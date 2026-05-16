@@ -1,0 +1,96 @@
+/* core/states.css — @layer states
+   Global state classes. Prefix .is-* is exclusive to this layer.
+   Utilities never use .is-*. Components may override these.
+   No tokens dependency — pure structural/behavioral CSS.
+   ─────────────────────────────────────────────────────────── */
+
+@layer states {
+
+  /* ── Visibility ──────────────────────────────────────── */
+
+  .is-hidden {
+    display: none !important;
+  }
+
+  .is-visible {
+    display: revert !important;
+  }
+
+  .is-invisible {
+    visibility: hidden !important;
+  }
+
+  /* ── Interaction ─────────────────────────────────────── */
+
+  .is-disabled,
+  [data-state="disabled"] {
+    pointer-events: none;
+    opacity: var(--opacity-disabled, 0.5);
+    cursor: not-allowed;
+  }
+
+  .is-readonly,
+  [data-state="readonly"] {
+    pointer-events: none;
+  }
+
+  /* ── Activity ────────────────────────────────────────── */
+
+  .is-active {
+    /* Visual prescription intentionally omitted — component
+       or consumer overrides apply on top of this marker. */
+  }
+
+  .is-selected {
+    /* see .is-active note above */
+  }
+
+  .is-current {
+    /* see .is-active note above */
+  }
+
+  /* ── Expansion ───────────────────────────────────────── */
+
+  .is-expanded {
+    /* marker — component overrides apply */
+  }
+
+  .is-collapsed {
+    /* marker — component overrides apply */
+  }
+
+  /* ── Async / loading ─────────────────────────────────── */
+
+  .is-loading {
+    cursor: wait;
+    pointer-events: none;
+  }
+
+  /* ── Validation ──────────────────────────────────────── */
+
+  .is-error {
+    /* marker — component overrides apply */
+  }
+
+  .is-success {
+    /* marker — component overrides apply */
+  }
+
+  .is-warning {
+    /* marker — component overrides apply */
+  }
+
+  /* ── Layout utility states ───────────────────────────── */
+
+  .is-sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky, 200);
+  }
+
+  .is-fixed {
+    position: fixed;
+    z-index: var(--z-overlay, 300);
+  }
+
+}

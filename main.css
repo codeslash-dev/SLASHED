@@ -1,0 +1,36 @@
+/* slashed — entry point
+   @layer declared once here and nowhere else.
+   Import order determines cascade order within each layer.
+   ─────────────────────────────────────────────────────────── */
+
+@layer
+  tokens,
+  reset,
+  base,
+  layout,
+  components,
+  utilities,
+  states,
+  themes,
+  motion,
+  accessibility,
+  print,
+  overrides;
+
+/* ── core — always loaded ────────────────────────────────── */
+
+@import "./core/tokens.css";
+@import "./core/reset.css";
+@import "./core/base.css";
+@import "./core/layout.css";
+@import "./core/states.css";
+@import "./core/accessibility.css";
+@import "./core/print.css";
+
+/* ── optional — load only what you need ──────────────────── */
+
+@import "./optional/components.tokens.css";
+@import "./optional/components.css";
+@import "./optional/utilities.css";
+@import "./optional/themes.css";
+@import "./optional/motion.css";

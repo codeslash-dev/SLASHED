@@ -1,0 +1,246 @@
+/* core/base.css — @layer base
+   Opinionated element defaults built on top of reset.css.
+   Every value uses var() from tokens.css — zero literals.
+   This is the foundation components.css builds on.
+   ─────────────────────────────────────────────────────────── */
+
+@layer base {
+
+  /* ── Document ────────────────────────────────────────── */
+
+  html {
+    font-size: max(16px, 1em); /* defensive — defeats 62.5% theme resets */
+    color-scheme: light dark;
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── Headings ────────────────────────────────────────── */
+
+  h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+  }
+
+  h4 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+  }
+
+  h5 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+
+  h6 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+
+  /* ── Body text ───────────────────────────────────────── */
+
+  p {
+    /* inherits body defaults */
+  }
+
+  /* ── Links ───────────────────────────────────────────── */
+
+  a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 1px;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* ── Inline text ─────────────────────────────────────── */
+
+  strong,
+  b {
+    font-weight: var(--font-weight-bold);
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  s {
+    text-decoration: line-through;
+  }
+
+  mark {
+    background-color: var(--color-warning-100);
+    color: var(--color-text);
+    padding-inline: 0.2em;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── Code ────────────────────────────────────────────── */
+
+  code,
+  kbd,
+  samp {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+  }
+
+  code {
+    background-color: var(--color-surface-2);
+    border: var(--border-width-1) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding-inline: 0.3em;
+    padding-block: 0.1em;
+  }
+
+  pre {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    background-color: var(--color-surface-2);
+    border: var(--border-width-1) solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4);
+    overflow-x: auto;
+  }
+
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  kbd {
+    background-color: var(--color-surface-3);
+    border: var(--border-width-1) solid var(--color-border);
+    border-bottom-width: var(--border-width-2);
+    border-radius: var(--radius-sm);
+    padding-inline: 0.4em;
+    padding-block: 0.15em;
+    font-size: var(--font-size-xs);
+  }
+
+  /* ── Lists ───────────────────────────────────────────── */
+
+  ul,
+  ol {
+    padding-inline-start: var(--spacing-6);
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li {
+    /* inherits */
+  }
+
+  li + li {
+    margin-block-start: var(--spacing-1);
+  }
+
+  dl {
+    /* ... */
+  }
+
+  dt {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  dd {
+    margin-inline-start: var(--spacing-4);
+  }
+
+  /* ── Blockquote ──────────────────────────────────────── */
+
+  blockquote {
+    border-inline-start: var(--border-width-4) solid var(--color-border);
+    padding-inline-start: var(--spacing-4);
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* ── Horizontal rule ─────────────────────────────────── */
+
+  hr {
+    border: none;
+    border-block-start: var(--border-width-1) solid var(--color-border);
+    color: inherit;
+  }
+
+  /* ── Tables ──────────────────────────────────────────── */
+
+  table {
+    width: 100%;
+    font-size: var(--font-size-sm);
+  }
+
+  th {
+    font-weight: var(--font-weight-semibold);
+    text-align: start;
+    padding: var(--spacing-2) var(--spacing-3);
+    border-block-end: var(--border-width-2) solid var(--color-border);
+  }
+
+  td {
+    padding: var(--spacing-2) var(--spacing-3);
+    border-block-end: var(--border-width-1) solid var(--color-border);
+    vertical-align: top;
+  }
+
+  /* ── Forms (foundation only — components build on this) ─ */
+
+  label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+  }
+
+  fieldset {
+    /* intentionally left lean — components.css styles form groups */
+  }
+
+  /* ── Selection ───────────────────────────────────────── */
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  /* ── Scrollbar (opt-in) ──────────────────────────────── */
+
+  /* placeholder — token-driven scrollbar styling goes here */
+
+}
