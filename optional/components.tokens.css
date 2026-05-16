@@ -1,0 +1,104 @@
+/* optional/components.tokens.css — @layer tokens
+   Component-scoped token defaults. Same layer as core/tokens.css
+   so these extend — not override — the global token set.
+   Rule: every value must be var(--global-token), never a literal.
+   ─────────────────────────────────────────────────────────── */
+
+@layer tokens {
+
+  :root {
+
+    /* ── Button ──────────────────────────────────────── */
+
+    --button-padding-x:      var(--spacing-4);
+    --button-padding-y:      var(--spacing-2);
+    --button-padding-x-sm:   var(--spacing-3);
+    --button-padding-y-sm:   var(--spacing-1);
+    --button-padding-x-lg:   var(--spacing-6);
+    --button-padding-y-lg:   var(--spacing-3);
+    --button-radius:         var(--radius-md);
+    --button-font-size:      var(--font-size-sm);
+    --button-font-weight:    var(--font-weight-medium);
+    --button-line-height:    var(--line-height-tight);
+    --button-transition:     var(--transition-fast);
+    --button-gap:            var(--spacing-2);
+
+    /* ── Card ────────────────────────────────────────── */
+
+    --card-padding:          var(--spacing-6);
+    --card-radius:           var(--radius-lg);
+    --card-shadow:           var(--shadow-sm);
+    --card-bg:               var(--color-surface);
+    --card-border:           var(--border-width-1) solid var(--color-border);
+    --card-gap:              var(--spacing-4);
+
+    /* ── Modal ───────────────────────────────────────── */
+
+    --modal-width:           min(90vw, 32rem);
+    --modal-padding:         var(--spacing-6);
+    --modal-radius:          var(--radius-xl);
+    --modal-shadow:          var(--shadow-2xl);
+    --modal-backdrop:        /* color-mix(in srgb, #000 50%, transparent) */;
+
+    /* ── Badge ───────────────────────────────────────── */
+
+    --badge-padding-x:       var(--spacing-2);
+    --badge-padding-y:       var(--spacing-1);
+    --badge-radius:          var(--radius-full);
+    --badge-font-size:       var(--font-size-xs);
+    --badge-font-weight:     var(--font-weight-medium);
+
+    /* ── Alert ───────────────────────────────────────── */
+
+    --alert-padding:         var(--spacing-4);
+    --alert-radius:          var(--radius-md);
+    --alert-border-width:    var(--border-width-1);
+    --alert-gap:             var(--spacing-3);
+
+    /* ── Form inputs ─────────────────────────────────── */
+
+    --input-padding-x:       var(--spacing-3);
+    --input-padding-y:       var(--spacing-2);
+    --input-radius:          var(--radius-md);
+    --input-border:          var(--border-width-1) solid var(--color-border);
+    --input-bg:              var(--color-surface);
+    --input-focus-ring:      var(--border-width-2) solid var(--color-focus);
+    --input-font-size:       var(--font-size-base);
+
+    /* ── Navigation ──────────────────────────────────── */
+
+    --nav-gap:               var(--spacing-1);
+    --nav-padding:           var(--spacing-2) var(--spacing-4);
+    --nav-radius:            var(--radius-md);
+
+    /* ── Tooltip ─────────────────────────────────────── */
+
+    --tooltip-padding:       var(--spacing-2) var(--spacing-3);
+    --tooltip-radius:        var(--radius-md);
+    --tooltip-font-size:     var(--font-size-xs);
+    --tooltip-max-width:     16rem;
+
+    /* ── Tabs ────────────────────────────────────────── */
+
+    --tabs-gap:              var(--spacing-1);
+    --tabs-padding:          var(--spacing-2) var(--spacing-4);
+    --tabs-radius:           var(--radius-md);
+    --tabs-border-width:     var(--border-width-2);
+
+    /* ── Avatar ──────────────────────────────────────── */
+
+    --avatar-size-sm:        1.5rem;
+    --avatar-size-md:        2.5rem;
+    --avatar-size-lg:        4rem;
+    --avatar-radius:         var(--radius-full);
+
+    /* ── Progress / spinner ──────────────────────────── */
+
+    --progress-height:       var(--spacing-2);
+    --progress-radius:       var(--radius-full);
+    --spinner-size:          1.5rem;
+    --spinner-border-width:  var(--border-width-2);
+
+  }
+
+}

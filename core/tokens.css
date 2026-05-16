@@ -1,0 +1,204 @@
+/* core/tokens.css — @layer tokens
+   Global design tokens. All custom properties live here.
+   Rules: only :root {} selectors. No element rules. No var() values
+   except cross-token references within this file.
+   Every literal value a consumer might tweak must be a custom property.
+   ─────────────────────────────────────────────────────────── */
+
+@layer tokens {
+
+  :root {
+
+    /* ── Color palette ───────────────────────────────────── */
+
+    /* Neutral */
+    --color-neutral-0:   #ffffff;
+    --color-neutral-50:  /* ... */;
+    --color-neutral-100: /* ... */;
+    --color-neutral-200: /* ... */;
+    --color-neutral-300: /* ... */;
+    --color-neutral-400: /* ... */;
+    --color-neutral-500: /* ... */;
+    --color-neutral-600: /* ... */;
+    --color-neutral-700: /* ... */;
+    --color-neutral-800: /* ... */;
+    --color-neutral-900: /* ... */;
+    --color-neutral-950: /* ... */;
+    --color-neutral-1000: #000000;
+
+    /* Primary */
+    --color-primary-100: /* ... */;
+    --color-primary-200: /* ... */;
+    --color-primary-300: /* ... */;
+    --color-primary-400: /* ... */;
+    --color-primary-500: /* ... */;
+    --color-primary-600: /* ... */;
+    --color-primary-700: /* ... */;
+    --color-primary-800: /* ... */;
+    --color-primary-900: /* ... */;
+
+    /* Semantic */
+    --color-success-100: /* ... */;
+    --color-success-500: /* ... */;
+    --color-success-900: /* ... */;
+
+    --color-warning-100: /* ... */;
+    --color-warning-500: /* ... */;
+    --color-warning-600: /* ... */;
+    --color-warning-900: /* ... */;
+
+    --color-error-100:   /* ... */;
+    --color-error-500:   /* ... */;
+    --color-error-900:   /* ... */;
+
+    --color-info-100:    /* ... */;
+    --color-info-500:    /* ... */;
+    --color-info-900:    /* ... */;
+
+    /* ── Semantic color aliases ──────────────────────────── */
+
+    --color-primary:   var(--color-primary-500);
+    --color-surface:   var(--color-neutral-0);
+    --color-surface-2: var(--color-neutral-50);
+    --color-surface-3: var(--color-neutral-100);
+    --color-text:      var(--color-neutral-900);
+    --color-text-muted: var(--color-neutral-500);
+    --color-border:    var(--color-neutral-200);
+    --color-focus:     var(--color-primary-500);
+
+    /* ── Spacing ─────────────────────────────────────────── */
+
+    --spacing-px:  1px;
+    --spacing-0:   0;
+    --spacing-1:   0.25rem;   /*  4px */
+    --spacing-2:   0.5rem;    /*  8px */
+    --spacing-3:   0.75rem;   /* 12px */
+    --spacing-4:   1rem;      /* 16px */
+    --spacing-5:   1.25rem;   /* 20px */
+    --spacing-6:   1.5rem;    /* 24px */
+    --spacing-8:   2rem;      /* 32px */
+    --spacing-10:  2.5rem;    /* 40px */
+    --spacing-12:  3rem;      /* 48px */
+    --spacing-16:  4rem;      /* 64px */
+    --spacing-20:  5rem;      /* 80px */
+    --spacing-24:  6rem;      /* 96px */
+    --spacing-32:  8rem;      /* 128px */
+
+    /* ── Typography ──────────────────────────────────────── */
+
+    /* Font families */
+    --font-family-sans:  system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif,
+                         "Apple Color Emoji", "Segoe UI Emoji";
+    --font-family-serif: Georgia, "Times New Roman", Times, serif;
+    --font-family-mono:  ui-monospace, SFMono-Regular, "SF Mono", Consolas,
+                         "Liberation Mono", Menlo, monospace;
+
+    /* Font sizes — clamp(min, preferred, max) for fluid scaling */
+    --font-size-xs:   clamp(0.694rem,  0.67rem  + 0.12vw, 0.75rem);
+    --font-size-sm:   clamp(0.833rem,  0.80rem  + 0.17vw, 0.875rem);
+    --font-size-base: clamp(1rem,      0.96rem  + 0.20vw, 1rem);
+    --font-size-md:   clamp(1rem,      0.96rem  + 0.20vw, 1.125rem);
+    --font-size-lg:   clamp(1.2rem,    1.15rem  + 0.25vw, 1.25rem);
+    --font-size-xl:   clamp(1.44rem,   1.38rem  + 0.30vw, 1.5rem);
+    --font-size-2xl:  clamp(1.728rem,  1.65rem  + 0.39vw, 1.875rem);
+    --font-size-3xl:  clamp(2.074rem,  1.98rem  + 0.47vw, 2.25rem);
+    --font-size-4xl:  clamp(2.488rem,  2.37rem  + 0.59vw, 3rem);
+    --font-size-5xl:  clamp(2.986rem,  2.85rem  + 0.68vw, 3.75rem);
+
+    /* Line heights */
+    --line-height-none:   1;
+    --line-height-tight:  1.25;
+    --line-height-snug:   1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose:  2;
+
+    /* Font weights */
+    --font-weight-thin:       100;
+    --font-weight-light:      300;
+    --font-weight-normal:     400;
+    --font-weight-medium:     500;
+    --font-weight-semibold:   600;
+    --font-weight-bold:       700;
+    --font-weight-extrabold:  800;
+    --font-weight-black:      900;
+
+    /* Letter spacing */
+    --tracking-tighter: -0.05em;
+    --tracking-tight:   -0.025em;
+    --tracking-normal:  0em;
+    --tracking-wide:    0.025em;
+    --tracking-wider:   0.05em;
+    --tracking-widest:  0.1em;
+
+    /* ── Border radius ───────────────────────────────────── */
+
+    --radius-none: 0;
+    --radius-sm:   2px;
+    --radius-md:   6px;
+    --radius-lg:   12px;
+    --radius-xl:   16px;
+    --radius-2xl:  24px;
+    --radius-full: 9999px;
+
+    /* ── Shadows ─────────────────────────────────────────── */
+
+    --shadow-xs:  /* ... */;
+    --shadow-sm:  /* ... */;
+    --shadow-md:  /* ... */;
+    --shadow-lg:  /* ... */;
+    --shadow-xl:  /* ... */;
+    --shadow-2xl: /* ... */;
+    --shadow-inner: /* ... */;
+    --shadow-none:  none;
+
+    /* ── Borders ─────────────────────────────────────────── */
+
+    --border-width-0:   0;
+    --border-width-1:   1px;
+    --border-width-2:   2px;
+    --border-width-4:   4px;
+    --border-width-8:   8px;
+
+    /* ── Opacity ─────────────────────────────────────────── */
+
+    --opacity-disabled: 0.5;
+    --opacity-muted:    0.75;
+
+    /* ── Breakpoints (reference only — CSS uses these
+       directly in @media; JS may consume them too) ────────── */
+
+    --breakpoint-sm: 30em;  /*  480px */
+    --breakpoint-md: 48em;  /*  768px */
+    --breakpoint-lg: 64em;  /* 1024px */
+    --breakpoint-xl: 80em;  /* 1280px */
+
+    /* ── Z-index scale ───────────────────────────────────── */
+
+    --z-below:    -1;
+    --z-base:      0;
+    --z-raised:    10;
+    --z-dropdown:  100;
+    --z-sticky:    200;
+    --z-overlay:   300;
+    --z-modal:     400;
+    --z-toast:     500;
+    --z-tooltip:   600;
+
+    /* ── Transitions ─────────────────────────────────────── */
+
+    --transition-none:  none;
+    --transition-fast:  100ms ease;
+    --transition-base:  200ms ease;
+    --transition-slow:  400ms ease;
+
+    --easing-default:  cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-in:       cubic-bezier(0.4, 0, 1, 1);
+    --easing-out:      cubic-bezier(0, 0, 0.2, 1);
+    --easing-linear:   linear;
+    --easing-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  }
+
+}
