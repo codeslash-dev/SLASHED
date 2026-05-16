@@ -3,7 +3,7 @@
    !important is permitted here — print is an isolated context.
    ─────────────────────────────────────────────────────────── */
 
-@layer print {
+@layer slashed.print {
 
   @media print {
 

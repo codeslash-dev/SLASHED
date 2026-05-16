@@ -51,23 +51,23 @@ Or mix in what you need:
 
 | File | Layer | What's inside |
 |------|-------|---------------|
-| `core/tokens.css` | `tokens` | Global design tokens — colors, spacing, typography, radii, shadows, z-index, transitions |
-| `core/reset.css` | `reset` | Browser normalization. No design decisions. No `var()` |
-| `core/base.css` | `base` | Opinionated element defaults — headings, links, code, tables. All values via tokens |
-| `core/layout.css` | `layout` | Composable primitives: `.stack`, `.cluster`, `.sidebar`, `.cover`, `.grid`, `.container` |
-| `core/states.css` | `states` | Global state markers: `.is-hidden`, `.is-disabled`, `.is-loading`, `.is-active`, … |
-| `core/accessibility.css` | `accessibility` | Focus styles, `.sr-only`, `.skip-link`, reduced-motion token reset |
-| `core/print.css` | `print` | Print-only overrides inside `@media print` |
+| `core/tokens.css` | `slashed.tokens` | Global design tokens — colors, spacing, typography, radii, shadows, z-index, transitions |
+| `core/reset.css` | `slashed.reset` | Browser normalization. No design decisions. No `var()` |
+| `core/base.css` | `slashed.base` | Opinionated element defaults — headings, links, code, tables. All values via tokens |
+| `core/layout.css` | `slashed.layout` | Composable primitives: `.stack`, `.cluster`, `.sidebar`, `.cover`, `.grid`, `.container` |
+| `core/states.css` | `slashed.states` | Global state markers: `.is-hidden`, `.is-disabled`, `.is-loading`, `.is-active`, … |
+| `core/accessibility.css` | `slashed.accessibility` | Focus styles, `.sr-only`, `.skip-link`, reduced-motion token reset |
+| `core/print.css` | `slashed.print` | Print-only overrides inside `@media print` |
 
 ### Optional — load only what you need
 
 | File | Layer | What's inside |
 |------|-------|---------------|
-| `optional/components.tokens.css` | `tokens` | Component-scoped token defaults (button sizing, card radius, input padding, …) |
-| `optional/components.css` | `components` | Pre-built UI: button, card, badge, alert, form elements, modal, nav, avatar |
-| `optional/utilities.css` | `utilities` | Single-purpose helpers — spacing, typography, display, flexbox, color, cursor |
-| `optional/themes.css` | `themes` | Dark mode, forced colors, and brand palette token overrides |
-| `optional/motion.css` | `motion` | Keyframes, transition utilities, animation classes |
+| `optional/components.tokens.css` | `slashed.tokens` | Component-scoped token defaults (button sizing, card radius, input padding, …) |
+| `optional/components.css` | `slashed.components` | Pre-built UI: button, card, badge, alert, form elements, modal, nav, avatar |
+| `optional/utilities.css` | `slashed.utilities` | Single-purpose helpers — spacing, typography, display, flexbox, color, cursor |
+| `optional/themes.css` | `slashed.themes` | Dark mode, forced colors, and brand palette token overrides |
+| `optional/motion.css` | `slashed.motion` | Keyframes, transition utilities, animation classes |
 
 ---
 
@@ -106,8 +106,10 @@ Use framework tokens everywhere — `var(--spacing-4)`, `var(--color-primary)`, 
 Layers are declared once in `main.css`. Specificity order, low → high:
 
 ```
-tokens → reset → base → layout → components → utilities →
-states → themes → motion → accessibility → print → overrides
+slashed.tokens → slashed.reset → slashed.base → slashed.layout →
+slashed.components → slashed.utilities → slashed.states →
+slashed.themes → slashed.motion → slashed.accessibility →
+slashed.print → slashed.overrides
 ```
 
 `overrides` has no framework file — it is the consumer's escape hatch. Any unlayered CSS you write also beats all framework layers, so you never need `!important` to override the framework.

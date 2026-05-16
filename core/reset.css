@@ -3,7 +3,7 @@
    No var() calls — no dependency on tokens.css.
    ─────────────────────────────────────────────────────────── */
 
-@layer reset {
+@layer slashed.reset {
 
   /* ── Box sizing ──────────────────────────────────────── */
 

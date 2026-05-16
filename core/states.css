@@ -4,7 +4,7 @@
    No tokens dependency — pure structural/behavioral CSS.
    ─────────────────────────────────────────────────────────── */
 
-@layer states {
+@layer slashed.states {
 
   /* ── Visibility ──────────────────────────────────────── */
 

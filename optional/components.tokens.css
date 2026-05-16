@@ -4,7 +4,7 @@
    Rule: every value must be var(--global-token), never a literal.
    ─────────────────────────────────────────────────────────── */
 
-@layer tokens {
+@layer slashed.tokens {
 
   :root {
 

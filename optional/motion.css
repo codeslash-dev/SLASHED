@@ -6,7 +6,7 @@
    under prefers-reduced-motion.
    ─────────────────────────────────────────────────────────── */
 
-@layer motion {
+@layer slashed.motion {
 
   /* ── Motion token defaults (extend core/tokens.css) ─── */
 
