@@ -4,18 +4,18 @@
    ─────────────────────────────────────────────────────────── */
 
 @layer
-  tokens,
-  reset,
-  base,
-  layout,
-  components,
-  utilities,
-  states,
-  themes,
-  motion,
-  accessibility,
-  print,
-  overrides;
+  slashed.tokens,
+  slashed.reset,
+  slashed.base,
+  slashed.layout,
+  slashed.components,
+  slashed.utilities,
+  slashed.states,
+  slashed.themes,
+  slashed.motion,
+  slashed.accessibility,
+  slashed.print,
+  slashed.overrides;
 
 /* ── core — always loaded ────────────────────────────────── */
 

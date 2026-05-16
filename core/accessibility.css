@@ -3,7 +3,7 @@
    token resets. No !important — layer order handles specificity.
    ─────────────────────────────────────────────────────────── */
 
-@layer accessibility {
+@layer slashed.accessibility {
 
   /* ── Focus — visible, never hidden ──────────────────── */
 

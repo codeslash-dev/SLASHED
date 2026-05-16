@@ -4,7 +4,7 @@
    Load components.tokens.css before this file.
    ─────────────────────────────────────────────────────────── */
 
-@layer components {
+@layer slashed.components {
 
   /* ════════════════════════════════════════════════════════
      BUTTON

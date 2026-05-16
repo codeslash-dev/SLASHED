@@ -5,7 +5,7 @@
    If a pattern repeats, extract it to a BEM block instead.
    ─────────────────────────────────────────────────────────── */
 
-@layer utilities {
+@layer slashed.utilities {
 
   /* ── Spacing — margin ────────────────────────────────── */
 

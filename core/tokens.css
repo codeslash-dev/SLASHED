@@ -5,7 +5,7 @@
    Every literal value a consumer might tweak must be a custom property.
    ─────────────────────────────────────────────────────────── */
 
-@layer tokens {
+@layer slashed.tokens {
 
   :root {
 
