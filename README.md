@@ -3,12 +3,18 @@
 **S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**dgeless · **D**eterministic
 
 A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
+BEM-first
+
+> Work in progress — this README is not final.
 
 ---
 
 ## Quick start
 
+`core/layers.css` must load first. `optional/legacy.css` must load last.
+
 ```html
+<!-- core -->
 <link rel="stylesheet" href="core/layers.css">
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/tokens.layout.css">
@@ -21,67 +27,47 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
 <!-- optional -->
 <link rel="stylesheet" href="optional/tokens.palette.css">
+<link rel="stylesheet" href="optional/tokens.components.css">
 <link rel="stylesheet" href="optional/components.css">
 <link rel="stylesheet" href="optional/utilities.css">
 <link rel="stylesheet" href="optional/themes.css">
 <link rel="stylesheet" href="optional/motion.css">
+
+<!-- optional, load LAST -->
+<link rel="stylesheet" href="optional/legacy.css">
 ```
 
----
+## Cascade layer order
 
-## Modules
-
-### Core
-
-| File | Layer |
-|------|-------|
-| `core/layers.css` | — |
-| `core/tokens.css` | `slashed.tokens` |
-| `core/tokens.layout.css` | `slashed.tokens` |
-| `core/reset.css` | `slashed.reset` |
-| `core/base.css` | `slashed.base` |
-| `core/layout.css` | `slashed.layout` |
-| `core/states.css` | `slashed.states` |
-| `core/accessibility.css` | `slashed.accessibility` |
-| `core/print.css` | `slashed.print` |
-
-### Optional
-
-| File | Layer |
-|------|-------|
-| `optional/tokens.palette.css` | `slashed.tokens` |
-| `optional/components.css` | `slashed.components` |
-| `optional/utilities.css` | `slashed.utilities` |
-| `optional/themes.css` | `slashed.themes` |
-| `optional/motion.css` | `slashed.motion` |
-
-`core/tokens.layout.css` provides layout-specific tokens required by `core/layout.css`.  
-`optional/tokens.palette.css` auto-generates tint/shade/alpha scales from brand colors via `color-mix()`.  
-`optional/components.css` auto-loads its own token file (`optional/tokens.components.css`).
-
----
-
-## Authoring
-
-BEM-first. Use framework tokens — theming and dark mode work automatically.
-
-```css
-.product-card {
-  background: var(--sf-color-surface);
-  border-radius: var(--sf-radius-l);
-  box-shadow: var(--sf-shadow-s);
-}
+```
+slashed.tokens → reset → base → layout → components → utilities →
+states → themes → motion → accessibility → print → overrides → legacy
 ```
 
----
+Declared in `core/layers.css`. Later layers win. `slashed.overrides`
+is reserved for your own overrides; `slashed.legacy` sits last.
 
-## Layer order
+## Token file rule
 
-```text
-slashed.tokens → slashed.reset → slashed.base → slashed.layout →
-slashed.components → slashed.utilities → slashed.states →
-slashed.themes → slashed.motion → slashed.accessibility →
-slashed.print → slashed.overrides
-```
+Any module may have its own token file (e.g. `tokens.print.css`),
+always loaded together with its parent module. All token files share
+the `slashed.tokens` layer.
 
-`slashed.overrides` has no framework file — consumer escape hatch. Unlayered CSS beats all layers automatically.
+## Bundles
+
+| Bundle | Contents |
+| --- | --- |
+| `slashed.core.css` | `layers` + `tokens` + `reset` + `base` |
+| `slashed.essential.css` | core + `layout` + `states` + `accessibility` + `print` |
+| `slashed.full.css` | everything |
+
+Core ships only as a bundle, so all its tokens live in one
+`tokens.css`. `motion`, `utilities`, `components`, `themes` are
+optional and combinable in any way.
+
+## Browser support
+
+Targets modern browsers; requires native cascade layers (floor:
+~2022 — Safari 15.4, Chrome 99, Firefox 97). `optional/legacy.css`
+smooths remaining gaps inside that window but does **not** extend
+support to pre-`@layer` browsers.
