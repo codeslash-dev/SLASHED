@@ -8,13 +8,8 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies. 
 
 ## Quick start
 
-Load `core/layers.css` first — it declares the cascade layer order. Then link whatever modules you need:
-
 ```html
-<!-- Always first — sets cascade layer order -->
 <link rel="stylesheet" href="core/layers.css">
-
-<!-- Core -->
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
@@ -23,7 +18,6 @@ Load `core/layers.css` first — it declares the cascade layer order. Then link 
 <link rel="stylesheet" href="core/accessibility.css">
 <link rel="stylesheet" href="core/print.css">
 
-<!-- Optional — pick what you need -->
 <link rel="stylesheet" href="optional/components.css">
 <link rel="stylesheet" href="optional/utilities.css">
 <link rel="stylesheet" href="optional/themes.css">
