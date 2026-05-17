@@ -8,25 +8,13 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies. 
 
 ## Quick start
 
-### Full bundle (everything)
+Load `layers.css` first — it declares the cascade layer order. Then link whatever modules you need:
 
 ```html
-<link rel="stylesheet" href="main.css">
-```
+<!-- Always first — sets cascade layer order -->
+<link rel="stylesheet" href="layers.css">
 
-### Selective (core only — tokens + reset + base + layout)
-
-```html
-<link rel="stylesheet" href="core/tokens.css">
-<link rel="stylesheet" href="core/reset.css">
-<link rel="stylesheet" href="core/base.css">
-<link rel="stylesheet" href="core/layout.css">
-```
-
-Or mix in what you need:
-
-```html
-<!-- Core always -->
+<!-- Core -->
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
@@ -36,7 +24,6 @@ Or mix in what you need:
 <link rel="stylesheet" href="core/print.css">
 
 <!-- Optional — pick what you need -->
-<link rel="stylesheet" href="optional/components.tokens.css">
 <link rel="stylesheet" href="optional/components.css">
 <link rel="stylesheet" href="optional/utilities.css">
 <link rel="stylesheet" href="optional/themes.css">
@@ -47,7 +34,7 @@ Or mix in what you need:
 
 ## Module overview
 
-### Core — always loaded
+### Core
 
 | File | Layer | What's inside |
 |------|-------|---------------|
@@ -59,12 +46,11 @@ Or mix in what you need:
 | `core/accessibility.css` | `slashed.accessibility` | Focus styles, `.sr-only`, `.skip-link`, reduced-motion token reset |
 | `core/print.css` | `slashed.print` | Print-only overrides inside `@media print` |
 
-### Optional — load only what you need
+### Optional
 
 | File | Layer | What's inside |
 |------|-------|---------------|
-| `optional/components.tokens.css` | `slashed.tokens` | Component-scoped token defaults (button sizing, card radius, input padding, …) |
-| `optional/components.css` | `slashed.components` | Pre-built UI: button, card, badge, alert, form elements, modal, nav, avatar |
+| `optional/components.css` | `slashed.components` | Pre-built UI: button, card, badge, alert, form elements, modal, nav |
 | `optional/utilities.css` | `slashed.utilities` | Single-purpose helpers — spacing, typography, display, flexbox, color, cursor |
 | `optional/themes.css` | `slashed.themes` | Dark mode, forced colors, and brand palette token overrides |
 | `optional/motion.css` | `slashed.motion` | Keyframes, transition utilities, animation classes |
@@ -90,29 +76,29 @@ SLASHED is BEM-first. The pre-built components in `optional/components.css` are 
 
 ```css
 .product-card {
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  background: var(--sf-color-surface);
+  border-radius: var(--sf-radius-l);
+  box-shadow: var(--sf-shadow-s);
   /* ... */
 }
 ```
 
-Use framework tokens everywhere — `var(--spacing-4)`, `var(--color-primary)`, `var(--radius-md)` — and theming and dark mode work automatically.
+Use framework tokens everywhere — `var(--sf-spacing-4)`, `var(--sf-color-primary)`, `var(--sf-radius-m)` — and theming and dark mode work automatically.
 
 ---
 
 ## Layer hierarchy
 
-Layers are declared once in `main.css`. Specificity order, low → high:
+Layers are declared once in `layers.css`. Specificity order, low → high:
 
-```
+```text
 slashed.tokens → slashed.reset → slashed.base → slashed.layout →
 slashed.components → slashed.utilities → slashed.states →
 slashed.themes → slashed.motion → slashed.accessibility →
 slashed.print → slashed.overrides
 ```
 
-`overrides` has no framework file — it is the consumer's escape hatch. Any unlayered CSS you write also beats all framework layers, so you never need `!important` to override the framework.
+`slashed.overrides` has no framework file — it is the consumer's escape hatch. Any unlayered CSS you write also beats all framework layers, so you never need `!important` to override the framework.
 
 ---
 
@@ -120,12 +106,6 @@ slashed.print → slashed.overrides
 
 Three layers, in order of preference:
 
-1. **Fluid tokens** — `--spacing-*`, `--font-size-*` use `clamp()` and scale with the viewport. Reach for these first; no `@media` rule needed.
+1. **Fluid tokens** — `--sf-spacing-*`, `--sf-text-*` use `clamp()` and scale with the viewport. Reach for these first; no `@media` rule needed.
 2. **Container-aware primitives** — `.grid`, `.sidebar`, and other layout primitives respond to their container via `@container`.
 3. **Breakpoints** — `sm: 30em / md: 48em / lg: 64em / xl: 80em`. Use only when (1) and (2) are not enough.
-
----
-
-## Philosophy
-
-See [`PHILOSOPHY.md`](PHILOSOPHY.md).
