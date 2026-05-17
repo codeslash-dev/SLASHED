@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 node scripts/bundle.js
 output=$(node -e "process.stdout.write(require('./bundle.config.json').output)")
 git add "$output"
