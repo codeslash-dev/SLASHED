@@ -637,8 +637,6 @@
 
     --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
 
-    background-color: var(--sf-color-bg);
-    color:            var(--sf-color-text);
   }
 
 }
