@@ -55,9 +55,9 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 | `optional/themes.css` | `slashed.themes` |
 | `optional/motion.css` | `slashed.motion` |
 
-`tokens.layout.css` provides layout-specific tokens required by `layout.css`.  
-`tokens.palette.css` auto-generates tint/shade/alpha scales from brand colors via `color-mix()`.  
-`components.css` auto-loads its own token file (`tokens.components.css`).
+`core/tokens.layout.css` provides layout-specific tokens required by `core/layout.css`.  
+`optional/tokens.palette.css` auto-generates tint/shade/alpha scales from brand colors via `color-mix()`.  
+`optional/components.css` auto-loads its own token file (`optional/tokens.components.css`).
 
 ---
 
