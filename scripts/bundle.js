@@ -4,50 +4,55 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
+const CONFIG_PATH = path.join(ROOT, 'bundle.config.json');
 
-const CORE_FILES = [
-  'core/layers.css',
-  'core/tokens.css',
-  'core/tokens.layout.css',
-  'core/reset.css',
-  'core/base.css',
-  'core/layout.css',
-  'core/states.css',
-  'core/accessibility.css',
-  'core/print.css',
-];
-
-const OUTPUT = path.join(ROOT, 'dist', 'slashed-essential.css');
+function loadConfig() {
+  const raw = fs.readFileSync(CONFIG_PATH, 'utf8');
+  return JSON.parse(raw);
+}
 
 function bundle() {
+  const { files, output } = loadConfig();
+  const outputPath = path.join(ROOT, output);
   const timestamp = new Date().toISOString();
-  const header = `/* slashed-essential.css — bundled ${timestamp} */\n`;
+  const header = `/* ${path.basename(output)} — bundled ${timestamp} */\n`;
 
-  const parts = CORE_FILES.map((file) => {
+  const parts = files.map((file) => {
     const filePath = path.join(ROOT, file);
     const content = fs.readFileSync(filePath, 'utf8');
     return `/* ─── ${file} ─── */\n${content.trimEnd()}`;
   });
 
-  const output = header + '\n' + parts.join('\n\n') + '\n';
+  const result = header + '\n' + parts.join('\n\n') + '\n';
 
-  fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
-  fs.writeFileSync(OUTPUT, output, 'utf8');
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, result, 'utf8');
 
-  console.log(`[bundle] → ${path.relative(ROOT, OUTPUT)}`);
+  console.log(`[bundle] → ${output} (${files.length} files)`);
 }
 
 function watch() {
   bundle();
 
   const watchDir = path.join(ROOT, 'core');
-  const watchedFiles = new Set(CORE_FILES.map((f) => path.basename(f)));
 
-  console.log('[watch] Watching core/ for changes…');
+  console.log('[watch] Watching core/ and bundle.config.json for changes…');
 
+  // Watch core/ directory — rebuild when any listed file changes
   fs.watch(watchDir, (event, filename) => {
-    if (filename && watchedFiles.has(filename)) {
+    if (!filename) return;
+    const { files } = loadConfig();
+    const listed = files.map((f) => path.basename(f));
+    if (listed.includes(filename)) {
       console.log(`[watch] ${event}: core/${filename}`);
+      bundle();
+    }
+  });
+
+  // Watch config — rebuild immediately when file list changes
+  fs.watch(CONFIG_PATH, (event) => {
+    if (event === 'change') {
+      console.log('[watch] bundle.config.json changed');
       bundle();
     }
   });

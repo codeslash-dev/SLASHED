@@ -1,0 +1,14 @@
+{
+  "output": "dist/slashed-essential.css",
+  "files": [
+    "core/layers.css",
+    "core/tokens.css",
+    "core/tokens.layout.css",
+    "core/reset.css",
+    "core/base.css",
+    "core/layout.css",
+    "core/states.css",
+    "core/accessibility.css",
+    "core/print.css"
+  ]
+}
