@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CSS framework",
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks",
     "build": "node scripts/bundle.js",
     "watch": "node scripts/bundle.js --watch"
   }
