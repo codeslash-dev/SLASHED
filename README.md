@@ -3,7 +3,6 @@
 **S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**dgeless · **D**eterministic
 
 A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
-BEM-first
 
 > Work in progress — this README is not final.
 
