@@ -1,5 +1,5 @@
 {
-  "output": "dist/slashed-essential.css",
+  "output": "dist/slashed.essential.css",
   "files": [
     "core/layers.css",
     "core/tokens.css",
