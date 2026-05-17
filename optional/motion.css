@@ -1,9 +1,51 @@
 /* SLASHED — optional/motion.css
    @layer slashed.motion
-   ────────────────────── */
+
+   Extends the base interactive transition (defined in base.css)
+   with a broader property set and adds scroll/view-transition
+   behaviour. Optional and independently loadable.
+
+   Reduced-motion handling is intentionally NOT duplicated here:
+   accessibility.css (a higher cascade layer, shipped in the
+   'essential' bundle) neutralises animation/transition via
+   property-level !important. The no-preference wrapper below is
+   a defensive opt-in stance — animations apply only when the
+   user has not requested their absence — and remains correct
+   even if motion.css is served without accessibility.css.
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.motion {
 
-  /* TODO */
+  @media (prefers-reduced-motion: no-preference) {
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Keyboard navigation must not be hijacked by smooth scroll. */
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    /* Broadens the base.css link transition to all interactive
+       elements and the full set of animatable UI properties. */
+    a, button, input, select, textarea, summary {
+      transition-property:
+        color, background-color, border-color, text-decoration-color,
+        fill, stroke, opacity, box-shadow, transform, filter,
+        backdrop-filter;
+      transition-duration:        var(--sf-duration-fast);
+      transition-timing-function: var(--sf-ease-out);
+    }
+
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration:        var(--sf-duration-normal);
+        animation-timing-function: var(--sf-ease-out);
+      }
+    }
+
+  }
 
 }
