@@ -1,0 +1,9 @@
+{
+  "name": "slashed",
+  "version": "1.0.0",
+  "description": "CSS framework",
+  "scripts": {
+    "build": "node scripts/bundle.js",
+    "watch": "node scripts/bundle.js --watch"
+  }
+}
