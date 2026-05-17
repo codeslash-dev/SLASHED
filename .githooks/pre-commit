@@ -1,3 +1,4 @@
 #!/bin/sh
 node scripts/bundle.js
-git add dist/slashed-essential.css
+output=$(node -e "process.stdout.write(require('./bundle.config.json').output)")
+git add "$output"
