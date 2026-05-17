@@ -1,9 +1,9 @@
 /* SLASHED — core/legacy.css
    @layer slashed.legacy
 
-   Load LAST, after every framework file. Requires slashed.legacy
-   declared as the final layer in layers.css (after
-   slashed.overrides).
+   Load LAST, after every framework file. slashed.legacy is
+   declared before slashed.overrides in layers.css, so user
+   overrides always win.
 
    Target: the ~2022 baseline (first browsers with CSS cascade
    layers — Safari 15.4, Chrome 99, Firefox 97) plus the tail of
@@ -14,13 +14,8 @@
    that ignores @layer wholesale. This file only smooths the
    property-level gaps that remain INSIDE the supported window.
 
-   Layer placement: slashed.legacy sits AFTER slashed.overrides so
-   a compatibility fallback can, if ever needed, win over project
-   overrides that used a modern property an old engine lacks. In
-   a modern browser every block below is gated by @supports not
-   (...) and is therefore inert — the layer position has no
-   effect there. The layer (not unlayered priority) is what
-   controls the cascade, by design.
+   Every block below is gated by @supports not (...), so on a
+   modern engine the rules are inert and contribute nothing.
 
    Scope: covers gaps in reset.css, base.css, accessibility.css,
    motion.css, print.css. oklch()/color-mix()/@property live in

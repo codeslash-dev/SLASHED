@@ -40,11 +40,13 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
 ```text
 slashed.tokens → reset → base → layout → components → utilities →
-states → themes → motion → accessibility → print → overrides → legacy
+states → themes → motion → accessibility → print → legacy → overrides
 ```
 
 Declared in `core/layers.css`. Later layers win. `slashed.overrides`
-is reserved for your own overrides; `slashed.legacy` sits last.
+is reserved for your own overrides and sits last so it always wins.
+`slashed.legacy` sits just before it; its rules are gated by
+`@supports not (...)` and are inert on modern engines.
 
 ## Token file rule
 
