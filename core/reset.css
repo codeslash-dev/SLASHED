@@ -1,9 +1,109 @@
 /* SLASHED — core/reset.css
    @layer slashed.reset
-   ────────────────────── */
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.reset {
 
-  /* TODO */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin:     0;
+    padding:    0;
+  }
+
+  html {
+    text-size-adjust:    100%;
+    scroll-padding-top:  var(--sf-header-height, 3.5rem);
+    scrollbar-gutter:    stable;
+    color-scheme:        var(--sf-color-scheme, light dark);
+    hanging-punctuation: first last;
+  }
+
+  /* interpolate-size is Chromium-only (no Firefox/Safari as of 2026);
+     opt-in by design, so @supports keeps it a clean progressive
+     enhancement without risking unknown-declaration handling. */
+  @supports (interpolate-size: allow-keywords) {
+    html { interpolate-size: allow-keywords; }
+  }
+
+  body {
+    min-height:      100dvh;
+    min-inline-size: 320px;
+  }
+
+  menu, ul, ol {
+    list-style: none;
+  }
+
+  img, picture, video, canvas, svg {
+    display:   block;
+    max-width: 100%;
+    height:    auto;
+  }
+
+  iframe, embed, object {
+    display:   block;
+    max-width: 100%;
+    height:    unset;
+    border:    none;
+  }
+
+  button, input, select, textarea {
+    font:           inherit;
+    color:          inherit;
+    letter-spacing: inherit;
+    color-scheme:   inherit;
+    line-height:    inherit;
+  }
+
+  button {
+    text-transform: none;
+  }
+
+  fieldset {
+    border:    none;
+    padding:   0;
+    min-width: 0;
+  }
+
+  legend {
+    padding: 0;
+  }
+
+  a, button, input, select, textarea, summary {
+    touch-action: manipulation;
+  }
+
+  summary {
+    list-style: none;
+    cursor:     pointer;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing:  0;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  dialog, [popover] {
+    padding:    0;
+    border:     none;
+    background: none;
+    color:      inherit;
+  }
+
+  [inert] {
+    cursor: default;
+  }
 
 }
