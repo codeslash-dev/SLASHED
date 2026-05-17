@@ -2,7 +2,7 @@
    @layer slashed.components
    ────────────────────── */
 
-@import "./components.tokens.css";
+@import "./tokens.components.css";
 
 @layer slashed.components {
 

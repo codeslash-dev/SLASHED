@@ -2,7 +2,7 @@
    SLASHED — core/layout.css
    ★ de facto wymagany dla większości projektów
    Layout primitives + structural patterns
-   Wymaga: core/tokens.css, core/layout.tokens.css
+   Wymaga: core/tokens.css, core/tokens.layout.css
    ============================================================ */
 
 @layer slashed.layout {
