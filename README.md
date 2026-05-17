@@ -11,6 +11,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ```html
 <link rel="stylesheet" href="core/layers.css">
 <link rel="stylesheet" href="core/tokens.css">
+<link rel="stylesheet" href="core/tokens.layout.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
 <link rel="stylesheet" href="core/layout.css">
@@ -18,6 +19,8 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="core/accessibility.css">
 <link rel="stylesheet" href="core/print.css">
 
+<!-- optional -->
+<link rel="stylesheet" href="optional/tokens.palette.css">
 <link rel="stylesheet" href="optional/components.css">
 <link rel="stylesheet" href="optional/utilities.css">
 <link rel="stylesheet" href="optional/themes.css">
@@ -34,6 +37,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 |------|-------|
 | `core/layers.css` | — |
 | `core/tokens.css` | `slashed.tokens` |
+| `core/tokens.layout.css` | `slashed.tokens` |
 | `core/reset.css` | `slashed.reset` |
 | `core/base.css` | `slashed.base` |
 | `core/layout.css` | `slashed.layout` |
@@ -45,13 +49,15 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
 | File | Layer |
 |------|-------|
+| `optional/tokens.palette.css` | `slashed.tokens` |
 | `optional/components.css` | `slashed.components` |
-| `optional/components.tokens.css` | `slashed.tokens` |
 | `optional/utilities.css` | `slashed.utilities` |
 | `optional/themes.css` | `slashed.themes` |
 | `optional/motion.css` | `slashed.motion` |
 
-`components.tokens.css` is loaded automatically by `components.css`.
+`tokens.layout.css` provides layout-specific tokens required by `layout.css`.  
+`tokens.palette.css` auto-generates tint/shade/alpha scales from brand colors via `color-mix()`.  
+`components.css` auto-loads its own token file (`tokens.components.css`).
 
 ---
 
