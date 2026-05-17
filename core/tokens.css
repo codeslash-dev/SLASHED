@@ -1,8 +1,7 @@
 /* ============================================================
    SLASHED — core/tokens.css
    @layer slashed.tokens
-   Global design tokens. Auto-loaded by main.css.
-   Do not import manually — main.css handles it.
+   Global design tokens. Loaded by core.css.
    ============================================================ */
 
 @layer slashed.tokens {
