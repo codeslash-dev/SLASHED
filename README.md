@@ -8,11 +8,11 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies. 
 
 ## Quick start
 
-Load `layers.css` first — it declares the cascade layer order. Then link whatever modules you need:
+Load `core/layers.css` first — it declares the cascade layer order. Then link whatever modules you need:
 
 ```html
 <!-- Always first — sets cascade layer order -->
-<link rel="stylesheet" href="layers.css">
+<link rel="stylesheet" href="core/layers.css">
 
 <!-- Core -->
 <link rel="stylesheet" href="core/tokens.css">
@@ -89,7 +89,7 @@ Use framework tokens everywhere — `var(--sf-spacing-4)`, `var(--sf-color-prima
 
 ## Layer hierarchy
 
-Layers are declared once in `layers.css`. Specificity order, low → high:
+Layers are declared once in `core/layers.css`. Specificity order, low → high:
 
 ```text
 slashed.tokens → slashed.reset → slashed.base → slashed.layout →
