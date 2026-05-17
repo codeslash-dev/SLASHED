@@ -436,12 +436,13 @@
   .sf-prose video                { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
 
   .sf-prose .sf-not-prose > * + *    { margin-block-start: 0; }
+  .sf-prose .sf-not-prose li + li    { margin-block-start: 0; }
   .sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }
   .sf-prose .sf-not-prose ::marker   { color: inherit; }
   .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
   .sf-prose .sf-not-prose figure     { margin-block: 0; }
   .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
-  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; }
+  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; max-width: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
 
 }
