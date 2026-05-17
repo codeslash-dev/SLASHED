@@ -1,6 +1,5 @@
 /* SLASHED — core.css
-   CSS cascade layer order + core module imports.
-   Load this file first, always.
+   CSS cascade layer order. Load this file first, always.
    ─────────────────────────────────────────────────── */
 
 @layer
@@ -16,11 +15,3 @@
   slashed.accessibility,
   slashed.print,
   slashed.overrides;
-
-@import "./core/tokens.css";
-@import "./core/reset.css";
-@import "./core/base.css";
-@import "./core/layout.css";
-@import "./core/states.css";
-@import "./core/accessibility.css";
-@import "./core/print.css";
