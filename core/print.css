@@ -26,7 +26,7 @@
     }
 
     a[href^="#"]::after,
-    a[href^="javascript:"]::after {
+    a[href^="javascript:" i]::after {
       content: "";
     }
 
@@ -63,9 +63,20 @@
     }
 
     /* Hide non-essential interactive and decorative elements */
-    nav, aside, details, summary, button, input, select, textarea,
+    nav, aside, button, input, select, textarea,
     dialog, [popover], .no-print {
       display: none !important;
+    }
+
+    /* Preserve <details> content in print, regardless of open state */
+    details {
+      display: block !important;
+    }
+    details > summary {
+      display: none !important;
+    }
+    details:not([open]) > :not(summary) {
+      display: block !important;
     }
 
   }

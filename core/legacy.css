@@ -1,4 +1,4 @@
-/* SLASHED — optional/legacy.css
+/* SLASHED — core/legacy.css
    @layer slashed.legacy
 
    Load LAST, after every framework file. Requires slashed.legacy
@@ -62,7 +62,7 @@
     :focus {
       outline:        var(--sf-focus-ring-width, 2px)
                       var(--sf-focus-ring-style, solid)
-                      var(--sf-focus-ring-color, currentColor);
+                      var(--sf-focus-ring-color, var(--sf-color-action));
       outline-offset: var(--sf-focus-ring-offset, 2px);
     }
   }
