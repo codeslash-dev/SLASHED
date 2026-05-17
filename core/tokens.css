@@ -1,204 +1,644 @@
-/* core/tokens.css — @layer tokens
-   Global design tokens. All custom properties live here.
-   Rules: only :root {} selectors. No element rules. No var() values
-   except cross-token references within this file.
-   Every literal value a consumer might tweak must be a custom property.
-   ─────────────────────────────────────────────────────────── */
+/* ============================================================
+   SLASHED — core/tokens.css
+   @layer slashed.tokens
+   Global design tokens. Auto-loaded by main.css.
+   Do not import manually — main.css handles it.
+   ============================================================ */
 
 @layer slashed.tokens {
 
+  /* ============================================================
+     @property — typed color tokens (brand + status)
+     ============================================================ */
+
+  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.2 250); }
+  @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.15 200); }
+  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.1 220); }
+  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(55% 0.2 30); }
+  @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0 0); }
+  @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(95% 0 0); }
+
+  @property --sf-color-success { syntax: "<color>"; inherits: true; initial-value: oklch(60% 0.2 145); }
+  @property --sf-color-warning { syntax: "<color>"; inherits: true; initial-value: oklch(75% 0.2 85); }
+  @property --sf-color-error   { syntax: "<color>"; inherits: true; initial-value: oklch(55% 0.25 25); }
+  @property --sf-color-info    { syntax: "<color>"; inherits: true; initial-value: oklch(60% 0.15 240); }
+  @property --sf-color-danger  { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.25 15); }
+
+
+  /* ============================================================
+     PRIMITIVES
+     ============================================================ */
+
   :root {
 
-    /* ── Color palette ───────────────────────────────────── */
+    /* ----------------------------------------------------------
+       Scale multipliers
+       ---------------------------------------------------------- */
+    --sf-space-scale:        1;
+    --sf-text-scale:         1;
+    --sf-text-display-scale: 1;
+    --sf-radius-scale:       1;
+    --sf-motion-scale:       1;
 
-    /* Neutral */
-    --color-neutral-0:   #ffffff;
-    --color-neutral-50:  /* ... */;
-    --color-neutral-100: /* ... */;
-    --color-neutral-200: /* ... */;
-    --color-neutral-300: /* ... */;
-    --color-neutral-400: /* ... */;
-    --color-neutral-500: /* ... */;
-    --color-neutral-600: /* ... */;
-    --color-neutral-700: /* ... */;
-    --color-neutral-800: /* ... */;
-    --color-neutral-900: /* ... */;
-    --color-neutral-950: /* ... */;
-    --color-neutral-1000: #000000;
 
-    /* Primary */
-    --color-primary-100: /* ... */;
-    --color-primary-200: /* ... */;
-    --color-primary-300: /* ... */;
-    --color-primary-400: /* ... */;
-    --color-primary-500: /* ... */;
-    --color-primary-600: /* ... */;
-    --color-primary-700: /* ... */;
-    --color-primary-800: /* ... */;
-    --color-primary-900: /* ... */;
+    /* ----------------------------------------------------------
+       Font families
+       ---------------------------------------------------------- */
+    --sf-font-body:    system-ui, -apple-system, sans-serif;
+    --sf-font-heading: var(--sf-font-body);
+    --sf-font-display: var(--sf-font-heading);
+    --sf-font-mono:    ui-monospace, monospace;
 
-    /* Semantic */
-    --color-success-100: /* ... */;
-    --color-success-500: /* ... */;
-    --color-success-900: /* ... */;
 
-    --color-warning-100: /* ... */;
-    --color-warning-500: /* ... */;
-    --color-warning-600: /* ... */;
-    --color-warning-900: /* ... */;
+    /* ----------------------------------------------------------
+       Font weights
+       ---------------------------------------------------------- */
+    --sf-font-weight-body:    400;
+    --sf-font-weight-heading: 600;
+    --sf-font-weight-display: 700;
 
-    --color-error-100:   /* ... */;
-    --color-error-500:   /* ... */;
-    --color-error-900:   /* ... */;
 
-    --color-info-100:    /* ... */;
-    --color-info-500:    /* ... */;
-    --color-info-900:    /* ... */;
+    /* ----------------------------------------------------------
+       Font sizes — fluid
+       ---------------------------------------------------------- */
+    --sf-text-2xs: clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem);
+    --sf-text-xs:  clamp(0.64rem, calc(0.0008888888888888881  * (100vw - 22.5rem) + 0.64rem), 0.7rem);
+    --sf-text-s:   clamp(0.8rem,  calc(0.002074074074074073   * (100vw - 22.5rem) + 0.8rem),  0.94rem);
+    --sf-text-m:   clamp(1rem,    calc(0.003703703703703704   * (100vw - 22.5rem) + 1rem),    1.25rem);
+    --sf-text-l:   clamp(1.25rem, calc(0.006222222222222221   * (100vw - 22.5rem) + 1.25rem), 1.67rem);
+    --sf-text-xl:  clamp(1.56rem, calc(0.00977777777777778    * (100vw - 22.5rem) + 1.56rem), 2.22rem);
+    --sf-text-2xl: clamp(1.95rem, calc(0.014962962962962963   * (100vw - 22.5rem) + 1.95rem), 2.96rem);
+    --sf-text-3xl: clamp(2.44rem, calc(0.022370370370370374   * (100vw - 22.5rem) + 2.44rem), 3.95rem);
+    --sf-text-4xl: clamp(3.05rem, calc(0.03274074074074074    * (100vw - 22.5rem) + 3.05rem), 5.26rem);
 
-    /* ── Semantic color aliases ──────────────────────────── */
+    --sf-text-display-s: clamp(2.4rem,  calc(0.00888888888888889   * (100vw - 22.5rem) + 2.4rem),  3rem);
+    --sf-text-display-m: clamp(3rem,    calc(0.014814814814814815  * (100vw - 22.5rem) + 3rem),    4rem);
+    --sf-text-display-l: clamp(3.75rem, calc(0.023407407407407408  * (100vw - 22.5rem) + 3.75rem), 5.33rem);
 
-    --color-primary:   var(--color-primary-500);
-    --color-surface:   var(--color-neutral-0);
-    --color-surface-2: var(--color-neutral-50);
-    --color-surface-3: var(--color-neutral-100);
-    --color-text:      var(--color-neutral-900);
-    --color-text-muted: var(--color-neutral-500);
-    --color-border:    var(--color-neutral-200);
-    --color-focus:     var(--color-primary-500);
 
-    /* ── Spacing ─────────────────────────────────────────── */
+    /* ----------------------------------------------------------
+       Line heights & letter spacing
+       ---------------------------------------------------------- */
+    --sf-leading-tight:   1.1;
+    --sf-leading-snug:    1.3;
+    --sf-leading-normal:  1.5;
+    --sf-leading-relaxed: 1.625;
 
-    --spacing-px:  1px;
-    --spacing-0:   0;
-    --spacing-1:   0.25rem;   /*  4px */
-    --spacing-2:   0.5rem;    /*  8px */
-    --spacing-3:   0.75rem;   /* 12px */
-    --spacing-4:   1rem;      /* 16px */
-    --spacing-5:   1.25rem;   /* 20px */
-    --spacing-6:   1.5rem;    /* 24px */
-    --spacing-8:   2rem;      /* 32px */
-    --spacing-10:  2.5rem;    /* 40px */
-    --spacing-12:  3rem;      /* 48px */
-    --spacing-16:  4rem;      /* 64px */
-    --spacing-20:  5rem;      /* 80px */
-    --spacing-24:  6rem;      /* 96px */
-    --spacing-32:  8rem;      /* 128px */
+    --sf-tracking-tight:   -0.025em;
+    --sf-tracking-normal:   0;
+    --sf-tracking-wide:     0.025em;
+    --sf-tracking-wider:    0.05em;
+    --sf-tracking-widest:   0.1em;
 
-    /* ── Typography ──────────────────────────────────────── */
 
-    /* Font families */
-    --font-family-sans:  system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                         Roboto, Helvetica, Arial, sans-serif,
-                         "Apple Color Emoji", "Segoe UI Emoji";
-    --font-family-serif: Georgia, "Times New Roman", Times, serif;
-    --font-family-mono:  ui-monospace, SFMono-Regular, "SF Mono", Consolas,
-                         "Liberation Mono", Menlo, monospace;
+    /* ----------------------------------------------------------
+       Icon sizes
+       ---------------------------------------------------------- */
+    --sf-icon-xs: 0.875em;
+    --sf-icon-s:  1em;
+    --sf-icon-m:  1.5em;
+    --sf-icon-l:  2em;
+    --sf-icon-xl: 3em;
 
-    /* Font sizes — clamp(min, preferred, max) for fluid scaling */
-    --font-size-xs:   clamp(0.694rem,  0.67rem  + 0.12vw, 0.75rem);
-    --font-size-sm:   clamp(0.833rem,  0.80rem  + 0.17vw, 0.875rem);
-    --font-size-base: clamp(1rem,      0.96rem  + 0.20vw, 1rem);
-    --font-size-md:   clamp(1rem,      0.96rem  + 0.20vw, 1.125rem);
-    --font-size-lg:   clamp(1.2rem,    1.15rem  + 0.25vw, 1.25rem);
-    --font-size-xl:   clamp(1.44rem,   1.38rem  + 0.30vw, 1.5rem);
-    --font-size-2xl:  clamp(1.728rem,  1.65rem  + 0.39vw, 1.875rem);
-    --font-size-3xl:  clamp(2.074rem,  1.98rem  + 0.47vw, 2.25rem);
-    --font-size-4xl:  clamp(2.488rem,  2.37rem  + 0.59vw, 3rem);
-    --font-size-5xl:  clamp(2.986rem,  2.85rem  + 0.68vw, 3.75rem);
 
-    /* Line heights */
-    --line-height-none:   1;
-    --line-height-tight:  1.25;
-    --line-height-snug:   1.375;
-    --line-height-normal: 1.5;
-    --line-height-relaxed: 1.625;
-    --line-height-loose:  2;
+    /* ----------------------------------------------------------
+       Spacing — fixed
+       ---------------------------------------------------------- */
+    --sf-space-none:   0;
+    --sf-space-px:     1px;
+    --sf-space-gutter: var(--sf-space-l);
 
-    /* Font weights */
-    --font-weight-thin:       100;
-    --font-weight-light:      300;
-    --font-weight-normal:     400;
-    --font-weight-medium:     500;
-    --font-weight-semibold:   600;
-    --font-weight-bold:       700;
-    --font-weight-extrabold:  800;
-    --font-weight-black:      900;
+    /* Spacing — fluid */
+    --sf-space-2xs: clamp(0.51rem, calc(0.004888888888888888   * (100vw - 22.5rem) + 0.51rem), 0.84rem);
+    --sf-space-xs:  clamp(0.64rem, calc(0.007259259259259258   * (100vw - 22.5rem) + 0.64rem), 1.13rem);
+    --sf-space-s:   clamp(0.8rem,  calc(0.01037037037037037    * (100vw - 22.5rem) + 0.8rem),  1.5rem);
+    --sf-space-m:   clamp(1rem,    calc(0.014814814814814815   * (100vw - 22.5rem) + 1rem),    2rem);
+    --sf-space-l:   clamp(1.25rem, calc(0.021037037037037035   * (100vw - 22.5rem) + 1.25rem), 2.67rem);
+    --sf-space-xl:  clamp(1.56rem, calc(0.029481481481481477   * (100vw - 22.5rem) + 1.56rem), 3.55rem);
+    --sf-space-2xl: clamp(1.95rem, calc(0.04133333333333333    * (100vw - 22.5rem) + 1.95rem), 4.74rem);
+    --sf-space-3xl: clamp(2.44rem, calc(0.057333333333333326   * (100vw - 22.5rem) + 2.44rem), 6.31rem);
+    --sf-space-4xl: clamp(3.05rem, calc(0.07955555555555556    * (100vw - 22.5rem) + 3.05rem), 8.42rem);
 
-    /* Letter spacing */
-    --tracking-tighter: -0.05em;
-    --tracking-tight:   -0.025em;
-    --tracking-normal:  0em;
-    --tracking-wide:    0.025em;
-    --tracking-wider:   0.05em;
-    --tracking-widest:  0.1em;
 
-    /* ── Border radius ───────────────────────────────────── */
+    /* ----------------------------------------------------------
+       UI sizes
+       ---------------------------------------------------------- */
+    --sf-size-xs: 1.5rem;
+    --sf-size-s:  2rem;
+    --sf-size-m:  2.5rem;
+    --sf-size-l:  2.75rem;
+    --sf-size-xl: 3.5rem;
 
-    --radius-none: 0;
-    --radius-sm:   2px;
-    --radius-md:   6px;
-    --radius-lg:   12px;
-    --radius-xl:   16px;
-    --radius-2xl:  24px;
-    --radius-full: 9999px;
 
-    /* ── Shadows ─────────────────────────────────────────── */
+    /* ----------------------------------------------------------
+       Containers
+       ---------------------------------------------------------- */
+    --sf-container-narrow:  38rem;
+    --sf-container-prose:   65ch;
+    --sf-container-default: 75rem;
+    --sf-container-wide:    90rem;
+    --sf-container-full:    100%;
 
-    --shadow-xs:  /* ... */;
-    --shadow-sm:  /* ... */;
-    --shadow-md:  /* ... */;
-    --shadow-lg:  /* ... */;
-    --shadow-xl:  /* ... */;
-    --shadow-2xl: /* ... */;
-    --shadow-inner: /* ... */;
-    --shadow-none:  none;
 
-    /* ── Borders ─────────────────────────────────────────── */
+    /* ----------------------------------------------------------
+       Aspect ratios
+       ---------------------------------------------------------- */
+    --sf-ratio-square:   1;
+    --sf-ratio-video:    16 / 9;
+    --sf-ratio-cinema:   21 / 9;
+    --sf-ratio-photo:    3 / 2;
+    --sf-ratio-portrait: 3 / 4;
+    --sf-ratio-golden:   1.618 / 1;
 
-    --border-width-0:   0;
-    --border-width-1:   1px;
-    --border-width-2:   2px;
-    --border-width-4:   4px;
-    --border-width-8:   8px;
 
-    /* ── Opacity ─────────────────────────────────────────── */
+    /* ----------------------------------------------------------
+       Border widths
+       ---------------------------------------------------------- */
+    --sf-border-width-hairline: 0.5px;
+    --sf-border-width-1:        1px;
+    --sf-border-width-2:        2px;
+    --sf-border-width-3:        3px;
+    --sf-border-width-4:        4px;
 
-    --opacity-disabled: 0.5;
-    --opacity-muted:    0.75;
 
-    /* ── Breakpoints (reference only — CSS uses these
-       directly in @media; JS may consume them too) ────────── */
+    /* ----------------------------------------------------------
+       Border radius
+       ---------------------------------------------------------- */
+    --sf-radius-none: 0;
+    --sf-radius-xs:   calc(2px  * var(--sf-radius-scale));
+    --sf-radius-s:    calc(4px  * var(--sf-radius-scale));
+    --sf-radius-m:    calc(8px  * var(--sf-radius-scale));
+    --sf-radius-l:    calc(12px * var(--sf-radius-scale));
+    --sf-radius-xl:   calc(16px * var(--sf-radius-scale));
+    --sf-radius-2xl:  calc(24px * var(--sf-radius-scale));
+    --sf-radius-3xl:  calc(32px * var(--sf-radius-scale));
+    --sf-radius-4xl:  calc(48px * var(--sf-radius-scale));
+    --sf-radius-full: 9999px;
 
-    --breakpoint-sm: 30em;  /*  480px */
-    --breakpoint-md: 48em;  /*  768px */
-    --breakpoint-lg: 64em;  /* 1024px */
-    --breakpoint-xl: 80em;  /* 1280px */
 
-    /* ── Z-index scale ───────────────────────────────────── */
+    /* ----------------------------------------------------------
+       Shadows
+       ---------------------------------------------------------- */
+    --sf-shadow-strength: 0.08;
+    --sf-shadow-color:    220 40% 2%;
 
-    --z-below:    -1;
-    --z-base:      0;
-    --z-raised:    10;
-    --z-dropdown:  100;
-    --z-sticky:    200;
-    --z-overlay:   300;
-    --z-modal:     400;
-    --z-toast:     500;
-    --z-tooltip:   600;
+    --sf-shadow-none:  none;
+    --sf-shadow-xs:    0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5));
+    --sf-shadow-s:     0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 2px 6px 0 rgb(0 0 0 / var(--sf-shadow-strength));
+    --sf-shadow-m:     0 1px 3px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 4px 12px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
+    --sf-shadow-l:     0 2px 4px 0   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 8px 24px 0  rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3)),
+                       0 16px 48px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
+    --sf-shadow-xl:    0 2px 8px 0   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 12px 36px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3.5)),
+                       0 24px 72px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2.5));
+    --sf-shadow-2xl:   0 4px 12px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.6)),
+                       0 20px 60px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 4)),
+                       0 40px 100px -8px   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 5));
+    --sf-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
 
-    /* ── Transitions ─────────────────────────────────────── */
 
-    --transition-none:  none;
-    --transition-fast:  100ms ease;
-    --transition-base:  200ms ease;
-    --transition-slow:  400ms ease;
+    /* ----------------------------------------------------------
+       Blur & opacity
+       ---------------------------------------------------------- */
+    --sf-blur-xs: 4px;
+    --sf-blur-s:  8px;
+    --sf-blur-m:  16px;
+    --sf-blur-l:  32px;
+    --sf-blur-xl: 48px;
 
-    --easing-default:  cubic-bezier(0.4, 0, 0.2, 1);
-    --easing-in:       cubic-bezier(0.4, 0, 1, 1);
-    --easing-out:      cubic-bezier(0, 0, 0.2, 1);
-    --easing-linear:   linear;
-    --easing-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+    --sf-opacity-0:   0;
+    --sf-opacity-10:  0.1;
+    --sf-opacity-25:  0.25;
+    --sf-opacity-50:  0.5;
+    --sf-opacity-75:  0.75;
+    --sf-opacity-100: 1;
 
+
+    /* ----------------------------------------------------------
+       Motion & easing
+       ---------------------------------------------------------- */
+    --sf-duration-instant: calc(100ms * var(--sf-motion-scale));
+    --sf-duration-fast:    calc(150ms * var(--sf-motion-scale));
+    --sf-duration-normal:  calc(250ms * var(--sf-motion-scale));
+    --sf-duration-slow:    calc(400ms * var(--sf-motion-scale));
+    --sf-duration-slower:  calc(600ms * var(--sf-motion-scale));
+
+    --sf-ease-linear:  linear;
+    --sf-ease-out:     cubic-bezier(0.25, 0, 0.15, 1);
+    --sf-ease-in:      cubic-bezier(0.5, 0, 0.75, 0.25);
+    --sf-ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+    --sf-ease-spring:  linear(0, 0.5, 1.1, 0.95, 1.02, 1);
+    --sf-ease-elastic: linear(0, 0.3, 1.2, 0.9, 1.05, 1);
+
+
+    /* ----------------------------------------------------------
+       Z-index
+       ---------------------------------------------------------- */
+    --sf-z-below:  -1;
+    --sf-z-base:    0;
+    --sf-z-raised:  1;
+    --sf-z-low:    10;
+    --sf-z-mid:   100;
+    --sf-z-high:  500;
+    --sf-z-top:   900;
+    --sf-z-max:  9999;
+
+
+    /* ----------------------------------------------------------
+       Container query breakpoints
+       ---------------------------------------------------------- */
+    --sf-cq-mobile-portrait: 20rem;
+    --sf-cq-s:               30rem;
+    --sf-cq-m:               48rem;
+    --sf-cq-l:               64rem;
+    --sf-cq-xl:              80rem;
+
+
+    /* ----------------------------------------------------------
+       Layout & a11y
+       ---------------------------------------------------------- */
+    --sf-header-height:     8rem;
+    --sf-sticky-offset:     var(--sf-header-height);
+    --sf-focus-ring-width:  2px;
+    --sf-focus-ring-offset: 2px;
+    --sf-focus-ring-style:  solid;
+    --sf-touch-target:      var(--sf-size-l);
+    --sf-contrast-bias:     0;
+    --sf-color-scheme:      light dark;
+
+    --sf-safe-top:    env(safe-area-inset-top,    0px);
+    --sf-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --sf-safe-left:   env(safe-area-inset-left,   0px);
+    --sf-safe-right:  env(safe-area-inset-right,  0px);
+
+
+    /* ----------------------------------------------------------
+       Print
+       ---------------------------------------------------------- */
+    --sf-print-page-margin: 2cm;
+    --sf-print-page-size:   a4;
+    --sf-print-base-size:   11pt;
+
+
+    /* ----------------------------------------------------------
+       Stroke widths
+       ---------------------------------------------------------- */
+    --sf-stroke-thin:    1px;
+    --sf-stroke-regular: 1.5px;
+    --sf-stroke-bold:    2px;
+    --sf-stroke-heavy:   3px;
+
+  }
+
+
+  /* ============================================================
+     SEMANTIC TOKENS — neutral theme (light mode)
+     ============================================================ */
+
+  :root {
+
+    /* ----------------------------------------------------------
+       Brand & status colors
+       ---------------------------------------------------------- */
+    --sf-color-primary:   #4f46e5;
+    --sf-color-secondary: #1e293b;
+    --sf-color-tertiary:  #0891b2;
+    --sf-color-action:    #4f46e5;
+    --sf-color-neutral:   #64748b;
+    --sf-color-base:      #f8fafc;
+
+    --sf-color-success: #16a34a;
+    --sf-color-warning: #d97706;
+    --sf-color-error:   #dc2626;
+    --sf-color-info:    #0284c7;
+    --sf-color-danger:  #dc2626;
+
+
+    /* ----------------------------------------------------------
+       Font families & weights — neutral defaults
+       ---------------------------------------------------------- */
+    --sf-font-body:    system-ui, -apple-system, sans-serif;
+    --sf-font-heading: var(--sf-font-body);
+    --sf-font-display: var(--sf-font-heading);
+    --sf-font-mono:    ui-monospace, monospace;
+
+    --sf-font-weight-body:    400;
+    --sf-font-weight-heading: 600;
+    --sf-font-weight-display: 700;
+
+
+    /* ----------------------------------------------------------
+       Surfaces
+       ---------------------------------------------------------- */
+    --sf-color-bg:      #ffffff;
+    --sf-color-surface: #f8fafc;
+    --sf-color-well:    #f1f5f9;
+    --sf-color-raised:  #ffffff;
+    --sf-color-overlay: rgba(255, 255, 255, 0.9);
+    --sf-color-inverse: #0f172a;
+
+
+    /* ----------------------------------------------------------
+       Text
+       ---------------------------------------------------------- */
+    --sf-color-text:              #0f172a;
+    --sf-color-text--secondary:   #334155;
+    --sf-color-text--muted:       #64748b;
+    --sf-color-text--placeholder: #94a3b8;
+    --sf-color-text--disabled:    #cbd5e1;
+    --sf-color-text--inverse:     #f8fafc;
+    --sf-color-heading:           #0f172a;
+
+
+    /* ----------------------------------------------------------
+       Text-on-color
+       ---------------------------------------------------------- */
+    --sf-color-text--on-primary:   #ffffff;
+    --sf-color-text--on-secondary: #f8fafc;
+    --sf-color-text--on-tertiary:  #ffffff;
+    --sf-color-text--on-action:    #ffffff;
+    --sf-color-text--on-neutral:   #ffffff;
+    --sf-color-text--on-base:      #0f172a;
+    --sf-color-text--on-inverse:   #f8fafc;
+    --sf-color-text--on-success:   #ffffff;
+    --sf-color-text--on-warning:   #0f172a;
+    --sf-color-text--on-error:     #ffffff;
+    --sf-color-text--on-info:      #ffffff;
+    --sf-color-text--on-danger:    #ffffff;
+
+
+    /* ----------------------------------------------------------
+       Borders
+       ---------------------------------------------------------- */
+    --sf-color-border:              #e2e8f0;
+    --sf-color-border--subtle:      #f1f5f9;
+    --sf-color-border--strong:      #94a3b8;
+    --sf-color-border--focus:       var(--sf-focus-ring-color);
+    --sf-color-border--disabled:    #e2e8f0;
+    --sf-color-border--translucent: rgba(226, 232, 240, 0.5);
+
+
+    /* ----------------------------------------------------------
+       Links
+       ---------------------------------------------------------- */
+    --sf-color-link:            #4f46e5;
+    --sf-color-link--hover:     #4338ca;
+    --sf-color-link--active:    #3730a3;
+    --sf-color-link--visited:   #7c3aed;
+    --sf-color-link--underline: rgba(79, 70, 229, 0.3);
+
+
+    /* ----------------------------------------------------------
+       Interactive state backgrounds
+       ---------------------------------------------------------- */
+    --sf-color-bg--hover:    rgba(226, 232, 240, 0.5);
+    --sf-color-bg--active:   rgba(203, 213, 225, 0.5);
+    --sf-color-bg--selected: rgba(79, 70, 229, 0.1);
+    --sf-color-bg--focus:    rgba(79, 70, 229, 0.05);
+
+
+    /* ----------------------------------------------------------
+       Selection & backdrop
+       ---------------------------------------------------------- */
+    --sf-color-selection-bg:   rgba(79, 70, 229, 0.2);
+    --sf-color-selection-text: inherit;
+    --sf-color-dim:            rgba(0, 0, 0, 0.5);
+
+
+    /* ----------------------------------------------------------
+       Status triplets
+       ---------------------------------------------------------- */
+    --sf-status-success-bg:     #f0fdf4;
+    --sf-status-success-text:   #15803d;
+    --sf-status-success-border: #bbf7d0;
+
+    --sf-status-warning-bg:     #fffbeb;
+    --sf-status-warning-text:   #92400e;
+    --sf-status-warning-border: #fde68a;
+
+    --sf-status-error-bg:       #fef2f2;
+    --sf-status-error-text:     #b91c1c;
+    --sf-status-error-border:   #fecaca;
+
+    --sf-status-info-bg:        #eff6ff;
+    --sf-status-info-text:      #1d4ed8;
+    --sf-status-info-border:    #bfdbfe;
+
+    --sf-status-danger-bg:      #fef2f2;
+    --sf-status-danger-text:    #b91c1c;
+    --sf-status-danger-border:  #fecaca;
+
+
+    /* ----------------------------------------------------------
+       Gradients
+       ---------------------------------------------------------- */
+    --sf-gradient-primary:   linear-gradient(135deg, #4f46e5, #4338ca);
+    --sf-gradient-secondary: linear-gradient(135deg, #1e293b, #0f172a);
+    --sf-gradient-tertiary:  linear-gradient(135deg, #0891b2, #0e7490);
+    --sf-gradient-brand:     linear-gradient(135deg, #4f46e5, #7c3aed);
+    --sf-gradient-surface:   linear-gradient(180deg, #ffffff, #f8fafc);
+
+    --sf-gradient-fade--r: linear-gradient(to right,  transparent, var(--sf-color-bg));
+    --sf-gradient-fade--l: linear-gradient(to left,   transparent, var(--sf-color-bg));
+    --sf-gradient-fade--t: linear-gradient(to top,    transparent, var(--sf-color-bg));
+    --sf-gradient-fade--b: linear-gradient(to bottom, transparent, var(--sf-color-bg));
+
+
+    /* ----------------------------------------------------------
+       Shadow glow & disabled state
+       ---------------------------------------------------------- */
+    --sf-shadow-glow-color: var(--sf-color-primary);
+    --sf-shadow-glow:       0 0 15px 2px color-mix(in srgb, var(--sf-shadow-glow-color) calc(40% * var(--sf-shadow-strength) * 5), transparent);
+
+    --sf-color-bg--disabled: var(--sf-color-well);
+    --sf-opacity-disabled:   0.45;
+
+
+    /* ----------------------------------------------------------
+       Focus / form colors
+       ---------------------------------------------------------- */
+    --sf-focus-ring-color:  var(--sf-color-action);
+    --sf-focus-ring-shadow: 0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg),
+                            0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color);
+    --sf-caret-color:       var(--sf-color-action);
+
+
+    /* ----------------------------------------------------------
+       Typography aliases
+       ---------------------------------------------------------- */
+    --sf-body-font-size:     var(--sf-text-m);
+    --sf-body-line-height:   var(--sf-leading-normal);
+    --sf-body-font-weight:   var(--sf-font-weight-body);
+    --sf-body-font-family:   var(--sf-font-body);
+    --sf-body-color:         var(--sf-color-text);
+    --sf-body-text-wrap:     pretty;
+    --sf-body-strong-weight: var(--sf-font-weight-heading);
+    --sf-body-em-style:      italic;
+
+    --sf-heading-font-family: var(--sf-font-heading);
+    --sf-heading-color:       var(--sf-color-heading);
+    --sf-heading-text-wrap:   balance;
+
+    --sf-h1-size:           var(--sf-text-4xl);
+    --sf-h1-line-height:    var(--sf-leading-tight);
+    --sf-h1-font-weight:    var(--sf-font-weight-heading);
+    --sf-h1-letter-spacing: var(--sf-tracking-tight);
+
+    --sf-h2-size:           var(--sf-text-3xl);
+    --sf-h2-line-height:    var(--sf-leading-tight);
+    --sf-h2-font-weight:    var(--sf-font-weight-heading);
+    --sf-h2-letter-spacing: var(--sf-tracking-tight);
+
+    --sf-h3-size:           var(--sf-text-2xl);
+    --sf-h3-line-height:    var(--sf-leading-snug);
+    --sf-h3-font-weight:    var(--sf-font-weight-heading);
+    --sf-h3-letter-spacing: var(--sf-tracking-normal);
+
+    --sf-h4-size:           var(--sf-text-xl);
+    --sf-h4-line-height:    var(--sf-leading-snug);
+    --sf-h4-font-weight:    var(--sf-font-weight-heading);
+    --sf-h4-letter-spacing: var(--sf-tracking-normal);
+
+    --sf-h5-size:           var(--sf-text-l);
+    --sf-h5-line-height:    var(--sf-leading-normal);
+    --sf-h5-font-weight:    var(--sf-font-weight-heading);
+    --sf-h5-letter-spacing: var(--sf-tracking-normal);
+
+    --sf-h6-size:           var(--sf-text-m);
+    --sf-h6-line-height:    var(--sf-leading-normal);
+    --sf-h6-font-weight:    var(--sf-font-weight-heading);
+    --sf-h6-letter-spacing: var(--sf-tracking-wide);
+
+
+    /* ----------------------------------------------------------
+       Spacing aliases
+       ---------------------------------------------------------- */
+    --sf-gap:           var(--sf-space-m);
+    --sf-content-gap:   var(--sf-space-s);
+    --sf-component-pad: var(--sf-space-m);
+    --sf-field-block:   var(--sf-space-l);
+    --sf-prose-paragraph: var(--sf-space-m);
+
+
+    /* ----------------------------------------------------------
+       Section padding
+       ---------------------------------------------------------- */
+    --sf-section-pad:     var(--sf-section-pad--m);
+    --sf-section-pad--s:  var(--sf-space-2xl);
+    --sf-section-pad--m:  var(--sf-space-3xl);
+    --sf-section-pad--l:  var(--sf-space-4xl);
+    --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5);
+
+
+    /* ----------------------------------------------------------
+       Transition shorthands
+       ---------------------------------------------------------- */
+    --sf-transition-base:  all var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-fast:  all var(--sf-duration-fast)   var(--sf-ease-out);
+    --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
+    --sf-transition-enter: all var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-exit:  all var(--sf-duration-fast)   var(--sf-ease-in);
+
+  }
+
+
+  /* ============================================================
+     DARK MODE — system preference
+     ============================================================ */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --sf-color-bg:      #0f172a;
+      --sf-color-surface: #1e293b;
+      --sf-color-well:    #0f172a;
+      --sf-color-raised:  #253047;
+      --sf-color-overlay: rgba(15, 23, 42, 0.9);
+      --sf-color-inverse: #f8fafc;
+
+      --sf-color-text:              #f1f5f9;
+      --sf-color-text--secondary:   #cbd5e1;
+      --sf-color-text--muted:       #94a3b8;
+      --sf-color-text--placeholder: #475569;
+      --sf-color-text--disabled:    #334155;
+      --sf-color-text--inverse:     #0f172a;
+      --sf-color-heading:           #f8fafc;
+
+      --sf-color-border:              #1e293b;
+      --sf-color-border--subtle:      #0f172a;
+      --sf-color-border--strong:      #334155;
+      --sf-color-border--disabled:    #1e293b;
+      --sf-color-border--translucent: rgba(30, 41, 59, 0.5);
+
+      --sf-color-primary: #818cf8;
+      --sf-color-action:  #818cf8;
+
+      --sf-color-link:            #818cf8;
+      --sf-color-link--hover:     #a5b4fc;
+      --sf-color-link--active:    #c7d2fe;
+      --sf-color-link--visited:   #a5b4fc;
+      --sf-color-link--underline: rgba(129, 140, 248, 0.3);
+
+      --sf-color-bg--hover:    rgba(30, 41, 59, 0.6);
+      --sf-color-bg--active:   rgba(51, 65, 85, 0.6);
+      --sf-color-bg--selected: rgba(129, 140, 248, 0.15);
+      --sf-color-bg--focus:    rgba(129, 140, 248, 0.08);
+
+      --sf-color-selection-bg: rgba(129, 140, 248, 0.25);
+
+      --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
+    }
+  }
+
+
+  /* ============================================================
+     DARK MODE — explicit toggle ([data-theme="dark"] on <html>)
+     ============================================================ */
+
+  [data-theme="dark"] {
+    --sf-color-bg:      #0f172a;
+    --sf-color-surface: #1e293b;
+    --sf-color-well:    #0f172a;
+    --sf-color-raised:  #253047;
+    --sf-color-overlay: rgba(15, 23, 42, 0.9);
+    --sf-color-inverse: #f8fafc;
+
+    --sf-color-text:              #f1f5f9;
+    --sf-color-text--secondary:   #cbd5e1;
+    --sf-color-text--muted:       #94a3b8;
+    --sf-color-text--placeholder: #475569;
+    --sf-color-text--disabled:    #334155;
+    --sf-color-text--inverse:     #0f172a;
+    --sf-color-heading:           #f8fafc;
+
+    --sf-color-border:              #1e293b;
+    --sf-color-border--subtle:      #0f172a;
+    --sf-color-border--strong:      #334155;
+    --sf-color-border--disabled:    #1e293b;
+    --sf-color-border--translucent: rgba(30, 41, 59, 0.5);
+
+    --sf-color-primary: #818cf8;
+    --sf-color-action:  #818cf8;
+
+    --sf-color-link:            #818cf8;
+    --sf-color-link--hover:     #a5b4fc;
+    --sf-color-link--active:    #c7d2fe;
+    --sf-color-link--visited:   #a5b4fc;
+    --sf-color-link--underline: rgba(129, 140, 248, 0.3);
+
+    --sf-color-bg--hover:    rgba(30, 41, 59, 0.6);
+    --sf-color-bg--active:   rgba(51, 65, 85, 0.6);
+    --sf-color-bg--selected: rgba(129, 140, 248, 0.15);
+    --sf-color-bg--focus:    rgba(129, 140, 248, 0.08);
+
+    --sf-color-selection-bg: rgba(129, 140, 248, 0.25);
+
+    --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
+
+    background-color: var(--sf-color-bg);
+    color:            var(--sf-color-text);
   }
 
 }
