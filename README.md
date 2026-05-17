@@ -46,9 +46,12 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 | File | Layer |
 |------|-------|
 | `optional/components.css` | `slashed.components` |
+| `optional/components.tokens.css` | `slashed.tokens` |
 | `optional/utilities.css` | `slashed.utilities` |
 | `optional/themes.css` | `slashed.themes` |
 | `optional/motion.css` | `slashed.motion` |
+
+`components.tokens.css` is loaded automatically by `components.css`.
 
 ---
 
