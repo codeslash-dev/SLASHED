@@ -38,7 +38,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
 ## Cascade layer order
 
-```
+```text
 slashed.tokens → reset → base → layout → components → utilities →
 states → themes → motion → accessibility → print → overrides → legacy
 ```

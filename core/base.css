@@ -21,7 +21,7 @@
     color:             var(--sf-heading-color, var(--sf-color-heading));
     text-wrap:         balance;
     overflow-wrap:     break-word;
-    text-rendering:    optimizeLegibility;
+    text-rendering:    optimizelegibility;
     scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
   }
 
@@ -121,7 +121,7 @@
   }
 
   svg {
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   hr {
