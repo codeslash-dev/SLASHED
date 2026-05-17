@@ -1,9 +1,73 @@
 /* SLASHED — core/print.css
    @layer slashed.print
-   ────────────────────── */
+
+   Print RULES only. @page (margins/size from --sf-print-*) lives
+   in tokens.print.css, which is always loaded alongside this file,
+   so tokens referenced here need no fallbacks.
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.print {
 
-  /* TODO */
+  @media print {
+
+    *,
+    *::before,
+    *::after {
+      background:  transparent !important;
+      color:       CanvasText  !important;
+      box-shadow:  none        !important;
+      text-shadow: none        !important;
+    }
+
+    a[href]::after {
+      content:    " (" attr(href) ")";
+      font-size:  90%;
+      word-break: break-all;
+    }
+
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+      content: "";
+    }
+
+    abbr[title]::after {
+      content: " (" attr(title) ")";
+    }
+
+    img, svg, video, canvas, figure, table, pre, blockquote {
+      break-inside: avoid;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+
+    tr {
+      break-inside: avoid;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      break-after: avoid;
+      orphans:     3;
+      widows:      3;
+    }
+
+    p {
+      orphans: 3;
+      widows:  3;
+    }
+
+    pre, blockquote {
+      border:  1px solid #999;
+      padding: var(--sf-space-s);
+    }
+
+    /* Hide non-essential interactive and decorative elements */
+    nav, aside, details, summary, button, input, select, textarea,
+    dialog, [popover], .no-print {
+      display: none !important;
+    }
+
+  }
 
 }

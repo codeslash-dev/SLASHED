@@ -1,9 +1,146 @@
 /* SLASHED — core/accessibility.css
    @layer slashed.accessibility
-   ────────────────────── */
+
+   Critical a11y rules use !important to survive unlayered CSS and
+   third-party resets (unlayered normal beats any layered normal).
+   Protection is SELECTIVE — only rules whose override is a genuine
+   user-facing barrier are hardened. Rules that are legitimately
+   customised (touch targets, skip-link position, contrast boost,
+   cursor) are left normal on purpose.
+
+   Audit note: reset.css/base.css contain no !important on outline,
+   animation-* or transition-*, so the reversed important-layer order
+   cannot let a lower layer defeat these rules.
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.accessibility {
 
-  /* TODO */
+  /* ----------------------------------------------------------
+     Focus — keyboard visibility is WCAG 2.4.7, hard barrier.
+     Ring definition lives here (not base.css) so all focus
+     logic is in one high-priority layer. Hardened.
+     ---------------------------------------------------------- */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color) !important;
+    outline-offset: var(--sf-focus-ring-offset) !important;
+  }
+
+  /* ----------------------------------------------------------
+     Reduced motion. Token override helps components that read
+     duration tokens in other contexts; the property-level
+     !important block is the real guarantee and works
+     independently of tokens (and of unlayered token overrides).
+     ---------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --sf-duration-instant: 0.01ms;
+      --sf-duration-fast:    0.01ms;
+      --sf-duration-normal:  0.01ms;
+      --sf-duration-slow:    0.01ms;
+      --sf-duration-slower:  0.01ms;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:        0.01ms !important;
+      animation-iteration-count: 1      !important;
+      transition-duration:       0.01ms !important;
+      scroll-behavior:           auto   !important;
+    }
+  }
+
+  /* ----------------------------------------------------------
+     High contrast — enhancement, not a barrier. Left normal:
+     if overridden the focus ring still exists, just thinner.
+     ---------------------------------------------------------- */
+  @media (prefers-contrast: more) {
+    :root {
+      --sf-focus-ring-width: 3px;
+    }
+
+    hr {
+      border-block-start-width: 2px;
+    }
+  }
+
+  /* ----------------------------------------------------------
+     Reduced transparency.
+     ---------------------------------------------------------- */
+  @media (prefers-reduced-transparency: reduce) {
+    ::backdrop {
+      background-color: var(--sf-color-neutral);
+      opacity:          1;
+    }
+  }
+
+  /* ----------------------------------------------------------
+     Minimum touch targets — WCAG 2.5.5 has documented
+     exceptions; dense desktop-first UIs legitimately go below
+     44px with other hit-area strategies. Left normal ON PURPOSE
+     so it stays a recommendation, not an unbreakable rule.
+     ---------------------------------------------------------- */
+  @media (pointer: coarse) {
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    select,
+    summary,
+    a {
+      min-height: 44px;
+      min-width:  44px;
+    }
+  }
+
+  /* ----------------------------------------------------------
+     Disabled states — cosmetic, left normal.
+     ---------------------------------------------------------- */
+  [disabled],
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  /* ----------------------------------------------------------
+     Screen-reader-only. Atomic contract: a partial override
+     either exposes hidden content visually or hides intended
+     content. All-or-nothing, so the whole set is hardened.
+     ---------------------------------------------------------- */
+  .sr-only,
+  .visually-hidden {
+    position:    absolute            !important;
+    width:       1px                 !important;
+    height:      1px                 !important;
+    padding:     0                   !important;
+    margin:      -1px                !important;
+    overflow:    hidden              !important;
+    clip:        rect(0, 0, 0, 0)    !important;
+    white-space: nowrap              !important;
+    border:      0                   !important;
+  }
+
+  /* ----------------------------------------------------------
+     Skip link — appearance belongs to the integrator's design.
+     Left normal so position/colour can be themed freely.
+     ---------------------------------------------------------- */
+  .skip-link {
+    position:      absolute;
+    top:           -100%;
+    left:          var(--sf-space-m);
+    z-index:       9999;
+    padding:       var(--sf-space-s) var(--sf-space-m);
+    background:    var(--sf-color-bg);
+    color:         var(--sf-color-text);
+    border:        var(--sf-border-width-1) solid var(--sf-color-border);
+    border-radius: var(--sf-radius-m);
+    transition:    top var(--sf-duration-fast) var(--sf-ease-out);
+  }
+  .skip-link:focus {
+    top: var(--sf-space-m);
+  }
 
 }
