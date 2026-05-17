@@ -32,6 +32,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies. 
 
 | File | Layer | What's inside |
 |------|-------|---------------|
+| `core/layers.css` | — | Cascade layer order declaration. Load first, always |
 | `core/tokens.css` | `slashed.tokens` | Global design tokens — colors, spacing, typography, radii, shadows, z-index, transitions |
 | `core/reset.css` | `slashed.reset` | Browser normalization. No design decisions. No `var()` |
 | `core/base.css` | `slashed.base` | Opinionated element defaults — headings, links, code, tables. All values via tokens |
@@ -77,7 +78,7 @@ SLASHED is BEM-first. The pre-built components in `optional/components.css` are 
 }
 ```
 
-Use framework tokens everywhere — `var(--sf-spacing-4)`, `var(--sf-color-primary)`, `var(--sf-radius-m)` — and theming and dark mode work automatically.
+Use framework tokens everywhere — `var(--sf-space-m)`, `var(--sf-color-primary)`, `var(--sf-radius-m)` — and theming and dark mode work automatically.
 
 ---
 
@@ -100,6 +101,6 @@ slashed.print → slashed.overrides
 
 Three layers, in order of preference:
 
-1. **Fluid tokens** — `--sf-spacing-*`, `--sf-text-*` use `clamp()` and scale with the viewport. Reach for these first; no `@media` rule needed.
+1. **Fluid tokens** — `--sf-space-*`, `--sf-text-*` use `clamp()` and scale with the viewport. Reach for these first; no `@media` rule needed.
 2. **Container-aware primitives** — `.grid`, `.sidebar`, and other layout primitives respond to their container via `@container`.
 3. **Breakpoints** — `sm: 30em / md: 48em / lg: 64em / xl: 80em`. Use only when (1) and (2) are not enough.
