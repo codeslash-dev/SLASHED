@@ -56,7 +56,7 @@
     --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
     --sf-color-surface: var(--sf-color-base);
     --sf-color-well:    oklch(from var(--sf-color-base) calc(l - 0.02) c h);
-    --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.02) c h);
+    --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
     --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
     --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
 
@@ -82,7 +82,7 @@
     --sf-color-text--on-action:    oklch(1 0 0);
     --sf-color-text--on-neutral:   oklch(1 0 0);
     --sf-color-text--on-base:      var(--sf-color-text);
-    --sf-color-text--on-inverse:   var(--sf-color-text);
+    --sf-color-text--on-inverse:   var(--sf-color-text--inverse);
     --sf-color-text--on-success:   oklch(1 0 0);
     --sf-color-text--on-warning:   oklch(0.2 0.02 70);
     --sf-color-text--on-error:     oklch(1 0 0);
@@ -173,7 +173,7 @@
        Shadow glow & disabled
        ---------------------------------------------------------- */
     --sf-shadow-glow-color: var(--sf-color-primary);
-    --sf-shadow-glow:       0 0 15px 2px color-mix(in srgb, var(--sf-shadow-glow-color) calc(40% * var(--sf-shadow-strength) * 5), transparent);
+    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / calc(0.4 * var(--sf-shadow-strength) * 5));
     --sf-opacity-disabled:  0.45;
 
 
@@ -275,15 +275,15 @@
     --sf-space-gutter: var(--sf-space-l);
 
     /* Spacing — fluid */
-    --sf-space-2xs: clamp(0.51rem, calc(0.004888888888888888   * (100vw - 22.5rem) + 0.51rem), 0.84rem);
-    --sf-space-xs:  clamp(0.64rem, calc(0.007259259259259258   * (100vw - 22.5rem) + 0.64rem), 1.13rem);
-    --sf-space-s:   clamp(0.8rem,  calc(0.01037037037037037    * (100vw - 22.5rem) + 0.8rem),  1.5rem);
-    --sf-space-m:   clamp(1rem,    calc(0.014814814814814815   * (100vw - 22.5rem) + 1rem),    2rem);
-    --sf-space-l:   clamp(1.25rem, calc(0.021037037037037035   * (100vw - 22.5rem) + 1.25rem), 2.67rem);
-    --sf-space-xl:  clamp(1.56rem, calc(0.029481481481481477   * (100vw - 22.5rem) + 1.56rem), 3.55rem);
-    --sf-space-2xl: clamp(1.95rem, calc(0.04133333333333333    * (100vw - 22.5rem) + 1.95rem), 4.74rem);
-    --sf-space-3xl: clamp(2.44rem, calc(0.057333333333333326   * (100vw - 22.5rem) + 2.44rem), 6.31rem);
-    --sf-space-4xl: clamp(3.05rem, calc(0.07955555555555556    * (100vw - 22.5rem) + 3.05rem), 8.42rem);
+    --sf-space-2xs: calc(clamp(0.51rem, calc(0.004888888888888888   * (100vw - 22.5rem) + 0.51rem), 0.84rem) * var(--sf-space-scale));
+    --sf-space-xs:  calc(clamp(0.64rem, calc(0.007259259259259258   * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale));
+    --sf-space-s:   calc(clamp(0.8rem,  calc(0.01037037037037037    * (100vw - 22.5rem) + 0.8rem),  1.5rem)  * var(--sf-space-scale));
+    --sf-space-m:   calc(clamp(1rem,    calc(0.014814814814814815   * (100vw - 22.5rem) + 1rem),    2rem)    * var(--sf-space-scale));
+    --sf-space-l:   calc(clamp(1.25rem, calc(0.021037037037037035   * (100vw - 22.5rem) + 1.25rem), 2.67rem) * var(--sf-space-scale));
+    --sf-space-xl:  calc(clamp(1.56rem, calc(0.029481481481481477   * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale));
+    --sf-space-2xl: calc(clamp(1.95rem, calc(0.04133333333333333    * (100vw - 22.5rem) + 1.95rem), 4.74rem) * var(--sf-space-scale));
+    --sf-space-3xl: calc(clamp(2.44rem, calc(0.057333333333333326   * (100vw - 22.5rem) + 2.44rem), 6.31rem) * var(--sf-space-scale));
+    --sf-space-4xl: calc(clamp(3.05rem, calc(0.07955555555555556    * (100vw - 22.5rem) + 3.05rem), 8.42rem) * var(--sf-space-scale));
 
 
     /* ----------------------------------------------------------
@@ -414,7 +414,12 @@
 
 
     /* ----------------------------------------------------------
-       Container query breakpoints
+       Container query breakpoints — reference values only.
+       CSS custom properties cannot be used inside @container or
+       @media queries. Use these values directly in your queries:
+         mobile-portrait: 20rem   s: 30rem   m: 48rem
+         l: 64rem                 xl: 80rem
+       Or read them from JS via getComputedStyle().
        ---------------------------------------------------------- */
     --sf-cq-mobile-portrait: 20rem;
     --sf-cq-s:               30rem;
