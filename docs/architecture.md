@@ -36,6 +36,7 @@ core/
   base.css                slashed.base
   layout.css              slashed.layout
   states.css              slashed.states
+  motion.css              slashed.motion
   accessibility.css       slashed.accessibility
   print.css               slashed.print
 optional/
@@ -43,7 +44,6 @@ optional/
   tokens.components.css   slashed.tokens  (component-level tokens)
   components.css          slashed.components  (imports tokens.components.css)
   utilities.css           slashed.utilities
-  motion.css              slashed.motion
   legacy.css              slashed.legacy
 ```
 
@@ -144,6 +144,7 @@ core/reset.css
 core/base.css
 core/layout.css
 core/states.css
+core/motion.css
 core/accessibility.css
 core/print.css
 ```
