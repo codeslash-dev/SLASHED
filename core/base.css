@@ -35,6 +35,24 @@
       --sf-color-error:   var(--sf-color-error-dark);
       --sf-color-info:    var(--sf-color-info-dark);
       --sf-color-danger:  var(--sf-color-danger-dark);
+
+      /* Text — inverted direction for dark backgrounds */
+      --sf-color-text:              oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) calc(l + 0.1)  c h);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) calc(l - 0.1)  c h);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.2)  c h);
+      --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4)  c h);
+      --sf-color-heading:           oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+
+      /* Borders — adjusted for dark backgrounds */
+      --sf-color-border:              oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
+      --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) calc(l - 0.38) 0.005 h);
+      --sf-color-border--strong:      oklch(from var(--sf-color-neutral) calc(l - 0.1)  0.02  h);
+      --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
+      --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
+
+      /* Shadow strength — more visible on dark surfaces */
+      --sf-shadow-strength: 0.25;
     }
   }
 
@@ -64,6 +82,24 @@
     --sf-color-error:   var(--sf-color-error-dark);
     --sf-color-info:    var(--sf-color-info-dark);
     --sf-color-danger:  var(--sf-color-danger-dark);
+
+    /* Text — inverted direction for dark backgrounds */
+    --sf-color-text:              oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+    --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) calc(l + 0.1)  c h);
+    --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) calc(l - 0.1)  c h);
+    --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.2)  c h);
+    --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4)  c h);
+    --sf-color-heading:           oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+
+    /* Borders — adjusted for dark backgrounds */
+    --sf-color-border:              oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
+    --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) calc(l - 0.38) 0.005 h);
+    --sf-color-border--strong:      oklch(from var(--sf-color-neutral) calc(l - 0.1)  0.02  h);
+    --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
+    --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
+
+    /* Shadow strength — more visible on dark surfaces */
+    --sf-shadow-strength: 0.25;
   }
 
   /* ----------------------------------------------------------

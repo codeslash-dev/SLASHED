@@ -104,6 +104,7 @@
   .sf-cluster--2xs     { gap: var(--sf-space-2xs); }
   .sf-cluster--xs      { gap: var(--sf-space-xs); }
   .sf-cluster--s       { gap: var(--sf-space-s); }
+  .sf-cluster--m       { gap: var(--sf-space-m); }
   .sf-cluster--l       { gap: var(--sf-space-l); }
   .sf-cluster--xl      { gap: var(--sf-space-xl); }
 
