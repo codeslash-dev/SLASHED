@@ -314,26 +314,95 @@
 
 
   /* ============================================================
-     SEMANTIC TOKENS — neutral theme (light mode)
+     COLOR PALETTE — primitives (referenced by semantic tokens)
+     ============================================================ */
+
+  :root {
+
+    /* Slate */
+    --sf-palette-slate-50:  #f8fafc;
+    --sf-palette-slate-100: #f1f5f9;
+    --sf-palette-slate-200: #e2e8f0;
+    --sf-palette-slate-300: #cbd5e1;
+    --sf-palette-slate-400: #94a3b8;
+    --sf-palette-slate-500: #64748b;
+    --sf-palette-slate-600: #475569;
+    --sf-palette-slate-700: #334155;
+    --sf-palette-slate-800: #1e293b;
+    --sf-palette-slate-850: #253047;
+    --sf-palette-slate-900: #0f172a;
+
+    /* Indigo */
+    --sf-palette-indigo-200: #c7d2fe;
+    --sf-palette-indigo-300: #a5b4fc;
+    --sf-palette-indigo-400: #818cf8;
+    --sf-palette-indigo-600: #4f46e5;
+    --sf-palette-indigo-700: #4338ca;
+    --sf-palette-indigo-800: #3730a3;
+
+    /* Violet */
+    --sf-palette-violet-600: #7c3aed;
+
+    /* Cyan */
+    --sf-palette-cyan-500: #0891b2;
+    --sf-palette-cyan-600: #0e7490;
+
+    /* Green */
+    --sf-palette-green-50:  #f0fdf4;
+    --sf-palette-green-200: #bbf7d0;
+    --sf-palette-green-500: #16a34a;
+    --sf-palette-green-700: #15803d;
+
+    /* Yellow / Amber */
+    --sf-palette-yellow-50:  #fffbeb;
+    --sf-palette-yellow-200: #fde68a;
+    --sf-palette-yellow-500: #d97706;
+    --sf-palette-yellow-900: #92400e;
+
+    /* Red */
+    --sf-palette-red-50:  #fef2f2;
+    --sf-palette-red-200: #fecaca;
+    --sf-palette-red-600: #dc2626;
+    --sf-palette-red-700: #b91c1c;
+
+    /* Blue */
+    --sf-palette-blue-50:  #eff6ff;
+    --sf-palette-blue-200: #bfdbfe;
+    --sf-palette-blue-600: #0284c7;
+    --sf-palette-blue-700: #1d4ed8;
+
+    /* Neutrals */
+    --sf-palette-white: #ffffff;
+    --sf-palette-black: #000000;
+
+  }
+
+
+  /* ============================================================
+     SEMANTIC TOKENS
+     light-dark() handles both system preference and [data-theme].
+     @property typed tokens (brand/status) keep light defaults here;
+     [data-theme="dark"] re-declares them so light-dark() re-evaluates
+     against its own color-scheme (computed values don't cascade).
      ============================================================ */
 
   :root {
 
     /* ----------------------------------------------------------
-       Brand & status colors
+       Brand & status — @property typed, light default
        ---------------------------------------------------------- */
-    --sf-color-primary:   #4f46e5;
-    --sf-color-secondary: #1e293b;
-    --sf-color-tertiary:  #0891b2;
-    --sf-color-action:    #4f46e5;
-    --sf-color-neutral:   #64748b;
-    --sf-color-base:      #f8fafc;
+    --sf-color-primary:   light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
+    --sf-color-secondary: var(--sf-palette-slate-800);
+    --sf-color-tertiary:  var(--sf-palette-cyan-500);
+    --sf-color-action:    light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
+    --sf-color-neutral:   var(--sf-palette-slate-500);
+    --sf-color-base:      var(--sf-palette-slate-50);
 
-    --sf-color-success: #16a34a;
-    --sf-color-warning: #d97706;
-    --sf-color-error:   #dc2626;
-    --sf-color-info:    #0284c7;
-    --sf-color-danger:  #dc2626;
+    --sf-color-success: var(--sf-palette-green-500);
+    --sf-color-warning: var(--sf-palette-yellow-500);
+    --sf-color-error:   var(--sf-palette-red-600);
+    --sf-color-info:    var(--sf-palette-blue-600);
+    --sf-color-danger:  var(--sf-palette-red-600);
 
 
     /* ----------------------------------------------------------
@@ -352,113 +421,140 @@
     /* ----------------------------------------------------------
        Surfaces
        ---------------------------------------------------------- */
-    --sf-color-bg:      #ffffff;
-    --sf-color-surface: #f8fafc;
-    --sf-color-well:    #f1f5f9;
-    --sf-color-raised:  #ffffff;
-    --sf-color-overlay: rgba(255, 255, 255, 0.9);
-    --sf-color-inverse: #0f172a;
+    --sf-color-bg:      light-dark(var(--sf-palette-white),      var(--sf-palette-slate-900));
+    --sf-color-surface: light-dark(var(--sf-palette-slate-50),   var(--sf-palette-slate-800));
+    --sf-color-well:    light-dark(var(--sf-palette-slate-100),  var(--sf-palette-slate-900));
+    --sf-color-raised:  light-dark(var(--sf-palette-white),      var(--sf-palette-slate-850));
+    --sf-color-overlay: light-dark(
+      color-mix(in srgb, var(--sf-palette-white)       90%, transparent),
+      color-mix(in srgb, var(--sf-palette-slate-900)   90%, transparent)
+    );
+    --sf-color-inverse: light-dark(var(--sf-palette-slate-900),  var(--sf-palette-slate-50));
 
 
     /* ----------------------------------------------------------
        Text
        ---------------------------------------------------------- */
-    --sf-color-text:              #0f172a;
-    --sf-color-text--secondary:   #334155;
-    --sf-color-text--muted:       #64748b;
-    --sf-color-text--placeholder: #94a3b8;
-    --sf-color-text--disabled:    #cbd5e1;
-    --sf-color-text--inverse:     #f8fafc;
-    --sf-color-heading:           #0f172a;
+    --sf-color-text:              light-dark(var(--sf-palette-slate-900), var(--sf-palette-slate-100));
+    --sf-color-text--secondary:   light-dark(var(--sf-palette-slate-700), var(--sf-palette-slate-300));
+    --sf-color-text--muted:       light-dark(var(--sf-palette-slate-500), var(--sf-palette-slate-400));
+    --sf-color-text--placeholder: light-dark(var(--sf-palette-slate-400), var(--sf-palette-slate-600));
+    --sf-color-text--disabled:    light-dark(var(--sf-palette-slate-300), var(--sf-palette-slate-700));
+    --sf-color-text--inverse:     light-dark(var(--sf-palette-slate-50),  var(--sf-palette-slate-900));
+    --sf-color-heading:           light-dark(var(--sf-palette-slate-900), var(--sf-palette-slate-50));
 
 
     /* ----------------------------------------------------------
-       Text-on-color
+       Text-on-color (no light/dark variant — stays constant)
        ---------------------------------------------------------- */
-    --sf-color-text--on-primary:   #ffffff;
-    --sf-color-text--on-secondary: #f8fafc;
-    --sf-color-text--on-tertiary:  #ffffff;
-    --sf-color-text--on-action:    #ffffff;
-    --sf-color-text--on-neutral:   #ffffff;
-    --sf-color-text--on-base:      #0f172a;
-    --sf-color-text--on-inverse:   #f8fafc;
-    --sf-color-text--on-success:   #ffffff;
-    --sf-color-text--on-warning:   #0f172a;
-    --sf-color-text--on-error:     #ffffff;
-    --sf-color-text--on-info:      #ffffff;
-    --sf-color-text--on-danger:    #ffffff;
+    --sf-color-text--on-primary:   var(--sf-palette-white);
+    --sf-color-text--on-secondary: var(--sf-palette-slate-50);
+    --sf-color-text--on-tertiary:  var(--sf-palette-white);
+    --sf-color-text--on-action:    var(--sf-palette-white);
+    --sf-color-text--on-neutral:   var(--sf-palette-white);
+    --sf-color-text--on-base:      var(--sf-palette-slate-900);
+    --sf-color-text--on-inverse:   var(--sf-palette-slate-50);
+    --sf-color-text--on-success:   var(--sf-palette-white);
+    --sf-color-text--on-warning:   var(--sf-palette-slate-900);
+    --sf-color-text--on-error:     var(--sf-palette-white);
+    --sf-color-text--on-info:      var(--sf-palette-white);
+    --sf-color-text--on-danger:    var(--sf-palette-white);
 
 
     /* ----------------------------------------------------------
        Borders
        ---------------------------------------------------------- */
-    --sf-color-border:              #e2e8f0;
-    --sf-color-border--subtle:      #f1f5f9;
-    --sf-color-border--strong:      #94a3b8;
+    --sf-color-border:              light-dark(var(--sf-palette-slate-200), var(--sf-palette-slate-800));
+    --sf-color-border--subtle:      light-dark(var(--sf-palette-slate-100), var(--sf-palette-slate-900));
+    --sf-color-border--strong:      light-dark(var(--sf-palette-slate-400), var(--sf-palette-slate-700));
     --sf-color-border--focus:       var(--sf-focus-ring-color);
-    --sf-color-border--disabled:    #e2e8f0;
-    --sf-color-border--translucent: rgba(226, 232, 240, 0.5);
+    --sf-color-border--disabled:    light-dark(var(--sf-palette-slate-200), var(--sf-palette-slate-800));
+    --sf-color-border--translucent: light-dark(
+      color-mix(in srgb, var(--sf-palette-slate-200) 50%, transparent),
+      color-mix(in srgb, var(--sf-palette-slate-800) 50%, transparent)
+    );
 
 
     /* ----------------------------------------------------------
        Links
        ---------------------------------------------------------- */
-    --sf-color-link:            #4f46e5;
-    --sf-color-link--hover:     #4338ca;
-    --sf-color-link--active:    #3730a3;
-    --sf-color-link--visited:   #7c3aed;
-    --sf-color-link--underline: rgba(79, 70, 229, 0.3);
+    --sf-color-link:            light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
+    --sf-color-link--hover:     light-dark(var(--sf-palette-indigo-700), var(--sf-palette-indigo-300));
+    --sf-color-link--active:    light-dark(var(--sf-palette-indigo-800), var(--sf-palette-indigo-200));
+    --sf-color-link--visited:   light-dark(var(--sf-palette-violet-600), var(--sf-palette-indigo-300));
+    --sf-color-link--underline: light-dark(
+      color-mix(in srgb, var(--sf-palette-indigo-600) 30%, transparent),
+      color-mix(in srgb, var(--sf-palette-indigo-400) 30%, transparent)
+    );
 
 
     /* ----------------------------------------------------------
        Interactive state backgrounds
        ---------------------------------------------------------- */
-    --sf-color-bg--hover:    rgba(226, 232, 240, 0.5);
-    --sf-color-bg--active:   rgba(203, 213, 225, 0.5);
-    --sf-color-bg--selected: rgba(79, 70, 229, 0.1);
-    --sf-color-bg--focus:    rgba(79, 70, 229, 0.05);
+    --sf-color-bg--hover:    light-dark(
+      color-mix(in srgb, var(--sf-palette-slate-200) 50%, transparent),
+      color-mix(in srgb, var(--sf-palette-slate-800) 60%, transparent)
+    );
+    --sf-color-bg--active:   light-dark(
+      color-mix(in srgb, var(--sf-palette-slate-300) 50%, transparent),
+      color-mix(in srgb, var(--sf-palette-slate-700) 60%, transparent)
+    );
+    --sf-color-bg--selected: light-dark(
+      color-mix(in srgb, var(--sf-palette-indigo-600) 10%, transparent),
+      color-mix(in srgb, var(--sf-palette-indigo-400) 15%, transparent)
+    );
+    --sf-color-bg--focus:    light-dark(
+      color-mix(in srgb, var(--sf-palette-indigo-600)  5%, transparent),
+      color-mix(in srgb, var(--sf-palette-indigo-400)  8%, transparent)
+    );
 
 
     /* ----------------------------------------------------------
        Selection & backdrop
        ---------------------------------------------------------- */
-    --sf-color-selection-bg:   rgba(79, 70, 229, 0.2);
+    --sf-color-selection-bg:   light-dark(
+      color-mix(in srgb, var(--sf-palette-indigo-600) 20%, transparent),
+      color-mix(in srgb, var(--sf-palette-indigo-400) 25%, transparent)
+    );
     --sf-color-selection-text: inherit;
-    --sf-color-dim:            rgba(0, 0, 0, 0.5);
+    --sf-color-dim:            color-mix(in srgb, var(--sf-palette-black) 50%, transparent);
 
 
     /* ----------------------------------------------------------
-       Status triplets
+       Status triplets (light-only; no dark override in original)
        ---------------------------------------------------------- */
-    --sf-status-success-bg:     #f0fdf4;
-    --sf-status-success-text:   #15803d;
-    --sf-status-success-border: #bbf7d0;
+    --sf-status-success-bg:     var(--sf-palette-green-50);
+    --sf-status-success-text:   var(--sf-palette-green-700);
+    --sf-status-success-border: var(--sf-palette-green-200);
 
-    --sf-status-warning-bg:     #fffbeb;
-    --sf-status-warning-text:   #92400e;
-    --sf-status-warning-border: #fde68a;
+    --sf-status-warning-bg:     var(--sf-palette-yellow-50);
+    --sf-status-warning-text:   var(--sf-palette-yellow-900);
+    --sf-status-warning-border: var(--sf-palette-yellow-200);
 
-    --sf-status-error-bg:       #fef2f2;
-    --sf-status-error-text:     #b91c1c;
-    --sf-status-error-border:   #fecaca;
+    --sf-status-error-bg:       var(--sf-palette-red-50);
+    --sf-status-error-text:     var(--sf-palette-red-700);
+    --sf-status-error-border:   var(--sf-palette-red-200);
 
-    --sf-status-info-bg:        #eff6ff;
-    --sf-status-info-text:      #1d4ed8;
-    --sf-status-info-border:    #bfdbfe;
+    --sf-status-info-bg:        var(--sf-palette-blue-50);
+    --sf-status-info-text:      var(--sf-palette-blue-700);
+    --sf-status-info-border:    var(--sf-palette-blue-200);
 
-    --sf-status-danger-bg:      #fef2f2;
-    --sf-status-danger-text:    #b91c1c;
-    --sf-status-danger-border:  #fecaca;
+    --sf-status-danger-bg:      var(--sf-palette-red-50);
+    --sf-status-danger-text:    var(--sf-palette-red-700);
+    --sf-status-danger-border:  var(--sf-palette-red-200);
 
 
     /* ----------------------------------------------------------
        Gradients
        ---------------------------------------------------------- */
-    --sf-gradient-primary:   linear-gradient(135deg, #4f46e5, #4338ca);
-    --sf-gradient-secondary: linear-gradient(135deg, #1e293b, #0f172a);
-    --sf-gradient-tertiary:  linear-gradient(135deg, #0891b2, #0e7490);
-    --sf-gradient-brand:     linear-gradient(135deg, #4f46e5, #7c3aed);
-    --sf-gradient-surface:   linear-gradient(180deg, #ffffff, #f8fafc);
+    --sf-gradient-primary:   linear-gradient(135deg, var(--sf-palette-indigo-600), var(--sf-palette-indigo-700));
+    --sf-gradient-secondary: linear-gradient(135deg, var(--sf-palette-slate-800),  var(--sf-palette-slate-900));
+    --sf-gradient-tertiary:  linear-gradient(135deg, var(--sf-palette-cyan-500),   var(--sf-palette-cyan-600));
+    --sf-gradient-brand:     linear-gradient(135deg, var(--sf-palette-indigo-600), var(--sf-palette-violet-600));
+    --sf-gradient-surface:   light-dark(
+      linear-gradient(180deg, var(--sf-palette-white),      var(--sf-palette-slate-50)),
+      linear-gradient(180deg, var(--sf-palette-slate-800),  var(--sf-palette-slate-900))
+    );
 
     --sf-gradient-fade--r: linear-gradient(to right,  transparent, var(--sf-color-bg));
     --sf-gradient-fade--l: linear-gradient(to left,   transparent, var(--sf-color-bg));
@@ -565,103 +661,25 @@
 
 
   /* ============================================================
-     DARK MODE — system preference
-     ============================================================ */
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --sf-color-bg:      #0f172a;
-      --sf-color-surface: #1e293b;
-      --sf-color-well:    #0f172a;
-      --sf-color-raised:  #253047;
-      --sf-color-overlay: rgba(15, 23, 42, 0.9);
-      --sf-color-inverse: #f8fafc;
-
-      --sf-color-text:              #f1f5f9;
-      --sf-color-text--secondary:   #cbd5e1;
-      --sf-color-text--muted:       #94a3b8;
-      --sf-color-text--placeholder: #475569;
-      --sf-color-text--disabled:    #334155;
-      --sf-color-text--inverse:     #0f172a;
-      --sf-color-heading:           #f8fafc;
-
-      --sf-color-border:              #1e293b;
-      --sf-color-border--subtle:      #0f172a;
-      --sf-color-border--strong:      #334155;
-      --sf-color-border--disabled:    #1e293b;
-      --sf-color-border--translucent: rgba(30, 41, 59, 0.5);
-
-      --sf-color-primary: #818cf8;
-      --sf-color-action:  #818cf8;
-
-      --sf-color-link:            #818cf8;
-      --sf-color-link--hover:     #a5b4fc;
-      --sf-color-link--active:    #c7d2fe;
-      --sf-color-link--visited:   #a5b4fc;
-      --sf-color-link--underline: rgba(129, 140, 248, 0.3);
-
-      --sf-color-bg--hover:    rgba(30, 41, 59, 0.6);
-      --sf-color-bg--active:   rgba(51, 65, 85, 0.6);
-      --sf-color-bg--selected: rgba(129, 140, 248, 0.15);
-      --sf-color-bg--focus:    rgba(129, 140, 248, 0.08);
-
-      --sf-color-selection-bg: rgba(129, 140, 248, 0.25);
-
-      --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
-    }
-  }
-
-
-  /* ============================================================
-     DARK MODE — explicit toggle ([data-theme="dark"] on <html>)
+     DARK MODE — explicit toggle ([data-theme="dark"])
+     Only @property typed tokens need re-declaration here because
+     computed color values don't cascade light-dark() through DOM.
+     Non-@property tokens (surfaces, text, borders, links) adapt
+     automatically via light-dark() once color-scheme is set.
      ============================================================ */
 
   [data-theme="dark"] {
     --sf-color-scheme: dark;
 
-    --sf-color-bg:      #0f172a;
-    --sf-color-surface: #1e293b;
-    --sf-color-well:    #0f172a;
-    --sf-color-raised:  #253047;
-    --sf-color-overlay: rgba(15, 23, 42, 0.9);
-    --sf-color-inverse: #f8fafc;
-
-    --sf-color-text:              #f1f5f9;
-    --sf-color-text--secondary:   #cbd5e1;
-    --sf-color-text--muted:       #94a3b8;
-    --sf-color-text--placeholder: #475569;
-    --sf-color-text--disabled:    #334155;
-    --sf-color-text--inverse:     #0f172a;
-    --sf-color-heading:           #f8fafc;
-
-    --sf-color-border:              #1e293b;
-    --sf-color-border--subtle:      #0f172a;
-    --sf-color-border--strong:      #334155;
-    --sf-color-border--disabled:    #1e293b;
-    --sf-color-border--translucent: rgba(30, 41, 59, 0.5);
-
-    --sf-color-primary: #818cf8;
-    --sf-color-action:  #818cf8;
-
-    --sf-color-link:            #818cf8;
-    --sf-color-link--hover:     #a5b4fc;
-    --sf-color-link--active:    #c7d2fe;
-    --sf-color-link--visited:   #a5b4fc;
-    --sf-color-link--underline: rgba(129, 140, 248, 0.3);
-
-    --sf-color-bg--hover:    rgba(30, 41, 59, 0.6);
-    --sf-color-bg--active:   rgba(51, 65, 85, 0.6);
-    --sf-color-bg--selected: rgba(129, 140, 248, 0.15);
-    --sf-color-bg--focus:    rgba(129, 140, 248, 0.08);
-
-    --sf-color-selection-bg: rgba(129, 140, 248, 0.25);
-
-    --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
-
+    --sf-color-primary: light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
+    --sf-color-action:  light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
   }
 
   [data-theme="light"] {
     --sf-color-scheme: light;
+
+    --sf-color-primary: light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
+    --sf-color-action:  light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
   }
 
 }
