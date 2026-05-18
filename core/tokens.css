@@ -341,6 +341,7 @@
        Shadows
        ---------------------------------------------------------- */
     --sf-shadow-strength: 0.08;
+    --sf-shadow-color:    220 40% 2%;
 
     --sf-shadow-none:  none;
     --sf-shadow-xs:    0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5));
@@ -505,10 +506,11 @@
     /* ----------------------------------------------------------
        Spacing aliases
        ---------------------------------------------------------- */
-    --sf-gap:           var(--sf-space-m);
-    --sf-content-gap:   var(--sf-space-s);
-    --sf-component-pad: var(--sf-space-m);
-    --sf-field-block:   var(--sf-space-l);
+    --sf-gap:             var(--sf-space-m);
+    --sf-content-gap:     var(--sf-space-s);
+    --sf-component-pad:   var(--sf-space-m);
+    --sf-field-block:     var(--sf-space-l);
+    --sf-prose-paragraph: var(--sf-space-m);
 
 
     /* ----------------------------------------------------------
