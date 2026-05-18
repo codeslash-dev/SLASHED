@@ -36,6 +36,7 @@ core/
   base.css                slashed.base
   layout.css              slashed.layout
   states.css              slashed.states
+  themes.css              slashed.themes
   motion.css              slashed.motion
   accessibility.css       slashed.accessibility
   print.css               slashed.print
@@ -65,7 +66,7 @@ optional/
 
 **slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it.
 
-**slashed.themes** — token overrides only, no new rules. Dark mode, forced colors, brand palettes.
+**slashed.themes** — selector-driven `color-scheme` overrides only. The brand and status palettes are theme-aware natively via `light-dark()` in `tokens.css` — no token swaps needed at this layer. Setting `data-theme="dark"` on any element flips `color-scheme` for its subtree, which makes every nested `light-dark()` resolve to its dark branch (including all derived tokens) without any further declarations.
 
 **slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`.
 
@@ -82,7 +83,8 @@ optional/
 ## Tokens
 
 - Colors: `oklch()` with relative color syntax for derived values; `color-mix(in oklch)` for tints/shades in palette
-- `@property` registration for brand & status colors (enables animation and `initial` reset)
+- `@property` registration for the `-light` and `-dark` companion brand & status tokens (enables animation and `initial` reset)
+- Theming primitive: each active brand/status token is an unregistered custom property holding a `light-dark(var(--sf-color-X-light), var(--sf-color-X-dark))` expression, so it re-resolves at use-site based on the inherited `color-scheme`. Switching theme is a single `color-scheme` flip — no token swap blocks needed
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals
@@ -144,6 +146,7 @@ core/reset.css
 core/base.css
 core/layout.css
 core/states.css
+core/themes.css
 core/motion.css
 core/accessibility.css
 core/print.css

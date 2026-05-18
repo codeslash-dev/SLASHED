@@ -1,0 +1,66 @@
+/* SLASHED — core/themes.css
+   @layer slashed.themes
+   ───────────────────────────────────────────────────
+
+   Selector-driven `color-scheme` overrides only.
+
+   The brand and status palettes are theme-aware natively via
+   `light-dark()` in `core/tokens.css` — no token swaps live here.
+   Setting `data-theme="dark"` on any element flips
+   `color-scheme` for its subtree, which makes every nested
+   `light-dark()` resolve to its dark branch — including all
+   derived tokens — without any further declarations.
+
+   `:where()` is used on the color-scheme selectors to keep
+   specificity at 0 so consumer CSS wins without `!important`.
+   ─────────────────────────────────────────────────── */
+
+@layer slashed.themes {
+
+  /* ----------------------------------------------------------
+     Forced color-scheme overrides.
+     These are the ONLY rules needed to switch theme on a
+     subtree — `light-dark()` in tokens.css does the rest.
+     ---------------------------------------------------------- */
+
+  :where([data-theme="light"]) {
+    color-scheme: light;
+  }
+
+  :where([data-theme="dark"]) {
+    color-scheme: dark;
+  }
+
+  /* ----------------------------------------------------------
+     Light-mode reset for nested sections.
+     A section forced to `data-theme="light"` inside a parent
+     that has set `--sf-color-X` inline (bypassing the
+     light-dark() infrastructure) inherits that override.
+     This block clears those inherited overrides so the
+     section's `light-dark()` infrastructure (defined on
+     `:root`) takes over again via the cascade.
+
+     Note: the active `--sf-color-X` tokens are unregistered
+     custom properties holding a `light-dark()` expression.
+     Setting an unregistered custom property to `initial`
+     produces the guaranteed-invalid value on this element,
+     causing `var()` to fall back to its `:root` declaration
+     for descendants — restoring the theme-aware pipeline.
+     ---------------------------------------------------------- */
+
+  [data-theme="light"]:not(:root) {
+    --sf-color-primary:   initial;
+    --sf-color-secondary: initial;
+    --sf-color-tertiary:  initial;
+    --sf-color-action:    initial;
+    --sf-color-neutral:   initial;
+    --sf-color-base:      initial;
+
+    --sf-color-success: initial;
+    --sf-color-warning: initial;
+    --sf-color-error:   initial;
+    --sf-color-info:    initial;
+    --sf-color-danger:  initial;
+  }
+
+}
