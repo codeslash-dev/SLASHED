@@ -452,7 +452,11 @@
     /* ----------------------------------------------------------
        Shadows
        ---------------------------------------------------------- */
-    --sf-shadow-strength: light-dark(0.08, 0.25);
+    /* Light-mode default. The dark-mode value is set per-scheme in
+       core/themes.css because `light-dark()` only accepts <color>
+       arguments — scalar numbers are invalid and would zero out
+       every shadow that does `calc(var(--sf-shadow-strength) * N)`. */
+    --sf-shadow-strength: 0.08;
     --sf-shadow-color:    220 40% 2%;
 
     --sf-shadow-none:  none;
@@ -1800,6 +1804,24 @@
    ─────────────────────────────────────────────────── */
 
 @layer slashed.themes {
+
+  /* ----------------------------------------------------------
+     Non-color scalar overrides for dark mode.
+     `light-dark()` only accepts <color> arguments, so any
+     theme-aware NUMBER must be set via a selector. Today
+     that's only --sf-shadow-strength; keep additions here
+     limited to non-color scalars.
+     ---------------------------------------------------------- */
+
+  @media (prefers-color-scheme: dark) {
+    :where(:root:not([data-theme])) {
+      --sf-shadow-strength: 0.25;
+    }
+  }
+
+  :where([data-theme="dark"]) {
+    --sf-shadow-strength: 0.25;
+  }
 
   /* ----------------------------------------------------------
      Forced color-scheme overrides.

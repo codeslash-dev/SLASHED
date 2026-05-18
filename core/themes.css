@@ -18,6 +18,24 @@
 @layer slashed.themes {
 
   /* ----------------------------------------------------------
+     Non-color scalar overrides for dark mode.
+     `light-dark()` only accepts <color> arguments, so any
+     theme-aware NUMBER must be set via a selector. Today
+     that's only --sf-shadow-strength; keep additions here
+     limited to non-color scalars.
+     ---------------------------------------------------------- */
+
+  @media (prefers-color-scheme: dark) {
+    :where(:root:not([data-theme])) {
+      --sf-shadow-strength: 0.25;
+    }
+  }
+
+  :where([data-theme="dark"]) {
+    --sf-shadow-strength: 0.25;
+  }
+
+  /* ----------------------------------------------------------
      Forced color-scheme overrides.
      These are the ONLY rules needed to switch theme on a
      subtree — `light-dark()` in tokens.css does the rest.
