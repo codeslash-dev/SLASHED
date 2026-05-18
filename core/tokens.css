@@ -414,21 +414,6 @@
 
 
     /* ----------------------------------------------------------
-       Container query breakpoints — reference values only.
-       CSS custom properties cannot be used inside @container or
-       @media queries. Use these values directly in your queries:
-         mobile-portrait: 20rem   s: 30rem   m: 48rem
-         l: 64rem                 xl: 80rem
-       Or read them from JS via getComputedStyle().
-       ---------------------------------------------------------- */
-    --sf-cq-mobile-portrait: 20rem;
-    --sf-cq-s:               30rem;
-    --sf-cq-m:               48rem;
-    --sf-cq-l:               64rem;
-    --sf-cq-xl:              80rem;
-
-
-    /* ----------------------------------------------------------
        Layout & a11y
        ---------------------------------------------------------- */
     --sf-header-height:     8rem;
