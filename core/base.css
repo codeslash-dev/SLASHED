@@ -4,6 +4,72 @@
 
 @layer slashed.base {
 
+  /* ============================================================
+     DARK / LIGHT MODE
+     ─────────────────
+     color-scheme tells the browser which mode is active.
+     By default we respect OS preference.
+
+     Usage:
+       <html>                        → follows OS preference
+       <html data-theme="dark">     → whole page dark
+       <section data-theme="dark">  → only this section dark
+     ============================================================ */
+
+  :root {
+    color-scheme: light dark;
+  }
+
+  [data-theme="light"] {
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  /* ----------------------------------------------------------
+     Dark mode — swap brand & status colors to -dark variants.
+     Works on :root (whole page) or any element (section-level).
+     ---------------------------------------------------------- */
+
+  [data-theme="dark"] {
+    --sf-color-primary:   var(--sf-color-primary-dark);
+    --sf-color-secondary: var(--sf-color-secondary-dark);
+    --sf-color-tertiary:  var(--sf-color-tertiary-dark);
+    --sf-color-action:    var(--sf-color-action-dark);
+    --sf-color-neutral:   var(--sf-color-neutral-dark);
+    --sf-color-base:      var(--sf-color-base-dark);
+
+    --sf-color-success: var(--sf-color-success-dark);
+    --sf-color-warning: var(--sf-color-warning-dark);
+    --sf-color-error:   var(--sf-color-error-dark);
+    --sf-color-info:    var(--sf-color-info-dark);
+    --sf-color-danger:  var(--sf-color-danger-dark);
+  }
+
+  /* ----------------------------------------------------------
+     Light mode — resets colors to their @property initial-value.
+     Works for light sections inside a dark page.
+     The keyword `initial` on a registered @property reverts
+     to the value defined in @property { initial-value: ... }.
+     ---------------------------------------------------------- */
+
+  [data-theme="light"]:not(:root) {
+    --sf-color-primary:   initial;
+    --sf-color-secondary: initial;
+    --sf-color-tertiary:  initial;
+    --sf-color-action:    initial;
+    --sf-color-neutral:   initial;
+    --sf-color-base:      initial;
+
+    --sf-color-success: initial;
+    --sf-color-warning: initial;
+    --sf-color-error:   initial;
+    --sf-color-info:    initial;
+    --sf-color-danger:  initial;
+  }
+
   body {
     font-family:      var(--sf-body-font-family, var(--sf-font-body));
     font-size:        var(--sf-body-font-size,   var(--sf-text-m));
