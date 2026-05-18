@@ -74,6 +74,11 @@
   /* ----------------------------------------------------------
      Dark mode — swap brand & status colors to -dark variants.
      Works on :root (whole page) or any element (section-level).
+
+     NOTE: The derived semantic overrides (text, border, shadow,
+     status text) are duplicated in the @media block above.
+     CSS has no syntax to share declarations across a media
+     condition and a selector — keep both blocks in sync.
      ---------------------------------------------------------- */
 
   [data-theme="dark"] {
