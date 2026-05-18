@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLASHED — Demo</title>
-  <link rel="stylesheet" href="../dist/slashed.essential.css">
-  <link rel="stylesheet" href="../optional/tokens.palette.css">
+  <!-- SLASHED via jsDelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.essential.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/optional/tokens.palette.css">
   <style>
     /* ── demo-only overrides ──────────────────────────────── */
     :root {
@@ -113,6 +114,100 @@
 
     .demo-section h3:first-of-type {
       margin-block-start: 0;
+    }
+
+    /* ── theme customizer ─────────────────────────────────── */
+    .demo-customizer {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sf-space-l);
+    }
+
+    @media (min-width: 48em) {
+      .demo-customizer {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .demo-customizer-col {
+      background: var(--sf-color-well);
+      padding: var(--sf-space-m);
+      border-radius: var(--sf-radius-m);
+      border: 1px solid var(--sf-color-border);
+    }
+
+    .demo-customizer-col h3 {
+      margin-block-start: 0;
+    }
+
+    .demo-customizer-grid {
+      display: grid;
+      grid-template-columns: max-content 2.5rem 1fr;
+      gap: var(--sf-space-xs) var(--sf-space-s);
+      align-items: center;
+    }
+
+    .demo-customizer-grid label {
+      font-family: var(--sf-font-mono);
+      font-size: var(--sf-text-xs);
+      color: var(--sf-color-text--secondary);
+      white-space: nowrap;
+    }
+
+    .demo-customizer-grid input[type="color"] {
+      width: 2.5rem;
+      height: 1.75rem;
+      padding: 0;
+      border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-s);
+      background: var(--sf-color-surface);
+      cursor: pointer;
+    }
+
+    .demo-customizer-grid .demo-customizer-value {
+      font-family: var(--sf-font-mono);
+      font-size: var(--sf-text-2xs);
+      color: var(--sf-color-text--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .demo-customizer-actions {
+      margin-block-start: var(--sf-space-m);
+      display: flex;
+      gap: var(--sf-space-s);
+      flex-wrap: wrap;
+    }
+
+    .demo-customizer-actions button {
+      padding: var(--sf-space-xs) var(--sf-space-m);
+      border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-m);
+      background: var(--sf-color-surface);
+      color: var(--sf-color-text);
+      font-size: var(--sf-text-s);
+      cursor: pointer;
+    }
+
+    .demo-customizer-actions button:hover {
+      background: var(--sf-color-bg--hover);
+    }
+
+    .demo-customizer-group + .demo-customizer-group {
+      margin-block-start: var(--sf-space-m);
+      padding-block-start: var(--sf-space-m);
+      border-block-start: 1px solid var(--sf-color-border--subtle);
+    }
+
+    .demo-customizer-group-label {
+      display: block;
+      font-size: var(--sf-text-xs);
+      font-weight: var(--sf-font-weight-heading);
+      text-transform: uppercase;
+      letter-spacing: var(--sf-tracking-wider);
+      color: var(--sf-color-text--muted);
+      margin-block-end: var(--sf-space-xs);
     }
 
     /* ── color swatches ───────────────────────────────────── */
@@ -399,6 +494,11 @@
 
     <nav id="demo-nav" aria-label="Demo sections">
       <ul>
+        <li><span class="nav-group-label">Theme</span>
+          <ul class="nav-sub">
+            <li><a href="#theme-customizer">Customizer</a></li>
+          </ul>
+        </li>
         <li><span class="nav-group-label">Tokens</span>
           <ul class="nav-sub">
             <li><a href="#colors">Colors</a></li>
@@ -436,6 +536,141 @@
     </nav>
 
     <main id="main">
+
+      <!-- ══════════════════════════════════════════════════════
+           THEME CUSTOMIZER
+      ══════════════════════════════════════════════════════ -->
+      <section id="theme-customizer" class="demo-section">
+        <h2>Theme Customizer</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
+          Pick a color for any brand or status token in light or dark mode. Changes are applied live to <code>:root</code> via <code>--sf-color-*</code> and <code>--sf-color-*-dark</code>. Toggle dark mode in the header to preview the dark palette in context.
+        </p>
+
+        <div class="demo-customizer">
+          <!-- LIGHT COLUMN -->
+          <div class="demo-customizer-col">
+            <h3>Light mode</h3>
+
+            <div class="demo-customizer-group">
+              <span class="demo-customizer-group-label">Brand</span>
+              <div class="demo-customizer-grid" data-mode="light" data-group="brand">
+                <label for="cz-l-primary">--sf-color-primary</label>
+                <input id="cz-l-primary"   type="color" data-token="--sf-color-primary">
+                <span class="demo-customizer-value" data-value-for="cz-l-primary"></span>
+
+                <label for="cz-l-secondary">--sf-color-secondary</label>
+                <input id="cz-l-secondary" type="color" data-token="--sf-color-secondary">
+                <span class="demo-customizer-value" data-value-for="cz-l-secondary"></span>
+
+                <label for="cz-l-tertiary">--sf-color-tertiary</label>
+                <input id="cz-l-tertiary"  type="color" data-token="--sf-color-tertiary">
+                <span class="demo-customizer-value" data-value-for="cz-l-tertiary"></span>
+
+                <label for="cz-l-action">--sf-color-action</label>
+                <input id="cz-l-action"    type="color" data-token="--sf-color-action">
+                <span class="demo-customizer-value" data-value-for="cz-l-action"></span>
+
+                <label for="cz-l-neutral">--sf-color-neutral</label>
+                <input id="cz-l-neutral"   type="color" data-token="--sf-color-neutral">
+                <span class="demo-customizer-value" data-value-for="cz-l-neutral"></span>
+
+                <label for="cz-l-base">--sf-color-base</label>
+                <input id="cz-l-base"      type="color" data-token="--sf-color-base">
+                <span class="demo-customizer-value" data-value-for="cz-l-base"></span>
+              </div>
+            </div>
+
+            <div class="demo-customizer-group">
+              <span class="demo-customizer-group-label">Status</span>
+              <div class="demo-customizer-grid" data-mode="light" data-group="status">
+                <label for="cz-l-success">--sf-color-success</label>
+                <input id="cz-l-success" type="color" data-token="--sf-color-success">
+                <span class="demo-customizer-value" data-value-for="cz-l-success"></span>
+
+                <label for="cz-l-warning">--sf-color-warning</label>
+                <input id="cz-l-warning" type="color" data-token="--sf-color-warning">
+                <span class="demo-customizer-value" data-value-for="cz-l-warning"></span>
+
+                <label for="cz-l-error">--sf-color-error</label>
+                <input id="cz-l-error"   type="color" data-token="--sf-color-error">
+                <span class="demo-customizer-value" data-value-for="cz-l-error"></span>
+
+                <label for="cz-l-info">--sf-color-info</label>
+                <input id="cz-l-info"    type="color" data-token="--sf-color-info">
+                <span class="demo-customizer-value" data-value-for="cz-l-info"></span>
+
+                <label for="cz-l-danger">--sf-color-danger</label>
+                <input id="cz-l-danger"  type="color" data-token="--sf-color-danger">
+                <span class="demo-customizer-value" data-value-for="cz-l-danger"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DARK COLUMN -->
+          <div class="demo-customizer-col" data-theme="dark">
+            <h3>Dark mode</h3>
+
+            <div class="demo-customizer-group">
+              <span class="demo-customizer-group-label">Brand</span>
+              <div class="demo-customizer-grid" data-mode="dark" data-group="brand">
+                <label for="cz-d-primary">--sf-color-primary-dark</label>
+                <input id="cz-d-primary"   type="color" data-token="--sf-color-primary-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-primary"></span>
+
+                <label for="cz-d-secondary">--sf-color-secondary-dark</label>
+                <input id="cz-d-secondary" type="color" data-token="--sf-color-secondary-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-secondary"></span>
+
+                <label for="cz-d-tertiary">--sf-color-tertiary-dark</label>
+                <input id="cz-d-tertiary"  type="color" data-token="--sf-color-tertiary-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-tertiary"></span>
+
+                <label for="cz-d-action">--sf-color-action-dark</label>
+                <input id="cz-d-action"    type="color" data-token="--sf-color-action-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-action"></span>
+
+                <label for="cz-d-neutral">--sf-color-neutral-dark</label>
+                <input id="cz-d-neutral"   type="color" data-token="--sf-color-neutral-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-neutral"></span>
+
+                <label for="cz-d-base">--sf-color-base-dark</label>
+                <input id="cz-d-base"      type="color" data-token="--sf-color-base-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-base"></span>
+              </div>
+            </div>
+
+            <div class="demo-customizer-group">
+              <span class="demo-customizer-group-label">Status</span>
+              <div class="demo-customizer-grid" data-mode="dark" data-group="status">
+                <label for="cz-d-success">--sf-color-success-dark</label>
+                <input id="cz-d-success" type="color" data-token="--sf-color-success-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-success"></span>
+
+                <label for="cz-d-warning">--sf-color-warning-dark</label>
+                <input id="cz-d-warning" type="color" data-token="--sf-color-warning-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-warning"></span>
+
+                <label for="cz-d-error">--sf-color-error-dark</label>
+                <input id="cz-d-error"   type="color" data-token="--sf-color-error-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-error"></span>
+
+                <label for="cz-d-info">--sf-color-info-dark</label>
+                <input id="cz-d-info"    type="color" data-token="--sf-color-info-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-info"></span>
+
+                <label for="cz-d-danger">--sf-color-danger-dark</label>
+                <input id="cz-d-danger"  type="color" data-token="--sf-color-danger-dark">
+                <span class="demo-customizer-value" data-value-for="cz-d-danger"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-customizer-actions">
+          <button id="cz-reset" type="button">Reset all</button>
+          <button id="cz-randomize" type="button">Randomize brand</button>
+        </div>
+      </section>
 
       <!-- ══════════════════════════════════════════════════════
            COLORS
@@ -1257,6 +1492,97 @@
   </div>
 
   <script>
+    // ── Theme Customizer ───────────────────────────────────
+    (function () {
+      const root  = document.documentElement;
+      const inputs = document.querySelectorAll('.demo-customizer-grid input[type="color"]');
+
+      // Reusable canvas for color resolution (oklch → rgb → hex)
+      const cvs = document.createElement('canvas');
+      cvs.width = cvs.height = 1;
+      const ctx = cvs.getContext('2d', { willReadFrequently: true });
+
+      function colorToHex(cssColor) {
+        try {
+          ctx.clearRect(0, 0, 1, 1);
+          ctx.fillStyle = '#000';
+          ctx.fillStyle = cssColor;     // browser parses oklch(), rgb(), etc.
+          ctx.fillRect(0, 0, 1, 1);
+          const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+          return '#' + [r, g, b].map(n => n.toString(16).padStart(2, '0')).join('');
+        } catch (e) {
+          return '#000000';
+        }
+      }
+
+      function resolveTokenHex(token, modeIsDark) {
+        // Temporarily resolve via a probe element with the right theme context
+        const probe = document.createElement('span');
+        probe.style.cssText = 'position:absolute;visibility:hidden;color:var(' + token + ')';
+        if (modeIsDark) probe.setAttribute('data-theme', 'dark');
+        document.body.appendChild(probe);
+        const computed = getComputedStyle(probe).color;
+        document.body.removeChild(probe);
+        return colorToHex(computed);
+      }
+
+      function syncValueLabel(input) {
+        const label = document.querySelector('[data-value-for="' + input.id + '"]');
+        if (label) label.textContent = input.value;
+      }
+
+      function applyToken(token, hex) {
+        root.style.setProperty(token, hex);
+      }
+
+      // Initialize each input from the current resolved token value
+      inputs.forEach(input => {
+        const token = input.dataset.token;
+        const isDark = token.endsWith('-dark');
+        const hex = resolveTokenHex(token, isDark);
+        input.value = hex;
+        syncValueLabel(input);
+
+        input.addEventListener('input', () => {
+          applyToken(token, input.value);
+          syncValueLabel(input);
+        });
+      });
+
+      // Reset all — clear inline overrides on :root, then re-read defaults
+      document.getElementById('cz-reset').addEventListener('click', () => {
+        inputs.forEach(input => root.style.removeProperty(input.dataset.token));
+        inputs.forEach(input => {
+          const token  = input.dataset.token;
+          const isDark = token.endsWith('-dark');
+          const hex = resolveTokenHex(token, isDark);
+          input.value = hex;
+          syncValueLabel(input);
+        });
+      });
+
+      // Randomize brand colors (primary / secondary / tertiary / action) for both modes
+      document.getElementById('cz-randomize').addEventListener('click', () => {
+        const brandKeys = ['primary', 'secondary', 'tertiary', 'action'];
+        brandKeys.forEach(key => {
+          const baseHue = Math.floor(Math.random() * 360);
+          // Light: lower L, fuller chroma
+          const light = 'oklch(0.50 0.18 ' + baseHue + ')';
+          // Dark: higher L, slightly lower chroma — same hue family
+          const dark  = 'oklch(0.72 0.14 ' + baseHue + ')';
+          applyToken('--sf-color-' + key,        light);
+          applyToken('--sf-color-' + key + '-dark', dark);
+        });
+        // Re-sync inputs to the new computed values
+        inputs.forEach(input => {
+          const token  = input.dataset.token;
+          const isDark = token.endsWith('-dark');
+          input.value  = resolveTokenHex(token, isDark);
+          syncValueLabel(input);
+        });
+      });
+    })();
+
     // Theme toggle
     const btn = document.getElementById('theme-toggle');
     const root = document.documentElement;

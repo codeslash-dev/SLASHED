@@ -9,33 +9,38 @@
      Everything else is derived automatically.
      ============================================================ */
 
-  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.2 264); }
+  /* primary  = brand identity (indigo)
+     action   = interactive / links / focus / CTA (cyan-teal — distinct from primary)
+     error    = validation / message of failure (orange-red)
+     danger   = destructive operation (deep crimson — distinct from error) */
+
+  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.20 264); }
   @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(0.25 0.03 260); }
-  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 210); }
-  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.2 264); }
+  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 310); }
+  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(0.60 0.16 210); }
   @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.02 260); }
   @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(0.98 0.005 260); }
 
-  @property --sf-color-primary-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.7 0.15 264); }
-  @property --sf-color-secondary-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.8 0.02 260); }
-  @property --sf-color-tertiary-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.12 210); }
-  @property --sf-color-action-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.7 0.15 264); }
+  @property --sf-color-primary-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.15 264); }
+  @property --sf-color-secondary-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.80 0.02 260); }
+  @property --sf-color-tertiary-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.72 0.12 310); }
+  @property --sf-color-action-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.78 0.13 210); }
   @property --sf-color-neutral-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.02 260); }
-  @property --sf-color-base-dark      { syntax: "<color>"; inherits: true; initial-value: oklch(0.2 0.02 260); }
+  @property --sf-color-base-dark      { syntax: "<color>"; inherits: true; initial-value: oklch(0.20 0.02 260); }
 
   /* @property — STATUS COLORS (light + dark) */
 
   @property --sf-color-success      { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.17 150); }
-  @property --sf-color-warning      { syntax: "<color>"; inherits: true; initial-value: oklch(0.7 0.17 70); }
-  @property --sf-color-error        { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.22 25); }
+  @property --sf-color-warning      { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
+  @property --sf-color-error        { syntax: "<color>"; inherits: true; initial-value: oklch(0.62 0.20 35);  }
   @property --sf-color-info         { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.15 240); }
-  @property --sf-color-danger       { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.22 25); }
+  @property --sf-color-danger       { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.24 12);  }
 
-  @property --sf-color-success-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.17 150); }
-  @property --sf-color-warning-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.15 70); }
-  @property --sf-color-error-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.2 25); }
-  @property --sf-color-info-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.13 240); }
-  @property --sf-color-danger-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.2 25); }
+  @property --sf-color-success-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.17 150); }
+  @property --sf-color-warning-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.82 0.15 80);  }
+  @property --sf-color-error-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.72 0.18 35);  }
+  @property --sf-color-info-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.68 0.14 240); }
+  @property --sf-color-danger-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.62 0.21 12);  }
 
 
   /* ============================================================
@@ -154,9 +159,9 @@
     --sf-status-info-text:      oklch(from var(--sf-color-info) calc(l - 0.1) c h);
     --sf-status-info-border:    oklch(from var(--sf-color-info) l c h / 0.3);
 
-    --sf-status-danger-bg:      var(--sf-status-error-bg);
-    --sf-status-danger-text:    var(--sf-status-error-text);
-    --sf-status-danger-border:  var(--sf-status-error-border);
+    --sf-status-danger-bg:      oklch(from var(--sf-color-danger) l c h / 0.1);
+    --sf-status-danger-text:    oklch(from var(--sf-color-danger) calc(l - 0.1) c h);
+    --sf-status-danger-border:  oklch(from var(--sf-color-danger) l c h / 0.3);
 
 
     /* ----------------------------------------------------------
