@@ -8,6 +8,7 @@
     "core/base.css",
     "core/layout.css",
     "core/states.css",
+    "core/themes.css",
     "core/accessibility.css",
     "core/print.css"
   ]
