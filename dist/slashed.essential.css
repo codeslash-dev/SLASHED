@@ -69,6 +69,11 @@
   :root {
 
     /* ----------------------------------------------------------
+       Color scheme
+       ---------------------------------------------------------- */
+    --sf-color-scheme: light dark;
+
+    /* ----------------------------------------------------------
        Surfaces — derived from --sf-color-base
        ---------------------------------------------------------- */
     --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
@@ -237,6 +242,7 @@
        Font weights
        ---------------------------------------------------------- */
     --sf-font-weight-body:    400;
+    --sf-font-weight-bold:    700;
     --sf-font-weight-heading: 600;
     --sf-font-weight-display: 700;
 
@@ -803,7 +809,7 @@
      ============================================================ */
 
   :root {
-    color-scheme: light dark;
+    color-scheme: var(--sf-color-scheme, light dark);
   }
 
   /* OS preference — auto-switch when no data-theme is set */
@@ -1026,12 +1032,12 @@
   }
 
   ::backdrop {
-    background-color: var(--sf-color-backdrop, var(--sf-color-neutral));
+    background-color: var(--sf-color-backdrop, var(--sf-color-dim));
   }
 
   optgroup { font: inherit; }
   ::file-selector-button { font: inherit; }
-  ::placeholder { opacity: 1; color: inherit; }
+  ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
 
 }
 
@@ -1488,11 +1494,333 @@
 /* ─── core/states.css ─── */
 /* SLASHED — core/states.css
    @layer slashed.states
-   ────────────────────── */
+
+   Stateful classes toggled by JS or ARIA attributes.
+   Prefix: .is-*  (exclusive to this layer — never used in utilities).
+
+   These are NOT utility classes. They describe dynamic,
+   runtime states that change in response to user interaction
+   or application logic. Utilities describe static intent;
+   states describe current condition.
+
+   Design principles (informed by Bulma, ACSS, CUBE CSS):
+   ─ Generic states only — component-specific overrides belong
+     in slashed.components (e.g. .sf-modal.is-open).
+   ─ Tokens first — every value references a design token.
+   ─ Low specificity — single class, no nesting.
+   ─ Minimal property sets — states set the MINIMUM needed
+     to communicate the state. Components layer on top.
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.states {
 
-  /* TODO */
+  /* ============================================================
+     VISIBILITY
+     ============================================================ */
+
+  .is-hidden {
+    display: none !important;
+  }
+
+  .is-invisible {
+    visibility: hidden;
+  }
+
+  .is-visible {
+    visibility: visible;
+  }
+
+  /* ============================================================
+     INTERACTIVITY — DISABLED / READONLY
+     ============================================================ */
+
+  .is-disabled {
+    opacity:        var(--sf-opacity-disabled);
+    pointer-events: none;
+    cursor:         not-allowed;
+    user-select:    none;
+  }
+
+  .is-readonly {
+    pointer-events: none;
+    user-select:    none;
+  }
+
+  /* ============================================================
+     LOADING / ASYNC FEEDBACK
+     ============================================================ */
+
+  .is-loading {
+    color:          transparent !important;
+    pointer-events: none;
+    position:       relative;
+  }
+
+  .is-loading::after {
+    content:       "";
+    position:      absolute;
+    inset-block-start:   50%;
+    inset-inline-start:  50%;
+    width:         1em;
+    height:        1em;
+    margin-block-start:  -0.5em;
+    margin-inline-start: -0.5em;
+    border:        2px solid var(--sf-color-border--strong);
+    border-block-start-color: var(--sf-color-action);
+    border-radius: var(--sf-radius-full);
+    animation:     sf-spin 0.6s linear infinite;
+  }
+
+  .is-busy {
+    cursor: progress;
+  }
+
+  .is-skeleton {
+    color:           transparent !important;
+    background:      linear-gradient(
+                       90deg,
+                       var(--sf-color-well) 25%,
+                       var(--sf-color-raised) 50%,
+                       var(--sf-color-well) 75%
+                     );
+    background-size: 200% 100%;
+    animation:       sf-shimmer 1.5s ease-in-out infinite;
+    border-radius:   var(--sf-radius-s);
+    pointer-events:  none;
+    user-select:     none;
+  }
+
+  /* ============================================================
+     ACTIVE / SELECTED / CURRENT — navigation & toggling
+     ============================================================ */
+
+  .is-active {
+    /* Generic active indicator — components add visual specifics.
+       Sets a scoped token for components to consume. */
+    --sf-is-active: 1;
+  }
+
+  .is-selected {
+    background-color: var(--sf-color-bg--selected);
+  }
+
+  .is-current {
+    /* Navigation: marks the current page/route.
+       Components style via .sf-nav .is-current etc. */
+    --sf-is-current: 1;
+    font-weight: var(--sf-font-weight-bold);
+  }
+
+  .is-highlighted {
+    background-color: var(--sf-color-bg--focus);
+  }
+
+  /* ============================================================
+     OPEN / CLOSED — disclosure widgets, modals, dropdowns
+     ============================================================ */
+
+  .is-open {
+    --sf-is-open: 1;
+  }
+
+  .is-collapsed {
+    --sf-is-open: 0;
+  }
+
+  .is-expanded {
+    --sf-is-open: 1;
+  }
+
+  /* ============================================================
+     VALIDATION / FEEDBACK
+     ============================================================ */
+
+  .is-valid {
+    --sf-field-border-color: var(--sf-color-success);
+    --sf-field-text-color:   var(--sf-status-success-text);
+  }
+
+  .is-invalid {
+    --sf-field-border-color: var(--sf-color-error);
+    --sf-field-text-color:   var(--sf-status-error-text);
+  }
+
+  .is-warning {
+    --sf-field-border-color: var(--sf-color-warning);
+    --sf-field-text-color:   var(--sf-status-warning-text);
+  }
+
+  .is-success {
+    --sf-field-border-color: var(--sf-color-success);
+    --sf-field-text-color:   var(--sf-status-success-text);
+  }
+
+  .is-error {
+    --sf-field-border-color: var(--sf-color-error);
+    --sf-field-text-color:   var(--sf-status-error-text);
+  }
+
+  .is-info {
+    --sf-field-border-color: var(--sf-color-info);
+    --sf-field-text-color:   var(--sf-status-info-text);
+  }
+
+  .is-danger {
+    --sf-field-border-color: var(--sf-color-danger);
+    --sf-field-text-color:   var(--sf-status-danger-text);
+  }
+
+  /* ============================================================
+     POSITION / STICKINESS
+     ============================================================ */
+
+  .is-sticky {
+    position:  sticky;
+    top:       var(--sf-sticky-offset, 0);
+    z-index:   var(--sf-z-low);
+  }
+
+  .is-pinned {
+    position:  sticky;
+    top:       0;
+    z-index:   var(--sf-z-mid);
+  }
+
+  .is-fixed {
+    position: fixed;
+  }
+
+  /* ============================================================
+     OVERFLOW / CLIPPING
+     ============================================================ */
+
+  .is-clipped {
+    overflow: hidden !important;
+  }
+
+  .is-scrollable {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .is-truncated {
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+  }
+
+  /* ============================================================
+     DRAG & DROP
+     ============================================================ */
+
+  .is-dragging {
+    opacity: 0.5;
+    cursor:  grabbing;
+  }
+
+  .is-drop-target {
+    outline:        2px dashed var(--sf-color-action);
+    outline-offset: 2px;
+  }
+
+  .is-draggable {
+    cursor: grab;
+  }
+
+  /* ============================================================
+     OVERLAY / BACKDROP
+     ============================================================ */
+
+  .is-overlay {
+    position: absolute;
+    inset:    0;
+  }
+
+  /* ============================================================
+     FOCUS / INTERACTION MODIFIERS
+     ============================================================ */
+
+  .is-clickable {
+    cursor:  pointer;
+  }
+
+  .is-unselectable {
+    user-select: none;
+  }
+
+  /* ============================================================
+     EMPTY STATE
+     ============================================================ */
+
+  .is-empty:empty {
+    display: none;
+  }
+
+  /* ============================================================
+     KEYFRAMES (used by states above)
+     ============================================================ */
+
+  @keyframes sf-spin {
+    to { rotate: 360deg; }
+  }
+
+  @keyframes sf-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+}
+
+/* ─── core/motion.css ─── */
+/* SLASHED — core/motion.css
+   @layer slashed.motion
+
+   Extends the base interactive transition (defined in base.css)
+   with a broader property set and adds scroll/view-transition
+   behaviour. Optional and independently loadable.
+
+   Reduced-motion handling is intentionally NOT duplicated here:
+   accessibility.css (a higher cascade layer, shipped in the
+   'essential' bundle) neutralises animation/transition via
+   property-level !important. The no-preference wrapper below is
+   a defensive opt-in stance — animations apply only when the
+   user has not requested their absence — and remains correct
+   even if motion.css is served without accessibility.css.
+   ─────────────────────────────────────────────────── */
+
+@layer slashed.motion {
+
+  @media (prefers-reduced-motion: no-preference) {
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Keyboard navigation must not be hijacked by smooth scroll. */
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    /* Broadens the base.css link transition to all interactive
+       elements and the full set of animatable UI properties. */
+    a, button, input, select, textarea, summary {
+      transition-property:
+        color, background-color, border-color, text-decoration-color,
+        fill, stroke, opacity, box-shadow, transform, filter,
+        backdrop-filter;
+      transition-duration:        var(--sf-duration-fast);
+      transition-timing-function: var(--sf-ease-out);
+    }
+
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration:        var(--sf-duration-normal);
+        animation-timing-function: var(--sf-ease-out);
+      }
+    }
+
+  }
 
 }
 
@@ -1648,14 +1976,18 @@
 /* SLASHED — core/print.css
    @layer slashed.print
 
-   Print RULES only. @page (margins/size from --sf-print-*) lives
-   in tokens.print.css, which is always loaded alongside this file,
-   so tokens referenced here need no fallbacks.
+   Print rules and @page definition. Print tokens (--sf-print-*)
+   are declared in core/tokens.css.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.print {
 
   @media print {
+
+    @page {
+      size:   var(--sf-print-page-size, a4);
+      margin: var(--sf-print-page-margin, 2cm);
+    }
 
     *,
     *::before,
