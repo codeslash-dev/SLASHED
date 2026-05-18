@@ -91,6 +91,41 @@ optional/
 
 ---
 
+## Theming
+
+The framework is theme-aware natively. Switching theme is a single `color-scheme` flip; no token-swap blocks needed.
+
+**Source tokens.** 22 colors registered with `@property` in `core/tokens.css`: 6 brand × 2 (`--sf-color-primary-light`, `--sf-color-primary-dark`, …) and 5 status × 2 (`--sf-color-success-light`, …).
+
+**Active tokens.** 11 unregistered `:root` declarations:
+
+```css
+--sf-color-primary: light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark));
+```
+
+These are intentionally unregistered. A registered (`@property`) custom property would resolve `light-dark()` once at registration time. An unregistered one re-resolves at use-site, so it follows the inherited `color-scheme`.
+
+**Theme switching.** `color-scheme` drives everything. Either let `prefers-color-scheme` set it (default) or force it via `<html data-theme="dark">`. No token reassignment required.
+
+**Per-section theming.** Any nested element with `data-theme="dark"` (or `"light"`) gets its own `color-scheme`. Every `light-dark()` expression evaluated inside that subtree resolves accordingly, including all derived tokens.
+
+**Derived tokens.** Where light and dark need different math (text, border, status text), each derived token is itself a `light-dark()` expression that reads from the matching `*-light` / `*-dark` source in each branch. Where the math reads sensibly through the active theme-aware token (surfaces from `--sf-color-base`, links from `--sf-color-action`), a single relative-color formula is used.
+
+**Non-color scalars.** `light-dark()` only accepts `<color>` per spec. The one non-color theme-aware token, `--sf-shadow-strength`, uses selector-driven overrides in `core/themes.css`: an `@media (prefers-color-scheme: dark)` block plus a `[data-theme="dark"]` block, intentionally duplicated because CSS has no way to share declarations across both. Future theme-aware scalars must follow the same pattern.
+
+**Optional palette.** `optional/tokens.palette.css` provides `-100..-900` and `-a10..-a75` for each brand color, plus M3-style `--sf-color-X-container` / `--sf-color-X-on-container` aliases for the 5 non-base brands. Tints mix with `--sf-color-base`, shades with `--sf-color-text`. Both anchors are theme-aware, so the entire numeric scale follows the theme.
+
+**Auto-contrast.** `--sf-color-text--on-X` (defined in `core/tokens.css`) picks black or white based on the active brand color's lightness via `sign(0.6 - l)`. Use this when the BACKGROUND is the brand color itself.
+
+**Consumer recipes.**
+
+- Solid brand background → `background: var(--sf-color-primary); color: var(--sf-color-text--on-primary)`
+- Tinted brand container → `background: var(--sf-color-primary-container); color: var(--sf-color-primary-on-container)`
+- Brand color as text on neutral surface → `color: var(--sf-color-primary)` (works directly, both themes)
+- Per-section dark island → `<section data-theme="dark">…</section>`
+
+---
+
 ## Specificity
 
 ```text
@@ -119,10 +154,11 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 | Mechanism | Example |
 |-----------|---------|
 | Token override | `:root { --sf-color-primary: #your-color }` |
+| Per-mode color override | `:root { --sf-color-primary-light: #abc; --sf-color-primary-dark: #def }` |
 | Instance token | `style="--sf-button-radius: var(--sf-radius-full)"` |
 | Layer override | `@layer slashed.overrides { … }` |
 | Unlayered CSS | Author normally |
-| Theme | `[data-theme="dark"] { --sf-color-primary: … }` |
+| Theme | `[data-theme="dark"] { color-scheme: dark }` |
 
 ---
 
