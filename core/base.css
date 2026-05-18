@@ -59,7 +59,7 @@
       --sf-status-warning-text: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
       --sf-status-error-text:   oklch(from var(--sf-color-error)   clamp(0.70, calc(l + 0.15), 1) c h);
       --sf-status-info-text:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
-      --sf-status-danger-text:  var(--sf-status-error-text);
+      --sf-status-danger-text:  oklch(from var(--sf-color-danger)  clamp(0.70, calc(l + 0.15), 1) c h);
     }
   }
 
@@ -118,7 +118,7 @@
     --sf-status-warning-text: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
     --sf-status-error-text:   oklch(from var(--sf-color-error)   clamp(0.70, calc(l + 0.15), 1) c h);
     --sf-status-info-text:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
-    --sf-status-danger-text:  var(--sf-status-error-text);
+    --sf-status-danger-text:  oklch(from var(--sf-color-danger)  clamp(0.70, calc(l + 0.15), 1) c h);
   }
 
   /* ----------------------------------------------------------
