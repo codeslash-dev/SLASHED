@@ -682,6 +682,9 @@
     --sf-color-action:  light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
   }
 
+  /* Activate light-dark() resolution for the themed subtree. */
+  [data-theme] { color-scheme: var(--sf-color-scheme); }
+
 }
 
 /* ─── core/tokens.layout.css ─── */
@@ -925,6 +928,11 @@
     color:            var(--sf-body-color,       var(--sf-color-text));
     background-color: var(--sf-color-bg, #fff);
     font-synthesis:   none;
+  }
+
+  [data-theme] {
+    background-color: var(--sf-color-bg);
+    color:            var(--sf-color-text);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -1536,26 +1544,6 @@
 @layer slashed.states {
 
   /* TODO */
-
-}
-
-/* ─── core/themes.css ─── */
-/* SLASHED — core/themes.css
-   @layer slashed.themes
-   ─────────────────────────────────────────────────────────────────────────────
-   Applies color-scheme + base surface/text to every [data-theme] element.
-   color-scheme activates light-dark() resolution for the subtree so that
-   any consumer CSS using light-dark() resolves correctly inside sections
-   with a forced theme (not just at the root).
-   ──────────────────────────────────────────────────────────────────────────── */
-
-@layer slashed.themes {
-
-  [data-theme] {
-    color-scheme:     var(--sf-color-scheme);
-    background-color: var(--sf-color-bg);
-    color:            var(--sf-color-text);
-  }
 
 }
 

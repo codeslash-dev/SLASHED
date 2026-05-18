@@ -14,6 +14,11 @@
     font-synthesis:   none;
   }
 
+  [data-theme] {
+    background-color: var(--sf-color-bg);
+    color:            var(--sf-color-text);
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family:       var(--sf-heading-font-family, var(--sf-font-heading));
     font-weight:       var(--sf-font-weight-heading);

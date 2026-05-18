@@ -659,4 +659,7 @@
     --sf-color-action:  light-dark(var(--sf-palette-indigo-600), var(--sf-palette-indigo-400));
   }
 
+  /* Activate light-dark() resolution for the themed subtree. */
+  [data-theme] { color-scheme: var(--sf-color-scheme); }
+
 }
