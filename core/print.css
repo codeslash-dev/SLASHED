@@ -1,14 +1,18 @@
 /* SLASHED — core/print.css
    @layer slashed.print
 
-   Print RULES only. @page (margins/size from --sf-print-*) lives
-   in tokens.print.css, which is always loaded alongside this file,
-   so tokens referenced here need no fallbacks.
+   Print rules and @page definition. Print tokens (--sf-print-*)
+   are declared in core/tokens.css.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.print {
 
   @media print {
+
+    @page {
+      size:   var(--sf-print-page-size, a4);
+      margin: var(--sf-print-page-margin, 2cm);
+    }
 
     *,
     *::before,
