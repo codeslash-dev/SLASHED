@@ -53,6 +53,13 @@
 
       /* Shadow strength — more visible on dark surfaces */
       --sf-shadow-strength: 0.25;
+
+      /* Status text — lightened for dark backgrounds */
+      --sf-status-success-text: oklch(from var(--sf-color-success) calc(l + 0.15) c h);
+      --sf-status-warning-text: oklch(from var(--sf-color-warning) calc(l + 0.05) c h);
+      --sf-status-error-text:   oklch(from var(--sf-color-error)   calc(l + 0.15) c h);
+      --sf-status-info-text:    oklch(from var(--sf-color-info)    calc(l + 0.15) c h);
+      --sf-status-danger-text:  var(--sf-status-error-text);
     }
   }
 
@@ -100,6 +107,13 @@
 
     /* Shadow strength — more visible on dark surfaces */
     --sf-shadow-strength: 0.25;
+
+    /* Status text — lightened for dark backgrounds */
+    --sf-status-success-text: oklch(from var(--sf-color-success) calc(l + 0.15) c h);
+    --sf-status-warning-text: oklch(from var(--sf-color-warning) calc(l + 0.05) c h);
+    --sf-status-error-text:   oklch(from var(--sf-color-error)   calc(l + 0.15) c h);
+    --sf-status-info-text:    oklch(from var(--sf-color-info)    calc(l + 0.15) c h);
+    --sf-status-danger-text:  var(--sf-status-error-text);
   }
 
   /* ----------------------------------------------------------
