@@ -114,6 +114,7 @@
     --sf-color-bg--selected: oklch(from var(--sf-color-action) l c h / 0.1);
     --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
     --sf-color-bg--disabled: var(--sf-color-well);
+    --sf-color-code-bg:      var(--sf-color-well);
 
 
     /* ----------------------------------------------------------

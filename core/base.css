@@ -20,6 +20,24 @@
     color-scheme: light dark;
   }
 
+  /* OS preference — auto-switch when no data-theme is set */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --sf-color-primary:   var(--sf-color-primary-dark);
+      --sf-color-secondary: var(--sf-color-secondary-dark);
+      --sf-color-tertiary:  var(--sf-color-tertiary-dark);
+      --sf-color-action:    var(--sf-color-action-dark);
+      --sf-color-neutral:   var(--sf-color-neutral-dark);
+      --sf-color-base:      var(--sf-color-base-dark);
+
+      --sf-color-success: var(--sf-color-success-dark);
+      --sf-color-warning: var(--sf-color-warning-dark);
+      --sf-color-error:   var(--sf-color-error-dark);
+      --sf-color-info:    var(--sf-color-info-dark);
+      --sf-color-danger:  var(--sf-color-danger-dark);
+    }
+  }
+
   [data-theme="light"] {
     color-scheme: light;
   }
