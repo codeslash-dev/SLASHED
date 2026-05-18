@@ -373,6 +373,72 @@
     #layout-content-grid.demo-section {
       padding-inline: 0;
     }
+
+    /* ── color customizer ─────────────────────────────────── */
+    .demo-customizer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sf-space-l);
+      margin-block-end: var(--sf-space-m);
+    }
+
+    @media (max-width: 40em) {
+      .demo-customizer-grid { grid-template-columns: 1fr; }
+    }
+
+    .demo-customizer-col-label {
+      font-size: var(--sf-text-xs);
+      font-weight: var(--sf-font-weight-heading);
+      text-transform: uppercase;
+      letter-spacing: var(--sf-tracking-wider);
+      color: var(--sf-color-text--muted);
+      margin-block-end: var(--sf-space-xs);
+    }
+
+    .demo-picker-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sf-space-xs);
+      padding-block: 0.2rem;
+    }
+
+    .demo-picker-row input[type="color"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 1.75rem;
+      height: 1.75rem;
+      border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-s);
+      cursor: pointer;
+      padding: 2px;
+      background: none;
+      flex-shrink: 0;
+    }
+
+    .demo-picker-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    .demo-picker-row input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
+    .demo-picker-row input[type="color"]::-moz-color-swatch { border: none; border-radius: 2px; }
+
+    .demo-picker-label {
+      font-size: var(--sf-text-xs);
+      font-family: var(--sf-font-mono);
+      color: var(--sf-color-text--secondary);
+    }
+
+    #customizer-reset {
+      padding: var(--sf-space-2xs) var(--sf-space-s);
+      font-size: var(--sf-text-xs);
+      border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-s);
+      background: var(--sf-color-bg);
+      color: var(--sf-color-text);
+      cursor: pointer;
+      vertical-align: middle;
+    }
+
+    #customizer-reset:hover {
+      background: var(--sf-color-bg--hover);
+    }
   </style>
 </head>
 <body>
@@ -401,6 +467,7 @@
       <ul>
         <li><span class="nav-group-label">Tokens</span>
           <ul class="nav-sub">
+            <li><a href="#customizer">Customizer</a></li>
             <li><a href="#colors">Colors</a></li>
             <li><a href="#typography">Typography</a></li>
             <li><a href="#spacing">Spacing</a></li>
@@ -436,6 +503,125 @@
     </nav>
 
     <main id="main">
+
+      <!-- ══════════════════════════════════════════════════════
+           CUSTOMIZER
+      ══════════════════════════════════════════════════════ -->
+      <section id="customizer" class="demo-section">
+        <h2>Theme Customizer</h2>
+        <p style="color:var(--sf-color-text--secondary); font-size:var(--sf-text-s); margin-block-end:var(--sf-space-m)">
+          Adjust the 22 base color tokens live — all semantic tokens derive automatically.
+          <button id="customizer-reset" type="button">Reset defaults</button>
+        </p>
+
+        <h3 style="margin-block: 0 var(--sf-space-xs)">Brand Colors</h3>
+        <div class="demo-customizer-grid">
+          <div>
+            <div class="demo-customizer-col-label">Light</div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-primary" data-token="--sf-color-primary" value="#5040c8">
+              <label for="pick-primary" class="demo-picker-label">primary</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-secondary" data-token="--sf-color-secondary" value="#1e1c2c">
+              <label for="pick-secondary" class="demo-picker-label">secondary</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-tertiary" data-token="--sf-color-tertiary" value="#3c6e8c">
+              <label for="pick-tertiary" class="demo-picker-label">tertiary</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-action" data-token="--sf-color-action" value="#1a5ed8">
+              <label for="pick-action" class="demo-picker-label">action</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-neutral" data-token="--sf-color-neutral" value="#605e6a">
+              <label for="pick-neutral" class="demo-picker-label">neutral</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-base" data-token="--sf-color-base" value="#f5f5f8">
+              <label for="pick-base" class="demo-picker-label">base</label>
+            </div>
+          </div>
+          <div>
+            <div class="demo-customizer-col-label">Dark</div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-primary-dark" data-token="--sf-color-primary-dark" value="#8870e8">
+              <label for="pick-primary-dark" class="demo-picker-label">primary</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-secondary-dark" data-token="--sf-color-secondary-dark" value="#b8b6c4">
+              <label for="pick-secondary-dark" class="demo-picker-label">secondary</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-tertiary-dark" data-token="--sf-color-tertiary-dark" value="#5890ae">
+              <label for="pick-tertiary-dark" class="demo-picker-label">tertiary</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-action-dark" data-token="--sf-color-action-dark" value="#4878e8">
+              <label for="pick-action-dark" class="demo-picker-label">action</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-neutral-dark" data-token="--sf-color-neutral-dark" value="#908e9c">
+              <label for="pick-neutral-dark" class="demo-picker-label">neutral</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-base-dark" data-token="--sf-color-base-dark" value="#1a1820">
+              <label for="pick-base-dark" class="demo-picker-label">base</label>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-block: var(--sf-space-s) var(--sf-space-xs)">Status Colors</h3>
+        <div class="demo-customizer-grid">
+          <div>
+            <div class="demo-customizer-col-label">Light</div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-success" data-token="--sf-color-success" value="#1e7a48">
+              <label for="pick-success" class="demo-picker-label">success</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-warning" data-token="--sf-color-warning" value="#b06800">
+              <label for="pick-warning" class="demo-picker-label">warning</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-error" data-token="--sf-color-error" value="#c02010">
+              <label for="pick-error" class="demo-picker-label">error</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-info" data-token="--sf-color-info" value="#305aae">
+              <label for="pick-info" class="demo-picker-label">info</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-danger" data-token="--sf-color-danger" value="#a01008">
+              <label for="pick-danger" class="demo-picker-label">danger</label>
+            </div>
+          </div>
+          <div>
+            <div class="demo-customizer-col-label">Dark</div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-success-dark" data-token="--sf-color-success-dark" value="#28984e">
+              <label for="pick-success-dark" class="demo-picker-label">success</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-warning-dark" data-token="--sf-color-warning-dark" value="#c87a00">
+              <label for="pick-warning-dark" class="demo-picker-label">warning</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-error-dark" data-token="--sf-color-error-dark" value="#e04020">
+              <label for="pick-error-dark" class="demo-picker-label">error</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-info-dark" data-token="--sf-color-info-dark" value="#4068d0">
+              <label for="pick-info-dark" class="demo-picker-label">info</label>
+            </div>
+            <div class="demo-picker-row">
+              <input type="color" id="pick-danger-dark" data-token="--sf-color-danger-dark" value="#cc1810">
+              <label for="pick-danger-dark" class="demo-picker-label">danger</label>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- ══════════════════════════════════════════════════════
            COLORS
@@ -1257,6 +1443,47 @@
   </div>
 
   <script>
+    // Color customizer
+    function cssColorToHex(value) {
+      const d = document.createElement('div');
+      d.style.display = 'none';
+      d.style.color = value.trim() || 'transparent';
+      document.body.appendChild(d);
+      const rgb = getComputedStyle(d).color;
+      document.body.removeChild(d);
+      const m = rgb.match(/[\d.]+/g);
+      if (!m || m.length < 3) return '#808080';
+      return '#' + [+m[0], +m[1], +m[2]]
+        .map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+    }
+
+    function initPicker(input) {
+      const token = input.dataset.token;
+      const raw = getComputedStyle(document.documentElement).getPropertyValue(token);
+      if (raw.trim()) input.value = cssColorToHex(raw);
+      input.addEventListener('input', () => {
+        document.documentElement.style.setProperty(token, input.value);
+      });
+    }
+
+    const customizerTokens = [
+      '--sf-color-primary', '--sf-color-secondary', '--sf-color-tertiary',
+      '--sf-color-action',  '--sf-color-neutral',   '--sf-color-base',
+      '--sf-color-primary-dark', '--sf-color-secondary-dark', '--sf-color-tertiary-dark',
+      '--sf-color-action-dark',  '--sf-color-neutral-dark',   '--sf-color-base-dark',
+      '--sf-color-success', '--sf-color-warning', '--sf-color-error',
+      '--sf-color-info',    '--sf-color-danger',
+      '--sf-color-success-dark', '--sf-color-warning-dark', '--sf-color-error-dark',
+      '--sf-color-info-dark',    '--sf-color-danger-dark',
+    ];
+
+    document.querySelectorAll('.demo-picker-row input[type="color"]').forEach(initPicker);
+
+    document.getElementById('customizer-reset').addEventListener('click', () => {
+      customizerTokens.forEach(t => document.documentElement.style.removeProperty(t));
+      document.querySelectorAll('.demo-picker-row input[type="color"]').forEach(initPicker);
+    });
+
     // Theme toggle
     const btn = document.getElementById('theme-toggle');
     const root = document.documentElement;
