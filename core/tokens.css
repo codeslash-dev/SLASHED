@@ -4,25 +4,189 @@
 @layer slashed.tokens {
 
   /* ============================================================
-     @property — typed color tokens (brand + status)
+     @property — BRAND COLORS (light + dark)
+     These are the only colors a theme needs to define.
+     Everything else is derived automatically.
      ============================================================ */
 
-  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.2 250); }
-  @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.15 200); }
-  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.1 220); }
-  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(55% 0.2 30); }
-  @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0 0); }
-  @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(95% 0 0); }
+  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.2 264); }
+  @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(0.25 0.03 260); }
+  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 210); }
+  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.2 264); }
+  @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.02 260); }
+  @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(0.98 0.005 260); }
 
-  @property --sf-color-success { syntax: "<color>"; inherits: true; initial-value: oklch(60% 0.2 145); }
-  @property --sf-color-warning { syntax: "<color>"; inherits: true; initial-value: oklch(75% 0.2 85); }
-  @property --sf-color-error   { syntax: "<color>"; inherits: true; initial-value: oklch(55% 0.25 25); }
-  @property --sf-color-info    { syntax: "<color>"; inherits: true; initial-value: oklch(60% 0.15 240); }
-  @property --sf-color-danger  { syntax: "<color>"; inherits: true; initial-value: oklch(50% 0.25 15); }
+  @property --sf-color-primary-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.7 0.15 264); }
+  @property --sf-color-secondary-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.8 0.02 260); }
+  @property --sf-color-tertiary-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.12 210); }
+  @property --sf-color-action-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.7 0.15 264); }
+  @property --sf-color-neutral-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.02 260); }
+  @property --sf-color-base-dark      { syntax: "<color>"; inherits: true; initial-value: oklch(0.2 0.02 260); }
+
+  /* @property — STATUS COLORS (light + dark) */
+
+  @property --sf-color-success      { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.17 150); }
+  @property --sf-color-warning      { syntax: "<color>"; inherits: true; initial-value: oklch(0.7 0.17 70); }
+  @property --sf-color-error        { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.22 25); }
+  @property --sf-color-info         { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.15 240); }
+  @property --sf-color-danger       { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.22 25); }
+
+  @property --sf-color-success-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.17 150); }
+  @property --sf-color-warning-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.15 70); }
+  @property --sf-color-error-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.2 25); }
+  @property --sf-color-info-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.13 240); }
+  @property --sf-color-danger-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.2 25); }
 
 
   /* ============================================================
-     PRIMITIVES
+     DERIVED SEMANTIC TOKENS
+     All computed from the 22 base colors above.
+     ============================================================ */
+
+  :root {
+
+    /* ----------------------------------------------------------
+       Surfaces — derived from --sf-color-base
+       ---------------------------------------------------------- */
+    --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
+    --sf-color-surface: var(--sf-color-base);
+    --sf-color-well:    oklch(from var(--sf-color-base) calc(l - 0.02) c h);
+    --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.02) c h);
+    --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
+    --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
+
+
+    /* ----------------------------------------------------------
+       Text — derived from --sf-color-neutral
+       ---------------------------------------------------------- */
+    --sf-color-text:              oklch(from var(--sf-color-neutral) calc(l - 0.4) c h);
+    --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) calc(l - 0.25) c h);
+    --sf-color-text--muted:       var(--sf-color-neutral);
+    --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) calc(l + 0.15) c h);
+    --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+    --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l + 0.4) c h);
+    --sf-color-heading:           oklch(from var(--sf-color-neutral) calc(l - 0.4) c h);
+
+
+    /* ----------------------------------------------------------
+       Text-on-color — white or dark based on luminance
+       ---------------------------------------------------------- */
+    --sf-color-text--on-primary:   oklch(1 0 0);
+    --sf-color-text--on-secondary: oklch(0.97 0.005 260);
+    --sf-color-text--on-tertiary:  oklch(1 0 0);
+    --sf-color-text--on-action:    oklch(1 0 0);
+    --sf-color-text--on-neutral:   oklch(1 0 0);
+    --sf-color-text--on-base:      var(--sf-color-text);
+    --sf-color-text--on-inverse:   var(--sf-color-text);
+    --sf-color-text--on-success:   oklch(1 0 0);
+    --sf-color-text--on-warning:   oklch(0.2 0.02 70);
+    --sf-color-text--on-error:     oklch(1 0 0);
+    --sf-color-text--on-info:      oklch(1 0 0);
+    --sf-color-text--on-danger:    oklch(1 0 0);
+
+
+    /* ----------------------------------------------------------
+       Borders — derived from --sf-color-neutral
+       ---------------------------------------------------------- */
+    --sf-color-border:              oklch(from var(--sf-color-neutral) calc(l + 0.35) 0.005 h);
+    --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) calc(l + 0.4) 0.005 h);
+    --sf-color-border--strong:      oklch(from var(--sf-color-neutral) calc(l + 0.1) 0.02 h);
+    --sf-color-border--focus:       var(--sf-color-action);
+    --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) calc(l + 0.35) 0.005 h);
+    --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
+
+
+    /* ----------------------------------------------------------
+       Links — derived from --sf-color-action
+       ---------------------------------------------------------- */
+    --sf-color-link:            var(--sf-color-action);
+    --sf-color-link--hover:     oklch(from var(--sf-color-action) calc(l + 0.1) c h);
+    --sf-color-link--active:    oklch(from var(--sf-color-action) calc(l + 0.15) c h);
+    --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 40));
+    --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
+
+
+    /* ----------------------------------------------------------
+       Interactive states — derived from --sf-color-neutral
+       ---------------------------------------------------------- */
+    --sf-color-bg--hover:    oklch(from var(--sf-color-neutral) l c h / 0.08);
+    --sf-color-bg--active:   oklch(from var(--sf-color-neutral) l c h / 0.12);
+    --sf-color-bg--selected: oklch(from var(--sf-color-action) l c h / 0.1);
+    --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
+    --sf-color-bg--disabled: var(--sf-color-well);
+    --sf-color-code-bg:      var(--sf-color-well);
+
+
+    /* ----------------------------------------------------------
+       Selection & backdrop
+       ---------------------------------------------------------- */
+    --sf-color-selection-bg:   oklch(from var(--sf-color-action) l c h / 0.22);
+    --sf-color-selection-text: inherit;
+    --sf-color-dim:            oklch(0 0 0 / 0.5);
+
+
+    /* ----------------------------------------------------------
+       Status triplets — auto-derived (bg / text / border)
+       ---------------------------------------------------------- */
+    --sf-status-success-bg:     oklch(from var(--sf-color-success) l c h / 0.12);
+    --sf-status-success-text:   oklch(from var(--sf-color-success) calc(l - 0.15) c h);
+    --sf-status-success-border: oklch(from var(--sf-color-success) l c h / 0.3);
+
+    --sf-status-warning-bg:     oklch(from var(--sf-color-warning) l c h / 0.12);
+    --sf-status-warning-text:   oklch(from var(--sf-color-warning) calc(l - 0.25) c h);
+    --sf-status-warning-border: oklch(from var(--sf-color-warning) l c h / 0.3);
+
+    --sf-status-error-bg:       oklch(from var(--sf-color-error) l c h / 0.1);
+    --sf-status-error-text:     oklch(from var(--sf-color-error) calc(l - 0.1) c h);
+    --sf-status-error-border:   oklch(from var(--sf-color-error) l c h / 0.3);
+
+    --sf-status-info-bg:        oklch(from var(--sf-color-info) l c h / 0.1);
+    --sf-status-info-text:      oklch(from var(--sf-color-info) calc(l - 0.1) c h);
+    --sf-status-info-border:    oklch(from var(--sf-color-info) l c h / 0.3);
+
+    --sf-status-danger-bg:      var(--sf-status-error-bg);
+    --sf-status-danger-text:    var(--sf-status-error-text);
+    --sf-status-danger-border:  var(--sf-status-error-border);
+
+
+    /* ----------------------------------------------------------
+       Gradients — derived from brand colors
+       ---------------------------------------------------------- */
+    --sf-gradient-primary:   linear-gradient(135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h));
+    --sf-gradient-secondary: linear-gradient(135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h));
+    --sf-gradient-tertiary:  linear-gradient(135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h));
+    --sf-gradient-brand:     linear-gradient(135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)));
+    --sf-gradient-surface:   linear-gradient(180deg, var(--sf-color-surface), var(--sf-color-bg));
+
+    --sf-gradient-fade--r: linear-gradient(to right,  transparent, var(--sf-color-bg));
+    --sf-gradient-fade--l: linear-gradient(to left,   transparent, var(--sf-color-bg));
+    --sf-gradient-fade--t: linear-gradient(to top,    transparent, var(--sf-color-bg));
+    --sf-gradient-fade--b: linear-gradient(to bottom, transparent, var(--sf-color-bg));
+
+
+    /* ----------------------------------------------------------
+       Shadow glow & disabled
+       ---------------------------------------------------------- */
+    --sf-shadow-glow-color: var(--sf-color-primary);
+    --sf-shadow-glow:       0 0 15px 2px color-mix(in srgb, var(--sf-shadow-glow-color) calc(40% * var(--sf-shadow-strength) * 5), transparent);
+    --sf-opacity-disabled:  0.45;
+
+
+    /* ----------------------------------------------------------
+       Focus / form colors
+       ---------------------------------------------------------- */
+    --sf-focus-ring-color:  var(--sf-color-action);
+    --sf-focus-ring-shadow: 0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg),
+                            0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color);
+    --sf-caret-color:       var(--sf-color-action);
+
+  }
+
+
+
+
+  /* ============================================================
+     NON-COLOR DESIGN TOKENS
      ============================================================ */
 
   :root {
@@ -263,7 +427,6 @@
     --sf-focus-ring-style:  solid;
     --sf-touch-target:      var(--sf-size-l);
     --sf-contrast-bias:     0;
-    --sf-color-scheme:      light dark;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);
     --sf-safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -291,180 +454,10 @@
 
 
   /* ============================================================
-     SEMANTIC TOKENS — neutral theme (light mode)
+     TYPOGRAPHY ALIASES
      ============================================================ */
 
   :root {
-
-    /* ----------------------------------------------------------
-       Brand & status colors
-       ---------------------------------------------------------- */
-    --sf-color-primary:   #4f46e5;
-    --sf-color-secondary: #1e293b;
-    --sf-color-tertiary:  #0891b2;
-    --sf-color-action:    #4f46e5;
-    --sf-color-neutral:   #64748b;
-    --sf-color-base:      #f8fafc;
-
-    --sf-color-success: #16a34a;
-    --sf-color-warning: #d97706;
-    --sf-color-error:   #dc2626;
-    --sf-color-info:    #0284c7;
-    --sf-color-danger:  #dc2626;
-
-
-    /* ----------------------------------------------------------
-       Font families & weights — neutral defaults
-       ---------------------------------------------------------- */
-    --sf-font-body:    system-ui, -apple-system, sans-serif;
-    --sf-font-heading: var(--sf-font-body);
-    --sf-font-display: var(--sf-font-heading);
-    --sf-font-mono:    ui-monospace, monospace;
-
-    --sf-font-weight-body:    400;
-    --sf-font-weight-heading: 600;
-    --sf-font-weight-display: 700;
-
-
-    /* ----------------------------------------------------------
-       Surfaces
-       ---------------------------------------------------------- */
-    --sf-color-bg:      #ffffff;
-    --sf-color-surface: #f8fafc;
-    --sf-color-well:    #f1f5f9;
-    --sf-color-raised:  #ffffff;
-    --sf-color-overlay: rgba(255, 255, 255, 0.9);
-    --sf-color-inverse: #0f172a;
-
-
-    /* ----------------------------------------------------------
-       Text
-       ---------------------------------------------------------- */
-    --sf-color-text:              #0f172a;
-    --sf-color-text--secondary:   #334155;
-    --sf-color-text--muted:       #64748b;
-    --sf-color-text--placeholder: #94a3b8;
-    --sf-color-text--disabled:    #cbd5e1;
-    --sf-color-text--inverse:     #f8fafc;
-    --sf-color-heading:           #0f172a;
-
-
-    /* ----------------------------------------------------------
-       Text-on-color
-       ---------------------------------------------------------- */
-    --sf-color-text--on-primary:   #ffffff;
-    --sf-color-text--on-secondary: #f8fafc;
-    --sf-color-text--on-tertiary:  #ffffff;
-    --sf-color-text--on-action:    #ffffff;
-    --sf-color-text--on-neutral:   #ffffff;
-    --sf-color-text--on-base:      #0f172a;
-    --sf-color-text--on-inverse:   #f8fafc;
-    --sf-color-text--on-success:   #ffffff;
-    --sf-color-text--on-warning:   #0f172a;
-    --sf-color-text--on-error:     #ffffff;
-    --sf-color-text--on-info:      #ffffff;
-    --sf-color-text--on-danger:    #ffffff;
-
-
-    /* ----------------------------------------------------------
-       Borders
-       ---------------------------------------------------------- */
-    --sf-color-border:              #e2e8f0;
-    --sf-color-border--subtle:      #f1f5f9;
-    --sf-color-border--strong:      #94a3b8;
-    --sf-color-border--focus:       var(--sf-focus-ring-color);
-    --sf-color-border--disabled:    #e2e8f0;
-    --sf-color-border--translucent: rgba(226, 232, 240, 0.5);
-
-
-    /* ----------------------------------------------------------
-       Links
-       ---------------------------------------------------------- */
-    --sf-color-link:            #4f46e5;
-    --sf-color-link--hover:     #4338ca;
-    --sf-color-link--active:    #3730a3;
-    --sf-color-link--visited:   #7c3aed;
-    --sf-color-link--underline: rgba(79, 70, 229, 0.3);
-
-
-    /* ----------------------------------------------------------
-       Interactive state backgrounds
-       ---------------------------------------------------------- */
-    --sf-color-bg--hover:    rgba(226, 232, 240, 0.5);
-    --sf-color-bg--active:   rgba(203, 213, 225, 0.5);
-    --sf-color-bg--selected: rgba(79, 70, 229, 0.1);
-    --sf-color-bg--focus:    rgba(79, 70, 229, 0.05);
-
-
-    /* ----------------------------------------------------------
-       Selection & backdrop
-       ---------------------------------------------------------- */
-    --sf-color-selection-bg:   rgba(79, 70, 229, 0.2);
-    --sf-color-selection-text: inherit;
-    --sf-color-dim:            rgba(0, 0, 0, 0.5);
-
-
-    /* ----------------------------------------------------------
-       Status triplets
-       ---------------------------------------------------------- */
-    --sf-status-success-bg:     #f0fdf4;
-    --sf-status-success-text:   #15803d;
-    --sf-status-success-border: #bbf7d0;
-
-    --sf-status-warning-bg:     #fffbeb;
-    --sf-status-warning-text:   #92400e;
-    --sf-status-warning-border: #fde68a;
-
-    --sf-status-error-bg:       #fef2f2;
-    --sf-status-error-text:     #b91c1c;
-    --sf-status-error-border:   #fecaca;
-
-    --sf-status-info-bg:        #eff6ff;
-    --sf-status-info-text:      #1d4ed8;
-    --sf-status-info-border:    #bfdbfe;
-
-    --sf-status-danger-bg:      #fef2f2;
-    --sf-status-danger-text:    #b91c1c;
-    --sf-status-danger-border:  #fecaca;
-
-
-    /* ----------------------------------------------------------
-       Gradients
-       ---------------------------------------------------------- */
-    --sf-gradient-primary:   linear-gradient(135deg, #4f46e5, #4338ca);
-    --sf-gradient-secondary: linear-gradient(135deg, #1e293b, #0f172a);
-    --sf-gradient-tertiary:  linear-gradient(135deg, #0891b2, #0e7490);
-    --sf-gradient-brand:     linear-gradient(135deg, #4f46e5, #7c3aed);
-    --sf-gradient-surface:   linear-gradient(180deg, #ffffff, #f8fafc);
-
-    --sf-gradient-fade--r: linear-gradient(to right,  transparent, var(--sf-color-bg));
-    --sf-gradient-fade--l: linear-gradient(to left,   transparent, var(--sf-color-bg));
-    --sf-gradient-fade--t: linear-gradient(to top,    transparent, var(--sf-color-bg));
-    --sf-gradient-fade--b: linear-gradient(to bottom, transparent, var(--sf-color-bg));
-
-
-    /* ----------------------------------------------------------
-       Shadow glow & disabled state
-       ---------------------------------------------------------- */
-    --sf-shadow-glow-color: var(--sf-color-primary);
-    --sf-shadow-glow:       0 0 15px 2px color-mix(in srgb, var(--sf-shadow-glow-color) calc(40% * var(--sf-shadow-strength) * 5), transparent);
-
-    --sf-color-bg--disabled: var(--sf-color-well);
-    --sf-opacity-disabled:   0.45;
-
-
-    /* ----------------------------------------------------------
-       Focus / form colors
-       ---------------------------------------------------------- */
-    --sf-focus-ring-color:  var(--sf-color-action);
-    --sf-focus-ring-shadow: 0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg),
-                            0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color);
-    --sf-caret-color:       var(--sf-color-action);
-
-
-    /* ----------------------------------------------------------
-       Typography aliases
-       ---------------------------------------------------------- */
     --sf-body-font-size:     var(--sf-text-m);
     --sf-body-line-height:   var(--sf-leading-normal);
     --sf-body-font-weight:   var(--sf-font-weight-body);
@@ -512,10 +505,10 @@
     /* ----------------------------------------------------------
        Spacing aliases
        ---------------------------------------------------------- */
-    --sf-gap:           var(--sf-space-m);
-    --sf-content-gap:   var(--sf-space-s);
-    --sf-component-pad: var(--sf-space-m);
-    --sf-field-block:   var(--sf-space-l);
+    --sf-gap:             var(--sf-space-m);
+    --sf-content-gap:     var(--sf-space-s);
+    --sf-component-pad:   var(--sf-space-m);
+    --sf-field-block:     var(--sf-space-l);
     --sf-prose-paragraph: var(--sf-space-m);
 
 
@@ -537,102 +530,6 @@
     --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
     --sf-transition-enter: all var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-exit:  all var(--sf-duration-fast)   var(--sf-ease-in);
-
-  }
-
-
-  /* ============================================================
-     DARK MODE — system preference
-     ============================================================ */
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --sf-color-bg:      #0f172a;
-      --sf-color-surface: #1e293b;
-      --sf-color-well:    #0f172a;
-      --sf-color-raised:  #253047;
-      --sf-color-overlay: rgba(15, 23, 42, 0.9);
-      --sf-color-inverse: #f8fafc;
-
-      --sf-color-text:              #f1f5f9;
-      --sf-color-text--secondary:   #cbd5e1;
-      --sf-color-text--muted:       #94a3b8;
-      --sf-color-text--placeholder: #475569;
-      --sf-color-text--disabled:    #334155;
-      --sf-color-text--inverse:     #0f172a;
-      --sf-color-heading:           #f8fafc;
-
-      --sf-color-border:              #1e293b;
-      --sf-color-border--subtle:      #0f172a;
-      --sf-color-border--strong:      #334155;
-      --sf-color-border--disabled:    #1e293b;
-      --sf-color-border--translucent: rgba(30, 41, 59, 0.5);
-
-      --sf-color-primary: #818cf8;
-      --sf-color-action:  #818cf8;
-
-      --sf-color-link:            #818cf8;
-      --sf-color-link--hover:     #a5b4fc;
-      --sf-color-link--active:    #c7d2fe;
-      --sf-color-link--visited:   #a5b4fc;
-      --sf-color-link--underline: rgba(129, 140, 248, 0.3);
-
-      --sf-color-bg--hover:    rgba(30, 41, 59, 0.6);
-      --sf-color-bg--active:   rgba(51, 65, 85, 0.6);
-      --sf-color-bg--selected: rgba(129, 140, 248, 0.15);
-      --sf-color-bg--focus:    rgba(129, 140, 248, 0.08);
-
-      --sf-color-selection-bg: rgba(129, 140, 248, 0.25);
-
-      --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
-    }
-  }
-
-
-  /* ============================================================
-     DARK MODE — explicit toggle ([data-theme="dark"] on <html>)
-     ============================================================ */
-
-  [data-theme="dark"] {
-    --sf-color-bg:      #0f172a;
-    --sf-color-surface: #1e293b;
-    --sf-color-well:    #0f172a;
-    --sf-color-raised:  #253047;
-    --sf-color-overlay: rgba(15, 23, 42, 0.9);
-    --sf-color-inverse: #f8fafc;
-
-    --sf-color-text:              #f1f5f9;
-    --sf-color-text--secondary:   #cbd5e1;
-    --sf-color-text--muted:       #94a3b8;
-    --sf-color-text--placeholder: #475569;
-    --sf-color-text--disabled:    #334155;
-    --sf-color-text--inverse:     #0f172a;
-    --sf-color-heading:           #f8fafc;
-
-    --sf-color-border:              #1e293b;
-    --sf-color-border--subtle:      #0f172a;
-    --sf-color-border--strong:      #334155;
-    --sf-color-border--disabled:    #1e293b;
-    --sf-color-border--translucent: rgba(30, 41, 59, 0.5);
-
-    --sf-color-primary: #818cf8;
-    --sf-color-action:  #818cf8;
-
-    --sf-color-link:            #818cf8;
-    --sf-color-link--hover:     #a5b4fc;
-    --sf-color-link--active:    #c7d2fe;
-    --sf-color-link--visited:   #a5b4fc;
-    --sf-color-link--underline: rgba(129, 140, 248, 0.3);
-
-    --sf-color-bg--hover:    rgba(30, 41, 59, 0.6);
-    --sf-color-bg--active:   rgba(51, 65, 85, 0.6);
-    --sf-color-bg--selected: rgba(129, 140, 248, 0.15);
-    --sf-color-bg--focus:    rgba(129, 140, 248, 0.08);
-
-    --sf-color-selection-bg: rgba(129, 140, 248, 0.25);
-
-    --sf-gradient-surface: linear-gradient(180deg, #1e293b, #0f172a);
-
   }
 
 }
