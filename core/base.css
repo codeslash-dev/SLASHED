@@ -36,29 +36,29 @@
       --sf-color-info:    var(--sf-color-info-dark);
       --sf-color-danger:  var(--sf-color-danger-dark);
 
-      /* Text — inverted direction for dark backgrounds */
-      --sf-color-text:              oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
-      --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) calc(l + 0.1)  c h);
-      --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) calc(l - 0.1)  c h);
-      --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.2)  c h);
-      --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4)  c h);
-      --sf-color-heading:           oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+      /* Text — inverted direction for dark backgrounds, clamped for any neutral value */
+      --sf-color-text:              oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1),  0.90) c h);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1),  0.65) c h);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2),  0.55) c h);
+      --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4) c h);
+      --sf-color-heading:           oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
 
-      /* Borders — adjusted for dark backgrounds */
-      --sf-color-border:              oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
-      --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) calc(l - 0.38) 0.005 h);
-      --sf-color-border--strong:      oklch(from var(--sf-color-neutral) calc(l - 0.1)  0.02  h);
-      --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
+      /* Borders — adjusted for dark backgrounds, clamped for any neutral value */
+      --sf-color-border:              oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
+      --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h);
+      --sf-color-border--strong:      oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1),  0.65) 0.02  h);
+      --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
       --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
 
       /* Shadow strength — more visible on dark surfaces */
       --sf-shadow-strength: 0.25;
 
-      /* Status text — lightened for dark backgrounds */
-      --sf-status-success-text: oklch(from var(--sf-color-success) calc(l + 0.15) c h);
-      --sf-status-warning-text: oklch(from var(--sf-color-warning) calc(l + 0.05) c h);
-      --sf-status-error-text:   oklch(from var(--sf-color-error)   calc(l + 0.15) c h);
-      --sf-status-info-text:    oklch(from var(--sf-color-info)    calc(l + 0.15) c h);
+      /* Status text — lightened for dark backgrounds, clamped */
+      --sf-status-success-text: oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h);
+      --sf-status-warning-text: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
+      --sf-status-error-text:   oklch(from var(--sf-color-error)   clamp(0.70, calc(l + 0.15), 1) c h);
+      --sf-status-info-text:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
       --sf-status-danger-text:  var(--sf-status-error-text);
     }
   }
@@ -95,29 +95,29 @@
     --sf-color-info:    var(--sf-color-info-dark);
     --sf-color-danger:  var(--sf-color-danger-dark);
 
-    /* Text — inverted direction for dark backgrounds */
-    --sf-color-text:              oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
-    --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) calc(l + 0.1)  c h);
-    --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) calc(l - 0.1)  c h);
-    --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.2)  c h);
-    --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4)  c h);
-    --sf-color-heading:           oklch(from var(--sf-color-neutral) calc(l + 0.25) c h);
+    /* Text — inverted direction for dark backgrounds, clamped for any neutral value */
+    --sf-color-text:              oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
+    --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1),  0.90) c h);
+    --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1),  0.65) c h);
+    --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2),  0.55) c h);
+    --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4) c h);
+    --sf-color-heading:           oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
 
-    /* Borders — adjusted for dark backgrounds */
-    --sf-color-border:              oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
-    --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) calc(l - 0.38) 0.005 h);
-    --sf-color-border--strong:      oklch(from var(--sf-color-neutral) calc(l - 0.1)  0.02  h);
-    --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) calc(l - 0.3)  0.005 h);
+    /* Borders — adjusted for dark backgrounds, clamped for any neutral value */
+    --sf-color-border:              oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
+    --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h);
+    --sf-color-border--strong:      oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1),  0.65) 0.02  h);
+    --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
     --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
 
     /* Shadow strength — more visible on dark surfaces */
     --sf-shadow-strength: 0.25;
 
-    /* Status text — lightened for dark backgrounds */
-    --sf-status-success-text: oklch(from var(--sf-color-success) calc(l + 0.15) c h);
-    --sf-status-warning-text: oklch(from var(--sf-color-warning) calc(l + 0.05) c h);
-    --sf-status-error-text:   oklch(from var(--sf-color-error)   calc(l + 0.15) c h);
-    --sf-status-info-text:    oklch(from var(--sf-color-info)    calc(l + 0.15) c h);
+    /* Status text — lightened for dark backgrounds, clamped */
+    --sf-status-success-text: oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h);
+    --sf-status-warning-text: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
+    --sf-status-error-text:   oklch(from var(--sf-color-error)   clamp(0.70, calc(l + 0.15), 1) c h);
+    --sf-status-info-text:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
     --sf-status-danger-text:  var(--sf-status-error-text);
   }
 
