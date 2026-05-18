@@ -113,6 +113,13 @@ for (const key of ACTIVE_KEYS) {
       on the active tokens (issue 1 of the v1 review).
       `initial` on an unregistered custom property yields
       the guaranteed-invalid value, breaking descendants.
+
+      The forced-dark reset block (added in v2-review fix)
+      mirrors the light side: a forced-dark island nested
+      inside a parent that wrote `--sf-color-X` inline must
+      re-establish the `light-dark()` chain on its own
+      element, otherwise the parent's constant inherits
+      unchanged through the dark section.
    ──────────────────────────────────────────────── */
 
 const resetBlockMatch = themes.match(
@@ -143,6 +150,38 @@ if (resetBlockMatch) {
       `forced-light reset re-declares --sf-color-${key} via light-dark()`,
       re.test(body),
       `core/themes.css [data-theme="light"]:not(:root) does not re-declare --sf-color-${key}`
+    );
+  }
+}
+
+const darkResetBlockMatch = themes.match(
+  /\[data-theme="dark"\]:not\(:root\)\s*\{([\s\S]*?)\}/
+);
+check(
+  'forced-dark reset block exists',
+  !!darkResetBlockMatch,
+  'core/themes.css missing [data-theme="dark"]:not(:root) reset block; a forced-dark island must mirror the forced-light block to override a parent\'s inline --sf-color-X write.'
+);
+
+if (darkResetBlockMatch) {
+  const body = darkResetBlockMatch[1];
+  const initialUses = body.match(/--sf-color-[a-z]+\s*:\s*initial\b/g) || [];
+  check(
+    'forced-dark reset block does not use `initial` on active tokens',
+    initialUses.length === 0,
+    `core/themes.css [data-theme="dark"]:not(:root) reset block has ${initialUses.length} `
+      + `--sf-color-X: initial declaration(s); under unregistered active tokens, `
+      + `\`initial\` produces guaranteed-invalid. Use light-dark(var(--sf-color-X-light), var(--sf-color-X-dark)) instead.`
+  );
+
+  for (const key of ACTIVE_KEYS) {
+    const re = new RegExp(
+      `--sf-color-${key}\\s*:\\s*light-dark\\(`
+    );
+    check(
+      `forced-dark reset re-declares --sf-color-${key} via light-dark()`,
+      re.test(body),
+      `core/themes.css [data-theme="dark"]:not(:root) does not re-declare --sf-color-${key}`
     );
   }
 }

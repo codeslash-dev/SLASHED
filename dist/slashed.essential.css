@@ -1838,27 +1838,52 @@
   }
 
   /* ----------------------------------------------------------
-     Light-mode reset for nested sections.
-     A section forced to `data-theme="light"` inside a parent
-     that has set `--sf-color-X` inline (bypassing the
-     light-dark() infrastructure) inherits that override by
-     computed value. Custom-property inheritance is one parent
-     at a time, NOT a re-lookup against the cascade, so we
-     cannot rely on `: initial` here: the active tokens are
-     unregistered, and `initial` on an unregistered custom
-     property produces the guaranteed-invalid value, which
-     descendants then inherit (their `var()` substitutions
-     fail with no fallback).
+     Forced-mode reset for nested sections.
+     A section forced to `data-theme="light"` or
+     `data-theme="dark"` inside a parent that has set
+     `--sf-color-X` inline (bypassing the light-dark()
+     infrastructure) inherits that override by computed value.
+     Custom-property inheritance is one parent at a time, NOT
+     a re-lookup against the cascade, so we cannot rely on
+     `: initial` here: the active tokens are unregistered, and
+     `initial` on an unregistered custom property produces the
+     guaranteed-invalid value, which descendants then inherit
+     (their `var()` substitutions fail with no fallback).
 
      Instead, we re-declare the `light-dark()` expression on
-     this element. Because the section also forces
-     `color-scheme: light` (above), the expression resolves
-     to its light branch here, regardless of what any parent
+     this element. Because the section also forces its own
+     `color-scheme` (above), the expression resolves to the
+     correct branch here, regardless of what any parent
      declared inline. Descendants inherit a real, theme-aware
      value.
+
+     Symmetric blocks for forced-light and forced-dark keep
+     the `data-theme` API consistent: a forced-X island is
+     self-contained and immune to a parent's inline
+     `--sf-color-X` override in either direction.
+
+     `:where()` is intentionally NOT used on these blocks:
+     their purpose is selector-level reset, and the
+     `:not(:root)` keeps them from overriding the registered
+     `:root` declarations on the document element.
      ---------------------------------------------------------- */
 
   [data-theme="light"]:not(:root) {
+    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark));
+    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark));
+    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark));
+    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark));
+    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark));
+    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark));
+
+    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark));
+    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark));
+    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark));
+    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark));
+    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark));
+  }
+
+  [data-theme="dark"]:not(:root) {
     --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark));
     --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark));
     --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark));
