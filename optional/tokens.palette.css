@@ -8,10 +8,57 @@
    Load after core/tokens.css:
      @import "optional/tokens.palette.css";
 
-   Token naming:
-     --sf-color-X-100  … -400  tints  (mixed with white)
-     --sf-color-X-600  … -900  shades (mixed with black)
-     --sf-color-X-a10  … -a75  alpha  (mixed with transparent)
+   ------------------------------------------------------------
+   THEME-AWARE CONTRACT (since FEAT-002)
+   ------------------------------------------------------------
+   The numeric scale is anchored to the active theme, not to
+   absolute white/black. With FEAT-001 making --sf-color-base
+   and --sf-color-text theme-aware via light-dark(), the palette
+   now mixes brand colors with those active anchors:
+
+     --sf-color-X-100 … -400  tints   (X mixed with --sf-color-base)
+     --sf-color-X-600 … -900  shades  (X mixed with --sf-color-text)
+     --sf-color-X-a10 … -a75  alpha   (X mixed with transparent — unchanged)
+
+   Semantics shift from "absolute lightness" to
+   "relative-to-theme":
+     -100 = closest to the active background (subtle tint)
+     -900 = closest to the active foreground (readable text)
+
+   In light mode -100..-400 lighten toward white; in dark mode
+   they darken toward the dark base. Likewise -600..-900 darken
+   in light mode and lighten in dark mode. A pairing such as
+   `background: var(--sf-color-X-200); color: var(--sf-color-X-800)`
+   is now legible in BOTH themes without overrides.
+
+   Special case — the base scale:
+     `--sf-color-base-*` cannot mix base with itself. Instead it
+     mixes the active base with --sf-color-text at LOW
+     percentages for tints (subtle layered surfaces) and HIGH
+     percentages for shades (near-foreground). The result is a
+     base-derived surface→text ramp useful for stripes, tables,
+     dividers, and elevated panels — theme-aware in both modes.
+
+   The alpha tokens (-a10..-a75) are unchanged; they already
+   work in both themes because they mix with `transparent`.
+
+   ------------------------------------------------------------
+   SEMANTIC PAIR ALIASES (Material 3 inspired)
+   ------------------------------------------------------------
+   For the common "tinted container with readable text on it"
+   use case, each non-base brand color exposes a pair:
+
+     --sf-color-X-container     → alias of --sf-color-X-100
+     --sf-color-X-on-container  → alias of --sf-color-X-900
+
+   Recommended idiom:
+     background: var(--sf-color-primary-container);
+     color:      var(--sf-color-primary-on-container);
+
+   This pairing is theme-aware by construction and is the
+   preferred way to build chips, badges, callouts, and inline
+   highlight blocks. There is intentionally no base-container
+   pair (use --sf-color-bg / --sf-color-text directly).
 
    The 500 base value is --sf-color-X itself — no alias needed.
    ============================================================ */
@@ -22,14 +69,14 @@
     /* ----------------------------------------------------------
        primary
        ---------------------------------------------------------- */
-    --sf-color-primary-100: color-mix(in oklch, var(--sf-color-primary)  8%, white);
-    --sf-color-primary-200: color-mix(in oklch, var(--sf-color-primary) 20%, white);
-    --sf-color-primary-300: color-mix(in oklch, var(--sf-color-primary) 40%, white);
-    --sf-color-primary-400: color-mix(in oklch, var(--sf-color-primary) 65%, white);
-    --sf-color-primary-600: color-mix(in oklch, var(--sf-color-primary) 82%, black);
-    --sf-color-primary-700: color-mix(in oklch, var(--sf-color-primary) 62%, black);
-    --sf-color-primary-800: color-mix(in oklch, var(--sf-color-primary) 38%, black);
-    --sf-color-primary-900: color-mix(in oklch, var(--sf-color-primary) 18%, black);
+    --sf-color-primary-100: color-mix(in oklch, var(--sf-color-primary)  8%, var(--sf-color-base));
+    --sf-color-primary-200: color-mix(in oklch, var(--sf-color-primary) 20%, var(--sf-color-base));
+    --sf-color-primary-300: color-mix(in oklch, var(--sf-color-primary) 40%, var(--sf-color-base));
+    --sf-color-primary-400: color-mix(in oklch, var(--sf-color-primary) 65%, var(--sf-color-base));
+    --sf-color-primary-600: color-mix(in oklch, var(--sf-color-primary) 82%, var(--sf-color-text));
+    --sf-color-primary-700: color-mix(in oklch, var(--sf-color-primary) 62%, var(--sf-color-text));
+    --sf-color-primary-800: color-mix(in oklch, var(--sf-color-primary) 38%, var(--sf-color-text));
+    --sf-color-primary-900: color-mix(in oklch, var(--sf-color-primary) 18%, var(--sf-color-text));
     --sf-color-primary-a10: color-mix(in oklch, var(--sf-color-primary) 10%, transparent);
     --sf-color-primary-a20: color-mix(in oklch, var(--sf-color-primary) 20%, transparent);
     --sf-color-primary-a30: color-mix(in oklch, var(--sf-color-primary) 30%, transparent);
@@ -40,14 +87,14 @@
     /* ----------------------------------------------------------
        secondary
        ---------------------------------------------------------- */
-    --sf-color-secondary-100: color-mix(in oklch, var(--sf-color-secondary)  8%, white);
-    --sf-color-secondary-200: color-mix(in oklch, var(--sf-color-secondary) 20%, white);
-    --sf-color-secondary-300: color-mix(in oklch, var(--sf-color-secondary) 40%, white);
-    --sf-color-secondary-400: color-mix(in oklch, var(--sf-color-secondary) 65%, white);
-    --sf-color-secondary-600: color-mix(in oklch, var(--sf-color-secondary) 82%, black);
-    --sf-color-secondary-700: color-mix(in oklch, var(--sf-color-secondary) 62%, black);
-    --sf-color-secondary-800: color-mix(in oklch, var(--sf-color-secondary) 38%, black);
-    --sf-color-secondary-900: color-mix(in oklch, var(--sf-color-secondary) 18%, black);
+    --sf-color-secondary-100: color-mix(in oklch, var(--sf-color-secondary)  8%, var(--sf-color-base));
+    --sf-color-secondary-200: color-mix(in oklch, var(--sf-color-secondary) 20%, var(--sf-color-base));
+    --sf-color-secondary-300: color-mix(in oklch, var(--sf-color-secondary) 40%, var(--sf-color-base));
+    --sf-color-secondary-400: color-mix(in oklch, var(--sf-color-secondary) 65%, var(--sf-color-base));
+    --sf-color-secondary-600: color-mix(in oklch, var(--sf-color-secondary) 82%, var(--sf-color-text));
+    --sf-color-secondary-700: color-mix(in oklch, var(--sf-color-secondary) 62%, var(--sf-color-text));
+    --sf-color-secondary-800: color-mix(in oklch, var(--sf-color-secondary) 38%, var(--sf-color-text));
+    --sf-color-secondary-900: color-mix(in oklch, var(--sf-color-secondary) 18%, var(--sf-color-text));
     --sf-color-secondary-a10: color-mix(in oklch, var(--sf-color-secondary) 10%, transparent);
     --sf-color-secondary-a20: color-mix(in oklch, var(--sf-color-secondary) 20%, transparent);
     --sf-color-secondary-a30: color-mix(in oklch, var(--sf-color-secondary) 30%, transparent);
@@ -58,14 +105,14 @@
     /* ----------------------------------------------------------
        tertiary
        ---------------------------------------------------------- */
-    --sf-color-tertiary-100: color-mix(in oklch, var(--sf-color-tertiary)  8%, white);
-    --sf-color-tertiary-200: color-mix(in oklch, var(--sf-color-tertiary) 20%, white);
-    --sf-color-tertiary-300: color-mix(in oklch, var(--sf-color-tertiary) 40%, white);
-    --sf-color-tertiary-400: color-mix(in oklch, var(--sf-color-tertiary) 65%, white);
-    --sf-color-tertiary-600: color-mix(in oklch, var(--sf-color-tertiary) 82%, black);
-    --sf-color-tertiary-700: color-mix(in oklch, var(--sf-color-tertiary) 62%, black);
-    --sf-color-tertiary-800: color-mix(in oklch, var(--sf-color-tertiary) 38%, black);
-    --sf-color-tertiary-900: color-mix(in oklch, var(--sf-color-tertiary) 18%, black);
+    --sf-color-tertiary-100: color-mix(in oklch, var(--sf-color-tertiary)  8%, var(--sf-color-base));
+    --sf-color-tertiary-200: color-mix(in oklch, var(--sf-color-tertiary) 20%, var(--sf-color-base));
+    --sf-color-tertiary-300: color-mix(in oklch, var(--sf-color-tertiary) 40%, var(--sf-color-base));
+    --sf-color-tertiary-400: color-mix(in oklch, var(--sf-color-tertiary) 65%, var(--sf-color-base));
+    --sf-color-tertiary-600: color-mix(in oklch, var(--sf-color-tertiary) 82%, var(--sf-color-text));
+    --sf-color-tertiary-700: color-mix(in oklch, var(--sf-color-tertiary) 62%, var(--sf-color-text));
+    --sf-color-tertiary-800: color-mix(in oklch, var(--sf-color-tertiary) 38%, var(--sf-color-text));
+    --sf-color-tertiary-900: color-mix(in oklch, var(--sf-color-tertiary) 18%, var(--sf-color-text));
     --sf-color-tertiary-a10: color-mix(in oklch, var(--sf-color-tertiary) 10%, transparent);
     --sf-color-tertiary-a20: color-mix(in oklch, var(--sf-color-tertiary) 20%, transparent);
     --sf-color-tertiary-a30: color-mix(in oklch, var(--sf-color-tertiary) 30%, transparent);
@@ -76,14 +123,14 @@
     /* ----------------------------------------------------------
        action
        ---------------------------------------------------------- */
-    --sf-color-action-100: color-mix(in oklch, var(--sf-color-action)  8%, white);
-    --sf-color-action-200: color-mix(in oklch, var(--sf-color-action) 20%, white);
-    --sf-color-action-300: color-mix(in oklch, var(--sf-color-action) 40%, white);
-    --sf-color-action-400: color-mix(in oklch, var(--sf-color-action) 65%, white);
-    --sf-color-action-600: color-mix(in oklch, var(--sf-color-action) 82%, black);
-    --sf-color-action-700: color-mix(in oklch, var(--sf-color-action) 62%, black);
-    --sf-color-action-800: color-mix(in oklch, var(--sf-color-action) 38%, black);
-    --sf-color-action-900: color-mix(in oklch, var(--sf-color-action) 18%, black);
+    --sf-color-action-100: color-mix(in oklch, var(--sf-color-action)  8%, var(--sf-color-base));
+    --sf-color-action-200: color-mix(in oklch, var(--sf-color-action) 20%, var(--sf-color-base));
+    --sf-color-action-300: color-mix(in oklch, var(--sf-color-action) 40%, var(--sf-color-base));
+    --sf-color-action-400: color-mix(in oklch, var(--sf-color-action) 65%, var(--sf-color-base));
+    --sf-color-action-600: color-mix(in oklch, var(--sf-color-action) 82%, var(--sf-color-text));
+    --sf-color-action-700: color-mix(in oklch, var(--sf-color-action) 62%, var(--sf-color-text));
+    --sf-color-action-800: color-mix(in oklch, var(--sf-color-action) 38%, var(--sf-color-text));
+    --sf-color-action-900: color-mix(in oklch, var(--sf-color-action) 18%, var(--sf-color-text));
     --sf-color-action-a10: color-mix(in oklch, var(--sf-color-action) 10%, transparent);
     --sf-color-action-a20: color-mix(in oklch, var(--sf-color-action) 20%, transparent);
     --sf-color-action-a30: color-mix(in oklch, var(--sf-color-action) 30%, transparent);
@@ -94,14 +141,14 @@
     /* ----------------------------------------------------------
        neutral
        ---------------------------------------------------------- */
-    --sf-color-neutral-100: color-mix(in oklch, var(--sf-color-neutral)  8%, white);
-    --sf-color-neutral-200: color-mix(in oklch, var(--sf-color-neutral) 20%, white);
-    --sf-color-neutral-300: color-mix(in oklch, var(--sf-color-neutral) 40%, white);
-    --sf-color-neutral-400: color-mix(in oklch, var(--sf-color-neutral) 65%, white);
-    --sf-color-neutral-600: color-mix(in oklch, var(--sf-color-neutral) 82%, black);
-    --sf-color-neutral-700: color-mix(in oklch, var(--sf-color-neutral) 62%, black);
-    --sf-color-neutral-800: color-mix(in oklch, var(--sf-color-neutral) 38%, black);
-    --sf-color-neutral-900: color-mix(in oklch, var(--sf-color-neutral) 18%, black);
+    --sf-color-neutral-100: color-mix(in oklch, var(--sf-color-neutral)  8%, var(--sf-color-base));
+    --sf-color-neutral-200: color-mix(in oklch, var(--sf-color-neutral) 20%, var(--sf-color-base));
+    --sf-color-neutral-300: color-mix(in oklch, var(--sf-color-neutral) 40%, var(--sf-color-base));
+    --sf-color-neutral-400: color-mix(in oklch, var(--sf-color-neutral) 65%, var(--sf-color-base));
+    --sf-color-neutral-600: color-mix(in oklch, var(--sf-color-neutral) 82%, var(--sf-color-text));
+    --sf-color-neutral-700: color-mix(in oklch, var(--sf-color-neutral) 62%, var(--sf-color-text));
+    --sf-color-neutral-800: color-mix(in oklch, var(--sf-color-neutral) 38%, var(--sf-color-text));
+    --sf-color-neutral-900: color-mix(in oklch, var(--sf-color-neutral) 18%, var(--sf-color-text));
     --sf-color-neutral-a10: color-mix(in oklch, var(--sf-color-neutral) 10%, transparent);
     --sf-color-neutral-a20: color-mix(in oklch, var(--sf-color-neutral) 20%, transparent);
     --sf-color-neutral-a30: color-mix(in oklch, var(--sf-color-neutral) 30%, transparent);
@@ -110,21 +157,49 @@
 
 
     /* ----------------------------------------------------------
-       base
+       base — special scale
+       Mixes the active base with --sf-color-text so we get a
+       theme-aware surface→foreground ramp instead of a broken
+       self-mix. Low percentages for tints (subtle layered
+       surfaces); high percentages for shades (near-foreground).
        ---------------------------------------------------------- */
-    --sf-color-base-100: color-mix(in oklch, var(--sf-color-base)  8%, white);
-    --sf-color-base-200: color-mix(in oklch, var(--sf-color-base) 20%, white);
-    --sf-color-base-300: color-mix(in oklch, var(--sf-color-base) 40%, white);
-    --sf-color-base-400: color-mix(in oklch, var(--sf-color-base) 65%, white);
-    --sf-color-base-600: color-mix(in oklch, var(--sf-color-base) 82%, black);
-    --sf-color-base-700: color-mix(in oklch, var(--sf-color-base) 62%, black);
-    --sf-color-base-800: color-mix(in oklch, var(--sf-color-base) 38%, black);
-    --sf-color-base-900: color-mix(in oklch, var(--sf-color-base) 18%, black);
+    --sf-color-base-100: color-mix(in oklch, var(--sf-color-base)  96%, var(--sf-color-text));
+    --sf-color-base-200: color-mix(in oklch, var(--sf-color-base)  92%, var(--sf-color-text));
+    --sf-color-base-300: color-mix(in oklch, var(--sf-color-base)  86%, var(--sf-color-text));
+    --sf-color-base-400: color-mix(in oklch, var(--sf-color-base)  78%, var(--sf-color-text));
+    --sf-color-base-600: color-mix(in oklch, var(--sf-color-base)  60%, var(--sf-color-text));
+    --sf-color-base-700: color-mix(in oklch, var(--sf-color-base)  40%, var(--sf-color-text));
+    --sf-color-base-800: color-mix(in oklch, var(--sf-color-base)  20%, var(--sf-color-text));
+    --sf-color-base-900: color-mix(in oklch, var(--sf-color-base)   5%, var(--sf-color-text));
     --sf-color-base-a10: color-mix(in oklch, var(--sf-color-base) 10%, transparent);
     --sf-color-base-a20: color-mix(in oklch, var(--sf-color-base) 20%, transparent);
     --sf-color-base-a30: color-mix(in oklch, var(--sf-color-base) 30%, transparent);
     --sf-color-base-a50: color-mix(in oklch, var(--sf-color-base) 50%, transparent);
     --sf-color-base-a75: color-mix(in oklch, var(--sf-color-base) 75%, transparent);
+
+
+    /* ----------------------------------------------------------
+       Semantic pair aliases — Material 3 style
+       For "tinted container with readable text on it" use cases.
+       Pair `background: var(--sf-color-X-container)` with
+       `color: var(--sf-color-X-on-container)` for an idiom that
+       stays legible in both light and dark themes.
+       (Not provided for `base` — use --sf-color-bg/--sf-color-text.)
+       ---------------------------------------------------------- */
+    --sf-color-primary-container:      var(--sf-color-primary-100);
+    --sf-color-primary-on-container:   var(--sf-color-primary-900);
+
+    --sf-color-secondary-container:    var(--sf-color-secondary-100);
+    --sf-color-secondary-on-container: var(--sf-color-secondary-900);
+
+    --sf-color-tertiary-container:     var(--sf-color-tertiary-100);
+    --sf-color-tertiary-on-container:  var(--sf-color-tertiary-900);
+
+    --sf-color-action-container:       var(--sf-color-action-100);
+    --sf-color-action-on-container:    var(--sf-color-action-900);
+
+    --sf-color-neutral-container:      var(--sf-color-neutral-100);
+    --sf-color-neutral-on-container:   var(--sf-color-neutral-900);
 
   }
 }
