@@ -1267,15 +1267,40 @@
     });
 
     // Nav drawer
-    const navToggle = document.getElementById('nav-toggle');
-    const nav       = document.getElementById('demo-nav');
-    const overlay   = document.getElementById('nav-overlay');
+    const navToggle   = document.getElementById('nav-toggle');
+    const nav         = document.getElementById('demo-nav');
+    const overlay     = document.getElementById('nav-overlay');
+    const mainContent = document.getElementById('main');
+    let focusTrapHandler = null;
+
+    function getFocusable() {
+      return [...nav.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')];
+    }
 
     function openNav() {
       nav.classList.add('is-open');
       overlay.classList.add('is-open');
       navToggle.setAttribute('aria-expanded', 'true');
       navToggle.setAttribute('aria-label', 'Close navigation');
+      document.body.style.overflow = 'hidden';
+      mainContent.setAttribute('aria-hidden', 'true');
+
+      const focusable = getFocusable();
+      if (focusable.length) focusable[0].focus();
+
+      focusTrapHandler = e => {
+        if (e.key !== 'Tab') return;
+        const els = getFocusable();
+        if (!els.length) return;
+        const first = els[0];
+        const last  = els[els.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        }
+      };
+      nav.addEventListener('keydown', focusTrapHandler);
     }
 
     function closeNav() {
@@ -1283,6 +1308,13 @@
       overlay.classList.remove('is-open');
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.setAttribute('aria-label', 'Open navigation');
+      document.body.style.overflow = '';
+      mainContent.removeAttribute('aria-hidden');
+      navToggle.focus();
+      if (focusTrapHandler) {
+        nav.removeEventListener('keydown', focusTrapHandler);
+        focusTrapHandler = null;
+      }
     }
 
     navToggle.addEventListener('click', () => {
