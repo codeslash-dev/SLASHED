@@ -17,7 +17,7 @@
      ============================================================ */
 
   :root {
-    color-scheme: light dark;
+    color-scheme: var(--sf-color-scheme, light dark);
   }
 
   /* OS preference — auto-switch when no data-theme is set */
