@@ -83,7 +83,6 @@
     }
 
     #main {
-      flex: 1;
       min-width: 0;
     }
 
@@ -188,8 +187,8 @@
 
     /* ── radius swatches ──────────────────────────────────── */
     .demo-radius-swatch {
-      width: 4.5rem;
-      height: 4.5rem;
+      width: 6rem;
+      height: 5rem;
       background: var(--sf-color-primary-200, color-mix(in oklch, var(--sf-color-primary) 25%, var(--sf-color-bg)));
       border: 2px solid var(--sf-color-primary);
       display: flex;
@@ -233,11 +232,12 @@
       background: var(--sf-color-primary);
       position: absolute;
       top: 0;
+      left: 0;
     }
 
     @keyframes demo-slide {
-      from { translate: 0; }
-      to   { translate: calc(100% - 2rem); }
+      from { left: 0; }
+      to   { left: calc(100% - 2rem); }
     }
 
     .demo-motion-warning {
@@ -395,7 +395,7 @@
 
   <div id="nav-overlay" aria-hidden="true"></div>
 
-  <div class="sf-sidebar" style="--sf-sidebar-width: 14rem; --sf-sidebar-min-width: 55%; align-items: flex-start">
+  <div class="sf-sidebar" style="--sf-sidebar-width: 12rem; --sf-sidebar-min-width: 55%; align-items: flex-start">
 
     <nav id="demo-nav" aria-label="Demo sections">
       <ul>
@@ -473,7 +473,7 @@
         </div>
 
         <h3>Status Triplets</h3>
-        <div class="sf-cluster--m">
+        <div class="sf-cluster sf-cluster--m">
           <div style="background: var(--sf-status-success-bg); color: var(--sf-status-success-text); border: 1px solid var(--sf-status-success-border); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Success</div>
           <div style="background: var(--sf-status-warning-bg); color: var(--sf-status-warning-text); border: 1px solid var(--sf-status-warning-border); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Warning</div>
           <div style="background: var(--sf-status-error-bg); color: var(--sf-status-error-text); border: 1px solid var(--sf-status-error-border); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Error</div>
@@ -482,7 +482,7 @@
         </div>
 
         <h3>Text Hierarchy</h3>
-        <div class="sf-stack--xs" style="font-size: var(--sf-text-m)">
+        <div class="sf-stack sf-stack--xs" style="font-size: var(--sf-text-m)">
           <p style="color: var(--sf-color-text)">--sf-color-text (primary)</p>
           <p style="color: var(--sf-color-text--secondary)">--sf-color-text--secondary</p>
           <p style="color: var(--sf-color-text--muted)">--sf-color-text--muted</p>
@@ -492,7 +492,7 @@
         </div>
 
         <h3>Borders</h3>
-        <div class="sf-stack--xs">
+        <div class="sf-stack sf-stack--xs">
           <div style="padding: var(--sf-space-xs); border-bottom: 2px solid var(--sf-color-border)"><code>--sf-color-border</code></div>
           <div style="padding: var(--sf-space-xs); border-bottom: 2px solid var(--sf-color-border--subtle)"><code>--sf-color-border--subtle</code></div>
           <div style="padding: var(--sf-space-xs); border-bottom: 2px solid var(--sf-color-border--strong)"><code>--sf-color-border--strong</code></div>
@@ -547,7 +547,7 @@
 
         <h3>Fluid Text Scale (--sf-text-*)</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">All sizes use <code>clamp()</code> — resize the window to see fluid scaling.</p>
-        <div class="sf-stack--xs">
+        <div class="sf-stack sf-stack--xs">
           <div style="font-size: var(--sf-text-2xs)">2xs — The quick brown fox jumps over the lazy dog</div>
           <div style="font-size: var(--sf-text-xs)">xs — The quick brown fox jumps over the lazy dog</div>
           <div style="font-size: var(--sf-text-s)">s — The quick brown fox jumps</div>
@@ -563,7 +563,7 @@
         </div>
 
         <h3>Font Weights</h3>
-        <div class="sf-cluster--l" style="align-items: baseline">
+        <div class="sf-cluster sf-cluster--l" style="align-items: baseline">
           <span style="font-weight: var(--sf-font-weight-body)">body 400 — The quick</span>
           <span style="font-weight: var(--sf-font-weight-heading)">heading 600 — The quick</span>
           <span style="font-weight: var(--sf-font-weight-bold)">bold 700 — The quick</span>
@@ -591,7 +591,7 @@
         </div>
 
         <h3>Letter Spacing (--sf-tracking-*)</h3>
-        <div class="sf-stack--xs">
+        <div class="sf-stack sf-stack--xs">
           <div style="letter-spacing: var(--sf-tracking-tight)"><code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">tracking-tight</code> — THE QUICK BROWN FOX JUMPS OVER</div>
           <div style="letter-spacing: var(--sf-tracking-normal)"><code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">tracking-normal</code> — THE QUICK BROWN FOX JUMPS OVER</div>
           <div style="letter-spacing: var(--sf-tracking-wide)"><code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">tracking-wide</code> — THE QUICK BROWN FOX</div>
@@ -624,7 +624,7 @@
         </blockquote>
 
         <h3>Link States</h3>
-        <div class="sf-cluster--m">
+        <div class="sf-cluster sf-cluster--m">
           <a href="#typography">default link</a>
           <a href="#" style="color: var(--sf-color-link--hover)">hover state</a>
           <a href="#" style="color: var(--sf-color-link--visited)">visited state</a>
@@ -639,7 +639,7 @@
         <h2>Spacing</h2>
         <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">All fluid tokens use <code>clamp()</code> — resize the window to see bars animate.</p>
 
-        <div class="sf-stack--2xs">
+        <div class="sf-stack sf-stack--2xs">
           <div class="demo-space-row">
             <span class="demo-space-label">--sf-space-none</span>
             <div class="demo-space-bar" style="width: 2px; background: var(--sf-color-border)"></div>
@@ -688,7 +688,7 @@
         </div>
 
         <h3>Spacing Aliases</h3>
-        <div class="sf-cluster--m">
+        <div class="sf-cluster sf-cluster--m">
           <code>--sf-gap → --sf-space-m</code>
           <code>--sf-content-gap → --sf-space-s</code>
           <code>--sf-component-pad → --sf-space-m</code>
@@ -724,7 +724,7 @@
         <h2>Border Radius</h2>
         <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">All values multiplied by <code>--sf-radius-scale</code> (1 by default).</p>
 
-        <div class="sf-cluster--l" style="align-items: flex-end">
+        <div class="sf-cluster sf-cluster--l" style="align-items: center">
           <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-none)">none<br>0</div>
           <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-xs)">xs<br>2px</div>
           <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-s)">s<br>4px</div>
@@ -749,7 +749,7 @@
         </div>
 
         <h3>Transitions (motion.css — hover these)</h3>
-        <div class="sf-cluster--m">
+        <div class="sf-cluster sf-cluster--m">
           <button type="button" style="padding: var(--sf-space-s) var(--sf-space-l); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m); cursor: pointer">
             Default transition (fast ease-out)
           </button>
@@ -760,7 +760,7 @@
         </div>
 
         <h3>Easing Curves</h3>
-        <div class="sf-stack--2xs">
+        <div class="sf-stack sf-stack--2xs">
           <div class="demo-ease-row">
             <span class="demo-ease-label">ease-linear</span>
             <div class="demo-ease-track"><div class="demo-ease-ball" style="animation: demo-slide 2s var(--sf-ease-linear) infinite alternate"></div></div>
@@ -788,7 +788,7 @@
         </div>
 
         <h3>Duration Tokens</h3>
-        <div class="sf-cluster--m">
+        <div class="sf-cluster sf-cluster--m">
           <code style="font-size: var(--sf-text-s)">instant: 100ms</code>
           <code style="font-size: var(--sf-text-s)">fast: 150ms</code>
           <code style="font-size: var(--sf-text-s)">normal: 250ms</code>
@@ -797,14 +797,14 @@
         </div>
 
         <h3>States (states.css)</h3>
-        <div class="sf-cluster--l" style="align-items: center; flex-wrap: wrap">
+        <div class="sf-cluster sf-cluster--l" style="align-items: center; flex-wrap: wrap">
           <div>
             <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-loading</p>
             <button class="is-loading" style="padding: var(--sf-space-s) var(--sf-space-l); background: var(--sf-color-primary); border: none; border-radius: var(--sf-radius-m); min-width: 8rem; min-height: 2.5rem">Loading</button>
           </div>
           <div>
             <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-skeleton</p>
-            <div class="sf-stack--xs">
+            <div class="sf-stack sf-stack--xs">
               <div class="is-skeleton" style="width: 14rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
               <div class="is-skeleton" style="width: 10rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
               <div class="is-skeleton" style="width: 12rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
@@ -812,7 +812,7 @@
           </div>
           <div>
             <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-hidden / .is-invisible</p>
-            <div class="sf-cluster--s">
+            <div class="sf-cluster sf-cluster--s">
               <span style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">visible</span>
               <span class="is-hidden" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">hidden (display:none)</span>
               <span class="is-invisible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">invisible (visibility:hidden)</span>
@@ -836,7 +836,7 @@
 
         <h3>Focus Ring (accessibility.css)</h3>
         <p style="font-size: var(--sf-text-s); margin-block-end: var(--sf-space-s)">Tab through these elements to verify <code>:focus-visible</code> ring (2px solid, 2px offset, action color). The ring uses <code>!important</code> so it's never overridden.</p>
-        <div class="sf-cluster--m" style="align-items: center">
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
           <button type="button" style="padding: var(--sf-space-xs) var(--sf-space-m); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); cursor: pointer">Button</button>
           <a href="#accessibility">Link</a>
           <input type="text" placeholder="Text input" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text); width: 10rem">
@@ -854,7 +854,7 @@
         <p style="font-size: var(--sf-text-s)">Hidden from sighted users but available to screen readers:<span class="sr-only"> [THIS TEXT IS SCREEN-READER ONLY — not visible]</span> <em>(check with DevTools or a screen reader)</em></p>
 
         <h3>Disabled States</h3>
-        <div class="sf-cluster--m" style="align-items: center">
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
           <button type="button" disabled style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">[disabled] attr</button>
           <button type="button" class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">.is-disabled class</button>
           <button type="button" aria-disabled="true" style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">[aria-disabled]</button>
@@ -885,10 +885,10 @@
         <h2>Layout — Stack</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-stack</code> — flex column with uniform gap. Modifier suffix sets gap size.</p>
 
-        <div class="sf-cluster--l" style="align-items: flex-start">
+        <div class="sf-cluster sf-cluster--l" style="align-items: flex-start">
           <div>
             <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-stack--xs</code>
-            <div class="sf-stack--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs); max-width: 10rem">
+            <div class="sf-stack sf-stack--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs); max-width: 10rem">
               <div class="demo-box">Item 1</div>
               <div class="demo-box">Item 2</div>
               <div class="demo-box">Item 3</div>
@@ -896,7 +896,7 @@
           </div>
           <div>
             <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-stack--m</code>
-            <div class="sf-stack--m demo-layout-wrap" style="margin-top: var(--sf-space-xs); max-width: 10rem">
+            <div class="sf-stack sf-stack--m demo-layout-wrap" style="margin-top: var(--sf-space-xs); max-width: 10rem">
               <div class="demo-box">Item 1</div>
               <div class="demo-box">Item 2</div>
               <div class="demo-box">Item 3</div>
@@ -904,7 +904,7 @@
           </div>
           <div>
             <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-stack--xl</code>
-            <div class="sf-stack--xl demo-layout-wrap" style="margin-top: var(--sf-space-xs); max-width: 10rem">
+            <div class="sf-stack sf-stack--xl demo-layout-wrap" style="margin-top: var(--sf-space-xs); max-width: 10rem">
               <div class="demo-box">Item 1</div>
               <div class="demo-box">Item 2</div>
               <div class="demo-box">Item 3</div>
@@ -921,7 +921,7 @@
         <h2>Layout — Cluster</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-cluster</code> — flex wrapping group with uniform gap. Ideal for tags, buttons, inline groups.</p>
 
-        <div class="sf-cluster--m demo-layout-wrap">
+        <div class="sf-cluster sf-cluster--m demo-layout-wrap">
           <div class="demo-box">Design tokens</div>
           <div class="demo-box">CSS layers</div>
           <div class="demo-box demo-box--alt">Layout primitives</div>
@@ -1006,26 +1006,26 @@
         <h2>Layout — Frame</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-frame</code> — aspect-ratio container. Media children use <code>object-fit: cover</code>.</p>
 
-        <div class="sf-cluster--l" style="align-items: flex-end">
-          <div class="sf-stack--xs">
+        <div class="sf-cluster sf-cluster--l" style="align-items: flex-end">
+          <div class="sf-stack sf-stack--xs">
             <code style="font-size: var(--sf-text-xs)">sf-frame--video (16:9)</code>
             <div class="sf-frame sf-frame--video" style="width: 14rem; background: var(--sf-color-primary-200, color-mix(in oklch, var(--sf-color-primary) 25%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center">
               <span style="color: var(--sf-color-primary)">16 / 9</span>
             </div>
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <code style="font-size: var(--sf-text-xs)">sf-frame--square (1:1)</code>
             <div class="sf-frame sf-frame--square" style="width: 8rem; background: var(--sf-color-tertiary-200, color-mix(in oklch, var(--sf-color-tertiary) 25%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center">
               <span style="color: var(--sf-color-tertiary)">1 / 1</span>
             </div>
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <code style="font-size: var(--sf-text-xs)">sf-frame--portrait (3:4)</code>
             <div class="sf-frame sf-frame--portrait" style="width: 7rem; background: var(--sf-color-action-200, color-mix(in oklch, var(--sf-color-action) 25%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center">
               <span style="color: var(--sf-color-action)">3 / 4</span>
             </div>
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <code style="font-size: var(--sf-text-xs)">sf-frame--cinema (21:9)</code>
             <div class="sf-frame sf-frame--cinema" style="width: 14rem; background: var(--sf-color-neutral-200, color-mix(in oklch, var(--sf-color-neutral) 25%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center">
               <span style="color: var(--sf-color-neutral)">21 / 9</span>
@@ -1086,7 +1086,7 @@
         <h2>Layout — Container &amp; Section</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-container</code> — centered max-width with horizontal gutters and <code>container-type: inline-size</code>. <code>.sf-section</code> adds vertical padding.</p>
 
-        <div class="sf-stack--m" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
+        <div class="sf-stack sf-stack--m" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
           <div>
             <code style="font-size: var(--sf-text-xs)">sf-container--narrow (38rem)</code>
             <div class="sf-container--narrow" style="margin-top: var(--sf-space-2xs); background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 12%, var(--sf-color-bg))); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); outline: 2px dashed var(--sf-color-primary); font-size: var(--sf-text-s); text-align: center">narrow content</div>
@@ -1169,19 +1169,19 @@
 
         <h3>Form Elements (reset.css + base.css)</h3>
         <div class="sf-grid" style="--sf-grid-min: 14rem; gap: var(--sf-space-m)">
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Text input</label>
             <input type="text" placeholder="Placeholder text" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text); width: 100%">
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Password input</label>
             <input type="password" placeholder="Password" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text); width: 100%">
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Textarea</label>
             <textarea rows="3" placeholder="Enter text..." style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text); width: 100%"></textarea>
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Select</label>
             <select style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text); width: 100%">
               <option>Option Alpha</option>
@@ -1189,14 +1189,14 @@
               <option>Option Gamma</option>
             </select>
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Checkbox, Radio (accent-color)</label>
             <label style="display: flex; align-items: center; gap: var(--sf-space-xs); cursor: pointer"><input type="checkbox" checked> Checked checkbox</label>
             <label style="display: flex; align-items: center; gap: var(--sf-space-xs); cursor: pointer"><input type="checkbox"> Unchecked</label>
             <label style="display: flex; align-items: center; gap: var(--sf-space-xs); cursor: pointer"><input type="radio" name="demo-r" checked> Radio A</label>
             <label style="display: flex; align-items: center; gap: var(--sf-space-xs); cursor: pointer"><input type="radio" name="demo-r"> Radio B</label>
           </div>
-          <div class="sf-stack--xs">
+          <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Range &amp; Progress</label>
             <input type="range" min="0" max="100" value="65" style="width: 100%">
             <progress value="65" max="100" style="width: 100%"></progress>
