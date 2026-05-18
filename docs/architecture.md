@@ -153,8 +153,8 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 
 | Mechanism | Example |
 |-----------|---------|
-| Token override | `:root { --sf-color-primary: #your-color }` |
-| Per-mode color override | `:root { --sf-color-primary-light: #abc; --sf-color-primary-dark: #def }` |
+| Token override (both modes) | `:root { --sf-color-primary: #your-color }` (shadows the `light-dark()` declaration; same color in light and dark) |
+| Per-mode color override | `:root { --sf-color-primary-light: #abc; --sf-color-primary-dark: #def }` (recommended for theme-aware brand customization) |
 | Instance token | `style="--sf-button-radius: var(--sf-radius-full)"` |
 | Layer override | `@layer slashed.overrides { … }` |
 | Unlayered CSS | Author normally |

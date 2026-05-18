@@ -53,32 +53,36 @@
      Light-mode reset for nested sections.
      A section forced to `data-theme="light"` inside a parent
      that has set `--sf-color-X` inline (bypassing the
-     light-dark() infrastructure) inherits that override.
-     This block clears those inherited overrides so the
-     section's `light-dark()` infrastructure (defined on
-     `:root`) takes over again via the cascade.
+     light-dark() infrastructure) inherits that override by
+     computed value. Custom-property inheritance is one parent
+     at a time, NOT a re-lookup against the cascade, so we
+     cannot rely on `: initial` here: the active tokens are
+     unregistered, and `initial` on an unregistered custom
+     property produces the guaranteed-invalid value, which
+     descendants then inherit (their `var()` substitutions
+     fail with no fallback).
 
-     Note: the active `--sf-color-X` tokens are unregistered
-     custom properties holding a `light-dark()` expression.
-     Setting an unregistered custom property to `initial`
-     produces the guaranteed-invalid value on this element,
-     causing `var()` to fall back to its `:root` declaration
-     for descendants — restoring the theme-aware pipeline.
+     Instead, we re-declare the `light-dark()` expression on
+     this element. Because the section also forces
+     `color-scheme: light` (above), the expression resolves
+     to its light branch here, regardless of what any parent
+     declared inline. Descendants inherit a real, theme-aware
+     value.
      ---------------------------------------------------------- */
 
   [data-theme="light"]:not(:root) {
-    --sf-color-primary:   initial;
-    --sf-color-secondary: initial;
-    --sf-color-tertiary:  initial;
-    --sf-color-action:    initial;
-    --sf-color-neutral:   initial;
-    --sf-color-base:      initial;
+    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark));
+    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark));
+    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark));
+    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark));
+    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark));
+    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark));
 
-    --sf-color-success: initial;
-    --sf-color-warning: initial;
-    --sf-color-error:   initial;
-    --sf-color-info:    initial;
-    --sf-color-danger:  initial;
+    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark));
+    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark));
+    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark));
+    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark));
+    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark));
   }
 
 }

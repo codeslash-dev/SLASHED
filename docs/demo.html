@@ -676,7 +676,7 @@
       <section id="colors" class="demo-section">
         <h2>Colors</h2>
 
-        <h3>Brand — light mode (base values)</h3>
+        <h3>Brand — active theme</h3>
         <div class="demo-swatch-row">
           <div class="demo-swatch" style="background: var(--sf-color-primary); color: var(--sf-color-text--on-primary)">primary</div>
           <div class="demo-swatch" style="background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary)">secondary</div>
@@ -1568,8 +1568,8 @@
           const light = 'oklch(0.50 0.18 ' + baseHue + ')';
           // Dark: higher L, slightly lower chroma — same hue family
           const dark  = 'oklch(0.72 0.14 ' + baseHue + ')';
-          applyToken('--sf-color-' + key,        light);
-          applyToken('--sf-color-' + key + '-dark', dark);
+          applyToken('--sf-color-' + key + '-light', light);
+          applyToken('--sf-color-' + key + '-dark',  dark);
         });
         // Re-sync inputs to the new computed values
         inputs.forEach(input => {
