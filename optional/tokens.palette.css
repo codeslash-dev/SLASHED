@@ -3,7 +3,7 @@
    Optional module. Auto-generates tints, shades, and alpha
    variants for the 6 brand color tokens using color-mix(in oklch).
    No build step required.
-   Status colors use --sf-status-X-bg/text/border in core/tokens.css.
+   Status colors use --sf-color-{status}-subtle/muted/strong in core/tokens.css.
 
    Load after core/tokens.css:
      @import "optional/tokens.palette.css";

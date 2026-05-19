@@ -143,37 +143,37 @@
 
   .is-valid {
     --sf-field-border-color: var(--sf-color-success);
-    --sf-field-text-color:   var(--sf-status-success-text);
+    --sf-field-text-color:   var(--sf-color-success-strong);
   }
 
   .is-invalid {
     --sf-field-border-color: var(--sf-color-error);
-    --sf-field-text-color:   var(--sf-status-error-text);
+    --sf-field-text-color:   var(--sf-color-error-strong);
   }
 
   .is-warning {
     --sf-field-border-color: var(--sf-color-warning);
-    --sf-field-text-color:   var(--sf-status-warning-text);
+    --sf-field-text-color:   var(--sf-color-warning-strong);
   }
 
   .is-success {
     --sf-field-border-color: var(--sf-color-success);
-    --sf-field-text-color:   var(--sf-status-success-text);
+    --sf-field-text-color:   var(--sf-color-success-strong);
   }
 
   .is-error {
     --sf-field-border-color: var(--sf-color-error);
-    --sf-field-text-color:   var(--sf-status-error-text);
+    --sf-field-text-color:   var(--sf-color-error-strong);
   }
 
   .is-info {
     --sf-field-border-color: var(--sf-color-info);
-    --sf-field-text-color:   var(--sf-status-info-text);
+    --sf-field-text-color:   var(--sf-color-info-strong);
   }
 
   .is-danger {
     --sf-field-border-color: var(--sf-color-danger);
-    --sf-field-text-color:   var(--sf-status-danger-text);
+    --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
   /* ============================================================

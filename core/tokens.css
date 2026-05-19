@@ -234,40 +234,40 @@
        error = form validation, input errors
        danger = destructive actions (delete, remove)
        ---------------------------------------------------------- */
-    --sf-status-success-bg:     oklch(from var(--sf-color-success) l c h / 0.12);
-    --sf-status-success-text: light-dark(
+    --sf-color-success-subtle: oklch(from var(--sf-color-success) l c h / 0.12);
+    --sf-color-success-strong: light-dark(
       oklch(from var(--sf-color-success-light) calc(l - 0.15) c h),
       oklch(from var(--sf-color-success-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
     );
-    --sf-status-success-border: oklch(from var(--sf-color-success) l c h / 0.3);
+    --sf-color-success-muted:  oklch(from var(--sf-color-success) l c h / 0.3);
 
-    --sf-status-warning-bg:     oklch(from var(--sf-color-warning) l c h / 0.12);
-    --sf-status-warning-text: light-dark(
+    --sf-color-warning-subtle: oklch(from var(--sf-color-warning) l c h / 0.12);
+    --sf-color-warning-strong: light-dark(
       oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h),
       oklch(from var(--sf-color-warning-dark)  clamp(0.70, calc(l + 0.05), 1) c h)
     );
-    --sf-status-warning-border: oklch(from var(--sf-color-warning) l c h / 0.3);
+    --sf-color-warning-muted:  oklch(from var(--sf-color-warning) l c h / 0.3);
 
-    --sf-status-error-bg:       oklch(from var(--sf-color-error) l c h / 0.1);
-    --sf-status-error-text: light-dark(
+    --sf-color-error-subtle:   oklch(from var(--sf-color-error) l c h / 0.1);
+    --sf-color-error-strong: light-dark(
       oklch(from var(--sf-color-error-light) calc(l - 0.1) c h),
       oklch(from var(--sf-color-error-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
     );
-    --sf-status-error-border:   oklch(from var(--sf-color-error) l c h / 0.3);
+    --sf-color-error-muted:    oklch(from var(--sf-color-error) l c h / 0.3);
 
-    --sf-status-info-bg:        oklch(from var(--sf-color-info) l c h / 0.1);
-    --sf-status-info-text: light-dark(
+    --sf-color-info-subtle:    oklch(from var(--sf-color-info) l c h / 0.1);
+    --sf-color-info-strong: light-dark(
       oklch(from var(--sf-color-info-light) calc(l - 0.1) c h),
       oklch(from var(--sf-color-info-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
     );
-    --sf-status-info-border:    oklch(from var(--sf-color-info) l c h / 0.3);
+    --sf-color-info-muted:     oklch(from var(--sf-color-info) l c h / 0.3);
 
-    --sf-status-danger-bg:      oklch(from var(--sf-color-danger) l c h / 0.1);
-    --sf-status-danger-text: light-dark(
+    --sf-color-danger-subtle:  oklch(from var(--sf-color-danger) l c h / 0.1);
+    --sf-color-danger-strong: light-dark(
       oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h),
       oklch(from var(--sf-color-danger-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
     );
-    --sf-status-danger-border:  oklch(from var(--sf-color-danger) l c h / 0.3);
+    --sf-color-danger-muted:   oklch(from var(--sf-color-danger) l c h / 0.3);
 
 
     /* ----------------------------------------------------------
