@@ -4,7 +4,9 @@
 
 A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
-> Work in progress — this README is not final.
+[![release](https://img.shields.io/github/v/release/codeslash-dev/SLASHED?label=version&color=blueviolet&logo=css3)](https://github.com/codeslash-dev/SLASHED/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
+[![license](https://img.shields.io/github/license/codeslash-dev/SLASHED)](LICENSE)
 
 ---
 
@@ -29,11 +31,13 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="optional/tokens.components.css">
 <link rel="stylesheet" href="optional/components.css">
 <link rel="stylesheet" href="optional/utilities.css">
-<link rel="stylesheet" href="optional/themes.css">
-<link rel="stylesheet" href="optional/motion.css">
-
-<!-- optional, load LAST -->
 <link rel="stylesheet" href="optional/legacy.css">
+```
+
+Or use the pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
+
+```html
+<link rel="stylesheet" href="slashed.essential.css">
 ```
 
 ## Cascade layer order
@@ -58,13 +62,48 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.core.css` | `layers` + `tokens` + `reset` + `base` |
-| `slashed.essential.css` | core + `layout` + `states` + `accessibility` + `print` |
-| `slashed.full.css` | everything |
+| `slashed.essential.css` | `layers` + `tokens` + `reset` + `base` + `layout` + `states` + `accessibility` + `print` |
 
-Core ships only as a bundle, so all its tokens live in one
-`tokens.css`. `motion`, `utilities`, `components`, `themes` are
-optional and combinable in any way.
+## Customising tokens
+
+Override the 22 source tokens in your own stylesheet — any valid CSS color works (hex, oklch, hsl…):
+
+```css
+:root {
+  /* light values */
+  --sf-color-primary-light: #3b5bdb;
+  --sf-color-action-light:  #0ca678;
+  --sf-color-neutral-light: #495057;
+  --sf-color-base-light:    #f8f9fa;
+
+  /* dark values */
+  --sf-color-primary-dark:  #748ffc;
+  --sf-color-action-dark:   #38d9a9;
+  --sf-color-neutral-dark:  #adb5bd;
+  --sf-color-base-dark:     #1a1b1e;
+}
+```
+
+Or shorthand with `light-dark()`:
+
+```css
+:root {
+  --sf-color-primary: light-dark(#3b5bdb, #748ffc);
+}
+```
+
+## Dark mode
+
+```html
+<!-- follows OS preference by default -->
+<html>
+
+<!-- force dark -->
+<html data-theme="dark">
+
+<!-- dark section inside light page -->
+<section data-theme="dark">
+```
 
 ## Browser support
 
@@ -72,3 +111,16 @@ Targets modern browsers; requires native cascade layers (floor:
 ~2022 — Safari 15.4, Chrome 99, Firefox 97). `optional/legacy.css`
 smooths remaining gaps inside that window but does **not** extend
 support to pre-`@layer` browsers.
+
+## Development
+
+```sh
+npm run build        # bundle dist/slashed.essential.css
+npm run watch        # rebuild on change
+npm run lint:css     # stylelint all CSS
+npm run lint:css:fix # auto-fix where possible
+npm run release      # bump version, update CHANGELOG, tag & push
+```
+
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
+`CHANGELOG.md` is generated automatically on release.

@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
 
+# Lint staged CSS files
+STAGED_CSS=$(git diff --cached --name-only --diff-filter=ACM | grep '\.css$' || true)
+if [ -n "$STAGED_CSS" ]; then
+  echo "$STAGED_CSS" | tr '\n' '\0' | xargs -0 npx stylelint
+fi
+
+# Rebuild dist bundle and stage it
 node scripts/bundle.js
 output=$(node -e "process.stdout.write(require('./bundle.config.json').output)")
 git add "$output"

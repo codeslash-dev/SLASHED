@@ -23,7 +23,8 @@ function loadConfig() {
 function bundle() {
   const { files, output } = loadConfig();
   const outputPath = resolveInsideRoot(output);
-  const header = `/* ${path.basename(output)} — bundled */\n`;
+  const { version } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  const header = `/* SLASHED v${version} — ${path.basename(output)} */\n`;
 
   const parts = files.map((file) => {
     const filePath = resolveInsideRoot(file);
