@@ -25,7 +25,19 @@ jobs:
         id: changelog
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          NOTES=$(awk "/^## \[?${VERSION}\]?/{found=1; next} found && /^## /{exit} found{print}" CHANGELOG.md)
+          NOTES=$(awk -v target="$VERSION" '
+            $1 == "##" {
+              heading = $2
+              gsub(/^\[/, "", heading)
+              gsub(/\]$/, "", heading)
+              if (found) exit
+              if (heading == target) { found = 1; next }
+            }
+            found { print }
+          ' CHANGELOG.md)
+          if [ -z "$NOTES" ]; then
+            echo "Warning: no CHANGELOG section found for v$VERSION" >&2
+          fi
           echo "notes<<EOF" >> "$GITHUB_OUTPUT"
           echo "$NOTES" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
