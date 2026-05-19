@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLASHED — Demo</title>
-  <!-- SLASHED via jsDelivr CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.essential.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/optional/tokens.palette.css">
+  <!-- SLASHED (local build) -->
+  <link rel="stylesheet" href="../dist/slashed.essential.css">
+  <link rel="stylesheet" href="../optional/tokens.palette.css">
   <style>
     /* ── demo-only overrides ──────────────────────────────── */
     :root {
@@ -502,6 +502,7 @@
         <li><span class="nav-group-label">Tokens</span>
           <ul class="nav-sub">
             <li><a href="#colors">Colors</a></li>
+            <li><a href="#scoped-themes">Scoped Themes</a></li>
             <li><a href="#typography">Typography</a></li>
             <li><a href="#spacing">Spacing</a></li>
             <li><a href="#shadows">Shadows</a></li>
@@ -543,7 +544,7 @@
       <section id="theme-customizer" class="demo-section">
         <h2>Theme Customizer</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
-          Pick a color for any brand or status token in light or dark mode. Changes are applied live to <code>:root</code> via <code>--sf-color-*-light</code> and <code>--sf-color-*-dark</code>. Toggle dark mode in the header to preview the dark palette in context.
+          Override just 6 <code>-light</code> tokens for quick branding; dark mode automatically falls back to the same values so you get a coherent palette with zero extra work. Optionally override the corresponding <code>-dark</code> tokens for full control over each mode. Changes are applied live to <code>:root</code> via <code>--sf-color-*-light</code> and <code>--sf-color-*-dark</code>. Toggle dark mode in the header to preview the dark palette in context.
         </p>
 
         <div class="demo-customizer">
@@ -761,6 +762,68 @@
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a30)">a30</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a50)">a50</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a75)">a75</div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SCOPED THEMES
+      ══════════════════════════════════════════════════════ -->
+      <section id="scoped-themes" class="demo-section">
+        <h2>Scoped Themes</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
+          Use <code>data-theme="dark"</code> or <code>data-theme="light"</code> on any element to scope a theme. Tokens resolve correctly per-section, enabling nested light-inside-dark (or vice-versa) without extra overrides.
+        </p>
+
+        <!-- Dark section nested inside the default light page -->
+        <div data-theme="dark" style="background: var(--sf-color-bg); color: var(--sf-color-text); padding: var(--sf-space-l); border-radius: var(--sf-radius-m); border: 1px solid var(--sf-color-border)">
+          <h3 style="color: var(--sf-color-heading); margin-block-end: var(--sf-space-s)">Dark section <code style="font-size: var(--sf-text-xs)">data-theme="dark"</code></h3>
+
+          <div class="demo-swatch-row">
+            <div class="demo-swatch" style="background: var(--sf-color-primary)">primary</div>
+            <div class="demo-swatch" style="background: var(--sf-color-secondary)">secondary</div>
+            <div class="demo-swatch" style="background: var(--sf-color-tertiary)">tertiary</div>
+            <div class="demo-swatch" style="background: var(--sf-color-action)">action</div>
+            <div class="demo-swatch" style="background: var(--sf-color-neutral)">neutral</div>
+            <div class="demo-swatch" style="background: var(--sf-color-base)">base</div>
+          </div>
+
+          <div class="sf-stack sf-stack--xs" style="font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">
+            <p style="color: var(--sf-color-text)">--sf-color-text (primary)</p>
+            <p style="color: var(--sf-color-text--secondary)">--sf-color-text--secondary</p>
+            <p style="color: var(--sf-color-text--muted)">--sf-color-text--muted</p>
+          </div>
+
+          <div class="sf-cluster sf-cluster--m">
+            <div style="background: var(--sf-color-success-subtle); color: var(--sf-color-success-strong); border: 1px solid var(--sf-color-success-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Success</div>
+            <div style="background: var(--sf-color-warning-subtle); color: var(--sf-color-warning-strong); border: 1px solid var(--sf-color-warning-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Warning</div>
+            <div style="background: var(--sf-color-error-subtle); color: var(--sf-color-error-strong); border: 1px solid var(--sf-color-error-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Error</div>
+          </div>
+
+          <!-- Light section nested inside the dark section -->
+          <div data-theme="light" style="background: var(--sf-color-bg); color: var(--sf-color-text); padding: var(--sf-space-l); border-radius: var(--sf-radius-m); border: 1px solid var(--sf-color-border); margin-block-start: var(--sf-space-l)">
+            <h3 style="color: var(--sf-color-heading); margin-block-end: var(--sf-space-s)">Light section (nested) <code style="font-size: var(--sf-text-xs)">data-theme="light"</code></h3>
+
+            <div class="demo-swatch-row">
+              <div class="demo-swatch" style="background: var(--sf-color-primary)">primary</div>
+              <div class="demo-swatch" style="background: var(--sf-color-secondary)">secondary</div>
+              <div class="demo-swatch" style="background: var(--sf-color-tertiary)">tertiary</div>
+              <div class="demo-swatch" style="background: var(--sf-color-action)">action</div>
+              <div class="demo-swatch" style="background: var(--sf-color-neutral)">neutral</div>
+              <div class="demo-swatch" style="background: var(--sf-color-base)">base</div>
+            </div>
+
+            <div class="sf-stack sf-stack--xs" style="font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">
+              <p style="color: var(--sf-color-text)">--sf-color-text (primary)</p>
+              <p style="color: var(--sf-color-text--secondary)">--sf-color-text--secondary</p>
+              <p style="color: var(--sf-color-text--muted)">--sf-color-text--muted</p>
+            </div>
+
+            <div class="sf-cluster sf-cluster--m">
+              <div style="background: var(--sf-color-success-subtle); color: var(--sf-color-success-strong); border: 1px solid var(--sf-color-success-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Success</div>
+              <div style="background: var(--sf-color-warning-subtle); color: var(--sf-color-warning-strong); border: 1px solid var(--sf-color-warning-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Warning</div>
+              <div style="background: var(--sf-color-error-subtle); color: var(--sf-color-error-strong); border: 1px solid var(--sf-color-error-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Error</div>
+            </div>
+          </div>
         </div>
       </section>
 
