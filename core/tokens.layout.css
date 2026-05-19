@@ -4,6 +4,16 @@
    Load before: core/layout.css
    Layer: slashed.tokens
    Prefix: --sf-
+
+   ZALEŻNOŚCI — wymaga tokens.css (załadowanego wcześniej).
+   Aliasy spacing dziedziczą z BEM consumer API w tokens.css:
+     --sf-space-gap     → var(--sf-gap)         z tokens.css
+     --sf-space-content → var(--sf-content-gap) z tokens.css
+   Nadpisz --sf-gap lub --sf-content-gap żeby zmienić gapy
+   we wszystkich layout primitives jednocześnie.
+
+   Każdy layout primitive (cluster, grid, sidebar…) ma własne
+   tokeny (--sf-cluster-gap itd.) do lokalnego nadpisania.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -12,8 +22,8 @@
     /* ----------------------------------------------------------
        Shared spacing aliases
        ---------------------------------------------------------- */
-    --sf-space-gap:     var(--sf-space-m);   /* component-level gap */
-    --sf-space-content: var(--sf-space-s);   /* within-component rhythm */
+    --sf-space-gap:     var(--sf-gap);       /* component-level gap */
+    --sf-space-content: var(--sf-content-gap);   /* within-component rhythm */
 
     /* ----------------------------------------------------------
        Stack

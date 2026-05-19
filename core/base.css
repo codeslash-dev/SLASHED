@@ -184,7 +184,7 @@
   }
 
   ::backdrop {
-    background-color: var(--sf-color-backdrop, var(--sf-color-dim));
+    background-color: var(--sf-color-dim);
   }
 
   optgroup { font: inherit; }
