@@ -1,4 +1,4 @@
-/* slashed.essential.css — bundled */
+/* SLASHED v0.1.0 — slashed.essential.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -27,22 +27,25 @@
 @layer slashed.tokens {
 
   /* ============================================================
-     @property — BRAND COLORS (light + dark)
-     These are the only colors a theme needs to define.
+     @property — BRAND COLORS (light + dark source tokens)
+     These are the 12 tokens a theme needs to override.
      Everything else is derived automatically.
+
+     Override example:
+       :root {
+         --sf-color-primary-light: #3b5bdb;
+         --sf-color-primary-dark:  #748ffc;
+       }
+     Or in one go using light-dark():
+       :root { --sf-color-primary: light-dark(#3b5bdb, #748ffc); }
      ============================================================ */
 
-  /* primary  = brand identity (indigo)
-     action   = interactive / links / focus / CTA (cyan-teal — distinct from primary)
-     error    = validation / message of failure (orange-red)
-     danger   = destructive operation (deep crimson — distinct from error) */
-
-  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.20 264); }
-  @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(0.25 0.03 260); }
-  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 310); }
-  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(0.60 0.16 210); }
-  @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.02 260); }
-  @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(0.98 0.005 260); }
+  @property --sf-color-primary-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.20 264); }
+  @property --sf-color-secondary-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.25 0.03 260); }
+  @property --sf-color-tertiary-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 310); }
+  @property --sf-color-action-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.60 0.16 210); }
+  @property --sf-color-neutral-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.02 260); }
+  @property --sf-color-base-light      { syntax: "<color>"; inherits: true; initial-value: oklch(0.98 0.005 260); }
 
   @property --sf-color-primary-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.15 264); }
   @property --sf-color-secondary-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.80 0.02 260); }
@@ -53,11 +56,11 @@
 
   /* @property — STATUS COLORS (light + dark) */
 
-  @property --sf-color-success      { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.17 150); }
-  @property --sf-color-warning      { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
-  @property --sf-color-error        { syntax: "<color>"; inherits: true; initial-value: oklch(0.62 0.20 35);  }
-  @property --sf-color-info         { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.15 240); }
-  @property --sf-color-danger       { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.24 12);  }
+  @property --sf-color-success-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.17 150); }
+  @property --sf-color-warning-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
+  @property --sf-color-error-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.62 0.20 35);  }
+  @property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.15 240); }
+  @property --sf-color-danger-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.24 12);  }
 
   @property --sf-color-success-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.17 150); }
   @property --sf-color-warning-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.82 0.15 80);  }
@@ -65,10 +68,13 @@
   @property --sf-color-info-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.68 0.14 240); }
   @property --sf-color-danger-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.62 0.21 12);  }
 
+  /* Mode flag — drives formula direction for non-color dark overrides.
+     Set by base.css via color-scheme switches. */
+  @property --sf-is-dark { syntax: "<integer>"; inherits: true; initial-value: 0; }
+
 
   /* ============================================================
      DERIVED SEMANTIC TOKENS
-     All computed from the 22 base colors above.
      ============================================================ */
 
   :root {
@@ -79,7 +85,27 @@
     --sf-color-scheme: light dark;
 
     /* ----------------------------------------------------------
-       Surfaces — derived from --sf-color-base
+       Resolved color tokens — auto-switch via light-dark().
+       Components reference these. Override the -light / -dark
+       source tokens above to customise; or override these directly
+       with your own light-dark() expression.
+       ---------------------------------------------------------- */
+    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark));
+    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark));
+    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark));
+    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark));
+    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark));
+    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark));
+
+    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark));
+    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark));
+    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark));
+    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark));
+    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark));
+
+
+    /* ----------------------------------------------------------
+       Surfaces — derived from --sf-color-base (auto-adapts)
        ---------------------------------------------------------- */
     --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
     --sf-color-surface: var(--sf-color-base);
@@ -90,24 +116,40 @@
 
 
     /* ----------------------------------------------------------
-       Text — derived from --sf-color-neutral
-       clamp() ensures safe output for any neutral value.
+       Text — light and dark require opposite formula directions,
+       so each side of light-dark() references its source token.
        ---------------------------------------------------------- */
-    --sf-color-text:              oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4),  0.35) c h);
-    --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) clamp(0.15, calc(l - 0.25), 0.45) c h);
-    --sf-color-text--muted:       var(--sf-color-neutral);
-    --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) clamp(0.45, calc(l + 0.15), 0.75) c h);
-    --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.25), 0.82) c h);
-    --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l + 0.4) c h);
-    --sf-color-heading:           oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4),  0.35) c h);
+    --sf-color-text: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.70, calc(l + 0.25), 1)    c h)
+    );
+    --sf-color-text--secondary: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25), 0.45) c h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.55, calc(l + 0.1),  0.90) c h)
+    );
+    --sf-color-text--muted: var(--sf-color-neutral);
+    --sf-color-text--placeholder: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.35, calc(l - 0.1),  0.65) c h)
+    );
+    --sf-color-text--disabled: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.25, calc(l - 0.2),  0.55) c h)
+    );
+    --sf-color-text--inverse: light-dark(
+      oklch(from var(--sf-color-neutral-light) calc(l + 0.4) c h),
+      oklch(from var(--sf-color-neutral-dark)  calc(l - 0.4) c h)
+    );
+    --sf-color-heading: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.70, calc(l + 0.25), 1)    c h)
+    );
 
 
     /* ----------------------------------------------------------
-       Text-on-color — auto white or dark based on source luminance.
-       sign(0.6 - l): +1 when dark bg (l<0.6) → light text (0.95),
-                      -1 when light bg (l>0.6) → dark text  (0.10).
-       Works automatically in dark mode: tokens reference the active
-       color which is already swapped to its -dark variant.
+       Text-on-color — sign(0.6 - l) * 999 is mode-agnostic:
+       auto-selects light or dark text based on background luminance.
+       Uses resolved tokens — works for any user-supplied color.
        ---------------------------------------------------------- */
     --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
     --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
@@ -124,18 +166,32 @@
 
 
     /* ----------------------------------------------------------
-       Borders — derived from --sf-color-neutral
+       Borders — direction-dependent, reference source tokens.
+       Light: borders are lighter than neutral (l + offset).
+       Dark:  borders are darker  than neutral (l - offset).
        ---------------------------------------------------------- */
-    --sf-color-border:              oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h);
-    --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h);
-    --sf-color-border--strong:      oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1),  0.85) 0.02  h);
+    --sf-color-border: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)
+    );
+    --sf-color-border--subtle: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.20, calc(l - 0.38), 0.45) 0.005 h)
+    );
+    --sf-color-border--strong: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1),  0.85) 0.02  h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.38, calc(l - 0.1),  0.65) 0.02  h)
+    );
     --sf-color-border--focus:       var(--sf-color-action);
-    --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h);
+    --sf-color-border--disabled: light-dark(
+      oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
+      oklch(from var(--sf-color-neutral-dark)  clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)
+    );
     --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
 
 
     /* ----------------------------------------------------------
-       Links — derived from --sf-color-action
+       Links — derived from --sf-color-action (auto-adapts)
        ---------------------------------------------------------- */
     --sf-color-link:            var(--sf-color-action);
     --sf-color-link--hover:     oklch(from var(--sf-color-action) calc(l + 0.1) c h);
@@ -145,7 +201,7 @@
 
 
     /* ----------------------------------------------------------
-       Interactive states — derived from --sf-color-neutral
+       Interactive states — derived from --sf-color-neutral (auto-adapts)
        ---------------------------------------------------------- */
     --sf-color-bg--hover:    oklch(from var(--sf-color-neutral) l c h / 0.08);
     --sf-color-bg--active:   oklch(from var(--sf-color-neutral) l c h / 0.12);
@@ -164,31 +220,47 @@
 
 
     /* ----------------------------------------------------------
-       Status triplets — auto-derived (bg / text / border)
+       Status triplets — bg/border use same formula both modes;
+       text is direction-dependent so uses source tokens.
        ---------------------------------------------------------- */
     --sf-status-success-bg:     oklch(from var(--sf-color-success) l c h / 0.12);
-    --sf-status-success-text:   oklch(from var(--sf-color-success) calc(l - 0.15) c h);
+    --sf-status-success-text: light-dark(
+      oklch(from var(--sf-color-success-light) calc(l - 0.15) c h),
+      oklch(from var(--sf-color-success-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
+    );
     --sf-status-success-border: oklch(from var(--sf-color-success) l c h / 0.3);
 
     --sf-status-warning-bg:     oklch(from var(--sf-color-warning) l c h / 0.12);
-    --sf-status-warning-text:   oklch(from var(--sf-color-warning) calc(l - 0.25) c h);
+    --sf-status-warning-text: light-dark(
+      oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h),
+      oklch(from var(--sf-color-warning-dark)  clamp(0.70, calc(l + 0.05), 1) c h)
+    );
     --sf-status-warning-border: oklch(from var(--sf-color-warning) l c h / 0.3);
 
     --sf-status-error-bg:       oklch(from var(--sf-color-error) l c h / 0.1);
-    --sf-status-error-text:     oklch(from var(--sf-color-error) calc(l - 0.1) c h);
+    --sf-status-error-text: light-dark(
+      oklch(from var(--sf-color-error-light) calc(l - 0.1) c h),
+      oklch(from var(--sf-color-error-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
+    );
     --sf-status-error-border:   oklch(from var(--sf-color-error) l c h / 0.3);
 
     --sf-status-info-bg:        oklch(from var(--sf-color-info) l c h / 0.1);
-    --sf-status-info-text:      oklch(from var(--sf-color-info) calc(l - 0.1) c h);
+    --sf-status-info-text: light-dark(
+      oklch(from var(--sf-color-info-light) calc(l - 0.1) c h),
+      oklch(from var(--sf-color-info-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
+    );
     --sf-status-info-border:    oklch(from var(--sf-color-info) l c h / 0.3);
 
     --sf-status-danger-bg:      oklch(from var(--sf-color-danger) l c h / 0.1);
-    --sf-status-danger-text:    oklch(from var(--sf-color-danger) calc(l - 0.1) c h);
+    --sf-status-danger-text: light-dark(
+      oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h),
+      oklch(from var(--sf-color-danger-dark)  clamp(0.70, calc(l + 0.15), 1) c h)
+    );
     --sf-status-danger-border:  oklch(from var(--sf-color-danger) l c h / 0.3);
 
 
     /* ----------------------------------------------------------
-       Gradients — derived from brand colors
+       Gradients — derived from brand colors (auto-adapt)
        ---------------------------------------------------------- */
     --sf-gradient-primary:   linear-gradient(135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h));
     --sf-gradient-secondary: linear-gradient(135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h));
@@ -203,8 +275,9 @@
 
 
     /* ----------------------------------------------------------
-       Shadow glow & disabled
+       Shadow — strength scales up in dark mode via --sf-is-dark
        ---------------------------------------------------------- */
+    --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
     --sf-shadow-glow-color: var(--sf-color-primary);
     --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / calc(0.4 * var(--sf-shadow-strength) * 5));
     --sf-opacity-disabled:  0.45;
@@ -378,7 +451,6 @@
     /* ----------------------------------------------------------
        Shadows
        ---------------------------------------------------------- */
-    --sf-shadow-strength: 0.08;
     --sf-shadow-color:    220 40% 2%;
 
     --sf-shadow-none:  none;
@@ -812,128 +884,17 @@
     color-scheme: var(--sf-color-scheme, light dark);
   }
 
-  /* OS preference — auto-switch when no data-theme is set */
+  /* OS preference — activates when no data-theme is set on :root */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      --sf-color-primary:   var(--sf-color-primary-dark);
-      --sf-color-secondary: var(--sf-color-secondary-dark);
-      --sf-color-tertiary:  var(--sf-color-tertiary-dark);
-      --sf-color-action:    var(--sf-color-action-dark);
-      --sf-color-neutral:   var(--sf-color-neutral-dark);
-      --sf-color-base:      var(--sf-color-base-dark);
-
-      --sf-color-success: var(--sf-color-success-dark);
-      --sf-color-warning: var(--sf-color-warning-dark);
-      --sf-color-error:   var(--sf-color-error-dark);
-      --sf-color-info:    var(--sf-color-info-dark);
-      --sf-color-danger:  var(--sf-color-danger-dark);
-
-      /* Text — inverted direction for dark backgrounds, clamped for any neutral value */
-      --sf-color-text:              oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
-      --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1),  0.90) c h);
-      --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1),  0.65) c h);
-      --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2),  0.55) c h);
-      --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4) c h);
-      --sf-color-heading:           oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
-
-      /* Borders — adjusted for dark backgrounds, clamped for any neutral value */
-      --sf-color-border:              oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
-      --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h);
-      --sf-color-border--strong:      oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1),  0.65) 0.02  h);
-      --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
-      --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
-
-      /* Shadow strength — more visible on dark surfaces */
-      --sf-shadow-strength: 0.25;
-
-      /* Status text — lightened for dark backgrounds, clamped */
-      --sf-status-success-text: oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h);
-      --sf-status-warning-text: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
-      --sf-status-error-text:   oklch(from var(--sf-color-error)   clamp(0.70, calc(l + 0.15), 1) c h);
-      --sf-status-info-text:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
-      --sf-status-danger-text:  oklch(from var(--sf-color-danger)  clamp(0.70, calc(l + 0.15), 1) c h);
+      color-scheme: dark;
+      --sf-is-dark: 1;
     }
   }
 
-  [data-theme="light"] {
-    color-scheme: light;
-  }
-
-  [data-theme="dark"] {
-    color-scheme: dark;
-  }
-
-  /* ----------------------------------------------------------
-     Dark mode — swap brand & status colors to -dark variants.
-     Works on :root (whole page) or any element (section-level).
-
-     NOTE: The derived semantic overrides (text, border, shadow,
-     status text) are duplicated in the @media block above.
-     CSS has no syntax to share declarations across a media
-     condition and a selector — keep both blocks in sync.
-     ---------------------------------------------------------- */
-
-  [data-theme="dark"] {
-    --sf-color-primary:   var(--sf-color-primary-dark);
-    --sf-color-secondary: var(--sf-color-secondary-dark);
-    --sf-color-tertiary:  var(--sf-color-tertiary-dark);
-    --sf-color-action:    var(--sf-color-action-dark);
-    --sf-color-neutral:   var(--sf-color-neutral-dark);
-    --sf-color-base:      var(--sf-color-base-dark);
-
-    --sf-color-success: var(--sf-color-success-dark);
-    --sf-color-warning: var(--sf-color-warning-dark);
-    --sf-color-error:   var(--sf-color-error-dark);
-    --sf-color-info:    var(--sf-color-info-dark);
-    --sf-color-danger:  var(--sf-color-danger-dark);
-
-    /* Text — inverted direction for dark backgrounds, clamped for any neutral value */
-    --sf-color-text:              oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
-    --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1),  0.90) c h);
-    --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1),  0.65) c h);
-    --sf-color-text--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2),  0.55) c h);
-    --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) calc(l - 0.4) c h);
-    --sf-color-heading:           oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25), 1)    c h);
-
-    /* Borders — adjusted for dark backgrounds, clamped for any neutral value */
-    --sf-color-border:              oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
-    --sf-color-border--subtle:      oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h);
-    --sf-color-border--strong:      oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1),  0.65) 0.02  h);
-    --sf-color-border--disabled:    oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
-    --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
-
-    /* Shadow strength — more visible on dark surfaces */
-    --sf-shadow-strength: 0.25;
-
-    /* Status text — lightened for dark backgrounds, clamped */
-    --sf-status-success-text: oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h);
-    --sf-status-warning-text: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
-    --sf-status-error-text:   oklch(from var(--sf-color-error)   clamp(0.70, calc(l + 0.15), 1) c h);
-    --sf-status-info-text:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
-    --sf-status-danger-text:  oklch(from var(--sf-color-danger)  clamp(0.70, calc(l + 0.15), 1) c h);
-  }
-
-  /* ----------------------------------------------------------
-     Light mode — resets colors to their @property initial-value.
-     Works for light sections inside a dark page.
-     The keyword `initial` on a registered @property reverts
-     to the value defined in @property { initial-value: ... }.
-     ---------------------------------------------------------- */
-
-  [data-theme="light"]:not(:root) {
-    --sf-color-primary:   initial;
-    --sf-color-secondary: initial;
-    --sf-color-tertiary:  initial;
-    --sf-color-action:    initial;
-    --sf-color-neutral:   initial;
-    --sf-color-base:      initial;
-
-    --sf-color-success: initial;
-    --sf-color-warning: initial;
-    --sf-color-error:   initial;
-    --sf-color-info:    initial;
-    --sf-color-danger:  initial;
-  }
+  /* Explicit theme — works on :root (whole page) or any element (section-level) */
+  [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
+  [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
 
   body {
     font-family:      var(--sf-body-font-family, var(--sf-font-body));

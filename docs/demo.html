@@ -543,7 +543,7 @@
       <section id="theme-customizer" class="demo-section">
         <h2>Theme Customizer</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
-          Pick a color for any brand or status token in light or dark mode. Changes are applied live to <code>:root</code> via <code>--sf-color-*</code> and <code>--sf-color-*-dark</code>. Toggle dark mode in the header to preview the dark palette in context.
+          Pick a color for any brand or status token in light or dark mode. Changes are applied live to <code>:root</code> via <code>--sf-color-*-light</code> and <code>--sf-color-*-dark</code>. Toggle dark mode in the header to preview the dark palette in context.
         </p>
 
         <div class="demo-customizer">
@@ -554,28 +554,28 @@
             <div class="demo-customizer-group">
               <span class="demo-customizer-group-label">Brand</span>
               <div class="demo-customizer-grid" data-mode="light" data-group="brand">
-                <label for="cz-l-primary">--sf-color-primary</label>
-                <input id="cz-l-primary"   type="color" data-token="--sf-color-primary">
+                <label for="cz-l-primary">--sf-color-primary-light</label>
+                <input id="cz-l-primary"   type="color" data-token="--sf-color-primary-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-primary"></span>
 
-                <label for="cz-l-secondary">--sf-color-secondary</label>
-                <input id="cz-l-secondary" type="color" data-token="--sf-color-secondary">
+                <label for="cz-l-secondary">--sf-color-secondary-light</label>
+                <input id="cz-l-secondary" type="color" data-token="--sf-color-secondary-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-secondary"></span>
 
-                <label for="cz-l-tertiary">--sf-color-tertiary</label>
-                <input id="cz-l-tertiary"  type="color" data-token="--sf-color-tertiary">
+                <label for="cz-l-tertiary">--sf-color-tertiary-light</label>
+                <input id="cz-l-tertiary"  type="color" data-token="--sf-color-tertiary-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-tertiary"></span>
 
-                <label for="cz-l-action">--sf-color-action</label>
-                <input id="cz-l-action"    type="color" data-token="--sf-color-action">
+                <label for="cz-l-action">--sf-color-action-light</label>
+                <input id="cz-l-action"    type="color" data-token="--sf-color-action-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-action"></span>
 
-                <label for="cz-l-neutral">--sf-color-neutral</label>
-                <input id="cz-l-neutral"   type="color" data-token="--sf-color-neutral">
+                <label for="cz-l-neutral">--sf-color-neutral-light</label>
+                <input id="cz-l-neutral"   type="color" data-token="--sf-color-neutral-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-neutral"></span>
 
-                <label for="cz-l-base">--sf-color-base</label>
-                <input id="cz-l-base"      type="color" data-token="--sf-color-base">
+                <label for="cz-l-base">--sf-color-base-light</label>
+                <input id="cz-l-base"      type="color" data-token="--sf-color-base-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-base"></span>
               </div>
             </div>
@@ -583,24 +583,24 @@
             <div class="demo-customizer-group">
               <span class="demo-customizer-group-label">Status</span>
               <div class="demo-customizer-grid" data-mode="light" data-group="status">
-                <label for="cz-l-success">--sf-color-success</label>
-                <input id="cz-l-success" type="color" data-token="--sf-color-success">
+                <label for="cz-l-success">--sf-color-success-light</label>
+                <input id="cz-l-success" type="color" data-token="--sf-color-success-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-success"></span>
 
-                <label for="cz-l-warning">--sf-color-warning</label>
-                <input id="cz-l-warning" type="color" data-token="--sf-color-warning">
+                <label for="cz-l-warning">--sf-color-warning-light</label>
+                <input id="cz-l-warning" type="color" data-token="--sf-color-warning-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-warning"></span>
 
-                <label for="cz-l-error">--sf-color-error</label>
-                <input id="cz-l-error"   type="color" data-token="--sf-color-error">
+                <label for="cz-l-error">--sf-color-error-light</label>
+                <input id="cz-l-error"   type="color" data-token="--sf-color-error-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-error"></span>
 
-                <label for="cz-l-info">--sf-color-info</label>
-                <input id="cz-l-info"    type="color" data-token="--sf-color-info">
+                <label for="cz-l-info">--sf-color-info-light</label>
+                <input id="cz-l-info"    type="color" data-token="--sf-color-info-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-info"></span>
 
-                <label for="cz-l-danger">--sf-color-danger</label>
-                <input id="cz-l-danger"  type="color" data-token="--sf-color-danger">
+                <label for="cz-l-danger">--sf-color-danger-light</label>
+                <input id="cz-l-danger"  type="color" data-token="--sf-color-danger-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-danger"></span>
               </div>
             </div>
@@ -1570,8 +1570,8 @@
           const light = 'oklch(0.50 0.18 ' + baseHue + ')';
           // Dark: higher L, slightly lower chroma — same hue family
           const dark  = 'oklch(0.72 0.14 ' + baseHue + ')';
-          applyToken('--sf-color-' + key,        light);
-          applyToken('--sf-color-' + key + '-dark', dark);
+          applyToken('--sf-color-' + key + '-light', light);
+          applyToken('--sf-color-' + key + '-dark',  dark);
         });
         // Re-sync inputs to the new computed values
         inputs.forEach(input => {
