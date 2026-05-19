@@ -3,11 +3,11 @@
    @layer slashed.tokens
 
    ARCHITEKTURA — 3 warstwy:
-     1. @property source tokens  — animowalne, 12 tokenów do nadpisania przy themowaniu
+     1. @property source tokens  — animowalne, 11 par (6 brand + 5 status) do nadpisania przy themowaniu
      2. Resolved semantic tokens — light-dark() auto-switch bez JS
      3. Derived tokens           — relative color syntax (auto-kontrast, odcienie)
 
-   THEMOWANIE — nadpisz tylko źródłowe 12 par -light/-dark:
+   THEMOWANIE — nadpisz źródłowe pary -light/-dark (6 brand + 5 status):
      :root {
        --sf-color-primary-light: oklch(0.45 0.20 264);
        --sf-color-primary-dark:  oklch(0.70 0.15 264);
