@@ -7,12 +7,21 @@
      2. Resolved semantic tokens — light-dark() auto-switch bez JS
      3. Derived tokens           — relative color syntax (auto-kontrast, odcienie)
 
-   THEMOWANIE — nadpisz źródłowe pary -light/-dark (6 brand + 5 status):
+   THEMOWANIE — quick branding: override 6 -light tokens.
+     Dark mode falls back to the same value when no -dark override is set.
+     For full control of both modes, optionally override the 6 -dark tokens too.
+
+     Minimal 6-token override:
      :root {
-       --sf-color-primary-light: oklch(0.45 0.20 264);
-       --sf-color-primary-dark:  oklch(0.70 0.15 264);
+       --sf-color-primary-light:   oklch(0.45 0.20 264);
+       --sf-color-secondary-light: oklch(0.25 0.03 260);
+       --sf-color-tertiary-light:  oklch(0.55 0.14 310);
+       --sf-color-action-light:    oklch(0.60 0.16 210);
+       --sf-color-neutral-light:   oklch(0.55 0.02 260);
+       --sf-color-base-light:      oklch(0.98 0.005 260);
      }
-     Wszystkie pochodne tokeny dostosują się automatycznie.
+     All derived tokens adapt automatically.
+     To fine-tune dark mode, add the corresponding -dark tokens.
 
    BEM CONSUMER API — większość tokenów jest celowo nieużywana przez
    framework. Tokeny takie jak --sf-shadow-*, --sf-blur-*, --sf-gap,
@@ -92,18 +101,18 @@
        source tokens above to customise; or override these directly
        with your own light-dark() expression.
        ---------------------------------------------------------- */
-    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark));
-    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark));
-    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark));
-    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark));
-    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark));
-    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark));
+    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark, var(--sf-color-primary-light)));
+    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, var(--sf-color-secondary-light)));
+    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark, var(--sf-color-tertiary-light)));
+    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark, var(--sf-color-action-light)));
+    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark, var(--sf-color-neutral-light)));
+    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark, var(--sf-color-base-light)));
 
-    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark));
-    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark));
-    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark));
-    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark));
-    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark));
+    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, var(--sf-color-success-light)));
+    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, var(--sf-color-warning-light)));
+    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark, var(--sf-color-error-light)));
+    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark, var(--sf-color-info-light)));
+    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark, var(--sf-color-danger-light)));
 
 
     /* ----------------------------------------------------------
