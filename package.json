@@ -1,6 +1,6 @@
 {
   "name": "slashed",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "CSS framework",
   "scripts": {
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
@@ -8,7 +8,9 @@
     "watch": "node scripts/bundle.js --watch",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
-    "release": "release-it"
+    "release": "release-it",
+    "release:minor": "release-it --increment minor",
+    "release:major": "release-it --increment major"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",

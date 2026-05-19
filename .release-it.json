@@ -1,5 +1,6 @@
 {
   "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+  "increment": "patch",
   "git": {
     "commitMessage": "chore(release): v${version}",
     "tagName": "v${version}",
@@ -20,7 +21,8 @@
     "@release-it/conventional-changelog": {
       "preset": { "name": "angular" },
       "infile": "CHANGELOG.md",
-      "header": "# Changelog\n"
+      "header": "# Changelog\n",
+      "ignoreRecommendedBump": true
     }
   }
 }
