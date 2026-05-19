@@ -12,7 +12,7 @@
     /* ----------------------------------------------------------
        Shared spacing aliases
        ---------------------------------------------------------- */
-    --sf-space-gap:     var(--sf-space-m);   /* component-level gap */
+    --sf-space-gap:     var(--sf-gap);       /* component-level gap */
     --sf-space-content: var(--sf-space-s);   /* within-component rhythm */
 
     /* ----------------------------------------------------------

@@ -160,10 +160,7 @@
       oklch(from var(--sf-color-neutral-dark)  clamp(0.38, calc(l - 0.1),  0.65) 0.02  h)
     );
     --sf-color-border--focus:       var(--sf-color-action);
-    --sf-color-border--disabled: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
-      oklch(from var(--sf-color-neutral-dark)  clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)
-    );
+    --sf-color-border--disabled: oklch(from var(--sf-color-border--subtle) l 0 h / 0.5);
     --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
 
 
@@ -175,6 +172,7 @@
     --sf-color-link--active:    oklch(from var(--sf-color-action) calc(l + 0.15) c h);
     --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 40));
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
+    --sf-color-link--disabled:  var(--sf-color-text--disabled);
 
 
     /* ----------------------------------------------------------
@@ -193,12 +191,23 @@
        ---------------------------------------------------------- */
     --sf-color-selection-bg:   oklch(from var(--sf-color-action) l c h / 0.22);
     --sf-color-selection-text: inherit;
+    --sf-color-mark-bg:        oklch(from var(--sf-color-warning) l c h / 0.25);
+    --sf-color-mark-text:      inherit;
     --sf-color-dim:            oklch(0 0 0 / 0.5);
+
+
+    /* ----------------------------------------------------------
+       Scrollbar
+       ---------------------------------------------------------- */
+    --sf-scrollbar-thumb: var(--sf-color-neutral);
+    --sf-scrollbar-track: transparent;
 
 
     /* ----------------------------------------------------------
        Status triplets — bg/border use same formula both modes;
        text is direction-dependent so uses source tokens.
+       error = form validation, input errors
+       danger = destructive actions (delete, remove)
        ---------------------------------------------------------- */
     --sf-status-success-bg:     oklch(from var(--sf-color-success) l c h / 0.12);
     --sf-status-success-text: light-dark(
@@ -468,6 +477,7 @@
     /* ----------------------------------------------------------
        Motion & easing
        ---------------------------------------------------------- */
+    --sf-duration-none:    0ms;
     --sf-duration-instant: calc(100ms * var(--sf-motion-scale));
     --sf-duration-fast:    calc(150ms * var(--sf-motion-scale));
     --sf-duration-normal:  calc(250ms * var(--sf-motion-scale));
@@ -583,11 +593,10 @@
     /* ----------------------------------------------------------
        Spacing aliases
        ---------------------------------------------------------- */
-    --sf-gap:             var(--sf-space-m);
-    --sf-content-gap:     var(--sf-space-s);
-    --sf-component-pad:   var(--sf-space-m);
-    --sf-field-block:     var(--sf-space-l);
-    --sf-prose-paragraph: var(--sf-space-m);
+    --sf-gap:           var(--sf-space-m);
+    --sf-content-gap:   var(--sf-space-s);
+    --sf-component-pad: var(--sf-space-m);
+    --sf-field-block:   var(--sf-space-l);
 
 
     /* ----------------------------------------------------------
