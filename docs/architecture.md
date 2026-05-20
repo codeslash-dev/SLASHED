@@ -128,7 +128,30 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 
 1. **Fluid tokens** — `--sf-space-*`, `--sf-text-*` use `clamp()`. No `@media` needed.
 2. **Container primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-alternate`, `.sf-bento` use `@container`. Note: `.sf-container` sets `container-type: inline-size` making it a query container for its children.
-3. **Breakpoints** — `sm: 30em / md: 48em / lg: 64em / xl: 80em`. Last resort.
+3. **Container query tokens** — component-scoped thresholds, preferred over `@media`:
+
+   | Token            | Value | Px equivalent |
+   |------------------|-------|---------------|
+   | `--sf-cq-xs`     | `20em` |  320px |
+   | `--sf-cq-sm`     | `30em` |  480px |
+   | `--sf-cq-md`     | `48em` |  768px |
+   | `--sf-cq-lg`     | `64em` | 1024px |
+   | `--sf-cq-xl`     | `80em` | 1280px |
+
+   Usage: `@container (min-width: var(--sf-cq-md)) { … }`
+
+4. **Breakpoints** — last-resort viewport thresholds for global layout decisions:
+
+   | Token            | Value | Px equivalent |
+   |------------------|-------|---------------|
+   | `--sf-bp-xs`     | `20em` |  320px |
+   | `--sf-bp-sm`     | `30em` |  480px |
+   | `--sf-bp-md`     | `48em` |  768px |
+   | `--sf-bp-lg`     | `64em` | 1024px |
+   | `--sf-bp-xl`     | `80em` | 1280px |
+   | `--sf-bp-2xl`    | `96em` | 1536px |
+
+   Usage: `@media (min-width: var(--sf-bp-md)) { … }`
 
 ---
 

@@ -869,6 +869,31 @@
        ---------------------------------------------------------- */
     --sf-prose-paragraph: var(--sf-space-content);
 
+    /* ----------------------------------------------------------
+       Breakpoints
+       Last-resort min-width thresholds for legacy `@media` rules.
+       Container queries are preferred (see container-query sizes).
+       Use as: `@media (min-width: var(--sf-bp-md))`
+       ---------------------------------------------------------- */
+    --sf-bp-xs:  20em;   /*  320px */
+    --sf-bp-sm:  30em;   /*  480px */
+    --sf-bp-md:  48em;   /*  768px */
+    --sf-bp-lg:  64em;   /* 1024px */
+    --sf-bp-xl:  80em;   /* 1280px */
+    --sf-bp-2xl: 96em;   /* 1536px */
+
+    /* ----------------------------------------------------------
+       Container query sizes
+       Component-scoped breakpoints. Mirror the global breakpoints
+       through `xl` (no `2xl` — components rarely need it).
+       Use as: `@container (min-width: var(--sf-cq-md))`
+       ---------------------------------------------------------- */
+    --sf-cq-xs: 20em;   /*  320px */
+    --sf-cq-sm: 30em;   /*  480px */
+    --sf-cq-md: 48em;   /*  768px */
+    --sf-cq-lg: 64em;   /* 1024px */
+    --sf-cq-xl: 80em;   /* 1280px */
+
   }
 }
 
