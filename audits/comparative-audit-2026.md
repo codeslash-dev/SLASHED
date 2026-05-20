@@ -162,17 +162,17 @@ Cells: ✓ ships | 🟡 partial | ● missing | ⚫ out-of-scope | 📦 stub
 @property --sf-color-primary-light { syntax: "<color>"; inherits: true; ... }
 --sf-color-primary: light-dark(var(--sf-color-primary-light), ...);
 ```
-**Browser reality:**
+**Browser reality:** (verified: 2026-05-20)
 - `light-dark()` → Chrome 123 (Mar 2024), Safari 17.5 (Apr 2024), Firefox 120 (Nov 2023). Chrome 99 and Firefox 97 do not support it.
 - `@property` with `inherits: true` → Firefox 128 (Jul 2024). Firefox 97 does not support it.
 - `sign()` in `calc()` → Chrome 99+, Firefox 118+ (Safari 15.4 supports it). Firefox 97 does not.
 
-**Compared to:** Tailwind v4 — explicitly documents "Chrome 111, Safari 16.4, Firefox 128" as the floor: https://tailwindcss.com/docs/compatibility
+**Compared to:** Tailwind v4 — explicitly documents "Chrome 111, Safari 16.4, Firefox 128" as the floor: https://tailwindcss.com/docs/compatibility (verified: 2026-05-20)
 
 **Impact:** A developer who trusts the README and deploys to Firefox <120 will see the entire color system fail silently — all colors collapse to `initial`, producing white-on-white or invisible text.
 
 **Recommendation:** Update README and architecture.md to state the true floor:
-```
+```text
 Requires: Chrome 123+ | Safari 17.5+ | Firefox 128+
 (light-dark() and @property with inherits drive the color system)
 ```
@@ -496,9 +496,9 @@ But `--sf-transition-base` in tokens.css encourages `all`.
   html { interpolate-size: allow-keywords; }
 }
 ```
-As of early 2026, `interpolate-size` has landed in Safari 18 (shipped September 2024) and is under active development in Firefox (behind a flag). The comment "no Firefox/Safari as of 2026" is factually inaccurate.
+As of early 2026, `interpolate-size` has landed in Safari 18 (shipped September 2024) and is under active development in Firefox (behind a flag). The comment "no Firefox/Safari as of 2026" is factually inaccurate. (verified: 2026-05-20)
 
-**Compared to:** Can I Use confirms Safari 18+ support for `interpolate-size`. This does not cause a bug (the `@supports` guard is correct), only documentation drift.
+**Compared to:** Can I Use confirms Safari 18+ support for `interpolate-size` (verified: 2026-05-20). This does not cause a bug (the `@supports` guard is correct), only documentation drift.
 
 **Impact:** Developers may skip testing `interpolate-size` behavior in Safari, missing actual behavior that now applies.
 
@@ -588,7 +588,7 @@ All other `--sf-radius-*` tokens use `calc(Npx * var(--sf-radius-scale))`. `--sf
 
 ---
 
-### F-21 — `--sf-sf-color-link--visited` hue-shifts by 40° but may collide with other brand hues
+### F-21 — `--sf-color-link--visited` hue-shifts by 40° but may collide with other brand hues
 **Severity:** low
 **Category:** a11y
 **Evidence:** `tokens.css:200`:
@@ -731,7 +731,7 @@ For the default action color (h=210, cyan-blue), visited becomes h=250 (indigo-b
 ## 8. Appendix A — Full SLASHED Selector Inventory
 
 ### core/reset.css (slashed.reset)
-```
+```text
 *, *::before, *::after
 html
 body
@@ -753,7 +753,7 @@ dialog, [popover]
 ```
 
 ### core/base.css (slashed.base)
-```
+```text
 :root
 @media (prefers-color-scheme: dark) > :root:not([data-theme])
 [data-theme="light"]
@@ -799,7 +799,7 @@ optgroup
 ```
 
 ### core/layout.css (slashed.layout)
-```
+```text
 .sf-section
 .sf-section--s
 .sf-section--m
@@ -931,7 +931,7 @@ optgroup
 ```
 
 ### core/states.css (slashed.states)
-```
+```text
 .is-hidden
 .is-invisible
 .is-visible
@@ -973,7 +973,7 @@ optgroup
 ```
 
 ### core/motion.css (slashed.motion)
-```
+```text
 @media (prefers-reduced-motion: no-preference) > html
 @media (prefers-reduced-motion: no-preference) > html:focus-within
 @media (prefers-reduced-motion: no-preference) > a, button, input, select, textarea, summary
@@ -998,7 +998,7 @@ optgroup
 ```
 
 ### core/accessibility.css (slashed.accessibility)
-```
+```text
 :focus:not(:focus-visible)
 :focus-visible
 @media (prefers-reduced-motion: reduce) > :root
@@ -1017,7 +1017,7 @@ optgroup
 ```
 
 ### core/print.css (slashed.print)
-```
+```text
 @media print > @page
 @media print > *, *::before, *::after
 @media print > a[href]::after
@@ -1040,7 +1040,7 @@ optgroup
 No selectors — only custom property declarations in `:root { }`.
 
 ### optional/legacy.css (slashed.legacy)
-```
+```text
 @supports not (height: 100dvh) > body
 @supports not selector(:focus-visible) > :focus
 @supports not (scrollbar-gutter: stable) > html
@@ -1458,6 +1458,8 @@ Per brand color (primary, secondary, tertiary, action, neutral, base):
 ---
 
 ## 10. Appendix C — Sources Cited
+
+All URLs verified: 2026-05-20.
 
 | Resource | URL |
 |---|---|
