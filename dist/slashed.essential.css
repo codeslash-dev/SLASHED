@@ -1871,11 +1871,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Keyboard navigation must not be hijacked by smooth scroll. */
-    html:focus-within {
-      scroll-behavior: auto;
-    }
-
     /* Broadens the base.css link transition to all interactive
        elements and the full set of animatable UI properties. */
     a, button, input, select, textarea, summary {
