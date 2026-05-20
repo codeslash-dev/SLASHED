@@ -47,7 +47,7 @@
   @property --sf-color-tertiary-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 310); }
   @property --sf-color-action-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.60 0.16 210); }
   @property --sf-color-neutral-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.02 260); }
-  @property --sf-color-base-light      { syntax: "<color>"; inherits: true; initial-value: oklch(0.98 0.005 260); }
+  @property --sf-color-base-light      { syntax: "<color>"; inherits: true; initial-value: oklch(0.96 0.005 260); }
 
   @property --sf-color-primary-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.15 264); }
   @property --sf-color-secondary-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.80 0.02 260); }
@@ -478,8 +478,8 @@
                        0 12px 36px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3.5)),
                        0 24px 72px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2.5));
     --sf-shadow-2xl:   0 4px 12px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.6)),
-                       0 20px 60px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 4)),
-                       0 40px 100px -8px   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 5));
+                       0 20px 60px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3)),
+                       0 40px 100px -8px   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3.8));
     --sf-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
 
 

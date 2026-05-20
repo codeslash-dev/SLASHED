@@ -239,7 +239,7 @@
   .sf-frame--video    { aspect-ratio: var(--sf-ratio-video); }
   .sf-frame--cinema   { aspect-ratio: var(--sf-ratio-cinema); }
   .sf-frame--portrait { aspect-ratio: var(--sf-ratio-portrait); }
-  .sf-frame--4-3      { aspect-ratio: var(--sf-ratio-photo); }
+  .sf-frame--4-3      { aspect-ratio: 4 / 3; }
   .sf-frame--3-2      { aspect-ratio: 3 / 2; }
   .sf-frame--golden   { aspect-ratio: var(--sf-ratio-golden); }
 
