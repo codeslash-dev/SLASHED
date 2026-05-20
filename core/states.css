@@ -56,13 +56,15 @@
      LOADING / ASYNC FEEDBACK
      ============================================================ */
 
-  .is-loading {
+  .is-loading,
+  [aria-busy="true"] {
     color:          transparent !important;
     pointer-events: none;
     position:       relative;
   }
 
-  .is-loading::after {
+  .is-loading::after,
+  [aria-busy="true"]::after {
     content:       "";
     position:      absolute;
     inset-block-start:   50%;
@@ -175,6 +177,17 @@
     --sf-field-border-color: var(--sf-color-danger);
     --sf-field-text-color:   var(--sf-color-danger-strong);
   }
+
+  /* ============================================================
+     :HAS() FORM PATTERNS
+     ============================================================
+     Flag-only patterns: set scoped CSS variables that consumer
+     components can read. They do NOT impose any styles —
+     selectors target consumer authorial classes (.sf-form, .sf-field). */
+  .sf-form:has(.is-invalid)         { --sf-form-has-error: 1; }
+  .sf-form:has(.is-loading)         { --sf-form-is-loading: 1; }
+  .sf-field:has(:user-invalid),
+  .sf-field:has(.is-invalid)        { --sf-field-error: 1; }
 
   /* ============================================================
      POSITION / STICKINESS
