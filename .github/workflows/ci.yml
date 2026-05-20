@@ -33,3 +33,25 @@ jobs:
         with:
           name: dist
           path: dist/
+
+  size-budget:
+    name: Size budget
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Check bundle size
+        run: |
+          SIZE=$(wc -c < dist/slashed.essential.css)
+          MAX=$((110 * 1024))
+          echo "size: $SIZE bytes / budget: $MAX bytes"
+          if [ "$SIZE" -gt "$MAX" ]; then
+            echo "::error::Bundle size $SIZE exceeds budget $MAX (110 KB)"
+            exit 1
+          fi

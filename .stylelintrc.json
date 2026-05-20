@@ -18,6 +18,10 @@
       "ignoreFunctions": ["sign", "light-dark"]
     }],
 
+    "at-rule-no-deprecated": true,
+    "declaration-property-value-no-unknown": true,
+    "media-feature-name-value-no-unknown": true,
+
     "lightness-notation": null,
     "hue-degree-notation": null,
 
