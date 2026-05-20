@@ -202,9 +202,20 @@ for (const theme of ['light', 'dark']) {
       }
     });
 
-    test('on-color text meets at least AA Large (3:1)', () => {
-      for (const [name, ratio] of Object.entries(data.onColor)) {
-        expect(ratio, `on-${name}`).toBeGreaterThanOrEqual(3);
+    test('on-color text meets WCAG AA Normal (4.5:1)', () => {
+      // After Phase 2's default-tightening (tertiary L 0.55→0.48,
+      // neutral L 0.55→0.45) every brand and status colour ships with
+      // an on-* foreground that clears 4.5:1. The binary `sign(0.6-l)`
+      // threshold flips text from white-on-dark to black-on-light at
+      // L=0.6, so any user-supplied colour landing near that threshold
+      // (e.g. L=0.55..0.65) may need an explicit override of its
+      // matching --sf-color-text--on-* token. See architecture.md.
+      const FAMILIES = [
+        'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
+        'success', 'warning', 'error', 'info', 'danger',
+      ];
+      for (const name of FAMILIES) {
+        expect(data.onColor[name], `on-${name}`).toBeGreaterThanOrEqual(4.5);
       }
     });
 

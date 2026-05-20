@@ -15,9 +15,9 @@
      :root {
        --sf-color-primary-light:   oklch(0.45 0.20 264);
        --sf-color-secondary-light: oklch(0.25 0.03 260);
-       --sf-color-tertiary-light:  oklch(0.55 0.14 310);
+       --sf-color-tertiary-light:  oklch(0.48 0.14 310);
        --sf-color-action-light:    oklch(0.60 0.16 210);
-       --sf-color-neutral-light:   oklch(0.55 0.02 260);
+       --sf-color-neutral-light:   oklch(0.45 0.02 260);
        --sf-color-base-light:      oklch(0.98 0.005 260);
      }
      Full per-mode control (add -dark overrides):
@@ -49,17 +49,17 @@
 
   @property --sf-color-primary-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.20 264); }
   @property --sf-color-secondary-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.25 0.03 260); }
-  @property --sf-color-tertiary-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.14 310); }
+  @property --sf-color-tertiary-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.14 310); }
   @property --sf-color-action-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.60 0.16 210); }
-  @property --sf-color-neutral-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.02 260); }
+  @property --sf-color-neutral-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.02 260); }
   @property --sf-color-base-light      { syntax: "<color>"; inherits: true; initial-value: oklch(0.98 0.005 260); }
 
   /* @property — STATUS COLORS (-light source tokens) */
 
-  @property --sf-color-success-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.17 150); }
+  @property --sf-color-success-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.17 150); }
   @property --sf-color-warning-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
   @property --sf-color-error-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.62 0.20 35);  }
-  @property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.55 0.15 240); }
+  @property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.15 240); }
   @property --sf-color-danger-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.24 12);  }
 
   /* Mode flag — drives formula direction for non-color dark overrides.
@@ -135,7 +135,7 @@
       oklch(from var(--sf-color-neutral)       clamp(0.25, calc(l - 0.2),  0.55) c h)
     );
     --sf-color-text--inverse: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.4), 1)    c h),
+      oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h),
       oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
     );
     --sf-color-heading: light-dark(
@@ -197,7 +197,11 @@
       oklch(from var(--sf-color-action) clamp(0, calc(l - 0.15), 1) c h),
       oklch(from var(--sf-color-action) clamp(0, calc(l + 0.15), 1) c h)
     );
-    --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 40));
+    /* Visited link — 60° hue shift from action gives clearly distinct
+       chroma without colliding with default tertiary (h ≈ 310). If your
+       brand puts action and tertiary close in hue, override directly:
+         :root { --sf-color-link--visited: #6b46c1; } */
+    --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 60));
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
 
