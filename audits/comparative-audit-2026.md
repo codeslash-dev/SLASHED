@@ -655,7 +655,7 @@ For the default action color (h=210, cyan-blue), visited becomes h=250 (indigo-b
 |---------|--------|--------|
 | **F-01** | Update README browser floor to Chrome 123 / Safari 17.5 / Firefox 128 | XS |
 | **F-03** | Replace `#999` in `print.css:65` with `var(--sf-color-border--strong)` | XS |
-| **F-06** | Lower `--sf-color-tertiary-light` default L to ≤0.48, or raise sign() threshold to 0.55 | S |
+| ~~**F-06**~~ | ~~Lower `--sf-color-tertiary-light` default L to ≤0.48, or raise sign() threshold to 0.55~~ — resolved in Phase 2 (tertiary/success/info L→0.48, neutral L→0.45) | — |
 | ~~**F-08**~~ | ~~Fix `--sf-color-link--hover` to darken in light mode~~ — already fixed; finding stale | — |
 | ~~**F-11**~~ | ~~Add `clamp(0, …, 0.7)` guard to `--sf-shadow-2xl` third layer~~ — already fixed; finding stale | — |
 | **F-02** | Implement at minimum `.sf-btn`, `.sf-input`, `.sf-alert` components | L |
@@ -1484,4 +1484,17 @@ Findings resolved subsequent to publication. This section is updated as remediat
 | N-02 (new) | Duplicate `:root { color-scheme }` removed from `base.css`; sole declaration lives on `html` in `reset.css`. |
 | N-03 (new) | Dead arithmetic in `--sf-shadow-glow` (`0.4 * X * 5`) collapsed to `X * 2`. |
 
-Remaining open: F-02 (out of scope per project decision), F-04, F-06, F-09, F-10, F-13, F-14, F-17, F-18, F-21, N-01, N-04, N-05.
+Remaining open: F-02 (out of scope per project decision), F-04, F-10, F-13, F-14, F-17, F-18, N-01, N-04, N-05.
+
+### Phase 2 — Contrast discipline (`chore/phase-2-contrast`, 2026-05-20)
+
+| Finding | Resolution |
+|---|---|
+| F-06 | Defaults lowered for the four families that previously fell below WCAG AA Normal with the binary `sign(0.6 - l)` text-color picker: `--sf-color-tertiary-light` `0.55→0.48`, `--sf-color-neutral-light` `0.55→0.45`, `--sf-color-success-light` `0.55→0.48`, `--sf-color-info-light` `0.55→0.48`. Verified empirically (culori sRGB → WCAG luminance) and by the test-suite change below. The audit only called out tertiary and neutral; success and info were latent failures the original suite missed because of its 3:1 threshold. |
+| F-09 | `--sf-color-text--inverse` light-mode clamp widened from `clamp(0.70, …, 1)` to `clamp(0.85, …, 0.98)`. Inverse ink can no longer collapse to medium grey on a near-black inverse surface. |
+| F-21 | `--sf-color-link--visited` hue shift increased from `+40°` to `+60°`. Inline comment now points integrators at the direct override path for brands where action and tertiary hues sit close together. |
+| N-01 (new) | `tests/tokens.spec.js` raised the on-color contrast threshold from 3:1 to 4.5:1 across all 11 brand and status families. The previous lower bar would have masked the regression captured by F-06. |
+
+`docs/architecture.md` — "Known intentional tradeoffs" rewritten to declare the AA Normal default contract and identify `warning` as the single documented exception.
+
+Remaining open: F-02 (out of scope per project decision), F-04, F-10, F-13, F-14, F-17, F-18, N-04, N-05.
