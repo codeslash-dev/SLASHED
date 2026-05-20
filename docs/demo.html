@@ -514,6 +514,7 @@
             <li><a href="#motion">Motion &amp; States</a></li>
             <li><a href="#accessibility">Accessibility</a></li>
             <li><a href="#reset-base">Reset &amp; Base</a></li>
+            <li><a href="#print">Print</a></li>
           </ul>
         </li>
         <li><span class="nav-group-label">Layout</span>
@@ -1633,6 +1634,56 @@
         <p style="font-size: var(--sf-text-s)">All elements: <code>box-sizing: border-box</code>. Media (<code>img, video, svg</code>): <code>display: block; max-width: 100%</code>. Margins/padding removed globally. <code>scrollbar-gutter: stable</code> prevents layout shift.</p>
       </section>
 
+      <!-- ══════════════════════════════════════════════════════
+           PRINT
+      ══════════════════════════════════════════════════════ -->
+      <section id="print" class="demo-section">
+        <h2>Print</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
+          SLASHED's print stylesheet preserves authored colour by default — open print preview (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>P</kbd>) to compare. Two opt-in classes adjust the contract: <code>.print-color-exact</code> forces colours when the browser would flatten them, <code>.print-no-color</code> opts back into ink-on-paper.
+        </p>
+
+        <h3>Default — authored colour survives</h3>
+        <p>
+          <mark>Highlighted text in <code>&lt;mark&gt;</code></mark> stays yellow in print.
+          <span style="color: var(--sf-color-success-strong); font-weight: var(--sf-font-weight-bold)">Success-coloured text</span> stays green.
+          <span style="color: var(--sf-color-error-strong); font-weight: var(--sf-font-weight-bold)">Error-coloured text</span> stays red.
+          External links carry their <code>href</code> in parentheses: visit <a href="https://github.com/codeslash-dev/SLASHED">the SLASHED repo</a>.
+        </p>
+
+        <h3>.no-print — vanishes from print</h3>
+        <p>
+          The badge below disappears from printed output:
+          <span class="no-print" style="background: var(--sf-color-tertiary); color: var(--sf-color-text--on-tertiary); padding: var(--sf-space-2xs) var(--sf-space-xs); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); font-weight: var(--sf-font-weight-bold); margin-inline-start: var(--sf-space-2xs)">SCREEN-ONLY</span>
+        </p>
+
+        <h3>.print-color-exact — force colour preservation</h3>
+        <div class="print-color-exact" style="background: var(--sf-color-info-subtle); border-inline-start: 4px solid var(--sf-color-info); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          Colour-coded callouts that lose meaning when a browser flattens them. <code>print-color-adjust: exact</code> guarantees the tinted background reaches paper.
+        </div>
+
+        <h3>.print-no-color — opt back into ink-on-paper</h3>
+        <div class="print-no-color" style="background: var(--sf-color-warning-subtle); border-inline-start: 4px solid var(--sf-color-warning); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); margin-block-start: var(--sf-space-s)">
+          On screen this matches the callout above. In print preview the background goes transparent and text falls back to system colour. Use where ink-saving is the contract (corporate boilerplate forms, append-to-existing-document templates).
+        </div>
+
+        <h3>Manual verification checklist</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">Open print preview and confirm each of the following.</p>
+        <ol style="list-style: decimal; padding-inline-start: 1.5em; font-size: var(--sf-text-s)">
+          <li><code>&lt;mark&gt;</code> retains its yellow background (the test for F-04).</li>
+          <li>Success and error text retain their colour.</li>
+          <li>The SCREEN-ONLY badge is absent.</li>
+          <li>The <code>.print-color-exact</code> callout retains its tinted background.</li>
+          <li>The <code>.print-no-color</code> callout has lost its background.</li>
+          <li>The repo link shows its <code>href</code> in parentheses.</li>
+          <li>The <code>Open print preview</code> button below is absent (it carries <code>.no-print</code>).</li>
+        </ol>
+
+        <p style="margin-block-start: var(--sf-space-m)">
+          <button type="button" id="print-trigger" class="no-print" style="padding: var(--sf-space-xs) var(--sf-space-m); border-radius: var(--sf-radius-m); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none; cursor: pointer; font-weight: var(--sf-font-weight-bold)">Open print preview</button>
+        </p>
+      </section>
+
     </main>
   </div>
 
@@ -1828,6 +1879,10 @@
         el.style.animation = '';    // restore the class-driven animation
       });
     });
+
+    // Print-section convenience trigger.
+    const printBtn = document.getElementById('print-trigger');
+    if (printBtn) printBtn.addEventListener('click', () => window.print());
   </script>
 
 </body>

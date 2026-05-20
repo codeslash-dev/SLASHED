@@ -664,7 +664,7 @@ For the default action color (h=210, cyan-blue), visited becomes h=250 (indigo-b
 
 | Finding | Change | Effort |
 |---------|--------|--------|
-| **F-04** | Scope print background-transparent reset; add `.print-color-exact` escape | S |
+| ~~**F-04**~~ | ~~Scope print background-transparent reset; add `.print-color-exact` escape~~ — resolved in Phase 3 (default preserves authored colour; `.print-color-exact` and `.print-no-color` opt-ins) | — |
 | **F-05** / **F-12** | Move `[data-theme]` rules to `core/themes.css` targeting `slashed.themes` | S |
 | **F-07** | Move `@keyframes sf-spin` and `sf-shimmer` to `motion.css` | XS |
 | **F-10** | Name the `.sf-container` container; use named `@container` queries | S |
@@ -1498,3 +1498,11 @@ Remaining open: F-02 (out of scope per project decision), F-04, F-10, F-13, F-14
 `docs/architecture.md` — "Known intentional tradeoffs" rewritten to declare the AA Normal default contract and identify `warning` as the single documented exception.
 
 Remaining open: F-02 (out of scope per project decision), F-04, F-10, F-13, F-14, F-17, F-18, N-04, N-05.
+
+### Phase 3 — Print colour preservation (`chore/phase-3-print`, 2026-05-20)
+
+| Finding | Resolution |
+|---|---|
+| F-04 | The blanket `* { background: transparent !important; color: CanvasText !important }` reset is gone. Default contract: authored colour reaches paper. Two opt-in classes provide control: `.print-color-exact` forces colour-faithful rendering (`print-color-adjust: exact`) for colour-coded data, `.print-no-color` opts back into the legacy ink-on-paper flatten for the marked subtree. `box-shadow` and `text-shadow` are still suppressed in print but no longer with `!important` — an authored shadow that explicitly survives is now the consumer's call. `!important` in print is now reserved for selectors that defeat consumer-authored CSS by semantic necessity: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes. `docs/demo.html` ships a new `#print` section with a manual-verification checklist. `docs/architecture.md` updated. CHANGELOG opens with this as a BREAKING entry. |
+
+Remaining open: F-02 (out of scope per project decision), F-10, F-13, F-14, F-17, F-18, N-04, N-05.
