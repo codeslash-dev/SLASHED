@@ -470,18 +470,6 @@
 
 
     /* ----------------------------------------------------------
-       Breakpoints — values only (no media-query utilities).
-       Use in your own @media / @container queries.
-       ---------------------------------------------------------- */
-    --sf-breakpoint-xs:  20rem;   /* 320px  */
-    --sf-breakpoint-s:   40rem;   /* 640px  */
-    --sf-breakpoint-m:   48rem;   /* 768px  */
-    --sf-breakpoint-l:   64rem;   /* 1024px */
-    --sf-breakpoint-xl:  80rem;   /* 1280px */
-    --sf-breakpoint-2xl: 96rem;   /* 1536px */
-
-
-    /* ----------------------------------------------------------
        Aspect ratios
        ---------------------------------------------------------- */
     --sf-ratio-square:   1;
