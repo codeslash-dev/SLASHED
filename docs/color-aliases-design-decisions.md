@@ -1,53 +1,63 @@
-# Decyzje projektowe: Warstwa aliasów kolorystycznych dla SLASHED
+# Design decisions: color-alias layer for SLASHED
 
-## Kontekst i problem
+> **Status:** Decisions 1–4 and 6–7 are **implemented** in
+> `optional/tokens.palette.css` (full 50–950 numeric scale, a5–a95 alpha,
+> shade aliases, functional aliases). Decision 5 (status mini-palette) was
+> **already covered** in `core/tokens.css` via the
+> `--sf-color-{status}-subtle/muted/strong` triplets, so it is not duplicated
+> in the palette file. This document is the design record behind those tokens.
 
-Framework SLASHED posiada trójwarstwową architekturę kolorów:
-1. **Source tokens** (`@property`) - 11 par `-light`/`-dark` do themowania
-2. **Resolved tokens** - `--sf-color-primary` via `light-dark()` auto-switch
-3. **Palette (optional)** - numeryczne odcienie 100-900 + alpha a10-a75
+## Context and problem
 
-Brakuje warstwy **semantycznych aliasów**, która:
-- Daje czytelne, samodokumentujące nazwy (`--sf-color-primary-xdark` zamiast `--sf-color-primary-900`)
-- Pozwala na globalne remapowanie jednym nadpisaniem (zmiana `xdark` z 950 na 800 zmienia całą stronę)
-- Oddziela intencję od implementacji
+SLASHED has a three-layer color architecture:
+1. **Source tokens** (`@property`) — 11 `-light`/`-dark` pairs for theming
+2. **Resolved tokens** — `--sf-color-primary` via `light-dark()` auto-switch
+3. **Palette (optional)** — numeric shades + alpha variants
 
----
-
-## Decyzja 1: Rozszerzenie palety numerycznej
-
-**Obecna skala**: 100, 200, 300, 400, 600, 700, 800, 900 (8 kroków, brak 500/50/950)
-
-**Nowa skala**: 50, 100, 200, 300, 400, **500**, 600, 700, 800, 900, 950 (11 kroków)
-
-- `500` = alias do `var(--sf-color-primary)` (base kolor)
-- `50` = najjaśniejszy (prawie biały z nutą koloru)
-- `950` = najciemniejszy (prawie czarny z nutą koloru)
-- Model zgodny z Tailwind (de facto standard w branży)
-
-**Dotyczy**: 6 brand colors (primary, secondary, tertiary, action, neutral, base)
+What was missing is a layer of **semantic aliases** that:
+- Gives readable, self-documenting names (`--sf-color-primary-xdark` instead of
+  `--sf-color-primary-900`)
+- Allows global remapping with a single override (changing `xdark` from 950 to
+  800 shifts the whole page)
+- Separates intent from implementation
 
 ---
 
-## Decyzja 2: Rozszerzenie skali alfa
+## Decision 1: Extend the numeric scale
 
-**Obecna skala**: a10, a20, a30, a50, a75 (5 kroków, niesymetryczna)
+**Old scale**: 100, 200, 300, 400, 600, 700, 800, 900 (8 steps, missing 50/500/950)
 
-**Nowa skala**: a5, a10, a20, a30, a40, a50, a60, a70, a80, a90, a95 (11 kroków)
+**New scale**: 50, 100, 200, 300, 400, **500**, 600, 700, 800, 900, 950 (11 steps)
 
-- Symetryczna z zagęszczeniem na krańcach (a5 i a95)
-- Środek co 10pp
-- a5 = subtelne tła, hovers
-- a95 = prawie opaque, przydatne dla overlays
-- Pełne 100% nie jest potrzebne - to jest sam base kolor
+- `500` = alias for `var(--sf-color-primary)` (the base color)
+- `50` = lightest (near-white with a hint of color)
+- `950` = darkest (near-black with a hint of color)
+- Model matches Tailwind (the de facto industry standard)
 
-**Dotyczy**: 6 brand colors
+**Applies to**: 6 brand colors (primary, secondary, tertiary, action, neutral, base)
 
 ---
 
-## Decyzja 3: Aliasy semantyczne odcieniowe (6 per brand color)
+## Decision 2: Extend the alpha scale
 
-```
+**Old scale**: a10, a20, a30, a50, a75 (5 steps, asymmetric)
+
+**New scale**: a5, a10, a20, a30, a40, a50, a60, a70, a80, a90, a95 (11 steps)
+
+- Symmetric, denser at the extremes (a5 and a95)
+- Middle steps every 10pp
+- a5 = subtle backgrounds, hovers
+- a95 = nearly opaque, useful for overlays
+- Full 100% isn't needed — that's the base color itself
+- The old off-grid `a75` is dropped; `a70`/`a80` cover its range.
+
+**Applies to**: 6 brand colors
+
+---
+
+## Decision 3: Semantic shade aliases (6 per brand color)
+
+```text
 --sf-color-{color}-superlight  → 50
 --sf-color-{color}-xlight      → 200
 --sf-color-{color}-lighter     → 400
@@ -57,23 +67,25 @@ Brakuje warstwy **semantycznych aliasów**, która:
 --sf-color-{color}-superdark   → 950
 ```
 
-**Logika nazewnicza**:
-- 3 stopnie po jasnej stronie: `superlight` > `xlight` > `lighter`
-- 3 stopnie po ciemnej stronie: `darker` > `xdark` > `superdark`
-- Forma comparative (`-er`) = najbliżej base
-- Prefix `x-` = dalej od base
-- Prefix `super-` = ekstrema
-- Symetria jest natychmiast czytelna
+**Naming logic**:
+- 3 steps on the light side: `superlight` > `xlight` > `lighter`
+- 3 steps on the dark side: `darker` > `xdark` > `superdark`
+- Comparative form (`-er`) = closest to base
+- Prefix `x-` = farther from base
+- Prefix `super-` = the extremes
+- The symmetry is immediately readable
 
-**Dlaczego nie `-light`/`-dark`**: zajęte przez source tokens (`--sf-color-primary-light` = wartość dla light mode). Suffix `-er` eliminuje kolizję i jednocześnie sugeruje bliskość do base.
+**Why not `-light`/`-dark`**: those are taken by the source tokens
+(`--sf-color-primary-light` = the light-mode value). The `-er` suffix avoids the
+collision and also signals proximity to base.
 
-**Dotyczy**: 6 brand colors (primary, secondary, tertiary, action, neutral, base)
+**Applies to**: 6 brand colors (primary, secondary, tertiary, action, neutral, base)
 
 ---
 
-## Decyzja 4: Aliasy funkcjonalne (per brand color)
+## Decision 4: Functional aliases (per brand color)
 
-```
+```text
 --sf-color-{color}-hover    → var(--sf-color-{color}-darker)
 --sf-color-{color}-active   → var(--sf-color-{color}-xdark)
 --sf-color-{color}-subtle   → var(--sf-color-{color}-a10)
@@ -81,99 +93,114 @@ Brakuje warstwy **semantycznych aliasów**, która:
 --sf-color-{color}-ghost    → var(--sf-color-{color}-a5)
 ```
 
-- Opisują intencję, nie wygląd
-- Wskazują na inne aliasy (nie bezpośrednio na numerykę) - chain of aliases, jedno nadpisanie propaguje
-- `hover`/`active` = interakcje
-- `subtle`/`muted`/`ghost` = transparentne warianty od ledwo widocznego do delikatnego
+- They describe intent, not appearance
+- They point at other aliases (not directly at numerics) — a chain of aliases, so
+  one override propagates
+- `hover`/`active` = interactions
+- `subtle`/`muted`/`ghost` = transparent variants from barely-visible to soft
+
+> Note: these are **per-color** (`--sf-color-primary-hover`) and complement — not
+> duplicate — the generic interaction tokens in `core/tokens.css`
+> (`--sf-color-bg--hover`), which are palette-agnostic. Different scope.
 
 ---
 
-## Decyzja 5: Kolory statusowe - mini-paleta
+## Decision 5: Status colors — mini-palette
 
-Kolory statusowe (success, warning, error, info, danger) **nie potrzebują pełnej skali 50-950**. Dostają mini-paletę 3 aliasów:
+Status colors (success, warning, error, info, danger) **don't need a full 50–950
+scale**. They get a 3-alias mini-palette:
 
+```text
+--sf-color-{status}-subtle   → background (alpha ~10%)
+--sf-color-{status}-muted    → border / soft bg (alpha ~30%)
+--sf-color-{status}-strong   → emphasis / text (shade ~700)
 ```
---sf-color-{status}-subtle   → tło (alpha ~10%)
---sf-color-{status}-muted    → border/soft bg (alpha ~30%)
---sf-color-{status}-strong   → emphasis/tekst (shade ~700)
-```
 
-**Uzasadnienie**: kolory statusowe mają wąskie zastosowanie (alerty, badge'e, walidacja). Pełna paleta byłaby overengineering. Te 3 aliasy pokrywają 95% use cases: tło alertu, border alertu, tekst/ikona alertu.
+**Rationale**: status colors have a narrow use (alerts, badges, validation). A full
+palette would be overengineering. These 3 aliases cover 95% of use cases: alert
+background, alert border, alert text/icon.
 
-**Uwaga**: core/tokens.css już definiuje `--sf-status-{x}-bg/text/border` - nowe aliasy mogą być albo ich uzupełnieniem, albo zastąpieniem. Do decyzji przy implementacji.
-
----
-
-## Decyzja 6: Lokalizacja w pliku
-
-Wszystko trafia do istniejącego `optional/tokens.palette.css`:
-- Rozszerzona paleta numeryczna (50, 500, 950 dodane)
-- Rozszerzona alfa (11 kroków)
-- Aliasy semantyczne odcieniowe
-- Aliasy funkcjonalne
-- Mini-paleta statusowa
-
-Jeden plik, jedna warstwa (`slashed.tokens`), opcjonalny import.
+**Resolved**: `core/tokens.css` already defines
+`--sf-color-{status}-subtle/muted/strong`, so the palette file does **not**
+redefine them — it relies on the core triplets.
 
 ---
 
-## Decyzja 7: Mechanizm remapowania
+## Decision 6: File location
 
-Aliasy odcieniowe wskazują na paletę numeryczną via `var()`:
+Everything lives in the existing `optional/tokens.palette.css`:
+- Extended numeric palette (50, 500, 950 added)
+- Extended alpha (11 steps)
+- Semantic shade aliases
+- Functional aliases
+
+One file, one layer (`slashed.tokens`), optional import.
+
+---
+
+## Decision 7: Remapping mechanism
+
+Shade aliases point at the numeric palette via `var()`:
 ```css
 --sf-color-primary-xdark: var(--sf-color-primary-800);
 ```
 
-Aliasy funkcjonalne wskazują na aliasy odcieniowe via `var()`:
+Functional aliases point at shade aliases via `var()`:
 ```css
 --sf-color-primary-hover: var(--sf-color-primary-darker);
 ```
 
-Użytkownik nadpisuje w swoim CSS:
+A consumer overrides in their own CSS:
 ```css
 :root {
-  --sf-color-primary-xdark: var(--sf-color-primary-700); /* jaśniejszy xdark */
+  --sf-color-primary-xdark: var(--sf-color-primary-700); /* lighter xdark */
   --sf-color-primary-hover: var(--sf-color-primary-xdark); /* hover = xdark */
 }
 ```
 
-Jedno nadpisanie propaguje do wszystkich miejsc używających aliasu.
+One override propagates to every place that uses the alias.
 
 ---
 
-## Podsumowanie ilościowe
+## Quantitative summary
 
-Per brand color (6 kolorów):
-- 11 tokenów numerycznych (50-950)
-- 11 tokenów alfa (a5-a95)
-- 6 aliasów odcieniowych
-- 5 aliasów funkcjonalnych
+Per brand color (6 colors):
+- 11 numeric tokens (50–950)
+- 11 alpha tokens (a5–a95)
+- 6 shade aliases
+- 5 functional aliases
 
-**Łącznie brand**: 6 x 33 = **198 tokenów**
+**Brand total**: 6 × 33 = **198 tokens**
 
-Per status color (5 kolorów):
-- 3 aliasy
+Per status color (5 colors):
+- 3 aliases (defined in `core/tokens.css`, not here)
 
-**Łącznie status**: 5 x 3 = **15 tokenów**
+**Status total**: 5 × 3 = **15 tokens**
 
-**Razem**: ~213 tokenów w `tokens.palette.css`
+**Grand total**: ~213 tokens across `tokens.palette.css` + `core/tokens.css`
 
 ---
 
-## Wzorce z branży użyte jako inspiracja
+## Industry patterns used as inspiration
 
-| System | Co wzięliśmy |
+| System | What we took |
 |---|---|
-| Automatic.CSS | Koncepcja aliasów remapowanych (`ultra-dark` etc.) |
-| Radix Colors | Każdy stopień palety ma zdefiniowany cel użytkowy |
-| Tailwind | Skala 50-950, de facto standard numeryczny |
+| Automatic.CSS | The concept of remappable aliases (`ultra-dark` etc.) |
+| Radix Colors | Each palette step has a defined functional purpose |
+| Tailwind | The 50–950 scale, the de facto numeric standard |
 | Material Design 3 | Role-based tokens (functional aliases) |
-| W3C Design Tokens spec | Alias token = referencja do innego tokena |
+| W3C Design Tokens spec | Alias token = reference to another token |
 
 ---
 
-## Otwarte pytania do weryfikacji
+## Resolved open questions
 
-1. **Czy aliasy funkcjonalne (`hover`, `active`) nie duplikują logiki z `core/tokens.css`?** - Tam są `--sf-color-bg--hover` (generyczne), tu byłyby `--sf-color-primary-hover` (per kolor). Inne scope, ale warto potwierdzić brak konfuzji.
-2. **Relacja `--sf-color-{status}-subtle/muted/strong` vs istniejące `--sf-status-{x}-bg/text/border`** - zastępujemy, aliasujemy, czy współistnieją?
-3. **Czy `500` alias powinien być literalnie `var(--sf-color-primary)` czy `color-mix(in oklch, var(--sf-color-primary) 100%, transparent)`** - dla spójności z resztą palety (wszystko jest color-mix)?
+1. **Do functional aliases (`hover`, `active`) duplicate logic in `core/tokens.css`?**
+   No — `core` has `--sf-color-bg--hover` (generic, palette-agnostic); here we have
+   `--sf-color-primary-hover` (per color). Different scope; both kept.
+2. **Relation of `--sf-color-{status}-subtle/muted/strong` to the existing core
+   triplets?** They are the same tokens — defined once in `core/tokens.css` and not
+   duplicated here.
+3. **Should `500` be literally `var(--sf-color-primary)` or a `color-mix(... 100%,
+   transparent)`?** Literal `var(--sf-color-primary)` — simpler and more predictable;
+   no needless color-mix.

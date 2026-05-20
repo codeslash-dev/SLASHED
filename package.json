@@ -8,6 +8,8 @@
     "watch": "node scripts/bundle.js --watch",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
+    "test": "playwright test",
+    "test:install": "playwright install --with-deps chromium",
     "release": "release-it",
     "release:minor": "release-it --increment minor",
     "release:major": "release-it --increment major"
@@ -15,6 +17,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
+    "@playwright/test": "^1.49.0",
     "@release-it/conventional-changelog": "^11.0.0",
     "release-it": "^20.0.1",
     "stylelint": "^17.11.1",

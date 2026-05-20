@@ -1,15 +1,15 @@
 /* ============================================================
    SLASHED — core/layout.css
-   ★ de facto wymagany dla większości projektów
+   ★ de facto required for most projects
    Layout primitives + structural patterns
-   Wymaga: core/tokens.css, core/tokens.layout.css
+   Requires: core/tokens.css, core/tokens.layout.css
    ============================================================ */
 
 @layer slashed.layout {
 
   /* -- Section -------------------------------------------------
-     Sekcja strony z paddingiem pionowym. Modyfikatory rozmiaru
-     nadpisują scoped token.
+     Page section with vertical padding. Size modifiers
+     override the scoped token.
      ---------------------------------------------------------- */
 
   .sf-section     { padding-block: var(--sf-section-pad); }
@@ -21,7 +21,7 @@
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
   /* -- Container -----------------------------------------------
-     Kontener z max-width, wycentrowany z bocznymi gutterami.
+     Max-width container, centered with side gutters.
      ---------------------------------------------------------- */
 
   .sf-container {
@@ -37,7 +37,7 @@
   .sf-container--full   { max-width: var(--sf-container-full); }
 
   /* -- Stack ---------------------------------------------------
-     Flex column z równomiernym pionowym odstępem między dziećmi.
+     Flex column with even vertical spacing between children.
      Override: style="--sf-stack-gap: 2rem"
      ---------------------------------------------------------- */
 
@@ -60,8 +60,8 @@
   .sf-stack--stretch { align-items: stretch; }
 
   /* -- Box -----------------------------------------------------
-     Izolowana jednostka z paddingiem i opcjonalnym obramowaniem.
-     Outline zamiast border — nie zaburza box modelu przy toggling.
+     Isolated unit with padding and an optional border.
+     Outline instead of border — doesn't disturb the box model when toggled.
      Override: style="--sf-box-padding: 1rem; --sf-box-border-width: 1px"
      ---------------------------------------------------------- */
 
@@ -71,8 +71,8 @@
   }
 
   /* -- Center --------------------------------------------------
-     Centrowanie treści z max-inline-size i bocznymi gutterami.
-     content-box: max-inline-size dotyczy tylko treści, padding jest addytywny.
+     Centers content with a max-inline-size and side gutters.
+     content-box: max-inline-size applies to content only; padding is additive.
      Override: style="--sf-center-max: 60rem"
      ---------------------------------------------------------- */
 
@@ -90,7 +90,7 @@
   }
 
   /* -- Cluster -------------------------------------------------
-     Flex-wrap grupa różnoszerokościowych elementów.
+     Flex-wrap group of variable-width items.
      Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center"
      ---------------------------------------------------------- */
 
@@ -114,8 +114,8 @@
   .sf-cluster--between  { justify-content: space-between; }
 
   /* -- Sidebar -------------------------------------------------
-     Dwukolumnowy układ: first-child = sidebar, last-child = główna treść.
-     Zwija się gdy viewport jest za wąski (flex-basis trick).
+     Two-column layout: first-child = sidebar, last-child = main content.
+     Collapses when the viewport is too narrow (flex-basis trick).
      Override: style="--sf-sidebar-width: 20rem"
      ---------------------------------------------------------- */
 
@@ -151,8 +151,8 @@
   .sf-sidebar--wide   { --sf-sidebar-width: 26rem; }
 
   /* -- Switcher ------------------------------------------------
-     Przełącza między kolumną (wąski viewport) a wierszem (szeroki).
-     Używa calc((threshold - 100%) * 999) — zero media queries.
+     Switches between a column (narrow viewport) and a row (wide).
+     Uses calc((threshold - 100%) * 999) — zero media queries.
      Override: style="--sf-switcher-threshold: 40rem"
      ---------------------------------------------------------- */
 
@@ -171,9 +171,9 @@
   .sf-switcher--vertical { flex-direction: column; }
 
   /* -- Grid ----------------------------------------------------
-     Auto-fill CSS grid bez breakpointów. --fit przełącza na auto-fit.
-     auto-fill: puste tracki zachowane, ostatni element nie rozciąga się.
-     auto-fit (--fit): puste tracki zwijane, elementy rozciągają lukę.
+     Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.
+     auto-fill: empty tracks preserved, last item doesn't stretch.
+     auto-fit (--fit): empty tracks collapsed, items stretch to fill the gap.
      Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem"
      ---------------------------------------------------------- */
 
@@ -194,8 +194,8 @@
   .sf-grid--xl { --sf-grid-min: var(--sf-grid-min-xl); }
 
   /* -- Cover ---------------------------------------------------
-     Pełnoekranowy flex column. Dziecko z .sf-cover__center
-     wycentrowane pionowo przez margin-block: auto.
+     Full-height flex column. A .sf-cover__center child is
+     vertically centered via margin-block: auto.
      Override: style="--sf-cover-min-height: 50dvh"
      ---------------------------------------------------------- */
 
@@ -216,7 +216,7 @@
   .sf-cover--padding-l { padding-block: var(--sf-space-4xl); }
 
   /* -- Frame ---------------------------------------------------
-     Kontener zachowujący aspect ratio. Media children: fill + cover.
+     Aspect-ratio container. Media children: fill + cover.
      Override: style="--sf-frame-ratio: 4 / 3"
      ---------------------------------------------------------- */
 
@@ -244,7 +244,7 @@
   .sf-frame--golden   { aspect-ratio: var(--sf-ratio-golden); }
 
   /* -- Reel ----------------------------------------------------
-     Poziomy scroll ze scroll-snap. Każde dziecko snapuje na starcie.
+     Horizontal scroll with scroll-snap. Each child snaps to start.
      Override: style="--sf-reel-gap: 1rem; --sf-reel-item-width: 280px"
      ---------------------------------------------------------- */
 
@@ -264,8 +264,8 @@
   }
 
   /* -- Imposter ------------------------------------------------
-     Element wycentrowany absolutnie względem rodzica.
-     Rodzic musi mieć position: relative.
+     Element centered absolutely within its parent.
+     The parent must have position: relative.
      ---------------------------------------------------------- */
 
   .sf-imposter {
@@ -286,8 +286,8 @@
   }
 
   /* -- Alternate (zigzag / media-object) -----------------------
-     Naprzemienne układy dwukolumnowe (kontener query responsive).
-     Co drugi rząd ma odwróconą kolejność dzieci.
+     Alternating two-column layouts (container-query responsive).
+     Every other row reverses its children's order.
      ---------------------------------------------------------- */
 
   .sf-alternate {
@@ -311,7 +311,7 @@
   }
 
   /* -- Pancake (sticky footer) ---------------------------------
-     Grid z trzema wierszami: header / main(1fr) / footer.
+     Grid with three rows: header / main(1fr) / footer.
      ---------------------------------------------------------- */
 
   .sf-pancake {
@@ -321,7 +321,7 @@
   }
 
   /* -- Fixed column grids (container-query responsive) ---------
-     Responsywne siatki stałokolumnowe bez media queries.
+     Responsive fixed-column grids with no media queries.
      ---------------------------------------------------------- */
 
   .sf-grid-1, .sf-grid-2, .sf-grid-3, .sf-grid-4, .sf-grid-6 {
@@ -342,7 +342,7 @@
   }
 
   /* -- Ratio grids ---------------------------------------------
-     Siatki dwukolumnowe z proporcjami, container-query responsive.
+     Two-column ratio grids, container-query responsive.
      ---------------------------------------------------------- */
 
   .sf-grid-1-2, .sf-grid-2-1,
@@ -359,8 +359,8 @@
   }
 
   /* -- Content grid (breakout pattern) -------------------------
-     Full-width grid z możliwością wyrwania elementów na szerokość
-     breakout lub full. Dzieci domyślnie w kolumnie content.
+     Full-width grid that lets items break out to breakout or full
+     width. Children default to the content column.
      ---------------------------------------------------------- */
 
   .sf-content-grid {
@@ -384,7 +384,7 @@
   .sf-content-grid > .sf-full-bleed { grid-column: full; }
 
   /* -- Bento grid ----------------------------------------------
-     Swobodna siatka z auto-flow dense, responsywna przez CQ.
+     Free-form grid with auto-flow dense, responsive via CQ.
      Override: style="--sf-bento-cols: 4; --sf-bento-row: 12rem"
      ---------------------------------------------------------- */
 
@@ -406,15 +406,15 @@
   .sf-bento--tall    { --sf-bento-row: var(--sf-bento-row-tall); }
 
   /* -- Subgrid -------------------------------------------------
-     Dziecko grida, które dziedziczy tracki rodzica.
+     A grid child that inherits its parent's tracks.
      ---------------------------------------------------------- */
 
   .sf-subgrid      { display: grid; grid-template-columns: subgrid; }
   .sf-subgrid-rows { display: grid; grid-template-rows:    subgrid; }
 
   /* -- Prose ---------------------------------------------------
-     Kolumna tekstu long-form z automatycznym rytmem pionowym.
-     .sf-not-prose resetuje style wewnątrz bloku prose.
+     Long-form text column with automatic vertical rhythm.
+     .sf-not-prose resets styles inside a prose block.
      ---------------------------------------------------------- */
 
   .sf-prose {

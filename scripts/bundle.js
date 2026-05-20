@@ -20,8 +20,14 @@ function loadConfig() {
   return JSON.parse(raw);
 }
 
-function bundle() {
-  const { files, output } = loadConfig();
+// Accepts both the new { bundles: [...] } shape and the legacy
+// single-bundle { output, files } object.
+function getBundles() {
+  const config = loadConfig();
+  return Array.isArray(config.bundles) ? config.bundles : [config];
+}
+
+function buildOne({ files, output }) {
   const outputPath = resolveInsideRoot(output);
   const { version } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const header = `/* SLASHED v${version} — ${path.basename(output)} */\n`;
@@ -40,6 +46,10 @@ function bundle() {
   console.log(`[bundle] → ${output} (${files.length} files)`);
 }
 
+function bundle() {
+  getBundles().forEach(buildOne);
+}
+
 function watch() {
   try {
     bundle();
@@ -47,10 +57,12 @@ function watch() {
     console.error(`[watch] Initial bundle failed: ${err.message}`);
   }
 
-  const watchDir = path.join(ROOT, 'core');
-  let watchedFiles = [];
+  const collectWatchedPaths = () =>
+    new Set(getBundles().flatMap((b) => b.files).map((f) => path.normalize(f)));
+
+  let watchedFiles = new Set();
   try {
-    watchedFiles = loadConfig().files.map((f) => path.basename(f));
+    watchedFiles = collectWatchedPaths();
   } catch (err) {
     console.error(`[watch] Failed to load config: ${err.message}`);
   }
@@ -67,21 +79,24 @@ function watch() {
     }, 100);
   };
 
-  console.log('[watch] Watching core/ and bundle.config.json for changes…');
+  console.log('[watch] Watching core/, optional/ and bundle.config.json for changes…');
 
-  fs.watch(watchDir, (event, filename) => {
-    if (!filename) return;
-    if (watchedFiles.includes(filename)) {
-      console.log(`[watch] ${event}: core/${filename}`);
-      rebuild();
-    }
+  ['core', 'optional'].forEach((dir) => {
+    fs.watch(path.join(ROOT, dir), (event, filename) => {
+      if (!filename) return;
+      const changedPath = path.normalize(path.join(dir, String(filename)));
+      if (watchedFiles.has(changedPath)) {
+        console.log(`[watch] ${event}: ${dir}/${filename}`);
+        rebuild();
+      }
+    });
   });
 
   fs.watch(CONFIG_PATH, (event) => {
     if (event === 'change' || event === 'rename') {
       console.log('[watch] bundle.config.json changed');
       try {
-        watchedFiles = loadConfig().files.map((f) => path.basename(f));
+        watchedFiles = collectWatchedPaths();
       } catch (err) {
         console.error(`[watch] Invalid config: ${err.message}`);
       }

@@ -46,6 +46,32 @@
       }
     }
 
+    /* Animation presets — opt-in classes. Scoped to no-preference so
+       reduced-motion users never trigger them (accessibility.css also
+       neutralises animation-duration as a hard guarantee). These are
+       DECORATIVE: under reduced motion they simply don't run, so never
+       rely on one (e.g. .sf-fade-out) as the sole way to show/hide
+       content — drive real state with hidden/display/JS instead. */
+    .sf-fade-in        { animation: var(--sf-animation-fade-in); }
+    .sf-fade-out       { animation: var(--sf-animation-fade-out); }
+    .sf-slide-in-up    { animation: var(--sf-animation-slide-in-up); }
+    .sf-slide-in-down  { animation: var(--sf-animation-slide-in-down); }
+    .sf-slide-in-left  { animation: var(--sf-animation-slide-in-left); }
+    .sf-slide-in-right { animation: var(--sf-animation-slide-in-right); }
+    .sf-scale-up       { animation: var(--sf-animation-scale-up); }
+    .sf-scale-down     { animation: var(--sf-animation-scale-down); }
+
   }
+
+  /* Keyframes — inert until referenced, so they live outside the
+     no-preference wrapper (consumers may reference them at will). */
+  @keyframes sf-fade-in   { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes sf-fade-out  { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes sf-slide-in-up    { from { opacity: 0; translate: 0 1rem;  } to { opacity: 1; translate: 0 0; } }
+  @keyframes sf-slide-in-down  { from { opacity: 0; translate: 0 -1rem; } to { opacity: 1; translate: 0 0; } }
+  @keyframes sf-slide-in-left  { from { opacity: 0; translate: 1rem 0;  } to { opacity: 1; translate: 0 0; } }
+  @keyframes sf-slide-in-right { from { opacity: 0; translate: -1rem 0; } to { opacity: 1; translate: 0 0; } }
+  @keyframes sf-scale-up   { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
+  @keyframes sf-scale-down { from { opacity: 1; scale: 1; } to { opacity: 0; scale: 0.92; } }
 
 }

@@ -744,24 +744,49 @@
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-gradient-surface); width: 8rem">gradient-surface</div>
         </div>
 
-        <h3>Palette Tints &amp; Shades <small style="font-weight: normal; color: var(--sf-color-text--muted)">(tokens.palette.css)</small></h3>
+        <h3>Palette Numeric Scale 50–950 <small style="font-weight: normal; color: var(--sf-color-text--muted)">(tokens.palette.css)</small></h3>
         <div class="demo-swatch-row">
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-50)">50</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-100)">100</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-200)">200</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-300)">300</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-400)">400</div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary)">500</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-500)">500</div>
           <div class="demo-swatch" style="background: var(--sf-color-primary-600)">600</div>
           <div class="demo-swatch" style="background: var(--sf-color-primary-700)">700</div>
           <div class="demo-swatch" style="background: var(--sf-color-primary-800)">800</div>
           <div class="demo-swatch" style="background: var(--sf-color-primary-900)">900</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-950)">950</div>
         </div>
+
+        <h3>Alpha Scale a5–a95</h3>
         <div class="demo-swatch-row">
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a5)">a5</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a10)">a10</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a20)">a20</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a30)">a30</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a40)">a40</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a50)">a50</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a75)">a75</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a60)">a60</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a70)">a70</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a80)">a80</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a90)">a90</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a95)">a95</div>
+        </div>
+
+        <h3>Semantic &amp; Functional Aliases</h3>
+        <div class="demo-swatch-row">
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-superlight)">superlight</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-xlight)">xlight</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-lighter)">lighter</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-darker)">darker</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-xdark)">xdark</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-superdark)">superdark</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-hover)">hover</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary-active)">active</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-subtle)">subtle</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-muted)">muted</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-ghost)">ghost</div>
         </div>
       </section>
 
@@ -860,12 +885,30 @@
           <div style="font-size: var(--sf-text-display-l)">display-l</div>
         </div>
 
-        <h3>Font Weights</h3>
+        <h3>Font Weights — numeric scale 100–900</h3>
+        <div class="sf-stack sf-stack--2xs">
+          <span style="font-weight: var(--sf-font-weight-thin)">100 thin — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-extralight)">200 extralight — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-light)">300 light — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-normal)">400 normal — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-medium)">500 medium — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-semibold)">600 semibold — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-bold)">700 bold — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-extrabold)">800 extrabold — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-black)">900 black — The quick brown fox</span>
+        </div>
+
+        <h3>Semantic Weight Aliases &amp; Font Stacks</h3>
         <div class="sf-cluster sf-cluster--l" style="align-items: baseline">
-          <span style="font-weight: var(--sf-font-weight-body)">body 400 — The quick</span>
-          <span style="font-weight: var(--sf-font-weight-heading)">heading 600 — The quick</span>
-          <span style="font-weight: var(--sf-font-weight-bold)">bold 700 — The quick</span>
-          <span style="font-weight: var(--sf-font-weight-display)">display 700 — The quick</span>
+          <span style="font-weight: var(--sf-font-weight-body)">body</span>
+          <span style="font-weight: var(--sf-font-weight-heading)">heading</span>
+          <span style="font-weight: var(--sf-font-weight-display)">display</span>
+        </div>
+        <div class="sf-stack sf-stack--2xs" style="margin-block-start: var(--sf-space-s)">
+          <span style="font-family: var(--sf-font-humanist)">humanist — The quick brown fox jumps</span>
+          <span style="font-family: var(--sf-font-geometric)">geometric — The quick brown fox jumps</span>
+          <span style="font-family: var(--sf-font-slab)">slab — The quick brown fox jumps</span>
+          <span style="font-family: var(--sf-font-mono)">mono — The quick brown fox jumps</span>
         </div>
 
         <h3>Line Heights (--sf-leading-*)</h3>
@@ -1000,7 +1043,7 @@
       ══════════════════════════════════════════════════════ -->
       <section id="shadows" class="demo-section">
         <h2>Shadows</h2>
-        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">In dark mode, shadows use pure black with low opacity — nearly invisible on dark surfaces by design. Use <code>--sf-shadow-strength</code> to adjust.</p>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">Shadow color is a neutral near-black auto-derived from <code>--sf-color-neutral</code> (<code>--sf-shadow-color</code>) — override it to <code>var(--sf-color-primary)</code> for tinted shadows. In dark mode strength scales up but every layer's alpha is capped at 0.7. Adjust via <code>--sf-shadow-strength</code>.</p>
 
         <div class="demo-shadow-grid">
           <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-none)">shadow-none</div>
@@ -1012,6 +1055,27 @@
           <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-2xl)">shadow-2xl</div>
           <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-inner)">shadow-inner</div>
           <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-glow)">shadow-glow</div>
+        </div>
+
+        <h3>Text Shadows</h3>
+        <div class="sf-cluster sf-cluster--l" style="font-size: var(--sf-text-xl); font-weight: var(--sf-font-weight-bold)">
+          <span style="text-shadow: var(--sf-text-shadow-s)">text-shadow-s</span>
+          <span style="text-shadow: var(--sf-text-shadow-m)">text-shadow-m</span>
+          <span style="text-shadow: var(--sf-text-shadow-l)">text-shadow-l</span>
+        </div>
+
+        <h3>Drop Shadows <small style="font-weight: normal; color: var(--sf-color-text--muted)">(filter — follows alpha edges)</small></h3>
+        <div class="sf-cluster sf-cluster--l" style="align-items: center">
+          <svg width="48" height="48" viewBox="0 0 24 24" style="fill: var(--sf-color-primary); filter: var(--sf-drop-shadow-s)" aria-hidden="true"><path d="M12 2 2 22h20z"/></svg>
+          <svg width="48" height="48" viewBox="0 0 24 24" style="fill: var(--sf-color-tertiary); filter: var(--sf-drop-shadow-m)" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg width="48" height="48" viewBox="0 0 24 24" style="fill: var(--sf-color-action); filter: var(--sf-drop-shadow-l)" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3"/></svg>
+        </div>
+
+        <h3>3D Perspective</h3>
+        <div class="sf-cluster sf-cluster--xl" style="padding-block: var(--sf-space-l)">
+          <div style="perspective: var(--sf-perspective-near)"><div style="width: 5rem; height: 5rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-m); transform: rotateY(40deg)"></div></div>
+          <div style="perspective: var(--sf-perspective-normal)"><div style="width: 5rem; height: 5rem; background: var(--sf-color-tertiary); border-radius: var(--sf-radius-m); transform: rotateY(40deg)"></div></div>
+          <div style="perspective: var(--sf-perspective-far)"><div style="width: 5rem; height: 5rem; background: var(--sf-color-action); border-radius: var(--sf-radius-m); transform: rotateY(40deg)"></div></div>
         </div>
       </section>
 
@@ -1083,6 +1147,24 @@
             <span class="demo-ease-label">ease-elastic</span>
             <div class="demo-ease-track"><div class="demo-ease-ball" style="animation: demo-slide 2s var(--sf-ease-elastic) infinite alternate"></div></div>
           </div>
+          <div class="demo-ease-row">
+            <span class="demo-ease-label">ease-bounce</span>
+            <div class="demo-ease-track"><div class="demo-ease-ball" style="animation: demo-slide 2s var(--sf-ease-bounce) infinite alternate"></div></div>
+          </div>
+          <div class="demo-ease-row">
+            <span class="demo-ease-label">ease-overshoot</span>
+            <div class="demo-ease-track"><div class="demo-ease-ball" style="animation: demo-slide 2s var(--sf-ease-overshoot) infinite alternate"></div></div>
+          </div>
+        </div>
+
+        <h3>Animation Presets <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — click to replay)</small></h3>
+        <div class="sf-cluster sf-cluster--m" id="demo-anim-presets">
+          <button type="button" class="sf-fade-in"        style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">fade-in</button>
+          <button type="button" class="sf-slide-in-up"     style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">slide-in-up</button>
+          <button type="button" class="sf-slide-in-down"   style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">slide-in-down</button>
+          <button type="button" class="sf-slide-in-left"   style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">slide-in-left</button>
+          <button type="button" class="sf-slide-in-right"  style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">slide-in-right</button>
+          <button type="button" class="sf-scale-up"        style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">scale-up</button>
         </div>
 
         <h3>Duration Tokens</h3>
@@ -1776,6 +1858,16 @@
 
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+    });
+
+    // Replay an animation preset on click by re-triggering its animation.
+    document.querySelectorAll('#demo-anim-presets button').forEach(el => {
+      el.addEventListener('click', () => {
+        const anim = el.style.animation;
+        el.style.animation = 'none';
+        void el.offsetWidth;        // force reflow
+        el.style.animation = '';    // restore the class-driven animation
+      });
     });
   </script>
 
