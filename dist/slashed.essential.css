@@ -169,19 +169,25 @@
        Text-on-color — sign(0.6 - l) * 999 is mode-agnostic:
        auto-selects light or dark text based on background luminance.
        Uses resolved tokens — works for any user-supplied color.
+       Override --sf-on-color-{light,dark,threshold} to tune the
+       contrast pair and switch point.
        ---------------------------------------------------------- */
-    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-on-color-light:     0.97;
+    --sf-on-color-dark:      0.13;
+    --sf-on-color-threshold: 0.6;
+
+    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
     --sf-color-text--on-base:      var(--sf-color-text);
     --sf-color-text--on-inverse:   var(--sf-color-text--inverse);
-    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
+    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(var(--sf-on-color-dark), sign(var(--sf-on-color-threshold) - l) * 999, var(--sf-on-color-light)) 0 0);
 
 
     /* ----------------------------------------------------------
