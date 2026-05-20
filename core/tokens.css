@@ -292,7 +292,7 @@
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
     --sf-shadow-glow-color: var(--sf-color-primary);
-    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(0.4 * var(--sf-shadow-strength) * 5), 0.7));
+    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
     --sf-opacity-disabled:  0.45;
 
 
@@ -459,6 +459,12 @@
 
     /* ----------------------------------------------------------
        Border widths
+       --sf-border-width-hairline: device-pixel-dependent. On 1x DPR
+       displays (Windows non-Retina) the browser will round 0.5px up
+       to 1px, so it visually matches --sf-border-width-1. On 2x+
+       DPR (macOS/iOS Retina, most modern phones) it renders as a
+       true half-pixel hairline. Use it for subtle separators where
+       1px on low-DPR is acceptable.
        ---------------------------------------------------------- */
     --sf-border-width-hairline: 0.5px;
     --sf-border-width-1:        1px;
@@ -469,6 +475,11 @@
 
     /* ----------------------------------------------------------
        Border radius
+       --sf-radius-full: intentionally not scaled by --sf-radius-scale.
+       A pill/circle is a topological constant, not a relative size:
+       any --sf-radius-scale: 0 ("sharp" design system) should still
+       render pill buttons as pills. 9999px is a magic-number convention
+       large enough to clip to half the shorter edge for any realistic UI.
        ---------------------------------------------------------- */
     --sf-radius-none: 0;
     --sf-radius-xs:   calc(2px  * var(--sf-radius-scale));

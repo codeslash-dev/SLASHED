@@ -62,7 +62,7 @@
     }
 
     pre, blockquote {
-      border:  1px solid #999;
+      border:  var(--sf-border-width-1) solid var(--sf-color-border--strong);
       padding: var(--sf-space-s);
     }
 
