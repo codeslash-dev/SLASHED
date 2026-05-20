@@ -6,9 +6,10 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { pathToFileURL } = require('url');
 
 const ROOT = path.resolve(__dirname, '..');
-const FIXTURE = 'file://' + path.join(__dirname, 'fixture.html');
+const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
 
 // ---- Parse the declared token names from the source ----------------------
 const TOKEN_FILES = [

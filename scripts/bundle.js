@@ -57,12 +57,12 @@ function watch() {
     console.error(`[watch] Initial bundle failed: ${err.message}`);
   }
 
-  const collectBasenames = () =>
-    getBundles().flatMap((b) => b.files).map((f) => path.basename(f));
+  const collectWatchedPaths = () =>
+    new Set(getBundles().flatMap((b) => b.files).map((f) => path.normalize(f)));
 
-  let watchedFiles = [];
+  let watchedFiles = new Set();
   try {
-    watchedFiles = collectBasenames();
+    watchedFiles = collectWatchedPaths();
   } catch (err) {
     console.error(`[watch] Failed to load config: ${err.message}`);
   }
@@ -84,7 +84,8 @@ function watch() {
   ['core', 'optional'].forEach((dir) => {
     fs.watch(path.join(ROOT, dir), (event, filename) => {
       if (!filename) return;
-      if (watchedFiles.includes(filename)) {
+      const changedPath = path.normalize(path.join(dir, String(filename)));
+      if (watchedFiles.has(changedPath)) {
         console.log(`[watch] ${event}: ${dir}/${filename}`);
         rebuild();
       }
@@ -95,7 +96,7 @@ function watch() {
     if (event === 'change' || event === 'rename') {
       console.log('[watch] bundle.config.json changed');
       try {
-        watchedFiles = collectBasenames();
+        watchedFiles = collectWatchedPaths();
       } catch (err) {
         console.error(`[watch] Invalid config: ${err.message}`);
       }

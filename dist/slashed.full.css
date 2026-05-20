@@ -513,7 +513,8 @@
        inherits the neutral's own chroma/hue, so a colourless neutral yields
        colourless shadows. Forced dark in both modes; --sf-shadow-strength
        handles dark-mode intensity. Override to a brand colour for explicitly
-       tinted shadows: var(--sf-color-primary). */
+       tinted shadows — keep it dark or you get bright slabs:
+       oklch(from var(--sf-color-primary) 0.15 c h). */
     --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 c h);
 
     --sf-shadow-none:  none;

@@ -68,7 +68,7 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | `layers` + `tokens` + `reset` + `base` + `layout` + `states` + `motion` + `accessibility` + `print` |
+| `slashed.essential.css` | `layers` + `tokens` + `tokens.layout` + `reset` + `base` + `layout` + `states` + `motion` + `accessibility` + `print` |
 | `slashed.full.css` | essential + `tokens.palette` + `legacy` |
 
 ## Customising tokens

@@ -57,7 +57,7 @@ What was missing is a layer of **semantic aliases** that:
 
 ## Decision 3: Semantic shade aliases (6 per brand color)
 
-```
+```text
 --sf-color-{color}-superlight  → 50
 --sf-color-{color}-xlight      → 200
 --sf-color-{color}-lighter     → 400
@@ -85,7 +85,7 @@ collision and also signals proximity to base.
 
 ## Decision 4: Functional aliases (per brand color)
 
-```
+```text
 --sf-color-{color}-hover    → var(--sf-color-{color}-darker)
 --sf-color-{color}-active   → var(--sf-color-{color}-xdark)
 --sf-color-{color}-subtle   → var(--sf-color-{color}-a10)
@@ -110,7 +110,7 @@ collision and also signals proximity to base.
 Status colors (success, warning, error, info, danger) **don't need a full 50–950
 scale**. They get a 3-alias mini-palette:
 
-```
+```text
 --sf-color-{status}-subtle   → background (alpha ~10%)
 --sf-color-{status}-muted    → border / soft bg (alpha ~30%)
 --sf-color-{status}-strong   → emphasis / text (shade ~700)
