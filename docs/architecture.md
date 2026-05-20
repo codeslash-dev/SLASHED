@@ -128,7 +128,7 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 
 1. **Fluid tokens** — `--sf-space-*`, `--sf-text-*` use `clamp()`. No `@media` needed.
 2. **Container primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-alternate`, `.sf-bento` use `@container`. Note: `.sf-container` sets `container-type: inline-size` making it a query container for its children.
-3. **Breakpoints** — `sm: 30em / md: 48em / lg: 64em / xl: 80em`. Last resort.
+3. **Breakpoints** — a last resort. The framework ships no breakpoint tokens (custom properties can't be used in `@media`/`@container` conditions); hard-code a value in your own query if you truly need one.
 
 ---
 

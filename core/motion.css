@@ -48,7 +48,10 @@
 
     /* Animation presets — opt-in classes. Scoped to no-preference so
        reduced-motion users never trigger them (accessibility.css also
-       neutralises animation-duration as a hard guarantee). */
+       neutralises animation-duration as a hard guarantee). These are
+       DECORATIVE: under reduced motion they simply don't run, so never
+       rely on one (e.g. .sf-fade-out) as the sole way to show/hide
+       content — drive real state with hidden/display/JS instead. */
     .sf-fade-in        { animation: var(--sf-animation-fade-in); }
     .sf-fade-out       { animation: var(--sf-animation-fade-out); }
     .sf-slide-in-up    { animation: var(--sf-animation-slide-in-up); }

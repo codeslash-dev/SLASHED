@@ -509,11 +509,12 @@
        Shadows — BEM consumer API
        Use in your own classes: .card { box-shadow: var(--sf-shadow-m); }
        ---------------------------------------------------------- */
-    /* Shadow tint — neutral near-black auto-derived from the palette
-       (carries the brand hue at low chroma). Forced dark in both modes;
-       --sf-shadow-strength handles dark-mode intensity. Override to a
-       brand color for tinted/colored shadows: var(--sf-color-primary). */
-    --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 calc(c * 2) h);
+    /* Shadow tint — near-black derived from the neutral; the tint simply
+       inherits the neutral's own chroma/hue, so a colourless neutral yields
+       colourless shadows. Forced dark in both modes; --sf-shadow-strength
+       handles dark-mode intensity. Override to a brand colour for explicitly
+       tinted shadows: var(--sf-color-primary). */
+    --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 c h);
 
     --sf-shadow-none:  none;
     --sf-shadow-xs:    0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7));
@@ -1957,7 +1958,10 @@
 
     /* Animation presets — opt-in classes. Scoped to no-preference so
        reduced-motion users never trigger them (accessibility.css also
-       neutralises animation-duration as a hard guarantee). */
+       neutralises animation-duration as a hard guarantee). These are
+       DECORATIVE: under reduced motion they simply don't run, so never
+       rely on one (e.g. .sf-fade-out) as the sole way to show/hide
+       content — drive real state with hidden/display/JS instead. */
     .sf-fade-in        { animation: var(--sf-animation-fade-in); }
     .sf-fade-out       { animation: var(--sf-animation-fade-out); }
     .sf-slide-in-up    { animation: var(--sf-animation-slide-in-up); }
