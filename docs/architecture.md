@@ -199,7 +199,12 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
    | `--sf-bp-xl`     | `80em` | 1280px |
    | `--sf-bp-2xl`    | `96em` | 1536px |
 
-   Usage: `@media (min-width: var(--sf-bp-md)) { … }`
+   The bare `@media (min-width: var(--sf-bp-md))` syntax is **not** yet supported in stable Chrome, Safari, or Firefox as of 2025. Substitution of `var()` inside `@media` feature values is specified by CSS Conditional 5 / Values 5 but unimplemented in stable browsers, so the entire at-rule is dropped. Use container queries (`@container (min-width: var(--sf-cq-md))`) as the primary modern responsive path.
+
+   The `--sf-bp-*` tokens remain useful for two scenarios:
+
+   - **JavaScript reads** — `getComputedStyle(document.documentElement).getPropertyValue('--sf-bp-md')` resolves to `48em` and can drive `matchMedia()` calls or layout logic.
+   - **PostCSS / `@custom-media` preprocessing** — declare `@custom-media --sf-bp-md (min-width: 48em);` once and write `@media (--sf-bp-md) { … }`, which preprocessors (and eventually browsers) resolve at build time.
 
 5. **Smooth scroll**: `html { scroll-behavior: smooth }` is gated only by `@media (prefers-reduced-motion: no-preference)`. Anchor-link clicks scroll smoothly for users who have not requested reduced motion. Reduced-motion users get `scroll-behavior: auto !important` enforced in `core/accessibility.css`. The earlier `:focus-within` trapdoor pattern was removed in 0.2.0; see [migration notes](migration-0.1-to-0.2.md).
 

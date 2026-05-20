@@ -442,6 +442,11 @@ Last-resort `@media` thresholds. Container queries are preferred.
 | `--sf-bp-xl` | `80em` | 1280px | derived |
 | `--sf-bp-2xl` | `96em` | 1536px | derived |
 
+The bare `@media (min-width: var(--sf-bp-md))` syntax is **not** yet supported in stable Chrome, Safari, or Firefox as of 2025. Substitution of `var()` inside `@media` feature values is specified by CSS Conditional 5 / Values 5 but unimplemented in stable browsers; the at-rule is dropped. Use container queries (see below) as the primary modern responsive path. The breakpoint tokens still serve two consumer use cases:
+
+- **JavaScript** reads via `getComputedStyle(document.documentElement).getPropertyValue('--sf-bp-md')` for `matchMedia()` calls or other layout logic.
+- **PostCSS / `@custom-media` preprocessing**: declare `@custom-media --sf-bp-md (min-width: 48em);` once and write `@media (--sf-bp-md) { … }`, resolved at build time by your preprocessor.
+
 ## Container queries
 
 | Token | Default | Description | Override |
@@ -490,8 +495,8 @@ Shorthand pairings of keyframe + duration + easing. Reduced-motion is honoured a
 | `--sf-animation-fade-out` | `sf-fade-out normal ease-in both` | Fade out | derived |
 | `--sf-animation-slide-in-up` | `sf-slide-in-up normal ease-out both` | Slide in from below | derived |
 | `--sf-animation-slide-in-down` | `sf-slide-in-down normal ease-out both` | Slide in from above | derived |
-| `--sf-animation-slide-in-left` | `sf-slide-in-left normal ease-out both` | Slide in from right | derived |
-| `--sf-animation-slide-in-right` | `sf-slide-in-right normal ease-out both` | Slide in from left | derived |
+| `--sf-animation-slide-in-left` | `sf-slide-in-left normal ease-out both` | Slide in from the left | derived |
+| `--sf-animation-slide-in-right` | `sf-slide-in-right normal ease-out both` | Slide in from the right | derived |
 | `--sf-animation-scale-up` | `sf-scale-up normal back-out both` | Scale in (overshoot) | derived |
 | `--sf-animation-scale-down` | `sf-scale-down normal ease-in both` | Scale in (settle) | derived |
 

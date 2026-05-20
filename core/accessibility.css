@@ -158,9 +158,11 @@
       outline-offset: 2px !important;
     }
 
-    .sf-container, .sf-frame, .sf-box {
-      border-color: CanvasText;
-    }
+    /* Forced Colors Mode auto-substitutes system colors for
+       var(--sf-color-border), var(--sf-color-text), etc. on any
+       consumer-authored borders, so no explicit border-color rule
+       is needed here. The :focus-visible outline above is the only
+       piece that requires explicit hardening. */
   }
 
 }

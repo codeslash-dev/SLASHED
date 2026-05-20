@@ -236,6 +236,8 @@ The framework's `@starting-style` block in `core/motion.css` covers the graceful
 
 ## 9. Container queries with `--sf-cq-*` tokens
 
+`@container (min-width: var(--sf-cq-md))` works today in every modern browser. Direct `@media (min-width: var(--sf-bp-md))` does **not** yet work in stable Chrome, Safari, or Firefox: substitution of `var()` inside `@media` feature values is specified but not yet implemented, so the at-rule is dropped. See [Responsive design in `architecture.md`](architecture.md#responsive-design) for the `@custom-media` preprocessing workaround when you need a viewport-level breakpoint.
+
 Component-scoped breakpoints. Wrap the component in `.sf-container` (or any element with `container-type: inline-size`) and query against the size tokens.
 
 ```html
