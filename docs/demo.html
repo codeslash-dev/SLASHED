@@ -1674,10 +1674,12 @@
       const probes = { light: makeProbe('light'), dark: makeProbe('dark') };
 
       // Pre-computed hex fallbacks for engines that can't resolve oklch.
+      // Approximations of the @property defaults in core/tokens.css; rarely
+      // hit because every supported engine resolves oklch directly.
       const HEX_FALLBACKS = {
         '--sf-color-primary-light':   '#1b3fbf', '--sf-color-secondary-light': '#2d2f3d',
-        '--sf-color-tertiary-light':  '#9b3fb8', '--sf-color-action-light':    '#0090a8',
-        '--sf-color-neutral-light':   '#7c7e8a', '--sf-color-base-light':      '#f8f7fa',
+        '--sf-color-tertiary-light':  '#7c2e94', '--sf-color-action-light':    '#0090a8',
+        '--sf-color-neutral-light':   '#5e616b', '--sf-color-base-light':      '#f8f7fa',
         '--sf-color-success-light':   '#1e8c4a', '--sf-color-warning-light':   '#c58c1a',
         '--sf-color-error-light':     '#d95525', '--sf-color-info-light':      '#1a6dbf',
         '--sf-color-danger-light':    '#c4211a'
