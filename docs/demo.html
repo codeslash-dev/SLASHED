@@ -1660,74 +1660,40 @@
         }
       }
 
-      // Default oklch values from @property definitions
-      const TOKEN_DEFAULTS = {
-        '--sf-color-primary-light':   'oklch(0.45 0.20 264)',
-        '--sf-color-secondary-light': 'oklch(0.25 0.03 260)',
-        '--sf-color-tertiary-light':  'oklch(0.55 0.14 310)',
-        '--sf-color-action-light':    'oklch(0.60 0.16 210)',
-        '--sf-color-neutral-light':   'oklch(0.55 0.02 260)',
-        '--sf-color-base-light':      'oklch(0.98 0.005 260)',
-        '--sf-color-primary-dark':    'oklch(0.70 0.15 264)',
-        '--sf-color-secondary-dark':  'oklch(0.80 0.02 260)',
-        '--sf-color-tertiary-dark':   'oklch(0.72 0.12 310)',
-        '--sf-color-action-dark':     'oklch(0.78 0.13 210)',
-        '--sf-color-neutral-dark':    'oklch(0.65 0.02 260)',
-        '--sf-color-base-dark':       'oklch(0.20 0.02 260)',
-        '--sf-color-success-light':   'oklch(0.55 0.17 150)',
-        '--sf-color-warning-light':   'oklch(0.75 0.17 80)',
-        '--sf-color-error-light':     'oklch(0.62 0.20 35)',
-        '--sf-color-info-light':      'oklch(0.55 0.15 240)',
-        '--sf-color-danger-light':    'oklch(0.48 0.24 12)',
-        '--sf-color-success-dark':    'oklch(0.70 0.17 150)',
-        '--sf-color-warning-dark':    'oklch(0.82 0.15 80)',
-        '--sf-color-error-dark':      'oklch(0.72 0.18 35)',
-        '--sf-color-info-dark':       'oklch(0.68 0.14 240)',
-        '--sf-color-danger-dark':     'oklch(0.62 0.21 12)'
-      };
+      // Hidden probes pinned to each mode so light-dark() resolves
+      // deterministically regardless of OS/page theme. Reading the *resolved*
+      // --sf-color-X on a probe shows exactly what the framework renders —
+      // including the auto-derived dark value when no -dark override is set.
+      function makeProbe(theme) {
+        const el = document.createElement('span');
+        el.setAttribute('data-theme', theme);
+        el.style.cssText = 'position:absolute;width:0;height:0;visibility:hidden;pointer-events:none;';
+        root.appendChild(el);
+        return el;
+      }
+      const probes = { light: makeProbe('light'), dark: makeProbe('dark') };
 
-      // Pre-computed hex fallbacks for browsers that cannot resolve oklch via canvas
+      // Pre-computed hex fallbacks for engines that can't resolve oklch.
       const HEX_FALLBACKS = {
-        '--sf-color-primary-light':   '#1b3fbf',
-        '--sf-color-secondary-light': '#2d2f3d',
-        '--sf-color-tertiary-light':  '#9b3fb8',
-        '--sf-color-action-light':    '#0090a8',
-        '--sf-color-neutral-light':   '#7c7e8a',
-        '--sf-color-base-light':      '#f8f7fa',
-        '--sf-color-primary-dark':    '#6b8aff',
-        '--sf-color-secondary-dark':  '#c5c6cc',
-        '--sf-color-tertiary-dark':   '#c478d9',
-        '--sf-color-action-dark':     '#5cc8e0',
-        '--sf-color-neutral-dark':    '#979aa5',
-        '--sf-color-base-dark':       '#282a33',
-        '--sf-color-success-light':   '#1e8c4a',
-        '--sf-color-warning-light':   '#c58c1a',
-        '--sf-color-error-light':     '#d95525',
-        '--sf-color-info-light':      '#1a6dbf',
-        '--sf-color-danger-light':    '#c4211a',
-        '--sf-color-success-dark':    '#47c97a',
-        '--sf-color-warning-dark':    '#e6b84d',
-        '--sf-color-error-dark':      '#f07a52',
-        '--sf-color-info-dark':       '#4d9ee0',
-        '--sf-color-danger-dark':     '#e84f47'
+        '--sf-color-primary-light':   '#1b3fbf', '--sf-color-secondary-light': '#2d2f3d',
+        '--sf-color-tertiary-light':  '#9b3fb8', '--sf-color-action-light':    '#0090a8',
+        '--sf-color-neutral-light':   '#7c7e8a', '--sf-color-base-light':      '#f8f7fa',
+        '--sf-color-success-light':   '#1e8c4a', '--sf-color-warning-light':   '#c58c1a',
+        '--sf-color-error-light':     '#d95525', '--sf-color-info-light':      '#1a6dbf',
+        '--sf-color-danger-light':    '#c4211a'
       };
 
-      function resolveTokenHex(token) {
-        // Try reading computed value from :root
-        const raw = getComputedStyle(root).getPropertyValue(token).trim();
-        if (raw) {
-          const hex = colorToHex(raw);
-          if (hex !== '#000000' || raw.includes('0, 0, 0') || raw === '#000000' || raw === 'black') {
-            return hex;
-          }
-        }
-        // Try oklch default
-        if (TOKEN_DEFAULTS[token]) {
-          const hex = colorToHex(TOKEN_DEFAULTS[token]);
-          if (hex !== '#000000') return hex;
-        }
-        // Final fallback: pre-computed hex
-        return HEX_FALLBACKS[token] || '#000000';
+      // data-token is the SOURCE token an input writes to (…-light / …-dark);
+      // the swatch shows the RESOLVED base token (--sf-color-X) in that mode,
+      // so dark always reflects the live auto-derived (or overridden) value.
+      function resolvedHex(token) {
+        const mode  = token.endsWith('-dark') ? 'dark' : 'light';
+        const base  = token.replace(/-(light|dark)$/, '');
+        const probe = probes[mode];
+        probe.style.color = 'initial';
+        probe.style.color = 'var(' + base + ')';
+        const hex = colorToHex(getComputedStyle(probe).color); // computed value is rgb()
+        return hex !== '#000000' ? hex : (HEX_FALLBACKS[token] || '#000000');
       }
 
       function syncValueLabel(input) {
@@ -1735,52 +1701,43 @@
         if (label) label.textContent = input.value;
       }
 
-      function applyToken(token, hex) {
-        root.style.setProperty(token, hex);
+      // Refresh every picker from the resolved truth. Dark pickers without an
+      // explicit -dark override display the auto-derived value and follow
+      // -light edits live.
+      function syncAll() {
+        inputs.forEach(input => {
+          input.value = resolvedHex(input.dataset.token);
+          syncValueLabel(input);
+        });
       }
 
-      // Initialize each input from the current resolved token value
       inputs.forEach(input => {
-        const token = input.dataset.token;
-        const hex = resolveTokenHex(token);
-        input.value = hex;
-        syncValueLabel(input);
-
         input.addEventListener('input', () => {
-          applyToken(token, input.value);
-          syncValueLabel(input);
+          // Writing a -dark token is what converts the auto-derived value into
+          // an explicit override; editing -light leaves dark on auto-derive.
+          root.style.setProperty(input.dataset.token, input.value);
+          syncAll();
         });
       });
 
-      // Reset all — clear inline overrides on :root, then re-read defaults
+      syncAll();
+
+      // Reset — drop every inline override; -light reverts to its @property
+      // default and dark returns to auto-derivation.
       document.getElementById('cz-reset').addEventListener('click', () => {
         inputs.forEach(input => root.style.removeProperty(input.dataset.token));
-        inputs.forEach(input => {
-          const token  = input.dataset.token;
-          const hex = resolveTokenHex(token);
-          input.value = hex;
-          syncValueLabel(input);
-        });
+        syncAll();
       });
 
-      // Randomize brand colors (primary / secondary / tertiary / action) for both modes
+      // Randomize brand hues — set only -light and let dark auto-derive, to
+      // showcase single-input branding.
       document.getElementById('cz-randomize').addEventListener('click', () => {
-        const brandKeys = ['primary', 'secondary', 'tertiary', 'action'];
-        brandKeys.forEach(key => {
-          const baseHue = Math.floor(Math.random() * 360);
-          // Light: lower L, fuller chroma
-          const light = 'oklch(0.50 0.18 ' + baseHue + ')';
-          // Dark: higher L, slightly lower chroma — same hue family
-          const dark  = 'oklch(0.72 0.14 ' + baseHue + ')';
-          applyToken('--sf-color-' + key + '-light', light);
-          applyToken('--sf-color-' + key + '-dark',  dark);
+        ['primary', 'secondary', 'tertiary', 'action'].forEach(key => {
+          const hue = Math.floor(Math.random() * 360);
+          root.style.setProperty('--sf-color-' + key + '-light', 'oklch(0.50 0.18 ' + hue + ')');
+          root.style.removeProperty('--sf-color-' + key + '-dark');
         });
-        // Re-sync inputs to the new computed values
-        inputs.forEach(input => {
-          const token  = input.dataset.token;
-          input.value  = resolveTokenHex(token);
-          syncValueLabel(input);
-        });
+        syncAll();
       });
     })();
 
