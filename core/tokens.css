@@ -2,16 +2,16 @@
    SLASHED — core/tokens.css
    @layer slashed.tokens
 
-   ARCHITEKTURA — 3 warstwy:
-     1. @property source tokens  — animowalne, 6 brand + 5 status (-light only); -dark jest opcjonalny
-     2. Resolved semantic tokens — light-dark() z auto-derywacją dark z light (relative color syntax)
-     3. Derived tokens           — relative color syntax (auto-kontrast, odcienie)
+   ARCHITECTURE — 3 layers:
+     1. @property source tokens  — animatable, 6 brand + 5 status (-light only); -dark is optional
+     2. Resolved semantic tokens — light-dark() with auto-derivation of dark from light (relative color syntax)
+     3. Derived tokens           — relative color syntax (auto-contrast, tints/shades)
 
-   THEMOWANIE — wystarczy nadpisać 6 tokenów -light. Dark mode auto-dostosowuje się
-     przez relative color syntax — zero dodatkowej pracy. Aby mieć pełną kontrolę
-     nad dark mode, nadpisz opcjonalnie tokeny -dark (niezarejestrowane custom properties).
+   THEMING — override just the 6 -light tokens. Dark mode auto-adapts via
+     relative color syntax — zero extra work. For full control over dark mode,
+     optionally override the -dark tokens (unregistered custom properties).
 
-     Quick branding (6 tokenów):
+     Quick branding (6 tokens):
      :root {
        --sf-color-primary-light:   oklch(0.45 0.20 264);
        --sf-color-secondary-light: oklch(0.25 0.03 260);
@@ -25,24 +25,26 @@
        --sf-color-primary-dark: oklch(0.75 0.18 264);
      }
 
-   BEM CONSUMER API — większość tokenów jest celowo nieużywana przez
-   framework. Tokeny takie jak --sf-shadow-*, --sf-blur-*, --sf-gap,
-   --sf-gradient-* itd. są przeznaczone do użycia w autorskich klasach BEM:
+   BEM CONSUMER API — most tokens are intentionally unused by the
+   framework itself. Tokens such as --sf-shadow-*, --sf-blur-*, --sf-gap,
+   --sf-gradient-* etc. are meant for use in your own BEM classes:
      .card { box-shadow: var(--sf-shadow-m); gap: var(--sf-gap); }
-   Brak użycia wewnątrz frameworka NIE oznacza martwego kodu.
+   "Not used internally" does NOT mean dead code: every token is exercised
+   in docs/demo.html and validated by the regression suite (tests/), so an
+   unreferenced token is never untested or orphaned.
 
-   RELACJA Z tokens.layout.css — aliasy spacing w sekcji "Spacing aliases"
-   są source of truth dla --sf-space-gap i --sf-space-content w
-   tokens.layout.css. Nadpisując --sf-gap zmieniasz gapy we wszystkich
-   layout primitives (cluster, grid, sidebar itd.).
+   RELATION TO tokens.layout.css — the spacing aliases in the "Spacing
+   aliases" section are the source of truth for --sf-space-gap and
+   --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
+   gaps across all layout primitives (cluster, grid, sidebar, etc.).
    ============================================================ */
 
 @layer slashed.tokens {
 
   /* ============================================================
-     @property — BRAND COLORS (-light source tokens, animowalne)
-     Nadpisz te 6 tokenów aby zmienić markę — dark mode auto-derivuje.
-     Opcjonalnie ustaw --sf-color-X-dark (bez @property) dla pełnej kontroli.
+     @property — BRAND COLORS (-light source tokens, animatable)
+     Override these 6 tokens to rebrand — dark mode auto-derives.
+     Optionally set --sf-color-X-dark (no @property) for full control.
      ============================================================ */
 
   @property --sf-color-primary-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.45 0.20 264); }
@@ -133,8 +135,8 @@
       oklch(from var(--sf-color-neutral)       clamp(0.25, calc(l - 0.2),  0.55) c h)
     );
     --sf-color-text--inverse: light-dark(
-      oklch(from var(--sf-color-neutral-light) calc(l + 0.4) c h),
-      oklch(from var(--sf-color-neutral)       calc(l - 0.4) c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.4), 1)    c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
     );
     --sf-color-heading: light-dark(
       oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
@@ -187,8 +189,14 @@
        Links — derived from --sf-color-action (auto-adapts)
        ---------------------------------------------------------- */
     --sf-color-link:            var(--sf-color-action);
-    --sf-color-link--hover:     oklch(from var(--sf-color-action) calc(l + 0.1) c h);
-    --sf-color-link--active:    oklch(from var(--sf-color-action) calc(l + 0.15) c h);
+    --sf-color-link--hover:     light-dark(
+      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.1),  1) c h),
+      oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1),  1) c h)
+    );
+    --sf-color-link--active:    light-dark(
+      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.15), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, calc(l + 0.15), 1) c h)
+    );
     --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 40));
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
@@ -284,7 +292,7 @@
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
     --sf-shadow-glow-color: var(--sf-color-primary);
-    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / calc(0.4 * var(--sf-shadow-strength) * 5));
+    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(0.4 * var(--sf-shadow-strength) * 5), 0.7));
     --sf-opacity-disabled:  0.45;
 
 
@@ -325,14 +333,35 @@
     --sf-font-display: var(--sf-font-heading);
     --sf-font-mono:    ui-monospace, monospace;
 
+    /* Optional system-font stacks (zero-cost, no @import) */
+    --sf-font-humanist:  "Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif;
+    --sf-font-geometric: "Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif;
+    --sf-font-slab:      "Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
+
+    /* Opt-in OpenType / variable-font controls (token-only, not applied by the framework) */
+    --sf-font-features:  normal;  /* e.g. "cv11", "ss01" */
+    --sf-font-variation: normal;  /* e.g. "wght" 450, "opsz" 32 */
+    --sf-optical-sizing: auto;
+
 
     /* ----------------------------------------------------------
        Font weights
        ---------------------------------------------------------- */
-    --sf-font-weight-body:    400;
-    --sf-font-weight-bold:    700;
-    --sf-font-weight-heading: 600;
-    --sf-font-weight-display: 700;
+    /* Numeric scale (Tailwind / Open Props parity) */
+    --sf-font-weight-thin:       100;
+    --sf-font-weight-extralight: 200;
+    --sf-font-weight-light:      300;
+    --sf-font-weight-normal:     400;
+    --sf-font-weight-medium:     500;
+    --sf-font-weight-semibold:   600;
+    --sf-font-weight-bold:       700;
+    --sf-font-weight-extrabold:  800;
+    --sf-font-weight-black:      900;
+
+    /* Semantic aliases — reference the numeric scale */
+    --sf-font-weight-body:    var(--sf-font-weight-normal);
+    --sf-font-weight-heading: var(--sf-font-weight-semibold);
+    --sf-font-weight-display: var(--sf-font-weight-bold);
 
 
     /* ----------------------------------------------------------
@@ -418,6 +447,18 @@
 
 
     /* ----------------------------------------------------------
+       Breakpoints — values only (no media-query utilities).
+       Use in your own @media / @container queries.
+       ---------------------------------------------------------- */
+    --sf-breakpoint-xs:  20rem;   /* 320px  */
+    --sf-breakpoint-s:   40rem;   /* 640px  */
+    --sf-breakpoint-m:   48rem;   /* 768px  */
+    --sf-breakpoint-l:   64rem;   /* 1024px */
+    --sf-breakpoint-xl:  80rem;   /* 1280px */
+    --sf-breakpoint-2xl: 96rem;   /* 1536px */
+
+
+    /* ----------------------------------------------------------
        Aspect ratios
        ---------------------------------------------------------- */
     --sf-ratio-square:   1;
@@ -455,26 +496,44 @@
 
     /* ----------------------------------------------------------
        Shadows — BEM consumer API
-       Używaj w autorskich klasach: .card { box-shadow: var(--sf-shadow-m); }
+       Use in your own classes: .card { box-shadow: var(--sf-shadow-m); }
        ---------------------------------------------------------- */
-    --sf-shadow-color:    220 40% 2%;  /* WIP: surowe wartości HSL do integracji z definicjami cieni */
+    /* Shadow tint — neutral near-black auto-derived from the palette
+       (carries the brand hue at low chroma). Forced dark in both modes;
+       --sf-shadow-strength handles dark-mode intensity. Override to a
+       brand color for tinted/colored shadows: var(--sf-color-primary). */
+    --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 calc(c * 2) h);
 
     --sf-shadow-none:  none;
-    --sf-shadow-xs:    0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5));
-    --sf-shadow-s:     0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 2px 6px 0 rgb(0 0 0 / var(--sf-shadow-strength));
-    --sf-shadow-m:     0 1px 3px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 4px 12px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
-    --sf-shadow-l:     0 2px 4px 0   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 8px 24px 0  rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3)),
-                       0 16px 48px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
-    --sf-shadow-xl:    0 2px 8px 0   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 12px 36px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 3.5)),
-                       0 24px 72px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2.5));
-    --sf-shadow-2xl:   0 4px 12px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.6)),
-                       0 20px 60px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 4)),
-                       0 40px 100px -8px   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 5));
-    --sf-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
+    --sf-shadow-xs:    0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7));
+    --sf-shadow-s:     0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                       0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7));
+    --sf-shadow-m:     0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                       0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+    --sf-shadow-l:     0 2px 4px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                       0 8px 24px 0  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)),
+                       0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+    --sf-shadow-xl:    0 2px 8px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                       0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)),
+                       0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
+    --sf-shadow-2xl:   0 4px 12px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)),
+                       0 20px 60px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)),
+                       0 40px 100px -8px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7));
+    --sf-shadow-inner: inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+
+
+    /* ----------------------------------------------------------
+       Text shadows — share --sf-shadow-color / --sf-shadow-strength
+       ---------------------------------------------------------- */
+    --sf-text-shadow-none: none;
+    --sf-text-shadow-s: 0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7));
+    --sf-text-shadow-m: 0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7));
+    --sf-text-shadow-l: 0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
+
+    /* Drop shadows — for filter: drop-shadow() (respects alpha edges) */
+    --sf-drop-shadow-s: drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)));
+    --sf-drop-shadow-m: drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7)));
+    --sf-drop-shadow-l: drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)));
 
 
     /* ----------------------------------------------------------
@@ -485,6 +544,11 @@
     --sf-blur-m:  16px;
     --sf-blur-l:  32px;
     --sf-blur-xl: 48px;
+
+    /* 3D perspective */
+    --sf-perspective-near:   500px;
+    --sf-perspective-normal: 1000px;
+    --sf-perspective-far:    2000px;
 
     --sf-opacity-0:   0;
     --sf-opacity-10:  0.1;
@@ -508,8 +572,31 @@
     --sf-ease-out:     cubic-bezier(0.25, 0, 0.15, 1);
     --sf-ease-in:      cubic-bezier(0.5, 0, 0.75, 0.25);
     --sf-ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
-    --sf-ease-spring:  linear(0, 0.5, 1.1, 0.95, 1.02, 1);
-    --sf-ease-elastic: linear(0, 0.3, 1.2, 0.9, 1.05, 1);
+    --sf-ease-spring:    linear(0, 0.5, 1.1, 0.95, 1.02, 1);
+    --sf-ease-elastic:   linear(0, 0.3, 1.2, 0.9, 1.05, 1);
+    --sf-ease-bounce:    linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1);
+    --sf-ease-overshoot: linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1);
+
+
+    /* ----------------------------------------------------------
+       Animation presets — pair keyframes (core/motion.css) with
+       duration + easing. Use directly: animation: var(--sf-animation-fade-in);
+       ---------------------------------------------------------- */
+    --sf-animation-fade-in:        sf-fade-in        var(--sf-duration-normal) var(--sf-ease-out)       both;
+    --sf-animation-fade-out:       sf-fade-out       var(--sf-duration-normal) var(--sf-ease-in)        both;
+    --sf-animation-slide-in-up:    sf-slide-in-up    var(--sf-duration-normal) var(--sf-ease-out)       both;
+    --sf-animation-slide-in-down:  sf-slide-in-down  var(--sf-duration-normal) var(--sf-ease-out)       both;
+    --sf-animation-slide-in-left:  sf-slide-in-left  var(--sf-duration-normal) var(--sf-ease-out)       both;
+    --sf-animation-slide-in-right: sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out)       both;
+    --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-overshoot) both;
+    --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
+
+
+    /* ----------------------------------------------------------
+       Scroll-driven animation range — attach to your own timeline.
+       ---------------------------------------------------------- */
+    --sf-scroll-timeline-range-start: 0%;
+    --sf-scroll-timeline-range-end:   100%;
 
 
     /* ----------------------------------------------------------
@@ -612,15 +699,15 @@
 
     /* ----------------------------------------------------------
        Spacing aliases — BEM consumer API
-       Używaj w autorskich klasach BEM: .nav { gap: var(--sf-gap); }
-       Source of truth dla tokens.layout.css:
-         --sf-space-gap     → var(--sf-gap)        (wszystkie layout primitives)
+       Use in your own BEM classes: .nav { gap: var(--sf-gap); }
+       Source of truth for tokens.layout.css:
+         --sf-space-gap     → var(--sf-gap)        (all layout primitives)
          --sf-space-content → var(--sf-content-gap) (stack, prose)
        ---------------------------------------------------------- */
-    --sf-gap:           var(--sf-space-m);  /* odstęp między elementami BEM */
-    --sf-content-gap:   var(--sf-space-s);  /* rytm wewnątrz komponentu */
-    --sf-component-pad: var(--sf-space-m);  /* standardowy padding komponentu */
-    --sf-field-block:   var(--sf-space-l);  /* blokowy odstęp pola formularza */
+    --sf-gap:           var(--sf-space-m);  /* gap between BEM elements */
+    --sf-content-gap:   var(--sf-space-s);  /* rhythm within a component */
+    --sf-component-pad: var(--sf-space-m);  /* standard component padding */
+    --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
 
 
     /* ----------------------------------------------------------

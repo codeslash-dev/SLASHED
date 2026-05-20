@@ -23,6 +23,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="core/base.css">
 <link rel="stylesheet" href="core/layout.css">
 <link rel="stylesheet" href="core/states.css">
+<link rel="stylesheet" href="core/motion.css">
 <link rel="stylesheet" href="core/accessibility.css">
 <link rel="stylesheet" href="core/print.css">
 
@@ -34,10 +35,15 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="optional/legacy.css">
 ```
 
-Or use the pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
+**Recommended:** use a pre-built bundle instead of wiring up every file
+(see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
 
 ```html
+<!-- core only -->
 <link rel="stylesheet" href="slashed.essential.css">
+
+<!-- core + populated optionals (palette, legacy) -->
+<link rel="stylesheet" href="slashed.full.css">
 ```
 
 ## Cascade layer order
@@ -62,7 +68,8 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | `layers` + `tokens` + `reset` + `base` + `layout` + `states` + `accessibility` + `print` |
+| `slashed.essential.css` | `layers` + `tokens` + `reset` + `base` + `layout` + `states` + `motion` + `accessibility` + `print` |
+| `slashed.full.css` | essential + `tokens.palette` + `legacy` |
 
 ## Customising tokens
 
@@ -115,10 +122,12 @@ support to pre-`@layer` browsers.
 ## Development
 
 ```sh
-npm run build        # bundle dist/slashed.essential.css
+npm run build        # build dist/ bundles (essential + full)
 npm run watch        # rebuild on change
 npm run lint:css     # stylelint all CSS
 npm run lint:css:fix # auto-fix where possible
+npm test             # token regression suite (Playwright, light + dark)
+npm run test:install # one-time: install the Chromium test browser
 npm run release      # bump version, update CHANGELOG, tag & push
 ```
 

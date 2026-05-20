@@ -7,7 +7,9 @@ if [ -n "$STAGED_CSS" ]; then
   echo "$STAGED_CSS" | tr '\n' '\0' | xargs -0 npx stylelint
 fi
 
-# Rebuild dist bundle and stage it
+# Rebuild dist bundles and stage them
 node scripts/bundle.js
-output=$(node -e "process.stdout.write(require('./bundle.config.json').output)")
-git add "$output"
+outputs=$(node -e "const c=require('./bundle.config.json'); const b=Array.isArray(c.bundles)?c.bundles:[c]; process.stdout.write(b.map(x=>x.output).join('\n'))")
+echo "$outputs" | while IFS= read -r f; do
+  [ -n "$f" ] && git add "$f"
+done

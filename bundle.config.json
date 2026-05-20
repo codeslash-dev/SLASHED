@@ -1,15 +1,36 @@
 {
-  "output": "dist/slashed.essential.css",
-  "files": [
-    "core/layers.css",
-    "core/tokens.css",
-    "core/tokens.layout.css",
-    "core/reset.css",
-    "core/base.css",
-    "core/layout.css",
-    "core/states.css",
-    "core/motion.css",
-    "core/accessibility.css",
-    "core/print.css"
+  "bundles": [
+    {
+      "output": "dist/slashed.essential.css",
+      "files": [
+        "core/layers.css",
+        "core/tokens.css",
+        "core/tokens.layout.css",
+        "core/reset.css",
+        "core/base.css",
+        "core/layout.css",
+        "core/states.css",
+        "core/motion.css",
+        "core/accessibility.css",
+        "core/print.css"
+      ]
+    },
+    {
+      "output": "dist/slashed.full.css",
+      "files": [
+        "core/layers.css",
+        "core/tokens.css",
+        "core/tokens.layout.css",
+        "core/reset.css",
+        "core/base.css",
+        "core/layout.css",
+        "core/states.css",
+        "core/motion.css",
+        "core/accessibility.css",
+        "core/print.css",
+        "optional/tokens.palette.css",
+        "optional/legacy.css"
+      ]
+    }
   ]
 }

@@ -149,4 +149,42 @@ core/accessibility.css
 core/print.css
 ```
 
-Optional files are loaded independently by the consumer as needed.
+The full bundle (`dist/slashed.full.css`) adds the populated optional files
+(`optional/tokens.palette.css`, then `optional/legacy.css` last). The empty
+`components`/`utilities`/`tokens.components` files are not bundled. Bundles are
+declared in `bundle.config.json` and built by `scripts/bundle.js`.
+
+---
+
+## Known intentional tradeoffs
+
+These behaviors are deliberate. Documented here so they aren't mistaken for bugs.
+
+- **Text-on-color threshold is a hard switch.** `--sf-color-text--on-*` use
+  `sign(0.6 - l)` to pick black or white text. This is a binary decision: a color at
+  lightness 0.59 gets white text, 0.60 gets black. The default `tertiary` and
+  `neutral` (L 0.55) therefore get white text at ~4.2:1 contrast — **AA Large, not AA
+  Normal**. Use them for large text / UI chrome, or set an explicit text color for
+  small text. The trough exists for any color near L 0.6 (default or user-supplied);
+  a binary threshold cannot remove it. A future upgrade path is CSS `contrast-color()`
+  once it has broad support.
+- **Smooth scroll is disabled while something has focus.** `core/motion.css` sets
+  `html:focus-within { scroll-behavior: auto }` (the Andy Bell pattern). Clicking an
+  anchor focuses the target, so smooth scroll won't animate for that click — a
+  deliberate trade to avoid hijacking keyboard navigation.
+- **The `base` palette ramp is V-shaped, not monotonic.** In
+  `optional/tokens.palette.css`, `base-*` mixes `--sf-color-text` *into* base for
+  tints and base *into* text for shades, so it is surface-relative, not a perceptual
+  lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
+  differs from Material/Tailwind conventions.
+
+---
+
+## Deferred (until the component layer exists)
+
+`@starting-style` and CSS anchor positioning are only meaningful attached to a
+specific element/component transition (dialog, popover, tooltip). They are out of
+scope while `optional/components.css` is empty and will be added with the components.
+The component-free part — scroll-driven animation range tokens
+(`--sf-scroll-timeline-range-*`) — already ships in `core/tokens.css`.
+

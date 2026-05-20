@@ -143,4 +143,26 @@
     top: var(--sf-space-m);
   }
 
+  /* ----------------------------------------------------------
+     Forced colors (Windows High Contrast). Outline-based focus
+     already survives; we only (a) adopt the system Highlight
+     colour for the ring and (b) drop decorative shadows that
+     forced-colors would otherwise flatten into solid slabs.
+     Shadow removal is zero-specificity so any rule can win it back.
+     ---------------------------------------------------------- */
+  @media (forced-colors: active) {
+    :root {
+      --sf-focus-ring-color: Highlight;
+    }
+
+    :focus-visible {
+      outline-color: Highlight !important;
+    }
+
+    :where(*) {
+      box-shadow:  none;
+      text-shadow: none;
+    }
+  }
+
 }
