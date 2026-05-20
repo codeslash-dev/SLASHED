@@ -140,7 +140,354 @@ Tabela porównuje SLASHED z czterema referencyjnymi frameworkami (Pico CSS v2, A
 
 ## 4. Findings
 
-_TODO: filled by FEAT-001C._
+Sekcja zawiera 20 ustaleń uporządkowanych malejąco wg severity (`critical → high → medium → low → nit`). Każde ustalenie cytuje konkretny `path:line` z drzewa źródłowego na commicie `e2d8165` oraz co najmniej jeden URL referencyjny z [Załącznika C / sources.md](#10-appendix-c--sources-cited). Trzy świadome stuby (`optional/components.css`, `optional/utilities.css`, `optional/tokens.components.css`) raportowane są jako `gap`, nigdy `bug` — zgodnie z user-confirmed deliberate-stub. Trzy udokumentowane intencjonalne tradeoffy z `docs/architecture.md` § Known intentional tradeoffs (binary `sign(0.6 - l)`, `html:focus-within { scroll-behavior: auto }`, V-shaped ramp `base-*`) są w tej sekcji wyłącznie informacyjne (`docs`); polemika żyje w sekcji 7. Stałe stwierdzenia historyczne z poprzednich audytów, które kod już rozwiązuje (BUG-1/2/3, WARN-1, forced-colors absent, scroll-driven tokens, font-feature tokens, presets `sf-spin`/`sf-shimmer`-only, 4-stopniowa skala `font-weight`), są weryfikowane jako `⚠️ stale` w sekcji 5 i celowo nie są refilowane jako świeże ustalenia.
+
+### F-01 — Brak bibliotecznych komponentów UI: `optional/components.css` jest pustym szkieletem
+Severity:   critical
+Category:   gap
+Evidence:   `optional/components.css:7-11` — całe wnętrze warstwy to znacznik pracy:
+```css
+@layer slashed.components {
+  /* TODO */
+}
+```
+Compared to: Pico v2 dostarcza pełen katalog semantycznych komponentów bez klas (button, form, card, modal, nav, table, accordion, dropdown, tooltip, progress) — patrz [Pico button](https://picocss.com/docs/button). Bulma v1 ma 11 elementów + 10 komponentów (`.button`, `.card`, `.modal`, `.notification`, `.tag`, `.navbar`, `.breadcrumb`, `.pagination`, `.tabs`, `.message`, …) — patrz [Bulma elements](https://bulma.io/documentation/elements/) i [Bulma components](https://bulma.io/documentation/components/).
+Impact:     Konsument linkujący `slashed.full.css` w gotowej stronie nie dostaje żadnego renderowanego buttona, karty, modala ani alertu — tylko prymitywy układu z `core/layout.css` i tokeny. Każdy projekt poza demo musi sam napisać warstwę komponentów, co przekreśla obietnicę "no build, no Node, just link CSS" dla aplikacji aspirujących do parytetu z Pico/Bulmą.
+Recommendation: Utrzymać status `gap`, nie przekształcać w `bug` — stuby są celowe (potwierdzone przez użytkownika) i opisane w `docs/architecture.md` § Deferred. Zaprojektować pierwszą iterację warstwy komponentów (button, card, alert, modal — minimum produktowy) jako oddzielną epicę po zamknięciu tego audytu; do tego czasu README i wiersz "What's not here yet" w sekcji 1 mają jawnie wymieniać brakujące komponenty.
+Effort:     L
+
+### F-02 — Floor wsparcia przeglądarek w README jest niezgodny z faktycznym feature-line frameworka
+Severity:   high
+Category:   docs
+Evidence:   `README.md:113-117` deklaruje cascade-layer baseline jako próg:
+```text
+Targets modern browsers; requires native cascade layers (floor:
+~2022 — Safari 15.4, Chrome 99, Firefox 97).
+```
+Tymczasem `core/tokens.css:91` używa `light-dark()`, `core/tokens.css:152-163` używa `sign()`, `core/tokens.css:50` rejestruje 12 `@property` z `<color>` oraz typowanymi liczbami, a `optional/tokens.palette.css:30` używa `color-mix(in oklch …)` z relative color syntax.
+Compared to: Tailwind v4 jawnie deklaruje wymóg Safari 16.4+ / Chrome 111+ / Firefox 128+ ze względu na te same prymitywy — patrz [Tailwind v4 colors](https://tailwindcss.com/docs/colors). Realny feature-line SLASHED to: `light-dark()` Safari 17.5+ ([caniuse light-dark](https://caniuse.com/mdn-css_types_color_light-dark)), `@property` Firefox 128+ ([caniuse @property](https://caniuse.com/mdn-css_at-rules_property)), `oklch()` + relative color syntax Safari 16.4+ ([caniuse oklch](https://caniuse.com/mdn-css_types_color_oklch), [caniuse relative colors](https://caniuse.com/css-relative-colors)), `color-mix()` Firefox 113+ ([caniuse color-mix](https://caniuse.com/mdn-css_types_color_color-mix)), `:has()` Firefox 121+ ([caniuse :has](https://caniuse.com/css-has)), `sign()` cross-browser dopiero od mid-2024 ([caniuse sign()](https://caniuse.com/mdn-css_types_sign)).
+Impact:     Konsument na bazie deklaracji README zakłada, że framework działa na Safari 15.4 / Firefox 97 i wdraża go do produkcji — w rzeczywistości na tych przeglądarkach ciemny motyw jest nieprzełączalny (`light-dark()` nieobsługiwane), tokeny `text--on-*` zwracają `unset` (`sign()` brak), a paleta `optional/tokens.palette.css` nie generuje stopni (`color-mix` brak na Firefox <113). To bug-class incident w przeglądarce, którą README oficjalnie dopuszcza.
+Recommendation: Przepisać akapit `Browser support` w README — podać prawdziwy próg (Safari 17.5 / Chrome 119 / Firefox 128, datowane na maj 2026) i jednym zdaniem wyjaśnić, że cascade-layer baseline jest wymogiem koniecznym, ale nie wystarczającym; zaktualizować `docs/architecture.md` § Browser support tym samym tekstem.
+Effort:     S
+
+### F-03 — Warstwa `slashed.themes` zadeklarowana, ale w drzewie źródłowym faktycznie pusta
+Severity:   medium
+Category:   inconsistency
+Evidence:   `core/layers.css:13` deklaruje warstwę i `docs/architecture.md:68` opisuje jej zawartość ("Dark mode, forced colors, brand palettes"):
+```css
+slashed.themes,
+```
+Faktyczne reguły dark-mode siedzą jednak w `core/base.css:32-33` (warstwa `slashed.base`), a forced-colors w `core/accessibility.css:153-166` (warstwa `slashed.accessibility`) — `grep -RIn 'slashed.themes' core/ optional/` zwraca wyłącznie deklarację z `core/layers.css`.
+Compared to: Tailwind v4 trzyma `dark:` w spójnym mechanizmie variant-based — patrz [Tailwind dark mode](https://tailwindcss.com/docs/dark-mode); Pico v2 kapsułkuje motywy w `[data-theme]` blokach z dokumentem-schedulerem — patrz [Pico color schemes](https://picocss.com/docs/color-schemes). W obu przypadkach jest jeden węzeł CSS z motywami, nie deklaracja-bez-implementacji.
+Impact:     Ktoś próbujący dodać własny motyw przez `@layer slashed.themes { … }` (zgodnie z `docs/architecture.md`) odkryje, że jego reguły wygrywają z `[data-theme]` w `slashed.base` — bo `themes` jest wyżej w stosie. Dla maintenance-team gap "deklaracja vs implementacja" zwiększa koszt nawigacji i utrudnia code-review.
+Recommendation: Przenieść bloki `[data-theme="light"|="dark"]` z `core/base.css:32-33` oraz `@media (forced-colors: active)` z `core/accessibility.css:153-166` do nowego pliku `core/themes.css` z `@layer slashed.themes { … }`, dodać go do `bundle.config.json` essential bundle bezpośrednio za `core/states.css` (tj. tam gdzie ma stać wg layer order). Alternatywnie: usunąć deklarację `slashed.themes` z `core/layers.css` i zaktualizować `docs/architecture.md` jeśli intencją jest by motywy żyły rozproszone.
+Effort:     M
+
+### F-04 — `prefers-contrast: more` zwiększa wyłącznie grubość focus-ringa, nie podnosi kontrastu treści
+Severity:   medium
+Category:   a11y
+Evidence:   `core/accessibility.css:61-69`:
+```css
+@media (prefers-contrast: more) {
+  :root { --sf-focus-ring-width: 3px; }
+  hr    { border-block-start-width: 2px; }
+}
+```
+Cały blok ignoruje semantyczne tokeny tekstowe (`--sf-color-text--muted`, `--sf-color-border--subtle`) i tokeny statusowe.
+Compared to: Pico v2 ma w pełni zhardenowaną gamę kolorów testowanych pod kątem AA — patrz [Pico colors](https://picocss.com/docs/colors); Tailwind v4 oferuje variant `contrast-more:` pozwalający przesterować dowolne klasy utility — patrz [Tailwind v4 colors](https://tailwindcss.com/docs/colors). SLASHED nie podbija ani jednego rozmytego koloru, mimo że ma na wejściu request użytkownika.
+Impact:     Użytkownik systemowy z włączoną opcją "Increase contrast" (macOS, Windows High Contrast pre-forced-colors, Android) dostaje grubszy focus-ring, ale tekst przez `--sf-color-text--muted` nadal ma kontrast bliski progu AA Large; w trybie `dark` z brand `tertiary` (L 0.55) wynik jest niezdolny do AA Normal. To regres dostępności w grupie najbardziej wrażliwej.
+Recommendation: W bloku `@media (prefers-contrast: more)` przesterować również: `--sf-color-text--muted: var(--sf-color-text)`, `--sf-color-border--subtle: var(--sf-color-border)`, `--sf-color-text--placeholder: var(--sf-color-text--secondary)` oraz wymusić `text-decoration: underline` na linkach inline. Każdy override jednolinijkowy w istniejącym bloku.
+Effort:     S
+
+### F-05 — `docs/demo.html` pokrywa 36 z 101 zadeklarowanych klas `.sf-*` i 6 z 35 klas `.is-*`
+Severity:   medium
+Category:   docs
+Evidence:   Liczniki:
+```sh
+grep -hoE '\.sf-[a-z0-9-]+' core/*.css optional/*.css | sort -u | wc -l   # 101
+grep -oE 'class="[^"]*"' docs/demo.html | grep -oE 'sf-[a-z0-9-]+' | sort -u | wc -l   # 36
+grep -hoE '\.is-[a-z-]+' core/*.css optional/*.css | sort -u | wc -l      # 35
+grep -oE 'class="[^"]*"' docs/demo.html | grep -oE 'is-[a-z-]+' | sort -u | wc -l       # 6
+```
+Niedemonstrowane (próbka): `sf-alternate`, `sf-box`, `sf-center`, `sf-imposter`, `sf-subgrid`, `sf-grid--xs/--s/--m/--l/--xl`, `sf-grid-1`, `sf-grid-6`, `sf-grid-1-2`, `sf-grid-3-1`, `sf-section--s/--l/--xl`, `sf-section-group`, `sf-cover--min/--max/--padding-s/--padding-l`, `sf-container--full/--wide`, `sf-cluster--2xs/--xs/--center/--end/--between/--no-wrap`, `sf-stack--2xl/--3xl/--center/--end/--stretch`, `sf-frame--3-2/--4-3/--golden`, `sf-sidebar--narrow/--wide`, `sf-fade-out`, `sf-scale-down`, `sf-bento--2/--4/--compact/--tall` oraz prawie cała rodzina `.is-*` (`is-active`, `is-busy`, `is-clickable`, `is-clipped`, `is-collapsed`, `is-current`, `is-danger`, `is-draggable`, `is-dragging`, `is-drop-target`, `is-empty`, `is-error`, `is-expanded`, `is-fixed`, `is-highlighted`, `is-info`, `is-invalid`, `is-overlay`, `is-pinned`, `is-readonly`, `is-scrollable`, `is-selected`, `is-success`, `is-sticky`, `is-unselectable`, `is-valid`, `is-visible`, `is-warning`).
+Compared to: Pico v2 ma osobną stronę docs dla każdej rodziny komponentów — patrz [Pico docs](https://picocss.com/docs); Bulma v1 dla każdego helpera ma sekcję z live-przykładem — patrz [Bulma helpers](https://bulma.io/documentation/helpers/). SLASHED ma jedną stronę `docs/demo.html` (1832 linie) prezentującą głównie rdzeń.
+Impact:     Konsument oceniający framework przed adopcją nie wie, że istnieje `.sf-imposter` ani `.sf-bento--tall`, bo demo ich nie pokazuje — ryzykuje zduplikowanie funkcjonalności w aplikacji albo odrzucenie SLASHED na tym etapie. Maintenance-team nie ma też ścieżki regression-przez-eyeball (klasa pominięta w demo nie zostanie zauważona, gdy ktoś ją niechcący zepsuje).
+Recommendation: Dodać do `docs/demo.html` sekcję "Layout primitives — full coverage" z minimalnym wzorcem dla każdej brakującej klasy układu (`.sf-imposter`, wszystkie warianty `.sf-bento`, wszystkie warianty `.sf-grid-N-M`, wszystkie warianty `.sf-cluster--*` i `.sf-stack--*`) oraz dla każdej klasy stanu sekcję "States" z listą `.is-*` na sztucznym przycisku/diviku.
+Effort:     M
+
+### F-06 — `sign(0.6 - l) * 999` wymusza binarny próg kontrastu tekst-na-kolorze (informacyjne, NIE bug)
+Severity:   medium
+Category:   docs
+Evidence:   `core/tokens.css:152-163`:
+```css
+--sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+--sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+```
+`docs/architecture.md:159-170` § Known intentional tradeoffs eksplicytnie kodyfikuje ten zachowanie i dopuszcza AA Large (~4.2:1) dla `tertiary`/`neutral`.
+Compared to: Pico v2 dostarcza ręcznie sparowane jasny/ciemny tekst dla każdej hue family — patrz [Pico colors](https://picocss.com/docs/colors); Tailwind v4 zostawia decyzję autorowi (`text-white`/`text-black` na bazie utility) — patrz [Tailwind colors](https://tailwindcss.com/docs/colors). Przyszłe `contrast-color()` rozwiąże to natywnie ([caniuse contrast-color](https://caniuse.com/mdn-css_types_color_oklch) — feature-line jeszcze niedojrzały).
+Impact:     Konsument używający domyślnego `--sf-color-tertiary` lub `--sf-color-neutral` jako tła karty z napisem `--sf-color-text--on-*` dostanie tekst o kontraście ~4.2:1 — niezgodny z WCAG AA Normal dla tekstu poniżej 18pt. Ustalenie jest informacyjne; sekcja 7 audytu polemizuje z tradeoffem na poziomie projektowym.
+Recommendation: Pozostawić zachowanie zgodne z `docs/architecture.md` — to nie jest bug. Dodać do README jednoakapitową notę "Text-on-color is AA Large for `tertiary`/`neutral`; use `--sf-color-text` for body copy" z linkiem do rozdziału § Known intentional tradeoffs. Po dojrzeniu `contrast-color()` wymienić wyrażenie `sign(0.6 - l)` na natywną funkcję.
+Effort:     XS
+
+### F-07 — README promuje 14 ręcznych `<link>` ponad pre-built bundle, co czyni kolejność load-bearing
+Severity:   medium
+Category:   foot-gun
+Evidence:   `README.md:17-37` przedstawia jako pierwsze 14 niezależnych `<link>` w ścisłym porządku (`core/layers.css` najpierw, `optional/legacy.css` ostatni); dopiero `README.md:39-48` opcjonalnie ("**Recommended:**") wspomina o `slashed.essential.css` / `slashed.full.css`:
+```html
+<link rel="stylesheet" href="core/layers.css">
+<link rel="stylesheet" href="core/tokens.css">
+…
+<link rel="stylesheet" href="optional/legacy.css">
+```
+Compared to: Tailwind v4 ma domyślnie pojedynczy plik wynikowy z dyrektywą `@import "tailwindcss"` i dopiero zaawansowani konfigurują warstwy — patrz [Tailwind getting started](https://tailwindcss.com/docs); Pico v2 ma jeden CDN `<link>` w pierwszym kroku quick-start — patrz [Pico docs](https://picocss.com/docs); Bulma v1 to też jeden plik — patrz [Bulma overview](https://bulma.io/documentation/overview/start/).
+Impact:     Konsument kopiuje 14 tagów do swojej aplikacji i przy refaktoringu (np. zmiana kolejności linków, usunięcie nieużywanego pliku) łamie kaskadę — `core/layers.css` musi być pierwszy, inaczej `@layer` nie istnieje gdy reszta plików go używa. To classic foot-gun: wszystko działa lokalnie, łamie się dopiero w momencie, gdy ktoś wstawi własny `<link>` przed `layers.css` w `<head>`.
+Recommendation: Odwrócić wagę: Quick-start ma pokazywać dwie linijki bundle (`<link rel="stylesheet" href="dist/slashed.essential.css">` lub `slashed.full.css`); 14-link-setup spakować w `<details><summary>Manual file-by-file setup (advanced)</summary>` — z jawną notą "Order matters; `core/layers.css` MUST load first". Zmiana czysto edytorska w `README.md`.
+Effort:     XS
+
+### F-08 — Literały `1px solid #999` w `core/print.css` i `2px solid/dashed` w `core/states.css` łamią regułę "every value via var()"
+Severity:   low
+Category:   inconsistency
+Evidence:   `core/print.css:65`:
+```css
+border:  1px solid #999;
+```
+`core/states.css:74`:
+```css
+border:        2px solid var(--sf-color-border--strong);
+```
+`core/states.css:228-229`:
+```css
+outline:        2px dashed var(--sf-color-action);
+outline-offset: 2px;
+```
+`docs/architecture.md:31-39` § Tokens explicitly: "Every value via `var()`."
+Compared to: Tailwind v4 utility-classes nie mają literałów w wynikowym CSS (każdy `border-2` to token `var(--border-width-2)`) — patrz [Tailwind border-width](https://tailwindcss.com/docs/border-width); Bulma v1 wszystkie wymiary dla `.box` pochodzą z `$box-radius`, `$box-shadow` — patrz [Bulma customize](https://bulma.io/documentation/customize/).
+Impact:     Konsument przesterowujący `--sf-border-width-2`/`--sf-color-border` (np. dla brand-skinningu) zaobserwuje, że `.is-loading::after` i `.is-drop-target` nadal mają stary wygląd — bo trzy literały po cichu obchodzą token-system. Print-style pokaże szare ramki niezależnie od motywu.
+Recommendation: Zamienić literały na istniejące tokeny:
+```css
+/* core/print.css:65 */
+border: var(--sf-border-width-1) solid var(--sf-color-border);
+/* core/states.css:74 */
+border: var(--sf-border-width-2) solid var(--sf-color-border--strong);
+/* core/states.css:228-229 */
+outline:        var(--sf-border-width-2) dashed var(--sf-color-action);
+outline-offset: var(--sf-space-2xs);
+```
+Jeśli `--sf-border-width-1`/`--sf-border-width-2` jeszcze nie istnieją — dodać je do `core/tokens.css` w sekcji "Borders" (token `var()`-only zgodnie z architekturą).
+Effort:     XS
+
+### F-09 — `core/accessibility.css` używa literału `44px` zamiast tokena `--sf-touch-target`
+Severity:   low
+Category:   inconsistency
+Evidence:   `core/accessibility.css:95-99`:
+```css
+a {
+  min-height: 44px;
+  min-width:  44px;
+}
+```
+Token `core/tokens.css:613`: `--sf-touch-target: var(--sf-size-l);` — istnieje, ale nie jest tu konsumowany.
+Compared to: Tailwind v4 wystawia `min-h-touch` przez tokens.json — patrz [Tailwind size](https://tailwindcss.com/docs); Pico v2 ma `--pico-form-element-height` jako single source — patrz [Pico CSS variables](https://picocss.com/docs/css-variables). Mając token, użycie literału jest dryf konsystencji.
+Impact:     Konsument próbujący zmienić touch-target z 44px na 48px (np. dla projektu mobile-first) przesterowuje `--sf-touch-target` w `:root`, ale `@media (pointer: coarse)` nadal wymusza 44px na buttonach i linkach — token jest martwą deklaracją przy obecnym kodzie.
+Recommendation: Zamienić literały na token w istniejącym bloku:
+```css
+@media (pointer: coarse) {
+  button, input[type="button"], input[type="submit"], input[type="reset"],
+  select, summary, a {
+    min-height: var(--sf-touch-target);
+    min-width:  var(--sf-touch-target);
+  }
+}
+```
+Effort:     XS
+
+### F-10 — `.is-truncated` bez `min-width: 0` — wielokropek nie pojawia się we flex/grid track
+Severity:   low
+Category:   bug
+Evidence:   `core/states.css:212-216`:
+```css
+.is-truncated {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+}
+```
+Compared to: Bulma v1 `.is-clipped` nie obsługuje truncation, ale Tailwind v4 helpera `truncate` wzbogaca o `min-width: 0` — patrz [Tailwind text-overflow](https://tailwindcss.com/docs). Pico v2 nie ma odpowiednika.
+Impact:     Element `<span class="is-truncated">…</span>` umieszczony jako dziecko `.sf-cluster` (flex z `min-content` defaultem) nie obetnie się — w computed-style `min-width` rezolwuje do `auto = max-content`, więc kontener flexowy daje mu pełną szerokość treści zamiast wymusić ellipsy. To realna pętla bug-reportowa: "wielokropek mi nie działa".
+Recommendation: Dodać jeden wiersz w istniejącej regule (zachowuje obecny set):
+```css
+.is-truncated {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+  min-width:     0;
+}
+```
+Effort:     XS
+
+### F-11 — `@media (pointer: coarse)` wymusza 44×44 na każdym `<a>`, łamiąc linki inline w paragrafach
+Severity:   low
+Category:   a11y
+Evidence:   `core/accessibility.css:87-101`:
+```css
+@media (pointer: coarse) {
+  button, input[type="button"], input[type="submit"], input[type="reset"],
+  select, summary,
+  a { min-height: 44px; min-width: 44px; }
+}
+```
+Komentarz powyżej w `core/accessibility.css:82-86` celowo zostawia regułę "normal" jako "recommendation, not unbreakable rule" — ale selektor `a` jest zbyt szeroki.
+Compared to: Pico v2 stosuje touch-target wyłącznie do `<button>`/form-controls, nie do tekstowych `<a>` — patrz [Pico forms](https://picocss.com/docs/forms); Bulma v1 nie wymusza w ogóle (właściciel projektu odpowiada) — patrz [Bulma overview](https://bulma.io/documentation/overview/start/). WCAG 2.5.5 dopuszcza wyjątek "inline link in a sentence" — selektor go nie respektuje.
+Impact:     Każdy link tekstowy w akapicie na urządzeniu dotykowym zostaje rozciągnięty do 44px wysokości, łamiąc rytm wiersza i wymuszając duże białe pasy między linijkami z hipertekstem. To regresja UX dokładnie w grupie, którą reguła miała chronić.
+Recommendation: Zawęzić selektor `a` do `a[role="button"], .sf-button a, nav a` (lub innej deklaracji "to jest link-jak-button"), zostawiając goły `<a>` w paragrafie nieobjęty regułą:
+```css
+@media (pointer: coarse) {
+  button, input[type="button"], input[type="submit"], input[type="reset"],
+  select, summary,
+  a[role="button"] { min-height: var(--sf-touch-target); min-width: var(--sf-touch-target); }
+}
+```
+Effort:     S
+
+### F-12 — 106 wystąpień `oklch(from …)` w `core/tokens.css` przeliczanych przy każdym repaint
+Severity:   low
+Category:   perf
+Evidence:   `grep -c 'oklch(from' core/tokens.css` zwraca `106`. Próbka z `core/tokens.css:152-163`:
+```css
+--sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+--sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+```
+Compared to: Tailwind v4 emituje statyczne klasy utility z gotowymi wartościami `oklch()` (bez relative-color przeliczania) — patrz [Tailwind theme](https://tailwindcss.com/docs/theme). Pico v2 trzyma RGB w hex, bez żadnego runtime-CSS-color-eval — patrz [Pico CSS variables](https://picocss.com/docs/css-variables).
+Impact:     Strona z dużą paletą (`slashed.full.css` ładuje też `optional/tokens.palette.css` z dodatkowymi 132 `color-mix()`) zmusza silnik renderujący do re-rezolwowania wszystkich relative-color expressions przy każdej zmianie `--sf-color-primary` (np. theme-toggle). Na słabszym sprzęcie mobilnym pojedynczy theme-switch jest mierzalnie wolniejszy niż w Pico/Tailwind. Brak dokumentacji tej charakterystyki.
+Recommendation: Nie precomputować — to zniszczyłoby no-build promise. Zamiast tego dodać do README sekcję "Performance characteristics" z notą o relative-color-syntax-cost i zaleceniem unikania theme-toggle w hot-path. Zaktualizować `docs/architecture.md` o akapit "Repaint cost" w § Tokens.
+Effort:     S
+
+### F-13 — 132 tokeny palety w `optional/tokens.palette.css` definiowane przez `color-mix()` per-paint
+Severity:   low
+Category:   perf
+Evidence:   `grep -c 'color-mix' optional/tokens.palette.css` zwraca `127`. Próbka z `optional/tokens.palette.css:30-45`:
+```css
+--sf-color-primary-50:  color-mix(in oklch, var(--sf-color-primary)  4%, var(--sf-color-base));
+--sf-color-primary-a5:  color-mix(in oklch, var(--sf-color-primary)  5%, transparent);
+```
+6 brand × (11 stopni + 11 alfa) ≈ 132 tokeny — wszystkie eager-evaluated.
+Compared to: Tailwind v4 nadal emituje statyczne hex/oklch dla klas paletowych — patrz [Tailwind colors](https://tailwindcss.com/docs/colors); Bulma v1 generuje paletę w Sass-time, więc CSS-output jest płaski — patrz [Bulma customize](https://bulma.io/documentation/customize/).
+Impact:     `slashed.full.css` ma dodatkowy koszt repaintu wprost proporcjonalny do liczby derived-tokenów (132 mixów). Na stronach lazy-load sekcjach z `data-theme="dark"` widoczny jest paint-tearing przy pierwszym wejściu w dark section. Konsument bez wiedzy o tym zjawisku diagnozuje to jako "framework jest wolny".
+Recommendation: Pozostawić architekturę — to świadomy tradeoff za no-build. Rozszerzyć README § Bundles o akapit: "`slashed.full.css` adds 132 derived palette tokens computed via `color-mix(in oklch …)`. If you only need brand colors, link `slashed.essential.css` instead — palette is opt-in." Plus w `docs/architecture.md` § Tokens: "Palette is opt-in; cost-neutral if you only ship `slashed.essential.css`."
+Effort:     XS
+
+### F-14 — Brak tokenów breakpointów (świadomy wybór, ale nieoznakowany w README)
+Severity:   low
+Category:   DX
+Evidence:   `docs/architecture.md:130-134` § Responsive design jawnie odrzuca breakpoint tokens:
+```text
+3. **Breakpoints** — a last resort. The framework ships no breakpoint tokens
+   (custom properties can't be used in `@media`/`@container` conditions);
+   hard-code a value in your own query if you truly need one.
+```
+W matrix sekcji 3 audytu wiersz "Breakpoint tokens" (linia 42) ma `● missing — breakpoint-free by design`.
+Compared to: Tailwind v4 wystawia 5 breakpointów + container-query variants — patrz [Tailwind responsive design](https://tailwindcss.com/docs/responsive-design); Bulma v1 ma `$breakpoints` Sass map — patrz [Bulma columns sizes](https://bulma.io/documentation/columns/sizes/).
+Impact:     Konsument migrujący z Tailwind/Bulma traci 30 minut szukając `--sf-breakpoint-md` zanim znajdzie akapit w `docs/architecture.md`. To friction-cost przy pierwszej godzinie z frameworkiem — nie problem inżynierski, lecz DX-ergonomic.
+Recommendation: Pozostawić wybór architektoniczny. Dodać do README jednolinijkową notę pod `## Browser support`: "Responsive design is container-query-first. No `--sf-breakpoint-*` tokens — see [docs/architecture.md § Responsive design](docs/architecture.md#responsive-design)."
+Effort:     XS
+
+### F-15 — `dist/slashed.essential.css` po cichu pomija `optional/tokens.palette.css`
+Severity:   low
+Category:   foot-gun
+Evidence:   `bundle.config.json:4-15` — essential bundle nie zawiera plików palette ani legacy:
+```json
+"output": "dist/slashed.essential.css",
+"files": [
+  "core/layers.css", "core/tokens.css", … "core/print.css"
+]
+```
+README.md:67-72 ("Bundles") ma tabelkę porównawczą, ale nie wymienia konkretnych tokenów które się różnią.
+Compared to: Tailwind v4 dystrybuuje pojedynczy plik (paleta w core, brak rozszczepienia) — patrz [Tailwind v4 colors](https://tailwindcss.com/docs/colors); Pico v2 dystrybuuje "classless" / "all" / "minimum" jako oddzielne pliki, każdy z full-paletą — patrz [Pico docs](https://picocss.com/docs).
+Impact:     Konsument linkuje `slashed.essential.css`, próbuje użyć `var(--sf-color-primary-500)` w swoim CSS i dostaje pustą wartość bez ostrzeżenia (niezarejestrowane custom property). Diagnoza wymaga przeczytania `bundle.config.json` i połączenia faktów. Token-name-pattern jest publiczny (`--sf-color-*-N00` brzmi jak Tailwind), więc consumer-expectation jest "to powinno działać".
+Recommendation: Rozszerzyć tabelkę "Bundles" w README.md o trzecią kolumnę "Includes palette ladder?" z `❌` dla essential, `✓` dla full. Alternatywnie: dodać do `core/tokens.css` `@property --sf-color-primary-500 { syntax: "<color>"; inherits: true; initial-value: transparent }` żeby consumer dostawał `transparent` zamiast `unset` (lepszy fail-mode).
+Effort:     XS
+
+### F-16 — Blok `accent-color` w `optional/legacy.css:80-94` jest komentarzem-no-op
+Severity:   nit
+Category:   docs
+Evidence:   `optional/legacy.css:80-94`:
+```css
+/* ============================================================
+   4. accent-color — form control tint
+   …
+   (no-op: accent-color has no CSS fallback; native default
+   control colour is the accepted degradation.)
+   ============================================================ */
+```
+Cały blok jest 15-liniowym komentarzem bez deklaracji.
+Compared to: Bulma v1 nie wystawia legacy-fallbacków (Sass-only) — patrz [Bulma customize](https://bulma.io/documentation/customize/); Tailwind v4 zostawia browser-degrade autorowi — patrz [Tailwind getting started](https://tailwindcss.com/docs).
+Impact:     Czytelnik `optional/legacy.css` widzi 5 numerowanych sekcji — `1. forced-colors`, `2. scrollbar-gutter`, `3. overflow-y: scroll`, `4. accent-color`, `5. (kontynuacja)` — i spodziewa się działającego kodu pod każdym numerem. Pusty blok łamie tę umowę. Dokumentacyjny.
+Recommendation: Albo usunąć cały blok (4 sekcja) i opisać luki w `CHANGELOG.md` przy kolejnym release, albo przenieść komentarz do `docs/architecture.md` § Deferred. Lekka edycja jednego pliku.
+Effort:     XS
+
+### F-17 — Container-query-first jako pozytyw architektoniczny vs Tailwind classes-with-breakpoints
+Severity:   nit
+Category:   DX
+Evidence:   `core/layout.css:27-31`:
+```css
+.sf-container {
+  container-type: inline-size;
+}
+```
+oraz `core/layout.css:296` (`.sf-bento`), `core/layout.css:305-358` (cztery bloki `@container (min-width: …)` na `.sf-alternate`/`.sf-bento`/`.sf-sidebar`), `core/layout.css:399-401` (`.sf-sidebar` przełącza orientację per-container, nie per-viewport).
+Compared to: Tailwind v4 utrzymuje breakpoint-first model (`sm:flex`, `md:grid`) z container-query variants jako sekundarnym narzędziem — patrz [Tailwind responsive design](https://tailwindcss.com/docs/responsive-design); Pico v2 nie ma container-queries w core. SLASHED jako jedyny w porównaniu robi to natywnie i konsekwentnie.
+Impact:     Konsument próbujący zrobić sidebar widget reusable na desktop i w sekcji `aside` na mobile w Tailwind ma dwa zestawy klas (responsive + container variants). W SLASHED ten sam `.sf-sidebar` przełącza się sam zależnie od kontenera, w którym żyje. To realna DX-przewaga, ale dziś niewspomniana w README.
+Recommendation: Dodać do README sekcję "Why container-queries first?" (3-5 linii) z linkiem do `docs/architecture.md` § Responsive design. Headline-jeden, treść-trzy zdania, link-jeden — czysty content-edit.
+Effort:     XS
+
+### F-18 — README quick-start linkuje 3 puste pliki stub jako wymagane
+Severity:   nit
+Category:   docs
+Evidence:   `README.md:30-34` — w bloku "optional" wymieniane są trzy pliki które są obecnie pustymi szkieletami:
+```html
+<link rel="stylesheet" href="optional/tokens.components.css">
+<link rel="stylesheet" href="optional/components.css">
+<link rel="stylesheet" href="optional/utilities.css">
+```
+`optional/components.css` (11 linii), `optional/utilities.css` (9 linii), `optional/tokens.components.css` (9 linii) zawierają tylko deklaracje warstw i `/* TODO */`.
+Compared to: Pico v2 ma `pico.classless.css` / `pico.css` / `pico.min.css` jako kompletne, samowystarczalne pliki — patrz [Pico docs](https://picocss.com/docs); Bulma v1 nie udostępnia pustych helpers — patrz [Bulma helpers](https://bulma.io/documentation/helpers/).
+Impact:     Czytelnik README wykonuje quick-start, dodaje 14 tagów, potem widzi 0 efektu od `components.css`/`utilities.css` i traci czas na diagnostykę "czemu nie ma buttona". Trzy `<link>` to 3 zbędne HTTP request bez korzyści przez cały okres do uzupełnienia warstwy komponentów.
+Recommendation: Wyciąć trzy stub-`<link>` z bloku "optional" w README, zostawiając tam tylko `tokens.palette.css` i `legacy.css`. Dodać uwagę pod blokiem: "`optional/components.css`, `optional/utilities.css` and `optional/tokens.components.css` ship empty today — link them only when the component layer is published."
+Effort:     XS
+
+### F-19 — Brak deklaratywnego API `data-*`/ARIA — wszystko przez klasy, w odróżnieniu od Pico
+Severity:   nit
+Category:   DX
+Evidence:   `grep -RIn 'data-[a-z]' core/*.css optional/*.css` zwraca tylko `core/base.css:32-33` (`[data-theme]`) — żadnego `data-tooltip`, `data-toggle`, `data-target`. Komponenty `.is-loading` (`core/states.css:60-77`) nie konsumują `aria-busy`:
+```css
+.is-loading {
+  color:          transparent !important;
+  pointer-events: none;
+  position:       relative;
+}
+```
+Compared to: Pico v2 stylizuje `aria-busy="true"` jako spinner — patrz [Pico loading](https://picocss.com/docs/loading), `data-tooltip` jako tooltip — patrz [Pico tooltip](https://picocss.com/docs/tooltip), `<details role="list">` jako dropdown — patrz [Pico dropdown](https://picocss.com/docs/dropdown). To headline value-prop "classless / semantic-HTML-first" Pico.
+Impact:     Konsument używający `<button aria-busy="true">` w wycinku HTML z innego frameworka musi w SLASHED jeszcze dodać `class="is-loading"`. Dla migrującego z Pico to friction. Dla a11y-pierwszych developerów (preferują ARIA nad ad-hoc class) to gap w idiomie.
+Recommendation: Dodać selektor równoległy na `[aria-busy="true"]` w `core/states.css` (alias `.is-loading`):
+```css
+.is-loading,
+[aria-busy="true"] { /* …existing rules… */ }
+```
+Reszta `data-*`-API to scope kolejnej warstwy komponentów (poza FEAT) — opisać w `docs/architecture.md` § Deferred.
+Effort:     S
+
+### F-20 — `--sf-color-link--visited` rotuje hue o `+40°` bez dokumentacji
+Severity:   nit
+Category:   docs
+Evidence:   `core/tokens.css:200`:
+```css
+--sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 40));
+```
+Brak adnotacji o tym zachowaniu w `docs/architecture.md`, w `docs/color-aliases-design-decisions.md`, ani w README.
+Compared to: Pico v2 trzyma `--pico-color-visited` jako jawny hex bez magic-number — patrz [Pico CSS variables](https://picocss.com/docs/css-variables); Tailwind v4 zostawia `visited:` variant autorowi — patrz [Tailwind colors](https://tailwindcss.com/docs/colors).
+Impact:     Konsument debugujący "czemu mój link odwiedzony jest fioletowy zamiast zielonego jak `--sf-color-action`" musi przeczytać 723 linie `core/tokens.css` zanim natknie się na `calc(h + 40)`. To 20-minutowy time-sink w pierwszym tygodniu z frameworkiem.
+Recommendation: Dodać 3-liniową notę do `docs/color-aliases-design-decisions.md`: "`--sf-color-link--visited` rotates hue of `--sf-color-action` by `+40°` (in OKLCH) to ensure visual distinction without re-defining a token. Override the whole token to disable."
+Effort:     XS
 
 ## 5. Existing audits — verification
 
