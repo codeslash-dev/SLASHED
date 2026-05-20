@@ -584,6 +584,23 @@
 
 
     /* ----------------------------------------------------------
+       Animation presets — shorthand tokens that pair a keyframe
+       (defined in core/motion.css) with a duration and easing.
+       Use as: `animation: var(--sf-animation-fade-in);`
+       Reduced-motion is honoured automatically via the duration
+       reset in core/accessibility.css.
+       ---------------------------------------------------------- */
+    --sf-animation-fade-in:        sf-fade-in        var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-fade-out:       sf-fade-out       var(--sf-duration-normal) var(--sf-ease-in)       both;
+    --sf-animation-slide-in-up:    sf-slide-in-up    var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-slide-in-down:  sf-slide-in-down  var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-slide-in-left:  sf-slide-in-left  var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-slide-in-right: sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-back-out) both;
+    --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)       both;
+
+
+    /* ----------------------------------------------------------
        Z-index
        ---------------------------------------------------------- */
     --sf-z-below:  -1;
@@ -1931,6 +1948,79 @@
       }
     }
 
+    /* ----------------------------------------------------------
+       Open/close transitions for top-layer elements (dialog,
+       popover). The @starting-style block defines the pre-open
+       state; allow-discrete on `display` and `overlay` lets them
+       animate across discrete value changes (none ↔ block,
+       not in top layer ↔ in top layer).
+       ---------------------------------------------------------- */
+    dialog, [popover] {
+      transition:
+        opacity var(--sf-duration-normal) var(--sf-ease-out),
+        scale   var(--sf-duration-normal) var(--sf-ease-back-out),
+        display var(--sf-duration-normal) allow-discrete,
+        overlay var(--sf-duration-normal) allow-discrete;
+    }
+    dialog[open], [popover]:popover-open {
+      opacity: 1;
+      scale:   1;
+    }
+    @starting-style {
+      dialog[open], [popover]:popover-open {
+        opacity: 0;
+        scale:   0.95;
+      }
+    }
+
+  }
+
+  /* ============================================================
+     ANIMATION PRESETS — keyframes
+     Live OUTSIDE the prefers-reduced-motion wrapper so they are
+     always defined and consumable via the --sf-animation-* tokens.
+     Reduced-motion neutralisation is handled in accessibility.css
+     by zeroing animation-duration with !important.
+     ============================================================ */
+
+  @keyframes sf-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes sf-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+
+  @keyframes sf-slide-in-up {
+    from { opacity: 0; translate: 0 1rem; }
+    to   { opacity: 1; translate: 0 0;    }
+  }
+
+  @keyframes sf-slide-in-down {
+    from { opacity: 0; translate: 0 -1rem; }
+    to   { opacity: 1; translate: 0 0;     }
+  }
+
+  @keyframes sf-slide-in-left {
+    from { opacity: 0; translate: 1rem 0; }
+    to   { opacity: 1; translate: 0    0; }
+  }
+
+  @keyframes sf-slide-in-right {
+    from { opacity: 0; translate: -1rem 0; }
+    to   { opacity: 1; translate: 0     0; }
+  }
+
+  @keyframes sf-scale-up {
+    from { opacity: 0; scale: 0.95; }
+    to   { opacity: 1; scale: 1;    }
+  }
+
+  @keyframes sf-scale-down {
+    from { opacity: 0; scale: 1.05; }
+    to   { opacity: 1; scale: 1;    }
   }
 
 }

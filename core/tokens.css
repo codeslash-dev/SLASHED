@@ -561,6 +561,23 @@
 
 
     /* ----------------------------------------------------------
+       Animation presets — shorthand tokens that pair a keyframe
+       (defined in core/motion.css) with a duration and easing.
+       Use as: `animation: var(--sf-animation-fade-in);`
+       Reduced-motion is honoured automatically via the duration
+       reset in core/accessibility.css.
+       ---------------------------------------------------------- */
+    --sf-animation-fade-in:        sf-fade-in        var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-fade-out:       sf-fade-out       var(--sf-duration-normal) var(--sf-ease-in)       both;
+    --sf-animation-slide-in-up:    sf-slide-in-up    var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-slide-in-down:  sf-slide-in-down  var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-slide-in-left:  sf-slide-in-left  var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-slide-in-right: sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out)      both;
+    --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-back-out) both;
+    --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)       both;
+
+
+    /* ----------------------------------------------------------
        Z-index
        ---------------------------------------------------------- */
     --sf-z-below:  -1;
