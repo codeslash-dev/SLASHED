@@ -1,6 +1,6 @@
 {
   "name": "slashed",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CSS framework",
   "scripts": {
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
