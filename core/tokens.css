@@ -187,8 +187,14 @@
        Links — derived from --sf-color-action (auto-adapts)
        ---------------------------------------------------------- */
     --sf-color-link:            var(--sf-color-action);
-    --sf-color-link--hover:     oklch(from var(--sf-color-action) calc(l + 0.1) c h);
-    --sf-color-link--active:    oklch(from var(--sf-color-action) calc(l + 0.15) c h);
+    --sf-color-link--hover:     light-dark(
+      oklch(from var(--sf-color-action-light) calc(l - 0.10) c h),
+      oklch(from var(--sf-color-action)       calc(l + 0.10) c h)
+    );
+    --sf-color-link--active:    light-dark(
+      oklch(from var(--sf-color-action-light) calc(l - 0.15) c h),
+      oklch(from var(--sf-color-action)       calc(l + 0.15) c h)
+    );
     --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 40));
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
