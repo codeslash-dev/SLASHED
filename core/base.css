@@ -4,33 +4,9 @@
 
 @layer slashed.base {
 
-  /* ============================================================
-     DARK / LIGHT MODE
-     ─────────────────
-     color-scheme tells the browser which mode is active.
-     By default we respect OS preference.
-
-     Usage:
-       <html>                        → follows OS preference
-       <html data-theme="dark">     → whole page dark
-       <section data-theme="dark">  → only this section dark
-     ============================================================ */
-
-  :root {
-    color-scheme: var(--sf-color-scheme, light dark);
-  }
-
-  /* OS preference — activates when no data-theme is set on :root */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
-      color-scheme: dark;
-      --sf-is-dark: 1;
-    }
-  }
-
-  /* Explicit theme — works on :root (whole page) or any element (section-level) */
-  [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
-  [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
+  /* Dark/light mode lives in core/themes.css (slashed.themes layer).
+     The baseline color-scheme: var(--sf-color-scheme, light dark) is
+     set on html in core/reset.css. */
 
   body {
     font-family:      var(--sf-body-font-family, var(--sf-font-body));
