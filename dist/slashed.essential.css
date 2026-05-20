@@ -544,6 +544,20 @@
                        0 40px 100px -8px   oklch(var(--sf-shadow-color) / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 5)));
     --sf-shadow-inner: inset 0 2px 4px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2));
 
+    /* Text shadows — multipliers 2/3/4 of base strength.
+       Use as: `text-shadow: var(--sf-text-shadow-m);` */
+    --sf-text-shadow-s: 0 1px 2px oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2));
+    --sf-text-shadow-m: 0 2px 4px oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 3));
+    --sf-text-shadow-l: 0 4px 8px oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 4));
+
+    /* Drop shadows — `filter` shorthands following the alpha box-
+       shadow tier. Multipliers 1.5/2/2.5 keep filter contrast in
+       a tighter range than text-shadow.
+       Use as: `filter: var(--sf-drop-shadow-m);` */
+    --sf-drop-shadow-s: drop-shadow(0 1px 2px oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 1.5)));
+    --sf-drop-shadow-m: drop-shadow(0 4px 6px oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2)));
+    --sf-drop-shadow-l: drop-shadow(0 8px 16px oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2.5)));
+
 
     /* ----------------------------------------------------------
        Blur & opacity
