@@ -112,10 +112,10 @@
     /* ----------------------------------------------------------
        base
        ---------------------------------------------------------- */
-    --sf-color-base-100: color-mix(in oklch, var(--sf-color-base)  8%, var(--sf-color-base));
-    --sf-color-base-200: color-mix(in oklch, var(--sf-color-base) 20%, var(--sf-color-base));
-    --sf-color-base-300: color-mix(in oklch, var(--sf-color-base) 40%, var(--sf-color-base));
-    --sf-color-base-400: color-mix(in oklch, var(--sf-color-base) 65%, var(--sf-color-base));
+    --sf-color-base-100: color-mix(in oklch, var(--sf-color-text)  8%, var(--sf-color-base));
+    --sf-color-base-200: color-mix(in oklch, var(--sf-color-text) 20%, var(--sf-color-base));
+    --sf-color-base-300: color-mix(in oklch, var(--sf-color-text) 40%, var(--sf-color-base));
+    --sf-color-base-400: color-mix(in oklch, var(--sf-color-text) 65%, var(--sf-color-base));
     --sf-color-base-600: color-mix(in oklch, var(--sf-color-base) 82%, var(--sf-color-text));
     --sf-color-base-700: color-mix(in oklch, var(--sf-color-base) 62%, var(--sf-color-text));
     --sf-color-base-800: color-mix(in oklch, var(--sf-color-base) 38%, var(--sf-color-text));
