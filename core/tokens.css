@@ -72,6 +72,33 @@
   :root {
 
     /* ----------------------------------------------------------
+       Control parameters: tune system behaviour. Override these
+       to reshape the dark-mode auto-derivation curve, the base-
+       surface inversion, or the shadow strength response without
+       redefining each derived token. Defaults are perceptually
+       calibrated for the stock palette.
+       ---------------------------------------------------------- */
+    /* Shadow alpha: light-mode floor + extra strength when --sf-is-dark=1. */
+    --sf-shadow-base-strength:    0.08;
+    --sf-shadow-dark-boost:       0.17;
+
+    /* Brand/status dark auto-derive curve:
+       L_dark = clamp(l-min, intercept - L_light * slope, l-max); C_dark = C_light * c-factor. */
+    --sf-derive-l-min:            0.65;
+    --sf-derive-l-max:            0.88;
+    --sf-derive-l-slope:          0.5;
+    --sf-derive-l-intercept:      0.95;
+    --sf-derive-c-factor:         0.9;
+
+    /* Base surface inversion curve (near-white light → near-dark dark):
+       L_dark = clamp(l-min, intercept - L_light, l-max); C_dark = C_light * c-factor. */
+    --sf-derive-base-l-min:       0.16;
+    --sf-derive-base-l-max:       0.24;
+    --sf-derive-base-l-intercept: 1.18;
+    --sf-derive-base-c-factor:    0.5;
+
+
+    /* ----------------------------------------------------------
        Color scheme
        ---------------------------------------------------------- */
     --sf-color-scheme: light dark;
@@ -83,21 +110,22 @@
        with your own light-dark() expression.
        ---------------------------------------------------------- */
     /* Dark auto-derivation formula (brand + status):
-       clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source.
-       Base inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark.
+       clamp(l-min, intercept - l * slope, l-max) lightens dark-mode value relative to the light source.
+       Base inverts: clamp(base-l-min, base-l-intercept - l, base-l-max) — near-white flips to near-dark.
+       Tune via the --sf-derive-* control parameters at the top of :root.
        Override any --sf-color-X-dark to take full per-mode control. */
-    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark,   oklch(from var(--sf-color-primary-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark,  oklch(from var(--sf-color-tertiary-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark,    oklch(from var(--sf-color-action-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark,   oklch(from var(--sf-color-neutral-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark,      oklch(from var(--sf-color-base-light)      clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h)));
+    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark,   oklch(from var(--sf-color-primary-light)   clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark,  oklch(from var(--sf-color-tertiary-light)  clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark,    oklch(from var(--sf-color-action-light)    clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark,   oklch(from var(--sf-color-neutral-light)   clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark,      oklch(from var(--sf-color-base-light)      clamp(var(--sf-derive-base-l-min), calc(var(--sf-derive-base-l-intercept) - l), var(--sf-derive-base-l-max)) calc(c * var(--sf-derive-base-c-factor)) h)));
 
-    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark,   oklch(from var(--sf-color-error-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark,    oklch(from var(--sf-color-info-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark,  oklch(from var(--sf-color-danger-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark,   oklch(from var(--sf-color-error-light)   clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark,    oklch(from var(--sf-color-info-light)    clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
+    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark,  oklch(from var(--sf-color-danger-light)  clamp(var(--sf-derive-l-min), calc(var(--sf-derive-l-intercept) - l * var(--sf-derive-l-slope)), var(--sf-derive-l-max)) calc(c * var(--sf-derive-c-factor)) h)));
 
 
     /* ----------------------------------------------------------
@@ -114,6 +142,14 @@
     /* ----------------------------------------------------------
        Text — light and dark require opposite formula directions,
        so each side of light-dark() references its source token.
+       Convention for the clamp triples in this and the
+       border/heading/status-strong sections: light side uses
+       (l - X) for darkening; dark side uses (l + X) for
+       lightening; clamp floors/ceilings prevent over-shoot when
+       consumers override --sf-color-neutral with extreme L
+       values. The literals are narrow perceptual choices, not
+       control parameters; they are kept inline rather than
+       tokenised.
        ---------------------------------------------------------- */
     --sf-color-text: light-dark(
       oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
@@ -294,7 +330,7 @@
     /* ----------------------------------------------------------
        Shadow — strength scales up in dark mode via --sf-is-dark
        ---------------------------------------------------------- */
-    --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
+    --sf-shadow-strength:   calc(var(--sf-shadow-base-strength) + var(--sf-is-dark) * var(--sf-shadow-dark-boost));
     --sf-shadow-cap:        0.7;
     --sf-shadow-glow-color: var(--sf-color-primary);
     --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / min(var(--sf-shadow-cap), calc(0.4 * var(--sf-shadow-strength) * 5)));

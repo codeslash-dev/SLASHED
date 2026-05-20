@@ -87,6 +87,52 @@ optional/
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals
 
+See [Token taxonomy](#token-taxonomy) below for naming conventions (suffixes, scales, control parameters).
+
+---
+
+## Token taxonomy
+
+Token names follow predictable suffix conventions. Each suffix encodes a specific role, so consumers can learn one pattern and apply it across colors, spacing, typography and motion.
+
+**Source pairs `*-light` / `*-dark`**: paired light- and dark-mode source values registered with `@property`. Override the `-light` token to rebrand; the matching `-dark` is auto-derived via relative color syntax, or you can override it explicitly for full per-mode control.
+
+- `--sf-color-primary-light` / `--sf-color-primary-dark`
+- `--sf-color-action-light` / `--sf-color-action-dark`
+- `--sf-color-success-light` / `--sf-color-success-dark`
+
+**State variants `*--{state}`**: interaction-state overlays attached with a double dash. The states are a closed set: `--hover`, `--focus`, `--active`, `--disabled`, plus selected/visited where it applies.
+
+- `--sf-color-link--hover`
+- `--sf-color-link--active`
+- `--sf-color-text--disabled`
+- `--sf-color-bg--selected`
+
+**Text-on-surface `*--on-{surface}`**: guaranteed-contrast foreground for a given surface token. Switches automatically between light and dark text via `sign()` on the surface luminance.
+
+- `--sf-color-text--on-primary`
+- `--sf-color-text--on-action`
+- `--sf-color-text--on-warning`
+
+**Scale steps `*-{scale}`**: t-shirt size suffixes for ordered scales. The standard ladder is `xs`, `s`, `m`, `l`, `xl`, `2xl` (and `3xl` / `4xl` where the scale extends). `m` is always the default.
+
+- `--sf-space-xs`, `--sf-space-m`, `--sf-space-2xl`
+- `--sf-text-s`, `--sf-text-l`, `--sf-text-3xl`
+- `--sf-radius-s`, `--sf-radius-xl`, `--sf-radius-full`
+- `--sf-shadow-xs`, `--sf-shadow-l`, `--sf-shadow-2xl`
+
+**Per-family / per-scope `*-{property}-{family}`**: typography and feature tokens scoped to a specific family or surface. Body, heading, display, mono each get their own slot so consumers can wire OpenType features and variable-font axes without leaking across families.
+
+- `--sf-font-features-body` / `--sf-font-features-heading` / `--sf-font-features-mono`
+- `--sf-font-variation-body` / `--sf-font-variation-heading` / `--sf-font-variation-display`
+
+**Control parameters**: knobs that tune system behaviour rather than expose visual values. Names end with `-cap`, `-threshold`, `-step`, `-base-strength`, `-dark-boost`, or `-derive-*`. Override these to reshape the underlying formula (dark-mode auto-derivation curve, shadow alpha response, on-color contrast switch) without redefining each derived token.
+
+- `--sf-shadow-cap`, `--sf-shadow-base-strength`, `--sf-shadow-dark-boost`
+- `--sf-on-color-light`, `--sf-on-color-dark`, `--sf-on-color-threshold`
+- `--sf-derive-l-min`, `--sf-derive-l-max`, `--sf-derive-l-slope`, `--sf-derive-l-intercept`, `--sf-derive-c-factor`
+- `--sf-derive-base-l-min`, `--sf-derive-base-l-max`, `--sf-derive-base-l-intercept`, `--sf-derive-base-c-factor`
+
 ---
 
 ## Specificity
