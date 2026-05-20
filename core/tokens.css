@@ -605,6 +605,19 @@
 
 
     /* ----------------------------------------------------------
+       Perspective & anchor offsets
+       Forward-looking tokens for CSS Anchor Positioning
+       (`anchor-name`, `position-anchor`, `inset-area`) and 3D
+       transforms (`perspective`). Not consumed by the framework
+       itself — provided for consumer authoring.
+       ---------------------------------------------------------- */
+    --sf-anchor-offset:      0;
+    --sf-perspective-near:   500px;
+    --sf-perspective-normal: 1000px;
+    --sf-perspective-far:    2000px;
+
+
+    /* ----------------------------------------------------------
        Layout & a11y
        ---------------------------------------------------------- */
     --sf-header-height:     8rem;
