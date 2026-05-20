@@ -177,3 +177,52 @@ Per status color (5 kolorów):
 1. **Czy aliasy funkcjonalne (`hover`, `active`) nie duplikują logiki z `core/tokens.css`?** - Tam są `--sf-color-bg--hover` (generyczne), tu byłyby `--sf-color-primary-hover` (per kolor). Inne scope, ale warto potwierdzić brak konfuzji.
 2. **Relacja `--sf-color-{status}-subtle/muted/strong` vs istniejące `--sf-status-{x}-bg/text/border`** - zastępujemy, aliasujemy, czy współistnieją?
 3. **Czy `500` alias powinien być literalnie `var(--sf-color-primary)` czy `color-mix(in oklch, var(--sf-color-primary) 100%, transparent)`** - dla spójności z resztą palety (wszystko jest color-mix)?
+
+---
+
+## Sign() discontinuity at L=0.6
+
+The on-color formula in `core/tokens.css` (used by every `--sf-color-text--on-*` alias) is:
+
+```css
+clamp(
+  var(--sf-on-color-dark),
+  sign(var(--sf-on-color-threshold) - l) * 999,
+  var(--sf-on-color-light)
+) 0 0
+```
+
+`sign()` returns one of three values: `-1`, `0`, `+1`. Multiplied by `999` and clamped to `[0.13, 0.97]`, the formula collapses into a binary switch: any background with `L > 0.6` gets dark text (0.13), any background with `L <= 0.6` gets light text (0.97). The transition is a **single-step discontinuity**: a brand color at `L = 0.59` reads white-on-color, the same hue at `L = 0.61` reads dark-on-color. Audit verification used Playwright to walk a brand color across the threshold in `0.01` increments and confirmed the flip happens at the documented point with no smoothing.
+
+This is intentional. Smoothing the transition would require a small range where the on-color text is mid-grey, which fails WCAG contrast on both ends. A clean flip preserves contrast at every L value outside the threshold zone.
+
+**Recommendation for theme authors**: keep brand colors outside the `L 0.58 ... 0.62` band. Colors that sit in that zone are visually ambiguous (neither "definitely light" nor "definitely dark") and a small downstream tweak (a hue rotation, a chroma bump) can flip the on-color side, producing a mode-switch that looks like a bug. Override `--sf-on-color-threshold` if you need to bias the flip point for a non-default palette.
+
+---
+
+## Base palette V-shape lightness curve
+
+`optional/tokens.palette.css` builds the numeric base scale (`--sf-color-base-100` through `--sf-color-base-900`) from `color-mix(in oklch, ...)` between `--sf-color-base` and `--sf-color-text`. The two formula branches are:
+
+- **Tints (100..400, "lighter than base")**: mix `--sf-color-text` into `--sf-color-base` at increasing percentages. In light mode, base is near-white and text is near-black, so adding text **darkens** these steps.
+- **Shades (600..900, "darker than base")**: mix `--sf-color-base` into `--sf-color-text` at decreasing percentages. Same colors, opposite roles, so adding base **lightens** these steps.
+
+The result is a **V-shaped luminance curve** rather than a monotonic 100 -> 900 darkening:
+
+| Step | L (light mode) | L (dark mode) |
+|------|----------------|---------------|
+| 100  | 0.91           | 0.27          |
+| 200  | 0.78           | 0.40          |
+| 300  | 0.65           | 0.53          |
+| 400  | 0.44           | 0.66          |
+| 500  | base           | base          |
+| 600  | 0.83           | 0.32          |
+| 700  | 0.65           | 0.50          |
+| 800  | 0.47           | 0.68          |
+| 900  | 0.30           | 0.86          |
+
+Notice that the apex of the V (the darkest step in light mode, the lightest step in dark mode) sits at `400` on the tint side and at `900` on the shade side. The two arms of the V are **symmetric across modes**: in dark mode, base is near-dark and text is near-light, so the same formulas auto-invert and produce a mirror-image V.
+
+This is intentional. The trade-off is monotonicity (Material/Tailwind keep `100 -> 900` strictly darker in every mode) for symmetry (SLASHED does not need a parallel `dark-100 ... dark-900` palette; the same tokens flip automatically). Authors who reach for `base-300` expecting "slightly darker than base in every mode" will find that it is darker in light mode and **lighter** in dark mode. The numeric step is a "distance from base" indicator, not an absolute luminance ranking.
+
+**Divergence from convention**: Material 3, Tailwind, Radix, and most other systems give you a monotonic `100..900` ladder. SLASHED diverges deliberately: those systems have separate light- and dark-mode palettes (twice the tokens). SLASHED uses one palette that auto-inverts. If you need a strict monotonic ladder, override the per-step tokens in `optional/tokens.palette.css` directly; the V-shape is a property of the mix formula, not of the tokens themselves.

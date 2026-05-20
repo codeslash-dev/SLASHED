@@ -105,6 +105,51 @@ Or shorthand with `light-dark()`:
 <section data-theme="dark">
 ```
 
+## Animation presets
+
+Eight named `animation` shorthands ship in `core/tokens.css`. Each pairs a keyframe (defined in `core/motion.css`) with a duration and easing.
+
+- `--sf-animation-fade-in`
+- `--sf-animation-fade-out`
+- `--sf-animation-slide-in-up`
+- `--sf-animation-slide-in-down`
+- `--sf-animation-slide-in-left`
+- `--sf-animation-slide-in-right`
+- `--sf-animation-scale-up`
+- `--sf-animation-scale-down`
+
+Use directly:
+
+```css
+.toast { animation: var(--sf-animation-slide-in-up); }
+```
+
+`core/accessibility.css` zeros every `--sf-duration-*` token and forces
+`animation-duration: 0s !important` for users with `prefers-reduced-motion: reduce`,
+so presets respect that preference automatically.
+
+## Accessibility baseline
+
+Out of the box, `core/accessibility.css` ships:
+
+- **Focus**: a high-contrast `:focus-visible` ring built from `--sf-focus-ring-*` tokens.
+- **Hidden helpers**: `.sr-only` and `.visually-hidden` for screen-reader-only content.
+- **Skip link**: `.skip-link` jumps to `#main` and reveals on focus.
+- **`prefers-reduced-motion`**: every `--sf-duration-*` token zeros out, plus `animation-duration` and `transition-duration` are forced to `0s !important`. `scroll-behavior` falls back to `auto !important`.
+- **`prefers-contrast: more`**: increases border weight, raises text contrast, removes translucency.
+- **`prefers-reduced-transparency`**: drops `backdrop-filter`, opaque overlays.
+- **`forced-colors: active`**: maps SLASHED tokens to system keywords (`Canvas`, `CanvasText`, `LinkText`, etc.).
+- **Touch targets**: `@media (pointer: coarse)` enforces a minimum 44px target via `--sf-touch-target`.
+- **Safe-area insets**: `--sf-safe-top/bottom/left/right` consume `env(safe-area-inset-*)` for notched devices.
+
+## Documentation
+
+- [Architecture](docs/architecture.md): cascade layer order, token taxonomy, file structure
+- [Token reference](docs/tokens.md): every public `--sf-` token with default value and override class
+- [Recipes](docs/recipes.md): cookbook for branding, theming, animation, container queries
+- [Color aliases design decisions](docs/color-aliases-design-decisions.md): rationale for the on-color formula and base palette V-shape
+- [0.1 to 0.2 migration](docs/migration-0.1-to-0.2.md): new tokens, bugfixes, behavioural changes
+
 ## Browser support
 
 Targets modern browsers; requires native cascade layers (floor:

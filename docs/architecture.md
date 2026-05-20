@@ -67,7 +67,7 @@ optional/
 
 **slashed.themes** — token overrides only, no new rules. Dark mode, forced colors, brand palettes.
 
-**slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`.
+**slashed.motion**: animation tokens, keyframes, transition utilities. No component selectors. The eight `--sf-animation-*` keyframes (`sf-fade-in`, `sf-slide-in-*`, `sf-scale-*`) are defined unconditionally so author rules can reference the shorthand tokens at any time. The `@media (prefers-reduced-motion: no-preference)` wrapper gates only the property-level transition rules and the `@starting-style` block for `dialog` and `[popover]`. Reduced-motion users are protected on two redundant axes: `core/accessibility.css` zeros every `--sf-duration-*` token, and applies property-level `!important` to `animation-duration` and `transition-duration`.
 
 **slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only).
 
@@ -86,6 +86,8 @@ optional/
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals
+
+> See [color-aliases-design-decisions.md](color-aliases-design-decisions.md) for two formula notes that affect token authoring: the [`sign()` discontinuity at L=0.6](color-aliases-design-decisions.md#sign-discontinuity-at-l06) used by every `--sf-color-text--on-*` alias, and the [base palette V-shape lightness curve](color-aliases-design-decisions.md#base-palette-v-shape-lightness-curve) used by `optional/tokens.palette.css`.
 
 See [Token taxonomy](#token-taxonomy) below for naming conventions (suffixes, scales, control parameters).
 
@@ -198,6 +200,8 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
    | `--sf-bp-2xl`    | `96em` | 1536px |
 
    Usage: `@media (min-width: var(--sf-bp-md)) { … }`
+
+5. **Smooth scroll**: `html { scroll-behavior: smooth }` is gated only by `@media (prefers-reduced-motion: no-preference)`. Anchor-link clicks scroll smoothly for users who have not requested reduced motion. Reduced-motion users get `scroll-behavior: auto !important` enforced in `core/accessibility.css`. The earlier `:focus-within` trapdoor pattern was removed in 0.2.0; see [migration notes](migration-0.1-to-0.2.md).
 
 ---
 

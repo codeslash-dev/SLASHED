@@ -533,6 +533,16 @@
             <li><a href="#layout-pancake">Pancake</a></li>
           </ul>
         </li>
+        <li><span class="nav-group-label">v0.2.0</span>
+          <ul class="nav-sub">
+            <li><a href="#font-weights">Font weights</a></li>
+            <li><a href="#animations">Animation presets</a></li>
+            <li><a href="#text-shadows">Text shadows</a></li>
+            <li><a href="#drop-shadows">Drop shadows</a></li>
+            <li><a href="#forced-colors">Forced colors</a></li>
+            <li><a href="#starting-style">@starting-style + popover</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
 
@@ -1549,6 +1559,165 @@
 
         <h3>Box Model (reset.css)</h3>
         <p style="font-size: var(--sf-text-s)">All elements: <code>box-sizing: border-box</code>. Media (<code>img, video, svg</code>): <code>display: block; max-width: 100%</code>. Margins/padding removed globally. <code>scrollbar-gutter: stable</code> prevents layout shift.</p>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           FONT WEIGHTS (v0.2.0)
+      ══════════════════════════════════════════════════════ -->
+      <section id="font-weights" class="demo-section">
+        <h2>Font weights</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          Full numeric scale 100..900 exposed as <code>--sf-font-weight-100</code> through <code>--sf-font-weight-900</code>. The actual rendered weight depends on the loaded font family; system fonts typically map intermediate weights to the nearest available cut.
+        </p>
+        <div class="sf-stack sf-stack--xs" style="font-size: var(--sf-text-l)">
+          <p style="font-weight: var(--sf-font-weight-100)">100 - Thin</p>
+          <p style="font-weight: var(--sf-font-weight-200)">200 - Extra Light</p>
+          <p style="font-weight: var(--sf-font-weight-300)">300 - Light</p>
+          <p style="font-weight: var(--sf-font-weight-400)">400 - Regular</p>
+          <p style="font-weight: var(--sf-font-weight-500)">500 - Medium</p>
+          <p style="font-weight: var(--sf-font-weight-600)">600 - Semibold</p>
+          <p style="font-weight: var(--sf-font-weight-700)">700 - Bold</p>
+          <p style="font-weight: var(--sf-font-weight-800)">800 - Extra Bold</p>
+          <p style="font-weight: var(--sf-font-weight-900)">900 - Black</p>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           ANIMATION PRESETS (v0.2.0)
+      ══════════════════════════════════════════════════════ -->
+      <section id="animations" class="demo-section">
+        <h2>Animation presets</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          Eight named <code>animation</code> shorthands. Hover any card to replay, or click <strong>Replay</strong> to retrigger via class toggle. Reduced-motion users see the end state without animation (durations zero out in <code>core/accessibility.css</code>).
+        </p>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          Underlying keyframes (defined in <code>core/motion.css</code>): <code>sf-fade-in</code>, <code>sf-fade-out</code>, <code>sf-slide-in-up</code>, <code>sf-slide-in-down</code>, <code>sf-slide-in-left</code>, <code>sf-slide-in-right</code>, <code>sf-scale-up</code>, <code>sf-scale-down</code>.
+        </p>
+        <style>
+          .anim-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sf-space-s);
+            padding: var(--sf-space-m);
+            border: 1px solid var(--sf-color-border);
+            border-radius: var(--sf-radius-m);
+            background: var(--sf-color-surface);
+            text-align: center;
+          }
+          .anim-card code { font-size: var(--sf-text-xs); }
+          .anim-box {
+            inline-size: 4rem;
+            block-size: 4rem;
+            margin-inline: auto;
+            border-radius: var(--sf-radius-m);
+            background: var(--sf-color-primary);
+          }
+          .anim-card[data-anim="fade-in"]:hover .anim-box,
+          .anim-card[data-anim="fade-in"].is-replay .anim-box        { animation: var(--sf-animation-fade-in); }
+          .anim-card[data-anim="fade-out"]:hover .anim-box,
+          .anim-card[data-anim="fade-out"].is-replay .anim-box       { animation: var(--sf-animation-fade-out); }
+          .anim-card[data-anim="slide-in-up"]:hover .anim-box,
+          .anim-card[data-anim="slide-in-up"].is-replay .anim-box    { animation: var(--sf-animation-slide-in-up); }
+          .anim-card[data-anim="slide-in-down"]:hover .anim-box,
+          .anim-card[data-anim="slide-in-down"].is-replay .anim-box  { animation: var(--sf-animation-slide-in-down); }
+          .anim-card[data-anim="slide-in-left"]:hover .anim-box,
+          .anim-card[data-anim="slide-in-left"].is-replay .anim-box  { animation: var(--sf-animation-slide-in-left); }
+          .anim-card[data-anim="slide-in-right"]:hover .anim-box,
+          .anim-card[data-anim="slide-in-right"].is-replay .anim-box { animation: var(--sf-animation-slide-in-right); }
+          .anim-card[data-anim="scale-up"]:hover .anim-box,
+          .anim-card[data-anim="scale-up"].is-replay .anim-box       { animation: var(--sf-animation-scale-up); }
+          .anim-card[data-anim="scale-down"]:hover .anim-box,
+          .anim-card[data-anim="scale-down"].is-replay .anim-box     { animation: var(--sf-animation-scale-down); }
+        </style>
+        <div class="sf-grid" style="--sf-grid-min: 12rem; gap: var(--sf-space-m)">
+          <div class="anim-card" data-anim="fade-in"><code>--sf-animation-fade-in</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="fade-out"><code>--sf-animation-fade-out</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="slide-in-up"><code>--sf-animation-slide-in-up</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="slide-in-down"><code>--sf-animation-slide-in-down</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="slide-in-left"><code>--sf-animation-slide-in-left</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="slide-in-right"><code>--sf-animation-slide-in-right</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="scale-up"><code>--sf-animation-scale-up</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+          <div class="anim-card" data-anim="scale-down"><code>--sf-animation-scale-down</code><div class="anim-box"></div><button type="button" onclick="this.parentElement.classList.remove('is-replay'); void this.parentElement.offsetWidth; this.parentElement.classList.add('is-replay');">Replay</button></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           TEXT SHADOWS (v0.2.0)
+      ══════════════════════════════════════════════════════ -->
+      <section id="text-shadows" class="demo-section">
+        <h2>Text shadows</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          Three sizes: <code>--sf-text-shadow-s</code>, <code>--sf-text-shadow-m</code>, <code>--sf-text-shadow-l</code>. Tint via <code>--sf-shadow-color</code>.
+        </p>
+        <div class="sf-stack" style="font-size: var(--sf-text-3xl); font-weight: var(--sf-font-weight-bold)">
+          <p style="text-shadow: var(--sf-text-shadow-s)">Small text shadow</p>
+          <p style="text-shadow: var(--sf-text-shadow-m)">Medium text shadow</p>
+          <p style="text-shadow: var(--sf-text-shadow-l)">Large text shadow</p>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           DROP SHADOWS (v0.2.0)
+      ══════════════════════════════════════════════════════ -->
+      <section id="drop-shadows" class="demo-section">
+        <h2>Drop shadows</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          Three filter shorthands: <code>--sf-drop-shadow-s</code>, <code>--sf-drop-shadow-m</code>, <code>--sf-drop-shadow-l</code>. Unlike <code>box-shadow</code>, <code>filter: drop-shadow()</code> follows the alpha silhouette of an SVG.
+        </p>
+        <div class="sf-cluster" style="--sf-cluster-gap: var(--sf-space-l); align-items: center; justify-content: space-around">
+          <svg width="80" height="80" viewBox="0 0 80 80" style="filter: var(--sf-drop-shadow-s)">
+            <circle cx="40" cy="40" r="32" fill="var(--sf-color-primary)"/>
+          </svg>
+          <svg width="80" height="80" viewBox="0 0 80 80" style="filter: var(--sf-drop-shadow-m)">
+            <polygon points="40,8 49,32 75,32 54,48 62,72 40,58 18,72 26,48 5,32 31,32" fill="var(--sf-color-warning)"/>
+          </svg>
+          <svg width="80" height="80" viewBox="0 0 80 80" style="filter: var(--sf-drop-shadow-l)">
+            <rect x="10" y="10" width="60" height="60" rx="8" fill="var(--sf-color-tertiary)"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           FORCED COLORS (v0.2.0)
+      ══════════════════════════════════════════════════════ -->
+      <section id="forced-colors" class="demo-section">
+        <h2>Forced colors</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          To preview: open Chrome DevTools, run <strong>Show Rendering</strong>, scroll to <strong>Emulate CSS media feature forced-colors</strong>, switch to <strong>active</strong>. The OS palette overrides every color and the elements below should retain crisp borders by binding to <code>CanvasText</code>.
+        </p>
+        <div class="sf-cluster" style="--sf-cluster-gap: var(--sf-space-m)">
+          <button type="button" style="padding: var(--sf-space-xs) var(--sf-space-m); border: 2px solid var(--sf-color-action); border-radius: var(--sf-radius-m); background: var(--sf-color-action); color: var(--sf-color-text--on-action)">Action button</button>
+          <div style="padding: var(--sf-space-m); border: 2px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface)">
+            Bordered container
+          </div>
+        </div>
+        <style>
+          @media (forced-colors: active) {
+            #forced-colors button,
+            #forced-colors > .sf-cluster > div {
+              border-color: CanvasText;
+            }
+          }
+        </style>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           @STARTING-STYLE + POPOVER (v0.2.0)
+      ══════════════════════════════════════════════════════ -->
+      <section id="starting-style" class="demo-section">
+        <h2>@starting-style + popover</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">
+          The framework's <code>core/motion.css</code> ships an <code>@starting-style</code> block for <code>dialog[open]</code> and <code>[popover]:popover-open</code>. Author rules can layer their own animation on top using the <code>--sf-animation-*</code> presets.
+        </p>
+        <button type="button" popovertarget="demo-popover" style="padding: var(--sf-space-xs) var(--sf-space-m); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-action); color: var(--sf-color-text--on-action); cursor: pointer">Show popover</button>
+        <div id="demo-popover" popover style="margin: auto; padding: var(--sf-space-l); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-l); background: var(--sf-color-raised); color: var(--sf-color-text); box-shadow: var(--sf-shadow-l); max-inline-size: 24rem">
+          <h3 style="margin-block-start: 0">Hello from a popover</h3>
+          <p>This element is in the top layer and is animated in via <code>--sf-animation-scale-up</code>.</p>
+          <button type="button" popovertarget="demo-popover" popovertargetaction="hide" style="padding: var(--sf-space-2xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-s); background: var(--sf-color-surface); color: var(--sf-color-text); cursor: pointer">Close</button>
+        </div>
+        <style>
+          #demo-popover:popover-open { animation: var(--sf-animation-scale-up); }
+        </style>
       </section>
 
     </main>
