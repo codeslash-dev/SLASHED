@@ -464,24 +464,26 @@
        Shadows — BEM consumer API
        Używaj w autorskich klasach: .card { box-shadow: var(--sf-shadow-m); }
        ---------------------------------------------------------- */
-    --sf-shadow-color:    220 40% 2%;  /* WIP: surowe wartości HSL do integracji z definicjami cieni */
+    /* OKLCH L C H components for shadow color. Defaults to neutral black.
+       Override e.g. `--sf-shadow-color: 0.2 0.05 260;` for tinted shadows. */
+    --sf-shadow-color:    0 0 0;
 
     --sf-shadow-none:  none;
-    --sf-shadow-xs:    0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5));
-    --sf-shadow-s:     0 1px 2px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 2px 6px 0 rgb(0 0 0 / var(--sf-shadow-strength));
-    --sf-shadow-m:     0 1px 3px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 4px 12px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
-    --sf-shadow-l:     0 2px 4px 0   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 8px 24px 0  rgb(0 0 0 / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 3))),
-                       0 16px 48px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
-    --sf-shadow-xl:    0 2px 8px 0   rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.5)),
-                       0 12px 36px 0 rgb(0 0 0 / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 3.5))),
-                       0 24px 72px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2.5));
-    --sf-shadow-2xl:   0 4px 12px 0       rgb(0 0 0 / calc(var(--sf-shadow-strength) * 0.6)),
-                       0 20px 60px 0       rgb(0 0 0 / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 4))),
-                       0 40px 100px -8px   rgb(0 0 0 / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 5)));
-    --sf-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / calc(var(--sf-shadow-strength) * 2));
+    --sf-shadow-xs:    0 1px 2px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 0.5));
+    --sf-shadow-s:     0 1px 2px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 2px 6px 0 oklch(var(--sf-shadow-color) / var(--sf-shadow-strength));
+    --sf-shadow-m:     0 1px 3px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 4px 12px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2));
+    --sf-shadow-l:     0 2px 4px 0   oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 8px 24px 0  oklch(var(--sf-shadow-color) / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 3))),
+                       0 16px 48px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2));
+    --sf-shadow-xl:    0 2px 8px 0   oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 0.5)),
+                       0 12px 36px 0 oklch(var(--sf-shadow-color) / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 3.5))),
+                       0 24px 72px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2.5));
+    --sf-shadow-2xl:   0 4px 12px 0       oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 0.6)),
+                       0 20px 60px 0       oklch(var(--sf-shadow-color) / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 4))),
+                       0 40px 100px -8px   oklch(var(--sf-shadow-color) / min(var(--sf-shadow-cap), calc(var(--sf-shadow-strength) * 5)));
+    --sf-shadow-inner: inset 0 2px 4px 0 oklch(var(--sf-shadow-color) / calc(var(--sf-shadow-strength) * 2));
 
 
     /* ----------------------------------------------------------
