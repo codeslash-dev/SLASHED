@@ -5,22 +5,28 @@
    declared before slashed.overrides in layers.css, so user
    overrides always win.
 
-   Target: the ~2022 baseline (first browsers with CSS cascade
-   layers — Safari 15.4, Chrome 99, Firefox 97) plus the tail of
-   early-2022 Safari 15.0–15.3 that has @layer-adjacent gaps.
+   IMPORTANT — what this file is NOT
+   ─────────────────────────────────
+   The framework's real support floor is Chrome 123+, Safari 17.5+,
+   Firefox 128+ (April–July 2024). That floor is set by the colour
+   system: light-dark(), @property with inherits, and the oklch()
+   relative-color form. None of those have a CSS-only fallback, so
+   on any older engine the framework's colours collapse to initial
+   regardless of what this file does. This file does NOT extend
+   the floor below those versions.
 
-   NOT a 2017 polyfill. @layer itself does not exist before this
-   window; nothing here can resurrect the framework in a browser
-   that ignores @layer wholesale. This file only smooths the
-   property-level gaps that remain INSIDE the supported window.
+   What this file IS
+   ─────────────────
+   Property-level smoothing for non-colour features that landed
+   later than @layer itself. Specifically: dvh on Safari 15.0–15.3,
+   :focus-visible on Safari pre-15.4, scrollbar-gutter on Safari
+   (still missing). Useful only for users who pin to early-2022
+   Safari for non-colour reasons; on modern engines every block
+   below is inert via @supports not (...).
 
-   Every block below is gated by @supports not (...), so on a
-   modern engine the rules are inert and contribute nothing.
-
-   Scope: covers gaps in reset.css, base.css, accessibility.css,
-   motion.css, print.css. oklch()/color-mix()/@property live in
-   tokens.css (out of scope here) and need their own token-level
-   fallbacks if a separate legacy token file is ever added.
+   Scope: covers gaps in reset.css, base.css, accessibility.css.
+   oklch()/color-mix()/@property live in tokens.css and have no
+   fallback path here.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.legacy {

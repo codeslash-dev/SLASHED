@@ -264,15 +264,12 @@
 
   /* ============================================================
      KEYFRAMES (used by states above)
+
+     Spinner and shimmer keyframes live in core/motion.css alongside
+     the rest of the framework's @keyframes. They are referenced from
+     here by name (sf-spin, sf-shimmer) and are inert until applied.
+     If you load core/states.css without core/motion.css, define them
+     in your own CSS or copy them from motion.css.
      ============================================================ */
-
-  @keyframes sf-spin {
-    to { rotate: 360deg; }
-  }
-
-  @keyframes sf-shimmer {
-    0%   { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
 
 }

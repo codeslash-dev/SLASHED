@@ -315,7 +315,7 @@
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
     --sf-shadow-glow-color: var(--sf-color-primary);
-    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(0.4 * var(--sf-shadow-strength) * 5), 0.7));
+    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
     --sf-opacity-disabled:  0.45;
 
 
@@ -482,6 +482,12 @@
 
     /* ----------------------------------------------------------
        Border widths
+       --sf-border-width-hairline: device-pixel-dependent. On 1x DPR
+       displays (Windows non-Retina) the browser will round 0.5px up
+       to 1px, so it visually matches --sf-border-width-1. On 2x+
+       DPR (macOS/iOS Retina, most modern phones) it renders as a
+       true half-pixel hairline. Use it for subtle separators where
+       1px on low-DPR is acceptable.
        ---------------------------------------------------------- */
     --sf-border-width-hairline: 0.5px;
     --sf-border-width-1:        1px;
@@ -492,6 +498,11 @@
 
     /* ----------------------------------------------------------
        Border radius
+       --sf-radius-full: intentionally not scaled by --sf-radius-scale.
+       A pill/circle is a topological constant, not a relative size:
+       any --sf-radius-scale: 0 ("sharp" design system) should still
+       render pill buttons as pills. 9999px is a magic-number convention
+       large enough to clip to half the shorter edge for any realistic UI.
        ---------------------------------------------------------- */
     --sf-radius-none: 0;
     --sf-radius-xs:   calc(2px  * var(--sf-radius-scale));
@@ -891,9 +902,11 @@
     hanging-punctuation: first last;
   }
 
-  /* interpolate-size is Chromium-only (no Firefox/Safari as of 2026);
-     opt-in by design, so @supports keeps it a clean progressive
-     enhancement without risking unknown-declaration handling. */
+  /* interpolate-size enables animations to/from intrinsic sizing
+     keywords (auto, min-content, max-content, fit-content). Shipped:
+     Chrome 129 (Aug 2024), Safari 18 (Sep 2024). Firefox: behind a
+     flag as of 2026-Q2. Wrapped in @supports so unsupporting engines
+     get clean progressive enhancement, not an unknown-declaration. */
   @supports (interpolate-size: allow-keywords) {
     html { interpolate-size: allow-keywords; }
   }
@@ -988,33 +1001,9 @@
 
 @layer slashed.base {
 
-  /* ============================================================
-     DARK / LIGHT MODE
-     ─────────────────
-     color-scheme tells the browser which mode is active.
-     By default we respect OS preference.
-
-     Usage:
-       <html>                        → follows OS preference
-       <html data-theme="dark">     → whole page dark
-       <section data-theme="dark">  → only this section dark
-     ============================================================ */
-
-  :root {
-    color-scheme: var(--sf-color-scheme, light dark);
-  }
-
-  /* OS preference — activates when no data-theme is set on :root */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
-      color-scheme: dark;
-      --sf-is-dark: 1;
-    }
-  }
-
-  /* Explicit theme — works on :root (whole page) or any element (section-level) */
-  [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
-  [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
+  /* Dark/light mode lives in core/themes.css (slashed.themes layer).
+     The baseline color-scheme: var(--sf-color-scheme, light dark) is
+     set on html in core/reset.css. */
 
   body {
     font-family:      var(--sf-body-font-family, var(--sf-font-body));
@@ -1174,6 +1163,51 @@
   optgroup { font: inherit; }
   ::file-selector-button { font: inherit; }
   ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
+
+}
+
+/* ─── core/themes.css ─── */
+/* SLASHED — core/themes.css
+   @layer slashed.themes
+
+   Theme switching: token reassignments only. No new selectors,
+   no new properties — strictly remaps existing tokens based on
+   system preference and explicit data-theme attributes.
+
+   Cascade position is significant. slashed.themes sits ABOVE
+   slashed.{states, utilities, components, layout, base} (see
+   core/layers.css), so a theme's token reassignment cannot be
+   accidentally beaten by a component or utility rule of equal
+   specificity. Only consumer code in slashed.overrides (or
+   unlayered CSS) can override a theme.
+
+   USAGE
+     <html>                        → follows OS preference
+     <html data-theme="dark">      → whole page dark
+     <section data-theme="dark">   → only this section dark
+     <section data-theme="light">  → only this section light
+
+   The base color-scheme: var(--sf-color-scheme, light dark)
+   declaration lives in core/reset.css and provides the baseline.
+   This layer flips it.
+   ─────────────────────────────────────────────────── */
+
+@layer slashed.themes {
+
+  /* OS preference — only when no data-theme is set on :root.
+     A section-level [data-theme] still wins via the explicit
+     selectors below (higher specificity within the same layer). */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --sf-is-dark: 1;
+    }
+  }
+
+  /* Explicit theme — works on :root (whole page) or any element
+     (section-level theming). */
+  [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
+  [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
 
 }
 
@@ -1895,16 +1929,13 @@
 
   /* ============================================================
      KEYFRAMES (used by states above)
+
+     Spinner and shimmer keyframes live in core/motion.css alongside
+     the rest of the framework's @keyframes. They are referenced from
+     here by name (sf-spin, sf-shimmer) and are inert until applied.
+     If you load core/states.css without core/motion.css, define them
+     in your own CSS or copy them from motion.css.
      ============================================================ */
-
-  @keyframes sf-spin {
-    to { rotate: 360deg; }
-  }
-
-  @keyframes sf-shimmer {
-    0%   { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
 
 }
 
@@ -1975,7 +2006,10 @@
   }
 
   /* Keyframes — inert until referenced, so they live outside the
-     no-preference wrapper (consumers may reference them at will). */
+     no-preference wrapper (consumers may reference them at will).
+     Spinner and shimmer are used by .is-loading / .is-skeleton in
+     core/states.css; the rest power the .sf-* animation classes
+     above. */
   @keyframes sf-fade-in   { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sf-fade-out  { from { opacity: 1; } to { opacity: 0; } }
   @keyframes sf-slide-in-up    { from { opacity: 0; translate: 0 1rem;  } to { opacity: 1; translate: 0 0; } }
@@ -1984,6 +2018,9 @@
   @keyframes sf-slide-in-right { from { opacity: 0; translate: -1rem 0; } to { opacity: 1; translate: 0 0; } }
   @keyframes sf-scale-up   { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
   @keyframes sf-scale-down { from { opacity: 1; scale: 1; } to { opacity: 0; scale: 0.92; } }
+
+  @keyframes sf-spin    { to { rotate: 360deg; } }
+  @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 }
 
@@ -2222,7 +2259,7 @@
     }
 
     pre, blockquote {
-      border:  1px solid #999;
+      border:  var(--sf-border-width-1) solid var(--sf-color-border--strong);
       padding: var(--sf-space-s);
     }
 

@@ -64,7 +64,10 @@
   }
 
   /* Keyframes — inert until referenced, so they live outside the
-     no-preference wrapper (consumers may reference them at will). */
+     no-preference wrapper (consumers may reference them at will).
+     Spinner and shimmer are used by .is-loading / .is-skeleton in
+     core/states.css; the rest power the .sf-* animation classes
+     above. */
   @keyframes sf-fade-in   { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sf-fade-out  { from { opacity: 1; } to { opacity: 0; } }
   @keyframes sf-slide-in-up    { from { opacity: 0; translate: 0 1rem;  } to { opacity: 1; translate: 0 0; } }
@@ -73,5 +76,8 @@
   @keyframes sf-slide-in-right { from { opacity: 0; translate: -1rem 0; } to { opacity: 1; translate: 0 0; } }
   @keyframes sf-scale-up   { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
   @keyframes sf-scale-down { from { opacity: 1; scale: 1; } to { opacity: 0; scale: 0.92; } }
+
+  @keyframes sf-spin    { to { rotate: 360deg; } }
+  @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 }

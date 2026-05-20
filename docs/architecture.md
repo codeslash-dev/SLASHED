@@ -34,6 +34,7 @@ core/
   tokens.layout.css       slashed.tokens  (semantic layout tokens)
   reset.css               slashed.reset
   base.css                slashed.base
+  themes.css              slashed.themes
   layout.css              slashed.layout
   states.css              slashed.states
   motion.css              slashed.motion
@@ -41,11 +42,15 @@ core/
   print.css               slashed.print
 optional/
   tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors)
-  tokens.components.css   slashed.tokens  (component-level tokens)
-  components.css          slashed.components  (imports tokens.components.css)
-  utilities.css           slashed.utilities
+  tokens.components.css   slashed.tokens  (component-level tokens — empty stub)
+  components.css          slashed.components  (empty stub)
+  utilities.css           slashed.utilities  (empty stub)
   legacy.css              slashed.legacy
 ```
+
+The three empty stubs are reserved for a future component layer and
+ship in source only — they are excluded from `bundle.config.json` and
+the README Quick start.
 
 ---
 
@@ -65,7 +70,7 @@ optional/
 
 **slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it.
 
-**slashed.themes** — token overrides only, no new rules. Dark mode, forced colors, brand palettes.
+**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Add `forced-colors`, brand-palette swaps, or any other token-only theme reassignment here.
 
 **slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`.
 
@@ -142,6 +147,7 @@ core/tokens.css
 core/tokens.layout.css
 core/reset.css
 core/base.css
+core/themes.css
 core/layout.css
 core/states.css
 core/motion.css

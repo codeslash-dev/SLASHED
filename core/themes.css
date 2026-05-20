@@ -1,0 +1,43 @@
+/* SLASHED — core/themes.css
+   @layer slashed.themes
+
+   Theme switching: token reassignments only. No new selectors,
+   no new properties — strictly remaps existing tokens based on
+   system preference and explicit data-theme attributes.
+
+   Cascade position is significant. slashed.themes sits ABOVE
+   slashed.{states, utilities, components, layout, base} (see
+   core/layers.css), so a theme's token reassignment cannot be
+   accidentally beaten by a component or utility rule of equal
+   specificity. Only consumer code in slashed.overrides (or
+   unlayered CSS) can override a theme.
+
+   USAGE
+     <html>                        → follows OS preference
+     <html data-theme="dark">      → whole page dark
+     <section data-theme="dark">   → only this section dark
+     <section data-theme="light">  → only this section light
+
+   The base color-scheme: var(--sf-color-scheme, light dark)
+   declaration lives in core/reset.css and provides the baseline.
+   This layer flips it.
+   ─────────────────────────────────────────────────── */
+
+@layer slashed.themes {
+
+  /* OS preference — only when no data-theme is set on :root.
+     A section-level [data-theme] still wins via the explicit
+     selectors below (higher specificity within the same layer). */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --sf-is-dark: 1;
+    }
+  }
+
+  /* Explicit theme — works on :root (whole page) or any element
+     (section-level theming). */
+  [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
+  [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
+
+}
