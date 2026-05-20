@@ -40,6 +40,9 @@
     color:            var(--sf-body-color,       var(--sf-color-text));
     background-color: var(--sf-color-bg, #fff);
     font-synthesis:   none;
+    font-feature-settings:   var(--sf-font-features-body);
+    font-variation-settings: var(--sf-font-variation-body);
+    font-optical-sizing:     var(--sf-font-optical-sizing);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -51,6 +54,8 @@
     overflow-wrap:     break-word;
     text-rendering:    optimizelegibility;
     scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+    font-feature-settings:   var(--sf-font-features-heading);
+    font-variation-settings: var(--sf-font-variation-heading);
   }
 
   h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); letter-spacing: var(--sf-h1-letter-spacing); }
@@ -90,6 +95,7 @@
   kbd, samp {
     font-family: var(--sf-font-mono);
     font-size:   inherit;
+    font-feature-settings: var(--sf-font-features-mono);
   }
 
   sub, sup {
@@ -126,6 +132,7 @@
     border-radius:    var(--sf-radius-xs);
     background-color: var(--sf-color-code-bg);
     color:            var(--sf-color-code-text, inherit);
+    font-feature-settings: var(--sf-font-features-mono);
   }
 
   pre {
@@ -138,6 +145,7 @@
     overflow-x:    auto;
     tab-size:      2;
     hyphens:       none;
+    font-feature-settings: var(--sf-font-features-mono);
   }
   pre code {
     background:    none;

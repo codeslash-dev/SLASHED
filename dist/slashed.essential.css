@@ -384,6 +384,24 @@
 
 
     /* ----------------------------------------------------------
+       Font features / variations / optical sizing
+       Per-family tokens for OpenType features (`font-feature-settings`),
+       variable-font axes (`font-variation-settings`) and optical sizing.
+       Body/heading/mono are wired automatically in core/base.css.
+       --sf-font-features-display has no auto-wire target — consumers
+       apply it on their display-class elements (e.g. `.display`).
+       ---------------------------------------------------------- */
+    --sf-font-features-body:     normal;
+    --sf-font-features-heading:  normal;
+    --sf-font-features-display:  normal;
+    --sf-font-features-mono:     normal;
+    --sf-font-variation-body:    normal;
+    --sf-font-variation-heading: normal;
+    --sf-font-variation-display: normal;
+    --sf-font-optical-sizing:    auto;
+
+
+    /* ----------------------------------------------------------
        Font sizes — fluid
        ---------------------------------------------------------- */
     --sf-text-2xs: clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem);
@@ -974,6 +992,9 @@
     color:            var(--sf-body-color,       var(--sf-color-text));
     background-color: var(--sf-color-bg, #fff);
     font-synthesis:   none;
+    font-feature-settings:   var(--sf-font-features-body);
+    font-variation-settings: var(--sf-font-variation-body);
+    font-optical-sizing:     var(--sf-font-optical-sizing);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -985,6 +1006,8 @@
     overflow-wrap:     break-word;
     text-rendering:    optimizelegibility;
     scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+    font-feature-settings:   var(--sf-font-features-heading);
+    font-variation-settings: var(--sf-font-variation-heading);
   }
 
   h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); letter-spacing: var(--sf-h1-letter-spacing); }
@@ -1024,6 +1047,7 @@
   kbd, samp {
     font-family: var(--sf-font-mono);
     font-size:   inherit;
+    font-feature-settings: var(--sf-font-features-mono);
   }
 
   sub, sup {
@@ -1060,6 +1084,7 @@
     border-radius:    var(--sf-radius-xs);
     background-color: var(--sf-color-code-bg);
     color:            var(--sf-color-code-text, inherit);
+    font-feature-settings: var(--sf-font-features-mono);
   }
 
   pre {
@@ -1072,6 +1097,7 @@
     overflow-x:    auto;
     tab-size:      2;
     hyphens:       none;
+    font-feature-settings: var(--sf-font-features-mono);
   }
   pre code {
     background:    none;

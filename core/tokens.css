@@ -361,6 +361,24 @@
 
 
     /* ----------------------------------------------------------
+       Font features / variations / optical sizing
+       Per-family tokens for OpenType features (`font-feature-settings`),
+       variable-font axes (`font-variation-settings`) and optical sizing.
+       Body/heading/mono are wired automatically in core/base.css.
+       --sf-font-features-display has no auto-wire target — consumers
+       apply it on their display-class elements (e.g. `.display`).
+       ---------------------------------------------------------- */
+    --sf-font-features-body:     normal;
+    --sf-font-features-heading:  normal;
+    --sf-font-features-display:  normal;
+    --sf-font-features-mono:     normal;
+    --sf-font-variation-body:    normal;
+    --sf-font-variation-heading: normal;
+    --sf-font-variation-display: normal;
+    --sf-font-optical-sizing:    auto;
+
+
+    /* ----------------------------------------------------------
        Font sizes — fluid
        ---------------------------------------------------------- */
     --sf-text-2xs: clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem);
