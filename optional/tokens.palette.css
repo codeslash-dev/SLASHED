@@ -9,8 +9,8 @@
      @import "optional/tokens.palette.css";
 
    Token naming:
-     --sf-color-X-100  … -400  tints  (mixed with white)
-     --sf-color-X-600  … -900  shades (mixed with black)
+     --sf-color-X-100  … -400  tints  (mixed with --sf-color-base, adapts to theme)
+     --sf-color-X-600  … -900  shades (mixed with --sf-color-text, adapts to theme)
      --sf-color-X-a10  … -a75  alpha  (mixed with transparent)
 
    The 500 base value is --sf-color-X itself — no alias needed.
