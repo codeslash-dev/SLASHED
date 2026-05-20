@@ -318,29 +318,16 @@ For `--sf-color-tertiary-light: oklch(0.55 0.14 310)` and `--sf-color-neutral-li
 ---
 
 ### F-08 — `--sf-color-link--hover` lightens in light mode (reduces contrast)
-**Severity:** medium
-**Category:** bug
-**Evidence:** `tokens.css:192–195`:
+**Severity:** ~~medium~~ ✅ **RESOLVED — fix predates this audit**
+**Category:** ~~bug~~ stale finding
+**Evidence:** `tokens.css:191–194` (current commit):
 ```css
 --sf-color-link--hover: light-dark(
-  oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1),  1) c h),
-  ...
+  oklch(from var(--sf-color-action) clamp(0, calc(l - 0.1), 1) c h),  /* light: darken */
+  oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1), 1) c h)   /* dark: lighten */
 );
 ```
-With `--sf-color-action-light` at L=0.60, light-mode hover yields L=0.70 — lighter on a near-white background, which **reduces** visual emphasis.
-
-**Compared to:** Pico CSS v2 darkens links on hover: `--pico-primary-hover` is a darker shade: https://picocss.com/docs/css-variables
-
-**Impact:** Keyboard users relying on link hover states as a visual cue get less visual feedback in light mode when hovering a link, contrary to convention.
-
-**Recommendation (from existing quality audit, still unresolved):**
-```css
---sf-color-link--hover: light-dark(
-  oklch(from var(--sf-color-action-light) clamp(0, calc(l - 0.08), 1) c h),
-  oklch(from var(--sf-color-action)       clamp(0, calc(l + 0.1),  1) c h)
-);
-```
-**Effort:** XS
+The light-mode branch already uses `l - 0.1` (darken), the dark-mode branch `l + 0.1` (lighten). This is the correct, conventional behaviour and the regression test `BUG-2` in `tests/tokens.spec.js` validates it. The fix landed in a commit between the original quality audit (2024) and this one; the finding above was based on an older snapshot and should not have been carried forward. Treat as **invalid** and do not act on it.
 
 ---
 
@@ -388,22 +375,15 @@ Then use `@container sf-layout (min-width: 48em)` in `.sf-alternate`.
 ---
 
 ### F-11 — `--sf-shadow-2xl` produces opacity >1 in dark mode
-**Severity:** medium
-**Category:** bug
-**Evidence:** `tokens.css:509–511`. In dark mode, `--sf-shadow-strength = 0.08 + 1*0.17 = 0.25`. The third layer uses `calc(var(--sf-shadow-strength) * 5) = 1.25`, which exceeds valid alpha range. Browser clamps to 1.0 producing an opaque black shadow layer.
-
-*(Confirmed by the 2024 quality audit as BUG-1; still present in current commit at e2d8165.)*
-
-**Compared to:** The token has a `clamp(0, ..., 0.7)` guard on all other shadow definitions but not on `--sf-shadow-2xl`'s third layer.
-
-**Impact:** `--sf-shadow-2xl` in dark mode renders with an opaque `oklch(0.15 c h / 1.0)` bottom shadow layer — a solid black slab instead of a diffuse shadow.
-
-**Recommendation:**
+**Severity:** ~~medium~~ ✅ **RESOLVED — fix predates this audit**
+**Category:** ~~bug~~ stale finding
+**Evidence:** `tokens.css:509–511` (current commit):
 ```css
---sf-shadow-2xl: ...,
-  0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7));
+--sf-shadow-2xl: 0 4px 12px 0       oklch(... / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)),
+                 0 20px 60px 0      oklch(... / clamp(0, calc(var(--sf-shadow-strength) * 4),   0.7)),
+                 0 40px 100px -8px  oklch(... / clamp(0, calc(var(--sf-shadow-strength) * 5),   0.7));
 ```
-**Effort:** XS
+All three layers — including the third — already have an upper-bound `clamp(0, …, 0.7)` guard. The maximum reachable alpha is 0.7, never 1.0. The regression test `BUG-1` in `tests/tokens.spec.js` validates this. The fix landed between the 2024 quality audit and this one; the finding above is based on an older snapshot and should not have been carried forward. Treat as **invalid** and do not act on it.
 
 ---
 
@@ -676,8 +656,8 @@ For the default action color (h=210, cyan-blue), visited becomes h=250 (indigo-b
 | **F-01** | Update README browser floor to Chrome 123 / Safari 17.5 / Firefox 128 | XS |
 | **F-03** | Replace `#999` in `print.css:65` with `var(--sf-color-border--strong)` | XS |
 | **F-06** | Lower `--sf-color-tertiary-light` default L to ≤0.48, or raise sign() threshold to 0.55 | S |
-| **F-08** | Fix `--sf-color-link--hover` to darken in light mode | XS |
-| **F-11** | Add `clamp(0, …, 0.7)` guard to `--sf-shadow-2xl` third layer | XS |
+| ~~**F-08**~~ | ~~Fix `--sf-color-link--hover` to darken in light mode~~ — already fixed; finding stale | — |
+| ~~**F-11**~~ | ~~Add `clamp(0, …, 0.7)` guard to `--sf-shadow-2xl` third layer~~ — already fixed; finding stale | — |
 | **F-02** | Implement at minimum `.sf-btn`, `.sf-input`, `.sf-alert` components | L |
 
 ### P1 — For v1.1
@@ -1478,3 +1458,30 @@ All URLs verified: 2026-05-20.
 | Tailwind CSS v4 preflight | https://tailwindcss.com/docs/preflight |
 | Tailwind CSS v4 adding custom styles | https://tailwindcss.com/docs/adding-custom-styles |
 | Tailwind CSS v4 browser compatibility | https://tailwindcss.com/docs/compatibility |
+
+
+---
+
+## 11. Resolution Log
+
+Findings resolved subsequent to publication. This section is updated as remediation lands.
+
+### Phase 1 — Truthfulness foundation (`chore/phase-1-truthfulness`, 2026-05-20)
+
+| Finding | Resolution |
+|---|---|
+| F-01 | README floor updated to Chrome 123+ / Safari 17.5+ / Firefox 128+ with rationale; `optional/legacy.css` header rewritten to be honest about scope (does NOT extend below modern floor). |
+| F-03 | `print.css:65` now `border: var(--sf-border-width-1) solid var(--sf-color-border--strong)`. |
+| F-05 / F-12 | Theme rules moved from `slashed.base` to new `core/themes.css` (`slashed.themes` layer). Cascade-position guarantee documented in `architecture.md`. |
+| F-07 | `@keyframes sf-spin` and `sf-shimmer` moved from `states.css` to `motion.css` alongside other framework keyframes; cross-reference comment added in `states.css`. |
+| F-08 | Marked as **stale** — the inline finding was wrong (the fix predated this audit). Removed from P0 roadmap. |
+| F-11 | Marked as **stale** — same as F-08. Removed from P0 roadmap. |
+| F-15 | Bundle scope explicitly documented in README and `architecture.md`. Empty stubs called out as not-bundled. |
+| F-16 | `interpolate-size` comment rewritten: Chrome 129+, Safari 18+, Firefox behind a flag (2026-Q2). |
+| F-19 | Inline rationale comment added: pill shape is topological, not relative — intentionally not scaled. |
+| F-20 | Demo `--sf-prose-paragraph` chain corrected: `→ --sf-content-gap → --sf-space-s`. |
+| F-22 | Inline DPR-behaviour comment added to `--sf-border-width-hairline`. |
+| N-02 (new) | Duplicate `:root { color-scheme }` removed from `base.css`; sole declaration lives on `html` in `reset.css`. |
+| N-03 (new) | Dead arithmetic in `--sf-shadow-glow` (`0.4 * X * 5`) collapsed to `X * 2`. |
+
+Remaining open: F-02 (out of scope per project decision), F-04, F-06, F-09, F-10, F-13, F-14, F-17, F-18, F-21, N-01, N-04, N-05.

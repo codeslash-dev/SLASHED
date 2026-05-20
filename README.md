@@ -21,19 +21,22 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="core/tokens.layout.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
+<link rel="stylesheet" href="core/themes.css">
 <link rel="stylesheet" href="core/layout.css">
 <link rel="stylesheet" href="core/states.css">
 <link rel="stylesheet" href="core/motion.css">
 <link rel="stylesheet" href="core/accessibility.css">
 <link rel="stylesheet" href="core/print.css">
 
-<!-- optional -->
+<!-- optional (populated) -->
 <link rel="stylesheet" href="optional/tokens.palette.css">
-<link rel="stylesheet" href="optional/tokens.components.css">
-<link rel="stylesheet" href="optional/components.css">
-<link rel="stylesheet" href="optional/utilities.css">
 <link rel="stylesheet" href="optional/legacy.css">
 ```
+
+> **Note:** `optional/components.css`, `optional/utilities.css` and
+> `optional/tokens.components.css` exist as empty placeholders reserved
+> for a future component layer. They are excluded from both prebuilt
+> bundles and from the wiring above. Don't link them until they ship.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -68,8 +71,11 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | `layers` + `tokens` + `tokens.layout` + `reset` + `base` + `layout` + `states` + `motion` + `accessibility` + `print` |
+| `slashed.essential.css` | `layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print` |
 | `slashed.full.css` | essential + `tokens.palette` + `legacy` |
+
+The empty stub files (`optional/components.css`, `optional/utilities.css`,
+`optional/tokens.components.css`) are intentionally not bundled.
 
 ## Customising tokens
 
@@ -114,10 +120,19 @@ Or shorthand with `light-dark()`:
 
 ## Browser support
 
-Targets modern browsers; requires native cascade layers (floor:
-~2022 — Safari 15.4, Chrome 99, Firefox 97). `optional/legacy.css`
-smooths remaining gaps inside that window but does **not** extend
-support to pre-`@layer` browsers.
+**Floor: Chrome 123+, Safari 17.5+, Firefox 128+** (≈ April–July 2024).
+
+The framework's color system is built on three features that arrived
+together in 2024 and have no graceful fallback:
+
+- `light-dark()` (Chrome 123, Safari 17.5, Firefox 120)
+- `@property` with `inherits: true` (Firefox 128)
+- `oklch(from … sign(…) …)` relative color syntax (Firefox 113, Safari 16.4)
+
+`optional/legacy.css` smooths a handful of property-level gaps within
+the cascade-layer-supporting window (Safari 15.0–15.3 dvh/`:focus-visible`,
+Safari `scrollbar-gutter`) but does **not** extend the floor below the
+versions above — colors will collapse to `initial` on older engines.
 
 ## Development
 
