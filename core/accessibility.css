@@ -144,13 +144,15 @@
   }
 
   /* ----------------------------------------------------------
-     Forced Colors Mode (Windows High Contrast). System color
-     keywords are resolved by the UA from the user's chosen
-     palette. The :focus-visible rule above already uses
-     !important; mirror that here so the system-color outline
-     wins inside HCM without being defeated by layer ordering.
-     border-color is left without !important — Forced Colors
-     Mode auto-applies system colours regardless.
+     Forced Colors Mode (Windows High Contrast Mode).
+     System color keywords (Highlight, CanvasText, etc.)
+     are resolved by the UA from the user's chosen palette.
+     The :focus-visible outline above uses !important; mirror
+     that pattern here so the system-color outline wins inside
+     HCM without being defeated by layer ordering. No other
+     rules are needed: FCM auto-applies system colours to
+     var(--sf-color-border), var(--sf-color-text), and any
+     other consumer-authored color values regardless.
      ---------------------------------------------------------- */
   @media (forced-colors: active) {
     :focus-visible {

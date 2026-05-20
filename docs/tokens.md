@@ -500,6 +500,8 @@ Shorthand pairings of keyframe + duration + easing. Reduced-motion is honoured a
 | `--sf-animation-scale-up` | `sf-scale-up normal back-out both` | Scale in (overshoot) | derived |
 | `--sf-animation-scale-down` | `sf-scale-down normal ease-in both` | Scale in (settle) | derived |
 
+> Note on slide-in axis naming: the X axis tokens (`--sf-animation-slide-in-left` / `-right`) describe the ORIGIN side ("starts on the left, moves rightward"), matching Tailwind and Animate.css. The Y axis tokens (`--sf-animation-slide-in-up` / `-down`) describe the MOTION DIRECTION ("starts below, moves upward"). The two axes follow different conventions because each matches the most common ecosystem precedent for that axis. When in doubt, trust the Description column above; the bare token name alone may not be enough.
+
 ## Motion: transition shorthands
 
 | Token | Default | Description | Override |

@@ -74,4 +74,4 @@ None.
    - Reach for `--sf-animation-slide-in-up` instead of writing your own `@keyframes` for toasts.
    - Use `--sf-cq-md` and friends in your container queries instead of hardcoded `48em`.
    - Tune `--sf-shadow-color` once to tint every shadow on the page.
-4. Run your existing visual regression suite. No expected diffs apart from the three bugfix sites listed above.
+4. Run your existing visual regression suite. Expect diffs at the three bugfix sites listed above AND at every site covered by the `## Behavioural changes` bullets above (smooth-scroll gating, `[aria-busy="true"]` alias on `.is-loading`, on-color text default lightness shift). Every other token and component is value-stable.
