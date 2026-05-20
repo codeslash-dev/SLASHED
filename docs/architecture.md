@@ -166,14 +166,15 @@ declared in `bundle.config.json` and built by `scripts/bundle.js`.
 
 These behaviors are deliberate. Documented here so they aren't mistaken for bugs.
 
-- **Text-on-color threshold is a hard switch.** `--sf-color-text--on-*` use
-  `sign(0.6 - l)` to pick black or white text. This is a binary decision: a color at
-  lightness 0.59 gets white text, 0.60 gets black. The default `tertiary` and
-  `neutral` (L 0.55) therefore get white text at ~4.2:1 contrast — **AA Large, not AA
-  Normal**. Use them for large text / UI chrome, or set an explicit text color for
-  small text. The trough exists for any color near L 0.6 (default or user-supplied);
-  a binary threshold cannot remove it. A future upgrade path is CSS `contrast-color()`
-  once it has broad support.
+- **Text-on-color uses a binary lightness threshold.** `--sf-color-text--on-*`
+  use `sign(0.6 - l)` to pick black or white text. This is a binary decision: a
+  colour at lightness 0.59 gets white text, 0.60 gets black. The framework's
+  default brand and status palettes are picked so every on-color foreground
+  meets WCAG AA Normal (4.5:1) — verified by `tests/tokens.spec.js`. The
+  trough at L 0.6 is inherent to any binary approach, so user-supplied
+  colours that land in the L≈0.55..0.65 band may require an explicit
+  override of their matching `--sf-color-text--on-*` token. A future
+  upgrade path is CSS `contrast-color()` once it has broad support.
 - **Smooth scroll is disabled while something has focus.** `core/motion.css` sets
   `html:focus-within { scroll-behavior: auto }` (the Andy Bell pattern). Clicking an
   anchor focuses the target, so smooth scroll won't animate for that click — a
