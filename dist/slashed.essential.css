@@ -364,7 +364,19 @@
 
     /* ----------------------------------------------------------
        Font weights
+       Numeric scale 100-900 = canonical values.
+       Semantic aliases (-body/-bold/-heading/-display) reference them.
        ---------------------------------------------------------- */
+    --sf-font-weight-100: 100;
+    --sf-font-weight-200: 200;
+    --sf-font-weight-300: 300;
+    --sf-font-weight-400: 400;
+    --sf-font-weight-500: 500;
+    --sf-font-weight-600: 600;
+    --sf-font-weight-700: 700;
+    --sf-font-weight-800: 800;
+    --sf-font-weight-900: 900;
+
     --sf-font-weight-body:    400;
     --sf-font-weight-bold:    700;
     --sf-font-weight-heading: 600;
