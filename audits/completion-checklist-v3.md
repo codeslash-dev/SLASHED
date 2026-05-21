@@ -556,7 +556,7 @@ Rejected-on-purpose items live in §D9, not here.
 
 ## §E — Re-scored summary
 
-**Decisions do not change the score — only implementation does.** Every D1–D10
+**Decisions do not change the score — only implementation does.** Every D1–D11
 item remains outstanding in §C until it lands in the code. The re-scores below
 reflect *only* two legitimate sources, neither of which is work done in this
 review: **(a) scope reclassification** — items that are now out-of-scope (D1) or
