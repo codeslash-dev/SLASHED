@@ -231,7 +231,7 @@ Evidence:   `core/tokens.css:152-163`:
 --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
 --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
 ```
-`docs/architecture.md:159-170` § Known intentional tradeoffs eksplicytnie kodyfikuje ten zachowanie i dopuszcza AA Large (~4.2:1) dla `tertiary`/`neutral`.
+`docs/architecture.md:163-170` § Known intentional tradeoffs eksplicytnie kodyfikuje ten zachowanie i dopuszcza AA Large (~4.2:1) dla `tertiary`/`neutral`.
 Compared to: Pico v2 dostarcza ręcznie sparowane jasny/ciemny tekst dla każdej hue family — patrz [Pico colors](https://picocss.com/docs/colors); Tailwind v4 zostawia decyzję autorowi (`text-white`/`text-black` na bazie utility) — patrz [Tailwind colors](https://tailwindcss.com/docs/colors). Przyszłe `contrast-color()` rozwiąże to natywnie ([caniuse contrast-color](https://caniuse.com/mdn-css_types_color_oklch) — feature-line jeszcze niedojrzały).
 Impact:     Konsument używający domyślnego `--sf-color-tertiary` lub `--sf-color-neutral` jako tła karty z napisem `--sf-color-text--on-*` dostanie tekst o kontraście ~4.2:1 — niezgodny z WCAG AA Normal dla tekstu poniżej 18pt. Ustalenie jest informacyjne; sekcja 7 audytu polemizuje z tradeoffem na poziomie projektowym.
 Recommendation: Pozostawić zachowanie zgodne z `docs/architecture.md` — to nie jest bug. Dodać do README jednoakapitową notę "Text-on-color is AA Large for `tertiary`/`neutral`; use `--sf-color-text` for body copy" z linkiem do rozdziału § Known intentional tradeoffs. Po dojrzeniu `contrast-color()` wymienić wyrażenie `sign(0.6 - l)` na natywną funkcję.
@@ -602,7 +602,7 @@ html             { scroll-behavior: smooth; }
 html:focus-within { scroll-behavior: auto; }
 ```
 
-✓ confirmed — WARN-5 (Dark mode palette `base-*` numbering is non-monotonic). `docs/architecture.md:176-180` § Known intentional tradeoffs eksplicytnie kodyfikuje V-shape; aktywne reguły w `optional/tokens.palette.css` mieszają `--sf-color-text` w `base-*` tints i `base` w `base-*` shades — nadal niezmienione.
+✓ confirmed — WARN-5 (Dark mode palette `base-*` numbering is non-monotonic). `docs/architecture.md:175-179` § Known intentional tradeoffs eksplicytnie kodyfikuje V-shape; aktywne reguły w `optional/tokens.palette.css` mieszają `--sf-color-text` w `base-*` tints i `base` w `base-*` shades — nadal niezmienione.
 
 ⚠️ stale — Sekcja F ("forced-colors / prefers-contrast: less handling missing"). Ten sam blok `core/accessibility.css:153-166` pokrywa `forced-colors: active`. Komentarz audytu kończy się "No action needed" — dziś działanie zostało wykonane.
 
