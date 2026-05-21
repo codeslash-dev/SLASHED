@@ -1169,6 +1169,15 @@
           <button type="button" class="sf-scale-up"        style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">scale-up</button>
         </div>
 
+        <h3>@property Color Interpolation <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — sf-color-pulse)</small></h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--secondary); margin-block-end: var(--sf-space-s)">
+          Demonstrates smooth <code>oklch</code> color animation via <code>@property</code>-registered tokens.
+          The box below pulses its <code>--sf-color-primary-light</code> lightness. Only works in browsers supporting <code>@property inherits</code>.
+        </p>
+        <div class="sf-color-pulse" style="padding: var(--sf-space-l); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-m); text-align: center; font-weight: var(--sf-font-weight-semibold)">
+          .sf-color-pulse — animating --sf-color-primary-light
+        </div>
+
         <h3>Duration Tokens</h3>
         <div class="sf-cluster sf-cluster--m">
           <code style="font-size: var(--sf-text-s)">instant: 100ms</code>
