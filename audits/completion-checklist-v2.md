@@ -267,7 +267,7 @@
 | Frame (.sf-frame) | ✓ | EveryLayout | aspect-ratio, 7 ratio modifiers, media cover |
 | Reel (.sf-reel) | ✓ | EveryLayout | scroll-snap, overscroll-behavior, thin scrollbar |
 | Imposter (.sf-imposter) | ✓ | EveryLayout | absolute centered, --fixed, --contain variants |
-| Icon (sizing primitive) | ✗ | EveryLayout | LOW | EveryLayout's Icon is width/height em-based. We have --sf-icon-* tokens but no .sf-icon class. Utility concern |
+| Icon (sizing primitive) | ✗ | EveryLayout | EveryLayout's Icon is width/height em-based. We have --sf-icon-* tokens but no .sf-icon class. Utility concern (priority: LOW) |
 
 
 ### 5.2 SLASHED-Specific Layout Primitives
@@ -524,7 +524,7 @@
 | Reduced-motion behavior test | ✗ | - | MEDIUM | Emulate prefers-reduced-motion:reduce and verify animation-duration resolves to 0.01ms |
 | Cross-browser matrix (Firefox, WebKit) | ✗ | - | HIGH | Currently Chromium only (playwright.config.js). Add Firefox + WebKit projects |
 | Forced-colors rendering test | ✗ | - | LOW | Playwright can emulate forced-colors. Verify focus ring uses Highlight |
-| Performance/bundle-size regression | ✗ | - | MEDIUM | Assert bundle size stays below threshold (e.g. < 30KB uncompressed essential) |
+| Performance/bundle-size regression | ✗ | - | MEDIUM | Assert bundle size stays below threshold (< 30KB uncompressed / < 25KB gzipped for essential bundle) |
 
 
 ---
@@ -868,7 +868,7 @@ Prerequisites (all must be green):
 - [ ] Theming guide published
 - [ ] Browser support matrix published
 - [ ] Token reference published
-- [ ] Bundle size < 25KB gzipped (essential)
+- [ ] Bundle size < 30KB uncompressed AND < 25KB gzipped (essential bundle)
 - [ ] All --sf-* tokens either consumed internally OR documented as BEM API
 - [ ] No deprecated aliases remaining without removal timeline
 - [ ] CHANGELOG complete with all changes since v0.1.0
