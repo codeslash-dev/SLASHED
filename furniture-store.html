@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORMA — Premium Furniture Store</title>
+  <!-- SLASHED framework via jsDelivr CDN (GitHub: codeslash-dev/SLASHED) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.essential.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/optional/tokens.palette.css">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       FORMA — Premium Furniture Store
+       BEM-first custom styles consuming SLASHED tokens.
+       Only tokens and layout primitives from the framework.
+       ═══════════════════════════════════════════════════════ */
+
+    /* ── Brand override: warm, luxurious palette ─────────── */
+    :root {
+      --sf-color-primary-light:   oklch(0.35 0.05 60);
+      --sf-color-secondary-light: oklch(0.25 0.02 50);
+      --sf-color-tertiary-light:  oklch(0.55 0.12 45);
+      --sf-color-action-light:    oklch(0.45 0.08 60);
+      --sf-color-neutral-light:   oklch(0.40 0.01 60);
+      --sf-color-base-light:      oklch(0.97 0.005 60);
+      --sf-font-heading: "Playfair Display", var(--sf-font-slab);
+      --sf-font-body: var(--sf-font-geometric);
+    }
+    /* ── Header (BEM: .header) ───────────────────────────── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: var(--sf-z-mid);
+      background: var(--sf-color-surface);
+      border-bottom: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+      backdrop-filter: blur(var(--sf-blur-m));
+    }
+
+    .header__inner {
+      height: var(--sf-header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__logo {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-xl);
+      font-weight: var(--sf-font-weight-bold);
+      letter-spacing: var(--sf-tracking-wider);
+      color: var(--sf-color-heading);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .header__nav-list {
+      display: flex;
+      gap: var(--sf-space-l);
+      list-style: none;
+    }
+
+    .header__nav-link {
+      color: var(--sf-color-text--secondary);
+      text-decoration: none;
+      font-size: var(--sf-text-s);
+      font-weight: var(--sf-font-weight-medium);
+      letter-spacing: var(--sf-tracking-wide);
+      text-transform: uppercase;
+      transition: var(--sf-transition-colors);
+    }
+
+    .header__nav-link:hover,
+    .header__nav-link:visited { color: var(--sf-color-text); }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--sf-space-m);
+    }
+
+
+
+    /* ── Hero (BEM: .hero) ────────────────────────────────── */
+    .hero {
+      background: var(--sf-gradient-surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--sf-color-primary-a5);
+      pointer-events: none;
+    }
+
+    .hero__heading {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-display-l);
+      font-weight: var(--sf-font-weight-display);
+      letter-spacing: var(--sf-tracking-tight);
+      line-height: var(--sf-leading-tight);
+      color: var(--sf-color-heading);
+    }
+
+    .hero__sub {
+      font-size: var(--sf-text-l);
+      color: var(--sf-color-text--secondary);
+      max-width: 40ch;
+    }
+
+    .hero__image {
+      border-radius: var(--sf-radius-2xl);
+      box-shadow: var(--sf-shadow-2xl);
+      aspect-ratio: var(--sf-ratio-golden);
+      width: 100%;
+      object-fit: cover;
+      background: var(--sf-color-well);
+    }
+
+    /* ── Button (BEM: .btn) ───────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sf-space-xs);
+      padding: var(--sf-space-s) var(--sf-space-xl);
+      border: var(--sf-border-width-1) solid transparent;
+      border-radius: var(--sf-radius-m);
+      font-size: var(--sf-text-s);
+      font-weight: var(--sf-font-weight-semibold);
+      letter-spacing: var(--sf-tracking-wide);
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--sf-transition-all);
+    }
+
+    .btn--primary {
+      background: var(--sf-color-primary);
+      color: var(--sf-color-text--on-primary);
+    }
+
+    .btn--primary:hover {
+      box-shadow: var(--sf-shadow-m);
+      filter: brightness(1.08);
+    }
+
+    .btn--outline {
+      background: transparent;
+      border-color: var(--sf-color-border--strong);
+      color: var(--sf-color-text);
+    }
+
+    .btn--outline:hover {
+      background: var(--sf-color-bg--hover);
+      border-color: var(--sf-color-primary);
+      color: var(--sf-color-primary);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--sf-color-text--secondary);
+      padding: var(--sf-space-xs) var(--sf-space-s);
+    }
+
+    .btn--ghost:hover {
+      color: var(--sf-color-text);
+      background: var(--sf-color-bg--hover);
+    }
+
+
+    /* ── Product Card (BEM: .product) ─────────────────────── */
+    .product {
+      background: var(--sf-color-surface);
+      border-radius: var(--sf-radius-l);
+      overflow: hidden;
+      box-shadow: var(--sf-shadow-s);
+      transition: var(--sf-transition-shadow), var(--sf-transition-transform);
+    }
+
+    .product:hover {
+      box-shadow: var(--sf-shadow-l);
+      translate: 0 -4px;
+    }
+
+    .product__image {
+      aspect-ratio: var(--sf-ratio-photo);
+      width: 100%;
+      object-fit: cover;
+      background: var(--sf-color-well);
+    }
+
+    .product__body {
+      padding: var(--sf-space-m);
+    }
+
+    .product__category {
+      font-size: var(--sf-text-xs);
+      font-weight: var(--sf-font-weight-semibold);
+      letter-spacing: var(--sf-tracking-widest);
+      text-transform: uppercase;
+      color: var(--sf-color-primary);
+    }
+
+    .product__name {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-l);
+      font-weight: var(--sf-font-weight-heading);
+      color: var(--sf-color-heading);
+    }
+
+    .product__price {
+      font-size: var(--sf-text-m);
+      font-weight: var(--sf-font-weight-semibold);
+      color: var(--sf-color-text);
+    }
+
+    .product__badge {
+      position: absolute;
+      top: var(--sf-space-s);
+      left: var(--sf-space-s);
+      padding: var(--sf-space-2xs) var(--sf-space-s);
+      background: var(--sf-color-primary);
+      color: var(--sf-color-text--on-primary);
+      border-radius: var(--sf-radius-full);
+      font-size: var(--sf-text-2xs);
+      font-weight: var(--sf-font-weight-bold);
+      letter-spacing: var(--sf-tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .product__image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    /* ── Category Card (BEM: .category) ───────────────────── */
+    .category {
+      position: relative;
+      border-radius: var(--sf-radius-xl);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .category__image {
+      aspect-ratio: var(--sf-ratio-portrait);
+      width: 100%;
+      object-fit: cover;
+      transition: var(--sf-transition-transform);
+      background: var(--sf-color-well);
+    }
+
+    .category:hover .category__image {
+      scale: 1.05;
+    }
+
+    .category__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, oklch(0 0 0 / 0.7), transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--sf-space-l);
+    }
+
+    .category__label {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-xl);
+      font-weight: var(--sf-font-weight-heading);
+      color: oklch(0.98 0 0);
+      letter-spacing: var(--sf-tracking-wide);
+    }
+
+    /* ── Features strip (BEM: .features) ──────────────────── */
+    .features {
+      background: var(--sf-color-well);
+      border-top: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+      border-bottom: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+    }
+
+    .features__item {
+      text-align: center;
+      padding: var(--sf-space-m);
+    }
+
+    .features__icon {
+      font-size: var(--sf-text-2xl);
+      margin-bottom: var(--sf-space-xs);
+    }
+
+    .features__title {
+      font-size: var(--sf-text-s);
+      font-weight: var(--sf-font-weight-semibold);
+      color: var(--sf-color-heading);
+    }
+
+    .features__desc {
+      font-size: var(--sf-text-xs);
+      color: var(--sf-color-text--muted);
+    }
+
+
+    /* ── Testimonial (BEM: .testimonial) ──────────────────── */
+    .testimonial {
+      background: var(--sf-color-surface);
+      border-radius: var(--sf-radius-xl);
+      padding: var(--sf-space-xl);
+      box-shadow: var(--sf-shadow-s);
+      border: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+    }
+
+    .testimonial__quote {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-l);
+      font-style: italic;
+      line-height: var(--sf-leading-relaxed);
+      color: var(--sf-color-text);
+      margin-bottom: var(--sf-space-m);
+    }
+
+    .testimonial__quote::before {
+      content: "\201C";
+      font-size: var(--sf-text-3xl);
+      color: var(--sf-color-primary);
+      line-height: 0;
+      vertical-align: -0.3em;
+      margin-right: var(--sf-space-2xs);
+    }
+
+    .testimonial__author {
+      font-size: var(--sf-text-s);
+      font-weight: var(--sf-font-weight-semibold);
+      color: var(--sf-color-heading);
+    }
+
+    .testimonial__role {
+      font-size: var(--sf-text-xs);
+      color: var(--sf-color-text--muted);
+    }
+
+    /* ── Newsletter (BEM: .newsletter) ────────────────────── */
+    .newsletter {
+      background: var(--sf-color-primary);
+      color: var(--sf-color-text--on-primary);
+      border-radius: var(--sf-radius-2xl);
+      padding: var(--sf-space-3xl) var(--sf-space-2xl);
+      text-align: center;
+      box-shadow: var(--sf-shadow-xl);
+    }
+
+    .newsletter__heading {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-2xl);
+      font-weight: var(--sf-font-weight-heading);
+      color: inherit;
+      margin-bottom: var(--sf-space-xs);
+    }
+
+    .newsletter__desc {
+      font-size: var(--sf-text-m);
+      opacity: 0.85;
+      margin-bottom: var(--sf-space-l);
+    }
+
+    .newsletter__form {
+      display: flex;
+      gap: var(--sf-space-s);
+      max-width: 28rem;
+      margin-inline: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .newsletter__input {
+      flex: 1;
+      min-width: 12rem;
+      padding: var(--sf-space-s) var(--sf-space-m);
+      border: var(--sf-border-width-1) solid oklch(1 0 0 / 0.3);
+      border-radius: var(--sf-radius-m);
+      background: oklch(1 0 0 / 0.15);
+      color: inherit;
+      font-size: var(--sf-text-s);
+    }
+
+    .newsletter__input::placeholder {
+      color: oklch(1 0 0 / 0.6);
+    }
+
+    .newsletter__btn {
+      padding: var(--sf-space-s) var(--sf-space-xl);
+      background: oklch(1 0 0);
+      color: var(--sf-color-primary);
+      border: none;
+      border-radius: var(--sf-radius-m);
+      font-weight: var(--sf-font-weight-bold);
+      font-size: var(--sf-text-s);
+      letter-spacing: var(--sf-tracking-wide);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--sf-transition-all);
+    }
+
+    .newsletter__btn:hover {
+      box-shadow: var(--sf-shadow-m);
+      scale: 1.03;
+    }
+
+
+    /* ── About / Story section (BEM: .story) ──────────────── */
+    .story__image {
+      border-radius: var(--sf-radius-xl);
+      width: 100%;
+      aspect-ratio: var(--sf-ratio-photo);
+      object-fit: cover;
+      box-shadow: var(--sf-shadow-l);
+      background: var(--sf-color-well);
+    }
+
+    .story__eyebrow {
+      font-size: var(--sf-text-xs);
+      font-weight: var(--sf-font-weight-bold);
+      letter-spacing: var(--sf-tracking-widest);
+      text-transform: uppercase;
+      color: var(--sf-color-primary);
+    }
+
+    .story__heading {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-2xl);
+      font-weight: var(--sf-font-weight-heading);
+      color: var(--sf-color-heading);
+    }
+
+    .story__text {
+      font-size: var(--sf-text-m);
+      color: var(--sf-color-text--secondary);
+      line-height: var(--sf-leading-relaxed);
+      max-width: 50ch;
+    }
+
+    /* ── Footer (BEM: .footer) ────────────────────────────── */
+    .footer {
+      background: var(--sf-color-secondary);
+      color: var(--sf-color-text--on-secondary);
+      padding-block: var(--sf-space-3xl) var(--sf-space-xl);
+    }
+
+    .footer__logo {
+      font-family: var(--sf-font-heading);
+      font-size: var(--sf-text-xl);
+      font-weight: var(--sf-font-weight-bold);
+      letter-spacing: var(--sf-tracking-wider);
+      text-transform: uppercase;
+      color: inherit;
+    }
+
+    .footer__tagline {
+      font-size: var(--sf-text-s);
+      opacity: 0.7;
+      max-width: 30ch;
+    }
+
+    .footer__heading {
+      font-size: var(--sf-text-s);
+      font-weight: var(--sf-font-weight-bold);
+      letter-spacing: var(--sf-tracking-wider);
+      text-transform: uppercase;
+      color: inherit;
+      margin-bottom: var(--sf-space-s);
+    }
+
+    .footer__link {
+      display: block;
+      color: inherit;
+      opacity: 0.7;
+      text-decoration: none;
+      font-size: var(--sf-text-s);
+      padding-block: var(--sf-space-2xs);
+      transition: var(--sf-transition-colors);
+    }
+
+    .footer__link:hover,
+    .footer__link:visited { opacity: 1; color: inherit; }
+
+    .footer__bottom {
+      border-top: var(--sf-border-width-hairline) solid oklch(1 0 0 / 0.15);
+      padding-top: var(--sf-space-l);
+      margin-top: var(--sf-space-2xl);
+      font-size: var(--sf-text-xs);
+      opacity: 0.6;
+    }
+
+    /* ── Theme toggle (BEM: .theme-toggle) ────────────────── */
+    .theme-toggle {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--sf-border-width-1) solid var(--sf-color-border);
+      border-radius: var(--sf-radius-full);
+      background: var(--sf-color-surface);
+      color: var(--sf-color-text);
+      cursor: pointer;
+      transition: var(--sf-transition-colors);
+    }
+
+    .theme-toggle:hover {
+      background: var(--sf-color-bg--hover);
+      border-color: var(--sf-color-primary);
+    }
+  </style>
+</head>
+<body class="sf-pancake">
+
+  <!-- ═══ ACCESSIBILITY: Skip Link ═══ -->
+  <a href="#main" class="skip-link">Przejdz do tresci</a>
+
+  <!-- ═══ SECTION 1: Header / Navigation ═══ -->
+  <header class="header no-print">
+    <div class="sf-container sf-container--wide">
+      <div class="header__inner">
+        <a href="#" class="header__logo" aria-label="FORMA - strona glowna">FORMA</a>
+
+        <nav aria-label="Nawigacja glowna">
+          <ul class="header__nav-list">
+            <li><a href="#kolekcje" class="header__nav-link is-current">Kolekcje</a></li>
+            <li><a href="#kategorie" class="header__nav-link">Kategorie</a></li>
+            <li><a href="#o-nas" class="header__nav-link">O nas</a></li>
+            <li><a href="#opinie" class="header__nav-link">Opinie</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__actions">
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Przelacz motyw jasny/ciemny">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </button>
+          <a href="#" class="btn btn--outline">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main id="main">
+
+  <!-- ═══ SECTION 2: Hero ═══ -->
+  <section class="hero sf-section--xl" aria-labelledby="hero-heading">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-sidebar" style="--sf-sidebar-width: 50%; --sf-sidebar-min-width: 45%; align-items: center">
+        <div class="sf-stack sf-stack--l sf-fade-in">
+          <h1 id="hero-heading" class="hero__heading">Meble, ktore opowiadaja historie</h1>
+          <p class="hero__sub">Kazdy mebel w naszej kolekcji to polaczenie rzemiosla, naturalnych materialow i ponadczasowego designu.</p>
+          <div class="sf-cluster sf-cluster--s">
+            <a href="#kolekcje" class="btn btn--primary">Zobacz kolekcje</a>
+            <a href="#o-nas" class="btn btn--outline">Nasza historia</a>
+          </div>
+        </div>
+        <div class="sf-slide-in-right">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=500&fit=crop"
+               alt="Elegancka sofa w cieplym wnetrzu"
+               class="hero__image"
+               width="800" height="500"
+               loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══ SECTION 3: Features Strip ═══ -->
+  <section class="features sf-section--s" aria-label="Nasze atuty">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-grid sf-grid--fit" style="--sf-grid-min: 12rem">
+        <div class="features__item">
+          <div class="features__icon" aria-hidden="true">&#128736;</div>
+          <div class="features__title">Reczne wykonanie</div>
+          <div class="features__desc">Kazdy mebel tworzony przez mistrzow rzemiosla</div>
+        </div>
+        <div class="features__item">
+          <div class="features__icon" aria-hidden="true">&#127795;</div>
+          <div class="features__title">Naturalne materialy</div>
+          <div class="features__desc">Drewno, len, skora — z certyfikowanych zrodel</div>
+        </div>
+        <div class="features__item">
+          <div class="features__icon" aria-hidden="true">&#128666;</div>
+          <div class="features__title">Darmowa dostawa</div>
+          <div class="features__desc">Bezplatny transport i montaz w calej Polsce</div>
+        </div>
+        <div class="features__item">
+          <div class="features__icon" aria-hidden="true">&#9883;</div>
+          <div class="features__title">25 lat gwarancji</div>
+          <div class="features__desc">Pewnosc jakosci na pokolenia</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SECTION 4: Featured Products ═══ -->
+  <section id="kolekcje" class="sf-section" aria-labelledby="products-heading">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-stack sf-stack--xl">
+        <div class="sf-stack sf-stack--xs" style="text-align: center; align-items: center">
+          <span class="product__category">Bestsellery 2026</span>
+          <h2 id="products-heading" style="font-family: var(--sf-font-heading); font-size: var(--sf-text-3xl); color: var(--sf-color-heading)">Wyrozniajace sie kolekcje</h2>
+          <p style="color: var(--sf-color-text--secondary); max-width: 50ch">Odkryj meble, ktore definiuja wspolczesny luksus — od minimalistycznych form po odwazne akcenty.</p>
+        </div>
+
+        <div class="sf-grid" style="--sf-grid-min: 18rem">
+          <!-- Product 1 -->
+          <article class="product sf-slide-in-up">
+            <div class="product__image-wrap">
+              <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500&h=340&fit=crop"
+                   alt="Fotel Norden z drewniana rama"
+                   class="product__image" width="500" height="340" loading="lazy">
+              <span class="product__badge">Nowosc</span>
+            </div>
+            <div class="product__body sf-stack sf-stack--2xs">
+              <span class="product__category">Fotele</span>
+              <h3 class="product__name">Norden Lounge</h3>
+              <span class="product__price">4 890 zl</span>
+            </div>
+          </article>
+
+          <!-- Product 2 -->
+          <article class="product sf-slide-in-up">
+            <div class="product__image-wrap">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=340&fit=crop"
+                   alt="Sofa w kolorze oliwkowym"
+                   class="product__image" width="500" height="340" loading="lazy">
+            </div>
+            <div class="product__body sf-stack sf-stack--2xs">
+              <span class="product__category">Sofy</span>
+              <h3 class="product__name">Oslo Sectional</h3>
+              <span class="product__price">12 490 zl</span>
+            </div>
+          </article>
+
+          <!-- Product 3 -->
+          <article class="product sf-slide-in-up">
+            <div class="product__image-wrap">
+              <img src="https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=500&h=340&fit=crop"
+                   alt="Drewniany stol jadalniany"
+                   class="product__image" width="500" height="340" loading="lazy">
+              <span class="product__badge">Bestseller</span>
+            </div>
+            <div class="product__body sf-stack sf-stack--2xs">
+              <span class="product__category">Stoly</span>
+              <h3 class="product__name">Craft Dining Table</h3>
+              <span class="product__price">7 290 zl</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SECTION 5: Categories ═══ -->
+  <section id="kategorie" class="sf-section" aria-labelledby="categories-heading">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-stack sf-stack--xl">
+        <div class="sf-cluster sf-cluster--between" style="align-items: flex-end">
+          <div class="sf-stack sf-stack--2xs">
+            <h2 id="categories-heading" style="font-family: var(--sf-font-heading); font-size: var(--sf-text-2xl); color: var(--sf-color-heading)">Przegladaj kategorie</h2>
+            <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">Znajdz idealny mebel do kazdego pomieszczenia</p>
+          </div>
+          <a href="#" class="btn btn--ghost">Wszystkie kategorie &rarr;</a>
+        </div>
+
+        <div class="sf-grid" style="--sf-grid-min: 14rem">
+          <div class="category" role="link" tabindex="0" aria-label="Kategoria: Salon">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=530&fit=crop"
+                 alt="" class="category__image" width="400" height="530" loading="lazy">
+            <div class="category__overlay">
+              <span class="category__label">Salon</span>
+            </div>
+          </div>
+          <div class="category" role="link" tabindex="0" aria-label="Kategoria: Sypialnia">
+            <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&h=530&fit=crop"
+                 alt="" class="category__image" width="400" height="530" loading="lazy">
+            <div class="category__overlay">
+              <span class="category__label">Sypialnia</span>
+            </div>
+          </div>
+          <div class="category" role="link" tabindex="0" aria-label="Kategoria: Jadalnia">
+            <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=400&h=530&fit=crop"
+                 alt="" class="category__image" width="400" height="530" loading="lazy">
+            <div class="category__overlay">
+              <span class="category__label">Jadalnia</span>
+            </div>
+          </div>
+          <div class="category" role="link" tabindex="0" aria-label="Kategoria: Biuro">
+            <img src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=400&h=530&fit=crop"
+                 alt="" class="category__image" width="400" height="530" loading="lazy">
+            <div class="category__overlay">
+              <span class="category__label">Biuro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SECTION 6: Story / About — uses sf-alternate (zigzag) ═══ -->
+  <section id="o-nas" class="sf-section" data-theme="dark" aria-labelledby="story-heading" style="background: var(--sf-color-bg)">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-alternate">
+        <div>
+          <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=700&h=470&fit=crop"
+               alt="Rzemieslik pracujacy nad drewnianym blatem" class="story__image" width="700" height="470" loading="lazy">
+          <div class="sf-stack sf-stack--m">
+            <span class="story__eyebrow">Nasza historia</span>
+            <h2 id="story-heading" class="story__heading">Tradycja spotyka nowoczesnosc</h2>
+            <p class="story__text">Od 2001 roku tworzymy meble, ktore lacza wielopokoleniowe rzemioslo z nowoczesnym wzornictwem. Kazdy element naszej kolekcji przechodzi przez rece doswiadczonych mistrzow — od projektu, przez selekcje drewna, po finalny montaz.</p>
+            <a href="#" class="btn btn--outline" style="align-self: flex-start">Poznaj nas blizej</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SECTION 7: Testimonials — uses sf-reel (horizontal scroll) ═══ -->
+  <section id="opinie" class="sf-section" aria-labelledby="testimonials-heading">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-stack sf-stack--xl">
+        <div class="sf-stack sf-stack--xs" style="text-align: center; align-items: center">
+          <h2 id="testimonials-heading" style="font-family: var(--sf-font-heading); font-size: var(--sf-text-2xl); color: var(--sf-color-heading)">Co mowia nasi klienci</h2>
+          <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">Opinie klientow, ktore nas inspiruja</p>
+        </div>
+
+        <div class="sf-reel" style="--sf-reel-item-width: min(22rem, 85vw); --sf-reel-gap: var(--sf-space-l)">
+          <article class="testimonial">
+            <p class="testimonial__quote">Sofa Oslo to absolutny gamechanger naszego salonu. Jakosc materialow jest niezwykla.</p>
+            <div class="sf-stack sf-stack--2xs">
+              <span class="testimonial__author">Anna Kowalska</span>
+              <span class="testimonial__role">Architekt wnetrz, Warszawa</span>
+            </div>
+          </article>
+
+          <article class="testimonial">
+            <p class="testimonial__quote">Stol Craft sluzyl nam juz na trzech przeprowadzkach. Wyglada lepiej z kazdym rokiem.</p>
+            <div class="sf-stack sf-stack--2xs">
+              <span class="testimonial__author">Marek Nowicki</span>
+              <span class="testimonial__role">CEO, Studio Nowicki</span>
+            </div>
+          </article>
+
+          <article class="testimonial">
+            <p class="testimonial__quote">Obsługa klienta na najwyzszym poziomie. Pomogli zaprojektowac cale wnetrze od zera.</p>
+            <div class="sf-stack sf-stack--2xs">
+              <span class="testimonial__author">Katarzyna Lewandowska</span>
+              <span class="testimonial__role">Klientka od 2019</span>
+            </div>
+          </article>
+
+          <article class="testimonial">
+            <p class="testimonial__quote">Fotel Norden to moj ulubiony zakatek do czytania. Idealny komfort i estetyka.</p>
+            <div class="sf-stack sf-stack--2xs">
+              <span class="testimonial__author">Piotr Wisniewski</span>
+              <span class="testimonial__role">Designer, Krakow</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SECTION 8: Newsletter CTA ═══ -->
+  <section class="sf-section" aria-labelledby="newsletter-heading">
+    <div class="sf-container">
+      <div class="newsletter sf-scale-up">
+        <h2 id="newsletter-heading" class="newsletter__heading">Dolacz do swiata FORMA</h2>
+        <p class="newsletter__desc">Otrzymuj inspiracje, nowosci i ekskluzywne oferty prosto na skrzynke.</p>
+        <form class="newsletter__form" action="#" method="post" aria-label="Formularz zapisu na newsletter">
+          <label for="newsletter-email" class="sr-only">Adres email</label>
+          <input type="email" id="newsletter-email" class="newsletter__input" placeholder="Twoj adres email" required>
+          <button type="submit" class="newsletter__btn">Zapisz sie</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+
+  <!-- ═══ SECTION 9: Footer ═══ -->
+  <footer class="footer" role="contentinfo">
+    <div class="sf-container sf-container--wide">
+      <div class="sf-grid" style="--sf-grid-min: 14rem">
+        <div class="sf-stack sf-stack--s">
+          <span class="footer__logo">FORMA</span>
+          <p class="footer__tagline">Meble premium tworzone z pasja do detalu od 2001 roku.</p>
+        </div>
+        <div>
+          <h3 class="footer__heading">Kolekcje</h3>
+          <nav aria-label="Kolekcje">
+            <a href="#" class="footer__link">Salon</a>
+            <a href="#" class="footer__link">Sypialnia</a>
+            <a href="#" class="footer__link">Jadalnia</a>
+            <a href="#" class="footer__link">Biuro</a>
+            <a href="#" class="footer__link">Outdoor</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer__heading">Informacje</h3>
+          <nav aria-label="Informacje">
+            <a href="#" class="footer__link">O nas</a>
+            <a href="#" class="footer__link">Rzemioslo</a>
+            <a href="#" class="footer__link">Zrownowazonosc</a>
+            <a href="#" class="footer__link">Kariera</a>
+            <a href="#" class="footer__link">Blog</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer__heading">Obsluga klienta</h3>
+          <nav aria-label="Obsluga klienta">
+            <a href="#" class="footer__link">Kontakt</a>
+            <a href="#" class="footer__link">Dostawa i montaz</a>
+            <a href="#" class="footer__link">Zwroty</a>
+            <a href="#" class="footer__link">Gwarancja</a>
+            <a href="#" class="footer__link">FAQ</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer__bottom sf-cluster sf-cluster--between">
+        <span>&copy; 2026 FORMA. Wszelkie prawa zastrzezone.</span>
+        <span>Crafted with SLASHED CSS Framework</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══ Theme Toggle Script ═══ -->
+  <script>
+    (() => {
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const stored = localStorage.getItem('forma-theme');
+      if (stored) html.setAttribute('data-theme', stored);
+
+      toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const isDark = current === 'dark' ||
+          (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const next = isDark ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('forma-theme', next);
+      });
+    })();
+  </script>
+
+</body>
+</html>
