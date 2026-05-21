@@ -667,7 +667,7 @@ For the default action color (h=210, cyan-blue), visited becomes h=250 (indigo-b
 | ~~**F-04**~~ | ~~Scope print background-transparent reset; add `.print-color-exact` escape~~ — resolved in Phase 3 (default preserves authored colour; `.print-color-exact` and `.print-no-color` opt-ins) | — |
 | **F-05** / **F-12** | Move `[data-theme]` rules to `core/themes.css` targeting `slashed.themes` | S |
 | **F-07** | Move `@keyframes sf-spin` and `sf-shimmer` to `motion.css` | XS |
-| **F-10** | Name the `.sf-container` container; use named `@container` queries | S |
+| ~~**F-10**~~ | ~~Name the `.sf-container` container; use named `@container` queries~~ — resolved in Phase 4 (`.sf-container` → `sf-layout`, `.sf-alternate` → `sf-alternate` with name-bound flip query; `.sf-bento` and `.sf-grid-*` deliberately stay anonymous, documented in `architecture.md`) | — |
 | **F-14** | Add all missing `.is-*` and layout modifier demos to `docs/demo.html` | M |
 | **F-15** | Document that `slashed.full.css` excludes stub optional files | XS |
 | **F-20** | Correct demo.html `--sf-prose-paragraph` alias documentation | XS |
@@ -1506,3 +1506,11 @@ Remaining open: F-02 (out of scope per project decision), F-04, F-10, F-13, F-14
 | F-04 | The blanket `* { background: transparent !important; color: CanvasText !important }` reset is gone. Default contract: authored colour reaches paper. Two opt-in classes provide control: `.print-color-exact` forces colour-faithful rendering (`print-color-adjust: exact`) for colour-coded data, `.print-no-color` opts back into the legacy ink-on-paper flatten for the marked subtree. `box-shadow` and `text-shadow` are still suppressed in print but no longer with `!important` — an authored shadow that explicitly survives is now the consumer's call. `!important` in print is now reserved for selectors that defeat consumer-authored CSS by semantic necessity: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes. `docs/demo.html` ships a new `#print` section with a manual-verification checklist. `docs/architecture.md` updated. CHANGELOG opens with this as a BREAKING entry. |
 
 Remaining open: F-02 (out of scope per project decision), F-10, F-13, F-14, F-17, F-18, N-04, N-05.
+
+### Phase 4 — Named container queries (`chore/phase-4-named-containers`, 2026-05-21)
+
+| Finding | Resolution |
+|---|---|
+| F-10 | `.sf-container` now declares the named container `sf-layout` (consumer-targetable via `@container sf-layout (...)`). `.sf-alternate` declares its own `sf-alternate` and the zigzag flip query is bound to that name, so a nested `.sf-alternate` inside any other inline-size container reacts to its OWN width. The audit recommended naming both these primitives — done. The remaining anonymous queries (`.sf-bento` collapse, `.sf-grid-2/3/4/6/-1-2/-2-1/-1-3/-3-1`) are intentionally portable: they react to the nearest inline-size ancestor regardless of name, which is the documented contract that lets a consumer drop them into any container without rewiring. `docs/architecture.md` ships a new "Container query contract" section that names the contract explicitly. `docs/demo.html` adds a new `#layout-alternate` section that includes a smoke-test of `.sf-alternate` nested inside a wide `.sf-bento` cell — confirming the inner alternate flips on its own width, not the bento's. |
+
+Remaining open: F-02 (out of scope per project decision), F-13, F-14, F-17, F-18, N-04, N-05.
