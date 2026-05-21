@@ -313,7 +313,8 @@ depth and label every token public-vs-internal. A full `var()`-graph audit of al
 
 **Actions:**
 1. Collapse the synonym hops — point layout primitives at the canonical
-   `--sf-gap` / `--sf-content-gap` directly — OR formally document each as a
+   `--sf-gap` / `--sf-content-gap` directly, and resolve `--sf-section-pad →
+   --sf-section-pad--m` the same way — OR formally document each as a
    canonical-source alias. **Target: max 2 hops (primitive → semantic → scale).**
 2. Tag every token **PUBLIC API** vs **INTERNAL** in the token-file headers; the
    freeze and SemVer guarantees cover public names only.
@@ -531,7 +532,7 @@ Rejected-on-purpose items live in §D9, not here.
 | BEM-API tokens unconsumed (`--sf-scrollbar-*`, `--sf-optical-sizing`, `--sf-shadow-*`, `--sf-blur-*`, `--sf-gap`, `--sf-gradient-*`) | 🟡 | LOW | **Correct by design** — document explicitly as consumer API (not a defect) |
 | Colour naming: `-light/-dark` (source) vs `--variant` (modifier) | 🟡 | LOW | Document: single dash = source, double dash = modifier |
 | Print class naming (`.no-print` vs `.print-no-color` vs `.print-color-exact`) | 🟡 | LOW | Consider standardising to `.print-*` |
-| Token alias-chain depth + public/internal labelling | 🟡 | HIGH | Audit clean (562 tokens, 0 dupes/dangling/cycles, max depth 3); collapse synonym hops (`space-gap`/`gap`, `space-content`/`content-gap`) to ≤2 and tag public vs internal before API freeze **[D11]** |
+| Token alias-chain depth + public/internal labelling | 🟡 | HIGH | Audit clean (562 tokens, 0 dupes/dangling/cycles, max depth 3); collapse synonym hops (`space-gap`/`gap`, `space-content`/`content-gap`, `section-pad`/`section-pad--m`) to ≤2 and tag public vs internal before API freeze **[D11]** |
 
 ### 16. Stub files (newly inventoried)
 - `optional/components.css` — empty `slashed.components` stub.
