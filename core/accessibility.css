@@ -117,6 +117,7 @@
     height:      1px                 !important;
     padding:     0                   !important;
     margin:      -1px                !important;
+    overflow:    hidden              !important; /* fallback for Safari <16 */
     overflow:    clip                !important;
     clip-path:   inset(50%)          !important;
     white-space: nowrap              !important;

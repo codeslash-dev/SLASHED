@@ -1217,6 +1217,241 @@
       </section>
 
       <!-- ══════════════════════════════════════════════════════
+           STATES — FULL COVERAGE (F-14)
+      ══════════════════════════════════════════════════════ -->
+      <section id="states-full" class="demo-section">
+        <h2>States — Full Coverage</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">Every <code>.is-*</code> class from <code>states.css</code>. Grouped by category.</p>
+
+        <h3>Navigation &amp; Toggling</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <span class="is-active" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-active (--sf-is-active: 1)</span>
+          <span class="is-current" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-current (bold)</span>
+          <span class="is-selected" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-selected</span>
+          <span class="is-highlighted" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-highlighted</span>
+        </div>
+
+        <h3>Disclosure</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <span class="is-open" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-open</span>
+          <span class="is-expanded" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-expanded</span>
+          <span class="is-collapsed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-collapsed</span>
+        </div>
+
+        <h3>Validation / Feedback</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <span class="is-valid" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-valid</span>
+          <span class="is-invalid" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-invalid</span>
+          <span class="is-warning" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-warning</span>
+          <span class="is-success" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-success</span>
+          <span class="is-error" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-error</span>
+          <span class="is-info" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-info</span>
+          <span class="is-danger" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-danger</span>
+        </div>
+
+        <h3>Position / Stickiness</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <span class="is-sticky" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-sticky</span>
+          <span class="is-pinned" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-pinned</span>
+          <span class="is-fixed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-fixed</span>
+        </div>
+
+        <h3>Overflow / Clipping</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <div class="is-clipped" style="width: 8rem; height: 3rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-clipped (overflow hidden)</div>
+          <div class="is-scrollable" style="width: 8rem; height: 3rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)"><div style="height: 6rem">.is-scrollable (scroll me)</div></div>
+        </div>
+
+        <h3>Drag &amp; Drop</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <span class="is-dragging" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-dragging</span>
+          <span class="is-drop-target" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-drop-target</span>
+          <span class="is-draggable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-draggable</span>
+        </div>
+
+        <h3>Overlay / Interaction</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <div style="position: relative; width: 8rem; height: 4rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s)"><div class="is-overlay" style="background: var(--sf-color-primary); opacity: 0.2; border-radius: var(--sf-radius-s)"></div><span style="position: relative; font-size: var(--sf-text-xs); padding: var(--sf-space-xs)">.is-overlay</span></div>
+          <span class="is-clickable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-clickable</span>
+          <span class="is-unselectable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-unselectable</span>
+        </div>
+
+        <h3>Interactivity</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <span class="is-busy" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-busy</span>
+          <span class="is-readonly" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-readonly</span>
+          <span class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-disabled</span>
+        </div>
+
+        <h3>Empty State</h3>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center">
+          <div class="is-empty" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)"></div>
+          <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.is-empty:empty → display:none (the empty div above is gone)</code>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           LAYOUT — MISSING PRIMITIVES (F-14)
+      ══════════════════════════════════════════════════════ -->
+      <section id="layout-extra" class="demo-section">
+        <h2>Layout — Additional Primitives</h2>
+
+        <h3>.sf-imposter</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Absolutely positioned overlay. Modifiers: <code>--fixed</code>, <code>--contain</code>.</p>
+        <div style="position: relative; height: 8rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden">
+          <div class="sf-imposter" style="background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-imposter (centered)</div>
+        </div>
+        <div style="position: relative; height: 6rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden; margin-top: var(--sf-space-s)">
+          <div class="sf-imposter sf-imposter--contain" style="background: var(--sf-color-tertiary); color: var(--sf-color-text--on-tertiary); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); width: 80%">.sf-imposter--contain</div>
+        </div>
+
+        <h3>.sf-imposter--fixed</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">Uses <code>position: fixed</code> — not demoed visually to avoid viewport takeover. Class reference: <code>sf-imposter--fixed</code>.</p>
+
+        <h3>.sf-subgrid / .sf-subgrid-rows</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Inherit parent grid tracks. Requires parent with explicit grid.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sf-space-s); background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
+          <div class="sf-subgrid" style="grid-column: span 2; display: grid; grid-template-columns: subgrid; gap: var(--sf-space-s)">
+            <div class="demo-box">Subgrid col 1</div>
+            <div class="demo-box demo-box--alt">Subgrid col 2</div>
+          </div>
+          <div class="demo-box demo-box--action">Regular col</div>
+        </div>
+        <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs)"><code>.sf-subgrid-rows</code> works the same for row tracks.</p>
+
+        <h3>.sf-section-group</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Groups adjacent <code>.sf-section</code> elements with zero gap between them.</p>
+        <div class="sf-section-group" style="background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden">
+          <div class="sf-section--s" style="background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section A (--s padding)</div>
+          <div class="sf-section--s" style="background: var(--sf-color-tertiary-100, color-mix(in oklch, var(--sf-color-tertiary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section B (--s padding)</div>
+        </div>
+
+        <h3>.sf-cover modifiers</h3>
+        <div class="sf-cluster sf-cluster--l" style="align-items: flex-start">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-cover--min</code>
+            <div class="sf-cover sf-cover--min" style="min-height: 10rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); padding: var(--sf-space-s); margin-top: var(--sf-space-xs); width: 10rem">
+              <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">min</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-cover--max</code>
+            <div class="sf-cover sf-cover--max" style="min-height: 10rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); padding: var(--sf-space-s); margin-top: var(--sf-space-xs); width: 10rem">
+              <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">max</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-cover--padding-s / --padding-l</code>
+            <div class="sf-cover sf-cover--padding-s" style="min-height: 10rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); margin-top: var(--sf-space-xs); width: 10rem">
+              <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">pad-s</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>.sf-cluster--no-wrap / .sf-switcher--no-wrap / .sf-switcher--vertical</h3>
+        <div class="sf-stack sf-stack--m">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-cluster--no-wrap</code>
+            <div class="sf-cluster sf-cluster--no-wrap demo-layout-wrap" style="margin-top: var(--sf-space-xs); overflow: auto">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div><div class="demo-box">D</div><div class="demo-box">E</div><div class="demo-box">F</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-switcher--no-wrap</code>
+            <div class="sf-switcher sf-switcher--no-wrap demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-switcher--vertical</code>
+            <div class="sf-switcher sf-switcher--vertical demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>.sf-grid-1 / Ratio grids</h3>
+        <div class="sf-stack sf-stack--m">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-1</code>
+            <div class="sf-grid-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">Full width row</div>
+              <div class="demo-box demo-box--alt">Full width row</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-1-2 (1fr 2fr)</code>
+            <div class="sf-grid-1-2 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1fr</div>
+              <div class="demo-box demo-box--alt">2fr</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-2-1 (2fr 1fr)</code>
+            <div class="sf-grid-2-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">2fr</div>
+              <div class="demo-box demo-box--alt">1fr</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-1-3 (1fr 3fr)</code>
+            <div class="sf-grid-1-3 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1fr</div>
+              <div class="demo-box demo-box--alt">3fr</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-3-1 (3fr 1fr)</code>
+            <div class="sf-grid-3-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">3fr</div>
+              <div class="demo-box demo-box--alt">1fr</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>.sf-scale-down (motion.css)</h3>
+        <div class="sf-cluster sf-cluster--m" id="demo-scale-down">
+          <button type="button" class="sf-scale-down" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">scale-down (click to replay)</button>
+        </div>
+
+        <h3>Other layout helpers referenced in code</h3>
+        <div class="sf-cluster sf-cluster--m" style="flex-wrap: wrap">
+          <code style="font-size: var(--sf-text-xs)">.sf-center</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-center--intrinsic</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-box</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-grid-6</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-grid--s</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-grid--m</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-grid--l</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-grid--xl</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-grid--xs</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-sidebar--narrow</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-sidebar--wide</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-container--full</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-container--wide</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-section--l</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-section--xl</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-frame--3-2</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-frame--4-3</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-frame--golden</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--s</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--l</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--2xl</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--3xl</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--center</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--end</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-stack--stretch</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-cluster--xs</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-cluster--2xs</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-cluster--center</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-cluster--end</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-cluster--between</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-cover--padding-l</code>
+          <code style="font-size: var(--sf-text-xs)">.sf-fade-out</code>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
            ACCESSIBILITY
       ══════════════════════════════════════════════════════ -->
       <section id="accessibility" class="demo-section">

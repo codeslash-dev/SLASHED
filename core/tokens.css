@@ -741,7 +741,13 @@
        one of the scoped variants.
        ---------------------------------------------------------- */
     --sf-transition-all:       all var(--sf-duration-normal) var(--sf-ease-out);
-    --sf-transition-colors:    color, background-color, border-color, text-decoration-color, fill, stroke var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-colors:
+      color var(--sf-duration-normal) var(--sf-ease-out),
+      background-color var(--sf-duration-normal) var(--sf-ease-out),
+      border-color var(--sf-duration-normal) var(--sf-ease-out),
+      text-decoration-color var(--sf-duration-normal) var(--sf-ease-out),
+      fill var(--sf-duration-normal) var(--sf-ease-out),
+      stroke var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-transform: transform var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-opacity:   opacity var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-shadow:    box-shadow var(--sf-duration-normal) var(--sf-ease-out);
