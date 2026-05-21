@@ -523,30 +523,36 @@ Rejected-on-purpose items live in §D9, not here.
 
 ## §E — Re-scored summary
 
-Build/infra re-scored upward (existing tooling credited); Base re-scored upward
-(widget styling reclassified as out-of-scope by design, not "missing").
+**Decisions do not change the score — only implementation does.** Every D1–D10
+item remains outstanding in §C until it lands in the code. The re-scores below
+reflect *only* two legitimate sources, neither of which is work done in this
+review: **(a) scope reclassification** — items that are now out-of-scope (D1) or
+deliberately rejected (D9) leave the gap count; and **(b) crediting pre-existing
+tooling** that v2 under-counted (stylelint, CI, commitlint, hooks). Nothing that
+was prototyped during this session counts as done.
 
 | Layer | Score (v2 → v3) | Note |
 |-------|------------------|------|
-| Tokens (core) | 85% → 87% | divider system is the main HIGH gap |
-| Reset | 91% → 91% | minor cleanups |
-| Base | 77% → **90%** | "missing" widgets reclassified out-of-scope [D1] |
-| Forms | 67% → 72% | file/range still HIGH; states/hover/asterisk decided |
+| Tokens (core) | 85% | divider system is the main HIGH gap (no re-score — decisions don't count) |
+| Reset | 91% | minor cleanups |
+| Base | 77% → **90%** | reclassification only: widgets are out-of-scope [D1] (no code written) |
+| Forms | 67% | file/range/states/hover/asterisk all **outstanding** — decided ≠ done |
 | Layout | 93% | divider class outstanding |
 | States | 85% | overlaps need docs |
 | Themes | 60% | example theme + docs are the gap |
-| Motion | 61% → 68% | utility classes rejected (not a gap) |
+| Motion | 61% → **68%** | reclassification only: utility classes rejected [D9], leave the gap count |
 | Accessibility | 71% | sr-only-focusable HIGH |
-| Print | 71% | print-base-size + print-only |
+| Print | 71% | print-base-size + print-only outstanding |
 | Legacy | 100% | — |
-| Build | 50% → **70%** | existing stylelint/CI/commitlint credited |
-| Tests | 42% → 55% | CI-run credited; cross-browser + axe outstanding |
+| Build | 50% → **70%** | pre-existing stylelint/CI/commitlint/hooks credited (v2 under-counted) |
+| Tests | 42% → **55%** | pre-existing CI run credited; cross-browser + axe outstanding |
 | Documentation | 33% | the real v1.0 blocker |
-| Internal Consistency | 50% → 65% | token wiring + contrast-bias decided |
+| Internal Consistency | 50% → **55%** | only BEM-API-token reclassification credited; D2/D3/D4 token wiring still outstanding |
 
-**Overall: 72% → ~78% production-ready.**
-- Core CSS: ~88% (excellent)
-- Optional modules: ~75%
+**Overall: 72% → ~76% production-ready** (uplift is reclassification + crediting
+existing tooling, not implemented work).
+- Core CSS: ~87%
+- Optional modules: ~74%
 - Infrastructure (build/test/docs): ~60% (docs is the gating item for v1.0)
 
 ---
