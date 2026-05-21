@@ -313,116 +313,192 @@ batch because they add a build dependency / CI surface. Schedule for v0.3.
 
 ---
 
-## §C — Layer inventory (corrected; actionable rows only)
+## §C — Outstanding items (complete carryover from v2)
 
-Fully-complete layers are summarised; only items needing action are itemised.
-"Done" counts feed §E.
+Every **not-done** item from v2 is reproduced here — all priorities, including
+LOW. Completed (✓) rows from v2 are intentionally omitted (this is the to-do
+list). Status: ✗ missing · 🟡 partial · ⚠ cleanup. `[D#]` links to §A.
+Rejected-on-purpose items live in §D9, not here.
 
 ### 1. Tokens
-- Colour / shadow / typography / spacing / radius / motion / z-index / palette
-  systems: comprehensive (see v2 §1 for the full ✓ inventory — unchanged).
-- ◆ `--sf-h*-font-weight`, `--sf-heading-text-wrap`, `--sf-body-text-wrap`,
-  `--sf-body-strong-weight`, `--sf-body-em-style` — wire in base **[D2]**.
-- ◆ `--sf-contrast-bias` — implement **[D3]**.
-- ✗ `--sf-divider-width/-style/-color` — HIGH. ACSS-style global divider system.
-- ✗ `--sf-color-code-text` — LOW. Declared as fallback in base.css; add to tokens.css for discoverability.
-- ✗ `--sf-mask-scrim-start/-end` — MEDIUM. Reel/scroll edge fades.
-- ✗ `--sf-animation-delay-1..5` — MEDIUM. Stagger tokens (token only; the
-  `.sf-stagger` *class* is rejected per D9).
-- ✗ `--sf-text-decoration-thickness`, `--sf-line-clamp` — LOW (defer).
-- ✗ `--sf-color-accent` — **rejected [D9]**.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `--sf-h1..h6-font-weight`, `--sf-heading-text-wrap`, `--sf-body-text-wrap`, `--sf-body-strong-weight`, `--sf-body-em-style` | 🟡 | HIGH | Wire in base **[D2]** |
+| `--sf-contrast-bias` | 🟡 | MEDIUM | Implement as global text-contrast knob **[D3]** |
+| `--sf-divider-width / -style / -color` | ✗ | HIGH | ACSS-style global divider system |
+| `--sf-mask-scrim-start / -end` (mask/edge-fade) | ✗ | MEDIUM | Reel/scroll edge fades |
+| `--sf-animation-delay-1..5` | ✗ | MEDIUM | Stagger tokens (token only; `.sf-stagger` class rejected — §D9) |
+| `--sf-color-code-text` | 🟡 | LOW | Declared as fallback in base.css; add to tokens.css for discoverability |
+| `--sf-text-decoration-thickness` | ✗ | LOW | Link/underline customisation (defer to utilities) |
+| `--sf-line-clamp` | ✗ | LOW | Utility concern (defer to utilities) |
+| `--sf-content-min-width` (fluid baseline) | ✗ | LOW | Not needed — `--sf-container-narrow` + 320px min body serves the same purpose |
+| Status colours in palette (numeric scale) | ✗ | LOW | Status already have subtle/strong/muted in core; full numeric expansion not needed |
 
 ### 2. Reset
-- Comprehensive (modern-normalize + andy-bell). 
-- ⚠ `textarea { resize: vertical }` duplicated in forms.css — remove from forms.css. LOW.
-- ✗ `::file-selector-button { appearance: button }` — LOW.
-- 🟡 `<search>` element — LOW (semantic only; optional `display:block`).
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `textarea { resize: vertical }` duplicated in forms.css | ⚠ | LOW | Remove from forms.css (reset owns it) |
+| `::file-selector-button { appearance: button }` | ✗ | LOW | Only `font:inherit` set today; add for consistency |
+| `<search>` element reset | 🟡 | LOW | Semantic only; optional `display:block` for older engines |
 
 ### 3. Base
-- Text/inline defaults: comprehensive.
-- ◆ Behaviour-token wiring **[D2]**.
-- ◆ blockquote / table / details / dialog / dl / figure / progress / meter
-  (global) — **out of scope by design [D1]**. Documented, not built.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Behaviour-token wiring (per-heading weights, text-wrap, strong, em) | 🟡 | HIGH | **[D2]** |
+| blockquote (global) | ✗ | HIGH | **Out of scope by design [D1]** — styled inside `.sf-prose` |
+| details/summary (global) | ✗ | HIGH | **Out of scope by design [D1]** — widget → consumer BEM |
+| dialog (global) | ✗ | HIGH | **Out of scope by design [D1]** — widget → consumer BEM |
+| table/thead/tbody/td/th (global) | ✗ | MEDIUM | **Out of scope by design [D1]** — styled inside `.sf-prose` |
+| progress (global) | ✗ | MEDIUM | **Out of scope by design [D1]** — widget → consumer BEM |
+| figure/figcaption (global) | ✗ | MEDIUM | **Out of scope by design [D1]** — styled inside `.sf-prose` |
+| dl/dt/dd (global) | ✗ | MEDIUM | **Out of scope by design [D1]** |
+| meter (global) | ✗ | LOW | **Out of scope by design [D1]** — complex cross-browser; widget |
 
 ### 4. Forms (optional)
-- Text inputs / select / textarea / button / checkbox-radio / fieldset / label /
-  focus / disabled / placeholder: done.
-- ◆ Consume `--sf-field-border-color` **[D6]**.
-- ◆ Button `:hover` fix **[D7]**.
-- ◆ Required asterisk **[D8]**.
-- ⚠ Remove `textarea resize` duplication.
-- ✗ `input[type="file"]` (`::file-selector-button`) — HIGH.
-- ✗ `input[type="range"]` (track + thumb, webkit + moz) — HIGH.
-- ✗ Switch / helper text — **rejected/deferred [D9]**.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `.is-*` integration (consume `--sf-field-border-color`) | 🟡 | HIGH | **[D6]** |
+| Button `:hover` bug | 🟡 | HIGH | Misuses surface-hover token — fix **[D7]** |
+| `input[type="file"]` (`::file-selector-button`) | ✗ | HIGH | Button-like appearance |
+| `input[type="range"]` (track + thumb, webkit + moz) | ✗ | HIGH | Slider styling |
+| Select arrow cross-browser | 🟡 | MEDIUM | SVG `stroke="currentColor"` may not inherit in all engines; test FF/Safari, consider `mask-image` |
+| Form group pattern (label + input + helper spacing) | ✗ | MEDIUM | Structural spacing; partly component territory |
+| Helper / error text below input | ✗ | MEDIUM | **Deferred → components/utilities [D9]** |
+| Switch (`checkbox[role="switch"]`) | ✗ | MEDIUM | **Deferred → components [D9]** |
+| Required asterisk indicator | ✗ | LOW | Classless `:has()` — **add [D8]** |
+| `textarea resize` duplication | ⚠ | LOW | Remove from forms.css |
 
 ### 5. Layout
-- 11 Every-Layout primitives + SLASHED primitives: complete (v2 §5 unchanged).
-- ✗ `.sf-divider` / `.sf-separator` class — HIGH (pairs with the divider tokens).
-- 🟡 `.sf-grid--dense` — LOW.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `.sf-divider` / `.sf-separator` class | ✗ | HIGH | Pairs with `--sf-divider-*` tokens (§C.1) |
+| Icon sizing primitive (`.sf-icon`) | ✗ | LOW | `--sf-icon-*` tokens exist; class is a utility concern |
+| `.sf-grid--dense` (dense flow on regular grids) | 🟡 | LOW | Only on `.sf-bento` today |
 
 ### 6. States
-- 34 `.is-*` markers: complete.
-- ✗ `.is-focused`, `.focus-parent` — MEDIUM. `.is-pressed`, `.is-pending`,
-  `.is-fullscreen`, `.is-resizable` — LOW.
-- HIGH (docs, not code): document overlaps `.is-error` vs `.is-invalid`,
-  `.is-danger` vs `.is-error`, `.is-open` vs `.is-expanded`, `.is-valid` vs `.is-success`.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `.is-error` vs `.is-invalid` — document semantics | ✗ | HIGH | Generic component state vs form-field validation |
+| `.is-danger` vs `.is-error` — document semantics | ✗ | HIGH | Destructive-action context vs validation feedback |
+| `.is-focused` (programmatic focus) | ✗ | MEDIUM | JS-driven focus without `:focus-visible` |
+| `.focus-parent` (parent on child focus) | ✗ | MEDIUM | `:has(:focus-visible)` / `:focus-within` |
+| `.is-open` vs `.is-expanded` — document semantics | ✗ | MEDIUM | Disclosure vs accordion |
+| `.is-valid` vs `.is-success` — document semantics | ✗ | MEDIUM | Form-specific vs general positive |
+| `.is-pressed` (aria-pressed) | ✗ | LOW | Toggle buttons |
+| `.is-pending` (async, ≠ loading) | ✗ | LOW | Optimistic UI |
+| `.is-fullscreen` | ✗ | LOW | Consider vs native `:fullscreen` |
+| `.is-resizable` | ✗ | LOW | `resize: both` — niche |
 
 ### 7. Themes
-- OS + explicit `data-theme`, section scoping, `--sf-is-dark` flag: done.
-- ✗ Example branded theme file — HIGH (adoption-critical).
-- ✗ Multi-brand + theme-transition docs — MEDIUM.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Example branded theme file | ✗ | HIGH | Adoption-critical |
+| Theme transition (view-transition on toggle) | ✗ | MEDIUM | Opt-in class/token |
+| Multi-brand theming documentation | ✗ | MEDIUM | Architecture allows it; document |
+| High-contrast theme variant | ✗ | LOW | `prefers-contrast:more` adjusts ring only; full override acceptable to skip (see also `--sf-contrast-bias` [D3]) |
 
 ### 8. Motion
-- Keyframes + presets + reduced-motion gating + view-transition: done.
-- ✗ `--sf-animation-delay-*` tokens — MEDIUM (tokens only).
-- ✗ `sf-ping` keyframe — MEDIUM. 
-- ◆ Animation **utility classes** — **rejected [D9]**.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `sf-ping` keyframe (notification pulse) | ✗ | MEDIUM | Badges/notifications |
+| `--sf-delay-1..5` animation-delay tokens | ✗ | MEDIUM | Stagger (tokens only) |
+| `sf-blink` keyframe (cursor blink) | ✗ | LOW | Niche |
+| `sf-float` keyframe (gentle float) | ✗ | LOW | Decorative |
+| Scroll-driven animation utility classes | ✗ | LOW | Tokens exist; classes deferred to utilities |
+| `@starting-style` readiness (entry animations) | 🟡 | LOW | Document as future enhancement |
+| `.sf-spin` / `.sf-pulse` / `.sf-bounce` / `.sf-stagger` classes | — | — | **Rejected / deferred to utilities [D9]** |
 
 ### 9. Accessibility
-- focus-visible, reduced-motion, contrast, transparency, touch targets,
-  forced-colors, sr-only, skip-link: done.
-- ✗ `.sr-only-focusable` — HIGH.
-- 🟡 forced-colors form borders — MEDIUM.
-- ✗ `.no-motion` manual override — MEDIUM.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `.sr-only-focusable` | ✗ | HIGH | Skip-link alternatives / focus-trap exits |
+| Forced-colors form-element borders | 🟡 | MEDIUM | Inputs lose visible borders in forced-colors |
+| `.no-motion` (manual override, not OS) | ✗ | MEDIUM | Per-element motion suppression |
+| `prefers-reduced-data` (`@supports`) | ✗ | LOW | Draft spec; speculative |
+| ARIA live-region considerations | ✗ | LOW | CSS-only can't address; document as consumer responsibility |
 
 ### 10. Print
-- @page, shadow strip, URL expansion, break rules, hide-list, color classes: done.
-- ◆ Consume `--sf-print-base-size` **[D4]**.
-- ✗ `.print-only` class — MEDIUM.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Consume `--sf-print-base-size` | ✗ | HIGH | **[D4]** |
+| `.print-only` class | ✗ | MEDIUM | `display:none` normally, `block` in print |
+| `.no-print` standalone documentation | 🟡 | LOW | Exists in hide-list; document explicitly |
+| video/audio in hide-list | 🟡 | LOW | Blank boxes in print; add or document |
+| `@page` named pages | ✗ | LOW | Advanced; defer to v1.x |
+| `page-break-before` utility | ✗ | LOW | Utility concern; defer |
 
 ### 11. Legacy
-- dvh / focus-visible / scrollbar-gutter fallbacks: complete (100%).
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Container query fallback | ✗ | LOW | Not needed — CQ is baseline 2023 within support floor |
+| `@layer` fallback | ✗ | LOW | Not possible — layers are the foundational architecture |
 
 ### 12. Build & Distribution
-- Bundler, exports map, version banner, path-traversal guard, watch: done.
-- **Existing infra (credit):** stylelint (+ `^sf-` / `sf-*` naming enforcement),
-  CI (lint+build+test), release.yml, commitlint, git hooks.
-- ◆ Tiered bundle scheme + ship forms **[D5]**.
-- ◆ Minification + source maps **[D10]** — CRITICAL/HIGH.
-- ✗ Gzip/Brotli size reporting + README badge — MEDIUM.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Minified bundle (`.min.css`) | ✗ | CRITICAL | lightningcss/cssnano **[D10]** |
+| Source maps (`.map`) | ✗ | HIGH | **[D10]** |
+| forms.css not in any bundle | 🟡 | MEDIUM | Fixed by tiered bundle scheme **[D5]** |
+| Lightning CSS integration | ✗ | MEDIUM | Minify + nesting + prefixes **[D10]** |
+| Gzip/Brotli size reporting | ✗ | MEDIUM | Build-time report |
+| Bundle size badge in README | ✗ | MEDIUM | shields.io / bundlephobia |
+| Separate layers.css entry point | 🟡 | LOW | Document the import-first requirement for custom bundles |
+| **Existing infra (credit)** | ✓ | — | stylelint (+ `^sf-`/`sf-*` enforcement), CI (lint+build+test), release.yml, commitlint, git hooks |
 
 ### 13. Tests
-- token regression (light+dark), layer order, coverage, print, visual, WCAG
-  contrast: done. **CI runs them** (credit).
-- ◆ Cross-browser matrix (Firefox + WebKit) **[D10]** — HIGH.
-- ✗ axe-core a11y audit — HIGH.
-- ✗ CQ breakpoint tests, reduced-motion test, bundle-size threshold — MEDIUM.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Cross-browser matrix (Firefox + WebKit) | ✗ | HIGH | Chromium-only today **[D10]** |
+| axe-core a11y audit | ✗ | HIGH | `@axe-core/playwright` on demo/fixture |
+| Container query breakpoint tests | ✗ | MEDIUM | Verify CQ triggers for grid-N/bento/alternate |
+| States visual test (all 33 `.is-*`) | 🟡 | MEDIUM | Only some states covered today |
+| Reduced-motion behavior test | ✗ | MEDIUM | Emulate `reduce`, assert 0.01ms |
+| Performance / bundle-size regression | ✗ | MEDIUM | Threshold assert |
+| Forced-colors rendering test | ✗ | LOW | Verify focus ring uses Highlight |
 
 ### 14. Documentation
-- README, architecture.md, demo.html, in-source headers, CHANGELOG: done.
-- ◆ Document `slashed.forms` layer + base scope rule **[D1, D5]**.
-- ✗ Theming guide, token reference table, layout visual guide, state docs,
-  browser support matrix — HIGH (adoption-critical).
-- ✗ Dark-mode cookbook, performance notes, contributing guide — MEDIUM.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| `slashed.forms` layer + base scope rule documented | 🟡 | HIGH | **[D1, D5]** (README + architecture.md) |
+| architecture.md layer order outdated (missing forms) | 🟡 | HIGH | **[D5]** |
+| Theming guide (rebrand in 6 tokens) | ✗ | HIGH | Adoption-critical |
+| Token reference table (all `--sf-*` + defaults) | ✗ | HIGH | Auto-generate from source |
+| Layout primitives visual guide | ✗ | HIGH | Diagram per primitive |
+| Browser support matrix (detailed) | ✗ | HIGH | Features × versions |
+| State documentation (when to use each `.is-*`) | ✗ | HIGH | + ARIA mapping (ties to §C.6 overlaps) |
+| Per-section theming examples | ✗ | MEDIUM | Nested `data-theme` |
+| Dark-mode cookbook | ✗ | MEDIUM | Forced header, light card in dark, toggle JS |
+| Performance considerations | ✗ | MEDIUM | oklch paint, `@property` cost, transition-all footgun |
+| Contributing guide | ✗ | MEDIUM | For OSS contributors |
+| tokens.palette.css missing in file-structure diagram | 🟡 | MEDIUM | Note it ships in the full/optimal bundles |
+| Interactive state demos with descriptions | 🟡 | MEDIUM | States appear minimally in demo |
+| Animation class visual demos (replay/before-after) | 🟡 | MEDIUM | Preset classes need comparison |
+| Migration guide (Pico/Bulma → SLASHED) | ✗ | LOW | Class/concept mapping |
 
 ### 15. Internal Consistency
-- `--sf-*` prefix, layer naming, no stray `!important`: clean.
-- ◆ Behaviour-token wiring **[D2]**; `--sf-contrast-bias` **[D3]**.
-- BEM-API tokens (`--sf-shadow-*`, `--sf-blur-*`, `--sf-gap`, `--sf-gradient-*`,
-  scrollbar, optical-sizing, font-features) — **correctly unconsumed**, document
-  as consumer API (not a defect).
-- 🟡 print class naming (`.no-print` vs `.print-no-color` vs `.print-color-exact`)
-  — LOW, consider standardising.
+
+| Item | Status | Priority | Decision / Note |
+|------|--------|----------|-----------------|
+| Behaviour tokens declared-not-consumed (body/heading/per-heading) | 🟡 | HIGH | **[D2]** |
+| `--sf-print-base-size` declared-not-consumed | 🟡 | HIGH | **[D4]** |
+| `--sf-contrast-bias` declared-not-consumed | 🟡 | MEDIUM | **[D3]** |
+| BEM-API tokens unconsumed (`--sf-scrollbar-*`, `--sf-optical-sizing`, `--sf-shadow-*`, `--sf-blur-*`, `--sf-gap`, `--sf-gradient-*`) | 🟡 | LOW | **Correct by design** — document explicitly as consumer API (not a defect) |
+| Colour naming: `-light/-dark` (source) vs `--variant` (modifier) | 🟡 | LOW | Document: single dash = source, double dash = modifier |
+| Print class naming (`.no-print` vs `.print-no-color` vs `.print-color-exact`) | 🟡 | LOW | Consider standardising to `.print-*` |
 
 ### 16. Stub files (newly inventoried)
 - `optional/components.css` — empty `slashed.components` stub.
