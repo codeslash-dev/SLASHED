@@ -2,6 +2,21 @@
   "name": "slashed",
   "version": "0.1.0",
   "description": "CSS framework",
+  "style": "dist/slashed.full.css",
+  "main": "dist/slashed.full.css",
+  "unpkg": "dist/slashed.full.css",
+  "jsdelivr": "dist/slashed.full.css",
+  "exports": {
+    ".": "./dist/slashed.full.css",
+    "./essential": "./dist/slashed.essential.css",
+    "./core/*": "./core/*",
+    "./optional/*": "./optional/*"
+  },
+  "files": [
+    "dist/",
+    "core/",
+    "optional/"
+  ],
   "scripts": {
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
     "build": "node scripts/bundle.js",
