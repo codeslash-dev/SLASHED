@@ -390,6 +390,10 @@
     --sf-font-weight-heading: var(--sf-font-weight-semibold);
     --sf-font-weight-display: var(--sf-font-weight-bold);
 
+    /* State token — consumed by .is-current in states.css.
+       Override to match your nav design (e.g. semibold for thin fonts). */
+    --sf-current-font-weight: var(--sf-font-weight-bold);
+
 
     /* ----------------------------------------------------------
        Font sizes — fluid
@@ -618,6 +622,7 @@
     --sf-animation-slide-in-right: sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out)       both;
     --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-overshoot) both;
     --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
+    --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
 
 
     /* ----------------------------------------------------------
@@ -750,8 +755,29 @@
 
     /* ----------------------------------------------------------
        Transition shorthands
+
+       --sf-transition-all transitions ALL properties — convenient but
+       a performance footgun (forces the browser to watch every computed
+       value). Prefer the granular tokens below for production UI. The
+       alias --sf-transition-base is kept for one minor release to avoid
+       breaking consumers; migrate to --sf-transition-all or, better,
+       one of the scoped variants.
        ---------------------------------------------------------- */
-    --sf-transition-base:  all var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-all:       all var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-colors:
+      color var(--sf-duration-normal) var(--sf-ease-out),
+      background-color var(--sf-duration-normal) var(--sf-ease-out),
+      border-color var(--sf-duration-normal) var(--sf-ease-out),
+      text-decoration-color var(--sf-duration-normal) var(--sf-ease-out),
+      fill var(--sf-duration-normal) var(--sf-ease-out),
+      stroke var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-transform: transform var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-opacity:   opacity var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-shadow:    box-shadow var(--sf-duration-normal) var(--sf-ease-out);
+
+    /* Legacy alias — deprecated, remove after v1.x */
+    --sf-transition-base:  var(--sf-transition-all);
+
     --sf-transition-fast:  all var(--sf-duration-fast)   var(--sf-ease-out);
     --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
     --sf-transition-enter: all var(--sf-duration-normal) var(--sf-ease-out);
@@ -1792,9 +1818,11 @@
 
   .is-current {
     /* Navigation: marks the current page/route.
-       Components style via .sf-nav .is-current etc. */
+       Components style via .sf-nav .is-current etc.
+       Weight is tokenised so consumers can override without specificity battles:
+         :root { --sf-current-font-weight: var(--sf-font-weight-semibold); } */
     --sf-is-current: 1;
-    font-weight: var(--sf-font-weight-bold);
+    font-weight: var(--sf-current-font-weight, var(--sf-font-weight-bold));
   }
 
   .is-highlighted {
@@ -2037,6 +2065,22 @@
   @keyframes sf-spin    { to { rotate: 360deg; } }
   @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
+  /* @property color interpolation — proves that registered custom
+     properties animate smoothly in oklch. Because --sf-color-primary-light
+     is registered with syntax:"<color>", the browser interpolates the
+     intermediate color values frame-by-frame. Opt-in via .sf-color-pulse. */
+  @keyframes sf-color-pulse {
+    0%   { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) l c h); }
+    50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) calc(l + 0.12) c h); }
+    100% { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) l c h); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sf-color-pulse {
+      animation: var(--sf-animation-color-pulse);
+    }
+  }
+
 }
 
 /* ─── core/accessibility.css ─── */
@@ -2159,7 +2203,8 @@
     height:      1px                 !important;
     padding:     0                   !important;
     margin:      -1px                !important;
-    overflow:    hidden              !important;
+    overflow:    hidden              !important; /* fallback for Safari <16 */
+    overflow:    clip                !important;
     clip-path:   inset(50%)          !important;
     white-space: nowrap              !important;
     border:      0                   !important;
