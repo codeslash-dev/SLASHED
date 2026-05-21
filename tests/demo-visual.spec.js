@@ -267,7 +267,10 @@ test.describe('Motion & States', () => {
     const loading = page.locator('#motion .is-loading').first();
     // Loading state makes text transparent
     const color = await getStyle(loading, 'color');
-    expect(color).toMatch(/rgba?\(.*0\)|transparent/);
+    const isTransparent =
+      color === 'transparent' ||
+      /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0(?:\.0+)?\s*\)$/.test(color);
+    expect(isTransparent).toBeTruthy();
     // pointer-events disabled
     const pe = await getStyle(loading, 'pointerEvents');
     expect(pe).toBe('none');
@@ -826,8 +829,10 @@ test.describe('Accessibility', () => {
     // depending on browser defaults, but cursor should be restricted.
     const opacity = parseFloat(await getStyle(disabled, 'opacity'));
     const pointerEvents = await getStyle(disabled, 'pointerEvents');
+    const cursor = await getStyle(disabled, 'cursor');
     // Either opacity is reduced OR pointer-events is none (depending on approach)
-    const isStyled = opacity < 1 || pointerEvents === 'none';
+    const isStyled = opacity < 1 || pointerEvents === 'none' || cursor === 'not-allowed';
+    expect(isStyled).toBeTruthy();
     // At minimum, the element should exist and be rendered
     const box = await disabled.boundingBox();
     expect(box).not.toBeNull();
