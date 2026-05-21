@@ -1,5 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const path = require('path');
 
 /**
  * Print color preservation smoke test.
@@ -10,10 +11,8 @@ const { test, expect } = require('@playwright/test');
 test.describe('Print styles', () => {
   test('<mark> retains non-transparent background in print', async ({ page }) => {
     await page.emulateMedia({ media: 'print' });
-    await page.setContent(`
-      <link rel="stylesheet" href="file://${process.cwd()}/dist/slashed.essential.css">
-      <p><mark>Highlighted text</mark></p>
-    `);
+    await page.setContent(`<p><mark>Highlighted text</mark></p>`);
+    await page.addStyleTag({ path: path.join(process.cwd(), 'dist', 'slashed.essential.css') });
 
     const bg = await page.locator('mark').evaluate(el =>
       getComputedStyle(el).backgroundColor
@@ -26,12 +25,12 @@ test.describe('Print styles', () => {
   });
 
   test('.no-print elements are hidden in print', async ({ page }) => {
-    await page.emulateMedia({ media: 'print' });
     await page.setContent(`
-      <link rel="stylesheet" href="file://${process.cwd()}/dist/slashed.essential.css">
       <div class="no-print" id="hidden-el">Should be hidden</div>
       <div id="visible-el">Should be visible</div>
     `);
+    await page.addStyleTag({ path: path.join(process.cwd(), 'dist', 'slashed.essential.css') });
+    await page.emulateMedia({ media: 'print' });
 
     const hiddenDisplay = await page.locator('#hidden-el').evaluate(el =>
       getComputedStyle(el).display
@@ -45,11 +44,11 @@ test.describe('Print styles', () => {
   });
 
   test('.print-color-exact preserves background in print', async ({ page }) => {
-    await page.emulateMedia({ media: 'print' });
     await page.setContent(`
-      <link rel="stylesheet" href="file://${process.cwd()}/dist/slashed.essential.css">
       <div class="print-color-exact" style="background: rgb(100, 150, 200);">Coloured</div>
     `);
+    await page.addStyleTag({ path: path.join(process.cwd(), 'dist', 'slashed.essential.css') });
+    await page.emulateMedia({ media: 'print' });
 
     const pca = await page.locator('.print-color-exact').evaluate(el =>
       getComputedStyle(el).getPropertyValue('print-color-adjust') ||
