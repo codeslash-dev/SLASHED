@@ -1,0 +1,194 @@
+/* ============================================================
+   SLASHED — optional/forms.css
+   @layer slashed.forms
+
+   Classless form styling — opt-in element-level defaults for
+   <input>, <select>, <textarea>, and <button> without any classes.
+
+   USAGE:
+     @import '@slashed/css/optional/forms.css';
+     — or include in a custom bundle via bundle.config.json.
+
+   PHILOSOPHY:
+     This file is OPTIONAL. SLASHED core does not style native form
+     elements beyond reset (font-inherit, box-sizing). If you prefer
+     full control via BEM components, skip this file entirely.
+
+   TOKENS CONSUMED:
+     --sf-radius-m, --sf-border-1, --sf-color-border-default,
+     --sf-color-border-focus, --sf-color-bg, --sf-color-surface,
+     --sf-color-text, --sf-color-text-placeholder,
+     --sf-color-bg-disabled, --sf-color-text-disabled,
+     --sf-opacity-disabled, --sf-space-xs, --sf-space-s,
+     --sf-text-m, --sf-transition-colors, --sf-focus-ring-*
+   ============================================================ */
+
+@layer slashed.forms {
+
+  /* ----------------------------------------------------------
+     Shared base for text-like inputs, select, textarea
+     ---------------------------------------------------------- */
+  input:where(
+    [type="text"], [type="email"], [type="password"], [type="url"],
+    [type="tel"], [type="number"], [type="search"], [type="date"],
+    [type="datetime-local"], [type="month"], [type="week"],
+    [type="time"], [type="color"], :not([type])
+  ),
+  select,
+  textarea {
+    display: block;
+    inline-size: 100%;
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-s);
+    font-size: var(--sf-text-m);
+    line-height: var(--sf-leading-normal);
+    color: var(--sf-color-text);
+    background-color: var(--sf-color-surface);
+    border: var(--sf-border-1) solid var(--sf-color-border-default);
+    border-radius: var(--sf-radius-m);
+    transition: var(--sf-transition-colors),
+                border-color var(--sf-duration-fast) var(--sf-ease-out);
+  }
+
+  /* Focus */
+  input:where(
+    [type="text"], [type="email"], [type="password"], [type="url"],
+    [type="tel"], [type="number"], [type="search"], [type="date"],
+    [type="datetime-local"], [type="month"], [type="week"],
+    [type="time"], [type="color"], :not([type])
+  ):focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--sf-color-border-focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border-focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* Disabled */
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    background-color: var(--sf-color-bg-disabled);
+    color: var(--sf-color-text-disabled);
+    opacity: var(--sf-opacity-disabled);
+    cursor: not-allowed;
+  }
+
+  /* Placeholder */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--sf-color-text-placeholder);
+    opacity: 1;
+  }
+
+
+  /* ----------------------------------------------------------
+     Textarea specifics
+     ---------------------------------------------------------- */
+  textarea {
+    min-block-size: 6rem;
+    resize: vertical;
+  }
+
+
+  /* ----------------------------------------------------------
+     Select
+     ---------------------------------------------------------- */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--sf-space-s) center;
+    background-size: 1em;
+    padding-inline-end: calc(var(--sf-space-s) + 1.5em);
+  }
+
+
+  /* ----------------------------------------------------------
+     Button / submit / reset
+     ---------------------------------------------------------- */
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sf-space-xs);
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-m);
+    font-size: var(--sf-text-m);
+    font-weight: var(--sf-font-weight-heading);
+    line-height: var(--sf-leading-normal);
+    color: var(--sf-color-text--on-action);
+    background-color: var(--sf-color-action);
+    border: var(--sf-border-1) solid transparent;
+    border-radius: var(--sf-radius-m);
+    cursor: pointer;
+    transition: var(--sf-transition-colors);
+    text-decoration: none;
+  }
+
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover,
+  input[type="button"]:hover {
+    background-color: var(--sf-color-bg-hover);
+    color: var(--sf-color-text);
+  }
+
+  button:focus-visible,
+  input[type="submit"]:focus-visible,
+  input[type="reset"]:focus-visible,
+  input[type="button"]:focus-visible {
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border-focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  button:disabled,
+  input[type="submit"]:disabled,
+  input[type="reset"]:disabled,
+  input[type="button"]:disabled {
+    opacity: var(--sf-opacity-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+
+  /* ----------------------------------------------------------
+     Checkbox & radio — minimal accent styling
+     ---------------------------------------------------------- */
+  input[type="checkbox"],
+  input[type="radio"] {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+    accent-color: var(--sf-color-action);
+    cursor: pointer;
+  }
+
+
+  /* ----------------------------------------------------------
+     Fieldset & legend
+     ---------------------------------------------------------- */
+  fieldset {
+    border: var(--sf-border-1) solid var(--sf-color-border-subtle);
+    border-radius: var(--sf-radius-m);
+    padding: var(--sf-space-m);
+  }
+
+  legend {
+    font-weight: var(--sf-font-weight-heading);
+    padding-inline: var(--sf-space-xs);
+  }
+
+
+  /* ----------------------------------------------------------
+     Label
+     ---------------------------------------------------------- */
+  label {
+    display: block;
+    font-weight: var(--sf-font-weight-heading);
+    margin-block-end: var(--sf-space-xs);
+  }
+
+}
