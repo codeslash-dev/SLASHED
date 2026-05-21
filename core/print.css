@@ -3,6 +3,29 @@
 
    Print rules and @page definition. Print tokens (--sf-print-*)
    are declared in core/tokens.css.
+
+   Color contract (Phase 3, see audits/comparative-audit-2026.md F-04):
+   authored colour is preserved by default. Browsers apply their own
+   ink-saving heuristics via the default `print-color-adjust: economy`,
+   so semantic colours (badges, status pills, <mark>, syntax highlighting)
+   reach paper intact. Two opt-in classes give consumers control:
+
+     .print-color-exact  → force every descendant to print colours
+                           verbatim (for colour-coded data that loses
+                           meaning when the browser flattens it).
+     .print-no-color     → force everything to ink-on-paper:
+                           transparent backgrounds + system text colour.
+                           The legacy blanket reset, now opt-in.
+
+   `!important` is reserved for selectors whose semantics require
+   defeating consumer-authored CSS:
+     - `.no-print` and the hide-list (nav, aside, button, …) — these
+       are content negative-space and must vanish from print regardless
+       of authored display rules.
+     - `details > summary` — disclosure widget carries no print value.
+     - The two opt-in colour classes above — when the consumer marks a
+       region with them they are explicitly asking to override authored
+       colour, so `!important` is the contract.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.print {
@@ -14,15 +37,17 @@
       margin: var(--sf-print-page-margin, 2cm);
     }
 
+    /* Decorative shadows are paper-noise. No `!important` — an authored
+       shadow that explicitly survives into print is the consumer's call. */
     *,
     *::before,
     *::after {
-      background:  transparent !important;
-      color:       CanvasText  !important;
-      box-shadow:  none        !important;
-      text-shadow: none        !important;
+      box-shadow:  none;
+      text-shadow: none;
     }
 
+    /* Expand link URLs after the link text so paper-readers can follow
+       them. Anchors and javascript: pseudo-links are excluded. */
     a[href]::after {
       content:    " (" attr(href) ")";
       font-size:  90%;
@@ -66,21 +91,51 @@
       padding: var(--sf-space-s);
     }
 
-    /* Hide non-essential interactive and decorative elements */
+    /* Hide non-essential interactive and decorative elements.
+       `!important` is justified: these elements are content negative-space
+       in print, and consumer-authored display rules must not bring them
+       back accidentally. */
     nav, aside, button, input, select, textarea,
     dialog, [popover], .no-print {
       display: none !important;
     }
 
-    /* Preserve <details> content in print, regardless of open state */
+    /* Preserve <details> content regardless of open state. Only
+       `summary` keeps `!important` — the disclosure chevron carries no
+       print value and the consumer should not be able to bring it back
+       inadvertently. The other two rules win against the UA stylesheet
+       on layered-author > UA precedence alone. */
     details {
-      display: block !important;
+      display: block;
     }
     details > summary {
       display: none !important;
     }
     details:not([open]) > :not(summary) {
-      display: block !important;
+      display: block;
+    }
+
+    /* ── Opt-in colour treatment ─────────────────────────────────── */
+
+    /* Force colour-faithful rendering. Use on regions where a tinted
+       background or coloured text encodes meaning (status pills,
+       severity callouts, syntax highlighting, charts). */
+    .print-color-exact,
+    .print-color-exact * {
+      print-color-adjust:         exact !important;
+      -webkit-print-color-adjust: exact !important;
+    }
+
+    /* Opt back into the legacy blanket reset: transparent backgrounds
+       and system text colour everywhere inside the marked subtree.
+       Use on regions where ink-saving is the contract (corporate
+       boilerplate forms, append-to-existing-document templates). */
+    .print-no-color,
+    .print-no-color *,
+    .print-no-color *::before,
+    .print-no-color *::after {
+      background:  transparent !important;
+      color:       CanvasText  !important;
     }
 
   }
