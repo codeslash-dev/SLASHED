@@ -80,4 +80,20 @@
   @keyframes sf-spin    { to { rotate: 360deg; } }
   @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
+  /* @property color interpolation — proves that registered custom
+     properties animate smoothly in oklch. Because --sf-color-primary-light
+     is registered with syntax:"<color>", the browser interpolates the
+     intermediate color values frame-by-frame. Opt-in via .sf-color-pulse. */
+  @keyframes sf-color-pulse {
+    0%   { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) l c h); }
+    50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) calc(l + 0.12) c h); }
+    100% { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) l c h); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sf-color-pulse {
+      animation: var(--sf-animation-color-pulse);
+    }
+  }
+
 }

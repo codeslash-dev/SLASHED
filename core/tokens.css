@@ -367,6 +367,10 @@
     --sf-font-weight-heading: var(--sf-font-weight-semibold);
     --sf-font-weight-display: var(--sf-font-weight-bold);
 
+    /* State token — consumed by .is-current in states.css.
+       Override to match your nav design (e.g. semibold for thin fonts). */
+    --sf-current-font-weight: var(--sf-font-weight-bold);
+
 
     /* ----------------------------------------------------------
        Font sizes — fluid
@@ -595,6 +599,7 @@
     --sf-animation-slide-in-right: sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out)       both;
     --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-overshoot) both;
     --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
+    --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
 
 
     /* ----------------------------------------------------------
@@ -727,8 +732,23 @@
 
     /* ----------------------------------------------------------
        Transition shorthands
+
+       --sf-transition-all transitions ALL properties — convenient but
+       a performance footgun (forces the browser to watch every computed
+       value). Prefer the granular tokens below for production UI. The
+       alias --sf-transition-base is kept for one minor release to avoid
+       breaking consumers; migrate to --sf-transition-all or, better,
+       one of the scoped variants.
        ---------------------------------------------------------- */
-    --sf-transition-base:  all var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-all:       all var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-colors:    color, background-color, border-color, text-decoration-color, fill, stroke var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-transform: transform var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-opacity:   opacity var(--sf-duration-normal) var(--sf-ease-out);
+    --sf-transition-shadow:    box-shadow var(--sf-duration-normal) var(--sf-ease-out);
+
+    /* Legacy alias — deprecated, remove after v1.x */
+    --sf-transition-base:  var(--sf-transition-all);
+
     --sf-transition-fast:  all var(--sf-duration-fast)   var(--sf-ease-out);
     --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
     --sf-transition-enter: all var(--sf-duration-normal) var(--sf-ease-out);

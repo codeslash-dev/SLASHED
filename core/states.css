@@ -112,9 +112,11 @@
 
   .is-current {
     /* Navigation: marks the current page/route.
-       Components style via .sf-nav .is-current etc. */
+       Components style via .sf-nav .is-current etc.
+       Weight is tokenised so consumers can override without specificity battles:
+         :root { --sf-current-font-weight: var(--sf-font-weight-semibold); } */
     --sf-is-current: 1;
-    font-weight: var(--sf-font-weight-bold);
+    font-weight: var(--sf-current-font-weight, var(--sf-font-weight-bold));
   }
 
   .is-highlighted {

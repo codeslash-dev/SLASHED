@@ -68,13 +68,30 @@ the README Quick start.
 
 **slashed.utilities** — single-purpose helpers. Components always win.
 
-**slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it.
+**slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it. `.is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
 
 **slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Add `forced-colors`, brand-palette swaps, or any other token-only theme reassignment here.
 
 **slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`.
 
-**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only).
+Transition tokens live in `core/tokens.css`:
+
+| Token | Scope | Notes |
+|-------|-------|-------|
+| `--sf-transition-all` | all properties | Convenient but a performance footgun — forces browser to watch every computed value |
+| `--sf-transition-colors` | color, background-color, border-color, text-decoration-color, fill, stroke | Preferred for interactive colour changes |
+| `--sf-transition-transform` | transform | Preferred for movement/scale |
+| `--sf-transition-opacity` | opacity | Preferred for show/hide fades |
+| `--sf-transition-shadow` | box-shadow | Preferred for elevation changes |
+| `--sf-transition-base` | *(deprecated alias)* | Maps to `--sf-transition-all`. Will be removed after v1.x — migrate to a scoped token |
+| `--sf-transition-fast` | all, fast duration | Quick interactions |
+| `--sf-transition-slow` | all, slow duration | Deliberate transitions |
+| `--sf-transition-enter` | all, normal duration | Mount/appear |
+| `--sf-transition-exit` | all, fast duration | Unmount/disappear |
+
+`@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
+
+**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`).
 
 **slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
 
