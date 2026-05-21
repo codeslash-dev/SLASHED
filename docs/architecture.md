@@ -132,8 +132,23 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 ## Responsive design
 
 1. **Fluid tokens** — `--sf-space-*`, `--sf-text-*` use `clamp()`. No `@media` needed.
-2. **Container primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-alternate`, `.sf-bento` use `@container`. Note: `.sf-container` sets `container-type: inline-size` making it a query container for its children.
+2. **Container primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-alternate`, `.sf-bento` use `@container`. `.sf-container` declares the named container `sf-layout` (see Container query contract below); `.sf-alternate` declares its own `sf-alternate`.
 3. **Breakpoints** — a last resort. The framework ships no breakpoint tokens (custom properties can't be used in `@media`/`@container` conditions); hard-code a value in your own query if you truly need one.
+
+---
+
+## Container query contract
+
+The framework declares two named containers:
+
+| Selector | Container name | Type | Where consumed |
+|---|---|---|---|
+| `.sf-container` | `sf-layout` | `inline-size` | open — consumers can target with `@container sf-layout (...)` in their own CSS |
+| `.sf-alternate` | `sf-alternate` | `inline-size` | framework-internal — the zigzag flip query is bound to this name so a nested `.sf-alternate` flips on its own width, not its outer container's |
+
+The `.sf-bento` and `.sf-grid-*` (fixed-column and ratio) primitives use **anonymous** `@container (...)` queries on purpose. They are designed to react to whatever the nearest `inline-size` ancestor reports — typically `.sf-container`, but legitimately also a parent `.sf-bento`, `.sf-alternate`, or any user-declared container. This portability is the feature: drop `.sf-grid-3` inside any inline-size context and it adapts.
+
+If precision is needed in a consumer layout — e.g. a `.sf-grid-3` that must respond to the outer `.sf-container` and ignore an intermediate container — the consumer wraps the grid in their own named container or uses `@container sf-layout (...)` directly in user CSS.
 
 ---
 

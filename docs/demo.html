@@ -530,6 +530,7 @@
             <li><a href="#layout-prose">Prose</a></li>
             <li><a href="#layout-container">Container</a></li>
             <li><a href="#layout-bento">Bento</a></li>
+            <li><a href="#layout-alternate">Alternate</a></li>
             <li><a href="#layout-content-grid">Content Grid</a></li>
             <li><a href="#layout-pancake">Pancake</a></li>
           </ul>
@@ -1465,7 +1466,7 @@
       ══════════════════════════════════════════════════════ -->
       <section id="layout-container" class="demo-section">
         <h2>Layout — Container &amp; Section</h2>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-container</code> — centered max-width with horizontal gutters and <code>container-type: inline-size</code>. <code>.sf-section</code> adds vertical padding.</p>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-container</code> — centered max-width with horizontal gutters. Declares a named inline-size container <code>sf-layout</code>, so consumers can target it precisely with <code>@container sf-layout (...)</code> in their own CSS. <code>.sf-section</code> adds vertical padding.</p>
 
         <div class="sf-stack sf-stack--m" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
           <div>
@@ -1500,6 +1501,58 @@
           <div class="demo-box demo-box--secondary">4</div>
         </div>
         <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-bento-cols</code> (default 3), <code>--sf-bento-row</code> (row height). Modifiers: <code>.sf-bento--2</code>, <code>.sf-bento--4</code>, <code>.sf-bento--compact</code>, <code>.sf-bento--tall</code></p>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           LAYOUT: ALTERNATE
+      ══════════════════════════════════════════════════════ -->
+      <section id="layout-alternate" class="demo-section">
+        <h2>Layout — Alternate (zigzag)</h2>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-alternate</code> — alternating two-column rows. Below 48em (own container width) it stacks; above, every other row reverses its children. Declares the named container <code>sf-alternate</code> and binds the flip query to that name — so a nested <code>.sf-alternate</code> reacts to its OWN width, not its outer container's.</p>
+
+        <div class="sf-alternate demo-layout-wrap">
+          <div>
+            <div class="demo-box" style="min-height: 6rem">Image / leading column</div>
+            <div class="sf-stack sf-stack--xs" style="padding: var(--sf-space-s)">
+              <strong>Row 1</strong>
+              <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: 0">Standard order: leading column on the left, text on the right (above 48em).</p>
+            </div>
+          </div>
+          <div>
+            <div class="demo-box demo-box--alt" style="min-height: 6rem">Image / leading column</div>
+            <div class="sf-stack sf-stack--xs" style="padding: var(--sf-space-s)">
+              <strong>Row 2</strong>
+              <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: 0">Even row — children swap order via <code>order: 2 / 1</code>.</p>
+            </div>
+          </div>
+          <div>
+            <div class="demo-box" style="min-height: 6rem">Image / leading column</div>
+            <div class="sf-stack sf-stack--xs" style="padding: var(--sf-space-s)">
+              <strong>Row 3</strong>
+              <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: 0">Back to standard order.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>Smoke test — <code>.sf-alternate</code> nested inside <code>.sf-bento</code></h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">Phase 4 contract: the inner <code>.sf-alternate</code>'s flip query is bound to the <code>sf-alternate</code> name, so it reacts to the bento cell's intrinsic width — not the outer page container. The cell below is wide enough (a span-2 bento cell) to flip into the two-column layout independently of viewport width.</p>
+
+        <div class="sf-bento demo-layout-wrap" style="--sf-bento-cols: 3; gap: var(--sf-space-s); container-type: inline-size">
+          <div style="grid-column: span 2; background: var(--sf-color-surface); border-radius: var(--sf-radius-s); padding: var(--sf-space-s)">
+            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-xs)">Wide cell (span 2) — contains a <code>.sf-alternate</code></p>
+            <div class="sf-alternate">
+              <div>
+                <div class="demo-box" style="min-height: 4rem">A1</div>
+                <div style="padding: var(--sf-space-2xs); font-size: var(--sf-text-s)">Left → right</div>
+              </div>
+              <div>
+                <div class="demo-box demo-box--alt" style="min-height: 4rem">B1</div>
+                <div style="padding: var(--sf-space-2xs); font-size: var(--sf-text-s)">Right → left (flipped)</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-box demo-box--secondary" style="min-height: 4rem">Narrow bento cell</div>
+        </div>
       </section>
 
       <!-- ══════════════════════════════════════════════════════

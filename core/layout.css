@@ -21,11 +21,17 @@
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
   /* -- Container -----------------------------------------------
-     Max-width container, centered with side gutters.
+     Max-width container, centered with side gutters. Establishes
+     a named inline-size container `sf-layout` so children can
+     target it precisely with `@container sf-layout (...)`.
+     The framework's own `.sf-bento` and `.sf-grid-*` rules use
+     anonymous `@container` queries on purpose — they react to
+     the nearest inline-size ancestor, which lets a consumer
+     embed them inside any container without rewiring.
      ---------------------------------------------------------- */
 
   .sf-container {
-    container-type: inline-size;
+    container:      sf-layout / inline-size;
     width:          100%;
     max-width:      var(--sf-container-default);
     margin-inline:  auto;
@@ -288,12 +294,17 @@
   /* -- Alternate (zigzag / media-object) -----------------------
      Alternating two-column layouts (container-query responsive).
      Every other row reverses its children's order.
+
+     Establishes a named container `sf-alternate` and binds the
+     responsive query to that name — so a `.sf-alternate` nested
+     inside another container (e.g. `.sf-bento`) still flips on
+     its OWN width, not the outer container's.
      ---------------------------------------------------------- */
 
   .sf-alternate {
-    display:        grid;
-    gap:            var(--sf-space-content);
-    container-type: inline-size;
+    display:   grid;
+    gap:       var(--sf-space-content);
+    container: sf-alternate / inline-size;
   }
 
   .sf-alternate > * {
@@ -302,7 +313,7 @@
     align-items: center;
   }
 
-  @container (min-width: 48em) {
+  @container sf-alternate (min-width: 48em) {
     .sf-alternate > * {
       grid-template-columns: 1fr 1fr;
     }
