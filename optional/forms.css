@@ -15,12 +15,15 @@
      full control via BEM components, skip this file entirely.
 
    TOKENS CONSUMED:
-     --sf-radius-m, --sf-border-1, --sf-color-border-default,
-     --sf-color-border-focus, --sf-color-bg, --sf-color-surface,
-     --sf-color-text, --sf-color-text-placeholder,
-     --sf-color-bg-disabled, --sf-color-text-disabled,
-     --sf-opacity-disabled, --sf-space-xs, --sf-space-s,
-     --sf-text-m, --sf-transition-colors, --sf-focus-ring-*
+     --sf-radius-m, --sf-border-width-1, --sf-color-border,
+     --sf-color-border--focus, --sf-color-border--subtle,
+     --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
+     --sf-color-text--disabled, --sf-color-text--on-action,
+     --sf-color-bg--disabled, --sf-color-bg--hover, --sf-color-action,
+     --sf-opacity-disabled, --sf-space-xs, --sf-space-s, --sf-space-m,
+     --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
+     --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
+     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset
    ============================================================ */
 
 @layer slashed.forms {
