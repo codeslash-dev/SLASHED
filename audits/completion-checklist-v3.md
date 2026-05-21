@@ -293,6 +293,39 @@ batch because they add a build dependency / CI surface. Schedule for v0.3.
 
 ---
 
+### D11 — Token alias-chain hygiene & API-surface freeze
+
+**Decision.** Before the token API is frozen for v1.0, bound the indirection
+depth and label every token public-vs-internal. A full `var()`-graph audit of all
+562 token definitions was run (script seeded from this review).
+
+**Findings (graph is healthy):**
+- 153 pure single-hop aliases; **max chain depth 3**.
+- **0 duplicate definitions, 0 dangling aliases, 0 cycles.**
+- **Redundant "synonym" hops** (alias → alias with no added semantics) — the only
+  real wrinkle. They force every layout-gap chain to 3 hops:
+  - `--sf-space-gap → --sf-gap` (two public names for "gap"; header says `--sf-gap` is the source of truth)
+  - `--sf-space-content → --sf-content-gap` (two names for "content gap")
+  - `--sf-section-pad → --sf-section-pad--m` (base → `-m` variant)
+- **Intentional multi-name fan-in** — keep, but document as a stable contract:
+  e.g. 7 names → `--sf-font-weight-heading`; 5 → `--sf-color-action`; the palette's
+  3-tier functional → named → numeric (`*-hover → *-darker → *-600`).
+
+**Actions:**
+1. Collapse the synonym hops — point layout primitives at the canonical
+   `--sf-gap` / `--sf-content-gap` directly, and resolve `--sf-section-pad →
+   --sf-section-pad--m` the same way — OR formally document each as a
+   canonical-source alias. **Target: max 2 hops (primitive → semantic → scale).**
+2. Tag every token **PUBLIC API** vs **INTERNAL** in the token-file headers; the
+   freeze and SemVer guarantees cover public names only.
+3. Add a **CI guard**: fail the build if any `--sf-*` alias chain exceeds 2 hops,
+   or if a new duplicate / dangling / cyclic alias is introduced.
+
+**Priority:** HIGH (gates the v1.0 "API freeze"). **Effort:** S (docs + small
+spacing-alias refactor) + S (CI script). **Status:** audit-only; no code written.
+
+---
+
 ## §B — Verification results (what was checked against source)
 
 | Claim (from v2) | Verdict |
@@ -499,6 +532,7 @@ Rejected-on-purpose items live in §D9, not here.
 | BEM-API tokens unconsumed (`--sf-scrollbar-*`, `--sf-optical-sizing`, `--sf-shadow-*`, `--sf-blur-*`, `--sf-gap`, `--sf-gradient-*`) | 🟡 | LOW | **Correct by design** — document explicitly as consumer API (not a defect) |
 | Colour naming: `-light/-dark` (source) vs `--variant` (modifier) | 🟡 | LOW | Document: single dash = source, double dash = modifier |
 | Print class naming (`.no-print` vs `.print-no-color` vs `.print-color-exact`) | 🟡 | LOW | Consider standardising to `.print-*` |
+| Token alias-chain depth + public/internal labelling | 🟡 | HIGH | Audit clean (562 tokens, 0 dupes/dangling/cycles, max depth 3); collapse synonym hops (`space-gap`/`gap`, `space-content`/`content-gap`, `section-pad`/`section-pad--m`) to ≤2 and tag public vs internal before API freeze **[D11]** |
 
 ### 16. Stub files (newly inventoried)
 - `optional/components.css` — empty `slashed.components` stub.
@@ -523,7 +557,7 @@ Rejected-on-purpose items live in §D9, not here.
 
 ## §E — Re-scored summary
 
-**Decisions do not change the score — only implementation does.** Every D1–D10
+**Decisions do not change the score — only implementation does.** Every D1–D11
 item remains outstanding in §C until it lands in the code. The re-scores below
 reflect *only* two legitimate sources, neither of which is work done in this
 review: **(a) scope reclassification** — items that are now out-of-scope (D1) or
@@ -571,6 +605,7 @@ existing tooling, not implemented work).
 9. Remove `textarea resize` duplication. XS
 10. Add `--sf-divider-*` tokens + `.sf-divider` class. S
 11. Add `.sr-only-focusable`. XS
+12. **[D11]** Collapse synonym alias hops + tag tokens public/internal. S
 
 ### v0.3 — Build & test infrastructure
 1. **[D10]** Minified bundles + source maps (lightningcss). S
@@ -580,6 +615,7 @@ existing tooling, not implemented work).
 5. `input[type="file"]` + `input[type="range"]` in forms. M
 6. forced-colors form-border fix; `.no-motion`; `.print-only`. XS each
 7. `--sf-mask-scrim-*`, `--sf-animation-delay-*`, `sf-ping` keyframe (tokens/keyframes only). S
+8. **[D11]** Alias-chain CI guard (fail on >2 hops / new duplicate / dangling / cycle). S
 
 ### v0.4 — Documentation sprint (the v1.0 gate)
 1. Theming guide (rebrand in 6 tokens) + example branded theme file. M
@@ -597,13 +633,14 @@ existing tooling, not implemented work).
 - [ ] Theming guide, browser-support matrix, token reference, state docs published
 - [ ] `slashed.forms` + universal-base scope documented everywhere
 - [ ] Every `--sf-*` token either consumed internally OR documented as BEM API
+- [ ] Token API frozen: alias chains ≤ 2 hops; every token labelled public/internal **[D11]**
 - [ ] Bundle size < 30 KB uncompressed AND < 25 KB gzipped (essential)
 - [ ] No deprecated aliases without a removal timeline
 - [ ] CHANGELOG complete since v0.1.0
 
 ---
 
-*End of v3. Decisions D1–D10 are implementation-ready; §F is the execution order.
+*End of v3. Decisions D1–D11 are implementation-ready; §F is the execution order.
 Generated from source analysis of all `core/*.css`, all `optional/*.css`
 (including the three empty stubs), `tests/*.js`, `scripts/bundle.js`,
 `bundle.config.json`, `package.json`, `.stylelintrc.json`,
