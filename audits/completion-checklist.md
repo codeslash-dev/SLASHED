@@ -40,7 +40,7 @@ Pico reprezentuje "minimalistyczny ideał" — framework który z jednym `<link>
 
 ---
 
-## CHECKLISTА — PODZIELONA NA KATEGORIE
+## CHECKLISTA — PODZIELONA NA KATEGORIE
 
 ### Legenda:
 - ✅ = Mamy, kompletne
@@ -277,7 +277,7 @@ Pico reprezentuje "minimalistyczny ideał" — framework który z jednym `<link>
 
 | Element | Status | Benchmark | Priorytet |
 |---------|--------|-----------|-----------|
-| Classless form styling (input/select/textarea/button bez klas) | ❌ | Pico (core feature) | **WYSOKI** — Pico daje piękne formy bez żadnej klasy |
+| Classless form styling (input/select/textarea/button bez klas) | ✅ | Pico (core feature) | Zaimplementowane jako opt-in: `optional/forms.css` |
 | Classless table styling (thead/tbody/td) | ❌ | Pico | Średni |
 | details/summary base styling | ❌ | Pico | Średni — mamy reset ale brak visual styling |
 | progress element styling | ❌ | Pico | Niski |
@@ -286,7 +286,7 @@ Pico reprezentuje "minimalistyczny ideał" — framework który z jednym `<link>
 | figure/figcaption base styling | ❌ | Pico | Niski — mamy w .sf-prose |
 | dialog base styling (non-component) | ❌ | Pico | Niski — deferred do components |
 
-> **UWAGA:** To jest największa różnica vs Pico. Pico daje "piękne defaults" na surowym HTML. SLASHED wymaga klas. Rozważ opcjonalny `core/classless.css` lub rozbudowę base.css o element-level form/table styling.
+> **UWAGA:** Classless form styling jest dostępne jako opt-in via `optional/forms.css`. Base layer celowo NIE styluje natywnych elementów formularzy — to świadoma decyzja architektoniczna (BEM-first). Tabele i pozostałe elementy poniżej to backlog na przyszłe minor releases.
 
 ---
 
@@ -574,7 +574,7 @@ Pico reprezentuje "minimalistyczny ideał" — framework który z jednym `<link>
 | Minified bundle (.min.css) | ❌ | Oba | **WYSOKI** — standard dla CDN |
 | Gzip/Brotli size reporting | ❌ | - | Średni |
 | Individual file CDN imports (unpkg/jsdelivr) | ❌ | Pico | Średni |
-| npm publish configuration (main/exports) | 🟡 | Pico | Średni — package.json brakuje "main"/"exports" |
+| npm publish configuration (main/exports) | ✅ | Pico | Zaimplementowane w package.json (exports map + CDN fields) |
 | Source map generation | ❌ | - | Niski |
 | Bundle size badge w README | ❌ | Pico | Niski |
 | Version banner in built files | ❌ | Bulma | Niski |
@@ -645,10 +645,10 @@ Ranking bazowany na: impact × effort × benchmark-parity
 |---|---------|-----------|-----------|--------|-----------|
 | 1 | **Minified bundle (.min.css)** | Build | KRYTYCZNY | XS | Oba |
 | 2 | **demo.html — uzupełnić brakujące ~50% klas** | Docs | KRYTYCZNY | L | - |
-| 3 | **Classless form styling w base.css** | Base | WYSOKI | M | Pico |
+| 3 | ~~Classless form styling w base.css~~ | Base | ~~WYSOKI~~ DONE | - | Pico |
 | 4 | **.sr-only-focusable class** | A11y | WYSOKI | XS | Bootstrap/ACSS |
 | 5 | **Theming guide doc** | Docs | WYSOKI | M | ACSS |
-| 6 | **npm package exports (main/module/exports)** | Build | WYSOKI | XS | Pico |
+| 6 | ~~npm package exports (main/module/exports)~~ | Build | ~~WYSOKI~~ DONE | - | Pico |
 | 7 | **axe-core accessibility test** | Tests | WYSOKI | S | - |
 | 8 | **Fix: --sf-color-tertiary-light L≤0.48** (WCAG AA) | Tokens | WYSOKI | XS | - |
 | 9 | **Fix: --sf-color-text--inverse clamp widening** | Tokens | ŚREDNI | XS | - |
@@ -684,7 +684,7 @@ Ranking bazowany na: impact × effort × benchmark-parity
 | **Legacy** | 100% | Kompletny |
 | **Palette** | 100% | Kompletny |
 | **Docs** | 60% | demo.html niekompletny, brak guides |
-| **Build/DX** | 75% | Brak minification, npm exports |
+| **Build/DX** | 80% | Brak minification (npm exports już dodane) |
 | **Tests** | 70% | Brak axe-core, cross-browser |
 
 ### Ogólna gotowość: **~85%** (bez components/utilities)

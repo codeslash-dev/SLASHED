@@ -6,7 +6,7 @@
    <input>, <select>, <textarea>, and <button> without any classes.
 
    USAGE:
-     @import '@slashed/css/optional/forms.css';
+     @import 'slashed/optional/forms.css';
      — or include in a custom bundle via bundle.config.json.
 
    PHILOSOPHY:
@@ -44,7 +44,7 @@
     line-height: var(--sf-leading-normal);
     color: var(--sf-color-text);
     background-color: var(--sf-color-surface);
-    border: var(--sf-border-1) solid var(--sf-color-border-default);
+    border: var(--sf-border-width-1) solid var(--sf-color-border);
     border-radius: var(--sf-radius-m);
     transition: var(--sf-transition-colors),
                 border-color var(--sf-duration-fast) var(--sf-ease-out);
@@ -59,8 +59,8 @@
   ):focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    border-color: var(--sf-color-border-focus);
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border-focus);
+    border-color: var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -68,8 +68,8 @@
   input:disabled,
   select:disabled,
   textarea:disabled {
-    background-color: var(--sf-color-bg-disabled);
-    color: var(--sf-color-text-disabled);
+    background-color: var(--sf-color-bg--disabled);
+    color: var(--sf-color-text--disabled);
     opacity: var(--sf-opacity-disabled);
     cursor: not-allowed;
   }
@@ -77,7 +77,7 @@
   /* Placeholder */
   input::placeholder,
   textarea::placeholder {
-    color: var(--sf-color-text-placeholder);
+    color: var(--sf-color-text--placeholder);
     opacity: 1;
   }
 
@@ -122,7 +122,7 @@
     line-height: var(--sf-leading-normal);
     color: var(--sf-color-text--on-action);
     background-color: var(--sf-color-action);
-    border: var(--sf-border-1) solid transparent;
+    border: var(--sf-border-width-1) solid transparent;
     border-radius: var(--sf-radius-m);
     cursor: pointer;
     transition: var(--sf-transition-colors);
@@ -133,7 +133,7 @@
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover {
-    background-color: var(--sf-color-bg-hover);
+    background-color: var(--sf-color-bg--hover);
     color: var(--sf-color-text);
   }
 
@@ -141,7 +141,7 @@
   input[type="submit"]:focus-visible,
   input[type="reset"]:focus-visible,
   input[type="button"]:focus-visible {
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border-focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -171,7 +171,7 @@
      Fieldset & legend
      ---------------------------------------------------------- */
   fieldset {
-    border: var(--sf-border-1) solid var(--sf-color-border-subtle);
+    border: var(--sf-border-width-1) solid var(--sf-color-border--subtle);
     border-radius: var(--sf-radius-m);
     padding: var(--sf-space-m);
   }
