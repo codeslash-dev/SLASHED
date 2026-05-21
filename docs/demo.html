@@ -2061,12 +2061,35 @@
         });
       }
 
+      // ── Performance: throttle syncs to one per animation frame ──
+      // Dragging a color picker fires 'input' at 60+ Hz. Each syncAll()
+      // forces getComputedStyle on every probe (style recalc + canvas draw
+      // per picker). Throttling to one rAF keeps the page responsive.
+      let syncRafId = null;
+      // Track which mode's pickers need re-reading (light edits affect
+      // dark auto-derivation, so both columns refresh; dark edits only
+      // affect the dark column).
+      let pendingFullSync = false;
+
+      function scheduleSyncAll() {
+        pendingFullSync = true;
+        if (!syncRafId) {
+          syncRafId = requestAnimationFrame(() => {
+            syncRafId = null;
+            if (pendingFullSync) { syncAll(); pendingFullSync = false; }
+          });
+        }
+      }
+
       inputs.forEach(input => {
         input.addEventListener('input', () => {
           // Writing a -dark token is what converts the auto-derived value into
           // an explicit override; editing -light leaves dark on auto-derive.
           root.style.setProperty(input.dataset.token, input.value);
-          syncAll();
+          // Immediately update this picker's own label (cheap, no getComputedStyle)
+          syncValueLabel(input);
+          // Defer the expensive full re-read of all pickers
+          scheduleSyncAll();
         });
       });
 
