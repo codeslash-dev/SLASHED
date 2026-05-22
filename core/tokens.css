@@ -643,12 +643,32 @@
     --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
     --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
 
+    /* Stagger delays — apply to successive items for entrance choreography
+       (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens
+       only; SLASHED ships no .sf-stagger utility class (see audit §D9). */
+    --sf-animation-delay-1: calc(75ms  * var(--sf-motion-scale));
+    --sf-animation-delay-2: calc(150ms * var(--sf-motion-scale));
+    --sf-animation-delay-3: calc(225ms * var(--sf-motion-scale));
+    --sf-animation-delay-4: calc(300ms * var(--sf-motion-scale));
+    --sf-animation-delay-5: calc(375ms * var(--sf-motion-scale));
+
 
     /* ----------------------------------------------------------
        Scroll-driven animation range — attach to your own timeline.
        ---------------------------------------------------------- */
     --sf-scroll-timeline-range-start: 0%;
     --sf-scroll-timeline-range-end:   100%;
+
+
+    /* ----------------------------------------------------------
+       Mask scrim — edge-fade stops for scroll reels / overflow.
+       Use in a mask-image gradient to fade content near an edge:
+         mask-image: linear-gradient(to right,
+           transparent 0, #000 var(--sf-mask-scrim-start),
+           #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%);
+       ---------------------------------------------------------- */
+    --sf-mask-scrim-start: var(--sf-space-l);
+    --sf-mask-scrim-end:   var(--sf-space-l);
 
 
     /* ----------------------------------------------------------

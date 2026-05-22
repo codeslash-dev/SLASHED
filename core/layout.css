@@ -216,6 +216,28 @@
   .sf-grid--l  { --sf-grid-min: var(--sf-grid-min-l); }
   .sf-grid--xl { --sf-grid-min: var(--sf-grid-min-xl); }
 
+  /* Dense packing — let later items backfill earlier gaps (as .sf-bento
+     does). Applies to any grid, including the fixed-column .sf-grid-N. */
+  .sf-grid--dense { grid-auto-flow: dense; }
+
+  /* -- Icon ----------------------------------------------------
+     Inline icon sizing primitive. Uses em-based --sf-icon-* tokens
+     so an icon scales with its surrounding text. Defaults to -m.
+     ---------------------------------------------------------- */
+  .sf-icon {
+    display:        inline-block;
+    inline-size:    var(--sf-icon-size, var(--sf-icon-m));
+    block-size:     var(--sf-icon-size, var(--sf-icon-m));
+    flex-shrink:    0;
+    vertical-align: text-bottom;
+    fill:           currentcolor;
+  }
+  .sf-icon--xs { --sf-icon-size: var(--sf-icon-xs); }
+  .sf-icon--s  { --sf-icon-size: var(--sf-icon-s); }
+  .sf-icon--m  { --sf-icon-size: var(--sf-icon-m); }
+  .sf-icon--l  { --sf-icon-size: var(--sf-icon-l); }
+  .sf-icon--xl { --sf-icon-size: var(--sf-icon-xl); }
+
   /* -- Cover ---------------------------------------------------
      Full-height flex column. A .sf-cover__center child is
      vertically centered via margin-block: auto.

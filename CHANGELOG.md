@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-05-22
+
+New CSS features across tokens, reset, forms, and layout (checklist v3 §C.1–5).
+
+### Added
+
+- Tokens: `--sf-mask-scrim-start` / `--sf-mask-scrim-end` (edge-fade stops for
+  scroll reels) and `--sf-animation-delay-1`…`-5` (stagger delays; tokens only,
+  no `.sf-stagger` class per audit §D9)
+- Reset: `::file-selector-button { font: inherit }` and `search { display: block }`
+- Forms: styled `input[type="file"]::file-selector-button` (action-button look),
+  `input[type="range"]` track + thumb for WebKit and Firefox, and a focus ring
+- Layout: `.sf-grid--dense` (dense auto-flow on any grid) and the `.sf-icon`
+  inline icon-sizing primitive with `--xs`…`--xl` modifiers (consumes the
+  existing `--sf-icon-*` tokens)
+
+### Changed
+
+- Select chevron now swaps stroke colour via `light-dark()` instead of relying
+  on `currentColor` inside a data-URI background (which doesn't inherit the host
+  colour cross-browser); the chevron now tracks dark mode and scoped
+  `[data-theme]` regions
+
 ## [0.2.1] - 2026-05-22
 
 Completes the v0.2 "leftovers" from `audits/completion-checklist-v3.md`:
