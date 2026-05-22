@@ -79,8 +79,8 @@ function findMatchingBrace(src, openPos) {
 
 // Removes SLASHED's @layer scaffolding from a single source file's contents,
 // producing flat unlayered CSS suitable for environments that already manage
-// the cascade (e.g. Bricks Builder 2.0+ which wraps its defaults in
-// `@layer bricks` — unlayered author CSS automatically beats it).
+// the cascade themselves (e.g. a host that wraps its own defaults in a named
+// layer — unlayered author CSS automatically beats anything in a layer).
 //
 //   1. `@layer name1, name2, … ;` declarations  → removed.
 //   2. `@layer slashed.X { … }` block wrappers  → unwrapped (inner CSS kept,
