@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-05-22
+
+State and motion primitives (checklist v3 §C.6, §C.8).
+
+### Added
+
+- States: `.is-pressed` (aria-pressed toggles), `.is-pending` (optimistic UI,
+  distinct from `.is-loading`), `.is-focused` (programmatic focus ring),
+  `.focus-parent:focus-within` (parent reacts to a focused descendant),
+  `.is-fullscreen`, and `.is-resizable`
+- Motion: `sf-ping`, `sf-blink`, and `sf-float` keyframes with matching
+  `--sf-animation-ping` / `-blink` / `-float` presets (keyframes/tokens only —
+  no utility classes, per audit §D9)
+- Inline documentation of state-overlap semantics (`.is-error` vs `.is-invalid`
+  vs `.is-danger`; `.is-open` vs `.is-expanded`) and an `@starting-style`
+  readiness note in `core/motion.css`
+
 ## [0.2.2] - 2026-05-22
 
 New CSS features across tokens, reset, forms, and layout (checklist v3 §C.1–5).

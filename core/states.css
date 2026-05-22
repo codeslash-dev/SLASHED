@@ -81,6 +81,13 @@
     cursor: progress;
   }
 
+  .is-pending {
+    /* Optimistic UI — request in flight but content still visible/usable
+       (unlike .is-loading, which masks content with a spinner). */
+    opacity: 0.7;
+    cursor:  progress;
+  }
+
   .is-skeleton {
     color:           transparent !important;
     background:      linear-gradient(
@@ -123,8 +130,19 @@
     background-color: var(--sf-color-bg--focus);
   }
 
+  .is-pressed {
+    /* Toggle buttons (aria-pressed="true"). Components add specifics. */
+    --sf-is-pressed: 1;
+    background-color: var(--sf-color-bg--selected);
+  }
+
   /* ============================================================
      OPEN / CLOSED — disclosure widgets, modals, dropdowns
+
+     .is-open / .is-collapsed — a thing is shown vs hidden (modal,
+       dropdown, drawer). .is-expanded — maps to aria-expanded on a
+       disclosure/accordion trigger. They share the --sf-is-open flag
+       but signal different intent to consumers.
      ============================================================ */
 
   .is-open {
@@ -141,6 +159,14 @@
 
   /* ============================================================
      VALIDATION / FEEDBACK
+
+     Overlap semantics (see docs/states.md):
+     · .is-invalid / .is-valid — form-field validation (maps to
+       aria-invalid). Use on inputs.
+     · .is-error / .is-success — general component feedback, not tied
+       to a single field (a failed save, a completed step).
+     · .is-danger — destructive-action context (a delete button), NOT
+       a validation result. Distinct from .is-error.
      ============================================================ */
 
   .is-valid {
@@ -196,6 +222,20 @@
 
   .is-fixed {
     position: fixed;
+  }
+
+  .is-fullscreen {
+    /* App-managed fullscreen overlay. For the native Fullscreen API,
+       prefer the `:fullscreen` pseudo-class; this is the JS-toggled
+       equivalent for elements not entered via that API. */
+    position: fixed;
+    inset:    0;
+    z-index:  var(--sf-z-max);
+  }
+
+  .is-resizable {
+    resize:   both;
+    overflow: auto;
   }
 
   /* ============================================================
@@ -254,6 +294,20 @@
 
   .is-unselectable {
     user-select: none;
+  }
+
+  .is-focused {
+    /* Programmatic / JS-driven focus indicator, independent of
+       :focus-visible. Normal weight so consumers can restyle. */
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* Parent reacts to a focused descendant (e.g. highlight a card while
+     any field inside it has keyboard focus). Not is-/sf-prefixed by design. */
+  .focus-parent:focus-within {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
   }
 
   /* ============================================================

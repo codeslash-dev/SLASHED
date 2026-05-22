@@ -642,6 +642,9 @@
     --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-overshoot) both;
     --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
     --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
+    --sf-animation-ping:           sf-ping           var(--sf-duration-slow)   var(--sf-ease-out)       infinite;
+    --sf-animation-blink:          sf-blink          1s                        steps(1, end)            infinite;
+    --sf-animation-float:          sf-float          calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;
 
     /* Stagger delays — apply to successive items for entrance choreography
        (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens
