@@ -165,9 +165,12 @@
       oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
       oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
-    /* Inline-code text colour. Defaults to inherit (code adopts surrounding
-       text colour); override for a distinct code tint. Consumed by base.css. */
-    --sf-color-code-text: inherit;
+    /* Inline-code text colour. Auto-contrasts with --sf-color-code-bg using
+       the same luminance formula as --sf-color-text--on-*. This prevents
+       invisible text when code appears inside inverted-colour containers
+       (e.g. sf-imposter with a dark background where inherited colour is
+       near-white). Override with a tint value if desired. */
+    --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
 
 
     /* ----------------------------------------------------------
