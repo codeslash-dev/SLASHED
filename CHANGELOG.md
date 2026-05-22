@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-05-22
+
+Behavioural test hardening (checklist v3 §C.13) — completes the test matrix.
+
+### Added
+
+- `tests/behavior.spec.js`:
+  - reduced-motion neutralisation (`prefers-reduced-motion: reduce` and the
+    manual `.no-motion` opt-out)
+  - forced-colors focus-ring colour (Chromium-only emulation; skipped elsewhere)
+  - container-query wiring (`.sf-container` inline-size container; fixed-grid
+    reflow across container widths)
+  - state-class effects (`.is-hidden`, `.is-disabled`, `.is-truncated`)
+
 ## [0.2.6] - 2026-05-22
 
 Build & test infrastructure (checklist v3 §C.12, §C.13, D10).
