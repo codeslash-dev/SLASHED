@@ -24,12 +24,17 @@ view transition (falls back to an instant swap where unsupported):
 
 ```js
 const root = document.documentElement;
-const apply = (t) => { root.dataset.theme = t; localStorage.theme = t; };
+const btn = document.getElementById('theme-toggle');
+const apply = (t) => {
+  root.dataset.theme = t;
+  localStorage.theme = t;
+  btn.setAttribute('aria-pressed', String(t === 'dark'));
+};
 
 // restore on load
 if (localStorage.theme) apply(localStorage.theme);
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
+btn.addEventListener('click', () => {
   const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
   if (document.startViewTransition) document.startViewTransition(() => apply(next));
   else apply(next);

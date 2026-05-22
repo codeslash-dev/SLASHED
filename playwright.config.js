@@ -13,8 +13,22 @@ module.exports = defineConfig({
     headless: true,
   },
   projects: [
+    // Chromium runs the whole suite, including the pixel/geometry visual
+    // regression (demo-visual.spec.js).
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    // Firefox and WebKit validate cross-engine CSS *behaviour* (colour
+    // resolution, a11y, states, container queries). The visual-regression
+    // suite is excluded: its boundingBox/text-metric assertions depend on
+    // engine font rendering and are intentionally pinned to one engine.
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+      testIgnore: /demo-visual\.spec\.js/,
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+      testIgnore: /demo-visual\.spec\.js/,
+    },
   ],
 });

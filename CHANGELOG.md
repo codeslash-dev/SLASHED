@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.10] - 2026-05-22
+
+CI fix and PR review follow-ups.
+
+### Fixed
+
+- **CI green**: the cross-browser matrix ran the geometry/text-metric visual
+  suite (`demo-visual.spec.js`) on Firefox/WebKit, whose font metrics differ
+  from Chromium — pinned that suite to Chromium (where pixel/geometry
+  regression belongs) while Firefox/WebKit keep validating CSS *behaviour*
+  (colour resolution, a11y, states, container queries)
+- Hardened `tests/a11y.spec.js` to wait for fonts + applied styles before the
+  axe audit, eliminating a rare under-load flake where axe sampled unstyled
+  defaults
+- RTL: select chevron now mirrors to the inline-end (left) edge under
+  `:dir(rtl)` instead of staying physically right
+- `scripts/bundle.js` `@import`-stripping regex now requires matching quotes
+  (backreference) instead of allowing `"…'`
+
+### Changed
+
+- Docs/demo review fixes: accessible name on the focus-parent demo input;
+  `aria-pressed` kept in sync in the dark-mode toggle example; corrected
+  "15-layer" → "14-layer" in performance docs; consistent `role="status"` /
+  `role="alert"` notation in the states doc
+
 ## [0.2.9] - 2026-05-22
 
 Universal-colour transparency: a live accessibility report in the demo.

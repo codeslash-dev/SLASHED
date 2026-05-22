@@ -28,7 +28,7 @@ All states are exercised in [`demo.html`](demo.html).
 | `.is-open` / `.is-collapsed` | a thing is shown vs hidden (modal, drawer) | — |
 | `.is-expanded` | disclosure/accordion trigger expanded | `aria-expanded="true"` |
 | `.is-valid` / `.is-invalid` | **form-field** validation result | `aria-invalid` |
-| `.is-success` / `.is-error` | **general** positive/negative feedback (a save, a step) | `role="status"`/`"alert"` |
+| `.is-success` / `.is-error` | **general** positive/negative feedback (a save, a step) | `role="status"` / `role="alert"` |
 | `.is-warning` / `.is-info` | cautionary / informational feedback | — |
 | `.is-danger` | destructive-action context (a delete button) | — |
 | `.is-sticky` / `.is-pinned` / `.is-fixed` | positioning | — |

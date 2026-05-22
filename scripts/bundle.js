@@ -51,7 +51,7 @@ function buildOne({ files, output }) {
     const content = fs.readFileSync(filePath, 'utf8');
     // Strip local @import statements: bundling resolves them by explicit
     // file order, and a mid-file @import is invalid (ignored by browsers).
-    const inlined = content.replace(/^[ \t]*@import\s+["'][^"']+["']\s*;[ \t]*\r?\n?/gm, '');
+    const inlined = content.replace(/^[ \t]*@import\s+(["'])[^"']+\1\s*;[ \t]*\r?\n?/gm, '');
     return `/* ─── ${file} ─── */\n${inlined.trimEnd()}`;
   });
 

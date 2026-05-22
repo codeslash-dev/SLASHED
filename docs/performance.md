@@ -38,7 +38,7 @@ The set is small (11 colours + `--sf-is-dark`); the cost is immaterial.
 
 ## Cascade layers
 
-`@layer` has no runtime cost — layering is resolved at parse time. The 15-layer
+`@layer` has no runtime cost — layering is resolved at parse time. The 14-layer
 order in `core/layers.css` keeps selectors single-class / low-specificity, which
 keeps style recalculation fast and lets you override without `!important`.
 
