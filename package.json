@@ -10,6 +10,7 @@
     ".": "./dist/slashed.full.css",
     "./essential": "./dist/slashed.essential.css",
     "./optimal": "./dist/slashed.optimal.css",
+    "./bricks": "./dist/slashed.bricks.css",
     "./optimal-components": "./dist/slashed.optimal-components.css",
     "./optimal-utilities": "./dist/slashed.optimal-utilities.css",
     "./full": "./dist/slashed.full.css",
