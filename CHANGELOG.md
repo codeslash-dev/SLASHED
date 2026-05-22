@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.5] - 2026-05-22
+
+Documentation sprint (checklist v3 §C.14) — the stated v1.0 gate.
+
+### Added
+
+- `docs/theming.md` — rebrand-in-6-tokens guide, multi-brand scoping, contrast
+- `docs/dark-mode.md` — toggle script, scoped themes, per-value overrides, gotchas
+- `docs/layout.md` — every layout primitive with its tokens
+- `docs/states.md` — every `.is-*` class, ARIA mapping, and overlap semantics
+- `docs/tokens.md` — full `--sf-*` reference (588 tokens), generated from source
+- `docs/browser-support.md` — the support floor and the features that set it
+- `docs/performance.md` — modern-CSS footguns (transition: all, oklch paint, …)
+- `docs/migration.md` — Pico / Bulma / Tailwind → SLASHED mapping
+- `CONTRIBUTING.md` — setup, enforced conventions, test/coverage rules
+- `scripts/gen-token-reference.js` + `npm run docs:tokens` to regenerate the
+  token reference from source
+
+### Changed
+
+- README gains a Documentation index linking the guides above
+- `docs/architecture.md` notes `tokens.palette` ships in the optimal+ bundles
+
 ## [0.2.4] - 2026-05-22
 
 Accessibility, print, and theming (checklist v3 §C.7, §C.9, §C.10).

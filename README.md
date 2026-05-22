@@ -167,11 +167,27 @@ the cascade-layer-supporting window (Safari 15.0–15.3 dvh/`:focus-visible`,
 Safari `scrollbar-gutter`) but does **not** extend the floor below the
 versions above — colors will collapse to `initial` on older engines.
 
+## Documentation
+
+| Guide | What's inside |
+| --- | --- |
+| [Architecture](docs/architecture.md) | layers, file structure, bundles, token contract, naming |
+| [Theming](docs/theming.md) | rebrand in 6 tokens, multi-brand, contrast |
+| [Dark mode](docs/dark-mode.md) | toggle script, scoped themes, per-value overrides |
+| [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
+| [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
+| [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
+| [Browser support](docs/browser-support.md) | the support floor and why |
+| [Performance](docs/performance.md) | modern-CSS footguns to avoid |
+| [Migration](docs/migration.md) | Pico / Bulma / Tailwind → SLASHED |
+| [Contributing](CONTRIBUTING.md) | setup, conventions, tests |
+
 ## Development
 
 ```sh
-npm run build        # build dist/ bundles (essential + full)
+npm run build        # build all dist/ bundles
 npm run watch        # rebuild on change
+npm run docs:tokens  # regenerate docs/tokens.md from source
 npm run lint:css     # stylelint all CSS
 npm run lint:css:fix # auto-fix where possible
 npm test             # token regression suite (Playwright, light + dark)

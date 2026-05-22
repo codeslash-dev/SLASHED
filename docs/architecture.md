@@ -42,7 +42,7 @@ core/
   accessibility.css       slashed.accessibility
   print.css               slashed.print
 optional/
-  tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors)
+  tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors; ships in optimal+ bundles)
   tokens.components.css   slashed.tokens  (component-level tokens — empty stub)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
