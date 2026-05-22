@@ -7,6 +7,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 [![release](https://img.shields.io/github/v/release/codeslash-dev/SLASHED?label=version&color=blueviolet&logo=css3)](https://github.com/codeslash-dev/SLASHED/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/codeslash-dev/SLASHED)](LICENSE)
+[![essential bundle](https://img.shields.io/badge/essential-9.7kB%20gzip-brightgreen?logo=css3)](dist/slashed.essential.min.css)
 
 ---
 
@@ -30,13 +31,15 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
 <!-- optional (populated) -->
 <link rel="stylesheet" href="optional/tokens.palette.css">
+<link rel="stylesheet" href="optional/forms.css">
 <link rel="stylesheet" href="optional/legacy.css">
 ```
 
 > **Note:** `optional/components.css`, `optional/utilities.css` and
-> `optional/tokens.components.css` exist as empty placeholders reserved
-> for a future component layer. They are excluded from both prebuilt
-> bundles and from the wiring above. Don't link them until they ship.
+> `optional/tokens.components.css` are empty placeholders reserved for a
+> future component/utility layer. They ship (as no-ops) only in the
+> `*-components` / `*-utilities` / `full` bundles and do nothing until
+> populated — there's no need to link them individually yet.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -45,14 +48,17 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <!-- core only -->
 <link rel="stylesheet" href="slashed.essential.css">
 
-<!-- core + populated optionals (palette, legacy) -->
+<!-- core + palette + forms + legacy (recommended for most sites) -->
+<link rel="stylesheet" href="slashed.optimal.css">
+
+<!-- everything, including the (currently empty) component/utility stubs -->
 <link rel="stylesheet" href="slashed.full.css">
 ```
 
 ## Cascade layer order
 
 ```text
-slashed.tokens → reset → base → layout → components → utilities →
+slashed.tokens → reset → base → forms → layout → components → utilities →
 states → themes → motion → accessibility → print → legacy → overrides
 ```
 
@@ -60,6 +66,25 @@ Declared in `core/layers.css`. Later layers win. `slashed.overrides`
 is reserved for your own overrides and sits last so it always wins.
 `slashed.legacy` sits just before it; its rules are gated by
 `@supports not (...)` and are inert on modern engines.
+
+`slashed.forms` (between `base` and `layout`) holds the opt-in
+classless form styling from `optional/forms.css`.
+
+## Scope of the base layer
+
+The `base` layer is a minimal, readable foundation — **not** a classless
+UI kit. SLASHED is BEM-first: the token API is the product, and consumers
+build components on top of it. The line we hold:
+
+- **Global base** — flow and inline text for readability: headings, `p`,
+  `a`, `code`, `pre`, `mark`, `hr`, `sub`/`sup`, `abbr`, `::selection`.
+- **Rich blocks** (`table`, `blockquote`, `figure`, `dl`) — styled **only
+  inside `.sf-prose`**, not globally.
+- **Interactive widgets** (`dialog`, `details`, `progress`, `meter`) —
+  consumer BEM territory (a future `components` layer); `core` carries
+  reset-level normalization only.
+- **Native form controls** — opt-in via `optional/forms.css`
+  (the `slashed.forms` layer).
 
 ## Token file rule
 
@@ -71,11 +96,27 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | `layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print` |
-| `slashed.full.css` | essential + `tokens.palette` + `legacy` |
+| `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print`) |
+| `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
+| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` |
+| `slashed.optimal-utilities.css` | optimal + `utilities` |
+| `slashed.full.css` | optimal + `tokens.components` + `components` + `utilities` |
 
-The empty stub files (`optional/components.css`, `optional/utilities.css`,
-`optional/tokens.components.css`) are intentionally not bundled.
+`optional/legacy.css` is always concatenated last. Every rule lives in an
+`@layer`, so concatenation order never affects the cascade — `core/layers.css`
+fixes it. The `components` / `utilities` / `tokens.components` files are still
+empty stubs: they ship (no-op) only in the `*-components` / `*-utilities` /
+`full` bundles and do nothing until populated.
+
+À la carte is also supported — start from `essential` (or raw `core/`) and add
+hand-picked optional files in any order. When building a custom bundle by hand,
+`core/layers.css` (the `@layer` declaration) must load **first** — import it via
+the `slashed/core/layers.css` subpath before anything else.
+
+Each bundle is emitted both readable and minified, with a source map:
+`dist/slashed.<name>.css`, `dist/slashed.<name>.min.css`, and
+`dist/slashed.<name>.min.css.map`. `npm run build` prints raw / gzip / brotli
+sizes for every bundle; `tests/bundle-size.spec.js` guards against bloat.
 
 ## Customising tokens
 
@@ -134,11 +175,27 @@ the cascade-layer-supporting window (Safari 15.0–15.3 dvh/`:focus-visible`,
 Safari `scrollbar-gutter`) but does **not** extend the floor below the
 versions above — colors will collapse to `initial` on older engines.
 
+## Documentation
+
+| Guide | What's inside |
+| --- | --- |
+| [Architecture](docs/architecture.md) | layers, file structure, bundles, token contract, naming |
+| [Theming](docs/theming.md) | rebrand in 6 tokens, multi-brand, contrast |
+| [Dark mode](docs/dark-mode.md) | toggle script, scoped themes, per-value overrides |
+| [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
+| [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
+| [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
+| [Browser support](docs/browser-support.md) | the support floor and why |
+| [Performance](docs/performance.md) | modern-CSS footguns to avoid |
+| [Migration](docs/migration.md) | Pico / Bulma / Tailwind → SLASHED |
+| [Contributing](CONTRIBUTING.md) | setup, conventions, tests |
+
 ## Development
 
 ```sh
-npm run build        # build dist/ bundles (essential + full)
+npm run build        # build all dist/ bundles
 npm run watch        # rebuild on change
+npm run docs:tokens  # regenerate docs/tokens.md from source
 npm run lint:css     # stylelint all CSS
 npm run lint:css:fix # auto-fix where possible
 npm test             # token regression suite (Playwright, light + dark)

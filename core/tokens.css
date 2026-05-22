@@ -37,6 +37,29 @@
    aliases" section are the source of truth for --sf-space-gap and
    --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
    gaps across all layout primitives (cluster, grid, sidebar, etc.).
+
+   PUBLIC API vs INTERNAL (token-API freeze contract)
+   ─────────────────────────────────────────────────
+   PUBLIC — covered by SemVer; safe to consume and override:
+     · brand/status source tokens (--sf-color-*-light / -dark)
+     · resolved semantic tokens (--sf-color-*, --sf-color-text--*, surfaces)
+     · scales (--sf-space-*, --sf-text-*, --sf-radius-*, --sf-font-weight-*,
+       --sf-leading-*, --sf-tracking-*, --sf-border-width-*, --sf-shadow-*,
+       --sf-duration-*, --sf-ease-*, --sf-transition-*, --sf-z-*)
+     · BEM consumer aliases (--sf-gap, --sf-content-gap, --sf-component-pad,
+       --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
+   INTERNAL — implementation detail, may change without a major bump:
+     · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
+   DEPRECATED — slated for removal on the documented timeline:
+     · --sf-transition-base (→ use a scoped --sf-transition-* token)
+
+   CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
+     · --sf-space-gap     → --sf-gap          (layout primitives read this name)
+     · --sf-space-content → --sf-content-gap  (stack / prose rhythm)
+     · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
+   These are deliberate two-name contracts: override the canonical token
+   (right side) to move everything downstream. The alias graph is otherwise
+   ≤2 hops (primitive → semantic → scale), with no duplicates/dangling/cycles.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -118,12 +141,12 @@
        so each side of light-dark() references its source token.
        ---------------------------------------------------------- */
     --sf-color-text: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25), 1)    c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
     --sf-color-text--secondary: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25), 0.45) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1),  0.90) c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h)
     );
     --sf-color-text--muted: var(--sf-color-neutral);
     --sf-color-text--placeholder: light-dark(
@@ -139,9 +162,12 @@
       oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
     );
     --sf-color-heading: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25), 1)    c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
+    /* Inline-code text colour. Defaults to inherit (code adopts surrounding
+       text colour); override for a distinct code tint. Consumed by base.css. */
+    --sf-color-code-text: inherit;
 
 
     /* ----------------------------------------------------------
@@ -196,20 +222,35 @@
     /* ----------------------------------------------------------
        Links — derived from --sf-color-action (auto-adapts)
        ---------------------------------------------------------- */
-    --sf-color-link:            var(--sf-color-action);
+    /* Links keep the action hue but CLAMP lightness toward a contrast-safe
+       band — a ceiling in light mode, a floor in dark mode — so link text
+       clears WCAG AA (4.5:1) on the page background for the default palette
+       AND the large majority of brand overrides (a fixed offset alone only
+       fixed the default). Lightness dominates OKLCH contrast but doesn't
+       fully determine it: very high-chroma hues (saturated yellow/green) can
+       still fall short even at a safe lightness — those remain the consumer's
+       responsibility (see docs/theming.md → "Link contrast"). */
+    --sf-color-link:            light-dark(
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, max(l,        0.62), 1) c h)
+    );
     --sf-color-link--hover:     light-dark(
-      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.1),  1) c h),
-      oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1),  1) c h)
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h)
     );
     --sf-color-link--active:    light-dark(
-      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.15), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, calc(l + 0.15), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h)
     );
     /* Visited link — 60° hue shift from action gives clearly distinct
-       chroma without colliding with default tertiary (h ≈ 310). If your
-       brand puts action and tertiary close in hue, override directly:
+       chroma without colliding with default tertiary (h ≈ 310). Same
+       lightness clamp as the base link. If your brand puts action and
+       tertiary close in hue, override directly:
          :root { --sf-color-link--visited: #6b46c1; } */
-    --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 60));
+    --sf-color-link--visited:   light-dark(
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
+      oklch(from var(--sf-color-action) clamp(0, max(l,        0.62), 1) c calc(h + 60))
+    );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
 
@@ -488,6 +529,14 @@
     --sf-border-width-3:        3px;
     --sf-border-width-4:        4px;
 
+    /* ----------------------------------------------------------
+       Divider — global separator system. Drives `hr` (base) and
+       the `.sf-divider` layout primitive.
+       ---------------------------------------------------------- */
+    --sf-divider-width: var(--sf-border-width-1);
+    --sf-divider-style: solid;
+    --sf-divider-color: var(--sf-color-border);
+
 
     /* ----------------------------------------------------------
        Border radius
@@ -608,6 +657,18 @@
     --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-overshoot) both;
     --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
     --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
+    --sf-animation-ping:           sf-ping           var(--sf-duration-slow)   var(--sf-ease-out)       infinite;
+    --sf-animation-blink:          sf-blink          1s                        steps(1, end)            infinite;
+    --sf-animation-float:          sf-float          calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;
+
+    /* Stagger delays — apply to successive items for entrance choreography
+       (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens
+       only; SLASHED ships no .sf-stagger utility class (see audit §D9). */
+    --sf-animation-delay-1: calc(75ms  * var(--sf-motion-scale));
+    --sf-animation-delay-2: calc(150ms * var(--sf-motion-scale));
+    --sf-animation-delay-3: calc(225ms * var(--sf-motion-scale));
+    --sf-animation-delay-4: calc(300ms * var(--sf-motion-scale));
+    --sf-animation-delay-5: calc(375ms * var(--sf-motion-scale));
 
 
     /* ----------------------------------------------------------
@@ -615,6 +676,17 @@
        ---------------------------------------------------------- */
     --sf-scroll-timeline-range-start: 0%;
     --sf-scroll-timeline-range-end:   100%;
+
+
+    /* ----------------------------------------------------------
+       Mask scrim — edge-fade stops for scroll reels / overflow.
+       Use in a mask-image gradient to fade content near an edge:
+         mask-image: linear-gradient(to right,
+           transparent 0, #000 var(--sf-mask-scrim-start),
+           #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%);
+       ---------------------------------------------------------- */
+    --sf-mask-scrim-start: var(--sf-space-l);
+    --sf-mask-scrim-end:   var(--sf-space-l);
 
 
     /* ----------------------------------------------------------
@@ -639,6 +711,10 @@
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
     --sf-touch-target:      var(--sf-size-l);
+    /* Global text-contrast knob. Nudges derived reading-text colours
+       toward the extremes (darker in light mode, lighter in dark mode).
+       Positive = more contrast; 0 = no change. Consumed by
+       --sf-color-text, --sf-color-text--secondary, --sf-color-heading. */
     --sf-contrast-bias:     0;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);
@@ -677,7 +753,7 @@
     --sf-body-font-family:   var(--sf-font-body);
     --sf-body-color:         var(--sf-color-text);
     --sf-body-text-wrap:     pretty;
-    --sf-body-strong-weight: var(--sf-font-weight-heading);
+    --sf-body-strong-weight: var(--sf-font-weight-bold);
     --sf-body-em-style:      italic;
 
     --sf-heading-font-family: var(--sf-font-heading);

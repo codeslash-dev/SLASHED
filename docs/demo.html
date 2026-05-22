@@ -754,6 +754,14 @@
           <button id="cz-reset" type="button">Reset all</button>
           <button id="cz-randomize" type="button">Randomize brand</button>
         </div>
+
+        <div id="a11y-report" style="margin-block-start: var(--sf-space-l)">
+          <h3>Accessibility report <span style="font-weight: var(--sf-font-weight-normal); font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">(live, both modes)</span></h3>
+          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
+            WCAG 2 contrast for <strong>your</strong> chosen colours, recomputed live. The framework auto-picks readable on-colours (black/white by lightness) and clamps link lightness — but contrast also depends on chroma, so this panel shows the <em>actual</em> result, including any pairs that fall short. <strong>AA</strong> = 4.5:1 (normal text); <strong>AA Large</strong> = 3:1 (large/UI). Fix a ✗ by adjusting that colour's lightness, or override the on-/text token directly.
+          </p>
+          <div data-a11y-body class="demo-a11y-grid" style="display: grid; grid-template-columns: 1fr auto auto; gap: var(--sf-space-2xs) var(--sf-space-m); font-size: var(--sf-text-s); align-items: center"></div>
+        </div>
       </section>
 
       <!-- ══════════════════════════════════════════════════════
@@ -1391,6 +1399,17 @@
           <span class="is-busy" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-busy</span>
           <span class="is-readonly" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-readonly</span>
           <span class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-disabled</span>
+          <span class="is-pending" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pending</span>
+          <span class="is-pressed" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pressed</span>
+          <span class="is-focused" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-focused</span>
+        </div>
+        <div class="focus-parent sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.focus-parent (focus the input → parent rings)</code>
+          <input type="text" aria-label="Focus parent demo input" placeholder="focus me" style="font-size: var(--sf-text-s)">
+        </div>
+        <div class="sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s)">
+          <div class="is-resizable" style="width: 8rem; height: 3rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-resizable (drag corner)</div>
+          <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.is-fullscreen → position:fixed; inset:0 (not demoed to avoid viewport takeover)</code>
         </div>
 
         <h3>Empty State</h3>
@@ -1434,6 +1453,37 @@
         <div class="sf-section-group" style="background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden">
           <div class="sf-section--s" style="background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section A (--s padding)</div>
           <div class="sf-section--s" style="background: var(--sf-color-tertiary-100, color-mix(in oklch, var(--sf-color-tertiary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section B (--s padding)</div>
+        </div>
+
+        <h3>.sf-divider</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Token-driven separator (<code>--sf-divider-width/-style/-color</code>). Horizontal by default; <code>.sf-divider--vertical</code> for inline use.</p>
+        <p style="font-size: var(--sf-text-s)">Content above the divider.</p>
+        <hr class="sf-divider">
+        <p style="font-size: var(--sf-text-s)">Content below the divider.</p>
+        <div class="sf-cluster" style="align-items: stretch; min-height: 3rem; font-size: var(--sf-text-s)">
+          <span>Left</span>
+          <span class="sf-divider--vertical" role="separator" aria-orientation="vertical"></span>
+          <span>Right</span>
+        </div>
+
+        <h3>.sf-icon</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Em-based inline icon sizing. Scales with surrounding text; size modifiers <code>.sf-icon--xs</code> … <code>.sf-icon--xl</code>.</p>
+        <div class="sf-cluster" style="align-items: center; font-size: var(--sf-text-m)">
+          <svg class="sf-icon sf-icon--xs" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg class="sf-icon sf-icon--s" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg class="sf-icon sf-icon--m" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg class="sf-icon sf-icon--l" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg class="sf-icon sf-icon--xl" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+
+        <h3>.sf-grid--dense</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Dense auto-flow lets later items backfill earlier gaps. Add <code>.sf-grid--dense</code> to any grid.</p>
+        <div class="sf-grid sf-grid--s sf-grid--dense" style="font-size: var(--sf-text-xs)">
+          <div class="demo-box" style="grid-column: span 2">span 2</div>
+          <div class="demo-box">a</div>
+          <div class="demo-box">b</div>
+          <div class="demo-box" style="grid-column: span 2">span 2</div>
+          <div class="demo-box">c</div>
         </div>
 
         <h3>.sf-cover modifiers</h3>
@@ -2356,6 +2406,72 @@
         if (label) label.textContent = input.value;
       }
 
+      // ── Live accessibility report ──────────────────────────
+      // Resolves the *actual* rendered colour of any token in a given mode
+      // (via the pinned probes) and reports WCAG contrast for the key pairs,
+      // so the user sees the accessibility consequences of THEIR colours —
+      // not just the defaults. This is the universal-colour answer: the
+      // framework adapts on-colours/links automatically, and where pure CSS
+      // can't guarantee a ratio, the panel surfaces it.
+      const a11yBody = document.querySelector('[data-a11y-body]');
+      const A11Y_PAIRS = [
+        ['Body text / bg',   '--sf-color-text',             '--sf-color-bg'],
+        ['Heading / bg',     '--sf-color-heading',          '--sf-color-bg'],
+        ['Muted text / bg',  '--sf-color-text--muted',      '--sf-color-bg'],
+        ['Link / bg',        '--sf-color-link',             '--sf-color-bg'],
+        ['Text on primary',  '--sf-color-text--on-primary', '--sf-color-primary'],
+        ['Text on secondary','--sf-color-text--on-secondary','--sf-color-secondary'],
+        ['Text on tertiary', '--sf-color-text--on-tertiary','--sf-color-tertiary'],
+        ['Text on action',   '--sf-color-text--on-action',  '--sf-color-action'],
+        ['Text on success',  '--sf-color-text--on-success', '--sf-color-success'],
+        ['Text on warning',  '--sf-color-text--on-warning', '--sf-color-warning'],
+        ['Text on error',    '--sf-color-text--on-error',   '--sf-color-error'],
+        ['Text on info',     '--sf-color-text--on-info',    '--sf-color-info'],
+        ['Text on danger',   '--sf-color-text--on-danger',  '--sf-color-danger']
+      ];
+
+      function resolveRGB(token, mode) {
+        const probe = probes[mode];
+        probe.style.color = 'initial';
+        probe.style.color = 'var(' + token + ')';
+        ctx.clearRect(0, 0, 1, 1);
+        ctx.fillStyle = '#000';
+        ctx.fillStyle = getComputedStyle(probe).color;
+        ctx.fillRect(0, 0, 1, 1);
+        const d = ctx.getImageData(0, 0, 1, 1).data;
+        return [d[0], d[1], d[2]];
+      }
+      function relLum([r, g, b]) {
+        const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      }
+      function contrastRatio(fgToken, bgToken, mode) {
+        const a = relLum(resolveRGB(fgToken, mode));
+        const b = relLum(resolveRGB(bgToken, mode));
+        return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      }
+      function gradeCell(ratio) {
+        const r = ratio.toFixed(2);
+        let label, color;
+        if (ratio >= 4.5)      { label = '✓ AA';       color = 'var(--sf-color-success-strong)'; }
+        else if (ratio >= 3)   { label = '✓ AA Large'; color = 'var(--sf-color-warning-strong)'; }
+        else                   { label = '✗ Fail';     color = 'var(--sf-color-error-strong)'; }
+        return '<span style="color:' + color + '; white-space:nowrap">' + r + ':1 ' + label + '</span>';
+      }
+      function updateA11y() {
+        if (!a11yBody) return;
+        let html =
+          '<strong>Pair</strong>' +
+          '<strong style="text-align:right">Light</strong>' +
+          '<strong style="text-align:right">Dark</strong>';
+        for (const [name, fg, bg] of A11Y_PAIRS) {
+          html += '<span>' + name + '</span>' +
+            '<span style="text-align:right">' + gradeCell(contrastRatio(fg, bg, 'light')) + '</span>' +
+            '<span style="text-align:right">' + gradeCell(contrastRatio(fg, bg, 'dark')) + '</span>';
+        }
+        a11yBody.innerHTML = html;
+      }
+
       // Refresh every picker from the resolved truth. Dark pickers without an
       // explicit -dark override display the auto-derived value and follow
       // -light edits live.
@@ -2364,6 +2480,7 @@
           input.value = resolvedHex(input.dataset.token);
           syncValueLabel(input);
         });
+        updateA11y();
       }
 
       // ── Performance: throttle syncs to one per animation frame ──

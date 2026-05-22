@@ -21,6 +21,16 @@
    The base color-scheme: var(--sf-color-scheme, light dark)
    declaration lives in core/reset.css and provides the baseline.
    This layer flips it.
+
+   MULTI-BRAND — scope a palette to any subtree by re-declaring the 6
+   source tokens under a selector (e.g. [data-brand="x"]). See
+   optional/theme-example.css and docs/theming.md.
+
+   THEME TRANSITION — toggling [data-theme] via document.startViewTransition()
+   animates through the ::view-transition(root) rules in core/motion.css.
+   For a plain cross-fade of colours, opt into a transition class on <html>
+   (example in optional/theme-example.css) — never transition every colour
+   globally and permanently (perf footgun).
    ─────────────────────────────────────────────────── */
 
 @layer slashed.themes {

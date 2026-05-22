@@ -80,6 +80,14 @@
   @keyframes sf-spin    { to { rotate: 360deg; } }
   @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
+  /* Notification ping (expanding fading ring), cursor blink, gentle float.
+     Keyframes only — apply via your own BEM/component rules or the
+     --sf-animation-ping / -blink / -float presets. No utility classes
+     ship for these (see audit §D9). */
+  @keyframes sf-ping  { 75%, 100% { scale: 2; opacity: 0; } }
+  @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+  @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
+
   /* @property color interpolation — proves that registered custom
      properties animate smoothly in oklch. Because --sf-color-primary-light
      is registered with syntax:"<color>", the browser interpolates the
@@ -95,5 +103,12 @@
       animation: var(--sf-animation-color-pulse);
     }
   }
+
+  /* @starting-style — entry animations for elements appearing in the
+     top layer (dialog, [popover]) or via display:none → block. SLASHED
+     ships no global @starting-style rules because the from-state is
+     element/component specific. Consumers opt in per component, e.g.:
+       dialog[open] { opacity: 1; @starting-style { opacity: 0; } }
+     Tracked for the future components layer. */
 
 }

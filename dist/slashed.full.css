@@ -1,4 +1,4 @@
-/* SLASHED v0.1.0 — slashed.full.css */
+/* SLASHED v0.2.10 — slashed.full.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -61,6 +61,29 @@
    aliases" section are the source of truth for --sf-space-gap and
    --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
    gaps across all layout primitives (cluster, grid, sidebar, etc.).
+
+   PUBLIC API vs INTERNAL (token-API freeze contract)
+   ─────────────────────────────────────────────────
+   PUBLIC — covered by SemVer; safe to consume and override:
+     · brand/status source tokens (--sf-color-*-light / -dark)
+     · resolved semantic tokens (--sf-color-*, --sf-color-text--*, surfaces)
+     · scales (--sf-space-*, --sf-text-*, --sf-radius-*, --sf-font-weight-*,
+       --sf-leading-*, --sf-tracking-*, --sf-border-width-*, --sf-shadow-*,
+       --sf-duration-*, --sf-ease-*, --sf-transition-*, --sf-z-*)
+     · BEM consumer aliases (--sf-gap, --sf-content-gap, --sf-component-pad,
+       --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
+   INTERNAL — implementation detail, may change without a major bump:
+     · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
+   DEPRECATED — slated for removal on the documented timeline:
+     · --sf-transition-base (→ use a scoped --sf-transition-* token)
+
+   CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
+     · --sf-space-gap     → --sf-gap          (layout primitives read this name)
+     · --sf-space-content → --sf-content-gap  (stack / prose rhythm)
+     · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
+   These are deliberate two-name contracts: override the canonical token
+   (right side) to move everything downstream. The alias graph is otherwise
+   ≤2 hops (primitive → semantic → scale), with no duplicates/dangling/cycles.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -142,12 +165,12 @@
        so each side of light-dark() references its source token.
        ---------------------------------------------------------- */
     --sf-color-text: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25), 1)    c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
     --sf-color-text--secondary: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25), 0.45) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1),  0.90) c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h)
     );
     --sf-color-text--muted: var(--sf-color-neutral);
     --sf-color-text--placeholder: light-dark(
@@ -163,9 +186,12 @@
       oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
     );
     --sf-color-heading: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25), 1)    c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
+    /* Inline-code text colour. Defaults to inherit (code adopts surrounding
+       text colour); override for a distinct code tint. Consumed by base.css. */
+    --sf-color-code-text: inherit;
 
 
     /* ----------------------------------------------------------
@@ -220,20 +246,35 @@
     /* ----------------------------------------------------------
        Links — derived from --sf-color-action (auto-adapts)
        ---------------------------------------------------------- */
-    --sf-color-link:            var(--sf-color-action);
+    /* Links keep the action hue but CLAMP lightness toward a contrast-safe
+       band — a ceiling in light mode, a floor in dark mode — so link text
+       clears WCAG AA (4.5:1) on the page background for the default palette
+       AND the large majority of brand overrides (a fixed offset alone only
+       fixed the default). Lightness dominates OKLCH contrast but doesn't
+       fully determine it: very high-chroma hues (saturated yellow/green) can
+       still fall short even at a safe lightness — those remain the consumer's
+       responsibility (see docs/theming.md → "Link contrast"). */
+    --sf-color-link:            light-dark(
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, max(l,        0.62), 1) c h)
+    );
     --sf-color-link--hover:     light-dark(
-      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.1),  1) c h),
-      oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1),  1) c h)
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h)
     );
     --sf-color-link--active:    light-dark(
-      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.15), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, calc(l + 0.15), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h)
     );
     /* Visited link — 60° hue shift from action gives clearly distinct
-       chroma without colliding with default tertiary (h ≈ 310). If your
-       brand puts action and tertiary close in hue, override directly:
+       chroma without colliding with default tertiary (h ≈ 310). Same
+       lightness clamp as the base link. If your brand puts action and
+       tertiary close in hue, override directly:
          :root { --sf-color-link--visited: #6b46c1; } */
-    --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 60));
+    --sf-color-link--visited:   light-dark(
+      oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
+      oklch(from var(--sf-color-action) clamp(0, max(l,        0.62), 1) c calc(h + 60))
+    );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
 
@@ -512,6 +553,14 @@
     --sf-border-width-3:        3px;
     --sf-border-width-4:        4px;
 
+    /* ----------------------------------------------------------
+       Divider — global separator system. Drives `hr` (base) and
+       the `.sf-divider` layout primitive.
+       ---------------------------------------------------------- */
+    --sf-divider-width: var(--sf-border-width-1);
+    --sf-divider-style: solid;
+    --sf-divider-color: var(--sf-color-border);
+
 
     /* ----------------------------------------------------------
        Border radius
@@ -632,6 +681,18 @@
     --sf-animation-scale-up:       sf-scale-up       var(--sf-duration-normal) var(--sf-ease-overshoot) both;
     --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
     --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
+    --sf-animation-ping:           sf-ping           var(--sf-duration-slow)   var(--sf-ease-out)       infinite;
+    --sf-animation-blink:          sf-blink          1s                        steps(1, end)            infinite;
+    --sf-animation-float:          sf-float          calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;
+
+    /* Stagger delays — apply to successive items for entrance choreography
+       (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens
+       only; SLASHED ships no .sf-stagger utility class (see audit §D9). */
+    --sf-animation-delay-1: calc(75ms  * var(--sf-motion-scale));
+    --sf-animation-delay-2: calc(150ms * var(--sf-motion-scale));
+    --sf-animation-delay-3: calc(225ms * var(--sf-motion-scale));
+    --sf-animation-delay-4: calc(300ms * var(--sf-motion-scale));
+    --sf-animation-delay-5: calc(375ms * var(--sf-motion-scale));
 
 
     /* ----------------------------------------------------------
@@ -639,6 +700,17 @@
        ---------------------------------------------------------- */
     --sf-scroll-timeline-range-start: 0%;
     --sf-scroll-timeline-range-end:   100%;
+
+
+    /* ----------------------------------------------------------
+       Mask scrim — edge-fade stops for scroll reels / overflow.
+       Use in a mask-image gradient to fade content near an edge:
+         mask-image: linear-gradient(to right,
+           transparent 0, #000 var(--sf-mask-scrim-start),
+           #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%);
+       ---------------------------------------------------------- */
+    --sf-mask-scrim-start: var(--sf-space-l);
+    --sf-mask-scrim-end:   var(--sf-space-l);
 
 
     /* ----------------------------------------------------------
@@ -663,6 +735,10 @@
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
     --sf-touch-target:      var(--sf-size-l);
+    /* Global text-contrast knob. Nudges derived reading-text colours
+       toward the extremes (darker in light mode, lighter in dark mode).
+       Positive = more contrast; 0 = no change. Consumed by
+       --sf-color-text, --sf-color-text--secondary, --sf-color-heading. */
     --sf-contrast-bias:     0;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);
@@ -701,7 +777,7 @@
     --sf-body-font-family:   var(--sf-font-body);
     --sf-body-color:         var(--sf-color-text);
     --sf-body-text-wrap:     pretty;
-    --sf-body-strong-weight: var(--sf-font-weight-heading);
+    --sf-body-strong-weight: var(--sf-font-weight-bold);
     --sf-body-em-style:      italic;
 
     --sf-heading-font-family: var(--sf-font-heading);
@@ -807,8 +883,14 @@
    Spacing aliases inherit from the BEM consumer API in tokens.css:
      --sf-space-gap     → var(--sf-gap)         from tokens.css
      --sf-space-content → var(--sf-content-gap) from tokens.css
-   Override --sf-gap or --sf-content-gap to change the gaps across
-   all layout primitives at once.
+   Override --sf-gap or --sf-content-gap (the canonical source) to change
+   the gaps across all layout primitives at once. --sf-space-gap and
+   --sf-space-content are CANONICAL-SOURCE ALIASES — a second public name
+   kept for layout-primitive readability, not a redundant indirection.
+
+   PUBLIC API — every --sf-*-gap / --sf-*-padding / --sf-*-min / etc. here
+   is a per-primitive override knob (e.g. style="--sf-cluster-gap: …").
+   No INTERNAL tokens live in this file.
 
    Each layout primitive (cluster, grid, sidebar…) has its own
    tokens (--sf-cluster-gap etc.) for local overrides.
@@ -984,6 +1066,14 @@
     text-transform: none;
   }
 
+  ::file-selector-button {
+    font: inherit;
+  }
+
+  search {
+    display: block;
+  }
+
   fieldset {
     border:    none;
     padding:   0;
@@ -1056,31 +1146,34 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family:       var(--sf-heading-font-family, var(--sf-font-heading));
-    font-weight:       var(--sf-font-weight-heading);
     line-height:       var(--sf-leading-tight);
     color:             var(--sf-heading-color, var(--sf-color-heading));
-    text-wrap:         balance;
+    text-wrap:         var(--sf-heading-text-wrap);
     overflow-wrap:     break-word;
     text-rendering:    optimizelegibility;
     scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
   }
 
-  h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); letter-spacing: var(--sf-h1-letter-spacing); }
-  h2 { font-size: var(--sf-h2-size); line-height: var(--sf-h2-line-height); letter-spacing: var(--sf-h2-letter-spacing); }
-  h3 { font-size: var(--sf-h3-size); line-height: var(--sf-h3-line-height); letter-spacing: var(--sf-h3-letter-spacing); }
-  h4 { font-size: var(--sf-h4-size); line-height: var(--sf-h4-line-height); letter-spacing: var(--sf-h4-letter-spacing); }
-  h5 { font-size: var(--sf-h5-size); line-height: var(--sf-h5-line-height); letter-spacing: var(--sf-h5-letter-spacing); }
-  h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); letter-spacing: var(--sf-h6-letter-spacing); }
+  h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); }
+  h2 { font-size: var(--sf-h2-size); line-height: var(--sf-h2-line-height); font-weight: var(--sf-h2-font-weight); letter-spacing: var(--sf-h2-letter-spacing); }
+  h3 { font-size: var(--sf-h3-size); line-height: var(--sf-h3-line-height); font-weight: var(--sf-h3-font-weight); letter-spacing: var(--sf-h3-letter-spacing); }
+  h4 { font-size: var(--sf-h4-size); line-height: var(--sf-h4-line-height); font-weight: var(--sf-h4-font-weight); letter-spacing: var(--sf-h4-letter-spacing); }
+  h5 { font-size: var(--sf-h5-size); line-height: var(--sf-h5-line-height); font-weight: var(--sf-h5-font-weight); letter-spacing: var(--sf-h5-letter-spacing); }
+  h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); font-weight: var(--sf-h6-font-weight); letter-spacing: var(--sf-h6-letter-spacing); }
 
   p {
-    text-wrap:     pretty;
+    text-wrap:     var(--sf-body-text-wrap);
     overflow-wrap: break-word;
     orphans:       2;
     widows:        2;
   }
 
   b, strong {
-    font-weight: var(--sf-font-weight-bold, bold);
+    font-weight: var(--sf-body-strong-weight);
+  }
+
+  em {
+    font-style: var(--sf-body-em-style);
   }
 
   small {
@@ -1166,7 +1259,7 @@
 
   hr {
     border:             none;
-    border-block-start: var(--sf-border-width-1, 1px) solid var(--sf-color-border);
+    border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
   }
 
   :target {
@@ -1229,6 +1322,16 @@
    The base color-scheme: var(--sf-color-scheme, light dark)
    declaration lives in core/reset.css and provides the baseline.
    This layer flips it.
+
+   MULTI-BRAND — scope a palette to any subtree by re-declaring the 6
+   source tokens under a selector (e.g. [data-brand="x"]). See
+   optional/theme-example.css and docs/theming.md.
+
+   THEME TRANSITION — toggling [data-theme] via document.startViewTransition()
+   animates through the ::view-transition(root) rules in core/motion.css.
+   For a plain cross-fade of colours, opt into a transition class on <html>
+   (example in optional/theme-example.css) — never transition every colour
+   globally and permanently (perf footgun).
    ─────────────────────────────────────────────────── */
 
 @layer slashed.themes {
@@ -1272,6 +1375,23 @@
   .sf-section--xl { padding-block: var(--sf-section-pad--xl); }
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
+
+  /* -- Divider -------------------------------------------------
+     Standalone separator primitive. Token-driven; pairs with the
+     `--sf-divider-*` tokens and mirrors the `hr` element default.
+     ---------------------------------------------------------- */
+  .sf-divider {
+    border:             none;
+    border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+    margin-block:       var(--sf-space-m);
+  }
+  .sf-divider--vertical {
+    border-block-start:  none;
+    border-inline-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+    margin-block:        0;
+    margin-inline:       var(--sf-space-m);
+    align-self:          stretch;
+  }
 
   /* -- Container -----------------------------------------------
      Max-width container, centered with side gutters. Establishes
@@ -1451,6 +1571,28 @@
   .sf-grid--m  { --sf-grid-min: var(--sf-grid-min-m); }
   .sf-grid--l  { --sf-grid-min: var(--sf-grid-min-l); }
   .sf-grid--xl { --sf-grid-min: var(--sf-grid-min-xl); }
+
+  /* Dense packing — let later items backfill earlier gaps (as .sf-bento
+     does). Applies to any grid, including the fixed-column .sf-grid-N. */
+  .sf-grid--dense { grid-auto-flow: dense; }
+
+  /* -- Icon ----------------------------------------------------
+     Inline icon sizing primitive. Uses em-based --sf-icon-* tokens
+     so an icon scales with its surrounding text. Defaults to -m.
+     ---------------------------------------------------------- */
+  .sf-icon {
+    display:        inline-block;
+    inline-size:    var(--sf-icon-size, var(--sf-icon-m));
+    block-size:     var(--sf-icon-size, var(--sf-icon-m));
+    flex-shrink:    0;
+    vertical-align: text-bottom;
+    fill:           currentcolor;
+  }
+  .sf-icon--xs { --sf-icon-size: var(--sf-icon-xs); }
+  .sf-icon--s  { --sf-icon-size: var(--sf-icon-s); }
+  .sf-icon--m  { --sf-icon-size: var(--sf-icon-m); }
+  .sf-icon--l  { --sf-icon-size: var(--sf-icon-l); }
+  .sf-icon--xl { --sf-icon-size: var(--sf-icon-xl); }
 
   /* -- Cover ---------------------------------------------------
      Full-height flex column. A .sf-cover__center child is
@@ -1796,6 +1938,13 @@
     cursor: progress;
   }
 
+  .is-pending {
+    /* Optimistic UI — request in flight but content still visible/usable
+       (unlike .is-loading, which masks content with a spinner). */
+    opacity: 0.7;
+    cursor:  progress;
+  }
+
   .is-skeleton {
     color:           transparent !important;
     background:      linear-gradient(
@@ -1838,8 +1987,19 @@
     background-color: var(--sf-color-bg--focus);
   }
 
+  .is-pressed {
+    /* Toggle buttons (aria-pressed="true"). Components add specifics. */
+    --sf-is-pressed: 1;
+    background-color: var(--sf-color-bg--selected);
+  }
+
   /* ============================================================
      OPEN / CLOSED — disclosure widgets, modals, dropdowns
+
+     .is-open / .is-collapsed — a thing is shown vs hidden (modal,
+       dropdown, drawer). .is-expanded — maps to aria-expanded on a
+       disclosure/accordion trigger. They share the --sf-is-open flag
+       but signal different intent to consumers.
      ============================================================ */
 
   .is-open {
@@ -1856,6 +2016,14 @@
 
   /* ============================================================
      VALIDATION / FEEDBACK
+
+     Overlap semantics (see docs/states.md):
+     · .is-invalid / .is-valid — form-field validation (maps to
+       aria-invalid). Use on inputs.
+     · .is-error / .is-success — general component feedback, not tied
+       to a single field (a failed save, a completed step).
+     · .is-danger — destructive-action context (a delete button), NOT
+       a validation result. Distinct from .is-error.
      ============================================================ */
 
   .is-valid {
@@ -1911,6 +2079,20 @@
 
   .is-fixed {
     position: fixed;
+  }
+
+  .is-fullscreen {
+    /* App-managed fullscreen overlay. For the native Fullscreen API,
+       prefer the `:fullscreen` pseudo-class; this is the JS-toggled
+       equivalent for elements not entered via that API. */
+    position: fixed;
+    inset:    0;
+    z-index:  var(--sf-z-max);
+  }
+
+  .is-resizable {
+    resize:   both;
+    overflow: auto;
   }
 
   /* ============================================================
@@ -1969,6 +2151,20 @@
 
   .is-unselectable {
     user-select: none;
+  }
+
+  .is-focused {
+    /* Programmatic / JS-driven focus indicator, independent of
+       :focus-visible. Normal weight so consumers can restyle. */
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* Parent reacts to a focused descendant (e.g. highlight a card while
+     any field inside it has keyboard focus). Not is-/sf-prefixed by design. */
+  .focus-parent:focus-within {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
   }
 
   /* ============================================================
@@ -2074,6 +2270,14 @@
   @keyframes sf-spin    { to { rotate: 360deg; } }
   @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
+  /* Notification ping (expanding fading ring), cursor blink, gentle float.
+     Keyframes only — apply via your own BEM/component rules or the
+     --sf-animation-ping / -blink / -float presets. No utility classes
+     ship for these (see audit §D9). */
+  @keyframes sf-ping  { 75%, 100% { scale: 2; opacity: 0; } }
+  @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+  @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
+
   /* @property color interpolation — proves that registered custom
      properties animate smoothly in oklch. Because --sf-color-primary-light
      is registered with syntax:"<color>", the browser interpolates the
@@ -2089,6 +2293,13 @@
       animation: var(--sf-animation-color-pulse);
     }
   }
+
+  /* @starting-style — entry animations for elements appearing in the
+     top layer (dialog, [popover]) or via display:none → block. SLASHED
+     ships no global @starting-style rules because the from-state is
+     element/component specific. Consumers opt in per component, e.g.:
+       dialog[open] { opacity: 1; @starting-style { opacity: 0; } }
+     Tracked for the future components layer. */
 
 }
 
@@ -2149,6 +2360,19 @@
     }
   }
 
+  /* Manual motion opt-out — same suppression as the OS preference above,
+     but consumer-toggled (e.g. a site-level "reduce motion" switch). Works
+     regardless of the OS setting. */
+  .no-motion,
+  .no-motion *,
+  .no-motion *::before,
+  .no-motion *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+
   /* ----------------------------------------------------------
      High contrast — enhancement, not a barrier. Left normal:
      if overridden the focus ring still exists, just thinner.
@@ -2156,6 +2380,9 @@
   @media (prefers-contrast: more) {
     :root {
       --sf-focus-ring-width: 3px;
+      /* Push derived reading-text colours toward the extremes (see the
+         --sf-contrast-bias knob in tokens.css). */
+      --sf-contrast-bias: 0.06;
     }
 
     hr {
@@ -2206,7 +2433,8 @@
      content. All-or-nothing, so the whole set is hardened.
      ---------------------------------------------------------- */
   .sr-only,
-  .visually-hidden {
+  .visually-hidden,
+  .sr-only-focusable:not(:focus, :focus-within) {
     position:    absolute            !important;
     width:       1px                 !important;
     height:      1px                 !important;
@@ -2259,6 +2487,15 @@
       box-shadow:  none;
       text-shadow: none;
     }
+
+    /* Form controls otherwise lose their visible boundary in forced-colors
+       (their token-driven border colour is replaced by the system canvas).
+       Re-assert a system-coloured border so fields stay distinguishable. */
+    input,
+    select,
+    textarea {
+      border: var(--sf-border-width-1) solid;
+    }
   }
 
 }
@@ -2296,11 +2533,20 @@
 
 @layer slashed.print {
 
+  /* Screen default: print-only content is hidden until the page is printed. */
+  .print-only {
+    display: none;
+  }
+
   @media print {
 
     @page {
       size:   var(--sf-print-page-size, a4);
       margin: var(--sf-print-page-margin, 2cm);
+    }
+
+    body {
+      font-size: var(--sf-print-base-size);
     }
 
     /* Decorative shadows are paper-noise. No `!important` — an authored
@@ -2362,8 +2608,13 @@
        in print, and consumer-authored display rules must not bring them
        back accidentally. */
     nav, aside, button, input, select, textarea,
-    dialog, [popover], .no-print {
+    audio, video, dialog, [popover], .no-print {
       display: none !important;
+    }
+
+    /* Reveal print-only content (overrides the screen default above). */
+    .print-only {
+      display: revert !important;
     }
 
     /* Preserve <details> content regardless of open state. Only
@@ -2422,7 +2673,6 @@
    core/tokens.css — they are NOT duplicated here.
 
    Load after core/tokens.css:
-     @import "optional/tokens.palette.css";
 
    Token families (per brand color):
      -50 … -950   numeric scale (Tailwind-style). 500 = the base color.
@@ -2686,6 +2936,330 @@
     --sf-color-base-ghost:  var(--sf-color-base-a5);
 
   }
+}
+
+/* ─── optional/forms.css ─── */
+/* ============================================================
+   SLASHED — optional/forms.css
+   @layer slashed.forms
+
+   Classless form styling — opt-in element-level defaults for
+   <input>, <select>, <textarea>, and <button> without any classes.
+
+   USAGE:
+     — or include in a custom bundle via bundle.config.json.
+
+   PHILOSOPHY:
+     This file is OPTIONAL. SLASHED core does not style native form
+     elements beyond reset (font-inherit, box-sizing). If you prefer
+     full control via BEM components, skip this file entirely.
+
+   TOKENS CONSUMED:
+     --sf-radius-m, --sf-border-width-1, --sf-color-border,
+     --sf-color-border--focus, --sf-color-border--subtle,
+     --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
+     --sf-color-text--disabled, --sf-color-text--on-action,
+     --sf-color-bg--disabled, --sf-color-action, --sf-color-error,
+     --sf-field-border-color, --sf-opacity-disabled,
+     --sf-space-xs, --sf-space-s, --sf-space-m,
+     --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
+     --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
+     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset,
+     --sf-field-required-marker
+
+   STATE INTEGRATION:
+     The shared field border reads --sf-field-border-color (set by the
+     `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
+     .is-danger` classes in core/states.css), falling back to
+     --sf-color-border. Add a validation `.is-*` class to recolour a field.
+   ============================================================ */
+
+@layer slashed.forms {
+
+  /* ----------------------------------------------------------
+     Shared base for text-like inputs, select, textarea
+     ---------------------------------------------------------- */
+  input:where(
+    [type="text"], [type="email"], [type="password"], [type="url"],
+    [type="tel"], [type="number"], [type="search"], [type="date"],
+    [type="datetime-local"], [type="month"], [type="week"],
+    [type="time"], [type="color"], :not([type])
+  ),
+  select,
+  textarea {
+    display: block;
+    inline-size: 100%;
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-s);
+    font-size: var(--sf-text-m);
+    line-height: var(--sf-leading-normal);
+    color: var(--sf-color-text);
+    background-color: var(--sf-color-surface);
+    border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
+    border-radius: var(--sf-radius-m);
+    transition: var(--sf-transition-colors),
+                border-color var(--sf-duration-fast) var(--sf-ease-out);
+  }
+
+  /* Focus */
+  input:where(
+    [type="text"], [type="email"], [type="password"], [type="url"],
+    [type="tel"], [type="number"], [type="search"], [type="date"],
+    [type="datetime-local"], [type="month"], [type="week"],
+    [type="time"], [type="color"], :not([type])
+  ):focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* Disabled */
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    background-color: var(--sf-color-bg--disabled);
+    color: var(--sf-color-text--disabled);
+    opacity: var(--sf-opacity-disabled);
+    cursor: not-allowed;
+  }
+
+  /* Placeholder */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--sf-color-text--placeholder);
+    opacity: 1;
+  }
+
+
+  /* ----------------------------------------------------------
+     Textarea specifics
+     ---------------------------------------------------------- */
+  textarea {
+    min-block-size: 6rem;
+  }
+
+
+  /* ----------------------------------------------------------
+     Select
+     ---------------------------------------------------------- */
+  select {
+    appearance: none;
+    padding-inline-end: calc(var(--sf-space-s) + 1.5em);
+  }
+  /* Single-line selects get a chevron. `currentColor` inside a data-URI
+     background SVG does NOT inherit the host colour cross-browser, so the
+     stroke is swapped by colour-scheme via light-dark() — this also tracks
+     scoped [data-theme] regions, which flip color-scheme. */
+  select:not([multiple], [size]) {
+    background-repeat: no-repeat;
+    background-position: right var(--sf-space-s) center;
+    background-size: 1em;
+    background-image: light-dark(
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23eee' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E")
+    );
+  }
+  /* RTL: mirror the chevron to the inline-end (left) edge. */
+  :dir(rtl) select:not([multiple], [size]) {
+    background-position: left var(--sf-space-s) center;
+  }
+
+
+  /* ----------------------------------------------------------
+     Button / submit / reset
+     ---------------------------------------------------------- */
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sf-space-xs);
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-m);
+    font-size: var(--sf-text-m);
+    font-weight: var(--sf-font-weight-heading);
+    line-height: var(--sf-leading-normal);
+    color: var(--sf-color-text--on-action);
+    background-color: var(--sf-color-action);
+    border: var(--sf-border-width-1) solid transparent;
+    border-radius: var(--sf-radius-m);
+    cursor: pointer;
+    transition: var(--sf-transition-colors);
+    text-decoration: none;
+  }
+
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover,
+  input[type="button"]:hover {
+    background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
+  }
+
+  button:focus-visible,
+  input[type="submit"]:focus-visible,
+  input[type="reset"]:focus-visible,
+  input[type="button"]:focus-visible {
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  button:disabled,
+  input[type="submit"]:disabled,
+  input[type="reset"]:disabled,
+  input[type="button"]:disabled {
+    opacity: var(--sf-opacity-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+
+  /* ----------------------------------------------------------
+     Checkbox & radio — minimal accent styling
+     ---------------------------------------------------------- */
+  input[type="checkbox"],
+  input[type="radio"] {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+    accent-color: var(--sf-color-action);
+    cursor: pointer;
+  }
+
+
+  /* ----------------------------------------------------------
+     File input — style the selector button like a button
+     ---------------------------------------------------------- */
+  input[type="file"] {
+    cursor: pointer;
+  }
+  input[type="file"]::file-selector-button {
+    appearance: none;
+    margin-inline-end: var(--sf-space-s);
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-m);
+    font-weight: var(--sf-font-weight-heading);
+    color: var(--sf-color-text--on-action);
+    background-color: var(--sf-color-action);
+    border: var(--sf-border-width-1) solid transparent;
+    border-radius: var(--sf-radius-m);
+    cursor: pointer;
+    transition: var(--sf-transition-colors);
+  }
+  input[type="file"]::file-selector-button:hover {
+    background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
+  }
+
+
+  /* ----------------------------------------------------------
+     Range — track + thumb (WebKit + Firefox)
+     ---------------------------------------------------------- */
+  input[type="range"] {
+    appearance: none;
+    inline-size: 100%;
+    background: transparent;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    block-size: var(--sf-border-width-3, 0.25rem);
+    background-color: var(--sf-color-border);
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]::-moz-range-track {
+    block-size: var(--sf-border-width-3, 0.25rem);
+    background-color: var(--sf-color-border);
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    inline-size: 1em;
+    block-size: 1em;
+    margin-block-start: calc((var(--sf-border-width-3, 0.25rem) - 1em) / 2);
+    background-color: var(--sf-color-action);
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]::-moz-range-thumb {
+    inline-size: 1em;
+    block-size: 1em;
+    background-color: var(--sf-color-action);
+    border: none;
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]:focus-visible {
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+
+  /* ----------------------------------------------------------
+     Fieldset & legend
+     ---------------------------------------------------------- */
+  fieldset {
+    border: var(--sf-border-width-1) solid var(--sf-color-border--subtle);
+    border-radius: var(--sf-radius-m);
+    padding: var(--sf-space-m);
+  }
+
+  legend {
+    font-weight: var(--sf-font-weight-heading);
+    padding-inline: var(--sf-space-xs);
+  }
+
+
+  /* ----------------------------------------------------------
+     Label
+     ---------------------------------------------------------- */
+  label {
+    display: block;
+    font-weight: var(--sf-font-weight-heading);
+    margin-block-end: var(--sf-space-xs);
+  }
+
+  /* Required-field marker — classless, no markup convention.
+     Covers both <label>Name <input required></label> and
+     <label>Name</label><input required>. */
+  label:has(:required)::after,
+  label:has(+ :required)::after {
+    content: var(--sf-field-required-marker, " *");
+    color: var(--sf-color-error);
+  }
+
+}
+
+/* ─── optional/tokens.components.css ─── */
+/* SLASHED — optional/tokens.components.css
+   @layer slashed.tokens
+   ────────────────────── */
+
+@layer slashed.tokens {
+
+  /* TODO */
+
+}
+
+/* ─── optional/components.css ─── */
+/* SLASHED — optional/components.css
+   @layer slashed.components
+   ────────────────────── */
+
+
+@layer slashed.components {
+
+  /* TODO */
+
+}
+
+/* ─── optional/utilities.css ─── */
+/* SLASHED — optional/utilities.css
+   @layer slashed.utilities
+   ────────────────────── */
+
+@layer slashed.utilities {
+
+  /* TODO */
+
 }
 
 /* ─── optional/legacy.css ─── */

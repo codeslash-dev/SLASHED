@@ -61,6 +61,14 @@
     text-transform: none;
   }
 
+  ::file-selector-button {
+    font: inherit;
+  }
+
+  search {
+    display: block;
+  }
+
   fieldset {
     border:    none;
     padding:   0;

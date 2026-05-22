@@ -19,11 +19,19 @@
      --sf-color-border--focus, --sf-color-border--subtle,
      --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
      --sf-color-text--disabled, --sf-color-text--on-action,
-     --sf-color-bg--disabled, --sf-color-bg--hover, --sf-color-action,
-     --sf-opacity-disabled, --sf-space-xs, --sf-space-s, --sf-space-m,
+     --sf-color-bg--disabled, --sf-color-action, --sf-color-error,
+     --sf-field-border-color, --sf-opacity-disabled,
+     --sf-space-xs, --sf-space-s, --sf-space-m,
      --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
      --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
-     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset
+     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset,
+     --sf-field-required-marker
+
+   STATE INTEGRATION:
+     The shared field border reads --sf-field-border-color (set by the
+     `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
+     .is-danger` classes in core/states.css), falling back to
+     --sf-color-border. Add a validation `.is-*` class to recolour a field.
    ============================================================ */
 
 @layer slashed.forms {
@@ -47,7 +55,7 @@
     line-height: var(--sf-leading-normal);
     color: var(--sf-color-text);
     background-color: var(--sf-color-surface);
-    border: var(--sf-border-width-1) solid var(--sf-color-border);
+    border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
     border-radius: var(--sf-radius-m);
     transition: var(--sf-transition-colors),
                 border-color var(--sf-duration-fast) var(--sf-ease-out);
@@ -90,7 +98,6 @@
      ---------------------------------------------------------- */
   textarea {
     min-block-size: 6rem;
-    resize: vertical;
   }
 
 
@@ -99,11 +106,24 @@
      ---------------------------------------------------------- */
   select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+    padding-inline-end: calc(var(--sf-space-s) + 1.5em);
+  }
+  /* Single-line selects get a chevron. `currentColor` inside a data-URI
+     background SVG does NOT inherit the host colour cross-browser, so the
+     stroke is swapped by colour-scheme via light-dark() — this also tracks
+     scoped [data-theme] regions, which flip color-scheme. */
+  select:not([multiple], [size]) {
     background-repeat: no-repeat;
     background-position: right var(--sf-space-s) center;
     background-size: 1em;
-    padding-inline-end: calc(var(--sf-space-s) + 1.5em);
+    background-image: light-dark(
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23eee' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E")
+    );
+  }
+  /* RTL: mirror the chevron to the inline-end (left) edge. */
+  :dir(rtl) select:not([multiple], [size]) {
+    background-position: left var(--sf-space-s) center;
   }
 
 
@@ -136,8 +156,7 @@
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover {
-    background-color: var(--sf-color-bg--hover);
-    color: var(--sf-color-text);
+    background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
   }
 
   button:focus-visible,
@@ -171,6 +190,70 @@
 
 
   /* ----------------------------------------------------------
+     File input — style the selector button like a button
+     ---------------------------------------------------------- */
+  input[type="file"] {
+    cursor: pointer;
+  }
+  input[type="file"]::file-selector-button {
+    appearance: none;
+    margin-inline-end: var(--sf-space-s);
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-m);
+    font-weight: var(--sf-font-weight-heading);
+    color: var(--sf-color-text--on-action);
+    background-color: var(--sf-color-action);
+    border: var(--sf-border-width-1) solid transparent;
+    border-radius: var(--sf-radius-m);
+    cursor: pointer;
+    transition: var(--sf-transition-colors);
+  }
+  input[type="file"]::file-selector-button:hover {
+    background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
+  }
+
+
+  /* ----------------------------------------------------------
+     Range — track + thumb (WebKit + Firefox)
+     ---------------------------------------------------------- */
+  input[type="range"] {
+    appearance: none;
+    inline-size: 100%;
+    background: transparent;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    block-size: var(--sf-border-width-3, 0.25rem);
+    background-color: var(--sf-color-border);
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]::-moz-range-track {
+    block-size: var(--sf-border-width-3, 0.25rem);
+    background-color: var(--sf-color-border);
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    inline-size: 1em;
+    block-size: 1em;
+    margin-block-start: calc((var(--sf-border-width-3, 0.25rem) - 1em) / 2);
+    background-color: var(--sf-color-action);
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]::-moz-range-thumb {
+    inline-size: 1em;
+    block-size: 1em;
+    background-color: var(--sf-color-action);
+    border: none;
+    border-radius: var(--sf-radius-full);
+  }
+  input[type="range"]:focus-visible {
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+
+  /* ----------------------------------------------------------
      Fieldset & legend
      ---------------------------------------------------------- */
   fieldset {
@@ -192,6 +275,15 @@
     display: block;
     font-weight: var(--sf-font-weight-heading);
     margin-block-end: var(--sf-space-xs);
+  }
+
+  /* Required-field marker — classless, no markup convention.
+     Covers both <label>Name <input required></label> and
+     <label>Name</label><input required>. */
+  label:has(:required)::after,
+  label:has(+ :required)::after {
+    content: var(--sf-field-required-marker, " *");
+    color: var(--sf-color-error);
   }
 
 }

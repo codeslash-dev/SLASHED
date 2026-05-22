@@ -1,6 +1,6 @@
 {
   "name": "slashed",
-  "version": "0.1.0",
+  "version": "0.2.10",
   "description": "CSS framework",
   "style": "dist/slashed.full.css",
   "main": "dist/slashed.full.css",
@@ -9,6 +9,10 @@
   "exports": {
     ".": "./dist/slashed.full.css",
     "./essential": "./dist/slashed.essential.css",
+    "./optimal": "./dist/slashed.optimal.css",
+    "./optimal-components": "./dist/slashed.optimal-components.css",
+    "./optimal-utilities": "./dist/slashed.optimal-utilities.css",
+    "./full": "./dist/slashed.full.css",
     "./core/*": "./core/*",
     "./optional/*": "./optional/*"
   },
@@ -21,19 +25,22 @@
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
     "build": "node scripts/bundle.js",
     "watch": "node scripts/bundle.js --watch",
+    "docs:tokens": "node scripts/gen-token-reference.js",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
     "test": "playwright test",
-    "test:install": "playwright install --with-deps chromium",
+    "test:install": "playwright install --with-deps chromium firefox webkit",
     "release": "release-it",
     "release:minor": "release-it --increment minor",
     "release:major": "release-it --increment major"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
     "@playwright/test": "^1.49.0",
     "@release-it/conventional-changelog": "^11.0.0",
+    "lightningcss": "^1.32.0",
     "release-it": "^20.0.1",
     "stylelint": "^17.11.1",
     "stylelint-config-standard": "^40.0.0"

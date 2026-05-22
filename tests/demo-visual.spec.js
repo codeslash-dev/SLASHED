@@ -779,14 +779,21 @@ test.describe('Print Styles', () => {
     expect(pca).toBe('exact');
   });
 
-  test('links show href after text in print', async ({ page }) => {
+  test('links show href after text in print', async ({ page, browserName }) => {
     await page.goto(DEMO_URL);
     await page.emulateMedia({ media: 'print' });
     const link = page.locator('#print a[href^="https"]').first();
     const afterContent = await link.evaluate(el =>
       getComputedStyle(el, '::after').content
     );
-    expect(afterContent).toContain('http');
+    // Chromium resolves attr() in the computed ::after content; Firefox/WebKit
+    // report the unresolved `attr(href)` expression. Either proves the print
+    // rule is applied (and not suppressed to none/normal).
+    if (browserName === 'chromium') {
+      expect(afterContent).toContain('http');
+    } else {
+      expect(afterContent).toMatch(/attr\(href\)|http/);
+    }
   });
 
   test('shadows are removed in print', async ({ page }) => {

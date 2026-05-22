@@ -6,6 +6,267 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.10] - 2026-05-22
+
+CI fix and PR review follow-ups.
+
+### Fixed
+
+- **CI green**: the cross-browser matrix ran the geometry/text-metric visual
+  suite (`demo-visual.spec.js`) on Firefox/WebKit, whose font metrics differ
+  from Chromium — pinned that suite to Chromium (where pixel/geometry
+  regression belongs) while Firefox/WebKit keep validating CSS *behaviour*
+  (colour resolution, a11y, states, container queries)
+- Hardened `tests/a11y.spec.js` to wait for fonts + applied styles before the
+  axe audit, eliminating a rare under-load flake where axe sampled unstyled
+  defaults
+- RTL: select chevron now mirrors to the inline-end (left) edge under
+  `:dir(rtl)` instead of staying physically right
+- `scripts/bundle.js` `@import`-stripping regex now requires matching quotes
+  (backreference) instead of allowing `"…'`
+
+### Changed
+
+- Docs/demo review fixes: accessible name on the focus-parent demo input;
+  `aria-pressed` kept in sync in the dark-mode toggle example; corrected
+  "15-layer" → "14-layer" in performance docs; consistent `role="status"` /
+  `role="alert"` notation in the states doc
+
+## [0.2.9] - 2026-05-22
+
+Universal-colour transparency: a live accessibility report in the demo.
+
+### Added
+
+- Demo Theme Customizer now includes a **live Accessibility report** that
+  computes WCAG 2 contrast (AA / AA-Large / Fail) for 13 key colour pairs in
+  both light and dark mode, recomputed whenever brand colours change. This makes
+  the accessibility consequences of *any* chosen palette visible — including the
+  edges pure-CSS auto-derivation can't guarantee
+- `docs/theming.md` → "How universal is the colour system?" — documents what is
+  fully universal (brand hue/chroma, on-colour text, surfaces), the one
+  structural contract (`base-light` is a light surface), and why CSS alone can't
+  guarantee 4.5:1 for every possible input
+- `tests/demo-a11y-panel.spec.js` — verifies the report renders all pairs, that
+  the default palette passes AA, and that it recomputes on colour change
+
+## [0.2.8] - 2026-05-22
+
+Robust link contrast under brand overrides.
+
+### Changed
+
+- `--sf-color-link` / `--hover` / `--active` / `--visited` now clamp OKLCH
+  lightness toward a contrast-safe band (ceiling in light mode, floor in dark)
+  instead of applying a fixed offset. Links keep the action hue but clear
+  WCAG AA (4.5:1) for the default palette **and** the large majority of brand
+  overrides — not just the default. Very high-chroma hues (saturated
+  yellow/green) remain a documented exception (consumer overrides
+  `--sf-color-link` directly)
+- Audit checklist: items previously dispositioned "not needed / not possible /
+  defer to v1.x" are retagged **defer to v0.5.0**
+
+### Added
+
+- `tests/link-contrast.spec.js` — verifies the clamp holds ≥ 4.5:1 across a
+  range of moderate-chroma `--sf-color-action` overrides
+- `docs/theming.md` → "Link contrast" section documenting the guarantee and
+  its high-chroma caveat
+
+## [0.2.7] - 2026-05-22
+
+Behavioural test hardening (checklist v3 §C.13) — completes the test matrix.
+
+### Added
+
+- `tests/behavior.spec.js`:
+  - reduced-motion neutralisation (`prefers-reduced-motion: reduce` and the
+    manual `.no-motion` opt-out)
+  - forced-colors focus-ring colour (Chromium-only emulation; skipped elsewhere)
+  - container-query wiring (`.sf-container` inline-size container; fixed-grid
+    reflow across container widths)
+  - state-class effects (`.is-hidden`, `.is-disabled`, `.is-truncated`)
+
+## [0.2.6] - 2026-05-22
+
+Build & test infrastructure (checklist v3 §C.12, §C.13, D10).
+
+### Added
+
+- Minified bundles (`*.min.css`) + source maps (`*.min.css.map`) for every
+  bundle via lightningcss; modern colour syntax is preserved (no down-levelling)
+- `npm run build` now reports raw / gzip / brotli sizes per bundle
+- Cross-browser test matrix — Firefox and WebKit added alongside Chromium in
+  `playwright.config.js`, `test:install`, and CI
+- `tests/a11y.spec.js` — axe-core WCAG 2 A/AA audit (light + dark) against a
+  dedicated `tests/a11y-fixture.html`
+- `tests/bundle-size.spec.js` — gzip-size regression budgets per bundle
+- README bundle-size badge; docs for the minified bundles and the
+  `layers.css`-first rule for custom bundles
+
+### Fixed
+
+- Default link colour now darkens the action colour in light mode so link text
+  meets WCAG AA (4.5:1) on the page background (was 3.43:1); dark mode unchanged.
+  Surfaced by the new axe audit
+- `tests/demo-visual.spec.js` print-href assertion is now browser-aware
+  (Firefox/WebKit report the unresolved `attr(href)` expression)
+
+## [0.2.5] - 2026-05-22
+
+Documentation sprint (checklist v3 §C.14) — the stated v1.0 gate.
+
+### Added
+
+- `docs/theming.md` — rebrand-in-6-tokens guide, multi-brand scoping, contrast
+- `docs/dark-mode.md` — toggle script, scoped themes, per-value overrides, gotchas
+- `docs/layout.md` — every layout primitive with its tokens
+- `docs/states.md` — every `.is-*` class, ARIA mapping, and overlap semantics
+- `docs/tokens.md` — full `--sf-*` reference (588 tokens), generated from source
+- `docs/browser-support.md` — the support floor and the features that set it
+- `docs/performance.md` — modern-CSS footguns (transition: all, oklch paint, …)
+- `docs/migration.md` — Pico / Bulma / Tailwind → SLASHED mapping
+- `CONTRIBUTING.md` — setup, enforced conventions, test/coverage rules
+- `scripts/gen-token-reference.js` + `npm run docs:tokens` to regenerate the
+  token reference from source
+
+### Changed
+
+- README gains a Documentation index linking the guides above
+- `docs/architecture.md` notes `tokens.palette` ships in the optimal+ bundles
+
+## [0.2.4] - 2026-05-22
+
+Accessibility, print, and theming (checklist v3 §C.7, §C.9, §C.10).
+
+### Added
+
+- Accessibility: `.no-motion` (consumer-toggled motion opt-out, independent of
+  the OS setting); forced-colors now re-asserts form-control borders so fields
+  stay distinguishable; `prefers-contrast: more` now also raises
+  `--sf-contrast-bias` to darken/lighten reading text
+- Print: `.print-only` (hidden on screen, shown on paper); `audio`/`video` added
+  to the print hide-list
+- Themes: `optional/theme-example.css` — a copy-and-customise "rebrand in 6
+  tokens" example covering quick rebrand, per-mode dark control, multi-brand
+  scoping (`[data-brand]`), and an opt-in theme-transition class (not bundled)
+
+### Changed
+
+- `core/themes.css` documents multi-brand scoping and the
+  `startViewTransition()` theme-toggle pattern
+
+## [0.2.3] - 2026-05-22
+
+State and motion primitives (checklist v3 §C.6, §C.8).
+
+### Added
+
+- States: `.is-pressed` (aria-pressed toggles), `.is-pending` (optimistic UI,
+  distinct from `.is-loading`), `.is-focused` (programmatic focus ring),
+  `.focus-parent:focus-within` (parent reacts to a focused descendant),
+  `.is-fullscreen`, and `.is-resizable`
+- Motion: `sf-ping`, `sf-blink`, and `sf-float` keyframes with matching
+  `--sf-animation-ping` / `-blink` / `-float` presets (keyframes/tokens only —
+  no utility classes, per audit §D9)
+- Inline documentation of state-overlap semantics (`.is-error` vs `.is-invalid`
+  vs `.is-danger`; `.is-open` vs `.is-expanded`) and an `@starting-style`
+  readiness note in `core/motion.css`
+
+## [0.2.2] - 2026-05-22
+
+New CSS features across tokens, reset, forms, and layout (checklist v3 §C.1–5).
+
+### Added
+
+- Tokens: `--sf-mask-scrim-start` / `--sf-mask-scrim-end` (edge-fade stops for
+  scroll reels) and `--sf-animation-delay-1`…`-5` (stagger delays; tokens only,
+  no `.sf-stagger` class per audit §D9)
+- Reset: `::file-selector-button { font: inherit }` and `search { display: block }`
+- Forms: styled `input[type="file"]::file-selector-button` (action-button look),
+  `input[type="range"]` track + thumb for WebKit and Firefox, and a focus ring
+- Layout: `.sf-grid--dense` (dense auto-flow on any grid) and the `.sf-icon`
+  inline icon-sizing primitive with `--xs`…`--xl` modifiers (consumes the
+  existing `--sf-icon-*` tokens)
+
+### Changed
+
+- Select chevron now swaps stroke colour via `light-dark()` instead of relying
+  on `currentColor` inside a data-URI background (which doesn't inherit the host
+  colour cross-browser); the chevron now tracks dark mode and scoped
+  `[data-theme]` regions
+
+## [0.2.1] - 2026-05-22
+
+Completes the v0.2 "leftovers" from `audits/completion-checklist-v3.md`:
+the tiered bundle scheme (D5) and token-API hygiene (D11).
+
+### Added
+
+- Tiered bundle scheme (D5): `essential`, `optimal`, `optimal-components`,
+  `optimal-utilities`, and `full`. `optimal` = core + `tokens.palette` +
+  `forms` + `legacy`; `full` adds the (empty) component/utility stubs. New
+  `package.json` `exports` subpaths: `./optimal`, `./optimal-components`,
+  `./optimal-utilities`, `./full`
+- `--sf-color-code-text` token in `core/tokens.css` (defaults to `inherit`)
+  for discoverability — previously only a fallback in `base.css`
+- Token-API contract documentation (D11): PUBLIC / INTERNAL / DEPRECATED
+  labelling in the token-file headers, canonical-source alias documentation
+  (`--sf-space-gap`→`--sf-gap`, etc.), and naming conventions (single- vs
+  double-dash, BEM consumer-API tokens, print class prefix) in
+  `docs/architecture.md`
+
+### Changed
+
+- `scripts/bundle.js` now strips local `@import` statements when
+  concatenating, so bundled stubs carry no dead mid-file imports
+- README and `docs/architecture.md` bundle sections rewritten for the
+  five-bundle scheme
+
+## [0.2.0] - 2026-05-22
+
+Foundation polish from `audits/completion-checklist-v3.md` (§F v0.2): wire up
+declared-but-unused base/print tokens, fix two real form bugs, ship the
+previously-unbundled `optional/forms.css`, and close the `slashed.forms` /
+base-scope documentation gaps.
+
+### Added
+
+- `em` base rule consuming `--sf-body-em-style`; per-heading `font-weight`
+  wiring (`--sf-h1-font-weight`…`--sf-h6-font-weight`) and `text-wrap` wiring
+  (`--sf-heading-text-wrap`, `--sf-body-text-wrap`) in `core/base.css` — tokens
+  that previously advertised control the base ignored (D2)
+- `--sf-contrast-bias` is now a real global text-contrast knob, folded into
+  `--sf-color-text`, `--sf-color-text--secondary`, and `--sf-color-heading`
+  (default `0` = no change) (D3)
+- `--sf-divider-width` / `--sf-divider-style` / `--sf-divider-color` tokens and
+  a `.sf-divider` (+ `.sf-divider--vertical`) layout primitive; `hr` now reads
+  the divider tokens
+- `.sr-only-focusable` accessibility helper (visually hidden until focused)
+- Required-field asterisk in `optional/forms.css` — classless `:has()` +
+  `:required`, customisable via `--sf-field-required-marker` (D8)
+- `optional/forms.css` now ships in the `slashed.full.css` bundle (D5, bundle
+  half); `slashed.forms` layer and the universal-base scope rule documented in
+  `README.md` and `docs/architecture.md` (D1, D5)
+
+### Changed
+
+- `--sf-body-strong-weight` default corrected to `--sf-font-weight-bold` (700)
+  before being wired, so `<strong>` is not silently downweighted to 600 (D2)
+- `optional/forms.css` shared field border now reads `--sf-field-border-color`,
+  so the `.is-*` validation states in `core/states.css` recolour native inputs
+  (D6)
+- `core/print.css` consumes `--sf-print-base-size` on `body` in `@media print`
+  (D4)
+
+### Fixed
+
+- Primary-button `:hover` no longer swaps the solid action fill for the
+  surface-hover tint and dark text; it now darkens the action colour
+  (`oklch(from var(--sf-color-action) calc(l - 0.05) c h)`) (D7)
+- Removed duplicate `textarea { resize: vertical }` from `optional/forms.css`
+  (owned by `core/reset.css`)
+
 ## [0.1.0] - 2026-05-21
 
 ### Added
