@@ -1,6 +1,5 @@
 # SLASHED -- Comparative Gap Audit
 
-> Generated: 2025-01-15  
 > Framework version: 0.2.10  
 > Methodology: 6-phase comparative analysis  
 > Benchmarks: Pico CSS v2.x, Automatic.css v4.x, Bulma v1.x, Tailwind CSS v4
