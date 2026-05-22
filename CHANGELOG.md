@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.8] - 2026-05-22
+
+Robust link contrast under brand overrides.
+
+### Changed
+
+- `--sf-color-link` / `--hover` / `--active` / `--visited` now clamp OKLCH
+  lightness toward a contrast-safe band (ceiling in light mode, floor in dark)
+  instead of applying a fixed offset. Links keep the action hue but clear
+  WCAG AA (4.5:1) for the default palette **and** the large majority of brand
+  overrides — not just the default. Very high-chroma hues (saturated
+  yellow/green) remain a documented exception (consumer overrides
+  `--sf-color-link` directly)
+- Audit checklist: items previously dispositioned "not needed / not possible /
+  defer to v1.x" are retagged **defer to v0.5.0**
+
+### Added
+
+- `tests/link-contrast.spec.js` — verifies the clamp holds ≥ 4.5:1 across a
+  range of moderate-chroma `--sf-color-action` overrides
+- `docs/theming.md` → "Link contrast" section documenting the guarantee and
+  its high-chroma caveat
+
 ## [0.2.7] - 2026-05-22
 
 Behavioural test hardening (checklist v3 §C.13) — completes the test matrix.

@@ -73,6 +73,31 @@ source tokens under your own selector:
 Because `slashed.themes` sits above the component/utility layers in the
 cascade, these reassignments win without `!important`.
 
+## Link contrast
+
+Default link text (`--sf-color-link`) keeps your **action hue** but clamps its
+OKLCH lightness toward a contrast-safe band — a ceiling in light mode, a floor
+in dark mode. This means links clear **WCAG AA (4.5:1)** on the page background
+not only for the default palette but for the large majority of brand
+overrides, automatically, without you tuning anything.
+
+**The one caveat:** lightness dominates OKLCH contrast but doesn't fully
+determine it. A *very high-chroma* hue — saturated yellow or lime green — can
+still fall short of 4.5:1 even at a clamped lightness, because those hues are
+intrinsically luminous. (This is the same limitation every framework that
+keeps brand-coloured links has; most don't clamp at all.) If your action colour
+is in that range, set the link colour explicitly:
+
+```css
+:root {
+  --sf-color-link: oklch(0.45 0.12 110); /* a darker, less-saturated green */
+}
+```
+
+The regression suite (`tests/link-contrast.spec.js`) verifies the clamp holds
+AA across a range of moderate-chroma overrides; `tests/a11y.spec.js` runs an
+axe-core audit on the default palette.
+
 ## Tuning contrast
 
 `--sf-contrast-bias` (default `0`) is a global knob that nudges reading-text

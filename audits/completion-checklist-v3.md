@@ -365,8 +365,8 @@ Rejected-on-purpose items live in §D9, not here.
 | `--sf-color-code-text` | 🟡 | LOW | Declared as fallback in base.css; add to tokens.css for discoverability |
 | `--sf-text-decoration-thickness` | ✗ | LOW | Link/underline customisation (defer to utilities) |
 | `--sf-line-clamp` | ✗ | LOW | Utility concern (defer to utilities) |
-| `--sf-content-min-width` (fluid baseline) | ✗ | LOW | Not needed — `--sf-container-narrow` + 320px min body serves the same purpose |
-| Status colours in palette (numeric scale) | ✗ | LOW | Status already have subtle/strong/muted in core; full numeric expansion not needed |
+| `--sf-content-min-width` (fluid baseline) | ✗ | LOW | Defer to v0.5.0 — `--sf-container-narrow` + 320px min body serves the same purpose today |
+| Status colours in palette (numeric scale) | ✗ | LOW | Defer to v0.5.0 — status already have subtle/strong/muted in core; full numeric expansion not yet needed |
 
 ### 2. Reset
 
@@ -456,7 +456,7 @@ Rejected-on-purpose items live in §D9, not here.
 | `.sr-only-focusable` | ✗ | HIGH | Skip-link alternatives / focus-trap exits |
 | Forced-colors form-element borders | 🟡 | MEDIUM | Inputs lose visible borders in forced-colors |
 | `.no-motion` (manual override, not OS) | ✗ | MEDIUM | Per-element motion suppression |
-| `prefers-reduced-data` (`@supports`) | ✗ | LOW | Draft spec; speculative |
+| `prefers-reduced-data` (`@supports`) | ✗ | LOW | Defer to v0.5.0 — draft spec; revisit when standardised |
 | ARIA live-region considerations | ✗ | LOW | CSS-only can't address; document as consumer responsibility |
 
 ### 10. Print
@@ -467,15 +467,15 @@ Rejected-on-purpose items live in §D9, not here.
 | `.print-only` class | ✗ | MEDIUM | `display:none` normally, `block` in print |
 | `.no-print` standalone documentation | 🟡 | LOW | Exists in hide-list; document explicitly |
 | video/audio in hide-list | 🟡 | LOW | Blank boxes in print; add or document |
-| `@page` named pages | ✗ | LOW | Advanced; defer to v1.x |
-| `page-break-before` utility | ✗ | LOW | Utility concern; defer |
+| `@page` named pages | ✗ | LOW | Defer to v0.5.0 — advanced print control |
+| `page-break-before` utility | ✗ | LOW | Defer to v0.5.0 — utility concern |
 
 ### 11. Legacy
 
 | Item | Status | Priority | Decision / Note |
 |------|--------|----------|-----------------|
-| Container query fallback | ✗ | LOW | Not needed — CQ is baseline 2023 within support floor |
-| `@layer` fallback | ✗ | LOW | Not possible — layers are the foundational architecture |
+| Container query fallback | ✗ | LOW | Defer to v0.5.0 — CQ is baseline 2023 within the support floor, so not needed today |
+| `@layer` fallback | ✗ | LOW | Defer to v0.5.0 — not feasible (layers are the foundational architecture); revisit only if the floor changes |
 
 ### 12. Build & Distribution
 
