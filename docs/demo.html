@@ -754,6 +754,14 @@
           <button id="cz-reset" type="button">Reset all</button>
           <button id="cz-randomize" type="button">Randomize brand</button>
         </div>
+
+        <div id="a11y-report" style="margin-block-start: var(--sf-space-l)">
+          <h3>Accessibility report <span style="font-weight: var(--sf-font-weight-normal); font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">(live, both modes)</span></h3>
+          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
+            WCAG 2 contrast for <strong>your</strong> chosen colours, recomputed live. The framework auto-picks readable on-colours (black/white by lightness) and clamps link lightness — but contrast also depends on chroma, so this panel shows the <em>actual</em> result, including any pairs that fall short. <strong>AA</strong> = 4.5:1 (normal text); <strong>AA Large</strong> = 3:1 (large/UI). Fix a ✗ by adjusting that colour's lightness, or override the on-/text token directly.
+          </p>
+          <div data-a11y-body class="demo-a11y-grid" style="display: grid; grid-template-columns: 1fr auto auto; gap: var(--sf-space-2xs) var(--sf-space-m); font-size: var(--sf-text-s); align-items: center"></div>
+        </div>
       </section>
 
       <!-- ══════════════════════════════════════════════════════
@@ -2398,6 +2406,72 @@
         if (label) label.textContent = input.value;
       }
 
+      // ── Live accessibility report ──────────────────────────
+      // Resolves the *actual* rendered colour of any token in a given mode
+      // (via the pinned probes) and reports WCAG contrast for the key pairs,
+      // so the user sees the accessibility consequences of THEIR colours —
+      // not just the defaults. This is the universal-colour answer: the
+      // framework adapts on-colours/links automatically, and where pure CSS
+      // can't guarantee a ratio, the panel surfaces it.
+      const a11yBody = document.querySelector('[data-a11y-body]');
+      const A11Y_PAIRS = [
+        ['Body text / bg',   '--sf-color-text',             '--sf-color-bg'],
+        ['Heading / bg',     '--sf-color-heading',          '--sf-color-bg'],
+        ['Muted text / bg',  '--sf-color-text--muted',      '--sf-color-bg'],
+        ['Link / bg',        '--sf-color-link',             '--sf-color-bg'],
+        ['Text on primary',  '--sf-color-text--on-primary', '--sf-color-primary'],
+        ['Text on secondary','--sf-color-text--on-secondary','--sf-color-secondary'],
+        ['Text on tertiary', '--sf-color-text--on-tertiary','--sf-color-tertiary'],
+        ['Text on action',   '--sf-color-text--on-action',  '--sf-color-action'],
+        ['Text on success',  '--sf-color-text--on-success', '--sf-color-success'],
+        ['Text on warning',  '--sf-color-text--on-warning', '--sf-color-warning'],
+        ['Text on error',    '--sf-color-text--on-error',   '--sf-color-error'],
+        ['Text on info',     '--sf-color-text--on-info',    '--sf-color-info'],
+        ['Text on danger',   '--sf-color-text--on-danger',  '--sf-color-danger']
+      ];
+
+      function resolveRGB(token, mode) {
+        const probe = probes[mode];
+        probe.style.color = 'initial';
+        probe.style.color = 'var(' + token + ')';
+        ctx.clearRect(0, 0, 1, 1);
+        ctx.fillStyle = '#000';
+        ctx.fillStyle = getComputedStyle(probe).color;
+        ctx.fillRect(0, 0, 1, 1);
+        const d = ctx.getImageData(0, 0, 1, 1).data;
+        return [d[0], d[1], d[2]];
+      }
+      function relLum([r, g, b]) {
+        const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      }
+      function contrastRatio(fgToken, bgToken, mode) {
+        const a = relLum(resolveRGB(fgToken, mode));
+        const b = relLum(resolveRGB(bgToken, mode));
+        return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      }
+      function gradeCell(ratio) {
+        const r = ratio.toFixed(2);
+        let label, color;
+        if (ratio >= 4.5)      { label = '✓ AA';       color = 'var(--sf-color-success-strong)'; }
+        else if (ratio >= 3)   { label = '✓ AA Large'; color = 'var(--sf-color-warning-strong)'; }
+        else                   { label = '✗ Fail';     color = 'var(--sf-color-error-strong)'; }
+        return '<span style="color:' + color + '; white-space:nowrap">' + r + ':1 ' + label + '</span>';
+      }
+      function updateA11y() {
+        if (!a11yBody) return;
+        let html =
+          '<strong>Pair</strong>' +
+          '<strong style="text-align:right">Light</strong>' +
+          '<strong style="text-align:right">Dark</strong>';
+        for (const [name, fg, bg] of A11Y_PAIRS) {
+          html += '<span>' + name + '</span>' +
+            '<span style="text-align:right">' + gradeCell(contrastRatio(fg, bg, 'light')) + '</span>' +
+            '<span style="text-align:right">' + gradeCell(contrastRatio(fg, bg, 'dark')) + '</span>';
+        }
+        a11yBody.innerHTML = html;
+      }
+
       // Refresh every picker from the resolved truth. Dark pickers without an
       // explicit -dark override display the auto-derived value and follow
       // -light edits live.
@@ -2406,6 +2480,7 @@
           input.value = resolvedHex(input.dataset.token);
           syncValueLabel(input);
         });
+        updateA11y();
       }
 
       // ── Performance: throttle syncs to one per animation frame ──

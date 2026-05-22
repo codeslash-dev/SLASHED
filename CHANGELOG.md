@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.9] - 2026-05-22
+
+Universal-colour transparency: a live accessibility report in the demo.
+
+### Added
+
+- Demo Theme Customizer now includes a **live Accessibility report** that
+  computes WCAG 2 contrast (AA / AA-Large / Fail) for 13 key colour pairs in
+  both light and dark mode, recomputed whenever brand colours change. This makes
+  the accessibility consequences of *any* chosen palette visible — including the
+  edges pure-CSS auto-derivation can't guarantee
+- `docs/theming.md` → "How universal is the colour system?" — documents what is
+  fully universal (brand hue/chroma, on-colour text, surfaces), the one
+  structural contract (`base-light` is a light surface), and why CSS alone can't
+  guarantee 4.5:1 for every possible input
+- `tests/demo-a11y-panel.spec.js` — verifies the report renders all pairs, that
+  the default palette passes AA, and that it recomputes on colour change
+
 ## [0.2.8] - 2026-05-22
 
 Robust link contrast under brand overrides.
