@@ -7,6 +7,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 [![release](https://img.shields.io/github/v/release/codeslash-dev/SLASHED?label=version&color=blueviolet&logo=css3)](https://github.com/codeslash-dev/SLASHED/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/codeslash-dev/SLASHED)](LICENSE)
+[![essential bundle](https://img.shields.io/badge/essential-9.7kB%20gzip-brightgreen?logo=css3)](dist/slashed.essential.min.css)
 
 ---
 
@@ -108,7 +109,14 @@ empty stubs: they ship (no-op) only in the `*-components` / `*-utilities` /
 `full` bundles and do nothing until populated.
 
 À la carte is also supported — start from `essential` (or raw `core/`) and add
-hand-picked optional files in any order.
+hand-picked optional files in any order. When building a custom bundle by hand,
+`core/layers.css` (the `@layer` declaration) must load **first** — import it via
+the `slashed/core/layers.css` subpath before anything else.
+
+Each bundle is emitted both readable and minified, with a source map:
+`dist/slashed.<name>.css`, `dist/slashed.<name>.min.css`, and
+`dist/slashed.<name>.min.css.map`. `npm run build` prints raw / gzip / brotli
+sizes for every bundle; `tests/bundle-size.spec.js` guards against bloat.
 
 ## Customising tokens
 

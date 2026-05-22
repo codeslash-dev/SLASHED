@@ -2,9 +2,23 @@
 
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 
 const ROOT = path.resolve(__dirname, '..');
 const CONFIG_PATH = path.join(ROOT, 'bundle.config.json');
+
+// lightningcss is a maintainer-only dev dependency. If it's missing (e.g. a
+// consumer cloned without dev deps), skip minification rather than fail.
+let lightningcss = null;
+try { lightningcss = require('lightningcss'); } catch { /* optional */ }
+
+function sizeReport(buf) {
+  const raw = buf.length;
+  const gz = zlib.gzipSync(buf, { level: 9 }).length;
+  const br = zlib.brotliCompressSync(buf).length;
+  const kb = (n) => `${(n / 1024).toFixed(1)}kB`;
+  return `${kb(raw)} raw · ${kb(gz)} gzip · ${kb(br)} br`;
+}
 
 function resolveInsideRoot(relativePath) {
   const resolved = path.resolve(ROOT, relativePath);
@@ -46,7 +60,25 @@ function buildOne({ files, output }) {
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, result, 'utf8');
 
-  console.log(`[bundle] → ${output} (${files.length} files)`);
+  const unminBuf = Buffer.from(result);
+  console.log(`[bundle] → ${output} (${files.length} files) — ${sizeReport(unminBuf)}`);
+
+  // Minified sibling + source map (modern CSS preserved: no `targets`, so
+  // light-dark()/oklch relative colour syntax is never down-levelled).
+  if (lightningcss) {
+    const minPath = outputPath.replace(/\.css$/, '.min.css');
+    const mapName = `${path.basename(minPath)}.map`;
+    const { code, map } = lightningcss.transform({
+      filename: path.basename(output),
+      code: unminBuf,
+      minify: true,
+      sourceMap: true,
+    });
+    const codeWithRef = Buffer.concat([code, Buffer.from(`\n/*# sourceMappingURL=${mapName} */\n`)]);
+    fs.writeFileSync(minPath, codeWithRef);
+    if (map) fs.writeFileSync(`${minPath}.map`, map);
+    console.log(`[bundle] → ${output.replace(/\.css$/, '.min.css')} — ${sizeReport(codeWithRef)}`);
+  }
 }
 
 function bundle() {

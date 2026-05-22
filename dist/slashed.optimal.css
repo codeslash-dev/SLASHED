@@ -1,4 +1,4 @@
-/* SLASHED v0.2.5 — slashed.optimal.css */
+/* SLASHED v0.2.6 — slashed.optimal.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -246,20 +246,29 @@
     /* ----------------------------------------------------------
        Links — derived from --sf-color-action (auto-adapts)
        ---------------------------------------------------------- */
-    --sf-color-link:            var(--sf-color-action);
+    /* Links darken the action colour in light mode so default link text
+       clears WCAG AA (4.5:1) on the page background; dark mode keeps the
+       auto-lightened action, which already passes on a dark surface. */
+    --sf-color-link:            light-dark(
+      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.12), 1) c h),
+      var(--sf-color-action)
+    );
     --sf-color-link--hover:     light-dark(
-      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.1),  1) c h),
+      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.20), 1) c h),
       oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1),  1) c h)
     );
     --sf-color-link--active:    light-dark(
-      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.15), 1) c h),
+      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.26), 1) c h),
       oklch(from var(--sf-color-action) clamp(0, calc(l + 0.15), 1) c h)
     );
     /* Visited link — 60° hue shift from action gives clearly distinct
        chroma without colliding with default tertiary (h ≈ 310). If your
        brand puts action and tertiary close in hue, override directly:
          :root { --sf-color-link--visited: #6b46c1; } */
-    --sf-color-link--visited:   oklch(from var(--sf-color-action) l c calc(h + 60));
+    --sf-color-link--visited:   light-dark(
+      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.12), 1) c calc(h + 60)),
+      oklch(from var(--sf-color-action) l c calc(h + 60))
+    );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
 

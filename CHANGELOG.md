@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-05-22
+
+Build & test infrastructure (checklist v3 §C.12, §C.13, D10).
+
+### Added
+
+- Minified bundles (`*.min.css`) + source maps (`*.min.css.map`) for every
+  bundle via lightningcss; modern colour syntax is preserved (no down-levelling)
+- `npm run build` now reports raw / gzip / brotli sizes per bundle
+- Cross-browser test matrix — Firefox and WebKit added alongside Chromium in
+  `playwright.config.js`, `test:install`, and CI
+- `tests/a11y.spec.js` — axe-core WCAG 2 A/AA audit (light + dark) against a
+  dedicated `tests/a11y-fixture.html`
+- `tests/bundle-size.spec.js` — gzip-size regression budgets per bundle
+- README bundle-size badge; docs for the minified bundles and the
+  `layers.css`-first rule for custom bundles
+
+### Fixed
+
+- Default link colour now darkens the action colour in light mode so link text
+  meets WCAG AA (4.5:1) on the page background (was 3.43:1); dark mode unchanged.
+  Surfaced by the new axe audit
+- `tests/demo-visual.spec.js` print-href assertion is now browser-aware
+  (Firefox/WebKit report the unresolved `attr(href)` expression)
+
 ## [0.2.5] - 2026-05-22
 
 Documentation sprint (checklist v3 §C.14) — the stated v1.0 gate.

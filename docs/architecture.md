@@ -243,6 +243,12 @@ core/accessibility.css
 core/print.css
 ```
 
+Each bundle is emitted readable **and** minified with a source map
+(`*.css`, `*.min.css`, `*.min.css.map`) via lightningcss; the minifier does
+not down-level modern colour syntax (no `targets`), so `light-dark()` and
+`oklch(from …)` survive. `npm run build` reports raw/gzip/brotli sizes.
+Custom hand-built bundles must load `core/layers.css` first.
+
 Five tiered bundles are declared in `bundle.config.json` and built by
 `scripts/bundle.js`:
 

@@ -1,8 +1,10 @@
 const { defineConfig, devices } = require('@playwright/test');
 
-// Token regression suite. No dev server — the fixture loads the built
-// bundle over file://. Chromium only (relative color syntax + light-dark()
-// + @property are all supported there).
+// Token + a11y regression suite. No dev server — fixtures load the built
+// bundle / demo over file://. The framework leans on bleeding-edge CSS
+// (oklch relative colour, @property inherits, light-dark()), all within the
+// documented support floor for Chromium, Firefox, and WebKit — so the suite
+// runs on all three.
 module.exports = defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -12,5 +14,7 @@ module.exports = defineConfig({
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 });
