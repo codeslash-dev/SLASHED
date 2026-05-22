@@ -1,0 +1,54 @@
+/* ============================================================
+   SLASHED — optional/theme-example.css   (COPY & CUSTOMISE)
+   @layer slashed.themes
+
+   A worked example of the "rebrand in 6 tokens" workflow. This file
+   is NOT part of any bundle — copy it into your project, rename it,
+   and edit the values. Everything else (dark mode, surfaces, text,
+   status tints, on-colours) auto-derives from these source tokens.
+
+   See README "Customising tokens" and docs/theming.md.
+   ============================================================ */
+
+@layer slashed.themes {
+
+  /* ---- 1. Quick rebrand: override the 6 -light source tokens ----
+     Dark mode auto-derives via relative colour syntax. Any valid CSS
+     colour works (hex, oklch, hsl, …). */
+  :root {
+    --sf-color-primary-light:   oklch(0.55 0.18 280);  /* brand / links     */
+    --sf-color-secondary-light: oklch(0.30 0.04 280);  /* muted brand        */
+    --sf-color-tertiary-light:  oklch(0.62 0.15 200);  /* accent             */
+    --sf-color-action-light:    oklch(0.62 0.16 150);  /* primary CTA        */
+    --sf-color-neutral-light:   oklch(0.45 0.01 280);  /* greys / text base  */
+    --sf-color-base-light:      oklch(0.99 0.004 280); /* page surface       */
+  }
+
+  /* ---- 2. Optional: take full control of dark mode ----
+     Only needed when the auto-derived dark value isn't what you want. */
+  :root {
+    --sf-color-primary-dark: oklch(0.78 0.16 280);
+  }
+
+  /* ---- 3. Multi-brand: scope a different palette to a subtree ----
+     Nest [data-brand] (or any selector) and re-declare the 6 tokens.
+     The architecture allows unlimited scoped palettes. */
+  [data-brand="sunset"] {
+    --sf-color-primary-light: oklch(0.62 0.20 35);
+    --sf-color-action-light:  oklch(0.70 0.18 60);
+  }
+
+  /* ---- 4. Optional: smooth colour change when toggling themes ----
+     Opt-in only — transitioning every colour globally is a perf
+     footgun, so it's scoped to a class you add to <html> while a
+     toggle is in flight (remove it afterwards). Pairs with the
+     ::view-transition(root) animation already shipped in motion.css. */
+  .theme-transition,
+  .theme-transition * {
+    transition:
+      color            var(--sf-duration-normal) var(--sf-ease-out),
+      background-color var(--sf-duration-normal) var(--sf-ease-out),
+      border-color     var(--sf-duration-normal) var(--sf-ease-out);
+  }
+
+}

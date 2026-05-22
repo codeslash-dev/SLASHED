@@ -44,6 +44,7 @@ core/
 optional/
   tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors)
   tokens.components.css   slashed.tokens  (component-level tokens — empty stub)
+  theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
   components.css          slashed.components  (empty stub)
   utilities.css           slashed.utilities  (empty stub)

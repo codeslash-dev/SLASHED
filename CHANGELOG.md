@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-05-22
+
+Accessibility, print, and theming (checklist v3 §C.7, §C.9, §C.10).
+
+### Added
+
+- Accessibility: `.no-motion` (consumer-toggled motion opt-out, independent of
+  the OS setting); forced-colors now re-asserts form-control borders so fields
+  stay distinguishable; `prefers-contrast: more` now also raises
+  `--sf-contrast-bias` to darken/lighten reading text
+- Print: `.print-only` (hidden on screen, shown on paper); `audio`/`video` added
+  to the print hide-list
+- Themes: `optional/theme-example.css` — a copy-and-customise "rebrand in 6
+  tokens" example covering quick rebrand, per-mode dark control, multi-brand
+  scoping (`[data-brand]`), and an opt-in theme-transition class (not bundled)
+
+### Changed
+
+- `core/themes.css` documents multi-brand scoping and the
+  `startViewTransition()` theme-toggle pattern
+
 ## [0.2.3] - 2026-05-22
 
 State and motion primitives (checklist v3 §C.6, §C.8).

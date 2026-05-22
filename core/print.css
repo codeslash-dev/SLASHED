@@ -30,6 +30,11 @@
 
 @layer slashed.print {
 
+  /* Screen default: print-only content is hidden until the page is printed. */
+  .print-only {
+    display: none;
+  }
+
   @media print {
 
     @page {
@@ -100,8 +105,13 @@
        in print, and consumer-authored display rules must not bring them
        back accidentally. */
     nav, aside, button, input, select, textarea,
-    dialog, [popover], .no-print {
+    audio, video, dialog, [popover], .no-print {
       display: none !important;
+    }
+
+    /* Reveal print-only content (overrides the screen default above). */
+    .print-only {
+      display: revert !important;
     }
 
     /* Preserve <details> content regardless of open state. Only

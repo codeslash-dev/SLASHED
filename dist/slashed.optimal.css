@@ -1,4 +1,4 @@
-/* SLASHED v0.2.3 — slashed.optimal.css */
+/* SLASHED v0.2.4 — slashed.optimal.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -1307,6 +1307,16 @@
    The base color-scheme: var(--sf-color-scheme, light dark)
    declaration lives in core/reset.css and provides the baseline.
    This layer flips it.
+
+   MULTI-BRAND — scope a palette to any subtree by re-declaring the 6
+   source tokens under a selector (e.g. [data-brand="x"]). See
+   optional/theme-example.css and docs/theming.md.
+
+   THEME TRANSITION — toggling [data-theme] via document.startViewTransition()
+   animates through the ::view-transition(root) rules in core/motion.css.
+   For a plain cross-fade of colours, opt into a transition class on <html>
+   (example in optional/theme-example.css) — never transition every colour
+   globally and permanently (perf footgun).
    ─────────────────────────────────────────────────── */
 
 @layer slashed.themes {
@@ -2335,6 +2345,19 @@
     }
   }
 
+  /* Manual motion opt-out — same suppression as the OS preference above,
+     but consumer-toggled (e.g. a site-level "reduce motion" switch). Works
+     regardless of the OS setting. */
+  .no-motion,
+  .no-motion *,
+  .no-motion *::before,
+  .no-motion *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+
   /* ----------------------------------------------------------
      High contrast — enhancement, not a barrier. Left normal:
      if overridden the focus ring still exists, just thinner.
@@ -2342,6 +2365,9 @@
   @media (prefers-contrast: more) {
     :root {
       --sf-focus-ring-width: 3px;
+      /* Push derived reading-text colours toward the extremes (see the
+         --sf-contrast-bias knob in tokens.css). */
+      --sf-contrast-bias: 0.06;
     }
 
     hr {
@@ -2446,6 +2472,15 @@
       box-shadow:  none;
       text-shadow: none;
     }
+
+    /* Form controls otherwise lose their visible boundary in forced-colors
+       (their token-driven border colour is replaced by the system canvas).
+       Re-assert a system-coloured border so fields stay distinguishable. */
+    input,
+    select,
+    textarea {
+      border: var(--sf-border-width-1) solid;
+    }
   }
 
 }
@@ -2482,6 +2517,11 @@
    ─────────────────────────────────────────────────── */
 
 @layer slashed.print {
+
+  /* Screen default: print-only content is hidden until the page is printed. */
+  .print-only {
+    display: none;
+  }
 
   @media print {
 
@@ -2553,8 +2593,13 @@
        in print, and consumer-authored display rules must not bring them
        back accidentally. */
     nav, aside, button, input, select, textarea,
-    dialog, [popover], .no-print {
+    audio, video, dialog, [popover], .no-print {
       display: none !important;
+    }
+
+    /* Reveal print-only content (overrides the screen default above). */
+    .print-only {
+      display: revert !important;
     }
 
     /* Preserve <details> content regardless of open state. Only
