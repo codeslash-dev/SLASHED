@@ -34,6 +34,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          # Don't write GITHUB_TOKEN into .git/config; the build steps
+          # (npm install, npm run build) shouldn't have implicit push
+          # credentials. We re-authenticate explicitly at push time below.
+          persist-credentials: false
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -63,6 +67,10 @@ jobs:
 
       - name: Force-push dist branch
         env:
+          # Scoped to this step only — checkout was started with
+          # persist-credentials: false, so GITHUB_TOKEN never landed in
+          # .git/config and never leaked into the build/install steps.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: github-actions[bot]
           GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GIT_COMMITTER_NAME: github-actions[bot]
@@ -77,4 +85,6 @@ jobs:
           cp -R /tmp/sf-dist/. .
           git add -A
           git commit -m "build: dist for ${GITHUB_SHA}"
-          git push --force origin dist
+          git push --force \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            dist
