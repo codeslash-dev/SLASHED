@@ -20,6 +20,23 @@
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
+  /* -- Divider -------------------------------------------------
+     Standalone separator primitive. Token-driven; pairs with the
+     `--sf-divider-*` tokens and mirrors the `hr` element default.
+     ---------------------------------------------------------- */
+  .sf-divider {
+    border:             none;
+    border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+    margin-block:       var(--sf-space-m);
+  }
+  .sf-divider--vertical {
+    border-block-start:  none;
+    border-inline-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+    margin-block:        0;
+    margin-inline:       var(--sf-space-m);
+    align-self:          stretch;
+  }
+
   /* -- Container -----------------------------------------------
      Max-width container, centered with side gutters. Establishes
      a named inline-size container `sf-layout` so children can

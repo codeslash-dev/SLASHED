@@ -9,6 +9,7 @@ Declared once in `core/layers.css`:
   slashed.tokens,
   slashed.reset,
   slashed.base,
+  slashed.forms,
   slashed.layout,
   slashed.components,
   slashed.utilities,
@@ -43,6 +44,7 @@ core/
 optional/
   tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors)
   tokens.components.css   slashed.tokens  (component-level tokens — empty stub)
+  forms.css               slashed.forms  (classless native form-control styling)
   components.css          slashed.components  (empty stub)
   utilities.css           slashed.utilities  (empty stub)
   legacy.css              slashed.legacy
@@ -60,7 +62,28 @@ the README Quick start.
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
-**slashed.base** — element defaults. All values via `var()`.
+**slashed.base** — element defaults, all values via `var()`. A minimal,
+readable foundation for flow and inline text — **not** a classless UI kit.
+SLASHED is BEM-first: the token API is the product, and the base holds the
+line at three tiers:
+
+- *Global base* — flow/inline readability: headings, `p`, `a`, `code`,
+  `pre`, `mark`, `hr`, `sub`/`sup`, `abbr`, `::selection`.
+- *Rich blocks* (`table`, `blockquote`, `figure`, `dl`) — styled **only
+  inside `.sf-prose`** (a layout primitive), never globally.
+- *Interactive widgets* (`dialog`, `details`, `progress`, `meter`) —
+  consumer/component territory (future `components` layer); `core` carries
+  reset-level normalization only.
+
+Native form controls are out of base entirely — they live in the opt-in
+`slashed.forms` layer.
+
+**slashed.forms** — opt-in classless styling for native form controls
+(`input`, `select`, `textarea`, `button`, checkbox/radio, `fieldset`,
+`label`) from `optional/forms.css`. Element-level only, no classes. Reads
+`--sf-field-border-color` so the `.is-*` validation states in
+`slashed.states` recolour fields. Skip the file entirely if you prefer full
+BEM control.
 
 **slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-prose`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
 
@@ -125,6 +148,7 @@ slashed.states
 slashed.utilities
 slashed.components
 slashed.layout
+slashed.forms
 slashed.base
 slashed.reset
 slashed.tokens               lowest
@@ -188,9 +212,11 @@ core/print.css
 ```
 
 The full bundle (`dist/slashed.full.css`) adds the populated optional files
-(`optional/tokens.palette.css`, then `optional/legacy.css` last). The empty
-`components`/`utilities`/`tokens.components` files are not bundled. Bundles are
-declared in `bundle.config.json` and built by `scripts/bundle.js`.
+(`optional/tokens.palette.css`, `optional/forms.css`, then `optional/legacy.css`
+last). The empty `components`/`utilities`/`tokens.components` files are not
+bundled. Bundles are declared in `bundle.config.json` and built by
+`scripts/bundle.js`. Because every rule sits in an `@layer`, concatenation order
+within a bundle does not affect the cascade — `core/layers.css` fixes it.
 
 ---
 

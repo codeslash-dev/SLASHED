@@ -37,6 +37,10 @@
       margin: var(--sf-print-page-margin, 2cm);
     }
 
+    body {
+      font-size: var(--sf-print-base-size);
+    }
+
     /* Decorative shadows are paper-noise. No `!important` — an authored
        shadow that explicitly survives into print is the consumer's call. */
     *,

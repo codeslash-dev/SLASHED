@@ -1,4 +1,4 @@
-/* SLASHED v0.1.0 — slashed.full.css */
+/* SLASHED v0.2.0 — slashed.full.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -142,12 +142,12 @@
        so each side of light-dark() references its source token.
        ---------------------------------------------------------- */
     --sf-color-text: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25), 1)    c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
     --sf-color-text--secondary: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25), 0.45) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1),  0.90) c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h)
     );
     --sf-color-text--muted: var(--sf-color-neutral);
     --sf-color-text--placeholder: light-dark(
@@ -163,8 +163,8 @@
       oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
     );
     --sf-color-heading: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4),  0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25), 1)    c h)
+      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
 
 
@@ -512,6 +512,14 @@
     --sf-border-width-3:        3px;
     --sf-border-width-4:        4px;
 
+    /* ----------------------------------------------------------
+       Divider — global separator system. Drives `hr` (base) and
+       the `.sf-divider` layout primitive.
+       ---------------------------------------------------------- */
+    --sf-divider-width: var(--sf-border-width-1);
+    --sf-divider-style: solid;
+    --sf-divider-color: var(--sf-color-border);
+
 
     /* ----------------------------------------------------------
        Border radius
@@ -663,6 +671,10 @@
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
     --sf-touch-target:      var(--sf-size-l);
+    /* Global text-contrast knob. Nudges derived reading-text colours
+       toward the extremes (darker in light mode, lighter in dark mode).
+       Positive = more contrast; 0 = no change. Consumed by
+       --sf-color-text, --sf-color-text--secondary, --sf-color-heading. */
     --sf-contrast-bias:     0;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);
@@ -701,7 +713,7 @@
     --sf-body-font-family:   var(--sf-font-body);
     --sf-body-color:         var(--sf-color-text);
     --sf-body-text-wrap:     pretty;
-    --sf-body-strong-weight: var(--sf-font-weight-heading);
+    --sf-body-strong-weight: var(--sf-font-weight-bold);
     --sf-body-em-style:      italic;
 
     --sf-heading-font-family: var(--sf-font-heading);
@@ -1056,31 +1068,34 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family:       var(--sf-heading-font-family, var(--sf-font-heading));
-    font-weight:       var(--sf-font-weight-heading);
     line-height:       var(--sf-leading-tight);
     color:             var(--sf-heading-color, var(--sf-color-heading));
-    text-wrap:         balance;
+    text-wrap:         var(--sf-heading-text-wrap);
     overflow-wrap:     break-word;
     text-rendering:    optimizelegibility;
     scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
   }
 
-  h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); letter-spacing: var(--sf-h1-letter-spacing); }
-  h2 { font-size: var(--sf-h2-size); line-height: var(--sf-h2-line-height); letter-spacing: var(--sf-h2-letter-spacing); }
-  h3 { font-size: var(--sf-h3-size); line-height: var(--sf-h3-line-height); letter-spacing: var(--sf-h3-letter-spacing); }
-  h4 { font-size: var(--sf-h4-size); line-height: var(--sf-h4-line-height); letter-spacing: var(--sf-h4-letter-spacing); }
-  h5 { font-size: var(--sf-h5-size); line-height: var(--sf-h5-line-height); letter-spacing: var(--sf-h5-letter-spacing); }
-  h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); letter-spacing: var(--sf-h6-letter-spacing); }
+  h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); }
+  h2 { font-size: var(--sf-h2-size); line-height: var(--sf-h2-line-height); font-weight: var(--sf-h2-font-weight); letter-spacing: var(--sf-h2-letter-spacing); }
+  h3 { font-size: var(--sf-h3-size); line-height: var(--sf-h3-line-height); font-weight: var(--sf-h3-font-weight); letter-spacing: var(--sf-h3-letter-spacing); }
+  h4 { font-size: var(--sf-h4-size); line-height: var(--sf-h4-line-height); font-weight: var(--sf-h4-font-weight); letter-spacing: var(--sf-h4-letter-spacing); }
+  h5 { font-size: var(--sf-h5-size); line-height: var(--sf-h5-line-height); font-weight: var(--sf-h5-font-weight); letter-spacing: var(--sf-h5-letter-spacing); }
+  h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); font-weight: var(--sf-h6-font-weight); letter-spacing: var(--sf-h6-letter-spacing); }
 
   p {
-    text-wrap:     pretty;
+    text-wrap:     var(--sf-body-text-wrap);
     overflow-wrap: break-word;
     orphans:       2;
     widows:        2;
   }
 
   b, strong {
-    font-weight: var(--sf-font-weight-bold, bold);
+    font-weight: var(--sf-body-strong-weight);
+  }
+
+  em {
+    font-style: var(--sf-body-em-style);
   }
 
   small {
@@ -1166,7 +1181,7 @@
 
   hr {
     border:             none;
-    border-block-start: var(--sf-border-width-1, 1px) solid var(--sf-color-border);
+    border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
   }
 
   :target {
@@ -1272,6 +1287,23 @@
   .sf-section--xl { padding-block: var(--sf-section-pad--xl); }
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
+
+  /* -- Divider -------------------------------------------------
+     Standalone separator primitive. Token-driven; pairs with the
+     `--sf-divider-*` tokens and mirrors the `hr` element default.
+     ---------------------------------------------------------- */
+  .sf-divider {
+    border:             none;
+    border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+    margin-block:       var(--sf-space-m);
+  }
+  .sf-divider--vertical {
+    border-block-start:  none;
+    border-inline-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+    margin-block:        0;
+    margin-inline:       var(--sf-space-m);
+    align-self:          stretch;
+  }
 
   /* -- Container -----------------------------------------------
      Max-width container, centered with side gutters. Establishes
@@ -2206,7 +2238,8 @@
      content. All-or-nothing, so the whole set is hardened.
      ---------------------------------------------------------- */
   .sr-only,
-  .visually-hidden {
+  .visually-hidden,
+  .sr-only-focusable:not(:focus, :focus-within) {
     position:    absolute            !important;
     width:       1px                 !important;
     height:      1px                 !important;
@@ -2301,6 +2334,10 @@
     @page {
       size:   var(--sf-print-page-size, a4);
       margin: var(--sf-print-page-margin, 2cm);
+    }
+
+    body {
+      font-size: var(--sf-print-base-size);
     }
 
     /* Decorative shadows are paper-noise. No `!important` — an authored
@@ -2686,6 +2723,220 @@
     --sf-color-base-ghost:  var(--sf-color-base-a5);
 
   }
+}
+
+/* ─── optional/forms.css ─── */
+/* ============================================================
+   SLASHED — optional/forms.css
+   @layer slashed.forms
+
+   Classless form styling — opt-in element-level defaults for
+   <input>, <select>, <textarea>, and <button> without any classes.
+
+   USAGE:
+     @import 'slashed/optional/forms.css';
+     — or include in a custom bundle via bundle.config.json.
+
+   PHILOSOPHY:
+     This file is OPTIONAL. SLASHED core does not style native form
+     elements beyond reset (font-inherit, box-sizing). If you prefer
+     full control via BEM components, skip this file entirely.
+
+   TOKENS CONSUMED:
+     --sf-radius-m, --sf-border-width-1, --sf-color-border,
+     --sf-color-border--focus, --sf-color-border--subtle,
+     --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
+     --sf-color-text--disabled, --sf-color-text--on-action,
+     --sf-color-bg--disabled, --sf-color-action, --sf-color-error,
+     --sf-field-border-color, --sf-opacity-disabled,
+     --sf-space-xs, --sf-space-s, --sf-space-m,
+     --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
+     --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
+     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset,
+     --sf-field-required-marker
+
+   STATE INTEGRATION:
+     The shared field border reads --sf-field-border-color (set by the
+     `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
+     .is-danger` classes in core/states.css), falling back to
+     --sf-color-border. Add a validation `.is-*` class to recolour a field.
+   ============================================================ */
+
+@layer slashed.forms {
+
+  /* ----------------------------------------------------------
+     Shared base for text-like inputs, select, textarea
+     ---------------------------------------------------------- */
+  input:where(
+    [type="text"], [type="email"], [type="password"], [type="url"],
+    [type="tel"], [type="number"], [type="search"], [type="date"],
+    [type="datetime-local"], [type="month"], [type="week"],
+    [type="time"], [type="color"], :not([type])
+  ),
+  select,
+  textarea {
+    display: block;
+    inline-size: 100%;
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-s);
+    font-size: var(--sf-text-m);
+    line-height: var(--sf-leading-normal);
+    color: var(--sf-color-text);
+    background-color: var(--sf-color-surface);
+    border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
+    border-radius: var(--sf-radius-m);
+    transition: var(--sf-transition-colors),
+                border-color var(--sf-duration-fast) var(--sf-ease-out);
+  }
+
+  /* Focus */
+  input:where(
+    [type="text"], [type="email"], [type="password"], [type="url"],
+    [type="tel"], [type="number"], [type="search"], [type="date"],
+    [type="datetime-local"], [type="month"], [type="week"],
+    [type="time"], [type="color"], :not([type])
+  ):focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* Disabled */
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    background-color: var(--sf-color-bg--disabled);
+    color: var(--sf-color-text--disabled);
+    opacity: var(--sf-opacity-disabled);
+    cursor: not-allowed;
+  }
+
+  /* Placeholder */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--sf-color-text--placeholder);
+    opacity: 1;
+  }
+
+
+  /* ----------------------------------------------------------
+     Textarea specifics
+     ---------------------------------------------------------- */
+  textarea {
+    min-block-size: 6rem;
+  }
+
+
+  /* ----------------------------------------------------------
+     Select
+     ---------------------------------------------------------- */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--sf-space-s) center;
+    background-size: 1em;
+    padding-inline-end: calc(var(--sf-space-s) + 1.5em);
+  }
+
+
+  /* ----------------------------------------------------------
+     Button / submit / reset
+     ---------------------------------------------------------- */
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sf-space-xs);
+    padding-block: var(--sf-space-xs);
+    padding-inline: var(--sf-space-m);
+    font-size: var(--sf-text-m);
+    font-weight: var(--sf-font-weight-heading);
+    line-height: var(--sf-leading-normal);
+    color: var(--sf-color-text--on-action);
+    background-color: var(--sf-color-action);
+    border: var(--sf-border-width-1) solid transparent;
+    border-radius: var(--sf-radius-m);
+    cursor: pointer;
+    transition: var(--sf-transition-colors);
+    text-decoration: none;
+  }
+
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover,
+  input[type="button"]:hover {
+    background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
+  }
+
+  button:focus-visible,
+  input[type="submit"]:focus-visible,
+  input[type="reset"]:focus-visible,
+  input[type="button"]:focus-visible {
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  button:disabled,
+  input[type="submit"]:disabled,
+  input[type="reset"]:disabled,
+  input[type="button"]:disabled {
+    opacity: var(--sf-opacity-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+
+  /* ----------------------------------------------------------
+     Checkbox & radio — minimal accent styling
+     ---------------------------------------------------------- */
+  input[type="checkbox"],
+  input[type="radio"] {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+    accent-color: var(--sf-color-action);
+    cursor: pointer;
+  }
+
+
+  /* ----------------------------------------------------------
+     Fieldset & legend
+     ---------------------------------------------------------- */
+  fieldset {
+    border: var(--sf-border-width-1) solid var(--sf-color-border--subtle);
+    border-radius: var(--sf-radius-m);
+    padding: var(--sf-space-m);
+  }
+
+  legend {
+    font-weight: var(--sf-font-weight-heading);
+    padding-inline: var(--sf-space-xs);
+  }
+
+
+  /* ----------------------------------------------------------
+     Label
+     ---------------------------------------------------------- */
+  label {
+    display: block;
+    font-weight: var(--sf-font-weight-heading);
+    margin-block-end: var(--sf-space-xs);
+  }
+
+  /* Required-field marker — classless, no markup convention.
+     Covers both <label>Name <input required></label> and
+     <label>Name</label><input required>. */
+  label:has(:required)::after,
+  label:has(+ :required)::after {
+    content: var(--sf-field-required-marker, " *");
+    color: var(--sf-color-error);
+  }
+
 }
 
 /* ─── optional/legacy.css ─── */

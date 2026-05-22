@@ -111,7 +111,8 @@
      content. All-or-nothing, so the whole set is hardened.
      ---------------------------------------------------------- */
   .sr-only,
-  .visually-hidden {
+  .visually-hidden,
+  .sr-only-focusable:not(:focus, :focus-within) {
     position:    absolute            !important;
     width:       1px                 !important;
     height:      1px                 !important;

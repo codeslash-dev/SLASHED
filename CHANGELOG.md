@@ -6,6 +6,50 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-05-22
+
+Foundation polish from `audits/completion-checklist-v3.md` (§F v0.2): wire up
+declared-but-unused base/print tokens, fix two real form bugs, ship the
+previously-unbundled `optional/forms.css`, and close the `slashed.forms` /
+base-scope documentation gaps.
+
+### Added
+
+- `em` base rule consuming `--sf-body-em-style`; per-heading `font-weight`
+  wiring (`--sf-h1-font-weight`…`--sf-h6-font-weight`) and `text-wrap` wiring
+  (`--sf-heading-text-wrap`, `--sf-body-text-wrap`) in `core/base.css` — tokens
+  that previously advertised control the base ignored (D2)
+- `--sf-contrast-bias` is now a real global text-contrast knob, folded into
+  `--sf-color-text`, `--sf-color-text--secondary`, and `--sf-color-heading`
+  (default `0` = no change) (D3)
+- `--sf-divider-width` / `--sf-divider-style` / `--sf-divider-color` tokens and
+  a `.sf-divider` (+ `.sf-divider--vertical`) layout primitive; `hr` now reads
+  the divider tokens
+- `.sr-only-focusable` accessibility helper (visually hidden until focused)
+- Required-field asterisk in `optional/forms.css` — classless `:has()` +
+  `:required`, customisable via `--sf-field-required-marker` (D8)
+- `optional/forms.css` now ships in the `slashed.full.css` bundle (D5, bundle
+  half); `slashed.forms` layer and the universal-base scope rule documented in
+  `README.md` and `docs/architecture.md` (D1, D5)
+
+### Changed
+
+- `--sf-body-strong-weight` default corrected to `--sf-font-weight-bold` (700)
+  before being wired, so `<strong>` is not silently downweighted to 600 (D2)
+- `optional/forms.css` shared field border now reads `--sf-field-border-color`,
+  so the `.is-*` validation states in `core/states.css` recolour native inputs
+  (D6)
+- `core/print.css` consumes `--sf-print-base-size` on `body` in `@media print`
+  (D4)
+
+### Fixed
+
+- Primary-button `:hover` no longer swaps the solid action fill for the
+  surface-hover tint and dark text; it now darkens the action colour
+  (`oklch(from var(--sf-color-action) calc(l - 0.05) c h)`) (D7)
+- Removed duplicate `textarea { resize: vertical }` from `optional/forms.css`
+  (owned by `core/reset.css`)
+
 ## [0.1.0] - 2026-05-21
 
 ### Added

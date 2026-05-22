@@ -19,11 +19,19 @@
      --sf-color-border--focus, --sf-color-border--subtle,
      --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
      --sf-color-text--disabled, --sf-color-text--on-action,
-     --sf-color-bg--disabled, --sf-color-bg--hover, --sf-color-action,
-     --sf-opacity-disabled, --sf-space-xs, --sf-space-s, --sf-space-m,
+     --sf-color-bg--disabled, --sf-color-action, --sf-color-error,
+     --sf-field-border-color, --sf-opacity-disabled,
+     --sf-space-xs, --sf-space-s, --sf-space-m,
      --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
      --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
-     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset
+     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset,
+     --sf-field-required-marker
+
+   STATE INTEGRATION:
+     The shared field border reads --sf-field-border-color (set by the
+     `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
+     .is-danger` classes in core/states.css), falling back to
+     --sf-color-border. Add a validation `.is-*` class to recolour a field.
    ============================================================ */
 
 @layer slashed.forms {
@@ -47,7 +55,7 @@
     line-height: var(--sf-leading-normal);
     color: var(--sf-color-text);
     background-color: var(--sf-color-surface);
-    border: var(--sf-border-width-1) solid var(--sf-color-border);
+    border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
     border-radius: var(--sf-radius-m);
     transition: var(--sf-transition-colors),
                 border-color var(--sf-duration-fast) var(--sf-ease-out);
@@ -90,7 +98,6 @@
      ---------------------------------------------------------- */
   textarea {
     min-block-size: 6rem;
-    resize: vertical;
   }
 
 
@@ -136,8 +143,7 @@
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover {
-    background-color: var(--sf-color-bg--hover);
-    color: var(--sf-color-text);
+    background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
   }
 
   button:focus-visible,
@@ -192,6 +198,15 @@
     display: block;
     font-weight: var(--sf-font-weight-heading);
     margin-block-end: var(--sf-space-xs);
+  }
+
+  /* Required-field marker — classless, no markup convention.
+     Covers both <label>Name <input required></label> and
+     <label>Name</label><input required>. */
+  label:has(:required)::after,
+  label:has(+ :required)::after {
+    content: var(--sf-field-required-marker, " *");
+    color: var(--sf-color-error);
   }
 
 }

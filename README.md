@@ -30,6 +30,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
 <!-- optional (populated) -->
 <link rel="stylesheet" href="optional/tokens.palette.css">
+<link rel="stylesheet" href="optional/forms.css">
 <link rel="stylesheet" href="optional/legacy.css">
 ```
 
@@ -52,7 +53,7 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ## Cascade layer order
 
 ```text
-slashed.tokens → reset → base → layout → components → utilities →
+slashed.tokens → reset → base → forms → layout → components → utilities →
 states → themes → motion → accessibility → print → legacy → overrides
 ```
 
@@ -60,6 +61,25 @@ Declared in `core/layers.css`. Later layers win. `slashed.overrides`
 is reserved for your own overrides and sits last so it always wins.
 `slashed.legacy` sits just before it; its rules are gated by
 `@supports not (...)` and are inert on modern engines.
+
+`slashed.forms` (between `base` and `layout`) holds the opt-in
+classless form styling from `optional/forms.css`.
+
+## Scope of the base layer
+
+The `base` layer is a minimal, readable foundation — **not** a classless
+UI kit. SLASHED is BEM-first: the token API is the product, and consumers
+build components on top of it. The line we hold:
+
+- **Global base** — flow and inline text for readability: headings, `p`,
+  `a`, `code`, `pre`, `mark`, `hr`, `sub`/`sup`, `abbr`, `::selection`.
+- **Rich blocks** (`table`, `blockquote`, `figure`, `dl`) — styled **only
+  inside `.sf-prose`**, not globally.
+- **Interactive widgets** (`dialog`, `details`, `progress`, `meter`) —
+  consumer BEM territory (a future `components` layer); `core` carries
+  reset-level normalization only.
+- **Native form controls** — opt-in via `optional/forms.css`
+  (the `slashed.forms` layer).
 
 ## Token file rule
 
@@ -72,7 +92,7 @@ the `slashed.tokens` layer.
 | Bundle | Contents |
 | --- | --- |
 | `slashed.essential.css` | `layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print` |
-| `slashed.full.css` | essential + `tokens.palette` + `legacy` |
+| `slashed.full.css` | essential + `tokens.palette` + `forms` + `legacy` |
 
 The empty stub files (`optional/components.css`, `optional/utilities.css`,
 `optional/tokens.components.css`) are intentionally not bundled.

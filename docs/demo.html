@@ -1436,6 +1436,17 @@
           <div class="sf-section--s" style="background: var(--sf-color-tertiary-100, color-mix(in oklch, var(--sf-color-tertiary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section B (--s padding)</div>
         </div>
 
+        <h3>.sf-divider</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Token-driven separator (<code>--sf-divider-width/-style/-color</code>). Horizontal by default; <code>.sf-divider--vertical</code> for inline use.</p>
+        <p style="font-size: var(--sf-text-s)">Content above the divider.</p>
+        <hr class="sf-divider">
+        <p style="font-size: var(--sf-text-s)">Content below the divider.</p>
+        <div class="sf-cluster" style="align-items: stretch; min-height: 3rem; font-size: var(--sf-text-s)">
+          <span>Left</span>
+          <span class="sf-divider--vertical" role="separator" aria-orientation="vertical"></span>
+          <span>Right</span>
+        </div>
+
         <h3>.sf-cover modifiers</h3>
         <div class="sf-cluster sf-cluster--l" style="align-items: flex-start">
           <div>
