@@ -335,7 +335,7 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 
 - **Severity:** nit
 - **Category:** Reduced-motion gating
-- **Evidence:** `core/motion.css:21-62` -- all .sf-* animation classes inside `@media (prefers-reduced-motion: no-preference)` block; `core/accessibility.css:42-54` additionally kills duration via !important
+- **Evidence:** `core/motion.css:21-62` -- all `.sf-*` animation classes inside `@media (prefers-reduced-motion: no-preference)` block; `core/accessibility.css:42-54` additionally kills duration via !important
 - **Compared to:** Pico CSS -- reduced-motion honored ([docs](https://picocss.com/docs)); Tailwind -- motion-safe/motion-reduce variants ([docs](https://tailwindcss.com/docs/hover-focus-and-other-states#prefers-reduced-motion))
 - **Impact:** Double-gated: animations only apply in no-preference AND accessibility.css can kill them independently. Fully compliant.
 - **Recommendation:** No action needed. Document the dual-gating strategy in docs/performance.md
@@ -395,10 +395,10 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 
 - **Severity:** medium
 - **Category:** Demo coverage
-- **Evidence:** `docs/demo.html` -- would need full comparison against all .sf-* and .is-* classes; `tests/coverage.spec.js` exists suggesting automated coverage checking
+- **Evidence:** `docs/demo.html` -- would need full comparison against all `.sf-*` and `.is-*` classes; `tests/coverage.spec.js` exists suggesting automated coverage checking
 - **Compared to:** Pico CSS -- full demo page covers all components ([docs](https://picocss.com/docs)); Bulma -- every component has a demo ([docs](https://bulma.io/documentation/))
 - **Impact:** Untested classes may have rendering bugs that go unnoticed until consumer reports
-- **Recommendation:** Expand demo.html to include every .sf-* layout class and .is-* state class; automate with coverage.spec.js
+- **Recommendation:** Expand demo.html to include every `.sf-*` layout class and `.is-*` state class; automate with coverage.spec.js
 - **Effort:** M
 
 ---
@@ -952,7 +952,7 @@ All `--sf-*` custom properties with their default values. Source: `core/tokens.c
 | `core/base.css` | Element-level base styling | 157 |
 | `core/themes.css` | Dark/light theme switching | 53 |
 | `core/layout.css` | Layout primitives (20+ patterns) | 412 |
-| `core/states.css` | State classes (.is-*) | 283 |
+| `core/states.css` | State classes (`.is-*`) | 283 |
 | `core/motion.css` | Animations, transitions, keyframes | 100 |
 | `core/accessibility.css` | A11y rules (focus, motion, contrast, forced-colors) | 172 |
 | `core/print.css` | Print stylesheet | 133 |
@@ -996,10 +996,10 @@ All 20 mandatory checkpoints addressed within the findings above:
 | 6 | Container query safety | PASS | No percentage heights inside container-type elements found; F-11 confirms |
 | 7 | Accessibility completeness | PASS | :focus-visible on all interactive (`core/accessibility.css:23`); all animations gated by prefers-reduced-motion (`core/accessibility.css:42-48` + `core/motion.css:21`) |
 | 8 | Print completeness | PASS | @page with physical units 2cm (`core/print.css:39`); links expanded (`core/print.css:56-60`) |
-| 9 | Reduced-motion gating | PASS | Every animation/transition gated: motion.css wraps in no-preference; accessibility.css kills duration via !important on *, *::before, *::after |
+| 9 | Reduced-motion gating | PASS | Every animation/transition gated: motion.css wraps in no-preference; accessibility.css kills duration via !important on `*, *::before, *::after` |
 | 10 | Legacy layer correctness | PASS | All rules under `@supports not (...)` (`optional/legacy.css:43,58,75`) |
 | 11 | Demo coverage | PARTIAL | F-27 notes demo.html may not exercise all classes; coverage.spec.js exists |
-| 12 | Naming consistency | PASS | .sf-* for layout (core/layout.css), .is-* for states (core/states.css), --sf-* for tokens; exception: .focus-parent (documented intentional) |
+| 12 | Naming consistency | PASS | `.sf-*` for layout (core/layout.css), `.is-*` for states (core/states.css), `--sf-*` for tokens; exception: .focus-parent (documented intentional) |
 | 13 | Bundle correctness | PARTIAL | F-24 notes README claims minified bundles that do not exist; bundle.config.json accurately lists file inclusions |
 | 14 | Browser floor accuracy | PASS | Features within declared floor (Chrome 123+, Safari 17.5+, Firefox 128+); interpolate-size properly @supports-gated |
 | 15 | No-build integrity | PASS | Works with just link tags per README quick-start; no preprocessing required for consumers |
