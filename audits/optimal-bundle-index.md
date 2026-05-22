@@ -681,7 +681,7 @@ slashed.overrides     (consumer layer, not shipped)
 
 ---
 
-**GRAND TOTAL core/tokens.css: ~289 custom properties**
+**GRAND TOTAL core/tokens.css: 345 unique custom properties**
 
 ---
 
@@ -1453,7 +1453,7 @@ These tokens exist solely for use in consumer BEM classes (`.card`, `.nav`, `.he
 | Containers | None — all consumed |
 | All palette tokens | 198 tokens in tokens.palette.css — NONE consumed internally |
 
-**Estimated BEM-consumer-only tokens: ~150+ from tokens.css, all 198 from tokens.palette.css**
+**Estimated BEM-consumer-only tokens: ~200+ from tokens.css, all 198 from tokens.palette.css**
 
 ---
 
@@ -1464,10 +1464,10 @@ These tokens exist solely for use in consumer BEM classes (`.card`, `.nav`, `.he
 
 | Source File | Count |
 |-------------|-------|
-| core/tokens.css (incl. @property) | ~289 |
+| core/tokens.css (incl. @property) | 345 |
 | core/tokens.layout.css | 39 |
 | optional/tokens.palette.css | 198 |
-| **TOTAL custom properties** | **~526** |
+| **TOTAL custom properties** | **582** |
 
 ### Class Counts
 
