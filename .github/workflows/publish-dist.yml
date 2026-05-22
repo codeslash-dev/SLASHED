@@ -1,0 +1,80 @@
+name: Publish dist branch
+
+# Builds the CSS bundles after every merge to main and force-pushes the
+# resulting dist/ tree to a dedicated `dist` branch. The `dist` branch is
+# orphan (no shared history with main) and contains only the generated
+# bundles at its root, so consumers can reference them via:
+#
+#   https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css
+#
+# Source files (core/, optional/, etc.) live only on main; built files live
+# only on dist. This keeps main free of generated artifacts while still
+# giving the CDN something to serve.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# If several merges land in quick succession, cancel any in-flight publish
+# and rerun against the newest commit only. Prevents racing force-pushes.
+concurrency:
+  group: publish-dist
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish-dist:
+    name: Build and force-push dist branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build dist bundles
+        run: npm run build
+
+      - name: Stage dist for orphan branch
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sf-dist
+          cp -R dist/. /tmp/sf-dist/
+          # Stamp file so consumers can verify exactly which source commit
+          # produced this dist tree.
+          {
+            echo "source-commit: ${GITHUB_SHA}"
+            echo "source-ref:    ${GITHUB_REF}"
+            echo "built-at:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "built-by:      .github/workflows/publish-dist.yml"
+          } > /tmp/sf-dist/SOURCE.txt
+
+      - name: Force-push dist branch
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          set -euo pipefail
+          git checkout --orphan dist
+          # The orphan checkout still stages main's tree; remove it all so
+          # only built artifacts end up on the dist branch.
+          git rm -rf . > /dev/null
+          shopt -s dotglob
+          cp -R /tmp/sf-dist/. .
+          git add -A
+          git commit -m "build: dist for ${GITHUB_SHA}"
+          git push --force origin dist
