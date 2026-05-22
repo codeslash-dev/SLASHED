@@ -41,18 +41,96 @@ function getBundles() {
   return Array.isArray(config.bundles) ? config.bundles : [config];
 }
 
-function buildOne({ files, output }) {
+// Walks src starting at openPos (which must point at '{'), respecting CSS
+// comments and quoted strings, and returns the index of the matching '}'.
+// Returns -1 on imbalance.
+function findMatchingBrace(src, openPos) {
+  let depth = 1;
+  let i = openPos + 1;
+  while (i < src.length) {
+    const ch = src[i];
+    // Block comment.
+    if (ch === '/' && src[i + 1] === '*') {
+      const end = src.indexOf('*/', i + 2);
+      if (end === -1) return -1;
+      i = end + 2;
+      continue;
+    }
+    // Quoted string (CSS uses both " and ', no template literals).
+    if (ch === '"' || ch === "'") {
+      const quote = ch;
+      i++;
+      while (i < src.length && src[i] !== quote) {
+        if (src[i] === '\\') { i += 2; continue; }
+        i++;
+      }
+      i++;
+      continue;
+    }
+    if (ch === '{') depth++;
+    else if (ch === '}') {
+      depth--;
+      if (depth === 0) return i;
+    }
+    i++;
+  }
+  return -1;
+}
+
+// Removes SLASHED's @layer scaffolding from a single source file's contents,
+// producing flat unlayered CSS suitable for environments that already manage
+// the cascade (e.g. Bricks Builder 2.0+ which wraps its defaults in
+// `@layer bricks` — unlayered author CSS automatically beats it).
+//
+//   1. `@layer name1, name2, … ;` declarations  → removed.
+//   2. `@layer slashed.X { … }` block wrappers  → unwrapped (inner CSS kept,
+//      dedented by 2 spaces for readability).
+//
+// Anchored to start-of-line so commented-out @layer text in file headers
+// (e.g. `   @layer slashed.print` in a doc block) cannot accidentally match.
+function stripLayerWrappers(content, fileLabel) {
+  // 1. Strip top-level @layer declarations (no opening brace before ';').
+  let out = content.replace(/^@layer\b[^{;]*;[ \t]*\r?\n?/gm, '');
+
+  // 2. Unwrap each @layer slashed.X { … } block by walking its braces.
+  for (let guard = 0; guard < 32; guard++) {
+    const header = /^@layer[ \t]+[\w.\s,-]+\{/m.exec(out);
+    if (!header) break;
+    const start = header.index;
+    const openBrace = start + header[0].length - 1;
+    const closeBrace = findMatchingBrace(out, openBrace);
+    if (closeBrace === -1) {
+      throw new Error(`stripLayerWrappers: unbalanced @layer block in ${fileLabel}`);
+    }
+    const inner = out.slice(openBrace + 1, closeBrace);
+    // Dedent two spaces (the standard indent inside SLASHED layer blocks)
+    // and trim a single leading/trailing blank line for cleanliness.
+    const dedented = inner
+      .replace(/^[ \t]*\r?\n/, '')
+      .replace(/^ {2}/gm, '')
+      .replace(/\s+$/, '');
+    const before = out.slice(0, start).replace(/[ \t]*$/, '');
+    const after = out.slice(closeBrace + 1).replace(/^[ \t]*\r?\n/, '');
+    out = `${before}${dedented}\n${after}`;
+  }
+
+  return out;
+}
+
+function buildOne({ files, output, flat = false }) {
   const outputPath = resolveInsideRoot(output);
   const { version } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
-  const header = `/* SLASHED v${version} — ${path.basename(output)} */\n`;
+  const flatTag = flat ? ' (flat)' : '';
+  const header = `/* SLASHED v${version} — ${path.basename(output)}${flatTag} */\n`;
 
   const parts = files.map((file) => {
     const filePath = resolveInsideRoot(file);
-    const content = fs.readFileSync(filePath, 'utf8');
+    let content = fs.readFileSync(filePath, 'utf8');
     // Strip local @import statements: bundling resolves them by explicit
     // file order, and a mid-file @import is invalid (ignored by browsers).
-    const inlined = content.replace(/^[ \t]*@import\s+(["'])[^"']+\1\s*;[ \t]*\r?\n?/gm, '');
-    return `/* ─── ${file} ─── */\n${inlined.trimEnd()}`;
+    content = content.replace(/^[ \t]*@import\s+(["'])[^"']+\1\s*;[ \t]*\r?\n?/gm, '');
+    if (flat) content = stripLayerWrappers(content, file);
+    return `/* ─── ${file} ─── */\n${content.trimEnd()}`;
   });
 
   const result = header + '\n' + parts.join('\n\n') + '\n';
