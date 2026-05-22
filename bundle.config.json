@@ -17,6 +17,66 @@
       ]
     },
     {
+      "output": "dist/slashed.optimal.css",
+      "files": [
+        "core/layers.css",
+        "core/tokens.css",
+        "core/tokens.layout.css",
+        "core/reset.css",
+        "core/base.css",
+        "core/themes.css",
+        "core/layout.css",
+        "core/states.css",
+        "core/motion.css",
+        "core/accessibility.css",
+        "core/print.css",
+        "optional/tokens.palette.css",
+        "optional/forms.css",
+        "optional/legacy.css"
+      ]
+    },
+    {
+      "output": "dist/slashed.optimal-components.css",
+      "files": [
+        "core/layers.css",
+        "core/tokens.css",
+        "core/tokens.layout.css",
+        "core/reset.css",
+        "core/base.css",
+        "core/themes.css",
+        "core/layout.css",
+        "core/states.css",
+        "core/motion.css",
+        "core/accessibility.css",
+        "core/print.css",
+        "optional/tokens.palette.css",
+        "optional/forms.css",
+        "optional/tokens.components.css",
+        "optional/components.css",
+        "optional/legacy.css"
+      ]
+    },
+    {
+      "output": "dist/slashed.optimal-utilities.css",
+      "files": [
+        "core/layers.css",
+        "core/tokens.css",
+        "core/tokens.layout.css",
+        "core/reset.css",
+        "core/base.css",
+        "core/themes.css",
+        "core/layout.css",
+        "core/states.css",
+        "core/motion.css",
+        "core/accessibility.css",
+        "core/print.css",
+        "optional/tokens.palette.css",
+        "optional/forms.css",
+        "optional/utilities.css",
+        "optional/legacy.css"
+      ]
+    },
+    {
       "output": "dist/slashed.full.css",
       "files": [
         "core/layers.css",
@@ -32,6 +92,9 @@
         "core/print.css",
         "optional/tokens.palette.css",
         "optional/forms.css",
+        "optional/tokens.components.css",
+        "optional/components.css",
+        "optional/utilities.css",
         "optional/legacy.css"
       ]
     }

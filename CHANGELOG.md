@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-05-22
+
+Completes the v0.2 "leftovers" from `audits/completion-checklist-v3.md`:
+the tiered bundle scheme (D5) and token-API hygiene (D11).
+
+### Added
+
+- Tiered bundle scheme (D5): `essential`, `optimal`, `optimal-components`,
+  `optimal-utilities`, and `full`. `optimal` = core + `tokens.palette` +
+  `forms` + `legacy`; `full` adds the (empty) component/utility stubs. New
+  `package.json` `exports` subpaths: `./optimal`, `./optimal-components`,
+  `./optimal-utilities`, `./full`
+- `--sf-color-code-text` token in `core/tokens.css` (defaults to `inherit`)
+  for discoverability — previously only a fallback in `base.css`
+- Token-API contract documentation (D11): PUBLIC / INTERNAL / DEPRECATED
+  labelling in the token-file headers, canonical-source alias documentation
+  (`--sf-space-gap`→`--sf-gap`, etc.), and naming conventions (single- vs
+  double-dash, BEM consumer-API tokens, print class prefix) in
+  `docs/architecture.md`
+
+### Changed
+
+- `scripts/bundle.js` now strips local `@import` statements when
+  concatenating, so bundled stubs carry no dead mid-file imports
+- README and `docs/architecture.md` bundle sections rewritten for the
+  five-bundle scheme
+
 ## [0.2.0] - 2026-05-22
 
 Foundation polish from `audits/completion-checklist-v3.md` (§F v0.2): wire up

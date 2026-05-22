@@ -37,6 +37,29 @@
    aliases" section are the source of truth for --sf-space-gap and
    --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
    gaps across all layout primitives (cluster, grid, sidebar, etc.).
+
+   PUBLIC API vs INTERNAL (token-API freeze contract)
+   ─────────────────────────────────────────────────
+   PUBLIC — covered by SemVer; safe to consume and override:
+     · brand/status source tokens (--sf-color-*-light / -dark)
+     · resolved semantic tokens (--sf-color-*, --sf-color-text--*, surfaces)
+     · scales (--sf-space-*, --sf-text-*, --sf-radius-*, --sf-font-weight-*,
+       --sf-leading-*, --sf-tracking-*, --sf-border-width-*, --sf-shadow-*,
+       --sf-duration-*, --sf-ease-*, --sf-transition-*, --sf-z-*)
+     · BEM consumer aliases (--sf-gap, --sf-content-gap, --sf-component-pad,
+       --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
+   INTERNAL — implementation detail, may change without a major bump:
+     · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
+   DEPRECATED — slated for removal on the documented timeline:
+     · --sf-transition-base (→ use a scoped --sf-transition-* token)
+
+   CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
+     · --sf-space-gap     → --sf-gap          (layout primitives read this name)
+     · --sf-space-content → --sf-content-gap  (stack / prose rhythm)
+     · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
+   These are deliberate two-name contracts: override the canonical token
+   (right side) to move everything downstream. The alias graph is otherwise
+   ≤2 hops (primitive → semantic → scale), with no duplicates/dangling/cycles.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -142,6 +165,9 @@
       oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
       oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
+    /* Inline-code text colour. Defaults to inherit (code adopts surrounding
+       text colour); override for a distinct code tint. Consumed by base.css. */
+    --sf-color-code-text: inherit;
 
 
     /* ----------------------------------------------------------

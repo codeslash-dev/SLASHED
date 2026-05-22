@@ -1,6 +1,6 @@
 {
   "name": "slashed",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "CSS framework",
   "style": "dist/slashed.full.css",
   "main": "dist/slashed.full.css",
@@ -9,6 +9,10 @@
   "exports": {
     ".": "./dist/slashed.full.css",
     "./essential": "./dist/slashed.essential.css",
+    "./optimal": "./dist/slashed.optimal.css",
+    "./optimal-components": "./dist/slashed.optimal-components.css",
+    "./optimal-utilities": "./dist/slashed.optimal-utilities.css",
+    "./full": "./dist/slashed.full.css",
     "./core/*": "./core/*",
     "./optional/*": "./optional/*"
   },

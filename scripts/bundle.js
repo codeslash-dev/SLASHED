@@ -35,7 +35,10 @@ function buildOne({ files, output }) {
   const parts = files.map((file) => {
     const filePath = resolveInsideRoot(file);
     const content = fs.readFileSync(filePath, 'utf8');
-    return `/* ─── ${file} ─── */\n${content.trimEnd()}`;
+    // Strip local @import statements: bundling resolves them by explicit
+    // file order, and a mid-file @import is invalid (ignored by browsers).
+    const inlined = content.replace(/^[ \t]*@import\s+["'][^"']+["']\s*;[ \t]*\r?\n?/gm, '');
+    return `/* ─── ${file} ─── */\n${inlined.trimEnd()}`;
   });
 
   const result = header + '\n' + parts.join('\n\n') + '\n';

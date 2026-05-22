@@ -23,6 +23,7 @@ const TOKEN_FILES = [
 const EXPECTED_EMPTY = new Set([
   '--sf-color-mark-text',
   '--sf-color-selection-text',
+  '--sf-color-code-text',
 ]);
 
 function declaredTokens() {

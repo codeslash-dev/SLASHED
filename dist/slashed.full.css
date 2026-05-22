@@ -1,4 +1,4 @@
-/* SLASHED v0.2.0 — slashed.full.css */
+/* SLASHED v0.2.1 — slashed.full.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -61,6 +61,29 @@
    aliases" section are the source of truth for --sf-space-gap and
    --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
    gaps across all layout primitives (cluster, grid, sidebar, etc.).
+
+   PUBLIC API vs INTERNAL (token-API freeze contract)
+   ─────────────────────────────────────────────────
+   PUBLIC — covered by SemVer; safe to consume and override:
+     · brand/status source tokens (--sf-color-*-light / -dark)
+     · resolved semantic tokens (--sf-color-*, --sf-color-text--*, surfaces)
+     · scales (--sf-space-*, --sf-text-*, --sf-radius-*, --sf-font-weight-*,
+       --sf-leading-*, --sf-tracking-*, --sf-border-width-*, --sf-shadow-*,
+       --sf-duration-*, --sf-ease-*, --sf-transition-*, --sf-z-*)
+     · BEM consumer aliases (--sf-gap, --sf-content-gap, --sf-component-pad,
+       --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
+   INTERNAL — implementation detail, may change without a major bump:
+     · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
+   DEPRECATED — slated for removal on the documented timeline:
+     · --sf-transition-base (→ use a scoped --sf-transition-* token)
+
+   CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
+     · --sf-space-gap     → --sf-gap          (layout primitives read this name)
+     · --sf-space-content → --sf-content-gap  (stack / prose rhythm)
+     · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
+   These are deliberate two-name contracts: override the canonical token
+   (right side) to move everything downstream. The alias graph is otherwise
+   ≤2 hops (primitive → semantic → scale), with no duplicates/dangling/cycles.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -166,6 +189,9 @@
       oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
       oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
     );
+    /* Inline-code text colour. Defaults to inherit (code adopts surrounding
+       text colour); override for a distinct code tint. Consumed by base.css. */
+    --sf-color-code-text: inherit;
 
 
     /* ----------------------------------------------------------
@@ -819,8 +845,14 @@
    Spacing aliases inherit from the BEM consumer API in tokens.css:
      --sf-space-gap     → var(--sf-gap)         from tokens.css
      --sf-space-content → var(--sf-content-gap) from tokens.css
-   Override --sf-gap or --sf-content-gap to change the gaps across
-   all layout primitives at once.
+   Override --sf-gap or --sf-content-gap (the canonical source) to change
+   the gaps across all layout primitives at once. --sf-space-gap and
+   --sf-space-content are CANONICAL-SOURCE ALIASES — a second public name
+   kept for layout-primitive readability, not a redundant indirection.
+
+   PUBLIC API — every --sf-*-gap / --sf-*-padding / --sf-*-min / etc. here
+   is a per-primitive override knob (e.g. style="--sf-cluster-gap: …").
+   No INTERNAL tokens live in this file.
 
    Each layout primitive (cluster, grid, sidebar…) has its own
    tokens (--sf-cluster-gap etc.) for local overrides.
@@ -2459,7 +2491,6 @@
    core/tokens.css — they are NOT duplicated here.
 
    Load after core/tokens.css:
-     @import "optional/tokens.palette.css";
 
    Token families (per brand color):
      -50 … -950   numeric scale (Tailwind-style). 500 = the base color.
@@ -2734,7 +2765,6 @@
    <input>, <select>, <textarea>, and <button> without any classes.
 
    USAGE:
-     @import 'slashed/optional/forms.css';
      — or include in a custom bundle via bundle.config.json.
 
    PHILOSOPHY:
@@ -2936,6 +2966,40 @@
     content: var(--sf-field-required-marker, " *");
     color: var(--sf-color-error);
   }
+
+}
+
+/* ─── optional/tokens.components.css ─── */
+/* SLASHED — optional/tokens.components.css
+   @layer slashed.tokens
+   ────────────────────── */
+
+@layer slashed.tokens {
+
+  /* TODO */
+
+}
+
+/* ─── optional/components.css ─── */
+/* SLASHED — optional/components.css
+   @layer slashed.components
+   ────────────────────── */
+
+
+@layer slashed.components {
+
+  /* TODO */
+
+}
+
+/* ─── optional/utilities.css ─── */
+/* SLASHED — optional/utilities.css
+   @layer slashed.utilities
+   ────────────────────── */
+
+@layer slashed.utilities {
+
+  /* TODO */
 
 }
 

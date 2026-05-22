@@ -35,9 +35,10 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ```
 
 > **Note:** `optional/components.css`, `optional/utilities.css` and
-> `optional/tokens.components.css` exist as empty placeholders reserved
-> for a future component layer. They are excluded from both prebuilt
-> bundles and from the wiring above. Don't link them until they ship.
+> `optional/tokens.components.css` are empty placeholders reserved for a
+> future component/utility layer. They ship (as no-ops) only in the
+> `*-components` / `*-utilities` / `full` bundles and do nothing until
+> populated — there's no need to link them individually yet.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -46,7 +47,10 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <!-- core only -->
 <link rel="stylesheet" href="slashed.essential.css">
 
-<!-- core + populated optionals (palette, legacy) -->
+<!-- core + palette + forms + legacy (recommended for most sites) -->
+<link rel="stylesheet" href="slashed.optimal.css">
+
+<!-- everything, including the (currently empty) component/utility stubs -->
 <link rel="stylesheet" href="slashed.full.css">
 ```
 
@@ -91,11 +95,20 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | `layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print` |
-| `slashed.full.css` | essential + `tokens.palette` + `forms` + `legacy` |
+| `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print`) |
+| `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
+| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` |
+| `slashed.optimal-utilities.css` | optimal + `utilities` |
+| `slashed.full.css` | optimal + `tokens.components` + `components` + `utilities` |
 
-The empty stub files (`optional/components.css`, `optional/utilities.css`,
-`optional/tokens.components.css`) are intentionally not bundled.
+`optional/legacy.css` is always concatenated last. Every rule lives in an
+`@layer`, so concatenation order never affects the cascade — `core/layers.css`
+fixes it. The `components` / `utilities` / `tokens.components` files are still
+empty stubs: they ship (no-op) only in the `*-components` / `*-utilities` /
+`full` bundles and do nothing until populated.
+
+À la carte is also supported — start from `essential` (or raw `core/`) and add
+hand-picked optional files in any order.
 
 ## Customising tokens
 
