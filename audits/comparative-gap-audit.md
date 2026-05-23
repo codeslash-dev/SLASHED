@@ -12,11 +12,11 @@ SLASHED v0.2.10 delivers a technically advanced token-first CSS framework built 
 
 Compared against four benchmarks, SLASHED leads in color-system sophistication (auto-deriving dark mode from 6 source tokens), cascade-layer hygiene, and token density. Its layout primitives cover 95% of common patterns without media queries.
 
-Key gaps: no minified production bundles (P0), documentation insufficient for adoption (P0), forms integration incomplete with state tokens partially unwired (P1), and the utility/component layers remain empty stubs (P2, by-design deferral). The color-on-color contrast system uses a binary lightness threshold that guarantees 3:1 but not 4.5:1 for mid-luminance brand colors -- a documented tradeoff.
+Key gaps: documentation insufficient for adoption (P0), forms integration incomplete with state tokens partially unwired (P1), and the utility/component layers remain empty stubs (P2, by-design deferral). The color-on-color contrast system uses a binary lightness threshold that guarantees 3:1 but not 4.5:1 for mid-luminance brand colors -- a documented tradeoff.
 
-Of 25+ findings, zero are critical (no broken APIs, no accessibility failures in shipped code). The reduced-motion gating is comprehensive. The focus-visible ring covers all interactive elements. The primary blocker to v1.0 is infrastructure (minification, cross-browser CI) and documentation completeness, not CSS quality.
+Of 25+ findings, zero are critical (no broken APIs, no accessibility failures in shipped code). The reduced-motion gating is comprehensive. The focus-visible ring covers all interactive elements. The primary blocker to v1.0 is documentation completeness, not CSS quality. Infrastructure (minification via lightningcss, cross-browser CI with Firefox + WebKit) is already implemented.
 
-Overall assessment: 76% production-ready. Core CSS quality is high (~87%); optional modules and infrastructure drag the score (~60%).
+Overall assessment: 88% production-ready. Core CSS quality is high (~87%); infrastructure is complete (~95%); optional modules and documentation drag the score (~70%).
 
 ---
 
@@ -120,7 +120,7 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 | 48 | Validation state integration | ✓ `core/states.css:150-176` 7 validation states | ● | ✓ [docs](https://automaticcss.com/docs/forms/) | ✓ [docs](https://bulma.io/documentation/form/general/) | ● |
 | 49 | Utility classes | 📦 `optional/utilities.css:5` stub reserved | ● | ✓ [docs](https://automaticcss.com/docs/) | ✓ [docs](https://bulma.io/documentation/helpers/) | ✓ [docs](https://tailwindcss.com/docs/utility-first) |
 | 50 | Component library | 📦 `optional/components.css:8` stub reserved | ✓ [docs](https://picocss.com/docs) | ✓ [docs](https://automaticcss.com/docs/) | ✓ [docs](https://bulma.io/documentation/components/) | ● |
-| 51 | Minified dist | ● | ✓ [docs](https://picocss.com/docs) | ✓ [docs](https://automaticcss.com/docs/) | ✓ [docs](https://bulma.io/documentation/) | ✓ [docs](https://tailwindcss.com/docs/installation) |
+| 51 | Minified dist | ✓ `scripts/bundle.js:134-147` lightningcss + source maps | ✓ [docs](https://picocss.com/docs) | ✓ [docs](https://automaticcss.com/docs/) | ✓ [docs](https://bulma.io/documentation/) | ✓ [docs](https://tailwindcss.com/docs/installation) |
 | 52 | Shadow tokens | ✓ `core/tokens.css:563-588` 8 levels xs-2xl+inner | ● | ✓ [docs](https://automaticcss.com/docs/) | ● | ✓ [docs](https://tailwindcss.com/docs/box-shadow) |
 | 53 | Transition tokens | ✓ `core/tokens.css:746-759` 8 transition presets | ● | ✓ [docs](https://automaticcss.com/docs/) | ● | ✓ [docs](https://tailwindcss.com/docs/transition-property) |
 | 54 | Z-index scale | ✓ `core/tokens.css:698-705` 8 levels | ● | ✓ [docs](https://automaticcss.com/docs/) | ● | ✓ [docs](https://tailwindcss.com/docs/z-index) |
@@ -130,25 +130,19 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 
 ## 4. Findings
 
-### F-01: No minified production bundles
+### F-01: ~~No minified production bundles~~ RESOLVED
 
-- **Severity:** high
+- **Severity:** ~~high~~ resolved
 - **Category:** Distribution
-- **Evidence:** `bundle.config.json:1-170` -- outputs only unminified CSS; `package.json:42` lists lightningcss as devDependency but `scripts/bundle.js` does not invoke it for minification
-- **Compared to:** Pico CSS -- ships minified dist ([docs](https://picocss.com/docs)); Tailwind -- ships optimized output ([docs](https://tailwindcss.com/docs/installation))
-- **Impact:** Consumers serve 2-3x larger payloads than necessary; CDN links deliver unminified code
-- **Recommendation:** Add a minification pass in `scripts/bundle.js` using the already-installed lightningcss to produce `.min.css` + `.min.css.map` for each bundle
-- **Effort:** S
+- **Status:** **RESOLVED** -- `scripts/bundle.js:134-147` invokes lightningcss to produce `.min.css` + `.min.css.map` for every bundle. The `dist/` directory ships 30 files including minified variants with source maps for all 5 bundle tiers (essential, optimal, optimal-components, optimal-utilities, full) plus their flat counterparts. `npm run build` prints raw/gzip/brotli sizes.
+- **Evidence (original claim):** Audit originally stated bundle.js did not invoke lightningcss. This was incorrect at time of verification.
 
-### F-02: Cross-browser CI covers Chromium only
+### F-02: ~~Cross-browser CI covers Chromium only~~ RESOLVED
 
-- **Severity:** high
+- **Severity:** ~~high~~ resolved
 - **Category:** Testing
-- **Evidence:** `playwright.config.js` -- only Chromium project configured; `package.json:46` test:install references all three but CI runs only Chromium
-- **Compared to:** Tailwind -- tests across all major engines ([docs](https://tailwindcss.com/docs/browser-support)); Bulma -- tests Firefox/Safari ([docs](https://bulma.io/documentation/))
-- **Impact:** Regressions in Firefox 128 (@property) or Safari 17.5 (light-dark) go undetected until user reports
-- **Recommendation:** Add Firefox and WebKit projects to `playwright.config.js` and update CI matrix
-- **Effort:** S
+- **Status:** **RESOLVED** -- `playwright.config.js` configures three projects: chromium (full suite), firefox (behaviour tests, visual regression excluded), and webkit (behaviour tests, visual regression excluded). Visual-regression tests (`demo-visual.spec.js`) are intentionally pinned to Chromium only due to engine-specific font rendering; all other tests (tokens, a11y, states, container queries) run cross-engine.
+- **Evidence (original claim):** Audit originally stated only Chromium was configured. This was incorrect at time of verification.
 
 ### F-03: Documentation insufficient for adoption
 
@@ -200,15 +194,12 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 - **Recommendation:** Add `color: var(--sf-field-text-color, inherit)` to a helper-text pattern or document the consumer responsibility
 - **Effort:** S
 
-### F-08: architecture.md layer order outdated (missing slashed.forms)
+### F-08: ~~architecture.md layer order outdated (missing slashed.forms)~~ RESOLVED
 
-- **Severity:** medium
+- **Severity:** ~~medium~~ resolved
 - **Category:** Documentation consistency
-- **Evidence:** `core/layers.css:7-20` declares 14 layers including `slashed.forms`; `docs/architecture.md` layer diagram does not include it (confirmed in completion-checklist-v3.md)
-- **Compared to:** Pico CSS -- docs match source structure ([docs](https://picocss.com/docs)); Tailwind -- layer docs accurate ([docs](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer))
-- **Impact:** Contributors and consumers see conflicting information about cascade order
-- **Recommendation:** Add `slashed.forms` between `base` and `layout` in architecture.md layer diagram and description
-- **Effort:** XS
+- **Status:** **RESOLVED** -- `docs/architecture.md` lists all 14 layers in correct order including `slashed.forms` between `base` and `layout`. The file structure section correctly maps `optional/forms.css` to `slashed.forms`. README also documents `slashed.forms` in the cascade order section.
+- **Evidence (original claim):** Audit originally stated architecture.md was missing slashed.forms. This was incorrect at time of verification.
 
 ### F-09: No global blockquote/dl/table styling outside .sf-prose
 
@@ -360,15 +351,12 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 - **Recommendation:** Document that `.print-only` or custom print CSS can restore specific video elements if needed
 - **Effort:** XS
 
-### F-24: bundle.config.json does not exactly match README bundle table
+### F-24: ~~bundle.config.json does not exactly match README bundle table~~ RESOLVED
 
-- **Severity:** low
+- **Severity:** ~~low~~ resolved
 - **Category:** Bundle correctness
-- **Evidence:** `bundle.config.json` -- includes flat variants (e.g. `slashed.essential.flat.css`) not listed in README; README mentions `.min.css` files that do not exist yet
-- **Compared to:** Tailwind -- docs match actual dist output ([docs](https://tailwindcss.com/docs/installation))
-- **Impact:** README claims minified bundles exist ("Each bundle is emitted both readable and minified") but they are not currently built
-- **Recommendation:** Either implement minification (F-01) or remove the minified-bundle claim from README until implemented
-- **Effort:** XS
+- **Status:** **RESOLVED** -- README states "Each bundle is emitted both readable and minified, with a source map" and this is accurate. Every bundle tier ships `.css`, `.min.css`, and `.min.css.map` variants. Flat variants (e.g. `slashed.essential.flat.css`) are documented via `package.json` exports. The README bundle table intentionally shows only the primary bundle names (not every flat/min variant) for readability.
+- **Evidence (original claim):** Audit originally stated minified bundles did not exist. This was incorrect at time of verification.
 
 ### F-25: Specificity budget exceeded by .sf-prose nested selectors
 
@@ -417,7 +405,7 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 | D7 | Fix primary-button :hover bug | **Resolved** | `optional/forms.css:121-122` -- hover uses `oklch(from var(--sf-color-action) calc(l - 0.05) c h)` instead of the old --sf-color-bg--hover misuse |
 | D8 | Required-field asterisk | **Resolved** | `optional/forms.css:205-209` -- `label:has(:required)::after` and `label:has(+ :required)::after` with `content: var(--sf-field-required-marker, " *")` |
 | D9 | Deliberate rejections | **Confirmed** | No .sf-pulse/.sf-bounce/.sf-stagger utility classes added; no 7th brand token; no switch toggle; keyframe-only approach maintained |
-| D10 | Infrastructure (minify, cross-browser CI) | **Stale** | lightningcss listed in devDependencies but not invoked for minification; CI still Chromium-only; README claims minified bundles exist but they do not |
+| D10 | Infrastructure (minify, cross-browser CI) | **Resolved** | `scripts/bundle.js:134-147` invokes lightningcss for minification + source maps; `playwright.config.js` configures Chromium + Firefox + WebKit projects; `dist/` ships `.min.css` + `.min.css.map` for all bundles |
 | D11 | Token alias-chain hygiene | **Resolved** | `core/tokens.css:44-62` header documents the canonical-source aliases, public vs internal tagging, and max 2-hop target; synonym hops kept as documented intentional contracts |
 
 ---
@@ -428,10 +416,10 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 
 | Finding | Action | Effort |
 |---|---|---|
-| F-01 | Implement minification pass (lightningcss) | S |
-| F-02 | Add Firefox + WebKit to Playwright CI | S |
+| ~~F-01~~ | ~~Implement minification pass (lightningcss)~~ RESOLVED | - |
+| ~~F-02~~ | ~~Add Firefox + WebKit to Playwright CI~~ RESOLVED | - |
 | F-03 | Complete documentation (theming guide, token reference, layout guide) | L |
-| F-24 | Fix README claims about minified bundles or implement them | XS |
+| ~~F-24~~ | ~~Fix README claims about minified bundles or implement them~~ RESOLVED | - |
 
 ### P1 -- Target v1.1
 
@@ -439,7 +427,7 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 |---|---|---|
 | F-04 | Document contrast threshold limitation; add warning for mid-L brands | S |
 | F-07 | Wire --sf-field-text-color in helper text pattern or document | S |
-| F-08 | Fix architecture.md layer order | XS |
+| ~~F-08~~ | ~~Fix architecture.md layer order~~ RESOLVED | - |
 | F-10 | Select chevron: switch to mask-image or document limitation | S |
 | F-15 | Expand link-contrast test coverage for brand overrides | S |
 | F-17 | Document .sr-only-focusable in accessibility docs | XS |
@@ -518,7 +506,7 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 
 **Cons:** No tree-shaking (consumers load unused tokens). No automatic vendor prefixes (though none are needed at the stated browser floor). Maintainer-side minification still requires Node (but this is acceptable -- "no build" applies to consumers, not maintainers).
 
-**Assessment:** The constraint is correctly scoped. Maintainers already use Node for bundling/testing. Adding lightningcss minification (F-01) does not violate the no-build contract because consumers still receive static CSS files. The distinction between "consumer no-build" and "maintainer build tooling" should be documented more prominently.
+**Assessment:** The constraint is correctly scoped. Maintainers already use Node for bundling/testing. The lightningcss minification pass (now implemented in `scripts/bundle.js`) does not violate the no-build contract because consumers still receive static CSS files. The distinction between "consumer no-build" and "maintainer build tooling" is documented in the README.
 
 ---
 
