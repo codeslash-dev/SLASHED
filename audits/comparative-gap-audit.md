@@ -12,7 +12,7 @@ SLASHED v0.2.10 delivers a technically advanced token-first CSS framework built 
 
 Compared against four benchmarks, SLASHED leads in color-system sophistication (auto-deriving dark mode from 6 source tokens), cascade-layer hygiene, and token density. Its layout primitives cover 95% of common patterns without media queries.
 
-Key gaps: documentation insufficient for adoption (P0), forms integration incomplete with state tokens partially unwired (P1), and the utility/component layers remain empty stubs (P2, by-design deferral). The color-on-color contrast system uses a binary lightness threshold that guarantees 3:1 but not 4.5:1 for mid-luminance brand colors -- a documented tradeoff.
+Key gaps: documentation insufficient for adoption (P0), stale generated token reference (F-28, P0), forms integration incomplete with state tokens partially unwired (P1), and the utility/component layers remain empty stubs (P2, by-design deferral). The color-on-color contrast system uses a binary lightness threshold that guarantees 3:1 but not 4.5:1 for mid-luminance brand colors -- a documented tradeoff.
 
 Of 25+ findings, zero are critical (no broken APIs, no accessibility failures in shipped code). The reduced-motion gating is comprehensive. The focus-visible ring covers all interactive elements. The primary blocker to v1.0 is documentation completeness, not CSS quality. Infrastructure (minification via lightningcss, cross-browser CI with Firefox + WebKit) is already implemented.
 
@@ -188,7 +188,7 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 
 - **Severity:** medium
 - **Category:** Forms integration
-- **Evidence:** `optional/forms.css:60` -- reads `var(--sf-field-border-color, var(--sf-color-border))`; `core/states.css:152-176` sets `--sf-field-border-color` but forms.css does not consume `--sf-field-text-color` for helper text
+- **Evidence:** `optional/forms.css:60` -- reads `var(--sf-field-border-color, var(--sf-color-border))`; `core/states.css:152-176` sets `--sf-field-border-color` but forms.css does not consume `--sf-field-text-color` for helper text. See also F-29: the token `--sf-field-text-color` is set by states.css but consumed by NOTHING in the entire framework -- not just helper text, but also not the input label or the input itself.
 - **Compared to:** Bulma -- full validation styling including message text ([docs](https://bulma.io/documentation/form/general/)); ACSS -- validation colors applied to labels and helpers ([docs](https://automaticcss.com/docs/forms/))
 - **Impact:** Adding `.is-invalid` to an input recolors the border but not associated label or helper text
 - **Recommendation:** Add `color: var(--sf-field-text-color, inherit)` to a helper-text pattern or document the consumer responsibility
@@ -388,6 +388,86 @@ Cell values: ✓ = fully implemented | 🟡 = partial | ● = missing (gap) | �
 - **Recommendation:** Expand demo.html to include every `.sf-*` layout class and `.is-*` state class; automate with coverage.spec.js
 - **Effort:** M
 
+### F-28: tokens.md reports --sf-color-code-text as `inherit` but source uses oklch formula
+
+- **Severity:** medium
+- **Category:** Documentation accuracy (generated docs drift)
+- **Evidence:** `docs/tokens.md:70` shows `--sf-color-code-text | inherit` but `core/tokens.css` actually declares `--sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)`. The generated reference is stale -- `npm run docs:tokens` was not re-run after the code-text token was changed from `inherit` to the auto-contrast formula.
+- **Compared to:** Tailwind -- generated docs always match source ([docs](https://tailwindcss.com/docs))
+- **Impact:** Consumers reading token reference see a different default than what the framework actually resolves. They may override unnecessarily or not realise auto-contrast is active.
+- **Recommendation:** Re-run `npm run docs:tokens` to regenerate `docs/tokens.md`. Consider adding a CI check that verifies the generated file is up-to-date.
+- **Effort:** XS
+
+### F-29: --sf-field-text-color set by states but never consumed anywhere
+
+- **Severity:** medium
+- **Category:** Token wiring (dead token)
+- **Evidence:** `core/states.css:174-199` -- every `.is-valid/.is-invalid/.is-warning/.is-success/.is-error/.is-info/.is-danger` sets `--sf-field-text-color`. However, `optional/forms.css` does not read this token -- no rule applies `color: var(--sf-field-text-color, inherit)` to labels, helper text, or inputs themselves. The token is set but has zero consumers in the entire framework.
+- **Compared to:** Bulma -- validation state colours propagate to helper text and input text ([docs](https://bulma.io/documentation/form/general/)); ACSS -- validation applies to label, helper, and field ([docs](https://automaticcss.com/docs/forms/))
+- **Impact:** Applying `.is-invalid` to a form group only recolours the border (via `--sf-field-border-color`), not any text. The consumer must manually add `color: var(--sf-field-text-color)` to their helper-text BEM class. The token exists in the API but does nothing by default.
+- **Recommendation:** Either (a) have `optional/forms.css` add a helper-text pattern that consumes it, or (b) document clearly that this is a hook for consumer CSS to wire up.
+- **Effort:** S
+
+### F-30: .sf-prose ul list-style `disc` vs minified output `outside`
+
+- **Severity:** low
+- **Category:** Build tooling (minification transforms)
+- **Evidence:** `core/layout.css:481` declares `.sf-prose ul { list-style: disc; }`. But in `dist/slashed.essential.min.css`, lightningcss transforms this to `list-style:outside` -- because `disc` is the initial value for `list-style-type` and lightningcss optimises `list-style: disc` (shorthand) to `list-style: outside` (since `outside` is the `list-style-position` initial value, and it drops the redundant type). The semantic is equivalent but confusing for anyone reading the minified output or debugging.
+- **Compared to:** Other frameworks typically keep authored values intact in minified output
+- **Impact:** Zero visual difference (browsers render identically). Debugging confusion only.
+- **Recommendation:** No action needed. Document that lightningcss performs semantic-equivalent shorthand collapsing in minified output.
+- **Effort:** XS (documentation only)
+
+### F-31: No CI step verifying docs/tokens.md is up-to-date
+
+- **Severity:** low
+- **Category:** CI completeness
+- **Evidence:** `package.json` has `"docs:tokens": "node scripts/gen-token-reference.js"` but no CI workflow step verifies the committed `docs/tokens.md` matches regenerated output. CONTRIBUTING.md says "run `npm run docs:tokens` to refresh" but nothing enforces it.
+- **Compared to:** Tailwind -- generated docs rebuilt in CI ([docs](https://tailwindcss.com/docs)); many OSS projects fail CI on stale generated files
+- **Impact:** tokens.md can drift from source (as demonstrated by F-28) without anyone noticing until a consumer hits the discrepancy
+- **Recommendation:** Add a CI step: `npm run docs:tokens && git diff --exit-code docs/tokens.md`
+- **Effort:** XS
+
+### F-32: No CDN / unpkg minified path in package.json exports
+
+- **Severity:** low
+- **Category:** Distribution / DX
+- **Evidence:** `package.json` exports map `"."` to `./dist/slashed.full.css` (unminified). The `unpkg` and `jsdelivr` fields also point to unminified. Consumers loading via `https://unpkg.com/slashed` or `https://cdn.jsdelivr.net/npm/slashed` receive the larger unminified bundle by default.
+- **Compared to:** Pico CSS -- CDN serves minified by default ([docs](https://picocss.com/docs)); Tailwind -- CDN script serves optimised output ([docs](https://tailwindcss.com/docs/installation))
+- **Impact:** CDN consumers pay the full unminified size unless they manually append `/dist/slashed.full.min.css` to the URL
+- **Recommendation:** Change `unpkg` and `jsdelivr` fields to `dist/slashed.full.min.css`. Keep the `main`/`style` fields pointing to the readable version for dev tooling that prefers source-readable CSS.
+- **Effort:** XS
+
+### F-33: No status-colour palette scales (success/warning/error/info/danger missing from tokens.palette.css)
+
+- **Severity:** low
+- **Category:** Token completeness (by-design gap)
+- **Evidence:** `optional/tokens.palette.css` generates 50-950 + alpha + aliases for the 6 brand colours (primary, secondary, tertiary, action, neutral, base) but NOT for the 5 status colours (success, warning, error, info, danger). Status colours only get subtle/strong/muted triplets in `core/tokens.css`.
+- **Compared to:** Tailwind -- all semantic colours get the full scale ([docs](https://tailwindcss.com/docs/customizing-colors)); ACSS -- status colours have full shade/tint ranges ([docs](https://automaticcss.com/docs/colors/))
+- **Impact:** Consumers needing `--sf-color-error-200` or `--sf-color-success-a20` must define them manually. The brand palette is rich (37 tokens per colour) but status is limited to 3 tokens per colour.
+- **Recommendation:** Either extend tokens.palette.css to include status palettes (adds ~185 tokens), or document that status colours are intentionally kept minimal (triplets only) to avoid palette bloat.
+- **Effort:** S (if implementing) / XS (if documenting the by-design choice)
+
+### F-34: demo.html loads from CDN, not local dist -- tests may not catch local changes
+
+- **Severity:** low
+- **Category:** Testing accuracy
+- **Evidence:** `docs/demo.html:12` -- `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.css">`. The demo loads CSS from a CDN (the `dist` branch), not from the local `dist/` folder. If Playwright tests use this demo, they test the PUBLISHED version, not local changes.
+- **Compared to:** Standard practice -- test fixtures reference local build output
+- **Impact:** If tests/demo-visual.spec.js or tests/coverage.spec.js use docs/demo.html directly, they may pass even when local CSS is broken (testing stale CDN version). However, test fixtures may use `tests/fixture.html` instead (which likely loads locally).
+- **Recommendation:** Verify whether the test suite uses docs/demo.html or its own fixture. If the demo is tested, switch to a relative path (`../dist/slashed.essential.css`) for CI accuracy.
+- **Effort:** XS
+
+### F-35: .sf-prose .sf-not-prose :is(ul,ol) uses `revert` which may behave unpredictably in layered context
+
+- **Severity:** low
+- **Category:** Cascade layer interaction
+- **Evidence:** `core/layout.css:490` -- `.sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }`. In a cascade-layer context, `revert` rolls back to the previous cascade layer, not to the browser default. Since `slashed.reset` (which removes list-style) sits in a lower layer, `revert` from `slashed.layout` would revert past the reset back to the UA stylesheet -- which is likely the intent, but is fragile if consumers load files without layers.
+- **Compared to:** Tailwind -- `@layer` + `revert` interaction documented clearly ([docs](https://tailwindcss.com/docs/preflight))
+- **Impact:** Works correctly within the layered architecture. In the `flat` bundle (layers stripped), `revert` has no layer to revert to and falls back to the UA stylesheet -- same visual result. No actual bug, but worth documenting for consumers who may not understand `revert` in layers.
+- **Recommendation:** Add a comment explaining the revert-in-layers behaviour, or switch to explicit `revert-layer` for clarity.
+- **Effort:** XS
+
 ---
 
 ## 5. Internal Audit Cross-Reference (D1-D11)
@@ -420,6 +500,7 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 | ~~F-02~~ | ~~Add Firefox + WebKit to Playwright CI~~ RESOLVED | - |
 | F-03 | Complete documentation (theming guide, token reference, layout guide) | L |
 | ~~F-24~~ | ~~Fix README claims about minified bundles or implement them~~ RESOLVED | - |
+| F-28 | Re-run `npm run docs:tokens` to fix stale token reference | XS |
 
 ### P1 -- Target v1.1
 
@@ -434,6 +515,9 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 | F-19 | Document .no-motion in accessibility docs | XS |
 | F-25 | Evaluate :where() for .sf-not-prose selectors | XS |
 | F-27 | Expand demo.html to full class coverage | M |
+| F-29 | Wire --sf-field-text-color in forms or document consumer responsibility | S |
+| F-31 | Add CI check verifying docs/tokens.md is up-to-date | XS |
+| F-32 | Point unpkg/jsdelivr fields to minified bundle | XS |
 
 ### P2 -- Future
 
@@ -453,6 +537,10 @@ Cross-reference of completion-checklist-v3.md decisions against current CSS sour
 | F-22 | Add dependency comment in states.css | XS |
 | F-23 | Document print hiding behavior | XS |
 | F-26 | No action (passes) | - |
+| F-30 | Document lightningcss shorthand collapsing in minified output | XS |
+| F-33 | Status palette scales -- document by-design or implement | S |
+| F-34 | Verify demo.html test path; switch to local if tested | XS |
+| F-35 | Document revert-in-layers behavior or switch to revert-layer | XS |
 
 ---
 
