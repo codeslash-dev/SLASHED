@@ -197,10 +197,10 @@ class Slashed_Bricks_CSS_Generator {
 		}
 
 		// Scale multipliers.
-		if ( ! empty( $settings['text_scale'] ) ) {
+		if ( isset( $settings['text_scale'] ) && '' !== $settings['text_scale'] ) {
 			$declarations[] = '--sf-text-scale: ' . $settings['text_scale'] . ';';
 		}
-		if ( ! empty( $settings['text_display_scale'] ) ) {
+		if ( isset( $settings['text_display_scale'] ) && '' !== $settings['text_display_scale'] ) {
 			$declarations[] = '--sf-text-display-scale: ' . $settings['text_display_scale'] . ';';
 		}
 
@@ -260,7 +260,7 @@ class Slashed_Bricks_CSS_Generator {
 	private static function generate_spacing_declarations( $settings ) {
 		$declarations = array();
 
-		if ( ! empty( $settings['space_scale'] ) ) {
+		if ( isset( $settings['space_scale'] ) && '' !== $settings['space_scale'] ) {
 			$declarations[] = '--sf-space-scale: ' . $settings['space_scale'] . ';';
 		}
 
@@ -290,7 +290,7 @@ class Slashed_Bricks_CSS_Generator {
 	private static function generate_radius_declarations( $settings ) {
 		$declarations = array();
 
-		if ( ! empty( $settings['radius_scale'] ) ) {
+		if ( isset( $settings['radius_scale'] ) && '' !== $settings['radius_scale'] ) {
 			$declarations[] = '--sf-radius-scale: ' . $settings['radius_scale'] . ';';
 		}
 
@@ -306,7 +306,7 @@ class Slashed_Bricks_CSS_Generator {
 	private static function generate_shadow_declarations( $settings ) {
 		$declarations = array();
 
-		if ( ! empty( $settings['shadow_strength'] ) ) {
+		if ( isset( $settings['shadow_strength'] ) && '' !== $settings['shadow_strength'] ) {
 			$declarations[] = '--sf-shadow-strength: calc(' . $settings['shadow_strength'] . ' + var(--sf-is-dark) * 0.17);';
 		}
 
@@ -322,7 +322,7 @@ class Slashed_Bricks_CSS_Generator {
 	private static function generate_motion_declarations( $settings ) {
 		$declarations = array();
 
-		if ( ! empty( $settings['motion_scale'] ) ) {
+		if ( isset( $settings['motion_scale'] ) && '' !== $settings['motion_scale'] ) {
 			$declarations[] = '--sf-motion-scale: ' . $settings['motion_scale'] . ';';
 		}
 
@@ -330,7 +330,7 @@ class Slashed_Bricks_CSS_Generator {
 		$durations = array( 'instant', 'fast', 'normal', 'slow', 'slower' );
 		foreach ( $durations as $name ) {
 			$key = 'duration_' . $name;
-			if ( ! empty( $settings[ $key ] ) ) {
+			if ( isset( $settings[ $key ] ) && '' !== $settings[ $key ] ) {
 				$declarations[] = '--sf-duration-' . $name . ': calc(' . $settings[ $key ] . 'ms * var(--sf-motion-scale));';
 			}
 		}

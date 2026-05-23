@@ -95,7 +95,9 @@ function slashed_bricks_admin_init() {
 
     new Slashed_Bricks_Admin_Page();
 }
-add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
+if ( is_admin() ) {
+    add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
+}
 
 /**
  * Initialize the plugin.

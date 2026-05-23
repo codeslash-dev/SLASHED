@@ -192,13 +192,32 @@ class Slashed_Bricks_Admin_Page {
 		foreach ( $data as $key => $value ) {
 			$key = sanitize_key( $key );
 			if ( is_array( $value ) ) {
-				$sanitized[ $key ] = array_map( 'sanitize_text_field', $value );
+				$sanitized[ $key ] = array_map(
+					function ( $v ) {
+						return $this->sanitize_css_value( sanitize_text_field( $v ) );
+					},
+					$value
+				);
 			} else {
-				$sanitized[ $key ] = sanitize_text_field( $value );
+				$sanitized[ $key ] = $this->sanitize_css_value( sanitize_text_field( $value ) );
 			}
 		}
 
 		return $sanitized;
+	}
+
+	/**
+	 * Sanitize a value for safe use in CSS declarations.
+	 *
+	 * Strips characters that could escape a CSS declaration context or inject
+	 * at-rules. This prevents stored values from breaking out of the
+	 * :root { ... } block when interpolated into generated CSS.
+	 *
+	 * @param string $value The value to sanitize.
+	 * @return string Sanitized value with dangerous characters removed.
+	 */
+	private function sanitize_css_value( $value ) {
+		return str_replace( array( '{', '}', '<', '>', '@' ), '', $value );
 	}
 
 	/**
