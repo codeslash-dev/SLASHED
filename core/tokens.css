@@ -764,6 +764,8 @@
     --sf-body-strong-weight: var(--sf-font-weight-bold);
     --sf-body-em-style:      italic;
 
+    --sf-code-font-size:     0.875em;
+
     --sf-heading-font-family: var(--sf-font-heading);
     --sf-heading-color:       var(--sf-color-heading);
     --sf-heading-text-wrap:   balance;

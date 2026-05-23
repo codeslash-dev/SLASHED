@@ -108,8 +108,8 @@
     select,
     summary,
     a {
-      min-height: 44px;
-      min-width:  44px;
+      min-height: var(--sf-touch-target);
+      min-width:  var(--sf-touch-target);
     }
   }
 
