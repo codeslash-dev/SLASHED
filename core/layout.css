@@ -295,6 +295,7 @@
 
   .sf-reel {
     display:               flex;
+    block-size:            var(--sf-reel-height);
     gap:                   var(--sf-reel-gap);
     overflow-x:            auto;
     scroll-snap-type:      x mandatory;

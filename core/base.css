@@ -100,7 +100,7 @@
 
   code {
     font-family:      var(--sf-font-mono);
-    font-size:        0.875em;
+    font-size:        var(--sf-code-font-size);
     padding:          0.125em 0.3em;
     border-radius:    var(--sf-radius-xs);
     background-color: var(--sf-color-code-bg);
@@ -155,7 +155,7 @@
   }
 
   input, textarea {
-    caret-color: var(--sf-color-action);
+    caret-color: var(--sf-caret-color);
   }
 
   input, progress {

@@ -71,13 +71,13 @@
     height:        1em;
     margin-block-start:  -0.5em;
     margin-inline-start: -0.5em;
-    border:        2px solid var(--sf-color-border--strong);
+    border:        var(--sf-border-width-2) solid var(--sf-color-border--strong);
     border-block-start-color: var(--sf-color-action);
     border-radius: var(--sf-radius-full);
     /* Reduced-motion: accessibility.css kills animation-duration via
        !important on *, *::before, *::after — so this spinner stops
        even without a local reduced-motion wrapper. */
-    animation:     sf-spin 0.6s linear infinite;
+    animation:     sf-spin var(--sf-duration-slower) linear infinite;
   }
 
   .is-busy {
@@ -100,7 +100,7 @@
                        var(--sf-color-well) 75%
                      );
     background-size: 200% 100%;
-    animation:       sf-shimmer 1.5s ease-in-out infinite;
+    animation:       sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
     border-radius:   var(--sf-radius-s);
     pointer-events:  none;
     user-select:     none;
@@ -270,8 +270,8 @@
   }
 
   .is-drop-target {
-    outline:        2px dashed var(--sf-color-action);
-    outline-offset: 2px;
+    outline:        var(--sf-focus-ring-width) dashed var(--sf-color-action);
+    outline-offset: var(--sf-focus-ring-offset);
   }
 
   .is-draggable {
