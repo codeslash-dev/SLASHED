@@ -6,6 +6,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.12] - 2026-05-23
+
+Release infrastructure and Bricks Builder integration.
+
+### Added
+
+- **Bricks Builder integration** — WordPress plugin for one-click SLASHED
+  loading in Bricks Builder themes (PR #71)
+
+### Changed
+
+- Removed `audits/` directory from repository (internal planning docs moved
+  elsewhere)
+- README updated for current project state
+
+## [0.2.11] - 2026-05-23
+
+Documentation accuracy and dark-mode link contrast.
+
+### Fixed
+
+- **Dark-mode link contrast (WebKit)** — raised the lightness floor in the
+  `--sf-color-link` dark-mode formula from `0.62` to `0.68`, fixing a WCAG AA
+  (4.5:1) failure flagged by axe-core in WebKit. `--sf-color-link--visited`
+  raised to match. Chromium/Firefox were unaffected (PR #70)
+- Added missing `--sf-field-required-marker` token declaration to
+  `core/tokens.css` (was consumed by `forms.css` without a source declaration)
+
+### Changed
+
+- **docs/architecture.md** — fixed `color-mix(in oklch)` to `color-mix(in oklab)`;
+  removed ghost `--sf-transition-base` from transition table; updated
+  `sign(0.6 - l)` to `sign(var(--sf-contrast-threshold) - l)`; added
+  `.visually-hidden` as `.sr-only` synonym; clarified `slashed.themes`
+  extension guidance
+- **docs/layout.md** — added 5 missing primitives (`.sf-box`, `.sf-center`,
+  `.sf-alternate`, `.sf-pancake`, `.sf-not-prose`); corrected `.sf-grid-1...-6`
+  to `.sf-grid-1/-2/-3/-4/-6` (no `-5`)
+- **README.md** — clarified "22 source tokens" to "6 minimum light + up to 22
+  total"
+- **docs/tokens.md** — regenerated; adds `--sf-contrast-threshold`, fixes stale
+  formulas
+- `--sf-contrast-threshold` token (introduced in PR #68) now wired into all
+  `--sf-color-text--on-*` formulas and `--sf-color-code-text`
+- CI `docs-freshness` job added to verify `docs/tokens.md` stays in sync
+
 ## [0.2.10] - 2026-05-22
 
 CI fix and PR review follow-ups.
