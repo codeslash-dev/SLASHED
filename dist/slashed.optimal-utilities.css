@@ -74,8 +74,6 @@
        --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
    INTERNAL — implementation detail, may change without a major bump:
      · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
-   DEPRECATED — slated for removal on the documented timeline:
-     · --sf-transition-base (→ use a scoped --sf-transition-* token)
 
    CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
      · --sf-space-gap     → --sf-gap          (layout primitives read this name)
@@ -699,7 +697,9 @@
 
 
     /* ----------------------------------------------------------
-       Scroll-driven animation range — attach to your own timeline.
+       Scroll-driven animation range — consumer API. Attach these
+       to your own scroll-timeline via animation-range. Not consumed
+       by the framework itself; intended for BEM component authors.
        ---------------------------------------------------------- */
     --sf-scroll-timeline-range-start: 0%;
     --sf-scroll-timeline-range-end:   100%;
@@ -846,10 +846,7 @@
 
        --sf-transition-all transitions ALL properties — convenient but
        a performance footgun (forces the browser to watch every computed
-       value). Prefer the granular tokens below for production UI. The
-       alias --sf-transition-base is kept for one minor release to avoid
-       breaking consumers; migrate to --sf-transition-all or, better,
-       one of the scoped variants.
+       value). Prefer the granular tokens below for production UI.
        ---------------------------------------------------------- */
     --sf-transition-all:       all var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-colors:
@@ -862,9 +859,6 @@
     --sf-transition-transform: transform var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-opacity:   opacity var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-shadow:    box-shadow var(--sf-duration-normal) var(--sf-ease-out);
-
-    /* Legacy alias — deprecated, remove after v1.x */
-    --sf-transition-base:  var(--sf-transition-all);
 
     --sf-transition-fast:  all var(--sf-duration-fast)   var(--sf-ease-out);
     --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
@@ -1839,14 +1833,21 @@
   .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
   .sf-prose ul                   { list-style: disc; }
   .sf-prose ol                   { list-style: decimal; }
-  .sf-prose ::marker             { color: var(--sf-brand, var(--sf-color-primary)); }
+  .sf-prose ::marker             { color: var(--sf-color-primary); }
   .sf-prose figure               { margin-block: var(--sf-space-l); }
   .sf-prose figcaption           { font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs); }
   .sf-prose table                { margin-block: var(--sf-space-m); display: block; overflow-x: auto; max-width: 100%; }
   .sf-prose video                { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
 
+  /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the
+     general 0-2-0 budget because these rules must override the .sf-prose
+     child selectors above (also 0-2-0). This is a documented exception. */
   .sf-prose .sf-not-prose > * + *    { margin-block-start: 0; }
   .sf-prose .sf-not-prose li + li    { margin-block-start: 0; }
+  /* `revert` in a cascade layer rolls back past all layers to the UA
+     stylesheet — restoring browser-default list styling. In the flat
+     bundle (layers stripped), `revert` falls back to the UA stylesheet
+     directly. Both paths produce the same result: native list bullets. */
   .sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }
   .sf-prose .sf-not-prose ::marker   { color: inherit; }
   .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
@@ -1934,6 +1935,9 @@
     border:        2px solid var(--sf-color-border--strong);
     border-block-start-color: var(--sf-color-action);
     border-radius: var(--sf-radius-full);
+    /* Reduced-motion: accessibility.css kills animation-duration via
+       !important on *, *::before, *::after — so this spinner stops
+       even without a local reduced-motion wrapper. */
     animation:     sf-spin 0.6s linear infinite;
   }
 

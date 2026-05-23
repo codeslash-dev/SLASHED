@@ -40,9 +40,19 @@ All states are exercised in [`demo.html`](demo.html).
 | `.is-clickable` / `.is-unselectable` | cursor / selection | — |
 | `.is-focused` | programmatic focus ring (JS-driven, no `:focus-visible`) | — |
 | `.is-empty:empty` | hide when empty | — |
+| `.sr-only-focusable` | hidden until focused (skip-link pattern) | — |
+| `.no-motion` | kill all animation/transition on this subtree | `prefers-reduced-motion` equivalent |
 
 `.focus-parent` (no `is-`/`sf-` prefix) is a helper: a container with it rings
 when any descendant has keyboard focus (`:focus-within`).
+
+`.sr-only-focusable` hides an element with the screen-reader-only technique
+**until** it receives focus — then it becomes visible. Use for skip links and
+off-screen navigation that should appear on keyboard focus.
+
+`.no-motion` suppresses all `animation` and `transition` on the element and all
+its descendants, regardless of the OS reduced-motion preference. Use for a
+site-level "disable animations" toggle driven by JS.
 
 ## Disambiguating the overlaps
 

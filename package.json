@@ -4,8 +4,8 @@
   "description": "CSS framework",
   "style": "dist/slashed.full.css",
   "main": "dist/slashed.full.css",
-  "unpkg": "dist/slashed.full.css",
-  "jsdelivr": "dist/slashed.full.css",
+  "unpkg": "dist/slashed.full.min.css",
+  "jsdelivr": "dist/slashed.full.min.css",
   "exports": {
     ".": "./dist/slashed.full.css",
     "./essential": "./dist/slashed.essential.css",
