@@ -14,6 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Registers SLASHED CSS custom properties with Bricks Builder
  * for variable pickers and code editor autocomplete.
+ *
+ * Bricks 1.9.2+ automatically detects CSS custom properties from stylesheets
+ * loaded in the editor iframe. This class provides additional organization
+ * (category labels via i18n) and code editor autocomplete (via code signatures).
+ * The primary variable picker population happens through CSS loading in
+ * class-enqueue.php.
  */
 class Slashed_Bricks_Variables {
 

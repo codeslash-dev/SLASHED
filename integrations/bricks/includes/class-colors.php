@@ -13,6 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Slashed_Bricks_Colors
  *
  * Registers SLASHED color tokens with Bricks Builder's global color palette.
+ *
+ * Note: The 'raw' color type (used instead of 'hex' for var() references)
+ * requires Bricks 1.9.2+. Older versions may not render swatches correctly.
  */
 class Slashed_Bricks_Colors {
 
@@ -94,7 +97,7 @@ class Slashed_Bricks_Colors {
             $brand_colors[] = array(
                 'id'    => 'sf-' . $brand,
                 'name'  => 'SF ' . ucfirst( $brand ),
-                'color' => array( 'hex' => 'var(--sf-color-' . $brand . ')' ),
+                'color' => array( 'raw' => 'var(--sf-color-' . $brand . ')' ),
             );
 
             // Scale colors.
@@ -102,7 +105,7 @@ class Slashed_Bricks_Colors {
                 $brand_colors[] = array(
                     'id'    => 'sf-' . $brand . '-' . $step,
                     'name'  => 'SF ' . ucfirst( $brand ) . ' ' . $step,
-                    'color' => array( 'hex' => 'var(--sf-color-' . $brand . '-' . $step . ')' ),
+                    'color' => array( 'raw' => 'var(--sf-color-' . $brand . '-' . $step . ')' ),
                 );
             }
 
@@ -117,7 +120,7 @@ class Slashed_Bricks_Colors {
             $status_colors[] = array(
                 'id'    => 'sf-' . $status,
                 'name'  => 'SF ' . ucfirst( $status ),
-                'color' => array( 'hex' => 'var(--sf-color-' . $status . ')' ),
+                'color' => array( 'raw' => 'var(--sf-color-' . $status . ')' ),
             );
         }
 
@@ -149,7 +152,7 @@ class Slashed_Bricks_Colors {
             $semantic_colors[] = array(
                 'id'    => 'sf-' . str_replace( '--', '-', $token ),
                 'name'  => 'SF ' . $label,
-                'color' => array( 'hex' => 'var(--sf-color-' . $token . ')' ),
+                'color' => array( 'raw' => 'var(--sf-color-' . $token . ')' ),
             );
         }
 

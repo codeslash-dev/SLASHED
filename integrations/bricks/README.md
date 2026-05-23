@@ -26,6 +26,24 @@ Copy the `integrations/bricks/` folder to your WordPress plugins directory:
 cp -r integrations/bricks /path/to/wp-content/plugins/slashed-bricks
 ```
 
+When using this method, the plugin cannot automatically locate the SLASHED CSS bundle.
+You have two options:
+
+1. **Copy the `dist/` folder** into the plugin directory so the bundle is available at
+   `wp-content/plugins/slashed-bricks/dist/slashed.optimal.css`:
+
+   ```bash
+   cp -r dist /path/to/wp-content/plugins/slashed-bricks/dist
+   ```
+
+2. **Use the filter** to point to a CDN or another location:
+
+   ```php
+   add_filter( 'slashed_bricks/css_bundle_url', function() {
+       return 'https://cdn.example.com/slashed/slashed.optimal.css';
+   } );
+   ```
+
 ### Option B: Symlink (for development)
 
 ```bash

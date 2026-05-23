@@ -37,11 +37,23 @@ class Slashed_Bricks_Enqueue {
     public function enqueue_frontend_styles() {
         $css_url = slashed_bricks_get_css_url();
 
+        // Use file modification time for cache-busting when the CSS exists locally.
+        $repo_path   = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';
+        $local_path  = SLASHED_BRICKS_PATH . 'dist/slashed.optimal.css';
+
+        if ( file_exists( $repo_path ) ) {
+            $version = (string) filemtime( $repo_path );
+        } elseif ( file_exists( $local_path ) ) {
+            $version = (string) filemtime( $local_path );
+        } else {
+            $version = SLASHED_BRICKS_VERSION;
+        }
+
         wp_enqueue_style(
             'slashed-framework',
             $css_url,
             array(),
-            SLASHED_BRICKS_VERSION
+            $version
         );
     }
 
