@@ -10,6 +10,15 @@
    Status colors keep their subtle/muted/strong triplets in
    core/tokens.css — they are NOT duplicated here.
 
+   This is a deliberate design choice: brand colours need a full 50-950
+   ramp for decorative/compositional use (backgrounds, borders, hover
+   states at arbitrary intensities). Status colours are functional — you
+   need a subtle background, a strong readable text, and a muted accent.
+   A full numeric scale for errors/warnings would add ~185 tokens that
+   most consumers never use. If you need --sf-color-error-300, replicate
+   the brand-palette formula:
+     --sf-color-error-300: color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-base));
+
    Load after core/tokens.css:
      @import "optional/tokens.palette.css";
 
