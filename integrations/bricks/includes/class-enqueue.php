@@ -37,6 +37,10 @@ class Slashed_Bricks_Enqueue {
     public function enqueue_frontend_styles() {
         $css_url = slashed_bricks_get_css_url();
 
+        if ( '' === $css_url ) {
+            return;
+        }
+
         // Use file modification time for cache-busting when the CSS exists locally.
         $repo_path   = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';
         $local_path  = SLASHED_BRICKS_PATH . 'dist/slashed.optimal.css';

@@ -72,13 +72,14 @@ function slashed_bricks_get_css_url() {
  */
 function slashed_bricks_is_bricks_active() {
     $theme = wp_get_theme();
+    $minimum_version = '1.9.2';
 
     if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) || 'bricks' === strtolower( $theme->get_template() ) ) {
-        return true;
+        return version_compare( (string) $theme->get( 'Version' ), $minimum_version, '>=' );
     }
 
     if ( defined( 'BRICKS_VERSION' ) ) {
-        return true;
+        return version_compare( BRICKS_VERSION, $minimum_version, '>=' );
     }
 
     return false;
@@ -104,6 +105,21 @@ function slashed_bricks_init() {
     new Slashed_Bricks_Colors();
 }
 add_action( 'after_setup_theme', 'slashed_bricks_init' );
+
+/**
+ * Activation check: ensure Bricks Builder 1.9.2+ is available.
+ */
+function slashed_bricks_activation_check() {
+    if ( ! slashed_bricks_is_bricks_active() ) {
+        deactivate_plugins( plugin_basename( __FILE__ ) );
+        wp_die(
+            esc_html__( 'SLASHED for Bricks requires Bricks Builder 1.9.2 or higher to be installed and active.', 'slashed-bricks' ),
+            'Plugin Activation Error',
+            array( 'back_link' => true )
+        );
+    }
+}
+register_activation_hook( __FILE__, 'slashed_bricks_activation_check' );
 
 /**
  * Display admin notice when Bricks Builder is not active.
