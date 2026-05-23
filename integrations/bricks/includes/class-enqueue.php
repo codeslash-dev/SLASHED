@@ -59,6 +59,11 @@ class Slashed_Bricks_Enqueue {
             array(),
             $version
         );
+
+        // Inject token override CSS after the framework stylesheet.
+        if ( Slashed_Bricks_CSS_Generator::has_overrides() ) {
+            wp_add_inline_style( 'slashed-framework', Slashed_Bricks_CSS_Generator::get_override_css() );
+        }
     }
 
     /**
