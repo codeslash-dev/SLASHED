@@ -1,4 +1,4 @@
-# SLASHED
+# SLASHED CSS Framework
 
 **S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**dgeless · **D**eterministic
 
