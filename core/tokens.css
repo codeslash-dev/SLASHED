@@ -230,7 +230,16 @@
        fixed the default). Lightness dominates OKLCH contrast but doesn't
        fully determine it: very high-chroma hues (saturated yellow/green) can
        still fall short even at a safe lightness — those remain the consumer's
-       responsibility (see docs/theming.md → "Link contrast"). */
+       responsibility (see docs/theming.md → "Link contrast").
+
+       NOTE: the consumer-facing :link rule in core/base.css uses
+       `a:link` (not bare `a`) so its specificity matches WebKit's UA
+       stylesheet `a:link { color: -webkit-link }`. Without that
+       pseudo-class the framework's `--sf-color-link` value is
+       silently ignored on unvisited anchors in WebKit and
+       `-webkit-link` (≈ #00728f in dark mode) paints instead —
+       regardless of how this token is computed. PR #73 and several
+       follow-up attempts mistakenly chased the formula. */
     --sf-color-link:            light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
       oklch(from var(--sf-color-action) clamp(0.72, l, 1) c h)

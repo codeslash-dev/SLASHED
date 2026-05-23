@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+- **Anchor selector specificity** — `core/base.css` now styles
+  unvisited anchors with `a:link { color: var(--sf-color-link); }`
+  (specificity 0,1,1) instead of bare `a { color: ...; }` (0,0,1).
+  This puts the author rule on equal footing with WebKit's UA
+  stylesheet `a:link { color: -webkit-link; }`, which would otherwise
+  win on most browsers' UA cascade. Resolves the long-running
+  dark-mode link contrast issue (PR #73 and four iterations of PR #76
+  all chased the colour formula instead of the selector specificity).
+
 - **Form-field contrast in WebKit dark mode** — text-like `<input>`s
   and `<textarea>`s now get `appearance: none` (previously only
   `<select>` had it). Without this, WebKit overlays its own dark-mode

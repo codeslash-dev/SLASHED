@@ -237,7 +237,16 @@
      fixed the default). Lightness dominates OKLCH contrast but doesn't
      fully determine it: very high-chroma hues (saturated yellow/green) can
      still fall short even at a safe lightness — those remain the consumer's
-     responsibility (see docs/theming.md → "Link contrast"). */
+     responsibility (see docs/theming.md → "Link contrast").
+
+     NOTE: the consumer-facing :link rule in core/base.css uses
+     `a:link` (not bare `a`) so its specificity matches WebKit's UA
+     stylesheet `a:link { color: -webkit-link }`. Without that
+     pseudo-class the framework's `--sf-color-link` value is
+     silently ignored on unvisited anchors in WebKit and
+     `-webkit-link` (≈ #00728f in dark mode) paints instead —
+     regardless of how this token is computed. PR #73 and several
+     follow-up attempts mistakenly chased the formula. */
   --sf-color-link:            light-dark(
     oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
     oklch(from var(--sf-color-action) clamp(0.72, l, 1) c h)
@@ -1184,7 +1193,19 @@ sub, sup {
 sup { top:    -0.5em; }
 sub { bottom: -0.25em; }
 
-a {
+/* `a:link` (specificity 0,1,1) rather than bare `a` (0,0,1) so the
+   author rule wins over WebKit's UA stylesheet rule
+   `a:link { color: -webkit-link; }`. The bare-`a` form silently
+   loses to the UA `:link` rule on unvisited anchors in WebKit,
+   which paints `-webkit-link` (≈ #00728f in dark mode) regardless
+   of whatever `--sf-color-link` resolves to — producing axe's
+   3.12 : 1 dark-mode contrast failure that survived four attempts
+   to "fix" the link colour formula (PR #73, then three iterations
+   of PR #76). The colour formula was never the problem; the
+   selector specificity was. Hover / visited / active rules already
+   used pseudo-classes so they had matching specificity and were
+   never affected. */
+a:link {
   color:                   var(--sf-color-link);
   text-decoration-color:   var(--sf-color-link--underline);
   text-underline-offset:   0.15em;
