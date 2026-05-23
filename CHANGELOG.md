@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- **Dark-mode link luminance floor reverted `0.72` → `0.68`** in
+  `core/tokens.css` (`--sf-color-link`, `--sf-color-link--hover`,
+  `--sf-color-link--visited`; the corresponding `--sf-color-link--active`
+  floor `0.78` → `0.74`, preserving its +0.06 offset above base). PR #73's
+  bump from `0.68` to `0.72` was made under the (incorrect) belief that
+  the dark-mode link floor was the cause of the WebKit axe contrast
+  failure. The actual cause was selector specificity (now fixed via
+  `a:link`, see above) and the WebKit value was painting `-webkit-link`
+  regardless of how the formula computed. Restoring PR #70's `0.68`
+  floor — that floor is still a defensive contrast cushion above the
+  pre-PR-#70 `0.62`, just without the speculative extra bump that
+  served no purpose. Tiny visible delta in dark mode across all
+  browsers; the formula's value never reached WebKit anyway and now
+  Chromium/Firefox revert to PR #70's tested floor.
+
 ### Fixed
 
 - **Anchor selector specificity** — `core/base.css` now styles
