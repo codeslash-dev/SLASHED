@@ -286,6 +286,7 @@
     display: block;
     font-weight: var(--sf-font-weight-heading);
     margin-block-end: var(--sf-space-xs);
+    color: var(--sf-field-text-color, inherit);
   }
 
   /* Required-field marker — classless, no markup convention.

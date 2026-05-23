@@ -170,4 +170,34 @@
   ::file-selector-button { font: inherit; }
   ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
 
+  /* Minimal rich-block defaults — just enough to distinguish from <p>.
+     Full styling lives in .sf-prose (core/layout.css). */
+  blockquote {
+    border-inline-start: var(--sf-border-width-3) solid var(--sf-color-border);
+    padding-inline-start: var(--sf-space-m);
+    font-style: italic;
+  }
+
+  dt {
+    font-weight: var(--sf-font-weight-heading);
+  }
+
+  dd {
+    margin-inline-start: var(--sf-space-m);
+  }
+
+  table {
+    width: 100%;
+    text-align: start;
+  }
+
+  th {
+    font-weight: var(--sf-font-weight-heading);
+  }
+
+  td, th {
+    padding: var(--sf-space-2xs) var(--sf-space-xs);
+    border-block-end: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+  }
+
 }

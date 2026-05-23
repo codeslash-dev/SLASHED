@@ -192,11 +192,11 @@
        invisible text when code appears inside inverted-colour containers
        (e.g. sf-imposter with a dark background where inherited colour is
        near-white). Override with a tint value if desired. */
-    --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
 
     /* ----------------------------------------------------------
-       Text-on-color — sign(0.6 - l) * 999 is mode-agnostic:
+       Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic:
        auto-selects light or dark text based on background luminance.
        Uses resolved tokens — works for any user-supplied color.
 
@@ -208,18 +208,18 @@
        brand colors fall in this range. For body text on colored
        backgrounds, override --sf-color-text--on-* manually.
        ---------------------------------------------------------- */
-    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     --sf-color-text--on-base:      var(--sf-color-text);
     --sf-color-text--on-inverse:   var(--sf-color-text--inverse);
-    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
 
     /* ----------------------------------------------------------
@@ -743,6 +743,11 @@
        Positive = more contrast; 0 = no change. Consumed by
        --sf-color-text, --sf-color-text--secondary, --sf-color-heading. */
     --sf-contrast-bias:     0;
+    /* Lightness crossover for text-on-color auto-contrast. Colours with
+       L above this value get dark text; below get light text. Default 0.6
+       guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your
+       brand sits in the 0.52-0.60 range and you prefer white text on it. */
+    --sf-contrast-threshold: 0.6;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);
     --sf-safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -1292,6 +1297,36 @@
   optgroup { font: inherit; }
   ::file-selector-button { font: inherit; }
   ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
+
+  /* Minimal rich-block defaults — just enough to distinguish from <p>.
+     Full styling lives in .sf-prose (core/layout.css). */
+  blockquote {
+    border-inline-start: var(--sf-border-width-3) solid var(--sf-color-border);
+    padding-inline-start: var(--sf-space-m);
+    font-style: italic;
+  }
+
+  dt {
+    font-weight: var(--sf-font-weight-heading);
+  }
+
+  dd {
+    margin-inline-start: var(--sf-space-m);
+  }
+
+  table {
+    width: 100%;
+    text-align: start;
+  }
+
+  th {
+    font-weight: var(--sf-font-weight-heading);
+  }
+
+  td, th {
+    padding: var(--sf-space-2xs) var(--sf-space-xs);
+    border-block-end: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+  }
 
 }
 
@@ -3242,6 +3277,7 @@
     display: block;
     font-weight: var(--sf-font-weight-heading);
     margin-block-end: var(--sf-space-xs);
+    color: var(--sf-field-text-color, inherit);
   }
 
   /* Required-field marker — classless, no markup convention.
