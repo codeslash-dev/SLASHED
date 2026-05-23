@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- **Form-field contrast in WebKit dark mode** — text-like `<input>`s
+  and `<textarea>`s now get `appearance: none` (previously only
+  `<select>` had it). Without this, WebKit overlays its own dark-mode
+  default field background (≈ `#5f6163`) on top of the framework's
+  `--sf-color-surface`, producing a 1.78 : 1 contrast failure flagged
+  by axe. Chromium and Firefox honoured the CSS `background-color`
+  without `appearance: none`; only WebKit needed the explicit opt-out.
+  Native rendering of checkbox / radio / range / file / datetime
+  pickers is unaffected (the `:where()` block only matches text-like
+  inputs).
+
 ## [0.2.12] - 2026-05-23
 
 Release infrastructure and Bricks Builder integration.

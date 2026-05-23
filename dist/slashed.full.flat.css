@@ -2999,6 +2999,18 @@ input:where(
 ),
 select,
 textarea {
+  /* Strip native form-control rendering so the CSS background-color
+     below actually paints. Without this, WebKit (Safari) overlays its
+     own dark-mode default field background (≈ #5f6163) on top of the
+     framework's --sf-color-surface, producing a 1.78 : 1 contrast
+     failure flagged by axe. Chromium and Firefox honour the CSS
+     background-color even without this; WebKit needs the explicit
+     opt-out. Native rendering of checkbox / radio / range / file /
+     datetime pickers is preserved because this :where() block only
+     matches text-like inputs (and select / textarea, which already
+     had `appearance: none` for chevron control). */
+  appearance: none;
+
   display: block;
   inline-size: 100%;
   padding-block: var(--sf-space-xs);
@@ -3057,7 +3069,6 @@ textarea {
    Select
    ---------------------------------------------------------- */
 select {
-  appearance: none;
   padding-inline-end: calc(var(--sf-space-s) + 1.5em);
 }
 /* Single-line selects get a chevron. `currentColor` inside a data-URI
