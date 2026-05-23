@@ -120,7 +120,7 @@ sizes for every bundle; `tests/bundle-size.spec.js` guards against bloat.
 
 ## Customising tokens
 
-Override the 22 source tokens in your own stylesheet — any valid CSS color works (hex, oklch, hsl…):
+Override the source tokens in your own stylesheet — any valid CSS color works (hex, oklch, hsl…). The minimum rebrand requires 6 `-light` tokens; optionally add `-dark` counterparts for full per-mode control (up to 22 color tokens total: 11 light + 11 dark):
 
 ```css
 :root {

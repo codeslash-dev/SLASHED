@@ -94,7 +94,7 @@ BEM control.
 
 **slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it. `.is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
 
-**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Add `forced-colors`, brand-palette swaps, or any other token-only theme reassignment here.
+**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/theme-example.css`).
 
 **slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`.
 
@@ -107,7 +107,6 @@ Transition tokens live in `core/tokens.css`:
 | `--sf-transition-transform` | transform | Preferred for movement/scale |
 | `--sf-transition-opacity` | opacity | Preferred for show/hide fades |
 | `--sf-transition-shadow` | box-shadow | Preferred for elevation changes |
-| `--sf-transition-base` | *(deprecated alias)* | Maps to `--sf-transition-all`. Will be removed after v1.x — migrate to a scoped token |
 | `--sf-transition-fast` | all, fast duration | Quick interactions |
 | `--sf-transition-slow` | all, slow duration | Deliberate transitions |
 | `--sf-transition-enter` | all, normal duration | Mount/appear |
@@ -115,7 +114,7 @@ Transition tokens live in `core/tokens.css`:
 
 `@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
 
-**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`).
+**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
 
 **slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
 
@@ -127,7 +126,7 @@ Transition tokens live in `core/tokens.css`:
 
 ## Tokens
 
-- Colors: `oklch()` with relative color syntax for derived values; `color-mix(in oklch)` for tints/shades in palette
+- Colors: `oklch()` with relative color syntax for derived values; `color-mix(in oklab)` for tints/shades in palette
 - `@property` registration for brand & status colors (enables animation and `initial` reset)
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
@@ -143,7 +142,7 @@ Transition tokens live in `core/tokens.css`:
 - **Public vs internal.** Token-file headers label each group **PUBLIC API**
   (covered by SemVer — brand/status sources, resolved semantic tokens, scales,
   BEM consumer aliases), **INTERNAL** (`--sf-is-dark` and anything marked so),
-  or **DEPRECATED** (`--sf-transition-base`, with a removal timeline).
+  or **DEPRECATED** (with a removal timeline noted in the token-file header).
 - **Canonical-source aliases.** A few public tokens have two names by design —
   `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
   `--sf-section-pad`→`--sf-section-pad--m`. Override the canonical (right-hand)
@@ -276,7 +275,7 @@ no-ops in the bundles that include them. Consumers can also build à la carte:
 These behaviors are deliberate. Documented here so they aren't mistaken for bugs.
 
 - **Text-on-color uses a binary lightness threshold.** `--sf-color-text--on-*`
-  use `sign(0.6 - l)` to pick black or white text. This is a binary decision: a
+  use `sign(var(--sf-contrast-threshold) - l)` to pick black or white text (threshold defaults to 0.6). This is a binary decision: a
   colour at lightness 0.59 gets white text, 0.60 gets black. The framework's
   default brand and status palettes are picked so every on-color foreground
   meets WCAG AA Normal (4.5:1) — verified by `tests/tokens.spec.js`. The
