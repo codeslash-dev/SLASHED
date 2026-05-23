@@ -82,3 +82,31 @@ State classes are visual. Always pair them with the matching ARIA attribute so
 assistive tech is informed — e.g. `class="is-expanded" aria-expanded="true"`.
 Live updates (a toast appearing, a validation message) need an ARIA live region
 (`aria-live`, `role="status"`/`"alert"`); CSS cannot announce changes.
+
+## Wiring validation text colour
+
+Validation states (`.is-valid`, `.is-invalid`, `.is-error`, etc.) set two
+tokens: `--sf-field-border-color` (consumed by `forms.css` automatically) and
+`--sf-field-text-color` (a consumer hook).
+
+The framework recolours the **border** for you. For **text** (error messages,
+labels, helper hints), wire the token in your own component CSS:
+
+```css
+.form-error,
+.form-helper {
+  color: var(--sf-field-text-color, inherit);
+}
+```
+
+Because the token inherits, place the `.is-*` class on a wrapper and every
+descendant picks it up — regardless of whether your pattern uses visible
+labels, sr-only labels with placeholders, or a custom markup structure:
+
+```html
+<div class="field-group is-invalid">
+  <label class="sr-only">Email</label>
+  <input type="email" placeholder="Email">
+  <span class="form-error">Please enter a valid email</span>
+</div>
+```
