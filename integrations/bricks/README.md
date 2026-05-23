@@ -26,23 +26,12 @@ Copy the `integrations/bricks/` folder to your WordPress plugins directory:
 cp -r integrations/bricks /path/to/wp-content/plugins/slashed-bricks
 ```
 
-When using this method, the plugin cannot automatically locate the SLASHED CSS bundle.
-You have two options:
+The plugin loads CSS from jsDelivr by default, so no local file setup is needed.
+Optionally, you can copy the `dist/` folder into the plugin directory for local/offline use:
 
-1. **Copy the `dist/` folder** into the plugin directory so the bundle is available at
-   `wp-content/plugins/slashed-bricks/dist/slashed.optimal.css`:
-
-   ```bash
-   cp -r dist /path/to/wp-content/plugins/slashed-bricks/dist
-   ```
-
-2. **Use the filter** to point to a CDN or another location:
-
-   ```php
-   add_filter( 'slashed_bricks/css_bundle_url', function() {
-       return 'https://cdn.example.com/slashed/slashed.optimal.css';
-   } );
-   ```
+```bash
+cp -r dist /path/to/wp-content/plugins/slashed-bricks/dist
+```
 
 ### Option B: Symlink (for development)
 
@@ -148,7 +137,9 @@ integrations/bricks/
 
 ## CSS Bundle
 
-By default, the plugin loads `dist/slashed.optimal.css` from the SLASHED framework directory (resolved relative to the plugin location). This is the recommended bundle that includes core tokens, layout primitives, states, and optional palette tokens.
+By default, the plugin loads `dist/slashed.optimal.css` from the jsDelivr CDN (`https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.optimal.css`). This means the plugin works out of the box without copying any CSS files locally.
+
+If a local copy of the bundle is detected (symlink/in-repo mode or a `dist/` folder inside the plugin directory), the local file takes precedence for faster loads and offline development.
 
 To load a different bundle (e.g., the minimal `dist/slashed.essential.css` or the full `dist/slashed.full.css`), use the `slashed_bricks/css_bundle_url` filter.
 

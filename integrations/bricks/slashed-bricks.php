@@ -26,19 +26,20 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
 /**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Resolves the path to dist/slashed.optimal.css by checking:
- * 1. Symlink/in-repo mode: ../../dist/slashed.optimal.css relative to the plugin
- * 2. Copy-install mode: dist/slashed.optimal.css within the plugin directory
+ * Defaults to the jsDelivr CDN (main branch latest) so the plugin works
+ * without any local file setup. If a local copy is detected (symlink/in-repo
+ * mode or copy-install mode), the local file takes precedence for faster loads
+ * and offline development.
  *
- * Falls back to an empty string (with a PHP notice) if neither location exists.
  * Use the 'slashed_bricks/css_bundle_url' filter to override.
  *
  * @return string URL to the CSS bundle.
  */
 function slashed_bricks_get_css_url() {
-    $default_url = '';
+    // Default: jsDelivr CDN pointing to main branch latest.
+    $default_url = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.optimal.css';
 
-    // Check symlink/in-repo mode first (../../dist/ relative to plugin).
+    // Prefer local file if available (symlink/in-repo mode).
     $repo_path = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';
     if ( file_exists( $repo_path ) ) {
         $default_url = SLASHED_BRICKS_URL . '../../dist/slashed.optimal.css';
@@ -46,15 +47,6 @@ function slashed_bricks_get_css_url() {
     // Check copy-install mode (dist/ within the plugin directory).
     elseif ( file_exists( SLASHED_BRICKS_PATH . 'dist/slashed.optimal.css' ) ) {
         $default_url = SLASHED_BRICKS_URL . 'dist/slashed.optimal.css';
-    }
-    // Neither location found.
-    else {
-        trigger_error(
-            'SLASHED for Bricks: Could not locate slashed.optimal.css. '
-            . 'Copy the dist/ folder into the plugin directory, or use the '
-            . "'slashed_bricks/css_bundle_url' filter to specify the URL.",
-            E_USER_NOTICE
-        );
     }
 
     /**
