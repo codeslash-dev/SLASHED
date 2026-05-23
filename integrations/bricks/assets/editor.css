@@ -1,0 +1,18 @@
+/**
+ * SLASHED for Bricks - Editor Panel Styles
+ *
+ * Minimal styling for SLASHED entries in the Bricks Builder panel.
+ * Loaded only in the admin editor context, not on the frontend.
+ */
+
+/* Style SLASHED variable group headers in the panel */
+[data-slashed-group] {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Improve readability of SLASHED class entries */
+.brx-body .slashed-class-item {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 0.85em;
+}
