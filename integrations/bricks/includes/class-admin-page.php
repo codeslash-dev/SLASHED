@@ -54,6 +54,7 @@ class Slashed_Bricks_Admin_Page {
 		);
 
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'admin_post_slashed_bricks_save', array( $this, 'handle_save' ) );
 	}
 
@@ -69,6 +70,50 @@ class Slashed_Bricks_Admin_Page {
 			array( $this, 'render_page' ),
 			'dashicons-art',
 			59
+		);
+	}
+
+	/**
+	 * Enqueue admin CSS and JS assets on the SLASHED settings page only.
+	 *
+	 * @param string $hook_suffix The current admin page hook suffix.
+	 */
+	public function enqueue_admin_assets( $hook_suffix ) {
+		if ( 'toplevel_page_slashed-bricks' !== $hook_suffix ) {
+			return;
+		}
+
+		$plugin_url = plugin_dir_url( dirname( __FILE__ ) );
+		$plugin_dir = plugin_dir_path( dirname( __FILE__ ) );
+
+		// Enqueue WordPress color picker.
+		wp_enqueue_style( 'wp-color-picker' );
+
+		// Enqueue admin page styles.
+		wp_enqueue_style(
+			'slashed-bricks-admin',
+			$plugin_url . 'assets/admin-page.css',
+			array( 'wp-color-picker' ),
+			filemtime( $plugin_dir . 'assets/admin-page.css' )
+		);
+
+		// Enqueue admin page scripts.
+		wp_enqueue_script(
+			'slashed-bricks-admin-js',
+			$plugin_url . 'assets/admin-page.js',
+			array( 'jquery', 'wp-color-picker' ),
+			filemtime( $plugin_dir . 'assets/admin-page.js' ),
+			true
+		);
+
+		// Pass token data to JavaScript for live preview generation.
+		wp_localize_script(
+			'slashed-bricks-admin-js',
+			'slashedBricksAdmin',
+			array(
+				'defaults' => Slashed_Bricks_Token_Defaults::get_all(),
+				'settings' => $this->get_settings(),
+			)
 		);
 	}
 
@@ -221,6 +266,8 @@ class Slashed_Bricks_Admin_Page {
 					<?php printf( esc_html__( 'Reset %s Section', 'slashed-bricks' ), esc_html( $this->tabs[ $active_tab ] ) ); ?>
 				</button>
 			</form>
+
+			<?php $this->render_live_preview(); ?>
 		</div>
 		<?php
 	}
@@ -238,6 +285,55 @@ class Slashed_Bricks_Admin_Page {
 		} elseif ( 'reset_section' === $message ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Section reset to defaults.', 'slashed-bricks' ) . '</p></div>';
 		}
+	}
+
+	/**
+	 * Render the live preview panel.
+	 *
+	 * Displays sample HTML elements styled with current token values
+	 * that update in real-time as the user adjusts controls via JS.
+	 */
+	private function render_live_preview() {
+		$defaults = Slashed_Bricks_Token_Defaults::get_colors();
+		?>
+		<div class="slashed-preview-panel">
+			<style id="slashed-live-preview"></style>
+
+			<h3 class="preview-heading" style="font-family: var(--sf-font-heading, system-ui, sans-serif);">
+				<?php esc_html_e( 'The quick brown fox jumps over the lazy dog', 'slashed-bricks' ); ?>
+			</h3>
+
+			<p class="preview-text" style="font-family: var(--sf-font-body, system-ui, sans-serif);">
+				<?php esc_html_e( 'This is a preview of your design token configuration. Adjust values above and see changes reflected here in real time. Typography, colors, spacing, and other tokens will update as you modify them.', 'slashed-bricks' ); ?>
+			</p>
+
+			<div class="preview-colors">
+				<div class="preview-color-swatch" style="background: var(--sf-color-primary-light, <?php echo esc_attr( $defaults['brand']['primary'] ); ?>);" title="Primary"></div>
+				<div class="preview-color-swatch" style="background: var(--sf-color-secondary-light, <?php echo esc_attr( $defaults['brand']['secondary'] ); ?>);" title="Secondary"></div>
+				<div class="preview-color-swatch" style="background: var(--sf-color-tertiary-light, <?php echo esc_attr( $defaults['brand']['tertiary'] ); ?>);" title="Tertiary"></div>
+				<div class="preview-color-swatch" style="background: var(--sf-color-action-light, <?php echo esc_attr( $defaults['brand']['action'] ); ?>);" title="Action"></div>
+				<div class="preview-color-swatch" style="background: var(--sf-color-neutral-light, <?php echo esc_attr( $defaults['brand']['neutral'] ); ?>);" title="Neutral"></div>
+				<div class="preview-color-swatch" style="background: var(--sf-color-base-light, <?php echo esc_attr( $defaults['brand']['base'] ); ?>);" title="Base"></div>
+			</div>
+
+			<div>
+				<span class="preview-button" style="background: var(--sf-color-primary-light, <?php echo esc_attr( $defaults['brand']['primary'] ); ?>);">
+					<?php esc_html_e( 'Primary Button', 'slashed-bricks' ); ?>
+				</span>
+				<span class="preview-button" style="background: var(--sf-color-action-light, <?php echo esc_attr( $defaults['brand']['action'] ); ?>);">
+					<?php esc_html_e( 'Action Button', 'slashed-bricks' ); ?>
+				</span>
+			</div>
+
+			<div class="preview-spacing">
+				<div class="preview-spacing-box" style="width: 20px; height: 20px;" title="XS"></div>
+				<div class="preview-spacing-box" style="width: 30px; height: 30px;" title="S"></div>
+				<div class="preview-spacing-box" style="width: 44px; height: 44px;" title="M"></div>
+				<div class="preview-spacing-box" style="width: 60px; height: 60px;" title="L"></div>
+				<div class="preview-spacing-box" style="width: 80px; height: 80px;" title="XL"></div>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
