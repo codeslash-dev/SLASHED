@@ -74,12 +74,18 @@ function slashed_bricks_is_bricks_active() {
     $theme = wp_get_theme();
     $minimum_version = '1.9.2';
 
-    if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) || 'bricks' === strtolower( $theme->get_template() ) ) {
-        return version_compare( (string) $theme->get( 'Version' ), $minimum_version, '>=' );
+    if ( defined( 'BRICKS_VERSION' ) ) {
+        return version_compare( (string) BRICKS_VERSION, $minimum_version, '>=' );
     }
 
-    if ( defined( 'BRICKS_VERSION' ) ) {
-        return version_compare( BRICKS_VERSION, $minimum_version, '>=' );
+    if ( 'bricks' === strtolower( $theme->get_template() ) ) {
+        $parent = $theme->parent();
+        $version = $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
+        return version_compare( $version, $minimum_version, '>=' );
+    }
+
+    if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
+        return version_compare( (string) $theme->get( 'Version' ), $minimum_version, '>=' );
     }
 
     return false;
