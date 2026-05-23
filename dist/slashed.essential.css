@@ -257,7 +257,7 @@
        responsibility (see docs/theming.md → "Link contrast"). */
     --sf-color-link:            light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l,        0.68), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0.72, l, 1) c h)
     );
     --sf-color-link--hover:     light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
@@ -274,7 +274,7 @@
          :root { --sf-color-link--visited: #6b46c1; } */
     --sf-color-link--visited:   light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
-      oklch(from var(--sf-color-action) clamp(0, max(l,        0.68), 1) c calc(h + 60))
+      oklch(from var(--sf-color-action) clamp(0.72, l, 1) c calc(h + 60))
     );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
