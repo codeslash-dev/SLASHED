@@ -86,12 +86,12 @@ rebrand workflow.
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.1)` |
 | `--sf-color-inverse` | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |
-| `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.72, l, 1) c h) )` |
-| `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h) )` |
+| `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` |
+| `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h) )` |
 | `--sf-color-link--disabled` | `var(--sf-color-text--disabled)` |
-| `--sf-color-link--hover` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h) )` |
+| `--sf-color-link--hover` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h) )` |
 | `--sf-color-link--underline` | `oklch(from var(--sf-color-action) l c h / 0.3)` |
-| `--sf-color-link--visited` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.72, l, 1) c calc(h + 60)) )` |
+| `--sf-color-link--visited` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )` |
 | `--sf-color-mark-bg` | `oklch(from var(--sf-color-warning) l c h / 0.25)` |
 | `--sf-color-mark-text` | `inherit` |
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |

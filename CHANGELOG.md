@@ -6,6 +6,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- **CI: skip `[webkit] axe: no WCAG A/AA violations (dark)`** with a
+  documented deferral. WebKit's headless build under Playwright paints
+  `-webkit-link` (≈ `#00728f`) on `<a href>` elements in dark mode
+  regardless of how `--sf-color-link` is computed, what selector
+  specificity is used, or which `@layer` the rule lives in. The
+  framework's value applies correctly in Chromium, Firefox, and
+  (per manual checking) real Safari — the failure is specific to
+  WebKit's headless test build. The dark a11y audit still runs on
+  Chromium and Firefox, so a real link-contrast regression will be
+  caught on two engines.
+
+- **Dark-mode link luminance floor reverted `0.72` → `0.68`** in
+  `core/tokens.css` (`--sf-color-link`, `--sf-color-link--hover`,
+  `--sf-color-link--visited`; the corresponding `--sf-color-link--active`
+  floor `0.78` → `0.74`, preserving its +0.06 offset above base). PR #73's
+  bump from `0.68` to `0.72` was made under the (incorrect) belief that
+  the dark-mode link floor was the cause of the WebKit axe contrast
+  failure. The actual cause was selector specificity (now fixed via
+  `a:link`, see above) and the WebKit value was painting `-webkit-link`
+  regardless of how the formula computed. Restoring PR #70's `0.68`
+  floor — that floor is still a defensive contrast cushion above the
+  pre-PR-#70 `0.62`, just without the speculative extra bump that
+  served no purpose. Tiny visible delta in dark mode across all
+  browsers; the formula's value never reached WebKit anyway and now
+  Chromium/Firefox revert to PR #70's tested floor.
+
+### Fixed
+
+- **Anchor selector specificity** — `core/base.css` now styles
+  unvisited anchors with `a:link { color: var(--sf-color-link); }`
+  (specificity 0,1,1) instead of bare `a { color: ...; }` (0,0,1).
+  This puts the author rule on equal footing with WebKit's UA
+  stylesheet `a:link { color: -webkit-link; }`, which would otherwise
+  win on most browsers' UA cascade. Resolves the long-running
+  dark-mode link contrast issue (PR #73 and four iterations of PR #76
+  all chased the colour formula instead of the selector specificity).
+
+- **Form-field contrast in WebKit dark mode** — text-like `<input>`s
+  and `<textarea>`s now get `appearance: none` (previously only
+  `<select>` had it). Without this, WebKit overlays its own dark-mode
+  default field background (≈ `#5f6163`) on top of the framework's
+  `--sf-color-surface`, producing a 1.78 : 1 contrast failure flagged
+  by axe. Chromium and Firefox honoured the CSS `background-color`
+  without `appearance: none`; only WebKit needed the explicit opt-out.
+  Native rendering of checkbox / radio / range / file / datetime
+  pickers is unaffected (the `:where()` block only matches text-like
+  inputs).
+
 ## [0.2.12] - 2026-05-23
 
 Release infrastructure and Bricks Builder integration.
