@@ -3,14 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**588 tokens.** Every `--sf-*` custom property and its default value. See
+**587 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-351 tokens.
+350 tokens.
 
 | Token | Default |
 |---|---|
@@ -67,7 +67,7 @@ rebrand workflow.
 | `--sf-color-border--subtle` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` |
 | `--sf-color-border--translucent` | `oklch(from var(--sf-color-neutral) l c h / 0.15)` |
 | `--sf-color-code-bg` | `var(--sf-color-well)` |
-| `--sf-color-code-text` | `inherit` |
+| `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-danger-light` | `oklch(0.48 0.24 12) *(registered)*` |
 | `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.3)` |
@@ -86,12 +86,12 @@ rebrand workflow.
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.1)` |
 | `--sf-color-inverse` | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |
-| `--sf-color-link` | `var(--sf-color-action)` |
-| `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, calc(l - 0.15), 1) c h), oklch(from var(--sf-color-action) clamp(0, calc(l + 0.15), 1) c h) )` |
+| `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l, 0.62), 1) c h) )` |
+| `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h) )` |
 | `--sf-color-link--disabled` | `var(--sf-color-text--disabled)` |
-| `--sf-color-link--hover` | `light-dark( oklch(from var(--sf-color-action) clamp(0, calc(l - 0.1), 1) c h), oklch(from var(--sf-color-action) clamp(0, calc(l + 0.1), 1) c h) )` |
+| `--sf-color-link--hover` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h) )` |
 | `--sf-color-link--underline` | `oklch(from var(--sf-color-action) l c h / 0.3)` |
-| `--sf-color-link--visited` | `oklch(from var(--sf-color-action) l c calc(h + 60))` |
+| `--sf-color-link--visited` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0, max(l, 0.62), 1) c calc(h + 60)) )` |
 | `--sf-color-mark-bg` | `oklch(from var(--sf-color-warning) l c h / 0.25)` |
 | `--sf-color-mark-text` | `inherit` |
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
@@ -348,7 +348,6 @@ rebrand workflow.
 | `--sf-tracking-wider` | `0.05em` |
 | `--sf-tracking-widest` | `0.1em` |
 | `--sf-transition-all` | `all var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-base` | `var(--sf-transition-all)` |
 | `--sf-transition-colors` | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-enter` | `all var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-exit` | `all var(--sf-duration-fast) var(--sf-ease-in)` |

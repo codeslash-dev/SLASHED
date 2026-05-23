@@ -34,6 +34,19 @@ jobs:
           name: dist
           path: dist/
 
+  docs-freshness:
+    name: Verify generated docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run docs:tokens
+      - run: git diff --exit-code docs/tokens.md || (echo "::error::docs/tokens.md is stale — run 'npm run docs:tokens' and commit" && exit 1)
+
   test:
     name: Regression tests
     runs-on: ubuntu-latest

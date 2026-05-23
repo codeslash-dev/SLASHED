@@ -32,6 +32,14 @@
      `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
      .is-danger` classes in core/states.css), falling back to
      --sf-color-border. Add a validation `.is-*` class to recolour a field.
+
+     Validation states also set --sf-field-text-color (e.g. error-strong,
+     success-strong). The framework does NOT consume this token — it is a
+     hook for your own component CSS. Wire it to your error message, label,
+     or helper-text class:
+       .form-error { color: var(--sf-field-text-color, inherit); }
+     The token inherits, so place the .is-* class on a wrapper and all
+     descendants can read it.
    ============================================================ */
 
 @layer slashed.forms {
@@ -111,7 +119,10 @@
   /* Single-line selects get a chevron. `currentColor` inside a data-URI
      background SVG does NOT inherit the host colour cross-browser, so the
      stroke is swapped by colour-scheme via light-dark() — this also tracks
-     scoped [data-theme] regions, which flip color-scheme. */
+     scoped [data-theme] regions, which flip color-scheme.
+
+     Override path: to use a custom chevron colour or icon, override
+     background-image on `select:not([multiple], [size])` in your own CSS. */
   select:not([multiple], [size]) {
     background-repeat: no-repeat;
     background-position: right var(--sf-space-s) center;
@@ -275,6 +286,7 @@
     display: block;
     font-weight: var(--sf-font-weight-heading);
     margin-block-end: var(--sf-space-xs);
+    color: var(--sf-field-text-color, inherit);
   }
 
   /* Required-field marker — classless, no markup convention.

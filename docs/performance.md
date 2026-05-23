@@ -6,7 +6,7 @@ knowing when you build on top.
 
 ## `transition: all` is a footgun
 
-`--sf-transition-all` (and its deprecated alias `--sf-transition-base`)
+`--sf-transition-all`
 transition **every** animatable property, forcing the browser to watch every
 computed value for change. Prefer a scoped token:
 

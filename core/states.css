@@ -74,6 +74,9 @@
     border:        2px solid var(--sf-color-border--strong);
     border-block-start-color: var(--sf-color-action);
     border-radius: var(--sf-radius-full);
+    /* Reduced-motion: accessibility.css kills animation-duration via
+       !important on *, *::before, *::after — so this spinner stops
+       even without a local reduced-motion wrapper. */
     animation:     sf-spin 0.6s linear infinite;
   }
 

@@ -74,8 +74,6 @@
        --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
    INTERNAL — implementation detail, may change without a major bump:
      · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
-   DEPRECATED — slated for removal on the documented timeline:
-     · --sf-transition-base (→ use a scoped --sf-transition-* token)
 
    CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
      · --sf-space-gap     → --sf-gap          (layout primitives read this name)
@@ -194,11 +192,11 @@
        invisible text when code appears inside inverted-colour containers
        (e.g. sf-imposter with a dark background where inherited colour is
        near-white). Override with a tint value if desired. */
-    --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
 
     /* ----------------------------------------------------------
-       Text-on-color — sign(0.6 - l) * 999 is mode-agnostic:
+       Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic:
        auto-selects light or dark text based on background luminance.
        Uses resolved tokens — works for any user-supplied color.
 
@@ -210,18 +208,18 @@
        brand colors fall in this range. For body text on colored
        backgrounds, override --sf-color-text--on-* manually.
        ---------------------------------------------------------- */
-    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary)  clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     --sf-color-text--on-base:      var(--sf-color-text);
     --sf-color-text--on-inverse:   var(--sf-color-text--inverse);
-    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
 
     /* ----------------------------------------------------------
@@ -699,7 +697,9 @@
 
 
     /* ----------------------------------------------------------
-       Scroll-driven animation range — attach to your own timeline.
+       Scroll-driven animation range — consumer API. Attach these
+       to your own scroll-timeline via animation-range. Not consumed
+       by the framework itself; intended for BEM component authors.
        ---------------------------------------------------------- */
     --sf-scroll-timeline-range-start: 0%;
     --sf-scroll-timeline-range-end:   100%;
@@ -743,6 +743,11 @@
        Positive = more contrast; 0 = no change. Consumed by
        --sf-color-text, --sf-color-text--secondary, --sf-color-heading. */
     --sf-contrast-bias:     0;
+    /* Lightness crossover for text-on-color auto-contrast. Colours with
+       L above this value get dark text; below get light text. Default 0.6
+       guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your
+       brand sits in the 0.52-0.60 range and you prefer white text on it. */
+    --sf-contrast-threshold: 0.6;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);
     --sf-safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -846,10 +851,7 @@
 
        --sf-transition-all transitions ALL properties — convenient but
        a performance footgun (forces the browser to watch every computed
-       value). Prefer the granular tokens below for production UI. The
-       alias --sf-transition-base is kept for one minor release to avoid
-       breaking consumers; migrate to --sf-transition-all or, better,
-       one of the scoped variants.
+       value). Prefer the granular tokens below for production UI.
        ---------------------------------------------------------- */
     --sf-transition-all:       all var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-colors:
@@ -862,9 +864,6 @@
     --sf-transition-transform: transform var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-opacity:   opacity var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-shadow:    box-shadow var(--sf-duration-normal) var(--sf-ease-out);
-
-    /* Legacy alias — deprecated, remove after v1.x */
-    --sf-transition-base:  var(--sf-transition-all);
 
     --sf-transition-fast:  all var(--sf-duration-fast)   var(--sf-ease-out);
     --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
@@ -1298,6 +1297,36 @@
   optgroup { font: inherit; }
   ::file-selector-button { font: inherit; }
   ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
+
+  /* Minimal rich-block defaults — just enough to distinguish from <p>.
+     Full styling lives in .sf-prose (core/layout.css). */
+  blockquote {
+    border-inline-start: var(--sf-border-width-3) solid var(--sf-color-border);
+    padding-inline-start: var(--sf-space-m);
+    font-style: italic;
+  }
+
+  dt {
+    font-weight: var(--sf-font-weight-heading);
+  }
+
+  dd {
+    margin-inline-start: var(--sf-space-m);
+  }
+
+  table {
+    width: 100%;
+    text-align: start;
+  }
+
+  th {
+    font-weight: var(--sf-font-weight-heading);
+  }
+
+  td, th {
+    padding: var(--sf-space-2xs) var(--sf-space-xs);
+    border-block-end: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+  }
 
 }
 
@@ -1839,14 +1868,21 @@
   .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
   .sf-prose ul                   { list-style: disc; }
   .sf-prose ol                   { list-style: decimal; }
-  .sf-prose ::marker             { color: var(--sf-brand, var(--sf-color-primary)); }
+  .sf-prose ::marker             { color: var(--sf-color-primary); }
   .sf-prose figure               { margin-block: var(--sf-space-l); }
   .sf-prose figcaption           { font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs); }
   .sf-prose table                { margin-block: var(--sf-space-m); display: block; overflow-x: auto; max-width: 100%; }
   .sf-prose video                { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
 
+  /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the
+     general 0-2-0 budget because these rules must override the .sf-prose
+     child selectors above (also 0-2-0). This is a documented exception. */
   .sf-prose .sf-not-prose > * + *    { margin-block-start: 0; }
   .sf-prose .sf-not-prose li + li    { margin-block-start: 0; }
+  /* `revert` in a cascade layer rolls back past all layers to the UA
+     stylesheet — restoring browser-default list styling. In the flat
+     bundle (layers stripped), `revert` falls back to the UA stylesheet
+     directly. Both paths produce the same result: native list bullets. */
   .sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }
   .sf-prose .sf-not-prose ::marker   { color: inherit; }
   .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
@@ -1934,6 +1970,9 @@
     border:        2px solid var(--sf-color-border--strong);
     border-block-start-color: var(--sf-color-action);
     border-radius: var(--sf-radius-full);
+    /* Reduced-motion: accessibility.css kills animation-duration via
+       !important on *, *::before, *::after — so this spinner stops
+       even without a local reduced-motion wrapper. */
     animation:     sf-spin 0.6s linear infinite;
   }
 
@@ -2675,6 +2714,15 @@
    Status colors keep their subtle/muted/strong triplets in
    core/tokens.css — they are NOT duplicated here.
 
+   This is a deliberate design choice: brand colours need a full 50-950
+   ramp for decorative/compositional use (backgrounds, borders, hover
+   states at arbitrary intensities). Status colours are functional — you
+   need a subtle background, a strong readable text, and a muted accent.
+   A full numeric scale for errors/warnings would add ~185 tokens that
+   most consumers never use. If you need --sf-color-error-300, replicate
+   the brand-palette formula:
+     --sf-color-error-300: color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-base));
+
    Load after core/tokens.css:
 
    Token families (per brand color):
@@ -2975,6 +3023,14 @@
      `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
      .is-danger` classes in core/states.css), falling back to
      --sf-color-border. Add a validation `.is-*` class to recolour a field.
+
+     Validation states also set --sf-field-text-color (e.g. error-strong,
+     success-strong). The framework does NOT consume this token — it is a
+     hook for your own component CSS. Wire it to your error message, label,
+     or helper-text class:
+       .form-error { color: var(--sf-field-text-color, inherit); }
+     The token inherits, so place the .is-* class on a wrapper and all
+     descendants can read it.
    ============================================================ */
 
 @layer slashed.forms {
@@ -3054,7 +3110,10 @@
   /* Single-line selects get a chevron. `currentColor` inside a data-URI
      background SVG does NOT inherit the host colour cross-browser, so the
      stroke is swapped by colour-scheme via light-dark() — this also tracks
-     scoped [data-theme] regions, which flip color-scheme. */
+     scoped [data-theme] regions, which flip color-scheme.
+
+     Override path: to use a custom chevron colour or icon, override
+     background-image on `select:not([multiple], [size])` in your own CSS. */
   select:not([multiple], [size]) {
     background-repeat: no-repeat;
     background-position: right var(--sf-space-s) center;
@@ -3218,6 +3277,7 @@
     display: block;
     font-weight: var(--sf-font-weight-heading);
     margin-block-end: var(--sf-space-xs);
+    color: var(--sf-field-text-color, inherit);
   }
 
   /* Required-field marker — classless, no markup convention.
