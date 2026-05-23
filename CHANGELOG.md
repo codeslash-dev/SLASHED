@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- **Dark-mode link contrast (WebKit, follow-up)** — replaced
+  `clamp(0, max(l, 0.68), 1)` with `clamp(0.72, l, 1)` in the dark-mode
+  `--sf-color-link` and `--sf-color-link--visited` formulas. WebKit does
+  not correctly resolve nested `max()` inside `oklch(from ...)` relative
+  colour syntax, which left axe-core flagging a WCAG AA contrast
+  violation on dark-mode links. The simpler `clamp()` form is
+  semantically equivalent (lightness floor) and avoids the engine bug,
+  with the floor raised to 0.72 for additional contrast margin (PR #73)
+
 ## [0.2.12] - 2026-05-23
 
 Release infrastructure and Bricks Builder integration.
