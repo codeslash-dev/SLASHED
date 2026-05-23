@@ -111,6 +111,21 @@ class Slashed_Bricks_Variables {
             foreach ( array( '50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950' ) as $step ) {
                 $colors[] = '--sf-color-' . $brand . '-' . $step;
             }
+
+            // Functional aliases.
+            $colors[] = '--sf-color-' . $brand . '-hover';
+            $colors[] = '--sf-color-' . $brand . '-active';
+            $colors[] = '--sf-color-' . $brand . '-subtle';
+            $colors[] = '--sf-color-' . $brand . '-muted';
+            $colors[] = '--sf-color-' . $brand . '-ghost';
+
+            // Shade aliases.
+            $colors[] = '--sf-color-' . $brand . '-superlight';
+            $colors[] = '--sf-color-' . $brand . '-xlight';
+            $colors[] = '--sf-color-' . $brand . '-lighter';
+            $colors[] = '--sf-color-' . $brand . '-darker';
+            $colors[] = '--sf-color-' . $brand . '-xdark';
+            $colors[] = '--sf-color-' . $brand . '-superdark';
         }
 
         // Status colors.
@@ -124,9 +139,17 @@ class Slashed_Bricks_Variables {
         // Semantic colors.
         $semantic = array(
             'text', 'text--secondary', 'text--muted', 'heading',
+            'text--placeholder', 'text--disabled', 'text--inverse',
+            'text--on-primary', 'text--on-secondary', 'text--on-tertiary',
+            'text--on-action', 'text--on-neutral', 'text--on-base',
             'bg', 'surface', 'well', 'raised', 'overlay', 'inverse',
+            'bg--hover', 'bg--active', 'bg--selected', 'bg--focus', 'bg--disabled',
             'border', 'border--subtle', 'border--strong',
+            'border--focus', 'border--disabled', 'border--translucent',
             'link', 'link--hover', 'link--active', 'link--visited',
+            'link--underline', 'link--disabled',
+            'code-bg', 'code-text',
+            'selection-bg', 'mark-bg', 'dim',
         );
         foreach ( $semantic as $s ) {
             $colors[] = '--sf-color-' . $s;
@@ -141,7 +164,7 @@ class Slashed_Bricks_Variables {
      * @return array
      */
     private function get_spacing_variables() {
-        $sizes = array( '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl' );
+        $sizes = array( 'none', 'px', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl' );
         $vars  = array();
 
         foreach ( $sizes as $size ) {
@@ -163,28 +186,50 @@ class Slashed_Bricks_Variables {
      * @return array
      */
     private function get_typography_variables() {
-        $sizes = array( '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl' );
+        $sizes = array( '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl' );
         $vars  = array();
 
         foreach ( $sizes as $size ) {
             $vars[] = '--sf-text-' . $size;
         }
 
-        $vars[] = '--sf-font-sans';
-        $vars[] = '--sf-font-serif';
+        // Display sizes.
+        $vars[] = '--sf-text-display-s';
+        $vars[] = '--sf-text-display-m';
+        $vars[] = '--sf-text-display-l';
+
+        // Font families.
+        $vars[] = '--sf-font-body';
+        $vars[] = '--sf-font-heading';
         $vars[] = '--sf-font-mono';
+        $vars[] = '--sf-font-display';
+        $vars[] = '--sf-font-humanist';
+        $vars[] = '--sf-font-geometric';
+        $vars[] = '--sf-font-slab';
+
+        // Font weights.
+        $vars[] = '--sf-font-weight-thin';
+        $vars[] = '--sf-font-weight-extralight';
+        $vars[] = '--sf-font-weight-light';
         $vars[] = '--sf-font-weight-normal';
         $vars[] = '--sf-font-weight-medium';
         $vars[] = '--sf-font-weight-semibold';
         $vars[] = '--sf-font-weight-bold';
+        $vars[] = '--sf-font-weight-extrabold';
+        $vars[] = '--sf-font-weight-black';
+
+        // Leading.
         $vars[] = '--sf-leading-tight';
         $vars[] = '--sf-leading-snug';
         $vars[] = '--sf-leading-normal';
         $vars[] = '--sf-leading-relaxed';
-        $vars[] = '--sf-leading-loose';
+
+        // Tracking.
         $vars[] = '--sf-tracking-tight';
         $vars[] = '--sf-tracking-normal';
         $vars[] = '--sf-tracking-wide';
+        $vars[] = '--sf-tracking-wider';
+        $vars[] = '--sf-tracking-widest';
 
         return $vars;
     }
@@ -237,11 +282,15 @@ class Slashed_Bricks_Variables {
      */
     private function get_radius_variables() {
         return array(
+            '--sf-radius-none',
             '--sf-radius-xs',
             '--sf-radius-s',
             '--sf-radius-m',
             '--sf-radius-l',
             '--sf-radius-xl',
+            '--sf-radius-2xl',
+            '--sf-radius-3xl',
+            '--sf-radius-4xl',
             '--sf-radius-full',
         );
     }
@@ -253,11 +302,14 @@ class Slashed_Bricks_Variables {
      */
     private function get_shadow_variables() {
         return array(
+            '--sf-shadow-none',
             '--sf-shadow-xs',
             '--sf-shadow-s',
             '--sf-shadow-m',
             '--sf-shadow-l',
             '--sf-shadow-xl',
+            '--sf-shadow-2xl',
+            '--sf-shadow-inner',
         );
     }
 
@@ -268,15 +320,34 @@ class Slashed_Bricks_Variables {
      */
     private function get_motion_variables() {
         return array(
+            // Durations.
+            '--sf-duration-none',
+            '--sf-duration-instant',
             '--sf-duration-fast',
             '--sf-duration-normal',
             '--sf-duration-slow',
-            '--sf-ease-in',
+            '--sf-duration-slower',
+
+            // Easings.
+            '--sf-ease-linear',
             '--sf-ease-out',
+            '--sf-ease-in',
             '--sf-ease-in-out',
+            '--sf-ease-spring',
+            '--sf-ease-elastic',
+            '--sf-ease-bounce',
+            '--sf-ease-overshoot',
+
+            // Transitions.
+            '--sf-transition-all',
+            '--sf-transition-colors',
+            '--sf-transition-transform',
+            '--sf-transition-opacity',
+            '--sf-transition-shadow',
             '--sf-transition-fast',
-            '--sf-transition-normal',
             '--sf-transition-slow',
+            '--sf-transition-enter',
+            '--sf-transition-exit',
         );
     }
 
@@ -287,14 +358,14 @@ class Slashed_Bricks_Variables {
      */
     private function get_z_index_variables() {
         return array(
+            '--sf-z-below',
             '--sf-z-base',
-            '--sf-z-dropdown',
-            '--sf-z-sticky',
-            '--sf-z-fixed',
-            '--sf-z-modal',
-            '--sf-z-popover',
-            '--sf-z-tooltip',
-            '--sf-z-toast',
+            '--sf-z-raised',
+            '--sf-z-low',
+            '--sf-z-mid',
+            '--sf-z-high',
+            '--sf-z-top',
+            '--sf-z-max',
         );
     }
 }
