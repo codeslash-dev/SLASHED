@@ -84,6 +84,20 @@ function slashed_bricks_is_bricks_active() {
 }
 
 /**
+ * Initialize the admin page.
+ *
+ * The admin page loads regardless of whether Bricks is active so users
+ * can configure tokens before activating the Bricks theme.
+ */
+function slashed_bricks_admin_init() {
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page.php';
+
+    new Slashed_Bricks_Admin_Page();
+}
+add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
+
+/**
  * Initialize the plugin.
  */
 function slashed_bricks_init() {
