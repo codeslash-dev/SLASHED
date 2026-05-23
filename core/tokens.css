@@ -810,6 +810,7 @@
     --sf-content-gap:   var(--sf-space-s);  /* rhythm within a component */
     --sf-component-pad: var(--sf-space-m);  /* standard component padding */
     --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
+    --sf-field-required-marker: " *";
 
 
     /* ----------------------------------------------------------

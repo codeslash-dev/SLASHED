@@ -14,14 +14,18 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-section` | vertical page rhythm; sizes `--s/--m/--l/--xl` | `--sf-section-pad*` |
 | `.sf-section-group` | collapses the gap between adjacent sections | — |
 | `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-space-gutter` |
+| `.sf-box` | isolated unit with padding and optional border outline | `--sf-box-padding`, `--sf-box-border-width`, `--sf-box-border-color` |
+| `.sf-center` | intrinsic centering with max-width and gutters; `--intrinsic` | `--sf-center-max`, `--sf-center-gutter` |
 | `.sf-stack` | vertical flow with consistent gap (the "owl") | `--sf-stack-gap` |
 | `.sf-cluster` | wrapping inline group; `--no-wrap` | `--sf-cluster-gap/-align/-justify` |
 | `.sf-sidebar` | content + fixed-ish side panel that wraps when narrow | `--sf-sidebar-*` |
 | `.sf-switcher` | N columns above a threshold, stacked below; `--no-wrap`, `--vertical` | `--sf-switcher-threshold/-gap` |
 | `.sf-grid` | auto-fill responsive grid; `--fit`, `--xs … --xl`, `--dense` | `--sf-grid-min`, `--sf-grid-gap` |
-| `.sf-grid-1 … -6` | fixed-column grids, container-responsive | `--sf-grid-gap` |
+| `.sf-grid-1 / -2 / -3 / -4 / -6` | fixed-column grids, container-responsive (no `-5`) | `--sf-grid-gap` |
 | `.sf-grid-1-2 / -2-1 / -1-3 / -3-1` | ratio two-column grids | `--sf-grid-gap` |
 | `.sf-bento` | dense free-form grid; `--sf-bento-cols/-row` overrides | `--sf-bento-*` |
+| `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-space-content`, `--sf-space-gap` |
+| `.sf-pancake` | sticky-footer grid: header / main(1fr) / footer | — |
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed` | `--sf-content-width`, `--sf-breakout-width` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |
 | `.sf-frame` | aspect-ratio media box | `--sf-frame-ratio` |
@@ -29,6 +33,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
 | `.sf-prose` | readable long-form text column (styles `table`, `blockquote`, `figure`, `dl`) | `--sf-prose-*` |
+| `.sf-not-prose` | reset zone inside `.sf-prose` — reverts prose styles for nested components | — |
 | `.sf-divider` | token-driven separator; `--vertical` | `--sf-divider-*` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --xl` | `--sf-icon-*` |
 

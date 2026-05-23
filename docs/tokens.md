@@ -3,14 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**587 tokens.** Every `--sf-*` custom property and its default value. See
+**589 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-350 tokens.
+352 tokens.
 
 | Token | Default |
 |---|---|
@@ -67,7 +67,7 @@ rebrand workflow.
 | `--sf-color-border--subtle` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` |
 | `--sf-color-border--translucent` | `oklch(from var(--sf-color-neutral) l c h / 0.15)` |
 | `--sf-color-code-bg` | `var(--sf-color-well)` |
-| `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
+| `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-danger-light` | `oklch(0.48 0.24 12) *(registered)*` |
 | `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.3)` |
@@ -117,18 +117,18 @@ rebrand workflow.
 | `--sf-color-text--disabled` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` |
 | `--sf-color-text--inverse` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` |
 | `--sf-color-text--muted` | `var(--sf-color-neutral)` |
-| `--sf-color-text--on-action` | `oklch(from var(--sf-color-action) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-action` | `oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-base` | `var(--sf-color-text)` |
-| `--sf-color-text--on-danger` | `oklch(from var(--sf-color-danger) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-error` | `oklch(from var(--sf-color-error) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-info` | `oklch(from var(--sf-color-info) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-danger` | `oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-error` | `oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-info` | `oklch(from var(--sf-color-info) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-inverse` | `var(--sf-color-text--inverse)` |
-| `--sf-color-text--on-neutral` | `oklch(from var(--sf-color-neutral) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-primary` | `oklch(from var(--sf-color-primary) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-secondary` | `oklch(from var(--sf-color-secondary) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-success` | `oklch(from var(--sf-color-success) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-tertiary` | `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-warning` | `oklch(from var(--sf-color-warning) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-neutral` | `oklch(from var(--sf-color-neutral) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-primary` | `oklch(from var(--sf-color-primary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-secondary` | `oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-success` | `oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-tertiary` | `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-warning` | `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--placeholder` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` |
 | `--sf-color-text--secondary` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` |
 | `--sf-color-warning` | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
@@ -145,6 +145,7 @@ rebrand workflow.
 | `--sf-container-wide` | `90rem` |
 | `--sf-content-gap` | `var(--sf-space-s)` |
 | `--sf-contrast-bias` | `0` |
+| `--sf-contrast-threshold` | `0.6` |
 | `--sf-current-font-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-divider-color` | `var(--sf-color-border)` |
 | `--sf-divider-style` | `solid` |
@@ -167,6 +168,7 @@ rebrand workflow.
 | `--sf-ease-overshoot` | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` |
 | `--sf-ease-spring` | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` |
 | `--sf-field-block` | `var(--sf-space-l)` |
+| `--sf-field-required-marker` | `" *"` |
 | `--sf-focus-ring-color` | `var(--sf-color-action)` |
 | `--sf-focus-ring-offset` | `2px` |
 | `--sf-focus-ring-shadow` | `0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)` |
