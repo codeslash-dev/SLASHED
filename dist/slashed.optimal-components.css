@@ -3637,27 +3637,23 @@
 /* ─── optional/tokens.components.css ─── */
 /* ============================================================
    SLASHED — optional/tokens.components.css
-   Component tokens — BLUEPRINT (commented out).
+   Component tokens.
    Layer: slashed.tokens
 
-   STATUS — v0.3.0 BLUEPRINT
-   ─────────────────────────
-   Token declarations are commented out below. The @layer
-   declaration is real, so the cascade position is reserved.
-   Activation alongside class activation in optional/components.css
-   is planned for upcoming minor releases (additive, no breaking
-   changes to existing tokens or classes).
+   This file is not yet complete. All token declarations below are
+   commented out — minified bundles ship 0 bytes from this file.
+   The @layer declaration is real so the cascade slot is in place.
 
-   These tokens pair with the 8 components reserved in
-   optional/components.css:
-     button, card, badge, tag, alert, avatar, modal, skeleton.
+   These tokens pair with the 8 component names taken in
+   optional/components.css: button, card, badge, tag, alert,
+   avatar, modal, skeleton.
 
-   When activated, every token here becomes PUBLIC API and is
-   covered by SemVer.
+   When the matching component classes ship, every token here
+   becomes public API and is covered by SemVer.
 
    CARD TOKENS — note the card token block lives here (rather
    than in core/tokens.css) so that the entire component-related
-   surface — classes AND tokens — shares one activation cycle.
+   surface — classes AND tokens — moves together.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -3774,43 +3770,19 @@
 /* ─── optional/components.css ─── */
 /* ============================================================
    SLASHED — optional/components.css
-   Component classes — BLUEPRINT (commented out).
    Layer: slashed.components
 
-   STATUS — v0.3.0 BLUEPRINT
-   ─────────────────────────
-   Class definitions are commented out below. The @layer
-   declaration is real, so the cascade position is reserved.
-   Activation is planned for upcoming minor releases (additive,
-   no breaking changes).
+   This file is not yet complete. All class definitions below are
+   commented out — minified bundles ship 0 bytes from this file.
+   The @layer declaration is real so the cascade slot is in place.
 
-   Why ship a "blueprint" file at all?
-     1. The cascade slot for slashed.components is reserved by
-        a real @layer declaration here AND in core/layers.css —
-        any consumer that adds components into slashed.components
-        gets predictable ordering today.
-     2. The reserved component name list serves as a documented
-        roadmap. Nothing here will be RENAMED at activation;
-        only added.
-     3. Tokens consumed by these components live in
-        optional/tokens.components.css — also commented for
-        parity with the classes.
+   Eight component names are taken here by convention so that they
+   won't be claimed by anything else: .sf-button, .sf-card,
+   .sf-badge, .sf-tag, .sf-alert, .sf-avatar, .sf-modal, .sf-skeleton.
 
-   Reserved classes (8 components):
-     .sf-button     primary action
-     .sf-card       content container (with concentric radius)
-     .sf-badge      small status / count
-     .sf-tag        category / removable chip
-     .sf-alert      info / warning / error banner
-     .sf-avatar     profile / author marker
-     .sf-modal      dialog (native <dialog> friendly)
-     .sf-skeleton   loading placeholder
-
-   Ratified out-of-scope (won't be added in 0.x):
-     tabs, accordion, tooltip, popover, pagination, breadcrumb,
-     progress, spinner, table, form-field, nav.
-     These either need JS, have macro/recipe equivalents already,
-     or need real-world use cases before locking an API.
+   Out of scope for 0.x (not taken, write your own BEM):
+   tabs, accordion, tooltip, popover, pagination, breadcrumb,
+   progress, spinner, table, form-field, nav.
    ============================================================ */
 
 

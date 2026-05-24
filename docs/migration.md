@@ -50,14 +50,14 @@ You only see a difference if your CSS targeted these classes from
 
 See [`docs/macros.md`](macros.md) for the full macro reference.
 
-### Components blueprint
+### Components — incomplete files
 
 `optional/components.css` and `optional/tokens.components.css` are no
-longer empty `/* TODO */` files — they ship as **blueprints**: the
-`@layer` declarations reserve the cascade slot, and the 8 component
-class definitions and their tokens are commented out. Activation will
-happen in upcoming minor releases (additive only). See
-[`docs/components.md`](components.md).
+longer empty `/* TODO */` files — they now contain structured class
+definitions and tokens, but **every line is commented out**. The
+`@layer` declarations are real, the cascade slot is in place, and 8
+component names are taken; the implementations will land in upcoming
+minor releases (additive only). See [`docs/components.md`](components.md).
 
 If you previously wrote your own `.sf-button` / `.sf-card` etc. styles,
 you have two options for v0.3.0:

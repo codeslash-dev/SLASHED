@@ -9,9 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [0.3.0] - 2026-05-24
 
 Class taxonomy refactor. New `slashed.macros` cascade layer, 12 macro
-recipes, ACSS-parity essentials, and a v0.3.0+ blueprint for 8 reserved
-components. Plus the in-flight WebKit a11y/contrast fixes that were sitting
-in `Unreleased`.
+recipes, ACSS-parity essentials, and 8 taken component names with empty
+class definitions ready for upcoming minor releases. Plus the in-flight
+WebKit a11y/contrast fixes that were sitting in `Unreleased`.
 
 ### ⚠️ Breaking Changes
 
@@ -75,17 +75,18 @@ See `docs/migration.md` for details.
     consumers can switch decorative styles without rewriting rules.
   - Icon-boxed tokens: `--sf-icon-box-pad`, `--sf-icon-box-radius`,
     `--sf-icon-box-bg`, `--sf-icon-box-border`.
-- **Components blueprint** — `optional/components.css` and
+- **Components — incomplete files** — `optional/components.css` and
   `optional/tokens.components.css` move from empty `/* TODO */` stubs
-  to structured BLUEPRINTs. Both files keep an active `@layer`
-  declaration to RESERVE cascade position; every class definition and
-  every component token is commented out. Activation is planned for
-  upcoming minor releases (additive only). The 8 reserved components
+  to structured files with all class definitions and tokens commented
+  out. Both files keep an active `@layer` declaration to RESERVE
+  cascade position; nothing else ships in `*.min.css` (minifier strips
+  the comments). Class and token activation is planned for upcoming
+  upcoming minor releases (additive only). The 8 taken component names
   are: `.sf-button`, `.sf-card`, `.sf-badge`, `.sf-tag`, `.sf-alert`,
   `.sf-avatar`, `.sf-modal`, `.sf-skeleton`. Card tokens (originally
   proposed for the essential bundle) live here, commented, alongside
   the rest — so the entire component-related surface (classes +
-  tokens) shares one activation cycle. See `docs/components.md`.
+  tokens) ships together when ready. See `docs/components.md`.
 
 ### Documentation
 
@@ -94,8 +95,8 @@ See `docs/migration.md` for details.
   layer order updated; file structure updated.
 - **`docs/macros.md`** *(new)* — full reference for every macro with
   signature, usage example, and consumed tokens.
-- **`docs/components.md`** *(new)* — components blueprint and the
-  ratified out-of-scope list (`tabs`, `accordion`, `tooltip`, …) with
+- **`docs/components.md`** *(new)* — taken component names and the
+  out-of-scope list (`tabs`, `accordion`, `tooltip`, …) with
   rationale for each exclusion.
 - **`docs/migration.md`** — adds an "0.2.x → 0.3.0" section explaining
   the three relocations and the `slashed.overrides` escape hatch.
@@ -169,8 +170,8 @@ See `docs/migration.md` for details.
 
 - essential: 9.9 kB → 10.4 kB gzip (+5%).
 - optimal: 12.2 kB → 12.7 kB gzip (+4%).
-- optimal-components / full: minifier strips blueprint comments, so
-  min sizes are unchanged from optimal.
+- optimal-components / full: minifier strips the commented-out
+  component definitions, so min sizes are unchanged from optimal.
 - All bundles remain well under their `tests/bundle-size.spec.js`
   budgets (15 / 18 / 20 kB gzip).
 
