@@ -422,7 +422,7 @@ rebrand workflow.
 | `--sf-switcher-gap` | `var(--sf-space-gap)` |
 | `--sf-switcher-threshold` | `30rem` |
 
-## Macro tokens (`core/tokens.macro-classes.css`)
+## Macro tokens (`core/tokens.macros.css`)
 
 5 tokens.
 

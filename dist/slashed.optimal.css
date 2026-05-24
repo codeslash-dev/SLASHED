@@ -1039,11 +1039,11 @@
   }
 }
 
-/* ─── core/tokens.macro-classes.css ─── */
+/* ─── core/tokens.macros.css ─── */
 /* ============================================================
-   SLASHED — core/tokens.macro-classes.css
-   Semantic tokens for macro-classes (recipes / patterns).
-   Load before: core/macro-classes.css
+   SLASHED — core/tokens.macros.css
+   Semantic tokens for macros (recipes / patterns).
+   Load before: core/macros.css
    Layer: slashed.tokens
    Prefix: --sf-
 
@@ -1978,12 +1978,12 @@
 
 }
 
-/* ─── core/macro-classes.css ─── */
+/* ─── core/macros.css ─── */
 /* ============================================================
-   SLASHED — core/macro-classes.css
+   SLASHED — core/macros.css
    ★ shipped in essential bundle
    Macro-classes (recipes / patterns).
-   Requires: core/tokens.css, core/tokens.macro-classes.css
+   Requires: core/tokens.css, core/tokens.macros.css
    Layer:    slashed.macros
 
    Macro-classes vs layout primitives:
@@ -1999,7 +1999,7 @@
 
    PUBLIC API — every class here is part of the public surface.
    Tokens consumed by these classes are listed in
-   core/tokens.macro-classes.css.
+   core/tokens.macros.css.
    ============================================================ */
 
 @layer slashed.macros {

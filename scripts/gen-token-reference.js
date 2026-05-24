@@ -10,7 +10,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SOURCES = [
   { file: 'core/tokens.css', title: 'Core tokens (`core/tokens.css`)' },
   { file: 'core/tokens.layout.css', title: 'Layout tokens (`core/tokens.layout.css`)' },
-  { file: 'core/tokens.macro-classes.css', title: 'Macro tokens (`core/tokens.macro-classes.css`)' },
+  { file: 'core/tokens.macros.css', title: 'Macro tokens (`core/tokens.macros.css`)' },
   { file: 'optional/tokens.palette.css', title: 'Palette tokens (`optional/tokens.palette.css`)' },
 ];
 

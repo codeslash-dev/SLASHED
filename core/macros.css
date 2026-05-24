@@ -1,8 +1,8 @@
 /* ============================================================
-   SLASHED — core/macro-classes.css
+   SLASHED — core/macros.css
    ★ shipped in essential bundle
    Macro-classes (recipes / patterns).
-   Requires: core/tokens.css, core/tokens.macro-classes.css
+   Requires: core/tokens.css, core/tokens.macros.css
    Layer:    slashed.macros
 
    Macro-classes vs layout primitives:
@@ -18,7 +18,7 @@
 
    PUBLIC API — every class here is part of the public surface.
    Tokens consumed by these classes are listed in
-   core/tokens.macro-classes.css.
+   core/tokens.macros.css.
    ============================================================ */
 
 @layer slashed.macros {

@@ -31,7 +31,7 @@ legacy → overrides
 Three classes change cascade layer (selectors and properties unchanged):
 
 - `.sf-prose`, `.sf-not-prose` — `slashed.layout` → `slashed.macros`.
-  Moved out of `core/layout.css` into the new `core/macro-classes.css`.
+  Moved out of `core/layout.css` into the new `core/macros.css`.
 - `.focus-parent` — `slashed.states` → `slashed.accessibility`.
   Now lives in `core/accessibility.css` alongside the rest of the focus /
   a11y rules.
@@ -44,7 +44,7 @@ See `docs/migration.md` for details.
 
 ### Added
 
-- **`core/macro-classes.css`** — 12 recipes / patterns.
+- **`core/macros.css`** — 12 recipes / patterns.
   - `.sf-prose`, `.sf-not-prose` (relocated from `core/layout.css`).
   - `.sf-flow` — Heydon Pickering's lobotomized owl
     (`> * + * { margin-block-start: var(--sf-flow-space) }`).
@@ -57,7 +57,7 @@ See `docs/migration.md` for details.
   - `.sf-scroll-snap` — vertical scroll-snap container.
   - `.sf-overflow-fade` — end-edge horizontal mask fade.
   - `.sf-no-tap-highlight` — suppress mobile tap-highlight.
-- **`core/tokens.macro-classes.css`** — semantic tokens for the macros:
+- **`core/tokens.macros.css`** — semantic tokens for the macros:
   `--sf-flow-space`, `--sf-line-clamp`, `--sf-truncate-suffix`,
   `--sf-aspect`, `--sf-scroll-shadow-size`.
 - **A11y patterns:**
@@ -112,7 +112,7 @@ See `docs/migration.md` for details.
 - `tests/coverage.spec.js` — three new exclusions for selectors
   exercised by dedicated specs (`.sf-overflow-fade`,
   `.sf-no-tap-highlight`, `.sf-clickable-parent`).
-- `tests/tokens.spec.js` — adds `core/tokens.macro-classes.css` to
+- `tests/tokens.spec.js` — adds `core/tokens.macros.css` to
   the token-coverage source list.
 - `docs/demo.html` — new `<section id="macros">` exercising every
   macro inline. Existing `tests/demo-visual.spec.js` screenshots are

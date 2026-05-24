@@ -20,12 +20,12 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="core/layers.css">
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/tokens.layout.css">
-<link rel="stylesheet" href="core/tokens.macro-classes.css">
+<link rel="stylesheet" href="core/tokens.macros.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
 <link rel="stylesheet" href="core/themes.css">
 <link rel="stylesheet" href="core/layout.css">
-<link rel="stylesheet" href="core/macro-classes.css">
+<link rel="stylesheet" href="core/macros.css">
 <link rel="stylesheet" href="core/states.css">
 <link rel="stylesheet" href="core/motion.css">
 <link rel="stylesheet" href="core/accessibility.css">
@@ -105,7 +105,7 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `tokens.macro-classes` + `reset` + `base` + `themes` + `layout` + `macro-classes` + `states` + `motion` + `accessibility` + `print`) |
+| `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `tokens.macros` + `reset` + `base` + `themes` + `layout` + `macros` + `states` + `motion` + `accessibility` + `print`) |
 | `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` |

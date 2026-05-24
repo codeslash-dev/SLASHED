@@ -1,5 +1,5 @@
 // @ts-check
-// Behavioural tests for core/macro-classes.css.
+// Behavioural tests for core/macros.css.
 // Each macro is exercised against a synthetic fixture and its
 // observable effect verified via getComputedStyle / layout reads.
 const { test, expect } = require('@playwright/test');

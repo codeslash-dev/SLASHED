@@ -15,7 +15,7 @@ live in changes. Most consumers won't notice.
 
 | # | Class / file | Was (0.2.x) | Now (0.3.0) |
 |---|---|---|---|
-| 1 | `.sf-prose`, `.sf-not-prose` | `slashed.layout` (in `core/layout.css`) | `slashed.macros` (in `core/macro-classes.css`) |
+| 1 | `.sf-prose`, `.sf-not-prose` | `slashed.layout` (in `core/layout.css`) | `slashed.macros` (in `core/macros.css`) |
 | 2 | `.focus-parent` | `slashed.states` (in `core/states.css`) | `slashed.accessibility` (in `core/accessibility.css`) |
 | 3 | new layer | — | `slashed.macros` between `components` and `utilities` |
 
@@ -40,8 +40,8 @@ You only see a difference if your CSS targeted these classes from
 
 ### What's new in essential
 
-- New file: `core/macro-classes.css` (12 recipes).
-- New file: `core/tokens.macro-classes.css` (5 macro tokens).
+- New file: `core/macros.css` (12 recipes).
+- New file: `core/tokens.macros.css` (5 macro tokens).
 - New a11y pattern: `.sf-clickable-parent` (the card-with-link pattern).
 - New modifier: `.sf-icon--boxed` on the existing `.sf-icon`.
 - New tokens: border-style scale (`--sf-border-style`, `-strong`,
@@ -82,7 +82,7 @@ the migration is mostly about *where* styling lives.
 | Components | restyle bare elements | utility classes on markup | your own BEM classes consuming `--sf-*` tokens |
 | Theming | CSS vars (some) | config file + build | override 6 source tokens, no build |
 | Layout | utility/grid classes | flex/grid utilities | container-query primitives (`.sf-*`) |
-| Recipes | bespoke per project | utility chains | macro-classes (`.sf-prose`, `.sf-flow`, …) |
+| Recipes | bespoke per project | utility chains | macros (`.sf-prose`, `.sf-flow`, …) |
 | States | `:disabled` etc. | `disabled:` variants | `.is-*` state classes |
 
 ### From Pico CSS
@@ -110,7 +110,7 @@ Pico styles bare HTML; SLASHED keeps `base` minimal and expects components.
 ### From Tailwind
 
 - **Utility classes on markup**: SLASHED is not utility-first. Compose with the
-  layout primitives, the macro-classes (`.sf-flow`, `.sf-truncate`, etc.), and
+  layout primitives, the macros (`.sf-flow`, `.sf-truncate`, etc.), and
   write small BEM components that read tokens.
 - **`theme.extend` / config**: there's no config or build — override `--sf-*`
   tokens in a stylesheet. See [theming.md](theming.md).
@@ -126,7 +126,7 @@ Pico styles bare HTML; SLASHED keeps `base` minimal and expects components.
 1. Drop in a bundle (`slashed.optimal.css` is a good default).
 2. Rebrand with the 6 source tokens.
 3. Replace layout utilities with layout primitives.
-4. Replace recurring patterns with macro-classes (prose, flow, truncate, …).
+4. Replace recurring patterns with macros (prose, flow, truncate, …).
 5. Move element-level overrides into BEM components that consume tokens.
 6. Wrap long-form content in `.sf-prose`.
 7. Map interactive state toggles to `.is-*` classes (+ matching ARIA).

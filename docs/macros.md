@@ -1,6 +1,6 @@
 # Macros
 
-Recipes / patterns from `core/macro-classes.css`. Macros answer
+Recipes / patterns from `core/macros.css`. Macros answer
 **"what does this element do / look like?"** — distinct from layout
 primitives, which answer **"where do my children go?"**.
 
@@ -8,7 +8,7 @@ Layer: `slashed.macros` (between `slashed.components` and
 `slashed.utilities`). Macros may compose with primitives and components,
 but a single-property utility still wins on the same selector.
 
-All tokens listed below live in `core/tokens.macro-classes.css` and ship
+All tokens listed below live in `core/tokens.macros.css` and ship
 in the essential bundle.
 
 ---

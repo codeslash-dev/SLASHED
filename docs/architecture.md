@@ -37,12 +37,12 @@ core/
   layers.css                   @layer declaration only
   tokens.css                   slashed.tokens
   tokens.layout.css            slashed.tokens  (semantic layout tokens)
-  tokens.macro-classes.css     slashed.tokens  (semantic macro tokens, v0.3.0+)
+  tokens.macros.css     slashed.tokens  (semantic macro tokens, v0.3.0+)
   reset.css                    slashed.reset
   base.css                     slashed.base
   themes.css                   slashed.themes
   layout.css                   slashed.layout
-  macro-classes.css            slashed.macros  (recipes / patterns, v0.3.0+)
+  macros.css            slashed.macros  (recipes / patterns, v0.3.0+)
   states.css                   slashed.states
   motion.css                   slashed.motion
   accessibility.css            slashed.accessibility
@@ -78,7 +78,7 @@ decision tree to use when adding a new class.
 | # | Category | Question it answers | File | Layer |
 |---|---|---|---|---|
 | 1 | **Layout primitives** | "How are children arranged?" | `core/layout.css` | `slashed.layout` |
-| 2 | **Macro-classes** *(recipes)* | "What does this element DO / look like?" | `core/macro-classes.css` | `slashed.macros` |
+| 2 | **Macro-classes** *(recipes)* | "What does this element DO / look like?" | `core/macros.css` | `slashed.macros` |
 | 3 | **Animation primitives** | "How does this element move?" | `core/motion.css` | `slashed.motion` |
 | 4 | **State utilities** *(`.is-*`)* | "What state is this element in?" | `core/states.css` | `slashed.states` |
 | 5 | **A11y utilities & patterns** | "How does this work for AT users?" | `core/accessibility.css` | `slashed.accessibility` |
@@ -109,14 +109,14 @@ decision tree to use when adding a new class.
 5. Is it an opinionated visual component?
       (button, card, alert…)
    YES → optional/components.css         (slashed.components)
-   NO  → core/macro-classes.css          (slashed.macros)  ← default
+   NO  → core/macros.css          (slashed.macros)  ← default
 ```
 
 Macros are the default fallback because they're the right home for
 behavioural / visual recipes that aren't strictly layout, state, a11y,
 animation, or component.
 
-### Layout primitives vs macro-classes — the line
+### Layout primitives vs macros — the line
 
 The category split between primitives and macros looks subtle but has a
 clean test:
@@ -147,7 +147,7 @@ them would create churn:
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.macro-classes.css` (macros, v0.3.0+), `tokens.palette.css` (optional tints/shades), `tokens.components.css` (optional component-level tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros, v0.3.0+), `tokens.palette.css` (optional tints/shades), `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -185,7 +185,7 @@ through `var()`. Requires `tokens.components.css`.
 `.sf-not-prose`, `.sf-flow`, `.sf-truncate`, `.sf-line-clamp-{2,3,N}`,
 `.sf-equal-height`, `.sf-aspect`, `.sf-scroll-shadow`, `.sf-scroll-snap`,
 `.sf-overflow-fade`, `.sf-no-tap-highlight`. Tokens for these classes
-live in `core/tokens.macro-classes.css`.
+live in `core/tokens.macros.css`.
 
 **slashed.utilities** — single-purpose helpers. SLASHED ships no
 utility classes in 0.x; the layer slot is reserved for the future.
@@ -331,12 +331,12 @@ The essential bundle (`dist/slashed.essential.css`) includes core files in order
 core/layers.css
 core/tokens.css
 core/tokens.layout.css
-core/tokens.macro-classes.css
+core/tokens.macros.css
 core/reset.css
 core/base.css
 core/themes.css
 core/layout.css
-core/macro-classes.css
+core/macros.css
 core/states.css
 core/motion.css
 core/accessibility.css
