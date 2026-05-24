@@ -540,6 +540,18 @@
     --sf-border-width-4:        4px;
 
     /* ----------------------------------------------------------
+       Border styles — paired with --sf-border-width-* and
+       --sf-color-border*. Consumer BEM:
+         .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); }
+       Override per element to switch decorative styles without
+       rewriting the rule.
+       ---------------------------------------------------------- */
+    --sf-border-style:        solid;     /* default */
+    --sf-border-style-strong: solid;     /* alias for emphasis */
+    --sf-border-style-soft:   dashed;
+    --sf-border-style-dotted: dotted;
+
+    /* ----------------------------------------------------------
        Divider — global separator system. Drives `hr` (base) and
        the `.sf-divider` layout primitive.
        ---------------------------------------------------------- */

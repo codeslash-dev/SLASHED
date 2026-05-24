@@ -547,6 +547,18 @@
   --sf-border-width-4:        4px;
 
   /* ----------------------------------------------------------
+     Border styles — paired with --sf-border-width-* and
+     --sf-color-border*. Consumer BEM:
+       .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); }
+     Override per element to switch decorative styles without
+     rewriting the rule.
+     ---------------------------------------------------------- */
+  --sf-border-style:        solid;     /* default */
+  --sf-border-style-strong: solid;     /* alias for emphasis */
+  --sf-border-style-soft:   dashed;
+  --sf-border-style-dotted: dotted;
+
+  /* ----------------------------------------------------------
      Divider — global separator system. Drives `hr` (base) and
      the `.sf-divider` layout primitive.
      ---------------------------------------------------------- */
@@ -960,6 +972,16 @@
      Frame
      ---------------------------------------------------------- */
   --sf-frame-ratio: 16 / 9;    /* literal <ratio>, valid in aspect-ratio */
+
+  /* ----------------------------------------------------------
+     Icon (boxed variant) — extras for .sf-icon--boxed.
+     The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in
+     core/tokens.css alongside the typography scale.
+     ---------------------------------------------------------- */
+  --sf-icon-box-pad:    0.5em;
+  --sf-icon-box-radius: var(--sf-radius-s);
+  --sf-icon-box-bg:     var(--sf-color-well);
+  --sf-icon-box-border: var(--sf-border-width-1) solid var(--sf-color-border);
 
   /* ----------------------------------------------------------
      Reel
@@ -1679,6 +1701,21 @@ td, th {
 .sf-icon--m  { --sf-icon-size: var(--sf-icon-m); }
 .sf-icon--l  { --sf-icon-size: var(--sf-icon-l); }
 .sf-icon--xl { --sf-icon-size: var(--sf-icon-xl); }
+
+/* Boxed variant — wraps the icon in a padded, bordered, optionally
+   coloured frame. Adds inline-/block-size on top of the naked icon
+   size so the visible glyph stays at --sf-icon-size and the box
+   grows around it (content-box). Override per icon:
+     <span class="sf-icon sf-icon--boxed" style="--sf-icon-box-bg: var(--sf-color-primary)"> */
+.sf-icon--boxed {
+  inline-size:    calc(var(--sf-icon-size, var(--sf-icon-m)) + var(--sf-icon-box-pad) * 2);
+  block-size:     calc(var(--sf-icon-size, var(--sf-icon-m)) + var(--sf-icon-box-pad) * 2);
+  padding:        var(--sf-icon-box-pad);
+  border:         var(--sf-icon-box-border);
+  border-radius:  var(--sf-icon-box-radius);
+  background:     var(--sf-icon-box-bg);
+  box-sizing:     content-box;
+}
 
 /* -- Cover ---------------------------------------------------
    Full-height flex column. A .sf-cover__center child is
@@ -2702,6 +2739,60 @@ td, th {
 .focus-parent:focus-within {
   outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
   outline-offset: var(--sf-focus-ring-offset);
+}
+
+/* ----------------------------------------------------------
+   Clickable-parent — the card-with-link a11y pattern.
+   Pairs with a single child <a> whose `href` provides the
+   destination. The link is announced once by AT (the rest of
+   the card content is read in continuous flow because nothing
+   wraps it in another link), but the entire card is clickable.
+
+   Mechanic: the link's ::after grows to fill the parent's
+   positioning context, so the parent's `cursor: pointer` and
+   hit-area cover the whole card. Inline text is still
+   selectable because the overlay sits at z-index 1 and any
+   paragraph/heading inside the card needs `position: relative`
+   to lift above it — the rule below applies that to the most
+   common children automatically.
+
+   Independent interactive children (buttons, secondary links,
+   form controls) get z-index: 2 so they keep working even when
+   the overlay is present.
+
+   Usage:
+     <article class="card sf-clickable-parent">
+       <h3><a href="...">Title</a></h3>
+       <p>Description (still selectable)</p>
+       <button>Independent action (still clickable)</button>
+     </article>
+   ---------------------------------------------------------- */
+.sf-clickable-parent {
+  position: relative;
+  cursor:   pointer;
+}
+.sf-clickable-parent a:where(:any-link)::after {
+  content:        "";
+  position:       absolute;
+  inset:          0;
+  z-index:        1;
+  pointer-events: auto;
+}
+/* Inline content lifts above the overlay so users can select
+   text inside the card without their drag being captured by
+   the link. Limited to common flow children — consumers can
+   opt in extras with [data-no-overlay] below. */
+.sf-clickable-parent :is(p, h1, h2, h3, h4, h5, h6, span, time, small, em, strong, code) {
+  position: relative;
+  z-index:  2;
+}
+/* Independent interactive descendants beat the overlay, so a
+   secondary <a>, <button>, <input>, etc. inside the card stays
+   functional. [data-no-overlay] is the consumer escape hatch. */
+.sf-clickable-parent :is(button, input, textarea, select,
+                         a:not(:first-of-type), [data-no-overlay]) {
+  position: relative;
+  z-index:  2;
 }
 
 /* ----------------------------------------------------------

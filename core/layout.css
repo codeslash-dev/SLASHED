@@ -238,6 +238,21 @@
   .sf-icon--l  { --sf-icon-size: var(--sf-icon-l); }
   .sf-icon--xl { --sf-icon-size: var(--sf-icon-xl); }
 
+  /* Boxed variant — wraps the icon in a padded, bordered, optionally
+     coloured frame. Adds inline-/block-size on top of the naked icon
+     size so the visible glyph stays at --sf-icon-size and the box
+     grows around it (content-box). Override per icon:
+       <span class="sf-icon sf-icon--boxed" style="--sf-icon-box-bg: var(--sf-color-primary)"> */
+  .sf-icon--boxed {
+    inline-size:    calc(var(--sf-icon-size, var(--sf-icon-m)) + var(--sf-icon-box-pad) * 2);
+    block-size:     calc(var(--sf-icon-size, var(--sf-icon-m)) + var(--sf-icon-box-pad) * 2);
+    padding:        var(--sf-icon-box-pad);
+    border:         var(--sf-icon-box-border);
+    border-radius:  var(--sf-icon-box-radius);
+    background:     var(--sf-icon-box-bg);
+    box-sizing:     content-box;
+  }
+
   /* -- Cover ---------------------------------------------------
      Full-height flex column. A .sf-cover__center child is
      vertically centered via margin-block: auto.
