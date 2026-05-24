@@ -5,9 +5,10 @@ A WordPress plugin that integrates the [SLASHED](https://github.com/codeslash-de
 ## Features
 
 - **CSS Loading** - Automatically enqueues the SLASHED CSS bundle on the frontend and within the Bricks editor iframe
-- **Variable Pickers** - Registers all 587+ SLASHED CSS custom properties for use in Bricks variable pickers and the code editor autocomplete
-- **Class Autocomplete** - All `.sf-*` layout classes and `.is-*` state classes appear in the Bricks class input with organized categories
-- **Color Palette** - Synchronizes SLASHED color tokens (brand scales, status, and semantic colors) with the Bricks global color palette
+- **Variable Pickers** - Registers every `--sf-*` CSS custom property declared in the active bundle (~600 in `optimal`, ~700 in `full`) with the Bricks variable pickers and code editor autocomplete, organized into category groups
+- **Class Autocomplete** - Registers every `.sf-*` layout/utility class and `.is-*` state class declared in the active bundle with the Bricks class input, organized into "SLASHED Layout" and "SLASHED State" categories
+- **Color Palette** - Synchronizes every `--sf-color-*` token (brand scales including alpha steps, status, and semantic colors) with the Bricks global color palette
+- **Dynamic Detection** - The integration parses the loaded CSS bundle at runtime, so registrations stay in sync with whichever bundle (`essential` / `optimal` / `full`) and SLASHED release is active. There is no hand-curated list to drift out of date.
 
 ## Requirements
 
@@ -96,6 +97,32 @@ add_filter( 'slashed_bricks/registered_variables', function( $variables ) {
 } );
 ```
 
+#### `slashed_bricks/inventory`
+
+Replace the resolved inventory wholesale. Useful for tests, custom forks of the framework, or sites that want to ship their own token list. Expects an array shaped `['variables' => string[], 'sf_classes' => string[], 'is_classes' => string[]]`.
+
+```php
+add_filter( 'slashed_bricks/inventory', function( $inventory ) {
+    $inventory['variables'][] = '--sf-color-my-custom';
+    return $inventory;
+} );
+```
+
+#### `slashed_bricks/inventory_local_path`
+
+Override the local CSS path the inventory parses. The filter is authoritative:
+
+- Return a string to use a specific path (skipping the default candidates).
+- Return `false` to skip local resolution entirely (forcing a CDN fetch).
+- Return `null` (the default) to use the bundled candidate paths.
+
+```php
+// Use a child-theme copy of the bundle.
+add_filter( 'slashed_bricks/inventory_local_path', function() {
+    return get_stylesheet_directory() . '/assets/slashed.optimal.css';
+} );
+```
+
 #### `slashed_bricks/color_categories`
 
 Filter which color categories to include in the palette.
@@ -115,6 +142,13 @@ add_filter( 'slashed_bricks/color_categories', function( $categories ) {
 ```
 integrations/bricks/
   slashed-bricks.php            Main plugin bootstrap (guards, constants, loader)
+  data/inventory.json           Built-in fallback inventory (used when no
+                                local CSS or CDN is reachable)
+  includes/class-css-parser.php Pure parser: declared --sf-* properties +
+                                .sf-/.is- class selectors from a CSS string
+  includes/class-inventory.php  Resolves the active CSS bundle (local file,
+                                then CDN with transient cache, then fallback)
+                                and categorizes variables by prefix family
   includes/class-enqueue.php    CSS enqueue for frontend + editor iframe
   includes/class-variables.php  Variable registration for builder pickers
   includes/class-classes.php    Class registration for autocomplete
@@ -129,11 +163,32 @@ integrations/bricks/
 
 2. **Enqueue** (`class-enqueue.php`) - Hooks into `wp_enqueue_scripts` to load the SLASHED CSS bundle. Since Bricks fires `wp_enqueue_scripts` in its editor iframe context, this single hook covers both frontend and builder preview.
 
-3. **Variables** (`class-variables.php`) - Registers organized variable groups via `bricks/builder/i18n` and provides code editor autocomplete data via `bricks/code/get_code_signatures`.
+3. **Inventory** (`class-inventory.php`) - The single source of truth for "what does the framework actually ship?" It locates the active CSS bundle (preferring a local file, falling back to the CDN, then to a built-in `data/inventory.json`), parses it once via `class-css-parser.php`, and caches the result via WordPress transients (keyed by file mtime or URL). All three registration classes share one process-local cache so a single page load incurs at most one parse.
 
-4. **Classes** (`class-classes.php`) - Registers all layout and state classes as locked global classes via `bricks/setup/control_options`, making them available in the class picker with categorized organization.
+4. **Variables** (`class-variables.php`) - Pulls the categorized variable list from the inventory and registers organized variable groups via `bricks/builder/i18n` and code editor autocomplete data via `bricks/code/get_code_signatures`.
 
-5. **Colors** (`class-colors.php`) - Injects color entries into the Bricks global color palette via `bricks/setup/control_options`. Colors reference CSS variables (`var(--sf-color-*)`) rather than hardcoded values, so they adapt to theme customization and dark mode.
+5. **Classes** (`class-classes.php`) - Pulls `.sf-*` and `.is-*` class lists from the inventory and registers them as locked global classes via `bricks/setup/control_options`, tagged "SLASHED Layout" and "SLASHED State" respectively.
+
+6. **Colors** (`class-colors.php`) - Pulls every `--sf-color-*` from the inventory, splits them into brand-family categories (one per brand: Primary, Secondary, Tertiary, Action, Neutral, Base), Status, and Semantic groups, and injects them via `bricks/setup/control_options`. Swatches reference CSS variables (`var(--sf-color-*)`) rather than hardcoded values, so they adapt to theme customization and dark mode.
+
+### Inventory Resolution Order
+
+The inventory class tries these sources in order, stopping at the first one that succeeds:
+
+1. **Local file** at `dist/slashed.optimal.css` (relative to the plugin) - covers symlink/in-repo development and copy-installs that include the `dist/` folder. Cached as a transient keyed by file mtime, so edits invalidate automatically.
+2. **CDN URL** - whatever `slashed_bricks_get_css_url()` returns, fetched via `wp_remote_get` and cached as a transient for one day.
+3. **Built-in fallback** - `data/inventory.json`, generated at release time from `dist/slashed.optimal.css` by `scripts/gen-bricks-inventory.js`. This keeps the plugin functional on hosts that block outbound HTTP.
+
+You can short-circuit step 1 with the `slashed_bricks/inventory_local_path` filter, or replace the resolved inventory entirely with the `slashed_bricks/inventory` filter.
+
+### Regenerating the Fallback Inventory
+
+The fallback JSON ships with the plugin and must be regenerated whenever the framework adds or removes tokens or classes. The build script does this automatically:
+
+```bash
+npm run build              # rebuilds dist/ AND regenerates inventory.json
+npm run bricks:inventory   # only regenerate inventory.json
+```
 
 ## CSS Bundle
 
