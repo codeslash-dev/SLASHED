@@ -49,20 +49,20 @@ core/
   print.css                    slashed.print
 optional/
   tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors; ships in optimal+ bundles)
-  tokens.components.css   slashed.tokens  (component tokens — BLUEPRINT, commented out)
+  tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
-  components.css          slashed.components  (8 components — BLUEPRINT, commented out)
+  components.css          slashed.components  (8 components — incomplete, all commented out)
   utilities.css           slashed.utilities  (empty stub)
   legacy.css              slashed.legacy
 ```
 
-`optional/components.css` and `optional/tokens.components.css` ship as
-**blueprints** in v0.3.0: their `@layer` declarations reserve the cascade
-position, but every class definition and component token is commented out.
-Activation will happen incrementally in upcoming minor releases (additive,
-no breaking changes). See [`docs/components.md`](components.md) for the
-roadmap and the 8 reserved component names.
+`optional/components.css` and `optional/tokens.components.css` are
+**incomplete** in v0.3.0: their `@layer` declarations are real, but
+every class definition and component token is commented out. They will
+land incrementally in upcoming minor releases (additive, no breaking
+changes). See [`docs/components.md`](components.md) for the eight
+taken component names and the roadmap.
 
 `optional/utilities.css` remains an empty stub — SLASHED is BEM-first by
 design and ships no utility classes in 0.x.
@@ -176,10 +176,11 @@ BEM control.
 
 **slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
 
-**slashed.components** — UI blocks. v0.3.0 ships a BLUEPRINT (8 reserved
-component names — `button`, `card`, `badge`, `tag`, `alert`, `avatar`,
-`modal`, `skeleton` — commented out). When activated, every value goes
-through `var()`. Requires `tokens.components.css`.
+**slashed.components** — UI blocks. v0.3.0 is incomplete: 8 component
+names are taken (`button`, `card`, `badge`, `tag`, `alert`, `avatar`,
+`modal`, `skeleton`) but all class definitions are commented out. When
+the classes ship, every value goes through `var()`. Requires
+`tokens.components.css`.
 
 **slashed.macros** *(v0.3.0+)* — recipes / patterns: `.sf-prose`,
 `.sf-not-prose`, `.sf-flow`, `.sf-truncate`, `.sf-line-clamp-{2,3,N}`,
@@ -356,18 +357,18 @@ Five tiered bundles are declared in `bundle.config.json` and built by
 |---|---|
 | `slashed.essential.css` | — (all `core/`) |
 | `slashed.optimal.css` | `tokens.palette` + `forms` + `legacy` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* |
+| `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
-| `slashed.full.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* + `utilities` *(empty)* |
+| `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
 
 `optional/legacy.css` is always concatenated last. Because every rule sits in
 an `@layer`, concatenation order within a bundle does not affect the cascade —
 `core/layers.css` fixes it. The bundler strips local `@import` statements (the
 explicit file list resolves them), so the `tokens.components` import inside
 `components.css` is inlined by listing the token file first. `components.css`
-and `tokens.components.css` ship as **blueprints** in 0.3.0 — the `@layer`
-declarations reserve cascade position, but every selector and token is
-commented out (no CSS is emitted). `utilities.css` ships as an empty stub.
+and `tokens.components.css` are **not yet complete** in 0.3.0 — the `@layer`
+declarations are real, but every selector and token is commented out (no
+CSS is emitted). `utilities.css` ships as an empty stub.
 Consumers can also build à la carte: `essential` (or raw `core/`) plus
 hand-picked optional files.
 
@@ -398,11 +399,12 @@ These behaviors are deliberate. Documented here so they aren't mistaken for bugs
 
 ---
 
-## Deferred (until the components blueprint is activated)
+## Deferred (until the components ship)
 
 `@starting-style` and CSS anchor positioning are only meaningful attached to
 a specific element/component transition (dialog, popover, tooltip). They
-are out of scope while `optional/components.css` is a BLUEPRINT (commented
-out) and will be added with the components when activated in upcoming
-0.x minors. The component-free part — scroll-driven animation range tokens
-(`--sf-scroll-timeline-range-*`) — already ships in `core/tokens.css`.
+are out of scope while `optional/components.css` is incomplete (every class
+commented out) and will be added with the components when they ship in
+upcoming 0.x minors. The component-free part — scroll-driven animation
+range tokens (`--sf-scroll-timeline-range-*`) — already ships in
+`core/tokens.css`.

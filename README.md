@@ -38,13 +38,12 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ```
 
 > **Note:** `optional/components.css` and `optional/tokens.components.css`
-> ship as **blueprints** in v0.3.0 — their `@layer` declarations reserve
-> cascade position, but every class definition and component token is
-> commented out (no CSS is emitted). They appear (as no-ops) in the
-> `*-components` and `full` bundles only. `optional/utilities.css`
-> remains an empty stub — SLASHED is BEM-first by design and ships no
-> utility classes in 0.x. There's no need to link any of the three
-> individually.
+> are not yet complete in v0.3.0 — their `@layer` declarations are real,
+> but every class definition and component token is commented out (no CSS
+> is emitted). They appear (as no-ops) in the `*-components` and `full`
+> bundles only. `optional/utilities.css` remains an empty stub — SLASHED
+> is BEM-first by design and ships no utility classes in 0.x. There's no
+> need to link any of the three individually.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -107,14 +106,14 @@ the `slashed.tokens` layer.
 | --- | --- |
 | `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `tokens.macros` + `reset` + `base` + `themes` + `layout` + `macros` + `states` + `motion` + `accessibility` + `print`) |
 | `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* |
+| `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` |
-| `slashed.full.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* + `utilities` |
+| `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` |
 
 `optional/legacy.css` is always concatenated last. Every rule lives in an
 `@layer`, so concatenation order never affects the cascade — `core/layers.css`
-fixes it. `components.css` and `tokens.components.css` ship as **blueprints**
-in 0.3.0 — their `@layer` declarations reserve cascade position, but every
+fixes it. `components.css` and `tokens.components.css` are **not yet
+complete** in 0.3.0 — their `@layer` declarations are real, but every
 selector and token is commented out (no CSS is emitted). `utilities.css`
 ships as an empty stub.
 
@@ -194,7 +193,7 @@ versions above — colors will collapse to `initial` on older engines.
 | [Dark mode](docs/dark-mode.md) | toggle script, scoped themes, per-value overrides |
 | [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
 | [Macros / recipes](docs/macros.md) | every `.sf-*` macro-class + tokens (v0.3.0+) |
-| [Components blueprint](docs/components.md) | reserved component names + roadmap |
+| [Components](docs/components.md) | taken component names + roadmap |
 | [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
 | [Browser support](docs/browser-support.md) | the support floor and why |

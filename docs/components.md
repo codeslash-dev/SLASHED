@@ -1,21 +1,18 @@
-# Components — blueprint
+# Components
 
-> **Status (v0.3.0): BLUEPRINT.** Class definitions and component tokens
-> are reserved by name but commented out. Activation will happen
-> incrementally in upcoming minor releases as additive features —
-> no breaking changes to the names listed below.
+> **Status (v0.3.0):** `optional/components.css` and
+> `optional/tokens.components.css` are not yet complete. Everything in
+> them is commented out and ships 0 bytes in `*.min.css` bundles. The
+> `@layer slashed.components` slot is real and ordered.
 
-`optional/components.css` and `optional/tokens.components.css` ship in
-the `slashed.optimal-components.css` and `slashed.full.css` bundles.
-Their `@layer` declarations reserve cascade position; everything else
-is in CSS comments until activation.
-
-This file lists the 8 reserved components and what to expect when they
-ship — both so you can plan around them and so the names cannot drift.
+Eight component names are taken by convention so they can't be claimed
+by another framework or your own BEM classes. They will land
+incrementally in upcoming minor releases as additive features — none of
+the names listed below will be renamed.
 
 ---
 
-## Reserved components (v0.3.0+ activation)
+## Taken component names
 
 | # | Class | Modifiers | Slots / children |
 |---|---|---|---|
@@ -28,14 +25,14 @@ ship — both so you can plan around them and so the names cannot drift.
 | 7 | `.sf-modal` | `--s`, `--m`, `--l`, `--full` | `__header`, `__body`, `__footer`, `__close` |
 | 8 | `.sf-skeleton` | `--text`, `--avatar`, `--card`, `--line` | — |
 
-Pre-activation, you can already write your own BEM components against
-the same selector pattern (e.g. `.my-button`) and switch to `.sf-button`
-when it activates — no naming collisions are introduced today.
+You can already write your own BEM components against the same selector
+pattern (e.g. `.my-button`) and switch to `.sf-button` when it ships —
+no naming collisions are introduced today.
 
-## Reserved tokens
+## Component tokens
 
-`optional/tokens.components.css` reserves token names per component.
-Sample (commented in the source until activation):
+`optional/tokens.components.css` declares token names per component (all
+currently commented out). Sample:
 
 ```css
 /* card */
@@ -51,17 +48,17 @@ Sample (commented in the source until activation):
 --sf-button-border-width;
 ```
 
-A consumer that authors their own `.my-button` today should NOT use the
-`--sf-button-*` token names yet (they don't resolve to anything until
-activation). Use the global tokens (`--sf-space-*`, `--sf-radius-*`,
-`--sf-color-*`) for now.
+A consumer authoring their own `.my-button` today should NOT use the
+`--sf-button-*` token names yet — they don't resolve to anything until
+the matching class ships. Use the global tokens (`--sf-space-*`,
+`--sf-radius-*`, `--sf-color-*`) until then.
 
-## Ratified out-of-scope (won't ship in 0.x)
+## Out of scope for 0.x
 
-The following are **deliberately not reserved** in the v0.3.0 blueprint.
-They are not in scope for the 0.x line, either because they need JS to
-work properly, because a macro / recipe already covers the use case, or
-because the API needs more real-world usage data before being locked.
+The following are **not taken** and won't ship in the 0.x line, either
+because they need JS, because a macro / recipe already covers the use
+case, or because the API needs more real-world usage data before being
+locked.
 
 - `.sf-tabs` (needs JS for keyboard nav)
 - `.sf-accordion` (needs JS or polyfilled `<details>` interactions)
@@ -78,15 +75,14 @@ because the API needs more real-world usage data before being locked.
 If your project needs one of the above, write it as your own BEM class
 that reads SLASHED tokens — this is the fully supported path.
 
-## Activation roadmap
+## Roadmap
 
-Activation order is not finalised. The likely first batch is `.sf-card`
-+ `.sf-button` because they're the most universally useful and the
-tokens for both are stable. Each minor that activates a component will:
+Order is not finalised. The likely first batch is `.sf-card` +
+`.sf-button` because they're the most universally useful and the tokens
+for both are stable. Each minor that ships a component will:
 
 - Uncomment its block in `optional/components.css` and the matching
   token block in `optional/tokens.components.css`.
-- Document the active class in `docs/components.md` (this file) with
-  full HTML examples.
+- Document the active class in this file with full HTML examples.
 - Add behavioural tests under `tests/`.
 - Bump `MINOR` only — no breaking changes.
