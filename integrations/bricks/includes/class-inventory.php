@@ -63,17 +63,59 @@ class Slashed_Bricks_Inventory {
 			return self::$cache;
 		}
 
-		$inventory = self::resolve();
+		// Prime the cache with the resolved inventory BEFORE applying the
+		// filter. A filter callback is allowed to query inventory data via
+		// the public Slashed_Bricks_Inventory::get_*() helpers; without a
+		// pre-primed cache that re-entry would call resolve() recursively
+		// and never terminate. With the cache primed, recursive get() calls
+		// short-circuit on the first line above.
+		self::$cache = self::sanitize_inventory( self::resolve() );
 
 		/**
 		 * Filter the resolved inventory before it's used to register
 		 * variables, classes, and colors with Bricks.
 		 *
+		 * Filter callbacks may safely call Slashed_Bricks_Inventory::get_*()
+		 * - the cache is primed before this filter fires, so re-entrant
+		 * calls are bounded by the per-request cache instead of re-running
+		 * resolve().
+		 *
 		 * @param array $inventory ['variables', 'sf_classes', 'is_classes'].
 		 */
-		self::$cache = apply_filters( 'slashed_bricks/inventory', $inventory );
+		self::$cache = self::sanitize_inventory(
+			apply_filters( 'slashed_bricks/inventory', self::$cache )
+		);
 
 		return self::$cache;
+	}
+
+	/**
+	 * Normalise an inventory array to the canonical shape.
+	 *
+	 * Defensive coercion for arbitrary inputs: filter callbacks may
+	 * legitimately want to extend, prune, or replace inventory entries,
+	 * but they could also return null, a partial array, or non-string
+	 * entries. This normaliser guarantees the consumers downstream
+	 * (Variables / Classes / Colors registration) always see the same
+	 * shape: three keys, sorted unique string lists.
+	 *
+	 * @param mixed $inventory Possibly malformed inventory data.
+	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
+	 */
+	private static function sanitize_inventory( $inventory ) {
+		$base = Slashed_Bricks_CSS_Parser::empty_inventory();
+		if ( ! is_array( $inventory ) ) {
+			return $base;
+		}
+		foreach ( array_keys( $base ) as $key ) {
+			$list = isset( $inventory[ $key ] ) && is_array( $inventory[ $key ] )
+				? array_filter( $inventory[ $key ], 'is_string' )
+				: array();
+			$list = array_values( array_unique( $list ) );
+			sort( $list );
+			$base[ $key ] = $list;
+		}
+		return $base;
 	}
 
 	/**
@@ -356,13 +398,16 @@ class Slashed_Bricks_Inventory {
 	/**
 	 * Find a local path to the configured CSS bundle, if any.
 	 *
-	 * Mirrors the discovery logic in slashed_bricks_get_css_url() so the
-	 * inventory always reflects the same file the frontend is loading.
+	 * Aligns the inventory source with whichever CSS bundle is actually
+	 * enqueued: the active URL from slashed_bricks_get_css_url() drives
+	 * the choice, so a slashed_bricks/css_bundle_url filter that swaps
+	 * 'optimal' for 'essential' or 'full' is reflected in what tokens
+	 * the Bricks UI shows.
 	 *
 	 * The 'slashed_bricks/inventory_local_path' filter is authoritative:
 	 *   - return a string -> use that path (or empty if it doesn't exist)
 	 *   - return false    -> skip local resolution entirely
-	 *   - return null     -> use the default candidate paths
+	 *   - return null     -> derive the path from the active CSS URL
 	 *
 	 * @return string Absolute path, or '' when no local copy is available.
 	 */
@@ -377,18 +422,42 @@ class Slashed_Bricks_Inventory {
 			return ( '' !== $override && file_exists( $override ) ) ? $override : '';
 		}
 
-		$candidates = array(
-			SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css', // repo symlink mode.
-			SLASHED_BRICKS_PATH . 'dist/slashed.optimal.css',       // copy-install mode.
-		);
-
-		foreach ( $candidates as $candidate ) {
-			if ( file_exists( $candidate ) ) {
-				return $candidate;
+		// Derive the local path from the active CSS URL. This keeps the
+		// parsed inventory aligned with whichever bundle the
+		// slashed_bricks/css_bundle_url filter has selected, so we never
+		// register tokens from 'optimal' while the site loads 'full'.
+		if ( function_exists( 'slashed_bricks_get_css_url' ) ) {
+			$derived = self::derive_local_path_from_url( slashed_bricks_get_css_url() );
+			if ( '' !== $derived && file_exists( $derived ) ) {
+				return $derived;
 			}
 		}
 
 		return '';
+	}
+
+	/**
+	 * Map a plugin-served CSS URL back to its filesystem path.
+	 *
+	 * Returns a path only when the URL clearly maps to a file inside the
+	 * plugin's URL space (covers both copy-install mode where dist/ lives
+	 * under the plugin and symlink-in-repo mode where dist/ lives at
+	 * SLASHED_BRICKS_PATH . '../../dist/'). For any other URL (CDN,
+	 * third-party host) returns '' so the caller can fall through to
+	 * remote fetching.
+	 *
+	 * @param string $url Active CSS bundle URL.
+	 * @return string Absolute filesystem path candidate, or '' when not a local URL.
+	 */
+	private static function derive_local_path_from_url( $url ) {
+		if ( ! is_string( $url ) || '' === $url ) {
+			return '';
+		}
+		if ( 0 !== strpos( $url, SLASHED_BRICKS_URL ) ) {
+			return '';
+		}
+		$relative = substr( $url, strlen( SLASHED_BRICKS_URL ) );
+		return SLASHED_BRICKS_PATH . $relative;
 	}
 
 	/**
