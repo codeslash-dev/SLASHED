@@ -127,6 +127,10 @@ class Slashed_Bricks_CSS_Generator {
 			$declarations = array_merge( $declarations, self::generate_zindex_declarations( $settings['zindex'] ) );
 		}
 
+		if ( ! empty( $settings['contrast'] ) && is_array( $settings['contrast'] ) ) {
+			$declarations = array_merge( $declarations, self::generate_contrast_declarations( $settings['contrast'] ) );
+		}
+
 		if ( empty( $declarations ) ) {
 			self::$cache = '';
 			return self::$cache;
@@ -355,5 +359,72 @@ class Slashed_Bricks_CSS_Generator {
 		}
 
 		return $declarations;
+	}
+
+	/**
+	 * Generate CSS declarations for the Contrast tab tokens.
+	 *
+	 * Each control writes one custom property. Numeric inputs are
+	 * formatted with a guarded float cast so locale settings can't
+	 * smuggle commas into the output. Pixel-unit fields suffix 'px'
+	 * automatically. The focus ring style is restricted to a known
+	 * enum so we never emit garbage like "javascript:"-style values.
+	 *
+	 * @param array $settings Contrast section settings.
+	 * @return array CSS declaration strings.
+	 */
+	private static function generate_contrast_declarations( $settings ) {
+		$declarations = array();
+
+		// Plain unitless numerics.
+		$numerics = array(
+			'contrast_bias'      => '--sf-contrast-bias',
+			'contrast_threshold' => '--sf-contrast-threshold',
+			'opacity_disabled'   => '--sf-opacity-disabled',
+		);
+		foreach ( $numerics as $key => $property ) {
+			if ( isset( $settings[ $key ] ) && '' !== $settings[ $key ] ) {
+				$declarations[] = $property . ': ' . self::format_float( $settings[ $key ] ) . ';';
+			}
+		}
+
+		// Pixel-typed focus ring metrics.
+		$pixel_metrics = array(
+			'focus_ring_width'  => '--sf-focus-ring-width',
+			'focus_ring_offset' => '--sf-focus-ring-offset',
+		);
+		foreach ( $pixel_metrics as $key => $property ) {
+			if ( isset( $settings[ $key ] ) && '' !== $settings[ $key ] ) {
+				$declarations[] = $property . ': ' . self::format_float( $settings[ $key ] ) . 'px;';
+			}
+		}
+
+		// Focus ring style: restricted enum so we never echo arbitrary input.
+		if ( isset( $settings['focus_ring_style'] ) && '' !== $settings['focus_ring_style'] ) {
+			$style = (string) $settings['focus_ring_style'];
+			$allowed = array( 'solid', 'dashed', 'dotted', 'double', 'none' );
+			if ( in_array( $style, $allowed, true ) ) {
+				$declarations[] = '--sf-focus-ring-style: ' . $style . ';';
+			}
+		}
+
+		return $declarations;
+	}
+
+	/**
+	 * Locale-safe float formatter.
+	 *
+	 * Casts to float, then formats with '.' decimal and no trailing
+	 * zeros. Avoids surprises from setlocale() shifting the decimal
+	 * separator to ','.
+	 *
+	 * @param mixed $value Raw numeric input.
+	 * @return string
+	 */
+	private static function format_float( $value ) {
+		$num = (float) $value;
+		// Up to 6 decimals, then trim trailing zeros and dot.
+		$out = rtrim( rtrim( number_format( $num, 6, '.', '' ), '0' ), '.' );
+		return '' === $out ? '0' : $out;
 	}
 }

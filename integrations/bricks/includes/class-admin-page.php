@@ -45,6 +45,7 @@ class Slashed_Bricks_Admin_Page {
 	public function __construct() {
 		$this->tabs = array(
 			'colors'     => 'Colors',
+			'contrast'   => 'Contrast',
 			'typography' => 'Typography',
 			'spacing'    => 'Spacing',
 			'radius'     => 'Radius',
@@ -194,6 +195,13 @@ class Slashed_Bricks_Admin_Page {
 	 * @return array Sanitized data.
 	 */
 	private function sanitize_section( $section, $data ) {
+		// Colors get a specialised merger because each token has two paired
+		// inputs in the form (HEX picker + raw advanced) that resolve to a
+		// single stored value.
+		if ( 'colors' === $section ) {
+			return $this->sanitize_color_section( $data );
+		}
+
 		$sanitized = array();
 
 		foreach ( $data as $key => $value ) {
@@ -211,6 +219,102 @@ class Slashed_Bricks_Admin_Page {
 		}
 
 		return $sanitized;
+	}
+
+	/**
+	 * Merge paired HEX/raw color inputs into a single stored value per token.
+	 *
+	 * The Colors tab renders two inputs per color: a HEX picker (suffix
+	 * "_hex") and an Advanced raw input (suffix "_raw") that accepts any
+	 * CSS color string (oklch, rgb, hsl, etc.). The raw value wins when
+	 * non-empty; otherwise the HEX value is used. The merged result is
+	 * stored under the base key (e.g. "brand_primary"), preserving the
+	 * storage shape the CSS generator already expects.
+	 *
+	 * Legacy direct writes (key without suffix) are still accepted, so
+	 * imports or pre-upgrade saved values keep working.
+	 *
+	 * @param array $data Raw form data for the colors section.
+	 * @return array Sanitized color settings keyed by base token name.
+	 */
+	private function sanitize_color_section( $data ) {
+		$grouped = array();
+
+		foreach ( $data as $key => $value ) {
+			$key = (string) $key;
+			if ( '' === $key || ! is_string( $value ) ) {
+				continue;
+			}
+
+			$clean_value = $this->sanitize_css_value( sanitize_text_field( $value ) );
+			$clean_value = trim( $clean_value );
+
+			if ( $this->key_has_suffix( $key, '_hex' ) ) {
+				$base = sanitize_key( substr( $key, 0, -4 ) );
+				if ( '' !== $base ) {
+					$grouped[ $base ]['hex'] = $clean_value;
+				}
+			} elseif ( $this->key_has_suffix( $key, '_raw' ) ) {
+				$base = sanitize_key( substr( $key, 0, -4 ) );
+				if ( '' !== $base ) {
+					$grouped[ $base ]['raw'] = $clean_value;
+				}
+			} else {
+				$base = sanitize_key( $key );
+				if ( '' !== $base ) {
+					$grouped[ $base ]['direct'] = $clean_value;
+				}
+			}
+		}
+
+		$sanitized = array();
+		foreach ( $grouped as $base => $parts ) {
+			if ( ! empty( $parts['raw'] ) ) {
+				$sanitized[ $base ] = $parts['raw'];
+			} elseif ( ! empty( $parts['hex'] ) ) {
+				$sanitized[ $base ] = $parts['hex'];
+			} elseif ( isset( $parts['direct'] ) && '' !== $parts['direct'] ) {
+				$sanitized[ $base ] = $parts['direct'];
+			}
+			// All-empty rows are omitted so the framework default applies.
+		}
+
+		return $sanitized;
+	}
+
+	/**
+	 * Polyfill for str_ends_with() since the plugin supports PHP 7.4.
+	 *
+	 * @param string $haystack Subject string.
+	 * @param string $needle   Suffix to test for.
+	 * @return bool
+	 */
+	private function key_has_suffix( $haystack, $needle ) {
+		$nl = strlen( $needle );
+		if ( $nl === 0 ) {
+			return true;
+		}
+		$hl = strlen( $haystack );
+		if ( $hl < $nl ) {
+			return false;
+		}
+		return substr( $haystack, -$nl ) === $needle;
+	}
+
+	/**
+	 * Determine whether a stored value looks like a HEX color.
+	 *
+	 * Accepts 3, 4, 6, and 8-digit forms. Anything else (oklch, rgb, hsl,
+	 * named color, var()...) is treated as a raw advanced value so the
+	 * UI starts in the Advanced input and won't truncate it via the
+	 * HEX-only color picker.
+	 *
+	 * @param string $value Stored color value.
+	 * @return bool
+	 */
+	private function is_hex_color( $value ) {
+		return is_string( $value )
+			&& 1 === preg_match( '/^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', trim( $value ) );
 	}
 
 	/**
@@ -365,25 +469,37 @@ class Slashed_Bricks_Admin_Page {
 	/**
 	 * Render the Colors tab.
 	 *
+	 * Each color exposes two paired inputs:
+	 *   - A HEX picker (real WP color picker) - the primary path.
+	 *   - An "Advanced (raw value)" input that accepts any CSS color
+	 *     string (oklch, rgb, hsl, var(), ...) - used when the user
+	 *     wants to keep an authoring format the picker can't represent.
+	 *
+	 * The active mode is auto-detected on render: if the saved value
+	 * is a HEX literal we start in HEX mode; if it's anything else
+	 * (oklch, named, etc.) we start in Advanced mode.
+	 *
 	 * @param array $settings Saved settings for this tab.
 	 */
 	private function render_tab_colors( $settings ) {
 		$defaults = Slashed_Bricks_Token_Defaults::get_colors();
 
 		echo '<h2>' . esc_html__( 'Brand Colors', 'slashed-bricks' ) . '</h2>';
-		echo '<p class="description">' . esc_html__( 'Source color tokens in oklch() format. These generate the full color scale.', 'slashed-bricks' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Pick a color via the HEX picker, or switch to "Advanced" to paste an oklch() / rgb() / any other CSS color value. Whatever you save is fed straight into the framework as the source of the brand scale.', 'slashed-bricks' ) . '</p>';
 		echo '<table class="form-table"><tbody>';
 
-		foreach ( $defaults['brand'] as $name => $default ) {
-			$field_name = 'slashed_tokens[brand_' . $name . ']';
-			$value      = isset( $settings[ 'brand_' . $name ] ) ? $settings[ 'brand_' . $name ] : '';
-			echo '<tr>';
-			echo '<th scope="row"><label for="brand_' . esc_attr( $name ) . '">' . esc_html( ucfirst( $name ) ) . '</label></th>';
-			echo '<td>';
-			echo '<input type="text" id="brand_' . esc_attr( $name ) . '" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $value ) . '" placeholder="' . esc_attr( $default ) . '" class="regular-text slashed-color-field">';
-			echo '<p class="description"><code>--sf-color-' . esc_html( $name ) . '-light</code></p>';
-			echo '</td>';
-			echo '</tr>';
+		foreach ( $defaults['brand'] as $name => $default_oklch ) {
+			$base_key   = 'brand_' . $name;
+			$saved      = isset( $settings[ $base_key ] ) ? (string) $settings[ $base_key ] : '';
+			$hex_default_hint = isset( $defaults['brand_hex_hints'][ $name ] ) ? $defaults['brand_hex_hints'][ $name ] : '';
+			$this->render_color_row(
+				$base_key,
+				ucfirst( $name ),
+				$saved,
+				$hex_default_hint,
+				$default_oklch,
+				'--sf-color-' . $name . '-light'
+			);
 		}
 
 		echo '</tbody></table>';
@@ -391,19 +507,272 @@ class Slashed_Bricks_Admin_Page {
 		echo '<h2>' . esc_html__( 'Status Colors', 'slashed-bricks' ) . '</h2>';
 		echo '<table class="form-table"><tbody>';
 
-		foreach ( $defaults['status'] as $name => $default ) {
-			$field_name = 'slashed_tokens[status_' . $name . ']';
-			$value      = isset( $settings[ 'status_' . $name ] ) ? $settings[ 'status_' . $name ] : '';
-			echo '<tr>';
-			echo '<th scope="row"><label for="status_' . esc_attr( $name ) . '">' . esc_html( ucfirst( $name ) ) . '</label></th>';
-			echo '<td>';
-			echo '<input type="text" id="status_' . esc_attr( $name ) . '" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $value ) . '" placeholder="' . esc_attr( $default ) . '" class="regular-text slashed-color-field">';
-			echo '<p class="description"><code>--sf-color-' . esc_html( $name ) . '-light</code></p>';
-			echo '</td>';
-			echo '</tr>';
+		foreach ( $defaults['status'] as $name => $default_oklch ) {
+			$base_key   = 'status_' . $name;
+			$saved      = isset( $settings[ $base_key ] ) ? (string) $settings[ $base_key ] : '';
+			$hex_default_hint = isset( $defaults['status_hex_hints'][ $name ] ) ? $defaults['status_hex_hints'][ $name ] : '';
+			$this->render_color_row(
+				$base_key,
+				ucfirst( $name ),
+				$saved,
+				$hex_default_hint,
+				$default_oklch,
+				'--sf-color-' . $name . '-light'
+			);
 		}
 
 		echo '</tbody></table>';
+	}
+
+	/**
+	 * Render a single color row with paired HEX and Advanced inputs.
+	 *
+	 * @param string $base_key      Stored token key (e.g. "brand_primary").
+	 * @param string $label         Display label (e.g. "Primary").
+	 * @param string $saved         Currently saved value (any CSS color string, or empty).
+	 * @param string $hex_hint      HEX placeholder shown when nothing is saved.
+	 * @param string $oklch_hint    OKLCH placeholder shown in the Advanced input.
+	 * @param string $css_var       Underlying CSS custom property name (informational only).
+	 */
+	private function render_color_row( $base_key, $label, $saved, $hex_hint, $oklch_hint, $css_var ) {
+		$is_hex      = $this->is_hex_color( $saved );
+		$start_mode  = ( $is_hex || '' === $saved ) ? 'hex' : 'raw';
+		$hex_value   = $is_hex ? $saved : '';
+		$raw_value   = $is_hex ? '' : $saved;
+		$row_id      = 'slashed-color-row-' . $base_key;
+
+		?>
+		<tr>
+			<th scope="row">
+				<label for="<?php echo esc_attr( $base_key . '_hex' ); ?>"><?php echo esc_html( $label ); ?></label>
+			</th>
+			<td>
+				<div class="slashed-color-row" id="<?php echo esc_attr( $row_id ); ?>" data-base="<?php echo esc_attr( $base_key ); ?>" data-mode="<?php echo esc_attr( $start_mode ); ?>">
+
+					<div class="slashed-color-input slashed-color-input--hex" <?php echo 'hex' === $start_mode ? '' : 'hidden'; ?>>
+						<input
+							type="text"
+							id="<?php echo esc_attr( $base_key . '_hex' ); ?>"
+							name="slashed_tokens[<?php echo esc_attr( $base_key ); ?>_hex]"
+							value="<?php echo esc_attr( $hex_value ); ?>"
+							class="slashed-color-hex"
+							data-default-color="<?php echo esc_attr( $hex_hint ); ?>"
+							data-base="<?php echo esc_attr( $base_key ); ?>"
+						>
+					</div>
+
+					<div class="slashed-color-input slashed-color-input--raw" <?php echo 'raw' === $start_mode ? '' : 'hidden'; ?>>
+						<input
+							type="text"
+							id="<?php echo esc_attr( $base_key . '_raw' ); ?>"
+							name="slashed_tokens[<?php echo esc_attr( $base_key ); ?>_raw]"
+							value="<?php echo esc_attr( $raw_value ); ?>"
+							placeholder="<?php echo esc_attr( $oklch_hint ); ?>"
+							class="regular-text slashed-color-raw"
+							spellcheck="false"
+							data-base="<?php echo esc_attr( $base_key ); ?>"
+						>
+					</div>
+
+					<button
+						type="button"
+						class="button-link slashed-color-toggle"
+						data-row="<?php echo esc_attr( $row_id ); ?>"
+						aria-controls="<?php echo esc_attr( $row_id ); ?>"
+					>
+						<span class="slashed-color-toggle__label-hex"><?php esc_html_e( 'Advanced (oklch / raw)', 'slashed-bricks' ); ?></span>
+						<span class="slashed-color-toggle__label-raw"><?php esc_html_e( 'Use HEX picker', 'slashed-bricks' ); ?></span>
+					</button>
+
+					<p class="description"><code><?php echo esc_html( $css_var ); ?></code></p>
+				</div>
+			</td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * Render the Contrast tab.
+	 *
+	 * Houses cross-cutting visual fine-tuning knobs that don't fit
+	 * inside any of the typed token sections (typography, spacing,
+	 * radius, etc). Each control writes one CSS custom property:
+	 *
+	 *   - --sf-contrast-bias        (-0.2 to +0.2)
+	 *   - --sf-contrast-threshold   (0 to 1)
+	 *   - --sf-opacity-disabled     (0 to 1)
+	 *   - --sf-focus-ring-width     (px)
+	 *   - --sf-focus-ring-offset    (px)
+	 *   - --sf-focus-ring-style     (solid / dashed / dotted / double / none)
+	 *
+	 * Per-section scale multipliers (text_scale, space_scale, etc) keep
+	 * their own tabs since they belong with their token family. This
+	 * keeps each setting in exactly one place - no duplicate sources of
+	 * truth, no surprising overrides.
+	 *
+	 * @param array $settings Saved settings for this tab.
+	 */
+	private function render_tab_contrast( $settings ) {
+		$defaults = Slashed_Bricks_Token_Defaults::get_contrast();
+
+		echo '<h2>' . esc_html__( 'Contrast', 'slashed-bricks' ) . '</h2>';
+		echo '<p class="description">' . esc_html__( 'Fine-tune how the framework derives shades and picks readable text colors against your brand colors.', 'slashed-bricks' ) . '</p>';
+		echo '<table class="form-table"><tbody>';
+
+		$this->render_range_field(
+			$settings,
+			'contrast_bias',
+			__( 'Contrast bias', 'slashed-bricks' ),
+			__( 'Shifts every derived shade up (positive) or down (negative). Useful to brighten or dim the entire scale without re-picking source colors.', 'slashed-bricks' ),
+			-0.2,
+			0.2,
+			0.01,
+			$defaults['contrast_bias'],
+			'--sf-contrast-bias'
+		);
+
+		$this->render_range_field(
+			$settings,
+			'contrast_threshold',
+			__( 'Contrast threshold', 'slashed-bricks' ),
+			__( 'Lightness threshold used to pick text-on-color (white vs. black). Lower values prefer dark text on more colors; higher values prefer white text.', 'slashed-bricks' ),
+			0,
+			1,
+			0.01,
+			$defaults['contrast_threshold'],
+			'--sf-contrast-threshold'
+		);
+
+		echo '</tbody></table>';
+
+		echo '<h2>' . esc_html__( 'Opacity', 'slashed-bricks' ) . '</h2>';
+		echo '<table class="form-table"><tbody>';
+
+		$this->render_range_field(
+			$settings,
+			'opacity_disabled',
+			__( 'Disabled opacity', 'slashed-bricks' ),
+			__( 'Opacity applied to disabled UI elements (buttons, inputs, links).', 'slashed-bricks' ),
+			0,
+			1,
+			0.01,
+			$defaults['opacity_disabled'],
+			'--sf-opacity-disabled'
+		);
+
+		echo '</tbody></table>';
+
+		echo '<h2>' . esc_html__( 'Focus ring', 'slashed-bricks' ) . '</h2>';
+		echo '<p class="description">' . esc_html__( 'Visual indicator drawn around keyboard-focused elements. Lower the offset to tighten the ring, raise it to give the element more breathing room.', 'slashed-bricks' ) . '</p>';
+		echo '<table class="form-table"><tbody>';
+
+		$this->render_range_field(
+			$settings,
+			'focus_ring_width',
+			__( 'Ring width', 'slashed-bricks' ),
+			'',
+			0,
+			8,
+			0.5,
+			$defaults['focus_ring_width'],
+			'--sf-focus-ring-width',
+			'px'
+		);
+
+		$this->render_range_field(
+			$settings,
+			'focus_ring_offset',
+			__( 'Ring offset', 'slashed-bricks' ),
+			'',
+			0,
+			8,
+			0.5,
+			$defaults['focus_ring_offset'],
+			'--sf-focus-ring-offset',
+			'px'
+		);
+
+		// Focus ring style is a small enum, so render a select instead of a slider.
+		$style_value   = isset( $settings['focus_ring_style'] ) ? (string) $settings['focus_ring_style'] : '';
+		$style_default = $defaults['focus_ring_style'];
+		$style_options = array( 'solid', 'dashed', 'dotted', 'double', 'none' );
+		echo '<tr>';
+		echo '<th scope="row"><label for="focus_ring_style">' . esc_html__( 'Ring style', 'slashed-bricks' ) . '</label></th>';
+		echo '<td>';
+		echo '<select id="focus_ring_style" name="slashed_tokens[focus_ring_style]">';
+		echo '<option value="">' . esc_html( sprintf( /* translators: %s: default style name. */ __( 'Default (%s)', 'slashed-bricks' ), $style_default ) ) . '</option>';
+		foreach ( $style_options as $opt ) {
+			$selected = selected( $style_value, $opt, false );
+			echo '<option value="' . esc_attr( $opt ) . '" ' . $selected . '>' . esc_html( $opt ) . '</option>';
+		}
+		echo '</select>';
+		echo '<p class="description"><code>--sf-focus-ring-style</code></p>';
+		echo '</td>';
+		echo '</tr>';
+
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * Render a paired range + number input that share a sync id.
+	 *
+	 * Markup matches what initRangeSync() in admin-page.js looks for:
+	 * .slashed-range-input and .slashed-number-input sharing data-sync.
+	 *
+	 * Only the number input carries the form `name`, so submission is
+	 * unambiguous regardless of which control the user touched last.
+	 *
+	 * @param array       $settings    Saved settings for the section.
+	 * @param string      $key         Token key (also used as data-sync id).
+	 * @param string      $label       Field label.
+	 * @param string      $description Help text shown beneath the inputs.
+	 * @param float|int   $min         Minimum allowed value.
+	 * @param float|int   $max         Maximum allowed value.
+	 * @param float       $step        Step granularity.
+	 * @param float|int   $default     Factory default (used as placeholder).
+	 * @param string      $css_var     Underlying CSS custom property (informational only).
+	 * @param string      $unit        Optional unit label rendered after the inputs (e.g. 'px').
+	 */
+	private function render_range_field( $settings, $key, $label, $description, $min, $max, $step, $default, $css_var, $unit = '' ) {
+		$value      = isset( $settings[ $key ] ) ? $settings[ $key ] : '';
+		$slider_val = '' !== $value ? $value : $default;
+
+		echo '<tr>';
+		echo '<th scope="row"><label for="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</label></th>';
+		echo '<td>';
+		echo '<div class="slashed-range-group">';
+
+		printf(
+			'<input type="range" class="slashed-range-input" data-sync="%1$s" min="%2$s" max="%3$s" step="%4$s" value="%5$s" aria-hidden="true" tabindex="-1">',
+			esc_attr( $key ),
+			esc_attr( (string) $min ),
+			esc_attr( (string) $max ),
+			esc_attr( (string) $step ),
+			esc_attr( (string) $slider_val )
+		);
+
+		printf(
+			'<input type="number" id="%1$s" class="slashed-number-input" data-sync="%1$s" name="slashed_tokens[%1$s]" min="%2$s" max="%3$s" step="%4$s" value="%5$s" placeholder="%6$s">',
+			esc_attr( $key ),
+			esc_attr( (string) $min ),
+			esc_attr( (string) $max ),
+			esc_attr( (string) $step ),
+			esc_attr( (string) $value ),
+			esc_attr( (string) $default )
+		);
+
+		if ( '' !== $unit ) {
+			echo '<span class="slashed-range-unit">' . esc_html( $unit ) . '</span>';
+		}
+
+		echo '</div>';
+
+		if ( '' !== $description ) {
+			echo '<p class="description">' . esc_html( $description ) . '</p>';
+		}
+		echo '<p class="description"><code>' . esc_html( $css_var ) . '</code></p>';
+		echo '</td>';
+		echo '</tr>';
 	}
 
 	/**

@@ -133,7 +133,62 @@
 	color: #646970;
 }
 
-/* Color Fields */
+/* Color Fields - paired HEX picker + Advanced raw input */
+.slashed-color-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+}
+
+.slashed-color-row .slashed-color-input {
+	display: flex;
+	align-items: center;
+}
+
+.slashed-color-row .slashed-color-input[hidden] {
+	display: none;
+}
+
+.slashed-color-row .slashed-color-raw {
+	min-width: 280px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 12px;
+}
+
+.slashed-color-row .slashed-color-toggle {
+	font-size: 12px;
+	color: #2271b1;
+	cursor: pointer;
+	background: none;
+	border: 0;
+	padding: 4px 0;
+	text-decoration: underline;
+}
+
+.slashed-color-row .slashed-color-toggle:hover,
+.slashed-color-row .slashed-color-toggle:focus {
+	color: #135e96;
+}
+
+/* Toggle button label visibility - driven by data-mode on the row */
+.slashed-color-row .slashed-color-toggle__label-hex,
+.slashed-color-row .slashed-color-toggle__label-raw {
+	display: none;
+}
+.slashed-color-row[data-mode="hex"] .slashed-color-toggle__label-hex {
+	display: inline;
+}
+.slashed-color-row[data-mode="raw"] .slashed-color-toggle__label-raw {
+	display: inline;
+}
+
+.slashed-color-row .description {
+	flex-basis: 100%;
+	margin: 0;
+}
+
+/* Legacy single-input colors (kept for any custom integrations) */
 .slashed-color-field-wrap {
 	display: flex;
 	align-items: center;
@@ -185,6 +240,16 @@
 	text-align: right;
 	font-size: 12px;
 	color: #646970;
+}
+
+.slashed-range-group .slashed-range-unit {
+	min-width: 24px;
+	font-size: 12px;
+	color: #646970;
+}
+
+.wrap .slashed-tab-content select {
+	min-width: 180px;
 }
 
 /* Live Preview Panel */
