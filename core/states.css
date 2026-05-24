@@ -306,13 +306,6 @@
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  /* Parent reacts to a focused descendant (e.g. highlight a card while
-     any field inside it has keyboard focus). Not is-/sf-prefixed by design. */
-  .focus-parent:focus-within {
-    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
-    outline-offset: var(--sf-focus-ring-offset);
-  }
-
   /* ============================================================
      EMPTY STATE
      ============================================================ */

@@ -15,6 +15,7 @@ const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
 const TOKEN_FILES = [
   'core/tokens.css',
   'core/tokens.layout.css',
+  'core/tokens.macros.css',
   'optional/tokens.palette.css',
 ];
 

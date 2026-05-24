@@ -1,9 +1,135 @@
-/* SLASHED — optional/tokens.components.css
-   @layer slashed.tokens
-   ────────────────────── */
+/* ============================================================
+   SLASHED — optional/tokens.components.css
+   Component tokens — BLUEPRINT (commented out).
+   Layer: slashed.tokens
+
+   STATUS — v0.3.0 BLUEPRINT
+   ─────────────────────────
+   Token declarations are commented out below. The @layer
+   declaration is real, so the cascade position is reserved.
+   Activation alongside class activation in optional/components.css
+   is planned for upcoming minor releases (additive, no breaking
+   changes to existing tokens or classes).
+
+   These tokens pair with the 8 components reserved in
+   optional/components.css:
+     button, card, badge, tag, alert, avatar, modal, skeleton.
+
+   When activated, every token here becomes PUBLIC API and is
+   covered by SemVer.
+
+   CARD TOKENS — note the card token block lives here (rather
+   than in core/tokens.css) so that the entire component-related
+   surface — classes AND tokens — shares one activation cycle.
+   ============================================================ */
 
 @layer slashed.tokens {
+  :root {
 
-  /* TODO */
+    /* ============================================================
+     * CARD TOKENS
+     * ============================================================
+     *
+     * Concentric radius math: outer = inner + padding. Keeps inner
+     * elements that use the global --sf-radius-m visually
+     * proportional inside a padded card.
+     *
+     * --sf-card-padding:        var(--sf-space-l);
+     * --sf-card-gap:            var(--sf-space-m);
+     * --sf-card-radius:         var(--sf-radius-m);
+     * --sf-card-radius-outer:   calc(var(--sf-card-radius) + var(--sf-card-padding));
+     * --sf-card-bg:             var(--sf-color-surface);
+     * --sf-card-border-width:   var(--sf-border-width-1);
+     * --sf-card-border-color:   var(--sf-color-border);
+     * --sf-card-shadow:         var(--sf-shadow-s);
+     */
 
+    /* ============================================================
+     * BUTTON TOKENS
+     * ============================================================
+     *
+     * --sf-button-pad-x:        var(--sf-space-m);
+     * --sf-button-pad-y:        var(--sf-space-s);
+     * --sf-button-gap:          var(--sf-space-2xs);
+     * --sf-button-radius:       var(--sf-radius-s);
+     * --sf-button-font-weight:  var(--sf-font-weight-semibold);
+     * --sf-button-min-height:   var(--sf-touch-target);
+     * --sf-button-border-width: var(--sf-border-width-1);
+     */
+
+    /* ============================================================
+     * BADGE TOKENS
+     * ============================================================
+     *
+     * --sf-badge-pad-x:         var(--sf-space-2xs);
+     * --sf-badge-pad-y:         var(--sf-space-3xs, 0.125rem);
+     * --sf-badge-radius:        var(--sf-radius-pill, 999px);
+     * --sf-badge-font-size:     var(--sf-text-2xs);
+     * --sf-badge-font-weight:   var(--sf-font-weight-semibold);
+     * --sf-badge-line-height:   var(--sf-leading-tight);
+     */
+
+    /* ============================================================
+     * TAG TOKENS
+     * ============================================================
+     *
+     * --sf-tag-pad-x:           var(--sf-space-xs);
+     * --sf-tag-pad-y:           var(--sf-space-3xs, 0.125rem);
+     * --sf-tag-radius:          var(--sf-radius-s);
+     * --sf-tag-gap:             var(--sf-space-2xs);
+     * --sf-tag-font-size:       var(--sf-text-xs);
+     * --sf-tag-bg:              var(--sf-color-well);
+     * --sf-tag-border-width:    var(--sf-border-width-1);
+     * --sf-tag-border-color:    var(--sf-color-border);
+     */
+
+    /* ============================================================
+     * ALERT TOKENS
+     * ============================================================
+     *
+     * --sf-alert-pad:           var(--sf-space-m);
+     * --sf-alert-radius:        var(--sf-radius-m);
+     * --sf-alert-gap:           var(--sf-space-s);
+     * --sf-alert-border-width:  var(--sf-border-width-1);
+     * --sf-alert-icon-size:     var(--sf-icon-m);
+     */
+
+    /* ============================================================
+     * AVATAR TOKENS
+     * ============================================================
+     *
+     * --sf-avatar-size:         2.5rem;
+     * --sf-avatar-radius:       var(--sf-radius-full, 50%);
+     * --sf-avatar-bg:           var(--sf-color-well);
+     * --sf-avatar-font-weight:  var(--sf-font-weight-semibold);
+     * --sf-avatar-border-width: 0;
+     * --sf-avatar-border-color: var(--sf-color-border);
+     */
+
+    /* ============================================================
+     * MODAL TOKENS
+     * ============================================================
+     *
+     * --sf-modal-pad:           var(--sf-space-l);
+     * --sf-modal-gap:           var(--sf-space-m);
+     * --sf-modal-radius:        var(--sf-radius-l);
+     * --sf-modal-max-inline:    min(90vw, 32rem);
+     * --sf-modal-bg:            var(--sf-color-surface);
+     * --sf-modal-shadow:        var(--sf-shadow-xl);
+     * --sf-modal-backdrop-bg:   color-mix(in oklab, var(--sf-color-neutral) 60%, transparent);
+     * --sf-modal-z:             var(--sf-z-max);
+     */
+
+    /* ============================================================
+     * SKELETON TOKENS
+     * ============================================================
+     *
+     * --sf-skeleton-bg:         var(--sf-color-well);
+     * --sf-skeleton-shimmer:    var(--sf-color-raised);
+     * --sf-skeleton-radius:     var(--sf-radius-s);
+     * --sf-skeleton-duration:   1.5s;
+     * --sf-skeleton-line-height: 0.8em;
+     */
+
+  }
 }
