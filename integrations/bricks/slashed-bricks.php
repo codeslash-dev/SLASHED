@@ -123,17 +123,11 @@ function slashed_bricks_init() {
 add_action( 'after_setup_theme', 'slashed_bricks_init' );
 
 /**
- * Activation check: ensure Bricks Builder 1.9.2+ is available.
+ * Activation check.
  */
 function slashed_bricks_activation_check() {
-    if ( ! slashed_bricks_is_bricks_active() ) {
-        deactivate_plugins( plugin_basename( __FILE__ ) );
-        wp_die(
-            esc_html__( 'SLASHED for Bricks requires Bricks Builder 1.9.2 or higher to be installed and active.', 'slashed-bricks' ),
-            'Plugin Activation Error',
-            array( 'back_link' => true )
-        );
-    }
+	// Allow activation without Bricks so admin token configuration is available.
+	// Runtime guards in slashed_bricks_init() handle the Bricks dependency.
 }
 register_activation_hook( __FILE__, 'slashed_bricks_activation_check' );
 

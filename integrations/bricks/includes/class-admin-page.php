@@ -157,7 +157,11 @@ class Slashed_Bricks_Admin_Page {
 
 		// Handle reset section.
 		if ( ! empty( $_POST['reset_section'] ) ) {
-			$section  = sanitize_key( wp_unslash( $_POST['reset_section'] ) );
+			$section = sanitize_key( wp_unslash( $_POST['reset_section'] ) );
+			if ( ! isset( $this->tabs[ $section ] ) ) {
+				wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=error' ) );
+				exit;
+			}
 			$settings = $this->get_settings();
 			unset( $settings[ $section ] );
 			update_option( self::OPTION_NAME, $settings );
@@ -167,6 +171,9 @@ class Slashed_Bricks_Admin_Page {
 
 		// Save settings.
 		$active_tab = isset( $_POST['active_tab'] ) ? sanitize_key( wp_unslash( $_POST['active_tab'] ) ) : 'colors';
+		if ( ! isset( $this->tabs[ $active_tab ] ) ) {
+			$active_tab = 'colors';
+		}
 		$settings   = $this->get_settings();
 		$section    = isset( $_POST['slashed_tokens'] ) ? wp_unslash( $_POST['slashed_tokens'] ) : array();
 
@@ -237,14 +244,14 @@ class Slashed_Bricks_Admin_Page {
 		$message  = isset( $_GET['message'] ) ? sanitize_key( wp_unslash( $_GET['message'] ) ) : '';
 
 		?>
-		<div class="wrap">
-			<h1>
+		<div class="wrap slashed-admin-tabs">
+			<h1 class="slashed-admin-header">
 				<?php esc_html_e( 'SLASHED Design Tokens', 'slashed-bricks' ); ?>
 				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="display:inline;">
 					<input type="hidden" name="action" value="slashed_bricks_save">
 					<input type="hidden" name="reset_all" value="1">
 					<?php wp_nonce_field( self::NONCE_ACTION ); ?>
-					<button type="submit" class="page-title-action" onclick="return confirm('<?php esc_attr_e( 'Reset all settings to defaults?', 'slashed-bricks' ); ?>');">
+					<button type="submit" class="page-title-action slashed-reset-all-btn" onclick="return confirm('<?php esc_attr_e( 'Reset all settings to defaults?', 'slashed-bricks' ); ?>');">
 						<?php esc_html_e( 'Reset All', 'slashed-bricks' ); ?>
 					</button>
 				</form>
@@ -280,7 +287,7 @@ class Slashed_Bricks_Admin_Page {
 
 				<hr>
 				<input type="hidden" name="reset_section" value="">
-				<button type="submit" class="button button-link-delete"
+				<button type="submit" class="button button-link-delete slashed-reset-btn"
 						onclick="this.form.querySelector('[name=reset_section]').value='<?php echo esc_attr( $active_tab ); ?>'; return confirm('<?php esc_attr_e( 'Reset this section to defaults?', 'slashed-bricks' ); ?>');">
 					<?php printf( esc_html__( 'Reset %s Section', 'slashed-bricks' ), esc_html( $this->tabs[ $active_tab ] ) ); ?>
 				</button>
