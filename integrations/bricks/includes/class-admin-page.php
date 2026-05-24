@@ -224,7 +224,7 @@ class Slashed_Bricks_Admin_Page {
 	 * @return string Sanitized value with dangerous characters removed.
 	 */
 	private function sanitize_css_value( $value ) {
-		return str_replace( array( '{', '}', '<', '>', '@' ), '', $value );
+		return str_replace( array( '{', '}', '<', '>', '@', ';' ), '', $value );
 	}
 
 	/**
