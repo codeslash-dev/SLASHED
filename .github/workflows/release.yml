@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. v0.3.0)'
+        required: true
+        type: string
 
 jobs:
   release:
@@ -21,10 +27,19 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Determine version tag
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
       - name: Extract changelog for this version
         id: changelog
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${{ steps.version.outputs.tag }}"
+          VERSION="${VERSION#v}"
           NOTES=$(awk -v target="$VERSION" '
             $1 == "##" {
               heading = $2
@@ -43,6 +58,7 @@ jobs:
           echo "EOF" >> "$GITHUB_OUTPUT"
       - uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
           body: ${{ steps.changelog.outputs.notes }}
           files: |
             dist/slashed.essential.css
