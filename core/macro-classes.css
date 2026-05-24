@@ -1,0 +1,67 @@
+/* ============================================================
+   SLASHED — core/macro-classes.css
+   ★ shipped in essential bundle
+   Macro-classes (recipes / patterns).
+   Requires: core/tokens.css, core/tokens.macro-classes.css
+   Layer:    slashed.macros
+
+   Macro-classes vs layout primitives:
+     · Layout primitive = answers "where do my children go?"
+       (e.g. .sf-stack, .sf-grid, .sf-cluster)
+     · Macro-class      = answers "what does this element DO or
+       LOOK LIKE?" (e.g. .sf-prose, .sf-flow, .sf-truncate)
+
+   Cascade position:
+     layout → components → macros → utilities → states → …
+     Macros may compose with primitives and components, but a
+     single-property utility still wins on the same selector.
+
+   PUBLIC API — every class here is part of the public surface.
+   Tokens consumed by these classes are listed in
+   core/tokens.macro-classes.css.
+   ============================================================ */
+
+@layer slashed.macros {
+
+  /* -- Prose ---------------------------------------------------
+     Long-form text column with automatic vertical rhythm.
+     .sf-not-prose resets styles inside a prose block.
+     ---------------------------------------------------------- */
+
+  .sf-prose {
+    max-width:     var(--sf-container-prose);
+    overflow-wrap: break-word;
+  }
+
+  .sf-prose > * + *              { margin-block-start: var(--sf-prose-paragraph); }
+  .sf-prose :is(h2, h3, h4) + * { margin-block-start: var(--sf-space-s); }
+  .sf-prose li + li              { margin-block-start: var(--sf-space-xs); }
+  .sf-prose :is(blockquote, pre) { margin-block: var(--sf-space-m); }
+  .sf-prose img                  { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
+  .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
+  .sf-prose ul                   { list-style: disc; }
+  .sf-prose ol                   { list-style: decimal; }
+  .sf-prose ::marker             { color: var(--sf-color-primary); }
+  .sf-prose figure               { margin-block: var(--sf-space-l); }
+  .sf-prose figcaption           { font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs); }
+  .sf-prose table                { margin-block: var(--sf-space-m); display: block; overflow-x: auto; max-width: 100%; }
+  .sf-prose video                { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
+
+  /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the
+     general 0-2-0 budget because these rules must override the .sf-prose
+     child selectors above (also 0-2-0). This is a documented exception. */
+  .sf-prose .sf-not-prose > * + *    { margin-block-start: 0; }
+  .sf-prose .sf-not-prose li + li    { margin-block-start: 0; }
+  /* `revert` in a cascade layer rolls back past all layers to the UA
+     stylesheet — restoring browser-default list styling. In the flat
+     bundle (layers stripped), `revert` falls back to the UA stylesheet
+     directly. Both paths produce the same result: native list bullets. */
+  .sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }
+  .sf-prose .sf-not-prose ::marker   { color: inherit; }
+  .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
+  .sf-prose .sf-not-prose figure     { margin-block: 0; }
+  .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
+  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; max-width: revert; }
+  .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
+
+}

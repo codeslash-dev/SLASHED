@@ -780,6 +780,8 @@
   --sf-body-strong-weight: var(--sf-font-weight-bold);
   --sf-body-em-style:      italic;
 
+  --sf-code-font-size:     0.875em;
+
   --sf-heading-font-family: var(--sf-font-heading);
   --sf-heading-color:       var(--sf-color-heading);
   --sf-heading-text-wrap:   balance;
@@ -1225,7 +1227,7 @@ a, code {
 
 code {
   font-family:      var(--sf-font-mono);
-  font-size:        0.875em;
+  font-size:        var(--sf-code-font-size);
   padding:          0.125em 0.3em;
   border-radius:    var(--sf-radius-xs);
   background-color: var(--sf-color-code-bg);
@@ -1280,7 +1282,7 @@ address, cite, dfn, var {
 }
 
 input, textarea {
-  caret-color: var(--sf-color-action);
+  caret-color: var(--sf-caret-color);
 }
 
 input, progress {
@@ -1674,6 +1676,7 @@ td, th {
 
 .sf-reel {
   display:               flex;
+  block-size:            var(--sf-reel-height);
   gap:                   var(--sf-reel-gap);
   overflow-x:            auto;
   scroll-snap-type:      x mandatory;
@@ -1841,6 +1844,31 @@ td, th {
 .sf-subgrid      { display: grid; grid-template-columns: subgrid; }
 .sf-subgrid-rows { display: grid; grid-template-rows:    subgrid; }
 
+/* ─── core/macro-classes.css ─── */
+/* ============================================================
+   SLASHED — core/macro-classes.css
+   ★ shipped in essential bundle
+   Macro-classes (recipes / patterns).
+   Requires: core/tokens.css, core/tokens.macro-classes.css
+   Layer:    slashed.macros
+
+   Macro-classes vs layout primitives:
+     · Layout primitive = answers "where do my children go?"
+       (e.g. .sf-stack, .sf-grid, .sf-cluster)
+     · Macro-class      = answers "what does this element DO or
+       LOOK LIKE?" (e.g. .sf-prose, .sf-flow, .sf-truncate)
+
+   Cascade position:
+     layout → components → macros → utilities → states → …
+     Macros may compose with primitives and components, but a
+     single-property utility still wins on the same selector.
+
+   PUBLIC API — every class here is part of the public surface.
+   Tokens consumed by these classes are listed in
+   core/tokens.macro-classes.css.
+   ============================================================ */
+
+
 /* -- Prose ---------------------------------------------------
    Long-form text column with automatic vertical rhythm.
    .sf-not-prose resets styles inside a prose block.
@@ -1955,13 +1983,13 @@ td, th {
   height:        1em;
   margin-block-start:  -0.5em;
   margin-inline-start: -0.5em;
-  border:        2px solid var(--sf-color-border--strong);
+  border:        var(--sf-border-width-2) solid var(--sf-color-border--strong);
   border-block-start-color: var(--sf-color-action);
   border-radius: var(--sf-radius-full);
   /* Reduced-motion: accessibility.css kills animation-duration via
      !important on *, *::before, *::after — so this spinner stops
      even without a local reduced-motion wrapper. */
-  animation:     sf-spin 0.6s linear infinite;
+  animation:     sf-spin var(--sf-duration-slower) linear infinite;
 }
 
 .is-busy {
@@ -1984,7 +2012,7 @@ td, th {
                      var(--sf-color-well) 75%
                    );
   background-size: 200% 100%;
-  animation:       sf-shimmer 1.5s ease-in-out infinite;
+  animation:       sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
   border-radius:   var(--sf-radius-s);
   pointer-events:  none;
   user-select:     none;
@@ -2154,8 +2182,8 @@ td, th {
 }
 
 .is-drop-target {
-  outline:        2px dashed var(--sf-color-action);
-  outline-offset: 2px;
+  outline:        var(--sf-focus-ring-width) dashed var(--sf-color-action);
+  outline-offset: var(--sf-focus-ring-offset);
 }
 
 .is-draggable {
@@ -2438,8 +2466,8 @@ td, th {
   select,
   summary,
   a {
-    min-height: 44px;
-    min-width:  44px;
+    min-height: var(--sf-touch-target);
+    min-width:  var(--sf-touch-target);
   }
 }
 
