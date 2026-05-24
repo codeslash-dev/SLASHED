@@ -2339,6 +2339,86 @@
         </p>
       </section>
 
+      <!-- ──────────────────────────────────────────────────
+           MACROS (recipes / patterns)
+           Added in v0.3.0 alongside the new slashed.macros layer.
+           Each macro is shown with a minimal real-world example.
+           ────────────────────────────────────────────────── -->
+      <section id="macros" class="sf-section">
+        <h2>Macros</h2>
+        <p style="color: var(--sf-color-text--muted); max-inline-size: 60ch">
+          Recipes / patterns from <code>core/macros.css</code>.
+          Macros answer "what does this element <em>do</em>?" — distinct
+          from layout primitives, which answer "where do my children go?".
+        </p>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-flow</code> — equal vertical rhythm</h3>
+        <div class="sf-flow" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m); --sf-flow-space: var(--sf-space-s)">
+          <p>First child has no top margin (only siblings get the rhythm).</p>
+          <p>Second child gets <code>margin-block-start: var(--sf-flow-space)</code>.</p>
+          <p>So does every subsequent child. Override with the token.</p>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-truncate</code> — single-line ellipsis</h3>
+        <div class="sf-truncate" style="max-inline-size: 24rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          This sentence is intentionally too long for the container so the ellipsis
+          will appear — text-overflow ellipsis on a single line.
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-line-clamp-2</code> / <code>-3</code> / <code>-N</code></h3>
+        <div class="sf-cluster sf-cluster--m">
+          <p class="sf-line-clamp-2" style="max-inline-size: 18rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+            <strong>2 lines:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation.
+          </p>
+          <p class="sf-line-clamp-3" style="max-inline-size: 18rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+            <strong>3 lines:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation.
+          </p>
+          <p class="sf-line-clamp-N" style="--sf-line-clamp: 4; max-inline-size: 18rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+            <strong>4 lines (via --sf-line-clamp):</strong> Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-aspect</code> — generic ratio container</h3>
+        <div class="sf-cluster sf-cluster--m">
+          <div class="sf-aspect" style="--sf-aspect: 16 / 9; inline-size: 16rem; background: var(--sf-gradient-primary); border-radius: var(--sf-radius-m)"></div>
+          <div class="sf-aspect" style="--sf-aspect: 1 / 1; inline-size: 8rem; background: var(--sf-gradient-tertiary); border-radius: var(--sf-radius-m)"></div>
+          <div class="sf-aspect" style="--sf-aspect: 4 / 3; inline-size: 12rem; background: var(--sf-gradient-brand); border-radius: var(--sf-radius-m)"></div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-equal-height</code> — children stretch to tallest</h3>
+        <div class="sf-equal-height" style="gap: var(--sf-space-s)">
+          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Short.</div>
+          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Two<br>lines.</div>
+          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Three<br>lines<br>here.</div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-scroll-shadow</code> — top + bottom mask gradient</h3>
+        <div class="sf-scroll-shadow" style="block-size: 8rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-m); --sf-scroll-shadow-size: 1.5rem">
+          <p>Scroll inside this box.</p>
+          <p>The mask gradient fades the top and bottom of the content.</p>
+          <p>It's pure CSS — no scroll listener.</p>
+          <p>Override <code>--sf-scroll-shadow-size</code> to tune the fade depth.</p>
+          <p>Pairs nicely with <code>overflow-y: auto</code> on tables, lists, code blocks.</p>
+          <p>Also useful inside cards with overflowing comment threads.</p>
+          <p>Keep scrolling — the bottom edge fades the same way.</p>
+          <p>Final paragraph for proof.</p>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-scroll-snap</code> — vertical scroll-snap container</h3>
+        <div class="sf-scroll-snap" style="block-size: 12rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m)">
+          <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-primary); color: var(--sf-color-text--on-primary)">Slide A</section>
+          <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-secondary); color: var(--sf-color-text--on-secondary)">Slide B</section>
+          <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-tertiary); color: var(--sf-color-text--on-tertiary)">Slide C</section>
+        </div>
+      </section>
+
     </main>
   </div>
 

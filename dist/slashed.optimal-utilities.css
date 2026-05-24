@@ -1,4 +1,4 @@
-/* SLASHED v0.2.12 — slashed.optimal-utilities.css */
+/* SLASHED v0.3.0 — slashed.optimal-utilities.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -12,6 +12,7 @@
   slashed.forms,
   slashed.layout,
   slashed.components,
+  slashed.macros,
   slashed.utilities,
   slashed.states,
   slashed.themes,
@@ -254,18 +255,27 @@
        fixed the default). Lightness dominates OKLCH contrast but doesn't
        fully determine it: very high-chroma hues (saturated yellow/green) can
        still fall short even at a safe lightness — those remain the consumer's
-       responsibility (see docs/theming.md → "Link contrast"). */
+       responsibility (see docs/theming.md → "Link contrast").
+
+       NOTE: the consumer-facing :link rule in core/base.css uses
+       `a:link` (not bare `a`) so its specificity matches WebKit's UA
+       stylesheet `a:link { color: -webkit-link }`. Without that
+       pseudo-class the framework's `--sf-color-link` value is
+       silently ignored on unvisited anchors in WebKit and
+       `-webkit-link` (≈ #00728f in dark mode) paints instead —
+       regardless of how this token is computed. PR #73 and several
+       follow-up attempts mistakenly chased the formula. */
     --sf-color-link:            light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l,        0.68), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h)
     );
     --sf-color-link--hover:     light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h)
     );
     --sf-color-link--active:    light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h)
     );
     /* Visited link — 60° hue shift from action gives clearly distinct
        chroma without colliding with default tertiary (h ≈ 310). Same
@@ -274,7 +284,7 @@
          :root { --sf-color-link--visited: #6b46c1; } */
     --sf-color-link--visited:   light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
-      oklch(from var(--sf-color-action) clamp(0, max(l,        0.68), 1) c calc(h + 60))
+      oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60))
     );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
@@ -555,6 +565,18 @@
     --sf-border-width-4:        4px;
 
     /* ----------------------------------------------------------
+       Border styles — paired with --sf-border-width-* and
+       --sf-color-border*. Consumer BEM:
+         .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); }
+       Override per element to switch decorative styles without
+       rewriting the rule.
+       ---------------------------------------------------------- */
+    --sf-border-style:        solid;     /* default */
+    --sf-border-style-strong: solid;     /* alias for emphasis */
+    --sf-border-style-soft:   dashed;
+    --sf-border-style-dotted: dotted;
+
+    /* ----------------------------------------------------------
        Divider — global separator system. Drives `hr` (base) and
        the `.sf-divider` layout primitive.
        ---------------------------------------------------------- */
@@ -788,6 +810,8 @@
     --sf-body-strong-weight: var(--sf-font-weight-bold);
     --sf-body-em-style:      italic;
 
+    --sf-code-font-size:     0.875em;
+
     --sf-heading-font-family: var(--sf-font-heading);
     --sf-heading-color:       var(--sf-color-heading);
     --sf-heading-text-wrap:   balance;
@@ -971,6 +995,16 @@
     --sf-frame-ratio: 16 / 9;    /* literal <ratio>, valid in aspect-ratio */
 
     /* ----------------------------------------------------------
+       Icon (boxed variant) — extras for .sf-icon--boxed.
+       The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in
+       core/tokens.css alongside the typography scale.
+       ---------------------------------------------------------- */
+    --sf-icon-box-pad:    0.5em;
+    --sf-icon-box-radius: var(--sf-radius-s);
+    --sf-icon-box-bg:     var(--sf-color-well);
+    --sf-icon-box-border: var(--sf-border-width-1) solid var(--sf-color-border);
+
+    /* ----------------------------------------------------------
        Reel
        ---------------------------------------------------------- */
     --sf-reel-item-width: max-content;
@@ -1001,6 +1035,69 @@
        Prose
        ---------------------------------------------------------- */
     --sf-prose-paragraph: var(--sf-space-content);
+
+  }
+}
+
+/* ─── core/tokens.macros.css ─── */
+/* ============================================================
+   SLASHED — core/tokens.macros.css
+   Semantic tokens for macros (recipes / patterns).
+   Load before: core/macros.css
+   Layer: slashed.tokens
+   Prefix: --sf-
+
+   DEPENDENCIES — requires tokens.css (loaded earlier).
+   Macro tokens reference --sf-space-* / --sf-radius-* / etc.
+
+   PUBLIC API — every token here is a per-recipe override knob
+   (e.g. style="--sf-line-clamp: 5"). No INTERNAL tokens live in
+   this file.
+
+   Architectural parallel — these tokens stand alongside
+   tokens.layout.css: same prefix, same shape, same status
+   (essential, public, override-friendly).
+   ============================================================ */
+
+@layer slashed.tokens {
+  :root {
+
+    /* ----------------------------------------------------------
+       Flow — distance between flow children (lobotomized owl).
+       Consumed by .sf-flow > * + *.
+       ---------------------------------------------------------- */
+    --sf-flow-space: var(--sf-space-content);
+
+    /* ----------------------------------------------------------
+       Line clamp — default line count for .sf-line-clamp-N.
+       Override per element: style="--sf-line-clamp: 5".
+       The fixed-N variants .sf-line-clamp-2 / -3 don't read this
+       token (they hardcode the value), so the default only
+       applies to .sf-line-clamp-N callers.
+       ---------------------------------------------------------- */
+    --sf-line-clamp: 3;
+
+    /* ----------------------------------------------------------
+       Truncate — ellipsis character for .sf-truncate.
+       Stays as a token so consumers can swap to ASCII "..." or a
+       localised character without rewriting the rule. The CSS
+       text-overflow: ellipsis property doesn't read it directly;
+       it's exposed for consumer-built variants.
+       ---------------------------------------------------------- */
+    --sf-truncate-suffix: "\2026";
+
+    /* ----------------------------------------------------------
+       Aspect ratio — default for .sf-aspect (generic ratio container,
+       distinct from layout's .sf-frame which has its own --sf-frame-ratio).
+       ---------------------------------------------------------- */
+    --sf-aspect: 16 / 9;
+
+    /* ----------------------------------------------------------
+       Scroll shadow / overflow fade — mask gradient size.
+       Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade
+       (end-edge horizontal fade).
+       ---------------------------------------------------------- */
+    --sf-scroll-shadow-size: 2rem;
 
   }
 }
@@ -1209,7 +1306,19 @@
   sup { top:    -0.5em; }
   sub { bottom: -0.25em; }
 
-  a {
+  /* `a:link` (specificity 0,1,1) rather than bare `a` (0,0,1) so the
+     author rule wins over WebKit's UA stylesheet rule
+     `a:link { color: -webkit-link; }`. The bare-`a` form silently
+     loses to the UA `:link` rule on unvisited anchors in WebKit,
+     which paints `-webkit-link` (≈ #00728f in dark mode) regardless
+     of whatever `--sf-color-link` resolves to — producing axe's
+     3.12 : 1 dark-mode contrast failure that survived four attempts
+     to "fix" the link colour formula (PR #73, then three iterations
+     of PR #76). The colour formula was never the problem; the
+     selector specificity was. Hover / visited / active rules already
+     used pseudo-classes so they had matching specificity and were
+     never affected. */
+  a:link {
     color:                   var(--sf-color-link);
     text-decoration-color:   var(--sf-color-link--underline);
     text-underline-offset:   0.15em;
@@ -1229,7 +1338,7 @@
 
   code {
     font-family:      var(--sf-font-mono);
-    font-size:        0.875em;
+    font-size:        var(--sf-code-font-size);
     padding:          0.125em 0.3em;
     border-radius:    var(--sf-radius-xs);
     background-color: var(--sf-color-code-bg);
@@ -1284,7 +1393,7 @@
   }
 
   input, textarea {
-    caret-color: var(--sf-color-action);
+    caret-color: var(--sf-caret-color);
   }
 
   input, progress {
@@ -1627,6 +1736,21 @@
   .sf-icon--l  { --sf-icon-size: var(--sf-icon-l); }
   .sf-icon--xl { --sf-icon-size: var(--sf-icon-xl); }
 
+  /* Boxed variant — wraps the icon in a padded, bordered, optionally
+     coloured frame. Adds inline-/block-size on top of the naked icon
+     size so the visible glyph stays at --sf-icon-size and the box
+     grows around it (content-box). Override per icon:
+       <span class="sf-icon sf-icon--boxed" style="--sf-icon-box-bg: var(--sf-color-primary)"> */
+  .sf-icon--boxed {
+    inline-size:    calc(var(--sf-icon-size, var(--sf-icon-m)) + var(--sf-icon-box-pad) * 2);
+    block-size:     calc(var(--sf-icon-size, var(--sf-icon-m)) + var(--sf-icon-box-pad) * 2);
+    padding:        var(--sf-icon-box-pad);
+    border:         var(--sf-icon-box-border);
+    border-radius:  var(--sf-icon-box-radius);
+    background:     var(--sf-icon-box-bg);
+    box-sizing:     content-box;
+  }
+
   /* -- Cover ---------------------------------------------------
      Full-height flex column. A .sf-cover__center child is
      vertically centered via margin-block: auto.
@@ -1684,6 +1808,7 @@
 
   .sf-reel {
     display:               flex;
+    block-size:            var(--sf-reel-height);
     gap:                   var(--sf-reel-gap);
     overflow-x:            auto;
     scroll-snap-type:      x mandatory;
@@ -1851,6 +1976,34 @@
   .sf-subgrid      { display: grid; grid-template-columns: subgrid; }
   .sf-subgrid-rows { display: grid; grid-template-rows:    subgrid; }
 
+}
+
+/* ─── core/macros.css ─── */
+/* ============================================================
+   SLASHED — core/macros.css
+   ★ shipped in essential bundle
+   Macro-classes (recipes / patterns).
+   Requires: core/tokens.css, core/tokens.macros.css
+   Layer:    slashed.macros
+
+   Macro-classes vs layout primitives:
+     · Layout primitive = answers "where do my children go?"
+       (e.g. .sf-stack, .sf-grid, .sf-cluster)
+     · Macro-class      = answers "what does this element DO or
+       LOOK LIKE?" (e.g. .sf-prose, .sf-flow, .sf-truncate)
+
+   Cascade position:
+     layout → components → macros → utilities → states → …
+     Macros may compose with primitives and components, but a
+     single-property utility still wins on the same selector.
+
+   PUBLIC API — every class here is part of the public surface.
+   Tokens consumed by these classes are listed in
+   core/tokens.macros.css.
+   ============================================================ */
+
+@layer slashed.macros {
+
   /* -- Prose ---------------------------------------------------
      Long-form text column with automatic vertical rhythm.
      .sf-not-prose resets styles inside a prose block.
@@ -1891,6 +2044,124 @@
   .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
   .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; max-width: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
+
+  /* -- Flow ----------------------------------------------------
+     Heydon Pickering's "lobotomized owl" — every flow child gets
+     equal margin-block-start. Useful for content blocks where you
+     don't know in advance which elements will be present.
+     Override: style="--sf-flow-space: 2rem"
+     ---------------------------------------------------------- */
+  .sf-flow > * + * {
+    margin-block-start: var(--sf-flow-space);
+  }
+
+  /* -- Truncate / line-clamp -----------------------------------
+     Single-line ellipsis (.sf-truncate) and N-line clamp
+     (.sf-line-clamp-2 / -3 / -N). The fixed-count variants
+     hardcode -webkit-line-clamp; -N reads --sf-line-clamp.
+
+     Note: -webkit-line-clamp is not vendor-locked despite the
+     prefix — every modern browser implements it as the de-facto
+     standard. The unprefixed CSS Overflow 4 `line-clamp` exists
+     but is not yet widely shipped.
+     ---------------------------------------------------------- */
+  .sf-truncate {
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+  }
+
+  .sf-line-clamp-2,
+  .sf-line-clamp-3,
+  .sf-line-clamp-N {
+    display:            -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow:           hidden;
+  }
+  .sf-line-clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }
+  .sf-line-clamp-3 { -webkit-line-clamp: 3; line-clamp: 3; }
+  .sf-line-clamp-N {
+    -webkit-line-clamp: var(--sf-line-clamp);
+    line-clamp:         var(--sf-line-clamp);
+  }
+
+  /* -- Equal height --------------------------------------------
+     Force grid/flex children to share the tallest one's height.
+     Works in flex (default `align-items: stretch`) and is
+     re-asserted here for cases where a wrapper resets it.
+     ---------------------------------------------------------- */
+  .sf-equal-height {
+    display:     flex;
+    align-items: stretch;
+  }
+  .sf-equal-height > * {
+    block-size: auto;
+    flex:       1 1 auto;
+  }
+
+  /* -- Aspect --------------------------------------------------
+     Generic aspect-ratio container. Distinct from layout's
+     .sf-frame which targets media (object-fit: cover) — .sf-aspect
+     is content-agnostic.
+     Override: style="--sf-aspect: 4 / 3"
+     ---------------------------------------------------------- */
+  .sf-aspect {
+    aspect-ratio: var(--sf-aspect);
+  }
+
+  /* -- Scroll shadow -------------------------------------------
+     Top + bottom mask gradient that reveals when content is
+     scrolled inside a vertical-scroll container. Pure CSS,
+     no JS. Combine with overflow-y: auto on the same element.
+     Override: style="--sf-scroll-shadow-size: 3rem"
+     ---------------------------------------------------------- */
+  .sf-scroll-shadow {
+    overflow-y: auto;
+    mask-image:
+      linear-gradient(to bottom,
+        transparent 0,
+        black var(--sf-scroll-shadow-size),
+        black calc(100% - var(--sf-scroll-shadow-size)),
+        transparent 100%);
+  }
+
+  /* -- Scroll snap ---------------------------------------------
+     Vertical scroll-snap container for vertically stacked sections.
+     Pairs with consumer-supplied scroll-snap-align on children.
+     For horizontal snap, use the .sf-reel layout primitive.
+     ---------------------------------------------------------- */
+  .sf-scroll-snap {
+    overflow-y:            auto;
+    scroll-snap-type:      y mandatory;
+    overscroll-behavior-y: contain;
+  }
+  .sf-scroll-snap > * {
+    scroll-snap-align: start;
+  }
+
+  /* -- Overflow fade -------------------------------------------
+     End-edge horizontal fade for clipped inline content
+     (e.g. a row of tags overflowing a card). Pure mask, so it
+     respects the element's actual background.
+     ---------------------------------------------------------- */
+  .sf-overflow-fade {
+    overflow:   hidden;
+    mask-image: linear-gradient(
+      to right,
+      black 0,
+      black calc(100% - var(--sf-scroll-shadow-size)),
+      transparent 100%
+    );
+  }
+
+  /* -- No tap highlight ----------------------------------------
+     Suppresses the WebKit/Android grey tap-highlight overlay on
+     interactive elements where it conflicts with the framework's
+     own .is-active / hover treatment.
+     ---------------------------------------------------------- */
+  .sf-no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
 
 }
 
@@ -1968,13 +2239,13 @@
     height:        1em;
     margin-block-start:  -0.5em;
     margin-inline-start: -0.5em;
-    border:        2px solid var(--sf-color-border--strong);
+    border:        var(--sf-border-width-2) solid var(--sf-color-border--strong);
     border-block-start-color: var(--sf-color-action);
     border-radius: var(--sf-radius-full);
     /* Reduced-motion: accessibility.css kills animation-duration via
        !important on *, *::before, *::after — so this spinner stops
        even without a local reduced-motion wrapper. */
-    animation:     sf-spin 0.6s linear infinite;
+    animation:     sf-spin var(--sf-duration-slower) linear infinite;
   }
 
   .is-busy {
@@ -1997,7 +2268,7 @@
                        var(--sf-color-well) 75%
                      );
     background-size: 200% 100%;
-    animation:       sf-shimmer 1.5s ease-in-out infinite;
+    animation:       sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
     border-radius:   var(--sf-radius-s);
     pointer-events:  none;
     user-select:     none;
@@ -2167,8 +2438,8 @@
   }
 
   .is-drop-target {
-    outline:        2px dashed var(--sf-color-action);
-    outline-offset: 2px;
+    outline:        var(--sf-focus-ring-width) dashed var(--sf-color-action);
+    outline-offset: var(--sf-focus-ring-offset);
   }
 
   .is-draggable {
@@ -2200,13 +2471,6 @@
     /* Programmatic / JS-driven focus indicator, independent of
        :focus-visible. Normal weight so consumers can restyle. */
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
-    outline-offset: var(--sf-focus-ring-offset);
-  }
-
-  /* Parent reacts to a focused descendant (e.g. highlight a card while
-     any field inside it has keyboard focus). Not is-/sf-prefixed by design. */
-  .focus-parent:focus-within {
-    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -2457,8 +2721,8 @@
     select,
     summary,
     a {
-      min-height: 44px;
-      min-width:  44px;
+      min-height: var(--sf-touch-target);
+      min-width:  var(--sf-touch-target);
     }
   }
 
@@ -2508,6 +2772,73 @@
   }
   .skip-link:focus {
     top: var(--sf-space-m);
+  }
+
+  /* ----------------------------------------------------------
+     Focus-parent — an a11y *pattern*, not a state. Lives in the
+     accessibility layer (was previously in states.css; moved in
+     v0.3.0) so that all focus-related a11y rules share one home
+     and survive third-party resets at the same priority as the
+     focus-visible ring above. Cannot be hardened with !important
+     because the outline shorthand is consumer-customisable.
+     ---------------------------------------------------------- */
+  .focus-parent:focus-within {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* ----------------------------------------------------------
+     Clickable-parent — the card-with-link a11y pattern.
+     Pairs with a single child <a> whose `href` provides the
+     destination. The link is announced once by AT (the rest of
+     the card content is read in continuous flow because nothing
+     wraps it in another link), but the entire card is clickable.
+
+     Mechanic: the link's ::after grows to fill the parent's
+     positioning context, so the parent's `cursor: pointer` and
+     hit-area cover the whole card. Inline text is still
+     selectable because the overlay sits at z-index 1 and any
+     paragraph/heading inside the card needs `position: relative`
+     to lift above it — the rule below applies that to the most
+     common children automatically.
+
+     Independent interactive children (buttons, secondary links,
+     form controls) get z-index: 2 so they keep working even when
+     the overlay is present.
+
+     Usage:
+       <article class="card sf-clickable-parent">
+         <h3><a href="...">Title</a></h3>
+         <p>Description (still selectable)</p>
+         <button>Independent action (still clickable)</button>
+       </article>
+     ---------------------------------------------------------- */
+  .sf-clickable-parent {
+    position: relative;
+    cursor:   pointer;
+  }
+  .sf-clickable-parent a:where(:any-link)::after {
+    content:        "";
+    position:       absolute;
+    inset:          0;
+    z-index:        1;
+    pointer-events: auto;
+  }
+  /* Inline content lifts above the overlay so users can select
+     text inside the card without their drag being captured by
+     the link. Limited to common flow children — consumers can
+     opt in extras with [data-no-overlay] below. */
+  .sf-clickable-parent :is(p, h1, h2, h3, h4, h5, h6, span, time, small, em, strong, code) {
+    position: relative;
+    z-index:  2;
+  }
+  /* Independent interactive descendants beat the overlay, so a
+     secondary <a>, <button>, <input>, etc. inside the card stays
+     functional. [data-no-overlay] is the consumer escape hatch. */
+  .sf-clickable-parent :is(button, input, textarea, select,
+                           a:not(:first-of-type), [data-no-overlay]) {
+    position: relative;
+    z-index:  2;
   }
 
   /* ----------------------------------------------------------
@@ -3047,6 +3378,18 @@
   ),
   select,
   textarea {
+    /* Strip native form-control rendering so the CSS background-color
+       below actually paints. Without this, WebKit (Safari) overlays its
+       own dark-mode default field background (≈ #5f6163) on top of the
+       framework's --sf-color-surface, producing a 1.78 : 1 contrast
+       failure flagged by axe. Chromium and Firefox honour the CSS
+       background-color even without this; WebKit needs the explicit
+       opt-out. Native rendering of checkbox / radio / range / file /
+       datetime pickers is preserved because this :where() block only
+       matches text-like inputs (and select / textarea, which already
+       had `appearance: none` for chevron control). */
+    appearance: none;
+
     display: block;
     inline-size: 100%;
     padding-block: var(--sf-space-xs);
@@ -3105,7 +3448,6 @@
      Select
      ---------------------------------------------------------- */
   select {
-    appearance: none;
     padding-inline-end: calc(var(--sf-space-s) + 1.5em);
   }
   /* Single-line selects get a chevron. `currentColor` inside a data-URI

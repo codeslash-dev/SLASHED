@@ -94,6 +94,16 @@
     --sf-frame-ratio: 16 / 9;    /* literal <ratio>, valid in aspect-ratio */
 
     /* ----------------------------------------------------------
+       Icon (boxed variant) — extras for .sf-icon--boxed.
+       The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in
+       core/tokens.css alongside the typography scale.
+       ---------------------------------------------------------- */
+    --sf-icon-box-pad:    0.5em;
+    --sf-icon-box-radius: var(--sf-radius-s);
+    --sf-icon-box-bg:     var(--sf-color-well);
+    --sf-icon-box-border: var(--sf-border-width-1) solid var(--sf-color-border);
+
+    /* ----------------------------------------------------------
        Reel
        ---------------------------------------------------------- */
     --sf-reel-item-width: max-content;

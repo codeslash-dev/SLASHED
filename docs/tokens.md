@@ -3,14 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**589 tokens.** Every `--sf-*` custom property and its default value. See
+**603 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-352 tokens.
+357 tokens.
 
 | Token | Default |
 |---|---|
@@ -44,12 +44,17 @@ rebrand workflow.
 | `--sf-body-line-height` | `var(--sf-leading-normal)` |
 | `--sf-body-strong-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-body-text-wrap` | `pretty` |
+| `--sf-border-style` | `solid` |
+| `--sf-border-style-dotted` | `dotted` |
+| `--sf-border-style-soft` | `dashed` |
+| `--sf-border-style-strong` | `solid` |
 | `--sf-border-width-1` | `1px` |
 | `--sf-border-width-2` | `2px` |
 | `--sf-border-width-3` | `3px` |
 | `--sf-border-width-4` | `4px` |
 | `--sf-border-width-hairline` | `0.5px` |
 | `--sf-caret-color` | `var(--sf-color-action)` |
+| `--sf-code-font-size` | `0.875em` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action-light` | `oklch(0.60 0.16 210) *(registered)*` |
 | `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
@@ -86,12 +91,12 @@ rebrand workflow.
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.1)` |
 | `--sf-color-inverse` | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |
-| `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l, 0.68), 1) c h) )` |
-| `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h) )` |
+| `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` |
+| `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h) )` |
 | `--sf-color-link--disabled` | `var(--sf-color-text--disabled)` |
-| `--sf-color-link--hover` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h) )` |
+| `--sf-color-link--hover` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h) )` |
 | `--sf-color-link--underline` | `oklch(from var(--sf-color-action) l c h / 0.3)` |
-| `--sf-color-link--visited` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0, max(l, 0.68), 1) c calc(h + 60)) )` |
+| `--sf-color-link--visited` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )` |
 | `--sf-color-mark-bg` | `oklch(from var(--sf-color-warning) l c h / 0.25)` |
 | `--sf-color-mark-text` | `inherit` |
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
@@ -369,7 +374,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-39 tokens.
+43 tokens.
 
 | Token | Default |
 |---|---|
@@ -399,6 +404,10 @@ rebrand workflow.
 | `--sf-grid-min-s` | `13rem` |
 | `--sf-grid-min-xl` | `24rem` |
 | `--sf-grid-min-xs` | `10rem` |
+| `--sf-icon-box-bg` | `var(--sf-color-well)` |
+| `--sf-icon-box-border` | `var(--sf-border-width-1) solid var(--sf-color-border)` |
+| `--sf-icon-box-pad` | `0.5em` |
+| `--sf-icon-box-radius` | `var(--sf-radius-s)` |
 | `--sf-imposter-margin` | `var(--sf-space-m)` |
 | `--sf-prose-paragraph` | `var(--sf-space-content)` |
 | `--sf-reel-gap` | `var(--sf-space-gap)` |
@@ -412,6 +421,18 @@ rebrand workflow.
 | `--sf-stack-gap` | `var(--sf-space-content)` |
 | `--sf-switcher-gap` | `var(--sf-space-gap)` |
 | `--sf-switcher-threshold` | `30rem` |
+
+## Macro tokens (`core/tokens.macros.css`)
+
+5 tokens.
+
+| Token | Default |
+|---|---|
+| `--sf-aspect` | `16 / 9` |
+| `--sf-flow-space` | `var(--sf-space-content)` |
+| `--sf-line-clamp` | `3` |
+| `--sf-scroll-shadow-size` | `2rem` |
+| `--sf-truncate-suffix` | `"\2026"` |
 
 ## Palette tokens (`optional/tokens.palette.css`)
 

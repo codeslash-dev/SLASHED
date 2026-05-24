@@ -230,18 +230,27 @@
        fixed the default). Lightness dominates OKLCH contrast but doesn't
        fully determine it: very high-chroma hues (saturated yellow/green) can
        still fall short even at a safe lightness — those remain the consumer's
-       responsibility (see docs/theming.md → "Link contrast"). */
+       responsibility (see docs/theming.md → "Link contrast").
+
+       NOTE: the consumer-facing :link rule in core/base.css uses
+       `a:link` (not bare `a`) so its specificity matches WebKit's UA
+       stylesheet `a:link { color: -webkit-link }`. Without that
+       pseudo-class the framework's `--sf-color-link` value is
+       silently ignored on unvisited anchors in WebKit and
+       `-webkit-link` (≈ #00728f in dark mode) paints instead —
+       regardless of how this token is computed. PR #73 and several
+       follow-up attempts mistakenly chased the formula. */
     --sf-color-link:            light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l,        0.68), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h)
     );
     --sf-color-link--hover:     light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.72), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h)
     );
     --sf-color-link--active:    light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.78), 1) c h)
+      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h)
     );
     /* Visited link — 60° hue shift from action gives clearly distinct
        chroma without colliding with default tertiary (h ≈ 310). Same
@@ -250,7 +259,7 @@
          :root { --sf-color-link--visited: #6b46c1; } */
     --sf-color-link--visited:   light-dark(
       oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
-      oklch(from var(--sf-color-action) clamp(0, max(l,        0.68), 1) c calc(h + 60))
+      oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60))
     );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
@@ -531,6 +540,18 @@
     --sf-border-width-4:        4px;
 
     /* ----------------------------------------------------------
+       Border styles — paired with --sf-border-width-* and
+       --sf-color-border*. Consumer BEM:
+         .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); }
+       Override per element to switch decorative styles without
+       rewriting the rule.
+       ---------------------------------------------------------- */
+    --sf-border-style:        solid;     /* default */
+    --sf-border-style-strong: solid;     /* alias for emphasis */
+    --sf-border-style-soft:   dashed;
+    --sf-border-style-dotted: dotted;
+
+    /* ----------------------------------------------------------
        Divider — global separator system. Drives `hr` (base) and
        the `.sf-divider` layout primitive.
        ---------------------------------------------------------- */
@@ -763,6 +784,8 @@
     --sf-body-text-wrap:     pretty;
     --sf-body-strong-weight: var(--sf-font-weight-bold);
     --sf-body-em-style:      italic;
+
+    --sf-code-font-size:     0.875em;
 
     --sf-heading-font-family: var(--sf-font-heading);
     --sf-heading-color:       var(--sf-color-heading);

@@ -80,7 +80,19 @@
   sup { top:    -0.5em; }
   sub { bottom: -0.25em; }
 
-  a {
+  /* `a:link` (specificity 0,1,1) rather than bare `a` (0,0,1) so the
+     author rule wins over WebKit's UA stylesheet rule
+     `a:link { color: -webkit-link; }`. The bare-`a` form silently
+     loses to the UA `:link` rule on unvisited anchors in WebKit,
+     which paints `-webkit-link` (≈ #00728f in dark mode) regardless
+     of whatever `--sf-color-link` resolves to — producing axe's
+     3.12 : 1 dark-mode contrast failure that survived four attempts
+     to "fix" the link colour formula (PR #73, then three iterations
+     of PR #76). The colour formula was never the problem; the
+     selector specificity was. Hover / visited / active rules already
+     used pseudo-classes so they had matching specificity and were
+     never affected. */
+  a:link {
     color:                   var(--sf-color-link);
     text-decoration-color:   var(--sf-color-link--underline);
     text-underline-offset:   0.15em;
@@ -100,7 +112,7 @@
 
   code {
     font-family:      var(--sf-font-mono);
-    font-size:        0.875em;
+    font-size:        var(--sf-code-font-size);
     padding:          0.125em 0.3em;
     border-radius:    var(--sf-radius-xs);
     background-color: var(--sf-color-code-bg);
@@ -155,7 +167,7 @@
   }
 
   input, textarea {
-    caret-color: var(--sf-color-action);
+    caret-color: var(--sf-caret-color);
   }
 
   input, progress {

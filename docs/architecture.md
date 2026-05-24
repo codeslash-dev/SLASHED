@@ -1,3 +1,4 @@
+
 # SLASHED — Architecture
 
 ## Layer order
@@ -12,6 +13,7 @@ Declared once in `core/layers.css`:
   slashed.forms,
   slashed.layout,
   slashed.components,
+  slashed.macros,
   slashed.utilities,
   slashed.states,
   slashed.themes,
@@ -24,42 +26,128 @@ Declared once in `core/layers.css`:
 
 Priority increases left → right. Unlayered consumer CSS beats all layers. `slashed.overrides` ships empty. `slashed.legacy` is for backward-compatibility fallbacks and sits just below `slashed.overrides` so user overrides always win.
 
+`slashed.macros` (introduced in v0.3.0) sits between `components` and `utilities`. Macros may compose with primitives and components, but a single-property utility still wins on the same selector.
+
 ---
 
 ## File structure
 
 ```text
 core/
-  layers.css              @layer declaration only
-  tokens.css              slashed.tokens
-  tokens.layout.css       slashed.tokens  (semantic layout tokens)
-  reset.css               slashed.reset
-  base.css                slashed.base
-  themes.css              slashed.themes
-  layout.css              slashed.layout
-  states.css              slashed.states
-  motion.css              slashed.motion
-  accessibility.css       slashed.accessibility
-  print.css               slashed.print
+  layers.css                   @layer declaration only
+  tokens.css                   slashed.tokens
+  tokens.layout.css            slashed.tokens  (semantic layout tokens)
+  tokens.macros.css     slashed.tokens  (semantic macro tokens, v0.3.0+)
+  reset.css                    slashed.reset
+  base.css                     slashed.base
+  themes.css                   slashed.themes
+  layout.css                   slashed.layout
+  macros.css            slashed.macros  (recipes / patterns, v0.3.0+)
+  states.css                   slashed.states
+  motion.css                   slashed.motion
+  accessibility.css            slashed.accessibility
+  print.css                    slashed.print
 optional/
   tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors; ships in optimal+ bundles)
-  tokens.components.css   slashed.tokens  (component-level tokens — empty stub)
+  tokens.components.css   slashed.tokens  (component tokens — BLUEPRINT, commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
-  components.css          slashed.components  (empty stub)
+  components.css          slashed.components  (8 components — BLUEPRINT, commented out)
   utilities.css           slashed.utilities  (empty stub)
   legacy.css              slashed.legacy
 ```
 
-The three empty stubs are reserved for a future component layer and
-ship in source only — they are excluded from `bundle.config.json` and
-the README Quick start.
+`optional/components.css` and `optional/tokens.components.css` ship as
+**blueprints** in v0.3.0: their `@layer` declarations reserve the cascade
+position, but every class definition and component token is commented out.
+Activation will happen incrementally in upcoming minor releases (additive,
+no breaking changes). See [`docs/components.md`](components.md) for the
+roadmap and the 8 reserved component names.
+
+`optional/utilities.css` remains an empty stub — SLASHED is BEM-first by
+design and ships no utility classes in 0.x.
+
+---
+
+## Class taxonomy
+
+Every shipped class falls into exactly one of seven categories. The
+category answers a single question for the consumer; this is the
+decision tree to use when adding a new class.
+
+| # | Category | Question it answers | File | Layer |
+|---|---|---|---|---|
+| 1 | **Layout primitives** | "How are children arranged?" | `core/layout.css` | `slashed.layout` |
+| 2 | **Macro-classes** *(recipes)* | "What does this element DO / look like?" | `core/macros.css` | `slashed.macros` |
+| 3 | **Animation primitives** | "How does this element move?" | `core/motion.css` | `slashed.motion` |
+| 4 | **State utilities** *(`.is-*`)* | "What state is this element in?" | `core/states.css` | `slashed.states` |
+| 5 | **A11y utilities & patterns** | "How does this work for AT users?" | `core/accessibility.css` | `slashed.accessibility` |
+| 6 | **Print utilities** *(`.print-*`)* | "How does this print?" | `core/print.css` | `slashed.print` |
+| 7 | **Components** *(opt-in)* | "Pre-built visual block." | `optional/components.css` | `slashed.components` |
+
+### Decision tree for adding a new class (post-0.3.0)
+
+```text
+1. Does it answer "where do my children go?"
+   YES → core/layout.css                 (slashed.layout)
+   NO  → step 2
+
+2. Does it modify an element's runtime state?
+      (hover, active, disabled, loading…)
+   YES → core/states.css (.is-*/.has-*)  (slashed.states)
+   NO  → step 3
+
+3. Is it an a11y pattern or a11y utility?
+      (sr-only, focus-parent, clickable-parent…)
+   YES → core/accessibility.css          (slashed.accessibility)
+   NO  → step 4
+
+4. Is it a single-property animation trigger?
+   YES → core/motion.css                 (slashed.motion)
+   NO  → step 5
+
+5. Is it an opinionated visual component?
+      (button, card, alert…)
+   YES → optional/components.css         (slashed.components)
+   NO  → core/macros.css          (slashed.macros)  ← default
+```
+
+Macros are the default fallback because they're the right home for
+behavioural / visual recipes that aren't strictly layout, state, a11y,
+animation, or component.
+
+### Layout primitives vs macros — the line
+
+The category split between primitives and macros looks subtle but has a
+clean test:
+
+| Test | Primitive | Macro / recipe |
+|---|---|---|
+| Used as the only class on an element? | Often (`<ul class="sf-cluster">`) | Rarely — usually composed (`class="card sf-clickable-parent"`) |
+| Defines arrangement of children? | Yes (display, gap, grid-template) | Sometimes, but secondary |
+| Has tokenised knobs (`--sf-X-gap` etc.)? | Yes, central to the API | Sometimes — minimal |
+| Touches pseudo-elements / states? | Rarely | Often (`::after`, `:hover`, `:focus-within`) |
+| Container queries inside? | Often | Rarely |
+| Sole responsibility | "Where do my children go?" | "What does this DO / look like?" |
+
+Heuristic: a primitive is a *noun* (a stack, a grid, a switcher);
+a macro is a *verb* / adjective (clickable, scrollable, prose).
+
+Two existing classes that are conceptually macros stay in `layout.css`
+in 0.x for compatibility — they're "noun-shaped" enough that moving
+them would create churn:
+
+- `.sf-content-grid` / `.sf-breakout` / `.sf-full-bleed` — the
+  article-with-breakouts pattern. Layout-first because the rule
+  defines a grid.
+- `.sf-icon` (and `.sf-icon--xs..xl..boxed`) — graphical primitive
+  that consumers reach for as a single class.
 
 ---
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.palette.css` (optional tints/shades), `tokens.components.css` (optional component tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros, v0.3.0+), `tokens.palette.css` (optional tints/shades), `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -71,10 +159,10 @@ line at three tiers:
 - *Global base* — flow/inline readability: headings, `p`, `a`, `code`,
   `pre`, `mark`, `hr`, `sub`/`sup`, `abbr`, `::selection`.
 - *Rich blocks* (`table`, `blockquote`, `figure`, `dl`) — styled **only
-  inside `.sf-prose`** (a layout primitive), never globally.
+  inside `.sf-prose`** (a macro-class), never globally.
 - *Interactive widgets* (`dialog`, `details`, `progress`, `meter`) —
-  consumer/component territory (future `components` layer); `core` carries
-  reset-level normalization only.
+  consumer/component territory (the opt-in `slashed.components` layer);
+  `core` carries reset-level normalization only.
 
 Native form controls are out of base entirely — they live in the opt-in
 `slashed.forms` layer.
@@ -86,11 +174,21 @@ Native form controls are out of base entirely — they live in the opt-in
 `slashed.states` recolour fields. Skip the file entirely if you prefer full
 BEM control.
 
-**slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-prose`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
+**slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
 
-**slashed.components** — UI blocks. Every value via `var()`. Requires `tokens.components.css`.
+**slashed.components** — UI blocks. v0.3.0 ships a BLUEPRINT (8 reserved
+component names — `button`, `card`, `badge`, `tag`, `alert`, `avatar`,
+`modal`, `skeleton` — commented out). When activated, every value goes
+through `var()`. Requires `tokens.components.css`.
 
-**slashed.utilities** — single-purpose helpers. Components always win.
+**slashed.macros** *(v0.3.0+)* — recipes / patterns: `.sf-prose`,
+`.sf-not-prose`, `.sf-flow`, `.sf-truncate`, `.sf-line-clamp-{2,3,N}`,
+`.sf-equal-height`, `.sf-aspect`, `.sf-scroll-shadow`, `.sf-scroll-snap`,
+`.sf-overflow-fade`, `.sf-no-tap-highlight`. Tokens for these classes
+live in `core/tokens.macros.css`.
+
+**slashed.utilities** — single-purpose helpers. SLASHED ships no
+utility classes in 0.x; the layer slot is reserved for the future.
 
 **slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it. `.is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
 
@@ -114,7 +212,7 @@ Transition tokens live in `core/tokens.css`:
 
 `@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
 
-**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
+**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.focus-parent` (relocated from `slashed.states` in v0.3.0) and `.sf-clickable-parent` (added in v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
 
 **slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
 
@@ -177,6 +275,7 @@ slashed.motion
 slashed.themes
 slashed.states
 slashed.utilities
+slashed.macros
 slashed.components
 slashed.layout
 slashed.forms
@@ -232,10 +331,12 @@ The essential bundle (`dist/slashed.essential.css`) includes core files in order
 core/layers.css
 core/tokens.css
 core/tokens.layout.css
+core/tokens.macros.css
 core/reset.css
 core/base.css
 core/themes.css
 core/layout.css
+core/macros.css
 core/states.css
 core/motion.css
 core/accessibility.css
@@ -255,18 +356,20 @@ Five tiered bundles are declared in `bundle.config.json` and built by
 |---|---|
 | `slashed.essential.css` | — (all `core/`) |
 | `slashed.optimal.css` | `tokens.palette` + `forms` + `legacy` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` |
-| `slashed.optimal-utilities.css` | optimal + `utilities` |
-| `slashed.full.css` | optimal + `tokens.components` + `components` + `utilities` |
+| `slashed.optimal-components.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* |
+| `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
+| `slashed.full.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* + `utilities` *(empty)* |
 
 `optional/legacy.css` is always concatenated last. Because every rule sits in
 an `@layer`, concatenation order within a bundle does not affect the cascade —
 `core/layers.css` fixes it. The bundler strips local `@import` statements (the
 explicit file list resolves them), so the `tokens.components` import inside
-`components.css` is inlined by listing the token file first. The
-`components`/`utilities`/`tokens.components` files are empty stubs and ship as
-no-ops in the bundles that include them. Consumers can also build à la carte:
-`essential` (or raw `core/`) plus hand-picked optional files.
+`components.css` is inlined by listing the token file first. `components.css`
+and `tokens.components.css` ship as **blueprints** in 0.3.0 — the `@layer`
+declarations reserve cascade position, but every selector and token is
+commented out (no CSS is emitted). `utilities.css` ships as an empty stub.
+Consumers can also build à la carte: `essential` (or raw `core/`) plus
+hand-picked optional files.
 
 ---
 
@@ -295,11 +398,11 @@ These behaviors are deliberate. Documented here so they aren't mistaken for bugs
 
 ---
 
-## Deferred (until the component layer exists)
+## Deferred (until the components blueprint is activated)
 
-`@starting-style` and CSS anchor positioning are only meaningful attached to a
-specific element/component transition (dialog, popover, tooltip). They are out of
-scope while `optional/components.css` is empty and will be added with the components.
-The component-free part — scroll-driven animation range tokens
+`@starting-style` and CSS anchor positioning are only meaningful attached to
+a specific element/component transition (dialog, popover, tooltip). They
+are out of scope while `optional/components.css` is a BLUEPRINT (commented
+out) and will be added with the components when activated in upcoming
+0.x minors. The component-free part — scroll-driven animation range tokens
 (`--sf-scroll-timeline-range-*`) — already ships in `core/tokens.css`.
-
