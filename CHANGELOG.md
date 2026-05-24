@@ -6,6 +6,118 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-05-24
+
+Class taxonomy refactor. New `slashed.macros` cascade layer, 12 macro
+recipes, ACSS-parity essentials, and a v0.3.0+ blueprint for 8 reserved
+components. Plus the in-flight WebKit a11y/contrast fixes that were sitting
+in `Unreleased`.
+
+### ⚠️ Breaking Changes
+
+#### New `slashed.macros` cascade layer
+
+A new `slashed.macros` layer is introduced between `slashed.components`
+and `slashed.utilities`. Macros may compose with primitives and
+components, but a single-property utility still wins on the same
+selector. Updated layer order:
+
+```
+tokens → reset → base → forms → layout → components → macros →
+utilities → states → themes → motion → accessibility → print →
+legacy → overrides
+```
+
+Three classes change cascade layer (selectors and properties unchanged):
+
+- `.sf-prose`, `.sf-not-prose` — `slashed.layout` → `slashed.macros`.
+  Moved out of `core/layout.css` into the new `core/macro-classes.css`.
+- `.focus-parent` — `slashed.states` → `slashed.accessibility`.
+  Now lives in `core/accessibility.css` alongside the rest of the focus /
+  a11y rules.
+
+A site that worked in 0.2.x works in 0.3.0 without any markup changes.
+Consumers who previously wrote `@layer slashed.layout { .sf-prose { … } }`
+or `@layer slashed.states { .focus-parent { … } }` overrides should move
+those rules to `slashed.overrides` (the documented escape hatch).
+See `docs/migration.md` for details.
+
+### Added
+
+- **`core/macro-classes.css`** — 12 recipes / patterns.
+  - `.sf-prose`, `.sf-not-prose` (relocated from `core/layout.css`).
+  - `.sf-flow` — Heydon Pickering's lobotomized owl
+    (`> * + * { margin-block-start: var(--sf-flow-space) }`).
+  - `.sf-truncate` — single-line ellipsis.
+  - `.sf-line-clamp-2`, `.sf-line-clamp-3`, `.sf-line-clamp-N`.
+  - `.sf-equal-height` — flex children stretch to tallest.
+  - `.sf-aspect` — generic aspect-ratio container.
+  - `.sf-scroll-shadow` — top + bottom mask gradient on a vertical
+    scroll container.
+  - `.sf-scroll-snap` — vertical scroll-snap container.
+  - `.sf-overflow-fade` — end-edge horizontal mask fade.
+  - `.sf-no-tap-highlight` — suppress mobile tap-highlight.
+- **`core/tokens.macro-classes.css`** — semantic tokens for the macros:
+  `--sf-flow-space`, `--sf-line-clamp`, `--sf-truncate-suffix`,
+  `--sf-aspect`, `--sf-scroll-shadow-size`.
+- **A11y patterns:**
+  - `.sf-clickable-parent` — the card-with-link pattern (overlay-based
+    full-card click target with single AT announcement; text remains
+    selectable; secondary buttons / links keep working;
+    `[data-no-overlay]` is the consumer escape hatch).
+- **Layout extras (ACSS parity):**
+  - `.sf-icon--boxed` — modifier on the existing `.sf-icon` that wraps
+    the glyph in a padded, bordered, optionally coloured frame
+    (content-box; consumes new `--sf-icon-box-*` tokens).
+  - Border-style scale: `--sf-border-style`, `--sf-border-style-strong`,
+    `--sf-border-style-soft`, `--sf-border-style-dotted` — pairs with
+    the existing `--sf-border-width-*` and `--sf-color-border*` so
+    consumers can switch decorative styles without rewriting rules.
+  - Icon-boxed tokens: `--sf-icon-box-pad`, `--sf-icon-box-radius`,
+    `--sf-icon-box-bg`, `--sf-icon-box-border`.
+- **Components blueprint** — `optional/components.css` and
+  `optional/tokens.components.css` move from empty `/* TODO */` stubs
+  to structured BLUEPRINTs. Both files keep an active `@layer`
+  declaration to RESERVE cascade position; every class definition and
+  every component token is commented out. Activation is planned for
+  upcoming minor releases (additive only). The 8 reserved components
+  are: `.sf-button`, `.sf-card`, `.sf-badge`, `.sf-tag`, `.sf-alert`,
+  `.sf-avatar`, `.sf-modal`, `.sf-skeleton`. Card tokens (originally
+  proposed for the essential bundle) live here, commented, alongside
+  the rest — so the entire component-related surface (classes +
+  tokens) shares one activation cycle. See `docs/components.md`.
+
+### Documentation
+
+- **`docs/architecture.md`** — new "Class taxonomy" section with the
+  7 categories and a 5-step decision tree for adding new classes;
+  layer order updated; file structure updated.
+- **`docs/macros.md`** *(new)* — full reference for every macro with
+  signature, usage example, and consumed tokens.
+- **`docs/components.md`** *(new)* — components blueprint and the
+  ratified out-of-scope list (`tabs`, `accordion`, `tooltip`, …) with
+  rationale for each exclusion.
+- **`docs/migration.md`** — adds an "0.2.x → 0.3.0" section explaining
+  the three relocations and the `slashed.overrides` escape hatch.
+- README updated for the new layer order, file list, and bundle
+  contents.
+
+### Tests
+
+- `tests/macros.spec.js` *(new)* — behavioural tests for each macro,
+  covering both default behaviour and token-override paths.
+- `tests/layers.spec.js` — three new ordering invariants:
+  `macros > components`, `utilities > macros`,
+  `accessibility > motion`.
+- `tests/coverage.spec.js` — three new exclusions for selectors
+  exercised by dedicated specs (`.sf-overflow-fade`,
+  `.sf-no-tap-highlight`, `.sf-clickable-parent`).
+- `tests/tokens.spec.js` — adds `core/tokens.macro-classes.css` to
+  the token-coverage source list.
+- `docs/demo.html` — new `<section id="macros">` exercising every
+  macro inline. Existing `tests/demo-visual.spec.js` screenshots are
+  locator-scoped and unaffected.
+
 ### Changed
 
 - **CI: skip `[webkit] axe: no WCAG A/AA violations (dark)`** with a
@@ -26,13 +138,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   bump from `0.68` to `0.72` was made under the (incorrect) belief that
   the dark-mode link floor was the cause of the WebKit axe contrast
   failure. The actual cause was selector specificity (now fixed via
-  `a:link`, see above) and the WebKit value was painting `-webkit-link`
+  `a:link`, see below) and the WebKit value was painting `-webkit-link`
   regardless of how the formula computed. Restoring PR #70's `0.68`
-  floor — that floor is still a defensive contrast cushion above the
-  pre-PR-#70 `0.62`, just without the speculative extra bump that
-  served no purpose. Tiny visible delta in dark mode across all
-  browsers; the formula's value never reached WebKit anyway and now
-  Chromium/Firefox revert to PR #70's tested floor.
+  floor — still a defensive contrast cushion above the pre-PR-#70
+  `0.62`, without the speculative extra bump that served no purpose.
 
 ### Fixed
 
@@ -55,6 +164,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   Native rendering of checkbox / radio / range / file / datetime
   pickers is unaffected (the `:where()` block only matches text-like
   inputs).
+
+### Bundle size
+
+- essential: 9.9 kB → 10.4 kB gzip (+5%).
+- optimal: 12.2 kB → 12.7 kB gzip (+4%).
+- optimal-components / full: minifier strips blueprint comments, so
+  min sizes are unchanged from optimal.
+- All bundles remain well under their `tests/bundle-size.spec.js`
+  budgets (15 / 18 / 20 kB gzip).
 
 ## [0.2.12] - 2026-05-23
 

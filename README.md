@@ -20,10 +20,12 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="core/layers.css">
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/tokens.layout.css">
+<link rel="stylesheet" href="core/tokens.macro-classes.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
 <link rel="stylesheet" href="core/themes.css">
 <link rel="stylesheet" href="core/layout.css">
+<link rel="stylesheet" href="core/macro-classes.css">
 <link rel="stylesheet" href="core/states.css">
 <link rel="stylesheet" href="core/motion.css">
 <link rel="stylesheet" href="core/accessibility.css">
@@ -35,11 +37,14 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="optional/legacy.css">
 ```
 
-> **Note:** `optional/components.css`, `optional/utilities.css` and
-> `optional/tokens.components.css` are empty placeholders reserved for a
-> future component/utility layer. They ship (as no-ops) only in the
-> `*-components` / `*-utilities` / `full` bundles and do nothing until
-> populated — there's no need to link them individually yet.
+> **Note:** `optional/components.css` and `optional/tokens.components.css`
+> ship as **blueprints** in v0.3.0 — their `@layer` declarations reserve
+> cascade position, but every class definition and component token is
+> commented out (no CSS is emitted). They appear (as no-ops) in the
+> `*-components` and `full` bundles only. `optional/utilities.css`
+> remains an empty stub — SLASHED is BEM-first by design and ships no
+> utility classes in 0.x. There's no need to link any of the three
+> individually.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -58,8 +63,9 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ## Cascade layer order
 
 ```text
-slashed.tokens → reset → base → forms → layout → components → utilities →
-states → themes → motion → accessibility → print → legacy → overrides
+slashed.tokens → reset → base → forms → layout → components → macros →
+utilities → states → themes → motion → accessibility → print → legacy →
+overrides
 ```
 
 Declared in `core/layers.css`. Later layers win. `slashed.overrides`
@@ -68,7 +74,10 @@ is reserved for your own overrides and sits last so it always wins.
 `@supports not (...)` and are inert on modern engines.
 
 `slashed.forms` (between `base` and `layout`) holds the opt-in
-classless form styling from `optional/forms.css`.
+classless form styling from `optional/forms.css`. `slashed.macros`
+(between `components` and `utilities`, added in v0.3.0) holds recipes
+like `.sf-prose`, `.sf-flow`, `.sf-truncate`, `.sf-aspect`,
+`.sf-scroll-shadow`. See [`docs/macros.md`](docs/macros.md).
 
 ## Scope of the base layer
 
@@ -96,17 +105,18 @@ the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `reset` + `base` + `themes` + `layout` + `states` + `motion` + `accessibility` + `print`) |
+| `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `tokens.macro-classes` + `reset` + `base` + `themes` + `layout` + `macro-classes` + `states` + `motion` + `accessibility` + `print`) |
 | `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` |
+| `slashed.optimal-components.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` |
-| `slashed.full.css` | optimal + `tokens.components` + `components` + `utilities` |
+| `slashed.full.css` | optimal + `tokens.components` *(blueprint)* + `components` *(blueprint)* + `utilities` |
 
 `optional/legacy.css` is always concatenated last. Every rule lives in an
 `@layer`, so concatenation order never affects the cascade — `core/layers.css`
-fixes it. The `components` / `utilities` / `tokens.components` files are still
-empty stubs: they ship (no-op) only in the `*-components` / `*-utilities` /
-`full` bundles and do nothing until populated.
+fixes it. `components.css` and `tokens.components.css` ship as **blueprints**
+in 0.3.0 — their `@layer` declarations reserve cascade position, but every
+selector and token is commented out (no CSS is emitted). `utilities.css`
+ships as an empty stub.
 
 À la carte is also supported — start from `essential` (or raw `core/`) and add
 hand-picked optional files in any order. When building a custom bundle by hand,
@@ -179,15 +189,17 @@ versions above — colors will collapse to `initial` on older engines.
 
 | Guide | What's inside |
 | --- | --- |
-| [Architecture](docs/architecture.md) | layers, file structure, bundles, token contract, naming |
+| [Architecture](docs/architecture.md) | layers, file structure, class taxonomy, bundles, token contract |
 | [Theming](docs/theming.md) | rebrand in 6 tokens, multi-brand, contrast |
 | [Dark mode](docs/dark-mode.md) | toggle script, scoped themes, per-value overrides |
 | [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
+| [Macros / recipes](docs/macros.md) | every `.sf-*` macro-class + tokens (v0.3.0+) |
+| [Components blueprint](docs/components.md) | reserved component names + roadmap |
 | [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
 | [Browser support](docs/browser-support.md) | the support floor and why |
 | [Performance](docs/performance.md) | modern-CSS footguns to avoid |
-| [Migration](docs/migration.md) | Pico / Bulma / Tailwind → SLASHED |
+| [Migration](docs/migration.md) | 0.2.x → 0.3.0 + Pico / Bulma / Tailwind → SLASHED |
 | [Contributing](CONTRIBUTING.md) | setup, conventions, tests |
 
 ## Development
