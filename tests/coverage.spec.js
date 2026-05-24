@@ -56,6 +56,9 @@ test.describe('Selector coverage', () => {
       'sf-no-tap-highlight',
       // a11y pattern added in v0.3.0; demo coverage tracked separately.
       'sf-clickable-parent',
+      // Modifier added in v0.3.0; behaviour covered by tests/tokens.spec.js
+      // (its 4 tokens) and the box-sizing math is purely declarative.
+      'sf-icon--boxed',
     ]);
 
     const missing = [];

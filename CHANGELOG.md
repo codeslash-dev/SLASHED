@@ -22,7 +22,7 @@ and `slashed.utilities`. Macros may compose with primitives and
 components, but a single-property utility still wins on the same
 selector. Updated layer order:
 
-```
+```text
 tokens → reset → base → forms → layout → components → macros →
 utilities → states → themes → motion → accessibility → print →
 legacy → overrides
