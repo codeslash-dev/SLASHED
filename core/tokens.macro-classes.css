@@ -1,0 +1,61 @@
+/* ============================================================
+   SLASHED — core/tokens.macro-classes.css
+   Semantic tokens for macro-classes (recipes / patterns).
+   Load before: core/macro-classes.css
+   Layer: slashed.tokens
+   Prefix: --sf-
+
+   DEPENDENCIES — requires tokens.css (loaded earlier).
+   Macro tokens reference --sf-space-* / --sf-radius-* / etc.
+
+   PUBLIC API — every token here is a per-recipe override knob
+   (e.g. style="--sf-line-clamp: 5"). No INTERNAL tokens live in
+   this file.
+
+   Architectural parallel — these tokens stand alongside
+   tokens.layout.css: same prefix, same shape, same status
+   (essential, public, override-friendly).
+   ============================================================ */
+
+@layer slashed.tokens {
+  :root {
+
+    /* ----------------------------------------------------------
+       Flow — distance between flow children (lobotomized owl).
+       Consumed by .sf-flow > * + *.
+       ---------------------------------------------------------- */
+    --sf-flow-space: var(--sf-space-content);
+
+    /* ----------------------------------------------------------
+       Line clamp — default line count for .sf-line-clamp-N.
+       Override per element: style="--sf-line-clamp: 5".
+       The fixed-N variants .sf-line-clamp-2 / -3 don't read this
+       token (they hardcode the value), so the default only
+       applies to .sf-line-clamp-N callers.
+       ---------------------------------------------------------- */
+    --sf-line-clamp: 3;
+
+    /* ----------------------------------------------------------
+       Truncate — ellipsis character for .sf-truncate.
+       Stays as a token so consumers can swap to ASCII "..." or a
+       localised character without rewriting the rule. The CSS
+       text-overflow: ellipsis property doesn't read it directly;
+       it's exposed for consumer-built variants.
+       ---------------------------------------------------------- */
+    --sf-truncate-suffix: "\2026";
+
+    /* ----------------------------------------------------------
+       Aspect ratio — default for .sf-aspect (generic ratio container,
+       distinct from layout's .sf-frame which has its own --sf-frame-ratio).
+       ---------------------------------------------------------- */
+    --sf-aspect: 16 / 9;
+
+    /* ----------------------------------------------------------
+       Scroll shadow / overflow fade — mask gradient size.
+       Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade
+       (end-edge horizontal fade).
+       ---------------------------------------------------------- */
+    --sf-scroll-shadow-size: 2rem;
+
+  }
+}

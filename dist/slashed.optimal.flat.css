@@ -995,6 +995,67 @@
 
 }
 
+/* ─── core/tokens.macro-classes.css ─── */
+/* ============================================================
+   SLASHED — core/tokens.macro-classes.css
+   Semantic tokens for macro-classes (recipes / patterns).
+   Load before: core/macro-classes.css
+   Layer: slashed.tokens
+   Prefix: --sf-
+
+   DEPENDENCIES — requires tokens.css (loaded earlier).
+   Macro tokens reference --sf-space-* / --sf-radius-* / etc.
+
+   PUBLIC API — every token here is a per-recipe override knob
+   (e.g. style="--sf-line-clamp: 5"). No INTERNAL tokens live in
+   this file.
+
+   Architectural parallel — these tokens stand alongside
+   tokens.layout.css: same prefix, same shape, same status
+   (essential, public, override-friendly).
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     Flow — distance between flow children (lobotomized owl).
+     Consumed by .sf-flow > * + *.
+     ---------------------------------------------------------- */
+  --sf-flow-space: var(--sf-space-content);
+
+  /* ----------------------------------------------------------
+     Line clamp — default line count for .sf-line-clamp-N.
+     Override per element: style="--sf-line-clamp: 5".
+     The fixed-N variants .sf-line-clamp-2 / -3 don't read this
+     token (they hardcode the value), so the default only
+     applies to .sf-line-clamp-N callers.
+     ---------------------------------------------------------- */
+  --sf-line-clamp: 3;
+
+  /* ----------------------------------------------------------
+     Truncate — ellipsis character for .sf-truncate.
+     Stays as a token so consumers can swap to ASCII "..." or a
+     localised character without rewriting the rule. The CSS
+     text-overflow: ellipsis property doesn't read it directly;
+     it's exposed for consumer-built variants.
+     ---------------------------------------------------------- */
+  --sf-truncate-suffix: "\2026";
+
+  /* ----------------------------------------------------------
+     Aspect ratio — default for .sf-aspect (generic ratio container,
+     distinct from layout's .sf-frame which has its own --sf-frame-ratio).
+     ---------------------------------------------------------- */
+  --sf-aspect: 16 / 9;
+
+  /* ----------------------------------------------------------
+     Scroll shadow / overflow fade — mask gradient size.
+     Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade
+     (end-edge horizontal fade).
+     ---------------------------------------------------------- */
+  --sf-scroll-shadow-size: 2rem;
+
+}
+
 /* ─── core/reset.css ─── */
 /* SLASHED — core/reset.css
    @layer slashed.reset
@@ -1909,6 +1970,124 @@ td, th {
 .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
 .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; max-width: revert; }
 .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
+
+/* -- Flow ----------------------------------------------------
+   Heydon Pickering's "lobotomized owl" — every flow child gets
+   equal margin-block-start. Useful for content blocks where you
+   don't know in advance which elements will be present.
+   Override: style="--sf-flow-space: 2rem"
+   ---------------------------------------------------------- */
+.sf-flow > * + * {
+  margin-block-start: var(--sf-flow-space);
+}
+
+/* -- Truncate / line-clamp -----------------------------------
+   Single-line ellipsis (.sf-truncate) and N-line clamp
+   (.sf-line-clamp-2 / -3 / -N). The fixed-count variants
+   hardcode -webkit-line-clamp; -N reads --sf-line-clamp.
+
+   Note: -webkit-line-clamp is not vendor-locked despite the
+   prefix — every modern browser implements it as the de-facto
+   standard. The unprefixed CSS Overflow 4 `line-clamp` exists
+   but is not yet widely shipped.
+   ---------------------------------------------------------- */
+.sf-truncate {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+}
+
+.sf-line-clamp-2,
+.sf-line-clamp-3,
+.sf-line-clamp-N {
+  display:            -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow:           hidden;
+}
+.sf-line-clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }
+.sf-line-clamp-3 { -webkit-line-clamp: 3; line-clamp: 3; }
+.sf-line-clamp-N {
+  -webkit-line-clamp: var(--sf-line-clamp);
+  line-clamp:         var(--sf-line-clamp);
+}
+
+/* -- Equal height --------------------------------------------
+   Force grid/flex children to share the tallest one's height.
+   Works in flex (default `align-items: stretch`) and is
+   re-asserted here for cases where a wrapper resets it.
+   ---------------------------------------------------------- */
+.sf-equal-height {
+  display:     flex;
+  align-items: stretch;
+}
+.sf-equal-height > * {
+  block-size: auto;
+  flex:       1 1 auto;
+}
+
+/* -- Aspect --------------------------------------------------
+   Generic aspect-ratio container. Distinct from layout's
+   .sf-frame which targets media (object-fit: cover) — .sf-aspect
+   is content-agnostic.
+   Override: style="--sf-aspect: 4 / 3"
+   ---------------------------------------------------------- */
+.sf-aspect {
+  aspect-ratio: var(--sf-aspect);
+}
+
+/* -- Scroll shadow -------------------------------------------
+   Top + bottom mask gradient that reveals when content is
+   scrolled inside a vertical-scroll container. Pure CSS,
+   no JS. Combine with overflow-y: auto on the same element.
+   Override: style="--sf-scroll-shadow-size: 3rem"
+   ---------------------------------------------------------- */
+.sf-scroll-shadow {
+  overflow-y: auto;
+  mask-image:
+    linear-gradient(to bottom,
+      transparent 0,
+      black var(--sf-scroll-shadow-size),
+      black calc(100% - var(--sf-scroll-shadow-size)),
+      transparent 100%);
+}
+
+/* -- Scroll snap ---------------------------------------------
+   Vertical scroll-snap container for vertically stacked sections.
+   Pairs with consumer-supplied scroll-snap-align on children.
+   For horizontal snap, use the .sf-reel layout primitive.
+   ---------------------------------------------------------- */
+.sf-scroll-snap {
+  overflow-y:            auto;
+  scroll-snap-type:      y mandatory;
+  overscroll-behavior-y: contain;
+}
+.sf-scroll-snap > * {
+  scroll-snap-align: start;
+}
+
+/* -- Overflow fade -------------------------------------------
+   End-edge horizontal fade for clipped inline content
+   (e.g. a row of tags overflowing a card). Pure mask, so it
+   respects the element's actual background.
+   ---------------------------------------------------------- */
+.sf-overflow-fade {
+  overflow:   hidden;
+  mask-image: linear-gradient(
+    to right,
+    black 0,
+    black calc(100% - var(--sf-scroll-shadow-size)),
+    transparent 100%
+  );
+}
+
+/* -- No tap highlight ----------------------------------------
+   Suppresses the WebKit/Android grey tap-highlight overlay on
+   interactive elements where it conflicts with the framework's
+   own .is-active / hover treatment.
+   ---------------------------------------------------------- */
+.sf-no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* ─── core/states.css ─── */
 /* SLASHED — core/states.css
