@@ -24,11 +24,27 @@ define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
 
 /**
+ * Immutable jsDelivr ref for the SLASHED CSS bundle.
+ *
+ * Pinned to a specific release tag so the served CSS cannot change outside
+ * a plugin release. jsDelivr treats commit/tag refs as effectively immutable
+ * (cached "forever"), whereas branch refs (e.g. @main) have a 12h cache and
+ * follow the moving branch tip - which is unsafe for production use.
+ *
+ * When a new SLASHED framework release is published, bump this constant
+ * (and verify the tag was not retagged in the upstream repo).
+ *
+ * Override per-site with the 'slashed_bricks/css_bundle_url' filter.
+ */
+define( 'SLASHED_BRICKS_CSS_REF', 'v0.2.12' );
+
+/**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN (main branch latest) so the plugin works
- * without any local file setup. If a local copy is detected (symlink/in-repo
- * mode or copy-install mode), the local file takes precedence for faster loads
+ * Defaults to the jsDelivr CDN pinned to an immutable release tag
+ * (see SLASHED_BRICKS_CSS_REF) so the plugin works without any local
+ * file setup. If a local copy is detected (symlink/in-repo mode or
+ * copy-install mode), the local file takes precedence for faster loads
  * and offline development.
  *
  * Use the 'slashed_bricks/css_bundle_url' filter to override.
@@ -36,8 +52,11 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
  * @return string URL to the CSS bundle.
  */
 function slashed_bricks_get_css_url() {
-    // Default: jsDelivr CDN pointing to main branch latest.
-    $default_url = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.optimal.css';
+    // Default: jsDelivr CDN pinned to an immutable release tag.
+    $default_url = sprintf(
+        'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/dist/slashed.optimal.css',
+        SLASHED_BRICKS_CSS_REF
+    );
 
     // Prefer local file if available (symlink/in-repo mode).
     $repo_path = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';

@@ -137,11 +137,13 @@ integrations/bricks/
 
 ## CSS Bundle
 
-By default, the plugin loads `dist/slashed.optimal.css` from the jsDelivr CDN (`https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.optimal.css`). This means the plugin works out of the box without copying any CSS files locally.
+By default, the plugin loads `dist/slashed.optimal.css` from the jsDelivr CDN, pinned to an immutable release tag (e.g. `https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@v0.2.12/dist/slashed.optimal.css`). Pinning to a tag (rather than `@main`) ensures the served CSS cannot change outside a plugin release, which is important for reproducibility and supply-chain safety - jsDelivr treats commit/tag refs as effectively immutable, whereas branch refs follow the moving branch tip with a short cache window. The pinned ref lives in the `SLASHED_BRICKS_CSS_REF` constant in `slashed-bricks.php` and is bumped with each plugin release.
+
+This means the plugin works out of the box without copying any CSS files locally.
 
 If a local copy of the bundle is detected (symlink/in-repo mode or a `dist/` folder inside the plugin directory), the local file takes precedence for faster loads and offline development.
 
-To load a different bundle (e.g., the minimal `dist/slashed.essential.css` or the full `dist/slashed.full.css`), use the `slashed_bricks/css_bundle_url` filter.
+To load a different bundle (e.g., the minimal `dist/slashed.essential.css` or the full `dist/slashed.full.css`), or to override the pinned ref / point to a commit SHA, use the `slashed_bricks/css_bundle_url` filter.
 
 ## License
 
