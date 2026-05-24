@@ -24,11 +24,27 @@ define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
 
 /**
+ * Immutable jsDelivr ref for the SLASHED CSS bundle.
+ *
+ * Pinned to a specific release tag so the served CSS cannot change outside
+ * a plugin release. jsDelivr treats commit/tag refs as effectively immutable
+ * (cached "forever"), whereas branch refs (e.g. @main) have a 12h cache and
+ * follow the moving branch tip - which is unsafe for production use.
+ *
+ * When a new SLASHED framework release is published, bump this constant
+ * (and verify the tag was not retagged in the upstream repo).
+ *
+ * Override per-site with the 'slashed_bricks/css_bundle_url' filter.
+ */
+define( 'SLASHED_BRICKS_CSS_REF', 'v0.2.12' );
+
+/**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN (main branch latest) so the plugin works
- * without any local file setup. If a local copy is detected (symlink/in-repo
- * mode or copy-install mode), the local file takes precedence for faster loads
+ * Defaults to the jsDelivr CDN pinned to an immutable release tag
+ * (see SLASHED_BRICKS_CSS_REF) so the plugin works without any local
+ * file setup. If a local copy is detected (symlink/in-repo mode or
+ * copy-install mode), the local file takes precedence for faster loads
  * and offline development.
  *
  * Use the 'slashed_bricks/css_bundle_url' filter to override.
@@ -36,8 +52,11 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
  * @return string URL to the CSS bundle.
  */
 function slashed_bricks_get_css_url() {
-    // Default: jsDelivr CDN pointing to main branch latest.
-    $default_url = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/dist/slashed.optimal.css';
+    // Default: jsDelivr CDN pinned to an immutable release tag.
+    $default_url = sprintf(
+        'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/dist/slashed.optimal.css',
+        SLASHED_BRICKS_CSS_REF
+    );
 
     // Prefer local file if available (symlink/in-repo mode).
     $repo_path = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';
@@ -84,6 +103,22 @@ function slashed_bricks_is_bricks_active() {
 }
 
 /**
+ * Initialize the admin page.
+ *
+ * The admin page loads regardless of whether Bricks is active so users
+ * can configure tokens before activating the Bricks theme.
+ */
+function slashed_bricks_admin_init() {
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page.php';
+
+    new Slashed_Bricks_Admin_Page();
+}
+if ( is_admin() ) {
+    add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
+}
+
+/**
  * Initialize the plugin.
  */
 function slashed_bricks_init() {
@@ -92,6 +127,8 @@ function slashed_bricks_init() {
         return;
     }
 
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-css-generator.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';
@@ -105,17 +142,11 @@ function slashed_bricks_init() {
 add_action( 'after_setup_theme', 'slashed_bricks_init' );
 
 /**
- * Activation check: ensure Bricks Builder 1.9.2+ is available.
+ * Activation check.
  */
 function slashed_bricks_activation_check() {
-    if ( ! slashed_bricks_is_bricks_active() ) {
-        deactivate_plugins( plugin_basename( __FILE__ ) );
-        wp_die(
-            esc_html__( 'SLASHED for Bricks requires Bricks Builder 1.9.2 or higher to be installed and active.', 'slashed-bricks' ),
-            'Plugin Activation Error',
-            array( 'back_link' => true )
-        );
-    }
+	// Allow activation without Bricks so admin token configuration is available.
+	// Runtime guards in slashed_bricks_init() handle the Bricks dependency.
 }
 register_activation_hook( __FILE__, 'slashed_bricks_activation_check' );
 
