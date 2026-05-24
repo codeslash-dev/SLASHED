@@ -162,6 +162,19 @@
   }
 
   /* ----------------------------------------------------------
+     Focus-parent — an a11y *pattern*, not a state. Lives in the
+     accessibility layer (was previously in states.css; moved in
+     v0.3.0) so that all focus-related a11y rules share one home
+     and survive third-party resets at the same priority as the
+     focus-visible ring above. Cannot be hardened with !important
+     because the outline shorthand is consumer-customisable.
+     ---------------------------------------------------------- */
+  .focus-parent:focus-within {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  /* ----------------------------------------------------------
      Forced colors (Windows High Contrast). Outline-based focus
      already survives; we only (a) adopt the system Highlight
      colour for the ring and (b) drop decorative shadows that
