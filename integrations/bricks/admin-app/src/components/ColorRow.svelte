@@ -36,6 +36,13 @@
   // One-shot hydration from the store. Wrapping in an IIFE makes it
   // explicit to the Svelte compiler that we want a single read of the
   // storeKey prop at component init time (not a reactive subscription).
+  /**
+   * Initial mode + value pair derived from the stored token. Runs once
+   * at component creation; `mode`, `hexValue`, and `rawValue` then
+   * become independent local `$state` and the seed is discarded.
+   *
+   * @returns {{ mode: 'hex' | 'raw', hex: string, raw: string }}
+   */
   const seed = (() => {
     const v = (tokens.colors?.[storeKey] ?? '').trim();
     const isHex = v === '' || HEX.test(v);
@@ -64,6 +71,13 @@
     markDirty();
   }
 
+  /**
+   * Switch between HEX picker mode and Advanced (raw value) mode.
+   * Mirrors the legacy admin page's two-input toggle: clearing the
+   * inactive side is intentional so the merged save resolves to the
+   * user's currently visible value, not a stale leftover from the
+   * other input.
+   */
   function toggleMode() {
     if (mode === 'hex') {
       mode = 'raw';

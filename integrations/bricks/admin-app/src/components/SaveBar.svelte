@@ -10,6 +10,14 @@
   import { tokens, ui, meta, clearSection } from '../lib/stores.svelte.js';
   import * as api from '../lib/api.js';
 
+  /**
+   * Persist the active tab's tokens via the REST controller. Replaces
+   * the legacy form POST + page reload with an in-place save: we send
+   * the current local section, pull the server-sanitized values back,
+   * and write them to the store so dev/UI state matches the DB exactly.
+   * Surfaces transport errors via `ui.error` and guards re-entry while
+   * a save is in flight.
+   */
   async function save() {
     if (ui.saving) return;
     ui.saving = true;
@@ -31,6 +39,13 @@
     }
   }
 
+  /**
+   * Reset just the active tab back to PHP defaults. Confirms first
+   * because the action is destructive (drops the section's slice from
+   * `slashed_bricks_tokens` server-side and `tokens[section]` locally).
+   * Mirrors `save()`'s in-flight guard, error handling, and dirty/saved
+   * transitions so the UI state stays consistent across both paths.
+   */
   async function reset() {
     if (ui.saving) return;
     if (!confirm(`Reset the ${meta.tabs[ui.activeTab] ?? ui.activeTab} tab to defaults?`)) return;
