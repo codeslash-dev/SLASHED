@@ -153,7 +153,8 @@ class Slashed_Bricks_Colors {
      * @return array<int, array{id:string,name:string,colors:array}>
      */
     public function build_palettes() {
-        $vars = Slashed_Bricks_Inventory::get_color_variables();
+        $vars    = Slashed_Bricks_Inventory::get_color_variables();
+        $hex_map = Slashed_Bricks_Inventory::get_color_hex_map();
 
         $by_brand = array_fill_keys( self::$brands, array() );
         $status   = array();
@@ -185,16 +186,17 @@ class Slashed_Bricks_Colors {
             $palettes[] = $this->build_palette(
                 $brand,
                 'SLASHED · ' . ucfirst( $brand ),
-                $by_brand[ $brand ]
+                $by_brand[ $brand ],
+                $hex_map
             );
         }
 
         if ( ! empty( $status ) ) {
-            $palettes[] = $this->build_palette( 'status', 'SLASHED · Status', $status );
+            $palettes[] = $this->build_palette( 'status', 'SLASHED · Status', $status, $hex_map );
         }
 
         if ( ! empty( $semantic ) ) {
-            $palettes[] = $this->build_palette( 'semantic', 'SLASHED · Semantic', $semantic );
+            $palettes[] = $this->build_palette( 'semantic', 'SLASHED · Semantic', $semantic, $hex_map );
         }
 
         /**
@@ -211,13 +213,14 @@ class Slashed_Bricks_Colors {
      * @param string   $palette_slug Internal slug (used for id).
      * @param string   $palette_name Display name.
      * @param string[] $vars         Variable names (e.g. "--sf-color-primary-50").
+     * @param array    $hex_map      Map of variable name to hex fallback.
      * @return array{id:string,name:string,colors:array}
      */
-    private function build_palette( $palette_slug, $palette_name, $vars ) {
+    private function build_palette( $palette_slug, $palette_name, $vars, $hex_map ) {
         return array(
             'id'     => self::PALETTE_ID_PREFIX . $palette_slug,
             'name'   => $palette_name,
-            'colors' => $this->vars_to_palette_colors( $palette_slug, $vars ),
+            'colors' => $this->vars_to_palette_colors( $palette_slug, $vars, $hex_map ),
         );
     }
 
@@ -225,30 +228,32 @@ class Slashed_Bricks_Colors {
      * Convert a list of --sf-color-* variable names into Bricks palette
      * color entries.
      *
-     * Each entry uses var(--sf-color-X) for both 'hex' (the legacy field
-     * Bricks reads in older versions) and 'raw' (the preferred field in
-     * Bricks 1.9.2+). The picker resolves these via the SLASHED bundle
-     * loaded in the editor iframe, so swatches always reflect the live
-     * theme - including dark mode and any user token overrides from the
-     * SLASHED admin page.
+     * Each entry uses a resolved hex fallback for the 'hex' field (swatch
+     * preview in the builder panel) and var(--sf-color-X) for 'raw' (the
+     * actual value applied when a color is selected). This approach works
+     * because the Bricks builder panel does not load the SLASHED CSS, so
+     * var() references cannot resolve for preview purposes.
      *
      * @param string   $palette_slug Internal slug.
      * @param string[] $vars         Variable names.
+     * @param array    $hex_map      Map of variable name to hex fallback.
      * @return array<int, array<string,string>>
      */
-    private function vars_to_palette_colors( $palette_slug, $vars ) {
+    private function vars_to_palette_colors( $palette_slug, $vars, $hex_map ) {
         $colors = array();
         foreach ( $vars as $var ) {
             $key = substr( $var, strlen( '--sf-color-' ) );
             if ( '' === $key ) {
                 continue;
             }
-            $reference = 'var(' . $var . ')';
-            $colors[]  = array(
+
+            $hex_fallback = isset( $hex_map[ $var ] ) ? $hex_map[ $var ] : '#808080';
+
+            $colors[] = array(
                 'id'   => self::PALETTE_ID_PREFIX . $palette_slug . '-' . $this->slugify( $key ),
                 'name' => $this->humanize_key( $key ),
-                'hex'  => $reference,
-                'raw'  => $reference,
+                'hex'  => $hex_fallback,
+                'raw'  => 'var(' . $var . ')',
             );
         }
         return $colors;

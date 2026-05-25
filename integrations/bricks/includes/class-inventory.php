@@ -54,6 +54,13 @@ class Slashed_Bricks_Inventory {
 	private static $cache = null;
 
 	/**
+	 * Per-request cache for the resolved color hex map.
+	 *
+	 * @var array|null
+	 */
+	private static $hex_map_cache = null;
+
+	/**
 	 * Get the full inventory, resolving and caching on first access.
 	 *
 	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
@@ -97,10 +104,10 @@ class Slashed_Bricks_Inventory {
 	 * but they could also return null, a partial array, or non-string
 	 * entries. This normaliser guarantees the consumers downstream
 	 * (Variables / Classes / Colors registration) always see the same
-	 * shape: three keys, sorted unique string lists.
+	 * shape: three keys, sorted unique string lists plus color_values map.
 	 *
 	 * @param mixed $inventory Possibly malformed inventory data.
-	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
+	 * @return array{variables: string[], sf_classes: string[], is_classes: string[], color_values: array}
 	 */
 	private static function sanitize_inventory( $inventory ) {
 		$base = Slashed_Bricks_CSS_Parser::empty_inventory();
@@ -108,6 +115,13 @@ class Slashed_Bricks_Inventory {
 			return $base;
 		}
 		foreach ( array_keys( $base ) as $key ) {
+			// color_values is an associative map, not a sortable list.
+			if ( 'color_values' === $key ) {
+				$base[ $key ] = isset( $inventory[ $key ] ) && is_array( $inventory[ $key ] )
+					? $inventory[ $key ]
+					: array();
+				continue;
+			}
 			$list = isset( $inventory[ $key ] ) && is_array( $inventory[ $key ] )
 				? array_filter( $inventory[ $key ], 'is_string' )
 				: array();
@@ -122,7 +136,27 @@ class Slashed_Bricks_Inventory {
 	 * Reset the per-request cache. Mostly useful for tests.
 	 */
 	public static function flush() {
-		self::$cache = null;
+		self::$cache         = null;
+		self::$hex_map_cache = null;
+	}
+
+	/**
+	 * Get the resolved hex color map for all --sf-color-* variables.
+	 *
+	 * @return array<string, string> Map of variable name to hex string.
+	 */
+	public static function get_color_hex_map() {
+		if ( null !== self::$hex_map_cache ) {
+			return self::$hex_map_cache;
+		}
+
+		$inv = self::get();
+
+		$color_values = isset( $inv['color_values'] ) ? $inv['color_values'] : array();
+
+		self::$hex_map_cache = Slashed_Bricks_Color_Resolver::resolve( $color_values );
+
+		return self::$hex_map_cache;
 	}
 
 	/**
