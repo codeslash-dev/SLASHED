@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SLASHED admin (dev harness)</title>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 24px; }
+      .wrap { max-width: 1200px; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Standalone dev harness used only by `vite dev`. The real WP page
+      prints an equivalent mount + hydration script via PHP. The shape
+      of `window.slashedBricksApp` here mirrors what wp_localize_script
+      writes in production so the same Svelte code works in both.
+    -->
+    <script>
+      window.slashedBricksApp = {
+        rest: {
+          // In dev, no real REST endpoint exists; api.js short-circuits
+          // when restUrl is empty and just logs the payload.
+          url: '',
+          nonce: '',
+        },
+        defaults: {
+          colors: {
+            brand: {
+              primary:   'oklch(0.45 0.20 264)',
+              secondary: 'oklch(0.25 0.03 260)',
+              tertiary:  'oklch(0.48 0.14 310)',
+              action:    'oklch(0.60 0.16 210)',
+              neutral:   'oklch(0.45 0.02 260)',
+              base:      'oklch(0.98 0.005 260)',
+            },
+            status: {
+              success: 'oklch(0.48 0.17 150)',
+              warning: 'oklch(0.75 0.17 80)',
+              error:   'oklch(0.62 0.20 35)',
+              info:    'oklch(0.48 0.15 240)',
+              danger:  'oklch(0.48 0.24 12)',
+            },
+            brand_hex_hints: {
+              primary: '#4338ca', secondary: '#1e293b', tertiary: '#7c3aed',
+              action:  '#0891b2', neutral:   '#64748b', base:      '#fafafa',
+            },
+            status_hex_hints: {
+              success: '#16a34a', warning: '#ca8a04', error: '#dc2626',
+              info:    '#2563eb', danger:  '#dc2626',
+            },
+          },
+        },
+        settings: {},
+        tabs: {
+          colors:     'Colors',
+          contrast:   'Contrast',
+          typography: 'Typography',
+        },
+      };
+    </script>
+    <div class="wrap">
+      <div id="slashed-admin-app"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
