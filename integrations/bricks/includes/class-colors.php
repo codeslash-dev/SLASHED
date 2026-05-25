@@ -12,8 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Colors
  *
- * Registers SLASHED color tokens with Bricks Builder as a set of named color
- * palettes that appear under the Color Manager palette dropdown.
+ * Registers SLASHED color tokens with Bricks Builder as a set of separate,
+ * named color palettes that appear under the "Color palettes" dropdown of
+ * the Bricks color picker (Color Manager) — distinct from the site's global
+ * colors.
  *
  * Strategy
  * --------
@@ -26,8 +28,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *      The plugin is registered early (plugins_loaded) so our filters are
  *      in place before Bricks' Database::__construct() reads the option.
  *   2. On every write (pre_update_option_bricks_color_palette) we strip
- *      our palettes back out so the DB never persists them. The plugin
- *      remains the single source of truth.
+ *      our palettes back out so the DB never persists them. The integration
+ *      remains the single source of truth — bumping the framework or
+ *      changing the active bundle automatically updates what Bricks shows,
+ *      without leaving stale rows behind on the site.
+ *
+ * The bricks/builder/color_palette filter is intentionally not used here:
+ * per the Bricks forum that filter cannot assign names — "id and name are
+ * generated after it is applied" — making it unsuitable for Color Manager
+ * integration.
  *
  * Each color swatch references the framework variable via var(--sf-color-X).
  * The SLASHED bundle loaded in the editor iframe resolves the var() reference
@@ -69,10 +78,13 @@ class Slashed_Bricks_Colors {
         // not used here: per the Bricks forum that filter cannot assign names
         // — "id and name are generated after it is applied" — making it
         // unsuitable for Color Manager integration.
+        //
+        // Run late so any other plugin's additions are preserved.
         add_filter( 'option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
         add_filter( 'default_option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
 
         // Strip SLASHED palettes before they are persisted back to the DB.
+        // pre_update_option_* signature is ($value, $old_value, $option).
         add_filter( 'pre_update_option_bricks_color_palette', array( $this, 'strip_palettes' ), 10, 1 );
     }
 

@@ -160,9 +160,17 @@
 
 		var declarations = [];
 
-		// Resolve active color value per row: prefer the raw input when
-		// it has content, otherwise use the HEX input. Mirrors what the
-		// PHP sanitiser does on save, so the preview always matches.
+		/**
+		 * Resolve the active color value for one token row.
+		 *
+		 * Mirrors the PHP sanitiser's merge order so the live preview
+		 * always matches what would be saved: the Advanced (raw) input
+		 * wins when populated, otherwise the HEX picker value is used.
+		 * Returns an empty string when neither side has a value.
+		 *
+		 * @param {string} baseKey  Token base key, e.g. "brand_primary".
+		 * @returns {string}        The active color value or "".
+		 */
 		function resolveColor( baseKey ) {
 			var raw = $( '#' + baseKey + '_raw' ).val();
 			if ( raw && raw.length ) {

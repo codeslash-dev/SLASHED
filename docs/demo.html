@@ -2417,6 +2417,74 @@
           <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-secondary); color: var(--sf-color-text--on-secondary)">Slide B</section>
           <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-tertiary); color: var(--sf-color-text--on-tertiary)">Slide C</section>
         </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-overflow-fade</code> — end-edge mask</h3>
+        <div class="sf-overflow-fade" style="inline-size: 24rem; --sf-scroll-shadow-size: 4rem">
+          <div class="sf-cluster sf-cluster--no-wrap" style="white-space: nowrap">
+            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-one</span>
+            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-two</span>
+            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-three</span>
+            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-four</span>
+            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-five</span>
+          </div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-no-tap-highlight</code> — suppress mobile tap overlay</h3>
+        <button class="sf-no-tap-highlight" style="padding: var(--sf-space-s) var(--sf-space-m); border-radius: var(--sf-radius-m); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none">
+          Tap me on mobile (no grey flash)
+        </button>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-clickable-parent</code> — full-card click target</h3>
+        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 22rem">
+          <h4 style="margin: 0"><a href="#macros">Click anywhere on this card</a></h4>
+          <p style="margin: 0">Text inside is still <strong>selectable</strong> — only the link's overlay covers the surface, and inline children are lifted above it via z-index.</p>
+          <button onclick="event.stopPropagation(); event.preventDefault();" style="justify-self: start; padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none">Independent action</button>
+        </article>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-surface--*</code> — auto-flipped foreground</h3>
+        <div class="sf-grid sf-grid--m" style="--sf-grid-min: 9rem">
+          <div class="sf-surface--primary"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">primary</div>
+          <div class="sf-surface--secondary" style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">secondary</div>
+          <div class="sf-surface--tertiary"  style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">tertiary</div>
+          <div class="sf-surface--action"    style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">action</div>
+          <div class="sf-surface--neutral"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">neutral</div>
+          <div class="sf-surface--inverse"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">inverse</div>
+          <div class="sf-surface--success"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">success</div>
+          <div class="sf-surface--warning"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">warning</div>
+          <div class="sf-surface--error"     style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">error</div>
+          <div class="sf-surface--info"      style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">info</div>
+          <div class="sf-surface--danger"    style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">danger</div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-text-gradient</code> — gradient-clipped text</h3>
+        <h2 class="sf-text-gradient" style="font-size: var(--sf-text-3xl); margin: 0">Headline gradient</h2>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-link-external</code> — external-link indicator</h3>
+        <p>
+          See the <a href="https://example.com" class="sf-link-external">external project</a>
+          for more — the marker is configurable via <code>--sf-link-external-marker</code>.
+        </p>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-section--collapse</code> — adjacent sections share padding</h3>
+        <div style="border: 1px dashed var(--sf-color-border); border-radius: var(--sf-radius-m); overflow: hidden">
+          <section class="sf-section sf-section--s sf-section--collapse sf-surface--primary" style="--sf-section-pad: var(--sf-space-l)">
+            <p style="margin: 0">Section A — primary surface</p>
+          </section>
+          <section class="sf-section sf-section--s sf-section--collapse sf-surface--secondary" style="--sf-section-pad: var(--sf-space-l)">
+            <p style="margin: 0">Section B — secondary surface (different bg, but content has half-padding from boundary)</p>
+          </section>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-entrance--*</code> — scroll-driven entrance</h3>
+        <p style="color: var(--sf-color-text--secondary); font-size: var(--sf-text-s)">Animations require <code>animation-timeline: view()</code> support (Chrome 115+, Firefox 145+). Refresh and scroll to see effects in supported engines.</p>
+        <div class="sf-stack sf-stack--s">
+          <div class="sf-entrance--fade"        style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade</div>
+          <div class="sf-entrance--fade-up"     style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-up</div>
+          <div class="sf-entrance--fade-down"   style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-down</div>
+          <div class="sf-entrance--fade-left"   style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-left</div>
+          <div class="sf-entrance--fade-right"  style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-right</div>
+          <div class="sf-entrance--scale-up"    style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--scale-up</div>
+        </div>
       </section>
 
     </main>

@@ -40,6 +40,16 @@ export const ui = $state({
   error: '',
 });
 
+/**
+ * Pick the first key from the registered tabs object.
+ *
+ * Used as the initial `ui.activeTab` so the SPA opens on whichever tab
+ * the PHP side declared first (currently "colors"). Returns `null` for
+ * the empty case so the consumer can fall back to its own default.
+ *
+ * @param {Object<string, string>} tabs - Tab slug → display label map.
+ * @returns {string|null}
+ */
 function firstTabSlug(tabs) {
   for (const slug in tabs) return slug;
   return null;

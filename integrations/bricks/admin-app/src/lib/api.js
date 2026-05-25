@@ -14,6 +14,21 @@
  */
 import { meta } from './stores.svelte.js';
 
+/**
+ * Internal POST helper used by `saveSection` / `resetSection`.
+ *
+ * Stamps the WP REST nonce on every request so WordPress' standard
+ * cookie+nonce auth applies — no plugin-specific token plumbing.
+ *
+ * In the Vite dev harness `meta.rest.url` is empty; we log the payload
+ * and resolve a stub result so component code (dirty flag, "Saved" pill)
+ * can be exercised end-to-end without a real backend.
+ *
+ * @param {string} path - REST route relative to `meta.rest.url`.
+ * @param {Object} body - JSON payload sent as the request body.
+ * @returns {Promise<Object>} Parsed JSON response from the REST controller.
+ * @throws {Error} On non-2xx responses; the response body is used as the message.
+ */
 async function call(path, body) {
   const { url, nonce } = meta.rest;
   if (!url) {

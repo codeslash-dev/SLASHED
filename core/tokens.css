@@ -100,6 +100,18 @@
     --sf-color-scheme: light dark;
 
     /* ----------------------------------------------------------
+       LumLocker — OKLCH L value used by the
+       :root[data-lumlocker] override in core/themes.css.
+       Locks all 5 brand colors (primary, secondary, tertiary,
+       action, neutral) to one shared lightness while keeping their
+       individual hue and chroma. Base is excluded — it must remain
+       a light surface for page background.
+       Override to change the locked lightness:
+         :root { --sf-lumlocker: 0.55 }
+       ---------------------------------------------------------- */
+    --sf-lumlocker: 0.65;
+
+    /* ----------------------------------------------------------
        Resolved color tokens — auto-switch via light-dark().
        Components reference these. Override the -light / -dark
        source tokens above to customise; or override these directly
@@ -578,6 +590,17 @@
     --sf-radius-3xl:  calc(32px * var(--sf-radius-scale));
     --sf-radius-4xl:  calc(48px * var(--sf-radius-scale));
     --sf-radius-full: 9999px;
+    /* Pill — semantic alias of --sf-radius-full. Reach for this name
+       on rectangles you want capsule-shaped (badges, tags, chips); use
+       --sf-radius-full when you mean "as round as topologically possible". */
+    --sf-radius-pill: var(--sf-radius-full);
+    /* Concentric helper — outer radius for a container that wraps
+       content padded by --sf-component-pad with inner radius m.
+       Keeps inner elements visually proportional inside a padded box.
+       Override per use:
+         .my-card { border-radius: var(--sf-radius-outer); }
+       Maths: outer = inner + padding ⇒ aligned curves at corners. */
+    --sf-radius-outer: calc(var(--sf-radius-m) + var(--sf-component-pad));
 
 
     /* ----------------------------------------------------------
@@ -834,6 +857,12 @@
     --sf-component-pad: var(--sf-space-m);  /* standard component padding */
     --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
     --sf-field-required-marker: " *";
+    /* Leading space is baked into the default so consumers can fully
+       disable the indicator with `--sf-link-external-marker: ""` —
+       without the space a bare "" still left a stray space after the
+       link text. Override with your own glyph (include leading space
+       if you want one): `:root { --sf-link-external-marker: " →" }`. */
+    --sf-link-external-marker: " \2197";  /* " ↗" — consumed by .sf-link-external */
 
 
     /* ----------------------------------------------------------

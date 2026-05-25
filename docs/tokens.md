@@ -3,14 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**603 tokens.** Every `--sf-*` custom property and its default value. See
+**608 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-357 tokens.
+361 tokens.
 
 | Token | Default |
 |---|---|
@@ -248,6 +248,8 @@ rebrand workflow.
 | `--sf-leading-relaxed` | `1.625` |
 | `--sf-leading-snug` | `1.3` |
 | `--sf-leading-tight` | `1.1` |
+| `--sf-link-external-marker` | `" \2197"` |
+| `--sf-lumlocker` | `0.65` |
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
 | `--sf-motion-scale` | `1` |
@@ -272,6 +274,8 @@ rebrand workflow.
 | `--sf-radius-l` | `calc(12px * var(--sf-radius-scale))` |
 | `--sf-radius-m` | `calc(8px * var(--sf-radius-scale))` |
 | `--sf-radius-none` | `0` |
+| `--sf-radius-outer` | `calc(var(--sf-radius-m) + var(--sf-component-pad))` |
+| `--sf-radius-pill` | `var(--sf-radius-full)` |
 | `--sf-radius-s` | `calc(4px * var(--sf-radius-scale))` |
 | `--sf-radius-scale` | `1` |
 | `--sf-radius-xl` | `calc(16px * var(--sf-radius-scale))` |
@@ -374,7 +378,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-43 tokens.
+44 tokens.
 
 | Token | Default |
 |---|---|
@@ -397,7 +401,7 @@ rebrand workflow.
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |
-| `--sf-grid-min` | `16rem` |
+| `--sf-grid-min` | `var(--sf-grid-min-default, 16rem)` |
 | `--sf-grid-min-default` | `16rem` |
 | `--sf-grid-min-l` | `20rem` |
 | `--sf-grid-min-m` | `16rem` |
@@ -415,6 +419,7 @@ rebrand workflow.
 | `--sf-reel-item-width` | `max-content` |
 | `--sf-sidebar-gap` | `var(--sf-space-gap)` |
 | `--sf-sidebar-min-width` | `50%` |
+| `--sf-sidebar-width` | `var(--sf-sidebar-width-default, 18rem)` |
 | `--sf-sidebar-width-default` | `18rem` |
 | `--sf-space-content` | `var(--sf-content-gap)` |
 | `--sf-space-gap` | `var(--sf-gap)` |

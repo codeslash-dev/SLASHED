@@ -24,10 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * must therefore be instantiated at plugins_loaded (handled in slashed-bricks.php)
  * so our option filters are registered before that first read.
  *
- * We treat SLASHED entries as managed/virtual: inject on read, strip on save,
- * so the integration is the single source of truth and bumping the framework or
- * switching the active CSS bundle keeps the Variable Manager in sync without
- * leaving stale rows in the DB.
+ * Same as the Colors and Classes modules, we treat SLASHED entries as
+ * managed/virtual: inject on read, strip on save, so the integration is the
+ * single source of truth and bumping the framework or switching the active
+ * CSS bundle keeps the Variable Manager in sync without leaving stale rows
+ * in the DB.
  *
  * Naming
  * ------

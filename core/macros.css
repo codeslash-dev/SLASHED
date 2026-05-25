@@ -182,4 +182,80 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* -- Surface -------------------------------------------------
+     Sets background + auto-flipped foreground in one class.
+     Combines --sf-color-X (resolved semantic, mode-aware) with
+     the matching --sf-color-text--on-X (auto-contrast) so text
+     legibility is automatic without consumer math.
+
+     ACSS calls this "Contextual Backgrounds" / "Surfaces". 11
+     variants cover all brand + status + inverse colors. Base is
+     excluded — base IS the page surface; use plain
+     background: var(--sf-color-bg) if you need it explicitly.
+
+     Composes naturally with .sf-section / .sf-card / .sf-stack:
+       <section class="sf-section sf-surface--primary">…</section>
+     ---------------------------------------------------------- */
+  .sf-surface--primary    { background: var(--sf-color-primary);   color: var(--sf-color-text--on-primary); }
+  .sf-surface--secondary  { background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary); }
+  .sf-surface--tertiary   { background: var(--sf-color-tertiary);  color: var(--sf-color-text--on-tertiary); }
+  .sf-surface--action     { background: var(--sf-color-action);    color: var(--sf-color-text--on-action); }
+  .sf-surface--neutral    { background: var(--sf-color-neutral);   color: var(--sf-color-text--on-neutral); }
+  .sf-surface--inverse    { background: var(--sf-color-inverse);   color: var(--sf-color-text--on-inverse); }
+  .sf-surface--success    { background: var(--sf-color-success);   color: var(--sf-color-text--on-success); }
+  .sf-surface--warning    { background: var(--sf-color-warning);   color: var(--sf-color-text--on-warning); }
+  .sf-surface--error      { background: var(--sf-color-error);     color: var(--sf-color-text--on-error); }
+  .sf-surface--info       { background: var(--sf-color-info);      color: var(--sf-color-text--on-info); }
+  .sf-surface--danger     { background: var(--sf-color-danger);    color: var(--sf-color-text--on-danger); }
+
+  /* -- Text gradient -------------------------------------------
+     Fills text with a gradient. Defaults to --sf-gradient-primary
+     (auto-adapts to brand + dark mode). Override the background-image
+     per-instance for any other gradient or radial:
+       <h1 class="sf-text-gradient" style="background-image: var(--sf-gradient-secondary)">…</h1>
+
+     Selection on gradient text inherits the clipping — that's a
+     known browser limitation across all engines, accepted as-is.
+
+     The `color: transparent` declaration is gated behind a feature
+     query for background-clip:text. Without that gate, an engine
+     that ignored background-clip:text would render the text fully
+     invisible (transparent over no clipped fill). All current
+     evergreen browsers support either the standard or the
+     -webkit- prefixed form, so the supports check is a defensive
+     guard rather than a real-world fallback.
+     ---------------------------------------------------------- */
+  .sf-text-gradient {
+    background-image: var(--sf-gradient-primary);
+    /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    .sf-text-gradient {
+      color: transparent;
+    }
+  }
+
+  /* -- External link indication --------------------------------
+     Adds an external-link glyph after the link text. Opt-in per
+     element via class — for global auto-detection, write your
+     own rule in unlayered CSS:
+       a[rel~="external"]:not(.no-external)::after {
+         content: var(--sf-link-external-marker);
+       }
+
+     Marker is tokenised so consumers can swap to " →", " ⤴", or
+     unset (empty string fully disables it — the default token
+     value bakes the leading space in, so `""` leaves nothing
+     after the link):
+       :root { --sf-link-external-marker: "" }
+     ---------------------------------------------------------- */
+  .sf-link-external::after {
+    content:         var(--sf-link-external-marker);
+    display:         inline-block;
+    font-size:       0.85em;
+    text-decoration: none;
+  }
+
 }

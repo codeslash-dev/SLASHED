@@ -174,6 +174,8 @@ function slashed_bricks_init() {
 
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-generator.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
 
     new Slashed_Bricks_Enqueue();

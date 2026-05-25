@@ -25,7 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * therefore be instantiated at plugins_loaded (handled in slashed-bricks.php)
  * so our option filters are registered before that first read.
  *
- * We treat SLASHED entries as managed/virtual:
+ * We treat SLASHED entries as managed/virtual — the same pattern the Colors
+ * and Variables modules use for their respective options:
  *
  *   1. On every read of either option, inject our entries.
  *   2. On every write (save from the UI, import, etc.), strip our entries

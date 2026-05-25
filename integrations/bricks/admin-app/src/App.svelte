@@ -18,6 +18,16 @@
   // Replaces the equivalent jQuery `$(window).on('beforeunload', ...)`
   // block in admin-page.js.
   $effect(() => {
+    /**
+     * `beforeunload` listener that triggers the browser's native
+     * "Leave site? Changes you made may not be saved." prompt when
+     * the form is dirty. Returning a non-empty string from a beforeunload
+     * handler is the legacy way to opt into the prompt; modern browsers
+     * also accept `event.preventDefault()` + a non-empty `returnValue`,
+     * which is what we use here for cross-engine support.
+     *
+     * @param {BeforeUnloadEvent} e
+     */
     function onBeforeUnload(e) {
       if (ui.dirty) {
         e.preventDefault();
