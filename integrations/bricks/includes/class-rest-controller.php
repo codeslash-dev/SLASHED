@@ -77,8 +77,12 @@ class Slashed_Bricks_REST_Controller {
 						'sanitize_callback' => 'sanitize_key',
 					),
 					'values'  => array(
-						'type'     => 'object',
-						'required' => true,
+						'type'                 => 'object',
+						'required'             => true,
+						'additionalProperties' => array(
+							'type'      => 'string',
+							'maxLength' => 512,
+						),
 					),
 				),
 			)

@@ -35,6 +35,7 @@
     if (ui.saving) return;
     if (!confirm(`Reset the ${meta.tabs[ui.activeTab] ?? ui.activeTab} tab to defaults?`)) return;
     ui.saving = true;
+    ui.error = '';
     try {
       await api.resetSection(ui.activeTab);
       clearSection(ui.activeTab);

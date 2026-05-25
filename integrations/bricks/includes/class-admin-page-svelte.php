@@ -178,9 +178,9 @@ class Slashed_Bricks_Admin_Page_Svelte {
 		if ( 'slashed-bricks-admin-app' !== $handle ) {
 			return $tag;
 		}
-		// Replace the opening <script ...> with one that includes type=module.
-		// Preserve any existing attributes (id, src, defer added by WP, etc).
-		return str_replace( '<script ', '<script type="module" ', $tag );
+		// Insert type="module" without clobbering an existing type attribute.
+		// preg_replace with limit 1 so only the opening tag is touched.
+		return preg_replace( '/<script(\b[^>]*)>/', '<script type="module"$1>', $tag, 1 );
 	}
 
 	/**

@@ -18,11 +18,29 @@
   const brand = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
 
   /**
-   * Compose the :root override CSS string from the current store snapshot.
-   * Only the Colors tab is fully ported in the POC, so the deriver focuses
-   * on color tokens. Adding more sections later is a matter of appending
-   * declarations from tokens.<other-section>.
+   * Build inline CSS custom properties for the preview container.
+   *
+   * Setting vars on the container via the style attribute is safe — Svelte
+   * escapes attribute values, so no {@html} injection is needed. Custom
+   * properties cascade to all descendants, so var(--sf-color-*-light) on
+   * swatches/buttons resolves through the container's inline style.
    */
+  const inlineStyle = $derived.by(() => {
+    const pairs = [];
+    const colors = tokens.colors ?? {};
+
+    for (const name of brand) {
+      const v = colors[`brand_${name}`];
+      if (v) pairs.push(`--sf-color-${name}-light:${v}`);
+    }
+    for (const name of ['success', 'warning', 'error', 'info', 'danger']) {
+      const v = colors[`status_${name}`];
+      if (v) pairs.push(`--sf-color-${name}-light:${v}`);
+    }
+    return pairs.join(';');
+  });
+
+  /** Text representation shown in the "Generated CSS" code block. */
   const css = $derived.by(() => {
     const decls = [];
     const colors = tokens.colors ?? {};
@@ -99,13 +117,7 @@
   }
 </style>
 
-<svelte:head>
-  {#if css}
-    {@html `<style id="slashed-live-preview">${css}</style>`}
-  {/if}
-</svelte:head>
-
-<div class="slashed-preview">
+<div class="slashed-preview" style={inlineStyle}>
   <h3>Live preview</h3>
   <div class="slashed-preview__swatches">
     {#each brand as name (name)}

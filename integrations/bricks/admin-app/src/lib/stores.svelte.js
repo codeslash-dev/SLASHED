@@ -57,10 +57,12 @@ export function markDirty() {
 /**
  * Drop a section's local overrides so PHP defaults take over again
  * the next time the page is loaded or saved.
+ *
+ * Does NOT mark dirty — callers own the dirty/clean transition so the
+ * reset handler can set dirty=false immediately after without a flicker.
  */
 export function clearSection(section) {
   if (tokens[section]) {
     delete tokens[section];
   }
-  markDirty();
 }
