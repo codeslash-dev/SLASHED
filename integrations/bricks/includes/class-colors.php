@@ -64,9 +64,12 @@ class Slashed_Bricks_Colors {
      * Constructor. Register hooks.
      */
     public function __construct() {
-        // Inject SLASHED palettes when Bricks (or anything else) reads the
-        // bricks_color_palette option. Run late so any other plugin's
-        // additions are preserved.
+        // Official Bricks builder filter — fires when the builder assembles
+        // the color picker, regardless of how the option is stored/cached.
+        add_filter( 'bricks/builder/color_palette', array( $this, 'inject_palettes' ), 20 );
+
+        // Fallback: inject when WordPress reads the option directly (e.g.
+        // REST, imports, or older Bricks versions that call get_option).
         add_filter( 'option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
         add_filter( 'default_option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
 
