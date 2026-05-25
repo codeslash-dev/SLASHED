@@ -107,6 +107,18 @@
   --sf-color-scheme: light dark;
 
   /* ----------------------------------------------------------
+     Unified lightness — OKLCH L value used by the
+     :root[data-unified-lightness] override in core/themes.css.
+     Forces all 5 brand colors (primary, secondary, tertiary,
+     action, neutral) to share one lightness while keeping their
+     individual hue and chroma. Base is excluded — it must remain
+     a light surface for page background.
+     Override to change the unified lightness:
+       :root { --sf-unified-lightness: 0.55 }
+     ---------------------------------------------------------- */
+  --sf-unified-lightness: 0.65;
+
+  /* ----------------------------------------------------------
      Resolved color tokens — auto-switch via light-dark().
      Components reference these. Override the -light / -dark
      source tokens above to customise; or override these directly
@@ -585,6 +597,17 @@
   --sf-radius-3xl:  calc(32px * var(--sf-radius-scale));
   --sf-radius-4xl:  calc(48px * var(--sf-radius-scale));
   --sf-radius-full: 9999px;
+  /* Pill — semantic alias of --sf-radius-full. Reach for this name
+     on rectangles you want capsule-shaped (badges, tags, chips); use
+     --sf-radius-full when you mean "as round as topologically possible". */
+  --sf-radius-pill: var(--sf-radius-full);
+  /* Concentric helper — outer radius for a container that wraps
+     content padded by --sf-component-pad with inner radius m.
+     Keeps inner elements visually proportional inside a padded box.
+     Override per use:
+       .my-card { border-radius: var(--sf-radius-outer); }
+     Maths: outer = inner + padding ⇒ aligned curves at corners. */
+  --sf-radius-outer: calc(var(--sf-radius-m) + var(--sf-component-pad));
 
 
   /* ----------------------------------------------------------
@@ -841,6 +864,7 @@
   --sf-component-pad: var(--sf-space-m);  /* standard component padding */
   --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
   --sf-field-required-marker: " *";
+  --sf-link-external-marker: "\2197";  /* ↗ — consumed by .sf-link-external */
 
 
   /* ----------------------------------------------------------
@@ -941,7 +965,12 @@
      ---------------------------------------------------------- */
   --sf-sidebar-gap:           var(--sf-space-gap);
   --sf-sidebar-min-width:     50%;           /* content column minimum */
-  --sf-sidebar-width-default: 18rem;         /* sidebar panel default size */
+  --sf-sidebar-width:         18rem;         /* sidebar panel default size */
+  /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-sidebar-width.
+     Alias kept so existing override:
+       :root { --sf-sidebar-width-default: 20rem }
+     continues to flow through. */
+  --sf-sidebar-width-default: var(--sf-sidebar-width);
 
   /* ----------------------------------------------------------
      Switcher
@@ -957,10 +986,14 @@
 
   --sf-grid-min-xs:      10rem;
   --sf-grid-min-s:       13rem;
-  --sf-grid-min-default: 16rem;
   --sf-grid-min-m:       16rem;
   --sf-grid-min-l:       20rem;
   --sf-grid-min-xl:      24rem;
+  /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-grid-min.
+     Alias kept so existing override:
+       :root { --sf-grid-min-default: 14rem }
+     continues to flow through. */
+  --sf-grid-min-default: var(--sf-grid-min);
 
   /* ----------------------------------------------------------
      Cover
@@ -1462,6 +1495,50 @@ td, th {
 [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
 [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
 
+
+/* Unified lightness — opt-in via [data-unified-lightness] on :root.
+   Forces the 5 brand colors (primary, secondary, tertiary, action,
+   neutral) to share one OKLCH L value (--sf-unified-lightness,
+   default 0.65 in core/tokens.css), keeping each color's own hue
+   and chroma. Useful when a brand picker produces colors with
+   wildly different L values that look mismatched in weight.
+
+   Base is excluded by design — base IS the page surface (L ~0.98 in
+   light mode, ~0.20 in dark) and unifying it would destroy the page
+   background.
+
+   Default state: OFF. Without the attribute, every brand keeps its
+   own L. Add :root[data-unified-lightness] (or set via JS) to enable.
+
+   Per-color escape: override --sf-color-X under
+   :root[data-unified-lightness] to opt that one color out:
+     :root[data-unified-lightness] { --sf-color-primary: #yourColor; }
+
+   The dark-side input falls back to -light when -dark isn't
+   explicitly set, so this works even without per-mode overrides. */
+:root[data-unified-lightness] {
+  --sf-color-primary: light-dark(
+    oklch(from var(--sf-color-primary-light) var(--sf-unified-lightness) c h),
+    oklch(from var(--sf-color-primary-dark, var(--sf-color-primary-light)) var(--sf-unified-lightness) c h)
+  );
+  --sf-color-secondary: light-dark(
+    oklch(from var(--sf-color-secondary-light) var(--sf-unified-lightness) c h),
+    oklch(from var(--sf-color-secondary-dark, var(--sf-color-secondary-light)) var(--sf-unified-lightness) c h)
+  );
+  --sf-color-tertiary: light-dark(
+    oklch(from var(--sf-color-tertiary-light) var(--sf-unified-lightness) c h),
+    oklch(from var(--sf-color-tertiary-dark, var(--sf-color-tertiary-light)) var(--sf-unified-lightness) c h)
+  );
+  --sf-color-action: light-dark(
+    oklch(from var(--sf-color-action-light) var(--sf-unified-lightness) c h),
+    oklch(from var(--sf-color-action-dark, var(--sf-color-action-light)) var(--sf-unified-lightness) c h)
+  );
+  --sf-color-neutral: light-dark(
+    oklch(from var(--sf-color-neutral-light) var(--sf-unified-lightness) c h),
+    oklch(from var(--sf-color-neutral-dark, var(--sf-color-neutral-light)) var(--sf-unified-lightness) c h)
+  );
+}
+
 /* ─── core/layout.css ─── */
 /* ============================================================
    SLASHED — core/layout.css
@@ -1483,6 +1560,27 @@ td, th {
 .sf-section--xl { padding-block: var(--sf-section-pad--xl); }
 
 .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
+
+/* Collapse modifier — when two adjacent sections share this modifier,
+   they redistribute padding 50/50 across the boundary so total spacing
+   stays one full padding gap (instead of two). Works regardless of
+   background color: each section always has half its padding on
+   the boundary side, so content never touches a color edge.
+
+   Use when sections are siblings outside a .sf-section-group wrapper
+   and may share OR differ in background.
+
+   Note: uses --sf-section-pad (the canonical alias = m by default).
+   For other sizes, set --sf-section-pad locally on each section:
+     <section class="sf-section sf-section--l sf-section--collapse"
+              style="--sf-section-pad: var(--sf-section-pad--l)">
+   ---------------------------------------------------------- */
+.sf-section--collapse:has(+ .sf-section--collapse) {
+  padding-block-end: calc(var(--sf-section-pad) / 2);
+}
+.sf-section--collapse + .sf-section--collapse {
+  padding-block-start: calc(var(--sf-section-pad) / 2);
+}
 
 /* -- Divider -------------------------------------------------
    Standalone separator primitive. Token-driven; pairs with the
@@ -1613,7 +1711,7 @@ td, th {
 }
 
 .sf-sidebar > :first-child {
-  flex-basis: var(--sf-sidebar-width, var(--sf-sidebar-width-default));
+  flex-basis: var(--sf-sidebar-width);
   flex-grow:  1;
 }
 
@@ -1630,7 +1728,7 @@ td, th {
 }
 
 .sf-sidebar--right > :last-child {
-  flex-basis: var(--sf-sidebar-width, var(--sf-sidebar-width-default));
+  flex-basis: var(--sf-sidebar-width);
   flex-grow:  1;
 }
 
@@ -2126,6 +2224,68 @@ td, th {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* -- Surface -------------------------------------------------
+   Sets background + auto-flipped foreground in one class.
+   Combines --sf-color-X (resolved semantic, mode-aware) with
+   the matching --sf-color-text--on-X (auto-contrast) so text
+   legibility is automatic without consumer math.
+
+   ACSS calls this "Contextual Backgrounds" / "Surfaces". 11
+   variants cover all brand + status + inverse colors. Base is
+   excluded — base IS the page surface; use plain
+   background: var(--sf-color-bg) if you need it explicitly.
+
+   Composes naturally with .sf-section / .sf-card / .sf-stack:
+     <section class="sf-section sf-surface--primary">…</section>
+   ---------------------------------------------------------- */
+.sf-surface--primary    { background: var(--sf-color-primary);   color: var(--sf-color-text--on-primary); }
+.sf-surface--secondary  { background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary); }
+.sf-surface--tertiary   { background: var(--sf-color-tertiary);  color: var(--sf-color-text--on-tertiary); }
+.sf-surface--action     { background: var(--sf-color-action);    color: var(--sf-color-text--on-action); }
+.sf-surface--neutral    { background: var(--sf-color-neutral);   color: var(--sf-color-text--on-neutral); }
+.sf-surface--inverse    { background: var(--sf-color-inverse);   color: var(--sf-color-text--on-inverse); }
+.sf-surface--success    { background: var(--sf-color-success);   color: var(--sf-color-text--on-success); }
+.sf-surface--warning    { background: var(--sf-color-warning);   color: var(--sf-color-text--on-warning); }
+.sf-surface--error      { background: var(--sf-color-error);     color: var(--sf-color-text--on-error); }
+.sf-surface--info       { background: var(--sf-color-info);      color: var(--sf-color-text--on-info); }
+.sf-surface--danger     { background: var(--sf-color-danger);    color: var(--sf-color-text--on-danger); }
+
+/* -- Text gradient -------------------------------------------
+   Fills text with a gradient. Defaults to --sf-gradient-primary
+   (auto-adapts to brand + dark mode). Override the background-image
+   per-instance for any other gradient or radial:
+     <h1 class="sf-text-gradient" style="background-image: var(--sf-gradient-secondary)">…</h1>
+
+   Selection on gradient text inherits the clipping — that's a
+   known browser limitation across all engines, accepted as-is.
+   ---------------------------------------------------------- */
+.sf-text-gradient {
+  background-image: var(--sf-gradient-primary);
+  /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* -- External link indication --------------------------------
+   Adds an external-link glyph after the link text. Opt-in per
+   element via class — for global auto-detection, write your
+   own rule in unlayered CSS:
+     a[rel~="external"]:not(.no-external)::after {
+       content: " " var(--sf-link-external-marker);
+     }
+
+   Marker is tokenised so consumers can swap to "→", "⤴", or
+   unset (empty string disables it):
+     :root { --sf-link-external-marker: "" }
+   ---------------------------------------------------------- */
+.sf-link-external::after {
+  content:         " " var(--sf-link-external-marker);
+  display:         inline-block;
+  font-size:       0.85em;
+  text-decoration: none;
+}
+
 /* ─── core/states.css ─── */
 /* SLASHED — core/states.css
    @layer slashed.states
@@ -2514,6 +2674,45 @@ td, th {
   .sf-slide-in-right { animation: var(--sf-animation-slide-in-right); }
   .sf-scale-up       { animation: var(--sf-animation-scale-up); }
   .sf-scale-down     { animation: var(--sf-animation-scale-down); }
+
+  /* Scroll-driven entrance effects — element animates into view
+     as it enters the viewport. Uses CSS scroll-driven animations
+     via animation-timeline: view(). Range tokens
+     (--sf-scroll-timeline-range-{start,end}, declared in
+     core/tokens.css) control where the animation starts and ends
+     along the scroll progress.
+
+     Example:
+       <article class="sf-entrance--fade-up">…</article>
+
+     Reduced-motion: gated by the no-preference wrapper above, so
+     these are inert when the user opts out. The core animation
+     (translate/opacity) still composes correctly with reduced-motion
+     neutralisation in accessibility.css if a consumer accidentally
+     writes them outside the gate.
+
+     Browser support — animation-timeline is shipping in Chrome 115+
+     and Firefox 145+ (Nov 2026). Safari does not yet support it
+     (tracked at WebKit bug 264057); on those engines the animation
+     falls back to a one-shot run on page load (still a graceful
+     entrance, just not scroll-bound). */
+  .sf-entrance--fade,
+  .sf-entrance--fade-up,
+  .sf-entrance--fade-down,
+  .sf-entrance--fade-left,
+  .sf-entrance--fade-right,
+  .sf-entrance--scale-up {
+    animation-timeline: view();
+    animation-range:    var(--sf-scroll-timeline-range-start, entry 0%)
+                        var(--sf-scroll-timeline-range-end,   cover 30%);
+    animation-fill-mode: both;
+  }
+  .sf-entrance--fade        { animation-name: sf-fade-in; }
+  .sf-entrance--fade-up     { animation-name: sf-slide-in-up; }
+  .sf-entrance--fade-down   { animation-name: sf-slide-in-down; }
+  .sf-entrance--fade-left   { animation-name: sf-slide-in-left; }
+  .sf-entrance--fade-right  { animation-name: sf-slide-in-right; }
+  .sf-entrance--scale-up    { animation-name: sf-scale-up; }
 
 }
 

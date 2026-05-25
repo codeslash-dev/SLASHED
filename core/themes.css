@@ -50,4 +50,48 @@
   [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
   [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
 
+
+  /* Unified lightness — opt-in via [data-unified-lightness] on :root.
+     Forces the 5 brand colors (primary, secondary, tertiary, action,
+     neutral) to share one OKLCH L value (--sf-unified-lightness,
+     default 0.65 in core/tokens.css), keeping each color's own hue
+     and chroma. Useful when a brand picker produces colors with
+     wildly different L values that look mismatched in weight.
+
+     Base is excluded by design — base IS the page surface (L ~0.98 in
+     light mode, ~0.20 in dark) and unifying it would destroy the page
+     background.
+
+     Default state: OFF. Without the attribute, every brand keeps its
+     own L. Add :root[data-unified-lightness] (or set via JS) to enable.
+
+     Per-color escape: override --sf-color-X under
+     :root[data-unified-lightness] to opt that one color out:
+       :root[data-unified-lightness] { --sf-color-primary: #yourColor; }
+
+     The dark-side input falls back to -light when -dark isn't
+     explicitly set, so this works even without per-mode overrides. */
+  :root[data-unified-lightness] {
+    --sf-color-primary: light-dark(
+      oklch(from var(--sf-color-primary-light) var(--sf-unified-lightness) c h),
+      oklch(from var(--sf-color-primary-dark, var(--sf-color-primary-light)) var(--sf-unified-lightness) c h)
+    );
+    --sf-color-secondary: light-dark(
+      oklch(from var(--sf-color-secondary-light) var(--sf-unified-lightness) c h),
+      oklch(from var(--sf-color-secondary-dark, var(--sf-color-secondary-light)) var(--sf-unified-lightness) c h)
+    );
+    --sf-color-tertiary: light-dark(
+      oklch(from var(--sf-color-tertiary-light) var(--sf-unified-lightness) c h),
+      oklch(from var(--sf-color-tertiary-dark, var(--sf-color-tertiary-light)) var(--sf-unified-lightness) c h)
+    );
+    --sf-color-action: light-dark(
+      oklch(from var(--sf-color-action-light) var(--sf-unified-lightness) c h),
+      oklch(from var(--sf-color-action-dark, var(--sf-color-action-light)) var(--sf-unified-lightness) c h)
+    );
+    --sf-color-neutral: light-dark(
+      oklch(from var(--sf-color-neutral-light) var(--sf-unified-lightness) c h),
+      oklch(from var(--sf-color-neutral-dark, var(--sf-color-neutral-light)) var(--sf-unified-lightness) c h)
+    );
+  }
+
 }
