@@ -131,7 +131,40 @@ if ( is_admin() ) {
 }
 
 /**
- * Initialize the plugin.
+ * Data managers: early initialization at plugins_loaded.
+ *
+ * Bricks' Database::__construct() reads bricks_global_variables,
+ * bricks_global_classes, and bricks_color_palette via get_option() during
+ * theme functions.php load — which happens AFTER plugins_loaded but BEFORE
+ * after_setup_theme. Registering our option filters here guarantees they are
+ * in place when Bricks reads those options for the first time.
+ *
+ * Runs unconditionally: if Bricks is not the active theme the option filters
+ * simply never fire, which is harmless.
+ */
+function slashed_bricks_data_init() {
+    // Bail early on non-Bricks sites to avoid loading classes needlessly.
+    if ( 'bricks' !== strtolower( (string) get_option( 'template', '' ) ) ) {
+        return;
+    }
+
+    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-colors.php';
+
+    new Slashed_Bricks_Variables();
+    new Slashed_Bricks_Classes();
+    new Slashed_Bricks_Colors();
+}
+add_action( 'plugins_loaded', 'slashed_bricks_data_init', 20 );
+
+/**
+ * CSS enqueue: late initialization at after_setup_theme.
+ *
+ * Enqueue needs the theme to be active and Bricks version checks to pass.
+ * Data managers (variables, classes, colors) are already initialized above.
  */
 function slashed_bricks_init() {
     if ( ! slashed_bricks_is_bricks_active() ) {
@@ -144,14 +177,8 @@ function slashed_bricks_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-colors.php';
 
     new Slashed_Bricks_Enqueue();
-    new Slashed_Bricks_Variables();
-    new Slashed_Bricks_Classes();
-    new Slashed_Bricks_Colors();
 }
 add_action( 'after_setup_theme', 'slashed_bricks_init' );
 

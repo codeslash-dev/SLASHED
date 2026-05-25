@@ -18,11 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Strategy
  * --------
  * Bricks 1.9.8+ stores user-managed variables in the `bricks_global_variables`
- * wp_option (categories in `bricks_global_variables_categories`). Same as
- * the Colors and Classes modules, we treat SLASHED entries as managed/virtual:
- * inject on read, strip on save, so the integration is the single source of
- * truth and bumping the framework or switching the active CSS bundle keeps
- * the Variable Manager in sync without leaving stale rows in the DB.
+ * wp_option (categories in `bricks_global_variables_categories`). Both options
+ * are read via get_option() inside Bricks' Database::__construct() which runs
+ * during theme functions.php load — before after_setup_theme fires. This class
+ * must therefore be instantiated at plugins_loaded (handled in slashed-bricks.php)
+ * so our option filters are registered before that first read.
+ *
+ * Same as the Colors and Classes modules, we treat SLASHED entries as
+ * managed/virtual: inject on read, strip on save, so the integration is the
+ * single source of truth and bumping the framework or switching the active
+ * CSS bundle keeps the Variable Manager in sync without leaving stale rows
+ * in the DB.
  *
  * Naming
  * ------
