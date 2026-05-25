@@ -43,50 +43,85 @@
 	}
 
 	/**
-	 * Initialize WordPress color pickers on .slashed-color-field inputs.
+	 * Initialize the color picker on every paired HEX/Advanced color row.
 	 *
-	 * Note: Since SLASHED uses oklch() color values, the WordPress color picker
-	 * serves as a visual reference and inspiration palette. The actual saved value
-	 * is the oklch() string entered in the text input.
+	 * Each row contains:
+	 *   - .slashed-color-hex   - the HEX input wired to wpColorPicker
+	 *   - .slashed-color-raw   - the Advanced (oklch / any CSS color) input
+	 *   - .slashed-color-toggle - swaps which one is active/visible
+	 *
+	 * The active mode is recorded on the row's data-mode attribute, set
+	 * server-side based on the saved value's shape (HEX vs anything else).
 	 */
 	function initColorPickers() {
 		if ( ! $.fn.wpColorPicker ) {
 			return;
 		}
 
+		// Curated palette of the rough HEX equivalents of SLASHED's
+		// default oklch tokens - shown as quick-pick chips in the picker
+		// dropdown. Real chosen values are still written to the input.
 		var palette = [
-			'#4338ca', // primary-ish
-			'#1e293b', // secondary-ish
-			'#7c3aed', // tertiary-ish
-			'#0891b2', // action-ish
-			'#64748b', // neutral-ish
-			'#16a34a', // success-ish
-			'#eab308', // warning-ish
-			'#dc2626'  // error-ish
+			'#4338ca', '#1e293b', '#7c3aed', '#0891b2',
+			'#64748b', '#fafafa', '#16a34a', '#ca8a04',
+			'#dc2626', '#2563eb'
 		];
 
-		$( '.slashed-color-field' ).each( function() {
+		$( '.slashed-color-hex' ).each( function() {
 			var $input = $( this );
 
-			// Create a visual color reference picker alongside the text input.
-			var $pickerEl = $( '<input type="text" class="slashed-color-picker-visual">' );
-			$pickerEl.insertAfter( $input );
-
-			$pickerEl.wpColorPicker( {
+			$input.wpColorPicker( {
 				palettes: palette,
 				change: function() {
-					// The color picker is for visual reference only.
-					// Users should enter oklch() values in the text input.
+					// Defer one tick so wpColorPicker has finished writing
+					// the new value into the underlying input, then mirror
+					// the change into our dirty/preview pipeline.
+					window.setTimeout( function() {
+						markDirty();
+						updateLivePreview();
+					}, 0 );
 				},
-				clear: function() {}
+				clear: function() {
+					markDirty();
+					updateLivePreview();
+				}
 			} );
+		} );
 
-			// Add a helper note.
-			if ( ! $input.siblings( '.color-note' ).length ) {
-				$input.closest( 'td' ).find( '.wp-picker-container' ).after(
-					'<span class="color-note">Use oklch() values in the text field. The color picker is for visual reference only.</span>'
-				);
+		// Toggle button: swap which input is active for a given row.
+		$( document ).on( 'click', '.slashed-color-toggle', function( e ) {
+			e.preventDefault();
+			var $btn = $( this );
+			var $row = $( '#' + $btn.data( 'row' ) );
+			if ( ! $row.length ) {
+				return;
 			}
+			var current = $row.attr( 'data-mode' ) || 'hex';
+			var next    = current === 'hex' ? 'raw' : 'hex';
+
+			$row.attr( 'data-mode', next );
+			$row.find( '.slashed-color-input--hex' ).attr( 'hidden', next !== 'hex' ? true : null );
+			$row.find( '.slashed-color-input--raw' ).attr( 'hidden', next !== 'raw' ? true : null );
+
+			// Clear the inactive input so the merged save logic resolves
+			// unambiguously to the user's chosen value.
+			if ( next === 'hex' ) {
+				var $raw = $row.find( '.slashed-color-raw' );
+				if ( $raw.val() !== '' ) {
+					$raw.val( '' );
+				}
+			} else {
+				// Switching to raw: clear the picker via its API so the
+				// saved hex doesn't compete with what the user types.
+				var $hex = $row.find( '.slashed-color-hex' );
+				if ( $hex.val() !== '' && $hex.wpColorPicker ) {
+					$hex.wpColorPicker( 'color', '' );
+				}
+				$row.find( '.slashed-color-raw' ).trigger( 'focus' );
+			}
+
+			markDirty();
+			updateLivePreview();
 		} );
 	}
 
@@ -125,19 +160,31 @@
 
 		var declarations = [];
 
+		// Resolve active color value per row: prefer the raw input when
+		// it has content, otherwise use the HEX input. Mirrors what the
+		// PHP sanitiser does on save, so the preview always matches.
+		function resolveColor( baseKey ) {
+			var raw = $( '#' + baseKey + '_raw' ).val();
+			if ( raw && raw.length ) {
+				return raw;
+			}
+			var hex = $( '#' + baseKey + '_hex' ).val();
+			return hex && hex.length ? hex : '';
+		}
+
 		// Collect color values.
 		var brandColors = [ 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' ];
 		var statusColors = [ 'success', 'warning', 'error', 'info', 'danger' ];
 
 		brandColors.forEach( function( color ) {
-			var val = $( '#brand_' + color ).val();
+			var val = resolveColor( 'brand_' + color );
 			if ( val ) {
 				declarations.push( '--sf-color-' + color + '-light: ' + val );
 			}
 		} );
 
 		statusColors.forEach( function( color ) {
-			var val = $( '#status_' + color ).val();
+			var val = resolveColor( 'status_' + color );
 			if ( val ) {
 				declarations.push( '--sf-color-' + color + '-light: ' + val );
 			}
@@ -204,6 +251,28 @@
 				declarations.push( '--sf-z-' + name + ': ' + parseInt( val, 10 ) );
 			}
 		} );
+
+		// Contrast tab knobs (numeric, no unit).
+		[ 'contrast_bias', 'contrast_threshold', 'opacity_disabled' ].forEach( function( key ) {
+			var val = $( '#' + key ).val();
+			if ( val !== undefined && val !== '' ) {
+				declarations.push( '--sf-' + key.replace( /_/g, '-' ) + ': ' + val );
+			}
+		} );
+
+		// Focus ring metrics (px-suffixed).
+		[ 'focus_ring_width', 'focus_ring_offset' ].forEach( function( key ) {
+			var val = $( '#' + key ).val();
+			if ( val !== undefined && val !== '' ) {
+				declarations.push( '--sf-' + key.replace( /_/g, '-' ) + ': ' + val + 'px' );
+			}
+		} );
+
+		// Focus ring style (enum).
+		var ringStyle = $( '#focus_ring_style' ).val();
+		if ( ringStyle ) {
+			declarations.push( '--sf-focus-ring-style: ' + ringStyle );
+		}
 
 		// Build CSS string.
 		var css = '';

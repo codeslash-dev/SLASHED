@@ -1,6 +1,6 @@
 <?php
 /**
- * Class registration for Bricks Builder autocomplete.
+ * Class registration for the Bricks Builder Global Class Manager.
  *
  * @package SLASHED_Bricks
  */
@@ -12,298 +12,223 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Classes
  *
- * Registers SLASHED utility and layout classes with Bricks Builder
- * for autocomplete and the global classes panel.
+ * Registers SLASHED utility, layout, and state classes with Bricks Builder
+ * by injecting them into the Global Class Manager (the canonical home for
+ * Bricks classes since 1.9.5).
+ *
+ * Strategy
+ * --------
+ * Bricks reads global classes from the wp_options row `bricks_global_classes`
+ * (and class categories from `bricks_global_classes_categories`). We treat
+ * SLASHED entries as managed/virtual - the same pattern the Colors module
+ * uses for the color palette option:
+ *
+ *   1. On every read of either option, inject our entries.
+ *   2. On every write (save from the UI, import, etc.), strip our entries
+ *      back out so the database never persists them - the integration
+ *      remains the single source of truth and bumping the framework or
+ *      switching the active CSS bundle automatically refreshes what shows
+ *      up in the Class Manager.
+ *
+ * Each class is shipped as `settings: { locked: true }` so it lands in the
+ * Manager's "Locked" filter group: users can apply `.sf-stack`, `.is-active`,
+ * etc. on elements but cannot accidentally edit the framework selectors.
+ * The actual CSS rules are still authored in the SLASHED bundle - Bricks
+ * just stores a reference to the class name.
+ *
+ * Hooks Bricks 1.9.2-1.9.4 do not have class categories; the
+ * `bricks_global_classes_categories` filters are still safe there because
+ * Bricks simply never reads the option.
  */
 class Slashed_Bricks_Classes {
 
     /**
-     * Constructor. Register hooks.
+     * Prefix used on every class id and category id this integration injects.
+     * Used to identify our entries when stripping on save.
+     */
+    const ID_PREFIX = 'slashed-';
+
+    /**
+     * Stable category ids. These live in `bricks_global_classes_categories`
+     * and each class entry references one via its `category` field.
+     */
+    const CATEGORY_LAYOUT = 'slashed-cat-layout';
+    const CATEGORY_STATE  = 'slashed-cat-state';
+
+    /**
+     * Constructor. Register option filters.
      */
     public function __construct() {
-        add_filter( 'bricks/setup/control_options', array( $this, 'register_global_classes' ) );
+        // Inject SLASHED classes when Bricks reads the option. Run late
+        // so any other plugin's additions are preserved.
+        add_filter( 'option_bricks_global_classes', array( $this, 'inject_classes' ), 20 );
+        add_filter( 'default_option_bricks_global_classes', array( $this, 'inject_classes' ), 20 );
+
+        // Strip SLASHED classes before they are persisted back to the DB.
+        // pre_update_option_* hooks must never widen the stored type from
+        // array to scalar - that would break Bricks' own loader, which
+        // iterates over the option.
+        add_filter( 'pre_update_option_bricks_global_classes', array( $this, 'strip_classes' ), 10, 1 );
+
+        // Same managed/virtual pattern for class categories (Bricks 1.9.5+).
+        add_filter( 'option_bricks_global_classes_categories', array( $this, 'inject_categories' ), 20 );
+        add_filter( 'default_option_bricks_global_classes_categories', array( $this, 'inject_categories' ), 20 );
+        add_filter( 'pre_update_option_bricks_global_classes_categories', array( $this, 'strip_categories' ), 10, 1 );
     }
 
     /**
-     * Register SLASHED classes as locked global classes in Bricks.
+     * Inject SLASHED classes into the Bricks global classes list.
      *
-     * @param array $control_options Existing control options.
-     * @return array Modified control options.
+     * Idempotent: any existing SLASHED-prefixed entries are removed first
+     * so multiple read passes don't create duplicates.
+     *
+     * @param mixed $classes Existing value of bricks_global_classes option.
+     * @return array
      */
-    public function register_global_classes( $control_options ) {
-        $classes = $this->get_classes();
-
-        if ( ! isset( $control_options['globalClassesLocked'] ) ) {
-            $control_options['globalClassesLocked'] = array();
+    public function inject_classes( $classes ) {
+        if ( ! is_array( $classes ) ) {
+            $classes = array();
         }
 
-        foreach ( $classes as $class_entry ) {
-            $control_options['globalClassesLocked'][] = $class_entry;
+        $classes = $this->strip_classes( $classes );
+
+        foreach ( $this->build_classes() as $entry ) {
+            $classes[] = $entry;
         }
 
-        return $control_options;
+        return $classes;
     }
 
     /**
-     * Get all SLASHED classes formatted for Bricks.
+     * Remove SLASHED-prefixed entries from a global classes array.
      *
-     * @return array Array of class entries.
+     * Always returns a clean array, even when the option is malformed.
+     *
+     * @param mixed $classes Value of bricks_global_classes option.
+     * @return array
      */
-    public function get_classes() {
-        $classes = array();
+    public function strip_classes( $classes ) {
+        return $this->strip_prefixed( $classes );
+    }
 
-        // Layout classes.
-        $layout = $this->get_layout_classes();
-        foreach ( $layout as $class_name ) {
-            $classes[] = array(
-                'id'       => $class_name,
-                'name'     => $class_name,
+    /**
+     * Inject SLASHED class category entries.
+     *
+     * @param mixed $categories Existing value of bricks_global_classes_categories option.
+     * @return array
+     */
+    public function inject_categories( $categories ) {
+        if ( ! is_array( $categories ) ) {
+            $categories = array();
+        }
+
+        $categories = $this->strip_categories( $categories );
+
+        foreach ( $this->build_categories() as $cat ) {
+            $categories[] = $cat;
+        }
+
+        return $categories;
+    }
+
+    /**
+     * Remove SLASHED-prefixed categories from a categories array.
+     *
+     * @param mixed $categories Value of bricks_global_classes_categories option.
+     * @return array
+     */
+    public function strip_categories( $categories ) {
+        return $this->strip_prefixed( $categories );
+    }
+
+    /**
+     * Shared "strip every entry whose id starts with our prefix" helper.
+     *
+     * @param mixed $entries Possibly malformed list of `{id,...}` entries.
+     * @return array
+     */
+    private function strip_prefixed( $entries ) {
+        if ( ! is_array( $entries ) ) {
+            return array();
+        }
+
+        $kept = array();
+        foreach ( $entries as $entry ) {
+            if ( is_array( $entry )
+                && isset( $entry['id'] )
+                && is_string( $entry['id'] )
+                && 0 === strpos( $entry['id'], self::ID_PREFIX )
+            ) {
+                continue;
+            }
+            $kept[] = $entry;
+        }
+
+        return array_values( $kept );
+    }
+
+    /**
+     * Build SLASHED class entries from the inventory.
+     *
+     * Each entry follows the Bricks-native shape:
+     *   { id, name, settings: { locked: true }, category }
+     *
+     * - `id` is a stable slashed-* slug so strip_classes() can find it
+     *   reliably across read passes; Bricks accepts any unique string.
+     * - `name` is the actual class name users will apply (e.g. "sf-stack").
+     * - `settings.locked` puts the entry in the Class Manager's Locked
+     *   filter so framework classes aren't accidentally edited.
+     * - `category` references one of our stable category ids.
+     *
+     * @return array<int, array<string,mixed>>
+     */
+    public function build_classes() {
+        $entries = array();
+
+        foreach ( Slashed_Bricks_Inventory::get_sf_classes() as $name ) {
+            $entries[] = array(
+                'id'       => self::ID_PREFIX . sanitize_key( $name ),
+                'name'     => $name,
                 'settings' => array( 'locked' => true ),
-                'category' => 'SLASHED Layout',
+                'category' => self::CATEGORY_LAYOUT,
             );
         }
 
-        // State classes.
-        $states = $this->get_state_classes();
-        foreach ( $states as $class_name ) {
-            $classes[] = array(
-                'id'       => $class_name,
-                'name'     => $class_name,
+        foreach ( Slashed_Bricks_Inventory::get_is_classes() as $name ) {
+            $entries[] = array(
+                'id'       => self::ID_PREFIX . sanitize_key( $name ),
+                'name'     => $name,
                 'settings' => array( 'locked' => true ),
-                'category' => 'SLASHED State',
+                'category' => self::CATEGORY_STATE,
             );
         }
 
         /**
-         * Filter the registered classes before passing to Bricks.
+         * Filter the SLASHED class entries before injection.
          *
-         * @param array $classes Array of class entry arrays.
+         * @param array $entries Class entries.
          */
-        return apply_filters( 'slashed_bricks/registered_classes', $classes );
+        return apply_filters( 'slashed_bricks/registered_classes', $entries );
     }
 
     /**
-     * Get all SLASHED layout classes.
+     * Build SLASHED class category entries.
      *
-     * @return array
+     * @return array<int, array<string,string>>
      */
-    private function get_layout_classes() {
+    public function build_categories() {
         return array(
-            // Section.
-            'sf-section',
-            'sf-section--s',
-            'sf-section--m',
-            'sf-section--l',
-            'sf-section--xl',
-            'sf-section-group',
-
-            // Divider.
-            'sf-divider',
-            'sf-divider--vertical',
-
-            // Container.
-            'sf-container',
-            'sf-container--narrow',
-            'sf-container--prose',
-            'sf-container--wide',
-            'sf-container--full',
-
-            // Stack.
-            'sf-stack',
-            'sf-stack--2xs',
-            'sf-stack--xs',
-            'sf-stack--s',
-            'sf-stack--m',
-            'sf-stack--l',
-            'sf-stack--xl',
-            'sf-stack--2xl',
-            'sf-stack--3xl',
-            'sf-stack--center',
-            'sf-stack--end',
-            'sf-stack--stretch',
-
-            // Box.
-            'sf-box',
-
-            // Center.
-            'sf-center',
-            'sf-center--intrinsic',
-
-            // Cluster.
-            'sf-cluster',
-            'sf-cluster--2xs',
-            'sf-cluster--xs',
-            'sf-cluster--s',
-            'sf-cluster--m',
-            'sf-cluster--l',
-            'sf-cluster--xl',
-            'sf-cluster--no-wrap',
-            'sf-cluster--center',
-            'sf-cluster--end',
-            'sf-cluster--between',
-
-            // Sidebar.
-            'sf-sidebar',
-            'sf-sidebar--right',
-            'sf-sidebar--narrow',
-            'sf-sidebar--wide',
-
-            // Switcher.
-            'sf-switcher',
-            'sf-switcher--no-wrap',
-            'sf-switcher--vertical',
-
-            // Grid.
-            'sf-grid',
-            'sf-grid--fit',
-            'sf-grid--xs',
-            'sf-grid--s',
-            'sf-grid--m',
-            'sf-grid--l',
-            'sf-grid--xl',
-            'sf-grid--dense',
-            'sf-grid-1',
-            'sf-grid-2',
-            'sf-grid-3',
-            'sf-grid-4',
-            'sf-grid-6',
-            'sf-grid-1-2',
-            'sf-grid-2-1',
-            'sf-grid-1-3',
-            'sf-grid-3-1',
-
-            // Icon.
-            'sf-icon',
-            'sf-icon--xs',
-            'sf-icon--s',
-            'sf-icon--m',
-            'sf-icon--l',
-            'sf-icon--xl',
-
-            // Cover.
-            'sf-cover',
-            'sf-cover__center',
-            'sf-cover--min',
-            'sf-cover--max',
-            'sf-cover--padding-s',
-            'sf-cover--padding-l',
-
-            // Frame.
-            'sf-frame',
-            'sf-frame--square',
-            'sf-frame--video',
-            'sf-frame--cinema',
-            'sf-frame--portrait',
-            'sf-frame--4-3',
-            'sf-frame--3-2',
-            'sf-frame--golden',
-
-            // Reel.
-            'sf-reel',
-
-            // Imposter.
-            'sf-imposter',
-            'sf-imposter--fixed',
-            'sf-imposter--contain',
-
-            // Alternate.
-            'sf-alternate',
-
-            // Pancake.
-            'sf-pancake',
-
-            // Bento.
-            'sf-bento',
-            'sf-bento--2',
-            'sf-bento--4',
-            'sf-bento--compact',
-            'sf-bento--tall',
-
-            // Subgrid.
-            'sf-subgrid',
-            'sf-subgrid-rows',
-
-            // Prose.
-            'sf-prose',
-            'sf-not-prose',
-
-            // Content Grid.
-            'sf-content-grid',
-            'sf-breakout',
-            'sf-full-bleed',
+            array( 'id' => self::CATEGORY_LAYOUT, 'name' => __( 'SLASHED Layout', 'slashed-bricks' ) ),
+            array( 'id' => self::CATEGORY_STATE,  'name' => __( 'SLASHED State', 'slashed-bricks' ) ),
         );
     }
 
     /**
-     * Get all SLASHED state classes.
+     * Backward-compatible accessor retained for filter consumers and tests.
      *
-     * @return array
+     * @return array<int, array<string,mixed>>
      */
-    private function get_state_classes() {
-        return array(
-            // Visibility.
-            'is-hidden',
-            'is-invisible',
-            'is-visible',
-
-            // Interactivity.
-            'is-disabled',
-            'is-readonly',
-
-            // Loading.
-            'is-loading',
-            'is-busy',
-            'is-pending',
-            'is-skeleton',
-
-            // Active.
-            'is-active',
-            'is-selected',
-            'is-current',
-            'is-highlighted',
-            'is-pressed',
-
-            // Disclosure.
-            'is-open',
-            'is-collapsed',
-            'is-expanded',
-
-            // Validation.
-            'is-valid',
-            'is-invalid',
-            'is-warning',
-            'is-success',
-            'is-error',
-            'is-info',
-            'is-danger',
-
-            // Position.
-            'is-sticky',
-            'is-pinned',
-            'is-fixed',
-            'is-fullscreen',
-            'is-resizable',
-
-            // Overflow.
-            'is-clipped',
-            'is-scrollable',
-            'is-truncated',
-
-            // Drag.
-            'is-dragging',
-            'is-drop-target',
-            'is-draggable',
-
-            // Overlay.
-            'is-overlay',
-
-            // Focus.
-            'is-clickable',
-            'is-unselectable',
-            'is-focused',
-
-            // Empty.
-            'is-empty',
-        );
+    public function get_classes() {
+        return $this->build_classes();
     }
 }
