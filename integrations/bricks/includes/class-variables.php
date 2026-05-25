@@ -1,7 +1,7 @@
 <?php
 /**
- * Variable registration for the Bricks Builder Global Variable Manager
- * and code editor autocomplete.
+ * Variable registration for the Bricks Builder Variable Manager and
+ * code editor autocomplete.
  *
  * @package SLASHED_Bricks
  */
@@ -13,69 +13,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Variables
  *
- * Registers SLASHED CSS custom properties with Bricks Builder.
+ * Registers SLASHED CSS custom properties with both the Bricks Variable
+ * Manager (picker) and the code editor autocomplete.
  *
  * Strategy
  * --------
- * Bricks 1.9.8+ stores user-managed variables in the `bricks_global_variables`
- * wp_option (categories in `bricks_global_variables_categories`). Both options
- * are read via get_option() inside Bricks' Database::__construct() which runs
- * during theme functions.php load — before after_setup_theme fires. This class
- * must therefore be instantiated at plugins_loaded (handled in slashed-bricks.php)
- * so our option filters are registered before that first read.
+ * Bricks reads global variables from the wp_options row
+ * `bricks_global_variables` (categories from
+ * `bricks_global_variables_categories`). Both options are read via
+ * get_option() during theme initialization.
  *
- * Same as the Colors and Classes modules, we treat SLASHED entries as
- * managed/virtual: inject on read, strip on save, so the integration is the
- * single source of truth and bumping the framework or switching the active
- * CSS bundle keeps the Variable Manager in sync without leaving stale rows
- * in the DB.
+ * We treat SLASHED entries as managed/virtual - the same inject-on-read,
+ * strip-on-save pattern used by the Classes and Colors modules:
  *
- * Naming
- * ------
- * SLASHED variables live in the `--sf-*` namespace. Bricks generates CSS
- * for every entry it has under `:root { --<name>: <value>; }`. If we
- * registered `--sf-color-primary` directly with `value: var(--sf-color-primary)`
- * Bricks would emit `--sf-color-primary: var(--sf-color-primary);` - a
- * circular reference that resolves to the CSS initial value (invalid) and
- * would break every SLASHED token.
+ *   1. On every read of either option, inject our entries.
+ *   2. On every write (save from the UI, import, etc.), strip our entries
+ *      back out so the database never persists them. The integration
+ *      remains the single source of truth.
  *
- * To avoid clobbering the framework's own definitions, the Bricks-registered
- * variables use a `slashed-` prefix and chain back to the SLASHED token:
+ * Each variable is registered under its native name WITHOUT the leading
+ * `--` prefix (e.g. `sf-color-primary`). Bricks automatically prepends
+ * `--` when inserting via the picker, so the user sees and gets
+ * `var(--sf-color-primary)` - the framework's own custom property.
  *
- *   SLASHED defines:  --sf-color-primary: <theme-aware value>;
- *   Bricks emits:     --slashed-color-primary: var(--sf-color-primary);
+ * The `value` field is set to an empty string for every entry. Bricks
+ * skips empty-value variables in its `:root` CSS output, so the
+ * framework's own definitions remain the single source of truth. No
+ * aliases, no duplication, no extra CSS. The Variable Manager becomes a
+ * picker-only integration: users can browse and insert framework tokens
+ * without the plugin emitting any competing declarations.
  *
- * The picker shows `slashed-color-primary`; using it inserts
- * `var(--slashed-color-primary)` into the property, which the cascade
- * resolves through the framework so theme switches and dark mode keep
- * propagating.
- *
- * The code editor autocomplete (`bricks/code/get_code_signatures`) keeps
- * the original `--sf-*` names so users hand-typing CSS still get the
- * framework's native namespace suggested directly.
+ * The code editor autocomplete (bricks/code/get_code_signatures) continues
+ * to list the full `--sf-*` names so authors typing custom CSS see the
+ * framework's native namespace directly.
  */
 class Slashed_Bricks_Variables {
 
     /**
-     * Prefix used on every variable id and category id this integration
-     * injects. Used to identify our entries when stripping on save.
+     * Prefix used on every variable id this integration injects.
+     * Used to identify our entries when stripping on save.
      */
     const ID_PREFIX = 'slashed-';
 
     /**
-     * Prefix used on the user-visible variable name in the picker.
-     * E.g. `--sf-color-primary` becomes `slashed-color-primary`.
-     */
-    const VAR_PREFIX = 'slashed-';
-
-    /**
-     * Prefix used on category ids stored in
-     * `bricks_global_variables_categories`.
+     * Prefix used on every category id this integration injects.
      */
     const CAT_PREFIX = 'slashed-cat-';
 
     /**
-     * Constructor. Register option filters and the code editor signatures filter.
+     * Constructor. Register option filters and code editor hook.
      */
     public function __construct() {
         // Inject SLASHED variables when Bricks reads the option.
@@ -90,18 +76,18 @@ class Slashed_Bricks_Variables {
         add_filter( 'default_option_bricks_global_variables_categories', array( $this, 'inject_categories' ), 20 );
         add_filter( 'pre_update_option_bricks_global_variables_categories', array( $this, 'strip_categories' ), 10, 1 );
 
-        // Code editor autocomplete (real Bricks 1.9.2+ filter; lists the
-        // original --sf-* names so authors typing custom CSS see the
-        // framework's native namespace, not the slashed- alias).
+        // Code editor autocomplete (Bricks 1.9.2+): lists the original
+        // --sf-* names so authors typing custom CSS see the framework's
+        // native namespace directly.
         add_filter( 'bricks/code/get_code_signatures', array( $this, 'register_code_signatures' ) );
     }
 
     // ---------------------------------------------------------------
-    // Inject / strip plumbing.
+    // Variable Manager: inject / strip.
     // ---------------------------------------------------------------
 
     /**
-     * Inject SLASHED variables into the global variables list.
+     * Inject SLASHED variables into the Bricks global variables list.
      *
      * Idempotent: any existing SLASHED-prefixed entries are removed first
      * so multiple read passes don't create duplicates.
@@ -124,13 +110,15 @@ class Slashed_Bricks_Variables {
     }
 
     /**
-     * Remove SLASHED-prefixed variables from a variables array.
+     * Remove SLASHED-prefixed entries from a global variables array.
+     *
+     * Always returns a clean array, even when the option is malformed.
      *
      * @param mixed $variables Value of bricks_global_variables option.
      * @return array
      */
     public function strip_variables( $variables ) {
-        return $this->strip_prefixed( $variables );
+        return $this->strip_prefixed( $variables, self::ID_PREFIX );
     }
 
     /**
@@ -160,16 +148,17 @@ class Slashed_Bricks_Variables {
      * @return array
      */
     public function strip_categories( $categories ) {
-        return $this->strip_prefixed( $categories );
+        return $this->strip_prefixed( $categories, self::CAT_PREFIX );
     }
 
     /**
-     * Shared "strip every entry whose id starts with our prefix" helper.
+     * Shared "strip every entry whose id starts with the given prefix" helper.
      *
-     * @param mixed $entries Possibly malformed list of `{id,...}` entries.
+     * @param mixed  $entries Possibly malformed list of `{id,...}` entries.
+     * @param string $prefix  Prefix to match against.
      * @return array
      */
-    private function strip_prefixed( $entries ) {
+    private function strip_prefixed( $entries, $prefix ) {
         if ( ! is_array( $entries ) ) {
             return array();
         }
@@ -179,7 +168,7 @@ class Slashed_Bricks_Variables {
             if ( is_array( $entry )
                 && isset( $entry['id'] )
                 && is_string( $entry['id'] )
-                && 0 === strpos( $entry['id'], self::ID_PREFIX )
+                && 0 === strpos( $entry['id'], $prefix )
             ) {
                 continue;
             }
@@ -190,17 +179,21 @@ class Slashed_Bricks_Variables {
     }
 
     // ---------------------------------------------------------------
-    // Build the SLASHED entries from the inventory.
+    // Variable Manager: build entries.
     // ---------------------------------------------------------------
 
     /**
-     * Build SLASHED variable entries.
+     * Build SLASHED variable entries from the inventory.
      *
-     * Each SLASHED `--sf-X` becomes a Bricks variable named `slashed-X`
-     * with value `var(--sf-X)`. The chained reference keeps the framework's
-     * own definition authoritative for theme/dark-mode propagation.
+     * Each entry follows the Bricks-native variable shape:
+     *   { id, name, value, category }
      *
-     * Shape per entry: `{ id, name, value, category }`.
+     * - `id` is a stable slashed-* slug so strip_variables() can find it.
+     * - `name` is the native property name WITHOUT the `--` prefix (Bricks
+     *   adds `--` automatically), e.g. `sf-color-primary`.
+     * - `value` is empty string - Bricks skips empty values in :root output,
+     *   so the framework remains the single source of truth.
+     * - `category` references one of our stable category ids.
      *
      * @return array<int, array<string,string>>
      */
@@ -209,11 +202,15 @@ class Slashed_Bricks_Variables {
 
         foreach ( $this->get_variables() as $category => $vars ) {
             $cat_id = self::CAT_PREFIX . sanitize_key( $category );
+
             foreach ( $vars as $var ) {
+                // Strip leading '--' to get the native name Bricks expects.
+                $native_name = ltrim( $var, '-' );
+
                 $entries[] = array(
-                    'id'       => self::ID_PREFIX . sanitize_key( $var ),
-                    'name'     => $this->alias_name( $var ),
-                    'value'    => 'var(' . $var . ')',
+                    'id'       => self::ID_PREFIX . $native_name,
+                    'name'     => $native_name,
+                    'value'    => '',
                     'category' => $cat_id,
                 );
             }
@@ -222,9 +219,9 @@ class Slashed_Bricks_Variables {
         /**
          * Filter the SLASHED variable entries before injection.
          *
-         * @param array $entries Variable entries in the Bricks-native shape.
+         * @param array $entries Variable entries.
          */
-        return apply_filters( 'slashed_bricks/registered_variable_entries', $entries );
+        return apply_filters( 'slashed_bricks/registered_variables', $entries );
     }
 
     /**
@@ -233,46 +230,28 @@ class Slashed_Bricks_Variables {
      * @return array<int, array<string,string>>
      */
     public function build_categories() {
-        $cats = array();
-        foreach ( array_keys( $this->get_variables() ) as $category ) {
-            $cats[] = array(
+        $categories = array();
+
+        foreach ( $this->get_variables() as $category => $vars ) {
+            if ( empty( $vars ) ) {
+                continue;
+            }
+
+            $categories[] = array(
                 'id'   => self::CAT_PREFIX . sanitize_key( $category ),
-                /* translators: %s: variable group name, e.g. "Colors" */
-                'name' => sprintf( __( 'SLASHED %s', 'slashed-bricks' ), $category ),
+                'name' => 'SLASHED ' . $category,
             );
         }
-        return $cats;
-    }
 
-    /**
-     * Convert a SLASHED variable name to its Bricks-side alias.
-     *
-     * Strips the leading `--sf-` (if present) and prepends `slashed-`.
-     *
-     * Examples:
-     *   --sf-color-primary  -> slashed-color-primary
-     *   --sf-space-md       -> slashed-space-md
-     *   --custom-var        -> slashed-custom-var
-     *
-     * @param string $var SLASHED variable name (with leading --).
-     * @return string
-     */
-    private function alias_name( $var ) {
-        $name = substr( (string) $var, 2 ); // strip the canonical `--` prefix
-        if ( 0 === strpos( $name, 'sf-' ) ) {
-            $name = substr( $name, 3 );
-        }
-        return self::VAR_PREFIX . $name;
+        return $categories;
     }
 
     // ---------------------------------------------------------------
-    // Backward-compatible accessors and code editor autocomplete.
+    // Shared variable source.
     // ---------------------------------------------------------------
 
     /**
      * Get all SLASHED CSS variables grouped by category.
-     *
-     * Backward-compatible shape kept for existing filter consumers and tests.
      *
      * @return array<string, string[]> Map of category => variable names.
      */
@@ -280,12 +259,16 @@ class Slashed_Bricks_Variables {
         $variables = Slashed_Bricks_Inventory::get_variables_by_category();
 
         /**
-         * Filter the registered CSS variables (legacy accessor shape).
+         * Filter the registered CSS variables.
          *
          * @param array $variables Map of category => variable names.
          */
-        return apply_filters( 'slashed_bricks/registered_variables', $variables );
+        return apply_filters( 'slashed_bricks/variables', $variables );
     }
+
+    // ---------------------------------------------------------------
+    // Code editor autocomplete.
+    // ---------------------------------------------------------------
 
     /**
      * Register variables for the Bricks code editor autocomplete.

@@ -151,13 +151,14 @@ class Slashed_Bricks_Admin_Page_Svelte {
 			'slashed-bricks-admin-app',
 			'slashedBricksApp',
 			array(
-				'rest'     => array(
+				'rest'           => array(
 					'url'   => esc_url_raw( rest_url( Slashed_Bricks_REST_Controller::NAMESPACE ) ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 				),
-				'tabs'     => $this->admin_page->get_tabs(),
-				'defaults' => Slashed_Bricks_Token_Defaults::get_all(),
-				'settings' => $this->admin_page->get_settings(),
+				'tabs'           => $this->admin_page->get_tabs(),
+				'defaults'       => Slashed_Bricks_Token_Defaults::get_all(),
+				'settings'       => $this->admin_page->get_settings(),
+				'pluginSettings' => $this->admin_page->get_plugin_settings(),
 			)
 		);
 	}

@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-001",
+  "type": "fix",
+  "description": "Fix color palette swatches in Bricks builder by providing resolved hex fallback values. The CSS parser must be extended to extract declared color variable values (not just names), and the Colors class must use those resolved values as the 'hex' field while keeping var() as the 'raw' field.",
+  "status": "in_progress",
+  "steps": [
+    "Step 1: Extend class-css-parser.php to extract variable VALUES in addition to names. Add a new static method `extract_color_variable_values($css)` that returns an associative array mapping --sf-color-* variable names to their declared values. The existing `parse()` method should include a new 'color_values' key in its return. The regex should capture `(--sf-color-[a-zA-Z0-9_-]+)\\s*:\\s*([^;]+);` patterns. This captures the raw declared value (which might be oklch(), color-mix(), var(), light-dark(), etc.).",
+    "Step 2: Update `Slashed_Bricks_CSS_Parser::empty_inventory()` to include a 'color_values' key (empty array) so downstream code doesn't break.",
+    "Step 3: Create a new file `integrations/bricks/includes/class-color-resolver.php` that provides a static method to compute approximate hex fallback values for the color palette. The approach: (a) Parse the @property initial-values from the CSS to get the base oklch() source colors for each brand/status family. (b) For numeric scale steps (50-950), compute approximate color-mix percentages against white (for 50-400) and dark (for 600-950). (c) For alpha steps (a5-a95), use the base color with reduced opacity. (d) For semantic aliases (superlight, xlight, lighter, darker, xdark, superdark, hover, active, subtle, muted, ghost), map them to their corresponding numeric/alpha step. (e) The class needs a pure PHP oklch-to-hex converter (simplified: convert oklch to Lab to XYZ to sRGB to hex). The result is a map of variable-name -> hex-string.",
+    "Step 4: Update `Slashed_Bricks_Inventory` class to expose a new `get_color_hex_map()` static method that returns the resolved hex map. It should call the color resolver with the parsed CSS (or from the local bundle). Cache the result alongside the existing inventory cache. For the fallback inventory case (no CSS available), provide reasonable hardcoded hex values derived from the token defaults.",
+    "Step 5: Update `Slashed_Bricks_Colors::vars_to_palette_colors()` method to accept and use the hex map. Instead of setting both 'hex' and 'raw' to `var(--sf-color-*)`, set 'hex' to the resolved hex fallback from the map (for swatch preview in the builder panel), and 'raw' to `var(--sf-color-*)` (for the actual applied value when a color is selected). If no hex fallback is available for a given variable, fall back to a neutral gray (#808080).",
+    "Step 6: Update the `build_palettes()` method in class-colors.php to fetch the hex map from the inventory and pass it through to `build_palette()` and `vars_to_palette_colors()`.",
+    "Step 7: Require the new class-color-resolver.php in slashed-bricks.php in both `slashed_bricks_data_init()` and `slashed_bricks_init()` functions, before the inventory and colors classes are used."
+  ],
+  "acceptance_criteria": [
+    "class-css-parser.php has a method that extracts color variable values from CSS",
+    "class-color-resolver.php exists and can convert oklch values to hex approximations",
+    "class-color-resolver.php can compute the full color scale (50-950, a5-a95, aliases) from a base oklch color",
+    "class-colors.php sets 'hex' to resolved hex value and 'raw' to var() reference",
+    "All PHP files pass syntax check (php -l)",
+    "The empty_inventory() shape includes 'color_values' key"
+  ],
+  "verification": [
+    "Run `php -l integrations/bricks/includes/class-css-parser.php` and confirm no syntax errors",
+    "Run `php -l integrations/bricks/includes/class-color-resolver.php` and confirm no syntax errors",
+    "Run `php -l integrations/bricks/includes/class-colors.php` and confirm no syntax errors",
+    "Run `php -l integrations/bricks/includes/class-inventory.php` and confirm no syntax errors",
+    "Run `php -l integrations/bricks/slashed-bricks.php` and confirm no syntax errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

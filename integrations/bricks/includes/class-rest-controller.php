@@ -104,6 +104,33 @@ class Slashed_Bricks_REST_Controller {
 				),
 			)
 		);
+
+		register_rest_route(
+			self::NAMESPACE,
+			'/settings',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_settings' ),
+					'permission_callback' => array( $this, 'check_permissions' ),
+				),
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'save_settings' ),
+					'permission_callback' => array( $this, 'check_permissions' ),
+					'args'                => array(
+						'html_font_size' => array(
+							'type'              => 'string',
+							'required'          => true,
+							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => function( $value ) {
+								return in_array( (string) $value, array( '', '100', '62.5' ), true );
+							},
+						),
+					),
+				),
+			)
+		);
 	}
 
 	/**
@@ -200,6 +227,52 @@ class Slashed_Bricks_REST_Controller {
 				'settings' => $all,
 			)
 		);
+	}
+
+	/**
+	 * Get plugin settings via REST.
+	 *
+	 * @param WP_REST_Request $request Incoming request.
+	 * @return WP_REST_Response
+	 */
+	public function get_settings( WP_REST_Request $request ) {
+		$settings = get_option( Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME, array() );
+		if ( ! is_array( $settings ) ) {
+			$settings = array();
+		}
+		return rest_ensure_response( $settings );
+	}
+
+	/**
+	 * Save plugin settings via REST.
+	 *
+	 * Validates that html_font_size is one of the allowed values before
+	 * persisting to the database.
+	 *
+	 * @param WP_REST_Request $request Incoming request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function save_settings( WP_REST_Request $request ) {
+		$html_font_size = (string) $request->get_param( 'html_font_size' );
+
+		$allowed = array( '', '100', '62.5' );
+		if ( ! in_array( $html_font_size, $allowed, true ) ) {
+			return new WP_Error(
+				'slashed_bricks_invalid_font_size',
+				__( 'Invalid html_font_size value. Allowed: empty string, "100", or "62.5".', 'slashed-bricks' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		$settings = get_option( Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME, array() );
+		if ( ! is_array( $settings ) ) {
+			$settings = array();
+		}
+
+		$settings['html_font_size'] = $html_font_size;
+		update_option( Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME, $settings );
+
+		return rest_ensure_response( $settings );
 	}
 
 	/**

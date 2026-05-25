@@ -40,6 +40,20 @@ class Slashed_Bricks_Admin_Page {
 	private $tabs = array();
 
 	/**
+	 * Option name for storing plugin-level settings (separate from token overrides).
+	 *
+	 * @var string
+	 */
+	const SETTINGS_OPTION_NAME = 'slashed_bricks_settings';
+
+	/**
+	 * Nonce action for saving plugin settings.
+	 *
+	 * @var string
+	 */
+	const SETTINGS_NONCE_ACTION = 'slashed_bricks_save_settings';
+
+	/**
 	 * Constructor. Register hooks.
 	 */
 	public function __construct() {
@@ -57,6 +71,7 @@ class Slashed_Bricks_Admin_Page {
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'admin_post_slashed_bricks_save', array( $this, 'handle_save' ) );
+		add_action( 'admin_post_slashed_bricks_save_settings', array( $this, 'handle_save_settings' ) );
 	}
 
 	/**
@@ -185,6 +200,48 @@ class Slashed_Bricks_Admin_Page {
 		update_option( self::OPTION_NAME, $settings );
 		wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&tab=' . $active_tab . '&message=saved' ) );
 		exit;
+	}
+
+	/**
+	 * Handle form submission for saving plugin settings.
+	 */
+	public function handle_save_settings() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'Unauthorized access.', 'slashed-bricks' ) );
+		}
+
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), self::SETTINGS_NONCE_ACTION ) ) {
+			wp_die( esc_html__( 'Security check failed.', 'slashed-bricks' ) );
+		}
+
+		$html_font_size = isset( $_POST['html_font_size'] ) ? sanitize_text_field( wp_unslash( $_POST['html_font_size'] ) ) : '';
+
+		// Only allow known values.
+		$allowed = array( '', '100', '62.5' );
+		if ( ! in_array( $html_font_size, $allowed, true ) ) {
+			$html_font_size = '';
+		}
+
+		$settings = get_option( self::SETTINGS_OPTION_NAME, array() );
+		if ( ! is_array( $settings ) ) {
+			$settings = array();
+		}
+
+		$settings['html_font_size'] = $html_font_size;
+		update_option( self::SETTINGS_OPTION_NAME, $settings );
+
+		wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=settings_saved' ) );
+		exit;
+	}
+
+	/**
+	 * Get plugin settings (non-token behavioral settings).
+	 *
+	 * @return array
+	 */
+	public function get_plugin_settings() {
+		$settings = get_option( self::SETTINGS_OPTION_NAME, array() );
+		return is_array( $settings ) ? $settings : array();
 	}
 
 	/**
@@ -426,6 +483,29 @@ class Slashed_Bricks_Admin_Page {
 				</button>
 			</form>
 
+			<div class="slashed-plugin-settings">
+				<h2><?php esc_html_e( 'Plugin Settings', 'slashed-bricks' ); ?></h2>
+				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+					<input type="hidden" name="action" value="slashed_bricks_save_settings">
+					<?php wp_nonce_field( self::SETTINGS_NONCE_ACTION ); ?>
+					<?php $plugin_settings = $this->get_plugin_settings(); ?>
+					<table class="form-table"><tbody>
+						<tr>
+							<th scope="row"><label for="html_font_size"><?php esc_html_e( 'HTML Font Size', 'slashed-bricks' ); ?></label></th>
+							<td>
+								<select id="html_font_size" name="html_font_size">
+									<option value="" <?php selected( isset( $plugin_settings['html_font_size'] ) ? $plugin_settings['html_font_size'] : '', '' ); ?>><?php esc_html_e( 'Default (don\'t override)', 'slashed-bricks' ); ?></option>
+									<option value="100" <?php selected( isset( $plugin_settings['html_font_size'] ) ? $plugin_settings['html_font_size'] : '', '100' ); ?>><?php esc_html_e( 'Force 100%', 'slashed-bricks' ); ?></option>
+									<option value="62.5" <?php selected( isset( $plugin_settings['html_font_size'] ) ? $plugin_settings['html_font_size'] : '', '62.5' ); ?>><?php esc_html_e( 'Force 62.5%', 'slashed-bricks' ); ?></option>
+								</select>
+								<p class="description"><?php esc_html_e( 'Override the HTML root font-size. Use this if Bricks forces a font-size you don\'t want.', 'slashed-bricks' ); ?></p>
+							</td>
+						</tr>
+					</tbody></table>
+					<?php submit_button( __( 'Save Plugin Settings', 'slashed-bricks' ) ); ?>
+				</form>
+			</div>
+
 			<?php $this->render_live_preview(); ?>
 		</div>
 		<?php
@@ -439,6 +519,8 @@ class Slashed_Bricks_Admin_Page {
 	private function render_notices( $message ) {
 		if ( 'saved' === $message ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings saved.', 'slashed-bricks' ) . '</p></div>';
+		} elseif ( 'settings_saved' === $message ) {
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Plugin settings saved.', 'slashed-bricks' ) . '</p></div>';
 		} elseif ( 'reset' === $message ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'All settings reset to defaults.', 'slashed-bricks' ) . '</p></div>';
 		} elseif ( 'reset_section' === $message ) {

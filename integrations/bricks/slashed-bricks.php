@@ -149,6 +149,7 @@ function slashed_bricks_data_init() {
     }
 
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';
@@ -175,6 +176,7 @@ function slashed_bricks_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-generator.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
 

@@ -33,7 +33,7 @@ class Slashed_Bricks_CSS_Parser {
 	 * Parse a CSS string into an inventory of variables and class selectors.
 	 *
 	 * @param string $css Raw CSS source.
-	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
+	 * @return array{variables: string[], sf_classes: string[], is_classes: string[], color_values: array}
 	 */
 	public static function parse( $css ) {
 		if ( ! is_string( $css ) || '' === $css ) {
@@ -48,9 +48,10 @@ class Slashed_Bricks_CSS_Parser {
 		}
 
 		return array(
-			'variables'  => self::extract_declared_variables( $stripped ),
-			'sf_classes' => self::extract_class_names( $stripped, 'sf-' ),
-			'is_classes' => self::extract_class_names( $stripped, 'is-' ),
+			'variables'    => self::extract_declared_variables( $stripped ),
+			'sf_classes'   => self::extract_class_names( $stripped, 'sf-' ),
+			'is_classes'   => self::extract_class_names( $stripped, 'is-' ),
+			'color_values' => self::extract_color_variable_values( $stripped ),
 		);
 	}
 
@@ -100,13 +101,61 @@ class Slashed_Bricks_CSS_Parser {
 	/**
 	 * Return an empty inventory shape. Helps callers avoid undefined keys.
 	 *
-	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
+	 * @return array{variables: string[], sf_classes: string[], is_classes: string[], color_values: array}
 	 */
 	public static function empty_inventory() {
 		return array(
-			'variables'  => array(),
-			'sf_classes' => array(),
-			'is_classes' => array(),
+			'variables'    => array(),
+			'sf_classes'   => array(),
+			'is_classes'   => array(),
+			'color_values' => array(),
 		);
+	}
+
+	/**
+	 * Extract --sf-color-* variable names and their declared values.
+	 *
+	 * Captures both regular declarations (--sf-color-X: value;) and
+	 * @property initial-value declarations. Returns an associative array
+	 * mapping variable names to their raw declared values.
+	 *
+	 * @param string $css CSS with comments removed.
+	 * @return array<string, string> Map of variable name to declared value.
+	 */
+	private static function extract_color_variable_values( $css ) {
+		$values = array();
+
+		// Match @property declarations with initial-value.
+		// e.g. @property --sf-color-primary-light { ... initial-value: oklch(0.45 0.20 264); }
+		if ( preg_match_all(
+			'/@property\s+(--sf-color-[a-zA-Z0-9_-]+)\s*\{[^}]*initial-value:\s*([^;]+);/i',
+			$css,
+			$matches,
+			PREG_SET_ORDER
+		) ) {
+			foreach ( $matches as $match ) {
+				$values[ trim( $match[1] ) ] = trim( $match[2] );
+			}
+		}
+
+		// Match regular declarations: --sf-color-X: value;
+		if ( preg_match_all(
+			'/(--sf-color-[a-zA-Z0-9_-]+)\s*:\s*([^;]+);/',
+			$css,
+			$matches,
+			PREG_SET_ORDER
+		) ) {
+			foreach ( $matches as $match ) {
+				$name  = trim( $match[1] );
+				$value = trim( $match[2] );
+				// Don't overwrite @property initial-values with regular declarations
+				// unless we don't already have a value.
+				if ( ! isset( $values[ $name ] ) ) {
+					$values[ $name ] = $value;
+				}
+			}
+		}
+
+		return $values;
 	}
 }
