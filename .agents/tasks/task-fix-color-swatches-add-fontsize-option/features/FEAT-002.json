@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Add an HTML font-size override option to the plugin settings. Bricks sometimes forces html { font-size: 62.5% } regardless of user settings. The plugin should offer an option to force the html font-size to 100% or 62.5%, or leave it alone (default).",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Step 1: Add a new WordPress option key. Use the existing 'slashed_bricks_tokens' option with a new top-level section 'general' (or store it as a separate option 'slashed_bricks_html_font_size'). Given the existing architecture stores everything in 'slashed_bricks_tokens', add a new section. However, since this is not a token but a plugin behavior setting, use a separate option: 'slashed_bricks_settings' with key 'html_font_size' having values '', '100', or '62.5'. Store as a separate option to keep token overrides and plugin settings cleanly separated.",
     "Step 2: Add the font-size setting UI to the legacy admin page (class-admin-page.php). Add a new section at the top of render_page() (before the tab navigation) or as a new 'General' tab. Since the existing tabs are all token sections and this is a plugin-behavior setting, add it as a settings panel above the tabs. Render a 'Plugin Settings' section with a <select> for HTML Font Size with three options: 'Default (don't override)' (value ''), 'Force 100%' (value '100'), 'Force 62.5%' (value '62.5'). Handle save/read via the existing form submission mechanism but targeting the new option.",
@@ -29,5 +29,5 @@
     "Run `php -l integrations/bricks/slashed-bricks.php` and confirm no syntax errors"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All PHP files pass syntax checks. Implementation adds the SETTINGS_OPTION_NAME and SETTINGS_NONCE_ACTION constants to class-admin-page.php which are referenced by the REST controller. The get_plugin_settings() method is public on the admin page class for reuse by the Svelte page."
 }
