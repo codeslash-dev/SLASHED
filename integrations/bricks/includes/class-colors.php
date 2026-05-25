@@ -64,18 +64,42 @@ class Slashed_Bricks_Colors {
      * Constructor. Register hooks.
      */
     public function __construct() {
-        // Official Bricks builder filter — fires when the builder assembles
-        // the color picker, regardless of how the option is stored/cached.
-        add_filter( 'bricks/builder/color_palette', array( $this, 'inject_palettes' ), 20 );
+        // Official Bricks filter (bricks/builder/color_palette) — expects a
+        // flat array of {hex, rgb?} objects, per the Bricks Academy docs.
+        add_filter( 'bricks/builder/color_palette', array( $this, 'inject_builder_colors' ), 20 );
 
-        // Fallback: inject when WordPress reads the option directly (e.g.
-        // REST, imports, or older Bricks versions that call get_option).
+        // option_* filters inject the named-palette group structure that
+        // appears in the palette dropdown (id/name/colors shape). Kept as a
+        // secondary path for REST, imports, and older Bricks versions.
         add_filter( 'option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
         add_filter( 'default_option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
 
         // Strip SLASHED palettes before they are persisted back to the DB.
-        // pre_update_option_* signature is ($value, $old_value, $option).
         add_filter( 'pre_update_option_bricks_color_palette', array( $this, 'strip_palettes' ), 10, 1 );
+    }
+
+    /**
+     * Inject SLASHED color variables into the Bricks builder flat color
+     * palette (the swatch strip in the color picker).
+     *
+     * Called via bricks/builder/color_palette which expects a flat array of
+     * {hex, rgb?} objects. We pass var(--sf-color-*) references so swatches
+     * always reflect the live theme — the SLASHED bundle is loaded in the
+     * editor iframe so the browser resolves the variables when painting swatches.
+     *
+     * @param mixed $colors Existing flat palette from Bricks.
+     * @return array
+     */
+    public function inject_builder_colors( $colors ) {
+        if ( ! is_array( $colors ) ) {
+            $colors = array();
+        }
+
+        foreach ( Slashed_Bricks_Inventory::get_color_variables() as $var ) {
+            $colors[] = array( 'hex' => 'var(' . $var . ')' );
+        }
+
+        return $colors;
     }
 
     /**
