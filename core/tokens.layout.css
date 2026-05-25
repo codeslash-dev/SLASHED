@@ -61,12 +61,16 @@
        ---------------------------------------------------------- */
     --sf-sidebar-gap:           var(--sf-space-gap);
     --sf-sidebar-min-width:     50%;           /* content column minimum */
-    --sf-sidebar-width:         18rem;         /* sidebar panel default size */
-    /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-sidebar-width.
-       Alias kept so existing override:
+    /* The canonical name --sf-sidebar-width reads through to the
+       deprecated --sf-sidebar-width-default below, so existing
+       overrides of the old name keep flowing through unchanged:
          :root { --sf-sidebar-width-default: 20rem }
-       continues to flow through. */
-    --sf-sidebar-width-default: var(--sf-sidebar-width);
+       The , 18rem fallback in the var() chain means dropping the
+       deprecated declaration in 0.5 is a one-line removal — the
+       new name keeps resolving to the same default. */
+    --sf-sidebar-width:         var(--sf-sidebar-width-default, 18rem);
+    /* @deprecated 0.4.0, removed in 0.5.0 — prefer --sf-sidebar-width. */
+    --sf-sidebar-width-default: 18rem;         /* sidebar panel default size */
 
     /* ----------------------------------------------------------
        Switcher
@@ -76,8 +80,14 @@
 
     /* ----------------------------------------------------------
        Grid (auto-fill, breakpoint-free)
+
+       The canonical name --sf-grid-min reads through to the
+       deprecated --sf-grid-min-default below, so existing
+       overrides of the old name keep flowing through unchanged.
+       See the deprecated declaration further down for the full
+       migration note.
        ---------------------------------------------------------- */
-    --sf-grid-min:         16rem;
+    --sf-grid-min:         var(--sf-grid-min-default, 16rem);
     --sf-grid-gap:         var(--sf-space-gap);
 
     --sf-grid-min-xs:      10rem;
@@ -85,11 +95,13 @@
     --sf-grid-min-m:       16rem;
     --sf-grid-min-l:       20rem;
     --sf-grid-min-xl:      24rem;
-    /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-grid-min.
-       Alias kept so existing override:
+    /* @deprecated 0.4.0, removed in 0.5.0 — prefer --sf-grid-min.
+       Old name retained as the source so existing override:
          :root { --sf-grid-min-default: 14rem }
-       continues to flow through. */
-    --sf-grid-min-default: var(--sf-grid-min);
+       continues to flow through. The , 16rem fallback in the
+       --sf-grid-min chain (above) ensures dropping this declaration
+       in 0.5 is a one-line removal. */
+    --sf-grid-min-default: 16rem;
 
     /* ----------------------------------------------------------
        Cover

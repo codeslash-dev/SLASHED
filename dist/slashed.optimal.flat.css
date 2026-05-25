@@ -864,7 +864,12 @@
   --sf-component-pad: var(--sf-space-m);  /* standard component padding */
   --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
   --sf-field-required-marker: " *";
-  --sf-link-external-marker: "\2197";  /* ↗ — consumed by .sf-link-external */
+  /* Leading space is baked into the default so consumers can fully
+     disable the indicator with `--sf-link-external-marker: ""` —
+     without the space a bare "" still left a stray space after the
+     link text. Override with your own glyph (include leading space
+     if you want one): `:root { --sf-link-external-marker: " →" }`. */
+  --sf-link-external-marker: " \2197";  /* " ↗" — consumed by .sf-link-external */
 
 
   /* ----------------------------------------------------------
@@ -965,12 +970,16 @@
      ---------------------------------------------------------- */
   --sf-sidebar-gap:           var(--sf-space-gap);
   --sf-sidebar-min-width:     50%;           /* content column minimum */
-  --sf-sidebar-width:         18rem;         /* sidebar panel default size */
-  /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-sidebar-width.
-     Alias kept so existing override:
+  /* The canonical name --sf-sidebar-width reads through to the
+     deprecated --sf-sidebar-width-default below, so existing
+     overrides of the old name keep flowing through unchanged:
        :root { --sf-sidebar-width-default: 20rem }
-     continues to flow through. */
-  --sf-sidebar-width-default: var(--sf-sidebar-width);
+     The , 18rem fallback in the var() chain means dropping the
+     deprecated declaration in 0.5 is a one-line removal — the
+     new name keeps resolving to the same default. */
+  --sf-sidebar-width:         var(--sf-sidebar-width-default, 18rem);
+  /* @deprecated 0.4.0, removed in 0.5.0 — prefer --sf-sidebar-width. */
+  --sf-sidebar-width-default: 18rem;         /* sidebar panel default size */
 
   /* ----------------------------------------------------------
      Switcher
@@ -980,8 +989,14 @@
 
   /* ----------------------------------------------------------
      Grid (auto-fill, breakpoint-free)
+
+     The canonical name --sf-grid-min reads through to the
+     deprecated --sf-grid-min-default below, so existing
+     overrides of the old name keep flowing through unchanged.
+     See the deprecated declaration further down for the full
+     migration note.
      ---------------------------------------------------------- */
-  --sf-grid-min:         16rem;
+  --sf-grid-min:         var(--sf-grid-min-default, 16rem);
   --sf-grid-gap:         var(--sf-space-gap);
 
   --sf-grid-min-xs:      10rem;
@@ -989,11 +1004,13 @@
   --sf-grid-min-m:       16rem;
   --sf-grid-min-l:       20rem;
   --sf-grid-min-xl:      24rem;
-  /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-grid-min.
-     Alias kept so existing override:
+  /* @deprecated 0.4.0, removed in 0.5.0 — prefer --sf-grid-min.
+     Old name retained as the source so existing override:
        :root { --sf-grid-min-default: 14rem }
-     continues to flow through. */
-  --sf-grid-min-default: var(--sf-grid-min);
+     continues to flow through. The , 16rem fallback in the
+     --sf-grid-min chain (above) ensures dropping this declaration
+     in 0.5 is a one-line removal. */
+  --sf-grid-min-default: 16rem;
 
   /* ----------------------------------------------------------
      Cover
@@ -2258,13 +2275,25 @@ td, th {
 
    Selection on gradient text inherits the clipping — that's a
    known browser limitation across all engines, accepted as-is.
+
+   The `color: transparent` declaration is gated behind a feature
+   query for background-clip:text. Without that gate, an engine
+   that ignored background-clip:text would render the text fully
+   invisible (transparent over no clipped fill). All current
+   evergreen browsers support either the standard or the
+   -webkit- prefixed form, so the supports check is a defensive
+   guard rather than a real-world fallback.
    ---------------------------------------------------------- */
 .sf-text-gradient {
   background-image: var(--sf-gradient-primary);
   /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .sf-text-gradient {
+    color: transparent;
+  }
 }
 
 /* -- External link indication --------------------------------
@@ -2272,15 +2301,17 @@ td, th {
    element via class — for global auto-detection, write your
    own rule in unlayered CSS:
      a[rel~="external"]:not(.no-external)::after {
-       content: " " var(--sf-link-external-marker);
+       content: var(--sf-link-external-marker);
      }
 
-   Marker is tokenised so consumers can swap to "→", "⤴", or
-   unset (empty string disables it):
+   Marker is tokenised so consumers can swap to " →", " ⤴", or
+   unset (empty string fully disables it — the default token
+   value bakes the leading space in, so `""` leaves nothing
+   after the link):
      :root { --sf-link-external-marker: "" }
    ---------------------------------------------------------- */
 .sf-link-external::after {
-  content:         " " var(--sf-link-external-marker);
+  content:         var(--sf-link-external-marker);
   display:         inline-block;
   font-size:       0.85em;
   text-decoration: none;
@@ -2693,19 +2724,35 @@ td, th {
 
      Browser support — animation-timeline is shipping in Chrome 115+
      and Firefox 145+ (Nov 2026). Safari does not yet support it
-     (tracked at WebKit bug 264057); on those engines the animation
-     falls back to a one-shot run on page load (still a graceful
-     entrance, just not scroll-bound). */
+     (tracked at WebKit bug 264057); on those engines the @supports
+     block below is skipped, so the rule falls back to a one-shot
+     time-driven animation playing once at --sf-duration-slow.
+     animation-duration is set unconditionally because without it
+     a non-supporting engine would default to 0s and snap to the
+     end state instantly — there'd be no visible entrance at all.
+     Where animation-timeline is supported the timeline drives
+     progress and the duration is ignored. */
   .sf-entrance--fade,
   .sf-entrance--fade-up,
   .sf-entrance--fade-down,
   .sf-entrance--fade-left,
   .sf-entrance--fade-right,
   .sf-entrance--scale-up {
-    animation-timeline: view();
-    animation-range:    var(--sf-scroll-timeline-range-start, entry 0%)
-                        var(--sf-scroll-timeline-range-end,   cover 30%);
-    animation-fill-mode: both;
+    animation-duration:        var(--sf-duration-slow);
+    animation-timing-function: var(--sf-ease-out);
+    animation-fill-mode:       both;
+  }
+  @supports (animation-timeline: view()) {
+    .sf-entrance--fade,
+    .sf-entrance--fade-up,
+    .sf-entrance--fade-down,
+    .sf-entrance--fade-left,
+    .sf-entrance--fade-right,
+    .sf-entrance--scale-up {
+      animation-timeline: view();
+      animation-range:    var(--sf-scroll-timeline-range-start, entry 0%)
+                          var(--sf-scroll-timeline-range-end,   cover 30%);
+    }
   }
   .sf-entrance--fade        { animation-name: sf-fade-in; }
   .sf-entrance--fade-up     { animation-name: sf-slide-in-up; }
@@ -3595,10 +3642,10 @@ textarea {
 select {
   padding-inline-end: calc(var(--sf-space-s) + 1.5em);
 }
-/* Single-line selects get a chevron. `currentColor` inside a data-URI
-   background SVG does NOT inherit the host colour cross-browser, so the
-   stroke is swapped by colour-scheme via light-dark() — this also tracks
-   scoped [data-theme] regions, which flip color-scheme.
+/* Single-line selects get a chevron. CSS custom properties and `currentColor`
+   don't propagate into data-URI SVG backgrounds, so the stroke uses the CSS
+   system color `FieldText` — it resolves against the element's `color-scheme`
+   and therefore tracks scoped [data-theme] regions automatically.
 
    Override path: to use a custom chevron colour or icon, override
    background-image on `select:not([multiple], [size])` in your own CSS. */
@@ -3606,10 +3653,7 @@ select:not([multiple], [size]) {
   background-repeat: no-repeat;
   background-position: right var(--sf-space-s) center;
   background-size: 1em;
-  background-image: light-dark(
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23eee' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E")
-  );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='FieldText' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
 }
 /* RTL: mirror the chevron to the inline-end (left) edge. */
 :dir(rtl) select:not([multiple], [size]) {

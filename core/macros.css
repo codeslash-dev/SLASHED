@@ -216,13 +216,25 @@
 
      Selection on gradient text inherits the clipping — that's a
      known browser limitation across all engines, accepted as-is.
+
+     The `color: transparent` declaration is gated behind a feature
+     query for background-clip:text. Without that gate, an engine
+     that ignored background-clip:text would render the text fully
+     invisible (transparent over no clipped fill). All current
+     evergreen browsers support either the standard or the
+     -webkit- prefixed form, so the supports check is a defensive
+     guard rather than a real-world fallback.
      ---------------------------------------------------------- */
   .sf-text-gradient {
     background-image: var(--sf-gradient-primary);
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+  }
+  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    .sf-text-gradient {
+      color: transparent;
+    }
   }
 
   /* -- External link indication --------------------------------
@@ -230,15 +242,17 @@
      element via class — for global auto-detection, write your
      own rule in unlayered CSS:
        a[rel~="external"]:not(.no-external)::after {
-         content: " " var(--sf-link-external-marker);
+         content: var(--sf-link-external-marker);
        }
 
-     Marker is tokenised so consumers can swap to "→", "⤴", or
-     unset (empty string disables it):
+     Marker is tokenised so consumers can swap to " →", " ⤴", or
+     unset (empty string fully disables it — the default token
+     value bakes the leading space in, so `""` leaves nothing
+     after the link):
        :root { --sf-link-external-marker: "" }
      ---------------------------------------------------------- */
   .sf-link-external::after {
-    content:         " " var(--sf-link-external-marker);
+    content:         var(--sf-link-external-marker);
     display:         inline-block;
     font-size:       0.85em;
     text-decoration: none;

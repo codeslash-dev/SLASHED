@@ -857,7 +857,12 @@
     --sf-component-pad: var(--sf-space-m);  /* standard component padding */
     --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
     --sf-field-required-marker: " *";
-    --sf-link-external-marker: "\2197";  /* ↗ — consumed by .sf-link-external */
+    /* Leading space is baked into the default so consumers can fully
+       disable the indicator with `--sf-link-external-marker: ""` —
+       without the space a bare "" still left a stray space after the
+       link text. Override with your own glyph (include leading space
+       if you want one): `:root { --sf-link-external-marker: " →" }`. */
+    --sf-link-external-marker: " \2197";  /* " ↗" — consumed by .sf-link-external */
 
 
     /* ----------------------------------------------------------
