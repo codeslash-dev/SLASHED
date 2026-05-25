@@ -21,20 +21,40 @@ class Slashed_Bricks_Enqueue {
      * Constructor. Register hooks.
      */
     public function __construct() {
-        // Frontend and editor iframe both fire wp_enqueue_scripts.
+        // Frontend AND the Bricks builder canvas iframe AND the Bricks
+        // builder admin chrome all fire wp_enqueue_scripts. The third one
+        // is the gotcha: loading the framework CSS into the builder panel
+        // would override Bricks' own UI styles (icons, colors, fonts). The
+        // handler below skips that case via bricks_is_builder_main().
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_styles' ) );
 
-        // Enqueue in the Bricks editor panel (admin side) for variable detection.
+        // Reserved hook for intentional builder-panel tweaks (assets/editor.css).
+        // Currently a no-op stylesheet; left wired up so future panel styling
+        // can be dropped in without re-plumbing the hook chain.
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_editor_styles' ) );
     }
 
     /**
      * Enqueue SLASHED CSS on the frontend and in the Bricks editor iframe.
      *
-     * When Bricks renders its builder iframe, it fires wp_enqueue_scripts
-     * within that context, so this single hook covers both cases.
+     * Bricks fires wp_enqueue_scripts in three contexts:
+     *   1. Public frontend         - we want our CSS here.
+     *   2. Builder canvas iframe   - we want our CSS here (preview rendering,
+     *                                color-picker swatch resolution, etc.).
+     *   3. Builder admin chrome    - we DO NOT want our CSS here; loading
+     *                                resets / themes / base typography would
+     *                                bleed into Bricks' own UI and visibly
+     *                                change icons and colors in the toolbars.
+     *
+     * bricks_is_builder_main() returns true only on context (3), so the early
+     * return below is the canonical Bricks pattern for "frontend + canvas, not
+     * the panel" - documented in Bricks Academy under Child Theme guidance.
      */
     public function enqueue_frontend_styles() {
+        if ( function_exists( 'bricks_is_builder_main' ) && bricks_is_builder_main() ) {
+            return;
+        }
+
         $css_url = slashed_bricks_get_css_url();
 
         if ( '' === $css_url ) {

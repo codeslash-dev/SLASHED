@@ -12,152 +12,329 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Colors
  *
- * Registers SLASHED color tokens with Bricks Builder's global color palette.
+ * Registers SLASHED color tokens with Bricks Builder as a set of separate,
+ * named color palettes that appear under the "Color palettes" dropdown of
+ * the Bricks color picker - distinct from the site's global colors.
  *
- * Note: The 'raw' color type (used instead of 'hex' for var() references)
- * requires Bricks 1.9.2+. Older versions may not render swatches correctly.
+ * Strategy
+ * --------
+ * Bricks stores user-managed color palettes in the wp_options row
+ * `bricks_color_palette`. We treat SLASHED palettes as managed/virtual:
+ *
+ *   1. On every read of that option (option_bricks_color_palette /
+ *      default_option_bricks_color_palette), we inject our palettes into
+ *      the array Bricks sees.
+ *   2. On every write (pre_update_option_bricks_color_palette), we strip
+ *      our palettes back out so the database never persists them. That
+ *      way the integration is the single source of truth - bumping the
+ *      framework or changing the active bundle automatically updates
+ *      what Bricks shows, without leaving stale rows behind on the site.
+ *
+ * Each palette's swatch references the framework variable directly via
+ * var(--sf-color-X). Modern browsers resolve var() inside the picker
+ * preview because the SLASHED bundle is loaded into the editor iframe.
+ * This keeps swatches in sync with theme customization and dark mode.
+ *
+ * Note: the 'raw' field is included alongside 'hex' for forward
+ * compatibility with Bricks 1.9.2+, which prefers 'raw' when present.
  */
 class Slashed_Bricks_Colors {
+
+    /**
+     * Prefix used on every palette and color id this integration injects.
+     * Used to identify our entries when stripping on save.
+     */
+    const PALETTE_ID_PREFIX = 'slashed-';
+
+    /**
+     * Brand family slugs in canonical display order.
+     *
+     * @var string[]
+     */
+    private static $brands = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+
+    /**
+     * Status family slugs.
+     *
+     * @var string[]
+     */
+    private static $statuses = array( 'success', 'warning', 'error', 'info', 'danger' );
 
     /**
      * Constructor. Register hooks.
      */
     public function __construct() {
-        add_filter( 'bricks/setup/control_options', array( $this, 'register_global_colors' ) );
+        // Inject SLASHED palettes when Bricks (or anything else) reads the
+        // bricks_color_palette option. Run late so any other plugin's
+        // additions are preserved.
+        add_filter( 'option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
+        add_filter( 'default_option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
+
+        // Strip SLASHED palettes before they are persisted back to the DB.
+        // pre_update_option_* signature is ($value, $old_value, $option).
+        add_filter( 'pre_update_option_bricks_color_palette', array( $this, 'strip_palettes' ), 10, 1 );
     }
 
     /**
-     * Register SLASHED colors with Bricks global color palette.
+     * Inject SLASHED palettes into the Bricks palette list.
      *
-     * @param array $control_options Existing control options.
-     * @return array Modified control options.
+     * Idempotent: any existing SLASHED-prefixed palettes are removed first
+     * so multiple read passes don't create duplicates.
+     *
+     * @param mixed $palettes Existing value of bricks_color_palette option.
+     * @return array
      */
-    public function register_global_colors( $control_options ) {
-        $colors = $this->get_colors();
-
-        if ( ! isset( $control_options['globalColors'] ) ) {
-            $control_options['globalColors'] = array();
+    public function inject_palettes( $palettes ) {
+        if ( ! is_array( $palettes ) ) {
+            $palettes = array();
         }
 
-        foreach ( $colors as $color_entry ) {
-            $control_options['globalColors'][] = $color_entry;
+        $palettes = $this->strip_palettes( $palettes );
+
+        foreach ( $this->build_palettes() as $palette ) {
+            $palettes[] = $palette;
         }
 
-        return $control_options;
+        return $palettes;
     }
 
     /**
-     * Get all SLASHED colors formatted for Bricks.
+     * Remove SLASHED-prefixed palettes from a palette array.
      *
-     * @return array Array of color entries.
+     * Always returns a clean array, even when the option is malformed
+     * (e.g. a fresh install with no row, a serialized scalar from a
+     * misbehaving migration, or a corrupted value). pre_update_option_*
+     * hooks must never widen the stored type from array to scalar - that
+     * would break Bricks' own loader, which iterates over the option.
+     *
+     * @param mixed $palettes Value of bricks_color_palette option.
+     * @return array
      */
-    public function get_colors() {
-        $colors     = array();
-        $categories = $this->get_color_categories();
+    public function strip_palettes( $palettes ) {
+        if ( ! is_array( $palettes ) ) {
+            return array();
+        }
+
+        $kept = array();
+        foreach ( $palettes as $palette ) {
+            if ( is_array( $palette )
+                && isset( $palette['id'] )
+                && is_string( $palette['id'] )
+                && 0 === strpos( $palette['id'], self::PALETTE_ID_PREFIX )
+            ) {
+                continue;
+            }
+            $kept[] = $palette;
+        }
+
+        return array_values( $kept );
+    }
+
+    /**
+     * Build the SLASHED palette set from the current inventory.
+     *
+     * Returns one palette per brand family plus combined Status and
+     * Semantic palettes - so users get a small, navigable picker rather
+     * than one 275-swatch wall of color.
+     *
+     * @return array<int, array{id:string,name:string,colors:array}>
+     */
+    public function build_palettes() {
+        $vars = Slashed_Bricks_Inventory::get_color_variables();
+
+        $by_brand = array_fill_keys( self::$brands, array() );
+        $status   = array();
+        $semantic = array();
+
+        foreach ( $vars as $var ) {
+            $key = substr( $var, strlen( '--sf-color-' ) );
+            if ( '' === $key ) {
+                continue;
+            }
+            $first_dash = strpos( $key, '-' );
+            $first      = false === $first_dash ? $key : substr( $key, 0, $first_dash );
+
+            if ( in_array( $first, self::$brands, true ) ) {
+                $by_brand[ $first ][] = $var;
+            } elseif ( in_array( $first, self::$statuses, true ) ) {
+                $status[] = $var;
+            } else {
+                $semantic[] = $var;
+            }
+        }
+
+        $palettes = array();
+
+        foreach ( self::$brands as $brand ) {
+            if ( empty( $by_brand[ $brand ] ) ) {
+                continue;
+            }
+            $palettes[] = $this->build_palette(
+                $brand,
+                'SLASHED · ' . ucfirst( $brand ),
+                $by_brand[ $brand ]
+            );
+        }
+
+        if ( ! empty( $status ) ) {
+            $palettes[] = $this->build_palette( 'status', 'SLASHED · Status', $status );
+        }
+
+        if ( ! empty( $semantic ) ) {
+            $palettes[] = $this->build_palette( 'semantic', 'SLASHED · Semantic', $semantic );
+        }
 
         /**
-         * Filter which color categories to include.
+         * Filter the SLASHED palettes before injection.
          *
-         * @param array $categories Associative array of category => color definitions.
+         * @param array $palettes List of palette arrays.
+         */
+        return apply_filters( 'slashed_bricks/registered_palettes', $palettes );
+    }
+
+    /**
+     * Build a single Bricks-shaped palette entry.
+     *
+     * @param string   $palette_slug Internal slug (used for id).
+     * @param string   $palette_name Display name.
+     * @param string[] $vars         Variable names (e.g. "--sf-color-primary-50").
+     * @return array{id:string,name:string,colors:array}
+     */
+    private function build_palette( $palette_slug, $palette_name, $vars ) {
+        return array(
+            'id'     => self::PALETTE_ID_PREFIX . $palette_slug,
+            'name'   => $palette_name,
+            'colors' => $this->vars_to_palette_colors( $palette_slug, $vars ),
+        );
+    }
+
+    /**
+     * Convert a list of --sf-color-* variable names into Bricks palette
+     * color entries.
+     *
+     * Each entry uses var(--sf-color-X) for both 'hex' (the legacy field
+     * Bricks reads in older versions) and 'raw' (the preferred field in
+     * Bricks 1.9.2+). The picker resolves these via the SLASHED bundle
+     * loaded in the editor iframe, so swatches always reflect the live
+     * theme - including dark mode and any user token overrides from the
+     * SLASHED admin page.
+     *
+     * @param string   $palette_slug Internal slug.
+     * @param string[] $vars         Variable names.
+     * @return array<int, array<string,string>>
+     */
+    private function vars_to_palette_colors( $palette_slug, $vars ) {
+        $colors = array();
+        foreach ( $vars as $var ) {
+            $key = substr( $var, strlen( '--sf-color-' ) );
+            if ( '' === $key ) {
+                continue;
+            }
+            $reference = 'var(' . $var . ')';
+            $colors[]  = array(
+                'id'   => self::PALETTE_ID_PREFIX . $palette_slug . '-' . $this->slugify( $key ),
+                'name' => $this->humanize_key( $key ),
+                'hex'  => $reference,
+                'raw'  => $reference,
+            );
+        }
+        return $colors;
+    }
+
+    /**
+     * Convert a color key into a human-readable label.
+     *
+     * Examples:
+     *   "primary"          -> "Primary"
+     *   "primary-50"       -> "Primary 50"
+     *   "primary-a20"      -> "Primary A20"
+     *   "text--secondary"  -> "Text Secondary"
+     *
+     * @param string $key Color key.
+     * @return string
+     */
+    private function humanize_key( $key ) {
+        $normalized = str_replace( '--', '-', $key );
+        $parts      = array_filter( explode( '-', $normalized ), 'strlen' );
+
+        $label_parts = array();
+        foreach ( $parts as $part ) {
+            if ( preg_match( '/^[0-9]+$/', $part ) ) {
+                $label_parts[] = $part;
+            } elseif ( preg_match( '/^a[0-9]+$/i', $part ) ) {
+                $label_parts[] = strtoupper( $part );
+            } else {
+                $label_parts[] = ucfirst( $part );
+            }
+        }
+
+        return implode( ' ', $label_parts );
+    }
+
+    /**
+     * Convert a color key into a stable id-safe slug.
+     *
+     * @param string $key Color key.
+     * @return string
+     */
+    private function slugify( $key ) {
+        $normalized = str_replace( '--', '-', $key );
+        $normalized = preg_replace( '/[^a-zA-Z0-9-]/', '', $normalized );
+        return strtolower( trim( $normalized, '-' ) );
+    }
+
+    // ---------------------------------------------------------------
+    // Backward-compatible flat color list (kept for filters/tests).
+    // ---------------------------------------------------------------
+
+    /**
+     * Get every SLASHED color as a flat array.
+     *
+     * Mirrors the pre-palette shape so existing callers and the
+     * 'slashed_bricks/registered_colors' / 'slashed_bricks/color_categories'
+     * filters keep working.
+     *
+     * @return array<int, array<string,mixed>>
+     */
+    public function get_colors() {
+        $palettes = $this->build_palettes();
+
+        // Re-shape into the legacy "categories" map.
+        $categories = array();
+        foreach ( $palettes as $palette ) {
+            $cat = $palette['name'];
+            if ( ! isset( $categories[ $cat ] ) ) {
+                $categories[ $cat ] = array();
+            }
+            foreach ( $palette['colors'] as $color ) {
+                $categories[ $cat ][] = array(
+                    'id'    => $color['id'],
+                    'name'  => $color['name'],
+                    'color' => array( 'raw' => isset( $color['raw'] ) ? $color['raw'] : $color['hex'] ),
+                );
+            }
+        }
+
+        /**
+         * Filter which palette categories to include.
+         *
+         * @param array $categories Map of palette name => color entries.
          */
         $categories = apply_filters( 'slashed_bricks/color_categories', $categories );
 
-        foreach ( $categories as $category => $category_colors ) {
-            foreach ( $category_colors as $color ) {
-                $color['category'] = $category;
-                $colors[]          = $color;
+        $colors = array();
+        foreach ( $categories as $category => $entries ) {
+            foreach ( $entries as $entry ) {
+                $entry['category'] = $category;
+                $colors[]          = $entry;
             }
         }
 
         /**
          * Filter the registered colors before passing to Bricks.
          *
-         * @param array $colors Array of color entry arrays.
+         * @param array $colors Flat list of color entries.
          */
         return apply_filters( 'slashed_bricks/registered_colors', $colors );
-    }
-
-    /**
-     * Get color categories with their color definitions.
-     *
-     * @return array
-     */
-    private function get_color_categories() {
-        $categories = array();
-
-        // Brand colors with palette scales.
-        $brands = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
-        $scale  = array( '50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950' );
-
-        foreach ( $brands as $brand ) {
-            $category_name = 'SLASHED ' . ucfirst( $brand );
-            $brand_colors  = array();
-
-            // Base color.
-            $brand_colors[] = array(
-                'id'    => 'sf-' . $brand,
-                'name'  => 'SF ' . ucfirst( $brand ),
-                'color' => array( 'raw' => 'var(--sf-color-' . $brand . ')' ),
-            );
-
-            // Scale colors.
-            foreach ( $scale as $step ) {
-                $brand_colors[] = array(
-                    'id'    => 'sf-' . $brand . '-' . $step,
-                    'name'  => 'SF ' . ucfirst( $brand ) . ' ' . $step,
-                    'color' => array( 'raw' => 'var(--sf-color-' . $brand . '-' . $step . ')' ),
-                );
-            }
-
-            $categories[ $category_name ] = $brand_colors;
-        }
-
-        // Status colors.
-        $status_colors = array();
-        $statuses      = array( 'success', 'warning', 'error', 'info', 'danger' );
-
-        foreach ( $statuses as $status ) {
-            $status_colors[] = array(
-                'id'    => 'sf-' . $status,
-                'name'  => 'SF ' . ucfirst( $status ),
-                'color' => array( 'raw' => 'var(--sf-color-' . $status . ')' ),
-            );
-        }
-
-        $categories['SLASHED Status'] = $status_colors;
-
-        // Semantic colors.
-        $semantic_colors = array();
-        $semantic_map    = array(
-            'text'            => 'Text',
-            'text--secondary' => 'Text Secondary',
-            'text--muted'     => 'Text Muted',
-            'heading'         => 'Heading',
-            'bg'              => 'Background',
-            'surface'         => 'Surface',
-            'well'            => 'Well',
-            'raised'          => 'Raised',
-            'overlay'         => 'Overlay',
-            'inverse'         => 'Inverse',
-            'border'          => 'Border',
-            'border--subtle'  => 'Border Subtle',
-            'border--strong'  => 'Border Strong',
-            'link'            => 'Link',
-            'link--hover'     => 'Link Hover',
-            'link--active'    => 'Link Active',
-            'link--visited'   => 'Link Visited',
-        );
-
-        foreach ( $semantic_map as $token => $label ) {
-            $semantic_colors[] = array(
-                'id'    => 'sf-' . str_replace( '--', '-', $token ),
-                'name'  => 'SF ' . $label,
-                'color' => array( 'raw' => 'var(--sf-color-' . $token . ')' ),
-            );
-        }
-
-        $categories['SLASHED Semantic'] = $semantic_colors;
-
-        return $categories;
     }
 }

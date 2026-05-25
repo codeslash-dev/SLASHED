@@ -111,8 +111,20 @@ function slashed_bricks_is_bricks_active() {
 function slashed_bricks_admin_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
 
-    new Slashed_Bricks_Admin_Page();
+    // Legacy jQuery admin page (production). Owns option storage and the
+    // sanitization helpers both UIs share.
+    $admin_page = new Slashed_Bricks_Admin_Page();
+
+    // Svelte SPA admin page (POC). Lives at SLASHED -> Tokens (v2) and
+    // talks to the REST controller below for save/reset.
+    new Slashed_Bricks_Admin_Page_Svelte( $admin_page );
+
+    // REST endpoints powering the Svelte SPA. Reuses the legacy admin
+    // page's sanitizer so saves through either UI normalize identically.
+    new Slashed_Bricks_REST_Controller( $admin_page );
 }
 if ( is_admin() ) {
     add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
@@ -129,6 +141,8 @@ function slashed_bricks_init() {
 
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-generator.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';

@@ -25,6 +25,7 @@ class Slashed_Bricks_Token_Defaults {
 	public static function get_all() {
 		return array(
 			'colors'     => self::get_colors(),
+			'contrast'   => self::get_contrast(),
 			'typography' => self::get_typography(),
 			'spacing'    => self::get_spacing(),
 			'radius'     => self::get_radius(),
@@ -48,6 +49,15 @@ class Slashed_Bricks_Token_Defaults {
 	/**
 	 * Get color token defaults.
 	 *
+	 * Brand and status defaults are stored as oklch() strings (the
+	 * authoring format the framework was designed around). The
+	 * accompanying *_hex_hints maps provide approximate HEX equivalents
+	 * used purely for the admin color picker preview - so the picker
+	 * has something concrete to display when no override is saved.
+	 *
+	 * Hex hints are intentionally rough sRGB approximations; they are
+	 * never written to CSS unless the user explicitly picks them.
+	 *
 	 * @return array
 	 */
 	public static function get_colors() {
@@ -66,6 +76,21 @@ class Slashed_Bricks_Token_Defaults {
 				'error'   => 'oklch(0.62 0.20 35)',
 				'info'    => 'oklch(0.48 0.15 240)',
 				'danger'  => 'oklch(0.48 0.24 12)',
+			),
+			'brand_hex_hints' => array(
+				'primary'   => '#4338ca',
+				'secondary' => '#1e293b',
+				'tertiary'  => '#7c3aed',
+				'action'    => '#0891b2',
+				'neutral'   => '#64748b',
+				'base'      => '#fafafa',
+			),
+			'status_hex_hints' => array(
+				'success' => '#16a34a',
+				'warning' => '#ca8a04',
+				'error'   => '#dc2626',
+				'info'    => '#2563eb',
+				'danger'  => '#dc2626',
 			),
 		);
 	}
@@ -178,6 +203,27 @@ class Slashed_Bricks_Token_Defaults {
 			'high'   => 500,
 			'top'    => 900,
 			'max'    => 9999,
+		);
+	}
+
+	/**
+	 * Get contrast / opacity / focus-ring token defaults.
+	 *
+	 * Cross-cutting visual fine-tuning knobs that don't belong to any
+	 * one token family. Defaults mirror what core/tokens.css declares
+	 * so the admin placeholders match what the framework would do
+	 * without any overrides at all.
+	 *
+	 * @return array
+	 */
+	public static function get_contrast() {
+		return array(
+			'contrast_bias'      => 0,
+			'contrast_threshold' => 0.6,
+			'opacity_disabled'   => 0.45,
+			'focus_ring_width'   => 2,
+			'focus_ring_offset'  => 2,
+			'focus_ring_style'   => 'solid',
 		);
 	}
 }

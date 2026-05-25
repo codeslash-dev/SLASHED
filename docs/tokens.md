@@ -248,7 +248,7 @@ rebrand workflow.
 | `--sf-leading-relaxed` | `1.625` |
 | `--sf-leading-snug` | `1.3` |
 | `--sf-leading-tight` | `1.1` |
-| `--sf-link-external-marker` | `"\2197"` |
+| `--sf-link-external-marker` | `" \2197"` |
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
 | `--sf-motion-scale` | `1` |
@@ -401,8 +401,8 @@ rebrand workflow.
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |
-| `--sf-grid-min` | `16rem` |
-| `--sf-grid-min-default` | `var(--sf-grid-min)` |
+| `--sf-grid-min` | `var(--sf-grid-min-default, 16rem)` |
+| `--sf-grid-min-default` | `16rem` |
 | `--sf-grid-min-l` | `20rem` |
 | `--sf-grid-min-m` | `16rem` |
 | `--sf-grid-min-s` | `13rem` |
@@ -419,8 +419,8 @@ rebrand workflow.
 | `--sf-reel-item-width` | `max-content` |
 | `--sf-sidebar-gap` | `var(--sf-space-gap)` |
 | `--sf-sidebar-min-width` | `50%` |
-| `--sf-sidebar-width` | `18rem` |
-| `--sf-sidebar-width-default` | `var(--sf-sidebar-width)` |
+| `--sf-sidebar-width` | `var(--sf-sidebar-width-default, 18rem)` |
+| `--sf-sidebar-width-default` | `18rem` |
 | `--sf-space-content` | `var(--sf-content-gap)` |
 | `--sf-space-gap` | `var(--sf-gap)` |
 | `--sf-stack-gap` | `var(--sf-space-content)` |
