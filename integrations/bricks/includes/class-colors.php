@@ -101,12 +101,18 @@ class Slashed_Bricks_Colors {
     /**
      * Remove SLASHED-prefixed palettes from a palette array.
      *
+     * Always returns a clean array, even when the option is malformed
+     * (e.g. a fresh install with no row, a serialized scalar from a
+     * misbehaving migration, or a corrupted value). pre_update_option_*
+     * hooks must never widen the stored type from array to scalar - that
+     * would break Bricks' own loader, which iterates over the option.
+     *
      * @param mixed $palettes Value of bricks_color_palette option.
      * @return array
      */
     public function strip_palettes( $palettes ) {
         if ( ! is_array( $palettes ) ) {
-            return $palettes;
+            return array();
         }
 
         $kept = array();
