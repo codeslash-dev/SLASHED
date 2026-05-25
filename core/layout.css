@@ -20,6 +20,27 @@
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
+  /* Collapse modifier — when two adjacent sections share this modifier,
+     they redistribute padding 50/50 across the boundary so total spacing
+     stays one full padding gap (instead of two). Works regardless of
+     background color: each section always has half its padding on
+     the boundary side, so content never touches a color edge.
+
+     Use when sections are siblings outside a .sf-section-group wrapper
+     and may share OR differ in background.
+
+     Note: uses --sf-section-pad (the canonical alias = m by default).
+     For other sizes, set --sf-section-pad locally on each section:
+       <section class="sf-section sf-section--l sf-section--collapse"
+                style="--sf-section-pad: var(--sf-section-pad--l)">
+     ---------------------------------------------------------- */
+  .sf-section--collapse:has(+ .sf-section--collapse) {
+    padding-block-end: calc(var(--sf-section-pad) / 2);
+  }
+  .sf-section--collapse + .sf-section--collapse {
+    padding-block-start: calc(var(--sf-section-pad) / 2);
+  }
+
   /* -- Divider -------------------------------------------------
      Standalone separator primitive. Token-driven; pairs with the
      `--sf-divider-*` tokens and mirrors the `hr` element default.
@@ -149,7 +170,7 @@
   }
 
   .sf-sidebar > :first-child {
-    flex-basis: var(--sf-sidebar-width, var(--sf-sidebar-width-default));
+    flex-basis: var(--sf-sidebar-width);
     flex-grow:  1;
   }
 
@@ -166,7 +187,7 @@
   }
 
   .sf-sidebar--right > :last-child {
-    flex-basis: var(--sf-sidebar-width, var(--sf-sidebar-width-default));
+    flex-basis: var(--sf-sidebar-width);
     flex-grow:  1;
   }
 

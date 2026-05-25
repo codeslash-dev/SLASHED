@@ -61,6 +61,45 @@
     .sf-scale-up       { animation: var(--sf-animation-scale-up); }
     .sf-scale-down     { animation: var(--sf-animation-scale-down); }
 
+    /* Scroll-driven entrance effects — element animates into view
+       as it enters the viewport. Uses CSS scroll-driven animations
+       via animation-timeline: view(). Range tokens
+       (--sf-scroll-timeline-range-{start,end}, declared in
+       core/tokens.css) control where the animation starts and ends
+       along the scroll progress.
+
+       Example:
+         <article class="sf-entrance--fade-up">…</article>
+
+       Reduced-motion: gated by the no-preference wrapper above, so
+       these are inert when the user opts out. The core animation
+       (translate/opacity) still composes correctly with reduced-motion
+       neutralisation in accessibility.css if a consumer accidentally
+       writes them outside the gate.
+
+       Browser support — animation-timeline is shipping in Chrome 115+
+       and Firefox 145+ (Nov 2026). Safari does not yet support it
+       (tracked at WebKit bug 264057); on those engines the animation
+       falls back to a one-shot run on page load (still a graceful
+       entrance, just not scroll-bound). */
+    .sf-entrance--fade,
+    .sf-entrance--fade-up,
+    .sf-entrance--fade-down,
+    .sf-entrance--fade-left,
+    .sf-entrance--fade-right,
+    .sf-entrance--scale-up {
+      animation-timeline: view();
+      animation-range:    var(--sf-scroll-timeline-range-start, entry 0%)
+                          var(--sf-scroll-timeline-range-end,   cover 30%);
+      animation-fill-mode: both;
+    }
+    .sf-entrance--fade        { animation-name: sf-fade-in; }
+    .sf-entrance--fade-up     { animation-name: sf-slide-in-up; }
+    .sf-entrance--fade-down   { animation-name: sf-slide-in-down; }
+    .sf-entrance--fade-left   { animation-name: sf-slide-in-left; }
+    .sf-entrance--fade-right  { animation-name: sf-slide-in-right; }
+    .sf-entrance--scale-up    { animation-name: sf-scale-up; }
+
   }
 
   /* Keyframes — inert until referenced, so they live outside the

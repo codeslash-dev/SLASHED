@@ -50,12 +50,6 @@ test.describe('Selector coverage', () => {
       'sf-nav',
       // .is-visible is the logical inverse of .is-invisible — not separately demoed
       'is-visible',
-      // Macro added in v0.3.0; not yet exercised in the kitchen-sink demo
-      // (low priority — covered exhaustively by tests/macros.spec.js).
-      'sf-overflow-fade',
-      'sf-no-tap-highlight',
-      // a11y pattern added in v0.3.0; demo coverage tracked separately.
-      'sf-clickable-parent',
       // Modifier added in v0.3.0; behaviour covered by tests/tokens.spec.js
       // (its 4 tokens) and the box-sizing math is purely declarative.
       'sf-icon--boxed',
