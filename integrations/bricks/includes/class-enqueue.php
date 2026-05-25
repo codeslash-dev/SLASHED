@@ -84,6 +84,18 @@ class Slashed_Bricks_Enqueue {
         if ( Slashed_Bricks_CSS_Generator::has_overrides() ) {
             wp_add_inline_style( 'slashed-framework', Slashed_Bricks_CSS_Generator::get_override_css() );
         }
+
+        // Inject HTML font-size override if configured.
+        $plugin_settings = get_option( 'slashed_bricks_settings', array() );
+        if ( is_array( $plugin_settings ) && ! empty( $plugin_settings['html_font_size'] ) ) {
+            $font_size = $plugin_settings['html_font_size'];
+            if ( '100' === $font_size || '62.5' === $font_size ) {
+                wp_add_inline_style(
+                    'slashed-framework',
+                    'html { font-size: ' . $font_size . '% !important; }'
+                );
+            }
+        }
     }
 
     /**
