@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
-  "ignoreFiles": ["dist/**", "node_modules/**"],
+  "ignoreFiles": ["dist/**", "node_modules/**", "integrations/bricks/assets/admin-app/**"],
   "rules": {
     "color-function-notation": "modern",
     "alpha-value-notation": "number",

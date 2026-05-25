@@ -3450,10 +3450,10 @@
   select {
     padding-inline-end: calc(var(--sf-space-s) + 1.5em);
   }
-  /* Single-line selects get a chevron. `currentColor` inside a data-URI
-     background SVG does NOT inherit the host colour cross-browser, so the
-     stroke is swapped by colour-scheme via light-dark() — this also tracks
-     scoped [data-theme] regions, which flip color-scheme.
+  /* Single-line selects get a chevron. CSS custom properties and `currentColor`
+     don't propagate into data-URI SVG backgrounds, so the stroke uses the CSS
+     system color `FieldText` — it resolves against the element's `color-scheme`
+     and therefore tracks scoped [data-theme] regions automatically.
 
      Override path: to use a custom chevron colour or icon, override
      background-image on `select:not([multiple], [size])` in your own CSS. */
@@ -3461,10 +3461,7 @@
     background-repeat: no-repeat;
     background-position: right var(--sf-space-s) center;
     background-size: 1em;
-    background-image: light-dark(
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23eee' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E")
-    );
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='FieldText' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
   }
   /* RTL: mirror the chevron to the inline-end (left) edge. */
   :dir(rtl) select:not([multiple], [size]) {
