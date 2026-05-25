@@ -144,7 +144,7 @@ if ( is_admin() ) {
  */
 function slashed_bricks_data_init() {
     // Bail early on non-Bricks sites to avoid loading classes needlessly.
-    if ( 'bricks' !== get_option( 'template' ) ) {
+    if ( 'bricks' !== strtolower( (string) get_option( 'template', '' ) ) ) {
         return;
     }
 
