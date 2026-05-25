@@ -14,7 +14,7 @@ A WordPress plugin that integrates the [SLASHED](https://github.com/codeslash-de
 
 - WordPress 6.0+
 - PHP 7.4+
-- Bricks Builder 1.9.2+
+- Bricks Builder 1.9.2+ (Variables require 1.9.8+; Classes require 1.9.5+)
 - SLASHED CSS framework (included via the `dist/slashed.optimal.css` bundle)
 
 ## Installation

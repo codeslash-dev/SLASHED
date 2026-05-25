@@ -201,7 +201,7 @@ class Slashed_Bricks_Variables {
     public function build_variables() {
         $entries = array();
 
-        foreach ( Slashed_Bricks_Inventory::get_variables_by_category() as $category => $vars ) {
+        foreach ( $this->get_variables() as $category => $vars ) {
             $cat_id = self::CAT_PREFIX . sanitize_key( $category );
             foreach ( $vars as $var ) {
                 $entries[] = array(
@@ -228,10 +228,11 @@ class Slashed_Bricks_Variables {
      */
     public function build_categories() {
         $cats = array();
-        foreach ( array_keys( Slashed_Bricks_Inventory::get_variables_by_category() ) as $category ) {
+        foreach ( array_keys( $this->get_variables() ) as $category ) {
             $cats[] = array(
                 'id'   => self::CAT_PREFIX . sanitize_key( $category ),
-                'name' => 'SLASHED ' . $category,
+                /* translators: %s: variable group name, e.g. "Colors" */
+                'name' => sprintf( __( 'SLASHED %s', 'slashed-bricks' ), $category ),
             );
         }
         return $cats;
@@ -251,7 +252,7 @@ class Slashed_Bricks_Variables {
      * @return string
      */
     private function alias_name( $var ) {
-        $name = ltrim( (string) $var, '-' );
+        $name = substr( (string) $var, 2 ); // strip the canonical `--` prefix
         if ( 0 === strpos( $name, 'sf-' ) ) {
             $name = substr( $name, 3 );
         }

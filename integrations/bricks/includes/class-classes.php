@@ -218,8 +218,8 @@ class Slashed_Bricks_Classes {
      */
     public function build_categories() {
         return array(
-            array( 'id' => self::CATEGORY_LAYOUT, 'name' => 'SLASHED Layout' ),
-            array( 'id' => self::CATEGORY_STATE,  'name' => 'SLASHED State' ),
+            array( 'id' => self::CATEGORY_LAYOUT, 'name' => __( 'SLASHED Layout', 'slashed-bricks' ) ),
+            array( 'id' => self::CATEGORY_STATE,  'name' => __( 'SLASHED State', 'slashed-bricks' ) ),
         );
     }
 
