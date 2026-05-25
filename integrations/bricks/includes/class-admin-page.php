@@ -188,6 +188,35 @@ class Slashed_Bricks_Admin_Page {
 	}
 
 	/**
+	 * Public proxy to sanitize_section() for callers outside this class
+	 * (e.g. the REST controller used by the Svelte admin page).
+	 *
+	 * Keeping the underlying method private preserves the existing
+	 * encapsulation of the legacy form handler while still letting both
+	 * UIs share one sanitization path - critical so saves through either
+	 * surface produce identical option contents.
+	 *
+	 * @param string $section Section slug.
+	 * @param array  $data    Raw form data.
+	 * @return array Sanitized data.
+	 */
+	public function sanitize_section_public( $section, $data ) {
+		return $this->sanitize_section( $section, is_array( $data ) ? $data : array() );
+	}
+
+	/**
+	 * Public read-only accessor for the registered tab map.
+	 *
+	 * Used by the REST controller to validate incoming section slugs
+	 * against the same whitelist the legacy form enforces.
+	 *
+	 * @return array<string,string>
+	 */
+	public function get_tabs() {
+		return $this->tabs;
+	}
+
+	/**
 	 * Sanitize a section's input values.
 	 *
 	 * @param string $section Section slug.
