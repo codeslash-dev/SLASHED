@@ -506,7 +506,7 @@ class Slashed_Bricks_Inventory {
 			return Slashed_Bricks_CSS_Parser::empty_inventory();
 		}
 
-		$key    = self::TRANSIENT_PREFIX . md5( 'path:' . $path . ':' . $mtime );
+		$key    = self::TRANSIENT_PREFIX . md5( 'path:' . $path . ':' . $mtime . ':' . SLASHED_BRICKS_VERSION );
 		$cached = get_transient( $key );
 		if ( is_array( $cached ) && isset( $cached['variables'] ) ) {
 			return $cached;
@@ -529,7 +529,7 @@ class Slashed_Bricks_Inventory {
 	 * @return array Inventory shape (may be empty on network failure).
 	 */
 	private static function parse_url_with_cache( $url ) {
-		$key    = self::TRANSIENT_PREFIX . md5( 'url:' . $url );
+		$key    = self::TRANSIENT_PREFIX . md5( 'url:' . $url . ':' . SLASHED_BRICKS_VERSION );
 		$cached = get_transient( $key );
 		if ( is_array( $cached ) && isset( $cached['variables'] ) ) {
 			return $cached;

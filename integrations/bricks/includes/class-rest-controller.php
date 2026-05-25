@@ -123,6 +123,9 @@ class Slashed_Bricks_REST_Controller {
 							'type'              => 'string',
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => function( $value ) {
+								return in_array( (string) $value, array( '', '100', '62.5' ), true );
+							},
 						),
 					),
 				),

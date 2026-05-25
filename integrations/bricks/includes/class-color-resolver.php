@@ -18,6 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Pure resolver. Accepts parsed color_values from the CSS parser and returns
  * a flat map of --sf-color-* variable names to hex color strings suitable
  * for the Bricks color picker swatch preview.
+ *
+ * Note: The hex values produced here are intentional approximations for the
+ * builder panel swatch preview, not pixel-perfect replicas of browser-rendered
+ * color-mix(). The oklch-to-hex conversion is accurate, but the scale mixing
+ * uses a simplified linear interpolation in sRGB gamma space rather than the
+ * perceptually uniform OKLab space that CSS color-mix() uses. This trade-off
+ * keeps the implementation dependency-free and fast while providing visually
+ * adequate swatches for the color picker UI.
  */
 class Slashed_Bricks_Color_Resolver {
 
@@ -317,10 +325,11 @@ class Slashed_Bricks_Color_Resolver {
 	}
 
 	/**
-	 * Mix two RGB colors at a given ratio.
+	 * Mix two RGB colors at a given ratio via linear interpolation in sRGB gamma space.
 	 *
-	 * Simulates color-mix(in oklab, colorA pct%, colorB).
-	 * The percentage represents how much of colorA is in the result.
+	 * This is a simplified approximation of CSS color-mix(in oklab, ...) behaviour,
+	 * suitable for generating swatch preview hex values. The percentage represents
+	 * how much of colorA is in the result.
 	 *
 	 * @param array $rgb_a First color [r, g, b] (0-255).
 	 * @param array $rgb_b Second color [r, g, b] (0-255).
