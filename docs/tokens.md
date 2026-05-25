@@ -249,6 +249,7 @@ rebrand workflow.
 | `--sf-leading-snug` | `1.3` |
 | `--sf-leading-tight` | `1.1` |
 | `--sf-link-external-marker` | `" \2197"` |
+| `--sf-lumlocker` | `0.65` |
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
 | `--sf-motion-scale` | `1` |
@@ -366,7 +367,6 @@ rebrand workflow.
 | `--sf-transition-shadow` | `box-shadow var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-slow` | `all var(--sf-duration-slow) var(--sf-ease-in-out)` |
 | `--sf-transition-transform` | `transform var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-unified-lightness` | `0.65` |
 | `--sf-z-base` | `0` |
 | `--sf-z-below` | `-1` |
 | `--sf-z-high` | `500` |

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "source": "dist/slashed.optimal.css",
-    "generated_at": "2026-05-25T16:16:33.544Z",
+    "generated_at": "2026-05-25T16:36:46.266Z",
     "counts": {
       "variables": 607,
       "sf_classes": 143,
@@ -475,6 +475,7 @@
     "--sf-leading-tight",
     "--sf-line-clamp",
     "--sf-link-external-marker",
+    "--sf-lumlocker",
     "--sf-mask-scrim-end",
     "--sf-mask-scrim-start",
     "--sf-motion-scale",
@@ -607,7 +608,6 @@
     "--sf-transition-slow",
     "--sf-transition-transform",
     "--sf-truncate-suffix",
-    "--sf-unified-lightness",
     "--sf-z-base",
     "--sf-z-below",
     "--sf-z-high",
