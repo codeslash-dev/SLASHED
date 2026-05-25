@@ -12,28 +12,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Colors
  *
- * Registers SLASHED color tokens with Bricks Builder as a set of separate,
- * named color palettes that appear under the "Color palettes" dropdown of
- * the Bricks color picker - distinct from the site's global colors.
+ * Registers SLASHED color tokens with Bricks Builder as a set of named color
+ * palettes that appear under the Color Manager palette dropdown.
  *
  * Strategy
  * --------
- * Bricks stores user-managed color palettes in the wp_options row
- * `bricks_color_palette`. We treat SLASHED palettes as managed/virtual:
+ * Bricks stores color palettes in the wp_options row `bricks_color_palette`
+ * as an array of `{id, name, colors:[{id,name,hex}]}` palette-group objects.
+ * We treat SLASHED palettes as managed/virtual:
  *
- *   1. On every read of that option (option_bricks_color_palette /
- *      default_option_bricks_color_palette), we inject our palettes into
- *      the array Bricks sees.
- *   2. On every write (pre_update_option_bricks_color_palette), we strip
- *      our palettes back out so the database never persists them. That
- *      way the integration is the single source of truth - bumping the
- *      framework or changing the active bundle automatically updates
- *      what Bricks shows, without leaving stale rows behind on the site.
+ *   1. On every read of the option (option_bricks_color_palette /
+ *      default_option_bricks_color_palette) we inject our palette groups.
+ *      The plugin is registered early (plugins_loaded) so our filters are
+ *      in place before Bricks' Database::__construct() reads the option.
+ *   2. On every write (pre_update_option_bricks_color_palette) we strip
+ *      our palettes back out so the DB never persists them. The plugin
+ *      remains the single source of truth.
  *
- * Each palette's swatch references the framework variable directly via
- * var(--sf-color-X). Modern browsers resolve var() inside the picker
- * preview because the SLASHED bundle is loaded into the editor iframe.
- * This keeps swatches in sync with theme customization and dark mode.
+ * Each color swatch references the framework variable via var(--sf-color-X).
+ * The SLASHED bundle loaded in the editor iframe resolves the var() reference
+ * so swatches track the live theme including dark mode and token overrides.
  *
  * Note: the 'raw' field is included alongside 'hex' for forward
  * compatibility with Bricks 1.9.2+, which prefers 'raw' when present.
@@ -64,14 +62,17 @@ class Slashed_Bricks_Colors {
      * Constructor. Register hooks.
      */
     public function __construct() {
-        // Inject SLASHED palettes when Bricks (or anything else) reads the
-        // bricks_color_palette option. Run late so any other plugin's
-        // additions are preserved.
+        // Inject SLASHED named palette groups when Bricks reads the palette
+        // option. This populates the Color Manager dropdown with organized,
+        // labeled palettes (Primary, Secondary, …) rather than anonymous
+        // swatches. The bricks/builder/color_palette filter is intentionally
+        // not used here: per the Bricks forum that filter cannot assign names
+        // — "id and name are generated after it is applied" — making it
+        // unsuitable for Color Manager integration.
         add_filter( 'option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
         add_filter( 'default_option_bricks_color_palette', array( $this, 'inject_palettes' ), 20 );
 
         // Strip SLASHED palettes before they are persisted back to the DB.
-        // pre_update_option_* signature is ($value, $old_value, $option).
         add_filter( 'pre_update_option_bricks_color_palette', array( $this, 'strip_palettes' ), 10, 1 );
     }
 

@@ -19,9 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Strategy
  * --------
  * Bricks reads global classes from the wp_options row `bricks_global_classes`
- * (and class categories from `bricks_global_classes_categories`). We treat
- * SLASHED entries as managed/virtual - the same pattern the Colors module
- * uses for the color palette option:
+ * (categories from `bricks_global_classes_categories`). Both options are read
+ * via get_option() inside Bricks' Database::__construct() which runs during
+ * theme functions.php load — before after_setup_theme fires. This class must
+ * therefore be instantiated at plugins_loaded (handled in slashed-bricks.php)
+ * so our option filters are registered before that first read.
+ *
+ * We treat SLASHED entries as managed/virtual:
  *
  *   1. On every read of either option, inject our entries.
  *   2. On every write (save from the UI, import, etc.), strip our entries
