@@ -117,9 +117,17 @@ class Slashed_Bricks_Inventory {
 		foreach ( array_keys( $base ) as $key ) {
 			// color_values is an associative map, not a sortable list.
 			if ( 'color_values' === $key ) {
-				$base[ $key ] = isset( $inventory[ $key ] ) && is_array( $inventory[ $key ] )
+				$raw_map = isset( $inventory[ $key ] ) && is_array( $inventory[ $key ] )
 					? $inventory[ $key ]
 					: array();
+				$normalized = array();
+				foreach ( $raw_map as $name => $value ) {
+					if ( ! is_string( $name ) || ! is_scalar( $value ) ) {
+						continue;
+					}
+					$normalized[ $name ] = trim( (string) $value );
+				}
+				$base[ $key ] = $normalized;
 				continue;
 			}
 			$list = isset( $inventory[ $key ] ) && is_array( $inventory[ $key ] )
