@@ -71,3 +71,38 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm test
+
+  bricks-admin-app-freshness:
+    # Verify that the committed Svelte SPA bundle in
+    # integrations/bricks/assets/admin-app/ is in sync with the source
+    # under integrations/bricks/admin-app/src/. Mirrors the existing
+    # docs-freshness pattern: rebuild, diff, and fail if anything moves.
+    #
+    # Why we keep the built bundle in git rather than building at install
+    # time: copy-installs of the plugin (downloading the integration as a
+    # ZIP, unpacking into wp-content/plugins) need to work without Node.
+    # The trade-off is exactly this freshness check.
+    name: Verify Bricks admin SPA bundle is fresh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: integrations/bricks/admin-app/package-lock.json
+      - run: npm ci
+        working-directory: integrations/bricks/admin-app
+      - run: npm run build
+        working-directory: integrations/bricks/admin-app
+      - name: Assert built bundle matches source
+        # We diff only app.js and app.css; the .map sourcemap is built
+        # too but its bytes can vary across Node minor versions even when
+        # the source is unchanged, which would generate spurious failures.
+        run: |
+          git diff --exit-code \
+            integrations/bricks/assets/admin-app/app.js \
+            integrations/bricks/assets/admin-app/app.css \
+            || (echo "::error::Bricks admin SPA bundle is stale - run 'npm install && npm run build' inside integrations/bricks/admin-app/ and commit the updated assets/admin-app/app.{js,css}" && exit 1)

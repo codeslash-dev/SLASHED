@@ -6,6 +6,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- **Bricks integration: admin UI rewritten in Svelte 5.** The
+  top-level "SLASHED" admin page (`slashed_bricks` slug) now mounts a
+  Svelte single-page app instead of the previous jQuery / `admin-post`
+  form. Token storage shape and the `slashed_bricks_tokens`
+  `wp_option` are unchanged, so saved settings carry over without
+  migration. The new UI is JS-required; users who explicitly need a
+  no-JS form can opt in to the legacy page (see Added below).
+
+### Added
+
+- **Bricks integration: `slashed_bricks/enable_legacy_admin` filter.**
+  Re-exposes the legacy jQuery form as a "Classic admin" submenu
+  under "SLASHED" when set to true. Defaults to false. The legacy
+  page is scheduled for removal in a future release; the filter is
+  an opt-in escape hatch, not a long-term toggle.
+- **Bricks integration: helper classes** `Slashed_Bricks_Token_Store`,
+  `Slashed_Bricks_Token_Sanitizer`, and `Slashed_Bricks_Tab_Registry`
+  centralise option I/O, sanitization, and the tab list so every
+  admin surface (legacy form, Svelte SPA, REST controller) shares
+  one source of truth. `Slashed_Bricks_Admin_Page::OPTION_NAME`,
+  `SETTINGS_OPTION_NAME`, `get_settings()`, `get_plugin_settings()`,
+  `get_tabs()`, and `sanitize_section_public()` are kept as
+  backwards-compat proxies.
+- **CI: `bricks-admin-app-freshness` job** that rebuilds the Svelte
+  SPA from source and fails the workflow if the committed bundle
+  under `integrations/bricks/assets/admin-app/` is out of sync.
+  Mirrors the existing `docs-freshness` pattern.
+
 ## [0.3.0] - 2026-05-24
 
 Class taxonomy refactor. New `slashed.macros` cascade layer, 12 macro

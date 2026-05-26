@@ -1,11 +1,10 @@
 <?php
 /**
- * Svelte-based admin page (POC).
+ * Svelte-based admin page.
  *
- * Lives alongside the legacy jQuery admin page so both can be compared
- * side-by-side. PHP still owns capability checks, nonces, sanitization,
- * and option storage; this class just registers a second submenu and
- * mounts a Svelte SPA into a single div on it.
+ * Top-level "SLASHED" admin menu rendered with Svelte 5. Owns the
+ * primary token-customization UI; PHP keeps capability checks,
+ * nonces, sanitization, and option storage.
  *
  * @package SLASHED_Bricks
  */
@@ -17,14 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Admin_Page_Svelte
  *
- * Adds a "Tokens (v2)" submenu under SLASHED that boots the Svelte app
- * built from integrations/bricks/admin-app/.
+ * Registers the top-level "SLASHED" admin menu and mounts the Svelte
+ * SPA built from integrations/bricks/admin-app/ into a single div.
  *
  * Responsibilities split with the SPA:
  *
  *   PHP (this class)                 Svelte (admin-app/)
  *   --------------------------------|--------------------------------
- *   register_submenu                | render UI
+ *   register_menu                   | render UI
  *   capability check                | reactive state + dirty tracking
  *   enqueue built bundle            | live preview
  *   wp_localize_script hydration    | optimistic save / error toasts
@@ -37,22 +36,27 @@ if ( ! defined( 'ABSPATH' ) ) {
  * one div.
  *
  * The class itself is stateless except for the page hook suffix it
- * captures during submenu registration; tab metadata, settings, and
+ * captures during menu registration; tab metadata, settings, and
  * defaults all come from the dedicated helper classes.
  */
 class Slashed_Bricks_Admin_Page_Svelte {
 
 	/**
-	 * Submenu slug. Must be unique across the WP admin.
+	 * Top-level menu slug.
+	 *
+	 * Same slug the legacy class used to own; the SPA now claims it
+	 * directly. The legacy admin page ships behind an opt-in filter
+	 * (`slashed_bricks/enable_legacy_admin`) and registers under a
+	 * different slug (`slashed-bricks-classic`) when enabled.
 	 */
-	const PAGE_SLUG = 'slashed-bricks-svelte';
+	const PAGE_SLUG = 'slashed-bricks';
 
 	/**
-	 * Hook suffix returned by add_submenu_page(). Captured at registration
+	 * Hook suffix returned by add_menu_page(). Captured at registration
 	 * time and compared in enqueue_assets() so we never accidentally load
-	 * the SPA bundle on other admin screens. WordPress mangles the parent
-	 * slug into the hook name in ways that vary across versions; relying
-	 * on the value WP itself returned avoids brittle string assembly.
+	 * the SPA bundle on other admin screens. WordPress mangles slug
+	 * → hook conventions in ways that vary across versions; relying on
+	 * the value WP itself returned avoids brittle string assembly.
 	 *
 	 * @var string
 	 */
@@ -62,25 +66,29 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'register_submenu' ), 20 );
+		// Priority 9 (one earlier than default) so the top-level menu
+		// is registered before any other piece of code that might want
+		// to attach to it as a submenu — including the legacy classic
+		// admin page when its opt-in filter is on.
+		add_action( 'admin_menu', array( $this, 'register_menu' ), 9 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
 	/**
-	 * Register the submenu under the existing SLASHED top-level page.
+	 * Register the top-level "SLASHED" menu.
 	 *
-	 * Priority 20 so the parent page (registered in
-	 * Slashed_Bricks_Admin_Page::register_menu at default priority) has
-	 * already been added when we attach to it.
+	 * Ships with the same icon and menu position the legacy admin page
+	 * used so the migration is invisible from the admin sidebar.
 	 */
-	public function register_submenu() {
-		$this->hook_suffix = (string) add_submenu_page(
-			'slashed-bricks',
-			__( 'SLASHED Tokens (v2)', 'slashed-bricks' ),
-			__( 'Tokens (v2)', 'slashed-bricks' ),
+	public function register_menu() {
+		$this->hook_suffix = (string) add_menu_page(
+			__( 'SLASHED Settings', 'slashed-bricks' ),
+			__( 'SLASHED', 'slashed-bricks' ),
 			'manage_options',
 			self::PAGE_SLUG,
-			array( $this, 'render_page' )
+			array( $this, 'render_page' ),
+			'dashicons-art',
+			59
 		);
 	}
 
@@ -190,9 +198,9 @@ class Slashed_Bricks_Admin_Page_Svelte {
 		<div class="wrap">
 			<div id="slashed-admin-app">
 				<noscript>
-					<div class="notice notice-warning">
+					<div class="notice notice-error">
 						<p>
-							<?php esc_html_e( 'This settings page requires JavaScript. The legacy form (still fully functional, no JS required) is available under SLASHED &rarr; SLASHED.', 'slashed-bricks' ); ?>
+							<?php esc_html_e( 'This settings page requires JavaScript. Please enable it in your browser to manage SLASHED tokens.', 'slashed-bricks' ); ?>
 						</p>
 					</div>
 				</noscript>

@@ -1,6 +1,9 @@
 <?php
 /**
- * Admin settings page for SLASHED token customization.
+ * Admin settings page for SLASHED token customization (legacy classic).
+ *
+ * Opt-in via the `slashed_bricks/enable_legacy_admin` filter. The
+ * Svelte SPA (`class-admin-page-svelte.php`) is the primary UI.
  *
  * @package SLASHED_Bricks
  */
@@ -10,11 +13,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Slashed_Bricks_Admin_Page
+ * Class Slashed_Bricks_Admin_Page (legacy / classic admin)
  *
- * Registers the SLASHED admin menu and renders a tabbed settings interface
- * for customizing design token values. Settings are stored in a single
- * wp_option 'slashed_bricks_tokens'.
+ * Renders the original jQuery-based tabbed settings interface as an
+ * opt-in "Classic admin" submenu under the Svelte top-level page.
+ *
+ * Disabled by default. Operators can re-enable it on a specific site by
+ * adding to a theme `functions.php` or MU plugin:
+ *
+ *     add_filter( 'slashed_bricks/enable_legacy_admin', '__return_true' );
+ *
+ * Settings are stored in the same `slashed_bricks_tokens` wp_option as
+ * the Svelte SPA — both UIs share storage and sanitization through the
+ * `Slashed_Bricks_Token_Store` and `Slashed_Bricks_Token_Sanitizer`
+ * helper classes — so toggling the filter on or off never loses data.
+ *
+ * This class is scheduled for removal once the SPA has had a release
+ * cycle in production. See the plugin CHANGELOG for the deprecation
+ * timeline.
  */
 class Slashed_Bricks_Admin_Page {
 
@@ -64,6 +80,25 @@ class Slashed_Bricks_Admin_Page {
 	const SETTINGS_NONCE_ACTION = 'slashed_bricks_save_settings';
 
 	/**
+	 * Submenu slug used when the legacy admin is registered.
+	 *
+	 * Different from `Slashed_Bricks_Admin_Page_Svelte::PAGE_SLUG` so
+	 * the two pages can co-exist when the opt-in filter is on. Without
+	 * this rename, both classes would try to register the same
+	 * top-level slug and one would silently win.
+	 */
+	const CLASSIC_PAGE_SLUG = 'slashed-bricks-classic';
+
+	/**
+	 * Hook suffix returned by add_submenu_page(). Captured at registration
+	 * time and compared in enqueue_admin_assets() so the legacy CSS / JS
+	 * never load on other admin screens.
+	 *
+	 * @var string
+	 */
+	private $hook_suffix = '';
+
+	/**
 	 * Constructor. Register hooks.
 	 */
 	public function __construct() {
@@ -76,17 +111,41 @@ class Slashed_Bricks_Admin_Page {
 	}
 
 	/**
-	 * Register the top-level admin menu page.
+	 * Register the legacy admin menu, gated by an opt-in filter.
+	 *
+	 * The Svelte SPA owns the top-level "SLASHED" page. This class
+	 * only adds itself as a "Classic admin" submenu when a site
+	 * explicitly opts in via:
+	 *
+	 *     add_filter( 'slashed_bricks/enable_legacy_admin', '__return_true' );
+	 *
+	 * That gives operators a one-line escape hatch if the SPA breaks
+	 * for them on a particular WP / Bricks version, without leaving
+	 * the legacy form on permanently. The filter is consulted at
+	 * `admin_menu` time so any plugin/theme/MU that adds the filter
+	 * before that hook is honoured.
 	 */
 	public function register_menu() {
-		add_menu_page(
-			__( 'SLASHED Settings', 'slashed-bricks' ),
-			__( 'SLASHED', 'slashed-bricks' ),
+		/**
+		 * Whether to register the legacy jQuery admin page.
+		 *
+		 * Defaults to false. Flip to true to expose the classic form
+		 * as a submenu under "SLASHED → Classic admin" while the
+		 * Svelte SPA remains the primary UI.
+		 *
+		 * @param bool $enabled Default false.
+		 */
+		if ( ! apply_filters( 'slashed_bricks/enable_legacy_admin', false ) ) {
+			return;
+		}
+
+		$this->hook_suffix = (string) add_submenu_page(
+			Slashed_Bricks_Admin_Page_Svelte::PAGE_SLUG,
+			__( 'SLASHED — Classic admin', 'slashed-bricks' ),
+			__( 'Classic admin', 'slashed-bricks' ),
 			'manage_options',
-			'slashed-bricks',
-			array( $this, 'render_page' ),
-			'dashicons-art',
-			59
+			self::CLASSIC_PAGE_SLUG,
+			array( $this, 'render_page' )
 		);
 	}
 
@@ -96,7 +155,11 @@ class Slashed_Bricks_Admin_Page {
 	 * @param string $hook_suffix The current admin page hook suffix.
 	 */
 	public function enqueue_admin_assets( $hook_suffix ) {
-		if ( 'toplevel_page_slashed-bricks' !== $hook_suffix ) {
+		// Only fire on the Classic admin submenu — and only if it was
+		// actually registered (i.e. the opt-in filter is on). When the
+		// filter is off, $this->hook_suffix is the empty string and
+		// this comparison fails for every screen.
+		if ( '' === $this->hook_suffix || $hook_suffix !== $this->hook_suffix ) {
 			return;
 		}
 
@@ -171,7 +234,7 @@ class Slashed_Bricks_Admin_Page {
 		// Handle reset all.
 		if ( ! empty( $_POST['reset_all'] ) ) {
 			Slashed_Bricks_Token_Store::delete_settings();
-			wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=reset' ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=' . self::CLASSIC_PAGE_SLUG . '&message=reset' ) );
 			exit;
 		}
 
@@ -179,11 +242,11 @@ class Slashed_Bricks_Admin_Page {
 		if ( ! empty( $_POST['reset_section'] ) ) {
 			$section = sanitize_key( wp_unslash( $_POST['reset_section'] ) );
 			if ( ! isset( $this->tabs[ $section ] ) ) {
-				wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=error' ) );
+				wp_safe_redirect( admin_url( 'admin.php?page=' . self::CLASSIC_PAGE_SLUG . '&message=error' ) );
 				exit;
 			}
 			Slashed_Bricks_Token_Store::delete_section( $section );
-			wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&tab=' . $section . '&message=reset_section' ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=' . self::CLASSIC_PAGE_SLUG . '&tab=' . $section . '&message=reset_section' ) );
 			exit;
 		}
 
@@ -199,7 +262,7 @@ class Slashed_Bricks_Admin_Page {
 			Slashed_Bricks_Token_Store::update_section( $active_tab, $sanitized );
 		}
 
-		wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&tab=' . $active_tab . '&message=saved' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=' . self::CLASSIC_PAGE_SLUG . '&tab=' . $active_tab . '&message=saved' ) );
 		exit;
 	}
 
@@ -227,7 +290,7 @@ class Slashed_Bricks_Admin_Page {
 		$settings['html_font_size'] = $html_font_size;
 		Slashed_Bricks_Token_Store::update_plugin_settings( $settings );
 
-		wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=settings_saved' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=' . self::CLASSIC_PAGE_SLUG . '&message=settings_saved' ) );
 		exit;
 	}
 
@@ -305,7 +368,7 @@ class Slashed_Bricks_Admin_Page {
 
 			<nav class="nav-tab-wrapper">
 				<?php foreach ( $this->tabs as $slug => $label ) : ?>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=slashed-bricks&tab=' . $slug ) ); ?>"
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . self::CLASSIC_PAGE_SLUG . '&tab=' . $slug ) ); ?>"
 					   class="nav-tab <?php echo $active_tab === $slug ? 'nav-tab-active' : ''; ?>">
 						<?php echo esc_html( $label ); ?>
 					</a>
