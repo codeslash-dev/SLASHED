@@ -10,6 +10,10 @@
   import { meta, ui } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
   import ColorTab from './components/ColorTab.svelte';
+  import VariablesTab from './components/VariablesTab.svelte';
+  import ClassesTab from './components/ClassesTab.svelte';
+  import BundleTab from './components/BundleTab.svelte';
+  import HooksTab from './components/HooksTab.svelte';
   import StubTab from './components/StubTab.svelte';
   import LivePreview from './components/LivePreview.svelte';
   import SaveBar from './components/SaveBar.svelte';
@@ -53,6 +57,14 @@
   <section class="slashed-svelte-admin__body">
     {#if ui.activeTab === 'colors'}
       <ColorTab />
+    {:else if ui.activeTab === 'variables'}
+      <VariablesTab />
+    {:else if ui.activeTab === 'classes'}
+      <ClassesTab />
+    {:else if ui.activeTab === 'bundle'}
+      <BundleTab />
+    {:else if ui.activeTab === 'hooks'}
+      <HooksTab />
     {:else}
       <StubTab tab={meta.tabs[ui.activeTab] ?? ui.activeTab} />
     {/if}

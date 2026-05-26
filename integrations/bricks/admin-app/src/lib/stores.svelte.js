@@ -21,11 +21,13 @@ const bootstrap = typeof window !== 'undefined' && window.slashedBricksApp
   ? window.slashedBricksApp
   : { defaults: {}, settings: {}, tabs: {}, rest: { url: '', nonce: '' } };
 
-/** Read-only metadata: factory defaults, available tabs, REST handshake. */
+/** Read-only metadata: factory defaults, available tabs, REST handshake, inventory, plugin settings. */
 export const meta = {
   defaults: bootstrap.defaults || {},
   tabs: bootstrap.tabs || {},
   rest: bootstrap.rest || { url: '', nonce: '' },
+  inventory: bootstrap.inventory || { variables: [], sf_classes: [], is_classes: [] },
+  pluginSettings: bootstrap.pluginSettings || {},
 };
 
 /** Reactive token state. Mutating any nested key triggers re-renders. */
