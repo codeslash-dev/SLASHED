@@ -114,24 +114,16 @@ function slashed_bricks_admin_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
 
-    // Svelte SPA: primary admin page (top-level "SLASHED" menu).
-    // Constructed first and registers its admin_menu hook at priority 9
-    // so the top-level slug exists before any code tries to attach a
-    // submenu to it (notably the legacy Classic admin below).
+    // Top-level "SLASHED" admin page (Svelte SPA). Mounts the built
+    // bundle from integrations/bricks/admin-app/ and talks to the REST
+    // controller below for save/reset.
     new Slashed_Bricks_Admin_Page_Svelte();
 
-    // Legacy / Classic admin page. Registers as a "Classic admin"
-    // submenu only when the `slashed_bricks/enable_legacy_admin`
-    // filter is true; defaults to off. Scheduled for removal once the
-    // SPA has had a release cycle in production.
-    new Slashed_Bricks_Admin_Page();
-
-    // REST endpoints powering the Svelte SPA. Sanitization and
-    // storage are delegated to the shared helper classes so every
-    // admin surface persists data identically.
+    // REST endpoints powering the SPA. Sanitization and storage are
+    // delegated to the shared helper classes (Token_Store /
+    // Token_Sanitizer / Tab_Registry).
     new Slashed_Bricks_REST_Controller();
 }
 if ( is_admin() ) {

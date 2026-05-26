@@ -43,11 +43,6 @@ class Slashed_Bricks_REST_Controller {
 
 	/**
 	 * Constructor — registers the REST routes on rest_api_init.
-	 *
-	 * Now stateless: previous revisions held a reference to
-	 * `Slashed_Bricks_Admin_Page` to share its private sanitizer; that
-	 * dependency is gone now that sanitization lives in the dedicated
-	 * `Slashed_Bricks_Token_Sanitizer` class.
 	 */
 	public function __construct() {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );

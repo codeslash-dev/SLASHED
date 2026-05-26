@@ -10,31 +10,64 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - **Bricks integration: admin UI rewritten in Svelte 5.** The
   top-level "SLASHED" admin page (`slashed_bricks` slug) now mounts a
-  Svelte single-page app instead of the previous jQuery / `admin-post`
-  form. Token storage shape and the `slashed_bricks_tokens`
-  `wp_option` are unchanged, so saved settings carry over without
-  migration. The new UI is JS-required; users who explicitly need a
-  no-JS form can opt in to the legacy page (see Added below).
+  Svelte single-page app instead of the previous jQuery /
+  `admin-post` form. Token storage shape and the
+  `slashed_bricks_tokens` `wp_option` are unchanged, so saved
+  settings carry over without migration. The new UI is JS-required;
+  this matches the rest of `wp-admin`, which has assumed JS for
+  several major versions.
+- **Bricks integration: data layer separated from UI.** Three new
+  helper classes — `Slashed_Bricks_Token_Store`,
+  `Slashed_Bricks_Token_Sanitizer`, `Slashed_Bricks_Tab_Registry` —
+  own option I/O, sanitization, and the tab list respectively. The
+  Svelte page and the REST controller depend only on these helpers,
+  so the data model can be evolved (or swapped backends) without
+  touching either UI surface.
 
 ### Added
 
-- **Bricks integration: `slashed_bricks/enable_legacy_admin` filter.**
-  Re-exposes the legacy jQuery form as a "Classic admin" submenu
-  under "SLASHED" when set to true. Defaults to false. The legacy
-  page is scheduled for removal in a future release; the filter is
-  an opt-in escape hatch, not a long-term toggle.
-- **Bricks integration: helper classes** `Slashed_Bricks_Token_Store`,
-  `Slashed_Bricks_Token_Sanitizer`, and `Slashed_Bricks_Tab_Registry`
-  centralise option I/O, sanitization, and the tab list so every
-  admin surface (legacy form, Svelte SPA, REST controller) shares
-  one source of truth. `Slashed_Bricks_Admin_Page::OPTION_NAME`,
-  `SETTINGS_OPTION_NAME`, `get_settings()`, `get_plugin_settings()`,
-  `get_tabs()`, and `sanitize_section_public()` are kept as
-  backwards-compat proxies.
 - **CI: `bricks-admin-app-freshness` job** that rebuilds the Svelte
   SPA from source and fails the workflow if the committed bundle
   under `integrations/bricks/assets/admin-app/` is out of sync.
   Mirrors the existing `docs-freshness` pattern.
+
+### Removed
+
+- **Bricks integration: legacy jQuery admin page.**
+  `class-admin-page.php`, `assets/admin-page.js`, and
+  `assets/admin-page.css` are gone. With them go:
+  - `Slashed_Bricks_Admin_Page` class and its public constants
+    (`OPTION_NAME`, `SETTINGS_OPTION_NAME`, `NONCE_ACTION`,
+    `SETTINGS_NONCE_ACTION`).
+  - `admin_post_slashed_bricks_save` and
+    `admin_post_slashed_bricks_save_settings` action hooks.
+  - The `slashed-bricks-classic` page slug.
+
+### ⚠️ Breaking Changes
+
+#### Bricks: `Slashed_Bricks_Admin_Page` class removed
+
+External code that referenced the class directly needs to migrate to
+the helper classes:
+
+- `Slashed_Bricks_Admin_Page::OPTION_NAME` →
+  `Slashed_Bricks_Token_Store::OPTION_NAME` (value unchanged:
+  `'slashed_bricks_tokens'`).
+- `Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME` →
+  `Slashed_Bricks_Token_Store::SETTINGS_OPTION_NAME` (value
+  unchanged: `'slashed_bricks_settings'`).
+- `(new Slashed_Bricks_Admin_Page())->get_settings()` /
+  `get_plugin_settings()` / `get_tabs()` →
+  `Slashed_Bricks_Token_Store::get_settings()` /
+  `Slashed_Bricks_Token_Store::get_plugin_settings()` /
+  `Slashed_Bricks_Tab_Registry::get_all()`.
+- `sanitize_section_public()` →
+  `Slashed_Bricks_Token_Sanitizer::sanitize_section()`.
+
+Code that read or wrote the `slashed_bricks_tokens` /
+`slashed_bricks_settings` options via `get_option()` /
+`update_option()` directly is unaffected — option names and storage
+shape are unchanged.
 
 ## [0.3.0] - 2026-05-24
 

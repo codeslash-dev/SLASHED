@@ -5,7 +5,8 @@
    * Owns no state of its own — everything lives in stores.svelte.js so
    * any component can read or mutate it directly. The reactive graph
    * collapses what was ~20 lines of jQuery dirty-tracking + DOM querying
-   * in admin-page.js into a single $derived for the active tab body.
+   * in the previous admin form into a single $derived for the active
+   * tab body.
    */
   import { meta, ui } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
@@ -24,7 +25,7 @@
 
   // Warn before unload when the form has unsaved changes.
   // Replaces the equivalent jQuery `$(window).on('beforeunload', ...)`
-  // block in admin-page.js.
+  // block in the previous admin form.
   $effect(() => {
     /**
      * `beforeunload` listener that triggers the browser's native

@@ -29,8 +29,11 @@
     cssVar = '',
   } = $props();
 
-  // Detect starting mode from the stored value's shape, same heuristic
-  // as PHP::is_hex_color() in class-admin-page.php.
+  // Detect starting mode from the stored value's shape: anything matching
+  // a literal HEX (3 / 4 / 6 / 8 digit form) starts in HEX mode, anything
+  // else (oklch / rgb / named / var()...) starts in Advanced mode. Same
+  // regex as Slashed_Bricks_Token_Sanitizer::is_hex_color() so the two
+  // sides agree on what HEX-vs-raw means.
   const HEX = /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
   // One-shot hydration from the store. Wrapping in an IIFE makes it

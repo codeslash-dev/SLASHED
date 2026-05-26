@@ -1,19 +1,16 @@
 <script>
   /**
    * Colors tab body. Pulls the brand and status defaults from the
-   * hydrated metadata and renders a ColorRow per token.
-   *
-   * Note how thin this is compared to render_tab_colors() in
-   * class-admin-page.php: there's no separate hex_hints lookup ceremony,
-   * no ucfirst() label munging in PHP, no manual table markup. The
-   * table-of-rows shape is just a single each block.
+   * hydrated metadata and renders a ColorRow per token. The list of
+   * brands and statuses is data-driven (`meta.defaults.colors`), so
+   * adding or removing a brand only touches the PHP defaults.
    */
   import { meta } from '../lib/stores.svelte.js';
   import ColorRow from './ColorRow.svelte';
 
   const colors = meta.defaults?.colors ?? {};
 
-  /** Capitalize first letter for display labels (matches the legacy ucfirst()). */
+  /** Capitalize first letter for display labels. */
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 </script>
 

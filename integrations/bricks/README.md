@@ -48,18 +48,6 @@ The plugin works out of the box with sensible defaults. All behavior can be cust
 
 ### Filter Hooks
 
-#### `slashed_bricks/enable_legacy_admin`
-
-Re-expose the legacy jQuery admin page as a "Classic admin" submenu under "SLASHED". The Svelte SPA remains the primary admin UI. Defaults to `false`; opt-in is intended as a short-term escape hatch only — the legacy page is scheduled for removal.
-
-```php
-// functions.php / mu-plugin
-add_filter( 'slashed_bricks/enable_legacy_admin', '__return_true' );
-```
-
-When the filter is on, the classic form is reachable at
-`wp-admin/admin.php?page=slashed-bricks-classic`. Saves through the classic form go to the same `slashed_bricks_tokens` option as the SPA, so the two stay in sync.
-
 #### `slashed_bricks/css_bundle_url`
 
 Override which CSS bundle URL to load.
@@ -163,11 +151,10 @@ integrations/bricks/
                                      freshness-checks it on every PR)
   includes/class-token-store.php     Storage layer (option names, get/update/delete)
   includes/class-token-sanitizer.php Stateless input sanitization for token
-                                     submissions (shared by legacy + REST)
+                                     submissions (shared by REST + bootstrap)
   includes/class-tab-registry.php    Single source of truth for the tab list
   includes/class-token-defaults.php  Factory default values per section
-  includes/class-admin-page-svelte.php  Top-level "SLASHED" admin page (primary)
-  includes/class-admin-page.php      Legacy jQuery admin (opt-in via filter)
+  includes/class-admin-page-svelte.php  Top-level "SLASHED" admin page (Svelte SPA)
   includes/class-rest-controller.php REST endpoints powering the SPA
   includes/class-css-parser.php      Pure parser: declared --sf-* properties +
                                      .sf-/.is- class selectors from a CSS string

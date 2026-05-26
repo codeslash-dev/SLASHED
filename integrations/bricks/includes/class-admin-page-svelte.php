@@ -44,10 +44,10 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	/**
 	 * Top-level menu slug.
 	 *
-	 * Same slug the legacy class used to own; the SPA now claims it
-	 * directly. The legacy admin page ships behind an opt-in filter
-	 * (`slashed_bricks/enable_legacy_admin`) and registers under a
-	 * different slug (`slashed-bricks-classic`) when enabled.
+	 * The slug originally belonged to the legacy jQuery admin page; the
+	 * SPA inherited it during the migration so existing bookmarks
+	 * (`wp-admin/admin.php?page=slashed-bricks`) keep resolving to the
+	 * settings page.
 	 */
 	const PAGE_SLUG = 'slashed-bricks';
 

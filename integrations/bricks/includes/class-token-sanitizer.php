@@ -2,25 +2,23 @@
 /**
  * Pure sanitization helpers for SLASHED Bricks token submissions.
  *
- * Extracted verbatim from the legacy class-admin-page.php so both
- * the legacy form handler and the REST controller share one source
- * of truth for "what does it mean to clean section input X". Keeping
- * the implementation *purely static* rules out any chance of state
- * leaking between callers — every method takes its inputs and
- * returns its outputs, nothing more.
+ * Stateless static functions used by the REST controller (and any
+ * future admin surface) to clean up section input before it lands in
+ * `slashed_bricks_tokens`. Keeping the implementation purely static
+ * rules out any chance of state leaking between callers — every
+ * method takes its inputs and returns its outputs, nothing more.
  *
  * Sanitization rules
  * ------------------
  *   - colors section uses `sanitize_color_section()` which merges
  *     the paired HEX picker / Advanced raw inputs (`*_hex`, `*_raw`)
  *     down to a single value per base key. Raw wins over hex when
- *     both are present, which mirrors the precedence the legacy form
- *     produced via field render order.
+ *     both are present.
  *   - all other sections store flat key→string maps after running
  *     each value through `sanitize_text_field()` and stripping
  *     CSS-context-breaking characters (`{}<>@;`).
- *   - hex detection is split out so the admin renderer can decide
- *     which sub-input to start in (HEX picker vs Advanced raw).
+ *   - hex detection is split out so the colors UI can decide which
+ *     sub-input to start in (HEX picker vs Advanced raw).
  *
  * @package SLASHED_Bricks
  */

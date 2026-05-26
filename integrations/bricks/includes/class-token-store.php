@@ -3,18 +3,11 @@
  * Persistence layer for SLASHED Bricks token & plugin settings.
  *
  * Owns the option names and read/write paths used by every admin
- * surface (legacy form, Svelte SPA, REST controller). Centralising
- * this in one tiny class means the rest of the codebase never names
+ * surface (Svelte SPA, REST controller). Centralising this in one
+ * tiny class means the rest of the codebase never names
  * `get_option('slashed_bricks_tokens')` directly: changing the
  * underlying option, splitting it, or swapping in a CMB2 / Custom
  * Tables backend later only touches this file.
- *
- * Constants are intentionally exported as public so they remain
- * stable references for external code (filters, MU plugins). The
- * legacy class-admin-page.php keeps its own OPTION_NAME /
- * SETTINGS_OPTION_NAME constants pointing at these so any third
- * party that hard-coded the old class name keeps working through
- * one more release cycle (see PR 4 for removal).
  *
  * @package SLASHED_Bricks
  */
