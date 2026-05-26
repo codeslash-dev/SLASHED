@@ -1,0 +1,37 @@
+{
+  "id": "FEAT-001",
+  "type": "fix",
+  "description": "Add new tokens (animation-spin, animation-shimmer, state-pending-opacity, ratio-4-3, ratio-3-2, brand hover tokens) to core/tokens.css; add alternate tokens to core/tokens.layout.css; add @property registrations for state flags; deprecate --sf-ratio-photo; fix --sf-animation-blink to use motion-scale; update alias chain comment from 2 hops to 3 hops; remove dead audit references from tokens.css, motion.css, and print.css",
+  "status": "in_progress",
+  "steps": [
+    "In core/tokens.css, after the line `--sf-animation-float: sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;`, add two new animation presets: `--sf-animation-spin: sf-spin var(--sf-duration-slower) linear infinite;` and `--sf-animation-shimmer: sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;`",
+    "In core/tokens.css, near `--sf-opacity-disabled: 0.45;` (in the Shadow section around line 487), add a new state token: `--sf-state-pending-opacity: 0.7;`",
+    "In core/tokens.css, in the Aspect ratios section, KEEP `--sf-ratio-photo: 3 / 2;` but add a deprecation comment above it: `/* @deprecated 0.4.0, removed in 0.5.0 -- use --sf-ratio-4-3 or --sf-ratio-3-2 */`. Then add two new tokens BEFORE the deprecated one: `--sf-ratio-4-3: 4 / 3;` and `--sf-ratio-3-2: 3 / 2;`",
+    "In core/tokens.css, after `--sf-color-bg--focus: oklch(from var(--sf-color-action) l c h / 0.06);`, add brand hover tokens: `--sf-color-primary--hover: oklch(from var(--sf-color-primary) calc(l - 0.05) c h);`, `--sf-color-secondary--hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);`, `--sf-color-tertiary--hover: oklch(from var(--sf-color-tertiary) calc(l - 0.05) c h);`, `--sf-color-action--hover: oklch(from var(--sf-color-action) calc(l - 0.05) c h);`, `--sf-color-neutral--hover: oklch(from var(--sf-color-neutral) calc(l - 0.05) c h);`",
+    "In core/tokens.css, fix --sf-animation-blink to respect motion-scale: change `--sf-animation-blink: sf-blink 1s steps(1, end) infinite;` to `--sf-animation-blink: sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite;`",
+    "In core/tokens.css, after the existing `@property --sf-is-dark { syntax: \"<integer>\"; inherits: true; initial-value: 0; }`, add four new @property registrations: `@property --sf-is-active { syntax: \"<integer>\"; inherits: true; initial-value: 0; }`, `@property --sf-is-current { syntax: \"<integer>\"; inherits: true; initial-value: 0; }`, `@property --sf-is-pressed { syntax: \"<integer>\"; inherits: true; initial-value: 0; }`, `@property --sf-is-open { syntax: \"<integer>\"; inherits: true; initial-value: 0; }`",
+    "In core/tokens.css header comment (around line 60), change the alias graph description from `<=2 hops (primitive -> semantic -> scale)` to: `<=3 hops (per-primitive -> layout-system -> canonical source), giving three override levels: local (style=\"--sf-cluster-gap\"), all-primitives (--sf-space-gap), or global (--sf-gap).`",
+    "In core/tokens.css around line 711 (stagger delays comment), replace `(see audit section D9)` with `(by design -- apply via token presets or your own BEM rules)`",
+    "In core/motion.css around line 141, replace `(see audit section D9)` with `(by design)`",
+    "In core/print.css line 7-8, replace `Color contract (Phase 3, see audits/comparative-audit-2026.md F-04):` with `Color contract:` (remove the dead reference, the rest of the comment already describes the contract)",
+    "In core/tokens.layout.css, after the Prose section (`--sf-prose-paragraph: var(--sf-space-content);`), add a new Alternate section with: `--sf-alternate-gap: var(--sf-space-content);` and `--sf-alternate-inner-gap: var(--sf-space-gap);`"
+  ],
+  "acceptance_criteria": [
+    "core/tokens.css contains --sf-animation-spin and --sf-animation-shimmer presets",
+    "core/tokens.css contains --sf-state-pending-opacity: 0.7",
+    "core/tokens.css contains --sf-ratio-4-3 and --sf-ratio-3-2; --sf-ratio-photo is kept with @deprecated comment",
+    "core/tokens.css contains all 5 brand hover tokens (--sf-color-primary--hover through --sf-color-neutral--hover)",
+    "core/tokens.css --sf-animation-blink uses calc(1s * var(--sf-motion-scale))",
+    "core/tokens.css has @property registrations for --sf-is-active, --sf-is-current, --sf-is-pressed, --sf-is-open",
+    "core/tokens.css header mentions <=3 hops with explanation",
+    "No references to 'audit section D9' remain in core/tokens.css or core/motion.css",
+    "core/print.css no longer references audits/comparative-audit-2026.md",
+    "core/tokens.layout.css has --sf-alternate-gap and --sf-alternate-inner-gap tokens"
+  ],
+  "verification": [
+    "Run npm run lint:css to confirm no CSS lint errors in changed files",
+    "Run npm run build to confirm dist/ regenerates successfully"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

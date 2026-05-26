@@ -156,5 +156,11 @@
        ---------------------------------------------------------- */
     --sf-prose-paragraph: var(--sf-space-content);
 
+    /* ----------------------------------------------------------
+       Alternate
+       ---------------------------------------------------------- */
+    --sf-alternate-gap:       var(--sf-space-content);
+    --sf-alternate-inner-gap: var(--sf-space-gap);
+
   }
 }
