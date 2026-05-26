@@ -56,22 +56,40 @@ class Slashed_Bricks_CSS_Parser {
 	}
 
 	/**
-	 * Extract custom property names that are declared (LHS of a colon).
+	 * Extract custom property names that are declared (LHS of a colon) or
+	 * registered via @property.
 	 *
 	 * Matches patterns like "--sf-color-primary:", "  --sf-space-m :" but
 	 * not bare mentions like "see --sf-color-*" inside comments (already
 	 * stripped) or "var(--sf-color-primary)" usages.
 	 *
+	 * Also matches "@property --sf-color-primary-light { … }" because those
+	 * tokens are defined exclusively via @property (no separate :root
+	 * declaration) and would be missed by the colon-only regex.
+	 *
 	 * @param string $css CSS with comments removed.
 	 * @return string[] Sorted unique list of declared property names.
 	 */
 	private static function extract_declared_variables( $css ) {
+		$names = array();
+
+		// Standard declarations: --sf-name: value;
 		$matches = array();
-		if ( ! preg_match_all( '/(--sf-[a-zA-Z0-9_-]+)\s*:/', $css, $matches ) ) {
-			return array();
+		if ( preg_match_all( '/(--sf-[a-zA-Z0-9_-]+)\s*:/', $css, $matches ) ) {
+			foreach ( $matches[1] as $name ) {
+				$names[] = $name;
+			}
 		}
 
-		$names = array_values( array_unique( $matches[1] ) );
+		// @property registrations: @property --sf-name { … }
+		$prop_matches = array();
+		if ( preg_match_all( '/@property\s+(--sf-[a-zA-Z0-9_-]+)/', $css, $prop_matches ) ) {
+			foreach ( $prop_matches[1] as $name ) {
+				$names[] = $name;
+			}
+		}
+
+		$names = array_values( array_unique( $names ) );
 		sort( $names );
 		return $names;
 	}

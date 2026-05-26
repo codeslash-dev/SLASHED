@@ -2,17 +2,24 @@
 /* Generates docs/tokens.md from the token source files. Run: npm run docs:tokens
    The reference is derived from source so it never drifts. */
 
-const fs = require('fs');
+'use strict';
+
+const fs   = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 
-const SOURCES = [
-  { file: 'core/tokens.css', title: 'Core tokens (`core/tokens.css`)' },
-  { file: 'core/tokens.layout.css', title: 'Layout tokens (`core/tokens.layout.css`)' },
-  { file: 'core/tokens.macros.css', title: 'Macro tokens (`core/tokens.macros.css`)' },
-  { file: 'optional/tokens.palette.css', title: 'Palette tokens (`optional/tokens.palette.css`)' },
-];
+const { TOKEN_FILES } = require('./registry-sources');
+
+const FILE_TITLES = {
+  'core/tokens.css':               'Core tokens',
+  'core/tokens.layout.css':        'Layout tokens',
+  'core/tokens.macros.css':        'Macro tokens',
+  'optional/tokens.palette.css':   'Palette tokens',
+  'optional/tokens.components.css':'Component tokens',
+};
+
+const SOURCES = TOKEN_FILES.map(f => ({ file: f, title: `${FILE_TITLES[f]} (\`${f}\`)` }));
 
 // Read the value of a custom-property declaration starting at `:` index,
 // honouring nested parentheses so light-dark()/oklch() values stay intact.
@@ -30,12 +37,16 @@ function readValue(css, colonIdx) {
 }
 
 function extract(file) {
-  const raw = fs.readFileSync(path.join(ROOT, file), 'utf8');
-  const css = raw.replace(/\/\*[\s\S]*?\*\//g, ''); // strip comments
+  const abs = path.join(ROOT, file);
+  if (!fs.existsSync(abs)) {
+    throw new Error(`[docs:tokens] Missing canonical token source file: ${abs}`);
+  }
+  const css = fs.readFileSync(abs, 'utf8').replace(/\/\*[\s\S]*?\*\//g, ''); // strip comments first
   const rows = new Map(); // name -> value (last declaration wins)
 
-  // @property registrations: initial-value
-  for (const m of raw.matchAll(/@property\s+(--sf-[\w-]+)\s*\{([^}]*)\}/g)) {
+  // @property registrations: initial-value — scanned AFTER comment stripping
+  // to avoid picking up commented-out @property blocks.
+  for (const m of css.matchAll(/@property\s+(--sf-[\w-]+)\s*\{([^}]*)\}/g)) {
     const iv = /initial-value\s*:\s*([^;]+);/.exec(m[2]);
     rows.set(m[1], iv ? `${iv[1].trim()} *(registered)*` : '*(registered)*');
   }

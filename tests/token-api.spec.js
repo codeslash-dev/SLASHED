@@ -21,16 +21,9 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 
-// Source files contributing to the public token surface. Includes the
-// optional/* token files because they ship in the optimal+ bundles
-// and their names are part of the public API once activated.
-const TOKEN_FILES = [
-  'core/tokens.css',
-  'core/tokens.layout.css',
-  'core/tokens.macros.css',
-  'optional/tokens.palette.css',
-  'optional/tokens.components.css',
-];
+// Source files contributing to the public token surface.
+// Imported from scripts/registry-sources.js — the canonical single definition.
+const { TOKEN_FILES } = require('../scripts/registry-sources');
 
 // Names declared inside @keyframes blocks and other contexts that
 // look like tokens but aren't custom properties on :root. The regex

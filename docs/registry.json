@@ -1,13 +1,28 @@
 {
   "_meta": {
-    "source": "source (core/ + optional/ token and class files)",
+    "token_sources": [
+      "core/tokens.css",
+      "core/tokens.layout.css",
+      "core/tokens.macros.css",
+      "optional/tokens.palette.css",
+      "optional/tokens.components.css"
+    ],
+    "class_sources": [
+      "core/layout.css",
+      "core/macros.css",
+      "core/states.css",
+      "core/accessibility.css",
+      "core/motion.css",
+      "optional/forms.css",
+      "optional/components.css"
+    ],
     "counts": {
-      "variables": 608,
+      "tokens": 608,
       "sf_classes": 143,
       "is_classes": 40
     }
   },
-  "variables": [
+  "tokens": [
     "--sf-animation-blink",
     "--sf-animation-color-pulse",
     "--sf-animation-delay-1",

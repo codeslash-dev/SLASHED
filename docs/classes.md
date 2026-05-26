@@ -1,0 +1,226 @@
+# Class reference
+
+> **Generated** from source by `scripts/gen-class-reference.js` —
+> run `npm run docs:classes` to refresh. Do not edit by hand.
+
+**143 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+See [architecture.md](architecture.md) for layer order and naming conventions.
+
+## Layout primitives (`core/layout.css`)
+
+101 classes.
+
+| Class |
+|---|
+| `.sf-alternate` |
+| `.sf-bento` |
+| `.sf-bento--2` |
+| `.sf-bento--4` |
+| `.sf-bento--compact` |
+| `.sf-bento--tall` |
+| `.sf-box` |
+| `.sf-breakout` |
+| `.sf-center` |
+| `.sf-center--intrinsic` |
+| `.sf-cluster` |
+| `.sf-cluster--2xs` |
+| `.sf-cluster--between` |
+| `.sf-cluster--center` |
+| `.sf-cluster--end` |
+| `.sf-cluster--l` |
+| `.sf-cluster--m` |
+| `.sf-cluster--no-wrap` |
+| `.sf-cluster--s` |
+| `.sf-cluster--xl` |
+| `.sf-cluster--xs` |
+| `.sf-container` |
+| `.sf-container--full` |
+| `.sf-container--narrow` |
+| `.sf-container--prose` |
+| `.sf-container--wide` |
+| `.sf-content-grid` |
+| `.sf-cover` |
+| `.sf-cover--max` |
+| `.sf-cover--min` |
+| `.sf-cover--padding-l` |
+| `.sf-cover--padding-s` |
+| `.sf-cover__center` |
+| `.sf-divider` |
+| `.sf-divider--vertical` |
+| `.sf-frame` |
+| `.sf-frame--3-2` |
+| `.sf-frame--4-3` |
+| `.sf-frame--cinema` |
+| `.sf-frame--golden` |
+| `.sf-frame--portrait` |
+| `.sf-frame--square` |
+| `.sf-frame--video` |
+| `.sf-full-bleed` |
+| `.sf-grid` |
+| `.sf-grid--dense` |
+| `.sf-grid--fit` |
+| `.sf-grid--l` |
+| `.sf-grid--m` |
+| `.sf-grid--s` |
+| `.sf-grid--xl` |
+| `.sf-grid--xs` |
+| `.sf-grid-1` |
+| `.sf-grid-1-2` |
+| `.sf-grid-1-3` |
+| `.sf-grid-2` |
+| `.sf-grid-2-1` |
+| `.sf-grid-3` |
+| `.sf-grid-3-1` |
+| `.sf-grid-4` |
+| `.sf-grid-6` |
+| `.sf-icon` |
+| `.sf-icon--boxed` |
+| `.sf-icon--l` |
+| `.sf-icon--m` |
+| `.sf-icon--s` |
+| `.sf-icon--xl` |
+| `.sf-icon--xs` |
+| `.sf-imposter` |
+| `.sf-imposter--contain` |
+| `.sf-imposter--fixed` |
+| `.sf-pancake` |
+| `.sf-reel` |
+| `.sf-section` |
+| `.sf-section--collapse` |
+| `.sf-section--l` |
+| `.sf-section--m` |
+| `.sf-section--s` |
+| `.sf-section--xl` |
+| `.sf-section-group` |
+| `.sf-sidebar` |
+| `.sf-sidebar--narrow` |
+| `.sf-sidebar--right` |
+| `.sf-sidebar--wide` |
+| `.sf-stack` |
+| `.sf-stack--2xl` |
+| `.sf-stack--2xs` |
+| `.sf-stack--3xl` |
+| `.sf-stack--center` |
+| `.sf-stack--end` |
+| `.sf-stack--l` |
+| `.sf-stack--m` |
+| `.sf-stack--s` |
+| `.sf-stack--stretch` |
+| `.sf-stack--xl` |
+| `.sf-stack--xs` |
+| `.sf-subgrid` |
+| `.sf-subgrid-rows` |
+| `.sf-switcher` |
+| `.sf-switcher--no-wrap` |
+| `.sf-switcher--vertical` |
+
+## Macro classes (`core/macros.css`)
+
+26 classes.
+
+| Class |
+|---|
+| `.sf-aspect` |
+| `.sf-equal-height` |
+| `.sf-flow` |
+| `.sf-line-clamp-2` |
+| `.sf-line-clamp-3` |
+| `.sf-line-clamp-N` |
+| `.sf-link-external` |
+| `.sf-no-tap-highlight` |
+| `.sf-not-prose` |
+| `.sf-overflow-fade` |
+| `.sf-prose` |
+| `.sf-scroll-shadow` |
+| `.sf-scroll-snap` |
+| `.sf-surface--action` |
+| `.sf-surface--danger` |
+| `.sf-surface--error` |
+| `.sf-surface--info` |
+| `.sf-surface--inverse` |
+| `.sf-surface--neutral` |
+| `.sf-surface--primary` |
+| `.sf-surface--secondary` |
+| `.sf-surface--success` |
+| `.sf-surface--tertiary` |
+| `.sf-surface--warning` |
+| `.sf-text-gradient` |
+| `.sf-truncate` |
+
+## State classes (`core/states.css`)
+
+40 classes.
+
+| Class |
+|---|
+| `.is-active` |
+| `.is-busy` |
+| `.is-clickable` |
+| `.is-clipped` |
+| `.is-collapsed` |
+| `.is-current` |
+| `.is-danger` |
+| `.is-disabled` |
+| `.is-draggable` |
+| `.is-dragging` |
+| `.is-drop-target` |
+| `.is-empty` |
+| `.is-error` |
+| `.is-expanded` |
+| `.is-fixed` |
+| `.is-focused` |
+| `.is-fullscreen` |
+| `.is-hidden` |
+| `.is-highlighted` |
+| `.is-info` |
+| `.is-invalid` |
+| `.is-invisible` |
+| `.is-loading` |
+| `.is-open` |
+| `.is-overlay` |
+| `.is-pending` |
+| `.is-pinned` |
+| `.is-pressed` |
+| `.is-readonly` |
+| `.is-resizable` |
+| `.is-scrollable` |
+| `.is-selected` |
+| `.is-skeleton` |
+| `.is-sticky` |
+| `.is-success` |
+| `.is-truncated` |
+| `.is-unselectable` |
+| `.is-valid` |
+| `.is-visible` |
+| `.is-warning` |
+
+## Accessibility (`core/accessibility.css`)
+
+1 classes.
+
+| Class |
+|---|
+| `.sf-clickable-parent` |
+
+## Motion / entrances (`core/motion.css`)
+
+15 classes.
+
+| Class |
+|---|
+| `.sf-color-pulse` |
+| `.sf-entrance--fade` |
+| `.sf-entrance--fade-down` |
+| `.sf-entrance--fade-left` |
+| `.sf-entrance--fade-right` |
+| `.sf-entrance--fade-up` |
+| `.sf-entrance--scale-up` |
+| `.sf-fade-in` |
+| `.sf-fade-out` |
+| `.sf-scale-down` |
+| `.sf-scale-up` |
+| `.sf-slide-in-down` |
+| `.sf-slide-in-left` |
+| `.sf-slide-in-right` |
+| `.sf-slide-in-up` |
+

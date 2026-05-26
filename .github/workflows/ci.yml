@@ -50,8 +50,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run docs:tokens
-      - run: git diff --exit-code docs/tokens.md || (echo "::error::docs/tokens.md is stale — run 'npm run docs:tokens' and commit" && exit 1)
+      - run: npm run docs
+      - run: npm run audit:check
+      - run: git diff --exit-code docs/tokens.md          || (echo "::error::docs/tokens.md is stale — run 'npm run docs' and commit" && exit 1)
+      - run: git diff --exit-code docs/classes.md         || (echo "::error::docs/classes.md is stale — run 'npm run docs' and commit" && exit 1)
+      - run: git diff --exit-code integrations/bricks/data/inventory.json || (echo "::error::inventory.json is stale — run 'npm run docs' and commit" && exit 1)
 
   test:
     name: Regression tests
