@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Expand the Svelte admin panel to cover the entire public API by replacing stub tabs with real content tabs for Variables, Classes, Bundle/Settings, and Hooks, plus improving the existing ColorTab.",
-  "status": "pending",
+  "status": "in_progress",
   "steps": [
     "Step 1 - Create VariablesTab.svelte in src/components/. This tab reads all variables from the inventory (window.slashedBricksApp already provides defaults which contain variable categories from class-inventory.php). For the Svelte SPA, we need to add inventory data to the hydration payload. Since PHP is not available, we will embed a static cheatsheet data module (see FEAT-003). For now, this tab should display all registered variables grouped by their category (Colors, Typography, Spacing, Sizing, Layout, Borders, Radius, Shadows, Effects, Motion, Icons, Z-Index, States, Focus, Scroll, Print, Misc) using the same categorization logic from class-inventory.php. Each category is a collapsible section showing the variable names. This is a read-only view, not an editor.",
     "Step 2 - Create ClassesTab.svelte in src/components/. This tab shows all .sf-* layout/utility classes and .is-* state classes in two separate sections. Each class is listed with its name. The data comes from the same static inventory data module.",

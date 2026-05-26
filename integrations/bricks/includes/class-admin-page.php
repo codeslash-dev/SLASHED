@@ -66,6 +66,10 @@ class Slashed_Bricks_Admin_Page {
 			'shadows'    => 'Shadows',
 			'motion'     => 'Motion',
 			'zindex'     => 'Z-Index',
+			'variables'  => 'Variables',
+			'classes'    => 'Classes',
+			'bundle'     => 'Bundle',
+			'hooks'      => 'Hooks',
 		);
 
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
