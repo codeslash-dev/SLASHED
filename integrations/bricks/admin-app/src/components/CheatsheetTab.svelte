@@ -5,13 +5,14 @@
    * Read-only quick-reference page.
    */
   import { variableGroups, classGroups, miscTokens } from '../lib/cheatsheet-data.js';
+  import { meta } from '../lib/stores.svelte.js';
 
   let search = $state('');
   let viewMode = $state('all'); // 'all' | 'variables' | 'classes'
 
-  const totalVarCount = 607;
-  const totalSfClassCount = 143;
-  const totalIsClassCount = 40;
+  const totalVarCount = meta.inventory?.variables?.length ?? 0;
+  const totalSfClassCount = meta.inventory?.sf_classes?.length ?? 0;
+  const totalIsClassCount = meta.inventory?.is_classes?.length ?? 0;
 
   let filteredVariableGroups = $derived(filterGroups(variableGroups, 'tokens'));
   let filteredClassGroups = $derived(filterGroups(classGroups, 'classes'));
@@ -37,6 +38,12 @@
 
   let showVariables = $derived(viewMode === 'all' || viewMode === 'variables');
   let showClasses = $derived(viewMode === 'all' || viewMode === 'classes');
+
+  let noResults = $derived(
+    search.trim() !== '' &&
+    (!showVariables || (filteredVariableGroups.length === 0 && filteredMiscTokens.length === 0)) &&
+    (!showClasses || filteredClassGroups.length === 0)
+  );
 </script>
 
 <div class="cheatsheet">
@@ -136,7 +143,7 @@
     </div>
   {/if}
 
-  {#if showVariables && filteredVariableGroups.length === 0 && filteredMiscTokens.length === 0 && showClasses && filteredClassGroups.length === 0}
+  {#if noResults}
     <p class="cheatsheet__empty">No results for "{search}"</p>
   {/if}
 </div>
