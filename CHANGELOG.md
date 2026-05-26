@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Enhanced
+
+#### `.sf-clickable-parent` — multi-link support and built-in focus ring
+
+- **Dual-mode link selection.** Automatic mode (no extra markup) continues to
+  work for single-link cards. Explicit mode: add `data-overlay-link` to the
+  primary link and every other link/button in the card is lifted above the
+  overlay automatically — robust across any nesting depth, no manual z-index
+  work required.
+- **Built-in card-level focus ring** via `:focus-within`. Keyboard users see
+  the same "whole card highlighted" cue as mouse-hover without a separate
+  companion class. Can be suppressed with `outline: none` if the card design
+  provides its own indicator.
+- **`--sf-clickable-overlay-z` custom property** (default `1`). Set it on the
+  card to escape a parent stacking context without touching framework internals.
+- **Flow-content trade-off remains explicit.** Card text stays non-selectable
+  by mouse by default to preserve full-card navigation (matching Bootstrap
+  stretched-link and ACSS clickable-parent behavior). Use `[data-no-overlay]`
+  on specific descendants that must sit above the overlay.
+- **Wider interactive-element exceptions.** `summary`, `video`, `audio`, and
+  `[role="button"]` are now lifted alongside buttons and form controls.
+
 ## [0.3.0] - 2026-05-24
 
 Class taxonomy refactor. New `slashed.macros` cascade layer, 12 macro
