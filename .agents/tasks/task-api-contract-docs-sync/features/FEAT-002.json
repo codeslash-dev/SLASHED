@@ -1,0 +1,35 @@
+{
+  "id": "FEAT-002",
+  "type": "docs",
+  "description": "Replace the PUBLIC/INTERNAL section in core/tokens.css header comment with the comprehensive PUBLIC/PUBLIC-ADVANCED/INTERNAL/DEPRECATED classification, update docs/macros.md with 3 missing classes + entrance animations, fix docs/layout.md table, and fix docs/states.md cross-references",
+  "status": "pending",
+  "steps": [
+    "Step 1 - Update core/tokens.css header: Replace the block from 'PUBLIC API vs INTERNAL (token-API freeze contract)' through the line ending 'any token explicitly marked INTERNAL' (approx lines 40-51 in the header comment) with the comprehensive new classification text provided in the task description. Keep it inside the existing /* ... */ comment block. The new text has 4 sections: PUBLIC, PUBLIC-ADVANCED, INTERNAL, DEPRECATED.",
+    "Step 2 - Add .sf-surface--* section to docs/macros.md: After the .sf-no-tap-highlight section (the last current section), add a new --- separator and section documenting .sf-surface--* (11 variants: primary, secondary, tertiary, action, neutral, inverse, success, warning, error, info, danger). Describe it as contextual background + auto-contrast text. Show example HTML. No tokens table needed (it reads --sf-color-X and --sf-color-text--on-X directly).",
+    "Step 3 - Add .sf-text-gradient section to docs/macros.md: After .sf-surface--*, add section documenting .sf-text-gradient. Describe gradient text fill defaulting to --sf-gradient-primary. Note per-instance override via style attribute. Mention the @supports gate for background-clip:text and the selection limitation.",
+    "Step 4 - Add .sf-link-external section to docs/macros.md: After .sf-text-gradient, add section documenting .sf-link-external. Describe external link indicator via ::after pseudo-element. Document the --sf-link-external-marker token (default: arrow glyph with leading space). Show how to disable globally or override.",
+    "Step 5 - Add .sf-entrance--* section to docs/macros.md: After .sf-link-external, add section documenting the 6 scroll-driven entrance classes (.sf-entrance--fade, --fade-up, --fade-down, --fade-left, --fade-right, --scale-up). Explain they use animation-timeline: view() where supported, falling back to a one-shot time-driven animation. Document the range tokens (--sf-scroll-timeline-range-start, --sf-scroll-timeline-range-end). Note Safari fallback behavior. Note they live in core/motion.css layer slashed.motion. Note they are gated by prefers-reduced-motion: no-preference.",
+    "Step 6 - Fix docs/layout.md: Remove the two table rows for .sf-prose and .sf-not-prose from the primitives table. Add a new row for .sf-icon--boxed after the existing .sf-icon row with description 'padded, bordered icon frame (content-box sizing)' and tokens --sf-icon-box-pad, --sf-icon-box-radius, --sf-icon-box-bg, --sf-icon-box-border.",
+    "Step 7 - Fix docs/states.md: Add a 'Layer' column to the Reference table. For .sr-only-focusable, .no-motion, and .focus-parent rows, indicate 'accessibility.css'. For all other rows, indicate 'states.css'. Also add a brief note before or after the table explaining that while most state classes live in core/states.css, three a11y-related entries (.no-motion, .sr-only-focusable, .focus-parent) live in core/accessibility.css since v0.3.0.",
+    "Step 8 - Run npm run lint:css to verify no CSS lint issues",
+    "Step 9 - Run npm run build to rebuild dist/ bundles",
+    "Step 10 - Commit all changes with message: docs: complete PUBLIC/ADVANCED/INTERNAL contract + sync docs with code"
+  ],
+  "acceptance_criteria": [
+    "core/tokens.css header contains the new PUBLIC/PUBLIC-ADVANCED/INTERNAL/DEPRECATED classification",
+    "docs/macros.md has sections for .sf-surface--*, .sf-text-gradient, .sf-link-external, and .sf-entrance--*",
+    "docs/layout.md table does not contain .sf-prose or .sf-not-prose rows",
+    "docs/layout.md table contains .sf-icon--boxed row with its 4 tokens",
+    "docs/states.md indicates which classes live in accessibility.css vs states.css",
+    "npm run lint:css passes",
+    "npm run build succeeds",
+    "A commit exists with the conventional commit message"
+  ],
+  "verification": [
+    "npm run lint:css exits 0",
+    "npm run build exits 0",
+    "git log --oneline -1 shows the expected commit message"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
