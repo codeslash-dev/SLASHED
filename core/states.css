@@ -77,7 +77,7 @@
     /* Reduced-motion: accessibility.css kills animation-duration via
        !important on *, *::before, *::after — so this spinner stops
        even without a local reduced-motion wrapper. */
-    animation:     sf-spin var(--sf-duration-slower) linear infinite;
+    animation: var(--sf-animation-spin);
   }
 
   .is-busy {
@@ -87,7 +87,7 @@
   .is-pending {
     /* Optimistic UI — request in flight but content still visible/usable
        (unlike .is-loading, which masks content with a spinner). */
-    opacity: 0.7;
+    opacity: var(--sf-state-pending-opacity);
     cursor:  progress;
   }
 
@@ -100,7 +100,7 @@
                        var(--sf-color-well) 75%
                      );
     background-size: 200% 100%;
-    animation:       sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
+    animation: var(--sf-animation-shimmer);
     border-radius:   var(--sf-radius-s);
     pointer-events:  none;
     user-select:     none;
@@ -265,7 +265,7 @@
      ============================================================ */
 
   .is-dragging {
-    opacity: 0.5;
+    opacity: var(--sf-opacity-50);
     cursor:  grabbing;
   }
 

@@ -138,7 +138,7 @@
   /* Notification ping (expanding fading ring), cursor blink, gentle float.
      Keyframes only — apply via your own BEM/component rules or the
      --sf-animation-ping / -blink / -float presets. No utility classes
-     ship for these (see audit §D9). */
+     ship for these (by design). */
   @keyframes sf-ping  { 75%, 100% { scale: 2; opacity: 0; } }
   @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
   @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }

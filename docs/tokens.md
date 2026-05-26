@@ -3,18 +3,18 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**608 tokens.** Every `--sf-*` custom property and its default value. See
+**624 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-361 tokens.
+375 tokens.
 
 | Token | Default |
 |---|---|
-| `--sf-animation-blink` | `sf-blink 1s steps(1, end) infinite` |
+| `--sf-animation-blink` | `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite` |
 | `--sf-animation-color-pulse` | `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite` |
 | `--sf-animation-delay-1` | `calc(75ms * var(--sf-motion-scale))` |
 | `--sf-animation-delay-2` | `calc(150ms * var(--sf-motion-scale))` |
@@ -27,10 +27,12 @@ rebrand workflow.
 | `--sf-animation-ping` | `sf-ping var(--sf-duration-slow) var(--sf-ease-out) infinite` |
 | `--sf-animation-scale-down` | `sf-scale-down var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-scale-up` | `sf-scale-up var(--sf-duration-normal) var(--sf-ease-overshoot) both` |
+| `--sf-animation-shimmer` | `sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite` |
 | `--sf-animation-slide-in-down` | `sf-slide-in-down var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-left` | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-right` | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-up` | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` |
+| `--sf-animation-spin` | `sf-spin var(--sf-duration-slower) linear infinite` |
 | `--sf-blur-l` | `32px` |
 | `--sf-blur-m` | `16px` |
 | `--sf-blur-s` | `8px` |
@@ -56,6 +58,7 @@ rebrand workflow.
 | `--sf-caret-color` | `var(--sf-color-action)` |
 | `--sf-code-font-size` | `0.875em` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-action--hover` | `oklch(from var(--sf-color-action) calc(l - 0.05) c h)` |
 | `--sf-color-action-light` | `oklch(0.60 0.16 210) *(registered)*` |
 | `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
 | `--sf-color-base-light` | `oklch(0.98 0.005 260) *(registered)*` |
@@ -100,13 +103,16 @@ rebrand workflow.
 | `--sf-color-mark-bg` | `oklch(from var(--sf-color-warning) l c h / 0.25)` |
 | `--sf-color-mark-text` | `inherit` |
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-neutral--hover` | `oklch(from var(--sf-color-neutral) calc(l - 0.05) c h)` |
 | `--sf-color-neutral-light` | `oklch(0.45 0.02 260) *(registered)*` |
 | `--sf-color-overlay` | `oklch(from var(--sf-color-base) l c h / 0.9)` |
 | `--sf-color-primary` | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-primary--hover` | `oklch(from var(--sf-color-primary) calc(l - 0.05) c h)` |
 | `--sf-color-primary-light` | `oklch(0.45 0.20 264) *(registered)*` |
 | `--sf-color-raised` | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` |
 | `--sf-color-scheme` | `light dark` |
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-secondary--hover` | `oklch(from var(--sf-color-secondary) calc(l - 0.05) c h)` |
 | `--sf-color-secondary-light` | `oklch(0.25 0.03 260) *(registered)*` |
 | `--sf-color-selection-bg` | `oklch(from var(--sf-color-action) l c h / 0.22)` |
 | `--sf-color-selection-text` | `inherit` |
@@ -117,6 +123,7 @@ rebrand workflow.
 | `--sf-color-success-subtle` | `oklch(from var(--sf-color-success) l c h / 0.12)` |
 | `--sf-color-surface` | `var(--sf-color-base)` |
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-tertiary--hover` | `oklch(from var(--sf-color-tertiary) calc(l - 0.05) c h)` |
 | `--sf-color-tertiary-light` | `oklch(0.48 0.14 310) *(registered)*` |
 | `--sf-color-text` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-text--disabled` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` |
@@ -243,7 +250,11 @@ rebrand workflow.
 | `--sf-icon-s` | `1em` |
 | `--sf-icon-xl` | `3em` |
 | `--sf-icon-xs` | `0.875em` |
+| `--sf-is-active` | `0 *(registered)*` |
+| `--sf-is-current` | `0 *(registered)*` |
 | `--sf-is-dark` | `0 *(registered)*` |
+| `--sf-is-open` | `0 *(registered)*` |
+| `--sf-is-pressed` | `0 *(registered)*` |
 | `--sf-leading-normal` | `1.5` |
 | `--sf-leading-relaxed` | `1.625` |
 | `--sf-leading-snug` | `1.3` |
@@ -280,6 +291,8 @@ rebrand workflow.
 | `--sf-radius-scale` | `1` |
 | `--sf-radius-xl` | `calc(16px * var(--sf-radius-scale))` |
 | `--sf-radius-xs` | `calc(2px * var(--sf-radius-scale))` |
+| `--sf-ratio-3-2` | `3 / 2` |
+| `--sf-ratio-4-3` | `4 / 3` |
 | `--sf-ratio-cinema` | `21 / 9` |
 | `--sf-ratio-golden` | `1.618 / 1` |
 | `--sf-ratio-photo` | `3 / 2` |
@@ -329,6 +342,7 @@ rebrand workflow.
 | `--sf-space-scale` | `1` |
 | `--sf-space-xl` | `calc(clamp(1.56rem, calc(0.029481481481481477 * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale))` |
 | `--sf-space-xs` | `calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))` |
+| `--sf-state-pending-opacity` | `0.7` |
 | `--sf-sticky-offset` | `var(--sf-header-height)` |
 | `--sf-stroke-bold` | `2px` |
 | `--sf-stroke-heavy` | `3px` |
@@ -378,10 +392,12 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-44 tokens.
+46 tokens.
 
 | Token | Default |
 |---|---|
+| `--sf-alternate-gap` | `var(--sf-space-content)` |
+| `--sf-alternate-inner-gap` | `var(--sf-space-gap)` |
 | `--sf-bento-cols-default` | `3` |
 | `--sf-bento-gap` | `var(--sf-space-gap)` |
 | `--sf-bento-row-compact` | `6rem` |

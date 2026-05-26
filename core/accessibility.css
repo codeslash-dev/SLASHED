@@ -80,7 +80,7 @@
     }
 
     hr {
-      border-block-start-width: 2px;
+      border-block-start-width: var(--sf-border-width-2);
     }
   }
 
@@ -149,7 +149,7 @@
     position:      absolute;
     top:           -100%;
     left:          var(--sf-space-m);
-    z-index:       9999;
+    z-index:       var(--sf-z-max);
     padding:       var(--sf-space-s) var(--sf-space-m);
     background:    var(--sf-color-bg);
     color:         var(--sf-color-text);
