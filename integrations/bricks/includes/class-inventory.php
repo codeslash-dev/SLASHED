@@ -162,9 +162,56 @@ class Slashed_Bricks_Inventory {
 
 		$color_values = isset( $inv['color_values'] ) ? $inv['color_values'] : array();
 
+		// Merge admin-saved color overrides so palette swatches reflect
+		// customized colors instead of always showing framework defaults.
+		$admin_overrides = self::get_admin_color_overrides();
+		if ( ! empty( $admin_overrides ) ) {
+			$color_values = array_merge( $color_values, $admin_overrides );
+		}
+
 		self::$hex_map_cache = Slashed_Bricks_Color_Resolver::resolve( $color_values );
 
 		return self::$hex_map_cache;
+	}
+
+	/**
+	 * Read admin-saved color overrides and map them to CSS variable names.
+	 *
+	 * Mirrors the mapping logic in Slashed_Bricks_CSS_Generator::generate_color_declarations():
+	 *   - brand_primary   -> --sf-color-primary-light
+	 *   - status_success  -> --sf-color-success-light
+	 *
+	 * @return array<string, string> Map of CSS variable name to color value.
+	 */
+	private static function get_admin_color_overrides() {
+		$tokens = get_option( Slashed_Bricks_Admin_Page::OPTION_NAME );
+
+		if ( ! is_array( $tokens ) || empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
+			return array();
+		}
+
+		$settings = $tokens['colors'];
+		$overrides = array();
+
+		// Brand colors: brand_primary -> --sf-color-primary-light.
+		$brand_colors = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+		foreach ( $brand_colors as $color ) {
+			$key = 'brand_' . $color;
+			if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
+				$overrides[ '--sf-color-' . $color . '-light' ] = $settings[ $key ];
+			}
+		}
+
+		// Status colors: status_success -> --sf-color-success-light.
+		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
+		foreach ( $status_colors as $color ) {
+			$key = 'status_' . $color;
+			if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
+				$overrides[ '--sf-color-' . $color . '-light' ] = $settings[ $key ];
+			}
+		}
+
+		return $overrides;
 	}
 
 	/**
