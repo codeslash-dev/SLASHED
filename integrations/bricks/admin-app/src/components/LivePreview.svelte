@@ -8,35 +8,51 @@
    * - write the result into a <style> tag.
    *
    * Here it's a $derived expression off the reactive `tokens` store.
-   * Any change anywhere in the form re-runs the deriver, the <style>
-   * element re-renders, and the swatches/text update. No DOM walking,
-   * no per-input change handlers, no order-of-operations footguns.
+   * Any change anywhere in the form re-runs the deriver, the inline
+   * `style` attribute re-renders, and the swatches/text update. No DOM
+   * walking, no per-input change handlers, no order-of-operations
+   * footguns.
+   *
+   * Scope is intentionally limited to what's *visible* in the preview:
+   * brand + status colors (swatches and accent buttons) and font
+   * families (sample heading + paragraph). Things like font-size
+   * clamps, spacing aliases, motion durations etc. are not previewed
+   * here; they affect the framework's generated stylesheet but don't
+   * render meaningfully inside this small box, and adding them would
+   * just inflate the preview into a second admin form.
    */
   import { tokens } from '../lib/stores.svelte.js';
 
   /** Brand color names rendered as swatches; mirrors the legacy preview. */
   const brand = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
+  /** Status colors rendered alongside brand, same as legacy. */
+  const statuses = ['success', 'warning', 'error', 'info', 'danger'];
 
   /**
    * Build inline CSS custom properties for the preview container.
    *
-   * Setting vars on the container via the style attribute is safe — Svelte
-   * escapes attribute values, so no {@html} injection is needed. Custom
-   * properties cascade to all descendants, so var(--sf-color-*-light) on
-   * swatches/buttons resolves through the container's inline style.
+   * Setting vars on the container via the style attribute is safe —
+   * Svelte escapes attribute values, so no {@html} injection is needed.
+   * Custom properties cascade to all descendants, so var(--sf-color-…)
+   * and var(--sf-font-…) on swatches/text resolve through the
+   * container's inline style.
    */
   const inlineStyle = $derived.by(() => {
     const pairs = [];
     const colors = tokens.colors ?? {};
+    const typography = tokens.typography ?? {};
 
     for (const name of brand) {
       const v = colors[`brand_${name}`];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
     }
-    for (const name of ['success', 'warning', 'error', 'info', 'danger']) {
+    for (const name of statuses) {
       const v = colors[`status_${name}`];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
     }
+    if (typography.font_body)    pairs.push(`--sf-font-body:${typography.font_body}`);
+    if (typography.font_heading) pairs.push(`--sf-font-heading:${typography.font_heading}`);
+
     return pairs.join(';');
   });
 
@@ -44,15 +60,19 @@
   const css = $derived.by(() => {
     const decls = [];
     const colors = tokens.colors ?? {};
+    const typography = tokens.typography ?? {};
 
     for (const name of brand) {
       const v = colors[`brand_${name}`];
       if (v) decls.push(`--sf-color-${name}-light: ${v}`);
     }
-    for (const name of ['success', 'warning', 'error', 'info', 'danger']) {
+    for (const name of statuses) {
       const v = colors[`status_${name}`];
       if (v) decls.push(`--sf-color-${name}-light: ${v}`);
     }
+    if (typography.font_body)    decls.push(`--sf-font-body: ${typography.font_body}`);
+    if (typography.font_heading) decls.push(`--sf-font-heading: ${typography.font_heading}`);
+
     if (decls.length === 0) return '';
     return `.slashed-preview {\n  ${decls.join(';\n  ')};\n}`;
   });
@@ -67,6 +87,18 @@
     margin-top: 8px;
   }
   .slashed-preview h3 { margin-top: 0; }
+  .slashed-preview__type-heading {
+    font-family: var(--sf-font-heading, system-ui, sans-serif);
+    margin: 8px 0 6px;
+    font-size: 22px;
+    color: #1d2327;
+  }
+  .slashed-preview__type-body {
+    font-family: var(--sf-font-body, system-ui, sans-serif);
+    color: #2c3338;
+    margin: 0 0 16px;
+    max-width: 640px;
+  }
   .slashed-preview__swatches {
     display: flex;
     gap: 10px;
@@ -119,6 +151,17 @@
 
 <div class="slashed-preview" style={inlineStyle}>
   <h3>Live preview</h3>
+
+  <p class="slashed-preview__type-heading">
+    The quick brown fox jumps over the lazy dog
+  </p>
+  <p class="slashed-preview__type-body">
+    This is a preview of your design token configuration. Adjust values above
+    and see changes reflected here in real time. Brand and status colors are
+    rendered as swatches; the heading and this paragraph reflect the current
+    body and heading font stacks.
+  </p>
+
   <div class="slashed-preview__swatches">
     {#each brand as name (name)}
       <div
