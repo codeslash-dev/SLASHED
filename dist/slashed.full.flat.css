@@ -1169,7 +1169,7 @@
 
 html {
   text-size-adjust:    100%;
-  scroll-padding-top:  var(--sf-header-height, 3.5rem);
+  scroll-padding-top:  var(--sf-header-height);
   scrollbar-gutter:    stable;
   color-scheme:        var(--sf-color-scheme, light dark);
   hanging-punctuation: first last;
@@ -1300,7 +1300,7 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap:         var(--sf-heading-text-wrap);
   overflow-wrap:     break-word;
   text-rendering:    optimizelegibility;
-  scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+  scroll-margin-top: calc(var(--sf-header-height) + var(--sf-space-m));
 }
 
 h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); }
@@ -1424,7 +1424,7 @@ hr {
 }
 
 :target {
-  scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+  scroll-margin-top: calc(var(--sf-header-height) + var(--sf-space-m));
 }
 
 ::selection {
@@ -1905,8 +1905,8 @@ td, th {
 .sf-frame--video    { aspect-ratio: var(--sf-ratio-video); }
 .sf-frame--cinema   { aspect-ratio: var(--sf-ratio-cinema); }
 .sf-frame--portrait { aspect-ratio: var(--sf-ratio-portrait); }
-.sf-frame--4-3      { aspect-ratio: var(--sf-ratio-photo); }
-.sf-frame--3-2      { aspect-ratio: 3 / 2; }
+.sf-frame--4-3      { aspect-ratio: var(--sf-ratio-4-3); }
+.sf-frame--3-2      { aspect-ratio: var(--sf-ratio-3-2); }
 .sf-frame--golden   { aspect-ratio: var(--sf-ratio-golden); }
 
 /* -- Reel ----------------------------------------------------
@@ -1964,13 +1964,13 @@ td, th {
 
 .sf-alternate {
   display:   grid;
-  gap:       var(--sf-space-content);
+  gap:       var(--sf-alternate-gap);
   container: sf-alternate / inline-size;
 }
 
 .sf-alternate > * {
   display:     grid;
-  gap:         var(--sf-space-gap);
+  gap:         var(--sf-alternate-inner-gap);
   align-items: center;
 }
 
@@ -2423,7 +2423,7 @@ td, th {
   /* Reduced-motion: accessibility.css kills animation-duration via
      !important on *, *::before, *::after — so this spinner stops
      even without a local reduced-motion wrapper. */
-  animation:     sf-spin var(--sf-duration-slower) linear infinite;
+  animation:     var(--sf-animation-spin);
 }
 
 .is-busy {
@@ -2433,7 +2433,7 @@ td, th {
 .is-pending {
   /* Optimistic UI — request in flight but content still visible/usable
      (unlike .is-loading, which masks content with a spinner). */
-  opacity: 0.7;
+  opacity: var(--sf-state-pending-opacity);
   cursor:  progress;
 }
 
@@ -2446,7 +2446,7 @@ td, th {
                      var(--sf-color-well) 75%
                    );
   background-size: 200% 100%;
-  animation:       sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
+  animation:       var(--sf-animation-shimmer);
   border-radius:   var(--sf-radius-s);
   pointer-events:  none;
   user-select:     none;
@@ -2611,7 +2611,7 @@ td, th {
    ============================================================ */
 
 .is-dragging {
-  opacity: 0.5;
+  opacity: var(--sf-opacity-50);
   cursor:  grabbing;
 }
 
@@ -2920,7 +2920,7 @@ td, th {
   }
 
   hr {
-    border-block-start-width: 2px;
+    border-block-start-width: var(--sf-border-width-2);
   }
 }
 
@@ -2989,7 +2989,7 @@ td, th {
   position:      absolute;
   top:           -100%;
   left:          var(--sf-space-m);
-  z-index:       9999;
+  z-index:       var(--sf-z-max);
   padding:       var(--sf-space-s) var(--sf-space-m);
   background:    var(--sf-color-bg);
   color:         var(--sf-color-text);
@@ -3717,7 +3717,7 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
+  background-color: var(--sf-color-action-hover, var(--sf-color-action--hover));
 }
 
 button:focus-visible,
@@ -3770,7 +3770,7 @@ input[type="file"]::file-selector-button {
   transition: var(--sf-transition-colors);
 }
 input[type="file"]::file-selector-button:hover {
-  background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);
+  background-color: var(--sf-color-action-hover, var(--sf-color-action--hover));
 }
 
 

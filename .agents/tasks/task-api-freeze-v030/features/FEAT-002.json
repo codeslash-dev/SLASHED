@@ -1,0 +1,46 @@
+{
+  "id": "FEAT-002",
+  "type": "fix",
+  "description": "Replace all hardcoded values with token references across states.css, accessibility.css, layout.css, base.css, reset.css, and forms.css. Also remove --sf-header-height fallbacks.",
+  "status": "in_progress",
+  "steps": [
+    "In core/states.css, in .is-pending (around line 90): change `opacity: 0.7;` to `opacity: var(--sf-state-pending-opacity);`",
+    "In core/states.css, in .is-dragging (around line 268): change `opacity: 0.5;` to `opacity: var(--sf-opacity-50);`",
+    "In core/states.css, in .is-loading::after (around line 80): change `animation: sf-spin var(--sf-duration-slower) linear infinite;` to `animation: var(--sf-animation-spin);`",
+    "In core/states.css, in .is-skeleton (around line 103): change `animation: sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;` to `animation: var(--sf-animation-shimmer);`",
+    "In core/accessibility.css, in .skip-link (around line 152): change `z-index: 9999;` to `z-index: var(--sf-z-max);`",
+    "In core/accessibility.css, in @media (prefers-contrast: more) hr rule (around line 83): change `border-block-start-width: 2px;` to `border-block-start-width: var(--sf-border-width-2);`",
+    "In core/layout.css: change `.sf-frame--4-3 { aspect-ratio: var(--sf-ratio-photo); }` to `.sf-frame--4-3 { aspect-ratio: var(--sf-ratio-4-3); }`",
+    "In core/layout.css: change `.sf-frame--3-2 { aspect-ratio: 3 / 2; }` to `.sf-frame--3-2 { aspect-ratio: var(--sf-ratio-3-2); }`",
+    "In core/layout.css: change `.sf-alternate { ... gap: var(--sf-space-content); ... }` to use `gap: var(--sf-alternate-gap);`",
+    "In core/layout.css: inside `.sf-alternate > *`, change `gap: var(--sf-space-gap);` to `gap: var(--sf-alternate-inner-gap);`",
+    "In core/reset.css line 14: change `scroll-padding-top: var(--sf-header-height, 3.5rem);` to `scroll-padding-top: var(--sf-header-height);`",
+    "In core/base.css (heading scroll-margin-top around line 28): change `calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m))` to `calc(var(--sf-header-height) + var(--sf-space-m))`",
+    "In core/base.css (:target around line 152): same pattern -- remove the `, 3.5rem` fallback from var(--sf-header-height, 3.5rem)",
+    "In optional/forms.css line 178: change `background-color: oklch(from var(--sf-color-action) calc(l - 0.05) c h);` to `background-color: var(--sf-color-action-hover, var(--sf-color-action--hover));`",
+    "In optional/forms.css line 231 (file-selector-button:hover): same change as above"
+  ],
+  "acceptance_criteria": [
+    "core/states.css .is-pending uses var(--sf-state-pending-opacity)",
+    "core/states.css .is-dragging uses var(--sf-opacity-50)",
+    "core/states.css .is-loading::after uses var(--sf-animation-spin)",
+    "core/states.css .is-skeleton uses var(--sf-animation-shimmer)",
+    "core/accessibility.css .skip-link uses var(--sf-z-max) not 9999",
+    "core/accessibility.css hr in prefers-contrast uses var(--sf-border-width-2)",
+    "core/layout.css .sf-frame--4-3 uses var(--sf-ratio-4-3)",
+    "core/layout.css .sf-frame--3-2 uses var(--sf-ratio-3-2)",
+    "core/layout.css .sf-alternate uses var(--sf-alternate-gap)",
+    "core/layout.css .sf-alternate > * uses var(--sf-alternate-inner-gap)",
+    "core/reset.css html scroll-padding-top has no 3.5rem fallback",
+    "core/base.css headings scroll-margin-top has no 3.5rem fallback",
+    "core/base.css :target scroll-margin-top has no 3.5rem fallback",
+    "optional/forms.css button:hover uses var(--sf-color-action-hover, var(--sf-color-action--hover))",
+    "optional/forms.css file-selector-button:hover uses same token"
+  ],
+  "verification": [
+    "Run npm run lint:css to confirm no CSS lint errors",
+    "Run npm run build to confirm dist/ regenerates successfully"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

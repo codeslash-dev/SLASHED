@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "fix",
   "description": "Add new tokens (animation-spin, animation-shimmer, state-pending-opacity, ratio-4-3, ratio-3-2, brand hover tokens) to core/tokens.css; add alternate tokens to core/tokens.layout.css; add @property registrations for state flags; deprecate --sf-ratio-photo; fix --sf-animation-blink to use motion-scale; update alias chain comment from 2 hops to 3 hops; remove dead audit references from tokens.css, motion.css, and print.css",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "In core/tokens.css, after the line `--sf-animation-float: sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;`, add two new animation presets: `--sf-animation-spin: sf-spin var(--sf-duration-slower) linear infinite;` and `--sf-animation-shimmer: sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;`",
     "In core/tokens.css, near `--sf-opacity-disabled: 0.45;` (in the Shadow section around line 487), add a new state token: `--sf-state-pending-opacity: 0.7;`",
@@ -33,5 +33,5 @@
     "Run npm run build to confirm dist/ regenerates successfully"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All CSS changes applied successfully. Lint passes. Build regenerates dist/ cleanly (pre-commit hook also rebuilds). Token-api snapshot updated with 16 new tokens (624 total). Browser-based Playwright tests cannot run due to missing system libraries (libnspr4.so, no apt-get available) - this is a pre-existing environment limitation. Pure-Node tests (token-api, bundle-size, coverage) all pass across all 3 browsers."
 }

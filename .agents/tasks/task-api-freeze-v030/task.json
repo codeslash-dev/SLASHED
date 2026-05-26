@@ -1,0 +1,7 @@
+{
+  "task_id": "task-api-freeze-v030",
+  "task_description": "Implement API freeze changes for SLASHED v0.3.0: add new tokens, fix hardcoded values, remove dead audit references, add @property registrations, update PUBLIC/INTERNAL contract header, and deprecate --sf-ratio-photo.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002"],
+  "blocked_reason": null
+}
