@@ -202,6 +202,13 @@ class Slashed_Bricks_Color_Resolver {
 					$sources[ $family ] = $parsed;
 					continue;
 				}
+
+				// Fallback: try parsing as hex color.
+				$parsed = self::hex_to_oklch( $color_values[ $var_name ] );
+				if ( null !== $parsed ) {
+					$sources[ $family ] = $parsed;
+					continue;
+				}
 			}
 
 			// Fall back to default.
@@ -322,6 +329,104 @@ class Slashed_Bricks_Color_Resolver {
 			return 12.92 * $c;
 		}
 		return 1.055 * pow( $c, 1.0 / 2.4 ) - 0.055;
+	}
+
+	/**
+	 * Apply inverse sRGB gamma transfer function (sRGB to linear).
+	 *
+	 * @param float $c sRGB channel value (0-1).
+	 * @return float Linear channel value.
+	 */
+	private static function srgb_to_linear( $c ) {
+		if ( $c <= 0.04045 ) {
+			return $c / 12.92;
+		}
+		return pow( ( $c + 0.055 ) / 1.055, 2.4 );
+	}
+
+	/**
+	 * Cube root that handles negative values.
+	 *
+	 * The intermediate LMS space used in this OKLab formulation can produce
+	 * negative values for saturated colors, so a sign-preserving cube root
+	 * is required.
+	 *
+	 * @param float $x Value to take cube root of.
+	 * @return float Cube root of x.
+	 */
+	private static function safe_cbrt( $x ) {
+		if ( $x >= 0 ) {
+			return pow( $x, 1.0 / 3.0 );
+		}
+		return -pow( -$x, 1.0 / 3.0 );
+	}
+
+	/**
+	 * Convert a hex color string to oklch values.
+	 *
+	 * Conversion path: hex -> RGB -> linear sRGB -> LMS -> OKLab -> OKLch.
+	 * Uses the exact inverse of the matrices in oklch_to_hex() to ensure
+	 * accurate round-trip conversion.
+	 *
+	 * @param string $str The value to parse (expected hex like #rrggbb or #rgb).
+	 * @return array{0:float, 1:float, 2:float}|null [L, C, H] or null on failure.
+	 */
+	private static function hex_to_oklch( $str ) {
+		$str = trim( $str );
+		if ( ! preg_match( '/^#([0-9a-fA-F]{3,8})$/', $str ) ) {
+			return null;
+		}
+
+		$hex = ltrim( $str, '#' );
+		$len = strlen( $hex );
+
+		// Expand shorthand (#rgb -> #rrggbb, #rgba -> #rrggbbaa).
+		if ( 3 === $len || 4 === $len ) {
+			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+		} elseif ( 6 !== $len && 8 !== $len ) {
+			return null;
+		}
+
+		// Extract RGB (ignore alpha channel if present).
+		$r = (int) hexdec( substr( $hex, 0, 2 ) );
+		$g = (int) hexdec( substr( $hex, 2, 2 ) );
+		$b = (int) hexdec( substr( $hex, 4, 2 ) );
+
+		// RGB 0-255 -> sRGB 0-1.
+		$sr = $r / 255.0;
+		$sg = $g / 255.0;
+		$sb = $b / 255.0;
+
+		// sRGB -> linear RGB.
+		$lr = self::srgb_to_linear( $sr );
+		$lg = self::srgb_to_linear( $sg );
+		$lb = self::srgb_to_linear( $sb );
+
+		// Linear sRGB -> LMS (exact inverse of the LMS->sRGB matrix in oklch_to_hex).
+		$lms_l = 0.3777469185 * $lr + 0.4250470403 * $lg + 0.1979894399 * $lb;
+		$lms_m = 0.1399355608 * $lr + 0.4483836167 * $lg + 0.4133162198 * $lb;
+		$lms_s = -0.3338535206 * $lr + -1.0810207718 * $lg + 2.4244673521 * $lb;
+
+		// LMS -> cube root (LMS_). Sign-preserving for negative intermediate values.
+		$l_ = self::safe_cbrt( $lms_l );
+		$m_ = self::safe_cbrt( $lms_m );
+		$s_ = self::safe_cbrt( $lms_s );
+
+		// LMS_ -> OKLab (inverse of the OKLab->LMS_ matrix in oklch_to_hex).
+		$ok_l = 0.2104542553 * $l_ + 0.7936177850 * $m_ + ( -0.0040720468 ) * $s_;
+		$ok_a = 1.9779984951 * $l_ + ( -2.4285922050 ) * $m_ + 0.4505937099 * $s_;
+		$ok_b = 0.0259040371 * $l_ + 0.7827717662 * $m_ + ( -0.8086757660 ) * $s_;
+
+		// OKLab -> OKLch.
+		$c = sqrt( $ok_a * $ok_a + $ok_b * $ok_b );
+		$h = atan2( $ok_b, $ok_a ) * 180.0 / M_PI;
+
+		// Normalize hue to 0-360.
+		if ( $h < 0 ) {
+			$h += 360.0;
+		}
+
+		return array( $ok_l, $c, $h );
 	}
 
 	/**

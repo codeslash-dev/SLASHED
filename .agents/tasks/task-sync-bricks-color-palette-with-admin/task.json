@@ -1,0 +1,7 @@
+{
+  "task_id": "task-sync-bricks-color-palette-with-admin",
+  "task_description": "Fix Bricks color palette to reflect admin-saved color overrides instead of always showing default framework colors. The get_color_hex_map() method needs to merge admin-saved colors into the color_values before passing to the Color Resolver.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002"],
+  "blocked_reason": null
+}
