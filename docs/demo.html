@@ -2435,10 +2435,31 @@
         </button>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-clickable-parent</code> — full-card click target</h3>
-        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 22rem">
+        <p style="margin-block: var(--sf-space-xs) var(--sf-space-s); font-size: var(--sf-text-s)">
+          <strong>Automatic mode</strong> — one link, no extra attributes needed. Text is still selectable; the button stays independently clickable.
+          Tab to the card to see the built-in card-level focus ring (no separate <code>?focus-parent</code> recipe required).
+        </p>
+        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
           <h4 style="margin: 0"><a href="#macros">Click anywhere on this card</a></h4>
-          <p style="margin: 0">Text inside is still <strong>selectable</strong> — only the link's overlay covers the surface, and inline children are lifted above it via z-index.</p>
+          <p style="margin: 0">Text inside is still <strong>selectable</strong>. The overlay sits at <code>z-index: 1</code>; flow children are lifted above it automatically.</p>
+          <ul style="margin: 0; padding-inline-start: var(--sf-space-m)">
+            <li>List items are also selectable</li>
+            <li>No extra markup needed</li>
+          </ul>
           <button onclick="event.stopPropagation(); event.preventDefault();" style="justify-self: start; padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none">Independent action</button>
+        </article>
+
+        <p style="margin-block: var(--sf-space-m) var(--sf-space-xs); font-size: var(--sf-text-s)">
+          <strong>Explicit mode</strong> — multiple links. Add <code>data-overlay-link</code> to the primary link; every other link and button is lifted automatically with no manual z-index work.
+        </p>
+        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
+          <h4 style="margin: 0"><a href="#macros" data-overlay-link>Primary link covers the whole card</a></h4>
+          <p style="margin: 0">Body text is still <strong>selectable</strong>. The secondary links and button below are fully independent — no z-index wrangling required.</p>
+          <div style="display: flex; gap: var(--sf-space-s); flex-wrap: wrap; align-items: center">
+            <a href="#states" style="font-size: var(--sf-text-s)">Secondary link A</a>
+            <a href="#motion" style="font-size: var(--sf-text-s)">Secondary link B</a>
+            <button onclick="event.stopPropagation(); event.preventDefault();" style="margin-inline-start: auto; padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none">Action</button>
+          </div>
         </article>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-surface--*</code> — auto-flipped foreground</h3>
