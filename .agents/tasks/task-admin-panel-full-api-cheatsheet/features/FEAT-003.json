@@ -24,5 +24,5 @@
     "Run `cd integrations/bricks/admin-app && npm run build` and confirm exit code 0"
   ],
   "blocked_reason": null,
-  "findings": "All steps implemented successfully. Created cheatsheet-data.js with variableGroups (14 categories), classGroups (5 categories), and miscTokens. Created CheatsheetTab.svelte with search, view mode toggle (All/Variables/Classes), collapsible details sections, and total counts display. Updated App.svelte to import CheatsheetTab, hide SaveBar on read-only tabs (cheatsheet, hooks, variables, classes). Added cheatsheet tab to PHP class-admin-page.php and index.html dev harness. Build passes (vite build exits 0). Bundle grew from ~62KB to ~84KB due to the static cheatsheet data."
+  "findings": "All steps implemented successfully. Created cheatsheet-data.js with variableGroups (14 categories) plus miscTokens (displayed as a 15th Misc group), classGroups (5 categories). Created CheatsheetTab.svelte with search, view mode toggle (All/Variables/Classes), collapsible details sections, and total counts display. Updated App.svelte to import CheatsheetTab, hide SaveBar on read-only tabs (cheatsheet, hooks, variables, classes). Added cheatsheet tab to PHP class-admin-page.php and index.html dev harness. Build passes (vite build exits 0). Bundle grew from ~62KB to ~84KB due to the static cheatsheet data."
 }

@@ -59,22 +59,26 @@
       type="search"
       class="cheatsheet__search"
       placeholder="Search tokens or classes..."
+      aria-label="Search tokens or classes"
       bind:value={search}
     />
     <div class="cheatsheet__view-toggle">
       <button
         type="button"
         class:active={viewMode === 'all'}
+        aria-pressed={viewMode === 'all'}
         onclick={() => viewMode = 'all'}
       >All</button>
       <button
         type="button"
         class:active={viewMode === 'variables'}
+        aria-pressed={viewMode === 'variables'}
         onclick={() => viewMode = 'variables'}
       >Variables</button>
       <button
         type="button"
         class:active={viewMode === 'classes'}
+        aria-pressed={viewMode === 'classes'}
         onclick={() => viewMode = 'classes'}
       >Classes</button>
     </div>
