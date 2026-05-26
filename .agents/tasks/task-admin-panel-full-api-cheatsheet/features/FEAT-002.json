@@ -1,0 +1,34 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Expand the Svelte admin panel to cover the entire public API by replacing stub tabs with real content tabs for Variables, Classes, Bundle/Settings, and Hooks, plus improving the existing ColorTab.",
+  "status": "completed",
+  "steps": [
+    "Step 1 - Create VariablesTab.svelte in src/components/. This tab reads all variables from the inventory (window.slashedBricksApp already provides defaults which contain variable categories from class-inventory.php). For the Svelte SPA, we need to add inventory data to the hydration payload. Since PHP is not available, we will embed a static cheatsheet data module (see FEAT-003). For now, this tab should display all registered variables grouped by their category (Colors, Typography, Spacing, Sizing, Layout, Borders, Radius, Shadows, Effects, Motion, Icons, Z-Index, States, Focus, Scroll, Print, Misc) using the same categorization logic from class-inventory.php. Each category is a collapsible section showing the variable names. This is a read-only view, not an editor.",
+    "Step 2 - Create ClassesTab.svelte in src/components/. This tab shows all .sf-* layout/utility classes and .is-* state classes in two separate sections. Each class is listed with its name. The data comes from the same static inventory data module.",
+    "Step 3 - Create BundleTab.svelte in src/components/. This tab shows: (a) Current CSS bundle info (the URL configured, which bundle is active), (b) the html_font_size plugin setting (already exposed via pluginSettings in the hydration payload and the /settings REST endpoint). The font-size select should be functional - on change it calls the existing REST API (POST /slashed-bricks/v1/settings with html_font_size). Show a save button for this section that is independent of the token save flow.",
+    "Step 4 - Create HooksTab.svelte in src/components/. This is a documentation/reference tab that lists all available filter hooks with their signatures, descriptions, and example PHP code snippets. The content is static/hardcoded since it documents the PHP API. Hooks to document: slashed_bricks/css_bundle_url, slashed_bricks/registered_classes, slashed_bricks/registered_colors, slashed_bricks/registered_variables, slashed_bricks/inventory, slashed_bricks/inventory_local_path, slashed_bricks/color_categories.",
+    "Step 5 - Update stores.svelte.js to expose inventory data. Add an `inventory` field to the `meta` export that reads from bootstrap.inventory (which we will populate from PHP or from the static fallback). The shape should be { variables: string[], sf_classes: string[], is_classes: string[] }. Also expose pluginSettings from the bootstrap.",
+    "Step 6 - Update App.svelte to import and render the new tab components. Replace the single StubTab fallback with proper conditional rendering: 'colors' -> ColorTab, 'variables' -> VariablesTab, 'classes' -> ClassesTab, 'bundle' -> BundleTab, 'hooks' -> HooksTab. Any unrecognized tab slug still falls back to StubTab.",
+    "Step 7 - Update the PHP hydration in class-admin-page-svelte.php to pass inventory data to the SPA. Add 'inventory' key to the wp_localize_script payload containing Slashed_Bricks_Inventory::get() result (variables, sf_classes, is_classes). Also update the 'tabs' to include the new tab slugs.",
+    "Step 8 - Update class-admin-page.php get_tabs() to add the new tab slugs. Add 'variables' => 'Variables', 'classes' => 'Classes', 'bundle' => 'Bundle', 'hooks' => 'Hooks' to the $this->tabs array. Keep existing tabs (colors, contrast, typography, spacing, radius, shadows, motion, zindex) intact.",
+    "Step 9 - Update the api.js module to add a saveSettings(settings) function that calls POST /settings with the given payload. This is needed by BundleTab for the font-size setting.",
+    "Step 10 - Update index.html dev harness to include mock inventory data in window.slashedBricksApp so `vite dev` works for the new tabs. Add inventory with a few sample variables/classes, and the new tab slugs.",
+    "Step 11 - Build and verify: run `npm run build` in admin-app/ and confirm it succeeds."
+  ],
+  "acceptance_criteria": [
+    "App.svelte renders VariablesTab, ClassesTab, BundleTab, HooksTab for their respective tab slugs",
+    "VariablesTab shows variables grouped by category with collapsible sections",
+    "ClassesTab shows .sf-* and .is-* classes in separate sections",
+    "BundleTab shows the font-size setting with a functional select + save button",
+    "HooksTab shows all 7 filter hooks with descriptions and code examples",
+    "TabNav shows all tabs including the new ones",
+    "The app still builds successfully with `npm run build`",
+    "Existing ColorTab functionality is unchanged"
+  ],
+  "verification": [
+    "Run `cd integrations/bricks/admin-app && npm run build` and confirm exit code 0"
+  ],
+  "blocked_reason": null,
+  "findings": "All 11 steps implemented successfully. Build passes (vite build exits 0). Created 4 new tab components (VariablesTab, ClassesTab, BundleTab, HooksTab), updated stores to expose inventory and pluginSettings, added saveSettings to api.js, updated App.svelte routing, updated PHP class-admin-page.php and class-admin-page-svelte.php, and enriched the dev harness index.html with mock data for all new tabs. The compiled output grew from ~47KB to ~62KB due to the new components."
+}

@@ -67,3 +67,11 @@ export function saveSection(section, values) {
 export function resetSection(section) {
   return call('/tokens/reset', { section });
 }
+
+/**
+ * Persist plugin-level settings (e.g. html_font_size). PHP validates
+ * values against an allow-list and stores them in their own wp_option.
+ */
+export function saveSettings(settings) {
+  return call('/settings', settings);
+}

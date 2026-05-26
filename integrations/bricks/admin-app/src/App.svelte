@@ -10,9 +10,17 @@
   import { meta, ui } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
   import ColorTab from './components/ColorTab.svelte';
+  import VariablesTab from './components/VariablesTab.svelte';
+  import ClassesTab from './components/ClassesTab.svelte';
+  import BundleTab from './components/BundleTab.svelte';
+  import HooksTab from './components/HooksTab.svelte';
+  import CheatsheetTab from './components/CheatsheetTab.svelte';
   import StubTab from './components/StubTab.svelte';
   import LivePreview from './components/LivePreview.svelte';
   import SaveBar from './components/SaveBar.svelte';
+
+  const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes', 'bundle'];
+  let isReadOnly = $derived(readOnlyTabs.includes(ui.activeTab));
 
   // Warn before unload when the form has unsaved changes.
   // Replaces the equivalent jQuery `$(window).on('beforeunload', ...)`
@@ -53,6 +61,16 @@
   <section class="slashed-svelte-admin__body">
     {#if ui.activeTab === 'colors'}
       <ColorTab />
+    {:else if ui.activeTab === 'variables'}
+      <VariablesTab />
+    {:else if ui.activeTab === 'classes'}
+      <ClassesTab />
+    {:else if ui.activeTab === 'bundle'}
+      <BundleTab />
+    {:else if ui.activeTab === 'hooks'}
+      <HooksTab />
+    {:else if ui.activeTab === 'cheatsheet'}
+      <CheatsheetTab />
     {:else}
       <StubTab tab={meta.tabs[ui.activeTab] ?? ui.activeTab} />
     {/if}
@@ -60,7 +78,9 @@
 
   <LivePreview />
 
-  <SaveBar />
+  {#if !isReadOnly}
+    <SaveBar />
+  {/if}
 </div>
 
 <style>

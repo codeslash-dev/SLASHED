@@ -159,6 +159,7 @@ class Slashed_Bricks_Admin_Page_Svelte {
 				'defaults'       => Slashed_Bricks_Token_Defaults::get_all(),
 				'settings'       => $this->admin_page->get_settings(),
 				'pluginSettings' => $this->admin_page->get_plugin_settings(),
+				'inventory'      => Slashed_Bricks_Inventory::get(),
 			)
 		);
 	}

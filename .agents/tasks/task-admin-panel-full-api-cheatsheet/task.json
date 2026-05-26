@@ -1,0 +1,7 @@
+{
+  "task_id": "task-admin-panel-full-api-cheatsheet",
+  "task_description": "Expand the Svelte admin panel to cover the entire public API (variables, classes, bundle settings, hooks) and add a Cheatsheet tab with a searchable index of all CSS custom properties and classes in the framework with descriptions.",
+  "status": "completed",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}
