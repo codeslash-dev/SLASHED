@@ -157,6 +157,11 @@
   .category__toggle:hover {
     background: #f6f7f7;
   }
+  .category__toggle:focus-visible {
+    outline: 2px solid #2271b1;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 
   .category__arrow {
     font-size: 10px;

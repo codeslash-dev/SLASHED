@@ -10,6 +10,7 @@
   let saving = $state(false);
   let saved = $state(false);
   let error = $state('');
+  let savedTimer = null;
 
   async function handleSave() {
     saving = true;
@@ -18,7 +19,8 @@
     try {
       await saveSettings({ html_font_size: fontSize });
       saved = true;
-      setTimeout(() => { saved = false; }, 3000);
+      if (savedTimer) clearTimeout(savedTimer);
+      savedTimer = setTimeout(() => { saved = false; savedTimer = null; }, 3000);
     } catch (e) {
       error = e.message || 'Save failed';
     } finally {
