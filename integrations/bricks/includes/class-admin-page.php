@@ -66,11 +66,6 @@ class Slashed_Bricks_Admin_Page {
 			'shadows'    => 'Shadows',
 			'motion'     => 'Motion',
 			'zindex'     => 'Z-Index',
-			'variables'  => 'Variables',
-			'classes'    => 'Classes',
-			'bundle'     => 'Bundle',
-			'hooks'      => 'Hooks',
-			'cheatsheet' => 'Cheatsheet',
 		);
 
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
@@ -275,7 +270,16 @@ class Slashed_Bricks_Admin_Page {
 	 * @return array<string,string>
 	 */
 	public function get_tabs() {
-		return $this->tabs;
+		return array_merge(
+			$this->tabs,
+			array(
+				'variables'  => 'Variables',
+				'classes'    => 'Classes',
+				'bundle'     => 'Bundle',
+				'hooks'      => 'Hooks',
+				'cheatsheet' => 'Cheatsheet',
+			)
+		);
 	}
 
 	/**
