@@ -1,74 +1,107 @@
 #!/usr/bin/env node
 /**
- * Generate the Bricks integration's fallback inventory.json from the
- * built optimal CSS bundle.
+ * Generate the Bricks integration's fallback inventory.json.
  *
- * The integration parses the active CSS bundle at runtime to keep the
- * Bricks UI registry in sync with whatever the framework actually ships.
- * When neither a local file nor a CDN fetch is reachable (e.g. hosts
- * blocking outbound HTTP), the integration falls back to this JSON file -
- * so this script must run as part of every release that bumps
- * SLASHED_BRICKS_CSS_REF in the plugin bootstrap.
+ * Token and class lists are parsed from CSS SOURCE files (same lists as
+ * scripts/audit.js) — never from dist. This ensures the counts match
+ * docs/registry.json and tests/token-api.snapshot.json exactly:
+ *
+ *   - Dist-based counting misses @property-only tokens and picks up local
+ *     custom properties from class rules (--sf-icon-size etc.), causing
+ *     wrong variable counts.
+ *   - Source-based counting is canonical and stable across build tools.
  *
  * Usage:
  *   node scripts/gen-bricks-inventory.js
  */
 
-const fs = require('node:fs');
+'use strict';
+
+const fs   = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SOURCE = path.join(ROOT, 'dist', 'slashed.optimal.css');
-const OUT = path.join(ROOT, 'integrations', 'bricks', 'data', 'inventory.json');
+const OUT  = path.join(ROOT, 'integrations', 'bricks', 'data', 'inventory.json');
 
-if (!fs.existsSync(SOURCE)) {
-    console.error(`[gen-bricks-inventory] source not found: ${SOURCE}`);
-    console.error('  run the bundle build first (npm run build).');
-    process.exit(1);
+// Must match TOKEN_FILES / CLASS_FILES in scripts/audit.js.
+const TOKEN_FILES = [
+  'core/tokens.css',
+  'core/tokens.layout.css',
+  'core/tokens.macros.css',
+  'optional/tokens.palette.css',
+  'optional/tokens.components.css',
+];
+
+const CLASS_FILES = [
+  'core/layout.css',
+  'core/macros.css',
+  'core/states.css',
+  'core/accessibility.css',
+  'core/motion.css',
+  'optional/forms.css',
+  'optional/components.css',
+];
+
+function stripComments(css) {
+  return css.replace(/\/\*[\s\S]*?\*\//g, '');
 }
 
-const raw = fs.readFileSync(SOURCE, 'utf8');
-
-// Strip block comments so documentation strings like "--sf-space-*"
-// don't pollute the inventory.
-const css = raw.replace(/\/\*[\s\S]*?\*\//g, '');
-
-function unique(list) {
-    return Array.from(new Set(list)).sort();
+function stripStrings(css) {
+  return css.replace(/"[^"]*"|'[^']*'/g, '""');
 }
 
-function matchAll(pattern) {
-    const out = [];
-    let m;
-    while ((m = pattern.exec(css)) !== null) {
-        out.push(m[1]);
-    }
-    return unique(out);
+function readFile(rel) {
+  const abs = path.join(ROOT, rel);
+  return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : null;
 }
 
-const variables = matchAll(/(--sf-[a-zA-Z0-9_-]+)\s*:/g);
-const sfClasses = matchAll(/\.(sf-[a-zA-Z0-9_-]+)/g);
-const isClasses = matchAll(/\.(is-[a-zA-Z0-9_-]+)/g);
+function extractTokens() {
+  const names = new Set();
+  for (const rel of TOKEN_FILES) {
+    const raw = readFile(rel);
+    if (raw === null) continue;
+    const css = stripComments(raw);
+    for (const m of css.matchAll(/@property\s+(--sf-[\w-]+)/g))  names.add(m[1]);
+    for (const m of css.matchAll(/(--sf-[\w-]+)\s*:/g))          names.add(m[1]);
+  }
+  return [...names].sort();
+}
+
+function extractClasses(prefix) {
+  const names = new Set();
+  const re = new RegExp(`\\.(${prefix}[\\w-]+)`, 'g');
+  for (const rel of CLASS_FILES) {
+    const raw = readFile(rel);
+    if (raw === null) continue;
+    const css = stripStrings(stripComments(raw));
+    for (const m of css.matchAll(re)) names.add(m[1]);
+  }
+  return [...names].sort();
+}
+
+const variables = extractTokens();
+const sfClasses = extractClasses('sf-');
+const isClasses = extractClasses('is-');
 
 const inventory = {
-    _meta: {
-        source: 'dist/slashed.optimal.css',
-        generated_at: new Date().toISOString(),
-        counts: {
-            variables: variables.length,
-            sf_classes: sfClasses.length,
-            is_classes: isClasses.length,
-        },
+  _meta: {
+    source:       'source (core/ + optional/ token and class files)',
+    generated_at: new Date().toISOString(),
+    counts: {
+      variables:  variables.length,
+      sf_classes: sfClasses.length,
+      is_classes: isClasses.length,
     },
-    variables,
-    sf_classes: sfClasses,
-    is_classes: isClasses,
+  },
+  variables,
+  sf_classes: sfClasses,
+  is_classes: isClasses,
 };
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(inventory, null, 2) + '\n');
 
 console.log(
-    `[gen-bricks-inventory] wrote ${path.relative(ROOT, OUT)} ` +
-    `(${variables.length} vars, ${sfClasses.length} .sf-, ${isClasses.length} .is-)`
+  `[gen-bricks-inventory] → ${path.relative(ROOT, OUT)} ` +
+  `(${variables.length} vars, ${sfClasses.length} .sf-, ${isClasses.length} .is-)`
 );

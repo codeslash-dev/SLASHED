@@ -644,3 +644,10 @@ rebrand workflow.
 | `--sf-color-tertiary-xdark` | `var(--sf-color-tertiary-800)` |
 | `--sf-color-tertiary-xlight` | `var(--sf-color-tertiary-200)` |
 
+## Component tokens (`optional/tokens.components.css`)
+
+0 tokens.
+
+| Token | Default |
+|---|---|
+

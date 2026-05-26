@@ -21,9 +21,8 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 
-// Source files contributing to the public token surface. Includes the
-// optional/* token files because they ship in the optimal+ bundles
-// and their names are part of the public API once activated.
+// Source files contributing to the public token surface.
+// Must match TOKEN_FILES in scripts/audit.js — that is the canonical list.
 const TOKEN_FILES = [
   'core/tokens.css',
   'core/tokens.layout.css',

@@ -31,6 +31,8 @@
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
     "build": "node scripts/bundle.js && node scripts/gen-bricks-inventory.js",
     "watch": "node scripts/bundle.js --watch",
+    "audit": "node scripts/audit.js",
+    "audit:check": "node scripts/audit.js --check",
     "docs:tokens": "node scripts/gen-token-reference.js",
     "bricks:inventory": "node scripts/gen-bricks-inventory.js",
     "lint:css": "stylelint \"**/*.css\"",
