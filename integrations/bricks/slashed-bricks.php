@@ -103,6 +103,12 @@ function slashed_bricks_is_bricks_active() {
 }
 
 /**
+ * Load the Token Store class unconditionally so it is available on both
+ * admin and front-end requests (e.g. when Inventory reads color overrides).
+ */
+require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
+
+/**
  * Initialize the admin page.
  *
  * The admin page loads regardless of whether Bricks is active so users
@@ -110,7 +116,6 @@ function slashed_bricks_is_bricks_active() {
  */
 function slashed_bricks_admin_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
