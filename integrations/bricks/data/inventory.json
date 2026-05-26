@@ -1,7 +1,6 @@
 {
   "_meta": {
     "source": "source (core/ + optional/ token and class files)",
-    "generated_at": "2026-05-26T07:45:58.467Z",
     "counts": {
       "variables": 608,
       "sf_classes": 143,

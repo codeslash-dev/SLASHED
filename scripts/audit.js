@@ -88,7 +88,6 @@ const isClasses = extractClasses('is-');
 
 const registry = {
   _meta: {
-    generated_at:  new Date().toISOString(),
     token_sources: TOKEN_FILES,
     class_sources: CLASS_FILES,
     counts: {

@@ -67,8 +67,7 @@ const isClasses = extractClasses('is-');
 
 const inventory = {
   _meta: {
-    source:       'source (core/ + optional/ token and class files)',
-    generated_at: new Date().toISOString(),
+    source: 'source (core/ + optional/ token and class files)',
     counts: {
       variables:  variables.length,
       sf_classes: sfClasses.length,
