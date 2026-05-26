@@ -65,7 +65,9 @@
      · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
    These are deliberate two-name contracts: override the canonical token
    (right side) to move everything downstream. The alias graph is otherwise
-   ≤2 hops (primitive → semantic → scale), with no duplicates/dangling/cycles.
+   ≤3 hops (per-primitive → layout-system → canonical source), giving three
+   override levels: local (style="--sf-cluster-gap"), all-primitives
+   (--sf-space-gap), or global (--sf-gap).
    ============================================================ */
 
 
@@ -93,6 +95,11 @@
 /* Mode flag — drives formula direction for non-color dark overrides.
    Set by base.css via color-scheme switches. */
 @property --sf-is-dark { syntax: "<integer>"; inherits: true; initial-value: 0; }
+
+@property --sf-is-active  { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --sf-is-open    { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
 
 /* ============================================================
@@ -294,6 +301,16 @@
   --sf-color-bg--disabled: var(--sf-color-well);
   --sf-color-code-bg:      var(--sf-color-well);
 
+  /* ----------------------------------------------------------
+     Brand hover — darkened variant for interactive elements.
+     Used by forms.css buttons; available for consumer BEM.
+     ---------------------------------------------------------- */
+  --sf-color-primary--hover:   oklch(from var(--sf-color-primary)   calc(l - 0.05) c h);
+  --sf-color-secondary--hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);
+  --sf-color-tertiary--hover:  oklch(from var(--sf-color-tertiary)  calc(l - 0.05) c h);
+  --sf-color-action--hover:    oklch(from var(--sf-color-action)    calc(l - 0.05) c h);
+  --sf-color-neutral--hover:   oklch(from var(--sf-color-neutral)   calc(l - 0.05) c h);
+
 
   /* ----------------------------------------------------------
      Selection & backdrop
@@ -376,6 +393,7 @@
   --sf-shadow-glow-color: var(--sf-color-primary);
   --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
   --sf-opacity-disabled:  0.45;
+  --sf-state-pending-opacity: 0.7;
 
 
   /* ----------------------------------------------------------
@@ -538,7 +556,10 @@
   --sf-ratio-square:   1;
   --sf-ratio-video:    16 / 9;
   --sf-ratio-cinema:   21 / 9;
+  /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-ratio-4-3 or --sf-ratio-3-2 */
   --sf-ratio-photo:    3 / 2;
+  --sf-ratio-4-3:      4 / 3;
+  --sf-ratio-3-2:      3 / 2;
   --sf-ratio-portrait: 3 / 4;
   --sf-ratio-golden:   1.618 / 1;
 
@@ -710,12 +731,14 @@
   --sf-animation-scale-down:     sf-scale-down     var(--sf-duration-normal) var(--sf-ease-in)        both;
   --sf-animation-color-pulse:    sf-color-pulse    var(--sf-duration-slow)   var(--sf-ease-in-out)    infinite;
   --sf-animation-ping:           sf-ping           var(--sf-duration-slow)   var(--sf-ease-out)       infinite;
-  --sf-animation-blink:          sf-blink          1s                        steps(1, end)            infinite;
+  --sf-animation-blink:          sf-blink          calc(1s * var(--sf-motion-scale)) steps(1, end) infinite;
   --sf-animation-float:          sf-float          calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;
+  --sf-animation-spin:    sf-spin var(--sf-duration-slower) linear infinite;
+  --sf-animation-shimmer: sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
 
   /* Stagger delays — apply to successive items for entrance choreography
      (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens
-     only; SLASHED ships no .sf-stagger utility class (see audit §D9). */
+     only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). */
   --sf-animation-delay-1: calc(75ms  * var(--sf-motion-scale));
   --sf-animation-delay-2: calc(150ms * var(--sf-motion-scale));
   --sf-animation-delay-3: calc(225ms * var(--sf-motion-scale));
@@ -1065,6 +1088,12 @@
      ---------------------------------------------------------- */
   --sf-prose-paragraph: var(--sf-space-content);
 
+  /* ----------------------------------------------------------
+     Alternate (zigzag)
+     ---------------------------------------------------------- */
+  --sf-alternate-gap:       var(--sf-space-content);
+  --sf-alternate-inner-gap: var(--sf-space-gap);
+
 }
 
 /* ─── core/tokens.macros.css ─── */
@@ -1142,7 +1171,7 @@
 
 html {
   text-size-adjust:    100%;
-  scroll-padding-top:  var(--sf-header-height, 3.5rem);
+  scroll-padding-top:  var(--sf-header-height);
   scrollbar-gutter:    stable;
   color-scheme:        var(--sf-color-scheme, light dark);
   hanging-punctuation: first last;
@@ -1273,7 +1302,7 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap:         var(--sf-heading-text-wrap);
   overflow-wrap:     break-word;
   text-rendering:    optimizelegibility;
-  scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+  scroll-margin-top: calc(var(--sf-header-height) + var(--sf-space-m));
 }
 
 h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); }
@@ -1397,7 +1426,7 @@ hr {
 }
 
 :target {
-  scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+  scroll-margin-top: calc(var(--sf-header-height) + var(--sf-space-m));
 }
 
 ::selection {
@@ -1878,8 +1907,8 @@ td, th {
 .sf-frame--video    { aspect-ratio: var(--sf-ratio-video); }
 .sf-frame--cinema   { aspect-ratio: var(--sf-ratio-cinema); }
 .sf-frame--portrait { aspect-ratio: var(--sf-ratio-portrait); }
-.sf-frame--4-3      { aspect-ratio: var(--sf-ratio-photo); }
-.sf-frame--3-2      { aspect-ratio: 3 / 2; }
+.sf-frame--4-3      { aspect-ratio: var(--sf-ratio-4-3); }
+.sf-frame--3-2      { aspect-ratio: var(--sf-ratio-3-2); }
 .sf-frame--golden   { aspect-ratio: var(--sf-ratio-golden); }
 
 /* -- Reel ----------------------------------------------------
@@ -1937,13 +1966,13 @@ td, th {
 
 .sf-alternate {
   display:   grid;
-  gap:       var(--sf-space-content);
+  gap:       var(--sf-alternate-gap);
   container: sf-alternate / inline-size;
 }
 
 .sf-alternate > * {
   display:     grid;
-  gap:         var(--sf-space-gap);
+  gap:         var(--sf-alternate-inner-gap);
   align-items: center;
 }
 
@@ -2396,7 +2425,7 @@ td, th {
   /* Reduced-motion: accessibility.css kills animation-duration via
      !important on *, *::before, *::after — so this spinner stops
      even without a local reduced-motion wrapper. */
-  animation:     sf-spin var(--sf-duration-slower) linear infinite;
+  animation: var(--sf-animation-spin);
 }
 
 .is-busy {
@@ -2406,7 +2435,7 @@ td, th {
 .is-pending {
   /* Optimistic UI — request in flight but content still visible/usable
      (unlike .is-loading, which masks content with a spinner). */
-  opacity: 0.7;
+  opacity: var(--sf-state-pending-opacity);
   cursor:  progress;
 }
 
@@ -2419,7 +2448,7 @@ td, th {
                      var(--sf-color-well) 75%
                    );
   background-size: 200% 100%;
-  animation:       sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite;
+  animation: var(--sf-animation-shimmer);
   border-radius:   var(--sf-radius-s);
   pointer-events:  none;
   user-select:     none;
@@ -2584,7 +2613,7 @@ td, th {
    ============================================================ */
 
 .is-dragging {
-  opacity: 0.5;
+  opacity: var(--sf-opacity-50);
   cursor:  grabbing;
 }
 
@@ -2783,7 +2812,7 @@ td, th {
 /* Notification ping (expanding fading ring), cursor blink, gentle float.
    Keyframes only — apply via your own BEM/component rules or the
    --sf-animation-ping / -blink / -float presets. No utility classes
-   ship for these (see audit §D9). */
+   ship for these (by design). */
 @keyframes sf-ping  { 75%, 100% { scale: 2; opacity: 0; } }
 @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
@@ -2893,7 +2922,7 @@ td, th {
   }
 
   hr {
-    border-block-start-width: 2px;
+    border-block-start-width: var(--sf-border-width-2);
   }
 }
 
@@ -2962,7 +2991,7 @@ td, th {
   position:      absolute;
   top:           -100%;
   left:          var(--sf-space-m);
-  z-index:       9999;
+  z-index:       var(--sf-z-max);
   padding:       var(--sf-space-s) var(--sf-space-m);
   background:    var(--sf-color-bg);
   color:         var(--sf-color-text);
@@ -3079,7 +3108,7 @@ td, th {
    Print rules and @page definition. Print tokens (--sf-print-*)
    are declared in core/tokens.css.
 
-   Color contract (Phase 3, see audits/comparative-audit-2026.md F-04):
+   Color contract (Phase 3):
    authored colour is preserved by default. Browsers apply their own
    ink-saving heuristics via the default `print-color-adjust: economy`,
    so semantic colours (badges, status pills, <mark>, syntax highlighting)
