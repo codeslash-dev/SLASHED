@@ -19,7 +19,7 @@
   import LivePreview from './components/LivePreview.svelte';
   import SaveBar from './components/SaveBar.svelte';
 
-  const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes'];
+  const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes', 'bundle'];
   let isReadOnly = $derived(readOnlyTabs.includes(ui.activeTab));
 
   // Warn before unload when the form has unsaved changes.
