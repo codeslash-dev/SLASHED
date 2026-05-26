@@ -200,14 +200,13 @@
      position:relative. Flow children are therefore intentionally left at
      position:static; they sit below the overlay in stacking order.
 
-     Trade-off: card text is NOT user-selectable by mouse, identical to
-     Bootstrap stretched-link and ACSS clickable-parent. A JavaScript
+     Trade-off: card text is NOT user-selectable by mouse. A JavaScript
      click-delegate could restore selectability while preserving
      full-card navigation.
 
-     Advantages over ACSS clickable-parent:
+     Key features:
        • [data-overlay-link] explicit mode — reliable multi-link cards
-       • `:focus-within` card ring — no separate recipe needed
+       • `:focus-within` card ring — always included, no extra recipe
        • --sf-clickable-overlay-z — escape parent stacking contexts
        • Wider interactive-element exceptions (summary, video, audio…)
 
@@ -254,8 +253,8 @@
   }
 
   /* Card-level focus ring — keyboard users see which card is active.
-     ACSS requires a separate ?focus-parent recipe that is easily
-     forgotten; here it is always included. Suppress with outline:none
+     The focus ring is always included without requiring a separate
+     recipe. Suppress with outline:none
      if the card design provides its own focus indicator.               */
   .sf-clickable-parent:focus-within {
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
