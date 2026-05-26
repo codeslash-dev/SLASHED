@@ -21,30 +21,40 @@ class Slashed_Bricks_Admin_Page {
 	/**
 	 * Option name for storing token overrides.
 	 *
+	 * Backwards-compat alias for `Slashed_Bricks_Token_Store::OPTION_NAME`.
+	 * Kept for one release so any third-party code (filters, MU plugins)
+	 * that read `Slashed_Bricks_Admin_Page::OPTION_NAME` keeps working.
+	 * Will be dropped together with the legacy admin page itself.
+	 *
 	 * @var string
 	 */
-	const OPTION_NAME = 'slashed_bricks_tokens';
+	const OPTION_NAME = Slashed_Bricks_Token_Store::OPTION_NAME;
 
 	/**
-	 * Nonce action string.
+	 * Nonce action string for the legacy form's tokens submission.
 	 *
 	 * @var string
 	 */
 	const NONCE_ACTION = 'slashed_bricks_save_tokens';
 
 	/**
-	 * Available tabs configuration.
+	 * Token tabs (slug → label). Populated from the registry in the
+	 * constructor; this property is kept (rather than calling the
+	 * registry inline everywhere) so the renderer's tight loops avoid
+	 * repeated static calls.
 	 *
-	 * @var array
+	 * @var array<string,string>
 	 */
 	private $tabs = array();
 
 	/**
-	 * Option name for storing plugin-level settings (separate from token overrides).
+	 * Option name for plugin-level settings.
+	 *
+	 * Backwards-compat alias for `Slashed_Bricks_Token_Store::SETTINGS_OPTION_NAME`.
 	 *
 	 * @var string
 	 */
-	const SETTINGS_OPTION_NAME = 'slashed_bricks_settings';
+	const SETTINGS_OPTION_NAME = Slashed_Bricks_Token_Store::SETTINGS_OPTION_NAME;
 
 	/**
 	 * Nonce action for saving plugin settings.
@@ -57,16 +67,7 @@ class Slashed_Bricks_Admin_Page {
 	 * Constructor. Register hooks.
 	 */
 	public function __construct() {
-		$this->tabs = array(
-			'colors'     => 'Colors',
-			'contrast'   => 'Contrast',
-			'typography' => 'Typography',
-			'spacing'    => 'Spacing',
-			'radius'     => 'Radius',
-			'shadows'    => 'Shadows',
-			'motion'     => 'Motion',
-			'zindex'     => 'Z-Index',
-		);
+		$this->tabs = Slashed_Bricks_Tab_Registry::get_token_tabs();
 
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
@@ -136,11 +137,14 @@ class Slashed_Bricks_Admin_Page {
 	/**
 	 * Get saved token values.
 	 *
+	 * Thin proxy over `Slashed_Bricks_Token_Store::get_settings()` —
+	 * kept on this class for backwards compatibility with any external
+	 * code that called it directly (filters, integrations).
+	 *
 	 * @return array
 	 */
 	public function get_settings() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		return is_array( $settings ) ? $settings : array();
+		return Slashed_Bricks_Token_Store::get_settings();
 	}
 
 	/**
@@ -166,7 +170,7 @@ class Slashed_Bricks_Admin_Page {
 
 		// Handle reset all.
 		if ( ! empty( $_POST['reset_all'] ) ) {
-			delete_option( self::OPTION_NAME );
+			Slashed_Bricks_Token_Store::delete_settings();
 			wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=reset' ) );
 			exit;
 		}
@@ -178,9 +182,7 @@ class Slashed_Bricks_Admin_Page {
 				wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=error' ) );
 				exit;
 			}
-			$settings = $this->get_settings();
-			unset( $settings[ $section ] );
-			update_option( self::OPTION_NAME, $settings );
+			Slashed_Bricks_Token_Store::delete_section( $section );
 			wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&tab=' . $section . '&message=reset_section' ) );
 			exit;
 		}
@@ -190,14 +192,13 @@ class Slashed_Bricks_Admin_Page {
 		if ( ! isset( $this->tabs[ $active_tab ] ) ) {
 			$active_tab = 'colors';
 		}
-		$settings   = $this->get_settings();
-		$section    = isset( $_POST['slashed_tokens'] ) ? wp_unslash( $_POST['slashed_tokens'] ) : array();
+		$section = isset( $_POST['slashed_tokens'] ) ? wp_unslash( $_POST['slashed_tokens'] ) : array();
 
 		if ( is_array( $section ) ) {
-			$settings[ $active_tab ] = $this->sanitize_section( $active_tab, $section );
+			$sanitized = Slashed_Bricks_Token_Sanitizer::sanitize_section( $active_tab, $section );
+			Slashed_Bricks_Token_Store::update_section( $active_tab, $sanitized );
 		}
 
-		update_option( self::OPTION_NAME, $settings );
 		wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&tab=' . $active_tab . '&message=saved' ) );
 		exit;
 	}
@@ -222,208 +223,52 @@ class Slashed_Bricks_Admin_Page {
 			$html_font_size = '';
 		}
 
-		$settings = get_option( self::SETTINGS_OPTION_NAME, array() );
-		if ( ! is_array( $settings ) ) {
-			$settings = array();
-		}
-
+		$settings                   = Slashed_Bricks_Token_Store::get_plugin_settings();
 		$settings['html_font_size'] = $html_font_size;
-		update_option( self::SETTINGS_OPTION_NAME, $settings );
+		Slashed_Bricks_Token_Store::update_plugin_settings( $settings );
 
 		wp_safe_redirect( admin_url( 'admin.php?page=slashed-bricks&message=settings_saved' ) );
 		exit;
 	}
 
 	/**
-	 * Get plugin settings (non-token behavioral settings).
+	 * Get plugin settings (non-token behavioural settings).
+	 *
+	 * Thin proxy over `Slashed_Bricks_Token_Store::get_plugin_settings()`.
 	 *
 	 * @return array
 	 */
 	public function get_plugin_settings() {
-		$settings = get_option( self::SETTINGS_OPTION_NAME, array() );
-		return is_array( $settings ) ? $settings : array();
+		return Slashed_Bricks_Token_Store::get_plugin_settings();
 	}
 
 	/**
-	 * Public proxy to sanitize_section() for callers outside this class
-	 * (e.g. the REST controller used by the Svelte admin page).
+	 * Public proxy to the section sanitizer.
 	 *
-	 * Keeping the underlying method private preserves the existing
-	 * encapsulation of the legacy form handler while still letting both
-	 * UIs share one sanitization path - critical so saves through either
-	 * surface produce identical option contents.
+	 * Kept on this class for backwards compatibility — third-party code
+	 * may have called it as the documented "shared sanitizer" entry
+	 * point. The implementation now lives in
+	 * `Slashed_Bricks_Token_Sanitizer::sanitize_section()`.
 	 *
 	 * @param string $section Section slug.
 	 * @param array  $data    Raw form data.
 	 * @return array Sanitized data.
 	 */
 	public function sanitize_section_public( $section, $data ) {
-		return $this->sanitize_section( $section, is_array( $data ) ? $data : array() );
+		return Slashed_Bricks_Token_Sanitizer::sanitize_section( $section, is_array( $data ) ? $data : array() );
 	}
 
 	/**
-	 * Public read-only accessor for the registered tab map.
+	 * Public read-only accessor for the full tab map (token + view).
 	 *
-	 * Used by the REST controller to validate incoming section slugs
-	 * against the same whitelist the legacy form enforces.
+	 * Thin proxy over `Slashed_Bricks_Tab_Registry::get_all()` — kept
+	 * for backwards compatibility with the REST controller and any
+	 * external integrations that introspected the tab list.
 	 *
 	 * @return array<string,string>
 	 */
 	public function get_tabs() {
-		return array_merge(
-			$this->tabs,
-			array(
-				'variables'  => 'Variables',
-				'classes'    => 'Classes',
-				'bundle'     => 'Bundle',
-				'hooks'      => 'Hooks',
-				'cheatsheet' => 'Cheatsheet',
-			)
-		);
-	}
-
-	/**
-	 * Sanitize a section's input values.
-	 *
-	 * @param string $section Section slug.
-	 * @param array  $data    Raw form data.
-	 * @return array Sanitized data.
-	 */
-	private function sanitize_section( $section, $data ) {
-		// Colors get a specialised merger because each token has two paired
-		// inputs in the form (HEX picker + raw advanced) that resolve to a
-		// single stored value.
-		if ( 'colors' === $section ) {
-			return $this->sanitize_color_section( $data );
-		}
-
-		$sanitized = array();
-
-		foreach ( $data as $key => $value ) {
-			$key = sanitize_key( $key );
-			if ( is_array( $value ) ) {
-				$sanitized[ $key ] = array_map(
-					function ( $v ) {
-						return $this->sanitize_css_value( sanitize_text_field( $v ) );
-					},
-					$value
-				);
-			} else {
-				$sanitized[ $key ] = $this->sanitize_css_value( sanitize_text_field( $value ) );
-			}
-		}
-
-		return $sanitized;
-	}
-
-	/**
-	 * Merge paired HEX/raw color inputs into a single stored value per token.
-	 *
-	 * The Colors tab renders two inputs per color: a HEX picker (suffix
-	 * "_hex") and an Advanced raw input (suffix "_raw") that accepts any
-	 * CSS color string (oklch, rgb, hsl, etc.). The raw value wins when
-	 * non-empty; otherwise the HEX value is used. The merged result is
-	 * stored under the base key (e.g. "brand_primary"), preserving the
-	 * storage shape the CSS generator already expects.
-	 *
-	 * Legacy direct writes (key without suffix) are still accepted, so
-	 * imports or pre-upgrade saved values keep working.
-	 *
-	 * @param array $data Raw form data for the colors section.
-	 * @return array Sanitized color settings keyed by base token name.
-	 */
-	private function sanitize_color_section( $data ) {
-		$grouped = array();
-
-		foreach ( $data as $key => $value ) {
-			$key = (string) $key;
-			if ( '' === $key || ! is_string( $value ) ) {
-				continue;
-			}
-
-			$clean_value = $this->sanitize_css_value( sanitize_text_field( $value ) );
-			$clean_value = trim( $clean_value );
-
-			if ( $this->key_has_suffix( $key, '_hex' ) ) {
-				$base = sanitize_key( substr( $key, 0, -4 ) );
-				if ( '' !== $base ) {
-					$grouped[ $base ]['hex'] = $clean_value;
-				}
-			} elseif ( $this->key_has_suffix( $key, '_raw' ) ) {
-				$base = sanitize_key( substr( $key, 0, -4 ) );
-				if ( '' !== $base ) {
-					$grouped[ $base ]['raw'] = $clean_value;
-				}
-			} else {
-				$base = sanitize_key( $key );
-				if ( '' !== $base ) {
-					$grouped[ $base ]['direct'] = $clean_value;
-				}
-			}
-		}
-
-		$sanitized = array();
-		foreach ( $grouped as $base => $parts ) {
-			if ( ! empty( $parts['raw'] ) ) {
-				$sanitized[ $base ] = $parts['raw'];
-			} elseif ( ! empty( $parts['hex'] ) ) {
-				$sanitized[ $base ] = $parts['hex'];
-			} elseif ( isset( $parts['direct'] ) && '' !== $parts['direct'] ) {
-				$sanitized[ $base ] = $parts['direct'];
-			}
-			// All-empty rows are omitted so the framework default applies.
-		}
-
-		return $sanitized;
-	}
-
-	/**
-	 * Polyfill for str_ends_with() since the plugin supports PHP 7.4.
-	 *
-	 * @param string $haystack Subject string.
-	 * @param string $needle   Suffix to test for.
-	 * @return bool
-	 */
-	private function key_has_suffix( $haystack, $needle ) {
-		$nl = strlen( $needle );
-		if ( $nl === 0 ) {
-			return true;
-		}
-		$hl = strlen( $haystack );
-		if ( $hl < $nl ) {
-			return false;
-		}
-		return substr( $haystack, -$nl ) === $needle;
-	}
-
-	/**
-	 * Determine whether a stored value looks like a HEX color.
-	 *
-	 * Accepts 3, 4, 6, and 8-digit forms. Anything else (oklch, rgb, hsl,
-	 * named color, var()...) is treated as a raw advanced value so the
-	 * UI starts in the Advanced input and won't truncate it via the
-	 * HEX-only color picker.
-	 *
-	 * @param string $value Stored color value.
-	 * @return bool
-	 */
-	private function is_hex_color( $value ) {
-		return is_string( $value )
-			&& 1 === preg_match( '/^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', trim( $value ) );
-	}
-
-	/**
-	 * Sanitize a value for safe use in CSS declarations.
-	 *
-	 * Strips characters that could escape a CSS declaration context or inject
-	 * at-rules. This prevents stored values from breaking out of the
-	 * :root { ... } block when interpolated into generated CSS.
-	 *
-	 * @param string $value The value to sanitize.
-	 * @return string Sanitized value with dangerous characters removed.
-	 */
-	private function sanitize_css_value( $value ) {
-		return str_replace( array( '{', '}', '<', '>', '@', ';' ), '', $value );
+		return Slashed_Bricks_Tab_Registry::get_all();
 	}
 
 	/**
@@ -655,7 +500,7 @@ class Slashed_Bricks_Admin_Page {
 	 * @param string $css_var       Underlying CSS custom property name (informational only).
 	 */
 	private function render_color_row( $base_key, $label, $saved, $hex_hint, $oklch_hint, $css_var ) {
-		$is_hex      = $this->is_hex_color( $saved );
+		$is_hex      = Slashed_Bricks_Token_Sanitizer::is_hex_color( $saved );
 		$start_mode  = ( $is_hex || '' === $saved ) ? 'hex' : 'raw';
 		$hex_value   = $is_hex ? $saved : '';
 		$raw_value   = $is_hex ? '' : $saved;
