@@ -184,7 +184,15 @@ class Slashed_Bricks_Inventory {
 	 * @return array<string, string> Map of CSS variable name to color value.
 	 */
 	private static function get_admin_color_overrides() {
-		$tokens = get_option( Slashed_Bricks_Admin_Page::OPTION_NAME );
+		// Inventory may be requested before the admin bootstrap has loaded
+		// the Token_Store class (e.g. on a non-admin request that triggers
+		// inventory caching), so guard with a class_exists() check and
+		// fall back to the bare option name.
+		$option_name = class_exists( 'Slashed_Bricks_Token_Store' )
+			? Slashed_Bricks_Token_Store::OPTION_NAME
+			: 'slashed_bricks_tokens';
+
+		$tokens = get_option( $option_name );
 
 		if ( ! is_array( $tokens ) || empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
 			return array();

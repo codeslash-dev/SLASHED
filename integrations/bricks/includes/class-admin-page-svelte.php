@@ -35,6 +35,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * inside it is owned by Svelte. This is the cleanest line to draw - WP
  * keeps doing the WordPress-correct things, the SPA owns the inside of
  * one div.
+ *
+ * The class itself is stateless except for the page hook suffix it
+ * captures during submenu registration; tab metadata, settings, and
+ * defaults all come from the dedicated helper classes.
  */
 class Slashed_Bricks_Admin_Page_Svelte {
 
@@ -55,20 +59,9 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	private $hook_suffix = '';
 
 	/**
-	 * Reference to the legacy admin page; reused for defaults, settings,
-	 * and tab metadata so both UIs render the same data.
-	 *
-	 * @var Slashed_Bricks_Admin_Page
-	 */
-	private $admin_page;
-
-	/**
 	 * Constructor.
-	 *
-	 * @param Slashed_Bricks_Admin_Page $admin_page Legacy admin page instance.
 	 */
-	public function __construct( Slashed_Bricks_Admin_Page $admin_page ) {
-		$this->admin_page = $admin_page;
+	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'register_submenu' ), 20 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
@@ -155,10 +148,10 @@ class Slashed_Bricks_Admin_Page_Svelte {
 					'url'   => esc_url_raw( rest_url( Slashed_Bricks_REST_Controller::NAMESPACE ) ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 				),
-				'tabs'           => $this->admin_page->get_tabs(),
+				'tabs'           => Slashed_Bricks_Tab_Registry::get_all(),
 				'defaults'       => Slashed_Bricks_Token_Defaults::get_all(),
-				'settings'       => $this->admin_page->get_settings(),
-				'pluginSettings' => $this->admin_page->get_plugin_settings(),
+				'settings'       => Slashed_Bricks_Token_Store::get_settings(),
+				'pluginSettings' => Slashed_Bricks_Token_Store::get_plugin_settings(),
 				'inventory'      => Slashed_Bricks_Inventory::get(),
 			)
 		);

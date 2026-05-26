@@ -15,8 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Exposes a small JSON surface so the Svelte admin page can save and
  * reset token sections without page reloads. Auth uses the standard WP
  * REST nonce (X-WP-Nonce header) plus the manage_options capability;
- * sanitization and option storage are delegated to the legacy admin
- * page class so both UIs share one source of truth.
+ * sanitization, tab whitelisting and option storage are delegated to
+ * the dedicated helper classes (Token_Store, Token_Sanitizer,
+ * Tab_Registry) so every admin surface persists data identically.
  *
  * Routes
  * ------
@@ -41,21 +42,14 @@ class Slashed_Bricks_REST_Controller {
 	const NAMESPACE = 'slashed-bricks/v1';
 
 	/**
-	 * Reference to the admin page class so we can reuse its sanitizer
-	 * and tab metadata. Kept private; the SPA never sees it.
+	 * Constructor — registers the REST routes on rest_api_init.
 	 *
-	 * @var Slashed_Bricks_Admin_Page
+	 * Now stateless: previous revisions held a reference to
+	 * `Slashed_Bricks_Admin_Page` to share its private sanitizer; that
+	 * dependency is gone now that sanitization lives in the dedicated
+	 * `Slashed_Bricks_Token_Sanitizer` class.
 	 */
-	private $admin_page;
-
-	/**
-	 * Constructor.
-	 *
-	 * @param Slashed_Bricks_Admin_Page $admin_page Existing admin page instance whose
-	 *                                              sanitization helpers we reuse.
-	 */
-	public function __construct( Slashed_Bricks_Admin_Page $admin_page ) {
-		$this->admin_page = $admin_page;
+	public function __construct() {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 	}
 
@@ -172,14 +166,11 @@ class Slashed_Bricks_REST_Controller {
 			$values = array();
 		}
 
-		// Reuse the legacy sanitizer so both UIs persist data identically.
-		// sanitize_section is private, so call it via a public proxy on
-		// the admin page class.
-		$sanitized = $this->admin_page->sanitize_section_public( $section, $values );
+		// Reuse the shared sanitizer so every admin surface persists
+		// data identically.
+		$sanitized = Slashed_Bricks_Token_Sanitizer::sanitize_section( $section, $values );
 
-		$all              = $this->admin_page->get_settings();
-		$all[ $section ]  = $sanitized;
-		update_option( Slashed_Bricks_Admin_Page::OPTION_NAME, $all );
+		Slashed_Bricks_Token_Store::update_section( $section, $sanitized );
 
 		return rest_ensure_response(
 			array(
@@ -199,7 +190,7 @@ class Slashed_Bricks_REST_Controller {
 		$section = (string) $request->get_param( 'section' );
 
 		if ( '' === $section ) {
-			delete_option( Slashed_Bricks_Admin_Page::OPTION_NAME );
+			Slashed_Bricks_Token_Store::delete_settings();
 			return rest_ensure_response(
 				array(
 					'section'  => '',
@@ -217,9 +208,7 @@ class Slashed_Bricks_REST_Controller {
 			);
 		}
 
-		$all = $this->admin_page->get_settings();
-		unset( $all[ $section ] );
-		update_option( Slashed_Bricks_Admin_Page::OPTION_NAME, $all );
+		$all = Slashed_Bricks_Token_Store::delete_section( $section );
 
 		return rest_ensure_response(
 			array(
@@ -236,11 +225,7 @@ class Slashed_Bricks_REST_Controller {
 	 * @return WP_REST_Response
 	 */
 	public function get_settings( WP_REST_Request $request ) {
-		$settings = get_option( Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME, array() );
-		if ( ! is_array( $settings ) ) {
-			$settings = array();
-		}
-		return rest_ensure_response( $settings );
+		return rest_ensure_response( Slashed_Bricks_Token_Store::get_plugin_settings() );
 	}
 
 	/**
@@ -264,25 +249,25 @@ class Slashed_Bricks_REST_Controller {
 			);
 		}
 
-		$settings = get_option( Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME, array() );
-		if ( ! is_array( $settings ) ) {
-			$settings = array();
-		}
-
+		$settings                   = Slashed_Bricks_Token_Store::get_plugin_settings();
 		$settings['html_font_size'] = $html_font_size;
-		update_option( Slashed_Bricks_Admin_Page::SETTINGS_OPTION_NAME, $settings );
+		Slashed_Bricks_Token_Store::update_plugin_settings( $settings );
 
 		return rest_ensure_response( $settings );
 	}
 
 	/**
-	 * Whitelist sections against the admin page's tab map.
+	 * Whitelist sections against the token-tab registry.
+	 *
+	 * Only token tabs (colors, contrast, typography, ...) are accepted
+	 * here — view tabs (variables, classes, ...) never persist anything
+	 * to the option, so attempting to save or reset them would be a
+	 * no-op at best and stale-data at worst.
 	 *
 	 * @param string $section Section slug.
 	 * @return bool
 	 */
 	private function is_known_section( $section ) {
-		$tabs = $this->admin_page->get_tabs();
-		return isset( $tabs[ $section ] );
+		return Slashed_Bricks_Tab_Registry::is_token_tab( $section );
 	}
 }

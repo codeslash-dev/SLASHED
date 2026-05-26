@@ -110,21 +110,26 @@ function slashed_bricks_is_bricks_active() {
  */
 function slashed_bricks_admin_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
 
-    // Legacy jQuery admin page (production). Owns option storage and the
-    // sanitization helpers both UIs share.
-    $admin_page = new Slashed_Bricks_Admin_Page();
+    // Legacy jQuery admin page (production). Owns rendering of the
+    // top-level "SLASHED" menu; option storage and sanitization live
+    // in the helper classes loaded above.
+    new Slashed_Bricks_Admin_Page();
 
     // Svelte SPA admin page (POC). Lives at SLASHED -> Tokens (v2) and
     // talks to the REST controller below for save/reset.
-    new Slashed_Bricks_Admin_Page_Svelte( $admin_page );
+    new Slashed_Bricks_Admin_Page_Svelte();
 
-    // REST endpoints powering the Svelte SPA. Reuses the legacy admin
-    // page's sanitizer so saves through either UI normalize identically.
-    new Slashed_Bricks_REST_Controller( $admin_page );
+    // REST endpoints powering the Svelte SPA. Sanitization and storage
+    // are delegated to the shared helper classes so every admin
+    // surface persists data identically.
+    new Slashed_Bricks_REST_Controller();
 }
 if ( is_admin() ) {
     add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
