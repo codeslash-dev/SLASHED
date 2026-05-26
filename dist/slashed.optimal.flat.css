@@ -48,16 +48,89 @@
 
    PUBLIC API vs INTERNAL (token-API freeze contract)
    ─────────────────────────────────────────────────
-   PUBLIC — covered by SemVer; safe to consume and override:
-     · brand/status source tokens (--sf-color-*-light / -dark)
-     · resolved semantic tokens (--sf-color-*, --sf-color-text--*, surfaces)
-     · scales (--sf-space-*, --sf-text-*, --sf-radius-*, --sf-font-weight-*,
-       --sf-leading-*, --sf-tracking-*, --sf-border-width-*, --sf-shadow-*,
-       --sf-duration-*, --sf-ease-*, --sf-transition-*, --sf-z-*)
-     · BEM consumer aliases (--sf-gap, --sf-content-gap, --sf-component-pad,
-       --sf-section-pad*, --sf-divider-*, --sf-field-*, behaviour tokens)
+   Tokens are classified into three stability tiers (PUBLIC,
+   PUBLIC-ADVANCED, INTERNAL) plus a lifecycle annotation (DEPRECATED).
+   PUBLIC and PUBLIC-ADVANCED share the same SemVer guarantee
+   (removal/rename = major bump after freeze). The distinction is
+   documentation-level: ADVANCED tokens are powerful but niche — they
+   live in a separate "Advanced" section in docs.
+
+   PUBLIC — everyday knobs, prominently documented:
+     · brand source tokens (--sf-color-{primary,secondary,tertiary,action,neutral,base}-light)
+     · status source tokens (--sf-color-{success,warning,error,info,danger}-light)
+     · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
+     · text-on-color (--sf-color-text--on-*)
+     · code colors (--sf-color-code-bg, --sf-color-code-text)
+     · brand hover (--sf-color-{primary,secondary,tertiary,action,neutral}--hover)
+     · status triplets (--sf-color-{success,...,danger}-{subtle,strong,muted})
+     · gradients (--sf-gradient-*)
+     · shadows (--sf-shadow-{none,xs,s,m,l,xl,2xl,inner})
+     · text/drop shadows (--sf-text-shadow-*, --sf-drop-shadow-*)
+     · blur (--sf-blur-*)
+     · opacity (--sf-opacity-{0,10,25,50,75,100}, --sf-opacity-disabled, --sf-state-pending-opacity)
+     · spacing (--sf-space-{none,px,gutter,2xs..4xl})
+     · font families (--sf-font-{body,heading,display,mono,humanist,geometric,slab})
+     · font weights (--sf-font-weight-{thin..black,body,heading,display})
+     · font sizes (--sf-text-{2xs..4xl}, --sf-text-display-{s,m,l})
+     · leading (--sf-leading-{tight,snug,normal,relaxed})
+     · tracking (--sf-tracking-{tight,normal,wide,wider,widest})
+     · icon sizes (--sf-icon-{xs,s,m,l,xl})
+     · UI sizes (--sf-size-{xs,s,m,l,xl})
+     · containers (--sf-container-{narrow,prose,default,wide,full})
+     · ratios (--sf-ratio-{square,video,cinema,portrait,golden,4-3,3-2})
+     · border widths (--sf-border-width-{hairline,1,2,3,4})
+     · border styles (--sf-border-style, --strong, --soft, --dotted)
+     · divider (--sf-divider-{width,style,color})
+     · radius (--sf-radius-{none,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
+     · duration (--sf-duration-{none,instant,fast,normal,slow,slower})
+     · easing (--sf-ease-{linear,out,in,in-out,spring,elastic,bounce,overshoot})
+     · transitions (--sf-transition-{all,colors,transform,opacity,shadow,fast,slow,enter,exit})
+     · animations (--sf-animation-{fade-in,fade-out,slide-in-*,scale-*,color-pulse,ping,blink,float,spin,shimmer})
+     · animation delays (--sf-animation-delay-{1..5})
+     · z-index (--sf-z-{below,base,raised,low,mid,high,top,max})
+     · header/sticky (--sf-header-height, --sf-sticky-offset)
+     · touch target (--sf-touch-target)
+     · focus ring (--sf-focus-ring-{width,offset,style,color})
+     · caret (--sf-caret-color)
+     · scrollbar (--sf-scrollbar-{thumb,track})
+     · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
+       --sf-field-required-marker, --sf-link-external-marker)
+     · section padding (--sf-section-pad, --sf-section-pad--{s,m,l,xl})
+     · typography aliases (--sf-body-*, --sf-code-font-size, --sf-heading-*, --sf-h{1..6}-*)
+     · current-font-weight (--sf-current-font-weight)
+     · color scheme (--sf-color-scheme)
+     · stroke (--sf-stroke-{thin,regular,bold,heavy})
+     · layout tokens — all of tokens.layout.css (per-primitive gaps, sidebar, grid, bento, etc.)
+     · macro tokens — all of tokens.macros.css (flow-space, line-clamp, aspect, scroll-shadow-size)
+     · palette tokens — all of optional/tokens.palette.css
+     · scoped override tokens (--sf-icon-size, --sf-bento-cols, --sf-bento-row,
+       --sf-color-code-block-bg, --sf-color-code-block-text,
+       --sf-field-border-color, --sf-field-text-color)
+
+   PUBLIC-ADVANCED — stable (same SemVer guarantee) but niche/powerful:
+     · --sf-lumlocker (LumLocker lightness override)
+     · --sf-contrast-bias, --sf-contrast-threshold (text-contrast tuning)
+     · --sf-shadow-strength, --sf-shadow-color, --sf-shadow-glow-color (shadow internals)
+     · --sf-font-features, --sf-font-variation, --sf-optical-sizing (OpenType)
+     · --sf-space-scale, --sf-text-scale, --sf-text-display-scale,
+       --sf-radius-scale, --sf-motion-scale (global multipliers)
+     · --sf-scroll-timeline-range-{start,end} (scroll-driven animation)
+     · --sf-mask-scrim-{start,end} (edge-fade masks)
+     · --sf-safe-{top,bottom,left,right} (safe-area insets)
+     · --sf-perspective-{near,normal,far} (3D transforms)
+     · --sf-truncate-suffix (ellipsis character override)
+     · --sf-radius-outer (concentric radius helper)
+     · --sf-is-active, --sf-is-current, --sf-is-pressed, --sf-is-open (state flags)
+     · --sf-focus-ring-shadow (composite focus shadow)
+     · --sf-print-{page-margin,page-size,base-size} (print tokens)
+
    INTERNAL — implementation detail, may change without a major bump:
-     · --sf-is-dark (mode flag) and any token explicitly marked INTERNAL
+     · --sf-is-dark (mode flag — set via data-theme, not directly)
+
+   DEPRECATED — still functional, removal timeline noted:
+     · --sf-ratio-photo (0.4.0 deprecated, 0.5.0 removed — use --sf-ratio-4-3 / --sf-ratio-3-2)
+     · --sf-sidebar-width-default (0.4.0 deprecated, 0.5.0 removed — use --sf-sidebar-width)
+     · --sf-grid-min-default (0.4.0 deprecated, 0.5.0 removed — use --sf-grid-min)
 
    CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
      · --sf-space-gap     → --sf-gap          (layout primitives read this name)

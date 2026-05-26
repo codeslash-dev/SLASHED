@@ -10,41 +10,47 @@ All states are exercised in [`demo.html`](demo.html).
 
 ## Reference
 
-| Class | Use when | ARIA / pairing |
-|---|---|---|
-| `.is-hidden` | element removed from layout | `hidden` attr equivalent |
-| `.is-invisible` / `.is-visible` | hidden but keeps its box | `visibility` |
-| `.is-disabled` | non-interactive, dimmed | `aria-disabled="true"` |
-| `.is-readonly` | viewable, not editable | `aria-readonly` |
-| `.is-loading` | content replaced by a spinner | `aria-busy="true"` |
-| `.is-pending` | request in flight, content still usable (optimistic UI) | `aria-busy="true"` |
-| `.is-busy` | cursor-only busy hint | `aria-busy` |
-| `.is-skeleton` | placeholder shimmer | — |
-| `.is-active` | generic active item (sets `--sf-is-active`) | — |
-| `.is-selected` | selected in a set | `aria-selected` |
-| `.is-current` | current page/step in navigation | `aria-current` |
-| `.is-pressed` | toggle button in the on state | `aria-pressed="true"` |
-| `.is-highlighted` | transient emphasis | — |
-| `.is-open` / `.is-collapsed` | a thing is shown vs hidden (modal, drawer) | — |
-| `.is-expanded` | disclosure/accordion trigger expanded | `aria-expanded="true"` |
-| `.is-valid` / `.is-invalid` | **form-field** validation result | `aria-invalid` |
-| `.is-success` / `.is-error` | **general** positive/negative feedback (a save, a step) | `role="status"` / `role="alert"` |
-| `.is-warning` / `.is-info` | cautionary / informational feedback | — |
-| `.is-danger` | destructive-action context (a delete button) | — |
-| `.is-sticky` / `.is-pinned` / `.is-fixed` | positioning | — |
-| `.is-fullscreen` | app-managed fullscreen overlay | prefer `:fullscreen` for the native API |
-| `.is-clipped` / `.is-scrollable` / `.is-truncated` | overflow handling | — |
-| `.is-resizable` | user-resizable (`resize: both`) | — |
-| `.is-dragging` / `.is-drop-target` / `.is-draggable` | drag & drop | — |
-| `.is-overlay` | absolute fill | — |
-| `.is-clickable` / `.is-unselectable` | cursor / selection | — |
-| `.is-focused` | programmatic focus ring (JS-driven, no `:focus-visible`) | — |
-| `.is-empty:empty` | hide when empty | — |
-| `.sr-only-focusable` | hidden until focused (skip-link pattern) | — |
-| `.no-motion` | kill all animation/transition on this subtree | `prefers-reduced-motion` equivalent |
+> **Layer note:** Most state classes live in `core/states.css` (layer
+> `slashed.states`). Three accessibility-related entries (`.no-motion`,
+> `.sr-only-focusable`, `.focus-parent`) moved to `core/accessibility.css`
+> (layer `slashed.accessibility`) in v0.3.0 for better layering priority.
+
+| Class | Use when | ARIA / pairing | Layer |
+|---|---|---|---|
+| `.is-hidden` | element removed from layout | `hidden` attr equivalent | states |
+| `.is-invisible` / `.is-visible` | hidden but keeps its box | `visibility` | states |
+| `.is-disabled` | non-interactive, dimmed | `aria-disabled="true"` | states |
+| `.is-readonly` | viewable, not editable | `aria-readonly` | states |
+| `.is-loading` | content replaced by a spinner | `aria-busy="true"` | states |
+| `.is-pending` | request in flight, content still usable (optimistic UI) | `aria-busy="true"` | states |
+| `.is-busy` | cursor-only busy hint | `aria-busy` | states |
+| `.is-skeleton` | placeholder shimmer | — | states |
+| `.is-active` | generic active item (sets `--sf-is-active`) | — | states |
+| `.is-selected` | selected in a set | `aria-selected` | states |
+| `.is-current` | current page/step in navigation | `aria-current` | states |
+| `.is-pressed` | toggle button in the on state | `aria-pressed="true"` | states |
+| `.is-highlighted` | transient emphasis | — | states |
+| `.is-open` / `.is-collapsed` | a thing is shown vs hidden (modal, drawer) | — | states |
+| `.is-expanded` | disclosure/accordion trigger expanded | `aria-expanded="true"` | states |
+| `.is-valid` / `.is-invalid` | **form-field** validation result | `aria-invalid` | states |
+| `.is-success` / `.is-error` | **general** positive/negative feedback (a save, a step) | `role="status"` / `role="alert"` | states |
+| `.is-warning` / `.is-info` | cautionary / informational feedback | — | states |
+| `.is-danger` | destructive-action context (a delete button) | — | states |
+| `.is-sticky` / `.is-pinned` / `.is-fixed` | positioning | — | states |
+| `.is-fullscreen` | app-managed fullscreen overlay | prefer `:fullscreen` for the native API | states |
+| `.is-clipped` / `.is-scrollable` / `.is-truncated` | overflow handling | — | states |
+| `.is-resizable` | user-resizable (`resize: both`) | — | states |
+| `.is-dragging` / `.is-drop-target` / `.is-draggable` | drag & drop | — | states |
+| `.is-overlay` | absolute fill | — | states |
+| `.is-clickable` / `.is-unselectable` | cursor / selection | — | states |
+| `.is-focused` | programmatic focus ring (JS-driven, no `:focus-visible`) | — | states |
+| `.is-empty:empty` | hide when empty | — | states |
+| `.sr-only-focusable` | hidden until focused (skip-link pattern) | — | accessibility |
+| `.no-motion` | kill all animation/transition on this subtree | `prefers-reduced-motion` equivalent | accessibility |
 
 `.focus-parent` (no `is-`/`sf-` prefix) is a helper: a container with it rings
-when any descendant has keyboard focus (`:focus-within`).
+when any descendant has keyboard focus (`:focus-within`). It lives in
+`core/accessibility.css` (layer `slashed.accessibility`).
 
 `.sr-only-focusable` hides an element with the screen-reader-only technique
 **until** it receives focus — then it becomes visible. Use for skip links and
