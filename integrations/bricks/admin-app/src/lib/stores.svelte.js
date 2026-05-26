@@ -78,3 +78,49 @@ export function clearSection(section) {
     delete tokens[section];
   }
 }
+
+/**
+ * Read a single field from a (possibly absent) section.
+ *
+ * Returns an empty string when the section or key isn't present so
+ * callers can bind directly to an `<input>` without null-checking.
+ *
+ * @param {string} section Section slug, e.g. "contrast".
+ * @param {string} key     Token key, e.g. "contrast_bias".
+ * @returns {string} Stored value as a string, or '' if unset.
+ */
+export function readField(section, key) {
+  const slice = tokens[section];
+  if (!slice) return '';
+  const v = slice[key];
+  return v === undefined || v === null ? '' : String(v);
+}
+
+/**
+ * Persist a single field, lazily creating the section slice and
+ * deleting the key when the value is "empty" (empty string / null /
+ * undefined) so PHP defaults can take over again.
+ *
+ * Mirrors the contract of `ColorRow.commit()`: any non-empty value is
+ * stored as a string, any empty value drops the override entirely, and
+ * every write marks the form dirty so SaveBar reacts. Centralising
+ * this pattern keeps every field component a thin shell around a
+ * single store mutation — no duplicated empty/null branching across
+ * RangeField, NumberField, TextField, SelectField.
+ *
+ * @param {string} section Section slug, e.g. "typography".
+ * @param {string} key     Token key, e.g. "font_body".
+ * @param {string|number|null|undefined} value Raw input value.
+ */
+export function writeField(section, key, value) {
+  if (!tokens[section]) tokens[section] = {};
+  const isEmpty =
+    value === '' || value === null || value === undefined ||
+    (typeof value === 'string' && value.trim() === '');
+  if (isEmpty) {
+    delete tokens[section][key];
+  } else {
+    tokens[section][key] = String(value);
+  }
+  markDirty();
+}

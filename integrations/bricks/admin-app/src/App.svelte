@@ -6,19 +6,35 @@
    * any component can read or mutate it directly. The reactive graph
    * collapses what was ~20 lines of jQuery dirty-tracking + DOM querying
    * in admin-page.js into a single $derived for the active tab body.
+   *
+   * As of this iteration every tab in the legacy jQuery admin page has
+   * a Svelte counterpart, so the SPA is now feature-complete relative
+   * to `class-admin-page.php`. The "v2" / POC framing in the header has
+   * been retired accordingly.
    */
-  import { meta, ui } from './lib/stores.svelte.js';
+  import { ui } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
   import ColorTab from './components/ColorTab.svelte';
+  import ContrastTab from './components/ContrastTab.svelte';
+  import TypographyTab from './components/TypographyTab.svelte';
+  import SpacingTab from './components/SpacingTab.svelte';
+  import RadiusTab from './components/RadiusTab.svelte';
+  import ShadowsTab from './components/ShadowsTab.svelte';
+  import MotionTab from './components/MotionTab.svelte';
+  import ZindexTab from './components/ZindexTab.svelte';
   import VariablesTab from './components/VariablesTab.svelte';
   import ClassesTab from './components/ClassesTab.svelte';
   import BundleTab from './components/BundleTab.svelte';
   import HooksTab from './components/HooksTab.svelte';
   import CheatsheetTab from './components/CheatsheetTab.svelte';
-  import StubTab from './components/StubTab.svelte';
   import LivePreview from './components/LivePreview.svelte';
   import SaveBar from './components/SaveBar.svelte';
 
+  /**
+   * Tabs that are inventory / documentation views with no per-section
+   * save semantics. The SaveBar (and the section reset button) only
+   * make sense for tabs that mutate `tokens[section]`.
+   */
   const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes', 'bundle'];
   let isReadOnly = $derived(readOnlyTabs.includes(ui.activeTab));
 
@@ -49,10 +65,9 @@
 
 <div class="slashed-svelte-admin">
   <header class="slashed-svelte-admin__header">
-    <h1>SLASHED Design Tokens <span class="badge">v2 · Svelte POC</span></h1>
+    <h1>SLASHED Design Tokens</h1>
     <p class="muted">
-      Proof-of-concept admin page rendered with Svelte 5 instead of jQuery.
-      Currently only the Colors tab is fully ported; other tabs show a stub.
+      Adjust framework tokens, inspect generated variables, and manage the bundled CSS in one place.
     </p>
   </header>
 
@@ -61,6 +76,20 @@
   <section class="slashed-svelte-admin__body">
     {#if ui.activeTab === 'colors'}
       <ColorTab />
+    {:else if ui.activeTab === 'contrast'}
+      <ContrastTab />
+    {:else if ui.activeTab === 'typography'}
+      <TypographyTab />
+    {:else if ui.activeTab === 'spacing'}
+      <SpacingTab />
+    {:else if ui.activeTab === 'radius'}
+      <RadiusTab />
+    {:else if ui.activeTab === 'shadows'}
+      <ShadowsTab />
+    {:else if ui.activeTab === 'motion'}
+      <MotionTab />
+    {:else if ui.activeTab === 'zindex'}
+      <ZindexTab />
     {:else if ui.activeTab === 'variables'}
       <VariablesTab />
     {:else if ui.activeTab === 'classes'}
@@ -71,8 +100,6 @@
       <HooksTab />
     {:else if ui.activeTab === 'cheatsheet'}
       <CheatsheetTab />
-    {:else}
-      <StubTab tab={meta.tabs[ui.activeTab] ?? ui.activeTab} />
     {/if}
   </section>
 
@@ -94,21 +121,7 @@
   }
 
   .slashed-svelte-admin__header h1 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
     margin: 0;
-  }
-
-  .slashed-svelte-admin__header .badge {
-    font-size: 11px;
-    font-weight: 500;
-    background: #2271b1;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 999px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   .muted {
