@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "docs",
   "description": "Replace the PUBLIC/INTERNAL section in core/tokens.css header comment with the comprehensive PUBLIC/PUBLIC-ADVANCED/INTERNAL/DEPRECATED classification, update docs/macros.md with 3 missing classes + entrance animations, fix docs/layout.md table, and fix docs/states.md cross-references",
-  "status": "pending",
+  "status": "completed",
   "steps": [
     "Step 1 - Update core/tokens.css header: Replace the block from 'PUBLIC API vs INTERNAL (token-API freeze contract)' through the line ending 'any token explicitly marked INTERNAL' (approx lines 40-51 in the header comment) with the comprehensive new classification text provided in the task description. Keep it inside the existing /* ... */ comment block. The new text has 4 sections: PUBLIC, PUBLIC-ADVANCED, INTERNAL, DEPRECATED.",
     "Step 2 - Add .sf-surface--* section to docs/macros.md: After the .sf-no-tap-highlight section (the last current section), add a new --- separator and section documenting .sf-surface--* (11 variants: primary, secondary, tertiary, action, neutral, inverse, success, warning, error, info, danger). Describe it as contextual background + auto-contrast text. Show example HTML. No tokens table needed (it reads --sf-color-X and --sf-color-text--on-X directly).",
@@ -31,5 +31,5 @@
     "git log --oneline -1 shows the expected commit message"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Pre-commit hook runs both build and lint automatically. Build output (dist/) is committed as part of the change. No test failures or environment issues."
 }

@@ -221,3 +221,102 @@ interactive elements where it conflicts with the framework's own
 ```
 
 Just sets `-webkit-tap-highlight-color: transparent`. No tokens.
+
+---
+
+## `.sf-surface--*`
+
+Contextual background + auto-contrast text color. Apply to any element
+to give it a filled surface with accessible foreground text.
+
+11 variants: `primary`, `secondary`, `tertiary`, `action`, `neutral`,
+`inverse`, `success`, `warning`, `error`, `info`, `danger`.
+
+```html
+<div class="sf-surface--primary">White text on primary bg</div>
+<div class="sf-surface--danger">White text on danger bg</div>
+<div class="sf-surface--neutral">Auto-contrast text on neutral bg</div>
+```
+
+Each variant sets `background` to the resolved color token
+(`--sf-color-{name}`) and `color` to the matching on-color token
+(`--sf-color-text--on-{name}`). No extra tokens needed.
+
+---
+
+## `.sf-text-gradient`
+
+Fills text with a gradient (default `--sf-gradient-primary`).
+
+```html
+<h2 class="sf-text-gradient">Gradient headline</h2>
+
+<!-- Override per-instance -->
+<h2 class="sf-text-gradient" style="background-image: var(--sf-gradient-secondary)">
+  Secondary gradient
+</h2>
+```
+
+Gated by `@supports (background-clip: text)` so browsers that lack
+support render normal solid text instead of invisible text.
+
+> **Known limitation:** selecting gradient text in most browsers reveals
+> the clipping boundary (text appears to lose color during selection).
+
+---
+
+## `.sf-link-external`
+
+Adds an external-link indicator glyph after the link text via `::after`.
+
+```html
+<a href="https://example.com" class="sf-link-external">Example</a>
+```
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-link-external-marker` | `" \2197"` (arrow with leading space) | glyph appended after link text |
+
+Disable globally:
+
+```css
+:root { --sf-link-external-marker: ""; }
+```
+
+For automatic detection of external links (without adding the class
+manually), write your own rule targeting `a[rel~="external"]` or
+`a[href^="https://"]` and apply the same marker technique.
+
+---
+
+## `.sf-entrance--*`
+
+Scroll-driven entrance animations. Elements animate into view as they
+enter the viewport.
+
+6 variants: `fade`, `fade-up`, `fade-down`, `fade-left`, `fade-right`,
+`scale-up`.
+
+```html
+<div class="sf-entrance--fade-up">Fades in while sliding up</div>
+<div class="sf-entrance--scale-up">Scales from 95% to 100%</div>
+```
+
+**How it works:** Uses `animation-timeline: view()` where supported
+(Chrome 115+, Firefox 145+). In browsers without scroll-driven animation
+support (notably Safari), the class falls back to a one-shot time-driven
+animation at `--sf-duration-slow`.
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-scroll-timeline-range-start` | `entry 0%` | when the animation begins |
+| `--sf-scroll-timeline-range-end` | `cover 30%` | when the animation completes |
+
+All entrance classes are gated by `prefers-reduced-motion: no-preference`;
+when the user opts out of motion the animations are inert (no movement).
+
+Lives in `core/motion.css`, layer `slashed.motion`.

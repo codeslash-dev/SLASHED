@@ -32,10 +32,9 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-reel` | horizontal scroll strip | `--sf-reel-*`, `--sf-mask-scrim-*` |
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
-| `.sf-prose` | readable long-form text column (styles `table`, `blockquote`, `figure`, `dl`) | `--sf-prose-*` |
-| `.sf-not-prose` | reset zone inside `.sf-prose` — reverts prose styles for nested components | — |
 | `.sf-divider` | token-driven separator; `--vertical` | `--sf-divider-*` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --xl` | `--sf-icon-*` |
+| `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
 
 ## Why no breakpoints
 
