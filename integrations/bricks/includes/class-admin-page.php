@@ -106,8 +106,6 @@ class Slashed_Bricks_Admin_Page {
 
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
-		add_action( 'admin_post_slashed_bricks_save', array( $this, 'handle_save' ) );
-		add_action( 'admin_post_slashed_bricks_save_settings', array( $this, 'handle_save_settings' ) );
 	}
 
 	/**
@@ -124,6 +122,11 @@ class Slashed_Bricks_Admin_Page {
 	 * the legacy form on permanently. The filter is consulted at
 	 * `admin_menu` time so any plugin/theme/MU that adds the filter
 	 * before that hook is honoured.
+	 *
+	 * The admin_post_* handlers are also registered here (not in the
+	 * constructor) so they only fire when the legacy page is actually
+	 * shown — registering them unconditionally would add live POST
+	 * endpoints even when the page is hidden.
 	 */
 	public function register_menu() {
 		/**
@@ -138,6 +141,9 @@ class Slashed_Bricks_Admin_Page {
 		if ( ! apply_filters( 'slashed_bricks/enable_legacy_admin', false ) ) {
 			return;
 		}
+
+		add_action( 'admin_post_slashed_bricks_save', array( $this, 'handle_save' ) );
+		add_action( 'admin_post_slashed_bricks_save_settings', array( $this, 'handle_save_settings' ) );
 
 		$this->hook_suffix = (string) add_submenu_page(
 			Slashed_Bricks_Admin_Page_Svelte::PAGE_SLUG,
