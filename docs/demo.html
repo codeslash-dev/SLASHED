@@ -2436,25 +2436,26 @@
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-clickable-parent</code> — full-card click target</h3>
         <p style="margin-block: var(--sf-space-xs) var(--sf-space-s); font-size: var(--sf-text-s)">
-          <strong>Automatic mode</strong> — one link, no extra attributes needed. Text is still selectable; the button stays independently clickable.
-          Tab to the card to see the built-in card-level focus ring (no separate <code>?focus-parent</code> recipe required).
+          <strong>Automatic mode</strong> — one link, no extra attributes. Click anywhere on the card to navigate;
+          the button remains independently clickable. Tab to the card to see the built-in card-level focus ring
+          (no separate <code>focus-parent</code> recipe needed).
         </p>
         <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
-          <h4 style="margin: 0"><a href="#macros">Click anywhere on this card</a></h4>
-          <p style="margin: 0">Text inside is still <strong>selectable</strong>. The overlay sits at <code>z-index: 1</code>; flow children are lifted above it automatically.</p>
+          <h4 style="margin: 0"><a href="#macros">Click anywhere on this card to navigate</a></h4>
+          <p style="margin: 0">The entire card surface is the click target — heading, body text, list, and padding.</p>
           <ul style="margin: 0; padding-inline-start: var(--sf-space-m)">
-            <li>List items are also selectable</li>
-            <li>No extra markup needed</li>
+            <li>Click here too — the whole card is the link</li>
           </ul>
-          <button onclick="event.stopPropagation(); event.preventDefault();" style="justify-self: start; padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none">Independent action</button>
+          <button onclick="event.stopPropagation(); event.preventDefault();" style="justify-self: start; padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s); background: var(--sf-color-action); color: var(--sf-color-text--on-action); border: none">Independent button</button>
         </article>
 
         <p style="margin-block: var(--sf-space-m) var(--sf-space-xs); font-size: var(--sf-text-s)">
-          <strong>Explicit mode</strong> — multiple links. Add <code>data-overlay-link</code> to the primary link; every other link and button is lifted automatically with no manual z-index work.
+          <strong>Explicit mode</strong> — multiple links. Add <code>data-overlay-link</code> to the primary link;
+          all other links and buttons are lifted above the overlay automatically — no manual z-index work required.
         </p>
         <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
-          <h4 style="margin: 0"><a href="#macros" data-overlay-link>Primary link covers the whole card</a></h4>
-          <p style="margin: 0">Body text is still <strong>selectable</strong>. The secondary links and button below are fully independent — no z-index wrangling required.</p>
+          <h4 style="margin: 0"><a href="#macros" data-overlay-link>Primary link — click card surface to navigate here</a></h4>
+          <p style="margin: 0">Click on paragraph text or card padding → primary link. Secondary links and the button stay independent.</p>
           <div style="display: flex; gap: var(--sf-space-s); flex-wrap: wrap; align-items: center">
             <a href="#states" style="font-size: var(--sf-text-s)">Secondary link A</a>
             <a href="#motion" style="font-size: var(--sf-text-s)">Secondary link B</a>

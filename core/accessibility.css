@@ -178,30 +178,41 @@
      Clickable-parent — the card-with-link a11y pattern.
      Applied to the card container. Two modes:
 
-     Automatic (one primary link — dominant use case):
+     Automatic (single primary link):
        <article class="sf-clickable-parent">
          <h3><a href="…">Title</a></h3>
-         <p>Description (still selectable)</p>
-         <button>Action (still clickable)</button>
+         <p>Description</p>
+         <button>Independent action</button>
        </article>
 
-     Explicit (multiple links — mark the primary with [data-overlay-link]):
+     Explicit (multiple links — add [data-overlay-link] to the primary):
        <article class="sf-clickable-parent">
          <h3><a href="…" data-overlay-link>Title</a></h3>
-         <p>Description (still selectable)</p>
+         <p>Description</p>
          <a href="/category">Category</a>  ← lifted automatically
          <button>Action</button>           ← lifted automatically
        </article>
 
-     Mechanic: the designated link's ::after grows to fill the card's
-     positioning context. Flow children are lifted above the overlay so
-     text stays selectable. Interactive descendants (buttons, secondary
-     links, form controls, media) are lifted so they keep working.
-     The card shows a focus ring via :focus-within so keyboard users
-     always see one clear hit area — no separate focus-parent recipe needed.
+     Mechanic: the link's ::after fills the card via position:absolute;
+     inset:0. It is contained by .sf-clickable-parent (position:relative)
+     only if the link itself has no positioned ancestor between it and the
+     card — so no element containing the overlay link should be given
+     position:relative. Flow children are therefore intentionally left at
+     position:static; they sit below the overlay in stacking order.
+
+     Trade-off: card text is NOT user-selectable by mouse, identical to
+     Bootstrap stretched-link and ACSS clickable-parent. A JavaScript
+     click-delegate could restore selectability while preserving
+     full-card navigation.
+
+     Advantages over ACSS clickable-parent:
+       • [data-overlay-link] explicit mode — reliable multi-link cards
+       • `:focus-within` card ring — no separate recipe needed
+       • --sf-clickable-overlay-z — escape parent stacking contexts
+       • Wider interactive-element exceptions (summary, video, audio…)
 
      Tune --sf-clickable-overlay-z to escape a parent stacking context.
-     [data-no-overlay] opts individual elements above the overlay.
+     [data-no-overlay] opts any descendant above the overlay.
      ---------------------------------------------------------- */
   .sf-clickable-parent {
     --sf-clickable-overlay-z: 1;
@@ -209,11 +220,13 @@
     cursor:   pointer;
   }
 
-  /* Automatic mode: every :any-link gets the overlay when no explicit
-     link is designated. Works reliably for the single-link case.        */
+  /* Overlay: the link's ::after fills the containing card.
+     Automatic mode — every :any-link gets the overlay; works reliably
+     for single-link cards. Secondary links that also receive ::after are
+     lifted to position:relative (interactive rule below), which scopes
+     their ::after to themselves and keeps them independently clickable.
+     Explicit mode  — only [data-overlay-link] fills the card.          */
   .sf-clickable-parent:not(:has([data-overlay-link])) a:where(:any-link)::after,
-  /* Explicit mode: only [data-overlay-link] gets the full-card overlay;
-     all other links are lifted automatically (see interactive rule).    */
   .sf-clickable-parent [data-overlay-link]::after {
     content:        "";
     position:       absolute;
@@ -222,24 +235,13 @@
     pointer-events: auto;
   }
 
-  /* Flow content lifts above the overlay so text stays selectable.      */
-  .sf-clickable-parent :is(
-    p, h1, h2, h3, h4, h5, h6,
-    span, time, small, em, strong, code,
-    ul, ol, li, dl, dt, dd,
-    figure, figcaption, blockquote, address, label
-  ) {
-    position: relative;
-    z-index:  calc(var(--sf-clickable-overlay-z) + 1);
-  }
-
-  /* Interactive descendants beat the overlay.
-     Explicit mode: every non-designated link is lifted — robust across
-     any nesting depth.
-     Automatic mode: secondary links (a:not(:first-of-type) among
-     siblings) are lifted; this is sibling-scoped so for multi-link cards
-     at different nesting depths prefer explicit mode.
-     [data-no-overlay] is the per-element opt-out.                       */
+  /* Interactive descendants beat the overlay and stay functional.
+     Explicit mode: every non-designated :any-link is lifted — robust at
+     any nesting depth, no :first-of-type fragility.
+     Automatic mode: links that are :not(:first-of-type) among siblings
+     are lifted. Sibling-scoped — use explicit mode for cards where
+     secondary links live at different nesting depths.
+     [data-no-overlay] is the per-element consumer escape hatch.         */
   .sf-clickable-parent :is(
     button, input, textarea, select,
     summary, video, audio,
@@ -251,10 +253,10 @@
     z-index:  calc(var(--sf-clickable-overlay-z) + 1);
   }
 
-  /* Card-level focus ring — shows keyboard users which card is active.
-     Equivalent to ACSS's separate ?focus-parent recipe, but included
-     automatically. Override with outline: none if your design provides
-     an alternative focus indicator on the card.                         */
+  /* Card-level focus ring — keyboard users see which card is active.
+     ACSS requires a separate ?focus-parent recipe that is easily
+     forgotten; here it is always included. Suppress with outline:none
+     if the card design provides its own focus indicator.               */
   .sf-clickable-parent:focus-within {
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);

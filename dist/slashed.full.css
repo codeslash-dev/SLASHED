@@ -3035,56 +3035,90 @@
 
   /* ----------------------------------------------------------
      Clickable-parent — the card-with-link a11y pattern.
-     Pairs with a single child <a> whose `href` provides the
-     destination. The link is announced once by AT (the rest of
-     the card content is read in continuous flow because nothing
-     wraps it in another link), but the entire card is clickable.
+     Applied to the card container. Two modes:
 
-     Mechanic: the link's ::after grows to fill the parent's
-     positioning context, so the parent's `cursor: pointer` and
-     hit-area cover the whole card. Inline text is still
-     selectable because the overlay sits at z-index 1 and any
-     paragraph/heading inside the card needs `position: relative`
-     to lift above it — the rule below applies that to the most
-     common children automatically.
-
-     Independent interactive children (buttons, secondary links,
-     form controls) get z-index: 2 so they keep working even when
-     the overlay is present.
-
-     Usage:
-       <article class="card sf-clickable-parent">
-         <h3><a href="...">Title</a></h3>
-         <p>Description (still selectable)</p>
-         <button>Independent action (still clickable)</button>
+     Automatic (single primary link):
+       <article class="sf-clickable-parent">
+         <h3><a href="…">Title</a></h3>
+         <p>Description</p>
+         <button>Independent action</button>
        </article>
+
+     Explicit (multiple links — add [data-overlay-link] to the primary):
+       <article class="sf-clickable-parent">
+         <h3><a href="…" data-overlay-link>Title</a></h3>
+         <p>Description</p>
+         <a href="/category">Category</a>  ← lifted automatically
+         <button>Action</button>           ← lifted automatically
+       </article>
+
+     Mechanic: the link's ::after fills the card via position:absolute;
+     inset:0. It is contained by .sf-clickable-parent (position:relative)
+     only if the link itself has no positioned ancestor between it and the
+     card — so no element containing the overlay link should be given
+     position:relative. Flow children are therefore intentionally left at
+     position:static; they sit below the overlay in stacking order.
+
+     Trade-off: card text is NOT user-selectable by mouse, identical to
+     Bootstrap stretched-link and ACSS clickable-parent. A JavaScript
+     click-delegate could restore selectability while preserving
+     full-card navigation.
+
+     Advantages over ACSS clickable-parent:
+       • [data-overlay-link] explicit mode — reliable multi-link cards
+       • `:focus-within` card ring — no separate recipe needed
+       • --sf-clickable-overlay-z — escape parent stacking contexts
+       • Wider interactive-element exceptions (summary, video, audio…)
+
+     Tune --sf-clickable-overlay-z to escape a parent stacking context.
+     [data-no-overlay] opts any descendant above the overlay.
      ---------------------------------------------------------- */
   .sf-clickable-parent {
+    --sf-clickable-overlay-z: 1;
     position: relative;
     cursor:   pointer;
   }
-  .sf-clickable-parent a:where(:any-link)::after {
+
+  /* Overlay: the link's ::after fills the containing card.
+     Automatic mode — every :any-link gets the overlay; works reliably
+     for single-link cards. Secondary links that also receive ::after are
+     lifted to position:relative (interactive rule below), which scopes
+     their ::after to themselves and keeps them independently clickable.
+     Explicit mode  — only [data-overlay-link] fills the card.          */
+  .sf-clickable-parent:not(:has([data-overlay-link])) a:where(:any-link)::after,
+  .sf-clickable-parent [data-overlay-link]::after {
     content:        "";
     position:       absolute;
     inset:          0;
-    z-index:        1;
+    z-index:        var(--sf-clickable-overlay-z);
     pointer-events: auto;
   }
-  /* Inline content lifts above the overlay so users can select
-     text inside the card without their drag being captured by
-     the link. Limited to common flow children — consumers can
-     opt in extras with [data-no-overlay] below. */
-  .sf-clickable-parent :is(p, h1, h2, h3, h4, h5, h6, span, time, small, em, strong, code) {
+
+  /* Interactive descendants beat the overlay and stay functional.
+     Explicit mode: every non-designated :any-link is lifted — robust at
+     any nesting depth, no :first-of-type fragility.
+     Automatic mode: links that are :not(:first-of-type) among siblings
+     are lifted. Sibling-scoped — use explicit mode for cards where
+     secondary links live at different nesting depths.
+     [data-no-overlay] is the per-element consumer escape hatch.         */
+  .sf-clickable-parent :is(
+    button, input, textarea, select,
+    summary, video, audio,
+    [role="button"], [data-no-overlay]
+  ),
+  .sf-clickable-parent:has([data-overlay-link]) a:where(:any-link):not([data-overlay-link]),
+  .sf-clickable-parent:not(:has([data-overlay-link])) a:where(:any-link):not(:first-of-type) {
     position: relative;
-    z-index:  2;
+    z-index:  calc(var(--sf-clickable-overlay-z) + 1);
   }
-  /* Independent interactive descendants beat the overlay, so a
-     secondary <a>, <button>, <input>, etc. inside the card stays
-     functional. [data-no-overlay] is the consumer escape hatch. */
-  .sf-clickable-parent :is(button, input, textarea, select,
-                           a:not(:first-of-type), [data-no-overlay]) {
-    position: relative;
-    z-index:  2;
+
+  /* Card-level focus ring — keyboard users see which card is active.
+     ACSS requires a separate ?focus-parent recipe that is easily
+     forgotten; here it is always included. Suppress with outline:none
+     if the card design provides its own focus indicator.               */
+  .sf-clickable-parent:focus-within {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
   }
 
   /* ----------------------------------------------------------
