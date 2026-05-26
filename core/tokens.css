@@ -422,7 +422,7 @@
     /* ----------------------------------------------------------
        Font weights
        ---------------------------------------------------------- */
-    /* Numeric scale (Tailwind / Open Props parity) */
+    /* Numeric scale */
     --sf-font-weight-thin:       100;
     --sf-font-weight-extralight: 200;
     --sf-font-weight-light:      300;

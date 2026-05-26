@@ -188,8 +188,7 @@
      the matching --sf-color-text--on-X (auto-contrast) so text
      legibility is automatic without consumer math.
 
-     ACSS calls this "Contextual Backgrounds" / "Surfaces". 11
-     variants cover all brand + status + inverse colors. Base is
+     11 variants cover all brand + status + inverse colors. Base is
      excluded — base IS the page surface; use plain
      background: var(--sf-color-bg) if you need it explicitly.
 
