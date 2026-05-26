@@ -12,7 +12,7 @@
 
   html {
     text-size-adjust:    100%;
-    scroll-padding-top:  var(--sf-header-height);
+    scroll-padding-top:  var(--sf-header-height, 3.5rem);
     scrollbar-gutter:    stable;
     color-scheme:        var(--sf-color-scheme, light dark);
     hanging-punctuation: first last;

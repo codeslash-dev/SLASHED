@@ -25,7 +25,7 @@
     text-wrap:         var(--sf-heading-text-wrap);
     overflow-wrap:     break-word;
     text-rendering:    optimizelegibility;
-    scroll-margin-top: calc(var(--sf-header-height) + var(--sf-space-m));
+    scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
   }
 
   h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); }
@@ -149,7 +149,7 @@
   }
 
   :target {
-    scroll-margin-top: calc(var(--sf-header-height) + var(--sf-space-m));
+    scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
   }
 
   ::selection {
