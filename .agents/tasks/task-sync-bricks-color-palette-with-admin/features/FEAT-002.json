@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "fix",
   "description": "Add hex-to-oklch conversion fallback in Color Resolver's resolve_sources() method so hex values from the admin color picker are properly resolved instead of silently falling back to defaults.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Add a private static srgb_to_linear($c) method that inverts the linear_to_srgb() gamma function.",
     "Add a private static hex_to_oklch($hex) method that converts hex -> RGB -> linear sRGB -> LMS -> OKLab -> OKLch, returning [L, C, H] or null.",
@@ -19,5 +19,5 @@
     "Run php -l on integrations/bricks/includes/class-color-resolver.php to confirm valid syntax"
   ],
   "blocked_reason": null,
-  "findings": null
+  "findings": "The standard OKLab reference matrices from the user's instructions were NOT the exact inverses of the matrices used in the existing oklch_to_hex(). Computed the actual mathematical inverse of the LMS->sRGB matrix in the codebase. Also discovered the intermediate LMS space can have negative values for saturated colors (e.g. pure green), requiring a sign-preserving cube root (safe_cbrt) instead of plain pow(x, 1/3). Round-trip hex->oklch->hex is now exact for all tested colors."
 }
