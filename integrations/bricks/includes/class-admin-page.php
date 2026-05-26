@@ -70,6 +70,7 @@ class Slashed_Bricks_Admin_Page {
 			'classes'    => 'Classes',
 			'bundle'     => 'Bundle',
 			'hooks'      => 'Hooks',
+			'cheatsheet' => 'Cheatsheet',
 		);
 
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
