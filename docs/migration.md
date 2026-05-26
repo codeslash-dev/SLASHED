@@ -76,45 +76,44 @@ the migration is mostly about *where* styling lives.
 
 ### Mental model
 
-| Concern | Pico / classless | Tailwind / utility-first | **SLASHED** |
+| Concern | Classless / element-styled | Utility-first | **SLASHED** |
 |---|---|---|---|
 | Element defaults | global element styles | reset only | minimal `base` layer (flow/inline text) |
 | Components | restyle bare elements | utility classes on markup | your own BEM classes consuming `--sf-*` tokens |
 | Theming | CSS vars (some) | config file + build | override 6 source tokens, no build |
 | Layout | utility/grid classes | flex/grid utilities | container-query primitives (`.sf-*`) |
 | Recipes | bespoke per project | utility chains | macros (`.sf-prose`, `.sf-flow`, …) |
-| States | `:disabled` etc. | `disabled:` variants | `.is-*` state classes |
+| States | `:disabled` etc. | variant modifiers | `.is-*` state classes |
 
-### From Pico CSS
+### From a classless / element-styled framework
 
-Pico styles bare HTML; SLASHED keeps `base` minimal and expects components.
+These frameworks style bare HTML globally; SLASHED keeps `base` minimal and expects components.
 
-- **Rich element styling** (`table`, `blockquote`, `figure`, `dl`): in Pico
-  these are global. In SLASHED they're styled **inside `.sf-prose`** — wrap
-  long-form content in `<div class="sf-prose">`.
-- **Forms**: Pico styles inputs globally. SLASHED's are opt-in — add
-  `optional/forms.css` (the `optimal` bundle includes it).
-- **Containers**: Pico's `.container` → SLASHED `.sf-container`.
+- **Rich element styling** (`table`, `blockquote`, `figure`, `dl`): globally
+  styled in classless frameworks. In SLASHED they're styled **inside
+  `.sf-prose`** — wrap long-form content in `<div class="sf-prose">`.
+- **Forms**: many classless frameworks style inputs globally. SLASHED's are
+  opt-in — add `optional/forms.css` (the `optimal` bundle includes it).
+- **Containers**: use `.sf-container`.
 - **Pre-compiled colour themes**: not needed — override the 6 source tokens.
 
-### From Bulma
+### From a component / modifier framework
 
 - **Helpers/modifiers** (`.is-primary`, `.is-active`): SLASHED reserves `.is-*`
   exclusively for runtime **states** (`.is-active`, `.is-disabled`, …). Visual
   variants belong in your component CSS using brand tokens
   (`background: var(--sf-color-primary)`).
-- **Columns** (`.columns`/`.column`): use `.sf-grid`, `.sf-grid-N`, or
-  `.sf-switcher`.
-- **`.section`/`.container`**: `.sf-section` / `.sf-container`.
+- **Columns**: use `.sf-grid`, `.sf-grid-N`, or `.sf-switcher`.
+- **Section/container**: `.sf-section` / `.sf-container`.
 
-### From Tailwind
+### From a utility-first framework
 
 - **Utility classes on markup**: SLASHED is not utility-first. Compose with the
   layout primitives, the macros (`.sf-flow`, `.sf-truncate`, etc.), and
   write small BEM components that read tokens.
-- **`theme.extend` / config**: there's no config or build — override `--sf-*`
+- **Config file / build step**: there's no config or build — override `--sf-*`
   tokens in a stylesheet. See [theming.md](theming.md).
-- **`dark:` variant**: use `data-theme` (auto-derived dark mode) — see
+- **Dark variant syntax**: use `data-theme` (auto-derived dark mode) — see
   [dark-mode.md](dark-mode.md).
 - **Spacing/colour scales**: available as tokens (`--sf-space-*`,
   `--sf-color-*`) — use them in your own classes instead of inline utilities.

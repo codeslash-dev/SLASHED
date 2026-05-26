@@ -395,7 +395,7 @@ These behaviors are deliberate. Documented here so they aren't mistaken for bugs
   `optional/tokens.palette.css`, `base-*` mixes `--sf-color-text` *into* base for
   tints and base *into* text for shades, so it is surface-relative, not a perceptual
   lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
-  differs from Material/Tailwind conventions.
+  differs from the conventional monotonic lightness ramp.
 
 ---
 

@@ -9,7 +9,7 @@
    or application logic. Utilities describe static intent;
    states describe current condition.
 
-   Design principles (informed by Bulma, ACSS, CUBE CSS):
+   Design principles:
    ─ Generic states only — component-specific overrides belong
      in slashed.components (e.g. .sf-modal.is-open).
    ─ Tokens first — every value references a design token.

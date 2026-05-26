@@ -198,7 +198,7 @@ versions above — colors will collapse to `initial` on older engines.
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
 | [Browser support](docs/browser-support.md) | the support floor and why |
 | [Performance](docs/performance.md) | modern-CSS footguns to avoid |
-| [Migration](docs/migration.md) | 0.2.x → 0.3.0 + Pico / Bulma / Tailwind → SLASHED |
+| [Migration](docs/migration.md) | 0.2.x → 0.3.0 + migrating from other frameworks |
 | [Contributing](CONTRIBUTING.md) | setup, conventions, tests |
 
 ## Development

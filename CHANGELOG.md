@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [0.3.0] - 2026-05-24
 
 Class taxonomy refactor. New `slashed.macros` cascade layer, 12 macro
-recipes, ACSS-parity essentials, and 8 taken component names with empty
+recipes, layout essentials, and 8 taken component names with empty
 class definitions ready for upcoming minor releases. Plus the in-flight
 WebKit a11y/contrast fixes that were sitting in `Unreleased`.
 
@@ -65,7 +65,7 @@ See `docs/migration.md` for details.
     full-card click target with single AT announcement; text remains
     selectable; secondary buttons / links keep working;
     `[data-no-overlay]` is the consumer escape hatch).
-- **Layout extras (ACSS parity):**
+- **Layout extras:**
   - `.sf-icon--boxed` — modifier on the existing `.sf-icon` that wraps
     the glyph in a padded, bordered, optionally coloured frame
     (content-box; consumes new `--sf-icon-box-*` tokens).
@@ -340,7 +340,7 @@ Documentation sprint (checklist v3 §C.14) — the stated v1.0 gate.
 - `docs/tokens.md` — full `--sf-*` reference (588 tokens), generated from source
 - `docs/browser-support.md` — the support floor and the features that set it
 - `docs/performance.md` — modern-CSS footguns (transition: all, oklch paint, …)
-- `docs/migration.md` — Pico / Bulma / Tailwind → SLASHED mapping
+- `docs/migration.md` — migration guide for teams coming from other frameworks
 - `CONTRIBUTING.md` — setup, enforced conventions, test/coverage rules
 - `scripts/gen-token-reference.js` + `npm run docs:tokens` to regenerate the
   token reference from source
@@ -486,7 +486,7 @@ base-scope documentation gaps.
 
 ### Added
 
-- Comprehensive comparative audit (`audits/comparative-audit-2026.md`) against Pico CSS v2, Automatic.css v4, Bulma v1, and Tailwind CSS v4 — 22 findings with a prioritised remediation roadmap ([#33](https://github.com/codeslash-dev/SLASHED/pull/33))
+- Comprehensive comparative audit (`audits/comparative-audit-2026.md`) — 22 findings with a prioritised remediation roadmap ([#33](https://github.com/codeslash-dev/SLASHED/pull/33))
 - Named container queries — `sf-layout` and `sf-alternate` containers explicitly named in `core/layout.css`; anonymous queries left deliberately unnamed (Phase 4, [#39](https://github.com/codeslash-dev/SLASHED/pull/39))
 - Granular transition tokens — `--sf-transition-duration`, `--sf-transition-easing`, and related `--sf-transition-*` properties for fine-grained motion control; `@property` colour interpolation proof-of-concept via `color-pulse` utility (Phase 5, [#40](https://github.com/codeslash-dev/SLASHED/pull/40))
 - Print demo section in `docs/demo.html` — interactive checklist verifying `<mark>`, status colours, SCREEN-ONLY badge, and colour opt-in callouts in print preview ([#37](https://github.com/codeslash-dev/SLASHED/pull/37))

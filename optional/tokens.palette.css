@@ -23,7 +23,7 @@
      @import "optional/tokens.palette.css";
 
    Token families (per brand color):
-     -50 … -950   numeric scale (Tailwind-style). 500 = the base color.
+     -50 … -950   numeric scale. 500 = the base color.
                   Tints (50-400) mix toward --sf-color-base; shades
                   (600-950) mix toward --sf-color-text. Both auto-adapt
                   to light/dark. (base inverts the mix direction.)

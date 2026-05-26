@@ -429,7 +429,7 @@
   /* ----------------------------------------------------------
      Font weights
      ---------------------------------------------------------- */
-  /* Numeric scale (Tailwind / Open Props parity) */
+  /* Numeric scale */
   --sf-font-weight-thin:       100;
   --sf-font-weight-extralight: 200;
   --sf-font-weight-light:      300;
@@ -2247,8 +2247,7 @@ td, th {
    the matching --sf-color-text--on-X (auto-contrast) so text
    legibility is automatic without consumer math.
 
-   ACSS calls this "Contextual Backgrounds" / "Surfaces". 11
-   variants cover all brand + status + inverse colors. Base is
+   11 variants cover all brand + status + inverse colors. Base is
    excluded — base IS the page surface; use plain
    background: var(--sf-color-bg) if you need it explicitly.
 
@@ -2329,7 +2328,7 @@ td, th {
    or application logic. Utilities describe static intent;
    states describe current condition.
 
-   Design principles (informed by Bulma, ACSS, CUBE CSS):
+   Design principles:
    ─ Generic states only — component-specific overrides belong
      in slashed.components (e.g. .sf-modal.is-open).
    ─ Tokens first — every value references a design token.
@@ -3253,7 +3252,7 @@ td, th {
    Load after core/tokens.css:
 
    Token families (per brand color):
-     -50 … -950   numeric scale (Tailwind-style). 500 = the base color.
+     -50 … -950   numeric scale. 500 = the base color.
                   Tints (50-400) mix toward --sf-color-base; shades
                   (600-950) mix toward --sf-color-text. Both auto-adapt
                   to light/dark. (base inverts the mix direction.)
