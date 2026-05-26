@@ -21,10 +21,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   provides its own indicator.
 - **`--sf-clickable-overlay-z` custom property** (default `1`). Set it on the
   card to escape a parent stacking context without touching framework internals.
-- **Broader auto-lift coverage.** `ul`, `ol`, `li`, `dl`, `dt`, `dd`,
-  `figure`, `figcaption`, `blockquote`, `address`, and `label` are now lifted
-  above the overlay automatically, so list text and media captions inside cards
-  remain text-selectable without extra markup.
+- **Flow-content trade-off remains explicit.** Card text stays non-selectable
+  by mouse by default to preserve full-card navigation (matching Bootstrap
+  stretched-link and ACSS clickable-parent behavior). Use `[data-no-overlay]`
+  on specific descendants that must sit above the overlay.
 - **Wider interactive-element exceptions.** `summary`, `video`, `audio`, and
   `[role="button"]` are now lifted alongside buttons and form controls.
 
