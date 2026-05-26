@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "fix",
   "description": "Replace all hardcoded values with token references across states.css, accessibility.css, layout.css, base.css, reset.css, and forms.css. Also remove --sf-header-height fallbacks.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "In core/states.css, in .is-pending (around line 90): change `opacity: 0.7;` to `opacity: var(--sf-state-pending-opacity);`",
     "In core/states.css, in .is-dragging (around line 268): change `opacity: 0.5;` to `opacity: var(--sf-opacity-50);`",
@@ -42,5 +42,5 @@
     "Run npm run build to confirm dist/ regenerates successfully"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All 15 replacements applied cleanly. Lint and build pass. Pre-commit hook re-ran build successfully."
 }
