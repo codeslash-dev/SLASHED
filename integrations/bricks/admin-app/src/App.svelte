@@ -14,9 +14,13 @@
   import ClassesTab from './components/ClassesTab.svelte';
   import BundleTab from './components/BundleTab.svelte';
   import HooksTab from './components/HooksTab.svelte';
+  import CheatsheetTab from './components/CheatsheetTab.svelte';
   import StubTab from './components/StubTab.svelte';
   import LivePreview from './components/LivePreview.svelte';
   import SaveBar from './components/SaveBar.svelte';
+
+  const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes'];
+  let isReadOnly = $derived(readOnlyTabs.includes(ui.activeTab));
 
   // Warn before unload when the form has unsaved changes.
   // Replaces the equivalent jQuery `$(window).on('beforeunload', ...)`
@@ -65,6 +69,8 @@
       <BundleTab />
     {:else if ui.activeTab === 'hooks'}
       <HooksTab />
+    {:else if ui.activeTab === 'cheatsheet'}
+      <CheatsheetTab />
     {:else}
       <StubTab tab={meta.tabs[ui.activeTab] ?? ui.activeTab} />
     {/if}
@@ -72,7 +78,9 @@
 
   <LivePreview />
 
-  <SaveBar />
+  {#if !isReadOnly}
+    <SaveBar />
+  {/if}
 </div>
 
 <style>
