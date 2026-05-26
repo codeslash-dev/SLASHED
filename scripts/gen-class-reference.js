@@ -4,7 +4,6 @@
  * Run: npm run docs:classes
  *
  * The reference is derived from source so it never drifts.
- * Must match CLASS_FILES in scripts/audit.js — that is the canonical list.
  */
 
 'use strict';
@@ -14,22 +13,32 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 
-const SOURCES = [
-  { file: 'core/layout.css',       title: 'Layout primitives (`core/layout.css`)',    prefix: 'sf-' },
-  { file: 'core/macros.css',       title: 'Macro classes (`core/macros.css`)',         prefix: 'sf-' },
-  { file: 'core/states.css',       title: 'State classes (`core/states.css`)',         prefix: 'is-' },
-  { file: 'core/accessibility.css',title: 'Accessibility (`core/accessibility.css`)',  prefix: 'sf-' },
-  { file: 'core/motion.css',       title: 'Motion / entrances (`core/motion.css`)',    prefix: 'sf-' },
-  { file: 'optional/forms.css',    title: 'Forms (`optional/forms.css`)',              prefix: 'sf-' },
-  { file: 'optional/components.css', title: 'Components (`optional/components.css`)', prefix: 'sf-' },
-];
+const { CLASS_FILES } = require('./registry-sources');
+
+const FILE_META = {
+  'core/layout.css':        { title: 'Layout primitives',    prefix: 'sf-' },
+  'core/macros.css':        { title: 'Macro classes',         prefix: 'sf-' },
+  'core/states.css':        { title: 'State classes',         prefix: 'is-' },
+  'core/accessibility.css': { title: 'Accessibility',         prefix: 'sf-' },
+  'core/motion.css':        { title: 'Motion / entrances',    prefix: 'sf-' },
+  'optional/forms.css':     { title: 'Forms',                 prefix: 'sf-' },
+  'optional/components.css':{ title: 'Components',            prefix: 'sf-' },
+};
+
+const SOURCES = CLASS_FILES.map(f => ({
+  file:   f,
+  title:  `${FILE_META[f].title} (\`${f}\`)`,
+  prefix: FILE_META[f].prefix,
+}));
 
 function extract(file) {
   const abs = path.join(ROOT, file);
-  if (!fs.existsSync(abs)) return [];
+  if (!fs.existsSync(abs)) {
+    throw new Error(`[docs:classes] Missing canonical class source file: ${abs}`);
+  }
   const css = fs.readFileSync(abs, 'utf8')
-    .replace(/\/\*[\s\S]*?\*\//g, '')      // strip block comments
-    .replace(/"[^"]*"|'[^']*'/g, '""');    // strip string literals
+    .replace(/\/\*[\s\S]*?\*\//g, '')     // strip block comments
+    .replace(/"[^"]*"|'[^']*'/g, '""');   // strip string literals
   const names = new Set();
   for (const m of css.matchAll(/\.((sf|is)-[\w-]+)/g)) names.add(m[1]);
   return [...names].sort();

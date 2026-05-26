@@ -23,24 +23,7 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const OUT  = path.join(ROOT, 'integrations', 'bricks', 'data', 'inventory.json');
 
-// Must match TOKEN_FILES / CLASS_FILES in scripts/audit.js.
-const TOKEN_FILES = [
-  'core/tokens.css',
-  'core/tokens.layout.css',
-  'core/tokens.macros.css',
-  'optional/tokens.palette.css',
-  'optional/tokens.components.css',
-];
-
-const CLASS_FILES = [
-  'core/layout.css',
-  'core/macros.css',
-  'core/states.css',
-  'core/accessibility.css',
-  'core/motion.css',
-  'optional/forms.css',
-  'optional/components.css',
-];
+const { TOKEN_FILES, CLASS_FILES } = require('./registry-sources');
 
 function stripComments(css) {
   return css.replace(/\/\*[\s\S]*?\*\//g, '');
@@ -52,15 +35,16 @@ function stripStrings(css) {
 
 function readFile(rel) {
   const abs = path.join(ROOT, rel);
-  return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : null;
+  if (!fs.existsSync(abs)) {
+    throw new Error(`[gen-bricks-inventory] Missing canonical source file: ${rel}`);
+  }
+  return fs.readFileSync(abs, 'utf8');
 }
 
 function extractTokens() {
   const names = new Set();
   for (const rel of TOKEN_FILES) {
-    const raw = readFile(rel);
-    if (raw === null) continue;
-    const css = stripComments(raw);
+    const css = stripComments(readFile(rel));
     for (const m of css.matchAll(/@property\s+(--sf-[\w-]+)/g))  names.add(m[1]);
     for (const m of css.matchAll(/(--sf-[\w-]+)\s*:/g))          names.add(m[1]);
   }
@@ -71,9 +55,7 @@ function extractClasses(prefix) {
   const names = new Set();
   const re = new RegExp(`\\.(${prefix}[\\w-]+)`, 'g');
   for (const rel of CLASS_FILES) {
-    const raw = readFile(rel);
-    if (raw === null) continue;
-    const css = stripStrings(stripComments(raw));
+    const css = stripStrings(stripComments(readFile(rel)));
     for (const m of css.matchAll(re)) names.add(m[1]);
   }
   return [...names].sort();
