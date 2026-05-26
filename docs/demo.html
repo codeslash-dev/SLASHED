@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLASHED — Demo</title>
-  <!-- SLASHED via jsDelivr CDN -->
-  <!-- Built bundles live on the orphan `dist` branch, auto-published by
-       .github/workflows/publish-dist.yml on every merge to main.
-       Source files (e.g. optional/*) live on main. -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/optional/tokens.palette.css">
+  <!-- SLASHED local build — relative paths work for both Playwright (file://)
+       and a local dev server. For a standalone shareable demo, swap these for
+       the jsDelivr CDN links:
+         https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.css
+         https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@main/optional/tokens.palette.css -->
+  <link rel="stylesheet" href="../dist/slashed.essential.css">
+  <link rel="stylesheet" href="../optional/tokens.palette.css">
   <style>
     /* ── demo-only overrides ──────────────────────────────── */
     :root {
