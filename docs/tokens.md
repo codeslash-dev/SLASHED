@@ -4,8 +4,9 @@
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
 **623 tokens.** Every `--sf-*` custom property and its default value. See
-[architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
-contract and naming conventions, and [theming.md](theming.md) for the
+[architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
+contract and naming conventions (a DEPRECATED tier will be introduced
+post-0.5.0 when tokens are retired), and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)

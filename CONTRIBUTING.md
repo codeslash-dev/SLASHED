@@ -39,8 +39,9 @@ be green, and `dist/` must be rebuilt and committed.
 - **`.is-*` is reserved** for runtime state classes only (the `slashed.states`
   layer) — never for utilities or variants.
 - **Public vs internal tokens.** Label new tokens in the file header
-  (PUBLIC / INTERNAL / DEPRECATED). Keep alias chains ≤2 hops; don't introduce
-  duplicate/dangling/cyclic aliases.
+  (PUBLIC / PUBLIC-ADVANCED / INTERNAL). Keep alias chains ≤2 indirections
+  (3 nodes max: per-primitive → layout-system → canonical source); don't
+  introduce duplicate/dangling/cyclic aliases.
 - **Scope of `base`.** Global base styles cover flow/inline text only. Rich
   blocks belong in `.sf-prose`; widgets and form controls are opt-in/component
   territory (see [architecture.md](docs/architecture.md)).

@@ -65,7 +65,7 @@
      · font sizes (--sf-text-{2xs..4xl}, --sf-text-display-{s,m,l})
      · leading (--sf-leading-{tight,snug,normal,relaxed})
      · tracking (--sf-tracking-{tight,normal,wide,wider,widest})
-     · icon sizes (--sf-icon-{xs,s,m,l,xl})
+     · icon sizes (--sf-icon-{xs,s,m,l,xl,2xl})
      · UI sizes (--sf-size-{xs,s,m,l,xl})
      · containers (--sf-container-{narrow,prose,default,wide,full})
      · ratios (--sf-ratio-{square,video,cinema,portrait,golden,4-3,3-2})
