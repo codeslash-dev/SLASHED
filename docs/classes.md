@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**143 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**144 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-101 classes.
+102 classes.
 
 | Class |
 |---|
@@ -23,7 +23,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-center` |
 | `.sf-center--intrinsic` |
 | `.sf-cluster` |
-| `.sf-cluster--2xs` |
+| `.sf-cluster--2xl` |
 | `.sf-cluster--between` |
 | `.sf-cluster--center` |
 | `.sf-cluster--end` |
@@ -57,6 +57,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-frame--video` |
 | `.sf-full-bleed` |
 | `.sf-grid` |
+| `.sf-grid--2xl` |
 | `.sf-grid--dense` |
 | `.sf-grid--fit` |
 | `.sf-grid--l` |
@@ -86,11 +87,13 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-pancake` |
 | `.sf-reel` |
 | `.sf-section` |
+| `.sf-section--2xl` |
 | `.sf-section--collapse` |
 | `.sf-section--l` |
 | `.sf-section--m` |
 | `.sf-section--s` |
 | `.sf-section--xl` |
+| `.sf-section--xs` |
 | `.sf-section-group` |
 | `.sf-sidebar` |
 | `.sf-sidebar--narrow` |
@@ -98,8 +101,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-sidebar--wide` |
 | `.sf-stack` |
 | `.sf-stack--2xl` |
-| `.sf-stack--2xs` |
-| `.sf-stack--3xl` |
 | `.sf-stack--center` |
 | `.sf-stack--end` |
 | `.sf-stack--l` |

@@ -3,14 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**624 tokens.** Every `--sf-*` custom property and its default value. See
+**619 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-375 tokens.
+371 tokens.
 
 | Token | Default |
 |---|---|
@@ -58,7 +58,6 @@ rebrand workflow.
 | `--sf-caret-color` | `var(--sf-color-action)` |
 | `--sf-code-font-size` | `0.875em` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-action--hover` | `oklch(from var(--sf-color-action) calc(l - 0.05) c h)` |
 | `--sf-color-action-light` | `oklch(0.60 0.16 210) *(registered)*` |
 | `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
 | `--sf-color-base-light` | `oklch(0.98 0.005 260) *(registered)*` |
@@ -103,16 +102,13 @@ rebrand workflow.
 | `--sf-color-mark-bg` | `oklch(from var(--sf-color-warning) l c h / 0.25)` |
 | `--sf-color-mark-text` | `inherit` |
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-neutral--hover` | `oklch(from var(--sf-color-neutral) calc(l - 0.05) c h)` |
 | `--sf-color-neutral-light` | `oklch(0.45 0.02 260) *(registered)*` |
 | `--sf-color-overlay` | `oklch(from var(--sf-color-base) l c h / 0.9)` |
 | `--sf-color-primary` | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-primary--hover` | `oklch(from var(--sf-color-primary) calc(l - 0.05) c h)` |
 | `--sf-color-primary-light` | `oklch(0.45 0.20 264) *(registered)*` |
 | `--sf-color-raised` | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` |
 | `--sf-color-scheme` | `light dark` |
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-secondary--hover` | `oklch(from var(--sf-color-secondary) calc(l - 0.05) c h)` |
 | `--sf-color-secondary-light` | `oklch(0.25 0.03 260) *(registered)*` |
 | `--sf-color-selection-bg` | `oklch(from var(--sf-color-action) l c h / 0.22)` |
 | `--sf-color-selection-text` | `inherit` |
@@ -123,7 +119,6 @@ rebrand workflow.
 | `--sf-color-success-subtle` | `oklch(from var(--sf-color-success) l c h / 0.12)` |
 | `--sf-color-surface` | `var(--sf-color-base)` |
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-tertiary--hover` | `oklch(from var(--sf-color-tertiary) calc(l - 0.05) c h)` |
 | `--sf-color-tertiary-light` | `oklch(0.48 0.14 310) *(registered)*` |
 | `--sf-color-text` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-text--disabled` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` |
@@ -295,7 +290,6 @@ rebrand workflow.
 | `--sf-ratio-4-3` | `4 / 3` |
 | `--sf-ratio-cinema` | `21 / 9` |
 | `--sf-ratio-golden` | `1.618 / 1` |
-| `--sf-ratio-photo` | `3 / 2` |
 | `--sf-ratio-portrait` | `3 / 4` |
 | `--sf-ratio-square` | `1` |
 | `--sf-ratio-video` | `16 / 9` |
@@ -308,10 +302,12 @@ rebrand workflow.
 | `--sf-scrollbar-thumb` | `var(--sf-color-neutral)` |
 | `--sf-scrollbar-track` | `transparent` |
 | `--sf-section-pad` | `var(--sf-section-pad--m)` |
+| `--sf-section-pad--2xl` | `calc(var(--sf-space-4xl) * 2)` |
 | `--sf-section-pad--l` | `var(--sf-space-4xl)` |
 | `--sf-section-pad--m` | `var(--sf-space-3xl)` |
 | `--sf-section-pad--s` | `var(--sf-space-2xl)` |
 | `--sf-section-pad--xl` | `calc(var(--sf-space-4xl) * 1.5)` |
+| `--sf-section-pad--xs` | `var(--sf-space-xl)` |
 | `--sf-shadow-2xl` | `0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))` |
 | `--sf-shadow-color` | `oklch(from var(--sf-color-neutral) 0.15 c h)` |
 | `--sf-shadow-glow` | `0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
@@ -392,7 +388,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-46 tokens.
+45 tokens.
 
 | Token | Default |
 |---|---|
@@ -417,8 +413,8 @@ rebrand workflow.
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |
-| `--sf-grid-min` | `var(--sf-grid-min-default, 16rem)` |
-| `--sf-grid-min-default` | `16rem` |
+| `--sf-grid-min` | `16rem` |
+| `--sf-grid-min-2xl` | `28rem` |
 | `--sf-grid-min-l` | `20rem` |
 | `--sf-grid-min-m` | `16rem` |
 | `--sf-grid-min-s` | `13rem` |
@@ -435,8 +431,7 @@ rebrand workflow.
 | `--sf-reel-item-width` | `max-content` |
 | `--sf-sidebar-gap` | `var(--sf-space-gap)` |
 | `--sf-sidebar-min-width` | `50%` |
-| `--sf-sidebar-width` | `var(--sf-sidebar-width-default, 18rem)` |
-| `--sf-sidebar-width-default` | `18rem` |
+| `--sf-sidebar-width` | `18rem` |
 | `--sf-space-content` | `var(--sf-content-gap)` |
 | `--sf-space-gap` | `var(--sf-gap)` |
 | `--sf-stack-gap` | `var(--sf-space-content)` |

@@ -981,7 +981,7 @@
         </div>
 
         <h3>Font Weights — numeric scale 100–900</h3>
-        <div class="sf-stack sf-stack--2xs">
+        <div class="sf-stack sf-stack--xs">
           <span style="font-weight: var(--sf-font-weight-thin)">100 thin — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-extralight)">200 extralight — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-light)">300 light — The quick brown fox</span>
@@ -999,7 +999,7 @@
           <span style="font-weight: var(--sf-font-weight-heading)">heading</span>
           <span style="font-weight: var(--sf-font-weight-display)">display</span>
         </div>
-        <div class="sf-stack sf-stack--2xs" style="margin-block-start: var(--sf-space-s)">
+        <div class="sf-stack sf-stack--xs" style="margin-block-start: var(--sf-space-s)">
           <span style="font-family: var(--sf-font-humanist)">humanist — The quick brown fox jumps</span>
           <span style="font-family: var(--sf-font-geometric)">geometric — The quick brown fox jumps</span>
           <span style="font-family: var(--sf-font-slab)">slab — The quick brown fox jumps</span>
@@ -1075,7 +1075,7 @@
         <h2>Spacing</h2>
         <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">All fluid tokens use <code>clamp()</code> — resize the window to see bars animate.</p>
 
-        <div class="sf-stack sf-stack--2xs">
+        <div class="sf-stack sf-stack--xs">
           <div class="demo-space-row">
             <span class="demo-space-label">--sf-space-none</span>
             <div class="demo-space-bar" style="width: 2px; background: var(--sf-color-border)"></div>
@@ -1220,7 +1220,7 @@
         </div>
 
         <h3>Easing Curves</h3>
-        <div class="sf-stack sf-stack--2xs">
+        <div class="sf-stack sf-stack--xs">
           <div class="demo-ease-row">
             <span class="demo-ease-label">ease-linear</span>
             <div class="demo-ease-track"><div class="demo-ease-ball" style="animation: demo-slide 2s var(--sf-ease-linear) infinite alternate"></div></div>
@@ -1276,7 +1276,7 @@
 
         <h3>Duration Tokens</h3>
         <p class="demo-duration-hint">Hover any row — the dot slides across using that duration token. Easing is the same (<code>--sf-ease-out</code>) so the only variable is speed.</p>
-        <div class="sf-stack sf-stack--2xs">
+        <div class="sf-stack sf-stack--xs">
           <div class="demo-duration-row" tabindex="0">
             <span class="demo-duration-label">--sf-duration-instant</span>
             <div class="demo-duration-track">
@@ -1329,6 +1329,7 @@
               <span style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">visible</span>
               <span class="is-hidden" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">hidden (display:none)</span>
               <span class="is-invisible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">invisible (visibility:hidden)</span>
+              <span class="is-visible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-visible (force visibility:visible)</span>
             </div>
           </div>
           <div>
@@ -1471,13 +1472,21 @@
         </div>
 
         <h3>.sf-icon</h3>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Em-based inline icon sizing. Scales with surrounding text; size modifiers <code>.sf-icon--xs</code> … <code>.sf-icon--xl</code>.</p>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Em-based inline icon sizing. Scales with surrounding text; size modifiers <code>.sf-icon--xs</code> … <code>.sf-icon--xl</code>. Capped at <code>--xl</code> (3em) — above that an icon stops being an icon.</p>
         <div class="sf-cluster" style="align-items: center; font-size: var(--sf-text-m)">
           <svg class="sf-icon sf-icon--xs" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
           <svg class="sf-icon sf-icon--s" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
           <svg class="sf-icon sf-icon--m" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
           <svg class="sf-icon sf-icon--l" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
           <svg class="sf-icon sf-icon--xl" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+
+        <h3>.sf-icon--boxed</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Padded, bordered icon frame. Override <code>--sf-icon-box-bg</code> / <code>-border</code> / <code>-radius</code> per instance. Combine with size modifiers; the visible glyph stays at <code>--sf-icon-size</code> and the frame grows around it.</p>
+        <div class="sf-cluster" style="align-items: center; font-size: var(--sf-text-m)">
+          <svg class="sf-icon sf-icon--m sf-icon--boxed" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg class="sf-icon sf-icon--m sf-icon--boxed" viewBox="0 0 24 24" aria-hidden="true" style="--sf-icon-box-bg: var(--sf-color-primary); color: var(--sf-color-text--on-primary); --sf-icon-box-border: none"><circle cx="12" cy="12" r="10"/></svg>
+          <svg class="sf-icon sf-icon--l sf-icon--boxed" viewBox="0 0 24 24" aria-hidden="true" style="--sf-icon-box-radius: var(--sf-radius-full); --sf-icon-box-bg: var(--sf-color-action); color: var(--sf-color-text--on-action); --sf-icon-box-border: none"><circle cx="12" cy="12" r="10"/></svg>
         </div>
 
         <h3>.sf-grid--dense</h3>
@@ -1600,9 +1609,9 @@
           </div>
         </div>
 
-        <h3>.sf-grid-6 / .sf-grid--s / .sf-grid--m / .sf-grid--l / .sf-grid--xl / .sf-grid--xs</h3>
+        <h3>.sf-grid-6 / .sf-grid--xs … .sf-grid--2xl</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
-          Fixed-column grids (<code>.sf-grid-6</code>) use container queries — wrap in <code>container-type: inline-size</code>. Auto-fill grids (<code>.sf-grid--xs/s/m/l/xl</code>) use <code>repeat(auto-fill, minmax(min(--sf-grid-min, 100%), 1fr))</code> — they collapse to fewer columns as the container narrows. On very narrow viewports both will stack to a single column; resize the window to see them respond.
+          Fixed-column grids (<code>.sf-grid-6</code>) use container queries — wrap in <code>container-type: inline-size</code>. Auto-fill grids (<code>.sf-grid--xs/s/m/l/xl/2xl</code>) use <code>repeat(auto-fill, minmax(min(--sf-grid-min, 100%), 1fr))</code> — they collapse to fewer columns as the container narrows. On very narrow viewports both will stack to a single column; resize the window to see them respond.
         </p>
         <div class="sf-stack sf-stack--m">
           <div style="container-type: inline-size">
@@ -1641,6 +1650,12 @@
               <div class="demo-box">A</div><div class="demo-box">B</div>
             </div>
           </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--2xl (min ~28rem)</code>
+            <div class="sf-grid sf-grid--2xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div>
+            </div>
+          </div>
         </div>
 
         <h3>.sf-sidebar--narrow / .sf-sidebar--wide</h3>
@@ -1673,13 +1688,19 @@
           </div>
         </div>
 
-        <h3>.sf-section--l / .sf-section--xl</h3>
+        <h3>.sf-section--xs / .sf-section--l / .sf-section--xl / .sf-section--2xl</h3>
         <div class="sf-stack sf-stack--s">
+          <div class="sf-section--xs" style="background: var(--sf-color-action-100, color-mix(in oklch, var(--sf-color-action) 8%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); text-align: center; font-size: var(--sf-text-s); outline: 1px dashed var(--sf-color-action)">
+            .sf-section--xs (small vertical padding)
+          </div>
           <div class="sf-section--l" style="background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 8%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); text-align: center; font-size: var(--sf-text-s); outline: 1px dashed var(--sf-color-primary)">
             .sf-section--l (large vertical padding)
           </div>
           <div class="sf-section--xl" style="background: var(--sf-color-tertiary-100, color-mix(in oklch, var(--sf-color-tertiary) 8%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); text-align: center; font-size: var(--sf-text-s); outline: 1px dashed var(--sf-color-tertiary)">
             .sf-section--xl (extra-large vertical padding)
+          </div>
+          <div class="sf-section--2xl" style="background: var(--sf-color-secondary-100, color-mix(in oklch, var(--sf-color-secondary) 8%, var(--sf-color-bg))); border-radius: var(--sf-radius-m); text-align: center; font-size: var(--sf-text-s); outline: 1px dashed var(--sf-color-secondary)">
+            .sf-section--2xl (hero vertical padding)
           </div>
         </div>
 
@@ -1731,34 +1752,40 @@
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-stack--3xl</code>
-            <div class="sf-stack sf-stack--3xl demo-layout-wrap" style="margin-top: var(--sf-space-xs); min-width: 6rem">
+            <code style="font-size: var(--sf-text-xs)">override beyond scale: style="--sf-stack-gap: var(--sf-space-3xl)"</code>
+            <div class="sf-stack demo-layout-wrap" style="--sf-stack-gap: var(--sf-space-3xl); margin-top: var(--sf-space-xs); min-width: 6rem">
               <div class="demo-box">A</div>
               <div class="demo-box">B</div>
             </div>
           </div>
         </div>
 
-        <h3>.sf-cluster gap modifiers: --2xs / --xs / --s / --m / --l</h3>
+        <h3>.sf-cluster gap modifiers: --xs / --s / --m / --l / --xl / --2xl</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
           The size suffix sets the <em>gap</em> between items (not alignment). Compare side by side:
         </p>
         <div class="sf-stack sf-stack--xs">
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-cluster--2xs (smallest gap)</code>
-            <div class="sf-cluster sf-cluster--2xs demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">override below scale: style="--sf-cluster-gap: var(--sf-space-2xs)"</code>
+            <div class="sf-cluster demo-layout-wrap" style="--sf-cluster-gap: var(--sf-space-2xs); margin-top: var(--sf-space-xs)">
               <div class="demo-box" style="width: 3rem">A</div><div class="demo-box" style="width: 3rem">B</div><div class="demo-box" style="width: 3rem">C</div><div class="demo-box" style="width: 3rem">D</div><div class="demo-box" style="width: 3rem">E</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-cluster--xs</code>
+            <code style="font-size: var(--sf-text-xs)">.sf-cluster--xs (smallest of the canonical scale)</code>
             <div class="sf-cluster sf-cluster--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box" style="width: 3rem">A</div><div class="demo-box" style="width: 3rem">B</div><div class="demo-box" style="width: 3rem">C</div><div class="demo-box" style="width: 3rem">D</div><div class="demo-box" style="width: 3rem">E</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-cluster--l (largest of the common scale)</code>
+            <code style="font-size: var(--sf-text-xs)">.sf-cluster--l</code>
             <div class="sf-cluster sf-cluster--l demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box" style="width: 3rem">A</div><div class="demo-box" style="width: 3rem">B</div><div class="demo-box" style="width: 3rem">C</div><div class="demo-box" style="width: 3rem">D</div><div class="demo-box" style="width: 3rem">E</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-cluster--2xl (largest of the canonical scale)</code>
+            <div class="sf-cluster sf-cluster--2xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box" style="width: 3rem">A</div><div class="demo-box" style="width: 3rem">B</div><div class="demo-box" style="width: 3rem">C</div><div class="demo-box" style="width: 3rem">D</div><div class="demo-box" style="width: 3rem">E</div>
             </div>
           </div>
@@ -2085,7 +2112,7 @@
             <div class="sf-container" style="margin-top: var(--sf-space-2xs); background: var(--sf-color-action-100, color-mix(in oklch, var(--sf-color-action) 12%, var(--sf-color-bg))); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); outline: 2px dashed var(--sf-color-action); font-size: var(--sf-text-s); text-align: center">default content</div>
           </div>
         </div>
-        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)"><code>.sf-section</code> modifiers: <code>--s</code>, <code>--m</code>, <code>--l</code>, <code>--xl</code>. Combine: <code>&lt;section class="sf-section--m"&gt;&lt;div class="sf-container"&gt;</code></p>
+        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)"><code>.sf-section</code> modifiers: <code>--xs</code>, <code>--s</code>, <code>--m</code>, <code>--l</code>, <code>--xl</code>, <code>--2xl</code>. Combine: <code>&lt;section class="sf-section--m"&gt;&lt;div class="sf-container"&gt;</code></p>
       </section>
 
       <!-- ══════════════════════════════════════════════════════
