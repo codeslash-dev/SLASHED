@@ -168,7 +168,11 @@
      and survive third-party resets at the same priority as the
      focus-visible ring above. Cannot be hardened with !important
      because the outline shorthand is consumer-customisable.
+
+     Canonical name: .sf-focus-parent (prefixed, added 0.3.0).
+     Legacy alias:   .focus-parent    (unprefixed, kept for compat).
      ---------------------------------------------------------- */
+  .sf-focus-parent:focus-within,
   .focus-parent:focus-within {
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);

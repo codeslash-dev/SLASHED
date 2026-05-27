@@ -2,47 +2,408 @@
    SLASHED — optional/theme-example.css   (COPY & CUSTOMISE)
    @layer slashed.themes
 
-   A worked example of the "rebrand in 6 tokens" workflow. This file
-   is NOT part of any bundle — copy it into your project, rename it,
-   and edit the values. Everything else (dark mode, surfaces, text,
-   status tints, on-colours) auto-derives from these source tokens.
+   MAXIMAL project-override reference. This file lists EVERY
+   overridable token, grouped by concern. It is NOT part of any
+   bundle — copy it into your project, rename it (e.g.
+   `my-brand.css`), uncomment only the tokens you want to
+   override, and load it AFTER slashed:
 
-   See README "Customising tokens" and docs/theming.md.
+     <link rel="stylesheet" href="slashed.optimal.css">
+     <link rel="stylesheet" href="my-brand.css">
+
+   Everything else (dark mode, surfaces, text, status tints,
+   on-colours) auto-derives from these source tokens. You don't
+   need to override derived tokens unless you want full control.
+
+   See docs/theming.md for the workflow and docs/architecture.md
+   for the PUBLIC token contract.
    ============================================================ */
 
 @layer slashed.themes {
 
-  /* ---- 1. Quick rebrand: override the 6 -light source tokens ----
-     Dark mode auto-derives via relative colour syntax. Any valid CSS
-     colour works (hex, oklch, hsl, …). */
   :root {
-    --sf-color-primary-light:   oklch(0.55 0.18 280);  /* brand / links     */
-    --sf-color-secondary-light: oklch(0.30 0.04 280);  /* muted brand        */
-    --sf-color-tertiary-light:  oklch(0.62 0.15 200);  /* accent             */
-    --sf-color-action-light:    oklch(0.62 0.16 150);  /* primary CTA        */
-    --sf-color-neutral-light:   oklch(0.45 0.01 280);  /* greys / text base  */
-    --sf-color-base-light:      oklch(0.99 0.004 280); /* page surface       */
+
+    /* ==========================================================
+       1. BRAND COLOURS — override these 6 to rebrand everything.
+          Dark mode auto-derives via relative colour syntax.
+          Any valid CSS colour works (hex, oklch, hsl, ...).
+       ========================================================== */
+    /* --sf-color-primary-light:   oklch(0.45 0.20 264); */  /* links / primary brand */
+    /* --sf-color-secondary-light: oklch(0.25 0.03 260); */  /* muted brand */
+    /* --sf-color-tertiary-light:  oklch(0.48 0.14 310); */  /* accent */
+    /* --sf-color-action-light:    oklch(0.60 0.16 210); */  /* primary CTA */
+    /* --sf-color-neutral-light:   oklch(0.45 0.02 260); */  /* greys / text base */
+    /* --sf-color-base-light:      oklch(0.98 0.005 260); */ /* page surface */
+
+
+    /* ==========================================================
+       2. DARK-MODE OVERRIDES — only needed when the auto-derived
+          dark value isn't what you want.
+       ========================================================== */
+    /* --sf-color-primary-dark:   oklch(0.78 0.16 264); */
+    /* --sf-color-secondary-dark: oklch(0.70 0.03 260); */
+    /* --sf-color-tertiary-dark:  oklch(0.72 0.12 310); */
+    /* --sf-color-action-dark:    oklch(0.75 0.14 210); */
+    /* --sf-color-neutral-dark:   oklch(0.70 0.02 260); */
+    /* --sf-color-base-dark:      oklch(0.20 0.005 260); */
+
+
+    /* ==========================================================
+       3. STATUS COLOURS — override to match your brand.
+          Each auto-derives subtle/strong/muted variants.
+       ========================================================== */
+    /* --sf-color-success-light: oklch(0.48 0.17 150); */
+    /* --sf-color-warning-light: oklch(0.75 0.17 80);  */
+    /* --sf-color-error-light:   oklch(0.62 0.20 35);  */
+    /* --sf-color-info-light:    oklch(0.48 0.15 240); */
+    /* --sf-color-danger-light:  oklch(0.48 0.24 12);  */
+
+    /* Status dark-mode overrides (optional): */
+    /* --sf-color-success-dark: oklch(0.72 0.15 150); */
+    /* --sf-color-warning-dark: oklch(0.82 0.14 80);  */
+    /* --sf-color-error-dark:   oklch(0.78 0.18 35);  */
+    /* --sf-color-info-dark:    oklch(0.72 0.13 240); */
+    /* --sf-color-danger-dark:  oklch(0.72 0.20 12);  */
+
+
+    /* ==========================================================
+       4. TYPOGRAPHY
+       ========================================================== */
+
+    /* -- Font families -- */
+    /* --sf-font-body:    system-ui, -apple-system, sans-serif; */
+    /* --sf-font-heading: var(--sf-font-body); */
+    /* --sf-font-display: var(--sf-font-heading); */
+    /* --sf-font-mono:    ui-monospace, monospace; */
+
+    /* -- Font weights -- */
+    /* --sf-font-weight-body:    400; */
+    /* --sf-font-weight-heading: 600; */
+    /* --sf-font-weight-display: 700; */
+    /* --sf-current-font-weight: 700; */
+
+    /* -- Body typography -- */
+    /* --sf-body-font-size:     var(--sf-text-m); */
+    /* --sf-body-line-height:   1.5; */
+    /* --sf-body-font-weight:   var(--sf-font-weight-body); */
+    /* --sf-body-text-wrap:     pretty; */
+    /* --sf-body-strong-weight: var(--sf-font-weight-bold); */
+    /* --sf-body-em-style:      italic; */
+
+    /* -- Headings -- */
+    /* --sf-heading-font-family: var(--sf-font-heading); */
+    /* --sf-heading-text-wrap:   balance; */
+    /* --sf-h1-size:           var(--sf-text-4xl); */
+    /* --sf-h1-line-height:    1.1; */
+    /* --sf-h1-font-weight:    var(--sf-font-weight-heading); */
+    /* --sf-h1-letter-spacing: -0.025em; */
+    /* --sf-h2-size:           var(--sf-text-3xl); */
+    /* --sf-h2-line-height:    1.1; */
+    /* --sf-h2-font-weight:    var(--sf-font-weight-heading); */
+    /* --sf-h2-letter-spacing: -0.025em; */
+    /* --sf-h3-size:           var(--sf-text-2xl); */
+    /* --sf-h3-line-height:    1.3; */
+    /* --sf-h3-font-weight:    var(--sf-font-weight-heading); */
+    /* --sf-h3-letter-spacing: 0; */
+    /* --sf-h4-size:           var(--sf-text-xl); */
+    /* --sf-h4-line-height:    1.3; */
+    /* --sf-h4-font-weight:    var(--sf-font-weight-heading); */
+    /* --sf-h4-letter-spacing: 0; */
+    /* --sf-h5-size:           var(--sf-text-l); */
+    /* --sf-h5-line-height:    1.5; */
+    /* --sf-h5-font-weight:    var(--sf-font-weight-heading); */
+    /* --sf-h5-letter-spacing: 0; */
+    /* --sf-h6-size:           var(--sf-text-m); */
+    /* --sf-h6-line-height:    1.5; */
+    /* --sf-h6-font-weight:    var(--sf-font-weight-heading); */
+    /* --sf-h6-letter-spacing: 0.025em; */
+
+    /* -- OpenType / variable fonts -- */
+    /* --sf-font-features:  normal; */  /* e.g. "cv11", "ss01" */
+    /* --sf-font-variation: normal; */  /* e.g. "wght" 450, "opsz" 32 */
+    /* --sf-optical-sizing: auto; */
+
+    /* -- Code -- */
+    /* --sf-code-font-size: 0.875em; */
+
+
+    /* ==========================================================
+       5. SPACING
+       ========================================================== */
+    /* --sf-space-scale: 1; */       /* global multiplier for all spaces */
+    /* --sf-gap:         var(--sf-space-m); */  /* BEM component gap */
+    /* --sf-content-gap: var(--sf-space-s); */  /* within-component rhythm */
+    /* --sf-component-pad: var(--sf-space-m); */
+    /* --sf-space-gutter:  var(--sf-space-l); */
+
+    /* -- Section padding -- */
+    /* --sf-section-pad--xs: var(--sf-space-xl); */
+    /* --sf-section-pad--s:  var(--sf-space-2xl); */
+    /* --sf-section-pad--m:  var(--sf-space-3xl); */
+    /* --sf-section-pad--l:  var(--sf-space-4xl); */
+    /* --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5); */
+    /* --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2); */
+
+
+    /* ==========================================================
+       6. BORDER & RADIUS
+       ========================================================== */
+    /* --sf-radius-scale: 1; */      /* global multiplier for all radii */
+    /* --sf-radius-xs:   2px; */
+    /* --sf-radius-s:    4px; */
+    /* --sf-radius-m:    8px; */
+    /* --sf-radius-l:    12px; */
+    /* --sf-radius-xl:   16px; */
+    /* --sf-radius-2xl:  24px; */
+    /* --sf-radius-3xl:  32px; */
+    /* --sf-radius-4xl:  48px; */
+
+    /* -- Border widths -- */
+    /* --sf-border-width-hairline: 0.5px; */
+    /* --sf-border-width-1: 1px; */
+    /* --sf-border-width-2: 2px; */
+    /* --sf-border-width-3: 3px; */
+    /* --sf-border-width-4: 4px; */
+
+    /* -- Border styles -- */
+    /* --sf-border-style:        solid; */
+    /* --sf-border-style-strong: solid; */
+    /* --sf-border-style-soft:   dashed; */
+    /* --sf-border-style-dotted: dotted; */
+
+    /* -- Divider -- */
+    /* --sf-divider-width: var(--sf-border-width-1); */
+    /* --sf-divider-style: solid; */
+    /* --sf-divider-color: var(--sf-color-border); */
+
+
+    /* ==========================================================
+       7. SHADOWS
+       ========================================================== */
+    /* --sf-shadow-strength:   0.08; */  /* auto-increases in dark mode */
+    /* --sf-shadow-color:      oklch(from var(--sf-color-neutral) 0.15 c h); */
+    /* --sf-shadow-glow-color: var(--sf-color-primary); */
+
+
+    /* ==========================================================
+       8. MOTION & TRANSITIONS
+       ========================================================== */
+    /* --sf-motion-scale: 1; */  /* global speed multiplier (0 = instant) */
+
+    /* -- Durations -- */
+    /* --sf-duration-instant: 100ms; */
+    /* --sf-duration-fast:    150ms; */
+    /* --sf-duration-normal:  250ms; */
+    /* --sf-duration-slow:    400ms; */
+    /* --sf-duration-slower:  600ms; */
+
+    /* -- Easing curves -- */
+    /* --sf-ease-out:       cubic-bezier(0.25, 0, 0.15, 1); */
+    /* --sf-ease-in:        cubic-bezier(0.5, 0, 0.75, 0.25); */
+    /* --sf-ease-in-out:    cubic-bezier(0.4, 0, 0.2, 1); */
+    /* --sf-ease-spring:    linear(0, 0.5, 1.1, 0.95, 1.02, 1); */
+    /* --sf-ease-elastic:   linear(0, 0.3, 1.2, 0.9, 1.05, 1); */
+    /* --sf-ease-bounce:    linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1); */
+    /* --sf-ease-overshoot: linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1); */
+
+
+    /* ==========================================================
+       9. LAYOUT PRIMITIVES
+       ========================================================== */
+
+    /* -- Stack -- */
+    /* --sf-stack-gap: var(--sf-space-content); */
+
+    /* -- Cluster -- */
+    /* --sf-cluster-gap:     var(--sf-space-gap); */
+    /* --sf-cluster-align:   center; */
+    /* --sf-cluster-justify: flex-start; */
+
+    /* -- Grid -- */
+    /* --sf-grid-min: 16rem; */
+    /* --sf-grid-gap: var(--sf-space-gap); */
+
+    /* -- Sidebar -- */
+    /* --sf-sidebar-width:     18rem; */
+    /* --sf-sidebar-gap:       var(--sf-space-gap); */
+    /* --sf-sidebar-min-width: 50%; */
+
+    /* -- Switcher -- */
+    /* --sf-switcher-threshold: 30rem; */
+    /* --sf-switcher-gap:       var(--sf-space-gap); */
+
+    /* -- Cover -- */
+    /* --sf-cover-min-height: 100dvh; */
+    /* --sf-cover-padding:    var(--sf-section-pad); */
+
+    /* -- Box -- */
+    /* --sf-box-padding:      var(--sf-space-m); */
+    /* --sf-box-border-width: 0; */
+    /* --sf-box-border-color: var(--sf-color-border); */
+
+    /* -- Frame -- */
+    /* --sf-frame-ratio: 16 / 9; */
+
+    /* -- Reel -- */
+    /* --sf-reel-item-width: max-content; */
+    /* --sf-reel-gap:        var(--sf-space-gap); */
+    /* --sf-reel-height:     auto; */
+
+    /* -- Bento -- */
+    /* --sf-bento-cols-default: 3; */
+    /* --sf-bento-row-default:  10rem; */
+    /* --sf-bento-row-compact:  6rem; */
+    /* --sf-bento-row-tall:     16rem; */
+    /* --sf-bento-gap:          var(--sf-space-gap); */
+
+    /* -- Imposter -- */
+    /* --sf-imposter-margin: var(--sf-space-m); */
+
+    /* -- Icon (boxed) -- */
+    /* --sf-icon-box-pad:    0.5em; */
+    /* --sf-icon-box-radius: var(--sf-radius-s); */
+    /* --sf-icon-box-bg:     var(--sf-color-well); */
+    /* --sf-icon-box-border: var(--sf-border-width-1) solid var(--sf-color-border); */
+
+    /* -- Content grid / breakout -- */
+    /* --sf-breakout-width: var(--sf-container-wide); */
+    /* --sf-content-width:  var(--sf-container-default); */
+
+    /* -- Prose -- */
+    /* --sf-prose-paragraph: var(--sf-space-content); */
+
+    /* -- Alternate (zigzag) -- */
+    /* --sf-alternate-gap:       var(--sf-space-content); */
+    /* --sf-alternate-inner-gap: var(--sf-space-gap); */
+
+
+    /* ==========================================================
+       10. MACROS
+       ========================================================== */
+    /* --sf-flow-space:         var(--sf-space-content); */
+    /* --sf-line-clamp:         3; */
+    /* --sf-truncate-suffix:    "\2026"; */
+    /* --sf-aspect:             16 / 9; */
+    /* --sf-scroll-shadow-size: 2rem; */
+
+
+    /* ==========================================================
+       11. CONTAINERS
+       ========================================================== */
+    /* --sf-container-narrow:  38rem; */
+    /* --sf-container-prose:   65ch; */
+    /* --sf-container-default: 75rem; */
+    /* --sf-container-wide:    90rem; */
+    /* --sf-container-full:    100%; */
+
+
+    /* ==========================================================
+       12. Z-INDEX
+       ========================================================== */
+    /* --sf-z-below:  -1; */
+    /* --sf-z-base:    0; */
+    /* --sf-z-raised:  1; */
+    /* --sf-z-low:    10; */
+    /* --sf-z-mid:   100; */
+    /* --sf-z-high:  500; */
+    /* --sf-z-top:   900; */
+    /* --sf-z-max:  9999; */
+
+
+    /* ==========================================================
+       13. FOCUS & ACCESSIBILITY
+       ========================================================== */
+    /* --sf-focus-ring-width:  2px; */
+    /* --sf-focus-ring-offset: 2px; */
+    /* --sf-focus-ring-style:  solid; */
+    /* --sf-focus-ring-color:  var(--sf-color-action); */
+    /* --sf-touch-target:      var(--sf-size-l); */
+    /* --sf-contrast-bias:     0; */
+    /* --sf-contrast-threshold: 0.6; */
+
+
+    /* ==========================================================
+       14. ADVANCED — SCALE MULTIPLIERS
+           Set these to globally scale an entire concern.
+       ========================================================== */
+    /* --sf-space-scale:        1; */
+    /* --sf-text-scale:         1; */
+    /* --sf-text-display-scale: 1; */
+    /* --sf-radius-scale:       1; */
+    /* --sf-motion-scale:       1; */
+
+
+    /* ==========================================================
+       15. ADVANCED — MISCELLANEOUS
+       ========================================================== */
+    /* --sf-lumlocker: 0.65; */          /* LumLocker lightness */
+    /* --sf-opacity-disabled: 0.45; */
+    /* --sf-state-pending-opacity: 0.7; */
+    /* --sf-link-external-marker: " \2197"; */  /* " ↗" */
+    /* --sf-field-required-marker: " *"; */
+    /* --sf-field-block: var(--sf-space-l); */
+    /* --sf-header-height: 8rem; */
+    /* --sf-sticky-offset: var(--sf-header-height); */
+    /* --sf-caret-color:   var(--sf-color-action); */
+
+    /* -- Scrollbar -- */
+    /* --sf-scrollbar-thumb: var(--sf-color-neutral); */
+    /* --sf-scrollbar-track: transparent; */
+
+    /* -- Safe-area insets -- */
+    /* --sf-safe-top:    env(safe-area-inset-top, 0px); */
+    /* --sf-safe-bottom: env(safe-area-inset-bottom, 0px); */
+    /* --sf-safe-left:   env(safe-area-inset-left, 0px); */
+    /* --sf-safe-right:  env(safe-area-inset-right, 0px); */
+
+    /* -- Scroll-driven animation range -- */
+    /* --sf-scroll-timeline-range-start: 0%; */
+    /* --sf-scroll-timeline-range-end:   100%; */
+
+    /* -- Mask scrim -- */
+    /* --sf-mask-scrim-start: var(--sf-space-l); */
+    /* --sf-mask-scrim-end:   var(--sf-space-l); */
+
+    /* -- 3D perspective -- */
+    /* --sf-perspective-near:   500px; */
+    /* --sf-perspective-normal: 1000px; */
+    /* --sf-perspective-far:    2000px; */
+
+    /* -- Print -- */
+    /* --sf-print-page-margin: 2cm; */
+    /* --sf-print-page-size:   a4; */
+    /* --sf-print-base-size:   11pt; */
+
   }
 
-  /* ---- 2. Optional: take full control of dark mode ----
-     Only needed when the auto-derived dark value isn't what you want. */
-  :root {
-    --sf-color-primary-dark: oklch(0.78 0.16 280);
-  }
 
-  /* ---- 3. Multi-brand: scope a different palette to a subtree ----
-     Nest [data-brand] (or any selector) and re-declare the 6 tokens.
-     The architecture allows unlimited scoped palettes. */
+  /* ==========================================================
+     MULTI-BRAND — scope a different palette to a subtree.
+     Nest [data-brand] (or any selector) and re-declare any of
+     the 6 brand source tokens. The architecture allows unlimited
+     scoped palettes — everything downstream auto-derives.
+  ========================================================== */
+  /*
   [data-brand="sunset"] {
     --sf-color-primary-light: oklch(0.62 0.20 35);
+    --sf-color-secondary-light: oklch(0.35 0.05 35);
+    --sf-color-tertiary-light:  oklch(0.55 0.14 60);
     --sf-color-action-light:  oklch(0.70 0.18 60);
+    --sf-color-neutral-light: oklch(0.42 0.02 35);
+    --sf-color-base-light:    oklch(0.99 0.003 35);
   }
+  */
 
-  /* ---- 4. Optional: smooth colour change when toggling themes ----
-     Opt-in only — transitioning every colour globally is a perf
-     footgun, so it's scoped to a class you add to <html> while a
-     toggle is in flight (remove it afterwards). Pairs with the
-     ::view-transition(root) animation already shipped in motion.css. */
+
+  /* ==========================================================
+     THEME TRANSITION — opt-in smooth colour change when toggling
+     themes. Add .theme-transition to <html> while a toggle is in
+     flight (remove it afterwards). Perf cost: transitions EVERY
+     colour globally, so scope the duration tightly.
+
+     Pairs with the ::view-transition(root) animation already
+     shipped in core/motion.css.
+  ========================================================== */
   .theme-transition,
   .theme-transition * {
     transition:

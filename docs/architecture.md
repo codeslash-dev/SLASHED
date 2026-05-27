@@ -271,6 +271,26 @@ Print helpers use the `.print-*` prefix: `.print-only` (show only on paper),
 `.no-print` (hide on paper), `.print-color-exact` (force colour), and
 `.print-no-color` (force ink-saving flatten). See the **slashed.print** layer.
 
+### Naming exceptions — public classes without the `.sf-` prefix
+
+The following public classes intentionally omit the `.sf-` prefix. Each is
+covered by SemVer (removal = major bump). The rationale is documented here
+so the deviation from the prefix rule is explicit, not accidental.
+
+| Class | Layer | Rationale |
+|---|---|---|
+| `.sr-only` | slashed.accessibility | Industry standard (HTML5BP / WHATWG). Every developer recognises it without looking up a prefix. |
+| `.visually-hidden` | slashed.accessibility | WHATWG synonym of `.sr-only` — shipped for teams that prefer the newer name. |
+| `.sr-only-focusable` | slashed.accessibility | Companion to `.sr-only` — same naming lineage. |
+| `.skip-link` | slashed.accessibility | Standard a11y pattern name. |
+| `.focus-parent` | slashed.accessibility | A11y pattern. Alias of `.sf-focus-parent` (canonical prefixed name added in 0.4). |
+| `.no-motion` | slashed.accessibility | User-preference toggle; mirrors the `.no-print` pattern. |
+| `.no-print` | slashed.print | Self-describing print utility; `.print-*` namespace is unique enough. |
+| `.print-only` | slashed.print | Same namespace. |
+| `.print-color-exact` | slashed.print | Same namespace. |
+| `.print-no-color` | slashed.print | Same namespace. |
+| `.theme-transition` | slashed.themes | Ships only in `optional/theme-example.css` (copy-paste reference). Documented in `docs/theming.md`. |
+
 ---
 
 ## Specificity
@@ -381,6 +401,34 @@ CSS is emitted). `utilities.css` ships as an empty stub.
 Consumers can also build à la carte: `essential` (or raw `core/`) plus
 hand-picked optional files.
 
+### Flat bundles
+
+Every tiered bundle has a **flat** sibling (`*.flat.css`) that strips all
+`@layer` wrappers. Use flat bundles when you embed SLASHED into a host that
+already manages the cascade via its own `@layer` declarations — unlayered
+author CSS automatically beats anything inside a named layer, so the host's
+reset/defaults won't interfere.
+
+How flat bundles work:
+
+1. `@layer name1, name2, … ;` declarations → **removed**.
+2. `@layer slashed.X { … }` block wrappers → **unwrapped** (inner CSS kept,
+   dedented for readability).
+3. File concatenation order is **identical** to the layered bundle — the
+   source-order cascade replaces the explicit layer priority. Since SLASHED's
+   layer order declaration (`core/layers.css`) mirrors the file order in
+   `bundle.config.json`, specificity and the cascade behave the same way in
+   both modes.
+
+**When to use which:**
+
+| Scenario | Bundle |
+|---|---|
+| Standalone project (recommended) | Layered (`slashed.*.css`) |
+| Host already wraps its styles in named layers | Flat (`slashed.*.flat.css`) |
+| Embedding inside a design system that controls `@layer` | Flat |
+| Need to override SLASHED with bare author CSS (no layers) | Flat |
+
 ---
 
 ## Known intentional tradeoffs
@@ -405,6 +453,14 @@ These behaviors are deliberate. Documented here so they aren't mistaken for bugs
   tints and base *into* text for shades, so it is surface-relative, not a perceptual
   lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
   differs from the conventional monotonic lightness ramp.
+- **Palette token values are derived, not fixed.** The 198 tokens in
+  `optional/tokens.palette.css` compute their values from `--sf-color-text` and
+  `--sf-color-base` via `color-mix()`. If a future minor release refines the
+  base derivation formula (e.g. improved contrast), exact computed colour
+  values may shift. The SemVer contract covers token **names** and
+  **relationships** (lighter-than, darker-than, alpha percentage) — not the
+  precise computed `oklch()` output. Override any palette token directly if
+  you need pixel-stable values.
 
 ---
 
