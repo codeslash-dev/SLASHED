@@ -25,7 +25,7 @@
   import * as api from '../lib/bricks-api.js';
   import { slugify } from '../lib/slugify.js';
   import { validateName } from '../lib/validate.js';
-  import { applyToSubtree } from '../lib/apply.js';
+  import { applyToSubtree, buildPlan } from '../lib/apply.js';
   import { suggestElementName, isLayoutContainer } from '../lib/element-types.js';
   import { pickMigratableKeys, pickSkippedKeys } from '../lib/migrate-keys.js';
   import Row from './Row.svelte';
@@ -61,6 +61,30 @@
       willSkip += (row.skippedKeys?.length ?? 0);
     }
     return { willMigrate, willSkip };
+  });
+
+  /**
+   * Per-row preview of the post-numbering BEM class name that will
+   * actually be created/attached on Apply. Built from the same pure
+   * `buildPlan` step that the apply path uses, so the "use existing
+   * class" hint never disagrees with what apply does (semantic-review
+   * issue #7). Reactive on rows + mode + rootId.
+   *
+   * Important: `buildPlan` mutates the per-op `suggestedFrom` to
+   * `'auto-number'` when it renumbers. We don't write that back into
+   * the source rows here — the next derivation re-reads `row.suggestedFrom`
+   * from the original state, so the next preview is computed fresh
+   * from the user's authoritative inputs.
+   */
+  const previewClassNames = $derived.by(() => {
+    if (rows.length === 0) return new Map();
+    const result = buildPlan({ rootId, rows, mode });
+    const map = new Map();
+    if (!result.ok) return map;
+    for (const op of result.ops) {
+      map.set(op.row.id, op.finalClass);
+    }
+    return map;
   });
 
   onMount(() => {
@@ -199,6 +223,7 @@
         {blockName}
         isRoot={row.id === rootId}
         globalClasses={globalClassesAtOpen}
+        finalClassName={previewClassNames.get(row.id) ?? ''}
       />
     {/each}
   </section>

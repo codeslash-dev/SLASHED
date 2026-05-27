@@ -11,14 +11,15 @@
    *     input. On user input, flip `row.suggestedFrom` to 'user' so
    *     the apply-time auto-numbering treats this name as authoritative.
    *   - Surface "use existing class" recommendations when the produced
-   *     class name already exists in the global registry. This is the
-   *     client-side half of the §11.3 `recommendedAction` hint —
-   *     cross-page reference counts come from the server preflight in
-   *     a future PR.
+   *     class name already exists in the global registry. Uses the
+   *     post-numbering `finalClassName` passed in by the panel — the
+   *     same name `apply.js` will actually attach — so the hint never
+   *     disagrees with what apply does.
    *   - In migrate mode, render a chip strip listing the element-
-   *     settings keys that will be lifted into the new global class.
+   *     settings keys that will be lifted into the new global class,
+   *     with copy that matches the migrate-mode merge/conflict rules
+   *     in apply.js's validateMigrate().
    */
-  import { slugify } from '../lib/slugify.js';
 
   let {
     row = $bindable(),
@@ -26,6 +27,15 @@
     blockName,
     isRoot,
     globalClasses = [],
+    /**
+     * The post-numbering BEM class name `apply.js` will actually
+     * create/attach for this row. Empty string means the row is
+     * either skipped, has an invalid name, or the plan is otherwise
+     * incomplete (e.g. modifier mode with empty modifier). The panel
+     * derives this map from `buildPlan` so it always agrees with
+     * apply-time behavior.
+     */
+    finalClassName = '',
   } = $props();
 
   const showModifier = $derived(mode === 'modifier');
@@ -40,35 +50,15 @@
   );
 
   /**
-   * Compute the class name this row will produce, respecting the
-   * current mode. Mirrors the apply-time logic in apply.js so the
-   * recommendation hint reflects what would actually happen on Apply.
-   *
-   * Note: modifier auto-numbering is intentionally NOT modeled here —
-   * apply.js rejects in-plan modifier collisions outright.
-   */
-  const candidateClassName = $derived.by(() => {
-    if (!row.include) return '';
-    const slug = slugify(row.name);
-    if (!slug) return '';
-    let base = isRoot ? slug : (blockName ? `${blockName}__${slug}` : slug);
-    if (mode === 'modifier') {
-      const modSlug = slugify(row.modifier);
-      if (!modSlug) return '';
-      base = `${base}--${modSlug}`;
-    }
-    return base;
-  });
-
-  /**
-   * Find an existing global class with the same name. Used to surface
-   * a one-click "use existing" affordance (§11.3 `recommendedAction:
-   * "attach"`). Snapshot at panel open, NOT live — globalClasses is
-   * passed as a prop and only refreshes when the panel is reopened.
+   * Find an existing global class with the same name. Snapshot at
+   * panel open via the `globalClasses` prop, NOT live — refreshes
+   * only when the panel is reopened. Used to surface a one-click
+   * "use existing" affordance (§11.3 `recommendedAction: "attach"`).
    */
   const existingClassMatch = $derived.by(() => {
-    if (!candidateClassName || !Array.isArray(globalClasses)) return null;
-    return globalClasses.find(c => c && c.name === candidateClassName) || null;
+    if (!finalClassName || !Array.isArray(globalClasses)) return null;
+    if (!row.include) return null;
+    return globalClasses.find(c => c && c.name === finalClassName) || null;
   });
 
   function markAsUserTyped() {
@@ -97,7 +87,10 @@
       {isRoot ? 'BLOCK' : (row.bricksType || 'ELEM').toUpperCase()}
     </span>
     {#if isSuggested && row.include}
-      <span class="rebemer-row__hint" title="Pre-filled from {row.suggestedFrom === 'element-type' ? 'Bricks element type' : 'fallback'}">suggested</span>
+      <span
+        class="rebemer-row__hint"
+        title="Pre-filled from {row.suggestedFrom === 'element-type' ? 'Bricks element type' : 'fallback'}"
+      >suggested</span>
     {/if}
   </div>
 
@@ -128,11 +121,17 @@
     {/if}
   </div>
 
-  {#if existingClassMatch && row.include}
+  {#if existingClassMatch}
     <p class="rebemer-row__recommend" role="note">
-      A class named <code>{candidateClassName}</code> already exists
-      globally. Apply will attach the existing class instead of
-      creating a duplicate.
+      {#if showMigrate}
+        A class named <code>{finalClassName}</code> already exists.
+        On Apply, missing style keys will be merged into it. Conflicting
+        values block the migration — pick a different name or use Add.
+      {:else}
+        A class named <code>{finalClassName}</code> already exists
+        globally. Apply will attach the existing class instead of
+        creating a duplicate.
+      {/if}
     </p>
   {/if}
 
@@ -141,7 +140,7 @@
       {#if row.migrateKeys?.length}
         <span class="rebemer-row__chips-label">Migrate:</span>
         {#each row.migrateKeys as key}
-          <span class="rebemer-chip" title="Will be lifted into {candidateClassName || 'the new class'}">{chipLabel(key)}</span>
+          <span class="rebemer-chip" title="Will be lifted into {finalClassName || 'the new class'}">{chipLabel(key)}</span>
         {/each}
       {:else}
         <span class="rebemer-row__chips-empty">No migratable keys on this element.</span>

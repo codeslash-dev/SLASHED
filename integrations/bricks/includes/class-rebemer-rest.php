@@ -208,12 +208,19 @@ class Slashed_Bricks_ReBEMer_REST {
 
 		// One row over the cap is enough to detect truncation without
 		// fetching extra payload.
+		//
+		// ORDER BY meta_id ASC keeps the scan deterministic: across two
+		// truncated runs on the same site the first `cap` rows scanned
+		// are always the same, so the `truncated: true` flag is paired
+		// with reproducible content rather than whatever order MySQL
+		// happened to return rows in.
 		$rows = $wpdb->get_col(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				"SELECT meta_value FROM {$wpdb->postmeta}
 				 WHERE meta_key IN ($placeholders)
 				   AND meta_value != ''
+				 ORDER BY meta_id ASC
 				 LIMIT %d",
 				array_merge( self::BRICKS_CONTENT_META_KEYS, array( $cap + 1 ) )
 			)

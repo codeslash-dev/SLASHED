@@ -24,7 +24,7 @@ what has actually shipped in code so far. Update on every reBEMer PR.
 | Element-aware row pre-fill (§9.3) | ✅ shipped | `lib/element-types.js` consumed by `BemPanel` |
 | Sibling auto-numbering (§9.2) | ✅ shipped | `applyAutoNumbering()` in `apply.js` |
 | Per-row skip toggle (§6.2, §9) | ✅ shipped | `Row.svelte` include checkbox |
-| `suggestedFrom` provenance tracking (§9) | ✅ shipped | flipped to `'user'` in `Row.svelte` `oninput` |
+| `suggestedFrom` provenance tracking (§9) | ✅ shipped | `'user' \| 'label' \| 'element-type' \| 'fallback' \| 'auto-number'`; `AUTHORITATIVE_PROVENANCE` set in `apply.js` covers user + label |
 | "Use existing class" client-side hint (§11.3 `recommendedAction: "attach"`) | ✅ shipped (client snapshot only) | `Row.svelte` derived `existingClassMatch` |
 | Unused-class read-only report (§20) | ✅ shipped | `GET /rebemer/unused`, `class-rebemer-rest.php` |
 | BEM grammar policy (§8) | ⚠️ partial | basic `validateName()` exists; no policy hydration yet |

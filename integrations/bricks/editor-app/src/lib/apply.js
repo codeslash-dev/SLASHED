@@ -16,19 +16,34 @@
  * name (e.g. two `image` rows both producing `card__image`). A pre-pass
  * detects in-plan collisions and appends `-1`, `-2`, … in document
  * order to disambiguate. The pre-pass respects row provenance:
- *   - `suggestedFrom: 'user'` rows are treated as authoritative and
- *     never auto-numbered. Two user-typed rows colliding is a hard
- *     validation error.
- *   - `suggestedFrom: 'element-type' | 'fallback'` rows accept the
+ *   - `'user'` (user-typed) and `'label'` (derived from the structure-
+ *     panel label, which is itself user-controlled) are *authoritative*
+ *     and never auto-numbered. Two authoritative rows colliding is a
+ *     hard validation error.
+ *   - `'element-type' | 'fallback' | 'auto-number'` rows accept the
  *     numeric suffix in document order.
+ *
+ * Modifier-mode collisions
+ * ------------------------
+ * Two siblings each producing `card__image--lg` is the canonical
+ * "attach the same modifier class to all of them" case, NOT a name
+ * conflict. We deliberately do NOT auto-number modifier-mode duplicates
+ * — `upsertGlobalClass` dedupes by name, so all colliding rows end up
+ * sharing the same class.
  *
  * Skip toggle
  * -----------
  * Rows with `include: false` are excluded from operations *and* from
- * the collision tally — a skipped row never claims a number. This
- * lets the user open the panel on a 12-element subtree, uncheck two
- * rows they don't want to touch, and apply the rest atomically without
- * leaving the panel.
+ * the collision tally — a skipped row never claims a number.
+ *
+ * Two-step API
+ * ------------
+ *   buildPlan(...)        Pure: validate + auto-number. Returns
+ *                         { ok, ops, error }. No mutations. Used by
+ *                         the panel for preview-driven UI hints.
+ *   applyToSubtree(...)   Impure: builds the plan, pre-validates
+ *                         migrate-mode conflicts against live state,
+ *                         then mutates the Bricks Vue state op by op.
  *
  * @module apply
  */
@@ -40,42 +55,67 @@ import * as api from './bricks-api.js';
 const VALID_MODES = new Set(['add', 'rename', 'replace', 'modifier', 'migrate']);
 
 /**
+ * Provenance values that are treated as authoritative — these names
+ * come from the user (typed in OR already on the structure-panel
+ * label, which the user owns) and must never be auto-renumbered.
+ * Anything else is open to renumbering when sibling collisions occur.
+ */
+const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
+
+/**
  * @typedef {Object} Row
  * @property {string} id - Bricks element id.
  * @property {number} depth - 0 = root, > 0 = descendant.
- * @property {string} name - Slugifiable label (block name for root, element
- *   label otherwise).
+ * @property {string} name - Slugifiable label (block name for root,
+ *   element label otherwise).
  * @property {string} modifier - Slugifiable modifier (only used when
  *   mode is 'modifier').
- * @property {boolean} include - When false the row is skipped (no mutations,
- *   no collision tally, no preflight).
- * @property {'user'|'element-type'|'fallback'|'auto-number'} [suggestedFrom]
- * @property {string[]} [migrateKeys] - element-settings keys to lift into
- *   the new class on a 'migrate' apply. Already filtered by the
- *   allowlist by the caller; we re-filter here as a defense-in-depth
- *   guard against tampering.
+ * @property {boolean} include - When false the row is skipped: no
+ *   mutations, no collision tally, no preflight.
+ * @property {'user'|'label'|'element-type'|'fallback'|'auto-number'} [suggestedFrom]
+ *   Where the row's `name` came from. `'user'` and `'label'` are
+ *   treated as authoritative (never auto-renumbered). The other
+ *   values are open to renumbering on intra-plan collisions.
+ * @property {string[]} [migrateKeys] - element-settings keys to lift
+ *   into the new class on a 'migrate' apply. Already filtered by
+ *   `migrate-keys.MIGRATE_ALLOWLIST` by the caller; we re-filter here
+ *   defensively against tampered DOM input.
  */
 
 /**
+ * @typedef {Object} Op
+ * @property {Row} row
+ * @property {boolean} isRoot
+ * @property {string} finalClass        The post-numbering class name.
+ * @property {string} suggestedFrom     Possibly mutated to 'auto-number'.
+ */
+
+/**
+ * Build the plan for a subtree apply: validate inputs, slug, run the
+ * sibling auto-numbering pre-pass. Pure — no mutations to live Bricks
+ * state, no I/O.
+ *
  * @param {object} opts
  * @param {string} opts.rootId
  * @param {Row[]} opts.rows
  * @param {'add'|'rename'|'replace'|'modifier'|'migrate'} opts.mode
- * @param {boolean} opts.syncLabels
- * @returns {{ok:true, count:number} | {ok:false, error:string}}
+ * @returns {{ok:true, ops:Op[]} | {ok:false, error:string, ops:Op[]}}
+ *   On error, `ops` is an empty array so callers (e.g. previews) can
+ *   safely treat it as "nothing to display".
  */
-export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
+export function buildPlan({ rootId, rows, mode }) {
   if (!VALID_MODES.has(mode)) {
-    return { ok: false, error: `Invalid mode: ${mode}` };
+    return { ok: false, ops: [], error: `Invalid mode: ${mode}` };
   }
 
   const blockRow = rows.find(r => r.id === rootId);
-  if (!blockRow) return { ok: false, error: 'Root row missing.' };
+  if (!blockRow) return { ok: false, ops: [], error: 'Root row missing.' };
 
   const blockName = slugify(blockRow.name);
-  if (!blockName) return { ok: false, error: 'Block name is empty.' };
+  if (!blockName) return { ok: false, ops: [], error: 'Block name is empty.' };
 
   // 1. Build per-row operations with intended (pre-numbering) class names.
+  /** @type {Op[]} */
   const ops = [];
   for (const row of rows) {
     if (!row.include) continue;
@@ -106,18 +146,47 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
   }
 
   if (ops.length === 0) {
-    return { ok: false, error: 'No rows to apply. Include at least one row.' };
+    return { ok: false, ops: [], error: 'No rows to apply. Include at least one row.' };
   }
 
   // 2. Sibling auto-numbering (in-plan collision resolver).
-  const numberingResult = applyAutoNumbering(ops);
-  if (!numberingResult.ok) return numberingResult;
+  const numberingResult = applyAutoNumbering(ops, mode);
+  if (!numberingResult.ok) return { ok: false, ops: [], error: numberingResult.error };
 
-  // 3. Apply each op against live state.
+  return { ok: true, ops };
+}
+
+/**
+ * Apply a plan to live Bricks state.
+ *
+ * @param {object} opts
+ * @param {string} opts.rootId
+ * @param {Row[]} opts.rows
+ * @param {'add'|'rename'|'replace'|'modifier'|'migrate'} opts.mode
+ * @param {boolean} opts.syncLabels
+ * @returns {{ok:true, count:number} | {ok:false, error:string}}
+ */
+export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
+  const planResult = buildPlan({ rootId, rows, mode });
+  if (!planResult.ok) return { ok: false, error: planResult.error };
+
+  const ops = planResult.ops;
+  const blockRow = rows.find(r => r.id === rootId);
+  const blockName = slugify(blockRow?.name ?? '');
+  const globalClasses = api.getGlobalClasses();
+
+  // 3. Pre-validate migrate-mode against live state BEFORE any
+  //    mutation. This catches the "existing class with conflicting
+  //    settings" case up-front so we never end up half-applied with a
+  //    silent style-loss surprise. See validateMigrate() for details.
+  if (mode === 'migrate') {
+    const validation = validateMigrate(ops, globalClasses);
+    if (!validation.ok) return validation;
+  }
+
+  // 4. Apply each op against live state.
   let count = 0;
   try {
-    const globalClasses = api.getGlobalClasses();
-
     for (const op of ops) {
       const el = api.findElement(op.row.id);
       if (!el) continue;
@@ -133,6 +202,28 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
         }
       } else if (mode === 'migrate') {
         seed = collectMigrateSeed(el.settings, op.row.migrateKeys);
+      }
+
+      // For migrate mode, when the target class already exists, merge
+      // any keys from the seed that the existing class doesn't have.
+      // upsertGlobalClass deliberately never overwrites; without this
+      // step, the inline keys would be stripped from the element by
+      // removeMigratedKeys (below) and never reach the existing class
+      // — silent style loss. Pre-validation in step 3 has already
+      // confirmed there are no conflicting values, so merging here
+      // is safe and additive.
+      if (mode === 'migrate') {
+        const existing = globalClasses.find(c => c && c.name === op.finalClass);
+        if (existing) {
+          if (!existing.settings || typeof existing.settings !== 'object') {
+            existing.settings = {};
+          }
+          for (const [key, value] of Object.entries(seed)) {
+            if (!Object.prototype.hasOwnProperty.call(existing.settings, key)) {
+              existing.settings[key] = value;
+            }
+          }
+        }
       }
 
       const newClassId = api.upsertGlobalClass(op.finalClass, seed);
@@ -155,9 +246,10 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
 
       api.setElementClasses(op.row.id, nextIds);
 
-      // For 'migrate', remove the lifted keys from the element settings.
-      // Done AFTER setElementClasses so a thrown setElementClasses can't
-      // leave the element in a half-stripped state.
+      // For 'migrate', remove the lifted keys from the element settings
+      // AFTER the class is attached. The pre-validation + merge above
+      // guarantees every key is now provided by the (new or existing)
+      // class with the same value, so this is visually a no-op.
       if (mode === 'migrate') {
         removeMigratedKeys(el.settings, op.row.migrateKeys);
       }
@@ -171,8 +263,20 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
       count++;
     }
   } catch (err) {
+    // Mid-apply rollback is spec-only (see docs/rebemer.md §10) and
+    // not yet implemented. Until it is, the best we can do for partial
+    // applies is (a) log so the user can see what happened, (b) tell
+    // them via the toast how many rows succeeded, and (c) point them
+    // at Bricks' own undo. Callers may prefer to surface this as a
+    // bigger destructive-rollback dialog.
     const message = err instanceof Error ? err.message : String(err);
-    return { ok: false, error: `Operation failed mid-apply: ${message}` };
+    console.warn('[reBEMer] apply halted after', count, 'mutation(s):', message);
+    return {
+      ok: false,
+      error: count > 0
+        ? `Applied to ${count} element${count !== 1 ? 's' : ''} before halting: ${message}. State is partially applied — undo via Bricks (Cmd-Z) before retrying.`
+        : `Operation failed: ${message}`,
+    };
   }
 
   if (count === 0) {
@@ -182,33 +286,76 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
   return { ok: true, count };
 }
 
-
 /**
- * Detect intra-plan collisions and assign `-1`, `-2`, … suffixes.
+ * Pre-validation for migrate mode: detect cases where lifting the
+ * keys would conflict with an existing class of the same name.
  *
- * Rules:
- *   - Single-element groups: no change.
- *   - Multi-element group with > 1 user-typed entries: hard error (the
- *     user has explicitly typed the same name twice; we won't silently
- *     mangle it).
- *   - Multi-element group with ≤ 1 user-typed entries: any
- *     non-user entries get sequential `-1`, `-2`, … in document order.
- *     A user-typed entry, if present, keeps its bare name.
- *   - Modifier-mode operations are NOT auto-numbered: the modifier
- *     suffix already disambiguates ('block__title--lg' vs '--sm'),
- *     and adding a numeric suffix to a modifier produces names that
- *     read poorly ('block__title--lg-2').
+ * Three cases per migrate op:
  *
- * Mutates ops[].finalClass in place. Returns a result object.
+ *   1. Target class doesn't exist → safe; new class will be created
+ *      with the seed (handled in applyToSubtree).
+ *   2. Target class exists, no overlap with seed → safe; missing
+ *      keys will be merged into the existing class (additive).
+ *   3. Target class exists, same key with different value → CONFLICT.
+ *      Applying would either overwrite the existing class's value
+ *      (forbidden by Goal #6) or strip the inline key without
+ *      replacement (silent style loss). Refuse the whole apply.
  *
- * @param {Array<{row:Row, finalClass:string, suggestedFrom:string}>} ops
+ * The third case is rare in practice — it requires the same BEM
+ * class name to mean two different things in two different contexts,
+ * which is exactly what we don't want and what reBEMer is supposed
+ * to discourage. Refusing rather than guessing keeps the user in
+ * control: rename one of the colliding contexts or use Add mode.
+ *
+ * @param {Op[]} ops
+ * @param {Array} globalClasses
  * @returns {{ok:true} | {ok:false, error:string}}
  */
-function applyAutoNumbering(ops) {
+function validateMigrate(ops, globalClasses) {
+  for (const op of ops) {
+    const existing = globalClasses.find(c => c && c.name === op.finalClass);
+    if (!existing) continue;
+
+    const el = api.findElement(op.row.id);
+    if (!el) continue;
+
+    const seed = collectMigrateSeed(el.settings, op.row.migrateKeys);
+    const existingSettings = (existing.settings && typeof existing.settings === 'object')
+      ? existing.settings
+      : {};
+
+    const conflicts = [];
+    for (const [key, value] of Object.entries(seed)) {
+      if (!Object.prototype.hasOwnProperty.call(existingSettings, key)) continue;
+      if (JSON.stringify(existingSettings[key]) !== JSON.stringify(value)) {
+        conflicts.push(key.replace(/^_/, ''));
+      }
+    }
+
+    if (conflicts.length > 0) {
+      const list = conflicts.join(', ');
+      return {
+        ok: false,
+        error: `Migrate blocked: existing class "${op.finalClass}" has conflicting values for ${list}. Pick a different name or use Add mode.`,
+      };
+    }
+  }
+  return { ok: true };
+}
+
+/**
+ * Detect in-plan collisions and assign `-1`, `-2`, … suffixes.
+ *
+ * Mutates `ops[].finalClass` and `ops[].suggestedFrom` (latter flips
+ * to `'auto-number'` when a row gets a numeric suffix). Returns a
+ * result object — `{ ok: false, error }` on validation failure.
+ *
+ * @param {Op[]} ops
+ * @param {string} mode
+ */
+function applyAutoNumbering(ops, mode) {
   const groups = new Map();
   for (const op of ops) {
-    // Skip modifier-suffixed names from the collision tally — see rule
-    // above. We still detect duplicates among them, just don't number.
     const list = groups.get(op.finalClass) || [];
     list.push(op);
     groups.set(op.finalClass, list);
@@ -217,34 +364,47 @@ function applyAutoNumbering(ops) {
   for (const [name, group] of groups) {
     if (group.length === 1) continue;
 
-    const userTyped = group.filter(o => o.suggestedFrom === 'user');
-    if (userTyped.length > 1) {
-      return {
-        ok: false,
-        error: `"${name}" is used by ${userTyped.length} rows. Edit one to make it unique.`,
-      };
-    }
+    // Modifier-mode duplicates are intentional ("attach this modifier
+    // to all N siblings"). upsertGlobalClass dedupes by name, so all
+    // rows end up sharing the single class. No numbering, no error.
+    if (mode === 'modifier') continue;
 
-    // Modifier-mode duplicates can't be auto-numbered cleanly. Surface
-    // as an error rather than producing 'block__title--lg-2'.
-    if (name.includes('--')) {
+    const authoritative = group.filter(o => AUTHORITATIVE_PROVENANCE.has(o.suggestedFrom));
+    if (authoritative.length > 1) {
       return {
         ok: false,
-        error: `"${name}" is used by ${group.length} rows. Modifier names must be unique within a plan.`,
+        error: `"${name}" is used by ${authoritative.length} rows. Edit one to make it unique.`,
       };
     }
 
     let n = 1;
     for (const op of group) {
-      if (op.suggestedFrom === 'user') continue;
+      if (AUTHORITATIVE_PROVENANCE.has(op.suggestedFrom)) continue;
       op.finalClass = `${name}-${n++}`;
       op.suggestedFrom = 'auto-number';
     }
   }
 
+  // Post-numbering integrity check (semantic-review issue #4): catch
+  // the case where a user-typed `card__image-1` collides with an
+  // auto-numbered `card__image-1` produced from a different group.
+  // Modifier mode is exempt — duplicates there are by design.
+  if (mode !== 'modifier') {
+    const seen = new Map();
+    for (const op of ops) {
+      const prior = seen.get(op.finalClass);
+      if (prior) {
+        return {
+          ok: false,
+          error: `"${op.finalClass}" is produced by 2 rows after auto-numbering (one ${prior}, one ${op.suggestedFrom}). Pick a different name for one of them.`,
+        };
+      }
+      seen.set(op.finalClass, op.suggestedFrom);
+    }
+  }
+
   return { ok: true };
 }
-
 
 /**
  * Build the seed settings for a 'migrate' op: a deep clone of the

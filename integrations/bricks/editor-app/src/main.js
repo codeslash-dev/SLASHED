@@ -25,7 +25,6 @@ import './styles/panel.css';
 const STRUCTURE_PANEL_SELECTOR = '#bricks-structure';
 const ITEM_SELECTOR = 'li[data-id]';
 const HOST_ID = 'slashed-rebemer-host';
-const ATTACHED_FLAG = 'rebemerAttached';
 const PROBE_INTERVAL_MS = 400;
 const PROBE_MAX_ATTEMPTS = 25; // ≈10s total grace before we give up
 
@@ -113,20 +112,32 @@ function onStructurePanelReady(panelEl) {
 }
 
 function refreshBadges(panelEl) {
-  // Mount any newly-arrived items.
-  const items = panelEl.querySelectorAll(ITEM_SELECTOR);
-  for (const li of items) {
-    if (!li.dataset[ATTACHED_FLAG]) injectBadgeInto(li);
-  }
-
-  // Reap any badges whose host node has been detached. Bricks tends
-  // to rebuild list nodes wholesale on undo; the dataset flag goes
-  // away with the old node, so the badge just needs to be unmounted.
+  // Pass 1: reap stale entries whose host node has been detached.
+  // Bricks rerenders inner subtrees (e.g. `.structure-item` rebuilds
+  // on label edits, drag/drop, undo) without removing the outer <li>,
+  // so a host that was alive can become detached while the <li>
+  // stays. Catching that here is what keeps us from leaking unmounted
+  // Svelte instances or, worse, never re-injecting the badge on a
+  // resurrected row (semantic-review issue #5).
   for (const [id, entry] of badgeInstances) {
     if (!entry.host.isConnected) {
       try { unmount(entry.instance); } catch (err) { log('warn', 'badge unmount failed', err); }
       badgeInstances.delete(id);
     }
+  }
+
+  // Pass 2: mount badges for any <li> without a live host inside it.
+  // We use the map state as the source of truth (previously this used
+  // a dataset flag on the <li>, which lived on the outer node and
+  // never got cleared when only the inner subtree was rebuilt — so
+  // re-injection was permanently blocked after the first detach).
+  const items = panelEl.querySelectorAll(ITEM_SELECTOR);
+  for (const li of items) {
+    const id = li.getAttribute('data-id');
+    if (!id) continue;
+    const existing = badgeInstances.get(id);
+    if (existing && existing.host.isConnected && li.contains(existing.host)) continue;
+    injectBadgeInto(li);
   }
 }
 
@@ -189,7 +200,6 @@ function injectBadgeInto(li) {
   }
 
   badgeInstances.set(elementId, { instance, host });
-  li.dataset[ATTACHED_FLAG] = '1';
 }
 
 function openPanel(elementId) {
