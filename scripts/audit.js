@@ -80,11 +80,33 @@ function extractClasses(prefix) {
   return [...names].sort();
 }
 
+// ── Unprefixed class extraction ──────────────────────────────────────────────
+// Finds class selectors that are NOT .sf-* or .is-* (accessibility helpers,
+// print utilities, theme utilities, etc.)
+
+function extractUnprefixedClasses() {
+  const names = new Set();
+  const re = /\.([a-z][\w-]*)/g;
+  for (const rel of CLASS_FILES) {
+    let css = stripStrings(stripComments(readFile(rel)));
+    // Strip @layer declarations so dotted layer names aren't matched as classes
+    css = css.replace(/@layer\s+[^{;]+[{;]/g, '');
+    for (const m of css.matchAll(re)) {
+      const name = m[1];
+      // Skip sf- and is- prefixed (already tracked separately)
+      if (name.startsWith('sf-') || name.startsWith('is-')) continue;
+      names.add(name);
+    }
+  }
+  return [...names].sort();
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 
-const tokens    = extractTokens();
-const sfClasses = extractClasses('sf-');
-const isClasses = extractClasses('is-');
+const tokens           = extractTokens();
+const sfClasses        = extractClasses('sf-');
+const isClasses        = extractClasses('is-');
+const unprefixedClasses = extractUnprefixedClasses();
 
 const registry = {
   _meta: {
@@ -99,6 +121,7 @@ const registry = {
   tokens,
   sf_classes: sfClasses,
   is_classes: isClasses,
+  unprefixed_classes: unprefixedClasses,
 };
 
 const OUT = path.join(ROOT, 'docs', 'registry.json');
@@ -122,6 +145,7 @@ if (process.argv.includes('--check')) {
   diff('token',    tokens,    stored.tokens);
   diff('sf-class', sfClasses, stored.sf_classes);
   diff('is-class', isClasses, stored.is_classes);
+  diff('unprefixed-class', unprefixedClasses, stored.unprefixed_classes || []);
 
   if (errors.length) {
     console.error('[audit] registry.json is stale — run: node scripts/audit.js');

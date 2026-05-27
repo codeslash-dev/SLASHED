@@ -27,8 +27,10 @@ const CLASS_FILES = [
   'core/states.css',
   'core/accessibility.css',
   'core/motion.css',
+  'core/print.css',
   'optional/forms.css',
   'optional/components.css',
+  'optional/theme-example.css',
 ];
 
 module.exports = { TOKEN_FILES, CLASS_FILES };

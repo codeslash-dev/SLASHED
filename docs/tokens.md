@@ -3,14 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**622 tokens.** Every `--sf-*` custom property and its default value. See
+**623 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-371 tokens.
+372 tokens.
 
 | Token | Default |
 |---|---|
@@ -240,6 +240,7 @@ rebrand workflow.
 | `--sf-heading-color` | `var(--sf-color-heading)` |
 | `--sf-heading-font-family` | `var(--sf-font-heading)` |
 | `--sf-heading-text-wrap` | `balance` |
+| `--sf-icon-2xl` | `4em` |
 | `--sf-icon-l` | `2em` |
 | `--sf-icon-m` | `1.5em` |
 | `--sf-icon-s` | `1em` |
