@@ -135,22 +135,44 @@ function injectBadgeInto(li) {
   const elementId = li.getAttribute('data-id');
   if (!elementId) return;
 
-  // Try the conventional Bricks container; fall back to the row
-  // itself so the badge always renders even when Bricks restructures.
-  const target =
-    li.querySelector(':scope > .actions') ||
-    li.querySelector(':scope > .structure-item-actions') ||
-    li;
+  // Bricks structure-panel row layout:
+  //
+  //   <li data-id="…">
+  //     <div class="structure-item">
+  //       <div class="title">…element label…</div>
+  //       <ul class="actions">…icon buttons…</ul>     ← inject BEFORE this
+  //     </div>
+  //   </li>
+  //
+  // We want the badge to read as a small inline word between the
+  // title and the action icons — NOT a chip overlaid on the row,
+  // and NOT a leading icon inside the actions cluster (where it
+  // would compete for space with Bricks' own buttons).
+  //
+  // Selector chain is defensive: if Bricks restructures we want a
+  // sane fallback rather than a missing badge.
+  //   1. Prefer the `.structure-item` wrapper that holds title + actions.
+  //   2. Inside it, insert immediately before the actions list. If no
+  //      actions list exists (rare — happens for read-only items)
+  //      append at the end so the badge still appears after the title.
+  //   3. If `.structure-item` itself isn't present, fall back to the
+  //      <li> with the same insertion rule, so legacy/forked Bricks
+  //      builds still get a badge.
+  const item = li.querySelector(':scope > .structure-item') || li;
+  const actions =
+    item.querySelector(':scope > ul.actions') ||
+    item.querySelector(':scope > .actions') ||
+    item.querySelector(':scope > .structure-item-actions');
 
   const host = document.createElement('span');
   host.className = 'rebemer-badge-host';
-  if (target.firstChild) {
-    target.insertBefore(host, target.firstChild);
+  if (actions) {
+    item.insertBefore(host, actions);
   } else {
-    target.appendChild(host);
+    item.appendChild(host);
   }
 
-  const labelNode = li.querySelector(':scope > .structure-item-title, :scope > .name, :scope .label');
+  const labelNode = item.querySelector(':scope > .title, :scope > .structure-item-title, :scope > .name, :scope .label');
   const label = labelNode ? labelNode.textContent.trim() : '';
 
   const instance = mount(BemBadge, {

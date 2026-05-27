@@ -19,8 +19,8 @@
 <button
   type="button"
   class="rebemer-badge"
-  title={label ? `reBEMer: ${label}` : 'reBEMer'}
+  title={label ? `Open reBEMer for ${label}` : 'Open reBEMer'}
   aria-label={label ? `Open reBEMer for ${label}` : 'Open reBEMer'}
   onclick={activate}
   onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && activate(e)}
->BEM</button>
+>reBEM</button>

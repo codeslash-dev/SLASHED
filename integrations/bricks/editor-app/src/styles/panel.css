@@ -18,20 +18,47 @@
   --rebemer-font: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Badge — uses fallbacks because badges are injected outside #slashed-rebemer-host */
-.rebemer-badge {
-  font: 600 9px/1 var(--rebemer-font, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
-  letter-spacing: .5px;
-  text-transform: uppercase;
-  color: var(--rebemer-bg, #161a1d);
-  background: var(--rebemer-accent, #e2b93b);
-  border: 0;
-  border-radius: 2px;
-  padding: 2px 4px;
-  cursor: pointer;
+/* Badge — uses fallbacks because badges are injected outside #slashed-rebemer-host
+ *
+ * Visual goal: read as a small inline word inside the structure-panel
+ * row, sitting between the element label and Bricks' own action icons.
+ * Not a chip, not a button-looking thing — just discreet, clickable
+ * text the user can ignore until they want it.
+ *
+ * The host span uses inline-flex so it slots cleanly into whatever
+ * layout Bricks uses for the row (currently flex with space-between).
+ * `flex: 0 0 auto` prevents it from competing with the title for
+ * width when the row is narrow.
+ */
+.rebemer-badge-host {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin: 0 6px;
 }
-.rebemer-badge:hover { background: var(--rebemer-accent-hover, #ffd042); }
-.rebemer-badge:focus-visible { outline: 2px solid var(--rebemer-accent-hover, #ffd042); outline-offset: 1px; }
+.rebemer-badge {
+  font: 500 10px/1 var(--rebemer-font, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
+  letter-spacing: .3px;
+  color: var(--rebemer-fg-muted, #8a8d95);
+  background: transparent;
+  border: 0;
+  padding: 2px 4px;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 2px;
+  /* Stop Bricks' row click handler from firing when the user clicks
+     the badge — its parent <li> is interactive in some Bricks builds. */
+  pointer-events: auto;
+}
+.rebemer-badge:hover {
+  color: var(--rebemer-accent, #e2b93b);
+  background: rgba(226, 185, 59, .08);
+}
+.rebemer-badge:focus-visible {
+  outline: 1px dotted var(--rebemer-accent, #e2b93b);
+  outline-offset: 1px;
+  color: var(--rebemer-accent, #e2b93b);
+}
 
 /* Panel */
 .rebemer-panel {
