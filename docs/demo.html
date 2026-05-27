@@ -1585,6 +1585,37 @@
           </div>
         </div>
 
+        <h3>.sf-equal — fixed N-column grid</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
+          Column count never collapses — unlike <code>.sf-grid-N</code> which uses container queries.
+        </p>
+        <div class="sf-stack sf-stack--xs">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-equal--2</code>
+            <div class="sf-equal sf-equal--2 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1</div><div class="demo-box">2</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-equal--3</code>
+            <div class="sf-equal sf-equal--3 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-equal--4</code>
+            <div class="sf-equal sf-equal--4 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-equal--6</code>
+            <div class="sf-equal sf-equal--6 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div><div class="demo-box">6</div>
+            </div>
+          </div>
+        </div>
+
         <h3>.sf-scale-down (motion.css)</h3>
         <div class="sf-cluster sf-cluster--m" id="demo-scale-down">
           <button type="button" class="sf-scale-down" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">scale-down (click to replay)</button>
@@ -1756,6 +1787,49 @@
             <div class="sf-stack demo-layout-wrap" style="--sf-stack-gap: var(--sf-space-3xl); margin-top: var(--sf-space-xs); min-width: 6rem">
               <div class="demo-box">A</div>
               <div class="demo-box">B</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>.sf-gap — gap size modifiers</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
+          Injects <code>gap</code> into any existing flex or grid container without imposing a display type.
+        </p>
+        <div class="sf-stack sf-stack--xs">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-gap--xs</code>
+            <div class="sf-gap sf-gap--xs demo-layout-wrap" style="display: flex; margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-gap--s</code>
+            <div class="sf-gap sf-gap--s demo-layout-wrap" style="display: flex; margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-gap--m</code>
+            <div class="sf-gap sf-gap--m demo-layout-wrap" style="display: flex; margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-gap--l</code>
+            <div class="sf-gap sf-gap--l demo-layout-wrap" style="display: flex; margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-gap--xl</code>
+            <div class="sf-gap sf-gap--xl demo-layout-wrap" style="display: flex; margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-gap--2xl</code>
+            <div class="sf-gap sf-gap--2xl demo-layout-wrap" style="display: flex; margin-top: var(--sf-space-xs)">
+              <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
             </div>
           </div>
         </div>
