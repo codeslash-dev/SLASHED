@@ -240,8 +240,8 @@ Transition tokens live in `core/tokens.css`:
   of the token to its left".
 - **Public vs internal.** Token-file headers label each group **PUBLIC API**
   (covered by SemVer — brand/status sources, resolved semantic tokens, scales,
-  BEM consumer aliases), **INTERNAL** (`--sf-is-dark` and anything marked so),
-  or **DEPRECATED** (with a removal timeline noted in the token-file header).
+  BEM consumer aliases) or **INTERNAL** (`--sf-is-dark` and anything marked
+  so).
 - **Canonical-source aliases.** A few public tokens have two names by design —
   `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
   `--sf-section-pad`→`--sf-section-pad--m`. Override the canonical (right-hand)

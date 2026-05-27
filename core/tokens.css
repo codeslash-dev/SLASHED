@@ -41,7 +41,7 @@
    PUBLIC API vs INTERNAL (token-API freeze contract)
    ─────────────────────────────────────────────────
    Tokens are classified into three stability tiers (PUBLIC,
-   PUBLIC-ADVANCED, INTERNAL) plus a lifecycle annotation (DEPRECATED).
+   PUBLIC-ADVANCED, INTERNAL).
    PUBLIC and PUBLIC-ADVANCED share the same SemVer guarantee
    (removal/rename = major bump after freeze). The distinction is
    documentation-level: ADVANCED tokens are powerful but niche — they
@@ -118,11 +118,6 @@
 
    INTERNAL — implementation detail, may change without a major bump:
      · --sf-is-dark (mode flag — set via data-theme, not directly)
-
-   DEPRECATED — still functional, removal timeline noted:
-     · --sf-ratio-photo (0.4.0 deprecated, 0.5.0 removed — use --sf-ratio-4-3 / --sf-ratio-3-2)
-     · --sf-sidebar-width-default (0.4.0 deprecated, 0.5.0 removed — use --sf-sidebar-width)
-     · --sf-grid-min-default (0.4.0 deprecated, 0.5.0 removed — use --sf-grid-min)
 
    CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
      · --sf-space-gap     → --sf-gap          (layout primitives read this name)
@@ -622,8 +617,6 @@
     --sf-ratio-square:   1;
     --sf-ratio-video:    16 / 9;
     --sf-ratio-cinema:   21 / 9;
-    /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-ratio-4-3 or --sf-ratio-3-2 */
-    --sf-ratio-photo:    3 / 2;
     --sf-ratio-4-3:      4 / 3;
     --sf-ratio-3-2:      3 / 2;
     --sf-ratio-portrait: 3 / 4;
