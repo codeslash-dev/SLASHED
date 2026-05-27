@@ -48,11 +48,6 @@ test.describe('Selector coverage', () => {
       // or as compound selectors that require the component layer
       'sf-modal',
       'sf-nav',
-      // .is-visible is the logical inverse of .is-invisible — not separately demoed
-      'is-visible',
-      // Modifier added in v0.3.0; behaviour covered by tests/tokens.spec.js
-      // (its 4 tokens) and the box-sizing math is purely declarative.
-      'sf-icon--boxed',
     ]);
 
     const missing = [];

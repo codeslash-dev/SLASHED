@@ -41,7 +41,7 @@
    PUBLIC API vs INTERNAL (token-API freeze contract)
    ─────────────────────────────────────────────────
    Tokens are classified into three stability tiers (PUBLIC,
-   PUBLIC-ADVANCED, INTERNAL) plus a lifecycle annotation (DEPRECATED).
+   PUBLIC-ADVANCED, INTERNAL).
    PUBLIC and PUBLIC-ADVANCED share the same SemVer guarantee
    (removal/rename = major bump after freeze). The distinction is
    documentation-level: ADVANCED tokens are powerful but niche — they
@@ -53,7 +53,6 @@
      · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
      · text-on-color (--sf-color-text--on-*)
      · code colors (--sf-color-code-bg, --sf-color-code-text)
-     · brand hover (--sf-color-{primary,secondary,tertiary,action,neutral}--hover)
      · status triplets (--sf-color-{success,...,danger}-{subtle,strong,muted})
      · gradients (--sf-gradient-*)
      · shadows (--sf-shadow-{none,xs,s,m,l,xl,2xl,inner})
@@ -87,7 +86,7 @@
      · scrollbar (--sf-scrollbar-{thumb,track})
      · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
        --sf-field-required-marker, --sf-link-external-marker)
-     · section padding (--sf-section-pad, --sf-section-pad--{s,m,l,xl})
+     · section padding (--sf-section-pad, --sf-section-pad--{xs,s,m,l,xl,2xl})
      · typography aliases (--sf-body-*, --sf-code-font-size, --sf-heading-*, --sf-h{1..6}-*)
      · current-font-weight (--sf-current-font-weight)
      · color scheme (--sf-color-scheme)
@@ -118,11 +117,6 @@
 
    INTERNAL — implementation detail, may change without a major bump:
      · --sf-is-dark (mode flag — set via data-theme, not directly)
-
-   DEPRECATED — still functional, removal timeline noted:
-     · --sf-ratio-photo (0.4.0 deprecated, 0.5.0 removed — use --sf-ratio-4-3 / --sf-ratio-3-2)
-     · --sf-sidebar-width-default (0.4.0 deprecated, 0.5.0 removed — use --sf-sidebar-width)
-     · --sf-grid-min-default (0.4.0 deprecated, 0.5.0 removed — use --sf-grid-min)
 
    CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
      · --sf-space-gap     → --sf-gap          (layout primitives read this name)
@@ -368,17 +362,6 @@
     --sf-color-code-bg:      var(--sf-color-well);
 
     /* ----------------------------------------------------------
-       Brand hover — darkened variant for interactive elements.
-       Overridden by tokens.palette.css when palette is loaded.
-       ---------------------------------------------------------- */
-    --sf-color-primary-hover:   oklch(from var(--sf-color-primary)   calc(l - 0.05) c h);
-    --sf-color-secondary-hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);
-    --sf-color-tertiary-hover:  oklch(from var(--sf-color-tertiary)  calc(l - 0.05) c h);
-    --sf-color-action-hover:    oklch(from var(--sf-color-action)    calc(l - 0.05) c h);
-    --sf-color-neutral-hover:   oklch(from var(--sf-color-neutral)   calc(l - 0.05) c h);
-
-
-    /* ----------------------------------------------------------
        Selection & backdrop
        ---------------------------------------------------------- */
     --sf-color-selection-bg:   oklch(from var(--sf-color-action) l c h / 0.22);
@@ -568,7 +551,18 @@
 
 
     /* ----------------------------------------------------------
-       Icon sizes
+       Icon sizes — em-based by design.
+       Icons are sized in em so they scale with the surrounding
+       text: an icon in a button at --sf-text-m renders at 1rem;
+       moved into a heading at --sf-text-2xl, the same icon scales
+       up automatically.
+       Global scaling flows transitively through --sf-text-scale
+       (parent text grows → em-icons grow) — there is no separate
+       --sf-icon-scale knob by design. clamp() is intentionally
+       absent here: making icons fluid INDEPENDENTLY of context
+       would break the relationship to surrounding text.
+       Capped at --xl (3em ≈ 48px on default text); above that the
+       element ceases to be an icon and becomes an illustration.
        ---------------------------------------------------------- */
     --sf-icon-xs: 0.875em;
     --sf-icon-s:  1em;
@@ -622,8 +616,6 @@
     --sf-ratio-square:   1;
     --sf-ratio-video:    16 / 9;
     --sf-ratio-cinema:   21 / 9;
-    /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-ratio-4-3 or --sf-ratio-3-2 */
-    --sf-ratio-photo:    3 / 2;
     --sf-ratio-4-3:      4 / 3;
     --sf-ratio-3-2:      3 / 2;
     --sf-ratio-portrait: 3 / 4;
@@ -965,10 +957,12 @@
        Section padding
        ---------------------------------------------------------- */
     --sf-section-pad:     var(--sf-section-pad--m);
+    --sf-section-pad--xs: var(--sf-space-xl);
     --sf-section-pad--s:  var(--sf-space-2xl);
     --sf-section-pad--m:  var(--sf-space-3xl);
     --sf-section-pad--l:  var(--sf-space-4xl);
     --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5);
+    --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2);
 
 
     /* ----------------------------------------------------------

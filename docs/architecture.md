@@ -233,15 +233,24 @@ Transition tokens live in `core/tokens.css`:
 
 ### Naming conventions
 
-- **Single dash vs double dash.** A single dash names a *source/scale* token
-  (`--sf-color-primary-light`, `--sf-space-m`); a double dash names a *modifier
-  or variant* of a base token (`--sf-color-text--secondary`,
-  `--sf-section-pad--m`, `--sf-color-bg--hover`). Read `--variant` as "a flavour
-  of the token to its left".
+- **Single dash vs double dash.** Two parallel rules, applied consistently:
+  - **`<role>-<variant>` (single dash)** — names a *palette/shade variant*; the
+    name describes the colour itself (`--sf-color-primary-light`,
+    `--sf-color-primary-hover`, `--sf-color-success-strong`,
+    `--sf-color-action-subtle`). The token IS a colour value.
+  - **`<role>--<context>` (double dash)** — names an *application slot*; the
+    name describes where/when the colour is applied (`--sf-color-bg--hover`,
+    `--sf-color-text--muted`, `--sf-color-link--hover`,
+    `--sf-color-border--subtle`). The token is consumed in a specific
+    semantic context.
+  Read `--variant` as "a flavour of the token to its left" and `-variant` as
+  "a name-derived shade of the role to its left". Brand hover variants
+  (`--sf-color-{primary,...}-hover`) live in `optional/tokens.palette.css` —
+  the palette is the single source of name-derived shades.
 - **Public vs internal.** Token-file headers label each group **PUBLIC API**
   (covered by SemVer — brand/status sources, resolved semantic tokens, scales,
-  BEM consumer aliases), **INTERNAL** (`--sf-is-dark` and anything marked so),
-  or **DEPRECATED** (with a removal timeline noted in the token-file header).
+  BEM consumer aliases) or **INTERNAL** (`--sf-is-dark` and anything marked
+  so).
 - **Canonical-source aliases.** A few public tokens have two names by design —
   `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
   `--sf-section-pad`→`--sf-section-pad--m`. Override the canonical (right-hand)

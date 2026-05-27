@@ -11,7 +11,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 
 | Class | What it does | Key tokens |
 |---|---|---|
-| `.sf-section` | vertical page rhythm; sizes `--s/--m/--l/--xl` | `--sf-section-pad*` |
+| `.sf-section` | vertical page rhythm; sizes `--xs/--s/--m/--l/--xl/--2xl` | `--sf-section-pad*` |
 | `.sf-section-group` | collapses the gap between adjacent sections | — |
 | `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-space-gutter` |
 | `.sf-box` | isolated unit with padding and optional border outline | `--sf-box-padding`, `--sf-box-border-width`, `--sf-box-border-color` |
@@ -20,7 +20,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-cluster` | wrapping inline group; `--no-wrap` | `--sf-cluster-gap/-align/-justify` |
 | `.sf-sidebar` | content + fixed-ish side panel that wraps when narrow | `--sf-sidebar-*` |
 | `.sf-switcher` | N columns above a threshold, stacked below; `--no-wrap`, `--vertical` | `--sf-switcher-threshold/-gap` |
-| `.sf-grid` | auto-fill responsive grid; `--fit`, `--xs … --xl`, `--dense` | `--sf-grid-min`, `--sf-grid-gap` |
+| `.sf-grid` | auto-fill responsive grid; `--fit`, `--xs … --2xl`, `--dense` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-grid-1 / -2 / -3 / -4 / -6` | fixed-column grids, container-responsive (no `-5`) | `--sf-grid-gap` |
 | `.sf-grid-1-2 / -2-1 / -1-3 / -3-1` | ratio two-column grids | `--sf-grid-gap` |
 | `.sf-bento` | dense free-form grid; `--sf-bento-cols/-row` overrides | `--sf-bento-*` |
@@ -35,6 +35,30 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-divider` | token-driven separator; `--vertical` | `--sf-divider-*` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
+
+## Size-modifier scale — `xs..2xl` everywhere (one exception)
+
+Every size-aware primitive supports the canonical range
+`--xs --s --m --l --xl --2xl` with one documented exception: `.sf-icon` is
+capped at `--xl` (3em ≈ 48px on default text). Above that the element ceases
+to be an icon and becomes an illustration — the cap is semantic, not
+arbitrary.
+
+| primitive | what the suffix scales | `--xs` | `--s` | `--m` *(default)* | `--l` | `--xl` | `--2xl` |
+|---|---|:-:|:-:|:-:|:-:|:-:|:-:|
+| `.sf-stack`   | block-axis gap         | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-cluster` | inline-axis gap        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-grid`    | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+
+Three suffixes scale different physical dimensions. `.sf-grid--xs` reads as
+"narrow column tier" (denser layouts), not "small gap" — gap on `.sf-grid` is
+controlled separately by `--sf-grid-gap` and is independent of the column-min
+modifier. To control a primitive's value beyond the built-in scale, override
+its scoped token directly: `style="--sf-stack-gap: var(--sf-space-3xl)"` —
+the underlying space tokens (`--sf-space-2xs`/`--sf-space-3xl`/`--sf-space-4xl`)
+remain part of the public token API.
 
 ## Why no breakpoints
 

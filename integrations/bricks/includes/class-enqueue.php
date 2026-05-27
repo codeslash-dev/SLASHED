@@ -96,6 +96,12 @@ class Slashed_Bricks_Enqueue {
                 );
             }
         }
+
+        // Bridge Bricks' dark mode toggle (data-brx-theme attribute) to SLASHED's theme system.
+        wp_add_inline_style(
+            'slashed-framework',
+            '@layer slashed.themes{[data-brx-theme="light"]{color-scheme:light;--sf-is-dark:0}[data-brx-theme="dark"]{color-scheme:dark;--sf-is-dark:1}}'
+        );
     }
 
     /**

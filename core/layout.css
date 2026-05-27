@@ -13,10 +13,12 @@
      ---------------------------------------------------------- */
 
   .sf-section     { padding-block: var(--sf-section-pad); }
+  .sf-section--xs { padding-block: var(--sf-section-pad--xs); }
   .sf-section--s  { padding-block: var(--sf-section-pad--s); }
   .sf-section--m  { padding-block: var(--sf-section-pad--m); }
   .sf-section--l  { padding-block: var(--sf-section-pad--l); }
   .sf-section--xl { padding-block: var(--sf-section-pad--xl); }
+  .sf-section--2xl { padding-block: var(--sf-section-pad--2xl); }
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
@@ -90,14 +92,12 @@
     flex-direction: column;
     gap:            var(--sf-stack-gap);
   }
-  .sf-stack--2xs { gap: var(--sf-space-2xs); }
   .sf-stack--xs  { gap: var(--sf-space-xs); }
   .sf-stack--s   { gap: var(--sf-space-s); }
   .sf-stack--m   { gap: var(--sf-space-m); }
   .sf-stack--l   { gap: var(--sf-space-l); }
   .sf-stack--xl  { gap: var(--sf-space-xl); }
   .sf-stack--2xl { gap: var(--sf-space-2xl); }
-  .sf-stack--3xl { gap: var(--sf-space-3xl); }
 
   .sf-stack--center  { align-items: center; }
   .sf-stack--end     { align-items: flex-end; }
@@ -145,12 +145,12 @@
     align-items:     var(--sf-cluster-align);
     justify-content: var(--sf-cluster-justify);
   }
-  .sf-cluster--2xs     { gap: var(--sf-space-2xs); }
   .sf-cluster--xs      { gap: var(--sf-space-xs); }
   .sf-cluster--s       { gap: var(--sf-space-s); }
   .sf-cluster--m       { gap: var(--sf-space-m); }
   .sf-cluster--l       { gap: var(--sf-space-l); }
   .sf-cluster--xl      { gap: var(--sf-space-xl); }
+  .sf-cluster--2xl     { gap: var(--sf-space-2xl); }
 
   .sf-cluster--no-wrap  { flex-wrap: nowrap; }
   .sf-cluster--center   { justify-content: center; }
@@ -236,6 +236,7 @@
   .sf-grid--m  { --sf-grid-min: var(--sf-grid-min-m); }
   .sf-grid--l  { --sf-grid-min: var(--sf-grid-min-l); }
   .sf-grid--xl { --sf-grid-min: var(--sf-grid-min-xl); }
+  .sf-grid--2xl { --sf-grid-min: var(--sf-grid-min-2xl); }
 
   /* Dense packing — let later items backfill earlier gaps (as .sf-bento
      does). Applies to any grid, including the fixed-column .sf-grid-N. */
