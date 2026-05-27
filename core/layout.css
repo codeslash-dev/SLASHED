@@ -103,6 +103,22 @@
   .sf-stack--end     { align-items: flex-end; }
   .sf-stack--stretch { align-items: stretch; }
 
+  /* -- Gap ----------------------------------------------------
+     Injects gap into any existing flex or grid container without
+     imposing a display type or axis. Unlike .sf-stack (flex
+     column) or .sf-cluster (flex-wrap row), .sf-gap is layout-
+     agnostic — use it on elements that already have their own
+     display context.
+     Override: style="--sf-gap-size: 2rem"
+     ---------------------------------------------------------- */
+  .sf-gap { gap: var(--sf-gap-size); }
+  .sf-gap--xs  { --sf-gap-size: var(--sf-space-xs); }
+  .sf-gap--s   { --sf-gap-size: var(--sf-space-s); }
+  .sf-gap--m   { --sf-gap-size: var(--sf-space-m); }
+  .sf-gap--l   { --sf-gap-size: var(--sf-space-l); }
+  .sf-gap--xl  { --sf-gap-size: var(--sf-space-xl); }
+  .sf-gap--2xl { --sf-gap-size: var(--sf-space-2xl); }
+
   /* -- Box -----------------------------------------------------
      Isolated unit with padding and an optional border.
      Outline instead of border — doesn't disturb the box model when toggled.
@@ -445,6 +461,23 @@
     .sf-grid-1-3 { grid-template-columns: 1fr 3fr; }
     .sf-grid-3-1 { grid-template-columns: 3fr 1fr; }
   }
+
+  /* -- Equal columns ------------------------------------------
+     Fixed N-column grid. Column count NEVER collapses — unlike
+     .sf-grid-N which uses container queries to stack at small
+     sizes. Use when the layout must remain N columns at all
+     widths; the caller is responsible for overflow handling.
+     Override: style="--sf-equal-cols: 3"
+     ---------------------------------------------------------- */
+  .sf-equal {
+    display:               grid;
+    grid-template-columns: repeat(var(--sf-equal-cols), 1fr);
+    gap:                   var(--sf-equal-gap);
+  }
+  .sf-equal--2 { --sf-equal-cols: 2; }
+  .sf-equal--3 { --sf-equal-cols: 3; }
+  .sf-equal--4 { --sf-equal-cols: 4; }
+  .sf-equal--6 { --sf-equal-cols: 6; }
 
   /* -- Content grid (breakout pattern) -------------------------
      Full-width grid that lets items break out to breakout or full
