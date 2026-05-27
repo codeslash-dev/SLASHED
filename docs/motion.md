@@ -55,13 +55,13 @@ your own components:
 | Token | Value |
 |---|---|
 | `--sf-ease-linear` | `linear` |
-| `--sf-ease-in` | `cubic-bezier(0.4, 0, 1, 1)` |
-| `--sf-ease-out` | `cubic-bezier(0, 0, 0.2, 1)` |
+| `--sf-ease-in` | `cubic-bezier(0.5, 0, 0.75, 0.25)` |
+| `--sf-ease-out` | `cubic-bezier(0.25, 0, 0.15, 1)` |
 | `--sf-ease-in-out` | `cubic-bezier(0.4, 0, 0.2, 1)` |
-| `--sf-ease-bounce` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
-| `--sf-ease-elastic` | `cubic-bezier(0.68, -0.6, 0.32, 1.6)` |
-| `--sf-ease-overshoot` | `cubic-bezier(0.22, 1.3, 0.36, 1)` |
-| `--sf-ease-spring` | `linear(...)` (spring approximation) |
+| `--sf-ease-spring` | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` |
+| `--sf-ease-elastic` | `linear(0, 0.3, 1.2, 0.9, 1.05, 1)` |
+| `--sf-ease-bounce` | `linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)` |
+| `--sf-ease-overshoot` | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` |
 
 ## Animation classes
 

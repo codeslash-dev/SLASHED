@@ -33,13 +33,13 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
 | `.sf-divider` | token-driven separator; `--vertical` | `--sf-divider-*` |
-| `.sf-icon` | em-based inline icon sizing; `--xs … --xl` | `--sf-icon-*` |
+| `.sf-icon` | em-based inline icon sizing; `--xs … --2xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
 
 ## Size-modifier scale -- `xs..2xl` everywhere
 
 Every size-aware primitive supports the canonical range
-`--xs --s --m --l --xl --2xl`. One rule: **xs..2xl wszedzie.**
+`--xs --s --m --l --xl --2xl`.
 
 | primitive | what the suffix scales | `--xs` | `--s` | `--m` *(default)* | `--l` | `--xl` | `--2xl` |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|
