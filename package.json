@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
-    "build": "node scripts/bundle.js && node scripts/gen-bricks-inventory.js",
+    "build": "node scripts/bundle.js && node scripts/gen-bricks-inventory.js && node scripts/zip-plugin.js",
+    "build:plugin": "node scripts/zip-plugin.js",
     "watch": "node scripts/bundle.js --watch",
     "audit": "node scripts/audit.js",
     "audit:check": "node scripts/audit.js --check",
