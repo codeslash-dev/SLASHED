@@ -86,7 +86,7 @@
      · scrollbar (--sf-scrollbar-{thumb,track})
      · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
        --sf-field-required-marker, --sf-link-external-marker)
-     · section padding (--sf-section-pad, --sf-section-pad--{s,m,l,xl})
+     · section padding (--sf-section-pad, --sf-section-pad--{xs,s,m,l,xl,2xl})
      · typography aliases (--sf-body-*, --sf-code-font-size, --sf-heading-*, --sf-h{1..6}-*)
      · current-font-weight (--sf-current-font-weight)
      · color scheme (--sf-color-scheme)
@@ -946,10 +946,12 @@
        Section padding
        ---------------------------------------------------------- */
     --sf-section-pad:     var(--sf-section-pad--m);
+    --sf-section-pad--xs: var(--sf-space-xl);
     --sf-section-pad--s:  var(--sf-space-2xl);
     --sf-section-pad--m:  var(--sf-space-3xl);
     --sf-section-pad--l:  var(--sf-space-4xl);
     --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5);
+    --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2);
 
 
     /* ----------------------------------------------------------
