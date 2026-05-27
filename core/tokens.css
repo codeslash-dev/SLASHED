@@ -551,7 +551,18 @@
 
 
     /* ----------------------------------------------------------
-       Icon sizes
+       Icon sizes — em-based by design.
+       Icons are sized in em so they scale with the surrounding
+       text: an icon in a button at --sf-text-m renders at 1rem;
+       moved into a heading at --sf-text-2xl, the same icon scales
+       up automatically.
+       Global scaling flows transitively through --sf-text-scale
+       (parent text grows → em-icons grow) — there is no separate
+       --sf-icon-scale knob by design. clamp() is intentionally
+       absent here: making icons fluid INDEPENDENTLY of context
+       would break the relationship to surrounding text.
+       Capped at --xl (3em ≈ 48px on default text); above that the
+       element ceases to be an icon and becomes an illustration.
        ---------------------------------------------------------- */
     --sf-icon-xs: 0.875em;
     --sf-icon-s:  1em;
