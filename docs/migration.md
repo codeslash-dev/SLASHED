@@ -16,7 +16,7 @@ live in changes. Most consumers won't notice.
 | # | Class / file | Was (0.2.x) | Now (0.3.0) |
 |---|---|---|---|
 | 1 | `.sf-prose`, `.sf-not-prose` | `slashed.layout` (in `core/layout.css`) | `slashed.macros` (in `core/macros.css`) |
-| 2 | `.focus-parent` | `slashed.states` (in `core/states.css`) | `slashed.accessibility` (in `core/accessibility.css`) |
+| 2 | `.sf-focus-parent` | `slashed.states` (in `core/states.css`) | `slashed.accessibility` (in `core/accessibility.css`) |
 | 3 | new layer | — | `slashed.macros` between `components` and `utilities` |
 
 ### Are these breaking changes?
@@ -34,7 +34,7 @@ You only see a difference if your CSS targeted these classes from
   The fix is to move the override into `slashed.overrides` (the
   documented escape hatch, last in the cascade) — that's been the
   recommended path all along.
-- A `@layer slashed.states { .focus-parent { … } }` override stops
+- A `@layer slashed.states { .sf-focus-parent { … } }` override stops
   winning over the framework's rule. Same fix: move it to
   `slashed.overrides`.
 

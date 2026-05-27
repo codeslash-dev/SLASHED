@@ -2,47 +2,114 @@
    SLASHED — optional/theme-example.css   (COPY & CUSTOMISE)
    @layer slashed.themes
 
-   A worked example of the "rebrand in 6 tokens" workflow. This file
-   is NOT part of any bundle — copy it into your project, rename it,
-   and edit the values. Everything else (dark mode, surfaces, text,
-   status tints, on-colours) auto-derives from these source tokens.
+   Maximal reference theme. This file demonstrates EVERY theming
+   mechanism the framework supports — it is intentionally verbose.
+   Copy it, delete what you don't need, and rename it.
+
+   NOT part of any bundle — this is a docs/reference file only.
+
+   Sections:
+     1. Quick rebrand (6 source tokens)
+     2. Full dark-mode override (optional)
+     3. Multi-brand scoping
+     4. Component-level token overrides (commented examples)
+     5. Smooth theme-transition helper
+     6. Full token reference (commented out)
 
    See README "Customising tokens" and docs/theming.md.
    ============================================================ */
 
 @layer slashed.themes {
 
-  /* ---- 1. Quick rebrand: override the 6 -light source tokens ----
+  /* ===========================================================
+     1. QUICK REBRAND — override the 6 -light source tokens
+     ===========================================================
      Dark mode auto-derives via relative colour syntax. Any valid CSS
-     colour works (hex, oklch, hsl, …). */
+     colour works (hex, oklch, hsl, ...). These six tokens propagate
+     to every derived colour in the system. */
+
   :root {
     --sf-color-primary-light:   oklch(0.55 0.18 280);  /* brand / links     */
-    --sf-color-secondary-light: oklch(0.30 0.04 280);  /* muted brand        */
-    --sf-color-tertiary-light:  oklch(0.62 0.15 200);  /* accent             */
-    --sf-color-action-light:    oklch(0.62 0.16 150);  /* primary CTA        */
-    --sf-color-neutral-light:   oklch(0.45 0.01 280);  /* greys / text base  */
-    --sf-color-base-light:      oklch(0.99 0.004 280); /* page surface       */
+    --sf-color-secondary-light: oklch(0.30 0.04 280);  /* muted brand       */
+    --sf-color-tertiary-light:  oklch(0.62 0.15 200);  /* accent            */
+    --sf-color-action-light:    oklch(0.62 0.16 150);  /* primary CTA       */
+    --sf-color-neutral-light:   oklch(0.45 0.01 280);  /* greys / text base */
+    --sf-color-base-light:      oklch(0.99 0.004 280); /* page surface      */
   }
 
-  /* ---- 2. Optional: take full control of dark mode ----
-     Only needed when the auto-derived dark value isn't what you want. */
+  /* ===========================================================
+     2. FULL DARK-MODE OVERRIDE (optional)
+     ===========================================================
+     Only needed when the auto-derived dark value isn't what you want.
+     Most brands work fine with auto-derivation — only override if the
+     computed dark-mode colour is off. */
+
   :root {
-    --sf-color-primary-dark: oklch(0.78 0.16 280);
+    --sf-color-primary-dark:   oklch(0.78 0.16 280);
+    /* --sf-color-secondary-dark: oklch(…); */
+    /* --sf-color-tertiary-dark:  oklch(…); */
+    /* --sf-color-action-dark:    oklch(…); */
+    /* --sf-color-neutral-dark:   oklch(…); */
+    /* --sf-color-base-dark:      oklch(…); */
   }
 
-  /* ---- 3. Multi-brand: scope a different palette to a subtree ----
+  /* ===========================================================
+     3. MULTI-BRAND SCOPING
+     ===========================================================
      Nest [data-brand] (or any selector) and re-declare the 6 tokens.
-     The architecture allows unlimited scoped palettes. */
+     The architecture allows unlimited scoped palettes — downstream
+     colours re-derive automatically within the subtree. */
+
   [data-brand="sunset"] {
-    --sf-color-primary-light: oklch(0.62 0.20 35);
-    --sf-color-action-light:  oklch(0.70 0.18 60);
+    --sf-color-primary-light:   oklch(0.62 0.20 35);
+    --sf-color-secondary-light: oklch(0.50 0.12 30);
+    --sf-color-tertiary-light:  oklch(0.55 0.18 60);
+    --sf-color-action-light:    oklch(0.70 0.18 60);
+    --sf-color-neutral-light:   oklch(0.40 0.02 35);
+    --sf-color-base-light:      oklch(0.98 0.005 35);
   }
 
-  /* ---- 4. Optional: smooth colour change when toggling themes ----
+  [data-brand="ocean"] {
+    --sf-color-primary-light:   oklch(0.50 0.14 230);
+    --sf-color-secondary-light: oklch(0.40 0.08 230);
+    --sf-color-tertiary-light:  oklch(0.58 0.12 180);
+    --sf-color-action-light:    oklch(0.55 0.16 200);
+    --sf-color-neutral-light:   oklch(0.42 0.01 230);
+    --sf-color-base-light:      oklch(0.98 0.003 230);
+  }
+
+  /* ===========================================================
+     4. COMPONENT-LEVEL TOKEN OVERRIDES (examples)
+     ===========================================================
+     When components ship, you can fine-tune their tokens here
+     without touching their source. Uncomment and adjust as needed. */
+
+  /* :root {
+    --sf-button-radius: var(--sf-radius-full);
+    --sf-button-font-weight: var(--sf-font-weight-semibold);
+    --sf-card-radius: var(--sf-radius-l);
+    --sf-card-shadow: var(--sf-shadow-m);
+    --sf-badge-radius: var(--sf-radius-full);
+    --sf-avatar-radius: var(--sf-radius-full);
+  } */
+
+  /* ===========================================================
+     5. SMOOTH THEME-TRANSITION HELPER
+     ===========================================================
      Opt-in only — transitioning every colour globally is a perf
      footgun, so it's scoped to a class you add to <html> while a
-     toggle is in flight (remove it afterwards). Pairs with the
-     ::view-transition(root) animation already shipped in motion.css. */
+     toggle is in flight (remove it afterwards via setTimeout or
+     transitionend). Pairs with the ::view-transition(root)
+     animation already shipped in motion.css.
+
+     Usage:
+       document.documentElement.classList.add('theme-transition');
+       document.documentElement.dataset.theme = newTheme;
+       setTimeout(() => {
+         document.documentElement.classList.remove('theme-transition');
+       }, 350);
+  */
+
   .theme-transition,
   .theme-transition * {
     transition:
@@ -50,5 +117,146 @@
       background-color var(--sf-duration-normal) var(--sf-ease-out),
       border-color     var(--sf-duration-normal) var(--sf-ease-out);
   }
+
+  /* ===========================================================
+     6. FULL TOKEN REFERENCE (commented out)
+     ===========================================================
+     Every overridable token in the system, grouped by concern.
+     Uncomment individual lines to override. Values shown are the
+     defaults — change them to your brand values.
+
+     NOTE: Palette token VALUES are not part of the public API (they
+     may shift between minors). The NAMES are stable and SemVer'd.
+  */
+
+  /* :root { */
+
+    /* --- Brand sources (the 6 master tokens) ---
+    --sf-color-primary-light:   oklch(0.55 0.22 265);
+    --sf-color-secondary-light: oklch(0.30 0.04 265);
+    --sf-color-tertiary-light:  oklch(0.62 0.15 145);
+    --sf-color-action-light:    oklch(0.55 0.22 265);
+    --sf-color-neutral-light:   oklch(0.45 0.01 265);
+    --sf-color-base-light:      oklch(0.985 0.004 265);
+    */
+
+    /* --- Typography ---
+    --sf-body-font-family: system-ui, sans-serif;
+    --sf-heading-font-family: inherit;
+    --sf-font-mono: ui-monospace, monospace;
+    --sf-body-font-size: 100%;
+    --sf-body-line-height: 1.6;
+    --sf-body-font-weight: 400;
+    --sf-body-strong-weight: 700;
+    --sf-heading-text-wrap: balance;
+    --sf-body-text-wrap: pretty;
+    --sf-text-scale: 1;
+    */
+
+    /* --- Text sizes (fluid clamp) ---
+    --sf-text-2xs: clamp(...);
+    --sf-text-xs:  clamp(...);
+    --sf-text-s:   clamp(...);
+    --sf-text-m:   clamp(...);
+    --sf-text-l:   clamp(...);
+    --sf-text-xl:  clamp(...);
+    --sf-text-2xl: clamp(...);
+    --sf-text-3xl: clamp(...);
+    --sf-text-4xl: clamp(...);
+    */
+
+    /* --- Spacing (fluid clamp * scale) ---
+    --sf-space-scale: 1;
+    --sf-space-gutter: var(--sf-space-l);
+    */
+
+    /* --- Radii ---
+    --sf-radius-none: 0;
+    --sf-radius-xs:   0.125rem;
+    --sf-radius-s:    0.25rem;
+    --sf-radius-m:    0.5rem;
+    --sf-radius-l:    0.75rem;
+    --sf-radius-xl:   1rem;
+    --sf-radius-2xl:  1.25rem;
+    --sf-radius-3xl:  1.5rem;
+    --sf-radius-4xl:  2rem;
+    --sf-radius-full: 9999px;
+    --sf-radius-pill: 9999px;
+    --sf-radius-scale: 1;
+    */
+
+    /* --- Shadows ---
+    --sf-shadow-color: oklch(0.25 0 0 / 0.1);
+    --sf-shadow-strength: 1;
+    --sf-shadow-xs: ...;
+    --sf-shadow-s:  ...;
+    --sf-shadow-m:  ...;
+    --sf-shadow-l:  ...;
+    --sf-shadow-xl: ...;
+    --sf-shadow-2xl: ...;
+    --sf-shadow-inner: ...;
+    --sf-shadow-glow: ...;
+    */
+
+    /* --- Borders ---
+    --sf-border-width-1: 1px;
+    --sf-border-width-2: 2px;
+    --sf-border-width-3: 3px;
+    --sf-border-width-4: 4px;
+    --sf-border-style: solid;
+    --sf-border-style-strong: solid;
+    --sf-border-style-soft: solid;
+    --sf-border-style-dotted: dotted;
+    */
+
+    /* --- Motion ---
+    --sf-duration-fast:   150ms;
+    --sf-duration-normal: 300ms;
+    --sf-duration-slow:   500ms;
+    --sf-motion-scale: 1;
+    */
+
+    /* --- Layout ---
+    --sf-container-default: 75rem;
+    --sf-container-narrow:  55rem;
+    --sf-container-wide:    90rem;
+    --sf-container-prose:   65ch;
+    --sf-header-height:     4rem;
+    */
+
+    /* --- Focus ring ---
+    --sf-focus-ring-width:  3px;
+    --sf-focus-ring-style:  solid;
+    --sf-focus-ring-offset: 2px;
+    --sf-focus-ring-color:  var(--sf-color-border--focus);
+    */
+
+    /* --- Z-index scale ---
+    --sf-z-below:  -1;
+    --sf-z-base:    0;
+    --sf-z-low:    10;
+    --sf-z-raised: 20;
+    --sf-z-mid:    50;
+    --sf-z-high:  100;
+    --sf-z-top:   500;
+    --sf-z-max:  9999;
+    */
+
+    /* --- Icon ---
+    --sf-icon-xs:  0.875em;
+    --sf-icon-s:   1em;
+    --sf-icon-m:   1.5em;
+    --sf-icon-l:   2em;
+    --sf-icon-xl:  3em;
+    --sf-icon-2xl: 4em;
+    */
+
+    /* --- Print ---
+    --sf-print-page-size:   A4;
+    --sf-print-page-margin: 2cm;
+    --sf-print-base-size:   12pt;
+    */
+
+  /* } */
 
 }

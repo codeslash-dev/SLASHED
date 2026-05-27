@@ -568,14 +568,15 @@
      --sf-icon-scale knob by design. clamp() is intentionally
      absent here: making icons fluid INDEPENDENTLY of context
      would break the relationship to surrounding text.
-     Capped at --xl (3em ≈ 48px on default text); above that the
+     Capped at --2xl (4em ≈ 64px on default text); above that the
      element ceases to be an icon and becomes an illustration.
      ---------------------------------------------------------- */
-  --sf-icon-xs: 0.875em;
-  --sf-icon-s:  1em;
-  --sf-icon-m:  1.5em;
-  --sf-icon-l:  2em;
-  --sf-icon-xl: 3em;
+  --sf-icon-xs:  0.875em;
+  --sf-icon-s:   1em;
+  --sf-icon-m:   1.5em;
+  --sf-icon-l:   2em;
+  --sf-icon-xl:  3em;
+  --sf-icon-2xl: 4em;
 
 
   /* ----------------------------------------------------------
@@ -1914,11 +1915,12 @@ td, th {
   vertical-align: text-bottom;
   fill:           currentcolor;
 }
-.sf-icon--xs { --sf-icon-size: var(--sf-icon-xs); }
-.sf-icon--s  { --sf-icon-size: var(--sf-icon-s); }
-.sf-icon--m  { --sf-icon-size: var(--sf-icon-m); }
-.sf-icon--l  { --sf-icon-size: var(--sf-icon-l); }
-.sf-icon--xl { --sf-icon-size: var(--sf-icon-xl); }
+.sf-icon--xs  { --sf-icon-size: var(--sf-icon-xs); }
+.sf-icon--s   { --sf-icon-size: var(--sf-icon-s); }
+.sf-icon--m   { --sf-icon-size: var(--sf-icon-m); }
+.sf-icon--l   { --sf-icon-size: var(--sf-icon-l); }
+.sf-icon--xl  { --sf-icon-size: var(--sf-icon-xl); }
+.sf-icon--2xl { --sf-icon-size: var(--sf-icon-2xl); }
 
 /* Boxed variant — wraps the icon in a padded, bordered, optionally
    coloured frame. Adds inline-/block-size on top of the naked icon
@@ -3093,6 +3095,7 @@ td, th {
   top: var(--sf-space-m);
 }
 
+
 /* ----------------------------------------------------------
    Focus-parent — an a11y *pattern*, not a state. Lives in the
    accessibility layer (was previously in states.css; moved in
@@ -3100,8 +3103,9 @@ td, th {
    and survive third-party resets at the same priority as the
    focus-visible ring above. Cannot be hardened with !important
    because the outline shorthand is consumer-customisable.
+   Canonical name: .sf-focus-parent (prefixed).
    ---------------------------------------------------------- */
-.focus-parent:focus-within {
+.sf-focus-parent:focus-within {
   outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
   outline-offset: var(--sf-focus-ring-offset);
 }
@@ -3683,11 +3687,13 @@ td, th {
      full control via BEM components, skip this file entirely.
 
    TOKENS CONSUMED:
-     --sf-radius-m, --sf-border-width-1, --sf-color-border,
+     --sf-radius-m, --sf-radius-full, --sf-border-width-1,
+     --sf-border-width-3, --sf-color-border,
      --sf-color-border--focus, --sf-color-border--subtle,
      --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
      --sf-color-text--disabled, --sf-color-text--on-action,
-     --sf-color-bg--disabled, --sf-color-action, --sf-color-error,
+     --sf-color-bg--disabled, --sf-color-action, --sf-color-action-hover,
+     --sf-color-error,
      --sf-field-border-color, --sf-opacity-disabled,
      --sf-space-xs, --sf-space-s, --sf-space-m,
      --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,

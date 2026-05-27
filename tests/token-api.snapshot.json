@@ -456,6 +456,7 @@
   "--sf-heading-color",
   "--sf-heading-font-family",
   "--sf-heading-text-wrap",
+  "--sf-icon-2xl",
   "--sf-icon-box-bg",
   "--sf-icon-box-border",
   "--sf-icon-box-pad",

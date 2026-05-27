@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**156 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**158 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-114 classes.
+115 classes.
 
 | Class |
 |---|
@@ -87,6 +87,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-grid-4` |
 | `.sf-grid-6` |
 | `.sf-icon` |
+| `.sf-icon--2xl` |
 | `.sf-icon--boxed` |
 | `.sf-icon--l` |
 | `.sf-icon--m` |
@@ -209,11 +210,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Accessibility (`core/accessibility.css`)
 
-1 classes.
+2 classes.
 
 | Class |
 |---|
 | `.sf-clickable-parent` |
+| `.sf-focus-parent` |
 
 ## Motion / entrances (`core/motion.css`)
 

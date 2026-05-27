@@ -105,7 +105,7 @@ test.describe('Layer ordering', () => {
   test('slashed.accessibility wins over slashed.motion at equal specificity', async ({ page }) => {
     // a11y rules are placed near the end of the cascade so they can
     // recover focus rings, sr-only positioning, and the relocated
-    // .focus-parent / .sf-clickable-parent patterns.
+    // .sf-focus-parent / .sf-clickable-parent patterns.
     await page.setContent(`
       <style>
         @layer slashed.motion        { .layer-check-6 { opacity: 0.2; } }

@@ -21,8 +21,10 @@ const FILE_META = {
   'core/states.css':        { title: 'State classes',         prefix: 'is-' },
   'core/accessibility.css': { title: 'Accessibility',         prefix: 'sf-' },
   'core/motion.css':        { title: 'Motion / entrances',    prefix: 'sf-' },
+  'core/print.css':         { title: 'Print utilities',       prefix: ''    },
   'optional/forms.css':     { title: 'Forms',                 prefix: 'sf-' },
   'optional/components.css':{ title: 'Components',            prefix: 'sf-' },
+  'optional/theme-example.css': { title: 'Theme example',     prefix: ''    },
 };
 
 const SOURCES = CLASS_FILES.map(f => ({

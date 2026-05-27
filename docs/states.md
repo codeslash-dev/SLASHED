@@ -11,8 +11,8 @@ All states are exercised in [`demo.html`](demo.html).
 ## Reference
 
 > **Layer note:** Most state classes live in `core/states.css` (layer
-> `slashed.states`). Three accessibility-related entries (`.no-motion`,
-> `.sr-only-focusable`, `.focus-parent`) moved to `core/accessibility.css`
+> `slashed.states`). Two accessibility-related entries (`.no-motion`,
+> `.sr-only-focusable`) moved to `core/accessibility.css`
 > (layer `slashed.accessibility`) in v0.3.0 for better layering priority.
 
 | Class | Use when | ARIA / pairing | Layer |
@@ -48,7 +48,7 @@ All states are exercised in [`demo.html`](demo.html).
 | `.sr-only-focusable` | hidden until focused (skip-link pattern) | — | accessibility |
 | `.no-motion` | kill all animation/transition on this subtree | `prefers-reduced-motion` equivalent | accessibility |
 
-`.focus-parent` (no `is-`/`sf-` prefix) is a helper: a container with it rings
+`.sf-focus-parent` is a helper: a container with it rings
 when any descendant has keyboard focus (`:focus-within`). It lives in
 `core/accessibility.css` (layer `slashed.accessibility`).
 
