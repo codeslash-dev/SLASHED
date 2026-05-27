@@ -219,6 +219,27 @@ function slashed_bricks_init() {
 add_action( 'after_setup_theme', 'slashed_bricks_init' );
 
 /**
+ * reBEMer: enqueue the editor bundle inside the Bricks builder main panel.
+ *
+ * The Enqueue class hooks itself onto wp_enqueue_scripts and gates on
+ * bricks_is_builder_main(), so registering it here at after_setup_theme
+ * (priority 20 to follow slashed_bricks_init) is sufficient — the actual
+ * decision to enqueue happens later, per-request.
+ *
+ * Bails out cleanly when Bricks isn't the active theme; the missing-Bricks
+ * notice from slashed_bricks_init() already covers that case.
+ */
+function slashed_bricks_rebemer_init() {
+    if ( ! slashed_bricks_is_bricks_active() ) {
+        return;
+    }
+
+    require_once SLASHED_BRICKS_PATH . 'includes/class-rebemer-enqueue.php';
+    new Slashed_Bricks_ReBEMer_Enqueue();
+}
+add_action( 'after_setup_theme', 'slashed_bricks_rebemer_init', 20 );
+
+/**
  * Activation check.
  */
 function slashed_bricks_activation_check() {

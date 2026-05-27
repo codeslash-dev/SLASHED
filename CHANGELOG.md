@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- **reBEMer** (`integrations/bricks/`) — Subtree-scoped BEM class manager
+  for the Bricks Builder structure panel. Adds a "BEM" badge to every
+  structure-panel item; clicking it opens a draggable modal that names a
+  block + every descendant element + an optional modifier and applies the
+  result as global classes in one transaction. Five operation modes
+  (Add / Rename / Replace / Add Modifier / Migrate ID styles), a REST
+  preflight endpoint that reports cross-element class usage so destructive
+  ops never silently break unrelated elements, snapshot + rollback for
+  every apply, an in-panel undo ring buffer, and a reserved-name guard
+  against SLASHED's own utility classes. Full design at
+  [docs/rebemer.md](docs/rebemer.md). The editor app lives in
+  `integrations/bricks/editor-app/` (Svelte 5 runes + Vite); the PHP side
+  is `Slashed_Bricks_ReBEMer_{Policy,REST,Enqueue}` under
+  `integrations/bricks/includes/`.
+
 ### ⚠️ Breaking Changes (pre-freeze cleanup)
 
 The framework is in pre-freeze cleanup. No published consumer is affected.
