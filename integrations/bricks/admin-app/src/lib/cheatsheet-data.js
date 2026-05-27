@@ -12,6 +12,7 @@ export const variableGroups = [
     description: "Brand, status, semantic, and derived color tokens. Source colors use oklch(); the framework derives light-dark pairs, palettes, and alpha scales automatically.",
     tokens: [
       { name: "--sf-color-{brand}-light", description: "Source color for the brand (oklch registered value). Set this to rebrand." },
+      { name: "--sf-color-{brand}-dark", description: "Optional dark-mode override. If set, replaces the auto-derived dark variant for full per-mode control." },
       { name: "--sf-color-{brand}", description: "Resolved light-dark adaptive color for use in rules." },
       { name: "--sf-color-{brand}-{50-950}", description: "Palette scale: 50 (lightest) to 950 (darkest) mixed with base/text." },
       { name: "--sf-color-{brand}-a{5-95}", description: "Alpha scale: 5% to 95% opacity of the brand color." },

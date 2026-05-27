@@ -45,10 +45,14 @@
     for (const name of brand) {
       const v = colors[`brand_${name}`];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
+      const vd = colors[`brand_dark_${name}`];
+      if (vd) pairs.push(`--sf-color-${name}-dark:${vd}`);
     }
     for (const name of statuses) {
       const v = colors[`status_${name}`];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
+      const vd = colors[`status_dark_${name}`];
+      if (vd) pairs.push(`--sf-color-${name}-dark:${vd}`);
     }
     if (typography.font_body)    pairs.push(`--sf-font-body:${typography.font_body}`);
     if (typography.font_heading) pairs.push(`--sf-font-heading:${typography.font_heading}`);
@@ -65,10 +69,14 @@
     for (const name of brand) {
       const v = colors[`brand_${name}`];
       if (v) decls.push(`--sf-color-${name}-light: ${v}`);
+      const vd = colors[`brand_dark_${name}`];
+      if (vd) decls.push(`--sf-color-${name}-dark: ${vd}`);
     }
     for (const name of statuses) {
       const v = colors[`status_${name}`];
       if (v) decls.push(`--sf-color-${name}-light: ${v}`);
+      const vd = colors[`status_dark_${name}`];
+      if (vd) decls.push(`--sf-color-${name}-dark: ${vd}`);
     }
     if (typography.font_body)    decls.push(`--sf-font-body: ${typography.font_body}`);
     if (typography.font_heading) decls.push(`--sf-font-heading: ${typography.font_heading}`);

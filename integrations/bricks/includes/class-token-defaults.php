@@ -70,12 +70,27 @@ class Slashed_Bricks_Token_Defaults {
 				'neutral'   => 'oklch(0.45 0.02 260)',
 				'base'      => 'oklch(0.98 0.005 260)',
 			),
+			'brand_dark' => array(
+				'primary'   => '',
+				'secondary' => '',
+				'tertiary'  => '',
+				'action'    => '',
+				'neutral'   => '',
+				'base'      => '',
+			),
 			'status' => array(
 				'success' => 'oklch(0.48 0.17 150)',
 				'warning' => 'oklch(0.75 0.17 80)',
 				'error'   => 'oklch(0.62 0.20 35)',
 				'info'    => 'oklch(0.48 0.15 240)',
 				'danger'  => 'oklch(0.48 0.24 12)',
+			),
+			'status_dark' => array(
+				'success' => '',
+				'warning' => '',
+				'error'   => '',
+				'info'    => '',
+				'danger'  => '',
 			),
 			'brand_hex_hints' => array(
 				'primary'   => '#4338ca',
@@ -85,12 +100,27 @@ class Slashed_Bricks_Token_Defaults {
 				'neutral'   => '#64748b',
 				'base'      => '#fafafa',
 			),
+			'brand_dark_hex_hints' => array(
+				'primary'   => '#818cf8',
+				'secondary' => '#cbd5e1',
+				'tertiary'  => '#c084fc',
+				'action'    => '#22d3ee',
+				'neutral'   => '#94a3b8',
+				'base'      => '#1e1e2e',
+			),
 			'status_hex_hints' => array(
 				'success' => '#16a34a',
 				'warning' => '#ca8a04',
 				'error'   => '#dc2626',
 				'info'    => '#2563eb',
 				'danger'  => '#dc2626',
+			),
+			'status_dark_hex_hints' => array(
+				'success' => '#4ade80',
+				'warning' => '#fbbf24',
+				'error'   => '#f87171',
+				'info'    => '#60a5fa',
+				'danger'  => '#f87171',
 			),
 		);
 	}

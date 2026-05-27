@@ -141,6 +141,25 @@ if ( is_admin() ) {
 }
 
 /**
+ * Register REST routes on non-admin (API) requests.
+ *
+ * REST API requests do NOT satisfy is_admin(), so the REST controller
+ * must also be loaded outside of slashed_bricks_admin_init(). Without
+ * this, POST /wp-json/slashed-bricks/v1/tokens returns rest_no_route.
+ */
+function slashed_bricks_rest_init() {
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
+
+    new Slashed_Bricks_REST_Controller();
+}
+if ( ! is_admin() ) {
+    add_action( 'plugins_loaded', 'slashed_bricks_rest_init' );
+}
+
+/**
  * Data managers: early initialization at plugins_loaded.
  *
  * Bricks' Database::__construct() reads bricks_global_variables,
