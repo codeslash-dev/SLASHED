@@ -1756,12 +1756,12 @@ td, th {
    Override: style="--sf-gap-size: 2rem"
    ---------------------------------------------------------- */
 .sf-gap { gap: var(--sf-gap-size); }
-.sf-gap--xs  { --sf-gap-size: var(--sf-space-xs); }
-.sf-gap--s   { --sf-gap-size: var(--sf-space-s); }
-.sf-gap--m   { --sf-gap-size: var(--sf-space-m); }
-.sf-gap--l   { --sf-gap-size: var(--sf-space-l); }
-.sf-gap--xl  { --sf-gap-size: var(--sf-space-xl); }
-.sf-gap--2xl { --sf-gap-size: var(--sf-space-2xl); }
+.sf-gap--xs  { gap: var(--sf-space-xs); }
+.sf-gap--s   { gap: var(--sf-space-s); }
+.sf-gap--m   { gap: var(--sf-space-m); }
+.sf-gap--l   { gap: var(--sf-space-l); }
+.sf-gap--xl  { gap: var(--sf-space-xl); }
+.sf-gap--2xl { gap: var(--sf-space-2xl); }
 
 /* -- Box -----------------------------------------------------
    Isolated unit with padding and an optional border.
