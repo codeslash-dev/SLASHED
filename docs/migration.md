@@ -116,6 +116,16 @@ The underlying space tokens (`--sf-space-2xs`, `--sf-space-3xl`,
 **Result:** every size-aware primitive now supports the canonical
 `--xs --s --m --l --xl --2xl` range.
 
+### Component modifier renamed (taken-names table)
+
+| Old name | New name | Rationale |
+|---|---|---|
+| `.sf-button--destructive` | `.sf-button--danger` | Aligns with the `--danger` intent modifier used by `.is-danger`, `.sf-surface--danger`, and the `--sf-color-danger-*` token family. "Danger" is the consistent term across the entire API. |
+
+The component CSS is not yet active (all commented out), so no runtime
+breakage. The taken-names table in `docs/components.md` reflects the
+canonical name that will ship when the class activates.
+
 ---
 
 ## From other frameworks

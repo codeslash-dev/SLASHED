@@ -50,7 +50,7 @@
    *   background:       transparent;
    *   color:            var(--sf-color-link);
    * }
-   * .sf-button--destructive {
+   * .sf-button--danger {
    *   background:       var(--sf-color-danger);
    *   color:            var(--sf-color-text--on-danger);
    * }
