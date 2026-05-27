@@ -837,7 +837,6 @@
     "is-warning"
   ],
   "unprefixed_classes": [
-    "focus-parent",
     "no-motion",
     "no-print",
     "print-color-exact",

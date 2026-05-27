@@ -98,7 +98,7 @@ decision tree to use when adding a new class.
    NO  → step 3
 
 3. Is it an a11y pattern or a11y utility?
-      (sr-only, focus-parent, clickable-parent…)
+      (sr-only, sf-focus-parent, clickable-parent…)
    YES → core/accessibility.css          (slashed.accessibility)
    NO  → step 4
 
@@ -213,7 +213,7 @@ Transition tokens live in `core/tokens.css`:
 
 `@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
 
-**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.focus-parent` (relocated from `slashed.states` in v0.3.0) and `.sf-clickable-parent` (added in v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
+**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` (v0.3.0) and `.sf-clickable-parent` (v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
 
 **slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
 
@@ -283,7 +283,6 @@ so the deviation from the prefix rule is explicit, not accidental.
 | `.visually-hidden` | slashed.accessibility | WHATWG synonym of `.sr-only` — shipped for teams that prefer the newer name. |
 | `.sr-only-focusable` | slashed.accessibility | Companion to `.sr-only` — same naming lineage. |
 | `.skip-link` | slashed.accessibility | Standard a11y pattern name. |
-| `.focus-parent` | slashed.accessibility | A11y pattern. Alias of `.sf-focus-parent` (canonical prefixed name added in 0.4). |
 | `.no-motion` | slashed.accessibility | User-preference toggle; mirrors the `.no-print` pattern. |
 | `.no-print` | slashed.print | Self-describing print utility; `.print-*` namespace is unique enough. |
 | `.print-only` | slashed.print | Same namespace. |
