@@ -8,3 +8,4 @@ playwright-report/
 # Built source maps are large and not needed in shipped releases.
 # Re-build locally via `npm run build` in admin-app/ to regenerate.
 integrations/bricks/assets/admin-app/*.map
+integrations/bricks/assets/editor-app/*.map
