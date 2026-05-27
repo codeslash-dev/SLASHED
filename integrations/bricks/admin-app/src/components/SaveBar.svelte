@@ -9,6 +9,7 @@
    */
   import { tokens, ui, meta, clearSection } from '../lib/stores.svelte.js';
   import * as api from '../lib/api.js';
+  import { generateExportCSS, hasOverrides } from '../lib/export.js';
 
   /**
    * Persist the active tab's tokens via the REST controller. Replaces
@@ -63,6 +64,28 @@
     }
   }
 
+  /**
+   * Export the current token overrides as a downloadable CSS file.
+   * Builds the CSS string via generateExportCSS, creates a Blob,
+   * and triggers a browser download as slashed-custom.css.
+   */
+  function downloadCSS() {
+    const css = generateExportCSS(tokens);
+    if (!css) return;
+    const blob = new Blob([css], { type: 'text/css' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'slashed-custom.css';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /** Whether there are any non-empty overrides to export. */
+  const canExport = $derived(hasOverrides(tokens));
+
   // "Saved" pill auto-fades after 2 seconds.
   let showSaved = $state(false);
   $effect(() => {
@@ -91,6 +114,9 @@
   <div class="bar__actions">
     <button type="button" class="bar__reset" onclick={reset} disabled={ui.saving}>
       Reset section
+    </button>
+    <button type="button" class="bar__export" onclick={downloadCSS} disabled={!canExport}>
+      Export CSS
     </button>
     <button
       type="button"
@@ -137,6 +163,19 @@
     color: #2271b1;
     cursor: pointer;
     font-size: 13px;
+  }
+  .bar__export {
+    padding: 6px 14px;
+    border-radius: 3px;
+    border: 1px solid #50575e;
+    background: white;
+    color: #50575e;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .bar__export:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   .bar__save {
     background: #2271b1;
