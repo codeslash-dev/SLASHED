@@ -53,7 +53,6 @@
      · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
      · text-on-color (--sf-color-text--on-*)
      · code colors (--sf-color-code-bg, --sf-color-code-text)
-     · brand hover (--sf-color-{primary,secondary,tertiary,action,neutral}--hover)
      · status triplets (--sf-color-{success,...,danger}-{subtle,strong,muted})
      · gradients (--sf-gradient-*)
      · shadows (--sf-shadow-{none,xs,s,m,l,xl,2xl,inner})
@@ -361,17 +360,6 @@
     --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
     --sf-color-bg--disabled: var(--sf-color-well);
     --sf-color-code-bg:      var(--sf-color-well);
-
-    /* ----------------------------------------------------------
-       Brand hover — darkened variant for interactive elements.
-       Used by forms.css buttons; available for consumer BEM.
-       ---------------------------------------------------------- */
-    --sf-color-primary--hover:   oklch(from var(--sf-color-primary)   calc(l - 0.05) c h);
-    --sf-color-secondary--hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);
-    --sf-color-tertiary--hover:  oklch(from var(--sf-color-tertiary)  calc(l - 0.05) c h);
-    --sf-color-action--hover:    oklch(from var(--sf-color-action)    calc(l - 0.05) c h);
-    --sf-color-neutral--hover:   oklch(from var(--sf-color-neutral)   calc(l - 0.05) c h);
-
 
     /* ----------------------------------------------------------
        Selection & backdrop
