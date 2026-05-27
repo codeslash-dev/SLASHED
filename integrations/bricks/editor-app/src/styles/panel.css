@@ -90,6 +90,21 @@
 .rebemer-field select:focus,
 .rebemer-field input:focus { outline: 1px solid var(--rebemer-accent); }
 
+/* Notice strip — currently used for the migrate-mode summary, but
+   structured so future preflight warnings can reuse it. */
+.rebemer-panel__notice {
+  margin: 0;
+  padding: 8px 14px;
+  background: rgba(226,185,59,.08);
+  border-bottom: 1px solid var(--rebemer-border);
+  color: var(--rebemer-fg);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.rebemer-panel__notice--warn { background: rgba(226,185,59,.16); }
+.rebemer-panel__notice strong { color: var(--rebemer-accent); font-weight: 600; }
+.rebemer-panel__notice-skip { display: block; margin-top: 2px; color: var(--rebemer-fg-muted); }
+
 /* Body / Rows */
 .rebemer-panel__body { flex: 1; overflow-y: auto; padding: 8px 14px; display: flex; flex-direction: column; gap: 6px; }
 
@@ -112,6 +127,15 @@
 .rebemer-row__meta { display: flex; gap: 6px; align-items: baseline; min-width: 0; }
 .rebemer-row__label { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rebemer-row__type { font-size: 9px; color: var(--rebemer-fg-muted); text-transform: uppercase; }
+.rebemer-row__hint {
+  font-size: 9px;
+  color: var(--rebemer-accent);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  background: rgba(226,185,59,.12);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
 
 .rebemer-row__inputs { grid-column: 1 / -1; display: flex; gap: 6px; align-items: center; }
 .rebemer-row__name {
@@ -125,7 +149,67 @@
 }
 .rebemer-row__prefix { padding: 4px 6px; background: rgba(0,0,0,.25); color: var(--rebemer-fg-muted); font-size: 11px; border-right: 1px solid var(--rebemer-input-border); white-space: nowrap; }
 .rebemer-row__name input { background: transparent; border: 0; outline: 0; color: var(--rebemer-fg); font: inherit; padding: 4px 6px; flex: 1; min-width: 0; }
+/* Suggested rows — the user hasn't touched the input yet. Italic +
+   muted color so they read as "we filled this in, you might want to
+   change it" rather than authoritative input. */
+.rebemer-row--suggested .rebemer-row__name input:not(:focus) {
+  color: var(--rebemer-fg-muted);
+  font-style: italic;
+}
 .rebemer-row__modifier { background: var(--rebemer-input-bg); border: 1px solid var(--rebemer-input-border); border-radius: var(--rebemer-radius); color: var(--rebemer-fg); font: inherit; padding: 4px 6px; width: 90px; }
+
+/* Per-row recommendation hint (use-existing-class affordance). */
+.rebemer-row__recommend {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 6px 8px;
+  background: rgba(74,222,128,.08);
+  border-left: 2px solid var(--rebemer-success);
+  border-radius: 2px;
+  color: var(--rebemer-fg);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.rebemer-row__recommend code {
+  background: rgba(0,0,0,.3);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--rebemer-accent);
+}
+
+/* Migrate-mode chip strip. */
+.rebemer-row__chips {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0 0;
+  font-size: 10px;
+}
+.rebemer-row__chips-label,
+.rebemer-row__chips-empty,
+.rebemer-row__chips-skip {
+  color: var(--rebemer-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 9px;
+}
+.rebemer-row__chips-skip {
+  margin-left: auto;
+  cursor: help;
+  color: #c8a038;
+}
+.rebemer-chip {
+  font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: rgba(0,0,0,.3);
+  border: 1px solid var(--rebemer-input-border);
+  color: var(--rebemer-fg);
+  padding: 2px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
 
 /* Footer */
 .rebemer-panel__footer { display: flex; justify-content: flex-end; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--rebemer-border); }

@@ -50,11 +50,24 @@ export function findElement(id) {
   return null;
 }
 
-/** Build flat subtree array: [{id, depth, label, settings}, ...] */
+/**
+ * Build flat subtree array: [{id, depth, label, name, settings}, ...].
+ *
+ * `name` here is the Bricks element type slug (e.g. 'heading', 'image',
+ * 'section') — the same field the Bricks builder uses to look up
+ * which element class to instantiate. We expose it so the editor app
+ * can pre-fill row names from element type via `lib/element-types.js`.
+ */
 export function getSubtree(rootId) {
   const root = findElement(rootId);
   if (!root) return [];
-  const out = [{ id: root.id, depth: 0, label: root.label, settings: root.settings }];
+  const out = [{
+    id: root.id,
+    depth: 0,
+    label: root.label,
+    name: root.name,
+    settings: root.settings,
+  }];
   walk(root, 1, out);
   return out;
 }
@@ -64,7 +77,13 @@ function walk(node, depth, out) {
   for (const childId of node.children) {
     const child = findElement(childId);
     if (!child) continue;
-    out.push({ id: child.id, depth, label: child.label, settings: child.settings });
+    out.push({
+      id: child.id,
+      depth,
+      label: child.label,
+      name: child.name,
+      settings: child.settings,
+    });
     walk(child, depth + 1, out);
   }
 }

@@ -3,8 +3,40 @@
 > A subtree-scoped BEM class manager for the Bricks Builder structure
 > panel, shipped as part of **SLASHED for Bricks**.
 
-Status: **v1 design, pre-implementation**.
+Status: **v1 partial implementation in progress** — see §0 Implementation status.
 License: MIT, same as the host plugin.
+
+---
+
+## 0. Implementation status
+
+This document is *both* the v1 design and the running implementation
+log. Section bodies describe the full v1 design; this table tracks
+what has actually shipped in code so far. Update on every reBEMer PR.
+
+| Capability | Status | Where |
+|---|---|---|
+| Badge injection in structure panel (§6.1) | ✅ shipped | `editor-app/src/main.js` + `BemBadge.svelte` |
+| Panel mount + close (§6.2) | ✅ shipped | `editor-app/src/main.js` + `BemPanel.svelte` |
+| Add / Rename / Replace / Add Modifier modes (§6.3) | ✅ shipped | `editor-app/src/lib/apply.js` |
+| Migrate ID styles mode (§6.3, §9) | ✅ shipped | `apply.js` + `lib/migrate-keys.js` allowlist |
+| Migrate-mode preview chips (§6.3) | ✅ shipped | `Row.svelte` chip strip |
+| Element-aware row pre-fill (§9.3) | ✅ shipped | `lib/element-types.js` consumed by `BemPanel` |
+| Sibling auto-numbering (§9.2) | ✅ shipped | `applyAutoNumbering()` in `apply.js` |
+| Per-row skip toggle (§6.2, §9) | ✅ shipped | `Row.svelte` include checkbox |
+| `suggestedFrom` provenance tracking (§9) | ✅ shipped | flipped to `'user'` in `Row.svelte` `oninput` |
+| "Use existing class" client-side hint (§11.3 `recommendedAction: "attach"`) | ✅ shipped (client snapshot only) | `Row.svelte` derived `existingClassMatch` |
+| Unused-class read-only report (§20) | ✅ shipped | `GET /rebemer/unused`, `class-rebemer-rest.php` |
+| BEM grammar policy (§8) | ⚠️ partial | basic `validateName()` exists; no policy hydration yet |
+| Reserved-name guard (§13) | ⚠️ partial | CSS keywords blocked; SLASHED utility list not yet wired |
+| Cross-page reference-count preflight (§11.1–11.3) | ❌ spec-only | needs server endpoint + client preflight call |
+| Snapshot/rollback transactional apply (§10) | ❌ spec-only | current apply is best-effort, no snapshot |
+| Real undo via in-panel ring buffer (§15) | ❌ spec-only | no undo yet |
+| `nameCollisions.recommendedAction: "rename" / "replace"` (§11.3) | ❌ spec-only | needs preflight; `"attach"` is client-side via match-by-name |
+| i18n string table (§16) | ❌ spec-only | strings are hardcoded English |
+
+The "spec-only" rows describe the destination v1 design; their bodies
+in §10, §11, §13, §15, §16 are accurate. They land in follow-up PRs.
 
 ---
 
