@@ -5,8 +5,8 @@
     "color-function-notation": "modern",
     "alpha-value-notation": "number",
 
-    "custom-property-pattern": ["^sf-", {
-      "message": "Custom properties must start with --sf-"
+    "custom-property-pattern": ["^sf-[a-z][a-z0-9]*(-[a-z0-9]+)*(--[a-z0-9][a-z0-9]*(-[a-z0-9]+)*)?$", {
+      "message": "Custom properties must use --sf-<role>-<variant> (single dash = shade) or --sf-<role>--<context> (double dash = application slot). At most one double-dash separator allowed."
     }],
     "keyframes-name-pattern": ["^sf-", {
       "message": "Keyframe names must start with sf-"

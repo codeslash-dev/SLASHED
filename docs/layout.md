@@ -33,6 +33,9 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
 | `.sf-divider` | token-driven separator; `--vertical` | `--sf-divider-*` |
+| `.sf-gap` | injects gap into any existing flex/grid container without imposing display; `--xs … --2xl` | `--sf-gap-size` |
+| `.sf-equal` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal-cols`, `--sf-equal-gap` |
+| `.sf-section--collapse` | adjacent sections share padding 50/50 across the boundary | `--sf-section-pad` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --2xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
 
@@ -45,6 +48,7 @@ Every size-aware primitive supports the canonical range
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|
 | `.sf-stack`   | block-axis gap         | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-cluster` | inline-axis gap        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-gap`     | layout-agnostic gap    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-grid`    | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

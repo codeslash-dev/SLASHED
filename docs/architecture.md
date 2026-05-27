@@ -254,8 +254,8 @@ Transition tokens live in `core/tokens.css`:
 - **Canonical-source aliases.** A few public tokens have two names by design —
   `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
   `--sf-section-pad`→`--sf-section-pad--m`. Override the canonical (right-hand)
-  token. Aside from these, the alias graph is ≤2 hops with no
-  duplicates/dangling/cycles.
+  token. Aside from these, the alias graph is ≤3 hops (per-primitive →
+  layout-system → canonical source) with no duplicates/dangling/cycles.
 
 ### BEM consumer-API tokens
 

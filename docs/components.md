@@ -16,7 +16,7 @@ the names listed below will be renamed.
 
 | # | Class | Modifiers | Slots / children |
 |---|---|---|---|
-| 1 | `.sf-button` | `--primary`, `--secondary`, `--ghost`, `--destructive`, `--s`, `--m`, `--l` | — |
+| 1 | `.sf-button` | `--primary`, `--secondary`, `--ghost`, `--danger`, `--s`, `--m`, `--l` | — |
 | 2 | `.sf-card` | `--bordered`, `--elevated`, `--interactive` | `__header`, `__body`, `__footer` |
 | 3 | `.sf-badge` | `--success`, `--warning`, `--error`, `--info`, `--neutral` | — |
 | 4 | `.sf-tag` | `--clickable`, `--removable`, `--s`, `--m` | — |

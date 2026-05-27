@@ -69,6 +69,55 @@ you have two options for v0.3.0:
 
 ---
 
+## SLASHED 0.3.0 → pre-freeze (Unreleased)
+
+The pre-freeze cleanup simplifies the public API surface before the
+token-API freeze. These changes are additive or removal-only — no
+renamed tokens.
+
+### Tokens removed
+
+| Token | Replacement |
+|---|---|
+| `--sf-ratio-photo` | Use `--sf-ratio-3-2` (identical value) or `--sf-ratio-4-3` |
+| `--sf-sidebar-width-default` | Override `--sf-sidebar-width` directly (now declared as `18rem`) |
+| `--sf-grid-min-default` | Override `--sf-grid-min` directly (now declared as `16rem`) |
+| `--sf-color-primary--hover` | Use `--sf-color-primary-hover` from `optional/tokens.palette.css` |
+| `--sf-color-secondary--hover` | Use `--sf-color-secondary-hover` from `optional/tokens.palette.css` |
+| `--sf-color-tertiary--hover` | Use `--sf-color-tertiary-hover` from `optional/tokens.palette.css` |
+| `--sf-color-action--hover` | Use `--sf-color-action-hover` from `optional/tokens.palette.css` |
+| `--sf-color-neutral--hover` | Use `--sf-color-neutral-hover` from `optional/tokens.palette.css` |
+
+**Note:** The single-dash brand hover variants (`--sf-color-{role}-hover`)
+live exclusively in `optional/tokens.palette.css` (shipped in the
+`optimal`+ bundles). If you relied on the double-dash hover tokens in
+the `essential` bundle, you must switch to the `optimal` bundle or
+declare your own hover colour.
+
+### Class modifiers removed
+
+| Removed | Replacement |
+|---|---|
+| `.sf-stack--2xs` | `style="--sf-stack-gap: var(--sf-space-2xs)"` |
+| `.sf-stack--3xl` | `style="--sf-stack-gap: var(--sf-space-3xl)"` |
+| `.sf-cluster--2xs` | `style="--sf-cluster-gap: var(--sf-space-2xs)"` |
+
+The underlying space tokens (`--sf-space-2xs`, `--sf-space-3xl`,
+`--sf-space-4xl`) remain part of the public API.
+
+### Class modifiers added
+
+- `.sf-cluster--2xl` — gap at `--sf-space-2xl`
+- `.sf-grid--2xl` — min column width `28rem` (new token `--sf-grid-min-2xl`)
+- `.sf-section--xs` — padding at `--sf-section-pad--xs` (new token)
+- `.sf-section--2xl` — padding at `--sf-section-pad--2xl` (new token)
+- `.sf-icon--2xl` — icon size at `4em` (new token `--sf-icon-2xl`)
+
+**Result:** every size-aware primitive now supports the canonical
+`--xs --s --m --l --xl --2xl` range.
+
+---
+
 ## From other frameworks
 
 SLASHED is **token + BEM**, not utility-first and not classless — so
