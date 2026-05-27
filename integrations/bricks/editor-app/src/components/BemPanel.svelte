@@ -37,6 +37,8 @@
     }
   }
 
+  let closeTimer = null;
+
   function apply() {
     // Validate block name
     const block = slugify(rows[0]?.name ?? '');
@@ -51,9 +53,15 @@
       toast = { kind: 'error', message: result.error };
     } else {
       toast = { kind: 'success', message: `Applied to ${result.count} element${result.count !== 1 ? 's' : ''}.` };
-      setTimeout(() => onClose?.(), 800);
+      if (closeTimer) clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => onClose?.(), 800);
     }
   }
+
+  $effect(() => {
+    // Cleanup: clear the auto-close timer if the component unmounts
+    return () => { if (closeTimer) clearTimeout(closeTimer); };
+  });
 </script>
 
 <svelte:window onkeydown={handleKeydown} />

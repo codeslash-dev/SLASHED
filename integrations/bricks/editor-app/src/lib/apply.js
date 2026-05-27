@@ -31,6 +31,7 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
   const globalClasses = api.getGlobalClasses();
   let count = 0;
 
+  try {
   for (const row of rows) {
     if (!row.include) continue;
 
@@ -97,6 +98,13 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
     }
 
     count++;
+  }
+  } catch (err) {
+    return { ok: false, error: `Operation failed mid-apply: ${err.message}` };
+  }
+
+  if (count === 0) {
+    return { ok: false, error: 'No elements were modified. The subtree may have changed.' };
   }
 
   return { ok: true, count };

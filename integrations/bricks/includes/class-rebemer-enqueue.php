@@ -49,6 +49,8 @@ class Slashed_Bricks_ReBEMer_Enqueue {
 		if ( self::SCRIPT_HANDLE !== $handle ) {
 			return $tag;
 		}
-		return preg_replace( '/<script(\b[^>]*)>/', '<script type="module"$1>', $tag, 1 );
+		// Strip any existing type attribute to avoid duplicates on WP < 6.3.
+		$tag = preg_replace( '/\stype=["\'][^"\']*["\']/', '', $tag, 1 );
+		return str_replace( '<script ', '<script type="module" ', $tag );
 	}
 }

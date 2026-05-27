@@ -3,7 +3,7 @@
  * Scoped to .rebemer-* so nothing leaks into Bricks UI.
  */
 
-:root {
+#slashed-rebemer-host {
   --rebemer-bg: #161a1d;
   --rebemer-fg: #e1e1e1;
   --rebemer-fg-muted: #8a8d95;
