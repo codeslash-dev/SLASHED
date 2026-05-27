@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**619 tokens.** Every `--sf-*` custom property and its default value. See
+**622 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / INTERNAL / DEPRECATED
 contract and naming conventions, and [theming.md](theming.md) for the
 rebrand workflow.
@@ -388,7 +388,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-45 tokens.
+48 tokens.
 
 | Token | Default |
 |---|---|
@@ -411,7 +411,10 @@ rebrand workflow.
 | `--sf-content-width` | `var(--sf-container-default)` |
 | `--sf-cover-min-height` | `100dvh` |
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
+| `--sf-equal-cols` | `2` |
+| `--sf-equal-gap` | `var(--sf-space-gap)` |
 | `--sf-frame-ratio` | `16 / 9` |
+| `--sf-gap-size` | `var(--sf-space-gap)` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |
 | `--sf-grid-min` | `16rem` |
 | `--sf-grid-min-2xl` | `28rem` |

@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**144 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**156 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-102 classes.
+114 classes.
 
 | Class |
 |---|
@@ -47,6 +47,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-cover__center` |
 | `.sf-divider` |
 | `.sf-divider--vertical` |
+| `.sf-equal` |
+| `.sf-equal--2` |
+| `.sf-equal--3` |
+| `.sf-equal--4` |
+| `.sf-equal--6` |
 | `.sf-frame` |
 | `.sf-frame--3-2` |
 | `.sf-frame--4-3` |
@@ -56,6 +61,13 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-frame--square` |
 | `.sf-frame--video` |
 | `.sf-full-bleed` |
+| `.sf-gap` |
+| `.sf-gap--2xl` |
+| `.sf-gap--l` |
+| `.sf-gap--m` |
+| `.sf-gap--s` |
+| `.sf-gap--xl` |
+| `.sf-gap--xs` |
 | `.sf-grid` |
 | `.sf-grid--2xl` |
 | `.sf-grid--dense` |
