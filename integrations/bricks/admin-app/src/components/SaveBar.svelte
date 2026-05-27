@@ -9,6 +9,7 @@
    */
   import { tokens, ui, meta, clearSection } from '../lib/stores.svelte.js';
   import * as api from '../lib/api.js';
+  import { generateExportCSS, hasOverrides } from '../lib/export.js';
 
   /**
    * Persist the active tab's tokens via the REST controller. Replaces
@@ -72,6 +73,27 @@
       return () => clearTimeout(t);
     }
   });
+
+  /** Whether any overrides exist (enables the Export button). */
+  const canExport = $derived(hasOverrides(tokens));
+
+  /**
+   * Generate CSS from current token overrides and trigger a file download.
+   * Creates a Blob URL, clicks a temporary anchor element, then revokes.
+   */
+  function downloadCSS() {
+    const css = generateExportCSS(tokens);
+    if (!css) return;
+    const blob = new Blob([css], { type: 'text/css' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'slashed-custom.css';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 </script>
 
 <div class="bar" class:dirty={ui.dirty}>
@@ -91,6 +113,9 @@
   <div class="bar__actions">
     <button type="button" class="bar__reset" onclick={reset} disabled={ui.saving}>
       Reset section
+    </button>
+    <button type="button" class="bar__export" onclick={downloadCSS} disabled={!canExport}>
+      Export CSS
     </button>
     <button
       type="button"
@@ -149,6 +174,19 @@
   .bar__reset {
     border-color: #d63638;
     color: #d63638;
+  }
+  .bar__export {
+    padding: 6px 14px;
+    border-radius: 3px;
+    border: 1px solid #2271b1;
+    background: white;
+    color: #2271b1;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .bar__export:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   /* Collapse the sidebar offset on small screens (folded WP admin). */
