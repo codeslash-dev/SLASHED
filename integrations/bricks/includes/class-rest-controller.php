@@ -42,15 +42,17 @@ class Slashed_Bricks_REST_Controller {
 	const NAMESPACE = 'slashed-bricks/v1';
 
 	/**
-	 * Constructor — registers the REST routes on rest_api_init.
+	 * Constructor — intentionally empty.
 	 *
-	 * Now stateless: previous revisions held a reference to
-	 * `Slashed_Bricks_Admin_Page` to share its private sanitizer; that
-	 * dependency is gone now that sanitization lives in the dedicated
-	 * `Slashed_Bricks_Token_Sanitizer` class.
+	 * Route registration is handled by the caller
+	 * (slashed_bricks_rest_routes_init in slashed-bricks.php) which
+	 * invokes register_routes() directly inside a rest_api_init hook.
+	 * This keeps the class stateless and avoids redundant add_action()
+	 * calls that would fire too late when the controller is instantiated
+	 * during the already-running rest_api_init action.
 	 */
 	public function __construct() {
-		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
+		// No-op. Routes are registered externally via rest_api_init hook.
 	}
 
 	/**
