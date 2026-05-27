@@ -50,6 +50,9 @@ your own components:
 | `--sf-duration-slow` | `400ms` |
 | `--sf-duration-slower` | `600ms` |
 
+> **Note:** All non-zero durations are multiplied by `--sf-motion-scale`
+> (default `1`). The values above assume the default scale.
+
 ## Easing tokens
 
 | Token | Value |
@@ -125,6 +128,8 @@ Use the delay tokens to stagger children:
 | `--sf-animation-delay-3` | `225ms` |
 | `--sf-animation-delay-4` | `300ms` |
 | `--sf-animation-delay-5` | `375ms` |
+
+> Delay values are also scaled by `--sf-motion-scale`.
 
 ## Motion scale
 
