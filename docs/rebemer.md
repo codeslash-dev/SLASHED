@@ -176,7 +176,7 @@ chip strip listing the element-settings keys (and a hover tooltip with
 their values) that will be lifted up into the new class. Drawn from
 `Operation.migrateFrom.keys`, this lets the user sanity-check the
 allowlisted keys before pressing Apply — and surfaces immediately
-when a setting *would* be migrated but is on the allowlist denylist
+when a setting *would* be migrated but is not on the allowlist
 (see §12 threat-model entry "Bricks introducing a new style key").
 
 ### 6.4 Validation, accessibility, keyboard
