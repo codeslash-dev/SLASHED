@@ -50,6 +50,12 @@ SLASHED-shaped equivalent — free, scoped, and safer.
    only in the Bricks builder context, gated by capability.
 8. **i18n + a11y from day one** — every string translatable, every
    control a real `<button>` with ARIA, focus trap, keyboard ops.
+9. **Element-aware suggestions** — every descendant row pre-fills its
+   name from the Bricks element type (heading → `__heading`, image →
+   `__image`, repeated divs → `__item`); siblings of the same role are
+   auto-numbered in the plan to avoid in-plan collisions; every row
+   carries a `skip` toggle so users can exclude one descendant without
+   breaking the atomic apply.
 
 ## 4. Non-goals (v1)
 
@@ -127,10 +133,13 @@ The badge:
 │  · Replace   · Add modifier                     │
 │  · Migrate ID styles                            │
 ├─────────────────────────────────────────────────┤
-│ ☐ block-name                          [block]   │  rows
-│ │   ☐ block__element-1     [--mod]    [elem]   │
-│ │   ☐ block__element-2     [--mod]    [elem]   │
-│ │      ☐ block__element-3  [--mod]    [elem]   │
+│ ☑ block-name                          [block]   │  rows
+│ │   ☑ block__element-1     [--mod]    [elem]   │
+│ │   ☐ block__element-2     [--mod]    [elem]   │  ← skipped
+│ │      ☑ block__element-3  [--mod]    [elem]   │
+├─────────────────────────────────────────────────┤
+│ Migrate keys: padding · radius · background     │  preview chips
+│                                  (migrate mode) │  (only in §6.3 migrate)
 ├─────────────────────────────────────────────────┤
 │ ⚠ 2 classes will remain on 5 elements outside  │  preflight strip
 │   this subtree. [Show details]                  │  (only if needed)
@@ -138,6 +147,13 @@ The badge:
 │ Cancel                                  [Apply] │  footer
 └─────────────────────────────────────────────────┘
 ```
+
+The leftmost `☑` / `☐` per row is the **include / skip toggle**.
+Unchecked rows are kept in the plan for transparency (so the user
+sees the full subtree they opened the panel on) but produce no
+mutations at apply time and are excluded from the preflight count.
+Toggling skip never affects the plan's atomicity — apply remains a
+single transaction over the still-included operations.
 
 
 ### 6.3 Operation modes
@@ -152,6 +168,16 @@ The badge:
 
 reBEMer **never** deletes a class globally. To remove a class entirely
 from the registry, use Bricks' Global Class Manager.
+
+#### Migrate-mode preview chips
+
+When the operation mode is `migrate`, each migrate row shows a small
+chip strip listing the element-settings keys (and a hover tooltip with
+their values) that will be lifted up into the new class. Drawn from
+`Operation.migrateFrom.keys`, this lets the user sanity-check the
+allowlisted keys before pressing Apply — and surfaces immediately
+when a setting *would* be migrated but is not on the allowlist
+(see §12 threat-model entry "Bricks introducing a new style key").
 
 ### 6.4 Validation, accessibility, keyboard
 
@@ -192,6 +218,7 @@ integrations/bricks/
 │       │   ├── bricks-api.js           # ONE seam to __vue_app__
 │       │   ├── slugify.js              # pure
 │       │   ├── bem.js                  # grammar validate + name builder
+│       │   ├── element-types.js        # element-type → BEM-name suggester
 │       │   ├── plan.js                 # buildPlan + applyPlan + snapshot/rollback
 │       │   ├── preflight.js            # POST to /rebemer/preflight, format result
 │       │   ├── policy.js               # reads window.slashedReBEMer.policy
@@ -212,6 +239,7 @@ integrations/bricks/
 │       └── __tests__/
 │           ├── slugify.test.js
 │           ├── bem.test.js
+│           ├── element-types.test.js
 │           ├── plan.test.js
 │           ├── policy.test.js
 │           └── ids.test.js
@@ -233,6 +261,7 @@ integrations/bricks/
 | `bricks-api.js` | The **only** module allowed to touch `__vue_app__` or any Bricks internal. Feature-detects the Vue app, exposes `getState()`, `findElement(id)`, `getDescendants(id)`, `getGlobalClasses()`, `upsertGlobalClass(entry)`, `setElementClasses(id, classIds)`, `setElementLabel(id, label)`, `mutateElementSettings(id, fn)`, `subscribe(fn)`. Falls back to a recorded no-op API in test/dev mode. | No (impure by design — wraps mutations). |
 | `slugify.js` | `slugify(input, policy) → string` and `slugifyOrThrow(...)`. Honors `allowUnicode` policy flag; otherwise ASCII-only. | Yes |
 | `bem.js` | `validateName(name, policy) → {ok, code, message}`, `buildBlockName(label, policy)`, `buildElementName(block, label, policy)`, `buildModifierName(base, modifier, policy)`. | Yes |
+| `element-types.js` | `suggestElementName(elementType, fallback, policy) → string`. Maps Bricks element types to BEM element labels (`heading` → `heading`, `text-basic` → `text`, `image` → `image`, `icon` → `icon`, `button` → `button`, `nav-nested` → `nav`, default → `fallback` or `item`). The mapping is filterable from PHP via `slashed_bricks/rebemer_element_type_map`. Used by `buildPlan` to pre-fill row names so the panel is usable on first open without typing every name. | Yes |
 | `plan.js` | `buildPlan({rootId, descendants, mode, inputs, policy, existingClasses}) → Plan`. `applyPlan(plan, bricksApi) → ApplyResult`. Plan execution is wrapped in snapshot/restore. Pure-builder + impure-applier separation. | `buildPlan`: yes. `applyPlan`: no. |
 | `preflight.js` | Fetch `POST /rebemer/preflight` with the plan, format the response into UI-ready warnings. | No (network) but trivially mockable. |
 | `policy.js` | `readPolicy() → Policy`, `defaultPolicy() → Policy`. Reads from `window.slashedReBEMer.policy`, validates shape, fills defaults. | Yes |
@@ -361,6 +390,17 @@ filterable via `slashed_bricks/rebemer_policy`, and serialized into
  *           Set only on 'migrate' ops; lists the element-settings keys
  *           that will be moved into the new class' settings.
  * @property {string|null} newLabel  if labelSync is on, the new label
+ * @property {boolean} skip          when true, the operation is recorded
+ *                                   in the plan for transparency but
+ *                                   applyPlan produces no mutations for
+ *                                   this row; preflight ignores its
+ *                                   old/new class ids; auto-numbering
+ *                                   in §9.2 excludes it from the tally.
+ * @property {string} suggestedFrom  'user' | 'element-type' | 'auto-number'
+ *                                   — provenance tag for the row's name,
+ *                                   used by the UI to show a "suggested"
+ *                                   styling and by tests to assert which
+ *                                   path produced the name.
  */
 
 /**
@@ -384,6 +424,40 @@ mutates nothing. It is unit-tested with snapshot fixtures.
 
 The result is fully serializable JSON, suitable for sending to the
 preflight endpoint without any reshaping.
+
+### 9.2 Sibling auto-numbering
+
+When two or more operations within a single plan would produce the
+same `finalClassName` (e.g. two `image` rows under one block both
+suggesting `card__image`), `buildPlan` appends `-1`, `-2`, … in
+document order to disambiguate. The numbering is **plan-local**:
+
+- Skipped operations (`skip:true`) are excluded from the collision
+  tally — a skipped row never claims a number.
+- Collisions *against existing global classes* are still resolved by
+  `upsert.preferExisting` (§9, ClassUpsert), independently of the
+  in-plan numbering. The two mechanisms compose: the in-plan number
+  is appended first, then the resulting name is matched against
+  existing globals.
+- A user-typed name (with `suggestedFrom === 'user'`) is treated as
+  authoritative and never auto-numbered. If two user-typed names
+  collide, that's a validation error (`code: 'in_plan_duplicate'`)
+  reported under the offending row, not silently mangled.
+
+### 9.3 Element-type pre-fill
+
+When `buildPlan` is called for an `add` or `migrate` plan and a
+descendant row has no user input yet, `element-types.suggestElementName`
+provides the initial label. The provenance is recorded on the
+operation (`suggestedFrom: 'element-type'`) so:
+
+- The UI can render the input as "suggested" (lighter weight, italic
+  placeholder) rather than as the user's own typing.
+- Re-running `buildPlan` after the user explicitly edits a row
+  preserves the user's value (because `suggestedFrom` becomes
+  `'user'`).
+- Auto-numbering only competes among `'element-type'` and
+  `'auto-number'` rows (see §9.2).
 
 
 ## 10. Transactional apply (snapshot + rollback)
@@ -466,13 +540,37 @@ Permission: `current_user_can('bricks_full_access') || current_user_can('manage_
     "xyz2": { "name": "wrap",  "outsideSubtreeOnPage": 0, "otherPosts": 0 }
   },
   "nameCollisions": [
-    { "finalClassName": "card__title", "existingClassId": "abc9", "match": "byName" }
+    {
+      "finalClassName": "card__title",
+      "existingClassId": "abc9",
+      "match": "byName",
+      "recommendedAction": "attach"
+    }
   ],
   "reservedHits": [
     { "finalClassName": "sf-stack", "reason": "reservedExact" }
   ]
 }
 ```
+
+The `recommendedAction` field on each `nameCollisions` entry is one
+of:
+
+- `"attach"` — the existing class with this name is already on the
+  target element (or is shape-compatible and the user is in `add`
+  mode); the row should auto-prefer it via `upsert.preferExisting`
+  rather than create a duplicate. The UI surfaces a one-click "use
+  existing" affordance per row.
+- `"rename"` — the existing class is *not* on this element but its
+  settings shape conflicts with what the operation would create; the
+  user should pick a different name. The UI shows an inline warning
+  and blocks apply for that row.
+- `"replace"` — destructive: applying would detach the old class from
+  this subtree while leaving the existing global. Allowed, but the
+  destructive-confirm modal is required (§6.4 destructive flow).
+
+The recommendation is advisory: the client decides what to do with
+it. The server never mutates state, only reports.
 
 
 ### 11.4 Server-side implementation notes
@@ -693,6 +791,15 @@ spec is out of scope for v1 but the test list is captured in
 - **Bricks history hook** if and when Bricks exposes a public seam.
 - **Telemetry-free crash reports** that copy a redacted plan to
   clipboard for users to attach to bug reports.
+- **Unused-class read-only report** (`GET /rebemer/unused`): scans
+  `bricks_global_classes` and the post-meta where Bricks elements live,
+  returns the list of class ids whose `outsideSubtreeOnPage + otherPosts`
+  reference count is zero across the site. Read-only, never mutates the
+  registry — deletion stays the user's job in Bricks' Global Class
+  Manager (Goal #6 stands). The endpoint shares its reference-counting
+  helper (`Slashed_Bricks_ReBEMer_REST::count_references()`) with the
+  preflight endpoint, so adding it is mostly UI work. Same caps and
+  capability check as preflight.
 
 ## 21. Glossary of acronyms used
 

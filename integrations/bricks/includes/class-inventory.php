@@ -134,7 +134,13 @@ class Slashed_Bricks_Inventory {
 				? array_filter( $inventory[ $key ], 'is_string' )
 				: array();
 			$list = array_values( array_unique( $list ) );
-			sort( $list );
+			// Natural sort so numeric suffixes order as humans expect: a
+			// palette swatch list reads -50, -100, -200, ..., -500, ...
+			// rather than the lexicographic -100, -200, ..., -50, -500.
+			// This is the order Bricks ultimately renders in the Color
+			// Manager dropdown, since Slashed_Bricks_Colors iterates
+			// inventory in the order returned here.
+			sort( $list, SORT_NATURAL | SORT_FLAG_CASE );
 			$base[ $key ] = $list;
 		}
 		return $base;
@@ -282,7 +288,7 @@ class Slashed_Bricks_Inventory {
 		$ordered = array();
 		foreach ( self::category_order() as $cat ) {
 			if ( ! empty( $grouped[ $cat ] ) ) {
-				sort( $grouped[ $cat ] );
+				sort( $grouped[ $cat ], SORT_NATURAL | SORT_FLAG_CASE );
 				$ordered[ $cat ] = $grouped[ $cat ];
 			}
 		}
@@ -290,7 +296,7 @@ class Slashed_Bricks_Inventory {
 		// Append any uncategorized buckets at the end (defensive).
 		foreach ( $grouped as $cat => $list ) {
 			if ( ! isset( $ordered[ $cat ] ) ) {
-				sort( $list );
+				sort( $list, SORT_NATURAL | SORT_FLAG_CASE );
 				$ordered[ $cat ] = $list;
 			}
 		}

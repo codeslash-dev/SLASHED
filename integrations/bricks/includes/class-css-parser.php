@@ -90,7 +90,10 @@ class Slashed_Bricks_CSS_Parser {
 		}
 
 		$names = array_values( array_unique( $names ) );
-		sort( $names );
+		// Natural sort so numeric shade suffixes order as humans expect:
+		// --sf-color-primary-50 before -500, space-2 before space-10, etc.
+		// SORT_FLAG_CASE keeps alpha-suffix tokens (a5, a10, A20) consistent.
+		sort( $names, SORT_NATURAL | SORT_FLAG_CASE );
 		return $names;
 	}
 
@@ -112,7 +115,9 @@ class Slashed_Bricks_CSS_Parser {
 		}
 
 		$names = array_values( array_unique( $matches[1] ) );
-		sort( $names );
+		// Natural sort matches the variable order so .sf-stack-2 lands
+		// before .sf-stack-10, etc. See extract_declared_variables().
+		sort( $names, SORT_NATURAL | SORT_FLAG_CASE );
 		return $names;
 	}
 

@@ -41,6 +41,13 @@ function readFile(rel) {
   return fs.readFileSync(abs, 'utf8');
 }
 
+// Natural-order comparator so numeric suffixes order intuitively
+// (`primary-50` before `primary-500`, `space-2` before `space-10`).
+// Mirrors the PHP-side `sort($x, SORT_NATURAL | SORT_FLAG_CASE)` in
+// class-inventory.php / class-css-parser.php so the fallback inventory
+// matches what the live parser produces from CSS at runtime.
+const naturalCompare = (a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+
 function extractTokens() {
   const names = new Set();
   for (const rel of TOKEN_FILES) {
@@ -48,7 +55,7 @@ function extractTokens() {
     for (const m of css.matchAll(/@property\s+(--sf-[\w-]+)/g))  names.add(m[1]);
     for (const m of css.matchAll(/(--sf-[\w-]+)\s*:/g))          names.add(m[1]);
   }
-  return [...names].sort();
+  return [...names].sort(naturalCompare);
 }
 
 function extractClasses(prefix) {
@@ -58,7 +65,7 @@ function extractClasses(prefix) {
     const css = stripStrings(stripComments(readFile(rel)));
     for (const m of css.matchAll(re)) names.add(m[1]);
   }
-  return [...names].sort();
+  return [...names].sort(naturalCompare);
 }
 
 const variables = extractTokens();
