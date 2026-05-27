@@ -49,7 +49,7 @@
    PUBLIC API vs INTERNAL (token-API freeze contract)
    ─────────────────────────────────────────────────
    Tokens are classified into three stability tiers (PUBLIC,
-   PUBLIC-ADVANCED, INTERNAL) plus a lifecycle annotation (DEPRECATED).
+   PUBLIC-ADVANCED, INTERNAL).
    PUBLIC and PUBLIC-ADVANCED share the same SemVer guarantee
    (removal/rename = major bump after freeze). The distinction is
    documentation-level: ADVANCED tokens are powerful but niche — they
@@ -61,7 +61,6 @@
      · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
      · text-on-color (--sf-color-text--on-*)
      · code colors (--sf-color-code-bg, --sf-color-code-text)
-     · brand hover (--sf-color-{primary,secondary,tertiary,action,neutral}--hover)
      · status triplets (--sf-color-{success,...,danger}-{subtle,strong,muted})
      · gradients (--sf-gradient-*)
      · shadows (--sf-shadow-{none,xs,s,m,l,xl,2xl,inner})
@@ -95,7 +94,7 @@
      · scrollbar (--sf-scrollbar-{thumb,track})
      · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
        --sf-field-required-marker, --sf-link-external-marker)
-     · section padding (--sf-section-pad, --sf-section-pad--{s,m,l,xl})
+     · section padding (--sf-section-pad, --sf-section-pad--{xs,s,m,l,xl,2xl})
      · typography aliases (--sf-body-*, --sf-code-font-size, --sf-heading-*, --sf-h{1..6}-*)
      · current-font-weight (--sf-current-font-weight)
      · color scheme (--sf-color-scheme)
@@ -126,11 +125,6 @@
 
    INTERNAL — implementation detail, may change without a major bump:
      · --sf-is-dark (mode flag — set via data-theme, not directly)
-
-   DEPRECATED — still functional, removal timeline noted:
-     · --sf-ratio-photo (0.4.0 deprecated, 0.5.0 removed — use --sf-ratio-4-3 / --sf-ratio-3-2)
-     · --sf-sidebar-width-default (0.4.0 deprecated, 0.5.0 removed — use --sf-sidebar-width)
-     · --sf-grid-min-default (0.4.0 deprecated, 0.5.0 removed — use --sf-grid-min)
 
    CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
      · --sf-space-gap     → --sf-gap          (layout primitives read this name)
@@ -375,17 +369,6 @@
   --sf-color-code-bg:      var(--sf-color-well);
 
   /* ----------------------------------------------------------
-     Brand hover — darkened variant for interactive elements.
-     Used by forms.css buttons; available for consumer BEM.
-     ---------------------------------------------------------- */
-  --sf-color-primary--hover:   oklch(from var(--sf-color-primary)   calc(l - 0.05) c h);
-  --sf-color-secondary--hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);
-  --sf-color-tertiary--hover:  oklch(from var(--sf-color-tertiary)  calc(l - 0.05) c h);
-  --sf-color-action--hover:    oklch(from var(--sf-color-action)    calc(l - 0.05) c h);
-  --sf-color-neutral--hover:   oklch(from var(--sf-color-neutral)   calc(l - 0.05) c h);
-
-
-  /* ----------------------------------------------------------
      Selection & backdrop
      ---------------------------------------------------------- */
   --sf-color-selection-bg:   oklch(from var(--sf-color-action) l c h / 0.22);
@@ -575,7 +558,18 @@
 
 
   /* ----------------------------------------------------------
-     Icon sizes
+     Icon sizes — em-based by design.
+     Icons are sized in em so they scale with the surrounding
+     text: an icon in a button at --sf-text-m renders at 1rem;
+     moved into a heading at --sf-text-2xl, the same icon scales
+     up automatically.
+     Global scaling flows transitively through --sf-text-scale
+     (parent text grows → em-icons grow) — there is no separate
+     --sf-icon-scale knob by design. clamp() is intentionally
+     absent here: making icons fluid INDEPENDENTLY of context
+     would break the relationship to surrounding text.
+     Capped at --xl (3em ≈ 48px on default text); above that the
+     element ceases to be an icon and becomes an illustration.
      ---------------------------------------------------------- */
   --sf-icon-xs: 0.875em;
   --sf-icon-s:  1em;
@@ -629,8 +623,6 @@
   --sf-ratio-square:   1;
   --sf-ratio-video:    16 / 9;
   --sf-ratio-cinema:   21 / 9;
-  /* @deprecated 0.4.0, removed in 0.5.0 — use --sf-ratio-4-3 or --sf-ratio-3-2 */
-  --sf-ratio-photo:    3 / 2;
   --sf-ratio-4-3:      4 / 3;
   --sf-ratio-3-2:      3 / 2;
   --sf-ratio-portrait: 3 / 4;
@@ -972,10 +964,12 @@
      Section padding
      ---------------------------------------------------------- */
   --sf-section-pad:     var(--sf-section-pad--m);
+  --sf-section-pad--xs: var(--sf-space-xl);
   --sf-section-pad--s:  var(--sf-space-2xl);
   --sf-section-pad--m:  var(--sf-space-3xl);
   --sf-section-pad--l:  var(--sf-space-4xl);
   --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5);
+  --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2);
 
 
   /* ----------------------------------------------------------
@@ -1066,16 +1060,7 @@
      ---------------------------------------------------------- */
   --sf-sidebar-gap:           var(--sf-space-gap);
   --sf-sidebar-min-width:     50%;           /* content column minimum */
-  /* The canonical name --sf-sidebar-width reads through to the
-     deprecated --sf-sidebar-width-default below, so existing
-     overrides of the old name keep flowing through unchanged:
-       :root { --sf-sidebar-width-default: 20rem }
-     The , 18rem fallback in the var() chain means dropping the
-     deprecated declaration in 0.5 is a one-line removal — the
-     new name keeps resolving to the same default. */
-  --sf-sidebar-width:         var(--sf-sidebar-width-default, 18rem);
-  /* @deprecated 0.4.0, removed in 0.5.0 — prefer --sf-sidebar-width. */
-  --sf-sidebar-width-default: 18rem;         /* sidebar panel default size */
+  --sf-sidebar-width:         18rem;         /* sidebar panel default size */
 
   /* ----------------------------------------------------------
      Switcher
@@ -1085,14 +1070,8 @@
 
   /* ----------------------------------------------------------
      Grid (auto-fill, breakpoint-free)
-
-     The canonical name --sf-grid-min reads through to the
-     deprecated --sf-grid-min-default below, so existing
-     overrides of the old name keep flowing through unchanged.
-     See the deprecated declaration further down for the full
-     migration note.
      ---------------------------------------------------------- */
-  --sf-grid-min:         var(--sf-grid-min-default, 16rem);
+  --sf-grid-min:         16rem;
   --sf-grid-gap:         var(--sf-space-gap);
 
   --sf-grid-min-xs:      10rem;
@@ -1100,13 +1079,7 @@
   --sf-grid-min-m:       16rem;
   --sf-grid-min-l:       20rem;
   --sf-grid-min-xl:      24rem;
-  /* @deprecated 0.4.0, removed in 0.5.0 — prefer --sf-grid-min.
-     Old name retained as the source so existing override:
-       :root { --sf-grid-min-default: 14rem }
-     continues to flow through. The , 16rem fallback in the
-     --sf-grid-min chain (above) ensures dropping this declaration
-     in 0.5 is a one-line removal. */
-  --sf-grid-min-default: 16rem;
+  --sf-grid-min-2xl:     28rem;
 
   /* ----------------------------------------------------------
      Cover
@@ -1673,10 +1646,12 @@ td, th {
    ---------------------------------------------------------- */
 
 .sf-section     { padding-block: var(--sf-section-pad); }
+.sf-section--xs { padding-block: var(--sf-section-pad--xs); }
 .sf-section--s  { padding-block: var(--sf-section-pad--s); }
 .sf-section--m  { padding-block: var(--sf-section-pad--m); }
 .sf-section--l  { padding-block: var(--sf-section-pad--l); }
 .sf-section--xl { padding-block: var(--sf-section-pad--xl); }
+.sf-section--2xl { padding-block: var(--sf-section-pad--2xl); }
 
 .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
@@ -1750,14 +1725,12 @@ td, th {
   flex-direction: column;
   gap:            var(--sf-stack-gap);
 }
-.sf-stack--2xs { gap: var(--sf-space-2xs); }
 .sf-stack--xs  { gap: var(--sf-space-xs); }
 .sf-stack--s   { gap: var(--sf-space-s); }
 .sf-stack--m   { gap: var(--sf-space-m); }
 .sf-stack--l   { gap: var(--sf-space-l); }
 .sf-stack--xl  { gap: var(--sf-space-xl); }
 .sf-stack--2xl { gap: var(--sf-space-2xl); }
-.sf-stack--3xl { gap: var(--sf-space-3xl); }
 
 .sf-stack--center  { align-items: center; }
 .sf-stack--end     { align-items: flex-end; }
@@ -1805,12 +1778,12 @@ td, th {
   align-items:     var(--sf-cluster-align);
   justify-content: var(--sf-cluster-justify);
 }
-.sf-cluster--2xs     { gap: var(--sf-space-2xs); }
 .sf-cluster--xs      { gap: var(--sf-space-xs); }
 .sf-cluster--s       { gap: var(--sf-space-s); }
 .sf-cluster--m       { gap: var(--sf-space-m); }
 .sf-cluster--l       { gap: var(--sf-space-l); }
 .sf-cluster--xl      { gap: var(--sf-space-xl); }
+.sf-cluster--2xl     { gap: var(--sf-space-2xl); }
 
 .sf-cluster--no-wrap  { flex-wrap: nowrap; }
 .sf-cluster--center   { justify-content: center; }
@@ -1896,6 +1869,7 @@ td, th {
 .sf-grid--m  { --sf-grid-min: var(--sf-grid-min-m); }
 .sf-grid--l  { --sf-grid-min: var(--sf-grid-min-l); }
 .sf-grid--xl { --sf-grid-min: var(--sf-grid-min-xl); }
+.sf-grid--2xl { --sf-grid-min: var(--sf-grid-min-2xl); }
 
 /* Dense packing — let later items backfill earlier gaps (as .sf-bento
    does). Applies to any grid, including the fixed-column .sf-grid-N. */
@@ -3824,7 +3798,7 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  background-color: var(--sf-color-action-hover, var(--sf-color-action--hover));
+  background-color: var(--sf-color-action-hover);
 }
 
 button:focus-visible,
@@ -3877,7 +3851,7 @@ input[type="file"]::file-selector-button {
   transition: var(--sf-transition-colors);
 }
 input[type="file"]::file-selector-button:hover {
-  background-color: var(--sf-color-action-hover, var(--sf-color-action--hover));
+  background-color: var(--sf-color-action-hover);
 }
 
 

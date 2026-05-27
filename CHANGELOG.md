@@ -6,6 +6,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### ⚠️ Breaking Changes (pre-freeze cleanup)
+
+The framework is in pre-freeze cleanup. No published consumer is affected.
+The following changes simplify the public API surface before the token-API
+freeze. Done in a single PR with no version bump.
+
+#### Tokens removed
+
+- **`--sf-ratio-photo`** — removed. Use `--sf-ratio-3-2` (semantically
+  identical) or `--sf-ratio-4-3`.
+- **`--sf-sidebar-width-default`** — removed. The canonical name
+  `--sf-sidebar-width` is now declared directly with `18rem`. Override that
+  token instead.
+- **`--sf-grid-min-default`** — removed. The canonical name `--sf-grid-min`
+  is now declared directly with `16rem`. Override that token instead.
+- **`--sf-color-primary--hover`**, **`--sf-color-secondary--hover`**,
+  **`--sf-color-tertiary--hover`**, **`--sf-color-action--hover`**,
+  **`--sf-color-neutral--hover`** — removed from `core/tokens.css`.
+  These were only consumed internally by `optional/forms.css`, which
+  ships with `optional/tokens.palette.css` (where `--sf-color-{role}-hover`
+  exists with palette-derived values). Single-source-of-truth: brand hover
+  variants now live in palette only. Inter-bundle drift between essential
+  and optimal/full eliminated.
+
+#### Class modifiers removed
+
+- **`.sf-stack--2xs`**, **`.sf-stack--3xl`**, **`.sf-cluster--2xs`** removed.
+  The underlying tokens (`--sf-space-2xs`/`-3xl`/`-4xl`) remain part of the
+  public API; override the primitive's scoped token directly to access the
+  extreme tiers (`style="--sf-stack-gap: var(--sf-space-3xl)"`).
+
+#### Class modifiers added
+
+- **`.sf-cluster--2xl`**, **`.sf-grid--2xl`** (+ token `--sf-grid-min-2xl: 28rem`),
+  **`.sf-section--xs`** (+ token `--sf-section-pad--xs`),
+  **`.sf-section--2xl`** (+ token `--sf-section-pad--2xl`).
+  Result: every size-aware primitive supports the canonical `--xs … --2xl`
+  range, with the documented exception of `.sf-icon` which caps at `--xl`
+  (3em ≈ 48px on default text — above that the element is no longer an
+  icon). One sentence rule: **xs..2xl wszędzie poza ikoną.**
+
 ### Enhanced
 
 #### `.sf-clickable-parent` — multi-link support and built-in focus ring
@@ -26,6 +67,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   on specific descendants that must sit above the overlay.
 - **Wider interactive-element exceptions.** `summary`, `video`, `audio`, and
   `[role="button"]` are now lifted alongside buttons and form controls.
+
+### Documentation
+
+- `docs/architecture.md`: rewrote the "Naming conventions" section to
+  document the two parallel rules. Single dash (`<role>-<variant>`) names a
+  palette/shade variant — the token IS a colour. Double dash
+  (`<role>--<context>`) names an application slot — the token is consumed in
+  a specific semantic context. Both are public, both are SemVer-locked;
+  the difference is documentation-level.
+- `docs/layout.md`: added "Size-modifier scale" section with the per-primitive
+  table and the documented `.sf-icon` exception.
+- `core/tokens.css`: added inline comment to the Icon sizes section
+  explaining em-based design (icons scale with surrounding text), why no
+  `clamp()`, why no separate `--sf-icon-scale` knob (transitively covered
+  by `--sf-text-scale`), and why `--xl` is the cap.
 
 ## [0.3.0] - 2026-05-24
 
