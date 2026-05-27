@@ -394,13 +394,13 @@
 
     /* ----------------------------------------------------------
        Brand hover — darkened variant for interactive elements.
-       Used by forms.css buttons; available for consumer BEM.
+       Overridden by tokens.palette.css when palette is loaded.
        ---------------------------------------------------------- */
-    --sf-color-primary--hover:   oklch(from var(--sf-color-primary)   calc(l - 0.05) c h);
-    --sf-color-secondary--hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);
-    --sf-color-tertiary--hover:  oklch(from var(--sf-color-tertiary)  calc(l - 0.05) c h);
-    --sf-color-action--hover:    oklch(from var(--sf-color-action)    calc(l - 0.05) c h);
-    --sf-color-neutral--hover:   oklch(from var(--sf-color-neutral)   calc(l - 0.05) c h);
+    --sf-color-primary-hover:   oklch(from var(--sf-color-primary)   calc(l - 0.05) c h);
+    --sf-color-secondary-hover: oklch(from var(--sf-color-secondary) calc(l - 0.05) c h);
+    --sf-color-tertiary-hover:  oklch(from var(--sf-color-tertiary)  calc(l - 0.05) c h);
+    --sf-color-action-hover:    oklch(from var(--sf-color-action)    calc(l - 0.05) c h);
+    --sf-color-neutral-hover:   oklch(from var(--sf-color-neutral)   calc(l - 0.05) c h);
 
 
     /* ----------------------------------------------------------

@@ -2,7 +2,7 @@
   "_meta": {
     "source": "source (core/ + optional/ token and class files)",
     "counts": {
-      "variables": 624,
+      "variables": 619,
       "sf_classes": 143,
       "is_classes": 40
     }
@@ -69,7 +69,6 @@
     "--sf-cluster-justify",
     "--sf-code-font-size",
     "--sf-color-action",
-    "--sf-color-action--hover",
     "--sf-color-action-100",
     "--sf-color-action-200",
     "--sf-color-action-300",
@@ -180,7 +179,6 @@
     "--sf-color-mark-bg",
     "--sf-color-mark-text",
     "--sf-color-neutral",
-    "--sf-color-neutral--hover",
     "--sf-color-neutral-100",
     "--sf-color-neutral-200",
     "--sf-color-neutral-300",
@@ -217,7 +215,6 @@
     "--sf-color-neutral-xlight",
     "--sf-color-overlay",
     "--sf-color-primary",
-    "--sf-color-primary--hover",
     "--sf-color-primary-100",
     "--sf-color-primary-200",
     "--sf-color-primary-300",
@@ -255,7 +252,6 @@
     "--sf-color-raised",
     "--sf-color-scheme",
     "--sf-color-secondary",
-    "--sf-color-secondary--hover",
     "--sf-color-secondary-100",
     "--sf-color-secondary-200",
     "--sf-color-secondary-300",
@@ -299,7 +295,6 @@
     "--sf-color-success-subtle",
     "--sf-color-surface",
     "--sf-color-tertiary",
-    "--sf-color-tertiary--hover",
     "--sf-color-tertiary-100",
     "--sf-color-tertiary-200",
     "--sf-color-tertiary-300",
