@@ -131,14 +131,38 @@ function slashed_bricks_admin_init() {
     // talks to the REST controller below for save/reset.
     new Slashed_Bricks_Admin_Page_Svelte();
 
-    // REST endpoints powering the Svelte SPA. Sanitization and storage
-    // are delegated to the shared helper classes so every admin
-    // surface persists data identically.
-    new Slashed_Bricks_REST_Controller();
+    // REST routes are registered via the dedicated rest_api_init hook
+    // (slashed_bricks_rest_routes_init) so they work on both admin and
+    // non-admin requests. No need to instantiate the controller here.
 }
 if ( is_admin() ) {
     add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
 }
+
+/**
+ * Register REST routes unconditionally via rest_api_init.
+ *
+ * WordPress fires `rest_api_init` exclusively during REST dispatch —
+ * never on normal admin or frontend requests. Hooking here guarantees
+ * the routes exist regardless of `is_admin()` state and eliminates the
+ * risk of dependency drift between admin and REST init paths.
+ *
+ * On admin requests the REST controller is ALSO instantiated inside
+ * `slashed_bricks_admin_init()` (which fires earlier, at plugins_loaded).
+ * That's harmless: WordPress deduplicates routes by namespace+path, and
+ * `require_once` prevents re-declaration of class files. The admin path
+ * keeps it so the controller is available for wp_localize_script (the
+ * NAMESPACE constant) without an extra require.
+ */
+function slashed_bricks_rest_routes_init() {
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
+
+    ( new Slashed_Bricks_REST_Controller() )->register_routes();
+}
+add_action( 'rest_api_init', 'slashed_bricks_rest_routes_init' );
 
 /**
  * Data managers: early initialization at plugins_loaded.
