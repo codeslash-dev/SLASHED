@@ -36,13 +36,10 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-icon` | em-based inline icon sizing; `--xs … --xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
 
-## Size-modifier scale — `xs..2xl` everywhere (one exception)
+## Size-modifier scale -- `xs..2xl` everywhere
 
 Every size-aware primitive supports the canonical range
-`--xs --s --m --l --xl --2xl` with one documented exception: `.sf-icon` is
-capped at `--xl` (3em ≈ 48px on default text). Above that the element ceases
-to be an icon and becomes an illustration — the cap is semantic, not
-arbitrary.
+`--xs --s --m --l --xl --2xl`. One rule: **xs..2xl wszedzie.**
 
 | primitive | what the suffix scales | `--xs` | `--s` | `--m` *(default)* | `--l` | `--xl` | `--2xl` |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -50,7 +47,7 @@ arbitrary.
 | `.sf-cluster` | inline-axis gap        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-grid`    | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+| `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 Three suffixes scale different physical dimensions. `.sf-grid--xs` reads as
 "narrow column tier" (denser layouts), not "small gap" — gap on `.sf-grid` is

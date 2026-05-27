@@ -561,14 +561,15 @@
        --sf-icon-scale knob by design. clamp() is intentionally
        absent here: making icons fluid INDEPENDENTLY of context
        would break the relationship to surrounding text.
-       Capped at --xl (3em ≈ 48px on default text); above that the
+       Capped at --2xl (4em ≈ 64px on default text); above that the
        element ceases to be an icon and becomes an illustration.
        ---------------------------------------------------------- */
-    --sf-icon-xs: 0.875em;
-    --sf-icon-s:  1em;
-    --sf-icon-m:  1.5em;
-    --sf-icon-l:  2em;
-    --sf-icon-xl: 3em;
+    --sf-icon-xs:  0.875em;
+    --sf-icon-s:   1em;
+    --sf-icon-m:   1.5em;
+    --sf-icon-l:   2em;
+    --sf-icon-xl:  3em;
+    --sf-icon-2xl: 4em;
 
 
     /* ----------------------------------------------------------

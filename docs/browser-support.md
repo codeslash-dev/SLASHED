@@ -25,7 +25,7 @@ The effective floor is the **maximum** of these per engine: Firefox 128
 |---|---|
 | Cascade layers (`@layer`) | foundational — the whole architecture; no fallback possible |
 | Container queries (`@container`) | all responsive primitives; baseline 2023 |
-| `:has()` | required-field marker, `.focus-parent` |
+| `:has()` | required-field marker, `.sf-focus-parent` |
 | `text-wrap: balance/pretty` | headings / paragraphs (degrades to normal) |
 | `interpolate-size` | wrapped in `@supports`; progressive enhancement only |
 | `@starting-style`, view transitions | opt-in, `@supports`-gated where used |

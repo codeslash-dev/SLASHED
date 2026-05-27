@@ -98,7 +98,7 @@ decision tree to use when adding a new class.
    NO  → step 3
 
 3. Is it an a11y pattern or a11y utility?
-      (sr-only, focus-parent, clickable-parent…)
+      (sr-only, sf-focus-parent, clickable-parent…)
    YES → core/accessibility.css          (slashed.accessibility)
    NO  → step 4
 
@@ -213,7 +213,7 @@ Transition tokens live in `core/tokens.css`:
 
 `@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
 
-**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.focus-parent` (relocated from `slashed.states` in v0.3.0) and `.sf-clickable-parent` (added in v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
+**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` (v0.3.0) and `.sf-clickable-parent` (added in v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
 
 **slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
 
@@ -270,6 +270,25 @@ code: each is exercised in `docs/demo.html` and validated by `tests/`.
 Print helpers use the `.print-*` prefix: `.print-only` (show only on paper),
 `.no-print` (hide on paper), `.print-color-exact` (force colour), and
 `.print-no-color` (force ink-saving flatten). See the **slashed.print** layer.
+
+### Naming exceptions
+
+A small number of classes are intentionally unprefixed (no `sf-` or `is-`).
+They are short, universally understood terms where a prefix would add noise
+without reducing collision risk in practice.
+
+| Class | Layer | Rationale |
+|---|---|---|
+| `.sr-only` | accessibility | Industry-standard screen-reader name |
+| `.sr-only-focusable` | accessibility | Companion to `.sr-only` |
+| `.visually-hidden` | accessibility | WHATWG synonym of `.sr-only` |
+| `.skip-link` | accessibility | Common a11y pattern name |
+| `.no-motion` | accessibility | Reads as a behaviour toggle |
+| `.no-print` | print | Reads as a behaviour toggle |
+| `.print-only` | print | Reads as a behaviour toggle |
+| `.print-color-exact` | print | Self-documenting intent |
+| `.print-no-color` | print | Self-documenting intent |
+| `.theme-transition` | themes | Scoped opt-in helper |
 
 ---
 
@@ -381,6 +400,14 @@ CSS is emitted). `utilities.css` ships as an empty stub.
 Consumers can also build à la carte: `essential` (or raw `core/`) plus
 hand-picked optional files.
 
+### Flat bundles
+
+For consumers who want a single file with no decisions, `dist/slashed.full.css`
+includes everything (core + all optional files that contain active rules).
+Because cascade layers govern specificity, concatenation order inside a flat
+bundle is irrelevant -- `core/layers.css` fixes the priority order once at the
+top.
+
 ---
 
 ## Known intentional tradeoffs
@@ -405,6 +432,11 @@ These behaviors are deliberate. Documented here so they aren't mistaken for bugs
   tints and base *into* text for shades, so it is surface-relative, not a perceptual
   lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
   differs from the conventional monotonic lightness ramp.
+- **Palette token values are not part of the public API.** The *names*
+  (`--sf-color-primary-light`, `--sf-color-action-hover`, etc.) are stable and
+  covered by SemVer. The *computed colour values* they resolve to may shift
+  between minor releases as derivation formulas are refined. Pin your own
+  overrides to the 6 source tokens if you need colour stability.
 
 ---
 
