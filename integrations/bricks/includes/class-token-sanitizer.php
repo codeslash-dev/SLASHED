@@ -123,6 +123,15 @@ class Slashed_Bricks_Token_Sanitizer {
 	 * filter-set values). All-empty rows are omitted from the result
 	 * so the framework default applies.
 	 *
+	 * COMPOUND-PREFIX KEYS (dark mode):
+	 * Keys like `brand_dark_primary` enter the "direct" bucket because
+	 * they don't end in `_hex` or `_raw`. The Svelte ColorRow merges
+	 * hex/raw client-side and submits the resolved value under the bare
+	 * compound key. This is intentional: dark-mode overrides are never
+	 * submitted as paired `_hex`/`_raw` inputs. Do NOT add color names
+	 * that end in "hex" or "raw" — they would collide with suffix
+	 * stripping.
+	 *
 	 * @param array $data Raw form data for the colors section.
 	 * @return array Sanitized colors keyed by base token name.
 	 */
