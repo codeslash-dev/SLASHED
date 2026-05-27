@@ -1,0 +1,326 @@
+/*
+ * reBEMer panel styles.
+ *
+ * Loaded once into the Bricks builder via the editor-app bundle.
+ * All selectors are scoped to .rebemer-* / [data-rebemer] so styles
+ * never leak into Bricks' own UI. The token palette mirrors Bricks'
+ * dark builder chrome so the panel feels native.
+ */
+
+:root {
+  --rebemer-bg:           #161a1d;
+  --rebemer-fg:           #e1e1e1;
+  --rebemer-fg-muted:     #8a8d95;
+  --rebemer-border:       #3d4752;
+  --rebemer-accent:       #e2b93b;
+  --rebemer-accent-hover: #ffd042;
+  --rebemer-input-bg:     #293038;
+  --rebemer-input-border: #3d4752;
+  --rebemer-error:        #ff4c4c;
+  --rebemer-success:      #4ade80;
+  --rebemer-shadow:       0 10px 40px rgba(0, 0, 0, 0.6);
+  --rebemer-radius:       4px;
+  --rebemer-panel-z:      100000;
+  --rebemer-confirm-z:    100001;
+  --rebemer-toast-z:      100002;
+  --rebemer-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ───────── Badge ───────── */
+
+.rebemer-badge {
+  font: 600 9px/1 var(--rebemer-font);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--rebemer-bg);
+  background: var(--rebemer-accent);
+  border: 0;
+  border-radius: 2px;
+  padding: 2px 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.rebemer-badge:hover { background: var(--rebemer-accent-hover); }
+.rebemer-badge:focus-visible {
+  outline: 2px solid var(--rebemer-accent-hover);
+  outline-offset: 1px;
+}
+
+
+/* ───────── Panel container ───────── */
+
+.rebemer-panel {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 460px;
+  max-width: calc(100vw - 40px);
+  max-height: 85vh;
+  z-index: var(--rebemer-panel-z);
+  background: var(--rebemer-bg);
+  color: var(--rebemer-fg);
+  border: 1px solid var(--rebemer-border);
+  border-radius: var(--rebemer-radius);
+  box-shadow: var(--rebemer-shadow);
+  display: flex;
+  flex-direction: column;
+  font: 12px/1.45 var(--rebemer-font);
+  overflow: hidden;
+  outline: none;
+}
+
+.rebemer-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rebemer-border);
+  cursor: grab;
+  user-select: none;
+}
+.rebemer-panel__title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #fff;
+}
+.rebemer-panel__subject { color: var(--rebemer-accent); text-transform: none; font-weight: 500; }
+.rebemer-panel__close {
+  background: transparent;
+  border: 0;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--rebemer-fg-muted);
+  cursor: pointer;
+  padding: 2px 6px;
+}
+.rebemer-panel__close:hover { color: #fff; }
+
+
+/* ───────── Toolbar ───────── */
+
+.rebemer-panel__toolbar {
+  padding: 10px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--rebemer-border);
+}
+.rebemer-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+.rebemer-field--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.rebemer-field__label {
+  color: var(--rebemer-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 10px;
+}
+.rebemer-field select,
+.rebemer-field input[type="text"] {
+  background: var(--rebemer-input-bg);
+  border: 1px solid var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius);
+  color: var(--rebemer-fg);
+  padding: 4px 6px;
+  font: inherit;
+  min-width: 130px;
+}
+.rebemer-field select:focus,
+.rebemer-field input:focus {
+  outline: 1px solid var(--rebemer-accent);
+  outline-offset: 0;
+}
+.rebemer-policy-hint {
+  margin-left: auto;
+  color: var(--rebemer-fg-muted);
+  font-size: 10px;
+}
+
+
+/* ───────── Body / rows ───────── */
+
+.rebemer-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rebemer-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--rebemer-radius);
+  background: rgba(255, 255, 255, 0.02);
+}
+.rebemer-row:hover { background: rgba(255, 255, 255, 0.04); }
+.rebemer-row--disabled { opacity: 0.5; }
+.rebemer-row--error { border-color: var(--rebemer-error); }
+.rebemer-row[data-depth="1"] { margin-left: 12px; }
+.rebemer-row[data-depth="2"] { margin-left: 24px; }
+.rebemer-row[data-depth="3"] { margin-left: 36px; }
+
+.rebemer-row__include input { cursor: pointer; }
+.rebemer-row__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rebemer-row__label {
+  font-size: 11px;
+  color: var(--rebemer-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rebemer-row__type {
+  font-size: 9px;
+  color: var(--rebemer-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+
+.rebemer-row__inputs {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.rebemer-row__name {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  background: var(--rebemer-input-bg);
+  border: 1px solid var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius);
+  overflow: hidden;
+}
+.rebemer-row__prefix {
+  padding: 4px 6px;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--rebemer-fg-muted);
+  font-size: 11px;
+  border-right: 1px solid var(--rebemer-input-border);
+  white-space: nowrap;
+}
+.rebemer-row__name input,
+.rebemer-row__modifier {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--rebemer-fg);
+  font: inherit;
+  padding: 4px 6px;
+  flex: 1;
+  min-width: 0;
+}
+.rebemer-row__modifier {
+  background: var(--rebemer-input-bg);
+  border: 1px solid var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius);
+  width: 100px;
+  flex: 0 0 100px;
+}
+.rebemer-row__error {
+  grid-column: 1 / -1;
+  color: var(--rebemer-error);
+  font-size: 10px;
+}
+
+
+/* ───────── Footer + buttons ───────── */
+
+.rebemer-panel__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--rebemer-border);
+}
+.rebemer-btn {
+  background: var(--rebemer-input-bg);
+  border: 1px solid var(--rebemer-input-border);
+  color: var(--rebemer-fg);
+  padding: 6px 12px;
+  border-radius: var(--rebemer-radius);
+  font: inherit;
+  cursor: pointer;
+}
+.rebemer-btn:hover { border-color: var(--rebemer-fg-muted); }
+.rebemer-btn:focus-visible { outline: 2px solid var(--rebemer-accent); outline-offset: 1px; }
+.rebemer-btn--primary {
+  background: var(--rebemer-accent);
+  border-color: var(--rebemer-accent);
+  color: var(--rebemer-bg);
+  font-weight: 600;
+}
+.rebemer-btn--primary:hover { background: var(--rebemer-accent-hover); border-color: var(--rebemer-accent-hover); }
+.rebemer-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* ───────── Confirm dialog ───────── */
+
+.rebemer-confirm-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--rebemer-confirm-z);
+  display: flex; align-items: center; justify-content: center;
+}
+.rebemer-confirm {
+  background: var(--rebemer-bg);
+  border: 1px solid var(--rebemer-border);
+  border-radius: var(--rebemer-radius);
+  box-shadow: var(--rebemer-shadow);
+  width: 420px; max-width: calc(100vw - 40px);
+  padding: 16px;
+  color: var(--rebemer-fg);
+  font: 12px/1.45 var(--rebemer-font);
+}
+.rebemer-confirm h3 { margin: 0 0 6px; font-size: 13px; }
+.rebemer-confirm-list { padding-left: 18px; margin: 8px 0; }
+.rebemer-confirm-list code { color: var(--rebemer-accent); }
+.rebemer-confirm-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+
+/* ───────── Toast ───────── */
+
+.rebemer-toast {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: var(--rebemer-toast-z);
+  background: var(--rebemer-input-bg);
+  color: var(--rebemer-fg);
+  border: 1px solid var(--rebemer-border);
+  border-radius: var(--rebemer-radius);
+  padding: 8px 12px;
+  font: 12px/1.45 var(--rebemer-font);
+  cursor: pointer;
+  box-shadow: var(--rebemer-shadow);
+  max-width: 360px;
+}
+.rebemer-toast--success { border-color: var(--rebemer-success); }
+.rebemer-toast--error   { border-color: var(--rebemer-error); background: var(--rebemer-error); color: #fff; }
+
+/* ───────── Reduced motion ───────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .rebemer-toast { transition: none; }
+}
