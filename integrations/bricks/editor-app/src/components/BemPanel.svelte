@@ -13,6 +13,7 @@
   let syncLabels = $state(true);
   let rows = $state([]);
   let toast = $state(null);
+  let panelEl = $state(null);
 
   const blockName = $derived(slugify(rows[0]?.name ?? ''));
   const rootLabel = $derived(rows[0]?.originalLabel ?? '');
@@ -31,7 +32,8 @@
 
   function handleKeydown(e) {
     if (e.key === 'Escape') { onClose?.(); return; }
-    if (e.key === 'Enter' && (e.target?.tagName === 'INPUT' || e.target?.tagName === 'SELECT')) {
+    const inPanel = panelEl && e.target instanceof Node && panelEl.contains(e.target);
+    if (inPanel && e.key === 'Enter' && (e.target?.tagName === 'INPUT' || e.target?.tagName === 'SELECT')) {
       e.preventDefault();
       apply();
     }
@@ -40,7 +42,6 @@
   let closeTimer = null;
 
   function apply() {
-    // Validate block name
     const block = slugify(rows[0]?.name ?? '');
     const v = validateName(block);
     if (!v.ok) {
@@ -59,17 +60,21 @@
   }
 
   $effect(() => {
-    // Cleanup: clear the auto-close timer if the component unmounts
     return () => { if (closeTimer) clearTimeout(closeTimer); };
   });
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
 
-<div class="rebemer-panel" role="dialog" aria-modal="true" tabindex="-1">
+<div bind:this={panelEl} class="rebemer-panel" role="dialog" aria-modal="true" tabindex="-1">
   <header class="rebemer-panel__header">
     <h2 class="rebemer-panel__title">reBEMer · <span class="rebemer-panel__subject">{rootLabel}</span></h2>
-    <button type="button" class="rebemer-panel__close" onclick={() => onClose?.()}>×</button>
+    <button
+      type="button"
+      class="rebemer-panel__close"
+      aria-label="Close reBEMer panel"
+      onclick={() => onClose?.()}
+    >×</button>
   </header>
 
   <section class="rebemer-panel__toolbar">

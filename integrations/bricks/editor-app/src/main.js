@@ -158,6 +158,14 @@ function injectBadgeInto(li) {
     props: { elementId, label, onActivate: openPanel },
   });
 
+  // Clean up any prior instance for this element id (can happen on
+  // rapid tree rebuilds where the same data-id reappears on a new node).
+  const existing = badgeInstances.get(elementId);
+  if (existing) {
+    try { unmount(existing.instance); } catch (err) { log('warn', 'badge remount cleanup failed', err); }
+    if (existing.host.isConnected) existing.host.remove();
+  }
+
   badgeInstances.set(elementId, { instance, host });
   li.dataset[ATTACHED_FLAG] = '1';
 }

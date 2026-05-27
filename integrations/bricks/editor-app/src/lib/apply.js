@@ -13,6 +13,8 @@
 import { slugify } from './slugify.js';
 import * as api from './bricks-api.js';
 
+const VALID_MODES = new Set(['add', 'rename', 'replace', 'modifier']);
+
 /**
  * @param {object} opts
  * @param {string} opts.rootId
@@ -22,85 +24,87 @@ import * as api from './bricks-api.js';
  * @returns {{ok:true, count:number} | {ok:false, error:string}}
  */
 export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
+  if (!VALID_MODES.has(mode)) {
+    return { ok: false, error: `Invalid mode: ${mode}` };
+  }
+
   const blockRow = rows.find(r => r.id === rootId);
   if (!blockRow) return { ok: false, error: 'Root row missing.' };
 
   const blockName = slugify(blockRow.name);
   if (!blockName) return { ok: false, error: 'Block name is empty.' };
 
-  const globalClasses = api.getGlobalClasses();
   let count = 0;
 
   try {
-  for (const row of rows) {
-    if (!row.include) continue;
+    const globalClasses = api.getGlobalClasses();
 
-    const isRoot = row.id === rootId;
-    const el = api.findElement(row.id);
-    if (!el) continue;
+    for (const row of rows) {
+      if (!row.include) continue;
 
-    // Build class name
-    let baseClass;
-    if (isRoot) {
-      baseClass = blockName;
-    } else {
-      const elemSlug = slugify(row.name);
-      if (!elemSlug) continue;
-      baseClass = `${blockName}__${elemSlug}`;
-    }
+      const isRoot = row.id === rootId;
+      const el = api.findElement(row.id);
+      if (!el) continue;
 
-    // Apply modifier suffix when in modifier mode
-    let finalClass = baseClass;
-    if (mode === 'modifier' && row.modifier) {
-      const modSlug = slugify(row.modifier);
-      if (!modSlug) continue;
-      finalClass = `${baseClass}--${modSlug}`;
-    }
-
-    // Read current classes on this element
-    const currentIds = readClassIds(el.settings);
-
-    // Determine seed settings for the new class (rename copies from first old)
-    let seed = {};
-    if (mode === 'rename' && currentIds.length > 0) {
-      const firstOld = globalClasses.find(c => c && c.id === currentIds[0]);
-      if (firstOld && firstOld.settings) {
-        seed = JSON.parse(JSON.stringify(firstOld.settings));
+      // Build class name
+      let baseClass;
+      if (isRoot) {
+        baseClass = blockName;
+      } else {
+        const elemSlug = slugify(row.name);
+        if (!elemSlug) continue;
+        baseClass = `${blockName}__${elemSlug}`;
       }
+
+      // In modifier mode, always require a valid modifier slug
+      let finalClass = baseClass;
+      if (mode === 'modifier') {
+        const modSlug = slugify(row.modifier);
+        if (!modSlug) continue;
+        finalClass = `${baseClass}--${modSlug}`;
+      }
+
+      // Read current classes on this element
+      const currentIds = readClassIds(el.settings);
+
+      // Determine seed settings for the new class (rename copies from first old)
+      let seed = {};
+      if (mode === 'rename' && currentIds.length > 0) {
+        const firstOld = globalClasses.find(c => c && c.id === currentIds[0]);
+        if (firstOld && firstOld.settings) {
+          seed = JSON.parse(JSON.stringify(firstOld.settings));
+        }
+      }
+
+      // Create or find the target global class
+      const newClassId = api.upsertGlobalClass(finalClass, seed);
+
+      // Build the new class list for this element
+      let nextIds;
+      switch (mode) {
+        case 'add':
+        case 'modifier':
+          nextIds = currentIds.includes(newClassId) ? currentIds : [...currentIds, newClassId];
+          break;
+        case 'rename':
+        case 'replace':
+          nextIds = [newClassId];
+          break;
+      }
+
+      api.setElementClasses(row.id, nextIds);
+
+      // Sync label if enabled (skip for modifier mode — label reflects identity, not state)
+      if (syncLabels && mode !== 'modifier') {
+        const label = labelFromClass(finalClass, blockName);
+        if (label) api.setElementLabel(row.id, label);
+      }
+
+      count++;
     }
-
-    // Create or find the target global class
-    const newClassId = api.upsertGlobalClass(finalClass, seed);
-
-    // Build the new class list for this element
-    let nextIds;
-    switch (mode) {
-      case 'add':
-      case 'modifier':
-        // Keep existing, append new (avoid duplicates)
-        nextIds = currentIds.includes(newClassId) ? currentIds : [...currentIds, newClassId];
-        break;
-      case 'rename':
-      case 'replace':
-        // Replace all old classes with just the new one
-        nextIds = [newClassId];
-        break;
-      default:
-        nextIds = [newClassId];
-    }
-
-    api.setElementClasses(row.id, nextIds);
-
-    // Sync label if enabled (skip for modifier mode — label reflects identity, not state)
-    if (syncLabels && mode !== 'modifier') {
-      const label = labelFromClass(finalClass, blockName);
-      if (label) api.setElementLabel(row.id, label);
-    }
-
-    count++;
-  }
   } catch (err) {
-    return { ok: false, error: `Operation failed mid-apply: ${err.message}` };
+    const message = err instanceof Error ? err.message : String(err);
+    return { ok: false, error: `Operation failed mid-apply: ${message}` };
   }
 
   if (count === 0) {

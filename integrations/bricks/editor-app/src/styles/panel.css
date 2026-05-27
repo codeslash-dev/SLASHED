@@ -18,20 +18,20 @@
   --rebemer-font: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Badge */
+/* Badge — uses fallbacks because badges are injected outside #slashed-rebemer-host */
 .rebemer-badge {
-  font: 600 9px/1 var(--rebemer-font);
+  font: 600 9px/1 var(--rebemer-font, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
   letter-spacing: .5px;
   text-transform: uppercase;
-  color: var(--rebemer-bg);
-  background: var(--rebemer-accent);
+  color: var(--rebemer-bg, #161a1d);
+  background: var(--rebemer-accent, #e2b93b);
   border: 0;
   border-radius: 2px;
   padding: 2px 4px;
   cursor: pointer;
 }
-.rebemer-badge:hover { background: var(--rebemer-accent-hover); }
-.rebemer-badge:focus-visible { outline: 2px solid var(--rebemer-accent-hover); outline-offset: 1px; }
+.rebemer-badge:hover { background: var(--rebemer-accent-hover, #ffd042); }
+.rebemer-badge:focus-visible { outline: 2px solid var(--rebemer-accent-hover, #ffd042); outline-offset: 1px; }
 
 /* Panel */
 .rebemer-panel {
