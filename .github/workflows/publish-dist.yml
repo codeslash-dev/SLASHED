@@ -64,6 +64,10 @@ jobs:
             echo "built-at:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "built-by:      .github/workflows/publish-dist.yml"
           } > /tmp/sf-dist/SOURCE.txt
+          # git rm -rf . (below) deletes .gitignore from the working tree, which
+          # would cause `git add -A` to stage node_modules/ (134 MB). Ship a
+          # minimal .gitignore on the dist branch to prevent that.
+          echo 'node_modules/' > /tmp/sf-dist/.gitignore
 
       - name: Force-push dist branch
         env:
