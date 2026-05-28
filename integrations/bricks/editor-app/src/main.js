@@ -25,7 +25,6 @@ import './styles/panel.css';
 const STRUCTURE_PANEL_SELECTOR = '#bricks-structure';
 const ITEM_SELECTOR = 'li[data-id]';
 const HOST_ID = 'slashed-rebemer-host';
-const ATTACHED_FLAG = 'rebemerAttached';
 const PROBE_INTERVAL_MS = 400;
 const PROBE_MAX_ATTEMPTS = 25; // ≈10s total grace before we give up
 
@@ -113,20 +112,32 @@ function onStructurePanelReady(panelEl) {
 }
 
 function refreshBadges(panelEl) {
-  // Mount any newly-arrived items.
-  const items = panelEl.querySelectorAll(ITEM_SELECTOR);
-  for (const li of items) {
-    if (!li.dataset[ATTACHED_FLAG]) injectBadgeInto(li);
-  }
-
-  // Reap any badges whose host node has been detached. Bricks tends
-  // to rebuild list nodes wholesale on undo; the dataset flag goes
-  // away with the old node, so the badge just needs to be unmounted.
+  // Pass 1: reap stale entries whose host node has been detached.
+  // Bricks rerenders inner subtrees (e.g. `.structure-item` rebuilds
+  // on label edits, drag/drop, undo) without removing the outer <li>,
+  // so a host that was alive can become detached while the <li>
+  // stays. Catching that here is what keeps us from leaking unmounted
+  // Svelte instances or, worse, never re-injecting the badge on a
+  // resurrected row (semantic-review issue #5).
   for (const [id, entry] of badgeInstances) {
     if (!entry.host.isConnected) {
       try { unmount(entry.instance); } catch (err) { log('warn', 'badge unmount failed', err); }
       badgeInstances.delete(id);
     }
+  }
+
+  // Pass 2: mount badges for any <li> without a live host inside it.
+  // We use the map state as the source of truth (previously this used
+  // a dataset flag on the <li>, which lived on the outer node and
+  // never got cleared when only the inner subtree was rebuilt — so
+  // re-injection was permanently blocked after the first detach).
+  const items = panelEl.querySelectorAll(ITEM_SELECTOR);
+  for (const li of items) {
+    const id = li.getAttribute('data-id');
+    if (!id) continue;
+    const existing = badgeInstances.get(id);
+    if (existing && existing.host.isConnected && li.contains(existing.host)) continue;
+    injectBadgeInto(li);
   }
 }
 
@@ -135,22 +146,44 @@ function injectBadgeInto(li) {
   const elementId = li.getAttribute('data-id');
   if (!elementId) return;
 
-  // Try the conventional Bricks container; fall back to the row
-  // itself so the badge always renders even when Bricks restructures.
-  const target =
-    li.querySelector(':scope > .actions') ||
-    li.querySelector(':scope > .structure-item-actions') ||
-    li;
+  // Bricks structure-panel row layout:
+  //
+  //   <li data-id="…">
+  //     <div class="structure-item">
+  //       <div class="title">…element label…</div>
+  //       <ul class="actions">…icon buttons…</ul>     ← inject BEFORE this
+  //     </div>
+  //   </li>
+  //
+  // We want the badge to read as a small inline word between the
+  // title and the action icons — NOT a chip overlaid on the row,
+  // and NOT a leading icon inside the actions cluster (where it
+  // would compete for space with Bricks' own buttons).
+  //
+  // Selector chain is defensive: if Bricks restructures we want a
+  // sane fallback rather than a missing badge.
+  //   1. Prefer the `.structure-item` wrapper that holds title + actions.
+  //   2. Inside it, insert immediately before the actions list. If no
+  //      actions list exists (rare — happens for read-only items)
+  //      append at the end so the badge still appears after the title.
+  //   3. If `.structure-item` itself isn't present, fall back to the
+  //      <li> with the same insertion rule, so legacy/forked Bricks
+  //      builds still get a badge.
+  const item = li.querySelector(':scope > .structure-item') || li;
+  const actions =
+    item.querySelector(':scope > ul.actions') ||
+    item.querySelector(':scope > .actions') ||
+    item.querySelector(':scope > .structure-item-actions');
 
   const host = document.createElement('span');
   host.className = 'rebemer-badge-host';
-  if (target.firstChild) {
-    target.insertBefore(host, target.firstChild);
+  if (actions) {
+    item.insertBefore(host, actions);
   } else {
-    target.appendChild(host);
+    item.appendChild(host);
   }
 
-  const labelNode = li.querySelector(':scope > .structure-item-title, :scope > .name, :scope .label');
+  const labelNode = item.querySelector(':scope > .title, :scope > .structure-item-title, :scope > .name, :scope .label');
   const label = labelNode ? labelNode.textContent.trim() : '';
 
   const instance = mount(BemBadge, {
@@ -167,7 +200,6 @@ function injectBadgeInto(li) {
   }
 
   badgeInstances.set(elementId, { instance, host });
-  li.dataset[ATTACHED_FLAG] = '1';
 }
 
 function openPanel(elementId) {

@@ -9,3 +9,6 @@ playwright-report/
 # Re-build locally via `npm run build` in admin-app/ to regenerate.
 integrations/bricks/assets/admin-app/*.map
 integrations/bricks/assets/editor-app/*.map
+
+# Semantic review artifacts (sub-agent output, not source)
+semantic-review/
