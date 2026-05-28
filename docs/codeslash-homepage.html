@@ -384,6 +384,7 @@ button { font-family: var(--sf-font-body); }
   list-style:none; display:flex; align-items:center; gap:1.25rem;
   padding:1.375rem 1.75rem; cursor:pointer; user-select:none;
 }
+.cs-process-item summary::marker,
 .cs-process-item summary::-webkit-details-marker { display:none; }
 .cs-process-item__num { font-family:var(--sf-font-heading); font-size:.72rem; font-weight:700; color:rgba(8,15,30,.28); width:1.5rem; flex-shrink:0; transition:color .2s; }
 .cs-process-item[open] .cs-process-item__num { color:var(--c-orange); }
@@ -558,6 +559,7 @@ button { font-family: var(--sf-font-body); }
   font-family:var(--sf-font-heading); font-weight:600; font-size:.95rem; color:var(--c-navy);
   user-select:none; gap:1rem;
 }
+.cs-faq-item summary::marker,
 .cs-faq-item summary::-webkit-details-marker { display:none; }
 .cs-faq-item summary::after { content:'+'; font-size:1.25rem; color:var(--c-orange); flex-shrink:0; font-weight:400; transition:transform .2s; }
 .cs-faq-item[open] summary::after { transform:rotate(45deg); }
