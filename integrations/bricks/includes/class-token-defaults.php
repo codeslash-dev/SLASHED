@@ -65,7 +65,7 @@ class Slashed_Bricks_Token_Defaults {
 			'brand' => array(
 				'primary'   => 'oklch(0.47 0.27 264)',
 				'secondary' => 'oklch(0.22 0.04 264)',
-				'tertiary'  => 'oklch(0.58 0.18 295)',
+				'tertiary'  => 'oklch(0.42 0.22 295)',
 				'action'    => 'oklch(0.50 0.22 235)',
 				'neutral'   => 'oklch(0.52 0.025 260)',
 				'base'      => 'oklch(0.99 0.006 250)',
@@ -82,7 +82,7 @@ class Slashed_Bricks_Token_Defaults {
 				'success' => 'oklch(0.50 0.16 145)',
 				'warning' => 'oklch(0.75 0.17 80)',
 				'error'   => 'oklch(0.50 0.20 25)',
-				'info'    => 'oklch(0.52 0.16 235)',
+				'info'    => 'oklch(0.48 0.18 235)',
 				'danger'  => 'oklch(0.48 0.22 12)',
 			),
 			'status_dark' => array(
@@ -95,7 +95,7 @@ class Slashed_Bricks_Token_Defaults {
 			'brand_hex_hints' => array(
 				'primary'   => '#4a30d0',
 				'secondary' => '#141530',
-				'tertiary'  => '#7038d8',
+				'tertiary'  => '#5c20cc',
 				'action'    => '#1c58cc',
 				'neutral'   => '#5e6880',
 				'base'      => '#f8f9ff',

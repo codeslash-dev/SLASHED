@@ -1052,8 +1052,8 @@
         </p>
         <pre><code>/* pre + code block */
 :root {
-  --sf-color-primary: oklch(0.45 0.2 264);
-  --sf-color-scheme:  light dark;
+  --sf-color-primary-light: oklch(0.47 0.27 264);
+  --sf-color-neutral-light: oklch(0.52 0.025 260);
 }</code></pre>
         <blockquote style="border-inline-start: 3px solid var(--sf-color-primary); padding-inline-start: var(--sf-space-m); color: var(--sf-color-text--secondary); margin: 0">
           A blockquote. Try selecting this text to see <code>--sf-color-selection-bg</code>.
@@ -2656,12 +2656,12 @@
       // Approximations of the @property defaults in core/tokens.css; rarely
       // hit because every supported engine resolves oklch directly.
       const HEX_FALLBACKS = {
-        '--sf-color-primary-light':   '#1b3fbf', '--sf-color-secondary-light': '#2d2f3d',
-        '--sf-color-tertiary-light':  '#7c2e94', '--sf-color-action-light':    '#0090a8',
-        '--sf-color-neutral-light':   '#5e616b', '--sf-color-base-light':      '#f8f7fa',
-        '--sf-color-success-light':   '#1e8c4a', '--sf-color-warning-light':   '#c58c1a',
-        '--sf-color-error-light':     '#d95525', '--sf-color-info-light':      '#1a6dbf',
-        '--sf-color-danger-light':    '#c4211a'
+        '--sf-color-primary-light':   '#4a30d0', '--sf-color-secondary-light': '#141530',
+        '--sf-color-tertiary-light':  '#5c20cc', '--sf-color-action-light':    '#1c58cc',
+        '--sf-color-neutral-light':   '#5e6880', '--sf-color-base-light':      '#f8f9ff',
+        '--sf-color-success-light':   '#1a8040', '--sf-color-warning-light':   '#c58c1a',
+        '--sf-color-error-light':     '#c42010', '--sf-color-info-light':      '#1a5ec8',
+        '--sf-color-danger-light':    '#c82010'
       };
 
       // data-token is the SOURCE token an input writes to (…-light / …-dark);

@@ -23,7 +23,7 @@
      :root {
        --sf-color-primary-light:   oklch(0.47 0.27 264);
        --sf-color-secondary-light: oklch(0.22 0.04 264);
-       --sf-color-tertiary-light:  oklch(0.58 0.18 295);
+       --sf-color-tertiary-light:  oklch(0.42 0.22 295);
        --sf-color-action-light:    oklch(0.50 0.22 235);
        --sf-color-neutral-light:   oklch(0.52 0.025 260);
        --sf-color-base-light:      oklch(0.99 0.006 250);
@@ -146,7 +146,7 @@
 
 @property --sf-color-primary-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.47 0.27 264); }
 @property --sf-color-secondary-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.22 0.04 264); }
-@property --sf-color-tertiary-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.58 0.18 295); }
+@property --sf-color-tertiary-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.42 0.22 295); }
 @property --sf-color-action-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.22 235); }
 @property --sf-color-neutral-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.52 0.025 260); }
 @property --sf-color-base-light      { syntax: "<color>"; inherits: true; initial-value: oklch(0.99 0.006 250); }
@@ -156,7 +156,7 @@
 @property --sf-color-success-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.16 145); }
 @property --sf-color-warning-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
 @property --sf-color-error-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.20 25);  }
-@property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.52 0.16 235); }
+@property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.18 235); }
 @property --sf-color-danger-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.22 12);  }
 
 /* Mode flag — drives formula direction for non-color dark overrides.
@@ -371,7 +371,10 @@
   /* ----------------------------------------------------------
      Selection & backdrop
      ---------------------------------------------------------- */
-  --sf-color-selection-bg:   oklch(from var(--sf-color-action) l c h / 0.22);
+  --sf-color-selection-bg:   light-dark(
+    oklch(from var(--sf-color-action-light) l c h / 0.28),
+    oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55)
+  );
   --sf-color-selection-text: inherit;
   --sf-color-mark-bg:        oklch(from var(--sf-color-warning) l c h / 0.25);
   --sf-color-mark-text:      inherit;
