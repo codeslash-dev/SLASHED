@@ -123,7 +123,7 @@ Ten plik zawiera wszystkie twoje overrides kolorów, typografii, odstępów itp.
 ### Krok 3: Spakuj oba pliki razem
 
 Konwencja nazewnictwa:
-```
+```text
 moj-szablon/
   ├── bricks-template-hero.json    # szablon Bricksa
   ├── slashed-tokens-2026-05-28.json  # tokeny SLASHED
@@ -259,7 +259,7 @@ Jeśli nie ma → sprawdź wersję wtyczki (wymaga ≥ bieżącej).
 
 ## Skrócony cheatsheet
 
-```
+```text
 Przed projektowaniem:
   ✅ Kolor → z SLASHED palette group
   ✅ Custom CSS → var(--sf-*)
@@ -269,11 +269,11 @@ Przed projektowaniem:
   ❌ Layout → Global Colors Bricksa
 
 Eksport (z tej strony):
-  1. Admin → SLASHED → Export/Import → Download token file
+  1. Admin → SLASHED → Design Tokens → Export / Import → Download token file
   2. Bricks → Export template
 
 Import (na nową stronę):
-  1. Admin → SLASHED → Export/Import → Import token file
+  1. Admin → SLASHED → Design Tokens → Export / Import → Import token file
   2. Bricks → Import template
   3. Odśwież stronę
   4. Zweryfikuj w edytorze

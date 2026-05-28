@@ -30,6 +30,7 @@
   let importing = $state(false);
   let importResult = $state('');
   let importError = $state('');
+  let reloadCountdown = $state(0);
 
   async function handleImport() {
     const file = fileInput?.files?.[0];
@@ -41,7 +42,19 @@
       const text = await file.text();
       const data = JSON.parse(text);
       const result = await importTokens(data);
-      importResult = `Imported ${result.imported} section(s) successfully. Reload the page to see the updated values.`;
+      const settingsNote = result.settings_imported ? ' Plugin settings restored.' : '';
+      importResult = `Imported ${result.imported} section(s) successfully.${settingsNote}`;
+      // Reload the page after a short delay so the SPA picks up the new
+      // wp_options values — token state lives server-side and cannot be
+      // patched into the Svelte store without a full re-bootstrap.
+      reloadCountdown = 3;
+      const tick = setInterval(() => {
+        reloadCountdown -= 1;
+        if (reloadCountdown <= 0) {
+          clearInterval(tick);
+          window.location.reload();
+        }
+      }, 1000);
     } catch (e) {
       importError = e.message || 'Import failed';
     } finally {
@@ -100,7 +113,12 @@
       </button>
     </div>
     {#if importResult}
-      <p class="status status--ok">{importResult}</p>
+      <p class="status status--ok">
+        {importResult}
+        {#if reloadCountdown > 0}
+          Reloading in {reloadCountdown}…
+        {/if}
+      </p>
     {/if}
     {#if importError}
       <p class="status status--err">{importError}</p>

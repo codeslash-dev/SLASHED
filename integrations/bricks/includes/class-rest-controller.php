@@ -356,10 +356,37 @@ class Slashed_Bricks_REST_Controller {
 
 		Slashed_Bricks_Token_Store::update_settings( $all );
 
+		// Restore plugin-level settings (bundle, font-size) when present and valid.
+		$settings_imported = false;
+		if ( isset( $body['plugin_settings'] ) && is_array( $body['plugin_settings'] ) ) {
+			$raw      = $body['plugin_settings'];
+			$existing = Slashed_Bricks_Token_Store::get_plugin_settings();
+
+			if ( isset( $raw['css_bundle'] )
+				&& in_array( (string) $raw['css_bundle'], Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true )
+			) {
+				$existing['css_bundle'] = (string) $raw['css_bundle'];
+				$settings_imported = true;
+			}
+
+			if ( isset( $raw['html_font_size'] )
+				&& in_array( (string) $raw['html_font_size'], array( '', '100', '62.5' ), true )
+			) {
+				$existing['html_font_size'] = (string) $raw['html_font_size'];
+				$settings_imported = true;
+			}
+
+			if ( $settings_imported ) {
+				Slashed_Bricks_Token_Store::update_plugin_settings( $existing );
+			}
+		}
+
 		return rest_ensure_response(
 			array(
-				'imported' => $imported,
-				'tokens'   => Slashed_Bricks_Token_Store::get_settings(),
+				'imported'          => $imported,
+				'settings_imported' => $settings_imported,
+				'tokens'            => Slashed_Bricks_Token_Store::get_settings(),
+				'plugin_settings'   => Slashed_Bricks_Token_Store::get_plugin_settings(),
 			)
 		);
 	}
