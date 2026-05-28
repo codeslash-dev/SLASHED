@@ -59,9 +59,9 @@ rebrand workflow.
 | `--sf-caret-color` | `var(--sf-color-action)` |
 | `--sf-code-font-size` | `0.875em` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-action-light` | `oklch(0.60 0.16 210) *(registered)*` |
+| `--sf-color-action-light` | `oklch(0.50 0.22 235) *(registered)*` |
 | `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
-| `--sf-color-base-light` | `oklch(0.98 0.005 260) *(registered)*` |
+| `--sf-color-base-light` | `oklch(0.99 0.006 250) *(registered)*` |
 | `--sf-color-bg` | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
 | `--sf-color-bg--active` | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | `var(--sf-color-well)` |
@@ -77,19 +77,19 @@ rebrand workflow.
 | `--sf-color-code-bg` | `var(--sf-color-well)` |
 | `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-danger-light` | `oklch(0.48 0.24 12) *(registered)*` |
+| `--sf-color-danger-light` | `oklch(0.48 0.22 12) *(registered)*` |
 | `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.3)` |
 | `--sf-color-danger-strong` | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-danger-subtle` | `oklch(from var(--sf-color-danger) l c h / 0.1)` |
 | `--sf-color-dim` | `oklch(0 0 0 / 0.5)` |
 | `--sf-color-error` | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-error-light` | `oklch(0.62 0.20 35) *(registered)*` |
+| `--sf-color-error-light` | `oklch(0.50 0.20 25) *(registered)*` |
 | `--sf-color-error-muted` | `oklch(from var(--sf-color-error) l c h / 0.3)` |
 | `--sf-color-error-strong` | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-error-subtle` | `oklch(from var(--sf-color-error) l c h / 0.1)` |
 | `--sf-color-heading` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-info` | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-info-light` | `oklch(0.48 0.15 240) *(registered)*` |
+| `--sf-color-info-light` | `oklch(0.48 0.18 235) *(registered)*` |
 | `--sf-color-info-muted` | `oklch(from var(--sf-color-info) l c h / 0.3)` |
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.1)` |
@@ -103,24 +103,24 @@ rebrand workflow.
 | `--sf-color-mark-bg` | `oklch(from var(--sf-color-warning) l c h / 0.25)` |
 | `--sf-color-mark-text` | `inherit` |
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-neutral-light` | `oklch(0.45 0.02 260) *(registered)*` |
+| `--sf-color-neutral-light` | `oklch(0.52 0.025 260) *(registered)*` |
 | `--sf-color-overlay` | `oklch(from var(--sf-color-base) l c h / 0.9)` |
 | `--sf-color-primary` | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-primary-light` | `oklch(0.45 0.20 264) *(registered)*` |
+| `--sf-color-primary-light` | `oklch(0.47 0.27 264) *(registered)*` |
 | `--sf-color-raised` | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` |
 | `--sf-color-scheme` | `light dark` |
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-secondary-light` | `oklch(0.25 0.03 260) *(registered)*` |
-| `--sf-color-selection-bg` | `oklch(from var(--sf-color-action) l c h / 0.22)` |
+| `--sf-color-secondary-light` | `oklch(0.22 0.04 264) *(registered)*` |
+| `--sf-color-selection-bg` | `light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
 | `--sf-color-selection-text` | `inherit` |
 | `--sf-color-success` | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-success-light` | `oklch(0.48 0.17 150) *(registered)*` |
+| `--sf-color-success-light` | `oklch(0.50 0.16 145) *(registered)*` |
 | `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.3)` |
 | `--sf-color-success-strong` | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-success-subtle` | `oklch(from var(--sf-color-success) l c h / 0.12)` |
 | `--sf-color-surface` | `var(--sf-color-base)` |
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
-| `--sf-color-tertiary-light` | `oklch(0.48 0.14 310) *(registered)*` |
+| `--sf-color-tertiary-light` | `oklch(0.42 0.22 295) *(registered)*` |
 | `--sf-color-text` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-text--disabled` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` |
 | `--sf-color-text--inverse` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` |
