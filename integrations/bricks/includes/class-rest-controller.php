@@ -248,14 +248,19 @@ class Slashed_Bricks_REST_Controller {
 	 * @return WP_REST_Response
 	 */
 	public function save_settings( WP_REST_Request $request ) {
+		$html_font_size = $request->get_param( 'html_font_size' );
+		$css_bundle     = $request->get_param( 'css_bundle' );
+
+		if ( null === $html_font_size && null === $css_bundle ) {
+			return rest_ensure_response( Slashed_Bricks_Token_Store::get_plugin_settings() );
+		}
+
 		$settings = Slashed_Bricks_Token_Store::get_plugin_settings();
 
-		$html_font_size = $request->get_param( 'html_font_size' );
 		if ( null !== $html_font_size ) {
 			$settings['html_font_size'] = (string) $html_font_size;
 		}
 
-		$css_bundle = $request->get_param( 'css_bundle' );
 		if ( null !== $css_bundle ) {
 			$settings['css_bundle'] = (string) $css_bundle;
 		}

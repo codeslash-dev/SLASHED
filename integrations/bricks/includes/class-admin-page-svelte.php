@@ -71,6 +71,11 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	/**
 	 * Enqueue the built Svelte bundle on this page only.
 	 *
+	 * Compares against the value returned by add_menu_page() at registration
+	 * time rather than assembling the hook name ourselves — WP's hook-name
+	 * conventions have changed across versions, so trusting the return value
+	 * is the only safe approach.
+	 *
 	 * @param string $hook_suffix Current admin page hook suffix.
 	 */
 	public function enqueue_assets( $hook_suffix ) {
@@ -130,6 +135,12 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	/**
 	 * Tag the SPA bundle as a JS module so import statements work.
 	 *
+	 * Vite emits ES modules; WordPress' default <script> tag has no type
+	 * attribute, which would prevent the import graph from resolving. The
+	 * regex uses limit 1 so only the opening tag is touched, not any inline
+	 * script content that might contain `<script>` as a literal string.
+	 * Filter is narrowed by handle so it never affects other enqueued scripts.
+	 *
 	 * @param string $tag    Generated script tag.
 	 * @param string $handle Script handle.
 	 * @param string $src    Script src URL.
@@ -169,6 +180,9 @@ class Slashed_Bricks_Admin_Page_Svelte {
 
 	/**
 	 * Admin notice rendered when the built bundle is missing.
+	 *
+	 * Helps developers who clone the repo without running the admin-app
+	 * build step understand why the page is blank.
 	 */
 	public function render_missing_bundle_notice() {
 		echo '<div class="notice notice-error"><p>';

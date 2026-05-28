@@ -62,9 +62,11 @@ class Slashed_Bricks_Enqueue {
         }
 
         // Use file modification time for cache-busting when the CSS exists locally.
-        $filename    = 'slashed.' . slashed_bricks_get_css_bundle() . '.css';
-        $repo_path   = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
-        $local_path  = SLASHED_BRICKS_PATH . 'dist/' . $filename;
+        // Derive the filename from the already-resolved URL so we don't re-read
+        // plugin settings a second time (slashed_bricks_get_css_url() already did).
+        $filename   = basename( (string) wp_parse_url( $css_url, PHP_URL_PATH ) );
+        $repo_path  = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
+        $local_path = SLASHED_BRICKS_PATH . 'dist/' . $filename;
 
         if ( file_exists( $repo_path ) ) {
             $version = (string) filemtime( $repo_path );

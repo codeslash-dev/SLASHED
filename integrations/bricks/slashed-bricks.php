@@ -39,6 +39,13 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
 define( 'SLASHED_BRICKS_CSS_REF', 'v0.2.12' );
 
 /**
+ * Token Store is loaded early so slashed_bricks_get_css_bundle() can call
+ * Slashed_Bricks_Token_Store::get_plugin_settings() at any point, even
+ * before the rest of the admin/data classes are initialised.
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-token-store.php';
+
+/**
  * Get the configured CSS bundle type (essential / optimal / full).
  *
  * Reads from plugin settings; falls back to "optimal". Used both for
@@ -47,7 +54,7 @@ define( 'SLASHED_BRICKS_CSS_REF', 'v0.2.12' );
  * @return string One of 'essential', 'optimal', 'full'.
  */
 function slashed_bricks_get_css_bundle() {
-    $settings = get_option( 'slashed_bricks_settings', array() );
+    $settings = Slashed_Bricks_Token_Store::get_plugin_settings();
     $bundle   = isset( $settings['css_bundle'] ) ? (string) $settings['css_bundle'] : 'optimal';
     if ( ! in_array( $bundle, array( 'essential', 'optimal', 'full' ), true ) ) {
         $bundle = 'optimal';
@@ -61,7 +68,7 @@ function slashed_bricks_get_css_bundle() {
  * Defaults to the jsDelivr CDN pinned to an immutable release tag
  * (see SLASHED_BRICKS_CSS_REF) so the plugin works without any local
  * file setup. The specific file (essential / optimal / full) is chosen
- * from the 'css_bundle' plugin setting.  If a local copy is detected
+ * from the 'css_bundle' plugin setting. If a local copy is detected
  * (symlink/in-repo mode or copy-install mode), the local file takes
  * precedence for faster loads and offline development.
  *
@@ -125,16 +132,11 @@ function slashed_bricks_is_bricks_active() {
 }
 
 /**
- * Load the Token Store class unconditionally so it is available on both
- * admin and front-end requests (e.g. when Inventory reads color overrides).
- */
-require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
-
-/**
  * Initialize the admin page.
  *
- * The admin page loads regardless of whether Bricks is active so users
- * can configure tokens before activating the Bricks theme.
+ * Runs regardless of whether Bricks is active so users can configure tokens
+ * before activating the theme. Bricks runtime checks are handled separately
+ * in slashed_bricks_init().
  */
 function slashed_bricks_admin_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
