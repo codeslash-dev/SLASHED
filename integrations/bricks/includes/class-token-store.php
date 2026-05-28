@@ -48,6 +48,12 @@ class Slashed_Bricks_Token_Store {
 	const SETTINGS_OPTION_NAME = 'slashed_bricks_settings';
 
 	/**
+	 * Allowed values for the css_bundle plugin setting.
+	 * Single source of truth used by URL resolution and REST validation.
+	 */
+	const ALLOWED_CSS_BUNDLES = array( 'essential', 'optimal', 'full' );
+
+	/**
 	 * Read all token overrides.
 	 *
 	 * Always returns an array even when the option is missing or

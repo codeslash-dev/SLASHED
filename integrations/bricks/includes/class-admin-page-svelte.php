@@ -1,11 +1,23 @@
 <?php
 /**
- * Svelte-based admin page (POC).
+ * Svelte-based admin page.
  *
- * Lives alongside the legacy jQuery admin page so both can be compared
- * side-by-side. PHP still owns capability checks, nonces, sanitization,
- * and option storage; this class just registers a second submenu and
- * mounts a Svelte SPA into a single div on it.
+ * Registers the top-level "SLASHED" admin menu and mounts the Svelte SPA
+ * built from integrations/bricks/admin-app/ into a single div.
+ *
+ * Responsibilities split with the SPA:
+ *
+ *   PHP (this class)                 Svelte (admin-app/)
+ *   --------------------------------|--------------------------------
+ *   register_menu                   | render UI
+ *   capability check                | reactive state + dirty tracking
+ *   enqueue built bundle            | live preview
+ *   wp_localize_script hydration    | optimistic save / error toasts
+ *   REST endpoint (REST controller) | calls REST endpoint
+ *   sanitize + option write         | -
+ *
+ * The mount point is just <div id="slashed-admin-app"></div>; everything
+ * inside it is owned by Svelte.
  *
  * @package SLASHED_Bricks
  */
@@ -16,43 +28,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Slashed_Bricks_Admin_Page_Svelte
- *
- * Adds a "Tokens (v2)" submenu under SLASHED that boots the Svelte app
- * built from integrations/bricks/admin-app/.
- *
- * Responsibilities split with the SPA:
- *
- *   PHP (this class)                 Svelte (admin-app/)
- *   --------------------------------|--------------------------------
- *   register_submenu                | render UI
- *   capability check                | reactive state + dirty tracking
- *   enqueue built bundle            | live preview
- *   wp_localize_script hydration    | optimistic save / error toasts
- *   REST endpoint (REST controller) | calls REST endpoint
- *   sanitize + option write         | -
- *
- * The mount point is just <div id="slashed-admin-app"></div>; everything
- * inside it is owned by Svelte. This is the cleanest line to draw - WP
- * keeps doing the WordPress-correct things, the SPA owns the inside of
- * one div.
- *
- * The class itself is stateless except for the page hook suffix it
- * captures during submenu registration; tab metadata, settings, and
- * defaults all come from the dedicated helper classes.
  */
 class Slashed_Bricks_Admin_Page_Svelte {
 
 	/**
-	 * Submenu slug. Must be unique across the WP admin.
+	 * Top-level menu slug.
 	 */
-	const PAGE_SLUG = 'slashed-bricks-svelte';
+	const PAGE_SLUG = 'slashed-bricks';
 
 	/**
-	 * Hook suffix returned by add_submenu_page(). Captured at registration
+	 * Hook suffix returned by add_menu_page(). Captured at registration
 	 * time and compared in enqueue_assets() so we never accidentally load
-	 * the SPA bundle on other admin screens. WordPress mangles the parent
-	 * slug into the hook name in ways that vary across versions; relying
-	 * on the value WP itself returned avoids brittle string assembly.
+	 * the SPA bundle on other admin screens.
 	 *
 	 * @var string
 	 */
@@ -62,43 +49,36 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'register_submenu' ), 20 );
+		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
 	/**
-	 * Register the submenu under the existing SLASHED top-level page.
-	 *
-	 * Priority 20 so the parent page (registered in
-	 * Slashed_Bricks_Admin_Page::register_menu at default priority) has
-	 * already been added when we attach to it.
+	 * Register the top-level SLASHED admin menu.
 	 */
-	public function register_submenu() {
-		$this->hook_suffix = (string) add_submenu_page(
-			'slashed-bricks',
-			__( 'SLASHED Tokens (v2)', 'slashed-bricks' ),
-			__( 'Tokens (v2)', 'slashed-bricks' ),
+	public function register_menu() {
+		$this->hook_suffix = (string) add_menu_page(
+			__( 'SLASHED Settings', 'slashed-bricks' ),
+			__( 'SLASHED', 'slashed-bricks' ),
 			'manage_options',
 			self::PAGE_SLUG,
-			array( $this, 'render_page' )
+			array( $this, 'render_page' ),
+			'dashicons-art',
+			59
 		);
 	}
 
 	/**
 	 * Enqueue the built Svelte bundle on this page only.
 	 *
-	 * The bundle is fully self-contained: no jQuery dependency, no
-	 * wp-color-picker, no other admin libraries. Cache-busting uses
-	 * filemtime() on the built artifact so a fresh `npm run build`
-	 * invalidates browser caches without manual version bumps.
+	 * Compares against the value returned by add_menu_page() at registration
+	 * time rather than assembling the hook name ourselves — WP's hook-name
+	 * conventions have changed across versions, so trusting the return value
+	 * is the only safe approach.
 	 *
 	 * @param string $hook_suffix Current admin page hook suffix.
 	 */
 	public function enqueue_assets( $hook_suffix ) {
-		// Only fire on our submenu. We compare against the value returned
-		// by add_submenu_page() at registration time rather than building
-		// the string ourselves - WP's hook-name conventions for submenus
-		// have changed across versions.
 		if ( '' === $this->hook_suffix || $hook_suffix !== $this->hook_suffix ) {
 			return;
 		}
@@ -109,8 +89,6 @@ class Slashed_Bricks_Admin_Page_Svelte {
 		$js_path  = $plugin_path . 'assets/admin-app/app.js';
 		$css_path = $plugin_path . 'assets/admin-app/app.css';
 
-		// Defensive: if the build artefact is missing, surface an admin
-		// notice rather than silently shipping a broken page.
 		if ( ! file_exists( $js_path ) ) {
 			add_action( 'admin_notices', array( $this, 'render_missing_bundle_notice' ) );
 			return;
@@ -137,9 +115,6 @@ class Slashed_Bricks_Admin_Page_Svelte {
 		// Modules need type=module on the <script> tag.
 		add_filter( 'script_loader_tag', array( $this, 'mark_as_module' ), 10, 3 );
 
-		// Hydration payload. Mirrors the structure the Svelte app expects
-		// in window.slashedBricksApp - see admin-app/index.html for the
-		// dev-time equivalent.
 		wp_localize_script(
 			'slashed-bricks-admin-app',
 			'slashedBricksApp',
@@ -160,9 +135,11 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	/**
 	 * Tag the SPA bundle as a JS module so import statements work.
 	 *
-	 * Vite emits ES modules; WordPress' default <script> tag has no
-	 * type attribute, which would prevent the import-graph from loading.
-	 * Filter narrowed by handle so this never affects other scripts.
+	 * Vite emits ES modules; WordPress' default <script> tag has no type
+	 * attribute, which would prevent the import graph from resolving. The
+	 * regex uses limit 1 so only the opening tag is touched, not any inline
+	 * script content that might contain `<script>` as a literal string.
+	 * Filter is narrowed by handle so it never affects other enqueued scripts.
 	 *
 	 * @param string $tag    Generated script tag.
 	 * @param string $handle Script handle.
@@ -173,14 +150,11 @@ class Slashed_Bricks_Admin_Page_Svelte {
 		if ( 'slashed-bricks-admin-app' !== $handle ) {
 			return $tag;
 		}
-		// Insert type="module" without clobbering an existing type attribute.
-		// preg_replace with limit 1 so only the opening tag is touched.
 		return preg_replace( '/<script(\b[^>]*)>/', '<script type="module"$1>', $tag, 1 );
 	}
 
 	/**
-	 * Render the page shell. The Svelte app takes over inside
-	 * #slashed-admin-app once main.js runs.
+	 * Render the page shell. The Svelte app takes over inside #slashed-admin-app.
 	 */
 	public function render_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -192,12 +166,12 @@ class Slashed_Bricks_Admin_Page_Svelte {
 				<noscript>
 					<div class="notice notice-warning">
 						<p>
-							<?php esc_html_e( 'This settings page requires JavaScript. The legacy form (still fully functional, no JS required) is available under SLASHED &rarr; SLASHED.', 'slashed-bricks' ); ?>
+							<?php esc_html_e( 'This settings page requires JavaScript to be enabled in your browser.', 'slashed-bricks' ); ?>
 						</p>
 					</div>
 				</noscript>
 				<p style="color:#50575e; padding: 24px 0;">
-					<?php esc_html_e( 'Loading SLASHED admin SPA…', 'slashed-bricks' ); ?>
+					<?php esc_html_e( 'Loading SLASHED settings…', 'slashed-bricks' ); ?>
 				</p>
 			</div>
 		</div>
@@ -208,7 +182,7 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	 * Admin notice rendered when the built bundle is missing.
 	 *
 	 * Helps developers who clone the repo without running the admin-app
-	 * build step understand why the page is empty.
+	 * build step understand why the page is blank.
 	 */
 	public function render_missing_bundle_notice() {
 		echo '<div class="notice notice-error"><p>';

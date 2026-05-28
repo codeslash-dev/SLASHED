@@ -1,11 +1,8 @@
 <script>
-  /**
-   * Bundle / Settings tab. Shows bundle info and the html_font_size
-   * plugin setting with its own save button (independent of token saves).
-   */
   import { meta } from '../lib/stores.svelte.js';
   import { saveSettings } from '../lib/api.js';
 
+  let bundle = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
   let fontSize = $state(meta.pluginSettings?.html_font_size ?? '');
   let saving = $state(false);
   let saved = $state(false);
@@ -17,7 +14,7 @@
     saved = false;
     error = '';
     try {
-      await saveSettings({ html_font_size: fontSize });
+      await saveSettings({ css_bundle: bundle, html_font_size: fontSize });
       saved = true;
       if (savedTimer) clearTimeout(savedTimer);
       savedTimer = setTimeout(() => { saved = false; savedTimer = null; }, 3000);
@@ -44,6 +41,18 @@
   </dl>
 
   <h2 class="settings-heading">Plugin Settings</h2>
+
+  <div class="setting-row">
+    <label for="css-bundle">CSS Bundle</label>
+    <select id="css-bundle" bind:value={bundle}>
+      <option value="essential">Essential — base variables only</option>
+      <option value="optimal">Optimal — variables + core utilities (default)</option>
+      <option value="full">Full — all utilities included</option>
+    </select>
+    <p class="description">
+      Choose which SLASHED CSS bundle to load on the frontend and in the Bricks editor canvas.
+    </p>
+  </div>
 
   <div class="setting-row">
     <label for="html-font-size">HTML Font Size</label>
@@ -91,7 +100,7 @@
   .info dd { margin: 0; color: #50575e; }
 
   .setting-row {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
   .setting-row label {
     display: block;

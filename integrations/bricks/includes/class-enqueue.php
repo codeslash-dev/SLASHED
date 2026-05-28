@@ -62,15 +62,23 @@ class Slashed_Bricks_Enqueue {
         }
 
         // Use file modification time for cache-busting when the CSS exists locally.
-        $repo_path   = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';
-        $local_path  = SLASHED_BRICKS_PATH . 'dist/slashed.optimal.css';
+        // Derive the filename from the already-resolved URL so we don't re-read
+        // plugin settings a second time (slashed_bricks_get_css_url() already did).
+        $filename = basename( (string) wp_parse_url( $css_url, PHP_URL_PATH ) );
 
-        if ( file_exists( $repo_path ) ) {
-            $version = (string) filemtime( $repo_path );
-        } elseif ( file_exists( $local_path ) ) {
-            $version = (string) filemtime( $local_path );
-        } else {
+        if ( '' === $filename ) {
             $version = SLASHED_BRICKS_VERSION;
+        } else {
+            $repo_path  = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
+            $local_path = SLASHED_BRICKS_PATH . 'dist/' . $filename;
+
+            if ( file_exists( $repo_path ) ) {
+                $version = (string) filemtime( $repo_path );
+            } elseif ( file_exists( $local_path ) ) {
+                $version = (string) filemtime( $local_path );
+            } else {
+                $version = SLASHED_BRICKS_VERSION;
+            }
         }
 
         wp_enqueue_style(

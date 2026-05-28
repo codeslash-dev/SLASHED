@@ -117,10 +117,18 @@ class Slashed_Bricks_REST_Controller {
 					'args'                => array(
 						'html_font_size' => array(
 							'type'              => 'string',
-							'required'          => true,
+							'required'          => false,
 							'sanitize_callback' => 'sanitize_text_field',
 							'validate_callback' => function( $value ) {
 								return in_array( (string) $value, array( '', '100', '62.5' ), true );
+							},
+						),
+						'css_bundle'     => array(
+							'type'              => 'string',
+							'required'          => false,
+							'sanitize_callback' => 'sanitize_key',
+							'validate_callback' => function( $value ) {
+								return in_array( (string) $value, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true );
 							},
 						),
 					),
@@ -231,28 +239,32 @@ class Slashed_Bricks_REST_Controller {
 	}
 
 	/**
-	 * Save plugin settings via REST.
+	 * Save plugin settings via REST (partial update — only provided fields are written).
 	 *
-	 * Validates that html_font_size is one of the allowed values before
-	 * persisting to the database.
+	 * validate_callback on each arg ensures values are already sane by the
+	 * time this handler runs; we just merge present fields into the stored map.
 	 *
 	 * @param WP_REST_Request $request Incoming request.
-	 * @return WP_REST_Response|WP_Error
+	 * @return WP_REST_Response
 	 */
 	public function save_settings( WP_REST_Request $request ) {
-		$html_font_size = (string) $request->get_param( 'html_font_size' );
+		$html_font_size = $request->get_param( 'html_font_size' );
+		$css_bundle     = $request->get_param( 'css_bundle' );
 
-		$allowed = array( '', '100', '62.5' );
-		if ( ! in_array( $html_font_size, $allowed, true ) ) {
-			return new WP_Error(
-				'slashed_bricks_invalid_font_size',
-				__( 'Invalid html_font_size value. Allowed: empty string, "100", or "62.5".', 'slashed-bricks' ),
-				array( 'status' => 400 )
-			);
+		if ( null === $html_font_size && null === $css_bundle ) {
+			return rest_ensure_response( Slashed_Bricks_Token_Store::get_plugin_settings() );
 		}
 
-		$settings                   = Slashed_Bricks_Token_Store::get_plugin_settings();
-		$settings['html_font_size'] = $html_font_size;
+		$settings = Slashed_Bricks_Token_Store::get_plugin_settings();
+
+		if ( null !== $html_font_size ) {
+			$settings['html_font_size'] = (string) $html_font_size;
+		}
+
+		if ( null !== $css_bundle ) {
+			$settings['css_bundle'] = (string) $css_bundle;
+		}
+
 		Slashed_Bricks_Token_Store::update_plugin_settings( $settings );
 
 		return rest_ensure_response( $settings );
