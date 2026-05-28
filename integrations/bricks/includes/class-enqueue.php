@@ -62,8 +62,9 @@ class Slashed_Bricks_Enqueue {
         }
 
         // Use file modification time for cache-busting when the CSS exists locally.
-        $repo_path   = SLASHED_BRICKS_PATH . '../../dist/slashed.optimal.css';
-        $local_path  = SLASHED_BRICKS_PATH . 'dist/slashed.optimal.css';
+        $filename    = 'slashed.' . slashed_bricks_get_css_bundle() . '.css';
+        $repo_path   = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
+        $local_path  = SLASHED_BRICKS_PATH . 'dist/' . $filename;
 
         if ( file_exists( $repo_path ) ) {
             $version = (string) filemtime( $repo_path );
