@@ -7,16 +7,20 @@
   <!--
     BRICKS BUILDER USAGE
     ─────────────────────────────────────────────────────────────────────
-    1. Remove the two <link> tags below (SLASHED plugin + Google Fonts are
-       loaded by WordPress/the plugin already).
-    2. Paste the <style> block into Bricks > Settings > Custom CSS.
-    3. Paste the <script> block into Bricks > Settings > Custom JS.
+    1. Remove ALL four <link> tags below — in Bricks:
+       • SLASHED is loaded automatically by the plugin.
+       • Add Outfit + DM Sans via Bricks › Settings › Custom Code
+         (head) or your theme's font loader.
+    2. From the <style> block, paste everything EXCEPT the
+       "Standalone-only reset" comment block into
+       Bricks › Settings › Custom CSS.
+    3. Paste the <script> block into Bricks › Settings › Custom JS.
     4. Paste each <!-- SECTION --> block into its own Bricks Code element.
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@v0.4.4/dist/slashed.optimal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@v0.4.4/dist/slashed.optimal.css?ver=1.0.0">
   <!-- Remove this link when pasting into Bricks — the plugin loads SLASHED automatically -->
 
 <style>
@@ -24,17 +28,34 @@
    BRAND TOKENS — paste into Bricks › Settings › Custom CSS
    ═══════════════════════════════════════════════════════════════ */
 :root {
-  --sf-color-primary-light:   oklch(0.65 0.20 45);
-  --sf-color-secondary-light: oklch(0.10 0.04 255);
-  --sf-color-base-light:      oklch(0.98 0.01 55);
+  /* Source tokens — SLASHED derives dark-mode variants automatically */
+  --sf-color-primary-light:   oklch(0.65 0.20 45);   /* brand orange */
+  --sf-color-secondary-light: oklch(0.10 0.04 255);  /* deep navy */
+  --sf-color-neutral-light:   oklch(0.49 0.04 243);  /* blue-gray — drives heading + text formulas */
+  --sf-color-base-light:      oklch(0.98 0.01 55);   /* warm cream */
   --sf-font-heading: 'Outfit',  system-ui, sans-serif;
   --sf-font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Override the derived secondary-text token so it resolves to the
+     design's medium gray (#5D6B82) in light mode instead of the
+     formula default (~0.24 lightness, near-black). */
+  --sf-color-text--secondary: light-dark(
+    oklch(0.46 0.04 243),
+    oklch(0.72 0.03 243)
+  );
 }
 
-/* ── Reset ──────────────────────────────────────────────────── */
+/* ── Standalone-only reset — OMIT when pasting into Bricks ─── */
 *, *::before, *::after { box-sizing: border-box; }
 body { font-family: var(--sf-font-body); background: var(--sf-color-bg); color: var(--sf-color-text); margin: 0; overflow-x: hidden; }
-h1,h2,h3,h4,h5 { font-family: var(--sf-font-heading); line-height: 1.15; font-weight: 700; margin: 0; }
+/* ── End standalone-only ────────────────────────────────────── */
+
+/* Heading reset scoped to cs- components — safe to paste in Bricks */
+.cs-nav h1, .cs-nav h2, .cs-nav h3, .cs-nav h4, .cs-nav h5,
+.cs-section h1, .cs-section h2, .cs-section h3, .cs-section h4, .cs-section h5,
+footer h1, footer h2, footer h3, footer h4, footer h5 {
+  font-family: var(--sf-font-heading); line-height: 1.15; font-weight: 700; margin: 0;
+}
 a { color: inherit; text-decoration: none; }
 button { font-family: var(--sf-font-body); }
 
