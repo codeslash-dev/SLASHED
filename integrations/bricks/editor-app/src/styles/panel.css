@@ -21,9 +21,13 @@
 /* Badge — uses fallbacks because badges are injected outside #slashed-rebemer-host
  *
  * Visual goal: read as a small inline word inside the structure-panel
- * row, sitting between the element label and Bricks' own action icons.
- * Not a chip, not a button-looking thing — just discreet, clickable
- * text the user can ignore until they want it.
+ * row, sitting between the element label and Bricks' own action icons,
+ * AND behave the same way as those action icons:
+ *
+ *   - Hidden by default.
+ *   - Revealed when the user hovers the row (or tabs into it).
+ *   - Sized comparably to a single action-icon glyph so it doesn't
+ *     dominate the row.
  *
  * The host span uses inline-flex so it slots cleanly into whatever
  * layout Bricks uses for the row (currently flex with space-between).
@@ -34,15 +38,53 @@
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
-  margin: 0 6px;
+  margin: 0 4px;
+  /* Hidden by default. Revealed by the row-hover rules below — same
+     pattern Bricks uses to show its own .actions on row hover. We use
+     opacity (not display) so the row layout doesn't shift on reveal,
+     and pointer-events:none while hidden so the invisible badge can't
+     swallow clicks meant for the row. */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 80ms linear;
 }
+
+/* Reveal on row hover.
+ *
+ * Two selector pairs cover both injection paths used by main.js:
+ *   1. `.structure-item:hover` — the preferred mount point. Bricks'
+ *      `.structure-item` wraps only the row's own content (title +
+ *      actions), so hovering a nested child does NOT trigger this on
+ *      the parent — exactly the behavior we want.
+ *   2. `li[data-id]:hover > .rebemer-badge-host` — the fallback for
+ *      Bricks builds without `.structure-item`. The direct-child
+ *      combinator stops nested-row hover from revealing ancestor
+ *      badges in that fallback path.
+ *
+ * `:focus-within` keeps the badge keyboard-reachable: tabbing into
+ * any focusable child of the row (including the badge itself) reveals
+ * it, matching how Bricks reveals its own action buttons on focus. */
+.structure-item:hover .rebemer-badge-host,
+.structure-item:focus-within .rebemer-badge-host,
+li[data-id]:hover > .rebemer-badge-host,
+li[data-id]:focus-within > .rebemer-badge-host {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .rebemer-badge {
-  font: 500 10px/1 var(--rebemer-font, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
-  letter-spacing: .3px;
+  /* Sized to read like one of Bricks' own action-icon glyphs:
+     small, single-line, no chip styling. Bricks' structure rows
+     apply text-transform: uppercase to descendants in some builds,
+     so we explicitly reset it — otherwise "reBEM" renders as
+     "REBEM" and loses the BEM-cased branding. */
+  font: 600 9px/1 var(--rebemer-font, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--rebemer-fg-muted, #8a8d95);
   background: transparent;
   border: 0;
-  padding: 2px 4px;
+  padding: 1px 3px;
   margin: 0;
   cursor: pointer;
   border-radius: 2px;
