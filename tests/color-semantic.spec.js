@@ -9,55 +9,34 @@ const { pathToFileURL } = require('url');
 // fixture.html loads slashed.full.css (includes tokens.palette.css)
 const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
 
-// ── Shared in-browser helpers ────────────────────────────────────
-// Passed to page.evaluate; must be self-contained.
-function makeHelpers() {
-  const cv = document.createElement('canvas');
-  cv.width = cv.height = 1;
+// ── Serialisable in-browser helpers ─────────────────────────────
+// All functions below are passed to page.evaluate() so they must be
+// self-contained (no closure over Node.js variables).
+
+// Shared luminance + resolve wiring used by every helper below.
+function _lum(color) {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
   const ctx = cv.getContext('2d', { willReadFrequently: true });
-
-  function toLum(color) {
-    ctx.clearRect(0, 0, 1, 1);
-    ctx.fillStyle = '#000';
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, 1, 1);
-    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-    const lin = (v) => {
-      v /= 255;
-      return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
-    };
-    return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-  }
-
-  function ratio(lumA, lumB) {
-    const hi = Math.max(lumA, lumB);
-    const lo = Math.min(lumA, lumB);
-    return (hi + 0.05) / (lo + 0.05);
-  }
-
-  function resolveColor(token) {
-    const el = document.createElement('div');
-    el.style.backgroundColor = `var(${token})`;
-    document.body.appendChild(el);
-    const color = getComputedStyle(el).backgroundColor;
-    el.remove();
-    return color;
-  }
-
-  return { toLum, ratio, resolveColor };
+  ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=color; ctx.fillRect(0,0,1,1);
+  const [r,g,b] = ctx.getImageData(0,0,1,1).data;
+  const lin = v => { v/=255; return v<=0.03928 ? v/12.92 : ((v+0.055)/1.055)**2.4; };
+  return 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
+}
+function _resolve(tok) {
+  const el = document.createElement('div'); el.style.backgroundColor = `var(${tok})`;
+  document.body.appendChild(el); const c = getComputedStyle(el).backgroundColor; el.remove(); return c;
 }
 
-// Shared contrast measurement function for page.evaluate.
 // Returns WCAG contrast ratio between two CSS custom property tokens.
 function contrastBetween(token1, token2) {
-  const cv = document.createElement('canvas');
-  cv.width = cv.height = 1;
+  // Must be self-contained: re-declare helpers (page.evaluate serialises the fn body).
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
   const ctx = cv.getContext('2d', { willReadFrequently: true });
   const toLum = (color) => {
-    ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = '#000'; ctx.fillStyle = color; ctx.fillRect(0, 0, 1, 1);
-    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-    const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
-    return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+    ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=color; ctx.fillRect(0,0,1,1);
+    const [r,g,b] = ctx.getImageData(0,0,1,1).data;
+    const lin = v => { v/=255; return v<=0.03928 ? v/12.92 : ((v+0.055)/1.055)**2.4; };
+    return 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
   };
   const resolve = (tok) => {
     const el = document.createElement('div'); el.style.backgroundColor = `var(${tok})`;
@@ -65,7 +44,64 @@ function contrastBetween(token1, token2) {
   };
   const a = toLum(resolve(token1));
   const b = toLum(resolve(token2));
-  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  return (Math.max(a,b) + 0.05) / (Math.min(a,b) + 0.05);
+}
+
+// Returns luminance of all three surface tokens.
+function surfaceLuminances() {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  const toLum = c => {
+    ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=c; ctx.fillRect(0,0,1,1);
+    const [r,g,b]=ctx.getImageData(0,0,1,1).data;
+    const lin=v=>{v/=255;return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4;};
+    return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  };
+  const res=tok=>{const el=document.createElement('div');el.style.backgroundColor=`var(${tok})`;document.body.appendChild(el);const c=getComputedStyle(el).backgroundColor;el.remove();return c;};
+  return { bg: toLum(res('--sf-color-bg')), raised: toLum(res('--sf-color-raised')), well: toLum(res('--sf-color-well')) };
+}
+
+// Returns luminance of the page background (--sf-color-bg).
+function bgLuminance() {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  const el=document.createElement('div'); el.style.backgroundColor='var(--sf-color-bg)';
+  document.body.appendChild(el); const c=getComputedStyle(el).backgroundColor; el.remove();
+  ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=c; ctx.fillRect(0,0,1,1);
+  const [r,g,b]=ctx.getImageData(0,0,1,1).data;
+  const lin=v=>{v/=255;return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4;};
+  return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+}
+
+// Returns {step, lum} pairs for the primary palette steps provided.
+function paletteLuminances(steps) {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  return steps.map(s => {
+    ctx.clearRect(0,0,1,1); ctx.fillStyle='#000';
+    const el=document.createElement('div'); el.style.backgroundColor=`var(--sf-color-primary-${s})`;
+    document.body.appendChild(el); ctx.fillStyle=getComputedStyle(el).backgroundColor; el.remove();
+    ctx.fillRect(0,0,1,1);
+    const [r,g,b]=ctx.getImageData(0,0,1,1).data;
+    const lin=v=>{v/=255;return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4;};
+    return { step: s, lum: 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b) };
+  });
+}
+
+// Returns luminance of primary palette steps 50 and 950.
+function palettePolarLuminances() {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  const toLum = tok => {
+    ctx.clearRect(0,0,1,1); ctx.fillStyle='#000';
+    const el=document.createElement('div'); el.style.backgroundColor=`var(${tok})`;
+    document.body.appendChild(el); ctx.fillStyle=getComputedStyle(el).backgroundColor; el.remove();
+    ctx.fillRect(0,0,1,1);
+    const [r,g,b]=ctx.getImageData(0,0,1,1).data;
+    const lin=v=>{v/=255;return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4;};
+    return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  };
+  return { lum50: toLum('--sf-color-primary-50'), lum950: toLum('--sf-color-primary-950') };
 }
 
 for (const theme of ['light', 'dark']) {
@@ -110,45 +146,16 @@ for (const theme of ['light', 'dark']) {
 
     // ── Surface hierarchy: bg ≠ raised ≠ well ───────────────────
     test('bg, raised, and well surfaces have distinct luminance values', async ({ page }) => {
-      const lums = await page.evaluate(() => {
-        const cv = document.createElement('canvas'); cv.width = cv.height = 1;
-        const ctx = cv.getContext('2d', { willReadFrequently: true });
-        const toLum = (c) => {
-          ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=c; ctx.fillRect(0,0,1,1);
-          const [r,g,b] = ctx.getImageData(0,0,1,1).data;
-          const lin = v => { v/=255; return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4; };
-          return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
-        };
-        const resolve = tok => {
-          const el=document.createElement('div'); el.style.backgroundColor=`var(${tok})`;
-          document.body.appendChild(el); const c=getComputedStyle(el).backgroundColor; el.remove(); return c;
-        };
-        return {
-          bg:     toLum(resolve('--sf-color-bg')),
-          raised: toLum(resolve('--sf-color-raised')),
-          well:   toLum(resolve('--sf-color-well')),
-        };
-      });
+      const lums = await page.evaluate(surfaceLuminances);
       // Each surface should differ by at least 0.002 in luminance
       expect(Math.abs(lums.bg - lums.raised)).toBeGreaterThan(0.002);
       expect(Math.abs(lums.bg - lums.well)).toBeGreaterThan(0.002);
+      expect(Math.abs(lums.raised - lums.well)).toBeGreaterThan(0.002);
     });
 
     // ── Background polarity ──────────────────────────────────────
     test('page background luminance is > 0.5 in light, < 0.5 in dark', async ({ page }) => {
-      const lum = await page.evaluate(() => {
-        const cv = document.createElement('canvas'); cv.width = cv.height = 1;
-        const ctx = cv.getContext('2d', { willReadFrequently: true });
-        const toLum = (c) => {
-          ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=c; ctx.fillRect(0,0,1,1);
-          const [r,g,b] = ctx.getImageData(0,0,1,1).data;
-          const lin = v => { v/=255; return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4; };
-          return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
-        };
-        const el=document.createElement('div'); el.style.backgroundColor='var(--sf-color-bg)';
-        document.body.appendChild(el); const c=getComputedStyle(el).backgroundColor; el.remove();
-        return toLum(c);
-      });
+      const lum = await page.evaluate(bgLuminance);
       if (theme === 'light') {
         expect(lum).toBeGreaterThan(0.5);
       } else {
@@ -187,7 +194,7 @@ for (const theme of ['light', 'dark']) {
     // ── Status colours non-transparent ──────────────────────────
     for (const status of ['success', 'warning', 'error', 'info', 'danger']) {
       test(`--sf-color-${status} resolves to an opaque colour`, async ({ page }) => {
-        const lum = await page.evaluate((tok) => {
+        const alpha = await page.evaluate((tok) => {
           const cv = document.createElement('canvas'); cv.width = cv.height = 1;
           const ctx = cv.getContext('2d', { willReadFrequently: true });
           const el = document.createElement('div');
@@ -199,7 +206,7 @@ for (const theme of ['light', 'dark']) {
           const [r,g,b,a] = ctx.getImageData(0,0,1,1).data;
           return a; // 255 = fully opaque
         }, `--sf-color-${status}`);
-        expect(lum).toBe(255);
+        expect(alpha).toBe(255);
       });
     }
   });
@@ -212,22 +219,7 @@ test.describe('Palette scale — primary', () => {
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
 
     const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
-    const lums = await page.evaluate((steps) => {
-      const cv = document.createElement('canvas'); cv.width = cv.height = 1;
-      const ctx = cv.getContext('2d', { willReadFrequently: true });
-      return steps.map((s) => {
-        ctx.clearRect(0,0,1,1); ctx.fillStyle='#000';
-        const el = document.createElement('div');
-        el.style.backgroundColor = `var(--sf-color-primary-${s})`;
-        document.body.appendChild(el);
-        ctx.fillStyle = getComputedStyle(el).backgroundColor;
-        el.remove();
-        ctx.fillRect(0,0,1,1);
-        const [r,g,b] = ctx.getImageData(0,0,1,1).data;
-        const lin = v => { v/=255; return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4; };
-        return { step: s, lum: 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b) };
-      });
-    }, steps);
+    const lums = await page.evaluate(paletteLuminances, steps);
 
     // Luminance should strictly decrease from 50 → 950
     for (let i = 0; i < lums.length - 1; i++) {
@@ -242,20 +234,7 @@ test.describe('Palette scale — primary', () => {
     await page.goto(FIXTURE);
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
 
-    const lums = await page.evaluate(() => {
-      const cv = document.createElement('canvas'); cv.width = cv.height = 1;
-      const ctx = cv.getContext('2d', { willReadFrequently: true });
-      const toLum = (tok) => {
-        ctx.clearRect(0,0,1,1); ctx.fillStyle='#000';
-        const el = document.createElement('div'); el.style.backgroundColor=`var(${tok})`;
-        document.body.appendChild(el); ctx.fillStyle=getComputedStyle(el).backgroundColor; el.remove();
-        ctx.fillRect(0,0,1,1);
-        const [r,g,b]=ctx.getImageData(0,0,1,1).data;
-        const lin=v=>{v/=255;return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4;};
-        return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
-      };
-      return { lum50: toLum('--sf-color-primary-50'), lum950: toLum('--sf-color-primary-950') };
-    });
+    const lums = await page.evaluate(palettePolarLuminances);
     expect(lums.lum50).toBeGreaterThan(0.7);   // near-white
     expect(lums.lum950).toBeLessThan(0.15);     // near-black
   });

@@ -2,6 +2,8 @@
 // Deep container-query tests for all CQ-responsive primitives.
 // Each grid/layout variant is exercised at all relevant breakpoints:
 // below 30em, between 30em–48em, and above 48em (1em = 16px by default).
+// Note: .sf-alternate tests use 1200px for the "wide" breakpoint because the
+// framework's fluid body font-size makes 48em ≈ 960px, not 768px.
 const { test, expect } = require('@playwright/test');
 const path = require('path');
 
