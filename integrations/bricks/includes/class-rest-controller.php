@@ -128,7 +128,7 @@ class Slashed_Bricks_REST_Controller {
 							'required'          => false,
 							'sanitize_callback' => 'sanitize_key',
 							'validate_callback' => function( $value ) {
-								return in_array( (string) $value, array( 'essential', 'optimal', 'full' ), true );
+								return in_array( (string) $value, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true );
 							},
 						),
 					),

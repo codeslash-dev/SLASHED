@@ -56,7 +56,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/class-token-store.php';
 function slashed_bricks_get_css_bundle() {
     $settings = Slashed_Bricks_Token_Store::get_plugin_settings();
     $bundle   = isset( $settings['css_bundle'] ) ? (string) $settings['css_bundle'] : 'optimal';
-    if ( ! in_array( $bundle, array( 'essential', 'optimal', 'full' ), true ) ) {
+    if ( ! in_array( $bundle, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true ) ) {
         $bundle = 'optimal';
     }
     return $bundle;
