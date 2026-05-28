@@ -118,11 +118,13 @@ class Slashed_Bricks_ReBEMer_REST {
 
 		$reference_counts = $this->count_class_references( $classes );
 
-		$unused = array();
+		$unused            = array();
+		$processed_classes = 0;
 		foreach ( $classes as $cls ) {
 			if ( ! is_array( $cls ) || empty( $cls['id'] ) ) {
 				continue;
 			}
+			$processed_classes++;
 			$id    = (string) $cls['id'];
 			$count = isset( $reference_counts['counts'][ $id ] )
 				? (int) $reference_counts['counts'][ $id ]
@@ -150,7 +152,7 @@ class Slashed_Bricks_ReBEMer_REST {
 		return rest_ensure_response(
 			array(
 				'unused'             => $unused,
-				'totalGlobalClasses' => count( $classes ),
+				'totalGlobalClasses' => $processed_classes,
 				'totalUnused'        => count( $unused ),
 				'scanned'            => $reference_counts['scanned'],
 				'truncated'          => $reference_counts['truncated'],

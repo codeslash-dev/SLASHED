@@ -141,7 +141,7 @@ export function buildPlan({ rootId, rows, mode }) {
       row,
       isRoot,
       finalClass,
-      suggestedFrom: row.suggestedFrom || 'user',
+      suggestedFrom: row.suggestedFrom || 'fallback',
     });
   }
 
