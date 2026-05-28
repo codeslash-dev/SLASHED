@@ -277,11 +277,11 @@ button { font-family: var(--sf-font-body); }
   margin:3rem auto 0; border-radius:14px; overflow:hidden;
   background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
   background-size: 22px 22px;
-  border:1px solid rgba(255,255,255,.05);
+  border:1px solid var(--sf-color-border--subtle);
 }
 .cs-world-map__label {
   position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-  font-size:.7rem; color:rgba(255,255,255,.25); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+  font-size:.7rem; color:var(--sf-color-text--secondary); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
 }
 .cs-city { position:absolute; }
 .cs-city__dot {
@@ -296,12 +296,12 @@ button { font-family: var(--sf-font-body); }
   content:''; position:absolute; inset:-12px; border-radius:50%;
   background:rgba(249,115,22,.1); animation:cs-ping 2s ease-out .4s infinite;
 }
-.cs-city__name { position:absolute; top:10px; left:50%; transform:translateX(-50%); white-space:nowrap; font-size:.65rem; color:rgba(255,255,255,.55); font-weight:600; }
+.cs-city__name { position:absolute; top:10px; left:50%; transform:translateX(-50%); white-space:nowrap; font-size:.65rem; color:var(--sf-color-text--secondary); font-weight:600; }
 @keyframes cs-ping { 0%{transform:scale(.6);opacity:1} 100%{transform:scale(2.4);opacity:0} }
 
-.cs-logo-grid { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; justify-content:center; margin-top:3.5rem; padding-top:2.5rem; border-top:1px solid rgba(255,255,255,.06); }
-.cs-logo-grid__item { font-family:var(--sf-font-heading); font-weight:700; font-size:1rem; color:rgba(255,255,255,.2); letter-spacing:.06em; transition:color .15s; cursor:default; }
-.cs-logo-grid__item:hover { color:rgba(255,255,255,.45); }
+.cs-logo-grid { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; justify-content:center; margin-top:3.5rem; padding-top:2.5rem; border-top:1px solid var(--sf-color-border--subtle); }
+.cs-logo-grid__item { font-family:var(--sf-font-heading); font-weight:700; font-size:1rem; color:var(--sf-color-text--secondary); letter-spacing:.06em; transition:color .15s; cursor:default; }
+.cs-logo-grid__item:hover { color:var(--sf-color-text); }
 
 /* ═══════════════════════════════════════════════════════════════
    PROCESS — stepper + accordions
@@ -436,7 +436,7 @@ button { font-family: var(--sf-font-body); }
 .cs-plan-card__price sub { font-size:1rem; font-weight:600; color:var(--sf-color-text--secondary); }
 .cs-plan-card__billing { font-size:.775rem; color:var(--sf-color-text--secondary); margin-bottom:1.75rem; }
 .cs-plan-card__features { list-style:none; margin:0 0 2rem; padding:0; flex:1; }
-.cs-plan-card__features li { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:var(--sf-color-heading); padding-block:.4rem; border-bottom:1px solid rgba(8,15,30,.05); }
+.cs-plan-card__features li { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:var(--sf-color-text); padding-block:.4rem; border-bottom:1px solid rgba(8,15,30,.05); }
 .cs-plan-card__features li:last-child { border-bottom:none; }
 .cs-plan-card__features li::before { content:'✓'; color:var(--sf-color-primary); font-weight:700; flex-shrink:0; margin-top:1px; }
 .cs-plan-note { margin-top:2rem; text-align:center; color:var(--sf-color-text--secondary); font-size:.875rem; }
@@ -518,7 +518,7 @@ button { font-family: var(--sf-font-body); }
   position: absolute; bottom: -24px; left: -28px;
   background: rgba(12,24,48,.92);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,.12);
+  border: 1px solid var(--sf-color-border--subtle);
   border-radius: 14px;
   padding: 1.125rem 1.5rem;
   display: flex; gap: 1.5rem;
@@ -586,23 +586,23 @@ button { font-family: var(--sf-font-body); }
 .cs-footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:2.5rem; margin-bottom:3rem; }
 @media (max-width:768px) { .cs-footer-grid { grid-template-columns:1fr 1fr; } }
 @media (max-width:480px) { .cs-footer-grid { grid-template-columns:1fr; } }
-.cs-footer-brand__logo { font-family:var(--sf-font-heading); font-weight:800; font-size:1.2rem; color:#fff; margin-bottom:1rem; }
+.cs-footer-brand__logo { font-family:var(--sf-font-heading); font-weight:800; font-size:1.2rem; color:var(--sf-color-text); margin-bottom:1rem; }
 .cs-footer-brand__logo span { color:var(--sf-color-primary); }
-.cs-footer-brand__desc { font-size:.85rem; line-height:1.65; color:rgba(255,255,255,.35); max-width:28ch; margin-bottom:1.25rem; }
-.cs-footer-brand__location { font-size:.775rem; color:rgba(255,255,255,.25); }
+.cs-footer-brand__desc { font-size:.85rem; line-height:1.65; color:var(--sf-color-text--secondary); max-width:28ch; margin-bottom:1.25rem; }
+.cs-footer-brand__location { font-size:.775rem; color:var(--sf-color-text--secondary); }
 .cs-footer-brand__status { display:inline-flex; align-items:center; gap:.375rem; margin-top:.75rem; font-size:.75rem; color:#4ade80; font-weight:500; }
 .cs-footer-brand__status::before { content:''; width:6px; height:6px; background:#4ade80; border-radius:50%; }
-.cs-footer-col__title { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.25); margin:0 0 1rem; }
+.cs-footer-col__title { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--sf-color-text--secondary); margin:0 0 1rem; }
 .cs-footer-col__links { list-style:none; margin:0; padding:0; }
 .cs-footer-col__links li { margin-bottom:.625rem; }
-.cs-footer-col__links a { color:rgba(255,255,255,.45); font-size:.875rem; text-decoration:none; transition:color .15s; }
-.cs-footer-col__links a:hover { color:#fff; }
-.cs-footer-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.05); }
-.cs-footer-bottom__copy { font-size:.8rem; color:rgba(255,255,255,.25); }
+.cs-footer-col__links a { color:var(--sf-color-text--secondary); font-size:.875rem; text-decoration:none; transition:color .15s; }
+.cs-footer-col__links a:hover { color:var(--sf-color-text); }
+.cs-footer-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; padding-top:2rem; border-top:1px solid var(--sf-color-border--subtle); }
+.cs-footer-bottom__copy { font-size:.8rem; color:var(--sf-color-text--secondary); }
 .cs-footer-bottom__links { display:flex; gap:1.5rem; }
-.cs-footer-bottom__links a { font-size:.8rem; color:rgba(255,255,255,.25); text-decoration:none; transition:color .15s; }
-.cs-footer-bottom__links a:hover { color:rgba(255,255,255,.6); }
-.cs-footer-tagline { font-size:.775rem; color:rgba(255,255,255,.18); }
+.cs-footer-bottom__links a { font-size:.8rem; color:var(--sf-color-text--secondary); text-decoration:none; transition:color .15s; }
+.cs-footer-bottom__links a:hover { color:var(--sf-color-text); }
+.cs-footer-tagline { font-size:.775rem; color:var(--sf-color-text--secondary); }
 </style>
 </head>
 <body>
@@ -831,7 +831,7 @@ button { font-family: var(--sf-font-body); }
     <div class="cs-center">
       <span class="cs-eyebrow">Social Proof</span>
       <h2 class="cs-title cs-title--light">4.9★ across 50+ projects</h2>
-      <p style="color:rgba(255,255,255,.45);font-size:.85rem;margin:0">Real results from real clients — across 12+ countries</p>
+      <p style="color:var(--sf-color-text--secondary);font-size:.85rem;margin:0">Real results from real clients — across 12+ countries</p>
     </div>
     <div class="cs-testimonial-cards">
       <div class="cs-testimonial-card">
