@@ -2,8 +2,8 @@
 // Deep container-query tests for all CQ-responsive primitives.
 // Each grid/layout variant is exercised at all relevant breakpoints:
 // below 30em, between 30em–48em, and above 48em (1em = 16px by default).
-// Note: .sf-alternate tests use 1200px for the "wide" breakpoint because the
-// framework's fluid body font-size makes 48em ≈ 960px, not 768px.
+// setupInContainer pins font-size to 16px so em-based CQ thresholds are stable
+// across browsers (WebKit 26+ resolves em against inherited font-size, not 16px).
 const { test, expect } = require('@playwright/test');
 const path = require('path');
 
@@ -21,6 +21,10 @@ async function setupInContainer(page, widthPx, innerHtml) {
     </body></html>
   `);
   await page.addStyleTag({ path: BUNDLE });
+  // Pin font-size so em in @container queries resolves consistently across browsers.
+  // WebKit 26+ resolves em against the container's inherited font-size (spec-correct),
+  // which would be ~20px with the framework's fluid scale; 16px keeps 48em = 768px.
+  await page.addStyleTag({ content: ':root, html, body { font-size: 16px !important; }' });
 }
 
 function colCount(el) {

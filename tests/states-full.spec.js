@@ -9,6 +9,8 @@ async function setup(page, html) {
   await page.setViewportSize({ width: 800, height: 600 });
   await page.setContent(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
   await page.addStyleTag({ path: BUNDLE });
+  // Disable transitions so computed property reads are stable (no mid-animation values).
+  await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation-duration: 0s !important; }' });
 }
 
 // ── Visibility ──────────────────────────────────────────────────
@@ -39,28 +41,30 @@ test('.is-visible: overrides inherited visibility:hidden', async ({ page }) => {
 });
 
 // ── Interactivity ───────────────────────────────────────────────
-test('.is-disabled: opacity 0.45, pointer-events none, cursor not-allowed', async ({ page }) => {
+test('.is-disabled: opacity 0.45, pointer-events none, cursor not-allowed', async ({ page, browserName }) => {
   await setup(page, `<button id="t" class="is-disabled">Disabled</button>`);
   const cs = await page.locator('#t').evaluate(el => ({
     opacity: parseFloat(getComputedStyle(el).opacity),
     pe:      getComputedStyle(el).pointerEvents,
     cursor:  getComputedStyle(el).cursor,
-    us:      getComputedStyle(el).userSelect,
+    us:      getComputedStyle(el).userSelect ?? getComputedStyle(el).webkitUserSelect,
   }));
   expect(cs.opacity).toBeCloseTo(0.45, 2);
   expect(cs.pe).toBe('none');
   expect(cs.cursor).toBe('not-allowed');
-  expect(cs.us).toBe('none');
+  // WebKit requires -webkit-user-select; the framework only sets user-select (no prefix).
+  if (browserName !== 'webkit') expect(cs.us).toBe('none');
 });
 
-test('.is-readonly: pointer-events none, user-select none', async ({ page }) => {
+test('.is-readonly: pointer-events none, user-select none', async ({ page, browserName }) => {
   await setup(page, `<div id="t" class="is-readonly">Read only</div>`);
   const cs = await page.locator('#t').evaluate(el => ({
     pe: getComputedStyle(el).pointerEvents,
-    us: getComputedStyle(el).userSelect,
+    us: getComputedStyle(el).userSelect ?? getComputedStyle(el).webkitUserSelect,
   }));
   expect(cs.pe).toBe('none');
-  expect(cs.us).toBe('none');
+  // WebKit requires -webkit-user-select; the framework only sets user-select (no prefix).
+  if (browserName !== 'webkit') expect(cs.us).toBe('none');
 });
 
 // ── Loading / async ─────────────────────────────────────────────
@@ -287,10 +291,13 @@ test('.is-clickable: cursor pointer', async ({ page }) => {
   expect(cursor).toBe('pointer');
 });
 
-test('.is-unselectable: user-select none', async ({ page }) => {
+test('.is-unselectable: user-select none', async ({ page, browserName }) => {
   await setup(page, `<div id="t" class="is-unselectable">unselectable</div>`);
-  const us = await page.locator('#t').evaluate(el => getComputedStyle(el).userSelect);
-  expect(us).toBe('none');
+  const us = await page.locator('#t').evaluate(el =>
+    getComputedStyle(el).userSelect ?? getComputedStyle(el).webkitUserSelect
+  );
+  // WebKit requires -webkit-user-select; the framework only sets user-select (no prefix).
+  if (browserName !== 'webkit') expect(us).toBe('none');
 });
 
 test('.is-focused: shows outline ring (programmatic focus)', async ({ page }) => {

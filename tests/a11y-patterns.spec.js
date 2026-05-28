@@ -12,6 +12,8 @@ async function setup(page, html) {
   await page.setViewportSize({ width: 800, height: 600 });
   await page.setContent(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
   await page.addStyleTag({ path: BUNDLE });
+  // Disable transitions so computed property reads are stable (no mid-animation values).
+  await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation-duration: 0s !important; }' });
 }
 
 // ── .sr-only ────────────────────────────────────────────────────
@@ -59,10 +61,11 @@ test.describe('a11y: .sr-only-focusable', () => {
   test('becomes visible when focused', async ({ page }) => {
     await setup(page, `<a id="t" href="#" class="sr-only-focusable">Skip</a>`);
     await page.locator('#t').focus();
-    const cs = await page.locator('#t').evaluate(el => ({
-      w: parseFloat(getComputedStyle(el).width),
-      h: parseFloat(getComputedStyle(el).height),
-    }));
+    // getBoundingClientRect gives rendered size; getComputedStyle.width is "auto" for inline.
+    const cs = await page.locator('#t').evaluate(el => {
+      const r = el.getBoundingClientRect();
+      return { w: r.width, h: r.height };
+    });
     expect(cs.w).toBeGreaterThan(1);
     expect(cs.h).toBeGreaterThan(1);
   });
@@ -70,17 +73,18 @@ test.describe('a11y: .sr-only-focusable', () => {
 
 // ── .skip-link ──────────────────────────────────────────────────
 test.describe('a11y: .skip-link', () => {
-  test('starts off-screen (top: -100%)', async ({ page }) => {
+  test('starts off-screen (negative top, outside viewport)', async ({ page }) => {
     await setup(page, `<a id="t" href="#main" class="skip-link">Skip</a><main id="main"></main>`);
-    const top = await page.locator('#t').evaluate(el => getComputedStyle(el).top);
-    expect(top).toBe('-100%');
+    // getComputedStyle resolves top:-100% to pixels; verify it is off-screen (negative).
+    const top = await page.locator('#t').evaluate(el => parseFloat(getComputedStyle(el).top));
+    expect(top).toBeLessThan(-10);
   });
 
   test('moves into viewport on focus', async ({ page }) => {
     await setup(page, `<a id="t" href="#main" class="skip-link">Skip</a><main id="main"></main>`);
     await page.locator('#t').focus();
-    const top = await page.locator('#t').evaluate(el => getComputedStyle(el).top);
-    expect(top).not.toBe('-100%');
+    const top = await page.locator('#t').evaluate(el => parseFloat(getComputedStyle(el).top));
+    expect(top).toBeGreaterThanOrEqual(0);
   });
 });
 
@@ -188,28 +192,39 @@ test.describe('a11y: disabled cursor', () => {
 test.describe('a11y: touch target token', () => {
   test('--sf-touch-target resolves to ≥ 44px', async ({ page }) => {
     await setup(page, `<button>x</button>`);
-    const val = await page.evaluate(() =>
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--sf-touch-target').trim()
-    );
-    expect(val).toBeTruthy();
-    expect(parseFloat(val)).toBeGreaterThanOrEqual(44);
+    // Resolve via an element so rem/clamp() values are computed to pixels.
+    const px = await page.evaluate(() => {
+      const el = document.createElement('div');
+      el.style.width = 'var(--sf-touch-target)';
+      document.body.appendChild(el);
+      const v = parseFloat(getComputedStyle(el).width);
+      el.remove();
+      return v;
+    });
+    expect(px).toBeGreaterThanOrEqual(44);
   });
 });
 
 // ── Focus ring (:focus-visible) ─────────────────────────────────
 test.describe('a11y: focus ring', () => {
   test(':focus:not(:focus-visible) has no outline', async ({ page }) => {
-    // We verify the rule is declared: clicking (mouse focus) should not
-    // show an outline. Playwright can only verify the CSS rule exists.
+    // Verify the rule is declared. Check style.outlineStyle rather than cssText
+    // because WebKit serialises "outline: none" as "outline: medium" in cssText.
     await setup(page, `<button id="t">Focus me</button>`);
     const hasRule = await page.evaluate(() => {
+      const isTargetRule = r =>
+        r.selectorText === ':focus:not(:focus-visible)' &&
+        r.style && r.style.outlineStyle === 'none';
       for (const sheet of document.styleSheets) {
         try {
           for (const rule of sheet.cssRules) {
-            if (rule.cssText &&
-                rule.cssText.includes(':focus:not(:focus-visible)') &&
-                rule.cssText.includes('outline: none')) return true;
+            if (isTargetRule(rule)) return true;
+            // Rules may live one level deep inside @layer blocks.
+            if (rule.cssRules) {
+              for (const nested of rule.cssRules) {
+                if (isTargetRule(nested)) return true;
+              }
+            }
           }
         } catch {}
       }
