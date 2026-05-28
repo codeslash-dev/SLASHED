@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODE/codeslash — Senior WordPress Developer</title>
+
+  <!--
+    BRICKS BUILDER USAGE
+    ─────────────────────────────────────────────────────────────────────
+    The SLASHED Bricks plugin already loads slashed.optimal.css on every
+    page — you don't need the CDN link below inside Bricks. Remove it
+    before pasting into a Bricks Code element.
+
+    Paste the <style> block (everything between the two dashed lines
+    below) into Bricks > Settings > Custom CSS, then paste each section's
+    HTML into individual Bricks Code elements on your template.
+
+    STANDALONE / TESTING
+    ─────────────────────────────────────────────────────────────────────
+    Open this file in a browser as-is. The CDN link below loads the
+    framework so everything renders without any build step.
+  -->
+
+  <!-- Google Fonts ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- SLASHED framework (remove inside Bricks — plugin loads it) ─ -->
+  <link rel="stylesheet" href="../dist/slashed.optimal.css">
+  <!-- CDN: https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@v0.3.0/dist/slashed.optimal.css -->
+
+  <!-- ── PASTE INTO BRICKS GLOBAL CSS ──────────────────────────── -->
+  <style>
+
+    /* ── Brand tokens ─────────────────────────────────────────── */
+    :root {
+      /* Override SLASHED semantic slots */
+      --sf-color-primary-light:    oklch(0.65 0.20 45);   /* #F97316 orange  */
+      --sf-color-secondary-light:  oklch(0.10 0.04 255);  /* #080F1E navy    */
+      --sf-color-base-light:       oklch(0.98 0.01 55);   /* #FFF8F1 cream   */
+      --sf-font-heading: 'Outfit',   system-ui, sans-serif;
+      --sf-font-body:    'DM Sans',  system-ui, sans-serif;
+
+      /* Shorthand palette used throughout this file */
+      --c-orange:      #F97316;
+      --c-navy:        #080F1E;
+      --c-navy-mid:    #0C1830;
+      --c-navy-cta:    #0F2242;
+      --c-navy-footer: #060C18;
+      --c-cream:       #FFF8F1;
+      --c-gray:        #5D6B82;
+      --c-border-dark: rgba(255,255,255,0.08);
+    }
+
+    /* ── Global base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: var(--sf-font-body);
+      background: var(--c-cream);
+      color: var(--c-navy);
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: var(--sf-font-heading);
+      line-height: 1.15;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Scroll progress bar ─────────────────────────────────── */
+    .cs-progress {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: rgba(249,115,22,0.15);
+      z-index: var(--sf-z-max, 9999);
+      pointer-events: none;
+    }
+    .cs-progress__bar {
+      height: 100%;
+      background: var(--c-orange);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Navbar ───────────────────────────────────────────────── */
+    .cs-nav {
+      position: fixed;
+      top: 3px; left: 0; right: 0;
+      z-index: var(--sf-z-high, 500);
+      transition: background var(--sf-duration-normal, 250ms),
+                  box-shadow  var(--sf-duration-normal, 250ms);
+    }
+    .cs-nav.is-scrolled {
+      background: rgba(8,15,30,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--c-border-dark);
+    }
+    .cs-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1rem;
+      padding-inline: var(--sf-space-l, 2rem);
+      max-width: var(--sf-container-max, 80rem);
+      margin-inline: auto;
+    }
+    .cs-nav__logo {
+      font-family: var(--sf-font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .cs-nav__logo span { color: var(--c-orange); }
+
+    .cs-nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .cs-nav__links a {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color var(--sf-duration-fast, 150ms);
+    }
+    .cs-nav__links a:hover { color: #fff; }
+
+    .cs-nav__cta {
+      background: var(--c-orange) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--sf-radius-s, 6px);
+      font-weight: 600;
+      transition: opacity var(--sf-duration-fast, 150ms),
+                  transform var(--sf-duration-fast, 150ms);
+    }
+    .cs-nav__cta:hover { opacity: 0.9; transform: scale(1.02); }
+
+    @media (max-width: 768px) { .cs-nav__links { display: none; } }
+
+    /* ── Buttons ──────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--sf-radius-s, 8px);
+      font-family: var(--sf-font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: all var(--sf-duration-fast, 150ms);
+      white-space: nowrap;
+    }
+    .btn--primary {
+      background: var(--c-orange);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(249,115,22,0.35);
+    }
+    .btn--primary:hover {
+      box-shadow: 0 6px 20px rgba(249,115,22,0.5);
+      transform: translateY(-1px);
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--c-navy);
+      border: 1.5px solid rgba(8,15,30,0.2);
+    }
+    .btn--ghost:hover {
+      border-color: rgba(8,15,30,0.5);
+      background: rgba(8,15,30,0.04);
+    }
+    .btn--ghost-light {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255,255,255,0.2);
+    }
+    .btn--ghost-light:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+    /* ── Badge ────────────────────────────────────────────────── */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.875rem;
+      border-radius: var(--sf-radius-full, 100px);
+      border: 1.5px solid rgba(249,115,22,0.3);
+      background: rgba(249,115,22,0.08);
+      color: var(--c-orange);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Section rhythm ───────────────────────────────────────── */
+    .cs-section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+    .cs-section--dark   { background: var(--c-navy); }
+    .cs-section--mid    { background: var(--c-navy-mid); }
+    .cs-section--cta    { background: var(--c-navy-cta); }
+    .cs-section--cream  { background: var(--c-cream); }
+    .cs-section--white  { background: #fff; }
+    .cs-section--footer { background: var(--c-navy-footer); padding-block: clamp(3rem,6vw,5rem); }
+
+    /* ── Section labels & headings ────────────────────────────── */
+    .cs-eyebrow {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+      margin-bottom: var(--sf-space-xs, 0.75rem);
+    }
+    .cs-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: var(--sf-space-s, 1rem);
+    }
+    .cs-subtitle {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--c-gray);
+      max-width: 46ch;
+    }
+    .cs-title--light  { color: #fff; }
+    .cs-subtitle--light { color: rgba(255,255,255,0.6); max-width: 100%; }
+    .cs-center { text-align: center; }
+    .cs-center .cs-subtitle { margin-inline: auto; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    #hero {
+      padding-top: clamp(6rem, 14vw, 10rem);
+      padding-bottom: clamp(3.5rem, 6vw, 5rem);
+      background: var(--c-cream);
+    }
+    .cs-hero__hl {
+      font-size: clamp(2.25rem, 5.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.07;
+      letter-spacing: -0.025em;
+      max-width: 18ch;
+      margin: var(--sf-space-m, 1.25rem) 0 var(--sf-space-m, 1.25rem);
+    }
+    .cs-hero__sub {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--c-gray);
+      max-width: 52ch;
+      margin: 0 0 var(--sf-space-l, 2rem);
+    }
+    .cs-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sf-space-s, 1rem);
+      margin-bottom: var(--sf-space-xl, 3rem);
+    }
+    .cs-hero__stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sf-space-xl, 2.5rem);
+      padding-top: var(--sf-space-l, 2rem);
+      border-top: 1px solid rgba(8,15,30,0.1);
+    }
+    .cs-stat__num {
+      display: block;
+      font-family: var(--sf-font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--c-navy);
+    }
+    .cs-stat__label { font-size: 0.8rem; color: var(--c-gray); font-weight: 500; }
+
+    .cs-scroll-hint {
+      margin-top: var(--sf-space-xl, 3rem);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--sf-space-2xs, 0.375rem);
+    }
+    .cs-scroll-hint span {
+      font-size: 0.7rem;
+      color: var(--c-gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .cs-scroll-dot {
+      width: 24px; height: 40px;
+      border: 2px solid rgba(8,15,30,0.2);
+      border-radius: var(--sf-radius-full, 100px);
+      display: flex; justify-content: center; padding-top: 6px;
+    }
+    .cs-scroll-dot::after {
+      content: '';
+      width: 4px; height: 8px;
+      background: var(--c-orange);
+      border-radius: var(--sf-radius-full, 100px);
+      animation: cs-bounce 1.6s ease-in-out infinite;
+    }
+    @keyframes cs-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+
+    /* ── Service cards (dark section) ────────────────────────── */
+    #services-overview { position: relative; overflow: hidden; }
+    #services-overview::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(249,115,22,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cs-service-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: var(--sf-space-m, 1.5rem);
+      margin-top: var(--sf-space-2xl, 3rem);
+    }
+    .cs-service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--c-border-dark);
+      border-radius: var(--sf-radius-m, 12px);
+      padding: var(--sf-space-l, 2rem);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--sf-duration-normal, 250ms),
+                  box-shadow var(--sf-duration-normal, 250ms);
+    }
+    .cs-service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+    .cs-service-card--featured {
+      border-color: rgba(249,115,22,0.4);
+      background: rgba(249,115,22,0.06);
+    }
+    .cs-service-card__tag {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+      margin-bottom: var(--sf-space-s, 1rem);
+    }
+    .cs-service-card__badge {
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: var(--sf-radius-full, 100px);
+      padding: 0.15rem 0.625rem;
+      font-size: 0.65rem;
+    }
+    .cs-service-card__name {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: var(--sf-space-xs, 0.5rem);
+    }
+    .cs-service-card__desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: var(--sf-space-m, 1.5rem);
+      flex: 1;
+    }
+    .cs-service-card__price {
+      font-family: var(--sf-font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: var(--sf-space-m, 1.5rem);
+    }
+    .cs-service-card__price sub {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+    .cs-service-card__list {
+      list-style: none;
+      margin: 0 0 var(--sf-space-l, 2rem);
+      padding: 0;
+    }
+    .cs-service-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      padding-block: 0.375rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .cs-service-card__list li::before { content: '—'; color: var(--c-orange); flex-shrink: 0; }
+
+    /* ── 4 Pillars ────────────────────────────────────────────── */
+    .cs-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--sf-space-m, 1.5rem);
+      margin-top: var(--sf-space-2xl, 3rem);
+    }
+    .cs-pillar {
+      padding: var(--sf-space-l, 1.75rem);
+      border-radius: var(--sf-radius-m, 10px);
+      border: 1px solid rgba(8,15,30,0.08);
+      background: var(--c-cream);
+    }
+    .cs-pillar__num {
+      font-family: var(--sf-font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--c-orange);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: var(--sf-space-xs, 0.75rem);
+    }
+    .cs-pillar__title { font-weight: 700; font-size: 1rem; margin-bottom: var(--sf-space-2xs, 0.5rem); color: var(--c-navy); }
+    .cs-pillar__desc  { font-size: 0.875rem; line-height: 1.6; color: var(--c-gray); margin: 0; }
+
+    /* ── Comparison table ─────────────────────────────────────── */
+    .cs-compare-wrap { overflow-x: auto; margin-top: var(--sf-space-2xl, 3rem); }
+    .cs-compare {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .cs-compare th {
+      padding: 0.875rem 1.25rem;
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--c-gray);
+      border-bottom: 2px solid rgba(8,15,30,0.08);
+    }
+    .cs-compare th.cs-us { color: var(--c-orange); border-bottom-color: var(--c-orange); }
+    .cs-compare td {
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid rgba(8,15,30,0.06);
+      color: var(--c-gray);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .cs-compare td.cs-us { color: var(--c-navy); font-weight: 500; }
+    .cs-compare tr:last-child td { border-bottom: none; }
+    .cs-compare .cs-row-label { font-weight: 600; color: var(--c-navy); }
+    @media (max-width: 640px) { .cs-compare .cs-col-agency { display: none; } }
+
+    /* Inline quote */
+    .cs-inline-quote {
+      margin-top: var(--sf-space-2xl, 3rem);
+      padding: var(--sf-space-l, 2rem);
+      background: var(--c-cream);
+      border-left: 4px solid var(--c-orange);
+      border-radius: 0 var(--sf-radius-s, 8px) var(--sf-radius-s, 8px) 0;
+    }
+    .cs-inline-quote blockquote {
+      margin: 0 0 var(--sf-space-s, 1rem);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--c-navy);
+    }
+    .cs-inline-quote cite { font-size: 0.85rem; color: var(--c-gray); font-style: normal; }
+
+    /* ── Testimonials ─────────────────────────────────────────── */
+    #testimonials { position: relative; overflow: hidden; }
+    #testimonials::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 250px;
+      background: radial-gradient(ellipse, rgba(249,115,22,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cs-testimonial-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%,280px),1fr));
+      gap: var(--sf-space-m, 1.25rem);
+      margin-top: var(--sf-space-xl, 2.5rem);
+    }
+    .cs-testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--c-border-dark);
+      border-radius: var(--sf-radius-m, 12px);
+      padding: var(--sf-space-l, 1.75rem);
+      display: flex;
+      flex-direction: column;
+    }
+    .cs-testimonial-card__stars { color: var(--c-orange); font-size: 0.85rem; margin-bottom: var(--sf-space-s, 1rem); letter-spacing: 2px; }
+    .cs-testimonial-card__quote { color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.65; margin: 0 0 var(--sf-space-m, 1.5rem); flex: 1; }
+    .cs-testimonial-card__author { display: flex; align-items: center; gap: 0.75rem; margin-top: auto; }
+    .cs-testimonial-card__avatar {
+      width: 40px; height: 40px;
+      border-radius: var(--sf-radius-full, 50%);
+      background: rgba(249,115,22,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--sf-font-heading);
+      font-weight: 700;
+      color: var(--c-orange);
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    .cs-testimonial-card__name  { font-weight: 600; color: #fff; font-size: 0.875rem; }
+    .cs-testimonial-card__role  { font-size: 0.775rem; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+    .cs-logo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sf-space-l, 2rem);
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--sf-space-2xl, 4rem);
+      padding-top: var(--sf-space-xl, 3rem);
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .cs-logo-grid__item {
+      font-family: var(--sf-font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.06em;
+      transition: color var(--sf-duration-fast, 150ms);
+      cursor: default;
+    }
+    .cs-logo-grid__item:hover { color: rgba(255,255,255,0.45); }
+
+    /* ── Process ──────────────────────────────────────────────── */
+    .cs-process { margin-top: var(--sf-space-2xl, 3rem); }
+    .cs-process-item {
+      background: #fff;
+      border: 1px solid rgba(8,15,30,0.09);
+      border-radius: var(--sf-radius-m, 12px);
+      overflow: hidden;
+      margin-bottom: var(--sf-space-xs, 0.75rem);
+    }
+    .cs-process-item summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: var(--sf-space-m, 1.25rem);
+      padding: var(--sf-space-m, 1.5rem) var(--sf-space-l, 1.75rem);
+      cursor: pointer;
+      user-select: none;
+    }
+    .cs-process-item summary::-webkit-details-marker { display: none; }
+    .cs-process-item__num {
+      font-family: var(--sf-font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(8,15,30,0.3);
+      width: 1.5rem;
+      flex-shrink: 0;
+      transition: color var(--sf-duration-fast, 150ms);
+    }
+    .cs-process-item[open] .cs-process-item__num { color: var(--c-orange); }
+    .cs-process-item__title { font-weight: 700; font-size: 1.05rem; color: var(--c-navy); flex: 1; }
+    .cs-process-item__icon {
+      width: 20px; height: 20px;
+      color: var(--c-gray);
+      transition: transform var(--sf-duration-fast, 150ms);
+      flex-shrink: 0;
+    }
+    .cs-process-item[open] .cs-process-item__icon { transform: rotate(180deg); }
+    .cs-process-item__body {
+      padding: 0 var(--sf-space-l, 1.75rem) var(--sf-space-l, 1.75rem);
+      border-top: 1px solid rgba(8,15,30,0.06);
+    }
+    .cs-process-item__desc { color: var(--c-gray); font-size: 0.9rem; line-height: 1.65; margin-bottom: var(--sf-space-m, 1.25rem); }
+    .cs-process-cols {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: var(--sf-space-s, 1rem);
+      margin-bottom: var(--sf-space-m, 1.25rem);
+    }
+    @media (max-width: 600px) { .cs-process-cols { grid-template-columns: 1fr; } }
+    .cs-process-col h4 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-gray);
+      margin: 0 0 var(--sf-space-xs, 0.5rem);
+    }
+    .cs-process-col ul { list-style: none; margin: 0; padding: 0; }
+    .cs-process-col li { font-size: 0.85rem; color: var(--c-navy); padding-block: 2px; }
+    .cs-process-gate {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.625rem var(--sf-space-s, 1rem);
+      background: rgba(249,115,22,0.06);
+      border: 1px solid rgba(249,115,22,0.15);
+      border-radius: var(--sf-radius-xs, 6px);
+      font-size: 0.8rem;
+      color: var(--c-orange);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .cs-process-gate::before { content: '⊘'; flex-shrink: 0; }
+
+    /* ── Mid-page CTA ─────────────────────────────────────────── */
+    #mid-cta { position: relative; overflow: hidden; }
+    #mid-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(249,115,22,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cs-mid-cta__inner {
+      position: relative;
+      text-align: center;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+    .cs-mid-cta__title { font-size: clamp(1.75rem,4vw,2.5rem); font-weight: 800; color: #fff; margin-bottom: var(--sf-space-s, 1rem); }
+    .cs-mid-cta__sub   { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.65; margin-bottom: var(--sf-space-l, 2rem); }
+    .cs-mid-cta__actions { display: flex; flex-wrap: wrap; gap: var(--sf-space-s, 1rem); justify-content: center; align-items: center; }
+    .cs-link-arrow { color: rgba(255,255,255,0.6); font-size: 0.9rem; transition: color var(--sf-duration-fast, 150ms); }
+    .cs-link-arrow:hover { color: #fff; }
+
+    /* ── Case studies ─────────────────────────────────────────── */
+    .cs-case-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr));
+      gap: var(--sf-space-m, 1.5rem);
+      margin-top: var(--sf-space-2xl, 3rem);
+    }
+    .cs-case-card {
+      border: 1px solid rgba(8,15,30,0.08);
+      border-radius: var(--sf-radius-m, 12px);
+      overflow: hidden;
+      background: #fff;
+      transition: transform var(--sf-duration-normal, 250ms),
+                  box-shadow var(--sf-duration-normal, 250ms);
+    }
+    .cs-case-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(8,15,30,0.1); }
+    .cs-case-card__thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--c-cream) 0%, rgba(249,115,22,0.08) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-gray);
+      font-family: var(--sf-font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .cs-case-card__body { padding: var(--sf-space-m, 1.5rem); }
+    .cs-case-card__client { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--c-orange); margin-bottom: var(--sf-space-xs, 0.5rem); }
+    .cs-case-card__title { font-weight: 700; font-size: 1.05rem; color: var(--c-navy); margin-bottom: var(--sf-space-xs, 0.75rem); }
+    .cs-case-card__desc  { font-size: 0.875rem; line-height: 1.6; color: var(--c-gray); margin-bottom: var(--sf-space-m, 1.25rem); }
+    .cs-case-card__metrics { display: flex; flex-wrap: wrap; gap: var(--sf-space-xs, 0.75rem); }
+    .cs-metric {
+      display: flex; flex-direction: column;
+      padding: 0.625rem 0.875rem;
+      background: var(--c-cream);
+      border-radius: var(--sf-radius-s, 8px);
+    }
+    .cs-metric__val   { font-family: var(--sf-font-heading); font-weight: 700; font-size: 0.95rem; color: var(--c-orange); }
+    .cs-metric__label { font-size: 0.7rem; color: var(--c-gray); margin-top: 2px; }
+    .cs-case-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      margin-top: var(--sf-space-m, 1.25rem);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--c-navy);
+      border-bottom: 1px solid rgba(8,15,30,0.15);
+      padding-bottom: 1px;
+      transition: color var(--sf-duration-fast, 150ms), border-color var(--sf-duration-fast, 150ms);
+    }
+    .cs-case-card__link:hover { color: var(--c-orange); border-color: var(--c-orange); }
+
+    /* ── Pricing ──────────────────────────────────────────────── */
+    .cs-plan-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(min(100%,260px),1fr));
+      gap: var(--sf-space-m, 1.5rem);
+      margin-top: var(--sf-space-2xl, 3rem);
+    }
+    .cs-plan-card {
+      background: #fff;
+      border: 1px solid rgba(8,15,30,0.1);
+      border-radius: var(--sf-radius-m, 14px);
+      padding: var(--sf-space-l, 2rem);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .cs-plan-card--featured {
+      border-color: var(--c-orange);
+      box-shadow: 0 0 0 1px var(--c-orange);
+    }
+    .cs-plan-card__popular {
+      position: absolute;
+      top: -13px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--c-orange);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 0.25rem 1rem;
+      border-radius: var(--sf-radius-full, 100px);
+      white-space: nowrap;
+    }
+    .cs-plan-card__name    { font-size: 1.25rem; font-weight: 800; color: var(--c-navy); margin-bottom: 0.375rem; }
+    .cs-plan-card__tagline { font-size: 0.8rem; color: var(--c-gray); line-height: 1.5; margin-bottom: var(--sf-space-m, 1.5rem); min-height: 2.6em; }
+    .cs-plan-card__price   { font-size: 2.25rem; font-weight: 800; color: var(--c-navy); }
+    .cs-plan-card__price sub { font-size: 1rem; font-weight: 600; color: var(--c-gray); }
+    .cs-plan-card__billing { font-size: 0.775rem; color: var(--c-gray); margin-bottom: var(--sf-space-l, 1.75rem); }
+    .cs-plan-card__features {
+      list-style: none; margin: 0 0 var(--sf-space-l, 2rem); padding: 0; flex: 1;
+    }
+    .cs-plan-card__features li {
+      display: flex; align-items: flex-start; gap: 0.625rem;
+      font-size: 0.875rem; color: var(--c-navy);
+      padding-block: 0.4rem;
+      border-bottom: 1px solid rgba(8,15,30,0.05);
+    }
+    .cs-plan-card__features li:last-child { border-bottom: none; }
+    .cs-plan-card__features li::before { content: '✓'; color: var(--c-orange); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .cs-plan-note { margin-top: var(--sf-space-l, 2rem); text-align: center; color: var(--c-gray); font-size: 0.875rem; }
+    .cs-plan-note strong { color: var(--c-navy); }
+
+    /* ── Qualification ────────────────────────────────────────── */
+    .cs-qual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sf-space-l, 2rem);
+      margin-top: var(--sf-space-2xl, 3rem);
+    }
+    @media (max-width: 640px) { .cs-qual-grid { grid-template-columns: 1fr; } }
+    .cs-qual-col__header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: var(--sf-space-m, 1.25rem); }
+    .cs-qual-col__icon   { font-size: 1.25rem; }
+    .cs-qual-col__title  { font-weight: 700; font-size: 1rem; color: #fff; }
+    .cs-qual-col__list   { list-style: none; margin: 0; padding: 0; }
+    .cs-qual-col__list li {
+      display: flex; align-items: flex-start; gap: 0.625rem;
+      padding-block: 0.625rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem; line-height: 1.5;
+    }
+    .cs-qual-col__list li:last-child { border-bottom: none; }
+    .cs-qual-yes::before { content: '✓'; color: #4ade80; font-weight: 700; flex-shrink: 0; }
+    .cs-qual-no::before  { content: '✗'; color: #f87171; font-weight: 700; flex-shrink: 0; }
+
+    /* ── About ────────────────────────────────────────────────── */
+    .cs-about-layout {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--sf-space-3xl, 4rem);
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .cs-about-layout { grid-template-columns: 1fr; }
+      .cs-about-portrait { order: -1; margin-inline: auto; }
+    }
+    .cs-about-credentials { margin-top: var(--sf-space-l, 2rem); display: flex; flex-direction: column; gap: var(--sf-space-s, 1rem); }
+    .cs-credential {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.5;
+    }
+    .cs-credential::before { content: '→'; color: var(--c-orange); flex-shrink: 0; margin-top: 1px; }
+    .cs-about-portrait { width: 280px; flex-shrink: 0; }
+    .cs-about-portrait__img {
+      width: 100%;
+      border-radius: var(--sf-radius-m, 12px);
+      background: rgba(255,255,255,0.07);
+      aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .cs-about-stats { display: flex; gap: var(--sf-space-l, 2rem); margin-top: var(--sf-space-xl, 2.5rem); }
+    .cs-about-stat { text-align: center; }
+    .cs-about-stat__num   { display: block; font-family: var(--sf-font-heading); font-size: 1.75rem; font-weight: 800; color: var(--c-orange); }
+    .cs-about-stat__label { font-size: 0.75rem; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+    /* ── FAQ ──────────────────────────────────────────────────── */
+    .cs-faq-list { max-width: 720px; margin: var(--sf-space-2xl, 3rem) auto 0; }
+    .cs-faq-item { border-bottom: 1px solid rgba(8,15,30,0.08); }
+    .cs-faq-item summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--sf-space-m, 1.25rem) 0;
+      cursor: pointer;
+      font-family: var(--sf-font-heading);
+      font-weight: 600;
+      font-size: 0.975rem;
+      color: var(--c-navy);
+      user-select: none;
+      gap: var(--sf-space-s, 1rem);
+    }
+    .cs-faq-item summary::-webkit-details-marker { display: none; }
+    .cs-faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--c-orange); flex-shrink: 0; font-weight: 400; transition: transform var(--sf-duration-fast, 150ms); }
+    .cs-faq-item[open] summary::after { transform: rotate(45deg); }
+    .cs-faq-item__body { padding-bottom: var(--sf-space-m, 1.25rem); color: var(--c-gray); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── Contact ──────────────────────────────────────────────── */
+    #contact { position: relative; overflow: hidden; }
+    #contact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(249,115,22,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cs-contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sf-space-3xl, 4rem);
+      align-items: start;
+      position: relative;
+    }
+    @media (max-width: 768px) { .cs-contact-layout { grid-template-columns: 1fr; gap: var(--sf-space-xl, 2.5rem); } }
+    .cs-contact-meta__title { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; color: #fff; margin-bottom: var(--sf-space-s, 1rem); }
+    .cs-contact-meta__desc  { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.65; margin-bottom: var(--sf-space-l, 2rem); }
+    .cs-contact-meta__email {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: var(--sf-space-s, 1rem) var(--sf-space-m, 1.25rem);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--sf-radius-s, 8px);
+      text-decoration: none;
+      transition: border-color var(--sf-duration-fast, 150ms);
+    }
+    .cs-contact-meta__email:hover { border-color: rgba(249,115,22,0.3); }
+    .cs-contact-meta__email-icon { font-size: 1.1rem; }
+    .cs-contact-meta__email-addr { font-weight: 600; color: var(--c-orange); font-size: 0.95rem; }
+    .cs-contact-meta__email-note { font-size: 0.775rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .cs-contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--c-border-dark);
+      border-radius: var(--sf-radius-m, 16px);
+      padding: var(--sf-space-l, 2rem);
+    }
+    .cs-form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sf-space-s, 1rem); }
+    @media (max-width: 480px) { .cs-form-row { grid-template-columns: 1fr; } }
+    .cs-form-group { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: var(--sf-space-s, 1rem); }
+    .cs-form-group label {
+      font-size: 0.75rem; font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .cs-form-group input,
+    .cs-form-group select,
+    .cs-form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: var(--sf-radius-s, 8px);
+      padding: 0.75rem var(--sf-space-s, 1rem);
+      color: #fff;
+      font-family: var(--sf-font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--sf-duration-fast, 150ms);
+      width: 100%;
+    }
+    .cs-form-group input:focus,
+    .cs-form-group select:focus,
+    .cs-form-group textarea:focus { border-color: rgba(249,115,22,0.5); }
+    .cs-form-group input::placeholder,
+    .cs-form-group textarea::placeholder { color: rgba(255,255,255,0.28); }
+    .cs-form-group select option { background: var(--c-navy); }
+    .cs-form-group textarea       { min-height: 120px; resize: vertical; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    .cs-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--sf-space-xl, 2.5rem);
+      margin-bottom: var(--sf-space-2xl, 3rem);
+    }
+    @media (max-width: 768px) { .cs-footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .cs-footer-grid { grid-template-columns: 1fr; } }
+    .cs-footer-brand__logo { font-family: var(--sf-font-heading); font-weight: 800; font-size: 1.25rem; color: #fff; margin-bottom: var(--sf-space-s, 1rem); }
+    .cs-footer-brand__logo span { color: var(--c-orange); }
+    .cs-footer-brand__desc { font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.38); max-width: 28ch; margin-bottom: var(--sf-space-s, 1.25rem); }
+    .cs-footer-brand__location { font-size: 0.775rem; color: rgba(255,255,255,0.28); }
+    .cs-footer-brand__status {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      margin-top: var(--sf-space-xs, 0.75rem);
+      font-size: 0.75rem; color: #4ade80; font-weight: 500;
+    }
+    .cs-footer-brand__status::before { content: ''; width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+    .cs-footer-col__title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: var(--sf-space-s, 1rem); }
+    .cs-footer-col__links { list-style: none; margin: 0; padding: 0; }
+    .cs-footer-col__links li { margin-bottom: 0.625rem; }
+    .cs-footer-col__links a { color: rgba(255,255,255,0.45); font-size: 0.875rem; text-decoration: none; transition: color var(--sf-duration-fast, 150ms); }
+    .cs-footer-col__links a:hover { color: #fff; }
+    .cs-footer-bottom {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      gap: var(--sf-space-s, 1rem);
+      padding-top: var(--sf-space-l, 2rem);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .cs-footer-bottom__copy   { font-size: 0.8rem; color: rgba(255,255,255,0.28); }
+    .cs-footer-bottom__links  { display: flex; gap: var(--sf-space-m, 1.5rem); }
+    .cs-footer-bottom__links a { font-size: 0.8rem; color: rgba(255,255,255,0.28); text-decoration: none; transition: color var(--sf-duration-fast, 150ms); }
+    .cs-footer-bottom__links a:hover { color: rgba(255,255,255,0.6); }
+    .cs-footer-tagline { font-size: 0.775rem; color: rgba(255,255,255,0.18); }
+
+    /* ── Shared inline SVG arrow ──────────────────────────────── */
+    .cs-arrow { display: inline-block; margin-left: 0.25rem; }
+
+  </style>
+  <!-- ── END BRICKS GLOBAL CSS ─────────────────────────────── -->
+
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  SCROLL PROGRESS BAR                                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="cs-progress" aria-hidden="true">
+  <div class="cs-progress__bar" id="cs-progress-bar"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  NAVBAR                                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<header class="cs-nav" id="cs-nav">
+  <div class="cs-nav__inner">
+    <a href="#" class="cs-nav__logo">CODE/<span>codeslash</span></a>
+    <ul class="cs-nav__links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="mailto:hello@codeslash.net" style="color:rgba(255,255,255,0.45);font-size:0.85rem">hello@codeslash.net</a></li>
+      <li><a href="#contact" class="cs-nav__cta">Start a Project</a></li>
+    </ul>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  HERO                                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="sf-container">
+    <span class="cs-badge">WordPress Development Studio — Senior Contractor</span>
+    <h1 class="cs-hero__hl">
+      WordPress sites that load faster, convert better, and actually win business
+    </h1>
+    <p class="cs-hero__sub">
+      Performance-first development, structured process, and direct communication — no middlemen,
+      no agencies, no guesswork. Guaranteed 85+ PageSpeed scores, in the contract.
+    </p>
+    <div class="cs-hero__actions">
+      <a href="#contact" class="btn btn--primary">
+        Start a Project
+        <svg class="cs-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#case-studies" class="btn btn--ghost">See My Work</a>
+    </div>
+    <div class="cs-hero__stats">
+      <div>
+        <span class="cs-stat__num">10+</span>
+        <span class="cs-stat__label">Years in WordPress</span>
+      </div>
+      <div>
+        <span class="cs-stat__num">85+</span>
+        <span class="cs-stat__label">PageSpeed Guaranteed</span>
+      </div>
+      <div>
+        <span class="cs-stat__num">50+</span>
+        <span class="cs-stat__label">Projects Shipped</span>
+      </div>
+      <div>
+        <span class="cs-stat__num">12+</span>
+        <span class="cs-stat__label">Countries Served</span>
+      </div>
+    </div>
+    <div class="cs-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="cs-scroll-dot"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  SERVICES OVERVIEW — dark (BUILD / OPTIMIZE / SUSTAIN)      -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="services-overview" class="cs-section cs-section--dark">
+  <div class="sf-container">
+    <div class="cs-center" style="max-width:520px;margin-inline:auto">
+      <span class="cs-eyebrow">What I Do</span>
+      <h2 class="cs-title cs-title--light">Three ways to work together</h2>
+      <p class="cs-subtitle cs-subtitle--light">Custom builds, performance improvements, or ongoing maintenance — scope-matched to where you actually are.</p>
+    </div>
+
+    <div class="cs-service-cards">
+
+      <!-- BUILD -->
+      <div class="cs-service-card">
+        <p class="cs-service-card__tag">Build</p>
+        <h3 class="cs-service-card__name">Build</h3>
+        <p class="cs-service-card__desc">Custom WordPress sites built right from day one — business websites, e-commerce stores, and platform migrations.</p>
+        <p class="cs-service-card__price">From $4,000 <sub>fixed price</sub></p>
+        <ul class="cs-service-card__list">
+          <li>Business &amp; portfolio websites</li>
+          <li>WooCommerce stores</li>
+          <li>Platform migrations</li>
+          <li>85+ PageSpeed guaranteed</li>
+          <li>5-phase gate process</li>
+        </ul>
+        <a href="#contact" class="btn btn--ghost-light" style="justify-content:center">Discuss Your Build</a>
+      </div>
+
+      <!-- OPTIMIZE (featured) -->
+      <div class="cs-service-card cs-service-card--featured">
+        <p class="cs-service-card__tag">
+          <span>Optimize</span>
+          <span class="cs-service-card__badge">Most Requested</span>
+        </p>
+        <h3 class="cs-service-card__name">Optimize</h3>
+        <p class="cs-service-card__desc">Transform slow, leaky WordPress sites into performance machines. Speed and conversion improvements, guaranteed.</p>
+        <p class="cs-service-card__price">From $1,500 <sub>fixed price</sub></p>
+        <ul class="cs-service-card__list">
+          <li>Core Web Vitals audit</li>
+          <li>85+ PageSpeed guaranteed</li>
+          <li>Conversion rate review</li>
+          <li>Code quality assessment</li>
+          <li>Actionable improvement roadmap</li>
+        </ul>
+        <a href="#contact" class="btn btn--primary" style="justify-content:center">Get a Quote</a>
+      </div>
+
+      <!-- SUSTAIN -->
+      <div class="cs-service-card">
+        <p class="cs-service-card__tag">Sustain</p>
+        <h3 class="cs-service-card__name">Sustain</h3>
+        <p class="cs-service-card__desc">Monthly care plans so your site doesn't break at 2am. Ongoing updates, monitoring, and real developer support.</p>
+        <p class="cs-service-card__price">From $149/mo <sub>monthly retainer</sub></p>
+        <ul class="cs-service-card__list">
+          <li>Weekly plugin &amp; core updates</li>
+          <li>Daily offsite backups</li>
+          <li>24/7 uptime monitoring</li>
+          <li>Monthly security scans</li>
+          <li>Monthly performance reports</li>
+        </ul>
+        <a href="#pricing" class="btn btn--ghost-light" style="justify-content:center">See Plans</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  SERVICES DETAIL — light (4 pillars + comparison table)     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="services" class="cs-section cs-section--white">
+  <div class="sf-container">
+
+    <span class="cs-eyebrow">Why CodeSlash</span>
+    <h2 class="cs-title">Agency results. Freelancer access.</h2>
+    <p class="cs-subtitle">Senior-level work without the overhead, account managers, or communication lag.</p>
+
+    <div class="cs-pillars">
+      <div class="cs-pillar">
+        <div class="cs-pillar__num">01</div>
+        <h3 class="cs-pillar__title">Direct Communication</h3>
+        <p class="cs-pillar__desc">You talk to the person building your site. No account managers, no middlemen, no telephone game.</p>
+      </div>
+      <div class="cs-pillar">
+        <div class="cs-pillar__num">02</div>
+        <h3 class="cs-pillar__title">Cost-Effective Quality</h3>
+        <p class="cs-pillar__desc">Senior-level process and deliverables without the agency markup. You pay for work, not overhead.</p>
+      </div>
+      <div class="cs-pillar">
+        <div class="cs-pillar__num">03</div>
+        <h3 class="cs-pillar__title">Performance Guarantee</h3>
+        <p class="cs-pillar__desc">Every site ships with an 85+ PageSpeed score. It's not a target — it's in the contract.</p>
+      </div>
+      <div class="cs-pillar">
+        <div class="cs-pillar__num">04</div>
+        <h3 class="cs-pillar__title">Ongoing Support</h3>
+        <p class="cs-pillar__desc">Your site doesn't get abandoned after launch. Care plans keep a real developer on call, not a helpdesk.</p>
+      </div>
+    </div>
+
+    <div class="cs-compare-wrap">
+      <table class="cs-compare">
+        <thead>
+          <tr>
+            <th style="width:150px"></th>
+            <th class="cs-us">CodeSlash</th>
+            <th>Typical Freelancer</th>
+            <th class="cs-col-agency">Typical Agency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cs-row-label">Communication</td>
+            <td class="cs-us">Direct with your developer, always</td>
+            <td>Varies wildly</td>
+            <td class="cs-col-agency">Account manager buffer</td>
+          </tr>
+          <tr>
+            <td class="cs-row-label">Process</td>
+            <td class="cs-us">5-phase gate system, documented</td>
+            <td>Ad hoc</td>
+            <td class="cs-col-agency">Heavy process, slow</td>
+          </tr>
+          <tr>
+            <td class="cs-row-label">Performance</td>
+            <td class="cs-us">85+ PageSpeed, contractual</td>
+            <td>No guarantee</td>
+            <td class="cs-col-agency">Rarely prioritised</td>
+          </tr>
+          <tr>
+            <td class="cs-row-label">Post-launch</td>
+            <td class="cs-us">Care plans from $149/mo</td>
+            <td>Usually abandoned</td>
+            <td class="cs-col-agency">Expensive retainers</td>
+          </tr>
+          <tr>
+            <td class="cs-row-label">Pricing</td>
+            <td class="cs-us">Fixed price, no surprises</td>
+            <td>Hourly or vague</td>
+            <td class="cs-col-agency">High markup</td>
+          </tr>
+          <tr>
+            <td class="cs-row-label">Timeline</td>
+            <td class="cs-us">Locked at kickoff</td>
+            <td>Often delayed</td>
+            <td class="cs-col-agency">Often delayed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cs-inline-quote">
+      <blockquote>"The difference in process maturity is night and day. Working with CodeSlash felt like working with a small agency — but with the responsiveness and personal touch of a solo developer."</blockquote>
+      <cite>— James Harrington, CEO at Finex Capital</cite>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  SOCIAL PROOF / TESTIMONIALS                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="cs-section cs-section--dark">
+  <div class="sf-container">
+
+    <div class="cs-center">
+      <span class="cs-eyebrow">Social Proof</span>
+      <h2 class="cs-title cs-title--light">4.9★ across 50+ projects</h2>
+      <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;margin-bottom:0">Real results from real clients — across 12+ countries</p>
+    </div>
+
+    <div class="cs-testimonial-cards">
+
+      <div class="cs-testimonial-card">
+        <div class="cs-testimonial-card__stars">★★★★★</div>
+        <p class="cs-testimonial-card__quote">"Our WooCommerce store went from a 38 PageSpeed to 91 in three weeks. Revenue per session is up 22% since launch. Best investment we've made in the site."</p>
+        <div class="cs-testimonial-card__author">
+          <div class="cs-testimonial-card__avatar">SL</div>
+          <div>
+            <div class="cs-testimonial-card__name">Sarah L.</div>
+            <div class="cs-testimonial-card__role">E-commerce Director, Brightwell — London, UK</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-testimonial-card">
+        <div class="cs-testimonial-card__stars">★★★★★</div>
+        <p class="cs-testimonial-card__quote">"Three previous agencies couldn't fix our site's speed issues. CodeSlash diagnosed the problem in 48 hours and had us hitting 90+ within a week. Structured, fast, reliable."</p>
+        <div class="cs-testimonial-card__author">
+          <div class="cs-testimonial-card__avatar">MT</div>
+          <div>
+            <div class="cs-testimonial-card__name">Marcus T.</div>
+            <div class="cs-testimonial-card__role">Founder, Studio Vale — Toronto, Canada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-testimonial-card">
+        <div class="cs-testimonial-card__stars">★★★★★</div>
+        <p class="cs-testimonial-card__quote">"We've been on a care plan for 18 months. Not a single downtime incident. The monthly reports give us confidence we're not flying blind. We renew every year without question."</p>
+        <div class="cs-testimonial-card__author">
+          <div class="cs-testimonial-card__avatar">JH</div>
+          <div>
+            <div class="cs-testimonial-card__name">James H.</div>
+            <div class="cs-testimonial-card__role">CEO, Finex Capital — Dubai, UAE</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cs-logo-grid" aria-label="Client logos">
+      <span class="cs-logo-grid__item">FINEX</span>
+      <span class="cs-logo-grid__item">BRIGHTWELL</span>
+      <span class="cs-logo-grid__item">STUDIO VALE</span>
+      <span class="cs-logo-grid__item">NORTHLINE LEGAL</span>
+      <span class="cs-logo-grid__item">VELOUR STUDIO</span>
+      <span class="cs-logo-grid__item">PEAK ADVISORY</span>
+      <span class="cs-logo-grid__item">HARLOW MEDIA</span>
+      <span class="cs-logo-grid__item">MERIDIAN</span>
+      <span class="cs-logo-grid__item">CRESTWOOD</span>
+      <span class="cs-logo-grid__item">ORION LABS</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  PROCESS                                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="process" class="cs-section cs-section--cream">
+  <div class="sf-container" style="--sf-container-max: 60rem">
+
+    <span class="cs-eyebrow">How We Work</span>
+    <h2 class="cs-title">A 5-phase process. No surprises.</h2>
+    <p class="cs-subtitle">Every project follows the same structured workflow. You know what comes next before it happens — and nothing moves forward without your sign-off.</p>
+
+    <div class="cs-process">
+
+      <details class="cs-process-item" open>
+        <summary>
+          <span class="cs-process-item__num">01</span>
+          <span class="cs-process-item__title">Discovery</span>
+          <svg class="cs-process-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="cs-process-item__body">
+          <p class="cs-process-item__desc">Scope alignment, budget confirmation, and timeline lock. We leave with a signed brief and clear expectations — before a single pixel is touched.</p>
+          <div class="cs-process-cols">
+            <div class="cs-process-col">
+              <h4>You provide</h4>
+              <ul><li>Business goals</li><li>Budget range</li><li>Existing assets</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>I deliver</h4>
+              <ul><li>Scope document</li><li>Fixed-price quote</li><li>Project timeline</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>Timeline</h4>
+              <ul><li>1–3 business days</li><li>One discovery call</li><li>Async-friendly</li></ul>
+            </div>
+          </div>
+          <div class="cs-process-gate">Gate: Signed scope document &amp; 40% deposit received before moving forward</div>
+        </div>
+      </details>
+
+      <details class="cs-process-item">
+        <summary>
+          <span class="cs-process-item__num">02</span>
+          <span class="cs-process-item__title">Design</span>
+          <svg class="cs-process-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="cs-process-item__body">
+          <p class="cs-process-item__desc">High-fidelity Figma mockups for key pages, reviewed in two structured rounds. No "I'll know it when I see it" — feedback is structured and documented.</p>
+          <div class="cs-process-cols">
+            <div class="cs-process-col">
+              <h4>You provide</h4>
+              <ul><li>Brand guidelines</li><li>Content drafts</li><li>Reference sites</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>I deliver</h4>
+              <ul><li>Desktop + mobile mockups</li><li>2 revision rounds</li><li>Component library</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>Timeline</h4>
+              <ul><li>1–2 weeks</li><li>Depends on page count</li><li>Async reviews</li></ul>
+            </div>
+          </div>
+          <div class="cs-process-gate">Gate: Design signed off before development begins — no going back</div>
+        </div>
+      </details>
+
+      <details class="cs-process-item">
+        <summary>
+          <span class="cs-process-item__num">03</span>
+          <span class="cs-process-item__title">Develop</span>
+          <svg class="cs-process-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="cs-process-item__body">
+          <p class="cs-process-item__desc">Custom WordPress build — clean PHP, no page-builder bloat. Performance-first from the first commit. Staging environment for review before anything goes live.</p>
+          <div class="cs-process-cols">
+            <div class="cs-process-col">
+              <h4>You provide</h4>
+              <ul><li>Final content</li><li>Login credentials</li><li>Third-party access</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>I deliver</h4>
+              <ul><li>Staging site</li><li>QA checklist</li><li>85+ PageSpeed score</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>Timeline</h4>
+              <ul><li>2–6 weeks</li><li>Depends on scope</li><li>Weekly updates</li></ul>
+            </div>
+          </div>
+          <div class="cs-process-gate">Gate: Your sign-off on staging site before live deployment</div>
+        </div>
+      </details>
+
+      <details class="cs-process-item">
+        <summary>
+          <span class="cs-process-item__num">04</span>
+          <span class="cs-process-item__title">Launch</span>
+          <svg class="cs-process-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="cs-process-item__body">
+          <p class="cs-process-item__desc">Go-live, DNS migration, post-launch QA, and analytics verification. You get a handoff document whether you continue to a care plan or take the keys yourself.</p>
+          <div class="cs-process-cols">
+            <div class="cs-process-col">
+              <h4>You provide</h4>
+              <ul><li>DNS access</li><li>Final 20% payment</li><li>Go/no-go approval</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>I deliver</h4>
+              <ul><li>Live deployment</li><li>Post-launch QA</li><li>Handoff document</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>Timeline</h4>
+              <ul><li>1–2 days</li><li>Coordinated with you</li><li>Off-peak preferred</li></ul>
+            </div>
+          </div>
+          <div class="cs-process-gate">Gate: Final payment received; go-live confirmed in writing</div>
+        </div>
+      </details>
+
+      <details class="cs-process-item">
+        <summary>
+          <span class="cs-process-item__num">05</span>
+          <span class="cs-process-item__title">Care Plan</span>
+          <svg class="cs-process-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="cs-process-item__body">
+          <p class="cs-process-item__desc">Ongoing maintenance, monitoring, updates, and support — or a clean handoff. Either way, the project is properly closed, not abandoned.</p>
+          <div class="cs-process-cols">
+            <div class="cs-process-col">
+              <h4>Care plan path</h4>
+              <ul><li>Monthly retainer</li><li>Proactive monitoring</li><li>Edit hours included</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>Handoff path</h4>
+              <ul><li>Full documentation</li><li>Credentials handover</li><li>30-day support window</li></ul>
+            </div>
+            <div class="cs-process-col">
+              <h4>Timeline</h4>
+              <ul><li>Ongoing</li><li>Cancel anytime</li><li>Month-to-month</li></ul>
+            </div>
+          </div>
+          <div class="cs-process-gate">Your site keeps working — with or without ongoing support from me</div>
+        </div>
+      </details>
+
+    </div>
+
+    <div style="margin-top:var(--sf-space-xl,2.5rem);text-align:center">
+      <a href="#contact" class="btn btn--primary">Start a Conversation</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MID-PAGE CTA                                               -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="mid-cta" class="cs-section cs-section--cta">
+  <div class="sf-container">
+    <div class="cs-mid-cta__inner">
+      <h2 class="cs-mid-cta__title">
+        Ready to build something that <span style="color:var(--c-orange)">actually performs?</span>
+      </h2>
+      <p class="cs-mid-cta__sub">
+        Let's talk about your project. I'll respond within 24 hours with a clear scope and a
+        fixed-price quote. No vague estimates, no hidden fees.
+      </p>
+      <div class="cs-mid-cta__actions">
+        <a href="#contact" class="btn btn--primary">
+          Start a Project
+          <svg class="cs-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#pricing" class="cs-link-arrow">Or see pricing first →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  CASE STUDIES                                               -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="case-studies" class="cs-section cs-section--white">
+  <div class="sf-container">
+
+    <span class="cs-eyebrow">Case Studies</span>
+    <h2 class="cs-title">Real results, measured</h2>
+    <p class="cs-subtitle">Before and after — with numbers that actually matter to your business.</p>
+
+    <div class="cs-case-cards">
+
+      <div class="cs-case-card">
+        <div class="cs-case-card__thumb">Velour Studio</div>
+        <div class="cs-case-card__body">
+          <p class="cs-case-card__client">Velour Studio</p>
+          <h3 class="cs-case-card__title">Boutique fashion brand — full rebuild</h3>
+          <p class="cs-case-card__desc">Migrated from Squarespace to a custom WooCommerce build. Improved conversion rate and cut load time by 60%.</p>
+          <div class="cs-case-card__metrics">
+            <div class="cs-metric">
+              <span class="cs-metric__val">38 → 94</span>
+              <span class="cs-metric__label">PageSpeed</span>
+            </div>
+            <div class="cs-metric">
+              <span class="cs-metric__val">+34%</span>
+              <span class="cs-metric__label">Conversions</span>
+            </div>
+            <div class="cs-metric">
+              <span class="cs-metric__val">−60%</span>
+              <span class="cs-metric__label">Load time</span>
+            </div>
+          </div>
+          <a href="#contact" class="cs-case-card__link">Discuss a similar project →</a>
+        </div>
+      </div>
+
+      <div class="cs-case-card">
+        <div class="cs-case-card__thumb">Finex Capital</div>
+        <div class="cs-case-card__body">
+          <p class="cs-case-card__client">Finex Capital</p>
+          <h3 class="cs-case-card__title">Financial services — trust &amp; performance audit</h3>
+          <p class="cs-case-card__desc">Legacy WordPress site with security debt and poor performance. Rebuilt with structured content management and measurable improvements.</p>
+          <div class="cs-case-card__metrics">
+            <div class="cs-metric">
+              <span class="cs-metric__val">44 → 91</span>
+              <span class="cs-metric__label">PageSpeed</span>
+            </div>
+            <div class="cs-metric">
+              <span class="cs-metric__val">+22%</span>
+              <span class="cs-metric__label">Engagement</span>
+            </div>
+            <div class="cs-metric">
+              <span class="cs-metric__val">0</span>
+              <span class="cs-metric__label">Security incidents</span>
+            </div>
+          </div>
+          <a href="#contact" class="cs-case-card__link">Discuss a similar project →</a>
+        </div>
+      </div>
+
+      <div class="cs-case-card">
+        <div class="cs-case-card__thumb">Northline Legal</div>
+        <div class="cs-case-card__body">
+          <p class="cs-case-card__client">Northline Legal</p>
+          <h3 class="cs-case-card__title">Law firm — conversion-focused redesign</h3>
+          <p class="cs-case-card__desc">New site with clear service architecture, contact optimisation, and structured content to drive enquiries from the right clients.</p>
+          <div class="cs-case-card__metrics">
+            <div class="cs-metric">
+              <span class="cs-metric__val">52 → 96</span>
+              <span class="cs-metric__label">PageSpeed</span>
+            </div>
+            <div class="cs-metric">
+              <span class="cs-metric__val">+58%</span>
+              <span class="cs-metric__label">Form leads</span>
+            </div>
+            <div class="cs-metric">
+              <span class="cs-metric__val">3.2s → 0.8s</span>
+              <span class="cs-metric__label">LCP</span>
+            </div>
+          </div>
+          <a href="#contact" class="cs-case-card__link">Discuss a similar project →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  PRICING — Care Plans                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="pricing" class="cs-section cs-section--cream">
+  <div class="sf-container">
+
+    <div class="cs-center">
+      <span class="cs-eyebrow">Care Plans</span>
+      <h2 class="cs-title">Your site doesn't stop working after launch day</h2>
+      <p class="cs-subtitle" style="margin-inline:auto">Monthly retainers that keep a developer — one who already knows your site — actively looking after it.</p>
+    </div>
+
+    <div class="cs-plan-cards">
+
+      <!-- CORE -->
+      <div class="cs-plan-card">
+        <h3 class="cs-plan-card__name">Core</h3>
+        <p class="cs-plan-card__tagline">For business websites that need reliable maintenance and peace of mind.</p>
+        <div class="cs-plan-card__price">$149<sub>/mo</sub></div>
+        <p class="cs-plan-card__billing">or $127/mo billed annually — save 15%</p>
+        <ul class="cs-plan-card__features">
+          <li>Weekly plugin &amp; core updates</li>
+          <li>Daily offsite backups</li>
+          <li>24/7 uptime monitoring</li>
+          <li>Monthly security scans</li>
+          <li>Monthly performance report</li>
+          <li>Email support — 48h response</li>
+          <li>1 hour of edits per month</li>
+        </ul>
+        <a href="#contact" class="btn btn--ghost" style="justify-content:center">Choose Core</a>
+      </div>
+
+      <!-- COMMERCE (featured) -->
+      <div class="cs-plan-card cs-plan-card--featured">
+        <div class="cs-plan-card__popular">Most Popular</div>
+        <h3 class="cs-plan-card__name">Commerce</h3>
+        <p class="cs-plan-card__tagline">For WooCommerce stores that need performance + conversion care.</p>
+        <div class="cs-plan-card__price">$299<sub>/mo</sub></div>
+        <p class="cs-plan-card__billing">or $254/mo billed annually — save 15%</p>
+        <ul class="cs-plan-card__features">
+          <li>Everything in Core</li>
+          <li>WooCommerce store monitoring</li>
+          <li>Checkout flow optimisation</li>
+          <li>Conversion tracking setup</li>
+          <li>3 hours of edits per month</li>
+          <li>Priority support — 24h response</li>
+          <li>Quarterly strategy sessions</li>
+        </ul>
+        <a href="#contact" class="btn btn--primary" style="justify-content:center">Choose Commerce</a>
+      </div>
+
+      <!-- CUSTOM -->
+      <div class="cs-plan-card">
+        <h3 class="cs-plan-card__name">Custom</h3>
+        <p class="cs-plan-card__tagline">For complex platforms with specific technical requirements and SLAs.</p>
+        <div class="cs-plan-card__price" style="font-size:1.5rem;line-height:2.25rem">Let's talk</div>
+        <p class="cs-plan-card__billing">&nbsp;</p>
+        <ul class="cs-plan-card__features">
+          <li>Everything in Commerce</li>
+          <li>Custom SLA agreement</li>
+          <li>Dedicated development hours</li>
+          <li>Advanced integrations</li>
+          <li>Phone &amp; Slack access</li>
+          <li>Quarterly technical audits</li>
+          <li>Custom agreement terms</li>
+        </ul>
+        <a href="#contact" class="btn btn--ghost" style="justify-content:center">Contact Me</a>
+      </div>
+
+    </div>
+
+    <p class="cs-plan-note">Custom WordPress builds from <strong>$4,000</strong> — fixed scope, fixed price, no surprises at invoice time.</p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUALIFICATION                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="qualification" class="cs-section cs-section--dark">
+  <div class="sf-container" style="--sf-container-max: 60rem">
+
+    <div class="cs-center">
+      <span class="cs-eyebrow">Is This Right For You?</span>
+      <h2 class="cs-title cs-title--light">I don't take on every project. And neither should you.</h2>
+      <p class="cs-subtitle cs-subtitle--light" style="margin-inline:auto">This isn't gatekeeping — it's about making sure we're both set up to succeed.</p>
+    </div>
+
+    <div class="cs-qual-grid">
+
+      <div>
+        <div class="cs-qual-col__header">
+          <span class="cs-qual-col__icon" style="color:#4ade80">✓</span>
+          <span class="cs-qual-col__title">CodeSlash is a good fit if you…</span>
+        </div>
+        <ul class="cs-qual-col__list">
+          <li class="cs-qual-yes">Are an established business with revenue or funding</li>
+          <li class="cs-qual-yes">Value measurable results over aesthetics alone</li>
+          <li class="cs-qual-yes">Want a strategic partner, not just an order taker</li>
+          <li class="cs-qual-yes">Budget $4,000–$15,000+ for custom builds</li>
+          <li class="cs-qual-yes">Expect a structured process with clear milestones</li>
+          <li class="cs-qual-yes">Are thinking long-term, not just one project</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="cs-qual-col__header">
+          <span class="cs-qual-col__icon" style="color:#f87171">✗</span>
+          <span class="cs-qual-col__title">It's probably not a fit if you…</span>
+        </div>
+        <ul class="cs-qual-col__list">
+          <li class="cs-qual-no">Are price-shopping for the lowest quote</li>
+          <li class="cs-qual-no">Need a live site in under 4 weeks</li>
+          <li class="cs-qual-no">Expect to approve every individual decision</li>
+          <li class="cs-qual-no">Plan to provide feedback after long delays</li>
+          <li class="cs-qual-no">Expect a website to fix a broken business model</li>
+          <li class="cs-qual-no">Budget is under $4,000 for a custom build</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="margin-top:var(--sf-space-2xl,3rem);display:flex;flex-wrap:wrap;gap:var(--sf-space-s,1rem);justify-content:center;align-items:center">
+      <a href="#contact" class="btn btn--primary">Start a Project</a>
+      <a href="#pricing" class="cs-link-arrow">See pricing →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  ABOUT                                                      -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="about" class="cs-section cs-section--dark">
+  <div class="sf-container">
+    <div class="cs-about-layout">
+
+      <div>
+        <span class="cs-eyebrow">About</span>
+        <h2 class="cs-title cs-title--light">Senior WordPress developer. 10 years. No fluff.</h2>
+        <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.7;margin:var(--sf-space-m,1.25rem) 0">
+          Based in Pobiedziska, Poland. Working globally since 2014. I build fast, clean WordPress sites
+          for businesses that understand the connection between site performance and business outcomes.
+        </p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.875rem;line-height:1.7;margin:0">
+          I keep a small roster. You get a developer who actually knows your site — not a support ticket
+          system or a rotating team of juniors.
+        </p>
+
+        <div class="cs-about-credentials">
+          <div class="cs-credential">50+ projects shipped across 12+ countries since 2014</div>
+          <div class="cs-credential">Client relationships averaging 3+ years — care plans aren't a sales pitch, they're how we work</div>
+          <div class="cs-credential">Performance-first methodology — 85+ PageSpeed is the baseline, not a stretch goal</div>
+          <div class="cs-credential">Clean, custom PHP — no Elementor, no Divi, no page-builder dependencies</div>
+          <div class="cs-credential">Direct communication — you always know the status without having to ask</div>
+          <div class="cs-credential">5-phase gate system — structured process, no scope creep, no surprises</div>
+        </div>
+
+        <div class="cs-about-stats">
+          <div class="cs-about-stat">
+            <span class="cs-about-stat__num">50+</span>
+            <span class="cs-about-stat__label">Projects shipped</span>
+          </div>
+          <div class="cs-about-stat">
+            <span class="cs-about-stat__num">12+</span>
+            <span class="cs-about-stat__label">Countries</span>
+          </div>
+          <div class="cs-about-stat">
+            <span class="cs-about-stat__num">4.9★</span>
+            <span class="cs-about-stat__label">Average rating</span>
+          </div>
+        </div>
+
+        <div style="margin-top:var(--sf-space-xl,2.5rem)">
+          <a href="#contact" class="btn btn--primary">Let's talk about your project</a>
+        </div>
+      </div>
+
+      <div class="cs-about-portrait">
+        <!-- Replace the div below with an <img> tag pointing to your photo -->
+        <div class="cs-about-portrait__img" aria-label="Developer portrait placeholder">
+          Add your photo here
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  FAQ                                                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="faq" class="cs-section cs-section--white">
+  <div class="sf-container">
+
+    <div class="cs-center">
+      <span class="cs-eyebrow">FAQ</span>
+      <h2 class="cs-title">Questions I get asked a lot</h2>
+    </div>
+
+    <div class="cs-faq-list">
+
+      <details class="cs-faq-item">
+        <summary>What technologies do you use?</summary>
+        <div class="cs-faq-item__body">I work exclusively in WordPress with clean, custom PHP — no Elementor, no Divi, no page-builder bloat. On the front end I use modern CSS and vanilla JS where needed. WooCommerce for e-commerce, ACF for content management.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>How long does a typical project take?</summary>
+        <div class="cs-faq-item__body">Most builds take 4–8 weeks depending on scope. A focused 5-page site can launch in 3–4 weeks; a full WooCommerce build typically takes 8–12 weeks. Timeline is locked in before work begins — it's part of the gate system.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>Do you work with clients outside of Europe?</summary>
+        <div class="cs-faq-item__body">Yes — around 40% of my clients are in North America and beyond. Communication is entirely async-friendly. I'm in Central European time (UTC+1/+2) which gives good overlap with both US and Asia-Pacific teams.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>What if I don't have content ready?</summary>
+        <div class="cs-faq-item__body">We can discuss a phased approach where design begins with placeholder content, but I'll be honest: sites that launch with proper copy and imagery consistently outperform those that don't. I can recommend good copywriters if needed.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>Can you redesign my existing WordPress site?</summary>
+        <div class="cs-faq-item__body">Yes. For redesigns, I assess the existing codebase first and advise whether to rebuild from scratch or optimise the current structure — whichever is most cost-effective for your situation. I'll always be honest about the trade-offs.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>What happens after launch?</summary>
+        <div class="cs-faq-item__body">You either transition to a Care Plan (recommended) for ongoing updates, monitoring, and support — or receive a full handoff document. Care plan clients get a developer who already knows their site, not a helpdesk ticket system.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>How do Care Plans work?</summary>
+        <div class="cs-faq-item__body">Care Plans are monthly retainers that cover updates, backups, uptime monitoring, security scanning, and a set number of support/edit hours. You pay one fixed amount per month and your site is looked after proactively — not reactively.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>What is included in the project price?</summary>
+        <div class="cs-faq-item__body">Fixed-price projects include: discovery, design (2 revision rounds), development, QA, and launch. Hosting, third-party plugins, and stock imagery are not included but are discussed upfront — no surprise costs at invoice time.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>Do you offer payment plans?</summary>
+        <div class="cs-faq-item__body">Yes. Standard structure is: 40% upfront at kickoff, 40% at design sign-off, 20% at launch. For larger projects ($10,000+) a 4-stage payment schedule is available. I don't ask for 100% upfront.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>What if I'm not happy with the design?</summary>
+        <div class="cs-faq-item__body">Each design phase includes two structured rounds of feedback. After sign-off, changes outside the agreed scope are treated as addendum work. The gate system exists precisely to prevent "I don't like it" moments at development stage.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>Why choose a solo developer over an agency?</summary>
+        <div class="cs-faq-item__body">You get direct access to the person doing the work — not a sales rep, not a project manager, not a junior developer. The quality is consistent because I personally do every project. The cost is lower because there's no agency overhead.</div>
+      </details>
+
+      <details class="cs-faq-item">
+        <summary>What is the minimum budget to work together?</summary>
+        <div class="cs-faq-item__body">For custom builds: $4,000. For optimisation/performance audits: $1,500. For Care Plans: $149/month. If your budget is below these thresholds, I'm happy to point you towards good alternatives rather than waste either of our time.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  CONTACT                                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="contact" class="cs-section cs-section--dark">
+  <div class="sf-container">
+    <div class="cs-contact-layout">
+
+      <div class="cs-contact-meta">
+        <span class="cs-eyebrow">Get In Touch</span>
+        <h2 class="cs-contact-meta__title">Let's talk about your project</h2>
+        <p class="cs-contact-meta__desc">Fill in the form or send a direct email. I respond to every enquiry within 24 hours — with a clear scope and a fixed-price quote, not a vague "it depends."</p>
+        <a href="mailto:hello@codeslash.net" class="cs-contact-meta__email">
+          <span class="cs-contact-meta__email-icon">✉</span>
+          <div>
+            <div class="cs-contact-meta__email-addr">hello@codeslash.net</div>
+            <div class="cs-contact-meta__email-note">Response within 24 hours</div>
+          </div>
+        </a>
+      </div>
+
+      <form class="cs-contact-form" action="#" method="post">
+        <div class="cs-form-row">
+          <div class="cs-form-group">
+            <label for="cs-name">Name</label>
+            <input type="text" id="cs-name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="cs-form-group">
+            <label for="cs-email">Email</label>
+            <input type="email" id="cs-email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="cs-form-group">
+          <label for="cs-company">Company</label>
+          <input type="text" id="cs-company" name="company" placeholder="Company name (optional)">
+        </div>
+        <div class="cs-form-group">
+          <label for="cs-type">Project type</label>
+          <select id="cs-type" name="project_type">
+            <option value="" disabled selected>Select a project type</option>
+            <option>New WordPress website</option>
+            <option>WooCommerce store</option>
+            <option>Performance optimisation</option>
+            <option>Platform migration</option>
+            <option>Care plan</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="cs-form-group">
+          <label for="cs-budget">Budget range</label>
+          <select id="cs-budget" name="budget">
+            <option value="" disabled selected>Select your budget</option>
+            <option>$1,500 – $4,000</option>
+            <option>$4,000 – $7,500</option>
+            <option>$7,500 – $15,000</option>
+            <option>$15,000+</option>
+          </select>
+        </div>
+        <div class="cs-form-group">
+          <label for="cs-message">Tell me about your project</label>
+          <textarea id="cs-message" name="message" placeholder="What are you trying to achieve? What's broken or underperforming?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center">
+          Send Message
+          <svg class="cs-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  FOOTER                                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<footer id="footer" class="cs-section cs-section--footer">
+  <div class="sf-container">
+
+    <div class="cs-footer-grid">
+
+      <div>
+        <div class="cs-footer-brand__logo">CODE/<span>codeslash</span></div>
+        <p class="cs-footer-brand__desc">Senior WordPress development for businesses that need their site to earn trust, perform fast, and generate results.</p>
+        <div class="cs-footer-brand__location">Pobiedziska, Poland — Global clients</div>
+        <div class="cs-footer-brand__status">Available for new projects in Q3 2026</div>
+      </div>
+
+      <div>
+        <p class="cs-footer-col__title">Services</p>
+        <ul class="cs-footer-col__links">
+          <li><a href="#services-overview">Build</a></li>
+          <li><a href="#services-overview">Optimize</a></li>
+          <li><a href="#services-overview">Sustain</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="cs-footer-col__title">Resources</p>
+        <ul class="cs-footer-col__links">
+          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="cs-footer-col__title">Connect</p>
+        <ul class="cs-footer-col__links">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="mailto:hello@codeslash.net">hello@codeslash.net</a></li>
+          <li><a href="#">Book a call</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="cs-footer-bottom">
+      <div class="cs-footer-bottom__copy">© 2026 CodeSlash. All rights reserved.</div>
+      <div class="cs-footer-bottom__links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="cs-footer-tagline">Built with WordPress. Naturally.</div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MINIMAL JS — scroll progress + sticky nav                  -->
+<!--  Paste into Bricks > Settings > Custom JS                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  var bar = document.getElementById('cs-progress-bar');
+  var nav = document.getElementById('cs-nav');
+  if (!bar || !nav) return;
+
+  window.addEventListener('scroll', function () {
+    var scrolled = window.scrollY;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if (total > 0) bar.style.width = (scrolled / total * 100) + '%';
+    nav.classList.toggle('is-scrolled', scrolled > 20);
+  }, { passive: true });
+}());
+</script>
+
+</body>
+</html>
