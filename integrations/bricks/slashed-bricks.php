@@ -159,8 +159,10 @@ function slashed_bricks_rest_routes_init() {
     require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-rebemer-rest.php';
 
     ( new Slashed_Bricks_REST_Controller() )->register_routes();
+    ( new Slashed_Bricks_ReBEMer_REST() )->register_routes();
 }
 add_action( 'rest_api_init', 'slashed_bricks_rest_routes_init' );
 
