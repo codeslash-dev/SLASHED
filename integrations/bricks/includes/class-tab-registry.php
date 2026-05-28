@@ -64,6 +64,7 @@ class Slashed_Bricks_Tab_Registry {
 			'variables'  => 'Variables',
 			'classes'    => 'Classes',
 			'bundle'     => 'Bundle',
+			'export'     => 'Export / Import',
 			'hooks'      => 'Hooks',
 			'cheatsheet' => 'Cheatsheet',
 		);

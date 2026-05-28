@@ -103,6 +103,26 @@ class Slashed_Bricks_REST_Controller {
 
 		register_rest_route(
 			self::NAMESPACE,
+			'/tokens/export',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'export_tokens' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+			)
+		);
+
+		register_rest_route(
+			self::NAMESPACE,
+			'/tokens/import',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'import_tokens' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+			)
+		);
+
+		register_rest_route(
+			self::NAMESPACE,
 			'/settings',
 			array(
 				array(
@@ -268,6 +288,80 @@ class Slashed_Bricks_REST_Controller {
 		Slashed_Bricks_Token_Store::update_plugin_settings( $settings );
 
 		return rest_ensure_response( $settings );
+	}
+
+	/**
+	 * Export all token overrides and plugin settings as a portable JSON package.
+	 *
+	 * The response is a self-describing envelope callers can save to a file
+	 * and later POST to /tokens/import on a different site. Only overrides
+	 * are included — framework defaults are not repeated because the target
+	 * site already has them via the CSS bundle.
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function export_tokens() {
+		return rest_ensure_response(
+			array(
+				'schema_version'  => '1',
+				'plugin_version'  => SLASHED_BRICKS_VERSION,
+				'exported_at'     => gmdate( 'c' ),
+				'tokens'          => Slashed_Bricks_Token_Store::get_settings(),
+				'plugin_settings' => Slashed_Bricks_Token_Store::get_plugin_settings(),
+			)
+		);
+	}
+
+	/**
+	 * Import token overrides from a portable JSON package.
+	 *
+	 * Accepts the envelope produced by export_tokens(). Each section is
+	 * run through the standard sanitizer before it is written, so the
+	 * same validation rules that protect the per-section save endpoint
+	 * apply here too. Unknown sections (e.g. from a newer plugin version)
+	 * are silently skipped so forward-compatible exports don't fail.
+	 *
+	 * @param WP_REST_Request $request Incoming request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function import_tokens( WP_REST_Request $request ) {
+		$body = $request->get_json_params();
+
+		if ( ! is_array( $body ) || ! isset( $body['tokens'] ) || ! is_array( $body['tokens'] ) ) {
+			return new WP_Error(
+				'slashed_bricks_invalid_import',
+				__( 'Invalid import payload. Expected a SLASHED token export file.', 'slashed-bricks' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		$all      = Slashed_Bricks_Token_Store::get_settings();
+		$imported = 0;
+
+		foreach ( $body['tokens'] as $section => $values ) {
+			if ( ! Slashed_Bricks_Tab_Registry::is_token_tab( $section ) ) {
+				continue;
+			}
+			if ( ! is_array( $values ) ) {
+				continue;
+			}
+			$sanitized = Slashed_Bricks_Token_Sanitizer::sanitize_section( $section, $values );
+			if ( ! empty( $sanitized ) ) {
+				$all[ $section ] = $sanitized;
+				++$imported;
+			} else {
+				unset( $all[ $section ] );
+			}
+		}
+
+		Slashed_Bricks_Token_Store::update_settings( $all );
+
+		return rest_ensure_response(
+			array(
+				'imported' => $imported,
+				'tokens'   => Slashed_Bricks_Token_Store::get_settings(),
+			)
+		);
 	}
 
 	/**
