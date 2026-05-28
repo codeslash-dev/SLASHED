@@ -59,9 +59,8 @@ the Global Class Manager). Those tools operate on **classes** in
 isolation. reBEMer fills the gap nobody else fills: operating on the
 **element subtree** as a unit, with BEM grammar built in.
 
-The only product in the same shape today is ACSS Auto-BEM, which is
-paid and bundled with a coordinated framework. reBEMer is the
-SLASHED-shaped equivalent — free, scoped, and safer.
+Existing Auto-BEM tools are paid and bundled with coordinated frameworks.
+reBEMer is the SLASHED-shaped equivalent — free, scoped, and safer.
 
 
 ## 3. Goals (v1)
@@ -125,7 +124,7 @@ SLASHED-shaped equivalent — free, scoped, and safer.
   style settings keyed by Bricks control name.
 - **ID-level styles** — style settings written directly into
   `element.settings` rather than into a global class. Migrating these
-  up into a class is a known ACSS Auto-BEM feature; reBEMer matches it.
+  up into a class is a known Auto-BEM feature; reBEMer matches it.
 - **Plan** — the structured representation of "what would happen if I
   apply", produced by `buildPlan()`. Pure data, fully serializable,
   testable in isolation, sent to the preflight endpoint.
@@ -814,7 +813,7 @@ spec is out of scope for v1 but the test list is captured in
 
 - **Settings UI** in the SLASHED admin SPA for naming policy.
 - **Linter mode**: scan the page, surface non-BEM classes, propose
-  fixes. Differentiator vs. ACSS Auto-BEM.
+  fixes. Differentiator vs. competing Auto-BEM tools.
 - **Audit log**: per-user record of past operations.
 - **Bulk operations** across siblings via shift-click in the
   structure panel.
@@ -835,8 +834,6 @@ spec is out of scope for v1 but the test list is captured in
 
 ## 21. Glossary of acronyms used
 
-- **ACSS** — Automatic.css, a paid CSS framework with a similar
-  Auto-BEM feature.
 - **BEM** — Block-Element-Modifier methodology by Yandex.
 - **PUC** — Plugin Update Checker (Yahnis Elsts' library, used by the
   original samirhp plugin; reBEMer does not use it).
