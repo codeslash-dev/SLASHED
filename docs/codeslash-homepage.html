@@ -7,15 +7,30 @@
   <!--
     BRICKS BUILDER USAGE
     ─────────────────────────────────────────────────────────────────────
-    1. Remove ALL four <link> tags below — in Bricks:
-       • SLASHED is loaded automatically by the plugin.
-       • Add Outfit + DM Sans via Bricks › Settings › Custom Code
-         (head) or your theme's font loader.
-    2. From the <style> block, paste everything EXCEPT the
-       "Standalone-only reset" comment block into
-       Bricks › Settings › Custom CSS.
-    3. Paste the <script> block into Bricks › Settings › Custom JS.
-    4. Paste each <!-- SECTION --> block into its own Bricks Code element.
+    PREREQUISITES (do once per site)
+    • Install SLASHED for Bricks plugin — it auto-loads the CSS framework.
+    • Add Outfit + DM Sans fonts in Bricks › Settings › Custom Code (head):
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+    STEP 1 — BRAND TOKENS (paste into Bricks › Settings › Custom CSS)
+    Copy everything between the "BRICKS CUSTOM CSS START" and
+    "BRICKS CUSTOM CSS END" comment markers below. This sets your brand
+    colors, fonts, and component styles. Skip the "Standalone-only reset"
+    block — Bricks already has its own reset.
+
+    STEP 2 — JAVASCRIPT (paste into Bricks › Settings › Custom JS)
+    Copy the entire <script> block below.
+
+    STEP 3 — HTML SECTIONS (paste each into a separate Bricks Code element)
+    Each section is marked with <!-- ══════... SECTIONNAME --> comments.
+    Paste each section's HTML into its own Bricks Code element.
+    Do NOT include the <link> tags, the <style> block, or the <script>
+    block in the Code element — those go in Steps 1-2 above.
+    Also paste the progress bar <div class="cs-progress">...</div> into
+    the same Code element as the NAVBAR section (it goes just before it).
+
+    IMPORTANT: Do NOT paste the <link> tags into Bricks — the plugin
+    loads SLASHED automatically. Including them causes double-loading.
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,9 +39,11 @@
   <!-- Remove this link when pasting into Bricks — the plugin loads SLASHED automatically -->
 
 <style>
-/* ═══════════════════════════════════════════════════════════════
-   BRAND TOKENS — paste into Bricks › Settings › Custom CSS
-   ═══════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════
+   ▼ BRICKS CUSTOM CSS START — copy from here (skip standalone reset below)
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Brand tokens ────────────────────────────────────────────────── */
 :root {
   /* Source tokens — SLASHED derives dark-mode variants automatically */
   --sf-color-primary-light:   oklch(0.65 0.20 45);   /* brand orange */
@@ -626,6 +643,10 @@ button { font-family: var(--sf-font-body); }
 .cs-footer-bottom__links a { font-size:.8rem; color:var(--sf-color-text--secondary); text-decoration:none; transition:color .15s; }
 .cs-footer-bottom__links a:hover { color:var(--sf-color-text); }
 .cs-footer-tagline { font-size:.775rem; color:var(--sf-color-text--secondary); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   ▲ BRICKS CUSTOM CSS END — copy up to here (do not include this comment)
+   ══════════════════════════════════════════════════════════════════════ */
 </style>
 </head>
 <body>
