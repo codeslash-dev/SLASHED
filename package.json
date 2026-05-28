@@ -38,6 +38,7 @@
     "docs:tokens": "node scripts/gen-token-reference.js",
     "docs:classes": "node scripts/gen-class-reference.js",
     "bricks:inventory": "node scripts/gen-bricks-inventory.js",
+    "version-sync": "node scripts/version-sync.js",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
     "test": "playwright test",
