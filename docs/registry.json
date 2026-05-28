@@ -860,7 +860,6 @@
     "skip-link",
     "sr-only",
     "sr-only-focusable",
-    "theme-transition",
-    "visually-hidden"
+    "theme-transition"
   ]
 }
