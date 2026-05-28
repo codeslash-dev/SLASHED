@@ -73,6 +73,7 @@ button { font-family: var(--sf-font-body); }
   background: rgba(8,15,30,.96);
   backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 var(--sf-color-border--subtle);
+  color-scheme: dark;
 }
 .cs-nav__inner {
   display: flex; align-items: center; justify-content: space-between;
@@ -95,6 +96,7 @@ button { font-family: var(--sf-font-body); }
   background: rgba(8,15,30,.97); backdrop-filter:blur(16px);
   padding:1rem clamp(1.25rem,4vw,3rem) 1.5rem;
   border-top: 1px solid var(--sf-color-border--subtle);
+  color-scheme: dark;
 }
 .cs-nav__mobile.is-open { display:flex; }
 .cs-nav__mobile a { color:var(--sf-color-text--secondary); font-size:.95rem; padding:.625rem 0; border-bottom:1px solid var(--sf-color-border--subtle); transition:color .15s; }
@@ -112,12 +114,12 @@ button { font-family: var(--sf-font-body); }
 
 /* ── Section rhythm ─────────────────────────────────────────── */
 .cs-section { padding-block: clamp(3.5rem,8vw,6rem); }
-.cs-section--dark   { background:oklch(0.10 0.04 255); }
-.cs-section--mid    { background:oklch(0.12 0.04 255); }
-.cs-section--cta    { background:oklch(0.13 0.05 255); }
+.cs-section--dark   { background:oklch(0.10 0.04 255); color-scheme:dark; }
+.cs-section--mid    { background:oklch(0.12 0.04 255); color-scheme:dark; }
+.cs-section--cta    { background:oklch(0.13 0.05 255); color-scheme:dark; }
 .cs-section--cream  { background:var(--sf-color-bg); }
 .cs-section--white  { background:#fff; }
-.cs-section--footer { background:oklch(0.08 0.03 255); padding-block:clamp(3rem,6vw,5rem); }
+.cs-section--footer { background:oklch(0.08 0.03 255); padding-block:clamp(3rem,6vw,5rem); color-scheme:dark; }
 .cs-section--glow   { position:relative; overflow:hidden; }
 .cs-section--glow::before {
   content:''; position:absolute; top:-140px; left:50%; transform:translateX(-50%);
