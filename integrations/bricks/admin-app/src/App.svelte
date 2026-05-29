@@ -15,13 +15,9 @@
   import { ui } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
   import ColorTab from './components/ColorTab.svelte';
-  import ContrastTab from './components/ContrastTab.svelte';
   import TypographyTab from './components/TypographyTab.svelte';
   import SpacingTab from './components/SpacingTab.svelte';
-  import RadiusTab from './components/RadiusTab.svelte';
-  import ShadowsTab from './components/ShadowsTab.svelte';
-  import MotionTab from './components/MotionTab.svelte';
-  import ZindexTab from './components/ZindexTab.svelte';
+  import MiscTab from './components/MiscTab.svelte';
   import VariablesTab from './components/VariablesTab.svelte';
   import ClassesTab from './components/ClassesTab.svelte';
   import BundleTab from './components/BundleTab.svelte';
@@ -77,20 +73,12 @@
   <section class="slashed-svelte-admin__body">
     {#if ui.activeTab === 'colors'}
       <ColorTab />
-    {:else if ui.activeTab === 'contrast'}
-      <ContrastTab />
     {:else if ui.activeTab === 'typography'}
       <TypographyTab />
     {:else if ui.activeTab === 'spacing'}
       <SpacingTab />
-    {:else if ui.activeTab === 'radius'}
-      <RadiusTab />
-    {:else if ui.activeTab === 'shadows'}
-      <ShadowsTab />
-    {:else if ui.activeTab === 'motion'}
-      <MotionTab />
-    {:else if ui.activeTab === 'zindex'}
-      <ZindexTab />
+    {:else if ui.activeTab === 'misc'}
+      <MiscTab />
     {:else if ui.activeTab === 'variables'}
       <VariablesTab />
     {:else if ui.activeTab === 'classes'}

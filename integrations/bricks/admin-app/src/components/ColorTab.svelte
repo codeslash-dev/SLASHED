@@ -10,11 +10,15 @@
    */
   import { meta } from '../lib/stores.svelte.js';
   import ColorRow from './ColorRow.svelte';
+  import AdvancedSection from './AdvancedSection.svelte';
 
   const colors = meta.defaults?.colors ?? {};
 
   /** Capitalize first letter for display labels (matches the legacy ucfirst()). */
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  /** Brand color keys — only the 6 core brand colors for the basic section. */
+  const brandEntries = Object.entries(colors.brand ?? {});
 </script>
 
 <section>
@@ -26,7 +30,7 @@
   </p>
 
   <div class="rows">
-    {#each Object.entries(colors.brand ?? {}) as [name, oklch] (name)}
+    {#each brandEntries as [name, oklch] (name)}
       <ColorRow
         storeKey={`brand_${name}`}
         label={cap(name)}
@@ -37,54 +41,56 @@
     {/each}
   </div>
 
-  <h2 class="dark-heading">Brand Colors — Dark Mode</h2>
-  <p class="hint">
-    Optional overrides for dark mode. Leave empty to let the framework auto-derive
-    dark variants from the light source colors. Set explicit values for full
-    control over dark-mode appearance.
-  </p>
+  <AdvancedSection>
+    <h2 class="status-heading">Status Colors — Light Mode</h2>
+    <div class="rows">
+      {#each Object.entries(colors.status ?? {}) as [name, oklch] (name)}
+        <ColorRow
+          storeKey={`status_${name}`}
+          label={cap(name)}
+          hexHint={colors.status_hex_hints?.[name] ?? ''}
+          rawHint={oklch}
+          cssVar={`--sf-color-${name}-light`}
+        />
+      {/each}
+    </div>
 
-  <div class="rows rows--dark">
-    {#each Object.entries(colors.brand_dark ?? colors.brand ?? {}) as [name] (name)}
-      <ColorRow
-        storeKey={`brand_dark_${name}`}
-        label={cap(name)}
-        hexHint={colors.brand_dark_hex_hints?.[name] ?? ''}
-        rawHint={colors.brand_dark?.[name] ?? ''}
-        cssVar={`--sf-color-${name}-dark`}
-      />
-    {/each}
-  </div>
+    <h2 class="dark-heading">Brand Colors — Dark Mode</h2>
+    <p class="hint">
+      Optional overrides for dark mode. Leave empty to let the framework auto-derive
+      dark variants from the light source colors. Set explicit values for full
+      control over dark-mode appearance.
+    </p>
 
-  <h2 class="status-heading">Status Colors — Light Mode</h2>
-  <div class="rows">
-    {#each Object.entries(colors.status ?? {}) as [name, oklch] (name)}
-      <ColorRow
-        storeKey={`status_${name}`}
-        label={cap(name)}
-        hexHint={colors.status_hex_hints?.[name] ?? ''}
-        rawHint={oklch}
-        cssVar={`--sf-color-${name}-light`}
-      />
-    {/each}
-  </div>
+    <div class="rows rows--dark">
+      {#each Object.entries(colors.brand_dark ?? colors.brand ?? {}) as [name] (name)}
+        <ColorRow
+          storeKey={`brand_dark_${name}`}
+          label={cap(name)}
+          hexHint={colors.brand_dark_hex_hints?.[name] ?? ''}
+          rawHint={colors.brand_dark?.[name] ?? ''}
+          cssVar={`--sf-color-${name}-dark`}
+        />
+      {/each}
+    </div>
 
-  <h2 class="dark-heading">Status Colors — Dark Mode</h2>
-  <p class="hint">
-    Optional overrides for dark mode. Leave empty for auto-derivation.
-  </p>
+    <h2 class="dark-heading">Status Colors — Dark Mode</h2>
+    <p class="hint">
+      Optional overrides for dark mode. Leave empty for auto-derivation.
+    </p>
 
-  <div class="rows rows--dark">
-    {#each Object.entries(colors.status_dark ?? colors.status ?? {}) as [name] (name)}
-      <ColorRow
-        storeKey={`status_dark_${name}`}
-        label={cap(name)}
-        hexHint={colors.status_dark_hex_hints?.[name] ?? ''}
-        rawHint={colors.status_dark?.[name] ?? ''}
-        cssVar={`--sf-color-${name}-dark`}
-      />
-    {/each}
-  </div>
+    <div class="rows rows--dark">
+      {#each Object.entries(colors.status_dark ?? colors.status ?? {}) as [name] (name)}
+        <ColorRow
+          storeKey={`status_dark_${name}`}
+          label={cap(name)}
+          hexHint={colors.status_dark_hex_hints?.[name] ?? ''}
+          rawHint={colors.status_dark?.[name] ?? ''}
+          cssVar={`--sf-color-${name}-dark`}
+        />
+      {/each}
+    </div>
+  </AdvancedSection>
 </section>
 
 <style>

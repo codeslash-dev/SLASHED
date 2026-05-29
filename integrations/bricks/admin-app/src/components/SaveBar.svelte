@@ -12,24 +12,47 @@
   import { generateExportCSS, hasOverrides } from '../lib/export.js';
 
   /**
+   * The misc tab aggregates data from these five underlying sections.
+   * Since `tokens.misc` doesn't exist, we iterate over them individually.
+   */
+  const MISC_SECTIONS = ['contrast', 'radius', 'shadows', 'motion', 'zindex'];
+
+  /**
    * Persist the active tab's tokens via the REST controller. Replaces
    * the legacy form POST + page reload with an in-place save: we send
    * the current local section, pull the server-sanitized values back,
    * and write them to the store so dev/UI state matches the DB exactly.
    * Surfaces transport errors via `ui.error` and guards re-entry while
    * a save is in flight.
+   *
+   * For the misc tab, iterates over all 5 underlying sections.
    */
   async function save() {
     if (ui.saving) return;
     ui.saving = true;
     ui.error = '';
     try {
-      const section = ui.activeTab;
-      const values = tokens[section] ?? {};
-      const res = await api.saveSection(section, values);
-      if (res && res.values) {
-        // Prefer the server-sanitized values so dev/UI state matches DB.
-        tokens[section] = res.values;
+      if (ui.activeTab === 'misc') {
+        const results = await Promise.allSettled(
+          MISC_SECTIONS.map((section) => api.saveSection(section, tokens[section] ?? {}))
+        );
+        const failed = [];
+        results.forEach((result, i) => {
+          if (result.status === 'fulfilled') {
+            if (result.value?.values) tokens[MISC_SECTIONS[i]] = result.value.values;
+          } else {
+            failed.push(MISC_SECTIONS[i]);
+          }
+        });
+        if (failed.length > 0) throw new Error(`Failed to save: ${failed.join(', ')}`);
+      } else {
+        const section = ui.activeTab;
+        const values = tokens[section] ?? {};
+        const res = await api.saveSection(section, values);
+        if (res && res.values) {
+          // Prefer the server-sanitized values so dev/UI state matches DB.
+          tokens[section] = res.values;
+        }
       }
       ui.dirty = false;
       ui.lastSavedAt = Date.now();
@@ -46,6 +69,8 @@
    * `slashed_bricks_tokens` server-side and `tokens[section]` locally).
    * Mirrors `save()`'s in-flight guard, error handling, and dirty/saved
    * transitions so the UI state stays consistent across both paths.
+   *
+   * For the misc tab, iterates over all 5 underlying sections.
    */
   async function reset() {
     if (ui.saving) return;
@@ -53,8 +78,23 @@
     ui.saving = true;
     ui.error = '';
     try {
-      await api.resetSection(ui.activeTab);
-      clearSection(ui.activeTab);
+      if (ui.activeTab === 'misc') {
+        const results = await Promise.allSettled(
+          MISC_SECTIONS.map((section) => api.resetSection(section))
+        );
+        const failed = [];
+        results.forEach((result, i) => {
+          if (result.status === 'fulfilled') {
+            clearSection(MISC_SECTIONS[i]);
+          } else {
+            failed.push(MISC_SECTIONS[i]);
+          }
+        });
+        if (failed.length > 0) throw new Error(`Failed to reset: ${failed.join(', ')}`);
+      } else {
+        await api.resetSection(ui.activeTab);
+        clearSection(ui.activeTab);
+      }
       ui.dirty = false;
       ui.lastSavedAt = Date.now();
     } catch (err) {

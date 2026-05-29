@@ -330,6 +330,10 @@ class Slashed_Bricks_CSS_Generator {
 			$declarations[] = '--sf-shadow-strength: calc(' . $settings['shadow_strength'] . ' + var(--sf-is-dark) * 0.17);';
 		}
 
+		if ( isset( $settings['glow_color'] ) && '' !== $settings['glow_color'] ) {
+			$declarations[] = '--sf-shadow-glow-color: ' . $settings['glow_color'] . ';';
+		}
+
 		return $declarations;
 	}
 

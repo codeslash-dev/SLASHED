@@ -21,12 +21,15 @@
    * render meaningfully inside this small box, and adding them would
    * just inflate the preview into a second admin form.
    */
-  import { tokens } from '../lib/stores.svelte.js';
+  import { tokens, meta } from '../lib/stores.svelte.js';
 
   /** Brand color names rendered as swatches; mirrors the legacy preview. */
   const brand = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
   /** Status colors rendered alongside brand, same as legacy. */
   const statuses = ['success', 'warning', 'error', 'info', 'danger'];
+
+  /** Shorthand accessors for default color hints from meta. */
+  const defaultColors = meta.defaults?.colors ?? {};
 
   /**
    * Build inline CSS custom properties for the preview container.
@@ -36,6 +39,10 @@
    * Custom properties cascade to all descendants, so var(--sf-color-…)
    * and var(--sf-font-…) on swatches/text resolve through the
    * container's inline style.
+   *
+   * Falls back to meta.defaults.colors.*_hex_hints when no override is
+   * stored, so swatches show real colors even before the user touches
+   * anything (fixes the grey-swatch bug, issue #145).
    */
   const inlineStyle = $derived.by(() => {
     const pairs = [];
@@ -43,15 +50,15 @@
     const typography = tokens.typography ?? {};
 
     for (const name of brand) {
-      const v = colors[`brand_${name}`];
+      const v = colors[`brand_${name}`] ?? defaultColors.brand_hex_hints?.[name];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
-      const vd = colors[`brand_dark_${name}`];
+      const vd = colors[`brand_dark_${name}`] ?? defaultColors.brand_dark_hex_hints?.[name];
       if (vd) pairs.push(`--sf-color-${name}-dark:${vd}`);
     }
     for (const name of statuses) {
-      const v = colors[`status_${name}`];
+      const v = colors[`status_${name}`] ?? defaultColors.status_hex_hints?.[name];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
-      const vd = colors[`status_dark_${name}`];
+      const vd = colors[`status_dark_${name}`] ?? defaultColors.status_dark_hex_hints?.[name];
       if (vd) pairs.push(`--sf-color-${name}-dark:${vd}`);
     }
     if (typography.font_body)    pairs.push(`--sf-font-body:${typography.font_body}`);
@@ -139,6 +146,24 @@
     border: none;
     cursor: default;
   }
+  .slashed-preview__dark-section {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #e9eaeb;
+  }
+  .slashed-preview__dark-heading {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #50575e;
+    margin: 0 0 8px;
+  }
+  .slashed-preview__dark-bg {
+    background: #1d2327;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
   .slashed-preview__caption {
     margin-top: 16px;
     color: #50575e;
@@ -180,6 +205,15 @@
         {name}
       </div>
     {/each}
+    {#each statuses as name (name)}
+      <div
+        class="slashed-preview__swatch"
+        style:background={`var(--sf-color-${name}-light, #ddd)`}
+        title={name}
+      >
+        {name}
+      </div>
+    {/each}
   </div>
   <div class="slashed-preview__buttons">
     <span
@@ -191,6 +225,33 @@
       style:background={'var(--sf-color-action-light, #0891b2)'}
     >Action</span>
   </div>
+
+  <div class="slashed-preview__dark-section">
+    <p class="slashed-preview__dark-heading">Dark mode</p>
+    <div class="slashed-preview__dark-bg">
+      <div class="slashed-preview__swatches">
+        {#each brand as name (name)}
+          <div
+            class="slashed-preview__swatch"
+            style:background={`var(--sf-color-${name}-dark, #333)`}
+            title={`${name} dark`}
+          >
+            {name}
+          </div>
+        {/each}
+        {#each statuses as name (name)}
+          <div
+            class="slashed-preview__swatch"
+            style:background={`var(--sf-color-${name}-dark, #333)`}
+            title={`${name} dark`}
+          >
+            {name}
+          </div>
+        {/each}
+      </div>
+    </div>
+  </div>
+
   <div class="slashed-preview__caption">
     Generated CSS:
     <code>{css || '/* (defaults — no overrides set) */'}</code>

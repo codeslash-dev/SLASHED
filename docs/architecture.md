@@ -213,7 +213,7 @@ Transition tokens live in `core/tokens.css`:
 
 `@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
 
-**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` (v0.3.0) and `.sf-clickable-parent` (added in v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`). `.visually-hidden` is shipped as a synonym of `.sr-only` for teams that prefer the WHATWG naming convention.
+**slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` (v0.3.0) and `.sf-clickable-parent` (added in v0.3.0). High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`).
 
 **slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
 
@@ -282,7 +282,6 @@ without reducing collision risk in practice.
 |---|---|---|
 | `.sr-only` | accessibility | Industry-standard screen-reader name |
 | `.sr-only-focusable` | accessibility | Companion to `.sr-only` |
-| `.visually-hidden` | accessibility | WHATWG synonym of `.sr-only` |
 | `.skip-link` | accessibility | Common a11y pattern name |
 | `.no-motion` | accessibility | Reads as a behaviour toggle |
 | `.no-print` | print | Reads as a behaviour toggle |
