@@ -4436,11 +4436,7 @@
    @layer slashed.utilities
    ────────────────────── */
 
-@layer slashed.utilities {
-
-  /* TODO */
-
-}
+@layer slashed.utilities;
 
 /* ─── optional/legacy.css ─── */
 /* SLASHED — optional/legacy.css
