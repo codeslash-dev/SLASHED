@@ -3986,9 +3986,6 @@ label:has(+ :required)::after {
    @layer slashed.utilities
    ────────────────────── */
 
-
-/* TODO */
-
 /* ─── optional/legacy.css ─── */
 /* SLASHED — optional/legacy.css
    @layer slashed.legacy
