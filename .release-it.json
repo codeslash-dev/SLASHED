@@ -15,7 +15,7 @@
   },
   "hooks": {
     "before:init": ["npm run lint:css"],
-    "after:bump": "npm run build"
+    "after:bump": ["node scripts/version-sync.js", "npm run build"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {

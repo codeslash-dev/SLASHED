@@ -36,7 +36,7 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
  *
  * Override per-site with the 'slashed_bricks/css_bundle_url' filter.
  */
-define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.4' );
+define( 'SLASHED_BRICKS_CSS_REF', 'v0.3.0' );
 
 /**
  * Token Store is loaded early so slashed_bricks_get_css_bundle() can call
