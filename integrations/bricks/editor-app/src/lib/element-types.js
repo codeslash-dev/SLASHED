@@ -115,3 +115,70 @@ export function suggestElementName(elementType, fallback = 'item') {
 export function isLayoutContainer(elementType) {
   return typeof elementType === 'string' && LAYOUT_CONTAINER_TYPES.has(elementType);
 }
+
+/**
+ * Semantic label overrides for sole-child elements.
+ *
+ * When an element is the only sibling of its type within a parent,
+ * these names read more naturally in BEM than the generic type label.
+ * E.g. `card__title` reads better than `card__heading`.
+ *
+ * @type {Record<string, string>}
+ */
+export const SOLE_CHILD_LABEL_OVERRIDES = Object.freeze({
+  heading: 'title',
+  'text-basic': 'description',
+  text: 'description',
+  button: 'action',
+  'text-link': 'link',
+  logo: 'logo',
+  image: 'image',
+});
+
+/**
+ * Suggest a BEM name for a layout container based on the Bricks type
+ * strings of its direct children.
+ *
+ * Inspects what kind of content the container holds and returns a
+ * semantically appropriate name. Falls back to position-among-siblings
+ * when children give no clear signal.
+ *
+ * @param {string[]} childTypes - Bricks `element.name` values of direct children.
+ * @param {number} positionAmongContainerSiblings - 0-based index among layout-container siblings.
+ * @param {number} totalContainerSiblings - Total layout-container siblings at this level.
+ * @returns {string}
+ */
+export function suggestContainerName(childTypes, positionAmongContainerSiblings, totalContainerSiblings) {
+  const types = new Set(childTypes.filter(Boolean));
+
+  const has = (...ts) => ts.some(t => types.has(t));
+
+  const hasButton  = has('button', 'button-group');
+  const hasHeading = has('heading');
+  const hasText    = has('text-basic', 'text');
+  const hasImage   = has('image');
+  const hasNav     = has('nav-nested', 'nav-menu');
+  const hasForm    = has('form');
+  const hasIcon    = has('icon', 'icon-box');
+  const hasList    = has('list');
+
+  if (hasForm)                                     return 'form';
+  if (hasNav)                                      return 'nav';
+  if (hasButton && !hasHeading && !hasText)        return 'actions';
+  if (hasImage && !hasText && !hasHeading && !hasButton) return 'media';
+  if (hasHeading && !hasText && !hasButton)        return 'header';
+  if (hasText && !hasHeading && !hasButton)        return 'body';
+  if (hasHeading && hasButton)                     return 'header';
+  if (hasHeading && hasText)                       return 'content';
+  if (hasIcon && !hasText && !hasHeading)          return 'icon-group';
+  if (hasList)                                     return 'list-wrap';
+
+  // Position-based fallback when children give no clear signal
+  if (totalContainerSiblings > 1) {
+    if (positionAmongContainerSiblings === 0)                              return 'header';
+    if (positionAmongContainerSiblings === totalContainerSiblings - 1)    return 'footer';
+    return 'body';
+  }
+
+  return 'content';
+}

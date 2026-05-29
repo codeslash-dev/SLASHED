@@ -26,7 +26,7 @@
   import { slugify } from '../lib/slugify.js';
   import { validateName } from '../lib/validate.js';
   import { applyToSubtree, buildPlan } from '../lib/apply.js';
-  import { suggestElementName, isLayoutContainer } from '../lib/element-types.js';
+  import { suggestElementName, isLayoutContainer, suggestContainerName, SOLE_CHILD_LABEL_OVERRIDES } from '../lib/element-types.js';
   import { pickMigratableKeys, pickSkippedKeys } from '../lib/migrate-keys.js';
   import Row from './Row.svelte';
   import Toast from './Toast.svelte';
@@ -91,7 +91,8 @@
     const subtree = api.getSubtree(rootId);
     globalClassesAtOpen = api.getGlobalClasses().slice();
 
-    rows = subtree.map((el, i) => {
+    // Pass 1: basic name seeding from labels and element types.
+    const seeded = subtree.map((el, i) => {
       const isRoot = i === 0;
       const label = el.label || '';
       const labelSlug = slugify(label);
@@ -100,7 +101,6 @@
       let name;
       let suggestedFrom;
       if (labelSlug) {
-        // The user already named this thing — trust it.
         name = labelSlug;
         suggestedFrom = 'label';
       } else if (isRoot) {
@@ -123,13 +123,64 @@
         modifier: '',
         include: true,
         suggestedFrom,
-        // Pre-computed from the element's current settings; used in
-        // 'migrate' mode for the chip-strip preview and as the source
-        // of truth for which keys get lifted at apply time.
         migrateKeys: pickMigratableKeys(el.settings),
         skippedKeys: pickSkippedKeys(el.settings),
       };
     });
+
+    // Pass 2: context-aware refinement using parent→children relationships.
+    // Skips user-labelled elements (suggestedFrom === 'label').
+    if (seeded.length > 1) {
+      // Build parent → direct child ids map using a depth-tracking stack.
+      const childrenOf = new Map(subtree.map(e => [e.id, []]));
+      const stack = [];
+      for (const el of subtree) {
+        while (stack.length && stack[stack.length - 1].depth >= el.depth) stack.pop();
+        if (stack.length) childrenOf.get(stack[stack.length - 1].id).push(el.id);
+        stack.push(el);
+      }
+
+      const elById  = new Map(subtree.map(e => [e.id, e]));
+      const rowById = new Map(seeded.map(r => [r.id, r]));
+
+      for (const [, childIds] of childrenOf) {
+        if (!childIds.length) continue;
+
+        // Count how many children share each element type.
+        const typeCount = new Map();
+        for (const id of childIds) {
+          const t = elById.get(id)?.name;
+          if (t) typeCount.set(t, (typeCount.get(t) ?? 0) + 1);
+        }
+
+        // Layout-container children in document order (for positional hints).
+        const containerIds = childIds.filter(id => isLayoutContainer(elById.get(id)?.name ?? ''));
+
+        for (const id of childIds) {
+          const row = rowById.get(id);
+          const el  = elById.get(id);
+          if (!row || !el || row.suggestedFrom === 'label') continue;
+
+          if (isLayoutContainer(el.name)) {
+            // Infer container role from its children's types.
+            const gcTypes = (childrenOf.get(id) ?? [])
+              .map(gcId => elById.get(gcId)?.name ?? '').filter(Boolean);
+            const pos = containerIds.indexOf(id);
+            row.name = suggestContainerName(gcTypes, pos, containerIds.length);
+            row.suggestedFrom = 'element-type';
+          } else if ((typeCount.get(el.name) ?? 0) === 1) {
+            // Sole element of its type → apply semantic override if available.
+            const override = SOLE_CHILD_LABEL_OVERRIDES[el.name];
+            if (override) {
+              row.name = override;
+              row.suggestedFrom = 'element-type';
+            }
+          }
+        }
+      }
+    }
+
+    rows = seeded;
   });
 
   function handleKeydown(e) {

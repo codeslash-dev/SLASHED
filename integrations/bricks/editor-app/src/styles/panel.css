@@ -37,6 +37,7 @@
 .rebemer-badge-host {
   display: inline-flex;
   align-items: center;
+  align-self: center;
   flex: 0 0 auto;
   margin: 0 4px;
   /* Hidden by default. Revealed by the row-hover rules below — same
@@ -185,12 +186,10 @@ li[data-id]:focus-within > .rebemer-badge-host {
   padding: 6px 8px;
   border-radius: var(--rebemer-radius);
   background: rgba(255,255,255,.02);
+  margin-left: calc(var(--rebemer-row-depth, 0) * 12px);
 }
 .rebemer-row:hover { background: rgba(255,255,255,.04); }
 .rebemer-row--disabled { opacity: .45; }
-.rebemer-row[data-depth="1"] { margin-left: 12px; }
-.rebemer-row[data-depth="2"] { margin-left: 24px; }
-.rebemer-row[data-depth="3"] { margin-left: 36px; }
 
 .rebemer-row__include input { cursor: pointer; }
 .rebemer-row__meta { display: flex; gap: 6px; align-items: baseline; min-width: 0; }
