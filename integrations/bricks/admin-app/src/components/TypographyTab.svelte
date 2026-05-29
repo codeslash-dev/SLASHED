@@ -16,6 +16,7 @@
   import { meta } from '../lib/stores.svelte.js';
   import TextField from './TextField.svelte';
   import NumberField from './NumberField.svelte';
+  import TypographyPreview from './TypographyPreview.svelte';
 
   const SECTION = 'typography';
   const defaults = meta.defaults?.[SECTION] ?? {};
@@ -75,6 +76,8 @@
       </div>
     {/each}
   </div>
+
+  <TypographyPreview />
 
   <h2 class="group-heading">Scale Multipliers</h2>
   <div class="rows">

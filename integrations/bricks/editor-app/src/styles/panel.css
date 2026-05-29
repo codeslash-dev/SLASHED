@@ -82,8 +82,8 @@ li[data-id]:focus-within > .rebemer-badge-host {
   letter-spacing: 0;
   text-transform: none;
   color: var(--rebemer-fg-muted, #8a8d95);
+  display: inline;
   background: transparent;
-  border: 0;
   padding: 1px 3px;
   margin: 0;
   cursor: pointer;

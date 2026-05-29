@@ -2,9 +2,10 @@
   /**
    * The "BEM" badge injected per structure-panel item.
    *
-   * Real <button> with aria-label and explicit type="button" so it
-   * never accidentally submits a form Bricks happens to host. Both
-   * click and keyboard activation route through onActivate.
+   * Rendered as an inline <span role="button"> so it does not carry
+   * button box-model defaults (min-height) that would resize Bricks'
+   * structure-panel rows. Both click and keyboard activation route
+   * through onActivate.
    */
   /** @type {{ elementId: string, label?: string, onActivate?: (id: string) => void }} */
   let { elementId, label, onActivate } = $props();
@@ -16,11 +17,12 @@
   }
 </script>
 
-<button
-  type="button"
+<span
+  role="button"
+  tabindex="0"
   class="rebemer-badge"
   title={label ? `Open reBEMer for ${label}` : 'Open reBEMer'}
   aria-label={label ? `Open reBEMer for ${label}` : 'Open reBEMer'}
   onclick={activate}
   onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && activate(e)}
->reBEM</button>
+>reBEM</span>

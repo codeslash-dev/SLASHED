@@ -49,6 +49,22 @@ changed += sync(
   `SLASHED_BRICKS_CSS_REF = '${versionTag}'`
 ) ? 1 : 0;
 
+// Plugin header comment: "Version: X.X.X"
+changed += sync(
+  'integrations/bricks/slashed-bricks.php',
+  / \* Version: \d+\.\d+\.\d+/,
+  ` * Version: ${version}`,
+  `Version: ${version}`
+) ? 1 : 0;
+
+// Plugin version constant: define( 'SLASHED_BRICKS_VERSION', 'X.X.X' )
+changed += sync(
+  'integrations/bricks/slashed-bricks.php',
+  /define\(\s*'SLASHED_BRICKS_VERSION',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_BRICKS_VERSION', '${version}' )`,
+  `SLASHED_BRICKS_VERSION = '${version}'`
+) ? 1 : 0;
+
 // ── Summary ─────────────────────────────────────────────────────────────────
 if (changed === 0) {
   console.log('\nAll version references are already up to date.\n');
