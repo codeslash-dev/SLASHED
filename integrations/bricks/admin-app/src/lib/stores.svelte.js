@@ -28,6 +28,7 @@ export const meta = {
   rest: bootstrap.rest || { url: '', nonce: '' },
   inventory: bootstrap.inventory || { variables: [], sf_classes: [], is_classes: [] },
   pluginSettings: bootstrap.pluginSettings || {},
+  versions: bootstrap.versions || { plugin: '', framework: '' },
 };
 
 /** Reactive token state. Mutating any nested key triggers re-renders. */

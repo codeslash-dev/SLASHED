@@ -18,6 +18,7 @@
   import NumberField from './NumberField.svelte';
   import TypographyPreview from './TypographyPreview.svelte';
   import AdvancedSection from './AdvancedSection.svelte';
+  import ScaleGenerator from './ScaleGenerator.svelte';
 
   const SECTION = 'typography';
   const defaults = meta.defaults?.[SECTION] ?? {};
@@ -58,6 +59,7 @@
   <p class="hint">
     Min and max values in <code>rem</code> for fluid type scaling via <code>clamp()</code>.
   </p>
+  <ScaleGenerator />
   <div class="rows">
     {#each Object.entries(sizes) as [name, sizeDefaults] (name)}
       <div class="size-row">

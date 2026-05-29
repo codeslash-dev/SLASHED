@@ -128,6 +128,10 @@ class Slashed_Bricks_Admin_Page_Svelte {
 				'settings'       => Slashed_Bricks_Token_Store::get_settings(),
 				'pluginSettings' => Slashed_Bricks_Token_Store::get_plugin_settings(),
 				'inventory'      => Slashed_Bricks_Inventory::get(),
+				'versions'       => array(
+					'plugin'    => SLASHED_BRICKS_VERSION,
+					'framework' => SLASHED_BRICKS_CSS_REF,
+				),
 			)
 		);
 	}

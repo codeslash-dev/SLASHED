@@ -12,7 +12,7 @@
    * to `class-admin-page.php`. The "v2" / POC framing in the header has
    * been retired accordingly.
    */
-  import { ui } from './lib/stores.svelte.js';
+  import { ui, meta } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
   import ColorTab from './components/ColorTab.svelte';
   import TypographyTab from './components/TypographyTab.svelte';
@@ -62,7 +62,17 @@
 
 <div class="slashed-svelte-admin">
   <header class="slashed-svelte-admin__header">
-    <h1>SLASHED Design Tokens</h1>
+    <div class="slashed-svelte-admin__header-top">
+      <h1>SLASHED Design Tokens</h1>
+      <div class="slashed-svelte-admin__versions">
+        {#if meta.versions.framework}
+          <span class="version-pill">Framework {meta.versions.framework}</span>
+        {/if}
+        {#if meta.versions.plugin}
+          <span class="version-pill">Plugin v{meta.versions.plugin}</span>
+        {/if}
+      </div>
+    </div>
     <p class="muted">
       Adjust framework tokens, inspect generated variables, and manage the bundled CSS in one place.
     </p>
@@ -111,8 +121,32 @@
     padding-bottom: 80px; /* room for fixed save bar */
   }
 
+  .slashed-svelte-admin__header-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
   .slashed-svelte-admin__header h1 {
     margin: 0;
+  }
+
+  .slashed-svelte-admin__versions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .version-pill {
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 11px;
+    color: #50575e;
+    font-family: ui-monospace, monospace;
+    white-space: nowrap;
   }
 
   .muted {
