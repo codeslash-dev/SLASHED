@@ -38,12 +38,14 @@
   @media print {
 
     @page {
-      size:   var(--sf-print-page-size, a4);
-      margin: var(--sf-print-page-margin, 2cm);
+      /* var() is not valid inside @page — hardcode values here.
+         Consumers who need a different page size must override @page directly. */
+      size:   a4 portrait;
+      margin: 2cm;
     }
 
     body {
-      font-size: var(--sf-print-base-size);
+      font-size: var(--sf-print-base-size, 11pt);
     }
 
     /* Decorative shadows are paper-noise. No `!important` — an authored
@@ -55,25 +57,22 @@
       text-shadow: none;
     }
 
-    /* Expand link URLs after the link text so paper-readers can follow
-       them. Anchors and javascript: pseudo-links are excluded. */
-    a[href]::after {
+    /* Expand URLs after link text — exclude fragment, javascript:, mailto:,
+       tel: links (already readable or noisy on paper) and .sf-link-external
+       (which has its own ::after marker). */
+    a[href]:not([href^="#"], [href^="javascript:" i], [href^="mailto:" i], [href^="tel:" i], .sf-link-external)::after {
       content:    " (" attr(href) ")";
       font-size:  90%;
       word-break: break-all;
-    }
-
-    a[href^="#"]::after,
-    a[href^="javascript:" i]::after {
-      content: "";
     }
 
     abbr[title]::after {
       content: " (" attr(title) ")";
     }
 
-    img, svg, video, canvas, figure, table, pre, blockquote {
+    img, svg, canvas, figure, table, pre, blockquote {
       break-inside: avoid;
+      /* video is excluded — it is already hidden in print (see hide list below) */
     }
 
     thead {
@@ -86,8 +85,7 @@
 
     h1, h2, h3, h4, h5, h6 {
       break-after: avoid;
-      orphans:     3;
-      widows:      3;
+      /* orphans/widows on single-line headings have no effect — set on p below */
     }
 
     p {

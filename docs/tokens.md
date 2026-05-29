@@ -28,7 +28,7 @@ rebrand workflow.
 | `--sf-animation-ping` | `sf-ping var(--sf-duration-slow) var(--sf-ease-out) infinite` |
 | `--sf-animation-scale-down` | `sf-scale-down var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-scale-up` | `sf-scale-up var(--sf-duration-normal) var(--sf-ease-overshoot) both` |
-| `--sf-animation-shimmer` | `sf-shimmer calc(1.5s * var(--sf-motion-scale)) ease-in-out infinite` |
+| `--sf-animation-shimmer` | `sf-shimmer calc(1.5s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite` |
 | `--sf-animation-slide-in-down` | `sf-slide-in-down var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-left` | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-right` | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` |
@@ -61,7 +61,7 @@ rebrand workflow.
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action-light` | `oklch(0.50 0.22 235) *(registered)*` |
 | `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
-| `--sf-color-base-light` | `oklch(0.99 0.006 250) *(registered)*` |
+| `--sf-color-base-light` | `oklch(0.96 0.006 250) *(registered)*` |
 | `--sf-color-bg` | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
 | `--sf-color-bg--active` | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | `var(--sf-color-well)` |

@@ -25,7 +25,7 @@
     text-wrap:         var(--sf-heading-text-wrap);
     overflow-wrap:     break-word;
     text-rendering:    optimizelegibility;
-    scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+    scroll-margin-top: calc(var(--sf-header-height, 8rem) + var(--sf-space-m));
   }
 
   h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); }
@@ -51,7 +51,7 @@
   }
 
   small {
-    font-size: var(--sf-text-s, 80%);
+    font-size: var(--sf-text-s, 0.875em);
   }
 
   mark {
@@ -133,7 +133,6 @@
   pre code {
     background:    none;
     color:         inherit;
-    border:        0;
     padding:       0;
     font-size:     inherit;
     border-radius: 0;
@@ -149,7 +148,7 @@
   }
 
   :target {
-    scroll-margin-top: calc(var(--sf-header-height, 3.5rem) + var(--sf-space-m));
+    scroll-margin-top: calc(var(--sf-header-height, 8rem) + var(--sf-space-m));
   }
 
   ::selection {
@@ -179,13 +178,12 @@
   }
 
   optgroup { font: inherit; }
-  ::file-selector-button { font: inherit; }
   ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
 
   /* Minimal rich-block defaults — just enough to distinguish from <p>.
      Full styling lives in .sf-prose (core/layout.css). */
   blockquote {
-    border-inline-start: var(--sf-border-width-3) solid var(--sf-color-border);
+    border-inline-start: var(--sf-border-width-3) var(--sf-border-style) var(--sf-color-border);
     padding-inline-start: var(--sf-space-m);
     font-style: italic;
   }
@@ -209,7 +207,7 @@
 
   td, th {
     padding: var(--sf-space-2xs) var(--sf-space-xs);
-    border-block-end: var(--sf-border-width-hairline) solid var(--sf-color-border--subtle);
+    border-block-end: var(--sf-border-width-hairline) var(--sf-border-style) var(--sf-color-border--subtle);
   }
 
 }

@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**158 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**159 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -238,4 +238,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-slide-in-left` |
 | `.sf-slide-in-right` |
 | `.sf-slide-in-up` |
+
+## Print utilities (`core/print.css`)
+
+1 classes.
+
+| Class |
+|---|
+| `.sf-link-external` |
 
