@@ -65,7 +65,10 @@
     pairs.push(`--preview-radius-l:${Math.round(16 * rs)}px`);
 
     // Shadow preview var derived from shadow_strength token.
-    const ss = parseFloat(shadows.shadow_strength ?? meta.defaults?.shadows?.shadow_strength ?? 0.08);
+    const ssRaw = shadows.shadow_strength;
+    const ss = ssRaw !== undefined && ssRaw !== ''
+      ? parseFloat(ssRaw)
+      : parseFloat(meta.defaults?.shadows?.shadow_strength ?? 0.08);
     pairs.push(`--preview-shadow:0 2px 8px 0 rgba(0,0,0,${(ss * 2).toFixed(3)}),0 1px 3px 0 rgba(0,0,0,${ss.toFixed(3)})`);
 
     return pairs.join(';');

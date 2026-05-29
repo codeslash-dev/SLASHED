@@ -58,11 +58,13 @@
   );
 
   // ── Focus ring preview ────────────────────────────────────────────────────
+  const numField = (saved, fallback) =>
+    saved !== undefined && saved !== '' ? parseFloat(saved) : parseFloat(fallback);
   const focusRingWidth  = $derived(
-    parseFloat(tokens.contrast?.focus_ring_width  ?? contrastDefaults.focus_ring_width  ?? 2)
+    numField(tokens.contrast?.focus_ring_width,  contrastDefaults.focus_ring_width  ?? 2)
   );
   const focusRingOffset = $derived(
-    parseFloat(tokens.contrast?.focus_ring_offset ?? contrastDefaults.focus_ring_offset ?? 2)
+    numField(tokens.contrast?.focus_ring_offset, contrastDefaults.focus_ring_offset ?? 2)
   );
   const focusRingStyle  = $derived(
     tokens.contrast?.focus_ring_style ?? contrastDefaults.focus_ring_style ?? 'solid'

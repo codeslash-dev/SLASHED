@@ -162,16 +162,16 @@ export function suggestContainerName(childTypes, positionAmongContainerSiblings,
   const hasIcon    = has('icon', 'icon-box');
   const hasList    = has('list');
 
-  if (hasForm)                                     return 'form';
-  if (hasNav)                                      return 'nav';
-  if (hasButton && !hasHeading && !hasText)        return 'actions';
+  if (hasForm)                                          return 'form';
+  if (hasNav)                                           return 'nav';
+  if (hasButton && !hasHeading && !hasText)             return 'actions';
   if (hasImage && !hasText && !hasHeading && !hasButton) return 'media';
-  if (hasHeading && !hasText && !hasButton)        return 'header';
-  if (hasText && !hasHeading && !hasButton)        return 'body';
-  if (hasHeading && hasButton)                     return 'header';
-  if (hasHeading && hasText)                       return 'content';
-  if (hasIcon && !hasText && !hasHeading)          return 'icon-group';
-  if (hasList)                                     return 'list-wrap';
+  if (hasHeading && !hasText && !hasButton)             return 'header';
+  if (hasText && !hasHeading && !hasButton)             return 'body';
+  if (hasHeading && hasText)                            return 'content';
+  if (hasHeading && hasButton)                          return 'header';
+  if (hasIcon && !hasText && !hasHeading)               return 'icon-group';
+  if (hasList)                                          return 'list-wrap';
 
   // Position-based fallback when children give no clear signal
   if (totalContainerSiblings > 1) {

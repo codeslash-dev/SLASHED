@@ -1,18 +1,18 @@
 <script>
   import { exportTokens, importTokens } from '../lib/api.js';
   import { tokens } from '../lib/stores.svelte.js';
-  import { generateExportCSS, hasOverrides } from '../lib/export.js';
+  import { generateExportCSS } from '../lib/export.js';
 
   // ── Export ────────────────────────────────────────────────────────────────
   let exporting = $state(false);
   let exportError = $state('');
 
-  const canExportCSS = $derived(hasOverrides(tokens));
+  const exportCSS = $derived(generateExportCSS(tokens));
+  const canExportCSS = $derived(exportCSS.length > 0);
 
   function downloadCSS() {
-    const css = generateExportCSS(tokens);
-    if (!css) return;
-    const blob = new Blob([css], { type: 'text/css' });
+    if (!exportCSS) return;
+    const blob = new Blob([exportCSS], { type: 'text/css' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
