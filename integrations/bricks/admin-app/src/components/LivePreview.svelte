@@ -48,28 +48,26 @@
     // what the front-end actually renders. When enabled, use stored values.
     const darkEnabled = colors.dark_overrides_enabled !== '0';
 
+    // Auto-derivation formula matching core/tokens.css. Used when:
+    //   a) toggle is OFF (all colors auto-derived), or
+    //   b) toggle is ON but no explicit dark value stored for that color.
+    // This mirrors the framework's own fallback so the preview is accurate
+    // even when only some dark overrides are set.
+    const autoDark = (name) => name === 'base'
+      ? `oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)`
+      : `oklch(from var(--sf-color-${name}-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)`;
+
     for (const name of brand) {
       const v = colors[`brand_${name}`] ?? defaultColors.brand_hex_hints?.[name];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
-      if (darkEnabled) {
-        const vd = colors[`brand_dark_${name}`] ?? defaultColors.brand_dark_hex_hints?.[name];
-        if (vd) pairs.push(`--sf-color-${name}-dark:${vd}`);
-      } else {
-        const formula = name === 'base'
-          ? `oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)`
-          : `oklch(from var(--sf-color-${name}-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)`;
-        pairs.push(`--sf-color-${name}-dark:${formula}`);
-      }
+      const storedDark = darkEnabled ? colors[`brand_dark_${name}`] : '';
+      pairs.push(`--sf-color-${name}-dark:${storedDark || autoDark(name)}`);
     }
     for (const name of statuses) {
       const v = colors[`status_${name}`] ?? defaultColors.status_hex_hints?.[name];
       if (v) pairs.push(`--sf-color-${name}-light:${v}`);
-      if (darkEnabled) {
-        const vd = colors[`status_dark_${name}`] ?? defaultColors.status_dark_hex_hints?.[name];
-        if (vd) pairs.push(`--sf-color-${name}-dark:${vd}`);
-      } else {
-        pairs.push(`--sf-color-${name}-dark:oklch(from var(--sf-color-${name}-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)`);
-      }
+      const storedDark = darkEnabled ? colors[`status_dark_${name}`] : '';
+      pairs.push(`--sf-color-${name}-dark:${storedDark || autoDark(name)}`);
     }
     if (typography.font_body)    pairs.push(`--sf-font-body:${typography.font_body}`);
     if (typography.font_heading) pairs.push(`--sf-font-heading:${typography.font_heading}`);
