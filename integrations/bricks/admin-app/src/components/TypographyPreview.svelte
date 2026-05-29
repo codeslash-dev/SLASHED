@@ -45,12 +45,6 @@
     return { min, max };
   }
 
-  /**
-   * Interpolate a single step at the current `vw`.
-   *
-   * @param {string} name
-   * @returns {{ sizePx: number, sizeRem: number, clampFormula: string }}
-   */
   const stepAt = $derived.by(() => {
     const t = Math.max(0, Math.min(1, (vw - VW_MIN) / (VW_MAX - VW_MIN)));
     const steps = {};
@@ -59,8 +53,7 @@
       const { min, max } = resolveStep(name);
       const sizeRem = min + (max - min) * t;
       const sizePx  = sizeRem * BASE_PX;
-      const clampFormula = `clamp(${min}rem, ${min.toFixed(3)}rem + ${((max - min) * 100 / (VW_MAX - VW_MIN) * 100).toFixed(4)}cqi, ${max}rem)`;
-      steps[name] = { sizePx, sizeRem: sizeRem.toFixed(3), clampFormula };
+      steps[name] = { sizePx, sizeRem: sizeRem.toFixed(3) };
     }
 
     return steps;
@@ -75,11 +68,6 @@
   const textStepNames = $derived(TEXT_STEPS.filter((n) => defaultSizes[n]));
   const displayStepNames = $derived(DISPLAY_STEPS.filter((n) => defaultSizes[n]));
 
-  /** Ordered step names for rendering (largest to smallest so the preview reads like a type scale). */
-  const stepNames = $derived(Object.keys(defaultSizes));
-
-  /** Viewport percentage for the visual indicator. */
-  const vwPercent = $derived(((vw - 320) / (1440 - 320) * 100).toFixed(1));
 </script>
 
 <style>

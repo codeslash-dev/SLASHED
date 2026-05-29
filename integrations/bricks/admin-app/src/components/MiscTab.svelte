@@ -89,7 +89,7 @@
       <div class="radius-preview__item">
         <div
           class="radius-preview__swatch"
-          style:border-radius="{r === 9999 * radiusScale ? '9999px' : `${r}px`}"
+          style:border-radius="{RADIUS_BASES[i] === 9999 ? '9999px' : `${r}px`}"
         ></div>
         <span class="radius-preview__label">{RADIUS_LABELS[i]}</span>
       </div>

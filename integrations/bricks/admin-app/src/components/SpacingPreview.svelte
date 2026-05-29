@@ -49,7 +49,6 @@
     });
   });
 
-  const vwPercent = $derived(((vw - 320) / (1440 - 320) * 100).toFixed(1));
 </script>
 
 <div class="spacing-preview">
