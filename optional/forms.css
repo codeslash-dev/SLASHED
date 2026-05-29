@@ -49,11 +49,15 @@
   /* ----------------------------------------------------------
      Shared base for text-like inputs, select, textarea
      ---------------------------------------------------------- */
+  /* [type="color"] is intentionally excluded: it is a compact swatch button,
+     not a text field. Applying appearance:none and 100% width to a color input
+     removes the native swatch in WebKit and produces a broken box in Chrome.
+     Style color inputs separately if needed. */
   input:where(
     [type="text"], [type="email"], [type="password"], [type="url"],
     [type="tel"], [type="number"], [type="search"], [type="date"],
     [type="datetime-local"], [type="month"], [type="week"],
-    [type="time"], [type="color"], :not([type])
+    [type="time"], :not([type])
   ),
   select,
   textarea {
@@ -79,6 +83,9 @@
     background-color: var(--sf-color-surface);
     border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
     border-radius: var(--sf-radius-m);
+    /* border-color is listed twice intentionally: --sf-transition-colors already
+       includes it at normal duration; this override shortens it to fast for
+       snap-responsive focus feedback. The last entry in a transition list wins. */
     transition: var(--sf-transition-colors),
                 border-color var(--sf-duration-fast) var(--sf-ease-out);
   }
@@ -88,7 +95,7 @@
     [type="text"], [type="email"], [type="password"], [type="url"],
     [type="tel"], [type="number"], [type="search"], [type="date"],
     [type="datetime-local"], [type="month"], [type="week"],
-    [type="time"], [type="color"], :not([type])
+    [type="time"], :not([type])
   ):focus-visible,
   select:focus-visible,
   textarea:focus-visible {
@@ -120,6 +127,7 @@
      ---------------------------------------------------------- */
   textarea {
     min-block-size: 6rem;
+    resize:         vertical; /* prevent horizontal resize that overflows 100% width container */
   }
 
 
@@ -193,8 +201,9 @@
   input[type="reset"]:disabled,
   input[type="button"]:disabled {
     opacity: var(--sf-opacity-disabled);
-    cursor: not-allowed;
-    pointer-events: none;
+    cursor:  not-allowed;
+    /* pointer-events: none is intentionally absent: native :disabled already
+       blocks interaction; adding pointer-events:none silences the cursor above. */
   }
 
 
@@ -203,10 +212,11 @@
      ---------------------------------------------------------- */
   input[type="checkbox"],
   input[type="radio"] {
-    inline-size: 1.125em;
-    block-size: 1.125em;
-    accent-color: var(--sf-color-action);
-    cursor: pointer;
+    inline-size:    1.125em;
+    block-size:     1.125em;
+    accent-color:   var(--sf-color-action);
+    cursor:         pointer;
+    vertical-align: middle; /* center against adjacent inline label text */
   }
 
 

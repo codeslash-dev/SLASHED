@@ -197,6 +197,7 @@
    * core/states.css for non-<dialog> implementations.
    *
    * .sf-modal {
+   *   position:         relative; /* establishes containing block for .sf-modal__close */
    *   max-inline-size:  var(--sf-modal-max-inline);
    *   padding:          var(--sf-modal-pad);
    *   border:           none;
@@ -212,7 +213,7 @@
    * .sf-modal__header,
    * .sf-modal__body,
    * .sf-modal__footer { display: contents; }
-   * .sf-modal__close  { position: absolute; top: var(--sf-space-s); right: var(--sf-space-s); }
+   * .sf-modal__close  { position: absolute; inset-block-start: var(--sf-space-s); inset-inline-end: var(--sf-space-s); }
    * .sf-modal--s      { --sf-modal-max-inline: min(90vw, 24rem); }
    * .sf-modal--m      { --sf-modal-max-inline: min(90vw, 32rem); }
    * .sf-modal--l      { --sf-modal-max-inline: min(90vw, 48rem); }

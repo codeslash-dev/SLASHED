@@ -11,8 +11,9 @@
   }
 
   html {
-    text-size-adjust:    100%;
-    scroll-padding-top:  var(--sf-header-height, 3.5rem);
+    -webkit-text-size-adjust: 100%; /* Safari <17 — unprefixed only landed in Safari 17 */
+    text-size-adjust:          100%;
+    scroll-padding-top:        var(--sf-header-height, 8rem);
     scrollbar-gutter:    stable;
     color-scheme:        var(--sf-color-scheme, light dark);
     hanging-punctuation: first last;
@@ -45,7 +46,7 @@
   iframe, embed, object {
     display:   block;
     max-width: 100%;
-    height:    unset;
+    height:    auto;   /* unset reverts to UA's 150px default on <iframe>; auto is correct */
     border:    none;
   }
 
@@ -59,10 +60,7 @@
 
   button {
     text-transform: none;
-  }
-
-  ::file-selector-button {
-    font: inherit;
+    cursor:         pointer;
   }
 
   search {
@@ -92,13 +90,9 @@
     resize: vertical;
   }
 
-  button {
-    cursor: pointer;
-  }
-
   table {
     border-collapse: collapse;
-    border-spacing:  0;
+    /* border-spacing omitted — ignored when border-collapse: collapse is set */
   }
 
   [hidden] {

@@ -43,13 +43,18 @@
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
-    cursor:         not-allowed;
+    /* cursor: not-allowed is intentionally absent — pointer-events: none makes
+       the element transparent to mouse events, so the cursor is driven by the
+       element BELOW (typically the parent). To show a not-allowed cursor, set
+       cursor: not-allowed on the parent wrapper instead. */
     user-select:    none;
   }
 
   .is-readonly {
-    pointer-events: none;
-    user-select:    none;
+    /* Allows text selection and copying (correct readonly semantic).
+       cursor: default signals non-editability without blocking interaction. */
+    user-select: text;
+    cursor:      default;
   }
 
   /* ============================================================
@@ -63,12 +68,12 @@
   }
 
   .is-loading::after {
-    content:       "";
-    position:      absolute;
+    content:             "";
+    position:            absolute;
     inset-block-start:   50%;
     inset-inline-start:  50%;
-    width:         1em;
-    height:        1em;
+    inline-size:         1em;
+    block-size:          1em;
     margin-block-start:  -0.5em;
     margin-inline-start: -0.5em;
     border:        var(--sf-border-width-2) solid var(--sf-color-border--strong);
@@ -172,12 +177,25 @@
        a validation result. Distinct from .is-error.
      ============================================================ */
 
-  .is-valid {
+  /* NOTE: .is-valid and .is-success share identical CSS values by design.
+     The semantic distinction is intentional (see docs/states.md):
+     · .is-valid  → form-field validation result (maps to aria-invalid="false").
+       Use on <input> elements.
+     · .is-success → general component feedback, not tied to a form field.
+       Use on containers, banners, step indicators.
+     They share the same visual treatment because both represent a "positive"
+     state, but consuming them interchangeably is a semantic error. */
+  .is-valid,
+  .is-success {
     --sf-field-border-color: var(--sf-color-success);
     --sf-field-text-color:   var(--sf-color-success-strong);
   }
 
-  .is-invalid {
+  /* NOTE: .is-invalid and .is-error share identical CSS values by design.
+     · .is-invalid → form-field validation failure (maps to aria-invalid="true").
+     · .is-error   → general component error state (failed save, network error). */
+  .is-invalid,
+  .is-error {
     --sf-field-border-color: var(--sf-color-error);
     --sf-field-text-color:   var(--sf-color-error-strong);
   }
@@ -185,16 +203,6 @@
   .is-warning {
     --sf-field-border-color: var(--sf-color-warning);
     --sf-field-text-color:   var(--sf-color-warning-strong);
-  }
-
-  .is-success {
-    --sf-field-border-color: var(--sf-color-success);
-    --sf-field-text-color:   var(--sf-color-success-strong);
-  }
-
-  .is-error {
-    --sf-field-border-color: var(--sf-color-error);
-    --sf-field-text-color:   var(--sf-color-error-strong);
   }
 
   .is-info {
@@ -212,18 +220,21 @@
      ============================================================ */
 
   .is-sticky {
-    position:  sticky;
-    top:       var(--sf-sticky-offset, 0);
-    z-index:   var(--sf-z-low);
+    position:         sticky;
+    inset-block-start: var(--sf-sticky-offset, 0); /* logical: respects writing-mode */
+    z-index:           var(--sf-z-low);
   }
 
   .is-pinned {
-    position:  sticky;
-    top:       0;
-    z-index:   var(--sf-z-mid);
+    position:         sticky;
+    inset-block-start: 0;
+    z-index:           var(--sf-z-mid);
   }
 
   .is-fixed {
+    /* Intentionally bare — position only. Consumers must supply placement
+       (inset, inset-block-start, etc.) and z-index via a modifier or inline style.
+       Example: <div class="is-fixed" style="inset: 0; z-index: var(--sf-z-max)"> */
     position: fixed;
   }
 
@@ -237,8 +248,10 @@
   }
 
   .is-resizable {
-    resize:   both;
-    overflow: auto;
+    resize:          both;
+    overflow:        auto;
+    min-inline-size: var(--sf-space-xl, 3.55rem); /* prevent collapsing to zero on drag */
+    min-block-size:  var(--sf-space-xl, 3.55rem);
   }
 
   /* ============================================================
@@ -310,6 +323,11 @@
      EMPTY STATE
      ============================================================ */
 
+  /* NOTE: :empty only matches elements with NO child nodes — including no
+     whitespace. Server-rendered HTML often includes space between tags, which
+     prevents the match. When toggling via JS, call element.textContent = ""
+     before adding this class (or use element.innerHTML = "" to clear all nodes
+     including whitespace text nodes). */
   .is-empty:empty {
     display: none;
   }

@@ -70,7 +70,12 @@
        :root[data-lumlocker] { --sf-color-primary: #yourColor; }
 
      The dark-side input falls back to -light when -dark isn't
-     explicitly set, so this works even without per-mode overrides. */
+     explicitly set, so this works even without per-mode overrides.
+
+     Requires CSS relative color syntax (Chrome 119+, Safari 17.2+,
+     Firefox 128+). Wrapped in @supports — unsupporting engines skip
+     the block silently; brand colors remain unmodified. */
+  @supports (color: oklch(from red l c h)) {
   :root[data-lumlocker] {
     --sf-color-primary: light-dark(
       oklch(from var(--sf-color-primary-light) var(--sf-lumlocker) c h),
@@ -93,5 +98,21 @@
       oklch(from var(--sf-color-neutral-dark, var(--sf-color-neutral-light)) var(--sf-lumlocker) c h)
     );
   }
+  } /* end @supports (color: oklch(from red l c h)) */
+
+  /* SECTION-LEVEL THEMING NOTE — [data-theme] on a non-root element
+     correctly sets `color-scheme` and `--sf-is-dark`, giving downstream
+     CSS access to the mode flag. However, custom properties that use
+     `light-dark()` are resolved when they are declared (on :root), NOT
+     when they are inherited. This means `light-dark()` tokens declared
+     on :root will NOT re-evaluate for a `<section data-theme="dark">`
+     child — they will continue to reflect the root mode.
+
+     To fully invert a subtree, re-declare each mode-sensitive token
+     inside the [data-theme] selector, e.g.:
+       [data-theme="dark"] {
+         --sf-color-text: oklch(0.92 0.005 250);
+       }
+     See docs/theming.md → "Section-level theming" for the full pattern. */
 
 }

@@ -110,12 +110,16 @@
        }, 350);
   */
 
+  /* Use individual transition-* properties (NOT the shorthand) so this rule
+     does not reset the full transition list on component elements. The shorthand
+     replaces all transitions; individual properties extend them. slashed.themes
+     is a higher-priority layer than slashed.components, so a shorthand here
+     would silently strip component transitions (e.g. .sf-card's transform). */
   .theme-transition,
   .theme-transition * {
-    transition:
-      color            var(--sf-duration-normal) var(--sf-ease-out),
-      background-color var(--sf-duration-normal) var(--sf-ease-out),
-      border-color     var(--sf-duration-normal) var(--sf-ease-out);
+    transition-property:        color, background-color, border-color;
+    transition-duration:        var(--sf-duration-normal);
+    transition-timing-function: var(--sf-ease-out);
   }
 
   /* ===========================================================

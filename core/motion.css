@@ -78,7 +78,8 @@
        writes them outside the gate.
 
        Browser support — animation-timeline is shipping in Chrome 115+
-       and Firefox 145+ (Nov 2026). Safari does not yet support it
+       and Firefox 145+ (expected Nov 2026, not yet released as of May 2026).
+       Safari does not yet support it
        (tracked at WebKit bug 264057); on those engines the @supports
        block below is skipped, so the rule falls back to a one-shot
        time-driven animation playing once at --sf-duration-slow.
@@ -133,7 +134,7 @@
   @keyframes sf-scale-down { from { opacity: 1; scale: 1; } to { opacity: 0; scale: 0.92; } }
 
   @keyframes sf-spin    { to { rotate: 360deg; } }
-  @keyframes sf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  @keyframes sf-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
   /* Notification ping (expanding fading ring), cursor blink, gentle float.
      Keyframes only — apply via your own BEM/component rules or the
@@ -143,19 +144,22 @@
   @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
   @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
 
-  /* @property color interpolation — proves that registered custom
-     properties animate smoothly in oklch. Because --sf-color-primary-light
-     is registered with syntax:"<color>", the browser interpolates the
-     intermediate color values frame-by-frame. Opt-in via .sf-color-pulse. */
-  @keyframes sf-color-pulse {
-    0%   { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) l c h); }
-    50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) calc(l + 0.25) c h); }
-    100% { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) l c h); }
-  }
+  /* @property color interpolation — animates --sf-color-primary-light smoothly
+     because it is registered with syntax:"<color>" (see @property in tokens.css).
+     Without that registration the browser cannot interpolate between color values
+     and the animation will snap at 50% with no intermediate frames.
+     Gated behind @supports so unsupporting engines simply skip it. */
+  @supports (@property --x { syntax: "<color>"; inherits: false; initial-value: white; }) {
+    @keyframes sf-color-pulse {
+      0%   { --sf-color-primary-light: var(--sf-color-primary-light); }
+      50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) calc(l + 0.25) c h); }
+      100% { --sf-color-primary-light: var(--sf-color-primary-light); }
+    }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .sf-color-pulse {
-      animation: var(--sf-animation-color-pulse);
+    @media (prefers-reduced-motion: no-preference) {
+      .sf-color-pulse {
+        animation: var(--sf-animation-color-pulse);
+      }
     }
   }
 

@@ -106,8 +106,14 @@
     input[type="submit"],
     input[type="reset"],
     select,
-    summary,
+    summary {
+      min-height: var(--sf-touch-target);
+      min-width:  var(--sf-touch-target);
+    }
+    /* <a> is inline by default — min-height/width have no effect on inline
+       elements. Promote to inline-block so the size constraint applies. */
     a {
+      display:    inline-block;
       min-height: var(--sf-touch-target);
       min-width:  var(--sf-touch-target);
     }
@@ -145,19 +151,19 @@
      Left normal so position/colour can be themed freely.
      ---------------------------------------------------------- */
   .skip-link {
-    position:      absolute;
-    top:           -100%;
-    left:          var(--sf-space-m);
-    z-index:       var(--sf-z-max);
-    padding:       var(--sf-space-s) var(--sf-space-m);
-    background:    var(--sf-color-bg);
-    color:         var(--sf-color-text);
-    border:        var(--sf-border-width-1) solid var(--sf-color-border);
-    border-radius: var(--sf-radius-m);
-    transition:    top var(--sf-duration-fast) var(--sf-ease-out);
+    position:          absolute;
+    inset-block-start: -100%;
+    inset-inline-start: var(--sf-space-m);
+    z-index:           var(--sf-z-max);
+    padding:           var(--sf-space-s) var(--sf-space-m);
+    background:        var(--sf-color-bg);
+    color:             var(--sf-color-text);
+    border:            var(--sf-border-width-1) solid var(--sf-color-border);
+    border-radius:     var(--sf-radius-m);
+    transition:        inset-block-start var(--sf-duration-fast) var(--sf-ease-out);
   }
   .skip-link:focus {
-    top: var(--sf-space-m);
+    inset-block-start: var(--sf-space-m);
   }
 
 
@@ -170,8 +176,10 @@
      because the outline shorthand is consumer-customisable.
      Canonical name: .sf-focus-parent (prefixed).
      ---------------------------------------------------------- */
+  /* Uses --sf-focus-ring-color (same token as :focus-visible) so the ring
+     is visually consistent whether focus lands on the parent or a child. */
   .sf-focus-parent:focus-within {
-    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -258,7 +266,7 @@
      recipe. Suppress with outline:none
      if the card design provides its own focus indicator.               */
   .sf-clickable-parent:focus-within {
-    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
