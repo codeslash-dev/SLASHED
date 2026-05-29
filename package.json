@@ -1,6 +1,6 @@
 {
   "name": "slashed",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "CSS framework",
   "style": "dist/slashed.full.css",
   "main": "dist/slashed.full.css",
