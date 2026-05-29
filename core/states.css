@@ -43,6 +43,10 @@
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
+    /* cursor: not-allowed is intentional even though pointer-events:none means it never renders
+       on this element itself. The CSS value IS inherited by child elements that have
+       pointer-events:auto re-enabled, and it is part of the documented .is-disabled API surface. */
+    cursor:         not-allowed;
     user-select:    none;
   }
 

@@ -844,8 +844,8 @@
        to your own scroll-timeline via animation-range. Not consumed
        by the framework itself; intended for BEM component authors.
        ---------------------------------------------------------- */
-    --sf-scroll-timeline-range-start: 0%;
-    --sf-scroll-timeline-range-end:   100%;
+    --sf-scroll-timeline-range-start: entry 0%;
+    --sf-scroll-timeline-range-end:   cover 30%;
 
 
     /* ----------------------------------------------------------
@@ -1290,9 +1290,9 @@
   }
 
   img, picture, video, canvas, svg {
-    display:   block;
-    max-width: 100%;
-    height:    auto;
+    display:         block;
+    max-inline-size: 100%;
+    block-size:      auto;
   }
 
   iframe, embed, object {
@@ -2015,7 +2015,7 @@
   /* --max intentionally sets min-height: 0 to override .sf-cover's token-driven
      minimum — the cover may collapse below the default min if content is short.
      Pair with padding-block or a min-content guard if collapsing is undesirable. */
-  .sf-cover--max { min-height: 0; max-height: 100dvh; }
+  .sf-cover--max { min-block-size: 0; max-block-size: 100dvh; }
   .sf-cover--padding-s { padding-block: var(--sf-space-xl); }
   .sf-cover--padding-l { padding-block: var(--sf-space-4xl); }
 
@@ -2034,9 +2034,9 @@
 
   .sf-frame > img,
   .sf-frame > video {
-    width:      100%;
-    height:     100%;
-    object-fit: cover;
+    inline-size: 100%;
+    block-size:  100%;
+    object-fit:  cover;
   }
 
   .sf-frame--square   { aspect-ratio: var(--sf-ratio-square); }
@@ -2074,10 +2074,10 @@
      ---------------------------------------------------------- */
 
   .sf-imposter {
-    position:             absolute;
-    inset-block-start:    50%;
-    inset-inline-start:   50%;
-    translate:            -50% -50%;
+    position:          absolute;
+    inset-block-start: 50%;
+    left:              50%; /* physical: translate() uses physical x-axis; logical inset-inline-start: 50% maps to right:50% in RTL, which combined with translate(-50%) shifts away from center */
+    translate:         -50% -50%;
   }
 
   .sf-imposter--fixed {
@@ -2348,15 +2348,19 @@
   .sf-line-clamp-3,
   .sf-line-clamp-N {
     display:            -webkit-box;
+    /* stylelint-disable-next-line property-no-vendor-prefix -- de-facto standard; unprefixed CSS Overflow 4 line-clamp not yet shipped */
     -webkit-box-orient: vertical;
     overflow:           hidden;
   }
   /* line-clamp (unprefixed) is not yet shipped in any production browser as of
      2026 — only -webkit-line-clamp is effective. The prefixed form is the de
      facto standard across all engines despite the name. */
+  /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
   .sf-line-clamp-2 { -webkit-line-clamp: 2; }
+  /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
   .sf-line-clamp-3 { -webkit-line-clamp: 3; }
   .sf-line-clamp-N {
+    /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
     -webkit-line-clamp: var(--sf-line-clamp);
   }
 
@@ -2449,6 +2453,7 @@
      own .is-active / hover treatment.
      ---------------------------------------------------------- */
   .sf-no-tap-highlight {
+    /* stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent */
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -2577,6 +2582,9 @@
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
+    /* cursor: not-allowed is intentional even though pointer-events:none means it never renders
+       on this element itself. The CSS value IS inherited by child elements that have
+       pointer-events:auto re-enabled, and it is part of the documented .is-disabled API surface. */
     cursor:         not-allowed;
     user-select:    none;
   }
@@ -3158,15 +3166,15 @@
     input[type="reset"],
     select,
     summary {
-      min-height: var(--sf-touch-target);
-      min-width:  var(--sf-touch-target);
+      min-block-size:  var(--sf-touch-target);
+      min-inline-size: var(--sf-touch-target);
     }
-    /* <a> is inline by default — min-height/width have no effect on inline
+    /* <a> is inline by default — min-block/inline-size have no effect on inline
        elements. Promote to inline-block so the size constraint applies. */
     a {
-      display:    inline-block;
-      min-height: var(--sf-touch-target);
-      min-width:  var(--sf-touch-target);
+      display:         inline-block;
+      min-block-size:  var(--sf-touch-target);
+      min-inline-size: var(--sf-touch-target);
     }
   }
 
@@ -3901,7 +3909,7 @@
   select:focus-visible,
   textarea:focus-visible {
     border-color: var(--sf-color-border--focus);
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -3986,14 +3994,16 @@
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover {
-    background-color: var(--sf-color-action-hover);
+    /* --sf-color-action-hover defined in optional/tokens.palette.css; fallback to
+       action colour so hover degrades gracefully if the palette file is not loaded */
+    background-color: var(--sf-color-action-hover, var(--sf-color-action));
   }
 
   button:focus-visible,
   input[type="submit"]:focus-visible,
   input[type="reset"]:focus-visible,
   input[type="button"]:focus-visible {
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -4041,7 +4051,7 @@
     transition: var(--sf-transition-colors);
   }
   input[type="file"]::file-selector-button:hover {
-    background-color: var(--sf-color-action-hover);
+    background-color: var(--sf-color-action-hover, var(--sf-color-action));
   }
 
 
@@ -4080,7 +4090,7 @@
     border-radius: var(--sf-radius-full);
   }
   input[type="range"]:focus-visible {
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -4183,7 +4193,7 @@
      *
      * --sf-badge-pad-x:         var(--sf-space-2xs);
      * --sf-badge-pad-y:         var(--sf-space-3xs, 0.125rem);
-     * --sf-badge-radius:        var(--sf-radius-pill, 999px);
+     * --sf-badge-radius:        var(--sf-radius-pill, 9999px);
      * --sf-badge-font-size:     var(--sf-text-2xs);
      * --sf-badge-font-weight:   var(--sf-font-weight-semibold);
      * --sf-badge-line-height:   var(--sf-leading-tight);

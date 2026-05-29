@@ -299,8 +299,8 @@ rebrand workflow.
 | `--sf-safe-left` | `env(safe-area-inset-left, 0px)` |
 | `--sf-safe-right` | `env(safe-area-inset-right, 0px)` |
 | `--sf-safe-top` | `env(safe-area-inset-top, 0px)` |
-| `--sf-scroll-timeline-range-end` | `100%` |
-| `--sf-scroll-timeline-range-start` | `0%` |
+| `--sf-scroll-timeline-range-end` | `cover 30%` |
+| `--sf-scroll-timeline-range-start` | `entry 0%` |
 | `--sf-scrollbar-thumb` | `var(--sf-color-neutral)` |
 | `--sf-scrollbar-track` | `transparent` |
 | `--sf-section-pad` | `var(--sf-section-pad--m)` |
