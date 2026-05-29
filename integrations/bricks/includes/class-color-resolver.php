@@ -303,7 +303,7 @@ class Slashed_Bricks_Color_Resolver {
 		// LMS -> linear sRGB.
 		$r_lin = +4.0767416621 * $lms_l - 3.3077115913 * $lms_m + 0.2309699292 * $lms_s;
 		$g_lin = -1.2684380046 * $lms_l + 2.6097574011 * $lms_m - 0.3413193965 * $lms_s;
-		$b_lin = -0.0041960863 * $lms_l + 0.7081600000 * $lms_m + 0.2920793163 * $lms_s;
+		$b_lin = -0.0041960863 * $lms_l - 0.7034186147 * $lms_m + 1.7076147010 * $lms_s;
 
 		// Linear sRGB -> sRGB (gamma correction).
 		$r = self::linear_to_srgb( $r_lin );
@@ -365,8 +365,7 @@ class Slashed_Bricks_Color_Resolver {
 	 * Convert a hex color string to oklch values.
 	 *
 	 * Conversion path: hex -> RGB -> linear sRGB -> LMS -> OKLab -> OKLch.
-	 * Uses the exact inverse of the matrices in oklch_to_hex() to ensure
-	 * accurate round-trip conversion.
+	 * Uses the standard OKLab M1/M2 matrices for accurate round-trip conversion.
 	 *
 	 * @param string $str The value to parse (expected hex like #rrggbb or #rgb).
 	 * @return array{0:float, 1:float, 2:float}|null [L, C, H] or null on failure.
@@ -402,20 +401,20 @@ class Slashed_Bricks_Color_Resolver {
 		$lg = self::srgb_to_linear( $sg );
 		$lb = self::srgb_to_linear( $sb );
 
-		// Linear sRGB -> LMS (exact inverse of the LMS->sRGB matrix in oklch_to_hex).
-		$lms_l = 0.3777469185 * $lr + 0.4250470403 * $lg + 0.1979894399 * $lb;
-		$lms_m = 0.1399355608 * $lr + 0.4483836167 * $lg + 0.4133162198 * $lb;
-		$lms_s = -0.3338535206 * $lr + -1.0810207718 * $lg + 2.4244673521 * $lb;
+		// Linear sRGB -> LMS (standard OKLab M1 matrix).
+		$lms_l = 0.4122214708 * $lr + 0.5363325363 * $lg + 0.0514459929 * $lb;
+		$lms_m = 0.2119034982 * $lr + 0.6806995451 * $lg + 0.1073969566 * $lb;
+		$lms_s = 0.0883024619 * $lr + 0.2817188376 * $lg + 0.6299787005 * $lb;
 
 		// LMS -> cube root (LMS_). Sign-preserving for negative intermediate values.
 		$l_ = self::safe_cbrt( $lms_l );
 		$m_ = self::safe_cbrt( $lms_m );
 		$s_ = self::safe_cbrt( $lms_s );
 
-		// LMS_ -> OKLab (inverse of the OKLab->LMS_ matrix in oklch_to_hex).
-		$ok_l = 0.2104542553 * $l_ + 0.7936177850 * $m_ + ( -0.0040720468 ) * $s_;
-		$ok_a = 1.9779984951 * $l_ + ( -2.4285922050 ) * $m_ + 0.4505937099 * $s_;
-		$ok_b = 0.0259040371 * $l_ + 0.7827717662 * $m_ + ( -0.8086757660 ) * $s_;
+		// LMS_ -> OKLab (standard OKLab M2 matrix).
+		$ok_l = 0.2104542553 * $l_ + 0.7936177850 * $m_ - 0.0040720468 * $s_;
+		$ok_a = 1.9779984951 * $l_ - 2.4285922050 * $m_ + 0.4505937099 * $s_;
+		$ok_b = 0.0259040371 * $l_ + 0.7827717662 * $m_ - 0.8086757660 * $s_;
 
 		// OKLab -> OKLch.
 		$c = sqrt( $ok_a * $ok_a + $ok_b * $ok_b );
