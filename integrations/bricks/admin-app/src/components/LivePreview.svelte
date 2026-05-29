@@ -22,6 +22,7 @@
    * just inflate the preview into a second admin form.
    */
   import { tokens, meta } from '../lib/stores.svelte.js';
+  import { generateExportCSS } from '../lib/export.js';
 
   /** Brand color names rendered as swatches; mirrors the legacy preview. */
   const brand = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
@@ -67,30 +68,8 @@
     return pairs.join(';');
   });
 
-  /** Text representation shown in the "Generated CSS" code block. */
-  const css = $derived.by(() => {
-    const decls = [];
-    const colors = tokens.colors ?? {};
-    const typography = tokens.typography ?? {};
-
-    for (const name of brand) {
-      const v = colors[`brand_${name}`];
-      if (v) decls.push(`--sf-color-${name}-light: ${v}`);
-      const vd = colors[`brand_dark_${name}`];
-      if (vd) decls.push(`--sf-color-${name}-dark: ${vd}`);
-    }
-    for (const name of statuses) {
-      const v = colors[`status_${name}`];
-      if (v) decls.push(`--sf-color-${name}-light: ${v}`);
-      const vd = colors[`status_dark_${name}`];
-      if (vd) decls.push(`--sf-color-${name}-dark: ${vd}`);
-    }
-    if (typography.font_body)    decls.push(`--sf-font-body: ${typography.font_body}`);
-    if (typography.font_heading) decls.push(`--sf-font-heading: ${typography.font_heading}`);
-
-    if (decls.length === 0) return '';
-    return `.slashed-preview {\n  ${decls.join(';\n  ')};\n}`;
-  });
+  /** Full CSS override output — mirrors what the plugin emits server-side. */
+  const css = $derived(generateExportCSS(tokens));
 </script>
 
 <style>

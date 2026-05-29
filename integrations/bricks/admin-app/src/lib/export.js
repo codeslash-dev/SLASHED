@@ -206,6 +206,10 @@ function generateShadowDeclarations(settings) {
     declarations.push(`--sf-shadow-strength: calc(${settings.shadow_strength} + var(--sf-is-dark) * 0.17);`);
   }
 
+  if (hasValue(settings.glow_color)) {
+    declarations.push(`--sf-shadow-glow-color: ${settings.glow_color};`);
+  }
+
   return declarations;
 }
 
