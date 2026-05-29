@@ -7,8 +7,7 @@ import { resolve } from 'node:path';
  *
  * Output goes into the plugin's assets/admin-app/ directory with stable
  * filenames (no hashes), so the PHP enqueue side can reference them
- * directly and rely on filemtime() for cache-busting just like the
- * existing admin-page.css/js does.
+ * directly and rely on filemtime() for cache-busting.
  *
  * The bundle is fully self-contained: no externals, no CDN imports, no
  * dynamic chunks. WordPress admin pages don't need code-splitting at

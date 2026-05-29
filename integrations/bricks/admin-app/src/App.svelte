@@ -4,13 +4,8 @@
    *
    * Owns no state of its own — everything lives in stores.svelte.js so
    * any component can read or mutate it directly. The reactive graph
-   * collapses what was ~20 lines of jQuery dirty-tracking + DOM querying
-   * in admin-page.js into a single $derived for the active tab body.
-   *
-   * As of this iteration every tab in the legacy jQuery admin page has
-   * a Svelte counterpart, so the SPA is now feature-complete relative
-   * to `class-admin-page.php`. The "v2" / POC framing in the header has
-   * been retired accordingly.
+   * collapses dirty-tracking + DOM querying into a single $derived for
+   * the active tab body.
    */
   import { ui, meta } from './lib/stores.svelte.js';
   import TabNav from './components/TabNav.svelte';
@@ -36,8 +31,6 @@
   let isReadOnly = $derived(readOnlyTabs.includes(ui.activeTab));
 
   // Warn before unload when the form has unsaved changes.
-  // Replaces the equivalent jQuery `$(window).on('beforeunload', ...)`
-  // block in admin-page.js.
   $effect(() => {
     /**
      * `beforeunload` listener that triggers the browser's native

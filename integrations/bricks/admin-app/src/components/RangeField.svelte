@@ -52,8 +52,7 @@
   /**
    * Numeric value the slider should display. Falls back to the factory
    * default when the field is empty so the slider visually represents
-   * what the framework would render — same as legacy admin-page.js
-   * which seeded the slider with `value || default` on render.
+   * what the framework would render.
    */
   const sliderValue = $derived(
     stringValue === '' || Number.isNaN(Number(stringValue))
