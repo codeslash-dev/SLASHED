@@ -1,9 +1,25 @@
 <script>
   import { exportTokens, importTokens } from '../lib/api.js';
+  import { tokens } from '../lib/stores.svelte.js';
+  import { generateExportCSS } from '../lib/export.js';
 
   // ── Export ────────────────────────────────────────────────────────────────
   let exporting = $state(false);
   let exportError = $state('');
+
+  const exportCSS = $derived(generateExportCSS(tokens));
+  const canExportCSS = $derived(exportCSS.length > 0);
+
+  function downloadCSS() {
+    if (!exportCSS) return;
+    const blob = new Blob([exportCSS], { type: 'text/css' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `slashed-custom-${new Date().toISOString().slice(0, 10)}.css`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
   async function handleExport() {
     exporting = true;
@@ -81,7 +97,10 @@
     </p>
     <div class="action-row">
       <button type="button" class="btn btn--primary" onclick={handleExport} disabled={exporting}>
-        {exporting ? 'Exporting…' : 'Download token file'}
+        {exporting ? 'Exporting…' : 'Download token file (.json)'}
+      </button>
+      <button type="button" class="btn btn--secondary" onclick={downloadCSS} disabled={!canExportCSS} title={canExportCSS ? 'Download overrides as a standalone CSS file' : 'No overrides set yet'}>
+        Download CSS file
       </button>
       {#if exportError}
         <span class="status status--err">{exportError}</span>

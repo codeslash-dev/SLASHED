@@ -170,14 +170,6 @@ class Slashed_Bricks_CSS_Generator {
 			}
 		}
 
-		// Brand colors (dark): brand_dark_primary -> --sf-color-primary-dark.
-		foreach ( $brand_colors as $color ) {
-			$key = 'brand_dark_' . $color;
-			if ( ! empty( $settings[ $key ] ) ) {
-				$declarations[] = '--sf-color-' . $color . '-dark: ' . $settings[ $key ] . ';';
-			}
-		}
-
 		// Status colors (light): status_success -> --sf-color-success-light.
 		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 		foreach ( $status_colors as $color ) {
@@ -187,11 +179,26 @@ class Slashed_Bricks_CSS_Generator {
 			}
 		}
 
-		// Status colors (dark): status_dark_success -> --sf-color-success-dark.
-		foreach ( $status_colors as $color ) {
-			$key = 'status_dark_' . $color;
-			if ( ! empty( $settings[ $key ] ) ) {
-				$declarations[] = '--sf-color-' . $color . '-dark: ' . $settings[ $key ] . ';';
+		// Dark overrides are skipped when the toggle is explicitly disabled ('0').
+		// Default (key absent or '1') keeps previous behaviour: output dark overrides.
+		$dark_enabled = ! isset( $settings['dark_overrides_enabled'] )
+			|| '0' !== $settings['dark_overrides_enabled'];
+
+		if ( $dark_enabled ) {
+			// Brand colors (dark): brand_dark_primary -> --sf-color-primary-dark.
+			foreach ( $brand_colors as $color ) {
+				$key = 'brand_dark_' . $color;
+				if ( ! empty( $settings[ $key ] ) ) {
+					$declarations[] = '--sf-color-' . $color . '-dark: ' . $settings[ $key ] . ';';
+				}
+			}
+
+			// Status colors (dark): status_dark_success -> --sf-color-success-dark.
+			foreach ( $status_colors as $color ) {
+				$key = 'status_dark_' . $color;
+				if ( ! empty( $settings[ $key ] ) ) {
+					$declarations[] = '--sf-color-' . $color . '-dark: ' . $settings[ $key ] . ';';
+				}
 			}
 		}
 

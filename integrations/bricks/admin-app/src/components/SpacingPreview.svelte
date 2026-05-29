@@ -57,6 +57,17 @@
       return { name, sizeRem: sizeRem.toFixed(3), barPct: Math.min(barPct, 100) };
     });
   });
+
+  /** Spacing values at current vw for the container card preview. */
+  const cardSpacing = $derived.by(() => {
+    const spaceScale = parseFloat(tokens.spacing?.space_scale ?? defaults.space_scale ?? 1) || 1;
+    const t = Math.max(0, Math.min(1, (vw - VW_MIN) / (VW_MAX - VW_MIN)));
+    const resolve = (name) => {
+      const { min, max } = resolveStep(name);
+      return ((min + (max - min) * t) * spaceScale).toFixed(3);
+    };
+    return { xs: resolve('xs'), s: resolve('s'), m: resolve('m'), l: resolve('l') };
+  });
 </script>
 
 <div class="spacing-preview">
@@ -91,6 +102,32 @@
         <span class="spacing-preview__value">{step.sizeRem}rem</span>
       </div>
     {/each}
+  </div>
+
+  <!-- Container card showing spacing applied to a real layout -->
+  <div class="spacing-preview__card-section">
+    <p class="spacing-preview__card-label">Container context at {vw}px</p>
+    <div
+      class="spacing-preview__card"
+      style:padding="{cardSpacing.m}rem"
+      style:gap="{cardSpacing.s}rem"
+    >
+      <div class="spacing-preview__card-row" style:gap="{cardSpacing.s}rem">
+        <div class="spacing-preview__card-avatar"></div>
+        <div class="spacing-preview__card-meta">
+          <div class="spacing-preview__card-title">Card heading</div>
+          <div class="spacing-preview__card-sub">padding: {cardSpacing.m}rem</div>
+        </div>
+      </div>
+      <div class="spacing-preview__card-body">
+        Body section · gap between rows: {cardSpacing.s}rem
+      </div>
+      <div class="spacing-preview__card-footer" style:gap="{cardSpacing.xs}rem" style:padding-top="{cardSpacing.xs}rem">
+        <div class="spacing-preview__card-tag">tag</div>
+        <div class="spacing-preview__card-tag" style:width="3rem">tag 2</div>
+        <div class="spacing-preview__card-cta">Action</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -182,5 +219,86 @@
     text-align: right;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+  }
+
+  /* ── Container card ─────────────────────────────────────────────── */
+  .spacing-preview__card-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e9eaeb;
+  }
+  .spacing-preview__card-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #50575e;
+    margin: 0 0 10px;
+  }
+  .spacing-preview__card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    max-width: 320px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  .spacing-preview__card-row {
+    display: flex;
+    align-items: center;
+  }
+  .spacing-preview__card-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #2271b1;
+    flex-shrink: 0;
+  }
+  .spacing-preview__card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .spacing-preview__card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1d2327;
+    line-height: 1.2;
+  }
+  .spacing-preview__card-sub {
+    font-size: 11px;
+    color: #787c82;
+    font-variant-numeric: tabular-nums;
+  }
+  .spacing-preview__card-body {
+    font-size: 12px;
+    color: #50575e;
+    line-height: 1.5;
+    padding: 8px 0;
+    border-top: 1px dashed #e9eaeb;
+    border-bottom: 1px dashed #e9eaeb;
+    font-variant-numeric: tabular-nums;
+  }
+  .spacing-preview__card-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .spacing-preview__card-tag {
+    background: #f0f0f1;
+    color: #50575e;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .spacing-preview__card-cta {
+    margin-left: auto;
+    background: #2271b1;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 3px;
   }
 </style>

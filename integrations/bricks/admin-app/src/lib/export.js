@@ -75,14 +75,6 @@ function generateColorDeclarations(settings) {
     }
   }
 
-  // Brand colors (dark): brand_dark_primary -> --sf-color-primary-dark.
-  for (const color of brandColors) {
-    const key = `brand_dark_${color}`;
-    if (hasValue(settings[key])) {
-      declarations.push(`--sf-color-${color}-dark: ${settings[key]};`);
-    }
-  }
-
   // Status colors (light): status_success -> --sf-color-success-light.
   const statusColors = ['success', 'warning', 'error', 'info', 'danger'];
   for (const color of statusColors) {
@@ -92,11 +84,22 @@ function generateColorDeclarations(settings) {
     }
   }
 
-  // Status colors (dark): status_dark_success -> --sf-color-success-dark.
-  for (const color of statusColors) {
-    const key = `status_dark_${color}`;
-    if (hasValue(settings[key])) {
-      declarations.push(`--sf-color-${color}-dark: ${settings[key]};`);
+  // Dark overrides are skipped when the toggle is explicitly disabled.
+  // Default (key absent or '1') keeps previous behaviour: output dark overrides.
+  const darkEnabled = settings.dark_overrides_enabled !== '0';
+
+  if (darkEnabled) {
+    for (const color of brandColors) {
+      const key = `brand_dark_${color}`;
+      if (hasValue(settings[key])) {
+        declarations.push(`--sf-color-${color}-dark: ${settings[key]};`);
+      }
+    }
+    for (const color of statusColors) {
+      const key = `status_dark_${color}`;
+      if (hasValue(settings[key])) {
+        declarations.push(`--sf-color-${color}-dark: ${settings[key]};`);
+      }
     }
   }
 

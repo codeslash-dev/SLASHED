@@ -41,7 +41,6 @@
   const showModifier = $derived(mode === 'modifier');
   const showMigrate = $derived(mode === 'migrate');
   const prefix = $derived(!isRoot && blockName ? `${blockName}__` : '');
-  const indent = $derived(Math.min(row.depth ?? 0, 3));
 
   /** Style suggested vs user-typed names differently so the user can
    *  see at a glance which rows reBEMer pre-filled. */
@@ -75,7 +74,7 @@
   class="rebemer-row"
   class:rebemer-row--disabled={!row.include}
   class:rebemer-row--suggested={isSuggested}
-  data-depth={indent}
+  style="--rebemer-row-depth: {row.depth ?? 0}"
 >
   <label class="rebemer-row__include" title="Include this row in the operation">
     <input type="checkbox" bind:checked={row.include} />
