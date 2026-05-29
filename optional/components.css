@@ -197,7 +197,7 @@
    * core/states.css for non-<dialog> implementations.
    *
    * .sf-modal {
-   *   position:         relative; /* establishes containing block for .sf-modal__close */
+   *   position:         relative;
    *   max-inline-size:  var(--sf-modal-max-inline);
    *   padding:          var(--sf-modal-pad);
    *   border:           none;

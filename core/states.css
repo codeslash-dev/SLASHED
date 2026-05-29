@@ -51,10 +51,8 @@
   }
 
   .is-readonly {
-    /* Allows text selection and copying (correct readonly semantic).
-       cursor: default signals non-editability without blocking interaction. */
-    user-select: text;
-    cursor:      default;
+    pointer-events: none;
+    user-select:    none;
   }
 
   /* ============================================================

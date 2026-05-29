@@ -11,7 +11,8 @@
   }
 
   html {
-    -webkit-text-size-adjust: 100%; /* Safari <17 — unprefixed only landed in Safari 17 */
+    /* stylelint-disable-next-line property-no-vendor-prefix -- Safari <17: unprefixed text-size-adjust only landed in Safari 17 */
+    -webkit-text-size-adjust: 100%;
     text-size-adjust:          100%;
     scroll-padding-top:        var(--sf-header-height, 8rem);
     scrollbar-gutter:    stable;

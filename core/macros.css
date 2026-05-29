@@ -138,7 +138,7 @@
      ---------------------------------------------------------- */
   .sf-scroll-shadow {
     overflow-y: auto;
-    /* -webkit-mask-image required for Safari < 15.4 */
+    /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image:
       linear-gradient(to bottom,
         transparent 0,
@@ -174,7 +174,7 @@
      ---------------------------------------------------------- */
   .sf-overflow-fade {
     overflow: hidden;
-    /* -webkit-mask-image required for Safari < 15.4 */
+    /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image: linear-gradient(
       to right,
       black 0,
