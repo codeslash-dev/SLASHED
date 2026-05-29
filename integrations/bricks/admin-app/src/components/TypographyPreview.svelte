@@ -6,8 +6,9 @@
    * viewport width. The slider lets the user scrub between 320 px and
    * 1440 px to watch the clamp() scale play out in real time.
    *
-   * Formula (same as the framework's generated clamp()):
-   *   interpolated = min + (max - min) * clamp((vw - 375) / (1440 - 375), 0, 1)
+   * Formula mirrors class-css-generator.php build_clamp():
+   *   clamp(min, calc(slope * (100vw - 22.5rem) + min), max)
+   *   where slope = (max - min) / (95 - 22.5) and VW_MIN/MAX = 360/1520px.
    *
    * Values are read from tokens.typography (user overrides) with
    * meta.defaults.typography.font_sizes as the fallback, so the preview
@@ -16,11 +17,11 @@
   import { tokens, meta } from '../lib/stores.svelte.js';
 
   const BASE_PX = 16;
-  const VW_MIN  = 375;
-  const VW_MAX  = 1440;
+  const VW_MIN  = 360;  // 22.5rem × 16 — matches VIEWPORT_MIN in class-css-generator.php
+  const VW_MAX  = 1520; // 95rem × 16 — matches VIEWPORT_MAX in class-css-generator.php
 
   /** Viewport slider state — starts at desktop width. */
-  let vw = $state(1440);
+  let vw = $state(VW_MAX);
 
   const defaults = meta.defaults?.typography ?? {};
   const defaultSizes = defaults.font_sizes ?? {};
@@ -184,16 +185,17 @@
   <div class="typo-preview__header">
     <p class="typo-preview__title">Live Scale Preview</p>
     <div class="typo-preview__slider-wrap">
-      <span>320px</span>
+      <span>{VW_MIN}px</span>
       <input
         class="typo-preview__slider"
         type="range"
-        min="320"
-        max="1440"
+        min={VW_MIN}
+        max={VW_MAX}
         step="1"
+        aria-label="Preview viewport width"
         bind:value={vw}
       />
-      <span>1440px</span>
+      <span>{VW_MAX}px</span>
       <span class="typo-preview__vw-label">{vw}px</span>
     </div>
   </div>

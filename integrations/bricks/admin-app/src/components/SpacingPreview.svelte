@@ -13,9 +13,10 @@
 
   const VW_MIN = 375;
   const VW_MAX = 1440;
+  const SLIDER_MIN = VW_MIN;
 
   /** Viewport slider state — starts at desktop width. */
-  let vw = $state(1440);
+  let vw = $state(VW_MAX);
 
   /**
    * Base spacing values: min and max rem at 375px / 1440px viewport.
@@ -55,16 +56,17 @@
   <div class="spacing-preview__header">
     <p class="spacing-preview__title">Live Scale Preview</p>
     <div class="spacing-preview__slider-wrap">
-      <span>320px</span>
+      <span>{SLIDER_MIN}px</span>
       <input
         class="spacing-preview__slider"
         type="range"
-        min="320"
-        max="1440"
+        min={SLIDER_MIN}
+        max={VW_MAX}
         step="1"
+        aria-label="Preview viewport width"
         bind:value={vw}
       />
-      <span>1440px</span>
+      <span>{VW_MAX}px</span>
       <span class="spacing-preview__vw-label">{vw}px</span>
     </div>
   </div>

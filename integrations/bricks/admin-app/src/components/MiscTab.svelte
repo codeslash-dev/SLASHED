@@ -181,7 +181,7 @@
         section="shadows"
         fieldKey="glow_color"
         label="Glow Color"
-        default=""
+        default={shadowDefaults.glow_color ?? ''}
         cssVar="--sf-shadow-glow-color"
         mono
       />

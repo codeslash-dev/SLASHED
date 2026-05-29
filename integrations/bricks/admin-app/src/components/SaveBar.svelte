@@ -33,11 +33,18 @@
     ui.error = '';
     try {
       if (ui.activeTab === 'misc') {
-        for (const section of MISC_SECTIONS) {
-          const values = tokens[section] ?? {};
-          const res = await api.saveSection(section, values);
-          if (res && res.values) tokens[section] = res.values;
-        }
+        const results = await Promise.allSettled(
+          MISC_SECTIONS.map((section) => api.saveSection(section, tokens[section] ?? {}))
+        );
+        const failed = [];
+        results.forEach((result, i) => {
+          if (result.status === 'fulfilled') {
+            if (result.value?.values) tokens[MISC_SECTIONS[i]] = result.value.values;
+          } else {
+            failed.push(MISC_SECTIONS[i]);
+          }
+        });
+        if (failed.length > 0) throw new Error(`Failed to save: ${failed.join(', ')}`);
       } else {
         const section = ui.activeTab;
         const values = tokens[section] ?? {};
@@ -72,10 +79,18 @@
     ui.error = '';
     try {
       if (ui.activeTab === 'misc') {
-        for (const section of MISC_SECTIONS) {
-          await api.resetSection(section);
-          clearSection(section);
-        }
+        const results = await Promise.allSettled(
+          MISC_SECTIONS.map((section) => api.resetSection(section))
+        );
+        const failed = [];
+        results.forEach((result, i) => {
+          if (result.status === 'fulfilled') {
+            clearSection(MISC_SECTIONS[i]);
+          } else {
+            failed.push(MISC_SECTIONS[i]);
+          }
+        });
+        if (failed.length > 0) throw new Error(`Failed to reset: ${failed.join(', ')}`);
       } else {
         await api.resetSection(ui.activeTab);
         clearSection(ui.activeTab);
