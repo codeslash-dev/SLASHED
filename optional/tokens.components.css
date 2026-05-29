@@ -59,7 +59,7 @@
      *
      * --sf-badge-pad-x:         var(--sf-space-2xs);
      * --sf-badge-pad-y:         var(--sf-space-3xs, 0.125rem);
-     * --sf-badge-radius:        var(--sf-radius-pill, 999px);
+     * --sf-badge-radius:        var(--sf-radius-pill, 9999px);
      * --sf-badge-font-size:     var(--sf-text-2xs);
      * --sf-badge-font-weight:   var(--sf-font-weight-semibold);
      * --sf-badge-line-height:   var(--sf-leading-tight);

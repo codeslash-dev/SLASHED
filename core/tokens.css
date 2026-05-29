@@ -819,8 +819,8 @@
        to your own scroll-timeline via animation-range. Not consumed
        by the framework itself; intended for BEM component authors.
        ---------------------------------------------------------- */
-    --sf-scroll-timeline-range-start: 0%;
-    --sf-scroll-timeline-range-end:   100%;
+    --sf-scroll-timeline-range-start: entry 0%;
+    --sf-scroll-timeline-range-end:   cover 30%;
 
 
     /* ----------------------------------------------------------

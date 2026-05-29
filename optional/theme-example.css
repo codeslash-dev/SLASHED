@@ -34,7 +34,7 @@
     --sf-color-tertiary-light:  oklch(0.62 0.15 200);  /* accent            */
     --sf-color-action-light:    oklch(0.62 0.16 150);  /* primary CTA       */
     --sf-color-neutral-light:   oklch(0.45 0.01 280);  /* greys / text base */
-    --sf-color-base-light:      oklch(0.99 0.004 280); /* page surface      */
+    --sf-color-base-light:      oklch(0.97 0.004 280); /* page surface — keep ≤ 0.97 so +0.02/+0.04 surface offsets remain visually distinct (see tokens.css) */
   }
 
   /* ===========================================================
@@ -209,7 +209,7 @@
     --sf-border-width-4: 4px;
     --sf-border-style: solid;
     --sf-border-style-strong: solid;
-    --sf-border-style-soft: solid;
+    --sf-border-style-soft: dashed;
     --sf-border-style-dotted: dotted;
     */
 
@@ -238,11 +238,11 @@
     /* --- Z-index scale ---
     --sf-z-below:  -1;
     --sf-z-base:    0;
+    --sf-z-raised:  1;
     --sf-z-low:    10;
-    --sf-z-raised: 20;
-    --sf-z-mid:    50;
-    --sf-z-high:  100;
-    --sf-z-top:   500;
+    --sf-z-mid:   100;
+    --sf-z-high:  500;
+    --sf-z-top:   900;
     --sf-z-max:  9999;
     */
 

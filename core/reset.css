@@ -39,9 +39,9 @@
   }
 
   img, picture, video, canvas, svg {
-    display:   block;
-    max-width: 100%;
-    height:    auto;
+    display:         block;
+    max-inline-size: 100%;
+    block-size:      auto;
   }
 
   iframe, embed, object {
