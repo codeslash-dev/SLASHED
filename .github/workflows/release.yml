@@ -26,6 +26,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Sync version constants to tag
+        env:
+          DISPATCH_VERSION: ${{ inputs.version }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${DISPATCH_VERSION}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          VERSION="${TAG#v}"
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          node scripts/version-sync.js
       - run: npm run build
       - name: Determine version tag
         id: version
