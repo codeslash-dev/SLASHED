@@ -40,6 +40,34 @@
     parseFloat(tokens.shadows?.shadow_strength ?? shadowDefaults.shadow_strength ?? 0.08)
   );
 
+  // ── Motion preview ────────────────────────────────────────────────────────
+  const motionScale = $derived(
+    parseFloat(tokens.motion?.motion_scale ?? motionDefaults.motion_scale ?? 1) || 1
+  );
+
+  const DURATION_STEPS = ['instant', 'fast', 'normal', 'slow', 'slower'];
+
+  const durationMs = $derived(
+    DURATION_STEPS.map((name) => {
+      const saved = tokens.motion?.[`duration_${name}`];
+      const base = saved !== undefined && saved !== ''
+        ? parseFloat(saved)
+        : parseFloat(durations[name] ?? 0);
+      return { name, ms: Math.round(base * motionScale) };
+    })
+  );
+
+  // ── Focus ring preview ────────────────────────────────────────────────────
+  const focusRingWidth  = $derived(
+    parseFloat(tokens.contrast?.focus_ring_width  ?? contrastDefaults.focus_ring_width  ?? 2)
+  );
+  const focusRingOffset = $derived(
+    parseFloat(tokens.contrast?.focus_ring_offset ?? contrastDefaults.focus_ring_offset ?? 2)
+  );
+  const focusRingStyle  = $derived(
+    tokens.contrast?.focus_ring_style ?? contrastDefaults.focus_ring_style ?? 'solid'
+  );
+
   const shadowPreviews = $derived([
     {
       label: 'xs',
@@ -137,6 +165,19 @@
     />
   </div>
 
+  <!-- Motion preview -->
+  <div class="motion-preview">
+    {#each durationMs as d (d.name)}
+      <div class="motion-preview__item">
+        <span class="motion-preview__label">{d.name}</span>
+        <div class="motion-preview__track">
+          <div class="motion-preview__fill" style:animation-duration="{d.ms}ms"></div>
+        </div>
+        <span class="motion-preview__ms">{d.ms}ms</span>
+      </div>
+    {/each}
+  </div>
+
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <h2 class="group-heading">Accessibility</h2>
   <div class="rows">
@@ -170,6 +211,19 @@
       default={contrastDefaults.focus_ring_style ?? 'solid'}
       cssVar="--sf-focus-ring-style"
     />
+  </div>
+
+  <!-- Focus ring preview -->
+  <div class="focus-ring-preview">
+    <button
+      class="focus-ring-preview__btn"
+      style:--fp-width="{focusRingWidth}px"
+      style:--fp-offset="{focusRingOffset}px"
+      style:--fp-style={focusRingStyle}
+    >Tab to me</button>
+    <span class="focus-ring-preview__desc">
+      {focusRingWidth}px {focusRingStyle} · {focusRingOffset}px offset
+    </span>
   </div>
 
   <!-- ── Advanced ───────────────────────────────────────────────────────── -->
@@ -297,6 +351,86 @@
     font-size: 10px;
     color: #50575e;
     text-align: center;
+  }
+
+  /* ── Motion preview ───────────────────────────────────────────────── */
+  @keyframes slashed-mp-fill {
+    0%   { width: 0; }
+    50%  { width: 100%; }
+    100% { width: 0; }
+  }
+
+  .motion-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+  }
+  .motion-preview__item {
+    display: grid;
+    grid-template-columns: 60px 1fr 56px;
+    align-items: center;
+    gap: 10px;
+  }
+  .motion-preview__label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #50575e;
+    text-align: right;
+  }
+  .motion-preview__track {
+    height: 6px;
+    background: #f0f0f1;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .motion-preview__fill {
+    height: 100%;
+    background: #2271b1;
+    border-radius: 3px;
+    animation: slashed-mp-fill ease-in-out infinite;
+  }
+  .motion-preview__ms {
+    font-size: 11px;
+    color: #8c8f94;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Focus ring preview ─────────────────────────────────────────────── */
+  .focus-ring-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+  }
+  .focus-ring-preview__btn {
+    padding: 7px 16px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    background: #f0f0f1;
+    color: #1d2327;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .focus-ring-preview__btn:focus-visible {
+    outline-width: var(--fp-width, 2px);
+    outline-offset: var(--fp-offset, 2px);
+    outline-style: var(--fp-style, solid);
+    outline-color: #2271b1;
+  }
+  .focus-ring-preview__desc {
+    font-size: 12px;
+    color: #50575e;
+    font-family: monospace;
   }
 
   /* ── Shadow preview ────────────────────────────────────────────────── */
