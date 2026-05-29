@@ -41,9 +41,6 @@
     return { min, max };
   }
 
-  /** Max bar reference (4xl at VW_MAX). All bars are relative to this. */
-  const MAX_REM_BASE = 8.42;
-
   const computedSteps = $derived.by(() => {
     const spaceScale = parseFloat(
       tokens.spacing?.space_scale ?? defaults.space_scale ?? 1

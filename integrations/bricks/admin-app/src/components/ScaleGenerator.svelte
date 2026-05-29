@@ -9,8 +9,7 @@
    * On "Apply", writes size_*_min / size_*_max into tokens.typography so
    * the TypographyTab rows and the live preview update immediately.
    */
-  import { tokens } from '../lib/stores.svelte.js';
-  import { markDirty } from '../lib/stores.svelte.js';
+  import { tokens, markDirty } from '../lib/stores.svelte.js';
 
   /** Named scale ratios common in typographic practice. */
   const RATIOS = [
