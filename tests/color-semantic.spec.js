@@ -242,3 +242,86 @@ test.describe('Palette alpha variants', () => {
     expect(alphas.a5).toBeLessThan(alphas.a95);
   });
 });
+
+
+// ── Dark mode auto-derivation ────────────────────────────────────
+// Verifies that the framework's CSS relative-color-syntax fallback in
+// light-dark() actually produces correct values when no -dark overrides
+// are set. These tests confirm the formula is wired correctly end-to-end
+// in the shipped dist bundle — not just in theory.
+test.describe('Dark mode auto-derivation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(FIXTURE);
+  });
+
+  // Brand colors should be lighter in dark theme (L 0.65–0.88 from formula).
+  test('brand primary is lighter in dark theme than light theme', async ({ page }) => {
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    const lightLum = await page.evaluate(resolveTokenLuminance, '--sf-color-primary');
+
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    const darkLum = await page.evaluate(resolveTokenLuminance, '--sf-color-primary');
+
+    // Dark variant must be noticeably lighter (formula brightens to L 0.65–0.88).
+    expect(darkLum).toBeGreaterThan(lightLum + 0.04);
+  });
+
+  test('all 6 brand colors are lighter in dark theme than light theme', async ({ page }) => {
+    const names = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
+
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    const lightLums = await Promise.all(
+      names.map((n) => page.evaluate(resolveTokenLuminance, `--sf-color-${n}`))
+    );
+
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    const darkLums = await Promise.all(
+      names.map((n) => page.evaluate(resolveTokenLuminance, `--sf-color-${n}`))
+    );
+
+    for (let i = 0; i < names.length; i++) {
+      const name = names[i];
+      if (name === 'base') {
+        // Base inverts: near-white light → near-dark dark.
+        expect(darkLums[i], `${name} dark should be darker than light`).toBeLessThan(lightLums[i]);
+      } else {
+        // All other brand colors: dark variant must be lighter.
+        expect(darkLums[i], `${name} dark should be lighter than light`).toBeGreaterThan(lightLums[i]);
+      }
+    }
+  });
+
+  // The base color uses a different inversion formula: clamp(0.16, 1.18 - l, 0.24).
+  // Default base-light is oklch(0.99, 0.006, 250) → near-white.
+  // Dark value: 1.18 - 0.99 = 0.19 → near-dark background.
+  test('base color inverts in dark theme (near-white → near-dark surface)', async ({ page }) => {
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    const lightLum = await page.evaluate(resolveTokenLuminance, '--sf-color-bg');
+
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    const darkLum = await page.evaluate(resolveTokenLuminance, '--sf-color-bg');
+
+    expect(lightLum).toBeGreaterThan(0.7);  // near-white surface
+    expect(darkLum).toBeLessThan(0.08);     // near-dark surface
+  });
+
+  // An explicit -dark override must take precedence over the auto-derived fallback.
+  test('explicit dark override overrides auto-derived value', async ({ page }) => {
+    // Set a mid-tone orange light color.
+    await page.evaluate(() => {
+      document.documentElement.style.setProperty('--sf-color-primary-light', 'oklch(0.55 0.22 45)');
+    });
+
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    const autoDarkLum = await page.evaluate(resolveTokenLuminance, '--sf-color-primary');
+
+    // Inject a very different explicit dark value (low L ≈ 0.25 = very dark orange).
+    await page.evaluate(() => {
+      document.documentElement.style.setProperty('--sf-color-primary-dark', 'oklch(0.25 0.15 45)');
+    });
+    const overrideLum = await page.evaluate(resolveTokenLuminance, '--sf-color-primary');
+
+    // Override (very dark) should be substantially dimmer than the auto-derived (bright).
+    expect(autoDarkLum - overrideLum).toBeGreaterThan(0.1);
+  });
+});
