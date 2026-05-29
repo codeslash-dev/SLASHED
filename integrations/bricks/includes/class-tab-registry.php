@@ -44,14 +44,23 @@ class Slashed_Bricks_Tab_Registry {
 	public static function get_token_tabs() {
 		return array(
 			'colors'     => 'Colors',
-			'contrast'   => 'Contrast',
 			'typography' => 'Typography',
 			'spacing'    => 'Spacing',
-			'radius'     => 'Radius',
-			'shadows'    => 'Shadows',
-			'motion'     => 'Motion',
-			'zindex'     => 'Z-Index',
+			'misc'       => 'Miscellaneous',
 		);
+	}
+
+	/**
+	 * Slugs of the sections that live inside the Miscellaneous tab.
+	 *
+	 * The REST API and legacy form handler still accept these slugs
+	 * directly so the Svelte SaveBar can save/reset each sub-section
+	 * independently.
+	 *
+	 * @return string[]
+	 */
+	public static function get_misc_sections() {
+		return array( 'contrast', 'radius', 'shadows', 'motion', 'zindex' );
 	}
 
 	/**
@@ -100,6 +109,6 @@ class Slashed_Bricks_Tab_Registry {
 	 */
 	public static function is_token_tab( $slug ) {
 		$tokens = self::get_token_tabs();
-		return is_string( $slug ) && isset( $tokens[ $slug ] );
+		return is_string( $slug ) && ( isset( $tokens[ $slug ] ) || in_array( $slug, self::get_misc_sections(), true ) );
 	}
 }

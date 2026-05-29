@@ -197,6 +197,7 @@ class Slashed_Bricks_Token_Defaults {
 	public static function get_shadows() {
 		return array(
 			'shadow_strength' => 0.08,
+			'glow_color'      => '',
 		);
 	}
 
