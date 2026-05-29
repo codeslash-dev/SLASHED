@@ -25,6 +25,7 @@
   import VariablesTab from './components/VariablesTab.svelte';
   import ClassesTab from './components/ClassesTab.svelte';
   import BundleTab from './components/BundleTab.svelte';
+  import ExportImportTab from './components/ExportImportTab.svelte';
   import HooksTab from './components/HooksTab.svelte';
   import CheatsheetTab from './components/CheatsheetTab.svelte';
   import LivePreview from './components/LivePreview.svelte';
@@ -35,7 +36,7 @@
    * save semantics. The SaveBar (and the section reset button) only
    * make sense for tabs that mutate `tokens[section]`.
    */
-  const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes', 'bundle'];
+  const readOnlyTabs = ['cheatsheet', 'hooks', 'variables', 'classes', 'bundle', 'export'];
   let isReadOnly = $derived(readOnlyTabs.includes(ui.activeTab));
 
   // Warn before unload when the form has unsaved changes.
@@ -96,6 +97,8 @@
       <ClassesTab />
     {:else if ui.activeTab === 'bundle'}
       <BundleTab />
+    {:else if ui.activeTab === 'export'}
+      <ExportImportTab />
     {:else if ui.activeTab === 'hooks'}
       <HooksTab />
     {:else if ui.activeTab === 'cheatsheet'}

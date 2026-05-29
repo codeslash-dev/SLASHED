@@ -75,3 +75,31 @@ export function resetSection(section) {
 export function saveSettings(settings) {
   return call('/settings', settings);
 }
+
+/**
+ * Fetch all current token overrides as a portable export envelope.
+ *
+ * Uses GET so it's safe to call without CSRF concerns; the WP REST nonce
+ * is still sent so the permission_callback can enforce manage_options.
+ */
+export async function exportTokens() {
+  const { url, nonce } = meta.rest;
+  if (!url) {
+    console.info('[slashed-admin] (dev) would GET /tokens/export');
+    return { schema_version: '1', tokens: {}, plugin_settings: {}, dev: true };
+  }
+  const res = await fetch(url + '/tokens/export', {
+    credentials: 'same-origin',
+    headers: { 'X-WP-Nonce': nonce },
+  });
+  if (!res.ok) throw new Error(await res.text() || `HTTP ${res.status}`);
+  return res.json();
+}
+
+/**
+ * Send an export envelope back to the server to restore token overrides.
+ * The server runs each section through its sanitizer before persisting.
+ */
+export function importTokens(data) {
+  return call('/tokens/import', data);
+}
