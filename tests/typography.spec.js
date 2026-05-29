@@ -9,17 +9,6 @@ const { pathToFileURL } = require('url');
 const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
 const BUNDLE  = path.join(process.cwd(), 'dist', 'slashed.essential.css');
 
-// Resolves a CSS custom property through a real element so clamp()/calc()
-// expressions are computed by the browser engine.
-function resolveTokenViaElement(prop, cssProperty) {
-  const el = document.createElement('div');
-  el.style[cssProperty] = `var(${prop})`;
-  document.body.appendChild(el);
-  const val = parseFloat(getComputedStyle(el)[cssProperty]);
-  el.remove();
-  return val;
-}
-
 async function setup(page, html) {
   await page.setViewportSize({ width: 1200, height: 900 });
   await page.setContent(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
@@ -122,11 +111,15 @@ test.describe('Typography: font families', () => {
 
   test('body text uses --sf-font-body', async ({ page }) => {
     await setup(page, `<p id="t">body text</p>`);
-    const bodyFont = await page.evaluate(() =>
-      getComputedStyle(document.documentElement).getPropertyValue('--sf-font-body').trim()
-    );
-    // --sf-font-body should be non-empty and the body text should have a font family
-    expect(bodyFont).toBeTruthy();
+    const [tokenFont, actualFont] = await page.evaluate(() => {
+      const token = getComputedStyle(document.documentElement).getPropertyValue('--sf-font-body').trim();
+      const actual = getComputedStyle(document.getElementById('t')).fontFamily;
+      return [token, actual];
+    });
+    expect(tokenFont).toBeTruthy();
+    // The first font family in the token should appear in the element's computed stack.
+    const firstFont = tokenFont.split(',')[0].replace(/['"]/g, '').trim();
+    expect(actualFont.toLowerCase()).toContain(firstFont.toLowerCase());
   });
 });
 

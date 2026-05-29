@@ -244,11 +244,13 @@ test('.is-scrollable: overflow auto, overscroll-behavior contain', async ({ page
 test('.is-truncated: text-overflow ellipsis, white-space nowrap', async ({ page }) => {
   await setup(page, `<div id="t" class="is-truncated" style="width:2rem">long text here</div>`);
   const cs = await page.locator('#t').evaluate(el => ({
-    to: getComputedStyle(el).textOverflow,
-    ws: getComputedStyle(el).whiteSpace,
+    to:       getComputedStyle(el).textOverflow,
+    ws:       getComputedStyle(el).whiteSpace,
+    overflow: getComputedStyle(el).overflow,
   }));
   expect(cs.to).toBe('ellipsis');
   expect(cs.ws).toBe('nowrap');
+  expect(cs.overflow).toBe('hidden');
 });
 
 test('.is-resizable: resize both, overflow auto', async ({ page }) => {

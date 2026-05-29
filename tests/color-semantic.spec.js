@@ -141,7 +141,7 @@ for (const theme of ['light', 'dark']) {
     test('--sf-color-border resolves to a non-transparent value', async ({ page }) => {
       const color = await page.evaluate(() => {
         const el = document.createElement('div');
-        el.style.borderColor = 'var(--sf-color-border)';
+        el.style.borderColor = 'var(--sf-color-border, transparent)';
         document.body.appendChild(el);
         const c = getComputedStyle(el).borderTopColor;
         el.remove();

@@ -517,6 +517,7 @@ test.describe('layout: .sf-divider', () => {
       inline: parseFloat(getComputedStyle(el).borderInlineStartWidth),
     }));
     expect(cs.inline).toBeGreaterThan(0);
+    expect(cs.block).toBe(0);
   });
 });
 
