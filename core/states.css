@@ -43,10 +43,7 @@
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
-    /* cursor: not-allowed is intentionally absent — pointer-events: none makes
-       the element transparent to mouse events, so the cursor is driven by the
-       element BELOW (typically the parent). To show a not-allowed cursor, set
-       cursor: not-allowed on the parent wrapper instead. */
+    cursor:         not-allowed;
     user-select:    none;
   }
 
