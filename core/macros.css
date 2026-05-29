@@ -94,15 +94,19 @@
   .sf-line-clamp-3,
   .sf-line-clamp-N {
     display:            -webkit-box;
+    /* stylelint-disable-next-line property-no-vendor-prefix -- de-facto standard; unprefixed CSS Overflow 4 line-clamp not yet shipped */
     -webkit-box-orient: vertical;
     overflow:           hidden;
   }
   /* line-clamp (unprefixed) is not yet shipped in any production browser as of
      2026 — only -webkit-line-clamp is effective. The prefixed form is the de
      facto standard across all engines despite the name. */
+  /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
   .sf-line-clamp-2 { -webkit-line-clamp: 2; }
+  /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
   .sf-line-clamp-3 { -webkit-line-clamp: 3; }
   .sf-line-clamp-N {
+    /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
     -webkit-line-clamp: var(--sf-line-clamp);
   }
 
@@ -195,6 +199,7 @@
      own .is-active / hover treatment.
      ---------------------------------------------------------- */
   .sf-no-tap-highlight {
+    /* stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent */
     -webkit-tap-highlight-color: transparent;
   }
 

@@ -43,7 +43,6 @@
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
-    cursor:         not-allowed;
     user-select:    none;
   }
 

@@ -100,7 +100,7 @@
   select:focus-visible,
   textarea:focus-visible {
     border-color: var(--sf-color-border--focus);
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -185,14 +185,16 @@
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover {
-    background-color: var(--sf-color-action-hover);
+    /* --sf-color-action-hover defined in optional/tokens.palette.css; fallback to
+       action colour so hover degrades gracefully if the palette file is not loaded */
+    background-color: var(--sf-color-action-hover, var(--sf-color-action));
   }
 
   button:focus-visible,
   input[type="submit"]:focus-visible,
   input[type="reset"]:focus-visible,
   input[type="button"]:focus-visible {
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
@@ -240,7 +242,7 @@
     transition: var(--sf-transition-colors);
   }
   input[type="file"]::file-selector-button:hover {
-    background-color: var(--sf-color-action-hover);
+    background-color: var(--sf-color-action-hover, var(--sf-color-action));
   }
 
 
@@ -279,7 +281,7 @@
     border-radius: var(--sf-radius-full);
   }
   input[type="range"]:focus-visible {
-    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style) var(--sf-color-border--focus);
+    outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 

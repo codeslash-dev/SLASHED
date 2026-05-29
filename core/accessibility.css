@@ -107,15 +107,15 @@
     input[type="reset"],
     select,
     summary {
-      min-height: var(--sf-touch-target);
-      min-width:  var(--sf-touch-target);
+      min-block-size:  var(--sf-touch-target);
+      min-inline-size: var(--sf-touch-target);
     }
-    /* <a> is inline by default — min-height/width have no effect on inline
+    /* <a> is inline by default — min-block/inline-size have no effect on inline
        elements. Promote to inline-block so the size constraint applies. */
     a {
-      display:    inline-block;
-      min-height: var(--sf-touch-target);
-      min-width:  var(--sf-touch-target);
+      display:         inline-block;
+      min-block-size:  var(--sf-touch-target);
+      min-inline-size: var(--sf-touch-target);
     }
   }
 
