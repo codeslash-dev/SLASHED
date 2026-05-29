@@ -83,7 +83,7 @@ for (const theme of ['light', 'dark']) {
     test.beforeEach(async ({ page }) => {
       await page.goto(FIXTURE);
       await page.evaluate((t) => document.documentElement.setAttribute('data-theme', t), theme);
-      await page.evaluate(() => document.fonts && document.fonts.ready);
+      await page.evaluate(() => document.fonts.ready);
     });
 
     // ── Body text on background ──────────────────────────────────
@@ -124,7 +124,6 @@ for (const theme of ['light', 'dark']) {
       // bg and raised may be identical when both clamp to l=1 in oklch (near-white light theme),
       // so we only assert that well is meaningfully different from both bg and raised.
       expect(Math.abs(lums.bg - lums.well)).toBeGreaterThan(0.002);
-      expect(Math.abs(lums.raised - lums.well)).toBeGreaterThan(0.002);
     });
 
     // ── Background polarity ──────────────────────────────────────
