@@ -160,6 +160,18 @@ function generateSpacingDeclarations(settings) {
     declarations.push(`--sf-space-scale: ${settings.space_scale};`);
   }
 
+  const steps = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl'];
+  for (const step of steps) {
+    const minVal = settings[`space_${step}_min`];
+    const maxVal = settings[`space_${step}_max`];
+    if (hasValue(minVal) && hasValue(maxVal)) {
+      const clamp = buildClamp(parseFloat(minVal), parseFloat(maxVal));
+      if (clamp) {
+        declarations.push(`--sf-space-${step}: calc(${clamp} * var(--sf-space-scale));`);
+      }
+    }
+  }
+
   const aliases = {
     gutter: '--sf-space-gutter',
     gap: '--sf-gap',
@@ -204,6 +216,10 @@ function generateShadowDeclarations(settings) {
 
   if (hasValue(settings.shadow_strength)) {
     declarations.push(`--sf-shadow-strength: calc(${settings.shadow_strength} + var(--sf-is-dark) * 0.17);`);
+  }
+
+  if (hasValue(settings.glow_color)) {
+    declarations.push(`--sf-shadow-glow-color: ${settings.glow_color};`);
   }
 
   return declarations;
