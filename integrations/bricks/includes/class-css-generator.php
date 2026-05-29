@@ -284,6 +284,21 @@ class Slashed_Bricks_CSS_Generator {
 			$declarations[] = '--sf-space-scale: ' . $settings['space_scale'] . ';';
 		}
 
+		// Per-step fluid overrides: space_2xs_min + space_2xs_max -> --sf-space-2xs.
+		$steps = array( '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl' );
+		foreach ( $steps as $step ) {
+			$min_key = 'space_' . $step . '_min';
+			$max_key = 'space_' . $step . '_max';
+			$min_val = $settings[ $min_key ] ?? '';
+			$max_val = $settings[ $max_key ] ?? '';
+			if ( '' !== $min_val && '' !== $max_val ) {
+				$clamp = self::build_clamp( (float) $min_val, (float) $max_val );
+				if ( $clamp ) {
+					$declarations[] = '--sf-space-' . $step . ': calc(' . $clamp . ' * var(--sf-space-scale));';
+				}
+			}
+		}
+
 		$aliases = array(
 			'gutter'        => '--sf-space-gutter',
 			'gap'           => '--sf-gap',

@@ -4,63 +4,73 @@
    *
    * Renders the 9 spacing steps (2xs → 4xl) as horizontal bars at the
    * interpolated value for the selected viewport width. The slider lets
-   * the user scrub between 320 px and 1440 px to see the fluid scale.
+   * the user scrub between VW_MIN and VW_MAX to see the fluid scale.
    *
    * Formula (matches the framework's generated clamp()):
-   *   value = (min + (max - min) * clamp((vw - 375) / (1440 - 375), 0, 1)) * spaceScale
+   *   value = (min + (max - min) * clamp((vw - VW_MIN) / (VW_MAX - VW_MIN), 0, 1)) * spaceScale
+   *
+   * VW bounds match the framework CSS (22.5rem = 360px, 90rem = 1440px).
+   * Per-step token overrides (space_*_min/max) are preferred over the
+   * hardcoded defaults when set.
    */
   import { tokens, meta } from '../lib/stores.svelte.js';
 
-  const VW_MIN = 375;
+  const VW_MIN = 360;
   const VW_MAX = 1440;
-  const SLIDER_MIN = VW_MIN;
 
   /** Viewport slider state — starts at desktop width. */
   let vw = $state(VW_MAX);
 
-  /**
-   * Base spacing values: min and max rem at 375px / 1440px viewport.
-   * These mirror the framework's internal spacing scale.
-   */
-  const SPACE_STEPS = [
-    { name: '2xs', min: 0.51, max: 0.84 },
-    { name: 'xs',  min: 0.64, max: 1.13 },
-    { name: 's',   min: 0.80, max: 1.50 },
-    { name: 'm',   min: 1.00, max: 2.00 },
-    { name: 'l',   min: 1.25, max: 2.67 },
-    { name: 'xl',  min: 1.56, max: 3.55 },
-    { name: '2xl', min: 1.95, max: 4.74 },
-    { name: '3xl', min: 2.44, max: 6.31 },
-    { name: '4xl', min: 3.05, max: 8.42 },
-  ];
+  const defaults = meta.defaults?.spacing ?? {};
+  const defaultSizes = defaults.space_sizes ?? {};
 
-  /** Max bar reference (4xl at 1440px). All bars are relative to this. */
-  const MAX_REM = 8.42;
+  /**
+   * Resolve a single step's min/max, preferring token overrides then
+   * falling back to meta defaults.
+   */
+  function resolveStep(name) {
+    const saved = tokens.spacing ?? {};
+    const def   = defaultSizes[name] ?? {};
+
+    const minRaw = saved[`space_${name}_min`];
+    const maxRaw = saved[`space_${name}_max`];
+
+    const min = minRaw !== undefined && minRaw !== '' ? parseFloat(minRaw) : (def.min ?? 1);
+    const max = maxRaw !== undefined && maxRaw !== '' ? parseFloat(maxRaw) : (def.max ?? 1);
+
+    return { min, max };
+  }
+
+  /** Max bar reference (4xl at VW_MAX). All bars are relative to this. */
+  const MAX_REM_BASE = 8.42;
 
   const computedSteps = $derived.by(() => {
     const spaceScale = parseFloat(
-      tokens.spacing?.space_scale ?? meta.defaults?.spacing?.space_scale ?? 1
-    );
+      tokens.spacing?.space_scale ?? defaults.space_scale ?? 1
+    ) || 1;
     const t = Math.max(0, Math.min(1, (vw - VW_MIN) / (VW_MAX - VW_MIN)));
 
-    return SPACE_STEPS.map(({ name, min, max }) => {
+    const stepNames = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl'];
+    const maxRef = resolveStep('4xl').max * spaceScale;
+
+    return stepNames.map((name) => {
+      const { min, max } = resolveStep(name);
       const sizeRem = (min + (max - min) * t) * spaceScale;
-      const barPct = (sizeRem / MAX_REM) * 100;
+      const barPct = (sizeRem / maxRef) * 100;
       return { name, sizeRem: sizeRem.toFixed(3), barPct: Math.min(barPct, 100) };
     });
   });
-
 </script>
 
 <div class="spacing-preview">
   <div class="spacing-preview__header">
     <p class="spacing-preview__title">Live Scale Preview</p>
     <div class="spacing-preview__slider-wrap">
-      <span>{SLIDER_MIN}px</span>
+      <span>{VW_MIN}px</span>
       <input
         class="spacing-preview__slider"
         type="range"
-        min={SLIDER_MIN}
+        min={VW_MIN}
         max={VW_MAX}
         step="1"
         aria-label="Preview viewport width"

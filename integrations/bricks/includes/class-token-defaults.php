@@ -170,6 +170,17 @@ class Slashed_Bricks_Token_Defaults {
 	public static function get_spacing() {
 		return array(
 			'space_scale'    => 1,
+			'space_sizes'    => array(
+				'2xs' => array( 'min' => 0.51, 'max' => 0.84 ),
+				'xs'  => array( 'min' => 0.64, 'max' => 1.13 ),
+				's'   => array( 'min' => 0.80, 'max' => 1.50 ),
+				'm'   => array( 'min' => 1.00, 'max' => 2.00 ),
+				'l'   => array( 'min' => 1.25, 'max' => 2.67 ),
+				'xl'  => array( 'min' => 1.56, 'max' => 3.55 ),
+				'2xl' => array( 'min' => 1.95, 'max' => 4.74 ),
+				'3xl' => array( 'min' => 2.44, 'max' => 6.31 ),
+				'4xl' => array( 'min' => 3.05, 'max' => 8.42 ),
+			),
 			'gutter'         => 'var(--sf-space-l)',
 			'gap'            => 'var(--sf-space-m)',
 			'content_gap'    => 'var(--sf-space-s)',
