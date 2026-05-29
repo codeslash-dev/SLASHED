@@ -66,6 +66,15 @@
     return steps;
   });
 
+  /** Text scale steps (all non-display). */
+  const TEXT_STEPS = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl'];
+  /** Display scale steps. */
+  const DISPLAY_STEPS = ['display-s', 'display-m', 'display-l'];
+
+  /** All step names, filtered to those actually present in defaults. */
+  const textStepNames = $derived(TEXT_STEPS.filter((n) => defaultSizes[n]));
+  const displayStepNames = $derived(DISPLAY_STEPS.filter((n) => defaultSizes[n]));
+
   /** Ordered step names for rendering (largest to smallest so the preview reads like a type scale). */
   const stepNames = $derived(Object.keys(defaultSizes));
 
@@ -164,6 +173,23 @@
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
+
+  .typo-preview__group-heading {
+    font-size: 11px;
+    font-weight: 600;
+    color: #50575e;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin: 0 0 6px;
+    padding: 6px 0 4px;
+    border-bottom: 1px solid #f0f0f1;
+  }
+
+  .typo-preview__rows--display {
+    margin-top: 16px;
+    padding-top: 4px;
+    border-top: 2px solid #f0f0f1;
+  }
 </style>
 
 <div class="typo-preview">
@@ -185,7 +211,8 @@
   </div>
 
   <div class="typo-preview__rows">
-    {#each stepNames as name (name)}
+    <p class="typo-preview__group-heading">Text Scale</p>
+    {#each textStepNames as name (name)}
       {@const step = stepAt[name]}
       {#if step}
         <div class="typo-preview__row">
@@ -201,4 +228,25 @@
       {/if}
     {/each}
   </div>
+
+  {#if displayStepNames.length > 0}
+    <div class="typo-preview__rows typo-preview__rows--display">
+      <p class="typo-preview__group-heading">Display Scale</p>
+      {#each displayStepNames as name (name)}
+        {@const step = stepAt[name]}
+        {#if step}
+          <div class="typo-preview__row">
+            <span class="typo-preview__step-name">{name}</span>
+            <span
+              class="typo-preview__sample"
+              style:font-size="{step.sizePx.toFixed(1)}px"
+            >{name}</span>
+            <span class="typo-preview__meta">
+              {step.sizeRem}rem / {step.sizePx.toFixed(1)}px
+            </span>
+          </div>
+        {/if}
+      {/each}
+    </div>
+  {/if}
 </div>

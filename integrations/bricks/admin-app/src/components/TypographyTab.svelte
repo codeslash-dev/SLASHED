@@ -17,6 +17,7 @@
   import TextField from './TextField.svelte';
   import NumberField from './NumberField.svelte';
   import TypographyPreview from './TypographyPreview.svelte';
+  import AdvancedSection from './AdvancedSection.svelte';
 
   const SECTION = 'typography';
   const defaults = meta.defaults?.[SECTION] ?? {};
@@ -25,12 +26,23 @@
 
   /** ucfirst() helper, mirrors the legacy label munging. */
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  /** Basic families: body and heading only. */
+  const basicFamilyKeys = ['body', 'heading'];
+  const basicFamilies = Object.fromEntries(
+    Object.entries(families).filter(([name]) => basicFamilyKeys.includes(name))
+  );
+
+  /** Advanced families: everything except body and heading. */
+  const advancedFamilies = Object.fromEntries(
+    Object.entries(families).filter(([name]) => !basicFamilyKeys.includes(name))
+  );
 </script>
 
 <section>
   <h2>Font Families</h2>
   <div class="rows">
-    {#each Object.entries(families) as [name, defaultStack] (name)}
+    {#each Object.entries(basicFamilies) as [name, defaultStack] (name)}
       <TextField
         section={SECTION}
         fieldKey={`font_${name}`}
@@ -79,27 +91,43 @@
 
   <TypographyPreview />
 
-  <h2 class="group-heading">Scale Multipliers</h2>
-  <div class="rows">
-    <NumberField
-      section={SECTION}
-      fieldKey="text_scale"
-      label="Text Scale"
-      min={0}
-      step={0.05}
-      default={defaults.scale_multipliers?.text_scale ?? 1}
-      cssVar="--sf-text-scale"
-    />
-    <NumberField
-      section={SECTION}
-      fieldKey="text_display_scale"
-      label="Display Scale"
-      min={0}
-      step={0.05}
-      default={defaults.scale_multipliers?.text_display_scale ?? 1}
-      cssVar="--sf-text-display-scale"
-    />
-  </div>
+  <AdvancedSection>
+    <h2 class="group-heading">Additional Font Families</h2>
+    <div class="rows">
+      {#each Object.entries(advancedFamilies) as [name, defaultStack] (name)}
+        <TextField
+          section={SECTION}
+          fieldKey={`font_${name}`}
+          label={cap(name)}
+          default={defaultStack}
+          cssVar={`--sf-font-${name}`}
+          width="420px"
+        />
+      {/each}
+    </div>
+
+    <h2 class="group-heading">Scale Multipliers</h2>
+    <div class="rows">
+      <NumberField
+        section={SECTION}
+        fieldKey="text_scale"
+        label="Text Scale"
+        min={0}
+        step={0.05}
+        default={defaults.scale_multipliers?.text_scale ?? 1}
+        cssVar="--sf-text-scale"
+      />
+      <NumberField
+        section={SECTION}
+        fieldKey="text_display_scale"
+        label="Display Scale"
+        min={0}
+        step={0.05}
+        default={defaults.scale_multipliers?.text_display_scale ?? 1}
+        cssVar="--sf-text-display-scale"
+      />
+    </div>
+  </AdvancedSection>
 </section>
 
 <style>

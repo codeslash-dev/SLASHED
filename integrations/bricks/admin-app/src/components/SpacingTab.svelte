@@ -9,6 +9,8 @@
   import { meta } from '../lib/stores.svelte.js';
   import NumberField from './NumberField.svelte';
   import TextField from './TextField.svelte';
+  import AdvancedSection from './AdvancedSection.svelte';
+  import SpacingPreview from './SpacingPreview.svelte';
 
   const SECTION = 'spacing';
   const defaults = meta.defaults?.[SECTION] ?? {};
@@ -39,22 +41,30 @@
       default={defaults.space_scale ?? 1}
       cssVar="--sf-space-scale"
     />
-
-    {#each aliases as alias (alias.key)}
-      <TextField
-        section={SECTION}
-        fieldKey={alias.key}
-        label={alias.label}
-        default={defaults[alias.key] ?? ''}
-        cssVar={alias.cssVar}
-        mono
-      />
-    {/each}
   </div>
+
+  <AdvancedSection>
+    <h2 class="group-heading">Space Aliases</h2>
+    <div class="rows">
+      {#each aliases as alias (alias.key)}
+        <TextField
+          section={SECTION}
+          fieldKey={alias.key}
+          label={alias.label}
+          default={defaults[alias.key] ?? ''}
+          cssVar={alias.cssVar}
+          mono
+        />
+      {/each}
+    </div>
+  </AdvancedSection>
+
+  <SpacingPreview />
 </section>
 
 <style>
   h2 { margin-top: 0; }
+  .group-heading { margin-top: 0; }
   .rows {
     border: 1px solid #f0f0f1;
     border-radius: 4px;
