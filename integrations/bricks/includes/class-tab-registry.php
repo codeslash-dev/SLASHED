@@ -76,6 +76,7 @@ class Slashed_Bricks_Tab_Registry {
 			'export'     => 'Export / Import',
 			'hooks'      => 'Hooks',
 			'cheatsheet' => 'Cheatsheet',
+			'wcag'       => 'WCAG',
 		);
 	}
 
