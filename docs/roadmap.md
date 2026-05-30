@@ -38,17 +38,23 @@ These items are planned as part of the path to a stable v1.0 release.
 
 ### Bricks Integration
 
-- **reBEMer v1 completion** — wire up `applyPlan()` with the snapshot/rollback
-  machinery from the design spec (§10). Ensure all mutations flow through
-  Bricks' standard API so Bricks' own Ctrl-Z undoes the entire operation as a
-  single step. Remove the in-panel ring buffer from scope — Bricks' native undo
-  is sufficient.
+- **reBEMer v1 completion** — two distinct goals:
+  1. **Atomic apply via Bricks' mutation API** — route all `applyPlan()` mutations
+     through Bricks' standard element mutation API so Bricks' own Ctrl-Z treats the
+     entire operation as a single undoable step. No custom undo stack needed.
+  2. **Internal snapshot/rollback for error recovery** — if `applyPlan()` throws
+     mid-way, the pre-apply snapshot is restored silently so the user is never left
+     with a half-applied rename. This is invisible to users; it is not a user-facing
+     undo feature.
+  The `undo.js` in-panel ring buffer is removed from scope entirely.
 
-- **Color contrast reference table** — generate a `contrast-reference.json` at
-  build time computing WCAG AA/AAA ratios between semantic foreground and
-  background tokens in both light and dark modes. Surface as a tab in the admin
-  settings SPA: a matrix of "foreground × background → pass / fail" for users
-  to consult when choosing tokens.
+- **Color contrast reference — dynamic, user-aware** — a tab in the admin settings
+  SPA showing WCAG AA/AAA contrast ratios for every semantic foreground/background
+  token pair, in both light and dark modes, computed against the user's *current
+  saved token overrides* (not hardcoded defaults). Updates live as the user adjusts
+  color tokens before saving. Powered by `class-color-resolver.php` (which already
+  resolves OKLCH/alias chains to hex for palette swatches) exposed via a REST
+  endpoint or included in the inventory payload.
 
 - **Class documentation tooltips** — extract `docs/classes.md` data into a
   `data/classes.json` (generated at build time). When a new "Show class hints"
