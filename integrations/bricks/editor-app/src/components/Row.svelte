@@ -40,6 +40,7 @@
 
   const showModifier = $derived(mode === 'modifier');
   const showMigrate = $derived(mode === 'migrate');
+  const showRename = $derived(mode === 'rename');
   const prefix = $derived(!isRoot && blockName ? `${blockName}__` : '');
 
   /** Style suggested vs user-typed names differently so the user can
@@ -119,6 +120,16 @@
       />
     {/if}
   </div>
+
+  {#if showModifier && row.include && !row.modifier}
+    <p class="rebemer-row__warn" role="note">Enter a modifier name — the base class will be added automatically if absent.</p>
+  {/if}
+
+  {#if showRename && row.include && row.currentClassCount === 0}
+    <p class="rebemer-row__warn" role="note">This element has no existing classes. Rename will create a new class instead.</p>
+  {:else if showRename && row.include && row.currentClassCount > 1}
+    <p class="rebemer-row__info" role="note">This element has {row.currentClassCount} classes. Only the first will be renamed; modifiers matching it are renamed too.</p>
+  {/if}
 
   {#if existingClassMatch}
     <p class="rebemer-row__recommend" role="note">

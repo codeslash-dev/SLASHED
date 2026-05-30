@@ -160,6 +160,17 @@ li[data-id]:focus-within > .rebemer-badge-host {
 .rebemer-field select:focus,
 .rebemer-field input:focus { outline: 1px solid var(--rebemer-accent); }
 
+/* Mode hint — one-liner describing the active operation. */
+.rebemer-panel__mode-hint {
+  margin: 0;
+  padding: 5px 14px;
+  font-size: 11px;
+  color: var(--rebemer-fg-muted);
+  background: var(--rebemer-bg);
+  border-bottom: 1px solid var(--rebemer-border);
+  line-height: 1.4;
+}
+
 /* Notice strip — currently used for the migrate-mode summary, but
    structured so future preflight warnings can reuse it. */
 .rebemer-panel__notice {
@@ -244,6 +255,27 @@ li[data-id]:focus-within > .rebemer-badge-host {
   border-radius: 2px;
   font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color: var(--rebemer-accent);
+}
+
+/* Inline warn/info notes on individual rows. */
+.rebemer-row__warn,
+.rebemer-row__info {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 5px 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  border-radius: 2px;
+}
+.rebemer-row__warn {
+  background: rgba(226,185,59,.12);
+  border-left: 2px solid #e2b93b;
+  color: var(--rebemer-fg);
+}
+.rebemer-row__info {
+  background: rgba(99,179,237,.10);
+  border-left: 2px solid #63b3ed;
+  color: var(--rebemer-fg-muted);
 }
 
 /* Migrate-mode chip strip. */

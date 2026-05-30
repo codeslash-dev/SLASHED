@@ -259,13 +259,53 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
       let nextIds;
       switch (mode) {
         case 'add':
-        case 'modifier':
         case 'migrate':
           nextIds = currentIds.includes(newClassId)
             ? currentIds
             : [...currentIds, newClassId];
           break;
-        case 'rename':
+
+        case 'modifier': {
+          // Guarantee the base class (without the --modifier suffix) is
+          // also attached — a modifier alone is meaningless without it.
+          const modMarker = op.finalClass.indexOf('--');
+          const baseClassName = modMarker >= 0 ? op.finalClass.slice(0, modMarker) : null;
+          let ids = [...currentIds];
+          if (baseClassName) {
+            const baseId = api.upsertGlobalClass(baseClassName, {});
+            if (!ids.includes(baseId)) ids.push(baseId);
+          }
+          nextIds = ids.includes(newClassId) ? ids : [...ids, newClassId];
+          break;
+        }
+
+        case 'rename': {
+          // Start with the renamed base class.
+          const renamedIds = [newClassId];
+          // Any modifier classes on the element that were built from the
+          // old base class name (e.g. card__title--lg) get renamed to use
+          // the new base class name (e.g. card__heading--lg).
+          const oldBase = currentIds.length > 0
+            ? globalClasses.find(c => c && c.id === currentIds[0])
+            : null;
+          if (oldBase) {
+            const oldPrefix = oldBase.name + '--';
+            for (let i = 1; i < currentIds.length; i++) {
+              const old = globalClasses.find(c => c && c.id === currentIds[i]);
+              if (!old) continue;
+              if (old.name.startsWith(oldPrefix)) {
+                const suffix = old.name.slice(oldBase.name.length); // '--lg' etc.
+                const modSeed = old.settings ? JSON.parse(JSON.stringify(old.settings)) : {};
+                renamedIds.push(api.upsertGlobalClass(op.finalClass + suffix, modSeed));
+              } else {
+                renamedIds.push(currentIds[i]); // unrelated class — keep
+              }
+            }
+          }
+          nextIds = renamedIds;
+          break;
+        }
+
         case 'replace':
           nextIds = [newClassId];
           break;
