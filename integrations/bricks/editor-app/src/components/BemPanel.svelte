@@ -33,6 +33,14 @@
 
   let { rootId, onClose } = $props();
 
+  const MODE_HINTS = {
+    add:      'Attaches a new BEM class to each element without removing any existing classes.',
+    rename:   'Replaces the first existing class with a new name, seeding its settings from the old class.',
+    replace:  'Replaces ALL existing classes with a single new BEM class (clean slate, no settings carried over).',
+    modifier: 'Appends a --modifier variant. The base class is auto-added to the element if absent.',
+    migrate:  'Lifts inline element styles (padding, color, typography, etc.) into a new global class.',
+  };
+
   let mode = $state('add');
   let syncLabels = $state(true);
   let rows = $state([]);
@@ -125,6 +133,9 @@
         suggestedFrom,
         migrateKeys: pickMigratableKeys(el.settings),
         skippedKeys: pickSkippedKeys(el.settings),
+        currentClassCount: Array.isArray(el.settings?._cssGlobalClasses)
+          ? el.settings._cssGlobalClasses.filter(id => typeof id === 'string' && id.length > 0).length
+          : 0,
       };
     });
 
@@ -250,14 +261,19 @@
       <span>Sync labels</span>
     </label>
   </section>
+  <p class="rebemer-panel__mode-hint">{MODE_HINTS[mode]}</p>
 
   {#if migrateSummary}
     <aside
       class="rebemer-panel__notice"
-      class:rebemer-panel__notice--warn={migrateSummary.willSkip > 0}
+      class:rebemer-panel__notice--warn={migrateSummary.willSkip > 0 || migrateSummary.willMigrate === 0}
       role="status"
     >
-      Will migrate <strong>{migrateSummary.willMigrate}</strong> style key{migrateSummary.willMigrate === 1 ? '' : 's'} into new classes.
+      {#if migrateSummary.willMigrate === 0}
+        No migratable style keys found on any included element. Apply will attach empty classes.
+      {:else}
+        Will migrate <strong>{migrateSummary.willMigrate}</strong> style key{migrateSummary.willMigrate === 1 ? '' : 's'} into new classes.
+      {/if}
       {#if migrateSummary.willSkip > 0}
         <span class="rebemer-panel__notice-skip">
           {migrateSummary.willSkip} key{migrateSummary.willSkip === 1 ? '' : 's'} not on the allowlist will stay on the element.
