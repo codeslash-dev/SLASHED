@@ -64,9 +64,13 @@ class Slashed_Bricks_Fonts_REST {
 				if ( ! is_array( $font ) ) {
 					continue;
 				}
-				// Bricks stores the CSS font-family name in 'font_family';
-				// fall back to 'family' or 'title' for schema variants.
-				$family = $font['font_family'] ?? $font['family'] ?? null;
+				// Bricks schema variants across versions:
+				//   font_family — explicit CSS family name (most reliable)
+				//   family      — alternative key used in some versions
+				//   title       — display name; doubles as the CSS family name
+				//                 for fonts downloaded via Bricks' local-Google-
+				//                 Fonts feature (no separate font_family key).
+				$family = $font['font_family'] ?? $font['family'] ?? $font['title'] ?? $font['name'] ?? null;
 				$label  = $font['title'] ?? $font['name'] ?? $family;
 				if ( ! $family || ! is_string( $family ) ) {
 					continue;
@@ -86,9 +90,9 @@ class Slashed_Bricks_Fonts_REST {
 				if ( ! is_array( $font ) ) {
 					continue;
 				}
-				// Bricks stores the family name in 'family'; 'name' is a
-				// display label used in older schema versions.
-				$family = $font['family'] ?? $font['name'] ?? null;
+				// Bricks stores the family name in 'family'; 'name' and
+				// 'title' are display labels used in schema variants.
+				$family = $font['family'] ?? $font['font_family'] ?? $font['name'] ?? $font['title'] ?? null;
 				if ( ! $family || ! is_string( $family ) ) {
 					continue;
 				}
