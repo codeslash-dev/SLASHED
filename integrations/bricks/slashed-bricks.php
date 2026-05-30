@@ -252,6 +252,7 @@ function slashed_bricks_rebemer_init() {
         return;
     }
 
+    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-rebemer-enqueue.php';
     new Slashed_Bricks_ReBEMer_Enqueue();
 }
