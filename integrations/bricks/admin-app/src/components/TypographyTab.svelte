@@ -15,6 +15,7 @@
    */
   import { meta } from '../lib/stores.svelte.js';
   import TextField from './TextField.svelte';
+  import FontFamilyField from './FontFamilyField.svelte';
   import NumberField from './NumberField.svelte';
   import TypographyPreview from './TypographyPreview.svelte';
   import AdvancedSection from './AdvancedSection.svelte';
@@ -44,13 +45,12 @@
   <h2>Font Families</h2>
   <div class="rows">
     {#each Object.entries(basicFamilies) as [name, defaultStack] (name)}
-      <TextField
+      <FontFamilyField
         section={SECTION}
         fieldKey={`font_${name}`}
         label={cap(name)}
         default={defaultStack}
         cssVar={`--sf-font-${name}`}
-        width="420px"
       />
     {/each}
   </div>
@@ -97,13 +97,12 @@
     <h2 class="group-heading">Additional Font Families</h2>
     <div class="rows">
       {#each Object.entries(advancedFamilies) as [name, defaultStack] (name)}
-        <TextField
+        <FontFamilyField
           section={SECTION}
           fieldKey={`font_${name}`}
           label={cap(name)}
           default={defaultStack}
           cssVar={`--sf-font-${name}`}
-          width="420px"
         />
       {/each}
     </div>
