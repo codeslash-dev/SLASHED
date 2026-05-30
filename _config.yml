@@ -1,1 +1,5 @@
-render_with_liquid: false
+defaults:
+  - scope:
+      path: "docs"
+    values:
+      render_with_liquid: false
