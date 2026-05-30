@@ -108,7 +108,7 @@
     --sf-stack-gap: var(--sf-space-xl);
   } */
 
-  /* Example: all prose inside .editorial uses a narrower measure */
+  /* Example: all prose inside .editorial uses tighter paragraph spacing */
   /* .editorial .sf-prose {
     --sf-prose-paragraph: var(--sf-space-l);
   } */

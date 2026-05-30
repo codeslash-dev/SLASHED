@@ -41,6 +41,7 @@ const ALL_SOURCE_FILES = [
   'core/base.css',
   'core/reset.css',
   'core/themes.css',
+  'optional/legacy.css',
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -128,7 +129,10 @@ function extractUnprefixedClasses() {
 function findUnusedTokens(tokens) {
   // Build the full text corpus of all source files combined.
   const corpus = ALL_SOURCE_FILES.map(rel => {
-    try { return stripComments(readFile(rel)); } catch { return ''; }
+    try { return stripComments(readFile(rel)); } catch (err) {
+      console.warn(`[audit] warning: could not read ${rel} for unused-token check: ${err.message}`);
+      return '';
+    }
   }).join('\n');
 
   // Collect @property-registered names — these are never flagged.
@@ -145,7 +149,8 @@ function findUnusedTokens(tokens) {
   for (const name of tokens) {
     if (propertyRegistered.has(name)) continue;
     // Match var(--sf-name) with optional whitespace — covers var( --sf-foo )
-    const pattern = new RegExp(`var\\(\\s*${name.replace(/[-]/g, '\\-')}[\\s,)]`);
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`var\\(\\s*${escaped}[\\s,)]`);
     if (!pattern.test(corpus)) {
       unused.push(name);
     }
