@@ -79,6 +79,27 @@ class Slashed_Bricks_Fonts_REST {
 			}
 		}
 
+		// ── Google Fonts added via Bricks > Settings > Google Fonts ────
+		$google = get_option( 'bricks_google_fonts', array() );
+		if ( is_array( $google ) ) {
+			foreach ( $google as $font ) {
+				if ( ! is_array( $font ) ) {
+					continue;
+				}
+				// Bricks stores the family name in 'family'; 'name' is a
+				// display label used in older schema versions.
+				$family = $font['family'] ?? $font['name'] ?? null;
+				if ( ! $family || ! is_string( $family ) ) {
+					continue;
+				}
+				$fonts[] = array(
+					'family' => sanitize_text_field( $family ),
+					'label'  => sanitize_text_field( $family ),
+					'source' => 'google',
+				);
+			}
+		}
+
 		// ── Adobe Fonts (Typekit) configured in Bricks ──────────────────
 		$adobe = get_option( 'bricks_adobe_fonts', array() );
 		if ( is_array( $adobe ) && ! empty( $adobe['fonts'] ) && is_array( $adobe['fonts'] ) ) {

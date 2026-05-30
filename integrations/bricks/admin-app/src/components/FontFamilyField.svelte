@@ -176,7 +176,7 @@
       >
         {#each bricksFonts as font (font.family)}
           <option value={font.family}>
-            {font.label}{font.source === 'adobe' ? ' (Adobe)' : ''}
+            {font.label}{font.source === 'adobe' ? ' (Adobe)' : font.source === 'google' ? ' (Google)' : ''}
           </option>
         {/each}
       </select>
