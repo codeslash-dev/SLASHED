@@ -48,6 +48,7 @@ export function probe() {
     return false;
   }
   _state = candidate;
+  _history = null; // reset so probeHistory() re-probes against the live app
   return true;
 }
 
