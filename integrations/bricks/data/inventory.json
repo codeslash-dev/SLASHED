@@ -2,7 +2,7 @@
   "_meta": {
     "source": "source (core/ + optional/ token and class files)",
     "counts": {
-      "variables": 623,
+      "variables": 631,
       "sf_classes": 158,
       "is_classes": 40
     }
@@ -505,6 +505,14 @@
     "--sf-print-base-size",
     "--sf-print-page-margin",
     "--sf-print-page-size",
+    "--sf-prose-block-margin",
+    "--sf-prose-figcaption-size",
+    "--sf-prose-figure-margin",
+    "--sf-prose-heading-gap",
+    "--sf-prose-list-gap",
+    "--sf-prose-marker-color",
+    "--sf-prose-media-margin",
+    "--sf-prose-media-radius",
     "--sf-prose-paragraph",
     "--sf-radius-2xl",
     "--sf-radius-3xl",

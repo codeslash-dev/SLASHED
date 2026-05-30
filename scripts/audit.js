@@ -18,8 +18,10 @@
  *   6. Source files only — never dist
  *
  * Usage:
- *   node scripts/audit.js           — write docs/registry.json
- *   node scripts/audit.js --check   — validate (exit 1 if stale or wrong)
+ *   node scripts/audit.js              — write docs/registry.json
+ *   node scripts/audit.js --check      — validate (exit 1 if stale or wrong)
+ *   node scripts/audit.js --unused     — report tokens declared but never consumed
+ *                                        by the framework itself (warnings only)
  */
 
 'use strict';
@@ -30,6 +32,17 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 
 const { TOKEN_FILES, CLASS_FILES } = require('./registry-sources');
+
+// All framework source files — token files + class files + everything else
+// in core/ and optional/ — used for the unused-token cross-reference.
+const ALL_SOURCE_FILES = [
+  ...TOKEN_FILES,
+  ...CLASS_FILES,
+  'core/base.css',
+  'core/reset.css',
+  'core/themes.css',
+  'optional/legacy.css',
+];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -101,7 +114,49 @@ function extractUnprefixedClasses() {
   return [...names].sort();
 }
 
-// ── Main ─────────────────────────────────────────────────────────────────────
+// ── Unused token detection ───────────────────────────────────────────────────
+// Cross-references declared tokens against all framework source files.
+// A token is "unused by the framework" when it never appears as var(--sf-name)
+// in any source file. This is a WARNING, not an error — many tokens are
+// intentionally public API knobs consumed by consumers, not by the framework.
+//
+// Exceptions (never flagged as unused):
+//   - Tokens declared via @property (typed registrations; their usage is the
+//     registration itself, not a var() call)
+//   - Tokens consumed only as fallback values inside other var() calls
+//     (e.g. var(--sf-foo, var(--sf-bar)) — --sf-bar is a valid public default)
+
+function findUnusedTokens(tokens) {
+  // Build the full text corpus of all source files combined.
+  const corpus = ALL_SOURCE_FILES.map(rel => {
+    try { return stripComments(readFile(rel)); } catch (err) {
+      console.warn(`[audit] warning: could not read ${rel} for unused-token check: ${err.message}`);
+      return '';
+    }
+  }).join('\n');
+
+  // Collect @property-registered names — these are never flagged.
+  const propertyRegistered = new Set();
+  for (const rel of TOKEN_FILES) {
+    const css = stripComments(readFile(rel));
+    for (const m of css.matchAll(/@property\s+(--sf-[\w-]+)/g)) {
+      propertyRegistered.add(m[1]);
+    }
+  }
+
+  // For each declared token, check whether var(--sf-name) appears anywhere.
+  const unused = [];
+  for (const name of tokens) {
+    if (propertyRegistered.has(name)) continue;
+    // Match var(--sf-name) with optional whitespace — covers var( --sf-foo )
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`var\\(\\s*${escaped}[\\s,)]`);
+    if (!pattern.test(corpus)) {
+      unused.push(name);
+    }
+  }
+  return unused;
+}
 
 const tokens           = extractTokens();
 const sfClasses        = extractClasses('sf-');
@@ -125,6 +180,18 @@ const registry = {
 };
 
 const OUT = path.join(ROOT, 'docs', 'registry.json');
+
+if (process.argv.includes('--unused')) {
+  const unused = findUnusedTokens(tokens);
+  if (unused.length === 0) {
+    console.log('[audit] unused-tokens: none — all declared tokens are consumed by the framework.');
+  } else {
+    console.log(`[audit] unused-tokens: ${unused.length} token(s) declared but not consumed by the framework.`);
+    console.log('        These may be intentional public API knobs for consumers.');
+    for (const name of unused) console.log(`  ${name}`);
+  }
+  process.exit(0);
+}
 
 if (process.argv.includes('--check')) {
   if (!fs.existsSync(OUT)) {

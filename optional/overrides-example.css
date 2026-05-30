@@ -1,0 +1,131 @@
+/* ============================================================
+   SLASHED — optional/overrides-example.css   (COPY & CUSTOMISE)
+   @layer slashed.overrides
+
+   The overrides layer is declared last in SLASHED's 15-layer
+   cascade — it wins against every other layer unconditionally.
+   Use it for site-specific rules that must survive framework
+   updates without specificity tricks.
+
+   NOT part of any bundle — this is a docs/reference file only.
+   Copy it into your project, rename it, and load it AFTER the
+   SLASHED bundle.
+
+   Sections:
+     1. When to use the overrides layer vs other layers
+     2. Element-level overrides
+     3. Class-level overrides
+     4. Per-primitive instance overrides (inline tokens)
+     5. Third-party integration overrides
+
+   See docs/theming.md for token customisation (different concern).
+   ============================================================ */
+
+/* IMPORTANT: every rule in this file must be wrapped in
+   @layer slashed.overrides { … }. Without the layer wrapper
+   your CSS sits in the implicit (highest-priority) layer and
+   will already win — but it also becomes non-portable and
+   harder to reason about. Always use the wrapper. */
+
+@layer slashed.overrides {
+
+  /* ===========================================================
+     1. WHEN TO USE THIS LAYER
+     ===========================================================
+     Use slashed.overrides when:
+       · A framework rule targets an element you can't add a
+         class to (e.g. CMS-generated markup, third-party widgets)
+       · A framework macro or state class produces output you want
+         to adjust for your site without forking the source
+       · A third-party plugin adds CSS that conflicts with SLASHED
+
+     Do NOT use slashed.overrides for:
+       · Token rebrandings — use @layer slashed.themes instead
+         (optional/theme-example.css shows how)
+       · Project BEM components — those belong in your own
+         unlayered CSS or a dedicated project layer declared
+         AFTER slashed.overrides in your @layer statement
+  */
+
+  /* ===========================================================
+     2. ELEMENT-LEVEL OVERRIDES
+     ===========================================================
+     Adjust framework base styles for specific element types in
+     your site without touching core/base.css. */
+
+  /* Example: tighten heading line-height site-wide */
+  /* h1, h2, h3 {
+    line-height: 1.1;
+  } */
+
+  /* Example: remove underline from links in your navigation */
+  /* .site-nav a {
+    text-decoration: none;
+  } */
+
+  /* ===========================================================
+     3. CLASS-LEVEL OVERRIDES
+     ===========================================================
+     Adjust the output of .sf-* macro or layout classes for your
+     site's specific context. Because this layer is last, a single
+     class selector here wins over the framework's rules. */
+
+  /* Example: tighten prose max-width for a narrow editorial layout */
+  /* .sf-prose {
+    max-width: 55ch;
+  } */
+
+  /* Example: use a brand accent as the prose marker colour instead
+     of the default --sf-prose-marker-color token */
+  /* .sf-prose ::marker {
+    color: var(--sf-color-action);
+  } */
+
+  /* Example: disable the scroll shadow on mobile only */
+  /* @media (max-width: 40rem) {
+    .sf-scroll-shadow {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  } */
+
+  /* ===========================================================
+     4. PER-PRIMITIVE INSTANCE OVERRIDES (inline tokens)
+     ===========================================================
+     Most per-instance customisation should use inline style tokens
+     rather than a CSS rule — this keeps the HTML self-documenting:
+
+       <div class="sf-stack" style="--sf-stack-gap: var(--sf-space-xl)">
+       <div class="sf-grid"  style="--sf-grid-min: 20rem; --sf-fit: auto-fit">
+       <p   class="sf-prose" style="--sf-prose-marker-color: var(--sf-color-action)">
+
+     When you need the same per-instance override applied to EVERY
+     occurrence of a primitive within a specific section, scope it
+     here instead of repeating the inline style: */
+
+  /* Example: all stacks inside .content-area use wider gaps */
+  /* .content-area .sf-stack {
+    --sf-stack-gap: var(--sf-space-xl);
+  } */
+
+  /* Example: all prose inside .editorial uses tighter paragraph spacing */
+  /* .editorial .sf-prose {
+    --sf-prose-paragraph: var(--sf-space-l);
+  } */
+
+  /* ===========================================================
+     5. THIRD-PARTY INTEGRATION OVERRIDES
+     ===========================================================
+     Third-party plugins (Bricks, WooCommerce, Gravity Forms, etc.)
+     often add CSS outside any @layer, which puts them in the
+     implicit layer — above all SLASHED layers. If a plugin's styles
+     conflict with SLASHED, override them here rather than increasing
+     specificity or using !important. */
+
+  /* Example: reset a WooCommerce button that picks up wrong colours */
+  /* .woocommerce button.button {
+    background-color: var(--sf-color-action);
+    color: var(--sf-color-text--on-action);
+  } */
+
+}
