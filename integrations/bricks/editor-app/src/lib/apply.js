@@ -209,9 +209,11 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
     snapshot.set(op.row.id, entry);
   }
 
-  // 5. Apply each op against live state.
+  // 5. Apply each op against live state, wrapped in a single undo batch
+  //    so Ctrl-Z reverses the whole subtree apply in one step.
   let count = 0;
   try {
+    api.batchMutations(() => {
     for (const op of ops) {
       const el = api.findElement(op.row.id);
       if (!el) continue;
@@ -287,6 +289,7 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
 
       count++;
     }
+    }); // end batchMutations
   } catch (err) {
     // Roll back every element we touched to its pre-apply state.
     // upsertGlobalClass side-effects (new global classes) are not removed

@@ -13,6 +13,20 @@ const AREAS = ['header', 'content', 'footer'];
 let _state = null;
 
 /**
+ * Cached reference to the Bricks undo history API, resolved once on
+ * first use. `null` means not yet probed; `false` means probed and not
+ * found (graceful degradation); an object means found and ready.
+ *
+ * Shape when found: { pause: fn, resume: fn }
+ *
+ * Bricks does not publish a formal JS API, so we probe a small set of
+ * known signatures. If none match, applyToSubtree() still works — it
+ * just produces one undo step per element mutation instead of one
+ * step for the whole subtree apply.
+ */
+let _history = null;
+
+/**
  * Generate a unique 8-char hex id that doesn't collide with existing ids.
  */
 function newId(existingIds) {
@@ -34,10 +48,90 @@ export function probe() {
     return false;
   }
   _state = candidate;
+  _history = null; // reset so probeHistory() re-probes against the live app
   return true;
 }
 
 export function isReady() { return _state !== null; }
+
+/**
+ * Probe for a Bricks undo-history batch API.
+ *
+ * Bricks maintains a history stack so the user can Ctrl-Z changes.
+ * When multiple reactive mutations happen synchronously, Vue 3 batches
+ * DOM updates (via queueMicrotask) but the Bricks history watcher may
+ * fire synchronously (flush:'sync') producing one undo step per
+ * mutation. This probe tries three known API shapes:
+ *
+ *   1. $_state.$history.pause / resume  — older Bricks (< 1.9)
+ *   2. globalProperties.$_bricksData.history.add  — Bricks 1.9+
+ *   3. globalProperties.addHistory / addUndoStep  — hypothetical
+ *
+ * If nothing is found, `batchMutations(fn)` falls back to calling
+ * `fn()` directly. The apply still works; the only difference is that
+ * Ctrl-Z will undo one element at a time instead of the whole subtree.
+ *
+ * @returns {{ pause: function, resume: function } | false}
+ */
+function probeHistory() {
+  if (_history !== null) return _history;
+
+  const app = typeof document !== 'undefined'
+    ? document.querySelector(APP_SELECTOR)?.__vue_app__
+    : null;
+
+  if (!app) { _history = false; return false; }
+
+  const gp = app.config?.globalProperties ?? {};
+
+  // Shape 1: history object on $_state with pause/resume
+  if (typeof _state?.$history?.pause === 'function' &&
+      typeof _state?.$history?.resume === 'function') {
+    _history = { pause: () => _state.$history.pause(), resume: () => _state.$history.resume() };
+    return _history;
+  }
+
+  // Shape 2: bricksData.history — Bricks 1.9+ internal store
+  const bd = gp.$_bricksData ?? gp.bricksData;
+  if (typeof bd?.history?.pause === 'function' &&
+      typeof bd?.history?.resume === 'function') {
+    _history = { pause: () => bd.history.pause(), resume: () => bd.history.resume() };
+    return _history;
+  }
+
+  // Shape 3: top-level pause/resume on globalProperties
+  if (typeof gp.pauseHistory === 'function' && typeof gp.resumeHistory === 'function') {
+    _history = { pause: () => gp.pauseHistory(), resume: () => gp.resumeHistory() };
+    return _history;
+  }
+
+  _history = false;
+  return false;
+}
+
+/**
+ * Run `fn` as a single logical undo step.
+ *
+ * Pauses the Bricks history tracker before calling `fn`, then resumes
+ * it after. If no history API is found, calls `fn()` directly —
+ * Vue 3's async scheduling may still batch the mutations into one
+ * undo step depending on the Bricks version.
+ *
+ * @param {function} fn - Synchronous mutation function.
+ */
+export function batchMutations(fn) {
+  const hist = probeHistory();
+  if (hist) {
+    try {
+      hist.pause();
+      fn();
+    } finally {
+      hist.resume();
+    }
+  } else {
+    fn();
+  }
+}
 
 export function findElement(id) {
   if (!_state || !id) return null;
