@@ -43,7 +43,9 @@
  *                         the panel for preview-driven UI hints.
  *   applyToSubtree(...)   Impure: builds the plan, pre-validates
  *                         migrate-mode conflicts against live state,
- *                         then mutates the Bricks Vue state op by op.
+ *                         snapshots current element state, then mutates
+ *                         the Bricks Vue state op by op. Rolls back all
+ *                         touched elements on any mid-apply error.
  *
  * @module apply
  */
@@ -184,7 +186,30 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
     if (!validation.ok) return validation;
   }
 
-  // 4. Apply each op against live state.
+  // 4. Snapshot current state so we can roll back on mid-apply failure.
+  //    classIds and labels are cheap to capture; for migrate mode we also
+  //    save the exact setting keys that removeMigratedKeys will delete.
+  const snapshot = new Map(); // id -> { classIds, label, migrateKeys? }
+  for (const op of ops) {
+    const el = api.findElement(op.row.id);
+    if (!el) continue;
+    const entry = {
+      classIds: readClassIds(el.settings).slice(),
+      label: (syncLabels && mode !== 'modifier') ? (el.label ?? '') : null,
+    };
+    if (mode === 'migrate' && Array.isArray(op.row.migrateKeys)) {
+      const saved = {};
+      for (const key of op.row.migrateKeys) {
+        if (Object.prototype.hasOwnProperty.call(el.settings || {}, key)) {
+          saved[key] = JSON.parse(JSON.stringify(el.settings[key]));
+        }
+      }
+      entry.migrateKeys = saved;
+    }
+    snapshot.set(op.row.id, entry);
+  }
+
+  // 5. Apply each op against live state.
   let count = 0;
   try {
     for (const op of ops) {
@@ -263,20 +288,25 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
       count++;
     }
   } catch (err) {
-    // Mid-apply rollback is spec-only (see docs/rebemer.md §10) and
-    // not yet implemented. Until it is, the best we can do for partial
-    // applies is (a) log so the user can see what happened, (b) tell
-    // them via the toast how many rows succeeded, and (c) point them
-    // at Bricks' own undo. Callers may prefer to surface this as a
-    // bigger destructive-rollback dialog.
+    // Roll back every element we touched to its pre-apply state.
+    // upsertGlobalClass side-effects (new global classes) are not removed
+    // because unused classes are harmless and removal would require tracking
+    // which were newly created vs pre-existing.
+    for (const [id, snap] of snapshot) {
+      try {
+        api.setElementClasses(id, snap.classIds);
+        if (snap.migrateKeys) {
+          const el = api.findElement(id);
+          if (el && el.settings) Object.assign(el.settings, snap.migrateKeys);
+        }
+        if (snap.label !== null) api.setElementLabel(id, snap.label);
+      } catch {
+        // Best-effort; a failing rollback step shouldn't mask the original error.
+      }
+    }
     const message = err instanceof Error ? err.message : String(err);
-    console.warn('[reBEMer] apply halted after', count, 'mutation(s):', message);
-    return {
-      ok: false,
-      error: count > 0
-        ? `Applied to ${count} element${count !== 1 ? 's' : ''} before halting: ${message}. State is partially applied — undo via Bricks (Cmd-Z) before retrying.`
-        : `Operation failed: ${message}`,
-    };
+    console.warn('[reBEMer] apply failed after', count, 'mutation(s), rolled back:', message);
+    return { ok: false, error: `Operation failed and was rolled back: ${message}` };
   }
 
   if (count === 0) {
