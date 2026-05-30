@@ -3,7 +3,7 @@
  * Plugin Name: SLASHED for Bricks
  * Plugin URI: https://github.com/codeslash-dev/SLASHED
  * Description: Integrates the SLASHED cascade-layer CSS framework with Bricks Builder - providing CSS variables, utility classes, and color palette synchronization.
- * Version: 0.4.13
+ * Version: 0.4.14
  * Author: SLASHED
  * Author URI: https://github.com/codeslash-dev/SLASHED
  * License: MIT
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin constants.
  */
-define( 'SLASHED_BRICKS_VERSION', '0.4.13' );
+define( 'SLASHED_BRICKS_VERSION', '0.4.14' );
 define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
 
@@ -36,7 +36,7 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
  *
  * Override per-site with the 'slashed_bricks/css_bundle_url' filter.
  */
-define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.13' );
+define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.14' );
 
 /**
  * Token Store is loaded early so slashed_bricks_get_css_bundle() can call
