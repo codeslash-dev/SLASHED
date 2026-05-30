@@ -61,6 +61,7 @@
     --sf-prose-heading-gap:      var(--sf-space-s);
     --sf-prose-list-gap:         var(--sf-space-xs);
     --sf-prose-block-margin:     var(--sf-space-m);
+    --sf-prose-media-margin:     var(--sf-space-m);
     --sf-prose-media-radius:     var(--sf-radius-m);
     --sf-prose-figure-margin:    var(--sf-space-l);
     --sf-prose-marker-color:     var(--sf-color-primary);

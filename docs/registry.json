@@ -19,7 +19,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 630,
+      "tokens": 631,
       "sf_classes": 158,
       "is_classes": 40
     }
@@ -528,6 +528,7 @@
     "--sf-prose-heading-gap",
     "--sf-prose-list-gap",
     "--sf-prose-marker-color",
+    "--sf-prose-media-margin",
     "--sf-prose-media-radius",
     "--sf-prose-paragraph",
     "--sf-radius-2xl",

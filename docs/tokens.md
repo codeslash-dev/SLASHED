@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**630 tokens.** Every `--sf-*` custom property and its default value. See
+**631 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
 contract and naming conventions (a DEPRECATED tier will be introduced
 post-0.5.0 when tokens are retired), and [theming.md](theming.md) for the
@@ -445,7 +445,7 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-12 tokens.
+13 tokens.
 
 | Token | Default |
 |---|---|
@@ -458,6 +458,7 @@ rebrand workflow.
 | `--sf-prose-heading-gap` | `var(--sf-space-s)` |
 | `--sf-prose-list-gap` | `var(--sf-space-xs)` |
 | `--sf-prose-marker-color` | `var(--sf-color-primary)` |
+| `--sf-prose-media-margin` | `var(--sf-space-m)` |
 | `--sf-prose-media-radius` | `var(--sf-radius-m)` |
 | `--sf-scroll-shadow-size` | `2rem` |
 | `--sf-truncate-suffix` | `"\2026"` |
