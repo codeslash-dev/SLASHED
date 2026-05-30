@@ -2,8 +2,9 @@
   import { meta } from '../lib/stores.svelte.js';
   import { saveSettings } from '../lib/api.js';
 
-  let bundle = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
-  let fontSize = $state(meta.pluginSettings?.html_font_size ?? '');
+  let bundle          = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
+  let fontSize        = $state(meta.pluginSettings?.html_font_size ?? '');
+  let showClassHints  = $state(meta.pluginSettings?.show_class_hints ?? false);
   let saving = $state(false);
   let saved = $state(false);
   let error = $state('');
@@ -14,7 +15,7 @@
     saved = false;
     error = '';
     try {
-      await saveSettings({ css_bundle: bundle, html_font_size: fontSize });
+      await saveSettings({ css_bundle: bundle, html_font_size: fontSize, show_class_hints: showClassHints });
       saved = true;
       if (savedTimer) clearTimeout(savedTimer);
       savedTimer = setTimeout(() => { saved = false; savedTimer = null; }, 3000);
@@ -63,6 +64,21 @@
     </select>
     <p class="description">
       Override the HTML root font-size. Use this if Bricks forces a font-size you don't want.
+    </p>
+  </div>
+
+  <div class="field-row">
+    <label class="toggle-label" for="show-class-hints">
+      <input
+        id="show-class-hints"
+        type="checkbox"
+        bind:checked={showClassHints}
+      />
+      Show class hints in Bricks editor
+    </label>
+    <p class="description">
+      When enabled, hovering a SLASHED class in the Bricks class manager shows a short
+      description of what it does. Powered by <code>data/classes-hints.json</code>.
     </p>
   </div>
 

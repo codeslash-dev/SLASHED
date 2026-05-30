@@ -278,3 +278,97 @@ function slashed_bricks_missing_bricks_notice() {
     </div>
     <?php
 }
+
+// ─── Stale inventory / version detection ────────────────────────────────────
+
+/**
+ * Register a daily cron event to check for a newer framework release.
+ * Fires once on plugin load; wp_schedule_event is a no-op if already scheduled.
+ */
+function slashed_bricks_schedule_version_check() {
+	if ( ! wp_next_scheduled( 'slashed_bricks_version_check' ) ) {
+		wp_schedule_event( time(), 'daily', 'slashed_bricks_version_check' );
+	}
+}
+add_action( 'wp_loaded', 'slashed_bricks_schedule_version_check' );
+
+/**
+ * Cron callback: fetch the latest GitHub release tag and cache it.
+ * Uses the jsDelivr package metadata API (no auth, generous rate limit).
+ */
+function slashed_bricks_run_version_check() {
+	$url      = 'https://data.jsdelivr.com/v1/packages/gh/codeslash-dev/SLASHED';
+	$response = wp_remote_get(
+		$url,
+		array(
+			'timeout'    => 10,
+			'user-agent' => 'SLASHED-Bricks/' . SLASHED_BRICKS_VERSION . '; WordPress/' . get_bloginfo( 'version' ),
+		)
+	);
+
+	if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		return;
+	}
+
+	$body = json_decode( wp_remote_retrieve_body( $response ), true );
+	if ( ! is_array( $body ) || empty( $body['tags'] ) || ! is_array( $body['tags'] ) ) {
+		return;
+	}
+
+	// Tags are returned newest-first. Find the latest semver tag (vX.Y.Z).
+	$latest = null;
+	foreach ( $body['tags'] as $tag ) {
+		if ( isset( $tag['name'] ) && preg_match( '/^v\d+\.\d+\.\d+$/', $tag['name'] ) ) {
+			$latest = $tag['name'];
+			break;
+		}
+	}
+
+	if ( ! $latest ) {
+		return;
+	}
+
+	set_transient( 'slashed_bricks_latest_version', $latest, DAY_IN_SECONDS * 2 );
+}
+add_action( 'slashed_bricks_version_check', 'slashed_bricks_run_version_check' );
+
+/**
+ * Add a SLASHED widget to the WP Dashboard when the installed framework
+ * version is behind the latest released tag.
+ */
+function slashed_bricks_dashboard_setup() {
+	$latest  = get_transient( 'slashed_bricks_latest_version' );
+	$current = ltrim( SLASHED_BRICKS_CSS_REF, 'v' );
+
+	if ( ! $latest || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	// Trim leading 'v' for version_compare.
+	$latest_clean = ltrim( $latest, 'v' );
+
+	if ( version_compare( $latest_clean, $current, '<=' ) ) {
+		return; // Up to date — no widget needed.
+	}
+
+	wp_add_dashboard_widget(
+		'slashed_bricks_update_notice',
+		'SLASHED Framework Update Available',
+		'slashed_bricks_dashboard_widget_cb'
+	);
+}
+add_action( 'wp_dashboard_setup', 'slashed_bricks_dashboard_setup' );
+
+/**
+ * Dashboard widget content: informs the user a newer framework version exists.
+ */
+function slashed_bricks_dashboard_widget_cb() {
+	$latest  = get_transient( 'slashed_bricks_latest_version' );
+	$current = SLASHED_BRICKS_CSS_REF;
+	printf(
+		'<p>A newer SLASHED framework release is available: <strong>%s</strong> (you are on %s).</p>
+		<p>Update the plugin to load the latest CSS bundle and token inventory.</p>',
+		esc_html( $latest ),
+		esc_html( $current )
+	);
+}
