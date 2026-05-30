@@ -94,7 +94,7 @@ class Slashed_Bricks_Fonts_REST {
 				}
 				$fonts[] = array(
 					'family' => sanitize_text_field( $family ),
-					'label'  => sanitize_text_field( $family ),
+					'label'  => sanitize_text_field( $font['name'] ?? $family ),
 					'source' => 'google',
 				);
 			}
