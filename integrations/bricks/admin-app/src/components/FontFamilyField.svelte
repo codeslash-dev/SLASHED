@@ -126,6 +126,9 @@
 
   // Bricks source tab is only shown if fonts are loaded and non-empty.
   const hasBricksFonts = $derived(bricksLoaded && bricksFonts.length > 0);
+
+  const SOURCE_BADGES = { adobe: ' (Adobe)', google: ' (Google)' };
+  const sourceBadge = (src) => SOURCE_BADGES[src] ?? '';
 </script>
 
 <FieldRow {label} {cssVar} fieldId={fieldKey} {description}>
@@ -176,7 +179,7 @@
       >
         {#each bricksFonts as font (font.family)}
           <option value={font.family}>
-            {font.label}{font.source === 'adobe' ? ' (Adobe)' : ''}
+            {font.label}{sourceBadge(font.source)}
           </option>
         {/each}
       </select>
