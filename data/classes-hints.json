@@ -356,7 +356,7 @@
     "category": "Layout"
   },
   "sf-alternate": {
-    "description": "Element centered absolutely within its parent.",
+    "description": "Alternating two-column layouts (container-query responsive).",
     "category": "Layout"
   },
   "sf-pancake": {
@@ -364,23 +364,23 @@
     "category": "Layout"
   },
   "sf-grid-1": {
-    "description": "Grid with three rows: header / main(1fr) / footer.",
+    "description": "Responsive fixed-column grids with no media queries.",
     "category": "Layout"
   },
   "sf-grid-2": {
-    "description": "Grid with three rows: header / main(1fr) / footer.",
+    "description": "Responsive fixed-column grids with no media queries.",
     "category": "Layout"
   },
   "sf-grid-3": {
-    "description": "Grid with three rows: header / main(1fr) / footer.",
+    "description": "Responsive fixed-column grids with no media queries.",
     "category": "Layout"
   },
   "sf-grid-4": {
-    "description": "Grid with three rows: header / main(1fr) / footer.",
+    "description": "Responsive fixed-column grids with no media queries.",
     "category": "Layout"
   },
   "sf-grid-6": {
-    "description": "Grid with three rows: header / main(1fr) / footer.",
+    "description": "Responsive fixed-column grids with no media queries.",
     "category": "Layout"
   },
   "sf-grid-1-2": {
@@ -472,19 +472,19 @@
     "category": "Macros"
   },
   "sf-truncate": {
-    "description": "Heydon Pickering's \"lobotomized owl\" — every flow child gets",
+    "description": "Single-line ellipsis (.sf-truncate) and N-line clamp",
     "category": "Macros"
   },
   "sf-line-clamp-2": {
-    "description": "Heydon Pickering's \"lobotomized owl\" — every flow child gets",
+    "description": "Single-line ellipsis (.sf-truncate) and N-line clamp",
     "category": "Macros"
   },
   "sf-line-clamp-3": {
-    "description": "Heydon Pickering's \"lobotomized owl\" — every flow child gets",
+    "description": "Single-line ellipsis (.sf-truncate) and N-line clamp",
     "category": "Macros"
   },
   "sf-line-clamp-N": {
-    "description": "Heydon Pickering's \"lobotomized owl\" — every flow child gets",
+    "description": "Single-line ellipsis (.sf-truncate) and N-line clamp",
     "category": "Macros"
   },
   "sf-equal-height": {

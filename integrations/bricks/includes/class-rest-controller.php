@@ -273,10 +273,20 @@ class Slashed_Bricks_REST_Controller {
 
 		$sanitized = Slashed_Bricks_Token_Sanitizer::sanitize_section( $section, $values );
 
-		// Compute which fields were normalised so the SPA can surface them.
+		// Compute which fields were normalised or dropped by the sanitizer.
 		$changed = array();
-		foreach ( $sanitized as $key => $clean ) {
-			$raw = isset( $values[ $key ] ) ? (string) $values[ $key ] : '';
+		foreach ( $values as $key => $raw_value ) {
+			$raw = (string) $raw_value;
+
+			if ( ! array_key_exists( $key, $sanitized ) ) {
+				$changed[ $key ] = array(
+					'original'  => $raw,
+					'sanitized' => '',
+				);
+				continue;
+			}
+
+			$clean = (string) $sanitized[ $key ];
 			if ( $raw !== $clean ) {
 				$changed[ $key ] = array(
 					'original'  => $raw,
@@ -462,6 +472,11 @@ class Slashed_Bricks_REST_Controller {
 				&& in_array( (string) $raw['html_font_size'], array( '', '100', '62.5' ), true )
 			) {
 				$existing['html_font_size'] = (string) $raw['html_font_size'];
+				$settings_imported = true;
+			}
+
+			if ( array_key_exists( 'show_class_hints', $raw ) ) {
+				$existing['show_class_hints'] = (bool) $raw['show_class_hints'];
 				$settings_imported = true;
 			}
 

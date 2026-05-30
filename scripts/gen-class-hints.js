@@ -92,7 +92,7 @@ function parseFile(rel, category) {
 
   // Regex to find /* -- Heading ----- \n   Description \n ... */ blocks.
   // Captures the description line(s) inside.
-  const sectionRe = /\/\*\s*--\s+([^\n-]+?)[-\s]*\n([\s\S]*?)\*\//g;
+  const sectionRe = /\/\*\s*--\s+([^\n]+?)[-\s]*\n([\s\S]*?)\*\//g;
   const classRe   = /\.((sf|is)-[\w-]+)/g;
 
   // Build a list of (offset, type, value) tokens.

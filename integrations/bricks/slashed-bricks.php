@@ -311,15 +311,16 @@ function slashed_bricks_run_version_check() {
 	}
 
 	$body = json_decode( wp_remote_retrieve_body( $response ), true );
-	if ( ! is_array( $body ) || empty( $body['tags'] ) || ! is_array( $body['tags'] ) ) {
+	if ( ! is_array( $body ) || empty( $body['versions'] ) || ! is_array( $body['versions'] ) ) {
 		return;
 	}
 
-	// Tags are returned newest-first. Find the latest semver tag (vX.Y.Z).
+	// Versions are returned newest-first. Find the latest semver entry (X.Y.Z or vX.Y.Z).
 	$latest = null;
-	foreach ( $body['tags'] as $tag ) {
-		if ( isset( $tag['name'] ) && preg_match( '/^v\d+\.\d+\.\d+$/', $tag['name'] ) ) {
-			$latest = $tag['name'];
+	foreach ( $body['versions'] as $entry ) {
+		$ver = isset( $entry['version'] ) ? ltrim( (string) $entry['version'], 'v' ) : '';
+		if ( preg_match( '/^\d+\.\d+\.\d+$/', $ver ) ) {
+			$latest = 'v' . $ver;
 			break;
 		}
 	}
@@ -358,6 +359,18 @@ function slashed_bricks_dashboard_setup() {
 	);
 }
 add_action( 'wp_dashboard_setup', 'slashed_bricks_dashboard_setup' );
+
+/**
+ * Unschedule the version-check cron on plugin deactivation so no orphaned
+ * scheduled tasks remain after the plugin is turned off.
+ */
+function slashed_bricks_deactivation_cleanup() {
+	$timestamp = wp_next_scheduled( 'slashed_bricks_version_check' );
+	if ( $timestamp ) {
+		wp_unschedule_event( $timestamp, 'slashed_bricks_version_check' );
+	}
+}
+register_deactivation_hook( __FILE__, 'slashed_bricks_deactivation_cleanup' );
 
 /**
  * Dashboard widget content: informs the user a newer framework version exists.

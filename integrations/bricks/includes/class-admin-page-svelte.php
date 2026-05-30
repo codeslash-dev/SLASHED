@@ -152,6 +152,9 @@ class Slashed_Bricks_Admin_Page_Svelte {
 			return array();
 		}
 		$json = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		if ( false === $json ) {
+			return array();
+		}
 		$data = json_decode( $json, true );
 		return is_array( $data ) ? $data : array();
 	}
