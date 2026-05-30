@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**623 tokens.** Every `--sf-*` custom property and its default value. See
+**630 tokens.** Every `--sf-*` custom property and its default value. See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
 contract and naming conventions (a DEPRECATED tier will be introduced
 post-0.5.0 when tokens are retired), and [theming.md](theming.md) for the
@@ -445,13 +445,20 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-5 tokens.
+12 tokens.
 
 | Token | Default |
 |---|---|
 | `--sf-aspect` | `16 / 9` |
 | `--sf-flow-space` | `var(--sf-space-content)` |
 | `--sf-line-clamp` | `3` |
+| `--sf-prose-block-margin` | `var(--sf-space-m)` |
+| `--sf-prose-figcaption-size` | `var(--sf-text-s)` |
+| `--sf-prose-figure-margin` | `var(--sf-space-l)` |
+| `--sf-prose-heading-gap` | `var(--sf-space-s)` |
+| `--sf-prose-list-gap` | `var(--sf-space-xs)` |
+| `--sf-prose-marker-color` | `var(--sf-color-primary)` |
+| `--sf-prose-media-radius` | `var(--sf-radius-m)` |
 | `--sf-scroll-shadow-size` | `2rem` |
 | `--sf-truncate-suffix` | `"\2026"` |
 

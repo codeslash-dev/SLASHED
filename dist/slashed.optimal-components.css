@@ -1239,6 +1239,22 @@
     --sf-aspect: 16 / 9;
 
     /* ----------------------------------------------------------
+       Prose — per-instance override knobs for .sf-prose.
+       All values default to system spacing/color tokens so prose
+       stays in sync with the global scale unless overridden.
+
+       Override per-element:
+         style="--sf-prose-marker-color: var(--sf-color-secondary)"
+       ---------------------------------------------------------- */
+    --sf-prose-heading-gap:      var(--sf-space-s);
+    --sf-prose-list-gap:         var(--sf-space-xs);
+    --sf-prose-block-margin:     var(--sf-space-m);
+    --sf-prose-media-radius:     var(--sf-radius-m);
+    --sf-prose-figure-margin:    var(--sf-space-l);
+    --sf-prose-marker-color:     var(--sf-color-primary);
+    --sf-prose-figcaption-size:  var(--sf-text-s);
+
+    /* ----------------------------------------------------------
        Scroll shadow / overflow fade — mask gradient size.
        Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade
        (end-edge horizontal fade).
@@ -2288,18 +2304,18 @@
   }
 
   .sf-prose > * + *              { margin-block-start: var(--sf-prose-paragraph); }
-  .sf-prose :is(h2, h3, h4) + * { margin-block-start: var(--sf-space-s); }
-  .sf-prose li + li              { margin-block-start: var(--sf-space-xs); }
-  .sf-prose :is(blockquote, pre) { margin-block: var(--sf-space-m); }
-  .sf-prose img                  { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
+  .sf-prose :is(h2, h3, h4) + * { margin-block-start: var(--sf-prose-heading-gap); }
+  .sf-prose li + li              { margin-block-start: var(--sf-prose-list-gap); }
+  .sf-prose :is(blockquote, pre) { margin-block: var(--sf-prose-block-margin); }
+  .sf-prose img                  { margin-block: var(--sf-prose-block-margin); border-radius: var(--sf-prose-media-radius); }
   .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
   .sf-prose ul                   { list-style: disc; }
   .sf-prose ol                   { list-style: decimal; }
-  .sf-prose ::marker             { color: var(--sf-color-primary); }
-  .sf-prose figure               { margin-block: var(--sf-space-l); }
-  .sf-prose figcaption           { font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs); }
-  .sf-prose table                { margin-block: var(--sf-space-m); display: block; overflow-x: auto; max-width: 100%; }
-  .sf-prose video                { margin-block: var(--sf-space-m); border-radius: var(--sf-radius-m); }
+  .sf-prose ::marker             { color: var(--sf-prose-marker-color); }
+  .sf-prose figure               { margin-block: var(--sf-prose-figure-margin); }
+  .sf-prose figcaption           { font-size: var(--sf-prose-figcaption-size); color: var(--sf-color-text--muted); margin-block-start: var(--sf-prose-list-gap); }
+  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-x: auto; max-width: 100%; }
+  .sf-prose video                { margin-block: var(--sf-prose-block-margin); border-radius: var(--sf-prose-media-radius); }
 
   /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the
      general 0-2-0 budget because these rules must override the .sf-prose

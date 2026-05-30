@@ -51,6 +51,22 @@
     --sf-aspect: 16 / 9;
 
     /* ----------------------------------------------------------
+       Prose — per-instance override knobs for .sf-prose.
+       All values default to system spacing/color tokens so prose
+       stays in sync with the global scale unless overridden.
+
+       Override per-element:
+         style="--sf-prose-marker-color: var(--sf-color-secondary)"
+       ---------------------------------------------------------- */
+    --sf-prose-heading-gap:      var(--sf-space-s);
+    --sf-prose-list-gap:         var(--sf-space-xs);
+    --sf-prose-block-margin:     var(--sf-space-m);
+    --sf-prose-media-radius:     var(--sf-radius-m);
+    --sf-prose-figure-margin:    var(--sf-space-l);
+    --sf-prose-marker-color:     var(--sf-color-primary);
+    --sf-prose-figcaption-size:  var(--sf-text-s);
+
+    /* ----------------------------------------------------------
        Scroll shadow / overflow fade — mask gradient size.
        Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade
        (end-edge horizontal fade).

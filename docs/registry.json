@@ -19,7 +19,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 623,
+      "tokens": 630,
       "sf_classes": 158,
       "is_classes": 40
     }
@@ -522,6 +522,13 @@
     "--sf-print-base-size",
     "--sf-print-page-margin",
     "--sf-print-page-size",
+    "--sf-prose-block-margin",
+    "--sf-prose-figcaption-size",
+    "--sf-prose-figure-margin",
+    "--sf-prose-heading-gap",
+    "--sf-prose-list-gap",
+    "--sf-prose-marker-color",
+    "--sf-prose-media-radius",
     "--sf-prose-paragraph",
     "--sf-radius-2xl",
     "--sf-radius-3xl",
