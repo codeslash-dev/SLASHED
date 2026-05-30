@@ -30,6 +30,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *     Body: { section: string }       // empty string resets every section
  *     Returns the new effective settings map (post-reset).
  *
+ *   POST /wp-json/slashed-bricks/v1/tokens/validate
+ *     Body: { section: string, values: object }
+ *     Runs the sanitizer and returns { section, sanitized, changed } without
+ *     persisting anything. Used by the admin SPA for inline validation feedback.
+ *
  * Why POST-only: WordPress REST nonces ride on POST headers naturally
  * via X-WP-Nonce; using POST for both write paths keeps the auth
  * model uniform and avoids URL-cache surprises.
@@ -65,6 +70,31 @@ class Slashed_Bricks_REST_Controller {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'save_section' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+				'args'                => array(
+					'section' => array(
+						'type'              => 'string',
+						'required'          => true,
+						'sanitize_callback' => 'sanitize_key',
+					),
+					'values'  => array(
+						'type'                 => 'object',
+						'required'             => true,
+						'additionalProperties' => array(
+							'type'      => 'string',
+							'maxLength' => 512,
+						),
+					),
+				),
+			)
+		);
+
+		register_rest_route(
+			self::NAMESPACE,
+			'/tokens/validate',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'validate_section' ),
 				'permission_callback' => array( $this, 'check_permissions' ),
 				'args'                => array(
 					'section' => array(
@@ -143,13 +173,17 @@ class Slashed_Bricks_REST_Controller {
 								return in_array( (string) $value, array( '', '100', '62.5' ), true );
 							},
 						),
-						'css_bundle'     => array(
+						'css_bundle'       => array(
 							'type'              => 'string',
 							'required'          => false,
 							'sanitize_callback' => 'sanitize_key',
 							'validate_callback' => function( $value ) {
 								return in_array( (string) $value, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true );
 							},
+						),
+						'show_class_hints' => array(
+							'type'     => 'boolean',
+							'required' => false,
 						),
 					),
 				),
@@ -206,6 +240,66 @@ class Slashed_Bricks_REST_Controller {
 			array(
 				'section' => $section,
 				'values'  => $sanitized,
+			)
+		);
+	}
+
+	/**
+	 * Validate a section's values without persisting them.
+	 *
+	 * Runs values through the same sanitizer as save_section() and returns
+	 * the normalized output plus a map of fields that were changed, so the
+	 * SPA can highlight corrections inline before the user saves.
+	 *
+	 * @param WP_REST_Request $request Incoming request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function validate_section( WP_REST_Request $request ) {
+		$section = (string) $request->get_param( 'section' );
+		$values  = $request->get_param( 'values' );
+
+		if ( ! $this->is_known_section( $section ) ) {
+			return new WP_Error(
+				'slashed_bricks_unknown_section',
+				/* translators: %s: section slug. */
+				sprintf( __( 'Unknown section: %s', 'slashed-bricks' ), $section ),
+				array( 'status' => 400 )
+			);
+		}
+
+		if ( ! is_array( $values ) ) {
+			$values = array();
+		}
+
+		$sanitized = Slashed_Bricks_Token_Sanitizer::sanitize_section( $section, $values );
+
+		// Compute which fields were normalised or dropped by the sanitizer.
+		$changed = array();
+		foreach ( $values as $key => $raw_value ) {
+			$raw = (string) $raw_value;
+
+			if ( ! array_key_exists( $key, $sanitized ) ) {
+				$changed[ $key ] = array(
+					'original'  => $raw,
+					'sanitized' => '',
+				);
+				continue;
+			}
+
+			$clean = (string) $sanitized[ $key ];
+			if ( $raw !== $clean ) {
+				$changed[ $key ] = array(
+					'original'  => $raw,
+					'sanitized' => $clean,
+				);
+			}
+		}
+
+		return rest_ensure_response(
+			array(
+				'section'   => $section,
+				'sanitized' => $sanitized,
+				'changed'   => $changed,
 			)
 		);
 	}
@@ -268,10 +362,11 @@ class Slashed_Bricks_REST_Controller {
 	 * @return WP_REST_Response
 	 */
 	public function save_settings( WP_REST_Request $request ) {
-		$html_font_size = $request->get_param( 'html_font_size' );
-		$css_bundle     = $request->get_param( 'css_bundle' );
+		$html_font_size    = $request->get_param( 'html_font_size' );
+		$css_bundle        = $request->get_param( 'css_bundle' );
+		$show_class_hints  = $request->get_param( 'show_class_hints' );
 
-		if ( null === $html_font_size && null === $css_bundle ) {
+		if ( null === $html_font_size && null === $css_bundle && null === $show_class_hints ) {
 			return rest_ensure_response( Slashed_Bricks_Token_Store::get_plugin_settings() );
 		}
 
@@ -283,6 +378,10 @@ class Slashed_Bricks_REST_Controller {
 
 		if ( null !== $css_bundle ) {
 			$settings['css_bundle'] = (string) $css_bundle;
+		}
+
+		if ( null !== $show_class_hints ) {
+			$settings['show_class_hints'] = (bool) $show_class_hints;
 		}
 
 		Slashed_Bricks_Token_Store::update_plugin_settings( $settings );
@@ -373,6 +472,11 @@ class Slashed_Bricks_REST_Controller {
 				&& in_array( (string) $raw['html_font_size'], array( '', '100', '62.5' ), true )
 			) {
 				$existing['html_font_size'] = (string) $raw['html_font_size'];
+				$settings_imported = true;
+			}
+
+			if ( array_key_exists( 'show_class_hints', $raw ) ) {
+				$existing['show_class_hints'] = (bool) $raw['show_class_hints'];
 				$settings_imported = true;
 			}
 

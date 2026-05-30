@@ -117,13 +117,25 @@ class Slashed_Bricks_Token_Store {
 	}
 
 	/**
+	 * Default values for plugin settings.
+	 * Merged with stored settings so new keys are always present.
+	 */
+	const PLUGIN_SETTING_DEFAULTS = array(
+		'html_font_size'    => '',
+		'css_bundle'        => 'optimal',
+		'show_class_hints'  => false,
+	);
+
+	/**
 	 * Read non-token plugin settings (e.g. html_font_size override).
+	 * Always returns a complete map including defaults for missing keys.
 	 *
 	 * @return array
 	 */
 	public static function get_plugin_settings() {
-		$settings = get_option( self::SETTINGS_OPTION_NAME, array() );
-		return is_array( $settings ) ? $settings : array();
+		$stored = get_option( self::SETTINGS_OPTION_NAME, array() );
+		$stored = is_array( $stored ) ? $stored : array();
+		return array_merge( self::PLUGIN_SETTING_DEFAULTS, $stored );
 	}
 
 	/**

@@ -128,12 +128,35 @@ class Slashed_Bricks_Admin_Page_Svelte {
 				'settings'       => Slashed_Bricks_Token_Store::get_settings(),
 				'pluginSettings' => Slashed_Bricks_Token_Store::get_plugin_settings(),
 				'inventory'      => Slashed_Bricks_Inventory::get(),
+				'classHints'     => self::get_class_hints(),
 				'versions'       => array(
 					'plugin'    => SLASHED_BRICKS_VERSION,
 					'framework' => SLASHED_BRICKS_CSS_REF,
 				),
 			)
 		);
+	}
+
+	/**
+	 * Load the class hints map from the bundled JSON file.
+	 *
+	 * Returns the full map (className → { description, category }) so the
+	 * admin SPA and editor app can show tooltips without a REST round-trip.
+	 * Falls back to an empty array if the file is missing (e.g. mid-build).
+	 *
+	 * @return array
+	 */
+	public static function get_class_hints() {
+		$path = SLASHED_BRICKS_PATH . '../../data/classes-hints.json';
+		if ( ! file_exists( $path ) ) {
+			return array();
+		}
+		$json = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		if ( false === $json ) {
+			return array();
+		}
+		$data = json_decode( $json, true );
+		return is_array( $data ) ? $data : array();
 	}
 
 	/**

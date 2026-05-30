@@ -43,6 +43,16 @@ class Slashed_Bricks_ReBEMer_Enqueue {
 
 		wp_enqueue_style( self::STYLE_HANDLE, $base_url . 'app.css', array(), $css_ver );
 		wp_enqueue_script( self::SCRIPT_HANDLE, $base_url . 'app.js', array(), $js_ver, true );
+
+		$plugin_settings = Slashed_Bricks_Token_Store::get_plugin_settings();
+		wp_localize_script(
+			self::SCRIPT_HANDLE,
+			'slashedBricksEditor',
+			array(
+				'showClassHints' => ! empty( $plugin_settings['show_class_hints'] ),
+				'classHints'     => Slashed_Bricks_Admin_Page_Svelte::get_class_hints(),
+			)
+		);
 	}
 
 	public function mark_as_module( $tag, $handle, $src ) {
