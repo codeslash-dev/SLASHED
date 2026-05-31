@@ -68,8 +68,15 @@
     }
   }
 
-  // Fetch once on mount.
-  $effect(() => { loadBricksFonts(); });
+  // Fetch once on mount — skip entirely when Bricks integration is disabled
+  // so the absent REST route doesn't generate a 404 console error on every load.
+  $effect(() => {
+    if (meta.activeIntegrations?.bricks ?? true) {
+      loadBricksFonts();
+    } else {
+      bricksLoaded = true;
+    }
+  });
 
   // ── Current value ─────────────────────────────────────────────────
   const currentValue = $derived(

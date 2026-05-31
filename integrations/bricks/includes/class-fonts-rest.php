@@ -41,6 +41,15 @@ class Slashed_Bricks_Fonts_REST {
 				'permission_callback' => array( $this, 'check_permissions' ),
 			)
 		);
+
+		// Bust the CPT font cache whenever a custom-font post is saved.
+		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
+			add_action( 'save_post_' . BRICKS_DB_CUSTOM_FONTS, array( $this, 'bust_cpt_cache' ) );
+		}
+	}
+
+	public function bust_cpt_cache() {
+		delete_transient( 'slashed_bricks_cpt_fonts' );
 	}
 
 	public function check_permissions() {
@@ -132,27 +141,38 @@ class Slashed_Bricks_Fonts_REST {
 		// calling Bricks\Custom_Fonts::get_custom_fonts() because that method
 		// uses a static cache, has side-effects (generates @font-face strings),
 		// and only queries 'publish' by default — all unnecessary for a name
-		// lookup.
+		// lookup. Results are cached in a transient (1 hour) and invalidated
+		// when any custom-font CPT entry is saved.
 		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
-			$cpt_posts = get_posts(
-				array(
-					'post_type'      => BRICKS_DB_CUSTOM_FONTS,
-					'posts_per_page' => -1,
-					'post_status'    => array( 'publish', 'draft' ),
-					'fields'         => 'ids',
-					'no_found_rows'  => true,
-				)
-			);
-			foreach ( $cpt_posts as $post_id ) {
-				$family = html_entity_decode( (string) get_the_title( $post_id ), ENT_QUOTES, 'UTF-8' );
-				if ( ! $family ) {
-					continue;
-				}
-				$fonts[] = array(
-					'family' => sanitize_text_field( $family ),
-					'label'  => sanitize_text_field( $family ),
-					'source' => 'custom',
+			$cache_key  = 'slashed_bricks_cpt_fonts';
+			$cpt_cached = get_transient( $cache_key );
+
+			if ( false !== $cpt_cached && is_array( $cpt_cached ) ) {
+				$fonts = array_merge( $fonts, $cpt_cached );
+			} else {
+				$cpt_fonts = array();
+				$cpt_posts = get_posts(
+					array(
+						'post_type'      => BRICKS_DB_CUSTOM_FONTS,
+						'posts_per_page' => -1,
+						'post_status'    => array( 'publish', 'draft' ),
+						'fields'         => 'ids',
+						'no_found_rows'  => true,
+					)
 				);
+				foreach ( $cpt_posts as $post_id ) {
+					$family = html_entity_decode( (string) get_the_title( $post_id ), ENT_QUOTES, 'UTF-8' );
+					if ( ! $family ) {
+						continue;
+					}
+					$cpt_fonts[] = array(
+						'family' => sanitize_text_field( $family ),
+						'label'  => sanitize_text_field( $family ),
+						'source' => 'custom',
+					);
+				}
+				set_transient( $cache_key, $cpt_fonts, HOUR_IN_SECONDS );
+				$fonts = array_merge( $fonts, $cpt_fonts );
 			}
 		}
 
