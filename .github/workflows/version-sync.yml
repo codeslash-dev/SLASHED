@@ -3,13 +3,15 @@ name: Sync version artifacts
 # Triggered whenever a GitHub release or pre-release is published.
 # Checks out main, aligns all non-JS version references to the release tag,
 # rebuilds CSS bundles, publishes them to the dist branch, captures the
-# resulting commit SHA, stores it in SLASHED_BRICKS_DIST_SHA, and commits
+# resulting commit SHA, stores it in SLASHED_DIST_SHA (slashed.php),
+# SLASHED_BRICKS_DIST_SHA (slashed-bricks.php), and
+# SLASHED_GUTENBERG_DIST_SHA (slashed-gutenberg.php), then commits
 # everything back to main.
 #
 # CSS bundles are NOT committed to the main branch — they live only on the
 # dedicated `dist` branch and in GitHub Release assets. The dist-branch
-# commit SHA is stored in slashed-bricks.php so the plugin can construct an
-# immutable jsDelivr CDN URL that never changes between releases.
+# commit SHA is stored in each integration entry point so the plugin can
+# construct an immutable jsDelivr CDN URL that never changes between releases.
 #
 # Full release pipeline:
 #   1. Developer runs `npm run release` locally → bumps package.json, runs
@@ -106,12 +108,19 @@ jobs:
       - name: Switch back to main working tree
         run: git checkout main
 
-      - name: Update SLASHED_BRICKS_DIST_SHA in PHP
+      - name: Update DIST_SHA constants in PHP
+        env:
+          DIST_SHA: ${{ steps.dist.outputs.sha }}
         run: |
-          DIST_SHA="${{ steps.dist.outputs.sha }}"
+          sed -i \
+            "s|define( 'SLASHED_DIST_SHA', '[^']*' )|define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )|" \
+            slashed.php
           sed -i \
             "s|define( 'SLASHED_BRICKS_DIST_SHA', '[^']*' )|define( 'SLASHED_BRICKS_DIST_SHA', '${DIST_SHA}' )|" \
             integrations/bricks/slashed-bricks.php
+          sed -i \
+            "s|define( 'SLASHED_GUTENBERG_DIST_SHA', '[^']*' )|define( 'SLASHED_GUTENBERG_DIST_SHA', '${DIST_SHA}' )|" \
+            integrations/gutenberg/slashed-gutenberg.php
 
       - name: Commit and push if anything changed
         env:
@@ -120,7 +129,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Stage only tracked files (dist/*.css are gitignored).
-          git add integrations/bricks/slashed-bricks.php package.json package-lock.json
+          git add slashed.php integrations/bricks/slashed-bricks.php integrations/gutenberg/slashed-gutenberg.php package.json package-lock.json
           git add -u
           if git diff --cached --quiet; then
             echo "Nothing to commit — all version artifacts already up to date."

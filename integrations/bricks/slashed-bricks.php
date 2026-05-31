@@ -18,44 +18,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Plugin constants.
+ *
+ * Defined via plugin_dir_path(__FILE__) so paths are correct whether this
+ * file is loaded standalone or included by the unified slashed.php. The
+ * !defined() guard exists solely to prevent redefinition errors when both
+ * the standalone Bricks plugin and the unified SLASHED plugin are active.
  */
-define( 'SLASHED_BRICKS_VERSION', '0.4.18' );
-define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
-define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
-
-/**
- * Immutable jsDelivr ref for the SLASHED CSS bundle.
- *
- * Points to the HEAD commit SHA of the `dist` branch at the time of the
- * last release. jsDelivr treats commit SHAs as effectively immutable
- * (cached "forever"), so the served CSS cannot change outside a plugin
- * release even though the `dist` branch itself is a moving ref.
- *
- * CSS bundles are no longer committed to the main branch; they live only
- * on the `dist` branch (files at root) and in GitHub Release assets.
- * Updated automatically by the version-sync workflow on every release.
- *
- * Override per-site with the 'slashed_bricks/css_bundle_url' filter.
- */
-define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.18' );     // semver tag — version comparison only
-define( 'SLASHED_BRICKS_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' ); // dist branch SHA — CDN URL
+if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
+    define( 'SLASHED_BRICKS_VERSION', '0.4.18' );
+    define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
+    define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
+    define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.18' );
+    define( 'SLASHED_BRICKS_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
+}
 
 /**
  * Token Store is loaded early so slashed_bricks_get_css_bundle() can call
  * Slashed_Bricks_Token_Store::get_plugin_settings() at any point, even
  * before the rest of the admin/data classes are initialised.
  */
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-token-store.php';
+require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
 
 /**
- * Get the configured CSS bundle type (essential / optimal / full).
+ * Get the configured CSS bundle variant.
  *
- * Reads from plugin settings; falls back to "optimal". Used both for
- * URL resolution and for local-file version-stamp lookups.
+ * Delegates to the shared Slashed_CSS_Loader when running under the unified
+ * plugin; falls back to the Bricks token store in standalone mode.
  *
  * @return string One of 'essential', 'optimal', 'full'.
  */
 function slashed_bricks_get_css_bundle() {
+    if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+        return Slashed_CSS_Loader::get_bundle();
+    }
     $settings = Slashed_Bricks_Token_Store::get_plugin_settings();
     $bundle   = isset( $settings['css_bundle'] ) ? (string) $settings['css_bundle'] : 'optimal';
     if ( ! in_array( $bundle, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true ) ) {
@@ -67,44 +62,35 @@ function slashed_bricks_get_css_bundle() {
 /**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN pinned to the immutable dist-branch commit
- * SHA (see SLASHED_BRICKS_DIST_SHA) so the plugin works without any local
- * file setup. The specific file (essential / optimal / full) is chosen
- * from the 'css_bundle' plugin setting. If a local copy is detected
- * (symlink/in-repo mode or copy-install mode), the local file takes
- * precedence for faster loads and offline development.
+ * Delegates to the shared Slashed_CSS_Loader when running under the unified
+ * plugin, then applies the per-integration filter. In standalone mode, builds
+ * the URL directly from SLASHED_BRICKS_DIST_SHA with a local-file fallback.
  *
  * Use the 'slashed_bricks/css_bundle_url' filter to override.
  *
  * @return string URL to the CSS bundle.
  */
 function slashed_bricks_get_css_url() {
-    $bundle   = slashed_bricks_get_css_bundle();
-    $filename = 'slashed.' . $bundle . '.css';
+    if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+        return apply_filters( 'slashed_bricks/css_bundle_url', Slashed_CSS_Loader::get_url() );
+    }
 
-    // Default: jsDelivr CDN pinned to the dist-branch commit SHA at release
-    // time. Files live at the root of the dist branch (no /dist/ prefix).
+    // Standalone fallback.
+    $bundle      = slashed_bricks_get_css_bundle();
+    $filename    = 'slashed.' . $bundle . '.css';
     $default_url = sprintf(
         'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/%s',
         SLASHED_BRICKS_DIST_SHA,
         $filename
     );
 
-    // Prefer local file if available (symlink/in-repo mode).
     $repo_path = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
     if ( file_exists( $repo_path ) ) {
         $default_url = SLASHED_BRICKS_URL . '../../dist/' . $filename;
-    }
-    // Check copy-install mode (dist/ within the plugin directory).
-    elseif ( file_exists( SLASHED_BRICKS_PATH . 'dist/' . $filename ) ) {
+    } elseif ( file_exists( SLASHED_BRICKS_PATH . 'dist/' . $filename ) ) {
         $default_url = SLASHED_BRICKS_URL . 'dist/' . $filename;
     }
 
-    /**
-     * Filter the SLASHED CSS bundle URL.
-     *
-     * @param string $url The URL to the CSS bundle file.
-     */
     return apply_filters( 'slashed_bricks/css_bundle_url', $default_url );
 }
 
@@ -270,7 +256,11 @@ function slashed_bricks_activation_check() {
 	// Allow activation without Bricks so admin token configuration is available.
 	// Runtime guards in slashed_bricks_init() handle the Bricks dependency.
 }
-register_activation_hook( __FILE__, 'slashed_bricks_activation_check' );
+// Only register hooks against the standalone plugin file; when running under
+// the unified slashed.php the root plugin handles activation/deactivation.
+if ( ! defined( 'SLASHED_VERSION' ) ) {
+    register_activation_hook( __FILE__, 'slashed_bricks_activation_check' );
+}
 
 /**
  * Display admin notice when Bricks Builder is not active.
@@ -376,7 +366,9 @@ function slashed_bricks_deactivation_cleanup() {
 		wp_unschedule_event( $timestamp, 'slashed_bricks_version_check' );
 	}
 }
-register_deactivation_hook( __FILE__, 'slashed_bricks_deactivation_cleanup' );
+if ( ! defined( 'SLASHED_VERSION' ) ) {
+    register_deactivation_hook( __FILE__, 'slashed_bricks_deactivation_cleanup' );
+}
 
 /**
  * Dashboard widget content: informs the user a newer framework version exists.
