@@ -250,10 +250,19 @@ class Slashed_Bricks_Colors {
             $hex_fallback = isset( $hex_map[ $var ] ) ? $hex_map[ $var ] : '#808080';
 
             $colors[] = array(
-                'id'   => self::PALETTE_ID_PREFIX . $palette_slug . '-' . $this->slugify( $key ),
-                'name' => $this->humanize_key( $key ),
-                'hex'  => $hex_fallback,
-                'raw'  => 'var(' . $var . ')',
+                'id'        => self::PALETTE_ID_PREFIX . $palette_slug . '-' . $this->slugify( $key ),
+                'name'      => $this->humanize_key( $key ),
+                'hex'       => $hex_fallback,
+                'raw'       => 'var(' . $var . ')',
+                // Bricks only enables its dark-mode toggle element when at least
+                // one palette color has a dark_mode entry. SLASHED's CSS custom
+                // properties resolve to their dark-mode value automatically when
+                // data-brx-theme="dark" is set (bridged by the inline rule in
+                // class-enqueue.php), so both modes can reference the same var().
+                'dark_mode' => array(
+                    'hex' => $hex_fallback,
+                    'raw' => 'var(' . $var . ')',
+                ),
             );
         }
         return $colors;
