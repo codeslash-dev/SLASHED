@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // Updates all non-JS version references to match the version in package.json.
+// Covers: slashed.php, slashed-bricks.php, slashed-gutenberg.php.
 // Run after every version bump: npm run version-sync
 // Wired into .release-it.json hooks so it executes automatically during releases.
 
@@ -39,6 +40,28 @@ console.log(`\nversion-sync: syncing to ${versionTag}\n`);
 
 let changed = 0;
 
+// ── slashed.php (unified plugin) ────────────────────────────────────────────
+changed += sync(
+  'slashed.php',
+  / \* Version: \d+\.\d+\.\d+/,
+  ` * Version: ${version}`,
+  `Version: ${version}`
+) ? 1 : 0;
+
+changed += sync(
+  'slashed.php',
+  /define\(\s*'SLASHED_VERSION',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_VERSION', '${version}' )`,
+  `SLASHED_VERSION = '${version}'`
+) ? 1 : 0;
+
+changed += sync(
+  'slashed.php',
+  /define\(\s*'SLASHED_CSS_REF',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_CSS_REF', '${versionTag}' )`,
+  `SLASHED_CSS_REF = '${versionTag}'`
+) ? 1 : 0;
+
 // ── integrations/bricks/slashed-bricks.php ─────────────────────────────────
 // SLASHED_BRICKS_CSS_REF — semver tag used for version comparison only.
 // Still kept in sync so the dashboard "update available" widget shows the right version.
@@ -68,6 +91,31 @@ changed += sync(
   `define( 'SLASHED_BRICKS_VERSION', '${version}' )`,
   `SLASHED_BRICKS_VERSION = '${version}'`
 ) ? 1 : 0;
+
+// ── integrations/gutenberg/slashed-gutenberg.php ───────────────────────────
+changed += sync(
+  'integrations/gutenberg/slashed-gutenberg.php',
+  / \* Version: \d+\.\d+\.\d+/,
+  ` * Version: ${version}`,
+  `Version: ${version}`
+) ? 1 : 0;
+
+changed += sync(
+  'integrations/gutenberg/slashed-gutenberg.php',
+  /define\(\s*'SLASHED_GUTENBERG_VERSION',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_GUTENBERG_VERSION', '${version}' )`,
+  `SLASHED_GUTENBERG_VERSION = '${version}'`
+) ? 1 : 0;
+
+changed += sync(
+  'integrations/gutenberg/slashed-gutenberg.php',
+  /define\(\s*'SLASHED_GUTENBERG_CSS_REF',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_GUTENBERG_CSS_REF', '${versionTag}' )`,
+  `SLASHED_GUTENBERG_CSS_REF = '${versionTag}'`
+) ? 1 : 0;
+
+// SLASHED_DIST_SHA and SLASHED_GUTENBERG_DIST_SHA are NOT updated here;
+// managed by the version-sync GitHub Actions workflow.
 
 // ── Summary ─────────────────────────────────────────────────────────────────
 if (changed === 0) {

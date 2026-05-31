@@ -1,42 +1,46 @@
 #!/usr/bin/env node
 
 /**
- * Packages the SLASHED for Bricks WordPress plugin into a distributable zip.
+ * Packages the unified SLASHED WordPress plugin into a distributable zip.
  *
- * Output: dist/slashed-bricks.zip
+ * Output: dist/slashed.zip
  *
- * The zip contains a single top-level directory `slashed-bricks/` (matching
- * WordPress plugin slug conventions) with:
- *   - slashed-bricks.php (main bootstrap)
- *   - includes/           (PHP classes)
- *   - assets/             (pre-built admin/editor JS+CSS)
- *   - data/               (fallback inventory.json)
- *   - README.md
+ * The zip contains a single top-level `slashed/` directory with:
+ *   slashed.php                          — unified entry point
+ *   includes/                            — shared PHP classes
+ *   integrations/bricks/
+ *     slashed-bricks.php
+ *     includes/                          — Bricks PHP classes
+ *     assets/                            — pre-built admin/editor JS + CSS
+ *     data/                              — fallback inventory.json
+ *   integrations/gutenberg/
+ *     slashed-gutenberg.php
+ *     includes/                          — Gutenberg PHP classes
  *
- * Source directories (admin-app/, editor-app/) are excluded — they are dev
- * sources whose built output already lives in assets/.
+ * Source directories (admin-app/, editor-app/) are excluded — their built
+ * output already lives in assets/.
  */
 
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const ROOT = path.resolve(__dirname, '..');
-const PLUGIN_DIR = path.join(ROOT, 'integrations', 'bricks');
-const OUTPUT = path.join(ROOT, 'dist', 'slashed-bricks.zip');
+const ROOT   = path.resolve(__dirname, '..');
+const OUTPUT = path.join(ROOT, 'dist', 'slashed.zip');
+const STAGE  = path.join(ROOT, '.tmp-plugin-stage');
+const STAGE_PLUGIN = path.join(STAGE, 'slashed');
 
-// Directories/files to include (relative to integrations/bricks/).
+// Paths relative to ROOT that are copied into the zip, preserving structure.
 const INCLUDE = [
-  'slashed-bricks.php',
-  'README.md',
+  'slashed.php',
   'includes',
-  'assets',
-  'data',
+  'integrations/bricks/slashed-bricks.php',
+  'integrations/bricks/includes',
+  'integrations/bricks/assets',
+  'integrations/bricks/data',
+  'integrations/gutenberg/slashed-gutenberg.php',
+  'integrations/gutenberg/includes',
 ];
-
-// Build a temporary staging directory, zip it, then clean up.
-const STAGE = path.join(ROOT, '.tmp-plugin-stage');
-const STAGE_PLUGIN = path.join(STAGE, 'slashed-bricks');
 
 function copyRecursive(src, dest) {
   const stat = fs.statSync(src);
@@ -46,27 +50,22 @@ function copyRecursive(src, dest) {
       copyRecursive(path.join(src, entry), path.join(dest, entry));
     }
   } else {
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.copyFileSync(src, dest);
   }
 }
 
 function clean(dir) {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+  if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
 }
 
 function main() {
-  // Ensure dist/ exists.
   fs.mkdirSync(path.join(ROOT, 'dist'), { recursive: true });
-
-  // Clean previous staging area.
   clean(STAGE);
   fs.mkdirSync(STAGE_PLUGIN, { recursive: true });
 
-  // Copy selected entries into the staging directory.
   for (const entry of INCLUDE) {
-    const src = path.join(PLUGIN_DIR, entry);
+    const src  = path.join(ROOT, entry);
     const dest = path.join(STAGE_PLUGIN, entry);
     if (!fs.existsSync(src)) {
       console.warn(`[zip-plugin] warning: ${entry} not found, skipping`);
@@ -75,32 +74,18 @@ function main() {
     copyRecursive(src, dest);
   }
 
-  // Remove any existing zip to avoid appending.
-  if (fs.existsSync(OUTPUT)) {
-    fs.unlinkSync(OUTPUT);
-  }
+  if (fs.existsSync(OUTPUT)) fs.unlinkSync(OUTPUT);
 
-  // Create the zip. Use the system `zip` command (available on all CI
-  // runners and most dev machines). Fall back to a tar-based approach if
-  // zip is missing (unlikely on Linux/macOS).
   try {
     execSync('which zip', { stdio: 'ignore' });
-    execSync(`zip -r "${OUTPUT}" slashed-bricks`, {
-      cwd: STAGE,
-      stdio: 'pipe',
-    });
+    execSync(`zip -r "${OUTPUT}" slashed`, { cwd: STAGE, stdio: 'pipe' });
   } catch {
-    // Fallback: use tar to create a zip-compatible archive is not reliable,
-    // so we use Node's built-in zlib with a minimal zip implementation.
-    createZipFromDir(STAGE_PLUGIN, OUTPUT, 'slashed-bricks');
+    createZipFromDir(STAGE_PLUGIN, OUTPUT, 'slashed');
   }
 
-  // Report.
-  const stat = fs.statSync(OUTPUT);
-  const kb = (stat.size / 1024).toFixed(1);
-  console.log(`[zip-plugin] \u2192 dist/slashed-bricks.zip (${kb} kB)`);
+  const kb = (fs.statSync(OUTPUT).size / 1024).toFixed(1);
+  console.log(`[zip-plugin] → dist/slashed.zip (${kb} kB)`);
 
-  // Clean up staging.
   clean(STAGE);
 }
 
@@ -114,74 +99,65 @@ function createZipFromDir(sourceDir, outputPath, rootName) {
 
   function walk(dir, rel) {
     for (const entry of fs.readdirSync(dir)) {
-      const full = path.join(dir, entry);
+      const full     = path.join(dir, entry);
       const entryRel = rel ? `${rel}/${entry}` : entry;
-      const stat = fs.statSync(full);
+      const stat     = fs.statSync(full);
       if (stat.isDirectory()) {
         files.push({ path: `${rootName}/${entryRel}/`, isDir: true });
         walk(full, entryRel);
       } else {
-        files.push({
-          path: `${rootName}/${entryRel}`,
-          isDir: false,
-          data: fs.readFileSync(full),
-        });
+        files.push({ path: `${rootName}/${entryRel}`, isDir: false, data: fs.readFileSync(full) });
       }
     }
   }
 
-  // Add root directory entry.
   files.unshift({ path: `${rootName}/`, isDir: true });
   walk(sourceDir, '');
 
-  const localHeaders = [];
+  const localHeaders   = [];
   const centralHeaders = [];
   let offset = 0;
 
   for (const file of files) {
-    const nameBuf = Buffer.from(file.path, 'utf8');
+    const nameBuf      = Buffer.from(file.path, 'utf8');
     const uncompressed = file.isDir ? Buffer.alloc(0) : file.data;
-    const compressed = file.isDir
-      ? Buffer.alloc(0)
-      : zlib.deflateRawSync(uncompressed, { level: 9 });
-    const crc = crc32(uncompressed);
+    const compressed   = file.isDir ? Buffer.alloc(0) : zlib.deflateRawSync(uncompressed, { level: 9 });
+    const crc          = crc32(uncompressed);
 
-    // Local file header.
     const local = Buffer.alloc(30 + nameBuf.length);
-    local.writeUInt32LE(0x04034b50, 0); // signature
-    local.writeUInt16LE(20, 4); // version needed
-    local.writeUInt16LE(0, 6); // flags
-    local.writeUInt16LE(file.isDir ? 0 : 8, 8); // compression (DEFLATE)
-    local.writeUInt16LE(0, 10); // mod time
-    local.writeUInt16LE(0, 12); // mod date
-    local.writeUInt32LE(crc, 14); // crc-32
-    local.writeUInt32LE(compressed.length, 18); // compressed size
-    local.writeUInt32LE(uncompressed.length, 22); // uncompressed size
-    local.writeUInt16LE(nameBuf.length, 26); // file name length
-    local.writeUInt16LE(0, 28); // extra field length
+    local.writeUInt32LE(0x04034b50, 0);
+    local.writeUInt16LE(20, 4);
+    local.writeUInt16LE(0, 6);
+    local.writeUInt16LE(file.isDir ? 0 : 8, 8);
+    local.writeUInt16LE(0, 10);
+    local.writeUInt16LE(0, 12);
+    local.writeUInt32LE(crc, 14);
+    local.writeUInt32LE(compressed.length, 18);
+    local.writeUInt32LE(uncompressed.length, 22);
+    local.writeUInt16LE(nameBuf.length, 26);
+    local.writeUInt16LE(0, 28);
     nameBuf.copy(local, 30);
 
     localHeaders.push(Buffer.concat([local, compressed]));
 
-    // Central directory header.
     const central = Buffer.alloc(46 + nameBuf.length);
-    central.writeUInt32LE(0x02014b50, 0); // signature
-    central.writeUInt16LE(20, 4); // version made by
-    central.writeUInt16LE(20, 6); // version needed
-    central.writeUInt16LE(0, 8); // flags
-    central.writeUInt16LE(file.isDir ? 0 : 8, 10); // compression
-    central.writeUInt16LE(0, 12); // mod time
-    central.writeUInt16LE(0, 14); // mod date
-    central.writeUInt32LE(crc, 16); // crc-32
-    central.writeUInt32LE(compressed.length, 20); // compressed size
-    central.writeUInt32LE(uncompressed.length, 24); // uncompressed size
-    central.writeUInt16LE(nameBuf.length, 28); // file name length
-    central.writeUInt16LE(0, 30); // extra field length
-    central.writeUInt16LE(0, 32); // file comment length
-    central.writeUInt16LE(0, 34); // disk number start
-    central.writeUInt16LE(0, 36); // internal file attributes
-    central.writeUInt32LE(file.isDir ? 0x10 : 0, 38); // external file attributes
-    central.writeUInt32LE(offset, 42); // relative offset of local header
+    central.writeUInt32LE(0x02014b50, 0);
+    central.writeUInt16LE(20, 4);
+    central.writeUInt16LE(20, 6);
+    central.writeUInt16LE(0, 8);
+    central.writeUInt16LE(file.isDir ? 0 : 8, 10);
+    central.writeUInt16LE(0, 12);
+    central.writeUInt16LE(0, 14);
+    central.writeUInt32LE(crc, 16);
+    central.writeUInt32LE(compressed.length, 20);
+    central.writeUInt32LE(uncompressed.length, 24);
+    central.writeUInt16LE(nameBuf.length, 28);
+    central.writeUInt16LE(0, 30);
+    central.writeUInt16LE(0, 32);
+    central.writeUInt16LE(0, 34);
+    central.writeUInt16LE(0, 36);
+    central.writeUInt32LE(file.isDir ? 0x10 : 0, 38);
+    central.writeUInt32LE(offset, 42);
     nameBuf.copy(central, 46);
 
     centralHeaders.push(central);
@@ -189,33 +165,24 @@ function createZipFromDir(sourceDir, outputPath, rootName) {
   }
 
   const centralDirBuf = Buffer.concat(centralHeaders);
-  const centralDirOffset = offset;
-
-  // End of central directory record.
   const eocd = Buffer.alloc(22);
-  eocd.writeUInt32LE(0x06054b50, 0); // signature
-  eocd.writeUInt16LE(0, 4); // disk number
-  eocd.writeUInt16LE(0, 6); // disk with central dir
-  eocd.writeUInt16LE(files.length, 8); // entries on this disk
-  eocd.writeUInt16LE(files.length, 10); // total entries
-  eocd.writeUInt32LE(centralDirBuf.length, 12); // central dir size
-  eocd.writeUInt32LE(centralDirOffset, 16); // central dir offset
-  eocd.writeUInt16LE(0, 20); // comment length
+  eocd.writeUInt32LE(0x06054b50, 0);
+  eocd.writeUInt16LE(0, 4);
+  eocd.writeUInt16LE(0, 6);
+  eocd.writeUInt16LE(files.length, 8);
+  eocd.writeUInt16LE(files.length, 10);
+  eocd.writeUInt32LE(centralDirBuf.length, 12);
+  eocd.writeUInt32LE(offset, 16);
+  eocd.writeUInt16LE(0, 20);
 
-  const zipBuf = Buffer.concat([...localHeaders, centralDirBuf, eocd]);
-  fs.writeFileSync(outputPath, zipBuf);
+  fs.writeFileSync(outputPath, Buffer.concat([...localHeaders, centralDirBuf, eocd]));
 }
 
-/**
- * CRC-32 (ISO 3720) implementation.
- */
 function crc32(buf) {
   let crc = 0xffffffff;
   for (let i = 0; i < buf.length; i++) {
     crc ^= buf[i];
-    for (let j = 0; j < 8; j++) {
-      crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
-    }
+    for (let j = 0; j < 8; j++) crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
   }
   return (crc ^ 0xffffffff) >>> 0;
 }
