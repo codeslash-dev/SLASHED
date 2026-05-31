@@ -11,9 +11,9 @@
    * colour-coded by its worst WCAG level: green (AAA), yellow (AA),
    * orange (AA large only), red (fail all).
    *
-   * Color resolution uses getComputedStyle() on a hidden proxy element
-   * so hex, oklch, hsl — anything the browser understands — is handled
-   * without a custom parser.
+   * Color resolution uses an offscreen canvas (fillStyle + getImageData)
+   * so hex, rgb/hsl, oklch — anything the browser parser accepts — is
+   * handled without a custom parser.
    */
   import { meta, tokens } from '../lib/stores.svelte.js';
 
@@ -46,17 +46,23 @@
 
   // ── Color resolution (browser-native) ────────────────────────────────
 
-  /** Resolve any CSS color string to [r, g, b] via getComputedStyle, or null. */
+  /** Resolve any CSS color string to [r, g, b] via canvas, or null. */
   function resolveToRgb(cssValue) {
     if (!cssValue || typeof document === 'undefined') return null;
-    const el = document.createElement('div');
-    el.style.display = 'none';
-    el.style.backgroundColor = cssValue;
-    document.body.appendChild(el);
-    const computed = getComputedStyle(el).backgroundColor;
-    document.body.removeChild(el);
-    const m = computed.match(/(\d+(?:\.\d+)?),\s*(\d+(?:\.\d+)?),\s*(\d+(?:\.\d+)?)/);
-    return m ? [+m[1], +m[2], +m[3]] : null;
+    if (typeof CSS !== 'undefined' && !CSS.supports('color', cssValue)) return null;
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1;
+      canvas.height = 1;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = cssValue;
+      ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
+      if (a === 0) return null;
+      return [r, g, b];
+    } catch {
+      return null;
+    }
   }
 
   // ── WCAG maths ───────────────────────────────────────────────────────
