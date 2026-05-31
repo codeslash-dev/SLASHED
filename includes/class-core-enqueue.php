@@ -70,5 +70,15 @@ class Slashed_Core_Enqueue {
 			return;
 		}
 		wp_enqueue_style( 'slashed-framework', $url, array(), Slashed_CSS_Loader::get_version( $url ) );
+
+		// Mirror the frontend rem-base override so the iframed editor canvas
+		// matches the public site. The block editor is always iframed in WP 6.4+
+		// (our declared minimum), so this rule targets the canvas <html>, not
+		// the surrounding wp-admin chrome.
+		$settings  = Slashed_Token_Store::get_plugin_settings();
+		$font_size = isset( $settings['html_font_size'] ) ? (string) $settings['html_font_size'] : '';
+		if ( '100' === $font_size || '62.5' === $font_size ) {
+			wp_add_inline_style( 'slashed-framework', 'html { font-size: ' . $font_size . '% !important; }' );
+		}
 	}
 }
