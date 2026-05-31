@@ -129,22 +129,34 @@ class Slashed_Bricks_Fonts_REST {
 		// custom post type. The option-based 'bricks_custom_fonts' above
 		// covers an older/alternative storage path; this block covers the
 		// CPT path used by current Bricks versions.
-		if ( class_exists( 'Bricks\Custom_Fonts' ) ) {
-			$cpt_fonts = \Bricks\Custom_Fonts::get_custom_fonts();
-			if ( is_array( $cpt_fonts ) ) {
-				foreach ( $cpt_fonts as $font_data ) {
-					if ( empty( $font_data['family'] ) || ! is_string( $font_data['family'] ) ) {
-						continue;
+		//
+		// get_custom_fonts() is an internal Bricks method with no public API
+		// contract, so we guard against missing/incompatible versions and fall
+		// back to a direct WP_Query when the API is unavailable.
+		$cpt_via_api = false;
+		if ( class_exists( 'Bricks\Custom_Fonts' ) && method_exists( '\Bricks\Custom_Fonts', 'get_custom_fonts' ) ) {
+			try {
+				$cpt_fonts = \Bricks\Custom_Fonts::get_custom_fonts();
+				if ( is_array( $cpt_fonts ) ) {
+					$cpt_via_api = true;
+					foreach ( $cpt_fonts as $font_data ) {
+						if ( empty( $font_data['family'] ) || ! is_string( $font_data['family'] ) ) {
+							continue;
+						}
+						$fonts[] = array(
+							'family' => sanitize_text_field( $font_data['family'] ),
+							'label'  => sanitize_text_field( $font_data['family'] ),
+							'source' => 'custom',
+						);
 					}
-					$fonts[] = array(
-						'family' => sanitize_text_field( $font_data['family'] ),
-						'label'  => sanitize_text_field( $font_data['family'] ),
-						'source' => 'custom',
-					);
 				}
+			} catch ( \Throwable $e ) {
+				// Bricks API unavailable or incompatible — fall through to WP_Query.
 			}
-		} elseif ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
-			// Bricks class not yet loaded — query the CPT directly.
+		}
+
+		if ( ! $cpt_via_api && defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
+			// Bricks class/method not available — query the CPT directly.
 			$cpt_posts = get_posts(
 				array(
 					'post_type'      => BRICKS_DB_CUSTOM_FONTS,
