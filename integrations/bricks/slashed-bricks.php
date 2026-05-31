@@ -67,8 +67,8 @@ function slashed_bricks_get_css_bundle() {
 /**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN pinned to an immutable release tag
- * (see SLASHED_BRICKS_CSS_REF) so the plugin works without any local
+ * Defaults to the jsDelivr CDN pinned to the immutable dist-branch commit
+ * SHA (see SLASHED_BRICKS_DIST_SHA) so the plugin works without any local
  * file setup. The specific file (essential / optimal / full) is chosen
  * from the 'css_bundle' plugin setting. If a local copy is detected
  * (symlink/in-repo mode or copy-install mode), the local file takes

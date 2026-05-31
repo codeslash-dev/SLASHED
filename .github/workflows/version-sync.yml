@@ -69,6 +69,7 @@ jobs:
         id: dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.ver.outputs.tag }}
           GIT_AUTHOR_NAME: github-actions[bot]
           GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GIT_COMMITTER_NAME: github-actions[bot]
@@ -82,7 +83,7 @@ jobs:
           {
             echo "source-commit: ${GITHUB_SHA}"
             echo "source-ref:    refs/heads/main"
-            echo "release-tag:   ${{ steps.ver.outputs.tag }}"
+            echo "release-tag:   ${RELEASE_TAG}"
             echo "built-at:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "built-by:      .github/workflows/version-sync.yml"
           } > /tmp/sf-dist/SOURCE.txt
@@ -93,7 +94,7 @@ jobs:
           shopt -s dotglob
           cp -R /tmp/sf-dist/. .
           git add -A
-          git commit -m "build: dist for ${{ steps.ver.outputs.tag }}"
+          git commit -m "build: dist for ${RELEASE_TAG}"
 
           DIST_SHA=$(git rev-parse HEAD)
           echo "sha=${DIST_SHA}" >> "$GITHUB_OUTPUT"
@@ -102,15 +103,15 @@ jobs:
             "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
             dist-release:dist
 
+      - name: Switch back to main working tree
+        run: git checkout main
+
       - name: Update SLASHED_BRICKS_DIST_SHA in PHP
         run: |
           DIST_SHA="${{ steps.dist.outputs.sha }}"
           sed -i \
             "s|define( 'SLASHED_BRICKS_DIST_SHA', '[^']*' )|define( 'SLASHED_BRICKS_DIST_SHA', '${DIST_SHA}' )|" \
             integrations/bricks/slashed-bricks.php
-
-      - name: Switch back to main working tree
-        run: git checkout main
 
       - name: Commit and push if anything changed
         env:
