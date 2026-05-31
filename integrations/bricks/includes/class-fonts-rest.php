@@ -124,6 +124,48 @@ class Slashed_Bricks_Fonts_REST {
 			}
 		}
 
+		// ── Custom fonts uploaded via Bricks Font Manager (CPT) ────────
+		// Bricks stores fonts added through Settings > Custom Fonts as a
+		// custom post type. The option-based 'bricks_custom_fonts' above
+		// covers an older/alternative storage path; this block covers the
+		// CPT path used by current Bricks versions.
+		if ( class_exists( 'Bricks\Custom_Fonts' ) ) {
+			$cpt_fonts = \Bricks\Custom_Fonts::get_custom_fonts();
+			if ( is_array( $cpt_fonts ) ) {
+				foreach ( $cpt_fonts as $font_data ) {
+					if ( empty( $font_data['family'] ) || ! is_string( $font_data['family'] ) ) {
+						continue;
+					}
+					$fonts[] = array(
+						'family' => sanitize_text_field( $font_data['family'] ),
+						'label'  => sanitize_text_field( $font_data['family'] ),
+						'source' => 'custom',
+					);
+				}
+			}
+		} elseif ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
+			// Bricks class not yet loaded — query the CPT directly.
+			$cpt_posts = get_posts(
+				array(
+					'post_type'      => BRICKS_DB_CUSTOM_FONTS,
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
+					'fields'         => 'ids',
+				)
+			);
+			foreach ( $cpt_posts as $post_id ) {
+				$family = get_the_title( $post_id );
+				if ( ! $family ) {
+					continue;
+				}
+				$fonts[] = array(
+					'family' => sanitize_text_field( $family ),
+					'label'  => sanitize_text_field( $family ),
+					'source' => 'custom',
+				);
+			}
+		}
+
 		// Deduplicate by family name (case-insensitive) keeping first entry.
 		$seen   = array();
 		$unique = array();
