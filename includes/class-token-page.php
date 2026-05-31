@@ -97,14 +97,14 @@ class Slashed_Token_Page {
 		$css_version = file_exists( $css_path ) ? (string) filemtime( $css_path ) : $js_version;
 
 		wp_enqueue_style(
-			'slashed-bricks-admin-app',
+			'slashed-admin-app',
 			$plugin_url . 'assets/admin-app/app.css',
 			array(),
 			$css_version
 		);
 
 		wp_enqueue_script(
-			'slashed-bricks-admin-app',
+			'slashed-admin-app',
 			$plugin_url . 'assets/admin-app/app.js',
 			array(),
 			$js_version,
@@ -114,8 +114,8 @@ class Slashed_Token_Page {
 		add_filter( 'script_loader_tag', array( $this, 'mark_as_module' ), 10, 3 );
 
 		wp_localize_script(
-			'slashed-bricks-admin-app',
-			'slashedBricksApp',
+			'slashed-admin-app',
+			'slashedApp',
 			array(
 				'rest'           => array(
 					'url'   => esc_url_raw( rest_url( Slashed_REST_Controller::NAMESPACE ) ),
@@ -156,7 +156,7 @@ class Slashed_Token_Page {
 	}
 
 	public function mark_as_module( $tag, $handle, $src ) {
-		if ( 'slashed-bricks-admin-app' !== $handle ) {
+		if ( 'slashed-admin-app' !== $handle ) {
 			return $tag;
 		}
 		return preg_replace( '/<script(\b[^>]*)>/', '<script type="module"$1>', $tag, 1 );
@@ -184,7 +184,7 @@ class Slashed_Token_Page {
 
 	public function render_missing_bundle_notice() {
 		echo '<div class="notice notice-error"><p>';
-		esc_html_e( 'SLASHED admin SPA bundle is missing. Run `npm install && npm run build` inside integrations/bricks/admin-app/ to build it.', 'slashed' );
+		esc_html_e( 'SLASHED admin SPA bundle is missing. Run `npm install && npm run build` inside integrations/bricks/admin-app/ to generate it.', 'slashed' );
 		echo '</p></div>';
 	}
 }

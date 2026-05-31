@@ -2,9 +2,9 @@
  * SLASHED admin SPA entry point.
  *
  * Mounts the Svelte app into the #slashed-admin-app element printed
- * by class-admin-page-svelte.php. All hydration data comes from
- * window.slashedBricksApp, which is populated server-side via
- * wp_localize_script (see Slashed_Bricks_Admin_Page_Svelte::enqueue).
+ * by class-token-page.php. All hydration data comes from
+ * window.slashedApp, which is populated server-side via
+ * wp_localize_script (see Slashed_Token_Page::enqueue_assets).
  *
  * Why a single mount and not per-tab islands: every tab shares the
  * same dirty-state, defaults, and live-preview state. Having one

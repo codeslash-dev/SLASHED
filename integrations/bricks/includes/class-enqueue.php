@@ -12,89 +12,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Bricks_Enqueue
  *
- * Handles loading the SLASHED CSS bundle on the frontend
- * and within the Bricks Builder editor iframe.
+ * Adds Bricks-specific inline rules on top of the globally-registered
+ * `slashed-framework` handle (registered by Slashed_Core_Enqueue).
  */
 class Slashed_Bricks_Enqueue {
 
-    /**
-     * Constructor. Register hooks.
-     */
     public function __construct() {
-        // Frontend AND the Bricks builder canvas iframe AND the Bricks
-        // builder admin chrome all fire wp_enqueue_scripts. The third one
-        // is the gotcha: loading the framework CSS into the builder panel
-        // would override Bricks' own UI styles (icons, colors, fonts). The
-        // handler below skips that case via bricks_is_builder_main().
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_styles' ) );
-
-        // Reserved hook for intentional builder-panel tweaks (assets/editor.css).
-        // Currently a no-op stylesheet; left wired up so future panel styling
-        // can be dropped in without re-plumbing the hook chain.
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_editor_styles' ) );
     }
 
     /**
-     * Enqueue SLASHED CSS on the frontend and in the Bricks editor iframe.
+     * Add Bricks-specific inline CSS on the frontend and canvas iframe.
      *
-     * Bricks fires wp_enqueue_scripts in three contexts:
-     *   1. Public frontend         - we want our CSS here.
-     *   2. Builder canvas iframe   - we want our CSS here (preview rendering,
-     *                                color-picker swatch resolution, etc.).
-     *   3. Builder admin chrome    - we DO NOT want our CSS here; loading
-     *                                resets / themes / base typography would
-     *                                bleed into Bricks' own UI and visibly
-     *                                change icons and colors in the toolbars.
-     *
-     * bricks_is_builder_main() returns true only on context (3), so the early
-     * return below is the canonical Bricks pattern for "frontend + canvas, not
-     * the panel" - documented in Bricks Academy under Child Theme guidance.
+     * `slashed-framework` is registered globally by Slashed_Core_Enqueue.
+     * This method only adds the dark-mode bridge that maps Bricks'
+     * data-brx-theme attribute to SLASHED's colour-scheme / --sf-is-dark
+     * system. The builder-panel context is skipped for the same reason the
+     * global enqueue skips it (see Slashed_Core_Enqueue::enqueue_frontend).
      */
     public function enqueue_frontend_styles() {
         if ( function_exists( 'bricks_is_builder_main' ) && bricks_is_builder_main() ) {
             return;
-        }
-
-        $css_url = slashed_bricks_get_css_url();
-
-        if ( '' === $css_url ) {
-            return;
-        }
-
-        // Cache-busting: mtime for local files, version constant for CDN.
-        if ( class_exists( 'Slashed_CSS_Loader' ) ) {
-            $version = Slashed_CSS_Loader::get_version( $css_url );
-        } else {
-            $filename   = basename( (string) wp_parse_url( $css_url, PHP_URL_PATH ) );
-            $repo_path  = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
-            $local_path = SLASHED_BRICKS_PATH . 'dist/' . $filename;
-
-            if ( '' !== $filename && file_exists( $repo_path ) ) {
-                $version = (string) filemtime( $repo_path );
-            } elseif ( '' !== $filename && file_exists( $local_path ) ) {
-                $version = (string) filemtime( $local_path );
-            } else {
-                $version = SLASHED_BRICKS_VERSION;
-            }
-        }
-
-        wp_enqueue_style(
-            'slashed-framework',
-            $css_url,
-            array(),
-            $version
-        );
-
-        // Inject HTML font-size override if configured.
-        $plugin_settings = get_option( 'slashed_bricks_settings', array() );
-        if ( is_array( $plugin_settings ) && ! empty( $plugin_settings['html_font_size'] ) ) {
-            $font_size = $plugin_settings['html_font_size'];
-            if ( '100' === $font_size || '62.5' === $font_size ) {
-                wp_add_inline_style(
-                    'slashed-framework',
-                    'html { font-size: ' . $font_size . '% !important; }'
-                );
-            }
         }
 
         // Bridge Bricks' dark mode toggle (data-brx-theme attribute) to SLASHED's theme system.

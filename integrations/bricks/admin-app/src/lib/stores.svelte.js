@@ -6,8 +6,8 @@
  * automatically re-render when it changes, and the live-preview derived
  * CSS recomputes for free.
  *
- * Hydrated once at module load from window.slashedBricksApp. The shape
- * mirrors the `slashed_bricks_tokens` wp_option exactly:
+ * Hydrated once at module load from window.slashedApp. The shape
+ * mirrors the `slashed_tokens` wp_option exactly:
  *
  *   tokens.<section>.<key> = string
  *
@@ -17,8 +17,8 @@
  * so the store stays a flat key-value map.
  */
 
-const bootstrap = typeof window !== 'undefined' && window.slashedBricksApp
-  ? window.slashedBricksApp
+const bootstrap = typeof window !== 'undefined' && window.slashedApp
+  ? window.slashedApp
   : { defaults: {}, settings: {}, tabs: {}, rest: { url: '', nonce: '' } };
 
 /** Read-only metadata: factory defaults, available tabs, REST handshake, inventory, plugin settings. */

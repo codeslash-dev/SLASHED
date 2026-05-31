@@ -33,12 +33,15 @@ if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
 }
 
 /**
- * In unified mode slashed.php loads the shared token infrastructure before
- * this file is included. In standalone mode (this plugin activated directly),
- * load them from the shared includes directory two levels up.
+ * In unified mode slashed.php loads the shared infrastructure before this file
+ * is included. In standalone mode (this plugin activated directly), load
+ * everything from the shared includes directory two levels up.
  */
 if ( ! class_exists( 'Slashed_Token_Store' ) ) {
 	$_slashed_shared = SLASHED_BRICKS_PATH . '../../includes/';
+	require_once $_slashed_shared . 'class-settings.php';
+	require_once $_slashed_shared . 'class-css-loader.php';
+	require_once $_slashed_shared . 'class-core-enqueue.php';
 	require_once $_slashed_shared . 'class-token-store.php';
 	require_once $_slashed_shared . 'class-token-sanitizer.php';
 	require_once $_slashed_shared . 'class-token-defaults.php';
@@ -134,6 +137,10 @@ function slashed_bricks_is_bricks_active() {
 // (Slashed_REST_Controller) are registered globally by slashed.php.
 // In standalone mode the shared classes are loaded above and bootstrapped below.
 if ( ! defined( 'SLASHED_VERSION' ) ) {
+	// Standalone mode: bootstrap the full global pipeline that slashed.php provides
+	// in unified mode — CSS delivery, token REST API, admin page, override injection.
+	new Slashed_Core_Enqueue();
+
 	add_action( 'rest_api_init', function () {
 		( new Slashed_REST_Controller() )->register_routes();
 	} );
