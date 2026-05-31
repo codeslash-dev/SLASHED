@@ -2,7 +2,7 @@
 /**
  * Token default values for the SLASHED framework.
  *
- * @package SLASHED_Bricks
+ * @package SLASHED
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Slashed_Bricks_Token_Defaults
+ * Class Slashed_Token_Defaults
  *
  * Provides factory default values for all editable design tokens,
  * organized by section for use in the admin settings page.
  */
-class Slashed_Bricks_Token_Defaults {
+class Slashed_Token_Defaults {
 
 	/**
 	 * Get all default token values organized by section.

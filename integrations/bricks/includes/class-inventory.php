@@ -183,16 +183,16 @@ class Slashed_Bricks_Inventory {
 	/**
 	 * Read admin-saved color overrides and map them to CSS variable names.
 	 *
-	 * Mirrors the mapping logic in Slashed_Bricks_CSS_Generator::generate_color_declarations():
+	 * Mirrors the mapping logic in Slashed_CSS_Generator::generate_color_declarations():
 	 *   - brand_primary   -> --sf-color-primary-light
 	 *   - status_success  -> --sf-color-success-light
 	 *
 	 * @return array<string, string> Map of CSS variable name to color value.
 	 */
 	private static function get_admin_color_overrides() {
-		$tokens = get_option( Slashed_Bricks_Token_Store::OPTION_NAME );
+		$tokens = Slashed_Token_Store::get_settings();
 
-		if ( ! is_array( $tokens ) || empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
+		if ( empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
 			return array();
 		}
 

@@ -1,23 +1,14 @@
 <?php
 /**
- * Single source of truth for SLASHED Bricks admin tabs.
+ * Single source of truth for SLASHED admin tabs.
  *
- * The plugin has two flavours of tabs:
- *   - "Token tabs" — sections whose values live in
- *     `slashed_bricks_tokens` (colors, contrast, typography, spacing,
- *     radius, shadows, motion, zindex). These are the only tabs that
- *     read/write the option, so they're the only ones the legacy
- *     form handler and the REST sanitizer accept as `section`.
- *   - "View tabs" — read-only inventory / documentation panels
- *     (variables, classes, bundle, hooks, cheatsheet) that exist
- *     only in the Svelte SPA. They never touch the option.
+ * Two flavours of tabs:
+ *   - "Token tabs"  — sections whose values live in `slashed_tokens`
+ *     (colors, contrast, typography, spacing, radius, shadows, motion, zindex).
+ *   - "View tabs"   — read-only inventory / documentation panels that exist
+ *     only in the Svelte SPA and never touch the option.
  *
- * Splitting the registry into `get_token_tabs()` vs. `get_all()` lets
- * each caller pick the right slice:
- *   - legacy form's nav and section whitelist  → token tabs only.
- *   - Svelte SPA's nav + REST section whitelist → all tabs.
- *
- * @package SLASHED_Bricks
+ * @package SLASHED
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,19 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Slashed_Bricks_Tab_Registry
+ * Class Slashed_Tab_Registry
  *
- * Stateless. Returning fresh arrays each call is fine — the maps are
- * tiny and `WP_DEBUG` callers benefit from being unable to mutate a
- * shared instance accidentally.
+ * Stateless. Returning fresh arrays each call avoids accidental mutation.
  */
-class Slashed_Bricks_Tab_Registry {
+class Slashed_Tab_Registry {
 
 	/**
 	 * Tabs whose values are persisted to the tokens option.
-	 *
-	 * Order is the legacy nav order; do not reshuffle without also
-	 * updating any docs that screenshot / list the tabs.
 	 *
 	 * @return array<string,string> Slug → display label.
 	 */
@@ -53,10 +39,6 @@ class Slashed_Bricks_Tab_Registry {
 
 	/**
 	 * Slugs of the sections that live inside the Miscellaneous tab.
-	 *
-	 * The REST API and legacy form handler still accept these slugs
-	 * directly so the Svelte SaveBar can save/reset each sub-section
-	 * independently.
 	 *
 	 * @return string[]
 	 */
@@ -102,9 +84,7 @@ class Slashed_Bricks_Tab_Registry {
 	}
 
 	/**
-	 * Whether a slug names a *token* tab (i.e. one that may be saved
-	 * to the option). Used by the REST controller as the section
-	 * whitelist for save/reset.
+	 * Whether a slug names a token tab (i.e. one that may be saved to the option).
 	 *
 	 * @param string $slug Slug to test.
 	 * @return bool

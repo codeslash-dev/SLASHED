@@ -4,7 +4,7 @@
  *
  * v1 ships one endpoint:
  *
- *   GET /wp-json/slashed-bricks/v1/rebemer/unused
+ *   GET /wp-json/slashed/v1/rebemer/unused
  *     Returns the list of global classes not referenced by any element
  *     across the post types Bricks edits. Read-only. Never mutates the
  *     `bricks_global_classes` option — deletion stays the user's job in
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Slashed_Bricks_ReBEMer_REST {
 
-	const NAMESPACE = 'slashed-bricks/v1';
+	const NAMESPACE = 'slashed/v1';
 
 	/**
 	 * Maximum number of postmeta rows to scan for references in one
@@ -68,8 +68,9 @@ class Slashed_Bricks_ReBEMer_REST {
 	/**
 	 * Register all reBEMer REST routes.
 	 *
-	 * Called from `slashed_bricks_rest_routes_init()` in the plugin
-	 * bootstrap, alongside the legacy admin REST controller.
+	 * Called from `slashed_bricks_rest_routes_init()`, which registers
+	 * only Bricks-specific endpoints. The token CRUD controller
+	 * (Slashed_REST_Controller) is registered globally by slashed.php.
 	 */
 	public function register_routes() {
 		register_rest_route(
