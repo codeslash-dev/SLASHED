@@ -12,11 +12,11 @@
     <!--
       Standalone dev harness used only by `vite dev`. The real WP page
       prints an equivalent mount + hydration script via PHP. The shape
-      of `window.slashedBricksApp` here mirrors what wp_localize_script
+      of `window.slashedApp` here mirrors what wp_localize_script
       writes in production so the same Svelte code works in both.
     -->
     <script>
-      window.slashedBricksApp = {
+      window.slashedApp = {
         rest: {
           // In dev, no real REST endpoint exists; api.js short-circuits
           // when restUrl is empty and just logs the payload.

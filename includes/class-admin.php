@@ -95,51 +95,11 @@ class Slashed_Admin {
 				<input type="hidden" name="action" value="slashed_save_settings">
 				<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_KEY ); ?>
 
-				<h2 style="margin-top:1.5em;"><?php esc_html_e( 'Active integrations', 'slashed' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'Enable the integrations for the builders you use. SLASHED loads its CSS and syncs design tokens only for active integrations.', 'slashed' ); ?></p>
-
-				<table class="form-table" role="presentation">
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Bricks Builder', 'slashed' ); ?></th>
-						<td>
-							<label>
-								<input type="checkbox" name="integrations[bricks]"
-									<?php checked( $integrations['bricks'] ); ?>>
-								<?php esc_html_e( 'Enable', 'slashed' ); ?>
-							</label>
-							<p class="description">
-							<?php
-							if ( defined( 'BRICKS_VERSION' ) ) {
-								printf(
-									/* translators: %s: Bricks version */
-									esc_html__( 'Bricks %s detected.', 'slashed' ),
-									esc_html( BRICKS_VERSION )
-								);
-							} else {
-								esc_html_e( 'Bricks Builder not detected — integration will have no effect until Bricks is installed.', 'slashed' );
-							}
-							?>
-							<?php if ( $integrations['bricks'] ) : ?>
-								&nbsp;&mdash;&nbsp;<a href="<?php echo esc_url( admin_url( 'admin.php?page=slashed-bricks' ) ); ?>"><?php esc_html_e( 'Manage Bricks token overrides →', 'slashed' ); ?></a>
-							<?php endif; ?>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Gutenberg / Block Editor', 'slashed' ); ?></th>
-						<td>
-							<label>
-								<input type="checkbox" name="integrations[gutenberg]"
-									<?php checked( $integrations['gutenberg'] ); ?>>
-								<?php esc_html_e( 'Enable', 'slashed' ); ?>
-							</label>
-							<p class="description"><?php esc_html_e( 'Loads SLASHED CSS in the block editor canvas and syncs the color palette.', 'slashed' ); ?></p>
-						</td>
-					</tr>
-				</table>
-
-				<h2><?php esc_html_e( 'CSS bundle', 'slashed' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'All active integrations load the same bundle. Choose the smallest bundle that covers your needs.', 'slashed' ); ?></p>
+				<h2 style="margin-top:1.5em;"><?php esc_html_e( 'CSS framework', 'slashed' ); ?></h2>
+				<p class="description">
+					<?php esc_html_e( 'The SLASHED framework CSS loads automatically on your site — no page builder required. Choose the smallest bundle that covers your needs.', 'slashed' ); ?>
+					&nbsp;<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . \Slashed_Token_Page::PAGE_SLUG ) ); ?>"><?php esc_html_e( 'Customize design tokens →', 'slashed' ); ?></a>
+				</p>
 
 				<table class="form-table" role="presentation">
 					<?php
@@ -161,6 +121,47 @@ class Slashed_Admin {
 							</td>
 						</tr>
 					<?php endforeach; ?>
+				</table>
+
+				<h2><?php esc_html_e( 'Builder integrations', 'slashed' ); ?></h2>
+				<p class="description"><?php esc_html_e( 'Optional deeper integration with your page builder. Adds builder-specific features on top of the core CSS delivery.', 'slashed' ); ?></p>
+
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Bricks Builder', 'slashed' ); ?></th>
+						<td>
+							<label>
+								<input type="checkbox" name="integrations[bricks]"
+									<?php checked( $integrations['bricks'] ); ?>>
+								<?php esc_html_e( 'Enable', 'slashed' ); ?>
+							</label>
+							<p class="description">
+							<?php
+							if ( defined( 'BRICKS_VERSION' ) ) {
+								printf(
+									/* translators: %s: Bricks version */
+									esc_html__( 'Bricks %s detected.', 'slashed' ),
+									esc_html( BRICKS_VERSION )
+								);
+							} else {
+								esc_html_e( 'Bricks Builder not detected.', 'slashed' );
+							}
+							?>
+							<?php esc_html_e( 'Injects CSS variables into Global Variables, syncs the color palette, and enables the reBEMer class manager.', 'slashed' ); ?>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Gutenberg / Block Editor', 'slashed' ); ?></th>
+						<td>
+							<label>
+								<input type="checkbox" name="integrations[gutenberg]"
+									<?php checked( $integrations['gutenberg'] ); ?>>
+								<?php esc_html_e( 'Enable', 'slashed' ); ?>
+							</label>
+							<p class="description"><?php esc_html_e( 'Syncs SLASHED colors with the block editor palette and bridges the editor dark-mode toggle.', 'slashed' ); ?></p>
+						</td>
+					</tr>
 				</table>
 
 				<?php submit_button( __( 'Save settings', 'slashed' ) ); ?>

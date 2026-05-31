@@ -2,11 +2,11 @@
  * Thin REST client for the admin SPA.
  *
  * The PHP side exposes:
- *   POST  /wp-json/slashed-bricks/v1/tokens   - save a section
- *   POST  /wp-json/slashed-bricks/v1/tokens/reset - reset a section or all
+ *   POST  /wp-json/slashed/v1/tokens   - save a section
+ *   POST  /wp-json/slashed/v1/tokens/reset - reset a section or all
  *
  * Auth uses the WP REST nonce (X-WP-Nonce header). The nonce is generated
- * server-side and passed through window.slashedBricksApp.rest.nonce, so
+ * server-side and passed through window.slashedApp.rest.nonce, so
  * every request is automatically scoped to the logged-in admin.
  *
  * In the Vite dev harness rest.url is empty; we just log the payload and

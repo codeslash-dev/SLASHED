@@ -45,9 +45,18 @@ define( 'SLASHED_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
 require_once SLASHED_PATH . 'includes/class-settings.php';
 require_once SLASHED_PATH . 'includes/class-css-loader.php';
 
+// ─── Core CSS delivery (builder-agnostic) ────────────────────────────────────
+//
+// Loads the SLASHED framework stylesheet on every WordPress site regardless
+// of which builder (if any) is active. Builder integrations add inline rules
+// on top (dark-mode bridges etc.) without re-registering the handle.
+
+require_once SLASHED_PATH . 'includes/class-token-store.php';  // needed by Slashed_Core_Enqueue for html_font_size
+require_once SLASHED_PATH . 'includes/class-core-enqueue.php';
+new Slashed_Core_Enqueue();
+
 // ─── Token infrastructure (global — shared by all integrations) ───────────────
 
-require_once SLASHED_PATH . 'includes/class-token-store.php';
 require_once SLASHED_PATH . 'includes/class-token-sanitizer.php';
 require_once SLASHED_PATH . 'includes/class-token-defaults.php';
 require_once SLASHED_PATH . 'includes/class-tab-registry.php';
