@@ -40,14 +40,18 @@ console.log(`\nversion-sync: syncing to ${versionTag}\n`);
 let changed = 0;
 
 // ── integrations/bricks/slashed-bricks.php ─────────────────────────────────
-// SLASHED_BRICKS_CSS_REF — jsDelivr tag ref used to load the framework CSS.
-// Pinned to a release tag so CDN cache is immutable; must match framework version.
+// SLASHED_BRICKS_CSS_REF — semver tag used for version comparison only.
+// Still kept in sync so the dashboard "update available" widget shows the right version.
 changed += sync(
   'integrations/bricks/slashed-bricks.php',
   /define\(\s*'SLASHED_BRICKS_CSS_REF',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_BRICKS_CSS_REF', '${versionTag}' )`,
   `SLASHED_BRICKS_CSS_REF = '${versionTag}'`
 ) ? 1 : 0;
+
+// SLASHED_BRICKS_DIST_SHA — dist branch commit SHA used for the CDN URL.
+// NOT updated here; managed by the version-sync GitHub Actions workflow which
+// pushes CSS to the dist branch and captures the resulting commit SHA.
 
 // Plugin header comment: "Version: X.X.X"
 changed += sync(

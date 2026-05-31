@@ -2,16 +2,21 @@ name: Sync version artifacts
 
 # Triggered whenever a GitHub release or pre-release is published.
 # Checks out main, aligns all non-JS version references to the release tag,
-# rebuilds CSS bundles (so headers carry the correct version), and commits
-# any changed files back to main.
+# rebuilds CSS bundles, publishes them to the dist branch, captures the
+# resulting commit SHA, stores it in SLASHED_BRICKS_DIST_SHA, and commits
+# everything back to main.
 #
-# This is the safety net for the full release pipeline:
+# CSS bundles are NOT committed to the main branch — they live only on the
+# dedicated `dist` branch and in GitHub Release assets. The dist-branch
+# commit SHA is stored in slashed-bricks.php so the plugin can construct an
+# immutable jsDelivr CDN URL that never changes between releases.
+#
+# Full release pipeline:
 #   1. Developer runs `npm run release` locally → bumps package.json, runs
 #      version-sync + build, commits chore(release): vX.Y.Z, pushes tag.
 #   2. release.yml fires on the tag → uploads dist assets to the GitHub release.
-#   3. This workflow fires on the release.published event → ensures main always
-#      has the freshly-built dist/ and correctly pinned constants, even if a
-#      developer skipped the local release script and tagged manually.
+#   3. This workflow fires on the release.published event → rebuilds CSS,
+#      publishes to dist branch, captures SHA, updates PHP, commits to main.
 
 on:
   release:
@@ -60,13 +65,62 @@ jobs:
       - name: Rebuild CSS bundles
         run: npm run build
 
+      - name: Push CSS bundles to dist branch and capture SHA
+        id: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          set -euo pipefail
+
+          # Stage dist/ contents for the orphan dist branch.
+          mkdir -p /tmp/sf-dist
+          cp -R dist/. /tmp/sf-dist/
+          {
+            echo "source-commit: ${GITHUB_SHA}"
+            echo "source-ref:    refs/heads/main"
+            echo "release-tag:   ${{ steps.ver.outputs.tag }}"
+            echo "built-at:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "built-by:      .github/workflows/version-sync.yml"
+          } > /tmp/sf-dist/SOURCE.txt
+          echo 'node_modules/' > /tmp/sf-dist/.gitignore
+
+          git checkout --orphan dist-release
+          git rm -rf . > /dev/null
+          shopt -s dotglob
+          cp -R /tmp/sf-dist/. .
+          git add -A
+          git commit -m "build: dist for ${{ steps.ver.outputs.tag }}"
+
+          DIST_SHA=$(git rev-parse HEAD)
+          echo "sha=${DIST_SHA}" >> "$GITHUB_OUTPUT"
+
+          git push --force \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            dist-release:dist
+
+      - name: Update SLASHED_BRICKS_DIST_SHA in PHP
+        run: |
+          DIST_SHA="${{ steps.dist.outputs.sha }}"
+          sed -i \
+            "s|define( 'SLASHED_BRICKS_DIST_SHA', '[^']*' )|define( 'SLASHED_BRICKS_DIST_SHA', '${DIST_SHA}' )|" \
+            integrations/bricks/slashed-bricks.php
+
+      - name: Switch back to main working tree
+        run: git checkout main
+
       - name: Commit and push if anything changed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
+          # Stage only tracked files (dist/*.css are gitignored).
+          git add integrations/bricks/slashed-bricks.php package.json package-lock.json
+          git add -u
           if git diff --cached --quiet; then
             echo "Nothing to commit — all version artifacts already up to date."
           else
