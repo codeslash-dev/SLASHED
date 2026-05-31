@@ -18,6 +18,7 @@
  */
 import { mount, unmount } from 'svelte';
 import * as api from './lib/bricks-api.js';
+import * as hints from './lib/hints.js';
 import BemBadge from './components/BemBadge.svelte';
 import BemPanel from './components/BemPanel.svelte';
 import './styles/panel.css';
@@ -51,6 +52,14 @@ function ensureHost() {
 }
 
 function start() {
+  // Initialize class hints if enabled.
+  if (typeof window.slashedBricksEditor === 'object') {
+    hints.init(
+      window.slashedBricksEditor.showClassHints,
+      window.slashedBricksEditor.classHints
+    );
+  }
+
   let attempts = 0;
   const tryProbe = () => {
     if (signal.aborted) return;
@@ -226,6 +235,7 @@ function closePanel() {
 window.addEventListener('beforeunload', () => {
   controller.abort();
   closePanel();
+  hints.destroy();
   for (const { instance } of badgeInstances.values()) {
     try { unmount(instance); } catch { /* ignore */ }
   }
