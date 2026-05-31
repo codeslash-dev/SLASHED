@@ -62,8 +62,16 @@ class Slashed_Gutenberg_Enqueue {
 
 	/**
 	 * Load SLASHED CSS on the public frontend.
+	 *
+	 * Skips the Bricks builder-panel context when Bricks is active:
+	 * loading CSS resets into the builder chrome breaks Bricks' icons.
+	 * The same guard lives in Slashed_Core_Enqueue::enqueue_frontend().
 	 */
 	public function enqueue_frontend_styles() {
+		if ( function_exists( 'bricks_is_builder_main' ) && bricks_is_builder_main() ) {
+			return;
+		}
+
 		$css_url = slashed_gutenberg_get_css_url();
 		if ( '' === $css_url ) {
 			return;
