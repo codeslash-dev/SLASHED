@@ -11,9 +11,9 @@
    * colour-coded by its worst WCAG level: green (AAA), yellow (AA),
    * orange (AA large only), red (fail all).
    *
-   * Color resolution uses getComputedStyle() on a hidden proxy element
-   * so hex, oklch, hsl — anything the browser understands — is handled
-   * without a custom parser.
+   * Color resolution uses an offscreen canvas (fillStyle + getImageData)
+   * so hex, rgb/hsl, oklch — anything the browser parser accepts — is
+   * handled without a custom parser.
    */
   import { meta, tokens } from '../lib/stores.svelte.js';
 
@@ -49,6 +49,7 @@
   /** Resolve any CSS color string to [r, g, b] via canvas, or null. */
   function resolveToRgb(cssValue) {
     if (!cssValue || typeof document === 'undefined') return null;
+    if (typeof CSS !== 'undefined' && !CSS.supports('color', cssValue)) return null;
     try {
       const canvas = document.createElement('canvas');
       canvas.width = 1;
