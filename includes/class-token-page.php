@@ -117,19 +117,23 @@ class Slashed_Token_Page {
 			'slashed-admin-app',
 			'slashedApp',
 			array(
-				'rest'           => array(
+				'rest'               => array(
 					'url'   => esc_url_raw( rest_url( Slashed_REST_Controller::NAMESPACE ) ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 				),
-				'tabs'           => Slashed_Tab_Registry::get_all(),
-				'defaults'       => Slashed_Token_Defaults::get_all(),
-				'settings'       => Slashed_Token_Store::get_settings(),
-				'pluginSettings' => Slashed_Token_Store::get_plugin_settings(),
-				'inventory'      => class_exists( 'Slashed_Bricks_Inventory' ) ? Slashed_Bricks_Inventory::get() : null,
-				'classHints'     => self::get_class_hints(),
-				'versions'       => array(
+				'tabs'               => Slashed_Tab_Registry::get_all(),
+				'defaults'           => Slashed_Token_Defaults::get_all(),
+				'settings'           => Slashed_Token_Store::get_settings(),
+				'pluginSettings'     => Slashed_Token_Store::get_plugin_settings(),
+				'inventory'          => class_exists( 'Slashed_Bricks_Inventory' ) ? Slashed_Bricks_Inventory::get() : null,
+				'classHints'         => self::get_class_hints(),
+				'versions'           => array(
 					'plugin'    => defined( 'SLASHED_VERSION' ) ? SLASHED_VERSION : SLASHED_BRICKS_VERSION,
 					'framework' => defined( 'SLASHED_CSS_REF' ) ? SLASHED_CSS_REF : SLASHED_BRICKS_CSS_REF,
+				),
+				'activeIntegrations' => array(
+					'bricks'    => class_exists( 'Slashed_Settings' ) ? Slashed_Settings::is_enabled( 'bricks' ) : true,
+					'gutenberg' => class_exists( 'Slashed_Settings' ) ? Slashed_Settings::is_enabled( 'gutenberg' ) : true,
 				),
 			)
 		);

@@ -125,48 +125,26 @@ class Slashed_Bricks_Fonts_REST {
 		}
 
 		// ── Custom fonts uploaded via Bricks Font Manager (CPT) ────────
-		// Bricks stores fonts added through Settings > Custom Fonts as a
-		// custom post type. The option-based 'bricks_custom_fonts' above
-		// covers an older/alternative storage path; this block covers the
-		// CPT path used by current Bricks versions.
-		//
-		// get_custom_fonts() is an internal Bricks method with no public API
-		// contract, so we guard against missing/incompatible versions and fall
-		// back to a direct WP_Query when the API is unavailable.
-		$cpt_via_api = false;
-		if ( class_exists( 'Bricks\Custom_Fonts' ) && method_exists( '\Bricks\Custom_Fonts', 'get_custom_fonts' ) ) {
-			try {
-				$cpt_fonts = \Bricks\Custom_Fonts::get_custom_fonts();
-				if ( is_array( $cpt_fonts ) ) {
-					$cpt_via_api = true;
-					foreach ( $cpt_fonts as $font_data ) {
-						if ( empty( $font_data['family'] ) || ! is_string( $font_data['family'] ) ) {
-							continue;
-						}
-						$fonts[] = array(
-							'family' => sanitize_text_field( $font_data['family'] ),
-							'label'  => sanitize_text_field( $font_data['family'] ),
-							'source' => 'custom',
-						);
-					}
-				}
-			} catch ( \Throwable $e ) {
-				// Bricks API unavailable or incompatible — fall through to WP_Query.
-			}
-		}
-
-		if ( ! $cpt_via_api && defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
-			// Bricks class/method not available — query the CPT directly.
+		// Bricks stores fonts added via its Font Manager as a CPT. Fonts start
+		// as 'draft' when created through the builder UI and may stay in that
+		// status even after files are uploaded, so we include both 'publish'
+		// and 'draft' posts. We query the CPT title directly rather than
+		// calling Bricks\Custom_Fonts::get_custom_fonts() because that method
+		// uses a static cache, has side-effects (generates @font-face strings),
+		// and only queries 'publish' by default — all unnecessary for a name
+		// lookup.
+		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
 			$cpt_posts = get_posts(
 				array(
 					'post_type'      => BRICKS_DB_CUSTOM_FONTS,
 					'posts_per_page' => -1,
-					'post_status'    => 'publish',
+					'post_status'    => array( 'publish', 'draft' ),
 					'fields'         => 'ids',
+					'no_found_rows'  => true,
 				)
 			);
 			foreach ( $cpt_posts as $post_id ) {
-				$family = get_the_title( $post_id );
+				$family = html_entity_decode( (string) get_the_title( $post_id ), ENT_QUOTES, 'UTF-8' );
 				if ( ! $family ) {
 					continue;
 				}

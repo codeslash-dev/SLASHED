@@ -55,11 +55,14 @@
       const res = await fetch(url, {
         headers: { 'X-WP-Nonce': meta.rest.nonce },
       });
-      if (!res.ok) return;
+      if (!res.ok) {
+        console.error('[slashed] bricks-fonts fetch failed:', res.status, res.statusText, url);
+        return;
+      }
       const data = await res.json();
       bricksFonts = Array.isArray(data?.fonts) ? data.fonts : [];
-    } catch {
-      // Silently degrade — Bricks source tab just won't appear.
+    } catch (err) {
+      console.error('[slashed] bricks-fonts fetch error:', err);
     } finally {
       bricksLoaded = true;
     }
@@ -148,6 +151,8 @@
           class:source-tab--active={source === 'bricks'}
           onclick={() => switchSource('bricks')}
         >Bricks</button>
+      {:else if bricksLoaded && !meta.activeIntegrations?.bricks}
+        <span class="source-tab source-tab--disabled" title="Enable the Bricks integration in SLASHED Settings to browse Bricks fonts here.">Bricks</span>
       {/if}
       <button
         type="button"
@@ -234,6 +239,11 @@
     background: #2271b1;
     border-color: #2271b1;
     color: #fff;
+  }
+  .source-tab--disabled {
+    opacity: 0.45;
+    cursor: default;
+    pointer-events: none;
   }
 
   .font-select,
