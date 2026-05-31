@@ -30,16 +30,20 @@ const OUTPUT = path.join(ROOT, 'dist', 'slashed.zip');
 const STAGE  = path.join(ROOT, '.tmp-plugin-stage');
 const STAGE_PLUGIN = path.join(STAGE, 'slashed');
 
-// Paths relative to ROOT that are copied into the zip, preserving structure.
+const PLUGIN_ROOT = 'plugins/SLASHED-for-WP';
+
+// Paths relative to ROOT that are copied into the zip.
+// src is the repo path; dest is the path inside the slashed/ zip folder.
 const INCLUDE = [
-  'slashed.php',
-  'includes',
-  'integrations/bricks/slashed-bricks.php',
-  'integrations/bricks/includes',
-  'integrations/bricks/assets',
-  'integrations/bricks/data',
-  'integrations/gutenberg/slashed-gutenberg.php',
-  'integrations/gutenberg/includes',
+  { src: `${PLUGIN_ROOT}/slashed.php`,                                  dest: 'slashed.php' },
+  { src: `${PLUGIN_ROOT}/includes`,                                     dest: 'includes' },
+  { src: `${PLUGIN_ROOT}/data`,                                         dest: 'data' },
+  { src: `${PLUGIN_ROOT}/integrations/bricks/slashed-bricks.php`,      dest: 'integrations/bricks/slashed-bricks.php' },
+  { src: `${PLUGIN_ROOT}/integrations/bricks/includes`,                 dest: 'integrations/bricks/includes' },
+  { src: `${PLUGIN_ROOT}/integrations/bricks/assets`,                   dest: 'integrations/bricks/assets' },
+  { src: `${PLUGIN_ROOT}/integrations/bricks/data`,                     dest: 'integrations/bricks/data' },
+  { src: `${PLUGIN_ROOT}/integrations/gutenberg/slashed-gutenberg.php`, dest: 'integrations/gutenberg/slashed-gutenberg.php' },
+  { src: `${PLUGIN_ROOT}/integrations/gutenberg/includes`,              dest: 'integrations/gutenberg/includes' },
 ];
 
 function copyRecursive(src, dest) {
@@ -64,11 +68,11 @@ function main() {
   clean(STAGE);
   fs.mkdirSync(STAGE_PLUGIN, { recursive: true });
 
-  for (const entry of INCLUDE) {
-    const src  = path.join(ROOT, entry);
-    const dest = path.join(STAGE_PLUGIN, entry);
+  for (const { src: srcRel, dest: destRel } of INCLUDE) {
+    const src  = path.join(ROOT, srcRel);
+    const dest = path.join(STAGE_PLUGIN, destRel);
     if (!fs.existsSync(src)) {
-      console.warn(`[zip-plugin] warning: ${entry} not found, skipping`);
+      console.warn(`[zip-plugin] warning: ${srcRel} not found, skipping`);
       continue;
     }
     copyRecursive(src, dest);

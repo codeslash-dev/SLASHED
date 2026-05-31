@@ -7,8 +7,8 @@ playwright-report/
 
 # Built source maps are large and not needed in shipped releases.
 # Re-build locally via `npm run build` in admin-app/ to regenerate.
-integrations/bricks/assets/admin-app/*.map
-integrations/bricks/assets/editor-app/*.map
+plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/*.map
+plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/*.map
 
 # Semantic review artifacts (sub-agent output, not source)
 semantic-review/

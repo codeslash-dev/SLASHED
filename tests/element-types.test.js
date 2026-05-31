@@ -6,7 +6,7 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { suggestContainerName } from '../integrations/bricks/editor-app/src/lib/element-types.js';
+import { suggestContainerName } from '../plugins/SLASHED-for-WP/integrations/bricks/editor-app/src/lib/element-types.js';
 
 const s = (types, pos = 0, total = 1) => suggestContainerName(types, pos, total);
 
