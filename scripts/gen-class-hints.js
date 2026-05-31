@@ -22,7 +22,7 @@ const fs   = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT  = path.join(ROOT, 'data', 'classes-hints.json');
+const OUT  = path.join(ROOT, 'plugins', 'SLASHED-for-WP', 'data', 'classes-hints.json');
 
 // Files to parse, in generation order. Must match FILE_META in gen-class-reference.js.
 const SOURCE_FILES = [

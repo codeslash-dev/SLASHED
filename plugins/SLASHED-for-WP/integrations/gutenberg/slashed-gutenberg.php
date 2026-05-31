@@ -79,9 +79,9 @@ function slashed_gutenberg_get_css_url() {
 		$filename
 	);
 
-	$repo_path = SLASHED_GUTENBERG_PATH . '../../dist/' . $filename;
+	$repo_path = SLASHED_GUTENBERG_PATH . '../../../dist/' . $filename;
 	if ( file_exists( $repo_path ) ) {
-		$default_url = SLASHED_GUTENBERG_URL . '../../dist/' . $filename;
+		$default_url = SLASHED_GUTENBERG_URL . '../../../dist/' . $filename;
 	} elseif ( file_exists( SLASHED_GUTENBERG_PATH . 'dist/' . $filename ) ) {
 		$default_url = SLASHED_GUTENBERG_URL . 'dist/' . $filename;
 	}

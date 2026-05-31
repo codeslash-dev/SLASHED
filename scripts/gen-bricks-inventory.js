@@ -21,7 +21,7 @@ const fs   = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT  = path.join(ROOT, 'integrations', 'bricks', 'data', 'inventory.json');
+const OUT  = path.join(ROOT, 'plugins', 'SLASHED-for-WP', 'integrations', 'bricks', 'data', 'inventory.json');
 
 const { TOKEN_FILES, CLASS_FILES } = require('./registry-sources');
 

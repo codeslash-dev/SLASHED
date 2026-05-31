@@ -42,21 +42,21 @@ let changed = 0;
 
 // ── slashed.php (unified plugin) ────────────────────────────────────────────
 changed += sync(
-  'slashed.php',
+  'plugins/SLASHED-for-WP/slashed.php',
   / \* Version: \d+\.\d+\.\d+/,
   ` * Version: ${version}`,
   `Version: ${version}`
 ) ? 1 : 0;
 
 changed += sync(
-  'slashed.php',
+  'plugins/SLASHED-for-WP/slashed.php',
   /define\(\s*'SLASHED_VERSION',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_VERSION', '${version}' )`,
   `SLASHED_VERSION = '${version}'`
 ) ? 1 : 0;
 
 changed += sync(
-  'slashed.php',
+  'plugins/SLASHED-for-WP/slashed.php',
   /define\(\s*'SLASHED_CSS_REF',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_CSS_REF', '${versionTag}' )`,
   `SLASHED_CSS_REF = '${versionTag}'`
@@ -66,7 +66,7 @@ changed += sync(
 // SLASHED_BRICKS_CSS_REF — semver tag used for version comparison only.
 // Still kept in sync so the dashboard "update available" widget shows the right version.
 changed += sync(
-  'integrations/bricks/slashed-bricks.php',
+  'plugins/SLASHED-for-WP/integrations/bricks/slashed-bricks.php',
   /define\(\s*'SLASHED_BRICKS_CSS_REF',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_BRICKS_CSS_REF', '${versionTag}' )`,
   `SLASHED_BRICKS_CSS_REF = '${versionTag}'`
@@ -78,7 +78,7 @@ changed += sync(
 
 // Plugin header comment: "Version: X.X.X"
 changed += sync(
-  'integrations/bricks/slashed-bricks.php',
+  'plugins/SLASHED-for-WP/integrations/bricks/slashed-bricks.php',
   / \* Version: \d+\.\d+\.\d+/,
   ` * Version: ${version}`,
   `Version: ${version}`
@@ -86,7 +86,7 @@ changed += sync(
 
 // Plugin version constant: define( 'SLASHED_BRICKS_VERSION', 'X.X.X' )
 changed += sync(
-  'integrations/bricks/slashed-bricks.php',
+  'plugins/SLASHED-for-WP/integrations/bricks/slashed-bricks.php',
   /define\(\s*'SLASHED_BRICKS_VERSION',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_BRICKS_VERSION', '${version}' )`,
   `SLASHED_BRICKS_VERSION = '${version}'`
@@ -94,21 +94,21 @@ changed += sync(
 
 // ── integrations/gutenberg/slashed-gutenberg.php ───────────────────────────
 changed += sync(
-  'integrations/gutenberg/slashed-gutenberg.php',
+  'plugins/SLASHED-for-WP/integrations/gutenberg/slashed-gutenberg.php',
   / \* Version: \d+\.\d+\.\d+/,
   ` * Version: ${version}`,
   `Version: ${version}`
 ) ? 1 : 0;
 
 changed += sync(
-  'integrations/gutenberg/slashed-gutenberg.php',
+  'plugins/SLASHED-for-WP/integrations/gutenberg/slashed-gutenberg.php',
   /define\(\s*'SLASHED_GUTENBERG_VERSION',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_GUTENBERG_VERSION', '${version}' )`,
   `SLASHED_GUTENBERG_VERSION = '${version}'`
 ) ? 1 : 0;
 
 changed += sync(
-  'integrations/gutenberg/slashed-gutenberg.php',
+  'plugins/SLASHED-for-WP/integrations/gutenberg/slashed-gutenberg.php',
   /define\(\s*'SLASHED_GUTENBERG_CSS_REF',\s*'[^']+'\s*\)/,
   `define( 'SLASHED_GUTENBERG_CSS_REF', '${versionTag}' )`,
   `SLASHED_GUTENBERG_CSS_REF = '${versionTag}'`
