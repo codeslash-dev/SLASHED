@@ -20,6 +20,7 @@
   import HooksTab from './components/HooksTab.svelte';
   import CheatsheetTab from './components/CheatsheetTab.svelte';
   import WcagTab from './components/WcagTab.svelte';
+  import LayoutsTab from './components/LayoutsTab.svelte';
   import LivePreview from './components/LivePreview.svelte';
   import SaveBar from './components/SaveBar.svelte';
 
@@ -81,6 +82,8 @@
       <TypographyTab />
     {:else if ui.activeTab === 'spacing'}
       <SpacingTab />
+    {:else if ui.activeTab === 'layouts'}
+      <LayoutsTab />
     {:else if ui.activeTab === 'misc'}
       <MiscTab />
     {:else if ui.activeTab === 'variables'}

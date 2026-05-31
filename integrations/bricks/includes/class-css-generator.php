@@ -131,6 +131,10 @@ class Slashed_Bricks_CSS_Generator {
 			$declarations = array_merge( $declarations, self::generate_contrast_declarations( $settings['contrast'] ) );
 		}
 
+		if ( ! empty( $settings['layouts'] ) && is_array( $settings['layouts'] ) ) {
+			$declarations = array_merge( $declarations, self::generate_layout_declarations( $settings['layouts'] ) );
+		}
+
 		if ( empty( $declarations ) ) {
 			self::$cache = '';
 			return self::$cache;
@@ -447,6 +451,56 @@ class Slashed_Bricks_CSS_Generator {
 			$allowed = array( 'solid', 'dashed', 'dotted', 'double', 'none' );
 			if ( in_array( $style, $allowed, true ) ) {
 				$declarations[] = '--sf-focus-ring-style: ' . $style . ';';
+			}
+		}
+
+		return $declarations;
+	}
+
+	/**
+	 * Layout primitive overrides → CSS custom property declarations.
+	 *
+	 * All values are free-form CSS lengths/strings entered by the user,
+	 * so we sanitize but do not add units (users type 'rem', 'px', etc.).
+	 *
+	 * @param array $settings Layouts section settings.
+	 * @return string[]
+	 */
+	private static function generate_layout_declarations( $settings ) {
+		$declarations = array();
+
+		$map = array(
+			'container_narrow'   => '--sf-container-narrow',
+			'container_prose'    => '--sf-container-prose',
+			'container_default'  => '--sf-container-default',
+			'container_wide'     => '--sf-container-wide',
+			'grid_min'           => '--sf-grid-min',
+			'grid_min_xs'        => '--sf-grid-min-xs',
+			'grid_min_s'         => '--sf-grid-min-s',
+			'grid_min_l'         => '--sf-grid-min-l',
+			'grid_min_xl'        => '--sf-grid-min-xl',
+			'grid_min_2xl'       => '--sf-grid-min-2xl',
+			'switcher_threshold' => '--sf-switcher-threshold',
+			'bento_cols'         => '--sf-bento-cols-default',
+			'bento_row_default'  => '--sf-bento-row-default',
+			'bento_row_compact'  => '--sf-bento-row-compact',
+			'bento_row_tall'     => '--sf-bento-row-tall',
+			'content_width'      => '--sf-content-width',
+			'breakout_width'     => '--sf-breakout-width',
+			'sidebar_width'      => '--sf-sidebar-width',
+			'sidebar_min_width'  => '--sf-sidebar-min-width',
+			'cover_min_height'   => '--sf-cover-min-height',
+			'cover_padding'      => '--sf-cover-padding',
+			'frame_ratio'        => '--sf-frame-ratio',
+			'reel_item_width'    => '--sf-reel-item-width',
+			'reel_height'        => '--sf-reel-height',
+			'imposter_margin'    => '--sf-imposter-margin',
+			'equal_cols'         => '--sf-equal-cols',
+		);
+
+		foreach ( $map as $key => $property ) {
+			if ( isset( $settings[ $key ] ) && '' !== (string) $settings[ $key ] ) {
+				$declarations[] = $property . ': ' . sanitize_text_field( (string) $settings[ $key ] ) . ';';
 			}
 		}
 
