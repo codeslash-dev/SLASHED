@@ -85,6 +85,11 @@ class Slashed_Gutenberg_Enqueue {
 	 * @return string
 	 */
 	private function get_version( $css_url ) {
+		if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+			return Slashed_CSS_Loader::get_version( $css_url );
+		}
+
+		// Standalone fallback.
 		$filename = basename( (string) wp_parse_url( $css_url, PHP_URL_PATH ) );
 		if ( '' === $filename ) {
 			return SLASHED_GUTENBERG_VERSION;

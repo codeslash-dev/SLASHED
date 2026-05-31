@@ -30,10 +30,12 @@ class Slashed_Settings {
 	 */
 	const KNOWN_INTEGRATIONS = array( 'bricks', 'gutenberg' );
 
+	const ALLOWED_BUNDLES = array( 'essential', 'optimal', 'full' );
+
 	/**
 	 * Read settings from the database, applying defaults.
 	 *
-	 * @return array{integrations: array<string, bool>}
+	 * @return array{integrations: array<string, bool>, css_bundle: string}
 	 */
 	public static function get() {
 		$stored = get_option( self::OPTION_KEY, array() );
@@ -43,7 +45,29 @@ class Slashed_Settings {
 
 		return array(
 			'integrations' => self::get_integrations( $stored ),
+			'css_bundle'   => self::get_css_bundle( $stored ),
 		);
+	}
+
+	/**
+	 * Get the configured CSS bundle variant.
+	 *
+	 * Reads from shared settings; defaults to 'optimal'.
+	 * Called directly by Slashed_CSS_Loader so integrations do not need to
+	 * implement bundle resolution themselves.
+	 *
+	 * @param array|null $stored Pre-fetched stored option (avoids double DB read).
+	 * @return string
+	 */
+	public static function get_css_bundle( $stored = null ) {
+		if ( null === $stored ) {
+			$stored = get_option( self::OPTION_KEY, array() );
+			if ( ! is_array( $stored ) ) {
+				$stored = array();
+			}
+		}
+		$bundle = isset( $stored['css_bundle'] ) ? (string) $stored['css_bundle'] : 'optimal';
+		return in_array( $bundle, self::ALLOWED_BUNDLES, true ) ? $bundle : 'optimal';
 	}
 
 	/**
@@ -81,7 +105,15 @@ class Slashed_Settings {
 			$integrations[ $slug ] = ! empty( $data['integrations'][ $slug ] );
 		}
 
-		return update_option( self::OPTION_KEY, array( 'integrations' => $integrations ) );
+		$bundle = isset( $data['css_bundle'] ) ? (string) $data['css_bundle'] : 'optimal';
+		if ( ! in_array( $bundle, self::ALLOWED_BUNDLES, true ) ) {
+			$bundle = 'optimal';
+		}
+
+		return update_option( self::OPTION_KEY, array(
+			'integrations' => $integrations,
+			'css_bundle'   => $bundle,
+		) );
 	}
 
 	/**

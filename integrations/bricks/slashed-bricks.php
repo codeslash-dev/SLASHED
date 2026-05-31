@@ -47,7 +47,18 @@ require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
  *
  * @return string One of 'essential', 'optimal', 'full'.
  */
+/**
+ * Get the configured CSS bundle variant.
+ *
+ * Delegates to the shared Slashed_CSS_Loader when running under the unified
+ * plugin; falls back to the Bricks token store in standalone mode.
+ *
+ * @return string One of 'essential', 'optimal', 'full'.
+ */
 function slashed_bricks_get_css_bundle() {
+    if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+        return Slashed_CSS_Loader::get_bundle();
+    }
     $settings = Slashed_Bricks_Token_Store::get_plugin_settings();
     $bundle   = isset( $settings['css_bundle'] ) ? (string) $settings['css_bundle'] : 'optimal';
     if ( ! in_array( $bundle, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true ) ) {
@@ -59,44 +70,35 @@ function slashed_bricks_get_css_bundle() {
 /**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN pinned to the immutable dist-branch commit
- * SHA (see SLASHED_BRICKS_DIST_SHA) so the plugin works without any local
- * file setup. The specific file (essential / optimal / full) is chosen
- * from the 'css_bundle' plugin setting. If a local copy is detected
- * (symlink/in-repo mode or copy-install mode), the local file takes
- * precedence for faster loads and offline development.
+ * Delegates to the shared Slashed_CSS_Loader when running under the unified
+ * plugin, then applies the per-integration filter. In standalone mode, builds
+ * the URL directly from SLASHED_BRICKS_DIST_SHA with a local-file fallback.
  *
  * Use the 'slashed_bricks/css_bundle_url' filter to override.
  *
  * @return string URL to the CSS bundle.
  */
 function slashed_bricks_get_css_url() {
-    $bundle   = slashed_bricks_get_css_bundle();
-    $filename = 'slashed.' . $bundle . '.css';
+    if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+        return apply_filters( 'slashed_bricks/css_bundle_url', Slashed_CSS_Loader::get_url() );
+    }
 
-    // Default: jsDelivr CDN pinned to the dist-branch commit SHA at release
-    // time. Files live at the root of the dist branch (no /dist/ prefix).
+    // Standalone fallback.
+    $bundle      = slashed_bricks_get_css_bundle();
+    $filename    = 'slashed.' . $bundle . '.css';
     $default_url = sprintf(
         'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/%s',
         SLASHED_BRICKS_DIST_SHA,
         $filename
     );
 
-    // Prefer local file if available (symlink/in-repo mode).
     $repo_path = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
     if ( file_exists( $repo_path ) ) {
         $default_url = SLASHED_BRICKS_URL . '../../dist/' . $filename;
-    }
-    // Check copy-install mode (dist/ within the plugin directory).
-    elseif ( file_exists( SLASHED_BRICKS_PATH . 'dist/' . $filename ) ) {
+    } elseif ( file_exists( SLASHED_BRICKS_PATH . 'dist/' . $filename ) ) {
         $default_url = SLASHED_BRICKS_URL . 'dist/' . $filename;
     }
 
-    /**
-     * Filter the SLASHED CSS bundle URL.
-     *
-     * @param string $url The URL to the CSS bundle file.
-     */
     return apply_filters( 'slashed_bricks/css_bundle_url', $default_url );
 }
 

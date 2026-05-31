@@ -50,12 +50,18 @@ class Slashed_Admin {
 
 		check_admin_referer( self::NONCE_ACTION, self::NONCE_KEY );
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified above.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce verified above via check_admin_referer.
 		$raw_integrations = isset( $_POST['integrations'] ) && is_array( $_POST['integrations'] )
 			? array_map( 'sanitize_key', $_POST['integrations'] )
 			: array();
 
-		$data = array( 'integrations' => array() );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$raw_bundle = isset( $_POST['css_bundle'] ) ? sanitize_key( $_POST['css_bundle'] ) : 'optimal';
+
+		$data = array(
+			'css_bundle'   => in_array( $raw_bundle, Slashed_Settings::ALLOWED_BUNDLES, true ) ? $raw_bundle : 'optimal',
+			'integrations' => array(),
+		);
 		foreach ( Slashed_Settings::KNOWN_INTEGRATIONS as $slug ) {
 			$data['integrations'][ $slug ] = array_key_exists( $slug, $raw_integrations );
 		}
@@ -75,6 +81,7 @@ class Slashed_Admin {
 
 		$settings     = Slashed_Settings::get();
 		$integrations = $settings['integrations'];
+		$css_bundle   = $settings['css_bundle'];
 		$saved        = ! empty( $_GET['slashed_saved'] ); // phpcs:ignore WordPress.Security.NonceVerification
 		?>
 		<div class="wrap">
@@ -129,6 +136,31 @@ class Slashed_Admin {
 							<p class="description"><?php esc_html_e( 'Loads SLASHED CSS in the block editor canvas and syncs the color palette.', 'slashed' ); ?></p>
 						</td>
 					</tr>
+				</table>
+
+				<h2><?php esc_html_e( 'CSS bundle', 'slashed' ); ?></h2>
+				<p class="description"><?php esc_html_e( 'All active integrations load the same bundle. Choose the smallest bundle that covers your needs.', 'slashed' ); ?></p>
+
+				<table class="form-table" role="presentation">
+					<?php
+					$bundles = array(
+						'essential' => __( 'Essential — reset + design tokens only', 'slashed' ),
+						'optimal'   => __( 'Optimal — + layout, typography, states, forms (recommended)', 'slashed' ),
+						'full'      => __( 'Full — + utilities layer', 'slashed' ),
+					);
+					foreach ( $bundles as $value => $label ) :
+						?>
+						<tr>
+							<th scope="row" style="padding-top:6px;padding-bottom:6px;">
+								<label for="bundle-<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></label>
+							</th>
+							<td style="padding-top:6px;padding-bottom:6px;">
+								<input type="radio" id="bundle-<?php echo esc_attr( $value ); ?>"
+									name="css_bundle" value="<?php echo esc_attr( $value ); ?>"
+									<?php checked( $css_bundle, $value ); ?>>
+							</td>
+						</tr>
+					<?php endforeach; ?>
 				</table>
 
 				<?php submit_button( __( 'Save settings', 'slashed' ) ); ?>

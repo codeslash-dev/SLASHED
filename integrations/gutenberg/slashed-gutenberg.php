@@ -35,13 +35,17 @@ if ( ! defined( 'SLASHED_GUTENBERG_VERSION' ) ) {
 define( 'SLASHED_GUTENBERG_ALLOWED_BUNDLES', array( 'essential', 'optimal', 'full' ) );
 
 /**
- * Get the configured CSS bundle variant (essential / optimal / full).
+ * Get the configured CSS bundle variant.
  *
- * Reads from the 'slashed_gutenberg_settings' option; defaults to 'optimal'.
+ * Delegates to the shared Slashed_CSS_Loader when running under the unified
+ * plugin; falls back to its own option in standalone mode.
  *
- * @return string
+ * @return string One of 'essential', 'optimal', 'full'.
  */
 function slashed_gutenberg_get_css_bundle() {
+	if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+		return Slashed_CSS_Loader::get_bundle();
+	}
 	$settings = get_option( 'slashed_gutenberg_settings', array() );
 	$bundle   = isset( $settings['css_bundle'] ) ? (string) $settings['css_bundle'] : 'optimal';
 	if ( ! in_array( $bundle, SLASHED_GUTENBERG_ALLOWED_BUNDLES, true ) ) {
@@ -53,18 +57,22 @@ function slashed_gutenberg_get_css_bundle() {
 /**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN pinned to the immutable dist-branch commit
- * SHA. If a local copy exists (symlink/in-repo dev mode, or copy-install),
- * the local file is preferred.
+ * Delegates to the shared Slashed_CSS_Loader when running under the unified
+ * plugin, then applies the per-integration filter. In standalone mode, builds
+ * the URL directly from SLASHED_GUTENBERG_DIST_SHA with a local-file fallback.
  *
  * Use the 'slashed_gutenberg/css_bundle_url' filter to override.
  *
  * @return string
  */
 function slashed_gutenberg_get_css_url() {
-	$bundle   = slashed_gutenberg_get_css_bundle();
-	$filename = 'slashed.' . $bundle . '.css';
+	if ( class_exists( 'Slashed_CSS_Loader' ) ) {
+		return apply_filters( 'slashed_gutenberg/css_bundle_url', Slashed_CSS_Loader::get_url() );
+	}
 
+	// Standalone fallback.
+	$bundle      = slashed_gutenberg_get_css_bundle();
+	$filename    = 'slashed.' . $bundle . '.css';
 	$default_url = sprintf(
 		'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/%s',
 		SLASHED_GUTENBERG_DIST_SHA,
@@ -78,11 +86,6 @@ function slashed_gutenberg_get_css_url() {
 		$default_url = SLASHED_GUTENBERG_URL . 'dist/' . $filename;
 	}
 
-	/**
-	 * Filter the SLASHED CSS bundle URL used by the Gutenberg integration.
-	 *
-	 * @param string $url URL to the CSS bundle file.
-	 */
 	return apply_filters( 'slashed_gutenberg/css_bundle_url', $default_url );
 }
 
