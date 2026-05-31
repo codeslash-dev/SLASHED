@@ -33,11 +33,21 @@ if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
 }
 
 /**
- * Token Store is loaded early so slashed_bricks_get_css_bundle() can call
- * Slashed_Bricks_Token_Store::get_plugin_settings() at any point, even
- * before the rest of the admin/data classes are initialised.
+ * In unified mode slashed.php loads the shared token infrastructure before
+ * this file is included. In standalone mode (this plugin activated directly),
+ * load them from the shared includes directory two levels up.
  */
-require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
+if ( ! class_exists( 'Slashed_Token_Store' ) ) {
+	$_slashed_shared = SLASHED_BRICKS_PATH . '../../includes/';
+	require_once $_slashed_shared . 'class-token-store.php';
+	require_once $_slashed_shared . 'class-token-sanitizer.php';
+	require_once $_slashed_shared . 'class-token-defaults.php';
+	require_once $_slashed_shared . 'class-tab-registry.php';
+	require_once $_slashed_shared . 'class-css-generator.php';
+	require_once $_slashed_shared . 'class-rest-controller.php';
+	require_once $_slashed_shared . 'class-token-page.php';
+	unset( $_slashed_shared );
+}
 
 /**
  * Get the configured CSS bundle variant.
@@ -51,9 +61,9 @@ function slashed_bricks_get_css_bundle() {
     if ( class_exists( 'Slashed_CSS_Loader' ) ) {
         return Slashed_CSS_Loader::get_bundle();
     }
-    $settings = Slashed_Bricks_Token_Store::get_plugin_settings();
+    $settings = Slashed_Token_Store::get_plugin_settings();
     $bundle   = isset( $settings['css_bundle'] ) ? (string) $settings['css_bundle'] : 'optimal';
-    if ( ! in_array( $bundle, Slashed_Bricks_Token_Store::ALLOWED_CSS_BUNDLES, true ) ) {
+    if ( ! in_array( $bundle, Slashed_Token_Store::ALLOWED_CSS_BUNDLES, true ) ) {
         $bundle = 'optimal';
     }
     return $bundle;
@@ -120,29 +130,10 @@ function slashed_bricks_is_bricks_active() {
     return false;
 }
 
-/**
- * Initialize the admin page.
- *
- * Runs regardless of whether Bricks is active so users can configure tokens
- * before activating the theme. Bricks runtime checks are handled separately
- * in slashed_bricks_init().
- */
-function slashed_bricks_admin_init() {
-    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
-
-    new Slashed_Bricks_Admin_Page_Svelte();
-
-    // REST routes are registered via the dedicated rest_api_init hook
-    // (slashed_bricks_rest_routes_init) so they work on both admin and
-    // non-admin requests. No need to instantiate the controller here.
-}
-if ( is_admin() ) {
-    add_action( 'plugins_loaded', 'slashed_bricks_admin_init' );
-}
+// Token admin page (Slashed_Token_Page) and the main REST controller
+// (Slashed_REST_Controller) are registered globally by slashed.php.
+// In standalone mode the shared classes are loaded above and an
+// Slashed_Token_Page instance is registered there too.
 
 /**
  * Register REST routes unconditionally via rest_api_init.
@@ -160,14 +151,11 @@ if ( is_admin() ) {
  * NAMESPACE constant) without an extra require.
  */
 function slashed_bricks_rest_routes_init() {
-    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-token-sanitizer.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-tab-registry.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-rest-controller.php';
+    // Slashed_REST_Controller (token CRUD) is registered globally by slashed.php.
+    // Register only the Bricks-specific endpoints here.
     require_once SLASHED_BRICKS_PATH . 'includes/class-rebemer-rest.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-fonts-rest.php';
 
-    ( new Slashed_Bricks_REST_Controller() )->register_routes();
     ( new Slashed_Bricks_ReBEMer_REST() )->register_routes();
     ( new Slashed_Bricks_Fonts_REST() )->register_routes();
 }
@@ -216,8 +204,6 @@ function slashed_bricks_init() {
         return;
     }
 
-    require_once SLASHED_BRICKS_PATH . 'includes/class-token-defaults.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-css-generator.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
@@ -243,7 +229,6 @@ function slashed_bricks_rebemer_init() {
         return;
     }
 
-    require_once SLASHED_BRICKS_PATH . 'includes/class-admin-page-svelte.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-rebemer-enqueue.php';
     new Slashed_Bricks_ReBEMer_Enqueue();
 }

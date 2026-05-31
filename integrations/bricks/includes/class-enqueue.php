@@ -85,11 +85,6 @@ class Slashed_Bricks_Enqueue {
             $version
         );
 
-        // Inject token override CSS after the framework stylesheet.
-        if ( Slashed_Bricks_CSS_Generator::has_overrides() ) {
-            wp_add_inline_style( 'slashed-framework', Slashed_Bricks_CSS_Generator::get_override_css() );
-        }
-
         // Inject HTML font-size override if configured.
         $plugin_settings = get_option( 'slashed_bricks_settings', array() );
         if ( is_array( $plugin_settings ) && ! empty( $plugin_settings['html_font_size'] ) ) {

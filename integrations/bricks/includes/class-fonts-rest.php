@@ -11,7 +11,7 @@
  *
  * Route
  * -----
- *   GET /wp-json/slashed-bricks/v1/bricks-fonts
+ *   GET /wp-json/slashed/v1/bricks-fonts
  *   Auth: manage_options (same gate as every other SLASHED endpoint)
  *
  * Response shape
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Slashed_Bricks_Fonts_REST {
 
-	const NAMESPACE = 'slashed-bricks/v1';
+	const NAMESPACE = 'slashed/v1';
 
 	public function register_routes() {
 		register_rest_route(

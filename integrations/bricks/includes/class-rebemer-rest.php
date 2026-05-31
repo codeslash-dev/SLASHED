@@ -4,7 +4,7 @@
  *
  * v1 ships one endpoint:
  *
- *   GET /wp-json/slashed-bricks/v1/rebemer/unused
+ *   GET /wp-json/slashed/v1/rebemer/unused
  *     Returns the list of global classes not referenced by any element
  *     across the post types Bricks edits. Read-only. Never mutates the
  *     `bricks_global_classes` option — deletion stays the user's job in
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Slashed_Bricks_ReBEMer_REST {
 
-	const NAMESPACE = 'slashed-bricks/v1';
+	const NAMESPACE = 'slashed/v1';
 
 	/**
 	 * Maximum number of postmeta rows to scan for references in one
