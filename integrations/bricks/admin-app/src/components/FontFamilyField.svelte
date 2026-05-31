@@ -5,14 +5,17 @@
    *   System  — pick from a curated list of modern system-font stacks.
    *             No font loading; purely native OS fonts.
    *   Bricks  — pick from fonts already registered in Bricks Builder
-   *             (custom uploads, Adobe Fonts). Bricks owns all loading,
-   *             including any "serve locally" GDPR configuration.
+   *             (custom uploads, Adobe Fonts, Google Fonts). Bricks owns all
+   *             loading, including any "serve locally" GDPR configuration.
    *   Manual  — free-text input for anything else (full font stacks,
    *             var() references, fonts added outside Bricks, etc.).
    *
    * The stored token value is always a plain CSS font-family string.
    * Source is local UI state only — it is inferred from the current
    * value on mount and never persisted separately.
+   *
+   * Font data comes from window.slashedApp.bricksFonts (populated at
+   * page load from PHP), so no async REST fetch is needed.
    */
   import { meta, tokens, writeField } from '../lib/stores.svelte.js';
   import FieldRow from './FieldRow.svelte';
@@ -44,39 +47,10 @@
     { label: 'Handwritten',         value: "'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive" },
   ];
 
-  // ── Bricks fonts fetched from REST ───────────────────────────────────
+  // ── Bricks fonts from PHP bootstrap ─────────────────────────────────
   /** @type {Array<{family:string, label:string, source:string}>} */
-  let bricksFonts = $state([]);
-  let bricksLoaded = $state(false);
-
-  async function loadBricksFonts() {
-    try {
-      const url = `${meta.rest.url}bricks-fonts`;
-      const res = await fetch(url, {
-        headers: { 'X-WP-Nonce': meta.rest.nonce },
-      });
-      if (!res.ok) {
-        console.error('[slashed] bricks-fonts fetch failed:', res.status, res.statusText, url);
-        return;
-      }
-      const data = await res.json();
-      bricksFonts = Array.isArray(data?.fonts) ? data.fonts : [];
-    } catch (err) {
-      console.error('[slashed] bricks-fonts fetch error:', err);
-    } finally {
-      bricksLoaded = true;
-    }
-  }
-
-  // Fetch once on mount — skip entirely when Bricks integration is disabled
-  // so the absent REST route doesn't generate a 404 console error on every load.
-  $effect(() => {
-    if (meta.activeIntegrations?.bricks ?? true) {
-      loadBricksFonts();
-    } else {
-      bricksLoaded = true;
-    }
-  });
+  const bricksFonts = meta.bricksFonts;
+  const bricksEnabled = meta.activeIntegrations?.bricks ?? true;
 
   // ── Current value ─────────────────────────────────────────────────
   const currentValue = $derived(
@@ -96,17 +70,12 @@
    */
   function detectSource(value) {
     const v = (value || String(defaultValue)).trim().toLowerCase();
-    if (bricksFonts.some(f => v === f.family.toLowerCase())) return 'bricks';
+    if (bricksEnabled && bricksFonts.some(f => v === f.family.toLowerCase())) return 'bricks';
     if (SYSTEM_STACKS.some(s => v === s.value.toLowerCase())) return 'system';
     return 'manual';
   }
 
   let source = $state(detectSource(effectiveValue));
-
-  // Re-detect when Bricks fonts finish loading (value might match now).
-  $effect(() => {
-    if (bricksLoaded) source = detectSource(effectiveValue);
-  });
 
   // ── Source switch ─────────────────────────────────────────────────
   function switchSource(next) {
@@ -134,9 +103,6 @@
     writeField(section, fieldKey, e.currentTarget.value);
   }
 
-  // Bricks source tab is only shown if fonts are loaded and non-empty.
-  const hasBricksFonts = $derived(bricksLoaded && bricksFonts.length > 0);
-
   const SOURCE_BADGES = { adobe: ' (Adobe)', google: ' (Google)' };
   const sourceBadge = (src) => SOURCE_BADGES[src] ?? '';
 </script>
@@ -151,14 +117,14 @@
         class:source-tab--active={source === 'system'}
         onclick={() => switchSource('system')}
       >System</button>
-      {#if hasBricksFonts}
+      {#if bricksEnabled}
         <button
           type="button"
           class="source-tab"
           class:source-tab--active={source === 'bricks'}
           onclick={() => switchSource('bricks')}
         >Bricks</button>
-      {:else if bricksLoaded && !meta.activeIntegrations?.bricks}
+      {:else}
         <span class="source-tab source-tab--disabled" title="Enable the Bricks integration in SLASHED Settings to browse Bricks fonts here.">Bricks</span>
       {/if}
       <button
@@ -182,19 +148,25 @@
         {/each}
       </select>
 
-    {:else if source === 'bricks' && hasBricksFonts}
-      <select
-        id={fieldKey}
-        class="font-select"
-        value={effectiveValue}
-        onchange={onBricksSelect}
-      >
-        {#each bricksFonts as font (font.family)}
-          <option value={font.family}>
-            {font.label}{sourceBadge(font.source)}
-          </option>
-        {/each}
-      </select>
+    {:else if source === 'bricks' && bricksEnabled}
+      {#if bricksFonts.length > 0}
+        <select
+          id={fieldKey}
+          class="font-select"
+          value={effectiveValue}
+          onchange={onBricksSelect}
+        >
+          {#each bricksFonts as font (font.family)}
+            <option value={font.family}>
+              {font.label}{sourceBadge(font.source)}
+            </option>
+          {/each}
+        </select>
+      {:else}
+        <p class="bricks-empty">
+          No Bricks fonts found. Add fonts in <strong>Bricks &rsaquo; Settings &rsaquo; Custom Fonts</strong> or the Bricks Font Manager, then reload this page.
+        </p>
+      {/if}
 
     {:else}
       <input
@@ -270,6 +242,17 @@
     outline: 2px solid #2271b1;
     outline-offset: 0;
     border-color: #2271b1;
+  }
+
+  .bricks-empty {
+    font-size: 12px;
+    color: #50575e;
+    margin: 0;
+    padding: 6px 8px;
+    border: 1px dashed #c3c4c7;
+    border-radius: 3px;
+    background: #f6f7f7;
+    line-height: 1.5;
   }
 
   .font-preview {

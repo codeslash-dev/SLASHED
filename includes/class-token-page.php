@@ -135,6 +135,7 @@ class Slashed_Token_Page {
 					'bricks'    => class_exists( 'Slashed_Settings' ) ? Slashed_Settings::is_enabled( 'bricks' ) : true,
 					'gutenberg' => class_exists( 'Slashed_Settings' ) ? Slashed_Settings::is_enabled( 'gutenberg' ) : true,
 				),
+				'bricksFonts'        => self::get_bricks_fonts(),
 			)
 		);
 	}
@@ -157,6 +158,129 @@ class Slashed_Token_Page {
 		}
 		$data = json_decode( $json, true );
 		return is_array( $data ) ? $data : array();
+	}
+
+	/**
+	 * Collect Bricks-registered fonts for the SPA bootstrap.
+	 *
+	 * Mirrors the logic in Slashed_Bricks_Fonts_REST::get_fonts() without
+	 * the REST request overhead. Returns an empty array when Bricks is not
+	 * active or the integration is disabled.
+	 *
+	 * @return array[]
+	 */
+	public static function get_bricks_fonts() {
+		if ( class_exists( 'Slashed_Settings' ) && ! Slashed_Settings::is_enabled( 'bricks' ) ) {
+			return array();
+		}
+
+		$fonts = array();
+
+		// Custom fonts from bricks_custom_fonts option.
+		$custom = get_option( 'bricks_custom_fonts', array() );
+		if ( is_array( $custom ) ) {
+			foreach ( $custom as $font ) {
+				if ( ! is_array( $font ) ) {
+					continue;
+				}
+				$family = $font['font_family'] ?? $font['family'] ?? $font['title'] ?? $font['name'] ?? null;
+				$label  = $font['title'] ?? $font['name'] ?? $family;
+				if ( ! $family || ! is_string( $family ) ) {
+					continue;
+				}
+				$fonts[] = array(
+					'family' => sanitize_text_field( $family ),
+					'label'  => sanitize_text_field( is_string( $label ) ? $label : $family ),
+					'source' => 'custom',
+				);
+			}
+		}
+
+		// Google Fonts added via Bricks settings.
+		$google = get_option( 'bricks_google_fonts', array() );
+		if ( is_array( $google ) ) {
+			foreach ( $google as $font ) {
+				if ( ! is_array( $font ) ) {
+					continue;
+				}
+				$family = $font['family'] ?? $font['font_family'] ?? $font['name'] ?? $font['title'] ?? null;
+				if ( ! $family || ! is_string( $family ) ) {
+					continue;
+				}
+				$fonts[] = array(
+					'family' => sanitize_text_field( $family ),
+					'label'  => sanitize_text_field( $font['name'] ?? $family ),
+					'source' => 'google',
+				);
+			}
+		}
+
+		// Adobe Fonts (Typekit).
+		$adobe = get_option( 'bricks_adobe_fonts', array() );
+		if ( is_array( $adobe ) && ! empty( $adobe['fonts'] ) && is_array( $adobe['fonts'] ) ) {
+			foreach ( $adobe['fonts'] as $font ) {
+				if ( ! is_array( $font ) ) {
+					continue;
+				}
+				$family = $font['font_family'] ?? $font['family'] ?? null;
+				$label  = $font['label'] ?? $font['name'] ?? $family;
+				if ( ! $family || ! is_string( $family ) ) {
+					continue;
+				}
+				$fonts[] = array(
+					'family' => sanitize_text_field( $family ),
+					'label'  => sanitize_text_field( is_string( $label ) ? $label : $family ),
+					'source' => 'adobe',
+				);
+			}
+		}
+
+		// Fonts uploaded via Bricks Font Manager CPT (includes 'draft' status).
+		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
+			$cache_key  = 'slashed_bricks_cpt_fonts';
+			$cpt_cached = get_transient( $cache_key );
+
+			if ( false !== $cpt_cached && is_array( $cpt_cached ) ) {
+				$fonts = array_merge( $fonts, $cpt_cached );
+			} else {
+				$cpt_fonts = array();
+				$cpt_posts = get_posts(
+					array(
+						'post_type'      => BRICKS_DB_CUSTOM_FONTS,
+						'posts_per_page' => -1,
+						'post_status'    => array( 'publish', 'draft' ),
+						'fields'         => 'ids',
+						'no_found_rows'  => true,
+					)
+				);
+				foreach ( $cpt_posts as $post_id ) {
+					$family = html_entity_decode( (string) get_the_title( $post_id ), ENT_QUOTES, 'UTF-8' );
+					if ( ! $family ) {
+						continue;
+					}
+					$cpt_fonts[] = array(
+						'family' => sanitize_text_field( $family ),
+						'label'  => sanitize_text_field( $family ),
+						'source' => 'custom',
+					);
+				}
+				set_transient( $cache_key, $cpt_fonts, HOUR_IN_SECONDS );
+				$fonts = array_merge( $fonts, $cpt_fonts );
+			}
+		}
+
+		// Deduplicate by family name (case-insensitive), keeping first entry.
+		$seen   = array();
+		$unique = array();
+		foreach ( $fonts as $font ) {
+			$key = strtolower( $font['family'] );
+			if ( ! isset( $seen[ $key ] ) ) {
+				$seen[ $key ] = true;
+				$unique[]     = $font;
+			}
+		}
+
+		return $unique;
 	}
 
 	public function mark_as_module( $tag, $handle, $src ) {
