@@ -10,6 +10,8 @@
   let error = $state('');
   let savedTimer = null;
 
+  const bricksActive = $derived(meta.activeIntegrations?.bricks ?? true);
+
   async function handleSave() {
     saving = true;
     saved = false;
@@ -30,9 +32,9 @@
 <section>
   <h2>Bundle Info</h2>
   <p class="hint">
-    The SLASHED CSS bundle is loaded automatically by the plugin. The inventory
-    is parsed from whichever bundle is active (essential / optimal / full) and
-    drives the variable pickers, class autocomplete, and color palette in Bricks.
+    The SLASHED CSS bundle is loaded automatically on the frontend and in the block editor canvas.
+    The inventory is parsed from whichever bundle is active and drives the variable pickers,
+    class autocomplete, and color palette in any active builder integration.
   </p>
   <dl class="info">
     <dt>Variables registered</dt>
@@ -51,7 +53,7 @@
       <option value="full">Full — all utilities included</option>
     </select>
     <p class="description">
-      Choose which SLASHED CSS bundle to load on the frontend and in the Bricks editor canvas.
+      Choose which SLASHED CSS bundle to load on the frontend and in builder canvases.
     </p>
   </div>
 
@@ -63,24 +65,33 @@
       <option value="62.5">Force 62.5%</option>
     </select>
     <p class="description">
-      Override the HTML root font-size. Use this if Bricks forces a font-size you don't want.
+      Override the HTML root font-size. Use this when your theme or builder forces a root font-size
+      that conflicts with rem-based framework values.
     </p>
   </div>
 
-  <div class="field-row">
-    <label class="toggle-label" for="show-class-hints">
-      <input
-        id="show-class-hints"
-        type="checkbox"
-        bind:checked={showClassHints}
-      />
-      Show class hints in Bricks editor
-    </label>
-    <p class="description">
-      When enabled, hovering a SLASHED class in the Bricks class manager shows a short
-      description of what it does. Powered by <code>data/classes-hints.json</code>.
-    </p>
-  </div>
+  {#if bricksActive}
+    <div class="field-row">
+      <label class="toggle-label" for="show-class-hints">
+        <input
+          id="show-class-hints"
+          type="checkbox"
+          bind:checked={showClassHints}
+        />
+        Show class hints in Bricks editor
+        <span class="badge badge--bricks">Bricks</span>
+      </label>
+      <p class="description">
+        When enabled, hovering a SLASHED class in the Bricks class manager shows a short
+        description of what it does. Powered by <code>data/classes-hints.json</code>.
+      </p>
+    </div>
+  {:else}
+    <div class="field-row field-row--muted">
+      <span class="muted-label">Show class hints in Bricks editor <span class="badge badge--bricks">Bricks</span></span>
+      <p class="description">Enable the Bricks integration in SLASHED Settings to use this feature.</p>
+    </div>
+  {/if}
 
   <div class="save-row">
     <button
@@ -135,6 +146,40 @@
     margin-top: 6px;
   }
 
+  .field-row {
+    margin-bottom: 20px;
+  }
+  .field-row--muted {
+    opacity: 0.55;
+  }
+  .toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .muted-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge--bricks {
+    background: #f0f4ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+  }
+
   .save-row {
     display: flex;
     align-items: center;
@@ -160,4 +205,6 @@
   }
   .status--ok { color: #00a32a; }
   .status--err { color: #d63638; }
+
+  code { background: #f0f0f1; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
 </style>

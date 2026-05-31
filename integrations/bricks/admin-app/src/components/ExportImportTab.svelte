@@ -85,15 +85,15 @@
   <p class="hint">
     Export your current SLASHED token overrides (colors, typography, spacing, etc.) to a
     <code>.json</code> file and import them on any other WordPress site running this plugin.
-    This makes Bricks templates fully portable — the template JSON carries structure and
-    class references; this file carries the brand tokens that drive the visual result.
+    Token exports are builder-agnostic — the file carries the brand tokens that drive the visual
+    result regardless of which builder or theme is in use.
   </p>
 
   <div class="card">
     <h3>Export</h3>
     <p class="card-desc">
       Downloads a <code>.json</code> file containing all your active token overrides and plugin settings.
-      Share this file alongside your Bricks template export so the visual result is identical on every site.
+      Share this file alongside your template export so the visual result is identical on every site.
     </p>
     <div class="action-row">
       <button type="button" class="btn btn--primary" onclick={handleExport} disabled={exporting}>
@@ -145,29 +145,28 @@
   </div>
 
   <div class="card card--info">
-    <h3>Bricks template workflow — quick reference</h3>
+    <h3>Portability workflow — quick reference</h3>
     <ol class="steps">
       <li>
         <strong>Design using SLASHED tokens.</strong>
-        In the Bricks color picker, always choose a swatch from the <em>SLASHED · …</em> palette groups
+        In your builder's color picker, always choose a swatch from the SLASHED palette groups
         (Primary, Secondary, Status, Semantic). Never type a hex value directly — that bakes a
-        hardcoded color into the template JSON that won't follow your brand tokens.
+        hardcoded color into your content that won't follow your brand tokens.
       </li>
       <li>
         <strong>Use <code>var(--sf-*)</code> in custom CSS.</strong>
-        Any inline CSS you write inside a Bricks element's CSS tab should reference framework
-        variables (<code>var(--sf-color-primary)</code>, <code>var(--sf-space-4)</code>, etc.)
-        rather than literal pixel or color values.
+        Any custom CSS should reference framework variables (<code>var(--sf-color-primary)</code>,
+        <code>var(--sf-space-4)</code>, etc.) rather than literal pixel or color values.
       </li>
       <li>
         <strong>Use <code>sf-*</code> layout classes.</strong>
         Apply layout primitives (<code>sf-cluster</code>, <code>sf-grid</code>, <code>sf-center</code>, …)
-        via the Bricks class manager instead of manually setting gap / display / align values.
+        via your builder's class manager instead of manually setting gap / display / align values.
         These classes consume spacing tokens automatically.
       </li>
       <li>
-        <strong>Export the Bricks template</strong> (Bricks → Templates → Export).
-        The exported JSON holds element structure, class references, and CSS variable names — it is
+        <strong>Export your template or content</strong> using your builder's own export tool.
+        The exported data holds element structure, class references, and CSS variable names — it is
         already portable as long as the target site has SLASHED loaded.
       </li>
       <li>
@@ -175,12 +174,12 @@
         This captures your brand colors, typography settings, and all other overrides.
       </li>
       <li>
-        <strong>On the target site:</strong> install and activate the SLASHED Bricks plugin,
-        import the token file via this tab, then import the Bricks template via Bricks → Templates.
-        The plugin re-registers all SLASHED classes, variables, and color palettes automatically.
+        <strong>On the target site:</strong> install and activate SLASHED, import the token file
+        via this tab, then import your template via your builder. SLASHED re-registers all classes,
+        variables, and color palettes automatically.
       </li>
       <li>
-        <strong>Verify</strong> in the Bricks builder canvas that colors, spacing, and fonts match.
+        <strong>Verify</strong> that colors, spacing, and fonts match the original.
         If something looks off, check the browser console for unresolved <code>var()</code> calls —
         this means the CSS bundle isn't loading or the token file wasn't imported yet.
       </li>

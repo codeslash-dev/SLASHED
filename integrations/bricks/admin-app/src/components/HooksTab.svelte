@@ -1,9 +1,11 @@
 <script>
   /**
    * Static documentation tab listing all available filter hooks with
-   * descriptions and PHP code examples.
+   * descriptions and PHP code examples, grouped by integration.
    */
-  const hooks = [
+  import { meta } from '../lib/stores.svelte.js';
+
+  const bricksHooks = [
     {
       name: 'slashed_bricks/css_bundle_url',
       description: 'Override which CSS bundle URL to load.',
@@ -76,28 +78,86 @@ add_filter( 'slashed_bricks/inventory_local_path', function() {
 } );`,
     },
   ];
+
+  const bricksActive = $derived(meta.activeIntegrations?.bricks ?? true);
 </script>
 
 <section>
   <h2>Filter Hooks Reference</h2>
   <p class="hint">
-    These WordPress filter hooks let you customize the SLASHED Bricks integration
-    from your theme or a mu-plugin. Each hook fires during plugin initialization.
+    These WordPress filter hooks let you customize SLASHED integrations from your theme or a mu-plugin.
+    Hooks only fire when their respective integration is active.
   </p>
 
-  {#each hooks as hook (hook.name)}
-    <div class="hook">
-      <h3 class="hook__name"><code>{hook.name}</code></h3>
-      <p class="hook__desc">{hook.description}</p>
-      <p class="hook__params"><strong>Parameters:</strong> <code>{hook.params}</code></p>
-      <pre class="hook__example"><code>{hook.example}</code></pre>
+  <!-- Bricks integration hooks -->
+  <div class="group" class:group--inactive={!bricksActive}>
+    <div class="group-header">
+      <span class="group-title">Bricks integration</span>
+      <span class="badge badge--bricks">Bricks</span>
+      {#if !bricksActive}
+        <span class="inactive-notice">Bricks integration is disabled — these hooks have no effect until it is turned on.</span>
+      {/if}
     </div>
-  {/each}
+
+    {#each bricksHooks as hook (hook.name)}
+      <div class="hook">
+        <h3 class="hook__name"><code>{hook.name}</code></h3>
+        <p class="hook__desc">{hook.description}</p>
+        <p class="hook__params"><strong>Parameters:</strong> <code>{hook.params}</code></p>
+        <pre class="hook__example"><code>{hook.example}</code></pre>
+      </div>
+    {/each}
+  </div>
 </section>
 
 <style>
   h2 { margin-top: 0; }
   .hint { color: #50575e; margin-bottom: 20px; max-width: 720px; }
+
+  .group {
+    border: 1px solid #e2e4e7;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .group--inactive {
+    opacity: 0.6;
+  }
+
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .group-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: #1d2327;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge--bricks {
+    background: #f0f4ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+  }
+
+  .inactive-notice {
+    font-size: 12px;
+    color: #8c8f94;
+    font-style: italic;
+    flex-basis: 100%;
+    margin-top: 2px;
+  }
 
   .hook {
     border: 1px solid #f0f0f1;
@@ -106,6 +166,7 @@ add_filter( 'slashed_bricks/inventory_local_path', function() {
     margin-bottom: 12px;
     background: #fcfcfd;
   }
+  .hook:last-child { margin-bottom: 0; }
 
   .hook__name {
     margin: 0 0 8px;

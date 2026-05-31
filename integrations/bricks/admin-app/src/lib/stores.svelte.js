@@ -29,6 +29,7 @@ export const meta = {
   inventory: bootstrap.inventory || { variables: [], sf_classes: [], is_classes: [] },
   pluginSettings: bootstrap.pluginSettings || {},
   versions: bootstrap.versions || { plugin: '', framework: '' },
+  activeIntegrations: bootstrap.activeIntegrations || { bricks: true, gutenberg: true },
 };
 
 /** Reactive token state. Mutating any nested key triggers re-renders. */
