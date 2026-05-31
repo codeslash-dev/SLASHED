@@ -23,21 +23,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Slashed_CSS_Loader {
 
-	const ALLOWED_BUNDLES = array( 'essential', 'optimal', 'full' );
-
 	/**
 	 * Get the configured CSS bundle variant.
 	 *
-	 * Reads from the shared slashed_settings option. Defaults to 'optimal'.
+	 * Delegates to Slashed_Settings::get_css_bundle(), which validates the
+	 * value against the canonical allowlist and falls back to 'optimal'.
 	 *
 	 * @return string One of 'essential', 'optimal', 'full'.
 	 */
 	public static function get_bundle() {
-		$bundle = Slashed_Settings::get_css_bundle();
-		if ( ! in_array( $bundle, self::ALLOWED_BUNDLES, true ) ) {
-			return 'optimal';
-		}
-		return $bundle;
+		return Slashed_Settings::get_css_bundle();
 	}
 
 	/**

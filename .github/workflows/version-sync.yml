@@ -109,8 +109,9 @@ jobs:
         run: git checkout main
 
       - name: Update DIST_SHA constants in PHP
+        env:
+          DIST_SHA: ${{ steps.dist.outputs.sha }}
         run: |
-          DIST_SHA="${{ steps.dist.outputs.sha }}"
           sed -i \
             "s|define( 'SLASHED_DIST_SHA', '[^']*' )|define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )|" \
             slashed.php

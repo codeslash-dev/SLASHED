@@ -19,10 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin constants.
  *
- * Guarded with !defined() so this file can be included by the unified
- * SLASHED plugin (slashed.php), which pre-defines these constants with
- * paths relative to its own root. When loaded as a standalone plugin
- * the constants are not yet set and are defined here as usual.
+ * Defined via plugin_dir_path(__FILE__) so paths are correct whether this
+ * file is loaded standalone or included by the unified slashed.php. The
+ * !defined() guard exists solely to prevent redefinition errors when both
+ * the standalone Bricks plugin and the unified SLASHED plugin are active.
  */
 if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
     define( 'SLASHED_BRICKS_VERSION', '0.4.18' );
@@ -39,14 +39,6 @@ if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
  */
 require_once SLASHED_BRICKS_PATH . 'includes/class-token-store.php';
 
-/**
- * Get the configured CSS bundle type (essential / optimal / full).
- *
- * Reads from plugin settings; falls back to "optimal". Used both for
- * URL resolution and for local-file version-stamp lookups.
- *
- * @return string One of 'essential', 'optimal', 'full'.
- */
 /**
  * Get the configured CSS bundle variant.
  *

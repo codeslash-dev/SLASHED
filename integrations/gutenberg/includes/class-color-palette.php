@@ -12,8 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Gutenberg_Color_Palette
  *
- * Registers SLASHED color tokens with the block editor's native color picker
- * via `add_theme_support( 'editor-color-palette' )`.
+ * Registers SLASHED color tokens with the block editor's native color picker.
+ *
+ * Classic themes: `add_theme_support( 'editor-color-palette' )` is the
+ * mechanism that populates the picker.
+ *
+ * Block/FSE themes: `theme.json` is the source of truth and overrides
+ * `editor-color-palette`. The `wp_theme_json_data_theme` filter injects the
+ * same palette into the theme.json data layer so block themes see the tokens.
  *
  * Each entry uses a `var(--sf-color-*)` reference as its value. Because
  * class-enqueue.php loads the full SLASHED bundle into the editor canvas,
@@ -39,9 +45,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Slashed_Gutenberg_Color_Palette {
 
 	public function __construct() {
-		// Constructor is already called from after_setup_theme, so
-		// add_theme_support() can be invoked directly here.
+		// Classic themes: add_theme_support drives the editor palette.
 		add_theme_support( 'editor-color-palette', $this->build_palette() );
+		// Block/FSE themes: theme.json takes precedence; inject via the data filter.
+		add_filter( 'wp_theme_json_data_theme', array( $this, 'inject_theme_json_palette' ) );
+	}
+
+	/**
+	 * Inject the SLASHED palette into the theme.json data for block/FSE themes.
+	 *
+	 * Uses WP_Theme_JSON_Data::update_with() which merges presets by slug, so
+	 * the theme's own palette entries are preserved alongside ours. All SLASHED
+	 * slugs are prefixed with 'slashed-' to avoid collisions.
+	 *
+	 * @param WP_Theme_JSON_Data $theme_json Theme JSON data object.
+	 * @return WP_Theme_JSON_Data
+	 */
+	public function inject_theme_json_palette( $theme_json ) {
+		$theme_json->update_with( array(
+			'version'  => 3,
+			'settings' => array(
+				'color' => array(
+					'palette' => $this->build_palette(),
+				),
+			),
+		) );
+		return $theme_json;
 	}
 
 	/**
