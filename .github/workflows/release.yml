@@ -103,5 +103,5 @@ jobs:
             dist/slashed.full.flat.css
             dist/slashed.full.flat.min.css
             dist/slashed.full.flat.min.css.map
-            dist/slashed-bricks.zip
+            dist/slashed.zip
           fail_on_unmatched_files: true
