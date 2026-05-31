@@ -28,6 +28,7 @@ class Slashed_Bricks_Token_Defaults {
 			'contrast'   => self::get_contrast(),
 			'typography' => self::get_typography(),
 			'spacing'    => self::get_spacing(),
+			'layouts'    => self::get_layouts(),
 			'radius'     => self::get_radius(),
 			'shadows'    => self::get_shadows(),
 			'motion'     => self::get_motion(),
@@ -186,6 +187,56 @@ class Slashed_Bricks_Token_Defaults {
 			'content_gap'    => 'var(--sf-space-s)',
 			'component_pad'  => 'var(--sf-space-m)',
 			'section_pad'    => 'var(--sf-section-pad--m)',
+		);
+	}
+
+	/**
+	 * Get layout token defaults.
+	 *
+	 * Values mirror the CSS variable defaults in core/tokens.layout.css
+	 * and core/tokens.css so the admin placeholders match the framework.
+	 *
+	 * @return array
+	 */
+	public static function get_layouts() {
+		return array(
+			// Containers
+			'container_narrow'    => '38rem',
+			'container_prose'     => '65ch',
+			'container_default'   => '75rem',
+			'container_wide'      => '90rem',
+			// Grid
+			'grid_min'            => '16rem',
+			'grid_min_xs'         => '10rem',
+			'grid_min_s'          => '13rem',
+			'grid_min_l'          => '20rem',
+			'grid_min_xl'         => '24rem',
+			'grid_min_2xl'        => '28rem',
+			// Switcher
+			'switcher_threshold'  => '30rem',
+			// Bento
+			'bento_cols'          => '3',
+			'bento_row_default'   => '10rem',
+			'bento_row_compact'   => '6rem',
+			'bento_row_tall'      => '16rem',
+			// Content grid
+			'content_width'       => 'var(--sf-container-default)',
+			'breakout_width'      => 'var(--sf-container-wide)',
+			// Sidebar
+			'sidebar_width'       => '18rem',
+			'sidebar_min_width'   => '50%',
+			// Cover
+			'cover_min_height'    => '100dvh',
+			'cover_padding'       => 'var(--sf-section-pad)',
+			// Frame
+			'frame_ratio'         => '16 / 9',
+			// Reel
+			'reel_item_width'     => 'max-content',
+			'reel_height'         => 'auto',
+			// Imposter
+			'imposter_margin'     => 'var(--sf-space-m)',
+			// Equal columns
+			'equal_cols'          => '2',
 		);
 	}
 

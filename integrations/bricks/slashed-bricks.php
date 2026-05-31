@@ -26,17 +26,19 @@ define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
 /**
  * Immutable jsDelivr ref for the SLASHED CSS bundle.
  *
- * Pinned to a specific release tag so the served CSS cannot change outside
- * a plugin release. jsDelivr treats commit/tag refs as effectively immutable
- * (cached "forever"), whereas branch refs (e.g. @main) have a 12h cache and
- * follow the moving branch tip - which is unsafe for production use.
+ * Points to the HEAD commit SHA of the `dist` branch at the time of the
+ * last release. jsDelivr treats commit SHAs as effectively immutable
+ * (cached "forever"), so the served CSS cannot change outside a plugin
+ * release even though the `dist` branch itself is a moving ref.
  *
- * When a new SLASHED framework release is published, bump this constant
- * (and verify the tag was not retagged in the upstream repo).
+ * CSS bundles are no longer committed to the main branch; they live only
+ * on the `dist` branch (files at root) and in GitHub Release assets.
+ * Updated automatically by the version-sync workflow on every release.
  *
  * Override per-site with the 'slashed_bricks/css_bundle_url' filter.
  */
-define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.18' );
+define( 'SLASHED_BRICKS_CSS_REF', 'v0.4.18' );     // semver tag — version comparison only
+define( 'SLASHED_BRICKS_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' ); // dist branch SHA — CDN URL
 
 /**
  * Token Store is loaded early so slashed_bricks_get_css_bundle() can call
@@ -65,8 +67,8 @@ function slashed_bricks_get_css_bundle() {
 /**
  * Get the URL for the SLASHED CSS bundle.
  *
- * Defaults to the jsDelivr CDN pinned to an immutable release tag
- * (see SLASHED_BRICKS_CSS_REF) so the plugin works without any local
+ * Defaults to the jsDelivr CDN pinned to the immutable dist-branch commit
+ * SHA (see SLASHED_BRICKS_DIST_SHA) so the plugin works without any local
  * file setup. The specific file (essential / optimal / full) is chosen
  * from the 'css_bundle' plugin setting. If a local copy is detected
  * (symlink/in-repo mode or copy-install mode), the local file takes
@@ -80,10 +82,11 @@ function slashed_bricks_get_css_url() {
     $bundle   = slashed_bricks_get_css_bundle();
     $filename = 'slashed.' . $bundle . '.css';
 
-    // Default: jsDelivr CDN pinned to an immutable release tag.
+    // Default: jsDelivr CDN pinned to the dist-branch commit SHA at release
+    // time. Files live at the root of the dist branch (no /dist/ prefix).
     $default_url = sprintf(
-        'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/dist/%s',
-        SLASHED_BRICKS_CSS_REF,
+        'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/%s',
+        SLASHED_BRICKS_DIST_SHA,
         $filename
     );
 

@@ -46,6 +46,7 @@ class Slashed_Bricks_Tab_Registry {
 			'colors'     => 'Colors',
 			'typography' => 'Typography',
 			'spacing'    => 'Spacing',
+			'layouts'    => 'Layouts',
 			'misc'       => 'Miscellaneous',
 		);
 	}
