@@ -110,12 +110,20 @@ stable and locked.
 
 Ideas that are promising but not yet committed.
 
-- **Gutenberg integration** — CSS loading + color palette sync + `theme.json`
-  custom property mapping. Scoped v1 is ~2–3 weeks of work and covers 80% of
-  what Gutenberg users need. Deferred because the `--sf-*` → `--wp--custom--*`
-  naming mismatch needs a clean translation layer, and Gutenberg's per-block
-  architecture is fundamentally different from Bricks' canvas model. reBEMer
-  parity is not a goal for any Gutenberg integration.
+- **Gutenberg integration** *(in progress — `integrations/gutenberg/`)* — v1
+  ships as a standalone plugin (`slashed-gutenberg.php`) that can be activated
+  independently of the Bricks plugin. v1 scope: CSS bundle loading into the
+  block editor canvas + frontend, color palette sync (21 tokens — brand,
+  status, surface, text, border, link), and a `data-wp-dark-mode-active` bridge
+  so the editor dark-mode toggle drives SLASHED's color-scheme system.
+
+  Deliberately excluded from v1 (future work):
+  - `--sf-*` → `--wp--custom--*` theme.json mapping — only needed to expose
+    tokens in the Global Styles UI (Site Editor); not required for the 80% use
+    case. Analogy: ACSS does not do this either.
+  - Token override admin UI — no Svelte panel for Gutenberg yet; overrides via
+    the `slashed_gutenberg/css_bundle_url` filter or child-theme CSS.
+  - reBEMer parity — Bricks-specific; not applicable to the block editor.
 
 - **Per-layer opt-in bundle via `@import`** — technically already possible
   today using the granular `core/` and `optional/` source files (with
