@@ -153,19 +153,21 @@ function generate() {
 const hints = generate();
 const json  = JSON.stringify(hints, null, 2) + '\n';
 
+const OUT_REL = path.relative(ROOT, OUT);
+
 if (process.argv.includes('--check')) {
   if (!fs.existsSync(OUT)) {
-    console.error('[gen-class-hints] data/classes-hints.json not found — run: node scripts/gen-class-hints.js');
+    console.error(`[gen-class-hints] ${OUT_REL} not found — run: node scripts/gen-class-hints.js`);
     process.exit(1);
   }
   const stored = fs.readFileSync(OUT, 'utf8');
   if (stored !== json) {
-    console.error('[gen-class-hints] data/classes-hints.json is stale — run: node scripts/gen-class-hints.js');
+    console.error(`[gen-class-hints] ${OUT_REL} is stale — run: node scripts/gen-class-hints.js`);
     process.exit(1);
   }
   console.log(`[gen-class-hints] OK — ${Object.keys(hints).length} class hints`);
 } else {
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, json);
-  console.log(`[gen-class-hints] → data/classes-hints.json (${Object.keys(hints).length} class hints)`);
+  console.log(`[gen-class-hints] → ${OUT_REL} (${Object.keys(hints).length} class hints)`);
 }
