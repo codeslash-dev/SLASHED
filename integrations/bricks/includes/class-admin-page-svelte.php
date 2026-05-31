@@ -54,18 +54,34 @@ class Slashed_Bricks_Admin_Page_Svelte {
 	}
 
 	/**
-	 * Register the top-level SLASHED admin menu.
+	 * Register the SLASHED admin menu.
+	 *
+	 * Standalone plugin: registers a top-level "SLASHED" menu.
+	 * Unified plugin (SLASHED_VERSION defined): registers as a sub-page
+	 * under the top-level "SLASHED" menu owned by slashed.php so only one
+	 * SLASHED item appears in the sidebar.
 	 */
 	public function register_menu() {
-		$this->hook_suffix = (string) add_menu_page(
-			__( 'SLASHED Settings', 'slashed-bricks' ),
-			__( 'SLASHED', 'slashed-bricks' ),
-			'manage_options',
-			self::PAGE_SLUG,
-			array( $this, 'render_page' ),
-			'dashicons-art',
-			59
-		);
+		if ( defined( 'SLASHED_VERSION' ) ) {
+			$this->hook_suffix = (string) add_submenu_page(
+				'slashed',
+				__( 'Bricks Tokens', 'slashed-bricks' ),
+				__( 'Bricks Tokens', 'slashed-bricks' ),
+				'manage_options',
+				self::PAGE_SLUG,
+				array( $this, 'render_page' )
+			);
+		} else {
+			$this->hook_suffix = (string) add_menu_page(
+				__( 'SLASHED Settings', 'slashed-bricks' ),
+				__( 'SLASHED', 'slashed-bricks' ),
+				'manage_options',
+				self::PAGE_SLUG,
+				array( $this, 'render_page' ),
+				'dashicons-art',
+				59
+			);
+		}
 	}
 
 	/**

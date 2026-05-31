@@ -16,28 +16,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SLASHED_GUTENBERG_VERSION', '0.4.18' );
-define( 'SLASHED_GUTENBERG_PATH', plugin_dir_path( __FILE__ ) );
-define( 'SLASHED_GUTENBERG_URL', plugin_dir_url( __FILE__ ) );
-
 /**
- * Semver tag — used for version comparison / update detection only.
- * The CDN URL uses SLASHED_GUTENBERG_DIST_SHA instead (immutable).
- */
-define( 'SLASHED_GUTENBERG_CSS_REF', 'v0.4.18' );
-
-/**
- * HEAD commit SHA of the `dist` branch at the time of the last release.
- * jsDelivr treats commit SHAs as effectively immutable (cached forever),
- * so the served CSS cannot change outside a plugin release.
- * Updated automatically by the version-sync workflow on every release.
+ * Constants.
  *
- * Override per-site with the 'slashed_gutenberg/css_bundle_url' filter.
+ * Guarded with !defined() so this file can be included by the unified
+ * SLASHED plugin (slashed.php), which pre-defines these constants with
+ * the correct paths relative to its own root. When loaded as a standalone
+ * plugin they are not yet set and are defined here as usual.
  */
-define( 'SLASHED_GUTENBERG_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
+if ( ! defined( 'SLASHED_GUTENBERG_VERSION' ) ) {
+	define( 'SLASHED_GUTENBERG_VERSION',  '0.4.18' );
+	define( 'SLASHED_GUTENBERG_PATH',     plugin_dir_path( __FILE__ ) );
+	define( 'SLASHED_GUTENBERG_URL',      plugin_dir_url( __FILE__ ) );
+	define( 'SLASHED_GUTENBERG_CSS_REF',  'v0.4.18' );
+	define( 'SLASHED_GUTENBERG_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
+}
 
-/** Allowed bundle variants. */
-const SLASHED_GUTENBERG_ALLOWED_BUNDLES = array( 'essential', 'optimal', 'full' );
+define( 'SLASHED_GUTENBERG_ALLOWED_BUNDLES', array( 'essential', 'optimal', 'full' ) );
 
 /**
  * Get the configured CSS bundle variant (essential / optimal / full).
@@ -76,7 +71,6 @@ function slashed_gutenberg_get_css_url() {
 		$filename
 	);
 
-	// Symlink / in-repo dev mode (dist/ two levels up from this file).
 	$repo_path = SLASHED_GUTENBERG_PATH . '../../dist/' . $filename;
 	if ( file_exists( $repo_path ) ) {
 		$default_url = SLASHED_GUTENBERG_URL . '../../dist/' . $filename;
