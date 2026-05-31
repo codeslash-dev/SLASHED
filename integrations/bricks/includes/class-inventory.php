@@ -190,9 +190,9 @@ class Slashed_Bricks_Inventory {
 	 * @return array<string, string> Map of CSS variable name to color value.
 	 */
 	private static function get_admin_color_overrides() {
-		$tokens = get_option( Slashed_Token_Store::OPTION_NAME );
+		$tokens = Slashed_Token_Store::get_settings();
 
-		if ( ! is_array( $tokens ) || empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
+		if ( empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
 			return array();
 		}
 

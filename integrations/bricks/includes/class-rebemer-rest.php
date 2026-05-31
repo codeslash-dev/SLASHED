@@ -68,8 +68,9 @@ class Slashed_Bricks_ReBEMer_REST {
 	/**
 	 * Register all reBEMer REST routes.
 	 *
-	 * Called from `slashed_bricks_rest_routes_init()` in the plugin
-	 * bootstrap, alongside the legacy admin REST controller.
+	 * Called from `slashed_bricks_rest_routes_init()`, which registers
+	 * only Bricks-specific endpoints. The token CRUD controller
+	 * (Slashed_REST_Controller) is registered globally by slashed.php.
 	 */
 	public function register_routes() {
 		register_rest_route(

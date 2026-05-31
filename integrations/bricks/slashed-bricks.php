@@ -132,23 +132,39 @@ function slashed_bricks_is_bricks_active() {
 
 // Token admin page (Slashed_Token_Page) and the main REST controller
 // (Slashed_REST_Controller) are registered globally by slashed.php.
-// In standalone mode the shared classes are loaded above and an
-// Slashed_Token_Page instance is registered there too.
+// In standalone mode the shared classes are loaded above and bootstrapped below.
+if ( ! defined( 'SLASHED_VERSION' ) ) {
+	add_action( 'rest_api_init', function () {
+		( new Slashed_REST_Controller() )->register_routes();
+	} );
+
+	if ( is_admin() ) {
+		add_action( 'plugins_loaded', function () {
+			new Slashed_Token_Page();
+		}, 20 );
+	}
+
+	if ( ! function_exists( 'slashed_inject_token_overrides' ) ) {
+		function slashed_inject_token_overrides() {
+			if ( wp_style_is( 'slashed-framework', 'enqueued' ) && Slashed_CSS_Generator::has_overrides() ) {
+				wp_add_inline_style( 'slashed-framework', Slashed_CSS_Generator::get_override_css() );
+			}
+		}
+	}
+	add_action( 'wp_enqueue_scripts', 'slashed_inject_token_overrides', 20 );
+	add_action( 'enqueue_block_editor_assets', 'slashed_inject_token_overrides', 20 );
+}
 
 /**
- * Register REST routes unconditionally via rest_api_init.
+ * Register Bricks-specific REST routes via rest_api_init.
  *
  * WordPress fires `rest_api_init` exclusively during REST dispatch —
  * never on normal admin or frontend requests. Hooking here guarantees
- * the routes exist regardless of `is_admin()` state and eliminates the
- * risk of dependency drift between admin and REST init paths.
+ * the routes exist regardless of `is_admin()` state.
  *
- * On admin requests the REST controller is ALSO instantiated inside
- * `slashed_bricks_admin_init()` (which fires earlier, at plugins_loaded).
- * That's harmless: WordPress deduplicates routes by namespace+path, and
- * `require_once` prevents re-declaration of class files. The admin path
- * keeps it so the controller is available for wp_localize_script (the
- * NAMESPACE constant) without an extra require.
+ * The token CRUD controller (Slashed_REST_Controller) is registered
+ * globally by slashed.php (or by the standalone bootstrap above).
+ * Only Bricks-specific endpoints (reBEMer, fonts) are registered here.
  */
 function slashed_bricks_rest_routes_init() {
     // Slashed_REST_Controller (token CRUD) is registered globally by slashed.php.

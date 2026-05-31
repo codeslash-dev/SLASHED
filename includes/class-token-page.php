@@ -76,8 +76,14 @@ class Slashed_Token_Page {
 			return;
 		}
 
-		$plugin_url  = SLASHED_URL  . 'integrations/bricks/';
-		$plugin_path = SLASHED_PATH . 'integrations/bricks/';
+		if ( defined( 'SLASHED_URL' ) ) {
+			$plugin_url  = SLASHED_URL  . 'integrations/bricks/';
+			$plugin_path = SLASHED_PATH . 'integrations/bricks/';
+		} else {
+			// Standalone Bricks plugin: SLASHED_BRICKS_* already point to integrations/bricks/.
+			$plugin_url  = SLASHED_BRICKS_URL;
+			$plugin_path = SLASHED_BRICKS_PATH;
+		}
 
 		$js_path  = $plugin_path . 'assets/admin-app/app.js';
 		$css_path = $plugin_path . 'assets/admin-app/app.css';
@@ -122,8 +128,8 @@ class Slashed_Token_Page {
 				'inventory'      => class_exists( 'Slashed_Bricks_Inventory' ) ? Slashed_Bricks_Inventory::get() : null,
 				'classHints'     => self::get_class_hints(),
 				'versions'       => array(
-					'plugin'    => SLASHED_VERSION,
-					'framework' => SLASHED_CSS_REF,
+					'plugin'    => defined( 'SLASHED_VERSION' ) ? SLASHED_VERSION : SLASHED_BRICKS_VERSION,
+					'framework' => defined( 'SLASHED_CSS_REF' ) ? SLASHED_CSS_REF : SLASHED_BRICKS_CSS_REF,
 				),
 			)
 		);
@@ -135,7 +141,9 @@ class Slashed_Token_Page {
 	 * @return array
 	 */
 	public static function get_class_hints() {
-		$path = SLASHED_PATH . 'data/classes-hints.json';
+		$path = defined( 'SLASHED_PATH' )
+			? SLASHED_PATH . 'data/classes-hints.json'
+			: SLASHED_BRICKS_PATH . '../../data/classes-hints.json';
 		if ( ! file_exists( $path ) ) {
 			return array();
 		}

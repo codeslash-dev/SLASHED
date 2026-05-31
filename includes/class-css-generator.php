@@ -30,7 +30,7 @@ class Slashed_CSS_Generator {
 	 * @return bool
 	 */
 	public static function has_overrides() {
-		$settings = get_option( Slashed_Token_Store::OPTION_NAME, array() );
+		$settings = Slashed_Token_Store::get_settings();
 
 		if ( ! is_array( $settings ) || empty( $settings ) ) {
 			return false;
@@ -66,9 +66,9 @@ class Slashed_CSS_Generator {
 			return self::$cache;
 		}
 
-		$settings = get_option( Slashed_Token_Store::OPTION_NAME, array() );
+		$settings = Slashed_Token_Store::get_settings();
 
-		if ( ! is_array( $settings ) || empty( $settings ) ) {
+		if ( empty( $settings ) ) {
 			self::$cache = '';
 			return self::$cache;
 		}

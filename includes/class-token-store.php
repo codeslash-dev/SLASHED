@@ -112,6 +112,7 @@ class Slashed_Token_Store {
 	 */
 	public static function delete_settings() {
 		delete_option( self::OPTION_NAME );
+		delete_option( self::LEGACY_OPTION_NAME );
 	}
 
 	/**
