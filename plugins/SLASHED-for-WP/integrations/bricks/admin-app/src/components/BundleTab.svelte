@@ -48,9 +48,9 @@
   <div class="setting-row">
     <label for="css-bundle">CSS Bundle</label>
     <select id="css-bundle" bind:value={bundle}>
-      <option value="essential">Essential — base variables only</option>
-      <option value="optimal">Optimal — variables + core utilities (default)</option>
-      <option value="full">Full — all utilities included</option>
+      <option value="essential">Essential — core layer only: tokens, reset, layout, states, motion</option>
+      <option value="optimal">Optimal — + color palette, forms, legacy support (recommended)</option>
+      <option value="full">Full — + components + utilities</option>
     </select>
     <p class="description">
       Choose which SLASHED CSS bundle to load on the frontend and in builder canvases.

@@ -104,9 +104,9 @@ class Slashed_Admin {
 				<table class="form-table" role="presentation">
 					<?php
 					$bundles = array(
-						'essential' => __( 'Essential — reset + design tokens only', 'slashed' ),
-						'optimal'   => __( 'Optimal — + layout, typography, states, forms (recommended)', 'slashed' ),
-						'full'      => __( 'Full — + utilities layer', 'slashed' ),
+						'essential' => __( 'Essential — core layer only: tokens, reset, layout, states, motion', 'slashed' ),
+						'optimal'   => __( 'Optimal — + color palette, forms, legacy support (recommended)', 'slashed' ),
+						'full'      => __( 'Full — + components + utilities', 'slashed' ),
 					);
 					foreach ( $bundles as $value => $label ) :
 						?>
