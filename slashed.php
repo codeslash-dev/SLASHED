@@ -79,9 +79,10 @@ add_action( 'enqueue_block_editor_assets', 'slashed_inject_token_overrides', 20 
 
 // ─── Unified admin page ───────────────────────────────────────────────────────
 
+require_once SLASHED_PATH . 'includes/class-token-page.php'; // also used on frontend (Bricks editor)
+
 if ( is_admin() ) {
 	require_once SLASHED_PATH . 'includes/class-admin.php';
-	require_once SLASHED_PATH . 'includes/class-token-page.php';
 	add_action( 'plugins_loaded', function () {
 		new Slashed_Admin();
 		new Slashed_Token_Page();
