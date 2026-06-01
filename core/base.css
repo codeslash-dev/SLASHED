@@ -16,7 +16,6 @@
     font-weight:      var(--sf-body-font-weight, var(--sf-font-weight-body));
     color:            var(--sf-body-color,       var(--sf-color-text));
     background-color: var(--sf-color-bg, #fff);
-    font-synthesis:   none;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -177,10 +176,6 @@
     text-align: start;
   }
 
-  address, cite, dfn, var {
-    font-style: normal;
-  }
-
   input, textarea {
     caret-color: var(--sf-caret-color);
   }
@@ -223,7 +218,6 @@
   blockquote {
     border-inline-start: var(--sf-border-width-3) var(--sf-border-style) var(--sf-color-border);
     padding-inline-start: var(--sf-space-m);
-    font-style: italic;
   }
 
   dt {
