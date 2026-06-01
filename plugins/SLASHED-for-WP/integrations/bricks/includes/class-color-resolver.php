@@ -249,9 +249,17 @@ class Slashed_Bricks_Color_Resolver {
 		$hex_map['--sf-color-text--disabled']    = '#b4b4c4';
 		$hex_map['--sf-color-text--inverse']     = '#fafafa';
 
+		// Background interaction states.
+		$hex_map['--sf-color-bg--hover']     = '#f0f0f4';
+		$hex_map['--sf-color-bg--active']    = '#e8e8ee';
+		$hex_map['--sf-color-bg--focus']     = '#f0f0f4';
+		$hex_map['--sf-color-bg--selected']  = '#eaebf5';
+		$hex_map['--sf-color-bg--disabled']  = '#f5f5f8';
+
 		// Border defaults.
-		$hex_map['--sf-color-border']       = '#d4d4de';
-		$hex_map['--sf-color-border--muted'] = '#e8e8f0';
+		$hex_map['--sf-color-border']            = '#d4d4de';
+		$hex_map['--sf-color-border--muted']     = '#e8e8f0';
+		$hex_map['--sf-color-border--disabled']  = '#e8e8f0';
 
 		return $hex_map;
 	}
