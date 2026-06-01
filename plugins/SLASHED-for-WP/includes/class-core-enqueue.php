@@ -48,7 +48,6 @@ class Slashed_Core_Enqueue {
 		}
 
 		wp_enqueue_style( 'slashed-framework', $url, array(), Slashed_CSS_Loader::get_version( $url ) );
-		wp_add_inline_style( 'slashed-framework', self::admin_bar_shield() );
 
 		// HTML font-size override — affects all rem-based framework values.
 		$settings  = Slashed_Token_Store::get_plugin_settings();
@@ -56,56 +55,6 @@ class Slashed_Core_Enqueue {
 		if ( '100' === $font_size || '62.5' === $font_size ) {
 			wp_add_inline_style( 'slashed-framework', 'html { font-size: ' . $font_size . '% !important; }' );
 		}
-	}
-
-	/**
-	 * Return CSS that shields #wpadminbar from SLASHED's reset layer.
-	 *
-	 * SLASHED's reset lives in @layer slashed.reset (author-layered CSS).
-	 * The WP admin bar relies on UA stylesheet defaults for properties its
-	 * own stylesheet does not explicitly override. Because author layers beat
-	 * the UA in the cascade, the reset inadvertently zeroes those defaults
-	 * inside the admin bar.
-	 *
-	 * These rules are intentionally unlayered (no @layer wrapper), so they
-	 * sit above all slashed.* layers in the cascade. The `revert` keyword
-	 * instructs the browser to fall back to the user/UA stylesheet value —
-	 * effectively making the SLASHED reset a no-op for #wpadminbar.
-	 *
-	 * @return string
-	 */
-	private static function admin_bar_shield() {
-		return '
-#wpadminbar *,
-#wpadminbar *::before,
-#wpadminbar *::after {
-  margin: revert;
-  padding: revert;
-  box-sizing: revert;
-}
-#wpadminbar img,
-#wpadminbar svg {
-  display: revert;
-  max-inline-size: revert;
-  block-size: revert;
-}
-#wpadminbar button,
-#wpadminbar input,
-#wpadminbar select {
-  font: revert;
-  color: revert;
-  color-scheme: revert;
-  line-height: revert;
-  letter-spacing: revert;
-}
-#wpadminbar button {
-  cursor: revert;
-  text-transform: revert;
-}
-#wpadminbar a,
-#wpadminbar button {
-  touch-action: revert;
-}';
 	}
 
 	/**
