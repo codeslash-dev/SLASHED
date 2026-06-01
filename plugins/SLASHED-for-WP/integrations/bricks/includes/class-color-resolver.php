@@ -355,6 +355,27 @@ class Slashed_Bricks_Color_Resolver {
 		// mark-bg: warning at 25% opacity over white.
 		$hex_map['--sf-color-mark-bg'] = self::rgb_to_hex( self::mix_rgb( $warning_rgb, $white_rgb, 0.25 ) );
 
+		// ---- Status strong variants (light-mode: source L minus offset) ----
+		// CSS formula: oklch(from var(--sf-color-{family}-light) calc(l - offset) c h)
+		$status_strong_offsets = array(
+			'success' => 0.15,
+			'warning' => 0.25,
+			'error'   => 0.10,
+			'info'    => 0.10,
+			'danger'  => 0.10,
+		);
+		foreach ( $status_strong_offsets as $family => $l_offset ) {
+			if ( ! isset( $sources[ $family ] ) ) {
+				continue;
+			}
+			list( $sl, $sc, $sh ) = $sources[ $family ];
+			$hex_map[ '--sf-color-' . $family . '-strong' ] = self::oklch_to_hex(
+				max( 0.0, $sl - $l_offset ),
+				$sc,
+				$sh
+			);
+		}
+
 		return $hex_map;
 	}
 
