@@ -353,3 +353,29 @@ li[data-id]:focus-within > .rebemer-badge-host {
 }
 .rebemer-class-hint__cat[hidden] { display: none; }
 .rebemer-class-hint__desc { margin: 4px 0 0; color: var(--rebemer-fg); }
+
+/* Variable-picker colour swatch — a small square prepended to each
+   `--sf-color-*` row in the Bricks variable dropdown by
+   color-swatches.js. The colour is set inline via the
+   `--slashed-swatch-color` custom property; everything else lives here.
+   The checkerboard underlay shows through translucent (alpha) tokens. */
+.slashed-var-swatch {
+  flex: 0 0 auto;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 7px;
+  vertical-align: middle;
+  border-radius: 3px;
+  border: 1px solid rgba(127, 127, 127, .45);
+  /* Layer order: the resolved colour sits on top (opaque tokens hide the
+     checkerboard entirely); translucent/alpha tokens let the checkerboard
+     show through so transparency reads at a glance. */
+  background-color: #fff;
+  background-image:
+    linear-gradient(var(--slashed-swatch-color, transparent), var(--slashed-swatch-color, transparent)),
+    linear-gradient(45deg, rgba(127, 127, 127, .35) 25%, transparent 25%, transparent 75%, rgba(127, 127, 127, .35) 75%),
+    linear-gradient(45deg, rgba(127, 127, 127, .35) 25%, transparent 25%, transparent 75%, rgba(127, 127, 127, .35) 75%);
+  background-position: 0 0, 0 0, 4px 4px;
+  background-size: auto, 8px 8px, 8px 8px;
+}
