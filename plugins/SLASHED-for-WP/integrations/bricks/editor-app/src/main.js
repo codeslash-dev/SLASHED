@@ -18,6 +18,7 @@
  */
 import { mount, unmount } from 'svelte';
 import * as api from './lib/bricks-api.js';
+import * as classHints from './lib/class-hints.js';
 import BemBadge from './components/BemBadge.svelte';
 import BemPanel from './components/BemPanel.svelte';
 import './styles/panel.css';
@@ -51,6 +52,15 @@ function ensureHost() {
 }
 
 function start() {
+  // Class documentation tooltips are independent of the reBEMer badge
+  // pipeline below: they hook the Bricks settings panel / class manager,
+  // not the structure panel, so they run even if the Vue probe fails.
+  // Config is injected by class-rebemer-enqueue.php via wp_localize_script.
+  const cfg = window.slashedBricksEditor;
+  if (cfg && typeof cfg === 'object') {
+    classHints.init(cfg.showClassHints, cfg.classHints, { signal });
+  }
+
   let attempts = 0;
   const tryProbe = () => {
     if (signal.aborted) return;
@@ -226,6 +236,7 @@ function closePanel() {
 window.addEventListener('beforeunload', () => {
   controller.abort();
   closePanel();
+  classHints.destroy();
   for (const { instance } of badgeInstances.values()) {
     try { unmount(instance); } catch { /* ignore */ }
   }

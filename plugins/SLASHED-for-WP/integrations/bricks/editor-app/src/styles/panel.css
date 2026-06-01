@@ -322,3 +322,34 @@ li[data-id]:focus-within > .rebemer-badge-host {
 .rebemer-toast { position: fixed; bottom: 16px; right: 16px; z-index: 100002; background: var(--rebemer-input-bg); color: var(--rebemer-fg); border: 1px solid var(--rebemer-border); border-radius: var(--rebemer-radius); padding: 8px 12px; font: 12px/1.45 var(--rebemer-font); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
 .rebemer-toast--success { border-color: var(--rebemer-success); }
 .rebemer-toast--error { border-color: var(--rebemer-error); color: var(--rebemer-error); }
+
+/* Class hint tooltip — shown on hover over a SLASHED class in the
+   Bricks settings panel / class manager. Positioned imperatively
+   (fixed top/left set in class-hints.js); styling only here. */
+.rebemer-class-hint {
+  position: fixed;
+  z-index: 100003;
+  max-width: 280px;
+  background: var(--rebemer-bg);
+  color: var(--rebemer-fg);
+  border: 1px solid var(--rebemer-border);
+  border-radius: var(--rebemer-radius);
+  padding: 8px 10px;
+  font: 12px/1.45 var(--rebemer-font);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+.rebemer-class-hint[hidden] { display: none; }
+.rebemer-class-hint__name {
+  font: 600 11px/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--rebemer-accent);
+}
+.rebemer-class-hint__cat {
+  margin-left: 6px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--rebemer-fg-muted);
+}
+.rebemer-class-hint__cat[hidden] { display: none; }
+.rebemer-class-hint__desc { margin: 4px 0 0; color: var(--rebemer-fg); }
