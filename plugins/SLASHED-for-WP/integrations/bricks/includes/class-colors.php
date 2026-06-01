@@ -104,11 +104,55 @@ class Slashed_Bricks_Colors {
 
         $palettes = $this->strip_palettes( $palettes );
 
+        if ( ! $this->should_inject_palettes() ) {
+            return $palettes;
+        }
+
         foreach ( $this->build_palettes() as $palette ) {
             $palettes[] = $palette;
         }
 
         return $palettes;
+    }
+
+    /**
+     * Whether to inject SLASHED palettes into the Bricks color palette.
+     *
+     * Bricks 2.2 introduced the Color Manager, which materializes every
+     * palette color into `:root` as a static CSS variable (with an optional
+     * `[data-brx-theme="dark"]` variant). That model is fundamentally at
+     * odds with SLASHED's adaptive `light-dark()` tokens: injecting the
+     * framework's `--sf-color-*` tokens there bakes them to fixed hex,
+     * overrides the framework's own theme-aware definitions in `:root`, and
+     * breaks dark/light switching (the toggle flips `color-scheme` but the
+     * baked hex never changes).
+     *
+     * On Bricks 2.2+ we therefore skip palette injection entirely and let
+     * users reach the tokens through the Variable Manager
+     * (`class-variables.php`), whose empty-value entries Bricks never writes
+     * to `:root`, so the framework remains the single source of truth.
+     *
+     * The decision is evaluated lazily inside the option filter (not in the
+     * constructor) because `BRICKS_VERSION` is defined by the Bricks theme
+     * after `plugins_loaded`, where these managers are instantiated.
+     *
+     * @return bool
+     */
+    private function should_inject_palettes() {
+        $supports_color_manager = function_exists( 'slashed_bricks_supports_color_manager' )
+            ? slashed_bricks_supports_color_manager()
+            : false;
+
+        /**
+         * Filter whether SLASHED palettes are injected into the Bricks color
+         * palette. Defaults to false on Bricks 2.2+ (Color Manager) to avoid
+         * clobbering the framework's adaptive tokens in `:root`. Set to true
+         * to force injection anyway (accepting that palette colors become
+         * static hex snapshots without dark-mode adaptation).
+         *
+         * @param bool $inject Whether to inject the palettes.
+         */
+        return (bool) apply_filters( 'slashed_bricks/inject_color_palette', ! $supports_color_manager );
     }
 
     /**

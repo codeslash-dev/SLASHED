@@ -133,6 +133,50 @@ function slashed_bricks_is_bricks_active() {
     return false;
 }
 
+/**
+ * Whether the active Bricks version ships the Color Manager (Bricks 2.2+).
+ *
+ * The Color Manager (Style Manager → Colors) writes every color-palette
+ * entry to `:root` as a static CSS variable, with an optional
+ * `[data-brx-theme="dark"]` variant. That model is incompatible with
+ * SLASHED's adaptive `light-dark()` tokens, so the color-palette injection
+ * is disabled on 2.2+ (see Slashed_Bricks_Colors::should_inject_palettes()).
+ * Tokens remain available through the Variable Manager.
+ *
+ * Call no earlier than the option reads that occur during theme load:
+ * BRICKS_VERSION is defined by the Bricks theme, after `plugins_loaded`.
+ *
+ * @return bool
+ */
+function slashed_bricks_supports_color_manager() {
+    $version = '';
+
+    if ( defined( 'BRICKS_VERSION' ) ) {
+        $version = (string) BRICKS_VERSION;
+    } else {
+        $theme = wp_get_theme();
+
+        if ( 'bricks' === strtolower( $theme->get_template() ) ) {
+            $parent  = $theme->parent();
+            $version = $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
+        } elseif ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
+            $version = (string) $theme->get( 'Version' );
+        }
+    }
+
+    if ( '' === $version || ! preg_match( '/^(\d+)\.(\d+)/', $version, $m ) ) {
+        return false;
+    }
+
+    // Compare on major.minor so pre-release builds that already ship the
+    // Color Manager are detected. version_compare() ranks "2.2-beta" below
+    // "2.2", which would miss the beta where the feature first landed.
+    $major = (int) $m[1];
+    $minor = (int) $m[2];
+
+    return ( $major > 2 ) || ( 2 === $major && $minor >= 2 );
+}
+
 // Token admin page (Slashed_Token_Page) and the main REST controller
 // (Slashed_REST_Controller) are registered globally by slashed.php.
 // In standalone mode the shared classes are loaded above and bootstrapped below.
