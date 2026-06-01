@@ -108,29 +108,47 @@ function slashed_bricks_get_css_url() {
 }
 
 /**
+ * Resolve the active Bricks version string, or '' if it can't be determined.
+ *
+ * Prefers the BRICKS_VERSION constant (defined by the Bricks theme during
+ * theme load), falling back to the active theme's (or its parent's) version
+ * metadata. Both Bricks detectors below share this so they stay in sync if
+ * Bricks ever changes how its version is exposed.
+ *
+ * @return string
+ */
+function slashed_bricks_get_bricks_version() {
+    if ( defined( 'BRICKS_VERSION' ) ) {
+        return (string) BRICKS_VERSION;
+    }
+
+    $theme = wp_get_theme();
+
+    if ( 'bricks' === strtolower( $theme->get_template() ) ) {
+        $parent = $theme->parent();
+        return $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
+    }
+
+    if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
+        return (string) $theme->get( 'Version' );
+    }
+
+    return '';
+}
+
+/**
  * Check if Bricks Builder is active.
  *
  * @return bool
  */
 function slashed_bricks_is_bricks_active() {
-    $theme = wp_get_theme();
-    $minimum_version = '1.9.2';
+    $version = slashed_bricks_get_bricks_version();
 
-    if ( defined( 'BRICKS_VERSION' ) ) {
-        return version_compare( (string) BRICKS_VERSION, $minimum_version, '>=' );
+    if ( '' === $version ) {
+        return false;
     }
 
-    if ( 'bricks' === strtolower( $theme->get_template() ) ) {
-        $parent = $theme->parent();
-        $version = $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
-        return version_compare( $version, $minimum_version, '>=' );
-    }
-
-    if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
-        return version_compare( (string) $theme->get( 'Version' ), $minimum_version, '>=' );
-    }
-
-    return false;
+    return version_compare( $version, '1.9.2', '>=' );
 }
 
 /**
@@ -149,20 +167,7 @@ function slashed_bricks_is_bricks_active() {
  * @return bool
  */
 function slashed_bricks_supports_color_manager() {
-    $version = '';
-
-    if ( defined( 'BRICKS_VERSION' ) ) {
-        $version = (string) BRICKS_VERSION;
-    } else {
-        $theme = wp_get_theme();
-
-        if ( 'bricks' === strtolower( $theme->get_template() ) ) {
-            $parent  = $theme->parent();
-            $version = $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
-        } elseif ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
-            $version = (string) $theme->get( 'Version' );
-        }
-    }
+    $version = slashed_bricks_get_bricks_version();
 
     if ( '' === $version || ! preg_match( '/^(\d+)\.(\d+)/', $version, $m ) ) {
         return false;
