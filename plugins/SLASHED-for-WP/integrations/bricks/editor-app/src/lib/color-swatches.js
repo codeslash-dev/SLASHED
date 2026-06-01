@@ -158,6 +158,43 @@ function schedule() {
 }
 
 /**
+ * Cheap pre-filter for the body-level observer: only schedule a pass when
+ * a mutation actually touches the variable picker.
+ *
+ * We observe `document.body` (the picker dropdown is created, destroyed,
+ * and re-rendered by Bricks, with no container that's stable across its
+ * whole lifecycle), but the vast majority of builder mutations — canvas
+ * edits, structure-panel rebuilds — are irrelevant. Bailing here keeps
+ * those from waking the reconciler at all.
+ *
+ *   - A text/markup patch inside an existing row (Bricks reuses `<li>`
+ *     nodes when filtering) shows up as a mutation whose target is within
+ *     a `.variable-picker-item`.
+ *   - Opening the dropdown adds a subtree that contains the rows.
+ *
+ * @param {MutationRecord[]} records
+ * @returns {boolean}
+ */
+function touchesPicker(records) {
+  for (const m of records) {
+    const t = m.target;
+    if (t && t.nodeType === 1 && t.closest && t.closest(ITEM_SELECTOR)) {
+      return true;
+    }
+    for (const node of m.addedNodes) {
+      if (node.nodeType !== 1) continue;
+      if (
+        (node.matches && node.matches(ITEM_SELECTOR)) ||
+        (node.querySelector && node.querySelector(ITEM_SELECTOR))
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+/**
  * Initialise variable-picker swatches.
  *
  * Safe to call when disabled (no-ops) and idempotent (a second call
@@ -179,11 +216,17 @@ export function init(enabled, hexMap, options = {}) {
   _controller = new AbortController();
 
   // The picker dropdown is created, destroyed, and re-rendered (on search)
-  // by Bricks, so a persistent observer that re-decorates on any DOM
-  // churn is simpler and more robust than trying to hook open/close.
-  // The callback only schedules a cheap debounced pass; our own swatch
-  // insertions trigger at most one extra no-op pass before settling.
-  _observer = new MutationObserver(schedule);
+  // by Bricks, so a persistent observer is simpler and more robust than
+  // trying to hook open/close. We watch `document.body` because there's no
+  // container that stays mounted across the picker's whole lifecycle, but
+  // `touchesPicker()` filters out unrelated builder churn so canvas edits
+  // and structure-panel rebuilds never wake the reconciler. When a
+  // relevant mutation lands we schedule a single cheap debounced pass;
+  // our own swatch insertions trigger at most one extra no-op pass before
+  // settling.
+  _observer = new MutationObserver((records) => {
+    if (touchesPicker(records)) schedule();
+  });
   _observer.observe(document.body, { childList: true, subtree: true });
 
   runPass();
