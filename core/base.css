@@ -158,10 +158,6 @@
     border:    none;
   }
 
-  svg {
-    fill: currentcolor;
-  }
-
   hr {
     border:             none;
     border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
