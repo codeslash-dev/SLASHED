@@ -236,12 +236,16 @@ class Slashed_Bricks_Inventory {
 	 * @return string[]
 	 */
 	public static function get_color_variables() {
+		// Tokens excluded because they hold non-colour string values despite
+		// carrying the --sf-color- namespace prefix.
+		static $excluded = array( '--sf-color-scheme' );
+
 		$vars = self::get_variables();
 		return array_values(
 			array_filter(
 				$vars,
-				static function ( $v ) {
-					return 0 === strpos( $v, '--sf-color-' );
+				static function ( $v ) use ( $excluded ) {
+					return 0 === strpos( $v, '--sf-color-' ) && ! in_array( $v, $excluded, true );
 				}
 			)
 		);
