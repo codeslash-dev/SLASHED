@@ -212,6 +212,32 @@ function onMouseOut(event) {
   hide();
 }
 
+// Mirror the hover handlers for keyboard users: a class label focused
+// via Tab gets the same tooltip a mouse hover would surface.
+function onFocusIn(event) {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  if (target.closest(`#${HOST_ID}`)) return;
+  if (!target.closest(BRICKS_CONTAINERS.join(','))) {
+    if (_currentTarget) hide();
+    return;
+  }
+  const match = findHintTarget(target);
+  if (!match) {
+    if (_currentTarget) hide();
+    return;
+  }
+  if (match.el === _currentTarget) return;
+  show(match.el, match.hint);
+}
+
+function onFocusOut(event) {
+  if (!_currentTarget) return;
+  const to = event.relatedTarget;
+  if (to instanceof Node && _currentTarget.contains(to)) return;
+  hide();
+}
+
 function onKeyDown(event) {
   if (event.key === 'Escape') hide();
 }
@@ -241,6 +267,8 @@ export function init(enabled, hints, options = {}) {
 
   document.addEventListener('mouseover', onMouseOver, opts);
   document.addEventListener('mouseout', onMouseOut, opts);
+  document.addEventListener('focusin', onFocusIn, opts);
+  document.addEventListener('focusout', onFocusOut, opts);
   document.addEventListener('keydown', onKeyDown, opts);
   // The tooltip is anchored to a fixed viewport position; hide it on
   // scroll rather than chase a moving target.
