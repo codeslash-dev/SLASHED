@@ -19,6 +19,7 @@
 import { mount, unmount } from 'svelte';
 import * as api from './lib/bricks-api.js';
 import * as classHints from './lib/class-hints.js';
+import * as colorSwatches from './lib/color-swatches.js';
 import BemBadge from './components/BemBadge.svelte';
 import BemPanel from './components/BemPanel.svelte';
 import './styles/panel.css';
@@ -59,6 +60,7 @@ function start() {
   const cfg = window.slashedBricksEditor;
   if (cfg && typeof cfg === 'object') {
     classHints.init(cfg.showClassHints, cfg.classHints, { signal });
+    colorSwatches.init(cfg.showColorSwatches, cfg.colorHexMap, { signal });
   }
 
   let attempts = 0;
@@ -237,6 +239,7 @@ window.addEventListener('beforeunload', () => {
   controller.abort();
   closePanel();
   classHints.destroy();
+  colorSwatches.destroy();
   for (const { instance } of badgeInstances.values()) {
     try { unmount(instance); } catch { /* ignore */ }
   }

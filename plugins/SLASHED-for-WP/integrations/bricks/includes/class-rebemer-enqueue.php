@@ -45,12 +45,31 @@ class Slashed_Bricks_ReBEMer_Enqueue {
 		wp_enqueue_script( self::SCRIPT_HANDLE, $base_url . 'app.js', array(), $js_ver, true );
 
 		$plugin_settings = Slashed_Token_Store::get_plugin_settings();
+
+		/**
+		 * Toggle the variable-picker colour swatches.
+		 *
+		 * Swatches are painted builder-side onto each `--sf-color-*` entry
+		 * in the Bricks variable dropdown (see editor-app color-swatches.js)
+		 * and never touch `:root`, so dark/light stays framework-driven.
+		 * Filter to false to disable them.
+		 *
+		 * @param bool $enabled Default true.
+		 */
+		$show_color_swatches = (bool) apply_filters( 'slashed_bricks/show_color_swatches', true );
+
+		$color_hex_map = ( $show_color_swatches && class_exists( 'Slashed_Bricks_Inventory' ) )
+			? Slashed_Bricks_Inventory::get_color_hex_map()
+			: array();
+
 		wp_localize_script(
 			self::SCRIPT_HANDLE,
 			'slashedBricksEditor',
 			array(
-				'showClassHints' => ! empty( $plugin_settings['show_class_hints'] ),
-				'classHints'     => Slashed_Token_Page::get_class_hints(),
+				'showClassHints'    => ! empty( $plugin_settings['show_class_hints'] ),
+				'classHints'        => Slashed_Token_Page::get_class_hints(),
+				'showColorSwatches' => $show_color_swatches,
+				'colorHexMap'       => $color_hex_map,
 			)
 		);
 	}

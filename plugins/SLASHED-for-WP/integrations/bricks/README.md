@@ -8,6 +8,7 @@ A WordPress plugin that integrates the [SLASHED](https://github.com/codeslash-de
 - **Variable Pickers** - Registers every `--sf-*` CSS custom property declared in the active bundle (~600 in `optimal`, ~700 in `full`) with the Bricks variable pickers and code editor autocomplete, organized into category groups
 - **Class Autocomplete** - Registers every `.sf-*` layout/utility class and `.is-*` state class declared in the active bundle with the Bricks class input, organized into "SLASHED Layout" and "SLASHED State" categories
 - **Color Palette** - Synchronizes every `--sf-color-*` token (brand scales including alpha steps, status, and semantic colors) with the Bricks global color palette. Disabled automatically on Bricks 2.2+ (the new Color Manager bakes palette colors into `:root` as static hex, which would override the framework's adaptive `light-dark()` tokens and break dark mode) — use the Variable Manager to reach the tokens there
+- **Variable-Picker Swatches** - Paints a colour square next to each `--sf-color-*` entry in the Bricks variable-picker dropdown, builder-side only. Because the variables stay empty-valued, Bricks has no value to draw a swatch from; the square is rendered from a server-resolved hex map so dark/light stays 100% framework-driven and nothing is written to `:root`. Purely additive and fail-silent: if Bricks ever changes the picker markup you lose the squares, never the picker. Restores the swatch affordance lost when the Color Palette is disabled on Bricks 2.2+. Toggle with the `slashed_bricks/show_color_swatches` filter
 - **Dynamic Detection** - The integration parses the loaded CSS bundle at runtime, so registrations stay in sync with whichever bundle (`essential` / `optimal` / `full`) and SLASHED release is active. There is no hand-curated list to drift out of date.
 - **reBEMer** - Subtree-scoped BEM class manager inside the Bricks builder structure panel: add / rename / replace classes for an element and its children in one transaction, with reference-count preflight (REST), snapshot+rollback, reserved-name guard against SLASHED utilities, and Cmd/Ctrl-Z undo. See [docs/rebemer.md](../../docs/rebemer.md) for the full design.
 
@@ -93,6 +94,15 @@ Control whether SLASHED palettes are injected into the Bricks color palette (`br
 ```php
 // Force palette injection even on Bricks 2.2+.
 add_filter( 'slashed_bricks/inject_color_palette', '__return_true' );
+```
+
+#### `slashed_bricks/show_color_swatches`
+
+Control whether colour swatches are painted next to `--sf-color-*` entries in the Bricks variable-picker dropdown (builder-side only — see Variable-Picker Swatches above). Defaults to `true`. Returning `false` also skips localising the hex map, so no extra data is sent to the builder.
+
+```php
+// Hide the variable-picker swatches.
+add_filter( 'slashed_bricks/show_color_swatches', '__return_false' );
 ```
 
 #### `slashed_bricks/registered_variables`
