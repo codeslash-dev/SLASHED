@@ -55,9 +55,17 @@ light card inside a dark page, the toggle script).
 
 ## Per-section & multi-brand theming
 
-`data-theme` works on any element, not just `:root` — nest it to theme a
-subtree. For a different *palette* (not just light/dark), re-declare the six
-source tokens under your own selector:
+`data-theme` works on any element, not just `:root` — SLASHED re-declares all
+mode-sensitive tokens directly on `[data-theme]` elements so colours, text,
+borders, and links fully switch regardless of what `:root` is doing.
+
+```html
+<header data-theme="dark">Dark header on a light page</header>
+<article data-theme="light">Light card inside a dark page</article>
+```
+
+For a different *palette* (not just light/dark), re-declare the six source
+tokens under your own selector. All derived tokens re-compute automatically:
 
 ```css
 [data-brand="sunset"] {
@@ -70,8 +78,43 @@ source tokens under your own selector:
 <section data-brand="sunset"> … </section>
 ```
 
+Combine both for a section with a different palette **and** a forced mode:
+
+```html
+<section data-brand="sunset" data-theme="dark"> … </section>
+```
+
 Because `slashed.themes` sits above the component/utility layers in the
 cascade, these reassignments win without `!important`.
+
+## Manual colour overrides
+
+Three tiers of override, from least to most specific:
+
+**Tier 1 — source token** (changes both modes automatically):
+```css
+:root { --sf-color-primary-light: oklch(0.55 0.18 280); }
+```
+
+**Tier 2 — dark source token** (changes dark mode only, light unchanged):
+```css
+:root { --sf-color-primary-dark: oklch(0.78 0.16 280); }
+```
+
+**Tier 3 — resolved token** (overrides the final computed value directly;
+use when you need a specific value the formula can't produce):
+```css
+/* Global: always this value regardless of mode */
+:root { --sf-color-link: oklch(0.40 0.14 280); }
+
+/* Mode-specific: different value per mode */
+:root {
+  --sf-color-link: light-dark(oklch(0.40 0.14 280), oklch(0.72 0.16 280));
+}
+```
+
+Place Tier 3 overrides in `slashed.overrides` (load after the SLASHED bundle)
+so they survive framework updates. See `optional/overrides-example.css`.
 
 ## How universal is the colour system?
 

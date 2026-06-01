@@ -124,13 +124,6 @@ class Slashed_Bricks_Color_Resolver {
 		// Determine source oklch values for each family.
 		$sources = self::resolve_sources( $color_values );
 
-		// Approximate hex for base and text mixing targets.
-		$base_hex = self::oklch_to_hex( 0.98, 0.005, 260.0 );
-		$text_hex = '#1c1c2e';
-
-		$base_rgb = self::hex_to_rgb( $base_hex );
-		$text_rgb = self::hex_to_rgb( $text_hex );
-
 		$families = array_keys( self::$default_sources );
 
 		foreach ( $families as $family ) {
@@ -140,26 +133,32 @@ class Slashed_Bricks_Color_Resolver {
 
 			$oklch      = $sources[ $family ];
 			$family_hex = self::oklch_to_hex( $oklch[0], $oklch[1], $oklch[2] );
-			$family_rgb = self::hex_to_rgb( $family_hex );
 
 			// The base (500 step) is the direct conversion.
-			$hex_map[ '--sf-color-' . $family ] = $family_hex;
+			$hex_map[ '--sf-color-' . $family ]          = $family_hex;
 			$hex_map[ '--sf-color-' . $family . '-500' ] = $family_hex;
 
-			// Light steps (50-400): mix base color with base-light (#fafafa-ish).
+			// Light steps (50-400): interpolate toward white in oklch.
+			// Equivalent to color-mix(in oklch, source X%, white) — perceptually uniform,
+			// no hue drift (unlike sRGB mixing toward a tinted base color).
 			foreach ( self::$light_steps as $step => $pct ) {
-				$mixed = self::mix_rgb( $family_rgb, $base_rgb, $pct );
-				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::rgb_to_hex( $mixed );
+				$step_l = $oklch[0] * $pct + ( 1.0 - $pct ); // lerp L toward 1 (white)
+				$step_c = $oklch[1] * $pct;                   // chroma scales with color weight
+				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::oklch_to_hex( $step_l, $step_c, $oklch[2] );
 			}
 
-			// Dark steps (600-950): mix base color with text color.
+			// Dark steps (600-950): interpolate toward black in oklch.
+			// Equivalent to color-mix(in oklch, source X%, black) — no purple tint
+			// from mixing toward a dark-navy text color.
 			foreach ( self::$dark_steps as $step => $pct ) {
-				$mixed = self::mix_rgb( $family_rgb, $text_rgb, $pct );
-				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::rgb_to_hex( $mixed );
+				$step_l = $oklch[0] * $pct; // lerp L toward 0 (black)
+				$step_c = $oklch[1] * $pct; // chroma scales with color weight
+				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::oklch_to_hex( $step_l, $step_c, $oklch[2] );
 			}
 
-			// Alpha steps: approximate by mixing with white.
-			$white_rgb = array( 255, 255, 255 );
+			// Alpha steps: opaque swatch approximation composited over white.
+			$family_rgb = self::hex_to_rgb( $family_hex );
+			$white_rgb  = array( 255, 255, 255 );
 			foreach ( self::$alpha_steps as $suffix => $pct ) {
 				$mixed = self::mix_rgb( $family_rgb, $white_rgb, $pct );
 				$hex_map[ '--sf-color-' . $family . '-' . $suffix ] = self::rgb_to_hex( $mixed );
@@ -229,29 +228,132 @@ class Slashed_Bricks_Color_Resolver {
 	 * @return array<string, string> Extended hex map.
 	 */
 	private static function resolve_semantic_tokens( $hex_map, $sources ) {
-		// --sf-color-text: dark neutral approximate.
-		$hex_map['--sf-color-text'] = '#1c1c2e';
+		$white_rgb = array( 255, 255, 255 );
+		$dark_text = '#1c1c2e';
 
-		// --sf-color-bg: very light, almost white.
-		$hex_map['--sf-color-bg'] = '#fcfcfd';
+		// ---- Base text / bg / surface ----
+		$hex_map['--sf-color-text'] = $dark_text;
+		$hex_map['--sf-color-bg']   = '#fcfcfd';
 
-		// --sf-color-surface: same as base.
 		if ( isset( $hex_map['--sf-color-base'] ) ) {
 			$hex_map['--sf-color-surface'] = $hex_map['--sf-color-base'];
 		} else {
 			$hex_map['--sf-color-surface'] = '#fafafa';
 		}
 
-		// Text variants.
+		// ---- Text variants ----
 		$hex_map['--sf-color-text--secondary']   = '#4a4a5e';
 		$hex_map['--sf-color-text--muted']       = '#6e6e82';
 		$hex_map['--sf-color-text--placeholder'] = '#9e9eb2';
 		$hex_map['--sf-color-text--disabled']    = '#b4b4c4';
 		$hex_map['--sf-color-text--inverse']     = '#fafafa';
+		$hex_map['--sf-color-heading']           = $dark_text;
 
-		// Border defaults.
-		$hex_map['--sf-color-border']       = '#d4d4de';
-		$hex_map['--sf-color-border--muted'] = '#e8e8f0';
+		// ---- Family RGB values used for alpha-compositing approximations ----
+		$neutral_rgb = isset( $hex_map['--sf-color-neutral'] )
+			? self::hex_to_rgb( $hex_map['--sf-color-neutral'] )
+			: array( 79, 85, 97 );
+		$action_rgb  = isset( $hex_map['--sf-color-action'] )
+			? self::hex_to_rgb( $hex_map['--sf-color-action'] )
+			: array( 0, 151, 180 );
+		$warning_rgb = isset( $hex_map['--sf-color-warning'] )
+			? self::hex_to_rgb( $hex_map['--sf-color-warning'] )
+			: array( 196, 156, 0 );
+
+		// ---- Border tokens ----
+		// Light-mode formula: oklch(from neutral_light, clamp(min, L + offset, max), chroma, hue).
+		if ( isset( $sources['neutral'] ) ) {
+			list( $nl, , $nh ) = $sources['neutral'];
+			$hex_map['--sf-color-border']         = self::oklch_to_hex( max( 0.70, min( $nl + 0.35, 0.95 ) ), 0.005, $nh );
+			$hex_map['--sf-color-border--subtle'] = self::oklch_to_hex( max( 0.75, min( $nl + 0.40, 0.97 ) ), 0.005, $nh );
+			$hex_map['--sf-color-border--strong'] = self::oklch_to_hex( max( 0.55, min( $nl + 0.10, 0.85 ) ), 0.02,  $nh );
+		} else {
+			$hex_map['--sf-color-border']         = '#d4d4de';
+			$hex_map['--sf-color-border--subtle'] = '#e5e5ec';
+			$hex_map['--sf-color-border--strong'] = '#6c7280';
+		}
+		$hex_map['--sf-color-border--muted'] = $hex_map['--sf-color-border--subtle']; // legacy alias
+		$hex_map['--sf-color-border--focus'] = $hex_map['--sf-color-action'] ?? '#0097b4';
+		// disabled: desaturated border--subtle at 50% opacity over white.
+		$border_subtle_rgb = self::hex_to_rgb( $hex_map['--sf-color-border--subtle'] );
+		$hex_map['--sf-color-border--disabled']    = self::rgb_to_hex( self::mix_rgb( $border_subtle_rgb, $white_rgb, 0.50 ) );
+		// translucent: neutral at 15% opacity over white.
+		$hex_map['--sf-color-border--translucent'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $white_rgb, 0.15 ) );
+
+		// ---- Interactive background states ----
+		// Alpha-composited over white (opaque approximation of transparent overlays).
+		$hex_map['--sf-color-bg--hover']    = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $white_rgb, 0.08 ) );
+		$hex_map['--sf-color-bg--active']   = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $white_rgb, 0.12 ) );
+		$hex_map['--sf-color-bg--selected'] = self::rgb_to_hex( self::mix_rgb( $action_rgb,  $white_rgb, 0.10 ) );
+		$hex_map['--sf-color-bg--focus']    = self::rgb_to_hex( self::mix_rgb( $action_rgb,  $white_rgb, 0.06 ) );
+		$hex_map['--sf-color-bg--disabled'] = $hex_map['--sf-color-surface']; // = well ≈ surface
+
+		// ---- Well, raised, inverse, overlay ----
+		if ( isset( $sources['base'] ) ) {
+			list( $bl, $bc, $bh ) = $sources['base'];
+			$hex_map['--sf-color-well']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
+			$hex_map['--sf-color-raised']  = self::oklch_to_hex( min( 1.0, $bl + 0.04 ), $bc, $bh );
+			$hex_map['--sf-color-inverse'] = self::oklch_to_hex( 1.0 - $bl, $bc, $bh );
+			$hex_map['--sf-color-overlay'] = $hex_map['--sf-color-surface'];
+		} else {
+			$hex_map['--sf-color-well']    = '#f0f2f5';
+			$hex_map['--sf-color-raised']  = '#ffffff';
+			$hex_map['--sf-color-inverse'] = '#0a0a12';
+			$hex_map['--sf-color-overlay'] = '#fafafa';
+		}
+
+		// ---- dim: oklch(0 0 0 / 0.5) — semi-transparent black, approximate as mid-gray ----
+		$hex_map['--sf-color-dim'] = '#808080';
+
+		// ---- Code tokens ----
+		$hex_map['--sf-color-code-bg']   = $hex_map['--sf-color-well'];
+		$hex_map['--sf-color-code-text'] = $dark_text; // code-bg is light → dark text.
+
+		// ---- Link states (light-mode approximation) ----
+		// Light-mode formula: min(L − offset, cap) keeps link contrast-safe vs page bg.
+		if ( isset( $sources['action'] ) ) {
+			list( $al, $ac, $ah ) = $sources['action'];
+			$l_link   = max( 0.0, min( $al - 0.07, 0.48 ) );
+			$l_hover  = max( 0.0, min( $al - 0.15, 0.40 ) );
+			$l_active = max( 0.0, min( $al - 0.21, 0.34 ) );
+			$hex_map['--sf-color-link']          = self::oklch_to_hex( $l_link,   $ac, $ah );
+			$hex_map['--sf-color-link--hover']   = self::oklch_to_hex( $l_hover,  $ac, $ah );
+			$hex_map['--sf-color-link--active']  = self::oklch_to_hex( $l_active, $ac, $ah );
+			// visited: same lightness clamp, +60° hue shift.
+			$hex_map['--sf-color-link--visited'] = self::oklch_to_hex( $l_link, $ac, fmod( $ah + 60.0, 360.0 ) );
+		} else {
+			$hex_map['--sf-color-link']          = '#007896';
+			$hex_map['--sf-color-link--hover']   = '#005f7a';
+			$hex_map['--sf-color-link--active']  = '#004660';
+			$hex_map['--sf-color-link--visited'] = '#7c4dcc';
+		}
+		// underline: action at 30% opacity over white.
+		$hex_map['--sf-color-link--underline'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $white_rgb, 0.30 ) );
+		// disabled: = text--disabled.
+		$hex_map['--sf-color-link--disabled']  = $hex_map['--sf-color-text--disabled'];
+
+		// ---- Text-on-color contrast tokens ----
+		// CSS: oklch(clamp(0.1, sign(threshold − L) × 999, 0.95) 0 0)
+		//   L < 0.6 → clamp picks 0.95 → near-white text
+		//   L ≥ 0.6 → clamp picks 0.1  → near-black text
+		$light_text  = '#f0f0f5';
+		$on_families = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'success', 'warning', 'error', 'info', 'danger' );
+		foreach ( $on_families as $family ) {
+			if ( ! isset( $sources[ $family ] ) ) {
+				continue;
+			}
+			$hex_map[ '--sf-color-text--on-' . $family ] = ( $sources[ $family ][0] < 0.6 )
+				? $light_text
+				: $dark_text;
+		}
+		$hex_map['--sf-color-text--on-base']    = $dark_text; // base is light → dark text.
+		$hex_map['--sf-color-text--on-inverse'] = $hex_map['--sf-color-text--inverse'];
+
+		// ---- Selection and mark ----
+		// selection-bg: action at light opacity; approximate as bg--selected.
+		$hex_map['--sf-color-selection-bg'] = $hex_map['--sf-color-bg--selected'];
+		// mark-bg: warning at 25% opacity over white.
+		$hex_map['--sf-color-mark-bg'] = self::rgb_to_hex( self::mix_rgb( $warning_rgb, $white_rgb, 0.25 ) );
 
 		return $hex_map;
 	}

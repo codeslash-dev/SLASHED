@@ -79,6 +79,29 @@
   }
 
   /* ===========================================================
+     3b. SECTION-LEVEL DARK/LIGHT THEMING
+     ===========================================================
+     [data-theme] on any non-root element forces that subtree into
+     dark or light mode regardless of the page's root mode. This
+     works automatically — SLASHED re-declares all light-dark() tokens
+     on [data-theme] elements in core/themes.css.
+
+     Usage in HTML:
+       <header data-theme="dark">  ← always dark, even on a light page
+       <article data-theme="light"> ← always light, even on a dark page
+
+     Combine with a [data-brand] for a scoped palette + forced mode:
+       <section data-brand="sunset" data-theme="dark"> */
+
+  /* No extra CSS needed for basic section theming — it works out of
+     the box. Use this block only if you want to tweak tokens for a
+     specific forced-mode section beyond what auto-derivation gives:
+
+  [data-theme="dark"] .my-special-widget {
+    --sf-color-primary: oklch(0.80 0.22 265);
+  } */
+
+  /* ===========================================================
      4. COMPONENT-LEVEL TOKEN OVERRIDES (examples)
      ===========================================================
      When components ship, you can fine-tune their tokens here
