@@ -7,9 +7,19 @@ if [ -n "$STAGED_CSS" ]; then
   echo "$STAGED_CSS" | tr '\n' '\0' | xargs -0 npx stylelint
 fi
 
-# Rebuild dist bundles and stage them
+# Rebuild dist bundles and stage them.
+#
+# dist/*.css is gitignored on main (built by `npm run build`, served via
+# the dist branch + Releases — see .gitignore), so `git add` on those
+# paths errors out and, under `set -e`, aborts every commit. Only stage
+# outputs that are actually tracked; skip ignored ones. This keeps the
+# rebuild-and-stage behaviour for any context where dist IS tracked
+# without breaking commits where it isn't.
 node scripts/bundle.js
 outputs=$(node -e "const c=require('./bundle.config.json'); const b=Array.isArray(c.bundles)?c.bundles:[c]; process.stdout.write(b.map(x=>x.output).join('\n'))")
 echo "$outputs" | while IFS= read -r f; do
-  [ -n "$f" ] && git add "$f"
+  [ -n "$f" ] || continue
+  if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+    git add "$f"
+  fi
 done
