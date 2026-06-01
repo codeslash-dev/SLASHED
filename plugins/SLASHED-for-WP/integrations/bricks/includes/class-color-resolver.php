@@ -124,13 +124,6 @@ class Slashed_Bricks_Color_Resolver {
 		// Determine source oklch values for each family.
 		$sources = self::resolve_sources( $color_values );
 
-		// Approximate hex for base and text mixing targets.
-		$base_hex = self::oklch_to_hex( 0.98, 0.005, 260.0 );
-		$text_hex = '#1c1c2e';
-
-		$base_rgb = self::hex_to_rgb( $base_hex );
-		$text_rgb = self::hex_to_rgb( $text_hex );
-
 		$families = array_keys( self::$default_sources );
 
 		foreach ( $families as $family ) {
@@ -140,26 +133,32 @@ class Slashed_Bricks_Color_Resolver {
 
 			$oklch      = $sources[ $family ];
 			$family_hex = self::oklch_to_hex( $oklch[0], $oklch[1], $oklch[2] );
-			$family_rgb = self::hex_to_rgb( $family_hex );
 
 			// The base (500 step) is the direct conversion.
-			$hex_map[ '--sf-color-' . $family ] = $family_hex;
+			$hex_map[ '--sf-color-' . $family ]          = $family_hex;
 			$hex_map[ '--sf-color-' . $family . '-500' ] = $family_hex;
 
-			// Light steps (50-400): mix base color with base-light (#fafafa-ish).
+			// Light steps (50-400): interpolate toward white in oklch.
+			// Equivalent to color-mix(in oklch, source X%, white) — perceptually uniform,
+			// no hue drift (unlike sRGB mixing toward a tinted base color).
 			foreach ( self::$light_steps as $step => $pct ) {
-				$mixed = self::mix_rgb( $family_rgb, $base_rgb, $pct );
-				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::rgb_to_hex( $mixed );
+				$step_l = $oklch[0] * $pct + ( 1.0 - $pct ); // lerp L toward 1 (white)
+				$step_c = $oklch[1] * $pct;                   // chroma scales with color weight
+				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::oklch_to_hex( $step_l, $step_c, $oklch[2] );
 			}
 
-			// Dark steps (600-950): mix base color with text color.
+			// Dark steps (600-950): interpolate toward black in oklch.
+			// Equivalent to color-mix(in oklch, source X%, black) — no purple tint
+			// from mixing toward a dark-navy text color.
 			foreach ( self::$dark_steps as $step => $pct ) {
-				$mixed = self::mix_rgb( $family_rgb, $text_rgb, $pct );
-				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::rgb_to_hex( $mixed );
+				$step_l = $oklch[0] * $pct; // lerp L toward 0 (black)
+				$step_c = $oklch[1] * $pct; // chroma scales with color weight
+				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::oklch_to_hex( $step_l, $step_c, $oklch[2] );
 			}
 
-			// Alpha steps: approximate by mixing with white.
-			$white_rgb = array( 255, 255, 255 );
+			// Alpha steps: opaque swatch approximation composited over white.
+			$family_rgb = self::hex_to_rgb( $family_hex );
+			$white_rgb  = array( 255, 255, 255 );
 			foreach ( self::$alpha_steps as $suffix => $pct ) {
 				$mixed = self::mix_rgb( $family_rgb, $white_rgb, $pct );
 				$hex_map[ '--sf-color-' . $family . '-' . $suffix ] = self::rgb_to_hex( $mixed );
