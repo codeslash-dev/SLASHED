@@ -2,7 +2,6 @@
   import { meta } from '../lib/stores.svelte.js';
   import { saveSettings } from '../lib/api.js';
 
-  let bundle          = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
   let fontSize        = $state(meta.pluginSettings?.html_font_size ?? '');
   let showClassHints  = $state(meta.pluginSettings?.show_class_hints ?? false);
   let saving = $state(false);
@@ -17,7 +16,7 @@
     saved = false;
     error = '';
     try {
-      await saveSettings({ css_bundle: bundle, html_font_size: fontSize, show_class_hints: showClassHints });
+      await saveSettings({ html_font_size: fontSize, show_class_hints: showClassHints });
       saved = true;
       if (savedTimer) clearTimeout(savedTimer);
       savedTimer = setTimeout(() => { saved = false; savedTimer = null; }, 3000);
@@ -33,7 +32,7 @@
   <h2>Bundle Info</h2>
   <p class="hint">
     The SLASHED CSS bundle is loaded automatically on the frontend and in the block editor canvas.
-    The inventory is parsed from whichever bundle is active and drives the variable pickers,
+    The inventory below is parsed from whichever bundle is active and drives the variable pickers,
     class autocomplete, and color palette in any active builder integration.
   </p>
   <dl class="info">
@@ -43,19 +42,12 @@
     <dd>{(meta.inventory?.sf_classes?.length ?? 0) + (meta.inventory?.is_classes?.length ?? 0)}</dd>
   </dl>
 
-  <h2 class="settings-heading">Plugin Settings</h2>
+  <p class="hint hint--link">
+    To change the active CSS bundle variant, go to
+    <a href="/wp-admin/admin.php?page=slashed-settings" target="_blank">SLASHED Settings</a>.
+  </p>
 
-  <div class="setting-row">
-    <label for="css-bundle">CSS Bundle</label>
-    <select id="css-bundle" bind:value={bundle}>
-      <option value="essential">Essential — core layer only: tokens, reset, layout, states, motion</option>
-      <option value="optimal">Optimal — + color palette, forms, legacy support (recommended)</option>
-      <option value="full">Full — + components + utilities</option>
-    </select>
-    <p class="description">
-      Choose which SLASHED CSS bundle to load on the frontend and in builder canvases.
-    </p>
-  </div>
+  <h2 class="settings-heading">Plugin Settings</h2>
 
   <div class="setting-row">
     <label for="html-font-size">HTML Font Size</label>
@@ -115,6 +107,8 @@
   h2 { margin-top: 0; }
   .settings-heading { margin-top: 24px; }
   .hint { color: #50575e; margin-bottom: 16px; max-width: 720px; }
+  .hint--link { margin-top: -8px; font-size: 13px; }
+  .hint--link a { color: #2271b1; }
 
   .info {
     display: grid;

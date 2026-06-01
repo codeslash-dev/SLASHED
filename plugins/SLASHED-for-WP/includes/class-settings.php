@@ -66,7 +66,21 @@ class Slashed_Settings {
 				$stored = array();
 			}
 		}
-		$bundle = isset( $stored['css_bundle'] ) ? (string) $stored['css_bundle'] : 'optimal';
+
+		if ( isset( $stored['css_bundle'] ) ) {
+			$bundle = (string) $stored['css_bundle'];
+		} else {
+			// Migration: the Svelte token editor previously saved css_bundle to the
+			// legacy slashed_bricks_settings option while the CSS loader read from
+			// slashed_settings — so any bundle chosen in the editor was silently
+			// ignored. Pick it up once here; after the user saves via the main
+			// Settings page the key will live in slashed_settings permanently.
+			$legacy = get_option( 'slashed_bricks_settings', array() );
+			$bundle = ( is_array( $legacy ) && isset( $legacy['css_bundle'] ) )
+				? (string) $legacy['css_bundle']
+				: 'optimal';
+		}
+
 		return in_array( $bundle, self::ALLOWED_BUNDLES, true ) ? $bundle : 'optimal';
 	}
 
