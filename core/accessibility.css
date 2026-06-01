@@ -110,10 +110,11 @@
       min-block-size:  var(--sf-touch-target);
       min-inline-size: var(--sf-touch-target);
     }
-    /* <a> is inline by default — min-block/inline-size have no effect on inline
-       elements. Promote to inline-block so the size constraint applies. */
-    a {
-      display:         inline-block;
+    /* Checkboxes and radios are replaced elements — no display change needed.
+       The UA renders them as a fixed small square; min-size expands the
+       hit area without touching layout. */
+    input[type="checkbox"],
+    input[type="radio"] {
       min-block-size:  var(--sf-touch-target);
       min-inline-size: var(--sf-touch-target);
     }
