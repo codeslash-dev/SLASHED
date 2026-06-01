@@ -135,8 +135,10 @@ class Slashed_Bricks_Color_Resolver {
 			$family_hex = self::oklch_to_hex( $oklch[0], $oklch[1], $oklch[2] );
 
 			// The base (500 step) is the direct conversion.
-			$hex_map[ '--sf-color-' . $family ]          = $family_hex;
-			$hex_map[ '--sf-color-' . $family . '-500' ] = $family_hex;
+			// -light is the same source color (the @property initial-value).
+			$hex_map[ '--sf-color-' . $family ]           = $family_hex;
+			$hex_map[ '--sf-color-' . $family . '-500' ]  = $family_hex;
+			$hex_map[ '--sf-color-' . $family . '-light' ] = $family_hex;
 
 			// Light steps (50-400): interpolate toward white in oklch.
 			// Equivalent to color-mix(in oklch, source X%, white) — perceptually uniform,
@@ -351,9 +353,33 @@ class Slashed_Bricks_Color_Resolver {
 
 		// ---- Selection and mark ----
 		// selection-bg: action at light opacity; approximate as bg--selected.
-		$hex_map['--sf-color-selection-bg'] = $hex_map['--sf-color-bg--selected'];
+		$hex_map['--sf-color-selection-bg']   = $hex_map['--sf-color-bg--selected'];
+		// selection-text / mark-text: both are `inherit` in CSS — show as current text color.
+		$hex_map['--sf-color-selection-text'] = $dark_text;
 		// mark-bg: warning at 25% opacity over white.
-		$hex_map['--sf-color-mark-bg'] = self::rgb_to_hex( self::mix_rgb( $warning_rgb, $white_rgb, 0.25 ) );
+		$hex_map['--sf-color-mark-bg']  = self::rgb_to_hex( self::mix_rgb( $warning_rgb, $white_rgb, 0.25 ) );
+		$hex_map['--sf-color-mark-text'] = $dark_text;
+
+		// ---- Status strong variants (light-mode: source L minus offset) ----
+		// CSS formula: oklch(from var(--sf-color-{family}-light) calc(l - offset) c h)
+		$status_strong_offsets = array(
+			'success' => 0.15,
+			'warning' => 0.25,
+			'error'   => 0.10,
+			'info'    => 0.10,
+			'danger'  => 0.10,
+		);
+		foreach ( $status_strong_offsets as $family => $l_offset ) {
+			if ( ! isset( $sources[ $family ] ) ) {
+				continue;
+			}
+			list( $sl, $sc, $sh ) = $sources[ $family ];
+			$hex_map[ '--sf-color-' . $family . '-strong' ] = self::oklch_to_hex(
+				max( 0.0, $sl - $l_offset ),
+				$sc,
+				$sh
+			);
+		}
 
 		return $hex_map;
 	}
