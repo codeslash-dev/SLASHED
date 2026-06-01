@@ -94,11 +94,15 @@ use the token name in `slashed.overrides` or unlayered CSS:
 /* Always dark regardless of mode */
 :root { --sf-color-text: oklch(0.93 0.005 250); }
 
-/* Dark-mode only override */
-[data-theme="dark"], :root:not([data-theme]) {
-  @media (prefers-color-scheme: dark) { :root& {
+/* Dark-mode only override (two selectors cover forced + OS-preference dark) */
+:root[data-theme="dark"] {
+  --sf-color-primary: oklch(0.72 0.20 280);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
     --sf-color-primary: oklch(0.72 0.20 280);
-  }}
+  }
 }
 ```
 
