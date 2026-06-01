@@ -7,7 +7,7 @@ A WordPress plugin that integrates the [SLASHED](https://github.com/codeslash-de
 - **CSS Loading** - Automatically enqueues the SLASHED CSS bundle on the frontend and within the Bricks editor iframe
 - **Variable Pickers** - Registers every `--sf-*` CSS custom property declared in the active bundle (~600 in `optimal`, ~700 in `full`) with the Bricks variable pickers and code editor autocomplete, organized into category groups
 - **Class Autocomplete** - Registers every `.sf-*` layout/utility class and `.is-*` state class declared in the active bundle with the Bricks class input, organized into "SLASHED Layout" and "SLASHED State" categories
-- **Color Palette** - Synchronizes every `--sf-color-*` token (brand scales including alpha steps, status, and semantic colors) with the Bricks global color palette
+- **Color Palette** - Synchronizes every `--sf-color-*` token (brand scales including alpha steps, status, and semantic colors) with the Bricks global color palette. Disabled automatically on Bricks 2.2+ (the new Color Manager bakes palette colors into `:root` as static hex, which would override the framework's adaptive `light-dark()` tokens and break dark mode) — use the Variable Manager to reach the tokens there
 - **Dynamic Detection** - The integration parses the loaded CSS bundle at runtime, so registrations stay in sync with whichever bundle (`essential` / `optimal` / `full`) and SLASHED release is active. There is no hand-curated list to drift out of date.
 - **reBEMer** - Subtree-scoped BEM class manager inside the Bricks builder structure panel: add / rename / replace classes for an element and its children in one transaction, with reference-count preflight (REST), snapshot+rollback, reserved-name guard against SLASHED utilities, and Cmd/Ctrl-Z undo. See [docs/rebemer.md](../../docs/rebemer.md) for the full design.
 
@@ -84,6 +84,15 @@ add_filter( 'slashed_bricks/registered_colors', function( $colors ) {
         return strpos( $color['category'], 'Semantic' ) === false;
     } );
 } );
+```
+
+#### `slashed_bricks/inject_color_palette`
+
+Control whether SLASHED palettes are injected into the Bricks color palette (`bricks_color_palette`). Defaults to `true` on Bricks &lt; 2.2 and `false` on Bricks 2.2+ (whose Color Manager would bake the tokens into `:root` as static hex and break dark mode). Force it back on if you want the swatches and accept that those palette colors become static hex snapshots without dark-mode adaptation.
+
+```php
+// Force palette injection even on Bricks 2.2+.
+add_filter( 'slashed_bricks/inject_color_palette', '__return_true' );
 ```
 
 #### `slashed_bricks/registered_variables`
@@ -171,6 +180,8 @@ integrations/bricks/
 5. **Classes** (`class-classes.php`) - Pulls `.sf-*` and `.is-*` class lists from the inventory and injects them into the Bricks Global Class Manager (Bricks 1.9.5+) by filtering the `bricks_global_classes` and `bricks_global_classes_categories` options on the same managed/virtual pattern (inject on read, strip on save). Each entry is shipped with `settings.locked = true` so it lands in the Class Manager's "Locked" filter and can't be accidentally edited. The actual CSS rules still come from the SLASHED bundle.
 
 6. **Colors** (`class-colors.php`) - Pulls every `--sf-color-*` from the inventory, splits them into brand-family palettes (one per brand: Primary, Secondary, Tertiary, Action, Neutral, Base), Status, and Semantic groups, and injects them by filtering the `bricks_color_palette` option on the same managed/virtual pattern. Swatches reference CSS variables (`var(--sf-color-*)`) rather than hardcoded values, so they adapt to theme customization and dark mode.
+
+   **Bricks 2.2+ (Color Manager):** injection is skipped automatically. Bricks 2.2's Color Manager materializes every palette entry into `:root` as a static value (plus a `[data-brx-theme="dark"]` variant), which overrides the framework's adaptive `light-dark()` tokens and freezes dark/light switching. On 2.2+ the tokens are reached through the Variable Manager instead (step 4), which never writes to `:root`. The behavior is gated by `slashed_bricks_supports_color_manager()` and can be overridden with the `slashed_bricks/inject_color_palette` filter (return `true` to force injection, accepting that palette colors become static hex snapshots without dark-mode adaptation).
 
 ### Inventory Resolution Order
 

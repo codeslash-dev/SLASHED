@@ -108,29 +108,78 @@ function slashed_bricks_get_css_url() {
 }
 
 /**
+ * Resolve the active Bricks version string, or '' if it can't be determined.
+ *
+ * Prefers the BRICKS_VERSION constant (defined by the Bricks theme during
+ * theme load), falling back to the active theme's (or its parent's) version
+ * metadata. Both Bricks detectors below share this so they stay in sync if
+ * Bricks ever changes how its version is exposed.
+ *
+ * @return string
+ */
+function slashed_bricks_get_bricks_version() {
+    if ( defined( 'BRICKS_VERSION' ) ) {
+        return (string) BRICKS_VERSION;
+    }
+
+    $theme = wp_get_theme();
+
+    if ( 'bricks' === strtolower( $theme->get_template() ) ) {
+        $parent = $theme->parent();
+        return $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
+    }
+
+    if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
+        return (string) $theme->get( 'Version' );
+    }
+
+    return '';
+}
+
+/**
  * Check if Bricks Builder is active.
  *
  * @return bool
  */
 function slashed_bricks_is_bricks_active() {
-    $theme = wp_get_theme();
-    $minimum_version = '1.9.2';
+    $version = slashed_bricks_get_bricks_version();
 
-    if ( defined( 'BRICKS_VERSION' ) ) {
-        return version_compare( (string) BRICKS_VERSION, $minimum_version, '>=' );
+    if ( '' === $version ) {
+        return false;
     }
 
-    if ( 'bricks' === strtolower( $theme->get_template() ) ) {
-        $parent = $theme->parent();
-        $version = $parent ? (string) $parent->get( 'Version' ) : (string) $theme->get( 'Version' );
-        return version_compare( $version, $minimum_version, '>=' );
+    return version_compare( $version, '1.9.2', '>=' );
+}
+
+/**
+ * Whether the active Bricks version ships the Color Manager (Bricks 2.2+).
+ *
+ * The Color Manager (Style Manager → Colors) writes every color-palette
+ * entry to `:root` as a static CSS variable, with an optional
+ * `[data-brx-theme="dark"]` variant. That model is incompatible with
+ * SLASHED's adaptive `light-dark()` tokens, so the color-palette injection
+ * is disabled on 2.2+ (see Slashed_Bricks_Colors::should_inject_palettes()).
+ * Tokens remain available through the Variable Manager.
+ *
+ * Call no earlier than the option reads that occur during theme load:
+ * BRICKS_VERSION is defined by the Bricks theme, after `plugins_loaded`.
+ *
+ * @return bool
+ */
+function slashed_bricks_supports_color_manager() {
+    $version = slashed_bricks_get_bricks_version();
+
+    if ( '' === $version || ! preg_match( '/^(\d+)\.(\d+)/', $version, $m ) ) {
+        return false;
     }
 
-    if ( 'bricks' === strtolower( $theme->get( 'Name' ) ) ) {
-        return version_compare( (string) $theme->get( 'Version' ), $minimum_version, '>=' );
-    }
+    // Compare on major.minor so pre-release builds that already ship the
+    // Color Manager are detected. version_compare() ranks "2.2-beta" below
+    // "2.2", which would miss the beta where the feature first landed.
+    $major = (int) $m[1];
+    $minor = (int) $m[2];
 
-    return false;
+    return ( $major > 2 ) || ( 2 === $major && $minor >= 2 );
 }
 
 // Token admin page (Slashed_Token_Page) and the main REST controller
