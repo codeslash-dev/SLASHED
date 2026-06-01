@@ -1,133 +1,6 @@
-/* ============================================================
-   SLASHED — core/tokens.css
+/* SLASHED — core/tokens.css
    @layer slashed.tokens
-
-   ARCHITECTURE — 3 layers:
-     1. @property source tokens  — animatable, 6 brand + 5 status (-light only); -dark is optional
-     2. Resolved semantic tokens — light-dark() with auto-derivation of dark from light (relative color syntax)
-     3. Derived tokens           — relative color syntax (auto-contrast, tints/shades)
-
-   THEMING — override just the 6 -light tokens. Dark mode auto-adapts via
-     relative color syntax — zero extra work. For full control over dark mode,
-     optionally override the -dark tokens (unregistered custom properties).
-
-     Quick branding (6 tokens):
-     :root {
-       --sf-color-primary-light:   oklch(0.47 0.27 264);
-       --sf-color-secondary-light: oklch(0.22 0.04 264);
-       --sf-color-tertiary-light:  oklch(0.42 0.22 295);
-       --sf-color-action-light:    oklch(0.50 0.22 235);
-       --sf-color-neutral-light:   oklch(0.52 0.025 260);
-       --sf-color-base-light:      oklch(0.99 0.006 250);
-     }
-     Full per-mode control (add -dark overrides):
-     :root {
-       --sf-color-primary-dark: oklch(0.75 0.18 264);
-     }
-
-   BEM CONSUMER API — most tokens are intentionally unused by the
-   framework itself. Tokens such as --sf-shadow-*, --sf-blur-*, --sf-gap,
-   --sf-gradient-* etc. are meant for use in your own BEM classes:
-     .card { box-shadow: var(--sf-shadow-m); gap: var(--sf-gap); }
-   "Not used internally" does NOT mean dead code: every token is exercised
-   in docs/demo.html and validated by the regression suite (tests/), so an
-   unreferenced token is never untested or orphaned.
-
-   RELATION TO tokens.layout.css — the spacing aliases in the "Spacing
-   aliases" section are the source of truth for --sf-space-gap and
-   --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
-   gaps across all layout primitives (cluster, grid, sidebar, etc.).
-
-   PUBLIC API vs INTERNAL (token-API freeze contract)
-   ─────────────────────────────────────────────────
-   Tokens are classified into three stability tiers (PUBLIC,
-   PUBLIC-ADVANCED, INTERNAL).
-   PUBLIC and PUBLIC-ADVANCED share the same SemVer guarantee
-   (removal/rename = major bump after freeze). The distinction is
-   documentation-level: ADVANCED tokens are powerful but niche — they
-   live in a separate "Advanced" section in docs.
-
-   PUBLIC — everyday knobs, prominently documented:
-     · brand source tokens (--sf-color-{primary,secondary,tertiary,action,neutral,base}-light)
-     · status source tokens (--sf-color-{success,warning,error,info,danger}-light)
-     · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
-     · text-on-color (--sf-color-text--on-*)
-     · code colors (--sf-color-code-bg, --sf-color-code-text)
-     · status triplets (--sf-color-{success,...,danger}-{subtle,strong,muted})
-     · gradients (--sf-gradient-*)
-     · shadows (--sf-shadow-{none,xs,s,m,l,xl,2xl,inner})
-     · text/drop shadows (--sf-text-shadow-*, --sf-drop-shadow-*)
-     · blur (--sf-blur-*)
-     · opacity (--sf-opacity-{0,10,25,50,75,100}, --sf-opacity-disabled, --sf-state-pending-opacity)
-     · spacing (--sf-space-{none,px,gutter,2xs..4xl})
-     · font families (--sf-font-{body,heading,display,mono,humanist,geometric,slab})
-     · font weights (--sf-font-weight-{thin..black,body,heading,display})
-     · font sizes (--sf-text-{2xs..4xl}, --sf-text-display-{s,m,l})
-     · leading (--sf-leading-{tight,snug,normal,relaxed})
-     · tracking (--sf-tracking-{tight,normal,wide,wider,widest})
-     · icon sizes (--sf-icon-{xs,s,m,l,xl,2xl})
-     · UI sizes (--sf-size-{xs,s,m,l,xl})
-     · containers (--sf-container-{narrow,prose,default,wide,full})
-     · ratios (--sf-ratio-{square,video,cinema,portrait,golden,4-3,3-2})
-     · border widths (--sf-border-width-{hairline,1,2,3,4})
-     · border styles (--sf-border-style, --strong, --soft, --dotted)
-     · divider (--sf-divider-{width,style,color})
-     · radius (--sf-radius-{none,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
-     · duration (--sf-duration-{none,instant,fast,normal,slow,slower})
-     · easing (--sf-ease-{linear,out,in,in-out,spring,elastic,bounce,overshoot})
-     · transitions (--sf-transition-{all,colors,transform,opacity,shadow,fast,slow,enter,exit})
-     · animations (--sf-animation-{fade-in,fade-out,slide-in-*,scale-*,color-pulse,ping,blink,float,spin,shimmer})
-     · animation delays (--sf-animation-delay-{1..5})
-     · z-index (--sf-z-{below,base,raised,low,mid,high,top,max})
-     · header/sticky (--sf-header-height, --sf-sticky-offset)
-     · touch target (--sf-touch-target)
-     · focus ring (--sf-focus-ring-{width,offset,style,color})
-     · caret (--sf-caret-color)
-     · scrollbar (--sf-scrollbar-{thumb,track})
-     · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
-       --sf-field-required-marker, --sf-link-external-marker)
-     · section padding (--sf-section-pad, --sf-section-pad--{xs,s,m,l,xl,2xl})
-     · typography aliases (--sf-body-*, --sf-code-font-size, --sf-heading-*, --sf-h{1..6}-*)
-     · current-font-weight (--sf-current-font-weight)
-     · color scheme (--sf-color-scheme)
-     · stroke (--sf-stroke-{thin,regular,bold,heavy})
-     · layout tokens — all of tokens.layout.css (per-primitive gaps, sidebar, grid, bento, etc.)
-     · macro tokens — all of tokens.macros.css (flow-space, line-clamp, aspect, scroll-shadow-size)
-     · palette tokens — all of optional/tokens.palette.css
-     · scoped override tokens (--sf-icon-size, --sf-bento-cols, --sf-bento-row,
-       --sf-color-code-block-bg, --sf-color-code-block-text,
-       --sf-field-border-color, --sf-field-text-color)
-
-   PUBLIC-ADVANCED — stable (same SemVer guarantee) but niche/powerful:
-     · --sf-lumlocker (LumLocker lightness override)
-     · --sf-contrast-bias, --sf-contrast-threshold (text-contrast tuning)
-     · --sf-shadow-strength, --sf-shadow-color, --sf-shadow-glow-color (shadow internals)
-     · --sf-font-features, --sf-font-variation, --sf-optical-sizing (OpenType)
-     · --sf-space-scale, --sf-text-scale, --sf-text-display-scale,
-       --sf-radius-scale, --sf-motion-scale (global multipliers)
-     · --sf-scroll-timeline-range-{start,end} (scroll-driven animation)
-     · --sf-mask-scrim-{start,end} (edge-fade masks)
-     · --sf-safe-{top,bottom,left,right} (safe-area insets)
-     · --sf-perspective-{near,normal,far} (3D transforms)
-     · --sf-truncate-suffix (ellipsis character override)
-     · --sf-radius-outer (concentric radius helper)
-     · --sf-is-active, --sf-is-current, --sf-is-pressed, --sf-is-open (state flags)
-     · --sf-focus-ring-shadow (composite focus shadow)
-     · --sf-print-{page-margin,page-size,base-size} (print tokens)
-
-   INTERNAL — implementation detail, may change without a major bump:
-     · --sf-is-dark (mode flag — set via data-theme, not directly)
-
-   CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
-     · --sf-space-gap     → --sf-gap          (layout primitives read this name)
-     · --sf-space-content → --sf-content-gap  (stack / prose rhythm)
-     · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
-   These are deliberate two-name contracts: override the canonical token
-   (right side) to move everything downstream. The alias graph is otherwise
-   ≤3 hops (per-primitive → layout-system → canonical source), giving three
-   override levels: local (style="--sf-cluster-gap"), all-primitives
-   (--sf-space-gap), or global (--sf-gap).
-   ============================================================ */
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.tokens {
 
@@ -264,7 +137,7 @@
 
 
     /* ----------------------------------------------------------
-       Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic:
+       Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-adaptive:
        auto-selects light or dark text based on background luminance.
        Uses resolved tokens — works for any user-supplied color.
 

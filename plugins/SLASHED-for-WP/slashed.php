@@ -3,7 +3,7 @@
  * Plugin Name: SLASHED
  * Plugin URI: https://github.com/codeslash-dev/SLASHED
  * Description: SLASHED cascade-layer CSS framework for WordPress. Activate integrations per builder from the settings page (Bricks, Gutenberg — more coming).
- * Version: 0.4.18
+ * Version: 0.5.0-alpha1-alpha1
  * Author: SLASHED
  * Author URI: https://github.com/codeslash-dev/SLASHED
  * License: MIT
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ─── Canonical constants ──────────────────────────────────────────────────────
 
-define( 'SLASHED_VERSION',  '0.4.18' );
+define( 'SLASHED_VERSION', '0.5.0-alpha1' );
 define( 'SLASHED_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'SLASHED_URL',      plugin_dir_url( __FILE__ ) );
 
@@ -26,7 +26,7 @@ define( 'SLASHED_URL',      plugin_dir_url( __FILE__ ) );
  * Semver tag — version comparison / update detection only.
  * CDN URLs use the dist-branch SHA below (immutable).
  */
-define( 'SLASHED_CSS_REF',  'v0.4.18' );
+define( 'SLASHED_CSS_REF', 'v0.5.0-alpha1' );
 
 /**
  * HEAD commit SHA of the `dist` branch at the time of the last release.
@@ -45,7 +45,7 @@ define( 'SLASHED_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
 require_once SLASHED_PATH . 'includes/class-settings.php';
 require_once SLASHED_PATH . 'includes/class-css-loader.php';
 
-// ─── Core CSS delivery (builder-agnostic) ────────────────────────────────────
+// ─── Core CSS delivery (builder-adaptive) ────────────────────────────────────
 //
 // Loads the SLASHED framework stylesheet on every WordPress site regardless
 // of which builder (if any) is active. Builder integrations add inline rules

@@ -1,9 +1,6 @@
-/* ============================================================
-   SLASHED — core/layout.css
-   ★ de facto required for most projects
+/* SLASHED — core/layout.css
    Layout primitives + structural patterns
-   Requires: core/tokens.css, core/tokens.layout.css
-   ============================================================ */
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.layout {
 
@@ -43,10 +40,7 @@
     padding-block-start: calc(var(--sf-section-pad) / 2);
   }
 
-  /* -- Divider -------------------------------------------------
-     Standalone separator primitive. Token-driven; pairs with the
-     `--sf-divider-*` tokens and mirrors the `hr` element default.
-     ---------------------------------------------------------- */
+  /* -- Divider ------------------------------------------------- */
   .sf-divider {
     border:             none;
     border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
@@ -60,15 +54,7 @@
     align-self:          stretch;
   }
 
-  /* -- Container -----------------------------------------------
-     Max-width container, centered with side gutters. Establishes
-     a named inline-size container `sf-layout` so children can
-     target it precisely with `@container sf-layout (...)`.
-     The framework's own `.sf-bento` and `.sf-grid-*` rules use
-     anonymous `@container` queries on purpose — they react to
-     the nearest inline-size ancestor, which lets a consumer
-     embed them inside any container without rewiring.
-     ---------------------------------------------------------- */
+  /* -- Container ----------------------------------------------- */
 
   .sf-container {
     container:      sf-layout / inline-size;
@@ -82,10 +68,7 @@
   .sf-container--wide   { max-width: var(--sf-container-wide); }
   .sf-container--full   { max-width: var(--sf-container-full); }
 
-  /* -- Stack ---------------------------------------------------
-     Flex column with even vertical spacing between children.
-     Override: style="--sf-stack-gap: 2rem"
-     ---------------------------------------------------------- */
+  /* -- Stack --------------------------------------------------- */
 
   .sf-stack {
     display:        flex;
@@ -103,14 +86,7 @@
   .sf-stack--end     { align-items: flex-end; }
   .sf-stack--stretch { align-items: stretch; }
 
-  /* -- Gap ----------------------------------------------------
-     Injects gap into any existing flex or grid container without
-     imposing a display type or axis. Unlike .sf-stack (flex
-     column) or .sf-cluster (flex-wrap row), .sf-gap is layout-
-     agnostic — use it on elements that already have their own
-     display context.
-     Override: style="--sf-gap-size: 2rem"
-     ---------------------------------------------------------- */
+  /* -- Gap ---------------------------------------------------- */
   .sf-gap { gap: var(--sf-gap-size); }
   .sf-gap--xs  { gap: var(--sf-space-xs); }
   .sf-gap--s   { gap: var(--sf-space-s); }
@@ -119,22 +95,14 @@
   .sf-gap--xl  { gap: var(--sf-space-xl); }
   .sf-gap--2xl { gap: var(--sf-space-2xl); }
 
-  /* -- Box -----------------------------------------------------
-     Isolated unit with padding and an optional border.
-     Outline instead of border — doesn't disturb the box model when toggled.
-     Override: style="--sf-box-padding: 1rem; --sf-box-border-width: 1px"
-     ---------------------------------------------------------- */
+  /* -- Box ----------------------------------------------------- */
 
   .sf-box {
     padding: var(--sf-box-padding);
     outline: var(--sf-box-border-width) solid var(--sf-box-border-color);
   }
 
-  /* -- Center --------------------------------------------------
-     Centers content with a max-inline-size and side gutters.
-     content-box: max-inline-size applies to content only; padding is additive.
-     Override: style="--sf-center-max: 60rem"
-     ---------------------------------------------------------- */
+  /* -- Center -------------------------------------------------- */
 
   .sf-center {
     box-sizing:      content-box;
@@ -149,10 +117,7 @@
     align-items:    center;
   }
 
-  /* -- Cluster -------------------------------------------------
-     Flex-wrap group of variable-width items.
-     Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center"
-     ---------------------------------------------------------- */
+  /* -- Cluster ------------------------------------------------- */
 
   .sf-cluster {
     display:         flex;
@@ -173,11 +138,7 @@
   .sf-cluster--end      { justify-content: flex-end; }
   .sf-cluster--between  { justify-content: space-between; }
 
-  /* -- Sidebar -------------------------------------------------
-     Two-column layout: first-child = sidebar, last-child = main content.
-     Collapses when the viewport is too narrow (flex-basis trick).
-     Override: style="--sf-sidebar-width: 20rem"
-     ---------------------------------------------------------- */
+  /* -- Sidebar ------------------------------------------------- */
 
   .sf-sidebar {
     display:   flex;
@@ -210,11 +171,7 @@
   .sf-sidebar--narrow { --sf-sidebar-width: 12rem; }
   .sf-sidebar--wide   { --sf-sidebar-width: 26rem; }
 
-  /* -- Switcher ------------------------------------------------
-     Switches between a column (narrow viewport) and a row (wide).
-     Uses calc((threshold - 100%) * 999) — zero media queries.
-     Override: style="--sf-switcher-threshold: 40rem"
-     ---------------------------------------------------------- */
+  /* -- Switcher ------------------------------------------------ */
 
   .sf-switcher {
     display:   flex;
@@ -230,12 +187,7 @@
   .sf-switcher--no-wrap  { flex-wrap: nowrap; overflow-x: auto; }
   .sf-switcher--vertical { flex-direction: column; }
 
-  /* -- Grid ----------------------------------------------------
-     Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.
-     auto-fill: empty tracks preserved, last item doesn't stretch.
-     auto-fit (--fit): empty tracks collapsed, items stretch to fill the gap.
-     Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem"
-     ---------------------------------------------------------- */
+  /* -- Grid ---------------------------------------------------- */
 
   .sf-grid {
     display:               grid;
@@ -258,10 +210,7 @@
      does). Applies to any grid, including the fixed-column .sf-grid-N. */
   .sf-grid--dense { grid-auto-flow: dense; }
 
-  /* -- Icon ----------------------------------------------------
-     Inline icon sizing primitive. Uses em-based --sf-icon-* tokens
-     so an icon scales with its surrounding text. Defaults to -m.
-     ---------------------------------------------------------- */
+  /* -- Icon ---------------------------------------------------- */
   .sf-icon {
     display:        inline-block;
     inline-size:    var(--sf-icon-size, var(--sf-icon-m));
@@ -292,11 +241,7 @@
     box-sizing:     border-box; /* padding is contained within the declared outer size */
   }
 
-  /* -- Cover ---------------------------------------------------
-     Full-height flex column. A .sf-cover__center child is
-     vertically centered via margin-block: auto.
-     Override: style="--sf-cover-min-height: 50dvh"
-     ---------------------------------------------------------- */
+  /* -- Cover --------------------------------------------------- */
 
   .sf-cover {
     display:        flex;
@@ -317,10 +262,7 @@
   .sf-cover--padding-s { padding-block: var(--sf-space-xl); }
   .sf-cover--padding-l { padding-block: var(--sf-space-4xl); }
 
-  /* -- Frame ---------------------------------------------------
-     Aspect-ratio container. Media children: fill + cover.
-     Override: style="--sf-frame-ratio: 4 / 3"
-     ---------------------------------------------------------- */
+  /* -- Frame --------------------------------------------------- */
 
   .sf-frame {
     aspect-ratio:    var(--sf-frame-ratio);
@@ -345,10 +287,7 @@
   .sf-frame--3-2      { aspect-ratio: var(--sf-ratio-3-2); }
   .sf-frame--golden   { aspect-ratio: var(--sf-ratio-golden); }
 
-  /* -- Reel ----------------------------------------------------
-     Horizontal scroll with scroll-snap. Each child snaps to start.
-     Override: style="--sf-reel-gap: 1rem; --sf-reel-item-width: 280px"
-     ---------------------------------------------------------- */
+  /* -- Reel ---------------------------------------------------- */
 
   .sf-reel {
     display:               flex;
@@ -366,10 +305,7 @@
     scroll-snap-align: start;
   }
 
-  /* -- Imposter ------------------------------------------------
-     Element centered absolutely within its parent.
-     The parent must have position: relative.
-     ---------------------------------------------------------- */
+  /* -- Imposter ------------------------------------------------ */
 
   .sf-imposter {
     position:          absolute;
@@ -388,15 +324,7 @@
     overflow:        auto;
   }
 
-  /* -- Alternate (zigzag / media-object) -----------------------
-     Alternating two-column layouts (container-query responsive).
-     Every other row reverses its children's order.
-
-     Establishes a named container `sf-alternate` and binds the
-     responsive query to that name — so a `.sf-alternate` nested
-     inside another container (e.g. `.sf-bento`) still flips on
-     its OWN width, not the outer container's.
-     ---------------------------------------------------------- */
+  /* -- Alternate (zigzag / media-object) ----------------------- */
 
   .sf-alternate {
     display:   grid;
@@ -418,9 +346,7 @@
     .sf-alternate > :nth-child(even) > :last-child  { order: 1; }
   }
 
-  /* -- Pancake (sticky footer) ---------------------------------
-     Grid with three rows: header / main(1fr) / footer.
-     ---------------------------------------------------------- */
+  /* -- Pancake (sticky footer) --------------------------------- */
 
   .sf-pancake {
     display:             grid;
@@ -428,15 +354,7 @@
     min-height:          100dvh;
   }
 
-  /* -- Fixed column grids (container-query responsive) ---------
-     Responsive fixed-column grids with no media queries.
-
-     IMPORTANT: These classes use anonymous @container queries, so they
-     react to the nearest ancestor that has a container context
-     (container-type: inline-size). Without a container ancestor the
-     queries never match and the grid stays single-column at all widths.
-     Wrap in .sf-container (or any element with container-type: inline-size).
-     ---------------------------------------------------------- */
+  /* -- Fixed column grids (container-query responsive) --------- */
 
   .sf-grid-1, .sf-grid-2, .sf-grid-3, .sf-grid-4, .sf-grid-6 {
     display: grid;
@@ -455,9 +373,7 @@
     .sf-grid-6 { grid-template-columns: repeat(6, 1fr); }
   }
 
-  /* -- Ratio grids ---------------------------------------------
-     Two-column ratio grids, container-query responsive.
-     ---------------------------------------------------------- */
+  /* -- Ratio grids --------------------------------------------- */
 
   .sf-grid-1-2, .sf-grid-2-1,
   .sf-grid-1-3, .sf-grid-3-1 {
@@ -472,13 +388,7 @@
     .sf-grid-3-1 { grid-template-columns: 3fr 1fr; }
   }
 
-  /* -- Equal columns ------------------------------------------
-     Fixed N-column grid. Column count NEVER collapses — unlike
-     .sf-grid-N which uses container queries to stack at small
-     sizes. Use when the layout must remain N columns at all
-     widths; the caller is responsible for overflow handling.
-     Override: style="--sf-equal-cols: 3"
-     ---------------------------------------------------------- */
+  /* -- Equal columns ------------------------------------------ */
   .sf-equal {
     display:               grid;
     grid-template-columns: repeat(var(--sf-equal-cols), 1fr);
@@ -489,10 +399,7 @@
   .sf-equal--4 { --sf-equal-cols: 4; }
   .sf-equal--6 { --sf-equal-cols: 6; }
 
-  /* -- Content grid (breakout pattern) -------------------------
-     Full-width grid that lets items break out to breakout or full
-     width. Children default to the content column.
-     ---------------------------------------------------------- */
+  /* -- Content grid (breakout pattern) ------------------------- */
 
   .sf-content-grid {
     display: grid;
@@ -514,10 +421,7 @@
   .sf-content-grid > .sf-breakout   { grid-column: breakout; }
   .sf-content-grid > .sf-full-bleed { grid-column: full; }
 
-  /* -- Bento grid ----------------------------------------------
-     Free-form grid with auto-flow dense, responsive via CQ.
-     Override: style="--sf-bento-cols: 4; --sf-bento-row: 12rem"
-     ---------------------------------------------------------- */
+  /* -- Bento grid ---------------------------------------------- */
 
   .sf-bento {
     display:               grid;
@@ -540,9 +444,7 @@
   .sf-bento--compact { --sf-bento-row: var(--sf-bento-row-compact); }
   .sf-bento--tall    { --sf-bento-row: var(--sf-bento-row-tall); }
 
-  /* -- Subgrid -------------------------------------------------
-     A grid child that inherits its parent's tracks.
-     ---------------------------------------------------------- */
+  /* -- Subgrid ------------------------------------------------- */
 
   .sf-subgrid      { display: grid; grid-template-columns: subgrid; }
   .sf-subgrid-rows { display: grid; grid-template-rows:    subgrid; }

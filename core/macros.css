@@ -1,25 +1,6 @@
-/* ============================================================
-   SLASHED — core/macros.css
-   ★ shipped in essential bundle
-   Macro-classes (recipes / patterns).
-   Requires: core/tokens.css, core/tokens.macros.css
-   Layer:    slashed.macros
-
-   Macro-classes vs layout primitives:
-     · Layout primitive = answers "where do my children go?"
-       (e.g. .sf-stack, .sf-grid, .sf-cluster)
-     · Macro-class      = answers "what does this element DO or
-       LOOK LIKE?" (e.g. .sf-prose, .sf-flow, .sf-truncate)
-
-   Cascade position:
-     layout → components → macros → utilities → states → …
-     Macros may compose with primitives and components, but a
-     single-property utility still wins on the same selector.
-
-   PUBLIC API — every class here is part of the public surface.
-   Tokens consumed by these classes are listed in
-   core/tokens.macros.css.
-   ============================================================ */
+/* SLASHED — core/macros.css
+   @layer slashed.macros
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.macros {
 
@@ -98,8 +79,8 @@
     -webkit-box-orient: vertical;
     overflow:           hidden;
   }
-  /* line-clamp (unprefixed) is not yet shipped in any production browser as of
-     2026 — only -webkit-line-clamp is effective. The prefixed form is the de
+  /* line-clamp (unprefixed) is not yet broadly shipped — only
+     -webkit-line-clamp is effective. The prefixed form is the de
      facto standard across all engines despite the name. */
   /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
   .sf-line-clamp-2 { -webkit-line-clamp: 2; }
@@ -127,7 +108,7 @@
   /* -- Aspect --------------------------------------------------
      Generic aspect-ratio container. Distinct from layout's
      .sf-frame which targets media (object-fit: cover) — .sf-aspect
-     is content-agnostic.
+     is content-adaptive.
      Override: style="--sf-aspect: 4 / 3"
      ---------------------------------------------------------- */
   .sf-aspect {

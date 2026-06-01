@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current stable version: **0.4.11**
+Current stable version: **0.5.0-alpha1**
 
 This document tracks planned enhancements, post-1.0 features, and ideas under
 consideration. It is not a commitment — priorities shift as the project evolves.

@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_CSS_Loader
  *
- * Builder-agnostic helper used by every integration to locate the correct
+ * Builder-adaptive helper used by every integration to locate the correct
  * SLASHED CSS bundle. Integrations call these methods instead of duplicating
  * CDN/local-path logic. They may then apply their own filter on top of the
  * returned URL to allow per-integration overrides.

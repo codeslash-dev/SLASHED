@@ -34,7 +34,7 @@ function sync(rel, pattern, replacement, label) {
 // ── Read source of truth ────────────────────────────────────────────────────
 const pkg = JSON.parse(readFile('package.json'));
 const version = pkg.version;         // e.g. "0.4.0"
-const versionTag = `v${version}`;    // e.g. "v0.4.0"
+const versionTag = `v${version}`;    // e.g. "v0.5.0"
 
 console.log(`\nversion-sync: syncing to ${versionTag}\n`);
 

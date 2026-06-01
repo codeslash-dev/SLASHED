@@ -1,43 +1,42 @@
 # Bricks Template Workflow
 
-Powtarzalny, krok po kroku proces tworzenia i przenoszenia szablonów Bricksa,
-które zawsze wyglądają identycznie na każdej stronie z zainstalowaną wtyczką SLASHED.
+A repeatable, step-by-step process for creating and moving Bricks templates that always look identical on every site with the SLASHED plugin installed.
 
 ---
 
-## Dlaczego szablony się psują
+## Why templates break
 
-Bricks przechowuje wartości kolorów w JSON szablonu na jeden z trzech sposobów:
+Bricks stores color values in the template JSON in one of three ways:
 
-| Sposób | Jak trafia do szablonu | Przenośność |
-|--------|------------------------|-------------|
-| `var(--sf-color-primary)` | Wybrany z palety SLASHED w pickerze koloru | ✅ Przenośny — działa na każdej stronie z SLASHED |
-| `#4a90e2` | Wpisany ręcznie lub wybrany z kółka kolorów | ❌ Hardkodowany — ignoruje tokeny marki |
-| `bricks-color-abc123` | Wybrany z "Global Colors" Bricksa | ❌ ID specyficzne dla strony — na innej stronie daje przezroczystość |
+| Method | How it gets into the template | Portability |
+|--------|-------------------------------|-------------|
+| `var(--sf-color-primary)` | Selected from a SLASHED palette in the color picker | ✅ Portable — works on any site with SLASHED |
+| `#4a90e2` | Typed manually or chosen from the color wheel | ❌ Hardcoded — ignores brand tokens |
+| `bricks-color-abc123` | Selected from Bricks "Global Colors" | ❌ Site-specific ID — results in transparency on other sites |
 
-Ten sam problem dotyczy:
-- **Odstępów** — `padding: 24px` zamiast `var(--sf-space-6)` się nie skaluje
-- **Typografii** — `font-family: "Inter"` zamiast `var(--sf-font-body)` nie reaguje na tokeny
-- **Tokenów SLASHED** — wartości z panelu admina (`slashed_bricks_tokens`) nie podróżują razem z plikiem JSON Bricksa
+The same issue applies to:
+- **Spacing** — `padding: 24px` instead of `var(--sf-space-m)` doesn't scale
+- **Typography** — `font-family: "Inter"` instead of `var(--sf-font-body)` doesn't react to tokens
+- **SLASHED Tokens** — values from the admin panel (`slashed_bricks_tokens`) don't travel with the Bricks JSON file
 
 ---
 
-## Wymagania wstępne
+## Prerequisites
 
-Na **obu** stronach (źródłowej i docelowej):
+On **both** sites (source and destination):
 
 - Bricks Builder ≥ 1.9.2
-- Wtyczka SLASHED Bricks aktywna
-- Wybrany bundle CSS (Essential / Optimal / Full) — ten sam lub wyższy na stronie docelowej
-- Czcionki załadowane przez WordPressa lub Bricksa (Google Fonts, własne)
+- SLASHED WordPress plugin active
+- CSS bundle (Essential / Optimal / Full) — the same or higher on the destination site
+- Fonts loaded via WordPress or Bricks (Google Fonts, custom fonts)
 
 ---
 
-## Faza 1 — Projektowanie szablonu (strona źródłowa)
+## Phase 1 — Template Design (Source Site)
 
-### Zasada #1: Kolory wyłącznie z palet SLASHED
+### Rule #1: Colors exclusively from SLASHED palettes
 
-W pickerze koloru Bricksa rozwiń grupy palet. Używaj **wyłącznie** grup:
+In the Bricks color picker, expand the palette groups. Use **exclusively** these groups:
 - `SLASHED · Primary`
 - `SLASHED · Secondary`
 - `SLASHED · Tertiary`
@@ -47,32 +46,32 @@ W pickerze koloru Bricksa rozwiń grupy palet. Używaj **wyłącznie** grup:
 - `SLASHED · Status`
 - `SLASHED · Semantic`
 
-**Nigdy** nie używaj:
-- Kółka kolorów (wpisuje hex `#rrggbb`)
-- Sekcji "Global Colors" Bricksa (zapisuje wewnętrzny ID strony)
-- Pola tekstowego koloru z ręcznie wpisaną wartością
+**Never** use:
+- The color wheel (inserts a hex code `#rrggbb`)
+- Bricks "Global Colors" section (saves an internal site ID)
+- The color text field with a manually entered value
 
-> **Jak sprawdzić:** W DevTools zainspektuj element. Kolor powinien wyglądać jak
-> `color: var(--sf-color-primary)`, nie `color: #4a90e2`.
+> **How to check:** Inspect the element in DevTools. The color should look like
+> `color: var(--sf-color-primary)`, not `color: #4a90e2`.
 
-### Zasada #2: CSS variables w polach "Custom CSS"
+### Rule #2: CSS variables in "Custom CSS" fields
 
-W zakładce CSS elementu Bricksa, w każdym niestandardowym CSS używaj tokenów:
+In the Bricks element's CSS tab, use tokens for all custom CSS:
 
 ```css
-/* ✅ Dobrze */
-.moj-element {
+/* ✅ Good */
+.my-element {
   background: var(--sf-color-primary);
-  padding: var(--sf-space-4) var(--sf-space-6);
-  font-size: var(--sf-text-base);
+  padding: var(--sf-space-m) var(--sf-space-l);
+  font-size: var(--sf-text-m);
   font-family: var(--sf-font-body);
-  border-radius: var(--sf-radius-md);
-  box-shadow: var(--sf-shadow-md);
+  border-radius: var(--sf-radius-m);
+  box-shadow: var(--sf-shadow-m);
   transition: all var(--sf-duration-normal) var(--sf-ease-out);
 }
 
-/* ❌ Źle */
-.moj-element {
+/* ❌ Bad */
+.my-element {
   background: #4a90e2;
   padding: 16px 24px;
   font-size: 16px;
@@ -80,201 +79,201 @@ W zakładce CSS elementu Bricksa, w każdym niestandardowym CSS używaj tokenów
 }
 ```
 
-### Zasada #3: Klasy sf-* do layoutu
+### Rule #3: sf-* classes for layout
 
-Do układu elementów używaj klas SLASHED zamiast ręcznych wartości Flexbox/Grid:
+Use SLASHED classes for element layouts instead of manual Flexbox/Grid values:
 
-| Zamiast... | Użyj klasy |
-|------------|-----------|
+| Instead of... | Use class |
+|---------------|-----------|
 | `display: flex; gap: 16px; flex-wrap: wrap` | `sf-cluster` |
 | `display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px` | `sf-grid` |
 | `max-width: 1200px; margin: 0 auto` | `sf-center` |
 | `display: flex; flex-direction: column; gap: 16px` | `sf-stack` |
 
-Klasy są dostępne w managerze klas Bricksa (kategoria "SLASHED Layout").
+Classes are available in the Bricks class manager (category "SLASHED Layout").
 
-### Zasada #4: Nie używaj Bricks Global Colors
+### Rule #4: Do not use Bricks Global Colors
 
-Bricks ma własne "Global Colors" (kolor z niestandardową nazwą, np. "Accent Blue").
-Te kolory mają wewnętrzne ID specyficzne dla instalacji WordPress.
-**Po imporcie szablonu na innej stronie te ID nie istnieją → kolor niewidoczny.**
+Bricks has its own "Global Colors" (a color with a custom name like "Accent Blue").
+These colors have internal IDs specific to the WordPress installation.
+**After importing the template to another site, these IDs don't exist → the color disappears.**
 
-Zamiast Global Colors Bricksa → użyj SLASHED Color Palette.
+Instead of Bricks Global Colors → use SLASHED Color Palette.
 
 ---
 
-## Faza 2 — Eksport (strona źródłowa)
+## Phase 2 — Export (Source Site)
 
-### Krok 1: Eksport tokenów SLASHED
+### Step 1: Export SLASHED tokens
 
-1. Otwórz **WordPress Admin → SLASHED → Design Tokens**
-2. Przejdź do zakładki **Export / Import**
-3. Kliknij **Download token file**
-4. Zapisz plik `slashed-tokens-YYYY-MM-DD.json`
+1. Open **WordPress Admin → SLASHED → Design Tokens**
+2. Go to the **Export / Import** tab
+3. Click **Download token file**
+4. Save the `slashed-tokens-YYYY-MM-DD.json` file
 
-Ten plik zawiera wszystkie twoje overrides kolorów, typografii, odstępów itp.
+This file contains all your overrides for colors, typography, spacing, etc.
 
-### Krok 2: Eksport szablonu Bricksa
+### Step 2: Export Bricks template
 
-1. W Bricksie otwórz stronę/sekcję którą chcesz eksportować
-2. **Bricks → Templates → Export** lub zapisz jako szablon
-3. Pobierz plik JSON szablonu
+1. In Bricks, open the page/section you want to export
+2. **Bricks → Templates → Export** or save as a template
+3. Download the template JSON file
 
-### Krok 3: Spakuj oba pliki razem
+### Step 3: Package both files together
 
-Konwencja nazewnictwa:
+Naming convention:
 ```text
-moj-szablon/
-  ├── bricks-template-hero.json    # szablon Bricksa
-  ├── slashed-tokens-2026-05-28.json  # tokeny SLASHED
-  └── README.txt                   # opcjonalnie: opis fontu, bundle itp.
+my-template/
+  ├── bricks-template-hero.json    # Bricks template
+  ├── slashed-tokens-2026-06-01.json  # SLASHED tokens
+  └── README.txt                   # optional: font description, bundle info, etc.
 ```
 
 ---
 
-## Faza 3 — Import (strona docelowa)
+## Phase 3 — Import (Destination Site)
 
-### Krok 1: Sprawdź wymagania wstępne
+### Step 1: Check prerequisites
 
-- [ ] Wtyczka SLASHED Bricks zainstalowana i aktywna
-- [ ] Bundle CSS: taki sam lub wyższy (Essential ≤ Optimal ≤ Full)
+- [ ] SLASHED WordPress plugin installed and active
+- [ ] CSS Bundle: same or higher (Essential ≤ Optimal ≤ Full)
 - [ ] Bricks ≥ 1.9.2
-- [ ] Czcionki skonfigurowane (Google Fonts, Adobe Fonts, self-hosted)
+- [ ] Fonts configured (Google Fonts, Adobe Fonts, self-hosted)
 
-### Krok 2: Importuj tokeny SLASHED
+### Step 2: Import SLASHED tokens
 
 1. **Admin → SLASHED → Design Tokens → Export / Import**
-2. Kliknij "Wybierz plik" i wskaż `slashed-tokens-*.json`
-3. Kliknij **Import token file**
-4. Poczekaj na potwierdzenie "Imported N section(s) successfully"
-5. **Odśwież stronę** — tokeny są teraz aktywne
+2. Click "Choose file" and select `slashed-tokens-*.json`
+3. Click **Import token file**
+4. Wait for the confirmation "Imported N section(s) successfully"
+5. **Refresh the page** — tokens are now active
 
-### Krok 3: Importuj szablon Bricksa
+### Step 3: Import Bricks template
 
 1. **Bricks → Templates → Import**
-2. Wskaż plik `bricks-template-*.json`
-3. Zaimportuj
+2. Select the `bricks-template-*.json` file
+3. Import
 
-### Krok 4: Sprawdź w edytorze Bricksa
+### Step 4: Verify in Bricks editor
 
-Otwórz stronę w edytorze Bricksa. Canvas powinien renderować szablon z poprawnymi kolorami.
+Open the page in the Bricks editor. The canvas should render the template with correct colors.
 
 ---
 
-## Faza 4 — Weryfikacja
+## Phase 4 — Verification
 
-### Checklist wizualny
+### Visual Checklist
 
-- [ ] Kolory odpowiadają tokenom (Primary, Secondary, itp.)
-- [ ] Dark mode przełącza się poprawnie (`data-brx-theme="dark"`)
-- [ ] Odstępy/gaps wyglądają proporcjonalnie
-- [ ] Czcionki ładują się poprawnie (nie fallback serif/sans-serif)
-- [ ] Zaokrąglenia, cienie i animacje działają
+- [ ] Colors match the tokens (Primary, Secondary, etc.)
+- [ ] Dark mode toggles correctly (`data-theme="dark"`)
+- [ ] Spacing/gaps look proportional
+- [ ] Fonts load correctly (not fallback serif/sans-serif)
+- [ ] Radius, shadows, and animations work
 
-### Weryfikacja techniczna (DevTools)
+### Technical Verification (DevTools)
 
-Otwórz Inspector i sprawdź:
+Open the Inspector and check:
 
 ```js
-// W konsoli przeglądarki, na stronie z szablonem:
+// In the browser console, on the page with the template:
 getComputedStyle(document.documentElement).getPropertyValue('--sf-color-primary')
-// Powinno zwrócić kolor OKLCH, nie pusty string
+// Should return an OKLCH color, not an empty string
 ```
 
-Jeśli wartość jest pusta → SLASHED CSS nie jest załadowany (patrz: Debugowanie).
+If the value is empty → SLASHED CSS is not loaded (see Debugging).
 
 ---
 
-## Debugowanie
+## Debugging
 
-### Problem: Kolory są złe / nie zmieniają się
+### Problem: Colors are wrong / don't change
 
-**Causa:** Elementy mają hardkodowane wartości hex zamiast `var()`.
+**Cause:** Elements have hardcoded hex values instead of `var()`.
 
-**Diagnoza:** W DevTools → Inspector → Computed Styles szukaj wartości które
-wyglądają jak `#rrggbb` lub `rgb(...)` zamiast `var(--sf-color-*)`.
+**Diagnosis:** In DevTools → Inspector → Computed Styles, look for values that
+look like `#rrggbb` or `rgb(...)` instead of `var(--sf-color-*)`.
 
-**Rozwiązanie:** Przeprojektuj element wybierając kolor z palety SLASHED,
-nie z kółka kolorów.
+**Solution:** Redesign the element by selecting a color from the SLASHED palette,
+not the color wheel.
 
 ---
 
-### Problem: Wszystko jest bez koloru / szare
+### Problem: Everything is colorless / grey
 
-**Causa:** SLASHED CSS bundle nie jest załadowany na stronie.
+**Cause:** SLASHED CSS bundle is not loaded on the page.
 
-**Diagnoza:**
+**Diagnosis:**
 ```js
-// W konsoli:
+// In the console:
 document.querySelector('link[href*="slashed"]')
-// Powinno zwrócić element <link>. null = bundle nie załadowany.
+// Should return a <link> element. null = bundle not loaded.
 ```
 
-**Rozwiązanie:**
-1. Sprawdź czy wtyczka SLASHED Bricks jest aktywna
-2. Admin → SLASHED → Bundle — sprawdź czy bundle jest ustawiony
-3. Sprawdź czy nie ma konfliktu z inną wtyczką blokującą CSS
+**Solution:**
+1. Check if the SLASHED plugin is active
+2. Admin → SLASHED → Settings — check if a bundle is selected
+3. Check for conflicts with other plugins blocking CSS
 
 ---
 
-### Problem: Tokeny są domyślne, nie twoje
+### Problem: Tokens are default, not yours
 
-**Causa:** Plik tokenów nie został zaimportowany lub import się nie powiódł.
+**Cause:** Token file was not imported or import failed.
 
-**Diagnoza:** Admin → SLASHED → Colors — kolory powinny pokazywać twoje overrides.
-Jeśli wszystko jest domyślne (fiolet), plik nie trafił do bazy.
+**Diagnosis:** Admin → SLASHED → Colors — colors should show your overrides.
+If everything is default (purple), the file didn't make it to the database.
 
-**Rozwiązanie:** Powtórz import tokenów (Faza 3, Krok 2).
+**Solution:** Repeat token import (Phase 3, Step 2).
 
 ---
 
-### Problem: Klasy sf-* nie działają (brak stylowania)
+### Problem: sf-* classes don't work (no styling)
 
-**Causa:** Bundle CSS nie zawiera tych klas (np. użyto Essential zamiast Optimal/Full).
+**Cause:** CSS bundle doesn't contain these classes (e.g., Essential used instead of Optimal/Full).
 
-**Diagnoza:**
+**Diagnosis:**
 ```js
-// Sprawdź czy reguła CSS istnieje:
+// Check if CSS rule exists:
 [...document.styleSheets].flatMap(s => [...s.cssRules]).find(r => r.selectorText?.includes('sf-cluster'))
-// undefined = reguła nie istnieje w bundle
+// undefined = rule doesn't exist in bundle
 ```
 
-**Rozwiązanie:** Admin → SLASHED → Bundle → zmień na Optimal lub Full.
+**Solution:** Admin → SLASHED → Settings → change bundle to Optimal or Full.
 
 ---
 
-### Problem: Ciemny tryb nie działa
+### Problem: Dark mode doesn't work
 
-**Causa:** Bricks używa `data-brx-theme` zamiast `data-theme` (SLASHED).
-Wtyczka automatycznie bridguje te dwa atrybuty, ale tylko gdy CSS jest załadowany.
+**Cause:** Bricks uses `data-brx-theme` instead of `data-theme` (SLASHED).
+The plugin automatically bridges these two attributes, but only when CSS is loaded.
 
-**Weryfikacja:** Sprawdź czy w załadowanym CSS jest reguła:
+**Verification:** Check if the loaded CSS has the rule:
 ```css
-[data-brx-theme="dark"] { color-scheme: dark; --sf-is-dark: 1 }
+[data-theme="dark"] { color-scheme: dark; --sf-is-dark: 1 }
 ```
 
-Jeśli nie ma → sprawdź wersję wtyczki (wymaga ≥ bieżącej).
+If not → check plugin version (requires ≥ current).
 
 ---
 
-## Skrócony cheatsheet
+## Quick Cheatsheet
 
 ```text
-Przed projektowaniem:
-  ✅ Kolor → z SLASHED palette group
+Before designing:
+  ✅ Color → from SLASHED palette group
   ✅ Custom CSS → var(--sf-*)
-  ✅ Layout → klasa sf-*
-  ❌ Kolor → hex z kółka kolorów
+  ✅ Layout → sf-* class
+  ❌ Color → hex from color wheel
   ❌ Custom CSS → px / hex literal
-  ❌ Layout → Global Colors Bricksa
+  ❌ Layout → Bricks Global Colors
 
-Eksport (z tej strony):
+Export (from this site):
   1. Admin → SLASHED → Design Tokens → Export / Import → Download token file
   2. Bricks → Export template
 
-Import (na nową stronę):
+Import (to new site):
   1. Admin → SLASHED → Design Tokens → Export / Import → Import token file
   2. Bricks → Import template
-  3. Odśwież stronę
-  4. Zweryfikuj w edytorze
+  3. Refresh page
+  4. Verify in editor
 ```

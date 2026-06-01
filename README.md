@@ -1,6 +1,6 @@
 # SLASHED CSS Framework
 
-**S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**dgeless · **D**eterministic
+**S**tandalone · **L**ean · **A**daptive · **S**tructured · **H**ybrid · **E**xplicit · **D**eterministic
 
 A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
@@ -38,10 +38,9 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ```
 
 > **Note:** `optional/components.css` and `optional/tokens.components.css`
-> are not yet complete in v0.3.0 — their `@layer` declarations are real,
-> but every class definition and component token is commented out (no CSS
-> is emitted). They appear (as no-ops) in the `*-components` and `full`
-> bundles only. `optional/utilities.css` remains an empty stub — SLASHED
+> are now partially complete — their `@layer` declarations are real.
+> They appear in the `*-components` and `full` bundles.
+> `optional/utilities.css` remains an empty stub — SLASHED
 > is BEM-first by design and ships no utility classes in 0.x. There's no
 > need to link any of the three individually.
 
@@ -74,7 +73,7 @@ is reserved for your own overrides and sits last so it always wins.
 
 `slashed.forms` (between `base` and `layout`) holds the opt-in
 classless form styling from `optional/forms.css`. `slashed.macros`
-(between `components` and `utilities`, added in v0.3.0) holds recipes
+(between `components` and `utilities`) holds recipes
 like `.sf-prose`, `.sf-flow`, `.sf-truncate`, `.sf-aspect`,
 `.sf-scroll-shadow`. See [`docs/macros.md`](docs/macros.md).
 
@@ -106,16 +105,14 @@ the `slashed.tokens` layer.
 | --- | --- |
 | `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `tokens.macros` + `reset` + `base` + `themes` + `layout` + `macros` + `states` + `motion` + `accessibility` + `print`) |
 | `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
+| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` |
 | `slashed.optimal-utilities.css` | optimal + `utilities` |
-| `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` |
+| `slashed.full.css` | optimal + `tokens.components` + `components` + `utilities` |
 
 `optional/legacy.css` is always concatenated last. Every rule lives in an
 `@layer`, so concatenation order never affects the cascade — `core/layers.css`
-fixes it. `components.css` and `tokens.components.css` are **not yet
-complete** in 0.3.0 — their `@layer` declarations are real, but every
-selector and token is commented out (no CSS is emitted). `utilities.css`
-ships as an empty stub.
+fixes it. `components.css` and `tokens.components.css` are now available.
+`utilities.css` ships as an empty stub.
 
 À la carte is also supported — start from `essential` (or raw `core/`) and add
 hand-picked optional files in any order. When building a custom bundle by hand,
@@ -192,13 +189,13 @@ versions above — colors will collapse to `initial` on older engines.
 | [Theming](docs/theming.md) | rebrand in 6 tokens, multi-brand, contrast |
 | [Dark mode](docs/dark-mode.md) | toggle script, scoped themes, per-value overrides |
 | [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
-| [Macros / recipes](docs/macros.md) | every `.sf-*` macro-class + tokens (v0.3.0+) |
+| [Macros / recipes](docs/macros.md) | every `.sf-*` macro-class + tokens |
 | [Components](docs/components.md) | taken component names + roadmap |
 | [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
 | [Browser support](docs/browser-support.md) | the support floor and why |
 | [Performance](docs/performance.md) | modern-CSS footguns to avoid |
-| [Migration](docs/migration.md) | 0.2.x → 0.3.0 + migrating from other frameworks |
+| [Migration](docs/migration.md) | migrating from other frameworks |
 | [Contributing](CONTRIBUTING.md) | setup, conventions, tests |
 
 ## Development

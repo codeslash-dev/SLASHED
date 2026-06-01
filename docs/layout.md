@@ -48,7 +48,7 @@ Every size-aware primitive supports the canonical range
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|
 | `.sf-stack`   | block-axis gap         | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-cluster` | inline-axis gap        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.sf-gap`     | layout-agnostic gap    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-gap`     | layout-adaptive gap    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-grid`    | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

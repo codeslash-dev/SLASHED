@@ -67,7 +67,7 @@ test.describe('Layer ordering', () => {
   });
 
   test('slashed.macros wins over slashed.components at equal specificity', async ({ page }) => {
-    // New layer in v0.3.0 — sits between components and utilities so
+    // The slashed.macros layer sits between components and utilities so
     // macros can compose on top of opt-in components.
     await page.setContent(`
       <style>

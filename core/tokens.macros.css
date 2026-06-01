@@ -1,21 +1,6 @@
-/* ============================================================
-   SLASHED — core/tokens.macros.css
-   Semantic tokens for macros (recipes / patterns).
-   Load before: core/macros.css
-   Layer: slashed.tokens
-   Prefix: --sf-
-
-   DEPENDENCIES — requires tokens.css (loaded earlier).
-   Macro tokens reference --sf-space-* / --sf-radius-* / etc.
-
-   PUBLIC API — every token here is a per-recipe override knob
-   (e.g. style="--sf-line-clamp: 5"). No INTERNAL tokens live in
-   this file.
-
-   Architectural parallel — these tokens stand alongside
-   tokens.layout.css: same prefix, same shape, same status
-   (essential, public, override-friendly).
-   ============================================================ */
+/* SLASHED — core/tokens.macros.css
+   @layer slashed.tokens
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.tokens {
   :root {

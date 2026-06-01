@@ -4,7 +4,7 @@
    Print rules and @page definition. Print tokens (--sf-print-*)
    are declared in core/tokens.css.
 
-   Color contract (Phase 3):
+   Color contract:
    authored colour is preserved by default. Browsers apply their own
    ink-saving heuristics via the default `print-color-adjust: economy`,
    so semantic colours (badges, status pills, <mark>, syntax highlighting)

@@ -1,26 +1,6 @@
-/* ============================================================
-   SLASHED — core/tokens.layout.css
-   Semantic tokens for layout primitives.
-   Load before: core/layout.css
-   Layer: slashed.tokens
-   Prefix: --sf-
-
-   DEPENDENCIES — requires tokens.css (loaded earlier).
-   Spacing aliases inherit from the BEM consumer API in tokens.css:
-     --sf-space-gap     → var(--sf-gap)         from tokens.css
-     --sf-space-content → var(--sf-content-gap) from tokens.css
-   Override --sf-gap or --sf-content-gap (the canonical source) to change
-   the gaps across all layout primitives at once. --sf-space-gap and
-   --sf-space-content are CANONICAL-SOURCE ALIASES — a second public name
-   kept for layout-primitive readability, not a redundant indirection.
-
-   PUBLIC API — every --sf-*-gap / --sf-*-padding / --sf-*-min / etc. here
-   is a per-primitive override knob (e.g. style="--sf-cluster-gap: …").
-   No INTERNAL tokens live in this file.
-
-   Each layout primitive (cluster, grid, sidebar…) has its own
-   tokens (--sf-cluster-gap etc.) for local overrides.
-   ============================================================ */
+/* SLASHED — core/tokens.layout.css
+   @layer slashed.tokens
+   ─────────────────────────────────────────────────── */
 
 @layer slashed.tokens {
   :root {

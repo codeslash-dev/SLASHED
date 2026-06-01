@@ -1,6 +1,6 @@
 <?php
 /**
- * Core SLASHED CSS enqueue — builder-agnostic.
+ * Core SLASHED CSS enqueue — builder-adaptive.
  *
  * Registers and enqueues the `slashed-framework` stylesheet on every
  * WordPress site where the plugin is active, regardless of which builder

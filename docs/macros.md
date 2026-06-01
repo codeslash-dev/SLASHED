@@ -152,7 +152,7 @@ Tokens:
 
 Distinct from the `.sf-frame` layout primitive, which is media-specific
 (includes `object-fit: cover` for child `img`/`video`). `.sf-aspect`
-is content-agnostic.
+is content-adaptive.
 
 ---
 

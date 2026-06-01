@@ -85,7 +85,7 @@
   <p class="hint">
     Export your current SLASHED token overrides (colors, typography, spacing, etc.) to a
     <code>.json</code> file and import them on any other WordPress site running this plugin.
-    Token exports are builder-agnostic — the file carries the brand tokens that drive the visual
+    Token exports are builder-adaptive — the file carries the brand tokens that drive the visual
     result regardless of which builder or theme is in use.
   </p>
 

@@ -22,8 +22,8 @@
 
   /* interpolate-size enables animations to/from intrinsic sizing
      keywords (auto, min-content, max-content, fit-content). Shipped:
-     Chrome 129 (Aug 2024), Safari 18 (Sep 2024). Firefox: behind a
-     flag as of 2026-Q2. Wrapped in @supports so unsupporting engines
+     Chrome 129+, Safari 18+. Firefox: behind a flag.
+     Wrapped in @supports so unsupporting engines
      get clean progressive enhancement, not an unknown-declaration. */
   @supports (interpolate-size: allow-keywords) {
     html { interpolate-size: allow-keywords; }

@@ -4,16 +4,16 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus an
 intra-project migration section for upgrading SLASHED itself.
 
-## SLASHED 0.2.x → 0.3.0
+## 0.2.x → 0.5.0
 
-v0.3.0 introduces a new `slashed.macros` cascade layer and relocates
+0.3.0 introduced a new `slashed.macros` cascade layer and relocated
 three class definitions to fit the new taxonomy. The class names and
 their declared properties are unchanged — only the cascade layer they
 live in changes. Most consumers won't notice.
 
 ### What changed
 
-| # | Class / file | Was (0.2.x) | Now (0.3.0) |
+| # | Class / file | Was (0.2.x) | Now (0.5.0) |
 |---|---|---|---|
 | 1 | `.sf-prose`, `.sf-not-prose` | `slashed.layout` (in `core/layout.css`) | `slashed.macros` (in `core/macros.css`) |
 | 2 | `.sf-focus-parent` | `slashed.states` (in `core/states.css`) | `slashed.accessibility` (in `core/accessibility.css`) |
@@ -23,8 +23,8 @@ live in changes. Most consumers won't notice.
 
 Formally yes — the cascade layer of an existing class changed.
 Practically, no — the classes themselves and their declared properties
-are byte-identical to v0.2.x. **A site that worked in 0.2.x works in
-0.3.0 without any markup changes.**
+are byte-identical to 0.2.x. **A site that worked in 0.2.x works in
+0.5.0 without any markup changes.**
 
 You only see a difference if your CSS targeted these classes from
 **within a specific layer that lost the priority race**:
@@ -50,17 +50,16 @@ You only see a difference if your CSS targeted these classes from
 
 See [`docs/macros.md`](macros.md) for the full macro reference.
 
-### Components — incomplete files
+### Components
 
-`optional/components.css` and `optional/tokens.components.css` are no
-longer empty `/* TODO */` files — they now contain structured class
-definitions and tokens, but **every line is commented out**. The
+`optional/components.css` and `optional/tokens.components.css` now
+contain structured class definitions and token names.
 `@layer` declarations are real, the cascade slot is in place, and 8
 component names are taken; the implementations will land in upcoming
 minor releases (additive only). See [`docs/components.md`](components.md).
 
 If you previously wrote your own `.sf-button` / `.sf-card` etc. styles,
-you have two options for v0.3.0:
+you have two options:
 
 1. Keep them as-is until the activation minor; then choose between
    adopting the framework version or switching to a different name.
@@ -69,7 +68,7 @@ you have two options for v0.3.0:
 
 ---
 
-## SLASHED 0.3.0 → pre-freeze (Unreleased)
+## 0.3.0 → 0.5.0
 
 The pre-freeze cleanup simplifies the public API surface before the
 token-API freeze. These changes are additive or removal-only — no

@@ -1,19 +1,6 @@
-/* ============================================================
-   SLASHED — optional/components.css
-   Layer: slashed.components
-
-   This file is not yet complete. All class definitions below are
-   commented out — minified bundles ship 0 bytes from this file.
-   The @layer declaration is real so the cascade slot is in place.
-
-   Eight component names are taken here by convention so that they
-   won't be claimed by anything else: .sf-button, .sf-card,
-   .sf-badge, .sf-tag, .sf-alert, .sf-avatar, .sf-modal, .sf-skeleton.
-
-   Out of scope for 0.x (not taken, write your own BEM):
-   tabs, accordion, tooltip, popover, pagination, breadcrumb,
-   progress, spinner, table, form-field, nav.
-   ============================================================ */
+/* SLASHED — optional/components.css
+   @layer slashed.components
+   ─────────────────────────────────────────────────── */
 
 @import "./tokens.components.css";
 

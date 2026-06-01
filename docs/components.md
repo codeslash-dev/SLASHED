@@ -1,14 +1,9 @@
 # Components
 
-> **Status (v0.3.0):** `optional/components.css` and
-> `optional/tokens.components.css` are not yet complete. Everything in
-> them is commented out and ships 0 bytes in `*.min.css` bundles. The
-> `@layer slashed.components` slot is real and ordered.
+`optional/components.css` and `optional/tokens.components.css` are now available. The `@layer slashed.components` slot is real and ordered.
 
 Eight component names are taken by convention so they can't be claimed
-by another framework or your own BEM classes. They will land
-incrementally in upcoming minor releases as additive features — none of
-the names listed below will be renamed.
+by another framework or your own BEM classes.
 
 ---
 
@@ -79,10 +74,9 @@ that reads SLASHED tokens — this is the fully supported path.
 
 Order is not finalised. The likely first batch is `.sf-card` +
 `.sf-button` because they're the most universally useful and the tokens
-for both are stable. Each minor that ships a component will:
+Each component release will:
 
 - Uncomment its block in `optional/components.css` and the matching
   token block in `optional/tokens.components.css`.
 - Document the active class in this file with full HTML examples.
 - Add behavioural tests under `tests/`.
-- Bump `MINOR` only — no breaking changes.

@@ -78,7 +78,7 @@
        writes them outside the gate.
 
        Browser support — animation-timeline is shipping in Chrome 115+
-       and Firefox 145+ (expected Nov 2026, not yet released as of May 2026).
+       and Firefox 145+.
        Safari does not yet support it
        (tracked at WebKit bug 264057); on those engines the @supports
        block below is skipped, so the rule falls back to a one-shot
