@@ -347,7 +347,12 @@ function openColorPickerPanel(colorInputEl) {
         onPickValue: (value) => {
           // Re-query at pick time so we always write to the live input even if
           // Bricks re-rendered the control after the button was clicked.
-          const inputEl = colorInputEl?.querySelector('input[type="text"]');
+          // Some Bricks controls (border, box-shadow) omit the explicit
+          // type="text" attribute on their inputs, so fall back to any
+          // non-structural input after the explicit match.
+          const inputEl =
+            colorInputEl?.querySelector('input[type="text"]') ??
+            colorInputEl?.querySelector('input:not([type="hidden"],[type="submit"],[type="button"],[type="checkbox"],[type="radio"],[type="file"])');
           const ok = applyToColorInput(inputEl, value);
           if (ok) {
             const varName = value.match(/^var\((--[^)]+)\)/)?.[1];
