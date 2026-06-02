@@ -169,7 +169,6 @@
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-open    { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
-
   /* ============================================================
      DERIVED SEMANTIC TOKENS
      ============================================================ */
@@ -216,7 +215,6 @@
     --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark,    oklch(from var(--sf-color-info-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
     --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark,  oklch(from var(--sf-color-danger-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
 
-
     /* ----------------------------------------------------------
        Surfaces — derived from --sf-color-surface (auto-adapts)
        ---------------------------------------------------------- */
@@ -225,7 +223,6 @@
     --sf-color-raised:  oklch(from var(--sf-color-surface) calc(l + 0.04) c h);
     --sf-color-overlay: oklch(from var(--sf-color-surface) l c h / 0.9);
     --sf-color-inverse: oklch(from var(--sf-color-surface) calc(1 - l) c h);
-
 
     /* ----------------------------------------------------------
        Text — light and dark require opposite formula directions,
@@ -263,7 +260,6 @@
        near-white). Override with a tint value if desired. */
     --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
-
     /* ----------------------------------------------------------
        Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic:
        auto-selects light or dark text based on background luminance.
@@ -290,7 +286,6 @@
     --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
-
     /* ----------------------------------------------------------
        Borders — direction-dependent, reference source tokens.
        Light: borders are lighter than neutral (l + offset).
@@ -311,7 +306,6 @@
     --sf-color-border--focus:       var(--sf-color-action);
     --sf-color-border--disabled: oklch(from var(--sf-color-border--subtle) l 0 h / 0.5);
     --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
-
 
     /* ----------------------------------------------------------
        Links — derived from --sf-color-action (auto-adapts)
@@ -357,7 +351,6 @@
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
 
-
     /* ----------------------------------------------------------
        Interactive states — derived from --sf-color-neutral (auto-adapts)
        ---------------------------------------------------------- */
@@ -380,13 +373,11 @@
     --sf-color-mark-text:      inherit;
     --sf-color-dim:            oklch(0 0 0 / 0.5);
 
-
     /* ----------------------------------------------------------
        Scrollbar
        ---------------------------------------------------------- */
     --sf-scrollbar-thumb: var(--sf-color-neutral);
     --sf-scrollbar-track: transparent;
-
 
     /* ----------------------------------------------------------
        Status triplets — bg/border use same formula both modes;
@@ -429,7 +420,6 @@
     );
     --sf-color-danger-muted:   oklch(from var(--sf-color-danger) l c h / 0.3);
 
-
     /* ----------------------------------------------------------
        Gradients — derived from brand colors (auto-adapt)
        ---------------------------------------------------------- */
@@ -444,7 +434,6 @@
     --sf-gradient-fade--t: linear-gradient(to top,    transparent, var(--sf-color-bg));
     --sf-gradient-fade--b: linear-gradient(to bottom, transparent, var(--sf-color-bg));
 
-
     /* ----------------------------------------------------------
        Shadow — strength scales up in dark mode via --sf-is-dark
        ---------------------------------------------------------- */
@@ -453,7 +442,6 @@
     --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
     --sf-opacity-disabled:  0.45;
     --sf-state-pending-opacity: 0.7;
-
 
     /* ----------------------------------------------------------
        Focus / form colors
@@ -465,37 +453,21 @@
 
   }
 
-
   /* ============================================================
-     COLOR SCALE — numeric palette (50–950) + semantic aliases
+     SEMANTIC COLOUR ALIASES — shade, interactive + transparency
 
-     Numeric steps use the -light source token so each shade is
-     stable — pick a different step in dark mode to follow Tailwind
-     convention, or use the semantic aliases below which auto-adapt.
+     All aliases compute directly from the adaptive --sf-color-X
+     token (which uses light-dark()) via relative colour syntax,
+     so they auto-shift when the colour scheme switches.
 
-     Semantic aliases reference the adaptive --sf-color-X token
-     (which uses light-dark()) so they automatically shift when the
-     colour-scheme switches — safer default for component styles.
-
-     Both use color-mix(in oklch) / relative colour syntax for
-     perceptually-uniform steps: no hue drift, consistent visual
-     distance regardless of the source colour's hue.
+     When optional/tokens.palette.css is also loaded, it overrides
+     these aliases to point at the surface-aware numeric scale steps
+     it adds (-50…-950, -a5…-a95) for the 6 brand colour families.
      ============================================================ */
 
   :root {
 
     /* ─── primary ──────────────────────────────────────────── */
-    --sf-color-primary-50:         color-mix(in oklch, var(--sf-color-primary-light)  4%, white);
-    --sf-color-primary-100:        color-mix(in oklch, var(--sf-color-primary-light)  8%, white);
-    --sf-color-primary-200:        color-mix(in oklch, var(--sf-color-primary-light) 20%, white);
-    --sf-color-primary-300:        color-mix(in oklch, var(--sf-color-primary-light) 40%, white);
-    --sf-color-primary-400:        color-mix(in oklch, var(--sf-color-primary-light) 65%, white);
-    --sf-color-primary-500:        var(--sf-color-primary-light);
-    --sf-color-primary-600:        color-mix(in oklch, var(--sf-color-primary-light) 82%, black);
-    --sf-color-primary-700:        color-mix(in oklch, var(--sf-color-primary-light) 62%, black);
-    --sf-color-primary-800:        color-mix(in oklch, var(--sf-color-primary-light) 38%, black);
-    --sf-color-primary-900:        color-mix(in oklch, var(--sf-color-primary-light) 18%, black);
-    --sf-color-primary-950:        color-mix(in oklch, var(--sf-color-primary-light)  8%, black);
 
     --sf-color-primary-superlight: oklch(from var(--sf-color-primary) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-primary-xlight:     oklch(from var(--sf-color-primary) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -510,17 +482,6 @@
     --sf-color-primary-ghost:      oklch(from var(--sf-color-primary) l c h / 0.05);
 
     /* ─── secondary ────────────────────────────────────────── */
-    --sf-color-secondary-50:         color-mix(in oklch, var(--sf-color-secondary-light)  4%, white);
-    --sf-color-secondary-100:        color-mix(in oklch, var(--sf-color-secondary-light)  8%, white);
-    --sf-color-secondary-200:        color-mix(in oklch, var(--sf-color-secondary-light) 20%, white);
-    --sf-color-secondary-300:        color-mix(in oklch, var(--sf-color-secondary-light) 40%, white);
-    --sf-color-secondary-400:        color-mix(in oklch, var(--sf-color-secondary-light) 65%, white);
-    --sf-color-secondary-500:        var(--sf-color-secondary-light);
-    --sf-color-secondary-600:        color-mix(in oklch, var(--sf-color-secondary-light) 82%, black);
-    --sf-color-secondary-700:        color-mix(in oklch, var(--sf-color-secondary-light) 62%, black);
-    --sf-color-secondary-800:        color-mix(in oklch, var(--sf-color-secondary-light) 38%, black);
-    --sf-color-secondary-900:        color-mix(in oklch, var(--sf-color-secondary-light) 18%, black);
-    --sf-color-secondary-950:        color-mix(in oklch, var(--sf-color-secondary-light)  8%, black);
 
     --sf-color-secondary-superlight: oklch(from var(--sf-color-secondary) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-secondary-xlight:     oklch(from var(--sf-color-secondary) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -535,17 +496,6 @@
     --sf-color-secondary-ghost:      oklch(from var(--sf-color-secondary) l c h / 0.05);
 
     /* ─── tertiary ──────────────────────────────────────────── */
-    --sf-color-tertiary-50:         color-mix(in oklch, var(--sf-color-tertiary-light)  4%, white);
-    --sf-color-tertiary-100:        color-mix(in oklch, var(--sf-color-tertiary-light)  8%, white);
-    --sf-color-tertiary-200:        color-mix(in oklch, var(--sf-color-tertiary-light) 20%, white);
-    --sf-color-tertiary-300:        color-mix(in oklch, var(--sf-color-tertiary-light) 40%, white);
-    --sf-color-tertiary-400:        color-mix(in oklch, var(--sf-color-tertiary-light) 65%, white);
-    --sf-color-tertiary-500:        var(--sf-color-tertiary-light);
-    --sf-color-tertiary-600:        color-mix(in oklch, var(--sf-color-tertiary-light) 82%, black);
-    --sf-color-tertiary-700:        color-mix(in oklch, var(--sf-color-tertiary-light) 62%, black);
-    --sf-color-tertiary-800:        color-mix(in oklch, var(--sf-color-tertiary-light) 38%, black);
-    --sf-color-tertiary-900:        color-mix(in oklch, var(--sf-color-tertiary-light) 18%, black);
-    --sf-color-tertiary-950:        color-mix(in oklch, var(--sf-color-tertiary-light)  8%, black);
 
     --sf-color-tertiary-superlight: oklch(from var(--sf-color-tertiary) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-tertiary-xlight:     oklch(from var(--sf-color-tertiary) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -560,17 +510,6 @@
     --sf-color-tertiary-ghost:      oklch(from var(--sf-color-tertiary) l c h / 0.05);
 
     /* ─── action ────────────────────────────────────────────── */
-    --sf-color-action-50:         color-mix(in oklch, var(--sf-color-action-light)  4%, white);
-    --sf-color-action-100:        color-mix(in oklch, var(--sf-color-action-light)  8%, white);
-    --sf-color-action-200:        color-mix(in oklch, var(--sf-color-action-light) 20%, white);
-    --sf-color-action-300:        color-mix(in oklch, var(--sf-color-action-light) 40%, white);
-    --sf-color-action-400:        color-mix(in oklch, var(--sf-color-action-light) 65%, white);
-    --sf-color-action-500:        var(--sf-color-action-light);
-    --sf-color-action-600:        color-mix(in oklch, var(--sf-color-action-light) 82%, black);
-    --sf-color-action-700:        color-mix(in oklch, var(--sf-color-action-light) 62%, black);
-    --sf-color-action-800:        color-mix(in oklch, var(--sf-color-action-light) 38%, black);
-    --sf-color-action-900:        color-mix(in oklch, var(--sf-color-action-light) 18%, black);
-    --sf-color-action-950:        color-mix(in oklch, var(--sf-color-action-light)  8%, black);
 
     --sf-color-action-superlight: oklch(from var(--sf-color-action) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-action-xlight:     oklch(from var(--sf-color-action) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -585,17 +524,6 @@
     --sf-color-action-ghost:      oklch(from var(--sf-color-action) l c h / 0.05);
 
     /* ─── neutral ───────────────────────────────────────────── */
-    --sf-color-neutral-50:         color-mix(in oklch, var(--sf-color-neutral-light)  4%, white);
-    --sf-color-neutral-100:        color-mix(in oklch, var(--sf-color-neutral-light)  8%, white);
-    --sf-color-neutral-200:        color-mix(in oklch, var(--sf-color-neutral-light) 20%, white);
-    --sf-color-neutral-300:        color-mix(in oklch, var(--sf-color-neutral-light) 40%, white);
-    --sf-color-neutral-400:        color-mix(in oklch, var(--sf-color-neutral-light) 65%, white);
-    --sf-color-neutral-500:        var(--sf-color-neutral-light);
-    --sf-color-neutral-600:        color-mix(in oklch, var(--sf-color-neutral-light) 82%, black);
-    --sf-color-neutral-700:        color-mix(in oklch, var(--sf-color-neutral-light) 62%, black);
-    --sf-color-neutral-800:        color-mix(in oklch, var(--sf-color-neutral-light) 38%, black);
-    --sf-color-neutral-900:        color-mix(in oklch, var(--sf-color-neutral-light) 18%, black);
-    --sf-color-neutral-950:        color-mix(in oklch, var(--sf-color-neutral-light)  8%, black);
 
     --sf-color-neutral-superlight: oklch(from var(--sf-color-neutral) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-neutral-xlight:     oklch(from var(--sf-color-neutral) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -610,17 +538,6 @@
     --sf-color-neutral-ghost:      oklch(from var(--sf-color-neutral) l c h / 0.05);
 
     /* ─── surface ──────────────────────────────────────────── */
-    --sf-color-surface-50:         color-mix(in oklch, var(--sf-color-surface-light)  4%, white);
-    --sf-color-surface-100:        color-mix(in oklch, var(--sf-color-surface-light)  8%, white);
-    --sf-color-surface-200:        color-mix(in oklch, var(--sf-color-surface-light) 20%, white);
-    --sf-color-surface-300:        color-mix(in oklch, var(--sf-color-surface-light) 40%, white);
-    --sf-color-surface-400:        color-mix(in oklch, var(--sf-color-surface-light) 65%, white);
-    --sf-color-surface-500:        var(--sf-color-surface-light);
-    --sf-color-surface-600:        color-mix(in oklch, var(--sf-color-surface-light) 82%, black);
-    --sf-color-surface-700:        color-mix(in oklch, var(--sf-color-surface-light) 62%, black);
-    --sf-color-surface-800:        color-mix(in oklch, var(--sf-color-surface-light) 38%, black);
-    --sf-color-surface-900:        color-mix(in oklch, var(--sf-color-surface-light) 18%, black);
-    --sf-color-surface-950:        color-mix(in oklch, var(--sf-color-surface-light)  8%, black);
 
     --sf-color-surface-superlight: oklch(from var(--sf-color-surface) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-surface-xlight:     oklch(from var(--sf-color-surface) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -635,17 +552,6 @@
     --sf-color-surface-ghost:      oklch(from var(--sf-color-surface) l c h / 0.05);
 
     /* ─── success ───────────────────────────────────────────── */
-    --sf-color-success-50:         color-mix(in oklch, var(--sf-color-success-light)  4%, white);
-    --sf-color-success-100:        color-mix(in oklch, var(--sf-color-success-light)  8%, white);
-    --sf-color-success-200:        color-mix(in oklch, var(--sf-color-success-light) 20%, white);
-    --sf-color-success-300:        color-mix(in oklch, var(--sf-color-success-light) 40%, white);
-    --sf-color-success-400:        color-mix(in oklch, var(--sf-color-success-light) 65%, white);
-    --sf-color-success-500:        var(--sf-color-success-light);
-    --sf-color-success-600:        color-mix(in oklch, var(--sf-color-success-light) 82%, black);
-    --sf-color-success-700:        color-mix(in oklch, var(--sf-color-success-light) 62%, black);
-    --sf-color-success-800:        color-mix(in oklch, var(--sf-color-success-light) 38%, black);
-    --sf-color-success-900:        color-mix(in oklch, var(--sf-color-success-light) 18%, black);
-    --sf-color-success-950:        color-mix(in oklch, var(--sf-color-success-light)  8%, black);
 
     --sf-color-success-superlight: oklch(from var(--sf-color-success) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-success-xlight:     oklch(from var(--sf-color-success) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -660,17 +566,6 @@
     --sf-color-success-ghost:      oklch(from var(--sf-color-success) l c h / 0.05);
 
     /* ─── warning ───────────────────────────────────────────── */
-    --sf-color-warning-50:         color-mix(in oklch, var(--sf-color-warning-light)  4%, white);
-    --sf-color-warning-100:        color-mix(in oklch, var(--sf-color-warning-light)  8%, white);
-    --sf-color-warning-200:        color-mix(in oklch, var(--sf-color-warning-light) 20%, white);
-    --sf-color-warning-300:        color-mix(in oklch, var(--sf-color-warning-light) 40%, white);
-    --sf-color-warning-400:        color-mix(in oklch, var(--sf-color-warning-light) 65%, white);
-    --sf-color-warning-500:        var(--sf-color-warning-light);
-    --sf-color-warning-600:        color-mix(in oklch, var(--sf-color-warning-light) 82%, black);
-    --sf-color-warning-700:        color-mix(in oklch, var(--sf-color-warning-light) 62%, black);
-    --sf-color-warning-800:        color-mix(in oklch, var(--sf-color-warning-light) 38%, black);
-    --sf-color-warning-900:        color-mix(in oklch, var(--sf-color-warning-light) 18%, black);
-    --sf-color-warning-950:        color-mix(in oklch, var(--sf-color-warning-light)  8%, black);
 
     --sf-color-warning-superlight: oklch(from var(--sf-color-warning) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-warning-xlight:     oklch(from var(--sf-color-warning) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -685,17 +580,6 @@
     --sf-color-warning-ghost:      oklch(from var(--sf-color-warning) l c h / 0.05);
 
     /* ─── error ─────────────────────────────────────────────── */
-    --sf-color-error-50:         color-mix(in oklch, var(--sf-color-error-light)  4%, white);
-    --sf-color-error-100:        color-mix(in oklch, var(--sf-color-error-light)  8%, white);
-    --sf-color-error-200:        color-mix(in oklch, var(--sf-color-error-light) 20%, white);
-    --sf-color-error-300:        color-mix(in oklch, var(--sf-color-error-light) 40%, white);
-    --sf-color-error-400:        color-mix(in oklch, var(--sf-color-error-light) 65%, white);
-    --sf-color-error-500:        var(--sf-color-error-light);
-    --sf-color-error-600:        color-mix(in oklch, var(--sf-color-error-light) 82%, black);
-    --sf-color-error-700:        color-mix(in oklch, var(--sf-color-error-light) 62%, black);
-    --sf-color-error-800:        color-mix(in oklch, var(--sf-color-error-light) 38%, black);
-    --sf-color-error-900:        color-mix(in oklch, var(--sf-color-error-light) 18%, black);
-    --sf-color-error-950:        color-mix(in oklch, var(--sf-color-error-light)  8%, black);
 
     --sf-color-error-superlight: oklch(from var(--sf-color-error) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-error-xlight:     oklch(from var(--sf-color-error) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -710,17 +594,6 @@
     --sf-color-error-ghost:      oklch(from var(--sf-color-error) l c h / 0.05);
 
     /* ─── info ──────────────────────────────────────────────── */
-    --sf-color-info-50:         color-mix(in oklch, var(--sf-color-info-light)  4%, white);
-    --sf-color-info-100:        color-mix(in oklch, var(--sf-color-info-light)  8%, white);
-    --sf-color-info-200:        color-mix(in oklch, var(--sf-color-info-light) 20%, white);
-    --sf-color-info-300:        color-mix(in oklch, var(--sf-color-info-light) 40%, white);
-    --sf-color-info-400:        color-mix(in oklch, var(--sf-color-info-light) 65%, white);
-    --sf-color-info-500:        var(--sf-color-info-light);
-    --sf-color-info-600:        color-mix(in oklch, var(--sf-color-info-light) 82%, black);
-    --sf-color-info-700:        color-mix(in oklch, var(--sf-color-info-light) 62%, black);
-    --sf-color-info-800:        color-mix(in oklch, var(--sf-color-info-light) 38%, black);
-    --sf-color-info-900:        color-mix(in oklch, var(--sf-color-info-light) 18%, black);
-    --sf-color-info-950:        color-mix(in oklch, var(--sf-color-info-light)  8%, black);
 
     --sf-color-info-superlight: oklch(from var(--sf-color-info) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-info-xlight:     oklch(from var(--sf-color-info) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -735,17 +608,6 @@
     --sf-color-info-ghost:      oklch(from var(--sf-color-info) l c h / 0.05);
 
     /* ─── danger ────────────────────────────────────────────── */
-    --sf-color-danger-50:         color-mix(in oklch, var(--sf-color-danger-light)  4%, white);
-    --sf-color-danger-100:        color-mix(in oklch, var(--sf-color-danger-light)  8%, white);
-    --sf-color-danger-200:        color-mix(in oklch, var(--sf-color-danger-light) 20%, white);
-    --sf-color-danger-300:        color-mix(in oklch, var(--sf-color-danger-light) 40%, white);
-    --sf-color-danger-400:        color-mix(in oklch, var(--sf-color-danger-light) 65%, white);
-    --sf-color-danger-500:        var(--sf-color-danger-light);
-    --sf-color-danger-600:        color-mix(in oklch, var(--sf-color-danger-light) 82%, black);
-    --sf-color-danger-700:        color-mix(in oklch, var(--sf-color-danger-light) 62%, black);
-    --sf-color-danger-800:        color-mix(in oklch, var(--sf-color-danger-light) 38%, black);
-    --sf-color-danger-900:        color-mix(in oklch, var(--sf-color-danger-light) 18%, black);
-    --sf-color-danger-950:        color-mix(in oklch, var(--sf-color-danger-light)  8%, black);
 
     --sf-color-danger-superlight: oklch(from var(--sf-color-danger) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
     --sf-color-danger-xlight:     oklch(from var(--sf-color-danger) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
@@ -761,9 +623,6 @@
 
   }
 
-
-
-
   /* ============================================================
      NON-COLOR DESIGN TOKENS
      ============================================================ */
@@ -778,7 +637,6 @@
     --sf-text-display-scale: 1;
     --sf-radius-scale:       1;
     --sf-motion-scale:       1;
-
 
     /* ----------------------------------------------------------
        Font families
@@ -797,7 +655,6 @@
     --sf-font-features:  normal;  /* e.g. "cv11", "ss01" */
     --sf-font-variation: normal;  /* e.g. "wght" 450, "opsz" 32 */
     --sf-optical-sizing: auto;
-
 
     /* ----------------------------------------------------------
        Font weights
@@ -822,7 +679,6 @@
        Override to match your nav design (e.g. semibold for thin fonts). */
     --sf-current-font-weight: var(--sf-font-weight-bold);
 
-
     /* ----------------------------------------------------------
        Font sizes — fluid
        ---------------------------------------------------------- */
@@ -840,7 +696,6 @@
     --sf-text-display-m: clamp(3rem,    calc(0.014814814814814815  * (100vw - 22.5rem) + 3rem),    4rem);
     --sf-text-display-l: clamp(3.75rem, calc(0.023407407407407408  * (100vw - 22.5rem) + 3.75rem), 5.33rem);
 
-
     /* ----------------------------------------------------------
        Line heights & letter spacing
        ---------------------------------------------------------- */
@@ -854,7 +709,6 @@
     --sf-tracking-wide:     0.025em;
     --sf-tracking-wider:    0.05em;
     --sf-tracking-widest:   0.1em;
-
 
     /* ----------------------------------------------------------
        Icon sizes — em-based by design.
@@ -877,7 +731,6 @@
     --sf-icon-xl:  3em;
     --sf-icon-2xl: 4em;
 
-
     /* ----------------------------------------------------------
        Spacing — fixed
        ---------------------------------------------------------- */
@@ -896,7 +749,6 @@
     --sf-space-3xl: calc(clamp(2.44rem, calc(0.057333333333333326   * (100vw - 22.5rem) + 2.44rem), 6.31rem) * var(--sf-space-scale));
     --sf-space-4xl: calc(clamp(3.05rem, calc(0.07955555555555556    * (100vw - 22.5rem) + 3.05rem), 8.42rem) * var(--sf-space-scale));
 
-
     /* ----------------------------------------------------------
        UI sizes
        ---------------------------------------------------------- */
@@ -906,7 +758,6 @@
     --sf-size-l:  2.75rem;
     --sf-size-xl: 3.5rem;
 
-
     /* ----------------------------------------------------------
        Containers
        ---------------------------------------------------------- */
@@ -915,7 +766,6 @@
     --sf-container-default: 75rem;
     --sf-container-wide:    90rem;
     --sf-container-full:    100%;
-
 
     /* ----------------------------------------------------------
        Aspect ratios
@@ -927,7 +777,6 @@
     --sf-ratio-3-2:      3 / 2;
     --sf-ratio-portrait: 3 / 4;
     --sf-ratio-golden:   1.618 / 1;
-
 
     /* ----------------------------------------------------------
        Border widths
@@ -964,7 +813,6 @@
     --sf-divider-style: solid;
     --sf-divider-color: var(--sf-color-border);
 
-
     /* ----------------------------------------------------------
        Border radius
        --sf-radius-full: intentionally not scaled by --sf-radius-scale.
@@ -995,7 +843,6 @@
        Maths: outer = inner + padding ⇒ aligned curves at corners. */
     --sf-radius-outer: calc(var(--sf-radius-m) + var(--sf-component-pad));
 
-
     /* ----------------------------------------------------------
        Shadows — BEM consumer API
        Use in your own classes: .card { box-shadow: var(--sf-shadow-m); }
@@ -1025,7 +872,6 @@
                        0 40px 100px -8px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7));
     --sf-shadow-inner: inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
 
-
     /* ----------------------------------------------------------
        Text shadows — share --sf-shadow-color / --sf-shadow-strength
        ---------------------------------------------------------- */
@@ -1038,7 +884,6 @@
     --sf-drop-shadow-s: drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)));
     --sf-drop-shadow-m: drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7)));
     --sf-drop-shadow-l: drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)));
-
 
     /* ----------------------------------------------------------
        Blur & opacity
@@ -1061,7 +906,6 @@
     --sf-opacity-75:  0.75;
     --sf-opacity-100: 1;
 
-
     /* ----------------------------------------------------------
        Motion & easing
        ---------------------------------------------------------- */
@@ -1080,7 +924,6 @@
     --sf-ease-elastic:   linear(0, 0.3, 1.2, 0.9, 1.05, 1);
     --sf-ease-bounce:    linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1);
     --sf-ease-overshoot: linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1);
-
 
     /* ----------------------------------------------------------
        Animation presets — pair keyframes (core/motion.css) with
@@ -1110,7 +953,6 @@
     --sf-animation-delay-4: calc(300ms * var(--sf-motion-scale));
     --sf-animation-delay-5: calc(375ms * var(--sf-motion-scale));
 
-
     /* ----------------------------------------------------------
        Scroll-driven animation range — consumer API. Attach these
        to your own scroll-timeline via animation-range. Not consumed
@@ -1118,7 +960,6 @@
        ---------------------------------------------------------- */
     --sf-scroll-timeline-range-start: entry 0%;
     --sf-scroll-timeline-range-end:   cover 30%;
-
 
     /* ----------------------------------------------------------
        Mask scrim — edge-fade stops for scroll reels / overflow.
@@ -1129,7 +970,6 @@
        ---------------------------------------------------------- */
     --sf-mask-scrim-start: var(--sf-space-l);
     --sf-mask-scrim-end:   var(--sf-space-l);
-
 
     /* ----------------------------------------------------------
        Z-index
@@ -1142,7 +982,6 @@
     --sf-z-high:  500;
     --sf-z-top:   900;
     --sf-z-max:  9999;
-
 
     /* ----------------------------------------------------------
        Layout & a11y
@@ -1169,14 +1008,12 @@
     --sf-safe-left:   env(safe-area-inset-left,   0px);
     --sf-safe-right:  env(safe-area-inset-right,  0px);
 
-
     /* ----------------------------------------------------------
        Print
        ---------------------------------------------------------- */
     --sf-print-page-margin: 2cm;
     --sf-print-page-size:   a4;
     --sf-print-base-size:   11pt;
-
 
     /* ----------------------------------------------------------
        Stroke widths
@@ -1187,7 +1024,6 @@
     --sf-stroke-heavy:   3px;
 
   }
-
 
   /* ============================================================
      TYPOGRAPHY ALIASES
@@ -1239,7 +1075,6 @@
     --sf-h6-font-weight:    var(--sf-font-weight-heading);
     --sf-h6-letter-spacing: var(--sf-tracking-wide);
 
-
     /* ----------------------------------------------------------
        Spacing aliases — BEM consumer API
        Use in your own BEM classes: .nav { gap: var(--sf-gap); }
@@ -1259,7 +1094,6 @@
        if you want one): `:root { --sf-link-external-marker: " →" }`. */
     --sf-link-external-marker: " \2197";  /* " ↗" — consumed by .sf-link-external */
 
-
     /* ----------------------------------------------------------
        Section padding
        ---------------------------------------------------------- */
@@ -1270,7 +1104,6 @@
     --sf-section-pad--l:  var(--sf-space-4xl);
     --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5);
     --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2);
-
 
     /* ----------------------------------------------------------
        Transition shorthands
