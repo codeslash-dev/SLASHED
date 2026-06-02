@@ -21,6 +21,11 @@ function writeFile(rel, content) {
 
 function sync(rel, pattern, replacement, label) {
   const original = readFile(rel);
+  if (!pattern.test(original)) {
+    throw new Error(`version-sync: pattern not found in ${rel} for "${label}"`);
+  }
+  // Reset lastIndex in case the pattern is a sticky/global regex used more than once.
+  if (pattern.lastIndex !== undefined) pattern.lastIndex = 0;
   const updated = original.replace(pattern, replacement);
   if (updated === original) {
     console.log(`  ok   ${rel}  (${label} already up to date)`);

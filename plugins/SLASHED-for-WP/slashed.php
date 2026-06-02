@@ -106,8 +106,6 @@ if ( Slashed_Settings::is_enabled( 'gutenberg' ) ) {
 
 // ─── Activation / deactivation ───────────────────────────────────────────────
 
-register_activation_hook( __FILE__, '__return_true' );
-
 register_deactivation_hook( __FILE__, function () {
 	$timestamp = wp_next_scheduled( 'slashed_bricks_version_check' );
 	if ( $timestamp ) {

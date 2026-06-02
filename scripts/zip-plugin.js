@@ -23,7 +23,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 
 const ROOT   = path.resolve(__dirname, '..');
 const OUTPUT = path.join(ROOT, 'dist', 'slashed.zip');
@@ -47,7 +47,11 @@ const INCLUDE = [
 ];
 
 function copyRecursive(src, dest) {
-  const stat = fs.statSync(src);
+  const stat = fs.lstatSync(src);
+  if (stat.isSymbolicLink()) {
+    console.warn(`[zip-plugin] warning: skipping symlink ${src}`);
+    return;
+  }
   if (stat.isDirectory()) {
     fs.mkdirSync(dest, { recursive: true });
     for (const entry of fs.readdirSync(src)) {
@@ -82,7 +86,7 @@ function main() {
 
   try {
     execSync('which zip', { stdio: 'ignore' });
-    execSync(`zip -r "${OUTPUT}" slashed`, { cwd: STAGE, stdio: 'pipe' });
+    execFileSync('zip', ['-r', OUTPUT, 'slashed'], { cwd: STAGE, stdio: 'pipe' });
   } catch {
     createZipFromDir(STAGE_PLUGIN, OUTPUT, 'slashed');
   }

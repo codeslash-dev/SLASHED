@@ -50,11 +50,7 @@ class Slashed_Core_Enqueue {
 		wp_enqueue_style( 'slashed-framework', $url, array(), Slashed_CSS_Loader::get_version( $url ) );
 
 		// HTML font-size override — affects all rem-based framework values.
-		$settings  = Slashed_Token_Store::get_plugin_settings();
-		$font_size = isset( $settings['html_font_size'] ) ? (string) $settings['html_font_size'] : '';
-		if ( '100' === $font_size || '62.5' === $font_size ) {
-			wp_add_inline_style( 'slashed-framework', 'html { font-size: ' . $font_size . '% !important; }' );
-		}
+		$this->inject_html_font_size_css( 'slashed-framework' );
 	}
 
 	/**
@@ -75,10 +71,20 @@ class Slashed_Core_Enqueue {
 		// matches the public site. The block editor is always iframed in WP 6.4+
 		// (our declared minimum), so this rule targets the canvas <html>, not
 		// the surrounding wp-admin chrome.
+		$this->inject_html_font_size_css( 'slashed-framework' );
+	}
+
+	/**
+	 * Add an inline html { font-size } rule to the given stylesheet handle when
+	 * the plugin's html_font_size setting is set to a supported value.
+	 *
+	 * @param string $handle The registered stylesheet handle to attach the inline style to.
+	 */
+	private function inject_html_font_size_css( string $handle ): void {
 		$settings  = Slashed_Token_Store::get_plugin_settings();
 		$font_size = isset( $settings['html_font_size'] ) ? (string) $settings['html_font_size'] : '';
 		if ( '100' === $font_size || '62.5' === $font_size ) {
-			wp_add_inline_style( 'slashed-framework', 'html { font-size: ' . $font_size . '% !important; }' );
+			wp_add_inline_style( $handle, 'html { font-size: ' . $font_size . '% !important; }' );
 		}
 	}
 }

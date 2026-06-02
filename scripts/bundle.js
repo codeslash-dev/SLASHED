@@ -93,7 +93,9 @@ function stripLayerWrappers(content, fileLabel) {
   let out = content.replace(/^@layer\b[^{;]*;[ \t]*\r?\n?/gm, '');
 
   // 2. Unwrap each @layer slashed.X { … } block by walking its braces.
-  for (let guard = 0; guard < 32; guard++) {
+  let changed = true;
+  while (changed) {
+    changed = false;
     const header = /^@layer[ \t]+[\w.\s,-]+\{/m.exec(out);
     if (!header) break;
     const start = header.index;
@@ -112,6 +114,7 @@ function stripLayerWrappers(content, fileLabel) {
     const before = out.slice(0, start).replace(/[ \t]*$/, '');
     const after = out.slice(closeBrace + 1).replace(/^[ \t]*\r?\n/, '');
     out = `${before}${dedented}\n${after}`;
+    changed = true;
   }
 
   return out;

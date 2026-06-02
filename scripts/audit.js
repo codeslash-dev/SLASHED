@@ -36,12 +36,8 @@ const { TOKEN_FILES, CLASS_FILES } = require('./registry-sources');
 // All framework source files — token files + class files + everything else
 // in core/ and optional/ — used for the unused-token cross-reference.
 const ALL_SOURCE_FILES = [
-  ...TOKEN_FILES,
-  ...CLASS_FILES,
-  'core/base.css',
-  'core/reset.css',
-  'core/themes.css',
-  'optional/legacy.css',
+  ...fs.readdirSync(path.join(ROOT, 'core')).filter(f => f.endsWith('.css')).map(f => `core/${f}`),
+  ...fs.readdirSync(path.join(ROOT, 'optional')).filter(f => f.endsWith('.css')).map(f => `optional/${f}`),
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────

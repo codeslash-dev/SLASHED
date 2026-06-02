@@ -67,7 +67,7 @@ function generateColorDeclarations(settings) {
   const declarations = [];
 
   // Brand colors (light): brand_primary -> --sf-color-primary-light.
-  const brandColors = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
+  const brandColors = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface'];
   for (const color of brandColors) {
     const key = `brand_${color}`;
     if (hasValue(settings[key])) {
