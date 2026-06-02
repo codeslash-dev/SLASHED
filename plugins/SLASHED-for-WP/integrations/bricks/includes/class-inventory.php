@@ -61,6 +61,13 @@ class Slashed_Bricks_Inventory {
 	private static $hex_map_cache = null;
 
 	/**
+	 * Per-request cache for the resolved DARK-mode color hex map.
+	 *
+	 * @var array|null
+	 */
+	private static $hex_map_dark_cache = null;
+
+	/**
 	 * Get the full inventory, resolving and caching on first access.
 	 *
 	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
@@ -150,8 +157,9 @@ class Slashed_Bricks_Inventory {
 	 * Reset the per-request cache. Mostly useful for tests.
 	 */
 	public static function flush() {
-		self::$cache         = null;
-		self::$hex_map_cache = null;
+		self::$cache              = null;
+		self::$hex_map_cache      = null;
+		self::$hex_map_dark_cache = null;
 	}
 
 	/**
@@ -181,11 +189,46 @@ class Slashed_Bricks_Inventory {
 	}
 
 	/**
+	 * Get the resolved DARK-mode hex color map for all --sf-color-* variables.
+	 *
+	 * Companion to get_color_hex_map(); used by the editor Color System panel
+	 * to preview every token's dark variant alongside its light value.
+	 *
+	 * @return array<string, string> Map of variable name to hex string.
+	 */
+	public static function get_color_hex_map_dark() {
+		if ( null !== self::$hex_map_dark_cache ) {
+			return self::$hex_map_dark_cache;
+		}
+
+		$inv = self::get();
+
+		$color_values = isset( $inv['color_values'] ) ? $inv['color_values'] : array();
+
+		// Merge admin-saved color overrides so dark previews track the same
+		// customized -light source tokens the light map uses.
+		$admin_overrides = self::get_admin_color_overrides();
+		if ( ! empty( $admin_overrides ) ) {
+			$color_values = array_merge( $color_values, $admin_overrides );
+		}
+
+		self::$hex_map_dark_cache = Slashed_Bricks_Color_Resolver::resolve_dark( $color_values );
+
+		return self::$hex_map_dark_cache;
+	}
+
+	/**
 	 * Read admin-saved color overrides and map them to CSS variable names.
 	 *
 	 * Mirrors the mapping logic in Slashed_CSS_Generator::generate_color_declarations():
-	 *   - brand_primary   -> --sf-color-primary-light
-	 *   - status_success  -> --sf-color-success-light
+	 *   - brand_primary       -> --sf-color-primary-light
+	 *   - status_success      -> --sf-color-success-light
+	 *   - brand_dark_primary  -> --sf-color-primary-dark   (when dark overrides on)
+	 *   - status_dark_success -> --sf-color-success-dark   (when dark overrides on)
+	 *
+	 * Both the `-light` source and any explicit `-dark` override are returned
+	 * so the light AND dark hex maps stay in sync with what the generated CSS
+	 * actually emits — the dark resolver honours `-dark` over auto-derivation.
 	 *
 	 * @return array<string, string> Map of CSS variable name to color value.
 	 */
@@ -199,21 +242,41 @@ class Slashed_Bricks_Inventory {
 		$settings = $tokens['colors'];
 		$overrides = array();
 
-		// Brand colors: brand_primary -> --sf-color-primary-light.
-		$brand_colors = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
+
+		// Light source tokens: brand_primary -> --sf-color-primary-light.
 		foreach ( $brand_colors as $color ) {
 			$key = 'brand_' . $color;
 			if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
 				$overrides[ '--sf-color-' . $color . '-light' ] = $settings[ $key ];
 			}
 		}
-
-		// Status colors: status_success -> --sf-color-success-light.
-		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 		foreach ( $status_colors as $color ) {
 			$key = 'status_' . $color;
 			if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
 				$overrides[ '--sf-color-' . $color . '-light' ] = $settings[ $key ];
+			}
+		}
+
+		// Explicit dark overrides — gated by the same flag the CSS generator
+		// uses, so the preview matches the emitted CSS. When the flag is off,
+		// dark stays auto-derived from the light source (no -dark keys emitted).
+		$dark_enabled = ! isset( $settings['dark_overrides_enabled'] )
+			|| '0' !== $settings['dark_overrides_enabled'];
+
+		if ( $dark_enabled ) {
+			foreach ( $brand_colors as $color ) {
+				$key = 'brand_dark_' . $color;
+				if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
+					$overrides[ '--sf-color-' . $color . '-dark' ] = $settings[ $key ];
+				}
+			}
+			foreach ( $status_colors as $color ) {
+				$key = 'status_dark_' . $color;
+				if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
+					$overrides[ '--sf-color-' . $color . '-dark' ] = $settings[ $key ];
+				}
 			}
 		}
 

@@ -220,3 +220,98 @@ export function setElementLabel(id, label) {
   const el = findElement(id);
   if (el) el.label = label;
 }
+
+/**
+ * Resolve the id of the element the user currently has selected, or null.
+ *
+ * Bricks does not publish a stable JS handle for "the active element", and
+ * the internal key has shifted across versions. We probe a few known shapes
+ * on `$_state` first, then fall back to scraping the active row in the
+ * structure panel (`#bricks-structure li[data-id].…active…`) — DOM-based and
+ * version-tolerant, matching how main.js already reads that panel. Returns
+ * null when nothing is selected (the Color panel then degrades to copy-only).
+ */
+export function getActiveElementId() {
+  // 1. Known $_state shapes (newest-first). Each may be an element object
+  //    ({id,…}) or a bare id string depending on the Bricks build.
+  if (_state) {
+    const candidates = [
+      _state.activeElement,
+      _state.activeElementId,
+      _state.activeId,
+      _state.selectedElement,
+    ];
+    for (const c of candidates) {
+      if (c && typeof c === 'object' && typeof c.id === 'string' && c.id) return c.id;
+      if (typeof c === 'string' && c) return c;
+    }
+  }
+
+  // 2. DOM fallback: the active structure-panel row.
+  if (typeof document !== 'undefined') {
+    // `.active` / `.is-active` only — avoid a broad [class*="active"] that
+    // would also match `inactive`.
+    const row = document.querySelector(
+      '#bricks-structure li[data-id].active, #bricks-structure li[data-id].is-active'
+    );
+    const id = row?.getAttribute('data-id');
+    if (id) return id;
+  }
+
+  return null;
+}
+
+/**
+ * Bricks element-settings path for each Color-panel apply target.
+ *
+ * These are the standard Bricks "_" style controls; a colour control stores
+ * an object whose `raw` field carries the literal CSS value (so a
+ * `var(--sf-color-*)` reference round-trips intact). We deliberately write a
+ * minimal `{ raw }` object — Bricks can't resolve a CSS variable to
+ * hex/hsl/rgb at edit time, so those sibling fields have no meaningful value
+ * to set here.
+ *
+ * @type {Record<string, [string, string]>}
+ */
+const COLOR_TARGETS = {
+  text: ['_typography', 'color'],
+  background: ['_background', 'color'],
+  border: ['_border', 'color'],
+};
+
+/** The apply targets the Color panel offers, in display order. */
+export const COLOR_TARGET_KEYS = Object.keys(COLOR_TARGETS);
+
+/**
+ * Apply a colour value to one of an element's style controls.
+ *
+ * Mutates the reactive `el.settings` proxy in place (same approach as
+ * setElementClasses), so Vue picks up the change and the canvas repaints.
+ * Returns true on success, false when the element or target is unknown —
+ * the caller treats false as "fell back to clipboard only".
+ *
+ * @param {string} id      Element id.
+ * @param {string} target  One of COLOR_TARGET_KEYS.
+ * @param {string} rawValue e.g. "var(--sf-color-primary)".
+ * @returns {boolean}
+ */
+export function setElementColor(id, target, rawValue) {
+  const path = COLOR_TARGETS[target];
+  if (!path) return false;
+  const el = findElement(id);
+  if (!el) return false;
+
+  if (!el.settings || typeof el.settings !== 'object') el.settings = {};
+  const [group, key] = path;
+  if (!el.settings[group] || typeof el.settings[group] !== 'object') {
+    el.settings[group] = {};
+  }
+  el.settings[group][key] = { raw: rawValue };
+  return true;
+}
+
+/** Human label for an element id (structure-panel label), or '' when unknown. */
+export function getElementLabel(id) {
+  const el = findElement(id);
+  return el && typeof el.label === 'string' ? el.label : '';
+}
