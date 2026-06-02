@@ -74,7 +74,7 @@
      * --sf-tag-radius:          var(--sf-radius-s);
      * --sf-tag-gap:             var(--sf-space-2xs);
      * --sf-tag-font-size:       var(--sf-text-xs);
-     * --sf-tag-bg:              var(--sf-color-well);
+     * --sf-tag-bg:              var(--sf-color-inset);
      * --sf-tag-border-width:    var(--sf-border-width-1);
      * --sf-tag-border-color:    var(--sf-color-border);
      */
@@ -96,7 +96,7 @@
      *
      * --sf-avatar-size:         2.5rem;
      * --sf-avatar-radius:       var(--sf-radius-full, 50%);
-     * --sf-avatar-bg:           var(--sf-color-well);
+     * --sf-avatar-bg:           var(--sf-color-inset);
      * --sf-avatar-font-weight:  var(--sf-font-weight-semibold);
      * --sf-avatar-border-width: 0;
      * --sf-avatar-border-color: var(--sf-color-border);
@@ -120,7 +120,7 @@
      * SKELETON TOKENS
      * ============================================================
      *
-     * --sf-skeleton-bg:         var(--sf-color-well);
+     * --sf-skeleton-bg:         var(--sf-color-inset);
      * --sf-skeleton-shimmer:    var(--sf-color-raised);
      * --sf-skeleton-radius:     var(--sf-radius-s);
      * --sf-skeleton-duration:   1.5s;

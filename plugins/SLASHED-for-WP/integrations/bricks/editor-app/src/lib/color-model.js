@@ -32,7 +32,7 @@ const PREFIX = '--sf-color-';
 // change rarely; if you add or rename a family, update all three in sync.
 
 /** Brand families, in canonical display order. */
-export const BRAND_FAMILIES = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
+export const BRAND_FAMILIES = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface'];
 
 /** Status families, in canonical display order. */
 export const STATUS_FAMILIES = ['success', 'warning', 'error', 'info', 'danger'];
@@ -53,7 +53,7 @@ const ALIAS_ORDER = [
  * surfaces, borders, links) at the top.
  */
 const SEMANTIC_PREFIX_ORDER = [
-  'text', 'heading', 'bg', 'surface', 'well', 'raised', 'overlay', 'inverse',
+  'text', 'heading', 'bg', 'surface', 'inset', 'raised', 'overlay', 'inverse',
   'border', 'link', 'code', 'selection', 'mark', 'dim',
 ];
 
@@ -71,7 +71,7 @@ export const FAMILY_INFO = {
   tertiary:  { tagline: 'Accent / highlight', use: 'Badges, tags, decorative highlights.' },
   action:    { tagline: 'Interactive & links', use: 'Links, focus rings, anything clickable.' },
   neutral:   { tagline: 'Text, icons & dividers', use: 'Body text, borders, neutral UI chrome.' },
-  base:      { tagline: 'Page & surface backgrounds', use: 'Page background and raised surfaces.' },
+  surface:   { tagline: 'Page & surface backgrounds', use: 'Page background and raised surfaces.' },
   success:   { tagline: 'Positive / confirmation', use: 'Success messages and valid state.' },
   warning:   { tagline: 'Caution', use: 'Warnings and at-risk / pending state.' },
   error:     { tagline: 'Form & validation errors', use: 'Invalid inputs and error messages.' },
@@ -90,9 +90,9 @@ const SEMANTIC_SUBGROUPS = [
   { id: 'text-on', label: 'Text on color', match: (k) => k.startsWith('text--on') },
   { id: 'text', label: 'Text', match: (k) => k === 'text' || k === 'heading' || k.startsWith('text-') },
   // Interactive bg states (bg--hover/active/…) before surfaces so the plain
-  // surface tokens (bg, surface, well, raised, overlay, inverse) stay clean.
+  // surface tokens (bg, surface, inset, raised, overlay, inverse) stay clean.
   { id: 'state', label: 'Interactive states', match: (k) => k.startsWith('bg--') },
-  { id: 'surface', label: 'Surfaces & backgrounds', match: (k) => ['bg', 'surface', 'well', 'raised', 'overlay', 'inverse'].some((p) => k === p || k.startsWith(p + '-')) },
+  { id: 'surface', label: 'Surfaces & backgrounds', match: (k) => ['bg', 'surface', 'inset', 'raised', 'overlay', 'inverse'].some((p) => k === p || k.startsWith(p + '-')) },
   { id: 'border', label: 'Borders', match: (k) => k === 'border' || k.startsWith('border-') },
   { id: 'link', label: 'Links', match: (k) => k === 'link' || k.startsWith('link-') },
   { id: 'select', label: 'Selection & marks', match: (k) => k.startsWith('selection') || k.startsWith('mark') || k === 'dim' },

@@ -111,7 +111,7 @@
        ---------------------------------------------------------- */
     --sf-icon-box-pad:    0.5em;
     --sf-icon-box-radius: var(--sf-radius-s);
-    --sf-icon-box-bg:     var(--sf-color-well);
+    --sf-icon-box-bg:     var(--sf-color-inset);
     --sf-icon-box-border: var(--sf-border-width-1) solid var(--sf-color-border);
 
     /* ----------------------------------------------------------

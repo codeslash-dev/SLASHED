@@ -40,7 +40,7 @@ class Slashed_Bricks_Color_Resolver {
 		'tertiary'  => 'oklch(0.48 0.14 310)',
 		'action'    => 'oklch(0.60 0.16 210)',
 		'neutral'   => 'oklch(0.45 0.02 260)',
-		'base'      => 'oklch(0.98 0.005 260)',
+		'surface'   => 'oklch(0.98 0.005 260)',
 		'success'   => 'oklch(0.48 0.17 150)',
 		'warning'   => 'oklch(0.75 0.17 80)',
 		'error'     => 'oklch(0.62 0.20 35)',
@@ -49,7 +49,7 @@ class Slashed_Bricks_Color_Resolver {
 	);
 
 	/**
-	 * Light step percentages: step => mix percentage of base color with --sf-color-base.
+	 * Light step percentages: step => mix percentage of base color with --sf-color-surface.
 	 *
 	 * @var array<int, float>
 	 */
@@ -135,10 +135,10 @@ class Slashed_Bricks_Color_Resolver {
 	 *
 	 * Mirrors the framework's dark auto-derivation (core/tokens.css): each
 	 * family's dark source is lightened from its light source via
-	 * clamp(0.65, 0.95 - l*0.5, 0.88) (base inverts via clamp(0.16, 1.18 - l, 0.24)),
+	 * clamp(0.65, 0.95 - l*0.5, 0.88) (surface inverts via clamp(0.16, 1.18 - l, 0.24)),
 	 * then the same scale/alpha/alias machinery runs on the dark sources.
 	 * Semantic tokens use the direction-flipped dark formulas. Alpha steps
-	 * composite over the dark base surface rather than white.
+	 * composite over the dark surface rather than white.
 	 *
 	 * Like resolve(), the output is an intentional approximation for builder
 	 * swatch previews, not a pixel-perfect replica of browser-rendered
@@ -151,10 +151,10 @@ class Slashed_Bricks_Color_Resolver {
 		$light_sources = self::resolve_sources( $color_values );
 		$dark_sources  = self::derive_dark_sources( $light_sources, $color_values );
 
-		// Alpha swatches composite over the dark base surface, not white, so
+		// Alpha swatches composite over the dark surface, not white, so
 		// translucent tokens read the way they do on a dark page.
-		$base_dark_hex = isset( $dark_sources['base'] )
-			? self::oklch_to_hex( $dark_sources['base'][0], $dark_sources['base'][1], $dark_sources['base'][2] )
+		$base_dark_hex = isset( $dark_sources['surface'] )
+			? self::oklch_to_hex( $dark_sources['surface'][0], $dark_sources['surface'][1], $dark_sources['surface'][2] )
 			: '#1a1b1e';
 
 		$hex_map = self::build_family_scales( $dark_sources, self::hex_to_rgb( $base_dark_hex ) );
@@ -263,7 +263,7 @@ class Slashed_Bricks_Color_Resolver {
 
 			// 2. Auto-derive from the light source.
 			list( $l, $c, $h ) = $lch;
-			if ( 'base' === $family ) {
+			if ( 'surface' === $family ) {
 				$dl = max( 0.16, min( 1.18 - $l, 0.24 ) );
 				$dc = $c * 0.5;
 			} else {
@@ -331,9 +331,7 @@ class Slashed_Bricks_Color_Resolver {
 		$hex_map['--sf-color-text'] = $dark_text;
 		$hex_map['--sf-color-bg']   = '#fcfcfd';
 
-		if ( isset( $hex_map['--sf-color-base'] ) ) {
-			$hex_map['--sf-color-surface'] = $hex_map['--sf-color-base'];
-		} else {
+		if ( ! isset( $hex_map['--sf-color-surface'] ) ) {
 			$hex_map['--sf-color-surface'] = '#fafafa';
 		}
 
@@ -385,14 +383,14 @@ class Slashed_Bricks_Color_Resolver {
 		$hex_map['--sf-color-bg--disabled'] = $hex_map['--sf-color-surface']; // = well ≈ surface
 
 		// ---- Well, raised, inverse, overlay ----
-		if ( isset( $sources['base'] ) ) {
-			list( $bl, $bc, $bh ) = $sources['base'];
-			$hex_map['--sf-color-well']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
+		if ( isset( $sources['surface'] ) ) {
+			list( $bl, $bc, $bh ) = $sources['surface'];
+			$hex_map['--sf-color-inset']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
 			$hex_map['--sf-color-raised']  = self::oklch_to_hex( min( 1.0, $bl + 0.04 ), $bc, $bh );
 			$hex_map['--sf-color-inverse'] = self::oklch_to_hex( 1.0 - $bl, $bc, $bh );
 			$hex_map['--sf-color-overlay'] = $hex_map['--sf-color-surface'];
 		} else {
-			$hex_map['--sf-color-well']    = '#f0f2f5';
+			$hex_map['--sf-color-inset']    = '#f0f2f5';
 			$hex_map['--sf-color-raised']  = '#ffffff';
 			$hex_map['--sf-color-inverse'] = '#0a0a12';
 			$hex_map['--sf-color-overlay'] = '#fafafa';
@@ -402,7 +400,7 @@ class Slashed_Bricks_Color_Resolver {
 		$hex_map['--sf-color-dim'] = '#808080';
 
 		// ---- Code tokens ----
-		$hex_map['--sf-color-code-bg']   = $hex_map['--sf-color-well'];
+		$hex_map['--sf-color-code-bg']   = $hex_map['--sf-color-inset'];
 		$hex_map['--sf-color-code-text'] = $dark_text; // code-bg is light → dark text.
 
 		// ---- Link states (light-mode approximation) ----
@@ -442,7 +440,7 @@ class Slashed_Bricks_Color_Resolver {
 				? $light_text
 				: $dark_text;
 		}
-		$hex_map['--sf-color-text--on-base']    = $dark_text; // base is light → dark text.
+		$hex_map['--sf-color-text--on-surface'] = $dark_text; // surface is light → dark text.
 		$hex_map['--sf-color-text--on-inverse'] = $hex_map['--sf-color-text--inverse'];
 
 		// ---- Selection and mark ----
@@ -497,17 +495,17 @@ class Slashed_Bricks_Color_Resolver {
 		$light_text = '#f0f0f5';
 		$dark_text  = '#1c1c2e';
 
-		$base_hex = isset( $hex_map['--sf-color-base'] ) ? $hex_map['--sf-color-base'] : '#1a1b1e';
-		$base_rgb = self::hex_to_rgb( $base_hex );
+		$surface_hex = isset( $hex_map['--sf-color-surface'] ) ? $hex_map['--sf-color-surface'] : '#1a1b1e';
+		$surface_rgb = self::hex_to_rgb( $surface_hex );
 
 		// ---- Base-derived surfaces ----
-		if ( isset( $d['base'] ) ) {
-			list( $bl, $bc, $bh ) = $d['base'];
-			$hex_map['--sf-color-surface'] = $base_hex;
+		if ( isset( $d['surface'] ) ) {
+			list( $bl, $bc, $bh ) = $d['surface'];
+			$hex_map['--sf-color-surface'] = $surface_hex;
 			$hex_map['--sf-color-bg']      = self::oklch_to_hex( min( 1.0, $bl + 0.02 ), $bc, $bh );
-			$hex_map['--sf-color-well']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
+			$hex_map['--sf-color-inset']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
 			$hex_map['--sf-color-raised']  = self::oklch_to_hex( min( 1.0, $bl + 0.04 ), $bc, $bh );
-			$hex_map['--sf-color-overlay'] = $base_hex;
+			$hex_map['--sf-color-overlay'] = $surface_hex;
 			$hex_map['--sf-color-inverse'] = self::oklch_to_hex( max( 0.0, 1.0 - $bl ), $bc, $bh );
 		}
 
@@ -529,11 +527,11 @@ class Slashed_Bricks_Color_Resolver {
 			$hex_map['--sf-color-border--subtle'] = self::oklch_to_hex( max( 0.20, min( $nl - 0.38, 0.45 ) ), 0.005, $nh );
 			$hex_map['--sf-color-border--strong'] = self::oklch_to_hex( max( 0.38, min( $nl - 0.1, 0.65 ) ), 0.02, $nh );
 			$hex_map['--sf-color-border--muted']  = $hex_map['--sf-color-border--subtle'];
-			$hex_map['--sf-color-border--translucent'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $base_rgb, 0.15 ) );
-			$hex_map['--sf-color-border--disabled']    = self::rgb_to_hex( self::mix_rgb( self::hex_to_rgb( $hex_map['--sf-color-border--subtle'] ), $base_rgb, 0.5 ) );
+			$hex_map['--sf-color-border--translucent'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $surface_rgb, 0.15 ) );
+			$hex_map['--sf-color-border--disabled']    = self::rgb_to_hex( self::mix_rgb( self::hex_to_rgb( $hex_map['--sf-color-border--subtle'] ), $surface_rgb, 0.5 ) );
 
-			$hex_map['--sf-color-bg--hover']  = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $base_rgb, 0.08 ) );
-			$hex_map['--sf-color-bg--active'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $base_rgb, 0.12 ) );
+			$hex_map['--sf-color-bg--hover']  = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $surface_rgb, 0.08 ) );
+			$hex_map['--sf-color-bg--active'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $surface_rgb, 0.12 ) );
 		}
 
 		$hex_map['--sf-color-border--focus'] = isset( $hex_map['--sf-color-action'] ) ? $hex_map['--sf-color-action'] : '#5b8cff';
@@ -548,17 +546,17 @@ class Slashed_Bricks_Color_Resolver {
 			$hex_map['--sf-color-link--hover']   = self::oklch_to_hex( max( $al + 0.10, 0.68 ), $ac, $ah );
 			$hex_map['--sf-color-link--active']  = self::oklch_to_hex( max( $al + 0.15, 0.74 ), $ac, $ah );
 			$hex_map['--sf-color-link--visited'] = self::oklch_to_hex( max( 0.68, $al ), $ac, fmod( $ah + 60.0, 360.0 ) );
-			$hex_map['--sf-color-link--underline'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $base_rgb, 0.30 ) );
+			$hex_map['--sf-color-link--underline'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $surface_rgb, 0.30 ) );
 
-			$hex_map['--sf-color-bg--selected'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $base_rgb, 0.10 ) );
-			$hex_map['--sf-color-bg--focus']    = self::rgb_to_hex( self::mix_rgb( $action_rgb, $base_rgb, 0.06 ) );
+			$hex_map['--sf-color-bg--selected'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $surface_rgb, 0.10 ) );
+			$hex_map['--sf-color-bg--focus']    = self::rgb_to_hex( self::mix_rgb( $action_rgb, $surface_rgb, 0.06 ) );
 		}
 
 		$hex_map['--sf-color-link--disabled'] = isset( $hex_map['--sf-color-text--disabled'] ) ? $hex_map['--sf-color-text--disabled'] : '#6b6b78';
-		$hex_map['--sf-color-bg--disabled']   = isset( $hex_map['--sf-color-well'] ) ? $hex_map['--sf-color-well'] : '#222';
+		$hex_map['--sf-color-bg--disabled']   = isset( $hex_map['--sf-color-inset'] ) ? $hex_map['--sf-color-inset'] : '#222';
 
 		// ---- Code (code-bg = well; dark well → light code text) ----
-		$hex_map['--sf-color-code-bg']   = isset( $hex_map['--sf-color-well'] ) ? $hex_map['--sf-color-well'] : '#222';
+		$hex_map['--sf-color-code-bg']   = isset( $hex_map['--sf-color-inset'] ) ? $hex_map['--sf-color-inset'] : '#222';
 		$hex_map['--sf-color-code-text'] = $light_text;
 
 		// ---- Text-on-color (mode-agnostic: from the resolved dark family L) ----
@@ -569,7 +567,7 @@ class Slashed_Bricks_Color_Resolver {
 			}
 			$hex_map[ '--sf-color-text--on-' . $family ] = ( $d[ $family ][0] < 0.6 ) ? $light_text : $dark_text;
 		}
-		$hex_map['--sf-color-text--on-base']    = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		$hex_map['--sf-color-text--on-surface'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
 		$hex_map['--sf-color-text--on-inverse'] = isset( $hex_map['--sf-color-text--inverse'] ) ? $hex_map['--sf-color-text--inverse'] : $dark_text;
 
 		// ---- Selection + mark ----
@@ -578,13 +576,13 @@ class Slashed_Bricks_Color_Resolver {
 			list( $la, $lc, $lh ) = $light_sources['action'];
 			$sel_l   = max( 0.62, min( 0.93 - $la * 0.4, 0.78 ) );
 			$sel_rgb = self::hex_to_rgb( self::oklch_to_hex( $sel_l, $lc, $lh ) );
-			$hex_map['--sf-color-selection-bg'] = self::rgb_to_hex( self::mix_rgb( $sel_rgb, $base_rgb, 0.55 ) );
+			$hex_map['--sf-color-selection-bg'] = self::rgb_to_hex( self::mix_rgb( $sel_rgb, $surface_rgb, 0.55 ) );
 		} elseif ( isset( $hex_map['--sf-color-bg--selected'] ) ) {
 			$hex_map['--sf-color-selection-bg'] = $hex_map['--sf-color-bg--selected'];
 		}
 		$hex_map['--sf-color-selection-text'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
 		if ( isset( $hex_map['--sf-color-warning'] ) ) {
-			$hex_map['--sf-color-mark-bg'] = self::rgb_to_hex( self::mix_rgb( self::hex_to_rgb( $hex_map['--sf-color-warning'] ), $base_rgb, 0.25 ) );
+			$hex_map['--sf-color-mark-bg'] = self::rgb_to_hex( self::mix_rgb( self::hex_to_rgb( $hex_map['--sf-color-warning'] ), $surface_rgb, 0.25 ) );
 		}
 		$hex_map['--sf-color-mark-text'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
 		$hex_map['--sf-color-dim']       = '#808080';

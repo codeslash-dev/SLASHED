@@ -122,7 +122,7 @@ class Slashed_CSS_Generator {
 
 	private static function generate_color_declarations( $settings ) {
 		$declarations  = array();
-		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface' );
 		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 
 		foreach ( $brand_colors as $color ) {

@@ -55,12 +55,12 @@ function contrastBetween([token1, token2]) {
 // so the canvas boilerplate lives in exactly one place.
 
 async function getSurfaceLuminances(page) {
-  const [bg, raised, well] = await Promise.all([
+  const [bg, raised, inset] = await Promise.all([
     page.evaluate(resolveTokenLuminance, '--sf-color-bg'),
     page.evaluate(resolveTokenLuminance, '--sf-color-raised'),
-    page.evaluate(resolveTokenLuminance, '--sf-color-well'),
+    page.evaluate(resolveTokenLuminance, '--sf-color-inset'),
   ]);
-  return { bg, raised, well };
+  return { bg, raised, inset };
 }
 
 // Returns {step, lum} pairs for the primary palette steps provided.
@@ -112,18 +112,19 @@ for (const theme of ['light', 'dark']) {
       expect(ratio).toBeGreaterThanOrEqual(4.5);
     });
 
-    // ── Body text on well surface ────────────────────────────────
-    test('body text on well surface meets WCAG AA (4.5:1)', async ({ page }) => {
-      const ratio = await page.evaluate(contrastBetween, ['--sf-color-text', '--sf-color-well']);
+    // ── Body text on inset surface ───────────────────────────────
+    test('body text on inset surface meets WCAG AA (4.5:1)', async ({ page }) => {
+      const ratio = await page.evaluate(contrastBetween, ['--sf-color-text', '--sf-color-inset']);
       expect(ratio).toBeGreaterThanOrEqual(4.5);
     });
 
-    // ── Surface hierarchy: bg/raised lighter than well ──────────
-    test('bg, raised, and well surfaces have distinct luminance values', async ({ page }) => {
+    // ── Surface hierarchy: bg/raised lighter than inset ─────────
+    test('bg, raised, and inset surfaces have distinct luminance values', async ({ page }) => {
       const lums = await getSurfaceLuminances(page);
       // bg and raised may be identical when both clamp to l=1 in oklch (near-white light theme),
-      // so we only assert that well is meaningfully different from both bg and raised.
-      expect(Math.abs(lums.bg - lums.well)).toBeGreaterThan(0.002);
+      // so we only assert that inset is meaningfully different from both bg and raised.
+      expect(Math.abs(lums.bg - lums.inset)).toBeGreaterThan(0.002);
+      expect(Math.abs(lums.raised - lums.inset)).toBeGreaterThan(0.002);
     });
 
     // ── Background polarity ──────────────────────────────────────
@@ -267,7 +268,7 @@ test.describe('Dark mode auto-derivation', () => {
   });
 
   test('all 6 brand colors are lighter in dark theme than light theme', async ({ page }) => {
-    const names = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
+    const names = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface'];
 
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     const lightLums = await Promise.all(
@@ -281,8 +282,8 @@ test.describe('Dark mode auto-derivation', () => {
 
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
-      if (name === 'base') {
-        // Base inverts: near-white light → near-dark dark.
+      if (name === 'surface') {
+        // Surface inverts: near-white light → near-dark dark.
         expect(darkLums[i], `${name} dark should be darker than light`).toBeLessThan(lightLums[i]);
       } else {
         // All other brand colors: dark variant must be lighter.
@@ -291,10 +292,10 @@ test.describe('Dark mode auto-derivation', () => {
     }
   });
 
-  // The base color uses a different inversion formula: clamp(0.16, 1.18 - l, 0.24).
-  // Default base-light is oklch(0.99, 0.006, 250) → near-white.
+  // Surface uses a different inversion formula: clamp(0.16, 1.18 - l, 0.24).
+  // Default surface-light is oklch(0.99, 0.006, 250) → near-white.
   // Dark value: 1.18 - 0.99 = 0.19 → near-dark background.
-  test('base color inverts in dark theme (near-white → near-dark surface)', async ({ page }) => {
+  test('surface color inverts in dark theme (near-white → near-dark)', async ({ page }) => {
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     const lightLum = await page.evaluate(resolveTokenLuminance, '--sf-color-bg');
 

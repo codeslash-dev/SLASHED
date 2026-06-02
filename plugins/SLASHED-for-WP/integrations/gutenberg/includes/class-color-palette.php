@@ -35,9 +35,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * `--sf-color-text--secondary`) is stored separately in each entry.
  *
  * Palette groups (in picker order):
- *   Brand   — primary, secondary, tertiary, action, neutral, base
+ *   Brand   — primary, secondary, tertiary, action, neutral, surface
  *   Status  — success, warning, error, info, danger
- *   Surface — bg, surface, well, raised, inverse
+ *   Surface — bg, inset, raised, inverse
  *   Text    — text, text-secondary, text-muted
  *   Border  — border
  *   Link    — link
@@ -109,7 +109,7 @@ class Slashed_Gutenberg_Color_Palette {
 			array( 'slug' => 'tertiary',        'token' => 'tertiary',       'name' => __( 'Tertiary',       'slashed-gutenberg' ) ),
 			array( 'slug' => 'action',          'token' => 'action',         'name' => __( 'Action',         'slashed-gutenberg' ) ),
 			array( 'slug' => 'neutral',         'token' => 'neutral',        'name' => __( 'Neutral',        'slashed-gutenberg' ) ),
-			array( 'slug' => 'base',            'token' => 'base',           'name' => __( 'Base',           'slashed-gutenberg' ) ),
+			array( 'slug' => 'surface',         'token' => 'surface',        'name' => __( 'Surface',        'slashed-gutenberg' ) ),
 			// Status
 			array( 'slug' => 'success',         'token' => 'success',        'name' => __( 'Success',        'slashed-gutenberg' ) ),
 			array( 'slug' => 'warning',         'token' => 'warning',        'name' => __( 'Warning',        'slashed-gutenberg' ) ),
@@ -118,8 +118,7 @@ class Slashed_Gutenberg_Color_Palette {
 			array( 'slug' => 'danger',          'token' => 'danger',         'name' => __( 'Danger',         'slashed-gutenberg' ) ),
 			// Surface
 			array( 'slug' => 'bg',             'token' => 'bg',              'name' => __( 'Background',     'slashed-gutenberg' ) ),
-			array( 'slug' => 'surface',        'token' => 'surface',         'name' => __( 'Surface',        'slashed-gutenberg' ) ),
-			array( 'slug' => 'well',           'token' => 'well',            'name' => __( 'Well',           'slashed-gutenberg' ) ),
+			array( 'slug' => 'inset',          'token' => 'inset',           'name' => __( 'Inset',          'slashed-gutenberg' ) ),
 			array( 'slug' => 'raised',         'token' => 'raised',          'name' => __( 'Raised',         'slashed-gutenberg' ) ),
 			array( 'slug' => 'inverse',        'token' => 'inverse',         'name' => __( 'Inverse',        'slashed-gutenberg' ) ),
 			// Text

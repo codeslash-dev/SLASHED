@@ -58,9 +58,9 @@
      and chroma. Useful when a brand picker produces colors with
      wildly different L values that look mismatched in weight.
 
-     Base is excluded by design — base IS the page surface (L ~0.98 in
-     light mode, ~0.20 in dark) and locking it would destroy the page
-     background.
+     Surface is excluded by design — it is the source token for the
+     page-surface ladder, and locking it would distort the derived page
+     background and related surface levels.
 
      Default state: OFF. Without the attribute, every brand keeps its
      own L. Add :root[data-lumlocker] (or set via JS) to enable.
@@ -138,7 +138,7 @@
       --sf-color-tertiary:  var(--sf-color-tertiary-dark,  oklch(from var(--sf-color-tertiary-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h));
       --sf-color-action:    var(--sf-color-action-dark,    oklch(from var(--sf-color-action-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h));
       --sf-color-neutral:   var(--sf-color-neutral-dark,   oklch(from var(--sf-color-neutral-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h));
-      --sf-color-base:      var(--sf-color-base-dark,      oklch(from var(--sf-color-base-light)      clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h));
+      --sf-color-surface:   var(--sf-color-surface-dark,   oklch(from var(--sf-color-surface-light)   clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h));
 
       /* Status — dark formula or explicit -dark override */
       --sf-color-success: var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h));
@@ -186,7 +186,7 @@
       --sf-color-tertiary:  var(--sf-color-tertiary-light);
       --sf-color-action:    var(--sf-color-action-light);
       --sf-color-neutral:   var(--sf-color-neutral-light);
-      --sf-color-base:      var(--sf-color-base-light);
+      --sf-color-surface:   var(--sf-color-surface-light);
 
       /* Status — explicit light values */
       --sf-color-success: var(--sf-color-success-light);
