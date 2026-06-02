@@ -255,7 +255,45 @@ function unmountColorApp() {
   colorApp = null;
 }
 
-function openColorPickerPanel(detectedTarget) {
+/**
+ * Write a colour value into a Bricks colour input by setting its native
+ * value and dispatching an 'input' event. Bricks/Vue's v-model picks up
+ * the event and updates the reactive state for whichever field owns the
+ * input — gradient stops, box-shadow colours, text/background/border and
+ * any other [data-control="color"] field all use the same <input> structure.
+ *
+ * Uses the native HTMLInputElement value setter to bypass any Vue getter
+ * wrapper on the property, then fires a bubbling 'input' event so Vue's
+ * event listener updates its reactive state.
+ *
+ * @param {HTMLInputElement|null} inputEl
+ * @param {string} value  e.g. "var(--sf-color-primary)"
+ * @returns {boolean}
+ */
+function applyToColorInput(inputEl, value) {
+  if (!inputEl || !inputEl.isConnected) return false;
+  try {
+    const nativeSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype, 'value'
+    )?.set;
+    if (nativeSetter) nativeSetter.call(inputEl, value);
+    else inputEl.value = value;
+    inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Open a contextual ColorPanel bound to a specific Bricks colour input.
+ * Picker mode hides the target selector; the chosen var() is written
+ * directly into `inputEl` via a native input event so Vue updates the
+ * correct reactive field regardless of its type.
+ *
+ * @param {HTMLInputElement|null} inputEl
+ */
+function openColorPickerPanel(inputEl) {
   closeColorPickerPanel();
   const src = cfg?.colorPanel;
   if (!src || !Array.isArray(src.variables) || src.variables.length === 0) return;
@@ -266,7 +304,7 @@ function openColorPickerPanel(detectedTarget) {
       target: node,
       props: {
         source: src,
-        initialTarget: detectedTarget || 'background',
+        onPickValue: (value) => { applyToColorInput(inputEl, value); },
         onPick: closeColorPickerPanel,
         onClose: closeColorPickerPanel,
       },

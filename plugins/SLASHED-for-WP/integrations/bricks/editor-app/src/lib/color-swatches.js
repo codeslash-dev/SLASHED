@@ -135,6 +135,12 @@ function injectSFButton(colorControl) {
   if (!colorInput) return;
   if (colorInput.querySelector('.' + SF_BTN_CLASS)) return; // already present
 
+  // Capture the text input that holds the colour value. Setting its value
+  // and dispatching an 'input' event lets Vue's v-model reactive binding
+  // update the correct field regardless of type (gradient stop, box-shadow,
+  // text colour, border, etc.) — no special-casing per field type needed.
+  const inputEl = colorInput.querySelector('input[type="text"]');
+
   const btn = document.createElement('div');
   btn.className = SF_BTN_CLASS;
   btn.setAttribute('data-balloon', 'SLASHED Colors');
@@ -145,7 +151,7 @@ function injectSFButton(colorControl) {
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (_onOpenPanel) _onOpenPanel(detectTargetFromControl(colorControl));
+    if (_onOpenPanel) _onOpenPanel(inputEl || null);
   });
   btn.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') btn.click();
