@@ -221,8 +221,14 @@ class Slashed_Bricks_Inventory {
 	 * Read admin-saved color overrides and map them to CSS variable names.
 	 *
 	 * Mirrors the mapping logic in Slashed_CSS_Generator::generate_color_declarations():
-	 *   - brand_primary   -> --sf-color-primary-light
-	 *   - status_success  -> --sf-color-success-light
+	 *   - brand_primary       -> --sf-color-primary-light
+	 *   - status_success      -> --sf-color-success-light
+	 *   - brand_dark_primary  -> --sf-color-primary-dark   (when dark overrides on)
+	 *   - status_dark_success -> --sf-color-success-dark   (when dark overrides on)
+	 *
+	 * Both the `-light` source and any explicit `-dark` override are returned
+	 * so the light AND dark hex maps stay in sync with what the generated CSS
+	 * actually emits — the dark resolver honours `-dark` over auto-derivation.
 	 *
 	 * @return array<string, string> Map of CSS variable name to color value.
 	 */
@@ -236,21 +242,41 @@ class Slashed_Bricks_Inventory {
 		$settings = $tokens['colors'];
 		$overrides = array();
 
-		// Brand colors: brand_primary -> --sf-color-primary-light.
-		$brand_colors = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
+
+		// Light source tokens: brand_primary -> --sf-color-primary-light.
 		foreach ( $brand_colors as $color ) {
 			$key = 'brand_' . $color;
 			if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
 				$overrides[ '--sf-color-' . $color . '-light' ] = $settings[ $key ];
 			}
 		}
-
-		// Status colors: status_success -> --sf-color-success-light.
-		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 		foreach ( $status_colors as $color ) {
 			$key = 'status_' . $color;
 			if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
 				$overrides[ '--sf-color-' . $color . '-light' ] = $settings[ $key ];
+			}
+		}
+
+		// Explicit dark overrides — gated by the same flag the CSS generator
+		// uses, so the preview matches the emitted CSS. When the flag is off,
+		// dark stays auto-derived from the light source (no -dark keys emitted).
+		$dark_enabled = ! isset( $settings['dark_overrides_enabled'] )
+			|| '0' !== $settings['dark_overrides_enabled'];
+
+		if ( $dark_enabled ) {
+			foreach ( $brand_colors as $color ) {
+				$key = 'brand_dark_' . $color;
+				if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
+					$overrides[ '--sf-color-' . $color . '-dark' ] = $settings[ $key ];
+				}
+			}
+			foreach ( $status_colors as $color ) {
+				$key = 'status_dark_' . $color;
+				if ( ! empty( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) {
+					$overrides[ '--sf-color-' . $color . '-dark' ] = $settings[ $key ];
+				}
 			}
 		}
 

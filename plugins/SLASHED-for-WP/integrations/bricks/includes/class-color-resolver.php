@@ -149,7 +149,7 @@ class Slashed_Bricks_Color_Resolver {
 	 */
 	public static function resolve_dark( $color_values ) {
 		$light_sources = self::resolve_sources( $color_values );
-		$dark_sources  = self::derive_dark_sources( $light_sources );
+		$dark_sources  = self::derive_dark_sources( $light_sources, $color_values );
 
 		// Alpha swatches composite over the dark base surface, not white, so
 		// translucent tokens read the way they do on a dark page.
@@ -229,18 +229,39 @@ class Slashed_Bricks_Color_Resolver {
 	}
 
 	/**
-	 * Derive per-family dark oklch sources from the light sources.
+	 * Derive per-family dark oklch sources.
 	 *
-	 * Brand + status: clamp(0.65, 0.95 - l*0.5, 0.88) lightness, chroma * 0.9.
-	 * Base inverts:   clamp(0.16, 1.18 - l, 0.24) lightness, chroma * 0.5.
+	 * Honours an explicit `--sf-color-{family}-dark` override exactly as the
+	 * framework CSS does — `var(--sf-color-X-dark, <derived>)` — so a user who
+	 * sets a custom dark colour (via the admin Dark-mode overrides, a theme,
+	 * or hand-written CSS) sees that value previewed, not the auto-derivation.
+	 * Only when no parseable override is present does it fall back to the
+	 * framework formula:
+	 *   Brand + status: clamp(0.65, 0.95 - l*0.5, 0.88) lightness, chroma * 0.9.
+	 *   Base inverts:   clamp(0.16, 1.18 - l, 0.24) lightness, chroma * 0.5.
 	 * (Matches the auto-derivation formulas in core/tokens.css.)
 	 *
 	 * @param array $light_sources Family => [L, C, H].
+	 * @param array $color_values  Parsed values; may carry `-dark` overrides.
 	 * @return array<string, array{0:float,1:float,2:float}>
 	 */
-	private static function derive_dark_sources( $light_sources ) {
+	private static function derive_dark_sources( $light_sources, $color_values = array() ) {
 		$dark = array();
 		foreach ( $light_sources as $family => $lch ) {
+			// 1. Explicit per-mode override wins (matches the CSS fallback chain).
+			$override_key = '--sf-color-' . $family . '-dark';
+			if ( isset( $color_values[ $override_key ] ) && '' !== trim( (string) $color_values[ $override_key ] ) ) {
+				$parsed = self::parse_oklch( $color_values[ $override_key ] );
+				if ( null === $parsed ) {
+					$parsed = self::hex_to_oklch( $color_values[ $override_key ] );
+				}
+				if ( null !== $parsed ) {
+					$dark[ $family ] = $parsed;
+					continue;
+				}
+			}
+
+			// 2. Auto-derive from the light source.
 			list( $l, $c, $h ) = $lch;
 			if ( 'base' === $family ) {
 				$dl = max( 0.16, min( 1.18 - $l, 0.24 ) );

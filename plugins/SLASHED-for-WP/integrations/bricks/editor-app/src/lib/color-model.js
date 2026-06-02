@@ -60,6 +60,45 @@ const SET = (arr) => new Set(arr);
 const ALL_FAMILIES = SET([...BRAND_FAMILIES, ...STATUS_FAMILIES]);
 
 /**
+ * Role + when-to-use copy per group, so the panel reads as a guided system
+ * rather than an anonymous swatch wall. `tagline` is the one-line role shown
+ * next to the group name; `use` is the short "reach for this when…" hint.
+ */
+export const FAMILY_INFO = {
+  primary:   { tagline: 'Brand identity & main emphasis', use: 'Headlines, primary buttons, key brand moments.' },
+  secondary: { tagline: 'Supporting brand tone', use: 'Secondary surfaces and muted brand accents.' },
+  tertiary:  { tagline: 'Accent / highlight', use: 'Badges, tags, decorative highlights.' },
+  action:    { tagline: 'Interactive & links', use: 'Links, focus rings, anything clickable.' },
+  neutral:   { tagline: 'Text, icons & dividers', use: 'Body text, borders, neutral UI chrome.' },
+  base:      { tagline: 'Page & surface backgrounds', use: 'Page background and raised surfaces.' },
+  success:   { tagline: 'Positive / confirmation', use: 'Success messages and valid state.' },
+  warning:   { tagline: 'Caution', use: 'Warnings and at-risk / pending state.' },
+  error:     { tagline: 'Form & validation errors', use: 'Invalid inputs and error messages.' },
+  info:      { tagline: 'Informational', use: 'Tips and neutral notices.' },
+  danger:    { tagline: 'Destructive actions', use: 'Delete / remove and irreversible actions.' },
+  semantic:  { tagline: 'Ready-made role tokens', use: 'Pre-wired roles that already adapt to light/dark.' },
+};
+
+/**
+ * Purpose-based subsections for the catch-all Semantic group, in display
+ * order. The first matcher a token's key satisfies wins; anything unmatched
+ * collects into "Other". This is what lets a user scan "Text", "Surfaces",
+ * "Borders", "Links"… instead of one long alphabetical list.
+ */
+const SEMANTIC_SUBGROUPS = [
+  { id: 'text-on', label: 'Text on color', match: (k) => k.startsWith('text--on') },
+  { id: 'text', label: 'Text', match: (k) => k === 'text' || k === 'heading' || k.startsWith('text-') },
+  // Interactive bg states (bg--hover/active/…) before surfaces so the plain
+  // surface tokens (bg, surface, well, raised, overlay, inverse) stay clean.
+  { id: 'state', label: 'Interactive states', match: (k) => k.startsWith('bg--') },
+  { id: 'surface', label: 'Surfaces & backgrounds', match: (k) => ['bg', 'surface', 'well', 'raised', 'overlay', 'inverse'].some((p) => k === p || k.startsWith(p + '-')) },
+  { id: 'border', label: 'Borders', match: (k) => k === 'border' || k.startsWith('border-') },
+  { id: 'link', label: 'Links', match: (k) => k === 'link' || k.startsWith('link-') },
+  { id: 'select', label: 'Selection & marks', match: (k) => k.startsWith('selection') || k.startsWith('mark') || k === 'dim' },
+  { id: 'code', label: 'Code', match: (k) => k.startsWith('code') },
+];
+
+/**
  * Classify a single `--sf-color-*` variable.
  *
  * Pure. Returns the structured descriptor used to bucket the token into its
@@ -259,11 +298,14 @@ export function buildColorModel(variables, light, dark) {
     if (alpha.length) sections.push({ id: 'alpha', label: 'Transparent', swatches: alpha.map((e) => e.swatch) });
     if (alias.length) sections.push({ id: 'alias', label: 'Semantic', swatches: alias.map((e) => e.swatch) });
 
+    const info = FAMILY_INFO[family] || {};
     groups.push({
       id: family,
       label: capitalize(family),
       type,
       count: entries.length,
+      tagline: info.tagline || '',
+      use: info.use || '',
       sections,
     });
   };
@@ -273,12 +315,34 @@ export function buildColorModel(variables, light, dark) {
 
   if (semantic.length) {
     semantic.sort(compareSemantic);
+
+    // Bucket the page-level tokens into purpose-based subsections so the
+    // group reads as "Text / Surfaces / Borders / Links / …" rather than one
+    // long list. Unmatched tokens fall to a trailing "Other" section.
+    const buckets = new Map(SEMANTIC_SUBGROUPS.map((g) => [g.id, []]));
+    const other = [];
+    for (const entry of semantic) {
+      const sub = SEMANTIC_SUBGROUPS.find((g) => g.match(entry.info.key));
+      if (sub) buckets.get(sub.id).push(entry.swatch);
+      else other.push(entry.swatch);
+    }
+
+    const sections = [];
+    for (const sub of SEMANTIC_SUBGROUPS) {
+      const swatches = buckets.get(sub.id);
+      if (swatches.length) sections.push({ id: sub.id, label: sub.label, swatches });
+    }
+    if (other.length) sections.push({ id: 'other', label: 'Other', swatches: other });
+
+    const info = FAMILY_INFO.semantic || {};
     groups.push({
       id: 'semantic',
       label: 'Semantic',
       type: 'semantic',
       count: semantic.length,
-      sections: [{ id: 'all', label: '', swatches: semantic.map((e) => e.swatch) }],
+      tagline: info.tagline || '',
+      use: info.use || '',
+      sections,
     });
   }
 

@@ -494,22 +494,37 @@ li[data-id]:focus-within > .rebemer-badge-host {
 
 .slashed-cp__group { padding: 10px 0 6px; border-bottom: 1px solid rgba(255, 255, 255, .05); }
 .slashed-cp__group:last-child { border-bottom: 0; }
+.slashed-cp__group-head { margin: 0 0 8px; }
 .slashed-cp__group-title {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 7px;
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 11px;
   font-weight: 700;
   color: #fff;
   text-transform: capitalize;
 }
+.slashed-cp__group-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--rebemer-fg-muted);
+  text-transform: none;
+}
 .slashed-cp__group-count {
+  margin-left: auto;
   font: 600 9px/1 var(--rebemer-font);
   color: var(--rebemer-fg-muted);
   background: rgba(255, 255, 255, .06);
   border-radius: 999px;
   padding: 2px 6px;
+  text-transform: none;
+}
+.slashed-cp__group-use {
+  margin: 2px 0 0;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--rebemer-fg-muted);
 }
 .slashed-cp__section-label {
   margin: 8px 0 5px;

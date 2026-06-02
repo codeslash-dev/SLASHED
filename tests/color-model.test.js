@@ -15,6 +15,7 @@ import {
   swatchHex,
   BRAND_FAMILIES,
   STATUS_FAMILIES,
+  FAMILY_INFO,
 } from '../plugins/SLASHED-for-WP/integrations/bricks/editor-app/src/lib/color-model.js';
 
 describe('classifyVar', () => {
@@ -159,6 +160,67 @@ describe('buildColorModel', () => {
     for (const f of [...BRAND_FAMILIES, ...STATUS_FAMILIES]) {
       assert.equal(typeof f, 'string');
     }
+  });
+
+  test('groups carry role + when-to-use copy', () => {
+    const { groups } = buildColorModel(vars, light, dark);
+    const primary = groups.find((g) => g.id === 'primary');
+    assert.equal(primary.tagline, FAMILY_INFO.primary.tagline);
+    assert.equal(primary.use, FAMILY_INFO.primary.use);
+    // every brand + status family has guidance defined.
+    for (const f of [...BRAND_FAMILIES, ...STATUS_FAMILIES, 'semantic']) {
+      assert.ok(FAMILY_INFO[f] && FAMILY_INFO[f].tagline && FAMILY_INFO[f].use, `missing info for ${f}`);
+    }
+  });
+});
+
+describe('semantic subgrouping', () => {
+  const vars = [
+    '--sf-color-text',
+    '--sf-color-text--muted',
+    '--sf-color-text--on-primary',
+    '--sf-color-bg',
+    '--sf-color-surface',
+    '--sf-color-bg--hover',
+    '--sf-color-border',
+    '--sf-color-border--subtle',
+    '--sf-color-link',
+    '--sf-color-link--hover',
+    '--sf-color-selection-bg',
+    '--sf-color-mark-bg',
+    '--sf-color-code-bg',
+  ];
+  const light = Object.fromEntries(vars.map((v) => [v, '#abcabc']));
+  const model = buildColorModel(vars, light, {});
+  const semantic = model.groups.find((g) => g.id === 'semantic');
+
+  test('semantic group splits into purpose-based labelled sections', () => {
+    const ids = semantic.sections.map((s) => s.id);
+    // Order is fixed: text-on, text, state, surface, border, link, select, code.
+    assert.deepEqual(ids, ['text-on', 'text', 'state', 'surface', 'border', 'link', 'select', 'code']);
+    for (const s of semantic.sections) assert.ok(s.label, `section ${s.id} has a label`);
+  });
+
+  test('interactive bg states are separated from plain surfaces', () => {
+    const state = semantic.sections.find((s) => s.id === 'state');
+    const surface = semantic.sections.find((s) => s.id === 'surface');
+    assert.deepEqual(state.swatches.map((s) => s.var), ['--sf-color-bg--hover']);
+    assert.deepEqual(
+      surface.swatches.map((s) => s.var).sort(),
+      ['--sf-color-bg', '--sf-color-surface']
+    );
+  });
+
+  test('text-on-color is its own section, separate from Text', () => {
+    const on = semantic.sections.find((s) => s.id === 'text-on');
+    const text = semantic.sections.find((s) => s.id === 'text');
+    assert.deepEqual(on.swatches.map((s) => s.var), ['--sf-color-text--on-primary']);
+    assert.ok(text.swatches.every((s) => !s.var.includes('--on-')));
+  });
+
+  test('section counts roll up to the group count', () => {
+    const total = semantic.sections.reduce((n, s) => n + s.swatches.length, 0);
+    assert.equal(total, semantic.count);
   });
 });
 

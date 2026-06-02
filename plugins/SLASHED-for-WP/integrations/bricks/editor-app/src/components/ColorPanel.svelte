@@ -199,10 +199,14 @@
 
     {#each model.groups as group (group.id)}
       <section class="slashed-cp__group" data-type={group.type}>
-        <h3 class="slashed-cp__group-title">
-          {group.label}
-          <span class="slashed-cp__group-count">{group.count}</span>
-        </h3>
+        <div class="slashed-cp__group-head">
+          <h3 class="slashed-cp__group-title">
+            {group.label}
+            {#if group.tagline}<span class="slashed-cp__group-tag">{group.tagline}</span>{/if}
+            <span class="slashed-cp__group-count">{group.count}</span>
+          </h3>
+          {#if group.use}<p class="slashed-cp__group-use">{group.use}</p>{/if}
+        </div>
 
         {#each group.sections as section (section.id)}
           {#if section.label}
