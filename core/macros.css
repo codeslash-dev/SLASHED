@@ -37,6 +37,7 @@
   .sf-prose :is(h2, h3, h4) + * { margin-block-start: var(--sf-prose-heading-gap); }
   .sf-prose li + li              { margin-block-start: var(--sf-prose-list-gap); }
   .sf-prose :is(blockquote, pre) { margin-block: var(--sf-prose-block-margin); }
+  .sf-prose blockquote           { font-style: italic; }
   .sf-prose img                  { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
   .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
   .sf-prose ul                   { list-style: disc; }
@@ -44,7 +45,7 @@
   .sf-prose ::marker             { color: var(--sf-prose-marker-color); }
   .sf-prose figure               { margin-block: var(--sf-prose-figure-margin); }
   .sf-prose figcaption           { font-size: var(--sf-prose-figcaption-size); color: var(--sf-color-text--muted); margin-block-start: var(--sf-prose-list-gap); }
-  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-x: auto; max-width: 100%; }
+  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-x: auto; width: 100%; max-width: 100%; }
   .sf-prose video                { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
 
   /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the

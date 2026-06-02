@@ -1,20 +1,34 @@
 /* SLASHED — core/reset.css
    @layer slashed.reset
+
+   Lightweight normalize: corrects cross-browser inconsistencies and
+   sets sensible modern baselines. Deliberately does NOT zero global
+   margins/padding, strip list markers, or change form-element font
+   inheritance — those are component-level concerns. This keeps the
+   reset composable with any third-party UI on the same page (WP admin
+   bar, page-builder chrome, cookie banners, etc.) without element-
+   specific exclusions.
+
+   Opt-in "full reset" (margin/padding zero, list-style none, media
+   display:block, button font:inherit): load core/reset-full.css in
+   addition to this file, or use any of the bundles that include it.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.reset {
 
+  /* Box-sizing — near-universal baseline, safe to set globally.
+     Does not affect layout of third-party UI that explicitly
+     overrides it; UA agents and most WP/builder stylesheets do not
+     set box-sizing, so this wins by default but harmlessly. */
   *, *::before, *::after {
     box-sizing: border-box;
-    margin:     0;
-    padding:    0;
   }
 
   html {
     /* stylelint-disable-next-line property-no-vendor-prefix -- Safari <17: unprefixed text-size-adjust only landed in Safari 17 */
     -webkit-text-size-adjust: 100%;
     text-size-adjust:          100%;
-    scroll-padding-top:        var(--sf-header-height, 8rem);
+    scroll-padding-top:        var(--sf-header-height, 5rem);
     scrollbar-gutter:    stable;
     color-scheme:        var(--sf-color-scheme, light dark);
     hanging-punctuation: first last;
@@ -34,77 +48,46 @@
     min-inline-size: 320px;
   }
 
-  menu, ul, ol {
-    list-style: none;
-  }
-
-  img, picture, video, canvas, svg {
-    display:         block;
-    max-inline-size: 100%;
-    block-size:      auto;
-  }
-
-  iframe, embed, object {
-    display:   block;
-    max-width: 100%;
-    height:    auto;   /* unset reverts to UA's 150px default on <iframe>; auto is correct */
-    border:    none;
-  }
-
-  button, input, select, textarea {
-    font:           inherit;
-    color:          inherit;
-    letter-spacing: inherit;
-    color-scheme:   inherit;
-    line-height:    inherit;
-  }
-
+  /* Normalize button text-transform — Chrome/Edge capitalize UA rule. */
   button {
     text-transform: none;
-    cursor:         pointer;
   }
 
+  /* <search> is a block element per spec; Safari ≤16 renders it inline. */
   search {
     display: block;
   }
 
-  fieldset {
-    border:    none;
-    padding:   0;
-    min-width: 0;
-  }
-
-  legend {
-    padding: 0;
-  }
-
-  a, button, input, select, textarea, summary {
-    touch-action: manipulation;
-  }
-
+  /* summary cursor: normalize across browsers. */
   summary {
-    list-style: none;
-    cursor:     pointer;
+    cursor: pointer;
   }
 
-  textarea {
-    resize: vertical;
-  }
-
+  /* table: collapse borders (UA default varies). */
   table {
     border-collapse: collapse;
-    /* border-spacing omitted — ignored when border-collapse: collapse is set */
   }
 
+  /* [hidden] polyfill — flex/grid containers ignore the attribute in
+     some older engines without this. */
   [hidden] {
     display: none !important;
   }
 
+  /* dialog/popover: normalize padding/border differences.
+     background uses Canvas (UA system color) so the surface adapts to
+     color-scheme and forced-colors without hardcoding a hex value. */
   dialog, [popover] {
     padding:    0;
     border:     none;
-    background: none;
+    background: Canvas;
     color:      inherit;
+  }
+
+  /* fieldset: min-width:0 prevents overflow in flex/grid containers
+     (genuine browser bug, not an opinion). */
+  fieldset {
+    min-width: 0;
   }
 
   [inert] {

@@ -1148,7 +1148,7 @@
     /* ----------------------------------------------------------
        Layout & a11y
        ---------------------------------------------------------- */
-    --sf-header-height:     8rem;
+    --sf-header-height:     5rem;
     --sf-sticky-offset:     var(--sf-header-height);
     --sf-focus-ring-width:  2px;
     --sf-focus-ring-offset: 2px;
