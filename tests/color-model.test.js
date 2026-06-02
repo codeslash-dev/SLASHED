@@ -207,7 +207,7 @@ describe('semantic subgrouping', () => {
     assert.deepEqual(state.swatches.map((s) => s.var), ['--sf-color-bg--hover']);
     assert.deepEqual(
       surface.swatches.map((s) => s.var).sort(),
-      ['--sf-color-bg', '--sf-color-surface']
+      ['--sf-color-bg']
     );
   });
 
