@@ -3,11 +3,14 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**741 tokens.** Every `--sf-*` custom property and its default value. See
-[architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
-contract and naming conventions (a DEPRECATED tier will be introduced
-post-0.5.0 when tokens are retired), and [theming.md](theming.md) for the
-rebrand workflow.
+**741 tokens.** Every `--sf-*` custom property and its default value, grouped
+by source file. Tokens defined in multiple files (e.g. shade aliases overridden
+in `optional/tokens.palette.css`) are listed once per section — so this count
+is higher than `docs/registry.json` (675 unique token names), which deduplicates
+across files. See [architecture.md](architecture.md) for the PUBLIC /
+PUBLIC-ADVANCED / INTERNAL contract and naming conventions (a DEPRECATED tier
+will be introduced post-0.5.0 when tokens are retired), and
+[theming.md](theming.md) for the rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 

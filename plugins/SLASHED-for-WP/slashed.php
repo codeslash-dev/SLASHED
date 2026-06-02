@@ -112,3 +112,13 @@ register_deactivation_hook( __FILE__, function () {
 	// Bricks integration was toggled off while an instance was still scheduled.
 	wp_clear_scheduled_hook( 'slashed_bricks_version_check' );
 } );
+
+// When the Bricks integration is toggled OFF via settings (not just deactivation),
+// clear the cron immediately so it does not remain scheduled with no handler.
+add_action( 'update_option_slashed_settings', function ( $old_value, $new_value ) {
+	$was_on = ! empty( $old_value['integrations']['bricks'] );
+	$is_on  = ! empty( $new_value['integrations']['bricks'] );
+	if ( $was_on && ! $is_on ) {
+		wp_clear_scheduled_hook( 'slashed_bricks_version_check' );
+	}
+}, 10, 2 );
