@@ -654,3 +654,274 @@ li[data-id]:focus-within > .rebemer-badge-host {
   background-position: 0 0, 0 0, 4px 4px;
   background-size: auto, 8px 8px, 8px 8px;
 }
+
+/* =====================================================================
+   NEW PANEL LAYOUT — Quick Use + Palette sections.
+   All new swatch-like elements (quick use cells, scanner previews, scale
+   strip, family banner) use --sw-l / --sw-d CSS variables set inline and
+   a data-mode attribute on .slashed-cp to drive the background rendering.
+   ===================================================================== */
+
+/* Docked mode — picker panel anchored to the right edge of the Bricks
+   settings panel so it feels attached rather than floating. */
+.slashed-cp--docked {
+  top: 0;
+  bottom: 0;
+  left: var(--cp-dock-left, 320px);
+  right: auto;
+  width: 360px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: 6px 0 32px rgba(0, 0, 0, .55);
+}
+
+/* ── Shared mode-driven backgrounds ───────────────────────────────────
+   Applied to every new swatch element that exposes --sw-l / --sw-d.
+   Grouped here so the diagonal-split logic lives in exactly one place. */
+.slashed-cp[data-mode="both"] .slashed-cp__qu-sw,
+.slashed-cp[data-mode="both"] .slashed-cp__scan-base,
+.slashed-cp[data-mode="both"] .slashed-cp__scan-pre-sw,
+.slashed-cp[data-mode="both"] .slashed-cp__fam-banner,
+.slashed-cp[data-mode="both"] .slashed-cp__strip-sw {
+  background: linear-gradient(
+    135deg,
+    var(--sw-l) 0 calc(50% - 0.5px),
+    rgba(0, 0, 0, .35) calc(50% - 0.5px) calc(50% + 0.5px),
+    var(--sw-d) calc(50% + 0.5px) 100%
+  );
+}
+.slashed-cp[data-mode="light"] .slashed-cp__qu-sw,
+.slashed-cp[data-mode="light"] .slashed-cp__scan-base,
+.slashed-cp[data-mode="light"] .slashed-cp__scan-pre-sw,
+.slashed-cp[data-mode="light"] .slashed-cp__fam-banner,
+.slashed-cp[data-mode="light"] .slashed-cp__strip-sw { background: var(--sw-l); }
+
+.slashed-cp[data-mode="dark"] .slashed-cp__qu-sw,
+.slashed-cp[data-mode="dark"] .slashed-cp__scan-base,
+.slashed-cp[data-mode="dark"] .slashed-cp__scan-pre-sw,
+.slashed-cp[data-mode="dark"] .slashed-cp__fam-banner,
+.slashed-cp[data-mode="dark"] .slashed-cp__strip-sw  { background: var(--sw-d); }
+
+/* ── Section wrapper ──────────────────────────────────────────────── */
+.slashed-cp__sec {
+  padding: 10px 0 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+.slashed-cp__sec:last-child { border-bottom: 0; }
+.slashed-cp__sec-title {
+  margin: 0 0 10px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--rebemer-fg-muted);
+}
+.slashed-cp__sec--pal { padding-top: 12px; }
+
+/* ── Quick Use ─────────────────────────────────────────────────────── */
+.slashed-cp__qu-group { margin-bottom: 10px; }
+.slashed-cp__qu-group:last-child { margin-bottom: 0; }
+
+.slashed-cp__qu-label {
+  margin: 0 0 4px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--rebemer-fg-muted);
+}
+
+.slashed-cp__qu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.slashed-cp__qu-cell {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 6px;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  color: var(--rebemer-fg);
+  font: 11px/1.3 var(--rebemer-font);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+  transition: background 80ms;
+}
+.slashed-cp__qu-cell:hover { background: rgba(255, 255, 255, .06); }
+
+.slashed-cp__qu-sw {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  border-radius: 5px;
+  border: 1px solid rgba(127, 127, 127, .35);
+  transition: border-color 80ms;
+}
+.slashed-cp__qu-sw--alpha { border-style: dashed; }
+.slashed-cp__qu-cell:hover .slashed-cp__qu-sw { border-color: var(--rebemer-accent); }
+
+.slashed-cp__qu-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Palette category header ──────────────────────────────────────── */
+.slashed-cp__pal-cat {
+  margin: 10px 0 5px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--rebemer-fg-muted);
+}
+.slashed-cp__pal-cat:first-of-type { margin-top: 2px; }
+
+/* ── Scanner table ────────────────────────────────────────────────── */
+.slashed-cp__scanner {
+  border: 1px solid var(--rebemer-border);
+  border-radius: var(--rebemer-radius);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.slashed-cp__scan-item + .slashed-cp__scan-item { border-top: 1px solid var(--rebemer-border); }
+
+.slashed-cp__scan-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  background: transparent;
+  border: 0;
+  color: var(--rebemer-fg);
+  font: 11px/1 var(--rebemer-font);
+  cursor: pointer;
+  text-align: left;
+  transition: background 80ms;
+}
+.slashed-cp__scan-row:hover,
+.slashed-cp__scan-row--open { background: rgba(255, 255, 255, .04); }
+
+.slashed-cp__scan-base {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(127, 127, 127, .3);
+}
+.slashed-cp__scan-name {
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+.slashed-cp__scan-tagline {
+  font-size: 10px;
+  color: var(--rebemer-fg-muted);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.slashed-cp__scan-pre {
+  display: flex;
+  gap: 3px;
+  flex: 0 0 auto;
+}
+.slashed-cp__scan-pre-sw {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(127, 127, 127, .2);
+}
+.slashed-cp__scan-chev {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: var(--rebemer-fg-muted);
+}
+
+/* ── Expanded family detail ───────────────────────────────────────── */
+.slashed-cp__fam {
+  padding: 10px 10px 12px;
+  border-top: 1px solid var(--rebemer-border);
+  background: rgba(0, 0, 0, .12);
+}
+
+.slashed-cp__fam-banner {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 52px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: opacity 120ms;
+  box-sizing: border-box;
+}
+.slashed-cp__fam-banner:hover { opacity: .85; }
+.slashed-cp__fam-banner-lbl {
+  font: 700 9px/1 var(--rebemer-font);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, .9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+}
+
+.slashed-cp__fam-sec {
+  margin: 8px 0 6px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--rebemer-fg-muted);
+}
+.slashed-cp__fam-sec:first-child { margin-top: 0; }
+.slashed-cp__fam-sec-range {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, .25);
+}
+
+/* ── Scale / alpha strip ──────────────────────────────────────────── */
+.slashed-cp__strip {
+  display: flex;
+  height: 24px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.slashed-cp__strip--alpha { margin-top: 4px; opacity: .8; }
+
+.slashed-cp__strip-sw {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transition: flex 100ms ease-out;
+}
+.slashed-cp__strip-sw:hover { flex: 2; }
+.slashed-cp__strip-sw--alpha { border-style: dashed; }
+
+/* ── Alpha expand toggle ──────────────────────────────────────────── */
+.slashed-cp__alpha-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--rebemer-fg-muted);
+  font: 10px/1 var(--rebemer-font);
+  cursor: pointer;
+}
+.slashed-cp__alpha-btn:hover { color: var(--rebemer-fg); }

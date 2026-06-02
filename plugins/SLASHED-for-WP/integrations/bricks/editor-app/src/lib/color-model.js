@@ -407,3 +407,111 @@ export function swatchValue(swatch) {
 export function swatchHex(swatch, mode) {
   return mode === 'dark' ? swatch.dark : swatch.light;
 }
+
+// ─── Quick Use model ───────────────────────────────────────────────────────
+
+/**
+ * Curated token list for the Quick Use section, organised by design role.
+ * Optimised for business / portfolio / e-commerce / landing-page builds.
+ * Missing tokens (the theme doesn't define them) are silently skipped.
+ */
+const QUICK_USE_GROUPS = [
+  {
+    id: 'typography',
+    label: 'Typography',
+    tokens: [
+      { var: '--sf-color-heading',            label: 'Heading' },
+      { var: '--sf-color-text',               label: 'Text' },
+      { var: '--sf-color-text--muted',        label: 'Text · Muted' },
+      { var: '--sf-color-text--secondary',    label: 'Text · Secondary' },
+      { var: '--sf-color-text--on-primary',   label: 'On Primary' },
+      { var: '--sf-color-text--on-secondary', label: 'On Secondary' },
+    ],
+  },
+  {
+    id: 'surfaces',
+    label: 'Surfaces',
+    tokens: [
+      { var: '--sf-color-bg',      label: 'Background' },
+      { var: '--sf-color-surface', label: 'Surface' },
+      { var: '--sf-color-raised',  label: 'Raised' },
+      { var: '--sf-color-inset',   label: 'Inset' },
+      { var: '--sf-color-overlay', label: 'Overlay' },
+      { var: '--sf-color-inverse', label: 'Inverse' },
+    ],
+  },
+  {
+    id: 'structure',
+    label: 'Structure',
+    tokens: [
+      { var: '--sf-color-border',         label: 'Border' },
+      { var: '--sf-color-border--subtle', label: 'Border · Subtle' },
+      { var: '--sf-color-border--strong', label: 'Border · Strong' },
+      { var: '--sf-color-link',           label: 'Link' },
+      { var: '--sf-color-link--hover',    label: 'Link · Hover' },
+    ],
+  },
+  {
+    id: 'brand',
+    label: 'Brand',
+    tokens: [
+      { var: '--sf-color-primary',        label: 'Primary' },
+      { var: '--sf-color-primary-hover',  label: 'Primary · Hover' },
+      { var: '--sf-color-primary-subtle', label: 'Primary · Subtle' },
+      { var: '--sf-color-action',         label: 'Action' },
+      { var: '--sf-color-action-hover',   label: 'Action · Hover' },
+      { var: '--sf-color-secondary',      label: 'Secondary' },
+      { var: '--sf-color-tertiary',       label: 'Tertiary' },
+    ],
+  },
+  {
+    id: 'feedback',
+    label: 'Feedback',
+    tokens: [
+      { var: '--sf-color-success',         label: 'Success' },
+      { var: '--sf-color-success-subtle',  label: 'Success · Subtle' },
+      { var: '--sf-color-warning',         label: 'Warning' },
+      { var: '--sf-color-warning-subtle',  label: 'Warning · Subtle' },
+      { var: '--sf-color-error',           label: 'Error' },
+      { var: '--sf-color-error-subtle',    label: 'Error · Subtle' },
+      { var: '--sf-color-info',            label: 'Info' },
+      { var: '--sf-color-danger',          label: 'Danger' },
+    ],
+  },
+];
+
+/**
+ * Build the Quick Use model — a curated ~30-token subset organised by design
+ * role rather than token family. Only tokens present in the light hex map are
+ * included; the rest are silently skipped so the panel adapts to whatever
+ * subset a given theme defines.
+ *
+ * @param {string[]} _variables  (unused — kept for interface parity with buildColorModel)
+ * @param {Record<string,string>} light  Light-mode hex map.
+ * @param {Record<string,string>} dark   Dark-mode hex map.
+ * @returns {{ groups: Array<{ id: string, label: string, swatches: object[] }> }}
+ */
+export function buildQuickUseModel(_variables, light, dark) {
+  const lightMap = light && typeof light === 'object' ? light : {};
+  const darkMap  = dark  && typeof dark  === 'object' ? dark  : {};
+
+  const groups = [];
+  for (const groupDef of QUICK_USE_GROUPS) {
+    const swatches = [];
+    for (const token of groupDef.tokens) {
+      const l = lightMap[token.var];
+      if (!l) continue;
+      const d = darkMap[token.var] || l;
+      swatches.push({
+        var:   token.var,
+        name:  token.var.slice(2),
+        label: token.label,
+        light: l,
+        dark:  d,
+        alpha: /overlay|subtle|ghost|muted|dim|alpha/i.test(token.var),
+      });
+    }
+    if (swatches.length) groups.push({ id: groupDef.id, label: groupDef.label, swatches });
+  }
+  return { groups };
+}

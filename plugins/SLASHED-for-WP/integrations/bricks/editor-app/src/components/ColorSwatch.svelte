@@ -14,11 +14,11 @@
    */
   import { swatchHex } from '../lib/color-model.js';
 
-  /** @type {{ swatch: object, mode: 'light'|'dark'|'both', onPick: (s: object) => void }} */
-  let { swatch, mode, onPick } = $props();
+  /** @type {{ swatch: object, mode: 'light'|'dark'|'both', onPick?: (s: object) => void }} */
+  let { swatch, mode, onPick = undefined } = $props();
 
   const title = $derived(
-    `${swatch.name}\nlight ${swatch.light}  ·  dark ${swatch.dark}\nclick: apply + copy var(${swatch.var})`
+    `${swatch.name}\nlight ${swatch.light}  ·  dark ${swatch.dark}`
   );
 </script>
 
@@ -29,8 +29,8 @@
   class:slashed-cp-swatch--split={mode === 'both'}
   style="--cp-l:{swatch.light}; --cp-d:{swatch.dark}; --cp-solid:{swatchHex(swatch, mode === 'dark' ? 'dark' : 'light')};"
   {title}
-  aria-label={`${swatch.name} — apply and copy`}
-  onclick={() => onPick(swatch)}
+  aria-label={swatch.name}
+  onclick={() => onPick?.(swatch)}
 >
   <span class="slashed-cp-swatch__fill" aria-hidden="true"></span>
 </button>

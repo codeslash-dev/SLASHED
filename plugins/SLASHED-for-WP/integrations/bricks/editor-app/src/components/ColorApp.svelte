@@ -19,5 +19,5 @@
 <ColorLauncher {open} onToggle={() => (open = !open)} />
 
 {#if open}
-  <ColorPanel {source} onClose={() => (open = false)} />
+  <ColorPanel {source} referenceMode={true} onClose={() => (open = false)} />
 {/if}

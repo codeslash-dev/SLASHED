@@ -286,10 +286,48 @@ function applyToColorInput(inputEl, value) {
 }
 
 /**
+ * Find the right-edge x-coordinate of the Bricks settings panel so the
+ * picker ColorPanel can dock flush against it. Tries closest() first on the
+ * triggering element (most reliable), then falls back to document queries.
+ * Returns null when no panel is detected; the ColorPanel CSS falls back to
+ * --cp-dock-left: 320px in that case.
+ *
+ * @param {Element|null} anchorEl  Element inside the Bricks settings panel.
+ * @returns {number|null}
+ */
+function getBricksPanelRight(anchorEl) {
+  const selectors = [
+    '#bricks-panel',
+    '#brx-builder',
+    '.brx-builder',
+    '[id^="bricks-panel"]',
+    '#bricks-panel-inner',
+  ];
+  if (anchorEl) {
+    for (const sel of selectors) {
+      const el = anchorEl.closest(sel);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        if (r.width > 100) return Math.ceil(r.right);
+      }
+    }
+  }
+  for (const sel of selectors) {
+    const el = document.querySelector(sel);
+    if (el) {
+      const r = el.getBoundingClientRect();
+      if (r.width > 100) return Math.ceil(r.right);
+    }
+  }
+  return null;
+}
+
+/**
  * Open a contextual ColorPanel bound to a specific Bricks colour input.
- * Picker mode hides the target selector; the chosen var() is written
- * directly into the live input via a native input event so Vue updates the
- * correct reactive field regardless of its type.
+ * The panel docks to the right edge of the Bricks settings panel so it
+ * feels attached rather than floating. The chosen var() is written directly
+ * into the live input via a native input event so Vue updates the correct
+ * reactive field regardless of its type.
  *
  * @param {Element} colorInputEl  [data-control="text"].color-input wrapper element
  */
@@ -297,6 +335,9 @@ function openColorPickerPanel(colorInputEl) {
   closeColorPickerPanel();
   const src = cfg?.colorPanel;
   if (!src || !Array.isArray(src.variables) || src.variables.length === 0) return;
+
+  const dockedLeft = getBricksPanelRight(colorInputEl);
+
   const node = document.createElement('div');
   ensureHost().appendChild(node);
   colorPickerPanel = {
@@ -304,6 +345,7 @@ function openColorPickerPanel(colorInputEl) {
       target: node,
       props: {
         source: src,
+        dockedLeft,
         onPickValue: (value) => {
           // Re-query at pick time so we always write to the live input even if
           // Bricks re-rendered the control after the button was clicked.
