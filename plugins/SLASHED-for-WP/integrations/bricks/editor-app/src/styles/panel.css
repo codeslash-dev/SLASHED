@@ -610,23 +610,38 @@ li[data-id]:focus-within > .rebemer-badge-host {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* flex: 0 0 + min-width keep the button square in Bricks' flex row;
+     flex-shrink:0 alone isn't enough when the row is already compressed. */
+  flex: 0 0 22px;
+  min-width: 22px;
   width: 22px;
   height: 22px;
   border-radius: 4px;
   cursor: pointer;
   opacity: 0.6;
-  flex-shrink: 0;
   transition: opacity 120ms, background 120ms;
 }
 .slashed-sf-color-btn:hover { opacity: 1; background: rgba(91, 140, 255, .15); }
+/* Active state — shown after a colour is picked; dot background is set
+   inline by JS to the resolved hex. */
+.slashed-sf-color-btn--active { opacity: 1; }
+.slashed-sf-color-btn--active:hover { background: rgba(255, 255, 255, .06); }
+
 .slashed-sf-color-btn__dot {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: conic-gradient(from 210deg, #5b8cff, #b07cff, #ff6b6b, #ffd24a, #4ade80, #5b8cff);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
   flex-shrink: 0;
+  transition: border-radius 120ms;
+}
+/* After a pick the dot shows the active colour (background set inline);
+   switch from circle to a rounded-square swatch shape. */
+.slashed-sf-color-btn--active .slashed-sf-color-btn__dot {
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18), 0 0 0 1.5px rgba(255, 255, 255, .22);
 }
 
 /* Variable-picker colour swatch — a small square prepended to each
