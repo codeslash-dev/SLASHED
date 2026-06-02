@@ -78,7 +78,7 @@ touching the other by setting the `-dark` token on `:root`:
 
 ```css
 :root {
-  --sf-color-surface-dark: oklch(0.18 0.01 280); /* a slightly warmer dark bg */
+  --sf-color-base-dark: oklch(0.18 0.01 280); /* a slightly warmer dark bg */
 }
 ```
 
@@ -130,7 +130,7 @@ mode in one element:
 /* In slashed.themes: */
 [data-brand="night"] {
   --sf-color-primary-light: oklch(0.55 0.22 240);
-  --sf-color-surface-light:    oklch(0.985 0.003 240);
+  --sf-color-base-light:    oklch(0.985 0.003 240);
 }
 ```
 

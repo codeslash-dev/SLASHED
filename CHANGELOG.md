@@ -31,11 +31,11 @@ freeze. Done in a single PR with no version bump.
 
 #### Tokens renamed
 
-- **`--sf-color-base-*` → `--sf-color-surface-*`** — the page-surface source
-  token family is renamed for clarity. `--sf-color-base-light` /
-  `--sf-color-base-dark` become `--sf-color-surface-light` /
-  `--sf-color-surface-dark`; the full scale (`-50` … `-950`), alpha steps, and
-  on-color text token (`--sf-color-text--on-surface`) follow the same rename.
+- **`--sf-color-surface-*` → `--sf-color-base-*`** — the page-surface source
+  token family is renamed for clarity. `--sf-color-surface-light` /
+  `--sf-color-surface-dark` become `--sf-color-base-light` /
+  `--sf-color-base-dark`; the full scale (`-50` … `-950`), alpha steps, and
+  on-color text token (`--sf-color-text--on-base`) follow the same rename.
   The resolved semantic token `--sf-color-surface` (page-surface anchor) is
   unchanged — only the source-token family prefix changes.
 - **`--sf-color-well` → `--sf-color-inset`** — renamed to better communicate

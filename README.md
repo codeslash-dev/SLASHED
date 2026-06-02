@@ -137,13 +137,13 @@ Override the source tokens in your own stylesheet — any valid CSS color works 
   --sf-color-primary-light: #3b5bdb;
   --sf-color-action-light:  #0ca678;
   --sf-color-neutral-light: #495057;
-  --sf-color-surface-light:    #f8f9fa;
+  --sf-color-base-light:    #f8f9fa;
 
   /* dark values */
   --sf-color-primary-dark:  #748ffc;
   --sf-color-action-dark:   #38d9a9;
   --sf-color-neutral-dark:  #adb5bd;
-  --sf-color-surface-dark:     #1a1b1e;
+  --sf-color-base-dark:     #1a1b1e;
 }
 ```
 
