@@ -348,7 +348,48 @@ function openColorPickerPanel(colorInputEl) {
           // Re-query at pick time so we always write to the live input even if
           // Bricks re-rendered the control after the button was clicked.
           const inputEl = colorInputEl?.querySelector('input[type="text"]');
-          return applyToColorInput(inputEl, value);
+          const ok = applyToColorInput(inputEl, value);
+          if (ok) {
+            const varName = value.match(/^var\((--[^)]+)\)/)?.[1];
+            const hex = varName ? (cfg?.colorHexMap?.[varName] ?? null) : null;
+
+            // Show the picked colour on the SF icon dot.
+            const btn = colorInputEl?.querySelector('.slashed-sf-color-btn');
+            if (btn) {
+              const dot = btn.querySelector('.slashed-sf-color-btn__dot');
+              if (dot) {
+                if (hex) { dot.style.background = hex; dot.style.removeProperty('box-shadow'); }
+                else     { dot.style.removeProperty('background'); }
+              }
+              btn.classList.toggle('slashed-sf-color-btn--active', !!hex);
+            }
+
+            // Patch Bricks' colour preview swatch after Vue's nextTick settles.
+            // The swatch is the 2nd <span> child of .bricks-control-preview;
+            // when no resolvable colour is set Bricks hides it (display:none)
+            // and marks the parent with class "empty". Override both using the
+            // server-resolved hex from the colour map.
+            if (hex) {
+              const colorControl = colorInputEl?.closest('[data-control="color"]');
+              requestAnimationFrame(() => {
+                if (!colorControl) return;
+                const preview = colorControl.querySelector('.bricks-control-preview');
+                if (!preview) return;
+                // Target the swatch span by excluding Bricks' two named spans
+                // (.color-value-tooltip and .bricks-svg-wrapper). Falls back to
+                // position [1] for unknown future Bricks DOM variants.
+                const swatchSpan =
+                  preview.querySelector(':scope > span:not(.color-value-tooltip):not(.bricks-svg-wrapper)') ??
+                  preview.querySelectorAll(':scope > span')[1];
+                if (swatchSpan) {
+                  swatchSpan.style.display = 'block';
+                  swatchSpan.style.background = hex;
+                }
+                preview.classList.remove('empty');
+              });
+            }
+          }
+          return ok;
         },
         onPick: closeColorPickerPanel,
         onClose: closeColorPickerPanel,
