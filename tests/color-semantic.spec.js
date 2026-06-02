@@ -268,7 +268,9 @@ test.describe('Dark mode auto-derivation', () => {
   });
 
   test('all 6 brand colors are lighter in dark theme than light theme', async ({ page }) => {
-    const names = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface'];
+    // Use the resolved tokens: --sf-color-base is the brand family source;
+    // --sf-color-surface is a semantic alias = var(--sf-color-base) so both invert.
+    const names = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
 
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     const lightLums = await Promise.all(
@@ -282,8 +284,8 @@ test.describe('Dark mode auto-derivation', () => {
 
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
-      if (name === 'surface') {
-        // Surface inverts: near-white light → near-dark dark.
+      if (name === 'base') {
+        // Base inverts: near-white light → near-dark dark.
         expect(darkLums[i], `${name} dark should be darker than light`).toBeLessThan(lightLums[i]);
       } else {
         // All other brand colors: dark variant must be lighter.

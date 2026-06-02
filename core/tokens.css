@@ -187,7 +187,7 @@
        :root[data-lumlocker] override in core/themes.css.
        Locks all 5 brand colors (primary, secondary, tertiary,
        action, neutral) to one shared lightness while keeping their
-       individual hue and chroma. Surface is excluded — it must remain
+       individual hue and chroma. Base is excluded — it must remain
        near-white in light mode for the page background.
        Override to change the locked lightness:
          :root { --sf-lumlocker: 0.55 }
