@@ -137,12 +137,18 @@
       if (applied) {
         const label = api.getElementLabel(id) || 'element';
         toast = { kind: 'success', message: `${targetLabel} of “${label}” → ${swatch.name}` };
-        return;
+      } else {
+        // We had a selection but couldn't write to it (e.g. a stale id from
+        // the DOM fallback). Say so rather than implying nothing was selected.
+        toast = copied
+          ? { kind: 'info', message: `Copied ${value} — couldn't apply to the selected element` }
+          : { kind: 'error', message: `Couldn't apply or copy ${value}` };
       }
+      return;
     }
 
     toast = copied
-      ? { kind: 'info', message: `Copied ${value} — paste into any Bricks colour field` }
+      ? { kind: 'info', message: `Copied ${value} — select an element or paste into any Bricks colour field` }
       : { kind: 'error', message: `Couldn't copy ${value}` };
   }
 

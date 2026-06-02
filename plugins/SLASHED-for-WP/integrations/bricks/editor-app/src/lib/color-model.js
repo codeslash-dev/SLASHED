@@ -27,14 +27,15 @@
 
 const PREFIX = '--sf-color-';
 
+// These family lists mirror the PHP side (class-color-resolver.php
+// `$default_sources` and class-inventory.php's brand/status arrays). They
+// change rarely; if you add or rename a family, update all three in sync.
+
 /** Brand families, in canonical display order. */
 export const BRAND_FAMILIES = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
 
 /** Status families, in canonical display order. */
 export const STATUS_FAMILIES = ['success', 'warning', 'error', 'info', 'danger'];
-
-/** Numeric scale steps, light → dark. */
-const SCALE_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
 /** Alpha steps, most → least transparent. */
 const ALPHA_STEPS = ['a5', 'a10', 'a20', 'a30', 'a40', 'a50', 'a60', 'a70', 'a80', 'a90', 'a95'];
@@ -232,7 +233,11 @@ function compareInFamily(a, b) {
   if (a.info.kind === 'alias') {
     const ai = ALIAS_ORDER.indexOf(a.info.step);
     const bi = ALIAS_ORDER.indexOf(b.info.step);
-    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    const ar = ai === -1 ? 999 : ai;
+    const br = bi === -1 ? 999 : bi;
+    if (ar !== br) return ar - br;
+    // Both unranked → lexical tiebreaker for a stable, reproducible order.
+    return String(a.info.step).localeCompare(String(b.info.step));
   }
   return 0;
 }

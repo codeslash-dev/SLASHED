@@ -266,8 +266,10 @@ export function getActiveElementId() {
  *
  * These are the standard Bricks "_" style controls; a colour control stores
  * an object whose `raw` field carries the literal CSS value (so a
- * `var(--sf-color-*)` reference round-trips intact). We only ever write
- * `raw`, leaving any sibling hex/hsl/rgb fields untouched.
+ * `var(--sf-color-*)` reference round-trips intact). We deliberately write a
+ * minimal `{ raw }` object — Bricks can't resolve a CSS variable to
+ * hex/hsl/rgb at edit time, so those sibling fields have no meaningful value
+ * to set here.
  *
  * @type {Record<string, [string, string]>}
  */
