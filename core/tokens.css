@@ -460,6 +460,16 @@
      token (which uses light-dark()) via relative colour syntax,
      so they auto-shift when the colour scheme switches.
 
+     Shade aliases (superlight/xlight/lighter/darker/xdark/superdark)
+     use absolute lightness offsets, so they aim toward near-white /
+     near-black rather than toward the actual page surface. On a
+     non-white or non-dark surface (e.g. warm cream, dark slate) the
+     steps will look off. Load optional/tokens.palette.css to get
+     surface-aware tints via color-mix(in oklab, …, --sf-color-surface).
+
+     Alpha aliases (subtle/muted/ghost) are transparency-based and
+     therefore work correctly on any surface without the palette.
+
      When optional/tokens.palette.css is also loaded, it overrides
      these aliases to point at the surface-aware numeric scale steps
      it adds (-50…-950, -a5…-a95) for the 6 brand colour families.
