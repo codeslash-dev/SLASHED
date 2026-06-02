@@ -297,11 +297,9 @@ function applyToColorInput(inputEl, value) {
  */
 function getBricksPanelRight(anchorEl) {
   const selectors = [
-    '#bricks-panel',
-    '#brx-builder',
-    '.brx-builder',
-    '[id^="bricks-panel"]',
     '#bricks-panel-inner',
+    '#bricks-panel',
+    '[id^="bricks-panel"]',
   ];
   if (anchorEl) {
     for (const sel of selectors) {
@@ -350,7 +348,7 @@ function openColorPickerPanel(colorInputEl) {
           // Re-query at pick time so we always write to the live input even if
           // Bricks re-rendered the control after the button was clicked.
           const inputEl = colorInputEl?.querySelector('input[type="text"]');
-          applyToColorInput(inputEl, value);
+          return applyToColorInput(inputEl, value);
         },
         onPick: closeColorPickerPanel,
         onClose: closeColorPickerPanel,

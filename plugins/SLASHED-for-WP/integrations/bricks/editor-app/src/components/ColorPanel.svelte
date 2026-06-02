@@ -69,9 +69,10 @@
   let expandedFamily = $state(null);
   let alphaOpen      = $state(new Set());
 
-  const fullModel   = $derived(buildColorModel(source?.variables, source?.light, source?.dark));
-  const filtered    = $derived(filterModel(fullModel, query));
-  const quickModel  = $derived(buildQuickUseModel(source?.variables, source?.light, source?.dark));
+  const fullModel        = $derived(buildColorModel(source?.variables, source?.light, source?.dark));
+  const normalizedQuery  = $derived(query.trim());
+  const filtered         = $derived(filterModel(fullModel, normalizedQuery));
+  const quickModel       = $derived(buildQuickUseModel(source?.variables, source?.light, source?.dark));
   const totalTokens = $derived(fullModel.groups.reduce((n, g) => n + g.count, 0));
 
   const brandGroups  = $derived(fullModel.groups.filter(g => g.type === 'brand'));
@@ -137,7 +138,11 @@
     const value = swatchValue(swatch);
 
     if (pickerMode) {
-      onPickValue(value);
+      const ok = onPickValue(value);
+      if (ok === false) {
+        toast = { kind: 'error', message: `Couldn't apply ${value} — input not found` };
+        return;
+      }
       onPick?.();
       return;
     }
@@ -150,14 +155,8 @@
 
   // ── Accordion ────────────────────────────────────────────────────────────
   function toggleFamily(id) {
-    if (expandedFamily === id) {
-      expandedFamily = null;
-    } else {
-      expandedFamily = id;
-      const next = new Set(alphaOpen);
-      next.delete(id);
-      alphaOpen = next;
-    }
+    expandedFamily = expandedFamily === id ? null : id;
+    alphaOpen = new Set();
   }
   function toggleAlpha(id) {
     const next = new Set(alphaOpen);
@@ -229,11 +228,11 @@
 
   <div class="slashed-cp__body">
 
-    {#if query}
+    {#if normalizedQuery}
 
       <!-- ── SEARCH RESULTS ──────────────────────────────────────────── -->
       {#if filtered.groups.length === 0}
-        <p class="slashed-cp__empty">No tokens match "{query}".</p>
+        <p class="slashed-cp__empty">No tokens match "{normalizedQuery}".</p>
       {/if}
       {#each filtered.groups as group (group.id)}
         <section class="slashed-cp__group" data-type={group.type}>
