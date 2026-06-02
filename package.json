@@ -42,7 +42,7 @@
     "version-sync": "node scripts/version-sync.js",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
-    "pretest": "npm run build && node --test tests/element-types.test.js tests/class-hints.test.js",
+    "pretest": "npm run build && node --test tests/element-types.test.js tests/class-hints.test.js tests/color-model.test.js",
     "test": "playwright test",
     "test:install": "playwright install --with-deps chromium firefox webkit",
     "release": "release-it",

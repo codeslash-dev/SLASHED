@@ -11,6 +11,7 @@ A WordPress plugin that integrates the [SLASHED](https://github.com/codeslash-de
 - **Variable-Picker Swatches** - Paints a colour square next to each `--sf-color-*` entry in the Bricks variable-picker dropdown, builder-side only. Because the variables stay empty-valued, Bricks has no value to draw a swatch from; the square is rendered from a server-resolved hex map so dark/light stays 100% framework-driven and nothing is written to `:root`. Purely additive and fail-silent: if Bricks ever changes the picker markup you lose the squares, never the picker. Restores the swatch affordance lost when the Color Palette is disabled on Bricks 2.2+. Toggle with the `slashed_bricks/show_color_swatches` filter
 - **Dynamic Detection** - The integration parses the loaded CSS bundle at runtime, so registrations stay in sync with whichever bundle (`essential` / `optimal` / `full`) and SLASHED release is active. There is no hand-curated list to drift out of date.
 - **reBEMer** - Subtree-scoped BEM class manager inside the Bricks builder structure panel: add / rename / replace classes for an element and its children in one transaction, with reference-count preflight (REST), snapshot+rollback, reserved-name guard against SLASHED utilities, and Cmd/Ctrl-Z undo. See [docs/rebemer.md](../../docs/rebemer.md) for the full design.
+- **Color System Panel** - A floating in-builder browser for every `--sf-color-*` token, launched from a pill in the builder corner. Tokens are grouped the way the framework organises colour (the six brand families and five status families, each split into shades/tints, transparent steps, and named semantic aliases, plus a combined Semantic group for page-level tokens like text/bg/border/link). Its differentiator over a single-mode palette: because every SLASHED token is an adaptive `light-dark()` value, each swatch previews **both** variants at once (the "Both" mode splits a swatch on the diagonal — light top-left, dark bottom-right), and the Light/Dark toggle drives the live canvas `[data-theme]` so real elements adapt as you browse. Picking a swatch copies its `var(--sf-color-*)` reference to the clipboard **and** applies it to the selected element's chosen target (background / text / border) — always the variable, never a baked hex, so the element stays theme- and dark-mode-aware. With nothing selected it degrades to copy-only. Light/dark hex previews are server-resolved (`Slashed_Bricks_Color_Resolver`) so no SLASHED stylesheet needs loading in the builder chrome. Toggle with the `slashed_bricks/show_color_panel` filter.
 
 ## Requirements
 
@@ -103,6 +104,15 @@ Control whether colour swatches are painted next to `--sf-color-*` entries in th
 ```php
 // Hide the variable-picker swatches.
 add_filter( 'slashed_bricks/show_color_swatches', '__return_false' );
+```
+
+#### `slashed_bricks/show_color_panel`
+
+Control whether the in-builder **Color System Panel** (and its launcher pill) is loaded (see Color System Panel above). Defaults to `true`. Returning `false` skips localising the panel's token list and light/dark hex maps, so no extra data is sent to the builder.
+
+```php
+// Hide the Color System panel.
+add_filter( 'slashed_bricks/show_color_panel', '__return_false' );
 ```
 
 #### `slashed_bricks/registered_variables`

@@ -61,6 +61,13 @@ class Slashed_Bricks_Inventory {
 	private static $hex_map_cache = null;
 
 	/**
+	 * Per-request cache for the resolved DARK-mode color hex map.
+	 *
+	 * @var array|null
+	 */
+	private static $hex_map_dark_cache = null;
+
+	/**
 	 * Get the full inventory, resolving and caching on first access.
 	 *
 	 * @return array{variables: string[], sf_classes: string[], is_classes: string[]}
@@ -150,8 +157,9 @@ class Slashed_Bricks_Inventory {
 	 * Reset the per-request cache. Mostly useful for tests.
 	 */
 	public static function flush() {
-		self::$cache         = null;
-		self::$hex_map_cache = null;
+		self::$cache              = null;
+		self::$hex_map_cache      = null;
+		self::$hex_map_dark_cache = null;
 	}
 
 	/**
@@ -178,6 +186,35 @@ class Slashed_Bricks_Inventory {
 		self::$hex_map_cache = Slashed_Bricks_Color_Resolver::resolve( $color_values );
 
 		return self::$hex_map_cache;
+	}
+
+	/**
+	 * Get the resolved DARK-mode hex color map for all --sf-color-* variables.
+	 *
+	 * Companion to get_color_hex_map(); used by the editor Color System panel
+	 * to preview every token's dark variant alongside its light value.
+	 *
+	 * @return array<string, string> Map of variable name to hex string.
+	 */
+	public static function get_color_hex_map_dark() {
+		if ( null !== self::$hex_map_dark_cache ) {
+			return self::$hex_map_dark_cache;
+		}
+
+		$inv = self::get();
+
+		$color_values = isset( $inv['color_values'] ) ? $inv['color_values'] : array();
+
+		// Merge admin-saved color overrides so dark previews track the same
+		// customized -light source tokens the light map uses.
+		$admin_overrides = self::get_admin_color_overrides();
+		if ( ! empty( $admin_overrides ) ) {
+			$color_values = array_merge( $color_values, $admin_overrides );
+		}
+
+		self::$hex_map_dark_cache = Slashed_Bricks_Color_Resolver::resolve_dark( $color_values );
+
+		return self::$hex_map_dark_cache;
 	}
 
 	/**

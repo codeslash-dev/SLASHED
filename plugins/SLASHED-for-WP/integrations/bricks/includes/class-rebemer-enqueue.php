@@ -62,6 +62,35 @@ class Slashed_Bricks_ReBEMer_Enqueue {
 			? Slashed_Bricks_Inventory::get_color_hex_map()
 			: array();
 
+		/**
+		 * Toggle the in-builder Color System panel.
+		 *
+		 * The panel (see editor-app ColorPanel.svelte) is a floating browser
+		 * for the framework's `--sf-color-*` tokens that previews every
+		 * token's light AND dark variant at once, applies a chosen colour to
+		 * the selected element (text / background / border), and copies the
+		 * `var(--sf-color-*)` reference. Filter to false to hide its launcher.
+		 *
+		 * @param bool $enabled Default true.
+		 */
+		$show_color_panel = (bool) apply_filters( 'slashed_bricks/show_color_panel', true );
+
+		// The panel needs the ordered token list plus both hex maps to build
+		// its grouped model and dual-mode swatches. Light reuses the swatch
+		// map already resolved above when available.
+		$color_panel_data = array(
+			'variables' => array(),
+			'light'     => array(),
+			'dark'      => array(),
+		);
+		if ( $show_color_panel && class_exists( 'Slashed_Bricks_Inventory' ) ) {
+			$color_panel_data['variables'] = Slashed_Bricks_Inventory::get_color_variables();
+			$color_panel_data['light']     = ! empty( $color_hex_map )
+				? $color_hex_map
+				: Slashed_Bricks_Inventory::get_color_hex_map();
+			$color_panel_data['dark']      = Slashed_Bricks_Inventory::get_color_hex_map_dark();
+		}
+
 		wp_localize_script(
 			self::SCRIPT_HANDLE,
 			'slashedBricksEditor',
@@ -70,6 +99,8 @@ class Slashed_Bricks_ReBEMer_Enqueue {
 				'classHints'        => Slashed_Token_Page::get_class_hints(),
 				'showColorSwatches' => $show_color_swatches,
 				'colorHexMap'       => $color_hex_map,
+				'showColorPanel'    => $show_color_panel,
+				'colorPanel'        => $color_panel_data,
 			)
 		);
 	}

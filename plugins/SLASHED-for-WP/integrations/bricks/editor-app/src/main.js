@@ -22,6 +22,7 @@ import * as classHints from './lib/class-hints.js';
 import * as colorSwatches from './lib/color-swatches.js';
 import BemBadge from './components/BemBadge.svelte';
 import BemPanel from './components/BemPanel.svelte';
+import ColorApp from './components/ColorApp.svelte';
 import './styles/panel.css';
 
 const STRUCTURE_PANEL_SELECTOR = '#bricks-structure';
@@ -41,6 +42,9 @@ const badgeInstances = new Map();
 /** @type {{ instance: any, node: HTMLElement } | null} */
 let activePanel = null;
 
+/** @type {{ instance: any, node: HTMLElement } | null} */
+let colorApp = null;
+
 
 function ensureHost() {
   let host = document.getElementById(HOST_ID);
@@ -52,12 +56,14 @@ function ensureHost() {
   return host;
 }
 
+/** Config injected by class-rebemer-enqueue.php via wp_localize_script. */
+let cfg = null;
+
 function start() {
   // Class documentation tooltips are independent of the reBEMer badge
   // pipeline below: they hook the Bricks settings panel / class manager,
   // not the structure panel, so they run even if the Vue probe fails.
-  // Config is injected by class-rebemer-enqueue.php via wp_localize_script.
-  const cfg = window.slashedBricksEditor;
+  cfg = window.slashedBricksEditor;
   if (cfg && typeof cfg === 'object') {
     classHints.init(cfg.showClassHints, cfg.classHints, { signal });
     colorSwatches.init(cfg.showColorSwatches, cfg.colorHexMap, { signal });
@@ -80,6 +86,11 @@ function start() {
 }
 
 function onProbed() {
+  // Color System panel: mount once the Bricks app is confirmed (apply needs
+  // the live state). Independent of the structure-panel badge pipeline — the
+  // launcher is reachable from anywhere in the builder.
+  mountColorApp();
+
   // The structure panel may not be in the DOM yet on first paint;
   // observe body once for its arrival, then narrow to the panel.
   const existing = document.querySelector(STRUCTURE_PANEL_SELECTOR);
@@ -214,6 +225,27 @@ function injectBadgeInto(li) {
   badgeInstances.set(elementId, { instance, host });
 }
 
+function mountColorApp() {
+  if (colorApp) return; // already mounted
+  const src = cfg && cfg.colorPanel;
+  if (!cfg?.showColorPanel || !src || !Array.isArray(src.variables) || src.variables.length === 0) {
+    return; // disabled, or no token data to show
+  }
+  const node = document.createElement('div');
+  ensureHost().appendChild(node);
+  colorApp = {
+    instance: mount(ColorApp, { target: node, props: { source: src } }),
+    node,
+  };
+}
+
+function unmountColorApp() {
+  if (!colorApp) return;
+  try { unmount(colorApp.instance); } catch (err) { log('warn', 'color app unmount failed', err); }
+  colorApp.node.remove();
+  colorApp = null;
+}
+
 function openPanel(elementId) {
   closePanel();
   const node = document.createElement('div');
@@ -238,6 +270,7 @@ function closePanel() {
 window.addEventListener('beforeunload', () => {
   controller.abort();
   closePanel();
+  unmountColorApp();
   classHints.destroy();
   colorSwatches.destroy();
   for (const { instance } of badgeInstances.values()) {

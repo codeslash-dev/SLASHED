@@ -113,20 +113,70 @@ class Slashed_Bricks_Color_Resolver {
 	);
 
 	/**
-	 * Resolve color values into a hex map for all --sf-color-* variables.
+	 * Resolve color values into a LIGHT-mode hex map for all --sf-color-* variables.
 	 *
 	 * @param array $color_values Associative array from the CSS parser.
 	 * @return array<string, string> Map of variable name to hex string.
 	 */
 	public static function resolve( $color_values ) {
-		$hex_map = array();
-
-		// Determine source oklch values for each family.
 		$sources = self::resolve_sources( $color_values );
 
-		$families = array_keys( self::$default_sources );
+		// Light-mode family scales composite alpha steps over white.
+		$hex_map = self::build_family_scales( $sources, array( 255, 255, 255 ) );
 
-		foreach ( $families as $family ) {
+		// Semantic tokens with reasonable light-mode defaults.
+		$hex_map = self::resolve_semantic_tokens( $hex_map, $sources );
+
+		return $hex_map;
+	}
+
+	/**
+	 * Resolve color values into a DARK-mode hex map for all --sf-color-* variables.
+	 *
+	 * Mirrors the framework's dark auto-derivation (core/tokens.css): each
+	 * family's dark source is lightened from its light source via
+	 * clamp(0.65, 0.95 - l*0.5, 0.88) (base inverts via clamp(0.16, 1.18 - l, 0.24)),
+	 * then the same scale/alpha/alias machinery runs on the dark sources.
+	 * Semantic tokens use the direction-flipped dark formulas. Alpha steps
+	 * composite over the dark base surface rather than white.
+	 *
+	 * Like resolve(), the output is an intentional approximation for builder
+	 * swatch previews, not a pixel-perfect replica of browser-rendered
+	 * light-dark() / relative-color output.
+	 *
+	 * @param array $color_values Associative array from the CSS parser.
+	 * @return array<string, string> Map of variable name to hex string.
+	 */
+	public static function resolve_dark( $color_values ) {
+		$light_sources = self::resolve_sources( $color_values );
+		$dark_sources  = self::derive_dark_sources( $light_sources );
+
+		// Alpha swatches composite over the dark base surface, not white, so
+		// translucent tokens read the way they do on a dark page.
+		$base_dark_hex = isset( $dark_sources['base'] )
+			? self::oklch_to_hex( $dark_sources['base'][0], $dark_sources['base'][1], $dark_sources['base'][2] )
+			: '#1a1b1e';
+
+		$hex_map = self::build_family_scales( $dark_sources, self::hex_to_rgb( $base_dark_hex ) );
+		$hex_map = self::resolve_semantic_tokens_dark( $hex_map, $dark_sources, $light_sources );
+
+		return $hex_map;
+	}
+
+	/**
+	 * Build the per-family scale/alpha/alias hex map from resolved sources.
+	 *
+	 * Shared by both the light and dark resolvers — only the source oklch
+	 * values and the alpha-compositing backdrop differ between modes.
+	 *
+	 * @param array $sources      Family => [L, C, H].
+	 * @param array $backdrop_rgb [r, g, b] the alpha steps composite over.
+	 * @return array<string, string>
+	 */
+	private static function build_family_scales( $sources, $backdrop_rgb ) {
+		$hex_map = array();
+
+		foreach ( array_keys( self::$default_sources ) as $family ) {
 			if ( ! isset( $sources[ $family ] ) ) {
 				continue;
 			}
@@ -136,8 +186,8 @@ class Slashed_Bricks_Color_Resolver {
 
 			// The base (500 step) is the direct conversion.
 			// -light is the same source color (the @property initial-value).
-			$hex_map[ '--sf-color-' . $family ]           = $family_hex;
-			$hex_map[ '--sf-color-' . $family . '-500' ]  = $family_hex;
+			$hex_map[ '--sf-color-' . $family ]            = $family_hex;
+			$hex_map[ '--sf-color-' . $family . '-500' ]   = $family_hex;
 			$hex_map[ '--sf-color-' . $family . '-light' ] = $family_hex;
 
 			// Light steps (50-400): interpolate toward white in oklch.
@@ -158,11 +208,11 @@ class Slashed_Bricks_Color_Resolver {
 				$hex_map[ '--sf-color-' . $family . '-' . $step ] = self::oklch_to_hex( $step_l, $step_c, $oklch[2] );
 			}
 
-			// Alpha steps: opaque swatch approximation composited over white.
+			// Alpha steps: opaque swatch approximation composited over the
+			// mode backdrop (white in light mode, dark base in dark mode).
 			$family_rgb = self::hex_to_rgb( $family_hex );
-			$white_rgb  = array( 255, 255, 255 );
 			foreach ( self::$alpha_steps as $suffix => $pct ) {
-				$mixed = self::mix_rgb( $family_rgb, $white_rgb, $pct );
+				$mixed = self::mix_rgb( $family_rgb, $backdrop_rgb, $pct );
 				$hex_map[ '--sf-color-' . $family . '-' . $suffix ] = self::rgb_to_hex( $mixed );
 			}
 
@@ -175,10 +225,33 @@ class Slashed_Bricks_Color_Resolver {
 			}
 		}
 
-		// Semantic tokens with reasonable defaults.
-		$hex_map = self::resolve_semantic_tokens( $hex_map, $sources );
-
 		return $hex_map;
+	}
+
+	/**
+	 * Derive per-family dark oklch sources from the light sources.
+	 *
+	 * Brand + status: clamp(0.65, 0.95 - l*0.5, 0.88) lightness, chroma * 0.9.
+	 * Base inverts:   clamp(0.16, 1.18 - l, 0.24) lightness, chroma * 0.5.
+	 * (Matches the auto-derivation formulas in core/tokens.css.)
+	 *
+	 * @param array $light_sources Family => [L, C, H].
+	 * @return array<string, array{0:float,1:float,2:float}>
+	 */
+	private static function derive_dark_sources( $light_sources ) {
+		$dark = array();
+		foreach ( $light_sources as $family => $lch ) {
+			list( $l, $c, $h ) = $lch;
+			if ( 'base' === $family ) {
+				$dl = max( 0.16, min( 1.18 - $l, 0.24 ) );
+				$dc = $c * 0.5;
+			} else {
+				$dl = max( 0.65, min( 0.95 - $l * 0.5, 0.88 ) );
+				$dc = $c * 0.9;
+			}
+			$dark[ $family ] = array( $dl, $dc, $h );
+		}
+		return $dark;
 	}
 
 	/**
@@ -379,6 +452,136 @@ class Slashed_Bricks_Color_Resolver {
 				$sc,
 				$sh
 			);
+		}
+
+		return $hex_map;
+	}
+
+	/**
+	 * Resolve dark-mode semantic tokens (text, bg, surface, border, link…).
+	 *
+	 * Ports the direction-flipped dark formulas from core/tokens.css: surfaces
+	 * derive from the dark base source, text/border from the dark neutral
+	 * source, links from the dark action source. Alpha-composited tokens mix
+	 * over the dark base instead of white. text-on-* stays mode-agnostic
+	 * (chosen from the resolved family luminance).
+	 *
+	 * @param array $hex_map       Family scales already built (dark).
+	 * @param array $d             Dark sources (family => [L,C,H]).
+	 * @param array $light_sources Light sources — needed for selection-bg,
+	 *                             whose dark formula references action-light.
+	 * @return array<string, string>
+	 */
+	private static function resolve_semantic_tokens_dark( $hex_map, $d, $light_sources ) {
+		$light_text = '#f0f0f5';
+		$dark_text  = '#1c1c2e';
+
+		$base_hex = isset( $hex_map['--sf-color-base'] ) ? $hex_map['--sf-color-base'] : '#1a1b1e';
+		$base_rgb = self::hex_to_rgb( $base_hex );
+
+		// ---- Base-derived surfaces ----
+		if ( isset( $d['base'] ) ) {
+			list( $bl, $bc, $bh ) = $d['base'];
+			$hex_map['--sf-color-surface'] = $base_hex;
+			$hex_map['--sf-color-bg']      = self::oklch_to_hex( min( 1.0, $bl + 0.02 ), $bc, $bh );
+			$hex_map['--sf-color-well']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
+			$hex_map['--sf-color-raised']  = self::oklch_to_hex( min( 1.0, $bl + 0.04 ), $bc, $bh );
+			$hex_map['--sf-color-overlay'] = $base_hex;
+			$hex_map['--sf-color-inverse'] = self::oklch_to_hex( max( 0.0, 1.0 - $bl ), $bc, $bh );
+		}
+
+		// ---- Neutral-derived text + border (dark formulas) ----
+		if ( isset( $d['neutral'] ) ) {
+			list( $nl, $nc, $nh ) = $d['neutral'];
+			$neutral_hex = isset( $hex_map['--sf-color-neutral'] ) ? $hex_map['--sf-color-neutral'] : self::oklch_to_hex( $nl, $nc, $nh );
+			$neutral_rgb = self::hex_to_rgb( $neutral_hex );
+
+			$hex_map['--sf-color-text']             = self::oklch_to_hex( max( 0.70, min( $nl + 0.25, 1.0 ) ), $nc, $nh );
+			$hex_map['--sf-color-heading']          = $hex_map['--sf-color-text'];
+			$hex_map['--sf-color-text--secondary']  = self::oklch_to_hex( max( 0.55, min( $nl + 0.1, 0.90 ) ), $nc, $nh );
+			$hex_map['--sf-color-text--muted']      = $neutral_hex;
+			$hex_map['--sf-color-text--placeholder']= self::oklch_to_hex( max( 0.35, min( $nl - 0.1, 0.65 ) ), $nc, $nh );
+			$hex_map['--sf-color-text--disabled']   = self::oklch_to_hex( max( 0.25, min( $nl - 0.2, 0.55 ) ), $nc, $nh );
+			$hex_map['--sf-color-text--inverse']    = self::oklch_to_hex( max( 0.05, min( $nl - 0.4, 0.35 ) ), $nc, $nh );
+
+			$hex_map['--sf-color-border']         = self::oklch_to_hex( max( 0.25, min( $nl - 0.3, 0.55 ) ), 0.005, $nh );
+			$hex_map['--sf-color-border--subtle'] = self::oklch_to_hex( max( 0.20, min( $nl - 0.38, 0.45 ) ), 0.005, $nh );
+			$hex_map['--sf-color-border--strong'] = self::oklch_to_hex( max( 0.38, min( $nl - 0.1, 0.65 ) ), 0.02, $nh );
+			$hex_map['--sf-color-border--muted']  = $hex_map['--sf-color-border--subtle'];
+			$hex_map['--sf-color-border--translucent'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $base_rgb, 0.15 ) );
+			$hex_map['--sf-color-border--disabled']    = self::rgb_to_hex( self::mix_rgb( self::hex_to_rgb( $hex_map['--sf-color-border--subtle'] ), $base_rgb, 0.5 ) );
+
+			$hex_map['--sf-color-bg--hover']  = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $base_rgb, 0.08 ) );
+			$hex_map['--sf-color-bg--active'] = self::rgb_to_hex( self::mix_rgb( $neutral_rgb, $base_rgb, 0.12 ) );
+		}
+
+		$hex_map['--sf-color-border--focus'] = isset( $hex_map['--sf-color-action'] ) ? $hex_map['--sf-color-action'] : '#5b8cff';
+
+		// ---- Action-derived links (dark formulas: lighten toward a floor) ----
+		if ( isset( $d['action'] ) ) {
+			list( $al, $ac, $ah ) = $d['action'];
+			$action_hex = isset( $hex_map['--sf-color-action'] ) ? $hex_map['--sf-color-action'] : self::oklch_to_hex( $al, $ac, $ah );
+			$action_rgb = self::hex_to_rgb( $action_hex );
+
+			$hex_map['--sf-color-link']          = self::oklch_to_hex( max( 0.68, $al ), $ac, $ah );
+			$hex_map['--sf-color-link--hover']   = self::oklch_to_hex( max( $al + 0.10, 0.68 ), $ac, $ah );
+			$hex_map['--sf-color-link--active']  = self::oklch_to_hex( max( $al + 0.15, 0.74 ), $ac, $ah );
+			$hex_map['--sf-color-link--visited'] = self::oklch_to_hex( max( 0.68, $al ), $ac, fmod( $ah + 60.0, 360.0 ) );
+			$hex_map['--sf-color-link--underline'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $base_rgb, 0.30 ) );
+
+			$hex_map['--sf-color-bg--selected'] = self::rgb_to_hex( self::mix_rgb( $action_rgb, $base_rgb, 0.10 ) );
+			$hex_map['--sf-color-bg--focus']    = self::rgb_to_hex( self::mix_rgb( $action_rgb, $base_rgb, 0.06 ) );
+		}
+
+		$hex_map['--sf-color-link--disabled'] = isset( $hex_map['--sf-color-text--disabled'] ) ? $hex_map['--sf-color-text--disabled'] : '#6b6b78';
+		$hex_map['--sf-color-bg--disabled']   = isset( $hex_map['--sf-color-well'] ) ? $hex_map['--sf-color-well'] : '#222';
+
+		// ---- Code (code-bg = well; dark well → light code text) ----
+		$hex_map['--sf-color-code-bg']   = isset( $hex_map['--sf-color-well'] ) ? $hex_map['--sf-color-well'] : '#222';
+		$hex_map['--sf-color-code-text'] = $light_text;
+
+		// ---- Text-on-color (mode-agnostic: from the resolved dark family L) ----
+		$on_families = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'success', 'warning', 'error', 'info', 'danger' );
+		foreach ( $on_families as $family ) {
+			if ( ! isset( $d[ $family ] ) ) {
+				continue;
+			}
+			$hex_map[ '--sf-color-text--on-' . $family ] = ( $d[ $family ][0] < 0.6 ) ? $light_text : $dark_text;
+		}
+		$hex_map['--sf-color-text--on-base']    = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		$hex_map['--sf-color-text--on-inverse'] = isset( $hex_map['--sf-color-text--inverse'] ) ? $hex_map['--sf-color-text--inverse'] : $dark_text;
+
+		// ---- Selection + mark ----
+		// Dark selection-bg references action-LIGHT lightness; composite at ~0.55 over base.
+		if ( isset( $light_sources['action'] ) ) {
+			list( $la, $lc, $lh ) = $light_sources['action'];
+			$sel_l   = max( 0.62, min( 0.93 - $la * 0.4, 0.78 ) );
+			$sel_rgb = self::hex_to_rgb( self::oklch_to_hex( $sel_l, $lc, $lh ) );
+			$hex_map['--sf-color-selection-bg'] = self::rgb_to_hex( self::mix_rgb( $sel_rgb, $base_rgb, 0.55 ) );
+		} elseif ( isset( $hex_map['--sf-color-bg--selected'] ) ) {
+			$hex_map['--sf-color-selection-bg'] = $hex_map['--sf-color-bg--selected'];
+		}
+		$hex_map['--sf-color-selection-text'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		if ( isset( $hex_map['--sf-color-warning'] ) ) {
+			$hex_map['--sf-color-mark-bg'] = self::rgb_to_hex( self::mix_rgb( self::hex_to_rgb( $hex_map['--sf-color-warning'] ), $base_rgb, 0.25 ) );
+		}
+		$hex_map['--sf-color-mark-text'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		$hex_map['--sf-color-dim']       = '#808080';
+
+		// ---- Status strong variants (dark: lighten by offset toward 1) ----
+		$status_strong_offsets = array(
+			'success' => 0.15,
+			'warning' => 0.05,
+			'error'   => 0.15,
+			'info'    => 0.15,
+			'danger'  => 0.15,
+		);
+		foreach ( $status_strong_offsets as $family => $l_offset ) {
+			if ( ! isset( $d[ $family ] ) ) {
+				continue;
+			}
+			list( $sl, $sc, $sh ) = $d[ $family ];
+			$hex_map[ '--sf-color-' . $family . '-strong' ] = self::oklch_to_hex( max( 0.0, min( $sl + $l_offset, 1.0 ) ), $sc, $sh );
 		}
 
 		return $hex_map;
