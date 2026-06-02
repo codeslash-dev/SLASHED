@@ -28,8 +28,7 @@
     /* stylelint-disable-next-line property-no-vendor-prefix -- Safari <17: unprefixed text-size-adjust only landed in Safari 17 */
     -webkit-text-size-adjust: 100%;
     text-size-adjust:          100%;
-    /* stylelint-disable-next-line length-zero-no-unit -- 0px required inside var() fallback used in calc() */
-    scroll-padding-top:        var(--sf-header-height, 0px);
+    scroll-padding-top:        var(--sf-header-height, 5rem);
     scrollbar-gutter:    stable;
     color-scheme:        var(--sf-color-scheme, light dark);
     hanging-punctuation: first last;

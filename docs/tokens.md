@@ -469,7 +469,7 @@ rebrand workflow.
 | `--sf-h6-letter-spacing` | `var(--sf-tracking-wide)` |
 | `--sf-h6-line-height` | `var(--sf-leading-normal)` |
 | `--sf-h6-size` | `var(--sf-text-m)` |
-| `--sf-header-height` | `0px` |
+| `--sf-header-height` | `5rem` |
 | `--sf-heading-color` | `var(--sf-color-heading)` |
 | `--sf-heading-font-family` | `var(--sf-font-heading)` |
 | `--sf-heading-text-wrap` | `balance` |
