@@ -20,7 +20,7 @@ Override the six `-light` source tokens. Any valid CSS colour works (hex,
   --sf-color-tertiary-light:  oklch(0.62 0.15 200); /* accent             */
   --sf-color-action-light:    oklch(0.62 0.16 150); /* primary call-to-action */
   --sf-color-neutral-light:   oklch(0.45 0.01 280); /* greys / text base  */
-  --sf-color-base-light:      oklch(0.99 0.004 280);/* page surface       */
+  --sf-color-surface-light:      oklch(0.99 0.004 280);/* page surface       */
 }
 ```
 
@@ -127,15 +127,15 @@ to see the real numbers for *your* colours.
 |---|---|---|
 | Brand **hue / chroma** | ✅ Fully | Pick any hue/saturation for the 6 source colours — every derived tint, shade, hover and dark value follows. |
 | **On-colour text** (`--sf-color-text--on-*`) | ✅ ~Always | Auto-picks near-black or near-white by the fill's lightness (threshold L≈0.6). Robust for essentially all colours; can be marginal only for a fill sitting *exactly* at the crossover with very high chroma. |
-| **Reading text / headings / surfaces** | ✅ Within a contract | Derived from `--sf-color-neutral` and `--sf-color-base` with lightness clamps, so text stays dark-on-light / light-on-dark regardless of the exact neutral you pick. |
+| **Reading text / headings / surfaces** | ✅ Within a contract | Derived from `--sf-color-neutral` and `--sf-color-surface` with lightness clamps, so text stays dark-on-light / light-on-dark regardless of the exact neutral you pick. |
 | **Links on background** | ⚠️ Mostly | Lightness-clamped to clear AA for the default and most overrides; saturated yellow/green can still fall short (see below). |
 | **Status colours** | ✅ Fully | Independent fixed hues with subtle/strong/muted variants; on-colours auto-derive. |
 
-**The one structural contract:** `--sf-color-base-light` is your *light-mode
-page surface* and must be light; `--sf-color-base-dark` is the dark-mode surface
+**The one structural contract:** `--sf-color-surface-light` is your *light-mode
+page surface* and must be light; `--sf-color-surface-dark` is the dark-mode surface
 and must be dark. `--sf-color-neutral` is your greyscale/text base. Within that
 (entirely conventional) contract, any colours work. If you invert it — e.g. set
-a dark `base-light` — "light mode" simply isn't light, and contrast breaks; that
+a dark `surface-light` — "light mode" simply isn't light, and contrast breaks; that
 is a misconfiguration, not a framework limit.
 
 **Why not guarantee 4.5:1 for every possible input in CSS alone?** Because WCAG
@@ -187,7 +187,7 @@ SLASHED raises it automatically under `@media (prefers-contrast: more)`.
 |---|---|
 | `--sf-color-*-light` (6) | dark equivalents, hover/active variants, tints/shades (palette), status mixes |
 | `--sf-color-neutral-light` | `--sf-color-text`, `--sf-color-text--secondary`, `--sf-color-heading`, borders |
-| `--sf-color-base-light` | `--sf-color-bg`, `--sf-color-surface`, `--sf-color-well`, `--sf-color-raised` |
+| `--sf-color-surface-light` | `--sf-color-bg`, `--sf-color-inset`, `--sf-color-raised`, `--sf-color-overlay`, `--sf-color-inverse` |
 | any brand colour | `--sf-color-text--on-*` (auto black/white for WCAG AA) |
 
 See the full [token reference](tokens.md) for every overridable property.

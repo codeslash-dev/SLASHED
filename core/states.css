@@ -98,9 +98,9 @@
     color:           transparent !important;
     background:      linear-gradient(
                        90deg,
-                       var(--sf-color-well) 25%,
+                       var(--sf-color-inset) 25%,
                        var(--sf-color-raised) 50%,
-                       var(--sf-color-well) 75%
+                       var(--sf-color-inset) 75%
                      );
     background-size: 200% 100%;
     animation: var(--sf-animation-shimmer);

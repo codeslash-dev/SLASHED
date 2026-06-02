@@ -139,7 +139,7 @@
     }
 
     .demo-customizer-col {
-      background: var(--sf-color-well);
+      background: var(--sf-color-inset);
       padding: var(--sf-space-m);
       border-radius: var(--sf-radius-m);
       border: 1px solid var(--sf-color-border);
@@ -276,7 +276,7 @@
       grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
       gap: var(--sf-space-2xl);
       padding: var(--sf-space-xl);
-      background: var(--sf-color-well);
+      background: var(--sf-color-inset);
       border-radius: var(--sf-radius-l);
     }
 
@@ -323,7 +323,7 @@
     .demo-ease-track {
       flex: 1;
       height: 2rem;
-      background: var(--sf-color-well);
+      background: var(--sf-color-inset);
       border-radius: var(--sf-radius-full);
       position: relative;
       overflow: hidden;
@@ -422,7 +422,7 @@
       position: relative;
       flex: 1;
       height: 2rem;
-      background: var(--sf-color-well);
+      background: var(--sf-color-inset);
       border-radius: var(--sf-radius-full);
       overflow: hidden;
     }
@@ -469,7 +469,7 @@
     }
 
     .demo-layout-wrap {
-      background: var(--sf-color-well);
+      background: var(--sf-color-inset);
       padding: var(--sf-space-m);
       border-radius: var(--sf-radius-m);
     }
@@ -667,8 +667,8 @@
                 <input id="cz-l-neutral"   type="color" data-token="--sf-color-neutral-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-neutral"></span>
 
-                <label for="cz-l-base">--sf-color-base</label>
-                <input id="cz-l-base"      type="color" data-token="--sf-color-base-light">
+                <label for="cz-l-base">--sf-color-surface</label>
+                <input id="cz-l-base"      type="color" data-token="--sf-color-surface-light">
                 <span class="demo-customizer-value" data-value-for="cz-l-base"></span>
               </div>
             </div>
@@ -726,8 +726,8 @@
                 <input id="cz-d-neutral"   type="color" data-token="--sf-color-neutral-dark">
                 <span class="demo-customizer-value" data-value-for="cz-d-neutral"></span>
 
-                <label for="cz-d-base">--sf-color-base</label>
-                <input id="cz-d-base"      type="color" data-token="--sf-color-base-dark">
+                <label for="cz-d-base">--sf-color-surface</label>
+                <input id="cz-d-base"      type="color" data-token="--sf-color-surface-dark">
                 <span class="demo-customizer-value" data-value-for="cz-d-base"></span>
               </div>
             </div>
@@ -786,14 +786,14 @@
           <div class="demo-swatch" style="background: var(--sf-color-tertiary)">tertiary</div>
           <div class="demo-swatch" style="background: var(--sf-color-action)">action</div>
           <div class="demo-swatch" style="background: var(--sf-color-neutral)">neutral</div>
-          <div class="demo-swatch" style="background: var(--sf-color-base)">base</div>
+          <div class="demo-swatch" style="background: var(--sf-color-surface)">base</div>
         </div>
 
         <h3>Semantic Surfaces</h3>
         <div class="demo-swatch-row">
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-bg)">bg</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-surface)">surface</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-well)">well</div>
+          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-inset)">well</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-raised)">raised</div>
           <div class="demo-swatch" style="background: var(--sf-color-overlay)">overlay</div>
           <div class="demo-swatch" style="background: var(--sf-color-inverse)">inverse</div>
@@ -909,7 +909,7 @@
             <div class="demo-swatch" style="background: var(--sf-color-tertiary)">tertiary</div>
             <div class="demo-swatch" style="background: var(--sf-color-action)">action</div>
             <div class="demo-swatch" style="background: var(--sf-color-neutral)">neutral</div>
-            <div class="demo-swatch" style="background: var(--sf-color-base)">base</div>
+            <div class="demo-swatch" style="background: var(--sf-color-surface)">base</div>
           </div>
 
           <div class="sf-stack sf-stack--xs" style="font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">
@@ -934,7 +934,7 @@
               <div class="demo-swatch" style="background: var(--sf-color-tertiary)">tertiary</div>
               <div class="demo-swatch" style="background: var(--sf-color-action)">action</div>
               <div class="demo-swatch" style="background: var(--sf-color-neutral)">neutral</div>
-              <div class="demo-swatch" style="background: var(--sf-color-base)">base</div>
+              <div class="demo-swatch" style="background: var(--sf-color-surface)">base</div>
             </div>
 
             <div class="sf-stack sf-stack--xs" style="font-size: var(--sf-text-s); margin-block-end: var(--sf-space-m)">
@@ -959,7 +959,7 @@
         <h2>Typography</h2>
 
         <h3>Heading Scale (base.css)</h3>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">
           <h1 style="margin: 0 0 var(--sf-space-s)">h1 — The quick brown fox</h1>
           <h2 style="margin: 0 0 var(--sf-space-s); border: none; color: inherit; padding: 0; font-size: var(--sf-h2-size)">h2 — The quick brown fox</h2>
           <h3 style="margin: 0 0 var(--sf-space-s); color: inherit">h3 — The quick brown fox</h3>
@@ -1013,19 +1013,19 @@
 
         <h3>Line Heights (--sf-leading-*)</h3>
         <div class="sf-grid" style="--sf-grid-min: 14rem">
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <code style="font-size: var(--sf-text-xs)">--sf-leading-tight (1.1)</code>
             <p style="line-height: var(--sf-leading-tight); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
           </div>
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <code style="font-size: var(--sf-text-xs)">--sf-leading-snug (1.3)</code>
             <p style="line-height: var(--sf-leading-snug); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
           </div>
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <code style="font-size: var(--sf-text-xs)">--sf-leading-normal (1.5)</code>
             <p style="line-height: var(--sf-leading-normal); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
           </div>
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <code style="font-size: var(--sf-text-xs)">--sf-leading-relaxed (1.625)</code>
             <p style="line-height: var(--sf-leading-relaxed); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
           </div>
@@ -1331,15 +1331,15 @@
           <div>
             <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-hidden / .is-invisible</p>
             <div class="sf-cluster sf-cluster--s">
-              <span style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">visible</span>
-              <span class="is-hidden" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">hidden (display:none)</span>
-              <span class="is-invisible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">invisible (visibility:hidden)</span>
-              <span class="is-visible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-visible (force visibility:visible)</span>
+              <span style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">visible</span>
+              <span class="is-hidden" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">hidden (display:none)</span>
+              <span class="is-invisible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">invisible (visibility:hidden)</span>
+              <span class="is-visible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-visible (force visibility:visible)</span>
             </div>
           </div>
           <div>
             <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-truncated</p>
-            <div class="is-truncated" style="width: 12rem; padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">This text is very long and will be truncated with an ellipsis</div>
+            <div class="is-truncated" style="width: 12rem; padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">This text is very long and will be truncated with an ellipsis</div>
           </div>
         </div>
       </section>
@@ -1353,17 +1353,17 @@
 
         <h3>Navigation &amp; Toggling</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-active" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-active (--sf-is-active: 1)</span>
-          <span class="is-current" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-current (bold)</span>
+          <span class="is-active" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-active (--sf-is-active: 1)</span>
+          <span class="is-current" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-current (bold)</span>
           <span class="is-selected" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-selected</span>
           <span class="is-highlighted" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-highlighted</span>
         </div>
 
         <h3>Disclosure</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-open" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-open</span>
-          <span class="is-expanded" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-expanded</span>
-          <span class="is-collapsed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-collapsed</span>
+          <span class="is-open" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-open</span>
+          <span class="is-expanded" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-expanded</span>
+          <span class="is-collapsed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-collapsed</span>
         </div>
 
         <h3>Validation / Feedback</h3>
@@ -1379,52 +1379,52 @@
 
         <h3>Position / Stickiness</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-sticky" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-sticky</span>
-          <span class="is-pinned" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-pinned</span>
-          <span class="is-fixed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-fixed</span>
+          <span class="is-sticky" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-sticky</span>
+          <span class="is-pinned" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-pinned</span>
+          <span class="is-fixed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-fixed</span>
         </div>
 
         <h3>Overflow / Clipping</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <div class="is-clipped" style="width: 8rem; height: 3rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-clipped (overflow hidden)</div>
-          <div class="is-scrollable" style="width: 8rem; height: 3rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)"><div style="height: 6rem">.is-scrollable (scroll me)</div></div>
+          <div class="is-clipped" style="width: 8rem; height: 3rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-clipped (overflow hidden)</div>
+          <div class="is-scrollable" style="width: 8rem; height: 3rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)"><div style="height: 6rem">.is-scrollable (scroll me)</div></div>
         </div>
 
         <h3>Drag &amp; Drop</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-dragging" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-dragging</span>
-          <span class="is-drop-target" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-drop-target</span>
-          <span class="is-draggable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-draggable</span>
+          <span class="is-dragging" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-dragging</span>
+          <span class="is-drop-target" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-drop-target</span>
+          <span class="is-draggable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-draggable</span>
         </div>
 
         <h3>Overlay / Interaction</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <div style="position: relative; width: 8rem; height: 4rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s)"><div class="is-overlay" style="background: var(--sf-color-primary); opacity: 0.2; border-radius: var(--sf-radius-s)"></div><span style="position: relative; font-size: var(--sf-text-xs); padding: var(--sf-space-xs)">.is-overlay</span></div>
-          <span class="is-clickable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-clickable</span>
-          <span class="is-unselectable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-unselectable</span>
+          <div style="position: relative; width: 8rem; height: 4rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s)"><div class="is-overlay" style="background: var(--sf-color-primary); opacity: 0.2; border-radius: var(--sf-radius-s)"></div><span style="position: relative; font-size: var(--sf-text-xs); padding: var(--sf-space-xs)">.is-overlay</span></div>
+          <span class="is-clickable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-clickable</span>
+          <span class="is-unselectable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-unselectable</span>
         </div>
 
         <h3>Interactivity</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-busy" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-busy</span>
-          <span class="is-readonly" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-readonly</span>
+          <span class="is-busy" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-busy</span>
+          <span class="is-readonly" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-readonly</span>
           <span class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-disabled</span>
-          <span class="is-pending" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pending</span>
+          <span class="is-pending" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pending</span>
           <span class="is-pressed" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pressed</span>
-          <span class="is-focused" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-focused</span>
+          <span class="is-focused" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-focused</span>
         </div>
         <div class="sf-focus-parent sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
           <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-focus-parent (focus the input → parent rings)</code>
           <input type="text" aria-label="Focus parent demo input" placeholder="focus me" style="font-size: var(--sf-text-s)">
         </div>
         <div class="sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s)">
-          <div class="is-resizable" style="width: 8rem; height: 3rem; background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-resizable (drag corner)</div>
+          <div class="is-resizable" style="width: 8rem; height: 3rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-resizable (drag corner)</div>
           <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.is-fullscreen → position:fixed; inset:0 (not demoed to avoid viewport takeover)</code>
         </div>
 
         <h3>Empty State</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <div class="is-empty" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-well); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)"></div>
+          <div class="is-empty" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)"></div>
           <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.is-empty:empty → display:none (the empty div above is gone)</code>
         </div>
       </section>
@@ -1437,10 +1437,10 @@
 
         <h3>.sf-imposter</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Absolutely positioned overlay. Modifiers: <code>--fixed</code>, <code>--contain</code>.</p>
-        <div style="position: relative; height: 8rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden">
+        <div style="position: relative; height: 8rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); overflow: hidden">
           <div class="sf-imposter" style="background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-imposter (centered)</div>
         </div>
-        <div style="position: relative; height: 12rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden; margin-top: var(--sf-space-s)">
+        <div style="position: relative; height: 12rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); overflow: hidden; margin-top: var(--sf-space-s)">
           <div class="sf-imposter sf-imposter--contain" style="background: var(--sf-color-tertiary); color: var(--sf-color-text--on-tertiary); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); width: 80%">.sf-imposter--contain (clamps to <code>100% − 2 × --sf-imposter-margin</code> in both axes; <code>overflow: auto</code> kicks in only when the content is larger than that box)</div>
         </div>
 
@@ -1449,7 +1449,7 @@
 
         <h3>.sf-subgrid / .sf-subgrid-rows</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Inherit parent grid tracks. Requires parent with explicit grid.</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sf-space-s); background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sf-space-s); background: var(--sf-color-inset); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
           <div class="sf-subgrid" style="grid-column: span 2; display: grid; grid-template-columns: subgrid; gap: var(--sf-space-s)">
             <div class="demo-box">Subgrid col 1</div>
             <div class="demo-box demo-box--alt">Subgrid col 2</div>
@@ -1460,7 +1460,7 @@
 
         <h3>.sf-section-group</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Groups adjacent <code>.sf-section</code> elements with zero gap between them.</p>
-        <div class="sf-section-group" style="background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden">
+        <div class="sf-section-group" style="background: var(--sf-color-inset); border-radius: var(--sf-radius-m); overflow: hidden">
           <div class="sf-section--s" style="background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section A (--s padding)</div>
           <div class="sf-section--s" style="background: var(--sf-color-tertiary-100, color-mix(in oklch, var(--sf-color-tertiary) 12%, var(--sf-color-bg))); text-align: center; font-size: var(--sf-text-s)">Section B (--s padding)</div>
         </div>
@@ -1509,19 +1509,19 @@
         <div class="sf-cluster sf-cluster--l" style="align-items: flex-start">
           <div>
             <code style="font-size: var(--sf-text-xs)">.sf-cover--min</code>
-            <div class="sf-cover sf-cover--min" style="min-height: 10rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); padding: var(--sf-space-s); margin-top: var(--sf-space-xs); width: 10rem">
+            <div class="sf-cover sf-cover--min" style="min-height: 10rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); padding: var(--sf-space-s); margin-top: var(--sf-space-xs); width: 10rem">
               <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">min</div>
             </div>
           </div>
           <div>
             <code style="font-size: var(--sf-text-xs)">.sf-cover--max</code>
-            <div class="sf-cover sf-cover--max" style="min-height: 10rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); padding: var(--sf-space-s); margin-top: var(--sf-space-xs); width: 10rem">
+            <div class="sf-cover sf-cover--max" style="min-height: 10rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); padding: var(--sf-space-s); margin-top: var(--sf-space-xs); width: 10rem">
               <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">max</div>
             </div>
           </div>
           <div>
             <code style="font-size: var(--sf-text-xs)">.sf-cover--padding-s / --padding-l</code>
-            <div class="sf-cover sf-cover--padding-s" style="min-height: 10rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); margin-top: var(--sf-space-xs); width: 10rem">
+            <div class="sf-cover sf-cover--padding-s" style="min-height: 10rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); margin-top: var(--sf-space-xs); width: 10rem">
               <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">pad-s</div>
             </div>
           </div>
@@ -1714,7 +1714,7 @@
         </div>
 
         <h3>.sf-container--full / .sf-container--wide</h3>
-        <div class="sf-stack sf-stack--m" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
+        <div class="sf-stack sf-stack--m" style="background: var(--sf-color-inset); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
           <div>
             <code style="font-size: var(--sf-text-xs)">.sf-container--wide (90rem)</code>
             <div class="sf-container--wide" style="margin-top: var(--sf-space-2xs); background: var(--sf-color-action-100, color-mix(in oklch, var(--sf-color-action) 12%, var(--sf-color-bg))); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); outline: 2px dashed var(--sf-color-action); font-size: var(--sf-text-s); text-align: center">wide content (90rem)</div>
@@ -1903,7 +1903,7 @@
         </div>
 
         <h3>.sf-cover--padding-l</h3>
-        <div class="sf-cover sf-cover--padding-l" style="min-height: 12rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); width: 12rem">
+        <div class="sf-cover sf-cover--padding-l" style="min-height: 12rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); width: 12rem">
           <div class="sf-cover__center demo-box" style="font-size: var(--sf-text-xs)">padding-l (4xl)</div>
         </div>
 
@@ -2133,7 +2133,7 @@
         <h2>Layout — Reel</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-reel</code> — horizontal scroll container with <code>scroll-snap-type: x mandatory</code>. Scroll to snap cards.</p>
 
-        <div class="sf-reel" style="background: var(--sf-color-well); border-radius: var(--sf-radius-m); padding-block: var(--sf-space-m)">
+        <div class="sf-reel" style="background: var(--sf-color-inset); border-radius: var(--sf-radius-m); padding-block: var(--sf-space-m)">
           <div class="demo-box" style="width: 14rem; height: 9rem; flex-shrink: 0">Card 1</div>
           <div class="demo-box demo-box--alt" style="width: 14rem; height: 9rem; flex-shrink: 0">Card 2</div>
           <div class="demo-box demo-box--action" style="width: 14rem; height: 9rem; flex-shrink: 0">Card 3</div>
@@ -2151,7 +2151,7 @@
         <h2>Layout — Prose</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-prose</code> — long-form text rhythm. Adds <code>margin-block-start: var(--sf-prose-paragraph)</code> between children. Restores list styles.</p>
 
-        <div class="sf-prose" style="max-width: var(--sf-container-prose); background: var(--sf-color-well); padding: var(--sf-space-l); border-radius: var(--sf-radius-m)">
+        <div class="sf-prose" style="max-width: var(--sf-container-prose); background: var(--sf-color-inset); padding: var(--sf-space-l); border-radius: var(--sf-radius-m)">
           <h2>Prose Heading</h2>
           <p>The <code>.sf-prose</code> class provides automatic vertical rhythm for long-form content. All direct children receive spacing automatically — no extra margin classes needed.</p>
           <h3>Lists Are Restored</h3>
@@ -2178,7 +2178,7 @@
         <h2>Layout — Container &amp; Section</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-container</code> — centered max-width with horizontal gutters. Declares a named inline-size container <code>sf-layout</code>, so consumers can target it precisely with <code>@container sf-layout (...)</code> in their own CSS. <code>.sf-section</code> adds vertical padding.</p>
 
-        <div class="sf-stack sf-stack--m" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
+        <div class="sf-stack sf-stack--m" style="background: var(--sf-color-inset); padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">
           <div>
             <code style="font-size: var(--sf-text-xs)">sf-container--narrow (38rem)</code>
             <div class="sf-container--narrow" style="margin-top: var(--sf-space-2xs); background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 12%, var(--sf-color-bg))); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); outline: 2px dashed var(--sf-color-primary); font-size: var(--sf-text-s); text-align: center">narrow content</div>
@@ -2272,7 +2272,7 @@
         <h2 style="padding-inline: var(--sf-space-l)">Layout — Content Grid</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m); padding-inline: var(--sf-space-l)"><code>.sf-content-grid</code> — named column grid. Children default to content column. <code>.sf-breakout</code> spans wider. <code>.sf-full-bleed</code> spans edge-to-edge.</p>
 
-        <div class="sf-content-grid" style="background: var(--sf-color-well); padding-block: var(--sf-space-s); row-gap: var(--sf-space-s)">
+        <div class="sf-content-grid" style="background: var(--sf-color-inset); padding-block: var(--sf-space-s); row-gap: var(--sf-space-s)">
           <p style="background: var(--sf-color-surface); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">Normal content column — max-width: <code>--sf-content-width</code></p>
           <div class="sf-breakout demo-box" style="background: var(--sf-color-primary-100, color-mix(in oklch, var(--sf-color-primary) 12%, var(--sf-color-bg))); color: var(--sf-color-primary); padding: var(--sf-space-m); text-align: center; border-radius: var(--sf-radius-s)">
             <code>.sf-breakout</code> — spans <code>--sf-breakout-width</code>
@@ -2291,7 +2291,7 @@
         <h2>Layout — Pancake</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-pancake</code> — 3-row grid (<code>auto 1fr auto</code>) for sticky-footer layouts. Default <code>min-height: 100dvh</code>.</p>
 
-        <div class="sf-pancake" style="--sf-pancake-min-height: 18rem; min-height: 18rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m); overflow: hidden; border: 1px solid var(--sf-color-border)">
+        <div class="sf-pancake" style="--sf-pancake-min-height: 18rem; min-height: 18rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); overflow: hidden; border: 1px solid var(--sf-color-border)">
           <header class="demo-box demo-box--alt" style="border-radius: 0; justify-content: flex-start; padding-inline: var(--sf-space-l)">
             Header (auto height)
           </header>
@@ -2352,7 +2352,7 @@
         <h3>Table (reset: border-collapse)</h3>
         <div style="overflow-x: auto">
           <table style="width: 100%; border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); overflow: hidden; font-size: var(--sf-text-s)">
-            <thead style="background: var(--sf-color-well)">
+            <thead style="background: var(--sf-color-inset)">
               <tr>
                 <th style="padding: var(--sf-space-xs) var(--sf-space-m); text-align: left; border-bottom: 1px solid var(--sf-color-border)">Token</th>
                 <th style="padding: var(--sf-space-xs) var(--sf-space-m); text-align: left; border-bottom: 1px solid var(--sf-color-border)">Value</th>
@@ -2460,31 +2460,31 @@
         </p>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-flow</code> — equal vertical rhythm</h3>
-        <div class="sf-flow" style="background: var(--sf-color-well); padding: var(--sf-space-m); border-radius: var(--sf-radius-m); --sf-flow-space: var(--sf-space-s)">
+        <div class="sf-flow" style="background: var(--sf-color-inset); padding: var(--sf-space-m); border-radius: var(--sf-radius-m); --sf-flow-space: var(--sf-space-s)">
           <p>First child has no top margin (only siblings get the rhythm).</p>
           <p>Second child gets <code>margin-block-start: var(--sf-flow-space)</code>.</p>
           <p>So does every subsequent child. Override with the token.</p>
         </div>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-truncate</code> — single-line ellipsis</h3>
-        <div class="sf-truncate" style="max-inline-size: 24rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+        <div class="sf-truncate" style="max-inline-size: 24rem; background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
           This sentence is intentionally too long for the container so the ellipsis
           will appear — text-overflow ellipsis on a single line.
         </div>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-line-clamp-2</code> / <code>-3</code> / <code>-N</code></h3>
         <div class="sf-cluster sf-cluster--m">
-          <p class="sf-line-clamp-2" style="max-inline-size: 18rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <p class="sf-line-clamp-2" style="max-inline-size: 18rem; background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <strong>2 lines:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation.
           </p>
-          <p class="sf-line-clamp-3" style="max-inline-size: 18rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <p class="sf-line-clamp-3" style="max-inline-size: 18rem; background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <strong>3 lines:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation.
           </p>
-          <p class="sf-line-clamp-N" style="--sf-line-clamp: 4; max-inline-size: 18rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <p class="sf-line-clamp-N" style="--sf-line-clamp: 4; max-inline-size: 18rem; background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <strong>4 lines (via --sf-line-clamp):</strong> Lorem ipsum dolor sit amet,
             consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -2501,13 +2501,13 @@
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-equal-height</code> — children stretch to tallest</h3>
         <div class="sf-equal-height" style="gap: var(--sf-space-s)">
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Short.</div>
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Two<br>lines.</div>
-          <div style="background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Three<br>lines<br>here.</div>
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Short.</div>
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Two<br>lines.</div>
+          <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); flex: 1">Three<br>lines<br>here.</div>
         </div>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-scroll-shadow</code> — top + bottom mask gradient</h3>
-        <div class="sf-scroll-shadow" style="block-size: 8rem; background: var(--sf-color-well); padding: var(--sf-space-s); border-radius: var(--sf-radius-m); --sf-scroll-shadow-size: 1.5rem">
+        <div class="sf-scroll-shadow" style="block-size: 8rem; background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-m); --sf-scroll-shadow-size: 1.5rem">
           <p>Scroll inside this box.</p>
           <p>The mask gradient fades the top and bottom of the content.</p>
           <p>It's pure CSS — no scroll listener.</p>
@@ -2519,7 +2519,7 @@
         </div>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-scroll-snap</code> — vertical scroll-snap container</h3>
-        <div class="sf-scroll-snap" style="block-size: 12rem; background: var(--sf-color-well); border-radius: var(--sf-radius-m)">
+        <div class="sf-scroll-snap" style="block-size: 12rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">
           <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-primary); color: var(--sf-color-text--on-primary)">Slide A</section>
           <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-secondary); color: var(--sf-color-text--on-secondary)">Slide B</section>
           <section style="block-size: 12rem; display: grid; place-items: center; background: var(--sf-gradient-tertiary); color: var(--sf-color-text--on-tertiary)">Slide C</section>
@@ -2528,11 +2528,11 @@
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-overflow-fade</code> — end-edge mask</h3>
         <div class="sf-overflow-fade" style="inline-size: 24rem; --sf-scroll-shadow-size: 4rem">
           <div class="sf-cluster sf-cluster--no-wrap" style="white-space: nowrap">
-            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-one</span>
-            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-two</span>
-            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-three</span>
-            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-four</span>
-            <span style="background: var(--sf-color-well); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-five</span>
+            <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-one</span>
+            <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-two</span>
+            <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-three</span>
+            <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-four</span>
+            <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-five</span>
           </div>
         </div>
 
@@ -2547,7 +2547,7 @@
           the button remains independently clickable. Tab to the card to see the built-in card-level focus ring
           (no separate <code>sf-focus-parent</code> recipe needed).
         </p>
-        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
+        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
           <h4 style="margin: 0"><a href="#macros">Click anywhere on this card to navigate</a></h4>
           <p style="margin: 0">The entire card surface is the click target — heading, body text, list, and padding.</p>
           <ul style="margin: 0; padding-inline-start: var(--sf-space-m)">
@@ -2560,7 +2560,7 @@
           <strong>Explicit mode</strong> — multiple links. Add <code>data-overlay-link</code> to the primary link;
           all other links and buttons are lifted above the overlay automatically — no manual z-index work required.
         </p>
-        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
+        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
           <h4 style="margin: 0"><a href="#macros" data-overlay-link>Primary link — click card surface to navigate here</a></h4>
           <p style="margin: 0">Click on paragraph text or card padding → primary link. Secondary links and the button stay independent.</p>
           <div style="display: flex; gap: var(--sf-space-s); flex-wrap: wrap; align-items: center">
@@ -2607,12 +2607,12 @@
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-entrance--*</code> — scroll-driven entrance</h3>
         <p style="color: var(--sf-color-text--secondary); font-size: var(--sf-text-s)">Animations require <code>animation-timeline: view()</code> support (Chrome 115+, Firefox 145+). Refresh and scroll to see effects in supported engines.</p>
         <div class="sf-stack sf-stack--s">
-          <div class="sf-entrance--fade"        style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade</div>
-          <div class="sf-entrance--fade-up"     style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-up</div>
-          <div class="sf-entrance--fade-down"   style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-down</div>
-          <div class="sf-entrance--fade-left"   style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-left</div>
-          <div class="sf-entrance--fade-right"  style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--fade-right</div>
-          <div class="sf-entrance--scale-up"    style="padding: var(--sf-space-m); background: var(--sf-color-well); border-radius: var(--sf-radius-m)">.sf-entrance--scale-up</div>
+          <div class="sf-entrance--fade"        style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade</div>
+          <div class="sf-entrance--fade-up"     style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade-up</div>
+          <div class="sf-entrance--fade-down"   style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade-down</div>
+          <div class="sf-entrance--fade-left"   style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade-left</div>
+          <div class="sf-entrance--fade-right"  style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade-right</div>
+          <div class="sf-entrance--scale-up"    style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--scale-up</div>
         </div>
       </section>
 
@@ -2662,7 +2662,7 @@
       const HEX_FALLBACKS = {
         '--sf-color-primary-light':   '#4a30d0', '--sf-color-secondary-light': '#141530',
         '--sf-color-tertiary-light':  '#5c20cc', '--sf-color-action-light':    '#1c58cc',
-        '--sf-color-neutral-light':   '#5e6880', '--sf-color-base-light':      '#f8f9ff',
+        '--sf-color-neutral-light':   '#5e6880', '--sf-color-surface-light':      '#f8f9ff',
         '--sf-color-success-light':   '#1a8040', '--sf-color-warning-light':   '#c58c1a',
         '--sf-color-error-light':     '#c42010', '--sf-color-info-light':      '#1a5ec8',
         '--sf-color-danger-light':    '#c82010'

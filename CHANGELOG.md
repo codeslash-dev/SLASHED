@@ -352,7 +352,7 @@ Universal-colour transparency: a live accessibility report in the demo.
   edges pure-CSS auto-derivation can't guarantee
 - `docs/theming.md` → "How universal is the colour system?" — documents what is
   fully universal (brand hue/chroma, on-colour text, surfaces), the one
-  structural contract (`base-light` is a light surface), and why CSS alone can't
+  structural contract (`surface-light` is a light surface), and why CSS alone can't
   guarantee 4.5:1 for every possible input
 - `tests/demo-a11y-panel.spec.js` — verifies the report renders all pairs, that
   the default palette passes AA, and that it recomputes on colour change

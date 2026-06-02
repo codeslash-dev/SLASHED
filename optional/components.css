@@ -106,7 +106,7 @@
    *   font-size:        var(--sf-badge-font-size);
    *   font-weight:      var(--sf-badge-font-weight);
    *   line-height:      var(--sf-badge-line-height);
-   *   background:       var(--sf-color-well);
+   *   background:       var(--sf-color-inset);
    *   color:            var(--sf-color-text);
    * }
    * .sf-badge--success { background: var(--sf-color-success); color: var(--sf-color-text--on-success); }
