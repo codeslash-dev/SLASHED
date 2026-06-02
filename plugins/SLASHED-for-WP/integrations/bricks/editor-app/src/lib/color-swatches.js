@@ -83,32 +83,6 @@ let _debounce = null;
 let _controller = null;
 
 /**
- * Walk up from a colour control element to find the Bricks `data-controlkey`
- * attribute, which identifies the settings group the field belongs to
- * (e.g. "_background", "_typography", "_border"). Returns the matching
- * panel target string, or null when the key is absent / unrecognised.
- *
- * Bricks renders: <div data-controlkey="_background">…<div data-control="color">…
- * so walking up a few levels reliably finds the key.
- *
- * @param {Element} fromEl
- * @returns {'text'|'background'|'border'|null}
- */
-function detectTargetFromControl(fromEl) {
-  let el = fromEl;
-  while (el && el !== document.body) {
-    const key = el.getAttribute('data-controlkey') || el.getAttribute('data-control-key');
-    if (key) {
-      if (key === '_typography' || /typography/i.test(key)) return 'text';
-      if (key === '_background' || /background/i.test(key)) return 'background';
-      if (key === '_border'     || /border/i.test(key))     return 'border';
-    }
-    el = el.parentElement;
-  }
-  return null;
-}
-
-/**
  * Inject the "SF Colors" button into a Bricks colour control.
  *
  * Bricks colour-field markup (from live DOM):
