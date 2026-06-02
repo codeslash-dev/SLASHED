@@ -307,19 +307,6 @@ function slashed_bricks_rebemer_init() {
 add_action( 'after_setup_theme', 'slashed_bricks_rebemer_init', 20 );
 
 /**
- * Activation check.
- */
-function slashed_bricks_activation_check() {
-	// Allow activation without Bricks so admin token configuration is available.
-	// Runtime guards in slashed_bricks_init() handle the Bricks dependency.
-}
-// Only register hooks against the standalone plugin file; when running under
-// the unified slashed.php the root plugin handles activation/deactivation.
-if ( ! defined( 'SLASHED_VERSION' ) ) {
-    register_activation_hook( __FILE__, 'slashed_bricks_activation_check' );
-}
-
-/**
  * Display admin notice when Bricks Builder is not active.
  */
 function slashed_bricks_missing_bricks_notice() {

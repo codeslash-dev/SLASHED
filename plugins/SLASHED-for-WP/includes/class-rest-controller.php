@@ -25,10 +25,6 @@ class Slashed_REST_Controller {
 
 	const NAMESPACE = 'slashed/v1';
 
-	public function __construct() {
-		// No-op. Routes are registered externally via rest_api_init hook.
-	}
-
 	public function register_routes() {
 		register_rest_route(
 			self::NAMESPACE,

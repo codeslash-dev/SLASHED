@@ -93,7 +93,8 @@ function stripLayerWrappers(content, fileLabel) {
   let out = content.replace(/^@layer\b[^{;]*;[ \t]*\r?\n?/gm, '');
 
   // 2. Unwrap each @layer slashed.X { … } block by walking its braces.
-  for (let guard = 0; guard < 32; guard++) {
+  // Loop until no @layer blocks remain; exits via break when header is null.
+  for (;;) {
     const header = /^@layer[ \t]+[\w.\s,-]+\{/m.exec(out);
     if (!header) break;
     const start = header.index;

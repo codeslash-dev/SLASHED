@@ -21,6 +21,12 @@ function writeFile(rel, content) {
 
 function sync(rel, pattern, replacement, label) {
   const original = readFile(rel);
+  // Reset BEFORE test() — a global/sticky regex retains lastIndex across calls.
+  if (pattern.lastIndex !== undefined) pattern.lastIndex = 0;
+  if (!pattern.test(original)) {
+    throw new Error(`version-sync: pattern not found in ${rel} for "${label}"`);
+  }
+  if (pattern.lastIndex !== undefined) pattern.lastIndex = 0;
   const updated = original.replace(pattern, replacement);
   if (updated === original) {
     console.log(`  ok   ${rel}  (${label} already up to date)`);

@@ -257,8 +257,12 @@ Fills text with a gradient (default `--sf-gradient-primary`).
 </h2>
 ```
 
-Gated by `@supports (background-clip: text)` so browsers that lack
-support render normal solid text instead of invisible text.
+`background-clip: text` and `color: transparent` are applied unconditionally —
+no `@supports` gate. Both properties are fully supported at the framework's
+browser floor (Chrome 123, Safari 17.5, Firefox 128). In any browser that does
+not clip backgrounds to text, the text will be invisible (transparent with no
+fill) — this is an accepted consequence of dropping the floor below these
+versions.
 
 > **Known limitation:** selecting gradient text in most browsers reveals
 > the clipping boundary (text appears to lose color during selection).

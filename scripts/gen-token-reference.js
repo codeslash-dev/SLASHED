@@ -65,7 +65,10 @@ let out = `# Token reference
 > **Generated** from source by \`scripts/gen-token-reference.js\` —
 > run \`npm run docs:tokens\` to refresh. Do not edit by hand.
 
-Every \`--sf-*\` custom property and its default value. See
+Every \`--sf-*\` custom property and its default value, grouped by source file.
+Tokens defined in multiple files (e.g. shade aliases overridden in
+\`optional/tokens.palette.css\`) are listed once per section — so this count is
+higher than \`docs/registry.json\` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
 contract and naming conventions (a DEPRECATED tier will be introduced
 post-0.5.0 when tokens are retired), and [theming.md](theming.md) for the

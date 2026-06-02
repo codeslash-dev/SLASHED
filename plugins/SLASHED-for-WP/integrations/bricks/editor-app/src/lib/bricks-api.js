@@ -61,13 +61,13 @@ export function isReady() { return _state !== null; }
  * When multiple reactive mutations happen synchronously, Vue 3 batches
  * DOM updates (via queueMicrotask) but the Bricks history watcher may
  * fire synchronously (flush:'sync') producing one undo step per
- * mutation. This probe tries three known API shapes:
+ * mutation. This probe tries the two history-API shapes observed in
+ * real Bricks builds (verified against Bricks 1.9–2.0):
  *
- *   1. $_state.$history.pause / resume  — older Bricks (< 1.9)
- *   2. globalProperties.$_bricksData.history.add  — Bricks 1.9+
- *   3. globalProperties.addHistory / addUndoStep  — hypothetical
+ *   1. $_state.$history.pause / resume            — older Bricks (< 1.9)
+ *   2. globalProperties.$_bricksData.history.pause/resume — Bricks 1.9+
  *
- * If nothing is found, `batchMutations(fn)` falls back to calling
+ * If neither is present, `batchMutations(fn)` falls back to calling
  * `fn()` directly. The apply still works; the only difference is that
  * Ctrl-Z will undo one element at a time instead of the whole subtree.
  *
@@ -96,12 +96,6 @@ function probeHistory() {
   if (typeof bd?.history?.pause === 'function' &&
       typeof bd?.history?.resume === 'function') {
     _history = { pause: () => bd.history.pause(), resume: () => bd.history.resume() };
-    return _history;
-  }
-
-  // Shape 3: top-level pause/resume on globalProperties
-  if (typeof gp.pauseHistory === 'function' && typeof gp.resumeHistory === 'function') {
-    _history = { pause: () => gp.pauseHistory(), resume: () => gp.resumeHistory() };
     return _history;
   }
 
@@ -233,7 +227,9 @@ export function setElementLabel(id, label) {
  */
 export function getActiveElementId() {
   // 1. Known $_state shapes (newest-first). Each may be an element object
-  //    ({id,…}) or a bare id string depending on the Bricks build.
+  //    ({id,…}) or a bare id string depending on the Bricks build. None of
+  //    these are guaranteed to exist on a given version — the DOM fallback
+  //    in step 2 is the reliable path; these are a fast-path optimisation.
   if (_state) {
     const candidates = [
       _state.activeElement,

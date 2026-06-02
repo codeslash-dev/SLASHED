@@ -96,7 +96,7 @@
      rather than a CSS rule — this keeps the HTML self-documenting:
 
        <div class="sf-stack" style="--sf-stack-gap: var(--sf-space-xl)">
-       <div class="sf-grid"  style="--sf-grid-min: 20rem; --sf-fit: auto-fit">
+       <div class="sf-grid sf-grid--fit" style="--sf-grid-min: 20rem">
        <p   class="sf-prose" style="--sf-prose-marker-color: var(--sf-color-action)">
 
      When you need the same per-instance override applied to EVERY

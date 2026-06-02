@@ -58,6 +58,14 @@ freeze. Done in a single PR with no version bump.
   exists with palette-derived values). Single-source-of-truth: brand hover
   variants now live in palette only. Inter-bundle drift between essential
   and optimal/full eliminated.
+- **`--sf-color-{success,warning,error,info,danger}-{50…950}`** — numeric
+  scale for status colour families removed. Status colours are functional
+  (subtle/muted/strong triplets are the real API); a full decorative ramp
+  adds 55 tokens most consumers never use. Semantic aliases (`-superlight`,
+  `-hover`, `-subtle`, etc.) remain — they now compute directly from the base
+  token via relative colour syntax. To replicate a specific step:
+  `color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-surface))`.
+  Brand families continue to provide the full scale via `optional/tokens.palette.css`.
 
 #### Class modifiers removed
 

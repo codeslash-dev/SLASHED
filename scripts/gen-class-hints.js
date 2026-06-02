@@ -88,7 +88,6 @@ function parseFile(rel, category) {
   // Split into tokens: either a block comment or code.
   // We walk through in order, tracking current section description.
   let currentDesc = '';
-  let parentClass = '';
 
   // Regex to find /* -- Heading ----- \n   Description \n ... */ blocks.
   // Captures the description line(s) inside.
@@ -115,7 +114,6 @@ function parseFile(rel, category) {
   for (let i = 0; i < tokens.length; i++) {
     const section = tokens[i];
     currentDesc = section.desc;
-    parentClass = '';
 
     const codeStart = section.end;
     const codeEnd   = i + 1 < tokens.length ? tokens[i + 1].offset : src.length;
@@ -127,9 +125,6 @@ function parseFile(rel, category) {
     let cm;
     while ((cm = classRe.exec(code)) !== null) {
       const name = cm[1]; // e.g. "sf-stack" or "sf-stack--xl"
-      // Track the first (root) class in this section as the parent.
-      if (!parentClass) parentClass = name;
-      // Modifier classes inherit the parent description; root classes get the section desc.
       hints[name] = { description: currentDesc, category };
     }
   }
@@ -161,7 +156,7 @@ if (process.argv.includes('--check')) {
     process.exit(1);
   }
   const stored = fs.readFileSync(OUT, 'utf8');
-  if (stored !== json) {
+  if (JSON.stringify(JSON.parse(stored)) !== JSON.stringify(JSON.parse(json))) {
     console.error(`[gen-class-hints] ${OUT_REL} is stale — run: node scripts/gen-class-hints.js`);
     process.exit(1);
   }

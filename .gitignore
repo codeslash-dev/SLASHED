@@ -4,6 +4,7 @@ playwright-report/
 *.tgz
 .DS_Store
 .agents/
+.claude/
 
 # Built source maps are large and not needed in shipped releases.
 # Re-build locally via `npm run build` in admin-app/ to regenerate.

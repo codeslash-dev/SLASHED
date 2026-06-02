@@ -106,11 +106,19 @@ if ( Slashed_Settings::is_enabled( 'gutenberg' ) ) {
 
 // ─── Activation / deactivation ───────────────────────────────────────────────
 
-register_activation_hook( __FILE__, '__return_true' );
-
 register_deactivation_hook( __FILE__, function () {
-	$timestamp = wp_next_scheduled( 'slashed_bricks_version_check' );
-	if ( $timestamp ) {
-		wp_unschedule_event( $timestamp, 'slashed_bricks_version_check' );
-	}
+	// Clear every scheduled instance of the Bricks version-check cron, not just
+	// the next one — guards against an orphaned event being left behind if the
+	// Bricks integration was toggled off while an instance was still scheduled.
+	wp_clear_scheduled_hook( 'slashed_bricks_version_check' );
 } );
+
+// When the Bricks integration is toggled OFF via settings (not just deactivation),
+// clear the cron immediately so it does not remain scheduled with no handler.
+add_action( 'update_option_slashed_settings', function ( $old_value, $new_value ) {
+	$was_on = ! empty( $old_value['integrations']['bricks'] );
+	$is_on  = ! empty( $new_value['integrations']['bricks'] );
+	if ( $was_on && ! $is_on ) {
+		wp_clear_scheduled_hook( 'slashed_bricks_version_check' );
+	}
+}, 10, 2 );

@@ -231,9 +231,9 @@
   .sf-switcher--vertical { flex-direction: column; }
 
   /* -- Grid ----------------------------------------------------
-     Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.
+     Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.
      auto-fill: empty tracks preserved, last item doesn't stretch.
-     auto-fit (--fit): empty tracks collapsed, items stretch to fill the gap.
+     auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap.
      Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem"
      ---------------------------------------------------------- */
 

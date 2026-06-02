@@ -238,26 +238,15 @@
      Selection on gradient text inherits the clipping — that's a
      known browser limitation across all engines, accepted as-is.
 
-     The `color: transparent` declaration is gated behind a feature
-     query for background-clip:text. Without that gate, an engine
-     that ignored background-clip:text would render the text fully
-     invisible (transparent over no clipped fill). All current
-     evergreen browsers support either the standard or the
-     -webkit- prefixed form, so the supports check is a defensive
-     guard rather than a real-world fallback.
+     `background-clip: text` and `color: transparent` are required
+     together — without clipping, transparent text is invisible.
+     Both are fully supported at the stated browser floor
+     (Chrome 123, Safari 17.5, Firefox 128).
      ---------------------------------------------------------- */
   .sf-text-gradient {
     background-image: var(--sf-gradient-primary);
-    /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
-    -webkit-background-clip: text;
     background-clip: text;
-  }
-  /* All evergreen browsers that support -webkit-background-clip: text also
-     support the unprefixed form; the `or` branch is dead code. */
-  @supports (background-clip: text) {
-    .sf-text-gradient {
-      color: transparent;
-    }
+    color: transparent;
   }
 
   /* -- External link indication --------------------------------
