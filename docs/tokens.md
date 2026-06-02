@@ -92,9 +92,9 @@ rebrand workflow.
 | `--sf-color-danger-hover` | `var(--sf-color-danger-darker)` |
 | `--sf-color-danger-light` | `oklch(0.48 0.22 12) *(registered)*` |
 | `--sf-color-danger-lighter` | `color-mix(in oklab, var(--sf-color-danger) 65%, var(--sf-color-surface))` |
-| `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.30)` |
+| `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.3)` |
 | `--sf-color-danger-strong` | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` |
-| `--sf-color-danger-subtle` | `oklch(from var(--sf-color-danger) l c h / 0.10)` |
+| `--sf-color-danger-subtle` | `oklch(from var(--sf-color-danger) l c h / 0.1)` |
 | `--sf-color-danger-superdark` | `color-mix(in oklab, var(--sf-color-danger) 8%, var(--sf-color-text))` |
 | `--sf-color-danger-superlight` | `color-mix(in oklab, var(--sf-color-danger) 4%, var(--sf-color-surface))` |
 | `--sf-color-danger-xdark` | `color-mix(in oklab, var(--sf-color-danger) 38%, var(--sf-color-text))` |
@@ -107,9 +107,9 @@ rebrand workflow.
 | `--sf-color-error-hover` | `var(--sf-color-error-darker)` |
 | `--sf-color-error-light` | `oklch(0.50 0.20 25) *(registered)*` |
 | `--sf-color-error-lighter` | `color-mix(in oklab, var(--sf-color-error) 65%, var(--sf-color-surface))` |
-| `--sf-color-error-muted` | `oklch(from var(--sf-color-error) l c h / 0.30)` |
+| `--sf-color-error-muted` | `oklch(from var(--sf-color-error) l c h / 0.3)` |
 | `--sf-color-error-strong` | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` |
-| `--sf-color-error-subtle` | `oklch(from var(--sf-color-error) l c h / 0.10)` |
+| `--sf-color-error-subtle` | `oklch(from var(--sf-color-error) l c h / 0.1)` |
 | `--sf-color-error-superdark` | `color-mix(in oklab, var(--sf-color-error) 8%, var(--sf-color-text))` |
 | `--sf-color-error-superlight` | `color-mix(in oklab, var(--sf-color-error) 4%, var(--sf-color-surface))` |
 | `--sf-color-error-xdark` | `color-mix(in oklab, var(--sf-color-error) 38%, var(--sf-color-text))` |
@@ -122,9 +122,9 @@ rebrand workflow.
 | `--sf-color-info-hover` | `var(--sf-color-info-darker)` |
 | `--sf-color-info-light` | `oklch(0.48 0.18 235) *(registered)*` |
 | `--sf-color-info-lighter` | `color-mix(in oklab, var(--sf-color-info) 65%, var(--sf-color-surface))` |
-| `--sf-color-info-muted` | `oklch(from var(--sf-color-info) l c h / 0.30)` |
+| `--sf-color-info-muted` | `oklch(from var(--sf-color-info) l c h / 0.3)` |
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
-| `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.10)` |
+| `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.1)` |
 | `--sf-color-info-superdark` | `color-mix(in oklab, var(--sf-color-info) 8%, var(--sf-color-text))` |
 | `--sf-color-info-superlight` | `color-mix(in oklab, var(--sf-color-info) 4%, var(--sf-color-surface))` |
 | `--sf-color-info-xdark` | `color-mix(in oklab, var(--sf-color-info) 38%, var(--sf-color-text))` |
@@ -190,9 +190,9 @@ rebrand workflow.
 | `--sf-color-success-hover` | `var(--sf-color-success-darker)` |
 | `--sf-color-success-light` | `oklch(0.50 0.16 145) *(registered)*` |
 | `--sf-color-success-lighter` | `color-mix(in oklab, var(--sf-color-success) 65%, var(--sf-color-surface))` |
-| `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.30)` |
+| `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.3)` |
 | `--sf-color-success-strong` | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` |
-| `--sf-color-success-subtle` | `oklch(from var(--sf-color-success) l c h / 0.10)` |
+| `--sf-color-success-subtle` | `oklch(from var(--sf-color-success) l c h / 0.12)` |
 | `--sf-color-success-superdark` | `color-mix(in oklab, var(--sf-color-success) 8%, var(--sf-color-text))` |
 | `--sf-color-success-superlight` | `color-mix(in oklab, var(--sf-color-success) 4%, var(--sf-color-surface))` |
 | `--sf-color-success-xdark` | `color-mix(in oklab, var(--sf-color-success) 38%, var(--sf-color-text))` |
@@ -248,9 +248,9 @@ rebrand workflow.
 | `--sf-color-warning-hover` | `var(--sf-color-warning-darker)` |
 | `--sf-color-warning-light` | `oklch(0.75 0.17 80) *(registered)*` |
 | `--sf-color-warning-lighter` | `color-mix(in oklab, var(--sf-color-warning) 65%, var(--sf-color-surface))` |
-| `--sf-color-warning-muted` | `oklch(from var(--sf-color-warning) l c h / 0.30)` |
+| `--sf-color-warning-muted` | `oklch(from var(--sf-color-warning) l c h / 0.3)` |
 | `--sf-color-warning-strong` | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` |
-| `--sf-color-warning-subtle` | `oklch(from var(--sf-color-warning) l c h / 0.10)` |
+| `--sf-color-warning-subtle` | `oklch(from var(--sf-color-warning) l c h / 0.12)` |
 | `--sf-color-warning-superdark` | `color-mix(in oklab, var(--sf-color-warning) 8%, var(--sf-color-text))` |
 | `--sf-color-warning-superlight` | `color-mix(in oklab, var(--sf-color-warning) 4%, var(--sf-color-surface))` |
 | `--sf-color-warning-xdark` | `color-mix(in oklab, var(--sf-color-warning) 38%, var(--sf-color-text))` |

@@ -1,5 +1,10 @@
 # SLASHED — code audit
 
+> **Pre-fix snapshot** — several findings below were addressed in PR #196
+> (CSS generator validation hardening, version-sync lastIndex ordering,
+> export.js `base → surface` rename). This document reflects the state of the
+> codebase at audit time; resolved items are kept for historical context.
+
 Whole-repo code review across four domains: build scripts, the WordPress PHP
 plugin, the Svelte editor/admin apps, and the CSS source. Overall the codebase
 is unusually clean and well-documented — most "odd" patterns are deliberate and

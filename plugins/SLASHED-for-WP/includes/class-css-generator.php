@@ -449,6 +449,10 @@ class Slashed_CSS_Generator {
 		if ( ! self::is_css_safe( $v ) ) {
 			return false;
 		}
+		// Intrinsic sizing keywords.
+		if ( preg_match( '/^(auto|min-content|max-content|available|stretch)$/i', $v ) ) {
+			return $v;
+		}
 		$units = 'px|rem|em|%|vw|vh|vmin|vmax|vi|vb|ch|ex|fr|deg|s|ms|dvh|svh|lvh|dvw|svw|lvw|cqi|cqb|cqw|cqh';
 		if ( preg_match( '/^-?(\d+\.?\d*|\.\d+)(' . $units . ')?$/i', $v ) ) {
 			return $v;
@@ -457,8 +461,8 @@ class Slashed_CSS_Generator {
 		if ( preg_match( '#^\d+(\.\d+)?\s*/\s*\d+(\.\d+)?$#', $v ) ) {
 			return $v;
 		}
-		// Math functions with a restricted charset.
-		if ( preg_match( '/^(calc|clamp|min|max|var)\s*\(/i', $v )
+		// fit-content() and math functions with a restricted charset.
+		if ( preg_match( '/^(fit-content|calc|clamp|min|max|var)\s*\(/i', $v )
 			&& preg_match( '#^[a-z0-9\s.,%()/_*+-]+$#i', $v ) ) {
 			return $v;
 		}
@@ -478,7 +482,8 @@ class Slashed_CSS_Generator {
 		if ( ! self::is_css_safe( $v ) ) {
 			return false;
 		}
-		if ( preg_match( '/^var\s*\(\s*--[a-z0-9-]+\s*\)$/i', $v ) ) {
+		// var() with optional fallback — paren balance validated by is_css_safe().
+		if ( preg_match( '/^var\s*\(\s*--[a-z0-9-]+/i', $v ) ) {
 			return $v;
 		}
 		if ( preg_match( '/^[a-z0-9 ,"\'-]+$/i', $v ) ) {

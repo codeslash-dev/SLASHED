@@ -216,39 +216,39 @@
     "category": "Layout"
   },
   "sf-grid": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--fit": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--xs": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--s": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--m": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--l": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--xl": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--2xl": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-grid--dense": {
-    "description": "Auto-fill CSS grid with no breakpoints. --fit switches to auto-fit.",
+    "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit.",
     "category": "Layout"
   },
   "sf-icon": {
