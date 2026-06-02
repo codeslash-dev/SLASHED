@@ -69,11 +69,10 @@ you have two options for v0.3.0:
 
 ---
 
-## SLASHED 0.3.0 → pre-freeze (Unreleased)
+## SLASHED 0.3.0 → 0.4.x
 
-The pre-freeze cleanup simplifies the public API surface before the
-token-API freeze. These changes are additive or removal-only — no
-renamed tokens.
+The 0.4.x series simplified the public API surface ahead of a token-API
+freeze. These changes are additive or removal-only — no renamed tokens.
 
 ### Tokens removed
 
