@@ -207,7 +207,9 @@ describe('semantic subgrouping', () => {
     assert.deepEqual(state.swatches.map((s) => s.var), ['--sf-color-bg--hover']);
     assert.deepEqual(
       surface.swatches.map((s) => s.var).sort(),
-      ['--sf-color-bg']
+      // --sf-color-surface is the semantic alias (= var(--sf-color-base)), restored after
+      // the partial revert of the base→surface rename in commit 62b7337.
+      ['--sf-color-bg', '--sf-color-surface']
     );
   });
 
