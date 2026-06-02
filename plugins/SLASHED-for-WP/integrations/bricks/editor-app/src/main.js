@@ -288,12 +288,12 @@ function applyToColorInput(inputEl, value) {
 /**
  * Open a contextual ColorPanel bound to a specific Bricks colour input.
  * Picker mode hides the target selector; the chosen var() is written
- * directly into `inputEl` via a native input event so Vue updates the
+ * directly into the live input via a native input event so Vue updates the
  * correct reactive field regardless of its type.
  *
- * @param {HTMLInputElement|null} inputEl
+ * @param {Element} colorInputEl  [data-control="text"].color-input wrapper element
  */
-function openColorPickerPanel(inputEl) {
+function openColorPickerPanel(colorInputEl) {
   closeColorPickerPanel();
   const src = cfg?.colorPanel;
   if (!src || !Array.isArray(src.variables) || src.variables.length === 0) return;
@@ -304,7 +304,12 @@ function openColorPickerPanel(inputEl) {
       target: node,
       props: {
         source: src,
-        onPickValue: (value) => { applyToColorInput(inputEl, value); },
+        onPickValue: (value) => {
+          // Re-query at pick time so we always write to the live input even if
+          // Bricks re-rendered the control after the button was clicked.
+          const inputEl = colorInputEl?.querySelector('input[type="text"]');
+          applyToColorInput(inputEl, value);
+        },
         onPick: closeColorPickerPanel,
         onClose: closeColorPickerPanel,
       },

@@ -109,26 +109,26 @@ function injectSFButton(colorControl) {
   if (!colorInput) return;
   if (colorInput.querySelector('.' + SF_BTN_CLASS)) return; // already present
 
-  // Capture the text input that holds the colour value. Setting its value
-  // and dispatching an 'input' event lets Vue's v-model reactive binding
-  // update the correct field regardless of type (gradient stop, box-shadow,
-  // text colour, border, etc.) — no special-casing per field type needed.
-  const inputEl = colorInput.querySelector('input[type="text"]');
-
   const btn = document.createElement('div');
   btn.className = SF_BTN_CLASS;
   btn.setAttribute('data-balloon', 'SLASHED Colors');
   btn.setAttribute('data-balloon-pos', 'top-right');
   btn.setAttribute('role', 'button');
   btn.setAttribute('tabindex', '0');
-  btn.innerHTML = '<span class="' + SF_BTN_CLASS + '__dot" aria-hidden="true"></span>';
+  const dot = document.createElement('span');
+  dot.className = SF_BTN_CLASS + '__dot';
+  dot.setAttribute('aria-hidden', 'true');
+  btn.appendChild(dot);
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (_onOpenPanel) _onOpenPanel(inputEl || null);
+    // Pass the wrapper so the picker re-queries the live input at pick time,
+    // avoiding a stale reference if Bricks re-renders the control.
+    if (_onOpenPanel) _onOpenPanel(colorInput);
   });
   btn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') btn.click();
+    if (e.key === ' ') { e.preventDefault(); btn.click(); }
+    else if (e.key === 'Enter') btn.click();
   });
 
   // Insert right after the Variables icon, before Dynamic data (if present).
