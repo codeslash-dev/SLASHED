@@ -126,13 +126,15 @@ class Slashed_CSS_Generator {
 		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 
 		foreach ( $brand_colors as $color ) {
-			if ( ! empty( $settings[ 'brand_' . $color ] ) ) {
-				$declarations[] = '--sf-color-' . $color . '-light: ' . $settings[ 'brand_' . $color ] . ';';
+			$value = self::valid_color( $settings[ 'brand_' . $color ] ?? '' );
+			if ( false !== $value ) {
+				$declarations[] = '--sf-color-' . $color . '-light: ' . $value . ';';
 			}
 		}
 		foreach ( $status_colors as $color ) {
-			if ( ! empty( $settings[ 'status_' . $color ] ) ) {
-				$declarations[] = '--sf-color-' . $color . '-light: ' . $settings[ 'status_' . $color ] . ';';
+			$value = self::valid_color( $settings[ 'status_' . $color ] ?? '' );
+			if ( false !== $value ) {
+				$declarations[] = '--sf-color-' . $color . '-light: ' . $value . ';';
 			}
 		}
 
@@ -141,13 +143,15 @@ class Slashed_CSS_Generator {
 
 		if ( $dark_enabled ) {
 			foreach ( $brand_colors as $color ) {
-				if ( ! empty( $settings[ 'brand_dark_' . $color ] ) ) {
-					$declarations[] = '--sf-color-' . $color . '-dark: ' . $settings[ 'brand_dark_' . $color ] . ';';
+				$value = self::valid_color( $settings[ 'brand_dark_' . $color ] ?? '' );
+				if ( false !== $value ) {
+					$declarations[] = '--sf-color-' . $color . '-dark: ' . $value . ';';
 				}
 			}
 			foreach ( $status_colors as $color ) {
-				if ( ! empty( $settings[ 'status_dark_' . $color ] ) ) {
-					$declarations[] = '--sf-color-' . $color . '-dark: ' . $settings[ 'status_dark_' . $color ] . ';';
+				$value = self::valid_color( $settings[ 'status_dark_' . $color ] ?? '' );
+				if ( false !== $value ) {
+					$declarations[] = '--sf-color-' . $color . '-dark: ' . $value . ';';
 				}
 			}
 		}
@@ -160,16 +164,17 @@ class Slashed_CSS_Generator {
 		$font_stacks  = array( 'body', 'heading', 'mono', 'display', 'humanist', 'geometric', 'slab' );
 
 		foreach ( $font_stacks as $name ) {
-			if ( ! empty( $settings[ 'font_' . $name ] ) ) {
-				$declarations[] = '--sf-font-' . $name . ': ' . $settings[ 'font_' . $name ] . ';';
+			$value = self::valid_font_family( $settings[ 'font_' . $name ] ?? '' );
+			if ( false !== $value ) {
+				$declarations[] = '--sf-font-' . $name . ': ' . $value . ';';
 			}
 		}
 
-		if ( isset( $settings['text_scale'] ) && '' !== $settings['text_scale'] ) {
-			$declarations[] = '--sf-text-scale: ' . $settings['text_scale'] . ';';
+		if ( isset( $settings['text_scale'] ) && is_numeric( $settings['text_scale'] ) ) {
+			$declarations[] = '--sf-text-scale: ' . self::format_float( $settings['text_scale'] ) . ';';
 		}
-		if ( isset( $settings['text_display_scale'] ) && '' !== $settings['text_display_scale'] ) {
-			$declarations[] = '--sf-text-display-scale: ' . $settings['text_display_scale'] . ';';
+		if ( isset( $settings['text_display_scale'] ) && is_numeric( $settings['text_display_scale'] ) ) {
+			$declarations[] = '--sf-text-display-scale: ' . self::format_float( $settings['text_display_scale'] ) . ';';
 		}
 
 		$sizes = array( '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', 'display-s', 'display-m', 'display-l' );
@@ -198,8 +203,8 @@ class Slashed_CSS_Generator {
 	private static function generate_spacing_declarations( $settings ) {
 		$declarations = array();
 
-		if ( isset( $settings['space_scale'] ) && '' !== $settings['space_scale'] ) {
-			$declarations[] = '--sf-space-scale: ' . $settings['space_scale'] . ';';
+		if ( isset( $settings['space_scale'] ) && is_numeric( $settings['space_scale'] ) ) {
+			$declarations[] = '--sf-space-scale: ' . self::format_float( $settings['space_scale'] ) . ';';
 		}
 
 		$steps = array( '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl' );
@@ -222,8 +227,9 @@ class Slashed_CSS_Generator {
 			'section_pad'   => '--sf-section-pad',
 		);
 		foreach ( $aliases as $key => $property ) {
-			if ( ! empty( $settings[ $key ] ) ) {
-				$declarations[] = $property . ': ' . $settings[ $key ] . ';';
+			$value = self::valid_dimension( $settings[ $key ] ?? '' );
+			if ( false !== $value ) {
+				$declarations[] = $property . ': ' . $value . ';';
 			}
 		}
 
@@ -232,32 +238,33 @@ class Slashed_CSS_Generator {
 
 	private static function generate_radius_declarations( $settings ) {
 		$declarations = array();
-		if ( isset( $settings['radius_scale'] ) && '' !== $settings['radius_scale'] ) {
-			$declarations[] = '--sf-radius-scale: ' . $settings['radius_scale'] . ';';
+		if ( isset( $settings['radius_scale'] ) && is_numeric( $settings['radius_scale'] ) ) {
+			$declarations[] = '--sf-radius-scale: ' . self::format_float( $settings['radius_scale'] ) . ';';
 		}
 		return $declarations;
 	}
 
 	private static function generate_shadow_declarations( $settings ) {
 		$declarations = array();
-		if ( isset( $settings['shadow_strength'] ) && '' !== $settings['shadow_strength'] ) {
-			$declarations[] = '--sf-shadow-strength: calc(' . $settings['shadow_strength'] . ' + var(--sf-is-dark) * 0.17);';
+		if ( isset( $settings['shadow_strength'] ) && is_numeric( $settings['shadow_strength'] ) ) {
+			$declarations[] = '--sf-shadow-strength: calc(' . self::format_float( $settings['shadow_strength'] ) . ' + var(--sf-is-dark) * 0.17);';
 		}
-		if ( isset( $settings['glow_color'] ) && '' !== $settings['glow_color'] ) {
-			$declarations[] = '--sf-shadow-glow-color: ' . $settings['glow_color'] . ';';
+		$glow = self::valid_color( $settings['glow_color'] ?? '' );
+		if ( false !== $glow ) {
+			$declarations[] = '--sf-shadow-glow-color: ' . $glow . ';';
 		}
 		return $declarations;
 	}
 
 	private static function generate_motion_declarations( $settings ) {
 		$declarations = array();
-		if ( isset( $settings['motion_scale'] ) && '' !== $settings['motion_scale'] ) {
-			$declarations[] = '--sf-motion-scale: ' . $settings['motion_scale'] . ';';
+		if ( isset( $settings['motion_scale'] ) && is_numeric( $settings['motion_scale'] ) ) {
+			$declarations[] = '--sf-motion-scale: ' . self::format_float( $settings['motion_scale'] ) . ';';
 		}
 		$durations = array( 'instant', 'fast', 'normal', 'slow', 'slower' );
 		foreach ( $durations as $name ) {
-			if ( isset( $settings[ 'duration_' . $name ] ) && '' !== $settings[ 'duration_' . $name ] ) {
-				$declarations[] = '--sf-duration-' . $name . ': calc(' . $settings[ 'duration_' . $name ] . 'ms * var(--sf-motion-scale));';
+			if ( isset( $settings[ 'duration_' . $name ] ) && is_numeric( $settings[ 'duration_' . $name ] ) ) {
+				$declarations[] = '--sf-duration-' . $name . ': calc(' . self::format_float( $settings[ 'duration_' . $name ] ) . 'ms * var(--sf-motion-scale));';
 			}
 		}
 		return $declarations;
@@ -338,12 +345,146 @@ class Slashed_CSS_Generator {
 			'imposter_margin'    => '--sf-imposter-margin',
 			'equal_cols'         => '--sf-equal-cols',
 		);
+		// bento_cols / equal_cols are plain integers; everything else is a
+		// length, ratio, or math expression — all covered by valid_dimension.
 		foreach ( $map as $key => $property ) {
-			if ( isset( $settings[ $key ] ) && '' !== (string) $settings[ $key ] ) {
-				$declarations[] = $property . ': ' . sanitize_text_field( (string) $settings[ $key ] ) . ';';
+			$value = self::valid_dimension( $settings[ $key ] ?? '' );
+			if ( false !== $value ) {
+				$declarations[] = $property . ': ' . $value . ';';
 			}
 		}
 		return $declarations;
+	}
+
+	/**
+	 * Defence-in-depth guard: reject values that have no business inside a
+	 * token value, regardless of type. Blocks url()/image-set() (external
+	 * fetch + referrer leak), at-rules, CSS comments, HTML, backslash escapes
+	 * (which could smuggle a stripped delimiter such as `}` back in via `\7d`),
+	 * and control characters. The blacklist in Slashed_Token_Sanitizer already
+	 * strips `{ } < > @ ;`; this is the second layer at emission time.
+	 *
+	 * @param string $value Candidate value.
+	 * @return bool True when safe to emit.
+	 */
+	private static function is_css_safe( $value ) {
+		$v = (string) $value;
+		if ( '' === $v ) {
+			return false;
+		}
+		if ( preg_match( '/[\x00-\x1F\x7F]/', $v ) ) {
+			return false;
+		}
+		if ( preg_match( '#url\s*\(|image-set\s*\(|@|/\*|\*/|</|\\\\#i', $v ) ) {
+			return false;
+		}
+		return self::balanced_parens( $v );
+	}
+
+	/**
+	 * Verify parentheses are balanced and never close below zero — stops a
+	 * value like `1) ; } html{` from prematurely closing a function context.
+	 *
+	 * @param string $value Candidate value.
+	 * @return bool
+	 */
+	private static function balanced_parens( $value ) {
+		$depth = 0;
+		$len   = strlen( $value );
+		for ( $i = 0; $i < $len; $i++ ) {
+			$ch = $value[ $i ];
+			if ( '(' === $ch ) {
+				$depth++;
+			} elseif ( ')' === $ch ) {
+				$depth--;
+				if ( $depth < 0 ) {
+					return false;
+				}
+			}
+		}
+		return 0 === $depth;
+	}
+
+	/**
+	 * Validate a CSS color value: hex, named keyword, a known colour function,
+	 * or a var()/color-mix()/light-dark() reference. Returns the trimmed value
+	 * when valid, or false to skip emission (framework default then applies).
+	 *
+	 * @param mixed $value Raw color input.
+	 * @return string|false
+	 */
+	private static function valid_color( $value ) {
+		$v = trim( (string) $value );
+		if ( ! self::is_css_safe( $v ) ) {
+			return false;
+		}
+		// Hex literal.
+		if ( preg_match( '/^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $v ) ) {
+			return $v;
+		}
+		// Functional notation: rgb/hsl/hwb/lab/lch/oklab/oklch/color/color-mix/
+		// light-dark/var. Restrict the body to a safe charset (digits, units,
+		// punctuation used by colour syntax) so nothing unexpected slips in.
+		if ( preg_match( '/^(rgba?|hsla?|hwb|lab|lch|oklab|oklch|color|color-mix|light-dark|var)\s*\(/i', $v )
+			&& preg_match( '#^[a-z0-9\s.,%()/_\#-]+$#i', $v ) ) {
+			return $v;
+		}
+		// Bare keyword: named colour, currentColor, transparent, inherit, etc.
+		if ( preg_match( '/^[a-z][a-z0-9-]*$/i', $v ) ) {
+			return $v;
+		}
+		return false;
+	}
+
+	/**
+	 * Validate a CSS dimension / length / ratio: a number with optional unit,
+	 * an aspect ratio (`16 / 9`), or a calc()/clamp()/min()/max()/var()
+	 * expression. Returns the trimmed value when valid, false otherwise.
+	 *
+	 * @param mixed $value Raw dimension input.
+	 * @return string|false
+	 */
+	private static function valid_dimension( $value ) {
+		$v = trim( (string) $value );
+		if ( ! self::is_css_safe( $v ) ) {
+			return false;
+		}
+		$units = 'px|rem|em|%|vw|vh|vmin|vmax|vi|vb|ch|ex|fr|deg|s|ms|dvh|svh|lvh|dvw|svw|lvw|cqi|cqb|cqw|cqh';
+		if ( preg_match( '/^-?(\d+\.?\d*|\.\d+)(' . $units . ')?$/i', $v ) ) {
+			return $v;
+		}
+		// Aspect ratio, e.g. "16 / 9".
+		if ( preg_match( '#^\d+(\.\d+)?\s*/\s*\d+(\.\d+)?$#', $v ) ) {
+			return $v;
+		}
+		// Math functions with a restricted charset.
+		if ( preg_match( '/^(calc|clamp|min|max|var)\s*\(/i', $v )
+			&& preg_match( '#^[a-z0-9\s.,%()/_*+-]+$#i', $v ) ) {
+			return $v;
+		}
+		return false;
+	}
+
+	/**
+	 * Validate a font-family value: a list of family names (letters, digits,
+	 * spaces, hyphens, commas, quotes) or a single var() reference. Returns the
+	 * trimmed value when valid, false otherwise.
+	 *
+	 * @param mixed $value Raw font input.
+	 * @return string|false
+	 */
+	private static function valid_font_family( $value ) {
+		$v = trim( (string) $value );
+		if ( ! self::is_css_safe( $v ) ) {
+			return false;
+		}
+		if ( preg_match( '/^var\s*\(\s*--[a-z0-9-]+\s*\)$/i', $v ) ) {
+			return $v;
+		}
+		if ( preg_match( '/^[a-z0-9 ,"\'-]+$/i', $v ) ) {
+			return $v;
+		}
+		return false;
 	}
 
 	/**

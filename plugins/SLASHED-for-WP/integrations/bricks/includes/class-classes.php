@@ -227,13 +227,4 @@ class Slashed_Bricks_Classes {
             array( 'id' => self::CATEGORY_STATE,  'name' => __( 'SLASHED State', 'slashed-bricks' ) ),
         );
     }
-
-    /**
-     * Backward-compatible accessor retained for filter consumers and tests.
-     *
-     * @return array<int, array<string,mixed>>
-     */
-    public function get_classes() {
-        return $this->build_classes();
-    }
 }

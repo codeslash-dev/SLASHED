@@ -30,23 +30,61 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Slashed_Bricks_Color_Resolver {
 
 	/**
-	 * Default oklch source values for each color family (light mode).
+	 * Default oklch source value per family — used only as a fallback when the
+	 * live CSS bundle can't be parsed. Derived from Slashed_Token_Defaults so
+	 * there is a single source of truth shared with the admin token defaults;
+	 * the hardcoded map below is a last-resort safety net if that class is
+	 * unavailable (it should always be loaded in both unified and standalone
+	 * mode).
 	 *
-	 * @var array<string, string>
+	 * @var array<string, string>|null
 	 */
-	private static $default_sources = array(
-		'primary'   => 'oklch(0.45 0.20 264)',
-		'secondary' => 'oklch(0.25 0.03 260)',
-		'tertiary'  => 'oklch(0.48 0.14 310)',
-		'action'    => 'oklch(0.60 0.16 210)',
-		'neutral'   => 'oklch(0.45 0.02 260)',
-		'surface'   => 'oklch(0.98 0.005 260)',
-		'success'   => 'oklch(0.48 0.17 150)',
-		'warning'   => 'oklch(0.75 0.17 80)',
-		'error'     => 'oklch(0.62 0.20 35)',
-		'info'      => 'oklch(0.48 0.15 240)',
-		'danger'    => 'oklch(0.48 0.24 12)',
-	);
+	private static $default_sources_cache = null;
+
+	/**
+	 * Resolve the default oklch source map (family => oklch string).
+	 *
+	 * @return array<string, string>
+	 */
+	private static function default_sources() {
+		if ( null !== self::$default_sources_cache ) {
+			return self::$default_sources_cache;
+		}
+
+		$sources = array();
+		if ( class_exists( 'Slashed_Token_Defaults' ) ) {
+			$colors = Slashed_Token_Defaults::get_colors();
+			foreach ( array( 'brand', 'status' ) as $group ) {
+				if ( empty( $colors[ $group ] ) || ! is_array( $colors[ $group ] ) ) {
+					continue;
+				}
+				foreach ( $colors[ $group ] as $family => $oklch ) {
+					if ( is_string( $oklch ) && '' !== $oklch ) {
+						$sources[ $family ] = $oklch;
+					}
+				}
+			}
+		}
+
+		if ( empty( $sources ) ) {
+			$sources = array(
+				'primary'   => 'oklch(0.47 0.27 264)',
+				'secondary' => 'oklch(0.22 0.04 264)',
+				'tertiary'  => 'oklch(0.42 0.22 295)',
+				'action'    => 'oklch(0.50 0.22 235)',
+				'neutral'   => 'oklch(0.52 0.025 260)',
+				'surface'   => 'oklch(0.99 0.006 250)',
+				'success'   => 'oklch(0.50 0.16 145)',
+				'warning'   => 'oklch(0.75 0.17 80)',
+				'error'     => 'oklch(0.50 0.20 25)',
+				'info'      => 'oklch(0.48 0.18 235)',
+				'danger'    => 'oklch(0.48 0.22 12)',
+			);
+		}
+
+		self::$default_sources_cache = $sources;
+		return $sources;
+	}
 
 	/**
 	 * Light step percentages: step => mix percentage of base color with --sf-color-surface.
@@ -176,7 +214,7 @@ class Slashed_Bricks_Color_Resolver {
 	private static function build_family_scales( $sources, $backdrop_rgb ) {
 		$hex_map = array();
 
-		foreach ( array_keys( self::$default_sources ) as $family ) {
+		foreach ( array_keys( self::default_sources() ) as $family ) {
 			if ( ! isset( $sources[ $family ] ) ) {
 				continue;
 			}
@@ -287,7 +325,7 @@ class Slashed_Bricks_Color_Resolver {
 	private static function resolve_sources( $color_values ) {
 		$sources = array();
 
-		foreach ( self::$default_sources as $family => $default_oklch ) {
+		foreach ( self::default_sources() as $family => $default_oklch ) {
 			$var_name = '--sf-color-' . $family . '-light';
 			$oklch_str = $default_oklch;
 
