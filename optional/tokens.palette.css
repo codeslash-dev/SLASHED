@@ -242,8 +242,8 @@
 
 
     /* ----------------------------------------------------------
-       base — inverted mix direction (V-shaped ramp by design):
-       tints mix --sf-color-text INTO base, shades mix base INTO text.
+       surface — inverted mix direction (V-shaped ramp by design):
+       tints mix --sf-color-text INTO surface, shades mix surface INTO text.
        50 = lightest surface, 950 = darkest. See architecture.md.
        ---------------------------------------------------------- */
     --sf-color-surface-50:  color-mix(in oklab, var(--sf-color-text)  4%, var(--sf-color-surface));

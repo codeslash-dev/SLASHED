@@ -124,6 +124,7 @@ for (const theme of ['light', 'dark']) {
       // bg and raised may be identical when both clamp to l=1 in oklch (near-white light theme),
       // so we only assert that inset is meaningfully different from both bg and raised.
       expect(Math.abs(lums.bg - lums.inset)).toBeGreaterThan(0.002);
+      expect(Math.abs(lums.raised - lums.inset)).toBeGreaterThan(0.002);
     });
 
     // ── Background polarity ──────────────────────────────────────

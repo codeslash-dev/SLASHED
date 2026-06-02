@@ -58,9 +58,9 @@
      and chroma. Useful when a brand picker produces colors with
      wildly different L values that look mismatched in weight.
 
-     Surface is excluded by design — surface IS the page background (L ~0.98 in
-     light mode, ~0.20 in dark) and locking it would destroy the page
-     background.
+     Surface is excluded by design — it is the source token for the
+     page-surface ladder, and locking it would distort the derived page
+     background and related surface levels.
 
      Default state: OFF. Without the attribute, every brand keeps its
      own L. Add :root[data-lumlocker] (or set via JS) to enable.

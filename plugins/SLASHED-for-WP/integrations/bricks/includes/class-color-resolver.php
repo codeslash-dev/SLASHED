@@ -440,7 +440,7 @@ class Slashed_Bricks_Color_Resolver {
 				? $light_text
 				: $dark_text;
 		}
-		$hex_map['--sf-color-text--on-base']    = $dark_text; // base is light → dark text.
+		$hex_map['--sf-color-text--on-surface'] = $dark_text; // surface is light → dark text.
 		$hex_map['--sf-color-text--on-inverse'] = $hex_map['--sf-color-text--inverse'];
 
 		// ---- Selection and mark ----
@@ -567,7 +567,7 @@ class Slashed_Bricks_Color_Resolver {
 			}
 			$hex_map[ '--sf-color-text--on-' . $family ] = ( $d[ $family ][0] < 0.6 ) ? $light_text : $dark_text;
 		}
-		$hex_map['--sf-color-text--on-base']    = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		$hex_map['--sf-color-text--on-surface'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
 		$hex_map['--sf-color-text--on-inverse'] = isset( $hex_map['--sf-color-text--inverse'] ) ? $hex_map['--sf-color-text--inverse'] : $dark_text;
 
 		// ---- Selection + mark ----

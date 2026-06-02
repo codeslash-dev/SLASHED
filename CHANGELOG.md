@@ -29,6 +29,18 @@ The framework is in pre-freeze cleanup. No published consumer is affected.
 The following changes simplify the public API surface before the token-API
 freeze. Done in a single PR with no version bump.
 
+#### Tokens renamed
+
+- **`--sf-color-base-*` → `--sf-color-surface-*`** — the page-surface source
+  token family is renamed for clarity. `--sf-color-base-light` /
+  `--sf-color-base-dark` become `--sf-color-surface-light` /
+  `--sf-color-surface-dark`; the full scale (`-50` … `-950`), alpha steps, and
+  on-color text token (`--sf-color-text--on-surface`) follow the same rename.
+  The resolved semantic token `--sf-color-surface` (page-surface anchor) is
+  unchanged — only the source-token family prefix changes.
+- **`--sf-color-well` → `--sf-color-inset`** — renamed to better communicate
+  the recessed / indented surface role. `--sf-color-well` is removed.
+
 #### Tokens removed
 
 - **`--sf-ratio-photo`** — removed. Use `--sf-ratio-3-2` (semantically

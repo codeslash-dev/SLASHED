@@ -18,7 +18,7 @@
        --sf-color-tertiary-light:  oklch(0.42 0.22 295);
        --sf-color-action-light:    oklch(0.50 0.22 235);
        --sf-color-neutral-light:   oklch(0.52 0.025 260);
-       --sf-color-surface-light:   oklch(0.99 0.006 250);
+       --sf-color-surface-light:   oklch(0.96 0.006 250);
      }
      Full per-mode control (add -dark overrides):
      :root {
