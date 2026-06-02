@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**741 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**743 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-482 tokens.
+484 tokens.
 
 | Token | Default |
 |---|---|
@@ -74,7 +74,20 @@ rebrand workflow.
 | `--sf-color-action-superlight` | `color-mix(in oklab, var(--sf-color-action) 4%, var(--sf-color-surface))` |
 | `--sf-color-action-xdark` | `color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text))` |
 | `--sf-color-action-xlight` | `color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface))` |
-| `--sf-color-bg` | `oklch(from var(--sf-color-surface) calc(l + 0.02) c h)` |
+| `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
+| `--sf-color-base-active` | `var(--sf-color-base-xdark)` |
+| `--sf-color-base-darker` | `color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))` |
+| `--sf-color-base-ghost` | `oklch(from var(--sf-color-base) l c h / 0.05)` |
+| `--sf-color-base-hover` | `var(--sf-color-base-darker)` |
+| `--sf-color-base-light` | `oklch(0.96 0.006 250) *(registered)*` |
+| `--sf-color-base-lighter` | `color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base))` |
+| `--sf-color-base-muted` | `oklch(from var(--sf-color-base) l c h / 0.30)` |
+| `--sf-color-base-subtle` | `oklch(from var(--sf-color-base) l c h / 0.10)` |
+| `--sf-color-base-superdark` | `color-mix(in oklab, var(--sf-color-base) 8%, var(--sf-color-text))` |
+| `--sf-color-base-superlight` | `color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-base))` |
+| `--sf-color-base-xdark` | `color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))` |
+| `--sf-color-base-xlight` | `color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))` |
+| `--sf-color-bg` | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
 | `--sf-color-bg--active` | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | `var(--sf-color-inset)` |
 | `--sf-color-bg--focus` | `oklch(from var(--sf-color-action) l c h / 0.06)` |
@@ -132,8 +145,8 @@ rebrand workflow.
 | `--sf-color-info-superlight` | `color-mix(in oklab, var(--sf-color-info) 4%, var(--sf-color-surface))` |
 | `--sf-color-info-xdark` | `color-mix(in oklab, var(--sf-color-info) 38%, var(--sf-color-text))` |
 | `--sf-color-info-xlight` | `color-mix(in oklab, var(--sf-color-info) 20%, var(--sf-color-surface))` |
-| `--sf-color-inset` | `oklch(from var(--sf-color-surface) calc(l - 0.02) c h)` |
-| `--sf-color-inverse` | `oklch(from var(--sf-color-surface) calc(1 - l) c h)` |
+| `--sf-color-inset` | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` |
+| `--sf-color-inverse` | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |
 | `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` |
 | `--sf-color-link--active` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h) )` |
 | `--sf-color-link--disabled` | `var(--sf-color-text--disabled)` |
@@ -155,7 +168,7 @@ rebrand workflow.
 | `--sf-color-neutral-superlight` | `color-mix(in oklab, var(--sf-color-neutral) 4%, var(--sf-color-surface))` |
 | `--sf-color-neutral-xdark` | `color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text))` |
 | `--sf-color-neutral-xlight` | `color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface))` |
-| `--sf-color-overlay` | `oklch(from var(--sf-color-surface) l c h / 0.9)` |
+| `--sf-color-overlay` | `oklch(from var(--sf-color-base) l c h / 0.9)` |
 | `--sf-color-primary` | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-primary-active` | `var(--sf-color-primary-xdark)` |
 | `--sf-color-primary-darker` | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` |
@@ -169,7 +182,7 @@ rebrand workflow.
 | `--sf-color-primary-superlight` | `color-mix(in oklab, var(--sf-color-primary) 4%, var(--sf-color-surface))` |
 | `--sf-color-primary-xdark` | `color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text))` |
 | `--sf-color-primary-xlight` | `color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface))` |
-| `--sf-color-raised` | `oklch(from var(--sf-color-surface) calc(l + 0.04) c h)` |
+| `--sf-color-raised` | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` |
 | `--sf-color-scheme` | `light dark` |
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-secondary-active` | `var(--sf-color-secondary-xdark)` |
@@ -200,19 +213,7 @@ rebrand workflow.
 | `--sf-color-success-superlight` | `color-mix(in oklab, var(--sf-color-success) 4%, var(--sf-color-surface))` |
 | `--sf-color-success-xdark` | `color-mix(in oklab, var(--sf-color-success) 38%, var(--sf-color-text))` |
 | `--sf-color-success-xlight` | `color-mix(in oklab, var(--sf-color-success) 20%, var(--sf-color-surface))` |
-| `--sf-color-surface` | `light-dark(var(--sf-color-surface-light), var(--sf-color-surface-dark, oklch(from var(--sf-color-surface-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
-| `--sf-color-surface-active` | `var(--sf-color-surface-xdark)` |
-| `--sf-color-surface-darker` | `color-mix(in oklab, var(--sf-color-surface) 82%, var(--sf-color-text))` |
-| `--sf-color-surface-ghost` | `oklch(from var(--sf-color-surface) l c h / 0.05)` |
-| `--sf-color-surface-hover` | `var(--sf-color-surface-darker)` |
-| `--sf-color-surface-light` | `oklch(0.96 0.006 250) *(registered)*` |
-| `--sf-color-surface-lighter` | `color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-surface))` |
-| `--sf-color-surface-muted` | `oklch(from var(--sf-color-surface) l c h / 0.30)` |
-| `--sf-color-surface-subtle` | `oklch(from var(--sf-color-surface) l c h / 0.10)` |
-| `--sf-color-surface-superdark` | `color-mix(in oklab, var(--sf-color-surface) 8%, var(--sf-color-text))` |
-| `--sf-color-surface-superlight` | `color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-surface))` |
-| `--sf-color-surface-xdark` | `color-mix(in oklab, var(--sf-color-surface) 38%, var(--sf-color-text))` |
-| `--sf-color-surface-xlight` | `color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-surface))` |
+| `--sf-color-surface` | `var(--sf-color-base)` |
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-tertiary-active` | `var(--sf-color-tertiary-xdark)` |
 | `--sf-color-tertiary-darker` | `color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))` |
@@ -231,6 +232,7 @@ rebrand workflow.
 | `--sf-color-text--inverse` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` |
 | `--sf-color-text--muted` | `var(--sf-color-neutral)` |
 | `--sf-color-text--on-action` | `oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
+| `--sf-color-text--on-base` | `var(--sf-color-text)` |
 | `--sf-color-text--on-danger` | `oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-error` | `oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-info` | `oklch(from var(--sf-color-info) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
@@ -239,7 +241,7 @@ rebrand workflow.
 | `--sf-color-text--on-primary` | `oklch(from var(--sf-color-primary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-secondary` | `oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-success` | `oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
-| `--sf-color-text--on-surface` | `var(--sf-color-text)` |
+| `--sf-color-text--on-surface` | `var(--sf-color-text--on-base)` |
 | `--sf-color-text--on-tertiary` | `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-warning` | `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--placeholder` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` |
