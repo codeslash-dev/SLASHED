@@ -375,7 +375,12 @@ function openColorPickerPanel(colorInputEl) {
                 if (!colorControl) return;
                 const preview = colorControl.querySelector('.bricks-control-preview');
                 if (!preview) return;
-                const swatchSpan = preview.querySelectorAll(':scope > span')[1];
+                // Target the swatch span by excluding Bricks' two named spans
+                // (.color-value-tooltip and .bricks-svg-wrapper). Falls back to
+                // position [1] for unknown future Bricks DOM variants.
+                const swatchSpan =
+                  preview.querySelector(':scope > span:not(.color-value-tooltip):not(.bricks-svg-wrapper)') ??
+                  preview.querySelectorAll(':scope > span')[1];
                 if (swatchSpan) {
                   swatchSpan.style.display = 'block';
                   swatchSpan.style.background = hex;
