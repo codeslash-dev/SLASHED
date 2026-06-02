@@ -96,7 +96,7 @@ test.describe('Typography', () => {
     await page.goto(DEMO_URL);
     const section = page.locator('#typography');
     // Use the heading-scale demo box which contains h1..h6 in order
-    const headingBox = section.locator('div[style*="well"]').first();
+    const headingBox = section.locator('div[style*="inset"]').first();
     const sizes = await headingBox.evaluate(el => {
       return ['h1','h3','h4','h5','h6'].map(tag => {
         const h = el.querySelector(tag);
