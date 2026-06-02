@@ -51,7 +51,9 @@
      · brand source tokens (--sf-color-{primary,secondary,tertiary,action,neutral,surface}-light)
      · status source tokens (--sf-color-{success,warning,error,info,danger}-light)
      · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
-     · shade scales (--sf-color-{family}-{50..950}) — perceptually-uniform, stable across dark mode (use like Tailwind)
+     · numeric shade scales (--sf-color-{family}-{50..950}) — available for the 6 brand families
+       (primary/secondary/tertiary/action/neutral/surface) via optional/tokens.palette.css only;
+       status families (success/warning/error/info/danger) intentionally have no numeric scale
      · semantic shade aliases (--sf-color-{family}-{superlight,xlight,lighter,darker,xdark,superdark,hover,active,subtle,muted,ghost}) — auto-adapts to dark mode
      · text-on-color (--sf-color-text--on-*)
      · code colors (--sf-color-code-bg, --sf-color-code-text)
@@ -570,8 +572,6 @@
     --sf-color-success-superdark:  color-mix(in oklab, var(--sf-color-success)  8%, var(--sf-color-text));
     --sf-color-success-hover:      var(--sf-color-success-darker);
     --sf-color-success-active:     var(--sf-color-success-xdark);
-    --sf-color-success-subtle:     oklch(from var(--sf-color-success) l c h / 0.10);
-    --sf-color-success-muted:      oklch(from var(--sf-color-success) l c h / 0.30);
     --sf-color-success-ghost:      oklch(from var(--sf-color-success) l c h / 0.05);
 
     /* ─── warning ───────────────────────────────────────────── */
@@ -584,8 +584,6 @@
     --sf-color-warning-superdark:  color-mix(in oklab, var(--sf-color-warning)  8%, var(--sf-color-text));
     --sf-color-warning-hover:      var(--sf-color-warning-darker);
     --sf-color-warning-active:     var(--sf-color-warning-xdark);
-    --sf-color-warning-subtle:     oklch(from var(--sf-color-warning) l c h / 0.10);
-    --sf-color-warning-muted:      oklch(from var(--sf-color-warning) l c h / 0.30);
     --sf-color-warning-ghost:      oklch(from var(--sf-color-warning) l c h / 0.05);
 
     /* ─── error ─────────────────────────────────────────────── */
@@ -598,8 +596,6 @@
     --sf-color-error-superdark:  color-mix(in oklab, var(--sf-color-error)  8%, var(--sf-color-text));
     --sf-color-error-hover:      var(--sf-color-error-darker);
     --sf-color-error-active:     var(--sf-color-error-xdark);
-    --sf-color-error-subtle:     oklch(from var(--sf-color-error) l c h / 0.10);
-    --sf-color-error-muted:      oklch(from var(--sf-color-error) l c h / 0.30);
     --sf-color-error-ghost:      oklch(from var(--sf-color-error) l c h / 0.05);
 
     /* ─── info ──────────────────────────────────────────────── */
@@ -612,8 +608,6 @@
     --sf-color-info-superdark:  color-mix(in oklab, var(--sf-color-info)  8%, var(--sf-color-text));
     --sf-color-info-hover:      var(--sf-color-info-darker);
     --sf-color-info-active:     var(--sf-color-info-xdark);
-    --sf-color-info-subtle:     oklch(from var(--sf-color-info) l c h / 0.10);
-    --sf-color-info-muted:      oklch(from var(--sf-color-info) l c h / 0.30);
     --sf-color-info-ghost:      oklch(from var(--sf-color-info) l c h / 0.05);
 
     /* ─── danger ────────────────────────────────────────────── */
@@ -626,8 +620,6 @@
     --sf-color-danger-superdark:  color-mix(in oklab, var(--sf-color-danger)  8%, var(--sf-color-text));
     --sf-color-danger-hover:      var(--sf-color-danger-darker);
     --sf-color-danger-active:     var(--sf-color-danger-xdark);
-    --sf-color-danger-subtle:     oklch(from var(--sf-color-danger) l c h / 0.10);
-    --sf-color-danger-muted:      oklch(from var(--sf-color-danger) l c h / 0.30);
     --sf-color-danger-ghost:      oklch(from var(--sf-color-danger) l c h / 0.05);
 
   }
