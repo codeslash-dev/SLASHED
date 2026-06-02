@@ -26,8 +26,8 @@
   import ColorSwatch from './ColorSwatch.svelte';
   import Toast from './Toast.svelte';
 
-  /** @type {{ source: { variables: string[], light: object, dark: object }, onClose?: () => void }} */
-  let { source, onClose } = $props();
+  /** @type {{ source: { variables: string[], light: object, dark: object }, onClose?: () => void, initialTarget?: string, onPick?: () => void }} */
+  let { source, onClose, initialTarget = 'background', onPick } = $props();
 
   const TARGETS = [
     { id: 'background', label: 'Background' },
@@ -41,7 +41,7 @@
   ];
 
   let mode = $state('both');
-  let target = $state('background');
+  let target = $state(initialTarget);
   let query = $state('');
   let toast = $state(null);
 
@@ -135,6 +135,7 @@
         applied = api.setElementColor(id, target, value);
       });
       if (applied) {
+        onPick?.();
         const label = api.getElementLabel(id) || 'element';
         toast = { kind: 'success', message: `${targetLabel} of “${label}” → ${swatch.name}` };
       } else {

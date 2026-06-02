@@ -23,6 +23,7 @@ import * as colorSwatches from './lib/color-swatches.js';
 import BemBadge from './components/BemBadge.svelte';
 import BemPanel from './components/BemPanel.svelte';
 import ColorApp from './components/ColorApp.svelte';
+import ColorPanel from './components/ColorPanel.svelte';
 import './styles/panel.css';
 
 const STRUCTURE_PANEL_SELECTOR = '#bricks-structure';
@@ -45,6 +46,9 @@ let activePanel = null;
 /** @type {{ instance: any, node: HTMLElement } | null} */
 let colorApp = null;
 
+/** @type {{ instance: any, node: HTMLElement } | null} */
+let colorPickerPanel = null;
+
 
 function ensureHost() {
   let host = document.getElementById(HOST_ID);
@@ -66,7 +70,12 @@ function start() {
   cfg = window.slashedBricksEditor;
   if (cfg && typeof cfg === 'object') {
     classHints.init(cfg.showClassHints, cfg.classHints, { signal });
-    colorSwatches.init(cfg.showColorSwatches, cfg.colorHexMap, { signal });
+    colorSwatches.init(cfg.showColorSwatches, cfg.colorHexMap, {
+      signal,
+      onOpenPanel: cfg.showColorPanel
+        ? (target) => openColorPickerPanel(target)
+        : undefined,
+    });
   }
 
   let attempts = 0;
@@ -246,6 +255,33 @@ function unmountColorApp() {
   colorApp = null;
 }
 
+function openColorPickerPanel(detectedTarget) {
+  closeColorPickerPanel();
+  const src = cfg?.colorPanel;
+  if (!src || !Array.isArray(src.variables) || src.variables.length === 0) return;
+  const node = document.createElement('div');
+  ensureHost().appendChild(node);
+  colorPickerPanel = {
+    instance: mount(ColorPanel, {
+      target: node,
+      props: {
+        source: src,
+        initialTarget: detectedTarget || 'background',
+        onPick: closeColorPickerPanel,
+        onClose: closeColorPickerPanel,
+      },
+    }),
+    node,
+  };
+}
+
+function closeColorPickerPanel() {
+  if (!colorPickerPanel) return;
+  try { unmount(colorPickerPanel.instance); } catch (err) { log('warn', 'color picker panel unmount failed', err); }
+  colorPickerPanel.node.remove();
+  colorPickerPanel = null;
+}
+
 function openPanel(elementId) {
   closePanel();
   const node = document.createElement('div');
@@ -271,6 +307,7 @@ window.addEventListener('beforeunload', () => {
   controller.abort();
   closePanel();
   unmountColorApp();
+  closeColorPickerPanel();
   classHints.destroy();
   colorSwatches.destroy();
   for (const { instance } of badgeInstances.values()) {
