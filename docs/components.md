@@ -1,6 +1,6 @@
 # Components
 
-> **Status (v0.3.0):** `optional/components.css` and
+> **Status (pre-v1.0):** `optional/components.css` and
 > `optional/tokens.components.css` are not yet complete. Everything in
 > them is commented out and ships 0 bytes in `*.min.css` bundles. The
 > `@layer slashed.components` slot is real and ordered.

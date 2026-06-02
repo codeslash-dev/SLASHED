@@ -13,7 +13,7 @@ All states are exercised in [`demo.html`](demo.html).
 > **Layer note:** Most state classes live in `core/states.css` (layer
 > `slashed.states`). Two accessibility-related entries (`.no-motion`,
 > `.sr-only-focusable`) moved to `core/accessibility.css`
-> (layer `slashed.accessibility`) in v0.3.0 for better layering priority.
+> (layer `slashed.accessibility`) for better layering priority.
 
 | Class | Use when | ARIA / pairing | Layer |
 |---|---|---|---|

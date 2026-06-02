@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current stable version: **0.4.11**
+Current version: **0.5.0-beta5**
 
 This document tracks planned enhancements, post-1.0 features, and ideas under
 consideration. It is not a commitment — priorities shift as the project evolves.
@@ -89,6 +89,12 @@ stable and locked.
   registration beyond brand colors to spacing, sizing, and shadow tokens. Enables
   CSS transitions on layout values and better DevTools inspection.
 
+### Gutenberg Integration
+
+- **`--sf-*` → `--wp--custom--*` theme.json mapping** — exposes SLASHED tokens in the Global Styles UI (Site Editor). Only needed for the Site Editor token UI; not required for the standard block editor workflow.
+- **Token override admin UI** — a Svelte settings panel for Gutenberg, parallel to the Bricks admin SPA. Until then, overrides go via the `slashed_gutenberg/css_bundle_url` filter or a child-theme stylesheet.
+- **reBEMer parity** — reBEMer is currently Bricks-specific (structure panel integration). Gutenberg equivalent not scoped.
+
 ### Bricks Integration
 
 - **Token inheritance explorer** — a panel or modal in admin settings showing
@@ -109,21 +115,6 @@ stable and locked.
 ## Under Consideration
 
 Ideas that are promising but not yet committed.
-
-- **Gutenberg integration** *(in progress — `integrations/gutenberg/`)* — v1
-  ships as a standalone plugin (`slashed-gutenberg.php`) that can be activated
-  independently of the Bricks plugin. v1 scope: CSS bundle loading into the
-  block editor canvas + frontend, color palette sync (21 tokens — brand,
-  status, surface, text, border, link), and a `data-wp-dark-mode-active` bridge
-  so the editor dark-mode toggle drives SLASHED's color-scheme system.
-
-  Deliberately excluded from v1 (future work):
-  - `--sf-*` → `--wp--custom--*` theme.json mapping — only needed to expose
-    tokens in the Global Styles UI (Site Editor); not required for the 80% use
-    case. Analogy: ACSS does not do this either.
-  - Token override admin UI — no Svelte panel for Gutenberg yet; overrides via
-    the `slashed_gutenberg/css_bundle_url` filter or child-theme CSS.
-  - reBEMer parity — Bricks-specific; not applicable to the block editor.
 
 - **Per-layer opt-in bundle via `@import`** — technically already possible
   today using the granular `core/` and `optional/` source files (with

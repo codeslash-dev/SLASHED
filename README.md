@@ -1,6 +1,6 @@
 # SLASHED CSS Framework
 
-**S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**dgeless · **D**eterministic
+**S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**xplicit · **D**eterministic
 
 A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
@@ -38,12 +38,12 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 ```
 
 > **Note:** `optional/components.css` and `optional/tokens.components.css`
-> are not yet complete in v0.3.0 — their `@layer` declarations are real,
-> but every class definition and component token is commented out (no CSS
-> is emitted). They appear (as no-ops) in the `*-components` and `full`
-> bundles only. `optional/utilities.css` remains an empty stub — SLASHED
-> is BEM-first by design and ships no utility classes in 0.x. There's no
-> need to link any of the three individually.
+> are not yet complete — their `@layer` declarations are real, but every
+> class definition and component token is commented out (no CSS is emitted).
+> They appear (as no-ops) in the `*-components` and `full` bundles only.
+> `optional/utilities.css` remains an empty stub — SLASHED is BEM-first by
+> design and ships no utility classes in 0.x. There's no need to link any
+> of the three individually.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -74,9 +74,9 @@ is reserved for your own overrides and sits last so it always wins.
 
 `slashed.forms` (between `base` and `layout`) holds the opt-in
 classless form styling from `optional/forms.css`. `slashed.macros`
-(between `components` and `utilities`, added in v0.3.0) holds recipes
-like `.sf-prose`, `.sf-flow`, `.sf-truncate`, `.sf-aspect`,
-`.sf-scroll-shadow`. See [`docs/macros.md`](docs/macros.md).
+(between `components` and `utilities`) holds recipes like `.sf-prose`,
+`.sf-flow`, `.sf-truncate`, `.sf-aspect`, `.sf-scroll-shadow`.
+See [`docs/macros.md`](docs/macros.md).
 
 ## Scope of the base layer
 
@@ -113,9 +113,9 @@ the `slashed.tokens` layer.
 `optional/legacy.css` is always concatenated last. Every rule lives in an
 `@layer`, so concatenation order never affects the cascade — `core/layers.css`
 fixes it. `components.css` and `tokens.components.css` are **not yet
-complete** in 0.3.0 — their `@layer` declarations are real, but every
-selector and token is commented out (no CSS is emitted). `utilities.css`
-ships as an empty stub.
+complete** — their `@layer` declarations are real, but every selector and
+token is commented out (no CSS is emitted). `utilities.css` ships as an
+empty stub.
 
 À la carte is also supported — start from `essential` (or raw `core/`) and add
 hand-picked optional files in any order. When building a custom bundle by hand,
@@ -192,14 +192,50 @@ versions above — colors will collapse to `initial` on older engines.
 | [Theming](docs/theming.md) | rebrand in 6 tokens, multi-brand, contrast |
 | [Dark mode](docs/dark-mode.md) | toggle script, scoped themes, per-value overrides |
 | [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
-| [Macros / recipes](docs/macros.md) | every `.sf-*` macro-class + tokens (v0.3.0+) |
+| [Macros / recipes](docs/macros.md) | every `.sf-*` macro-class + tokens |
 | [Components](docs/components.md) | taken component names + roadmap |
 | [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
 | [Browser support](docs/browser-support.md) | the support floor and why |
 | [Performance](docs/performance.md) | modern-CSS footguns to avoid |
-| [Migration](docs/migration.md) | 0.2.x → 0.3.0 + migrating from other frameworks |
+| [Migration](docs/migration.md) | upgrading SLASHED versions + migrating from other frameworks |
+| [reBEMer](docs/rebemer.md) | BEM class manager for Bricks Builder |
+| [Bricks plugin](plugins/SLASHED-for-WP/integrations/bricks/README.md) | full Bricks Builder integration docs |
 | [Contributing](CONTRIBUTING.md) | setup, conventions, tests |
+
+## WordPress plugin
+
+SLASHED ships a companion WordPress plugin (`plugins/SLASHED-for-WP/`) with two independent integrations that can each be activated as a standalone plugin or loaded together from the main `slashed.php` bootstrap.
+
+### Bricks Builder
+
+Activate `integrations/bricks/slashed-bricks.php` (requires Bricks 1.9.2+, WordPress 6.0+, PHP 7.4+).
+
+- **CSS loading** — enqueues the SLASHED bundle on the frontend and inside the Bricks editor iframe
+- **Variable pickers** — registers all `--sf-*` tokens (~600 in `optimal`, ~700 in `full`) in the Bricks Global Variable Manager, organised by category
+- **Class autocomplete** — registers every `.sf-*` layout class and `.is-*` state class in the Bricks class input as locked entries
+- **Color palette** — syncs `--sf-color-*` tokens with the Bricks color palette (auto-disabled on Bricks 2.2+ where the Color Manager would override `light-dark()` tokens; use the Variable Manager there instead)
+- **Variable-picker swatches** — paints a colour square next to each `--sf-color-*` entry in the variable-picker dropdown, powered by server-resolved hex values so dark-mode stays framework-driven
+- **Dynamic detection** — parses the active CSS bundle at runtime; no hand-curated list to drift out of date
+- **reBEMer** — subtree-scoped BEM class manager inside the Bricks structure panel: rename, replace, or add modifiers across an element and its children in one transaction with preflight reference-count checks and snapshot/rollback
+
+See [`integrations/bricks/README.md`](plugins/SLASHED-for-WP/integrations/bricks/README.md) and [`docs/rebemer.md`](docs/rebemer.md).
+
+### Gutenberg (block editor)
+
+Activate `integrations/gutenberg/slashed-gutenberg.php` (requires WordPress 6.4+, PHP 7.4+).
+
+- **CSS loading** — enqueues the SLASHED bundle in the block editor canvas and on the frontend
+- **Color palette** — syncs 21 `--sf-color-*` tokens (brand, status, surface, text, border, link) with the WordPress editor color palette
+- **Dark-mode bridge** — maps the `data-wp-dark-mode-active` attribute from the block editor's dark-mode toggle to SLASHED's `color-scheme` system
+
+### Packaging
+
+```sh
+npm run build:plugin   # packages the plugin as a ZIP in dist/
+```
+
+---
 
 ## Development
 
