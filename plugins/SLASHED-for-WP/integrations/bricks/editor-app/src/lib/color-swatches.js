@@ -39,8 +39,9 @@
  */
 
 const ITEM_SELECTOR = 'li.variable-picker-item';
-const SWATCH_CLASS = 'slashed-var-swatch';
-const DEBOUNCE_MS = 50;
+const SWATCH_CLASS  = 'slashed-var-swatch';
+const SF_BTN_CLASS  = 'slashed-sf-color-btn';
+const DEBOUNCE_MS   = 50;
 
 const log = (level, ...args) => console[level]('[slashed-swatches]', ...args);
 
@@ -76,9 +77,70 @@ export function resolveSwatchColor(rawName, hexMap) {
 
 let _enabled = false;
 let _hexMap = {};
+let _onOpenPanel = null;
 let _observer = null;
 let _debounce = null;
 let _controller = null;
+
+/**
+ * Inject the "SF Colors" button into a Bricks colour control.
+ *
+ * Bricks colour-field markup (from live DOM):
+ *   <div data-control="color">
+ *     <div class="dynamic-tag-picker-button" data-balloon="Color picker">…</div>
+ *     <div class="bricks-control-preview">…palette icon…</div>
+ *     <div class="input-wrapper">
+ *       <div data-control="text" class="… color-input">
+ *         <input …/>
+ *         <div class="variable-picker-button" data-balloon="Variables">…</div>
+ *         <div class="dynamic-tag-picker-button" data-balloon="Dynamic data">…</div>
+ *       </div>
+ *     </div>
+ *   </div>
+ *
+ * We insert our button after .variable-picker-button, keeping it visually
+ * right next to the Variables icon. Idempotent via SF_BTN_CLASS guard.
+ *
+ * @param {Element} colorControl  element matching [data-control="color"]
+ */
+function injectSFButton(colorControl) {
+  if (!_onOpenPanel) return;
+  const colorInput = colorControl.querySelector('[data-control="text"].color-input');
+  if (!colorInput) return;
+  if (colorInput.querySelector('.' + SF_BTN_CLASS)) return; // already present
+
+  const btn = document.createElement('div');
+  btn.className = SF_BTN_CLASS;
+  btn.setAttribute('data-balloon', 'SLASHED Colors');
+  btn.setAttribute('data-balloon-pos', 'top-right');
+  btn.setAttribute('role', 'button');
+  btn.setAttribute('tabindex', '0');
+  const dot = document.createElement('span');
+  dot.className = SF_BTN_CLASS + '__dot';
+  dot.setAttribute('aria-hidden', 'true');
+  btn.appendChild(dot);
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // Pass the wrapper so the picker re-queries the live input at pick time,
+    // avoiding a stale reference if Bricks re-renders the control.
+    if (_onOpenPanel) _onOpenPanel(colorInput);
+  });
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === ' ') { e.preventDefault(); btn.click(); }
+    else if (e.key === 'Enter') btn.click();
+  });
+
+  // Insert right after the Variables icon, before Dynamic data (if present).
+  const varBtn = colorInput.querySelector('.variable-picker-button');
+  if (varBtn && varBtn.nextSibling) {
+    colorInput.insertBefore(btn, varBtn.nextSibling);
+  } else if (varBtn) {
+    colorInput.appendChild(btn);
+  } else {
+    colorInput.appendChild(btn);
+  }
+}
 
 /**
  * Read the variable name a picker row represents.
@@ -147,6 +209,13 @@ function runPass() {
   } catch (err) {
     log('warn', 'swatch pass failed', err);
   }
+  if (_onOpenPanel) {
+    try {
+      document.querySelectorAll('[data-control="color"]').forEach(injectSFButton);
+    } catch (err) {
+      log('warn', 'SF button inject failed', err);
+    }
+  }
 }
 
 function schedule() {
@@ -159,18 +228,16 @@ function schedule() {
 
 /**
  * Cheap pre-filter for the body-level observer: only schedule a pass when
- * a mutation actually touches the variable picker.
+ * a mutation is relevant to our injections.
  *
- * We observe `document.body` (the picker dropdown is created, destroyed,
- * and re-rendered by Bricks, with no container that's stable across its
- * whole lifecycle), but the vast majority of builder mutations — canvas
- * edits, structure-panel rebuilds — are irrelevant. Bailing here keeps
- * those from waking the reconciler at all.
+ * We observe `document.body` because neither the variable-picker dropdown
+ * nor the Bricks settings panel have stable containers across their full
+ * lifecycles. This filter keeps canvas edits and structure-panel rebuilds
+ * from waking the reconciler unnecessarily.
  *
- *   - A text/markup patch inside an existing row (Bricks reuses `<li>`
- *     nodes when filtering) shows up as a mutation whose target is within
- *     a `.variable-picker-item`.
- *   - Opening the dropdown adds a subtree that contains the rows.
+ * Relevant mutations:
+ *   - Variable picker rows appearing/changing → reconcile colour swatches.
+ *   - Colour controls (`[data-control="color"]`) appearing → inject SF button.
  *
  * @param {MutationRecord[]} records
  * @returns {boolean}
@@ -178,52 +245,53 @@ function schedule() {
 function touchesPicker(records) {
   for (const m of records) {
     const t = m.target;
-    if (t && t.nodeType === 1 && t.closest && t.closest(ITEM_SELECTOR)) {
-      return true;
+    if (t && t.nodeType === 1 && t.closest) {
+      if (t.closest(ITEM_SELECTOR)) return true;
+      if (_onOpenPanel && t.closest('[data-control="color"]')) return true;
     }
     for (const node of m.addedNodes) {
       if (node.nodeType !== 1) continue;
       if (
         (node.matches && node.matches(ITEM_SELECTOR)) ||
         (node.querySelector && node.querySelector(ITEM_SELECTOR))
-      ) {
-        return true;
-      }
+      ) return true;
+      if (_onOpenPanel && (
+        (node.matches && node.matches('[data-control="color"]')) ||
+        (node.querySelector && node.querySelector('[data-control="color"]'))
+      )) return true;
     }
   }
   return false;
 }
 
 /**
- * Initialise variable-picker swatches.
+ * Initialise variable-picker swatches and/or the SF Colors button.
  *
  * Safe to call when disabled (no-ops) and idempotent (a second call
  * tears down the first). Pass an `AbortSignal` to have the observer
- * disconnected automatically when the host aborts, matching how the
- * reBEMer entry point manages its own lifecycle.
+ * disconnected automatically when the host aborts.
  *
- * @param {boolean} enabled
+ * @param {boolean} enabled         - Whether to paint colour swatches in the variable picker.
  * @param {Record<string, string>} hexMap - Map keyed by "--sf-color-*".
- * @param {{ signal?: AbortSignal }} [options]
+ * @param {{ signal?: AbortSignal, onOpenPanel?: (target: string|null) => void }} [options]
  */
 export function init(enabled, hexMap, options = {}) {
   destroy();
 
   _enabled = !!enabled;
   _hexMap = hexMap && typeof hexMap === 'object' ? hexMap : {};
-  if (!_enabled || Object.keys(_hexMap).length === 0) return;
+  _onOpenPanel = typeof options.onOpenPanel === 'function' ? options.onOpenPanel : null;
+
+  // Need at least one active feature to warrant setting up the observer.
+  const needsSwatches = _enabled && Object.keys(_hexMap).length > 0;
+  if (!needsSwatches && !_onOpenPanel) return;
 
   _controller = new AbortController();
 
-  // The picker dropdown is created, destroyed, and re-rendered (on search)
-  // by Bricks, so a persistent observer is simpler and more robust than
-  // trying to hook open/close. We watch `document.body` because there's no
-  // container that stays mounted across the picker's whole lifecycle, but
-  // `touchesPicker()` filters out unrelated builder churn so canvas edits
-  // and structure-panel rebuilds never wake the reconciler. When a
-  // relevant mutation lands we schedule a single cheap debounced pass;
-  // our own swatch insertions trigger at most one extra no-op pass before
-  // settling.
+  // We watch `document.body` because neither the variable-picker dropdown
+  // nor the Bricks settings panel have stable containers across their full
+  // lifecycles. `touchesPicker()` filters out unrelated builder churn so
+  // canvas edits and structure-panel rebuilds never wake the reconciler.
   _observer = new MutationObserver((records) => {
     if (touchesPicker(records)) schedule();
   });
@@ -238,7 +306,7 @@ export function init(enabled, hexMap, options = {}) {
 }
 
 /**
- * Tear down the observer and remove every swatch we injected.
+ * Tear down the observer and remove every element we injected.
  */
 export function destroy() {
   if (_debounce !== null) {
@@ -255,9 +323,11 @@ export function destroy() {
   }
   try {
     document.querySelectorAll('.' + SWATCH_CLASS).forEach((node) => node.remove());
+    document.querySelectorAll('.' + SF_BTN_CLASS).forEach((node) => node.remove());
   } catch {
     /* ignore */
   }
   _enabled = false;
   _hexMap = {};
+  _onOpenPanel = null;
 }

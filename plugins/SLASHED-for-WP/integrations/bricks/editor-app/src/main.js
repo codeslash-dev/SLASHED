@@ -23,6 +23,7 @@ import * as colorSwatches from './lib/color-swatches.js';
 import BemBadge from './components/BemBadge.svelte';
 import BemPanel from './components/BemPanel.svelte';
 import ColorApp from './components/ColorApp.svelte';
+import ColorPanel from './components/ColorPanel.svelte';
 import './styles/panel.css';
 
 const STRUCTURE_PANEL_SELECTOR = '#bricks-structure';
@@ -45,6 +46,9 @@ let activePanel = null;
 /** @type {{ instance: any, node: HTMLElement } | null} */
 let colorApp = null;
 
+/** @type {{ instance: any, node: HTMLElement } | null} */
+let colorPickerPanel = null;
+
 
 function ensureHost() {
   let host = document.getElementById(HOST_ID);
@@ -66,7 +70,12 @@ function start() {
   cfg = window.slashedBricksEditor;
   if (cfg && typeof cfg === 'object') {
     classHints.init(cfg.showClassHints, cfg.classHints, { signal });
-    colorSwatches.init(cfg.showColorSwatches, cfg.colorHexMap, { signal });
+    colorSwatches.init(cfg.showColorSwatches, cfg.colorHexMap, {
+      signal,
+      onOpenPanel: cfg.showColorPanel
+        ? (target) => openColorPickerPanel(target)
+        : undefined,
+    });
   }
 
   let attempts = 0;
@@ -246,6 +255,76 @@ function unmountColorApp() {
   colorApp = null;
 }
 
+/**
+ * Write a colour value into a Bricks colour input by setting its native
+ * value and dispatching an 'input' event. Bricks/Vue's v-model picks up
+ * the event and updates the reactive state for whichever field owns the
+ * input — gradient stops, box-shadow colours, text/background/border and
+ * any other [data-control="color"] field all use the same <input> structure.
+ *
+ * Uses the native HTMLInputElement value setter to bypass any Vue getter
+ * wrapper on the property, then fires a bubbling 'input' event so Vue's
+ * event listener updates its reactive state.
+ *
+ * @param {HTMLInputElement|null} inputEl
+ * @param {string} value  e.g. "var(--sf-color-primary)"
+ * @returns {boolean}
+ */
+function applyToColorInput(inputEl, value) {
+  if (!inputEl || !inputEl.isConnected) return false;
+  try {
+    const nativeSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype, 'value'
+    )?.set;
+    if (nativeSetter) nativeSetter.call(inputEl, value);
+    else inputEl.value = value;
+    inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Open a contextual ColorPanel bound to a specific Bricks colour input.
+ * Picker mode hides the target selector; the chosen var() is written
+ * directly into the live input via a native input event so Vue updates the
+ * correct reactive field regardless of its type.
+ *
+ * @param {Element} colorInputEl  [data-control="text"].color-input wrapper element
+ */
+function openColorPickerPanel(colorInputEl) {
+  closeColorPickerPanel();
+  const src = cfg?.colorPanel;
+  if (!src || !Array.isArray(src.variables) || src.variables.length === 0) return;
+  const node = document.createElement('div');
+  ensureHost().appendChild(node);
+  colorPickerPanel = {
+    instance: mount(ColorPanel, {
+      target: node,
+      props: {
+        source: src,
+        onPickValue: (value) => {
+          // Re-query at pick time so we always write to the live input even if
+          // Bricks re-rendered the control after the button was clicked.
+          const inputEl = colorInputEl?.querySelector('input[type="text"]');
+          applyToColorInput(inputEl, value);
+        },
+        onPick: closeColorPickerPanel,
+        onClose: closeColorPickerPanel,
+      },
+    }),
+    node,
+  };
+}
+
+function closeColorPickerPanel() {
+  if (!colorPickerPanel) return;
+  try { unmount(colorPickerPanel.instance); } catch (err) { log('warn', 'color picker panel unmount failed', err); }
+  colorPickerPanel.node.remove();
+  colorPickerPanel = null;
+}
+
 function openPanel(elementId) {
   closePanel();
   const node = document.createElement('div');
@@ -271,6 +350,7 @@ window.addEventListener('beforeunload', () => {
   controller.abort();
   closePanel();
   unmountColorApp();
+  closeColorPickerPanel();
   classHints.destroy();
   colorSwatches.destroy();
   for (const { instance } of badgeInstances.values()) {

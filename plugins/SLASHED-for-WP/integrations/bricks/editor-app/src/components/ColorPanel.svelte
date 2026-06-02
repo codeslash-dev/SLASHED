@@ -9,13 +9,21 @@
    * once (the "Both" mode splits each swatch on the diagonal) and the mode
    * toggle drives the live canvas theme so real elements adapt as you browse.
    *
-   * Interaction model:
+   * Interaction model (standalone, opened from the launcher pill):
    *   - Pick a swatch → its `var(--sf-color-*)` reference is copied to the
    *     clipboard AND applied to the selected element's chosen target
    *     (text / background / border). Applying the *variable* (never a baked
    *     hex) keeps the element adaptive. With nothing selected it degrades to
    *     copy-only, with a toast telling you to paste.
    *   - Search filters the whole model live.
+   *
+   * Picker mode (opened from an SF Colors button inside a Bricks colour field):
+   *   - `onPickValue` prop is provided — calling it delivers the chosen
+   *     `var(--sf-color-*)` directly to the caller, which writes it into the
+   *     specific Bricks input field via a native DOM event so Vue's reactive
+   *     binding picks it up regardless of which field type it is (gradient stop,
+   *     box-shadow, text colour, …). The "Apply to" target selector is hidden
+   *     because the target is already determined by which field was clicked.
    *
    * The model itself is built by the pure `color-model.js` from data the PHP
    * side localises; this component is DOM/Bricks glue + presentation.
@@ -26,8 +34,20 @@
   import ColorSwatch from './ColorSwatch.svelte';
   import Toast from './Toast.svelte';
 
-  /** @type {{ source: { variables: string[], light: object, dark: object }, onClose?: () => void }} */
-  let { source, onClose } = $props();
+  /**
+   * @type {{
+   *   source: { variables: string[], light: object, dark: object },
+   *   onClose?: () => void,
+   *   initialTarget?: string,
+   *   onPick?: () => void,
+   *   onPickValue?: (value: string) => void,
+   * }}
+   */
+  let { source, onClose, initialTarget = 'background', onPick, onPickValue } = $props();
+
+  // Picker mode: triggered from a specific Bricks colour field via the SF button.
+  // The target selector is hidden; the caller handles writing the value to the field.
+  const pickerMode = $derived(typeof onPickValue === 'function');
 
   const TARGETS = [
     { id: 'background', label: 'Background' },
@@ -41,7 +61,7 @@
   ];
 
   let mode = $state('both');
-  let target = $state('background');
+  let target = $state(initialTarget);
   let query = $state('');
   let toast = $state(null);
 
@@ -126,6 +146,16 @@
 
   async function pick(swatch) {
     const value = swatchValue(swatch);
+
+    // Picker mode: the caller owns the target field and handles the write.
+    // We just deliver the value and let them close the panel via onPick.
+    if (pickerMode) {
+      onPickValue(value);
+      onPick?.();
+      return;
+    }
+
+    // Standalone mode: copy to clipboard + apply to the selected element.
     const copied = await copyText(value);
 
     const id = api.getActiveElementId();
@@ -135,11 +165,10 @@
         applied = api.setElementColor(id, target, value);
       });
       if (applied) {
+        onPick?.();
         const label = api.getElementLabel(id) || 'element';
         toast = { kind: 'success', message: `${targetLabel} of “${label}” → ${swatch.name}` };
       } else {
-        // We had a selection but couldn't write to it (e.g. a stale id from
-        // the DOM fallback). Say so rather than implying nothing was selected.
         toast = copied
           ? { kind: 'info', message: `Copied ${value} — couldn't apply to the selected element` }
           : { kind: 'error', message: `Couldn't apply or copy ${value}` };
@@ -184,6 +213,7 @@
       bind:value={query}
       aria-label="Search colours"
     />
+    {#if !pickerMode}
     <div class="slashed-cp__target" role="group" aria-label="Apply to">
       <span class="slashed-cp__target-label">Apply to</span>
       {#each TARGETS as t (t.id)}
@@ -196,6 +226,7 @@
         >{t.label}</button>
       {/each}
     </div>
+    {/if}
   </div>
 
   <div class="slashed-cp__body">
