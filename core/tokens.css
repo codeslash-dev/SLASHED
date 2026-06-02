@@ -423,16 +423,16 @@
     /* ----------------------------------------------------------
        Gradients — derived from brand colors (auto-adapt)
        ---------------------------------------------------------- */
-    --sf-gradient-primary:   linear-gradient(135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h));
-    --sf-gradient-secondary: linear-gradient(135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h));
-    --sf-gradient-tertiary:  linear-gradient(135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h));
-    --sf-gradient-brand:     linear-gradient(135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)));
-    --sf-gradient-surface:   linear-gradient(180deg, var(--sf-color-surface), var(--sf-color-bg));
+    --sf-gradient-primary:   linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h));
+    --sf-gradient-secondary: linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h));
+    --sf-gradient-tertiary:  linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h));
+    --sf-gradient-brand:     linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)));
+    --sf-gradient-surface:   linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg));
 
-    --sf-gradient-fade--r: linear-gradient(to right,  transparent, var(--sf-color-bg));
-    --sf-gradient-fade--l: linear-gradient(to left,   transparent, var(--sf-color-bg));
-    --sf-gradient-fade--t: linear-gradient(to top,    transparent, var(--sf-color-bg));
-    --sf-gradient-fade--b: linear-gradient(to bottom, transparent, var(--sf-color-bg));
+    --sf-gradient-fade--r: linear-gradient(in oklch to right,  transparent, var(--sf-color-bg));
+    --sf-gradient-fade--l: linear-gradient(in oklch to left,   transparent, var(--sf-color-bg));
+    --sf-gradient-fade--t: linear-gradient(in oklch to top,    transparent, var(--sf-color-bg));
+    --sf-gradient-fade--b: linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg));
 
     /* ----------------------------------------------------------
        Shadow — strength scales up in dark mode via --sf-is-dark
@@ -456,35 +456,34 @@
   /* ============================================================
      SEMANTIC COLOUR ALIASES — shade, interactive + transparency
 
-     All aliases compute directly from the adaptive --sf-color-X
-     token (which uses light-dark()) via relative colour syntax,
-     so they auto-shift when the colour scheme switches.
+     Shade aliases (superlight → superdark) use color-mix(in oklab)
+     toward --sf-color-surface (tints) or --sf-color-text (shades),
+     matching the formula used by optional/tokens.palette.css.
+     They are surface-aware and correct on any background.
 
-     Shade aliases (superlight/xlight/lighter/darker/xdark/superdark)
-     use absolute lightness offsets, so they aim toward near-white /
-     near-black rather than toward the actual page surface. On a
-     non-white or non-dark surface (e.g. warm cream, dark slate) the
-     steps will look off. Load optional/tokens.palette.css to get
-     surface-aware tints via color-mix(in oklab, …, --sf-color-surface).
+     Surface family uses an inverted mix direction for tints:
+     text mixes into surface (not color into surface) so the ramp
+     reads light→dark regardless of the base surface value.
 
-     Alpha aliases (subtle/muted/ghost) are transparency-based and
-     therefore work correctly on any surface without the palette.
+     Alpha aliases (subtle/muted/ghost) use oklch relative-color
+     syntax to preserve hue and chroma while varying only alpha.
 
-     When optional/tokens.palette.css is also loaded, it overrides
-     these aliases to point at the surface-aware numeric scale steps
-     it adds (-50…-950, -a5…-a95) for the 6 brand colour families.
+     When optional/tokens.palette.css is also loaded it overrides
+     these aliases to point at the named scale steps it introduces
+     (-50…-950, -a5…-a95) for the 6 brand colour families — same
+     computed color, but overriding a step then propagates to its alias.
      ============================================================ */
 
   :root {
 
     /* ─── primary ──────────────────────────────────────────── */
 
-    --sf-color-primary-superlight: oklch(from var(--sf-color-primary) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-primary-xlight:     oklch(from var(--sf-color-primary) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-primary-lighter:    oklch(from var(--sf-color-primary) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-primary-darker:     oklch(from var(--sf-color-primary) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-primary-xdark:      oklch(from var(--sf-color-primary) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-primary-superdark:  oklch(from var(--sf-color-primary) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-primary-superlight: color-mix(in oklab, var(--sf-color-primary)  4%, var(--sf-color-surface));
+    --sf-color-primary-xlight:     color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface));
+    --sf-color-primary-lighter:    color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface));
+    --sf-color-primary-darker:     color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text));
+    --sf-color-primary-xdark:      color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text));
+    --sf-color-primary-superdark:  color-mix(in oklab, var(--sf-color-primary)  8%, var(--sf-color-text));
     --sf-color-primary-hover:      var(--sf-color-primary-darker);
     --sf-color-primary-active:     var(--sf-color-primary-xdark);
     --sf-color-primary-subtle:     oklch(from var(--sf-color-primary) l c h / 0.10);
@@ -493,12 +492,12 @@
 
     /* ─── secondary ────────────────────────────────────────── */
 
-    --sf-color-secondary-superlight: oklch(from var(--sf-color-secondary) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-secondary-xlight:     oklch(from var(--sf-color-secondary) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-secondary-lighter:    oklch(from var(--sf-color-secondary) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-secondary-darker:     oklch(from var(--sf-color-secondary) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-secondary-xdark:      oklch(from var(--sf-color-secondary) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-secondary-superdark:  oklch(from var(--sf-color-secondary) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-secondary-superlight: color-mix(in oklab, var(--sf-color-secondary)  4%, var(--sf-color-surface));
+    --sf-color-secondary-xlight:     color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface));
+    --sf-color-secondary-lighter:    color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface));
+    --sf-color-secondary-darker:     color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text));
+    --sf-color-secondary-xdark:      color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text));
+    --sf-color-secondary-superdark:  color-mix(in oklab, var(--sf-color-secondary)  8%, var(--sf-color-text));
     --sf-color-secondary-hover:      var(--sf-color-secondary-darker);
     --sf-color-secondary-active:     var(--sf-color-secondary-xdark);
     --sf-color-secondary-subtle:     oklch(from var(--sf-color-secondary) l c h / 0.10);
@@ -507,12 +506,12 @@
 
     /* ─── tertiary ──────────────────────────────────────────── */
 
-    --sf-color-tertiary-superlight: oklch(from var(--sf-color-tertiary) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-tertiary-xlight:     oklch(from var(--sf-color-tertiary) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-tertiary-lighter:    oklch(from var(--sf-color-tertiary) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-tertiary-darker:     oklch(from var(--sf-color-tertiary) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-tertiary-xdark:      oklch(from var(--sf-color-tertiary) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-tertiary-superdark:  oklch(from var(--sf-color-tertiary) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-tertiary-superlight: color-mix(in oklab, var(--sf-color-tertiary)  4%, var(--sf-color-surface));
+    --sf-color-tertiary-xlight:     color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface));
+    --sf-color-tertiary-lighter:    color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface));
+    --sf-color-tertiary-darker:     color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text));
+    --sf-color-tertiary-xdark:      color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text));
+    --sf-color-tertiary-superdark:  color-mix(in oklab, var(--sf-color-tertiary)  8%, var(--sf-color-text));
     --sf-color-tertiary-hover:      var(--sf-color-tertiary-darker);
     --sf-color-tertiary-active:     var(--sf-color-tertiary-xdark);
     --sf-color-tertiary-subtle:     oklch(from var(--sf-color-tertiary) l c h / 0.10);
@@ -521,12 +520,12 @@
 
     /* ─── action ────────────────────────────────────────────── */
 
-    --sf-color-action-superlight: oklch(from var(--sf-color-action) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-action-xlight:     oklch(from var(--sf-color-action) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-action-lighter:    oklch(from var(--sf-color-action) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-action-darker:     oklch(from var(--sf-color-action) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-action-xdark:      oklch(from var(--sf-color-action) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-action-superdark:  oklch(from var(--sf-color-action) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-action-superlight: color-mix(in oklab, var(--sf-color-action)  4%, var(--sf-color-surface));
+    --sf-color-action-xlight:     color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface));
+    --sf-color-action-lighter:    color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface));
+    --sf-color-action-darker:     color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text));
+    --sf-color-action-xdark:      color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text));
+    --sf-color-action-superdark:  color-mix(in oklab, var(--sf-color-action)  8%, var(--sf-color-text));
     --sf-color-action-hover:      var(--sf-color-action-darker);
     --sf-color-action-active:     var(--sf-color-action-xdark);
     --sf-color-action-subtle:     oklch(from var(--sf-color-action) l c h / 0.10);
@@ -535,12 +534,12 @@
 
     /* ─── neutral ───────────────────────────────────────────── */
 
-    --sf-color-neutral-superlight: oklch(from var(--sf-color-neutral) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-neutral-xlight:     oklch(from var(--sf-color-neutral) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-neutral-lighter:    oklch(from var(--sf-color-neutral) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-neutral-darker:     oklch(from var(--sf-color-neutral) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-neutral-xdark:      oklch(from var(--sf-color-neutral) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-neutral-superdark:  oklch(from var(--sf-color-neutral) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-neutral-superlight: color-mix(in oklab, var(--sf-color-neutral)  4%, var(--sf-color-surface));
+    --sf-color-neutral-xlight:     color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface));
+    --sf-color-neutral-lighter:    color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface));
+    --sf-color-neutral-darker:     color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text));
+    --sf-color-neutral-xdark:      color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text));
+    --sf-color-neutral-superdark:  color-mix(in oklab, var(--sf-color-neutral)  8%, var(--sf-color-text));
     --sf-color-neutral-hover:      var(--sf-color-neutral-darker);
     --sf-color-neutral-active:     var(--sf-color-neutral-xdark);
     --sf-color-neutral-subtle:     oklch(from var(--sf-color-neutral) l c h / 0.10);
@@ -549,12 +548,12 @@
 
     /* ─── surface ──────────────────────────────────────────── */
 
-    --sf-color-surface-superlight: oklch(from var(--sf-color-surface) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-surface-xlight:     oklch(from var(--sf-color-surface) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-surface-lighter:    oklch(from var(--sf-color-surface) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-surface-darker:     oklch(from var(--sf-color-surface) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-surface-xdark:      oklch(from var(--sf-color-surface) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-surface-superdark:  oklch(from var(--sf-color-surface) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-surface-superlight: color-mix(in oklab, var(--sf-color-text)     4%, var(--sf-color-surface));
+    --sf-color-surface-xlight:     color-mix(in oklab, var(--sf-color-text)    20%, var(--sf-color-surface));
+    --sf-color-surface-lighter:    color-mix(in oklab, var(--sf-color-text)    65%, var(--sf-color-surface));
+    --sf-color-surface-darker:     color-mix(in oklab, var(--sf-color-surface) 82%, var(--sf-color-text));
+    --sf-color-surface-xdark:      color-mix(in oklab, var(--sf-color-surface) 38%, var(--sf-color-text));
+    --sf-color-surface-superdark:  color-mix(in oklab, var(--sf-color-surface)  8%, var(--sf-color-text));
     --sf-color-surface-hover:      var(--sf-color-surface-darker);
     --sf-color-surface-active:     var(--sf-color-surface-xdark);
     --sf-color-surface-subtle:     oklch(from var(--sf-color-surface) l c h / 0.10);
@@ -563,12 +562,12 @@
 
     /* ─── success ───────────────────────────────────────────── */
 
-    --sf-color-success-superlight: oklch(from var(--sf-color-success) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-success-xlight:     oklch(from var(--sf-color-success) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-success-lighter:    oklch(from var(--sf-color-success) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-success-darker:     oklch(from var(--sf-color-success) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-success-xdark:      oklch(from var(--sf-color-success) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-success-superdark:  oklch(from var(--sf-color-success) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-success-superlight: color-mix(in oklab, var(--sf-color-success)  4%, var(--sf-color-surface));
+    --sf-color-success-xlight:     color-mix(in oklab, var(--sf-color-success) 20%, var(--sf-color-surface));
+    --sf-color-success-lighter:    color-mix(in oklab, var(--sf-color-success) 65%, var(--sf-color-surface));
+    --sf-color-success-darker:     color-mix(in oklab, var(--sf-color-success) 82%, var(--sf-color-text));
+    --sf-color-success-xdark:      color-mix(in oklab, var(--sf-color-success) 38%, var(--sf-color-text));
+    --sf-color-success-superdark:  color-mix(in oklab, var(--sf-color-success)  8%, var(--sf-color-text));
     --sf-color-success-hover:      var(--sf-color-success-darker);
     --sf-color-success-active:     var(--sf-color-success-xdark);
     --sf-color-success-subtle:     oklch(from var(--sf-color-success) l c h / 0.10);
@@ -577,12 +576,12 @@
 
     /* ─── warning ───────────────────────────────────────────── */
 
-    --sf-color-warning-superlight: oklch(from var(--sf-color-warning) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-warning-xlight:     oklch(from var(--sf-color-warning) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-warning-lighter:    oklch(from var(--sf-color-warning) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-warning-darker:     oklch(from var(--sf-color-warning) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-warning-xdark:      oklch(from var(--sf-color-warning) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-warning-superdark:  oklch(from var(--sf-color-warning) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-warning-superlight: color-mix(in oklab, var(--sf-color-warning)  4%, var(--sf-color-surface));
+    --sf-color-warning-xlight:     color-mix(in oklab, var(--sf-color-warning) 20%, var(--sf-color-surface));
+    --sf-color-warning-lighter:    color-mix(in oklab, var(--sf-color-warning) 65%, var(--sf-color-surface));
+    --sf-color-warning-darker:     color-mix(in oklab, var(--sf-color-warning) 82%, var(--sf-color-text));
+    --sf-color-warning-xdark:      color-mix(in oklab, var(--sf-color-warning) 38%, var(--sf-color-text));
+    --sf-color-warning-superdark:  color-mix(in oklab, var(--sf-color-warning)  8%, var(--sf-color-text));
     --sf-color-warning-hover:      var(--sf-color-warning-darker);
     --sf-color-warning-active:     var(--sf-color-warning-xdark);
     --sf-color-warning-subtle:     oklch(from var(--sf-color-warning) l c h / 0.10);
@@ -591,12 +590,12 @@
 
     /* ─── error ─────────────────────────────────────────────── */
 
-    --sf-color-error-superlight: oklch(from var(--sf-color-error) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-error-xlight:     oklch(from var(--sf-color-error) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-error-lighter:    oklch(from var(--sf-color-error) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-error-darker:     oklch(from var(--sf-color-error) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-error-xdark:      oklch(from var(--sf-color-error) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-error-superdark:  oklch(from var(--sf-color-error) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-error-superlight: color-mix(in oklab, var(--sf-color-error)  4%, var(--sf-color-surface));
+    --sf-color-error-xlight:     color-mix(in oklab, var(--sf-color-error) 20%, var(--sf-color-surface));
+    --sf-color-error-lighter:    color-mix(in oklab, var(--sf-color-error) 65%, var(--sf-color-surface));
+    --sf-color-error-darker:     color-mix(in oklab, var(--sf-color-error) 82%, var(--sf-color-text));
+    --sf-color-error-xdark:      color-mix(in oklab, var(--sf-color-error) 38%, var(--sf-color-text));
+    --sf-color-error-superdark:  color-mix(in oklab, var(--sf-color-error)  8%, var(--sf-color-text));
     --sf-color-error-hover:      var(--sf-color-error-darker);
     --sf-color-error-active:     var(--sf-color-error-xdark);
     --sf-color-error-subtle:     oklch(from var(--sf-color-error) l c h / 0.10);
@@ -605,12 +604,12 @@
 
     /* ─── info ──────────────────────────────────────────────── */
 
-    --sf-color-info-superlight: oklch(from var(--sf-color-info) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-info-xlight:     oklch(from var(--sf-color-info) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-info-lighter:    oklch(from var(--sf-color-info) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-info-darker:     oklch(from var(--sf-color-info) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-info-xdark:      oklch(from var(--sf-color-info) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-info-superdark:  oklch(from var(--sf-color-info) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-info-superlight: color-mix(in oklab, var(--sf-color-info)  4%, var(--sf-color-surface));
+    --sf-color-info-xlight:     color-mix(in oklab, var(--sf-color-info) 20%, var(--sf-color-surface));
+    --sf-color-info-lighter:    color-mix(in oklab, var(--sf-color-info) 65%, var(--sf-color-surface));
+    --sf-color-info-darker:     color-mix(in oklab, var(--sf-color-info) 82%, var(--sf-color-text));
+    --sf-color-info-xdark:      color-mix(in oklab, var(--sf-color-info) 38%, var(--sf-color-text));
+    --sf-color-info-superdark:  color-mix(in oklab, var(--sf-color-info)  8%, var(--sf-color-text));
     --sf-color-info-hover:      var(--sf-color-info-darker);
     --sf-color-info-active:     var(--sf-color-info-xdark);
     --sf-color-info-subtle:     oklch(from var(--sf-color-info) l c h / 0.10);
@@ -619,12 +618,12 @@
 
     /* ─── danger ────────────────────────────────────────────── */
 
-    --sf-color-danger-superlight: oklch(from var(--sf-color-danger) clamp(0, calc(l + 0.50), 0.97) calc(c * 0.10) h);
-    --sf-color-danger-xlight:     oklch(from var(--sf-color-danger) clamp(0, calc(l + 0.40), 0.95) calc(c * 0.45) h);
-    --sf-color-danger-lighter:    oklch(from var(--sf-color-danger) clamp(0, calc(l + 0.17), 0.92) calc(c * 0.88) h);
-    --sf-color-danger-darker:     oklch(from var(--sf-color-danger) clamp(0, calc(l - 0.07), 1)    c h);
-    --sf-color-danger-xdark:      oklch(from var(--sf-color-danger) clamp(0, calc(l - 0.23), 1)    calc(c * 0.85) h);
-    --sf-color-danger-superdark:  oklch(from var(--sf-color-danger) clamp(0, calc(l - 0.38), 1)    calc(c * 0.55) h);
+    --sf-color-danger-superlight: color-mix(in oklab, var(--sf-color-danger)  4%, var(--sf-color-surface));
+    --sf-color-danger-xlight:     color-mix(in oklab, var(--sf-color-danger) 20%, var(--sf-color-surface));
+    --sf-color-danger-lighter:    color-mix(in oklab, var(--sf-color-danger) 65%, var(--sf-color-surface));
+    --sf-color-danger-darker:     color-mix(in oklab, var(--sf-color-danger) 82%, var(--sf-color-text));
+    --sf-color-danger-xdark:      color-mix(in oklab, var(--sf-color-danger) 38%, var(--sf-color-text));
+    --sf-color-danger-superdark:  color-mix(in oklab, var(--sf-color-danger)  8%, var(--sf-color-text));
     --sf-color-danger-hover:      var(--sf-color-danger-darker);
     --sf-color-danger-active:     var(--sf-color-danger-xdark);
     --sf-color-danger-subtle:     oklch(from var(--sf-color-danger) l c h / 0.10);
