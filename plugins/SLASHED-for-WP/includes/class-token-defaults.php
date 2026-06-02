@@ -69,7 +69,7 @@ class Slashed_Token_Defaults {
 				'tertiary'  => 'oklch(0.42 0.22 295)',
 				'action'    => 'oklch(0.50 0.22 235)',
 				'neutral'   => 'oklch(0.52 0.025 260)',
-				'base'      => 'oklch(0.99 0.006 250)',
+				'surface'   => 'oklch(0.99 0.006 250)',
 			),
 			'brand_dark' => array(
 				'primary'   => '',
@@ -77,7 +77,7 @@ class Slashed_Token_Defaults {
 				'tertiary'  => '',
 				'action'    => '',
 				'neutral'   => '',
-				'base'      => '',
+				'surface'   => '',
 			),
 			'status' => array(
 				'success' => 'oklch(0.50 0.16 145)',
@@ -99,7 +99,7 @@ class Slashed_Token_Defaults {
 				'tertiary'  => '#5c20cc',
 				'action'    => '#1c58cc',
 				'neutral'   => '#5e6880',
-				'base'      => '#f8f9ff',
+				'surface'   => '#f8f9ff',
 			),
 			'brand_dark_hex_hints' => array(
 				'primary'   => '#9080f0',
@@ -107,7 +107,7 @@ class Slashed_Token_Defaults {
 				'tertiary'  => '#b07ae8',
 				'action'    => '#6098f0',
 				'neutral'   => '#8a96b4',
-				'base'      => '#141924',
+				'surface'   => '#141924',
 			),
 			'status_hex_hints' => array(
 				'success' => '#1a8040',

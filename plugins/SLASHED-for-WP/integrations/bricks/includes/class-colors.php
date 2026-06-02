@@ -58,7 +58,7 @@ class Slashed_Bricks_Colors {
      *
      * @var string[]
      */
-    private static $brands = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
+    private static $brands = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface' );
 
     /**
      * Status family slugs.
