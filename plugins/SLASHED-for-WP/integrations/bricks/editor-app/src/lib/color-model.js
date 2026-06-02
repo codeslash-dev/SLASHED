@@ -433,7 +433,6 @@ const QUICK_USE_GROUPS = [
     label: 'Surfaces',
     tokens: [
       { var: '--sf-color-bg',      label: 'Background' },
-      { var: '--sf-color-surface', label: 'Surface' },
       { var: '--sf-color-raised',  label: 'Raised' },
       { var: '--sf-color-inset',   label: 'Inset' },
       { var: '--sf-color-overlay', label: 'Overlay' },
@@ -462,6 +461,8 @@ const QUICK_USE_GROUPS = [
       { var: '--sf-color-action-hover',   label: 'Action · Hover' },
       { var: '--sf-color-secondary',      label: 'Secondary' },
       { var: '--sf-color-tertiary',       label: 'Tertiary' },
+      { var: '--sf-color-neutral',        label: 'Neutral' },
+      { var: '--sf-color-surface',        label: 'Surface' },
     ],
   },
   {
