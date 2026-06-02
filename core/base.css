@@ -25,7 +25,7 @@
     color:             var(--sf-heading-color, var(--sf-color-heading));
     text-wrap:         var(--sf-heading-text-wrap);
     overflow-wrap:     break-word;
-    text-rendering:    optimizeLegibility;
+    text-rendering:    optimizelegibility;
     scroll-margin-top: calc(var(--sf-header-height, 5rem) + var(--sf-space-m));
   }
 
