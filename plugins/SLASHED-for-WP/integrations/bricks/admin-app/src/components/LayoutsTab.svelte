@@ -14,6 +14,7 @@
    */
   import { meta } from '../lib/stores.svelte.js';
   import TextField from './TextField.svelte';
+  import NumberField from './NumberField.svelte';
   import AdvancedSection from './AdvancedSection.svelte';
 
   const SECTION = 'layouts';
@@ -64,6 +65,66 @@
     <TextField section={SECTION} fieldKey="bento_row_default"  label="Row (default)" default={defaults.bento_row_default  ?? '10rem'} cssVar="--sf-bento-row-default"  mono />
     <TextField section={SECTION} fieldKey="bento_row_compact"  label="Row (compact)" default={defaults.bento_row_compact  ?? '6rem'}  cssVar="--sf-bento-row-compact"  mono />
     <TextField section={SECTION} fieldKey="bento_row_tall"     label="Row (tall)"    default={defaults.bento_row_tall     ?? '16rem'} cssVar="--sf-bento-row-tall"     mono />
+  </div>
+
+  <h2 class="group-heading">Header &amp; Sticky</h2>
+  <p class="hint">
+    Set mobile and desktop header heights in <code>rem</code>. When both are provided,
+    <code>--sf-header-height</code> becomes a fluid <code>clamp()</code> between them using
+    the viewport range configured in the Spacing tab. Set both to the same value for a
+    fixed height. Leave blank to use the framework default (<code>5rem</code>).
+  </p>
+  <div class="rows">
+    <div class="pair-row">
+      <span class="pair-row__label">Header height</span>
+      <div class="pair-row__inputs">
+        <NumberField
+          section={SECTION}
+          fieldKey="header_height_mobile"
+          label="Mobile (rem)"
+          min={0}
+          step={0.25}
+          default={defaults.header_height_mobile ?? ''}
+          cssVar="--sf-header-height-mobile"
+          width="100px"
+        />
+        <NumberField
+          section={SECTION}
+          fieldKey="header_height_desktop"
+          label="Desktop (rem)"
+          min={0}
+          step={0.25}
+          default={defaults.header_height_desktop ?? ''}
+          cssVar="--sf-header-height-desktop"
+          width="100px"
+        />
+      </div>
+    </div>
+    <div class="pair-row">
+      <span class="pair-row__label">Sticky offset</span>
+      <div class="pair-row__inputs">
+        <NumberField
+          section={SECTION}
+          fieldKey="sticky_offset_mobile"
+          label="Mobile (rem)"
+          min={0}
+          step={0.25}
+          default={defaults.sticky_offset_mobile ?? ''}
+          cssVar="--sf-sticky-offset-mobile"
+          width="100px"
+        />
+        <NumberField
+          section={SECTION}
+          fieldKey="sticky_offset_desktop"
+          label="Desktop (rem)"
+          min={0}
+          step={0.25}
+          default={defaults.sticky_offset_desktop ?? ''}
+          cssVar="--sf-sticky-offset-desktop"
+          width="100px"
+        />
+      </div>
+    </div>
   </div>
 
   <AdvancedSection>
@@ -124,5 +185,39 @@
     border-radius: 4px;
     padding: 0 12px;
     background: #fcfcfd;
+  }
+  .pair-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f1;
+  }
+  .pair-row:last-child { border-bottom: none; }
+  .pair-row__label {
+    font-weight: 500;
+    color: #1d2327;
+    font-size: 13px;
+  }
+  .pair-row__inputs {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .pair-row__inputs :global(.row) {
+    display: flex !important;
+    grid-template-columns: none;
+    gap: 6px;
+    padding: 0;
+    border: none;
+    align-items: center;
+  }
+  .pair-row__inputs :global(.row__label-text),
+  .pair-row__inputs :global(.row__label label) {
+    font-weight: 400;
+    color: #50575e;
+    font-size: 12px;
   }
 </style>

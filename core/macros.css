@@ -216,6 +216,15 @@
 
      Composes naturally with .sf-section / .sf-card / .sf-stack:
        <section class="sf-section sf-surface--primary">…</section>
+
+     Contextual color cascade (in @supports block below):
+     Re-declares the eight core semantic tokens on the surface element
+     so every descendant that reads var(--sf-color-text), --heading,
+     --border etc. automatically gets the surface-appropriate value
+     via inheritance — no extra classes needed on children.
+     Links inherit the surface text color (underline provides the
+     affordance); override --sf-color-link in slashed.overrides
+     if you want a branded link hue on a specific surface.
      ---------------------------------------------------------- */
   .sf-surface--primary    { background: var(--sf-color-primary);   color: var(--sf-color-text--on-primary); }
   .sf-surface--secondary  { background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary); }
@@ -228,6 +237,119 @@
   .sf-surface--error      { background: var(--sf-color-error);     color: var(--sf-color-text--on-error); }
   .sf-surface--info       { background: var(--sf-color-info);      color: var(--sf-color-text--on-info); }
   .sf-surface--danger     { background: var(--sf-color-danger);    color: var(--sf-color-text--on-danger); }
+
+  @supports (color: oklch(from red l c h)) {
+    .sf-surface--primary {
+      --sf-color-text:              var(--sf-color-text--on-primary);
+      --sf-color-heading:           var(--sf-color-text--on-primary);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-primary) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-primary) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-primary) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-primary) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-primary) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-primary) l c h / 0.35);
+    }
+    .sf-surface--secondary {
+      --sf-color-text:              var(--sf-color-text--on-secondary);
+      --sf-color-heading:           var(--sf-color-text--on-secondary);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-secondary) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-secondary) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-secondary) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-secondary) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-secondary) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-secondary) l c h / 0.35);
+    }
+    .sf-surface--tertiary {
+      --sf-color-text:              var(--sf-color-text--on-tertiary);
+      --sf-color-heading:           var(--sf-color-text--on-tertiary);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-tertiary) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-tertiary) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-tertiary) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-tertiary) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-tertiary) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-tertiary) l c h / 0.35);
+    }
+    .sf-surface--action {
+      --sf-color-text:              var(--sf-color-text--on-action);
+      --sf-color-heading:           var(--sf-color-text--on-action);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-action) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-action) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-action) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-action) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-action) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-action) l c h / 0.35);
+    }
+    .sf-surface--neutral {
+      --sf-color-text:              var(--sf-color-text--on-neutral);
+      --sf-color-heading:           var(--sf-color-text--on-neutral);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-neutral) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-neutral) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-neutral) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-neutral) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-neutral) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-neutral) l c h / 0.35);
+    }
+    .sf-surface--inverse {
+      --sf-color-text:              var(--sf-color-text--on-inverse);
+      --sf-color-heading:           var(--sf-color-text--on-inverse);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-inverse) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-inverse) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-inverse) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-inverse) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-inverse) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-inverse) l c h / 0.35);
+    }
+    .sf-surface--success {
+      --sf-color-text:              var(--sf-color-text--on-success);
+      --sf-color-heading:           var(--sf-color-text--on-success);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-success) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-success) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-success) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-success) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-success) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-success) l c h / 0.35);
+    }
+    .sf-surface--warning {
+      --sf-color-text:              var(--sf-color-text--on-warning);
+      --sf-color-heading:           var(--sf-color-text--on-warning);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-warning) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-warning) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-warning) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-warning) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-warning) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-warning) l c h / 0.35);
+    }
+    .sf-surface--error {
+      --sf-color-text:              var(--sf-color-text--on-error);
+      --sf-color-heading:           var(--sf-color-text--on-error);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-error) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-error) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-error) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-error) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-error) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-error) l c h / 0.35);
+    }
+    .sf-surface--info {
+      --sf-color-text:              var(--sf-color-text--on-info);
+      --sf-color-heading:           var(--sf-color-text--on-info);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-info) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-info) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-info) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-info) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-info) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-info) l c h / 0.35);
+    }
+    .sf-surface--danger {
+      --sf-color-text:              var(--sf-color-text--on-danger);
+      --sf-color-heading:           var(--sf-color-text--on-danger);
+      --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-danger) l c h / 0.70);
+      --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-danger) l c h / 0.45);
+      --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-danger) l c h / 0.30);
+      --sf-color-border:            oklch(from var(--sf-color-text--on-danger) l c h / 0.20);
+      --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-danger) l c h / 0.12);
+      --sf-color-border--strong:    oklch(from var(--sf-color-text--on-danger) l c h / 0.35);
+    }
+  } /* end @supports (color: oklch(from red l c h)) — surface contextual cascade */
 
   /* -- Text gradient -------------------------------------------
      Fills text with a gradient. Defaults to --sf-gradient-primary

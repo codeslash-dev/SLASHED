@@ -2,7 +2,7 @@
   "_meta": {
     "source": "source (core/ + optional/ token and class files)",
     "counts": {
-      "variables": 677,
+      "variables": 681,
       "sf_classes": 158,
       "is_classes": 40
     }
@@ -508,6 +508,8 @@
     "--sf-h6-line-height",
     "--sf-h6-size",
     "--sf-header-height",
+    "--sf-header-height-desktop",
+    "--sf-header-height-mobile",
     "--sf-heading-color",
     "--sf-heading-font-family",
     "--sf-heading-text-wrap",
@@ -637,6 +639,8 @@
     "--sf-stack-gap",
     "--sf-state-pending-opacity",
     "--sf-sticky-offset",
+    "--sf-sticky-offset-desktop",
+    "--sf-sticky-offset-mobile",
     "--sf-stroke-bold",
     "--sf-stroke-heavy",
     "--sf-stroke-regular",

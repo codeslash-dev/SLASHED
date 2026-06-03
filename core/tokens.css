@@ -989,8 +989,12 @@
     /* ----------------------------------------------------------
        Layout & a11y
        ---------------------------------------------------------- */
-    --sf-header-height:     5rem;
-    --sf-sticky-offset:     var(--sf-header-height);
+    --sf-header-height-mobile:  3.5rem;
+    --sf-header-height-desktop: 5rem;
+    --sf-header-height:         5rem;
+    --sf-sticky-offset-mobile:  var(--sf-header-height-mobile);
+    --sf-sticky-offset-desktop: var(--sf-header-height-desktop);
+    --sf-sticky-offset:         var(--sf-header-height);
     --sf-focus-ring-width:  2px;
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
