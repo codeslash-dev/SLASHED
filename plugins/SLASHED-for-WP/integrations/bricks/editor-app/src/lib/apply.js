@@ -108,8 +108,11 @@ const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
  */
 
 /**
- * Walk rows in document order to determine the owning BEM block for each
- * included row. Uses a depth-based stack: a sub-block root pushes itself,
+ * Walk rows in document order to determine the owning BEM block for each row.
+ * Block/sub-block roots are only pushed onto the stack when included; element
+ * rows are assigned an owner regardless of their include status (intentional:
+ * BemPanel uses this for live prefix display so excluded rows still show their
+ * would-be prefix). Uses a depth-based stack: a sub-block root pushes itself,
  * popping any prior entries at the same or greater depth first.
  *
  * Exported so BemPanel can reuse the result for live prefix display without

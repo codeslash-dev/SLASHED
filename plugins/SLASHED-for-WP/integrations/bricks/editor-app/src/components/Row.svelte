@@ -137,7 +137,6 @@
               type="text"
               class="rebemer-row__modifier"
               bind:value={row.modifiers[mi]}
-              oninput={markAsUserTyped}
               placeholder="--modifier"
               disabled={!row.include}
               spellcheck="false"
