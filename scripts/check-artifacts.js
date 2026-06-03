@@ -4,46 +4,50 @@
  *
  * Modes:
  *   --fix    (pre-commit) Run only the builds whose sources are staged, then
- *            stage the outputs. Skips gitignored outputs silently.
+ *            stage the outputs. Skips untracked outputs silently.
  *   --check  (CI) Run every build unconditionally, then assert git diff is
  *            clean for each output. Exits non-zero on any staleness.
  *
  * To register a new build artifact, add an entry to scripts/artifacts.json.
  */
 
-import { execSync } from 'child_process';
-import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+'use strict';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const { execSync, execFileSync } = require('child_process');
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
+
+const root = resolve(__dirname, '..');
 const artifacts = JSON.parse(readFileSync(resolve(root, 'scripts/artifacts.json'), 'utf8'));
 const mode = process.argv.includes('--check') ? 'check' : 'fix';
 
-function run(cmd, cwd = root) {
-  execSync(cmd, { cwd, stdio: 'inherit', shell: true });
+function run(cmd, cwd) {
+  execSync(cmd, { cwd: cwd || root, stdio: 'inherit', shell: true });
 }
 
-function git(args) {
-  return execSync(`git ${args}`, { cwd: root, encoding: 'utf8' });
+function gitFile(...args) {
+  return execFileSync('git', args, { cwd: root, encoding: 'utf8' });
 }
 
 function isTracked(path) {
-  try { git(`ls-files --error-unmatch ${path}`); return true; } catch { return false; }
+  try { gitFile('ls-files', '--error-unmatch', path); return true; } catch { return false; }
 }
 
 if (mode === 'fix') {
-  const staged = new Set(git('diff --cached --name-only --diff-filter=ACM').trim().split('\n').filter(Boolean));
+  const staged = new Set(
+    gitFile('diff', '--cached', '--name-only', '--diff-filter=ACM')
+      .trim().split('\n').filter(Boolean)
+  );
 
   for (const artifact of artifacts) {
-    const triggered = artifact.srcGlobs.some(glob => [...staged].some(f => f.startsWith(glob)));
+    const triggered = artifact.srcPrefixes.some(prefix => [...staged].some(f => f.startsWith(prefix)));
     if (!triggered) continue;
 
     console.log(`[artifacts] ${artifact.name} sources changed — rebuilding…`);
-    run(artifact.cmd, artifact.cwd ? resolve(root, artifact.cwd) : root);
+    run(artifact.buildCmd, artifact.cwd ? resolve(root, artifact.cwd) : root);
 
     for (const out of artifact.outputs) {
-      if (isTracked(out)) run(`git add ${out}`);
+      if (isTracked(out)) gitFile('add', out);
     }
   }
 } else {
@@ -51,11 +55,15 @@ if (mode === 'fix') {
 
   for (const artifact of artifacts) {
     console.log(`[artifacts] Checking ${artifact.name}…`);
-    run(artifact.cmd, artifact.cwd ? resolve(root, artifact.cwd) : root);
+    // In CI, run the full install+build; locally (--fix) only buildCmd is used.
+    const cmd = artifact.installCmd
+      ? `${artifact.installCmd} && ${artifact.buildCmd}`
+      : artifact.buildCmd;
+    run(cmd, artifact.cwd ? resolve(root, artifact.cwd) : root);
 
     for (const out of artifact.outputs) {
       try {
-        git(`diff --exit-code ${out}`);
+        gitFile('diff', '--exit-code', '--', out);
       } catch {
         console.error(`::error::${out} is stale — rebuild ${artifact.name} and commit`);
         failed = true;

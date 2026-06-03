@@ -1,8 +1,8 @@
 [
   {
     "name": "CSS bundles + docs",
-    "srcGlobs": ["core/", "optional/"],
-    "cmd": "node scripts/bundle.js && npm run docs",
+    "srcPrefixes": ["core/", "optional/"],
+    "buildCmd": "node scripts/bundle.js && npm run docs",
     "outputs": [
       "docs/tokens.md",
       "docs/classes.md",
@@ -12,9 +12,10 @@
   },
   {
     "name": "editor-app",
-    "srcGlobs": ["plugins/SLASHED-for-WP/integrations/bricks/editor-app/src/"],
+    "srcPrefixes": ["plugins/SLASHED-for-WP/integrations/bricks/editor-app/src/"],
     "cwd": "plugins/SLASHED-for-WP/integrations/bricks/editor-app",
-    "cmd": "npm ci --silent && npm run build --silent",
+    "installCmd": "npm ci --silent",
+    "buildCmd": "npm run build --silent",
     "outputs": [
       "plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.js",
       "plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.css"
@@ -22,9 +23,10 @@
   },
   {
     "name": "admin-app",
-    "srcGlobs": ["plugins/SLASHED-for-WP/integrations/bricks/admin-app/src/"],
+    "srcPrefixes": ["plugins/SLASHED-for-WP/integrations/bricks/admin-app/src/"],
     "cwd": "plugins/SLASHED-for-WP/integrations/bricks/admin-app",
-    "cmd": "npm ci --silent && npm run build --silent",
+    "installCmd": "npm ci --silent",
+    "buildCmd": "npm run build --silent",
     "outputs": [
       "plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.js",
       "plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.css"
