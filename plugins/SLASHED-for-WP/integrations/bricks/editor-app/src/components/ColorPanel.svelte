@@ -200,7 +200,17 @@
   aria-label="SLASHED Color System"
   tabindex="-1"
   onclick={(e) => e.stopPropagation()}
-  onmousedown={(e) => e.stopPropagation()}
+  onmousedown={(e) => {
+    e.stopPropagation();
+    // Prevent focus from shifting away from whatever Bricks had focused (e.g. a
+    // border/box-shadow colour input inside a Bricks colour-picker popover).
+    // Without this, mousedown steals focus → blur fires → Bricks closes the
+    // popover → colorInputEl disconnects before onPickValue runs.
+    // Exempt INPUT/TEXTAREA so the search box can still receive focus normally.
+    if (e.target?.tagName !== 'INPUT' && e.target?.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+    }
+  }}
 >
   <header class="slashed-cp__header">
     <h2 class="slashed-cp__title">Color System</h2>
