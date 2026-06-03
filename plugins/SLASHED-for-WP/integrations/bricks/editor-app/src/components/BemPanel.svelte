@@ -25,7 +25,7 @@
   import * as api from '../lib/bricks-api.js';
   import { slugify } from '../lib/slugify.js';
   import { validateName } from '../lib/validate.js';
-  import { applyToSubtree, buildPlan } from '../lib/apply.js';
+  import { applyToSubtree, buildPlan, computeBlockAssignment } from '../lib/apply.js';
   import { suggestElementName, isLayoutContainer, suggestContainerName, SOLE_CHILD_LABEL_OVERRIDES } from '../lib/element-types.js';
   import { pickMigratableKeys, pickSkippedKeys } from '../lib/migrate-keys.js';
   import Row from './Row.svelte';
@@ -34,11 +34,10 @@
   let { rootId, onClose } = $props();
 
   const MODE_HINTS = {
-    add:      'Attaches a new BEM class to each element without removing any existing classes.',
-    rename:   'Replaces the first existing class with a new name, seeding its settings from the old class.',
-    replace:  'Replaces ALL existing classes with a single new BEM class (clean slate, no settings carried over).',
-    modifier: 'Appends a --modifier variant. The base class is auto-added to the element if absent.',
-    migrate:  'Lifts inline element styles (padding, color, typography, etc.) into a new global class.',
+    add:     'Attaches a new BEM class to each element without removing any existing classes.',
+    rename:  'Replaces the first existing class with a new name, seeding its settings from the old class.',
+    replace: 'Replaces ALL existing classes with a single new BEM class (clean slate, no settings carried over).',
+    migrate: 'Lifts inline element styles (padding, color, typography, etc.) into a new global class.',
   };
 
   let mode = $state('add');
@@ -49,8 +48,16 @@
   let toast = $state(null);
   let panelEl = $state(null);
 
-  const blockName = $derived(slugify(rows[0]?.name ?? ''));
   const rootLabel = $derived(rows[0]?.originalLabel ?? '');
+
+  /**
+   * Per-row owning block name for prefix display. Uses the same stack
+   * walk as buildPlan so the displayed prefix always matches the plan.
+   */
+  const rowBlockNames = $derived.by(() => {
+    if (rows.length === 0) return new Map();
+    return computeBlockAssignment(rows, rootId);
+  });
 
   /**
    * For migrate mode the panel-level summary tells the user how many
@@ -72,17 +79,12 @@
   });
 
   /**
-   * Per-row preview of the post-numbering BEM class name that will
-   * actually be created/attached on Apply. Built from the same pure
-   * `buildPlan` step that the apply path uses, so the "use existing
-   * class" hint never disagrees with what apply does (semantic-review
-   * issue #7). Reactive on rows + mode + rootId.
-   *
-   * Important: `buildPlan` mutates the per-op `suggestedFrom` to
-   * `'auto-number'` when it renumbers. We don't write that back into
-   * the source rows here — the next derivation re-reads `row.suggestedFrom`
-   * from the original state, so the next preview is computed fresh
-   * from the user's authoritative inputs.
+   * Per-row preview of all class names that will be created/attached on
+   * Apply: the base finalClass plus any modifier classes derived from
+   * row.modifiers. Stored as string[] per row so the row component can
+   * surface "use existing" hints for any of them. Built from the same
+   * pure `buildPlan` step that the apply path uses, so hints always
+   * agree with apply-time behavior.
    */
   const previewClassNames = $derived.by(() => {
     if (rows.length === 0) return new Map();
@@ -90,7 +92,9 @@
     const map = new Map();
     if (!result.ok) return map;
     for (const op of result.ops) {
-      map.set(op.row.id, op.finalClass);
+      const names = [op.finalClass];
+      for (const slug of op.modifierSlugs ?? []) names.push(`${op.finalClass}--${slug}`);
+      map.set(op.row.id, names);
     }
     return map;
   });
@@ -128,7 +132,8 @@
         bricksType: elementType,
         originalLabel: label || (isRoot ? 'block' : 'element'),
         name,
-        modifier: '',
+        modifiers: [''],
+        isBlockRoot: false,
         include: true,
         suggestedFrom,
         migrateKeys: pickMigratableKeys(el.settings),
@@ -213,6 +218,16 @@
       return;
     }
 
+    // Validate any sub-block roots before hitting applyToSubtree.
+    for (const row of rows) {
+      if (!row.isBlockRoot || !row.include) continue;
+      const sv = validateName(slugify(row.name ?? ''));
+      if (!sv.ok) {
+        toast = { kind: 'error', message: `Sub-block "${row.originalLabel}": ${sv.reason}` };
+        return;
+      }
+    }
+
     const result = applyToSubtree({ rootId, rows, mode, syncLabels });
     if (!result.ok) {
       toast = { kind: 'error', message: result.error };
@@ -248,16 +263,11 @@
         <option value="add">Add</option>
         <option value="rename">Rename</option>
         <option value="replace">Replace</option>
-        <option value="modifier">Add modifier</option>
         <option value="migrate">Migrate ID styles</option>
       </select>
     </label>
     <label class="rebemer-field rebemer-field--inline">
-      <input
-        type="checkbox"
-        bind:checked={syncLabels}
-        disabled={mode === 'modifier'}
-      />
+      <input type="checkbox" bind:checked={syncLabels} />
       <span>Sync labels</span>
     </label>
   </section>
@@ -287,10 +297,11 @@
       <Row
         bind:row={rows[i]}
         {mode}
-        {blockName}
-        isRoot={row.id === rootId}
+        blockName={rowBlockNames.get(row.id) ?? ''}
+        isRoot={row.id === rootId || row.isBlockRoot}
+        {rootId}
         globalClasses={globalClassesAtOpen}
-        finalClassName={previewClassNames.get(row.id) ?? ''}
+        finalClassNames={previewClassNames.get(row.id) ?? []}
       />
     {/each}
   </section>

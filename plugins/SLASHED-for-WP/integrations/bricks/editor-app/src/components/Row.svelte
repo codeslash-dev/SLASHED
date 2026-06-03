@@ -21,27 +21,34 @@
    *     in apply.js's validateMigrate().
    */
 
+  import { slugify } from '../lib/slugify.js';
+
   let {
     row = $bindable(),
     mode,
     blockName,
     isRoot,
+    rootId = '',
     globalClasses = [],
     /**
-     * The post-numbering BEM class name `apply.js` will actually
-     * create/attach for this row. Empty string means the row is
-     * either skipped, has an invalid name, or the plan is otherwise
-     * incomplete (e.g. modifier mode with empty modifier). The panel
-     * derives this map from `buildPlan` so it always agrees with
-     * apply-time behavior.
+     * All class names apply.js will create/attach for this row: the
+     * base finalClass plus any modifier classes. Empty array means the
+     * row is skipped or has an invalid name. The panel derives this from
+     * `buildPlan` so it always agrees with apply-time behavior.
      */
-    finalClassName = '',
+    finalClassNames = [],
   } = $props();
 
-  const showModifier = $derived(mode === 'modifier');
+  // Modifier inputs are shown in all modes except migrate.
+  const showModifier = $derived(mode !== 'migrate');
   const showMigrate = $derived(mode === 'migrate');
   const showRename = $derived(mode === 'rename');
   const prefix = $derived(!isRoot && blockName ? `${blockName}__` : '');
+
+  /** Whether this row is a sub-block root (not the overall tree root). */
+  const isSubBlockRoot = $derived(row.isBlockRoot === true && row.id !== rootId);
+  /** Sub-block root toggle is available on all non-tree-root rows. */
+  const canToggleBlockRoot = $derived(row.id !== rootId);
 
   /** Style suggested vs user-typed names differently so the user can
    *  see at a glance which rows reBEMer pre-filled. */
@@ -50,16 +57,22 @@
   );
 
   /**
-   * Find an existing global class with the same name. Snapshot at
-   * panel open via the `globalClasses` prop, NOT live — refreshes
-   * only when the panel is reopened. Used to surface a one-click
-   * "use existing" affordance (§11.3 `recommendedAction: "attach"`).
+   * Find an existing global class matching any of this row's preview
+   * class names. Returns the first match, or null.
    */
   const existingClassMatch = $derived.by(() => {
-    if (!finalClassName || !Array.isArray(globalClasses)) return null;
-    if (!row.include) return null;
-    return globalClasses.find(c => c && c.name === finalClassName) || null;
+    if (!finalClassNames.length || !row.include || !Array.isArray(globalClasses)) return null;
+    for (const name of finalClassNames) {
+      const found = globalClasses.find(c => c && c.name === name);
+      if (found) return found;
+    }
+    return null;
   });
+
+  /** True when all modifier inputs are empty (or there are none). */
+  const allModifiersEmpty = $derived(
+    !Array.isArray(row.modifiers) || row.modifiers.every(m => !slugify(m))
+  );
 
   function markAsUserTyped() {
     if (row.suggestedFrom !== 'user') row.suggestedFrom = 'user';
@@ -83,9 +96,18 @@
 
   <div class="rebemer-row__meta">
     <span class="rebemer-row__label">{row.originalLabel}</span>
-    <span class="rebemer-row__type">
-      {isRoot ? 'BLOCK' : (row.bricksType || 'ELEM').toUpperCase()}
-    </span>
+    {#if canToggleBlockRoot}
+      <button
+        type="button"
+        class="rebemer-row__type rebemer-row__type--toggle"
+        class:rebemer-row__type--block={isSubBlockRoot}
+        title={isSubBlockRoot ? 'Sub-block root — click to revert to element' : 'Click to promote to block root'}
+        onclick={() => { row.isBlockRoot = !row.isBlockRoot; }}
+        disabled={!row.include}
+      >{isSubBlockRoot ? 'BLOCK' : (row.bricksType || 'ELEM').toUpperCase()}</button>
+    {:else}
+      <span class="rebemer-row__type">BLOCK</span>
+    {/if}
     {#if isSuggested && row.include}
       <span
         class="rebemer-row__hint"
@@ -108,22 +130,40 @@
       />
     </div>
     {#if showModifier}
-      <input
-        type="text"
-        class="rebemer-row__modifier"
-        bind:value={row.modifier}
-        oninput={markAsUserTyped}
-        placeholder="modifier"
-        disabled={!row.include}
-        spellcheck="false"
-        autocomplete="off"
-      />
+      <div class="rebemer-row__modifiers">
+        {#each row.modifiers as _mod, mi (mi)}
+          <div class="rebemer-row__modifier-row">
+            <input
+              type="text"
+              class="rebemer-row__modifier"
+              bind:value={row.modifiers[mi]}
+              placeholder="--modifier"
+              disabled={!row.include}
+              spellcheck="false"
+              autocomplete="off"
+            />
+            {#if row.modifiers.length > 1}
+              <button
+                type="button"
+                class="rebemer-row__modifier-remove"
+                aria-label="Remove modifier"
+                onclick={() => { row.modifiers = row.modifiers.filter((_, idx) => idx !== mi); }}
+                disabled={!row.include}
+              >×</button>
+            {/if}
+          </div>
+        {/each}
+        {#if !allModifiersEmpty}
+          <button
+            type="button"
+            class="rebemer-row__modifier-add"
+            onclick={() => { row.modifiers = [...row.modifiers, '']; }}
+            disabled={!row.include}
+          >+ Add modifier</button>
+        {/if}
+      </div>
     {/if}
   </div>
-
-  {#if showModifier && row.include && !row.modifier}
-    <p class="rebemer-row__warn" role="note">Enter a modifier name — the base class will be added automatically if absent.</p>
-  {/if}
 
   {#if showRename && row.include && row.currentClassCount === 0}
     <p class="rebemer-row__warn" role="note">This element has no existing classes. Rename will create a new class instead.</p>
@@ -134,11 +174,11 @@
   {#if existingClassMatch}
     <p class="rebemer-row__recommend" role="note">
       {#if showMigrate}
-        A class named <code>{finalClassName}</code> already exists.
+        A class named <code>{existingClassMatch.name}</code> already exists.
         On Apply, missing style keys will be merged into it. Conflicting
         values block the migration — pick a different name or use Add.
       {:else}
-        A class named <code>{finalClassName}</code> already exists
+        A class named <code>{existingClassMatch.name}</code> already exists
         globally. Apply will attach the existing class instead of
         creating a duplicate.
       {/if}
@@ -150,7 +190,7 @@
       {#if row.migrateKeys?.length}
         <span class="rebemer-row__chips-label">Migrate:</span>
         {#each row.migrateKeys as key}
-          <span class="rebemer-chip" title="Will be lifted into {finalClassName || 'the new class'}">{chipLabel(key)}</span>
+          <span class="rebemer-chip" title="Will be lifted into {finalClassNames[0] || 'the new class'}">{chipLabel(key)}</span>
         {/each}
       {:else}
         <span class="rebemer-row__chips-empty">No migratable keys on this element.</span>
