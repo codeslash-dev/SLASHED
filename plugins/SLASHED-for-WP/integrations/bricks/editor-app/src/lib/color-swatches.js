@@ -120,14 +120,6 @@ function injectSFButton(colorControl) {
   dot.setAttribute('aria-hidden', 'true');
   btn.appendChild(dot);
 
-  btn.addEventListener('mousedown', (e) => {
-    e.stopPropagation();
-    // Prevent focus from leaving the Bricks colour input on button press.
-    // For border/box-shadow controls the colour input lives inside a Bricks
-    // colour-picker popover that closes on blur — without preventDefault the
-    // popover shuts before the click handler runs, disconnecting colorInput.
-    e.preventDefault();
-  });
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
     // Pass the wrapper so the picker re-queries the live input at pick time,
