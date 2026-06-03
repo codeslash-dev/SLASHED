@@ -78,6 +78,9 @@
   const brandGroups  = $derived(fullModel.groups.filter(g => g.type === 'brand'));
   const statusGroups = $derived(fullModel.groups.filter(g => g.type === 'status'));
 
+  // ── Panel element ref (used for the direct mousedown listener below) ────
+  let panelEl;
+
   // ── Canvas theme preview ─────────────────────────────────────────────────
   let _canvasOriginal;
   function canvasRoot() {
@@ -113,6 +116,47 @@
   function setMode(next) { mode = next; applyCanvasTheme(next); }
   onMount(() => () => restoreCanvasTheme());
 
+  // Attach a direct (non-Svelte-delegated) mousedown listener on the panel
+  // element. Svelte 5 delegates onclick/onmousedown to document, which fires
+  // AFTER Bricks' own document-level click-outside handlers. For border and
+  // box-shadow colour controls, Bricks' handler closes the sub-panel (and
+  // disconnects colorInputEl) before our Svelte delegation can run, causing
+  // the "input not found" error. A direct listener fires at element level —
+  // before the event bubbles to document — so stopPropagation actually
+  // prevents Bricks from seeing the event and preventDefault actually prevents
+  // focus loss. In picker mode we also apply the colour value here (on
+  // mousedown) so the input is still connected at the moment of writing.
+  onMount(() => {
+    function handlePanelMouseDown(e) {
+      if (e.target?.tagName !== 'INPUT' && e.target?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+      e.stopPropagation();
+
+      if (!pickerMode) return;
+
+      const btn = e.target?.closest?.('button[data-cp-pick-var]');
+      if (!btn) return;
+
+      // Mark the button so the Svelte-delegated click handler (pick()) skips
+      // this gesture — prevents a double onPickValue call if the component
+      // is still mounted when the subsequent click event fires.
+      btn.dataset.cpSuppressClick = '1';
+
+      const value = `var(${btn.dataset.cpPickVar})`;
+      const ok = onPickValue(value);
+      if (ok === false) {
+        toast = { kind: 'error', message: `Couldn't apply ${value} — input not found` };
+        return;
+      }
+      delete btn.dataset.cpSuppressClick;
+      onPick?.();
+    }
+
+    panelEl?.addEventListener('mousedown', handlePanelMouseDown);
+    return () => panelEl?.removeEventListener('mousedown', handlePanelMouseDown);
+  });
+
   // ── Clipboard ────────────────────────────────────────────────────────────
   async function copyText(text) {
     try {
@@ -138,6 +182,12 @@
     const value = swatchValue(swatch);
 
     if (pickerMode) {
+      // The direct mousedown handler may have already applied this token and
+      // set a suppress flag on the button. If so, skip to avoid a double call.
+      // (Keyboard-activated clicks never set the flag, so they always proceed.)
+      const btn = panelEl?.querySelector(`button[data-cp-pick-var="${swatch.var}"][data-cp-suppress-click]`);
+      if (btn) { delete btn.dataset.cpSuppressClick; return; }
+
       const ok = onPickValue(value);
       if (ok === false) {
         toast = { kind: 'error', message: `Couldn't apply ${value} — input not found` };
@@ -191,6 +241,7 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <div
+  bind:this={panelEl}
   class="slashed-cp"
   class:slashed-cp--docked={pickerMode}
   data-mode={mode}
@@ -200,17 +251,6 @@
   aria-label="SLASHED Color System"
   tabindex="-1"
   onclick={(e) => e.stopPropagation()}
-  onmousedown={(e) => {
-    e.stopPropagation();
-    // Prevent focus from shifting away from whatever Bricks had focused (e.g. a
-    // border/box-shadow colour input inside a Bricks colour-picker popover).
-    // Without this, mousedown steals focus → blur fires → Bricks closes the
-    // popover → colorInputEl disconnects before onPickValue runs.
-    // Exempt INPUT/TEXTAREA so the search box can still receive focus normally.
-    if (e.target?.tagName !== 'INPUT' && e.target?.tagName !== 'TEXTAREA') {
-      e.preventDefault();
-    }
-  }}
 >
   <header class="slashed-cp__header">
     <h2 class="slashed-cp__title">Color System</h2>
@@ -295,6 +335,7 @@
                   type="button"
                   class="slashed-cp__qu-cell"
                   title={swatch.name}
+                  data-cp-pick-var={swatch.var}
                   onclick={() => pick(swatch)}
                 >
                   <span
@@ -353,6 +394,7 @@
                       class="slashed-cp__fam-banner"
                       style="--sw-l: {base.light}; --sw-d: {base.dark}"
                       title="{grp.label} base — {base.name}"
+                      data-cp-pick-var={base.var}
                       onclick={() => pick(base)}
                     >
                       <span class="slashed-cp__fam-banner-lbl">{grp.label}</span>
@@ -380,6 +422,7 @@
                           class="slashed-cp__strip-sw"
                           title="{s.label} — {s.name}"
                           style="--sw-l: {s.light}; --sw-d: {s.dark}"
+                          data-cp-pick-var={s.var}
                           onclick={() => pick(s)}
                         ></button>
                       {/each}
@@ -399,6 +442,7 @@
                             class="slashed-cp__strip-sw slashed-cp__strip-sw--alpha"
                             title="{s.label} — {s.name}"
                             style="--sw-l: {s.light}; --sw-d: {s.dark}"
+                            data-cp-pick-var={s.var}
                             onclick={() => pick(s)}
                           ></button>
                         {/each}
@@ -450,6 +494,7 @@
                       class="slashed-cp__fam-banner"
                       style="--sw-l: {base.light}; --sw-d: {base.dark}"
                       title="{grp.label} base — {base.name}"
+                      data-cp-pick-var={base.var}
                       onclick={() => pick(base)}
                     >
                       <span class="slashed-cp__fam-banner-lbl">{grp.label}</span>
@@ -477,6 +522,7 @@
                           class="slashed-cp__strip-sw"
                           title="{s.label} — {s.name}"
                           style="--sw-l: {s.light}; --sw-d: {s.dark}"
+                          data-cp-pick-var={s.var}
                           onclick={() => pick(s)}
                         ></button>
                       {/each}
@@ -496,6 +542,7 @@
                             class="slashed-cp__strip-sw slashed-cp__strip-sw--alpha"
                             title="{s.label} — {s.name}"
                             style="--sw-l: {s.light}; --sw-d: {s.dark}"
+                            data-cp-pick-var={s.var}
                             onclick={() => pick(s)}
                           ></button>
                         {/each}
