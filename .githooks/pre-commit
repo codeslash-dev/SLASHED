@@ -7,49 +7,6 @@ if [ -n "$STAGED_CSS" ]; then
   echo "$STAGED_CSS" | tr '\n' '\0' | xargs -0 npx stylelint
 fi
 
-# Rebuild dist bundles and stage them.
-#
-# dist/*.css is gitignored on main (built by `npm run build`, served via
-# the dist branch + Releases — see .gitignore), so `git add` on those
-# paths errors out and, under `set -e`, aborts every commit. Only stage
-# outputs that are actually tracked; skip ignored ones. This keeps the
-# rebuild-and-stage behaviour for any context where dist IS tracked
-# without breaking commits where it isn't.
-node scripts/bundle.js
-outputs=$(node -e "const c=require('./bundle.config.json'); const b=Array.isArray(c.bundles)?c.bundles:[c]; process.stdout.write(b.map(x=>x.output).join('\n'))")
-echo "$outputs" | while IFS= read -r f; do
-  [ -n "$f" ] || continue
-  if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
-    git add "$f"
-  fi
-done
-
-# Rebuild the Bricks editor app when any of its sources are staged.
-EDITOR_SRC="plugins/SLASHED-for-WP/integrations/bricks/editor-app/src"
-STAGED_EDITOR=$(git diff --cached --name-only --diff-filter=ACM | grep "^${EDITOR_SRC}" || true)
-if [ -n "$STAGED_EDITOR" ]; then
-  echo "reBEMer editor-app sources changed — rebuilding assets..."
-  (cd plugins/SLASHED-for-WP/integrations/bricks/editor-app && npm ci --silent && npm run build --silent)
-  git add plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.js
-  git add plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.css
-fi
-
-# Rebuild the Bricks admin app when any of its sources are staged.
-ADMIN_SRC="plugins/SLASHED-for-WP/integrations/bricks/admin-app/src"
-STAGED_ADMIN=$(git diff --cached --name-only --diff-filter=ACM | grep "^${ADMIN_SRC}" || true)
-if [ -n "$STAGED_ADMIN" ]; then
-  echo "Admin-app sources changed — rebuilding assets..."
-  (cd plugins/SLASHED-for-WP/integrations/bricks/admin-app && npm ci --silent && npm run build --silent)
-  git add plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.js
-  git add plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.css
-fi
-
-# Regenerate docs/inventory when CSS source files are staged.
-STAGED_CSS_SRC=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(core|optional)/' || true)
-if [ -n "$STAGED_CSS_SRC" ]; then
-  echo "CSS sources changed — regenerating docs and inventory..."
-  npm run docs --silent
-  git add docs/tokens.md docs/classes.md
-  git add plugins/SLASHED-for-WP/integrations/bricks/data/inventory.json
-  git add plugins/SLASHED-for-WP/data/classes-hints.json
-fi
+# Rebuild any generated artifacts whose sources changed and re-stage the outputs.
+# Registration lives in scripts/artifacts.json — add entries there, not here.
+node scripts/check-artifacts.js --fix

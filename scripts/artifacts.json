@@ -1,0 +1,33 @@
+[
+  {
+    "name": "CSS bundles + docs",
+    "srcGlobs": ["core/", "optional/"],
+    "cmd": "node scripts/bundle.js && npm run docs",
+    "outputs": [
+      "docs/tokens.md",
+      "docs/classes.md",
+      "plugins/SLASHED-for-WP/integrations/bricks/data/inventory.json",
+      "plugins/SLASHED-for-WP/data/classes-hints.json"
+    ]
+  },
+  {
+    "name": "editor-app",
+    "srcGlobs": ["plugins/SLASHED-for-WP/integrations/bricks/editor-app/src/"],
+    "cwd": "plugins/SLASHED-for-WP/integrations/bricks/editor-app",
+    "cmd": "npm ci --silent && npm run build --silent",
+    "outputs": [
+      "plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.js",
+      "plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.css"
+    ]
+  },
+  {
+    "name": "admin-app",
+    "srcGlobs": ["plugins/SLASHED-for-WP/integrations/bricks/admin-app/src/"],
+    "cwd": "plugins/SLASHED-for-WP/integrations/bricks/admin-app",
+    "cmd": "npm ci --silent && npm run build --silent",
+    "outputs": [
+      "plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.js",
+      "plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.css"
+    ]
+  }
+]

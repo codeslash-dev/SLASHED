@@ -38,8 +38,8 @@ jobs:
           name: dist
           path: dist/
 
-  docs-freshness:
-    name: Verify generated docs
+  artifacts-freshness:
+    name: Verify all generated artifacts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
@@ -50,50 +50,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run docs
       - run: npm run audit:check
-      - run: git diff --exit-code docs/tokens.md          || (echo "::error::docs/tokens.md is stale — run 'npm run docs' and commit" && exit 1)
-      - run: git diff --exit-code docs/classes.md         || (echo "::error::docs/classes.md is stale — run 'npm run docs' and commit" && exit 1)
-      - run: git diff --exit-code plugins/SLASHED-for-WP/integrations/bricks/data/inventory.json || (echo "::error::inventory.json is stale — run 'npm run docs' and commit" && exit 1)
-      - run: git diff --exit-code plugins/SLASHED-for-WP/data/classes-hints.json || (echo "::error::classes-hints.json is stale — run 'npm run docs' and commit" && exit 1)
-
-  editor-app-freshness:
-    name: Verify editor app build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: plugins/SLASHED-for-WP/integrations/bricks/editor-app/package-lock.json
-      - run: npm ci
-        working-directory: plugins/SLASHED-for-WP/integrations/bricks/editor-app
-      - run: npm run build
-        working-directory: plugins/SLASHED-for-WP/integrations/bricks/editor-app
-      - run: git diff --exit-code plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.js   || (echo "::error::assets/editor-app/app.js is stale — run 'npm run build' in editor-app/ and commit" && exit 1)
-      - run: git diff --exit-code plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.css  || (echo "::error::assets/editor-app/app.css is stale — run 'npm run build' in editor-app/ and commit" && exit 1)
-
-  admin-app-freshness:
-    name: Verify admin app build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: plugins/SLASHED-for-WP/integrations/bricks/admin-app/package-lock.json
-      - run: npm ci
-        working-directory: plugins/SLASHED-for-WP/integrations/bricks/admin-app
-      - run: npm run build
-        working-directory: plugins/SLASHED-for-WP/integrations/bricks/admin-app
-      - run: git diff --exit-code plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.js   || (echo "::error::assets/admin-app/app.js is stale — run 'npm run build' in admin-app/ and commit" && exit 1)
-      - run: git diff --exit-code plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.css  || (echo "::error::assets/admin-app/app.css is stale — run 'npm run build' in admin-app/ and commit" && exit 1)
+      - run: node scripts/check-artifacts.js --check
 
   test:
     name: Regression tests
