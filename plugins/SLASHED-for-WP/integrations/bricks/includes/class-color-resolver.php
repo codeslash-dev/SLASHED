@@ -73,7 +73,7 @@ class Slashed_Bricks_Color_Resolver {
 				'tertiary'  => 'oklch(0.42 0.22 295)',
 				'action'    => 'oklch(0.50 0.22 235)',
 				'neutral'   => 'oklch(0.52 0.025 260)',
-				'surface'   => 'oklch(0.99 0.006 250)',
+				'base'      => 'oklch(0.99 0.006 250)',
 				'success'   => 'oklch(0.50 0.16 145)',
 				'warning'   => 'oklch(0.75 0.17 80)',
 				'error'     => 'oklch(0.50 0.20 25)',
@@ -191,8 +191,8 @@ class Slashed_Bricks_Color_Resolver {
 
 		// Alpha swatches composite over the dark surface, not white, so
 		// translucent tokens read the way they do on a dark page.
-		$base_dark_hex = isset( $dark_sources['surface'] )
-			? self::oklch_to_hex( $dark_sources['surface'][0], $dark_sources['surface'][1], $dark_sources['surface'][2] )
+		$base_dark_hex = isset( $dark_sources['base'] )
+			? self::oklch_to_hex( $dark_sources['base'][0], $dark_sources['base'][1], $dark_sources['base'][2] )
 			: '#1a1b1e';
 
 		$hex_map = self::build_family_scales( $dark_sources, self::hex_to_rgb( $base_dark_hex ) );
@@ -301,7 +301,7 @@ class Slashed_Bricks_Color_Resolver {
 
 			// 2. Auto-derive from the light source.
 			list( $l, $c, $h ) = $lch;
-			if ( 'surface' === $family ) {
+			if ( 'base' === $family ) {
 				$dl = max( 0.16, min( 1.18 - $l, 0.24 ) );
 				$dc = $c * 0.5;
 			} else {
@@ -369,7 +369,10 @@ class Slashed_Bricks_Color_Resolver {
 		$hex_map['--sf-color-text'] = $dark_text;
 		$hex_map['--sf-color-bg']   = '#fcfcfd';
 
-		if ( ! isset( $hex_map['--sf-color-surface'] ) ) {
+		// --sf-color-surface is a semantic alias for --sf-color-base.
+		if ( isset( $hex_map['--sf-color-base'] ) ) {
+			$hex_map['--sf-color-surface'] = $hex_map['--sf-color-base'];
+		} elseif ( ! isset( $hex_map['--sf-color-surface'] ) ) {
 			$hex_map['--sf-color-surface'] = '#fafafa';
 		}
 
@@ -421,8 +424,8 @@ class Slashed_Bricks_Color_Resolver {
 		$hex_map['--sf-color-bg--disabled'] = $hex_map['--sf-color-surface']; // = well ≈ surface
 
 		// ---- Well, raised, inverse, overlay ----
-		if ( isset( $sources['surface'] ) ) {
-			list( $bl, $bc, $bh ) = $sources['surface'];
+		if ( isset( $sources['base'] ) ) {
+			list( $bl, $bc, $bh ) = $sources['base'];
 			$hex_map['--sf-color-inset']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
 			$hex_map['--sf-color-raised']  = self::oklch_to_hex( min( 1.0, $bl + 0.04 ), $bc, $bh );
 			$hex_map['--sf-color-inverse'] = self::oklch_to_hex( 1.0 - $bl, $bc, $bh );
@@ -478,7 +481,8 @@ class Slashed_Bricks_Color_Resolver {
 				? $light_text
 				: $dark_text;
 		}
-		$hex_map['--sf-color-text--on-surface'] = $dark_text; // surface is light → dark text.
+		$hex_map['--sf-color-text--on-base']    = $dark_text; // base is light → dark text.
+		$hex_map['--sf-color-text--on-surface'] = $dark_text; // compat alias → on-base.
 		$hex_map['--sf-color-text--on-inverse'] = $hex_map['--sf-color-text--inverse'];
 
 		// ---- Selection and mark ----
@@ -533,12 +537,16 @@ class Slashed_Bricks_Color_Resolver {
 		$light_text = '#f0f0f5';
 		$dark_text  = '#1c1c2e';
 
-		$surface_hex = isset( $hex_map['--sf-color-surface'] ) ? $hex_map['--sf-color-surface'] : '#1a1b1e';
+		// --sf-color-base is the brand family; --sf-color-surface is a semantic alias = var(--sf-color-base).
+		$surface_hex = isset( $hex_map['--sf-color-base'] ) ? $hex_map['--sf-color-base']
+			: ( isset( $hex_map['--sf-color-surface'] ) ? $hex_map['--sf-color-surface'] : '#1a1b1e' );
 		$surface_rgb = self::hex_to_rgb( $surface_hex );
 
 		// ---- Base-derived surfaces ----
-		if ( isset( $d['surface'] ) ) {
-			list( $bl, $bc, $bh ) = $d['surface'];
+		if ( isset( $d['base'] ) ) {
+			list( $bl, $bc, $bh ) = $d['base'];
+			// --sf-color-surface is a semantic alias for --sf-color-base.
+			$hex_map['--sf-color-base']    = $surface_hex;
 			$hex_map['--sf-color-surface'] = $surface_hex;
 			$hex_map['--sf-color-bg']      = self::oklch_to_hex( min( 1.0, $bl + 0.02 ), $bc, $bh );
 			$hex_map['--sf-color-inset']    = self::oklch_to_hex( max( 0.0, $bl - 0.02 ), $bc, $bh );
@@ -605,7 +613,8 @@ class Slashed_Bricks_Color_Resolver {
 			}
 			$hex_map[ '--sf-color-text--on-' . $family ] = ( $d[ $family ][0] < 0.6 ) ? $light_text : $dark_text;
 		}
-		$hex_map['--sf-color-text--on-surface'] = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		$hex_map['--sf-color-text--on-base']    = isset( $hex_map['--sf-color-text'] ) ? $hex_map['--sf-color-text'] : $light_text;
+		$hex_map['--sf-color-text--on-surface'] = $hex_map['--sf-color-text--on-base']; // compat alias → on-base.
 		$hex_map['--sf-color-text--on-inverse'] = isset( $hex_map['--sf-color-text--inverse'] ) ? $hex_map['--sf-color-text--inverse'] : $dark_text;
 
 		// ---- Selection + mark ----

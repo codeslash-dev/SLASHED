@@ -612,11 +612,11 @@ li[data-id]:focus-within > .rebemer-badge-host {
   justify-content: center;
   /* flex: 0 0 + min-width keep the button square in Bricks' flex row;
      flex-shrink:0 alone isn't enough when the row is already compressed. */
-  flex: 0 0 22px;
-  min-width: 22px;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
+  flex: 0 0 28px;
+  min-width: 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
   cursor: pointer;
   opacity: 0.6;
   transition: opacity 120ms, background 120ms;
@@ -629,8 +629,8 @@ li[data-id]:focus-within > .rebemer-badge-host {
 
 .slashed-sf-color-btn__dot {
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: conic-gradient(from 210deg, #5b8cff, #b07cff, #ff6b6b, #ffd24a, #4ade80, #5b8cff);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
@@ -640,7 +640,7 @@ li[data-id]:focus-within > .rebemer-badge-host {
 /* After a pick the dot shows the active colour (background set inline);
    switch from circle to a rounded-square swatch shape. */
 .slashed-sf-color-btn--active .slashed-sf-color-btn__dot {
-  border-radius: 3px;
+  border-radius: 4px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18), 0 0 0 1.5px rgba(255, 255, 255, .22);
 }
 
@@ -919,13 +919,14 @@ li[data-id]:focus-within > .rebemer-badge-host {
   flex: 1;
   min-width: 0;
   padding: 0;
-  border: 1px solid transparent;
+  border: 0;
   cursor: pointer;
   transition: flex 100ms ease-out;
   position: relative;
 }
-.slashed-cp__strip-sw:hover { flex: 2; }
-.slashed-cp__strip-sw--alpha { border-style: dashed; border-color: rgba(127, 127, 127, .45); }
+.slashed-cp__strip-sw:hover { flex: 2; box-shadow: inset 0 0 0 2px var(--rebemer-accent); }
+.slashed-cp__strip-sw--alpha { box-shadow: inset 0 0 0 1px rgba(127, 127, 127, .4); }
+.slashed-cp__strip-sw--alpha:hover { box-shadow: inset 0 0 0 2px var(--rebemer-accent); }
 .slashed-cp__strip-sw:focus-visible { outline: 2px solid var(--rebemer-accent); outline-offset: -2px; z-index: 1; }
 
 /* ── Alpha expand toggle ──────────────────────────────────────────── */

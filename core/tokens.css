@@ -18,7 +18,7 @@
        --sf-color-tertiary-light:  oklch(0.42 0.22 295);
        --sf-color-action-light:    oklch(0.50 0.22 235);
        --sf-color-neutral-light:   oklch(0.52 0.025 260);
-       --sf-color-surface-light:   oklch(0.96 0.006 250);
+       --sf-color-base-light:      oklch(0.96 0.006 250);
      }
      Full per-mode control (add -dark overrides):
      :root {
@@ -48,11 +48,11 @@
    live in a separate "Advanced" section in docs.
 
    PUBLIC — everyday knobs, prominently documented:
-     · brand source tokens (--sf-color-{primary,secondary,tertiary,action,neutral,surface}-light)
+     · brand source tokens (--sf-color-{primary,secondary,tertiary,action,neutral,base}-light)
      · status source tokens (--sf-color-{success,warning,error,info,danger}-light)
      · resolved semantic colors (--sf-color-{primary,...,danger}, surfaces, text, borders, links, interactive bg, selection)
      · numeric shade scales (--sf-color-{family}-{50..950}) — available for the 6 brand families
-       (primary/secondary/tertiary/action/neutral/surface) via optional/tokens.palette.css only;
+       (primary/secondary/tertiary/action/neutral/base) via optional/tokens.palette.css only;
        status families (success/warning/error/info/danger) intentionally have no numeric scale
      · semantic shade aliases (--sf-color-{family}-{superlight,xlight,lighter,darker,xdark,superdark,hover,active,subtle,muted,ghost}) — auto-adapts to dark mode
      · text-on-color (--sf-color-text--on-*)
@@ -151,7 +151,7 @@
      to pure white and become indistinguishable. 0.96 gives: bg=0.98, inset=0.94,
      raised=1.0→white — all distinct. Consumers using near-1.0 values should rely
      on shadows rather than lightness for elevation. */
-  @property --sf-color-surface-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.96 0.006 250); }
+  @property --sf-color-base-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.96 0.006 250); }
 
   /* @property — STATUS COLORS (-light source tokens) */
 
@@ -187,7 +187,7 @@
        :root[data-lumlocker] override in core/themes.css.
        Locks all 5 brand colors (primary, secondary, tertiary,
        action, neutral) to one shared lightness while keeping their
-       individual hue and chroma. Surface is excluded — it must remain
+       individual hue and chroma. Base is excluded — it must remain
        near-white in light mode for the page background.
        Override to change the locked lightness:
          :root { --sf-lumlocker: 0.55 }
@@ -209,7 +209,7 @@
     --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark,  oklch(from var(--sf-color-tertiary-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
     --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark,    oklch(from var(--sf-color-action-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
     --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark,   oklch(from var(--sf-color-neutral-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-surface:   light-dark(var(--sf-color-surface-light),   var(--sf-color-surface-dark,   oklch(from var(--sf-color-surface-light)   clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h)));
+    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark,      oklch(from var(--sf-color-base-light)      clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h)));
 
     --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
     --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
@@ -218,13 +218,14 @@
     --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark,  oklch(from var(--sf-color-danger-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
 
     /* ----------------------------------------------------------
-       Surfaces — derived from --sf-color-surface (auto-adapts)
+       Surfaces — derived from --sf-color-base (auto-adapts)
        ---------------------------------------------------------- */
-    --sf-color-bg:      oklch(from var(--sf-color-surface) calc(l + 0.02) c h);
-    --sf-color-inset:   oklch(from var(--sf-color-surface) calc(l - 0.02) c h);
-    --sf-color-raised:  oklch(from var(--sf-color-surface) calc(l + 0.04) c h);
-    --sf-color-overlay: oklch(from var(--sf-color-surface) l c h / 0.9);
-    --sf-color-inverse: oklch(from var(--sf-color-surface) calc(1 - l) c h);
+    --sf-color-surface: var(--sf-color-base);
+    --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
+    --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
+    --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
+    --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
+    --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
 
     /* ----------------------------------------------------------
        Text — light and dark require opposite formula directions,
@@ -280,7 +281,8 @@
     --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-surface:      var(--sf-color-text);
+    --sf-color-text--on-base:      var(--sf-color-text);
+    --sf-color-text--on-surface:   var(--sf-color-text--on-base);   /* compat alias → base */
     --sf-color-text--on-inverse:   var(--sf-color-text--inverse);
     --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
@@ -548,19 +550,19 @@
     --sf-color-neutral-muted:      oklch(from var(--sf-color-neutral) l c h / 0.30);
     --sf-color-neutral-ghost:      oklch(from var(--sf-color-neutral) l c h / 0.05);
 
-    /* ─── surface ──────────────────────────────────────────── */
+    /* ─── base ────────────────────────────────────────────── */
 
-    --sf-color-surface-superlight: color-mix(in oklab, var(--sf-color-text)     4%, var(--sf-color-surface));
-    --sf-color-surface-xlight:     color-mix(in oklab, var(--sf-color-text)    20%, var(--sf-color-surface));
-    --sf-color-surface-lighter:    color-mix(in oklab, var(--sf-color-text)    65%, var(--sf-color-surface));
-    --sf-color-surface-darker:     color-mix(in oklab, var(--sf-color-surface) 82%, var(--sf-color-text));
-    --sf-color-surface-xdark:      color-mix(in oklab, var(--sf-color-surface) 38%, var(--sf-color-text));
-    --sf-color-surface-superdark:  color-mix(in oklab, var(--sf-color-surface)  8%, var(--sf-color-text));
-    --sf-color-surface-hover:      var(--sf-color-surface-darker);
-    --sf-color-surface-active:     var(--sf-color-surface-xdark);
-    --sf-color-surface-subtle:     oklch(from var(--sf-color-surface) l c h / 0.10);
-    --sf-color-surface-muted:      oklch(from var(--sf-color-surface) l c h / 0.30);
-    --sf-color-surface-ghost:      oklch(from var(--sf-color-surface) l c h / 0.05);
+    --sf-color-base-superlight: color-mix(in oklab, var(--sf-color-text)  4%, var(--sf-color-base));
+    --sf-color-base-xlight:     color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base));
+    --sf-color-base-lighter:    color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base));
+    --sf-color-base-darker:     color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text));
+    --sf-color-base-xdark:      color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text));
+    --sf-color-base-superdark:  color-mix(in oklab, var(--sf-color-base)  8%, var(--sf-color-text));
+    --sf-color-base-hover:      var(--sf-color-base-darker);
+    --sf-color-base-active:     var(--sf-color-base-xdark);
+    --sf-color-base-subtle:     oklch(from var(--sf-color-base) l c h / 0.10);
+    --sf-color-base-muted:      oklch(from var(--sf-color-base) l c h / 0.30);
+    --sf-color-base-ghost:      oklch(from var(--sf-color-base) l c h / 0.05);
 
     /* ─── success ───────────────────────────────────────────── */
 

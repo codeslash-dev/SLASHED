@@ -32,7 +32,7 @@ const PREFIX = '--sf-color-';
 // change rarely; if you add or rename a family, update all three in sync.
 
 /** Brand families, in canonical display order. */
-export const BRAND_FAMILIES = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface'];
+export const BRAND_FAMILIES = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
 
 /** Status families, in canonical display order. */
 export const STATUS_FAMILIES = ['success', 'warning', 'error', 'info', 'danger'];
@@ -56,6 +56,8 @@ const SEMANTIC_PREFIX_ORDER = [
   'text', 'heading', 'bg', 'surface', 'inset', 'raised', 'overlay', 'inverse',
   'border', 'link', 'code', 'selection', 'mark', 'dim',
 ];
+// Note: 'surface' in SEMANTIC_PREFIX_ORDER refers to --sf-color-surface (the semantic alias
+// for --sf-color-base). The brand family itself is now 'base' in BRAND_FAMILIES.
 
 const SET = (arr) => new Set(arr);
 const ALL_FAMILIES = SET([...BRAND_FAMILIES, ...STATUS_FAMILIES]);
@@ -71,7 +73,7 @@ export const FAMILY_INFO = {
   tertiary:  { tagline: 'Accent / highlight', use: 'Badges, tags, decorative highlights.' },
   action:    { tagline: 'Interactive & links', use: 'Links, focus rings, anything clickable.' },
   neutral:   { tagline: 'Text, icons & dividers', use: 'Body text, borders, neutral UI chrome.' },
-  surface:   { tagline: 'Page & surface backgrounds', use: 'Page background and raised surfaces.' },
+  base:      { tagline: 'Page & surface backgrounds', use: 'Page background and raised surfaces.' },
   success:   { tagline: 'Positive / confirmation', use: 'Success messages and valid state.' },
   warning:   { tagline: 'Caution', use: 'Warnings and at-risk / pending state.' },
   error:     { tagline: 'Form & validation errors', use: 'Invalid inputs and error messages.' },
@@ -455,13 +457,12 @@ const QUICK_USE_GROUPS = [
     id: 'brand',
     label: 'Brand',
     tokens: [
-      { var: '--sf-color-primary',        label: 'Primary' },
-      { var: '--sf-color-primary-hover',  label: 'Primary · Hover' },
-      { var: '--sf-color-primary-subtle', label: 'Primary · Subtle' },
-      { var: '--sf-color-action',         label: 'Action' },
-      { var: '--sf-color-action-hover',   label: 'Action · Hover' },
-      { var: '--sf-color-secondary',      label: 'Secondary' },
-      { var: '--sf-color-tertiary',       label: 'Tertiary' },
+      { var: '--sf-color-primary',   label: 'Primary' },
+      { var: '--sf-color-secondary', label: 'Secondary' },
+      { var: '--sf-color-tertiary',  label: 'Tertiary' },
+      { var: '--sf-color-action',    label: 'Action' },
+      { var: '--sf-color-neutral',   label: 'Neutral' },
+      { var: '--sf-color-base',      label: 'Base' },
     ],
   },
   {

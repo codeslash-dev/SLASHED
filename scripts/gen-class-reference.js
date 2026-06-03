@@ -56,8 +56,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 `;
 
-let totalSf = 0;
-let totalIs = 0;
+const globalSf = new Set();
+const globalIs = new Set();
 const sections = [];
 
 for (const { file, title } of SOURCES) {
@@ -65,10 +65,13 @@ for (const { file, title } of SOURCES) {
   if (!names.length) continue;
   const sf = names.filter(n => n.startsWith('sf-'));
   const is = names.filter(n => n.startsWith('is-'));
-  totalSf += sf.length;
-  totalIs += is.length;
+  sf.forEach(n => globalSf.add(n));
+  is.forEach(n => globalIs.add(n));
   sections.push({ title, names });
 }
+
+const totalSf = globalSf.size;
+const totalIs = globalIs.size;
 
 out = out.replace('Every', `**${totalSf} .sf-classes, ${totalIs} .is-classes.** Every`);
 
