@@ -25,7 +25,36 @@
 </script>
 
 <section>
-  <h2>Spacing</h2>
+  <h2>Fluid Scale Viewport Range</h2>
+  <p class="hint">
+    The viewport width range (in <code>rem</code>) used to compute all fluid <code>clamp()</code>
+    formulas for custom-overridden spacing and typography values. Default: <strong>22.5 rem</strong>
+    (360 px) → <strong>95 rem</strong> (1520 px). Changing these only affects values you explicitly
+    override below or in the Typography tab — the framework's built-in scale uses the same defaults
+    and is unaffected.
+  </p>
+  <div class="rows">
+    <NumberField
+      section={SECTION}
+      fieldKey="viewport_min"
+      label="Min viewport (rem)"
+      min={10}
+      max={60}
+      step={0.5}
+      default={defaults.viewport_min ?? 22.5}
+    />
+    <NumberField
+      section={SECTION}
+      fieldKey="viewport_max"
+      label="Max viewport (rem)"
+      min={40}
+      max={200}
+      step={0.5}
+      default={defaults.viewport_max ?? 95}
+    />
+  </div>
+
+  <h2 class="group-heading">Spacing</h2>
   <div class="rows">
     <NumberField
       section={SECTION}

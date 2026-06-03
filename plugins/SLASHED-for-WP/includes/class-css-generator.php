@@ -21,6 +21,11 @@ class Slashed_CSS_Generator {
 	const VIEWPORT_MIN = 22.5;
 	const VIEWPORT_MAX = 95;
 
+	const VIEWPORT_MIN_FLOOR = 10;
+	const VIEWPORT_MIN_CAP   = 60;
+	const VIEWPORT_MAX_FLOOR = 40;
+	const VIEWPORT_MAX_CAP   = 200;
+
 	/** @var string|null */
 	private static $cache = null;
 
@@ -75,14 +80,17 @@ class Slashed_CSS_Generator {
 
 		$declarations = array();
 
+		$vp_min = self::resolve_viewport_min( $settings['spacing']['viewport_min'] ?? '' );
+		$vp_max = self::resolve_viewport_max( $settings['spacing']['viewport_max'] ?? '' );
+
 		if ( ! empty( $settings['colors'] ) && is_array( $settings['colors'] ) ) {
 			$declarations = array_merge( $declarations, self::generate_color_declarations( $settings['colors'] ) );
 		}
 		if ( ! empty( $settings['typography'] ) && is_array( $settings['typography'] ) ) {
-			$declarations = array_merge( $declarations, self::generate_typography_declarations( $settings['typography'] ) );
+			$declarations = array_merge( $declarations, self::generate_typography_declarations( $settings['typography'], $vp_min, $vp_max ) );
 		}
 		if ( ! empty( $settings['spacing'] ) && is_array( $settings['spacing'] ) ) {
-			$declarations = array_merge( $declarations, self::generate_spacing_declarations( $settings['spacing'] ) );
+			$declarations = array_merge( $declarations, self::generate_spacing_declarations( $settings['spacing'], $vp_min, $vp_max ) );
 		}
 		if ( ! empty( $settings['radius'] ) && is_array( $settings['radius'] ) ) {
 			$declarations = array_merge( $declarations, self::generate_radius_declarations( $settings['radius'] ) );
@@ -100,7 +108,7 @@ class Slashed_CSS_Generator {
 			$declarations = array_merge( $declarations, self::generate_contrast_declarations( $settings['contrast'] ) );
 		}
 		if ( ! empty( $settings['layouts'] ) && is_array( $settings['layouts'] ) ) {
-			$declarations = array_merge( $declarations, self::generate_layout_declarations( $settings['layouts'] ) );
+			$declarations = array_merge( $declarations, self::generate_layout_declarations( $settings['layouts'], $vp_min, $vp_max ) );
 		}
 
 		if ( empty( $declarations ) ) {
@@ -159,7 +167,7 @@ class Slashed_CSS_Generator {
 		return $declarations;
 	}
 
-	private static function generate_typography_declarations( $settings ) {
+	private static function generate_typography_declarations( $settings, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
 		$declarations = array();
 		$font_stacks  = array( 'body', 'heading', 'mono', 'display', 'humanist', 'geometric', 'slab' );
 
@@ -182,7 +190,7 @@ class Slashed_CSS_Generator {
 			$min_val = $settings[ 'size_' . $size . '_min' ] ?? '';
 			$max_val = $settings[ 'size_' . $size . '_max' ] ?? '';
 			if ( '' !== $min_val && '' !== $max_val ) {
-				$clamp = self::build_clamp( (float) $min_val, (float) $max_val );
+				$clamp = self::build_clamp( (float) $min_val, (float) $max_val, $vp_min, $vp_max );
 				if ( $clamp ) {
 					$declarations[] = '--sf-text-' . $size . ': ' . $clamp . ';';
 				}
@@ -192,15 +200,29 @@ class Slashed_CSS_Generator {
 		return $declarations;
 	}
 
-	private static function build_clamp( $min, $max ) {
-		if ( $min <= 0 || $max <= 0 ) {
+	private static function build_clamp( $min, $max, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
+		if ( $min <= 0 || $max <= 0 || $vp_max <= $vp_min ) {
 			return false;
 		}
-		$slope = ( $max - $min ) / ( self::VIEWPORT_MAX - self::VIEWPORT_MIN );
-		return 'clamp(' . round( $min, 4 ) . 'rem, calc(' . round( $slope, 6 ) . ' * (100vw - ' . self::VIEWPORT_MIN . 'rem) + ' . round( $min, 4 ) . 'rem), ' . round( $max, 4 ) . 'rem)';
+		$slope = ( $max - $min ) / ( $vp_max - $vp_min );
+		return 'clamp(' . round( $min, 4 ) . 'rem, calc(' . round( $slope, 6 ) . ' * (100vw - ' . $vp_min . 'rem) + ' . round( $min, 4 ) . 'rem), ' . round( $max, 4 ) . 'rem)';
 	}
 
-	private static function generate_spacing_declarations( $settings ) {
+	private static function resolve_viewport_min( $raw ) {
+		if ( '' === $raw || ! is_numeric( $raw ) ) {
+			return self::VIEWPORT_MIN;
+		}
+		return (float) max( self::VIEWPORT_MIN_FLOOR, min( self::VIEWPORT_MIN_CAP, $raw ) );
+	}
+
+	private static function resolve_viewport_max( $raw ) {
+		if ( '' === $raw || ! is_numeric( $raw ) ) {
+			return self::VIEWPORT_MAX;
+		}
+		return (float) max( self::VIEWPORT_MAX_FLOOR, min( self::VIEWPORT_MAX_CAP, $raw ) );
+	}
+
+	private static function generate_spacing_declarations( $settings, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
 		$declarations = array();
 
 		if ( isset( $settings['space_scale'] ) && is_numeric( $settings['space_scale'] ) ) {
@@ -212,7 +234,7 @@ class Slashed_CSS_Generator {
 			$min_val = $settings[ 'space_' . $step . '_min' ] ?? '';
 			$max_val = $settings[ 'space_' . $step . '_max' ] ?? '';
 			if ( '' !== $min_val && '' !== $max_val ) {
-				$clamp = self::build_clamp( (float) $min_val, (float) $max_val );
+				$clamp = self::build_clamp( (float) $min_val, (float) $max_val, $vp_min, $vp_max );
 				if ( $clamp ) {
 					$declarations[] = '--sf-space-' . $step . ': calc(' . $clamp . ' * var(--sf-space-scale));';
 				}
@@ -315,7 +337,7 @@ class Slashed_CSS_Generator {
 		return $declarations;
 	}
 
-	private static function generate_layout_declarations( $settings ) {
+	private static function generate_layout_declarations( $settings, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
 		$declarations = array();
 		$map          = array(
 			'container_narrow'   => '--sf-container-narrow',
@@ -353,6 +375,96 @@ class Slashed_CSS_Generator {
 				$declarations[] = $property . ': ' . $value . ';';
 			}
 		}
+
+		// Header height — mobile/desktop paired clamp.
+		$declarations = array_merge(
+			$declarations,
+			self::generate_paired_clamp_declarations(
+				$settings,
+				'header_height',
+				'--sf-header-height-mobile',
+				'--sf-header-height-desktop',
+				'--sf-header-height',
+				$vp_min,
+				$vp_max
+			)
+		);
+
+		// Sticky offset — mobile/desktop paired clamp.
+		$declarations = array_merge(
+			$declarations,
+			self::generate_paired_clamp_declarations(
+				$settings,
+				'sticky_offset',
+				'--sf-sticky-offset-mobile',
+				'--sf-sticky-offset-desktop',
+				'--sf-sticky-offset',
+				$vp_min,
+				$vp_max
+			)
+		);
+
+		return $declarations;
+	}
+
+	/**
+	 * Generates mobile + desktop token declarations plus a fluid clamp for a
+	 * paired dimension setting (e.g. header height, sticky offset).
+	 *
+	 * When only one side is set the computed token is assigned that single value
+	 * directly. When both are set (even if equal) the full clamp is emitted so
+	 * the per-breakpoint tokens remain accurate. When neither is set nothing is
+	 * emitted and the framework default stands.
+	 *
+	 * @param array  $settings    The full layout settings array.
+	 * @param string $key_prefix  Setting key prefix, e.g. 'header_height'.
+	 * @param string $mobile_var  CSS custom property for the mobile value.
+	 * @param string $desktop_var CSS custom property for the desktop value.
+	 * @param string $computed_var CSS custom property for the resulting value.
+	 * @param float  $vp_min      Min viewport (rem) for the fluid clamp.
+	 * @param float  $vp_max      Max viewport (rem) for the fluid clamp.
+	 * @return array CSS declaration strings.
+	 */
+	private static function generate_paired_clamp_declarations( $settings, $key_prefix, $mobile_var, $desktop_var, $computed_var, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
+		$declarations = array();
+
+		$mobile_raw  = $settings[ $key_prefix . '_mobile' ]  ?? '';
+		$desktop_raw = $settings[ $key_prefix . '_desktop' ] ?? '';
+
+		$mobile_num  = ( '' !== $mobile_raw  && is_numeric( $mobile_raw ) )  ? (float) $mobile_raw  : null;
+		$desktop_num = ( '' !== $desktop_raw && is_numeric( $desktop_raw ) ) ? (float) $desktop_raw : null;
+
+		if ( null === $mobile_num && null === $desktop_num ) {
+			return $declarations;
+		}
+
+		if ( null !== $mobile_num ) {
+			$declarations[] = $mobile_var . ': ' . round( $mobile_num, 4 ) . 'rem;';
+		}
+		if ( null !== $desktop_num ) {
+			$declarations[] = $desktop_var . ': ' . round( $desktop_num, 4 ) . 'rem;';
+		}
+
+		if ( null !== $mobile_num && null !== $desktop_num ) {
+			if ( abs( $mobile_num - $desktop_num ) < 0.0001 || $vp_max <= $vp_min ) {
+				$declarations[] = $computed_var . ': ' . round( $mobile_num, 4 ) . 'rem;';
+			} else {
+				// Mobile maps to vp_min, desktop to vp_max. Either side may be
+				// zero (a collapsed header) and mobile may exceed desktop (a
+				// header that shrinks as the viewport grows), so the clamp
+				// bounds are the sorted pair, not mobile/desktop in order.
+				$slope  = ( $desktop_num - $mobile_num ) / ( $vp_max - $vp_min );
+				$lower  = min( $mobile_num, $desktop_num );
+				$upper  = max( $mobile_num, $desktop_num );
+				$middle = 'calc(' . round( $slope, 6 ) . ' * (100vw - ' . $vp_min . 'rem) + ' . round( $mobile_num, 4 ) . 'rem)';
+				$declarations[] = $computed_var . ': clamp(' . round( $lower, 4 ) . 'rem, ' . $middle . ', ' . round( $upper, 4 ) . 'rem);';
+			}
+		} elseif ( null !== $mobile_num ) {
+			$declarations[] = $computed_var . ': ' . round( $mobile_num, 4 ) . 'rem;';
+		} else {
+			$declarations[] = $computed_var . ': ' . round( $desktop_num, 4 ) . 'rem;';
+		}
+
 		return $declarations;
 	}
 

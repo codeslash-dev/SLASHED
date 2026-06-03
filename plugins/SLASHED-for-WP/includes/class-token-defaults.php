@@ -171,6 +171,8 @@ class Slashed_Token_Defaults {
 	public static function get_spacing() {
 		return array(
 			'space_scale'    => 1,
+			'viewport_min'   => 22.5,
+			'viewport_max'   => 95,
 			'space_sizes'    => array(
 				'2xs' => array( 'min' => 0.51, 'max' => 0.84 ),
 				'xs'  => array( 'min' => 0.64, 'max' => 1.13 ),
@@ -237,6 +239,11 @@ class Slashed_Token_Defaults {
 			'imposter_margin'     => 'var(--sf-space-m)',
 			// Equal columns
 			'equal_cols'          => '2',
+			// Header & sticky (numeric rem values, empty = use framework default)
+			'header_height_mobile'  => '',
+			'header_height_desktop' => '',
+			'sticky_offset_mobile'  => '',
+			'sticky_offset_desktop' => '',
 		);
 	}
 

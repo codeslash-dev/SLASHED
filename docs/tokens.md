@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**743 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**747 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-484 tokens.
+488 tokens.
 
 | Token | Default |
 |---|---|
@@ -353,6 +353,8 @@ rebrand workflow.
 | `--sf-h6-line-height` | `var(--sf-leading-normal)` |
 | `--sf-h6-size` | `var(--sf-text-m)` |
 | `--sf-header-height` | `5rem` |
+| `--sf-header-height-desktop` | `5rem` |
+| `--sf-header-height-mobile` | `3.5rem` |
 | `--sf-heading-color` | `var(--sf-color-heading)` |
 | `--sf-heading-font-family` | `var(--sf-font-heading)` |
 | `--sf-heading-text-wrap` | `balance` |
@@ -457,6 +459,8 @@ rebrand workflow.
 | `--sf-space-xs` | `calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))` |
 | `--sf-state-pending-opacity` | `0.7` |
 | `--sf-sticky-offset` | `var(--sf-header-height)` |
+| `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |
+| `--sf-sticky-offset-mobile` | `var(--sf-header-height-mobile)` |
 | `--sf-stroke-bold` | `2px` |
 | `--sf-stroke-heavy` | `3px` |
 | `--sf-stroke-regular` | `1.5px` |
