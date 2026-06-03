@@ -138,12 +138,18 @@
       const btn = e.target?.closest?.('button[data-cp-pick-var]');
       if (!btn) return;
 
+      // Mark the button so the Svelte-delegated click handler (pick()) skips
+      // this gesture — prevents a double onPickValue call if the component
+      // is still mounted when the subsequent click event fires.
+      btn.dataset.cpSuppressClick = '1';
+
       const value = `var(${btn.dataset.cpPickVar})`;
       const ok = onPickValue(value);
       if (ok === false) {
         toast = { kind: 'error', message: `Couldn't apply ${value} — input not found` };
         return;
       }
+      delete btn.dataset.cpSuppressClick;
       onPick?.();
     }
 
@@ -176,6 +182,12 @@
     const value = swatchValue(swatch);
 
     if (pickerMode) {
+      // The direct mousedown handler may have already applied this token and
+      // set a suppress flag on the button. If so, skip to avoid a double call.
+      // (Keyboard-activated clicks never set the flag, so they always proceed.)
+      const btn = panelEl?.querySelector(`button[data-cp-pick-var="${swatch.var}"][data-cp-suppress-click]`);
+      if (btn) { delete btn.dataset.cpSuppressClick; return; }
+
       const ok = onPickValue(value);
       if (ok === false) {
         toast = { kind: 'error', message: `Couldn't apply ${value} — input not found` };
