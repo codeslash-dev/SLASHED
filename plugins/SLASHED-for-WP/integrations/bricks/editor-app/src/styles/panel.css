@@ -205,7 +205,18 @@ li[data-id]:focus-within > .rebemer-badge-host {
 .rebemer-row__include input { cursor: pointer; }
 .rebemer-row__meta { display: flex; gap: 6px; align-items: baseline; min-width: 0; }
 .rebemer-row__label { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.rebemer-row__type { font-size: 9px; color: var(--rebemer-fg-muted); text-transform: uppercase; }
+.rebemer-row__type { font-size: 9px; color: var(--rebemer-fg-muted); text-transform: uppercase; letter-spacing: .3px; }
+/* Block-root toggle button — same visual as the static span by default */
+.rebemer-row__type--toggle {
+  background: transparent; border: 0; padding: 1px 3px; border-radius: 2px;
+  cursor: pointer; line-height: 1;
+}
+.rebemer-row__type--toggle:hover:not(:disabled) {
+  color: var(--rebemer-fg); background: rgba(255,255,255,.06);
+}
+.rebemer-row__type--toggle:disabled { cursor: default; opacity: .5; }
+.rebemer-row__type--block { color: var(--rebemer-accent); background: rgba(226,185,59,.12); }
+.rebemer-row__type--block:hover:not(:disabled) { background: rgba(226,185,59,.2); }
 .rebemer-row__hint {
   font-size: 9px;
   color: var(--rebemer-accent);
@@ -236,6 +247,23 @@ li[data-id]:focus-within > .rebemer-badge-host {
   font-style: italic;
 }
 .rebemer-row__modifier { background: var(--rebemer-input-bg); border: 1px solid var(--rebemer-input-border); border-radius: var(--rebemer-radius); color: var(--rebemer-fg); font: inherit; padding: 4px 6px; width: 90px; }
+/* Multi-modifier stack */
+.rebemer-row__modifiers { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.rebemer-row__modifier-row { display: flex; align-items: center; gap: 4px; }
+.rebemer-row__modifier-row .rebemer-row__modifier { flex: 1; width: auto; }
+.rebemer-row__modifier-remove {
+  background: transparent; border: 1px solid var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius); color: var(--rebemer-fg-muted);
+  font-size: 13px; line-height: 1; padding: 2px 6px; cursor: pointer; flex: 0 0 auto;
+}
+.rebemer-row__modifier-remove:hover:not(:disabled) { border-color: var(--rebemer-error); color: var(--rebemer-error); }
+.rebemer-row__modifier-add {
+  background: transparent; border: 1px dashed var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius); color: var(--rebemer-fg-muted);
+  font: inherit; font-size: 10px; padding: 3px 7px; cursor: pointer;
+  text-align: left; width: fit-content;
+}
+.rebemer-row__modifier-add:hover:not(:disabled) { border-color: var(--rebemer-fg-muted); color: var(--rebemer-fg); }
 
 /* Per-row recommendation hint (use-existing-class affordance). */
 .rebemer-row__recommend {

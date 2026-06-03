@@ -1,14 +1,29 @@
 /**
  * Apply BEM classes to a subtree in one pass.
  *
- * Five modes:
+ * Four modes:
  *   add      — attach new BEM classes (keep any existing classes).
  *   rename   — detach old classes, create new ones seeded with old settings.
  *   replace  — detach old classes, create new ones with empty settings.
- *   modifier — keep existing classes, append a `--modifier` class.
  *   migrate  — keep existing classes, lift allowlisted element-settings
  *              keys (padding, color, etc.) up into a new global class
  *              and remove them from the element.
+ *
+ * Modifiers
+ * ---------
+ * Any row in add/rename/replace mode may carry `row.modifiers: string[]`.
+ * Non-empty entries produce additional `finalClass--modSlug` classes that
+ * are attached alongside the primary class in the same Apply. Modifier
+ * slugs are resolved AFTER auto-numbering so they always reference the
+ * final (post-numbered) base class name.
+ *
+ * Multiple blocks per subtree
+ * ---------------------------
+ * Any non-root row may have `row.isBlockRoot: true`, promoting it to a
+ * sub-block root. Its `finalClass` becomes its own block name (not
+ * `parentBlock__elemName`), and all its descendants adopt it as their
+ * owning block. `computeBlockAssignment` implements the stack walk that
+ * resolves each row to its owning block.
  *
  * Sibling auto-numbering
  * ----------------------
@@ -23,18 +38,12 @@
  *   - `'element-type' | 'fallback' | 'auto-number'` rows accept the
  *     numeric suffix in document order.
  *
- * Modifier-mode collisions
- * ------------------------
- * Two siblings each producing `card__image--lg` is the canonical
- * "attach the same modifier class to all of them" case, NOT a name
- * conflict. We deliberately do NOT auto-number modifier-mode duplicates
- * — `upsertGlobalClass` dedupes by name, so all colliding rows end up
- * sharing the same class.
- *
  * Skip toggle
  * -----------
  * Rows with `include: false` are excluded from operations *and* from
- * the collision tally — a skipped row never claims a number.
+ * the collision tally — a skipped row never claims a number. A skipped
+ * sub-block root is also not pushed onto the block stack, so its
+ * children fall back to the nearest active ancestor block.
  *
  * Two-step API
  * ------------
@@ -54,7 +63,7 @@ import { slugify } from './slugify.js';
 import { MIGRATE_ALLOWLIST } from './migrate-keys.js';
 import * as api from './bricks-api.js';
 
-const VALID_MODES = new Set(['add', 'rename', 'replace', 'modifier', 'migrate']);
+const VALID_MODES = new Set(['add', 'rename', 'replace', 'migrate']);
 
 /**
  * Provenance values that are treated as authoritative — these names
@@ -68,10 +77,13 @@ const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
  * @typedef {Object} Row
  * @property {string} id - Bricks element id.
  * @property {number} depth - 0 = root, > 0 = descendant.
- * @property {string} name - Slugifiable label (block name for root,
- *   element label otherwise).
- * @property {string} modifier - Slugifiable modifier (only used when
- *   mode is 'modifier').
+ * @property {string} name - Slugifiable label (block name for root or
+ *   sub-block roots, element label otherwise).
+ * @property {string[]} [modifiers] - Slugifiable modifier tokens. Each
+ *   non-empty entry produces an extra `finalClass--modSlug` class
+ *   attached alongside the primary class (add/rename/replace only).
+ * @property {boolean} [isBlockRoot] - When true (and row.id !== rootId),
+ *   this row starts a new BEM block scope for itself and its descendants.
  * @property {boolean} include - When false the row is skipped: no
  *   mutations, no collision tally, no preflight.
  * @property {'user'|'label'|'element-type'|'fallback'|'auto-number'} [suggestedFrom]
@@ -87,10 +99,50 @@ const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
 /**
  * @typedef {Object} Op
  * @property {Row} row
- * @property {boolean} isRoot
- * @property {string} finalClass        The post-numbering class name.
- * @property {string} suggestedFrom     Possibly mutated to 'auto-number'.
+ * @property {boolean} isRoot        True for the tree root or a sub-block root.
+ * @property {string} blockName      The owning block's slugified name.
+ * @property {string} finalClass     The post-numbering class name.
+ * @property {string[]} modifierSlugs Resolved after auto-numbering; each
+ *   entry produces a `finalClass--slug` class attached alongside the primary.
+ * @property {string} suggestedFrom  Possibly mutated to 'auto-number'.
  */
+
+/**
+ * Walk rows in document order to determine the owning BEM block for each
+ * included row. Uses a depth-based stack: a sub-block root pushes itself,
+ * popping any prior entries at the same or greater depth first.
+ *
+ * Exported so BemPanel can reuse the result for live prefix display without
+ * re-running the full plan.
+ *
+ * @param {Row[]} rows
+ * @param {string} rootId
+ * @returns {Map<string, string>}  row.id → owning block's slugified name
+ */
+export function computeBlockAssignment(rows, rootId) {
+  const map = new Map();
+  const stack = []; // { depth: number, blockName: string }
+
+  for (const row of rows) {
+    while (stack.length && stack[stack.length - 1].depth >= row.depth) stack.pop();
+
+    const isRootRow = row.id === rootId;
+    const isSubBlock = !isRootRow && row.isBlockRoot === true;
+
+    if (isRootRow || isSubBlock) {
+      const slug = slugify(row.name);
+      if (slug && row.include !== false) {
+        stack.push({ depth: row.depth, blockName: slug });
+        map.set(row.id, slug);
+      }
+    } else {
+      const ownerSlug = stack.length ? stack[stack.length - 1].blockName : '';
+      if (ownerSlug) map.set(row.id, ownerSlug);
+    }
+  }
+
+  return map;
+}
 
 /**
  * Build the plan for a subtree apply: validate inputs, slug, run the
@@ -100,7 +152,7 @@ const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
  * @param {object} opts
  * @param {string} opts.rootId
  * @param {Row[]} opts.rows
- * @param {'add'|'rename'|'replace'|'modifier'|'migrate'} opts.mode
+ * @param {'add'|'rename'|'replace'|'migrate'} opts.mode
  * @returns {{ok:true, ops:Op[]} | {ok:false, error:string, ops:Op[]}}
  *   On error, `ops` is an empty array so callers (e.g. previews) can
  *   safely treat it as "nothing to display".
@@ -113,18 +165,35 @@ export function buildPlan({ rootId, rows, mode }) {
   const blockRow = rows.find(r => r.id === rootId);
   if (!blockRow) return { ok: false, ops: [], error: 'Root row missing.' };
 
-  const blockName = slugify(blockRow.name);
-  if (!blockName) return { ok: false, ops: [], error: 'Block name is empty.' };
+  const rootBlockName = slugify(blockRow.name);
+  if (!rootBlockName) return { ok: false, ops: [], error: 'Block name is empty.' };
+
+  // Validate sub-block root names up-front so errors are reported before
+  // any op is built. Collect all bad names for a combined message.
+  const emptySubBlocks = [];
+  for (const row of rows) {
+    if (!row.isBlockRoot || !row.include || row.id === rootId) continue;
+    if (!slugify(row.name)) emptySubBlocks.push(row.originalLabel || row.id);
+  }
+  if (emptySubBlocks.length > 0) {
+    return { ok: false, ops: [], error: `Block name is empty for: ${emptySubBlocks.join(', ')}.` };
+  }
+
+  const blockMap = computeBlockAssignment(rows, rootId);
 
   // 1. Build per-row operations with intended (pre-numbering) class names.
   /** @type {Op[]} */
   const ops = [];
   for (const row of rows) {
     if (!row.include) continue;
-    const isRoot = row.id === rootId;
+    const isRootRow = row.id === rootId;
+    const isSubBlock = !isRootRow && row.isBlockRoot === true;
+
+    const blockName = blockMap.get(row.id);
+    if (!blockName) continue;
 
     let baseClass;
-    if (isRoot) {
+    if (isRootRow || isSubBlock) {
       baseClass = blockName;
     } else {
       const elemSlug = slugify(row.name);
@@ -132,17 +201,12 @@ export function buildPlan({ rootId, rows, mode }) {
       baseClass = `${blockName}__${elemSlug}`;
     }
 
-    let finalClass = baseClass;
-    if (mode === 'modifier') {
-      const modSlug = slugify(row.modifier);
-      if (!modSlug) continue;
-      finalClass = `${baseClass}--${modSlug}`;
-    }
-
     ops.push({
       row,
-      isRoot,
-      finalClass,
+      isRoot: isRootRow || isSubBlock,
+      blockName,
+      finalClass: baseClass,
+      modifierSlugs: [], // populated after auto-numbering
       suggestedFrom: row.suggestedFrom || 'fallback',
     });
   }
@@ -152,8 +216,18 @@ export function buildPlan({ rootId, rows, mode }) {
   }
 
   // 2. Sibling auto-numbering (in-plan collision resolver).
-  const numberingResult = applyAutoNumbering(ops, mode);
+  const numberingResult = applyAutoNumbering(ops);
   if (!numberingResult.ok) return { ok: false, ops: [], error: numberingResult.error };
+
+  // 3. Resolve modifier slugs against the now-final class names.
+  //    Doing this after numbering ensures modifiers reference the
+  //    correct (post-numbered) base class (e.g. `card__image-1--lg`).
+  if (mode !== 'migrate') {
+    for (const op of ops) {
+      const mods = Array.isArray(op.row.modifiers) ? op.row.modifiers : [];
+      op.modifierSlugs = mods.map(m => slugify(m)).filter(Boolean);
+    }
+  }
 
   return { ok: true, ops };
 }
@@ -164,7 +238,7 @@ export function buildPlan({ rootId, rows, mode }) {
  * @param {object} opts
  * @param {string} opts.rootId
  * @param {Row[]} opts.rows
- * @param {'add'|'rename'|'replace'|'modifier'|'migrate'} opts.mode
+ * @param {'add'|'rename'|'replace'|'migrate'} opts.mode
  * @param {boolean} opts.syncLabels
  * @returns {{ok:true, count:number} | {ok:false, error:string}}
  */
@@ -173,8 +247,6 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
   if (!planResult.ok) return { ok: false, error: planResult.error };
 
   const ops = planResult.ops;
-  const blockRow = rows.find(r => r.id === rootId);
-  const blockName = slugify(blockRow?.name ?? '');
   const globalClasses = api.getGlobalClasses();
 
   // 3. Pre-validate migrate-mode against live state BEFORE any
@@ -191,11 +263,12 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
   //    save the exact setting keys that removeMigratedKeys will delete.
   const snapshot = new Map(); // id -> { classIds, label, migrateKeys? }
   for (const op of ops) {
+    if (snapshot.has(op.row.id)) continue; // same element, already snapshotted
     const el = api.findElement(op.row.id);
     if (!el) continue;
     const entry = {
       classIds: readClassIds(el.settings).slice(),
-      label: (syncLabels && mode !== 'modifier') ? (el.label ?? '') : null,
+      label: syncLabels ? (el.label ?? '') : null,
     };
     if (mode === 'migrate' && Array.isArray(op.row.migrateKeys)) {
       const saved = {};
@@ -265,20 +338,6 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
             : [...currentIds, newClassId];
           break;
 
-        case 'modifier': {
-          // Guarantee the base class (without the --modifier suffix) is
-          // also attached — a modifier alone is meaningless without it.
-          const modMarker = op.finalClass.indexOf('--');
-          const baseClassName = modMarker >= 0 ? op.finalClass.slice(0, modMarker) : null;
-          let ids = [...currentIds];
-          if (baseClassName) {
-            const baseId = api.upsertGlobalClass(baseClassName, {});
-            if (!ids.includes(baseId)) ids.push(baseId);
-          }
-          nextIds = ids.includes(newClassId) ? ids : [...ids, newClassId];
-          break;
-        }
-
         case 'rename': {
           // Start with the renamed base class.
           const renamedIds = [newClassId];
@@ -311,6 +370,15 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
           break;
       }
 
+      // Append any modifier classes requested via row.modifiers. These
+      // piggyback on the primary class operation: the base is already in
+      // nextIds, so we only need to upsert and append the modifier classes.
+      for (const modSlug of op.modifierSlugs) {
+        const modClass = `${op.finalClass}--${modSlug}`;
+        const modId = api.upsertGlobalClass(modClass, {});
+        if (!nextIds.includes(modId)) nextIds.push(modId);
+      }
+
       api.setElementClasses(op.row.id, nextIds);
 
       // For 'migrate', remove the lifted keys from the element settings
@@ -321,9 +389,9 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
         removeMigratedKeys(el.settings, op.row.migrateKeys);
       }
 
-      // Sync label if enabled (skip for modifier — label reflects identity).
-      if (syncLabels && mode !== 'modifier') {
-        const label = labelFromClass(op.finalClass, blockName);
+      // Sync label if enabled.
+      if (syncLabels) {
+        const label = labelFromClass(op.finalClass, op.blockName);
         if (label) api.setElementLabel(op.row.id, label);
       }
 
@@ -424,9 +492,8 @@ function validateMigrate(ops, globalClasses) {
  * result object — `{ ok: false, error }` on validation failure.
  *
  * @param {Op[]} ops
- * @param {string} mode
  */
-function applyAutoNumbering(ops, mode) {
+function applyAutoNumbering(ops) {
   const groups = new Map();
   for (const op of ops) {
     const list = groups.get(op.finalClass) || [];
@@ -436,11 +503,6 @@ function applyAutoNumbering(ops, mode) {
 
   for (const [name, group] of groups) {
     if (group.length === 1) continue;
-
-    // Modifier-mode duplicates are intentional ("attach this modifier
-    // to all N siblings"). upsertGlobalClass dedupes by name, so all
-    // rows end up sharing the single class. No numbering, no error.
-    if (mode === 'modifier') continue;
 
     const authoritative = group.filter(o => AUTHORITATIVE_PROVENANCE.has(o.suggestedFrom));
     if (authoritative.length > 1) {
@@ -458,22 +520,19 @@ function applyAutoNumbering(ops, mode) {
     }
   }
 
-  // Post-numbering integrity check (semantic-review issue #4): catch
-  // the case where a user-typed `card__image-1` collides with an
-  // auto-numbered `card__image-1` produced from a different group.
-  // Modifier mode is exempt — duplicates there are by design.
-  if (mode !== 'modifier') {
-    const seen = new Map();
-    for (const op of ops) {
-      const prior = seen.get(op.finalClass);
-      if (prior) {
-        return {
-          ok: false,
-          error: `"${op.finalClass}" is produced by 2 rows after auto-numbering (one ${prior}, one ${op.suggestedFrom}). Pick a different name for one of them.`,
-        };
-      }
-      seen.set(op.finalClass, op.suggestedFrom);
+  // Post-numbering integrity check: catch the case where a user-typed
+  // `card__image-1` collides with an auto-numbered `card__image-1`
+  // produced from a different group.
+  const seen = new Map();
+  for (const op of ops) {
+    const prior = seen.get(op.finalClass);
+    if (prior) {
+      return {
+        ok: false,
+        error: `"${op.finalClass}" is produced by 2 rows after auto-numbering (one ${prior}, one ${op.suggestedFrom}). Pick a different name for one of them.`,
+      };
     }
+    seen.set(op.finalClass, op.suggestedFrom);
   }
 
   return { ok: true };
