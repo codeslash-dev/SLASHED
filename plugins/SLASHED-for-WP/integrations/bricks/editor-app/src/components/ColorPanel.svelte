@@ -199,6 +199,8 @@
   aria-modal="false"
   aria-label="SLASHED Color System"
   tabindex="-1"
+  onclick={(e) => e.stopPropagation()}
+  onmousedown={(e) => e.stopPropagation()}
 >
   <header class="slashed-cp__header">
     <h2 class="slashed-cp__title">Color System</h2>

@@ -637,10 +637,12 @@ li[data-id]:focus-within > .rebemer-badge-host {
   flex-shrink: 0;
   transition: border-radius 120ms;
 }
-/* After a pick the dot shows the active colour (background set inline);
-   switch from circle to a rounded-square swatch shape. */
+/* After a pick the dot expands to fill the button as a solid colour swatch. */
 .slashed-sf-color-btn--active .slashed-sf-color-btn__dot {
-  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  transition: width 80ms, height 80ms, border-radius 120ms;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18), 0 0 0 1.5px rgba(255, 255, 255, .22);
 }
 
