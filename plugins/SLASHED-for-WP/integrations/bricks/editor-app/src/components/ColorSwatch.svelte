@@ -30,7 +30,6 @@
   style="--cp-l:{swatch.light}; --cp-d:{swatch.dark}; --cp-solid:{swatchHex(swatch, mode === 'dark' ? 'dark' : 'light')};"
   {title}
   aria-label={swatch.name}
-  data-cp-pick-var={swatch.var}
   onclick={() => onPick?.(swatch)}
 >
   <span class="slashed-cp-swatch__fill" aria-hidden="true"></span>
