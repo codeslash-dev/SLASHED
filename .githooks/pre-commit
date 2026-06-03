@@ -23,3 +23,13 @@ echo "$outputs" | while IFS= read -r f; do
     git add "$f"
   fi
 done
+
+# Rebuild the Bricks editor app when any of its sources are staged.
+EDITOR_SRC="plugins/SLASHED-for-WP/integrations/bricks/editor-app/src"
+STAGED_EDITOR=$(git diff --cached --name-only --diff-filter=ACM | grep "^${EDITOR_SRC}" || true)
+if [ -n "$STAGED_EDITOR" ]; then
+  echo "reBEMer editor-app sources changed — rebuilding assets..."
+  (cd plugins/SLASHED-for-WP/integrations/bricks/editor-app && npm ci --silent && npm run build --silent)
+  git add plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.js
+  git add plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.css
+fi
