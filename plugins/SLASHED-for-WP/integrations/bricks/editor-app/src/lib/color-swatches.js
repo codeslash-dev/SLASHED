@@ -140,6 +140,22 @@ function injectSFButton(colorControl) {
   } else {
     colorInput.appendChild(btn);
   }
+
+  // Restore active state if the input already holds an SF color variable.
+  // Bricks' Vue re-renders the control after each value change, which tears
+  // out our old button and causes injectSFButton to re-run with a fresh one.
+  // Reading the current input value here re-arms the swatch on every injection.
+  const liveInput =
+    colorInput.querySelector('input[type="text"]') ??
+    colorInput.querySelector('input:not([type="hidden"],[type="submit"],[type="button"],[type="checkbox"],[type="radio"],[type="file"])');
+  const currentVal = liveInput?.value ?? '';
+  const varName = currentVal.match(/^var\((--[^)]+)\)/)?.[1];
+  const initHex = varName ? (_hexMap[varName] ?? null) : null;
+  if (initHex) {
+    dot.style.background = initHex;
+    dot.style.removeProperty('box-shadow');
+    btn.classList.add(SF_BTN_CLASS + '--active');
+  }
 }
 
 /**

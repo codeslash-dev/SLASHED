@@ -389,6 +389,9 @@ function openColorPickerPanel(colorInputEl) {
                 if (swatchSpan) {
                   swatchSpan.style.display = 'block';
                   swatchSpan.style.background = hex;
+                  // bricks-control-transparency-pattern uses color:currentColor
+                  // for its background — set color too so both paths are covered.
+                  swatchSpan.style.setProperty('color', hex, 'important');
                 }
                 preview.classList.remove('empty');
               });
