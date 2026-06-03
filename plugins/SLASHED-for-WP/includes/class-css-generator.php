@@ -108,7 +108,7 @@ class Slashed_CSS_Generator {
 			$declarations = array_merge( $declarations, self::generate_contrast_declarations( $settings['contrast'] ) );
 		}
 		if ( ! empty( $settings['layouts'] ) && is_array( $settings['layouts'] ) ) {
-			$declarations = array_merge( $declarations, self::generate_layout_declarations( $settings['layouts'] ) );
+			$declarations = array_merge( $declarations, self::generate_layout_declarations( $settings['layouts'], $vp_min, $vp_max ) );
 		}
 
 		if ( empty( $declarations ) ) {
@@ -337,7 +337,7 @@ class Slashed_CSS_Generator {
 		return $declarations;
 	}
 
-	private static function generate_layout_declarations( $settings ) {
+	private static function generate_layout_declarations( $settings, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
 		$declarations = array();
 		$map          = array(
 			'container_narrow'   => '--sf-container-narrow',
@@ -384,7 +384,9 @@ class Slashed_CSS_Generator {
 				'header_height',
 				'--sf-header-height-mobile',
 				'--sf-header-height-desktop',
-				'--sf-header-height'
+				'--sf-header-height',
+				$vp_min,
+				$vp_max
 			)
 		);
 
@@ -396,7 +398,9 @@ class Slashed_CSS_Generator {
 				'sticky_offset',
 				'--sf-sticky-offset-mobile',
 				'--sf-sticky-offset-desktop',
-				'--sf-sticky-offset'
+				'--sf-sticky-offset',
+				$vp_min,
+				$vp_max
 			)
 		);
 
@@ -417,9 +421,11 @@ class Slashed_CSS_Generator {
 	 * @param string $mobile_var  CSS custom property for the mobile value.
 	 * @param string $desktop_var CSS custom property for the desktop value.
 	 * @param string $computed_var CSS custom property for the resulting value.
+	 * @param float  $vp_min      Min viewport (rem) for the fluid clamp.
+	 * @param float  $vp_max      Max viewport (rem) for the fluid clamp.
 	 * @return array CSS declaration strings.
 	 */
-	private static function generate_paired_clamp_declarations( $settings, $key_prefix, $mobile_var, $desktop_var, $computed_var ) {
+	private static function generate_paired_clamp_declarations( $settings, $key_prefix, $mobile_var, $desktop_var, $computed_var, $vp_min = self::VIEWPORT_MIN, $vp_max = self::VIEWPORT_MAX ) {
 		$declarations = array();
 
 		$mobile_raw  = $settings[ $key_prefix . '_mobile' ]  ?? '';
@@ -440,13 +446,18 @@ class Slashed_CSS_Generator {
 		}
 
 		if ( null !== $mobile_num && null !== $desktop_num ) {
-			if ( abs( $mobile_num - $desktop_num ) < 0.0001 ) {
+			if ( abs( $mobile_num - $desktop_num ) < 0.0001 || $vp_max <= $vp_min ) {
 				$declarations[] = $computed_var . ': ' . round( $mobile_num, 4 ) . 'rem;';
 			} else {
-				$clamp = self::build_clamp( $mobile_num, $desktop_num );
-				if ( $clamp ) {
-					$declarations[] = $computed_var . ': ' . $clamp . ';';
-				}
+				// Mobile maps to vp_min, desktop to vp_max. Either side may be
+				// zero (a collapsed header) and mobile may exceed desktop (a
+				// header that shrinks as the viewport grows), so the clamp
+				// bounds are the sorted pair, not mobile/desktop in order.
+				$slope  = ( $desktop_num - $mobile_num ) / ( $vp_max - $vp_min );
+				$lower  = min( $mobile_num, $desktop_num );
+				$upper  = max( $mobile_num, $desktop_num );
+				$middle = 'calc(' . round( $slope, 6 ) . ' * (100vw - ' . $vp_min . 'rem) + ' . round( $mobile_num, 4 ) . 'rem)';
+				$declarations[] = $computed_var . ': clamp(' . round( $lower, 4 ) . 'rem, ' . $middle . ', ' . round( $upper, 4 ) . 'rem);';
 			}
 		} elseif ( null !== $mobile_num ) {
 			$declarations[] = $computed_var . ': ' . round( $mobile_num, 4 ) . 'rem;';
