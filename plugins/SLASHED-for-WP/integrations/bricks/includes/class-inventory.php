@@ -141,12 +141,8 @@ class Slashed_Bricks_Inventory {
 				? array_filter( $inventory[ $key ], 'is_string' )
 				: array();
 			$list = array_values( array_unique( $list ) );
-			// Natural sort so numeric suffixes order as humans expect: a
-			// palette swatch list reads -50, -100, -200, ..., -500, ...
-			// rather than the lexicographic -100, -200, ..., -50, -500.
-			// This is the order Bricks ultimately renders in the Color
-			// Manager dropdown, since Slashed_Bricks_Colors iterates
-			// inventory in the order returned here.
+			// Natural sort so numeric suffixes order as humans expect:
+			// -50, -100, -200, ..., -500, ... rather than lexicographic.
 			sort( $list, SORT_NATURAL | SORT_FLAG_CASE );
 			$base[ $key ] = $list;
 		}
