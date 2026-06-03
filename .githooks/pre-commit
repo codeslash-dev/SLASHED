@@ -33,3 +33,23 @@ if [ -n "$STAGED_EDITOR" ]; then
   git add plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.js
   git add plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/app.css
 fi
+
+# Rebuild the Bricks admin app when any of its sources are staged.
+ADMIN_SRC="plugins/SLASHED-for-WP/integrations/bricks/admin-app/src"
+STAGED_ADMIN=$(git diff --cached --name-only --diff-filter=ACM | grep "^${ADMIN_SRC}" || true)
+if [ -n "$STAGED_ADMIN" ]; then
+  echo "Admin-app sources changed — rebuilding assets..."
+  (cd plugins/SLASHED-for-WP/integrations/bricks/admin-app && npm ci --silent && npm run build --silent)
+  git add plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.js
+  git add plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/app.css
+fi
+
+# Regenerate docs/inventory when CSS source files are staged.
+STAGED_CSS_SRC=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(core|optional)/' || true)
+if [ -n "$STAGED_CSS_SRC" ]; then
+  echo "CSS sources changed — regenerating docs and inventory..."
+  npm run docs --silent
+  git add docs/tokens.md docs/classes.md
+  git add plugins/SLASHED-for-WP/integrations/bricks/data/inventory.json
+  git add plugins/SLASHED-for-WP/data/classes-hints.json
+fi
