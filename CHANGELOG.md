@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **New tokens**: `--sf-header-height-mobile`, `--sf-header-height-desktop`,
+  `--sf-sticky-offset-mobile`, `--sf-sticky-offset-desktop` — paired
+  mobile/desktop source tokens for the header height and sticky-offset
+  computed tokens. The WordPress plugin admin (Layouts tab) exposes these
+  as number fields and generates a fluid `clamp()` for
+  `--sf-header-height` / `--sf-sticky-offset` when the two values differ.
+
+- **Contextual color cascade** — `.sf-surface--*` variants now inherit a
+  full set of on-surface tokens (`--sf-color-text`, `--sf-color-heading`,
+  secondary/placeholder/disabled text, border/subtle/strong border) via
+  CSS relative-color syntax inside an `@supports` guard. Requires Chrome
+  123 / Safari 17.5 / Firefox 128 (the existing framework floor).
+
 - **reBEMer** (`integrations/bricks/`) — Subtree-scoped BEM class manager
   for the Bricks Builder structure panel. Adds a "BEM" badge to every
   structure-panel item; clicking it opens a draggable modal that names a
