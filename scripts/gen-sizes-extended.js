@@ -18,8 +18,9 @@ const VP_RANGE = 67.5;
 // -------------------------------------------------------------------
 // Source values extracted from core/tokens.css.
 // SYNC REQUIRED: if the spacing or text scale changes in core/tokens.css,
-// update SPACE_STEPS (mirrors lines ~751-759) and TEXT_STEPS (mirrors
-// lines ~694-702) here, then re-run `node scripts/gen-sizes-extended.js`
+// update SPACE_STEPS (mirrors the core --sf-space-{size} scale values)
+// and TEXT_STEPS (mirrors the core --sf-text-{size} scale values) here,
+// then re-run `node scripts/gen-sizes-extended.js`
 // to regenerate optional/tokens.sizes-extended.css.
 // -------------------------------------------------------------------
 
