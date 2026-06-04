@@ -817,6 +817,11 @@
     /* ----------------------------------------------------------
        Border shorthands — convenience tokens composing width, style,
        and color into a single value for the common cases.
+       subtle / strong vary COLOR CONTRAST only — all three use
+       --sf-border-width-1 (1px). This matches the IBM Carbon and
+       GitHub Primer convention where subtle/strong name a color axis,
+       not a weight axis. For a thicker border compose manually:
+         border: var(--sf-border-width-2) var(--sf-border-style) var(--sf-color-border--strong)
        Usage: border: var(--sf-border);
               border-bottom: var(--sf-border-subtle);
        ---------------------------------------------------------- */
