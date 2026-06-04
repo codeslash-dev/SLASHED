@@ -83,6 +83,46 @@ export function clearSection(section) {
 }
 
 /**
+ * Resolve the fluid viewport range, in pixels, used by every fluid
+ * `clamp()` formula the framework emits.
+ *
+ * The range is owned by the Spacing tab's "Fluid Scale Viewport Range"
+ * (`tokens.spacing.viewport_min` / `viewport_max`, stored in `rem`) and
+ * is the single source of truth shared by the Spacing and Typography
+ * live-scale previews — so the previewed scale always matches what the
+ * generated CSS would actually clamp between. Falls back to the PHP
+ * defaults (22.5rem → 95rem) when the user hasn't overridden them.
+ *
+ * Reading `tokens` here keeps the result reactive: callers that wrap a
+ * `$derived` around this recompute when the viewport fields change.
+ *
+ * @returns {{ minRem: number, maxRem: number, minPx: number, maxPx: number }}
+ */
+export function viewportRangePx() {
+  const sp  = tokens.spacing ?? {};
+  const def = meta.defaults?.spacing ?? {};
+
+  const read = (key, fallback) => {
+    const v = sp[key];
+    const n = v !== undefined && v !== '' ? parseFloat(v) : parseFloat(def[key] ?? fallback);
+    return Number.isFinite(n) ? n : fallback;
+  };
+
+  const minRem = read('viewport_min', 22.5);
+  const maxRem = read('viewport_max', 95);
+  // Guard against an inverted/zero range so the previews never divide by
+  // zero or run the slider backwards while the user is mid-edit.
+  const safeMax = maxRem > minRem ? maxRem : minRem + 0.5;
+
+  return {
+    minRem,
+    maxRem: safeMax,
+    minPx: Math.round(minRem * 16),
+    maxPx: Math.round(safeMax * 16),
+  };
+}
+
+/**
  * Read a single field from a (possibly absent) section.
  *
  * Returns an empty string when the section or key isn't present so

@@ -3,25 +3,37 @@
    * Live fluid-type scale preview.
    *
    * Renders each size step at the interpolated font size for a given
-   * viewport width. The slider lets the user scrub between 320 px and
-   * 1440 px to watch the clamp() scale play out in real time.
+   * viewport width. The slider scrubs across the fluid viewport range.
    *
    * Formula mirrors class-css-generator.php build_clamp():
-   *   clamp(min, calc(slope * (100vw - 22.5rem) + min), max)
-   *   where slope = (max - min) / (95 - 22.5) and VW_MIN/MAX = 360/1520px.
+   *   clamp(min, calc(slope * (100vw - VW_MIN) + min), max)
+   *
+   * The VW_MIN/VW_MAX bounds are NOT owned here: they come from the
+   * Spacing tab's "Fluid Scale Viewport Range" via viewportRangePx(), the
+   * single source of truth the generated clamp() also uses. This keeps
+   * the Typography preview and the Spacing preview scrubbing the exact
+   * same range.
    *
    * Values are read from tokens.typography (user overrides) with
    * meta.defaults.typography.font_sizes as the fallback, so the preview
    * is always populated even before the user sets anything.
    */
-  import { tokens, meta } from '../lib/stores.svelte.js';
+  import { tokens, meta, viewportRangePx } from '../lib/stores.svelte.js';
 
   const BASE_PX = 16;
-  const VW_MIN  = 360;  // 22.5rem × 16 — matches VIEWPORT_MIN in class-css-generator.php
-  const VW_MAX  = 1520; // 95rem × 16 — matches VIEWPORT_MAX in class-css-generator.php
+
+  /** Live viewport range (px) sourced from the Spacing viewport fields. */
+  const range = $derived(viewportRangePx());
 
   /** Viewport slider state — starts at desktop width. */
-  let vw = $state(VW_MAX);
+  let vw = $state(viewportRangePx().maxPx);
+
+  // Keep the slider value inside the (possibly edited) range so it never
+  // drifts out of bounds when the user changes Min/Max viewport.
+  $effect(() => {
+    if (vw < range.minPx) vw = range.minPx;
+    else if (vw > range.maxPx) vw = range.maxPx;
+  });
 
   const defaults = meta.defaults?.typography ?? {};
   const defaultSizes = defaults.font_sizes ?? {};
@@ -47,7 +59,7 @@
   }
 
   const stepAt = $derived.by(() => {
-    const t = Math.max(0, Math.min(1, (vw - VW_MIN) / (VW_MAX - VW_MIN)));
+    const t = Math.max(0, Math.min(1, (vw - range.minPx) / (range.maxPx - range.minPx)));
     const steps = {};
 
     for (const name of Object.keys(defaultSizes)) {
@@ -185,17 +197,17 @@
   <div class="typo-preview__header">
     <p class="typo-preview__title">Live Scale Preview</p>
     <div class="typo-preview__slider-wrap">
-      <span>{VW_MIN}px</span>
+      <span>{range.minPx}px</span>
       <input
         class="typo-preview__slider"
         type="range"
-        min={VW_MIN}
-        max={VW_MAX}
+        min={range.minPx}
+        max={range.maxPx}
         step="1"
         aria-label="Preview viewport width"
         bind:value={vw}
       />
-      <span>{VW_MAX}px</span>
+      <span>{range.maxPx}px</span>
       <span class="typo-preview__vw-label">{vw}px</span>
     </div>
   </div>

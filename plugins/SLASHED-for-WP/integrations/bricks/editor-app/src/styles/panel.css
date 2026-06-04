@@ -454,6 +454,40 @@ li[data-id]:focus-within > .rebemer-badge-host {
 .rebemer-class-hint__cat[hidden] { display: none; }
 .rebemer-class-hint__desc { margin: 4px 0 0; color: var(--rebemer-fg); }
 
+/* "?" info icon injected beside a class row's own action icons. The
+   tooltip above is bound to THIS element only (not the whole row), so it
+   surfaces on deliberate hover/focus and never obscures the row controls.
+   The glyph is a ::before so the icon contributes no textContent — the
+   reconciler reads the row text back to re-resolve which class it is. */
+.rebemer-class-hint-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  border-radius: 50%;
+  /* Injected outside #slashed-rebemer-host, so the --rebemer-* vars need
+     fallbacks (mirrors .rebemer-badge-host). */
+  border: 1px solid var(--rebemer-border, #3d4752);
+  background: transparent;
+  color: var(--rebemer-fg-muted, #8a8d95);
+  font: 700 10px/1 var(--rebemer-font, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
+  cursor: help;
+  opacity: 0.7;
+  vertical-align: middle;
+  transition: opacity 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.rebemer-class-hint-btn::before { content: '?'; }
+.rebemer-class-hint-btn:hover,
+.rebemer-class-hint-btn:focus-visible {
+  opacity: 1;
+  color: var(--rebemer-accent, #e2b93b);
+  border-color: var(--rebemer-accent, #e2b93b);
+  outline: none;
+}
+
 /* =====================================================================
    Color System panel
    ---------------------------------------------------------------------

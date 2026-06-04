@@ -1,26 +1,36 @@
 /**
  * Class documentation hints for the Bricks builder.
  *
- * When the "Show class hints" plugin setting is enabled, hovering a
- * SLASHED class name inside the Bricks UI (the element's CSS-class list
- * in the settings panel, the class autocomplete dropdown, or the global
- * class manager) shows a small styled tooltip describing what the class
+ * When the "Show class hints" plugin setting is enabled, each SLASHED
+ * class row inside the Bricks UI (an applied class chip in the element's
+ * CSS-class list, a class-autocomplete suggestion, or a row in the global
+ * class manager) gets a small "?" info icon injected beside the row's own
+ * action icons (remove, lock/unlock, copy:styles…). Hovering or focusing
+ * **that icon only** reveals a styled tooltip describing what the class
  * does, plus its category.
  *
  * Design notes — why this looks the way it does:
  *
- *   - **Scoped, not body-wide.** A single delegated `mouseover` listener
- *     is cheap, but acting on *every* hovered node on the page is not:
- *     it risks tagging unrelated text and fighting Bricks' own DOM. We
- *     only react when the hovered node sits inside a known Bricks panel
- *     container (see `BRICKS_CONTAINERS`) and never inside our own
- *     reBEMer host.
+ *   - **Icon-triggered, not row-hover.** An earlier version showed the
+ *     tooltip on hovering anywhere over a class row via a body-wide
+ *     `mouseover` listener. That fought Bricks' own DOM and the tooltip
+ *     constantly obscured the row's action icons. Instead we inject our
+ *     own `?` button (reconciled, idempotent) and bind the tooltip to it,
+ *     so the hint only appears on deliberate intent and never covers the
+ *     controls.
+ *
+ *   - **Reconcile, don't stamp-once.** Bricks (Vue) reuses row nodes when
+ *     a list is filtered, so a row that was `sf-stack` can become
+ *     `sf-grid` — or a non-SLASHED class — while keeping the same DOM
+ *     node. Every pass recomputes each row's class and adds / updates /
+ *     removes its `?` button accordingly. The button carries no text node
+ *     (its glyph is a CSS `::before`) so it never contaminates the row's
+ *     `textContent` we read back to re-resolve the class.
  *
  *   - **Exact match on a known key only.** `resolveClassName()` rejects
  *     anything that isn't a single `sf-*` / `is-*` token present in the
- *     hint map. Because container rows carry lots of text, multi-word
- *     `textContent` is rejected outright — so climbing a few ancestors
- *     to find the label wrapper can't accidentally match a big row.
+ *     hint map, so multi-word rows (category headers, suggestions that
+ *     also render a category label) are never tagged.
  *
  *   - **Styled tooltip, not the native `title` attribute.** `title` is
  *     slow to appear, unstyled, and mutating Bricks' nodes is invasive.
@@ -37,7 +47,7 @@
 const HOST_ID = 'slashed-rebemer-host';
 const TOOLTIP_ID = 'slashed-class-hint';
 
-// Containers inside which a hovered class name is worth a tooltip. The
+// Containers inside which a class row is worth a "?" hint icon. The
 // element settings panel (`#bricks-panel`) holds the per-element class
 // list and the class autocomplete; the global class manager renders its
 // own popup. Listed defensively — extras cost nothing and missing ones
@@ -49,11 +59,13 @@ const BRICKS_CONTAINERS = [
   '[data-control="cssClasses"]',
 ];
 
-// How many ancestors to climb from the hovered node looking for the
-// element that wholly represents a single class label. Bricks wraps the
-// class text in a span/li; the pointer often lands on that text node's
-// element directly, occasionally on a child glyph. Three is plenty.
-const MAX_CLIMB = 3;
+// Class applied to every injected "?" info icon. The guard for "already
+// has a button" and the teardown sweep both key off this.
+const BTN_CLASS = 'rebemer-class-hint-btn';
+
+// Coalesce churny Bricks mutation bursts (filtering the class list,
+// adding/removing a class) into one reconcile.
+const DEBOUNCE_MS = 50;
 
 /**
  * Resolve a raw text string to a hint, or null.
@@ -92,11 +104,13 @@ export function resolveClassName(raw, hints) {
 
 // ----- DOM glue (only runs in the browser) ---------------------------
 
-let _enabled = false;
 let _hints = {};
 let _tooltip = null;
 let _controller = null;
-let _currentTarget = null;
+let _observer = null;
+let _debounce = null;
+/** The `?` button the tooltip is currently anchored to, if any. */
+let _activeBtn = null;
 
 function ensureTooltip() {
   if (_tooltip && _tooltip.isConnected) return _tooltip;
@@ -123,25 +137,6 @@ function ensureTooltip() {
   return el;
 }
 
-/**
- * Walk up from the hovered node to find the element that represents a
- * single known class, returning `{ el, hint }` or null.
- *
- * @param {Element|null} start
- * @returns {{ el: Element, hint: { name: string, description: string, category: string } } | null}
- */
-function findHintTarget(start) {
-  let el = start;
-  for (let depth = 0; el && depth < MAX_CLIMB; depth++) {
-    if (el.nodeType === 1) {
-      const hint = resolveClassName(el.textContent, _hints);
-      if (hint) return { el, hint };
-    }
-    el = el.parentElement;
-  }
-  return null;
-}
-
 function position(el, target) {
   const r = target.getBoundingClientRect();
   // Measure after making it visible-but-transparent so width/height read.
@@ -155,8 +150,8 @@ function position(el, target) {
   let top = r.bottom + gap;
   if (top + th > vh && r.top - gap - th >= 0) top = r.top - gap - th;
 
-  // Left-align to the target, clamped into the viewport.
-  let left = r.left;
+  // Centre on the small icon, clamped into the viewport.
+  let left = r.left + r.width / 2 - tw / 2;
   if (left + tw > vw - 4) left = Math.max(4, vw - 4 - tw);
   if (left < 4) left = 4;
 
@@ -164,7 +159,18 @@ function position(el, target) {
   el.style.left = `${Math.round(left)}px`;
 }
 
-function show(target, hint) {
+/**
+ * Show the tooltip anchored to a `?` button, reading the class name it
+ * was tagged with and looking the hint up fresh (so a reused button that
+ * changed class still shows the right copy).
+ *
+ * @param {HTMLElement} btn
+ */
+function showForButton(btn) {
+  const name = btn.dataset.sfClass;
+  const hint = name ? resolveClassName(name, _hints) : null;
+  if (!hint) return;
+
   const el = ensureTooltip();
   el.querySelector('.rebemer-class-hint__name').textContent = `.${hint.name}`;
   const cat = el.querySelector('.rebemer-class-hint__cat');
@@ -173,73 +179,158 @@ function show(target, hint) {
   el.querySelector('.rebemer-class-hint__desc').textContent = hint.description;
 
   el.hidden = false;
-  position(el, target);
-  _currentTarget = target;
+  position(el, btn);
+  _activeBtn = btn;
 }
 
 function hide() {
   if (_tooltip) _tooltip.hidden = true;
-  _currentTarget = null;
+  _activeBtn = null;
 }
 
-function onMouseOver(event) {
-  const target = event.target;
-  if (!(target instanceof Element)) return;
-
-  // Never react to our own UI.
-  if (target.closest(`#${HOST_ID}`)) return;
-
-  // Only inside known Bricks panel regions.
-  if (!target.closest(BRICKS_CONTAINERS.join(','))) {
-    if (_currentTarget) hide();
-    return;
-  }
-
-  const match = findHintTarget(target);
-  if (!match) {
-    if (_currentTarget) hide();
-    return;
-  }
-  if (match.el === _currentTarget) return; // already showing for this node
-  show(match.el, match.hint);
+// Button-local handlers. The tooltip is bound to the `?` icon ONLY, so it
+// never appears while the pointer is merely passing over the class row.
+function onBtnEnter(event) { showForButton(event.currentTarget); }
+function onBtnLeave() { hide(); }
+function onBtnClick(event) {
+  // The `?` is informational; swallow the click so it can't trigger
+  // Bricks' own row actions (select/apply/remove).
+  event.preventDefault();
+  event.stopPropagation();
 }
-
-function onMouseOut(event) {
-  if (!_currentTarget) return;
-  // Hide only when the pointer truly leaves the labelled element.
-  const to = event.relatedTarget;
-  if (to instanceof Node && _currentTarget.contains(to)) return;
-  hide();
-}
-
-// Mirror the hover handlers for keyboard users: a class label focused
-// via Tab gets the same tooltip a mouse hover would surface.
-function onFocusIn(event) {
-  const target = event.target;
-  if (!(target instanceof Element)) return;
-  if (target.closest(`#${HOST_ID}`)) return;
-  if (!target.closest(BRICKS_CONTAINERS.join(','))) {
-    if (_currentTarget) hide();
-    return;
-  }
-  const match = findHintTarget(target);
-  if (!match) {
-    if (_currentTarget) hide();
-    return;
-  }
-  if (match.el === _currentTarget) return;
-  show(match.el, match.hint);
-}
-
-function onFocusOut(event) {
-  if (!_currentTarget) return;
-  const to = event.relatedTarget;
-  if (to instanceof Node && _currentTarget.contains(to)) return;
-  hide();
-}
-
 function onKeyDown(event) {
   if (event.key === 'Escape') hide();
+}
+
+/**
+ * Resolve the single SLASHED class a row represents, or null.
+ *
+ * Reads the row's own text (icon buttons carry no text node, and our `?`
+ * glyph is a CSS `::before`, so neither contaminates it). Falls back to
+ * probing likely label children for rows that also render a category or
+ * count alongside the name.
+ *
+ * @param {Element} row
+ * @returns {{ name: string, description: string, category: string } | null}
+ */
+function resolveRow(row) {
+  const direct = resolveClassName(row.textContent, _hints);
+  if (direct) return direct;
+
+  const labels = row.querySelectorAll('span, [contenteditable], .name, .label, a');
+  for (const el of labels) {
+    const hint = resolveClassName(el.textContent, _hints);
+    if (hint) return hint;
+  }
+  return null;
+}
+
+/**
+ * Choose where the `?` icon should sit so it reads as one of the row's
+ * action icons. Prefers an explicit actions cluster; otherwise the row
+ * itself (the icon then trails the existing controls).
+ *
+ * @param {Element} row
+ * @returns {Element}
+ */
+function actionsHost(row) {
+  return (
+    row.querySelector('.actions, [class*="action"], [class*="icons"], [class*="controls"]') ||
+    row
+  );
+}
+
+function makeButton() {
+  const btn = document.createElement('span');
+  btn.className = BTN_CLASS;
+  btn.setAttribute('role', 'button');
+  btn.setAttribute('tabindex', '0');
+  btn.setAttribute('aria-label', 'What does this class do?');
+  // No text node: the "?" glyph is painted via CSS ::before so the row's
+  // textContent stays clean for re-resolution.
+  btn.addEventListener('mouseenter', onBtnEnter);
+  btn.addEventListener('mouseleave', onBtnLeave);
+  btn.addEventListener('focus', onBtnEnter);
+  btn.addEventListener('blur', onBtnLeave);
+  btn.addEventListener('click', onBtnClick);
+  return btn;
+}
+
+/**
+ * One reconcile pass: refresh existing `?` icons, drop stale ones, and
+ * inject icons into newly-eligible class rows. Idempotent.
+ */
+function reconcile() {
+  // Pass 1: refresh / reap existing icons. A row whose class changed (Vue
+  // reuse) gets re-tagged; a row that's no longer a known SLASHED class
+  // loses its icon.
+  for (const btn of document.querySelectorAll('.' + BTN_CLASS)) {
+    // Pass 2 only ever injects into <li> rows, so the row is the nearest
+    // <li> ancestor.
+    const row = btn.closest('li');
+    const hint = row ? resolveRow(row) : null;
+    if (!hint) {
+      if (_activeBtn === btn) hide();
+      btn.remove();
+    } else if (btn.dataset.sfClass !== hint.name) {
+      btn.dataset.sfClass = hint.name;
+    }
+  }
+
+  // Pass 2: inject into eligible rows that lack an icon. Scope strictly to
+  // the known Bricks containers and to <li> rows, which is what Bricks uses
+  // for applied class chips, autocomplete suggestions, and class-manager
+  // rows alike.
+  const containers = document.querySelectorAll(BRICKS_CONTAINERS.join(','));
+  for (const container of containers) {
+    for (const row of container.querySelectorAll('li')) {
+      if (row.querySelector('.' + BTN_CLASS)) continue;
+      // Only tag innermost rows — a wrapper <li> around a single class
+      // chip resolves to the same name and would double-inject.
+      if (row.querySelector('li')) continue;
+      const hint = resolveRow(row);
+      if (!hint) continue;
+      const btn = makeButton();
+      btn.dataset.sfClass = hint.name;
+      actionsHost(row).appendChild(btn);
+    }
+  }
+}
+
+function schedule() {
+  if (_debounce !== null) return;
+  _debounce = setTimeout(() => {
+    _debounce = null;
+    reconcile();
+  }, DEBOUNCE_MS);
+}
+
+/**
+ * Cheap pre-filter: only reconcile when a mutation touches one of the
+ * Bricks containers (or adds nodes that contain one), so canvas edits and
+ * unrelated builder churn don't wake the reconciler.
+ *
+ * @param {MutationRecord[]} records
+ * @returns {boolean}
+ */
+function touchesContainers(records) {
+  const sel = BRICKS_CONTAINERS.join(',');
+  for (const m of records) {
+    const t = m.target;
+    // Ignore mutations we caused ourselves (injecting / removing icons).
+    if (t && t.nodeType === 1) {
+      if (t.classList && t.classList.contains(BTN_CLASS)) continue;
+      if (t.closest && t.closest(sel)) return true;
+    }
+    for (const node of m.addedNodes) {
+      if (node.nodeType !== 1) continue;
+      if (node.classList && node.classList.contains(BTN_CLASS)) continue;
+      if ((node.matches && node.matches(sel)) ||
+          (node.closest && node.closest(sel)) ||
+          (node.querySelector && node.querySelector(sel))) return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -257,22 +348,25 @@ function onKeyDown(event) {
 export function init(enabled, hints, options = {}) {
   destroy();
 
-  _enabled = !!enabled;
   _hints = hints && typeof hints === 'object' ? hints : {};
-  if (!_enabled || Object.keys(_hints).length === 0) return;
+  if (!enabled || Object.keys(_hints).length === 0) return;
 
   _controller = new AbortController();
   const { signal } = _controller;
-  const opts = { passive: true, signal };
 
-  document.addEventListener('mouseover', onMouseOver, opts);
-  document.addEventListener('mouseout', onMouseOut, opts);
-  document.addEventListener('focusin', onFocusIn, opts);
-  document.addEventListener('focusout', onFocusOut, opts);
-  document.addEventListener('keydown', onKeyDown, opts);
-  // The tooltip is anchored to a fixed viewport position; hide it on
-  // scroll rather than chase a moving target.
+  // Esc dismisses the tooltip; scroll hides it (it's fixed-positioned, so
+  // chasing a moving anchor isn't worth it).
+  document.addEventListener('keydown', onKeyDown, { passive: true, signal });
   window.addEventListener('scroll', hide, { capture: true, passive: true, signal });
+
+  // The class lists live in panels without a single stable container across
+  // their lifecycle, so observe body and filter with touchesContainers().
+  _observer = new MutationObserver((records) => {
+    if (touchesContainers(records)) schedule();
+  });
+  _observer.observe(document.body, { childList: true, subtree: true });
+
+  reconcile();
 
   if (options.signal) {
     if (options.signal.aborted) destroy();
@@ -281,18 +375,30 @@ export function init(enabled, hints, options = {}) {
 }
 
 /**
- * Tear down listeners and remove the tooltip element.
+ * Tear down listeners, the observer, the tooltip, and every injected icon.
  */
 export function destroy() {
+  if (_debounce !== null) {
+    clearTimeout(_debounce);
+    _debounce = null;
+  }
+  if (_observer) {
+    _observer.disconnect();
+    _observer = null;
+  }
   if (_controller) {
     _controller.abort();
     _controller = null;
+  }
+  try {
+    document.querySelectorAll('.' + BTN_CLASS).forEach((node) => node.remove());
+  } catch {
+    /* ignore */
   }
   if (_tooltip) {
     _tooltip.remove();
     _tooltip = null;
   }
-  _currentTarget = null;
-  _enabled = false;
+  _activeBtn = null;
   _hints = {};
 }

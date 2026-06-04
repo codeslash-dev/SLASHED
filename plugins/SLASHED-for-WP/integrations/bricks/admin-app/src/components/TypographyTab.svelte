@@ -77,7 +77,10 @@
     <h2 class="group-heading">Font Size Scale</h2>
     <p class="hint">
       Min and max values in <code>rem</code> for fluid type scaling via <code>clamp()</code>.
-      Leave both fields blank to use the framework defaults.
+      Leave both fields blank to use the framework defaults. The viewport range these
+      sizes interpolate across (and the range the Live Scale Preview above scrubs) is the
+      <strong>Fluid Scale Viewport Range</strong> set in the <strong>Spacing</strong> tab —
+      it's the shared source for both spacing and typography.
     </p>
     <ScaleGenerator />
     <div class="rows">

@@ -58,9 +58,10 @@ These items are planned as part of the path to a stable v1.0 release.
 
 - **Class documentation tooltips** — extract `docs/classes.md` data into a
   `data/classes.json` (generated at build time). When a new "Show class hints"
-  toggle in admin settings is enabled, inject short descriptions into Bricks'
-  class manager on hover. Implemented via a `show_class_hints` setting in
-  `class-token-store.php` and a flag passed to the editor JS bundle.
+  toggle in admin settings is enabled, inject a small "?" info icon beside each
+  SLASHED class row's action icons in Bricks' class manager; hovering or focusing
+  that icon reveals a short description. Implemented via a `show_class_hints`
+  setting in `class-token-store.php` and a flag passed to the editor JS bundle.
 
 - **Inventory stale-detection** — a weekly WP cron job checks the npm registry
   for a newer framework version and surfaces a subtle dashboard widget (not a
