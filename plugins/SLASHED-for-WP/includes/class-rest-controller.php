@@ -147,10 +147,6 @@ class Slashed_REST_Controller {
 							'type'     => 'boolean',
 							'required' => false,
 						),
-						'lock_framework_classes' => array(
-							'type'     => 'boolean',
-							'required' => false,
-						),
 					),
 				),
 			)
@@ -252,12 +248,11 @@ class Slashed_REST_Controller {
 	}
 
 	public function save_settings( WP_REST_Request $request ) {
-		$html_font_size          = $request->get_param( 'html_font_size' );
-		$css_bundle              = $request->get_param( 'css_bundle' );
-		$show_class_hints        = $request->get_param( 'show_class_hints' );
-		$lock_framework_classes  = $request->get_param( 'lock_framework_classes' );
+		$html_font_size   = $request->get_param( 'html_font_size' );
+		$css_bundle       = $request->get_param( 'css_bundle' );
+		$show_class_hints = $request->get_param( 'show_class_hints' );
 
-		if ( null === $html_font_size && null === $css_bundle && null === $show_class_hints && null === $lock_framework_classes ) {
+		if ( null === $html_font_size && null === $css_bundle && null === $show_class_hints ) {
 			return rest_ensure_response( Slashed_Token_Store::get_plugin_settings() );
 		}
 
@@ -271,9 +266,6 @@ class Slashed_REST_Controller {
 		}
 		if ( null !== $show_class_hints ) {
 			$settings['show_class_hints'] = (bool) $show_class_hints;
-		}
-		if ( null !== $lock_framework_classes ) {
-			$settings['lock_framework_classes'] = (bool) $lock_framework_classes;
 		}
 
 		Slashed_Token_Store::update_plugin_settings( $settings );
@@ -339,10 +331,6 @@ class Slashed_REST_Controller {
 			if ( array_key_exists( 'show_class_hints', $raw ) ) {
 				$existing['show_class_hints'] = (bool) $raw['show_class_hints'];
 				$settings_imported            = true;
-			}
-			if ( array_key_exists( 'lock_framework_classes', $raw ) ) {
-				$existing['lock_framework_classes'] = (bool) $raw['lock_framework_classes'];
-				$settings_imported                  = true;
 			}
 
 			if ( $settings_imported ) {

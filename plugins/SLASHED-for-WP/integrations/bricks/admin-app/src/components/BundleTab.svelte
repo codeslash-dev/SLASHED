@@ -2,10 +2,9 @@
   import { meta } from '../lib/stores.svelte.js';
   import { saveSettings } from '../lib/api.js';
 
-  let bundle                = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
-  let fontSize              = $state(meta.pluginSettings?.html_font_size ?? '');
-  let showClassHints        = $state(meta.pluginSettings?.show_class_hints ?? false);
-  let lockFrameworkClasses  = $state(meta.pluginSettings?.lock_framework_classes ?? true);
+  let bundle          = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
+  let fontSize        = $state(meta.pluginSettings?.html_font_size ?? '');
+  let showClassHints  = $state(meta.pluginSettings?.show_class_hints ?? false);
   let saving = $state(false);
   let saved = $state(false);
   let error = $state('');
@@ -18,7 +17,7 @@
     saved = false;
     error = '';
     try {
-      await saveSettings({ css_bundle: bundle, html_font_size: fontSize, show_class_hints: showClassHints, lock_framework_classes: lockFrameworkClasses });
+      await saveSettings({ css_bundle: bundle, html_font_size: fontSize, show_class_hints: showClassHints });
       saved = true;
       if (savedTimer) clearTimeout(savedTimer);
       savedTimer = setTimeout(() => { saved = false; savedTimer = null; }, 3000);
@@ -87,29 +86,9 @@
         description of what it does. Powered by <code>data/classes-hints.json</code>.
       </p>
     </div>
-    <div class="field-row">
-      <label class="toggle-label" for="lock-framework-classes">
-        <input
-          id="lock-framework-classes"
-          type="checkbox"
-          bind:checked={lockFrameworkClasses}
-        />
-        Lock framework classes in Bricks class manager
-        <span class="badge badge--bricks">Bricks</span>
-      </label>
-      <p class="description">
-        When enabled, all SLASHED framework classes appear as locked in the Bricks
-        Global Class Manager so they cannot be accidentally edited. Disable only if
-        you need to add custom styles to a framework class via Bricks.
-      </p>
-    </div>
   {:else}
     <div class="field-row field-row--muted">
       <span class="muted-label">Show class hints in Bricks editor <span class="badge badge--bricks">Bricks</span></span>
-      <p class="description">Enable the Bricks integration in SLASHED Settings to use this feature.</p>
-    </div>
-    <div class="field-row field-row--muted">
-      <span class="muted-label">Lock framework classes in Bricks class manager <span class="badge badge--bricks">Bricks</span></span>
       <p class="description">Enable the Bricks integration in SLASHED Settings to use this feature.</p>
     </div>
   {/if}

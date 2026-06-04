@@ -35,11 +35,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  *      switching the active CSS bundle automatically refreshes what shows
  *      up in the Class Manager.
  *
- * Each class is shipped with `settings: { locked: true }` by default so it
- * lands in the Manager's "Locked" filter group: users can apply `.sf-stack`,
- * `.is-active`, etc. on elements but cannot accidentally edit the framework
- * selectors. The locked state is controlled by the `lock_framework_classes`
- * plugin setting (default: true) and can be toggled in the SLASHED admin panel.
+ * Each class is shipped as `settings: { locked: true }` so it lands in the
+ * Manager's "Locked" filter group: users can apply `.sf-stack`, `.is-active`,
+ * etc. on elements but cannot accidentally edit the framework selectors.
  * The actual CSS rules are still authored in the SLASHED bundle - Bricks
  * just stores a reference to the class name.
  *
@@ -178,14 +176,13 @@ class Slashed_Bricks_Classes {
      * Build SLASHED class entries from the inventory.
      *
      * Each entry follows the Bricks-native shape:
-     *   { id, name, settings: { locked: <bool> }, category }
+     *   { id, name, settings: { locked: true }, category }
      *
      * - `id` is a stable slashed-* slug so strip_classes() can find it
      *   reliably across read passes; Bricks accepts any unique string.
      * - `name` is the actual class name users will apply (e.g. "sf-stack").
      * - `settings.locked` puts the entry in the Class Manager's Locked
-     *   filter when enabled (controlled by the lock_framework_classes plugin
-     *   setting, which defaults to true).
+     *   filter so framework classes aren't accidentally edited.
      * - `category` references one of our stable category ids.
      *
      * @return array<int, array<string,mixed>>
@@ -193,16 +190,11 @@ class Slashed_Bricks_Classes {
     public function build_classes() {
         $entries = array();
 
-        $plugin_settings = Slashed_Token_Store::get_plugin_settings();
-        $locked = isset( $plugin_settings['lock_framework_classes'] )
-            ? (bool) $plugin_settings['lock_framework_classes']
-            : true;
-
         foreach ( Slashed_Bricks_Inventory::get_sf_classes() as $name ) {
             $entries[] = array(
                 'id'       => self::ID_PREFIX . sanitize_key( $name ),
                 'name'     => $name,
-                'settings' => array( 'locked' => $locked ),
+                'settings' => array( 'locked' => true ),
                 'category' => self::CATEGORY_LAYOUT,
             );
         }
@@ -211,7 +203,7 @@ class Slashed_Bricks_Classes {
             $entries[] = array(
                 'id'       => self::ID_PREFIX . sanitize_key( $name ),
                 'name'     => $name,
-                'settings' => array( 'locked' => $locked ),
+                'settings' => array( 'locked' => true ),
                 'category' => self::CATEGORY_STATE,
             );
         }
