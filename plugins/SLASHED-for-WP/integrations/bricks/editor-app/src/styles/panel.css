@@ -265,6 +265,78 @@ li[data-id]:focus-within > .rebemer-badge-host {
 }
 .rebemer-row__modifier-add:hover:not(:disabled) { border-color: var(--rebemer-fg-muted); color: var(--rebemer-fg); }
 
+/* Per-row op toggle in All-in-one (mixed) mode. */
+.rebemer-row__op-toggle {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius);
+  overflow: hidden;
+  width: fit-content;
+  margin-top: 2px;
+}
+.rebemer-row__op-btn {
+  background: var(--rebemer-input-bg);
+  border: 0;
+  border-left: 1px solid var(--rebemer-input-border);
+  color: var(--rebemer-fg-muted);
+  font: 600 10px/1 var(--rebemer-font);
+  padding: 4px 9px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  white-space: nowrap;
+}
+.rebemer-row__op-btn:first-child { border-left: 0; }
+.rebemer-row__op-btn--on {
+  color: var(--rebemer-accent);
+  background: rgba(226,185,59,.12);
+}
+.rebemer-row__op-btn:hover:not(.rebemer-row__op-btn--on) {
+  color: var(--rebemer-fg);
+  background: rgba(255,255,255,.06);
+}
+
+/* Family picker — shown when Rename is selected and the element has multiple families. */
+.rebemer-row__family {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 3px;
+}
+.rebemer-row__family-label {
+  font-size: 9px;
+  color: var(--rebemer-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+.rebemer-row__family-select {
+  background: var(--rebemer-input-bg);
+  border: 1px solid var(--rebemer-input-border);
+  border-radius: var(--rebemer-radius);
+  color: var(--rebemer-fg);
+  padding: 3px 6px;
+  font: inherit;
+  font-size: 11px;
+  flex: 1;
+  min-width: 0;
+}
+.rebemer-row__family-select:focus { outline: 1px solid var(--rebemer-accent); }
+
+/* code inside info/warn notes */
+.rebemer-row__info code,
+.rebemer-row__warn code {
+  background: rgba(0,0,0,.3);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--rebemer-accent);
+}
+
 /* Per-row recommendation hint (use-existing-class affordance). */
 .rebemer-row__recommend {
   grid-column: 1 / -1;

@@ -38,7 +38,26 @@
     rename:  'Replaces the first existing class with a new name, seeding its settings from the old class.',
     replace: 'Replaces ALL existing classes with a single new BEM class (clean slate, no settings carried over).',
     migrate: 'Lifts inline element styles (padding, color, typography, etc.) into a new global class.',
+    mixed:   'Per-element control — every row defaults to Add. Switch any row to Rename (targets one class family, keeps others) or Replace (strips all existing classes).',
   };
+
+  /** Read _cssGlobalClasses as a flat array of string ids (mirrors readClassIds in apply.js). */
+  function readCurrentClassIds(settings) {
+    const raw = settings?._cssGlobalClasses;
+    if (!raw) return [];
+    const arr = Array.isArray(raw) ? raw : Object.values(raw);
+    return arr.filter(id => typeof id === 'string' && id.length > 0);
+  }
+
+  /** Find the first non-modifier class in the element's class list as the default rename target. */
+  function findFirstFamilyId(settings, globalClasses) {
+    const ids = readCurrentClassIds(settings);
+    for (const id of ids) {
+      const cls = globalClasses.find(c => c && c.id === id);
+      if (cls && !cls.name.includes('--')) return id;
+    }
+    return ids[0] ?? null;
+  }
 
   let mode = $state('add');
   let syncLabels = $state(true);
@@ -126,6 +145,7 @@
         suggestedFrom = 'fallback';
       }
 
+      const currentClassIds = readCurrentClassIds(el.settings);
       return {
         id: el.id,
         depth: el.depth,
@@ -138,9 +158,10 @@
         suggestedFrom,
         migrateKeys: pickMigratableKeys(el.settings),
         skippedKeys: pickSkippedKeys(el.settings),
-        currentClassCount: Array.isArray(el.settings?._cssGlobalClasses)
-          ? el.settings._cssGlobalClasses.filter(id => typeof id === 'string' && id.length > 0).length
-          : 0,
+        currentClassCount: currentClassIds.length,
+        currentClassIds,
+        op: 'add',
+        renameFamilyId: findFirstFamilyId(el.settings, globalClassesAtOpen),
       };
     });
 
@@ -264,6 +285,7 @@
         <option value="rename">Rename</option>
         <option value="replace">Replace</option>
         <option value="migrate">Migrate ID styles</option>
+        <option value="mixed">All-in-one</option>
       </select>
     </label>
     <label class="rebemer-field rebemer-field--inline">

@@ -63,7 +63,7 @@ import { slugify } from './slugify.js';
 import { MIGRATE_ALLOWLIST } from './migrate-keys.js';
 import * as api from './bricks-api.js';
 
-const VALID_MODES = new Set(['add', 'rename', 'replace', 'migrate']);
+const VALID_MODES = new Set(['add', 'rename', 'replace', 'migrate', 'mixed']);
 
 /**
  * Provenance values that are treated as authoritative — these names
@@ -94,6 +94,14 @@ const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
  *   into the new class on a 'migrate' apply. Already filtered by
  *   `migrate-keys.MIGRATE_ALLOWLIST` by the caller; we re-filter here
  *   defensively against tampered DOM input.
+ * @property {'add'|'rename'|'replace'} [op] - Per-row operation for
+ *   'mixed' mode. Ignored in all other modes. Defaults to 'add'.
+ * @property {string[]} [currentClassIds] - IDs of existing global
+ *   classes currently attached to the element. Populated by BemPanel
+ *   on open; used in 'mixed' mode for family detection and seeding.
+ * @property {string|null} [renameFamilyId] - In 'mixed' mode with
+ *   `op: 'rename'`, the ID of the class to use as the rename source
+ *   (base of the family being renamed). Falls back to currentIds[0].
  */
 
 /**
@@ -295,19 +303,23 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
       if (!el) continue;
 
       const currentIds = readClassIds(el.settings);
+      // In 'mixed' mode each row carries its own operation; fall back to 'add'.
+      const effectiveMode = mode === 'mixed' ? (op.row.op ?? 'add') : mode;
 
       // Determine seed settings for the new class.
       let seed = {};
-      if (mode === 'rename' && currentIds.length > 0) {
-        const firstOld = globalClasses.find(c => c && c.id === currentIds[0]);
+      if (effectiveMode === 'rename' && currentIds.length > 0) {
+        // In mixed mode use the user-selected family base; otherwise use first class.
+        const sourceId = (mode === 'mixed' && op.row.renameFamilyId) || currentIds[0];
+        const firstOld = globalClasses.find(c => c && c.id === sourceId);
         if (firstOld && firstOld.settings) {
           seed = JSON.parse(JSON.stringify(firstOld.settings));
         }
-      } else if (mode === 'migrate') {
+      } else if (effectiveMode === 'migrate') {
         seed = collectMigrateSeed(el.settings, op.row.migrateKeys);
       }
 
-      // For migrate mode, when the target class already exists, merge
+      // For migrate effectiveMode, when the target class already exists, merge
       // any keys from the seed that the existing class doesn't have.
       // upsertGlobalClass deliberately never overwrites; without this
       // step, the inline keys would be stripped from the element by
@@ -315,7 +327,7 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
       // — silent style loss. Pre-validation in step 3 has already
       // confirmed there are no conflicting values, so merging here
       // is safe and additive.
-      if (mode === 'migrate') {
+      if (effectiveMode === 'migrate') {
         const existing = globalClasses.find(c => c && c.name === op.finalClass);
         if (existing) {
           if (!existing.settings || typeof existing.settings !== 'object') {
@@ -333,7 +345,7 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
 
       // Build the new class list for this element.
       let nextIds;
-      switch (mode) {
+      switch (effectiveMode) {
         case 'add':
         case 'migrate':
           nextIds = currentIds.includes(newClassId)
@@ -342,25 +354,24 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
           break;
 
         case 'rename': {
-          // Start with the renamed base class.
+          // In mixed mode use the user-selected family base; otherwise use first class.
+          const sourceId = (mode === 'mixed' && op.row.renameFamilyId) || (currentIds[0] ?? null);
           const renamedIds = [newClassId];
-          // Any modifier classes on the element that were built from the
-          // old base class name (e.g. card__title--lg) get renamed to use
-          // the new base class name (e.g. card__heading--lg).
-          const oldBase = currentIds.length > 0
-            ? globalClasses.find(c => c && c.id === currentIds[0])
-            : null;
+          const oldBase = sourceId ? globalClasses.find(c => c && c.id === sourceId) : null;
           if (oldBase) {
             const oldPrefix = oldBase.name + '--';
-            for (let i = 1; i < currentIds.length; i++) {
-              const old = globalClasses.find(c => c && c.id === currentIds[i]);
+            // Iterate all ids — skip the source (replaced by newClassId), rename
+            // its modifier classes, and keep all unrelated classes as-is.
+            for (const id of currentIds) {
+              if (id === sourceId) continue;
+              const old = globalClasses.find(c => c && c.id === id);
               if (!old) continue;
               if (old.name.startsWith(oldPrefix)) {
                 const suffix = old.name.slice(oldBase.name.length); // '--lg' etc.
                 const modSeed = old.settings ? JSON.parse(JSON.stringify(old.settings)) : {};
                 renamedIds.push(api.upsertGlobalClass(op.finalClass + suffix, modSeed));
               } else {
-                renamedIds.push(currentIds[i]); // unrelated class — keep
+                renamedIds.push(id); // unrelated class — keep
               }
             }
           }
@@ -384,11 +395,11 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
 
       api.setElementClasses(op.row.id, nextIds);
 
-      // For 'migrate', remove the lifted keys from the element settings
+      // For migrate effectiveMode, remove the lifted keys from the element settings
       // AFTER the class is attached. The pre-validation + merge above
       // guarantees every key is now provided by the (new or existing)
       // class with the same value, so this is visually a no-op.
-      if (mode === 'migrate') {
+      if (effectiveMode === 'migrate') {
         removeMigratedKeys(el.settings, op.row.migrateKeys);
       }
 
