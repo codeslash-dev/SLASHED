@@ -380,7 +380,24 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
         }
 
         case 'replace':
-          nextIds = [newClassId];
+          // In mixed mode, if the user targeted a specific family, strip only
+          // that family's base + modifier classes; keep all unrelated classes.
+          if (mode === 'mixed' && op.row.renameFamilyId) {
+            const targetBase = globalClasses.find(c => c && c.id === op.row.renameFamilyId);
+            if (targetBase) {
+              const prefix = targetBase.name + '--';
+              const kept = currentIds.filter(id => {
+                if (id === op.row.renameFamilyId) return false;
+                const cls = globalClasses.find(c => c && c.id === id);
+                return !cls || !cls.name.startsWith(prefix);
+              });
+              nextIds = [newClassId, ...kept];
+            } else {
+              nextIds = [newClassId]; // target not found — replace all as fallback
+            }
+          } else {
+            nextIds = [newClassId]; // replace all (default)
+          }
           break;
       }
 

@@ -226,7 +226,7 @@
         type="button"
         class="rebemer-row__op-btn"
         class:rebemer-row__op-btn--on={row.op === 'replace'}
-        onclick={() => { row.op = 'replace'; }}
+        onclick={() => { row.op = 'replace'; row.renameFamilyId = null; }}
       >× Replace</button>
     </div>
     {#if row.op === 'rename'}
@@ -247,7 +247,22 @@
         </p>
       {/if}
     {:else if row.op === 'replace'}
-      <p class="rebemer-row__warn" role="note">All existing classes will be removed from this element.</p>
+      {#if currentFamilies.length > 1}
+        <div class="rebemer-row__family">
+          <span class="rebemer-row__family-label">Family</span>
+          <select bind:value={row.renameFamilyId} class="rebemer-row__family-select">
+            <option value={null}>— All classes —</option>
+            {#each currentFamilies as fam}
+              <option value={fam.id}>{fam.name}{fam.modCount > 0 ? ` (+ ${fam.modCount} modifier${fam.modCount > 1 ? 's' : ''})` : ''}</option>
+            {/each}
+          </select>
+        </div>
+      {/if}
+      {#if row.renameFamilyId}
+        <p class="rebemer-row__info" role="note">Will remove the selected family and replace with the new class (empty settings). Other classes kept.</p>
+      {:else}
+        <p class="rebemer-row__warn" role="note">All existing classes will be removed from this element.</p>
+      {/if}
     {/if}
   {/if}
 
