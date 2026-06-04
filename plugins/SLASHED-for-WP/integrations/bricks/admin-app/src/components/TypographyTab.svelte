@@ -3,10 +3,13 @@
    * Typography tab: font families, fluid font-size scale, and
    * scale multipliers.
    *
-   * 1:1 port of `render_tab_typography()` in class-admin-page.php.
    * Iteration over `meta.defaults.typography.font_families` /
    * `font_sizes` keeps the field list driven by PHP defaults so adding
    * a new family or step doesn't require touching this component.
+   *
+   * Basic: body + heading families and a live preview.
+   * Advanced: additional families, the full fluid font-size scale
+   *           (generator + per-step overrides), and scale multipliers.
    *
    * Storage convention (matches the legacy form):
    *   - font families:  font_<name>          (e.g. font_body)
@@ -55,42 +58,6 @@
     {/each}
   </div>
 
-  <h2 class="group-heading">Font Size Scale</h2>
-  <p class="hint">
-    Min and max values in <code>rem</code> for fluid type scaling via <code>clamp()</code>.
-  </p>
-  <ScaleGenerator />
-  <div class="rows">
-    {#each Object.entries(sizes) as [name, sizeDefaults] (name)}
-      <div class="size-row">
-        <div class="size-row__label">
-          <span class="size-row__name">{name}</span>
-          <code class="size-row__var">--sf-text-{name}</code>
-        </div>
-        <div class="size-row__inputs">
-          <NumberField
-            section={SECTION}
-            fieldKey={`size_${name}_min`}
-            label="Min"
-            min={0}
-            step={0.01}
-            default={sizeDefaults.min}
-            width="80px"
-          />
-          <NumberField
-            section={SECTION}
-            fieldKey={`size_${name}_max`}
-            label="Max"
-            min={0}
-            step={0.01}
-            default={sizeDefaults.max}
-            width="80px"
-          />
-        </div>
-      </div>
-    {/each}
-  </div>
-
   <TypographyPreview />
 
   <AdvancedSection>
@@ -104,6 +71,43 @@
           default={defaultStack}
           cssVar={`--sf-font-${name}`}
         />
+      {/each}
+    </div>
+
+    <h2 class="group-heading">Font Size Scale</h2>
+    <p class="hint">
+      Min and max values in <code>rem</code> for fluid type scaling via <code>clamp()</code>.
+      Leave both fields blank to use the framework defaults.
+    </p>
+    <ScaleGenerator />
+    <div class="rows">
+      {#each Object.entries(sizes) as [name, sizeDefaults] (name)}
+        <div class="size-row">
+          <div class="size-row__label">
+            <span class="size-row__name">{name}</span>
+            <code class="size-row__var">--sf-text-{name}</code>
+          </div>
+          <div class="size-row__inputs">
+            <NumberField
+              section={SECTION}
+              fieldKey={`size_${name}_min`}
+              label="Min"
+              min={0}
+              step={0.01}
+              default={sizeDefaults.min}
+              width="80px"
+            />
+            <NumberField
+              section={SECTION}
+              fieldKey={`size_${name}_max`}
+              label="Max"
+              min={0}
+              step={0.01}
+              default={sizeDefaults.max}
+              width="80px"
+            />
+          </div>
+        </div>
       {/each}
     </div>
 

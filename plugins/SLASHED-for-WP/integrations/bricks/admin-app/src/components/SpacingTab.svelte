@@ -2,8 +2,9 @@
   /**
    * Spacing tab: scale multiplier, per-step fluid sizes, and named aliases.
    *
-   * Basic: space_scale multiplier + per-step min/max fluid overrides.
-   * Advanced: 5 named alias fields (gutter, gap, etc.).
+   * Basic: space_scale multiplier (the one knob that scales everything).
+   * Advanced: fluid viewport range, per-step min/max overrides, and the
+   *           5 named alias fields (gutter, gap, etc.) — expert fine-tuning.
    */
   import { meta } from '../lib/stores.svelte.js';
   import NumberField from './NumberField.svelte';
@@ -25,36 +26,12 @@
 </script>
 
 <section>
-  <h2>Fluid Scale Viewport Range</h2>
+  <h2>Spacing</h2>
   <p class="hint">
-    The viewport width range (in <code>rem</code>) used to compute all fluid <code>clamp()</code>
-    formulas for custom-overridden spacing and typography values. Default: <strong>22.5 rem</strong>
-    (360 px) → <strong>95 rem</strong> (1520 px). Changing these only affects values you explicitly
-    override below or in the Typography tab — the framework's built-in scale uses the same defaults
-    and is unaffected.
+    The <code>Space Scale</code> multiplier scales every spacing token at once — the quickest
+    way to make a whole site more or less airy. Fine-grained per-step overrides, the fluid
+    viewport range, and named aliases live under Advanced.
   </p>
-  <div class="rows">
-    <NumberField
-      section={SECTION}
-      fieldKey="viewport_min"
-      label="Min viewport (rem)"
-      min={10}
-      max={60}
-      step={0.5}
-      default={defaults.viewport_min ?? 22.5}
-    />
-    <NumberField
-      section={SECTION}
-      fieldKey="viewport_max"
-      label="Max viewport (rem)"
-      min={40}
-      max={200}
-      step={0.5}
-      default={defaults.viewport_max ?? 95}
-    />
-  </div>
-
-  <h2 class="group-heading">Spacing</h2>
   <div class="rows">
     <NumberField
       section={SECTION}
@@ -67,45 +44,74 @@
     />
   </div>
 
-  <h2 class="group-heading">Space Scale Steps</h2>
-  <p class="hint">
-    Min and max values in <code>rem</code> for fluid spacing via <code>clamp()</code>.
-    Leave both fields blank to use the framework defaults.
-  </p>
-  <div class="rows">
-    {#each Object.entries(spaceSizes) as [name, sizeDefaults] (name)}
-      <div class="size-row">
-        <div class="size-row__label">
-          <span class="size-row__name">{name}</span>
-          <code class="size-row__var">--sf-space-{name}</code>
-        </div>
-        <div class="size-row__inputs">
-          <NumberField
-            section={SECTION}
-            fieldKey={`space_${name}_min`}
-            label="Min"
-            min={0}
-            step={0.01}
-            default={sizeDefaults.min}
-            width="80px"
-          />
-          <NumberField
-            section={SECTION}
-            fieldKey={`space_${name}_max`}
-            label="Max"
-            min={0}
-            step={0.01}
-            default={sizeDefaults.max}
-            width="80px"
-          />
-        </div>
-      </div>
-    {/each}
-  </div>
-
   <SpacingPreview />
 
   <AdvancedSection>
+    <h2 class="group-heading">Fluid Scale Viewport Range</h2>
+    <p class="hint">
+      The viewport width range (in <code>rem</code>) used to compute all fluid <code>clamp()</code>
+      formulas for custom-overridden spacing and typography values. Default: <strong>22.5 rem</strong>
+      (360 px) → <strong>95 rem</strong> (1520 px). Changing these only affects values you explicitly
+      override below or in the Typography tab — the framework's built-in scale uses the same defaults
+      and is unaffected.
+    </p>
+    <div class="rows">
+      <NumberField
+        section={SECTION}
+        fieldKey="viewport_min"
+        label="Min viewport (rem)"
+        min={10}
+        max={60}
+        step={0.5}
+        default={defaults.viewport_min ?? 22.5}
+      />
+      <NumberField
+        section={SECTION}
+        fieldKey="viewport_max"
+        label="Max viewport (rem)"
+        min={40}
+        max={200}
+        step={0.5}
+        default={defaults.viewport_max ?? 95}
+      />
+    </div>
+
+    <h2 class="group-heading">Space Scale Steps</h2>
+    <p class="hint">
+      Min and max values in <code>rem</code> for fluid spacing via <code>clamp()</code>.
+      Leave both fields blank to use the framework defaults.
+    </p>
+    <div class="rows">
+      {#each Object.entries(spaceSizes) as [name, sizeDefaults] (name)}
+        <div class="size-row">
+          <div class="size-row__label">
+            <span class="size-row__name">{name}</span>
+            <code class="size-row__var">--sf-space-{name}</code>
+          </div>
+          <div class="size-row__inputs">
+            <NumberField
+              section={SECTION}
+              fieldKey={`space_${name}_min`}
+              label="Min"
+              min={0}
+              step={0.01}
+              default={sizeDefaults.min}
+              width="80px"
+            />
+            <NumberField
+              section={SECTION}
+              fieldKey={`space_${name}_max`}
+              label="Max"
+              min={0}
+              step={0.01}
+              default={sizeDefaults.max}
+              width="80px"
+            />
+          </div>
+        </div>
+      {/each}
+    </div>
+
     <h2 class="group-heading">Space Aliases</h2>
     <div class="rows">
       {#each aliases as alias (alias.key)}
