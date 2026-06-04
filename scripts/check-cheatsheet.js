@@ -5,10 +5,20 @@
  * fallback inventory (data/inventory.json, regenerated from CSS source).
  *
  * The cheatsheet documents tokens/classes with a compact PATTERN notation,
- * e.g. `--sf-color-{brand}-{50-950}`, `.sf-grid-{1,2,3,4,6}`,
+ * e.g. `--sf-color-{primary,action}-500`, `.sf-grid-{1,2,3,4,6}`,
  * `--sf-space-{2xs..4xl}`. This script expands that notation into regexes
  * and asserts that every concrete inventory entry matches at least one
  * cheatsheet entry. Any uncovered names are printed and the process exits 1.
+ *
+ * Pattern notation:
+ *   {a,b,c}          alternation (options may contain hyphens)
+ *   {2xs..4xl}/{word} single-segment wildcard ([0-9a-z]+)
+ *   *                multi-segment wildcard ([0-9a-z-]+)
+ *
+ * There is deliberately NO loose numeric-range form. Discrete numeric scales
+ * (palette 50…950, alpha a5…a95) are written as explicit comma lists so that
+ * matching stays exact and can never over-match a number outside the real
+ * scale — which would otherwise hide a genuinely uncovered token.
  *
  * Usage: node scripts/check-cheatsheet.js
  */
@@ -39,9 +49,11 @@ function escapeLiteral(s) {
  * Supported placeholder notations inside `{ }`:
  *   {a,b,c}      -> alternation (options may contain hyphens)
  *   {a..b}       -> single-segment wildcard  ([0-9a-z]+)
- *   {NN-MMM}     -> numeric run               ([0-9]+)  when both sides numeric
  *   {word}       -> single-segment wildcard  ([0-9a-z]+)
  * A literal `*` becomes a multi-segment wildcard ([0-9a-z-]+).
+ *
+ * Throws on an unterminated `{` so a malformed pattern fails fast instead of
+ * spinning the scan loop forever.
  */
 function patternToRegex(tok) {
   let out = '';
@@ -50,12 +62,13 @@ function patternToRegex(tok) {
     const ch = tok[i];
     if (ch === '{') {
       const end = tok.indexOf('}', i);
+      if (end === -1) {
+        throw new Error(`Unterminated "{" in cheatsheet pattern: ${tok}`);
+      }
       const body = tok.slice(i + 1, end);
       if (body.includes(',')) {
         const opts = body.split(',').map((o) => escapeLiteral(o.trim())).join('|');
         out += `(?:${opts})`;
-      } else if (/^\d+-\d+$/.test(body)) {
-        out += '[0-9]+';
       } else {
         out += '[0-9a-z]+';
       }
