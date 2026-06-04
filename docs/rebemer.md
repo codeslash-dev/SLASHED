@@ -397,6 +397,7 @@ filterable via `slashed_bricks/rebemer_policy`, and serialized into
 
 ## 9. Plan model
 
+{% raw %}
 ```js
 /**
  * @typedef {Object} Plan
@@ -446,6 +447,7 @@ filterable via `slashed_bricks/rebemer_policy`, and serialized into
  *                                    creating a duplicate
  */
 ```
+{% endraw %}
 
 ### 9.1 buildPlan
 
