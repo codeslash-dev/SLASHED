@@ -50,13 +50,13 @@
   .sf-divider {
     border:             none;
     border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
-    margin-block:       var(--sf-space-m);
+    margin-block:       var(--sf-divider-gap);
   }
   .sf-divider--vertical {
     border-block-start:  none;
     border-inline-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
     margin-block:        0;
-    margin-inline:       var(--sf-space-m);
+    margin-inline:       var(--sf-divider-gap);
     align-self:          stretch;
   }
 

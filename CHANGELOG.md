@@ -8,6 +8,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **`optional/tokens.sizes-extended.css`** — new optional module (108 tokens)
+  for finer control over the spacing and typography scales:
+  - *Spacing bridge variables* (`--sf-space-{A}-to-{B}`, 36 tokens) — full
+    descending matrix across the 9 fluid spacing steps. Each token is a
+    `clamp()` spanning from the larger step's max value to the smaller step's
+    min, giving more aggressive viewport compression than any single fixed step.
+  - *Text bridge variables* (`--sf-text-{A}-to-{B}`, 36 tokens) — same concept
+    for the 9 body text size steps.
+  - *Per-text-size sub-properties* (`--sf-text-{size}-{line-height|font-weight|
+    letter-spacing|max-width}`, 36 tokens) — individual override knobs per text
+    size step; defaults encode typographic convention (relaxed leading for small
+    text, tight leading for display-sized text).
+  Include via `@import "optional/tokens.sizes-extended.css"` after core tokens.
+  Included in all bundles at `optimal` tier and above.
+
+- **Color anchors**: `--sf-color-white` (`oklch(100% 0 0)`) and
+  `--sf-color-black` (`oklch(0% 0 0)`) — explicit named tokens so authors
+  never need to escape the token system for the most common color literals.
+
+- **Border shorthands**: `--sf-border`, `--sf-border-subtle`,
+  `--sf-border-strong` — convenience tokens composing the existing
+  `--sf-border-width-*` / `--sf-border-style` / `--sf-color-border-*` parts.
+  Usage: `border: var(--sf-border)`.
+
+- **`--sf-divider-gap`** — spacing token controlling the block (and inline for
+  vertical dividers) margin around `.sf-divider`. Defaults to `--sf-space-m`;
+  was previously a hardcoded `--sf-space-m` in `layout.css`. Now consumed
+  directly by the `.sf-divider` and `.sf-divider--vertical` rules.
+
+- **Object fit / position tokens**: `--sf-object-fit` (default `cover`) and
+  `--sf-object-position` (default `50% 50%`), wired into the `img, picture,
+  video, canvas` rule in `core/base.css`. Override globally in `:root` or
+  per-element via inline `style` attribute.
+
+- **CSS multi-column tokens**: `--sf-col-width-{s,m,l}` (ch-based column
+  widths: 16ch / 24ch / 32ch) and `--sf-col-rule-width-{s,m,l}` (aliasing
+  the border-width scale) for the CSS `columns` layout property.
+
 - **New tokens**: `--sf-header-height-mobile`, `--sf-header-height-desktop`,
   `--sf-sticky-offset-mobile`, `--sf-sticky-offset-desktop` — paired
   mobile/desktop source tokens for the header height and sticky-offset
