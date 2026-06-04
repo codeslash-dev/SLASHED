@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**855 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**869 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-488 tokens.
+502 tokens.
 
 | Token | Default |
 |---|---|
@@ -50,10 +50,13 @@ rebrand workflow.
 | `--sf-body-line-height` | `var(--sf-leading-normal)` |
 | `--sf-body-strong-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-body-text-wrap` | `pretty` |
+| `--sf-border` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)` |
+| `--sf-border-strong` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)` |
 | `--sf-border-style` | `solid` |
 | `--sf-border-style-dotted` | `dotted` |
 | `--sf-border-style-soft` | `dashed` |
 | `--sf-border-style-strong` | `solid` |
+| `--sf-border-subtle` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` |
 | `--sf-border-width-1` | `1px` |
 | `--sf-border-width-2` | `2px` |
 | `--sf-border-width-3` | `3px` |
@@ -61,6 +64,12 @@ rebrand workflow.
 | `--sf-border-width-hairline` | `0.5px` |
 | `--sf-caret-color` | `var(--sf-color-action)` |
 | `--sf-code-font-size` | `0.875em` |
+| `--sf-col-rule-width-l` | `var(--sf-border-width-3)` |
+| `--sf-col-rule-width-m` | `var(--sf-border-width-2)` |
+| `--sf-col-rule-width-s` | `var(--sf-border-width-1)` |
+| `--sf-col-width-l` | `32ch` |
+| `--sf-col-width-m` | `24ch` |
+| `--sf-col-width-s` | `16ch` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action-active` | `var(--sf-color-action-xdark)` |
 | `--sf-color-action-darker` | `color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))` |
@@ -93,6 +102,7 @@ rebrand workflow.
 | `--sf-color-bg--focus` | `oklch(from var(--sf-color-action) l c h / 0.06)` |
 | `--sf-color-bg--hover` | `oklch(from var(--sf-color-neutral) l c h / 0.08)` |
 | `--sf-color-bg--selected` | `oklch(from var(--sf-color-action) l c h / 0.1)` |
+| `--sf-color-black` | `oklch(0% 0 0)` |
 | `--sf-color-border` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )` |
 | `--sf-color-border--disabled` | `oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)` |
 | `--sf-color-border--focus` | `var(--sf-color-action)` |
@@ -260,6 +270,7 @@ rebrand workflow.
 | `--sf-color-warning-superlight` | `color-mix(in oklab, var(--sf-color-warning) 4%, var(--sf-color-surface))` |
 | `--sf-color-warning-xdark` | `color-mix(in oklab, var(--sf-color-warning) 38%, var(--sf-color-text))` |
 | `--sf-color-warning-xlight` | `color-mix(in oklab, var(--sf-color-warning) 20%, var(--sf-color-surface))` |
+| `--sf-color-white` | `oklch(100% 0 0)` |
 | `--sf-component-pad` | `var(--sf-space-m)` |
 | `--sf-container-default` | `75rem` |
 | `--sf-container-full` | `100%` |
@@ -271,6 +282,7 @@ rebrand workflow.
 | `--sf-contrast-threshold` | `0.6` |
 | `--sf-current-font-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-divider-color` | `var(--sf-color-border)` |
+| `--sf-divider-gap` | `var(--sf-space-m)` |
 | `--sf-divider-style` | `solid` |
 | `--sf-divider-width` | `var(--sf-border-width-1)` |
 | `--sf-drop-shadow-l` | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` |
@@ -378,6 +390,8 @@ rebrand workflow.
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
 | `--sf-motion-scale` | `1` |
+| `--sf-object-fit` | `cover` |
+| `--sf-object-position` | `50% 50%` |
 | `--sf-opacity-0` | `0` |
 | `--sf-opacity-10` | `0.1` |
 | `--sf-opacity-100` | `1` |

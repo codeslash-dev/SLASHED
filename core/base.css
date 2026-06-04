@@ -148,6 +148,8 @@
     display:         block;
     max-inline-size: 100%;
     block-size:      auto;
+    object-fit:      var(--sf-object-fit);
+    object-position: var(--sf-object-position);
   }
 
   iframe, embed, object {

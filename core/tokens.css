@@ -75,7 +75,8 @@
      · ratios (--sf-ratio-{square,video,cinema,portrait,golden,4-3,3-2})
      · border widths (--sf-border-width-{hairline,1,2,3,4})
      · border styles (--sf-border-style, --strong, --soft, --dotted)
-     · divider (--sf-divider-{width,style,color})
+     · border shorthands (--sf-border, --sf-border-subtle, --sf-border-strong)
+     · divider (--sf-divider-{width,style,color,gap})
      · radius (--sf-radius-{none,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
      · duration (--sf-duration-{none,instant,fast,normal,slow,slower})
      · easing (--sf-ease-{linear,out,in,in-out,spring,elastic,bounce,overshoot})
@@ -94,7 +95,10 @@
      · typography aliases (--sf-body-*, --sf-code-font-size, --sf-heading-*, --sf-h{1..6}-*)
      · current-font-weight (--sf-current-font-weight)
      · color scheme (--sf-color-scheme)
+     · color anchors (--sf-color-white, --sf-color-black)
      · stroke (--sf-stroke-{thin,regular,bold,heavy})
+     · object fit (--sf-object-fit, --sf-object-position)
+     · multi-column (--sf-col-width-{s,m,l}, --sf-col-rule-width-{s,m,l})
      · layout tokens — all of tokens.layout.css (per-primitive gaps, sidebar, grid, bento, etc.)
      · macro tokens — all of tokens.macros.css (flow-space, line-clamp, aspect, scroll-shadow-size)
      · palette tokens — all of optional/tokens.palette.css
@@ -376,6 +380,8 @@
     --sf-color-mark-bg:        oklch(from var(--sf-color-warning) l c h / 0.25);
     --sf-color-mark-text:      inherit;
     --sf-color-dim:            oklch(0 0 0 / 0.5);
+    --sf-color-white:          oklch(100% 0 0);
+    --sf-color-black:          oklch(0% 0 0);
 
     /* ----------------------------------------------------------
        Scrollbar
@@ -809,12 +815,23 @@
     --sf-border-style-dotted: dotted;
 
     /* ----------------------------------------------------------
+       Border shorthands — convenience tokens composing width, style,
+       and color into a single value for the common cases.
+       Usage: border: var(--sf-border);
+              border-bottom: var(--sf-border-subtle);
+       ---------------------------------------------------------- */
+    --sf-border:        var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border);
+    --sf-border-subtle: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle);
+    --sf-border-strong: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong);
+
+    /* ----------------------------------------------------------
        Divider — global separator system. Drives `hr` (base) and
        the `.sf-divider` layout primitive.
        ---------------------------------------------------------- */
     --sf-divider-width: var(--sf-border-width-1);
     --sf-divider-style: solid;
     --sf-divider-color: var(--sf-color-border);
+    --sf-divider-gap:   var(--sf-space-m);
 
     /* ----------------------------------------------------------
        Border radius
@@ -1029,6 +1046,26 @@
     --sf-stroke-regular: 1.5px;
     --sf-stroke-bold:    2px;
     --sf-stroke-heavy:   3px;
+
+    /* ----------------------------------------------------------
+       Object fit / position — global defaults for replaced elements.
+       Applied in core/base.css on img and video. Override per element
+       via inline style="--sf-object-position: top" or in BEM CSS.
+       ---------------------------------------------------------- */
+    --sf-object-fit:      cover;
+    --sf-object-position: 50% 50%;
+
+    /* ----------------------------------------------------------
+       CSS multi-column — tokens for the `columns` layout property.
+       column-width is ch-based (character units) so columns maintain
+       a comfortable reading measure regardless of font-size.
+       ---------------------------------------------------------- */
+    --sf-col-width-s:       16ch;
+    --sf-col-width-m:       24ch;
+    --sf-col-width-l:       32ch;
+    --sf-col-rule-width-s:  var(--sf-border-width-1);
+    --sf-col-rule-width-m:  var(--sf-border-width-2);
+    --sf-col-rule-width-l:  var(--sf-border-width-3);
 
   }
 
