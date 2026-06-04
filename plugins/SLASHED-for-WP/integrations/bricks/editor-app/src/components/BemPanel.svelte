@@ -56,7 +56,7 @@
       const cls = globalClasses.find(c => c && c.id === id);
       if (cls && !cls.name.includes('--')) return id;
     }
-    return ids[0] ?? null;
+    return ids[0] ?? '';
   }
 
   let mode = $state('add');

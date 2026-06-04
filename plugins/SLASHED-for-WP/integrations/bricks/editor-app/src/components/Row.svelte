@@ -226,7 +226,7 @@
         type="button"
         class="rebemer-row__op-btn"
         class:rebemer-row__op-btn--on={row.op === 'replace'}
-        onclick={() => { row.op = 'replace'; row.renameFamilyId = null; }}
+        onclick={() => { row.op = 'replace'; row.renameFamilyId = ''; }}
       >× Replace</button>
     </div>
     {#if row.op === 'rename'}
@@ -242,8 +242,10 @@
           </select>
         </div>
       {:else}
+        {@const fam0 = currentFamilies[0]}
+        {@const familySize = 1 + fam0.modCount}
         <p class="rebemer-row__info" role="note">
-          Will rename <code>{currentFamilies[0].name}</code>{currentFamilies[0].modCount > 0 ? ` (+ ${currentFamilies[0].modCount} modifier${currentFamilies[0].modCount > 1 ? 's' : ''})` : ''}. Unrelated classes kept.
+          Will rename <code>{fam0.name}</code>{fam0.modCount > 0 ? ` (+ ${fam0.modCount} modifier${fam0.modCount > 1 ? 's' : ''})` : ''}{(row.currentClassIds?.length ?? 0) > familySize ? ' Other classes kept.' : ''}
         </p>
       {/if}
     {:else if row.op === 'replace'}
@@ -251,7 +253,7 @@
         <div class="rebemer-row__family">
           <span class="rebemer-row__family-label">Family</span>
           <select bind:value={row.renameFamilyId} class="rebemer-row__family-select">
-            <option value={null}>— All classes —</option>
+            <option value="">— All classes —</option>
             {#each currentFamilies as fam}
               <option value={fam.id}>{fam.name}{fam.modCount > 0 ? ` (+ ${fam.modCount} modifier${fam.modCount > 1 ? 's' : ''})` : ''}</option>
             {/each}
@@ -260,6 +262,8 @@
       {/if}
       {#if row.renameFamilyId}
         <p class="rebemer-row__info" role="note">Will remove the selected family and replace with the new class (empty settings). Other classes kept.</p>
+      {:else if currentFamilies.length === 0}
+        <p class="rebemer-row__info" role="note">No existing classes — a new class will be created.</p>
       {:else}
         <p class="rebemer-row__warn" role="note">All existing classes will be removed from this element.</p>
       {/if}
