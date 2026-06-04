@@ -19,6 +19,7 @@ what has actually shipped in code so far. Update on every reBEMer PR.
 | Badge injection in structure panel (§6.1) | ✅ shipped | `editor-app/src/main.js` + `BemBadge.svelte` |
 | Panel mount + close (§6.2) | ✅ shipped | `editor-app/src/main.js` + `BemPanel.svelte` |
 | Add / Rename / Replace / Add Modifier modes (§6.3) | ✅ shipped | `editor-app/src/lib/apply.js` |
+| All-in-one (Mixed) mode — per-row op toggle + family picker (§6.3) | ✅ shipped | `apply.js` (`'mixed'` mode; per-op `effectiveMode` dispatch) + `BemPanel.svelte` + `Row.svelte` |
 | Migrate ID styles mode (§6.3, §9) | ✅ shipped | `apply.js` + `lib/migrate-keys.js` allowlist |
 | Migrate-mode preview chips (§6.3) | ✅ shipped | `Row.svelte` chip strip |
 | Element-aware row pre-fill (§9.3) | ✅ shipped | `lib/element-types.js` consumed by `BemPanel` |
@@ -196,6 +197,7 @@ single transaction over the still-included operations.
 | **Replace** | Old class detached from subtree. | Old class kept globally as-is. New class created (empty settings). |
 | **Add Modifier** | Old classes preserved. | New `--modifier` global class created (empty settings). |
 | **Migrate ID styles** | New class attached. ID-level style settings on the element are *moved* into the new class. Other classes preserved. | New class created with the migrated settings. |
+| **All-in-one** | Per-row: Add keeps old classes; Rename retargets a selected class family (unrelated classes kept, modifiers of that family renamed too); Replace strips all old classes or, when a family is selected, removes only that family and its modifiers (unrelated classes kept). | New global class(es) created per row's effective operation. |
 
 reBEMer **never** deletes a class globally. To remove a class entirely
 from the registry, use Bricks' Global Class Manager.
