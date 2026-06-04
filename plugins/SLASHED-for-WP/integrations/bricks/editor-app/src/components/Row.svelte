@@ -204,17 +204,19 @@
   </div>
 
   {#if isMixed && row.include}
-    <div class="rebemer-row__op-toggle">
+    <div class="rebemer-row__op-toggle" role="group" aria-label="Operation">
       <button
         type="button"
         class="rebemer-row__op-btn"
         class:rebemer-row__op-btn--on={row.op === 'add'}
+        aria-pressed={row.op === 'add'}
         onclick={() => { row.op = 'add'; }}
       >+ Add</button>
       <button
         type="button"
         class="rebemer-row__op-btn"
         class:rebemer-row__op-btn--on={row.op === 'rename'}
+        aria-pressed={row.op === 'rename'}
         onclick={() => {
           row.op = 'rename';
           if (!row.renameFamilyId && currentFamilies.length) {
@@ -226,6 +228,7 @@
         type="button"
         class="rebemer-row__op-btn"
         class:rebemer-row__op-btn--on={row.op === 'replace'}
+        aria-pressed={row.op === 'replace'}
         onclick={() => { row.op = 'replace'; row.renameFamilyId = ''; }}
       >× Replace</button>
     </div>

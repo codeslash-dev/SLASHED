@@ -1,13 +1,17 @@
 /**
  * Apply BEM classes to a subtree in one pass.
  *
- * Four modes:
+ * Five modes:
  *   add      — attach new BEM classes (keep any existing classes).
  *   rename   — detach old classes, create new ones seeded with old settings.
  *   replace  — detach old classes, create new ones with empty settings.
  *   migrate  — keep existing classes, lift allowlisted element-settings
  *              keys (padding, color, etc.) up into a new global class
  *              and remove them from the element.
+ *   mixed    — per-row operation; each row independently chooses add,
+ *              rename, or replace via row.op. Rename can target a
+ *              specific class family (row.renameFamilyId); replace can
+ *              remove a targeted family or all existing classes.
  *
  * Modifiers
  * ---------
@@ -163,7 +167,7 @@ export function computeBlockAssignment(rows, rootId) {
  * @param {object} opts
  * @param {string} opts.rootId
  * @param {Row[]} opts.rows
- * @param {'add'|'rename'|'replace'|'migrate'} opts.mode
+ * @param {'add'|'rename'|'replace'|'migrate'|'mixed'} opts.mode
  * @returns {{ok:true, ops:Op[]} | {ok:false, error:string, ops:Op[]}}
  *   On error, `ops` is an empty array so callers (e.g. previews) can
  *   safely treat it as "nothing to display".
@@ -249,7 +253,7 @@ export function buildPlan({ rootId, rows, mode }) {
  * @param {object} opts
  * @param {string} opts.rootId
  * @param {Row[]} opts.rows
- * @param {'add'|'rename'|'replace'|'migrate'} opts.mode
+ * @param {'add'|'rename'|'replace'|'migrate'|'mixed'} opts.mode
  * @param {boolean} opts.syncLabels
  * @returns {{ok:true, count:number} | {ok:false, error:string}}
  */
@@ -303,8 +307,11 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
       if (!el) continue;
 
       const currentIds = readClassIds(el.settings);
-      // In 'mixed' mode each row carries its own operation; fall back to 'add'.
-      const effectiveMode = mode === 'mixed' ? (op.row.op ?? 'add') : mode;
+      // In 'mixed' mode each row carries its own operation; validate and fall back to 'add'.
+      const rowOp = op.row.op ?? 'add';
+      const effectiveMode = mode === 'mixed'
+        ? (['add', 'rename', 'replace'].includes(rowOp) ? rowOp : 'add')
+        : mode;
 
       // Determine seed settings for the new class.
       let seed = {};

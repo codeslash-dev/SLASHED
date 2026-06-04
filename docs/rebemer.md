@@ -197,7 +197,7 @@ single transaction over the still-included operations.
 | **Replace** | Old class detached from subtree. | Old class kept globally as-is. New class created (empty settings). |
 | **Add Modifier** | Old classes preserved. | New `--modifier` global class created (empty settings). |
 | **Migrate ID styles** | New class attached. ID-level style settings on the element are *moved* into the new class. Other classes preserved. | New class created with the migrated settings. |
-| **All-in-one** | Per-row: Add keeps old classes; Rename retargets a selected class family (unrelated classes kept, modifiers of that family renamed too); Replace strips *all* old classes. | New global class(es) created per row's effective operation. |
+| **All-in-one** | Per-row: Add keeps old classes; Rename retargets a selected class family (unrelated classes kept, modifiers of that family renamed too); Replace strips all old classes or, when a family is selected, removes only that family and its modifiers (unrelated classes kept). | New global class(es) created per row's effective operation. |
 
 reBEMer **never** deletes a class globally. To remove a class entirely
 from the registry, use Bricks' Global Class Manager.

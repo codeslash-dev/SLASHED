@@ -38,7 +38,7 @@
     rename:  'Replaces the first existing class with a new name, seeding its settings from the old class.',
     replace: 'Replaces ALL existing classes with a single new BEM class (clean slate, no settings carried over).',
     migrate: 'Lifts inline element styles (padding, color, typography, etc.) into a new global class.',
-    mixed:   'Per-element control — every row defaults to Add. Switch any row to Rename (targets one class family, keeps others) or Replace (strips all existing classes).',
+    mixed:   'Per-element control — every row defaults to Add. Switch any row to Rename (targets one class family, keeps others) or Replace (strips all existing classes, or just a selected family).',
   };
 
   /** Read _cssGlobalClasses as a flat array of string ids (mirrors readClassIds in apply.js). */
