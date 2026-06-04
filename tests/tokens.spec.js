@@ -12,12 +12,7 @@ const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
 
 // ---- Parse the declared token names from the source ----------------------
-const TOKEN_FILES = [
-  'core/tokens.css',
-  'core/tokens.layout.css',
-  'core/tokens.macros.css',
-  'optional/tokens.palette.css',
-];
+const { TOKEN_FILES } = require('../scripts/registry-sources');
 
 // Tokens whose value is the `inherit` keyword resolve to empty at :root
 // (no parent to inherit from) — by design, so they're excluded from coverage.

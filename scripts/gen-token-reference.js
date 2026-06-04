@@ -15,8 +15,9 @@ const FILE_TITLES = {
   'core/tokens.css':               'Core tokens',
   'core/tokens.layout.css':        'Layout tokens',
   'core/tokens.macros.css':        'Macro tokens',
-  'optional/tokens.palette.css':   'Palette tokens',
-  'optional/tokens.components.css':'Component tokens',
+  'optional/tokens.palette.css':        'Palette tokens',
+  'optional/tokens.sizes-extended.css': 'Sizes extended tokens',
+  'optional/tokens.components.css':     'Component tokens',
 };
 
 const SOURCES = TOKEN_FILES.map(f => ({ file: f, title: `${FILE_TITLES[f]} (\`${f}\`)` }));

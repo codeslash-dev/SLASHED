@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**747 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**869 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-488 tokens.
+502 tokens.
 
 | Token | Default |
 |---|---|
@@ -50,10 +50,13 @@ rebrand workflow.
 | `--sf-body-line-height` | `var(--sf-leading-normal)` |
 | `--sf-body-strong-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-body-text-wrap` | `pretty` |
+| `--sf-border` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)` |
+| `--sf-border-strong` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)` |
 | `--sf-border-style` | `solid` |
 | `--sf-border-style-dotted` | `dotted` |
 | `--sf-border-style-soft` | `dashed` |
 | `--sf-border-style-strong` | `solid` |
+| `--sf-border-subtle` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` |
 | `--sf-border-width-1` | `1px` |
 | `--sf-border-width-2` | `2px` |
 | `--sf-border-width-3` | `3px` |
@@ -61,6 +64,12 @@ rebrand workflow.
 | `--sf-border-width-hairline` | `0.5px` |
 | `--sf-caret-color` | `var(--sf-color-action)` |
 | `--sf-code-font-size` | `0.875em` |
+| `--sf-col-rule-width-l` | `var(--sf-border-width-3)` |
+| `--sf-col-rule-width-m` | `var(--sf-border-width-2)` |
+| `--sf-col-rule-width-s` | `var(--sf-border-width-1)` |
+| `--sf-col-width-l` | `32ch` |
+| `--sf-col-width-m` | `24ch` |
+| `--sf-col-width-s` | `16ch` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action-active` | `var(--sf-color-action-xdark)` |
 | `--sf-color-action-darker` | `color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))` |
@@ -93,6 +102,7 @@ rebrand workflow.
 | `--sf-color-bg--focus` | `oklch(from var(--sf-color-action) l c h / 0.06)` |
 | `--sf-color-bg--hover` | `oklch(from var(--sf-color-neutral) l c h / 0.08)` |
 | `--sf-color-bg--selected` | `oklch(from var(--sf-color-action) l c h / 0.1)` |
+| `--sf-color-black` | `oklch(0% 0 0)` |
 | `--sf-color-border` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )` |
 | `--sf-color-border--disabled` | `oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)` |
 | `--sf-color-border--focus` | `var(--sf-color-action)` |
@@ -260,6 +270,7 @@ rebrand workflow.
 | `--sf-color-warning-superlight` | `color-mix(in oklab, var(--sf-color-warning) 4%, var(--sf-color-surface))` |
 | `--sf-color-warning-xdark` | `color-mix(in oklab, var(--sf-color-warning) 38%, var(--sf-color-text))` |
 | `--sf-color-warning-xlight` | `color-mix(in oklab, var(--sf-color-warning) 20%, var(--sf-color-surface))` |
+| `--sf-color-white` | `oklch(100% 0 0)` |
 | `--sf-component-pad` | `var(--sf-space-m)` |
 | `--sf-container-default` | `75rem` |
 | `--sf-container-full` | `100%` |
@@ -271,6 +282,7 @@ rebrand workflow.
 | `--sf-contrast-threshold` | `0.6` |
 | `--sf-current-font-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-divider-color` | `var(--sf-color-border)` |
+| `--sf-divider-gap` | `var(--sf-space-m)` |
 | `--sf-divider-style` | `solid` |
 | `--sf-divider-width` | `var(--sf-border-width-1)` |
 | `--sf-drop-shadow-l` | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` |
@@ -378,6 +390,8 @@ rebrand workflow.
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
 | `--sf-motion-scale` | `1` |
+| `--sf-object-fit` | `cover` |
+| `--sf-object-position` | `50% 50%` |
 | `--sf-opacity-0` | `0` |
 | `--sf-opacity-10` | `0.1` |
 | `--sf-opacity-100` | `1` |
@@ -786,6 +800,121 @@ rebrand workflow.
 | `--sf-color-tertiary-superlight` | `var(--sf-color-tertiary-50)` |
 | `--sf-color-tertiary-xdark` | `var(--sf-color-tertiary-800)` |
 | `--sf-color-tertiary-xlight` | `var(--sf-color-tertiary-200)` |
+
+## Sizes extended tokens (`optional/tokens.sizes-extended.css`)
+
+108 tokens.
+
+| Token | Default |
+|---|---|
+| `--sf-space-2xl-to-2xs` | `calc(clamp(0.51rem, calc(0.0626666666666667 * (100vw - 22.5rem) + 0.51rem), 4.74rem) * var(--sf-space-scale))` |
+| `--sf-space-2xl-to-l` | `calc(clamp(1.25rem, calc(0.0517037037037037 * (100vw - 22.5rem) + 1.25rem), 4.74rem) * var(--sf-space-scale))` |
+| `--sf-space-2xl-to-m` | `calc(clamp(1rem, calc(0.0554074074074074 * (100vw - 22.5rem) + 1rem), 4.74rem) * var(--sf-space-scale))` |
+| `--sf-space-2xl-to-s` | `calc(clamp(0.8rem, calc(0.0583703703703704 * (100vw - 22.5rem) + 0.8rem), 4.74rem) * var(--sf-space-scale))` |
+| `--sf-space-2xl-to-xl` | `calc(clamp(1.56rem, calc(0.0471111111111111 * (100vw - 22.5rem) + 1.56rem), 4.74rem) * var(--sf-space-scale))` |
+| `--sf-space-2xl-to-xs` | `calc(clamp(0.64rem, calc(0.0607407407407407 * (100vw - 22.5rem) + 0.64rem), 4.74rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-2xl` | `calc(clamp(1.95rem, calc(0.0645925925925926 * (100vw - 22.5rem) + 1.95rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-2xs` | `calc(clamp(0.51rem, calc(0.0859259259259259 * (100vw - 22.5rem) + 0.51rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-l` | `calc(clamp(1.25rem, calc(0.074962962962963 * (100vw - 22.5rem) + 1.25rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-m` | `calc(clamp(1rem, calc(0.0786666666666667 * (100vw - 22.5rem) + 1rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-s` | `calc(clamp(0.8rem, calc(0.0816296296296296 * (100vw - 22.5rem) + 0.8rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-xl` | `calc(clamp(1.56rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 1.56rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-3xl-to-xs` | `calc(clamp(0.64rem, calc(0.084 * (100vw - 22.5rem) + 0.64rem), 6.31rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-2xl` | `calc(clamp(1.95rem, calc(0.0958518518518519 * (100vw - 22.5rem) + 1.95rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-2xs` | `calc(clamp(0.51rem, calc(0.117185185185185 * (100vw - 22.5rem) + 0.51rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-3xl` | `calc(clamp(2.44rem, calc(0.0885925925925926 * (100vw - 22.5rem) + 2.44rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-l` | `calc(clamp(1.25rem, calc(0.106222222222222 * (100vw - 22.5rem) + 1.25rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-m` | `calc(clamp(1rem, calc(0.109925925925926 * (100vw - 22.5rem) + 1rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-s` | `calc(clamp(0.8rem, calc(0.112888888888889 * (100vw - 22.5rem) + 0.8rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-xl` | `calc(clamp(1.56rem, calc(0.10162962962963 * (100vw - 22.5rem) + 1.56rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-4xl-to-xs` | `calc(clamp(0.64rem, calc(0.115259259259259 * (100vw - 22.5rem) + 0.64rem), 8.42rem) * var(--sf-space-scale))` |
+| `--sf-space-l-to-2xs` | `calc(clamp(0.51rem, calc(0.032 * (100vw - 22.5rem) + 0.51rem), 2.67rem) * var(--sf-space-scale))` |
+| `--sf-space-l-to-m` | `calc(clamp(1rem, calc(0.0247407407407407 * (100vw - 22.5rem) + 1rem), 2.67rem) * var(--sf-space-scale))` |
+| `--sf-space-l-to-s` | `calc(clamp(0.8rem, calc(0.0277037037037037 * (100vw - 22.5rem) + 0.8rem), 2.67rem) * var(--sf-space-scale))` |
+| `--sf-space-l-to-xs` | `calc(clamp(0.64rem, calc(0.0300740740740741 * (100vw - 22.5rem) + 0.64rem), 2.67rem) * var(--sf-space-scale))` |
+| `--sf-space-m-to-2xs` | `calc(clamp(0.51rem, calc(0.0220740740740741 * (100vw - 22.5rem) + 0.51rem), 2rem) * var(--sf-space-scale))` |
+| `--sf-space-m-to-s` | `calc(clamp(0.8rem, calc(0.0177777777777778 * (100vw - 22.5rem) + 0.8rem), 2rem) * var(--sf-space-scale))` |
+| `--sf-space-m-to-xs` | `calc(clamp(0.64rem, calc(0.0201481481481481 * (100vw - 22.5rem) + 0.64rem), 2rem) * var(--sf-space-scale))` |
+| `--sf-space-s-to-2xs` | `calc(clamp(0.51rem, calc(0.0146666666666667 * (100vw - 22.5rem) + 0.51rem), 1.5rem) * var(--sf-space-scale))` |
+| `--sf-space-s-to-xs` | `calc(clamp(0.64rem, calc(0.0127407407407407 * (100vw - 22.5rem) + 0.64rem), 1.5rem) * var(--sf-space-scale))` |
+| `--sf-space-xl-to-2xs` | `calc(clamp(0.51rem, calc(0.045037037037037 * (100vw - 22.5rem) + 0.51rem), 3.55rem) * var(--sf-space-scale))` |
+| `--sf-space-xl-to-l` | `calc(clamp(1.25rem, calc(0.0340740740740741 * (100vw - 22.5rem) + 1.25rem), 3.55rem) * var(--sf-space-scale))` |
+| `--sf-space-xl-to-m` | `calc(clamp(1rem, calc(0.0377777777777778 * (100vw - 22.5rem) + 1rem), 3.55rem) * var(--sf-space-scale))` |
+| `--sf-space-xl-to-s` | `calc(clamp(0.8rem, calc(0.0407407407407407 * (100vw - 22.5rem) + 0.8rem), 3.55rem) * var(--sf-space-scale))` |
+| `--sf-space-xl-to-xs` | `calc(clamp(0.64rem, calc(0.0431111111111111 * (100vw - 22.5rem) + 0.64rem), 3.55rem) * var(--sf-space-scale))` |
+| `--sf-space-xs-to-2xs` | `calc(clamp(0.51rem, calc(0.00918518518518518 * (100vw - 22.5rem) + 0.51rem), 1.13rem) * var(--sf-space-scale))` |
+| `--sf-text-2xl-font-weight` | `var(--sf-font-weight-heading)` |
+| `--sf-text-2xl-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-2xl-line-height` | `var(--sf-leading-snug)` |
+| `--sf-text-2xl-max-width` | `none` |
+| `--sf-text-2xl-to-2xs` | `clamp(0.51rem, calc(0.0362962962962963 * (100vw - 22.5rem) + 0.51rem), 2.96rem)` |
+| `--sf-text-2xl-to-l` | `clamp(1.25rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 1.25rem), 2.96rem)` |
+| `--sf-text-2xl-to-m` | `clamp(1rem, calc(0.029037037037037 * (100vw - 22.5rem) + 1rem), 2.96rem)` |
+| `--sf-text-2xl-to-s` | `clamp(0.8rem, calc(0.032 * (100vw - 22.5rem) + 0.8rem), 2.96rem)` |
+| `--sf-text-2xl-to-xl` | `clamp(1.56rem, calc(0.0207407407407407 * (100vw - 22.5rem) + 1.56rem), 2.96rem)` |
+| `--sf-text-2xl-to-xs` | `clamp(0.64rem, calc(0.0343703703703704 * (100vw - 22.5rem) + 0.64rem), 2.96rem)` |
+| `--sf-text-2xs-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-2xs-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-2xs-line-height` | `var(--sf-leading-relaxed)` |
+| `--sf-text-2xs-max-width` | `55ch` |
+| `--sf-text-3xl-font-weight` | `var(--sf-font-weight-heading)` |
+| `--sf-text-3xl-letter-spacing` | `var(--sf-tracking-tight)` |
+| `--sf-text-3xl-line-height` | `var(--sf-leading-tight)` |
+| `--sf-text-3xl-max-width` | `none` |
+| `--sf-text-3xl-to-2xl` | `clamp(1.95rem, calc(0.0296296296296296 * (100vw - 22.5rem) + 1.95rem), 3.95rem)` |
+| `--sf-text-3xl-to-2xs` | `clamp(0.51rem, calc(0.050962962962963 * (100vw - 22.5rem) + 0.51rem), 3.95rem)` |
+| `--sf-text-3xl-to-l` | `clamp(1.25rem, calc(0.04 * (100vw - 22.5rem) + 1.25rem), 3.95rem)` |
+| `--sf-text-3xl-to-m` | `clamp(1rem, calc(0.0437037037037037 * (100vw - 22.5rem) + 1rem), 3.95rem)` |
+| `--sf-text-3xl-to-s` | `clamp(0.8rem, calc(0.0466666666666667 * (100vw - 22.5rem) + 0.8rem), 3.95rem)` |
+| `--sf-text-3xl-to-xl` | `clamp(1.56rem, calc(0.0354074074074074 * (100vw - 22.5rem) + 1.56rem), 3.95rem)` |
+| `--sf-text-3xl-to-xs` | `clamp(0.64rem, calc(0.049037037037037 * (100vw - 22.5rem) + 0.64rem), 3.95rem)` |
+| `--sf-text-4xl-font-weight` | `var(--sf-font-weight-heading)` |
+| `--sf-text-4xl-letter-spacing` | `var(--sf-tracking-tight)` |
+| `--sf-text-4xl-line-height` | `var(--sf-leading-tight)` |
+| `--sf-text-4xl-max-width` | `none` |
+| `--sf-text-4xl-to-2xl` | `clamp(1.95rem, calc(0.049037037037037 * (100vw - 22.5rem) + 1.95rem), 5.26rem)` |
+| `--sf-text-4xl-to-2xs` | `clamp(0.51rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 0.51rem), 5.26rem)` |
+| `--sf-text-4xl-to-3xl` | `clamp(2.44rem, calc(0.0417777777777778 * (100vw - 22.5rem) + 2.44rem), 5.26rem)` |
+| `--sf-text-4xl-to-l` | `clamp(1.25rem, calc(0.0594074074074074 * (100vw - 22.5rem) + 1.25rem), 5.26rem)` |
+| `--sf-text-4xl-to-m` | `clamp(1rem, calc(0.0631111111111111 * (100vw - 22.5rem) + 1rem), 5.26rem)` |
+| `--sf-text-4xl-to-s` | `clamp(0.8rem, calc(0.0660740740740741 * (100vw - 22.5rem) + 0.8rem), 5.26rem)` |
+| `--sf-text-4xl-to-xl` | `clamp(1.56rem, calc(0.0548148148148148 * (100vw - 22.5rem) + 1.56rem), 5.26rem)` |
+| `--sf-text-4xl-to-xs` | `clamp(0.64rem, calc(0.0684444444444444 * (100vw - 22.5rem) + 0.64rem), 5.26rem)` |
+| `--sf-text-l-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-l-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-l-line-height` | `var(--sf-leading-normal)` |
+| `--sf-text-l-max-width` | `none` |
+| `--sf-text-l-to-2xs` | `clamp(0.51rem, calc(0.0171851851851852 * (100vw - 22.5rem) + 0.51rem), 1.67rem)` |
+| `--sf-text-l-to-m` | `clamp(1rem, calc(0.00992592592592592 * (100vw - 22.5rem) + 1rem), 1.67rem)` |
+| `--sf-text-l-to-s` | `clamp(0.8rem, calc(0.0128888888888889 * (100vw - 22.5rem) + 0.8rem), 1.67rem)` |
+| `--sf-text-l-to-xs` | `clamp(0.64rem, calc(0.0152592592592593 * (100vw - 22.5rem) + 0.64rem), 1.67rem)` |
+| `--sf-text-m-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-m-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-m-line-height` | `var(--sf-leading-normal)` |
+| `--sf-text-m-max-width` | `65ch` |
+| `--sf-text-m-to-2xs` | `clamp(0.51rem, calc(0.010962962962963 * (100vw - 22.5rem) + 0.51rem), 1.25rem)` |
+| `--sf-text-m-to-s` | `clamp(0.8rem, calc(0.00666666666666667 * (100vw - 22.5rem) + 0.8rem), 1.25rem)` |
+| `--sf-text-m-to-xs` | `clamp(0.64rem, calc(0.00903703703703704 * (100vw - 22.5rem) + 0.64rem), 1.25rem)` |
+| `--sf-text-s-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-s-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-s-line-height` | `var(--sf-leading-relaxed)` |
+| `--sf-text-s-max-width` | `65ch` |
+| `--sf-text-s-to-2xs` | `clamp(0.51rem, calc(0.00637037037037037 * (100vw - 22.5rem) + 0.51rem), 0.94rem)` |
+| `--sf-text-s-to-xs` | `clamp(0.64rem, calc(0.00444444444444444 * (100vw - 22.5rem) + 0.64rem), 0.94rem)` |
+| `--sf-text-xl-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-xl-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-xl-line-height` | `var(--sf-leading-snug)` |
+| `--sf-text-xl-max-width` | `none` |
+| `--sf-text-xl-to-2xs` | `clamp(0.51rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 0.51rem), 2.22rem)` |
+| `--sf-text-xl-to-l` | `clamp(1.25rem, calc(0.0143703703703704 * (100vw - 22.5rem) + 1.25rem), 2.22rem)` |
+| `--sf-text-xl-to-m` | `clamp(1rem, calc(0.0180740740740741 * (100vw - 22.5rem) + 1rem), 2.22rem)` |
+| `--sf-text-xl-to-s` | `clamp(0.8rem, calc(0.021037037037037 * (100vw - 22.5rem) + 0.8rem), 2.22rem)` |
+| `--sf-text-xl-to-xs` | `clamp(0.64rem, calc(0.0234074074074074 * (100vw - 22.5rem) + 0.64rem), 2.22rem)` |
+| `--sf-text-xs-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-xs-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-xs-line-height` | `var(--sf-leading-relaxed)` |
+| `--sf-text-xs-max-width` | `60ch` |
+| `--sf-text-xs-to-2xs` | `clamp(0.51rem, calc(0.00281481481481481 * (100vw - 22.5rem) + 0.51rem), 0.7rem)` |
 
 ## Component tokens (`optional/tokens.components.css`)
 

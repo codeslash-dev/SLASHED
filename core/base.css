@@ -150,6 +150,12 @@
     block-size:      auto;
   }
 
+  /* object-fit only applies to replaced elements with intrinsic dimensions */
+  img, video {
+    object-fit:      var(--sf-object-fit);
+    object-position: var(--sf-object-position);
+  }
+
   iframe, embed, object {
     display:         block;
     max-inline-size: 100%;
