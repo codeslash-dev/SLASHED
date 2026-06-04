@@ -476,6 +476,11 @@ class Slashed_Bricks_Inventory {
 			'breakout'    => 'Layout',
 			'divider'     => 'Layout',
 			'field'       => 'Layout',
+			'alternate'   => 'Layout',
+			'equal'       => 'Layout',
+			'col'         => 'Layout',
+			// Sizing (media).
+			'object'      => 'Sizing',
 			// Borders.
 			'border'      => 'Borders',
 			'stroke'      => 'Borders',
@@ -504,6 +509,7 @@ class Slashed_Bricks_Inventory {
 			// States.
 			'is'          => 'States',
 			'current'     => 'States',
+			'state'       => 'States',
 			// Focus.
 			'focus'       => 'Focus',
 			'caret'       => 'Focus',

@@ -105,7 +105,7 @@ the `slashed.tokens` layer.
 | Bundle | Contents |
 | --- | --- |
 | `slashed.essential.css` | all `core/` (`layers` + `tokens` + `tokens.layout` + `tokens.macros` + `reset` + `base` + `themes` + `layout` + `macros` + `states` + `motion` + `accessibility` + `print`) |
-| `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
+| `slashed.optimal.css` | essential + `tokens.palette` + `tokens.sizes-extended` + `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` |
@@ -212,7 +212,7 @@ SLASHED ships a companion WordPress plugin (`plugins/SLASHED-for-WP/`) with two 
 Activate `integrations/bricks/slashed-bricks.php` (requires Bricks 1.9.2+, WordPress 6.0+, PHP 7.4+).
 
 - **CSS loading** — enqueues the SLASHED bundle on the frontend and inside the Bricks editor iframe
-- **Variable pickers** — registers all `--sf-*` tokens (~600 in `optimal`, ~700 in `full`) in the Bricks Global Variable Manager, organised by category
+- **Variable pickers** — registers all `--sf-*` tokens (~560 in `essential`, ~800 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
 - **Class autocomplete** — registers every `.sf-*` layout class and `.is-*` state class in the Bricks class input as locked entries
 - **Color palette** — syncs `--sf-color-*` tokens with the Bricks color palette (auto-disabled on Bricks 2.2+ where the Color Manager would override `light-dark()` tokens; use the Variable Manager there instead)
 - **Variable-picker swatches** — paints a colour square next to each `--sf-color-*` entry in the variable-picker dropdown, powered by server-resolved hex values so dark-mode stays framework-driven

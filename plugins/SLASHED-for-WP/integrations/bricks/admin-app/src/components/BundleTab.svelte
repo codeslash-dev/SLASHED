@@ -48,12 +48,16 @@
   <div class="setting-row">
     <label for="css-bundle">CSS Bundle</label>
     <select id="css-bundle" bind:value={bundle}>
-      <option value="essential">Essential — core layer only: tokens, reset, layout, states, motion</option>
-      <option value="optimal">Optimal — + color palette, forms, legacy support (recommended)</option>
-      <option value="full">Full — + components + utilities</option>
+      <option value="essential">Essential — core only: tokens, reset, base, themes, layout, macros, states, motion, accessibility, print</option>
+      <option value="optimal">Optimal — Essential + color palette, extended sizes, forms, legacy support (recommended)</option>
+      <option value="full">Full — Optimal + component tokens & styles + utilities</option>
     </select>
     <p class="description">
       Choose which SLASHED CSS bundle to load on the frontend and in builder canvases.
+      <strong>Essential</strong> is the full core layer (everything in <code>core/</code>).
+      <strong>Optimal</strong> adds the optional color palette, extended size/spacing scales,
+      form styling, and legacy fallbacks. <strong>Full</strong> additionally bundles the
+      component tokens &amp; styles and the utility classes.
     </p>
   </div>
 

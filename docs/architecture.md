@@ -49,6 +49,7 @@ core/
   print.css                    slashed.print
 optional/
   tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors; ships in optimal+ bundles)
+  tokens.sizes-extended.css slashed.tokens  (space/text bridge tokens + per-size sub-props; ships in optimal+ bundles)
   tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
@@ -147,7 +148,7 @@ them would create churn:
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional tints/shades), `tokens.components.css` (optional component-level tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional tints/shades), `tokens.sizes-extended.css` (optional space/text bridges + per-size sub-properties), `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -384,7 +385,7 @@ Five tiered bundles are declared in `bundle.config.json` and built by
 | Bundle | Adds to essential |
 |---|---|
 | `slashed.essential.css` | — (all `core/`) |
-| `slashed.optimal.css` | `tokens.palette` + `forms` + `legacy` |
+| `slashed.optimal.css` | `tokens.palette` + `tokens.sizes-extended` + `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
