@@ -35,11 +35,16 @@
 
   const MODE_HINTS = {
     add:     'Attaches a new BEM class to each element without removing any existing classes.',
-    rename:  'Replaces the first existing class with a new name, seeding its settings from the old class.',
-    replace: 'Replaces ALL existing classes with a single new BEM class (clean slate, no settings carried over).',
+    rename:  'Renames an existing class family to the new name (its settings carry over). When an element has several classes, pick which family to rename per row; other classes are kept unless "Remove all existing classes" is on.',
+    replace: 'Swaps classes for a new BEM class with empty settings. Pick a family to replace just that one (keeping the rest), or leave "— All classes —" / enable "Remove all existing classes" to clear the element.',
     migrate: 'Lifts inline element styles (padding, color, typography, etc.) into a new global class.',
-    mixed:   'Per-element control — every row defaults to Add. Switch any row to Rename (targets one class family, keeps others) or Replace (strips all existing classes, or just a selected family).',
+    mixed:   'Per-element control — every row defaults to Add. Switch any row to Rename (targets one class family, keeps others) or Replace (a selected family, or all classes). "Remove all existing classes" clears every renamed/replaced row.',
   };
+
+  /** Whether the "Remove all existing classes" toggle applies to this mode. */
+  function modeAllowsRemoveExisting(m) {
+    return m === 'rename' || m === 'replace' || m === 'mixed';
+  }
 
   /** Read _cssGlobalClasses as a flat array of string ids (mirrors readClassIds in apply.js). */
   function readCurrentClassIds(settings) {
@@ -49,18 +54,15 @@
     return arr.filter(id => typeof id === 'string' && id.length > 0);
   }
 
-  /** Find the first non-modifier class in the element's class list as the default rename target. */
-  function findFirstFamilyId(settings, globalClasses) {
-    const ids = readCurrentClassIds(settings);
-    for (const id of ids) {
-      const cls = globalClasses.find(c => c && c.id === id);
-      if (cls && !cls.name.includes('--')) return id;
-    }
-    return ids[0] ?? '';
-  }
-
   let mode = $state('add');
   let syncLabels = $state(true);
+  /**
+   * "Remove all existing classes" toggle (design doc §6.3). Available in
+   * rename/replace/mixed; threaded to applyToSubtree so each rename/replace
+   * row leaves its element with only the class(es) that op creates. Add and
+   * migrate ignore it.
+   */
+  let removeExisting = $state(false);
   let rows = $state([]);
   /** Snapshot of bricks_global_classes captured on panel open. */
   let globalClassesAtOpen = $state([]);
@@ -161,7 +163,9 @@
         currentClassCount: currentClassIds.length,
         currentClassIds,
         op: 'add',
-        renameFamilyId: findFirstFamilyId(el.settings, globalClassesAtOpen),
+        // Empty by default: the Row normalizes this to the first family for
+        // rename ops, while replace keeps '' meaning "— All classes —".
+        renameFamilyId: '',
       };
     });
 
@@ -249,7 +253,7 @@
       }
     }
 
-    const result = applyToSubtree({ rootId, rows, mode, syncLabels });
+    const result = applyToSubtree({ rootId, rows, mode, syncLabels, removeExisting });
     if (!result.ok) {
       toast = { kind: 'error', message: result.error };
     } else {
@@ -292,6 +296,12 @@
       <input type="checkbox" bind:checked={syncLabels} />
       <span>Sync labels</span>
     </label>
+    {#if modeAllowsRemoveExisting(mode)}
+      <label class="rebemer-field rebemer-field--inline" title="Strip every class already on each renamed/replaced element, leaving only the new BEM class">
+        <input type="checkbox" bind:checked={removeExisting} />
+        <span>Remove all existing classes</span>
+      </label>
+    {/if}
   </section>
   <p class="rebemer-panel__mode-hint">{MODE_HINTS[mode]}</p>
 
@@ -323,6 +333,7 @@
         isRoot={row.id === rootId || row.isBlockRoot}
         {rootId}
         globalClasses={globalClassesAtOpen}
+        {removeExisting}
         finalClassNames={previewClassNames.get(row.id) ?? []}
       />
     {/each}

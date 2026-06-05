@@ -13,6 +13,28 @@
  *              specific class family (row.renameFamilyId); replace can
  *              remove a targeted family or all existing classes.
  *
+ * Class-family targeting (rename / replace)
+ * -----------------------------------------
+ * `row.renameFamilyId` selects WHICH existing class family the op acts on,
+ * and is honored in the dedicated `rename` and `replace` modes as well as
+ * per-row in `mixed` mode:
+ *   - rename  — the selected family's base is renamed to the new class
+ *               (its settings seed the new class) and its modifier
+ *               siblings are renamed too; unrelated classes are kept.
+ *               Empty id falls back to the element's first class.
+ *   - replace — the selected family (base + modifiers) is detached and
+ *               the new class attached; unrelated classes are kept. Empty
+ *               id ('') means "all classes" — every existing class is
+ *               detached.
+ *
+ * Remove all existing classes
+ * ---------------------------
+ * The `removeExisting` apply flag (off by default) is the panel-level
+ * "Remove all existing classes" toggle. When on it forces every
+ * rename/replace op to leave the element with ONLY the class(es) that op
+ * creates (the renamed/new base plus any modifier-input classes). It never
+ * affects `add` or `migrate` ops, which always preserve other classes.
+ *
  * Modifiers
  * ---------
  * Any row in add/rename/replace mode may carry `row.modifiers: string[]`.
@@ -103,9 +125,13 @@ const AUTHORITATIVE_PROVENANCE = new Set(['user', 'label']);
  * @property {string[]} [currentClassIds] - IDs of existing global
  *   classes currently attached to the element. Populated by BemPanel
  *   on open; used in 'mixed' mode for family detection and seeding.
- * @property {string|null} [renameFamilyId] - In 'mixed' mode with
- *   `op: 'rename'`, the ID of the class to use as the rename source
- *   (base of the family being renamed). Falls back to currentIds[0].
+ * @property {string|null} [renameFamilyId] - With `op: 'rename'` (any
+ *   mode), the ID of the class to use as the rename source (base of the
+ *   family being renamed); falls back to currentIds[0]. With
+ *   `op: 'replace'`, the ID of the family to detach (its base + modifiers)
+ *   while keeping unrelated classes; an empty string ('') means "all
+ *   classes" — detach every existing class. Honored in the dedicated
+ *   `rename`/`replace` modes and per-row in `mixed`.
  */
 
 /**
@@ -255,9 +281,12 @@ export function buildPlan({ rootId, rows, mode }) {
  * @param {Row[]} opts.rows
  * @param {'add'|'rename'|'replace'|'migrate'|'mixed'} opts.mode
  * @param {boolean} opts.syncLabels
+ * @param {boolean} [opts.removeExisting] - "Remove all existing classes"
+ *   toggle. When true, every rename/replace op leaves the element with
+ *   only the class(es) it creates. Ignored by add/migrate ops.
  * @returns {{ok:true, count:number} | {ok:false, error:string}}
  */
-export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
+export function applyToSubtree({ rootId, rows, mode, syncLabels, removeExisting = false }) {
   const planResult = buildPlan({ rootId, rows, mode });
   if (!planResult.ok) return { ok: false, error: planResult.error };
 
@@ -313,11 +342,15 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
         ? (['add', 'rename', 'replace'].includes(rowOp) ? rowOp : 'add')
         : mode;
 
+      // "Remove all existing classes" only affects the destructive ops.
+      // add/migrate always keep the element's other classes.
+      const removeAll = removeExisting && (effectiveMode === 'rename' || effectiveMode === 'replace');
+
       // Determine seed settings for the new class.
       let seed = {};
       if (effectiveMode === 'rename' && currentIds.length > 0) {
-        // In mixed mode use the user-selected family base; otherwise use first class.
-        const sourceId = (mode === 'mixed' && op.row.renameFamilyId) || currentIds[0];
+        // Seed from the selected family base (any mode) or the first class.
+        const sourceId = op.row.renameFamilyId || currentIds[0];
         const firstOld = globalClasses.find(c => c && c.id === sourceId);
         if (firstOld && firstOld.settings) {
           seed = JSON.parse(JSON.stringify(firstOld.settings));
@@ -361,11 +394,16 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
           break;
 
         case 'rename': {
-          // In mixed mode use the user-selected family base; otherwise use first class.
-          const sourceId = (mode === 'mixed' && op.row.renameFamilyId) || (currentIds[0] ?? null);
+          // Source family base: the user-selected family (any mode) or the
+          // element's first class. Its settings already seeded the new class.
+          const sourceId = op.row.renameFamilyId || (currentIds[0] ?? null);
           const renamedIds = [newClassId];
           const oldBase = sourceId ? globalClasses.find(c => c && c.id === sourceId) : null;
-          if (oldBase) {
+          // When removeAll is on, drop every other class: the element keeps
+          // only the renamed base (settings carried via seed) plus any
+          // modifier-input classes appended below. Otherwise rename the
+          // family's modifier siblings and keep unrelated classes.
+          if (oldBase && !removeAll) {
             const oldPrefix = oldBase.name + '--';
             // Iterate all ids — skip the source (replaced by newClassId), rename
             // its modifier classes, and keep all unrelated classes as-is.
@@ -387,9 +425,11 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
         }
 
         case 'replace':
-          // In mixed mode, if the user targeted a specific family, strip only
-          // that family's base + modifier classes; keep all unrelated classes.
-          if (mode === 'mixed' && op.row.renameFamilyId) {
+          // Target a specific family (any mode) → strip only that family's
+          // base + modifier classes; keep all unrelated classes. With no
+          // family selected ('') or when removeAll is on, strip every class
+          // and keep only the new one.
+          if (op.row.renameFamilyId && !removeAll) {
             const targetBase = globalClasses.find(c => c && c.id === op.row.renameFamilyId);
             if (targetBase) {
               const prefix = targetBase.name + '--';
@@ -403,7 +443,7 @@ export function applyToSubtree({ rootId, rows, mode, syncLabels }) {
               nextIds = [newClassId]; // target not found — replace all as fallback
             }
           } else {
-            nextIds = [newClassId]; // replace all (default)
+            nextIds = [newClassId]; // replace all (default / removeAll)
           }
           break;
       }

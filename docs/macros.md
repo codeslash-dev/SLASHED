@@ -224,6 +224,59 @@ Just sets `-webkit-tap-highlight-color: transparent`. No tokens.
 
 ---
 
+## `.sf-content-auto`
+
+Skips rendering (layout + paint) for offscreen content until it scrolls
+near the viewport — a large initial-render win on long pages (product
+grids, long articles).
+
+```html
+<section class="sf-content-auto">…repeated long-page section…</section>
+
+<!-- Override the reserved placeholder size -->
+<section class="sf-content-auto" style="--sf-content-intrinsic-size: 800px">…</section>
+```
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-content-intrinsic-size` | `500px` | placeholder block size fed to `contain-intrinsic-size` |
+
+Sets `content-visibility: auto` plus `contain-intrinsic-size: auto
+var(--sf-content-intrinsic-size)`. The `auto` keyword caches each
+section's last-rendered size; the token reserves space before first
+render so the scrollbar and scroll position stay stable. Unsupported
+engines (e.g. Safari < 18) ignore both declarations and render normally
+— pure progressive enhancement.
+
+> Deliberately not paired with `will-change`. `will-change` pre-creates
+> compositing layers and usually *hurts* performance when applied
+> broadly; set it from JS only while an element is actively animating.
+
+---
+
+## `.sf-tabular-nums`
+
+Fixed-width digits so numbers align in vertical columns (price lists,
+totals, invoices, dashboards).
+
+```html
+<table class="sf-tabular-nums">…numeric columns…</table>
+```
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-font-numeric` | `tabular-nums` | figure style (`core/tokens.css`) |
+
+Sets `font-variant-numeric: var(--sf-font-numeric, tabular-nums)`. The
+same token is applied to `<input type="number">` in `optional/forms.css`.
+Universal browser support.
+
+---
+
 ## `.sf-surface--*`
 
 Contextual background + auto-contrast text color. Apply to any element

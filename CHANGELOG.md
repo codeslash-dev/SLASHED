@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Macro `.sf-content-auto`** (`core/macros.css`) + **`--sf-content-intrinsic-size`**
+  token (`core/tokens.macros.css`, default `500px`) — sets
+  `content-visibility: auto` with a `contain-intrinsic-size` placeholder to
+  skip rendering offscreen content on long pages. Progressive enhancement;
+  unsupported engines render normally. Lands in the macros layer (a token-driven
+  recipe), not utilities. (#222)
+
+- **Macro `.sf-tabular-nums`** (`core/macros.css`) — fixed-width digits
+  (`font-variant-numeric: var(--sf-font-numeric)`) for column-aligned numbers.
+  Complements the `--sf-font-numeric` token / number-input styling. (#214)
+
 - **Macro `.sf-scrim`** (`core/macros.css`) + `--sf-scrim-color` /
   `--sf-scrim-direction` / `--sf-scrim-gradient` tokens — gradient darkening
   overlay (via `::before`) for legible text over a background image, with

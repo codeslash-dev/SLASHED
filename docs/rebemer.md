@@ -19,6 +19,8 @@ what has actually shipped in code so far. Update on every reBEMer PR.
 | Badge injection in structure panel (§6.1) | ✅ shipped | `editor-app/src/main.js` + `BemBadge.svelte` |
 | Panel mount + close (§6.2) | ✅ shipped | `editor-app/src/main.js` + `BemPanel.svelte` |
 | Add / Rename / Replace / Add Modifier modes (§6.3) | ✅ shipped | `editor-app/src/lib/apply.js` |
+| Class-family picker in dedicated Rename & Replace (§6.3) | ✅ shipped | `Row.svelte` family `<select>` (driven by `effectiveOp`) + `apply.js` honors `row.renameFamilyId` in all modes |
+| "Remove all existing classes" toggle (§6.3) | ✅ shipped | `BemPanel.svelte` toolbar checkbox → `applyToSubtree({ removeExisting })`; ignored by Add/Migrate |
 | All-in-one (Mixed) mode — per-row op toggle + family picker (§6.3) | ✅ shipped | `apply.js` (`'mixed'` mode; per-op `effectiveMode` dispatch) + `BemPanel.svelte` + `Row.svelte` |
 | Migrate ID styles mode (§6.3, §9) | ✅ shipped | `apply.js` + `lib/migrate-keys.js` allowlist |
 | Migrate-mode preview chips (§6.3) | ✅ shipped | `Row.svelte` chip strip |
@@ -193,14 +195,41 @@ single transaction over the still-included operations.
 | Mode | What happens to old classes on subtree | What happens globally |
 |---|---|---|
 | **Add** | Subtree had none; nothing to remove. | New global class(es) created. |
-| **Rename** | Old class detached from subtree. | Old class kept globally if used elsewhere; new class created and inherits the old class settings. |
-| **Replace** | Old class detached from subtree. | Old class kept globally as-is. New class created (empty settings). |
+| **Rename** | The selected class family is detached (its base + matching modifiers are renamed); unrelated classes are kept. Per row, the user picks which family to rename when an element has several. | Old class kept globally if used elsewhere; new class created and inherits the old class settings. |
+| **Replace** | The selected class family is detached and the new class attached; unrelated classes are kept. With "— All classes —" selected (the default), every class is detached. | Old class kept globally as-is. New class created (empty settings). |
 | **Add Modifier** | Old classes preserved. | New `--modifier` global class created (empty settings). |
 | **Migrate ID styles** | New class attached. ID-level style settings on the element are *moved* into the new class. Other classes preserved. | New class created with the migrated settings. |
 | **All-in-one** | Per-row: Add keeps old classes; Rename retargets a selected class family (unrelated classes kept, modifiers of that family renamed too); Replace strips all old classes or, when a family is selected, removes only that family and its modifiers (unrelated classes kept). | New global class(es) created per row's effective operation. |
 
 reBEMer **never** deletes a class globally. To remove a class entirely
 from the registry, use Bricks' Global Class Manager.
+
+#### Class-family selection (Rename & Replace)
+
+In **Rename**, **Replace**, and **All-in-one** modes, each row shows a
+class-family picker so the user controls *which* existing class the
+operation targets, instead of always acting on the first class:
+
+- **Rename** lists the element's families; the chosen family's base is
+  renamed to the new name (its settings seed the new class) and its
+  modifier siblings (`base--mod`) are renamed too. Unrelated classes
+  stay. When the element has only one family, the picker collapses to
+  an inline note.
+- **Replace** offers the same families plus a leading **— All classes —**
+  option (the default). Pick a family to remove only that family (and
+  its modifiers) while keeping the rest; leave it on "— All classes —"
+  to detach everything before attaching the new class.
+
+#### "Remove all existing classes" toggle
+
+A panel-level toggle is available in **Rename**, **Replace**, and
+**All-in-one** modes (hidden for Add and Migrate). When on, every
+renamed/replaced row leaves its element with **only** the class(es)
+that row creates — the new/renamed base plus any modifier-input classes
+— stripping all other pre-existing classes. For Rename this also drops
+the family's untouched modifier siblings; the new base still inherits
+the source family's settings. The toggle never affects Add or Migrate
+rows (which always preserve other classes).
 
 #### Migrate-mode preview chips
 

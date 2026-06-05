@@ -603,6 +603,14 @@
     "description": "Adds an external-link glyph after the link text. Opt-in per",
     "category": "Macros"
   },
+  "sf-content-auto": {
+    "description": "Skip rendering (layout + paint) for offscreen content until it",
+    "category": "Macros"
+  },
+  "sf-tabular-nums": {
+    "description": "Fixed-width digits so numbers align in vertical columns",
+    "category": "Macros"
+  },
   "sf-link--subtle": {
     "description": "Opt-in link treatments composed from the link tokens. They",
     "category": "Macros"

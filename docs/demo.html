@@ -2465,6 +2465,29 @@
           from layout primitives, which answer "where do my children go?".
         </p>
 
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-content-auto</code> — skip offscreen rendering</h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); max-inline-size: 60ch">
+          Sets <code>content-visibility: auto</code> so the browser skips layout and paint for this
+          section while it is offscreen on a long page. <code>contain-intrinsic-size</code> (token
+          <code>--sf-content-intrinsic-size</code>) reserves a placeholder box so the scrollbar
+          doesn't jump. Unsupported engines render it normally.
+        </p>
+        <section class="sf-content-auto" style="background: var(--sf-color-inset); padding: var(--sf-space-m); border-radius: var(--sf-radius-m); --sf-content-intrinsic-size: 200px">
+          <p>This block is render-deferred until it nears the viewport. On long product or article
+          pages, applying it to repeated sections measurably cuts initial render cost.</p>
+        </section>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-tabular-nums</code> — column-aligned figures</h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s); max-inline-size: 60ch">
+          Fixed-width digits (<code>font-variant-numeric: var(--sf-font-numeric)</code>) so numbers
+          line up in columns — prices, totals, invoices.
+        </p>
+        <div class="sf-tabular-nums" style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); max-inline-size: 12rem; text-align: end; line-height: 1.6">
+          <div>1,110.00</div>
+          <div>98.40</div>
+          <div>7,001.99</div>
+        </div>
+
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-flow</code> — equal vertical rhythm</h3>
         <div class="sf-flow" style="background: var(--sf-color-inset); padding: var(--sf-space-m); border-radius: var(--sf-radius-m); --sf-flow-space: var(--sf-space-s)">
           <p>First child has no top margin (only siblings get the rhythm).</p>

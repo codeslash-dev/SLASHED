@@ -30,6 +30,10 @@
     isRoot,
     rootId = '',
     globalClasses = [],
+    /** Panel-level "Remove all existing classes" toggle. When true, a
+     *  rename/replace row leaves the element with only the class(es) it
+     *  creates. Used here only to make the row notes accurate. */
+    removeExisting = false,
     /**
      * All class names apply.js will create/attach for this row: the
      * base finalClass plus any modifier classes. Empty array means the
@@ -42,17 +46,30 @@
   // Modifier inputs are shown in all modes except migrate.
   const showModifier = $derived(mode !== 'migrate');
   const showMigrate = $derived(mode === 'migrate');
-  const showRename = $derived(mode === 'rename');
   const isMixed = $derived(mode === 'mixed');
   const prefix = $derived(!isRoot && blockName ? `${blockName}__` : '');
 
   /**
-   * Class families present on this element in mixed mode: each entry is a
-   * non-modifier class (base) plus a count of its modifier siblings on the
-   * same element. Orphaned modifiers (no base sibling) surface as lone entries.
+   * The effective operation for this row: in mixed mode it's the per-row
+   * `row.op`; in the dedicated modes it's the panel mode itself (add for
+   * migrate, which never shows the family UI). Drives the family-picker
+   * block so dedicated Rename/Replace get the same per-row class targeting
+   * that mixed mode already has.
+   */
+  const effectiveOp = $derived(
+    isMixed
+      ? (row.op ?? 'add')
+      : (mode === 'rename' ? 'rename' : mode === 'replace' ? 'replace' : 'add')
+  );
+
+  /**
+   * Class families present on this element: each entry is a non-modifier
+   * class (base) plus a count of its modifier siblings on the same element.
+   * Orphaned modifiers (no base sibling) surface as lone entries. Computed
+   * whenever the row can target a family (rename/replace in any mode).
    */
   const currentFamilies = $derived.by(() => {
-    if (!isMixed || !Array.isArray(row.currentClassIds)) return [];
+    if ((effectiveOp !== 'rename' && effectiveOp !== 'replace') || !Array.isArray(row.currentClassIds)) return [];
     const families = [];
     for (const id of row.currentClassIds) {
       const cls = globalClasses.find(c => c?.id === id);
@@ -75,9 +92,15 @@
     return families;
   });
 
-  // Keep renameFamilyId pointing at a valid family when available.
+  /** The family currently targeted by a rename op (for note text). */
+  const selectedFamily = $derived(
+    currentFamilies.find(f => f.id === row.renameFamilyId) ?? currentFamilies[0] ?? null
+  );
+
+  // Keep renameFamilyId pointing at a valid family for rename ops (any mode).
+  // Replace leaves '' (— All classes —) as a valid default, so it isn't forced.
   $effect(() => {
-    if (!isMixed || row.op !== 'rename' || !currentFamilies.length) return;
+    if (effectiveOp !== 'rename' || !currentFamilies.length) return;
     if (!currentFamilies.some(f => f.id === row.renameFamilyId)) {
       row.renameFamilyId = currentFamilies[0].id;
     }
@@ -232,30 +255,41 @@
         onclick={() => { row.op = 'replace'; row.renameFamilyId = ''; }}
       >× Replace</button>
     </div>
-    {#if row.op === 'rename'}
+  {/if}
+
+  {#if (effectiveOp === 'rename' || effectiveOp === 'replace') && row.include}
+    {#if effectiveOp === 'rename'}
       {#if currentFamilies.length === 0}
         <p class="rebemer-row__info" role="note">No existing classes — a new class will be added instead.</p>
-      {:else if currentFamilies.length > 1}
-        <div class="rebemer-row__family">
-          <span class="rebemer-row__family-label">Family</span>
-          <select bind:value={row.renameFamilyId} class="rebemer-row__family-select">
-            {#each currentFamilies as fam}
-              <option value={fam.id}>{fam.name}{fam.modCount > 0 ? ` (+ ${fam.modCount} modifier${fam.modCount > 1 ? 's' : ''})` : ''}</option>
-            {/each}
-          </select>
-        </div>
       {:else}
-        {@const fam0 = currentFamilies[0]}
-        {@const familySize = 1 + fam0.modCount}
-        <p class="rebemer-row__info" role="note">
-          Will rename <code>{fam0.name}</code>{fam0.modCount > 0 ? ` (+ ${fam0.modCount} modifier${fam0.modCount > 1 ? 's' : ''})` : ''}{(row.currentClassIds?.length ?? 0) > familySize ? ' Other classes kept.' : ''}
-        </p>
+        {#if currentFamilies.length > 1}
+          <div class="rebemer-row__family">
+            <span class="rebemer-row__family-label">Rename</span>
+            <select bind:value={row.renameFamilyId} class="rebemer-row__family-select">
+              {#each currentFamilies as fam}
+                <option value={fam.id}>{fam.name}{fam.modCount > 0 ? ` (+ ${fam.modCount} modifier${fam.modCount > 1 ? 's' : ''})` : ''}</option>
+              {/each}
+            </select>
+          </div>
+        {/if}
+        {#if selectedFamily}
+          {@const familySize = 1 + selectedFamily.modCount}
+          {#if removeExisting}
+            <p class="rebemer-row__warn" role="note">
+              Will rename <code>{selectedFamily.name}</code>{selectedFamily.modCount > 0 ? ` (+ ${selectedFamily.modCount} modifier${selectedFamily.modCount > 1 ? 's' : ''})` : ''} and remove all other classes from this element.
+            </p>
+          {:else}
+            <p class="rebemer-row__info" role="note">
+              Will rename <code>{selectedFamily.name}</code>{selectedFamily.modCount > 0 ? ` (+ ${selectedFamily.modCount} modifier${selectedFamily.modCount > 1 ? 's' : ''})` : ''}{(row.currentClassIds?.length ?? 0) > familySize ? ' Other classes kept.' : ''}
+            </p>
+          {/if}
+        {/if}
       {/if}
-    {:else if row.op === 'replace'}
-      {#if currentFamilies.length > 1}
+    {:else}
+      {#if currentFamilies.length > 0}
         <div class="rebemer-row__family">
-          <span class="rebemer-row__family-label">Family</span>
-          <select bind:value={row.renameFamilyId} class="rebemer-row__family-select">
+          <span class="rebemer-row__family-label">Replace</span>
+          <select bind:value={row.renameFamilyId} class="rebemer-row__family-select" disabled={removeExisting}>
             <option value="">— All classes —</option>
             {#each currentFamilies as fam}
               <option value={fam.id}>{fam.name}{fam.modCount > 0 ? ` (+ ${fam.modCount} modifier${fam.modCount > 1 ? 's' : ''})` : ''}</option>
@@ -263,20 +297,16 @@
           </select>
         </div>
       {/if}
-      {#if row.renameFamilyId}
-        <p class="rebemer-row__info" role="note">Will remove the selected family and replace with the new class (empty settings). Other classes kept.</p>
+      {#if removeExisting}
+        <p class="rebemer-row__warn" role="note">All existing classes will be removed from this element.</p>
       {:else if currentFamilies.length === 0}
         <p class="rebemer-row__info" role="note">No existing classes — a new class will be created.</p>
+      {:else if row.renameFamilyId}
+        <p class="rebemer-row__info" role="note">Will remove the selected family and replace with the new class (empty settings). Other classes kept.</p>
       {:else}
         <p class="rebemer-row__warn" role="note">All existing classes will be removed from this element.</p>
       {/if}
     {/if}
-  {/if}
-
-  {#if showRename && row.include && row.currentClassCount === 0}
-    <p class="rebemer-row__warn" role="note">This element has no existing classes. Rename will create a new class instead.</p>
-  {:else if showRename && row.include && row.currentClassCount > 1}
-    <p class="rebemer-row__info" role="note">This element has {row.currentClassCount} classes. Only the first will be renamed; modifiers matching it are renamed too.</p>
   {/if}
 
   {#if existingClassMatch}

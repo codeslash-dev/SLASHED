@@ -471,6 +471,38 @@
     text-decoration: none;
   }
 
+  /* -- Content visibility --------------------------------------
+     Skip rendering (layout + paint) for offscreen content until it
+     scrolls near the viewport — a large initial-render win on long
+     pages (product grids, long articles). contain-intrinsic-size
+     reserves a placeholder box so the scrollbar and scroll position
+     stay stable before a section is first rendered; the `auto`
+     keyword then caches each section's last-rendered size. Override
+     the placeholder per element:
+       style="--sf-content-intrinsic-size: 800px"
+
+     Unsupported engines (e.g. Safari < 18) simply ignore both
+     declarations and render normally — pure progressive enhancement.
+
+     Deliberately NOT paired with `will-change`: that pre-creates
+     compositing layers and usually HURTS performance when applied
+     broadly. `will-change` belongs on JS, set only while an element
+     is actively about to animate.
+     ---------------------------------------------------------- */
+  .sf-content-auto {
+    content-visibility:     auto;
+    contain-intrinsic-size: auto var(--sf-content-intrinsic-size, 500px);
+  }
+
+  /* -- Tabular figures -----------------------------------------
+     Fixed-width digits so numbers align in vertical columns
+     (price lists, totals, invoices, dashboards). Reads the public
+     --sf-font-numeric token. Universal browser support.
+     ---------------------------------------------------------- */
+  .sf-tabular-nums {
+    font-variant-numeric: var(--sf-font-numeric, tabular-nums);
+  }
+
   /* -- Link variants -------------------------------------------
      Opt-in link treatments composed from the link tokens. They
      don't change link COLOR (that stays the auto-contrast
