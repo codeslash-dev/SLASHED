@@ -365,9 +365,9 @@ enter the viewport.
 ```
 
 **How it works:** Uses `animation-timeline: view()` where supported
-(Chrome 115+, Firefox 145+). In browsers without scroll-driven animation
-support (notably Safari), the class falls back to a one-shot time-driven
-animation at `--sf-duration-slow`.
+(Chrome/Edge 115+). In browsers without scroll-driven animation support
+(Firefox, which keeps it behind a flag, and Safari), the class falls back
+to a one-shot time-driven animation at `--sf-duration-slow`.
 
 Tokens:
 
