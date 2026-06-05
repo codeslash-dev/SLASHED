@@ -362,6 +362,10 @@ export function init(enabled, hints, options = {}) {
   // The class lists live in panels without a single stable container across
   // their lifecycle, so observe body and filter with touchesContainers().
   _observer = new MutationObserver((records) => {
+    // If the row anchoring the tooltip was removed (e.g. the class was
+    // deleted while the hint was open), the tooltip would otherwise linger
+    // pointing at nothing — drop it before reconciling.
+    if (_activeBtn && !_activeBtn.isConnected) hide();
     if (touchesContainers(records)) schedule();
   });
   _observer.observe(document.body, { childList: true, subtree: true });
