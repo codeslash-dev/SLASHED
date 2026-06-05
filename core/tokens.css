@@ -69,6 +69,7 @@
      · font sizes (--sf-text-{2xs..4xl}, --sf-text-display-{s,m,l})
      · leading (--sf-leading-{tight,snug,normal,relaxed})
      · tracking (--sf-tracking-{tight,normal,wide,wider,widest})
+     · numeric figures (--sf-font-numeric)
      · icon sizes (--sf-icon-{xs,s,m,l,xl,2xl})
      · UI sizes (--sf-size-{xs,s,m,l,xl})
      · containers (--sf-container-{narrow,prose,default,wide,full})
@@ -719,6 +720,14 @@
     --sf-tracking-wider:    0.05em;
     --sf-tracking-widest:   0.1em;
 
+    /* Numeric figure style — tabular-nums gives every digit a fixed
+       advance width so numbers line up in vertical columns (price
+       lists, totals, invoices, dashboards). Consumed by number inputs
+       in optional/forms.css and available to BEM components, e.g.
+       `.price { font-variant-numeric: var(--sf-font-numeric); }`.
+       Universal browser support. */
+    --sf-font-numeric: tabular-nums;
+
     /* ----------------------------------------------------------
        Icon sizes — em-based by design.
        Icons are sized in em so they scale with the surrounding
@@ -1177,6 +1186,23 @@
     --sf-transition-slow:  all var(--sf-duration-slow)   var(--sf-ease-in-out);
     --sf-transition-enter: all var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-exit:  all var(--sf-duration-fast)   var(--sf-ease-in);
+
+    /* Top-layer transition building block (dialog, [popover]).
+       transition-behavior: allow-discrete keeps the discrete `display`
+       and `overlay` properties in the transition so entry animations can
+       fire and exit animations finish before the element leaves the top
+       layer. Compose it into a component transition alongside the visual
+       properties:
+         transition: opacity   var(--sf-duration-normal) var(--sf-ease-out),
+                     translate var(--sf-duration-normal) var(--sf-ease-out),
+                     var(--sf-transition-overlay);
+       The matching @starting-style rules are element-specific and ship with
+       the dialog/popover components (slashed.components). Progressive
+       enhancement — unsupporting engines simply show/hide instantly.
+       Chrome/Edge/Safari and Firefox (2025+) support allow-discrete. */
+    --sf-transition-overlay:
+      overlay var(--sf-duration-normal) allow-discrete,
+      display var(--sf-duration-normal) allow-discrete;
   }
 
 }

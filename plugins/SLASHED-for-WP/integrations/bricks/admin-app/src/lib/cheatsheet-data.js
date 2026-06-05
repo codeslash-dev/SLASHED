@@ -66,6 +66,7 @@ export const variableGroups = [
       { name: "--sf-current-font-weight", description: "Current context font weight (used by strong elements)." },
       { name: "--sf-leading-{tight,snug,normal,relaxed}", description: "Line-height presets: 1.1, 1.3, 1.5, 1.625." },
       { name: "--sf-tracking-{tight,normal,wide,wider,widest}", description: "Letter-spacing presets from -0.025em to 0.1em." },
+      { name: "--sf-font-numeric", description: "Numeric figure style (tabular-nums) so digits align in columns; applied to number inputs." },
       { name: "--sf-text-{2xs,xs,s,m,l,xl,2xl,3xl,4xl}", description: "Fluid type scale using clamp(). Honours --sf-text-scale." },
       { name: "--sf-text-display-{s,m,l}", description: "Extra-large display/hero sizes. Honour --sf-text-display-scale." },
       { name: "--sf-text-{scale,display-scale}", description: "Global multipliers for the body and display type scales (default 1)." },
@@ -194,7 +195,7 @@ export const variableGroups = [
       { name: "--sf-duration-{none,instant,fast,normal,slow,slower}", description: "Duration scale: 0ms to 600ms (respects --sf-motion-scale)." },
       { name: "--sf-motion-scale", description: "Global animation speed multiplier (set 0 to disable)." },
       { name: "--sf-ease-{linear,in,out,in-out,bounce,elastic,overshoot,spring}", description: "Easing function presets." },
-      { name: "--sf-transition-{all,colors,opacity,shadow,transform,fast,slow,enter,exit}", description: "Pre-composed transition shorthands." },
+      { name: "--sf-transition-{all,colors,opacity,shadow,transform,fast,slow,enter,exit,overlay}", description: "Pre-composed transition shorthands (overlay = top-layer display/overlay with allow-discrete)." },
       { name: "--sf-animation-{fade-in,fade-out,scale-up,scale-down,slide-in-up,slide-in-down,slide-in-left,slide-in-right,float,ping,blink,color-pulse,shimmer,spin}", description: "Named keyframe animation shorthands." },
       { name: "--sf-animation-delay-{1,2,3,4,5}", description: "Stagger delays for sequential animations." },
     ]

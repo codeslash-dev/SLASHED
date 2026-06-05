@@ -8,6 +8,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **`--sf-transition-overlay`** (`core/tokens.css`) — reusable transition
+  building block for top-layer elements (`<dialog>`, `[popover]`). Uses
+  `transition-behavior: allow-discrete` on `overlay` and `display` so entry
+  animations can fire and exit animations finish before the element leaves the
+  top layer. Compose it into a component transition alongside the visual
+  properties. The matching `@starting-style` rules are element-specific and
+  ship with the dialog/popover components. Progressive enhancement — engines
+  without `allow-discrete` show/hide instantly. (#218)
+
+- **`--sf-font-numeric`** (`core/tokens.css`, default `tabular-nums`) — figure
+  style token so digits share a fixed advance width and align in vertical
+  columns (price lists, totals, invoices, dashboards). Applied to
+  `input[type="number"]` in `optional/forms.css` and available to BEM
+  components via `font-variant-numeric: var(--sf-font-numeric)`. (#214)
+
+- **Forms (`optional/forms.css`) — native validation styling.**
+  `:user-invalid` / `:user-valid` recolour the shared field border (via the
+  existing `--sf-field-border-color` token) only after the user has interacted
+  with a field, so a pristine required form never glows red before it is
+  touched. Additive — the JS-driven `.is-valid` / `.is-invalid` classes remain
+  for server-side errors, cross-field validation, and message display. (#215)
+
+- **Forms (`optional/forms.css`) — autofill styling.** `:autofill` /
+  `:-webkit-autofill` repaint the browser's autofill highlight to match
+  `--sf-color-surface` using the inset `box-shadow` workaround, keeping
+  autofilled checkout fields visually consistent. (#216)
+
+- **Forms (`optional/forms.css`) — auto-growing textarea.** `field-sizing:
+  content` lets `<textarea>` grow with its content; `min-block-size` remains
+  the floor and `resize: vertical` the fallback, so engines without
+  `field-sizing` behave exactly as before. (#217)
+
+- **Docs (`optional/overrides-example.css`) — floating-label pattern.** Added a
+  commented, copy-and-customise `:placeholder-shown` floating-label example
+  with required-markup and accessibility notes. Kept as an opt-in pattern
+  rather than baked into the classless forms layer. (#221)
+
 - **`optional/tokens.sizes-extended.css`** — new optional module (108 tokens)
   for finer control over the spacing and typography scales:
   - *Spacing bridge variables* (`--sf-space-{A}-to-{B}`, 36 tokens) — full

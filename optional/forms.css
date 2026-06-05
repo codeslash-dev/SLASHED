@@ -25,6 +25,7 @@
      --sf-field-border-color, --sf-opacity-disabled,
      --sf-space-xs, --sf-space-s, --sf-space-m,
      --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
+     --sf-font-numeric,
      --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
      --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset,
      --sf-field-required-marker
@@ -123,11 +124,73 @@
 
 
   /* ----------------------------------------------------------
+     Autofill — repaint the browser's autofill highlight to match
+     the framework surface. Browsers refuse to let CSS override the
+     autofill background-color directly; the inset box-shadow trick
+     paints over it (the only CSS-only workaround). A faint tint may
+     still bleed through on some browser/OS combinations — that is a
+     browser limitation, not a framework one. Both the standard
+     `:autofill` and the WebKit/Blink `:-webkit-autofill` selectors
+     are listed so the rule applies across engines.
+     ---------------------------------------------------------- */
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  input:-webkit-autofill,
+  input:autofill {
+    box-shadow: inset 0 0 0 1000px var(--sf-color-surface);
+    -webkit-text-fill-color: var(--sf-color-text);
+    caret-color: var(--sf-color-text);
+    border-color: var(--sf-field-border-color, var(--sf-color-border));
+  }
+
+
+  /* ----------------------------------------------------------
+     Native validation states — :user-invalid / :user-valid fire
+     only AFTER the user has interacted with a field (typed + blurred),
+     so a pristine required form never glows red before it is touched.
+     These set the same --sf-field-border-color token consumed by the
+     shared border rule above, so they slot in without duplication.
+
+     ADDITIVE — the JS-driven .is-valid / .is-invalid classes
+     (core/states.css) remain for server-side errors, cross-field
+     validation, and flows that need to control timing or show
+     messages (which these pseudo-classes cannot do on their own).
+     Universal browser support (Chrome, Firefox, Safari).
+     ---------------------------------------------------------- */
+  input:user-invalid,
+  select:user-invalid,
+  textarea:user-invalid {
+    --sf-field-border-color: var(--sf-color-error);
+  }
+
+  input:user-valid,
+  select:user-valid,
+  textarea:user-valid {
+    --sf-field-border-color: var(--sf-color-success);
+  }
+
+
+  /* ----------------------------------------------------------
+     Numeric inputs — tabular figures so digits share a fixed
+     advance width and align in vertical columns (prices, quantities,
+     totals). Reads the public --sf-font-numeric token so consumers
+     can override it. Universal browser support.
+     ---------------------------------------------------------- */
+  input[type="number"] {
+    font-variant-numeric: var(--sf-font-numeric, tabular-nums);
+  }
+
+
+  /* ----------------------------------------------------------
      Textarea specifics
      ---------------------------------------------------------- */
   textarea {
     min-block-size: 6rem;
     resize:         vertical; /* prevent horizontal resize that overflows 100% width container */
+    /* Auto-grow with content where supported. min-block-size acts as the
+       floor and resize:vertical remains the manual fallback, so on engines
+       without field-sizing the textarea behaves exactly as before — pure
+       progressive enhancement (Chrome/Edge ship it; Firefox/Safari pending). */
+    field-sizing:   content;
   }
 
 

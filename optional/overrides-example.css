@@ -17,6 +17,7 @@
      3. Class-level overrides
      4. Per-primitive instance overrides (inline tokens)
      5. Third-party integration overrides
+     6. Opt-in patterns (floating label)
 
    See docs/theming.md for token customisation (different concern).
    ============================================================ */
@@ -126,6 +127,61 @@
   /* .woocommerce button.button {
     background-color: var(--sf-color-action);
     color: var(--sf-color-text--on-action);
+  } */
+
+  /* ===========================================================
+     6. OPT-IN PATTERNS — FLOATING LABEL
+     ===========================================================
+     A pure-CSS floating label (the label sits inside the field and
+     "floats" up once the user types) using :placeholder-shown. This
+     is intentionally NOT baked into optional/forms.css, which is
+     classless and minimal — the pattern needs specific markup and
+     careful accessibility handling, which makes it component territory.
+
+     REQUIRED MARKUP — the <input> must come BEFORE the <label> so the
+     adjacent-sibling (+) selector can reach the label. Note this is the
+     reverse of the usual accessible source order, so the id/for pairing
+     below is mandatory (do NOT rely on wrapping or DOM order alone):
+
+       <div class="sf-field-float">
+         <input id="name" type="text" placeholder=" " required>
+         <label for="name">Full name</label>
+       </div>
+
+     The placeholder MUST be a single space (placeholder=" ") so that
+     :placeholder-shown is true only while the field is empty — that is
+     what drives the float.
+
+     ACCESSIBILITY NOTES:
+       · Keep the explicit id/for pairing — screen readers announce the
+         label via that association, independent of visual position.
+       · The label stays visible at all times (it floats, never hidden),
+         so the field's purpose is never lost once filled — important for
+         users with cognitive disabilities.
+       · Floating labels can still confuse some AT/users; prefer a plain
+         visible <label> above the field for critical or complex forms.
+       · The placeholder=" " is decorative only; never put meaningful
+         text in the placeholder (it disappears on input and fails
+         contrast/persistence guidelines).
+  */
+
+  /* .sf-field-float { position: relative; }
+  .sf-field-float input { padding-block-start: 1.5rem; }
+  .sf-field-float label {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--sf-space-s);
+    translate: 0 -50%;
+    transition: all var(--sf-duration-fast) var(--sf-ease-out);
+    pointer-events: none;
+    color: var(--sf-color-text--placeholder);
+  }
+  .sf-field-float input:not(:placeholder-shown) + label,
+  .sf-field-float input:focus + label {
+    inset-block-start: var(--sf-space-xs);
+    translate: 0 0;
+    font-size: var(--sf-text-xs);
+    color: var(--sf-color-text--secondary);
   } */
 
 }
