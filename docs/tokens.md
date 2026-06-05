@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**871 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**877 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-504 tokens.
+506 tokens.
 
 | Token | Default |
 |---|---|
@@ -387,6 +387,8 @@ rebrand workflow.
 | `--sf-leading-snug` | `1.3` |
 | `--sf-leading-tight` | `1.1` |
 | `--sf-link-external-marker` | `" \2197"` |
+| `--sf-link-underline-offset` | `0.15em` |
+| `--sf-link-underline-thickness` | `auto` |
 | `--sf-lumlocker` | `0.65` |
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
@@ -580,7 +582,7 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-13 tokens.
+17 tokens.
 
 | Token | Default |
 |---|---|
@@ -595,6 +597,10 @@ rebrand workflow.
 | `--sf-prose-marker-color` | `var(--sf-color-primary)` |
 | `--sf-prose-media-margin` | `var(--sf-space-m)` |
 | `--sf-prose-media-radius` | `var(--sf-radius-m)` |
+| `--sf-scrim-color` | `oklch(0 0 0 / 0.55)` |
+| `--sf-scrim-direction` | `to top` |
+| `--sf-scrim-gradient` | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` |
+| `--sf-scrim-text-shadow` | `0 1px 3px oklch(0 0 0 / 0.6)` |
 | `--sf-scroll-shadow-size` | `2rem` |
 | `--sf-truncate-suffix` | `"\2026"` |
 

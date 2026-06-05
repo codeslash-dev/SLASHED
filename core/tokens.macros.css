@@ -74,5 +74,22 @@
        ---------------------------------------------------------- */
     --sf-scroll-shadow-size: 2rem;
 
+    /* ----------------------------------------------------------
+       Scrim — darkening overlay for text-over-image legibility,
+       consumed by the .sf-scrim macro. The gradient is composed
+       from a direction + a color stop so consumers can retune
+       either independently:
+         style="--sf-scrim-color: oklch(0 0 0 / 0.75)"
+         style="--sf-scrim-direction: to top right"
+       --sf-scrim-gradient is the final composed value; override it
+       directly for a multi-stop or radial scrim.
+       ---------------------------------------------------------- */
+    --sf-scrim-color:     oklch(0 0 0 / 0.55);
+    --sf-scrim-direction: to top;
+    --sf-scrim-gradient:  linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent);
+    /* Text-on-image legibility WITHOUT darkening the picture — a soft
+       shadow halo behind glyphs, consumed by .sf-text-protect. */
+    --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6);
+
   }
 }

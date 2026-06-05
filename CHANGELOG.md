@@ -8,6 +8,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Macro `.sf-scrim`** (`core/macros.css`) + `--sf-scrim-color` /
+  `--sf-scrim-direction` / `--sf-scrim-gradient` tokens — gradient darkening
+  overlay (via `::before`) for legible text over a background image, with
+  `--top` / `--bottom` / `--full` direction modifiers. Plus **`.sf-text-protect`**
+  + `--sf-scrim-text-shadow` — a lighter shadow-halo alternative that protects
+  text legibility without dimming the image. (#187)
+
+- **Macro `.sf-focus-shadow`** (`core/accessibility.css`) — opt-in modifier
+  that switches `:focus-visible` from the default `outline` ring to a
+  `box-shadow` ring (consuming the existing `--sf-focus-ring-shadow` token),
+  for rounded / `overflow: hidden` elements where an outline would clip.
+  Keyboard-focus visibility is preserved. (#167)
+
+- **Divider modifiers** (`core/layout.css`) — `.sf-divider--soft` /
+  `--strong` (border colour), `--dashed` / `--dotted` (line style), and
+  `--gradient` (a hairline that fades out at both ends), all built on the
+  existing `--sf-divider-*` tokens. (#186)
+
+- **Link underline tokens + variants.** `--sf-link-underline-offset` (default
+  `0.15em`) and `--sf-link-underline-thickness` (default `auto`) are now read by
+  the base `a:link` rule (`core/base.css`, replacing a hardcoded offset). Added
+  macros **`.sf-link--subtle`** (underline revealed on hover/focus) and
+  **`.sf-link--reverse`** (underline removed on hover/focus). (#185)
+
+- **Auto-colour regression tests** (`tests/auto-color.spec.js`) — verifies the
+  on-colour auto-pick clears the documented `>= 3:1` contract on all 11
+  `.sf-surface--*` variants (light + dark), flips polarity across a lightness
+  sweep, re-derives `--sf-color-link` from a root `--sf-color-action` override,
+  recomputes on-colour from an element-scoped brand override, and confirms link
+  underline tokens + per-element colour overwrites resolve as documented.
+  (#204, #205)
+
 - **`--sf-transition-overlay`** (`core/tokens.css`) — reusable transition
   building block for top-layer elements (`<dialog>`, `[popover]`). Uses
   `transition-behavior: allow-discrete` on `overlay` and `display` so entry

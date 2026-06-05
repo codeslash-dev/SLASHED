@@ -97,7 +97,8 @@
   a:link {
     color:                   var(--sf-color-link);
     text-decoration-color:   var(--sf-color-link--underline);
-    text-underline-offset:   0.15em;
+    text-underline-offset:   var(--sf-link-underline-offset);
+    text-decoration-thickness: var(--sf-link-underline-thickness);
     text-underline-position: from-font;
     transition:
       color                 var(--sf-duration-fast) var(--sf-ease-out),

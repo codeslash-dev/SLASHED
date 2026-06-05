@@ -298,6 +298,92 @@ manually), write your own rule targeting `a[rel~="external"]` or
 
 ---
 
+## `.sf-link--subtle`, `.sf-link--reverse`
+
+Opt-in link underline affordances. They don't change link **colour**
+(that stays the auto-contrast `--sf-color-link`); they only toggle the
+underline.
+
+```html
+<a href="…" class="sf-link--subtle">Underline appears on hover/focus</a>
+<a href="…" class="sf-link--reverse">Underlined at rest, clears on hover</a>
+```
+
+| Class | Resting state | Hover / focus |
+|---|---|---|
+| `.sf-link--subtle` | no underline | underline (currentcolor) |
+| `.sf-link--reverse` | underline | no underline |
+
+`.sf-link--subtle` suits dense link lists (nav, footers) where a
+permanent underline is noisy; the hover underline preserves the
+affordance at the moment of interaction.
+
+The base `a:link` underline geometry is tokenised (added for parity with
+the colour tokens):
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-link-underline-offset` | `0.15em` | distance from the text baseline |
+| `--sf-link-underline-thickness` | `auto` | underline stroke width (`auto` = font metrics) |
+
+---
+
+## `.sf-scrim`
+
+Darkening overlay for text placed over a background image, so the text
+clears contrast **without dimming the whole picture**. Apply to a
+positioned wrapper holding the image + text; the scrim paints as a
+`::before` gradient between them (the macro sets `position: relative`
+and `isolation: isolate` itself).
+
+```html
+<div class="sf-scrim sf-scrim--bottom">
+  <img src="hero.jpg" alt="">
+  <div style="position:absolute; inset-block-end:0">
+    <h2>Legible headline</h2>
+  </div>
+</div>
+```
+
+Variants:
+
+| Class | Effect |
+|---|---|
+| `.sf-scrim--bottom` | gradient darkest at the bottom (default — text at bottom) |
+| `.sf-scrim--top` | gradient darkest at the top |
+| `.sf-scrim--full` | even wash over the whole image |
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-scrim-color` | `oklch(0 0 0 / 0.55)` | the dark stop |
+| `--sf-scrim-direction` | `to top` | gradient direction |
+| `--sf-scrim-gradient` | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` | the whole composed gradient (override for multi-stop / radial) |
+
+Direct children are lifted above the scrim automatically
+(`.sf-scrim > * { z-index: 1 }`).
+
+---
+
+## `.sf-text-protect`
+
+Lighter-weight alternative to `.sf-scrim`: protects text legibility over
+a busy image **without** a darkening layer, using a soft shadow halo
+behind the glyphs. Apply directly to the text element.
+
+```html
+<h2 class="sf-text-protect">Readable over a photo</h2>
+```
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-scrim-text-shadow` | `0 1px 3px oklch(0 0 0 / 0.6)` | the protective text shadow |
+
+---
+
 ## `.sf-entrance--*`
 
 Scroll-driven entrance animations. Elements animate into view as they

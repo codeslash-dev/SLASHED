@@ -52,6 +52,15 @@ All states are exercised in [`demo.html`](demo.html).
 when any descendant has keyboard focus (`:focus-within`). It lives in
 `core/accessibility.css` (layer `slashed.accessibility`).
 
+`.sf-focus-shadow` is an opt-in modifier that switches the element's
+`:focus-visible` indicator from the default `outline` ring to a
+`box-shadow` ring (`box-shadow: var(--sf-focus-ring-shadow)`). Useful on
+rounded or `overflow: hidden` elements where the box-shadow follows the
+border-radius and the outline would clip. It replaces one always-visible
+ring with another (keyboard focus stays guaranteed) and, like the base
+ring, uses `!important` to survive unlayered resets. Also in
+`core/accessibility.css`.
+
 `.sr-only-focusable` hides an element with the screen-reader-only technique
 **until** it receives focus — then it becomes visible. Use for skip links and
 off-screen navigation that should appear on keyboard focus.

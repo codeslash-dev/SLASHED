@@ -43,6 +43,7 @@ export const variableGroups = [
       { name: "--sf-color-heading", description: "Heading text color, slightly stronger than body text." },
       { name: "--sf-color-link", description: "Link color, derived from the action brand." },
       { name: "--sf-color-link--{hover,active,visited,underline,disabled}", description: "Link state colors and underline accent." },
+      { name: "--sf-link-underline-{offset,thickness}", description: "Link underline geometry (offset from baseline, stroke thickness)." },
       { name: "--sf-color-border", description: "Default border color." },
       { name: "--sf-color-border--{subtle,strong,focus,disabled,translucent}", description: "De-emphasized, emphasized, focus, disabled, and translucent border colors." },
       { name: "--sf-color-{code-bg,code-text,mark-bg,mark-text}", description: "Inline <code> and <mark> background/foreground colors." },
@@ -184,6 +185,8 @@ export const variableGroups = [
       { name: "--sf-gradient-{brand,primary,secondary,tertiary,surface}", description: "Predefined gradients using brand colors." },
       { name: "--sf-gradient-fade--{t,b,l,r}", description: "Directional fade-to-background gradients." },
       { name: "--sf-mask-scrim-{start,end}", description: "Scroll mask fade depth." },
+      { name: "--sf-scrim-{color,direction,gradient}", description: "Darkening overlay for the .sf-scrim text-over-image macro." },
+      { name: "--sf-scrim-text-shadow", description: "Soft text-shadow halo for the .sf-text-protect macro." },
       { name: "--sf-perspective-{near,normal,far}", description: "3D perspective presets: 500px, 1000px, 2000px." },
       { name: "--sf-contrast-{bias,threshold}", description: "Color contrast tuning for auto text-on-color logic." },
     ]
@@ -300,6 +303,7 @@ export const classGroups = [
       { name: ".sf-imposter / .sf-imposter--{fixed,contain}", description: "Absolutely-centered overlay and its position variants." },
       { name: ".sf-subgrid / .sf-subgrid-rows", description: "Inherit parent grid tracks." },
       { name: ".sf-divider / .sf-divider--vertical", description: "Token-driven separator (horizontal or vertical)." },
+      { name: ".sf-divider--{soft,strong,dashed,dotted,gradient}", description: "Divider colour/line-style modifiers and a fading gradient variant." },
       { name: ".sf-icon", description: "Em-based inline icon sizing." },
       { name: ".sf-icon--{xs,s,m,l,xl,2xl,boxed}", description: "Icon size variants and boxed container." },
       { name: ".sf-prose / .sf-not-prose", description: "Readable long-form text rhythm; -not resets a zone inside it." },
@@ -319,7 +323,11 @@ export const classGroups = [
       { name: ".sf-no-tap-highlight", description: "Suppresses WebKit/Android tap highlight." },
       { name: ".sf-text-gradient", description: "Gradient text effect using background-clip." },
       { name: ".sf-clickable-parent / .sf-focus-parent", description: "Makes a whole card clickable via the first link inside; -focus mirrors focus ring to the parent." },
+      { name: ".sf-focus-shadow", description: "Opt-in: switches :focus-visible from outline to a box-shadow ring (follows border-radius)." },
       { name: ".sf-link-external", description: "Adds external link indicator marker." },
+      { name: ".sf-link--{subtle,reverse}", description: "Link underline affordance: subtle reveals on hover, reverse hides on hover." },
+      { name: ".sf-scrim / .sf-scrim--{top,bottom,full}", description: "Darkening gradient overlay for legible text over a background image." },
+      { name: ".sf-text-protect", description: "Soft text-shadow halo for legibility over busy images, without a darkening layer." },
     ]
   },
   {

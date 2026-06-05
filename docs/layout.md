@@ -32,7 +32,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-reel` | horizontal scroll strip | `--sf-reel-*`, `--sf-mask-scrim-*` |
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
-| `.sf-divider` | token-driven separator; `--vertical` | `--sf-divider-*` |
+| `.sf-divider` | token-driven separator; `--vertical`, `--soft`, `--strong`, `--dashed`, `--dotted`, `--gradient` | `--sf-divider-*` |
 | `.sf-gap` | injects gap into any existing flex/grid container without imposing display; `--xs … --2xl` | `--sf-gap-size` |
 | `.sf-equal` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal-cols`, `--sf-equal-gap` |
 | `.sf-section--collapse` | adjacent sections share padding 50/50 across the boundary | `--sf-section-pad` |
