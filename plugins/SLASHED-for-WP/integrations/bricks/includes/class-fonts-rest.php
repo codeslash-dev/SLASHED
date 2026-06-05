@@ -42,14 +42,11 @@ class Slashed_Bricks_Fonts_REST {
 			)
 		);
 
-		// Bust the CPT font cache whenever a custom-font post is saved.
-		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
-			add_action( 'save_post_' . BRICKS_DB_CUSTOM_FONTS, array( $this, 'bust_cpt_cache' ) );
-		}
-	}
-
-	public function bust_cpt_cache() {
-		delete_transient( 'slashed_bricks_cpt_fonts' );
+		// Note: the CPT font-cache invalidation hook
+		// (save_post_{BRICKS_DB_CUSTOM_FONTS}) is registered from the
+		// always-loaded plugins_loaded bootstrap in slashed-bricks.php, not
+		// here — rest_api_init only fires during REST dispatch, so registering
+		// it here would miss normal admin saves and leave a stale cache.
 	}
 
 	public function check_permissions() {
@@ -57,136 +54,17 @@ class Slashed_Bricks_Fonts_REST {
 	}
 
 	/**
-	 * Build the font list from known Bricks option names.
+	 * Return the Bricks font list as a REST response.
 	 *
-	 * Bricks does not publish a PHP API for its font registry, so we probe
-	 * the WP options it is known to use. Unrecognised shapes are skipped
-	 * gracefully — the SPA falls back to the Manual text input.
+	 * Thin wrapper over the canonical collector
+	 * Slashed_Token_Page::get_bricks_fonts(), which is shared with the admin
+	 * SPA bootstrap so the dropdown and this endpoint never drift apart. See
+	 * that method for the full enumeration/caching notes.
+	 *
+	 * @param WP_REST_Request $request Unused; the endpoint takes no parameters.
+	 * @return WP_REST_Response { "fonts": [ { family, label, source }, … ] }
 	 */
 	public function get_fonts( WP_REST_Request $request ) {
-		$fonts = array();
-
-		// ── Custom fonts uploaded via Bricks > Settings > Custom Fonts ──
-		$custom = get_option( 'bricks_custom_fonts', array() );
-		if ( is_array( $custom ) ) {
-			foreach ( $custom as $font ) {
-				if ( ! is_array( $font ) ) {
-					continue;
-				}
-				// Bricks schema variants across versions:
-				//   font_family — explicit CSS family name (most reliable)
-				//   family      — alternative key used in some versions
-				//   title       — display name; doubles as the CSS family name
-				//                 for fonts downloaded via Bricks' local-Google-
-				//                 Fonts feature (no separate font_family key).
-				$family = $font['font_family'] ?? $font['family'] ?? $font['title'] ?? $font['name'] ?? null;
-				$label  = $font['title'] ?? $font['name'] ?? $family;
-				if ( ! $family || ! is_string( $family ) ) {
-					continue;
-				}
-				$fonts[] = array(
-					'family' => sanitize_text_field( $family ),
-					'label'  => sanitize_text_field( is_string( $label ) ? $label : $family ),
-					'source' => 'custom',
-				);
-			}
-		}
-
-		// ── Google Fonts added via Bricks > Settings > Google Fonts ────
-		$google = get_option( 'bricks_google_fonts', array() );
-		if ( is_array( $google ) ) {
-			foreach ( $google as $font ) {
-				if ( ! is_array( $font ) ) {
-					continue;
-				}
-				// Bricks stores the family name in 'family'; 'name' and
-				// 'title' are display labels used in schema variants.
-				$family = $font['family'] ?? $font['font_family'] ?? $font['name'] ?? $font['title'] ?? null;
-				if ( ! $family || ! is_string( $family ) ) {
-					continue;
-				}
-				$fonts[] = array(
-					'family' => sanitize_text_field( $family ),
-					'label'  => sanitize_text_field( $font['name'] ?? $family ),
-					'source' => 'google',
-				);
-			}
-		}
-
-		// ── Adobe Fonts (Typekit) configured in Bricks ──────────────────
-		$adobe = get_option( 'bricks_adobe_fonts', array() );
-		if ( is_array( $adobe ) && ! empty( $adobe['fonts'] ) && is_array( $adobe['fonts'] ) ) {
-			foreach ( $adobe['fonts'] as $font ) {
-				if ( ! is_array( $font ) ) {
-					continue;
-				}
-				$family = $font['font_family'] ?? $font['family'] ?? null;
-				$label  = $font['label'] ?? $font['name'] ?? $family;
-				if ( ! $family || ! is_string( $family ) ) {
-					continue;
-				}
-				$fonts[] = array(
-					'family' => sanitize_text_field( $family ),
-					'label'  => sanitize_text_field( is_string( $label ) ? $label : $family ),
-					'source' => 'adobe',
-				);
-			}
-		}
-
-		// ── Custom fonts uploaded via Bricks Font Manager (CPT) ────────
-		// Bricks stores fonts added via its Font Manager as a CPT. Fonts start
-		// as 'draft' when created through the builder UI and may stay in that
-		// status even after files are uploaded, so we include both 'publish'
-		// and 'draft' posts. We query the CPT title directly rather than
-		// calling Bricks\Custom_Fonts::get_custom_fonts() because that method
-		// uses a static cache, has side-effects (generates @font-face strings),
-		// and only queries 'publish' by default — all unnecessary for a name
-		// lookup. Results are cached in a transient (1 hour) and invalidated
-		// when any custom-font CPT entry is saved.
-		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
-			$cache_key  = 'slashed_bricks_cpt_fonts';
-			$cpt_cached = get_transient( $cache_key );
-
-			if ( false !== $cpt_cached && is_array( $cpt_cached ) ) {
-				$fonts = array_merge( $fonts, $cpt_cached );
-			} else {
-				$cpt_fonts = array();
-				$cpt_posts = get_posts(
-					array(
-						'post_type'      => BRICKS_DB_CUSTOM_FONTS,
-						'posts_per_page' => -1,
-						'post_status'    => array( 'publish', 'draft' ),
-						'fields'         => 'ids',
-						'no_found_rows'  => true,
-					)
-				);
-				foreach ( $cpt_posts as $post_id ) {
-					$family = html_entity_decode( (string) get_the_title( $post_id ), ENT_QUOTES, 'UTF-8' );
-					if ( ! $family ) {
-						continue;
-					}
-					$cpt_fonts[] = array(
-						'family' => sanitize_text_field( $family ),
-						'label'  => sanitize_text_field( $family ),
-						'source' => 'custom',
-					);
-				}
-				set_transient( $cache_key, $cpt_fonts, HOUR_IN_SECONDS );
-				$fonts = array_merge( $fonts, $cpt_fonts );
-			}
-		}
-
-		// Deduplicate by family name (case-insensitive) keeping first entry.
-		$seen   = array();
-		$unique = array();
-		foreach ( $fonts as $font ) {
-			$key = strtolower( $font['family'] );
-			if ( ! isset( $seen[ $key ] ) ) {
-				$seen[ $key ] = true;
-				$unique[]     = $font;
-			}
-		}
-
-		return rest_ensure_response( array( 'fonts' => $unique ) );
+		return rest_ensure_response( array( 'fonts' => Slashed_Token_Page::get_bricks_fonts() ) );
 	}
 }

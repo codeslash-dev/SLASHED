@@ -34,12 +34,14 @@
   import Toast from './Toast.svelte';
 
   /**
+   * Reference vs picker mode is derived from whether an `onPickValue`
+   * callback is supplied (picker mode) — there is no separate flag.
+   *
    * @type {{
    *   source: { variables: string[], light: object, dark: object },
    *   onClose?: () => void,
    *   onPick?: () => void,
    *   onPickValue?: (value: string) => void,
-   *   referenceMode?: boolean,
    *   dockedLeft?: number | null,
    * }}
    */
@@ -48,7 +50,6 @@
     onClose,
     onPick,
     onPickValue,
-    referenceMode = false,
     dockedLeft = null,
   } = $props();
 
@@ -188,6 +189,108 @@
   function handleKeydown(e) { if (e.key === 'Escape') onClose?.(); }
 </script>
 
+<!--
+  Shared family-scanner markup for the Brand and Status palette sections.
+  Defined once as a snippet and rendered twice (with brandGroups /
+  statusGroups) so the two sections can never drift apart.
+-->
+{#snippet familyScanner(groups)}
+  <div class="slashed-cp__scanner">
+    {#each groups as grp (grp.id)}
+      {@const base     = baseSwatch(grp)}
+      {@const previews = previewAliases(grp)}
+      {@const isOpen   = expandedFamily === grp.id}
+      <div class="slashed-cp__scan-item">
+        <button
+          type="button"
+          class="slashed-cp__scan-row"
+          class:slashed-cp__scan-row--open={isOpen}
+          aria-expanded={isOpen}
+          onclick={() => toggleFamily(grp.id)}
+        >
+          {#if base}
+            <span class="slashed-cp__scan-base" style="--sw-l: {base.light}; --sw-d: {base.dark}"></span>
+          {/if}
+          <span class="slashed-cp__scan-name">{grp.label}</span>
+          <span class="slashed-cp__scan-tagline">{grp.tagline}</span>
+          <span class="slashed-cp__scan-pre" aria-hidden="true">
+            {#each previews as p (p.var)}
+              <span class="slashed-cp__scan-pre-sw" style="--sw-l: {p.light}; --sw-d: {p.dark}" title={p.label}></span>
+            {/each}
+          </span>
+          <span class="slashed-cp__scan-chev" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
+        </button>
+
+        {#if isOpen}
+          {@const aliasSec = sec(grp, 'alias')}
+          {@const strip    = scaleSwatches(grp)}
+          {@const alphaSec = sec(grp, 'alpha')}
+          <div class="slashed-cp__fam">
+            {#if base}
+              <button
+                type="button"
+                class="slashed-cp__fam-banner"
+                style="--sw-l: {base.light}; --sw-d: {base.dark}"
+                title="{grp.label} base — {base.name}"
+                onclick={() => pick(base)}
+              >
+                <span class="slashed-cp__fam-banner-lbl">{grp.label}</span>
+              </button>
+            {/if}
+
+            {#if aliasSec?.swatches.length}
+              <p class="slashed-cp__fam-sec">Aliases · {aliasSec.swatches.length}</p>
+              <div class="slashed-cp__grid">
+                {#each aliasSec.swatches as s (s.var)}
+                  <div class="slashed-cp__cell">
+                    <ColorSwatch swatch={s} {mode} onPick={pick} />
+                    <span class="slashed-cp__cap">{s.label}</span>
+                  </div>
+                {/each}
+              </div>
+            {/if}
+
+            {#if strip.length}
+              <p class="slashed-cp__fam-sec">Scale <span class="slashed-cp__fam-sec-range">50 → 950</span></p>
+              <div class="slashed-cp__strip">
+                {#each strip as s (s.var)}
+                  <button
+                    type="button"
+                    class="slashed-cp__strip-sw"
+                    title="{s.label} — {s.name}"
+                    style="--sw-l: {s.light}; --sw-d: {s.dark}"
+                    onclick={() => pick(s)}
+                  ></button>
+                {/each}
+              </div>
+            {/if}
+
+            {#if alphaSec?.swatches.length}
+              <button type="button" class="slashed-cp__alpha-btn" onclick={() => toggleAlpha(grp.id)}>
+                <span aria-hidden="true">{alphaOpen.has(grp.id) ? '▾' : '▸'}</span>
+                Transparent a5 → a95
+              </button>
+              {#if alphaOpen.has(grp.id)}
+                <div class="slashed-cp__strip slashed-cp__strip--alpha">
+                  {#each alphaSec.swatches as s (s.var)}
+                    <button
+                      type="button"
+                      class="slashed-cp__strip-sw slashed-cp__strip-sw--alpha"
+                      title="{s.label} — {s.name}"
+                      style="--sw-l: {s.light}; --sw-d: {s.dark}"
+                      onclick={() => pick(s)}
+                    ></button>
+                  {/each}
+                </div>
+              {/if}
+            {/if}
+          </div>
+        {/if}
+      </div>
+    {/each}
+  </div>
+{/snippet}
+
 <svelte:window onkeydown={handleKeydown} />
 
 <div
@@ -306,197 +409,11 @@
 
         <!-- Brand families -->
         <p class="slashed-cp__pal-cat">Brand</p>
-        <div class="slashed-cp__scanner">
-          {#each brandGroups as grp (grp.id)}
-            {@const base     = baseSwatch(grp)}
-            {@const previews = previewAliases(grp)}
-            {@const isOpen   = expandedFamily === grp.id}
-            <div class="slashed-cp__scan-item">
-              <button
-                type="button"
-                class="slashed-cp__scan-row"
-                class:slashed-cp__scan-row--open={isOpen}
-                aria-expanded={isOpen}
-                onclick={() => toggleFamily(grp.id)}
-              >
-                {#if base}
-                  <span class="slashed-cp__scan-base" style="--sw-l: {base.light}; --sw-d: {base.dark}"></span>
-                {/if}
-                <span class="slashed-cp__scan-name">{grp.label}</span>
-                <span class="slashed-cp__scan-tagline">{grp.tagline}</span>
-                <span class="slashed-cp__scan-pre" aria-hidden="true">
-                  {#each previews as p (p.var)}
-                    <span class="slashed-cp__scan-pre-sw" style="--sw-l: {p.light}; --sw-d: {p.dark}" title={p.label}></span>
-                  {/each}
-                </span>
-                <span class="slashed-cp__scan-chev" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
-              </button>
-
-              {#if isOpen}
-                {@const aliasSec = sec(grp, 'alias')}
-                {@const strip    = scaleSwatches(grp)}
-                {@const alphaSec = sec(grp, 'alpha')}
-                <div class="slashed-cp__fam">
-                  {#if base}
-                    <button
-                      type="button"
-                      class="slashed-cp__fam-banner"
-                      style="--sw-l: {base.light}; --sw-d: {base.dark}"
-                      title="{grp.label} base — {base.name}"
-                      onclick={() => pick(base)}
-                    >
-                      <span class="slashed-cp__fam-banner-lbl">{grp.label}</span>
-                    </button>
-                  {/if}
-
-                  {#if aliasSec?.swatches.length}
-                    <p class="slashed-cp__fam-sec">Aliases · {aliasSec.swatches.length}</p>
-                    <div class="slashed-cp__grid">
-                      {#each aliasSec.swatches as s (s.var)}
-                        <div class="slashed-cp__cell">
-                          <ColorSwatch swatch={s} {mode} onPick={pick} />
-                          <span class="slashed-cp__cap">{s.label}</span>
-                        </div>
-                      {/each}
-                    </div>
-                  {/if}
-
-                  {#if strip.length}
-                    <p class="slashed-cp__fam-sec">Scale <span class="slashed-cp__fam-sec-range">50 → 950</span></p>
-                    <div class="slashed-cp__strip">
-                      {#each strip as s (s.var)}
-                        <button
-                          type="button"
-                          class="slashed-cp__strip-sw"
-                          title="{s.label} — {s.name}"
-                          style="--sw-l: {s.light}; --sw-d: {s.dark}"
-                          onclick={() => pick(s)}
-                        ></button>
-                      {/each}
-                    </div>
-                  {/if}
-
-                  {#if alphaSec?.swatches.length}
-                    <button type="button" class="slashed-cp__alpha-btn" onclick={() => toggleAlpha(grp.id)}>
-                      <span aria-hidden="true">{alphaOpen.has(grp.id) ? '▾' : '▸'}</span>
-                      Transparent a5 → a95
-                    </button>
-                    {#if alphaOpen.has(grp.id)}
-                      <div class="slashed-cp__strip slashed-cp__strip--alpha">
-                        {#each alphaSec.swatches as s (s.var)}
-                          <button
-                            type="button"
-                            class="slashed-cp__strip-sw slashed-cp__strip-sw--alpha"
-                            title="{s.label} — {s.name}"
-                            style="--sw-l: {s.light}; --sw-d: {s.dark}"
-                            onclick={() => pick(s)}
-                          ></button>
-                        {/each}
-                      </div>
-                    {/if}
-                  {/if}
-                </div>
-              {/if}
-            </div>
-          {/each}
-        </div>
+        {@render familyScanner(brandGroups)}
 
         <!-- Status families -->
         <p class="slashed-cp__pal-cat">Status</p>
-        <div class="slashed-cp__scanner">
-          {#each statusGroups as grp (grp.id)}
-            {@const base     = baseSwatch(grp)}
-            {@const previews = previewAliases(grp)}
-            {@const isOpen   = expandedFamily === grp.id}
-            <div class="slashed-cp__scan-item">
-              <button
-                type="button"
-                class="slashed-cp__scan-row"
-                class:slashed-cp__scan-row--open={isOpen}
-                aria-expanded={isOpen}
-                onclick={() => toggleFamily(grp.id)}
-              >
-                {#if base}
-                  <span class="slashed-cp__scan-base" style="--sw-l: {base.light}; --sw-d: {base.dark}"></span>
-                {/if}
-                <span class="slashed-cp__scan-name">{grp.label}</span>
-                <span class="slashed-cp__scan-tagline">{grp.tagline}</span>
-                <span class="slashed-cp__scan-pre" aria-hidden="true">
-                  {#each previews as p (p.var)}
-                    <span class="slashed-cp__scan-pre-sw" style="--sw-l: {p.light}; --sw-d: {p.dark}" title={p.label}></span>
-                  {/each}
-                </span>
-                <span class="slashed-cp__scan-chev" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
-              </button>
-
-              {#if isOpen}
-                {@const aliasSec = sec(grp, 'alias')}
-                {@const strip    = scaleSwatches(grp)}
-                {@const alphaSec = sec(grp, 'alpha')}
-                <div class="slashed-cp__fam">
-                  {#if base}
-                    <button
-                      type="button"
-                      class="slashed-cp__fam-banner"
-                      style="--sw-l: {base.light}; --sw-d: {base.dark}"
-                      title="{grp.label} base — {base.name}"
-                      onclick={() => pick(base)}
-                    >
-                      <span class="slashed-cp__fam-banner-lbl">{grp.label}</span>
-                    </button>
-                  {/if}
-
-                  {#if aliasSec?.swatches.length}
-                    <p class="slashed-cp__fam-sec">Aliases · {aliasSec.swatches.length}</p>
-                    <div class="slashed-cp__grid">
-                      {#each aliasSec.swatches as s (s.var)}
-                        <div class="slashed-cp__cell">
-                          <ColorSwatch swatch={s} {mode} onPick={pick} />
-                          <span class="slashed-cp__cap">{s.label}</span>
-                        </div>
-                      {/each}
-                    </div>
-                  {/if}
-
-                  {#if strip.length}
-                    <p class="slashed-cp__fam-sec">Scale <span class="slashed-cp__fam-sec-range">50 → 950</span></p>
-                    <div class="slashed-cp__strip">
-                      {#each strip as s (s.var)}
-                        <button
-                          type="button"
-                          class="slashed-cp__strip-sw"
-                          title="{s.label} — {s.name}"
-                          style="--sw-l: {s.light}; --sw-d: {s.dark}"
-                          onclick={() => pick(s)}
-                        ></button>
-                      {/each}
-                    </div>
-                  {/if}
-
-                  {#if alphaSec?.swatches.length}
-                    <button type="button" class="slashed-cp__alpha-btn" onclick={() => toggleAlpha(grp.id)}>
-                      <span aria-hidden="true">{alphaOpen.has(grp.id) ? '▾' : '▸'}</span>
-                      Transparent a5 → a95
-                    </button>
-                    {#if alphaOpen.has(grp.id)}
-                      <div class="slashed-cp__strip slashed-cp__strip--alpha">
-                        {#each alphaSec.swatches as s (s.var)}
-                          <button
-                            type="button"
-                            class="slashed-cp__strip-sw slashed-cp__strip-sw--alpha"
-                            title="{s.label} — {s.name}"
-                            style="--sw-l: {s.light}; --sw-d: {s.dark}"
-                            onclick={() => pick(s)}
-                          ></button>
-                        {/each}
-                      </div>
-                    {/if}
-                  {/if}
-                </div>
-              {/if}
-            </div>
-          {/each}
-        </div>
+        {@render familyScanner(statusGroups)}
       </div>
 
     {/if}

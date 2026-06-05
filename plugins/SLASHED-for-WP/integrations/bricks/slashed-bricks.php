@@ -203,6 +203,21 @@ function slashed_bricks_rest_routes_init() {
 add_action( 'rest_api_init', 'slashed_bricks_rest_routes_init' );
 
 /**
+ * Load the shared Bricks data classes (parser → resolver → inventory).
+ *
+ * Required by both bootstrap paths — slashed_bricks_data_init() at
+ * plugins_loaded and slashed_bricks_init() at after_setup_theme. Each calls
+ * this independently because the two paths gate on different signals (the
+ * `template` option vs the live Bricks version), so neither may assume the
+ * other has already run. Idempotent via require_once.
+ */
+function slashed_bricks_require_data_classes() {
+    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+}
+
+/**
  * Data managers: early initialization at plugins_loaded.
  *
  * Bricks' Database::__construct() reads bricks_global_variables,
@@ -220,14 +235,24 @@ function slashed_bricks_data_init() {
         return;
     }
 
-    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+    slashed_bricks_require_data_classes();
     require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';
 
     new Slashed_Bricks_Variables();
     new Slashed_Bricks_Classes();
+
+    // Invalidate the Bricks Font-Manager CPT cache on every custom-font save.
+    // Registered here (plugins_loaded, all request types) rather than from REST
+    // route registration so the cache is busted on normal admin saves too, not
+    // only during REST requests. The collector + transient live in the
+    // always-loaded Slashed_Token_Page.
+    if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) && class_exists( 'Slashed_Token_Page' ) ) {
+        add_action(
+            'save_post_' . BRICKS_DB_CUSTOM_FONTS,
+            array( 'Slashed_Token_Page', 'flush_bricks_fonts_cache' )
+        );
+    }
 }
 add_action( 'plugins_loaded', 'slashed_bricks_data_init', 20 );
 
@@ -243,9 +268,7 @@ function slashed_bricks_init() {
         return;
     }
 
-    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+    slashed_bricks_require_data_classes();
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
 
     new Slashed_Bricks_Enqueue();

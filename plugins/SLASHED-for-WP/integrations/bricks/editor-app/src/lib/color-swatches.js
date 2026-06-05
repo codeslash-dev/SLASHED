@@ -132,11 +132,10 @@ function injectSFButton(colorControl) {
   });
 
   // Insert right after the Variables icon, before Dynamic data (if present).
+  // Falls back to appending when there's no Variables icon or it's the last child.
   const varBtn = colorInput.querySelector('.variable-picker-button');
   if (varBtn && varBtn.nextSibling) {
     colorInput.insertBefore(btn, varBtn.nextSibling);
-  } else if (varBtn) {
-    colorInput.appendChild(btn);
   } else {
     colorInput.appendChild(btn);
   }

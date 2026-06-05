@@ -67,7 +67,10 @@ function generateColorDeclarations(settings) {
   const declarations = [];
 
   // Brand colors (light): brand_primary -> --sf-color-primary-light.
-  const brandColors = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface'];
+  // The final family is `base` (source token --sf-color-base-light), NOT
+  // `surface` — surface is a derived token with no -light source. Must stay
+  // in sync with class-css-generator.php::generate_color_declarations().
+  const brandColors = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
   for (const color of brandColors) {
     const key = `brand_${color}`;
     if (hasValue(settings[key])) {
