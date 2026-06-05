@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**158 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**160 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -130,11 +130,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-26 classes.
+28 classes.
 
 | Class |
 |---|
 | `.sf-aspect` |
+| `.sf-content-auto` |
 | `.sf-equal-height` |
 | `.sf-flow` |
 | `.sf-line-clamp-2` |
@@ -158,6 +159,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-surface--success` |
 | `.sf-surface--tertiary` |
 | `.sf-surface--warning` |
+| `.sf-tabular-nums` |
 | `.sf-text-gradient` |
 | `.sf-truncate` |
 

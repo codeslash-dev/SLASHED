@@ -111,6 +111,7 @@ export const variableGroups = [
       { name: "--sf-ratio-{square,portrait,video,cinema,golden,3-2,4-3}", description: "Predefined aspect ratios for frames and containers." },
       { name: "--sf-aspect", description: "Generic aspect-ratio token read by the .sf-aspect macro (16/9)." },
       { name: "--sf-object-{fit,position}", description: "Default object-fit (cover) and object-position (50% 50%) for media elements." },
+      { name: "--sf-content-intrinsic-size", description: "Placeholder size for the .sf-content-auto macro's contain-intrinsic-size (500px)." },
     ]
   },
   {
@@ -317,6 +318,8 @@ export const classGroups = [
       { name: ".sf-scroll-snap", description: "Vertical scroll-snap container." },
       { name: ".sf-overflow-fade", description: "End-edge horizontal fade for overflowing inline content." },
       { name: ".sf-no-tap-highlight", description: "Suppresses WebKit/Android tap highlight." },
+      { name: ".sf-content-auto", description: "content-visibility:auto — skips rendering offscreen content (reads --sf-content-intrinsic-size)." },
+      { name: ".sf-tabular-nums", description: "Fixed-width digits for column-aligned numbers (reads --sf-font-numeric)." },
       { name: ".sf-text-gradient", description: "Gradient text effect using background-clip." },
       { name: ".sf-clickable-parent / .sf-focus-parent", description: "Makes a whole card clickable via the first link inside; -focus mirrors focus ring to the parent." },
       { name: ".sf-link-external", description: "Adds external link indicator marker." },
