@@ -107,54 +107,78 @@ function injectSFButton(colorControl) {
   if (!_onOpenPanel) return;
   const colorInput = colorControl.querySelector('[data-control="text"].color-input');
   if (!colorInput) return;
-  if (colorInput.querySelector('.' + SF_BTN_CLASS)) return; // already present
 
-  const btn = document.createElement('div');
-  btn.className = SF_BTN_CLASS;
-  btn.setAttribute('data-balloon', 'SLASHED Colors');
-  btn.setAttribute('data-balloon-pos', 'top-right');
-  btn.setAttribute('role', 'button');
-  btn.setAttribute('tabindex', '0');
-  const dot = document.createElement('span');
-  dot.className = SF_BTN_CLASS + '__dot';
-  dot.setAttribute('aria-hidden', 'true');
-  btn.appendChild(dot);
+  let btn = colorInput.querySelector('.' + SF_BTN_CLASS);
+  if (!btn) {
+    btn = document.createElement('div');
+    btn.className = SF_BTN_CLASS;
+    btn.setAttribute('data-balloon', 'SLASHED Colors');
+    btn.setAttribute('data-balloon-pos', 'top-right');
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('tabindex', '0');
+    const dot = document.createElement('span');
+    dot.className = SF_BTN_CLASS + '__dot';
+    dot.setAttribute('aria-hidden', 'true');
+    btn.appendChild(dot);
 
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    // Pass the wrapper so the picker re-queries the live input at pick time,
-    // avoiding a stale reference if Bricks re-renders the control.
-    if (_onOpenPanel) _onOpenPanel(colorInput);
-  });
-  btn.addEventListener('keydown', (e) => {
-    if (e.key === ' ') { e.preventDefault(); btn.click(); }
-    else if (e.key === 'Enter') btn.click();
-  });
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Pass the wrapper so the picker re-queries the live input at pick time,
+      // avoiding a stale reference if Bricks re-renders the control.
+      if (_onOpenPanel) _onOpenPanel(colorInput);
+    });
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === ' ') { e.preventDefault(); btn.click(); }
+      else if (e.key === 'Enter') btn.click();
+    });
 
-  // Insert right after the Variables icon, before Dynamic data (if present).
-  // Falls back to appending when there's no Variables icon or it's the last child.
-  const varBtn = colorInput.querySelector('.variable-picker-button');
-  if (varBtn && varBtn.nextSibling) {
-    colorInput.insertBefore(btn, varBtn.nextSibling);
-  } else {
-    colorInput.appendChild(btn);
+    // Insert right after the Variables icon, before Dynamic data (if present).
+    // Falls back to appending when there's no Variables icon or it's the last child.
+    const varBtn = colorInput.querySelector('.variable-picker-button');
+    if (varBtn && varBtn.nextSibling) {
+      colorInput.insertBefore(btn, varBtn.nextSibling);
+    } else {
+      colorInput.appendChild(btn);
+    }
   }
 
-  // Restore active state if the input already holds an SF color variable.
-  // Bricks' Vue re-renders the control after each value change, which tears
-  // out our old button and causes injectSFButton to re-run with a fresh one.
-  // Reading the current input value here re-arms the swatch on every injection.
+  // Sync the dot to the live input value on every pass — not just on fresh
+  // injection. The colour can change through paths that don't tear out our
+  // button (Bricks' own colour palette, dynamic data, a manual edit); when it
+  // does, the swatch must follow. If the value is no longer one of our
+  // `--sf-color-*` variables the dot resets to the default colourful state.
+  syncSFButtonState(btn, colorInput);
+}
+
+/**
+ * Reflect the colour input's current value on the SF button's dot.
+ *
+ * When the input holds a known `--sf-color-*` variable the dot becomes the
+ * solid resolved-hex square (active). Otherwise it resets to the default
+ * colourful conic-gradient dot, so picking a colour through Bricks' own UI
+ * no longer leaves a stale SF swatch behind.
+ *
+ * @param {Element} btn         the `.slashed-sf-color-btn` element
+ * @param {Element} colorInput  the `[data-control="text"].color-input` wrapper
+ */
+function syncSFButtonState(btn, colorInput) {
+  const dot = btn.querySelector('.' + SF_BTN_CLASS + '__dot');
   const liveInput =
     colorInput.querySelector('input[type="text"]') ??
     colorInput.querySelector('input:not([type="hidden"],[type="submit"],[type="button"],[type="checkbox"],[type="radio"],[type="file"])');
   const currentVal = liveInput?.value ?? '';
   const varName = currentVal.match(/^var\((--[^)]+)\)/)?.[1];
-  const initHex = varName ? (_hexMap[varName] ?? null) : null;
-  if (initHex) {
-    dot.style.background = initHex;
-    dot.style.removeProperty('box-shadow');
-    btn.classList.add(SF_BTN_CLASS + '--active');
+  const hex = varName ? (_hexMap[varName] ?? null) : null;
+
+  if (dot) {
+    if (hex) {
+      dot.style.background = hex;
+      dot.style.removeProperty('box-shadow');
+    } else {
+      dot.style.removeProperty('background');
+    }
   }
+  btn.classList.toggle(SF_BTN_CLASS + '--active', !!hex);
 }
 
 /**
