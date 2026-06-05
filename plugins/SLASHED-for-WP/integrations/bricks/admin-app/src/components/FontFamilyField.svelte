@@ -59,9 +59,15 @@
   const bricksEnabled = meta.activeIntegrations?.bricks ?? true;
 
   onMount(async () => {
+    const initialSource = source;
     try {
       const fresh = await fetchBricksFonts();
       bricksFonts = fresh;
+      // Re-infer source: a font present only in the live list would have
+      // been misclassified as 'manual' at init time.
+      if (source === initialSource && initialSource === 'manual' && detectSource(effectiveValue) === 'bricks') {
+        source = 'bricks';
+      }
     } catch {
       // Keep bootstrap data if the fetch fails.
     }

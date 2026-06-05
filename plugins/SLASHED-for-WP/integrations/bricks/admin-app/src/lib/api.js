@@ -87,7 +87,7 @@ export async function fetchBricksFonts() {
   const { url, nonce } = meta.rest;
   if (!url) {
     console.info('[slashed-admin] (dev) would GET /bricks-fonts');
-    return meta.bricksFonts;
+    return Array.isArray(meta.bricksFonts) ? meta.bricksFonts : [];
   }
   const res = await fetch(url + '/bricks-fonts', {
     credentials: 'same-origin',
@@ -95,7 +95,7 @@ export async function fetchBricksFonts() {
   });
   if (!res.ok) throw new Error(await res.text() || `HTTP ${res.status}`);
   const data = await res.json();
-  return data.fonts ?? [];
+  return Array.isArray(data?.fonts) ? data.fonts : [];
 }
 
 /**
