@@ -14,10 +14,13 @@
    * Source is local UI state only — it is inferred from the current
    * value on mount and never persisted separately.
    *
-   * Font data comes from window.slashedApp.bricksFonts (populated at
-   * page load from PHP), so no async REST fetch is needed.
+   * Font data starts from window.slashedApp.bricksFonts (populated at
+   * page load from PHP) and is refreshed on mount via the REST endpoint
+   * so newly added fonts appear without a full page reload.
    */
+  import { onMount } from 'svelte';
   import { meta, tokens, writeField } from '../lib/stores.svelte.js';
+  import { fetchBricksFonts } from '../lib/api.js';
   import FieldRow from './FieldRow.svelte';
 
   let {
@@ -47,10 +50,28 @@
     { label: 'Handwritten',         value: "'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive" },
   ];
 
-  // ── Bricks fonts from PHP bootstrap ─────────────────────────────────
+  // ── Bricks fonts: bootstrap then live refresh ────────────────────────
+  // Start from the PHP bootstrap so the dropdown is populated immediately,
+  // then fetch the live list on mount so fonts added since the page loaded
+  // (or within the CPT transient window) appear without a full reload.
   /** @type {Array<{family:string, label:string, source:string}>} */
-  const bricksFonts = meta.bricksFonts;
+  let bricksFonts = $state(meta.bricksFonts);
   const bricksEnabled = meta.activeIntegrations?.bricks ?? true;
+
+  onMount(async () => {
+    const initialSource = source;
+    try {
+      const fresh = await fetchBricksFonts();
+      bricksFonts = fresh;
+      // Re-infer source: a font present only in the live list would have
+      // been misclassified as 'manual' at init time.
+      if (source === initialSource && initialSource === 'manual' && detectSource(effectiveValue) === 'bricks') {
+        source = 'bricks';
+      }
+    } catch {
+      // Keep bootstrap data if the fetch fails.
+    }
+  });
 
   // ── Current value ─────────────────────────────────────────────────
   const currentValue = $derived(
