@@ -5,6 +5,13 @@
 > export.js `base → surface` rename). This document reflects the state of the
 > codebase at audit time; resolved items are kept for historical context.
 
+> **2026-06-05 WP-plugin re-audit pass** — a focused re-review of the
+> `plugins/SLASHED-for-WP` tree confirmed most prior High/Medium items were
+> already fixed (CSS-generator allowlist validation, `slashed.php` cleanup +
+> cron moved to the global layer, color defaults consolidated through
+> `Slashed_Token_Defaults`). Two genuine bugs and one duplication remained and
+> were fixed in this pass — see **"Re-audit fixes (2026-06-05)"** below.
+
 Whole-repo code review across four domains: build scripts, the WordPress PHP
 plugin, the Svelte editor/admin apps, and the CSS source. Overall the codebase
 is unusually clean and well-documented — most "odd" patterns are deliberate and
@@ -12,6 +19,63 @@ explained inline. The findings below are the genuine issues, ordered by impact.
 The top items were verified directly against the source.
 
 Date: 2026-06-02
+
+---
+
+## ✅ Re-audit fixes (2026-06-05)
+
+Applied on branch `audit/wp-plugin-cleanup`. All PHP files pass `php -l`; the
+admin SPA rebuilds cleanly; `node --test` is 64/64 green.
+
+### 1. `surface` → `base` regression fixed in the two remaining stragglers
+
+The framework's only *source* brand token is `--sf-color-base-light`;
+`--sf-color-surface` is a derived semantic alias (`= var(--sf-color-base)`) with
+no `-light`/`-dark` source. Commit `62b7337` partially reverted a
+`base → surface` rename but missed two spots, both of which read the
+non-existent `brand_surface` key and emitted a phantom
+`--sf-color-surface-light`, silently dropping the user's `brand_base` override:
+
+- `integrations/bricks/admin-app/src/lib/export.js:70` — client-side "Export
+  CSS". **Fixed** `'surface'` → `'base'` and rebuilt the bundle
+  (`assets/admin-app/app.js`, one-line diff).
+- `integrations/bricks/includes/class-inventory.php:241`
+  (`get_admin_color_overrides()`) — its own docblock says it mirrors
+  `Slashed_CSS_Generator::generate_color_declarations()` (which uses `base`), so
+  the editor color-swatch preview for the base color was wrong. **Fixed.**
+
+Cross-checked against the source of truth: `class-token-defaults.php`,
+`class-css-generator.php`, `ColorTab.svelte`, `color-model.js`,
+`LivePreview.svelte` all use `base`, as does `tests/color-model.test.js`.
+
+### 2. Bricks font collection de-duplicated
+
+`Slashed_Token_Page::get_bricks_fonts()` and
+`Slashed_Bricks_Fonts_REST::get_fonts()` were ~110-line near-verbatim copies of
+the same option-probing + Font-Manager-CPT query + dedup logic (sharing the
+`slashed_bricks_cpt_fonts` transient) that had already started to drift. The
+collector now lives once in `Slashed_Token_Page::get_bricks_fonts()` (the
+always-loaded canonical owner, in both unified and standalone modes); the REST
+endpoint is a thin wrapper, and the shared transient key is a single constant
+`Slashed_Token_Page::CPT_FONTS_TRANSIENT`. No behavioural change.
+
+### Verified already-resolved since the 2026-06-02 snapshot
+
+CSS-generator allowlist validation (`valid_color`/`valid_dimension`/
+`valid_font_family` + `is_css_safe` + `balanced_parens`); `slashed.php` no-op
+activation hook removed and the version-check cron clean-up moved to the global
+layer; `class-color-resolver.php` default colors derived from
+`Slashed_Token_Defaults`; the "kept for tests" `get_colors()`/`get_classes()`
+wrappers and the empty `slashed_bricks_activation_check()` are gone.
+
+### Still open (documented, not changed this pass)
+
+- `editor-app/src/lib/apply.js` migrate path — the two-siblings-into-one-new-
+  class edge case still reads a pre-batch `globalClasses` snapshot. Lives in the
+  compiled editor bundle and needs a live Bricks editor to verify safely; left
+  as-is to avoid a blind change.
+- `class-css-parser.php` `[^}]*` regex — brittle on `}` inside an
+  `@property` initial-value. Non-fatal (cached, editor-only).
 
 ---
 

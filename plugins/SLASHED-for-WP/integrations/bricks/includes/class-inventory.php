@@ -238,7 +238,7 @@ class Slashed_Bricks_Inventory {
 		$settings = $tokens['colors'];
 		$overrides = array();
 
-		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface' );
+		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
 		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 
 		// Light source tokens: brand_primary -> --sf-color-primary-light.
