@@ -9,9 +9,12 @@
    bar, page-builder chrome, cookie banners, etc.) without element-
    specific exclusions.
 
-   Opt-in "full reset" (margin/padding zero, list-style none, media
-   display:block, button font:inherit): load core/reset-full.css in
-   addition to this file, or use any of the bundles that include it.
+   A heavier "full reset" (zeroing all margins/padding, stripping list
+   markers, etc.) is intentionally NOT shipped — it would conflict with
+   the third-party UI this reset is designed to coexist with. Note that
+   core/base.css already sets the most useful of those defaults on its
+   own terms (media as display:block with capped width, form controls
+   inheriting font/color). Author any further reset in your own CSS.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.reset {
