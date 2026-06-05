@@ -367,8 +367,9 @@ Tokens:
 | `--sf-scrim-direction` | `to top` | gradient direction |
 | `--sf-scrim-gradient` | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` | the whole composed gradient (override for multi-stop / radial) |
 
-Direct children are lifted above the scrim automatically
-(`.sf-scrim > * { z-index: 1 }`).
+Non-media direct children are lifted above the scrim automatically
+(`.sf-scrim > :not(img, picture, video, svg, canvas) { z-index: 1 }`).
+Media children stay behind the scrim so the gradient can darken them.
 
 ---
 
