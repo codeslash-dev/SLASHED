@@ -77,6 +77,28 @@ export function saveSettings(settings) {
 }
 
 /**
+ * Fetch the live Bricks font list from the REST endpoint.
+ *
+ * Falls back to the bootstrap snapshot in the Vite dev harness (no real
+ * backend). On a real WP install this always returns the current state,
+ * so newly-added fonts appear without a page reload.
+ */
+export async function fetchBricksFonts() {
+  const { url, nonce } = meta.rest;
+  if (!url) {
+    console.info('[slashed-admin] (dev) would GET /bricks-fonts');
+    return meta.bricksFonts;
+  }
+  const res = await fetch(url + '/bricks-fonts', {
+    credentials: 'same-origin',
+    headers: { 'X-WP-Nonce': nonce },
+  });
+  if (!res.ok) throw new Error(await res.text() || `HTTP ${res.status}`);
+  const data = await res.json();
+  return data.fonts ?? [];
+}
+
+/**
  * Fetch all current token overrides as a portable export envelope.
  *
  * Uses GET so it's safe to call without CSRF concerns; the WP REST nonce
