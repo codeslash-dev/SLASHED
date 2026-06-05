@@ -48,6 +48,16 @@
     outline:    none                         !important;
     box-shadow: var(--sf-focus-ring-shadow)  !important;
   }
+  /* Forced-colors (Windows High Contrast) drops box-shadow entirely, which
+     would leave this element with NO focus indicator. Restore a system-colour
+     outline ring there so the WCAG 2.4.7 guarantee holds in that mode too. */
+  @media (forced-colors: active) {
+    .sf-focus-shadow:focus-visible {
+      outline:        var(--sf-focus-ring-width) solid !important;
+      outline-offset: var(--sf-focus-ring-offset) !important;
+      box-shadow:     none !important;
+    }
+  }
 
   /* ----------------------------------------------------------
      Reduced motion. Token override helps components that read

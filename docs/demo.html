@@ -2601,7 +2601,7 @@
         </p>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-link--subtle</code> / <code>.sf-link--reverse</code> — underline affordance</h3>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">Underline geometry reads <code>--sf-link-underline-offset</code> / <code>--sf-link-underline-thickness</code>.</p>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">The variant classes toggle only the underline line; its geometry comes from base <code>a:link</code> via <code>--sf-link-underline-offset</code> / <code>--sf-link-underline-thickness</code>.</p>
         <p>
           A <a href="#macros" class="sf-link--subtle">subtle link</a> hides its underline until hover/focus, while a
           <a href="#macros" class="sf-link--reverse">reverse link</a> is underlined at rest and clears on hover.
@@ -2623,6 +2623,12 @@
           <div class="sf-scrim sf-scrim--full" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; background: linear-gradient(120deg, #093, #360)">
             <div style="position: absolute; inset: 0; display: grid; place-items: center; color: #fff">
               <strong>Full wash + <span class="sf-text-protect">.sf-text-protect</span></strong>
+            </div>
+          </div>
+          <div class="sf-scrim sf-scrim--bottom" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Crect width='160' height='90' fill='%23e0a' /%3E%3C/svg%3E" alt="" style="display: block; inline-size: 100%; block-size: 100%; object-fit: cover">
+            <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
+              <strong>&lt;img&gt; child</strong>
             </div>
           </div>
         </div>

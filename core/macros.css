@@ -359,12 +359,19 @@
      must establish a stacking/positioning context, so the macro
      sets position: relative and isolation: isolate itself.
 
-       <div class="sf-scrim">
-         <img src="hero.jpg" alt="">
-         <div class="sf-scrim__content">
-           <h2>Legible headline</h2>
-         </div>
+     Two layouts work:
+     (a) image as a CSS background on the wrapper (simplest):
+       <div class="sf-scrim sf-scrim--bottom" style="background-image: url(hero.jpg)">
+         <div class="sf-scrim__content">…</div>
        </div>
+     (b) image as a child element (use object-fit to fill, and
+         position the content over it):
+       <div class="sf-scrim sf-scrim--bottom">
+         <img src="hero.jpg" alt="" style="block-size:100%; object-fit:cover">
+         <div class="sf-scrim__content" style="position:absolute; inset-block-end:0">…</div>
+       </div>
+     In (b) the image is left in the background layer (media children
+     are NOT lifted) so the scrim darkens it; the content is lifted.
 
      The gradient defaults to bottom-anchored (text sits at the
      bottom). Retune via tokens:
@@ -373,7 +380,12 @@
      or replace the whole gradient with --sf-scrim-gradient.
 
      Direction modifiers cover the common anchors without inline
-     styles. Content is lifted above the scrim automatically.
+     styles. Stacking order is image (background layer) → scrim
+     (::before) → content, so the image MUST sit below the scrim:
+     media children (img/picture/video/svg) are intentionally NOT
+     lifted, only the text/content children are. (Lifting every
+     child would promote the image above the scrim and the overlay
+     would never darken it.)
      ---------------------------------------------------------- */
   .sf-scrim {
     position:  relative;
@@ -387,7 +399,12 @@
     background:     var(--sf-scrim-gradient);
     pointer-events: none;
   }
-  .sf-scrim > * { position: relative; z-index: 1; } /* lift real content above the scrim */
+  /* Lift content above the scrim, but leave media below it so the
+     gradient actually darkens the picture. */
+  .sf-scrim > :not(img, picture, video, svg, canvas) {
+    position: relative;
+    z-index:  1;
+  }
   .sf-scrim--top    { --sf-scrim-direction: to bottom; } /* text anchored at the top */
   .sf-scrim--bottom { --sf-scrim-direction: to top; }    /* text anchored at the bottom (default) */
   .sf-scrim--full   { --sf-scrim-gradient: var(--sf-scrim-color); } /* even wash over the whole image */
@@ -467,13 +484,17 @@
        default, underline removed on hover/focus. Use where the
        resting state should read as an obvious link and hover is
        the "active" de-emphasis.
+
+     All four rules are gated on :link/:visited (like base a:link)
+     so the resting and hover halves stay symmetric — the classes
+     are meant for real anchors with an href.
      ---------------------------------------------------------- */
   .sf-link--subtle:link,
   .sf-link--subtle:visited {
     text-decoration-line: none;
   }
-  .sf-link--subtle:hover,
-  .sf-link--subtle:focus-visible {
+  .sf-link--subtle:is(:link, :visited):hover,
+  .sf-link--subtle:is(:link, :visited):focus-visible {
     text-decoration-line:  underline;
     text-decoration-color: currentcolor;
   }
@@ -482,8 +503,8 @@
   .sf-link--reverse:visited {
     text-decoration-line: underline;
   }
-  .sf-link--reverse:hover,
-  .sf-link--reverse:focus-visible {
+  .sf-link--reverse:is(:link, :visited):hover,
+  .sf-link--reverse:is(:link, :visited):focus-visible {
     text-decoration-line: none;
   }
 

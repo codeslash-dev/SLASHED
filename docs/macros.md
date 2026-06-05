@@ -337,13 +337,19 @@ positioned wrapper holding the image + text; the scrim paints as a
 and `isolation: isolate` itself).
 
 ```html
-<div class="sf-scrim sf-scrim--bottom">
-  <img src="hero.jpg" alt="">
-  <div style="position:absolute; inset-block-end:0">
+<div class="sf-scrim sf-scrim--bottom" style="position:relative">
+  <img src="hero.jpg" alt="" style="display:block; inline-size:100%">
+  <div class="sf-scrim__content" style="position:absolute; inset-block-end:0">
     <h2>Legible headline</h2>
   </div>
 </div>
 ```
+
+Media children (`img`, `picture`, `video`, `svg`, `canvas`) are left in
+the background layer so the scrim darkens them; only non-media children
+are lifted above the scrim. Position your content over the image with
+`position: absolute` (as above) or use a CSS `background-image` on the
+wrapper instead of an `<img>` child.
 
 Variants:
 
