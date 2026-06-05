@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**871 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**872 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -580,11 +580,12 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-13 tokens.
+14 tokens.
 
 | Token | Default |
 |---|---|
 | `--sf-aspect` | `16 / 9` |
+| `--sf-content-intrinsic-size` | `500px` |
 | `--sf-flow-space` | `var(--sf-space-content)` |
 | `--sf-line-clamp` | `3` |
 | `--sf-prose-block-margin` | `var(--sf-space-m)` |
