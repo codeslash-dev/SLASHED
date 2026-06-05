@@ -9,17 +9,26 @@
    * Formula (matches the framework's generated clamp()):
    *   value = (min + (max - min) * clamp((vw - VW_MIN) / (VW_MAX - VW_MIN), 0, 1)) * spaceScale
    *
-   * VW bounds match the framework CSS (22.5rem = 360px, 90rem = 1440px).
-   * Per-step token overrides (space_*_min/max) are preferred over the
-   * hardcoded defaults when set.
+   * VW bounds are NOT hardcoded — they come from the Spacing tab's "Fluid
+   * Scale Viewport Range" (viewportRangePx, shared with the Typography
+   * preview) so scrubbing the slider matches the range the generated
+   * clamp() actually interpolates over. Per-step token overrides
+   * (space_*_min/max) are preferred over the hardcoded defaults when set.
    */
-  import { tokens, meta } from '../lib/stores.svelte.js';
+  import { tokens, meta, viewportRangePx } from '../lib/stores.svelte.js';
 
-  const VW_MIN = 360;
-  const VW_MAX = 1440;
+  /** Live viewport range (px) sourced from the Spacing viewport fields. */
+  const range = $derived(viewportRangePx());
 
   /** Viewport slider state — starts at desktop width. */
-  let vw = $state(VW_MAX);
+  let vw = $state(viewportRangePx().maxPx);
+
+  // Keep the slider value inside the (possibly edited) range so it never
+  // drifts out of bounds when the user changes Min/Max viewport.
+  $effect(() => {
+    if (vw < range.minPx) vw = range.minPx;
+    else if (vw > range.maxPx) vw = range.maxPx;
+  });
 
   const defaults = meta.defaults?.spacing ?? {};
   const defaultSizes = defaults.space_sizes ?? {};
@@ -45,7 +54,7 @@
     const spaceScale = parseFloat(
       tokens.spacing?.space_scale ?? defaults.space_scale ?? 1
     ) || 1;
-    const t = Math.max(0, Math.min(1, (vw - VW_MIN) / (VW_MAX - VW_MIN)));
+    const t = Math.max(0, Math.min(1, (vw - range.minPx) / (range.maxPx - range.minPx)));
 
     const stepNames = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl'];
     const maxRef = resolveStep('4xl').max * spaceScale;
@@ -61,7 +70,7 @@
   /** Spacing values at current vw for the container card preview. */
   const cardSpacing = $derived.by(() => {
     const spaceScale = parseFloat(tokens.spacing?.space_scale ?? defaults.space_scale ?? 1) || 1;
-    const t = Math.max(0, Math.min(1, (vw - VW_MIN) / (VW_MAX - VW_MIN)));
+    const t = Math.max(0, Math.min(1, (vw - range.minPx) / (range.maxPx - range.minPx)));
     const resolve = (name) => {
       const { min, max } = resolveStep(name);
       return ((min + (max - min) * t) * spaceScale).toFixed(3);
@@ -74,17 +83,17 @@
   <div class="spacing-preview__header">
     <p class="spacing-preview__title">Live Scale Preview</p>
     <div class="spacing-preview__slider-wrap">
-      <span>{VW_MIN}px</span>
+      <span>{range.minPx}px</span>
       <input
         class="spacing-preview__slider"
         type="range"
-        min={VW_MIN}
-        max={VW_MAX}
+        min={range.minPx}
+        max={range.maxPx}
         step="1"
         aria-label="Preview viewport width"
         bind:value={vw}
       />
-      <span>{VW_MAX}px</span>
+      <span>{range.maxPx}px</span>
       <span class="spacing-preview__vw-label">{vw}px</span>
     </div>
   </div>

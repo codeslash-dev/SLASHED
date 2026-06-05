@@ -72,7 +72,8 @@
     Set mobile and desktop header heights in <code>rem</code>. When both are provided,
     <code>--sf-header-height</code> becomes a fluid <code>clamp()</code> between them using
     the viewport range configured in the Spacing tab. Set both to the same value for a
-    fixed height. Leave blank to use the framework default (<code>5rem</code>).
+    fixed height. Leave blank to use the framework defaults (<code>3.5rem</code> mobile,
+    <code>5rem</code> desktop) — shown as the input placeholders.
   </p>
   <div class="rows">
     <div class="pair-row">
@@ -84,7 +85,7 @@
           label="Mobile (rem)"
           min={0}
           step={0.25}
-          default={defaults.header_height_mobile ?? ''}
+          default={defaults.header_height_mobile || '3.5'}
           cssVar="--sf-header-height-mobile"
           width="100px"
         />
@@ -94,7 +95,7 @@
           label="Desktop (rem)"
           min={0}
           step={0.25}
-          default={defaults.header_height_desktop ?? ''}
+          default={defaults.header_height_desktop || '5'}
           cssVar="--sf-header-height-desktop"
           width="100px"
         />
@@ -109,7 +110,7 @@
           label="Mobile (rem)"
           min={0}
           step={0.25}
-          default={defaults.sticky_offset_mobile ?? ''}
+          default={defaults.sticky_offset_mobile || '3.5'}
           cssVar="--sf-sticky-offset-mobile"
           width="100px"
         />
@@ -119,7 +120,7 @@
           label="Desktop (rem)"
           min={0}
           step={0.25}
-          default={defaults.sticky_offset_desktop ?? ''}
+          default={defaults.sticky_offset_desktop || '5'}
           cssVar="--sf-sticky-offset-desktop"
           width="100px"
         />
