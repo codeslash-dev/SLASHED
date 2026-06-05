@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**160 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**173 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-115 classes.
+120 classes.
 
 | Class |
 |---|
@@ -46,6 +46,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-cover--padding-s` |
 | `.sf-cover__center` |
 | `.sf-divider` |
+| `.sf-divider--dashed` |
+| `.sf-divider--dotted` |
+| `.sf-divider--gradient` |
+| `.sf-divider--soft` |
+| `.sf-divider--strong` |
 | `.sf-divider--vertical` |
 | `.sf-equal` |
 | `.sf-equal--2` |
@@ -130,7 +135,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-28 classes.
+35 classes.
 
 | Class |
 |---|
@@ -141,11 +146,17 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-line-clamp-2` |
 | `.sf-line-clamp-3` |
 | `.sf-line-clamp-N` |
+| `.sf-link--reverse` |
+| `.sf-link--subtle` |
 | `.sf-link-external` |
 | `.sf-no-tap-highlight` |
 | `.sf-not-prose` |
 | `.sf-overflow-fade` |
 | `.sf-prose` |
+| `.sf-scrim` |
+| `.sf-scrim--bottom` |
+| `.sf-scrim--full` |
+| `.sf-scrim--top` |
 | `.sf-scroll-shadow` |
 | `.sf-scroll-snap` |
 | `.sf-surface--action` |
@@ -161,6 +172,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-surface--warning` |
 | `.sf-tabular-nums` |
 | `.sf-text-gradient` |
+| `.sf-text-protect` |
 | `.sf-truncate` |
 
 ## State classes (`core/states.css`)
@@ -212,12 +224,13 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Accessibility (`core/accessibility.css`)
 
-2 classes.
+3 classes.
 
 | Class |
 |---|
 | `.sf-clickable-parent` |
 | `.sf-focus-parent` |
+| `.sf-focus-shadow` |
 
 ## Motion / entrances (`core/motion.css`)
 

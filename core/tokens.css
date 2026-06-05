@@ -359,6 +359,11 @@
     );
     --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
+    /* Underline geometry — consumed by a:link in core/base.css and by
+       the .sf-link--* macros. `auto` defers to the font's own metrics;
+       set an explicit length (e.g. 0.08em) for a uniform rule. */
+    --sf-link-underline-offset:    0.15em;
+    --sf-link-underline-thickness: auto;
 
     /* ----------------------------------------------------------
        Interactive states — derived from --sf-color-neutral (auto-adapts)

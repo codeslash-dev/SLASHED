@@ -1475,6 +1475,12 @@
           <span class="sf-divider--vertical" role="separator" aria-orientation="vertical"></span>
           <span>Right</span>
         </div>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block: var(--sf-space-s) var(--sf-space-2xs)">Style modifiers — colour via <code>.sf-divider--soft</code> / <code>.sf-divider--strong</code>, line via <code>.sf-divider--dashed</code> / <code>.sf-divider--dotted</code>, and a fading <code>.sf-divider--gradient</code>.</p>
+        <hr class="sf-divider sf-divider--soft">
+        <hr class="sf-divider sf-divider--strong">
+        <hr class="sf-divider sf-divider--dashed">
+        <hr class="sf-divider sf-divider--dotted">
+        <hr class="sf-divider sf-divider--gradient">
 
         <h3>.sf-icon</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Em-based inline icon sizing. Scales with surrounding text; size modifiers <code>.sf-icon--xs</code> … <code>.sf-icon--2xl</code>.</p>
@@ -2615,6 +2621,45 @@
         <p>
           See the <a href="https://example.com" class="sf-link-external">external project</a>
           for more — the marker is configurable via <code>--sf-link-external-marker</code>.
+        </p>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-link--subtle</code> / <code>.sf-link--reverse</code> — underline affordance</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">The variant classes toggle only the underline line; its geometry comes from base <code>a:link</code> via <code>--sf-link-underline-offset</code> / <code>--sf-link-underline-thickness</code>.</p>
+        <p>
+          A <a href="#macros" class="sf-link--subtle">subtle link</a> hides its underline until hover/focus, while a
+          <a href="#macros" class="sf-link--reverse">reverse link</a> is underlined at rest and clears on hover.
+        </p>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-scrim</code> — text-over-image legibility</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Gradient overlay between an image and its text. Direction modifiers <code>.sf-scrim--top</code> / <code>.sf-scrim--bottom</code>, or an even wash with <code>.sf-scrim--full</code>. Retune via <code>--sf-scrim-color</code> / <code>--sf-scrim-direction</code> / <code>--sf-scrim-gradient</code>.</p>
+        <div class="sf-cluster sf-cluster--m">
+          <div class="sf-scrim sf-scrim--bottom" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; background: linear-gradient(120deg, #4f7, #07c)">
+            <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
+              <strong>Bottom scrim</strong>
+            </div>
+          </div>
+          <div class="sf-scrim sf-scrim--top" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; background: linear-gradient(120deg, #f70, #c07)">
+            <div style="position: absolute; inset-block-start: 0; padding: var(--sf-space-s); color: #fff">
+              <strong>Top scrim</strong>
+            </div>
+          </div>
+          <div class="sf-scrim sf-scrim--full" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; background: linear-gradient(120deg, #093, #360)">
+            <div style="position: absolute; inset: 0; display: grid; place-items: center; color: #fff">
+              <strong>Full wash + <span class="sf-text-protect">.sf-text-protect</span></strong>
+            </div>
+          </div>
+          <div class="sf-scrim sf-scrim--bottom" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Crect width='160' height='90' fill='%23e0a' /%3E%3C/svg%3E" alt="" style="display: block; inline-size: 100%; block-size: 100%; object-fit: cover">
+            <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
+              <strong>&lt;img&gt; child</strong>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-focus-shadow</code> — box-shadow focus ring (opt-in)</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">Tab to this link: the focus indicator follows the rounded corner via <code>box-shadow: var(--sf-focus-ring-shadow)</code> instead of the default outline.</p>
+        <p>
+          <a href="#macros" class="sf-focus-shadow" style="display: inline-block; padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill); background: var(--sf-color-inset)">Focusable pill</a>
         </p>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-section--collapse</code> — adjacent sections share padding</h3>

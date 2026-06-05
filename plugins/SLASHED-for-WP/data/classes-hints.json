@@ -43,6 +43,26 @@
     "description": "Standalone separator primitive. Token-driven; pairs with the",
     "category": "Layout"
   },
+  "sf-divider--soft": {
+    "description": "Standalone separator primitive. Token-driven; pairs with the",
+    "category": "Layout"
+  },
+  "sf-divider--strong": {
+    "description": "Standalone separator primitive. Token-driven; pairs with the",
+    "category": "Layout"
+  },
+  "sf-divider--dashed": {
+    "description": "Standalone separator primitive. Token-driven; pairs with the",
+    "category": "Layout"
+  },
+  "sf-divider--dotted": {
+    "description": "Standalone separator primitive. Token-driven; pairs with the",
+    "category": "Layout"
+  },
+  "sf-divider--gradient": {
+    "description": "Standalone separator primitive. Token-driven; pairs with the",
+    "category": "Layout"
+  },
   "sf-container": {
     "description": "Max-width container, centered with side gutters. Establishes",
     "category": "Layout"
@@ -555,6 +575,26 @@
     "description": "Sets background + auto-flipped foreground in one class.",
     "category": "Macros"
   },
+  "sf-scrim": {
+    "description": "Darkening overlay for text placed over a background image, so",
+    "category": "Macros"
+  },
+  "sf-scrim--top": {
+    "description": "Darkening overlay for text placed over a background image, so",
+    "category": "Macros"
+  },
+  "sf-scrim--bottom": {
+    "description": "Darkening overlay for text placed over a background image, so",
+    "category": "Macros"
+  },
+  "sf-scrim--full": {
+    "description": "Darkening overlay for text placed over a background image, so",
+    "category": "Macros"
+  },
+  "sf-text-protect": {
+    "description": "Lighter-weight alternative to .sf-scrim: protects legibility",
+    "category": "Macros"
+  },
   "sf-text-gradient": {
     "description": "Fills text with a gradient. Defaults to --sf-gradient-primary",
     "category": "Macros"
@@ -569,6 +609,14 @@
   },
   "sf-tabular-nums": {
     "description": "Fixed-width digits so numbers align in vertical columns",
+    "category": "Macros"
+  },
+  "sf-link--subtle": {
+    "description": "Opt-in link treatments composed from the link tokens. They",
+    "category": "Macros"
+  },
+  "sf-link--reverse": {
+    "description": "Opt-in link treatments composed from the link tokens. They",
     "category": "Macros"
   },
   "is-hidden": {

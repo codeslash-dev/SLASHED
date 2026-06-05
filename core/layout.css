@@ -59,6 +59,20 @@
     margin-inline:       var(--sf-divider-gap);
     align-self:          stretch;
   }
+  /* Style modifiers — retune the line itself via the same tokens the
+     base rule reads, so they apply to horizontal and vertical alike. */
+  .sf-divider--soft   { --sf-divider-color: var(--sf-color-border--subtle); }
+  .sf-divider--strong { --sf-divider-color: var(--sf-color-border--strong); }
+  .sf-divider--dashed { --sf-divider-style: dashed; }
+  .sf-divider--dotted { --sf-divider-style: dotted; }
+  /* Gradient divider — a hairline that fades out at both ends. Replaces
+     the border with a masked background so it can't use border-style;
+     height tracks --sf-divider-width. Horizontal only. */
+  .sf-divider--gradient {
+    border:        none;
+    block-size:    var(--sf-divider-width);
+    background:    linear-gradient(to right, transparent, var(--sf-divider-color), transparent);
+  }
 
   /* -- Container -----------------------------------------------
      Max-width container, centered with side gutters. Establishes

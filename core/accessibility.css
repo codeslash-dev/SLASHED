@@ -30,6 +30,36 @@
   }
 
   /* ----------------------------------------------------------
+     Focus-shadow opt-in — switches the focus indicator from the
+     default `outline` ring to a `box-shadow` ring (the composite
+     --sf-focus-ring-shadow token). Useful when the outline clips
+     awkwardly on rounded corners or overflow:hidden containers,
+     where box-shadow follows border-radius. Opt-in per element:
+       <a class="sf-focus-shadow" href="…">…</a>
+
+     The base :focus-visible outline is hardened with !important
+     (WCAG 2.4.7), so this opt-in must also use !important to take
+     over — it replaces one always-visible ring with another, so
+     the keyboard-focus guarantee is preserved, not weakened.
+     outline:none here only removes the now-redundant outline ring
+     in favour of the box-shadow ring on the same element.
+     ---------------------------------------------------------- */
+  .sf-focus-shadow:focus-visible {
+    outline:    none                         !important;
+    box-shadow: var(--sf-focus-ring-shadow)  !important;
+  }
+  /* Forced-colors (Windows High Contrast) drops box-shadow entirely, which
+     would leave this element with NO focus indicator. Restore a system-colour
+     outline ring there so the WCAG 2.4.7 guarantee holds in that mode too. */
+  @media (forced-colors: active) {
+    .sf-focus-shadow:focus-visible {
+      outline:        var(--sf-focus-ring-width) solid !important;
+      outline-offset: var(--sf-focus-ring-offset) !important;
+      box-shadow:     none !important;
+    }
+  }
+
+  /* ----------------------------------------------------------
      Reduced motion. Token override helps components that read
      duration tokens in other contexts; the property-level
      !important block is the real guarantee and works
