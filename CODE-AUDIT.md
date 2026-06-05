@@ -9,8 +9,12 @@
 > `plugins/SLASHED-for-WP` tree confirmed most prior High/Medium items were
 > already fixed (CSS-generator allowlist validation, `slashed.php` cleanup +
 > cron moved to the global layer, color defaults consolidated through
-> `Slashed_Token_Defaults`). Two genuine bugs and one duplication remained and
-> were fixed in this pass — see **"Re-audit fixes (2026-06-05)"** below.
+> `Slashed_Token_Defaults`). Two genuine bugs, one PHP duplication, and a set
+> of editor-app cleanups were fixed in this pass — see
+> **"Re-audit fixes (2026-06-05)"** below. A deep read of the entire
+> `editor-app` (~5.4k lines) found **no functional bugs** — only the small
+> cleanups listed. Items that need a product/architecture decision before
+> touching are collected under **"Remaining — needs a decision"**.
 
 Whole-repo code review across four domains: build scripts, the WordPress PHP
 plugin, the Svelte editor/admin apps, and the CSS source. Overall the codebase
@@ -59,6 +63,38 @@ always-loaded canonical owner, in both unified and standalone modes); the REST
 endpoint is a thin wrapper, and the shared transient key is a single constant
 `Slashed_Token_Page::CPT_FONTS_TRANSIENT`. No behavioural change.
 
+### 3. editor-app cleanups (reBEMer + Color System)
+
+A full read of all ~5.4k lines of `editor-app` confirmed the bundle is in very
+good shape — solid lifecycle teardown (every module wires an `AbortController`
++ `destroy()`), debounced + pre-filtered mutation observers, pure unit-tested
+helpers, and an allowlist-based migrate path with snapshot/rollback. The
+following small, behaviour-preserving cleanups were applied and the bundle
+rebuilt (`assets/editor-app/app.js`):
+
+- **Dead prop `referenceMode` removed.** `ColorPanel.svelte` declared and
+  `ColorApp.svelte` passed `referenceMode`, but the component derives its mode
+  purely from whether `onPickValue` is supplied (`pickerMode`). The prop was
+  never read. Removed from both the prop list and the call site.
+- **`ColorPanel.svelte` Brand/Status duplication collapsed.** The two palette
+  sections were ~90 lines of near-identical markup differing only by the source
+  group list. Extracted into a single `{#snippet familyScanner(groups)}`
+  rendered twice (`brandGroups` / `statusGroups`) so they can't drift. Pure
+  structural refactor — `app.css` is byte-identical, confirming no class/markup
+  change.
+- **Redundant branch in `color-swatches.js`.** `injectSFButton()` had an
+  `else if (varBtn) appendChild` / `else appendChild` pair that both did the
+  same thing; collapsed to a single `else`.
+
+### 4. PHP: duplicated `require_once` block extracted
+
+`slashed-bricks.php` loaded the same parser → resolver → inventory trio in both
+`slashed_bricks_data_init()` (plugins_loaded) and `slashed_bricks_init()`
+(after_setup_theme). The two paths gate on different signals and must each load
+their deps independently, so the calls can't simply be removed — instead the
+shared trio is now `slashed_bricks_require_data_classes()`, called from both.
+Idempotent via `require_once`; no behavioural change.
+
 ### Verified already-resolved since the 2026-06-02 snapshot
 
 CSS-generator allowlist validation (`valid_color`/`valid_dimension`/
@@ -66,16 +102,44 @@ CSS-generator allowlist validation (`valid_color`/`valid_dimension`/
 activation hook removed and the version-check cron clean-up moved to the global
 layer; `class-color-resolver.php` default colors derived from
 `Slashed_Token_Defaults`; the "kept for tests" `get_colors()`/`get_classes()`
-wrappers and the empty `slashed_bricks_activation_check()` are gone.
+wrappers and the empty `slashed_bricks_activation_check()` are gone. In
+`editor-app`: the speculative "shape 3 (hypothetical)" history probe in
+`bricks-api.js` is gone (only two version-verified shapes remain), and
+`color-swatches.js` now pre-filters mutations via `touchesPicker()` + a 50 ms
+debounce rather than running `.closest()` on every mutation.
 
-### Still open (documented, not changed this pass)
+### Remaining — needs a decision (not changed this pass)
 
-- `editor-app/src/lib/apply.js` migrate path — the two-siblings-into-one-new-
-  class edge case still reads a pre-batch `globalClasses` snapshot. Lives in the
-  compiled editor bundle and needs a live Bricks editor to verify safely; left
-  as-is to avoid a blind change.
-- `class-css-parser.php` `[^}]*` regex — brittle on `}` inside an
-  `@property` initial-value. Non-fatal (cached, editor-only).
+Each of these is either intentional-by-design or carries enough behavioural risk
+that it should be a deliberate choice rather than a drive-by edit:
+
+1. **Triplicated `DIST_SHA` constant** — `slashed.php:41`,
+   `slashed-bricks.php:32`, `slashed-gutenberg.php:32` hand-sync the same SHA.
+   The inline comment says this is **deliberate** so each integration file stays
+   self-contained and distributable standalone; the version-sync workflow keeps
+   them aligned. Decision needed: accept the documented duplication, or add a
+   shared canonical constant with a standalone fallback. *Left as-is.*
+2. **Duplicated `slashed_inject_token_overrides()`** — defined in both
+   `slashed.php` and (guarded by `! defined('SLASHED_VERSION')`) in
+   `slashed-bricks.php`. This is the **standalone-mode bootstrap**: the Bricks
+   plugin must provide the function when the unified plugin isn't present.
+   Removing it would break standalone activation. Decision needed: keep, or
+   factor the shared bootstrap into a common file loaded by both. *Left as-is.*
+3. **`apply.js` migrate edge case** — two siblings migrating into the *same new*
+   class name. Re-reading the full file, the live `getGlobalClasses()` reference
+   + the additive merge block + auto-numbering's uniqueness guarantee appear to
+   cover this, but confirming it needs a live Bricks editor. Decision needed:
+   write an integration test harness, or leave the current (apparently-correct)
+   behaviour documented. *Left as-is — no blind change.*
+4. **`class-css-parser.php` `[^}]*` regex** — breaks on a `}` inside an
+   `@property` initial-value. Non-fatal (cached, editor-only) and CSS parsing
+   via regex is inherently brittle. Decision needed: accept, or move to a small
+   tokeniser. *Left as-is.*
+5. **`migrate-keys.js` allowlist carries both naming conventions** — e.g.
+   `_widthMin`/`_widthMax` *and* `_minWidth`/`_maxWidth`. Harmless (unknown keys
+   are simply never present), but worth confirming which Bricks actually uses
+   and pruning the dead half. Decision needed: verify against a live Bricks
+   build before trimming. *Left as-is.*
 
 ---
 

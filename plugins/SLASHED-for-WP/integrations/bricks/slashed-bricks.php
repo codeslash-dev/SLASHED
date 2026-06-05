@@ -203,6 +203,21 @@ function slashed_bricks_rest_routes_init() {
 add_action( 'rest_api_init', 'slashed_bricks_rest_routes_init' );
 
 /**
+ * Load the shared Bricks data classes (parser → resolver → inventory).
+ *
+ * Required by both bootstrap paths — slashed_bricks_data_init() at
+ * plugins_loaded and slashed_bricks_init() at after_setup_theme. Each calls
+ * this independently because the two paths gate on different signals (the
+ * `template` option vs the live Bricks version), so neither may assume the
+ * other has already run. Idempotent via require_once.
+ */
+function slashed_bricks_require_data_classes() {
+    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
+    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+}
+
+/**
  * Data managers: early initialization at plugins_loaded.
  *
  * Bricks' Database::__construct() reads bricks_global_variables,
@@ -220,9 +235,7 @@ function slashed_bricks_data_init() {
         return;
     }
 
-    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+    slashed_bricks_require_data_classes();
     require_once SLASHED_BRICKS_PATH . 'includes/class-variables.php';
     require_once SLASHED_BRICKS_PATH . 'includes/class-classes.php';
 
@@ -243,9 +256,7 @@ function slashed_bricks_init() {
         return;
     }
 
-    require_once SLASHED_BRICKS_PATH . 'includes/class-css-parser.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-color-resolver.php';
-    require_once SLASHED_BRICKS_PATH . 'includes/class-inventory.php';
+    slashed_bricks_require_data_classes();
     require_once SLASHED_BRICKS_PATH . 'includes/class-enqueue.php';
 
     new Slashed_Bricks_Enqueue();
