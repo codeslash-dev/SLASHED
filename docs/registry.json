@@ -20,7 +20,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 803,
+      "tokens": 805,
       "sf_classes": 158,
       "is_classes": 40
     }
@@ -479,6 +479,7 @@
     "--sf-font-heading",
     "--sf-font-humanist",
     "--sf-font-mono",
+    "--sf-font-numeric",
     "--sf-font-slab",
     "--sf-font-variation",
     "--sf-font-weight-black",
@@ -817,6 +818,7 @@
     "--sf-transition-exit",
     "--sf-transition-fast",
     "--sf-transition-opacity",
+    "--sf-transition-overlay",
     "--sf-transition-shadow",
     "--sf-transition-slow",
     "--sf-transition-transform",

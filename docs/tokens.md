@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**869 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**871 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-502 tokens.
+504 tokens.
 
 | Token | Default |
 |---|---|
@@ -316,6 +316,7 @@ rebrand workflow.
 | `--sf-font-heading` | `var(--sf-font-body)` |
 | `--sf-font-humanist` | `"Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif` |
 | `--sf-font-mono` | `ui-monospace, monospace` |
+| `--sf-font-numeric` | `tabular-nums` |
 | `--sf-font-slab` | `"Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif` |
 | `--sf-font-variation` | `normal` |
 | `--sf-font-weight-black` | `900` |
@@ -509,6 +510,7 @@ rebrand workflow.
 | `--sf-transition-exit` | `all var(--sf-duration-fast) var(--sf-ease-in)` |
 | `--sf-transition-fast` | `all var(--sf-duration-fast) var(--sf-ease-out)` |
 | `--sf-transition-opacity` | `opacity var(--sf-duration-normal) var(--sf-ease-out)` |
+| `--sf-transition-overlay` | `overlay var(--sf-duration-normal) allow-discrete, display var(--sf-duration-normal) allow-discrete` |
 | `--sf-transition-shadow` | `box-shadow var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-slow` | `all var(--sf-duration-slow) var(--sf-ease-in-out)` |
 | `--sf-transition-transform` | `transform var(--sf-duration-normal) var(--sf-ease-out)` |
