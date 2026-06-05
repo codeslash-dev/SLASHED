@@ -95,6 +95,22 @@ their deps independently, so the calls can't simply be removed — instead the
 shared trio is now `slashed_bricks_require_data_classes()`, called from both.
 Idempotent via `require_once`; no behavioural change.
 
+### 5. PR #230 review feedback addressed (CodeRabbit)
+
+- **CPT font-cache invalidation moved to an always-loaded path (real fix).** The
+  `save_post_{BRICKS_DB_CUSTOM_FONTS}` → cache-bust hook was registered inside
+  `Slashed_Bricks_Fonts_REST::register_routes()`, which only runs on
+  `rest_api_init`. A normal (non-REST) admin save of a custom-font post would
+  therefore not invalidate the `slashed_bricks_cpt_fonts` transient, leaving a
+  stale font list for up to an hour. The invalidation now lives on
+  `Slashed_Token_Page::flush_bricks_fonts_cache()` (the always-loaded canonical
+  owner of the transient) and is hooked from `slashed_bricks_data_init()`
+  (`plugins_loaded`, all request types). The REST class no longer registers the
+  hook. Pre-existing bug, surfaced by the de-dup refactor.
+- **Inline `base`/`surface` comment added in `class-inventory.php`** to mirror
+  the note in `export.js`, so the brand-family list documents why `base` is
+  included and `surface` (a derived alias) is not.
+
 ### Verified already-resolved since the 2026-06-02 snapshot
 
 CSS-generator allowlist validation (`valid_color`/`valid_dimension`/

@@ -241,6 +241,18 @@ function slashed_bricks_data_init() {
 
     new Slashed_Bricks_Variables();
     new Slashed_Bricks_Classes();
+
+    // Invalidate the Bricks Font-Manager CPT cache on every custom-font save.
+    // Registered here (plugins_loaded, all request types) rather than from REST
+    // route registration so the cache is busted on normal admin saves too, not
+    // only during REST requests. The collector + transient live in the
+    // always-loaded Slashed_Token_Page.
+    if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) && class_exists( 'Slashed_Token_Page' ) ) {
+        add_action(
+            'save_post_' . BRICKS_DB_CUSTOM_FONTS,
+            array( 'Slashed_Token_Page', 'flush_bricks_fonts_cache' )
+        );
+    }
 }
 add_action( 'plugins_loaded', 'slashed_bricks_data_init', 20 );
 

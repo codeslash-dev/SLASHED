@@ -238,6 +238,9 @@ class Slashed_Bricks_Inventory {
 		$settings = $tokens['colors'];
 		$overrides = array();
 
+		// Brand families: 'base' is the source token (--sf-color-base-light);
+		// 'surface' is a derived alias with no -light source, so it's excluded.
+		// Must stay in sync with Slashed_CSS_Generator::generate_color_declarations().
 		$brand_colors  = array( 'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base' );
 		$status_colors = array( 'success', 'warning', 'error', 'info', 'danger' );
 

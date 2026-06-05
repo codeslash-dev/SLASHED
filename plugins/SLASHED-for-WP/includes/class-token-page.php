@@ -171,6 +171,18 @@ class Slashed_Token_Page {
 	const CPT_FONTS_TRANSIENT = 'slashed_bricks_cpt_fonts';
 
 	/**
+	 * Flush the cached Bricks Font-Manager CPT font list.
+	 *
+	 * Registered on save_post_{BRICKS_DB_CUSTOM_FONTS} from an always-loaded
+	 * bootstrap path (see slashed-bricks.php) rather than from REST route
+	 * registration, so the cache is invalidated on every custom-font save —
+	 * including normal admin saves, not only during REST requests.
+	 */
+	public static function flush_bricks_fonts_cache() {
+		delete_transient( self::CPT_FONTS_TRANSIENT );
+	}
+
+	/**
 	 * Collect every font Bricks already knows how to serve.
 	 *
 	 * Canonical implementation shared by the admin SPA bootstrap (here) and
