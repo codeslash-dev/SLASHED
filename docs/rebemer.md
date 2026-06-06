@@ -10,9 +10,9 @@ License: MIT, same as the host plugin.
 
 ## 0. Implementation status
 
-This document is *both* the v1 design and the running implementation
-log. Section bodies describe the full v1 design; this table tracks
-what has actually shipped in code so far. Update on every reBEMer PR.
+Section bodies describe the full v1 design; this table tracks what has shipped
+in code. Spec-only rows (§10, §11, §13, §15, §16) describe accurate design that
+lands in follow-up PRs.
 
 | Capability | Status | Where |
 |---|---|---|
@@ -29,7 +29,7 @@ what has actually shipped in code so far. Update on every reBEMer PR.
 | Per-row skip toggle (§6.2, §9) | ✅ shipped | `Row.svelte` include checkbox |
 | `suggestedFrom` provenance tracking (§9) | ✅ shipped | `'user' \| 'label' \| 'element-type' \| 'fallback' \| 'auto-number'`; `AUTHORITATIVE_PROVENANCE` set in `apply.js` covers user + label |
 | "Use existing class" client-side hint (§11.3 `recommendedAction: "attach"`) | ✅ shipped (client snapshot only) | `Row.svelte` derived `existingClassMatch` |
-| Unused-class read-only report (§20) | ✅ shipped | `GET /rebemer/unused`, `class-rebemer-rest.php` |
+| Unused-class read-only report | ✅ shipped | `GET /rebemer/unused`, `class-rebemer-rest.php` |
 | BEM grammar policy (§8) | ⚠️ partial | basic `validateName()` exists; no policy hydration yet |
 | Reserved-name guard (§13) | ⚠️ partial | CSS keywords blocked; SLASHED utility list not yet wired |
 | Cross-page reference-count preflight (§11.1–11.3) | ❌ spec-only | needs server endpoint + client preflight call |
@@ -37,9 +37,6 @@ what has actually shipped in code so far. Update on every reBEMer PR.
 | Real undo via in-panel ring buffer (§15) | ❌ spec-only | no undo yet |
 | `nameCollisions.recommendedAction: "rename" / "replace"` (§11.3) | ❌ spec-only | needs preflight; `"attach"` is client-side via match-by-name |
 | i18n string table (§16) | ❌ spec-only | strings are hardcoded English |
-
-The "spec-only" rows describe the destination v1 design; their bodies
-in §10, §11, §13, §15, §16 are accurate. They land in follow-up PRs.
 
 ---
 
@@ -54,57 +51,6 @@ preflight that counts other elements still using the old class, so a
 rename cannot silently break unrelated parts of the site. A snapshot
 of the Bricks state is taken before every apply, with a single Cmd-Z
 inside the panel reverting the whole operation.
-
-## 2. Why this exists
-
-Bricks already ships native class management (rename/search-replace,
-the Global Class Manager). Those tools operate on **classes** in
-isolation. reBEMer fills the gap nobody else fills: operating on the
-**element subtree** as a unit, with BEM grammar built in.
-
-Existing Auto-BEM tools are paid and bundled with coordinated frameworks.
-reBEMer is the SLASHED-shaped equivalent — free, scoped, and safer.
-
-
-## 3. Goals (v1)
-
-1. **Subtree BEM** — name a block + all descendant elements + optional
-   modifier in one operation, applied only to the selected subtree.
-2. **Five operations** — Add, Rename, Replace, Add Modifier, Migrate
-   ID styles → class.
-3. **Reference-count safety** — before any operation that detaches an
-   old class from a subtree, the user is told whether that class is
-   still in use elsewhere.
-4. **Transactional apply** — every operation is a single atomic step
-   from the user's point of view, with snapshot/rollback on failure.
-5. **Real undo** — one Cmd-Z (or Ctrl-Z) reverses the whole operation.
-6. **No destructive global writes** — reBEMer never deletes a class
-   from the global registry. That is Bricks' job.
-7. **Builder-only attack surface** — the editor JS bundle is enqueued
-   only in the Bricks builder context, gated by capability.
-8. **i18n + a11y from day one** — every string translatable, every
-   control a real `<button>` with ARIA, focus trap, keyboard ops.
-9. **Element-aware suggestions** — every descendant row pre-fills its
-   name from the Bricks element type (heading → `__heading`, image →
-   `__image`, repeated divs → `__item`); siblings of the same role are
-   auto-numbered in the plan to avoid in-plan collisions; every row
-   carries a `skip` toggle so users can exclude one descendant without
-   breaking the atomic apply.
-
-## 4. Non-goals (v1)
-
-- Site-wide rename of a class. *(Bricks already does this natively.)*
-- Full-page BEM linter pass / audit report. *(Maybe v1.1+.)*
-- Audit log of past renames. *(Stub endpoint only, behind a setting.)*
-- Settings UI for naming policy. *(Filterable from PHP day one,
-  visual UI deferred to v1.1.)*
-- TypeScript across the editor app. *(Plain JS + JSDoc, matching the
-  existing admin-app convention.)*
-- Server-side mutation of `bricks_global_classes`. *(Mutations stay
-  client-side via the Vue state seam; Bricks autosaves them.)*
-- Replacing or shimming Bricks' Global Class Manager.
-- Any kind of telemetry.
-
 
 ## 5. Glossary
 
@@ -841,29 +787,6 @@ by hand against a real Bricks install before each release. Topics:
 Playwright is already a dev-dependency at the repo root. A reBEMer
 spec is out of scope for v1 but the test list is captured in
 `tests/rebemer/PLAN.md` as future work.
-
-## 20. Open questions and v1.1 candidates
-
-- **Settings UI** in the SLASHED admin SPA for naming policy.
-- **Linter mode**: scan the page, surface non-BEM classes, propose
-  fixes. Differentiator vs. competing Auto-BEM tools.
-- **Audit log**: per-user record of past operations.
-- **Bulk operations** across siblings via shift-click in the
-  structure panel.
-- **Class settings inheritance helper** (e.g. `card__title` seeds from
-  an existing `_h2` class).
-- **Bricks history hook** if and when Bricks exposes a public seam.
-- **Telemetry-free crash reports** that copy a redacted plan to
-  clipboard for users to attach to bug reports.
-- **Unused-class read-only report** (`GET /rebemer/unused`): scans
-  `bricks_global_classes` and the post-meta where Bricks elements live,
-  returns the list of class ids whose `outsideSubtreeOnPage + otherPosts`
-  reference count is zero across the site. Read-only, never mutates the
-  registry — deletion stays the user's job in Bricks' Global Class
-  Manager (Goal #6 stands). The endpoint shares its reference-counting
-  helper (`Slashed_Bricks_ReBEMer_REST::count_references()`) with the
-  preflight endpoint, so adding it is mostly UI work. Same caps and
-  capability check as preflight.
 
 ## 21. Glossary of acronyms used
 

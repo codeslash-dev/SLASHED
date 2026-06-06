@@ -37,13 +37,11 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="optional/legacy.css">
 ```
 
-> **Note:** `optional/components.css` and `optional/tokens.components.css`
-> are not yet complete — their `@layer` declarations are real, but every
-> class definition and component token is commented out (no CSS is emitted).
-> They appear (as no-ops) in the `*-components` and `full` bundles only.
-> `optional/utilities.css` remains an empty stub — SLASHED is BEM-first by
-> design and ships no utility classes in 0.x. There's no need to link any
-> of the three individually.
+`optional/components.css` and `optional/tokens.components.css` are incomplete:
+their `@layer` declarations are real, but every class and component token is
+commented out, so no CSS is emitted. They appear only in the `*-components` and
+`full` bundles. `optional/utilities.css` is an empty stub — SLASHED is BEM-first
+and ships no utility classes in 0.x.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -113,7 +111,7 @@ the `slashed.tokens` layer.
 `optional/legacy.css` is always concatenated last. Every rule lives in an
 `@layer`, so concatenation order never affects the cascade — `core/layers.css`
 fixes it. The files marked *(incomplete)* (`components`, `tokens.components`)
-and the empty `utilities` stub emit no CSS yet (see the Quick start note).
+and the empty `utilities` stub emit no CSS yet.
 
 À la carte is also supported — start from `essential` (or raw `core/`) and add
 hand-picked optional files in any order. When building a custom bundle by hand,
