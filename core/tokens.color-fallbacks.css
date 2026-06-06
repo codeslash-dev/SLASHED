@@ -1,343 +1,86 @@
-/* SLASHED — core/tokens.color-fallbacks.css  (@layer slashed.tokens + slashed.themes)
-   GENERATED FROM SOURCE by scripts/gen-color-fallbacks.js
-   Regenerate: npm run gen:fallbacks
-   Do NOT edit by hand — changes will be overwritten. */
+/* SLASHED — core/tokens.color-fallbacks.css  (@layer slashed.tokens)
+   HSL-based fallbacks for browsers without light-dark() / oklch(from…) support.
+   Light mode only — dark mode is handled by modern CSS exclusively.
+   Customise by overriding the --sf-*-h / --sf-*-s / --sf-*-l channel variables;
+   the entire derived token tree recomputes automatically, no build step required. */
 
 @layer slashed.tokens {
-
-  /* ── Unguarded sRGB defaults — light mode ───────────────────────────────── */
   :root {
+    /* ── Source channels — override to apply brand colours ────────────────
+       Values are approximate HSL equivalents of the OKLCH source tokens.    */
 
-    /* brand + status resolved */
-    --sf-color-primary: #0137ee;
-    --sf-color-secondary: #111a2d;
-    --sf-color-tertiary: #5c10b4;
-    --sf-color-action: #006ca2;
-    --sf-color-neutral: #616978;
-    --sf-color-base: #eff2f6;
-    --sf-color-success: #00791b;
-    --sf-color-warning: #e59f00;
-    --sf-color-error: #bb061e;
-    --sf-color-info: #00669a;
-    --sf-color-danger: #b5003d;
+    --sf-primary-h:   226;  --sf-primary-s:   99%;  --sf-primary-l:   47%;
+    --sf-secondary-h: 221;  --sf-secondary-s: 45%;  --sf-secondary-l: 12%;
+    --sf-tertiary-h:  268;  --sf-tertiary-s:  84%;  --sf-tertiary-l:  39%;
+    --sf-action-h:    200;  --sf-action-s:   100%;  --sf-action-l:    32%;
+    --sf-neutral-h:   217;  --sf-neutral-s:   11%;  --sf-neutral-l:   42%;
+    --sf-base-h:      211;  --sf-base-s:      27%;  --sf-base-l:      95%;
+    --sf-success-h:   134;  --sf-success-s:  100%;  --sf-success-l:   24%;
+    --sf-warning-h:    42;  --sf-warning-s:  100%;  --sf-warning-l:   45%;
+    --sf-error-h:     352;  --sf-error-s:     93%;  --sf-error-l:     38%;
+    --sf-info-h:      200;  --sf-info-s:     100%;  --sf-info-l:      30%;
+    --sf-danger-h:    340;  --sf-danger-s:   100%;  --sf-danger-l:    35%;
 
-    /* surfaces (derived) */
-    --sf-color-bg: #f5f9fc;
-    --sf-color-inset: #e8ebef;
-    --sf-color-raised: #fff;
-    --sf-color-overlay: rgb(239 242 246 / 0.90);
-    --sf-color-inverse: #000;
+    /* ── Brand resolved ───────────────────────────────────────────────────── */
 
-    /* text */
-    --sf-color-text: #02060f;
-    --sf-color-text--secondary: #1f2733;
-    --sf-color-text--placeholder: #8c96a5;
-    --sf-color-text--disabled: #abb5c5;
-    --sf-color-text--inverse: #dbe5f6;
-    --sf-color-heading: #02060f;
-    --sf-color-code-text: #030303;
+    --sf-color-primary:   hsl(var(--sf-primary-h)   var(--sf-primary-s)   var(--sf-primary-l));
+    --sf-color-secondary: hsl(var(--sf-secondary-h) var(--sf-secondary-s) var(--sf-secondary-l));
+    --sf-color-tertiary:  hsl(var(--sf-tertiary-h)  var(--sf-tertiary-s)  var(--sf-tertiary-l));
+    --sf-color-action:    hsl(var(--sf-action-h)    var(--sf-action-s)    var(--sf-action-l));
+    --sf-color-neutral:   hsl(var(--sf-neutral-h)   var(--sf-neutral-s)   var(--sf-neutral-l));
+    --sf-color-base:      hsl(var(--sf-base-h)      var(--sf-base-s)      var(--sf-base-l));
 
-    /* text-on-color */
-    --sf-color-text--on-primary: #eee;
-    --sf-color-text--on-secondary: #eee;
-    --sf-color-text--on-tertiary: #eee;
-    --sf-color-text--on-action: #eee;
-    --sf-color-text--on-neutral: #eee;
-    --sf-color-text--on-success: #eee;
-    --sf-color-text--on-warning: #030303;
-    --sf-color-text--on-error: #eee;
-    --sf-color-text--on-info: #eee;
-    --sf-color-text--on-danger: #eee;
+    /* ── Status resolved ──────────────────────────────────────────────────── */
 
-    /* borders */
-    --sf-color-border: #d2d4d7;
-    --sf-color-border--subtle: #e3e5e8;
-    --sf-color-border--strong: #7f8793;
-    --sf-color-border--disabled: rgb(228 228 228 / 0.50);
-    --sf-color-border--translucent: rgb(97 105 120 / 0.15);
+    --sf-color-success: hsl(var(--sf-success-h) var(--sf-success-s) var(--sf-success-l));
+    --sf-color-warning: hsl(var(--sf-warning-h) var(--sf-warning-s) var(--sf-warning-l));
+    --sf-color-error:   hsl(var(--sf-error-h)   var(--sf-error-s)   var(--sf-error-l));
+    --sf-color-info:    hsl(var(--sf-info-h)    var(--sf-info-s)    var(--sf-info-l));
+    --sf-color-danger:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  var(--sf-danger-l));
 
-    /* links */
-    --sf-color-link: #005786;
-    --sf-color-link--hover: #004066;
-    --sf-color-link--active: #003050;
-    --sf-color-link--visited: #5f16b8;
-    --sf-color-link--underline: rgb(0 108 162 / 0.30);
+    /* ── Status strong (darker variant) ──────────────────────────────────── */
 
-    /* interactive states */
-    --sf-color-bg--hover: rgb(97 105 120 / 0.08);
-    --sf-color-bg--active: rgb(97 105 120 / 0.12);
-    --sf-color-bg--selected: rgb(0 108 162 / 0.10);
-    --sf-color-bg--focus: rgb(0 108 162 / 0.06);
+    --sf-color-success-strong: hsl(var(--sf-success-h) var(--sf-success-s) calc(var(--sf-success-l) - 8%));
+    --sf-color-warning-strong: hsl(var(--sf-warning-h) var(--sf-warning-s) calc(var(--sf-warning-l) - 15%));
+    --sf-color-error-strong:   hsl(var(--sf-error-h)   var(--sf-error-s)   calc(var(--sf-error-l)   - 6%));
+    --sf-color-info-strong:    hsl(var(--sf-info-h)    var(--sf-info-s)    calc(var(--sf-info-l)    - 8%));
+    --sf-color-danger-strong:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  calc(var(--sf-danger-l)  - 8%));
 
-    /* selection */
-    --sf-color-selection-bg: rgb(0 108 162 / 0.28);
-    --sf-color-mark-bg: rgb(229 159 0 / 0.25);
+    /* ── Surfaces (base-derived) ──────────────────────────────────────────── */
 
-    /* status triplets */
-    --sf-color-success-subtle: rgb(0 121 27 / 0.12);
-    --sf-color-success-strong: #004b00;
-    --sf-color-success-muted: rgb(0 121 27 / 0.30);
-    --sf-color-warning-subtle: rgb(229 159 0 / 0.12);
-    --sf-color-warning-strong: #875900;
-    --sf-color-warning-muted: rgb(229 159 0 / 0.30);
-    --sf-color-error-subtle: rgb(187 6 30 / 0.10);
-    --sf-color-error-strong: #910006;
-    --sf-color-error-muted: rgb(187 6 30 / 0.30);
-    --sf-color-info-subtle: rgb(0 102 154 / 0.10);
-    --sf-color-info-strong: #004972;
-    --sf-color-info-muted: rgb(0 102 154 / 0.30);
-    --sf-color-danger-subtle: rgb(181 0 61 / 0.10);
-    --sf-color-danger-strong: #850029;
-    --sf-color-danger-muted: rgb(181 0 61 / 0.30);
+    --sf-color-bg:    hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 2%));
+    --sf-color-inset: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) - 3%));
+    --sf-color-raised: hsl(var(--sf-base-h) var(--sf-base-s) 100%);
 
-    /* shade ramps (color-mix fallbacks) */
-    /* primary */
-    --sf-color-primary-superlight: #e5ecf7;
-    --sf-color-primary-xlight: #bed2f9;
-    --sf-color-primary-lighter: #5386f7;
-    --sf-color-primary-darker: #012fc0;
-    --sf-color-primary-xdark: #031a5a;
-    --sf-color-primary-superdark: #030a1d;
-    /* secondary */
-    --sf-color-secondary-superlight: #e5e8ed;
-    --sf-color-secondary-xlight: #bdc2ca;
-    --sf-color-secondary-lighter: #555e6e;
-    --sf-color-secondary-darker: #0e1627;
-    --sf-color-secondary-xdark: #060d1a;
-    --sf-color-secondary-superdark: #030711;
-    /* tertiary */
-    --sf-color-tertiary-superlight: #e8eaf4;
-    --sf-color-tertiary-xlight: #cecaec;
-    --sf-color-tertiary-lighter: #896fd0;
-    --sf-color-tertiary-darker: #4a1393;
-    --sf-color-tertiary-xdark: #1f1047;
-    --sf-color-tertiary-superdark: #06081a;
-    /* action */
-    --sf-color-action-superlight: #e4edf5;
-    --sf-color-action-xlight: #b6d9f0;
-    --sf-color-action-lighter: #009ede;
-    --sf-color-action-darker: #005887;
-    --sf-color-action-xdark: #00284a;
-    --sf-color-action-superdark: #000c1b;
-    /* neutral */
-    --sf-color-neutral-superlight: #e9ecf0;
-    --sf-color-neutral-xlight: #d1d5db;
-    --sf-color-neutral-lighter: #9097a2;
-    --sf-color-neutral-darker: #4d5563;
-    --sf-color-neutral-xdark: #202733;
-    --sf-color-neutral-superdark: #060c16;
-    /* base */
-    --sf-color-base-superlight: #e3e7eb;
-    --sf-color-base-xlight: #b7bcc1;
-    --sf-color-base-lighter: #464c56;
-    --sf-color-base-darker: #bcc1c7;
-    --sf-color-base-xdark: #4c535c;
-    --sf-color-base-superdark: #0d131e;
-    /* success */
-    --sf-color-success-superlight: #e6eded;
-    --sf-color-success-xlight: #c5daca;
-    --sf-color-success-lighter: #67a46c;
-    --sf-color-success-darker: #00621f;
-    --sf-color-success-xdark: #042d1b;
-    --sf-color-success-superdark: #030d12;
-    /* warning */
-    --sf-color-warning-superlight: #efefee;
-    --sf-color-warning-xlight: #eee2cf;
-    --sf-color-warning-lighter: #eabe70;
-    --sf-color-warning-darker: #b58000;
-    --sf-color-warning-xdark: #4b3a1d;
-    --sf-color-warning-superdark: #0d1014;
-    /* error */
-    --sf-color-error-superlight: #eeeaed;
-    --sf-color-error-xlight: #ebcbca;
-    --sf-color-error-lighter: #d6706b;
-    --sf-color-error-darker: #951420;
-    --sf-color-error-xdark: #40141b;
-    --sf-color-error-superdark: #0d0912;
-    /* info */
-    --sf-color-info-superlight: #e4edf3;
-    --sf-color-info-xlight: #bad7ea;
-    --sf-color-info-lighter: #39c;
-    --sf-color-info-darker: #005381;
-    --sf-color-info-xdark: #002646;
-    --sf-color-info-superdark: #010b1a;
-    /* danger */
-    --sf-color-danger-superlight: #efeaee;
-    --sf-color-danger-xlight: #ecc8ce;
-    --sf-color-danger-lighter: #d66579;
-    --sf-color-danger-darker: #930034;
-    --sf-color-danger-xdark: #400e21;
-    --sf-color-danger-superdark: #0d0813;
+    /* ── Text (neutral-derived) ───────────────────────────────────────────── */
 
-    /* alpha aliases (subtle / muted / ghost) */
-    --sf-color-primary-subtle: rgb(1 55 238 / 0.10);
-    --sf-color-primary-muted: rgb(1 55 238 / 0.30);
-    --sf-color-primary-ghost: rgb(1 55 238 / 0.05);
-    --sf-color-secondary-subtle: rgb(17 26 45 / 0.10);
-    --sf-color-secondary-muted: rgb(17 26 45 / 0.30);
-    --sf-color-secondary-ghost: rgb(17 26 45 / 0.05);
-    --sf-color-tertiary-subtle: rgb(92 16 180 / 0.10);
-    --sf-color-tertiary-muted: rgb(92 16 180 / 0.30);
-    --sf-color-tertiary-ghost: rgb(92 16 180 / 0.05);
-    --sf-color-action-subtle: rgb(0 108 162 / 0.10);
-    --sf-color-action-muted: rgb(0 108 162 / 0.30);
-    --sf-color-action-ghost: rgb(0 108 162 / 0.05);
-    --sf-color-neutral-subtle: rgb(97 105 120 / 0.10);
-    --sf-color-neutral-muted: rgb(97 105 120 / 0.30);
-    --sf-color-neutral-ghost: rgb(97 105 120 / 0.05);
-    --sf-color-base-subtle: rgb(239 242 246 / 0.10);
-    --sf-color-base-muted: rgb(239 242 246 / 0.30);
-    --sf-color-base-ghost: rgb(239 242 246 / 0.05);
-    --sf-color-success-ghost: rgb(0 121 27 / 0.05);
-    --sf-color-warning-ghost: rgb(229 159 0 / 0.05);
-    --sf-color-error-ghost: rgb(187 6 30 / 0.05);
-    --sf-color-info-ghost: rgb(0 102 154 / 0.05);
-    --sf-color-danger-ghost: rgb(181 0 61 / 0.05);
+    --sf-color-text:            hsl(var(--sf-neutral-h) 15%  12%);
+    --sf-color-text--secondary:  hsl(var(--sf-neutral-h) 10%  35%);
+    --sf-color-heading:          hsl(var(--sf-neutral-h) 20%   8%);
 
-    /* shadows */
-    --sf-shadow-color: #060b16;
-    --sf-shadow-none: none;
-    --sf-shadow-xs: 0 1px 2px 0 rgb(6 11 22 / 0.04);
-    --sf-shadow-s: 0 1px 2px 0 rgb(6 11 22 / 0.04),
-                 0 2px 6px 0 rgb(6 11 22 / 0.08);
-    --sf-shadow-m: 0 1px 3px 0 rgb(6 11 22 / 0.04),
-                 0 4px 12px 0 rgb(6 11 22 / 0.16);
-    --sf-shadow-l: 0 2px 4px 0 rgb(6 11 22 / 0.04),
-                 0 8px 24px 0 rgb(6 11 22 / 0.24),
-                 0 16px 48px 0 rgb(6 11 22 / 0.16);
-    --sf-shadow-xl: 0 2px 8px 0 rgb(6 11 22 / 0.04),
-                 0 12px 36px 0 rgb(6 11 22 / 0.28),
-                 0 24px 72px 0 rgb(6 11 22 / 0.20);
-    --sf-shadow-2xl: 0 4px 12px 0 rgb(6 11 22 / 0.05),
-                 0 20px 60px 0 rgb(6 11 22 / 0.32),
-                 0 40px 100px -8px rgb(6 11 22 / 0.40);
-    --sf-shadow-inner: inset 0 2px 4px 0 rgb(6 11 22 / 0.16);
-    --sf-text-shadow-none: none;
-    --sf-text-shadow-s: 0 1px 2px rgb(6 11 22 / 0.12);
-    --sf-text-shadow-m: 0 2px 4px rgb(6 11 22 / 0.16);
-    --sf-text-shadow-l: 0 4px 8px rgb(6 11 22 / 0.20);
-    --sf-drop-shadow-s: drop-shadow(0 1px 2px rgb(6 11 22 / 0.12));
-    --sf-drop-shadow-m: drop-shadow(0 4px 6px rgb(6 11 22 / 0.16));
-    --sf-drop-shadow-l: drop-shadow(0 8px 16px rgb(6 11 22 / 0.20));
-    --sf-shadow-glow: 0 0 15px 2px rgb(1 55 238 / 0.16);
+    /* ── Borders (neutral-derived) ────────────────────────────────────────── */
 
-    /* gradients */
-    --sf-gradient-primary: linear-gradient(135deg, #0137ee, #0001d2);
-    --sf-gradient-secondary: linear-gradient(135deg, #111a2d, #030819);
-    --sf-gradient-tertiary: linear-gradient(135deg, #5c10b4, #470095);
-    --sf-gradient-brand: linear-gradient(135deg, #0137ee, #6d00de);
-    --sf-gradient-surface: linear-gradient(180deg, #eff2f6, #f5f9fc);
-    --sf-gradient-fade--r: linear-gradient(to right, transparent, #f5f9fc);
-    --sf-gradient-fade--l: linear-gradient(to left, transparent, #f5f9fc);
-    --sf-gradient-fade--t: linear-gradient(to top, transparent, #f5f9fc);
-    --sf-gradient-fade--b: linear-gradient(to bottom, transparent, #f5f9fc);
+    --sf-color-border:         hsl(var(--sf-neutral-h)  8% 85%);
+    --sf-color-border--subtle:  hsl(var(--sf-neutral-h)  5% 91%);
+    --sf-color-border--strong:  hsl(var(--sf-neutral-h) 14% 70%);
 
+    /* ── Links (action-derived) ───────────────────────────────────────────── */
+
+    --sf-color-link: hsl(var(--sf-action-h) var(--sf-action-s) calc(var(--sf-action-l) - 5%));
+
+    /* ── Selection ────────────────────────────────────────────────────────── */
+
+    --sf-color-selection-bg: hsl(var(--sf-action-h) var(--sf-action-s) var(--sf-action-l) / 0.28);
+
+    /* ── Shadows (neutral-derived) ────────────────────────────────────────── */
+
+    --sf-shadow-xs: 0 1px 2px 0
+                    hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-s:  0 1px 3px 0 hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 1px 2px -1px hsl(var(--sf-neutral-h) 20% 10% / 0.10);
+    --sf-shadow-m:  0 4px 6px -1px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 2px 4px -2px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-l:  0 10px 15px -3px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 4px 6px -4px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
   }
-
-}
-
-@layer slashed.themes {
-
-  /* ── Dark-mode sRGB — Resolved_Tokens (ungated, for Old_Engines) ──────── */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
-      --sf-color-primary: #6b9eff;
-      --sf-color-secondary: #bfcbe3;
-      --sf-color-tertiary: #b490ff;
-      --sf-color-action: #00acf9;
-      --sf-color-neutral: #939caa;
-      --sf-color-base: #1a1b1c;
-      --sf-color-success: #5eb563;
-      --sf-color-warning: #bf8200;
-      --sf-color-error: #fa6863;
-      --sf-color-info: #00aff7;
-      --sf-color-danger: #ff6080;
-      --sf-color-text: #e3ecfb;
-      --sf-color-text--secondary: #b2bbc9;
-      --sf-color-text--placeholder: #767e8b;
-      --sf-color-text--disabled: #59616e;
-      --sf-color-text--inverse: #252c37;
-      --sf-color-heading: #e3ecfb;
-      --sf-color-border: #434548;
-      --sf-color-border--subtle: #2f3033;
-      --sf-color-border--strong: #767e8a;
-      --sf-color-link: #00acf9;
-      --sf-color-link--hover: #4acbff;
-      --sf-color-link--active: #7fdaff;
-      --sf-color-link--visited: #aa7fff;
-      --sf-color-selection-bg: rgb(0 182 255 / 0.55);
-      --sf-color-success-strong: #8ee792;
-      --sf-color-warning-strong: #cf9100;
-      --sf-color-error-strong: #ffb3ab;
-      --sf-color-info-strong: #8df;
-      --sf-color-danger-strong: #ffb6bf;
-    }
-  }
-
-  [data-theme="light"] {
-    --sf-color-primary: #0137ee;
-    --sf-color-secondary: #111a2d;
-    --sf-color-tertiary: #5c10b4;
-    --sf-color-action: #006ca2;
-    --sf-color-neutral: #616978;
-    --sf-color-base: #eff2f6;
-    --sf-color-success: #00791b;
-    --sf-color-warning: #e59f00;
-    --sf-color-error: #bb061e;
-    --sf-color-info: #00669a;
-    --sf-color-danger: #b5003d;
-    --sf-color-text: #02060f;
-    --sf-color-text--secondary: #1f2733;
-    --sf-color-text--placeholder: #8c96a5;
-    --sf-color-text--disabled: #abb5c5;
-    --sf-color-text--inverse: #dbe5f6;
-    --sf-color-heading: #02060f;
-    --sf-color-border: #d2d4d7;
-    --sf-color-border--subtle: #e3e5e8;
-    --sf-color-border--strong: #7f8793;
-    --sf-color-link: #005786;
-    --sf-color-link--hover: #004066;
-    --sf-color-link--active: #003050;
-    --sf-color-link--visited: #5f16b8;
-    --sf-color-selection-bg: rgb(0 108 162 / 0.28);
-    --sf-color-success-strong: #004b00;
-    --sf-color-warning-strong: #875900;
-    --sf-color-error-strong: #910006;
-    --sf-color-info-strong: #004972;
-    --sf-color-danger-strong: #850029;
-  }
-
-  [data-theme="dark"] {
-    --sf-color-primary: #6b9eff;
-    --sf-color-secondary: #bfcbe3;
-    --sf-color-tertiary: #b490ff;
-    --sf-color-action: #00acf9;
-    --sf-color-neutral: #939caa;
-    --sf-color-base: #1a1b1c;
-    --sf-color-success: #5eb563;
-    --sf-color-warning: #bf8200;
-    --sf-color-error: #fa6863;
-    --sf-color-info: #00aff7;
-    --sf-color-danger: #ff6080;
-    --sf-color-text: #e3ecfb;
-    --sf-color-text--secondary: #b2bbc9;
-    --sf-color-text--placeholder: #767e8b;
-    --sf-color-text--disabled: #59616e;
-    --sf-color-text--inverse: #252c37;
-    --sf-color-heading: #e3ecfb;
-    --sf-color-border: #434548;
-    --sf-color-border--subtle: #2f3033;
-    --sf-color-border--strong: #767e8a;
-    --sf-color-link: #00acf9;
-    --sf-color-link--hover: #4acbff;
-    --sf-color-link--active: #7fdaff;
-    --sf-color-link--visited: #aa7fff;
-    --sf-color-selection-bg: rgb(0 182 255 / 0.55);
-    --sf-color-success-strong: #8ee792;
-    --sf-color-warning-strong: #cf9100;
-    --sf-color-error-strong: #ffb3ab;
-    --sf-color-info-strong: #8df;
-    --sf-color-danger-strong: #ffb6bf;
-  }
-
 }

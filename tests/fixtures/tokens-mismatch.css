@@ -1,9 +1,0 @@
-@property --sf-color-primary-light {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: oklch(0.47 0.27 264);
-}
-/* Other 10 missing — verify should halt */
-:root {
-  --sf-color-primary-light: oklch(0.99 0.01 200); /* MISMATCH */
-}

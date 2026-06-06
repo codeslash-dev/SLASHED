@@ -49,7 +49,7 @@ describe('P3: sRGB fallback declared before modern gated expression', () => {
   // The fallbacks CSS comes before tokens.css in the bundle, so all
   // declarations from the fallbacks file have smaller source indices.
   test('tokens.color-fallbacks.css content appears before tokens.css content', () => {
-    const fallbacksMarker = 'GENERATED FROM SOURCE by scripts/gen-color-fallbacks.js';
+    const fallbacksMarker = 'HSL-based fallbacks for browsers without light-dark()';
     const tokensMarker    = 'SLASHED — core/tokens.css';
     const fIdx = full.indexOf(fallbacksMarker);
     const tIdx = full.indexOf(tokensMarker);

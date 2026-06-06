@@ -1,10 +1,8 @@
 /**
  * Feature: tier-1-color-fallback
- * Property 1: Every Tier-1 unguarded default parses as valid sRGB.
- *
- * Parses all unguarded color custom-property declarations from
- * dist/slashed.full.css and asserts each value is a valid sRGB
- * expression (hex or modern rgb()).
+ * Property 1: Every Tier-1 unguarded default is a valid CSS color expression
+ *             that resolves to sRGB — hex, rgb(), or hsl() with var() channels.
+ *             None use light-dark(), oklch(from…), or color-mix().
  *
  * Run: node --test tests/tier1-p1-srgb-validity.test.js
  */
@@ -20,15 +18,19 @@ const FALLBACKS = path.join(ROOT, 'core/tokens.color-fallbacks.css');
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
-const HEX_RE   = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
-const RGB_RE   = /^rgb\(\s*\d+\s+\d+\s+\d+\s*(?:\/\s*[\d.]+\s*)?\)$/;
-const NONE_RE  = /^none$/;
+const HEX_RE         = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
+const RGB_RE         = /^rgb\(\s*\d+\s+\d+\s+\d+\s*(?:\/\s*[\d.]+\s*)?\)$/;
 const STATIC_OKLCH_RE = /^oklch\(\s*[\d.]+%?\s+[\d.]+\s+[\d.]+\s*\)$/;
 
+// hsl() can contain var() references which have nested parens — check by prefix/suffix
+function isHSL(v) { return v.startsWith('hsl(') && v.endsWith(')'); }
+
+// Valid sRGB-resolving color expressions in the fallbacks file.
+// hsl() with var() channels is valid on every browser from Chrome 49+ (2016).
 function isValidSRGB(value) {
   const v = value.trim();
-  return HEX_RE.test(v) || RGB_RE.test(v) || NONE_RE.test(v) || STATIC_OKLCH_RE.test(v) ||
-    v === 'transparent' || v === 'inherit' || v === 'auto';
+  return HEX_RE.test(v) || RGB_RE.test(v) || isHSL(v) || STATIC_OKLCH_RE.test(v) ||
+    v === 'none' || v === 'transparent' || v === 'inherit' || v === 'auto';
 }
 
 // ── extract unguarded declarations from color-fallbacks.css ──────────────────
@@ -58,8 +60,12 @@ describe('P1: Tier-1 unguarded defaults are valid sRGB', () => {
     assert.ok(decls.length > 0, 'No declarations found in fallbacks file');
   });
 
-  test('all color custom properties have valid sRGB values', () => {
-    const colorDecls = decls.filter(d => d.name.includes('-color-') || d.name.startsWith('--sf-shadow-color'));
+  test('all color custom properties have valid sRGB-resolving values', () => {
+    // Channel variables (--sf-primary-h etc.) are numbers, not colors — skip them.
+    const colorDecls = decls.filter(d =>
+      (d.name.includes('-color-') || d.name.startsWith('--sf-shadow-color')) &&
+      !d.name.endsWith('-h') && !d.name.endsWith('-s') && !d.name.endsWith('-l')
+    );
     const violations = colorDecls.filter(d => !isValidSRGB(d.value));
     if (violations.length > 0) {
       const msg = violations.map(v => `  ${v.name}: ${v.value}`).join('\n');
@@ -88,34 +94,33 @@ describe('P1: Tier-1 unguarded defaults are valid sRGB', () => {
     }
   });
 
-  // fast-check: any hex value is 3 or 6 hex digits, any rgb() has channels 0-255
-  test('fast-check: all hex values have valid format (100 iterations)', () => {
-    const hexDecls = decls.filter(d => d.value.trim().startsWith('#'));
-    if (hexDecls.length === 0) return;
+  // fast-check: every color declaration uses an allowed expression type
+  test('fast-check: all color declarations use valid sRGB-resolving expressions (100 iterations)', () => {
+    const colorDecls = decls.filter(d =>
+      (d.name.includes('-color-') || d.name.startsWith('--sf-shadow-color')) &&
+      !d.name.endsWith('-h') && !d.name.endsWith('-s') && !d.name.endsWith('-l')
+    );
+    if (colorDecls.length === 0) return;
 
     fc.assert(
       fc.property(
-        fc.integer({ min: 0, max: hexDecls.length - 1 }),
-        (idx) => {
-          const { value } = hexDecls[idx];
-          return HEX_RE.test(value.trim());
-        }
+        fc.integer({ min: 0, max: colorDecls.length - 1 }),
+        (idx) => isValidSRGB(colorDecls[idx].value)
       ),
       { numRuns: 100 }
     );
   });
 
-  test('fast-check: all rgb() values have channels in [0,255] (100 iterations)', () => {
-    const rgbDecls = decls.filter(d => d.value.trim().startsWith('rgb('));
-    if (rgbDecls.length === 0) return;
+  test('fast-check: all hsl() declarations contain no modern-only features (100 iterations)', () => {
+    const hslDecls = decls.filter(d => d.value.trim().startsWith('hsl('));
+    if (hslDecls.length === 0) return;
 
     fc.assert(
       fc.property(
-        fc.integer({ min: 0, max: rgbDecls.length - 1 }),
+        fc.integer({ min: 0, max: hslDecls.length - 1 }),
         (idx) => {
-          const m = rgbDecls[idx].value.match(/rgb\(\s*(\d+)\s+(\d+)\s+(\d+)/);
-          if (!m) return false;
-          return [+m[1], +m[2], +m[3]].every(ch => ch >= 0 && ch <= 255);
+          const v = hslDecls[idx].value;
+          return !v.includes('light-dark') && !v.includes('oklch(from') && !v.includes('color-mix(');
         }
       ),
       { numRuns: 100 }

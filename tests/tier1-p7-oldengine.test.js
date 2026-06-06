@@ -77,8 +77,11 @@ const TESTED_TOKENS = [
 const HEX_RE = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
 const RGB_RE = /^rgb\(\s*\d+\s+\d+\s+\d+\s*(?:\/\s*[\d.]+\s*)?\)$/;
 
+// hsl() can contain var() references (nested parens) — check by prefix/suffix
+function isHSL(v) { return v.startsWith('hsl(') && v.endsWith(')'); }
+
 function isValidSRGBValue(v) {
-  return HEX_RE.test(v) || RGB_RE.test(v) ||
+  return HEX_RE.test(v) || RGB_RE.test(v) || isHSL(v) ||
     /^none$/.test(v) || /^transparent$/.test(v) || /^inherit$/.test(v) ||
     /^oklch\(\s*[\d.]+%?\s+[\d.]+\s+[\d.]+\s*\)$/.test(v); // absolute oklch is OK
 }
