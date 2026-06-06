@@ -99,8 +99,13 @@ class Slashed_Framework_Updater {
 			$wp_filesystem->mkdir( $dist_dir, FS_CHMOD_DIR );
 		}
 
+		// Download all bundles to .tmp files first; only rename to final paths once
+		// every download succeeds so a mid-run failure never leaves mixed versions.
+		$staged = array();
+
 		foreach ( self::BUNDLES as $bundle ) {
 			$filename = 'slashed.' . $bundle . '.css';
+			$tmp_path = $dist_dir . $filename . '.tmp';
 			$url      = sprintf( self::CDN_BASE, rawurlencode( $version ), $filename );
 
 			$response = wp_remote_get(
@@ -112,22 +117,43 @@ class Slashed_Framework_Updater {
 			);
 
 			if ( is_wp_error( $response ) ) {
+				foreach ( $staged as $f ) { $wp_filesystem->delete( $f ); }
 				return $response;
 			}
 			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+				foreach ( $staged as $f ) { $wp_filesystem->delete( $f ); }
 				return new WP_Error(
 					'download_failed',
-					/* translators: %s: filename */
-					sprintf( __( 'Could not download %s (HTTP %d).', 'slashed' ), $filename, wp_remote_retrieve_response_code( $response ) )
+					/* translators: %1$s: filename, %2$d: HTTP status code */
+					sprintf( __( 'Could not download %1$s (HTTP %2$d).', 'slashed' ), $filename, wp_remote_retrieve_response_code( $response ) )
 				);
 			}
 
 			$content = wp_remote_retrieve_body( $response );
-			if ( ! $wp_filesystem->put_contents( $dist_dir . $filename, $content, FS_CHMOD_FILE ) ) {
+			if ( ! $wp_filesystem->put_contents( $tmp_path, $content, FS_CHMOD_FILE ) ) {
+				foreach ( $staged as $f ) { $wp_filesystem->delete( $f ); }
 				return new WP_Error(
 					'write_failed',
 					/* translators: %s: filename */
 					sprintf( __( 'Could not write %s. Check file permissions.', 'slashed' ), $filename )
+				);
+			}
+
+			$staged[] = $tmp_path;
+		}
+
+		// All downloads staged — atomically move each to its final path.
+		foreach ( self::BUNDLES as $bundle ) {
+			$filename   = 'slashed.' . $bundle . '.css';
+			$tmp_path   = $dist_dir . $filename . '.tmp';
+			$final_path = $dist_dir . $filename;
+
+			if ( ! $wp_filesystem->move( $tmp_path, $final_path, true ) ) {
+				foreach ( $staged as $f ) { $wp_filesystem->delete( $f ); }
+				return new WP_Error(
+					'rename_failed',
+					/* translators: %s: filename */
+					sprintf( __( 'Could not install %s. Check file permissions.', 'slashed' ), $filename )
 				);
 			}
 		}
@@ -168,7 +194,10 @@ class Slashed_Framework_Updater {
 		}
 
 		$version = isset( $_POST['version'] ) ? sanitize_text_field( wp_unslash( $_POST['version'] ) ) : '';
-		if ( ! $version || ! preg_match( '/^v?\d+\.\d+\.\d+/', $version ) ) {
+		if ( $version && preg_match( '/^v?\d+\.\d+\.\d+[a-zA-Z0-9.-]*$/', $version ) ) {
+			// Normalize to vX.Y.Z[...] form.
+			$version = 'v' . ltrim( $version, 'v' );
+		} else {
 			$version = self::get_latest_version();
 		}
 		if ( ! $version ) {

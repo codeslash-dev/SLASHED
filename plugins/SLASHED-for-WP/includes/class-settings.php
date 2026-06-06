@@ -37,7 +37,7 @@ class Slashed_Settings {
 	/**
 	 * Read settings from the database, applying defaults.
 	 *
-	 * @return array{integrations: array<string, bool>, css_bundle: string}
+	 * @return array{integrations: array<string, bool>, css_bundle: string, css_source: string, cdn_version: string}
 	 */
 	public static function get() {
 		$stored = get_option( self::OPTION_KEY, array() );
@@ -105,10 +105,10 @@ class Slashed_Settings {
 			}
 		}
 		$ver = isset( $stored['cdn_version'] ) ? (string) $stored['cdn_version'] : '';
-		if ( ! $ver || ! preg_match( '/^v?\d+\.\d+\.\d+/', $ver ) ) {
+		if ( ! $ver || ! preg_match( '/^v?\d+\.\d+\.\d+[a-zA-Z0-9.-]*$/', $ver ) ) {
 			return SLASHED_CSS_REF;
 		}
-		return $ver;
+		return 'v' . ltrim( $ver, 'v' );
 	}
 
 	/**
@@ -157,7 +157,9 @@ class Slashed_Settings {
 		}
 
 		$cdn_version = isset( $data['cdn_version'] ) ? (string) $data['cdn_version'] : '';
-		if ( $cdn_version && ! preg_match( '/^v?\d+\.\d+\.\d+/', $cdn_version ) ) {
+		if ( $cdn_version && preg_match( '/^v?\d+\.\d+\.\d+[a-zA-Z0-9.-]*$/', $cdn_version ) ) {
+			$cdn_version = 'v' . ltrim( $cdn_version, 'v' );
+		} else {
 			$cdn_version = '';
 		}
 
