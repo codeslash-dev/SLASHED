@@ -11,32 +11,32 @@ License: MIT, same as the host plugin.
 ## 0. Implementation status
 
 Section bodies describe the full v1 design; this table tracks what has shipped
-in code. Spec-only rows (§10, §11, §13, §15, §16) describe accurate design that
+in code. Spec-only rows (§7, §8, §10, §12, §13) describe accurate design that
 lands in follow-up PRs.
 
 | Capability | Status | Where |
 |---|---|---|
-| Badge injection in structure panel (§6.1) | ✅ shipped | `editor-app/src/main.js` + `BemBadge.svelte` |
-| Panel mount + close (§6.2) | ✅ shipped | `editor-app/src/main.js` + `BemPanel.svelte` |
-| Add / Rename / Replace / Add Modifier modes (§6.3) | ✅ shipped | `editor-app/src/lib/apply.js` |
-| Class-family picker in dedicated Rename & Replace (§6.3) | ✅ shipped | `Row.svelte` family `<select>` (driven by `effectiveOp`) + `apply.js` honors `row.renameFamilyId` in all modes |
-| "Remove all existing classes" toggle (§6.3) | ✅ shipped | `BemPanel.svelte` toolbar checkbox → `applyToSubtree({ removeExisting })`; ignored by Add/Migrate |
-| All-in-one (Mixed) mode — per-row op toggle + family picker (§6.3) | ✅ shipped | `apply.js` (`'mixed'` mode; per-op `effectiveMode` dispatch) + `BemPanel.svelte` + `Row.svelte` |
-| Migrate ID styles mode (§6.3, §9) | ✅ shipped | `apply.js` + `lib/migrate-keys.js` allowlist |
-| Migrate-mode preview chips (§6.3) | ✅ shipped | `Row.svelte` chip strip |
-| Element-aware row pre-fill (§9.3) | ✅ shipped | `lib/element-types.js` consumed by `BemPanel` |
-| Sibling auto-numbering (§9.2) | ✅ shipped | `applyAutoNumbering()` in `apply.js` |
-| Per-row skip toggle (§6.2, §9) | ✅ shipped | `Row.svelte` include checkbox |
-| `suggestedFrom` provenance tracking (§9) | ✅ shipped | `'user' \| 'label' \| 'element-type' \| 'fallback' \| 'auto-number'`; `AUTHORITATIVE_PROVENANCE` set in `apply.js` covers user + label |
-| "Use existing class" client-side hint (§11.3 `recommendedAction: "attach"`) | ✅ shipped (client snapshot only) | `Row.svelte` derived `existingClassMatch` |
+| Badge injection in structure panel (§3.1) | ✅ shipped | `editor-app/src/main.js` + `BemBadge.svelte` |
+| Panel mount + close (§3.2) | ✅ shipped | `editor-app/src/main.js` + `BemPanel.svelte` |
+| Add / Rename / Replace / Add Modifier modes (§3.3) | ✅ shipped | `editor-app/src/lib/apply.js` |
+| Class-family picker in dedicated Rename & Replace (§3.3) | ✅ shipped | `Row.svelte` family `<select>` (driven by `effectiveOp`) + `apply.js` honors `row.renameFamilyId` in all modes |
+| "Remove all existing classes" toggle (§3.3) | ✅ shipped | `BemPanel.svelte` toolbar checkbox → `applyToSubtree({ removeExisting })`; ignored by Add/Migrate |
+| All-in-one (Mixed) mode — per-row op toggle + family picker (§3.3) | ✅ shipped | `apply.js` (`'mixed'` mode; per-op `effectiveMode` dispatch) + `BemPanel.svelte` + `Row.svelte` |
+| Migrate ID styles mode (§3.3, §6) | ✅ shipped | `apply.js` + `lib/migrate-keys.js` allowlist |
+| Migrate-mode preview chips (§3.3) | ✅ shipped | `Row.svelte` chip strip |
+| Element-aware row pre-fill (§6.3) | ✅ shipped | `lib/element-types.js` consumed by `BemPanel` |
+| Sibling auto-numbering (§6.2) | ✅ shipped | `applyAutoNumbering()` in `apply.js` |
+| Per-row skip toggle (§3.2, §6) | ✅ shipped | `Row.svelte` include checkbox |
+| `suggestedFrom` provenance tracking (§6) | ✅ shipped | `'user' \| 'label' \| 'element-type' \| 'fallback' \| 'auto-number'`; `AUTHORITATIVE_PROVENANCE` set in `apply.js` covers user + label |
+| "Use existing class" client-side hint (§8.3 `recommendedAction: "attach"`) | ✅ shipped (client snapshot only) | `Row.svelte` derived `existingClassMatch` |
 | Unused-class read-only report | ✅ shipped | `GET /rebemer/unused`, `class-rebemer-rest.php` |
-| BEM grammar policy (§8) | ⚠️ partial | basic `validateName()` exists; no policy hydration yet |
-| Reserved-name guard (§13) | ⚠️ partial | CSS keywords blocked; SLASHED utility list not yet wired |
-| Cross-page reference-count preflight (§11.1–11.3) | ❌ spec-only | needs server endpoint + client preflight call |
-| Snapshot/rollback transactional apply (§10) | ❌ spec-only | current apply is best-effort, no snapshot |
-| Real undo via in-panel ring buffer (§15) | ❌ spec-only | no undo yet |
-| `nameCollisions.recommendedAction: "rename" / "replace"` (§11.3) | ❌ spec-only | needs preflight; `"attach"` is client-side via match-by-name |
-| i18n string table (§16) | ❌ spec-only | strings are hardcoded English |
+| BEM grammar policy (§5) | ⚠️ partial | basic `validateName()` exists; no policy hydration yet |
+| Reserved-name guard (§10) | ⚠️ partial | CSS keywords blocked; SLASHED utility list not yet wired |
+| Cross-page reference-count preflight (§8.1–8.3) | ❌ spec-only | needs server endpoint + client preflight call |
+| Snapshot/rollback transactional apply (§7) | ❌ spec-only | current apply is best-effort, no snapshot |
+| Real undo via in-panel ring buffer (§12) | ❌ spec-only | no undo yet |
+| `nameCollisions.recommendedAction: "rename" / "replace"` (§8.3) | ❌ spec-only | needs preflight; `"attach"` is client-side via match-by-name |
+| i18n string table (§13) | ❌ spec-only | strings are hardcoded English |
 
 ---
 
@@ -52,7 +52,7 @@ rename cannot silently break unrelated parts of the site. A snapshot
 of the Bricks state is taken before every apply, with a single Cmd-Z
 inside the panel reverting the whole operation.
 
-## 5. Glossary
+## 2. Glossary
 
 - **Block** — top-level BEM token. A single word or kebab-case phrase
   identifying a UI component, e.g. `card`, `site-header`.
@@ -81,9 +81,9 @@ inside the panel reverting the whole operation.
   subtree* still using a given class id; reported by preflight.
 
 
-## 6. UX flow
+## 3. UX flow
 
-### 6.1 Badge in the structure panel
+### 3.1 Badge in the structure panel
 
 A small "BEM" badge is injected into every `li[data-id]` inside
 `#bricks-structure`, before the element actions cluster. Clicking it:
@@ -102,7 +102,7 @@ The badge:
 - Cleans up its observer + listeners with an `AbortController` on
   panel destruction.
 
-### 6.2 Panel layout
+### 3.2 Panel layout
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -119,7 +119,7 @@ The badge:
 │ │      ☑ block__element-3  [--mod]    [elem]   │
 ├─────────────────────────────────────────────────┤
 │ Migrate keys: padding · radius · background     │  preview chips
-│                                  (migrate mode) │  (only in §6.3 migrate)
+│                                  (migrate mode) │  (only in §3.3 migrate)
 ├─────────────────────────────────────────────────┤
 │ ⚠ 2 classes will remain on 5 elements outside  │  preflight strip
 │   this subtree. [Show details]                  │  (only if needed)
@@ -136,7 +136,7 @@ Toggling skip never affects the plan's atomicity — apply remains a
 single transaction over the still-included operations.
 
 
-### 6.3 Operation modes
+### 3.3 Operation modes
 
 | Mode | What happens to old classes on subtree | What happens globally |
 |---|---|---|
@@ -185,9 +185,9 @@ their values) that will be lifted up into the new class. Drawn from
 `Operation.migrateFrom.keys`, this lets the user sanity-check the
 allowlisted keys before pressing Apply — and surfaces immediately
 when a setting *would* be migrated but is not on the allowlist
-(see §12 threat-model entry "Bricks introducing a new style key").
+(see §9 threat-model entry "Bricks introducing a new style key").
 
-### 6.4 Validation, accessibility, keyboard
+### 3.4 Validation, accessibility, keyboard
 
 - **Empty class field** highlighted red, focused, panel does not apply.
 - **Invalid grammar** (per policy) → inline message under the row.
@@ -206,9 +206,9 @@ when a setting *would* be migrated but is not on the allowlist
 - Focus trap inside the panel; focus restored to the BEM badge on close.
 
 
-## 7. Architecture
+## 4. Architecture
 
-### 7.1 File layout
+### 4.1 File layout
 
 ```
 integrations/bricks/
@@ -262,7 +262,7 @@ integrations/bricks/
 ```
 
 
-### 7.2 Module responsibilities
+### 4.2 Module responsibilities
 
 | Module | Responsibility | Pure? |
 |---|---|---|
@@ -286,7 +286,7 @@ in `bricks-api.js` and the `App.svelte` mount, which we cover with
 manual smoke tests in the builder until a Playwright harness exists.
 
 
-### 7.3 The Bricks-API seam
+### 4.3 The Bricks-API seam
 
 Every reach into `appElement.__vue_app__.config.globalProperties.$_state`
 goes through one module. This is the most fragile part of the whole
@@ -331,7 +331,7 @@ touch (`element.settings._cssGlobalClasses`, `element.label`,
 inside Vue's reactive context. No fake-mutation hack needed.
 
 
-## 8. BEM grammar policy
+## 5. BEM grammar policy
 
 A `Policy` is a plain object hydrated from the server, validated on
 the client, and consumed by `bem.js`, `slugify.js`, and `reserved-names.js`.
@@ -372,7 +372,7 @@ filterable via `slashed_bricks/rebemer_policy`, and serialized into
 `window.slashedReBEMer.policy` for the editor app.
 
 
-## 9. Plan model
+## 6. Plan model
 
 {% raw %}
 ```js
@@ -404,7 +404,7 @@ filterable via `slashed_bricks/rebemer_policy`, and serialized into
  *                                   applyPlan produces no mutations for
  *                                   this row; preflight ignores its
  *                                   old/new class ids; auto-numbering
- *                                   in §9.2 excludes it from the tally.
+ *                                   in §6.2 excludes it from the tally.
  * @property {string} suggestedFrom  'user' | 'element-type' | 'auto-number'
  *                                   — provenance tag for the row's name,
  *                                   used by the UI to show a "suggested"
@@ -426,7 +426,7 @@ filterable via `slashed_bricks/rebemer_policy`, and serialized into
 ```
 {% endraw %}
 
-### 9.1 buildPlan
+### 6.1 buildPlan
 
 `buildPlan` is a **pure function** of (subtree snapshot, mode, user
 inputs, policy, existing global-classes list). It does no I/O and
@@ -435,7 +435,7 @@ mutates nothing. It is unit-tested with snapshot fixtures.
 The result is fully serializable JSON, suitable for sending to the
 preflight endpoint without any reshaping.
 
-### 9.2 Sibling auto-numbering
+### 6.2 Sibling auto-numbering
 
 When two or more operations within a single plan would produce the
 same `finalClassName` (e.g. two `image` rows under one block both
@@ -445,7 +445,7 @@ document order to disambiguate. The numbering is **plan-local**:
 - Skipped operations (`skip:true`) are excluded from the collision
   tally — a skipped row never claims a number.
 - Collisions *against existing global classes* are still resolved by
-  `upsert.preferExisting` (§9, ClassUpsert), independently of the
+  `upsert.preferExisting` (§6, ClassUpsert), independently of the
   in-plan numbering. The two mechanisms compose: the in-plan number
   is appended first, then the resulting name is matched against
   existing globals.
@@ -454,7 +454,7 @@ document order to disambiguate. The numbering is **plan-local**:
   collide, that's a validation error (`code: 'in_plan_duplicate'`)
   reported under the offending row, not silently mangled.
 
-### 9.3 Element-type pre-fill
+### 6.3 Element-type pre-fill
 
 When `buildPlan` is called for an `add` or `migrate` plan and a
 descendant row has no user input yet, `element-types.suggestElementName`
@@ -467,10 +467,10 @@ operation (`suggestedFrom: 'element-type'`) so:
   preserves the user's value (because `suggestedFrom` becomes
   `'user'`).
 - Auto-numbering only competes among `'element-type'` and
-  `'auto-number'` rows (see §9.2).
+  `'auto-number'` rows (see §6.2).
 
 
-## 10. Transactional apply (snapshot + rollback)
+## 7. Transactional apply (snapshot + rollback)
 
 `applyPlan(plan, bricksApi)` does the following, in order:
 
@@ -504,7 +504,7 @@ network blip causes a UI retry) and makes restore implementations
 straightforward.
 
 
-## 11. Reference-count preflight (REST contract)
+## 8. Reference-count preflight (REST contract)
 
 The preflight is the single trip to the server. It exists for one
 reason: the client knows what's in the current page, but it does not
@@ -512,7 +512,7 @@ know whether classes are in use across **other pages and templates**.
 The server can answer that with one read of `bricks_global_classes`
 plus a scan of post meta for elements referencing each class id.
 
-### 11.1 Endpoint
+### 8.1 Endpoint
 
 `POST /wp-json/slashed-bricks/v1/rebemer/preflight`
 
@@ -523,7 +523,7 @@ Headers:
 
 Permission: `current_user_can('bricks_full_access') || current_user_can('manage_options')`.
 
-### 11.2 Request body
+### 8.2 Request body
 
 ```json
 {
@@ -541,7 +541,7 @@ Permission: `current_user_can('bricks_full_access') || current_user_can('manage_
 }
 ```
 
-### 11.3 Response
+### 8.3 Response
 
 ```json
 {
@@ -577,13 +577,13 @@ of:
   and blocks apply for that row.
 - `"replace"` — destructive: applying would detach the old class from
   this subtree while leaving the existing global. Allowed, but the
-  destructive-confirm modal is required (§6.4 destructive flow).
+  destructive-confirm modal is required (§3.4 destructive flow).
 
 The recommendation is advisory: the client decides what to do with
 it. The server never mutates state, only reports.
 
 
-### 11.4 Server-side implementation notes
+### 8.4 Server-side implementation notes
 
 - Reads `bricks_global_classes` once (cached for the request).
 - Reads element references via the `bricks_get_posts_with_elements`
@@ -599,7 +599,7 @@ it. The server never mutates state, only reports.
 - All output strings escaped through `esc_html`/`sanitize_key` as
   appropriate before being put on the wire.
 
-### 11.5 What preflight does NOT do
+### 8.5 What preflight does NOT do
 
 - It does **not** mutate any option.
 - It does **not** persist a plan or audit entry (that's a separate
@@ -609,7 +609,7 @@ it. The server never mutates state, only reports.
 
 The endpoint is read-only, idempotent, side-effect-free.
 
-## 12. Threat model
+## 9. Threat model
 
 The reBEMer attack surface is small but not zero.
 
@@ -626,7 +626,7 @@ The reBEMer attack surface is small but not zero.
 | Bricks introducing a new style key | Migrate-ID-styles silently mis-classifies | Allowlist (not denylist); unknown keys are NOT migrated; logged in a panel-side warning. |
 
 
-## 13. Reserved-name guard
+## 10. Reserved-name guard
 
 A class name is **reserved** when:
 
@@ -648,7 +648,7 @@ The guard runs in two places:
 Both checks consult the same canonical list, exposed by
 `Slashed_Bricks_ReBEMer_Policy::reserved_names()`.
 
-## 14. ID generation
+## 11. ID generation
 
 The original `samirhp` plugin uses `Math.random().toString(36).slice(2,8)`.
 That gives 6 base36 chars ≈ 2.18 billion possible ids; birthday
@@ -674,7 +674,7 @@ Sixteen retries is a safety upper bound that we should never hit in
 practice.
 
 
-## 15. Undo
+## 12. Undo
 
 reBEMer maintains its own snapshot ring buffer (`undo.js`), separate
 from Bricks' history. Reasons:
@@ -700,7 +700,7 @@ Behavior:
 
 Outside the panel, Bricks' own Cmd-Z behavior is unchanged.
 
-## 16. Internationalization
+## 13. Internationalization
 
 All user-facing strings live in PHP via `__('...', 'slashed-bricks')`
 and are passed to JS through the `i18n` block of
@@ -726,7 +726,7 @@ The JS `__` helper performs `sprintf`-style replacement for `%s`,
 `%d`, and `%1$s`/`%2$d` indexed placeholders.
 
 
-## 17. Settings & persistence
+## 14. Settings & persistence
 
 | Setting | Where stored | Who reads it |
 |---|---|---|
@@ -737,7 +737,7 @@ The JS `__` helper performs `sprintf`-style replacement for `%s`,
 There is **no** `wp_options` row owned by reBEMer in v1. Adding one is
 trivial later if a settings UI is built.
 
-## 18. Compatibility & feature detection
+## 15. Compatibility & feature detection
 
 - **Bricks**: depends on `bricks_is_builder_main()` and the Vue app
   exposing `__vue_app__`. We **probe** for both. If either is missing,
@@ -749,9 +749,9 @@ trivial later if a settings UI is built.
 - **WordPress**: 6.0+, matches plugin baseline.
 - **REST**: standard `rest_api_init` registration; no custom auth.
 
-## 19. Testing strategy
+## 16. Testing strategy
 
-### 19.1 Unit (Vitest)
+### 16.1 Unit (Vitest)
 
 Pure modules:
 
@@ -767,7 +767,7 @@ Pure modules:
 - `ids.test.js` — collision retry logic via `crypto.randomUUID` mock.
 
 
-### 19.2 Integration (manual smoke checklist for v1)
+### 16.2 Integration (manual smoke checklist for v1)
 
 A markdown checklist lives in `docs/rebemer-smoke.md` and is executed
 by hand against a real Bricks install before each release. Topics:
@@ -782,13 +782,13 @@ by hand against a real Bricks install before each release. Topics:
 - Bricks update simulator (rename `__vue_app__` → `__vue_app2__`)
   triggers the fail-soft notice and prevents badge injection.
 
-### 19.3 e2e (deferred)
+### 16.3 e2e (deferred)
 
 Playwright is already a dev-dependency at the repo root. A reBEMer
 spec is out of scope for v1 but the test list is captured in
 `tests/rebemer/PLAN.md` as future work.
 
-## 21. Glossary of acronyms used
+## 17. Glossary of acronyms used
 
 - **BEM** — Block-Element-Modifier methodology by Yandex.
 - **PUC** — Plugin Update Checker (Yahnis Elsts' library, used by the
