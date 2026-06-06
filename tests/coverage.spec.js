@@ -1,7 +1,7 @@
 // @ts-check
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
 
 /**
  * Selector inventory coverage test.

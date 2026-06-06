@@ -2,11 +2,11 @@
 // Typography, spacing, border-radius, and z-index token scale tests.
 // Tokens use clamp() / calc() — values are resolved via element styles
 // at a fixed 1200px viewport so comparisons are stable.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
+const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 const BUNDLE  = path.join(process.cwd(), 'dist', 'slashed.essential.css');
 
 async function setup(page, html) {

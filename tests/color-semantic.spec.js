@@ -2,12 +2,12 @@
 // Verifies semantic colour-token pairs meet WCAG contrast requirements
 // and that the palette scale and surface hierarchy are coherent.
 // Runs in both light and dark themes.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 // fixture.html loads slashed.full.css (includes tokens.palette.css)
-const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
+const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
 // ── Serialisable in-browser helpers ─────────────────────────────
 // Functions passed directly to page.evaluate() must be self-contained

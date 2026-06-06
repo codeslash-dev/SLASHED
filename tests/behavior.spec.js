@@ -1,11 +1,11 @@
 // @ts-check
 // Behavioural regression tests: reduced-motion, forced-colors, container
 // queries, and a sample of state-class effects. Loads the demo over file://.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(__dirname, '..', 'docs', 'demo.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'docs', 'demo.html')).href;
 
 test.describe('Reduced motion', () => {
   test('transitions are neutralised under prefers-reduced-motion: reduce', async ({ page }) => {

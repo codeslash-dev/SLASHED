@@ -2,8 +2,8 @@
 // Behavioural tests for core/macros.css.
 // Each macro is exercised against a synthetic fixture and its
 // observable effect verified via getComputedStyle / layout reads.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
 
 const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.essential.css');
 
