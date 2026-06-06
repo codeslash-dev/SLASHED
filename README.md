@@ -208,7 +208,7 @@ SLASHED ships a companion WordPress plugin (`plugins/SLASHED-for-WP/`) with two 
 Activate `integrations/bricks/slashed-bricks.php` (requires Bricks 1.9.2+, WordPress 6.0+, PHP 7.4+).
 
 - **CSS loading** — enqueues the SLASHED bundle on the frontend and inside the Bricks editor iframe
-- **Variable pickers** — registers all `--sf-*` tokens (~570 in `essential`, ~810 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
+- **Variable pickers** — registers all `--sf-*` tokens (571 in `essential`, 812 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
 - **Class autocomplete** — registers every `.sf-*` layout class and `.is-*` state class in the Bricks class input as locked entries
 - **Color palette** — syncs `--sf-color-*` tokens with the Bricks color palette (auto-disabled on Bricks 2.2+ where the Color Manager would override `light-dark()` tokens; use the Variable Manager there instead)
 - **Variable-picker swatches** — paints a colour square next to each `--sf-color-*` entry in the variable-picker dropdown, powered by server-resolved hex values so dark-mode stays framework-driven
