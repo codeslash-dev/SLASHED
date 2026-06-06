@@ -276,7 +276,7 @@ Before designing:
   ✅ Layout     → sf-* class
   ❌ Colour     → hex from the colour wheel
   ❌ Custom CSS → px / hex literal
-  ❌ Layout     → Bricks Global Colors
+  ❌ Colour     → Bricks Global Colors
 
 Export (from this site):
   1. Admin → SLASHED → Design Tokens → Export / Import → Download token file
