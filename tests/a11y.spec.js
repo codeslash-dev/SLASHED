@@ -1,16 +1,16 @@
 // @ts-check
 // Automated accessibility audit of the demo page with axe-core.
 // Catches WCAG regressions (contrast, ARIA, landmarks) in both themes.
-const { test, expect } = require('@playwright/test');
-const { AxeBuilder } = require('@axe-core/playwright');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import { AxeBuilder } from '@axe-core/playwright';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 // A focused fixture exercising real framework usage with correct semantics
 // (labelled forms, heading order, landmarks). The kitchen-sink demo.html
 // intentionally contains low-contrast helper text and unlabelled control
 // samples, so it is not a fair axe target; this fixture is.
-const DEMO_URL = pathToFileURL(path.resolve(__dirname, 'a11y-fixture.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, 'a11y-fixture.html')).href;
 
 for (const theme of ['light', 'dark']) {
   test(`axe: no WCAG A/AA violations (${theme})`, async ({ page, browserName }) => {

@@ -23,12 +23,10 @@
  * Usage: node scripts/check-cheatsheet.js
  */
 
-'use strict';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const fs = require('node:fs');
-const path = require('node:path');
-
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(import.meta.dirname, '..');
 const INV = path.join(ROOT, 'plugins', 'SLASHED-for-WP', 'integrations', 'bricks', 'data', 'inventory.json');
 const SHEET = path.join(ROOT, 'plugins', 'SLASHED-for-WP', 'integrations', 'bricks', 'admin-app', 'src', 'lib', 'cheatsheet-data.js');
 

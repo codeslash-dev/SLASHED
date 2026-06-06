@@ -3,8 +3,8 @@
 //   .sr-only, .sr-only-focusable, .skip-link,
 //   .sf-focus-parent, .sf-clickable-parent,
 //   touch-target token, forced-colors, disabled cursor.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
 
 const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal.css');
 

@@ -4,11 +4,11 @@
 // range of brand `--sf-color-action` overrides (moderate-chroma hues).
 // Very high-chroma hues (saturated yellow/green) are a documented exception
 // and intentionally not asserted here.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(__dirname, 'a11y-fixture.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, 'a11y-fixture.html')).href;
 
 // Moderate brand colours someone might plausibly set as their action colour.
 const OVERRIDES = [

@@ -4,12 +4,10 @@
 // Run after every version bump: npm run version-sync
 // Wired into .release-it.json hooks so it executes automatically during releases.
 
-'use strict';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const fs = require('fs');
-const path = require('path');
-
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(import.meta.dirname, '..');
 
 function readFile(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');

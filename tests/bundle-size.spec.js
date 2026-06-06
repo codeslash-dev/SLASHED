@@ -2,12 +2,12 @@
 // Bundle-size regression guard. Fails if a built bundle's gzip size exceeds
 // its budget — catches accidental bloat. Budgets are deliberately loose
 // headroom over current sizes, tightened as the framework stabilises.
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
-const zlib = require('zlib');
+import { test, expect } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
 
-const DIST = path.resolve(__dirname, '..', 'dist');
+const DIST = path.resolve(import.meta.dirname, '..', 'dist');
 
 // gzip kB budgets per minified bundle.
 const BUDGETS = {

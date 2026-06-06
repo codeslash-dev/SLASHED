@@ -21,11 +21,12 @@
  * output already lives in assets/.
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync, execFileSync } = require('child_process');
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import { execSync, execFileSync } from 'node:child_process';
 
-const ROOT   = path.resolve(__dirname, '..');
+const ROOT   = path.resolve(import.meta.dirname, '..');
 const OUTPUT = path.join(ROOT, 'dist', 'slashed.zip');
 const STAGE  = path.join(ROOT, '.tmp-plugin-stage');
 const STAGE_PLUGIN = path.join(STAGE, 'slashed');
@@ -102,7 +103,6 @@ function main() {
  * Handles files and directories with DEFLATE compression.
  */
 function createZipFromDir(sourceDir, outputPath, rootName) {
-  const zlib = require('zlib');
   const files = [];
 
   function walk(dir, rel) {

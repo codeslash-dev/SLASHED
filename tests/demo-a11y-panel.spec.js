@@ -2,11 +2,11 @@
 // Verifies the demo's live accessibility-report panel renders contrast grades
 // for every key colour pair in both modes, and recomputes when the brand
 // colours change.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(__dirname, '..', 'docs', 'demo.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'docs', 'demo.html')).href;
 
 test.describe('Live accessibility report', () => {
   test('renders a grade for every pair in light and dark', async ({ page }) => {

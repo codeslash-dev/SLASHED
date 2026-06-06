@@ -3,16 +3,16 @@
 // dark and asserts the invariants behind the fixed bugs, plus a coverage
 // check that every declared --sf-* token resolves in both themes.
 
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const ROOT = path.resolve(__dirname, '..');
-const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
+const ROOT = path.resolve(import.meta.dirname, '..');
+const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
 // ---- Parse the declared token names from the source ----------------------
-const { TOKEN_FILES } = require('../scripts/registry-sources');
+import { TOKEN_FILES } from '../scripts/registry-sources.js';
 
 // Tokens whose value is the `inherit` keyword resolve to empty at :root
 // (no parent to inherit from) — by design, so they're excluded from coverage.

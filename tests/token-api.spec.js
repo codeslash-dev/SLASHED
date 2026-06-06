@@ -15,15 +15,15 @@
 // This test is pure-Node (no browser). It runs under @playwright/test
 // for consistency with the rest of the suite.
 
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(import.meta.dirname, '..');
 
 // Source files contributing to the public token surface.
 // Imported from scripts/registry-sources.js — the canonical single definition.
-const { TOKEN_FILES } = require('../scripts/registry-sources');
+import { TOKEN_FILES } from '../scripts/registry-sources.js';
 
 // Names declared inside @keyframes blocks and other contexts that
 // look like tokens but aren't custom properties on :root. The regex
@@ -55,7 +55,7 @@ function declaredTokens() {
 }
 
 test('Token API: declared --sf-* names match the locked snapshot', () => {
-  const SNAPSHOT_PATH = path.join(__dirname, 'token-api.snapshot.json');
+  const SNAPSHOT_PATH = path.join(import.meta.dirname, 'token-api.snapshot.json');
   const current = declaredTokens();
 
   if (!fs.existsSync(SNAPSHOT_PATH)) {

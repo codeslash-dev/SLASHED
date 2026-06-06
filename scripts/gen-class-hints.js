@@ -16,12 +16,10 @@
  *   node scripts/gen-class-hints.js --check  — exit 1 if file is stale
  */
 
-'use strict';
+import fs   from 'node:fs';
+import path from 'node:path';
 
-const fs   = require('node:fs');
-const path = require('node:path');
-
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT  = path.join(ROOT, 'plugins', 'SLASHED-for-WP', 'data', 'classes-hints.json');
 
 // Files to parse, in generation order. Must match FILE_META in gen-class-reference.js.

@@ -4,8 +4,8 @@
 // below 30em, between 30em–48em, and above 48em (1em = 16px by default).
 // setupInContainer pins font-size to 16px so em-based CQ thresholds are stable
 // across browsers (WebKit 26+ resolves em against inherited font-size, not 16px).
-const { test, expect } = require('@playwright/test');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
 
 const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.essential.css');
 

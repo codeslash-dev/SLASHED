@@ -1,7 +1,7 @@
 // @ts-check
 // Behavioural tests for core/layout.css — every layout primitive.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
 
 const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.essential.css');
 

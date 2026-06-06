@@ -15,11 +15,11 @@
 //
 // fixture.html loads dist/slashed.full.css, so both the `a:link` rules
 // (base) and the .sf-surface--* / .sf-link--* macros are present.
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const FIXTURE = pathToFileURL(path.join(__dirname, 'fixture.html')).href;
+const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
 const SURFACES = [
   'primary', 'secondary', 'tertiary', 'action', 'neutral',

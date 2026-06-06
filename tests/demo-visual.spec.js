@@ -3,11 +3,11 @@
 // Tests colors, shapes, shadows, layouts, grids, print, typography,
 // spacing, radius, motion states, accessibility, and all layout primitives.
 
-const { test, expect } = require('@playwright/test');
-const path = require('path');
-const { pathToFileURL } = require('url');
+import { test, expect } from '@playwright/test';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(__dirname, '..', 'docs', 'demo.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'docs', 'demo.html')).href;
 
 // Helper: resolve a CSS custom property value on an element
 async function getComputedProp(locator, prop) {
