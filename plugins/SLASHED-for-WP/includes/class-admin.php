@@ -58,8 +58,16 @@ class Slashed_Admin {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$raw_bundle = isset( $_POST['css_bundle'] ) ? sanitize_key( $_POST['css_bundle'] ) : 'optimal';
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$raw_source = isset( $_POST['css_source'] ) ? sanitize_key( $_POST['css_source'] ) : 'local';
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$raw_cdn_version = isset( $_POST['cdn_version'] ) ? sanitize_text_field( wp_unslash( $_POST['cdn_version'] ) ) : '';
+
 		$data = array(
 			'css_bundle'   => in_array( $raw_bundle, Slashed_Settings::ALLOWED_BUNDLES, true ) ? $raw_bundle : 'optimal',
+			'css_source'   => in_array( $raw_source, Slashed_Settings::ALLOWED_SOURCES, true ) ? $raw_source : 'local',
+			'cdn_version'  => $raw_cdn_version,
 			'integrations' => array(),
 		);
 		foreach ( Slashed_Settings::KNOWN_INTEGRATIONS as $slug ) {
@@ -82,7 +90,13 @@ class Slashed_Admin {
 		$settings     = Slashed_Settings::get();
 		$integrations = $settings['integrations'];
 		$css_bundle   = $settings['css_bundle'];
+		$css_source   = $settings['css_source'];
+		$cdn_version  = $settings['cdn_version'];
 		$saved        = ! empty( $_GET['slashed_saved'] ); // phpcs:ignore WordPress.Security.NonceVerification
+
+		$local_version  = Slashed_Framework_Updater::get_local_version();
+		$local_file_ok  = file_exists( SLASHED_PATH . 'dist/slashed.' . $css_bundle . '.css' );
+		$update_nonce   = wp_create_nonce( 'slashed_framework_update' );
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'SLASHED', 'slashed' ); ?> <span style="font-weight:400;font-size:13px;color:#999;"><?php echo esc_html( SLASHED_VERSION ); ?></span></h1>
@@ -121,6 +135,48 @@ class Slashed_Admin {
 							</td>
 						</tr>
 					<?php endforeach; ?>
+				</table>
+
+				<h2 style="margin-top:1.5em;"><?php esc_html_e( 'CSS delivery', 'slashed' ); ?></h2>
+				<p class="description"><?php esc_html_e( 'Choose how the framework CSS is loaded. Local files ship with the plugin; CDN lets you pin any release tag.', 'slashed' ); ?></p>
+
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Source', 'slashed' ); ?></th>
+						<td>
+							<label style="display:block;margin-bottom:6px;">
+								<input type="radio" name="css_source" value="local" <?php checked( $css_source, 'local' ); ?>>
+								<?php esc_html_e( 'Local files (recommended)', 'slashed' ); ?>
+							</label>
+							<div id="slashed-local-controls" style="margin-left:22px;margin-bottom:10px;<?php echo 'cdn' === $css_source ? 'display:none;' : ''; ?>">
+								<?php if ( $local_file_ok ) : ?>
+									<span id="slashed-local-version" style="color:#3c3;">&#10003; <?php echo esc_html( $local_version ); ?></span>
+								<?php else : ?>
+									<span style="color:#c33;"><?php esc_html_e( 'Local CSS file not found. Click Update to download it.', 'slashed' ); ?></span>
+								<?php endif; ?>
+								&nbsp;
+								<button type="button" id="slashed-check-btn" class="button button-small"><?php esc_html_e( 'Check for updates', 'slashed' ); ?></button>
+								<button type="button" id="slashed-update-btn" class="button button-small button-primary" style="margin-left:4px;"><?php esc_html_e( 'Update framework', 'slashed' ); ?></button>
+								<span id="slashed-update-msg" style="margin-left:8px;font-style:italic;"></span>
+							</div>
+
+							<label style="display:block;">
+								<input type="radio" name="css_source" value="cdn" <?php checked( $css_source, 'cdn' ); ?>>
+								<?php esc_html_e( 'CDN (jsDelivr)', 'slashed' ); ?>
+							</label>
+							<div id="slashed-cdn-controls" style="margin-left:22px;margin-top:6px;<?php echo 'cdn' !== $css_source ? 'display:none;' : ''; ?>">
+								<label for="slashed-cdn-version"><?php esc_html_e( 'Version tag:', 'slashed' ); ?></label>
+								<input type="text" id="slashed-cdn-version" name="cdn_version"
+									value="<?php echo esc_attr( $cdn_version ); ?>"
+									placeholder="<?php echo esc_attr( SLASHED_CSS_REF ); ?>"
+									style="width:160px;margin-left:6px;">
+								<p class="description" style="margin-top:4px;">
+									<?php esc_html_e( 'Enter a release tag, e.g.', 'slashed' ); ?>
+									<code><?php echo esc_html( SLASHED_CSS_REF ); ?></code>
+								</p>
+							</div>
+						</td>
+					</tr>
 				</table>
 
 				<h2><?php esc_html_e( 'Builder integrations', 'slashed' ); ?></h2>
@@ -179,6 +235,66 @@ class Slashed_Admin {
 				?>
 			</p>
 		</div>
+
+		<script>
+		(function() {
+			var nonce = <?php echo wp_json_encode( $update_nonce ); ?>;
+			var ajaxUrl = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;
+
+			// Toggle local / CDN control sections.
+			document.querySelectorAll('input[name="css_source"]').forEach(function(radio) {
+				radio.addEventListener('change', function() {
+					document.getElementById('slashed-local-controls').style.display = this.value === 'local' ? '' : 'none';
+					document.getElementById('slashed-cdn-controls').style.display   = this.value === 'cdn'   ? '' : 'none';
+				});
+			});
+
+			function setMsg(msg, color) {
+				var el = document.getElementById('slashed-update-msg');
+				el.textContent = msg;
+				el.style.color = color || '';
+			}
+
+			document.getElementById('slashed-check-btn').addEventListener('click', function() {
+				setMsg(<?php echo wp_json_encode( __( 'Checking…', 'slashed' ) ); ?>);
+				fetch(ajaxUrl, {
+					method: 'POST',
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					body: new URLSearchParams({action: 'slashed_check_framework_update', nonce: nonce})
+				})
+				.then(function(r){ return r.json(); })
+				.then(function(data) {
+					if (data.success) {
+						setMsg(<?php echo wp_json_encode( __( 'Latest:', 'slashed' ) ); ?> + ' ' + data.data.latest);
+					} else {
+						setMsg(data.data.message, '#c33');
+					}
+				})
+				.catch(function(){ setMsg(<?php echo wp_json_encode( __( 'Request failed.', 'slashed' ) ); ?>, '#c33'); });
+			});
+
+			document.getElementById('slashed-update-btn').addEventListener('click', function() {
+				if (!confirm(<?php echo wp_json_encode( __( 'Download and install the latest framework CSS?', 'slashed' ) ); ?>)) return;
+				setMsg(<?php echo wp_json_encode( __( 'Downloading…', 'slashed' ) ); ?>);
+				fetch(ajaxUrl, {
+					method: 'POST',
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					body: new URLSearchParams({action: 'slashed_do_framework_update', nonce: nonce})
+				})
+				.then(function(r){ return r.json(); })
+				.then(function(data) {
+					if (data.success) {
+						setMsg(data.data.message, '#3c3');
+						var ver = document.getElementById('slashed-local-version');
+						if (ver) ver.textContent = '✓ ' + data.data.version;
+					} else {
+						setMsg(data.data.message, '#c33');
+					}
+				})
+				.catch(function(){ setMsg(<?php echo wp_json_encode( __( 'Request failed.', 'slashed' ) ); ?>, '#c33'); });
+			});
+		}());
+		</script>
 		<?php
 	}
 }

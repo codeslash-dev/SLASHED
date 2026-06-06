@@ -38,9 +38,10 @@ class Slashed_CSS_Loader {
 	/**
 	 * Get the URL for the SLASHED CSS bundle.
 	 *
-	 * Resolution order:
-	 *   1. Local dist/ under the unified plugin root (dev / packaged-dist mode).
-	 *   2. jsDelivr CDN pinned to the immutable dist-branch SHA.
+	 * When source is 'local' (default) the plugin's own dist/ directory is used.
+	 * When source is 'cdn' a jsDelivr URL is built from the configured version tag.
+	 * No silent CDN fallback — if the local file is missing the URL is empty so
+	 * the admin notice in class-admin.php can surface the problem clearly.
 	 *
 	 * Applies the 'slashed/css_bundle_url' filter so site owners can override
 	 * the URL globally. Integrations apply their own filter on top of this
@@ -49,18 +50,20 @@ class Slashed_CSS_Loader {
 	 * @return string
 	 */
 	public static function get_url() {
+		$source   = Slashed_Settings::get_css_source();
 		$bundle   = self::get_bundle();
 		$filename = 'slashed.' . $bundle . '.css';
 
-		$url = sprintf(
-			'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/%s',
-			SLASHED_DIST_SHA,
-			$filename
-		);
-
-		$local = SLASHED_PATH . 'dist/' . $filename;
-		if ( file_exists( $local ) ) {
-			$url = SLASHED_URL . 'dist/' . $filename;
+		if ( 'cdn' === $source ) {
+			$version = Slashed_Settings::get_cdn_version();
+			$url     = sprintf(
+				'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/dist/%s',
+				rawurlencode( $version ),
+				$filename
+			);
+		} else {
+			$local = SLASHED_PATH . 'dist/' . $filename;
+			$url   = file_exists( $local ) ? SLASHED_URL . 'dist/' . $filename : '';
 		}
 
 		/**
