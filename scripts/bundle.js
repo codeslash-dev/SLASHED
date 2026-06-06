@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const zlib = require('zlib');
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import { createRequire } from 'node:module';
 
-const ROOT = path.resolve(__dirname, '..');
+const _require = createRequire(import.meta.url);
+const ROOT = path.resolve(import.meta.dirname, '..');
 const CONFIG_PATH = path.join(ROOT, 'bundle.config.json');
 
 // lightningcss is a maintainer-only dev dependency. If it's missing (e.g. a
 // consumer cloned without dev deps), skip minification rather than fail.
 let lightningcss = null;
-try { lightningcss = require('lightningcss'); } catch { /* optional */ }
+try { lightningcss = _require('lightningcss'); } catch { /* optional */ }
 
 function sizeReport(buf) {
   const raw = buf.length;

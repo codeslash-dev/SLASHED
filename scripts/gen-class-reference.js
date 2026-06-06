@@ -6,14 +6,11 @@
  * The reference is derived from source so it never drifts.
  */
 
-'use strict';
+import fs   from 'node:fs';
+import path from 'node:path';
+import { CLASS_FILES } from './registry-sources.js';
 
-const fs   = require('node:fs');
-const path = require('node:path');
-
-const ROOT = path.resolve(__dirname, '..');
-
-const { CLASS_FILES } = require('./registry-sources');
+const ROOT = path.resolve(import.meta.dirname, '..');
 
 const FILE_META = {
   'core/layout.css':        { title: 'Layout primitives',    prefix: 'sf-' },

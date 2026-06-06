@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Canonical source-file lists for the SLASHED registry.
  *
@@ -34,4 +32,4 @@ const CLASS_FILES = [
   'optional/theme-example.css',
 ];
 
-module.exports = { TOKEN_FILES, CLASS_FILES };
+export { TOKEN_FILES, CLASS_FILES };

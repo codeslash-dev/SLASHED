@@ -1,5 +1,6 @@
 {
   "name": "slashed",
+  "type": "module",
   "version": "0.5.0-beta5",
   "description": "CSS framework",
   "style": "dist/slashed.full.css",

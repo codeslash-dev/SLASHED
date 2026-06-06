@@ -24,14 +24,11 @@
  *                                        by the framework itself (warnings only)
  */
 
-'use strict';
+import fs   from 'node:fs';
+import path from 'node:path';
+import { TOKEN_FILES, CLASS_FILES } from './registry-sources.js';
 
-const fs   = require('node:fs');
-const path = require('node:path');
-
-const ROOT = path.resolve(__dirname, '..');
-
-const { TOKEN_FILES, CLASS_FILES } = require('./registry-sources');
+const ROOT = path.resolve(import.meta.dirname, '..');
 
 // All framework source files — token files + class files + everything else
 // in core/ and optional/ — used for the unused-token cross-reference.

@@ -11,13 +11,11 @@
  * To register a new build artifact, add an entry to scripts/artifacts.json.
  */
 
-'use strict';
+import { execSync, execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
-const { execSync, execFileSync } = require('child_process');
-const { readFileSync } = require('fs');
-const { resolve } = require('path');
-
-const root = resolve(__dirname, '..');
+const root = resolve(import.meta.dirname, '..');
 const artifacts = JSON.parse(readFileSync(resolve(root, 'scripts/artifacts.json'), 'utf8'));
 const mode = process.argv.includes('--check') ? 'check' : 'fix';
 

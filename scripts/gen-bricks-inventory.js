@@ -15,15 +15,12 @@
  *   node scripts/gen-bricks-inventory.js
  */
 
-'use strict';
+import fs   from 'node:fs';
+import path from 'node:path';
+import { TOKEN_FILES, CLASS_FILES } from './registry-sources.js';
 
-const fs   = require('node:fs');
-const path = require('node:path');
-
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT  = path.join(ROOT, 'plugins', 'SLASHED-for-WP', 'integrations', 'bricks', 'data', 'inventory.json');
-
-const { TOKEN_FILES, CLASS_FILES } = require('./registry-sources');
 
 function stripComments(css) {
   return css.replace(/\/\*[\s\S]*?\*\//g, '');

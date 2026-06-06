@@ -2,14 +2,11 @@
 /* Generates docs/tokens.md from the token source files. Run: npm run docs:tokens
    The reference is derived from source so it never drifts. */
 
-'use strict';
+import fs   from 'node:fs';
+import path from 'node:path';
+import { TOKEN_FILES } from './registry-sources.js';
 
-const fs   = require('fs');
-const path = require('path');
-
-const ROOT = path.resolve(__dirname, '..');
-
-const { TOKEN_FILES } = require('./registry-sources');
+const ROOT = path.resolve(import.meta.dirname, '..');
 
 const FILE_TITLES = {
   'core/tokens.css':               'Core tokens',
