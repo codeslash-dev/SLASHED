@@ -47,7 +47,7 @@ Then activate the plugin in **WordPress Admin > Plugins**.
 
 ## Configuration
 
-The plugin works out of the box with sensible defaults. All behavior can be customized via WordPress filter hooks.
+All behavior can be customized via WordPress filter hooks.
 
 ### Filter Hooks
 

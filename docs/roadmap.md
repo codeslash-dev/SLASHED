@@ -2,8 +2,6 @@
 
 Current version: **0.5.0-beta5**
 
-Items are grouped by milestone. Nothing here is a commitment.
-
 ---
 
 ## Before v1.0
