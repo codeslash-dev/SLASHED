@@ -129,6 +129,7 @@ A three-layer color architecture:
 3. **Derived tokens** — auto-contrast text, tints/shades, gradients, status triplets, etc.
 
 ### 5.1 Brand source tokens (override these 6 to rebrand)
+
 | Token | Default (OKLCH) |
 |-------|-----------------|
 | `--sf-color-primary-light` | `oklch(0.47 0.27 264)` |
