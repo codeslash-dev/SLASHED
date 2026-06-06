@@ -37,6 +37,12 @@ if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
  * is included. In standalone mode (this plugin activated directly), load
  * everything from the shared includes directory two levels up.
  */
+if ( ! defined( 'SLASHED_VERSION' ) ) {
+	add_action( 'init', function () {
+		load_plugin_textdomain( 'slashed-bricks', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	} );
+}
+
 if ( ! class_exists( 'Slashed_Token_Store' ) ) {
 	$_slashed_shared = SLASHED_BRICKS_PATH . '../../includes/';
 	require_once $_slashed_shared . 'class-settings.php';
@@ -97,9 +103,10 @@ function slashed_bricks_get_css_url() {
         $filename
     );
 
-    $repo_path = SLASHED_BRICKS_PATH . '../../../../dist/' . $filename;
-    if ( file_exists( $repo_path ) ) {
-        $default_url = SLASHED_BRICKS_URL . '../../../../dist/' . $filename;
+    // Check plugin root dist/ first (two levels up: integrations/bricks/ → plugin root).
+    $plugin_dist = SLASHED_BRICKS_PATH . '../../dist/' . $filename;
+    if ( file_exists( $plugin_dist ) ) {
+        $default_url = SLASHED_BRICKS_URL . '../../dist/' . $filename;
     } elseif ( file_exists( SLASHED_BRICKS_PATH . 'dist/' . $filename ) ) {
         $default_url = SLASHED_BRICKS_URL . 'dist/' . $filename;
     }

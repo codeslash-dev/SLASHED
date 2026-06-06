@@ -40,10 +40,15 @@ define( 'SLASHED_CSS_REF',  'v0.5.0-beta5' );
  */
 define( 'SLASHED_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
 
+add_action( 'init', function () {
+	load_plugin_textdomain( 'slashed', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+} );
+
 // ─── Shared infrastructure ────────────────────────────────────────────────────
 
 require_once SLASHED_PATH . 'includes/class-settings.php';
 require_once SLASHED_PATH . 'includes/class-css-loader.php';
+require_once SLASHED_PATH . 'includes/class-framework-updater.php';
 
 // ─── Core CSS delivery (builder-agnostic) ────────────────────────────────────
 //
@@ -86,6 +91,7 @@ if ( is_admin() ) {
 	add_action( 'plugins_loaded', function () {
 		new Slashed_Admin();
 		new Slashed_Token_Page();
+		new Slashed_Framework_Updater();
 	} );
 }
 

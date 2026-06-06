@@ -211,7 +211,7 @@ freeze. Done in a single PR with no version bump.
   **`.sf-section--xs`** (+ token `--sf-section-pad--xs`),
   **`.sf-section--2xl`** (+ token `--sf-section-pad--2xl`).
   Result: every size-aware primitive supports the canonical `--xs … --2xl`
-  range. One sentence rule: **xs..2xl wszędzie.**
+  range. One sentence rule: **xs..2xl everywhere.**
 
 ### Enhanced
 

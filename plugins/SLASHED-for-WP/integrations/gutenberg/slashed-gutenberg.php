@@ -79,14 +79,21 @@ function slashed_gutenberg_get_css_url() {
 		$filename
 	);
 
-	$repo_path = SLASHED_GUTENBERG_PATH . '../../../../dist/' . $filename;
-	if ( file_exists( $repo_path ) ) {
-		$default_url = SLASHED_GUTENBERG_URL . '../../../../dist/' . $filename;
+	// Check plugin root dist/ first (two levels up: integrations/gutenberg/ → plugin root).
+	$plugin_dist = SLASHED_GUTENBERG_PATH . '../../dist/' . $filename;
+	if ( file_exists( $plugin_dist ) ) {
+		$default_url = SLASHED_GUTENBERG_URL . '../../dist/' . $filename;
 	} elseif ( file_exists( SLASHED_GUTENBERG_PATH . 'dist/' . $filename ) ) {
 		$default_url = SLASHED_GUTENBERG_URL . 'dist/' . $filename;
 	}
 
 	return apply_filters( 'slashed_gutenberg/css_bundle_url', $default_url );
+}
+
+if ( ! defined( 'SLASHED_VERSION' ) ) {
+	add_action( 'init', function () {
+		load_plugin_textdomain( 'slashed-gutenberg', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	} );
 }
 
 /**

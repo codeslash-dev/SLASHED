@@ -2,14 +2,9 @@
 
 Current version: **0.5.0-beta5**
 
-This document tracks planned enhancements, post-1.0 features, and ideas under
-consideration. It is not a commitment — priorities shift as the project evolves.
-
 ---
 
 ## Before v1.0
-
-These items are planned as part of the path to a stable v1.0 release.
 
 ### Framework
 
@@ -76,9 +71,6 @@ These items are planned as part of the path to a stable v1.0 release.
 
 ## Post-1.0 Enhancements
 
-These are confirmed future directions, deferred until after the v1.0 API is
-stable and locked.
-
 ### Framework
 
 - **Components layer** — the `slashed.components` layer and its stubs
@@ -114,8 +106,6 @@ stable and locked.
 ---
 
 ## Under Consideration
-
-Ideas that are promising but not yet committed.
 
 - **Per-layer opt-in bundle via `@import`** — technically already possible
   today using the granular `core/` and `optional/` source files (with

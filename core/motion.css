@@ -77,12 +77,12 @@
        neutralisation in accessibility.css if a consumer accidentally
        writes them outside the gate.
 
-       Browser support — animation-timeline is shipping in Chrome 115+
-       and Firefox 145+ (expected Nov 2026, not yet released as of May 2026).
-       Safari does not yet support it
-       (tracked at WebKit bug 264057); on those engines the @supports
-       block below is skipped, so the rule falls back to a one-shot
-       time-driven animation playing once at --sf-duration-slow.
+       Browser support — animation-timeline ships in Chrome/Edge 115+.
+       Firefox keeps it behind a flag (the scroll-driven-animations
+       preference) and Safari has not shipped it (tracked at WebKit
+       bug 264057); on those engines the @supports block below is
+       skipped, so the rule falls back to a one-shot time-driven
+       animation playing once at --sf-duration-slow.
        animation-duration is set unconditionally because without it
        a non-supporting engine would default to 0s and snap to the
        end state instantly — there'd be no visible entrance at all.

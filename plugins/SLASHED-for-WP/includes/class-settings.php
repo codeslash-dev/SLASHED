@@ -30,12 +30,14 @@ class Slashed_Settings {
 	 */
 	const KNOWN_INTEGRATIONS = array( 'bricks', 'gutenberg' );
 
-	const ALLOWED_BUNDLES = array( 'essential', 'optimal', 'full' );
+	const ALLOWED_BUNDLES  = array( 'essential', 'optimal', 'full' );
+
+	const ALLOWED_SOURCES  = array( 'local', 'cdn' );
 
 	/**
 	 * Read settings from the database, applying defaults.
 	 *
-	 * @return array{integrations: array<string, bool>, css_bundle: string}
+	 * @return array{integrations: array<string, bool>, css_bundle: string, css_source: string, cdn_version: string}
 	 */
 	public static function get() {
 		$stored = get_option( self::OPTION_KEY, array() );
@@ -46,6 +48,8 @@ class Slashed_Settings {
 		return array(
 			'integrations' => self::get_integrations( $stored ),
 			'css_bundle'   => self::get_css_bundle( $stored ),
+			'css_source'   => self::get_css_source( $stored ),
+			'cdn_version'  => self::get_cdn_version( $stored ),
 		);
 	}
 
@@ -68,6 +72,43 @@ class Slashed_Settings {
 		}
 		$bundle = isset( $stored['css_bundle'] ) ? (string) $stored['css_bundle'] : 'optimal';
 		return in_array( $bundle, self::ALLOWED_BUNDLES, true ) ? $bundle : 'optimal';
+	}
+
+	/**
+	 * Get the configured CSS source mode.
+	 *
+	 * @param array|null $stored Pre-fetched stored option.
+	 * @return string 'local' or 'cdn'.
+	 */
+	public static function get_css_source( $stored = null ) {
+		if ( null === $stored ) {
+			$stored = get_option( self::OPTION_KEY, array() );
+			if ( ! is_array( $stored ) ) {
+				$stored = array();
+			}
+		}
+		$source = isset( $stored['css_source'] ) ? (string) $stored['css_source'] : 'local';
+		return in_array( $source, self::ALLOWED_SOURCES, true ) ? $source : 'local';
+	}
+
+	/**
+	 * Get the configured CDN version tag.
+	 *
+	 * @param array|null $stored Pre-fetched stored option.
+	 * @return string e.g. "v0.5.0" — falls back to the compile-time ref.
+	 */
+	public static function get_cdn_version( $stored = null ) {
+		if ( null === $stored ) {
+			$stored = get_option( self::OPTION_KEY, array() );
+			if ( ! is_array( $stored ) ) {
+				$stored = array();
+			}
+		}
+		$ver = isset( $stored['cdn_version'] ) ? (string) $stored['cdn_version'] : '';
+		if ( ! $ver || ! preg_match( '/^v?\d+\.\d+\.\d+[a-zA-Z0-9.-]*$/', $ver ) ) {
+			return SLASHED_CSS_REF;
+		}
+		return 'v' . ltrim( $ver, 'v' );
 	}
 
 	/**
@@ -110,9 +151,23 @@ class Slashed_Settings {
 			$bundle = 'optimal';
 		}
 
+		$source = isset( $data['css_source'] ) ? (string) $data['css_source'] : 'local';
+		if ( ! in_array( $source, self::ALLOWED_SOURCES, true ) ) {
+			$source = 'local';
+		}
+
+		$cdn_version = isset( $data['cdn_version'] ) ? (string) $data['cdn_version'] : '';
+		if ( $cdn_version && preg_match( '/^v?\d+\.\d+\.\d+[a-zA-Z0-9.-]*$/', $cdn_version ) ) {
+			$cdn_version = 'v' . ltrim( $cdn_version, 'v' );
+		} else {
+			$cdn_version = '';
+		}
+
 		return update_option( self::OPTION_KEY, array(
 			'integrations' => $integrations,
 			'css_bundle'   => $bundle,
+			'css_source'   => $source,
+			'cdn_version'  => $cdn_version,
 		) );
 	}
 

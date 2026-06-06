@@ -1,7 +1,7 @@
 # Contributing to SLASHED
 
-Thanks for your interest! SLASHED is a build-free, token-first CSS framework.
-This guide covers the workflow and the conventions the codebase enforces.
+SLASHED is a build-free, token-first CSS framework. The conventions below are
+enforced by stylelint, tests, and git hooks.
 
 ## Setup
 

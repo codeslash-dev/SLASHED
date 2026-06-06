@@ -37,13 +37,11 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 <link rel="stylesheet" href="optional/legacy.css">
 ```
 
-> **Note:** `optional/components.css` and `optional/tokens.components.css`
-> are not yet complete — their `@layer` declarations are real, but every
-> class definition and component token is commented out (no CSS is emitted).
-> They appear (as no-ops) in the `*-components` and `full` bundles only.
-> `optional/utilities.css` remains an empty stub — SLASHED is BEM-first by
-> design and ships no utility classes in 0.x. There's no need to link any
-> of the three individually.
+`optional/components.css` and `optional/tokens.components.css` are incomplete:
+their `@layer` declarations are real, but every class and component token is
+commented out, so no CSS is emitted. They appear only in the `*-components` and
+`full` bundles. `optional/utilities.css` is an empty stub — SLASHED is BEM-first
+and ships no utility classes in 0.x.
 
 **Recommended:** use a pre-built bundle instead of wiring up every file
 (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
@@ -112,10 +110,8 @@ the `slashed.tokens` layer.
 
 `optional/legacy.css` is always concatenated last. Every rule lives in an
 `@layer`, so concatenation order never affects the cascade — `core/layers.css`
-fixes it. `components.css` and `tokens.components.css` are **not yet
-complete** — their `@layer` declarations are real, but every selector and
-token is commented out (no CSS is emitted). `utilities.css` ships as an
-empty stub.
+fixes it. The files marked *(incomplete)* (`components`, `tokens.components`)
+and the empty `utilities` stub emit no CSS yet.
 
 À la carte is also supported — start from `essential` (or raw `core/`) and add
 hand-picked optional files in any order. When building a custom bundle by hand,
@@ -212,7 +208,7 @@ SLASHED ships a companion WordPress plugin (`plugins/SLASHED-for-WP/`) with two 
 Activate `integrations/bricks/slashed-bricks.php` (requires Bricks 1.9.2+, WordPress 6.0+, PHP 7.4+).
 
 - **CSS loading** — enqueues the SLASHED bundle on the frontend and inside the Bricks editor iframe
-- **Variable pickers** — registers all `--sf-*` tokens (~560 in `essential`, ~800 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
+- **Variable pickers** — registers all `--sf-*` tokens (571 in `essential`, 812 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
 - **Class autocomplete** — registers every `.sf-*` layout class and `.is-*` state class in the Bricks class input as locked entries
 - **Color palette** — syncs `--sf-color-*` tokens with the Bricks color palette (auto-disabled on Bricks 2.2+ where the Color Manager would override `light-dark()` tokens; use the Variable Manager there instead)
 - **Variable-picker swatches** — paints a colour square next to each `--sf-color-*` entry in the variable-picker dropdown, powered by server-resolved hex values so dark-mode stays framework-driven
@@ -226,7 +222,7 @@ See [`integrations/bricks/README.md`](plugins/SLASHED-for-WP/integrations/bricks
 Activate `integrations/gutenberg/slashed-gutenberg.php` (requires WordPress 6.4+, PHP 7.4+).
 
 - **CSS loading** — enqueues the SLASHED bundle in the block editor canvas and on the frontend
-- **Color palette** — syncs 21 `--sf-color-*` tokens (brand, status, surface, text, border, link) with the WordPress editor color palette
+- **Color palette** — syncs 20 `--sf-color-*` tokens (brand, status, surface, text, border, link) with the WordPress editor color palette
 - **Dark-mode bridge** — maps the `data-wp-dark-mode-active` attribute from the block editor's dark-mode toggle to SLASHED's `color-scheme` system
 
 ### Packaging
