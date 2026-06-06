@@ -1,0 +1,10 @@
+@property --sf-color-primary-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-secondary-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-tertiary-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-action-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-neutral-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-base-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-success-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-warning-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-error-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
+@property --sf-color-info-light { syntax: "<color>"; inherits: true; initial-value: oklch(0.5 0.1 264); }
