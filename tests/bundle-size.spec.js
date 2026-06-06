@@ -10,10 +10,12 @@ import zlib from 'node:zlib';
 const DIST = path.resolve(import.meta.dirname, '..', 'dist');
 
 // gzip kB budgets per minified bundle.
+// Updated after adding core/tokens.color-fallbacks.css (Tier-1 sRGB fallbacks),
+// which adds ~1.5–2kB gzip to each bundle containing color tokens.
 const BUDGETS = {
-  'slashed.essential.min.css': 15,
-  'slashed.optimal.min.css': 18,
-  'slashed.full.min.css': 20,
+  'slashed.essential.min.css': 18,
+  'slashed.optimal.min.css': 22,
+  'slashed.full.min.css': 22,
 };
 
 for (const [file, budgetKb] of Object.entries(BUDGETS)) {

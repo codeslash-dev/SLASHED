@@ -4,6 +4,7 @@
       "output": "dist/slashed.essential.css",
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -23,6 +24,7 @@
       "flat": true,
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -41,6 +43,7 @@
       "output": "dist/slashed.optimal.css",
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -64,6 +67,7 @@
       "flat": true,
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -86,6 +90,7 @@
       "output": "dist/slashed.optimal-components.css",
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -111,6 +116,7 @@
       "flat": true,
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -135,6 +141,7 @@
       "output": "dist/slashed.optimal-utilities.css",
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -159,6 +166,7 @@
       "flat": true,
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -182,6 +190,7 @@
       "output": "dist/slashed.full.css",
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -208,6 +217,7 @@
       "flat": true,
       "files": [
         "core/layers.css",
+        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",

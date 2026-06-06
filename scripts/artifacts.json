@@ -2,8 +2,9 @@
   {
     "name": "CSS bundles + docs",
     "srcPrefixes": ["core/", "optional/"],
-    "buildCmd": "node scripts/bundle.js && npm run docs",
+    "buildCmd": "node scripts/gen-color-fallbacks.js && node scripts/bundle.js && npm run docs",
     "outputs": [
+      "core/tokens.color-fallbacks.css",
       "docs/tokens.md",
       "docs/classes.md",
       "plugins/SLASHED-for-WP/integrations/bricks/data/inventory.json",

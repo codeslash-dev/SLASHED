@@ -54,6 +54,7 @@ jobs:
       - run: npm ci
       - run: npm run audit:check
       - run: node scripts/check-artifacts.js --check
+      - run: node scripts/gen-color-fallbacks.js && git diff --exit-code core/tokens.color-fallbacks.css
 
   test:
     name: Regression tests
