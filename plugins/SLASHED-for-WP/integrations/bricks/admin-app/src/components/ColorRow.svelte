@@ -30,7 +30,7 @@
   } = $props();
 
   // Detect starting mode from the stored value's shape, same heuristic
-  // as PHP::is_hex_color() in class-admin-page.php.
+  // as Slashed_Token_Sanitizer::is_hex_color() in class-token-sanitizer.php.
   const HEX = /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
   // One-shot hydration from the store. Wrapping in an IIFE makes it

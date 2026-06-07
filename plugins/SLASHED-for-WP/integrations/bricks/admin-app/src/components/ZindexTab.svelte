@@ -2,8 +2,7 @@
   /**
    * Z-Index tab: integer values for the named stacking layers.
    *
-   * 1:1 port of `render_tab_zindex()` in class-admin-page.php. The
-   * legacy form stored each layer under its bare name (e.g. `mid`,
+   * The legacy form stored each layer under its bare name (e.g. `mid`,
    * `top`) — not `z_top` — so the storage keys are intentionally
    * unprefixed to keep the REST sanitizer happy.
    */

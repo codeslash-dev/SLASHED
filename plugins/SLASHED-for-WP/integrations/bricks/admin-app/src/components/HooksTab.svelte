@@ -22,18 +22,19 @@
       example: `add_filter( 'slashed_bricks/registered_classes', function( $classes ) {
     // Remove state classes.
     return array_filter( $classes, function( $class ) {
-        return $class['category'] !== 'SLASHED State';
+        return $class['category'] !== 'slashed-cat-state';
     } );
 } );`,
     },
     {
       name: 'slashed_bricks/registered_variables',
       description: 'Filter the CSS variables array before registration with Bricks.',
-      params: '$variables (array) - Associative array keyed by category label.',
+      params: '$variables (array) - Array of variable entries, each with id, name, value, and category (a slashed-cat-* id).',
       example: `add_filter( 'slashed_bricks/registered_variables', function( $variables ) {
     // Remove z-index variables.
-    unset( $variables['Z-Index'] );
-    return $variables;
+    return array_filter( $variables, function( $variable ) {
+        return $variable['category'] !== 'slashed-cat-z-index';
+    } );
 } );`,
     },
     {

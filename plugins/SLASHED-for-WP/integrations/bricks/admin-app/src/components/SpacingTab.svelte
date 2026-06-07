@@ -51,7 +51,7 @@
     <p class="hint">
       The viewport width range (in <code>rem</code>) used to compute all fluid <code>clamp()</code>
       formulas for custom-overridden spacing and typography values. Default: <strong>22.5 rem</strong>
-      (360 px) → <strong>95 rem</strong> (1520 px). Changing these only affects values you explicitly
+      (360 px) → <strong>90 rem</strong> (1440 px). Changing these only affects values you explicitly
       override below or in the Typography tab — the framework's built-in scale uses the same defaults
       and is unaffected.
     </p>
@@ -72,7 +72,7 @@
         min={40}
         max={200}
         step={0.5}
-        default={defaults.viewport_max ?? 95}
+        default={defaults.viewport_max ?? 90}
       />
     </div>
 

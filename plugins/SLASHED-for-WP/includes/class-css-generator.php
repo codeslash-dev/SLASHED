@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Slashed_CSS_Generator {
 
 	const VIEWPORT_MIN = 22.5;
-	const VIEWPORT_MAX = 95;
+	const VIEWPORT_MAX = 90;
 
 	const VIEWPORT_MIN_FLOOR = 10;
 	const VIEWPORT_MIN_CAP   = 60;

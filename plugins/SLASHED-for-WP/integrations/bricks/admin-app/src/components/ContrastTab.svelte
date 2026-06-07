@@ -2,10 +2,9 @@
   /**
    * Contrast / opacity / focus-ring fine-tuning.
    *
-   * 1:1 port of `render_tab_contrast()` in class-admin-page.php. Three
-   * visual groups (Contrast, Opacity, Focus ring) with five numeric
+   * Three visual groups (Contrast, Opacity, Focus ring) with five numeric
    * sliders and one focus-ring-style select. Defaults come from
-   * `Slashed_Bricks_Token_Defaults::get_contrast()` via the hydration
+   * `Slashed_Token_Defaults::get_contrast()` via the hydration
    * payload — the Svelte side never duplicates a default value.
    */
   import { meta } from '../lib/stores.svelte.js';

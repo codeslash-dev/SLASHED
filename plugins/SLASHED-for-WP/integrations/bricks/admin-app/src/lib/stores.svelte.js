@@ -91,7 +91,7 @@ export function clearSection(section) {
  * is the single source of truth shared by the Spacing and Typography
  * live-scale previews — so the previewed scale always matches what the
  * generated CSS would actually clamp between. Falls back to the PHP
- * defaults (22.5rem → 95rem) when the user hasn't overridden them.
+ * defaults (22.5rem → 90rem) when the user hasn't overridden them.
  *
  * Reading `tokens` here keeps the result reactive: callers that wrap a
  * `$derived` around this recompute when the viewport fields change.
@@ -109,7 +109,7 @@ export function viewportRangePx() {
   };
 
   const minRem = read('viewport_min', 22.5);
-  const maxRem = read('viewport_max', 95);
+  const maxRem = read('viewport_max', 90);
   // Guard against an inverted/zero range so the previews never divide by
   // zero or run the slider backwards while the user is mid-edit.
   const safeMax = maxRem > minRem ? maxRem : minRem + 0.5;

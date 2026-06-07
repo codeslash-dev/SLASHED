@@ -73,7 +73,7 @@ class Slashed_Bricks_Color_Resolver {
 				'tertiary'  => 'oklch(0.42 0.22 295)',
 				'action'    => 'oklch(0.50 0.22 235)',
 				'neutral'   => 'oklch(0.52 0.025 260)',
-				'base'      => 'oklch(0.99 0.006 250)',
+				'base'      => 'oklch(0.96 0.006 250)',
 				'success'   => 'oklch(0.50 0.16 145)',
 				'warning'   => 'oklch(0.75 0.17 80)',
 				'error'     => 'oklch(0.50 0.20 25)',
