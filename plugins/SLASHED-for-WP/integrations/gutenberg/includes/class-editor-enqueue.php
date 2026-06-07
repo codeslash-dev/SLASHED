@@ -61,7 +61,9 @@ class Slashed_Gutenberg_Editor_Enqueue {
 		$css_path = $base_path . 'panel.css';
 		$css_ver  = file_exists( $css_path ) ? (string) filemtime( $css_path ) : $js_ver;
 
-		wp_enqueue_style( self::STYLE_HANDLE, $base_url . 'panel.css', array(), $css_ver );
+		if ( file_exists( $css_path ) ) {
+			wp_enqueue_style( self::STYLE_HANDLE, $base_url . 'panel.css', array(), $css_ver );
+		}
 
 		// Registered (not enqueued via deps) — it's an ES module that imports
 		// its own siblings (color-model.js, apply.js) relative to its URL, so

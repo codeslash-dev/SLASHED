@@ -157,8 +157,14 @@ class Slashed_Gutenberg_Presets {
 
 		// Drop empty preset arrays so we never blank out a theme's own presets
 		// (update_with treats an explicit empty array as "replace with none").
+		if ( empty( $settings['color']['palette'] ) ) {
+			unset( $settings['color']['palette'] );
+		}
 		if ( empty( $settings['color']['gradients'] ) ) {
 			unset( $settings['color']['gradients'] );
+		}
+		if ( empty( $settings['color'] ) ) {
+			unset( $settings['color'] );
 		}
 		if ( empty( $settings['spacing']['spacingSizes'] ) ) {
 			unset( $settings['spacing'] );

@@ -136,9 +136,9 @@ export function classifyVar(varName) {
     return { family, kind: 'base', step: null, key };
   }
 
-  // The `-light` source token duplicates the base swatch — skip to avoid a
-  // visual dupe (the base swatch already represents the resolved colour).
-  if (suffix === 'light') return null;
+  // The `-light`/`-dark` source tokens are internal implementation details —
+  // skip to avoid exposing them in the UI (base swatch already covers them).
+  if (suffix === 'light' || suffix === 'dark') return null;
 
   if (/^[0-9]+$/.test(suffix)) {
     return { family, kind: 'scale', step: Number(suffix), key };

@@ -30,7 +30,7 @@ import {
   buildColorModel, filterModel, swatchValue, swatchHex,
 } from './color-model.js';
 import {
-  selectedClientId, selectedBlockLabel, applyColor, applyGradient,
+  selectedClientId, selectedClientIds, selectedBlockLabel, applyColor, applyGradient,
   hasClass, toggleClass, copyToClipboard,
 } from './apply.js';
 
@@ -100,12 +100,12 @@ function hasAnyData() {
   );
 }
 
-let lastSelId = undefined;
+let lastSelKey = '';
 function onStoreChange() {
   if (!state.open) return;
-  const id = selectedClientId();
-  if (id === lastSelId) return;
-  lastSelId = id;
+  const key = selectedClientIds().join(',');
+  if (key === lastSelKey) return;
+  lastSelKey = key;
   updateContextLine();
   if (state.tab === 'classes') renderBody(); // refresh active markers
 }
@@ -140,7 +140,7 @@ function openPanel() {
   host.appendChild(panelEl);
   document.body.appendChild(host);
   launcherEl?.classList.add('is-active');
-  lastSelId = selectedClientId();
+  lastSelKey = selectedClientIds().join(',');
   updateContextLine();
   renderBody();
 }
@@ -414,6 +414,8 @@ function classRow(cls) {
       const now = toggleClass(cls);
       if (now === null) return doCopy(cls);
       row.classList.toggle('is-active', now);
+      const checkEl = row.querySelector(`.${NS}-classrow__check`);
+      if (checkEl) checkEl.textContent = now ? '✓' : '';
       toast(`${now ? 'Added' : 'Removed'} .${cls}`);
     },
   }, [

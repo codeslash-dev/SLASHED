@@ -151,7 +151,7 @@ class Slashed_Inventory {
 		// pre-primed cache that re-entry would call resolve() recursively
 		// and never terminate. With the cache primed, recursive get() calls
 		// short-circuit on the first line above.
-		self::$cache[ static::class ] = self::sanitize_inventory( static::resolve() );
+		self::$cache[ static::class ] = self::sanitize_inventory( self::resolve() );
 
 		/**
 		 * Filter the resolved inventory before it's used to register
@@ -299,6 +299,9 @@ class Slashed_Inventory {
 	 * @return array<string, string> Map of CSS variable name to color value.
 	 */
 	private static function get_admin_color_overrides() {
+		if ( ! class_exists( 'Slashed_Token_Store' ) ) {
+			return array();
+		}
 		$tokens = Slashed_Token_Store::get_settings();
 
 		if ( empty( $tokens['colors'] ) || ! is_array( $tokens['colors'] ) ) {
@@ -811,9 +814,10 @@ class Slashed_Inventory {
 				&& isset( $decoded['variables'], $decoded['sf_classes'], $decoded['is_classes'] )
 			) {
 				return array(
-					'variables'  => array_values( $decoded['variables'] ),
-					'sf_classes' => array_values( $decoded['sf_classes'] ),
-					'is_classes' => array_values( $decoded['is_classes'] ),
+					'variables'    => array_values( $decoded['variables'] ),
+					'sf_classes'   => array_values( $decoded['sf_classes'] ),
+					'is_classes'   => array_values( $decoded['is_classes'] ),
+					'color_values' => isset( $decoded['color_values'] ) ? (array) $decoded['color_values'] : array(),
 				);
 			}
 		}
