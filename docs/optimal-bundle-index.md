@@ -1,7 +1,7 @@
 # SLASHED — Optimal Bundle: Complete Index
 
 > **Bundle:** `slashed.optimal.css` / `slashed.optimal.min.css` / `slashed.optimal.flat.css`
-> **Framework version:** `0.5.0-beta5`
+> **Framework version:** `0.5.20`
 > **Tagline:** **S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**xplicit · **D**eterministic
 > **Nature:** A cascade-layer CSS framework. No build step required to consume it, no Node runtime, no runtime dependencies — plain CSS.
 
@@ -523,4 +523,4 @@ For the authoritative, machine-generated flat list, see `docs/registry.json` →
 
 ---
 
-*Generated as a reference index of the `slashed.optimal` bundle for SLASHED `0.5.0-beta5`. Source of truth: `bundle.config.json`, the `core/` and `optional/` CSS files, and `docs/registry.json`.*
+*Generated as a reference index of the `slashed.optimal` bundle for SLASHED `0.5.20`. Source of truth: `bundle.config.json`, the `core/` and `optional/` CSS files, and `docs/registry.json`.*
