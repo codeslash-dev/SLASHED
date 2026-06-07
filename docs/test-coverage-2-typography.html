@@ -90,7 +90,7 @@
       <a href="test-coverage-5-forms-features.html">5 · Forms &amp; Features</a>
       <a href="test-coverage-6-token-reference.html">6 · All tokens</a>
     </nav>
-    <button id="theme-toggle" type="button">Toggle dark</button>
+    <button id="theme-toggle" type="button" aria-pressed="false">Toggle dark</button>
   </header>
 
   <main id="main">
@@ -344,23 +344,23 @@
 
       <h3>Durations (hover to move)</h3>
       <div class="sf-stack sf-stack--xs">
-        <label class="demo-space-row"><span class="demo-space-label">duration-instant</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-instant) var(--sf-ease-out)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">duration-fast</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-fast) var(--sf-ease-out)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">duration-normal</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-normal) var(--sf-ease-out)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">duration-slow</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-out)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">duration-slower</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slower) var(--sf-ease-out)"></span></label>
+        <div class="demo-space-row"><span class="demo-space-label">duration-instant</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-instant) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-fast</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-fast) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-normal</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-normal) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-slow</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-slower</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slower) var(--sf-ease-out)"></span></div>
       </div>
 
       <h3>Easings (hover to move)</h3>
       <div class="sf-stack sf-stack--xs">
-        <label class="demo-space-row"><span class="demo-space-label">ease-linear</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-linear)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-in</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-in)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-out</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-out)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-in-out</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-in-out)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-spring</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-spring)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-elastic</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-elastic)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-bounce</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-bounce)"></span></label>
-        <label class="demo-space-row"><span class="demo-space-label">ease-overshoot</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-overshoot)"></span></label>
+        <div class="demo-space-row"><span class="demo-space-label">ease-linear</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-linear)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-in</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-in)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-out</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-in-out</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-in-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-spring</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-spring)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-elastic</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-elastic)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-bounce</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-bounce)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-overshoot</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-overshoot)"></span></div>
       </div>
 
       <h3>Transition tokens (hover the card)</h3>
@@ -424,14 +424,23 @@
     (function () {
       var root = document.documentElement;
       var btn = document.getElementById('theme-toggle');
+      function effective() {
+        if (root.dataset.theme === 'dark' || root.dataset.theme === 'light') return root.dataset.theme;
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
       function apply(t) {
+        t = (t === 'dark' || t === 'light') ? t : 'light';
         root.dataset.theme = t;
         try { localStorage.sfTheme = t; } catch (e) {}
+        btn.setAttribute('aria-pressed', String(t === 'dark'));
         btn.textContent = t === 'dark' ? 'Toggle light' : 'Toggle dark';
       }
-      try { if (localStorage.sfTheme) apply(localStorage.sfTheme); } catch (e) {}
+      try {
+        if (localStorage.sfTheme === 'dark' || localStorage.sfTheme === 'light') apply(localStorage.sfTheme);
+        else btn.setAttribute('aria-pressed', String(effective() === 'dark'));
+      } catch (e) { btn.setAttribute('aria-pressed', String(effective() === 'dark')); }
       btn.addEventListener('click', function () {
-        var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        var next = effective() === 'dark' ? 'light' : 'dark';
         if (document.startViewTransition) document.startViewTransition(function () { apply(next); });
         else apply(next);
       });

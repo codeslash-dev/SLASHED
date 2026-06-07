@@ -74,7 +74,7 @@
       <a href="test-coverage-5-forms-features.html">5 · Forms &amp; Features</a>
       <a href="test-coverage-6-token-reference.html" aria-current="page">6 · All tokens</a>
     </nav>
-    <button id="theme-toggle" type="button">Toggle dark</button>
+    <button id="theme-toggle" type="button" aria-pressed="false">Toggle dark</button>
   </header>
 
   <main id="main">
@@ -90,15 +90,21 @@
     (function () {
       var root = document.documentElement;
       var btn = document.getElementById('theme-toggle');
+      function effective() {
+        if (root.dataset.theme === 'dark' || root.dataset.theme === 'light') return root.dataset.theme;
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
       function apply(t) {
+        t = (t === 'dark' || t === 'light') ? t : 'light';
         root.dataset.theme = t;
         try { localStorage.sfTheme = t; } catch (e) {}
+        btn.setAttribute('aria-pressed', String(t === 'dark'));
         btn.textContent = t === 'dark' ? 'Toggle light' : 'Toggle dark';
-        render();
+        if (grid && filter) render();
       }
-      try { if (localStorage.sfTheme) apply(localStorage.sfTheme); } catch (e) {}
+      btn.setAttribute('aria-pressed', String(effective() === 'dark'));
       btn.addEventListener('click', function () {
-        var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        var next = effective() === 'dark' ? 'light' : 'dark';
         if (document.startViewTransition) document.startViewTransition(function () { apply(next); });
         else apply(next);
       });
@@ -141,7 +147,10 @@
         grid.appendChild(frag);
       }
       filter.addEventListener('input', render);
-      render();
+      var bootTheme = null;
+      try { bootTheme = (localStorage.sfTheme === 'dark' || localStorage.sfTheme === 'light') ? localStorage.sfTheme : null; } catch (e) {}
+      if (bootTheme) apply(bootTheme);
+      else render();
     })();
   </script>
 </body>
