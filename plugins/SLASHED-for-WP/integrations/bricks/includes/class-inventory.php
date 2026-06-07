@@ -416,6 +416,7 @@ class Slashed_Bricks_Inventory {
 			'Focus',
 			'Scroll',
 			'Print',
+			'Fallback/Legacy',
 			'Misc',
 		);
 	}
@@ -521,6 +522,21 @@ class Slashed_Bricks_Inventory {
 			'scrollbar'   => 'Scroll',
 			// Print.
 			'print'       => 'Print',
+			// Fallback/Legacy: HSL channel triplets (--sf-{name}-h/-s/-l)
+			// backing core/tokens.color-fallbacks.css — only consumed by the
+			// legacy hsl() fallback chain for browsers without light-dark() /
+			// oklch(from …) support.
+			'primary'     => 'Fallback/Legacy',
+			'secondary'   => 'Fallback/Legacy',
+			'tertiary'    => 'Fallback/Legacy',
+			'action'      => 'Fallback/Legacy',
+			'neutral'     => 'Fallback/Legacy',
+			'base'        => 'Fallback/Legacy',
+			'success'     => 'Fallback/Legacy',
+			'warning'     => 'Fallback/Legacy',
+			'error'       => 'Fallback/Legacy',
+			'info'        => 'Fallback/Legacy',
+			'danger'      => 'Fallback/Legacy',
 			// Misc explicit assignments.
 			'truncate'    => 'Misc',
 		);

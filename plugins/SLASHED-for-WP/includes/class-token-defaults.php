@@ -69,7 +69,7 @@ class Slashed_Token_Defaults {
 				'tertiary'  => 'oklch(0.42 0.22 295)',
 				'action'    => 'oklch(0.50 0.22 235)',
 				'neutral'   => 'oklch(0.52 0.025 260)',
-				'base'      => 'oklch(0.99 0.006 250)',
+				'base'      => 'oklch(0.96 0.006 250)',
 			),
 			'brand_dark' => array(
 				'primary'   => '',
@@ -134,13 +134,13 @@ class Slashed_Token_Defaults {
 	public static function get_typography() {
 		return array(
 			'font_families' => array(
-				'body'      => 'system-ui, sans-serif',
-				'heading'   => 'system-ui, sans-serif',
+				'body'      => 'system-ui, -apple-system, sans-serif',
+				'heading'   => 'var(--sf-font-body)',
 				'mono'      => 'ui-monospace, monospace',
-				'display'   => 'system-ui, sans-serif',
-				'humanist'  => 'system-ui, sans-serif',
-				'geometric' => 'system-ui, sans-serif',
-				'slab'      => 'system-ui, sans-serif',
+				'display'   => 'var(--sf-font-heading)',
+				'humanist'  => '"Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif',
+				'geometric' => '"Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif',
+				'slab'      => '"Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif',
 			),
 			'font_sizes' => array(
 				'2xs'       => array( 'min' => 0.51, 'max' => 0.53 ),
@@ -172,7 +172,7 @@ class Slashed_Token_Defaults {
 		return array(
 			'space_scale'    => 1,
 			'viewport_min'   => 22.5,
-			'viewport_max'   => 95,
+			'viewport_max'   => 90,
 			'space_sizes'    => array(
 				'2xs' => array( 'min' => 0.51, 'max' => 0.84 ),
 				'xs'  => array( 'min' => 0.64, 'max' => 1.13 ),
@@ -266,7 +266,7 @@ class Slashed_Token_Defaults {
 	public static function get_shadows() {
 		return array(
 			'shadow_strength' => 0.08,
-			'glow_color'      => '',
+			'glow_color'      => 'var(--sf-color-primary)',
 		);
 	}
 

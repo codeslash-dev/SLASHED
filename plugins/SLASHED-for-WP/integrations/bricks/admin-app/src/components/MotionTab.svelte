@@ -2,10 +2,9 @@
   /**
    * Motion tab: global scale multiplier + named duration tokens.
    *
-   * 1:1 port of `render_tab_motion()` in class-admin-page.php. Durations
-   * are stored as plain numbers in milliseconds; the framework converts
-   * them to `<n>ms` strings at CSS-emit time. Storage keys follow the
-   * legacy `duration_<name>` shape so the REST sanitizer accepts them.
+   * Durations are stored as plain numbers in milliseconds; the framework
+   * converts them to `<n>ms` strings at CSS-emit time. Storage keys follow
+   * the legacy `duration_<name>` shape so the REST sanitizer accepts them.
    */
   import { meta } from '../lib/stores.svelte.js';
   import NumberField from './NumberField.svelte';

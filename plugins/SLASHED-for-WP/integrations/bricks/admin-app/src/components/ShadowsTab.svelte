@@ -2,9 +2,8 @@
   /**
    * Shadows tab: base opacity strength for derived shadow layers.
    *
-   * 1:1 port of `render_tab_shadows()` in class-admin-page.php. Bounded
-   * to 0..1 since it's an opacity multiplier — anything outside that
-   * range produces invisible or fully-opaque shadows.
+   * Bounded to 0..1 since it's an opacity multiplier — anything outside
+   * that range produces invisible or fully-opaque shadows.
    */
   import { meta } from '../lib/stores.svelte.js';
   import RangeField from './RangeField.svelte';

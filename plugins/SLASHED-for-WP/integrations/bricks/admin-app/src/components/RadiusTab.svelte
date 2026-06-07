@@ -4,7 +4,6 @@
    *
    * The framework derives every named radius (`--sf-radius-s`, `-m`, `-l`,
    * etc.) from this one knob, so a single number field is enough.
-   * 1:1 port of `render_tab_radius()` in class-admin-page.php.
    */
   import { meta } from '../lib/stores.svelte.js';
   import NumberField from './NumberField.svelte';

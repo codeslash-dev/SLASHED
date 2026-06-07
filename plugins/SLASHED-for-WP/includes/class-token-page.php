@@ -136,6 +136,9 @@ class Slashed_Token_Page {
 					'gutenberg' => class_exists( 'Slashed_Settings' ) ? Slashed_Settings::is_enabled( 'gutenberg' ) : true,
 				),
 				'bricksFonts'        => self::get_bricks_fonts(),
+				'settingsUrl'        => class_exists( 'Slashed_Admin' )
+					? esc_url_raw( admin_url( 'admin.php?page=' . \Slashed_Admin::PAGE_SLUG ) )
+					: '',
 			)
 		);
 	}
@@ -171,19 +174,40 @@ class Slashed_Token_Page {
 	 * Transient key caching the Bricks Font-Manager CPT font list.
 	 *
 	 * Shared with Slashed_Bricks_Fonts_REST, which busts it on
-	 * save_post_{BRICKS_DB_CUSTOM_FONTS}. Kept here too because this class
-	 * is the canonical owner of the collector and is always loaded, whereas
-	 * the REST class is only required during REST dispatch.
+	 * save_post_{<font CPT slug>} (see get_bricks_fonts_post_type()). Kept
+	 * here too because this class is the canonical owner of the collector and
+	 * is always loaded, whereas the REST class is only required during REST
+	 * dispatch.
 	 */
 	const CPT_FONTS_TRANSIENT = 'slashed_bricks_cpt_fonts';
 
 	/**
+	 * Post type slug for the Bricks Font Manager CPT.
+	 *
+	 * Bricks does not expose this as a constant we can rely on, so we use the
+	 * slug observed in the wild (Bricks › Settings › Custom Fonts admin URLs
+	 * read /wp-admin/edit.php?post_type=bricks_fonts). BRICKS_DB_CUSTOM_FONTS
+	 * is honoured first in case a future Bricks version defines it.
+	 */
+	const CPT_FONTS_POST_TYPE = 'bricks_fonts';
+
+	/**
+	 * Resolve the Bricks Font Manager CPT slug: prefer the constant Bricks may
+	 * define, fall back to the known slug.
+	 *
+	 * @return string
+	 */
+	public static function get_bricks_fonts_post_type() {
+		return defined( 'BRICKS_DB_CUSTOM_FONTS' ) ? BRICKS_DB_CUSTOM_FONTS : self::CPT_FONTS_POST_TYPE;
+	}
+
+	/**
 	 * Flush the cached Bricks Font-Manager CPT font list.
 	 *
-	 * Registered on save_post_{BRICKS_DB_CUSTOM_FONTS} from an always-loaded
-	 * bootstrap path (see slashed-bricks.php) rather than from REST route
-	 * registration, so the cache is invalidated on every custom-font save —
-	 * including normal admin saves, not only during REST requests.
+	 * Registered on save_post_{<font CPT slug>} (see get_bricks_fonts_post_type())
+	 * from an always-loaded bootstrap path (see slashed-bricks.php) rather than
+	 * from REST route registration, so the cache is invalidated on every
+	 * custom-font save — including normal admin saves, not only REST requests.
 	 */
 	public static function flush_bricks_fonts_cache() {
 		delete_transient( self::CPT_FONTS_TRANSIENT );
@@ -204,13 +228,15 @@ class Slashed_Token_Page {
 	 *   - bricks_custom_fonts: font_family | family | title | name
 	 *   - bricks_google_fonts: family | font_family | name | title
 	 *   - bricks_adobe_fonts:  fonts[].font_family | family
-	 *   - Font Manager CPT (BRICKS_DB_CUSTOM_FONTS): the post title is the
-	 *     family name. Fonts created via the builder UI may stay in 'draft'
-	 *     even after the files upload, so both 'publish' and 'draft' are
-	 *     included. We read titles directly rather than calling
-	 *     Bricks\Custom_Fonts::get_custom_fonts() (static cache + @font-face
-	 *     side-effects + publish-only — all unnecessary for a name lookup),
-	 *     and cache the result in a 1-hour transient busted on CPT save.
+	 *   - Font Manager CPT (slug resolved by get_bricks_fonts_post_type(), the
+	 *     'bricks_fonts' post type observed in Bricks › Settings › Custom
+	 *     Fonts admin URLs): the post title is the family name. Fonts created
+	 *     via the builder UI may stay in 'draft' even after the files upload,
+	 *     so both 'publish' and 'draft' are included. We read titles directly
+	 *     rather than calling Bricks\Custom_Fonts::get_custom_fonts() (static
+	 *     cache + @font-face side-effects + publish-only — all unnecessary for
+	 *     a name lookup), and cache the result in a 1-hour transient busted on
+	 *     CPT save.
 	 *
 	 * Returns an empty array when the Bricks integration is disabled.
 	 *
@@ -283,7 +309,8 @@ class Slashed_Token_Page {
 		}
 
 		// Fonts uploaded via Bricks Font Manager CPT (includes 'draft' status).
-		if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) ) {
+		$font_post_type = self::get_bricks_fonts_post_type();
+		if ( post_type_exists( $font_post_type ) ) {
 			$cpt_cached = get_transient( self::CPT_FONTS_TRANSIENT );
 
 			if ( false !== $cpt_cached && is_array( $cpt_cached ) ) {
@@ -292,7 +319,7 @@ class Slashed_Token_Page {
 				$cpt_fonts = array();
 				$cpt_posts = get_posts(
 					array(
-						'post_type'      => BRICKS_DB_CUSTOM_FONTS,
+						'post_type'      => $font_post_type,
 						'posts_per_page' => -1,
 						'post_status'    => array( 'publish', 'draft' ),
 						'fields'         => 'ids',

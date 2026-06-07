@@ -2,8 +2,7 @@
   /**
    * Paired range slider + number input bound to a single token field.
    *
-   * Replaces the `render_range_field()` PHP helper in class-admin-page.php.
-   * Same UX contract:
+   * UX contract:
    *   - the number input is the canonical control (carries the value),
    *   - the range slider is a visual nudge with `aria-hidden`/`tabindex=-1`
    *     so it doesn't double up in the AT tree,

@@ -21,7 +21,7 @@ class Slashed_Framework_Updater {
 	const BUNDLES          = array( 'essential', 'optimal', 'full' );
 	const TRANSIENT_KEY    = 'slashed_latest_framework_version';
 	const LOCAL_VER_OPTION = 'slashed_local_framework_version';
-	const CDN_BASE         = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/dist/%s';
+	const CDN_BASE         = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/plugins/SLASHED-for-WP/dist/%s';
 	const METADATA_URL     = 'https://data.jsdelivr.com/v1/packages/gh/codeslash-dev/SLASHED';
 
 	public function __construct() {

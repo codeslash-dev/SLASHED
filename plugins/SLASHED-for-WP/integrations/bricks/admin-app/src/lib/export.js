@@ -10,27 +10,55 @@
  * their overrides without a WordPress runtime dependency.
  */
 
-/** Viewport min width in rem for fluid type calculations. */
+/** Viewport range fallbacks — mirror Slashed_CSS_Generator::VIEWPORT_MIN/MAX. */
 const VIEWPORT_MIN = 22.5;
+const VIEWPORT_MAX = 90;
 
-/** Viewport max width in rem for fluid type calculations. */
-const VIEWPORT_MAX = 95;
+/** Floor/cap clamps — mirror Slashed_CSS_Generator::resolve_viewport_min/max(). */
+const VIEWPORT_MIN_FLOOR = 10;
+const VIEWPORT_MIN_CAP   = 60;
+const VIEWPORT_MAX_FLOOR = 40;
+const VIEWPORT_MAX_CAP   = 200;
+
+/**
+ * Resolve the fluid viewport range from the user's spacing settings,
+ * falling back to the framework defaults — mirrors
+ * Slashed_CSS_Generator::resolve_viewport_min/max() so the exported CSS
+ * uses the exact same clamp() curve the server would generate for the
+ * same settings.
+ *
+ * @param {Object} spacingSettings Spacing section settings.
+ * @returns {{ min: number, max: number }}
+ */
+function resolveViewportRange(spacingSettings) {
+  const raw = (key, fallback, floor, cap) => {
+    const v = spacingSettings?.[key];
+    if (!hasValue(v) || isNaN(parseFloat(v))) return fallback;
+    return Math.max(floor, Math.min(cap, parseFloat(v)));
+  };
+  return {
+    min: raw('viewport_min', VIEWPORT_MIN, VIEWPORT_MIN_FLOOR, VIEWPORT_MIN_CAP),
+    max: raw('viewport_max', VIEWPORT_MAX, VIEWPORT_MAX_FLOOR, VIEWPORT_MAX_CAP),
+  };
+}
 
 /**
  * Build a clamp() expression for fluid type scaling.
  *
  * @param {number} min Minimum size in rem.
  * @param {number} max Maximum size in rem.
+ * @param {number} vpMin Viewport range minimum, in rem.
+ * @param {number} vpMax Viewport range maximum, in rem.
  * @returns {string|null} The clamp() expression or null on invalid input.
  */
-function buildClamp(min, max) {
-  if (min <= 0 || max <= 0) return null;
-  const range = VIEWPORT_MAX - VIEWPORT_MIN;
+function buildClamp(min, max, vpMin, vpMax) {
+  if (min <= 0 || max <= 0 || vpMax <= vpMin) return null;
+  const range = vpMax - vpMin;
   const slope = (max - min) / range;
   const slopeRounded = parseFloat(slope.toFixed(6));
   const minRounded = parseFloat(min.toFixed(4));
   const maxRounded = parseFloat(max.toFixed(4));
-  return `clamp(${minRounded}rem, calc(${slopeRounded} * (100vw - ${VIEWPORT_MIN}rem) + ${minRounded}rem), ${maxRounded}rem)`;
+  return `clamp(${minRounded}rem, calc(${slopeRounded} * (100vw - ${vpMin}rem) + ${minRounded}rem), ${maxRounded}rem)`;
 }
 
 /**
@@ -113,9 +141,11 @@ function generateColorDeclarations(settings) {
  * Generate CSS declarations for typography tokens.
  *
  * @param {Object} settings Typography section settings.
+ * @param {{ min: number, max: number }} vpRange Fluid viewport range, in rem
+ *   (shared with spacing — see resolveViewportRange()).
  * @returns {string[]} CSS declaration strings.
  */
-function generateTypographyDeclarations(settings) {
+function generateTypographyDeclarations(settings, vpRange) {
   const declarations = [];
 
   // Font families: font_body -> --sf-font-body.
@@ -143,7 +173,7 @@ function generateTypographyDeclarations(settings) {
     const minVal = settings[minKey];
     const maxVal = settings[maxKey];
     if (hasValue(minVal) && hasValue(maxVal)) {
-      const clamp = buildClamp(parseFloat(minVal), parseFloat(maxVal));
+      const clamp = buildClamp(parseFloat(minVal), parseFloat(maxVal), vpRange.min, vpRange.max);
       if (clamp) {
         declarations.push(`--sf-text-${size}: ${clamp};`);
       }
@@ -157,9 +187,11 @@ function generateTypographyDeclarations(settings) {
  * Generate CSS declarations for spacing tokens.
  *
  * @param {Object} settings Spacing section settings.
+ * @param {{ min: number, max: number }} vpRange Fluid viewport range, in rem
+ *   (see resolveViewportRange()).
  * @returns {string[]} CSS declaration strings.
  */
-function generateSpacingDeclarations(settings) {
+function generateSpacingDeclarations(settings, vpRange) {
   const declarations = [];
 
   if (hasValue(settings.space_scale)) {
@@ -171,7 +203,7 @@ function generateSpacingDeclarations(settings) {
     const minVal = settings[`space_${step}_min`];
     const maxVal = settings[`space_${step}_max`];
     if (hasValue(minVal) && hasValue(maxVal)) {
-      const clamp = buildClamp(parseFloat(minVal), parseFloat(maxVal));
+      const clamp = buildClamp(parseFloat(minVal), parseFloat(maxVal), vpRange.min, vpRange.max);
       if (clamp) {
         declarations.push(`--sf-space-${step}: calc(${clamp} * var(--sf-space-scale));`);
       }
@@ -327,16 +359,22 @@ function generateContrastDeclarations(settings) {
 export function generateExportCSS(allTokens) {
   const declarations = [];
 
+  // Shared by typography and spacing — mirrors how Slashed_CSS_Generator
+  // resolves the viewport range once and threads it into both generators,
+  // so the exported CSS clamp() curves match what the server would emit
+  // for the same settings.
+  const vpRange = resolveViewportRange(allTokens.spacing);
+
   if (allTokens.colors && typeof allTokens.colors === 'object') {
     declarations.push(...generateColorDeclarations(allTokens.colors));
   }
 
   if (allTokens.typography && typeof allTokens.typography === 'object') {
-    declarations.push(...generateTypographyDeclarations(allTokens.typography));
+    declarations.push(...generateTypographyDeclarations(allTokens.typography, vpRange));
   }
 
   if (allTokens.spacing && typeof allTokens.spacing === 'object') {
-    declarations.push(...generateSpacingDeclarations(allTokens.spacing));
+    declarations.push(...generateSpacingDeclarations(allTokens.spacing, vpRange));
   }
 
   if (allTokens.radius && typeof allTokens.radius === 'object') {

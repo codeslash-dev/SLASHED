@@ -150,8 +150,8 @@
       <li>
         <strong>Design using SLASHED tokens.</strong>
         In your builder's color picker, always choose a swatch from the SLASHED palette groups
-        (Primary, Secondary, Status, Semantic). Never type a hex value directly — that bakes a
-        hardcoded color into your content that won't follow your brand tokens.
+        (Brand, Status, Surface, Text, Border &amp; Link). Never type a hex value directly —
+        that bakes a hardcoded color into your content that won't follow your brand tokens.
       </li>
       <li>
         <strong>Use <code>var(--sf-*)</code> in custom CSS.</strong>

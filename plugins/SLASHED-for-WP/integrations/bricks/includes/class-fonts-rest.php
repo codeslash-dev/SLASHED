@@ -43,8 +43,9 @@ class Slashed_Bricks_Fonts_REST {
 		);
 
 		// Note: the CPT font-cache invalidation hook
-		// (save_post_{BRICKS_DB_CUSTOM_FONTS}) is registered from the
-		// always-loaded plugins_loaded bootstrap in slashed-bricks.php, not
+		// (save_post_{<font CPT slug>}, see
+		// Slashed_Token_Page::get_bricks_fonts_post_type()) is registered from
+		// the always-loaded plugins_loaded bootstrap in slashed-bricks.php, not
 		// here — rest_api_init only fires during REST dispatch, so registering
 		// it here would miss normal admin saves and leave a stale cache.
 	}
