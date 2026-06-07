@@ -351,6 +351,31 @@
     }
   } /* end @supports (color: oklch(from red l c h)) — surface contextual cascade */
 
+  /* -- Surface shadow tint -------------------------------------
+     Sets background + auto-flipped foreground in one class. Shadows
+     re-derive from surface background for in-family cast shadows.
+     Re-derive --sf-shadow-color from each surface's OWN background
+     so box-shadow / text-shadow / drop-shadow on a colored surface
+     read as an in-family cast shadow rather than a neutral-grey slab.
+     Mirrors the default formula (oklch …0.15 c h) but seeds it with
+     the surface background instead of --sf-color-neutral. Completes
+     the contextual cascade so elevated children (cards, popovers)
+     elevated ON a surface inherit a correctly tinted shadow.
+     Inverse is intentionally omitted: its background is the page text
+     color, so the neutral default already matches. */
+  @supports (color: oklch(from red l c h)) {
+    .sf-surface--primary   { --sf-shadow-color: oklch(from var(--sf-color-primary)   0.15 c h); }
+    .sf-surface--secondary { --sf-shadow-color: oklch(from var(--sf-color-secondary) 0.15 c h); }
+    .sf-surface--tertiary  { --sf-shadow-color: oklch(from var(--sf-color-tertiary)  0.15 c h); }
+    .sf-surface--action    { --sf-shadow-color: oklch(from var(--sf-color-action)    0.15 c h); }
+    .sf-surface--neutral   { --sf-shadow-color: oklch(from var(--sf-color-neutral)   0.15 c h); }
+    .sf-surface--success   { --sf-shadow-color: oklch(from var(--sf-color-success)   0.15 c h); }
+    .sf-surface--warning   { --sf-shadow-color: oklch(from var(--sf-color-warning)   0.15 c h); }
+    .sf-surface--error     { --sf-shadow-color: oklch(from var(--sf-color-error)     0.15 c h); }
+    .sf-surface--info      { --sf-shadow-color: oklch(from var(--sf-color-info)      0.15 c h); }
+    .sf-surface--danger    { --sf-shadow-color: oklch(from var(--sf-color-danger)    0.15 c h); }
+  }
+
   /* -- Scrim ---------------------------------------------------
      Darkening overlay for text placed over a background image, so
      the text clears contrast without dimming the whole picture.

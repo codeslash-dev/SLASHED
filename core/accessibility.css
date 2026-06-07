@@ -125,6 +125,28 @@
   }
 
   /* ----------------------------------------------------------
+     Reduced data — Save-Data / metered-connection preference.
+     Enhancement, not a barrier (left normal, no !important): we
+     only neutralise the framework's paint-heaviest *decorative*
+     output via its own master knobs, so layout and legibility are
+     untouched. --sf-shadow-strength: 0 zeroes every box/text/drop
+     shadow and the glow in one step (they all derive their alpha
+     from it); the blur tokens collapse so backdrop/filter blurs
+     stop compositing expensive layers. Progressive enhancement —
+     engines without prefers-reduced-data simply ignore this block.
+     ---------------------------------------------------------- */
+  @media (prefers-reduced-data: reduce) {
+    :root {
+      --sf-shadow-strength: 0;
+      --sf-blur-xs: 0px;
+      --sf-blur-s:  0px;
+      --sf-blur-m:  0px;
+      --sf-blur-l:  0px;
+      --sf-blur-xl: 0px;
+    }
+  }
+
+  /* ----------------------------------------------------------
      Minimum touch targets — WCAG 2.5.5 has documented
      exceptions; dense desktop-first UIs legitimately go below
      44px with other hit-area strategies. Left normal ON PURPOSE

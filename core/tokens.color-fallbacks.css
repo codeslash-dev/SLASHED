@@ -51,12 +51,38 @@
     --sf-color-bg:    hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 2%));
     --sf-color-inset: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) - 3%));
     --sf-color-raised: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 4%));
+    /* Inverse surface — dark in light-mode fallback (modern flips lightness
+       via oklch). Overlay — the page bg at 0.9 alpha for scrim/backdrop use. */
+    --sf-color-inverse: hsl(var(--sf-neutral-h) 18% 14%);
+    --sf-color-overlay: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 2%) / 0.9);
 
     /* ── Text (neutral-derived) ───────────────────────────────────────────── */
 
-    --sf-color-text:            hsl(var(--sf-neutral-h) 15%  12%);
-    --sf-color-text--secondary:  hsl(var(--sf-neutral-h) 10%  35%);
-    --sf-color-heading:          hsl(var(--sf-neutral-h) 20%   8%);
+    --sf-color-text:            hsl(var(--sf-neutral-h) 15% 12%);
+    --sf-color-text--secondary: hsl(var(--sf-neutral-h) 10% 35%);
+    --sf-color-heading:         hsl(var(--sf-neutral-h) 20% 8%);
+
+    /* ── Text-on-color ────────────────────────────────────────────────────────
+       Modern CSS auto-picks black/white per background luminance via the
+       sign() formula in tokens.css. That formula needs oklch relative color,
+       so on this fallback tier we hardcode the choice from each channel's
+       known lightness: white on the dark brand/status fills, dark text on the
+       light ones (base/surface) and on warning (perceptually light yellow).
+       Without these, every ungated `.sf-surface--*` rule would keep its
+       background but inherit unreadable body text. */
+    --sf-color-text--on-primary:   hsl(0 0% 100%);
+    --sf-color-text--on-secondary: hsl(0 0% 100%);
+    --sf-color-text--on-tertiary:  hsl(0 0% 100%);
+    --sf-color-text--on-action:    hsl(0 0% 100%);
+    --sf-color-text--on-neutral:   hsl(0 0% 100%);
+    --sf-color-text--on-base:      hsl(var(--sf-neutral-h) 15% 12%);
+    --sf-color-text--on-surface:   hsl(var(--sf-neutral-h) 15% 12%);
+    --sf-color-text--on-success:   hsl(0 0% 100%);
+    --sf-color-text--on-warning:   hsl(var(--sf-neutral-h) 15% 12%);
+    --sf-color-text--on-error:     hsl(0 0% 100%);
+    --sf-color-text--on-info:      hsl(0 0% 100%);
+    --sf-color-text--on-danger:    hsl(0 0% 100%);
+    --sf-color-text--on-inverse:   hsl(0 0% 100%);
 
     /* ── Borders (neutral-derived) ────────────────────────────────────────── */
 
@@ -74,6 +100,7 @@
 
     /* ── Shadows (neutral-derived) ────────────────────────────────────────── */
 
+    --sf-shadow-none: none;
     --sf-shadow-xs: 0 1px 2px 0
                     hsl(var(--sf-neutral-h) 20% 10% / 0.06);
     --sf-shadow-s:  0 1px 3px 0 hsl(var(--sf-neutral-h) 20% 10% / 0.10),
@@ -82,5 +109,22 @@
                     0 2px 4px -2px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
     --sf-shadow-l:  0 10px 15px -3px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
                     0 4px 6px -4px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-xl: 0 20px 25px -5px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 8px 10px -6px hsl(var(--sf-neutral-h) 20% 10% / 0.10);
+    --sf-shadow-2xl: 0 25px 50px -12px hsl(var(--sf-neutral-h) 20% 10% / 0.25);
+    --sf-shadow-inner: inset 0 2px 4px 0 hsl(var(--sf-neutral-h) 20% 10% / 0.10);
+
+    /* ── Text shadows (neutral-derived) ───────────────────────────────────── */
+
+    --sf-text-shadow-none: none;
+    --sf-text-shadow-s: 0 1px 2px hsl(var(--sf-neutral-h) 20% 10% / 0.18);
+    --sf-text-shadow-m: 0 2px 4px hsl(var(--sf-neutral-h) 20% 10% / 0.24);
+    --sf-text-shadow-l: 0 4px 8px hsl(var(--sf-neutral-h) 20% 10% / 0.30);
+
+    /* ── Drop shadows (neutral-derived) ───────────────────────────────────── */
+
+    --sf-drop-shadow-s: drop-shadow(0 1px 2px hsl(var(--sf-neutral-h) 20% 10% / 0.18));
+    --sf-drop-shadow-m: drop-shadow(0 4px 6px hsl(var(--sf-neutral-h) 20% 10% / 0.24));
+    --sf-drop-shadow-l: drop-shadow(0 8px 16px hsl(var(--sf-neutral-h) 20% 10% / 0.30));
   }
 }

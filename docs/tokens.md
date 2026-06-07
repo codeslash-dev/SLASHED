@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**833 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**837 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-461 tokens.
+465 tokens.
 
 | Token | Default |
 |---|---|
@@ -55,7 +55,6 @@ rebrand workflow.
 | `--sf-border-style` | `solid` |
 | `--sf-border-style-dotted` | `dotted` |
 | `--sf-border-style-soft` | `dashed` |
-| `--sf-border-style-strong` | `solid` |
 | `--sf-border-subtle` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` |
 | `--sf-border-width-1` | `1px` |
 | `--sf-border-width-2` | `2px` |
@@ -320,7 +319,7 @@ rebrand workflow.
 | `--sf-h6-letter-spacing` | `var(--sf-tracking-wide)` |
 | `--sf-h6-line-height` | `var(--sf-leading-normal)` |
 | `--sf-h6-size` | `var(--sf-text-m)` |
-| `--sf-header-height` | `5rem` |
+| `--sf-header-height` | `clamp( var(--sf-header-height-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))` |
 | `--sf-header-height-desktop` | `5rem` |
 | `--sf-header-height-mobile` | `3.5rem` |
 | `--sf-heading-color` | `var(--sf-color-heading)` |
@@ -430,31 +429,31 @@ rebrand workflow.
 | `--sf-space-xl` | `calc(clamp(1.56rem, calc(0.029481481481481477 * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale))` |
 | `--sf-space-xs` | `calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))` |
 | `--sf-state-pending-opacity` | `0.7` |
-| `--sf-sticky-offset` | `var(--sf-header-height)` |
+| `--sf-sticky-offset` | `clamp( var(--sf-sticky-offset-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | `var(--sf-header-height-mobile)` |
 | `--sf-stroke-bold` | `2px` |
 | `--sf-stroke-heavy` | `3px` |
 | `--sf-stroke-regular` | `1.5px` |
 | `--sf-stroke-thin` | `1px` |
-| `--sf-text-2xl` | `clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem)` |
-| `--sf-text-2xs` | `clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem)` |
-| `--sf-text-3xl` | `clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem)` |
-| `--sf-text-4xl` | `clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem)` |
-| `--sf-text-display-l` | `clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem)` |
-| `--sf-text-display-m` | `clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem)` |
-| `--sf-text-display-s` | `clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem)` |
+| `--sf-text-2xl` | `calc(clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem) * var(--sf-text-scale))` |
+| `--sf-text-2xs` | `calc(clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem) * var(--sf-text-scale))` |
+| `--sf-text-3xl` | `calc(clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem) * var(--sf-text-scale))` |
+| `--sf-text-4xl` | `calc(clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem) * var(--sf-text-scale))` |
+| `--sf-text-display-l` | `calc(clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem) * var(--sf-text-display-scale))` |
+| `--sf-text-display-m` | `calc(clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem) * var(--sf-text-display-scale))` |
+| `--sf-text-display-s` | `calc(clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem) * var(--sf-text-display-scale))` |
 | `--sf-text-display-scale` | `1` |
-| `--sf-text-l` | `clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem)` |
-| `--sf-text-m` | `clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem)` |
-| `--sf-text-s` | `clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem)` |
+| `--sf-text-l` | `calc(clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem) * var(--sf-text-scale))` |
+| `--sf-text-m` | `calc(clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem) * var(--sf-text-scale))` |
+| `--sf-text-s` | `calc(clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem) * var(--sf-text-scale))` |
 | `--sf-text-scale` | `1` |
 | `--sf-text-shadow-l` | `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-text-shadow-m` | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-text-shadow-none` | `none` |
 | `--sf-text-shadow-s` | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
-| `--sf-text-xl` | `clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem)` |
-| `--sf-text-xs` | `clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem)` |
+| `--sf-text-xl` | `calc(clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem) * var(--sf-text-scale))` |
+| `--sf-text-xs` | `calc(clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem) * var(--sf-text-scale))` |
 | `--sf-touch-target` | `var(--sf-size-l)` |
 | `--sf-tracking-normal` | `0` |
 | `--sf-tracking-tight` | `-0.025em` |
@@ -463,21 +462,26 @@ rebrand workflow.
 | `--sf-tracking-widest` | `0.1em` |
 | `--sf-transition-all` | `all var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-colors` | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-enter` | `all var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-exit` | `all var(--sf-duration-fast) var(--sf-ease-in)` |
-| `--sf-transition-fast` | `all var(--sf-duration-fast) var(--sf-ease-out)` |
+| `--sf-transition-enter` | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), box-shadow var(--sf-duration-normal) var(--sf-ease-out), opacity var(--sf-duration-normal) var(--sf-ease-out), transform var(--sf-duration-normal) var(--sf-ease-out), filter var(--sf-duration-normal) var(--sf-ease-out)` |
+| `--sf-transition-exit` | `color var(--sf-duration-fast) var(--sf-ease-in), background-color var(--sf-duration-fast) var(--sf-ease-in), border-color var(--sf-duration-fast) var(--sf-ease-in), box-shadow var(--sf-duration-fast) var(--sf-ease-in), opacity var(--sf-duration-fast) var(--sf-ease-in), transform var(--sf-duration-fast) var(--sf-ease-in), filter var(--sf-duration-fast) var(--sf-ease-in)` |
+| `--sf-transition-fast` | `color var(--sf-duration-fast) var(--sf-ease-out), background-color var(--sf-duration-fast) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out), transform var(--sf-duration-fast) var(--sf-ease-out), filter var(--sf-duration-fast) var(--sf-ease-out)` |
 | `--sf-transition-opacity` | `opacity var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-overlay` | `overlay var(--sf-duration-normal) allow-discrete, display var(--sf-duration-normal) allow-discrete` |
 | `--sf-transition-shadow` | `box-shadow var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-slow` | `all var(--sf-duration-slow) var(--sf-ease-in-out)` |
+| `--sf-transition-slow` | `color var(--sf-duration-slow) var(--sf-ease-in-out), background-color var(--sf-duration-slow) var(--sf-ease-in-out), border-color var(--sf-duration-slow) var(--sf-ease-in-out), box-shadow var(--sf-duration-slow) var(--sf-ease-in-out), opacity var(--sf-duration-slow) var(--sf-ease-in-out), transform var(--sf-duration-slow) var(--sf-ease-in-out), filter var(--sf-duration-slow) var(--sf-ease-in-out)` |
 | `--sf-transition-transform` | `transform var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-z-base` | `0` |
 | `--sf-z-below` | `-1` |
+| `--sf-z-dropdown` | `var(--sf-z-high)` |
+| `--sf-z-fixed` | `var(--sf-z-mid)` |
 | `--sf-z-high` | `500` |
 | `--sf-z-low` | `10` |
 | `--sf-z-max` | `9999` |
 | `--sf-z-mid` | `100` |
+| `--sf-z-overlay` | `var(--sf-z-max)` |
 | `--sf-z-raised` | `1` |
+| `--sf-z-sticky` | `var(--sf-z-low)` |
+| `--sf-z-toast` | `var(--sf-z-top)` |
 | `--sf-z-top` | `900` |
 
 ## Layout tokens (`core/tokens.layout.css`)

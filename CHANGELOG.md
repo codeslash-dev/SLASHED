@@ -14,6 +14,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Semantic z-index aliases** (`core/tokens.css`) — `--sf-z-sticky`,
+  `--sf-z-fixed`, `--sf-z-dropdown`, `--sf-z-toast`, `--sf-z-overlay`, each
+  mapped onto the existing numeric `--sf-z-*` ladder so component authors
+  target a role instead of a magic integer. Ordered so overlapping scroll-
+  plane roles each get their own rung (`raised < sticky < fixed < dropdown
+  < toast`); `--sf-z-dropdown` deliberately sits above sticky/fixed so a
+  navbar menu clears the header it opens from. Modal/popover/tooltip are
+  omitted by design — those components render in the native top layer and
+  ignore `z-index`; `--sf-z-overlay` is a fallback for non-top-layer builds.
+
 - **Macro `.sf-content-auto`** (`core/macros.css`) + **`--sf-content-intrinsic-size`**
   token (`core/tokens.macros.css`, default `500px`) — sets
   `content-visibility: auto` with a `contain-intrinsic-size` placeholder to
@@ -318,8 +328,8 @@ See `docs/migration.md` for details.
   - `.sf-icon--boxed` — modifier on the existing `.sf-icon` that wraps
     the glyph in a padded, bordered, optionally coloured frame
     (content-box; consumes new `--sf-icon-box-*` tokens).
-  - Border-style scale: `--sf-border-style`, `--sf-border-style-strong`,
-    `--sf-border-style-soft`, `--sf-border-style-dotted` — pairs with
+  - Border-style scale: `--sf-border-style`, `--sf-border-style-soft`,
+    `--sf-border-style-dotted` — pairs with
     the existing `--sf-border-width-*` and `--sf-color-border*` so
     consumers can switch decorative styles without rewriting rules.
   - Icon-boxed tokens: `--sf-icon-box-pad`, `--sf-icon-box-radius`,
@@ -392,6 +402,63 @@ See `docs/migration.md` for details.
   regardless of how the formula computed. Restoring PR #70's `0.68`
   floor — still a defensive contrast cushion above the pre-PR-#70
   `0.62`, without the speculative extra bump that served no purpose.
+
+- **Global text scale now functional** — `--sf-text-scale` and
+  `--sf-text-display-scale` (`core/tokens.css`) are now applied to the
+  `--sf-text-*` / `--sf-text-display-*` clamps via `calc(... * scale)`,
+  mirroring how `--sf-space-scale` works. Previously both tokens were
+  declared and documented as the global type multipliers but never
+  consumed, so setting them had no effect. The default value is `1`, so
+  existing output is unchanged; only overrides now take effect.
+
+- **Header / sticky offset is responsive by default** — `--sf-header-height`
+  and `--sf-sticky-offset` (`core/tokens.css`) now fluidly `clamp()`
+  between their `-mobile` and `-desktop` companion tokens across the
+  framework viewport range, instead of statically equalling the desktop
+  value. This wires up the previously-orphaned `--sf-header-height-mobile`,
+  `--sf-sticky-offset-mobile`, and `--sf-sticky-offset-desktop` tokens and
+  matches the clamp the WP plugin's CSS generator already emitted. Default
+  endpoints (3.5rem mobile, 5rem desktop) are unchanged; the header is now
+  shorter on small viewports.
+
+- **Shadows tint to the surface on `.sf-surface--*`** — `core/macros.css`
+  now re-derives `--sf-shadow-color` from each colored surface's own
+  background, so elevated children cast an in-family shadow instead of a
+  neutral-grey slab. Completes the existing surface contextual-color cascade.
+
+- **Legacy shadow fallbacks completed** — `core/tokens.color-fallbacks.css`
+  now defines the full HSL shadow set (`--sf-shadow-none/xl/2xl/inner`,
+  `--sf-text-shadow-*`, `--sf-drop-shadow-*`); previously only `xs`–`l`
+  were bridged, so pre-`oklch()` engines resolved the rest to empty.
+
+- **BREAKING — `--sf-transition-fast/slow/enter/exit` no longer use `all`.**
+  All four now transition an explicit curated property set (`color`,
+  `background-color`, `border-color`, `box-shadow`, `opacity`, `transform`,
+  `filter`), differing only in duration/easing. Previously each was
+  `all <duration> <easing>`, which directly contradicted the file's own
+  warning that `all` is a performance footgun. `--sf-transition-all` remains
+  the single intentional `all` escape hatch. Elements that relied on these
+  presets to animate a property outside the curated set (e.g. `width`,
+  `clip-path`) must now switch to `--sf-transition-all` or compose their own.
+
+- **Tier-1 colour fallbacks completed for colored surfaces** —
+  `core/tokens.color-fallbacks.css` now defines `--sf-color-inverse`,
+  `--sf-color-overlay`, and the full `--sf-color-text--on-*` set (13 tokens).
+  The modern auto-contrast formula needs `oklch()` relative color, so on
+  pre-`oklch()` engines every ungated `.sf-surface--*` rule previously kept
+  its background but inherited unreadable body text; the hardcoded
+  black/white choices restore legibility. No new token names (these are all
+  already declared by the modern tier).
+
+### Removed
+
+- **`--sf-border-style-strong`** (`core/tokens.css`) — removed. It was a
+  no-op alias resolving to the same value as `--sf-border-style` (`solid`)
+  and consumed by no rule. The "strong" axis in SLASHED is a color axis
+  (`--sf-border-strong` / `--sf-color-border--strong`, per the IBM Carbon /
+  GitHub Primer convention), not a style axis, so a "strong border style"
+  carried no distinct meaning. Compose a heavier border manually with
+  `--sf-border-width-*` + `--sf-color-border--strong`.
 
 ### Fixed
 
