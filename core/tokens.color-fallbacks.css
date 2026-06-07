@@ -50,7 +50,7 @@
 
     --sf-color-bg:    hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 2%));
     --sf-color-inset: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) - 3%));
-    --sf-color-raised: hsl(var(--sf-base-h) var(--sf-base-s) 100%);
+    --sf-color-raised: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 4%));
 
     /* ── Text (neutral-derived) ───────────────────────────────────────────── */
 

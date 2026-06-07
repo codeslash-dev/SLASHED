@@ -18,18 +18,19 @@ const FALLBACKS = path.join(ROOT, 'core/tokens.color-fallbacks.css');
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
-const HEX_RE         = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
-const RGB_RE         = /^rgb\(\s*\d+\s+\d+\s+\d+\s*(?:\/\s*[\d.]+\s*)?\)$/;
-const STATIC_OKLCH_RE = /^oklch\(\s*[\d.]+%?\s+[\d.]+\s+[\d.]+\s*\)$/;
+const HEX_RE = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
+const RGB_RE = /^rgb\(\s*\d+\s+\d+\s+\d+\s*(?:\/\s*[\d.]+\s*)?\)$/;
 
 // hsl() can contain var() references which have nested parens — check by prefix/suffix
 function isHSL(v) { return v.startsWith('hsl(') && v.endsWith(')'); }
 
 // Valid sRGB-resolving color expressions in the fallbacks file.
 // hsl() with var() channels is valid on every browser from Chrome 49+ (2016).
+// oklch() is intentionally NOT accepted here — the fallback contract is sRGB-only
+// (HSL/hex/rgb); an oklch() value would mean a modern expression leaked unguarded.
 function isValidSRGB(value) {
   const v = value.trim();
-  return HEX_RE.test(v) || RGB_RE.test(v) || isHSL(v) || STATIC_OKLCH_RE.test(v) ||
+  return HEX_RE.test(v) || RGB_RE.test(v) || isHSL(v) ||
     v === 'none' || v === 'transparent' || v === 'inherit' || v === 'auto';
 }
 

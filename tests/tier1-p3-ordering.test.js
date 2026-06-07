@@ -66,7 +66,7 @@ describe('P3: sRGB fallback declared before modern gated expression', () => {
   // at a smaller source position than any @supports-gated declaration
   for (const token of TOKENS_TO_CHECK) {
     test(`${token}: sRGB default precedes gated modern expression`, () => {
-      const all = findDeclarations(full, token + ':');
+      const all = findDeclarations(full, token);
       if (all.length < 2) return; // token may only appear once (ungated, no modern)
 
       // First occurrence is the sRGB fallback from tokens.color-fallbacks.css
@@ -86,7 +86,7 @@ describe('P3: sRGB fallback declared before modern gated expression', () => {
         fc.integer({ min: 0, max: TOKENS_TO_CHECK.length - 1 }),
         (idx) => {
           const token = TOKENS_TO_CHECK[idx];
-          const all = findDeclarations(full, token + ':');
+          const all = findDeclarations(full, token);
           if (all.length < 2) return true;
           const first = all[0].index;
           return all.slice(1).every(d => first < d.index);

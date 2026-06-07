@@ -82,7 +82,7 @@ test.describe('P8: Modern-engine computed values match baseline', () => {
     for (const token of TIER1_TOKENS) {
       const actual   = values[token];
       const expected = baseline.light[token];
-      if (!expected) continue; // token added after baseline — skip rather than fail
+      expect(expected, `Baseline missing token ${token} (light) — regenerate with BASELINE_CAPTURE=1`).toBeTruthy();
       expect(actual, `${token} (light)`).toBe(expected);
     }
   });
@@ -114,7 +114,7 @@ test.describe('P8: Modern-engine computed values match baseline', () => {
     for (const token of TIER1_TOKENS) {
       const actual   = values[token];
       const expected = baseline.dark[token];
-      if (!expected) continue;
+      expect(expected, `Baseline missing token ${token} (dark) — regenerate with BASELINE_CAPTURE=1`).toBeTruthy();
       expect(actual, `${token} (dark)`).toBe(expected);
     }
   });
