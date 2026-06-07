@@ -39,7 +39,7 @@ const PLUGIN_ROOT = 'plugins/SLASHED-for-WP';
 const INCLUDE = [
   { src: `${PLUGIN_ROOT}/slashed.php`,                                  dest: 'slashed.php' },
   { src: `${PLUGIN_ROOT}/includes`,                                     dest: 'includes' },
-  { src: `${PLUGIN_ROOT}/dist`,                                         dest: 'dist' },
+  { src: `${PLUGIN_ROOT}/dist`,                                         dest: 'dist', required: true },
   { src: `${PLUGIN_ROOT}/data`,                                         dest: 'data' },
   { src: `${PLUGIN_ROOT}/integrations/bricks/slashed-bricks.php`,      dest: 'integrations/bricks/slashed-bricks.php' },
   { src: `${PLUGIN_ROOT}/integrations/bricks/includes`,                 dest: 'integrations/bricks/includes' },
@@ -75,10 +75,13 @@ function main() {
   clean(STAGE);
   fs.mkdirSync(STAGE_PLUGIN, { recursive: true });
 
-  for (const { src: srcRel, dest: destRel } of INCLUDE) {
+  for (const { src: srcRel, dest: destRel, required } of INCLUDE) {
     const src  = path.join(ROOT, srcRel);
     const dest = path.join(STAGE_PLUGIN, destRel);
     if (!fs.existsSync(src)) {
+      if (required) {
+        throw new Error(`[zip-plugin] required path missing: ${srcRel} — run \`npm run build\` first`);
+      }
       console.warn(`[zip-plugin] warning: ${srcRel} not found, skipping`);
       continue;
     }
