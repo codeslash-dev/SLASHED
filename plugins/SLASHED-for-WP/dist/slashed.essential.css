@@ -167,7 +167,7 @@
      · numeric shade scales (--sf-color-{family}-{50..950}) — available for the 6 brand families
        (primary/secondary/tertiary/action/neutral/base) via optional/tokens.palette.css only;
        status families (success/warning/error/info/danger) intentionally have no numeric scale
-     · semantic shade aliases (--sf-color-{family}-{superlight,xlight,lighter,darker,xdark,superdark,hover,active,subtle,muted,ghost}) — auto-adapts to dark mode
+     · semantic shade aliases (--sf-color-{primary,secondary,tertiary,action,neutral,base}-{superlight,xlight,lighter,darker,xdark,superdark,hover,active,subtle,muted,ghost}) — auto-adapts to dark mode; brand families only (status families use the triplets below)
      · text-on-color (--sf-color-text--on-*)
      · code colors (--sf-color-code-bg, --sf-color-code-text)
      · status triplets (--sf-color-{success,...,danger}-{subtle,strong,muted})
@@ -771,8 +771,6 @@
     --sf-color-base-subtle:     oklch(from var(--sf-color-base) l c h / 0.10);
     --sf-color-base-muted:      oklch(from var(--sf-color-base) l c h / 0.30);
     --sf-color-base-ghost:      oklch(from var(--sf-color-base) l c h / 0.05);
-
-
 
     }
   }
