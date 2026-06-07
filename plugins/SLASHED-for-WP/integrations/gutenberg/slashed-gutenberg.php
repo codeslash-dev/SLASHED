@@ -162,17 +162,36 @@ if ( ! defined( 'SLASHED_VERSION' ) ) {
 }
 
 /**
+ * Load the shared SLASHED data classes (parser → resolver → inventory) plus
+ * the Gutenberg inventory subclass.
+ *
+ * The relative paths resolve correctly in both unified mode (shared classes
+ * live under SLASHED_PATH) and standalone mode (two levels up from this
+ * integration). require_once is idempotent, so this is harmless when
+ * slashed.php already loaded the shared classes.
+ */
+function slashed_gutenberg_require_data_classes() {
+	require_once SLASHED_GUTENBERG_PATH . '../../includes/class-css-parser.php';
+	require_once SLASHED_GUTENBERG_PATH . '../../includes/class-color-resolver.php';
+	require_once SLASHED_GUTENBERG_PATH . 'includes/class-inventory.php';
+}
+
+/**
  * Bootstrap the Gutenberg integration.
  *
- * Hooked at after_setup_theme so theme support declarations (color palette)
- * land at the right time and the theme is fully loaded before we inspect
- * anything theme-related.
+ * Hooked at after_setup_theme so theme support declarations (color palette,
+ * gradients, font sizes) land at the right time and the theme is fully loaded
+ * before we inspect anything theme-related.
  */
 function slashed_gutenberg_init() {
+	slashed_gutenberg_require_data_classes();
+
 	require_once SLASHED_GUTENBERG_PATH . 'includes/class-enqueue.php';
-	require_once SLASHED_GUTENBERG_PATH . 'includes/class-color-palette.php';
+	require_once SLASHED_GUTENBERG_PATH . 'includes/class-presets.php';
+	require_once SLASHED_GUTENBERG_PATH . 'includes/class-editor-enqueue.php';
 
 	new Slashed_Gutenberg_Enqueue();
-	new Slashed_Gutenberg_Color_Palette();
+	new Slashed_Gutenberg_Presets();
+	new Slashed_Gutenberg_Editor_Enqueue();
 }
 add_action( 'after_setup_theme', 'slashed_gutenberg_init' );
