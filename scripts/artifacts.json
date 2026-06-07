@@ -2,12 +2,15 @@
   {
     "name": "CSS bundles + docs",
     "srcPrefixes": ["core/", "optional/"],
-    "buildCmd": "node scripts/bundle.js && npm run docs",
+    "buildCmd": "node scripts/bundle.js && npm run docs && node scripts/sync-plugin-dist.js",
     "outputs": [
       "docs/tokens.md",
       "docs/classes.md",
       "plugins/SLASHED-for-WP/integrations/bricks/data/inventory.json",
-      "plugins/SLASHED-for-WP/data/classes-hints.json"
+      "plugins/SLASHED-for-WP/data/classes-hints.json",
+      "plugins/SLASHED-for-WP/dist/slashed.essential.css",
+      "plugins/SLASHED-for-WP/dist/slashed.optimal.css",
+      "plugins/SLASHED-for-WP/dist/slashed.full.css"
     ]
   },
   {

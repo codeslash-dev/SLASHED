@@ -22,6 +22,94 @@
   slashed.legacy,
   slashed.overrides;
 
+/* ─── core/tokens.color-fallbacks.css ─── */
+/* SLASHED — core/tokens.color-fallbacks.css  (@layer slashed.tokens)
+   HSL-based fallbacks for browsers without light-dark() / oklch(from…) support.
+   Light mode only — dark mode is handled by modern CSS exclusively.
+   Customise by overriding the --sf-*-h / --sf-*-s / --sf-*-l channel variables;
+   the entire derived token tree recomputes automatically, no build step required. */
+
+@layer slashed.tokens {
+  :root {
+    /* ── Source channels — override to apply brand colours ────────────────
+       Values are approximate HSL equivalents of the OKLCH source tokens.    */
+
+    --sf-primary-h:   226;  --sf-primary-s:   99%;  --sf-primary-l:   47%;
+    --sf-secondary-h: 221;  --sf-secondary-s: 45%;  --sf-secondary-l: 12%;
+    --sf-tertiary-h:  268;  --sf-tertiary-s:  84%;  --sf-tertiary-l:  39%;
+    --sf-action-h:    200;  --sf-action-s:   100%;  --sf-action-l:    32%;
+    --sf-neutral-h:   217;  --sf-neutral-s:   11%;  --sf-neutral-l:   42%;
+    --sf-base-h:      211;  --sf-base-s:      27%;  --sf-base-l:      95%;
+    --sf-success-h:   134;  --sf-success-s:  100%;  --sf-success-l:   24%;
+    --sf-warning-h:    42;  --sf-warning-s:  100%;  --sf-warning-l:   45%;
+    --sf-error-h:     352;  --sf-error-s:     93%;  --sf-error-l:     38%;
+    --sf-info-h:      200;  --sf-info-s:     100%;  --sf-info-l:      30%;
+    --sf-danger-h:    340;  --sf-danger-s:   100%;  --sf-danger-l:    35%;
+
+    /* ── Brand resolved ───────────────────────────────────────────────────── */
+
+    --sf-color-primary:   hsl(var(--sf-primary-h)   var(--sf-primary-s)   var(--sf-primary-l));
+    --sf-color-secondary: hsl(var(--sf-secondary-h) var(--sf-secondary-s) var(--sf-secondary-l));
+    --sf-color-tertiary:  hsl(var(--sf-tertiary-h)  var(--sf-tertiary-s)  var(--sf-tertiary-l));
+    --sf-color-action:    hsl(var(--sf-action-h)    var(--sf-action-s)    var(--sf-action-l));
+    --sf-color-neutral:   hsl(var(--sf-neutral-h)   var(--sf-neutral-s)   var(--sf-neutral-l));
+    --sf-color-base:      hsl(var(--sf-base-h)      var(--sf-base-s)      var(--sf-base-l));
+
+    /* ── Status resolved ──────────────────────────────────────────────────── */
+
+    --sf-color-success: hsl(var(--sf-success-h) var(--sf-success-s) var(--sf-success-l));
+    --sf-color-warning: hsl(var(--sf-warning-h) var(--sf-warning-s) var(--sf-warning-l));
+    --sf-color-error:   hsl(var(--sf-error-h)   var(--sf-error-s)   var(--sf-error-l));
+    --sf-color-info:    hsl(var(--sf-info-h)    var(--sf-info-s)    var(--sf-info-l));
+    --sf-color-danger:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  var(--sf-danger-l));
+
+    /* ── Status strong (darker variant) ──────────────────────────────────── */
+
+    --sf-color-success-strong: hsl(var(--sf-success-h) var(--sf-success-s) calc(var(--sf-success-l) - 8%));
+    --sf-color-warning-strong: hsl(var(--sf-warning-h) var(--sf-warning-s) calc(var(--sf-warning-l) - 15%));
+    --sf-color-error-strong:   hsl(var(--sf-error-h)   var(--sf-error-s)   calc(var(--sf-error-l) - 6%));
+    --sf-color-info-strong:    hsl(var(--sf-info-h)    var(--sf-info-s)    calc(var(--sf-info-l) - 8%));
+    --sf-color-danger-strong:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  calc(var(--sf-danger-l) - 8%));
+
+    /* ── Surfaces (base-derived) ──────────────────────────────────────────── */
+
+    --sf-color-bg:    hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 2%));
+    --sf-color-inset: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) - 3%));
+    --sf-color-raised: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 4%));
+
+    /* ── Text (neutral-derived) ───────────────────────────────────────────── */
+
+    --sf-color-text:            hsl(var(--sf-neutral-h) 15%  12%);
+    --sf-color-text--secondary:  hsl(var(--sf-neutral-h) 10%  35%);
+    --sf-color-heading:          hsl(var(--sf-neutral-h) 20%   8%);
+
+    /* ── Borders (neutral-derived) ────────────────────────────────────────── */
+
+    --sf-color-border:         hsl(var(--sf-neutral-h)  8% 85%);
+    --sf-color-border--subtle:  hsl(var(--sf-neutral-h)  5% 91%);
+    --sf-color-border--strong:  hsl(var(--sf-neutral-h) 14% 70%);
+
+    /* ── Links (action-derived) ───────────────────────────────────────────── */
+
+    --sf-color-link: hsl(var(--sf-action-h) var(--sf-action-s) calc(var(--sf-action-l) - 5%));
+
+    /* ── Selection ────────────────────────────────────────────────────────── */
+
+    --sf-color-selection-bg: hsl(var(--sf-action-h) var(--sf-action-s) var(--sf-action-l) / 0.28);
+
+    /* ── Shadows (neutral-derived) ────────────────────────────────────────── */
+
+    --sf-shadow-xs: 0 1px 2px 0
+                    hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-s:  0 1px 3px 0 hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 1px 2px -1px hsl(var(--sf-neutral-h) 20% 10% / 0.10);
+    --sf-shadow-m:  0 4px 6px -1px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 2px 4px -2px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-l:  0 10px 15px -3px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 4px 6px -4px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+  }
+}
+
 /* ─── core/tokens.css ─── */
 /* ============================================================
    SLASHED — core/tokens.css
@@ -191,6 +279,23 @@
   @property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.18 235); }
   @property --sf-color-danger-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.22 12);  }
 
+  /* Plain :root mirrors — character-for-character identical to each @property
+     initial-value above. Engines lacking @property support read the token value
+     from here. Do NOT edit these independently from the initial-value strings. */
+  :root {
+    --sf-color-primary-light:   oklch(0.47 0.27 264);
+    --sf-color-secondary-light: oklch(0.22 0.04 264);
+    --sf-color-tertiary-light:  oklch(0.42 0.22 295);
+    --sf-color-action-light:    oklch(0.50 0.22 235);
+    --sf-color-neutral-light:   oklch(0.52 0.025 260);
+    --sf-color-base-light:      oklch(0.96 0.006 250);
+    --sf-color-success-light:   oklch(0.50 0.16 145);
+    --sf-color-warning-light:   oklch(0.75 0.17 80);
+    --sf-color-error-light:     oklch(0.50 0.20 25);
+    --sf-color-info-light:      oklch(0.48 0.18 235);
+    --sf-color-danger-light:    oklch(0.48 0.22 12);
+  }
+
   /* Mode flag — drives formula direction for non-color dark overrides.
      Set by themes.css via [data-theme="dark"] and the prefers-color-scheme
      media query. Do not set directly. */
@@ -230,180 +335,46 @@
        source tokens above to customise; or override these directly
        with your own light-dark() expression.
        ---------------------------------------------------------- */
-    /* Dark auto-derivation formula (brand + status):
-       clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source.
-       Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark.
-       Override any --sf-color-X-dark to take full per-mode control. */
-    --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark,   oklch(from var(--sf-color-primary-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark,  oklch(from var(--sf-color-tertiary-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark,    oklch(from var(--sf-color-action-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark,   oklch(from var(--sf-color-neutral-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark,      oklch(from var(--sf-color-base-light)      clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h)));
-
-    --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark,   oklch(from var(--sf-color-error-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark,    oklch(from var(--sf-color-info-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-    --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark,  oklch(from var(--sf-color-danger-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
-
-    /* ----------------------------------------------------------
-       Surfaces — derived from --sf-color-base (auto-adapts)
-       ---------------------------------------------------------- */
+    /* Surface alias (plain var — no IACVT, stays ungated) */
     --sf-color-surface: var(--sf-color-base);
-    --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
-    --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
-    --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
-    --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
-    --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
 
     /* ----------------------------------------------------------
-       Text — light and dark require opposite formula directions,
-       so each side of light-dark() references its source token.
+       Text — plain var aliases (ungated)
        ---------------------------------------------------------- */
-    --sf-color-text: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
-    );
-    --sf-color-text--secondary: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h)
-    );
     --sf-color-text--muted: var(--sf-color-neutral);
-    --sf-color-text--placeholder: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.35, calc(l - 0.1),  0.65) c h)
-    );
-    --sf-color-text--disabled: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.25, calc(l - 0.2),  0.55) c h)
-    );
-    --sf-color-text--inverse: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
-    );
-    --sf-color-heading: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
-      oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
-    );
-    /* Inline-code text colour. Auto-contrasts with --sf-color-code-bg using
-       the same luminance formula as --sf-color-text--on-*. This prevents
-       invisible text when code appears inside inverted-colour containers
-       (e.g. sf-imposter with a dark background where inherited colour is
-       near-white). Override with a tint value if desired. */
-    --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
     /* ----------------------------------------------------------
-       Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic:
-       auto-selects light or dark text based on background luminance.
-       Uses resolved tokens — works for any user-supplied color.
-
-       CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI).
-       Colors in the mid-luminance range (L ≈ 0.52–0.67) may not
-       reach 4.5:1 (AA Normal Text) regardless of threshold chosen —
-       this is a mathematical limitation of any binary black/white
-       decision. The SLASHED configurator will warn users when their
-       brand colors fall in this range. For body text on colored
-       backgrounds, override --sf-color-text--on-* manually.
+       Text-on-color — plain var aliases (ungated)
        ---------------------------------------------------------- */
-    --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-base:      var(--sf-color-text);
-    --sf-color-text--on-surface:   var(--sf-color-text--on-base);   /* compat alias → base */
-    --sf-color-text--on-inverse:   var(--sf-color-text--inverse);
-    --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
-    --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    --sf-color-text--on-base:    var(--sf-color-text);
+    --sf-color-text--on-surface: var(--sf-color-text--on-base);   /* compat alias → base */
+    --sf-color-text--on-inverse: var(--sf-color-text--inverse);
 
     /* ----------------------------------------------------------
-       Borders — direction-dependent, reference source tokens.
-       Light: borders are lighter than neutral (l + offset).
-       Dark:  borders are darker  than neutral (l - offset).
+       Borders — plain var aliases (ungated)
        ---------------------------------------------------------- */
-    --sf-color-border: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
-      oklch(from var(--sf-color-neutral)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)
-    );
-    --sf-color-border--subtle: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h),
-      oklch(from var(--sf-color-neutral)       clamp(0.20, calc(l - 0.38), 0.45) 0.005 h)
-    );
-    --sf-color-border--strong: light-dark(
-      oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1),  0.85) 0.02  h),
-      oklch(from var(--sf-color-neutral)       clamp(0.38, calc(l - 0.1),  0.65) 0.02  h)
-    );
-    --sf-color-border--focus:       var(--sf-color-action);
-    --sf-color-border--disabled: oklch(from var(--sf-color-border--subtle) l 0 h / 0.5);
-    --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
+    --sf-color-border--focus: var(--sf-color-action);
 
     /* ----------------------------------------------------------
-       Links — derived from --sf-color-action (auto-adapts)
+       Links — plain var aliases and geometry (ungated)
        ---------------------------------------------------------- */
-    /* Links keep the action hue but CLAMP lightness toward a contrast-safe
-       band — a ceiling in light mode, a floor in dark mode — so link text
-       clears WCAG AA (4.5:1) on the page background for the default palette
-       AND the large majority of brand overrides (a fixed offset alone only
-       fixed the default). Lightness dominates OKLCH contrast but doesn't
-       fully determine it: very high-chroma hues (saturated yellow/green) can
-       still fall short even at a safe lightness — those remain the consumer's
-       responsibility (see docs/theming.md → "Link contrast").
-
-       NOTE: the consumer-facing :link rule in core/base.css uses
-       `a:link` (not bare `a`) so its specificity matches WebKit's UA
-       stylesheet `a:link { color: -webkit-link }`. Without that
-       pseudo-class the framework's `--sf-color-link` value is
-       silently ignored on unvisited anchors in WebKit and
-       `-webkit-link` (≈ #00728f in dark mode) paints instead —
-       regardless of how this token is computed. PR #73 and several
-       follow-up attempts mistakenly chased the formula. */
-    --sf-color-link:            light-dark(
-      oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h)
-    );
-    --sf-color-link--hover:     light-dark(
-      oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h)
-    );
-    --sf-color-link--active:    light-dark(
-      oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h),
-      oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h)
-    );
-    /* Visited link — 60° hue shift from action gives clearly distinct
-       chroma without colliding with default tertiary (h ≈ 310). Same
-       lightness clamp as the base link. If your brand puts action and
-       tertiary close in hue, override directly:
-         :root { --sf-color-link--visited: #6b46c1; } */
-    --sf-color-link--visited:   light-dark(
-      oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
-      oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60))
-    );
-    --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
     --sf-color-link--disabled:  var(--sf-color-text--disabled);
+    /* Underline geometry — consumed by a:link in core/base.css and by
+       the .sf-link--* macros. `auto` defers to the font's own metrics;
+       set an explicit length (e.g. 0.08em) for a uniform rule. */
+    --sf-link-underline-offset:    0.15em;
+    --sf-link-underline-thickness: auto;
 
     /* ----------------------------------------------------------
-       Interactive states — derived from --sf-color-neutral (auto-adapts)
+       Interactive states — plain var aliases (ungated)
        ---------------------------------------------------------- */
-    --sf-color-bg--hover:    oklch(from var(--sf-color-neutral) l c h / 0.08);
-    --sf-color-bg--active:   oklch(from var(--sf-color-neutral) l c h / 0.12);
-    --sf-color-bg--selected: oklch(from var(--sf-color-action) l c h / 0.1);
-    --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
     --sf-color-bg--disabled: var(--sf-color-inset);
     --sf-color-code-bg:      var(--sf-color-inset);
 
     /* ----------------------------------------------------------
-       Selection & backdrop
+       Selection & backdrop — static values (ungated)
        ---------------------------------------------------------- */
-    --sf-color-selection-bg:   light-dark(
-      oklch(from var(--sf-color-action-light) l c h / 0.28),
-      oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55)
-    );
     --sf-color-selection-text: inherit;
-    --sf-color-mark-bg:        oklch(from var(--sf-color-warning) l c h / 0.25);
     --sf-color-mark-text:      inherit;
     --sf-color-dim:            oklch(0 0 0 / 0.5);
     --sf-color-white:          oklch(100% 0 0);
@@ -416,66 +387,10 @@
     --sf-scrollbar-track: transparent;
 
     /* ----------------------------------------------------------
-       Status triplets — bg/border use same formula both modes;
-       text is direction-dependent so uses source tokens.
-       error = form validation, input errors
-       danger = destructive actions (delete, remove)
-       ---------------------------------------------------------- */
-    --sf-color-success-subtle: oklch(from var(--sf-color-success) l c h / 0.12);
-    --sf-color-success-strong: light-dark(
-      oklch(from var(--sf-color-success-light) calc(l - 0.15) c h),
-      oklch(from var(--sf-color-success)       clamp(0.70, calc(l + 0.15), 1) c h)
-    );
-    --sf-color-success-muted:  oklch(from var(--sf-color-success) l c h / 0.3);
-
-    --sf-color-warning-subtle: oklch(from var(--sf-color-warning) l c h / 0.12);
-    --sf-color-warning-strong: light-dark(
-      oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h),
-      oklch(from var(--sf-color-warning)       clamp(0.70, calc(l + 0.05), 1) c h)
-    );
-    --sf-color-warning-muted:  oklch(from var(--sf-color-warning) l c h / 0.3);
-
-    --sf-color-error-subtle:   oklch(from var(--sf-color-error) l c h / 0.1);
-    --sf-color-error-strong: light-dark(
-      oklch(from var(--sf-color-error-light) calc(l - 0.1) c h),
-      oklch(from var(--sf-color-error)       clamp(0.70, calc(l + 0.15), 1) c h)
-    );
-    --sf-color-error-muted:    oklch(from var(--sf-color-error) l c h / 0.3);
-
-    --sf-color-info-subtle:    oklch(from var(--sf-color-info) l c h / 0.1);
-    --sf-color-info-strong: light-dark(
-      oklch(from var(--sf-color-info-light) calc(l - 0.1) c h),
-      oklch(from var(--sf-color-info)       clamp(0.70, calc(l + 0.15), 1) c h)
-    );
-    --sf-color-info-muted:     oklch(from var(--sf-color-info) l c h / 0.3);
-
-    --sf-color-danger-subtle:  oklch(from var(--sf-color-danger) l c h / 0.1);
-    --sf-color-danger-strong: light-dark(
-      oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h),
-      oklch(from var(--sf-color-danger)       clamp(0.70, calc(l + 0.15), 1) c h)
-    );
-    --sf-color-danger-muted:   oklch(from var(--sf-color-danger) l c h / 0.3);
-
-    /* ----------------------------------------------------------
-       Gradients — derived from brand colors (auto-adapt)
-       ---------------------------------------------------------- */
-    --sf-gradient-primary:   linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h));
-    --sf-gradient-secondary: linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h));
-    --sf-gradient-tertiary:  linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h));
-    --sf-gradient-brand:     linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)));
-    --sf-gradient-surface:   linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg));
-
-    --sf-gradient-fade--r: linear-gradient(in oklch to right,  transparent, var(--sf-color-bg));
-    --sf-gradient-fade--l: linear-gradient(in oklch to left,   transparent, var(--sf-color-bg));
-    --sf-gradient-fade--t: linear-gradient(in oklch to top,    transparent, var(--sf-color-bg));
-    --sf-gradient-fade--b: linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg));
-
-    /* ----------------------------------------------------------
        Shadow — strength scales up in dark mode via --sf-is-dark
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
     --sf-shadow-glow-color: var(--sf-color-primary);
-    --sf-shadow-glow:       0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
     --sf-opacity-disabled:  0.45;
     --sf-state-pending-opacity: 0.7;
 
@@ -487,6 +402,265 @@
                             0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color);
     --sf-caret-color:       var(--sf-color-action);
 
+  }
+  /* ── @supports gate: light-dark() ── */
+  @supports (color: light-dark(white, black)) {
+    :root {
+
+      /* ----------------------------------------------------------
+         Resolved color tokens — auto-switch via light-dark().
+         Dark auto-derivation formula (brand + status):
+         clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source.
+         Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark.
+         Override any --sf-color-X-dark to take full per-mode control. */
+      --sf-color-primary:   light-dark(var(--sf-color-primary-light),   var(--sf-color-primary-dark,   oklch(from var(--sf-color-primary-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-secondary: light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-tertiary:  light-dark(var(--sf-color-tertiary-light),  var(--sf-color-tertiary-dark,  oklch(from var(--sf-color-tertiary-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-action:    light-dark(var(--sf-color-action-light),    var(--sf-color-action-dark,    oklch(from var(--sf-color-action-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-neutral:   light-dark(var(--sf-color-neutral-light),   var(--sf-color-neutral-dark,   oklch(from var(--sf-color-neutral-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-base:      light-dark(var(--sf-color-base-light),      var(--sf-color-base-dark,      oklch(from var(--sf-color-base-light)      clamp(0.16, calc(1.18 - l),        0.24) calc(c * 0.5) h)));
+
+      --sf-color-success: light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-warning: light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-error:   light-dark(var(--sf-color-error-light),   var(--sf-color-error-dark,   oklch(from var(--sf-color-error-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-info:    light-dark(var(--sf-color-info-light),    var(--sf-color-info-dark,    oklch(from var(--sf-color-info-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+      --sf-color-danger:  light-dark(var(--sf-color-danger-light),  var(--sf-color-danger-dark,  oklch(from var(--sf-color-danger-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)));
+
+      /* ----------------------------------------------------------
+         Text — light and dark require opposite formula directions,
+         so each side of light-dark() references its source token.
+         ---------------------------------------------------------- */
+      --sf-color-text: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+        oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
+      );
+      --sf-color-text--secondary: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
+        oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h)
+      );
+      --sf-color-text--placeholder: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h),
+        oklch(from var(--sf-color-neutral)       clamp(0.35, calc(l - 0.1),  0.65) c h)
+      );
+      --sf-color-text--disabled: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h),
+        oklch(from var(--sf-color-neutral)       clamp(0.25, calc(l - 0.2),  0.55) c h)
+      );
+      --sf-color-text--inverse: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h),
+        oklch(from var(--sf-color-neutral)       clamp(0.05, calc(l - 0.4), 0.35) c h)
+      );
+      --sf-color-heading: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+        oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
+      );
+
+      /* ----------------------------------------------------------
+         Borders — direction-dependent, reference source tokens.
+         Light: borders are lighter than neutral (l + offset).
+         Dark:  borders are darker  than neutral (l - offset).
+         ---------------------------------------------------------- */
+      --sf-color-border: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
+        oklch(from var(--sf-color-neutral)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)
+      );
+      --sf-color-border--subtle: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h),
+        oklch(from var(--sf-color-neutral)       clamp(0.20, calc(l - 0.38), 0.45) 0.005 h)
+      );
+      --sf-color-border--strong: light-dark(
+        oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1),  0.85) 0.02  h),
+        oklch(from var(--sf-color-neutral)       clamp(0.38, calc(l - 0.1),  0.65) 0.02  h)
+      );
+
+      /* ----------------------------------------------------------
+         Links — derived from --sf-color-action (auto-adapts)
+         ---------------------------------------------------------- */
+      /* Links keep the action hue but CLAMP lightness toward a contrast-safe
+         band — a ceiling in light mode, a floor in dark mode — so link text
+         clears WCAG AA (4.5:1) on the page background for the default palette
+         AND the large majority of brand overrides (a fixed offset alone only
+         fixed the default). Lightness dominates OKLCH contrast but doesn't
+         fully determine it: very high-chroma hues (saturated yellow/green) can
+         still fall short even at a safe lightness — those remain the consumer's
+         responsibility (see docs/theming.md → "Link contrast").
+
+         NOTE: the consumer-facing :link rule in core/base.css uses
+         `a:link` (not bare `a`) so its specificity matches WebKit's UA
+         stylesheet `a:link { color: -webkit-link }`. Without that
+         pseudo-class the framework's `--sf-color-link` value is
+         silently ignored on unvisited anchors in WebKit and
+         `-webkit-link` (≈ #00728f in dark mode) paints instead —
+         regardless of how this token is computed. PR #73 and several
+         follow-up attempts mistakenly chased the formula. */
+      --sf-color-link:            light-dark(
+        oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h),
+        oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h)
+      );
+      --sf-color-link--hover:     light-dark(
+        oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h),
+        oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h)
+      );
+      --sf-color-link--active:    light-dark(
+        oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h),
+        oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h)
+      );
+      /* Visited link — 60° hue shift from action gives clearly distinct
+         chroma without colliding with default tertiary (h ≈ 310). Same
+         lightness clamp as the base link. If your brand puts action and
+         tertiary close in hue, override directly:
+           :root { --sf-color-link--visited: #6b46c1; } */
+      --sf-color-link--visited:   light-dark(
+        oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)),
+        oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60))
+      );
+
+      /* ----------------------------------------------------------
+         Selection
+         ---------------------------------------------------------- */
+      --sf-color-selection-bg:   light-dark(
+        oklch(from var(--sf-color-action-light) l c h / 0.28),
+        oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55)
+      );
+
+      /* ----------------------------------------------------------
+         Status triplets — strong (direction-dependent, uses light-dark)
+         error = form validation, input errors
+         danger = destructive actions (delete, remove)
+         ---------------------------------------------------------- */
+      --sf-color-success-strong: light-dark(
+        oklch(from var(--sf-color-success-light) calc(l - 0.15) c h),
+        oklch(from var(--sf-color-success)       clamp(0.70, calc(l + 0.15), 1) c h)
+      );
+      --sf-color-warning-strong: light-dark(
+        oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h),
+        oklch(from var(--sf-color-warning)       clamp(0.70, calc(l + 0.05), 1) c h)
+      );
+      --sf-color-error-strong: light-dark(
+        oklch(from var(--sf-color-error-light) calc(l - 0.1) c h),
+        oklch(from var(--sf-color-error)       clamp(0.70, calc(l + 0.15), 1) c h)
+      );
+      --sf-color-info-strong: light-dark(
+        oklch(from var(--sf-color-info-light) calc(l - 0.1) c h),
+        oklch(from var(--sf-color-info)       clamp(0.70, calc(l + 0.15), 1) c h)
+      );
+      --sf-color-danger-strong: light-dark(
+        oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h),
+        oklch(from var(--sf-color-danger)       clamp(0.70, calc(l + 0.15), 1) c h)
+      );
+
+    }
+  }
+  /* ── @supports gate: oklch(from …) relative color + color-mix() ── */
+  @supports (color: oklch(from red l c h)) {
+    :root {
+
+      /* ----------------------------------------------------------
+         Surfaces — derived from --sf-color-base (auto-adapts)
+         ---------------------------------------------------------- */
+      --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
+      --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
+      --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
+      --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
+      --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
+
+      /* ----------------------------------------------------------
+         Code text — auto-contrasts with --sf-color-code-bg.
+         ---------------------------------------------------------- */
+      /* Inline-code text colour. Auto-contrasts with --sf-color-code-bg using
+         the same luminance formula as --sf-color-text--on-*. This prevents
+         invisible text when code appears inside inverted-colour containers
+         (e.g. sf-imposter with a dark background where inherited colour is
+         near-white). Override with a tint value if desired. */
+      --sf-color-code-text: oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+
+      /* ----------------------------------------------------------
+         Text-on-color — sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic:
+         auto-selects light or dark text based on background luminance.
+         Uses resolved tokens — works for any user-supplied color.
+
+         CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI).
+         Colors in the mid-luminance range (L ≈ 0.52–0.67) may not
+         reach 4.5:1 (AA Normal Text) regardless of threshold chosen —
+         this is a mathematical limitation of any binary black/white
+         decision. The SLASHED configurator will warn users when their
+         brand colors fall in this range. For body text on colored
+         backgrounds, override --sf-color-text--on-* manually.
+         ---------------------------------------------------------- */
+      --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-action:    oklch(from var(--sf-color-action)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-success:   oklch(from var(--sf-color-success)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+
+      /* ----------------------------------------------------------
+         Border alpha tokens
+         ---------------------------------------------------------- */
+      --sf-color-border--disabled: oklch(from var(--sf-color-border--subtle) l 0 h / 0.5);
+      --sf-color-border--translucent: oklch(from var(--sf-color-neutral) l c h / 0.15);
+
+      /* ----------------------------------------------------------
+         Link alpha token
+         ---------------------------------------------------------- */
+      --sf-color-link--underline: oklch(from var(--sf-color-action) l c h / 0.3);
+
+      /* ----------------------------------------------------------
+         Interactive states — derived from --sf-color-neutral (auto-adapts)
+         ---------------------------------------------------------- */
+      --sf-color-bg--hover:    oklch(from var(--sf-color-neutral) l c h / 0.08);
+      --sf-color-bg--active:   oklch(from var(--sf-color-neutral) l c h / 0.12);
+      --sf-color-bg--selected: oklch(from var(--sf-color-action) l c h / 0.1);
+      --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
+
+      /* ----------------------------------------------------------
+         Selection & mark
+         ---------------------------------------------------------- */
+      --sf-color-mark-bg: oklch(from var(--sf-color-warning) l c h / 0.25);
+
+      /* ----------------------------------------------------------
+         Status triplets — subtle/muted (alpha variants)
+         bg/border use same formula both modes
+         ---------------------------------------------------------- */
+      --sf-color-success-subtle: oklch(from var(--sf-color-success) l c h / 0.12);
+      --sf-color-success-muted:  oklch(from var(--sf-color-success) l c h / 0.3);
+
+      --sf-color-warning-subtle: oklch(from var(--sf-color-warning) l c h / 0.12);
+      --sf-color-warning-muted:  oklch(from var(--sf-color-warning) l c h / 0.3);
+
+      --sf-color-error-subtle:   oklch(from var(--sf-color-error) l c h / 0.1);
+      --sf-color-error-muted:    oklch(from var(--sf-color-error) l c h / 0.3);
+
+      --sf-color-info-subtle:    oklch(from var(--sf-color-info) l c h / 0.1);
+      --sf-color-info-muted:     oklch(from var(--sf-color-info) l c h / 0.3);
+
+      --sf-color-danger-subtle:  oklch(from var(--sf-color-danger) l c h / 0.1);
+      --sf-color-danger-muted:   oklch(from var(--sf-color-danger) l c h / 0.3);
+
+      /* ----------------------------------------------------------
+         Gradients — derived from brand colors (auto-adapt)
+         ---------------------------------------------------------- */
+      --sf-gradient-primary:   linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h));
+      --sf-gradient-secondary: linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h));
+      --sf-gradient-tertiary:  linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h));
+      --sf-gradient-brand:     linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)));
+      --sf-gradient-surface:   linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg));
+
+      --sf-gradient-fade--r: linear-gradient(in oklch to right,  transparent, var(--sf-color-bg));
+      --sf-gradient-fade--l: linear-gradient(in oklch to left,   transparent, var(--sf-color-bg));
+      --sf-gradient-fade--t: linear-gradient(in oklch to top,    transparent, var(--sf-color-bg));
+      --sf-gradient-fade--b: linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg));
+
+      /* ----------------------------------------------------------
+         Shadow glow
+         ---------------------------------------------------------- */
+      --sf-shadow-glow: 0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+
+    }
   }
 
   /* ============================================================
@@ -510,7 +684,9 @@
      computed color, but overriding a step then propagates to its alias.
      ============================================================ */
 
-  :root {
+  /* ── @supports gate: shade ramps + alpha aliases ── */
+  @supports (color: oklch(from red l c h)) {
+    :root {
 
     /* ─── primary ──────────────────────────────────────────── */
 
@@ -656,6 +832,8 @@
     --sf-color-danger-active:     var(--sf-color-danger-xdark);
     --sf-color-danger-ghost:      oklch(from var(--sf-color-danger) l c h / 0.05);
 
+
+    }
   }
 
   /* ============================================================
@@ -906,43 +1084,7 @@
        Shadows — BEM consumer API
        Use in your own classes: .card { box-shadow: var(--sf-shadow-m); }
        ---------------------------------------------------------- */
-    /* Shadow tint — near-black derived from the neutral; the tint simply
-       inherits the neutral's own chroma/hue, so a colourless neutral yields
-       colourless shadows. Forced dark in both modes; --sf-shadow-strength
-       handles dark-mode intensity. Override to a brand colour for explicitly
-       tinted shadows — keep it dark or you get bright slabs:
-       oklch(from var(--sf-color-primary) 0.15 c h). */
-    --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 c h);
 
-    --sf-shadow-none:  none;
-    --sf-shadow-xs:    0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7));
-    --sf-shadow-s:     0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
-                       0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7));
-    --sf-shadow-m:     0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
-                       0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
-    --sf-shadow-l:     0 2px 4px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
-                       0 8px 24px 0  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)),
-                       0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
-    --sf-shadow-xl:    0 2px 8px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
-                       0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)),
-                       0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
-    --sf-shadow-2xl:   0 4px 12px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)),
-                       0 20px 60px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)),
-                       0 40px 100px -8px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7));
-    --sf-shadow-inner: inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
-
-    /* ----------------------------------------------------------
-       Text shadows — share --sf-shadow-color / --sf-shadow-strength
-       ---------------------------------------------------------- */
-    --sf-text-shadow-none: none;
-    --sf-text-shadow-s: 0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7));
-    --sf-text-shadow-m: 0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7));
-    --sf-text-shadow-l: 0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
-
-    /* Drop shadows — for filter: drop-shadow() (respects alpha edges) */
-    --sf-drop-shadow-s: drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)));
-    --sf-drop-shadow-m: drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7)));
-    --sf-drop-shadow-l: drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)));
 
     /* ----------------------------------------------------------
        Blur & opacity
@@ -1106,6 +1248,51 @@
     --sf-col-rule-width-m:  var(--sf-border-width-2);
     --sf-col-rule-width-l:  var(--sf-border-width-3);
 
+  }
+
+  /* ── @supports gate: shadow tokens ── */
+  @supports (color: oklch(from red l c h)) {
+    :root {
+
+      /* Shadow tint — near-black derived from the neutral; the tint simply
+         inherits the neutral's own chroma/hue, so a colourless neutral yields
+         colourless shadows. Forced dark in both modes; --sf-shadow-strength
+         handles dark-mode intensity. Override to a brand colour for explicitly
+         tinted shadows — keep it dark or you get bright slabs:
+         oklch(from var(--sf-color-primary) 0.15 c h). */
+      --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 c h);
+  
+      --sf-shadow-none:  none;
+      --sf-shadow-xs:    0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7));
+      --sf-shadow-s:     0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                         0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7));
+      --sf-shadow-m:     0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                         0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+      --sf-shadow-l:     0 2px 4px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                         0 8px 24px 0  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)),
+                         0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+      --sf-shadow-xl:    0 2px 8px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
+                         0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)),
+                         0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
+      --sf-shadow-2xl:   0 4px 12px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)),
+                         0 20px 60px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)),
+                         0 40px 100px -8px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7));
+      --sf-shadow-inner: inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7));
+  
+      /* ----------------------------------------------------------
+         Text shadows — share --sf-shadow-color / --sf-shadow-strength
+         ---------------------------------------------------------- */
+      --sf-text-shadow-none: none;
+      --sf-text-shadow-s: 0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7));
+      --sf-text-shadow-m: 0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7));
+      --sf-text-shadow-l: 0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
+  
+      /* Drop shadows — for filter: drop-shadow() (respects alpha edges) */
+      --sf-drop-shadow-s: drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)));
+      --sf-drop-shadow-m: drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7)));
+      --sf-drop-shadow-l: drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)));
+
+    }
   }
 
   /* ============================================================
@@ -1476,6 +1663,23 @@
        ---------------------------------------------------------- */
     --sf-content-intrinsic-size: 500px;
 
+    /* ----------------------------------------------------------
+       Scrim — darkening overlay for text-over-image legibility,
+       consumed by the .sf-scrim macro. The gradient is composed
+       from a direction + a color stop so consumers can retune
+       either independently:
+         style="--sf-scrim-color: oklch(0 0 0 / 0.75)"
+         style="--sf-scrim-direction: to top right"
+       --sf-scrim-gradient is the final composed value; override it
+       directly for a multi-stop or radial scrim.
+       ---------------------------------------------------------- */
+    --sf-scrim-color:     oklch(0 0 0 / 0.55);
+    --sf-scrim-direction: to top;
+    --sf-scrim-gradient:  linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent);
+    /* Text-on-image legibility WITHOUT darkening the picture — a soft
+       shadow halo behind glyphs, consumed by .sf-text-protect. */
+    --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6);
+
   }
 }
 
@@ -1681,7 +1885,8 @@
   a:link {
     color:                   var(--sf-color-link);
     text-decoration-color:   var(--sf-color-link--underline);
-    text-underline-offset:   0.15em;
+    text-underline-offset:   var(--sf-link-underline-offset);
+    text-decoration-thickness: var(--sf-link-underline-thickness);
     text-underline-position: from-font;
     transition:
       color                 var(--sf-duration-fast) var(--sf-ease-out),
@@ -2128,6 +2333,20 @@
     margin-block:        0;
     margin-inline:       var(--sf-divider-gap);
     align-self:          stretch;
+  }
+  /* Style modifiers — retune the line itself via the same tokens the
+     base rule reads, so they apply to horizontal and vertical alike. */
+  .sf-divider--soft   { --sf-divider-color: var(--sf-color-border--subtle); }
+  .sf-divider--strong { --sf-divider-color: var(--sf-color-border--strong); }
+  .sf-divider--dashed { --sf-divider-style: dashed; }
+  .sf-divider--dotted { --sf-divider-style: dotted; }
+  /* Gradient divider — a hairline that fades out at both ends. Replaces
+     the border with a masked background so it can't use border-style;
+     height tracks --sf-divider-width. Horizontal only. */
+  .sf-divider--gradient {
+    border:        none;
+    block-size:    var(--sf-divider-width);
+    background:    linear-gradient(to right, transparent, var(--sf-divider-color), transparent);
   }
 
   /* -- Container -----------------------------------------------
@@ -2973,6 +3192,75 @@
     }
   } /* end @supports (color: oklch(from red l c h)) — surface contextual cascade */
 
+  /* -- Scrim ---------------------------------------------------
+     Darkening overlay for text placed over a background image, so
+     the text clears contrast without dimming the whole picture.
+     Apply to a positioned wrapper that holds the image + text; the
+     scrim paints as a ::before gradient between them. The wrapper
+     must establish a stacking/positioning context, so the macro
+     sets position: relative and isolation: isolate itself.
+
+     Two layouts work:
+     (a) image as a CSS background on the wrapper (simplest):
+       <div class="sf-scrim sf-scrim--bottom" style="background-image: url(hero.jpg)">
+         <div class="sf-scrim__content">…</div>
+       </div>
+     (b) image as a child element (use object-fit to fill, and
+         position the content over it):
+       <div class="sf-scrim sf-scrim--bottom">
+         <img src="hero.jpg" alt="" style="block-size:100%; object-fit:cover">
+         <div class="sf-scrim__content" style="position:absolute; inset-block-end:0">…</div>
+       </div>
+     In (b) the image is left in the background layer (media children
+     are NOT lifted) so the scrim darkens it; the content is lifted.
+
+     The gradient defaults to bottom-anchored (text sits at the
+     bottom). Retune via tokens:
+       style="--sf-scrim-direction: to top right"
+       style="--sf-scrim-color: oklch(0 0 0 / 0.75)"
+     or replace the whole gradient with --sf-scrim-gradient.
+
+     Direction modifiers cover the common anchors without inline
+     styles. Stacking order is image (background layer) → scrim
+     (::before) → content, so the image MUST sit below the scrim:
+     media children (img/picture/video/svg) are intentionally NOT
+     lifted, only the text/content children are. (Lifting every
+     child would promote the image above the scrim and the overlay
+     would never darken it.)
+     ---------------------------------------------------------- */
+  .sf-scrim {
+    position:  relative;
+    isolation: isolate;
+  }
+  .sf-scrim::before {
+    content:        "";
+    position:       absolute;
+    inset:          0;
+    z-index:        0;
+    background:     var(--sf-scrim-gradient);
+    pointer-events: none;
+  }
+  /* Lift content above the scrim, but leave media below it so the
+     gradient actually darkens the picture. */
+  .sf-scrim > :not(img, picture, video, svg, canvas) {
+    position: relative;
+    z-index:  1;
+  }
+  .sf-scrim--top    { --sf-scrim-direction: to bottom; } /* text anchored at the top */
+  .sf-scrim--bottom { --sf-scrim-direction: to top; }    /* text anchored at the bottom (default) */
+  .sf-scrim--full   { --sf-scrim-gradient: var(--sf-scrim-color); } /* even wash over the whole image */
+
+  /* -- Text protect --------------------------------------------
+     Lighter-weight alternative to .sf-scrim: protects legibility
+     of text over a busy image WITHOUT a darkening layer, using a
+     soft shadow halo behind the glyphs. Apply directly to the text
+     element sitting over the image.
+       <h2 class="sf-text-protect">Over a photo</h2>
+     ---------------------------------------------------------- */
+  .sf-text-protect {
+    text-shadow: var(--sf-scrim-text-shadow);
+  }
+
   /* -- Text gradient -------------------------------------------
      Fills text with a gradient. Defaults to --sf-gradient-primary
      (auto-adapts to brand + dark mode). Override the background-image
@@ -3054,6 +3342,43 @@
      ---------------------------------------------------------- */
   .sf-tabular-nums {
     font-variant-numeric: var(--sf-font-numeric, tabular-nums);
+  }
+
+  /* -- Link variants -------------------------------------------
+     Opt-in link treatments composed from the link tokens. They
+     don't change link COLOR (that stays the auto-contrast
+     --sf-color-link); they only adjust the underline affordance.
+
+     .sf-link--subtle  — underline hidden until hover/focus. Use
+       for dense link lists (nav, footers) where a permanent
+       underline is visually noisy. The hover underline keeps the
+       affordance for the moment of interaction.
+     .sf-link--reverse — the literal inverse: underlined by
+       default, underline removed on hover/focus. Use where the
+       resting state should read as an obvious link and hover is
+       the "active" de-emphasis.
+
+     All four rules are gated on :link/:visited (like base a:link)
+     so the resting and hover halves stay symmetric — the classes
+     are meant for real anchors with an href.
+     ---------------------------------------------------------- */
+  .sf-link--subtle:link,
+  .sf-link--subtle:visited {
+    text-decoration-line: none;
+  }
+  .sf-link--subtle:is(:link, :visited):hover,
+  .sf-link--subtle:is(:link, :visited):focus-visible {
+    text-decoration-line:  underline;
+    text-decoration-color: currentcolor;
+  }
+
+  .sf-link--reverse:link,
+  .sf-link--reverse:visited {
+    text-decoration-line: underline;
+  }
+  .sf-link--reverse:is(:link, :visited):hover,
+  .sf-link--reverse:is(:link, :visited):focus-visible {
+    text-decoration-line: none;
   }
 
 }
@@ -3608,6 +3933,36 @@
   :focus-visible {
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color) !important;
     outline-offset: var(--sf-focus-ring-offset) !important;
+  }
+
+  /* ----------------------------------------------------------
+     Focus-shadow opt-in — switches the focus indicator from the
+     default `outline` ring to a `box-shadow` ring (the composite
+     --sf-focus-ring-shadow token). Useful when the outline clips
+     awkwardly on rounded corners or overflow:hidden containers,
+     where box-shadow follows border-radius. Opt-in per element:
+       <a class="sf-focus-shadow" href="…">…</a>
+
+     The base :focus-visible outline is hardened with !important
+     (WCAG 2.4.7), so this opt-in must also use !important to take
+     over — it replaces one always-visible ring with another, so
+     the keyboard-focus guarantee is preserved, not weakened.
+     outline:none here only removes the now-redundant outline ring
+     in favour of the box-shadow ring on the same element.
+     ---------------------------------------------------------- */
+  .sf-focus-shadow:focus-visible {
+    outline:    none                         !important;
+    box-shadow: var(--sf-focus-ring-shadow)  !important;
+  }
+  /* Forced-colors (Windows High Contrast) drops box-shadow entirely, which
+     would leave this element with NO focus indicator. Restore a system-colour
+     outline ring there so the WCAG 2.4.7 guarantee holds in that mode too. */
+  @media (forced-colors: active) {
+    .sf-focus-shadow:focus-visible {
+      outline:        var(--sf-focus-ring-width) solid !important;
+      outline-offset: var(--sf-focus-ring-offset) !important;
+      box-shadow:     none !important;
+    }
   }
 
   /* ----------------------------------------------------------
@@ -4925,15 +5280,27 @@
    declared before slashed.overrides in layers.css, so user
    overrides always win.
 
+   COLOR FALLBACKS — boundary note
+   ─────────────────────────────────
+   Color fallbacks live in @layer slashed.tokens and @layer slashed.themes
+   (core/tokens.color-fallbacks.css + core/tokens.css). Precomputed sRGB
+   defaults are declared ungated; modern light-dark()/oklch(from…)/color-mix()
+   expressions are gated in @supports blocks so they override the sRGB
+   defaults on capable engines only.
+
+   This file (slashed.legacy) handles only non-color property smoothing:
+   dvh, :focus-visible, scrollbar-gutter. It does NOT provide color
+   fallbacks of any kind.
+
    IMPORTANT — what this file is NOT
    ─────────────────────────────────
    The framework's real support floor is Chrome 123+, Safari 17.5+,
    Firefox 128+ (April–July 2024). That floor is set by the colour
    system: light-dark(), @property with inherits, and the oklch()
-   relative-color form. None of those have a CSS-only fallback, so
-   on any older engine the framework's colours collapse to initial
-   regardless of what this file does. This file does NOT extend
-   the floor below those versions.
+   relative-color form. The Tier-1 color fallbacks in tokens.css and
+   tokens.color-fallbacks.css bridge the gap for engines that support
+   @layer but not all three features (e.g. Chrome 99–122, Safari 15.4–17.4,
+   Firefox 97–127). This file does NOT extend the floor below @layer support.
 
    What this file IS
    ─────────────────
@@ -4945,8 +5312,6 @@
    below is inert via @supports not (...).
 
    Scope: covers gaps in reset.css, base.css, accessibility.css.
-   oklch()/color-mix()/@property live in tokens.css and have no
-   fallback path here.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.legacy {

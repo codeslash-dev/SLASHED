@@ -8,6 +8,7 @@
  * The zip contains a single top-level `slashed/` directory with:
  *   slashed.php                          — unified entry point
  *   includes/                            — shared PHP classes
+ *   dist/                                — bundled CSS for local-first delivery
  *   integrations/bricks/
  *     slashed-bricks.php
  *     includes/                          — Bricks PHP classes
@@ -38,6 +39,7 @@ const PLUGIN_ROOT = 'plugins/SLASHED-for-WP';
 const INCLUDE = [
   { src: `${PLUGIN_ROOT}/slashed.php`,                                  dest: 'slashed.php' },
   { src: `${PLUGIN_ROOT}/includes`,                                     dest: 'includes' },
+  { src: `${PLUGIN_ROOT}/dist`,                                         dest: 'dist' },
   { src: `${PLUGIN_ROOT}/data`,                                         dest: 'data' },
   { src: `${PLUGIN_ROOT}/integrations/bricks/slashed-bricks.php`,      dest: 'integrations/bricks/slashed-bricks.php' },
   { src: `${PLUGIN_ROOT}/integrations/bricks/includes`,                 dest: 'integrations/bricks/includes' },
