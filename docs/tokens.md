@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**833 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**882 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-461 tokens.
+510 tokens.
 
 | Token | Default |
 |---|---|
@@ -55,7 +55,6 @@ rebrand workflow.
 | `--sf-border-style` | `solid` |
 | `--sf-border-style-dotted` | `dotted` |
 | `--sf-border-style-soft` | `dashed` |
-| `--sf-border-style-strong` | `solid` |
 | `--sf-border-subtle` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` |
 | `--sf-border-width-1` | `1px` |
 | `--sf-border-width-2` | `2px` |
@@ -112,22 +111,49 @@ rebrand workflow.
 | `--sf-color-code-bg` | `var(--sf-color-inset)` |
 | `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-danger-active` | `var(--sf-color-danger-xdark)` |
+| `--sf-color-danger-darker` | `color-mix(in oklab, var(--sf-color-danger) 82%, var(--sf-color-text))` |
+| `--sf-color-danger-ghost` | `oklch(from var(--sf-color-danger) l c h / 0.05)` |
+| `--sf-color-danger-hover` | `var(--sf-color-danger-darker)` |
 | `--sf-color-danger-light` | `oklch(0.48 0.22 12)` |
+| `--sf-color-danger-lighter` | `color-mix(in oklab, var(--sf-color-danger) 65%, var(--sf-color-surface))` |
 | `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.3)` |
 | `--sf-color-danger-strong` | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-danger-subtle` | `oklch(from var(--sf-color-danger) l c h / 0.1)` |
+| `--sf-color-danger-superdark` | `color-mix(in oklab, var(--sf-color-danger) 8%, var(--sf-color-text))` |
+| `--sf-color-danger-superlight` | `color-mix(in oklab, var(--sf-color-danger) 4%, var(--sf-color-surface))` |
+| `--sf-color-danger-xdark` | `color-mix(in oklab, var(--sf-color-danger) 38%, var(--sf-color-text))` |
+| `--sf-color-danger-xlight` | `color-mix(in oklab, var(--sf-color-danger) 20%, var(--sf-color-surface))` |
 | `--sf-color-dim` | `oklch(0 0 0 / 0.5)` |
 | `--sf-color-error` | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-error-active` | `var(--sf-color-error-xdark)` |
+| `--sf-color-error-darker` | `color-mix(in oklab, var(--sf-color-error) 82%, var(--sf-color-text))` |
+| `--sf-color-error-ghost` | `oklch(from var(--sf-color-error) l c h / 0.05)` |
+| `--sf-color-error-hover` | `var(--sf-color-error-darker)` |
 | `--sf-color-error-light` | `oklch(0.50 0.20 25)` |
+| `--sf-color-error-lighter` | `color-mix(in oklab, var(--sf-color-error) 65%, var(--sf-color-surface))` |
 | `--sf-color-error-muted` | `oklch(from var(--sf-color-error) l c h / 0.3)` |
 | `--sf-color-error-strong` | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-error-subtle` | `oklch(from var(--sf-color-error) l c h / 0.1)` |
+| `--sf-color-error-superdark` | `color-mix(in oklab, var(--sf-color-error) 8%, var(--sf-color-text))` |
+| `--sf-color-error-superlight` | `color-mix(in oklab, var(--sf-color-error) 4%, var(--sf-color-surface))` |
+| `--sf-color-error-xdark` | `color-mix(in oklab, var(--sf-color-error) 38%, var(--sf-color-text))` |
+| `--sf-color-error-xlight` | `color-mix(in oklab, var(--sf-color-error) 20%, var(--sf-color-surface))` |
 | `--sf-color-heading` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-info` | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-info-active` | `var(--sf-color-info-xdark)` |
+| `--sf-color-info-darker` | `color-mix(in oklab, var(--sf-color-info) 82%, var(--sf-color-text))` |
+| `--sf-color-info-ghost` | `oklch(from var(--sf-color-info) l c h / 0.05)` |
+| `--sf-color-info-hover` | `var(--sf-color-info-darker)` |
 | `--sf-color-info-light` | `oklch(0.48 0.18 235)` |
+| `--sf-color-info-lighter` | `color-mix(in oklab, var(--sf-color-info) 65%, var(--sf-color-surface))` |
 | `--sf-color-info-muted` | `oklch(from var(--sf-color-info) l c h / 0.3)` |
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-info-subtle` | `oklch(from var(--sf-color-info) l c h / 0.1)` |
+| `--sf-color-info-superdark` | `color-mix(in oklab, var(--sf-color-info) 8%, var(--sf-color-text))` |
+| `--sf-color-info-superlight` | `color-mix(in oklab, var(--sf-color-info) 4%, var(--sf-color-surface))` |
+| `--sf-color-info-xdark` | `color-mix(in oklab, var(--sf-color-info) 38%, var(--sf-color-text))` |
+| `--sf-color-info-xlight` | `color-mix(in oklab, var(--sf-color-info) 20%, var(--sf-color-surface))` |
 | `--sf-color-inset` | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` |
 | `--sf-color-inverse` | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |
 | `--sf-color-link` | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` |
@@ -183,10 +209,19 @@ rebrand workflow.
 | `--sf-color-selection-bg` | `light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
 | `--sf-color-selection-text` | `inherit` |
 | `--sf-color-success` | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-success-active` | `var(--sf-color-success-xdark)` |
+| `--sf-color-success-darker` | `color-mix(in oklab, var(--sf-color-success) 82%, var(--sf-color-text))` |
+| `--sf-color-success-ghost` | `oklch(from var(--sf-color-success) l c h / 0.05)` |
+| `--sf-color-success-hover` | `var(--sf-color-success-darker)` |
 | `--sf-color-success-light` | `oklch(0.50 0.16 145)` |
+| `--sf-color-success-lighter` | `color-mix(in oklab, var(--sf-color-success) 65%, var(--sf-color-surface))` |
 | `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.3)` |
 | `--sf-color-success-strong` | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-success-subtle` | `oklch(from var(--sf-color-success) l c h / 0.12)` |
+| `--sf-color-success-superdark` | `color-mix(in oklab, var(--sf-color-success) 8%, var(--sf-color-text))` |
+| `--sf-color-success-superlight` | `color-mix(in oklab, var(--sf-color-success) 4%, var(--sf-color-surface))` |
+| `--sf-color-success-xdark` | `color-mix(in oklab, var(--sf-color-success) 38%, var(--sf-color-text))` |
+| `--sf-color-success-xlight` | `color-mix(in oklab, var(--sf-color-success) 20%, var(--sf-color-surface))` |
 | `--sf-color-surface` | `var(--sf-color-base)` |
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-tertiary-active` | `var(--sf-color-tertiary-xdark)` |
@@ -221,10 +256,19 @@ rebrand workflow.
 | `--sf-color-text--placeholder` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` |
 | `--sf-color-text--secondary` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` |
 | `--sf-color-warning` | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-warning-active` | `var(--sf-color-warning-xdark)` |
+| `--sf-color-warning-darker` | `color-mix(in oklab, var(--sf-color-warning) 82%, var(--sf-color-text))` |
+| `--sf-color-warning-ghost` | `oklch(from var(--sf-color-warning) l c h / 0.05)` |
+| `--sf-color-warning-hover` | `var(--sf-color-warning-darker)` |
 | `--sf-color-warning-light` | `oklch(0.75 0.17 80)` |
+| `--sf-color-warning-lighter` | `color-mix(in oklab, var(--sf-color-warning) 65%, var(--sf-color-surface))` |
 | `--sf-color-warning-muted` | `oklch(from var(--sf-color-warning) l c h / 0.3)` |
 | `--sf-color-warning-strong` | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` |
 | `--sf-color-warning-subtle` | `oklch(from var(--sf-color-warning) l c h / 0.12)` |
+| `--sf-color-warning-superdark` | `color-mix(in oklab, var(--sf-color-warning) 8%, var(--sf-color-text))` |
+| `--sf-color-warning-superlight` | `color-mix(in oklab, var(--sf-color-warning) 4%, var(--sf-color-surface))` |
+| `--sf-color-warning-xdark` | `color-mix(in oklab, var(--sf-color-warning) 38%, var(--sf-color-text))` |
+| `--sf-color-warning-xlight` | `color-mix(in oklab, var(--sf-color-warning) 20%, var(--sf-color-surface))` |
 | `--sf-color-white` | `oklch(100% 0 0)` |
 | `--sf-component-pad` | `var(--sf-space-m)` |
 | `--sf-container-default` | `75rem` |
@@ -320,7 +364,7 @@ rebrand workflow.
 | `--sf-h6-letter-spacing` | `var(--sf-tracking-wide)` |
 | `--sf-h6-line-height` | `var(--sf-leading-normal)` |
 | `--sf-h6-size` | `var(--sf-text-m)` |
-| `--sf-header-height` | `5rem` |
+| `--sf-header-height` | `clamp( var(--sf-header-height-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))` |
 | `--sf-header-height-desktop` | `5rem` |
 | `--sf-header-height-mobile` | `3.5rem` |
 | `--sf-heading-color` | `var(--sf-color-heading)` |
@@ -430,31 +474,31 @@ rebrand workflow.
 | `--sf-space-xl` | `calc(clamp(1.56rem, calc(0.029481481481481477 * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale))` |
 | `--sf-space-xs` | `calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))` |
 | `--sf-state-pending-opacity` | `0.7` |
-| `--sf-sticky-offset` | `var(--sf-header-height)` |
+| `--sf-sticky-offset` | `clamp( var(--sf-sticky-offset-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | `var(--sf-header-height-mobile)` |
 | `--sf-stroke-bold` | `2px` |
 | `--sf-stroke-heavy` | `3px` |
 | `--sf-stroke-regular` | `1.5px` |
 | `--sf-stroke-thin` | `1px` |
-| `--sf-text-2xl` | `clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem)` |
-| `--sf-text-2xs` | `clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem)` |
-| `--sf-text-3xl` | `clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem)` |
-| `--sf-text-4xl` | `clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem)` |
-| `--sf-text-display-l` | `clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem)` |
-| `--sf-text-display-m` | `clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem)` |
-| `--sf-text-display-s` | `clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem)` |
+| `--sf-text-2xl` | `calc(clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem) * var(--sf-text-scale))` |
+| `--sf-text-2xs` | `calc(clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem) * var(--sf-text-scale))` |
+| `--sf-text-3xl` | `calc(clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem) * var(--sf-text-scale))` |
+| `--sf-text-4xl` | `calc(clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem) * var(--sf-text-scale))` |
+| `--sf-text-display-l` | `calc(clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem) * var(--sf-text-display-scale))` |
+| `--sf-text-display-m` | `calc(clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem) * var(--sf-text-display-scale))` |
+| `--sf-text-display-s` | `calc(clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem) * var(--sf-text-display-scale))` |
 | `--sf-text-display-scale` | `1` |
-| `--sf-text-l` | `clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem)` |
-| `--sf-text-m` | `clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem)` |
-| `--sf-text-s` | `clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem)` |
+| `--sf-text-l` | `calc(clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem) * var(--sf-text-scale))` |
+| `--sf-text-m` | `calc(clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem) * var(--sf-text-scale))` |
+| `--sf-text-s` | `calc(clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem) * var(--sf-text-scale))` |
 | `--sf-text-scale` | `1` |
 | `--sf-text-shadow-l` | `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-text-shadow-m` | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-text-shadow-none` | `none` |
 | `--sf-text-shadow-s` | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
-| `--sf-text-xl` | `clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem)` |
-| `--sf-text-xs` | `clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem)` |
+| `--sf-text-xl` | `calc(clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem) * var(--sf-text-scale))` |
+| `--sf-text-xs` | `calc(clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem) * var(--sf-text-scale))` |
 | `--sf-touch-target` | `var(--sf-size-l)` |
 | `--sf-tracking-normal` | `0` |
 | `--sf-tracking-tight` | `-0.025em` |
@@ -463,21 +507,26 @@ rebrand workflow.
 | `--sf-tracking-widest` | `0.1em` |
 | `--sf-transition-all` | `all var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-colors` | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-enter` | `all var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-exit` | `all var(--sf-duration-fast) var(--sf-ease-in)` |
-| `--sf-transition-fast` | `all var(--sf-duration-fast) var(--sf-ease-out)` |
+| `--sf-transition-enter` | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), box-shadow var(--sf-duration-normal) var(--sf-ease-out), opacity var(--sf-duration-normal) var(--sf-ease-out), transform var(--sf-duration-normal) var(--sf-ease-out), filter var(--sf-duration-normal) var(--sf-ease-out)` |
+| `--sf-transition-exit` | `color var(--sf-duration-fast) var(--sf-ease-in), background-color var(--sf-duration-fast) var(--sf-ease-in), border-color var(--sf-duration-fast) var(--sf-ease-in), box-shadow var(--sf-duration-fast) var(--sf-ease-in), opacity var(--sf-duration-fast) var(--sf-ease-in), transform var(--sf-duration-fast) var(--sf-ease-in), filter var(--sf-duration-fast) var(--sf-ease-in)` |
+| `--sf-transition-fast` | `color var(--sf-duration-fast) var(--sf-ease-out), background-color var(--sf-duration-fast) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out), transform var(--sf-duration-fast) var(--sf-ease-out), filter var(--sf-duration-fast) var(--sf-ease-out)` |
 | `--sf-transition-opacity` | `opacity var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-overlay` | `overlay var(--sf-duration-normal) allow-discrete, display var(--sf-duration-normal) allow-discrete` |
 | `--sf-transition-shadow` | `box-shadow var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-transition-slow` | `all var(--sf-duration-slow) var(--sf-ease-in-out)` |
+| `--sf-transition-slow` | `color var(--sf-duration-slow) var(--sf-ease-in-out), background-color var(--sf-duration-slow) var(--sf-ease-in-out), border-color var(--sf-duration-slow) var(--sf-ease-in-out), box-shadow var(--sf-duration-slow) var(--sf-ease-in-out), opacity var(--sf-duration-slow) var(--sf-ease-in-out), transform var(--sf-duration-slow) var(--sf-ease-in-out), filter var(--sf-duration-slow) var(--sf-ease-in-out)` |
 | `--sf-transition-transform` | `transform var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-z-base` | `0` |
 | `--sf-z-below` | `-1` |
+| `--sf-z-dropdown` | `var(--sf-z-high)` |
+| `--sf-z-fixed` | `var(--sf-z-mid)` |
 | `--sf-z-high` | `500` |
 | `--sf-z-low` | `10` |
 | `--sf-z-max` | `9999` |
 | `--sf-z-mid` | `100` |
+| `--sf-z-overlay` | `var(--sf-z-max)` |
 | `--sf-z-raised` | `1` |
+| `--sf-z-sticky` | `var(--sf-z-low)` |
+| `--sf-z-toast` | `var(--sf-z-top)` |
 | `--sf-z-top` | `900` |
 
 ## Layout tokens (`core/tokens.layout.css`)

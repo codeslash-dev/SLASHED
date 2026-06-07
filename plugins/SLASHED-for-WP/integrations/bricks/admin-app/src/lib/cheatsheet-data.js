@@ -217,6 +217,7 @@ export const variableGroups = [
     description: "Z-index scale for predictable layering.",
     tokens: [
       { name: "--sf-z-{below,base,raised,low,mid,high,top,max}", description: "Z-index scale: -1, 0, 1, 10, 100, 500, 900, 9999." },
+      { name: "--sf-z-{sticky,fixed,dropdown,toast,overlay}", description: "Semantic z-index aliases onto the scale: sticky/fixed/dropdown/toast/overlay. Modal/popover use the native top layer." },
     ]
   },
   {
