@@ -173,7 +173,7 @@ together in 2024 and have no graceful fallback:
 
 - `light-dark()` (Chrome 123, Safari 17.5, Firefox 120)
 - `@property` with `inherits: true` (Firefox 128)
-- `oklch(from … sign(…) …)` relative color syntax (Firefox 113, Safari 16.4)
+- `oklch(from … sign(…) …)` relative color syntax (Firefox 128, Safari 16.4)
 
 `optional/legacy.css` smooths a handful of property-level gaps within
 the cascade-layer-supporting window (Safari 15.0–15.3 dvh/`:focus-visible`,
@@ -205,15 +205,15 @@ SLASHED ships a companion WordPress plugin (`plugins/SLASHED-for-WP/`) with two 
 
 ### Bricks Builder
 
-Activate `integrations/bricks/slashed-bricks.php` (requires Bricks 1.9.2+, WordPress 6.0+, PHP 7.4+).
+Activate `integrations/bricks/slashed-bricks.php` (requires Bricks 1.9.2+, WordPress 6.4+, PHP 7.4+).
 
 - **CSS loading** — enqueues the SLASHED bundle on the frontend and inside the Bricks editor iframe
-- **Variable pickers** — registers all `--sf-*` tokens (571 in `essential`, 812 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
+- **Variable pickers** — registers all `--sf-*` tokens (572 in `essential`, 812 in `optimal`/`full`) in the Bricks Global Variable Manager, organised by category
 - **Class autocomplete** — registers every `.sf-*` layout class and `.is-*` state class in the Bricks class input as locked entries
-- **Color palette** — syncs `--sf-color-*` tokens with the Bricks color palette (auto-disabled on Bricks 2.2+ where the Color Manager would override `light-dark()` tokens; use the Variable Manager there instead)
+- **Color System panel** — a floating in-builder browser for every `--sf-color-*` token; each swatch previews its light and dark value at once, and picking one applies the `var(--sf-color-*)` reference (never a baked hex) to the selected element
 - **Variable-picker swatches** — paints a colour square next to each `--sf-color-*` entry in the variable-picker dropdown, powered by server-resolved hex values so dark-mode stays framework-driven
 - **Dynamic detection** — parses the active CSS bundle at runtime; no hand-curated list to drift out of date
-- **reBEMer** — subtree-scoped BEM class manager inside the Bricks structure panel: rename, replace, or add modifiers across an element and its children in one transaction with preflight reference-count checks and snapshot/rollback
+- **reBEMer** — subtree-scoped BEM class manager inside the Bricks structure panel: rename, replace, or add modifiers across an element and its children in one transaction with reference-count checks (`GET /rebemer/unused`) and snapshot/rollback
 
 See [`integrations/bricks/README.md`](plugins/SLASHED-for-WP/integrations/bricks/README.md) and [`docs/rebemer.md`](docs/rebemer.md).
 
@@ -224,6 +224,18 @@ Activate `integrations/gutenberg/slashed-gutenberg.php` (requires WordPress 6.4+
 - **CSS loading** — enqueues the SLASHED bundle in the block editor canvas and on the frontend
 - **Color palette** — syncs 20 `--sf-color-*` tokens (brand, status, surface, text, border, link) with the WordPress editor color palette
 - **Dark-mode bridge** — maps the `data-wp-dark-mode-active` attribute from the block editor's dark-mode toggle to SLASHED's `color-scheme` system
+
+### Filters
+
+Shared (fire in both integrations and standalone, when the unified `slashed.php` bootstrap is active):
+
+- `slashed/css_bundle_url` — override the resolved CSS bundle URL for every integration
+- `slashed/override_css` — replace/extend the generated token-override CSS
+
+Per integration:
+
+- `slashed_gutenberg/css_bundle_url` — override the bundle URL for the Gutenberg integration only
+- Bricks exposes a larger hook set (variables, classes, inventory, colour panel/swatches) — see the [Bricks plugin README](plugins/SLASHED-for-WP/integrations/bricks/README.md) and the in-admin **Hooks** tab.
 
 ### Packaging
 
@@ -243,8 +255,8 @@ npm run lint:css     # stylelint all CSS
 npm run lint:css:fix # auto-fix where possible
 npm test             # token regression suite (Playwright, light + dark)
 npm run test:install # one-time: install the Chromium test browser
-npm run release      # bump version, update CHANGELOG, tag & push
+npm run release      # bump version (runs version-sync + build), tag & push
 ```
 
 Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
-`CHANGELOG.md` is generated automatically on release.
+`CHANGELOG.md` is maintained by hand following [Keep a Changelog](https://keepachangelog.com/); move `[Unreleased]` entries under a version heading before releasing (see [CONTRIBUTING.md](CONTRIBUTING.md)).

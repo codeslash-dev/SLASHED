@@ -13,8 +13,9 @@
  *     numeric tint/shade scale (50–950), translucent alpha steps (a5–a95),
  *     and named semantic aliases (hover, subtle, …). Everything that isn't a
  *     family token (text, bg, border, link, …) collects into one "Semantic"
- *     group. This mirrors `class-colors.php`'s server-side grouping so the
- *     two stay conceptually aligned.
+ *     group. This grouping mirrors the way the framework itself organises
+ *     colour (see core/tokens.css and docs/tokens.md), so the panel stays
+ *     conceptually aligned with the token system.
  *   - Each swatch carries BOTH its light and dark hex so the panel can show
  *     the adaptive pair at a glance — the differentiator over a single-mode
  *     palette browser.

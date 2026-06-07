@@ -13,7 +13,7 @@ collapse to `initial`.
 |---|---|---|---|---|
 | `light-dark()` | every resolved colour token | 123 | 17.5 | 120 |
 | `@property` with `inherits: true` | animatable brand/status colours, `initial` reset | 85 | 16.4 | 128 |
-| `oklch()` relative colour (`oklch(from …)`) | hover/tint/shade/dark derivation | 119 | 16.4 | 113 |
+| `oklch()` relative colour (`oklch(from …)`) | hover/tint/shade/dark derivation | 119 | 16.4 | 128 |
 
 The effective floor is the **maximum** of these per engine: Firefox 128
 (`@property inherits`), Safari 17.5 (`light-dark()`), Chrome 123

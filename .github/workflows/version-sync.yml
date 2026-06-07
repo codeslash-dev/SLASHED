@@ -112,15 +112,18 @@ jobs:
         env:
           DIST_SHA: ${{ steps.dist.outputs.sha }}
         run: |
+          # Write the captured SHA into the canonical constant, then let
+          # version-sync.js propagate it to the two integration entry points.
           sed -i \
             "s|define( 'SLASHED_DIST_SHA', '[^']*' )|define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )|" \
-            slashed.php
-          sed -i \
-            "s|define( 'SLASHED_BRICKS_DIST_SHA', '[^']*' )|define( 'SLASHED_BRICKS_DIST_SHA', '${DIST_SHA}' )|" \
-            integrations/bricks/slashed-bricks.php
-          sed -i \
-            "s|define( 'SLASHED_GUTENBERG_DIST_SHA', '[^']*' )|define( 'SLASHED_GUTENBERG_DIST_SHA', '${DIST_SHA}' )|" \
-            integrations/gutenberg/slashed-gutenberg.php
+            plugins/SLASHED-for-WP/slashed.php
+          # Hard-fail if the substitution did not land (sed exits 0 even on no-op,
+          # e.g. if the define format ever changes) so we never propagate a stale SHA.
+          if ! grep -Fq "define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )" plugins/SLASHED-for-WP/slashed.php; then
+            echo "Failed to update SLASHED_DIST_SHA in plugins/SLASHED-for-WP/slashed.php" >&2
+            exit 1
+          fi
+          node scripts/version-sync.js
 
       - name: Commit and push if anything changed
         env:
@@ -129,7 +132,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Stage only tracked files (dist/*.css are gitignored).
-          git add slashed.php integrations/bricks/slashed-bricks.php integrations/gutenberg/slashed-gutenberg.php package.json package-lock.json
+          git add plugins/SLASHED-for-WP/slashed.php plugins/SLASHED-for-WP/integrations/bricks/slashed-bricks.php plugins/SLASHED-for-WP/integrations/gutenberg/slashed-gutenberg.php package.json package-lock.json
           git add -u
           if git diff --cached --quiet; then
             echo "Nothing to commit — all version artifacts already up to date."

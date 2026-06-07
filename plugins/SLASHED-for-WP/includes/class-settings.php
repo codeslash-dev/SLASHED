@@ -172,6 +172,30 @@ class Slashed_Settings {
 	}
 
 	/**
+	 * Update only the css_bundle value, preserving all other settings.
+	 *
+	 * Targeted setter used when a single surface (e.g. the token SPA) needs to
+	 * change the bundle without rewriting integration flags / source / version.
+	 *
+	 * @param string $bundle One of self::ALLOWED_BUNDLES.
+	 * @return bool True if the option was updated.
+	 */
+	public static function set_css_bundle( $bundle ) {
+		$bundle = (string) $bundle;
+		if ( ! in_array( $bundle, self::ALLOWED_BUNDLES, true ) ) {
+			$bundle = 'optimal';
+		}
+
+		$stored = get_option( self::OPTION_KEY, array() );
+		if ( ! is_array( $stored ) ) {
+			$stored = array();
+		}
+		$stored['css_bundle'] = $bundle;
+
+		return update_option( self::OPTION_KEY, $stored );
+	}
+
+	/**
 	 * @param array $stored Raw stored option value.
 	 * @return array<string, bool>
 	 */

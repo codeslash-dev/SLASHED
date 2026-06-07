@@ -1,4 +1,4 @@
-/* SLASHED v0.5.0-beta5 — slashed.essential.css */
+/* SLASHED v0.5.21 — slashed.essential.css */
 
 /* ─── core/layers.css ─── */
 /* SLASHED — core/layers.css
@@ -2113,7 +2113,7 @@
      The dark-side input falls back to -light when -dark isn't
      explicitly set, so this works even without per-mode overrides.
 
-     Requires CSS relative color syntax (Chrome 119+, Safari 17.2+,
+     Requires CSS relative color syntax (Chrome 119+, Safari 16.4+,
      Firefox 128+). Wrapped in @supports — unsupporting engines skip
      the block silently; brand colors remain unmodified. */
   @supports (color: oklch(from red l c h)) {
@@ -2157,7 +2157,7 @@
      headers, sections, cards, or any subtree with [data-theme] fully
      independent of the root's colour mode.
 
-     Requires relative colour syntax (Chrome 119+, Safari 17.2+,
+     Requires relative colour syntax (Chrome 119+, Safari 16.4+,
      Firefox 128+). Engines that don't support it skip the whole
      @supports block and fall back to the :root values — a graceful
      degradation with no visible breakage on older browsers. On :root

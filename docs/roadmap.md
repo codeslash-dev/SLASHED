@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current version: **0.5.0-beta5**
+Current version: **0.5.21**
 
 ---
 
@@ -11,20 +11,6 @@ Current version: **0.5.0-beta5**
 - **Logical property audit** — replace remaining physical properties
   (`margin-left`, `padding-right`, etc.) with logical equivalents
   (`margin-inline-start`, `padding-inline-end`) for RTL support.
-
-- **`sf-prose` subtoken expansion** — expose per-prose override tokens
-  (`--sf-prose-paragraph`, `--sf-prose-heading-gap`, `--sf-prose-marker-color`,
-  `--sf-prose-img-radius`, etc.) so users can customise prose spacing/styling
-  per-instance without writing custom CSS.
-
-- **`slashed.overrides` usage guidance** — add an `overrides-example.css` file
-  (parallel to `theme-example.css`) showing exactly how and where to place
-  consumer overrides so they correctly win over framework rules.
-
-- **Unused token detection in audit script** — extend `scripts/audit.js` with a
-  coverage pass: cross-reference tokens declared in `tokens.css` against usage
-  in `core/` and `optional/` layers. Surface as warnings (not errors) since
-  public API tokens are intentionally unused by the framework.
 
 - **Scoped token snapshot tests** — add Playwright snapshot assertions for ~20
   key semantic tokens (e.g. `--sf-color-text`, `--sf-color-primary`,

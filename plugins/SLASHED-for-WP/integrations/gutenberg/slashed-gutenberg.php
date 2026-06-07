@@ -3,8 +3,8 @@
  * Plugin Name: SLASHED for Gutenberg
  * Plugin URI: https://github.com/codeslash-dev/SLASHED
  * Description: Integrates the SLASHED cascade-layer CSS framework with the WordPress block editor — CSS loading, color palette sync, and dark-mode bridging.
- * Version: 0.5.0-beta5
- * Author: SLASHED
+ * Version: 0.5.21
+ * Author: jackgranatowski
  * Author URI: https://github.com/codeslash-dev/SLASHED
  * License: MIT
  * Requires PHP: 7.4
@@ -25,14 +25,45 @@ if ( ! defined( 'ABSPATH' ) ) {
  * plugin they are not yet set and are defined here as usual.
  */
 if ( ! defined( 'SLASHED_GUTENBERG_VERSION' ) ) {
-	define( 'SLASHED_GUTENBERG_VERSION',  '0.5.0-beta5' );
+	define( 'SLASHED_GUTENBERG_VERSION',  '0.5.21' );
 	define( 'SLASHED_GUTENBERG_PATH',     plugin_dir_path( __FILE__ ) );
 	define( 'SLASHED_GUTENBERG_URL',      plugin_dir_url( __FILE__ ) );
-	define( 'SLASHED_GUTENBERG_CSS_REF',  'v0.5.0-beta5' );
+	define( 'SLASHED_GUTENBERG_CSS_REF',  'v0.5.21' );
 	define( 'SLASHED_GUTENBERG_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
 }
 
 define( 'SLASHED_GUTENBERG_ALLOWED_BUNDLES', array( 'essential', 'optimal', 'full' ) );
+
+/**
+ * Standalone shared infrastructure.
+ *
+ * In unified mode slashed.php loads the shared token pipeline before this file
+ * is included. In standalone mode (this plugin activated directly) load it from
+ * the shared includes directory two levels up so token overrides, the REST API,
+ * and the admin token page work without the unified plugin.
+ *
+ * class-core-enqueue.php is intentionally NOT loaded here: in standalone mode
+ * this integration owns the bundle enqueue (so the slashed_gutenberg/css_bundle_url
+ * filter applies), and the absence of Slashed_Core_Enqueue is the signal the
+ * enqueue class uses to detect standalone vs unified mode.
+ *
+ * NOTE: running both standalone integration plugins (Bricks + Gutenberg) without
+ * the unified "SLASHED" plugin is unsupported — install the unified plugin to run
+ * multiple integrations together.
+ */
+if ( ! class_exists( 'Slashed_Token_Store' ) ) {
+	$_slashed_shared = SLASHED_GUTENBERG_PATH . '../../includes/';
+	require_once $_slashed_shared . 'class-settings.php';
+	require_once $_slashed_shared . 'class-css-loader.php';
+	require_once $_slashed_shared . 'class-token-store.php';
+	require_once $_slashed_shared . 'class-token-sanitizer.php';
+	require_once $_slashed_shared . 'class-token-defaults.php';
+	require_once $_slashed_shared . 'class-tab-registry.php';
+	require_once $_slashed_shared . 'class-css-generator.php';
+	require_once $_slashed_shared . 'class-rest-controller.php';
+	require_once $_slashed_shared . 'class-token-page.php';
+	unset( $_slashed_shared );
+}
 
 /**
  * Get the configured CSS bundle variant.
@@ -94,6 +125,40 @@ if ( ! defined( 'SLASHED_VERSION' ) ) {
 	add_action( 'init', function () {
 		load_plugin_textdomain( 'slashed-gutenberg', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	} );
+}
+
+/**
+ * Standalone token pipeline bootstrap.
+ *
+ * In unified mode slashed.php registers the token REST API, admin page, and
+ * override-CSS injection globally. In standalone mode replicate that here so
+ * design-token overrides set in the SPA actually reach the rendered page.
+ *
+ * The bundle itself is enqueued by Slashed_Gutenberg_Enqueue in standalone
+ * mode, so Slashed_Core_Enqueue is not instantiated here.
+ */
+if ( ! defined( 'SLASHED_VERSION' ) ) {
+	add_action( 'rest_api_init', function () {
+		( new Slashed_REST_Controller() )->register_routes();
+	} );
+
+	if ( is_admin() ) {
+		add_action( 'plugins_loaded', function () {
+			new Slashed_Token_Page();
+		}, 20 );
+	}
+
+	// Shared with the Bricks standalone bootstrap via the !function_exists guard,
+	// so only one definition exists when both integrations are present.
+	if ( ! function_exists( 'slashed_inject_token_overrides' ) ) {
+		function slashed_inject_token_overrides() {
+			if ( wp_style_is( 'slashed-framework', 'enqueued' ) && Slashed_CSS_Generator::has_overrides() ) {
+				wp_add_inline_style( 'slashed-framework', Slashed_CSS_Generator::get_override_css() );
+			}
+		}
+	}
+	add_action( 'wp_enqueue_scripts', 'slashed_inject_token_overrides', 20 );
+	add_action( 'enqueue_block_editor_assets', 'slashed_inject_token_overrides', 20 );
 }
 
 /**

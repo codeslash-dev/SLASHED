@@ -69,7 +69,10 @@ class Slashed_Framework_Updater {
 
 		foreach ( $body['versions'] as $entry ) {
 			$ver = isset( $entry['version'] ) ? ltrim( (string) $entry['version'], 'v' ) : '';
-			if ( preg_match( '/^\d+\.\d+\.\d+/', $ver ) ) {
+			// Match a plain stable semver only (X.Y.Z), anchored — pre-release
+			// tags (-rc/-beta) are intentionally skipped for update prompts.
+			// Kept identical to slashed_bricks_run_version_check() in slashed-bricks.php.
+			if ( preg_match( '/^\d+\.\d+\.\d+$/', $ver ) ) {
 				$latest = 'v' . $ver;
 				set_transient( self::TRANSIENT_KEY, $latest, DAY_IN_SECONDS );
 				return $latest;

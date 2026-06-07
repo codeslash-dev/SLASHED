@@ -129,20 +129,42 @@ class Slashed_Token_Store {
 	 * Read plugin behavioural settings (html_font_size, show_class_hints, etc.).
 	 * Always returns a complete map including defaults for missing keys.
 	 *
+	 * In unified mode (Slashed_Settings present) css_bundle is sourced from the
+	 * canonical `slashed_settings` option — the same value Slashed_CSS_Loader
+	 * reads — so the SPA's bundle control and the Settings page never diverge.
+	 *
 	 * @return array
 	 */
 	public static function get_plugin_settings() {
 		$stored = get_option( self::SETTINGS_OPTION_NAME, array() );
 		$stored = is_array( $stored ) ? $stored : array();
-		return array_merge( self::PLUGIN_SETTING_DEFAULTS, $stored );
+		$merged = array_merge( self::PLUGIN_SETTING_DEFAULTS, $stored );
+
+		// css_bundle is owned by Slashed_Settings whenever the shared layer is
+		// loaded; mirror it here so the SPA reflects the bundle actually served.
+		if ( class_exists( 'Slashed_Settings' ) ) {
+			$merged['css_bundle'] = Slashed_Settings::get_css_bundle();
+		}
+
+		return $merged;
 	}
 
 	/**
 	 * Persist plugin behavioural settings.
 	 *
+	 * css_bundle is routed to the canonical Slashed_Settings store (unified
+	 * mode) so the change reaches Slashed_CSS_Loader; the local
+	 * `slashed_bricks_settings` row keeps only the SPA-owned preferences.
+	 * In standalone mode (no Slashed_Settings) css_bundle stays in the local
+	 * row as before.
+	 *
 	 * @param array $settings Plugin settings map.
 	 */
 	public static function update_plugin_settings( array $settings ) {
+		if ( isset( $settings['css_bundle'] ) && class_exists( 'Slashed_Settings' ) ) {
+			Slashed_Settings::set_css_bundle( $settings['css_bundle'] );
+			unset( $settings['css_bundle'] );
+		}
 		update_option( self::SETTINGS_OPTION_NAME, $settings );
 	}
 }

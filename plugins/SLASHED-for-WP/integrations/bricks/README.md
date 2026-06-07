@@ -5,17 +5,16 @@ A WordPress plugin that integrates the [SLASHED](https://github.com/codeslash-de
 ## Features
 
 - **CSS Loading** - Automatically enqueues the SLASHED CSS bundle on the frontend and within the Bricks editor iframe
-- **Variable Pickers** - Registers every `--sf-*` CSS custom property declared in the active bundle (571 in `essential`, 812 in `optimal`/`full`) with the Bricks variable pickers and code editor autocomplete, organized into category groups
+- **Variable Pickers** - Registers every `--sf-*` CSS custom property declared in the active bundle (572 in `essential`, 812 in `optimal`/`full`) with the Bricks variable pickers and code editor autocomplete, organized into category groups
 - **Class Autocomplete** - Registers every `.sf-*` layout/utility class and `.is-*` state class declared in the active bundle with the Bricks class input, organized into "SLASHED Layout" and "SLASHED State" categories
-- **Color Palette** - Synchronizes every `--sf-color-*` token (brand scales including alpha steps, status, and semantic colors) with the Bricks global color palette. Disabled automatically on Bricks 2.2+ (the new Color Manager bakes palette colors into `:root` as static hex, which would override the framework's adaptive `light-dark()` tokens and break dark mode) — use the Variable Manager to reach the tokens there
-- **Variable-Picker Swatches** - Paints a colour square next to each `--sf-color-*` entry in the Bricks variable-picker dropdown, builder-side only. Because the variables stay empty-valued, Bricks has no value to draw a swatch from; the square is rendered from a server-resolved hex map so dark/light stays 100% framework-driven and nothing is written to `:root`. Purely additive and fail-silent: if Bricks ever changes the picker markup you lose the squares, never the picker. Restores the swatch affordance lost when the Color Palette is disabled on Bricks 2.2+. Toggle with the `slashed_bricks/show_color_swatches` filter
+- **Variable-Picker Swatches** - Paints a colour square next to each `--sf-color-*` entry in the Bricks variable-picker dropdown, builder-side only. Because the variables stay empty-valued, Bricks has no value to draw a swatch from; the square is rendered from a server-resolved hex map so dark/light stays 100% framework-driven and nothing is written to `:root`. Purely additive and fail-silent: if Bricks ever changes the picker markup you lose the squares, never the picker. Toggle with the `slashed_bricks/show_color_swatches` filter
 - **Dynamic Detection** - The integration parses the loaded CSS bundle at runtime, so registrations stay in sync with whichever bundle (`essential` / `optimal` / `full`) and SLASHED release is active. There is no hand-curated list to drift out of date.
-- **reBEMer** - Subtree-scoped BEM class manager inside the Bricks builder structure panel: add / rename / replace classes for an element and its children in one transaction, with reference-count preflight (REST), snapshot+rollback, reserved-name guard against SLASHED utilities, and Cmd/Ctrl-Z undo. See [docs/rebemer.md](../../docs/rebemer.md) for the full design.
+- **reBEMer** - Subtree-scoped BEM class manager inside the Bricks builder structure panel: add / rename / replace classes for an element and its children in one transaction, with a reference-count check (`GET /rebemer/unused`) that surfaces cross-element class usage before destructive ops, snapshot+rollback, reserved-name guard against SLASHED utilities, and Cmd/Ctrl-Z undo. See [docs/rebemer.md](../../docs/rebemer.md) for the full design.
 - **Color System Panel** - A floating in-builder browser for every `--sf-color-*` token, launched from a pill in the builder corner. Tokens are grouped the way the framework organises colour (the six brand families and five status families, each split into shades/tints, transparent steps, and named semantic aliases, plus a combined Semantic group for page-level tokens like text/bg/border/link). Its differentiator over a single-mode palette: because every SLASHED token is an adaptive `light-dark()` value, each swatch previews **both** variants at once (the "Both" mode splits a swatch on the diagonal — light top-left, dark bottom-right), and the Light/Dark toggle drives the live canvas `[data-theme]` so real elements adapt as you browse. Picking a swatch copies its `var(--sf-color-*)` reference to the clipboard **and** applies it to the selected element's chosen target (background / text / border) — always the variable, never a baked hex, so the element stays theme- and dark-mode-aware. With nothing selected it degrades to copy-only. Light/dark hex previews are server-resolved (`Slashed_Bricks_Color_Resolver`) so no SLASHED stylesheet needs loading in the builder chrome. Toggle with the `slashed_bricks/show_color_panel` filter.
 
 ## Requirements
 
-- WordPress 6.0+
+- WordPress 6.4+
 - PHP 7.4+
 - Bricks Builder 1.9.2+ (Variables require 1.9.8+; Classes require 1.9.5+)
 - SLASHED CSS framework (included via the `dist/slashed.optimal.css` bundle)
@@ -75,28 +74,6 @@ add_filter( 'slashed_bricks/registered_classes', function( $classes ) {
 } );
 ```
 
-#### `slashed_bricks/registered_colors`
-
-Filter the colors array before registration with Bricks.
-
-```php
-add_filter( 'slashed_bricks/registered_colors', function( $colors ) {
-    // Only keep brand colors, remove semantic.
-    return array_filter( $colors, function( $color ) {
-        return strpos( $color['category'], 'Semantic' ) === false;
-    } );
-} );
-```
-
-#### `slashed_bricks/inject_color_palette`
-
-Control whether SLASHED palettes are injected into the Bricks color palette (`bricks_color_palette`). Defaults to `true` on Bricks &lt; 2.2 and `false` on Bricks 2.2+ (whose Color Manager would bake the tokens into `:root` as static hex and break dark mode). Force it back on if you want the swatches and accept that those palette colors become static hex snapshots without dark-mode adaptation.
-
-```php
-// Force palette injection even on Bricks 2.2+.
-add_filter( 'slashed_bricks/inject_color_palette', '__return_true' );
-```
-
 #### `slashed_bricks/show_color_swatches`
 
 Control whether colour swatches are painted next to `--sf-color-*` entries in the Bricks variable-picker dropdown (builder-side only — see Variable-Picker Swatches above). Defaults to `true`. Returning `false` also skips localising the hex map, so no extra data is sent to the builder.
@@ -122,6 +99,20 @@ Filter the CSS variables array before registration with Bricks.
 ```php
 add_filter( 'slashed_bricks/registered_variables', function( $variables ) {
     // Remove z-index variables.
+    unset( $variables['Z-Index'] );
+    return $variables;
+} );
+```
+
+#### `slashed_bricks/variables`
+
+Filter the raw grouped variable map (category label → `--sf-*` names) before
+it is turned into Bricks entries. Lower-level than `registered_variables`,
+which filters the final entry array.
+
+```php
+add_filter( 'slashed_bricks/variables', function( $variables ) {
+    // Drop an entire category from every surface (pickers + autocomplete).
     unset( $variables['Z-Index'] );
     return $variables;
 } );
@@ -153,20 +144,6 @@ add_filter( 'slashed_bricks/inventory_local_path', function() {
 } );
 ```
 
-#### `slashed_bricks/color_categories`
-
-Filter which color categories to include in the palette.
-
-```php
-add_filter( 'slashed_bricks/color_categories', function( $categories ) {
-    // Only include primary and secondary brand palettes.
-    return array_intersect_key( $categories, array_flip( [
-        'SLASHED Primary',
-        'SLASHED Secondary',
-    ] ) );
-} );
-```
-
 ## Architecture
 
 ```
@@ -182,7 +159,6 @@ integrations/bricks/
   includes/class-enqueue.php    CSS enqueue for frontend + editor iframe
   includes/class-variables.php  Variable registration for builder pickers
   includes/class-classes.php    Class registration for autocomplete
-  includes/class-colors.php     Color palette synchronization
   assets/editor.css             Minimal editor panel styling
   README.md                     This file
 ```
@@ -198,10 +174,6 @@ integrations/bricks/
 4. **Variables** (`class-variables.php`) - Injects framework variables into the Bricks Global Variable Manager (Bricks 1.9.8+) by filtering the `bricks_global_variables` and `bricks_global_variables_categories` options - inject on read, strip on save - so the integration is the single source of truth and the database is never polluted with SLASHED rows. Bricks-registered names use a `slashed-` prefix (`--sf-color-primary` is exposed as `slashed-color-primary` with value `var(--sf-color-primary)`) so Bricks' own generated `:root` CSS chains back to the framework instead of clobbering its theme-aware `--sf-*` definitions. Code editor autocomplete (`bricks/code/get_code_signatures`) surfaces the original `--sf-*` names directly.
 
 5. **Classes** (`class-classes.php`) - Pulls `.sf-*` and `.is-*` class lists from the inventory and injects them into the Bricks Global Class Manager (Bricks 1.9.5+) by filtering the `bricks_global_classes` and `bricks_global_classes_categories` options on the same managed/virtual pattern (inject on read, strip on save). Each entry is shipped with `settings.locked = true` so it lands in the Class Manager's "Locked" filter and can't be accidentally edited. The actual CSS rules still come from the SLASHED bundle.
-
-6. **Colors** (`class-colors.php`) - Pulls every `--sf-color-*` from the inventory, splits them into brand-family palettes (one per brand: Primary, Secondary, Tertiary, Action, Neutral, Base), Status, and Semantic groups, and injects them by filtering the `bricks_color_palette` option on the same managed/virtual pattern. Swatches reference CSS variables (`var(--sf-color-*)`) rather than hardcoded values, so they adapt to theme customization and dark mode.
-
-   **Bricks 2.2+ (Color Manager):** injection is skipped automatically. Bricks 2.2's Color Manager materializes every palette entry into `:root` as a static value (plus a `[data-brx-theme="dark"]` variant), which overrides the framework's adaptive `light-dark()` tokens and freezes dark/light switching. On 2.2+ the tokens are reached through the Variable Manager instead (step 4), which never writes to `:root`. The behavior is gated by `slashed_bricks_supports_color_manager()` and can be overridden with the `slashed_bricks/inject_color_palette` filter (return `true` to force injection, accepting that palette colors become static hex snapshots without dark-mode adaptation).
 
 ### Inventory Resolution Order
 
@@ -224,7 +196,7 @@ npm run bricks:inventory   # only regenerate inventory.json
 
 ## CSS Bundle
 
-By default, the plugin loads `dist/slashed.optimal.css` from the jsDelivr CDN, pinned to an immutable release tag (e.g. `https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@v0.5.0-beta5/dist/slashed.optimal.css`). Pinning to a tag (rather than `@main`) ensures the served CSS cannot change outside a plugin release, which is important for reproducibility and supply-chain safety - jsDelivr treats commit/tag refs as effectively immutable, whereas branch refs follow the moving branch tip with a short cache window. The pinned ref lives in the `SLASHED_BRICKS_CSS_REF` constant in `slashed-bricks.php` and is bumped with each plugin release.
+By default, the plugin loads `dist/slashed.optimal.css` from the jsDelivr CDN, pinned to an immutable ref so the served CSS cannot change outside a plugin release (jsDelivr treats commit/tag refs as effectively immutable, whereas branch refs follow the moving branch tip with a short cache window). The pinned ref depends on how the integration runs: in **standalone** mode the URL is built from the dist-branch commit SHA in the `SLASHED_BRICKS_DIST_SHA` constant (e.g. `https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@<commit-sha>/dist/slashed.optimal.css`); under the **unified** SLASHED plugin the shared loader pins to the release tag in `SLASHED_CSS_REF` (e.g. `https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@v0.5.21/dist/slashed.optimal.css`). Both constants are bumped with each plugin release.
 
 This means the plugin works out of the box without copying any CSS files locally.
 

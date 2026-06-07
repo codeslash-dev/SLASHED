@@ -93,8 +93,9 @@ changed += sync(
 ) ? 1 : 0;
 
 // SLASHED_BRICKS_DIST_SHA — dist branch commit SHA used for the CDN URL.
-// NOT updated here; managed by the version-sync GitHub Actions workflow which
-// pushes CSS to the dist branch and captures the resulting commit SHA.
+// Propagated from the canonical SLASHED_DIST_SHA (slashed.php) below, so the
+// three integration copies never drift. (The literal must physically exist in
+// each integration file so it stays self-contained as a standalone plugin.)
 
 // ── integrations/gutenberg/slashed-gutenberg.php ───────────────────────────
 changed += sync(
@@ -118,8 +119,8 @@ changed += sync(
   `SLASHED_GUTENBERG_CSS_REF = '${versionTag}'`
 ) ? 1 : 0;
 
-// SLASHED_DIST_SHA and SLASHED_GUTENBERG_DIST_SHA are NOT updated here;
-// managed by the version-sync GitHub Actions workflow.
+// SLASHED_DIST_SHA and SLASHED_GUTENBERG_DIST_SHA are propagated from the
+// canonical slashed.php value in the dedicated DIST_SHA sync block below.
 
 // ── docs/roadmap.md ─────────────────────────────────────────────────────────
 changed += sync(
@@ -136,6 +137,39 @@ changed += sync(
   new RegExp(`(cdn\\.jsdelivr\\.net/gh/codeslash-dev/SLASHED@)v${SEMVER_RE.source}(/dist/)`),
   `$1${versionTag}$2`,
   `Bricks README CDN example = ${versionTag}`
+) ? 1 : 0;
+
+// ── plugins/SLASHED-for-WP/readme.txt ───────────────────────────────────────
+// WordPress.org plugin header — "Stable tag" must be a concrete version.
+changed += sync(
+  'plugins/SLASHED-for-WP/readme.txt',
+  /^Stable tag: .+$/m,
+  `Stable tag: ${version}`,
+  `readme.txt Stable tag = ${version}`
+) ? 1 : 0;
+
+// ── DIST_SHA propagation ────────────────────────────────────────────────────
+// slashed.php holds the canonical SLASHED_DIST_SHA. Mirror it into the two
+// integration entry points so all three stay in lockstep without manual edits.
+const distShaMatch = readFile('plugins/SLASHED-for-WP/slashed.php')
+  .match(/define\(\s*'SLASHED_DIST_SHA',\s*'([^']+)'\s*\)/);
+if (!distShaMatch) {
+  throw new Error('version-sync: could not read canonical SLASHED_DIST_SHA from slashed.php');
+}
+const distSha = distShaMatch[1];
+
+changed += sync(
+  'plugins/SLASHED-for-WP/integrations/bricks/slashed-bricks.php',
+  /define\(\s*'SLASHED_BRICKS_DIST_SHA',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_BRICKS_DIST_SHA', '${distSha}' )`,
+  `SLASHED_BRICKS_DIST_SHA = ${distSha}`
+) ? 1 : 0;
+
+changed += sync(
+  'plugins/SLASHED-for-WP/integrations/gutenberg/slashed-gutenberg.php',
+  /define\(\s*'SLASHED_GUTENBERG_DIST_SHA',\s*'[^']+'\s*\)/,
+  `define( 'SLASHED_GUTENBERG_DIST_SHA', '${distSha}' )`,
+  `SLASHED_GUTENBERG_DIST_SHA = ${distSha}`
 ) ? 1 : 0;
 
 // ── Summary ─────────────────────────────────────────────────────────────────

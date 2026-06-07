@@ -146,17 +146,24 @@ class Slashed_Token_Page {
 	 * @return array
 	 */
 	public static function get_class_hints() {
-		$path = defined( 'SLASHED_PATH' )
-			? SLASHED_PATH . 'data/classes-hints.json'
-			: SLASHED_BRICKS_PATH . '../../data/classes-hints.json';
+		// Resolve the shared data/ dir from whichever entry point is loaded.
+		// Unified defines SLASHED_PATH; standalone integrations define their own
+		// base two levels below the plugin root (integrations/<builder>/).
+		if ( defined( 'SLASHED_PATH' ) ) {
+			$path = SLASHED_PATH . 'data/classes-hints.json';
+		} elseif ( defined( 'SLASHED_BRICKS_PATH' ) ) {
+			$path = dirname( SLASHED_BRICKS_PATH, 2 ) . '/data/classes-hints.json';
+		} elseif ( defined( 'SLASHED_GUTENBERG_PATH' ) ) {
+			$path = dirname( SLASHED_GUTENBERG_PATH, 2 ) . '/data/classes-hints.json';
+		} else {
+			return array();
+		}
+
 		if ( ! file_exists( $path ) ) {
 			return array();
 		}
-		$json = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		if ( false === $json ) {
-			return array();
-		}
-		$data = json_decode( $json, true );
+
+		$data = wp_json_file_decode( $path, array( 'associative' => true ) );
 		return is_array( $data ) ? $data : array();
 	}
 

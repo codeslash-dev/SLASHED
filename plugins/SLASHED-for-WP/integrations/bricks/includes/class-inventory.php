@@ -722,18 +722,15 @@ class Slashed_Bricks_Inventory {
 	private static function fallback_inventory() {
 		$path = SLASHED_BRICKS_PATH . 'data/inventory.json';
 		if ( file_exists( $path ) ) {
-			$json = @file_get_contents( $path );
-			if ( is_string( $json ) && '' !== $json ) {
-				$decoded = json_decode( $json, true );
-				if ( is_array( $decoded )
-					&& isset( $decoded['variables'], $decoded['sf_classes'], $decoded['is_classes'] )
-				) {
-					return array(
-						'variables'  => array_values( $decoded['variables'] ),
-						'sf_classes' => array_values( $decoded['sf_classes'] ),
-						'is_classes' => array_values( $decoded['is_classes'] ),
-					);
-				}
+			$decoded = wp_json_file_decode( $path, array( 'associative' => true ) );
+			if ( is_array( $decoded )
+				&& isset( $decoded['variables'], $decoded['sf_classes'], $decoded['is_classes'] )
+			) {
+				return array(
+					'variables'  => array_values( $decoded['variables'] ),
+					'sf_classes' => array_values( $decoded['sf_classes'] ),
+					'is_classes' => array_values( $decoded['is_classes'] ),
+				);
 			}
 		}
 
