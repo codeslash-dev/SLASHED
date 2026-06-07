@@ -27,22 +27,21 @@
 } );`,
     },
     {
-      name: 'slashed_bricks/registered_colors',
-      description: 'Filter the colors array before registration with Bricks.',
-      params: '$colors (array) - Array of color definitions with name, value, and category.',
-      example: `add_filter( 'slashed_bricks/registered_colors', function( $colors ) {
-    // Only keep brand colors, remove semantic.
-    return array_filter( $colors, function( $color ) {
-        return strpos( $color['category'], 'Semantic' ) === false;
-    } );
-} );`,
-    },
-    {
       name: 'slashed_bricks/registered_variables',
       description: 'Filter the CSS variables array before registration with Bricks.',
       params: '$variables (array) - Associative array keyed by category label.',
       example: `add_filter( 'slashed_bricks/registered_variables', function( $variables ) {
     // Remove z-index variables.
+    unset( $variables['Z-Index'] );
+    return $variables;
+} );`,
+    },
+    {
+      name: 'slashed_bricks/variables',
+      description: 'Filter the raw grouped variable map (category label → --sf-* names) before it is turned into Bricks entries. Lower-level than registered_variables.',
+      params: '$variables (array) - Map of category label to array of --sf-* names.',
+      example: `add_filter( 'slashed_bricks/variables', function( $variables ) {
+    // Drop a whole category from pickers + autocomplete.
     unset( $variables['Z-Index'] );
     return $variables;
 } );`,
@@ -66,16 +65,18 @@ add_filter( 'slashed_bricks/inventory_local_path', function() {
 } );`,
     },
     {
-      name: 'slashed_bricks/color_categories',
-      description: 'Filter which color categories to include in the Bricks palette.',
-      params: '$categories (array) - Associative array of category name to color entries.',
-      example: `add_filter( 'slashed_bricks/color_categories', function( $categories ) {
-    // Only include primary and secondary brand palettes.
-    return array_intersect_key( $categories, array_flip( [
-        'SLASHED Primary',
-        'SLASHED Secondary',
-    ] ) );
-} );`,
+      name: 'slashed_bricks/show_color_swatches',
+      description: 'Toggle the colour squares painted next to --sf-color-* entries in the Bricks variable-picker dropdown (builder-side only). Defaults to true.',
+      params: '$show (bool) - Whether to paint the picker swatches.',
+      example: `// Hide the variable-picker swatches.
+add_filter( 'slashed_bricks/show_color_swatches', '__return_false' );`,
+    },
+    {
+      name: 'slashed_bricks/show_color_panel',
+      description: 'Toggle the in-builder Color System Panel and its launcher pill. Defaults to true.',
+      params: '$show (bool) - Whether to load the Color System Panel.',
+      example: `// Hide the Color System panel.
+add_filter( 'slashed_bricks/show_color_panel', '__return_false' );`,
     },
   ];
 

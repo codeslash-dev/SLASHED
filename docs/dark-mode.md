@@ -57,7 +57,7 @@ correctly — not just `color-scheme`:
 
 Works on any element: `<section>`, `<aside>`, `<div>`, `<article>`, etc.
 Requires browsers that support CSS relative colour syntax (Chrome 119+,
-Safari 17.2+, Firefox 128+). Older browsers fall back to root colours
+Safari 16.4+, Firefox 128+). Older browsers fall back to root colours
 gracefully — no visible breakage.
 
 ## 4. A light card inside a dark page
@@ -152,6 +152,6 @@ mode in one element:
   `<picture>` + `prefers-color-scheme`, or dim with a token-driven overlay.
 - **Older browsers (pre-2023) skip section-level theming.** The re-declaration
   block is gated behind `@supports (color: oklch(from red l c h))`. Browsers
-  that predate relative colour syntax (Chrome < 119, Safari < 17.2, FF < 128)
+  that predate relative colour syntax (Chrome < 119, Safari < 16.4, FF < 128)
   will still have `color-scheme` and `--sf-is-dark` set correctly — only the
   explicit token values fall back to the root's values.

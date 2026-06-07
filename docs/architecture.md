@@ -379,7 +379,8 @@ not down-level modern colour syntax (no `targets`), so `light-dark()` and
 `oklch(from …)` survive. `npm run build` reports raw/gzip/brotli sizes.
 Custom hand-built bundles must load `core/layers.css` first.
 
-Five tiered bundles are declared in `bundle.config.json` and built by
+Five tiered bundles — each also emitted as a layer-flattened `.flat` variant,
+so `bundle.config.json` lists ten outputs in total — are built by
 `scripts/bundle.js`:
 
 | Bundle | Adds to essential |

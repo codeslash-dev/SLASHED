@@ -127,6 +127,47 @@ canonical name that will ship when the class activates.
 
 ---
 
+## SLASHED 0.4.x → current (pre-freeze cleanup)
+
+Ahead of the token-API freeze, the unreleased line completes the pre-freeze
+cleanup. The only consumer-visible changes are two source-token **renames** and
+one removal — there are no other renamed tokens; everything else is additive.
+
+### Tokens renamed
+
+| Was | Now | Notes |
+|---|---|---|
+| `--sf-color-surface-light` / `-dark` | `--sf-color-base-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base` but **keeps a compat alias**, so the old name still resolves. |
+| `--sf-color-well` | `--sf-color-inset` | Renamed to communicate the recessed / indented surface role. `--sf-color-well` is removed (no alias). |
+
+**The resolved semantic token `--sf-color-surface` (the page-surface anchor)
+is unchanged** — only the underlying *source* family prefix changed. If you
+only ever consumed `var(--sf-color-surface)`, nothing changes. If you
+**overrode** `--sf-color-surface-light` / `--sf-color-surface-dark` to rebrand
+the page surface, rename those overrides to `--sf-color-base-light` / `-dark`.
+
+### Tokens removed
+
+| Removed | Replacement |
+|---|---|
+| `--sf-color-{success,warning,error,info,danger}-{50…950}` | The numeric ramp for status families is gone. Status colours are functional — use the `subtle` / `muted` / base / `strong` aliases, or derive a step with `color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-surface))`. Brand families keep their full numeric scale via `optional/tokens.palette.css`. |
+
+### What's new (additive — no action needed)
+
+- Macros: `.sf-content-auto`, `.sf-tabular-nums`, `.sf-scrim` / `.sf-text-protect`,
+  `.sf-focus-shadow`, `.sf-link--subtle` / `.sf-link--reverse`, divider modifiers
+  (`--soft` / `--strong` / `--dashed` / `--dotted` / `--gradient`).
+- New optional module `optional/tokens.sizes-extended.css` (spacing/typography
+  bridge scales + per-text-size sub-properties), included at `optimal`+.
+- Contextual on-surface colour cascade for `.sf-surface--*` variants.
+- Colour anchors `--sf-color-white` / `--sf-color-black`, border shorthands
+  (`--sf-border`, `-subtle`, `-strong`), object-fit/position and multi-column
+  tokens.
+
+See [`CHANGELOG.md`](../CHANGELOG.md) for the full list under *Unreleased*.
+
+---
+
 ## From other frameworks
 
 SLASHED is **token + BEM**, not utility-first and not classless — so

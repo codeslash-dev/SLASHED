@@ -3,8 +3,8 @@
  * Plugin Name: SLASHED
  * Plugin URI: https://github.com/codeslash-dev/SLASHED
  * Description: SLASHED cascade-layer CSS framework for WordPress. Activate integrations per builder from the settings page (Bricks, Gutenberg — more coming).
- * Version: 0.5.0-beta5
- * Author: SLASHED
+ * Version: 0.5.21
+ * Author: jackgranatowski
  * Author URI: https://github.com/codeslash-dev/SLASHED
  * License: MIT
  * Requires PHP: 7.4
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ─── Canonical constants ──────────────────────────────────────────────────────
 
-define( 'SLASHED_VERSION',  '0.5.0-beta5' );
+define( 'SLASHED_VERSION',  '0.5.21' );
 define( 'SLASHED_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'SLASHED_URL',      plugin_dir_url( __FILE__ ) );
 
@@ -26,17 +26,19 @@ define( 'SLASHED_URL',      plugin_dir_url( __FILE__ ) );
  * Semver tag — version comparison / update detection only.
  * CDN URLs use the dist-branch SHA below (immutable).
  */
-define( 'SLASHED_CSS_REF',  'v0.5.0-beta5' );
+define( 'SLASHED_CSS_REF',  'v0.5.21' );
 
 /**
  * HEAD commit SHA of the `dist` branch at the time of the last release.
  * jsDelivr treats commit SHAs as immutable (cached forever).
  * Updated automatically by the version-sync workflow on every release.
  *
- * Integration plugin files that define their own SLASHED_{BUILDER}_DIST_SHA
- * should mirror this value. They are intentionally kept in sync rather than
- * pointing here (via a constant reference) so each integration file remains
- * self-contained and distributable as a standalone plugin.
+ * Integration plugin files define their own SLASHED_{BUILDER}_DIST_SHA holding
+ * the same value, so each integration stays self-contained and distributable as
+ * a standalone plugin (they cannot reference this constant — it isn't defined in
+ * standalone mode). They are NOT maintained by hand: scripts/version-sync.js
+ * reads this canonical value and propagates it to both integration files, so the
+ * three never drift.
  */
 define( 'SLASHED_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
 

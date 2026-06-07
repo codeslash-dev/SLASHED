@@ -3,12 +3,12 @@
  * Plugin Name: SLASHED for Bricks
  * Plugin URI: https://github.com/codeslash-dev/SLASHED
  * Description: Integrates the SLASHED cascade-layer CSS framework with Bricks Builder - providing CSS variables, utility classes, and color palette synchronization.
- * Version: 0.5.0-beta5
- * Author: SLASHED
+ * Version: 0.5.21
+ * Author: jackgranatowski
  * Author URI: https://github.com/codeslash-dev/SLASHED
  * License: MIT
  * Requires PHP: 7.4
- * Requires at least: 6.0
+ * Requires at least: 6.4
  * Text Domain: slashed-bricks
  */
 
@@ -25,10 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * the standalone Bricks plugin and the unified SLASHED plugin are active.
  */
 if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
-    define( 'SLASHED_BRICKS_VERSION', '0.5.0-beta5' );
+    define( 'SLASHED_BRICKS_VERSION', '0.5.21' );
     define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
     define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
-    define( 'SLASHED_BRICKS_CSS_REF', 'v0.5.0-beta5' );
+    define( 'SLASHED_BRICKS_CSS_REF', 'v0.5.21' );
     define( 'SLASHED_BRICKS_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
 }
 
@@ -227,11 +227,11 @@ function slashed_bricks_require_data_classes() {
 /**
  * Data managers: early initialization at plugins_loaded.
  *
- * Bricks' Database::__construct() reads bricks_global_variables,
- * bricks_global_classes, and bricks_color_palette via get_option() during
- * theme functions.php load — which happens AFTER plugins_loaded but BEFORE
- * after_setup_theme. Registering our option filters here guarantees they are
- * in place when Bricks reads those options for the first time.
+ * Bricks' Database::__construct() reads bricks_global_variables and
+ * bricks_global_classes via get_option() during theme functions.php load —
+ * which happens AFTER plugins_loaded but BEFORE after_setup_theme.
+ * Registering our option filters here guarantees they are in place when
+ * Bricks reads those options for the first time.
  *
  * Runs unconditionally: if Bricks is not the active theme the option filters
  * simply never fire, which is harmless.
@@ -353,6 +353,8 @@ function slashed_bricks_run_version_check() {
 	}
 
 	// Versions are returned newest-first. Find the latest semver entry (X.Y.Z or vX.Y.Z).
+	// Anchored stable-only match — kept identical to
+	// Slashed_Framework_Updater::get_latest_version() so both update detectors agree.
 	$latest = null;
 	foreach ( $body['versions'] as $entry ) {
 		$ver = isset( $entry['version'] ) ? ltrim( (string) $entry['version'], 'v' ) : '';

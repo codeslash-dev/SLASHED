@@ -60,6 +60,22 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/)
 (`feat:`, `fix:`, `docs:`, …) — `commitlint` runs via git hooks, and
 `CHANGELOG.md` follows [Keep a Changelog](https://keepachangelog.com/).
 
+## Releasing
+
+`CHANGELOG.md` is maintained by hand (not auto-generated from commits). The
+release pipeline reads the matching `## [x.y.z]` section, so keep it accurate:
+
+1. Move the accumulated `## [Unreleased]` entries under a new
+   `## [x.y.z] - YYYY-MM-DD` heading and leave a fresh empty `## [Unreleased]`.
+2. Run `npm run release` (patch), `npm run release:minor`, or
+   `npm run release:major`. This bumps `package.json`, runs
+   `scripts/version-sync.js` (propagates the version to the PHP plugins,
+   `docs/roadmap.md`, the Bricks README CDN example, and `readme.txt`'s
+   `Stable tag`), rebuilds bundles, commits, tags, and pushes.
+3. The pushed tag triggers `release.yml` (GitHub Release + dist assets) and the
+   release event triggers `version-sync.yml` (publishes the `dist` branch and
+   writes the captured commit SHA into the `SLASHED_*_DIST_SHA` constants).
+
 ## Scope
 
 SLASHED deliberately rejects some additions (utility-class proliferation, a 7th

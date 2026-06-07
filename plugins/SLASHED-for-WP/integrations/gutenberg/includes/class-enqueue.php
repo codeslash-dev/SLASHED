@@ -39,35 +39,52 @@ class Slashed_Gutenberg_Enqueue {
 	 * site editor (FSE). Styles registered here are injected directly into
 	 * the editor iframe so they affect the editing canvas, not the
 	 * surrounding wp-admin chrome.
+	 *
+	 * In unified mode the shared Slashed_Core_Enqueue already enqueues the
+	 * `slashed-framework` handle on this hook (at an earlier priority), so this
+	 * method only layers the dark-mode bridge on top — avoiding a redundant
+	 * second registration of the same handle. In standalone mode this class
+	 * owns the bundle enqueue.
 	 */
 	public function enqueue_editor_styles() {
-		$css_url = slashed_gutenberg_get_css_url();
-		if ( '' === $css_url ) {
-			return;
+		if ( ! class_exists( 'Slashed_Core_Enqueue' ) ) {
+			$css_url = slashed_gutenberg_get_css_url();
+			if ( '' === $css_url ) {
+				return;
+			}
+			wp_enqueue_style(
+				'slashed-framework',
+				$css_url,
+				array(),
+				$this->get_version( $css_url )
+			);
 		}
 
-		wp_enqueue_style(
-			'slashed-framework',
-			$css_url,
-			array(),
-			$this->get_version( $css_url )
-		);
-
 		// Bridge the Gutenberg dark-mode toggle to SLASHED's theme system.
-		wp_add_inline_style(
-			'slashed-framework',
-			'@layer slashed.themes{html[data-wp-dark-mode-active]{color-scheme:dark;--sf-is-dark:1}}'
-		);
+		// Attaches to whichever code enqueued the shared handle.
+		if ( wp_style_is( 'slashed-framework', 'enqueued' ) ) {
+			wp_add_inline_style(
+				'slashed-framework',
+				'@layer slashed.themes{html[data-wp-dark-mode-active]{color-scheme:dark;--sf-is-dark:1}}'
+			);
+		}
 	}
 
 	/**
 	 * Load SLASHED CSS on the public frontend.
 	 *
+	 * In unified mode the shared Slashed_Core_Enqueue owns the frontend bundle,
+	 * so this method bails to avoid a duplicate enqueue. In standalone mode it
+	 * enqueues the bundle itself.
+	 *
 	 * Skips the Bricks builder-panel context when Bricks is active:
 	 * loading CSS resets into the builder chrome breaks Bricks' icons.
-	 * The same guard lives in Slashed_Core_Enqueue::enqueue_frontend().
 	 */
 	public function enqueue_frontend_styles() {
+		if ( class_exists( 'Slashed_Core_Enqueue' ) ) {
+			return;
+		}
+
 		if ( function_exists( 'bricks_is_builder_main' ) && bricks_is_builder_main() ) {
 			return;
 		}

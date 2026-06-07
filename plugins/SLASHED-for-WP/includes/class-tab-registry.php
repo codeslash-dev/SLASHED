@@ -84,13 +84,32 @@ class Slashed_Tab_Registry {
 	}
 
 	/**
+	 * Slugs of the sections that are actually persisted to `slashed_tokens`
+	 * and consumed by the CSS generator.
+	 *
+	 * This is the top-level token tabs minus the `misc` *grouping* tab (which
+	 * has no settings of its own — its real, saveable children are the misc
+	 * sections), plus those misc sections (contrast, radius, shadows, …).
+	 *
+	 * @return string[]
+	 */
+	public static function get_saveable_sections() {
+		$tabs = self::get_token_tabs();
+		unset( $tabs['misc'] ); // UI grouping only — never persisted as a section.
+		return array_merge( array_keys( $tabs ), self::get_misc_sections() );
+	}
+
+	/**
 	 * Whether a slug names a token tab (i.e. one that may be saved to the option).
+	 *
+	 * Returns false for the `misc` grouping tab itself — only its concrete
+	 * child sections (and the other top-level sections) are saveable, so a
+	 * `section=misc` write can never land as orphaned, never-emitted data.
 	 *
 	 * @param string $slug Slug to test.
 	 * @return bool
 	 */
 	public static function is_token_tab( $slug ) {
-		$tokens = self::get_token_tabs();
-		return is_string( $slug ) && ( isset( $tokens[ $slug ] ) || in_array( $slug, self::get_misc_sections(), true ) );
+		return is_string( $slug ) && in_array( $slug, self::get_saveable_sections(), true );
 	}
 }

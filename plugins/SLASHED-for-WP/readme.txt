@@ -3,7 +3,7 @@ Contributors: jackgranatowski
 Tags: css, bricks, gutenberg, design-tokens, dark-mode
 Requires at least: 6.4
 Tested up to: 7.0
-Stable tag: trunk
+Stable tag: 0.5.21
 Requires PHP: 7.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ SLASHED is an open-source CSS framework built on CSS cascade layers — tokens, 
 
 This plugin loads SLASHED on WordPress and adds builder integrations:
 
-* **Bricks Builder** — ~600 CSS variables in Global Variables, color palette sync, class autocomplete, reBEMer (BEM class manager in the structure panel)
+* **Bricks Builder** — ~600 CSS variables in Global Variables, in-builder color browser, class autocomplete, reBEMer (BEM class manager in the structure panel)
 * **Gutenberg** — color token sync with the block editor palette
 
 The framework CSS is bundled locally. Update it from the settings page or switch to CDN and pin any version tag.
@@ -41,7 +41,7 @@ SLASHED → Settings → CSS delivery → **Update framework**.
 
 = Can I pin a specific version? =
 
-Yes. Switch to CDN in settings and enter a release tag, e.g. `v0.5.0`.
+Yes. Switch to CDN in settings and enter a release tag, e.g. `v0.5.21`.
 
 = What is reBEMer? =
 

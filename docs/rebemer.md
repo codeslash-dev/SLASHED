@@ -52,6 +52,12 @@ rename cannot silently break unrelated parts of the site. A snapshot
 of the Bricks state is taken before every apply, with a single Cmd-Z
 inside the panel reverting the whole operation.
 
+> This paragraph describes the full v1 design. For what is actually shipped
+> today versus spec-only, see the status table in §0 — the cross-element
+> preflight, transactional snapshot/rollback, and in-panel undo are design
+> targets landing in follow-up PRs; the shipped reference check is the
+> read-only `GET /rebemer/unused` report.
+
 ## 2. Glossary
 
 - **Block** — top-level BEM token. A single word or kebab-case phrase

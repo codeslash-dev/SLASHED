@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+> **Changelog gap:** versions `0.4.0`–`0.5.21` were tagged by CI but their
+> changes were never individually logged here — the changelog stayed at
+> `0.3.0` while everything accumulated under *Unreleased*. The entries below
+> cover all work since `0.3.0`; the next release moves them under its version
+> heading.
+
 ### Added
 
 - **Macro `.sf-content-auto`** (`core/macros.css`) + **`--sf-content-intrinsic-size`**
@@ -144,9 +150,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   structure-panel item; clicking it opens a draggable modal that names a
   block + every descendant element + an optional modifier and applies the
   result as global classes in one transaction. Five operation modes
-  (Add / Rename / Replace / Add Modifier / Migrate ID styles), a REST
-  preflight endpoint that reports cross-element class usage so destructive
-  ops never silently break unrelated elements, snapshot + rollback for
+  (Add / Rename / Replace / Add Modifier / Migrate ID styles), a
+  client-side reference-usage check (via `GET /rebemer/unused`) so destructive
+  ops surface cross-element class usage before they run, snapshot + rollback for
   every apply, an in-panel undo ring buffer, and a reserved-name guard
   against SLASHED's own utility classes. Full design at
   [docs/rebemer.md](docs/rebemer.md). The editor app lives in
