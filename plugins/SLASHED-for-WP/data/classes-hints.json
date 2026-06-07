@@ -532,23 +532,23 @@
     "category": "Macros"
   },
   "sf-surface--primary": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--secondary": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--tertiary": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--action": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--neutral": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--inverse": {
@@ -556,23 +556,23 @@
     "category": "Macros"
   },
   "sf-surface--success": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--warning": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--error": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--info": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-surface--danger": {
-    "description": "Re-derive --sf-shadow-color from each surface's OWN background",
+    "description": "Sets background + auto-flipped foreground in one class. Shadows re-derive from surface background for in-family cast shadows.",
     "category": "Macros"
   },
   "sf-scrim": {
