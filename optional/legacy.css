@@ -5,15 +5,27 @@
    declared before slashed.overrides in layers.css, so user
    overrides always win.
 
+   COLOR FALLBACKS — boundary note
+   ─────────────────────────────────
+   Color fallbacks live in @layer slashed.tokens and @layer slashed.themes
+   (core/tokens.color-fallbacks.css + core/tokens.css). Precomputed sRGB
+   defaults are declared ungated; modern light-dark()/oklch(from…)/color-mix()
+   expressions are gated in @supports blocks so they override the sRGB
+   defaults on capable engines only.
+
+   This file (slashed.legacy) handles only non-color property smoothing:
+   dvh, :focus-visible, scrollbar-gutter. It does NOT provide color
+   fallbacks of any kind.
+
    IMPORTANT — what this file is NOT
    ─────────────────────────────────
    The framework's real support floor is Chrome 123+, Safari 17.5+,
    Firefox 128+ (April–July 2024). That floor is set by the colour
    system: light-dark(), @property with inherits, and the oklch()
-   relative-color form. None of those have a CSS-only fallback, so
-   on any older engine the framework's colours collapse to initial
-   regardless of what this file does. This file does NOT extend
-   the floor below those versions.
+   relative-color form. The Tier-1 color fallbacks in tokens.css and
+   tokens.color-fallbacks.css bridge the gap for engines that support
+   @layer but not all three features (e.g. Chrome 99–122, Safari 15.4–17.4,
+   Firefox 97–127). This file does NOT extend the floor below @layer support.
 
    What this file IS
    ─────────────────
@@ -25,8 +37,6 @@
    below is inert via @supports not (...).
 
    Scope: covers gaps in reset.css, base.css, accessibility.css.
-   oklch()/color-mix()/@property live in tokens.css and have no
-   fallback path here.
    ─────────────────────────────────────────────────── */
 
 @layer slashed.legacy {

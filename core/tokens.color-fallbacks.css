@@ -1,0 +1,86 @@
+/* SLASHED — core/tokens.color-fallbacks.css  (@layer slashed.tokens)
+   HSL-based fallbacks for browsers without light-dark() / oklch(from…) support.
+   Light mode only — dark mode is handled by modern CSS exclusively.
+   Customise by overriding the --sf-*-h / --sf-*-s / --sf-*-l channel variables;
+   the entire derived token tree recomputes automatically, no build step required. */
+
+@layer slashed.tokens {
+  :root {
+    /* ── Source channels — override to apply brand colours ────────────────
+       Values are approximate HSL equivalents of the OKLCH source tokens.    */
+
+    --sf-primary-h:   226;  --sf-primary-s:   99%;  --sf-primary-l:   47%;
+    --sf-secondary-h: 221;  --sf-secondary-s: 45%;  --sf-secondary-l: 12%;
+    --sf-tertiary-h:  268;  --sf-tertiary-s:  84%;  --sf-tertiary-l:  39%;
+    --sf-action-h:    200;  --sf-action-s:   100%;  --sf-action-l:    32%;
+    --sf-neutral-h:   217;  --sf-neutral-s:   11%;  --sf-neutral-l:   42%;
+    --sf-base-h:      211;  --sf-base-s:      27%;  --sf-base-l:      95%;
+    --sf-success-h:   134;  --sf-success-s:  100%;  --sf-success-l:   24%;
+    --sf-warning-h:    42;  --sf-warning-s:  100%;  --sf-warning-l:   45%;
+    --sf-error-h:     352;  --sf-error-s:     93%;  --sf-error-l:     38%;
+    --sf-info-h:      200;  --sf-info-s:     100%;  --sf-info-l:      30%;
+    --sf-danger-h:    340;  --sf-danger-s:   100%;  --sf-danger-l:    35%;
+
+    /* ── Brand resolved ───────────────────────────────────────────────────── */
+
+    --sf-color-primary:   hsl(var(--sf-primary-h)   var(--sf-primary-s)   var(--sf-primary-l));
+    --sf-color-secondary: hsl(var(--sf-secondary-h) var(--sf-secondary-s) var(--sf-secondary-l));
+    --sf-color-tertiary:  hsl(var(--sf-tertiary-h)  var(--sf-tertiary-s)  var(--sf-tertiary-l));
+    --sf-color-action:    hsl(var(--sf-action-h)    var(--sf-action-s)    var(--sf-action-l));
+    --sf-color-neutral:   hsl(var(--sf-neutral-h)   var(--sf-neutral-s)   var(--sf-neutral-l));
+    --sf-color-base:      hsl(var(--sf-base-h)      var(--sf-base-s)      var(--sf-base-l));
+
+    /* ── Status resolved ──────────────────────────────────────────────────── */
+
+    --sf-color-success: hsl(var(--sf-success-h) var(--sf-success-s) var(--sf-success-l));
+    --sf-color-warning: hsl(var(--sf-warning-h) var(--sf-warning-s) var(--sf-warning-l));
+    --sf-color-error:   hsl(var(--sf-error-h)   var(--sf-error-s)   var(--sf-error-l));
+    --sf-color-info:    hsl(var(--sf-info-h)    var(--sf-info-s)    var(--sf-info-l));
+    --sf-color-danger:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  var(--sf-danger-l));
+
+    /* ── Status strong (darker variant) ──────────────────────────────────── */
+
+    --sf-color-success-strong: hsl(var(--sf-success-h) var(--sf-success-s) calc(var(--sf-success-l) - 8%));
+    --sf-color-warning-strong: hsl(var(--sf-warning-h) var(--sf-warning-s) calc(var(--sf-warning-l) - 15%));
+    --sf-color-error-strong:   hsl(var(--sf-error-h)   var(--sf-error-s)   calc(var(--sf-error-l) - 6%));
+    --sf-color-info-strong:    hsl(var(--sf-info-h)    var(--sf-info-s)    calc(var(--sf-info-l) - 8%));
+    --sf-color-danger-strong:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  calc(var(--sf-danger-l) - 8%));
+
+    /* ── Surfaces (base-derived) ──────────────────────────────────────────── */
+
+    --sf-color-bg:    hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 2%));
+    --sf-color-inset: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) - 3%));
+    --sf-color-raised: hsl(var(--sf-base-h) var(--sf-base-s) calc(var(--sf-base-l) + 4%));
+
+    /* ── Text (neutral-derived) ───────────────────────────────────────────── */
+
+    --sf-color-text:            hsl(var(--sf-neutral-h) 15%  12%);
+    --sf-color-text--secondary:  hsl(var(--sf-neutral-h) 10%  35%);
+    --sf-color-heading:          hsl(var(--sf-neutral-h) 20%   8%);
+
+    /* ── Borders (neutral-derived) ────────────────────────────────────────── */
+
+    --sf-color-border:         hsl(var(--sf-neutral-h)  8% 85%);
+    --sf-color-border--subtle:  hsl(var(--sf-neutral-h)  5% 91%);
+    --sf-color-border--strong:  hsl(var(--sf-neutral-h) 14% 70%);
+
+    /* ── Links (action-derived) ───────────────────────────────────────────── */
+
+    --sf-color-link: hsl(var(--sf-action-h) var(--sf-action-s) calc(var(--sf-action-l) - 5%));
+
+    /* ── Selection ────────────────────────────────────────────────────────── */
+
+    --sf-color-selection-bg: hsl(var(--sf-action-h) var(--sf-action-s) var(--sf-action-l) / 0.28);
+
+    /* ── Shadows (neutral-derived) ────────────────────────────────────────── */
+
+    --sf-shadow-xs: 0 1px 2px 0
+                    hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-s:  0 1px 3px 0 hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 1px 2px -1px hsl(var(--sf-neutral-h) 20% 10% / 0.10);
+    --sf-shadow-m:  0 4px 6px -1px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 2px 4px -2px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+    --sf-shadow-l:  0 10px 15px -3px hsl(var(--sf-neutral-h) 20% 10% / 0.10),
+                    0 4px 6px -4px hsl(var(--sf-neutral-h) 20% 10% / 0.06);
+  }
+}
