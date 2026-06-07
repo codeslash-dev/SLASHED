@@ -309,6 +309,7 @@ function colorSwatch(sw) {
     class: `${NS}-swatch${sw.alpha ? ' is-alpha' : ''}`,
     type: 'button',
     title: `${sw.name}\n${hex}\nClick: apply as ${state.target} · Alt-click: copy var()`,
+    'aria-label': `${sw.label} (${hex})`,
     onclick: (e) => {
       const value = swatchValue(sw);
       if (e.altKey) return doCopy(value);
@@ -459,8 +460,12 @@ function emptyState(msg) {
 }
 
 async function doCopy(value) {
-  const ok = await copyToClipboard(value);
-  toast(ok ? `Copied ${value}` : 'Copy failed');
+  try {
+    const ok = await copyToClipboard(value);
+    toast(ok ? `Copied ${value}` : 'Copy failed');
+  } catch {
+    toast('Copy failed');
+  }
 }
 
 function toast(msg) {

@@ -240,7 +240,7 @@ class Slashed_Inventory {
 
 		$inv = self::get();
 
-		$color_values = isset( $inv['color_values'] ) ? $inv['color_values'] : array();
+		$color_values = $inv['color_values'] ?? array();
 
 		// Merge admin-saved color overrides so palette swatches reflect
 		// customized colors instead of always showing framework defaults.
@@ -269,7 +269,7 @@ class Slashed_Inventory {
 
 		$inv = self::get();
 
-		$color_values = isset( $inv['color_values'] ) ? $inv['color_values'] : array();
+		$color_values = $inv['color_values'] ?? array();
 
 		// Merge admin-saved color overrides so dark previews track the same
 		// customized -light source tokens the light map uses.

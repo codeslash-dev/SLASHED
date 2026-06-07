@@ -374,8 +374,10 @@ export function filterModel(model, query) {
 
   const groups = [];
   for (const group of model.groups) {
+    if (!Array.isArray(group.sections)) continue;
     const sections = [];
     for (const section of group.sections) {
+      if (!Array.isArray(section.swatches)) continue;
       const swatches = section.swatches.filter(
         (s) => s.name.toLowerCase().includes(q) || s.label.toLowerCase().includes(q) || group.label.toLowerCase().includes(q)
       );
