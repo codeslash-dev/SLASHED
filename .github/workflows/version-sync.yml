@@ -117,6 +117,12 @@ jobs:
           sed -i \
             "s|define( 'SLASHED_DIST_SHA', '[^']*' )|define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )|" \
             plugins/SLASHED-for-WP/slashed.php
+          # Hard-fail if the substitution did not land (sed exits 0 even on no-op,
+          # e.g. if the define format ever changes) so we never propagate a stale SHA.
+          if ! grep -Fq "define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )" plugins/SLASHED-for-WP/slashed.php; then
+            echo "Failed to update SLASHED_DIST_SHA in plugins/SLASHED-for-WP/slashed.php" >&2
+            exit 1
+          fi
           node scripts/version-sync.js
 
       - name: Commit and push if anything changed
