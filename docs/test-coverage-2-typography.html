@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLASHED Coverage 2 — Typography &amp; Tokens</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.full.css">
+
+  <style>
+    :root {
+      --sf-color-primary-light:   oklch(0.55 0.22 160);
+      --sf-color-secondary-light: oklch(0.28 0.06 160);
+      --sf-color-tertiary-light:  oklch(0.58 0.18 30);
+      --sf-color-action-light:    oklch(0.52 0.20 290);
+      --sf-color-neutral-light:   oklch(0.48 0.02 200);
+      --sf-color-base-light:      oklch(0.98 0.005 200);
+      --sf-color-success-light:   oklch(0.55 0.18 155);
+      --sf-color-warning-light:   oklch(0.78 0.16 75);
+      --sf-color-error-light:     oklch(0.52 0.22 18);
+      --sf-color-info-light:      oklch(0.50 0.16 250);
+      --sf-color-danger-light:    oklch(0.46 0.24 5);
+    }
+    body { background: var(--sf-color-bg); color: var(--sf-color-text); }
+    .demo-header {
+      position: sticky; top: 0; z-index: var(--sf-z-mid);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--sf-space-m); flex-wrap: wrap;
+      padding: var(--sf-space-s) var(--sf-space-l);
+      background: var(--sf-color-surface); border-bottom: 1px solid var(--sf-color-border);
+    }
+    .demo-pagenav { display: flex; gap: var(--sf-space-xs); flex-wrap: wrap; font-size: var(--sf-text-s); }
+    .demo-pagenav a {
+      padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s);
+      color: var(--sf-color-text--secondary); text-decoration: none; border: 1px solid var(--sf-color-border);
+    }
+    .demo-pagenav a[aria-current="page"] { background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-color: transparent; }
+    #theme-toggle {
+      padding: var(--sf-space-xs) var(--sf-space-m); border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-m); background: var(--sf-color-bg); color: var(--sf-color-text);
+      font-size: var(--sf-text-s); cursor: pointer;
+    }
+    .demo-section { padding: var(--sf-space-xl) var(--sf-space-l); border-top: 1px solid var(--sf-color-border); }
+    .demo-section h2 {
+      font-size: var(--sf-text-2xl); color: var(--sf-color-primary);
+      padding-block-end: var(--sf-space-xs); border-bottom: 2px solid var(--sf-color-primary-200);
+      margin-block-end: var(--sf-space-l);
+    }
+    .demo-section h3 { font-size: var(--sf-text-l); color: var(--sf-color-text--secondary); margin-block: var(--sf-space-l) var(--sf-space-s); }
+    .demo-space-row { display: flex; align-items: center; gap: var(--sf-space-s); padding-block: var(--sf-space-2xs); }
+    .demo-space-label { font-size: var(--sf-text-s); font-family: var(--sf-font-mono); width: 12rem; flex-shrink: 0; color: var(--sf-color-text--muted); }
+    .demo-space-bar { height: 1.25rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-s); min-width: 2px; }
+    .demo-shadow-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+      gap: var(--sf-space-2xl); padding: var(--sf-space-xl);
+      background: var(--sf-color-inset); border-radius: var(--sf-radius-l);
+    }
+    .demo-shadow-card {
+      background: var(--sf-color-surface); border-radius: var(--sf-radius-m);
+      padding: var(--sf-space-m) var(--sf-space-s); text-align: center;
+      font-size: var(--sf-text-xs); font-family: var(--sf-font-mono);
+    }
+    .demo-radius-swatch {
+      width: 6rem; height: 5rem;
+      background: var(--sf-color-primary-200); border: 2px solid var(--sf-color-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--sf-text-2xs); font-family: var(--sf-font-mono);
+      color: var(--sf-color-primary); text-align: center;
+    }
+    .demo-box {
+      padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-primary-200);
+      color: var(--sf-color-primary-800); border-radius: var(--sf-radius-s);
+      font-size: var(--sf-text-s); display: flex; align-items: center; justify-content: center;
+      min-height: 3rem; text-align: center;
+    }
+    .demo-tile { width: 4rem; height: 4rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-s); }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="sr-only-focusable">Skip to main content</a>
+
+  <header class="demo-header">
+    <strong style="font-size: var(--sf-text-l)">SLASHED <span style="color: var(--sf-color-text--muted)">/</span> coverage</strong>
+    <nav class="demo-pagenav" aria-label="Test pages">
+      <a href="test-coverage-1-colors.html">1 · Colors</a>
+      <a href="test-coverage-2-typography.html" aria-current="page">2 · Type &amp; Tokens</a>
+      <a href="test-coverage-3-layout.html">3 · Layout</a>
+      <a href="test-coverage-4-macros-states.html">4 · Macros &amp; States</a>
+      <a href="test-coverage-5-forms-features.html">5 · Forms &amp; Features</a>
+      <a href="test-coverage-6-token-reference.html">6 · All tokens</a>
+    </nav>
+    <button id="theme-toggle" type="button" aria-pressed="false">Toggle dark</button>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══════════════════ TYPOGRAPHY ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Page 2 — Typography &amp; design tokens</h2>
+
+      <h3>Heading elements (base.css h1–h6)</h3>
+      <div style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">
+        <h1 style="margin: 0 0 var(--sf-space-s)">h1 — The quick brown fox</h1>
+        <h2 style="margin: 0 0 var(--sf-space-s); border: none; color: inherit; padding: 0">h2 — The quick brown fox</h2>
+        <h3 style="margin: 0 0 var(--sf-space-s); color: inherit">h3 — The quick brown fox</h3>
+        <h4 style="margin: 0 0 var(--sf-space-s)">h4 — The quick brown fox</h4>
+        <h5 style="margin: 0 0 var(--sf-space-s)">h5 — The quick brown fox</h5>
+        <h6 style="margin: 0">h6 — The quick brown fox</h6>
+      </div>
+
+      <h3>Fluid text scale (--sf-text-*) — resize to see clamp()</h3>
+      <div class="sf-stack sf-stack--xs">
+        <div style="font-size: var(--sf-text-2xs)">2xs — The quick brown fox jumps over the lazy dog</div>
+        <div style="font-size: var(--sf-text-xs)">xs — The quick brown fox jumps over the lazy dog</div>
+        <div style="font-size: var(--sf-text-s)">s — The quick brown fox jumps</div>
+        <div style="font-size: var(--sf-text-m)">m (base) — The quick brown fox</div>
+        <div style="font-size: var(--sf-text-l)">l — The quick brown fox</div>
+        <div style="font-size: var(--sf-text-xl)">xl — The quick brown</div>
+        <div style="font-size: var(--sf-text-2xl)">2xl — The quick</div>
+        <div style="font-size: var(--sf-text-3xl)">3xl — Quick</div>
+        <div style="font-size: var(--sf-text-4xl)">4xl</div>
+        <div style="font-size: var(--sf-text-display-s)">display-s</div>
+        <div style="font-size: var(--sf-text-display-m)">display-m</div>
+        <div style="font-size: var(--sf-text-display-l)">display-l</div>
+      </div>
+
+      <h3>Font weights 100–900</h3>
+      <div class="sf-stack sf-stack--xs">
+        <span style="font-weight: var(--sf-font-weight-thin)">100 thin</span>
+        <span style="font-weight: var(--sf-font-weight-extralight)">200 extralight</span>
+        <span style="font-weight: var(--sf-font-weight-light)">300 light</span>
+        <span style="font-weight: var(--sf-font-weight-normal)">400 normal</span>
+        <span style="font-weight: var(--sf-font-weight-medium)">500 medium</span>
+        <span style="font-weight: var(--sf-font-weight-semibold)">600 semibold</span>
+        <span style="font-weight: var(--sf-font-weight-bold)">700 bold</span>
+        <span style="font-weight: var(--sf-font-weight-extrabold)">800 extrabold</span>
+        <span style="font-weight: var(--sf-font-weight-black)">900 black</span>
+      </div>
+
+      <h3>Semantic weight aliases</h3>
+      <div class="sf-cluster sf-cluster--l" style="align-items: baseline">
+        <span style="font-weight: var(--sf-font-weight-body)">body</span>
+        <span style="font-weight: var(--sf-font-weight-heading)">heading</span>
+        <span style="font-weight: var(--sf-font-weight-display)">display</span>
+      </div>
+
+      <h3>Font stacks</h3>
+      <div class="sf-stack sf-stack--xs">
+        <span style="font-family: var(--sf-font-body)">body — The quick brown fox jumps</span>
+        <span style="font-family: var(--sf-font-heading)">heading — The quick brown fox jumps</span>
+        <span style="font-family: var(--sf-font-display)">display — The quick brown fox jumps</span>
+        <span style="font-family: var(--sf-font-humanist)">humanist — The quick brown fox jumps</span>
+        <span style="font-family: var(--sf-font-geometric)">geometric — The quick brown fox jumps</span>
+        <span style="font-family: var(--sf-font-slab)">slab — The quick brown fox jumps</span>
+        <span style="font-family: var(--sf-font-mono)">mono — The quick brown fox jumps</span>
+      </div>
+
+      <h3>Line heights (--sf-leading-*)</h3>
+      <div class="sf-grid" style="--sf-grid-min: 14rem">
+        <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <code style="font-size: var(--sf-text-xs)">tight (1.1)</code>
+          <p style="line-height: var(--sf-leading-tight); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+        </div>
+        <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <code style="font-size: var(--sf-text-xs)">snug (1.3)</code>
+          <p style="line-height: var(--sf-leading-snug); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+        </div>
+        <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <code style="font-size: var(--sf-text-xs)">normal (1.5)</code>
+          <p style="line-height: var(--sf-leading-normal); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+        </div>
+        <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
+          <code style="font-size: var(--sf-text-xs)">relaxed (1.625)</code>
+          <p style="line-height: var(--sf-leading-relaxed); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do.</p>
+        </div>
+      </div>
+
+      <h3>Letter spacing (--sf-tracking-*)</h3>
+      <div class="sf-stack sf-stack--xs">
+        <div style="letter-spacing: var(--sf-tracking-tight)">tracking-tight — THE QUICK BROWN FOX</div>
+        <div style="letter-spacing: var(--sf-tracking-normal)">tracking-normal — THE QUICK BROWN FOX</div>
+        <div style="letter-spacing: var(--sf-tracking-wide)">tracking-wide — THE QUICK BROWN</div>
+        <div style="letter-spacing: var(--sf-tracking-wider)">tracking-wider — THE QUICK</div>
+        <div style="letter-spacing: var(--sf-tracking-widest)">tracking-widest — QUICK</div>
+      </div>
+
+      <h3>Semantic inline elements + pre</h3>
+      <p>
+        <strong>strong</strong>, <em>em</em>, <mark>mark</mark>, <code>code</code>,
+        <kbd>Ctrl</kbd> + <kbd>C</kbd>, <abbr title="Cascading Style Sheets">CSS</abbr>,
+        H<sub>2</sub>O, E=mc<sup>2</sup>, <small>small</small>,
+        <a href="#main">link</a>, <del>deleted</del>, <ins>inserted</ins>
+      </p>
+      <pre><code>:root {
+  --sf-color-primary-light: oklch(0.55 0.22 160);
+}</code></pre>
+      <blockquote style="border-inline-start: 3px solid var(--sf-color-primary); padding-inline-start: var(--sf-space-m); color: var(--sf-color-text--secondary); margin: 0">
+        A blockquote — select this text to verify selection colour.
+      </blockquote>
+    </section>
+
+    <!-- ═══════════════════ SPACING ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Spacing scale</h2>
+      <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">Fluid tokens use clamp() — resize to animate.</p>
+      <div class="sf-stack sf-stack--xs">
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-none</span><div class="demo-space-bar" style="width: 2px; background: var(--sf-color-border)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-px</span><div class="demo-space-bar" style="width: var(--sf-space-px)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-2xs</span><div class="demo-space-bar" style="width: var(--sf-space-2xs)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-xs</span><div class="demo-space-bar" style="width: var(--sf-space-xs)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-s</span><div class="demo-space-bar" style="width: var(--sf-space-s)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-m</span><div class="demo-space-bar" style="width: var(--sf-space-m)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-l</span><div class="demo-space-bar" style="width: var(--sf-space-l)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-xl</span><div class="demo-space-bar" style="width: var(--sf-space-xl)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-2xl</span><div class="demo-space-bar" style="width: var(--sf-space-2xl)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-3xl</span><div class="demo-space-bar" style="width: var(--sf-space-3xl)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-4xl</span><div class="demo-space-bar" style="width: var(--sf-space-4xl)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-gutter</span><div class="demo-space-bar" style="width: var(--sf-space-gutter)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-gap</span><div class="demo-space-bar" style="width: var(--sf-space-gap)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-space-content</span><div class="demo-space-bar" style="width: var(--sf-space-content)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-gap</span><div class="demo-space-bar" style="width: var(--sf-gap)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-content-gap</span><div class="demo-space-bar" style="width: var(--sf-content-gap)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-component-pad</span><div class="demo-space-bar" style="width: var(--sf-component-pad)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-field-block</span><div class="demo-space-bar" style="width: var(--sf-field-block)"></div></div>
+      </div>
+
+      <h3>Sizes (--sf-size-*) &amp; touch target</h3>
+      <div class="sf-cluster sf-cluster--m" style="align-items: flex-end">
+        <div style="width: var(--sf-size-xs); height: var(--sf-size-xs); background: var(--sf-color-action); border-radius: var(--sf-radius-s)" title="xs"></div>
+        <div style="width: var(--sf-size-s); height: var(--sf-size-s); background: var(--sf-color-action); border-radius: var(--sf-radius-s)" title="s"></div>
+        <div style="width: var(--sf-size-m); height: var(--sf-size-m); background: var(--sf-color-action); border-radius: var(--sf-radius-s)" title="m"></div>
+        <div style="width: var(--sf-size-l); height: var(--sf-size-l); background: var(--sf-color-action); border-radius: var(--sf-radius-s)" title="l"></div>
+        <div style="width: var(--sf-size-xl); height: var(--sf-size-xl); background: var(--sf-color-action); border-radius: var(--sf-radius-s)" title="xl"></div>
+        <div style="width: var(--sf-touch-target); height: var(--sf-touch-target); background: var(--sf-color-tertiary); border-radius: var(--sf-radius-s)" title="touch-target"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SHADOWS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Shadows</h2>
+      <div class="demo-shadow-grid">
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-none)">none</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-xs)">xs</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-s)">s</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-m)">m</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-l)">l</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-xl)">xl</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-2xl)">2xl</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-inner)">inner</div>
+        <div class="demo-shadow-card" style="box-shadow: var(--sf-shadow-glow)">glow</div>
+      </div>
+
+      <h3>Text shadows</h3>
+      <div class="sf-cluster sf-cluster--l" style="font-size: var(--sf-text-xl); font-weight: var(--sf-font-weight-bold)">
+        <span style="text-shadow: var(--sf-text-shadow-none)">none</span>
+        <span style="text-shadow: var(--sf-text-shadow-s)">s</span>
+        <span style="text-shadow: var(--sf-text-shadow-m)">m</span>
+        <span style="text-shadow: var(--sf-text-shadow-l)">l</span>
+      </div>
+
+      <h3>Drop shadows (filter)</h3>
+      <div class="sf-cluster sf-cluster--l" style="align-items: center">
+        <svg width="48" height="48" viewBox="0 0 24 24" style="fill: var(--sf-color-primary); filter: var(--sf-drop-shadow-s)" aria-hidden="true"><path d="M12 2 2 22h20z"/></svg>
+        <svg width="48" height="48" viewBox="0 0 24 24" style="fill: var(--sf-color-tertiary); filter: var(--sf-drop-shadow-m)" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+        <svg width="48" height="48" viewBox="0 0 24 24" style="fill: var(--sf-color-action); filter: var(--sf-drop-shadow-l)" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3"/></svg>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ RADIUS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Border radius</h2>
+      <div class="sf-cluster sf-cluster--l" style="align-items: center">
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-none)">none<br>0</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-xs)">xs<br>2px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-s)">s<br>4px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-m)">m<br>8px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-l)">l<br>12px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-xl)">xl<br>16px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-2xl)">2xl<br>24px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-3xl)">3xl<br>32px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-4xl)">4xl<br>48px</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-full)">full</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-pill)">pill</div>
+        <div class="demo-radius-swatch" style="border-radius: var(--sf-radius-outer)">outer</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ BORDERS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Border widths &amp; styles, strokes</h2>
+      <div class="sf-stack sf-stack--xs">
+        <div style="border-bottom: var(--sf-border-width-hairline) solid var(--sf-color-text); padding: var(--sf-space-2xs)">width-hairline (0.5px)</div>
+        <div style="border-bottom: var(--sf-border-width-1) solid var(--sf-color-text); padding: var(--sf-space-2xs)">width-1 (1px)</div>
+        <div style="border-bottom: var(--sf-border-width-2) solid var(--sf-color-text); padding: var(--sf-space-2xs)">width-2 (2px)</div>
+        <div style="border-bottom: var(--sf-border-width-3) solid var(--sf-color-text); padding: var(--sf-space-2xs)">width-3 (3px)</div>
+        <div style="border-bottom: var(--sf-border-width-4) solid var(--sf-color-text); padding: var(--sf-space-2xs)">width-4 (4px)</div>
+      </div>
+      <h3>Border styles &amp; composed border tokens</h3>
+      <div class="sf-stack sf-stack--xs">
+        <div style="border-bottom: 2px var(--sf-border-style) var(--sf-color-text); padding: var(--sf-space-2xs)">style (solid)</div>
+        <div style="border-bottom: 2px var(--sf-border-style-dotted) var(--sf-color-text); padding: var(--sf-space-2xs)">style-dotted</div>
+        <div style="border-bottom: 2px var(--sf-border-style-soft) var(--sf-color-text); padding: var(--sf-space-2xs)">style-soft (dashed)</div>
+        <div style="border: var(--sf-border); padding: var(--sf-space-2xs)">--sf-border</div>
+        <div style="border: var(--sf-border-strong); padding: var(--sf-space-2xs)">--sf-border-strong</div>
+        <div style="border: var(--sf-border-subtle); padding: var(--sf-space-2xs)">--sf-border-subtle</div>
+      </div>
+      <h3>Stroke widths</h3>
+      <div class="sf-cluster sf-cluster--l" style="align-items: center">
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-thin)"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-regular)"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-bold)"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-heavy)"/></svg>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ BLUR / OPACITY ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Blur &amp; opacity</h2>
+      <h3>Backdrop / filter blur</h3>
+      <div class="sf-cluster sf-cluster--m">
+        <div class="demo-box" style="filter: blur(var(--sf-blur-xs))">xs</div>
+        <div class="demo-box" style="filter: blur(var(--sf-blur-s))">s</div>
+        <div class="demo-box" style="filter: blur(var(--sf-blur-m))">m</div>
+        <div class="demo-box" style="filter: blur(var(--sf-blur-l))">l</div>
+        <div class="demo-box" style="filter: blur(var(--sf-blur-xl))">xl</div>
+      </div>
+      <h3>Opacity tokens</h3>
+      <div class="sf-cluster sf-cluster--m">
+        <div class="demo-tile" style="opacity: var(--sf-opacity-0)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-10)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-25)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-50)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-75)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-100)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-disabled)"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ MOTION TOKENS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Motion tokens (durations, easings, transitions)</h2>
+      <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">Hover a row to trigger the transition; the easing/duration token is named on the left.</p>
+
+      <h3>Durations (hover to move)</h3>
+      <div class="sf-stack sf-stack--xs">
+        <div class="demo-space-row"><span class="demo-space-label">duration-instant</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-instant) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-fast</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-fast) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-normal</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-normal) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-slow</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">duration-slower</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slower) var(--sf-ease-out)"></span></div>
+      </div>
+
+      <h3>Easings (hover to move)</h3>
+      <div class="sf-stack sf-stack--xs">
+        <div class="demo-space-row"><span class="demo-space-label">ease-linear</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-linear)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-in</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-in)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-out</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-in-out</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-in-out)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-spring</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-spring)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-elastic</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-elastic)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-bounce</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-bounce)"></span></div>
+        <div class="demo-space-row"><span class="demo-space-label">ease-overshoot</span><span class="demo-tile demo-dur" style="transition: transform var(--sf-duration-slow) var(--sf-ease-overshoot)"></span></div>
+      </div>
+
+      <h3>Transition tokens (hover the card)</h3>
+      <div class="sf-cluster sf-cluster--m">
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-all)">all</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-colors)">colors</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-transform)">transform</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-opacity)">opacity</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-shadow)">shadow</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-fast)">fast</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-slow)">slow</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-enter)">enter</div>
+        <div class="demo-box demo-trans" style="transition: var(--sf-transition-exit)">exit</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ Z-INDEX / PERSPECTIVE / RATIOS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Z-index, perspective &amp; ratios</h2>
+
+      <h3>Z-index ladder</h3>
+      <div style="position: relative; height: 6rem">
+        <span style="position: absolute; left: 0;   top: 0; z-index: var(--sf-z-below); background: var(--sf-color-neutral-300); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s)">below</span>
+        <span style="position: absolute; left: 2rem; top: 0.5rem; z-index: var(--sf-z-base); background: var(--sf-color-neutral-400); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s)">base</span>
+        <span style="position: absolute; left: 4rem; top: 1rem; z-index: var(--sf-z-raised); background: var(--sf-color-primary-300); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s)">raised</span>
+        <span style="position: absolute; left: 6rem; top: 1.5rem; z-index: var(--sf-z-low); background: var(--sf-color-primary-400); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-primary)">low</span>
+        <span style="position: absolute; left: 8rem; top: 2rem; z-index: var(--sf-z-mid); background: var(--sf-color-action); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-action)">mid</span>
+        <span style="position: absolute; left: 10rem; top: 2.5rem; z-index: var(--sf-z-high); background: var(--sf-color-tertiary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-tertiary)">high</span>
+        <span style="position: absolute; left: 12rem; top: 3rem; z-index: var(--sf-z-top); background: var(--sf-color-secondary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-secondary)">top</span>
+        <span style="position: absolute; left: 14rem; top: 3.5rem; z-index: var(--sf-z-max); background: var(--sf-color-primary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-primary)">max</span>
+      </div>
+
+      <h3>Perspective (near / normal / far)</h3>
+      <div class="sf-cluster sf-cluster--xl" style="padding-block: var(--sf-space-l)">
+        <div style="perspective: var(--sf-perspective-near)"><div style="width: 5rem; height: 5rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-m); transform: rotateY(40deg)"></div></div>
+        <div style="perspective: var(--sf-perspective-normal)"><div style="width: 5rem; height: 5rem; background: var(--sf-color-tertiary); border-radius: var(--sf-radius-m); transform: rotateY(40deg)"></div></div>
+        <div style="perspective: var(--sf-perspective-far)"><div style="width: 5rem; height: 5rem; background: var(--sf-color-action); border-radius: var(--sf-radius-m); transform: rotateY(40deg)"></div></div>
+      </div>
+
+      <h3>Aspect ratios</h3>
+      <div class="sf-cluster sf-cluster--m" style="align-items: flex-end">
+        <div style="width: 8rem; aspect-ratio: var(--sf-ratio-square); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">square</div>
+        <div style="width: 8rem; aspect-ratio: var(--sf-ratio-3-2); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">3:2</div>
+        <div style="width: 8rem; aspect-ratio: var(--sf-ratio-4-3); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">4:3</div>
+        <div style="width: 8rem; aspect-ratio: var(--sf-ratio-video); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">16:9</div>
+        <div style="width: 10rem; aspect-ratio: var(--sf-ratio-cinema); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">21:9</div>
+        <div style="width: 8rem; aspect-ratio: var(--sf-ratio-golden); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">golden</div>
+        <div style="width: 6rem; aspect-ratio: var(--sf-ratio-portrait); background: var(--sf-color-primary-200); border: 1px solid var(--sf-color-primary); display: grid; place-items: center; font-size: var(--sf-text-xs)">3:4</div>
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .demo-dur { transform: translateX(0); }
+    .demo-space-row:hover .demo-dur { transform: translateX(16rem); }
+    .demo-trans:hover { background: var(--sf-color-tertiary); color: var(--sf-color-text--on-tertiary); box-shadow: var(--sf-shadow-l); transform: translateY(-4px); opacity: 0.85; }
+  </style>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      function effective() {
+        if (root.dataset.theme === 'dark' || root.dataset.theme === 'light') return root.dataset.theme;
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function apply(t) {
+        t = (t === 'dark' || t === 'light') ? t : 'light';
+        root.dataset.theme = t;
+        try { localStorage.sfTheme = t; } catch (e) {}
+        btn.setAttribute('aria-pressed', String(t === 'dark'));
+        btn.textContent = t === 'dark' ? 'Toggle light' : 'Toggle dark';
+      }
+      try {
+        if (localStorage.sfTheme === 'dark' || localStorage.sfTheme === 'light') apply(localStorage.sfTheme);
+        else btn.setAttribute('aria-pressed', String(effective() === 'dark'));
+      } catch (e) { btn.setAttribute('aria-pressed', String(effective() === 'dark')); }
+      btn.addEventListener('click', function () {
+        var next = effective() === 'dark' ? 'light' : 'dark';
+        if (document.startViewTransition) document.startViewTransition(function () { apply(next); });
+        else apply(next);
+      });
+    })();
+  </script>
+</body>
+</html>
