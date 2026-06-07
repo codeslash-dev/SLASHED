@@ -266,7 +266,7 @@ class Slashed_Token_Defaults {
 	public static function get_shadows() {
 		return array(
 			'shadow_strength' => 0.08,
-			'glow_color'      => '',
+			'glow_color'      => 'var(--sf-color-primary)',
 		);
 	}
 

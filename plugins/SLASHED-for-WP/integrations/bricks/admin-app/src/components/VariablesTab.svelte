@@ -4,7 +4,7 @@
    * by category. Categories mirror those in class-inventory.php:
    * Colors, Typography, Spacing, Sizing, Layout, Borders, Radius,
    * Shadows, Effects, Motion, Icons, Z-Index, States, Focus, Scroll,
-   * Print, Misc.
+   * Print, Fallback/Legacy, Misc.
    */
   import { meta } from '../lib/stores.svelte.js';
 
@@ -40,13 +40,20 @@
     focus: 'Focus', caret: 'Focus',
     scroll: 'Scroll', scrollbar: 'Scroll',
     print: 'Print',
+    // HSL channel triplets (--sf-{name}-h/-s/-l) backing core/tokens.color-fallbacks.css —
+    // only consumed by the legacy hsl() fallback chain for browsers without
+    // light-dark() / oklch(from …) support.
+    primary: 'Fallback/Legacy', secondary: 'Fallback/Legacy', tertiary: 'Fallback/Legacy',
+    action: 'Fallback/Legacy', neutral: 'Fallback/Legacy', base: 'Fallback/Legacy',
+    success: 'Fallback/Legacy', warning: 'Fallback/Legacy', error: 'Fallback/Legacy',
+    info: 'Fallback/Legacy', danger: 'Fallback/Legacy',
     truncate: 'Misc',
   };
 
   const CATEGORY_ORDER = [
     'Colors', 'Typography', 'Spacing', 'Sizing', 'Layout', 'Borders',
     'Radius', 'Shadows', 'Effects', 'Motion', 'Icons', 'Z-Index',
-    'States', 'Focus', 'Scroll', 'Print', 'Misc',
+    'States', 'Focus', 'Scroll', 'Print', 'Fallback/Legacy', 'Misc',
   ];
 
   /**

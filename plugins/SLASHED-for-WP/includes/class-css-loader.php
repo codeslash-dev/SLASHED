@@ -57,7 +57,7 @@ class Slashed_CSS_Loader {
 		if ( 'cdn' === $source ) {
 			$version = Slashed_Settings::get_cdn_version();
 			$url     = sprintf(
-				'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/dist/%s',
+				'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/plugins/SLASHED-for-WP/dist/%s',
 				rawurlencode( $version ),
 				$filename
 			);

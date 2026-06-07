@@ -254,9 +254,9 @@ function slashed_bricks_data_init() {
     // route registration so the cache is busted on normal admin saves too, not
     // only during REST requests. The collector + transient live in the
     // always-loaded Slashed_Token_Page.
-    if ( defined( 'BRICKS_DB_CUSTOM_FONTS' ) && class_exists( 'Slashed_Token_Page' ) ) {
+    if ( class_exists( 'Slashed_Token_Page' ) ) {
         add_action(
-            'save_post_' . BRICKS_DB_CUSTOM_FONTS,
+            'save_post_' . Slashed_Token_Page::get_bricks_fonts_post_type(),
             array( 'Slashed_Token_Page', 'flush_bricks_fonts_cache' )
         );
     }

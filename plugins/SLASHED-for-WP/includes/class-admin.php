@@ -165,6 +165,11 @@ class Slashed_Admin {
 								<?php esc_html_e( 'CDN (jsDelivr)', 'slashed' ); ?>
 							</label>
 							<div id="slashed-cdn-controls" style="margin-left:22px;margin-top:6px;<?php echo 'cdn' !== $css_source ? 'display:none;' : ''; ?>">
+								<?php if ( 'cdn' === $css_source ) : ?>
+									<p style="margin:0 0 8px;">
+										<span style="color:#3c3;">&#10003; <?php esc_html_e( 'Currently serving:', 'slashed' ); ?> <strong><?php echo esc_html( $cdn_version ); ?></strong></span>
+									</p>
+								<?php endif; ?>
 								<label for="slashed-cdn-version"><?php esc_html_e( 'Version tag:', 'slashed' ); ?></label>
 								<input type="text" id="slashed-cdn-version" name="cdn_version"
 									value="<?php echo esc_attr( $cdn_version ); ?>"
@@ -172,7 +177,7 @@ class Slashed_Admin {
 									style="width:160px;margin-left:6px;">
 								<p class="description" style="margin-top:4px;">
 									<?php esc_html_e( 'Enter a release tag, e.g.', 'slashed' ); ?>
-									<code><?php echo esc_html( SLASHED_CSS_REF ); ?></code>
+									<code><?php echo esc_html( SLASHED_CSS_REF ); ?></code><?php esc_html_e( '. Leave blank to track the version this plugin ships with.', 'slashed' ); ?>
 								</p>
 							</div>
 						</td>

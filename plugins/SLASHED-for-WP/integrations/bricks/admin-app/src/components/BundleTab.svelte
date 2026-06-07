@@ -2,7 +2,12 @@
   import { meta } from '../lib/stores.svelte.js';
   import { saveSettings } from '../lib/api.js';
 
-  let bundle          = $state(meta.pluginSettings?.css_bundle ?? 'optimal');
+  const BUNDLE_LABELS = {
+    essential: 'Essential',
+    optimal:   'Optimal',
+    full:      'Full',
+  };
+
   let fontSize        = $state(meta.pluginSettings?.html_font_size ?? '');
   let showClassHints  = $state(meta.pluginSettings?.show_class_hints ?? false);
   let saving = $state(false);
@@ -11,13 +16,15 @@
   let savedTimer = null;
 
   const bricksActive = $derived(meta.activeIntegrations?.bricks ?? true);
+  const activeBundle = $derived(meta.pluginSettings?.css_bundle ?? 'optimal');
+  const settingsUrl  = meta.settingsUrl || '';
 
   async function handleSave() {
     saving = true;
     saved = false;
     error = '';
     try {
-      await saveSettings({ css_bundle: bundle, html_font_size: fontSize, show_class_hints: showClassHints });
+      await saveSettings({ html_font_size: fontSize, show_class_hints: showClassHints });
       saved = true;
       if (savedTimer) clearTimeout(savedTimer);
       savedTimer = setTimeout(() => { saved = false; savedTimer = null; }, 3000);
@@ -37,6 +44,13 @@
     class autocomplete, and color palette in any active builder integration.
   </p>
   <dl class="info">
+    <dt>Active bundle</dt>
+    <dd>
+      {BUNDLE_LABELS[activeBundle] ?? activeBundle}
+      {#if settingsUrl}
+        — <a href={settingsUrl}>change in SLASHED Settings →</a>
+      {/if}
+    </dd>
     <dt>Variables registered</dt>
     <dd>{meta.inventory?.variables?.length ?? 0}</dd>
     <dt>Classes registered</dt>
@@ -44,22 +58,6 @@
   </dl>
 
   <h2 class="settings-heading">Plugin Settings</h2>
-
-  <div class="setting-row">
-    <label for="css-bundle">CSS Bundle</label>
-    <select id="css-bundle" bind:value={bundle}>
-      <option value="essential">Essential — core only: tokens, reset, base, themes, layout, macros, states, motion, accessibility, print</option>
-      <option value="optimal">Optimal — Essential + color palette, extended sizes, forms, legacy support (recommended)</option>
-      <option value="full">Full — Optimal + component tokens & styles + utilities</option>
-    </select>
-    <p class="description">
-      Choose which SLASHED CSS bundle to load on the frontend and in builder canvases.
-      <strong>Essential</strong> is the full core layer (everything in <code>core/</code>).
-      <strong>Optimal</strong> adds the optional color palette, extended size/spacing scales,
-      form styling, and legacy fallbacks. <strong>Full</strong> additionally bundles the
-      component tokens &amp; styles and the utility classes.
-    </p>
-  </div>
 
   <div class="setting-row">
     <label for="html-font-size">HTML Font Size</label>
