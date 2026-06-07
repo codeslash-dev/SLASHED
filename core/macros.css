@@ -352,6 +352,8 @@
   } /* end @supports (color: oklch(from red l c h)) — surface contextual cascade */
 
   /* -- Surface shadow tint -------------------------------------
+     Sets background + auto-flipped foreground in one class. Shadows
+     re-derive from surface background for in-family cast shadows.
      Re-derive --sf-shadow-color from each surface's OWN background
      so box-shadow / text-shadow / drop-shadow on a colored surface
      read as an in-family cast shadow rather than a neutral-grey slab.
