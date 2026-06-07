@@ -28,9 +28,13 @@ const TOKENS_TO_CHECK = [
   '--sf-color-link',
 ];
 
+function escapeRegExp(s) {
+  return s.replace(/[.*+?^${}()|[\]\\-]/g, '\\$&');
+}
+
 function findDeclarations(css, tokenName) {
   const results = [];
-  const re = new RegExp(tokenName.replace(/[-]/g, '\\-') + '\\s*:', 'g');
+  const re = new RegExp(escapeRegExp(tokenName) + '\\s*:', 'g');
   let m;
   while ((m = re.exec(css)) !== null) {
     results.push({ index: m.index });

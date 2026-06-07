@@ -65,7 +65,6 @@ describe('P2: Coverage and uniqueness of Tier-1 fallback declarations', () => {
     const tokensCss = fs.readFileSync(path.join(ROOT, 'core/tokens.css'), 'utf8');
     const stripped = tokensCss.replace(/\/\*[\s\S]*?\*\//g, '');
     // Find light-dark() not inside @supports
-    let depth = 0;
     let inSupports = 0;
     for (const line of stripped.split('\n')) {
       if (line.includes('@supports')) inSupports++;

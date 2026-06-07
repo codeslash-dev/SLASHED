@@ -42,9 +42,9 @@
 
     --sf-color-success-strong: hsl(var(--sf-success-h) var(--sf-success-s) calc(var(--sf-success-l) - 8%));
     --sf-color-warning-strong: hsl(var(--sf-warning-h) var(--sf-warning-s) calc(var(--sf-warning-l) - 15%));
-    --sf-color-error-strong:   hsl(var(--sf-error-h)   var(--sf-error-s)   calc(var(--sf-error-l)   - 6%));
-    --sf-color-info-strong:    hsl(var(--sf-info-h)    var(--sf-info-s)    calc(var(--sf-info-l)    - 8%));
-    --sf-color-danger-strong:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  calc(var(--sf-danger-l)  - 8%));
+    --sf-color-error-strong:   hsl(var(--sf-error-h)   var(--sf-error-s)   calc(var(--sf-error-l) - 6%));
+    --sf-color-info-strong:    hsl(var(--sf-info-h)    var(--sf-info-s)    calc(var(--sf-info-l) - 8%));
+    --sf-color-danger-strong:  hsl(var(--sf-danger-h)  var(--sf-danger-s)  calc(var(--sf-danger-l) - 8%));
 
     /* ── Surfaces (base-derived) ──────────────────────────────────────────── */
 
