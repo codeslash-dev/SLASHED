@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLASHED Coverage 5 — Forms &amp; Features</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.full.css">
+
+  <style>
+    :root {
+      --sf-color-primary-light:   oklch(0.55 0.22 160);
+      --sf-color-secondary-light: oklch(0.28 0.06 160);
+      --sf-color-tertiary-light:  oklch(0.58 0.18 30);
+      --sf-color-action-light:    oklch(0.52 0.20 290);
+      --sf-color-neutral-light:   oklch(0.48 0.02 200);
+      --sf-color-base-light:      oklch(0.98 0.005 200);
+      --sf-color-success-light:   oklch(0.55 0.18 155);
+      --sf-color-warning-light:   oklch(0.78 0.16 75);
+      --sf-color-error-light:     oklch(0.52 0.22 18);
+      --sf-color-info-light:      oklch(0.50 0.16 250);
+      --sf-color-danger-light:    oklch(0.46 0.24 5);
+    }
+    body { background: var(--sf-color-bg); color: var(--sf-color-text); }
+    .demo-header {
+      position: sticky; top: 0; z-index: var(--sf-z-mid);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--sf-space-m); flex-wrap: wrap;
+      padding: var(--sf-space-s) var(--sf-space-l);
+      background: var(--sf-color-surface); border-bottom: 1px solid var(--sf-color-border);
+    }
+    .demo-pagenav { display: flex; gap: var(--sf-space-xs); flex-wrap: wrap; font-size: var(--sf-text-s); }
+    .demo-pagenav a {
+      padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-s);
+      color: var(--sf-color-text--secondary); text-decoration: none; border: 1px solid var(--sf-color-border);
+    }
+    .demo-pagenav a[aria-current="page"] { background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-color: transparent; }
+    #theme-toggle {
+      padding: var(--sf-space-xs) var(--sf-space-m); border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-m); background: var(--sf-color-bg); color: var(--sf-color-text);
+      font-size: var(--sf-text-s); cursor: pointer;
+    }
+    .demo-section { padding: var(--sf-space-xl) var(--sf-space-l); border-top: 1px solid var(--sf-color-border); }
+    .demo-section h2 {
+      font-size: var(--sf-text-2xl); color: var(--sf-color-primary);
+      padding-block-end: var(--sf-space-xs); border-bottom: 2px solid var(--sf-color-primary-200);
+      margin-block-end: var(--sf-space-l);
+    }
+    .demo-section h3 { font-size: var(--sf-text-l); color: var(--sf-color-text--secondary); margin-block: var(--sf-space-l) var(--sf-space-s); }
+    .demo-note { font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block: var(--sf-space-xs) 0; }
+    .form-error, .form-helper { color: var(--sf-field-text-color, var(--sf-color-text--muted)); font-size: var(--sf-text-s); }
+    .demo-cell {
+      padding: var(--sf-space-s); border: 1px solid var(--sf-color-border);
+      border-radius: var(--sf-radius-m); background: var(--sf-color-surface); font-size: var(--sf-text-s);
+    }
+    /* container query target */
+    .cq-host { container-type: inline-size; resize: horizontal; overflow: auto; border: 2px dashed var(--sf-color-action); padding: var(--sf-space-s); border-radius: var(--sf-radius-m); min-width: 12rem; max-width: 100%; }
+    .cq-box { padding: var(--sf-space-m); background: var(--sf-color-action-100); border-radius: var(--sf-radius-s); text-align: center; }
+    @container (min-width: 30rem) { .cq-box { background: var(--sf-color-success); color: var(--sf-color-text--on-success); } .cq-box::after { content: " — wide (≥30rem container)"; } }
+    @container (max-width: 29.99rem) { .cq-box::after { content: " — narrow (<30rem container)"; } }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="sr-only-focusable">Skip to main content</a>
+
+  <header class="demo-header">
+    <strong style="font-size: var(--sf-text-l)">SLASHED <span style="color: var(--sf-color-text--muted)">/</span> coverage</strong>
+    <nav class="demo-pagenav" aria-label="Test pages">
+      <a href="test-coverage-1-colors.html">1 · Colors</a>
+      <a href="test-coverage-2-typography.html">2 · Type &amp; Tokens</a>
+      <a href="test-coverage-3-layout.html">3 · Layout</a>
+      <a href="test-coverage-4-macros-states.html">4 · Macros &amp; States</a>
+      <a href="test-coverage-5-forms-features.html" aria-current="page">5 · Forms &amp; Features</a>
+      <a href="test-coverage-6-token-reference.html">6 · All tokens</a>
+    </nav>
+    <button id="theme-toggle" type="button">Toggle dark</button>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══════════════════ FORMS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Page 5 — Classless forms (optional/forms.css)</h2>
+      <form class="sf-stack sf-stack--m" style="max-width: 36rem" onsubmit="return false">
+        <div class="sf-grid" style="--sf-grid-min: 14rem">
+          <label class="sf-stack sf-stack--xs">Text input<input type="text" placeholder="Placeholder text"></label>
+          <label class="sf-stack sf-stack--xs">Email<input type="email" placeholder="you@example.com"></label>
+          <label class="sf-stack sf-stack--xs">Password<input type="password" placeholder="••••••••"></label>
+          <label class="sf-stack sf-stack--xs">Number<input type="number" value="42"></label>
+          <label class="sf-stack sf-stack--xs">Search<input type="search" placeholder="Search…"></label>
+          <label class="sf-stack sf-stack--xs">URL<input type="url" placeholder="https://"></label>
+          <label class="sf-stack sf-stack--xs">Tel<input type="tel" placeholder="+1…"></label>
+          <label class="sf-stack sf-stack--xs">Date<input type="date"></label>
+          <label class="sf-stack sf-stack--xs">Time<input type="time"></label>
+          <label class="sf-stack sf-stack--xs">Datetime<input type="datetime-local"></label>
+          <label class="sf-stack sf-stack--xs">Month<input type="month"></label>
+          <label class="sf-stack sf-stack--xs">Week<input type="week"></label>
+          <label class="sf-stack sf-stack--xs">Color<input type="color" value="#33aa88"></label>
+          <label class="sf-stack sf-stack--xs">File<input type="file"></label>
+        </div>
+
+        <label class="sf-stack sf-stack--xs">Select
+          <select><option>Option Alpha</option><option>Option Beta</option><option>Option Gamma</option></select>
+        </label>
+        <label class="sf-stack sf-stack--xs">Multi-select
+          <select multiple size="3"><option>One</option><option>Two</option><option>Three</option><option>Four</option></select>
+        </label>
+        <label class="sf-stack sf-stack--xs">Textarea
+          <textarea rows="3" placeholder="Enter text…"></textarea>
+        </label>
+
+        <fieldset style="border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); padding: var(--sf-space-m)">
+          <legend>Checkbox &amp; radio (accent-color)</legend>
+          <label style="display: flex; gap: var(--sf-space-xs); align-items: center"><input type="checkbox" checked> Checked</label>
+          <label style="display: flex; gap: var(--sf-space-xs); align-items: center"><input type="checkbox"> Unchecked</label>
+          <label style="display: flex; gap: var(--sf-space-xs); align-items: center"><input type="radio" name="r" checked> Radio A</label>
+          <label style="display: flex; gap: var(--sf-space-xs); align-items: center"><input type="radio" name="r"> Radio B</label>
+        </fieldset>
+
+        <label class="sf-stack sf-stack--xs">Range<input type="range" min="0" max="100" value="65"></label>
+        <label class="sf-stack sf-stack--xs">Progress<progress value="65" max="100"></progress></label>
+        <label class="sf-stack sf-stack--xs">Meter<meter min="0" max="100" value="70"></meter></label>
+
+        <h3>Validation states (border + --sf-field-text-color hook)</h3>
+        <div class="is-valid sf-stack sf-stack--xs"><label>Valid field<input type="text" value="looks good"></label><span class="form-helper">Field accepted</span></div>
+        <div class="is-invalid sf-stack sf-stack--xs"><label>Invalid field<input type="text" value="bad value" aria-invalid="true"></label><span class="form-error">Please correct this</span></div>
+        <div class="is-error sf-stack sf-stack--xs"><label>Error field<input type="text" value="error"></label><span class="form-error">Something went wrong</span></div>
+        <div class="is-warning sf-stack sf-stack--xs"><label>Warning field<input type="text" value="careful"></label><span class="form-helper">Double-check this</span></div>
+        <div class="is-success sf-stack sf-stack--xs"><label>Success field<input type="text" value="saved"></label><span class="form-helper">Saved</span></div>
+        <div class="is-info sf-stack sf-stack--xs"><label>Info field<input type="text" value="note"></label><span class="form-helper">For your information</span></div>
+
+        <div class="sf-cluster sf-cluster--s">
+          <button type="submit">Submit button</button>
+          <button type="button" disabled>Disabled button</button>
+          <input type="reset" value="Reset input">
+          <input type="submit" value="Submit input">
+        </div>
+
+        <label class="sf-stack sf-stack--xs">Disabled input<input type="text" value="disabled" disabled></label>
+        <label class="sf-stack sf-stack--xs">Readonly input<input type="text" value="readonly" readonly></label>
+      </form>
+    </section>
+
+    <!-- ═══════════════════ FEATURES: CONTAINER QUERIES ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — container queries</h2>
+      <p class="demo-note">Drag the resize handle (bottom-right) to change the container width and watch the box react — no media queries.</p>
+      <div class="cq-host"><div class="cq-box">Container-responsive box</div></div>
+    </section>
+
+    <!-- ═══════════════════ FEATURE: SCROLL-DRIVEN ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — scroll-driven entrances</h2>
+      <p class="demo-note">In engines that support <code>animation-timeline: view()</code> these animate as they scroll into view; elsewhere they fall back to a one-shot time animation.</p>
+      <div class="sf-stack sf-stack--l">
+        <div class="sf-entrance--fade-up demo-cell">Scroll-revealed block A</div>
+        <div class="sf-entrance--fade-left demo-cell">Scroll-revealed block B</div>
+        <div class="sf-entrance--scale-up demo-cell">Scroll-revealed block C</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ FEATURE: COLOR FUNCTIONS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — modern colour functions</h2>
+      <h3>light-dark()</h3>
+      <div class="demo-cell" style="background: light-dark(oklch(0.95 0.03 160), oklch(0.25 0.05 160))">Background flips with mode via <code>light-dark()</code></div>
+      <h3>Relative colour syntax (oklch from)</h3>
+      <div class="sf-cluster sf-cluster--s">
+        <div class="demo-cell" style="background: oklch(from var(--sf-color-primary) l c h)">base</div>
+        <div class="demo-cell" style="background: oklch(from var(--sf-color-primary) calc(l + 0.15) c h); color: var(--sf-color-primary-900)">l +0.15</div>
+        <div class="demo-cell" style="background: oklch(from var(--sf-color-primary) l c calc(h + 60)); color: white">h +60</div>
+      </div>
+      <h3>color-mix()</h3>
+      <div class="sf-cluster sf-cluster--s">
+        <div class="demo-cell" style="background: color-mix(in oklab, var(--sf-color-primary) 75%, var(--sf-color-tertiary))">75/25 primary↔tertiary</div>
+        <div class="demo-cell" style="background: color-mix(in oklab, var(--sf-color-primary) 50%, var(--sf-color-tertiary))">50/50</div>
+        <div class="demo-cell" style="background: color-mix(in oklab, var(--sf-color-primary) 25%, var(--sf-color-tertiary))">25/75</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ FEATURE: SELECTION / SCROLLBAR ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — selection &amp; scrollbar styling</h2>
+      <p>Select this paragraph to see <code>::selection</code> using <code>--sf-color-selection-bg</code>. The framework also sets <code>--sf-scrollbar-thumb</code> / <code>--sf-scrollbar-track</code>.</p>
+      <div style="max-height: 7rem; overflow: auto; border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); padding: var(--sf-space-s)">
+        <p>Scrollable region — note the themed scrollbar.</p>
+        <p style="height: 12rem">tall content…</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ FEATURE: FOCUS RING ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — focus ring tokens</h2>
+      <p class="demo-note">Tab through these to see <code>--sf-focus-ring-*</code> (color/width/offset/style) and the box-shadow ring variant.</p>
+      <div class="sf-cluster sf-cluster--m">
+        <button>Default outline ring</button>
+        <a href="#main">Link focus ring</a>
+        <button class="sf-focus-shadow" style="border-radius: var(--sf-radius-full)">Shadow ring</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ FEATURE: CSS LAYERS / @property ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — cascade layers &amp; @property</h2>
+      <p class="demo-note">Framework declares layer order: <code>slashed.reset, slashed.tokens, slashed.base, slashed.themes, slashed.layout, slashed.components, slashed.macros, slashed.states, slashed.motion, slashed.accessibility, slashed.forms, slashed.utilities, slashed.overrides</code>. Registered <code>@property</code> custom properties (e.g. <code>--sf-is-dark</code>, <code>--sf-is-active</code>) drive interpolation and conditional logic.</p>
+      <div class="demo-cell">Registered boolean flags: <code>--sf-is-dark</code>, <code>--sf-is-open</code>, <code>--sf-is-active</code>, <code>--sf-is-pressed</code>, <code>--sf-is-current</code></div>
+    </section>
+
+    <!-- ═══════════════════ HEADING / BODY / LAYOUT / MACRO TOKENS ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Remaining token groups</h2>
+
+      <h3>Per-heading tokens (h1–h6 size/weight/tracking/leading)</h3>
+      <div class="demo-cell sf-stack sf-stack--xs">
+        <span style="font-size: var(--sf-h1-size); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); line-height: var(--sf-h1-line-height)">h1 tokens</span>
+        <span style="font-size: var(--sf-h2-size); font-weight: var(--sf-h2-font-weight); letter-spacing: var(--sf-h2-letter-spacing)">h2 tokens</span>
+        <span style="font-size: var(--sf-h3-size); font-weight: var(--sf-h3-font-weight)">h3 tokens</span>
+        <span style="font-size: var(--sf-h4-size)">h4 tokens</span>
+        <span style="font-size: var(--sf-h5-size)">h5 tokens</span>
+        <span style="font-size: var(--sf-h6-size)">h6 tokens</span>
+      </div>
+
+      <h3>Layout tokens overridden inline</h3>
+      <div class="sf-cluster sf-cluster--m" style="--sf-cluster-gap: var(--sf-space-2xl)"><span class="demo-cell">cluster-gap override</span><span class="demo-cell">2xl</span></div>
+      <div class="sf-stack" style="--sf-stack-gap: var(--sf-space-3xl); margin-top: var(--sf-space-m)"><span class="demo-cell">stack-gap → space-3xl</span><span class="demo-cell">big gap</span></div>
+
+      <h3>Macro tokens overridden inline</h3>
+      <div class="sf-scroll-shadow demo-cell" style="--sf-scroll-shadow-size: 3rem; block-size: 6rem; overflow: auto">
+        <p style="margin: 0">--sf-scroll-shadow-size: 3rem</p>
+        <p style="height: 8rem">tall…</p>
+      </div>
+
+      <h3>Header height &amp; sticky offset tokens</h3>
+      <div class="demo-cell">--sf-header-height, --sf-header-height-mobile/-desktop, --sf-sticky-offset drive the sticky header on every page.</div>
+    </section>
+
+    <!-- ═══════════════════ PRINT ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — print</h2>
+      <p class="demo-note">Use the browser Print Preview (Ctrl/Cmd+P) to verify the <code>slashed.print</code> layer: optimized page margins (<code>--sf-print-page-margin</code>), base size (<code>--sf-print-base-size</code>), and external-link URL expansion.</p>
+      <p>This is an <a href="https://example.com" class="sf-link-external">external link</a> — in print, its URL is appended after the text.</p>
+    </section>
+
+    <!-- ═══════════════════ HIGH CONTRAST ═══════════════════ -->
+    <section class="demo-section">
+      <h2>Feature — high contrast &amp; reduced motion</h2>
+      <p class="demo-note">Enable OS "increase contrast" to see <code>--sf-contrast-bias</code> auto-raise and borders thicken. Enable "reduce motion" to see all animations on page 4 go inert.</p>
+      <div class="demo-cell">Bordered element — thickens under <code>prefers-contrast: more</code>.</div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      function apply(t) {
+        root.dataset.theme = t;
+        try { localStorage.sfTheme = t; } catch (e) {}
+        btn.textContent = t === 'dark' ? 'Toggle light' : 'Toggle dark';
+      }
+      try { if (localStorage.sfTheme) apply(localStorage.sfTheme); } catch (e) {}
+      btn.addEventListener('click', function () {
+        var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        if (document.startViewTransition) document.startViewTransition(function () { apply(next); });
+        else apply(next);
+      });
+    })();
+  </script>
+</body>
+</html>
