@@ -29,7 +29,7 @@ if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
     define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
     define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
     define( 'SLASHED_BRICKS_CSS_REF', 'v0.5.21' );
-    define( 'SLASHED_BRICKS_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
+    define( 'SLASHED_BRICKS_DIST_SHA', '76c71035f65e095f00ed5b0def268823cbc849aa' );
 }
 
 /**

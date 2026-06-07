@@ -29,7 +29,7 @@ if ( ! defined( 'SLASHED_GUTENBERG_VERSION' ) ) {
 	define( 'SLASHED_GUTENBERG_PATH',     plugin_dir_path( __FILE__ ) );
 	define( 'SLASHED_GUTENBERG_URL',      plugin_dir_url( __FILE__ ) );
 	define( 'SLASHED_GUTENBERG_CSS_REF',  'v0.5.21' );
-	define( 'SLASHED_GUTENBERG_DIST_SHA', 'be9ac0789180158c8ad86d5743020ef2272a063c' );
+	define( 'SLASHED_GUTENBERG_DIST_SHA', '76c71035f65e095f00ed5b0def268823cbc849aa' );
 }
 
 define( 'SLASHED_GUTENBERG_ALLOWED_BUNDLES', array( 'essential', 'optimal', 'full' ) );
