@@ -1,24 +1,19 @@
 name: Sync version artifacts
 
 # Triggered whenever a GitHub release or pre-release is published.
-# Checks out main, aligns all non-JS version references to the release tag,
-# rebuilds CSS bundles, publishes them to the dist branch, captures the
-# resulting commit SHA, stores it in SLASHED_DIST_SHA (slashed.php),
-# SLASHED_BRICKS_DIST_SHA (slashed-bricks.php), and
-# SLASHED_GUTENBERG_DIST_SHA (slashed-gutenberg.php), then commits
-# everything back to main.
+# Checks out main, aligns non-JS version references (docs/roadmap.md) and
+# package.json to the release tag, then commits any changes back to main.
 #
 # CSS bundles are NOT committed to the main branch — they live only on the
-# dedicated `dist` branch and in GitHub Release assets. The dist-branch
-# commit SHA is stored in each integration entry point so the plugin can
-# construct an immutable jsDelivr CDN URL that never changes between releases.
+# dedicated `dist` branch (published by publish-dist.yml on every push to
+# main) and in GitHub Release assets.
 #
 # Full release pipeline:
 #   1. Developer runs `npm run release` locally → bumps package.json, runs
 #      version-sync + build, commits chore(release): vX.Y.Z, pushes tag.
 #   2. release.yml fires on the tag → uploads dist assets to the GitHub release.
-#   3. This workflow fires on the release.published event → rebuilds CSS,
-#      publishes to dist branch, captures SHA, updates PHP, commits to main.
+#   3. This workflow fires on the release.published event → re-aligns version
+#      references on main in case the release was cut outside `npm run release`.
 
 on:
   release:
@@ -64,76 +59,13 @@ jobs:
       - name: Sync non-JS version references
         run: node scripts/version-sync.js
 
-      - name: Rebuild CSS bundles
-        run: npm run build
-
-      - name: Push CSS bundles to dist branch and capture SHA
-        id: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_TAG: ${{ steps.ver.outputs.tag }}
-          GIT_AUTHOR_NAME: github-actions[bot]
-          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-          GIT_COMMITTER_NAME: github-actions[bot]
-          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-        run: |
-          set -euo pipefail
-
-          # Stage dist/ contents for the orphan dist branch.
-          mkdir -p /tmp/sf-dist
-          cp -R dist/. /tmp/sf-dist/
-          {
-            echo "source-commit: ${GITHUB_SHA}"
-            echo "source-ref:    refs/heads/main"
-            echo "release-tag:   ${RELEASE_TAG}"
-            echo "built-at:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            echo "built-by:      .github/workflows/version-sync.yml"
-          } > /tmp/sf-dist/SOURCE.txt
-          echo 'node_modules/' > /tmp/sf-dist/.gitignore
-
-          git checkout --orphan dist-release
-          git rm -rf . > /dev/null
-          shopt -s dotglob
-          cp -R /tmp/sf-dist/. .
-          git add -A
-          git commit -m "build: dist for ${RELEASE_TAG}"
-
-          DIST_SHA=$(git rev-parse HEAD)
-          echo "sha=${DIST_SHA}" >> "$GITHUB_OUTPUT"
-
-          git push --force \
-            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-            dist-release:dist
-
-      - name: Switch back to main working tree
-        run: git checkout main
-
-      - name: Update DIST_SHA constants in PHP
-        env:
-          DIST_SHA: ${{ steps.dist.outputs.sha }}
-        run: |
-          # Write the captured SHA into the canonical constant, then let
-          # version-sync.js propagate it to the two integration entry points.
-          sed -i \
-            "s|define( 'SLASHED_DIST_SHA', '[^']*' )|define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )|" \
-            plugins/SLASHED-for-WP/slashed.php
-          # Hard-fail if the substitution did not land (sed exits 0 even on no-op,
-          # e.g. if the define format ever changes) so we never propagate a stale SHA.
-          if ! grep -Fq "define( 'SLASHED_DIST_SHA', '${DIST_SHA}' )" plugins/SLASHED-for-WP/slashed.php; then
-            echo "Failed to update SLASHED_DIST_SHA in plugins/SLASHED-for-WP/slashed.php" >&2
-            exit 1
-          fi
-          node scripts/version-sync.js
-
       - name: Commit and push if anything changed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Stage only tracked files (dist/*.css are gitignored).
-          git add plugins/SLASHED-for-WP/slashed.php plugins/SLASHED-for-WP/integrations/bricks/slashed-bricks.php plugins/SLASHED-for-WP/integrations/gutenberg/slashed-gutenberg.php package.json package-lock.json
-          git add -u
+          git add package.json package-lock.json docs/roadmap.md
           if git diff --cached --quiet; then
             echo "Nothing to commit — all version artifacts already up to date."
           else

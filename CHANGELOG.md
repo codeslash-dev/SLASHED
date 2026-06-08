@@ -145,30 +145,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **New tokens**: `--sf-header-height-mobile`, `--sf-header-height-desktop`,
   `--sf-sticky-offset-mobile`, `--sf-sticky-offset-desktop` — paired
   mobile/desktop source tokens for the header height and sticky-offset
-  computed tokens. The WordPress plugin admin (Layouts tab) exposes these
-  as number fields and generates a fluid `clamp()` for
-  `--sf-header-height` / `--sf-sticky-offset` when the two values differ.
+  computed tokens. `--sf-header-height` / `--sf-sticky-offset` fluidly
+  `clamp()` between the mobile and desktop endpoints when they differ.
 
 - **Contextual color cascade** — `.sf-surface--*` variants now inherit a
   full set of on-surface tokens (`--sf-color-text`, `--sf-color-heading`,
   secondary/placeholder/disabled text, border/subtle/strong border) via
   CSS relative-color syntax inside an `@supports` guard. Requires Chrome
   123 / Safari 17.5 / Firefox 128 (the existing framework floor).
-
-- **reBEMer** (`integrations/bricks/`) — Subtree-scoped BEM class manager
-  for the Bricks Builder structure panel. Adds a "BEM" badge to every
-  structure-panel item; clicking it opens a draggable modal that names a
-  block + every descendant element + an optional modifier and applies the
-  result as global classes in one transaction. Five operation modes
-  (Add / Rename / Replace / Add Modifier / Migrate ID styles), a
-  client-side reference-usage check (via `GET /rebemer/unused`) so destructive
-  ops surface cross-element class usage before they run, snapshot + rollback for
-  every apply, an in-panel undo ring buffer, and a reserved-name guard
-  against SLASHED's own utility classes. Full design at
-  [docs/rebemer.md](docs/rebemer.md). The editor app lives in
-  `integrations/bricks/editor-app/` (Svelte 5 runes + Vite); the PHP side
-  is `Slashed_Bricks_ReBEMer_{Policy,REST,Enqueue}` under
-  `integrations/bricks/includes/`.
 
 ### ⚠️ Breaking Changes (pre-freeze cleanup)
 
@@ -416,9 +400,8 @@ See `docs/migration.md` for details.
   between their `-mobile` and `-desktop` companion tokens across the
   framework viewport range, instead of statically equalling the desktop
   value. This wires up the previously-orphaned `--sf-header-height-mobile`,
-  `--sf-sticky-offset-mobile`, and `--sf-sticky-offset-desktop` tokens and
-  matches the clamp the WP plugin's CSS generator already emitted. Default
-  endpoints (3.5rem mobile, 5rem desktop) are unchanged; the header is now
+  `--sf-sticky-offset-mobile`, and `--sf-sticky-offset-desktop` tokens.
+  Default endpoints (3.5rem mobile, 5rem desktop) are unchanged; the header is now
   shorter on small viewports.
 
 - **Shadows tint to the surface on `.sf-surface--*`** — `core/macros.css`
@@ -493,12 +476,7 @@ See `docs/migration.md` for details.
 
 ## [0.2.12] - 2026-05-23
 
-Release infrastructure and Bricks Builder integration.
-
-### Added
-
-- **Bricks Builder integration** — WordPress plugin for one-click SLASHED
-  loading in Bricks Builder themes (PR #71)
+Release infrastructure.
 
 ### Changed
 
