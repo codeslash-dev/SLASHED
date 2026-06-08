@@ -11,9 +11,9 @@
     ],
     "fallback_source": "core/tokens.color-fallbacks.css",
     "counts": {
-      "tokens": 771,
+      "tokens": 769,
       "by_tier": {
-        "PUBLIC": 735,
+        "PUBLIC": 733,
         "PUBLIC-ADVANCED": 35,
         "INTERNAL": 1
       },
@@ -365,22 +365,6 @@
       ],
       "fallback": false,
       "value": "solid"
-    },
-    "--sf-border-style-dotted": {
-      "tier": "PUBLIC",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "dotted"
-    },
-    "--sf-border-style-soft": {
-      "tier": "PUBLIC",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "dashed"
     },
     "--sf-border-subtle": {
       "tier": "PUBLIC",

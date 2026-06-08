@@ -1599,7 +1599,7 @@
 
         <h3>.sf-equal — fixed N-column grid</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
-          Column count never collapses — unlike <code>.sf-grid-N</code> which uses container queries.
+          Column count never collapses — unlike <code>.sf-grid-*</code> which uses container queries.
         </p>
         <div class="sf-stack sf-stack--xs">
           <div>
@@ -2164,7 +2164,7 @@
           <ul>
             <li>List items get <code>list-style: disc</code> back (reset removes it)</li>
             <li>Nested list indentation is preserved</li>
-            <li>Marker color follows <code>--sf-brand</code> → <code>--sf-color-primary</code></li>
+            <li>Marker color follows <code>--sf-prose-marker-color</code> (defaults to <code>--sf-color-primary</code>)</li>
           </ul>
           <ol>
             <li>Ordered lists work too</li>
@@ -2297,7 +2297,7 @@
         <h2>Layout — Pancake</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-pancake</code> — 3-row grid (<code>auto 1fr auto</code>) for sticky-footer layouts. Default <code>min-height: 100dvh</code>.</p>
 
-        <div class="sf-pancake" style="--sf-pancake-min-height: 18rem; min-height: 18rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); overflow: hidden; border: 1px solid var(--sf-color-border)">
+        <div class="sf-pancake" style="min-height: 18rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-m); overflow: hidden; border: 1px solid var(--sf-color-border)">
           <header class="demo-box demo-box--alt" style="border-radius: 0; justify-content: flex-start; padding-inline: var(--sf-space-l)">
             Header (auto height)
           </header>
@@ -2713,7 +2713,7 @@
 
       // Hidden probes pinned to each mode so light-dark() resolves
       // deterministically regardless of OS/page theme. Reading the *resolved*
-      // --sf-color-X on a probe shows exactly what the framework renders —
+      // --sf-color-* on a probe shows exactly what the framework renders —
       // including the auto-derived dark value when no -dark override is set.
       function makeProbe(theme) {
         const el = document.createElement('span');
@@ -2737,7 +2737,7 @@
       };
 
       // data-token is the SOURCE token an input writes to (…-light / …-dark);
-      // the swatch shows the RESOLVED base token (--sf-color-X) in that mode,
+      // the swatch shows the RESOLVED base token (--sf-color-*) in that mode,
       // so dark always reflects the live auto-derived (or overridden) value.
       function resolvedHex(token) {
         const mode  = token.endsWith('-dark') ? 'dark' : 'light';

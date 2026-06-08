@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**837 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**835 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-465 tokens.
+463 tokens.
 
 | Token | Default |
 |---|---|
@@ -53,8 +53,6 @@ rebrand workflow.
 | `--sf-border` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)` |
 | `--sf-border-strong` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)` |
 | `--sf-border-style` | `solid` |
-| `--sf-border-style-dotted` | `dotted` |
-| `--sf-border-style-soft` | `dashed` |
 | `--sf-border-subtle` | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` |
 | `--sf-border-width-1` | `1px` |
 | `--sf-border-width-2` | `2px` |

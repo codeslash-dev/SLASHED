@@ -9,11 +9,11 @@ values see [tokens.md](tokens.md); for the flat name list see
 [registry.json](registry.json); for the tier contract and naming rules see
 [architecture.md](architecture.md).
 
-**771 tokens** (deduplicated by name across the 6 token source files).
+**769 tokens** (deduplicated by name across the 6 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 735 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 733 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 35 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -110,8 +110,6 @@ values see [tokens.md](tokens.md); for the flat name list see
 | `--sf-border` | PUBLIC | Core | — | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)` |
 | `--sf-border-strong` | PUBLIC | Core | — | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)` |
 | `--sf-border-style` | PUBLIC | Core | — | `solid` |
-| `--sf-border-style-dotted` | PUBLIC | Core | — | `dotted` |
-| `--sf-border-style-soft` | PUBLIC | Core | — | `dashed` |
 | `--sf-border-subtle` | PUBLIC | Core | — | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` |
 | `--sf-border-width-1` | PUBLIC | Core | — | `1px` |
 | `--sf-border-width-2` | PUBLIC | Core | — | `2px` |
