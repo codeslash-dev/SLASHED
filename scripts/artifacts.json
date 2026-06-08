@@ -11,5 +11,11 @@
       "docs/api-index.json",
       "docs/api-index.md"
     ]
+  },
+  {
+    "name": "sizes-extended tokens",
+    "srcPrefixes": ["scripts/gen-sizes-extended.js"],
+    "buildCmd": "node scripts/gen-sizes-extended.js > optional/tokens.sizes-extended.css",
+    "outputs": ["optional/tokens.sizes-extended.css"]
   }
 ]
