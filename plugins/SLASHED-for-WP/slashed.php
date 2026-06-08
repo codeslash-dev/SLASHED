@@ -40,7 +40,7 @@ define( 'SLASHED_CSS_REF',  'v0.5.21' );
  * reads this canonical value and propagates it to both integration files, so the
  * three never drift.
  */
-define( 'SLASHED_DIST_SHA', '76c71035f65e095f00ed5b0def268823cbc849aa' );
+define( 'SLASHED_DIST_SHA', 'f415dfc8a75a5f8e1f37966ba2605ef22466656e' );
 
 add_action( 'init', function () {
 	load_plugin_textdomain( 'slashed', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
