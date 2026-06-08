@@ -2,47 +2,30 @@
 
 Current version: **0.5.24**
 
----
-
 ## Before v1.0
 
-### Framework
-
 - **Logical property audit** — replace remaining physical properties
-  (`margin-left`, `padding-right`, etc.) with logical equivalents
+  (`margin-left`, `padding-right`) with logical equivalents
   (`margin-inline-start`, `padding-inline-end`) for RTL support.
+- **Scoped token snapshot tests** — Playwright snapshot assertions for ~20 key
+  semantic tokens (`--sf-color-text`, `--sf-color-primary`, …) in both modes, to
+  catch value regressions during releases.
 
-- **Scoped token snapshot tests** — add Playwright snapshot assertions for ~20
-  key semantic tokens (e.g. `--sf-color-text`, `--sf-color-primary`,
-  `--sf-color-background`) in both light and dark modes to catch accidental
-  value regressions during releases.
+## Post-1.0
 
----
+- **Components layer** — the `slashed.components` layer and its stubs are already
+  declared; the eight `.sf-*` components land incrementally after v1.0, additive
+  only.
+- **`@property` for spacing/shadow tokens** — extend typed registration beyond
+  colours to enable transitions on layout values and better DevTools inspection.
 
-## Post-1.0 Enhancements
+## Under consideration
 
-### Framework
+- **Per-layer opt-in bundle via `@import`** — already possible today via the
+  granular `core/`/`optional/` files (`core/layers.css` first); needs docs, not
+  code.
 
-- **Components layer** — the `slashed.components` layer and its stubs
-  (`optional/components.css`, `optional/tokens.components.css`) are already
-  declared and in place. Components will land incrementally after v1.0 under the
-  `.sf-` prefix without any breaking changes to existing layers or tokens.
+## Out of scope
 
-- **`@property` registration for spacing and shadow tokens** — extend typed
-  registration beyond brand colors to spacing, sizing, and shadow tokens. Enables
-  CSS transitions on layout values and better DevTools inspection.
-
----
-
-## Under Consideration
-
-- **Per-layer opt-in bundle via `@import`** — technically already possible
-  today using the granular `core/` and `optional/` source files (with
-  `core/layers.css` loaded first). Needs documentation rather than new code.
-
----
-
-## Out of Scope
-
-- **Utility classes** — SLASHED is BEM-first by design. The utilities layer
-  stub will remain empty through v1.0.
+- **Utility classes** — SLASHED is BEM-first; the utilities stub stays empty
+  through v1.0.

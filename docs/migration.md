@@ -1,15 +1,13 @@
-
 # Migration guide
 
-Mapping concepts from popular CSS frameworks to SLASHED, plus an
-intra-project migration section for upgrading SLASHED itself.
+Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
+upgrade notes.
 
 ## SLASHED 0.2.x → 0.3.0
 
-v0.3.0 introduces a new `slashed.macros` cascade layer and relocates
-three class definitions to fit the new taxonomy. The class names and
-their declared properties are unchanged — only the cascade layer they
-live in changes. Most consumers won't notice.
+v0.3.0 adds the `slashed.macros` cascade layer and relocates three class
+definitions to fit the new taxonomy. Class names and declared properties are
+unchanged — only their cascade layer changes.
 
 ### What changed
 
@@ -21,22 +19,14 @@ live in changes. Most consumers won't notice.
 
 ### Are these breaking changes?
 
-Formally yes — the cascade layer of an existing class changed.
-Practically, no — the classes themselves and their declared properties
-are byte-identical to v0.2.x. **A site that worked in 0.2.x works in
-0.3.0 without any markup changes.**
+Formally yes (a class's cascade layer changed); practically no — the classes and
+their properties are byte-identical to v0.2.x, so a 0.2.x site works in 0.3.0
+without markup changes. You only see a difference if your CSS targeted these
+classes from **within a specific layer that lost the priority race**:
 
-You only see a difference if your CSS targeted these classes from
-**within a specific layer that lost the priority race**:
-
-- A `@layer slashed.layout { .sf-prose { … } }` consumer override no
-  longer participates — `.sf-prose` is no longer in `slashed.layout`.
-  The fix is to move the override into `slashed.overrides` (the
-  documented escape hatch, last in the cascade) — that's been the
-  recommended path all along.
-- A `@layer slashed.states { .sf-focus-parent { … } }` override stops
-  winning over the framework's rule. Same fix: move it to
-  `slashed.overrides`.
+- `@layer slashed.layout { .sf-prose { … } }` no longer participates (`.sf-prose`
+  left `slashed.layout`). Move the override to `slashed.overrides`.
+- `@layer slashed.states { .sf-focus-parent { … } }` stops winning. Same fix.
 
 ### What's new in essential
 
@@ -52,20 +42,15 @@ See [`docs/macros.md`](macros.md) for the full macro reference.
 
 ### Components — incomplete files
 
-`optional/components.css` and `optional/tokens.components.css` are no
-longer empty `/* TODO */` files — they now contain structured class
-definitions and tokens, but **every line is commented out**. The
-`@layer` declarations are real, the cascade slot is in place, and 8
-component names are taken; the implementations will land in upcoming
-minor releases (additive only). See [`docs/components.md`](components.md).
+`optional/components.css` and `optional/tokens.components.css` now contain
+structured class definitions and tokens, but **every line is commented out**. The
+`@layer` declarations are real and 8 component names are taken; implementations
+land in upcoming minor releases (additive only). See
+[`docs/components.md`](components.md).
 
-If you previously wrote your own `.sf-button` / `.sf-card` etc. styles,
-you have two options for v0.3.0:
-
-1. Keep them as-is until the activation minor; then choose between
-   adopting the framework version or switching to a different name.
-2. Rename to a project-prefixed class (`.app-button`) right away to
-   guarantee no future collision.
+If you previously wrote your own `.sf-button` / `.sf-card` styles, either keep
+them until the activation minor (then adopt the framework version or rename), or
+rename to a project-prefixed class (`.app-button`) now to avoid future collision.
 
 ---
 
@@ -119,11 +104,9 @@ The underlying space tokens (`--sf-space-2xs`, `--sf-space-3xl`,
 
 | Old name | New name | Rationale |
 |---|---|---|
-| `.sf-button--destructive` | `.sf-button--danger` | Aligns with the `--danger` intent modifier used by `.is-danger`, `.sf-surface--danger`, and the `--sf-color-danger-*` token family. "Danger" is the consistent term across the entire API. |
+| `.sf-button--destructive` | `.sf-button--danger` | Aligns with the `--danger` intent used by `.is-danger`, `.sf-surface--danger`, and the `--sf-color-danger-*` tokens. |
 
-The component CSS is not yet active (all commented out), so no runtime
-breakage. The taken-names table in `docs/components.md` reflects the
-canonical name that will ship when the class activates.
+The component CSS isn't active yet (commented out), so no runtime breakage.
 
 ---
 
@@ -213,7 +196,7 @@ These frameworks style bare HTML globally; SLASHED keeps `base` minimal and expe
 - **Config file / build step**: there's no config or build — override `--sf-*`
   tokens in a stylesheet. See [theming.md](theming.md).
 - **Dark variant syntax**: use `data-theme` (auto-derived dark mode) — see
-  [dark-mode.md](dark-mode.md).
+  [theming.md](theming.md).
 - **Spacing/colour scales**: available as tokens (`--sf-space-*`,
   `--sf-color-*`) — use them in your own classes instead of inline utilities.
 - **`line-clamp-N` / `truncate`**: directly available as `.sf-line-clamp-N`

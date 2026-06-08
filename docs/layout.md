@@ -53,13 +53,12 @@ Every size-aware primitive supports the canonical range
 | `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
-Three suffixes scale different physical dimensions. `.sf-grid--xs` reads as
-"narrow column tier" (denser layouts), not "small gap" — gap on `.sf-grid` is
-controlled separately by `--sf-grid-gap` and is independent of the column-min
-modifier. To control a primitive's value beyond the built-in scale, override
-its scoped token directly: `style="--sf-stack-gap: var(--sf-space-3xl)"` —
-the underlying space tokens (`--sf-space-2xs`/`--sf-space-3xl`/`--sf-space-4xl`)
-remain part of the public token API.
+Three suffixes scale different physical dimensions. `.sf-grid--xs` means "narrow
+column tier" (denser layouts), not "small gap" — gap on `.sf-grid` is controlled
+separately by `--sf-grid-gap`, independent of the column-min modifier. To go beyond
+the built-in scale, override the scoped token directly:
+`style="--sf-stack-gap: var(--sf-space-3xl)"`. The underlying space tokens
+(`--sf-space-2xs`/`-3xl`/`-4xl`) are part of the public token API.
 
 ## Why no breakpoints
 
