@@ -57,7 +57,7 @@
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
     "@playwright/test": "^1.60.0",
-    "@release-it/conventional-changelog": "^11.0.0",
+    "@release-it/conventional-changelog": "^11.0.1",
     "culori": "^4.0.2",
     "fast-check": "^4.8.0",
     "lightningcss": "^1.32.0",
