@@ -4,16 +4,16 @@
 
 A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 
-[![release](https://img.shields.io/github/v/release/codeslash-dev/SLASHED?label=version&color=blueviolet&logo=css3&include_prereleases)](https://github.com/codeslash-dev/SLASHED/releases/latest)
-[![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/codeslash-dev/SLASHED?label=version&color=blueviolet&logo=css3&include_prereleases)](https://github.com/codeslash-dev/SLASHED/releases)
+[![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?branch=main&label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/codeslash-dev/SLASHED)](LICENSE)
-[![essential bundle](https://img.shields.io/badge/essential-11.6kB%20gzip-brightgreen?logo=css3)](dist/slashed.essential.min.css)
+[![essential bundle](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/codeslash-dev/SLASHED/dist/badge-essential.json)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css)
 
 ---
 
 ## Quick start
 
-Use a pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/releases/latest)):
+Use a pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/releases)):
 
 ```html
 <!-- core only -->
@@ -32,6 +32,7 @@ must load **first** and `optional/legacy.css` must load **last**:
 ```html
 <!-- core -->
 <link rel="stylesheet" href="core/layers.css">
+<link rel="stylesheet" href="core/tokens.color-fallbacks.css">
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/tokens.layout.css">
 <link rel="stylesheet" href="core/tokens.macros.css">
@@ -47,6 +48,7 @@ must load **first** and `optional/legacy.css` must load **last**:
 
 <!-- optional -->
 <link rel="stylesheet" href="optional/tokens.palette.css">
+<link rel="stylesheet" href="optional/tokens.sizes-extended.css">
 <link rel="stylesheet" href="optional/forms.css">
 <link rel="stylesheet" href="optional/legacy.css">
 ```
@@ -108,20 +110,25 @@ layer-flattened `.flat` variant. `npm run build` prints raw / gzip / brotli size
 ## Customising tokens
 
 Override the source tokens in your own stylesheet — any valid CSS color works. The
-minimum rebrand requires 6 `-light` tokens; optionally add `-dark` counterparts
-for per-mode control (up to 22 color tokens: 11 light + 11 dark):
+minimum rebrand is the 6 brand `-light` tokens; optionally add `-dark`
+counterparts for per-mode control. The 5 status colours
+(`success`/`warning`/`danger`/`error`/`info`) auto-derive but are overridable
+too, for up to 22 color tokens total (11 light + 11 dark):
 
 ```css
 :root {
-  --sf-color-primary-light: #3b5bdb;
-  --sf-color-action-light:  #0ca678;
-  --sf-color-neutral-light: #495057;
-  --sf-color-base-light:    #f8f9fa;
+  --sf-color-primary-light:   #3b5bdb;
+  --sf-color-secondary-light: #5c677d;
+  --sf-color-tertiary-light:  #0c8599;
+  --sf-color-action-light:    #0ca678;
+  --sf-color-neutral-light:   #495057;
+  --sf-color-base-light:      #f8f9fa;
 
-  --sf-color-primary-dark:  #748ffc;
-  --sf-color-action-dark:   #38d9a9;
-  --sf-color-neutral-dark:  #adb5bd;
-  --sf-color-base-dark:     #1a1b1e;
+  /* optional dark counterparts for per-mode control */
+  --sf-color-primary-dark:    #748ffc;
+  --sf-color-action-dark:     #38d9a9;
+  --sf-color-neutral-dark:    #adb5bd;
+  --sf-color-base-dark:       #1a1b1e;
 }
 ```
 
@@ -187,7 +194,7 @@ npm run docs:tokens  # regenerate docs/tokens.md from source
 npm run lint:css     # stylelint all CSS
 npm run lint:css:fix # auto-fix where possible
 npm test             # token regression suite (Playwright, light + dark)
-npm run test:install # one-time: install the Chromium test browser
+npm run test:install # one-time: install the Chromium, Firefox & WebKit test browsers
 npm run release      # bump version (runs version-sync + build), tag & push
 ```
 

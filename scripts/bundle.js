@@ -196,8 +196,35 @@ function buildOne({ files, output, flat = false }) {
   }
 }
 
+// Emits a shields.io "endpoint" badge descriptor for the essential bundle's
+// gzip size. Published to the `dist` branch by publish-dist.yml, so the README
+// badge (img.shields.io/endpoint?url=…/dist/badge-essential.json) always
+// reflects the freshly built size — no hand-edited number to go stale.
+function writeSizeBadge() {
+  const essentialMin = resolveInsideRoot('dist/slashed.essential.min.css');
+  // Prefer the minified bundle (what the badge advertises); fall back to the
+  // unminified one if lightningcss was unavailable.
+  const target = fs.existsSync(essentialMin)
+    ? essentialMin
+    : resolveInsideRoot('dist/slashed.essential.css');
+  if (!fs.existsSync(target)) return;
+
+  const gzipKb = zlib.gzipSync(fs.readFileSync(target), { level: 9 }).length / 1024;
+  const badge = {
+    schemaVersion: 1,
+    label: 'essential',
+    message: `${gzipKb.toFixed(1)} kB gzip`,
+    color: 'brightgreen',
+    logo: 'css3',
+  };
+  const out = resolveInsideRoot('dist/badge-essential.json');
+  fs.writeFileSync(out, `${JSON.stringify(badge, null, 2)}\n`, 'utf8');
+  console.log(`[bundle] → dist/badge-essential.json — ${badge.message}`);
+}
+
 function bundle() {
   getBundles().forEach(buildOne);
+  writeSizeBadge();
 }
 
 function watch() {
