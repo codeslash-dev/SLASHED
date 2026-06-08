@@ -561,7 +561,7 @@ values see [tokens.md](tokens.md); for the flat name list see
 | `--sf-leading-snug` | PUBLIC | Core | — | `1.3` |
 | `--sf-leading-tight` | PUBLIC | Core | — | `1.1` |
 | `--sf-line-clamp` | PUBLIC | Macros | — | `3` |
-| `--sf-link-external-marker` | PUBLIC | Core | — | `" \2197"` |
+| `--sf-link-external-marker` | PUBLIC | Core | — | `" \\2197"` |
 | `--sf-link-underline-offset` | PUBLIC | Core | — | `0.15em` |
 | `--sf-link-underline-thickness` | PUBLIC | Core | — | `auto` |
 | `--sf-lumlocker` | PUBLIC-ADVANCED | Core | — | `0.65` |
@@ -824,7 +824,7 @@ values see [tokens.md](tokens.md); for the flat name list see
 | `--sf-transition-shadow` | PUBLIC | Core | — | `box-shadow var(--sf-duration-normal) var(--sf-ease-out)` |
 | `--sf-transition-slow` | PUBLIC | Core | — | `color var(--sf-duration-slow) var(--sf-ease-in-out), background-color var(--sf-duration-slow) var(--sf-ease-in-out), border-color var(--sf-duration-slow) var(--sf-ease-in-out), box-shadow var(--sf-duration-slow) var(--sf-ease-in-out), opacity var(--sf-duration-slow) var(--sf-ease-in-out), transform var(--sf-duration-slow) var(--sf-ease-in-out), filter var(--sf-duration-slow) var(--sf-ease-in-out)` |
 | `--sf-transition-transform` | PUBLIC | Core | — | `transform var(--sf-duration-normal) var(--sf-ease-out)` |
-| `--sf-truncate-suffix` | PUBLIC-ADVANCED | Macros | — | `"\2026"` |
+| `--sf-truncate-suffix` | PUBLIC-ADVANCED | Macros | — | `"\\2026"` |
 | `--sf-z-base` | PUBLIC | Core | — | `0` |
 | `--sf-z-below` | PUBLIC | Core | — | `-1` |
 | `--sf-z-dropdown` | PUBLIC | Core | — | `var(--sf-z-high)` |

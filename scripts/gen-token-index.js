@@ -186,7 +186,10 @@ fs.writeFileSync(
 // ── Emit Markdown ─────────────────────────────────────────────────────────────
 
 const shortFile = f => FILE_TITLES[f] || f;
-const esc = v => v.replace(/\|/g, '\\|');
+// Escape for a Markdown table cell: backslash first (so we don't re-escape our
+// own escapes), then the pipe column-separator. CSS values legitimately contain
+// backslashes (e.g. unicode escapes like `\2026` in content tokens).
+const esc = v => v.replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
 
 let md = `# Token index
 
