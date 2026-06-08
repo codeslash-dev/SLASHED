@@ -190,9 +190,15 @@ lines.push(`
        standard typographic conventions; override any value globally
        here or locally via CSS custom property on a scoped element.
 
-       Consumed by base styles — apply like:
-         .my-element { font-size: var(--sf-text-xl); }
-         and these tokens are available to set its sub-properties.
+       These tokens are NOT auto-applied — they are opt-in composable
+       overrides. Wire them up in your own rules:
+         .my-element {
+           font-size:      var(--sf-text-xl);
+           line-height:    var(--sf-text-xl-line-height);
+           font-weight:    var(--sf-text-xl-font-weight);
+           letter-spacing: var(--sf-text-xl-letter-spacing);
+           max-width:      var(--sf-text-xl-max-width);
+         }
        ---------------------------------------------------------- */`);
 
 for (const size of TEXT_SIZE_PROPS) {
