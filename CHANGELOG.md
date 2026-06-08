@@ -6,11 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-> **Changelog gap:** versions `0.4.0`–`0.5.21` were tagged by CI but their
-> changes were never individually logged here — the changelog stayed at
-> `0.3.0` while everything accumulated under *Unreleased*. The entries below
-> cover all work since `0.3.0`; the next release moves them under its version
-> heading.
+## [0.5.24] - 2026-06-08
+
+> **Version-history note:** versions `0.4.0`–`0.5.23` were tagged by CI but
+> their changes were never individually logged here — the changelog stayed at
+> `0.3.0` while everything accumulated under *Unreleased*. Rather than invent
+> per-tag boundaries after the fact, the entire body of work since `0.3.0` is
+> consolidated under this `0.5.24` entry (the current released version). Future
+> releases log their changes under their own version heading as normal.
 
 ### Added
 
