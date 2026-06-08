@@ -5,7 +5,9 @@
     "buildCmd": "node scripts/bundle.js && npm run docs",
     "outputs": [
       "docs/tokens.md",
-      "docs/classes.md"
+      "docs/classes.md",
+      "docs/token-index.md",
+      "docs/token-index.json"
     ]
   }
 ]

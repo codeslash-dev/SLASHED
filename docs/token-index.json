@@ -1,0 +1,6295 @@
+{
+  "_meta": {
+    "generated_by": "scripts/gen-token-index.js",
+    "token_sources": [
+      "core/tokens.css",
+      "core/tokens.layout.css",
+      "core/tokens.macros.css",
+      "optional/tokens.palette.css",
+      "optional/tokens.sizes-extended.css",
+      "optional/tokens.components.css"
+    ],
+    "fallback_source": "core/tokens.color-fallbacks.css",
+    "counts": {
+      "tokens": 771,
+      "by_tier": {
+        "PUBLIC": 735,
+        "PUBLIC-ADVANCED": 35,
+        "INTERNAL": 1
+      },
+      "with_fallback": 57,
+      "fallback_only": 33
+    }
+  },
+  "tokens": {
+    "--sf-alternate-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-content)"
+    },
+    "--sf-alternate-inner-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-animation-blink": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite"
+    },
+    "--sf-animation-color-pulse": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite"
+    },
+    "--sf-animation-delay-1": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(75ms * var(--sf-motion-scale))"
+    },
+    "--sf-animation-delay-2": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(150ms * var(--sf-motion-scale))"
+    },
+    "--sf-animation-delay-3": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(225ms * var(--sf-motion-scale))"
+    },
+    "--sf-animation-delay-4": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(300ms * var(--sf-motion-scale))"
+    },
+    "--sf-animation-delay-5": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(375ms * var(--sf-motion-scale))"
+    },
+    "--sf-animation-fade-in": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both"
+    },
+    "--sf-animation-fade-out": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-fade-out var(--sf-duration-normal) var(--sf-ease-in) both"
+    },
+    "--sf-animation-float": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite"
+    },
+    "--sf-animation-ping": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-ping var(--sf-duration-slow) var(--sf-ease-out) infinite"
+    },
+    "--sf-animation-scale-down": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-scale-down var(--sf-duration-normal) var(--sf-ease-in) both"
+    },
+    "--sf-animation-scale-up": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-scale-up var(--sf-duration-normal) var(--sf-ease-overshoot) both"
+    },
+    "--sf-animation-shimmer": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-shimmer calc(1.5s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite"
+    },
+    "--sf-animation-slide-in-down": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-slide-in-down var(--sf-duration-normal) var(--sf-ease-out) both"
+    },
+    "--sf-animation-slide-in-left": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both"
+    },
+    "--sf-animation-slide-in-right": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both"
+    },
+    "--sf-animation-slide-in-up": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both"
+    },
+    "--sf-animation-spin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "sf-spin var(--sf-duration-slower) linear infinite"
+    },
+    "--sf-aspect": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "16 / 9"
+    },
+    "--sf-bento-cols-default": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "3"
+    },
+    "--sf-bento-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-bento-row-compact": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "6rem"
+    },
+    "--sf-bento-row-default": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "10rem"
+    },
+    "--sf-bento-row-tall": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "16rem"
+    },
+    "--sf-blur-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "32px"
+    },
+    "--sf-blur-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "16px"
+    },
+    "--sf-blur-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "8px"
+    },
+    "--sf-blur-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "48px"
+    },
+    "--sf-blur-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "4px"
+    },
+    "--sf-body-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-text)"
+    },
+    "--sf-body-em-style": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "italic"
+    },
+    "--sf-body-font-family": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-body)"
+    },
+    "--sf-body-font-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-m)"
+    },
+    "--sf-body-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-body-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-normal)"
+    },
+    "--sf-body-strong-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-bold)"
+    },
+    "--sf-body-text-wrap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "pretty"
+    },
+    "--sf-border": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)"
+    },
+    "--sf-border-strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)"
+    },
+    "--sf-border-style": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "solid"
+    },
+    "--sf-border-style-dotted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "dotted"
+    },
+    "--sf-border-style-soft": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "dashed"
+    },
+    "--sf-border-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)"
+    },
+    "--sf-border-width-1": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1px"
+    },
+    "--sf-border-width-2": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2px"
+    },
+    "--sf-border-width-3": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3px"
+    },
+    "--sf-border-width-4": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "4px"
+    },
+    "--sf-border-width-hairline": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.5px"
+    },
+    "--sf-box-border-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-border)"
+    },
+    "--sf-box-border-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-box-padding": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-breakout-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-container-wide)"
+    },
+    "--sf-caret-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action)"
+    },
+    "--sf-center-gutter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gutter)"
+    },
+    "--sf-center-max": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-container-default)"
+    },
+    "--sf-cluster-align": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "center"
+    },
+    "--sf-cluster-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-cluster-justify": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "flex-start"
+    },
+    "--sf-code-font-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.875em"
+    },
+    "--sf-col-rule-width-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-3)"
+    },
+    "--sf-col-rule-width-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-2)"
+    },
+    "--sf-col-rule-width-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-1)"
+    },
+    "--sf-col-width-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "32ch"
+    },
+    "--sf-col-width-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "24ch"
+    },
+    "--sf-col-width-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "16ch"
+    },
+    "--sf-color-action": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-action-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-surface))"
+    },
+    "--sf-color-action-200": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface))"
+    },
+    "--sf-color-action-300": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 40%, var(--sf-color-surface))"
+    },
+    "--sf-color-action-400": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface))"
+    },
+    "--sf-color-action-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 4%, var(--sf-color-surface))"
+    },
+    "--sf-color-action-500": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action)"
+    },
+    "--sf-color-action-600": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))"
+    },
+    "--sf-color-action-700": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 62%, var(--sf-color-text))"
+    },
+    "--sf-color-action-800": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text))"
+    },
+    "--sf-color-action-900": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 18%, var(--sf-color-text))"
+    },
+    "--sf-color-action-950": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-text))"
+    },
+    "--sf-color-action-a10": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 10%, transparent)"
+    },
+    "--sf-color-action-a20": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 20%, transparent)"
+    },
+    "--sf-color-action-a30": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 30%, transparent)"
+    },
+    "--sf-color-action-a40": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 40%, transparent)"
+    },
+    "--sf-color-action-a5": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 5%, transparent)"
+    },
+    "--sf-color-action-a50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 50%, transparent)"
+    },
+    "--sf-color-action-a60": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 60%, transparent)"
+    },
+    "--sf-color-action-a70": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 70%, transparent)"
+    },
+    "--sf-color-action-a80": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 80%, transparent)"
+    },
+    "--sf-color-action-a90": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 90%, transparent)"
+    },
+    "--sf-color-action-a95": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-action) 95%, transparent)"
+    },
+    "--sf-color-action-active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-xdark)"
+    },
+    "--sf-color-action-darker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-600)"
+    },
+    "--sf-color-action-ghost": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-a5)"
+    },
+    "--sf-color-action-hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-darker)"
+    },
+    "--sf-color-action-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.50 0.22 235)"
+    },
+    "--sf-color-action-lighter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-400)"
+    },
+    "--sf-color-action-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-a30)"
+    },
+    "--sf-color-action-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-a10)"
+    },
+    "--sf-color-action-superdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-950)"
+    },
+    "--sf-color-action-superlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-50)"
+    },
+    "--sf-color-action-xdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-800)"
+    },
+    "--sf-color-action-xlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-200)"
+    },
+    "--sf-color-base": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))"
+    },
+    "--sf-color-base-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-text) 8%, var(--sf-color-base))"
+    },
+    "--sf-color-base-200": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))"
+    },
+    "--sf-color-base-300": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-text) 40%, var(--sf-color-base))"
+    },
+    "--sf-color-base-400": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base))"
+    },
+    "--sf-color-base-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-base))"
+    },
+    "--sf-color-base-500": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base)"
+    },
+    "--sf-color-base-600": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))"
+    },
+    "--sf-color-base-700": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 62%, var(--sf-color-text))"
+    },
+    "--sf-color-base-800": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))"
+    },
+    "--sf-color-base-900": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 18%, var(--sf-color-text))"
+    },
+    "--sf-color-base-950": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 8%, var(--sf-color-text))"
+    },
+    "--sf-color-base-a10": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 10%, transparent)"
+    },
+    "--sf-color-base-a20": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 20%, transparent)"
+    },
+    "--sf-color-base-a30": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 30%, transparent)"
+    },
+    "--sf-color-base-a40": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 40%, transparent)"
+    },
+    "--sf-color-base-a5": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 5%, transparent)"
+    },
+    "--sf-color-base-a50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 50%, transparent)"
+    },
+    "--sf-color-base-a60": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 60%, transparent)"
+    },
+    "--sf-color-base-a70": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 70%, transparent)"
+    },
+    "--sf-color-base-a80": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 80%, transparent)"
+    },
+    "--sf-color-base-a90": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 90%, transparent)"
+    },
+    "--sf-color-base-a95": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-base) 95%, transparent)"
+    },
+    "--sf-color-base-active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-xdark)"
+    },
+    "--sf-color-base-darker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-600)"
+    },
+    "--sf-color-base-ghost": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-a5)"
+    },
+    "--sf-color-base-hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-darker)"
+    },
+    "--sf-color-base-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.96 0.006 250)"
+    },
+    "--sf-color-base-lighter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-400)"
+    },
+    "--sf-color-base-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-a30)"
+    },
+    "--sf-color-base-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-a10)"
+    },
+    "--sf-color-base-superdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-950)"
+    },
+    "--sf-color-base-superlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-50)"
+    },
+    "--sf-color-base-xdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-800)"
+    },
+    "--sf-color-base-xlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-200)"
+    },
+    "--sf-color-bg": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-base) calc(l + 0.02) c h)"
+    },
+    "--sf-color-bg--active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.12)"
+    },
+    "--sf-color-bg--disabled": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-inset)"
+    },
+    "--sf-color-bg--focus": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-action) l c h / 0.06)"
+    },
+    "--sf-color-bg--hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.08)"
+    },
+    "--sf-color-bg--selected": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-action) l c h / 0.1)"
+    },
+    "--sf-color-black": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0% 0 0)"
+    },
+    "--sf-color-border": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )"
+    },
+    "--sf-color-border--disabled": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)"
+    },
+    "--sf-color-border--focus": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action)"
+    },
+    "--sf-color-border--strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )"
+    },
+    "--sf-color-border--subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )"
+    },
+    "--sf-color-border--translucent": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.15)"
+    },
+    "--sf-color-code-bg": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-inset)"
+    },
+    "--sf-color-code-text": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-danger": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-danger-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.48 0.22 12)"
+    },
+    "--sf-color-danger-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.3)"
+    },
+    "--sf-color-danger-strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )"
+    },
+    "--sf-color-danger-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.1)"
+    },
+    "--sf-color-dim": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0 0 0 / 0.5)"
+    },
+    "--sf-color-error": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-error-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.50 0.20 25)"
+    },
+    "--sf-color-error-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-error) l c h / 0.3)"
+    },
+    "--sf-color-error-strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )"
+    },
+    "--sf-color-error-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-error) l c h / 0.1)"
+    },
+    "--sf-color-heading": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )"
+    },
+    "--sf-color-info": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-info-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.48 0.18 235)"
+    },
+    "--sf-color-info-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-info) l c h / 0.3)"
+    },
+    "--sf-color-info-strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )"
+    },
+    "--sf-color-info-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-info) l c h / 0.1)"
+    },
+    "--sf-color-inset": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-base) calc(l - 0.02) c h)"
+    },
+    "--sf-color-inverse": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-base) calc(1 - l) c h)"
+    },
+    "--sf-color-link": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )"
+    },
+    "--sf-color-link--active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h) )"
+    },
+    "--sf-color-link--disabled": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-text--disabled)"
+    },
+    "--sf-color-link--hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h) )"
+    },
+    "--sf-color-link--underline": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-action) l c h / 0.3)"
+    },
+    "--sf-color-link--visited": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )"
+    },
+    "--sf-color-mark-bg": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-warning) l c h / 0.25)"
+    },
+    "--sf-color-mark-text": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "inherit"
+    },
+    "--sf-color-neutral": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-neutral-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-surface))"
+    },
+    "--sf-color-neutral-200": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface))"
+    },
+    "--sf-color-neutral-300": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 40%, var(--sf-color-surface))"
+    },
+    "--sf-color-neutral-400": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface))"
+    },
+    "--sf-color-neutral-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 4%, var(--sf-color-surface))"
+    },
+    "--sf-color-neutral-500": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral)"
+    },
+    "--sf-color-neutral-600": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text))"
+    },
+    "--sf-color-neutral-700": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 62%, var(--sf-color-text))"
+    },
+    "--sf-color-neutral-800": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text))"
+    },
+    "--sf-color-neutral-900": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 18%, var(--sf-color-text))"
+    },
+    "--sf-color-neutral-950": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-text))"
+    },
+    "--sf-color-neutral-a10": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 10%, transparent)"
+    },
+    "--sf-color-neutral-a20": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 20%, transparent)"
+    },
+    "--sf-color-neutral-a30": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 30%, transparent)"
+    },
+    "--sf-color-neutral-a40": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 40%, transparent)"
+    },
+    "--sf-color-neutral-a5": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 5%, transparent)"
+    },
+    "--sf-color-neutral-a50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 50%, transparent)"
+    },
+    "--sf-color-neutral-a60": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 60%, transparent)"
+    },
+    "--sf-color-neutral-a70": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 70%, transparent)"
+    },
+    "--sf-color-neutral-a80": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 80%, transparent)"
+    },
+    "--sf-color-neutral-a90": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 90%, transparent)"
+    },
+    "--sf-color-neutral-a95": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-neutral) 95%, transparent)"
+    },
+    "--sf-color-neutral-active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-xdark)"
+    },
+    "--sf-color-neutral-darker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-600)"
+    },
+    "--sf-color-neutral-ghost": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-a5)"
+    },
+    "--sf-color-neutral-hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-darker)"
+    },
+    "--sf-color-neutral-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.52 0.025 260)"
+    },
+    "--sf-color-neutral-lighter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-400)"
+    },
+    "--sf-color-neutral-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-a30)"
+    },
+    "--sf-color-neutral-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-a10)"
+    },
+    "--sf-color-neutral-superdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-950)"
+    },
+    "--sf-color-neutral-superlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-50)"
+    },
+    "--sf-color-neutral-xdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-800)"
+    },
+    "--sf-color-neutral-xlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-200)"
+    },
+    "--sf-color-overlay": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-base) l c h / 0.9)"
+    },
+    "--sf-color-primary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-primary-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-surface))"
+    },
+    "--sf-color-primary-200": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface))"
+    },
+    "--sf-color-primary-300": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 40%, var(--sf-color-surface))"
+    },
+    "--sf-color-primary-400": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))"
+    },
+    "--sf-color-primary-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 4%, var(--sf-color-surface))"
+    },
+    "--sf-color-primary-500": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary)"
+    },
+    "--sf-color-primary-600": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))"
+    },
+    "--sf-color-primary-700": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 62%, var(--sf-color-text))"
+    },
+    "--sf-color-primary-800": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text))"
+    },
+    "--sf-color-primary-900": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 18%, var(--sf-color-text))"
+    },
+    "--sf-color-primary-950": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-text))"
+    },
+    "--sf-color-primary-a10": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 10%, transparent)"
+    },
+    "--sf-color-primary-a20": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 20%, transparent)"
+    },
+    "--sf-color-primary-a30": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 30%, transparent)"
+    },
+    "--sf-color-primary-a40": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 40%, transparent)"
+    },
+    "--sf-color-primary-a5": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 5%, transparent)"
+    },
+    "--sf-color-primary-a50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 50%, transparent)"
+    },
+    "--sf-color-primary-a60": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 60%, transparent)"
+    },
+    "--sf-color-primary-a70": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 70%, transparent)"
+    },
+    "--sf-color-primary-a80": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 80%, transparent)"
+    },
+    "--sf-color-primary-a90": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 90%, transparent)"
+    },
+    "--sf-color-primary-a95": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-primary) 95%, transparent)"
+    },
+    "--sf-color-primary-active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-xdark)"
+    },
+    "--sf-color-primary-darker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-600)"
+    },
+    "--sf-color-primary-ghost": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-a5)"
+    },
+    "--sf-color-primary-hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-darker)"
+    },
+    "--sf-color-primary-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.47 0.27 264)"
+    },
+    "--sf-color-primary-lighter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-400)"
+    },
+    "--sf-color-primary-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-a30)"
+    },
+    "--sf-color-primary-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-a10)"
+    },
+    "--sf-color-primary-superdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-950)"
+    },
+    "--sf-color-primary-superlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-50)"
+    },
+    "--sf-color-primary-xdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-800)"
+    },
+    "--sf-color-primary-xlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-200)"
+    },
+    "--sf-color-raised": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-base) calc(l + 0.04) c h)"
+    },
+    "--sf-color-scheme": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light dark"
+    },
+    "--sf-color-secondary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-secondary-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-surface))"
+    },
+    "--sf-color-secondary-200": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface))"
+    },
+    "--sf-color-secondary-300": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 40%, var(--sf-color-surface))"
+    },
+    "--sf-color-secondary-400": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface))"
+    },
+    "--sf-color-secondary-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 4%, var(--sf-color-surface))"
+    },
+    "--sf-color-secondary-500": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary)"
+    },
+    "--sf-color-secondary-600": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text))"
+    },
+    "--sf-color-secondary-700": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 62%, var(--sf-color-text))"
+    },
+    "--sf-color-secondary-800": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text))"
+    },
+    "--sf-color-secondary-900": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 18%, var(--sf-color-text))"
+    },
+    "--sf-color-secondary-950": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-text))"
+    },
+    "--sf-color-secondary-a10": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 10%, transparent)"
+    },
+    "--sf-color-secondary-a20": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 20%, transparent)"
+    },
+    "--sf-color-secondary-a30": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 30%, transparent)"
+    },
+    "--sf-color-secondary-a40": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 40%, transparent)"
+    },
+    "--sf-color-secondary-a5": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 5%, transparent)"
+    },
+    "--sf-color-secondary-a50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 50%, transparent)"
+    },
+    "--sf-color-secondary-a60": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 60%, transparent)"
+    },
+    "--sf-color-secondary-a70": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 70%, transparent)"
+    },
+    "--sf-color-secondary-a80": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 80%, transparent)"
+    },
+    "--sf-color-secondary-a90": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 90%, transparent)"
+    },
+    "--sf-color-secondary-a95": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-secondary) 95%, transparent)"
+    },
+    "--sf-color-secondary-active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-xdark)"
+    },
+    "--sf-color-secondary-darker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-600)"
+    },
+    "--sf-color-secondary-ghost": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-a5)"
+    },
+    "--sf-color-secondary-hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-darker)"
+    },
+    "--sf-color-secondary-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.22 0.04 264)"
+    },
+    "--sf-color-secondary-lighter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-400)"
+    },
+    "--sf-color-secondary-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-a30)"
+    },
+    "--sf-color-secondary-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-a10)"
+    },
+    "--sf-color-secondary-superdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-950)"
+    },
+    "--sf-color-secondary-superlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-50)"
+    },
+    "--sf-color-secondary-xdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-800)"
+    },
+    "--sf-color-secondary-xlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-200)"
+    },
+    "--sf-color-selection-bg": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )"
+    },
+    "--sf-color-selection-text": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "inherit"
+    },
+    "--sf-color-success": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-success-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.50 0.16 145)"
+    },
+    "--sf-color-success-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-success) l c h / 0.3)"
+    },
+    "--sf-color-success-strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )"
+    },
+    "--sf-color-success-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-success) l c h / 0.12)"
+    },
+    "--sf-color-surface": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base)"
+    },
+    "--sf-color-tertiary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-tertiary-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-surface))"
+    },
+    "--sf-color-tertiary-200": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface))"
+    },
+    "--sf-color-tertiary-300": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 40%, var(--sf-color-surface))"
+    },
+    "--sf-color-tertiary-400": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface))"
+    },
+    "--sf-color-tertiary-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 4%, var(--sf-color-surface))"
+    },
+    "--sf-color-tertiary-500": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary)"
+    },
+    "--sf-color-tertiary-600": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))"
+    },
+    "--sf-color-tertiary-700": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 62%, var(--sf-color-text))"
+    },
+    "--sf-color-tertiary-800": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text))"
+    },
+    "--sf-color-tertiary-900": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 18%, var(--sf-color-text))"
+    },
+    "--sf-color-tertiary-950": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-text))"
+    },
+    "--sf-color-tertiary-a10": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 10%, transparent)"
+    },
+    "--sf-color-tertiary-a20": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 20%, transparent)"
+    },
+    "--sf-color-tertiary-a30": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 30%, transparent)"
+    },
+    "--sf-color-tertiary-a40": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 40%, transparent)"
+    },
+    "--sf-color-tertiary-a5": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 5%, transparent)"
+    },
+    "--sf-color-tertiary-a50": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 50%, transparent)"
+    },
+    "--sf-color-tertiary-a60": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 60%, transparent)"
+    },
+    "--sf-color-tertiary-a70": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 70%, transparent)"
+    },
+    "--sf-color-tertiary-a80": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 80%, transparent)"
+    },
+    "--sf-color-tertiary-a90": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 90%, transparent)"
+    },
+    "--sf-color-tertiary-a95": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) 95%, transparent)"
+    },
+    "--sf-color-tertiary-active": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-xdark)"
+    },
+    "--sf-color-tertiary-darker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-600)"
+    },
+    "--sf-color-tertiary-ghost": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-a5)"
+    },
+    "--sf-color-tertiary-hover": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-darker)"
+    },
+    "--sf-color-tertiary-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.42 0.22 295)"
+    },
+    "--sf-color-tertiary-lighter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-400)"
+    },
+    "--sf-color-tertiary-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-a30)"
+    },
+    "--sf-color-tertiary-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-a10)"
+    },
+    "--sf-color-tertiary-superdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-950)"
+    },
+    "--sf-color-tertiary-superlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-50)"
+    },
+    "--sf-color-tertiary-xdark": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-800)"
+    },
+    "--sf-color-tertiary-xlight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-200)"
+    },
+    "--sf-color-text": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )"
+    },
+    "--sf-color-text--disabled": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )"
+    },
+    "--sf-color-text--inverse": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )"
+    },
+    "--sf-color-text--muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral)"
+    },
+    "--sf-color-text--on-action": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-base": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "var(--sf-color-text)"
+    },
+    "--sf-color-text--on-danger": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-error": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-info": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-info) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-inverse": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "var(--sf-color-text--inverse)"
+    },
+    "--sf-color-text--on-neutral": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-neutral) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-primary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-primary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-secondary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-success": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-surface": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "var(--sf-color-text--on-base)"
+    },
+    "--sf-color-text--on-tertiary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--on-warning": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
+    },
+    "--sf-color-text--placeholder": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )"
+    },
+    "--sf-color-text--secondary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )"
+    },
+    "--sf-color-warning": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-warning-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0.75 0.17 80)"
+    },
+    "--sf-color-warning-muted": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-warning) l c h / 0.3)"
+    },
+    "--sf-color-warning-strong": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )"
+    },
+    "--sf-color-warning-subtle": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-warning) l c h / 0.12)"
+    },
+    "--sf-color-white": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(100% 0 0)"
+    },
+    "--sf-component-pad": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-container-default": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "75rem"
+    },
+    "--sf-container-full": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "100%"
+    },
+    "--sf-container-narrow": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "38rem"
+    },
+    "--sf-container-prose": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "65ch"
+    },
+    "--sf-container-wide": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "90rem"
+    },
+    "--sf-content-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-s)"
+    },
+    "--sf-content-intrinsic-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "500px"
+    },
+    "--sf-content-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-container-default)"
+    },
+    "--sf-contrast-bias": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-contrast-threshold": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.6"
+    },
+    "--sf-cover-min-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "100dvh"
+    },
+    "--sf-cover-padding": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-section-pad)"
+    },
+    "--sf-current-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-bold)"
+    },
+    "--sf-divider-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-border)"
+    },
+    "--sf-divider-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-divider-style": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "solid"
+    },
+    "--sf-divider-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-1)"
+    },
+    "--sf-drop-shadow-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))"
+    },
+    "--sf-drop-shadow-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))"
+    },
+    "--sf-drop-shadow-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))"
+    },
+    "--sf-duration-fast": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(150ms * var(--sf-motion-scale))"
+    },
+    "--sf-duration-instant": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(100ms * var(--sf-motion-scale))"
+    },
+    "--sf-duration-none": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0ms"
+    },
+    "--sf-duration-normal": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(250ms * var(--sf-motion-scale))"
+    },
+    "--sf-duration-slow": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(400ms * var(--sf-motion-scale))"
+    },
+    "--sf-duration-slower": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(600ms * var(--sf-motion-scale))"
+    },
+    "--sf-ease-bounce": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)"
+    },
+    "--sf-ease-elastic": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear(0, 0.3, 1.2, 0.9, 1.05, 1)"
+    },
+    "--sf-ease-in": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "cubic-bezier(0.5, 0, 0.75, 0.25)"
+    },
+    "--sf-ease-in-out": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "--sf-ease-linear": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear"
+    },
+    "--sf-ease-out": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "cubic-bezier(0.25, 0, 0.15, 1)"
+    },
+    "--sf-ease-overshoot": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)"
+    },
+    "--sf-ease-spring": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear(0, 0.5, 1.1, 0.95, 1.02, 1)"
+    },
+    "--sf-equal-cols": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "2"
+    },
+    "--sf-equal-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-field-block": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-l)"
+    },
+    "--sf-field-required-marker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "\" *\""
+    },
+    "--sf-flow-space": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-content)"
+    },
+    "--sf-focus-ring-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action)"
+    },
+    "--sf-focus-ring-offset": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2px"
+    },
+    "--sf-focus-ring-shadow": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)"
+    },
+    "--sf-focus-ring-style": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "solid"
+    },
+    "--sf-focus-ring-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2px"
+    },
+    "--sf-font-body": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "system-ui, -apple-system, sans-serif"
+    },
+    "--sf-font-display": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-heading)"
+    },
+    "--sf-font-features": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "normal"
+    },
+    "--sf-font-geometric": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "\"Avenir\", \"Montserrat\", \"Corbel\", \"URW Gothic\", source-sans-pro, sans-serif"
+    },
+    "--sf-font-heading": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-body)"
+    },
+    "--sf-font-humanist": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "\"Seravek\", \"Gill Sans Nova\", \"Ubuntu\", \"Calibri\", \"DejaVu Sans\", source-sans-pro, sans-serif"
+    },
+    "--sf-font-mono": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "ui-monospace, monospace"
+    },
+    "--sf-font-numeric": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "tabular-nums"
+    },
+    "--sf-font-slab": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "\"Rockwell\", \"Rockwell Nova\", \"Roboto Slab\", \"DejaVu Serif\", \"Sitka Small\", serif"
+    },
+    "--sf-font-variation": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "normal"
+    },
+    "--sf-font-weight-black": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "900"
+    },
+    "--sf-font-weight-body": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-normal)"
+    },
+    "--sf-font-weight-bold": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "700"
+    },
+    "--sf-font-weight-display": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-bold)"
+    },
+    "--sf-font-weight-extrabold": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "800"
+    },
+    "--sf-font-weight-extralight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "200"
+    },
+    "--sf-font-weight-heading": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-semibold)"
+    },
+    "--sf-font-weight-light": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "300"
+    },
+    "--sf-font-weight-medium": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "500"
+    },
+    "--sf-font-weight-normal": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "400"
+    },
+    "--sf-font-weight-semibold": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "600"
+    },
+    "--sf-font-weight-thin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "100"
+    },
+    "--sf-frame-ratio": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "16 / 9"
+    },
+    "--sf-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-gap-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-gradient-brand": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))"
+    },
+    "--sf-gradient-fade--b": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))"
+    },
+    "--sf-gradient-fade--l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch to left, transparent, var(--sf-color-bg))"
+    },
+    "--sf-gradient-fade--r": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch to right, transparent, var(--sf-color-bg))"
+    },
+    "--sf-gradient-fade--t": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch to top, transparent, var(--sf-color-bg))"
+    },
+    "--sf-gradient-primary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h))"
+    },
+    "--sf-gradient-secondary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))"
+    },
+    "--sf-gradient-surface": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))"
+    },
+    "--sf-gradient-tertiary": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))"
+    },
+    "--sf-grid-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-grid-min": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "16rem"
+    },
+    "--sf-grid-min-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "28rem"
+    },
+    "--sf-grid-min-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "20rem"
+    },
+    "--sf-grid-min-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "16rem"
+    },
+    "--sf-grid-min-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "13rem"
+    },
+    "--sf-grid-min-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "24rem"
+    },
+    "--sf-grid-min-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "10rem"
+    },
+    "--sf-h1-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-h1-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-tight)"
+    },
+    "--sf-h1-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-tight)"
+    },
+    "--sf-h1-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-4xl)"
+    },
+    "--sf-h2-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-h2-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-tight)"
+    },
+    "--sf-h2-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-tight)"
+    },
+    "--sf-h2-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-3xl)"
+    },
+    "--sf-h3-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-h3-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-h3-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-snug)"
+    },
+    "--sf-h3-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-2xl)"
+    },
+    "--sf-h4-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-h4-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-h4-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-snug)"
+    },
+    "--sf-h4-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-xl)"
+    },
+    "--sf-h5-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-h5-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-h5-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-normal)"
+    },
+    "--sf-h5-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-l)"
+    },
+    "--sf-h6-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-h6-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-wide)"
+    },
+    "--sf-h6-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-normal)"
+    },
+    "--sf-h6-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-m)"
+    },
+    "--sf-header-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "clamp( var(--sf-header-height-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))"
+    },
+    "--sf-header-height-desktop": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "5rem"
+    },
+    "--sf-header-height-mobile": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3.5rem"
+    },
+    "--sf-heading-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-heading)"
+    },
+    "--sf-heading-font-family": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-heading)"
+    },
+    "--sf-heading-text-wrap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "balance"
+    },
+    "--sf-icon-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "4em"
+    },
+    "--sf-icon-box-bg": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-inset)"
+    },
+    "--sf-icon-box-border": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-1) solid var(--sf-color-border)"
+    },
+    "--sf-icon-box-pad": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "0.5em"
+    },
+    "--sf-icon-box-radius": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-radius-s)"
+    },
+    "--sf-icon-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2em"
+    },
+    "--sf-icon-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.5em"
+    },
+    "--sf-icon-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1em"
+    },
+    "--sf-icon-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3em"
+    },
+    "--sf-icon-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.875em"
+    },
+    "--sf-imposter-margin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-is-active": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 (registered)"
+    },
+    "--sf-is-current": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 (registered)"
+    },
+    "--sf-is-dark": {
+      "tier": "INTERNAL",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 (registered)"
+    },
+    "--sf-is-open": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 (registered)"
+    },
+    "--sf-is-pressed": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 (registered)"
+    },
+    "--sf-leading-normal": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.5"
+    },
+    "--sf-leading-relaxed": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.625"
+    },
+    "--sf-leading-snug": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.3"
+    },
+    "--sf-leading-tight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.1"
+    },
+    "--sf-line-clamp": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "3"
+    },
+    "--sf-link-external-marker": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "\" \\2197\""
+    },
+    "--sf-link-underline-offset": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.15em"
+    },
+    "--sf-link-underline-thickness": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "auto"
+    },
+    "--sf-lumlocker": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.65"
+    },
+    "--sf-mask-scrim-end": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-l)"
+    },
+    "--sf-mask-scrim-start": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-l)"
+    },
+    "--sf-motion-scale": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-object-fit": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "cover"
+    },
+    "--sf-object-position": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "50% 50%"
+    },
+    "--sf-opacity-0": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-opacity-10": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.1"
+    },
+    "--sf-opacity-100": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-opacity-25": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.25"
+    },
+    "--sf-opacity-50": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.5"
+    },
+    "--sf-opacity-75": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.75"
+    },
+    "--sf-opacity-disabled": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.45"
+    },
+    "--sf-optical-sizing": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "auto"
+    },
+    "--sf-perspective-far": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2000px"
+    },
+    "--sf-perspective-near": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "500px"
+    },
+    "--sf-perspective-normal": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1000px"
+    },
+    "--sf-print-base-size": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "11pt"
+    },
+    "--sf-print-page-margin": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2cm"
+    },
+    "--sf-print-page-size": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "a4"
+    },
+    "--sf-prose-block-margin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-prose-figcaption-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-text-s)"
+    },
+    "--sf-prose-figure-margin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-l)"
+    },
+    "--sf-prose-heading-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-s)"
+    },
+    "--sf-prose-list-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-xs)"
+    },
+    "--sf-prose-marker-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary)"
+    },
+    "--sf-prose-media-margin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-prose-media-radius": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-radius-m)"
+    },
+    "--sf-prose-paragraph": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-content)"
+    },
+    "--sf-radius-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(24px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-3xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(32px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-4xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(48px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-full": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "9999px"
+    },
+    "--sf-radius-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(12px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(8px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-none": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-radius-outer": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(var(--sf-radius-m) + var(--sf-component-pad))"
+    },
+    "--sf-radius-pill": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-radius-full)"
+    },
+    "--sf-radius-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(4px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-scale": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-radius-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(16px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(2px * var(--sf-radius-scale))"
+    },
+    "--sf-ratio-3-2": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3 / 2"
+    },
+    "--sf-ratio-4-3": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "4 / 3"
+    },
+    "--sf-ratio-cinema": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "21 / 9"
+    },
+    "--sf-ratio-golden": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.618 / 1"
+    },
+    "--sf-ratio-portrait": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3 / 4"
+    },
+    "--sf-ratio-square": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-ratio-video": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "16 / 9"
+    },
+    "--sf-reel-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-reel-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "auto"
+    },
+    "--sf-reel-item-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "max-content"
+    },
+    "--sf-safe-bottom": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "env(safe-area-inset-bottom, 0px)"
+    },
+    "--sf-safe-left": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "env(safe-area-inset-left, 0px)"
+    },
+    "--sf-safe-right": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "env(safe-area-inset-right, 0px)"
+    },
+    "--sf-safe-top": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "env(safe-area-inset-top, 0px)"
+    },
+    "--sf-scrim-color": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "oklch(0 0 0 / 0.55)"
+    },
+    "--sf-scrim-direction": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "to top"
+    },
+    "--sf-scrim-gradient": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)"
+    },
+    "--sf-scrim-text-shadow": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "0 1px 3px oklch(0 0 0 / 0.6)"
+    },
+    "--sf-scroll-shadow-size": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "2rem"
+    },
+    "--sf-scroll-timeline-range-end": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "cover 30%"
+    },
+    "--sf-scroll-timeline-range-start": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "entry 0%"
+    },
+    "--sf-scrollbar-thumb": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral)"
+    },
+    "--sf-scrollbar-track": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "transparent"
+    },
+    "--sf-section-pad": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-section-pad--m)"
+    },
+    "--sf-section-pad--2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(var(--sf-space-4xl) * 2)"
+    },
+    "--sf-section-pad--l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-4xl)"
+    },
+    "--sf-section-pad--m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-3xl)"
+    },
+    "--sf-section-pad--s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-2xl)"
+    },
+    "--sf-section-pad--xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(var(--sf-space-4xl) * 1.5)"
+    },
+    "--sf-section-pad--xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-xl)"
+    },
+    "--sf-shadow-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))"
+    },
+    "--sf-shadow-color": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "oklch(from var(--sf-color-neutral) 0.15 c h)"
+    },
+    "--sf-shadow-glow": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))"
+    },
+    "--sf-shadow-glow-color": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary)"
+    },
+    "--sf-shadow-inner": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))"
+    },
+    "--sf-shadow-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))"
+    },
+    "--sf-shadow-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))"
+    },
+    "--sf-shadow-none": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "none"
+    },
+    "--sf-shadow-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))"
+    },
+    "--sf-shadow-strength": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(0.08 + var(--sf-is-dark) * 0.17)"
+    },
+    "--sf-shadow-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))"
+    },
+    "--sf-shadow-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))"
+    },
+    "--sf-sidebar-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-sidebar-min-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "50%"
+    },
+    "--sf-sidebar-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "18rem"
+    },
+    "--sf-size-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2.75rem"
+    },
+    "--sf-size-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2.5rem"
+    },
+    "--sf-size-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2rem"
+    },
+    "--sf-size-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3.5rem"
+    },
+    "--sf-size-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.5rem"
+    },
+    "--sf-space-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.95rem, calc(0.04133333333333333 * (100vw - 22.5rem) + 1.95rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.0626666666666667 * (100vw - 22.5rem) + 0.51rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.25rem, calc(0.0517037037037037 * (100vw - 22.5rem) + 1.25rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.0554074074074074 * (100vw - 22.5rem) + 1rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.0583703703703704 * (100vw - 22.5rem) + 0.8rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xl-to-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.56rem, calc(0.0471111111111111 * (100vw - 22.5rem) + 1.56rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.0607407407407407 * (100vw - 22.5rem) + 0.64rem), 4.74rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.004888888888888888 * (100vw - 22.5rem) + 0.51rem), 0.84rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(2.44rem, calc(0.057333333333333326 * (100vw - 22.5rem) + 2.44rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.95rem, calc(0.0645925925925926 * (100vw - 22.5rem) + 1.95rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.0859259259259259 * (100vw - 22.5rem) + 0.51rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.25rem, calc(0.074962962962963 * (100vw - 22.5rem) + 1.25rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.0786666666666667 * (100vw - 22.5rem) + 1rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.0816296296296296 * (100vw - 22.5rem) + 0.8rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.56rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 1.56rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-3xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.084 * (100vw - 22.5rem) + 0.64rem), 6.31rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(3.05rem, calc(0.07955555555555556 * (100vw - 22.5rem) + 3.05rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.95rem, calc(0.0958518518518519 * (100vw - 22.5rem) + 1.95rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.117185185185185 * (100vw - 22.5rem) + 0.51rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-3xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(2.44rem, calc(0.0885925925925926 * (100vw - 22.5rem) + 2.44rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.25rem, calc(0.106222222222222 * (100vw - 22.5rem) + 1.25rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.109925925925926 * (100vw - 22.5rem) + 1rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.112888888888889 * (100vw - 22.5rem) + 0.8rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.56rem, calc(0.10162962962963 * (100vw - 22.5rem) + 1.56rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-4xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.115259259259259 * (100vw - 22.5rem) + 0.64rem), 8.42rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-content": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-content-gap)"
+    },
+    "--sf-space-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-gap)"
+    },
+    "--sf-space-gutter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-l)"
+    },
+    "--sf-space-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.25rem, calc(0.021037037037037035 * (100vw - 22.5rem) + 1.25rem), 2.67rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-l-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.032 * (100vw - 22.5rem) + 0.51rem), 2.67rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-l-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.0247407407407407 * (100vw - 22.5rem) + 1rem), 2.67rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-l-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.0277037037037037 * (100vw - 22.5rem) + 0.8rem), 2.67rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-l-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.0300740740740741 * (100vw - 22.5rem) + 0.64rem), 2.67rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 1rem), 2rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-m-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.0220740740740741 * (100vw - 22.5rem) + 0.51rem), 2rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-m-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.0177777777777778 * (100vw - 22.5rem) + 0.8rem), 2rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-m-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.0201481481481481 * (100vw - 22.5rem) + 0.64rem), 2rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-none": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-space-px": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1px"
+    },
+    "--sf-space-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.01037037037037037 * (100vw - 22.5rem) + 0.8rem), 1.5rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-s-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.0146666666666667 * (100vw - 22.5rem) + 0.51rem), 1.5rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-s-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.0127407407407407 * (100vw - 22.5rem) + 0.64rem), 1.5rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-scale": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-space-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.56rem, calc(0.029481481481481477 * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.045037037037037 * (100vw - 22.5rem) + 0.51rem), 3.55rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.25rem, calc(0.0340740740740741 * (100vw - 22.5rem) + 1.25rem), 3.55rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.0377777777777778 * (100vw - 22.5rem) + 1rem), 3.55rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.0407407407407407 * (100vw - 22.5rem) + 0.8rem), 3.55rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.0431111111111111 * (100vw - 22.5rem) + 0.64rem), 3.55rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))"
+    },
+    "--sf-space-xs-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.00918518518518518 * (100vw - 22.5rem) + 0.51rem), 1.13rem) * var(--sf-space-scale))"
+    },
+    "--sf-stack-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-content)"
+    },
+    "--sf-state-pending-opacity": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.7"
+    },
+    "--sf-sticky-offset": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "clamp( var(--sf-sticky-offset-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))"
+    },
+    "--sf-sticky-offset-desktop": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-header-height-desktop)"
+    },
+    "--sf-sticky-offset-mobile": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-header-height-mobile)"
+    },
+    "--sf-stroke-bold": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2px"
+    },
+    "--sf-stroke-heavy": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3px"
+    },
+    "--sf-stroke-regular": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.5px"
+    },
+    "--sf-stroke-thin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1px"
+    },
+    "--sf-switcher-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-gap)"
+    },
+    "--sf-switcher-threshold": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "fallback": false,
+      "value": "30rem"
+    },
+    "--sf-text-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-2xl-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-text-2xl-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-2xl-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-snug)"
+    },
+    "--sf-text-2xl-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
+    "--sf-text-2xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.0362962962962963 * (100vw - 22.5rem) + 0.51rem), 2.96rem)"
+    },
+    "--sf-text-2xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.25rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 1.25rem), 2.96rem)"
+    },
+    "--sf-text-2xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1rem, calc(0.029037037037037 * (100vw - 22.5rem) + 1rem), 2.96rem)"
+    },
+    "--sf-text-2xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.8rem, calc(0.032 * (100vw - 22.5rem) + 0.8rem), 2.96rem)"
+    },
+    "--sf-text-2xl-to-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.56rem, calc(0.0207407407407407 * (100vw - 22.5rem) + 1.56rem), 2.96rem)"
+    },
+    "--sf-text-2xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.0343703703703704 * (100vw - 22.5rem) + 0.64rem), 2.96rem)"
+    },
+    "--sf-text-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-2xs-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-text-2xs-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-2xs-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-relaxed)"
+    },
+    "--sf-text-2xs-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "55ch"
+    },
+    "--sf-text-3xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-3xl-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-text-3xl-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-tight)"
+    },
+    "--sf-text-3xl-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-tight)"
+    },
+    "--sf-text-3xl-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
+    "--sf-text-3xl-to-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.95rem, calc(0.0296296296296296 * (100vw - 22.5rem) + 1.95rem), 3.95rem)"
+    },
+    "--sf-text-3xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.050962962962963 * (100vw - 22.5rem) + 0.51rem), 3.95rem)"
+    },
+    "--sf-text-3xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.25rem, calc(0.04 * (100vw - 22.5rem) + 1.25rem), 3.95rem)"
+    },
+    "--sf-text-3xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1rem, calc(0.0437037037037037 * (100vw - 22.5rem) + 1rem), 3.95rem)"
+    },
+    "--sf-text-3xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.8rem, calc(0.0466666666666667 * (100vw - 22.5rem) + 0.8rem), 3.95rem)"
+    },
+    "--sf-text-3xl-to-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.56rem, calc(0.0354074074074074 * (100vw - 22.5rem) + 1.56rem), 3.95rem)"
+    },
+    "--sf-text-3xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.049037037037037 * (100vw - 22.5rem) + 0.64rem), 3.95rem)"
+    },
+    "--sf-text-4xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-4xl-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-heading)"
+    },
+    "--sf-text-4xl-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-tight)"
+    },
+    "--sf-text-4xl-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-tight)"
+    },
+    "--sf-text-4xl-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
+    "--sf-text-4xl-to-2xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.95rem, calc(0.049037037037037 * (100vw - 22.5rem) + 1.95rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 0.51rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-3xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(2.44rem, calc(0.0417777777777778 * (100vw - 22.5rem) + 2.44rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.25rem, calc(0.0594074074074074 * (100vw - 22.5rem) + 1.25rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1rem, calc(0.0631111111111111 * (100vw - 22.5rem) + 1rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.8rem, calc(0.0660740740740741 * (100vw - 22.5rem) + 0.8rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.56rem, calc(0.0548148148148148 * (100vw - 22.5rem) + 1.56rem), 5.26rem)"
+    },
+    "--sf-text-4xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.0684444444444444 * (100vw - 22.5rem) + 0.64rem), 5.26rem)"
+    },
+    "--sf-text-display-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem) * var(--sf-text-display-scale))"
+    },
+    "--sf-text-display-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem) * var(--sf-text-display-scale))"
+    },
+    "--sf-text-display-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem) * var(--sf-text-display-scale))"
+    },
+    "--sf-text-display-scale": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-text-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-l-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-text-l-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-l-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-normal)"
+    },
+    "--sf-text-l-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
+    "--sf-text-l-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.0171851851851852 * (100vw - 22.5rem) + 0.51rem), 1.67rem)"
+    },
+    "--sf-text-l-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1rem, calc(0.00992592592592592 * (100vw - 22.5rem) + 1rem), 1.67rem)"
+    },
+    "--sf-text-l-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.8rem, calc(0.0128888888888889 * (100vw - 22.5rem) + 0.8rem), 1.67rem)"
+    },
+    "--sf-text-l-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.0152592592592593 * (100vw - 22.5rem) + 0.64rem), 1.67rem)"
+    },
+    "--sf-text-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-m-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-text-m-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-m-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-normal)"
+    },
+    "--sf-text-m-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "65ch"
+    },
+    "--sf-text-m-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.010962962962963 * (100vw - 22.5rem) + 0.51rem), 1.25rem)"
+    },
+    "--sf-text-m-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.8rem, calc(0.00666666666666667 * (100vw - 22.5rem) + 0.8rem), 1.25rem)"
+    },
+    "--sf-text-m-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.00903703703703704 * (100vw - 22.5rem) + 0.64rem), 1.25rem)"
+    },
+    "--sf-text-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-s-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-text-s-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-s-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-relaxed)"
+    },
+    "--sf-text-s-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "65ch"
+    },
+    "--sf-text-s-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.00637037037037037 * (100vw - 22.5rem) + 0.51rem), 0.94rem)"
+    },
+    "--sf-text-s-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.00444444444444444 * (100vw - 22.5rem) + 0.64rem), 0.94rem)"
+    },
+    "--sf-text-scale": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-text-shadow-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))"
+    },
+    "--sf-text-shadow-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))"
+    },
+    "--sf-text-shadow-none": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "none"
+    },
+    "--sf-text-shadow-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": true,
+      "value": "0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))"
+    },
+    "--sf-text-xl": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-xl-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-text-xl-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-xl-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-snug)"
+    },
+    "--sf-text-xl-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
+    "--sf-text-xl-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 0.51rem), 2.22rem)"
+    },
+    "--sf-text-xl-to-l": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1.25rem, calc(0.0143703703703704 * (100vw - 22.5rem) + 1.25rem), 2.22rem)"
+    },
+    "--sf-text-xl-to-m": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(1rem, calc(0.0180740740740741 * (100vw - 22.5rem) + 1rem), 2.22rem)"
+    },
+    "--sf-text-xl-to-s": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.8rem, calc(0.021037037037037 * (100vw - 22.5rem) + 0.8rem), 2.22rem)"
+    },
+    "--sf-text-xl-to-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.64rem, calc(0.0234074074074074 * (100vw - 22.5rem) + 0.64rem), 2.22rem)"
+    },
+    "--sf-text-xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "calc(clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem) * var(--sf-text-scale))"
+    },
+    "--sf-text-xs-font-weight": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-font-weight-body)"
+    },
+    "--sf-text-xs-letter-spacing": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-tracking-normal)"
+    },
+    "--sf-text-xs-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-relaxed)"
+    },
+    "--sf-text-xs-max-width": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "60ch"
+    },
+    "--sf-text-xs-to-2xs": {
+      "tier": "PUBLIC",
+      "files": [
+        "optional/tokens.sizes-extended.css"
+      ],
+      "fallback": false,
+      "value": "clamp(0.51rem, calc(0.00281481481481481 * (100vw - 22.5rem) + 0.51rem), 0.7rem)"
+    },
+    "--sf-touch-target": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-size-l)"
+    },
+    "--sf-tracking-normal": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-tracking-tight": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "-0.025em"
+    },
+    "--sf-tracking-wide": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.025em"
+    },
+    "--sf-tracking-wider": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.05em"
+    },
+    "--sf-tracking-widest": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0.1em"
+    },
+    "--sf-transition-all": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "all var(--sf-duration-normal) var(--sf-ease-out)"
+    },
+    "--sf-transition-colors": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out)"
+    },
+    "--sf-transition-enter": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), box-shadow var(--sf-duration-normal) var(--sf-ease-out), opacity var(--sf-duration-normal) var(--sf-ease-out), transform var(--sf-duration-normal) var(--sf-ease-out), filter var(--sf-duration-normal) var(--sf-ease-out)"
+    },
+    "--sf-transition-exit": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "color var(--sf-duration-fast) var(--sf-ease-in), background-color var(--sf-duration-fast) var(--sf-ease-in), border-color var(--sf-duration-fast) var(--sf-ease-in), box-shadow var(--sf-duration-fast) var(--sf-ease-in), opacity var(--sf-duration-fast) var(--sf-ease-in), transform var(--sf-duration-fast) var(--sf-ease-in), filter var(--sf-duration-fast) var(--sf-ease-in)"
+    },
+    "--sf-transition-fast": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "color var(--sf-duration-fast) var(--sf-ease-out), background-color var(--sf-duration-fast) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out), transform var(--sf-duration-fast) var(--sf-ease-out), filter var(--sf-duration-fast) var(--sf-ease-out)"
+    },
+    "--sf-transition-opacity": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "opacity var(--sf-duration-normal) var(--sf-ease-out)"
+    },
+    "--sf-transition-overlay": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "overlay var(--sf-duration-normal) allow-discrete, display var(--sf-duration-normal) allow-discrete"
+    },
+    "--sf-transition-shadow": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "box-shadow var(--sf-duration-normal) var(--sf-ease-out)"
+    },
+    "--sf-transition-slow": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "color var(--sf-duration-slow) var(--sf-ease-in-out), background-color var(--sf-duration-slow) var(--sf-ease-in-out), border-color var(--sf-duration-slow) var(--sf-ease-in-out), box-shadow var(--sf-duration-slow) var(--sf-ease-in-out), opacity var(--sf-duration-slow) var(--sf-ease-in-out), transform var(--sf-duration-slow) var(--sf-ease-in-out), filter var(--sf-duration-slow) var(--sf-ease-in-out)"
+    },
+    "--sf-transition-transform": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "transform var(--sf-duration-normal) var(--sf-ease-out)"
+    },
+    "--sf-truncate-suffix": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "\"\\2026\""
+    },
+    "--sf-z-base": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
+    "--sf-z-below": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "-1"
+    },
+    "--sf-z-dropdown": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-z-high)"
+    },
+    "--sf-z-fixed": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-z-mid)"
+    },
+    "--sf-z-high": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "500"
+    },
+    "--sf-z-low": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "10"
+    },
+    "--sf-z-max": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "9999"
+    },
+    "--sf-z-mid": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "100"
+    },
+    "--sf-z-overlay": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-z-max)"
+    },
+    "--sf-z-raised": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-z-sticky": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-z-low)"
+    },
+    "--sf-z-toast": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-z-top)"
+    },
+    "--sf-z-top": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "900"
+    }
+  },
+  "fallback_only": [
+    "--sf-action-h",
+    "--sf-action-l",
+    "--sf-action-s",
+    "--sf-base-h",
+    "--sf-base-l",
+    "--sf-base-s",
+    "--sf-danger-h",
+    "--sf-danger-l",
+    "--sf-danger-s",
+    "--sf-error-h",
+    "--sf-error-l",
+    "--sf-error-s",
+    "--sf-info-h",
+    "--sf-info-l",
+    "--sf-info-s",
+    "--sf-neutral-h",
+    "--sf-neutral-l",
+    "--sf-neutral-s",
+    "--sf-primary-h",
+    "--sf-primary-l",
+    "--sf-primary-s",
+    "--sf-secondary-h",
+    "--sf-secondary-l",
+    "--sf-secondary-s",
+    "--sf-success-h",
+    "--sf-success-l",
+    "--sf-success-s",
+    "--sf-tertiary-h",
+    "--sf-tertiary-l",
+    "--sf-tertiary-s",
+    "--sf-warning-h",
+    "--sf-warning-l",
+    "--sf-warning-s"
+  ]
+}
