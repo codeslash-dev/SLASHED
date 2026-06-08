@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
-  "ignoreFiles": ["dist/**", "node_modules/**", "plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/**", "plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/**", "plugins/SLASHED-for-WP/integrations/bricks/editor-app/**"],
+  "ignoreFiles": ["dist/**", "node_modules/**", "plugins/SLASHED-for-WP/integrations/bricks/assets/admin-app/**", "plugins/SLASHED-for-WP/integrations/bricks/assets/editor-app/**", "plugins/SLASHED-for-WP/integrations/bricks/editor-app/**", "plugins/SLASHED-for-WP/integrations/gutenberg/assets/admin-app/**"],
   "rules": {
     "color-function-notation": "modern",
     "alpha-value-notation": "number",
