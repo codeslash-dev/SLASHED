@@ -62,6 +62,10 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/sf-dist
           cp -R dist/. /tmp/sf-dist/
+          # Ship the machine-readable API index alongside the bundles so
+          # integrations can fetch it from the same CDN path, e.g.:
+          #   https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/api-index.json
+          cp docs/api-index.json /tmp/sf-dist/api-index.json
           # Stamp file so consumers can verify exactly which source commit
           # produced this dist tree.
           {

@@ -20,13 +20,15 @@
     "./full": "./dist/slashed.full.css",
     "./full/flat": "./dist/slashed.full.flat.css",
     "./flat": "./dist/slashed.full.flat.css",
+    "./api-index.json": "./docs/api-index.json",
     "./core/*": "./core/*",
     "./optional/*": "./optional/*"
   },
   "files": [
     "dist/",
     "core/",
-    "optional/"
+    "optional/",
+    "docs/api-index.json"
   ],
   "scripts": {
     "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks && chmod +x .githooks/* || true",
@@ -34,9 +36,10 @@
     "watch": "node scripts/bundle.js --watch",
     "audit": "node scripts/audit.js",
     "audit:check": "node scripts/audit.js --check",
-    "docs": "node scripts/audit.js && node scripts/gen-token-reference.js && node scripts/gen-class-reference.js && node scripts/gen-token-index.js",
+    "docs": "node scripts/audit.js && node scripts/gen-token-reference.js && node scripts/gen-class-reference.js && node scripts/gen-token-index.js && node scripts/gen-api-index.js",
     "docs:tokens": "node scripts/gen-token-reference.js",
     "docs:index": "node scripts/gen-token-index.js",
+    "docs:api": "node scripts/gen-api-index.js",
     "docs:classes": "node scripts/gen-class-reference.js",
     "version-sync": "node scripts/version-sync.js",
     "check:version": "node scripts/check-version-sync.js",
