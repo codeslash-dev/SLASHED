@@ -16,8 +16,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Skip bot version-sync commits to avoid rebuilding identical dist artifacts.
-# The [skip ci] tag in the commit message signals this intent.
+# Skip only commits that explicitly opt out via [skip ci] in the message.
+# The version-sync commit pushed by release.yml deliberately does NOT carry
+# that tag, so a version bump always rebuilds the dist branch with the correct
+# header.
 
 # If several merges land in quick succession, cancel any in-flight publish
 # and rerun against the newest commit only. Prevents racing force-pushes.
