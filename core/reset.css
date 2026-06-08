@@ -5,9 +5,9 @@
    sets sensible modern baselines. Deliberately does NOT zero global
    margins/padding, strip list markers, or change form-element font
    inheritance — those are component-level concerns. This keeps the
-   reset composable with any third-party UI on the same page (WP admin
-   bar, page-builder chrome, cookie banners, etc.) without element-
-   specific exclusions.
+   reset composable with any third-party UI on the same page (admin
+   toolbars, embedded widget chrome, cookie banners, etc.) without
+   element-specific exclusions.
 
    A heavier "full reset" (zeroing all margins/padding, stripping list
    markers, etc.) is intentionally NOT shipped — it would conflict with
@@ -21,7 +21,7 @@
 
   /* Box-sizing — near-universal baseline, safe to set globally.
      Does not affect layout of third-party UI that explicitly
-     overrides it; UA agents and most WP/builder stylesheets do not
+     overrides it; UA agents and most third-party stylesheets do not
      set box-sizing, so this wins by default but harmlessly. */
   *, *::before, *::after {
     box-sizing: border-box;

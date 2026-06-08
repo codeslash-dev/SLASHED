@@ -115,16 +115,16 @@
   } */
 
   /* ===========================================================
-     5. THIRD-PARTY INTEGRATION OVERRIDES
+     5. THIRD-PARTY CSS OVERRIDES
      ===========================================================
-     Third-party plugins (Bricks, WooCommerce, Gravity Forms, etc.)
-     often add CSS outside any @layer, which puts them in the
-     implicit layer — above all SLASHED layers. If a plugin's styles
+     Third-party code (page builders, e-commerce or form tools, etc.)
+     often adds CSS outside any @layer, which puts it in the
+     implicit layer — above all SLASHED layers. If those styles
      conflict with SLASHED, override them here rather than increasing
      specificity or using !important. */
 
-  /* Example: reset a WooCommerce button that picks up wrong colours */
-  /* .woocommerce button.button {
+  /* Example: reset a third-party button that picks up wrong colours */
+  /* .third-party-widget button {
     background-color: var(--sf-color-action);
     color: var(--sf-color-text--on-action);
   } */

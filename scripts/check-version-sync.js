@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+// Fails if version references have drifted apart. Guards the class of bug where
+// package.json, package-lock.json and docs/roadmap.md fall out of sync (e.g. a
+// tag cut without `npm run release`, leaving build-time headers mis-stamped).
+//
+// Checks:
+//   1. package-lock.json version (root and packages[""]) === package.json
+//   2. docs/roadmap.md "Current version" === package.json
+//
+// Run locally with: node scripts/check-version-sync.js
+// Wired into CI (.github/workflows/ci.yml).
+
+import fs from 'node:fs';
+import path from 'node:path';
+
+const ROOT = path.resolve(import.meta.dirname, '..');
+const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+
+const errors = [];
+
+const pkg = JSON.parse(read('package.json'));
+const version = pkg.version;
+
+// 1. package-lock.json must match package.json.
+const lock = JSON.parse(read('package-lock.json'));
+if (lock.version !== version) {
+  errors.push(
+    `package-lock.json version "${lock.version}" != package.json "${version}"`,
+  );
+}
+const lockSelf = lock.packages?.['']?.version;
+if (lockSelf !== undefined && lockSelf !== version) {
+  errors.push(
+    `package-lock.json packages[""].version "${lockSelf}" != package.json "${version}"`,
+  );
+}
+
+// 2. docs/roadmap.md "Current version" must match package.json.
+const roadmap = read('docs/roadmap.md');
+const m = roadmap.match(/Current version:\s*\*\*([^*]+)\*\*/);
+if (!m) {
+  errors.push('docs/roadmap.md: "Current version" line not found');
+} else if (m[1].trim() !== version) {
+  errors.push(
+    `docs/roadmap.md version "${m[1].trim()}" != package.json "${version}"`,
+  );
+}
+
+if (errors.length) {
+  console.error('version-sync check FAILED:');
+  for (const e of errors) console.error(`  - ${e}`);
+  console.error('\nRun `npm version <v> --no-git-tag-version` + `npm run version-sync` to realign.');
+  process.exit(1);
+}
+
+console.log(`version-sync check OK — all references at ${version}.`);
