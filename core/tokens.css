@@ -75,7 +75,7 @@
      · containers (--sf-container-{narrow,prose,default,wide,full})
      · ratios (--sf-ratio-{square,video,cinema,portrait,golden,4-3,3-2})
      · border widths (--sf-border-width-{hairline,1,2,3,4})
-     · border styles (--sf-border-style, --strong, --soft, --dotted)
+     · border style (--sf-border-style)
      · border shorthands (--sf-border, --sf-border-subtle, --sf-border-strong)
      · divider (--sf-divider-{width,style,color,gap})
      · radius (--sf-radius-{none,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
@@ -842,15 +842,14 @@
     --sf-border-width-4:        4px;
 
     /* ----------------------------------------------------------
-       Border styles — paired with --sf-border-width-* and
+       Border style — global knob paired with --sf-border-width-* and
        --sf-color-border*. Consumer BEM:
          .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); }
-       Override per element to switch decorative styles without
-       rewriting the rule.
+       Set once on :root to restyle every framework border, or override
+       per element. For one-off decorative styles use the CSS keyword
+       directly (e.g. `border-style: dashed`).
        ---------------------------------------------------------- */
-    --sf-border-style:        solid;     /* default */
-    --sf-border-style-soft:   dashed;
-    --sf-border-style-dotted: dotted;
+    --sf-border-style: solid;     /* default */
 
     /* ----------------------------------------------------------
        Border shorthands — convenience tokens composing width, style,

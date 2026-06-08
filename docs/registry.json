@@ -20,7 +20,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 771,
+      "tokens": 769,
       "sf_classes": 173,
       "is_classes": 40
     }
@@ -69,8 +69,6 @@
     "--sf-border",
     "--sf-border-strong",
     "--sf-border-style",
-    "--sf-border-style-dotted",
-    "--sf-border-style-soft",
     "--sf-border-subtle",
     "--sf-border-width-1",
     "--sf-border-width-2",
