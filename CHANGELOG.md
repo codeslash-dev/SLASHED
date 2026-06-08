@@ -1,8 +1,19 @@
 # SLASHED Framework Changelog
 
-Complete development history from v0.0.1 through v0.5.24, organized by version.
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+- **#269** — fix changelog version ordering
+  > Reorder PR summary newest→oldest (v0.5.24 → v0.0.1). Rename "Unreleased" to "v0.0.1 / Pre-release". Remove orphaned content block floating between sections.
+- **#268** — consolidate post-0.3.0 work under v0.5.24 in CHANGELOG
+  > Restructures CHANGELOG.md to assign 222 merged PRs to proper version buckets (v0.1.0–v0.5.24), replacing a perpetual [Unreleased] accumulation.
+- **#267** — add CHANGELOG_FULL.md with complete development history
+  > Adds CHANGELOG_FULL.md — a master changelog organized by version and category (Framework vs Plugins) covering all 222 PRs.
+- **#266** — docs: consolidate and trim documentation
+  > Merges three overlapping docs into existing files (dark-mode.md → theming.md, performance.md → architecture.md, browser-support.md → README). Cuts filler prose throughout.
+- **#265** — docs: add token index (tier + fallback cross-reference)
+  > Adds scripts/gen-token-index.js + docs/token-index.md — a generated per-token table cross-referencing stability tier (PUBLIC/ADVANCED/INTERNAL), source file, HSL fallback coverage, and default value for all 771 tokens.
 
 ## v0.5.24
 
@@ -360,7 +371,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
-*Generated from 222 merged PRs*
 *Last Updated: 2026-06-08*
 
 ## [0.3.0] - 2026-05-24
