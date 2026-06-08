@@ -1,0 +1,1113 @@
+# API index
+
+> **Generated** from source by `scripts/gen-api-index.js` —
+> run `npm run docs:api` to refresh. Do not edit by hand.
+
+A single browseable catalogue of every public SLASHED element — design
+**tokens** and **classes** — with stability tier, category, bundle membership
+and a short description. The machine-readable companion (with all columns) is
+[api-index.json](api-index.json); for the flat name list see
+[registry.json](registry.json); for the tier contract see
+[architecture.md](architecture.md).
+
+**1024 elements** — 802 tokens, 222 classes.
+
+| Tier | Count | Meaning |
+|---|---|---|
+| PUBLIC | 955 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 68 | Same SemVer guarantee; niche/powerful. |
+| INTERNAL | 1 | Implementation detail; may change without a major bump. |
+
+## Tokens (802)
+
+### Color fallback (legacy HSL) (33)
+
+| Token | Tier | Namespace | Default | Description |
+|---|---|---|---|---|
+| `--sf-action-h` | PUBLIC-ADVANCED | action | `200` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-action-l` | PUBLIC-ADVANCED | action | `32%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-action-s` | PUBLIC-ADVANCED | action | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-base-h` | PUBLIC-ADVANCED | base | `211` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-base-l` | PUBLIC-ADVANCED | base | `95%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-base-s` | PUBLIC-ADVANCED | base | `27%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-danger-h` | PUBLIC-ADVANCED | danger | `340` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-danger-l` | PUBLIC-ADVANCED | danger | `35%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-danger-s` | PUBLIC-ADVANCED | danger | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-error-h` | PUBLIC-ADVANCED | error | `352` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-error-l` | PUBLIC-ADVANCED | error | `38%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-error-s` | PUBLIC-ADVANCED | error | `93%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-info-h` | PUBLIC-ADVANCED | info | `200` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-info-l` | PUBLIC-ADVANCED | info | `30%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-info-s` | PUBLIC-ADVANCED | info | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-neutral-h` | PUBLIC-ADVANCED | neutral | `217` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-neutral-l` | PUBLIC-ADVANCED | neutral | `42%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-neutral-s` | PUBLIC-ADVANCED | neutral | `11%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-primary-h` | PUBLIC-ADVANCED | primary | `226` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-primary-l` | PUBLIC-ADVANCED | primary | `47%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-primary-s` | PUBLIC-ADVANCED | primary | `99%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-secondary-h` | PUBLIC-ADVANCED | secondary | `221` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-secondary-l` | PUBLIC-ADVANCED | secondary | `12%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-secondary-s` | PUBLIC-ADVANCED | secondary | `45%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-success-h` | PUBLIC-ADVANCED | success | `134` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-success-l` | PUBLIC-ADVANCED | success | `24%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-success-s` | PUBLIC-ADVANCED | success | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-tertiary-h` | PUBLIC-ADVANCED | tertiary | `268` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-tertiary-l` | PUBLIC-ADVANCED | tertiary | `39%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-tertiary-s` | PUBLIC-ADVANCED | tertiary | `84%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-warning-h` | PUBLIC-ADVANCED | warning | `42` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-warning-l` | PUBLIC-ADVANCED | warning | `45%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-warning-s` | PUBLIC-ADVANCED | warning | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+
+### Core tokens (463)
+
+| Token | Tier | Namespace | Default | Description |
+|---|---|---|---|---|
+| `--sf-animation-blink` | PUBLIC | animation | `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-color-pulse` | PUBLIC | animation | `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-delay-1` | PUBLIC | animation | `calc(75ms * var(--sf-motion-scale))` | Stagger delays — apply to successive items for entrance choreography (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). |
+| `--sf-animation-delay-2` | PUBLIC | animation | `calc(150ms * var(--sf-motion-scale))` | Stagger delays — apply to successive items for entrance choreography (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). |
+| `--sf-animation-delay-3` | PUBLIC | animation | `calc(225ms * var(--sf-motion-scale))` | Stagger delays — apply to successive items for entrance choreography (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). |
+| `--sf-animation-delay-4` | PUBLIC | animation | `calc(300ms * var(--sf-motion-scale))` | Stagger delays — apply to successive items for entrance choreography (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). |
+| `--sf-animation-delay-5` | PUBLIC | animation | `calc(375ms * var(--sf-motion-scale))` | Stagger delays — apply to successive items for entrance choreography (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). |
+| `--sf-animation-fade-in` | PUBLIC | animation | `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-fade-out` | PUBLIC | animation | `sf-fade-out var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-float` | PUBLIC | animation | `sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-ping` | PUBLIC | animation | `sf-ping var(--sf-duration-slow) var(--sf-ease-out) infinite` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-scale-down` | PUBLIC | animation | `sf-scale-down var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-scale-up` | PUBLIC | animation | `sf-scale-up var(--sf-duration-normal) var(--sf-ease-overshoot) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-shimmer` | PUBLIC | animation | `sf-shimmer calc(1.5s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-in-down` | PUBLIC | animation | `sf-slide-in-down var(--sf-duration-normal) var(--sf-ease-out) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-in-left` | PUBLIC | animation | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-in-right` | PUBLIC | animation | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-in-up` | PUBLIC | animation | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-spin` | PUBLIC | animation | `sf-spin var(--sf-duration-slower) linear infinite` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-blur-l` | PUBLIC | blur | `32px` | Blur & opacity |
+| `--sf-blur-m` | PUBLIC | blur | `16px` | Blur & opacity |
+| `--sf-blur-s` | PUBLIC | blur | `8px` | Blur & opacity |
+| `--sf-blur-xl` | PUBLIC | blur | `48px` | Blur & opacity |
+| `--sf-blur-xs` | PUBLIC | blur | `4px` | Blur & opacity |
+| `--sf-body-color` | PUBLIC | body | `var(--sf-color-text)` | TYPOGRAPHY ALIASES |
+| `--sf-body-em-style` | PUBLIC | body | `italic` | TYPOGRAPHY ALIASES |
+| `--sf-body-font-family` | PUBLIC | body | `var(--sf-font-body)` | TYPOGRAPHY ALIASES |
+| `--sf-body-font-size` | PUBLIC | body | `var(--sf-text-m)` | TYPOGRAPHY ALIASES |
+| `--sf-body-font-weight` | PUBLIC | body | `var(--sf-font-weight-body)` | TYPOGRAPHY ALIASES |
+| `--sf-body-line-height` | PUBLIC | body | `var(--sf-leading-normal)` | TYPOGRAPHY ALIASES |
+| `--sf-body-strong-weight` | PUBLIC | body | `var(--sf-font-weight-bold)` | TYPOGRAPHY ALIASES |
+| `--sf-body-text-wrap` | PUBLIC | body | `pretty` | TYPOGRAPHY ALIASES |
+| `--sf-border` | PUBLIC | border | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)` | convenience tokens composing width, style, and color into a single value for the common cases. subtle / strong vary COLOR CONTRAST only — all three use --sf-border-width-1 (1px). This matches the IBM Carbon and GitHub Primer convention where subtle/strong name a color axis, not… |
+| `--sf-border-strong` | PUBLIC | border | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)` | convenience tokens composing width, style, and color into a single value for the common cases. subtle / strong vary COLOR CONTRAST only — all three use --sf-border-width-1 (1px). This matches the IBM Carbon and GitHub Primer convention where subtle/strong name a color axis, not… |
+| `--sf-border-style` | PUBLIC | border | `solid` | global knob paired with --sf-border-width-* and --sf-color-border*. Consumer BEM: .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); } Set once on :root to restyle every framework border, or override per element. For one-off decorative… |
+| `--sf-border-subtle` | PUBLIC | border | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` | convenience tokens composing width, style, and color into a single value for the common cases. subtle / strong vary COLOR CONTRAST only — all three use --sf-border-width-1 (1px). This matches the IBM Carbon and GitHub Primer convention where subtle/strong name a color axis, not… |
+| `--sf-border-width-1` | PUBLIC | border | `1px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
+| `--sf-border-width-2` | PUBLIC | border | `2px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
+| `--sf-border-width-3` | PUBLIC | border | `3px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
+| `--sf-border-width-4` | PUBLIC | border | `4px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
+| `--sf-border-width-hairline` | PUBLIC | border | `0.5px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
+| `--sf-caret-color` | PUBLIC | caret | `var(--sf-color-action)` | Focus / form colors |
+| `--sf-code-font-size` | PUBLIC | code | `0.875em` | TYPOGRAPHY ALIASES |
+| `--sf-col-rule-width-l` | PUBLIC | col | `var(--sf-border-width-3)` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
+| `--sf-col-rule-width-m` | PUBLIC | col | `var(--sf-border-width-2)` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
+| `--sf-col-rule-width-s` | PUBLIC | col | `var(--sf-border-width-1)` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
+| `--sf-col-width-l` | PUBLIC | col | `32ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
+| `--sf-col-width-m` | PUBLIC | col | `24ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
+| `--sf-col-width-s` | PUBLIC | col | `16ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
+| `--sf-color-action` | PUBLIC | color | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-action-active` | PUBLIC | color | `var(--sf-color-action-xdark)` | action |
+| `--sf-color-action-darker` | PUBLIC | color | `var(--sf-color-action-600)` | action |
+| `--sf-color-action-ghost` | PUBLIC | color | `var(--sf-color-action-a5)` | action |
+| `--sf-color-action-hover` | PUBLIC | color | `var(--sf-color-action-darker)` | action |
+| `--sf-color-action-light` | PUBLIC | color | `oklch(0.50 0.22 235)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
+| `--sf-color-action-lighter` | PUBLIC | color | `var(--sf-color-action-400)` | action |
+| `--sf-color-action-muted` | PUBLIC | color | `var(--sf-color-action-a30)` | action |
+| `--sf-color-action-subtle` | PUBLIC | color | `var(--sf-color-action-a10)` | action |
+| `--sf-color-action-superdark` | PUBLIC | color | `var(--sf-color-action-950)` | action |
+| `--sf-color-action-superlight` | PUBLIC | color | `var(--sf-color-action-50)` | action |
+| `--sf-color-action-xdark` | PUBLIC | color | `var(--sf-color-action-800)` | action |
+| `--sf-color-action-xlight` | PUBLIC | color | `var(--sf-color-action-200)` | action |
+| `--sf-color-base` | PUBLIC | color | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-base-active` | PUBLIC | color | `var(--sf-color-base-xdark)` | base |
+| `--sf-color-base-darker` | PUBLIC | color | `var(--sf-color-base-600)` | base |
+| `--sf-color-base-ghost` | PUBLIC | color | `var(--sf-color-base-a5)` | base |
+| `--sf-color-base-hover` | PUBLIC | color | `var(--sf-color-base-darker)` | base |
+| `--sf-color-base-light` | PUBLIC | color | `oklch(0.96 0.006 250)` | initial-value is 0.96 (not 0.99) so the +0.02/+0.04 surface offsets produce visually distinct levels in light mode. At 0.99 all lighter surfaces clamp to pure white and become indistinguishable. 0.96 gives: bg=0.98, inset=0.94, raised=1.0→white — all distinct. Consumers using… |
+| `--sf-color-base-lighter` | PUBLIC | color | `var(--sf-color-base-400)` | base |
+| `--sf-color-base-muted` | PUBLIC | color | `var(--sf-color-base-a30)` | base |
+| `--sf-color-base-subtle` | PUBLIC | color | `var(--sf-color-base-a10)` | base |
+| `--sf-color-base-superdark` | PUBLIC | color | `var(--sf-color-base-950)` | base |
+| `--sf-color-base-superlight` | PUBLIC | color | `var(--sf-color-base-50)` | base |
+| `--sf-color-base-xdark` | PUBLIC | color | `var(--sf-color-base-800)` | base |
+| `--sf-color-base-xlight` | PUBLIC | color | `var(--sf-color-base-200)` | base |
+| `--sf-color-bg` | PUBLIC | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | derived from --sf-color-base (auto-adapts) |
+| `--sf-color-bg--active` | PUBLIC | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | derived from --sf-color-neutral (auto-adapts) |
+| `--sf-color-bg--disabled` | PUBLIC | color | `var(--sf-color-inset)` | plain var aliases (ungated) |
+| `--sf-color-bg--focus` | PUBLIC | color | `oklch(from var(--sf-color-action) l c h / 0.06)` | derived from --sf-color-neutral (auto-adapts) |
+| `--sf-color-bg--hover` | PUBLIC | color | `oklch(from var(--sf-color-neutral) l c h / 0.08)` | derived from --sf-color-neutral (auto-adapts) |
+| `--sf-color-bg--selected` | PUBLIC | color | `oklch(from var(--sf-color-action) l c h / 0.1)` | derived from --sf-color-neutral (auto-adapts) |
+| `--sf-color-black` | PUBLIC | color | `oklch(0% 0 0)` | static values (ungated) |
+| `--sf-color-border` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )` | direction-dependent, reference source tokens. Light: borders are lighter than neutral (l + offset). Dark: borders are darker than neutral (l - offset). |
+| `--sf-color-border--disabled` | PUBLIC | color | `oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)` | Border alpha tokens |
+| `--sf-color-border--focus` | PUBLIC | color | `var(--sf-color-action)` | plain var aliases (ungated) |
+| `--sf-color-border--strong` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )` | direction-dependent, reference source tokens. Light: borders are lighter than neutral (l + offset). Dark: borders are darker than neutral (l - offset). |
+| `--sf-color-border--subtle` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` | direction-dependent, reference source tokens. Light: borders are lighter than neutral (l + offset). Dark: borders are darker than neutral (l - offset). |
+| `--sf-color-border--translucent` | PUBLIC | color | `oklch(from var(--sf-color-neutral) l c h / 0.15)` | Border alpha tokens |
+| `--sf-color-code-bg` | PUBLIC | color | `var(--sf-color-inset)` | plain var aliases (ungated) |
+| `--sf-color-code-text` | PUBLIC | color | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Inline-code text colour. Auto-contrasts with --sf-color-code-bg using the same luminance formula as --sf-color-text--on-*. This prevents invisible text when code appears inside inverted-colour containers (e.g. sf-imposter with a dark background where inherited colour is… |
+| `--sf-color-danger` | PUBLIC | color | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-danger-light` | PUBLIC | color | `oklch(0.48 0.22 12)` | STATUS COLORS (-light source tokens) |
+| `--sf-color-danger-muted` | PUBLIC | color | `oklch(from var(--sf-color-danger) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-danger-strong` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
+| `--sf-color-danger-subtle` | PUBLIC | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-dim` | PUBLIC | color | `oklch(0 0 0 / 0.5)` | static values (ungated) |
+| `--sf-color-error` | PUBLIC | color | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-error-light` | PUBLIC | color | `oklch(0.50 0.20 25)` | STATUS COLORS (-light source tokens) |
+| `--sf-color-error-muted` | PUBLIC | color | `oklch(from var(--sf-color-error) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-error-strong` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
+| `--sf-color-error-subtle` | PUBLIC | color | `oklch(from var(--sf-color-error) l c h / 0.1)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-heading` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
+| `--sf-color-info` | PUBLIC | color | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-info-light` | PUBLIC | color | `oklch(0.48 0.18 235)` | STATUS COLORS (-light source tokens) |
+| `--sf-color-info-muted` | PUBLIC | color | `oklch(from var(--sf-color-info) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-info-strong` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
+| `--sf-color-info-subtle` | PUBLIC | color | `oklch(from var(--sf-color-info) l c h / 0.1)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-inset` | PUBLIC | color | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` | derived from --sf-color-base (auto-adapts) |
+| `--sf-color-inverse` | PUBLIC | color | `oklch(from var(--sf-color-base) calc(1 - l) c h)` | derived from --sf-color-base (auto-adapts) |
+| `--sf-color-link` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` | Links keep the action hue but CLAMP lightness toward a contrast-safe band — a ceiling in light mode, a floor in dark mode — so link text clears WCAG AA (4.5:1) on the page background for the default palette AND the large majority of brand overrides (a fixed offset alone only… |
+| `--sf-color-link--active` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h) )` | Links keep the action hue but CLAMP lightness toward a contrast-safe band — a ceiling in light mode, a floor in dark mode — so link text clears WCAG AA (4.5:1) on the page background for the default palette AND the large majority of brand overrides (a fixed offset alone only… |
+| `--sf-color-link--disabled` | PUBLIC | color | `var(--sf-color-text--disabled)` | plain var aliases and geometry (ungated) |
+| `--sf-color-link--hover` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h) )` | Links keep the action hue but CLAMP lightness toward a contrast-safe band — a ceiling in light mode, a floor in dark mode — so link text clears WCAG AA (4.5:1) on the page background for the default palette AND the large majority of brand overrides (a fixed offset alone only… |
+| `--sf-color-link--underline` | PUBLIC | color | `oklch(from var(--sf-color-action) l c h / 0.3)` | Link alpha token |
+| `--sf-color-link--visited` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )` | Visited link — 60° hue shift from action gives clearly distinct chroma without colliding with default tertiary (h ≈ 310). Same lightness clamp as the base link. If your brand puts action and tertiary close in hue, override directly: :root { --sf-color-link--visited: #6b46c1; } |
+| `--sf-color-mark-bg` | PUBLIC | color | `oklch(from var(--sf-color-warning) l c h / 0.25)` | Selection & mark |
+| `--sf-color-mark-text` | PUBLIC | color | `inherit` | static values (ungated) |
+| `--sf-color-neutral` | PUBLIC | color | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-neutral-active` | PUBLIC | color | `var(--sf-color-neutral-xdark)` | neutral |
+| `--sf-color-neutral-darker` | PUBLIC | color | `var(--sf-color-neutral-600)` | neutral |
+| `--sf-color-neutral-ghost` | PUBLIC | color | `var(--sf-color-neutral-a5)` | neutral |
+| `--sf-color-neutral-hover` | PUBLIC | color | `var(--sf-color-neutral-darker)` | neutral |
+| `--sf-color-neutral-light` | PUBLIC | color | `oklch(0.52 0.025 260)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
+| `--sf-color-neutral-lighter` | PUBLIC | color | `var(--sf-color-neutral-400)` | neutral |
+| `--sf-color-neutral-muted` | PUBLIC | color | `var(--sf-color-neutral-a30)` | neutral |
+| `--sf-color-neutral-subtle` | PUBLIC | color | `var(--sf-color-neutral-a10)` | neutral |
+| `--sf-color-neutral-superdark` | PUBLIC | color | `var(--sf-color-neutral-950)` | neutral |
+| `--sf-color-neutral-superlight` | PUBLIC | color | `var(--sf-color-neutral-50)` | neutral |
+| `--sf-color-neutral-xdark` | PUBLIC | color | `var(--sf-color-neutral-800)` | neutral |
+| `--sf-color-neutral-xlight` | PUBLIC | color | `var(--sf-color-neutral-200)` | neutral |
+| `--sf-color-overlay` | PUBLIC | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | derived from --sf-color-base (auto-adapts) |
+| `--sf-color-primary` | PUBLIC | color | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-primary-active` | PUBLIC | color | `var(--sf-color-primary-xdark)` | primary |
+| `--sf-color-primary-darker` | PUBLIC | color | `var(--sf-color-primary-600)` | primary |
+| `--sf-color-primary-ghost` | PUBLIC | color | `var(--sf-color-primary-a5)` | primary |
+| `--sf-color-primary-hover` | PUBLIC | color | `var(--sf-color-primary-darker)` | primary |
+| `--sf-color-primary-light` | PUBLIC | color | `oklch(0.47 0.27 264)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
+| `--sf-color-primary-lighter` | PUBLIC | color | `var(--sf-color-primary-400)` | primary |
+| `--sf-color-primary-muted` | PUBLIC | color | `var(--sf-color-primary-a30)` | primary |
+| `--sf-color-primary-subtle` | PUBLIC | color | `var(--sf-color-primary-a10)` | primary |
+| `--sf-color-primary-superdark` | PUBLIC | color | `var(--sf-color-primary-950)` | primary |
+| `--sf-color-primary-superlight` | PUBLIC | color | `var(--sf-color-primary-50)` | primary |
+| `--sf-color-primary-xdark` | PUBLIC | color | `var(--sf-color-primary-800)` | primary |
+| `--sf-color-primary-xlight` | PUBLIC | color | `var(--sf-color-primary-200)` | primary |
+| `--sf-color-raised` | PUBLIC | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | derived from --sf-color-base (auto-adapts) |
+| `--sf-color-scheme` | PUBLIC | color | `light dark` | Color scheme |
+| `--sf-color-secondary` | PUBLIC | color | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-secondary-active` | PUBLIC | color | `var(--sf-color-secondary-xdark)` | secondary |
+| `--sf-color-secondary-darker` | PUBLIC | color | `var(--sf-color-secondary-600)` | secondary |
+| `--sf-color-secondary-ghost` | PUBLIC | color | `var(--sf-color-secondary-a5)` | secondary |
+| `--sf-color-secondary-hover` | PUBLIC | color | `var(--sf-color-secondary-darker)` | secondary |
+| `--sf-color-secondary-light` | PUBLIC | color | `oklch(0.22 0.04 264)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
+| `--sf-color-secondary-lighter` | PUBLIC | color | `var(--sf-color-secondary-400)` | secondary |
+| `--sf-color-secondary-muted` | PUBLIC | color | `var(--sf-color-secondary-a30)` | secondary |
+| `--sf-color-secondary-subtle` | PUBLIC | color | `var(--sf-color-secondary-a10)` | secondary |
+| `--sf-color-secondary-superdark` | PUBLIC | color | `var(--sf-color-secondary-950)` | secondary |
+| `--sf-color-secondary-superlight` | PUBLIC | color | `var(--sf-color-secondary-50)` | secondary |
+| `--sf-color-secondary-xdark` | PUBLIC | color | `var(--sf-color-secondary-800)` | secondary |
+| `--sf-color-secondary-xlight` | PUBLIC | color | `var(--sf-color-secondary-200)` | secondary |
+| `--sf-color-selection-bg` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Selection |
+| `--sf-color-selection-text` | PUBLIC | color | `inherit` | static values (ungated) |
+| `--sf-color-success` | PUBLIC | color | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-success-light` | PUBLIC | color | `oklch(0.50 0.16 145)` | STATUS COLORS (-light source tokens) |
+| `--sf-color-success-muted` | PUBLIC | color | `oklch(from var(--sf-color-success) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-success-strong` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
+| `--sf-color-success-subtle` | PUBLIC | color | `oklch(from var(--sf-color-success) l c h / 0.12)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-surface` | PUBLIC | color | `var(--sf-color-base)` | Surface alias (plain var — no IACVT, stays ungated) |
+| `--sf-color-tertiary` | PUBLIC | color | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-tertiary-active` | PUBLIC | color | `var(--sf-color-tertiary-xdark)` | tertiary |
+| `--sf-color-tertiary-darker` | PUBLIC | color | `var(--sf-color-tertiary-600)` | tertiary |
+| `--sf-color-tertiary-ghost` | PUBLIC | color | `var(--sf-color-tertiary-a5)` | tertiary |
+| `--sf-color-tertiary-hover` | PUBLIC | color | `var(--sf-color-tertiary-darker)` | tertiary |
+| `--sf-color-tertiary-light` | PUBLIC | color | `oklch(0.42 0.22 295)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
+| `--sf-color-tertiary-lighter` | PUBLIC | color | `var(--sf-color-tertiary-400)` | tertiary |
+| `--sf-color-tertiary-muted` | PUBLIC | color | `var(--sf-color-tertiary-a30)` | tertiary |
+| `--sf-color-tertiary-subtle` | PUBLIC | color | `var(--sf-color-tertiary-a10)` | tertiary |
+| `--sf-color-tertiary-superdark` | PUBLIC | color | `var(--sf-color-tertiary-950)` | tertiary |
+| `--sf-color-tertiary-superlight` | PUBLIC | color | `var(--sf-color-tertiary-50)` | tertiary |
+| `--sf-color-tertiary-xdark` | PUBLIC | color | `var(--sf-color-tertiary-800)` | tertiary |
+| `--sf-color-tertiary-xlight` | PUBLIC | color | `var(--sf-color-tertiary-200)` | tertiary |
+| `--sf-color-text` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
+| `--sf-color-text--disabled` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
+| `--sf-color-text--inverse` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
+| `--sf-color-text--muted` | PUBLIC | color | `var(--sf-color-neutral)` | plain var aliases (ungated) |
+| `--sf-color-text--on-action` | PUBLIC | color | `oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-base` | PUBLIC | color | `var(--sf-color-text)` | plain var aliases (ungated) |
+| `--sf-color-text--on-danger` | PUBLIC | color | `oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-error` | PUBLIC | color | `oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-info` | PUBLIC | color | `oklch(from var(--sf-color-info) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-inverse` | PUBLIC | color | `var(--sf-color-text--inverse)` | compat alias → base |
+| `--sf-color-text--on-neutral` | PUBLIC | color | `oklch(from var(--sf-color-neutral) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-primary` | PUBLIC | color | `oklch(from var(--sf-color-primary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-secondary` | PUBLIC | color | `oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-success` | PUBLIC | color | `oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-surface` | PUBLIC | color | `var(--sf-color-text--on-base)` | plain var aliases (ungated) |
+| `--sf-color-text--on-tertiary` | PUBLIC | color | `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--on-warning` | PUBLIC | color | `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
+| `--sf-color-text--placeholder` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
+| `--sf-color-text--secondary` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
+| `--sf-color-warning` | PUBLIC | color | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-warning-light` | PUBLIC | color | `oklch(0.75 0.17 80)` | STATUS COLORS (-light source tokens) |
+| `--sf-color-warning-muted` | PUBLIC | color | `oklch(from var(--sf-color-warning) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-warning-strong` | PUBLIC | color | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
+| `--sf-color-warning-subtle` | PUBLIC | color | `oklch(from var(--sf-color-warning) l c h / 0.12)` | subtle/muted (alpha variants) bg/border use same formula both modes |
+| `--sf-color-white` | PUBLIC | color | `oklch(100% 0 0)` | static values (ungated) |
+| `--sf-component-pad` | PUBLIC | component | `var(--sf-space-m)` | rhythm within a component |
+| `--sf-container-default` | PUBLIC | container | `75rem` | Containers |
+| `--sf-container-full` | PUBLIC | container | `100%` | Containers |
+| `--sf-container-narrow` | PUBLIC | container | `38rem` | Containers |
+| `--sf-container-prose` | PUBLIC | container | `65ch` | Containers |
+| `--sf-container-wide` | PUBLIC | container | `90rem` | Containers |
+| `--sf-content-gap` | PUBLIC | content | `var(--sf-space-s)` | gap between BEM elements |
+| `--sf-contrast-bias` | PUBLIC-ADVANCED | contrast | `0` | Global text-contrast knob. Nudges derived reading-text colours toward the extremes (darker in light mode, lighter in dark mode). Positive = more contrast; 0 = no change. Consumed by --sf-color-text, --sf-color-text--secondary, --sf-color-heading. |
+| `--sf-contrast-threshold` | PUBLIC-ADVANCED | contrast | `0.6` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-current-font-weight` | PUBLIC | current | `var(--sf-font-weight-bold)` | State token — consumed by .is-current in states.css. Override to match your nav design (e.g. semibold for thin fonts). |
+| `--sf-divider-color` | PUBLIC | divider | `var(--sf-color-border)` | global separator system. Drives `hr` (base) and the `.sf-divider` layout primitive. |
+| `--sf-divider-gap` | PUBLIC | divider | `var(--sf-space-m)` | global separator system. Drives `hr` (base) and the `.sf-divider` layout primitive. |
+| `--sf-divider-style` | PUBLIC | divider | `solid` | global separator system. Drives `hr` (base) and the `.sf-divider` layout primitive. |
+| `--sf-divider-width` | PUBLIC | divider | `var(--sf-border-width-1)` | global separator system. Drives `hr` (base) and the `.sf-divider` layout primitive. |
+| `--sf-drop-shadow-l` | PUBLIC | drop | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` | Drop shadows — for filter: drop-shadow() (respects alpha edges) |
+| `--sf-drop-shadow-m` | PUBLIC | drop | `drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))` | Drop shadows — for filter: drop-shadow() (respects alpha edges) |
+| `--sf-drop-shadow-s` | PUBLIC | drop | `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))` | Drop shadows — for filter: drop-shadow() (respects alpha edges) |
+| `--sf-duration-fast` | PUBLIC | duration | `calc(150ms * var(--sf-motion-scale))` | Motion & easing |
+| `--sf-duration-instant` | PUBLIC | duration | `calc(100ms * var(--sf-motion-scale))` | Motion & easing |
+| `--sf-duration-none` | PUBLIC | duration | `0ms` | Motion & easing |
+| `--sf-duration-normal` | PUBLIC | duration | `calc(250ms * var(--sf-motion-scale))` | Motion & easing |
+| `--sf-duration-slow` | PUBLIC | duration | `calc(400ms * var(--sf-motion-scale))` | Motion & easing |
+| `--sf-duration-slower` | PUBLIC | duration | `calc(600ms * var(--sf-motion-scale))` | Motion & easing |
+| `--sf-ease-bounce` | PUBLIC | ease | `linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)` | Motion & easing |
+| `--sf-ease-elastic` | PUBLIC | ease | `linear(0, 0.3, 1.2, 0.9, 1.05, 1)` | Motion & easing |
+| `--sf-ease-in` | PUBLIC | ease | `cubic-bezier(0.5, 0, 0.75, 0.25)` | Motion & easing |
+| `--sf-ease-in-out` | PUBLIC | ease | `cubic-bezier(0.4, 0, 0.2, 1)` | Motion & easing |
+| `--sf-ease-linear` | PUBLIC | ease | `linear` | Motion & easing |
+| `--sf-ease-out` | PUBLIC | ease | `cubic-bezier(0.25, 0, 0.15, 1)` | Motion & easing |
+| `--sf-ease-overshoot` | PUBLIC | ease | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` | Motion & easing |
+| `--sf-ease-spring` | PUBLIC | ease | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` | Motion & easing |
+| `--sf-field-block` | PUBLIC | field | `var(--sf-space-l)` | standard component padding |
+| `--sf-field-required-marker` | PUBLIC | field | `" *"` | form-field block spacing |
+| `--sf-focus-ring-color` | PUBLIC | focus | `var(--sf-color-action)` | Focus / form colors |
+| `--sf-focus-ring-offset` | PUBLIC | focus | `2px` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-focus-ring-shadow` | PUBLIC-ADVANCED | focus | `0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)` | Focus / form colors |
+| `--sf-focus-ring-style` | PUBLIC | focus | `solid` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-focus-ring-width` | PUBLIC | focus | `2px` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-font-body` | PUBLIC | font | `system-ui, -apple-system, sans-serif` | Font families |
+| `--sf-font-display` | PUBLIC | font | `var(--sf-font-heading)` | Font families |
+| `--sf-font-features` | PUBLIC-ADVANCED | font | `normal` | Opt-in OpenType / variable-font controls (token-only, not applied by the framework) |
+| `--sf-font-geometric` | PUBLIC | font | `"Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif` | Optional system-font stacks (zero-cost, no @import) |
+| `--sf-font-heading` | PUBLIC | font | `var(--sf-font-body)` | Font families |
+| `--sf-font-humanist` | PUBLIC | font | `"Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif` | Optional system-font stacks (zero-cost, no @import) |
+| `--sf-font-mono` | PUBLIC | font | `ui-monospace, monospace` | Font families |
+| `--sf-font-numeric` | PUBLIC | font | `tabular-nums` | Numeric figure style — tabular-nums gives every digit a fixed advance width so numbers line up in vertical columns (price lists, totals, invoices, dashboards). Consumed by number inputs in optional/forms.css and available to BEM components, e.g. `.price { font-variant-numeric:… |
+| `--sf-font-slab` | PUBLIC | font | `"Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif` | Optional system-font stacks (zero-cost, no @import) |
+| `--sf-font-variation` | PUBLIC-ADVANCED | font | `normal` | e.g. "cv11", "ss01" |
+| `--sf-font-weight-black` | PUBLIC | font | `900` | Numeric scale |
+| `--sf-font-weight-body` | PUBLIC | font | `var(--sf-font-weight-normal)` | Semantic aliases — reference the numeric scale |
+| `--sf-font-weight-bold` | PUBLIC | font | `700` | Numeric scale |
+| `--sf-font-weight-display` | PUBLIC | font | `var(--sf-font-weight-bold)` | Semantic aliases — reference the numeric scale |
+| `--sf-font-weight-extrabold` | PUBLIC | font | `800` | Numeric scale |
+| `--sf-font-weight-extralight` | PUBLIC | font | `200` | Numeric scale |
+| `--sf-font-weight-heading` | PUBLIC | font | `var(--sf-font-weight-semibold)` | Semantic aliases — reference the numeric scale |
+| `--sf-font-weight-light` | PUBLIC | font | `300` | Numeric scale |
+| `--sf-font-weight-medium` | PUBLIC | font | `500` | Numeric scale |
+| `--sf-font-weight-normal` | PUBLIC | font | `400` | Numeric scale |
+| `--sf-font-weight-semibold` | PUBLIC | font | `600` | Numeric scale |
+| `--sf-font-weight-thin` | PUBLIC | font | `100` | Numeric scale |
+| `--sf-gap` | PUBLIC | gap | `var(--sf-space-m)` | BEM consumer API Use in your own BEM classes: .nav { gap: var(--sf-gap); } Source of truth for tokens.layout.css: --sf-space-gap → var(--sf-gap) (all layout primitives) --sf-space-content → var(--sf-content-gap) (stack, prose) |
+| `--sf-gradient-brand` | PUBLIC | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-fade--b` | PUBLIC | gradient | `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-fade--l` | PUBLIC | gradient | `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-fade--r` | PUBLIC | gradient | `linear-gradient(in oklch to right, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-fade--t` | PUBLIC | gradient | `linear-gradient(in oklch to top, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-primary` | PUBLIC | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-secondary` | PUBLIC | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-surface` | PUBLIC | gradient | `linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
+| `--sf-gradient-tertiary` | PUBLIC | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))` | derived from brand colors (auto-adapt) |
+| `--sf-h1-font-weight` | PUBLIC | h1 | `var(--sf-font-weight-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-h1-letter-spacing` | PUBLIC | h1 | `var(--sf-tracking-tight)` | TYPOGRAPHY ALIASES |
+| `--sf-h1-line-height` | PUBLIC | h1 | `var(--sf-leading-tight)` | TYPOGRAPHY ALIASES |
+| `--sf-h1-size` | PUBLIC | h1 | `var(--sf-text-4xl)` | TYPOGRAPHY ALIASES |
+| `--sf-h2-font-weight` | PUBLIC | h2 | `var(--sf-font-weight-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-h2-letter-spacing` | PUBLIC | h2 | `var(--sf-tracking-tight)` | TYPOGRAPHY ALIASES |
+| `--sf-h2-line-height` | PUBLIC | h2 | `var(--sf-leading-tight)` | TYPOGRAPHY ALIASES |
+| `--sf-h2-size` | PUBLIC | h2 | `var(--sf-text-3xl)` | TYPOGRAPHY ALIASES |
+| `--sf-h3-font-weight` | PUBLIC | h3 | `var(--sf-font-weight-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-h3-letter-spacing` | PUBLIC | h3 | `var(--sf-tracking-normal)` | TYPOGRAPHY ALIASES |
+| `--sf-h3-line-height` | PUBLIC | h3 | `var(--sf-leading-snug)` | TYPOGRAPHY ALIASES |
+| `--sf-h3-size` | PUBLIC | h3 | `var(--sf-text-2xl)` | TYPOGRAPHY ALIASES |
+| `--sf-h4-font-weight` | PUBLIC | h4 | `var(--sf-font-weight-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-h4-letter-spacing` | PUBLIC | h4 | `var(--sf-tracking-normal)` | TYPOGRAPHY ALIASES |
+| `--sf-h4-line-height` | PUBLIC | h4 | `var(--sf-leading-snug)` | TYPOGRAPHY ALIASES |
+| `--sf-h4-size` | PUBLIC | h4 | `var(--sf-text-xl)` | TYPOGRAPHY ALIASES |
+| `--sf-h5-font-weight` | PUBLIC | h5 | `var(--sf-font-weight-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-h5-letter-spacing` | PUBLIC | h5 | `var(--sf-tracking-normal)` | TYPOGRAPHY ALIASES |
+| `--sf-h5-line-height` | PUBLIC | h5 | `var(--sf-leading-normal)` | TYPOGRAPHY ALIASES |
+| `--sf-h5-size` | PUBLIC | h5 | `var(--sf-text-l)` | TYPOGRAPHY ALIASES |
+| `--sf-h6-font-weight` | PUBLIC | h6 | `var(--sf-font-weight-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-h6-letter-spacing` | PUBLIC | h6 | `var(--sf-tracking-wide)` | TYPOGRAPHY ALIASES |
+| `--sf-h6-line-height` | PUBLIC | h6 | `var(--sf-leading-normal)` | TYPOGRAPHY ALIASES |
+| `--sf-h6-size` | PUBLIC | h6 | `var(--sf-text-m)` | TYPOGRAPHY ALIASES |
+| `--sf-header-height` | PUBLIC | header | `clamp( var(--sf-header-height-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-header-height-desktop` | PUBLIC | header | `5rem` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-header-height-mobile` | PUBLIC | header | `3.5rem` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-heading-color` | PUBLIC | heading | `var(--sf-color-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-heading-font-family` | PUBLIC | heading | `var(--sf-font-heading)` | TYPOGRAPHY ALIASES |
+| `--sf-heading-text-wrap` | PUBLIC | heading | `balance` | TYPOGRAPHY ALIASES |
+| `--sf-icon-2xl` | PUBLIC | icon | `4em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
+| `--sf-icon-l` | PUBLIC | icon | `2em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
+| `--sf-icon-m` | PUBLIC | icon | `1.5em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
+| `--sf-icon-s` | PUBLIC | icon | `1em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
+| `--sf-icon-xl` | PUBLIC | icon | `3em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
+| `--sf-icon-xs` | PUBLIC | icon | `0.875em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
+| `--sf-is-active` | PUBLIC-ADVANCED | is | `0` | Mode flag — drives formula direction for non-color dark overrides. Set by themes.css via [data-theme="dark"] and the prefers-color-scheme media query. Do not set directly. |
+| `--sf-is-current` | PUBLIC-ADVANCED | is | `0` | Mode flag — drives formula direction for non-color dark overrides. Set by themes.css via [data-theme="dark"] and the prefers-color-scheme media query. Do not set directly. |
+| `--sf-is-dark` | INTERNAL | is | `0` | Mode flag — drives formula direction for non-color dark overrides. Set by themes.css via [data-theme="dark"] and the prefers-color-scheme media query. Do not set directly. |
+| `--sf-is-open` | PUBLIC-ADVANCED | is | `0` | Mode flag — drives formula direction for non-color dark overrides. Set by themes.css via [data-theme="dark"] and the prefers-color-scheme media query. Do not set directly. |
+| `--sf-is-pressed` | PUBLIC-ADVANCED | is | `0` | Mode flag — drives formula direction for non-color dark overrides. Set by themes.css via [data-theme="dark"] and the prefers-color-scheme media query. Do not set directly. |
+| `--sf-leading-normal` | PUBLIC | leading | `1.5` | Line heights & letter spacing |
+| `--sf-leading-relaxed` | PUBLIC | leading | `1.625` | Line heights & letter spacing |
+| `--sf-leading-snug` | PUBLIC | leading | `1.3` | Line heights & letter spacing |
+| `--sf-leading-tight` | PUBLIC | leading | `1.1` | Line heights & letter spacing |
+| `--sf-link-external-marker` | PUBLIC | link | `" \\2197"` | Leading space is baked into the default so consumers can fully disable the indicator with `--sf-link-external-marker: ""` — without the space a bare "" still left a stray space after the link text. Override with your own glyph (include leading space if you want one): `:root {… |
+| `--sf-link-underline-offset` | PUBLIC | link | `0.15em` | Underline geometry — consumed by a:link in core/base.css and by the .sf-link--* macros. `auto` defers to the font's own metrics; set an explicit length (e.g. 0.08em) for a uniform rule. |
+| `--sf-link-underline-thickness` | PUBLIC | link | `auto` | Underline geometry — consumed by a:link in core/base.css and by the .sf-link--* macros. `auto` defers to the font's own metrics; set an explicit length (e.g. 0.08em) for a uniform rule. |
+| `--sf-lumlocker` | PUBLIC-ADVANCED | lumlocker | `0.65` | OKLCH L value used by the :root[data-lumlocker] override in core/themes.css. Locks all 5 brand colors (primary, secondary, tertiary, action, neutral) to one shared lightness while keeping their individual hue and chroma. Base is excluded — it must remain near-white in light… |
+| `--sf-mask-scrim-end` | PUBLIC-ADVANCED | mask | `var(--sf-space-l)` | edge-fade stops for scroll reels / overflow. Use in a mask-image gradient to fade content near an edge: mask-image: linear-gradient(to right, transparent 0, #000 var(--sf-mask-scrim-start), #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%); |
+| `--sf-mask-scrim-start` | PUBLIC-ADVANCED | mask | `var(--sf-space-l)` | edge-fade stops for scroll reels / overflow. Use in a mask-image gradient to fade content near an edge: mask-image: linear-gradient(to right, transparent 0, #000 var(--sf-mask-scrim-start), #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%); |
+| `--sf-motion-scale` | PUBLIC-ADVANCED | motion | `1` | Scale multipliers |
+| `--sf-object-fit` | PUBLIC | object | `cover` | global defaults for replaced elements. Applied in core/base.css on img and video. Override per element via inline style="--sf-object-position: top" or in BEM CSS. |
+| `--sf-object-position` | PUBLIC | object | `50% 50%` | global defaults for replaced elements. Applied in core/base.css on img and video. Override per element via inline style="--sf-object-position: top" or in BEM CSS. |
+| `--sf-opacity-0` | PUBLIC | opacity | `0` | 3D perspective |
+| `--sf-opacity-10` | PUBLIC | opacity | `0.1` | 3D perspective |
+| `--sf-opacity-100` | PUBLIC | opacity | `1` | 3D perspective |
+| `--sf-opacity-25` | PUBLIC | opacity | `0.25` | 3D perspective |
+| `--sf-opacity-50` | PUBLIC | opacity | `0.5` | 3D perspective |
+| `--sf-opacity-75` | PUBLIC | opacity | `0.75` | 3D perspective |
+| `--sf-opacity-disabled` | PUBLIC | opacity | `0.45` | strength scales up in dark mode via --sf-is-dark |
+| `--sf-optical-sizing` | PUBLIC-ADVANCED | optical | `auto` | e.g. "wght" 450, "opsz" 32 |
+| `--sf-perspective-far` | PUBLIC-ADVANCED | perspective | `2000px` | 3D perspective |
+| `--sf-perspective-near` | PUBLIC-ADVANCED | perspective | `500px` | 3D perspective |
+| `--sf-perspective-normal` | PUBLIC-ADVANCED | perspective | `1000px` | 3D perspective |
+| `--sf-print-base-size` | PUBLIC-ADVANCED | print | `11pt` | Print |
+| `--sf-print-page-margin` | PUBLIC-ADVANCED | print | `2cm` | Print |
+| `--sf-print-page-size` | PUBLIC-ADVANCED | print | `a4` | Print |
+| `--sf-radius-2xl` | PUBLIC | radius | `calc(24px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-3xl` | PUBLIC | radius | `calc(32px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-4xl` | PUBLIC | radius | `calc(48px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-full` | PUBLIC | radius | `9999px` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-l` | PUBLIC | radius | `calc(12px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-m` | PUBLIC | radius | `calc(8px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-none` | PUBLIC | radius | `0` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-outer` | PUBLIC-ADVANCED | radius | `calc(var(--sf-radius-m) + var(--sf-component-pad))` | Concentric helper — outer radius for a container that wraps content padded by --sf-component-pad with inner radius m. Keeps inner elements visually proportional inside a padded box. Override per use: .my-card { border-radius: var(--sf-radius-outer); } Maths: outer = inner +… |
+| `--sf-radius-pill` | PUBLIC | radius | `var(--sf-radius-full)` | Pill — semantic alias of --sf-radius-full. Reach for this name on rectangles you want capsule-shaped (badges, tags, chips); use --sf-radius-full when you mean "as round as topologically possible". |
+| `--sf-radius-s` | PUBLIC | radius | `calc(4px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-scale` | PUBLIC-ADVANCED | radius | `1` | Scale multipliers |
+| `--sf-radius-xl` | PUBLIC | radius | `calc(16px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-xs` | PUBLIC | radius | `calc(2px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-ratio-3-2` | PUBLIC | ratio | `3 / 2` | Aspect ratios |
+| `--sf-ratio-4-3` | PUBLIC | ratio | `4 / 3` | Aspect ratios |
+| `--sf-ratio-cinema` | PUBLIC | ratio | `21 / 9` | Aspect ratios |
+| `--sf-ratio-golden` | PUBLIC | ratio | `1.618 / 1` | Aspect ratios |
+| `--sf-ratio-portrait` | PUBLIC | ratio | `3 / 4` | Aspect ratios |
+| `--sf-ratio-square` | PUBLIC | ratio | `1` | Aspect ratios |
+| `--sf-ratio-video` | PUBLIC | ratio | `16 / 9` | Aspect ratios |
+| `--sf-safe-bottom` | PUBLIC-ADVANCED | safe | `env(safe-area-inset-bottom, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-safe-left` | PUBLIC-ADVANCED | safe | `env(safe-area-inset-left, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-safe-right` | PUBLIC-ADVANCED | safe | `env(safe-area-inset-right, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-safe-top` | PUBLIC-ADVANCED | safe | `env(safe-area-inset-top, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | scroll | `cover 30%` | consumer API. Attach these to your own scroll-timeline via animation-range. Not consumed by the framework itself; intended for BEM component authors. |
+| `--sf-scroll-timeline-range-start` | PUBLIC-ADVANCED | scroll | `entry 0%` | consumer API. Attach these to your own scroll-timeline via animation-range. Not consumed by the framework itself; intended for BEM component authors. |
+| `--sf-scrollbar-thumb` | PUBLIC | scrollbar | `var(--sf-color-neutral)` | Scrollbar |
+| `--sf-scrollbar-track` | PUBLIC | scrollbar | `transparent` | Scrollbar |
+| `--sf-section-pad` | PUBLIC | section | `var(--sf-section-pad--m)` | Section padding |
+| `--sf-section-pad--2xl` | PUBLIC | section | `calc(var(--sf-space-4xl) * 2)` | Section padding |
+| `--sf-section-pad--l` | PUBLIC | section | `var(--sf-space-4xl)` | Section padding |
+| `--sf-section-pad--m` | PUBLIC | section | `var(--sf-space-3xl)` | Section padding |
+| `--sf-section-pad--s` | PUBLIC | section | `var(--sf-space-2xl)` | Section padding |
+| `--sf-section-pad--xl` | PUBLIC | section | `calc(var(--sf-space-4xl) * 1.5)` | Section padding |
+| `--sf-section-pad--xs` | PUBLIC | section | `var(--sf-space-xl)` | Section padding |
+| `--sf-shadow-2xl` | PUBLIC | shadow | `0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-color` | PUBLIC-ADVANCED | shadow | `oklch(from var(--sf-color-neutral) 0.15 c h)` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-glow` | PUBLIC | shadow | `0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Shadow glow |
+| `--sf-shadow-glow-color` | PUBLIC-ADVANCED | shadow | `var(--sf-color-primary)` | strength scales up in dark mode via --sf-is-dark |
+| `--sf-shadow-inner` | PUBLIC | shadow | `inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-l` | PUBLIC | shadow | `0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-m` | PUBLIC | shadow | `0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-none` | PUBLIC | shadow | `none` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-s` | PUBLIC | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-strength` | PUBLIC-ADVANCED | shadow | `calc(0.08 + var(--sf-is-dark) * 0.17)` | strength scales up in dark mode via --sf-is-dark |
+| `--sf-shadow-xl` | PUBLIC | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-xs` | PUBLIC | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-size-l` | PUBLIC | size | `2.75rem` | UI sizes |
+| `--sf-size-m` | PUBLIC | size | `2.5rem` | UI sizes |
+| `--sf-size-s` | PUBLIC | size | `2rem` | UI sizes |
+| `--sf-size-xl` | PUBLIC | size | `3.5rem` | UI sizes |
+| `--sf-size-xs` | PUBLIC | size | `1.5rem` | UI sizes |
+| `--sf-space-2xl` | PUBLIC | space | `calc(clamp(1.95rem, calc(0.04133333333333333 * (100vw - 22.5rem) + 1.95rem), 4.74rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.004888888888888888 * (100vw - 22.5rem) + 0.51rem), 0.84rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-3xl` | PUBLIC | space | `calc(clamp(2.44rem, calc(0.057333333333333326 * (100vw - 22.5rem) + 2.44rem), 6.31rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-4xl` | PUBLIC | space | `calc(clamp(3.05rem, calc(0.07955555555555556 * (100vw - 22.5rem) + 3.05rem), 8.42rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-gutter` | PUBLIC | space | `var(--sf-space-l)` | fixed |
+| `--sf-space-l` | PUBLIC | space | `calc(clamp(1.25rem, calc(0.021037037037037035 * (100vw - 22.5rem) + 1.25rem), 2.67rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-m` | PUBLIC | space | `calc(clamp(1rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 1rem), 2rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-none` | PUBLIC | space | `0` | fixed |
+| `--sf-space-px` | PUBLIC | space | `1px` | fixed |
+| `--sf-space-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.01037037037037037 * (100vw - 22.5rem) + 0.8rem), 1.5rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-scale` | PUBLIC-ADVANCED | space | `1` | Scale multipliers |
+| `--sf-space-xl` | PUBLIC | space | `calc(clamp(1.56rem, calc(0.029481481481481477 * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-space-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))` | Spacing — fluid |
+| `--sf-state-pending-opacity` | PUBLIC | state | `0.7` | strength scales up in dark mode via --sf-is-dark |
+| `--sf-sticky-offset` | PUBLIC | sticky | `clamp( var(--sf-sticky-offset-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-sticky-offset-desktop` | PUBLIC | sticky | `var(--sf-header-height-desktop)` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-sticky-offset-mobile` | PUBLIC | sticky | `var(--sf-header-height-mobile)` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-stroke-bold` | PUBLIC | stroke | `2px` | Stroke widths |
+| `--sf-stroke-heavy` | PUBLIC | stroke | `3px` | Stroke widths |
+| `--sf-stroke-regular` | PUBLIC | stroke | `1.5px` | Stroke widths |
+| `--sf-stroke-thin` | PUBLIC | stroke | `1px` | Stroke widths |
+| `--sf-text-2xl` | PUBLIC | text | `calc(clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-2xs` | PUBLIC | text | `calc(clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-3xl` | PUBLIC | text | `calc(clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-4xl` | PUBLIC | text | `calc(clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-display-l` | PUBLIC | text | `calc(clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem) * var(--sf-text-display-scale))` | fluid |
+| `--sf-text-display-m` | PUBLIC | text | `calc(clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem) * var(--sf-text-display-scale))` | fluid |
+| `--sf-text-display-s` | PUBLIC | text | `calc(clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem) * var(--sf-text-display-scale))` | fluid |
+| `--sf-text-display-scale` | PUBLIC-ADVANCED | text | `1` | Scale multipliers |
+| `--sf-text-l` | PUBLIC | text | `calc(clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-m` | PUBLIC | text | `calc(clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-s` | PUBLIC | text | `calc(clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-scale` | PUBLIC-ADVANCED | text | `1` | Scale multipliers |
+| `--sf-text-shadow-l` | PUBLIC | text | `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | share --sf-shadow-color / --sf-shadow-strength |
+| `--sf-text-shadow-m` | PUBLIC | text | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | share --sf-shadow-color / --sf-shadow-strength |
+| `--sf-text-shadow-none` | PUBLIC | text | `none` | share --sf-shadow-color / --sf-shadow-strength |
+| `--sf-text-shadow-s` | PUBLIC | text | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` | share --sf-shadow-color / --sf-shadow-strength |
+| `--sf-text-xl` | PUBLIC | text | `calc(clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem) * var(--sf-text-scale))` | fluid |
+| `--sf-text-xs` | PUBLIC | text | `calc(clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem) * var(--sf-text-scale))` | fluid |
+| `--sf-touch-target` | PUBLIC | touch | `var(--sf-size-l)` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (22.5rem → 90rem), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. The slope (0.0222…) matches… |
+| `--sf-tracking-normal` | PUBLIC | tracking | `0` | Line heights & letter spacing |
+| `--sf-tracking-tight` | PUBLIC | tracking | `-0.025em` | Line heights & letter spacing |
+| `--sf-tracking-wide` | PUBLIC | tracking | `0.025em` | Line heights & letter spacing |
+| `--sf-tracking-wider` | PUBLIC | tracking | `0.05em` | Line heights & letter spacing |
+| `--sf-tracking-widest` | PUBLIC | tracking | `0.1em` | Line heights & letter spacing |
+| `--sf-transition-all` | PUBLIC | transition | `all var(--sf-duration-normal) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-colors` | PUBLIC | transition | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-enter` | PUBLIC | transition | `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), box-shadow var(--sf-duration-normal) var(--sf-ease-out), opacity var(--sf-duration-normal) var(--sf-ease-out), transform var(--sf-duration-normal) var(--sf-ease-out), filter var(--sf-duration-normal) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-exit` | PUBLIC | transition | `color var(--sf-duration-fast) var(--sf-ease-in), background-color var(--sf-duration-fast) var(--sf-ease-in), border-color var(--sf-duration-fast) var(--sf-ease-in), box-shadow var(--sf-duration-fast) var(--sf-ease-in), opacity var(--sf-duration-fast) var(--sf-ease-in), transform var(--sf-duration-fast) var(--sf-ease-in), filter var(--sf-duration-fast) var(--sf-ease-in)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-fast` | PUBLIC | transition | `color var(--sf-duration-fast) var(--sf-ease-out), background-color var(--sf-duration-fast) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out), transform var(--sf-duration-fast) var(--sf-ease-out), filter var(--sf-duration-fast) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-opacity` | PUBLIC | transition | `opacity var(--sf-duration-normal) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-overlay` | PUBLIC | transition | `overlay var(--sf-duration-normal) allow-discrete, display var(--sf-duration-normal) allow-discrete` | Top-layer transition building block (dialog, [popover]). transition-behavior: allow-discrete keeps the discrete `display` and `overlay` properties in the transition so entry animations can fire and exit animations finish before the element leaves the top layer. Compose it into… |
+| `--sf-transition-shadow` | PUBLIC | transition | `box-shadow var(--sf-duration-normal) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-slow` | PUBLIC | transition | `color var(--sf-duration-slow) var(--sf-ease-in-out), background-color var(--sf-duration-slow) var(--sf-ease-in-out), border-color var(--sf-duration-slow) var(--sf-ease-in-out), box-shadow var(--sf-duration-slow) var(--sf-ease-in-out), opacity var(--sf-duration-slow) var(--sf-ease-in-out), transform var(--sf-duration-slow) var(--sf-ease-in-out), filter var(--sf-duration-slow) var(--sf-ease-in-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-transition-transform` | PUBLIC | transition | `transform var(--sf-duration-normal) var(--sf-ease-out)` | --sf-transition-all transitions ALL properties — convenient but a performance footgun (forces the browser to watch every computed value). It is the ONLY token here that uses `all`; reach for it only as a deliberate escape hatch. Every other token below names an explicit… |
+| `--sf-z-base` | PUBLIC | z | `0` | Z-index |
+| `--sf-z-below` | PUBLIC | z | `-1` | Z-index |
+| `--sf-z-dropdown` | PUBLIC | z | `var(--sf-z-high)` | 100 fixed app chrome (navbar, FAB) |
+| `--sf-z-fixed` | PUBLIC | z | `var(--sf-z-mid)` | 10 sticky headers / sidebars |
+| `--sf-z-high` | PUBLIC | z | `500` | Z-index |
+| `--sf-z-low` | PUBLIC | z | `10` | Z-index |
+| `--sf-z-max` | PUBLIC | z | `9999` | Z-index |
+| `--sf-z-mid` | PUBLIC | z | `100` | Z-index |
+| `--sf-z-overlay` | PUBLIC | z | `var(--sf-z-max)` | 900 transient notifications |
+| `--sf-z-raised` | PUBLIC | z | `1` | Z-index |
+| `--sf-z-sticky` | PUBLIC | z | `var(--sf-z-low)` | Semantic z-index aliases — map UI roles onto the numeric ladder above so component authors target intent, not magic integers. Every role that can overlap another on the scroll plane gets its OWN rung, ordered: raised < sticky < fixed < dropdown < toast. Notably --sf-z-dropdown… |
+| `--sf-z-toast` | PUBLIC | z | `var(--sf-z-top)` | 500 menus — clear sticky + fixed |
+| `--sf-z-top` | PUBLIC | z | `900` | Z-index |
+
+### Layout tokens (48)
+
+| Token | Tier | Namespace | Default | Description |
+|---|---|---|---|---|
+| `--sf-alternate-gap` | PUBLIC | alternate | `var(--sf-space-content)` | Alternate (zigzag) |
+| `--sf-alternate-inner-gap` | PUBLIC | alternate | `var(--sf-space-gap)` | Alternate (zigzag) |
+| `--sf-bento-cols-default` | PUBLIC | bento | `3` | Bento grid |
+| `--sf-bento-gap` | PUBLIC | bento | `var(--sf-space-gap)` | Bento grid |
+| `--sf-bento-row-compact` | PUBLIC | bento | `6rem` | Bento grid |
+| `--sf-bento-row-default` | PUBLIC | bento | `10rem` | Bento grid |
+| `--sf-bento-row-tall` | PUBLIC | bento | `16rem` | Bento grid |
+| `--sf-box-border-color` | PUBLIC | box | `var(--sf-color-border)` | Box |
+| `--sf-box-border-width` | PUBLIC | box | `0` | Box |
+| `--sf-box-padding` | PUBLIC | box | `var(--sf-space-m)` | Box |
+| `--sf-breakout-width` | PUBLIC | breakout | `var(--sf-container-wide)` | Content grid (breakout pattern) |
+| `--sf-center-gutter` | PUBLIC | center | `var(--sf-space-gutter)` | Center |
+| `--sf-center-max` | PUBLIC | center | `var(--sf-container-default)` | Center |
+| `--sf-cluster-align` | PUBLIC | cluster | `center` | Cluster |
+| `--sf-cluster-gap` | PUBLIC | cluster | `var(--sf-space-gap)` | Cluster |
+| `--sf-cluster-justify` | PUBLIC | cluster | `flex-start` | Cluster |
+| `--sf-content-width` | PUBLIC | content | `var(--sf-container-default)` | Content grid (breakout pattern) |
+| `--sf-cover-min-height` | PUBLIC | cover | `100dvh` | Cover |
+| `--sf-cover-padding` | PUBLIC | cover | `var(--sf-section-pad)` | Cover |
+| `--sf-equal-cols` | PUBLIC | equal | `2` | Equal columns (fixed, non-responsive) |
+| `--sf-equal-gap` | PUBLIC | equal | `var(--sf-space-gap)` | Equal columns (fixed, non-responsive) |
+| `--sf-frame-ratio` | PUBLIC | frame | `16 / 9` | Frame |
+| `--sf-gap-size` | PUBLIC | gap | `var(--sf-space-gap)` | Gap |
+| `--sf-grid-gap` | PUBLIC | grid | `var(--sf-space-gap)` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min` | PUBLIC | grid | `16rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min-2xl` | PUBLIC | grid | `28rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min-l` | PUBLIC | grid | `20rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min-m` | PUBLIC | grid | `16rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min-s` | PUBLIC | grid | `13rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min-xl` | PUBLIC | grid | `24rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-min-xs` | PUBLIC | grid | `10rem` | Grid (auto-fill, breakpoint-free) |
+| `--sf-icon-box-bg` | PUBLIC | icon | `var(--sf-color-inset)` | extras for .sf-icon--boxed. The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in core/tokens.css alongside the typography scale. |
+| `--sf-icon-box-border` | PUBLIC | icon | `var(--sf-border-width-1) solid var(--sf-color-border)` | extras for .sf-icon--boxed. The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in core/tokens.css alongside the typography scale. |
+| `--sf-icon-box-pad` | PUBLIC | icon | `0.5em` | extras for .sf-icon--boxed. The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in core/tokens.css alongside the typography scale. |
+| `--sf-icon-box-radius` | PUBLIC | icon | `var(--sf-radius-s)` | extras for .sf-icon--boxed. The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in core/tokens.css alongside the typography scale. |
+| `--sf-imposter-margin` | PUBLIC | imposter | `var(--sf-space-m)` | Imposter (centered absolute/fixed overlay) |
+| `--sf-prose-paragraph` | PUBLIC | prose | `var(--sf-space-content)` | Prose |
+| `--sf-reel-gap` | PUBLIC | reel | `var(--sf-space-gap)` | Reel |
+| `--sf-reel-height` | PUBLIC | reel | `auto` | Reel |
+| `--sf-reel-item-width` | PUBLIC | reel | `max-content` | Reel |
+| `--sf-sidebar-gap` | PUBLIC | sidebar | `var(--sf-space-gap)` | Sidebar |
+| `--sf-sidebar-min-width` | PUBLIC | sidebar | `50%` | Sidebar |
+| `--sf-sidebar-width` | PUBLIC | sidebar | `18rem` | content column minimum |
+| `--sf-space-content` | PUBLIC | space | `var(--sf-content-gap)` | component-level gap |
+| `--sf-space-gap` | PUBLIC | space | `var(--sf-gap)` | Shared spacing aliases |
+| `--sf-stack-gap` | PUBLIC | stack | `var(--sf-space-content)` | Stack |
+| `--sf-switcher-gap` | PUBLIC | switcher | `var(--sf-space-gap)` | Switcher |
+| `--sf-switcher-threshold` | PUBLIC | switcher | `30rem` | Switcher |
+
+### Macro tokens (18)
+
+| Token | Tier | Namespace | Default | Description |
+|---|---|---|---|---|
+| `--sf-aspect` | PUBLIC | aspect | `16 / 9` | default for .sf-aspect (generic ratio container, distinct from layout's .sf-frame which has its own --sf-frame-ratio). |
+| `--sf-content-intrinsic-size` | PUBLIC | content | `500px` | placeholder size for .sf-content-auto. Feeds contain-intrinsic-size so offscreen sections reserve space before their first render, keeping the scrollbar and scroll position stable. Override per element: style="--sf-content-intrinsic-size: 800px". |
+| `--sf-flow-space` | PUBLIC | flow | `var(--sf-space-content)` | distance between flow children (lobotomized owl). Consumed by .sf-flow > * + *. |
+| `--sf-line-clamp` | PUBLIC | line | `3` | default line count for .sf-line-clamp-N. Override per element: style="--sf-line-clamp: 5". The fixed-N variants .sf-line-clamp-2 / -3 don't read this token (they hardcode the value), so the default only applies to .sf-line-clamp-N callers. |
+| `--sf-prose-block-margin` | PUBLIC | prose | `var(--sf-space-m)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-figcaption-size` | PUBLIC | prose | `var(--sf-text-s)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-figure-margin` | PUBLIC | prose | `var(--sf-space-l)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-heading-gap` | PUBLIC | prose | `var(--sf-space-s)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-list-gap` | PUBLIC | prose | `var(--sf-space-xs)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-marker-color` | PUBLIC | prose | `var(--sf-color-primary)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-media-margin` | PUBLIC | prose | `var(--sf-space-m)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-prose-media-radius` | PUBLIC | prose | `var(--sf-radius-m)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
+| `--sf-scrim-color` | PUBLIC | scrim | `oklch(0 0 0 / 0.55)` | darkening overlay for text-over-image legibility, consumed by the .sf-scrim macro. The gradient is composed from a direction + a color stop so consumers can retune either independently: style="--sf-scrim-color: oklch(0 0 0 / 0.75)" style="--sf-scrim-direction: to top right"… |
+| `--sf-scrim-direction` | PUBLIC | scrim | `to top` | darkening overlay for text-over-image legibility, consumed by the .sf-scrim macro. The gradient is composed from a direction + a color stop so consumers can retune either independently: style="--sf-scrim-color: oklch(0 0 0 / 0.75)" style="--sf-scrim-direction: to top right"… |
+| `--sf-scrim-gradient` | PUBLIC | scrim | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` | darkening overlay for text-over-image legibility, consumed by the .sf-scrim macro. The gradient is composed from a direction + a color stop so consumers can retune either independently: style="--sf-scrim-color: oklch(0 0 0 / 0.75)" style="--sf-scrim-direction: to top right"… |
+| `--sf-scrim-text-shadow` | PUBLIC | scrim | `0 1px 3px oklch(0 0 0 / 0.6)` | Text-on-image legibility WITHOUT darkening the picture — a soft shadow halo behind glyphs, consumed by .sf-text-protect. |
+| `--sf-scroll-shadow-size` | PUBLIC | scroll | `2rem` | mask gradient size. Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade (end-edge horizontal fade). |
+| `--sf-truncate-suffix` | PUBLIC-ADVANCED | truncate | `"\\2026"` | ellipsis character for .sf-truncate. Stays as a token so consumers can swap to ASCII "..." or a localised character without rewriting the rule. The CSS text-overflow: ellipsis property doesn't read it directly; it's exposed for consumer-built variants. |
+
+### Palette tokens (132)
+
+| Token | Tier | Namespace | Default | Description |
+|---|---|---|---|---|
+| `--sf-color-action-100` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-surface))` | action |
+| `--sf-color-action-200` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface))` | action |
+| `--sf-color-action-300` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 40%, var(--sf-color-surface))` | action |
+| `--sf-color-action-400` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface))` | action |
+| `--sf-color-action-50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 4%, var(--sf-color-surface))` | action |
+| `--sf-color-action-500` | PUBLIC | color | `var(--sf-color-action)` | action |
+| `--sf-color-action-600` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))` | action |
+| `--sf-color-action-700` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 62%, var(--sf-color-text))` | action |
+| `--sf-color-action-800` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text))` | action |
+| `--sf-color-action-900` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 18%, var(--sf-color-text))` | action |
+| `--sf-color-action-950` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-text))` | action |
+| `--sf-color-action-a10` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 10%, transparent)` | action |
+| `--sf-color-action-a20` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 20%, transparent)` | action |
+| `--sf-color-action-a30` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 30%, transparent)` | action |
+| `--sf-color-action-a40` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 40%, transparent)` | action |
+| `--sf-color-action-a5` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 5%, transparent)` | action |
+| `--sf-color-action-a50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 50%, transparent)` | action |
+| `--sf-color-action-a60` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 60%, transparent)` | action |
+| `--sf-color-action-a70` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 70%, transparent)` | action |
+| `--sf-color-action-a80` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 80%, transparent)` | action |
+| `--sf-color-action-a90` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 90%, transparent)` | action |
+| `--sf-color-action-a95` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-action) 95%, transparent)` | action |
+| `--sf-color-base-100` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-text) 8%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-200` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-300` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-text) 40%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-400` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-500` | PUBLIC | color | `var(--sf-color-base)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-600` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-700` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 62%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-800` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-900` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 18%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-950` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 8%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a10` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 10%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a20` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 20%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a30` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 30%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a40` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 40%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a5` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 5%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 50%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a60` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 60%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a70` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 70%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a80` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 80%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a90` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 90%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-base-a95` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-base) 95%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
+| `--sf-color-neutral-100` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-200` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-300` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 40%, var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-400` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 4%, var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-500` | PUBLIC | color | `var(--sf-color-neutral)` | neutral |
+| `--sf-color-neutral-600` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-700` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 62%, var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-800` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-900` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 18%, var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-950` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-a10` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 10%, transparent)` | neutral |
+| `--sf-color-neutral-a20` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 20%, transparent)` | neutral |
+| `--sf-color-neutral-a30` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 30%, transparent)` | neutral |
+| `--sf-color-neutral-a40` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 40%, transparent)` | neutral |
+| `--sf-color-neutral-a5` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 5%, transparent)` | neutral |
+| `--sf-color-neutral-a50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 50%, transparent)` | neutral |
+| `--sf-color-neutral-a60` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 60%, transparent)` | neutral |
+| `--sf-color-neutral-a70` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 70%, transparent)` | neutral |
+| `--sf-color-neutral-a80` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 80%, transparent)` | neutral |
+| `--sf-color-neutral-a90` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 90%, transparent)` | neutral |
+| `--sf-color-neutral-a95` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-neutral) 95%, transparent)` | neutral |
+| `--sf-color-primary-100` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-200` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-300` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 40%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-400` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 4%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-500` | PUBLIC | color | `var(--sf-color-primary)` | primary |
+| `--sf-color-primary-600` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-700` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 62%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-800` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-900` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 18%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-950` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-a10` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 10%, transparent)` | primary |
+| `--sf-color-primary-a20` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 20%, transparent)` | primary |
+| `--sf-color-primary-a30` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 30%, transparent)` | primary |
+| `--sf-color-primary-a40` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 40%, transparent)` | primary |
+| `--sf-color-primary-a5` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 5%, transparent)` | primary |
+| `--sf-color-primary-a50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 50%, transparent)` | primary |
+| `--sf-color-primary-a60` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 60%, transparent)` | primary |
+| `--sf-color-primary-a70` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 70%, transparent)` | primary |
+| `--sf-color-primary-a80` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 80%, transparent)` | primary |
+| `--sf-color-primary-a90` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 90%, transparent)` | primary |
+| `--sf-color-primary-a95` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-primary) 95%, transparent)` | primary |
+| `--sf-color-secondary-100` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-200` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-300` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 40%, var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-400` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 4%, var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-500` | PUBLIC | color | `var(--sf-color-secondary)` | secondary |
+| `--sf-color-secondary-600` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-700` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 62%, var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-800` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-900` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 18%, var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-950` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-a10` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 10%, transparent)` | secondary |
+| `--sf-color-secondary-a20` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 20%, transparent)` | secondary |
+| `--sf-color-secondary-a30` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 30%, transparent)` | secondary |
+| `--sf-color-secondary-a40` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 40%, transparent)` | secondary |
+| `--sf-color-secondary-a5` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 5%, transparent)` | secondary |
+| `--sf-color-secondary-a50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 50%, transparent)` | secondary |
+| `--sf-color-secondary-a60` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 60%, transparent)` | secondary |
+| `--sf-color-secondary-a70` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 70%, transparent)` | secondary |
+| `--sf-color-secondary-a80` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 80%, transparent)` | secondary |
+| `--sf-color-secondary-a90` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 90%, transparent)` | secondary |
+| `--sf-color-secondary-a95` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-secondary) 95%, transparent)` | secondary |
+| `--sf-color-tertiary-100` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-200` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-300` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 40%, var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-400` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 4%, var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-500` | PUBLIC | color | `var(--sf-color-tertiary)` | tertiary |
+| `--sf-color-tertiary-600` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-700` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 62%, var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-800` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-900` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 18%, var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-950` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-a10` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 10%, transparent)` | tertiary |
+| `--sf-color-tertiary-a20` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 20%, transparent)` | tertiary |
+| `--sf-color-tertiary-a30` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 30%, transparent)` | tertiary |
+| `--sf-color-tertiary-a40` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 40%, transparent)` | tertiary |
+| `--sf-color-tertiary-a5` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 5%, transparent)` | tertiary |
+| `--sf-color-tertiary-a50` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 50%, transparent)` | tertiary |
+| `--sf-color-tertiary-a60` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 60%, transparent)` | tertiary |
+| `--sf-color-tertiary-a70` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 70%, transparent)` | tertiary |
+| `--sf-color-tertiary-a80` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 80%, transparent)` | tertiary |
+| `--sf-color-tertiary-a90` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 90%, transparent)` | tertiary |
+| `--sf-color-tertiary-a95` | PUBLIC | color | `color-mix(in oklab, var(--sf-color-tertiary) 95%, transparent)` | tertiary |
+
+### Sizes-extended tokens (108)
+
+| Token | Tier | Namespace | Default | Description |
+|---|---|---|---|---|
+| `--sf-space-2xl-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.0626666666666667 * (100vw - 22.5rem) + 0.51rem), 4.74rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-2xl-to-l` | PUBLIC | space | `calc(clamp(1.25rem, calc(0.0517037037037037 * (100vw - 22.5rem) + 1.25rem), 4.74rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-2xl-to-m` | PUBLIC | space | `calc(clamp(1rem, calc(0.0554074074074074 * (100vw - 22.5rem) + 1rem), 4.74rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-2xl-to-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.0583703703703704 * (100vw - 22.5rem) + 0.8rem), 4.74rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-2xl-to-xl` | PUBLIC | space | `calc(clamp(1.56rem, calc(0.0471111111111111 * (100vw - 22.5rem) + 1.56rem), 4.74rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-2xl-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.0607407407407407 * (100vw - 22.5rem) + 0.64rem), 4.74rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-2xl` | PUBLIC | space | `calc(clamp(1.95rem, calc(0.0645925925925926 * (100vw - 22.5rem) + 1.95rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.0859259259259259 * (100vw - 22.5rem) + 0.51rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-l` | PUBLIC | space | `calc(clamp(1.25rem, calc(0.074962962962963 * (100vw - 22.5rem) + 1.25rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-m` | PUBLIC | space | `calc(clamp(1rem, calc(0.0786666666666667 * (100vw - 22.5rem) + 1rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.0816296296296296 * (100vw - 22.5rem) + 0.8rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-xl` | PUBLIC | space | `calc(clamp(1.56rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 1.56rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-3xl-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.084 * (100vw - 22.5rem) + 0.64rem), 6.31rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-2xl` | PUBLIC | space | `calc(clamp(1.95rem, calc(0.0958518518518519 * (100vw - 22.5rem) + 1.95rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.117185185185185 * (100vw - 22.5rem) + 0.51rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-3xl` | PUBLIC | space | `calc(clamp(2.44rem, calc(0.0885925925925926 * (100vw - 22.5rem) + 2.44rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-l` | PUBLIC | space | `calc(clamp(1.25rem, calc(0.106222222222222 * (100vw - 22.5rem) + 1.25rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-m` | PUBLIC | space | `calc(clamp(1rem, calc(0.109925925925926 * (100vw - 22.5rem) + 1rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.112888888888889 * (100vw - 22.5rem) + 0.8rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-xl` | PUBLIC | space | `calc(clamp(1.56rem, calc(0.10162962962963 * (100vw - 22.5rem) + 1.56rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-4xl-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.115259259259259 * (100vw - 22.5rem) + 0.64rem), 8.42rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-l-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.032 * (100vw - 22.5rem) + 0.51rem), 2.67rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-l-to-m` | PUBLIC | space | `calc(clamp(1rem, calc(0.0247407407407407 * (100vw - 22.5rem) + 1rem), 2.67rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-l-to-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.0277037037037037 * (100vw - 22.5rem) + 0.8rem), 2.67rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-l-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.0300740740740741 * (100vw - 22.5rem) + 0.64rem), 2.67rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-m-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.0220740740740741 * (100vw - 22.5rem) + 0.51rem), 2rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-m-to-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.0177777777777778 * (100vw - 22.5rem) + 0.8rem), 2rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-m-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.0201481481481481 * (100vw - 22.5rem) + 0.64rem), 2rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-s-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.0146666666666667 * (100vw - 22.5rem) + 0.51rem), 1.5rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-s-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.0127407407407407 * (100vw - 22.5rem) + 0.64rem), 1.5rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-xl-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.045037037037037 * (100vw - 22.5rem) + 0.51rem), 3.55rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-xl-to-l` | PUBLIC | space | `calc(clamp(1.25rem, calc(0.0340740740740741 * (100vw - 22.5rem) + 1.25rem), 3.55rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-xl-to-m` | PUBLIC | space | `calc(clamp(1rem, calc(0.0377777777777778 * (100vw - 22.5rem) + 1rem), 3.55rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-xl-to-s` | PUBLIC | space | `calc(clamp(0.8rem, calc(0.0407407407407407 * (100vw - 22.5rem) + 0.8rem), 3.55rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-xl-to-xs` | PUBLIC | space | `calc(clamp(0.64rem, calc(0.0431111111111111 * (100vw - 22.5rem) + 0.64rem), 3.55rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-space-xs-to-2xs` | PUBLIC | space | `calc(clamp(0.51rem, calc(0.00918518518518518 * (100vw - 22.5rem) + 0.51rem), 1.13rem) * var(--sf-space-scale))` | Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens. |
+| `--sf-text-2xl-font-weight` | PUBLIC | text | `var(--sf-font-weight-heading)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xl-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xl-line-height` | PUBLIC | text | `var(--sf-leading-snug)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xl-max-width` | PUBLIC | text | `none` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xl-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.0362962962962963 * (100vw - 22.5rem) + 0.51rem), 2.96rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-2xl-to-l` | PUBLIC | text | `clamp(1.25rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 1.25rem), 2.96rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-2xl-to-m` | PUBLIC | text | `clamp(1rem, calc(0.029037037037037 * (100vw - 22.5rem) + 1rem), 2.96rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-2xl-to-s` | PUBLIC | text | `clamp(0.8rem, calc(0.032 * (100vw - 22.5rem) + 0.8rem), 2.96rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-2xl-to-xl` | PUBLIC | text | `clamp(1.56rem, calc(0.0207407407407407 * (100vw - 22.5rem) + 1.56rem), 2.96rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-2xl-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.0343703703703704 * (100vw - 22.5rem) + 0.64rem), 2.96rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-2xs-font-weight` | PUBLIC | text | `var(--sf-font-weight-body)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xs-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xs-line-height` | PUBLIC | text | `var(--sf-leading-relaxed)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-2xs-max-width` | PUBLIC | text | `55ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-3xl-font-weight` | PUBLIC | text | `var(--sf-font-weight-heading)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-3xl-letter-spacing` | PUBLIC | text | `var(--sf-tracking-tight)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-3xl-line-height` | PUBLIC | text | `var(--sf-leading-tight)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-3xl-max-width` | PUBLIC | text | `none` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-3xl-to-2xl` | PUBLIC | text | `clamp(1.95rem, calc(0.0296296296296296 * (100vw - 22.5rem) + 1.95rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-3xl-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.050962962962963 * (100vw - 22.5rem) + 0.51rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-3xl-to-l` | PUBLIC | text | `clamp(1.25rem, calc(0.04 * (100vw - 22.5rem) + 1.25rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-3xl-to-m` | PUBLIC | text | `clamp(1rem, calc(0.0437037037037037 * (100vw - 22.5rem) + 1rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-3xl-to-s` | PUBLIC | text | `clamp(0.8rem, calc(0.0466666666666667 * (100vw - 22.5rem) + 0.8rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-3xl-to-xl` | PUBLIC | text | `clamp(1.56rem, calc(0.0354074074074074 * (100vw - 22.5rem) + 1.56rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-3xl-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.049037037037037 * (100vw - 22.5rem) + 0.64rem), 3.95rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-font-weight` | PUBLIC | text | `var(--sf-font-weight-heading)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-4xl-letter-spacing` | PUBLIC | text | `var(--sf-tracking-tight)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-4xl-line-height` | PUBLIC | text | `var(--sf-leading-tight)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-4xl-max-width` | PUBLIC | text | `none` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-4xl-to-2xl` | PUBLIC | text | `clamp(1.95rem, calc(0.049037037037037 * (100vw - 22.5rem) + 1.95rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 0.51rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-3xl` | PUBLIC | text | `clamp(2.44rem, calc(0.0417777777777778 * (100vw - 22.5rem) + 2.44rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-l` | PUBLIC | text | `clamp(1.25rem, calc(0.0594074074074074 * (100vw - 22.5rem) + 1.25rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-m` | PUBLIC | text | `clamp(1rem, calc(0.0631111111111111 * (100vw - 22.5rem) + 1rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-s` | PUBLIC | text | `clamp(0.8rem, calc(0.0660740740740741 * (100vw - 22.5rem) + 0.8rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-xl` | PUBLIC | text | `clamp(1.56rem, calc(0.0548148148148148 * (100vw - 22.5rem) + 1.56rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-4xl-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.0684444444444444 * (100vw - 22.5rem) + 0.64rem), 5.26rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-l-font-weight` | PUBLIC | text | `var(--sf-font-weight-body)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-l-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-l-line-height` | PUBLIC | text | `var(--sf-leading-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-l-max-width` | PUBLIC | text | `none` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-l-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.0171851851851852 * (100vw - 22.5rem) + 0.51rem), 1.67rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-l-to-m` | PUBLIC | text | `clamp(1rem, calc(0.00992592592592592 * (100vw - 22.5rem) + 1rem), 1.67rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-l-to-s` | PUBLIC | text | `clamp(0.8rem, calc(0.0128888888888889 * (100vw - 22.5rem) + 0.8rem), 1.67rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-l-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.0152592592592593 * (100vw - 22.5rem) + 0.64rem), 1.67rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-m-font-weight` | PUBLIC | text | `var(--sf-font-weight-body)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-m-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-m-line-height` | PUBLIC | text | `var(--sf-leading-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-m-max-width` | PUBLIC | text | `65ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-m-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.010962962962963 * (100vw - 22.5rem) + 0.51rem), 1.25rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-m-to-s` | PUBLIC | text | `clamp(0.8rem, calc(0.00666666666666667 * (100vw - 22.5rem) + 0.8rem), 1.25rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-m-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.00903703703703704 * (100vw - 22.5rem) + 0.64rem), 1.25rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-s-font-weight` | PUBLIC | text | `var(--sf-font-weight-body)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-s-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-s-line-height` | PUBLIC | text | `var(--sf-leading-relaxed)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-s-max-width` | PUBLIC | text | `65ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-s-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.00637037037037037 * (100vw - 22.5rem) + 0.51rem), 0.94rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-s-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.00444444444444444 * (100vw - 22.5rem) + 0.64rem), 0.94rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-xl-font-weight` | PUBLIC | text | `var(--sf-font-weight-body)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xl-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xl-line-height` | PUBLIC | text | `var(--sf-leading-snug)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xl-max-width` | PUBLIC | text | `none` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xl-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 0.51rem), 2.22rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-xl-to-l` | PUBLIC | text | `clamp(1.25rem, calc(0.0143703703703704 * (100vw - 22.5rem) + 1.25rem), 2.22rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-xl-to-m` | PUBLIC | text | `clamp(1rem, calc(0.0180740740740741 * (100vw - 22.5rem) + 1rem), 2.22rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-xl-to-s` | PUBLIC | text | `clamp(0.8rem, calc(0.021037037037037 * (100vw - 22.5rem) + 0.8rem), 2.22rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-xl-to-xs` | PUBLIC | text | `clamp(0.64rem, calc(0.0234074074074074 * (100vw - 22.5rem) + 0.64rem), 2.22rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+| `--sf-text-xs-font-weight` | PUBLIC | text | `var(--sf-font-weight-body)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xs-letter-spacing` | PUBLIC | text | `var(--sf-tracking-normal)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xs-line-height` | PUBLIC | text | `var(--sf-leading-relaxed)` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xs-max-width` | PUBLIC | text | `60ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
+| `--sf-text-xs-to-2xs` | PUBLIC | text | `clamp(0.51rem, calc(0.00281481481481481 * (100vw - 22.5rem) + 0.51rem), 0.7rem)` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are defined in core/tokens.css. |
+
+## Classes (222)
+
+### Accessibility (7)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.no-motion` | PUBLIC | accessibility | Reduced motion. Token override helps components that read | Manual motion opt-out — same suppression as the OS preference above, but consumer-toggled (e.g. a site-level "reduce motion" switch). Works regardless of the OS setting. |
+| `.sf-clickable-parent` | PUBLIC | accessibility | Clickable-parent | the card-with-link a11y pattern. Applied to the card container. Two modes: Automatic (single primary link): <article class="sf-clickable-parent"> <h3><a href="…">Title</a></h3> <p>Description</p> <button>Independent action</button> </article> Explicit (multiple links — add… |
+| `.sf-focus-parent` | PUBLIC | accessibility | Focus-parent | Uses --sf-focus-ring-color (same token as :focus-visible) so the ring is visually consistent whether focus lands on the parent or a child. |
+| `.sf-focus-shadow` | PUBLIC | accessibility | Focus-shadow opt-in | switches the focus indicator from the default `outline` ring to a `box-shadow` ring (the composite --sf-focus-ring-shadow token). Useful when the outline clips awkwardly on rounded corners or overflow:hidden containers, where box-shadow follows border-radius. Opt-in per… |
+| `.skip-link` | PUBLIC | accessibility | Skip link | appearance belongs to the integrator's design. Left normal so position/colour can be themed freely. |
+| `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | either exposes hidden content visually or hides intended content. All-or-nothing, so the whole set is hardened. |
+| `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | either exposes hidden content visually or hides intended content. All-or-nothing, so the whole set is hardened. |
+
+### Layout primitives (120)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-alternate` | PUBLIC | layout | Alternate (zigzag / media-object) | Alternating two-column layouts (container-query responsive). Every other row reverses its children's order. Establishes a named container `sf-alternate` and binds the responsive query to that name — so a `.sf-alternate` nested inside another container (e.g. `.sf-bento`) still… |
+| `.sf-bento` | PUBLIC | layout | Bento grid | Free-form grid with auto-flow dense, responsive via CQ. Override: style="--sf-bento-cols: 4; --sf-bento-row: 12rem" |
+| `.sf-bento--2` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
+| `.sf-bento--4` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
+| `.sf-bento--compact` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
+| `.sf-bento--tall` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
+| `.sf-box` | PUBLIC | layout | Box | Isolated unit with padding and an optional border. Outline instead of border — doesn't disturb the box model when toggled. Override: style="--sf-box-padding: 1rem; --sf-box-border-width: 1px" |
+| `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
+| `.sf-center` | PUBLIC | layout | Center | Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style="--sf-center-max: 60rem" |
+| `.sf-center--intrinsic` | PUBLIC | layout | Center | Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style="--sf-center-max: 60rem" |
+| `.sf-cluster` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--2xl` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--between` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--center` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--end` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--l` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--m` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--no-wrap` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--s` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--xl` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-cluster--xs` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
+| `.sf-container` | PUBLIC | layout | Container | Max-width container, centered with side gutters. Establishes a named inline-size container `sf-layout` so children can target it precisely with `@container sf-layout (...)`. The framework's own `.sf-bento` and `.sf-grid-*` rules use anonymous `@container` queries on purpose —… |
+| `.sf-container--full` | PUBLIC | layout | Container | Max-width container, centered with side gutters. Establishes a named inline-size container `sf-layout` so children can target it precisely with `@container sf-layout (...)`. The framework's own `.sf-bento` and `.sf-grid-*` rules use anonymous `@container` queries on purpose —… |
+| `.sf-container--narrow` | PUBLIC | layout | Container | Max-width container, centered with side gutters. Establishes a named inline-size container `sf-layout` so children can target it precisely with `@container sf-layout (...)`. The framework's own `.sf-bento` and `.sf-grid-*` rules use anonymous `@container` queries on purpose —… |
+| `.sf-container--prose` | PUBLIC | layout | Container | Max-width container, centered with side gutters. Establishes a named inline-size container `sf-layout` so children can target it precisely with `@container sf-layout (...)`. The framework's own `.sf-bento` and `.sf-grid-*` rules use anonymous `@container` queries on purpose —… |
+| `.sf-container--wide` | PUBLIC | layout | Container | Max-width container, centered with side gutters. Establishes a named inline-size container `sf-layout` so children can target it precisely with `@container sf-layout (...)`. The framework's own `.sf-bento` and `.sf-grid-*` rules use anonymous `@container` queries on purpose —… |
+| `.sf-content-grid` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
+| `.sf-cover` | PUBLIC | layout | Cover | Full-height flex column. A .sf-cover__center child is vertically centered via margin-block: auto. Override: style="--sf-cover-min-height: 50dvh" |
+| `.sf-cover__center` | PUBLIC | layout | Cover | Full-height flex column. A .sf-cover__center child is vertically centered via margin-block: auto. Override: style="--sf-cover-min-height: 50dvh" |
+| `.sf-cover--max` | PUBLIC | layout | Cover | --max intentionally sets min-height: 0 to override .sf-cover's token-driven minimum — the cover may collapse below the default min if content is short. Pair with padding-block or a min-content guard if collapsing is undesirable. |
+| `.sf-cover--min` | PUBLIC | layout | Cover | Full-height flex column. A .sf-cover__center child is vertically centered via margin-block: auto. Override: style="--sf-cover-min-height: 50dvh" |
+| `.sf-cover--padding-l` | PUBLIC | layout | Cover | --max intentionally sets min-height: 0 to override .sf-cover's token-driven minimum — the cover may collapse below the default min if content is short. Pair with padding-block or a min-content guard if collapsing is undesirable. |
+| `.sf-cover--padding-s` | PUBLIC | layout | Cover | --max intentionally sets min-height: 0 to override .sf-cover's token-driven minimum — the cover may collapse below the default min if content is short. Pair with padding-block or a min-content guard if collapsing is undesirable. |
+| `.sf-divider` | PUBLIC | layout | Divider | Standalone separator primitive. Token-driven; pairs with the `--sf-divider-*` tokens and mirrors the `hr` element default. |
+| `.sf-divider--dashed` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
+| `.sf-divider--dotted` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
+| `.sf-divider--gradient` | PUBLIC | layout | Divider | Gradient divider — a hairline that fades out at both ends. Replaces the border with a masked background so it can't use border-style; height tracks --sf-divider-width. Horizontal only. |
+| `.sf-divider--soft` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
+| `.sf-divider--strong` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
+| `.sf-divider--vertical` | PUBLIC | layout | Divider | Standalone separator primitive. Token-driven; pairs with the `--sf-divider-*` tokens and mirrors the `hr` element default. |
+| `.sf-equal` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--2` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--3` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--4` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--6` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-frame` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--3-2` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--4-3` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--cinema` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--golden` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--portrait` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--square` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-frame--video` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
+| `.sf-full-bleed` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
+| `.sf-gap` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap--2xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap--l` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap--m` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap--s` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap--xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap--xs` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-grid` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--2xl` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--dense` | PUBLIC | layout | Grid | Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including the fixed-column .sf-grid-N. |
+| `.sf-grid--fit` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--l` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--m` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--s` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--xl` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid--xs` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
+| `.sf-grid-1` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-1-2` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-1-3` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-2` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-2-1` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-3` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-icon--2xl` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-icon--boxed` | PUBLIC | layout | Icon | Boxed variant — wraps the icon in a padded, bordered, optionally coloured frame. The declared inline-/block-size is the OUTER size (icon + 2× pad); border-box ensures padding is subtracted inward so the glyph content area stays at exactly --sf-icon-size. <span class="sf-icon… |
+| `.sf-icon--l` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-icon--m` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-icon--s` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-icon--xl` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-icon--xs` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
+| `.sf-imposter` | PUBLIC | layout | Imposter | Element centered absolutely within its parent. The parent must have position: relative. |
+| `.sf-imposter--contain` | PUBLIC | layout | Imposter | physical: translate() uses physical x-axis; logical inset-inline-start: 50% maps to right:50% in RTL, which combined with translate(-50%) shifts away from center |
+| `.sf-imposter--fixed` | PUBLIC | layout | Imposter | physical: translate() uses physical x-axis; logical inset-inline-start: 50% maps to right:50% in RTL, which combined with translate(-50%) shifts away from center |
+| `.sf-pancake` | PUBLIC | layout | Pancake (sticky footer) | Grid with three rows: header / main(1fr) / footer. |
+| `.sf-reel` | PUBLIC | layout | Reel | Horizontal scroll with scroll-snap. Each child snaps to start. Override: style="--sf-reel-gap: 1rem; --sf-reel-item-width: 280px" |
+| `.sf-section` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section--2xl` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section--collapse` | PUBLIC | layout | Collapse modifier | when two adjacent sections share this modifier, they redistribute padding 50/50 across the boundary so total spacing stays one full padding gap (instead of two). Works regardless of background color: each section always has half its padding on the boundary side, so content… |
+| `.sf-section--l` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section--m` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section--s` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section--xl` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section--xs` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-section-group` | PUBLIC | layout | Section | Page section with vertical padding. Size modifiers override the scoped token. |
+| `.sf-sidebar` | PUBLIC | layout | Sidebar | Two-column layout: first-child = sidebar, last-child = main content. Collapses when the viewport is too narrow (flex-basis trick). Override: style="--sf-sidebar-width: 20rem" |
+| `.sf-sidebar--narrow` | PUBLIC | layout | Sidebar | Two-column layout: first-child = sidebar, last-child = main content. Collapses when the viewport is too narrow (flex-basis trick). Override: style="--sf-sidebar-width: 20rem" |
+| `.sf-sidebar--right` | PUBLIC | layout | Sidebar | Two-column layout: first-child = sidebar, last-child = main content. Collapses when the viewport is too narrow (flex-basis trick). Override: style="--sf-sidebar-width: 20rem" |
+| `.sf-sidebar--wide` | PUBLIC | layout | Sidebar | Two-column layout: first-child = sidebar, last-child = main content. Collapses when the viewport is too narrow (flex-basis trick). Override: style="--sf-sidebar-width: 20rem" |
+| `.sf-stack` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--2xl` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--center` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--end` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--l` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--m` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--s` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--stretch` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--xl` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-stack--xs` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children. Override: style="--sf-stack-gap: 2rem" |
+| `.sf-subgrid` | PUBLIC | layout | Subgrid | A grid child that inherits its parent's tracks. |
+| `.sf-subgrid-rows` | PUBLIC | layout | Subgrid | A grid child that inherits its parent's tracks. |
+| `.sf-switcher` | PUBLIC | layout | Switcher | Switches between a column (narrow viewport) and a row (wide). Uses calc((threshold - 100%) * 999) — zero media queries. Override: style="--sf-switcher-threshold: 40rem" |
+| `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switches between a column (narrow viewport) and a row (wide). Uses calc((threshold - 100%) * 999) — zero media queries. Override: style="--sf-switcher-threshold: 40rem" |
+| `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switches between a column (narrow viewport) and a row (wide). Uses calc((threshold - 100%) * 999) — zero media queries. Override: style="--sf-switcher-threshold: 40rem" |
+
+### Macro classes (35)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-aspect` | PUBLIC | macro | Aspect | Generic aspect-ratio container. Distinct from layout's .sf-frame which targets media (object-fit: cover) — .sf-aspect is content-agnostic. Override: style="--sf-aspect: 4 / 3" |
+| `.sf-content-auto` | PUBLIC | macro | Content visibility | Skip rendering (layout + paint) for offscreen content until it scrolls near the viewport — a large initial-render win on long pages (product grids, long articles). contain-intrinsic-size reserves a placeholder box so the scrollbar and scroll position stay stable before a… |
+| `.sf-equal-height` | PUBLIC | macro | Equal height | Force grid/flex children to share the tallest one's height. Works in flex (default `align-items: stretch`) and is re-asserted here for cases where a wrapper resets it. |
+| `.sf-flow` | PUBLIC | macro | Flow | Heydon Pickering's "lobotomized owl" — every flow child gets equal margin-block-start. Useful for content blocks where you don't know in advance which elements will be present. Override: style="--sf-flow-space: 2rem" |
+| `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Single-line ellipsis (.sf-truncate) and N-line clamp (.sf-line-clamp-2 / -3 / -N). The fixed-count variants hardcode -webkit-line-clamp; -N reads --sf-line-clamp. Note: -webkit-line-clamp is not vendor-locked despite the prefix — every modern browser implements it as the… |
+| `.sf-line-clamp-3` | PUBLIC | macro | Truncate / line-clamp | Single-line ellipsis (.sf-truncate) and N-line clamp (.sf-line-clamp-2 / -3 / -N). The fixed-count variants hardcode -webkit-line-clamp; -N reads --sf-line-clamp. Note: -webkit-line-clamp is not vendor-locked despite the prefix — every modern browser implements it as the… |
+| `.sf-line-clamp-N` | PUBLIC | macro | Truncate / line-clamp | Single-line ellipsis (.sf-truncate) and N-line clamp (.sf-line-clamp-2 / -3 / -N). The fixed-count variants hardcode -webkit-line-clamp; -N reads --sf-line-clamp. Note: -webkit-line-clamp is not vendor-locked despite the prefix — every modern browser implements it as the… |
+| `.sf-link--reverse` | PUBLIC | macro | Link variants | Opt-in link treatments composed from the link tokens. They don't change link COLOR (that stays the auto-contrast --sf-color-link); they only adjust the underline affordance. .sf-link--subtle — underline hidden until hover/focus. Use for dense link lists (nav, footers) where a… |
+| `.sf-link--subtle` | PUBLIC | macro | Link variants | Opt-in link treatments composed from the link tokens. They don't change link COLOR (that stays the auto-contrast --sf-color-link); they only adjust the underline affordance. .sf-link--subtle — underline hidden until hover/focus. Use for dense link lists (nav, footers) where a… |
+| `.sf-link-external` | PUBLIC | macro | External link indication | Adds an external-link glyph after the link text. Opt-in per element via class — for global auto-detection, write your own rule in unlayered CSS: a[rel~="external"]:not(.no-external)::after { content: var(--sf-link-external-marker); } Marker is tokenised so consumers can swap to… |
+| `.sf-no-tap-highlight` | PUBLIC | macro | No tap highlight | Suppresses the WebKit/Android grey tap-highlight overlay on interactive elements where it conflicts with the framework's own .is-active / hover treatment. |
+| `.sf-not-prose` | PUBLIC | macro | Prose | .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the general 0-2-0 budget because these rules must override the .sf-prose child selectors above (also 0-2-0). This is a documented exception. |
+| `.sf-overflow-fade` | PUBLIC | macro | Overflow fade | End-edge horizontal fade for clipped inline content (e.g. a row of tags overflowing a card). Pure mask, so it respects the element's actual background. |
+| `.sf-prose` | PUBLIC | macro | Prose | Long-form text column with automatic vertical rhythm. .sf-not-prose resets styles inside a prose block. |
+| `.sf-scrim` | PUBLIC | macro | Scrim | Darkening overlay for text placed over a background image, so the text clears contrast without dimming the whole picture. Apply to a positioned wrapper that holds the image + text; the scrim paints as a ::before gradient between them. The wrapper must establish a… |
+| `.sf-scrim--bottom` | PUBLIC | macro | Scrim | text anchored at the top |
+| `.sf-scrim--full` | PUBLIC | macro | Scrim | text anchored at the bottom (default) |
+| `.sf-scrim--top` | PUBLIC | macro | Scrim | Lift content above the scrim, but leave media below it so the gradient actually darkens the picture. |
+| `.sf-scroll-shadow` | PUBLIC | macro | Scroll shadow | Top + bottom mask gradient that reveals when content is scrolled inside a vertical-scroll container. Pure CSS, no JS. Combine with overflow-y: auto on the same element. Override: style="--sf-scroll-shadow-size: 3rem" |
+| `.sf-scroll-snap` | PUBLIC | macro | Scroll snap | Vertical scroll-snap container for vertically stacked sections. Pairs with consumer-supplied scroll-snap-align on children. For horizontal snap, use the .sf-reel layout primitive. |
+| `.sf-surface--action` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--danger` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--error` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--info` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--inverse` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--neutral` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--primary` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--secondary` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--success` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--tertiary` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-surface--warning` | PUBLIC | macro | Surface | Sets background + auto-flipped foreground in one class. Combines --sf-color-X (resolved semantic, mode-aware) with the matching --sf-color-text--on-X (auto-contrast) so text legibility is automatic without consumer math. 11 variants cover all brand + status + inverse colors.… |
+| `.sf-tabular-nums` | PUBLIC | macro | Tabular figures | Fixed-width digits so numbers align in vertical columns (price lists, totals, invoices, dashboards). Reads the public --sf-font-numeric token. Universal browser support. |
+| `.sf-text-gradient` | PUBLIC | macro | Text gradient | Fills text with a gradient. Defaults to --sf-gradient-primary (auto-adapts to brand + dark mode). Override the background-image per-instance for any other gradient or radial: <h1 class="sf-text-gradient" style="background-image: var(--sf-gradient-secondary)">…</h1> Selection on… |
+| `.sf-text-protect` | PUBLIC | macro | Text protect | Lighter-weight alternative to .sf-scrim: protects legibility of text over a busy image WITHOUT a darkening layer, using a soft shadow halo behind the glyphs. Apply directly to the text element sitting over the image. <h2 class="sf-text-protect">Over a photo</h2> |
+| `.sf-truncate` | PUBLIC | macro | Truncate / line-clamp | Single-line ellipsis (.sf-truncate) and N-line clamp (.sf-line-clamp-2 / -3 / -N). The fixed-count variants hardcode -webkit-line-clamp; -N reads --sf-line-clamp. Note: -webkit-line-clamp is not vendor-locked despite the prefix — every modern browser implements it as the… |
+
+### Motion / animation (15)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-color-pulse` | PUBLIC | motion | — | @property color interpolation — animates --sf-color-primary-light smoothly because it is registered with syntax:"<color>" (see @property in tokens.css). Without that registration the browser cannot interpolate between color values and the animation will snap at 50% with no… |
+| `.sf-entrance--fade` | PUBLIC | motion | — | Scroll-driven entrance effects — element animates into view as it enters the viewport. Uses CSS scroll-driven animations via animation-timeline: view(). Range tokens (--sf-scroll-timeline-range-{start,end}, declared in core/tokens.css) control where the animation starts and… |
+| `.sf-entrance--fade-down` | PUBLIC | motion | — | Scroll-driven entrance effects — element animates into view as it enters the viewport. Uses CSS scroll-driven animations via animation-timeline: view(). Range tokens (--sf-scroll-timeline-range-{start,end}, declared in core/tokens.css) control where the animation starts and… |
+| `.sf-entrance--fade-left` | PUBLIC | motion | — | Scroll-driven entrance effects — element animates into view as it enters the viewport. Uses CSS scroll-driven animations via animation-timeline: view(). Range tokens (--sf-scroll-timeline-range-{start,end}, declared in core/tokens.css) control where the animation starts and… |
+| `.sf-entrance--fade-right` | PUBLIC | motion | — | Scroll-driven entrance effects — element animates into view as it enters the viewport. Uses CSS scroll-driven animations via animation-timeline: view(). Range tokens (--sf-scroll-timeline-range-{start,end}, declared in core/tokens.css) control where the animation starts and… |
+| `.sf-entrance--fade-up` | PUBLIC | motion | — | Scroll-driven entrance effects — element animates into view as it enters the viewport. Uses CSS scroll-driven animations via animation-timeline: view(). Range tokens (--sf-scroll-timeline-range-{start,end}, declared in core/tokens.css) control where the animation starts and… |
+| `.sf-entrance--scale-up` | PUBLIC | motion | — | Scroll-driven entrance effects — element animates into view as it enters the viewport. Uses CSS scroll-driven animations via animation-timeline: view(). Range tokens (--sf-scroll-timeline-range-{start,end}, declared in core/tokens.css) control where the animation starts and… |
+| `.sf-fade-in` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-fade-out` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-scale-down` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-scale-up` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-slide-in-down` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-slide-in-left` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-slide-in-right` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+| `.sf-slide-in-up` | PUBLIC | motion | — | Animation presets — opt-in classes. Scoped to no-preference so reduced-motion users never trigger them (accessibility.css also neutralises animation-duration as a hard guarantee). These are DECORATIVE: under reduced motion they simply don't run, so never rely on one (e.g.… |
+
+### Print (4)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.no-print` | PUBLIC | print | — | Hide non-essential interactive and decorative elements. `!important` is justified: these elements are content negative-space in print, and consumer-authored display rules must not bring them back accidentally. |
+| `.print-color-exact` | PUBLIC | print | Opt-in colour treatment | Force colour-faithful rendering. Use on regions where a tinted background or coloured text encodes meaning (status pills, severity callouts, syntax highlighting, charts). |
+| `.print-no-color` | PUBLIC | print | Opt-in colour treatment | Opt back into the legacy blanket reset: transparent backgrounds and system text colour everywhere inside the marked subtree. Use on regions where ink-saving is the contract (corporate boilerplate forms, append-to-existing-document templates). |
+| `.print-only` | PUBLIC | print | — | Screen default: print-only content is hidden until the page is printed. |
+
+### State classes (40)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | navigation & toggling |
+| `.is-busy` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Reduced-motion: accessibility.css kills animation-duration via !important on *, *::before, *::after — so this spinner stops even without a local reduced-motion wrapper. |
+| `.is-clickable` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | FOCUS / INTERACTION MODIFIERS |
+| `.is-clipped` | PUBLIC | state | OVERFLOW / CLIPPING | OVERFLOW / CLIPPING |
+| `.is-collapsed` | PUBLIC | state | OPEN / CLOSED | disclosure widgets, modals, dropdowns .is-open / .is-collapsed — a thing is shown vs hidden (modal, dropdown, drawer). .is-expanded — maps to aria-expanded on a disclosure/accordion trigger. They share the --sf-is-open flag but signal different intent to consumers. |
+| `.is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Generic active indicator — components add visual specifics. Sets a scoped token for components to consume. |
+| `.is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-invalid and .is-error share identical CSS values by design. · .is-invalid → form-field validation failure (maps to aria-invalid="true"). · .is-error → general component error state (failed save, network error). |
+| `.is-disabled` | PUBLIC | state | INTERACTIVITY | DISABLED / READONLY |
+| `.is-draggable` | PUBLIC | state | DRAG & DROP | DRAG & DROP |
+| `.is-dragging` | PUBLIC | state | DRAG & DROP | DRAG & DROP |
+| `.is-drop-target` | PUBLIC | state | DRAG & DROP | DRAG & DROP |
+| `.is-empty` | PUBLIC | state | EMPTY STATE | NOTE: :empty only matches elements with NO child nodes — including no whitespace. Server-rendered HTML often includes space between tags, which prevents the match. When toggling via JS, call element.textContent = "" before adding this class (or use element.innerHTML = "" to… |
+| `.is-error` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-invalid and .is-error share identical CSS values by design. · .is-invalid → form-field validation failure (maps to aria-invalid="true"). · .is-error → general component error state (failed save, network error). |
+| `.is-expanded` | PUBLIC | state | OPEN / CLOSED | disclosure widgets, modals, dropdowns .is-open / .is-collapsed — a thing is shown vs hidden (modal, dropdown, drawer). .is-expanded — maps to aria-expanded on a disclosure/accordion trigger. They share the --sf-is-open flag but signal different intent to consumers. |
+| `.is-fixed` | PUBLIC | state | POSITION / STICKINESS | logical: respects writing-mode |
+| `.is-focused` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | FOCUS / INTERACTION MODIFIERS |
+| `.is-fullscreen` | PUBLIC | state | POSITION / STICKINESS | Intentionally bare — position only. Consumers must supply placement (inset, inset-block-start, etc.) and z-index via a modifier or inline style. Example: <div class="is-fixed" style="inset: 0; z-index: var(--sf-z-max)"> |
+| `.is-hidden` | PUBLIC | state | VISIBILITY | VISIBILITY |
+| `.is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Navigation: marks the current page/route. Components style via .sf-nav .is-current etc. Weight is tokenised so consumers can override without specificity battles: :root { --sf-current-font-weight: var(--sf-font-weight-semibold); } |
+| `.is-info` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-invalid and .is-error share identical CSS values by design. · .is-invalid → form-field validation failure (maps to aria-invalid="true"). · .is-error → general component error state (failed save, network error). |
+| `.is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-invalid and .is-error share identical CSS values by design. · .is-invalid → form-field validation failure (maps to aria-invalid="true"). · .is-error → general component error state (failed save, network error). |
+| `.is-invisible` | PUBLIC | state | VISIBILITY | VISIBILITY |
+| `.is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | LOADING / ASYNC FEEDBACK |
+| `.is-open` | PUBLIC | state | OPEN / CLOSED | disclosure widgets, modals, dropdowns .is-open / .is-collapsed — a thing is shown vs hidden (modal, dropdown, drawer). .is-expanded — maps to aria-expanded on a disclosure/accordion trigger. They share the --sf-is-open flag but signal different intent to consumers. |
+| `.is-overlay` | PUBLIC | state | OVERLAY / BACKDROP | OVERLAY / BACKDROP |
+| `.is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Reduced-motion: accessibility.css kills animation-duration via !important on *, *::before, *::after — so this spinner stops even without a local reduced-motion wrapper. |
+| `.is-pinned` | PUBLIC | state | POSITION / STICKINESS | logical: respects writing-mode |
+| `.is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Navigation: marks the current page/route. Components style via .sf-nav .is-current etc. Weight is tokenised so consumers can override without specificity battles: :root { --sf-current-font-weight: var(--sf-font-weight-semibold); } |
+| `.is-readonly` | PUBLIC | state | INTERACTIVITY | cursor: not-allowed is intentional even though pointer-events:none means it never renders on this element itself. The CSS value IS inherited by child elements that have pointer-events:auto re-enabled, and it is part of the documented .is-disabled API surface. |
+| `.is-resizable` | PUBLIC | state | POSITION / STICKINESS | App-managed fullscreen overlay. For the native Fullscreen API, prefer the `:fullscreen` pseudo-class; this is the JS-toggled equivalent for elements not entered via that API. |
+| `.is-scrollable` | PUBLIC | state | OVERFLOW / CLIPPING | OVERFLOW / CLIPPING |
+| `.is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Generic active indicator — components add visual specifics. Sets a scoped token for components to consume. |
+| `.is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Optimistic UI — request in flight but content still visible/usable (unlike .is-loading, which masks content with a spinner). |
+| `.is-sticky` | PUBLIC | state | POSITION / STICKINESS | POSITION / STICKINESS |
+| `.is-success` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-valid and .is-success share identical CSS values by design. The semantic distinction is intentional (see docs/states.md): · .is-valid → form-field validation result (maps to aria-invalid="false"). Use on <input> elements. · .is-success → general component feedback,… |
+| `.is-truncated` | PUBLIC | state | OVERFLOW / CLIPPING | OVERFLOW / CLIPPING |
+| `.is-unselectable` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | FOCUS / INTERACTION MODIFIERS |
+| `.is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-valid and .is-success share identical CSS values by design. The semantic distinction is intentional (see docs/states.md): · .is-valid → form-field validation result (maps to aria-invalid="false"). Use on <input> elements. · .is-success → general component feedback,… |
+| `.is-visible` | PUBLIC | state | VISIBILITY | VISIBILITY |
+| `.is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-invalid and .is-error share identical CSS values by design. · .is-invalid → form-field validation failure (maps to aria-invalid="true"). · .is-error → general component error state (failed save, network error). |
+
+### Theme example (1)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.theme-transition` | PUBLIC | theme | 5. SMOOTH THEME-TRANSITION HELPER | Use individual transition-* properties (NOT the shorthand) so this rule does not reset the full transition list on component elements. The shorthand replaces all transitions; individual properties extend them. slashed.themes is a higher-priority layer than slashed.components,… |
+

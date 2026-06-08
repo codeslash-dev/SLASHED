@@ -8,7 +8,8 @@
       "docs/classes.md",
       "docs/token-index.md",
       "docs/token-index.json",
-      "docs/api-index.json"
+      "docs/api-index.json",
+      "docs/api-index.md"
     ]
   }
 ]

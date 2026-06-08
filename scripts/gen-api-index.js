@@ -6,8 +6,9 @@
  *
  * Run: npm run docs:api   (or: node scripts/gen-api-index.js)
  *
- * Output (generated from source, never hand-edited):
- *   docs/api-index.json
+ * Outputs (generated from source, never hand-edited):
+ *   docs/api-index.json  — machine-readable rows for integrations
+ *   docs/api-index.md    — human-readable, grouped browseable tables
  *
  * Intended consumers: editor integrations, autocomplete / IntelliSense
  * providers, tooltip-hint generators, design-tool plugins, documentation
@@ -33,7 +34,8 @@ import { TOKEN_FILES, CLASS_FILES } from './registry-sources.js';
 import { tierOf } from './token-tiers.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const OUT  = path.join(ROOT, 'docs', 'api-index.json');
+const OUT    = path.join(ROOT, 'docs', 'api-index.json');
+const OUT_MD = path.join(ROOT, 'docs', 'api-index.md');
 
 // The HSL fallback tier lives in its own file, intentionally excluded from
 // TOKEN_FILES. We read it for fallback coverage + the channel tokens.
@@ -520,6 +522,72 @@ function tally(entries, key) {
   return Object.fromEntries(Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0])));
 }
 
+// ── Markdown view ─────────────────────────────────────────────────────────────
+// A browseable companion to the JSON, generated from the SAME data so the two
+// can never drift. Tokens and classes are split (different columns), each
+// grouped by category and alphabetised within a group.
+
+// Escape a value for a Markdown table cell: backslash first (so we don't
+// re-escape our own escapes), then the pipe column-separator.
+const escCell = v => String(v ?? '').replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
+
+function groupByCategory(entries) {
+  const map = new Map();
+  for (const e of entries) {
+    if (!map.has(e.category)) map.set(e.category, []);
+    map.get(e.category).push(e);
+  }
+  return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+}
+
+function buildMarkdown({ entries, tokenEntries, classEntries, tierCounts, typeCounts }) {
+  let md = `# API index
+
+> **Generated** from source by \`scripts/gen-api-index.js\` —
+> run \`npm run docs:api\` to refresh. Do not edit by hand.
+
+A single browseable catalogue of every public SLASHED element — design
+**tokens** and **classes** — with stability tier, category, bundle membership
+and a short description. The machine-readable companion (with all columns) is
+[api-index.json](api-index.json); for the flat name list see
+[registry.json](registry.json); for the tier contract see
+[architecture.md](architecture.md).
+
+**${entries.length} elements** — ${typeCounts.token || 0} tokens, ${typeCounts.class || 0} classes.
+
+| Tier | Count | Meaning |
+|---|---|---|
+| PUBLIC | ${tierCounts.PUBLIC || 0} | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | ${tierCounts['PUBLIC-ADVANCED'] || 0} | Same SemVer guarantee; niche/powerful. |
+| INTERNAL | ${tierCounts.INTERNAL || 0} | Implementation detail; may change without a major bump. |
+
+`;
+
+  // Tokens
+  md += `## Tokens (${tokenEntries.length})\n\n`;
+  for (const [category, list] of groupByCategory(tokenEntries)) {
+    md += `### ${category} (${list.length})\n\n`;
+    md += '| Token | Tier | Namespace | Default | Description |\n|---|---|---|---|---|\n';
+    for (const e of list) {
+      md += `| \`${e.name}\` | ${e.tier} | ${e.namespace || '—'} | \`${escCell(e.value)}\` | ${escCell(e.description)} |\n`;
+    }
+    md += '\n';
+  }
+
+  // Classes
+  md += `## Classes (${classEntries.length})\n\n`;
+  for (const [category, list] of groupByCategory(classEntries)) {
+    md += `### ${category} (${list.length})\n\n`;
+    md += '| Class | Tier | Kind | Group | Description |\n|---|---|---|---|---|\n';
+    for (const e of list) {
+      md += `| \`${e.selector}\` | ${e.tier} | ${e.kind} | ${escCell(e.group) || '—'} | ${escCell(e.description)} |\n`;
+    }
+    md += '\n';
+  }
+
+  return md;
+}
+
 function main() {
   const { bundlesFor, allBundles } = buildBundleMap();
   const rank = new Map(allBundles.map((b, i) => [b, i]));
@@ -610,8 +678,11 @@ function main() {
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(output, null, 2) + '\n', 'utf8');
 
+  const md = buildMarkdown({ entries, tokenEntries, classEntries, tierCounts, typeCounts });
+  fs.writeFileSync(OUT_MD, md, 'utf8');
+
   console.log(
-    `[docs] → docs/api-index.json ` +
+    `[docs] → docs/api-index.json + docs/api-index.md ` +
     `(${entries.length} elements: ${tokenEntries.length} tokens, ${classEntries.length} classes; ` +
     `${sfClasses.length} .sf-, ${isClasses.length} .is-, ${unprefixed.length} unprefixed)`
   );
