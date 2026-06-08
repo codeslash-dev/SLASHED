@@ -1,4 +1,3 @@
-
 # SLASHED — Architecture
 
 ## Layer order
@@ -113,14 +112,10 @@ decision tree to use when adding a new class.
    NO  → core/macros.css          (slashed.macros)  ← default
 ```
 
-Macros are the default fallback because they're the right home for
-behavioural / visual recipes that aren't strictly layout, state, a11y,
-animation, or component.
+Macros are the default fallback for behavioural/visual recipes that aren't
+layout, state, a11y, animation, or component.
 
-### Layout primitives vs macros — the line
-
-The category split between primitives and macros looks subtle but has a
-clean test:
+### Layout primitives vs macros
 
 | Test | Primitive | Macro / recipe |
 |---|---|---|
@@ -131,18 +126,15 @@ clean test:
 | Container queries inside? | Often | Rarely |
 | Sole responsibility | "Where do my children go?" | "What does this DO / look like?" |
 
-Heuristic: a primitive is a *noun* (a stack, a grid, a switcher);
-a macro is a *verb* / adjective (clickable, scrollable, prose).
+Heuristic: a primitive is a *noun* (a stack, a grid); a macro is a *verb*/adjective
+(clickable, scrollable, prose).
 
-Two existing classes that are conceptually macros stay in `layout.css`
-in 0.x for compatibility — they're "noun-shaped" enough that moving
-them would create churn:
+Two conceptually-macro classes stay in `layout.css` in 0.x for compatibility:
 
-- `.sf-content-grid` / `.sf-breakout` / `.sf-full-bleed` — the
-  article-with-breakouts pattern. Layout-first because the rule
-  defines a grid.
-- `.sf-icon` (and `.sf-icon--xs..xl..boxed`) — graphical primitive
-  that consumers reach for as a single class.
+- `.sf-content-grid` / `.sf-breakout` / `.sf-full-bleed` — article-with-breakouts;
+  layout-first because the rule defines a grid.
+- `.sf-icon` (and `.sf-icon--xs..xl..boxed`) — graphical primitive reached for as
+  a single class.
 
 ---
 
@@ -196,23 +188,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 **slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/theme-example.css`).
 
-**slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`.
-
-Transition tokens live in `core/tokens.css`:
-
-| Token | Scope | Notes |
-|-------|-------|-------|
-| `--sf-transition-all` | all properties | Convenient but a performance footgun — forces browser to watch every computed value |
-| `--sf-transition-colors` | color, background-color, border-color, text-decoration-color, fill, stroke | Preferred for interactive colour changes |
-| `--sf-transition-transform` | transform | Preferred for movement/scale |
-| `--sf-transition-opacity` | opacity | Preferred for show/hide fades |
-| `--sf-transition-shadow` | box-shadow | Preferred for elevation changes |
-| `--sf-transition-fast` | all, fast duration | Quick interactions |
-| `--sf-transition-slow` | all, slow duration | Deliberate transitions |
-| `--sf-transition-enter` | all, normal duration | Mount/appear |
-| `--sf-transition-exit` | all, fast duration | Unmount/disappear |
-
-`@property` color interpolation is demonstrated by `.sf-color-pulse` which animates `--sf-color-primary-light` lightness via `sf-color-pulse` keyframes — proving that registered custom properties interpolate smoothly in oklch.
+**slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`. Transition tokens live in `core/tokens.css` — see [motion.md](motion.md). `.sf-color-pulse` animates `--sf-color-primary-light` lightness, demonstrating `@property` colour interpolation in oklch.
 
 **slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` and `.sf-clickable-parent`. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`).
 
@@ -262,10 +238,10 @@ Transition tokens live in `core/tokens.css`:
 ### BEM consumer-API tokens
 
 Many tokens — `--sf-shadow-*`, `--sf-blur-*`, `--sf-gap`, `--sf-gradient-*`,
-`--sf-scrollbar-*`, `--sf-optical-sizing` — are intentionally **not consumed by
-the framework itself**. They exist for your own BEM classes
-(`.card { box-shadow: var(--sf-shadow-m) }`). "Unused internally" is not dead
-code: each is exercised in `docs/demo.html` and validated by `tests/`.
+`--sf-scrollbar-*`, `--sf-optical-sizing` — are **not consumed by the framework
+itself**. They exist for your own BEM classes
+(`.card { box-shadow: var(--sf-shadow-m) }`) and are exercised in
+`docs/demo.html` and validated by `tests/`.
 
 ### Print class naming
 
@@ -391,30 +367,45 @@ so `bundle.config.json` lists ten outputs in total — are built by
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
 
-`optional/legacy.css` is always concatenated last. Because every rule sits in
-an `@layer`, concatenation order within a bundle does not affect the cascade —
-`core/layers.css` fixes it. The bundler strips local `@import` statements (the
-explicit file list resolves them), so the `tokens.components` import inside
-`components.css` is inlined by listing the token file first. `components.css`
-and `tokens.components.css` are **not yet complete** (pre-v1.0) — the `@layer`
-declarations are real, but every selector and token is commented out (no
-CSS is emitted). `utilities.css` ships as an empty stub.
-Consumers can also build à la carte: `essential` (or raw `core/`) plus
-hand-picked optional files.
-
-### Flat bundles
-
-For consumers who want a single file with no decisions, `dist/slashed.full.css`
-includes everything (core + all optional files that contain active rules).
-Because cascade layers govern specificity, concatenation order inside a flat
-bundle is irrelevant -- `core/layers.css` fixes the priority order once at the
-top.
+`optional/legacy.css` is always concatenated last. Because every rule sits in an
+`@layer`, concatenation order within a bundle does not affect the cascade. The
+bundler strips local `@import` statements (the explicit file list resolves them),
+so the `tokens.components` import inside `components.css` is inlined by listing the
+token file first. `components.css` and `tokens.components.css` are incomplete
+(every selector/token commented out, no CSS emitted); `utilities.css` is an empty
+stub. Consumers can also build à la carte: `essential` (or raw `core/`) plus
+hand-picked optional files. Each bundle also has a layer-flattened `.flat` variant.
 
 ---
 
+## Performance
+
+Plain CSS, no runtime. The notable costs:
+
+- **`transition: all` (`--sf-transition-all`)** watches every animatable
+  property. Prefer a scoped token (`--sf-transition-colors` / `-transform` /
+  `-opacity` / `-shadow`); animate `transform`/`opacity` (compositor-only).
+- **`oklch` + relative-colour tokens** recompute when their inputs change.
+  Animating a registered colour (e.g. `.sf-color-pulse` mutating
+  `--sf-color-primary-light`) re-derives everything downstream each frame — fine
+  for a small accent, not for a token hundreds of elements read. A theme toggle
+  re-resolves the graph once (negligible).
+- **`@property` registration** (11 colours + `--sf-is-dark`) is a one-time parse
+  cost; immaterial.
+- **`@layer`** has no runtime cost — resolved at parse time. Low-specificity
+  selectors keep style recalc fast.
+- **`@container`** establishes a layout/style boundary (scoped invalidation, a
+  win); avoid thousands of tiny containers. `sf-layout` is declared once on
+  `.sf-container`.
+- **Bundle size** — ship only what you use; serve compressed (the token-heavy
+  `:root` gzips well). See [bundle configuration](#bundle-configuration).
+- **Reduced motion** — `core/accessibility.css` neutralises
+  animation/transition under `prefers-reduced-motion: reduce` (and `.no-motion`)
+  with property-level `!important`.
+
 ## Known intentional tradeoffs
 
-These behaviors are deliberate. Documented here so they aren't mistaken for bugs.
+Deliberate behaviours, documented so they aren't mistaken for bugs.
 
 - **Text-on-color uses a binary lightness threshold.** `--sf-color-text--on-*`
   use `sign(var(--sf-contrast-threshold) - l)` to pick black or white text (threshold defaults to 0.6). This is a binary decision: a

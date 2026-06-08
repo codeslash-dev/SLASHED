@@ -1,16 +1,13 @@
 # Components
 
 > **Status (pre-v1.0):** `optional/components.css` and
-> `optional/tokens.components.css` are not yet complete. Everything in
-> them is commented out and ships 0 bytes in `*.min.css` bundles. The
-> `@layer slashed.components` slot is real and ordered.
+> `optional/tokens.components.css` are incomplete — everything is commented out
+> and ships 0 bytes. The `@layer slashed.components` slot is real and ordered.
 
-Eight component names are taken by convention so they can't be claimed
-by another framework or your own BEM classes. They will land
-incrementally in upcoming minor releases as additive features — none of
-the names listed below will be renamed.
-
----
+Eight component names are reserved by convention. They will land incrementally in
+upcoming minor releases as additive features; none will be renamed. You can write
+your own BEM components against the same selector pattern (e.g. `.my-button`) today
+and switch to `.sf-button` when it ships.
 
 ## Taken component names
 
@@ -25,14 +22,10 @@ the names listed below will be renamed.
 | 7 | `.sf-modal` | `--s`, `--m`, `--l`, `--full` | `__header`, `__body`, `__footer`, `__close` |
 | 8 | `.sf-skeleton` | `--text`, `--avatar`, `--card`, `--line` | — |
 
-You can already write your own BEM components against the same selector
-pattern (e.g. `.my-button`) and switch to `.sf-button` when it ships —
-no naming collisions are introduced today.
-
 ## Component tokens
 
-`optional/tokens.components.css` declares token names per component (all
-currently commented out). Sample:
+`optional/tokens.components.css` declares token names per component (currently
+commented out). Sample:
 
 ```css
 /* card */
@@ -48,41 +41,29 @@ currently commented out). Sample:
 --sf-button-border-width;
 ```
 
-A consumer authoring their own `.my-button` today should NOT use the
-`--sf-button-*` token names yet — they don't resolve to anything until
-the matching class ships. Use the global tokens (`--sf-space-*`,
+Don't use `--sf-button-*` token names for your own `.my-button` yet — they don't
+resolve until the matching class ships. Use the global tokens (`--sf-space-*`,
 `--sf-radius-*`, `--sf-color-*`) until then.
 
 ## Out of scope for 0.x
 
-The following are **not taken** and won't ship in the 0.x line, either
-because they need JS, because a macro / recipe already covers the use
-case, or because the API needs more real-world usage data before being
-locked.
+Not reserved and won't ship in 0.x (need JS, already covered by a macro/recipe, or
+the API needs more usage data). Write these as your own BEM class reading SLASHED
+tokens:
 
-- `.sf-tabs` (needs JS for keyboard nav)
-- `.sf-accordion` (needs JS or polyfilled `<details>` interactions)
-- `.sf-tooltip` (popover API + anchor positioning still in flux across browsers)
-- `.sf-popover` (same)
-- `.sf-pagination` (needs concrete UX research)
-- `.sf-breadcrumb` (so simple it doesn't justify a class API)
-- `.sf-progress` (native `<progress>` already styled in `slashed.base`)
-- `.sf-spinner` (`.is-loading` state covers it)
-- `.sf-table` (style your own; `.sf-prose` styles long-form tables)
-- `.sf-form-field` (forms are classless via `optional/forms.css`)
-- `.sf-nav` (so site-specific that a class API constrains more than it helps)
-
-If your project needs one of the above, write it as your own BEM class
-that reads SLASHED tokens — this is the fully supported path.
+- `.sf-tabs`, `.sf-accordion` — need JS for keyboard nav / disclosure
+- `.sf-tooltip`, `.sf-popover` — popover API + anchor positioning still in flux
+- `.sf-pagination` — needs UX research
+- `.sf-breadcrumb` — too simple to justify a class API
+- `.sf-progress` — native `<progress>` already styled in `slashed.base`
+- `.sf-spinner` — `.is-loading` covers it
+- `.sf-table` — `.sf-prose` styles long-form tables
+- `.sf-form-field` — forms are classless via `optional/forms.css`
+- `.sf-nav` — too site-specific
 
 ## Roadmap
 
-Order is not finalised. The likely first batch is `.sf-card` +
-`.sf-button` because they're the most universally useful and the tokens
-for both are stable. Each minor that ships a component will:
-
-- Uncomment its block in `optional/components.css` and the matching
-  token block in `optional/tokens.components.css`.
-- Document the active class in this file with full HTML examples.
-- Add behavioural tests under `tests/`.
-- Bump `MINOR` only — no breaking changes.
+Order not finalised; likely first batch is `.sf-card` + `.sf-button` (stable
+tokens). Each minor that ships a component will uncomment its block in
+`optional/components.css` + the matching token block, document it here with HTML
+examples, add tests under `tests/`, and bump `MINOR` only (no breaking changes).

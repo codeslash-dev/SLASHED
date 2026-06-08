@@ -9,14 +9,13 @@ All animations are demoed in [`demo.html`](demo.html).
 
 ## Design principles
 
-1. **Token-driven.** Every duration, easing, and named animation is a
-   custom property -- override per-instance without new CSS.
-2. **Opt-in classes.** Nothing animates until you add a class (or
-   consume a transition token in your own rule).
-3. **Reduced-motion first.** The entire layer is wrapped in
-   `@media (prefers-reduced-motion: no-preference)`. Remove the class
-   or set `.no-motion` on an ancestor to suppress individually.
-4. **Composable.** Entrance classes can be combined with delay tokens.
+- **Token-driven** — every duration, easing, and named animation is a custom
+  property; override per-instance without new CSS.
+- **Opt-in** — nothing animates until you add a class or consume a transition
+  token.
+- **Reduced-motion first** — the whole layer is wrapped in
+  `@media (prefers-reduced-motion: no-preference)`. Set `.no-motion` on an
+  ancestor to suppress individually.
 
 ## Transition tokens
 
@@ -168,6 +167,5 @@ the OS preference.
 ## Theme transitions
 
 For smooth colour transitions when toggling light/dark mode, use the
-`.theme-transition` helper class (defined in `optional/theme-example.css`).
-Add it to `<html>` during the toggle, remove it once the transition
-completes. See [theming.md](theming.md) for the full pattern.
+`.theme-transition` helper (`optional/theme-example.css`): add it to `<html>`
+during the toggle, remove it once complete. See [theming.md](theming.md).

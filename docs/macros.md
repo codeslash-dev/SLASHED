@@ -244,15 +244,14 @@ Tokens:
 | `--sf-content-intrinsic-size` | `500px` | placeholder block size fed to `contain-intrinsic-size` |
 
 Sets `content-visibility: auto` plus `contain-intrinsic-size: auto
-var(--sf-content-intrinsic-size)`. The `auto` keyword caches each
-section's last-rendered size; the token reserves space before first
-render so the scrollbar and scroll position stay stable. Unsupported
-engines (e.g. Safari < 18) ignore both declarations and render normally
-— pure progressive enhancement.
+var(--sf-content-intrinsic-size)`. The `auto` keyword caches each section's
+last-rendered size; the token reserves space before first render so the scrollbar
+and scroll position stay stable. Unsupported engines (Safari < 18) ignore both
+declarations and render normally.
 
-> Deliberately not paired with `will-change`. `will-change` pre-creates
-> compositing layers and usually *hurts* performance when applied
-> broadly; set it from JS only while an element is actively animating.
+> Deliberately not paired with `will-change` — it pre-creates compositing layers
+> and usually hurts performance when applied broadly; set it from JS only while an
+> element is actively animating.
 
 ---
 
@@ -310,18 +309,14 @@ Fills text with a gradient (default `--sf-gradient-primary`).
 </h2>
 ```
 
-`background-clip: text` and `color: transparent` are applied unconditionally —
-no `@supports` gate. The `text` value is recognised by Chrome 123+ and
-Firefox 128+ without a prefix, but WebKit only shipped the unprefixed form in
-Safari 18; at the framework's floor (Safari 17.5) it works **only** through
-`-webkit-background-clip`. Both the prefixed and unprefixed properties are
-therefore emitted (prefixed first, standard last). In any browser that does
-not clip backgrounds to text at all, the text will be invisible (transparent
-with no fill) — an accepted consequence of dropping the floor below these
-versions.
+`background-clip: text` and `color: transparent` are applied unconditionally (no
+`@supports` gate). Both prefixed (`-webkit-background-clip`) and unprefixed
+properties are emitted; at the floor (Safari 17.5) only the prefixed form works.
+Browsers that don't clip backgrounds to text render the text invisible — an
+accepted consequence of the support floor.
 
-> **Known limitation:** selecting gradient text in most browsers reveals
-> the clipping boundary (text appears to lose color during selection).
+> **Known limitation:** selecting gradient text reveals the clipping boundary
+> (text appears to lose colour during selection) in most browsers.
 
 ---
 
@@ -420,9 +415,7 @@ Tokens:
 | `--sf-scrim-direction` | `to top` | gradient direction |
 | `--sf-scrim-gradient` | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` | the whole composed gradient (override for multi-stop / radial) |
 
-Non-media direct children are lifted above the scrim automatically
-(`.sf-scrim > :not(img, picture, video, svg, canvas) { z-index: 1 }`).
-Media children stay behind the scrim so the gradient can darken them.
+The lift selector is `.sf-scrim > :not(img, picture, video, svg, canvas) { z-index: 1 }`.
 
 ---
 
