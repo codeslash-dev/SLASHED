@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+
+# Build output
+dist/slashed.zip
+.tmp-plugin-stage/
+
+# Vite / SvelteKit caches
+.svelte-kit/
+**/.vite/
+
+# NOTE: SLASHED-for-WP/dist/*.css (the synced framework bundles) ARE tracked —
+# the plugin ships them for local-first CSS delivery. Refresh them with
+# `npm run sync-dist` after the framework publishes new bundles.
