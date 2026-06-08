@@ -23,24 +23,13 @@ define( 'SLASHED_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'SLASHED_URL',      plugin_dir_url( __FILE__ ) );
 
 /**
- * Semver tag — version comparison / update detection only.
- * CDN URLs use the dist-branch SHA below (immutable).
+ * Framework version this plugin ships with / tracks by default.
+ * Used as the default CSS version and for update-available comparisons.
+ * The framework CSS is loaded from the SLASHED framework's published
+ * artifacts (GitHub Release assets per version; the `dist` branch for
+ * "latest") — see Slashed_CSS_Loader and Slashed_Framework_Updater.
  */
 define( 'SLASHED_CSS_REF',  'v0.5.21' );
-
-/**
- * HEAD commit SHA of the `dist` branch at the time of the last release.
- * jsDelivr treats commit SHAs as immutable (cached forever).
- * Updated automatically by the version-sync workflow on every release.
- *
- * Integration plugin files define their own SLASHED_{BUILDER}_DIST_SHA holding
- * the same value, so each integration stays self-contained and distributable as
- * a standalone plugin (they cannot reference this constant — it isn't defined in
- * standalone mode). They are NOT maintained by hand: scripts/version-sync.js
- * reads this canonical value and propagates it to both integration files, so the
- * three never drift.
- */
-define( 'SLASHED_DIST_SHA', 'f415dfc8a75a5f8e1f37966ba2605ef22466656e' );
 
 add_action( 'init', function () {
 	load_plugin_textdomain( 'slashed', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );

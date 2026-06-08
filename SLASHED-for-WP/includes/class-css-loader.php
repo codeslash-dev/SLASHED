@@ -39,7 +39,9 @@ class Slashed_CSS_Loader {
 	 * Get the URL for the SLASHED CSS bundle.
 	 *
 	 * When source is 'local' (default) the plugin's own dist/ directory is used.
-	 * When source is 'cdn' a jsDelivr URL is built from the configured version tag.
+	 * When source is 'cdn' the URL points at the framework's published artifacts:
+	 *   - version "latest" → the always-current jsDelivr `dist` branch mirror;
+	 *   - a pinned version tag → that release's GitHub Release asset (immutable).
 	 * No silent CDN fallback — if the local file is missing the URL is empty so
 	 * the admin notice in class-admin.php can surface the problem clearly.
 	 *
@@ -56,11 +58,21 @@ class Slashed_CSS_Loader {
 
 		if ( 'cdn' === $source ) {
 			$version = Slashed_Settings::get_cdn_version();
-			$url     = sprintf(
-				'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/plugins/SLASHED-for-WP/dist/%s',
-				rawurlencode( $version ),
-				$filename
-			);
+			if ( 'latest' === $version ) {
+				// Always-current: the framework force-pushes built bundles to the
+				// `dist` branch on every release; jsDelivr mirrors it.
+				$url = sprintf(
+					'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/%s',
+					$filename
+				);
+			} else {
+				// Pinned: load the exact version's GitHub Release asset (immutable).
+				$url = sprintf(
+					'https://github.com/codeslash-dev/SLASHED/releases/download/%s/%s',
+					rawurlencode( $version ),
+					$filename
+				);
+			}
 		} else {
 			$local = SLASHED_PATH . 'dist/' . $filename;
 			$url   = file_exists( $local ) ? SLASHED_URL . 'dist/' . $filename : '';

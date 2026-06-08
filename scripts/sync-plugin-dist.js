@@ -17,7 +17,9 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 // defaults to a sibling ../SLASHED checkout.
 const FRAMEWORK = process.env.SLASHED_FRAMEWORK_DIR
   ? path.resolve(process.env.SLASHED_FRAMEWORK_DIR)
-  : path.resolve(ROOT, '..', 'SLASHED');
+  : fs.existsSync(path.join(ROOT, '.framework'))
+    ? path.join(ROOT, '.framework')
+    : path.resolve(ROOT, '..', 'SLASHED');
 const SRC_DIR = path.join(FRAMEWORK, 'dist');
 const DEST_DIR = path.join(ROOT, 'SLASHED-for-WP/dist');
 

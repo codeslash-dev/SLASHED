@@ -29,7 +29,6 @@ if ( ! defined( 'SLASHED_BRICKS_VERSION' ) ) {
     define( 'SLASHED_BRICKS_PATH', plugin_dir_path( __FILE__ ) );
     define( 'SLASHED_BRICKS_URL', plugin_dir_url( __FILE__ ) );
     define( 'SLASHED_BRICKS_CSS_REF', 'v0.5.21' );
-    define( 'SLASHED_BRICKS_DIST_SHA', 'f415dfc8a75a5f8e1f37966ba2605ef22466656e' );
 }
 
 /**
@@ -83,7 +82,8 @@ function slashed_bricks_get_css_bundle() {
  *
  * Delegates to the shared Slashed_CSS_Loader when running under the unified
  * plugin, then applies the per-integration filter. In standalone mode, builds
- * the URL directly from SLASHED_BRICKS_DIST_SHA with a local-file fallback.
+ * the URL from the framework's GitHub Release asset for SLASHED_BRICKS_CSS_REF,
+ * with a local-file fallback.
  *
  * Use the 'slashed_bricks/css_bundle_url' filter to override.
  *
@@ -98,8 +98,8 @@ function slashed_bricks_get_css_url() {
     $bundle      = slashed_bricks_get_css_bundle();
     $filename    = 'slashed.' . $bundle . '.css';
     $default_url = sprintf(
-        'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/%s',
-        SLASHED_BRICKS_DIST_SHA,
+        'https://github.com/codeslash-dev/SLASHED/releases/download/%s/%s',
+        rawurlencode( SLASHED_BRICKS_CSS_REF ),
         $filename
     );
 

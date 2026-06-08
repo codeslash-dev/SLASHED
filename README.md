@@ -27,26 +27,62 @@ tests/                     Unit tests for the editor-app libs (node:test)
 docs/                      reBEMer design doc, Bricks template workflow, roadmap
 ```
 
-## Framework dependency
+## Syncing with the framework
 
-The data-generation and drift-check scripts read the SLASHED framework's CSS
-sources and token registry, which live in the separate framework repo. Point
-them at a local checkout via `SLASHED_FRAMEWORK_DIR`; it defaults to a sibling
-`../SLASHED` checkout:
+The plugin tracks the [SLASHED framework](https://github.com/codeslash-dev/SLASHED),
+which lives in a separate repo. It consumes two of the framework's published
+artifacts:
+
+- **Source CSS** (`core/`, `optional/`) — parsed to regenerate the token/class
+  inventory and class hints.
+- **Built bundles** (`slashed.<bundle>.css`) — shipped in `SLASHED-for-WP/dist/`
+  for local-first delivery, downloaded from the framework's GitHub Release assets.
+
+### Update to the latest (or a chosen) framework version
 
 ```sh
-git clone https://github.com/codeslash-dev/SLASHED.git ../SLASHED
-( cd ../SLASHED && npm ci && npm run build )   # produces dist/ + docs/registry.json
+npm run update-framework                  # newest stable release
+npm run update-framework -- --version=0.5.21
+npm run update-framework -- --version=v0.6.0
 ```
+
+This resolves the target version, shallow-clones the framework source at that
+tag into `./.framework`, downloads that release's CSS bundles into
+`SLASHED-for-WP/dist/`, regenerates `data/inventory.json` + `data/classes-hints.json`,
+and stamps the `SLASHED_*_CSS_REF` constants in the PHP entry points. Then:
+
+```sh
+npm run build:apps && npm run build:zip   # rebuild SPA assets + package the plugin
+```
+
+### How the framework version is resolved by the build scripts
+
+The data/check scripts read the framework from the first of:
+
+1. `SLASHED_FRAMEWORK_DIR` (explicit override)
+2. `./.framework` (created by `npm run update-framework`)
+3. a sibling `../SLASHED` checkout
 
 | Script | Reads from framework |
 | --- | --- |
 | `scripts/gen-bricks-inventory.js` | `core/`, `optional/` token + class CSS |
 | `scripts/gen-class-hints.js` | `core/`, `optional/forms.css` section comments |
 | `scripts/check-admin-app.js` | `docs/registry.json`, `core/`, `optional/` CSS |
-| `scripts/sync-plugin-dist.js` | `dist/slashed.{essential,optimal,full}.css` |
+| `scripts/sync-plugin-dist.js` | `dist/slashed.{essential,optimal,full}.css` (for a locally-built checkout) |
 
-`scripts/zip-plugin.js` and `scripts/check-cheatsheet.js` are self-contained
+### Runtime: how the WordPress plugin loads the framework
+
+End users pick the framework version from the plugin's settings page (**CSS source**):
+
+- **Local** (default) — serves the bundled `dist/` CSS; the **Update framework**
+  button downloads any chosen or the latest release into `dist/` (from GitHub
+  Release assets).
+- **CDN** — `latest` serves the always-current jsDelivr `dist`-branch mirror; a
+  pinned version tag serves that release's immutable GitHub Release asset.
+
+A daily cron (Bricks) and the settings page check the framework's published tags
+(via jsDelivr metadata) and surface an update notice when a newer release exists.
+`scripts/check-cheatsheet.js` and `scripts/zip-plugin.js` are self-contained
 (operate only on plugin files).
 
 ## Build
@@ -84,9 +120,12 @@ canonical factory defaults) and the framework checkout (for `registry.json`).
 
 ## Versioning
 
-`scripts/version-sync.js` in the framework repo previously stamped this
-plugin's PHP version constants and CDN refs. After the split, version
-stamping for `slashed.php`, `slashed-bricks.php`, `slashed-gutenberg.php`,
-`readme.txt`, and the Bricks README CDN example needs a local `version-sync`
-step in this repo — port the relevant blocks from the framework's old
-`scripts/version-sync.js` if you automate releases here.
+Two independent version axes:
+
+- **Plugin version** — this plugin's own releases (`slashed.php` header,
+  `SLASHED_VERSION`, `readme.txt` `Stable tag`). Bumped when you release the plugin.
+- **Framework version** — which SLASHED framework the plugin tracks
+  (`SLASHED_*_CSS_REF`). Bumped by `npm run update-framework`.
+
+`npm run update-framework` keeps the framework axis in sync. If you automate
+plugin releases, add a release step that bumps the plugin axis and `readme.txt`.

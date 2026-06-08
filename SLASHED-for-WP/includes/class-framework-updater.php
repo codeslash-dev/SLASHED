@@ -12,8 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Slashed_Framework_Updater
  *
- * Checks jsDelivr for a newer SLASHED release and downloads the CSS bundles
- * to the plugin's local dist/ directory. Exposed as two wp_ajax actions so
+ * Checks jsDelivr (tag list) for a newer SLASHED release and downloads the
+ * matching CSS bundles from the framework's GitHub Release assets into the
+ * plugin's local dist/ directory. Exposed as two wp_ajax actions so
  * the settings page can trigger checks and downloads without a full page reload.
  */
 class Slashed_Framework_Updater {
@@ -21,7 +22,11 @@ class Slashed_Framework_Updater {
 	const BUNDLES          = array( 'essential', 'optimal', 'full' );
 	const TRANSIENT_KEY    = 'slashed_latest_framework_version';
 	const LOCAL_VER_OPTION = 'slashed_local_framework_version';
-	const CDN_BASE         = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@%s/plugins/SLASHED-for-WP/dist/%s';
+	// Per-version CSS comes from the framework's GitHub Release assets (immutable
+	// per tag). %1$s = version tag (e.g. v0.5.21), %2$s = bundle filename.
+	const CDN_BASE         = 'https://github.com/codeslash-dev/SLASHED/releases/download/%s/%s';
+	// jsDelivr package metadata lists the framework repo's git tags (works
+	// independently of where the built CSS lives).
 	const METADATA_URL     = 'https://data.jsdelivr.com/v1/packages/gh/codeslash-dev/SLASHED';
 
 	public function __construct() {

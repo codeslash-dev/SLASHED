@@ -92,10 +92,14 @@ class Slashed_Settings {
 	}
 
 	/**
-	 * Get the configured CDN version tag.
+	 * Get the configured CDN version.
+	 *
+	 * Returns the literal string 'latest' to track the newest release, or a
+	 * normalized version tag (e.g. "v0.5.0"). Falls back to the compile-time
+	 * ref when unset/invalid.
 	 *
 	 * @param array|null $stored Pre-fetched stored option.
-	 * @return string e.g. "v0.5.0" — falls back to the compile-time ref.
+	 * @return string 'latest' or a "vX.Y.Z" tag.
 	 */
 	public static function get_cdn_version( $stored = null ) {
 		if ( null === $stored ) {
@@ -104,7 +108,10 @@ class Slashed_Settings {
 				$stored = array();
 			}
 		}
-		$ver = isset( $stored['cdn_version'] ) ? (string) $stored['cdn_version'] : '';
+		$ver = isset( $stored['cdn_version'] ) ? trim( (string) $stored['cdn_version'] ) : '';
+		if ( 'latest' === strtolower( $ver ) ) {
+			return 'latest';
+		}
 		if ( ! $ver || ! preg_match( '/^v?\d+\.\d+\.\d+[a-zA-Z0-9.-]*$/', $ver ) ) {
 			return SLASHED_CSS_REF;
 		}

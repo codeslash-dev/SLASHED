@@ -1,6 +1,9 @@
 node_modules/
 .DS_Store
 
+# Managed framework checkout created by `npm run update-framework`
+.framework/
+
 # Build output
 dist/slashed.zip
 .tmp-plugin-stage/

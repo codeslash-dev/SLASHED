@@ -177,7 +177,7 @@ class Slashed_Admin {
 									style="width:160px;margin-left:6px;">
 								<p class="description" style="margin-top:4px;">
 									<?php esc_html_e( 'Enter a release tag, e.g.', 'slashed' ); ?>
-									<code><?php echo esc_html( SLASHED_CSS_REF ); ?></code><?php esc_html_e( '. Leave blank to track the version this plugin ships with.', 'slashed' ); ?>
+									<code><?php echo esc_html( SLASHED_CSS_REF ); ?></code><?php esc_html_e( ', or', 'slashed' ); ?> <code>latest</code><?php esc_html_e( ' to always track the newest release. Leave blank to track the version this plugin ships with.', 'slashed' ); ?>
 								</p>
 							</div>
 						</td>
@@ -232,10 +232,9 @@ class Slashed_Admin {
 			<p style="color:#999;font-size:12px;">
 				<?php
 				printf(
-					/* translators: %s: CSS ref tag */
-					esc_html__( 'Framework: %s &middot; CSS dist SHA: %s', 'slashed' ),
-					esc_html( SLASHED_CSS_REF ),
-					'<code>' . esc_html( substr( SLASHED_DIST_SHA, 0, 8 ) ) . '</code>'
+					/* translators: %s: framework version tag */
+					esc_html__( 'Framework: %s', 'slashed' ),
+					esc_html( SLASHED_CSS_REF )
 				);
 				?>
 			</p>

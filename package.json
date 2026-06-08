@@ -13,6 +13,7 @@
   "scripts": {
     "inventory": "node scripts/gen-bricks-inventory.js",
     "class-hints": "node scripts/gen-class-hints.js",
+    "update-framework": "node scripts/update-framework.js",
     "build:data": "node scripts/gen-bricks-inventory.js && node scripts/gen-class-hints.js",
     "sync-dist": "node scripts/sync-plugin-dist.js",
     "build:editor-app": "npm --prefix SLASHED-for-WP/integrations/bricks/editor-app run build",
