@@ -19,13 +19,13 @@
   background: #14152e;
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .28);
+  box-shadow: 0 4px 14px rgb(0 0 0 / .28);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform .15s ease, box-shadow .15s ease;
 }
-.slashed-gb-launcher:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0, 0, 0, .34); }
+.slashed-gb-launcher:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgb(0 0 0 / .34); }
 .slashed-gb-launcher.is-active { background: #4a30d0; }
 .slashed-gb-launcher__mark { font-weight: 800; font-size: 22px; line-height: 1; transform: skewX(-8deg); }
 
@@ -44,7 +44,7 @@
   background: #fff;
   color: #1e1e1e;
   border-left: 1px solid #e0e0e0;
-  box-shadow: -8px 0 28px rgba(0, 0, 0, .14);
+  box-shadow: -8px 0 28px rgb(0 0 0 / .14);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
@@ -116,25 +116,25 @@
 .slashed-gb-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(28px, 1fr)); gap: 6px; }
 .slashed-gb-swatch {
   border: 0; padding: 0; cursor: pointer; aspect-ratio: 1; border-radius: 6px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / .12);
 }
-.slashed-gb-swatch__fill { display: block; width: 100%; height: 100%; border-radius: 6px; background: var(--c); }
+.slashed-gb-swatch__fill { display: block; width: 100%; height: 100%; border-radius: 6px; background: var(--sf-gb-fill); }
 .slashed-gb-swatch.is-alpha .slashed-gb-swatch__fill {
   background-image:
-    linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--sf-gb-fill), var(--sf-gb-fill)),
     linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%),
     linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%);
   background-size: 100% 100%, 10px 10px, 10px 10px;
   background-position: 0 0, 0 0, 5px 5px;
 }
-.slashed-gb-swatch:hover { transform: scale(1.08); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25), 0 2px 6px rgba(0, 0, 0, .2); }
+.slashed-gb-swatch:hover { transform: scale(1.08); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .25), 0 2px 6px rgb(0 0 0 / .2); }
 
 /* Gradients */
 .slashed-gb-grad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.slashed-gb-grad { border: 0; padding: 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
-.slashed-gb-grad__fill { display: block; height: 46px; background: var(--g); }
+.slashed-gb-grad { border: 0; padding: 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .12); }
+.slashed-gb-grad__fill { display: block; height: 46px; background: var(--sf-gb-grad); }
 .slashed-gb-grad__name { display: block; padding: 5px 8px; font-size: 11px; color: #333; background: #fff; text-align: left; }
-.slashed-gb-grad:hover { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25), 0 2px 8px rgba(0, 0, 0, .18); }
+.slashed-gb-grad:hover { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .25), 0 2px 8px rgb(0 0 0 / .18); }
 
 /* Class + variable rows */
 .slashed-gb-classlist, .slashed-gb-varlist { display: flex; flex-direction: column; gap: 2px; }
@@ -156,7 +156,7 @@
 .slashed-gb-toast {
   position: fixed; bottom: 76px; right: 20px; z-index: 100001;
   background: #14152e; color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .3); opacity: 0; transform: translateY(6px);
+  box-shadow: 0 6px 18px rgb(0 0 0 / .3); opacity: 0; transform: translateY(6px);
   transition: opacity .18s ease, transform .18s ease; pointer-events: none; max-width: 320px;
 }
 .slashed-gb-toast.is-visible { opacity: 1; transform: translateY(0); }

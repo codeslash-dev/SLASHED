@@ -317,7 +317,7 @@ function colorSwatch(sw) {
       if (applied) toast(`${state.target}: ${sw.label}`);
       else doCopy(value);
     },
-  }, [el('span', { class: `${NS}-swatch__fill`, style: `--c:${hex}` })]);
+  }, [el('span', { class: `${NS}-swatch__fill`, style: `--sf-gb-fill:${hex}` })]);
   return chip;
 }
 
@@ -342,7 +342,7 @@ function renderGradients() {
         else doCopy(value);
       },
     }, [
-      el('span', { class: `${NS}-grad__fill`, style: `--g:${preview}` }),
+      el('span', { class: `${NS}-grad__fill`, style: `--sf-gb-grad:${preview}` }),
       el('span', { class: `${NS}-grad__name`, text: g.name }),
     ]));
   }
