@@ -20,6 +20,7 @@
 import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES } from './registry-sources.js';
+import { INTERNAL, ADVANCED, tierOf } from './token-tiers.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -36,35 +37,11 @@ const FILE_TITLES = {
   'optional/tokens.components.css':     'Components (optional, incomplete)',
 };
 
-// ── Tier contract — see core/tokens.css header + docs/architecture.md ─────────
-
-const INTERNAL = new Set([
-  '--sf-is-dark',
-]);
-
-const ADVANCED = new Set([
-  '--sf-lumlocker',
-  '--sf-contrast-bias', '--sf-contrast-threshold',
-  '--sf-shadow-strength', '--sf-shadow-color', '--sf-shadow-glow-color',
-  '--sf-font-features', '--sf-font-variation', '--sf-optical-sizing',
-  '--sf-space-scale', '--sf-text-scale', '--sf-text-display-scale',
-  '--sf-radius-scale', '--sf-motion-scale',
-  '--sf-scroll-timeline-range-start', '--sf-scroll-timeline-range-end',
-  '--sf-mask-scrim-start', '--sf-mask-scrim-end',
-  '--sf-safe-top', '--sf-safe-bottom', '--sf-safe-left', '--sf-safe-right',
-  '--sf-perspective-near', '--sf-perspective-normal', '--sf-perspective-far',
-  '--sf-truncate-suffix',
-  '--sf-radius-outer',
-  '--sf-is-active', '--sf-is-current', '--sf-is-pressed', '--sf-is-open',
-  '--sf-focus-ring-shadow',
-  '--sf-print-page-margin', '--sf-print-page-size', '--sf-print-base-size',
-]);
-
-function tierOf(name) {
-  if (INTERNAL.has(name)) return 'INTERNAL';
-  if (ADVANCED.has(name)) return 'PUBLIC-ADVANCED';
-  return 'PUBLIC';
-}
+// ── Tier contract — imported from scripts/token-tiers.js (single source of ───
+// truth, mirrors the core/tokens.css header + docs/architecture.md). INTERNAL
+// and ADVANCED are re-exported here only for any downstream importers that
+// historically reached into this module.
+export { INTERNAL, ADVANCED, tierOf };
 
 // ── Parsing (matches scripts/gen-token-reference.js contract) ─────────────────
 
