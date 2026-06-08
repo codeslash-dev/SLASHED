@@ -1,98 +1,109 @@
 # SLASHED Framework Changelog
 
-Complete development history from v0.1.0 through v0.5.24, organized by version.
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.1.0
+## Unreleased
 
-- **#42** — add v0.1.0 entries for last 7 merged PRs (Phases 1–6)
-  > Covers PRs #34–41: truthfulness foundation, WCAG AA token fix, print colour
-- **#43** — use oklab for palette color-mix to prevent hue drift
-  > Two fixes addressing palette correctness and demo page performance:
-- **#44** — comprehensive visual tests + missing layout demos
-  > - Replace text-only layout references in docs/demo.html with proper visual demonstrations
-- **#45** — tighten assertions flagged in PR #44 review
-  > - Replace permissive regex on .is-loading color with an explicit
-- **#46** — tighten visual test assertions and clarify customizer labels
-  > - Tighten .is-loading color assertion — replace the loose /rgba?\(.*0\)|transparent/ regex (which could falsely pass on opaque rgb() values containing
-- **#47** — completion checklist — ACSS & Pico benchmark
-  > Comprehensive completion checklist for bringing the existing SLASHED layers to 100% — benchmarked against Automatic.css v4 (closest match, ~85% overla
-- **#48** — API freeze prep — contrast docs, optional forms, npm exports
-  > Zamyka ostatnie potencjalne źródła breaking changes przed rozpoczęciem pracy nad komponentami i utilities.
-- **#49** — update TOKENS CONSUMED comment to match actual usage
-  > Align the documented token list in optional/forms.css header comment with the actual CSS custom properties used after the token-name correction in PR 
-- **#50** — Premium furniture store homepage (FORMA)
-  > Premium furniture store homepage FORMA built entirely using the SLASHED CSS framework.
-- **#51** — Production-readiness checklist v2
-  > Complete production-readiness audit for SLASHED CSS framework v1.0, benchmarked against 7 industry references:
-- **#52** — repair broken interactive demos in docs/demo.html
-  > Addresses the issues you reported in /docs/demo.html. Each fix is surgical and targets the specific demo that misbehaved — no library API changes, jus
-- **#53** — Add production readiness checklist v3 with implementation decisions
-  > This PR introduces audits/completion-checklist-v3.md, a comprehensive production readiness audit that supersedes v2. Unlike v2 (which was an inventory
-- **#54** — Add D11 — token alias-chain hygiene & API-surface freeze to checklist v3
-  > Follow-up to the merged checklist v3 (#53). Adds a token API-freeze checkup based on a full var()-graph audit of all 562 token definitions.
-- **#55** — foundation polish for v0.2.0 (checklist v3 §F batch)
-  > Wire up declared-but-unused base/print tokens, fix two form bugs, ship
-- **#56** — move container-type to parent for sf-grid-6 and ratio grids
-  > @container queries look for an ancestor container, not the element
-- **#57** — comprehensive optimal bundle index & inventory
-  > Full indexing and inventory of the slashed.optimal.css bundle — every token, class, alias, keyframe, and cascade relationship mapped and analysed for 
-- **#58** — refined comparative gap audit prompt v2
-  > Adds a comprehensive, source-verified audit prompt (audits/comparative-audit-prompt.md) designed to produce a definitive gap analysis of SLASHED again
-- **#59** — add flat (unlayered) bundle option for page builders
-  > Adds a flat: true per-bundle option to bundle.config.json that strips the SLASHED @layer scaffolding before emit. First consumer is dist/slashed.brick
-- **#62** — comprehensive comparative gap audit
-  > Adds a full comparative gap audit of SLASHED v0.2.10 (commit 4d0103e) against four benchmark frameworks:
-- **#63** — clean up repo structure and gitignore
-  > Brings the repo in line with best practices for a published CSS framework:
-- **#64** — restore jsDelivr CDN link so demo works without local build
-  > - Reverts the demo's CSS ` tags from local relative paths back to the jsDelivr @main CDN URLs that were in use prior to commit 26658d5`.
-- **#65** — re-commit dist/ to unbreak jsDelivr @main CDN URLs
-  > Reverts the dist/ removal from #63 so the jsDelivr CDN URLs that #64 restored (and any external user pinning to @main) keep working.
-- **#66** — build dist on merge to main, publish to dedicated `dist` branch
-  > Replaces the per-commit dist regeneration (via the .githooks/pre-commit hook) with a once-per-merge GitHub Action that publishes built CSS bundles to 
-- **#68** — fix 4 factual inaccuracies in comparative-gap-audit.md
-  > The comparative gap audit (audits/comparative-gap-audit.md) contained 4 major factual errors where it claimed features were missing that actually exis
-- **#70** — fix documentation vs CSS discrepancies
-  > Fixes 11 documentation vs CSS discrepancies identified during a full audit of the codebase.
-- **#72** — attach all dist bundles to releases + backfill CHANGELOG
-  > Fixes two issues with the release workflow:
-- **#73** — use clamp() for dark-mode link lightness (WebKit)
-  > Fixes the CI regression test failure: [webkit] › a11y.spec.js › axe: no WCAG A/AA violations (dark).
-- **#75** — trigger CI to verify regression tests after PR #73 webkit fix
-  > This is a small dummy-style PR primarily intended to trigger CI one more time and verify whether the Regression tests job now passes after the WebKit 
-- **#76** — use a:link selector to win over WebKit UA stylesheet (dark-mode link contrast)
-  > Replaces the WebKit dark-mode link contrast fix from PR #73 (which didn't actually work) with one that does. Fixes the WCAG AA failure flagged by axe-
-- **#77** — add admin GUI for editing SLASHED design tokens
-  > Adds a full WordPress admin settings page to the Bricks Builder integration plugin for visually editing all user-customizable SLASHED design tokens.
-- **#78** — connect orphaned tokens and close page-property control gaps
-  > Four tokens were defined but never consumed by the framework, making
+- **#269** — fix changelog version ordering
+  > Reorder PR summary newest→oldest (v0.5.24 → v0.0.1). Rename "Unreleased" to "v0.0.1 / Pre-release". Remove orphaned content block floating between sections.
+- **#268** — consolidate post-0.3.0 work under v0.5.24 in CHANGELOG
+  > Restructures CHANGELOG.md to assign 222 merged PRs to proper version buckets (v0.1.0–v0.5.24), replacing a perpetual [Unreleased] accumulation.
+- **#267** — add CHANGELOG_FULL.md with complete development history
+  > Adds CHANGELOG_FULL.md — a master changelog organized by version and category (Framework vs Plugins) covering all 222 PRs.
+- **#266** — docs: consolidate and trim documentation
+  > Merges three overlapping docs into existing files (dark-mode.md → theming.md, performance.md → architecture.md, browser-support.md → README). Cuts filler prose throughout.
+- **#265** — docs: add token index (tier + fallback cross-reference)
+  > Adds scripts/gen-token-index.js + docs/token-index.md — a generated per-token table cross-referencing stability tier (PUBLIC/ADVANCED/INTERNAL), source file, HSL fallback coverage, and default value for all 771 tokens.
 
-## v0.2.0
+## v0.5.24
 
-- **#30** — v0.2.0: bugfixes from quality audit + token enrichment + a11y/docs/tooling
-  > Doprowadza framework do stanu opisanego w zatwierdzonym 7-fazowym planie: 3 bugfixy z audits/quality-audit-2024-full.md, 5 warningów rozstrzygniętych 
-- **#32** — show auto-derived dark colors in the configurator
-  > Follow-up to #29. The theme configurator's dark color pickers were seeded from a hardcoded TOKEN_DEFAULTS table, which:
-- **#33** — Add comprehensive comparative audit against reference CSS frameworks
-  > This PR adds a detailed comparative audit of SLASHED against four reference CSS frameworks (Pico CSS v2, Automatic.css v4, Bulma v1, and Tailwind CSS 
-- **#34** — Phase 1: truthfulness foundation — themes layer extraction, bundle scope, browser floor accuracy
-  > Phase 1 of the perfection roadmap from audits/comparative-audit-2026.md Resolution Log. Foundation pass — no behavioural changes, no breaking changes.
-- **#35** — clear WCAG AA Normal by default for every brand & status on-color (Phase 2)
-  > Phase 2 of the perfection roadmap. Tightens the default brand & status palette so every on-color foreground clears WCAG AA Normal (4.5:1) by default —
-- **#36** — WCAG AA Normal by default for every brand & status on-color (Phase 2 redo)
-  > Phase 2 (#35) was approved and clicked-merge, but its base.ref was chore/phase-1-truthfulness (the now-deleted Phase 1 branch) instead of main. After 
-- **#37** — preserve authored colour by default; opt-in .print-color-exact / .print-no-color (Phase 3)
-  > Phase 3 of the perfection roadmap. Reverses the print-stylesheet colour contract: authored colour is preserved by default, ink-on-paper is now an opt-
-- **#38** — comparative audit vs Pico/ACSS/Bulma/Tailwind (2026-05-20)
-  > Adds a single new file: audits/comparative-audit-2026-05-20.md (1501 linii, narracja po polsku, nagłówki sekcji po angielsku zgodnie ze specyfikacją a
-- **#39** — name container queries — sf-layout and sf-alternate (Phase 4)
-  > Phase 4 of the perfection roadmap. Names two of the framework's container-query containers and binds one framework-internal query to a name. The remai
-- **#40** — Phase 5 — Motion API polish
-  > Phase 5 of the framework perfection plan. Polishes the motion/transition API, modernizes accessibility patterns, and proves @property color interpolat
-- **#41** — Phase 6 — regression tests & full demo coverage
-  > Phase 6 — Coverage & regression tests. Completes the full audit remediation plan.
+- **#264** — consolidate post-0.3.0 work under v0.5.24
+  > Fixes the framework changelog version history. The changelog was stuck at 0.3.0 with everything piled under a perpetual [Unreleased] section, even tho
+
+## v0.5.0
+
+- **#179** — Identity Refresh and Documentation Overhaul for v0.5.0
+  > This comprehensive update refreshes the SLASHED framework's identity and documentation for the v0.5.0 release.
+- **#181** — don't abort commits staging gitignored dist bundles
+  > The .githooks/pre-commit hook rebuilds dist bundles and git adds every output. But dist/*.css is gitignored on main (built via npm run build, shipped 
+- **#188** — complete color system — shade scale, section theming, swatch coverage
+  > A comprehensive pass over the SLASHED color system touching the core framework CSS, the Bricks Builder integration, and the documentation. All changes
+- **#192** — refresh all docs, add WordPress plugin section, fix version sync
+  > - E: Edgeless → Explicit — describes @layer declaration order, BEM naming, and the token API contract more precisely than the opaque "Edgeless"
+- **#194** — Rename --sf-color-base to --sf-color-surface
+  > This PR renames the --sf-color-base token family to --sf-color-surface throughout the codebase, along with renaming --sf-color-well to --sf-color-inse
+- **#196** — Harden CSS value validation and fix color export regression
+  > This PR addresses critical security and correctness issues in the CSS generator and color handling:
+- **#197** — move numeric scale ownership to tokens.palette.css
+  > Removes 121 numeric-scale lines (50–950) from core/tokens.css across
+- **#198** — Redesign SF colors panel: Quick Use + Palette layout, two distinct modes
+  > Badge (bottom-right): reference-only. Click copies var() to clipboard.
+- **#199** — Redesign SF Colors panel: Quick Use + Palette layout, two behaviour modes
+  > - Two distinct modes replace the old single-mode panel:
+- **#200** — handle border/box-shadow colour inputs without explicit type attribute
+  > - SF Colors picker was throwing "Couldn't apply var… input not found" when used inside border and box-shadow controls, while working correctly for bac
+- **#201** — SF Colors picker panel — Quick Use + Palette, active swatch, border support, base rename
+  > Full overhaul of the SF Colors panel and the --sf-color-base brand family rename.
+- **#203** — Add contextual color cascade and fluid layout dimension controls
+  > This PR enhances the design system with two major features: a contextual color cascade for surfaces that automatically adapts semantic color tokens to
+- **#209** — Replace modifier mode with multi-modifier support in all modes
+  > This PR removes the dedicated "modifier" mode and instead adds support for multiple modifiers across all non-migrate modes (add, rename, replace). Mod
+- **#210** — Build reBEMer editor app (multi-block + multi-modifier)
+  > - Compiles the Svelte source changes from #209 into the deployed plugin assets
+- **#211** — auto-rebuild all generated artifacts on commit + CI
+  > - Adds scripts/artifacts.json — a single manifest mapping source globs → build command → outputs for every generated/compiled file in the repo
+- **#213** — escape Liquid delimiters in rebemer.md code block
+  > - Fixes the red cross on main — GitHub Pages build was failing with a Liquid syntax error
+- **#224** — Add optional sizes-extended tokens and color/border shorthands
+  > Introduces a new optional token module (optional/tokens.sizes-extended.css) that extends the core spacing and typography scales with bridge variables 
+- **#226** — add All-in-one (mixed) mode with per-row op toggle and family picker
+  > New 'mixed' mode in the reBEMer panel lets users assign BEM classes to a
+- **#228** — Document all framework tokens/classes in cheatsheet with coverage enforcement
+  > This PR significantly expands and reorganizes the Cheatsheet documentation to cover every token and class shipped in the framework, and adds automated
+- **#229** — Sync viewport previews, revamp live preview, icon-trigger class hints
+  > - Live Scale Preview sliders in the Spacing and Typography tabs now scrub
+- **#232** — Fix SF color button state sync and touch event handling
+  > This PR improves the reliability of the SLASHED color button in the Bricks editor by ensuring its visual state stays synchronized with the color input
+- **#233** — restore -webkit-background-clip for .sf-text-gradient (Safari 17.5)
+  > A full audit pass over the CSS source (core/ + optional/, 22 files) found the framework in excellent shape — stylelint is clean, tradeoffs are documen
+- **#234** — native validation, autofill, auto-grow textarea & numeric/overlay tokens
+  > Resolves the batch of well-scoped, low-risk open issues. Each change is additive, progressively enhanced, and built on existing tokens.
+- **#235** — add .sf-content-auto and .sf-tabular-nums macros (#222, #214)
+  > Follow-up to #234. Resolves the two remaining issues that I'd previously mis-shelved as "blocked utilities" — they're actually macros (token-driven re
+- **#236** — class-family picker for rename/replace + remove-all toggle
+  > In the reBEMer panel, Rename mode previously always renamed *the first* class on an element ("This element has 2 classes. Only the first will be renam
+- **#237** — scrim, focus-shadow, divider & link recipes + auto-colour tests
+  > Implements the recipe-tier enhancements and tests recommended after the SLASHED vs Automatic.css v4 audit. Everything here is a token-driven macro/rec
+- **#239** — prepare for WordPress.org submission
+  > - Add readme.txt (required for wp.org review)
+- **#240** — WordPress.org submission prep, docs cleanup, ESM scripts
+  > - WordPress.org submission prep — local-first CSS delivery (dist/ bundled in plugin), in-admin updater to download latest bundles from jsDelivr, optio
+- **#241** — add feature-completeness & graceful-degradation issue backlog
+  > Adds docs/issue-backlog.md — a grouped backlog of suggested GitHub issues covering feature completeness on the modern CSS baseline and graceful degrad
+- **#251** — add path to maximum engine-design score
+  > - Adds docs/path-to-max-score.md, a per-criterion roadmap for raising SLASHED toward the ceiling of the 14-category engine-design scoring model (max 1
+- **#252** — Add comprehensive index documentation for optimal bundle
+  > This PR adds a complete reference index document (docs/optimal-bundle-index.md) that exhaustively catalogs everything shipped in the SLASHED optimal b
+- **#253** — add 100% framework coverage test pages
+  > Adds a six-page manual cross-browser test suite under docs/, designed to exercise 100% of the framework in action. Loads only the full variant via the
+- **#254** — add Tier-1 sRGB color fallbacks for pre-Chrome-123 / pre-Safari-17.5 engines
+  > Implements the "gate at declaration site" pattern to fix IACVT failures on
+- **#255** — add optimal bundle master index
+  > Adds docs/optimal-bundle-index.md — a complete master reference for the dist/slashed.optimal.css bundle variant, built directly from all 18 source fil
+- **#256** — keep WordPress plugin's bundled CSS in sync with core builds
+  > The plugin ships local copies of the essential/optimal/full CSS bundles
+- **#257** — version sync to 0.5.21 + pre-release audit fixes (0.6.0 prep)
+  > Pre-release audit and cleanup ahead of the 0.6.0 freeze. This does not release 0.6.0 — it restores the version invariant to the current released versi
+- **#259** — Remove unused semantic color variant tokens
+  > Removed 45 unused semantic color variant tokens across success, warning, error, info, and danger color families. These tokens were defined but not uti
+- **#260** — full token palette, gradients, font-size/spacing presets + in-editor token panel
+  > Brings the Gutenberg integration up to parity with the Bricks one. The block editor was shipping a stale, hand-maintained 20-entry color palette with 
+- **#261** — : wire scales, semantic z-index aliases, complete Tier-1 fallbacks
+  > Token-layer audit follow-ups: fixes dead/non-functional tokens, completes the Tier-1 sRGB fallback coverage, adds a semantic z-index layer, and makes 
+- **#262** — Split WordPress plugin into its own repo; decouple framework + docs cleanup
+  > Prepares the framework repo for the upcoming API freeze by splitting the bundled WordPress plugin out into its own repository (codeslash-dev/slashed-f
+- **#263** — Make framework plugin-agnostic and fix release version drift
+  > Follow-up to the plugin split (#262). Removes leftover integration references from the framework and fixes the version pipeline that left bundle heade
 
 ## v0.3.0
 
@@ -213,97 +224,97 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **#175** — move WP plugin into plugins/SLASHED-for-WP/
   > Separates the WordPress plugin from the SLASHED CSS framework at the repository level. The framework stays at root; all WordPress-specific code moves 
 
-## v0.5.0
+## v0.2.0
 
-- **#179** — Identity Refresh and Documentation Overhaul for v0.5.0
-  > This comprehensive update refreshes the SLASHED framework's identity and documentation for the v0.5.0 release.
-- **#181** — don't abort commits staging gitignored dist bundles
-  > The .githooks/pre-commit hook rebuilds dist bundles and git adds every output. But dist/*.css is gitignored on main (built via npm run build, shipped 
-- **#188** — complete color system — shade scale, section theming, swatch coverage
-  > A comprehensive pass over the SLASHED color system touching the core framework CSS, the Bricks builder integration, and the documentation. All changes
-- **#192** — refresh all docs, add WordPress plugin section, fix version sync
-  > - E: Edgeless → Explicit — describes @layer declaration order, BEM naming, and the token API contract more precisely than the opaque "Edgeless"
-- **#194** — Rename --sf-color-base to --sf-color-surface
-  > This PR renames the --sf-color-base token family to --sf-color-surface throughout the codebase, along with renaming --sf-color-well to --sf-color-inse
-- **#196** — Harden CSS value validation and fix color export regression
-  > This PR addresses critical security and correctness issues in the CSS generator and color handling:
-- **#197** — move numeric scale ownership to tokens.palette.css
-  > Removes 121 numeric-scale lines (50–950) from core/tokens.css across
-- **#198** — Redesign SF colors panel: Quick Use + Palette layout, two distinct modes
-  > Badge (bottom-right): reference-only. Click copies var() to clipboard.
-- **#199** — Redesign SF Colors panel: Quick Use + Palette layout, two behaviour modes
-  > - Two distinct modes replace the old single-mode panel:
-- **#200** — handle border/box-shadow colour inputs without explicit type attribute
-  > - SF Colors picker was throwing "Couldn't apply var… input not found" when used inside border and box-shadow controls, while working correctly for bac
-- **#201** — SF Colors picker panel — Quick Use + Palette, active swatch, border support, base rename
-  > Full overhaul of the SF Colors panel and the --sf-color-base brand family rename.
-- **#203** — Add contextual color cascade and fluid layout dimension controls
-  > This PR enhances the design system with two major features: a contextual color cascade for surfaces that automatically adapts semantic color tokens to
-- **#209** — Replace modifier mode with multi-modifier support in all modes
-  > This PR removes the dedicated "modifier" mode and instead adds support for multiple modifiers across all non-migrate modes (add, rename, replace). Mod
-- **#210** — Build reBEMer editor app (multi-block + multi-modifier)
-  > - Compiles the Svelte source changes from #209 into the deployed plugin assets
-- **#211** — auto-rebuild all generated artifacts on commit + CI
-  > - Adds scripts/artifacts.json — a single manifest mapping source globs → build command → outputs for every generated/compiled file in the repo
-- **#213** — escape Liquid delimiters in rebemer.md code block
-  > - Fixes the red cross on main — GitHub Pages build was failing with a Liquid syntax error
-- **#224** — Add optional sizes-extended tokens and color/border shorthands
-  > Introduces a new optional token module (optional/tokens.sizes-extended.css) that extends the core spacing and typography scales with bridge variables 
-- **#226** — add All-in-one (mixed) mode with per-row op toggle and family picker
-  > New 'mixed' mode in the reBEMer panel lets users assign BEM classes to a
-- **#228** — Document all framework tokens/classes in cheatsheet with coverage enforcement
-  > This PR significantly expands and reorganizes the Cheatsheet documentation to cover every token and class shipped in the framework, and adds automated
-- **#229** — Sync viewport previews, revamp live preview, icon-trigger class hints
-  > - Live Scale Preview sliders in the Spacing and Typography tabs now scrub
-- **#232** — Fix SF color button state sync and touch event handling
-  > This PR improves the reliability of the SLASHED color button in the Bricks editor by ensuring its visual state stays synchronized with the color input
-- **#233** — restore -webkit-background-clip for .sf-text-gradient (Safari 17.5)
-  > A full audit pass over the CSS source (core/ + optional/, 22 files) found the framework in excellent shape — stylelint is clean, tradeoffs are documen
-- **#234** — native validation, autofill, auto-grow textarea & numeric/overlay tokens
-  > Resolves the batch of well-scoped, low-risk open issues. Each change is additive, progressively enhanced, and built on existing tokens.
-- **#235** — add .sf-content-auto and .sf-tabular-nums macros (#222, #214)
-  > Follow-up to #234. Resolves the two remaining issues that I'd previously mis-shelved as "blocked utilities" — they're actually macros (token-driven re
-- **#236** — class-family picker for rename/replace + remove-all toggle
-  > In the reBEMer panel, Rename mode previously always renamed *the first* class on an element ("This element has 2 classes. Only the first will be renam
-- **#237** — scrim, focus-shadow, divider & link recipes + auto-colour tests
-  > Implements the recipe-tier enhancements and tests recommended after the SLASHED vs Automatic.css v4 audit. Everything here is a token-driven macro/rec
-- **#239** — prepare for WordPress.org submission
-  > - Add readme.txt (required for wp.org review)
-- **#240** — WordPress.org submission prep, docs cleanup, ESM scripts
-  > - WordPress.org submission prep — local-first CSS delivery (dist/ bundled in plugin), in-admin updater to download latest bundles from jsDelivr, optio
-- **#241** — add feature-completeness & graceful-degradation issue backlog
-  > Adds docs/issue-backlog.md — a grouped backlog of suggested GitHub issues covering feature completeness on the modern CSS baseline and graceful degrad
-- **#251** — add path to maximum engine-design score
-  > - Adds docs/path-to-max-score.md, a per-criterion roadmap for raising SLASHED toward the ceiling of the 14-category engine-design scoring model (max 1
-- **#252** — Add comprehensive index documentation for optimal bundle
-  > This PR adds a complete reference index document (docs/optimal-bundle-index.md) that exhaustively catalogs everything shipped in the SLASHED optimal b
-- **#253** — add 100% framework coverage test pages
-  > Adds a six-page manual cross-browser test suite under docs/, designed to exercise 100% of the framework in action. Loads only the full variant via the
-- **#254** — add Tier-1 sRGB color fallbacks for pre-Chrome-123 / pre-Safari-17.5 engines
-  > Implements the "gate at declaration site" pattern to fix IACVT failures on
-- **#255** — add optimal bundle master index
-  > Adds docs/optimal-bundle-index.md — a complete master reference for the dist/slashed.optimal.css bundle variant, built directly from all 18 source fil
-- **#256** — keep WordPress plugin's bundled CSS in sync with core builds
-  > The plugin ships local copies of the essential/optimal/full CSS bundles
-- **#257** — version sync to 0.5.21 + pre-release audit fixes (0.6.0 prep)
-  > Pre-release audit and cleanup ahead of the 0.6.0 freeze. This does not release 0.6.0 — it restores the version invariant to the current released versi
-- **#259** — Remove unused semantic color variant tokens
-  > Removed 45 unused semantic color variant tokens across success, warning, error, info, and danger color families. These tokens were defined but not uti
-- **#260** — full token palette, gradients, font-size/spacing presets + in-editor token panel
-  > Brings the Gutenberg integration up to parity with the Bricks one. The block editor was shipping a stale, hand-maintained 20-entry color palette with 
-- **#261** — : wire scales, semantic z-index aliases, complete Tier-1 fallbacks
-  > Token-layer audit follow-ups: fixes dead/non-functional tokens, completes the Tier-1 sRGB fallback coverage, adds a semantic z-index layer, and makes 
-- **#262** — Split WordPress plugin into its own repo; decouple framework + docs cleanup
-  > Prepares the framework repo for the upcoming API freeze by splitting the bundled WordPress plugin out into its own repository (codeslash-dev/slashed-f
-- **#263** — Make framework plugin-agnostic and fix release version drift
-  > Follow-up to the plugin split (#262). Removes leftover integration references from the framework and fixes the version pipeline that left bundle heade
+- **#30** — v0.2.0: bugfixes from quality audit + token enrichment + a11y/docs/tooling
+  > Doprowadza framework do stanu opisanego w zatwierdzonym 7-fazowym planie: 3 bugfixy z audits/quality-audit-2024-full.md, 5 warningów rozstrzygniętych 
+- **#32** — show auto-derived dark colors in the configurator
+  > Follow-up to #29. The theme configurator's dark color pickers were seeded from a hardcoded TOKEN_DEFAULTS table, which:
+- **#33** — Add comprehensive comparative audit against reference CSS frameworks
+  > This PR adds a detailed comparative audit of SLASHED against four reference CSS frameworks (Pico CSS v2, Automatic.css v4, Bulma v1, and Tailwind CSS 
+- **#34** — Phase 1: truthfulness foundation — themes layer extraction, bundle scope, browser floor accuracy
+  > Phase 1 of the perfection roadmap from audits/comparative-audit-2026.md Resolution Log. Foundation pass — no behavioural changes, no breaking changes.
+- **#35** — clear WCAG AA Normal by default for every brand & status on-color (Phase 2)
+  > Phase 2 of the perfection roadmap. Tightens the default brand & status palette so every on-color foreground clears WCAG AA Normal (4.5:1) by default —
+- **#36** — WCAG AA Normal by default for every brand & status on-color (Phase 2 redo)
+  > Phase 2 (#35) was approved and clicked-merge, but its base.ref was chore/phase-1-truthfulness (the now-deleted Phase 1 branch) instead of main. After 
+- **#37** — preserve authored colour by default; opt-in .print-color-exact / .print-no-color (Phase 3)
+  > Phase 3 of the perfection roadmap. Reverses the print-stylesheet colour contract: authored colour is preserved by default, ink-on-paper is now an opt-
+- **#38** — comparative audit vs Pico/ACSS/Bulma/Tailwind (2026-05-20)
+  > Adds a single new file: audits/comparative-audit-2026-05-20.md (1501 linii, narracja po polsku, nagłówki sekcji po angielsku zgodnie ze specyfikacją a
+- **#39** — name container queries — sf-layout and sf-alternate (Phase 4)
+  > Phase 4 of the perfection roadmap. Names two of the framework's container-query containers and binds one framework-internal query to a name. The remai
+- **#40** — Phase 5 — Motion API polish
+  > Phase 5 of the framework perfection plan. Polishes the motion/transition API, modernizes accessibility patterns, and proves @property color interpolat
+- **#41** — Phase 6 — regression tests & full demo coverage
+  > Phase 6 — Coverage & regression tests. Completes the full audit remediation plan.
 
-## v0.5.24
+## v0.1.0
 
-- **#264** — consolidate post-0.3.0 work under v0.5.24
-  > Fixes the framework changelog version history. The changelog was stuck at 0.3.0 with everything piled under a perpetual [Unreleased] section, even tho
+- **#42** — add v0.1.0 entries for last 7 merged PRs (Phases 1–6)
+  > Covers PRs #34–41: truthfulness foundation, WCAG AA token fix, print colour
+- **#43** — use oklab for palette color-mix to prevent hue drift
+  > Two fixes addressing palette correctness and demo page performance:
+- **#44** — comprehensive visual tests + missing layout demos
+  > - Replace text-only layout references in docs/demo.html with proper visual demonstrations
+- **#45** — tighten assertions flagged in PR #44 review
+  > - Replace permissive regex on .is-loading color with an explicit
+- **#46** — tighten visual test assertions and clarify customizer labels
+  > - Tighten .is-loading color assertion — replace the loose /rgba?\(.*0\)|transparent/ regex (which could falsely pass on opaque rgb() values containing
+- **#47** — completion checklist — ACSS & Pico benchmark
+  > Comprehensive completion checklist for bringing the existing SLASHED layers to 100% — benchmarked against Automatic.css v4 (closest match, ~85% overla
+- **#48** — API freeze prep — contrast docs, optional forms, npm exports
+  > Zamyka ostatnie potencjalne źródła breaking changes przed rozpoczęciem pracy nad komponentami i utilities.
+- **#49** — update TOKENS CONSUMED comment to match actual usage
+  > Align the documented token list in optional/forms.css header comment with the actual CSS custom properties used after the token-name correction in PR 
+- **#50** — Premium furniture store homepage (FORMA)
+  > Premium furniture store homepage FORMA built entirely using the SLASHED CSS framework.
+- **#51** — Production-readiness checklist v2
+  > Complete production-readiness audit for SLASHED CSS framework v1.0, benchmarked against 7 industry references:
+- **#52** — repair broken interactive demos in docs/demo.html
+  > Addresses the issues you reported in /docs/demo.html. Each fix is surgical and targets the specific demo that misbehaved — no library API changes, jus
+- **#53** — Add production readiness checklist v3 with implementation decisions
+  > This PR introduces audits/completion-checklist-v3.md, a comprehensive production readiness audit that supersedes v2. Unlike v2 (which was an inventory
+- **#54** — Add D11 — token alias-chain hygiene & API-surface freeze to checklist v3
+  > Follow-up to the merged checklist v3 (#53). Adds a token API-freeze checkup based on a full var()-graph audit of all 562 token definitions.
+- **#55** — foundation polish for v0.2.0 (checklist v3 §F batch)
+  > Wire up declared-but-unused base/print tokens, fix two form bugs, ship
+- **#56** — move container-type to parent for sf-grid-6 and ratio grids
+  > @container queries look for an ancestor container, not the element
+- **#57** — comprehensive optimal bundle index & inventory
+  > Full indexing and inventory of the slashed.optimal.css bundle — every token, class, alias, keyframe, and cascade relationship mapped and analysed for 
+- **#58** — refined comparative gap audit prompt v2
+  > Adds a comprehensive, source-verified audit prompt (audits/comparative-audit-prompt.md) designed to produce a definitive gap analysis of SLASHED again
+- **#59** — add flat (unlayered) bundle option for page builders
+  > Adds a flat: true per-bundle option to bundle.config.json that strips the SLASHED @layer scaffolding before emit. First consumer is dist/slashed.brick
+- **#62** — comprehensive comparative gap audit
+  > Adds a full comparative gap audit of SLASHED v0.2.10 (commit 4d0103e) against four benchmark frameworks:
+- **#63** — clean up repo structure and gitignore
+  > Brings the repo in line with best practices for a published CSS framework:
+- **#64** — restore jsDelivr CDN link so demo works without local build
+  > - Reverts the demo's CSS ` tags from local relative paths back to the jsDelivr @main CDN URLs that were in use prior to commit 26658d5`.
+- **#65** — re-commit dist/ to unbreak jsDelivr @main CDN URLs
+  > Reverts the dist/ removal from #63 so the jsDelivr CDN URLs that #64 restored (and any external user pinning to @main) keep working.
+- **#66** — build dist on merge to main, publish to dedicated `dist` branch
+  > Replaces the per-commit dist regeneration (via the .githooks/pre-commit hook) with a once-per-merge GitHub Action that publishes built CSS bundles to 
+- **#68** — fix 4 factual inaccuracies in comparative-gap-audit.md
+  > The comparative gap audit (audits/comparative-gap-audit.md) contained 4 major factual errors where it claimed features were missing that actually exis
+- **#70** — fix documentation vs CSS discrepancies
+  > Fixes 11 documentation vs CSS discrepancies identified during a full audit of the codebase.
+- **#72** — attach all dist bundles to releases + backfill CHANGELOG
+  > Fixes two issues with the release workflow:
+- **#73** — use clamp() for dark-mode link lightness (WebKit)
+  > Fixes the CI regression test failure: [webkit] › a11y.spec.js › axe: no WCAG A/AA violations (dark).
+- **#75** — trigger CI to verify regression tests after PR #73 webkit fix
+  > This is a small dummy-style PR primarily intended to trigger CI one more time and verify whether the Regression tests job now passes after the WebKit 
+- **#76** — use a:link selector to win over WebKit UA stylesheet (dark-mode link contrast)
+  > Replaces the WebKit dark-mode link contrast fix from PR #73 (which didn't actually work) with one that does. Fixes the WCAG AA failure flagged by axe-
+- **#77** — add admin GUI for editing SLASHED design tokens
+  > Adds a full WordPress admin settings page to the Bricks Builder integration plugin for visually editing all user-customizable SLASHED design tokens.
+- **#78** — connect orphaned tokens and close page-property control gaps
+  > Four tokens were defined but never consumed by the framework, making
 
-## Unreleased
+## v0.0.1 / Pre-release
 
 - **#1** — scaffold CSS architecture
   > - Replaces the two empty placeholder files (css/slashed-core.css, css/slashed-tokens.css) with a fully structured cascade-layer CSS scaffold
@@ -360,158 +371,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
-*Generated from 222 merged PRs*
 *Last Updated: 2026-06-08*
-
-- **Docs (`optional/overrides-example.css`) — floating-label pattern.** Added a
-  commented, copy-and-customise `:placeholder-shown` floating-label example
-  with required-markup and accessibility notes. Kept as an opt-in pattern
-  rather than baked into the classless forms layer. (#221)
-
-- **`optional/tokens.sizes-extended.css`** — new optional module (108 tokens)
-  for finer control over the spacing and typography scales:
-  - *Spacing bridge variables* (`--sf-space-{A}-to-{B}`, 36 tokens) — full
-    descending matrix across the 9 fluid spacing steps. Each token is a
-    `clamp()` spanning from the larger step's max value to the smaller step's
-    min, giving more aggressive viewport compression than any single fixed step.
-  - *Text bridge variables* (`--sf-text-{A}-to-{B}`, 36 tokens) — same concept
-    for the 9 body text size steps.
-  - *Per-text-size sub-properties* (`--sf-text-{size}-{line-height|font-weight|
-    letter-spacing|max-width}`, 36 tokens) — individual override knobs per text
-    size step; defaults encode typographic convention (relaxed leading for small
-    text, tight leading for display-sized text).
-  Include via `@import "optional/tokens.sizes-extended.css"` after core tokens.
-  Included in all bundles at `optimal` tier and above.
-
-- **Color anchors**: `--sf-color-white` (`oklch(100% 0 0)`) and
-  `--sf-color-black` (`oklch(0% 0 0)`) — explicit named tokens so authors
-  never need to escape the token system for the most common color literals.
-
-- **Border shorthands**: `--sf-border`, `--sf-border-subtle`,
-  `--sf-border-strong` — convenience tokens composing the existing
-  `--sf-border-width-*` / `--sf-border-style` / `--sf-color-border-*` parts.
-  Usage: `border: var(--sf-border)`.
-
-- **`--sf-divider-gap`** — spacing token controlling the block (and inline for
-  vertical dividers) margin around `.sf-divider`. Defaults to `--sf-space-m`;
-  was previously a hardcoded `--sf-space-m` in `layout.css`. Now consumed
-  directly by the `.sf-divider` and `.sf-divider--vertical` rules.
-
-- **Object fit / position tokens**: `--sf-object-fit` (default `cover`) and
-  `--sf-object-position` (default `50% 50%`), wired into the `img, picture,
-  video, canvas` rule in `core/base.css`. Override globally in `:root` or
-  per-element via inline `style` attribute.
-
-- **CSS multi-column tokens**: `--sf-col-width-{s,m,l}` (ch-based column
-  widths: 16ch / 24ch / 32ch) and `--sf-col-rule-width-{s,m,l}` (aliasing
-  the border-width scale) for the CSS `columns` layout property.
-
-- **New tokens**: `--sf-header-height-mobile`, `--sf-header-height-desktop`,
-  `--sf-sticky-offset-mobile`, `--sf-sticky-offset-desktop` — paired
-  mobile/desktop source tokens for the header height and sticky-offset
-  computed tokens. `--sf-header-height` / `--sf-sticky-offset` fluidly
-  `clamp()` between the mobile and desktop endpoints when they differ.
-
-- **Contextual color cascade** — `.sf-surface--*` variants now inherit a
-  full set of on-surface tokens (`--sf-color-text`, `--sf-color-heading`,
-  secondary/placeholder/disabled text, border/subtle/strong border) via
-  CSS relative-color syntax inside an `@supports` guard. Requires Chrome
-  123 / Safari 17.5 / Firefox 128 (the existing framework floor).
-
-### ⚠️ Breaking Changes (pre-freeze cleanup)
-
-The framework is in pre-freeze cleanup. No published consumer is affected.
-The following changes simplify the public API surface before the token-API
-freeze. Done in a single PR with no version bump.
-
-#### Tokens renamed
-
-- **`--sf-color-surface-*` → `--sf-color-base-*`** — the page-surface source
-  token family is renamed for clarity. `--sf-color-surface-light` /
-  `--sf-color-surface-dark` become `--sf-color-base-light` /
-  `--sf-color-base-dark`; the full scale (`-50` … `-950`), alpha steps, and
-  on-color text token (`--sf-color-text--on-base`) follow the same rename.
-  The resolved semantic token `--sf-color-surface` (page-surface anchor) is
-  unchanged — only the source-token family prefix changes.
-- **`--sf-color-well` → `--sf-color-inset`** — renamed to better communicate
-  the recessed / indented surface role. `--sf-color-well` is removed.
-
-#### Tokens removed
-
-- **`--sf-ratio-photo`** — removed. Use `--sf-ratio-3-2` (semantically
-  identical) or `--sf-ratio-4-3`.
-- **`--sf-sidebar-width-default`** — removed. The canonical name
-  `--sf-sidebar-width` is now declared directly with `18rem`. Override that
-  token instead.
-- **`--sf-grid-min-default`** — removed. The canonical name `--sf-grid-min`
-  is now declared directly with `16rem`. Override that token instead.
-- **`--sf-color-primary--hover`**, **`--sf-color-secondary--hover`**,
-  **`--sf-color-tertiary--hover`**, **`--sf-color-action--hover`**,
-  **`--sf-color-neutral--hover`** — removed from `core/tokens.css`.
-  These were only consumed internally by `optional/forms.css`, which
-  ships with `optional/tokens.palette.css` (where `--sf-color-{role}-hover`
-  exists with palette-derived values). Single-source-of-truth: brand hover
-  variants now live in palette only. Inter-bundle drift between essential
-  and optimal/full eliminated.
-- **`--sf-color-{success,warning,error,info,danger}-{50…950}`** — numeric
-  scale for status colour families removed. Status colours are functional
-  (subtle/muted/strong triplets are the real API); a full decorative ramp
-  adds 55 tokens most consumers never use. Semantic aliases (`-superlight`,
-  `-hover`, `-subtle`, etc.) remain — they now compute directly from the base
-  token via relative colour syntax. To replicate a specific step:
-  `color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-surface))`.
-  Brand families continue to provide the full scale via `optional/tokens.palette.css`.
-
-#### Class modifiers removed
-
-- **`.sf-stack--2xs`**, **`.sf-stack--3xl`**, **`.sf-cluster--2xs`** removed.
-  The underlying tokens (`--sf-space-2xs`/`-3xl`/`-4xl`) remain part of the
-  public API; override the primitive's scoped token directly to access the
-  extreme tiers (`style="--sf-stack-gap: var(--sf-space-3xl)"`).
-
-#### Class modifiers added
-
-- **`.sf-cluster--2xl`**, **`.sf-grid--2xl`** (+ token `--sf-grid-min-2xl: 28rem`),
-  **`.sf-section--xs`** (+ token `--sf-section-pad--xs`),
-  **`.sf-section--2xl`** (+ token `--sf-section-pad--2xl`).
-  Result: every size-aware primitive supports the canonical `--xs … --2xl`
-  range. One sentence rule: **xs..2xl everywhere.**
-
-### Enhanced
-
-#### `.sf-clickable-parent` — multi-link support and built-in focus ring
-
-- **Dual-mode link selection.** Automatic mode (no extra markup) continues to
-  work for single-link cards. Explicit mode: add `data-overlay-link` to the
-  primary link and every other link/button in the card is lifted above the
-  overlay automatically — robust across any nesting depth, no manual z-index
-  work required.
-- **Built-in card-level focus ring** via `:focus-within`. Keyboard users see
-  the same "whole card highlighted" cue as mouse-hover without a separate
-  companion class. Can be suppressed with `outline: none` if the card design
-  provides its own indicator.
-- **`--sf-clickable-overlay-z` custom property** (default `1`). Set it on the
-  card to escape a parent stacking context without touching framework internals.
-- **Flow-content trade-off remains explicit.** Card text stays non-selectable
-  by mouse by default to preserve full-card navigation. Use `[data-no-overlay]`
-  on specific descendants that must sit above the overlay.
-- **Wider interactive-element exceptions.** `summary`, `video`, `audio`, and
-  `[role="button"]` are now lifted alongside buttons and form controls.
-
-### Documentation
-
-- `docs/architecture.md`: rewrote the "Naming conventions" section to
-  document the two parallel rules. Single dash (`<role>-<variant>`) names a
-  palette/shade variant — the token IS a colour. Double dash
-  (`<role>--<context>`) names an application slot — the token is consumed in
-  a specific semantic context. Both are public, both are SemVer-locked;
-  the difference is documentation-level.
-- `docs/layout.md`: added "Size-modifier scale" section with the per-primitive
-  table and the documented `.sf-icon` exception.
-- `core/tokens.css`: added inline comment to the Icon sizes section
-  explaining em-based design (icons scale with surrounding text), why no
-  `clamp()`, why no separate `--sf-icon-scale` knob (transitively covered
-  by `--sf-text-scale`), and why `--xl` is the cap.
 
 ## [0.3.0] - 2026-05-24
 
