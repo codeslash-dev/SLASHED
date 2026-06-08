@@ -143,8 +143,8 @@
 
   /* Media: block display prevents the UA inline baseline gap and
      caps width to the container. Intentionally NOT in reset.css —
-     third-party UI (WP admin bar, builder chrome) uses inline SVG
-     icons that must remain inline. */
+     third-party UI (admin toolbars, embedded widget chrome) uses
+     inline SVG icons that must remain inline. */
   img, picture, video, canvas {
     display:         block;
     max-inline-size: 100%;

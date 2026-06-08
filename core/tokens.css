@@ -1036,8 +1036,7 @@
        same range used by the fluid type/space scales. Override either
        endpoint to retune; set both equal for a fixed height. The slope
        (0.0222…) matches the default 3.5rem→5rem delta; clamp() keeps the
-       result bounded to the endpoints even when they are overridden.
-       This mirrors the clamp the WP plugin's CSS generator emits. */
+       result bounded to the endpoints even when they are overridden. */
     --sf-header-height-mobile:  3.5rem;
     --sf-header-height-desktop: 5rem;
     --sf-header-height: clamp(
