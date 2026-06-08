@@ -61,7 +61,7 @@
     "culori": "^4.0.2",
     "fast-check": "^4.8.0",
     "lightningcss": "^1.32.0",
-    "release-it": "^20.0.1",
+    "release-it": "^20.2.0",
     "stylelint": "^17.11.1",
     "stylelint-config-standard": "^40.0.0"
   }
