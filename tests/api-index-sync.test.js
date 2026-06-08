@@ -126,6 +126,9 @@ describe('api-index.json ⇄ registry.json sync', () => {
       assert.ok('value' in e, `${e.name} missing value`);
       assert.ok('registered' in e && typeof e.registered === 'boolean', `${e.name} bad registered`);
       assert.equal(e.animatable, e.registered, `${e.name} animatable should equal registered`);
+      // fallbackOnly must be present as a boolean on EVERY token row (not sparse).
+      assert.equal(typeof e.fallbackOnly, 'boolean', `${e.name} fallbackOnly must be a boolean`);
+      assert.equal(typeof e.hasFallback, 'boolean', `${e.name} hasFallback must be a boolean`);
       if (e.aliasOf !== null) {
         assert.ok(e.aliasOf.startsWith('--sf-'), `${e.name} aliasOf not a token: ${e.aliasOf}`);
       }

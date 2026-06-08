@@ -70,13 +70,30 @@ const FILE_META = {
 // character index stable, so a token/class match found in the masked text can
 // be looked up against section banners parsed from the original text.
 
+/**
+ * Mask block-comment bodies with spaces (length-preserving) so character
+ * offsets stay stable for later banner/section lookups.
+ * @param {string} css source CSS
+ * @returns {string} CSS with comment bodies blanked
+ */
 function maskComments(css) {
   return css.replace(/\/\*[\s\S]*?\*\//g, m => m.replace(/[^\n]/g, ' '));
 }
+/**
+ * Mask string-literal bodies with spaces (length-preserving) so quoted class
+ * names inside `content:"…"` aren't mistaken for selectors.
+ * @param {string} css source CSS
+ * @returns {string} CSS with string bodies blanked
+ */
 function maskStrings(css) {
   return css.replace(/"[^"]*"|'[^']*'/g, m => m.replace(/[^\n]/g, ' '));
 }
 
+/**
+ * Read a workspace-relative source file, throwing a clear error if missing.
+ * @param {string} rel path relative to repo root
+ * @returns {string} file contents
+ */
 function readFile(rel) {
   const abs = path.join(ROOT, rel);
   if (!fs.existsSync(abs)) {
@@ -93,12 +110,22 @@ function readFile(rel) {
 
 const DIVIDER_RUN = /[-=─═]{10,}/;
 
+/**
+ * True when a comment line is purely a divider rule (ASCII or box-drawing).
+ * @param {string} line trimmed comment line
+ * @returns {boolean}
+ */
 function lineIsDivider(line) {
   const compact = line.replace(/\s/g, '');
   return compact.length >= 4 && /^[-=─═]+$/.test(compact);
 }
 
-// Turn a raw block comment into { title, description }.
+/**
+ * Parse a section-banner comment into a `{ title, description }` pair, stripping
+ * divider fences and promoting an inline `Title — lead` description.
+ * @param {string} raw the raw block comment (including delimiters)
+ * @returns {{title: string, description: string}}
+ */
 function parseBanner(raw) {
   const inner = raw.replace(/^\/\*+/, '').replace(/\*+\/$/, '');
   const rawLines = inner.split('\n')
@@ -142,7 +169,12 @@ function parseBanner(raw) {
   return { title, description };
 }
 
-// Collect every block comment with its position + classification.
+/**
+ * Collect every block comment with its position and classification
+ * (file header vs. section banner vs. plain note) for context lookups.
+ * @param {string} css source CSS (comments intact)
+ * @returns {Array<object>} ordered comment records
+ */
 function collectComments(css) {
   const comments = [];
   for (const m of css.matchAll(/\/\*[\s\S]*?\*\//g)) {
@@ -160,7 +192,11 @@ function collectComments(css) {
   return comments;
 }
 
-// A non-banner note: collapse to a single descriptive sentence-ish string.
+/**
+ * Collapse a non-banner note comment into a single descriptive string.
+ * @param {string} raw the raw block comment
+ * @returns {{title: string, description: string}} title is always empty
+ */
 function parseNote(raw) {
   const inner = raw.replace(/^\/\*+/, '').replace(/\*+\/$/, '');
   const text = inner.split('\n')
@@ -173,10 +209,14 @@ function parseNote(raw) {
   return { title: '', description: text };
 }
 
-// For an element at character `idx`, find the section banner that governs it
-// (nearest preceding banner that is not the file header) and the nearest
-// preceding comment of any kind (used as a more specific description when one
-// is attached directly above the declaration).
+/**
+ * Find the comment context governing the element at character `idx`: the
+ * nearest preceding section banner and the nearest preceding comment of any
+ * kind (the latter may attach a more specific description).
+ * @param {Array<object>} comments records from collectComments
+ * @param {number} idx character offset of the element
+ * @returns {{banner: ?object, nearest: ?object}}
+ */
 function contextAt(comments, idx) {
   let banner = null;
   let nearest = null;
@@ -189,6 +229,13 @@ function contextAt(comments, idx) {
   return { banner, nearest };
 }
 
+/**
+ * Derive a `{ group, description }` for the element at `idx` from its comment
+ * context, preferring an attached note over the governing banner's prose.
+ * @param {Array<object>} comments records from collectComments
+ * @param {number} idx character offset of the element
+ * @returns {{group: string, description: string}}
+ */
 function describe(comments, idx) {
   const { banner, nearest } = contextAt(comments, idx);
   const group = banner ? banner.title : '';
@@ -205,7 +252,13 @@ function describe(comments, idx) {
   return { group, description: truncate(description) };
 }
 
-// Descriptions are documentation hints, not prose dumps — keep them tight.
+/**
+ * Trim a description to a documentation-hint length, breaking on a word
+ * boundary and appending an ellipsis when truncated.
+ * @param {string} str input text
+ * @param {number} [max=280] maximum length
+ * @returns {string}
+ */
 function truncate(str, max = 280) {
   if (!str) return '';
   const clean = str.replace(/\s+/g, ' ').trim();
@@ -213,9 +266,14 @@ function truncate(str, max = 280) {
   return clean.slice(0, max - 1).replace(/\s+\S*$/, '') + '…';
 }
 
-// Read a custom-property value starting at its `:` index, honouring nested
-// parentheses so light-dark()/oklch()/clamp() values stay intact. (Identical
-// contract to gen-token-index.js / gen-token-reference.js.)
+/**
+ * Read a custom-property value starting at its `:` offset, honouring nested
+ * parentheses so light-dark()/oklch()/clamp() values stay intact. (Identical
+ * contract to gen-token-index.js / gen-token-reference.js.)
+ * @param {string} css source (comment-masked)
+ * @param {number} colonIdx offset of the `:` after the property name
+ * @returns {string} the normalised value text
+ */
 function readValue(css, colonIdx) {
   let depth = 0;
   let out = '';
@@ -229,7 +287,11 @@ function readValue(css, colonIdx) {
   return out.replace(/\s+/g, ' ').trim();
 }
 
-// First @layer this file lives in (e.g. "slashed.layout").
+/**
+ * Find the first `@layer` a file declares (e.g. "slashed.layout").
+ * @param {string} maskedCss comment-masked CSS
+ * @returns {?string} the layer name, or null
+ */
 function layerOf(maskedCss) {
   const m = /@layer\s+(slashed(?:\.[\w-]+)?)/.exec(maskedCss);
   return m ? m[1] : null;
@@ -238,6 +300,11 @@ function layerOf(maskedCss) {
 // ── Bundle membership ───────────────────────────────────────────────────────
 // Map each source file to the set of bundle tiers that ship it. Layered and
 // flat variants of the same tier collapse to one name (e.g. "essential").
+/**
+ * Build the file → bundle-tiers map from bundle.config.json (layered and flat
+ * variants of a tier collapse to one name) plus a `bundlesFor(file)` resolver.
+ * @returns {{bundlesFor: (file: string) => string[], allBundles: string[]}}
+ */
 function buildBundleMap() {
   const cfg = JSON.parse(readFile(BUNDLE_CONFIG));
   const fileToBundles = new Map();
@@ -268,12 +335,22 @@ function buildBundleMap() {
 // ── Token name → namespace ──────────────────────────────────────────────────
 // The second path segment of a token name is a useful machine-filterable
 // facet, e.g. --sf-color-primary → "color", --sf-space-m → "space".
+/**
+ * Extract a token's namespace facet — the second name segment, e.g.
+ * `--sf-color-primary` → "color", `--sf-space-m` → "space".
+ * @param {string} name token custom-property name
+ * @returns {?string}
+ */
 function namespaceOf(name) {
   const m = /^--sf-([a-z0-9]+)/.exec(name);
   return m ? m[1] : null;
 }
 
-// A token whose value is exactly one var(--sf-x) reference is an alias.
+/**
+ * Return the alias target when a value is exactly one `var(--sf-x)` reference.
+ * @param {string} value declared value
+ * @returns {?string} the referenced token name, or null
+ */
 function aliasTarget(value) {
   const m = /^var\(\s*(--sf-[\w-]+)\s*\)$/.exec(value || '');
   return m ? m[1] : null;
@@ -281,6 +358,10 @@ function aliasTarget(value) {
 
 // ── Token extraction ──────────────────────────────────────────────────────────
 
+/**
+ * Collect every `--sf-*` name declared in the legacy HSL fallback file.
+ * @returns {Set<string>}
+ */
 function fallbackNames() {
   const css = maskComments(readFile(FALLBACK_FILE));
   const names = new Set();
@@ -288,6 +369,12 @@ function fallbackNames() {
   return names;
 }
 
+/**
+ * Extract every token from one source file with its value, @property metadata
+ * and derived group/description. Last declaration wins per file for the value.
+ * @param {string} rel source file path
+ * @returns {Map<string, object>} name → partial token data
+ */
 function extractTokensFromFile(rel) {
   const original = readFile(rel);
   const masked   = maskComments(original);
@@ -337,6 +424,13 @@ function extractTokensFromFile(rel) {
   return rows;
 }
 
+/**
+ * Merge tokens across all TOKEN_FILES into finished entries (tier, namespace,
+ * value, alias, bundle membership, …). Redeclarations: last value wins, sources
+ * unioned.
+ * @param {(file: string) => string[]} bundlesFor bundle resolver
+ * @returns {Map<string, object>} name → token entry
+ */
 function buildTokenEntries(bundlesFor) {
   const fb = fallbackNames();
   const merged = new Map(); // name -> entry
@@ -363,6 +457,7 @@ function buildTokenEntries(bundlesFor) {
           syntax: data.syntax ?? null,
           inherits: data.inherits ?? null,
           hasFallback: fb.has(name),
+          fallbackOnly: false,
           optional: rel.startsWith('optional/'),
           layer: data.layer || null,
           sourceFiles: [rel],
@@ -386,9 +481,14 @@ function buildTokenEntries(bundlesFor) {
   return merged;
 }
 
-// Channel tokens that exist ONLY on the legacy HSL fallback tier
-// (--sf-{family}-h/s/l + resolved overrides). They are real override knobs on
-// older engines, so we surface them too — flagged so consumers can filter.
+/**
+ * Build entries for channel tokens that exist ONLY on the legacy HSL fallback
+ * tier (`--sf-{family}-h/s/l` + resolved overrides). They are real override
+ * knobs on older engines, so we surface them flagged `fallbackOnly: true`.
+ * @param {Set<string>} tokenNames names already present in the modern surface
+ * @param {(file: string) => string[]} bundlesFor bundle resolver
+ * @returns {Map<string, object>} name → fallback-only token entry
+ */
 function buildFallbackOnlyEntries(tokenNames, bundlesFor) {
   const original = readFile(FALLBACK_FILE);
   const masked   = maskComments(original);
@@ -432,6 +532,12 @@ function buildFallbackOnlyEntries(tokenNames, bundlesFor) {
 
 // ── Class extraction ──────────────────────────────────────────────────────────
 
+/**
+ * Extract prefixed (.sf-/.is-) and unprefixed framework classes from one file,
+ * with selector, kind, BEM-variant info and derived group/description.
+ * @param {string} rel source file path
+ * @returns {Map<string, object>} name → class entry
+ */
 function extractClassesFromFile(rel) {
   const original = readFile(rel);
   const masked   = maskStrings(maskComments(original));
@@ -453,6 +559,12 @@ function extractClassesFromFile(rel) {
     addClass(rows, name, m.index);
   }
 
+  /**
+   * Record a class on first occurrence (which defines its comment context).
+   * @param {Map<string, object>} map accumulator
+   * @param {string} name class name (no leading dot)
+   * @param {number} idx character offset of the match
+   */
   function addClass(map, name, idx) {
     if (map.has(name)) return; // first occurrence defines its context
     const prefix = name.startsWith('sf-') ? 'sf' : name.startsWith('is-') ? 'is' : '';
@@ -481,9 +593,19 @@ function extractClassesFromFile(rel) {
   return rows;
 }
 
-// Hoisted bundle resolver so addClass (a closure) can reach it.
+/**
+ * Hoisted bundle resolver so addClass (a closure) can reach it; assigned in
+ * buildClassEntries before extraction runs.
+ * @type {(file: string) => string[]}
+ */
 let bundlesFor_ = () => [];
 
+/**
+ * Merge classes across all CLASS_FILES into finished entries, unioning source
+ * files and bundle membership for classes declared in more than one file.
+ * @param {(file: string) => string[]} bundlesFor bundle resolver
+ * @returns {Map<string, object>} name → class entry
+ */
 function buildClassEntries(bundlesFor) {
   bundlesFor_ = bundlesFor;
   const merged = new Map(); // name -> entry (union of files)
@@ -506,12 +628,26 @@ function buildClassEntries(bundlesFor) {
 
 // ── Assemble ────────────────────────────────────────────────────────────────
 
+/**
+ * Finalise an entry for output: convert its `bundles` Set into a stably ordered
+ * array.
+ * @param {object} entry in-progress entry (bundles is a Set)
+ * @param {(b: string) => number} bundleOrderRank ordering key
+ * @returns {object} output-ready entry
+ */
 function finalizeEntry(entry, bundleOrderRank) {
   const out = { ...entry };
   out.bundles = [...entry.bundles].sort((a, b) => bundleOrderRank(a) - bundleOrderRank(b));
   return out;
 }
 
+/**
+ * Count entries grouped by the value of one key, returned as a key-sorted
+ * object (used for the `_meta.counts` breakdowns).
+ * @param {Array<object>} entries rows
+ * @param {string} key field to group by
+ * @returns {Object<string, number>}
+ */
 function tally(entries, key) {
   const counts = {};
   for (const e of entries) {
@@ -527,10 +663,20 @@ function tally(entries, key) {
 // can never drift. Tokens and classes are split (different columns), each
 // grouped by category and alphabetised within a group.
 
-// Escape a value for a Markdown table cell: backslash first (so we don't
-// re-escape our own escapes), then the pipe column-separator.
+/**
+ * Escape a value for a Markdown table cell: backslash first (so we don't
+ * re-escape our own escapes), then the pipe column-separator.
+ * @param {*} v cell value
+ * @returns {string} escaped text
+ */
 const escCell = v => String(v ?? '').replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
 
+/**
+ * Group entries by their `category` field, returned as category-sorted
+ * `[category, entries]` pairs for the Markdown tables.
+ * @param {Array<object>} entries rows
+ * @returns {Array<[string, object[]]>}
+ */
 function groupByCategory(entries) {
   const map = new Map();
   for (const e of entries) {
@@ -540,6 +686,12 @@ function groupByCategory(entries) {
   return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 }
 
+/**
+ * Render the human-readable Markdown companion from the same assembled data as
+ * the JSON, so the two views can never drift.
+ * @param {object} data assembled entries + count breakdowns
+ * @returns {string} Markdown document
+ */
 function buildMarkdown({ entries, tokenEntries, classEntries, tierCounts, typeCounts }) {
   let md = `# API index
 
@@ -588,6 +740,10 @@ and a short description. The machine-readable companion (with all columns) is
   return md;
 }
 
+/**
+ * Entry point: assemble token + class entries, build counts and the column
+ * schema, and write docs/api-index.json and docs/api-index.md.
+ */
 function main() {
   const { bundlesFor, allBundles } = buildBundleMap();
   const rank = new Map(allBundles.map((b, i) => [b, i]));
@@ -638,7 +794,7 @@ function main() {
     syntax:      'TOKEN: @property syntax descriptor (e.g. <color>), else null.',
     inherits:    'TOKEN: @property inherits flag, else null.',
     hasFallback: 'TOKEN: a legacy HSL fallback exists in core/tokens.color-fallbacks.css.',
-    fallbackOnly:'TOKEN: exists only on the legacy HSL fallback tier (channel/override knob).',
+    fallbackOnly:'TOKEN: true only when the token exists solely on the legacy HSL fallback tier (channel/override knob); false for every normal token.',
     // class-only
     selector:    'CLASS: the CSS selector form (.name).',
     prefix:      "CLASS: 'sf' | 'is' | '' (unprefixed).",
