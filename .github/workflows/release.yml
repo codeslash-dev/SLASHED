@@ -50,6 +50,28 @@ jobs:
           else
             echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
           fi
+      - name: Verify dist headers match the release tag
+        # Guard against silent mis-stamping: every built bundle header must read
+        # the version being released. Fails the release if any header drifts.
+        run: |
+          EXPECTED="${{ steps.version.outputs.tag }}"
+          EXPECTED="${EXPECTED#v}"
+          fail=0
+          for f in dist/*.css; do
+            # Minified bundles drop the non-license comment, so only the
+            # unminified bundles carry the stamped header — check those.
+            case "$f" in *.min.css) continue;; esac
+            header="$(head -1 "$f")"
+            if ! printf '%s' "$header" | grep -q "SLASHED v${EXPECTED} "; then
+              echo "::error file=${f}::expected 'SLASHED v${EXPECTED}', got: ${header}"
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "Built dist headers do not match release tag v${EXPECTED}." >&2
+            exit 1
+          fi
+          echo "All dist headers correctly stamped v${EXPECTED}."
       - name: Extract changelog for this version
         id: changelog
         run: |

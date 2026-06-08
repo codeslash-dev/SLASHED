@@ -3,11 +3,46 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
+import { execSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const _require = createRequire(import.meta.url);
 const ROOT = path.resolve(import.meta.dirname, '..');
 const CONFIG_PATH = path.join(ROOT, 'bundle.config.json');
+
+// Version stamped into every bundle header. Tag-authoritative: when building
+// at a release tag — a CI tag build (GITHUB_REF=refs/tags/vX.Y.Z) or a local
+// checkout sitting exactly on a tag — the tag wins. This guarantees Release
+// assets and tagged-source builds are stamped correctly even if package.json
+// on that commit lags behind (the historical cause of mis-stamped artifacts).
+// Ordinary branch builds fall back to package.json.
+function resolveVersion() {
+  const pkgVersion = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'),
+  ).version;
+
+  const ref = process.env.GITHUB_REF || '';
+  const refName = process.env.GITHUB_REF_NAME || '';
+  if (ref.startsWith('refs/tags/') && /^v?\d+\.\d+\.\d+/.test(refName)) {
+    return refName.replace(/^v/, '');
+  }
+
+  try {
+    const tag = execSync('git describe --tags --exact-match', {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+      .toString()
+      .trim();
+    if (/^v?\d+\.\d+\.\d+/.test(tag)) return tag.replace(/^v/, '');
+  } catch {
+    /* not building at a tag — fall back to package.json */
+  }
+
+  return pkgVersion;
+}
+
+const VERSION = resolveVersion();
 
 // lightningcss is a maintainer-only dev dependency. If it's missing (e.g. a
 // consumer cloned without dev deps), skip minification rather than fail.
@@ -122,9 +157,8 @@ function stripLayerWrappers(content, fileLabel) {
 
 function buildOne({ files, output, flat = false }) {
   const outputPath = resolveInsideRoot(output);
-  const { version } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const flatTag = flat ? ' (flat)' : '';
-  const header = `/* SLASHED v${version} — ${path.basename(output)}${flatTag} */\n`;
+  const header = `/* SLASHED v${VERSION} — ${path.basename(output)}${flatTag} */\n`;
 
   const parts = files.map((file) => {
     const filePath = resolveInsideRoot(file);
