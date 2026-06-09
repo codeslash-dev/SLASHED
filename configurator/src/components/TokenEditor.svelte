@@ -53,12 +53,14 @@
           <button
             class="font__seg-btn"
             class:font__seg-btn--on={fontSource === 'system'}
+            aria-pressed={fontSource === 'system'}
             onclick={() => (userSource = 'system')}
             type="button"
           >System</button>
           <button
             class="font__seg-btn"
             class:font__seg-btn--on={fontSource === 'manual'}
+            aria-pressed={fontSource === 'manual'}
             onclick={() => (userSource = 'manual')}
             type="button"
           >Manual</button>

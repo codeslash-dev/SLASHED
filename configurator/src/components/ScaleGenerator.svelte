@@ -70,8 +70,8 @@
 
   <section class="card">
     <div class="seg" role="group" aria-label="Scale kind">
-      <button class="seg__btn" class:seg__btn--on={kind === 'type'} onclick={() => switchKind('type')}>Type</button>
-      <button class="seg__btn" class:seg__btn--on={kind === 'space'} onclick={() => switchKind('space')}>Space</button>
+      <button class="seg__btn" class:seg__btn--on={kind === 'type'} aria-pressed={kind === 'type'} onclick={() => switchKind('type')}>Type</button>
+      <button class="seg__btn" class:seg__btn--on={kind === 'space'} aria-pressed={kind === 'space'} onclick={() => switchKind('space')}>Space</button>
     </div>
 
     <div class="controls">
