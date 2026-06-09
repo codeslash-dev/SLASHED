@@ -1,0 +1,71 @@
+name: Deploy configurator to Pages
+
+# Builds the standalone configurator (configurator/) and publishes its static
+# dist/ to GitHub Pages. The app's `prebuild` re-syncs its token catalogue from
+# docs/api-index.json, so each deploy reflects the framework API at that commit.
+#
+# Runs on merges to main that touch the app or the API index it is generated
+# from, and on demand via the Actions tab.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'configurator/**'
+      - 'docs/api-index.json'
+      - '.github/workflows/deploy-configurator.yml'
+  workflow_dispatch:
+
+# Least-privilege by default; the deploy job widens to the scopes Pages needs.
+permissions:
+  contents: read
+
+# Pages allows only one concurrent deployment. Don't cancel an in-flight
+# deploy (that can leave the environment half-updated); let it finish and
+# queue the newest run after it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build configurator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: configurator/package-lock.json
+      - name: Configure Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d  # v6
+      - name: Install dependencies
+        working-directory: configurator
+        run: npm ci
+      - name: Build (prebuild re-syncs the token catalogue)
+        working-directory: configurator
+        run: npm run build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5
+        with:
+          path: configurator/dist
+
+  deploy:
+    name: Deploy to Pages
+    needs: build
+    runs-on: ubuntu-latest
+    # Scopes required by the Pages deployment: an OIDC token (id-token) and
+    # write access to the Pages environment.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5

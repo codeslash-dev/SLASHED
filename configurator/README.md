@@ -57,6 +57,14 @@ The build in `dist/` is fully self-contained and uses relative asset paths
 (`base: './'`), so it can be hosted from any sub-path — a GitHub Pages project
 site, a CDN folder, or even opened over `file://`.
 
+## Hosting on GitHub Pages
+
+`.github/workflows/deploy-configurator.yml` builds and publishes this app to
+GitHub Pages automatically on merges to `main` that touch `configurator/**` or
+`docs/api-index.json` (and on demand via the Actions tab). Enable it once under
+**Settings → Pages → Build and deployment → Source: GitHub Actions**; the site
+then serves from `https://<owner>.github.io/<repo>/`.
+
 ## Manual re-sync
 
 ```bash
