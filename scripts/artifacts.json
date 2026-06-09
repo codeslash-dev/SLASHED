@@ -9,7 +9,8 @@
       "docs/token-index.md",
       "docs/token-index.json",
       "docs/api-index.json",
-      "docs/api-index.md"
+      "docs/api-index.md",
+      "configurator/src/data/api-index.generated.json"
     ]
   },
   {

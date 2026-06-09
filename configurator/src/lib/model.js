@@ -97,7 +97,7 @@ export function groupTokens(tokens) {
     const groupList = [];
     let count = 0;
     for (const [name, list] of groups) {
-      groupList.push({ name, tokens: list });
+      groupList.push({ name, tokens: list, description: list[0]?.description || '' });
       count += list.length;
     }
     groupList.sort((a, b) => a.name.localeCompare(b.name));
@@ -136,6 +136,6 @@ export const CATEGORY_ORDER = [
  */
 export function matchesQuery(token, query) {
   if (!query) return true;
-  const haystack = `${token.name} ${token.description} ${token.group} ${token.value} ${token.namespace}`.toLowerCase();
+  const haystack = `${token.name} ${token.note} ${token.description} ${token.group} ${token.value} ${token.namespace}`.toLowerCase();
   return haystack.includes(query);
 }
