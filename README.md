@@ -158,7 +158,7 @@ generative scales stop computing.
 | `light-dark()` | every resolved colour token | 123 | 17.5 | 120 |
 | `@property` with `inherits: true` | animatable brand/status colours, `initial` reset | 85 | 16.4 | 128 |
 | `oklch(from …)` relative colour | hover/tint/shade/dark derivation | 119 | 16.4 | 128 |
-| `pow()` math function | generative fluid type/space scales (ratio + viewport) | 125 | 15.4 | 118 |
+| `pow()` math function | generative fluid type/space scales (ratio + viewport) | 125 | 17.5 | 118 |
 
 The effective floor is the maximum per engine. Cascade layers (`@layer`) are
 foundational — below cascade-layer support (~2022) the architecture collapses.
