@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current version: **0.5.24**
+Current version: **0.5.26**
 
 ## Before v1.0
 
