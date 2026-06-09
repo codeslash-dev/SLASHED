@@ -123,7 +123,6 @@
     "--sf-color-link--disabled": "Disabled link color (low contrast, no interaction).",
     "--sf-link-underline-offset": "Vertical offset of the link underline from the text baseline.",
     "--sf-link-underline-thickness": "Stroke width of the link underline.",
-    "--sf-color-dim": "Semi-transparent backdrop overlay for modals and drawers.",
     "--sf-color-black": "Absolute black reference value.",
     "--sf-color-white": "Absolute white reference value.",
     "--sf-color-selection-text": "Text color inside browser text selections.",
