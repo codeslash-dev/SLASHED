@@ -5,10 +5,8 @@
 // Replaces the first "## Unreleased" line with "## [X.Y.Z] - YYYY-MM-DD".
 // If no Unreleased section exists the script exits cleanly (nothing to do).
 
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 const tag = process.argv[2];
 if (!tag) {
@@ -18,7 +16,7 @@ if (!tag) {
 
 const version = tag.replace(/^v/, '');
 const date = new Date().toISOString().slice(0, 10);
-const changelogPath = path.resolve(__dirname, '..', 'CHANGELOG.md');
+const changelogPath = path.resolve(import.meta.dirname, '..', 'CHANGELOG.md');
 
 let content = fs.readFileSync(changelogPath, 'utf8');
 
