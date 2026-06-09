@@ -14,6 +14,12 @@
     ]
   },
   {
+    "name": "configurator api sync",
+    "srcPrefixes": ["docs/token-annotations.json"],
+    "buildCmd": "npm run configurator:sync",
+    "outputs": ["configurator/src/data/api-index.generated.json"]
+  },
+  {
     "name": "sizes-extended tokens",
     "srcPrefixes": ["scripts/gen-sizes-extended.js"],
     "buildCmd": "node scripts/gen-sizes-extended.js > optional/tokens.sizes-extended.css",
