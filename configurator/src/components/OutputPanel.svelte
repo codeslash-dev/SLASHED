@@ -68,7 +68,7 @@
             class="out__seg-btn"
             class:out__seg-btn--on={ui.outputMode === 'layer'}
             onclick={() => (ui.outputMode = 'layer')}
-            title="Standard — wraps overrides in @layer slashed.overrides { :root {…} }. Use with any project that loads SLASHED normally; cascade layers ensure these win without !important."
+            title="Standard — wraps overrides in @layer slashed.overrides &lbrace; :root &lbrace;…&rbrace; &rbrace;. Use with any project that loads SLASHED normally; cascade layers ensure these win without !important."
           >
             <span class="out__seg-syntax">@layer</span>
             <span class="out__seg-hint">cascade layers</span>
@@ -77,7 +77,7 @@
             class="out__seg-btn"
             class:out__seg-btn--on={ui.outputMode === 'root'}
             onclick={() => (ui.outputMode = 'root')}
-            title="Legacy / no-layers — outputs a bare :root {…} block. Use when your project does not support CSS cascade layers (older toolchains, WordPress, some CMSes). Declarations outside @layer always beat layered tokens."
+            title="Legacy / no-layers — outputs a bare :root &lbrace;…&rbrace; block. Use when your project does not support CSS cascade layers (older toolchains, WordPress, some CMSes). Declarations outside @layer always beat layered tokens."
           >
             <span class="out__seg-syntax">:root</span>
             <span class="out__seg-hint">no layers</span>

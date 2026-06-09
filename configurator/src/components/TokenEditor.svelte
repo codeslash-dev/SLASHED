@@ -1,12 +1,23 @@
 <script>
   import { overrides, setOverride } from '../lib/store.svelte.js';
   import { inferControl } from '../lib/model.js';
+  import { SYSTEM_STACKS, detectSystemStack, isFontFamilyToken } from '../lib/fonts.js';
   import OklchPicker from './OklchPicker.svelte';
 
   let { token } = $props();
 
   const meta = $derived(inferControl(token));
   const current = $derived(overrides[token.name] ?? '');
+
+  // ── Font-family tokens get a System-stack picker + live preview ─────────
+  const isFont = $derived(isFontFamilyToken(token));
+  const effective = $derived(current || token.value || '');
+  // null = auto-detect from the value; a string is the user's explicit choice.
+  let userSource = $state(null);
+  const fontSource = $derived(userSource ?? (detectSystemStack(effective) ? 'system' : 'manual'));
+  function onSystemPick(e) {
+    setOverride(token.name, e.currentTarget.value);
+  }
 
   /** @param {Event} e */
   function onInput(e) {
@@ -39,8 +50,55 @@
   }
 </script>
 
-<div class="editor" class:editor--color={meta.control === 'color'}>
-  {#if meta.control === 'color'}
+<div class="editor" class:editor--color={meta.control === 'color'} class:editor--font={isFont}>
+  {#if isFont}
+    <div class="font">
+      <div class="font__top">
+        <div class="font__seg" role="group" aria-label="Font source">
+          <button
+            class="font__seg-btn"
+            class:font__seg-btn--on={fontSource === 'system'}
+            aria-pressed={fontSource === 'system'}
+            onclick={() => (userSource = 'system')}
+            type="button"
+          >System</button>
+          <button
+            class="font__seg-btn"
+            class:font__seg-btn--on={fontSource === 'manual'}
+            aria-pressed={fontSource === 'manual'}
+            onclick={() => (userSource = 'manual')}
+            type="button"
+          >Manual</button>
+        </div>
+        {#if fontSource === 'system'}
+          <select
+            class="font__select"
+            value={detectSystemStack(effective)?.value ?? ''}
+            onchange={onSystemPick}
+            aria-label="{token.name} system stack"
+          >
+            <option value="" disabled>Choose a system stack…</option>
+            {#each SYSTEM_STACKS as s (s.value)}
+              <option value={s.value}>{s.label}</option>
+            {/each}
+          </select>
+        {:else}
+          <input
+            class="editor__text editor__text--mono"
+            type="text"
+            spellcheck="false"
+            value={current}
+            placeholder={token.value}
+            oninput={onInput}
+            aria-label="{token.name} value"
+          />
+        {/if}
+      </div>
+      {#if effective}
+        <span class="font__preview" style="font-family: {effective}">Ag — The quick brown fox jumps</span>
+      {/if}
+    </div>
+  {:else if meta.control === 'color'}
     <button
       class="editor__swatch"
       bind:this={swatchEl}
@@ -110,6 +168,58 @@
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+  .editor--font {
+    align-items: stretch;
+  }
+  .font {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .font__top {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .font__seg {
+    display: inline-flex;
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .font__seg-btn {
+    background: var(--cfg-surface-2);
+    color: var(--cfg-text-muted);
+    border: none;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  .font__seg-btn--on {
+    background: var(--cfg-accent-strong);
+    color: #fff;
+  }
+  .font__select {
+    flex: 1;
+    min-width: 0;
+    background: var(--cfg-bg);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    color: var(--cfg-text);
+    padding: 6px 9px;
+    font-size: 12px;
+  }
+  .font__preview {
+    font-size: 15px;
+    color: var(--cfg-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 2px 0;
+    border-top: 1px dashed var(--cfg-border);
+    padding-top: 6px;
   }
   .editor__text {
     flex: 1;
