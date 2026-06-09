@@ -26,6 +26,8 @@ export const storage = $state({ ok: true });
 
 /** UI state: search, active category, tier visibility, preview theme. */
 export const ui = $state({
+  /** Active top-level view: 'tokens' | 'a11y' | 'scales'. */
+  view: 'tokens',
   query: '',
   activeCategory: '',
   showAdvanced: true,
