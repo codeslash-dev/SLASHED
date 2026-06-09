@@ -5,10 +5,6 @@
   import { sync } from '../lib/model.js';
 
   let { showPreview = $bindable(true) } = $props();
-
-  const generated = $derived(
-    sync.generatedAt ? new Date(sync.generatedAt).toLocaleString() : ''
-  );
 </script>
 
 <header class="hdr">
@@ -24,7 +20,10 @@
 
   <div class="hdr__meta">
     {#if sync.frameworkVersion}
-      <span class="hdr__pill" title="Synced from {sync.source} on {generated}">
+      <span
+        class="hdr__pill"
+        title="Synced from {sync.source} (catalogue {sync.tokensHash})"
+      >
         framework v{sync.frameworkVersion}
       </span>
     {/if}

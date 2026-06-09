@@ -10,6 +10,27 @@
 import { sync } from './model.js';
 
 /**
+ * Sanitize a single declaration value so it cannot break out of its CSS
+ * declaration. A legitimate custom-property value never needs a top-level
+ * `;`, `{`, or `}`, nor comment delimiters — stripping them prevents a pasted
+ * or fat-fingered value like `0; } body { display:none } /*` from corrupting
+ * the generated `:root {}` block or the live preview, and keeps generate/parse
+ * a faithful round-trip.
+ *
+ * @param {string} value raw value
+ * @returns {string} value safe to interpolate into a declaration
+ */
+export function sanitizeValue(value) {
+  if (value == null) return '';
+  return String(value)
+    .replace(/\/\*[\s\S]*?\*\//g, ' ') // drop comment blocks
+    .replace(/[;{}]/g, ' ') // strip structural characters
+    .replace(/[/*]{2,}/g, ' ') // neutralise stray comment delimiters
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
  * Build the override CSS string from an override map.
  *
  * @param {Record<string,string>} overrides token name -> value
@@ -23,7 +44,7 @@ export function generateCSS(overrides, opts = {}) {
   const names = Object.keys(overrides).sort((a, b) => a.localeCompare(b));
   if (names.length === 0) return '';
 
-  const decls = names.map((n) => `${n}: ${overrides[n]};`);
+  const decls = names.map((n) => `${n}: ${sanitizeValue(overrides[n])};`);
 
   const indent = mode === 'layer' ? '\t\t' : '\t';
   const body = decls.map((d) => `${indent}${d}`).join('\n');
@@ -70,12 +91,22 @@ export function parseCSS(text) {
     const name = m[1];
     let i = m.index + m[0].length;
     let depth = 0;
+    let quote = ''; // current open quote char ('"' or "'"), or '' when outside
     let value = '';
     for (; i < css.length; i++) {
       const ch = css[i];
-      if (ch === '(') depth++;
-      else if (ch === ')') depth--;
-      else if ((ch === ';' || ch === '}') && depth === 0) break;
+      if (quote) {
+        // Inside a string: only the matching unescaped quote closes it.
+        if (ch === quote && css[i - 1] !== '\\') quote = '';
+      } else if (ch === '"' || ch === "'") {
+        quote = ch;
+      } else if (ch === '(') {
+        depth++;
+      } else if (ch === ')') {
+        depth--;
+      } else if ((ch === ';' || ch === '}') && depth === 0) {
+        break;
+      }
       value += ch;
     }
     const trimmed = value.replace(/\s+/g, ' ').trim();

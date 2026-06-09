@@ -6,6 +6,7 @@
  * derived CSS output all stay in sync without prop-drilling or an event bus.
  */
 import { allTokens, tokenByName } from './model.js';
+import { sanitizeValue } from './css.js';
 
 const STORAGE_KEY = 'slashed-configurator/overrides/v1';
 
@@ -15,6 +16,13 @@ const STORAGE_KEY = 'slashed-configurator/overrides/v1';
  * @type {Record<string, string>}
  */
 export const overrides = $state(loadOverrides());
+
+/**
+ * Persistence health. `ok` flips to false if a localStorage write fails
+ * (quota exceeded, private mode, blocked storage) so the UI can warn the user
+ * their work isn't being saved.
+ */
+export const storage = $state({ ok: true });
 
 /** UI state: search, active category, tier visibility, preview theme. */
 export const ui = $state({
@@ -42,7 +50,10 @@ function loadOverrides() {
       // Drop keys that are no longer in the (possibly newly-synced) catalogue.
       const clean = {};
       for (const [k, v] of Object.entries(parsed)) {
-        if (tokenByName.has(k) && typeof v === 'string' && v !== '') clean[k] = v;
+        if (tokenByName.has(k) && typeof v === 'string') {
+          const safe = sanitizeValue(v);
+          if (safe !== '') clean[k] = safe;
+        }
       }
       return clean;
     }
@@ -60,8 +71,11 @@ function persist() {
   if (typeof localStorage === 'undefined') return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+    storage.ok = true;
   } catch {
-    /* ignore quota / privacy-mode errors */
+    // Quota / privacy-mode / blocked storage: keep working in-memory but let
+    // the UI surface that persistence is off.
+    storage.ok = false;
   }
 }
 
@@ -72,12 +86,11 @@ function persist() {
  * @param {string} value new value
  */
 export function setOverride(name, value) {
-  const isEmpty =
-    value === null || value === undefined || String(value).trim() === '';
-  if (isEmpty) {
+  const safe = sanitizeValue(value);
+  if (safe === '') {
     delete overrides[name];
   } else {
-    overrides[name] = String(value);
+    overrides[name] = safe;
   }
   persist();
 }
@@ -108,8 +121,9 @@ export function replaceOverrides(map) {
   let applied = 0;
   const skipped = [];
   for (const [name, value] of Object.entries(map || {})) {
-    if (tokenByName.has(name) && String(value).trim() !== '') {
-      overrides[name] = String(value);
+    const safe = sanitizeValue(value);
+    if (tokenByName.has(name) && safe !== '') {
+      overrides[name] = safe;
       applied += 1;
     } else {
       skipped.push(name);

@@ -4,7 +4,7 @@
    * Mutates the shared `ui` store directly; the parent re-derives the visible
    * token set from it.
    */
-  import { ui, overrides } from '../lib/store.svelte.js';
+  import { ui, overrides, tokenCount } from '../lib/store.svelte.js';
 
   let { categories } = $props();
 
@@ -15,7 +15,7 @@
   <div class="sidebar__search">
     <input
       type="search"
-      placeholder="Search {`${categories.reduce((n, c) => n + c.count, 0)}`} tokens…"
+      placeholder="Search {tokenCount} tokens…"
       bind:value={ui.query}
       spellcheck="false"
       aria-label="Search tokens"

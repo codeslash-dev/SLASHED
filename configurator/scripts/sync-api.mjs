@@ -28,6 +28,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const HERE = import.meta.dirname;
 const CONFIGURATOR_ROOT = path.resolve(HERE, '..');
@@ -83,6 +84,34 @@ function projectToken(e) {
   };
 }
 
+/**
+ * Read and parse the api-index JSON, failing with the same actionable message
+ * as the missing-file case when the contents are malformed (rather than
+ * dumping a raw stack trace).
+ * @param {string} file
+ * @returns {object}
+ */
+function readIndex(file) {
+  let text;
+  try {
+    text = fs.readFileSync(file, 'utf8');
+  } catch (err) {
+    console.error(
+      `[configurator:sync] Could not read ${file}: ${err.message}`
+    );
+    process.exit(1);
+  }
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    console.error(
+      `[configurator:sync] ${file} is not valid JSON (${err.message}).\n` +
+        `Re-generate it with \`npm run docs:api\` in the framework root.`
+    );
+    process.exit(1);
+  }
+}
+
 function main() {
   if (!fs.existsSync(SOURCE)) {
     console.error(
@@ -93,7 +122,7 @@ function main() {
     process.exit(1);
   }
 
-  const raw = JSON.parse(fs.readFileSync(SOURCE, 'utf8'));
+  const raw = readIndex(SOURCE);
   const entries = Array.isArray(raw.entries) ? raw.entries : [];
 
   const tokens = entries
@@ -101,6 +130,18 @@ function main() {
     .map(projectToken)
     // Stable alphabetical order for deterministic diffs.
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  // A zero (or collapsed) token set almost always means the upstream schema
+  // changed (e.g. `entries` renamed) rather than a framework with no tokens.
+  // Fail loudly so the break surfaces at build time, not in production.
+  if (tokens.length === 0) {
+    console.error(
+      `[configurator:sync] No \`type: "token"\` entries found in ${SOURCE}.\n` +
+        `The api-index schema may have changed — refusing to write an empty ` +
+        `catalogue.`
+    );
+    process.exit(1);
+  }
 
   const byTier = {};
   const byCategory = {};
@@ -113,8 +154,15 @@ function main() {
     _sync: {
       generatedBy: 'configurator/scripts/sync-api.mjs',
       source: path.relative(FRAMEWORK_ROOT, SOURCE).split(path.sep).join('/'),
-      generatedAt: new Date().toISOString(),
       frameworkVersion: readFrameworkVersion(),
+      // Content hash of the projected catalogue. Unlike a wall-clock stamp it
+      // only changes when the tokens themselves change, so re-running the sync
+      // produces no diff unless the framework API actually moved.
+      tokensHash: crypto
+        .createHash('sha256')
+        .update(JSON.stringify(tokens))
+        .digest('hex')
+        .slice(0, 12),
       // Pass through the upstream bundle list so the UI can offer bundle
       // filtering without re-deriving it.
       bundles: raw?._meta?.bundles || [],

@@ -4,7 +4,7 @@
    * output-framing toggle, and a paste-to-import box that round-trips an
    * existing override stylesheet back into the editor.
    */
-  import { overrides, ui, replaceOverrides, clearAll } from '../lib/store.svelte.js';
+  import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
   import { sync } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
 
@@ -99,6 +99,13 @@
     <p class="out__msg">{importMsg}</p>
   {/if}
 
+  {#if !storage.ok}
+    <p class="out__msg out__msg--warn">
+      ⚠ Couldn't save to this browser's storage — your overrides won't persist
+      across reloads. Download or copy the CSS to keep them.
+    </p>
+  {/if}
+
   <pre class="out__code"><code>{css || '/* No overrides yet — edit a token to generate CSS. */'}</code></pre>
 
   <footer class="out__foot">
@@ -180,6 +187,9 @@
     padding: 0 16px 8px;
     color: var(--cfg-text-muted);
     font-size: 12px;
+  }
+  .out__msg--warn {
+    color: var(--cfg-warn);
   }
   .out__code {
     margin: 0;
