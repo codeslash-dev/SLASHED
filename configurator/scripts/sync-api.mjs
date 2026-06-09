@@ -40,6 +40,8 @@ const SOURCE =
   process.argv[2] ||
   path.join(FRAMEWORK_ROOT, 'docs', 'api-index.json');
 
+const ANNOTATIONS_FILE = path.join(FRAMEWORK_ROOT, 'docs', 'token-annotations.json');
+
 const OUT_DIR = path.join(CONFIGURATOR_ROOT, 'src', 'data');
 const OUT = path.join(OUT_DIR, 'api-index.generated.json');
 
@@ -60,19 +62,38 @@ function readFrameworkVersion() {
 }
 
 /**
+ * Read the optional token-annotations.json overlay. Returns null if the file
+ * is missing or unreadable (annotations are optional, not required).
+ * @returns {{ _groups?: object, tokens?: object } | null}
+ */
+function readAnnotations() {
+  if (!fs.existsSync(ANNOTATIONS_FILE)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(ANNOTATIONS_FILE, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
+/**
  * The configurator only needs a subset of each token's columns. Project the
  * rich api-index row down to that subset so the baked-in JSON stays small.
+ *
  * @param {object} e api-index token entry
+ * @param {object} notes map of token name → per-token note from annotations
+ * @param {object} groupDescs map of "category | group" → group description override
  * @returns {object} configurator token row
  */
-function projectToken(e) {
+function projectToken(e, notes, groupDescs) {
+  const groupKey = `${e.category || 'Other'} | ${e.group || ''}`;
   return {
     name: e.name,
     tier: e.tier,
     namespace: e.namespace || null,
     category: e.category || 'Other',
     group: e.group || '',
-    description: e.description || '',
+    description: groupDescs[groupKey] || e.description || '',
+    note: notes[e.name] || '',
     value: e.value ?? null,
     aliasOf: e.aliasOf ?? null,
     registered: !!e.registered,
@@ -125,9 +146,13 @@ function main() {
   const raw = readIndex(SOURCE);
   const entries = Array.isArray(raw.entries) ? raw.entries : [];
 
+  const annotations = readAnnotations();
+  const notes = annotations?.tokens ?? {};
+  const groupDescs = annotations?._groups ?? {};
+
   const tokens = entries
     .filter((e) => e && e.type === 'token')
-    .map(projectToken)
+    .map((e) => projectToken(e, notes, groupDescs))
     // Stable alphabetical order for deterministic diffs.
     .sort((a, b) => a.name.localeCompare(b.name));
 

@@ -5,7 +5,7 @@
    */
   import TokenRow from './TokenRow.svelte';
 
-  let { name, tokens, showCategory = false, category = '' } = $props();
+  let { name, tokens, showCategory = false, category = '', description = '' } = $props();
   let open = $state(true);
 </script>
 
@@ -17,6 +17,9 @@
     <span class="group__count">{tokens.length}</span>
   </button>
   {#if open}
+    {#if description}
+      <p class="group__desc">{description}</p>
+    {/if}
     <div class="group__rows">
       {#each tokens as token (token.name)}
         <TokenRow {token} />
@@ -67,5 +70,13 @@
     font-family: var(--cfg-mono);
     font-size: 11px;
     color: var(--cfg-text-faint);
+  }
+  .group__desc {
+    margin: 0;
+    padding: 8px 14px 10px;
+    font-size: 12px;
+    color: var(--cfg-text-muted);
+    border-bottom: 1px solid var(--cfg-border);
+    background: var(--cfg-surface);
   }
 </style>

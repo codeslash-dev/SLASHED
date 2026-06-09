@@ -69,6 +69,7 @@
               <TokenGroup
                 name={g.name}
                 tokens={g.tokens}
+                description={g.description}
                 showCategory={true}
                 category={cat.category}
               />
@@ -77,7 +78,7 @@
         {:else if activeCat}
           <h2 class="list__heading">{activeCat.category}</h2>
           {#each activeCat.groups as g (g.name)}
-            <TokenGroup name={g.name} tokens={g.tokens} />
+            <TokenGroup name={g.name} tokens={g.tokens} description={g.description} />
           {/each}
         {/if}
       </main>

@@ -33,8 +33,8 @@
         <span class="row__opt" title="Ships only in optimal+ bundles (optional/)">optional</span>
       {/if}
     </div>
-    {#if token.description}
-      <p class="row__desc">{token.description}</p>
+    {#if token.note}
+      <p class="row__desc">{token.note}</p>
     {/if}
   </div>
 
@@ -55,7 +55,7 @@
 <style>
   .row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 500px);
     gap: 16px;
     align-items: center;
     padding: 12px 16px;

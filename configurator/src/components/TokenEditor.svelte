@@ -1,18 +1,12 @@
 <script>
-  /**
-   * The input control for a single token, chosen from the token's inferred
-   * control type. Reads/writes through the override store: the displayed value
-   * is the override when set, otherwise empty (with the framework default shown
-   * as a placeholder so the user always sees the baseline).
-   */
   import { overrides, setOverride } from '../lib/store.svelte.js';
   import { inferControl } from '../lib/model.js';
   import { SYSTEM_STACKS, detectSystemStack, isFontFamilyToken } from '../lib/fonts.js';
+  import OklchPicker from './OklchPicker.svelte';
 
   let { token } = $props();
 
   const meta = $derived(inferControl(token));
-  // Current edit value: the override if present, else '' (placeholder shows default).
   const current = $derived(overrides[token.name] ?? '');
 
   // ── Font-family tokens get a System-stack picker + live preview ─────────
@@ -30,19 +24,30 @@
     setOverride(token.name, e.currentTarget.value);
   }
 
-  // Native color picker emits #rrggbb; only meaningful when the default is hex.
-  function onPick(e) {
-    setOverride(token.name, e.currentTarget.value);
+  // ── Color picker ──────────────────────────────────────────────────────────
+  let pickerOpen = $state(false);
+  let pickerTop = $state(0);
+  let pickerLeft = $state(0);
+  let swatchEl = $state(null);
+
+  function togglePicker() {
+    if (pickerOpen) {
+      pickerOpen = false;
+      return;
+    }
+    if (swatchEl) {
+      const r = swatchEl.getBoundingClientRect();
+      const pickerHeight = 240;
+      const spaceBelow = window.innerHeight - r.bottom;
+      pickerTop = spaceBelow >= pickerHeight ? r.bottom + 6 : r.top - pickerHeight - 6;
+      pickerLeft = Math.min(r.left, window.innerWidth - 296);
+    }
+    pickerOpen = true;
   }
 
-  // A best-effort hex seed for the native picker when nothing is set yet.
-  const pickerValue = $derived(
-    /^#([0-9a-fA-F]{6})$/.test(current)
-      ? current
-      : /^#([0-9a-fA-F]{6})$/.test(token.value || '')
-        ? token.value
-        : '#888888'
-  );
+  function onPick(v) {
+    setOverride(token.name, v);
+  }
 </script>
 
 <div class="editor" class:editor--color={meta.control === 'color'} class:editor--font={isFont}>
@@ -94,23 +99,27 @@
       {/if}
     </div>
   {:else if meta.control === 'color'}
-    {#if meta.hexable}
-      <input
-        class="editor__swatch-input"
-        type="color"
-        value={pickerValue}
-        oninput={onPick}
-        title="Pick a color"
-        aria-label="{token.name} color picker"
+    <button
+      class="editor__swatch"
+      bind:this={swatchEl}
+      style:--probe={current || token.value}
+      onclick={togglePicker}
+      title="Open color picker"
+      aria-label="{token.name} color picker"
+      aria-expanded={pickerOpen}
+    ></button>
+
+    {#if pickerOpen}
+      <OklchPicker
+        value={current || token.value || ''}
+        top={pickerTop}
+        left={pickerLeft}
+        triggerEl={swatchEl}
+        onpick={onPick}
+        onclose={() => (pickerOpen = false)}
       />
-    {:else}
-      <span
-        class="editor__swatch"
-        style:--probe={current || token.value}
-        title="Resolved preview of the current value"
-        aria-hidden="true"
-      ></span>
     {/if}
+
     <input
       class="editor__text editor__text--mono"
       type="text"
@@ -233,26 +242,22 @@
   .editor__text::placeholder {
     color: var(--cfg-text-faint);
   }
-  .editor__swatch,
-  .editor__swatch-input {
+  .editor__swatch {
     width: 30px;
     height: 30px;
     flex-shrink: 0;
     border-radius: var(--cfg-radius-s);
     border: 1px solid var(--cfg-border-strong);
     padding: 0;
-  }
-  .editor__swatch {
-    background: var(--probe, transparent);
-    /* Checker backdrop so transparent/alpha values stay visible. */
+    cursor: pointer;
     background-image:
       linear-gradient(var(--probe, transparent), var(--probe, transparent)),
       conic-gradient(#444 25%, #2a2a2a 0 50%, #444 0 75%, #2a2a2a 0);
     background-size: cover, 12px 12px;
+    transition: box-shadow 0.1s;
   }
-  .editor__swatch-input {
-    cursor: pointer;
-    background: transparent;
+  .editor__swatch:hover {
+    box-shadow: 0 0 0 2px var(--cfg-accent);
   }
   .editor__unit {
     color: var(--cfg-text-faint);
