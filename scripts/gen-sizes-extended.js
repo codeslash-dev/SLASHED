@@ -23,7 +23,7 @@
  *   --sf-space-ratio-{min,max} / --sf-space-base-{min,max}
  *   --sf-text-ratio-{min,max}  / --sf-text-base-{min,max}
  *
- * Requires CSS pow() (Chrome 125+, Safari 17.5+, Firefox 118+).
+ * Requires CSS pow() (Chrome 125+, Safari 15.4+, Firefox 118+).
  */
 
 // Step names in ascending order; exponent N = index - 3 (so `m` = 0).
@@ -126,7 +126,7 @@ lines.push(`/* ============================================================
    Load after core/tokens.css:
      @import "optional/tokens.sizes-extended.css";
 
-   Requires CSS pow() (Chrome 125+, Safari 17.5+, Firefox 118+).
+   Requires CSS pow() (Chrome 125+, Safari 15.4+, Firefox 118+).
 
    Token families:
      --sf-space-{A}-to-{B}            spacing bridge (A > B)
