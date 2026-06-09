@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.28] - 2026-06-09
+
+### Features
+- **configurator:** add Accessibility + Scales views and shared parity modules
+- **configurator:** add Accessibility + Scales views and shared parity modules
+- **picker:** convert hex and hsl → oklch on parse
+- **configurator:** oklch/oklab picker, wider inputs, token descriptions
+
+### Bug Fixes
+- **configurator:** a11y polish on the new tools (self-review)
+- **configurator:** a11y polish on the new tools (self-review)
+- **annotations:** remove duplicate --sf-color-dim key; widen artifact srcPrefixes
+- **artifacts:** auto-sync configurator on token-annotations.json changes
+
 ## [0.5.27] - 2026-06-09
 
 ### Features
