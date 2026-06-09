@@ -47,6 +47,19 @@
    documentation-level: ADVANCED tokens are powerful but niche — they
    live in a separate "Advanced" section in docs.
 
+   Orthogonally, every token has a ROLE — knob vs consumption — a
+   SemVer-neutral hint (NOT a stability tier) about how it is used:
+     · knob        — an INPUT you SET to configure the system (a literal
+                     primitive: length, number, colour literal, keyword,
+                     font stack, easing curve …). e.g. --sf-color-primary-light,
+                     --sf-border-width-1, --sf-font-body, --sf-fluid-min-vw.
+     · consumption — a ready-to-use OUTPUT you READ; a value DERIVED from other
+                     tokens (references var(--sf-…), incl. light-dark()/
+                     oklch(from …)/color-mix()). e.g. --sf-color-bg,
+                     --sf-color-primary-600, --sf-space-xl-to-m.
+   Role is computed deterministically from the declared value; see
+   scripts/token-tiers.js (roleOf) and docs/token-index.md.
+
    PUBLIC — everyday knobs, prominently documented:
      · brand source tokens (--sf-color-{primary,secondary,tertiary,action,neutral,base}-light)
      · status source tokens (--sf-color-{success,warning,error,info,danger}-light)
@@ -119,6 +132,9 @@
      · --sf-text-ratio-{min,max}, --sf-text-base-{min,max},
        --sf-text-display-base-{min,max} (generative TYPE scale inputs)
      · --sf-space-ratio-{min,max}, --sf-space-base-{min,max} (generative SPACE scale inputs)
+     · --sf-{space,text}-{step}-to-{step} (fluid pairwise interpolation bridges,
+       optional/tokens.sizes-extended.css — generated OUTPUTS of the same scale
+       engine whose inputs above are ADVANCED; one per ordered pair of steps)
      · --sf-scroll-timeline-range-{start,end} (scroll-driven animation)
      · --sf-mask-scrim-{start,end} (edge-fade masks)
      · --sf-safe-{top,bottom,left,right} (safe-area insets)

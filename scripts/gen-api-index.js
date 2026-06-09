@@ -31,7 +31,7 @@
 import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES, CLASS_FILES } from './registry-sources.js';
-import { tierOf } from './token-tiers.js';
+import { tierOf, roleOf } from './token-tiers.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT    = path.join(ROOT, 'docs', 'api-index.json');
@@ -445,6 +445,7 @@ function buildTokenEntries(bundlesFor) {
           name,
           type: 'token',
           tier: tierOf(name),
+          role: roleOf(data.value),
           namespace: namespaceOf(name),
           category: meta.category,
           area: meta.area,
@@ -467,6 +468,7 @@ function buildTokenEntries(bundlesFor) {
         // Token redeclared in a later file — last value wins, union sources.
         existing.value = data.value ?? existing.value;
         existing.aliasOf = aliasTarget(existing.value);
+        existing.role = roleOf(existing.value);
         existing.registered = existing.registered || !!data.registered;
         existing.animatable = existing.registered;
         existing.syntax = existing.syntax ?? data.syntax ?? null;
@@ -508,6 +510,7 @@ function buildFallbackOnlyEntries(tokenNames, bundlesFor) {
       name,
       type: 'token',
       tier: 'PUBLIC-ADVANCED',
+      role: roleOf(value),
       namespace: namespaceOf(name),
       category: 'Color fallback (legacy HSL)',
       area: 'fallback',
@@ -719,9 +722,9 @@ and a short description. The machine-readable companion (with all columns) is
   md += `## Tokens (${tokenEntries.length})\n\n`;
   for (const [category, list] of groupByCategory(tokenEntries)) {
     md += `### ${category} (${list.length})\n\n`;
-    md += '| Token | Tier | Namespace | Default | Description |\n|---|---|---|---|---|\n';
+    md += '| Token | Tier | Role | Namespace | Default | Description |\n|---|---|---|---|---|---|\n';
     for (const e of list) {
-      md += `| \`${e.name}\` | ${e.tier} | ${e.namespace || '—'} | \`${escCell(e.value)}\` | ${escCell(e.description)} |\n`;
+      md += `| \`${e.name}\` | ${e.tier} | ${e.role || '—'} | ${e.namespace || '—'} | \`${escCell(e.value)}\` | ${escCell(e.description)} |\n`;
     }
     md += '\n';
   }
@@ -777,6 +780,7 @@ function main() {
     name:        'Element identifier (token custom-property name incl. leading --, or class name without leading dot).',
     type:        "Either 'token' or 'class'.",
     tier:        "Stability tier: PUBLIC | PUBLIC-ADVANCED | INTERNAL (see docs/architecture.md).",
+    role:        "TOKEN: 'knob' (input you set — a literal primitive) or 'consumption' (output you read — derived from other tokens via var(--sf-…)). Orthogonal to tier; no SemVer meaning.",
     category:    'High-level, human-facing area derived from the source file.',
     area:        'Short machine slug for the area (core, layout, macros, states, forms, …).',
     group:       'Finer-grained section, derived from the nearest section-banner comment in source.',
@@ -818,6 +822,7 @@ function main() {
         total: entries.length,
         by_type: typeCounts,
         by_tier: tierCounts,
+        by_role: tally(entries, 'role'),
         tokens: tokenEntries.length,
         classes: classEntries.length,
         sf_classes: sfClasses.length,

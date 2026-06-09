@@ -20,7 +20,7 @@
 import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES } from './registry-sources.js';
-import { INTERNAL, ADVANCED, tierOf } from './token-tiers.js';
+import { INTERNAL, ADVANCED, tierOf, roleOf } from './token-tiers.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -41,7 +41,7 @@ const FILE_TITLES = {
 // truth, mirrors the core/tokens.css header + docs/architecture.md). INTERNAL
 // and ADVANCED are re-exported here only for any downstream importers that
 // historically reached into this module.
-export { INTERNAL, ADVANCED, tierOf };
+export { INTERNAL, ADVANCED, tierOf, roleOf };
 
 // ── Parsing (matches scripts/gen-token-reference.js contract) ─────────────────
 
@@ -125,10 +125,13 @@ const fallbackOnly = [...fbNames].filter(n => !index.has(n)).sort((a, b) => a.lo
 // ── Counts ─────────────────────────────────────────────────────────────────────
 
 const tierCounts = { PUBLIC: 0, 'PUBLIC-ADVANCED': 0, INTERNAL: 0 };
+const roleCounts = { knob: 0, consumption: 0 };
 let withFallback = 0;
 for (const n of names) {
-  tierCounts[index.get(n).tier]++;
-  if (index.get(n).fallback) withFallback++;
+  const e = index.get(n);
+  tierCounts[e.tier]++;
+  roleCounts[roleOf(e.value)]++;
+  if (e.fallback) withFallback++;
 }
 
 // ── Emit JSON ───────────────────────────────────────────────────────────────────
@@ -141,6 +144,7 @@ const jsonOut = {
     counts: {
       tokens: names.length,
       by_tier: tierCounts,
+      by_role: roleCounts,
       with_fallback: withFallback,
       fallback_only: fallbackOnly.length,
     },
@@ -148,7 +152,7 @@ const jsonOut = {
   tokens: Object.fromEntries(
     names.map(n => {
       const e = index.get(n);
-      return [n, { tier: e.tier, files: e.files, fallback: e.fallback, value: e.value }];
+      return [n, { tier: e.tier, role: roleOf(e.value), files: e.files, fallback: e.fallback, value: e.value }];
     })
   ),
   fallback_only: fallbackOnly,
@@ -187,6 +191,15 @@ values see [tokens.md](tokens.md); for the flat name list see
 | PUBLIC-ADVANCED | ${tierCounts['PUBLIC-ADVANCED']} | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | ${tierCounts.INTERNAL} | Implementation detail; may change without a major bump. |
 
+Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
+whether you are expected to **set** it or **read** it. It is derived from the
+declared value (a value that references \`var(--sf-…)\` is a derived output):
+
+| Role | Count | Meaning |
+|---|---|---|
+| knob | ${roleCounts.knob} | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | ${roleCounts.consumption} | Ready-to-use output you **read**; derived from other tokens via \`var(--sf-…)\` (incl. \`light-dark()\`/\`oklch(from …)\`/\`color-mix()\`). |
+
 **${withFallback}** tokens have a legacy HSL fallback in \`${FALLBACK_FILE}\`
 (for engines without \`light-dark()\` / \`oklch(from …)\`), plus
 **${fallbackOnly.length}** fallback-only channel tokens listed at the end.
@@ -202,12 +215,12 @@ md += names.filter(n => index.get(n).tier === 'PUBLIC-ADVANCED').map(n => `- \`$
 
 // Full index table.
 md += `## Full index\n\n`;
-md += '| Token | Tier | File(s) | Fallback | Default |\n|---|---|---|---|---|\n';
+md += '| Token | Tier | Role | File(s) | Fallback | Default |\n|---|---|---|---|---|---|\n';
 for (const n of names) {
   const e = index.get(n);
   const files = e.files.map(shortFile).join(' + ');
   const fb = e.fallback ? 'yes' : '—';
-  md += `| \`${n}\` | ${e.tier} | ${files} | ${fb} | \`${esc(e.value)}\` |\n`;
+  md += `| \`${n}\` | ${e.tier} | ${roleOf(e.value)} | ${files} | ${fb} | \`${esc(e.value)}\` |\n`;
 }
 md += '\n';
 
@@ -224,5 +237,6 @@ console.log(
   `[docs] → docs/token-index.md + docs/token-index.json ` +
   `(${names.length} tokens: ${tierCounts.PUBLIC} public, ` +
   `${tierCounts['PUBLIC-ADVANCED']} advanced, ${tierCounts.INTERNAL} internal; ` +
+  `${roleCounts.knob} knob, ${roleCounts.consumption} consumption; ` +
   `${withFallback} with fallback, ${fallbackOnly.length} fallback-only)`
 );

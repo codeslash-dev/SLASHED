@@ -13,9 +13,13 @@
     "counts": {
       "tokens": 786,
       "by_tier": {
-        "PUBLIC": 741,
-        "PUBLIC-ADVANCED": 44,
+        "PUBLIC": 669,
+        "PUBLIC-ADVANCED": 116,
         "INTERNAL": 1
+      },
+      "by_role": {
+        "knob": 209,
+        "consumption": 577
       },
       "with_fallback": 57,
       "fallback_only": 33
@@ -24,6 +28,7 @@
   "tokens": {
     "--sf-alternate-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -32,6 +37,7 @@
     },
     "--sf-alternate-inner-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -40,6 +46,7 @@
     },
     "--sf-animation-blink": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -48,6 +55,7 @@
     },
     "--sf-animation-color-pulse": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -56,6 +64,7 @@
     },
     "--sf-animation-delay-1": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -64,6 +73,7 @@
     },
     "--sf-animation-delay-2": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -72,6 +82,7 @@
     },
     "--sf-animation-delay-3": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -80,6 +91,7 @@
     },
     "--sf-animation-delay-4": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -88,6 +100,7 @@
     },
     "--sf-animation-delay-5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -96,6 +109,7 @@
     },
     "--sf-animation-fade-in": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -104,6 +118,7 @@
     },
     "--sf-animation-fade-out": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -112,6 +127,7 @@
     },
     "--sf-animation-float": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -120,6 +136,7 @@
     },
     "--sf-animation-ping": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -128,6 +145,7 @@
     },
     "--sf-animation-scale-down": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -136,6 +154,7 @@
     },
     "--sf-animation-scale-up": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -144,6 +163,7 @@
     },
     "--sf-animation-shimmer": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -152,6 +172,7 @@
     },
     "--sf-animation-slide-in-down": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -160,6 +181,7 @@
     },
     "--sf-animation-slide-in-left": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -168,6 +190,7 @@
     },
     "--sf-animation-slide-in-right": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -176,6 +199,7 @@
     },
     "--sf-animation-slide-in-up": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -184,6 +208,7 @@
     },
     "--sf-animation-spin": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -192,6 +217,7 @@
     },
     "--sf-aspect": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -200,6 +226,7 @@
     },
     "--sf-bento-cols-default": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -208,6 +235,7 @@
     },
     "--sf-bento-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -216,6 +244,7 @@
     },
     "--sf-bento-row-compact": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -224,6 +253,7 @@
     },
     "--sf-bento-row-default": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -232,6 +262,7 @@
     },
     "--sf-bento-row-tall": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -240,6 +271,7 @@
     },
     "--sf-blur-l": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -248,6 +280,7 @@
     },
     "--sf-blur-m": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -256,6 +289,7 @@
     },
     "--sf-blur-s": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -264,6 +298,7 @@
     },
     "--sf-blur-xl": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -272,6 +307,7 @@
     },
     "--sf-blur-xs": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -280,6 +316,7 @@
     },
     "--sf-body-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -288,6 +325,7 @@
     },
     "--sf-body-em-style": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -296,6 +334,7 @@
     },
     "--sf-body-font-family": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -304,6 +343,7 @@
     },
     "--sf-body-font-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -312,6 +352,7 @@
     },
     "--sf-body-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -320,6 +361,7 @@
     },
     "--sf-body-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -328,6 +370,7 @@
     },
     "--sf-body-strong-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -336,6 +379,7 @@
     },
     "--sf-body-text-wrap": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -344,6 +388,7 @@
     },
     "--sf-border": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -352,6 +397,7 @@
     },
     "--sf-border-strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -360,6 +406,7 @@
     },
     "--sf-border-style": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -368,6 +415,7 @@
     },
     "--sf-border-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -376,6 +424,7 @@
     },
     "--sf-border-width-1": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -384,6 +433,7 @@
     },
     "--sf-border-width-2": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -392,6 +442,7 @@
     },
     "--sf-border-width-3": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -400,6 +451,7 @@
     },
     "--sf-border-width-4": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -408,6 +460,7 @@
     },
     "--sf-border-width-hairline": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -416,6 +469,7 @@
     },
     "--sf-box-border-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -424,6 +478,7 @@
     },
     "--sf-box-border-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -432,6 +487,7 @@
     },
     "--sf-box-padding": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -440,6 +496,7 @@
     },
     "--sf-breakout-width": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -448,6 +505,7 @@
     },
     "--sf-caret-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -456,6 +514,7 @@
     },
     "--sf-center-gutter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -464,6 +523,7 @@
     },
     "--sf-center-max": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -472,6 +532,7 @@
     },
     "--sf-cluster-align": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -480,6 +541,7 @@
     },
     "--sf-cluster-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -488,6 +550,7 @@
     },
     "--sf-cluster-justify": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -496,6 +559,7 @@
     },
     "--sf-code-font-size": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -504,6 +568,7 @@
     },
     "--sf-col-rule-width-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -512,6 +577,7 @@
     },
     "--sf-col-rule-width-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -520,6 +586,7 @@
     },
     "--sf-col-rule-width-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -528,6 +595,7 @@
     },
     "--sf-col-width-l": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -536,6 +604,7 @@
     },
     "--sf-col-width-m": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -544,6 +613,7 @@
     },
     "--sf-col-width-s": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -552,6 +622,7 @@
     },
     "--sf-color-action": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -560,6 +631,7 @@
     },
     "--sf-color-action-100": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -568,6 +640,7 @@
     },
     "--sf-color-action-200": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -576,6 +649,7 @@
     },
     "--sf-color-action-300": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -584,6 +658,7 @@
     },
     "--sf-color-action-400": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -592,6 +667,7 @@
     },
     "--sf-color-action-50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -600,6 +676,7 @@
     },
     "--sf-color-action-500": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -608,6 +685,7 @@
     },
     "--sf-color-action-600": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -616,6 +694,7 @@
     },
     "--sf-color-action-700": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -624,6 +703,7 @@
     },
     "--sf-color-action-800": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -632,6 +712,7 @@
     },
     "--sf-color-action-900": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -640,6 +721,7 @@
     },
     "--sf-color-action-950": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -648,6 +730,7 @@
     },
     "--sf-color-action-a10": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -656,6 +739,7 @@
     },
     "--sf-color-action-a20": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -664,6 +748,7 @@
     },
     "--sf-color-action-a30": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -672,6 +757,7 @@
     },
     "--sf-color-action-a40": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -680,6 +766,7 @@
     },
     "--sf-color-action-a5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -688,6 +775,7 @@
     },
     "--sf-color-action-a50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -696,6 +784,7 @@
     },
     "--sf-color-action-a60": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -704,6 +793,7 @@
     },
     "--sf-color-action-a70": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -712,6 +802,7 @@
     },
     "--sf-color-action-a80": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -720,6 +811,7 @@
     },
     "--sf-color-action-a90": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -728,6 +820,7 @@
     },
     "--sf-color-action-a95": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -736,6 +829,7 @@
     },
     "--sf-color-action-active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -745,6 +839,7 @@
     },
     "--sf-color-action-darker": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -754,6 +849,7 @@
     },
     "--sf-color-action-ghost": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -763,6 +859,7 @@
     },
     "--sf-color-action-hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -772,6 +869,7 @@
     },
     "--sf-color-action-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -780,6 +878,7 @@
     },
     "--sf-color-action-lighter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -789,6 +888,7 @@
     },
     "--sf-color-action-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -798,6 +898,7 @@
     },
     "--sf-color-action-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -807,6 +908,7 @@
     },
     "--sf-color-action-superdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -816,6 +918,7 @@
     },
     "--sf-color-action-superlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -825,6 +928,7 @@
     },
     "--sf-color-action-xdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -834,6 +938,7 @@
     },
     "--sf-color-action-xlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -843,6 +948,7 @@
     },
     "--sf-color-base": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -851,6 +957,7 @@
     },
     "--sf-color-base-100": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -859,6 +966,7 @@
     },
     "--sf-color-base-200": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -867,6 +975,7 @@
     },
     "--sf-color-base-300": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -875,6 +984,7 @@
     },
     "--sf-color-base-400": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -883,6 +993,7 @@
     },
     "--sf-color-base-50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -891,6 +1002,7 @@
     },
     "--sf-color-base-500": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -899,6 +1011,7 @@
     },
     "--sf-color-base-600": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -907,6 +1020,7 @@
     },
     "--sf-color-base-700": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -915,6 +1029,7 @@
     },
     "--sf-color-base-800": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -923,6 +1038,7 @@
     },
     "--sf-color-base-900": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -931,6 +1047,7 @@
     },
     "--sf-color-base-950": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -939,6 +1056,7 @@
     },
     "--sf-color-base-a10": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -947,6 +1065,7 @@
     },
     "--sf-color-base-a20": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -955,6 +1074,7 @@
     },
     "--sf-color-base-a30": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -963,6 +1083,7 @@
     },
     "--sf-color-base-a40": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -971,6 +1092,7 @@
     },
     "--sf-color-base-a5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -979,6 +1101,7 @@
     },
     "--sf-color-base-a50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -987,6 +1110,7 @@
     },
     "--sf-color-base-a60": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -995,6 +1119,7 @@
     },
     "--sf-color-base-a70": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1003,6 +1128,7 @@
     },
     "--sf-color-base-a80": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1011,6 +1137,7 @@
     },
     "--sf-color-base-a90": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1019,6 +1146,7 @@
     },
     "--sf-color-base-a95": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1027,6 +1155,7 @@
     },
     "--sf-color-base-active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1036,6 +1165,7 @@
     },
     "--sf-color-base-darker": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1045,6 +1175,7 @@
     },
     "--sf-color-base-ghost": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1054,6 +1185,7 @@
     },
     "--sf-color-base-hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1063,6 +1195,7 @@
     },
     "--sf-color-base-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1071,6 +1204,7 @@
     },
     "--sf-color-base-lighter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1080,6 +1214,7 @@
     },
     "--sf-color-base-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1089,6 +1224,7 @@
     },
     "--sf-color-base-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1098,6 +1234,7 @@
     },
     "--sf-color-base-superdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1107,6 +1244,7 @@
     },
     "--sf-color-base-superlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1116,6 +1254,7 @@
     },
     "--sf-color-base-xdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1125,6 +1264,7 @@
     },
     "--sf-color-base-xlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1134,6 +1274,7 @@
     },
     "--sf-color-bg": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1142,6 +1283,7 @@
     },
     "--sf-color-bg--active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1150,6 +1292,7 @@
     },
     "--sf-color-bg--disabled": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1158,6 +1301,7 @@
     },
     "--sf-color-bg--focus": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1166,6 +1310,7 @@
     },
     "--sf-color-bg--hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1174,6 +1319,7 @@
     },
     "--sf-color-bg--selected": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1182,6 +1328,7 @@
     },
     "--sf-color-black": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1190,6 +1337,7 @@
     },
     "--sf-color-border": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1198,6 +1346,7 @@
     },
     "--sf-color-border--disabled": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1206,6 +1355,7 @@
     },
     "--sf-color-border--focus": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1214,6 +1364,7 @@
     },
     "--sf-color-border--strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1222,6 +1373,7 @@
     },
     "--sf-color-border--subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1230,6 +1382,7 @@
     },
     "--sf-color-border--translucent": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1238,6 +1391,7 @@
     },
     "--sf-color-code-bg": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1246,6 +1400,7 @@
     },
     "--sf-color-code-text": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1254,6 +1409,7 @@
     },
     "--sf-color-danger": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1262,6 +1418,7 @@
     },
     "--sf-color-danger-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1270,6 +1427,7 @@
     },
     "--sf-color-danger-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1278,6 +1436,7 @@
     },
     "--sf-color-danger-strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1286,6 +1445,7 @@
     },
     "--sf-color-danger-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1294,6 +1454,7 @@
     },
     "--sf-color-dim": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1302,6 +1463,7 @@
     },
     "--sf-color-error": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1310,6 +1472,7 @@
     },
     "--sf-color-error-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1318,6 +1481,7 @@
     },
     "--sf-color-error-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1326,6 +1490,7 @@
     },
     "--sf-color-error-strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1334,6 +1499,7 @@
     },
     "--sf-color-error-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1342,6 +1508,7 @@
     },
     "--sf-color-heading": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1350,6 +1517,7 @@
     },
     "--sf-color-info": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1358,6 +1526,7 @@
     },
     "--sf-color-info-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1366,6 +1535,7 @@
     },
     "--sf-color-info-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1374,6 +1544,7 @@
     },
     "--sf-color-info-strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1382,6 +1553,7 @@
     },
     "--sf-color-info-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1390,6 +1562,7 @@
     },
     "--sf-color-inset": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1398,6 +1571,7 @@
     },
     "--sf-color-inverse": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1406,6 +1580,7 @@
     },
     "--sf-color-link": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1414,6 +1589,7 @@
     },
     "--sf-color-link--active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1422,6 +1598,7 @@
     },
     "--sf-color-link--disabled": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1430,6 +1607,7 @@
     },
     "--sf-color-link--hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1438,6 +1616,7 @@
     },
     "--sf-color-link--underline": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1446,6 +1625,7 @@
     },
     "--sf-color-link--visited": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1454,6 +1634,7 @@
     },
     "--sf-color-mark-bg": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1462,6 +1643,7 @@
     },
     "--sf-color-mark-text": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1470,6 +1652,7 @@
     },
     "--sf-color-neutral": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1478,6 +1661,7 @@
     },
     "--sf-color-neutral-100": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1486,6 +1670,7 @@
     },
     "--sf-color-neutral-200": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1494,6 +1679,7 @@
     },
     "--sf-color-neutral-300": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1502,6 +1688,7 @@
     },
     "--sf-color-neutral-400": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1510,6 +1697,7 @@
     },
     "--sf-color-neutral-50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1518,6 +1706,7 @@
     },
     "--sf-color-neutral-500": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1526,6 +1715,7 @@
     },
     "--sf-color-neutral-600": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1534,6 +1724,7 @@
     },
     "--sf-color-neutral-700": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1542,6 +1733,7 @@
     },
     "--sf-color-neutral-800": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1550,6 +1742,7 @@
     },
     "--sf-color-neutral-900": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1558,6 +1751,7 @@
     },
     "--sf-color-neutral-950": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1566,6 +1760,7 @@
     },
     "--sf-color-neutral-a10": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1574,6 +1769,7 @@
     },
     "--sf-color-neutral-a20": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1582,6 +1778,7 @@
     },
     "--sf-color-neutral-a30": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1590,6 +1787,7 @@
     },
     "--sf-color-neutral-a40": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1598,6 +1796,7 @@
     },
     "--sf-color-neutral-a5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1606,6 +1805,7 @@
     },
     "--sf-color-neutral-a50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1614,6 +1814,7 @@
     },
     "--sf-color-neutral-a60": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1622,6 +1823,7 @@
     },
     "--sf-color-neutral-a70": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1630,6 +1832,7 @@
     },
     "--sf-color-neutral-a80": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1638,6 +1841,7 @@
     },
     "--sf-color-neutral-a90": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1646,6 +1850,7 @@
     },
     "--sf-color-neutral-a95": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1654,6 +1859,7 @@
     },
     "--sf-color-neutral-active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1663,6 +1869,7 @@
     },
     "--sf-color-neutral-darker": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1672,6 +1879,7 @@
     },
     "--sf-color-neutral-ghost": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1681,6 +1889,7 @@
     },
     "--sf-color-neutral-hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1690,6 +1899,7 @@
     },
     "--sf-color-neutral-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1698,6 +1908,7 @@
     },
     "--sf-color-neutral-lighter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1707,6 +1918,7 @@
     },
     "--sf-color-neutral-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1716,6 +1928,7 @@
     },
     "--sf-color-neutral-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1725,6 +1938,7 @@
     },
     "--sf-color-neutral-superdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1734,6 +1948,7 @@
     },
     "--sf-color-neutral-superlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1743,6 +1958,7 @@
     },
     "--sf-color-neutral-xdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1752,6 +1968,7 @@
     },
     "--sf-color-neutral-xlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1761,6 +1978,7 @@
     },
     "--sf-color-overlay": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1769,6 +1987,7 @@
     },
     "--sf-color-primary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -1777,6 +1996,7 @@
     },
     "--sf-color-primary-100": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1785,6 +2005,7 @@
     },
     "--sf-color-primary-200": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1793,6 +2014,7 @@
     },
     "--sf-color-primary-300": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1801,6 +2023,7 @@
     },
     "--sf-color-primary-400": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1809,6 +2032,7 @@
     },
     "--sf-color-primary-50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1817,6 +2041,7 @@
     },
     "--sf-color-primary-500": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1825,6 +2050,7 @@
     },
     "--sf-color-primary-600": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1833,6 +2059,7 @@
     },
     "--sf-color-primary-700": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1841,6 +2068,7 @@
     },
     "--sf-color-primary-800": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1849,6 +2077,7 @@
     },
     "--sf-color-primary-900": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1857,6 +2086,7 @@
     },
     "--sf-color-primary-950": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1865,6 +2095,7 @@
     },
     "--sf-color-primary-a10": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1873,6 +2104,7 @@
     },
     "--sf-color-primary-a20": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1881,6 +2113,7 @@
     },
     "--sf-color-primary-a30": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1889,6 +2122,7 @@
     },
     "--sf-color-primary-a40": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1897,6 +2131,7 @@
     },
     "--sf-color-primary-a5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1905,6 +2140,7 @@
     },
     "--sf-color-primary-a50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1913,6 +2149,7 @@
     },
     "--sf-color-primary-a60": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1921,6 +2158,7 @@
     },
     "--sf-color-primary-a70": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1929,6 +2167,7 @@
     },
     "--sf-color-primary-a80": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1937,6 +2176,7 @@
     },
     "--sf-color-primary-a90": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1945,6 +2185,7 @@
     },
     "--sf-color-primary-a95": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -1953,6 +2194,7 @@
     },
     "--sf-color-primary-active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1962,6 +2204,7 @@
     },
     "--sf-color-primary-darker": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1971,6 +2214,7 @@
     },
     "--sf-color-primary-ghost": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1980,6 +2224,7 @@
     },
     "--sf-color-primary-hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -1989,6 +2234,7 @@
     },
     "--sf-color-primary-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -1997,6 +2243,7 @@
     },
     "--sf-color-primary-lighter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2006,6 +2253,7 @@
     },
     "--sf-color-primary-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2015,6 +2263,7 @@
     },
     "--sf-color-primary-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2024,6 +2273,7 @@
     },
     "--sf-color-primary-superdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2033,6 +2283,7 @@
     },
     "--sf-color-primary-superlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2042,6 +2293,7 @@
     },
     "--sf-color-primary-xdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2051,6 +2303,7 @@
     },
     "--sf-color-primary-xlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2060,6 +2313,7 @@
     },
     "--sf-color-raised": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2068,6 +2322,7 @@
     },
     "--sf-color-scheme": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2076,6 +2331,7 @@
     },
     "--sf-color-secondary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2084,6 +2340,7 @@
     },
     "--sf-color-secondary-100": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2092,6 +2349,7 @@
     },
     "--sf-color-secondary-200": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2100,6 +2358,7 @@
     },
     "--sf-color-secondary-300": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2108,6 +2367,7 @@
     },
     "--sf-color-secondary-400": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2116,6 +2376,7 @@
     },
     "--sf-color-secondary-50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2124,6 +2385,7 @@
     },
     "--sf-color-secondary-500": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2132,6 +2394,7 @@
     },
     "--sf-color-secondary-600": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2140,6 +2403,7 @@
     },
     "--sf-color-secondary-700": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2148,6 +2412,7 @@
     },
     "--sf-color-secondary-800": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2156,6 +2421,7 @@
     },
     "--sf-color-secondary-900": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2164,6 +2430,7 @@
     },
     "--sf-color-secondary-950": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2172,6 +2439,7 @@
     },
     "--sf-color-secondary-a10": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2180,6 +2448,7 @@
     },
     "--sf-color-secondary-a20": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2188,6 +2457,7 @@
     },
     "--sf-color-secondary-a30": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2196,6 +2466,7 @@
     },
     "--sf-color-secondary-a40": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2204,6 +2475,7 @@
     },
     "--sf-color-secondary-a5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2212,6 +2484,7 @@
     },
     "--sf-color-secondary-a50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2220,6 +2493,7 @@
     },
     "--sf-color-secondary-a60": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2228,6 +2502,7 @@
     },
     "--sf-color-secondary-a70": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2236,6 +2511,7 @@
     },
     "--sf-color-secondary-a80": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2244,6 +2520,7 @@
     },
     "--sf-color-secondary-a90": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2252,6 +2529,7 @@
     },
     "--sf-color-secondary-a95": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2260,6 +2538,7 @@
     },
     "--sf-color-secondary-active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2269,6 +2548,7 @@
     },
     "--sf-color-secondary-darker": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2278,6 +2558,7 @@
     },
     "--sf-color-secondary-ghost": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2287,6 +2568,7 @@
     },
     "--sf-color-secondary-hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2296,6 +2578,7 @@
     },
     "--sf-color-secondary-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2304,6 +2587,7 @@
     },
     "--sf-color-secondary-lighter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2313,6 +2597,7 @@
     },
     "--sf-color-secondary-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2322,6 +2607,7 @@
     },
     "--sf-color-secondary-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2331,6 +2617,7 @@
     },
     "--sf-color-secondary-superdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2340,6 +2627,7 @@
     },
     "--sf-color-secondary-superlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2349,6 +2637,7 @@
     },
     "--sf-color-secondary-xdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2358,6 +2647,7 @@
     },
     "--sf-color-secondary-xlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2367,6 +2657,7 @@
     },
     "--sf-color-selection-bg": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2375,6 +2666,7 @@
     },
     "--sf-color-selection-text": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2383,6 +2675,7 @@
     },
     "--sf-color-success": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2391,6 +2684,7 @@
     },
     "--sf-color-success-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2399,6 +2693,7 @@
     },
     "--sf-color-success-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2407,6 +2702,7 @@
     },
     "--sf-color-success-strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2415,6 +2711,7 @@
     },
     "--sf-color-success-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2423,6 +2720,7 @@
     },
     "--sf-color-surface": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2431,6 +2729,7 @@
     },
     "--sf-color-tertiary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2439,6 +2738,7 @@
     },
     "--sf-color-tertiary-100": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2447,6 +2747,7 @@
     },
     "--sf-color-tertiary-200": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2455,6 +2756,7 @@
     },
     "--sf-color-tertiary-300": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2463,6 +2765,7 @@
     },
     "--sf-color-tertiary-400": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2471,6 +2774,7 @@
     },
     "--sf-color-tertiary-50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2479,6 +2783,7 @@
     },
     "--sf-color-tertiary-500": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2487,6 +2792,7 @@
     },
     "--sf-color-tertiary-600": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2495,6 +2801,7 @@
     },
     "--sf-color-tertiary-700": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2503,6 +2810,7 @@
     },
     "--sf-color-tertiary-800": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2511,6 +2819,7 @@
     },
     "--sf-color-tertiary-900": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2519,6 +2828,7 @@
     },
     "--sf-color-tertiary-950": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2527,6 +2837,7 @@
     },
     "--sf-color-tertiary-a10": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2535,6 +2846,7 @@
     },
     "--sf-color-tertiary-a20": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2543,6 +2855,7 @@
     },
     "--sf-color-tertiary-a30": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2551,6 +2864,7 @@
     },
     "--sf-color-tertiary-a40": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2559,6 +2873,7 @@
     },
     "--sf-color-tertiary-a5": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2567,6 +2882,7 @@
     },
     "--sf-color-tertiary-a50": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2575,6 +2891,7 @@
     },
     "--sf-color-tertiary-a60": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2583,6 +2900,7 @@
     },
     "--sf-color-tertiary-a70": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2591,6 +2909,7 @@
     },
     "--sf-color-tertiary-a80": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2599,6 +2918,7 @@
     },
     "--sf-color-tertiary-a90": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2607,6 +2927,7 @@
     },
     "--sf-color-tertiary-a95": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.palette.css"
       ],
@@ -2615,6 +2936,7 @@
     },
     "--sf-color-tertiary-active": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2624,6 +2946,7 @@
     },
     "--sf-color-tertiary-darker": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2633,6 +2956,7 @@
     },
     "--sf-color-tertiary-ghost": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2642,6 +2966,7 @@
     },
     "--sf-color-tertiary-hover": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2651,6 +2976,7 @@
     },
     "--sf-color-tertiary-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2659,6 +2985,7 @@
     },
     "--sf-color-tertiary-lighter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2668,6 +2995,7 @@
     },
     "--sf-color-tertiary-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2677,6 +3005,7 @@
     },
     "--sf-color-tertiary-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2686,6 +3015,7 @@
     },
     "--sf-color-tertiary-superdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2695,6 +3025,7 @@
     },
     "--sf-color-tertiary-superlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2704,6 +3035,7 @@
     },
     "--sf-color-tertiary-xdark": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2713,6 +3045,7 @@
     },
     "--sf-color-tertiary-xlight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css",
         "optional/tokens.palette.css"
@@ -2722,6 +3055,7 @@
     },
     "--sf-color-text": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2730,6 +3064,7 @@
     },
     "--sf-color-text--disabled": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2738,6 +3073,7 @@
     },
     "--sf-color-text--inverse": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2746,6 +3082,7 @@
     },
     "--sf-color-text--muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2754,6 +3091,7 @@
     },
     "--sf-color-text--on-action": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2762,6 +3100,7 @@
     },
     "--sf-color-text--on-base": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2770,6 +3109,7 @@
     },
     "--sf-color-text--on-danger": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2778,6 +3118,7 @@
     },
     "--sf-color-text--on-error": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2786,6 +3127,7 @@
     },
     "--sf-color-text--on-info": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2794,6 +3136,7 @@
     },
     "--sf-color-text--on-inverse": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2802,6 +3145,7 @@
     },
     "--sf-color-text--on-neutral": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2810,6 +3154,7 @@
     },
     "--sf-color-text--on-primary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2818,6 +3163,7 @@
     },
     "--sf-color-text--on-secondary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2826,6 +3172,7 @@
     },
     "--sf-color-text--on-success": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2834,6 +3181,7 @@
     },
     "--sf-color-text--on-surface": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2842,6 +3190,7 @@
     },
     "--sf-color-text--on-tertiary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2850,6 +3199,7 @@
     },
     "--sf-color-text--on-warning": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2858,6 +3208,7 @@
     },
     "--sf-color-text--placeholder": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2866,6 +3217,7 @@
     },
     "--sf-color-text--secondary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2874,6 +3226,7 @@
     },
     "--sf-color-warning": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2882,6 +3235,7 @@
     },
     "--sf-color-warning-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2890,6 +3244,7 @@
     },
     "--sf-color-warning-muted": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2898,6 +3253,7 @@
     },
     "--sf-color-warning-strong": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2906,6 +3262,7 @@
     },
     "--sf-color-warning-subtle": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2914,6 +3271,7 @@
     },
     "--sf-color-white": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2922,6 +3280,7 @@
     },
     "--sf-component-pad": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2930,6 +3289,7 @@
     },
     "--sf-container-default": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2938,6 +3298,7 @@
     },
     "--sf-container-full": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2946,6 +3307,7 @@
     },
     "--sf-container-narrow": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2954,6 +3316,7 @@
     },
     "--sf-container-prose": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2962,6 +3325,7 @@
     },
     "--sf-container-wide": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -2970,6 +3334,7 @@
     },
     "--sf-content-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -2978,6 +3343,7 @@
     },
     "--sf-content-intrinsic-size": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -2986,6 +3352,7 @@
     },
     "--sf-content-width": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -2994,6 +3361,7 @@
     },
     "--sf-contrast-bias": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3002,6 +3370,7 @@
     },
     "--sf-contrast-threshold": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3010,6 +3379,7 @@
     },
     "--sf-cover-min-height": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3018,6 +3388,7 @@
     },
     "--sf-cover-padding": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3026,6 +3397,7 @@
     },
     "--sf-current-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3034,6 +3406,7 @@
     },
     "--sf-display-l-line-height": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3042,6 +3415,7 @@
     },
     "--sf-display-m-line-height": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3050,6 +3424,7 @@
     },
     "--sf-display-s-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3058,6 +3433,7 @@
     },
     "--sf-divider-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3066,6 +3442,7 @@
     },
     "--sf-divider-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3074,6 +3451,7 @@
     },
     "--sf-divider-style": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3082,6 +3460,7 @@
     },
     "--sf-divider-width": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3090,6 +3469,7 @@
     },
     "--sf-drop-shadow-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3098,6 +3478,7 @@
     },
     "--sf-drop-shadow-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3106,6 +3487,7 @@
     },
     "--sf-drop-shadow-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3114,6 +3496,7 @@
     },
     "--sf-duration-fast": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3122,6 +3505,7 @@
     },
     "--sf-duration-instant": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3130,6 +3514,7 @@
     },
     "--sf-duration-none": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3138,6 +3523,7 @@
     },
     "--sf-duration-normal": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3146,6 +3532,7 @@
     },
     "--sf-duration-slow": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3154,6 +3541,7 @@
     },
     "--sf-duration-slower": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3162,6 +3550,7 @@
     },
     "--sf-ease-bounce": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3170,6 +3559,7 @@
     },
     "--sf-ease-elastic": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3178,6 +3568,7 @@
     },
     "--sf-ease-in": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3186,6 +3577,7 @@
     },
     "--sf-ease-in-out": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3194,6 +3586,7 @@
     },
     "--sf-ease-linear": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3202,6 +3595,7 @@
     },
     "--sf-ease-out": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3210,6 +3604,7 @@
     },
     "--sf-ease-overshoot": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3218,6 +3613,7 @@
     },
     "--sf-ease-spring": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3226,6 +3622,7 @@
     },
     "--sf-equal-cols": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3234,6 +3631,7 @@
     },
     "--sf-equal-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3242,6 +3640,7 @@
     },
     "--sf-field-block": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3250,6 +3649,7 @@
     },
     "--sf-field-required-marker": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3258,6 +3658,7 @@
     },
     "--sf-flow-space": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -3266,6 +3667,7 @@
     },
     "--sf-fluid-max-vw": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3274,6 +3676,7 @@
     },
     "--sf-fluid-min-vw": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3282,6 +3685,7 @@
     },
     "--sf-focus-ring-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3290,6 +3694,7 @@
     },
     "--sf-focus-ring-offset": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3298,6 +3703,7 @@
     },
     "--sf-focus-ring-shadow": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3306,6 +3712,7 @@
     },
     "--sf-focus-ring-style": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3314,6 +3721,7 @@
     },
     "--sf-focus-ring-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3322,6 +3730,7 @@
     },
     "--sf-font-body": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3330,6 +3739,7 @@
     },
     "--sf-font-display": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3338,6 +3748,7 @@
     },
     "--sf-font-features": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3346,6 +3757,7 @@
     },
     "--sf-font-geometric": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3354,6 +3766,7 @@
     },
     "--sf-font-heading": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3362,6 +3775,7 @@
     },
     "--sf-font-humanist": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3370,6 +3784,7 @@
     },
     "--sf-font-mono": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3378,6 +3793,7 @@
     },
     "--sf-font-numeric": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3386,6 +3802,7 @@
     },
     "--sf-font-slab": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3394,6 +3811,7 @@
     },
     "--sf-font-variation": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3402,6 +3820,7 @@
     },
     "--sf-font-weight-black": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3410,6 +3829,7 @@
     },
     "--sf-font-weight-body": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3418,6 +3838,7 @@
     },
     "--sf-font-weight-bold": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3426,6 +3847,7 @@
     },
     "--sf-font-weight-display": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3434,6 +3856,7 @@
     },
     "--sf-font-weight-extrabold": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3442,6 +3865,7 @@
     },
     "--sf-font-weight-extralight": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3450,6 +3874,7 @@
     },
     "--sf-font-weight-heading": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3458,6 +3883,7 @@
     },
     "--sf-font-weight-light": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3466,6 +3892,7 @@
     },
     "--sf-font-weight-medium": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3474,6 +3901,7 @@
     },
     "--sf-font-weight-normal": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3482,6 +3910,7 @@
     },
     "--sf-font-weight-semibold": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3490,6 +3919,7 @@
     },
     "--sf-font-weight-thin": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3498,6 +3928,7 @@
     },
     "--sf-frame-ratio": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3506,6 +3937,7 @@
     },
     "--sf-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3514,6 +3946,7 @@
     },
     "--sf-gap-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3522,6 +3955,7 @@
     },
     "--sf-gradient-brand": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3530,6 +3964,7 @@
     },
     "--sf-gradient-fade--b": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3538,6 +3973,7 @@
     },
     "--sf-gradient-fade--l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3546,6 +3982,7 @@
     },
     "--sf-gradient-fade--r": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3554,6 +3991,7 @@
     },
     "--sf-gradient-fade--t": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3562,6 +4000,7 @@
     },
     "--sf-gradient-primary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3570,6 +4009,7 @@
     },
     "--sf-gradient-secondary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3578,6 +4018,7 @@
     },
     "--sf-gradient-surface": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3586,6 +4027,7 @@
     },
     "--sf-gradient-tertiary": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3594,6 +4036,7 @@
     },
     "--sf-grid-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3602,6 +4045,7 @@
     },
     "--sf-grid-min": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3610,6 +4054,7 @@
     },
     "--sf-grid-min-2xl": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3618,6 +4063,7 @@
     },
     "--sf-grid-min-l": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3626,6 +4072,7 @@
     },
     "--sf-grid-min-m": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3634,6 +4081,7 @@
     },
     "--sf-grid-min-s": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3642,6 +4090,7 @@
     },
     "--sf-grid-min-xl": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3650,6 +4099,7 @@
     },
     "--sf-grid-min-xs": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3658,6 +4108,7 @@
     },
     "--sf-h1-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3666,6 +4117,7 @@
     },
     "--sf-h1-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3674,6 +4126,7 @@
     },
     "--sf-h1-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3682,6 +4135,7 @@
     },
     "--sf-h1-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3690,6 +4144,7 @@
     },
     "--sf-h2-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3698,6 +4153,7 @@
     },
     "--sf-h2-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3706,6 +4162,7 @@
     },
     "--sf-h2-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3714,6 +4171,7 @@
     },
     "--sf-h2-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3722,6 +4180,7 @@
     },
     "--sf-h3-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3730,6 +4189,7 @@
     },
     "--sf-h3-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3738,6 +4198,7 @@
     },
     "--sf-h3-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3746,6 +4207,7 @@
     },
     "--sf-h3-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3754,6 +4216,7 @@
     },
     "--sf-h4-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3762,6 +4225,7 @@
     },
     "--sf-h4-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3770,6 +4234,7 @@
     },
     "--sf-h4-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3778,6 +4243,7 @@
     },
     "--sf-h4-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3786,6 +4252,7 @@
     },
     "--sf-h5-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3794,6 +4261,7 @@
     },
     "--sf-h5-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3802,6 +4270,7 @@
     },
     "--sf-h5-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3810,6 +4279,7 @@
     },
     "--sf-h5-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3818,6 +4288,7 @@
     },
     "--sf-h6-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3826,6 +4297,7 @@
     },
     "--sf-h6-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3834,6 +4306,7 @@
     },
     "--sf-h6-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3842,6 +4315,7 @@
     },
     "--sf-h6-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3850,6 +4324,7 @@
     },
     "--sf-header-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3858,6 +4333,7 @@
     },
     "--sf-header-height-desktop": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3866,6 +4342,7 @@
     },
     "--sf-header-height-mobile": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3874,6 +4351,7 @@
     },
     "--sf-heading-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3882,6 +4360,7 @@
     },
     "--sf-heading-font-family": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -3890,6 +4369,7 @@
     },
     "--sf-heading-text-wrap": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3898,6 +4378,7 @@
     },
     "--sf-icon-2xl": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3906,6 +4387,7 @@
     },
     "--sf-icon-box-bg": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3914,6 +4396,7 @@
     },
     "--sf-icon-box-border": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3922,6 +4405,7 @@
     },
     "--sf-icon-box-pad": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3930,6 +4414,7 @@
     },
     "--sf-icon-box-radius": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3938,6 +4423,7 @@
     },
     "--sf-icon-l": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3946,6 +4432,7 @@
     },
     "--sf-icon-m": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3954,6 +4441,7 @@
     },
     "--sf-icon-s": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3962,6 +4450,7 @@
     },
     "--sf-icon-xl": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3970,6 +4459,7 @@
     },
     "--sf-icon-xs": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3978,6 +4468,7 @@
     },
     "--sf-imposter-margin": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -3986,6 +4477,7 @@
     },
     "--sf-is-active": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -3994,6 +4486,7 @@
     },
     "--sf-is-current": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4002,6 +4495,7 @@
     },
     "--sf-is-dark": {
       "tier": "INTERNAL",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4010,6 +4504,7 @@
     },
     "--sf-is-open": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4018,6 +4513,7 @@
     },
     "--sf-is-pressed": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4026,6 +4522,7 @@
     },
     "--sf-leading-normal": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4034,6 +4531,7 @@
     },
     "--sf-leading-relaxed": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4042,6 +4540,7 @@
     },
     "--sf-leading-snug": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4050,6 +4549,7 @@
     },
     "--sf-leading-tight": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4058,6 +4558,7 @@
     },
     "--sf-line-clamp": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4066,6 +4567,7 @@
     },
     "--sf-link-external-marker": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4074,6 +4576,7 @@
     },
     "--sf-link-underline-offset": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4082,6 +4585,7 @@
     },
     "--sf-link-underline-thickness": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4090,6 +4594,7 @@
     },
     "--sf-lumlocker": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4098,6 +4603,7 @@
     },
     "--sf-mask-scrim-end": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4106,6 +4612,7 @@
     },
     "--sf-mask-scrim-start": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4114,6 +4621,7 @@
     },
     "--sf-motion-scale": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4122,6 +4630,7 @@
     },
     "--sf-object-fit": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4130,6 +4639,7 @@
     },
     "--sf-object-position": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4138,6 +4648,7 @@
     },
     "--sf-opacity-0": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4146,6 +4657,7 @@
     },
     "--sf-opacity-10": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4154,6 +4666,7 @@
     },
     "--sf-opacity-100": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4162,6 +4675,7 @@
     },
     "--sf-opacity-25": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4170,6 +4684,7 @@
     },
     "--sf-opacity-50": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4178,6 +4693,7 @@
     },
     "--sf-opacity-75": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4186,6 +4702,7 @@
     },
     "--sf-opacity-disabled": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4194,6 +4711,7 @@
     },
     "--sf-optical-sizing": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4202,6 +4720,7 @@
     },
     "--sf-print-base-size": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4210,6 +4729,7 @@
     },
     "--sf-print-page-margin": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4218,6 +4738,7 @@
     },
     "--sf-print-page-size": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4226,6 +4747,7 @@
     },
     "--sf-prose-block-margin": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4234,6 +4756,7 @@
     },
     "--sf-prose-blockquote-border": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4242,6 +4765,7 @@
     },
     "--sf-prose-blockquote-padding": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4250,6 +4774,7 @@
     },
     "--sf-prose-figcaption-size": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4258,6 +4783,7 @@
     },
     "--sf-prose-figure-margin": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4266,6 +4792,7 @@
     },
     "--sf-prose-heading-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4274,6 +4801,7 @@
     },
     "--sf-prose-hr-margin": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4282,6 +4810,7 @@
     },
     "--sf-prose-list-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4290,6 +4819,7 @@
     },
     "--sf-prose-marker-color": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4298,6 +4828,7 @@
     },
     "--sf-prose-media-margin": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4306,6 +4837,7 @@
     },
     "--sf-prose-media-radius": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4314,6 +4846,7 @@
     },
     "--sf-prose-nested-list-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4322,6 +4855,7 @@
     },
     "--sf-prose-paragraph": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4330,6 +4864,7 @@
     },
     "--sf-prose-table-pad": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4338,6 +4873,7 @@
     },
     "--sf-radius-2xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4346,6 +4882,7 @@
     },
     "--sf-radius-3xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4354,6 +4891,7 @@
     },
     "--sf-radius-4xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4362,6 +4900,7 @@
     },
     "--sf-radius-full": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4370,6 +4909,7 @@
     },
     "--sf-radius-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4378,6 +4918,7 @@
     },
     "--sf-radius-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4386,6 +4927,7 @@
     },
     "--sf-radius-none": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4394,6 +4936,7 @@
     },
     "--sf-radius-outer": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4402,6 +4945,7 @@
     },
     "--sf-radius-pill": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4410,6 +4954,7 @@
     },
     "--sf-radius-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4418,6 +4963,7 @@
     },
     "--sf-radius-scale": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4426,6 +4972,7 @@
     },
     "--sf-radius-xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4434,6 +4981,7 @@
     },
     "--sf-radius-xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4442,6 +4990,7 @@
     },
     "--sf-ratio-3-2": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4450,6 +4999,7 @@
     },
     "--sf-ratio-4-3": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4458,6 +5008,7 @@
     },
     "--sf-ratio-cinema": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4466,6 +5017,7 @@
     },
     "--sf-ratio-golden": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4474,6 +5026,7 @@
     },
     "--sf-ratio-portrait": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4482,6 +5035,7 @@
     },
     "--sf-ratio-square": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4490,6 +5044,7 @@
     },
     "--sf-ratio-video": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4498,6 +5053,7 @@
     },
     "--sf-reel-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4506,6 +5062,7 @@
     },
     "--sf-reel-height": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4514,6 +5071,7 @@
     },
     "--sf-reel-item-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4522,6 +5080,7 @@
     },
     "--sf-safe-bottom": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4530,6 +5089,7 @@
     },
     "--sf-safe-left": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4538,6 +5098,7 @@
     },
     "--sf-safe-right": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4546,6 +5107,7 @@
     },
     "--sf-safe-top": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4554,6 +5116,7 @@
     },
     "--sf-scrim-color": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4562,6 +5125,7 @@
     },
     "--sf-scrim-direction": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4570,6 +5134,7 @@
     },
     "--sf-scrim-gradient": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4578,6 +5143,7 @@
     },
     "--sf-scrim-text-shadow": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4586,6 +5152,7 @@
     },
     "--sf-scroll-shadow-size": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -4594,6 +5161,7 @@
     },
     "--sf-scroll-timeline-range-end": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4602,6 +5170,7 @@
     },
     "--sf-scroll-timeline-range-start": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4610,6 +5179,7 @@
     },
     "--sf-scrollbar-thumb": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4618,6 +5188,7 @@
     },
     "--sf-scrollbar-track": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4626,6 +5197,7 @@
     },
     "--sf-section-pad": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4634,6 +5206,7 @@
     },
     "--sf-section-pad--2xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4642,6 +5215,7 @@
     },
     "--sf-section-pad--l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4650,6 +5224,7 @@
     },
     "--sf-section-pad--m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4658,6 +5233,7 @@
     },
     "--sf-section-pad--s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4666,6 +5242,7 @@
     },
     "--sf-section-pad--xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4674,6 +5251,7 @@
     },
     "--sf-section-pad--xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4682,6 +5260,7 @@
     },
     "--sf-shadow-2xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4690,6 +5269,7 @@
     },
     "--sf-shadow-color": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4698,6 +5278,7 @@
     },
     "--sf-shadow-glow": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4706,6 +5287,7 @@
     },
     "--sf-shadow-glow-color": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4714,6 +5296,7 @@
     },
     "--sf-shadow-inner": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4722,6 +5305,7 @@
     },
     "--sf-shadow-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4730,6 +5314,7 @@
     },
     "--sf-shadow-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4738,6 +5323,7 @@
     },
     "--sf-shadow-none": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4746,6 +5332,7 @@
     },
     "--sf-shadow-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4754,6 +5341,7 @@
     },
     "--sf-shadow-strength": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4762,6 +5350,7 @@
     },
     "--sf-shadow-xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4770,6 +5359,7 @@
     },
     "--sf-shadow-xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4778,6 +5368,7 @@
     },
     "--sf-sidebar-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4786,6 +5377,7 @@
     },
     "--sf-sidebar-min-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4794,6 +5386,7 @@
     },
     "--sf-sidebar-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -4802,6 +5395,7 @@
     },
     "--sf-size-l": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4810,6 +5404,7 @@
     },
     "--sf-size-m": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4818,6 +5413,7 @@
     },
     "--sf-size-s": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4826,6 +5422,7 @@
     },
     "--sf-size-xl": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4834,6 +5431,7 @@
     },
     "--sf-size-xs": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -4842,6 +5440,7 @@
     },
     "--sf-space-2xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4849,7 +5448,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4857,7 +5457,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4865,7 +5466,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4873,7 +5475,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4881,7 +5484,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4889,7 +5493,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4898,6 +5503,7 @@
     },
     "--sf-space-2xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4906,6 +5512,7 @@
     },
     "--sf-space-3xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4913,7 +5520,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-2xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4921,7 +5529,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4929,7 +5538,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4937,7 +5547,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4945,7 +5556,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4953,7 +5565,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4961,7 +5574,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4970,6 +5584,7 @@
     },
     "--sf-space-4xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -4977,7 +5592,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-2xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4985,7 +5601,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -4993,7 +5610,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-3xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5001,7 +5619,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5009,7 +5628,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5017,7 +5637,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5025,7 +5646,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5033,7 +5655,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5042,6 +5665,7 @@
     },
     "--sf-space-base-max": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5050,6 +5674,7 @@
     },
     "--sf-space-base-min": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5058,6 +5683,7 @@
     },
     "--sf-space-content": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -5066,6 +5692,7 @@
     },
     "--sf-space-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -5074,6 +5701,7 @@
     },
     "--sf-space-gutter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5082,6 +5710,7 @@
     },
     "--sf-space-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5089,7 +5718,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5097,7 +5727,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5105,7 +5736,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5113,7 +5745,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5122,6 +5755,7 @@
     },
     "--sf-space-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5129,7 +5763,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5137,7 +5772,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5145,7 +5781,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5154,6 +5791,7 @@
     },
     "--sf-space-none": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5162,6 +5800,7 @@
     },
     "--sf-space-px": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5170,6 +5809,7 @@
     },
     "--sf-space-ratio-max": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5178,6 +5818,7 @@
     },
     "--sf-space-ratio-min": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5186,6 +5827,7 @@
     },
     "--sf-space-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5193,7 +5835,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-s-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5201,7 +5844,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-s-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5210,6 +5854,7 @@
     },
     "--sf-space-scale": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5218,6 +5863,7 @@
     },
     "--sf-space-xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5225,7 +5871,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5233,7 +5880,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5241,7 +5889,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5249,7 +5898,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5257,7 +5907,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5266,6 +5917,7 @@
     },
     "--sf-space-xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5273,7 +5925,8 @@
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xs-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5282,6 +5935,7 @@
     },
     "--sf-stack-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -5290,6 +5944,7 @@
     },
     "--sf-state-pending-opacity": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5298,6 +5953,7 @@
     },
     "--sf-sticky-offset": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5306,6 +5962,7 @@
     },
     "--sf-sticky-offset-desktop": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5314,6 +5971,7 @@
     },
     "--sf-sticky-offset-mobile": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5322,6 +5980,7 @@
     },
     "--sf-stroke-bold": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5330,6 +5989,7 @@
     },
     "--sf-stroke-heavy": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5338,6 +5998,7 @@
     },
     "--sf-stroke-regular": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5346,6 +6007,7 @@
     },
     "--sf-stroke-thin": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5354,6 +6016,7 @@
     },
     "--sf-switcher-gap": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -5362,6 +6025,7 @@
     },
     "--sf-switcher-threshold": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
@@ -5370,6 +6034,7 @@
     },
     "--sf-text-2xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5378,6 +6043,7 @@
     },
     "--sf-text-2xl-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5386,6 +6052,7 @@
     },
     "--sf-text-2xl-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5394,6 +6061,7 @@
     },
     "--sf-text-2xl-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5402,6 +6070,7 @@
     },
     "--sf-text-2xl-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5409,7 +6078,8 @@
       "value": "none"
     },
     "--sf-text-2xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5417,7 +6087,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5425,7 +6096,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5433,7 +6105,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5441,7 +6114,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5449,7 +6123,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5458,6 +6133,7 @@
     },
     "--sf-text-2xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5466,6 +6142,7 @@
     },
     "--sf-text-2xs-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5474,6 +6151,7 @@
     },
     "--sf-text-2xs-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5482,6 +6160,7 @@
     },
     "--sf-text-2xs-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5490,6 +6169,7 @@
     },
     "--sf-text-2xs-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5498,6 +6178,7 @@
     },
     "--sf-text-3xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5506,6 +6187,7 @@
     },
     "--sf-text-3xl-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5514,6 +6196,7 @@
     },
     "--sf-text-3xl-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5522,6 +6205,7 @@
     },
     "--sf-text-3xl-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5530,6 +6214,7 @@
     },
     "--sf-text-3xl-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5537,7 +6222,8 @@
       "value": "none"
     },
     "--sf-text-3xl-to-2xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5545,7 +6231,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5553,7 +6240,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5561,7 +6249,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5569,7 +6258,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5577,7 +6267,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5585,7 +6276,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5594,6 +6286,7 @@
     },
     "--sf-text-4xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5602,6 +6295,7 @@
     },
     "--sf-text-4xl-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5610,6 +6304,7 @@
     },
     "--sf-text-4xl-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5618,6 +6313,7 @@
     },
     "--sf-text-4xl-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5626,6 +6322,7 @@
     },
     "--sf-text-4xl-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5633,7 +6330,8 @@
       "value": "none"
     },
     "--sf-text-4xl-to-2xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5641,7 +6339,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5649,7 +6348,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-3xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5657,7 +6357,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5665,7 +6366,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5673,7 +6375,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5681,7 +6384,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-xl": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5689,7 +6393,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5698,6 +6403,7 @@
     },
     "--sf-text-base-max": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5706,6 +6412,7 @@
     },
     "--sf-text-base-min": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5714,6 +6421,7 @@
     },
     "--sf-text-display-base-max": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5722,6 +6430,7 @@
     },
     "--sf-text-display-base-min": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5730,6 +6439,7 @@
     },
     "--sf-text-display-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5738,6 +6448,7 @@
     },
     "--sf-text-display-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5746,6 +6457,7 @@
     },
     "--sf-text-display-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5754,6 +6466,7 @@
     },
     "--sf-text-display-scale": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5762,6 +6475,7 @@
     },
     "--sf-text-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5770,6 +6484,7 @@
     },
     "--sf-text-l-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5778,6 +6493,7 @@
     },
     "--sf-text-l-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5786,6 +6502,7 @@
     },
     "--sf-text-l-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5794,6 +6511,7 @@
     },
     "--sf-text-l-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5801,7 +6519,8 @@
       "value": "none"
     },
     "--sf-text-l-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5809,7 +6528,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-l-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5817,7 +6537,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-l-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5825,7 +6546,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-l-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5834,6 +6556,7 @@
     },
     "--sf-text-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5842,6 +6565,7 @@
     },
     "--sf-text-m-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5850,6 +6574,7 @@
     },
     "--sf-text-m-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5858,6 +6583,7 @@
     },
     "--sf-text-m-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5866,6 +6592,7 @@
     },
     "--sf-text-m-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5873,7 +6600,8 @@
       "value": "65ch"
     },
     "--sf-text-m-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5881,7 +6609,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
     },
     "--sf-text-m-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5889,7 +6618,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
     },
     "--sf-text-m-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5898,6 +6628,7 @@
     },
     "--sf-text-ratio-max": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5906,6 +6637,7 @@
     },
     "--sf-text-ratio-min": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5914,6 +6646,7 @@
     },
     "--sf-text-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5922,6 +6655,7 @@
     },
     "--sf-text-s-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5930,6 +6664,7 @@
     },
     "--sf-text-s-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5938,6 +6673,7 @@
     },
     "--sf-text-s-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5946,6 +6682,7 @@
     },
     "--sf-text-s-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5953,7 +6690,8 @@
       "value": "65ch"
     },
     "--sf-text-s-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5961,7 +6699,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))"
     },
     "--sf-text-s-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -5970,6 +6709,7 @@
     },
     "--sf-text-scale": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -5978,6 +6718,7 @@
     },
     "--sf-text-shadow-l": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5986,6 +6727,7 @@
     },
     "--sf-text-shadow-m": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -5994,6 +6736,7 @@
     },
     "--sf-text-shadow-none": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6002,6 +6745,7 @@
     },
     "--sf-text-shadow-s": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6010,6 +6754,7 @@
     },
     "--sf-text-xl": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6018,6 +6763,7 @@
     },
     "--sf-text-xl-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6026,6 +6772,7 @@
     },
     "--sf-text-xl-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6034,6 +6781,7 @@
     },
     "--sf-text-xl-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6042,6 +6790,7 @@
     },
     "--sf-text-xl-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6049,7 +6798,8 @@
       "value": "none"
     },
     "--sf-text-xl-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6057,7 +6807,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-l": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6065,7 +6816,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-m": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6073,7 +6825,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-s": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6081,7 +6834,8 @@
       "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6090,6 +6844,7 @@
     },
     "--sf-text-xs": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6098,6 +6853,7 @@
     },
     "--sf-text-xs-font-weight": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6106,6 +6862,7 @@
     },
     "--sf-text-xs-letter-spacing": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6114,6 +6871,7 @@
     },
     "--sf-text-xs-line-height": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6122,6 +6880,7 @@
     },
     "--sf-text-xs-max-width": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6129,7 +6888,8 @@
       "value": "60ch"
     },
     "--sf-text-xs-to-2xs": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
       "files": [
         "optional/tokens.sizes-extended.css"
       ],
@@ -6138,6 +6898,7 @@
     },
     "--sf-touch-target": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6146,6 +6907,7 @@
     },
     "--sf-tracking-normal": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6154,6 +6916,7 @@
     },
     "--sf-tracking-tight": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6162,6 +6925,7 @@
     },
     "--sf-tracking-wide": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6170,6 +6934,7 @@
     },
     "--sf-tracking-wider": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6178,6 +6943,7 @@
     },
     "--sf-tracking-widest": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6186,6 +6952,7 @@
     },
     "--sf-transition-all": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6194,6 +6961,7 @@
     },
     "--sf-transition-colors": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6202,6 +6970,7 @@
     },
     "--sf-transition-enter": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6210,6 +6979,7 @@
     },
     "--sf-transition-exit": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6218,6 +6988,7 @@
     },
     "--sf-transition-fast": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6226,6 +6997,7 @@
     },
     "--sf-transition-opacity": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6234,6 +7006,7 @@
     },
     "--sf-transition-overlay": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6242,6 +7015,7 @@
     },
     "--sf-transition-shadow": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6250,6 +7024,7 @@
     },
     "--sf-transition-slow": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6258,6 +7033,7 @@
     },
     "--sf-transition-transform": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6266,6 +7042,7 @@
     },
     "--sf-truncate-suffix": {
       "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
       "files": [
         "core/tokens.macros.css"
       ],
@@ -6274,6 +7051,7 @@
     },
     "--sf-z-base": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6282,6 +7060,7 @@
     },
     "--sf-z-below": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6290,6 +7069,7 @@
     },
     "--sf-z-dropdown": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6298,6 +7078,7 @@
     },
     "--sf-z-fixed": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6306,6 +7087,7 @@
     },
     "--sf-z-high": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6314,6 +7096,7 @@
     },
     "--sf-z-low": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6322,6 +7105,7 @@
     },
     "--sf-z-max": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6330,6 +7114,7 @@
     },
     "--sf-z-mid": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6338,6 +7123,7 @@
     },
     "--sf-z-overlay": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6346,6 +7132,7 @@
     },
     "--sf-z-raised": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
@@ -6354,6 +7141,7 @@
     },
     "--sf-z-sticky": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6362,6 +7150,7 @@
     },
     "--sf-z-toast": {
       "tier": "PUBLIC",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
@@ -6370,6 +7159,7 @@
     },
     "--sf-z-top": {
       "tier": "PUBLIC",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
