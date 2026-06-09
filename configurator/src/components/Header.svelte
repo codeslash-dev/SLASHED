@@ -3,8 +3,15 @@
    * Top bar: product title, framework sync stamp, and the preview toggle.
    */
   import { sync } from '../lib/model.js';
+  import { ui } from '../lib/store.svelte.js';
 
   let { showPreview = $bindable(true) } = $props();
+
+  const VIEWS = [
+    { id: 'tokens', label: 'Tokens' },
+    { id: 'a11y', label: 'Accessibility' },
+    { id: 'scales', label: 'Scales' },
+  ];
 </script>
 
 <header class="hdr">
@@ -17,6 +24,17 @@
       </p>
     </div>
   </div>
+
+  <nav class="hdr__views" aria-label="Views">
+    {#each VIEWS as v (v.id)}
+      <button
+        class="hdr__view"
+        class:hdr__view--on={ui.view === v.id}
+        onclick={() => (ui.view = v.id)}
+        aria-pressed={ui.view === v.id}
+      >{v.label}</button>
+    {/each}
+  </nav>
 
   <div class="hdr__meta">
     {#if sync.frameworkVersion}
@@ -78,6 +96,30 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+  }
+  .hdr__views {
+    display: inline-flex;
+    gap: 2px;
+    background: var(--cfg-bg);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius);
+    padding: 3px;
+  }
+  .hdr__view {
+    background: transparent;
+    border: none;
+    color: var(--cfg-text-muted);
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: var(--cfg-radius-s);
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .hdr__view:hover {
+    color: var(--cfg-text);
+  }
+  .hdr__view--on {
+    background: var(--cfg-accent-strong);
+    color: #fff;
   }
   .hdr__pill {
     font-family: var(--cfg-mono);

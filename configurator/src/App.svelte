@@ -13,6 +13,8 @@
   import TokenGroup from './components/TokenGroup.svelte';
   import OutputPanel from './components/OutputPanel.svelte';
   import Preview from './components/Preview.svelte';
+  import WcagPanel from './components/WcagPanel.svelte';
+  import ScaleGenerator from './components/ScaleGenerator.svelte';
 
   let showPreview = $state(true);
 
@@ -53,38 +55,46 @@
   <Header bind:showPreview />
 
   <div class="body" class:body--no-preview={!showPreview}>
-    <Sidebar {categories} />
+    {#if ui.view === 'tokens'}
+      <Sidebar {categories} />
 
-    <main class="list">
-      {#if visible.length === 0}
-        <div class="list__empty">
-          <p>No tokens match the current search and filters.</p>
-        </div>
-      {:else if searching}
-        {#each grouped as cat (cat.category)}
-          {#each cat.groups as g (g.name)}
-            <TokenGroup
-              name={g.name}
-              tokens={g.tokens}
-              showCategory={true}
-              category={cat.category}
-            />
+      <main class="list">
+        {#if visible.length === 0}
+          <div class="list__empty">
+            <p>No tokens match the current search and filters.</p>
+          </div>
+        {:else if searching}
+          {#each grouped as cat (cat.category)}
+            {#each cat.groups as g (g.name)}
+              <TokenGroup
+                name={g.name}
+                tokens={g.tokens}
+                showCategory={true}
+                category={cat.category}
+              />
+            {/each}
           {/each}
-        {/each}
-      {:else if activeCat}
-        <h2 class="list__heading">{activeCat.category}</h2>
-        {#each activeCat.groups as g (g.name)}
-          <TokenGroup name={g.name} tokens={g.tokens} />
-        {/each}
-      {/if}
-    </main>
+        {:else if activeCat}
+          <h2 class="list__heading">{activeCat.category}</h2>
+          {#each activeCat.groups as g (g.name)}
+            <TokenGroup name={g.name} tokens={g.tokens} />
+          {/each}
+        {/if}
+      </main>
+    {:else if ui.view === 'a11y'}
+      <main class="tool"><WcagPanel /></main>
+    {:else if ui.view === 'scales'}
+      <main class="tool"><ScaleGenerator /></main>
+    {/if}
 
     {#if showPreview}
       <Preview />
     {/if}
   </div>
 
-  <OutputPanel />
+  {#if ui.view === 'tokens'}
+    <OutputPanel />
+  {/if}
 </div>
 
 <style>
@@ -105,6 +115,18 @@
     overflow-y: auto;
     padding: 18px;
     min-width: 0;
+  }
+  .tool {
+    grid-column: 1 / span 2;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .tool > :global(.wcag),
+  .tool > :global(.scales) {
+    flex: 1;
+    min-height: 0;
   }
   .list__heading {
     margin: 0 0 14px;
