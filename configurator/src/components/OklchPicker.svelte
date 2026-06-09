@@ -27,27 +27,95 @@
     return parseFloat(n.toFixed(d)).toString();
   }
 
+  // ── Color conversion utilities ────────────────────────────────────────────
+
+  function gammaExpand(c) {
+    return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  }
+
+  function hexToLinearRgb(hex) {
+    let h = hex.replace('#', '');
+    if (h.length === 3 || h.length === 4) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    const n = parseInt(h.slice(0, 6), 16);
+    return {
+      r: gammaExpand(((n >> 16) & 255) / 255),
+      g: gammaExpand(((n >>  8) & 255) / 255),
+      b: gammaExpand(( n        & 255) / 255),
+    };
+  }
+
+  function hslToLinearRgb(hDeg, s, lv) {
+    s /= 100; lv /= 100;
+    const k = (n) => (n + hDeg / 30) % 12;
+    const a = s * Math.min(lv, 1 - lv);
+    const f = (n) => lv - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    return { r: gammaExpand(f(0)), g: gammaExpand(f(8)), b: gammaExpand(f(4)) };
+  }
+
+  function linearRgbToOklab({ r, g, b }) {
+    const l = 0.4122214708*r + 0.5363325363*g + 0.0514459929*b;
+    const m = 0.2119034982*r + 0.6806995451*g + 0.1073969566*b;
+    const s = 0.0883024619*r + 0.2817188376*g + 0.6299787005*b;
+    const l_ = Math.cbrt(l), m_ = Math.cbrt(m), s_ = Math.cbrt(s);
+    return {
+      L:  0.2104542553*l_ + 0.7936177850*m_ - 0.0040720468*s_,
+      a:  1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_,
+      b:  0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_,
+    };
+  }
+
+  function oklabToOklch({ L, a, b }) {
+    const C = Math.sqrt(a*a + b*b);
+    let H = (Math.atan2(b, a) * 180) / Math.PI;
+    if (H < 0) H += 360;
+    return { L, C, H };
+  }
+
+  function applyOklch({ L, C, H }) {
+    mode = 'oklch';
+    l = Math.max(0, Math.min(1, L));
+    c = Math.max(0, Math.min(0.4, C));
+    h = ((H % 360) + 360) % 360;
+  }
+
+  // ── Parser ────────────────────────────────────────────────────────────────
+
   function parse(v) {
     if (!v) return;
     const s = v.trim();
+
     const oklchM = /^oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)/.exec(s);
     if (oklchM) {
       mode = 'oklch';
       const rawL = oklchM[1];
-      l = rawL.endsWith('%') ? parseFloat(rawL) / 100 : parseFloat(rawL);
+      l = Math.min(1, rawL.endsWith('%') ? parseFloat(rawL) / 100 : parseFloat(rawL));
       c = Math.min(parseFloat(oklchM[2]), 0.4);
       h = parseFloat(oklchM[3]);
       return;
     }
+
     const oklabM = /^oklab\(\s*([\d.]+%?)\s+([-\d.]+)\s+([-\d.]+)/.exec(s);
     if (oklabM) {
       mode = 'oklab';
       const rawL = oklabM[1];
-      ll = rawL.endsWith('%') ? parseFloat(rawL) / 100 : parseFloat(rawL);
+      ll = Math.min(1, rawL.endsWith('%') ? parseFloat(rawL) / 100 : parseFloat(rawL));
       la = Math.max(-0.4, Math.min(0.4, parseFloat(oklabM[2])));
       lb = Math.max(-0.4, Math.min(0.4, parseFloat(oklabM[3])));
+      return;
     }
-    // Hex / other formats: leave sliders at current values (user adjusts from there).
+
+    // hex: #rgb #rgba #rrggbb #rrggbbaa
+    if (/^#[0-9a-fA-F]{3,8}$/.test(s)) {
+      try { applyOklch(oklabToOklch(linearRgbToOklab(hexToLinearRgb(s)))); } catch {}
+      return;
+    }
+
+    // hsl() / hsla() — legacy comma or modern space syntax
+    const hslM = /^hsla?\(\s*([\d.]+)(?:deg|rad|turn|grad)?\s*[, ]\s*([\d.]+)%?\s*[, ]\s*([\d.]+)%?/.exec(s);
+    if (hslM) {
+      try { applyOklch(oklabToOklch(linearRgbToOklab(hslToLinearRgb(parseFloat(hslM[1]), parseFloat(hslM[2]), parseFloat(hslM[3]))))); } catch {}
+    }
+    // Other (var(), light-dark(), etc.) — leave sliders at current values.
   }
 
   $effect(() => {
