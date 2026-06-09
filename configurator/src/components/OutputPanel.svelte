@@ -58,19 +58,31 @@
       <span class="out__count">{count} token{count === 1 ? '' : 's'}</span>
     </div>
     <div class="out__actions">
-      <div class="out__seg" role="group" aria-label="Output framing">
-        <button
-          class="out__seg-btn"
-          class:out__seg-btn--on={ui.outputMode === 'layer'}
-          onclick={() => (ui.outputMode = 'layer')}
-          title="Wrap output in @layer slashed.overrides"
-        >@layer</button>
-        <button
-          class="out__seg-btn"
-          class:out__seg-btn--on={ui.outputMode === 'root'}
-          onclick={() => (ui.outputMode = 'root')}
-          title="Output a bare :root rule"
-        >:root</button>
+      <div class="out__fmt">
+        <span
+          class="out__fmt-label"
+          title="@layer — for standard SLASHED projects (cascade layers). Overrides win without !important.&#10;no layers — for older setups without @layer support (WordPress, legacy toolchains). Outputs a bare :root block."
+        >Output format <span class="out__fmt-help" aria-hidden="true">?</span></span>
+        <div class="out__seg" role="group" aria-label="Output format">
+          <button
+            class="out__seg-btn"
+            class:out__seg-btn--on={ui.outputMode === 'layer'}
+            onclick={() => (ui.outputMode = 'layer')}
+            title="Standard — wraps overrides in @layer slashed.overrides { :root {…} }. Use with any project that loads SLASHED normally; cascade layers ensure these win without !important."
+          >
+            <span class="out__seg-syntax">@layer</span>
+            <span class="out__seg-hint">cascade layers</span>
+          </button>
+          <button
+            class="out__seg-btn"
+            class:out__seg-btn--on={ui.outputMode === 'root'}
+            onclick={() => (ui.outputMode = 'root')}
+            title="Legacy / no-layers — outputs a bare :root {…} block. Use when your project does not support CSS cascade layers (older toolchains, WordPress, some CMSes). Declarations outside @layer always beat layered tokens."
+          >
+            <span class="out__seg-syntax">:root</span>
+            <span class="out__seg-hint">no layers</span>
+          </button>
+        </div>
       </div>
       <button class="cfg-btn" onclick={() => (importOpen = !importOpen)}>Import…</button>
       <button class="cfg-btn" onclick={clearAll} disabled={count === 0}>Clear</button>
@@ -147,6 +159,32 @@
     gap: 8px;
     flex-wrap: wrap;
   }
+  .out__fmt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .out__fmt-label {
+    font-size: 11px;
+    color: var(--cfg-text-faint);
+    white-space: nowrap;
+    cursor: default;
+  }
+  .out__fmt-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--cfg-border-strong);
+    font-size: 10px;
+    font-style: normal;
+    line-height: 1;
+    color: var(--cfg-text-faint);
+    vertical-align: middle;
+    cursor: help;
+  }
   .out__seg {
     display: inline-flex;
     border: 1px solid var(--cfg-border-strong);
@@ -154,16 +192,32 @@
     overflow: hidden;
   }
   .out__seg-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
     background: var(--cfg-surface-2);
     color: var(--cfg-text-muted);
     border: none;
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+  .out__seg-syntax {
     font-family: var(--cfg-mono);
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .out__seg-hint {
+    font-size: 10px;
+    line-height: 1;
+    opacity: 0.7;
   }
   .out__seg-btn--on {
     background: var(--cfg-accent-strong);
     color: #fff;
+  }
+  .out__seg-btn--on .out__seg-hint {
+    opacity: 0.85;
   }
   .out__import {
     display: flex;

@@ -9,8 +9,15 @@
       "docs/token-index.md",
       "docs/token-index.json",
       "docs/api-index.json",
-      "docs/api-index.md"
+      "docs/api-index.md",
+      "configurator/src/data/api-index.generated.json"
     ]
+  },
+  {
+    "name": "configurator api sync",
+    "srcPrefixes": ["docs/token-annotations.json", "docs/api-index.json"],
+    "buildCmd": "npm run configurator:sync",
+    "outputs": ["configurator/src/data/api-index.generated.json"]
   },
   {
     "name": "sizes-extended tokens",
