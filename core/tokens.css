@@ -216,7 +216,7 @@
 
      Registered as <number> so they can be used as pow() exponents/operands
      and multiplied by 1rem in calc(). Requires CSS pow() (Chrome 125+,
-     Safari 17.5+, Firefox 118+) — see browser floor. Plain :root mirrors
+     Safari 15.4, Firefox 118+) — see browser floor. Plain :root mirrors
      below keep values readable; do NOT edit them independently. */
   @property --sf-fluid-min-vw          { syntax: "<number>"; inherits: true; initial-value: 22.5; }
   @property --sf-fluid-max-vw          { syntax: "<number>"; inherits: true; initial-value: 90; }
