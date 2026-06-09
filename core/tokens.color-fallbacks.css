@@ -2,7 +2,18 @@
    HSL-based fallbacks for browsers without light-dark() / oklch(from…) support.
    Light mode only — dark mode is handled by modern CSS exclusively.
    Customise by overriding the --sf-*-h / --sf-*-s / --sf-*-l channel variables;
-   the entire derived token tree recomputes automatically, no build step required. */
+   the entire derived token tree recomputes automatically, no build step required.
+
+   BUNDLE MEMBERSHIP
+   ─────────────────
+   Excluded from the `essential` bundles (which are modern-only — Chrome 125+,
+   Safari 17.5+, Firefox 128+). Included — and loaded FIRST, before tokens.css —
+   in every `optimal*` and `full` bundle. These ungated sRGB declarations MUST
+   precede tokens.css so the modern @supports-gated values override them on
+   capable engines (see tests/tier1-p3-ordering). To add legacy color fallbacks
+   to an essential build, include this file before the essential bundle:
+     <link rel="stylesheet" href="core/tokens.color-fallbacks.css">
+     <link rel="stylesheet" href="dist/slashed.essential.css"> */
 
 @layer slashed.tokens {
   :root {

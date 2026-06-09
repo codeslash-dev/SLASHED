@@ -6,47 +6,45 @@
  * and arrives at step B's min value (narrow viewport), spanning the full
  * fluid range between two non-adjacent scale steps.
  *
- * Formula:  clamp(B_min, slope * (100vw - VP_MIN) + B_min, A_max)
- * where:    slope = (A_max - B_min) / VP_RANGE
- *           VP_MIN   = 22.5rem (360px — narrowest supported viewport)
- *           VP_RANGE = 67.5rem (90rem max − 22.5rem min)
+ * Generative engine (mirrors core/tokens.css): every endpoint is derived at
+ * runtime from the fluid-engine input scalars, so overriding any of them on
+ * :root recalibrates the bridges too — no regeneration needed.
+ *
+ *   step coefficient(min) = base_min * pow(ratio_min, N)
+ *   step coefficient(max) = base_max * pow(ratio_max, N)
+ *   slope = (A_maxCoeff - B_minCoeff) / (max_vw - min_vw)        [unitless]
+ *   bridge = clamp(B_min, slope * (100vw - min_vw*1rem) + B_min, A_max)
+ *
+ * where N is the step exponent relative to the `m` step (m = 0):
+ *   2xs=-3  xs=-2  s=-1  m=0  l=1  xl=2  2xl=3  3xl=4  4xl=5
+ *
+ * Inputs (core/tokens.css):
+ *   --sf-fluid-min-vw / --sf-fluid-max-vw       viewport range (rem, unitless)
+ *   --sf-space-ratio-{min,max} / --sf-space-base-{min,max}
+ *   --sf-text-ratio-{min,max}  / --sf-text-base-{min,max}
+ *
+ * Requires CSS pow() (Chrome 125+, Safari 17.5+, Firefox 118+).
  */
 
-const VP_MIN   = 22.5;
-const VP_RANGE = 67.5;
+// Step names in ascending order; exponent N = index - 3 (so `m` = 0).
+const STEP_NAMES = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl'];
+const expOf = (name) => STEP_NAMES.indexOf(name) - 3;
 
-// -------------------------------------------------------------------
-// Source values extracted from core/tokens.css.
-// SYNC REQUIRED: if the spacing or text scale changes in core/tokens.css,
-// update SPACE_STEPS (mirrors the core --sf-space-{size} scale values)
-// and TEXT_STEPS (mirrors the core --sf-text-{size} scale values) here,
-// then re-run `node scripts/gen-sizes-extended.js`
-// to regenerate optional/tokens.sizes-extended.css.
-// -------------------------------------------------------------------
+const SPACE_VARS = {
+  baseMin:  '--sf-space-base-min',
+  baseMax:  '--sf-space-base-max',
+  ratioMin: '--sf-space-ratio-min',
+  ratioMax: '--sf-space-ratio-max',
+  scale:    '--sf-space-scale',
+};
 
-const SPACE_STEPS = [
-  { name: '2xs', min: 0.51, max: 0.84 },
-  { name: 'xs',  min: 0.64, max: 1.13 },
-  { name: 's',   min: 0.80, max: 1.50 },
-  { name: 'm',   min: 1.00, max: 2.00 },
-  { name: 'l',   min: 1.25, max: 2.67 },
-  { name: 'xl',  min: 1.56, max: 3.55 },
-  { name: '2xl', min: 1.95, max: 4.74 },
-  { name: '3xl', min: 2.44, max: 6.31 },
-  { name: '4xl', min: 3.05, max: 8.42 },
-];
-
-const TEXT_STEPS = [
-  { name: '2xs', min: 0.51, max: 0.53 },
-  { name: 'xs',  min: 0.64, max: 0.70 },
-  { name: 's',   min: 0.80, max: 0.94 },
-  { name: 'm',   min: 1.00, max: 1.25 },
-  { name: 'l',   min: 1.25, max: 1.67 },
-  { name: 'xl',  min: 1.56, max: 2.22 },
-  { name: '2xl', min: 1.95, max: 2.96 },
-  { name: '3xl', min: 2.44, max: 3.95 },
-  { name: '4xl', min: 3.05, max: 5.26 },
-];
+const TEXT_VARS = {
+  baseMin:  '--sf-text-base-min',
+  baseMax:  '--sf-text-base-max',
+  ratioMin: '--sf-text-ratio-min',
+  ratioMax: '--sf-text-ratio-max',
+  scale:    null, // text bridges intentionally omit the scale multiplier
+};
 
 // Per-text-size sub-property defaults.
 // Convention mirrors the existing --sf-h{1-6}-* token pattern.
@@ -69,26 +67,27 @@ const TEXT_SIZE_PROPS = [
 ];
 
 // -------------------------------------------------------------------
-// Helpers
+// Helpers — generative CSS expressions over the fluid-engine inputs
 // -------------------------------------------------------------------
 
-function rem(n) {
-  const s = n.toString();
-  return s.includes('.') ? s.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '') + 'rem' : s + 'rem';
+// Unitless coefficient: base * pow(ratio, N)  (pow term omitted when N === 0)
+function minCoeff(v, n) {
+  return n === 0 ? `var(${v.baseMin})` : `var(${v.baseMin}) * pow(var(${v.ratioMin}), ${n})`;
+}
+function maxCoeff(v, n) {
+  return n === 0 ? `var(${v.baseMax})` : `var(${v.baseMax}) * pow(var(${v.ratioMax}), ${n})`;
 }
 
-function slope(maxA, minB) {
-  return ((maxA - minB) / VP_RANGE).toPrecision(15).replace(/\.?0+$/, '');
-}
-
-function spaceBridge(a, b) {
-  const s = slope(a.max, b.min);
-  return `calc(clamp(${rem(b.min)}, calc(${s} * (100vw - ${VP_MIN}rem) + ${rem(b.min)}), ${rem(a.max)}) * var(--sf-space-scale))`;
-}
-
-function textBridge(a, b) {
-  const s = slope(a.max, b.min);
-  return `clamp(${rem(b.min)}, calc(${s} * (100vw - ${VP_MIN}rem) + ${rem(b.min)}), ${rem(a.max)})`;
+// Bridge expression from step A (larger) down to step B (smaller).
+function bridge(v, aName, bName) {
+  const na = expOf(aName);
+  const nb = expOf(bName);
+  const aMax = maxCoeff(v, na);          // unitless
+  const bMin = minCoeff(v, nb);          // unitless
+  const slope = `(${aMax} - ${bMin}) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw))`;
+  const mid = `calc(${slope} * (100vw - var(--sf-fluid-min-vw) * 1rem) + ${bMin} * 1rem)`;
+  const clampExpr = `clamp(calc(${bMin} * 1rem), ${mid}, calc(${aMax} * 1rem))`;
+  return v.scale ? `calc(${clampExpr} * var(${v.scale}))` : clampExpr;
 }
 
 // Pad token name to align values in columns
@@ -104,6 +103,8 @@ const lines = [];
 
 lines.push(`/* ============================================================
    SLASHED — optional/tokens.sizes-extended.css
+   GENERATED by scripts/gen-sizes-extended.js — do not edit by hand.
+
    Optional module. Extends the core spacing and typography scales
    with two additions:
 
@@ -111,7 +112,10 @@ lines.push(`/* ============================================================
       non-adjacent scale steps. Where --sf-space-l compresses within
       its own range, --sf-space-l-to-m starts at l's max value on
       wide viewports and arrives at m's min on narrow viewports —
-      a larger range of motion for contexts that need it.
+      a larger range of motion for contexts that need it. Computed
+      from the same generative fluid engine as the core scales, so
+      overriding --sf-fluid-*, --sf-*-ratio-*, or --sf-*-base-*
+      recalibrates these bridges automatically.
 
    2. PER-TEXT-SIZE SUB-PROPERTIES — individual override knobs for
       line-height, font-weight, letter-spacing, and max-width on
@@ -121,6 +125,8 @@ lines.push(`/* ============================================================
 
    Load after core/tokens.css:
      @import "optional/tokens.sizes-extended.css";
+
+   Requires CSS pow() (Chrome 125+, Safari 17.5+, Firefox 118+).
 
    Token families:
      --sf-space-{A}-to-{B}            spacing bridge (A > B)
@@ -147,13 +153,13 @@ lines.push(`
        Respects --sf-space-scale like all fluid spacing tokens.
        ---------------------------------------------------------- */`);
 
-for (let i = SPACE_STEPS.length - 1; i >= 1; i--) {
-  const a = SPACE_STEPS[i];
+for (let i = STEP_NAMES.length - 1; i >= 1; i--) {
+  const a = STEP_NAMES[i];
   lines.push('');
   for (let j = i - 1; j >= 0; j--) {
-    const b = SPACE_STEPS[j];
-    const tokenName = `--sf-space-${a.name}-to-${b.name}:`;
-    lines.push(`    ${padName(tokenName, 28)} ${spaceBridge(a, b)};`);
+    const b = STEP_NAMES[j];
+    const tokenName = `--sf-space-${a}-to-${b}:`;
+    lines.push(`    ${padName(tokenName, 28)} ${bridge(SPACE_VARS, a, b)};`);
   }
 }
 
@@ -166,16 +172,16 @@ lines.push(`
        Text bridges
        Full descending matrix: --sf-text-{larger}-to-{smaller}
        No --sf-text-scale multiplier — consistent with how the
-       base text tokens are defined in core/tokens.css.
+       base text tokens are consumed by the text-bridge contract.
        ---------------------------------------------------------- */`);
 
-for (let i = TEXT_STEPS.length - 1; i >= 1; i--) {
-  const a = TEXT_STEPS[i];
+for (let i = STEP_NAMES.length - 1; i >= 1; i--) {
+  const a = STEP_NAMES[i];
   lines.push('');
   for (let j = i - 1; j >= 0; j--) {
-    const b = TEXT_STEPS[j];
-    const tokenName = `--sf-text-${a.name}-to-${b.name}:`;
-    lines.push(`    ${padName(tokenName, 26)} ${textBridge(a, b)};`);
+    const b = STEP_NAMES[j];
+    const tokenName = `--sf-text-${a}-to-${b}:`;
+    lines.push(`    ${padName(tokenName, 26)} ${bridge(TEXT_VARS, a, b)};`);
   }
 }
 

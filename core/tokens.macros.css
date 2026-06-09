@@ -66,6 +66,11 @@
     --sf-prose-figure-margin:    var(--sf-space-l);
     --sf-prose-marker-color:     var(--sf-color-primary);
     --sf-prose-figcaption-size:  var(--sf-text-s);
+    --sf-prose-blockquote-padding: var(--sf-space-m);
+    --sf-prose-blockquote-border:  var(--sf-border-width-2) solid var(--sf-color-border--subtle);
+    --sf-prose-hr-margin:          var(--sf-space-l);
+    --sf-prose-nested-list-gap:    var(--sf-space-2xs);
+    --sf-prose-table-pad:          var(--sf-space-xs);
 
     /* ----------------------------------------------------------
        Scroll shadow / overflow fade — mask gradient size.

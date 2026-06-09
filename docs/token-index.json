@@ -11,10 +11,10 @@
     ],
     "fallback_source": "core/tokens.color-fallbacks.css",
     "counts": {
-      "tokens": 769,
+      "tokens": 786,
       "by_tier": {
-        "PUBLIC": 733,
-        "PUBLIC-ADVANCED": 35,
+        "PUBLIC": 741,
+        "PUBLIC-ADVANCED": 44,
         "INTERNAL": 1
       },
       "with_fallback": 57,
@@ -3032,6 +3032,30 @@
       "fallback": false,
       "value": "var(--sf-font-weight-bold)"
     },
+    "--sf-display-l-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-display-m-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.05"
+    },
+    "--sf-display-s-line-height": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-leading-tight)"
+    },
     "--sf-divider-color": {
       "tier": "PUBLIC",
       "files": [
@@ -3239,6 +3263,22 @@
       ],
       "fallback": false,
       "value": "var(--sf-space-content)"
+    },
+    "--sf-fluid-max-vw": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "90"
+    },
+    "--sf-fluid-min-vw": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "22.5"
     },
     "--sf-focus-ring-color": {
       "tier": "PUBLIC",
@@ -3814,7 +3854,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "clamp( var(--sf-header-height-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))"
+      "value": "clamp( var(--sf-header-height-mobile), calc((var(--sf-header-height-desktop) - var(--sf-header-height-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))"
     },
     "--sf-header-height-desktop": {
       "tier": "PUBLIC",
@@ -4160,30 +4200,6 @@
       "fallback": false,
       "value": "auto"
     },
-    "--sf-perspective-far": {
-      "tier": "PUBLIC-ADVANCED",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "2000px"
-    },
-    "--sf-perspective-near": {
-      "tier": "PUBLIC-ADVANCED",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "500px"
-    },
-    "--sf-perspective-normal": {
-      "tier": "PUBLIC-ADVANCED",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "1000px"
-    },
     "--sf-print-base-size": {
       "tier": "PUBLIC-ADVANCED",
       "files": [
@@ -4216,6 +4232,22 @@
       "fallback": false,
       "value": "var(--sf-space-m)"
     },
+    "--sf-prose-blockquote-border": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-border-width-2) solid var(--sf-color-border--subtle)"
+    },
+    "--sf-prose-blockquote-padding": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
     "--sf-prose-figcaption-size": {
       "tier": "PUBLIC",
       "files": [
@@ -4239,6 +4271,14 @@
       ],
       "fallback": false,
       "value": "var(--sf-space-s)"
+    },
+    "--sf-prose-hr-margin": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-l)"
     },
     "--sf-prose-list-gap": {
       "tier": "PUBLIC",
@@ -4272,6 +4312,14 @@
       "fallback": false,
       "value": "var(--sf-radius-m)"
     },
+    "--sf-prose-nested-list-gap": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-2xs)"
+    },
     "--sf-prose-paragraph": {
       "tier": "PUBLIC",
       "files": [
@@ -4279,6 +4327,14 @@
       ],
       "fallback": false,
       "value": "var(--sf-space-content)"
+    },
+    "--sf-prose-table-pad": {
+      "tier": "PUBLIC",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-xs)"
     },
     "--sf-radius-2xl": {
       "tier": "PUBLIC",
@@ -4790,7 +4846,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.95rem, calc(0.04133333333333333 * (100vw - 22.5rem) + 1.95rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-2xs": {
       "tier": "PUBLIC",
@@ -4798,7 +4854,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.0626666666666667 * (100vw - 22.5rem) + 0.51rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-l": {
       "tier": "PUBLIC",
@@ -4806,7 +4862,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.25rem, calc(0.0517037037037037 * (100vw - 22.5rem) + 1.25rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-m": {
       "tier": "PUBLIC",
@@ -4814,7 +4870,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.0554074074074074 * (100vw - 22.5rem) + 1rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-s": {
       "tier": "PUBLIC",
@@ -4822,7 +4878,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.0583703703703704 * (100vw - 22.5rem) + 0.8rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-xl": {
       "tier": "PUBLIC",
@@ -4830,7 +4886,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.56rem, calc(0.0471111111111111 * (100vw - 22.5rem) + 1.56rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xl-to-xs": {
       "tier": "PUBLIC",
@@ -4838,7 +4894,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.0607407407407407 * (100vw - 22.5rem) + 0.64rem), 4.74rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-2xs": {
       "tier": "PUBLIC",
@@ -4846,7 +4902,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.004888888888888888 * (100vw - 22.5rem) + 0.51rem), 0.84rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl": {
       "tier": "PUBLIC",
@@ -4854,7 +4910,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(2.44rem, calc(0.057333333333333326 * (100vw - 22.5rem) + 2.44rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-2xl": {
       "tier": "PUBLIC",
@@ -4862,7 +4918,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.95rem, calc(0.0645925925925926 * (100vw - 22.5rem) + 1.95rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-2xs": {
       "tier": "PUBLIC",
@@ -4870,7 +4926,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.0859259259259259 * (100vw - 22.5rem) + 0.51rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-l": {
       "tier": "PUBLIC",
@@ -4878,7 +4934,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.25rem, calc(0.074962962962963 * (100vw - 22.5rem) + 1.25rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-m": {
       "tier": "PUBLIC",
@@ -4886,7 +4942,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.0786666666666667 * (100vw - 22.5rem) + 1rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-s": {
       "tier": "PUBLIC",
@@ -4894,7 +4950,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.0816296296296296 * (100vw - 22.5rem) + 0.8rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-xl": {
       "tier": "PUBLIC",
@@ -4902,7 +4958,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.56rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 1.56rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-3xl-to-xs": {
       "tier": "PUBLIC",
@@ -4910,7 +4966,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.084 * (100vw - 22.5rem) + 0.64rem), 6.31rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl": {
       "tier": "PUBLIC",
@@ -4918,7 +4974,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(3.05rem, calc(0.07955555555555556 * (100vw - 22.5rem) + 3.05rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-2xl": {
       "tier": "PUBLIC",
@@ -4926,7 +4982,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.95rem, calc(0.0958518518518519 * (100vw - 22.5rem) + 1.95rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-2xs": {
       "tier": "PUBLIC",
@@ -4934,7 +4990,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.117185185185185 * (100vw - 22.5rem) + 0.51rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-3xl": {
       "tier": "PUBLIC",
@@ -4942,7 +4998,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(2.44rem, calc(0.0885925925925926 * (100vw - 22.5rem) + 2.44rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-l": {
       "tier": "PUBLIC",
@@ -4950,7 +5006,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.25rem, calc(0.106222222222222 * (100vw - 22.5rem) + 1.25rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-m": {
       "tier": "PUBLIC",
@@ -4958,7 +5014,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.109925925925926 * (100vw - 22.5rem) + 1rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-s": {
       "tier": "PUBLIC",
@@ -4966,7 +5022,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.112888888888889 * (100vw - 22.5rem) + 0.8rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-xl": {
       "tier": "PUBLIC",
@@ -4974,7 +5030,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.56rem, calc(0.10162962962963 * (100vw - 22.5rem) + 1.56rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-4xl-to-xs": {
       "tier": "PUBLIC",
@@ -4982,7 +5038,23 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.115259259259259 * (100vw - 22.5rem) + 0.64rem), 8.42rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
+    },
+    "--sf-space-base-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2"
+    },
+    "--sf-space-base-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
     },
     "--sf-space-content": {
       "tier": "PUBLIC",
@@ -5014,7 +5086,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.25rem, calc(0.021037037037037035 * (100vw - 22.5rem) + 1.25rem), 2.67rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-2xs": {
       "tier": "PUBLIC",
@@ -5022,7 +5094,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.032 * (100vw - 22.5rem) + 0.51rem), 2.67rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-m": {
       "tier": "PUBLIC",
@@ -5030,7 +5102,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.0247407407407407 * (100vw - 22.5rem) + 1rem), 2.67rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-s": {
       "tier": "PUBLIC",
@@ -5038,7 +5110,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.0277037037037037 * (100vw - 22.5rem) + 0.8rem), 2.67rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-l-to-xs": {
       "tier": "PUBLIC",
@@ -5046,7 +5118,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.0300740740740741 * (100vw - 22.5rem) + 0.64rem), 2.67rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m": {
       "tier": "PUBLIC",
@@ -5054,7 +5126,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 1rem), 2rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m-to-2xs": {
       "tier": "PUBLIC",
@@ -5062,7 +5134,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.0220740740740741 * (100vw - 22.5rem) + 0.51rem), 2rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m-to-s": {
       "tier": "PUBLIC",
@@ -5070,7 +5142,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.0177777777777778 * (100vw - 22.5rem) + 0.8rem), 2rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-m-to-xs": {
       "tier": "PUBLIC",
@@ -5078,7 +5150,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.0201481481481481 * (100vw - 22.5rem) + 0.64rem), 2rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-none": {
       "tier": "PUBLIC",
@@ -5096,13 +5168,29 @@
       "fallback": false,
       "value": "1px"
     },
+    "--sf-space-ratio-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.333"
+    },
+    "--sf-space-ratio-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.25"
+    },
     "--sf-space-s": {
       "tier": "PUBLIC",
       "files": [
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.01037037037037037 * (100vw - 22.5rem) + 0.8rem), 1.5rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-s-to-2xs": {
       "tier": "PUBLIC",
@@ -5110,7 +5198,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.0146666666666667 * (100vw - 22.5rem) + 0.51rem), 1.5rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-s-to-xs": {
       "tier": "PUBLIC",
@@ -5118,7 +5206,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.0127407407407407 * (100vw - 22.5rem) + 0.64rem), 1.5rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-scale": {
       "tier": "PUBLIC-ADVANCED",
@@ -5134,7 +5222,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.56rem, calc(0.029481481481481477 * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-2xs": {
       "tier": "PUBLIC",
@@ -5142,7 +5230,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.045037037037037 * (100vw - 22.5rem) + 0.51rem), 3.55rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-l": {
       "tier": "PUBLIC",
@@ -5150,7 +5238,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.25rem, calc(0.0340740740740741 * (100vw - 22.5rem) + 1.25rem), 3.55rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-m": {
       "tier": "PUBLIC",
@@ -5158,7 +5246,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.0377777777777778 * (100vw - 22.5rem) + 1rem), 3.55rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-s": {
       "tier": "PUBLIC",
@@ -5166,7 +5254,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.0407407407407407 * (100vw - 22.5rem) + 0.8rem), 3.55rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xl-to-xs": {
       "tier": "PUBLIC",
@@ -5174,7 +5262,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.0431111111111111 * (100vw - 22.5rem) + 0.64rem), 3.55rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xs": {
       "tier": "PUBLIC",
@@ -5182,7 +5270,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.007259259259259258 * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-xs-to-2xs": {
       "tier": "PUBLIC",
@@ -5190,7 +5278,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.00918518518518518 * (100vw - 22.5rem) + 0.51rem), 1.13rem) * var(--sf-space-scale))"
+      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-stack-gap": {
       "tier": "PUBLIC",
@@ -5214,7 +5302,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "clamp( var(--sf-sticky-offset-mobile), calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))"
+      "value": "clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))"
     },
     "--sf-sticky-offset-desktop": {
       "tier": "PUBLIC",
@@ -5286,7 +5374,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.95rem, calc(0.014962962962962963 * (100vw - 22.5rem) + 1.95rem), 2.96rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-2xl-font-weight": {
       "tier": "PUBLIC",
@@ -5326,7 +5414,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.0362962962962963 * (100vw - 22.5rem) + 0.51rem), 2.96rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-l": {
       "tier": "PUBLIC",
@@ -5334,7 +5422,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.25rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 1.25rem), 2.96rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-m": {
       "tier": "PUBLIC",
@@ -5342,7 +5430,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1rem, calc(0.029037037037037 * (100vw - 22.5rem) + 1rem), 2.96rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-s": {
       "tier": "PUBLIC",
@@ -5350,7 +5438,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.8rem, calc(0.032 * (100vw - 22.5rem) + 0.8rem), 2.96rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-xl": {
       "tier": "PUBLIC",
@@ -5358,7 +5446,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.56rem, calc(0.0207407407407407 * (100vw - 22.5rem) + 1.56rem), 2.96rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xl-to-xs": {
       "tier": "PUBLIC",
@@ -5366,7 +5454,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.0343703703703704 * (100vw - 22.5rem) + 0.64rem), 2.96rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xs": {
       "tier": "PUBLIC",
@@ -5374,7 +5462,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-2xs-font-weight": {
       "tier": "PUBLIC",
@@ -5414,7 +5502,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(2.44rem, calc(0.022370370370370374 * (100vw - 22.5rem) + 2.44rem), 3.95rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-3xl-font-weight": {
       "tier": "PUBLIC",
@@ -5454,7 +5542,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.95rem, calc(0.0296296296296296 * (100vw - 22.5rem) + 1.95rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-2xs": {
       "tier": "PUBLIC",
@@ -5462,7 +5550,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.050962962962963 * (100vw - 22.5rem) + 0.51rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-l": {
       "tier": "PUBLIC",
@@ -5470,7 +5558,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.25rem, calc(0.04 * (100vw - 22.5rem) + 1.25rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-m": {
       "tier": "PUBLIC",
@@ -5478,7 +5566,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1rem, calc(0.0437037037037037 * (100vw - 22.5rem) + 1rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-s": {
       "tier": "PUBLIC",
@@ -5486,7 +5574,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.8rem, calc(0.0466666666666667 * (100vw - 22.5rem) + 0.8rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-xl": {
       "tier": "PUBLIC",
@@ -5494,7 +5582,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.56rem, calc(0.0354074074074074 * (100vw - 22.5rem) + 1.56rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-3xl-to-xs": {
       "tier": "PUBLIC",
@@ -5502,7 +5590,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.049037037037037 * (100vw - 22.5rem) + 0.64rem), 3.95rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
     },
     "--sf-text-4xl": {
       "tier": "PUBLIC",
@@ -5510,7 +5598,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(3.05rem, calc(0.03274074074074074 * (100vw - 22.5rem) + 3.05rem), 5.26rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-4xl-font-weight": {
       "tier": "PUBLIC",
@@ -5550,7 +5638,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.95rem, calc(0.049037037037037 * (100vw - 22.5rem) + 1.95rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-2xs": {
       "tier": "PUBLIC",
@@ -5558,7 +5646,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.0703703703703704 * (100vw - 22.5rem) + 0.51rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-3xl": {
       "tier": "PUBLIC",
@@ -5566,7 +5654,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(2.44rem, calc(0.0417777777777778 * (100vw - 22.5rem) + 2.44rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-l": {
       "tier": "PUBLIC",
@@ -5574,7 +5662,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.25rem, calc(0.0594074074074074 * (100vw - 22.5rem) + 1.25rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-m": {
       "tier": "PUBLIC",
@@ -5582,7 +5670,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1rem, calc(0.0631111111111111 * (100vw - 22.5rem) + 1rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-s": {
       "tier": "PUBLIC",
@@ -5590,7 +5678,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.8rem, calc(0.0660740740740741 * (100vw - 22.5rem) + 0.8rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-xl": {
       "tier": "PUBLIC",
@@ -5598,7 +5686,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.56rem, calc(0.0548148148148148 * (100vw - 22.5rem) + 1.56rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-4xl-to-xs": {
       "tier": "PUBLIC",
@@ -5606,7 +5694,39 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.0684444444444444 * (100vw - 22.5rem) + 0.64rem), 5.26rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
+    },
+    "--sf-text-base-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.25"
+    },
+    "--sf-text-base-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-text-display-base-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "3"
+    },
+    "--sf-text-display-base-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2.4"
     },
     "--sf-text-display-l": {
       "tier": "PUBLIC",
@@ -5614,7 +5734,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(3.75rem, calc(0.023407407407407408 * (100vw - 22.5rem) + 3.75rem), 5.33rem) * var(--sf-text-display-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-display-scale))"
     },
     "--sf-text-display-m": {
       "tier": "PUBLIC",
@@ -5622,7 +5742,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(3rem, calc(0.014814814814814815 * (100vw - 22.5rem) + 3rem), 4rem) * var(--sf-text-display-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-display-scale))"
     },
     "--sf-text-display-s": {
       "tier": "PUBLIC",
@@ -5630,7 +5750,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(2.4rem, calc(0.00888888888888889 * (100vw - 22.5rem) + 2.4rem), 3rem) * var(--sf-text-display-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))"
     },
     "--sf-text-display-scale": {
       "tier": "PUBLIC-ADVANCED",
@@ -5646,7 +5766,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.25rem, calc(0.006222222222222221 * (100vw - 22.5rem) + 1.25rem), 1.67rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-l-font-weight": {
       "tier": "PUBLIC",
@@ -5686,7 +5806,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.0171851851851852 * (100vw - 22.5rem) + 0.51rem), 1.67rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-l-to-m": {
       "tier": "PUBLIC",
@@ -5694,7 +5814,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1rem, calc(0.00992592592592592 * (100vw - 22.5rem) + 1rem), 1.67rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-l-to-s": {
       "tier": "PUBLIC",
@@ -5702,7 +5822,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.8rem, calc(0.0128888888888889 * (100vw - 22.5rem) + 0.8rem), 1.67rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-l-to-xs": {
       "tier": "PUBLIC",
@@ -5710,7 +5830,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.0152592592592593 * (100vw - 22.5rem) + 0.64rem), 1.67rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
     },
     "--sf-text-m": {
       "tier": "PUBLIC",
@@ -5718,7 +5838,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1rem, calc(0.003703703703703704 * (100vw - 22.5rem) + 1rem), 1.25rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-m-font-weight": {
       "tier": "PUBLIC",
@@ -5758,7 +5878,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.010962962962963 * (100vw - 22.5rem) + 0.51rem), 1.25rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
     },
     "--sf-text-m-to-s": {
       "tier": "PUBLIC",
@@ -5766,7 +5886,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.8rem, calc(0.00666666666666667 * (100vw - 22.5rem) + 0.8rem), 1.25rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
     },
     "--sf-text-m-to-xs": {
       "tier": "PUBLIC",
@@ -5774,7 +5894,23 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.00903703703703704 * (100vw - 22.5rem) + 0.64rem), 1.25rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
+    },
+    "--sf-text-ratio-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.333"
+    },
+    "--sf-text-ratio-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1.25"
     },
     "--sf-text-s": {
       "tier": "PUBLIC",
@@ -5782,7 +5918,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.8rem, calc(0.002074074074074073 * (100vw - 22.5rem) + 0.8rem), 0.94rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-s-font-weight": {
       "tier": "PUBLIC",
@@ -5822,7 +5958,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.00637037037037037 * (100vw - 22.5rem) + 0.51rem), 0.94rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))"
     },
     "--sf-text-s-to-xs": {
       "tier": "PUBLIC",
@@ -5830,7 +5966,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.00444444444444444 * (100vw - 22.5rem) + 0.64rem), 0.94rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))"
     },
     "--sf-text-scale": {
       "tier": "PUBLIC-ADVANCED",
@@ -5878,7 +6014,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(1.56rem, calc(0.00977777777777778 * (100vw - 22.5rem) + 1.56rem), 2.22rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-xl-font-weight": {
       "tier": "PUBLIC",
@@ -5918,7 +6054,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.0253333333333333 * (100vw - 22.5rem) + 0.51rem), 2.22rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-l": {
       "tier": "PUBLIC",
@@ -5926,7 +6062,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1.25rem, calc(0.0143703703703704 * (100vw - 22.5rem) + 1.25rem), 2.22rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-m": {
       "tier": "PUBLIC",
@@ -5934,7 +6070,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(1rem, calc(0.0180740740740741 * (100vw - 22.5rem) + 1rem), 2.22rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-s": {
       "tier": "PUBLIC",
@@ -5942,7 +6078,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.8rem, calc(0.021037037037037 * (100vw - 22.5rem) + 0.8rem), 2.22rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xl-to-xs": {
       "tier": "PUBLIC",
@@ -5950,7 +6086,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.64rem, calc(0.0234074074074074 * (100vw - 22.5rem) + 0.64rem), 2.22rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
     },
     "--sf-text-xs": {
       "tier": "PUBLIC",
@@ -5958,7 +6094,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(clamp(0.64rem, calc(0.0008888888888888881 * (100vw - 22.5rem) + 0.64rem), 0.7rem) * var(--sf-text-scale))"
+      "value": "calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))"
     },
     "--sf-text-xs-font-weight": {
       "tier": "PUBLIC",
@@ -5998,7 +6134,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "clamp(0.51rem, calc(0.00281481481481481 * (100vw - 22.5rem) + 0.51rem), 0.7rem)"
+      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem))"
     },
     "--sf-touch-target": {
       "tier": "PUBLIC",

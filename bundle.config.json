@@ -4,7 +4,6 @@
       "output": "dist/slashed.essential.css",
       "files": [
         "core/layers.css",
-        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
@@ -24,7 +23,6 @@
       "flat": true,
       "files": [
         "core/layers.css",
-        "core/tokens.color-fallbacks.css",
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",

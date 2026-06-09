@@ -115,10 +115,13 @@
      · --sf-font-features, --sf-font-variation, --sf-optical-sizing (OpenType)
      · --sf-space-scale, --sf-text-scale, --sf-text-display-scale,
        --sf-radius-scale, --sf-motion-scale (global multipliers)
+     · --sf-fluid-{min,max}-vw (fluid interpolation viewport range, rem/unitless)
+     · --sf-text-ratio-{min,max}, --sf-text-base-{min,max},
+       --sf-text-display-base-{min,max} (generative TYPE scale inputs)
+     · --sf-space-ratio-{min,max}, --sf-space-base-{min,max} (generative SPACE scale inputs)
      · --sf-scroll-timeline-range-{start,end} (scroll-driven animation)
      · --sf-mask-scrim-{start,end} (edge-fade masks)
      · --sf-safe-{top,bottom,left,right} (safe-area insets)
-     · --sf-perspective-{near,normal,far} (3D transforms)
      · --sf-truncate-suffix (ellipsis character override)
      · --sf-radius-outer (concentric radius helper)
      · --sf-is-active, --sf-is-current, --sf-is-pressed, --sf-is-open (state flags)
@@ -193,6 +196,55 @@
   @property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-open    { syntax: "<integer>"; inherits: true; initial-value: 0; }
+
+  /* ============================================================
+     FLUID SCALE ENGINE — generative inputs
+     ------------------------------------------------------------
+     The fluid type / space / display scales are computed at runtime
+     from these scalars. Override any of them on :root and every
+     clamp() recalibrates — no build step, no token regeneration.
+
+       --sf-fluid-min-vw / --sf-fluid-max-vw   viewport range (rem, unitless)
+                                               over which values interpolate.
+       --sf-text-ratio-min / -max              modular ratio of the TYPE scale
+                                               at min / max viewport (dual-ratio:
+                                               subtler on mobile, larger on desktop).
+       --sf-text-base-min / -max               --sf-text-m endpoints (rem, unitless).
+       --sf-text-display-base-min / -max       --sf-text-display-s endpoints.
+       --sf-space-ratio-min / -max             modular ratio of the SPACE scale.
+       --sf-space-base-min / -max              --sf-space-m endpoints (rem, unitless).
+
+     Registered as <number> so they can be used as pow() exponents/operands
+     and multiplied by 1rem in calc(). Requires CSS pow() (Chrome 125+,
+     Safari 17.5+, Firefox 118+) — see browser floor. Plain :root mirrors
+     below keep values readable; do NOT edit them independently. */
+  @property --sf-fluid-min-vw          { syntax: "<number>"; inherits: true; initial-value: 22.5; }
+  @property --sf-fluid-max-vw          { syntax: "<number>"; inherits: true; initial-value: 90; }
+  @property --sf-text-ratio-min        { syntax: "<number>"; inherits: true; initial-value: 1.25; }
+  @property --sf-text-ratio-max        { syntax: "<number>"; inherits: true; initial-value: 1.333; }
+  @property --sf-text-base-min         { syntax: "<number>"; inherits: true; initial-value: 1; }
+  @property --sf-text-base-max         { syntax: "<number>"; inherits: true; initial-value: 1.25; }
+  @property --sf-text-display-base-min { syntax: "<number>"; inherits: true; initial-value: 2.4; }
+  @property --sf-text-display-base-max { syntax: "<number>"; inherits: true; initial-value: 3; }
+  @property --sf-space-ratio-min       { syntax: "<number>"; inherits: true; initial-value: 1.25; }
+  @property --sf-space-ratio-max       { syntax: "<number>"; inherits: true; initial-value: 1.333; }
+  @property --sf-space-base-min        { syntax: "<number>"; inherits: true; initial-value: 1; }
+  @property --sf-space-base-max        { syntax: "<number>"; inherits: true; initial-value: 2; }
+
+  :root {
+    --sf-fluid-min-vw:          22.5;
+    --sf-fluid-max-vw:          90;
+    --sf-text-ratio-min:        1.25;
+    --sf-text-ratio-max:        1.333;
+    --sf-text-base-min:         1;
+    --sf-text-base-max:         1.25;
+    --sf-text-display-base-min: 2.4;
+    --sf-text-display-base-max: 3;
+    --sf-space-ratio-min:       1.25;
+    --sf-space-ratio-max:       1.333;
+    --sf-space-base-min:        1;
+    --sf-space-base-max:        2;
+  }
 
   /* ============================================================
      DERIVED SEMANTIC TOKENS
@@ -722,19 +774,27 @@
     /* ----------------------------------------------------------
        Font sizes — fluid
        ---------------------------------------------------------- */
-    --sf-text-2xs: calc(clamp(0.51rem, calc(0.00029629629629629656 * (100vw - 22.5rem) + 0.51rem), 0.53rem) * var(--sf-text-scale));
-    --sf-text-xs:  calc(clamp(0.64rem, calc(0.0008888888888888881  * (100vw - 22.5rem) + 0.64rem), 0.7rem)  * var(--sf-text-scale));
-    --sf-text-s:   calc(clamp(0.8rem,  calc(0.002074074074074073   * (100vw - 22.5rem) + 0.8rem),  0.94rem) * var(--sf-text-scale));
-    --sf-text-m:   calc(clamp(1rem,    calc(0.003703703703703704   * (100vw - 22.5rem) + 1rem),    1.25rem) * var(--sf-text-scale));
-    --sf-text-l:   calc(clamp(1.25rem, calc(0.006222222222222221   * (100vw - 22.5rem) + 1.25rem), 1.67rem) * var(--sf-text-scale));
-    --sf-text-xl:  calc(clamp(1.56rem, calc(0.00977777777777778    * (100vw - 22.5rem) + 1.56rem), 2.22rem) * var(--sf-text-scale));
-    --sf-text-2xl: calc(clamp(1.95rem, calc(0.014962962962962963   * (100vw - 22.5rem) + 1.95rem), 2.96rem) * var(--sf-text-scale));
-    --sf-text-3xl: calc(clamp(2.44rem, calc(0.022370370370370374   * (100vw - 22.5rem) + 2.44rem), 3.95rem) * var(--sf-text-scale));
-    --sf-text-4xl: calc(clamp(3.05rem, calc(0.03274074074074074    * (100vw - 22.5rem) + 3.05rem), 5.26rem) * var(--sf-text-scale));
+    /* ----------------------------------------------------------
+       Font sizes — fluid (generative)
+       Computed from --sf-text-ratio-{min,max} + --sf-text-base-{min,max}
+       over the --sf-fluid-{min,max}-vw range. Step exponent N is relative
+       to --sf-text-m (N=0): 2xs=-3 … 4xl=5. Override the inputs above to
+       reshape the whole scale; override an individual --sf-text-* to pin one.
+       ---------------------------------------------------------- */
+    --sf-text-2xs: calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale));
+    --sf-text-xs:  calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale));
+    --sf-text-s:   calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale));
+    --sf-text-m:   calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale));
+    --sf-text-l:   calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale));
+    --sf-text-xl:  calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale));
+    --sf-text-2xl: calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale));
+    --sf-text-3xl: calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale));
+    --sf-text-4xl: calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale));
 
-    --sf-text-display-s: calc(clamp(2.4rem,  calc(0.00888888888888889   * (100vw - 22.5rem) + 2.4rem),  3rem)  * var(--sf-text-display-scale));
-    --sf-text-display-m: calc(clamp(3rem,    calc(0.014814814814814815  * (100vw - 22.5rem) + 3rem),    4rem)  * var(--sf-text-display-scale));
-    --sf-text-display-l: calc(clamp(3.75rem, calc(0.023407407407407408  * (100vw - 22.5rem) + 3.75rem), 5.33rem) * var(--sf-text-display-scale));
+    /* Display — reuses the type ratios with its own larger base (s=0, m=1, l=2). */
+    --sf-text-display-s: calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale));
+    --sf-text-display-m: calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-display-scale));
+    --sf-text-display-l: calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-display-scale));
 
     /* ----------------------------------------------------------
        Line heights & letter spacing
@@ -743,6 +803,15 @@
     --sf-leading-snug:    1.3;
     --sf-leading-normal:  1.5;
     --sf-leading-relaxed: 1.625;
+
+    /* Display line-heights — display sizes need tighter leading than the
+       --sf-leading-* scale provides. Not auto-applied (display sizes have no
+       dedicated element); wire alongside font-size:
+         h1.hero { font-size: var(--sf-text-display-l);
+                   line-height: var(--sf-display-l-line-height); } */
+    --sf-display-s-line-height: var(--sf-leading-tight);
+    --sf-display-m-line-height: 1.05;
+    --sf-display-l-line-height: 1;
 
     --sf-tracking-tight:   -0.025em;
     --sf-tracking-normal:   0;
@@ -786,16 +855,18 @@
     --sf-space-px:     1px;
     --sf-space-gutter: var(--sf-space-l);
 
-    /* Spacing — fluid */
-    --sf-space-2xs: calc(clamp(0.51rem, calc(0.004888888888888888   * (100vw - 22.5rem) + 0.51rem), 0.84rem) * var(--sf-space-scale));
-    --sf-space-xs:  calc(clamp(0.64rem, calc(0.007259259259259258   * (100vw - 22.5rem) + 0.64rem), 1.13rem) * var(--sf-space-scale));
-    --sf-space-s:   calc(clamp(0.8rem,  calc(0.01037037037037037    * (100vw - 22.5rem) + 0.8rem),  1.5rem)  * var(--sf-space-scale));
-    --sf-space-m:   calc(clamp(1rem,    calc(0.014814814814814815   * (100vw - 22.5rem) + 1rem),    2rem)    * var(--sf-space-scale));
-    --sf-space-l:   calc(clamp(1.25rem, calc(0.021037037037037035   * (100vw - 22.5rem) + 1.25rem), 2.67rem) * var(--sf-space-scale));
-    --sf-space-xl:  calc(clamp(1.56rem, calc(0.029481481481481477   * (100vw - 22.5rem) + 1.56rem), 3.55rem) * var(--sf-space-scale));
-    --sf-space-2xl: calc(clamp(1.95rem, calc(0.04133333333333333    * (100vw - 22.5rem) + 1.95rem), 4.74rem) * var(--sf-space-scale));
-    --sf-space-3xl: calc(clamp(2.44rem, calc(0.057333333333333326   * (100vw - 22.5rem) + 2.44rem), 6.31rem) * var(--sf-space-scale));
-    --sf-space-4xl: calc(clamp(3.05rem, calc(0.07955555555555556    * (100vw - 22.5rem) + 3.05rem), 8.42rem) * var(--sf-space-scale));
+    /* Spacing — fluid (generative). Same engine as type; space uses base_max=2
+       (more dramatic growth than type's 1.25). Step exponent N relative to
+       --sf-space-m (N=0): 2xs=-3 … 4xl=5. */
+    --sf-space-2xs: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale));
+    --sf-space-xs:  calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale));
+    --sf-space-s:   calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale));
+    --sf-space-m:   calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale));
+    --sf-space-l:   calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale));
+    --sf-space-xl:  calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale));
+    --sf-space-2xl: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale));
+    --sf-space-3xl: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale));
+    --sf-space-4xl: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale));
 
     /* ----------------------------------------------------------
        UI sizes
@@ -920,11 +991,6 @@
     --sf-blur-l:  32px;
     --sf-blur-xl: 48px;
 
-    /* 3D perspective */
-    --sf-perspective-near:   500px;
-    --sf-perspective-normal: 1000px;
-    --sf-perspective-far:    2000px;
-
     --sf-opacity-0:   0;
     --sf-opacity-10:  0.1;
     --sf-opacity-25:  0.25;
@@ -1031,22 +1097,21 @@
        Layout & a11y
        ---------------------------------------------------------- */
     /* Header height fluidly interpolates between the mobile and desktop
-       tokens across the framework viewport range (22.5rem → 90rem), the
-       same range used by the fluid type/space scales. Override either
-       endpoint to retune; set both equal for a fixed height. The slope
-       (0.0222…) matches the default 3.5rem→5rem delta; clamp() keeps the
+       tokens across the framework viewport range (--sf-fluid-{min,max}-vw),
+       the same range used by the fluid type/space scales. Override either
+       endpoint to retune; set both equal for a fixed height. clamp() keeps the
        result bounded to the endpoints even when they are overridden. */
     --sf-header-height-mobile:  3.5rem;
     --sf-header-height-desktop: 5rem;
     --sf-header-height: clamp(
       var(--sf-header-height-mobile),
-      calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-header-height-mobile)),
+      calc((var(--sf-header-height-desktop) - var(--sf-header-height-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-header-height-mobile)),
       var(--sf-header-height-desktop));
     --sf-sticky-offset-mobile:  var(--sf-header-height-mobile);
     --sf-sticky-offset-desktop: var(--sf-header-height-desktop);
     --sf-sticky-offset: clamp(
       var(--sf-sticky-offset-mobile),
-      calc(0.022222222222222223 * (100vw - 22.5rem) + var(--sf-sticky-offset-mobile)),
+      calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)),
       var(--sf-sticky-offset-desktop));
     --sf-focus-ring-width:  2px;
     --sf-focus-ring-offset: 2px;
