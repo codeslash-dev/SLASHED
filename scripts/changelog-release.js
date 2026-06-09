@@ -30,17 +30,31 @@ const SECTION_LABELS = {
   revert: 'Reverts',
 };
 
+const SAFE_TAG = /^[a-zA-Z0-9._/-]+$/;
+
 function commitsSinceLastTag(currentTag) {
+  if (!SAFE_TAG.test(currentTag)) {
+    console.warn(`Skipping commit generation: unexpected tag format "${currentTag}".`);
+    return [];
+  }
   try {
     const allTags = execSync('git tag --sort=-version:refname', { encoding: 'utf8' })
       .trim().split('\n').filter(Boolean);
     const idx = allTags.indexOf(currentTag);
     const prevTag = idx !== -1 && idx + 1 < allTags.length ? allTags[idx + 1] : null;
-    const range = prevTag ? `${prevTag}..HEAD` : 'HEAD';
 
-    return execSync(`git log ${range} --no-merges --pretty=format:"%s"`, { encoding: 'utf8' })
+    if (prevTag && !SAFE_TAG.test(prevTag)) {
+      console.warn(`Skipping commit generation: unexpected previous tag format "${prevTag}".`);
+      return [];
+    }
+
+    const args = ['log', '--no-merges', '--pretty=format:%s'];
+    if (prevTag) args.push(`${prevTag}..HEAD`); else args.push('HEAD');
+
+    return execSync(`git ${args.join(' ')}`, { encoding: 'utf8' })
       .trim().split('\n').filter(Boolean);
-  } catch {
+  } catch (err) {
+    console.warn(`Could not retrieve commits since last tag: ${err.message}`);
     return [];
   }
 }

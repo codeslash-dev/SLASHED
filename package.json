@@ -2,6 +2,9 @@
   "name": "slashed",
   "type": "module",
   "version": "0.5.26",
+  "engines": {
+    "node": ">=20.11.0"
+  },
   "description": "CSS framework",
   "style": "dist/slashed.full.css",
   "main": "dist/slashed.full.css",

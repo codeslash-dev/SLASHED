@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## Unreleased
 
 ## [0.5.26] - 2026-06-09
+
+> **Note:** v0.5.25 was published on 2026-06-08 but its `sync-main` CI step
+> failed due to the ESM `require()` bug fixed in this release. That release had
+> no additional changes relative to v0.5.24; v0.5.26 supersedes it.
 - **Generative fluid scale engine** — the fluid type, display, and space scales are now computed at runtime from override-able input tokens instead of hard-coded `clamp()` slopes. No build step.
   > ### Added
   > - `--sf-fluid-min-vw` / `--sf-fluid-max-vw` — fluid interpolation viewport range (rem, unitless). Override once to recalibrate every fluid token.

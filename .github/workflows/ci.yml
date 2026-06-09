@@ -120,7 +120,7 @@ jobs:
           HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
           if git log "$BASE..$HEAD" --no-merges --pretty=format:"%s" \
-               | grep -qE '^(feat|fix|refactor|perf|style|test|build|ci|chore|revert)(\([^)]+\))?!:'; then
+               | grep -qE '^[[:alnum:]_-]+(\([^)]+\))?!:'; then
             if ! git diff --name-only "$BASE" "$HEAD" | grep -q '^docs/migration\.md$'; then
               echo "::error::Breaking change detected but docs/migration.md was not updated." \
                    "Add a migration section or use a non-breaking commit type."
