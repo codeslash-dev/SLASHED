@@ -148,15 +148,17 @@ Or shorthand with `light-dark()`:
 
 ## Browser support
 
-**Floor: Chrome 123+, Safari 17.5+, Firefox 128+** (≈ April–July 2024). Set by
-three colour-system features that arrived in 2024 with no graceful fallback —
-below the floor, derived colours collapse to `initial`.
+**Floor: Chrome 125+, Safari 17.5+, Firefox 128+** (≈ April–July 2024). Set by
+colour-system and fluid-engine features that arrived in 2024 with no graceful
+fallback — below the floor, derived colours collapse to `initial` and the
+generative scales stop computing.
 
 | Feature | Used for | Chrome | Safari | Firefox |
 |---|---|---|---|---|
 | `light-dark()` | every resolved colour token | 123 | 17.5 | 120 |
 | `@property` with `inherits: true` | animatable brand/status colours, `initial` reset | 85 | 16.4 | 128 |
 | `oklch(from …)` relative colour | hover/tint/shade/dark derivation | 119 | 16.4 | 128 |
+| `pow()` math function | generative fluid type/space scales (ratio + viewport) | 125 | 15.4 | 118 |
 
 The effective floor is the maximum per engine. Cascade layers (`@layer`) are
 foundational — below cascade-layer support (~2022) the architecture collapses.

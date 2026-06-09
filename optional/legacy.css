@@ -19,7 +19,7 @@
 
    IMPORTANT — what this file is NOT
    ─────────────────────────────────
-   The framework's real support floor is Chrome 123+, Safari 17.5+,
+   The framework's real support floor is Chrome 125+, Safari 17.5+,
    Firefox 128+ (April–July 2024). That floor is set by the colour
    system: light-dark(), @property with inherits, and the oklch()
    relative-color form. The Tier-1 color fallbacks in tokens.css and

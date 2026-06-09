@@ -37,15 +37,18 @@
   .sf-prose :is(h2, h3, h4) + * { margin-block-start: var(--sf-prose-heading-gap); }
   .sf-prose li + li              { margin-block-start: var(--sf-prose-list-gap); }
   .sf-prose :is(blockquote, pre) { margin-block: var(--sf-prose-block-margin); }
-  .sf-prose blockquote           { font-style: italic; }
+  .sf-prose blockquote           { font-style: italic; padding-inline-start: var(--sf-prose-blockquote-padding); border-inline-start: var(--sf-prose-blockquote-border); }
   .sf-prose img                  { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
   .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
+  .sf-prose :is(ul, ol) :is(ul, ol) { margin-block-start: var(--sf-prose-nested-list-gap); }
   .sf-prose ul                   { list-style: disc; }
   .sf-prose ol                   { list-style: decimal; }
   .sf-prose ::marker             { color: var(--sf-prose-marker-color); }
+  .sf-prose hr                   { margin-block: var(--sf-prose-hr-margin); }
   .sf-prose figure               { margin-block: var(--sf-prose-figure-margin); }
   .sf-prose figcaption           { font-size: var(--sf-prose-figcaption-size); color: var(--sf-color-text--muted); margin-block-start: var(--sf-prose-list-gap); }
   .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-x: auto; width: 100%; max-width: 100%; }
+  .sf-prose :is(th, td)          { padding: var(--sf-prose-table-pad); }
   .sf-prose video                { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
 
   /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the
@@ -59,10 +62,18 @@
      directly. Both paths produce the same result: native list bullets. */
   .sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }
   .sf-prose .sf-not-prose ::marker   { color: inherit; }
+  .sf-prose .sf-not-prose blockquote {
+    margin-block: 0;
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    font-style: normal;
+  }
+  .sf-prose .sf-not-prose hr         { margin-block: 0; }
   .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
   .sf-prose .sf-not-prose figure     { margin-block: 0; }
   .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
   .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; max-width: revert; }
+  .sf-prose .sf-not-prose :is(th,td) { padding: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
 
   /* -- Flow ----------------------------------------------------
@@ -242,6 +253,9 @@
     .sf-surface--primary {
       --sf-color-text:              var(--sf-color-text--on-primary);
       --sf-color-heading:           var(--sf-color-text--on-primary);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-primary) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-primary);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-primary) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-primary) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-primary) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-primary) l c h / 0.30);
@@ -252,6 +266,9 @@
     .sf-surface--secondary {
       --sf-color-text:              var(--sf-color-text--on-secondary);
       --sf-color-heading:           var(--sf-color-text--on-secondary);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-secondary) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-secondary);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-secondary) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-secondary) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-secondary) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-secondary) l c h / 0.30);
@@ -262,6 +279,9 @@
     .sf-surface--tertiary {
       --sf-color-text:              var(--sf-color-text--on-tertiary);
       --sf-color-heading:           var(--sf-color-text--on-tertiary);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-tertiary) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-tertiary);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-tertiary) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-tertiary) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-tertiary) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-tertiary) l c h / 0.30);
@@ -272,6 +292,9 @@
     .sf-surface--action {
       --sf-color-text:              var(--sf-color-text--on-action);
       --sf-color-heading:           var(--sf-color-text--on-action);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-action) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-action);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-action) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-action) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-action) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-action) l c h / 0.30);
@@ -282,6 +305,9 @@
     .sf-surface--neutral {
       --sf-color-text:              var(--sf-color-text--on-neutral);
       --sf-color-heading:           var(--sf-color-text--on-neutral);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-neutral) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-neutral);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-neutral) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-neutral) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-neutral) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-neutral) l c h / 0.30);
@@ -292,6 +318,9 @@
     .sf-surface--inverse {
       --sf-color-text:              var(--sf-color-text--on-inverse);
       --sf-color-heading:           var(--sf-color-text--on-inverse);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-inverse) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-inverse);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-inverse) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-inverse) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-inverse) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-inverse) l c h / 0.30);
@@ -302,6 +331,9 @@
     .sf-surface--success {
       --sf-color-text:              var(--sf-color-text--on-success);
       --sf-color-heading:           var(--sf-color-text--on-success);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-success) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-success);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-success) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-success) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-success) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-success) l c h / 0.30);
@@ -312,6 +344,9 @@
     .sf-surface--warning {
       --sf-color-text:              var(--sf-color-text--on-warning);
       --sf-color-heading:           var(--sf-color-text--on-warning);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-warning) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-warning);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-warning) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-warning) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-warning) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-warning) l c h / 0.30);
@@ -322,6 +357,9 @@
     .sf-surface--error {
       --sf-color-text:              var(--sf-color-text--on-error);
       --sf-color-heading:           var(--sf-color-text--on-error);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-error) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-error);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-error) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-error) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-error) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-error) l c h / 0.30);
@@ -332,6 +370,9 @@
     .sf-surface--info {
       --sf-color-text:              var(--sf-color-text--on-info);
       --sf-color-heading:           var(--sf-color-text--on-info);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-info) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-info);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-info) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-info) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-info) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-info) l c h / 0.30);
@@ -342,6 +383,9 @@
     .sf-surface--danger {
       --sf-color-text:              var(--sf-color-text--on-danger);
       --sf-color-heading:           var(--sf-color-text--on-danger);
+      --sf-color-link:              oklch(from var(--sf-color-text--on-danger) l calc(c + 0.08) h);
+      --sf-color-link--hover:       var(--sf-color-text--on-danger);
+      --sf-color-link--underline:   oklch(from var(--sf-color-text--on-danger) l c h / 0.5);
       --sf-color-text--secondary:   oklch(from var(--sf-color-text--on-danger) l c h / 0.70);
       --sf-color-text--placeholder: oklch(from var(--sf-color-text--on-danger) l c h / 0.45);
       --sf-color-text--disabled:    oklch(from var(--sf-color-text--on-danger) l c h / 0.30);
@@ -462,7 +506,7 @@
      is recognised ONLY through `-webkit-background-clip`. The prefixed
      declaration is therefore required, or gradient headings render as
      invisible (transparent fill, unclipped background) on Safari
-     17.5–17.x. The unprefixed property is listed last so Chrome 123+,
+     17.5–17.x. The unprefixed property is listed last so Chrome 125+,
      Firefox 128+ and Safari 18+ use the standard form, while Safari
      17.5–17.x fall back to the prefixed one (last valid wins per
      browser). Firefox has never needed the prefix.

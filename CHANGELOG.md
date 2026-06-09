@@ -4,6 +4,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+- **Generative fluid scale engine** — the fluid type, display, and space scales are now computed at runtime from override-able input tokens instead of hard-coded `clamp()` slopes. No build step.
+  > ### Added
+  > - `--sf-fluid-min-vw` / `--sf-fluid-max-vw` — fluid interpolation viewport range (rem, unitless). Override once to recalibrate every fluid token.
+  > - `--sf-text-ratio-min` / `--sf-text-ratio-max`, `--sf-text-base-min` / `--sf-text-base-max` — generative TYPE scale inputs (dual modular ratio: 1.25 mobile → 1.333 desktop).
+  > - `--sf-text-display-base-min` / `--sf-text-display-base-max` — generative DISPLAY scale base (reuses the type ratios).
+  > - `--sf-space-ratio-min` / `--sf-space-ratio-max`, `--sf-space-base-min` / `--sf-space-base-max` — generative SPACE scale inputs (independent of type).
+  > - `--sf-display-s-line-height` / `--sf-display-m-line-height` / `--sf-display-l-line-height` — tighter leading for display sizes (not auto-applied; wire alongside `font-size`).
+  > - `--sf-prose-blockquote-padding`, `--sf-prose-blockquote-border`, `--sf-prose-hr-margin`, `--sf-prose-nested-list-gap`, `--sf-prose-table-pad` — extended `.sf-prose` editorial spacing knobs (auto-applied inside `.sf-prose`, reset by `.sf-not-prose`).
+  > - `.sf-surface--*` now also rebind `--sf-color-link` / `--sf-color-link--hover` / `--sf-color-link--underline` so links on coloured surfaces stay contrast-safe (lightness preserved, chroma nudged; underline carries the affordance).
+  > - `scripts/gen-sizes-extended.js` now emits the bridge matrix over the same generative engine, so `optional/tokens.sizes-extended.css` recalibrates with the inputs.
+  >
+  > ### Changed
+  > - `--sf-text-*`, `--sf-text-display-*`, `--sf-space-*`, `--sf-header-height`, and `--sf-sticky-offset` formulas rewritten as `calc()`/`pow()` over the new inputs. Default computed values are within rounding of the previous scale.
+  > - `core/tokens.color-fallbacks.css` (HSL legacy fallbacks) is no longer bundled into `slashed.essential*` — those bundles are now modern-only. It remains first-loaded in every `optimal*`/`full` bundle, and can be `<link>`ed before an essential build to restore old-engine colour fallbacks.
+  >
+  > ### Removed
+  > - ⚠️ **Breaking:** `--sf-perspective-near` / `--sf-perspective-normal` / `--sf-perspective-far` — unused 3D tokens with no framework integration.
+  >
+  > ### Browser support
+  > - ⚠️ Floor raised **Chrome 123 → 125** to gain the CSS `pow()` math function that drives the generative scales. Safari 17.5+ / Firefox 128+ unchanged.
+
 - **#269** — fix changelog version ordering
   > Reorder PR summary newest→oldest (v0.5.24 → v0.0.1). Rename "Unreleased" to "v0.0.1 / Pre-release". Remove orphaned content block floating between sections.
 - **#268** — consolidate post-0.3.0 work under v0.5.24 in CHANGELOG
