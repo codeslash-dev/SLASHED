@@ -21,6 +21,7 @@
     wcagLevel,
     wcagLevelLarge,
     levelClass,
+    resolveToRgb,
     suggestAccessiblePalette,
   } from '../lib/color.js';
 
@@ -72,7 +73,11 @@
     for (const name of measured) {
       const el = probes[name];
       if (!el) continue;
-      next[name] = parseRgb(getComputedStyle(el).color);
+      // getComputedStyle serialises `color` as rgb()/rgba() in most engines,
+      // but some return wide-gamut oklch()/color() — fall back to the canvas
+      // resolver so those still yield an [r,g,b] for the contrast maths.
+      const computed = getComputedStyle(el).color;
+      next[name] = parseRgb(computed) ?? resolveToRgb(computed);
     }
     resolved = next;
   });
@@ -205,7 +210,8 @@
                     onclick={() => { fg = fgName; bg = bgName; }}
                     role="button"
                     tabindex="0"
-                    onkeydown={(e) => e.key === 'Enter' && (fg = fgName, bg = bgName)}
+                    aria-label="{shortLabel(fgName)} on {shortLabel(bgName)}{cell.ratio !== null ? `, ${cell.ratio.toFixed(1)} to 1` : ''}"
+                    onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fg = fgName; bg = bgName; } }}
                   >{cell.ratio !== null ? cell.ratio.toFixed(1) : '—'}</td>
                 {/each}
               </tr>
