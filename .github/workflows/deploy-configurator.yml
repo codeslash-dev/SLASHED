@@ -48,10 +48,12 @@ jobs:
       - name: Build (prebuild re-syncs the token catalogue)
         working-directory: configurator
         run: npm run build
+      - name: Stage for Pages
+        run: mkdir -p _site/configurator && cp -r configurator/dist/. _site/configurator/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5
         with:
-          path: configurator/dist
+          path: _site
 
   deploy:
     name: Deploy to Pages
