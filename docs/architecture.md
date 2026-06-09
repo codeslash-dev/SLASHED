@@ -224,10 +224,20 @@ utility classes in 0.x; the layer slot is reserved for the future.
   "a name-derived shade of the role to its left". Brand hover variants
   (`--sf-color-{primary,...}-hover`) live in `optional/tokens.palette.css` —
   the palette is the single source of name-derived shades.
-- **Public vs internal.** Token-file headers label each group **PUBLIC API**
-  (covered by SemVer — brand/status sources, resolved semantic tokens, scales,
-  BEM consumer aliases) or **INTERNAL** (`--sf-is-dark` and anything marked
-  so).
+- **Stability tiers.** Token-file headers classify every token into one of
+  three SemVer tiers: **PUBLIC** (everyday knobs — brand/status sources,
+  resolved semantic tokens, scales, BEM consumer aliases), **PUBLIC-ADVANCED**
+  (same SemVer guarantee but niche/powerful — e.g. generative scale inputs and
+  the `--sf-{space,text}-{step}-to-{step}` fluid interpolation bridges), and
+  **INTERNAL** (`--sf-is-dark` — implementation detail, may change without a
+  major bump). The enumerated tier sets live in `scripts/token-tiers.js`; the
+  full cross-reference is [token-index.md](token-index.md).
+- **Role: knob vs consumption.** Orthogonal to tier (and carrying no SemVer
+  meaning), each token is a **knob** — an input you *set* (a literal primitive
+  value) — or a **consumption** value — a ready-to-use output you *read*,
+  derived from other tokens via `var(--sf-…)`. Role is computed deterministically
+  from the declared value (`roleOf` in `scripts/token-tiers.js`) and surfaced in
+  both index docs.
 - **Canonical-source aliases.** A few public tokens have two names by design —
   `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
   `--sf-section-pad`→`--sf-section-pad--m`. Override the canonical (right-hand)
