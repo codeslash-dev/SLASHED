@@ -196,35 +196,37 @@ function buildOne({ files, output, flat = false }) {
   }
 }
 
-// Emits a shields.io "endpoint" badge descriptor for the essential bundle's
-// gzip size. Published to the `dist` branch by publish-dist.yml, so the README
-// badge (img.shields.io/endpoint?url=…/dist/badge-essential.json) always
-// reflects the freshly built size — no hand-edited number to go stale.
-function writeSizeBadge() {
-  const essentialMin = resolveInsideRoot('dist/slashed.essential.min.css');
-  // Prefer the minified bundle (what the badge advertises); fall back to the
-  // unminified one if lightningcss was unavailable.
-  const target = fs.existsSync(essentialMin)
-    ? essentialMin
-    : resolveInsideRoot('dist/slashed.essential.css');
-  if (!fs.existsSync(target)) return;
+// Emits a shields.io "endpoint" badge descriptor for a bundle's gzip size.
+// Published to the `dist` branch by publish-dist.yml, so README badges always
+// reflect the freshly built size — no hand-edited number to go stale.
+function writeSizeBadge(label) {
+  const minPath = resolveInsideRoot(`dist/slashed.${label}.min.css`);
+  // Prefer the minified bundle; fall back to unminified if lightningcss was unavailable.
+  const target = fs.existsSync(minPath)
+    ? minPath
+    : resolveInsideRoot(`dist/slashed.${label}.css`);
+  if (!fs.existsSync(target)) {
+    console.warn(`[bundle] Badge skipped for "${label}" — bundle not found`);
+    return;
+  }
 
   const gzipKb = zlib.gzipSync(fs.readFileSync(target), { level: 9 }).length / 1024;
   const badge = {
     schemaVersion: 1,
-    label: 'essential',
+    label,
     message: `${gzipKb.toFixed(1)} kB gzip`,
     color: 'brightgreen',
-    logo: 'css3',
+    namedLogo: 'css3',
   };
-  const out = resolveInsideRoot('dist/badge-essential.json');
+  const out = resolveInsideRoot(`dist/badge-${label}.json`);
   fs.writeFileSync(out, `${JSON.stringify(badge, null, 2)}\n`, 'utf8');
-  console.log(`[bundle] → dist/badge-essential.json — ${badge.message}`);
+  console.log(`[bundle] → dist/badge-${label}.json — ${badge.message}`);
 }
 
 function bundle() {
   getBundles().forEach(buildOne);
-  writeSizeBadge();
+  writeSizeBadge('essential');
+  writeSizeBadge('optimal');
 }
 
 function watch() {
