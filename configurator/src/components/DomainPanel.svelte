@@ -35,11 +35,13 @@
   // Every token in this domain.
   const domainTokens = $derived(allTokens.filter((t) => domainOf(t) === domain.id));
 
-  // Advanced list: tier + modified + search filters, then grouped.
+  // Advanced list: tier + modified + usage + search filters, then grouped.
   const advancedVisible = $derived(
     domainTokens.filter((t) => {
       if (t.tier === 'INTERNAL' && !ui.showInternal) return false;
       if (ui.onlyModified && !(t.name in overrides)) return false;
+      if (ui.usageFilter === 'configure' && t.role !== 'knob') return false;
+      if (ui.usageFilter === 'consume' && t.role !== 'consumption') return false;
       return matchesQuery(t, query);
     })
   );
@@ -91,6 +93,29 @@
 
     <div class="panel__actions">
       {#if advanced}
+        <div class="cfg-seg panel__usage-seg" role="group" aria-label="Usage filter">
+          <button
+            class="cfg-seg__btn"
+            class:cfg-seg__btn--on={ui.usageFilter === 'all'}
+            onclick={() => (ui.usageFilter = 'all')}
+            aria-pressed={ui.usageFilter === 'all'}
+            title="Show all tokens"
+          >All</button>
+          <button
+            class="cfg-seg__btn"
+            class:cfg-seg__btn--on={ui.usageFilter === 'configure'}
+            onclick={() => (ui.usageFilter = 'configure')}
+            aria-pressed={ui.usageFilter === 'configure'}
+            title="Show only configure tokens — literal inputs you SET in :root"
+          >Configure</button>
+          <button
+            class="cfg-seg__btn"
+            class:cfg-seg__btn--on={ui.usageFilter === 'consume'}
+            onclick={() => (ui.usageFilter = 'consume')}
+            aria-pressed={ui.usageFilter === 'consume'}
+            title="Show only consume tokens — derived outputs you READ in component CSS"
+          >Consume</button>
+        </div>
         <label class="panel__check" title="Restrict to tokens with an active override">
           <input type="checkbox" bind:checked={ui.onlyModified} />
           <span>Modified only</span>
@@ -242,6 +267,7 @@
     gap: 12px;
     flex-wrap: wrap;
   }
+  .panel__usage-seg :global(.cfg-seg__btn) { padding: 4px 10px; font-size: 11.5px; }
   .panel__check {
     display: flex;
     align-items: center;

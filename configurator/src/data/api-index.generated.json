@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "frameworkVersion": "0.5.31",
+    "frameworkVersion": "0.5.32",
     "tokensHash": "abb9b1598040",
     "bundles": [
       "essential",

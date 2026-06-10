@@ -43,6 +43,13 @@ export const ui = $state({
   showInternal: false,
   /** Restrict the advanced list to tokens with an active override. */
   onlyModified: false,
+  /**
+   * Usage filter for the advanced full-catalogue list.
+   * 'all'       — show every token (configure + consume)
+   * 'configure' — show only knob tokens (literal values you SET in :root)
+   * 'consume'   — show only consumption tokens (derived values you READ in component CSS)
+   */
+  usageFilter: 'all',
   /** Theme used by the live preview / WCAG probes. */
   previewTheme: 'light',
   /** Motion mode in the preview only — 'normal' or 'reduced' (forces --sf-motion-scale: 0 on the stage). */
