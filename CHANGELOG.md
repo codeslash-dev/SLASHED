@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.32] - 2026-06-10
+
+### Features
+- **configurator:** knob-density pack — slider editors, drives/contrast badges, viewport ruler, RM preview, diff view
+- **configurator:** automatic.css-tier DX — quick knobs, theme presets, undo/redo
+- **configurator:** full redesign — categorised UI, sidebar nav, classifier coverage
+- palette mix knobs, surface cascade, [data-theme] bg fix, alpha leak fix
+
+### Bug Fixes
+- **configurator:** address CodeRabbit review on knob-density commit
+- **configurator:** honour quoted parens in light-dark() depth scan
+- **configurator:** tabbed Basic/Advanced UI, dark-mode preview, display scale
+- address review findings on palette knobs, docs, and tier metadata
+
 ## [0.5.31] - 2026-06-10
 
 ### Added
