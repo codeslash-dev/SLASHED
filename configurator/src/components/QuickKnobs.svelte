@@ -186,7 +186,7 @@
 {/if}
 
 <style>
-  .knobs { overflow: hidden; }
+  .knobs { overflow: clip; }
   .knobs__head {
     display: flex;
     align-items: center;

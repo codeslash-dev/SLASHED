@@ -287,7 +287,7 @@
     min-height: 0;
   }
 
-  .panel__card { overflow: hidden; }
+  .panel__card { overflow: clip; }
   .panel__card-head {
     display: flex;
     align-items: baseline;

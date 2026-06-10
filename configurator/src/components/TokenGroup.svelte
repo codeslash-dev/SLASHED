@@ -42,7 +42,7 @@
 
 <style>
   .group {
-    overflow: hidden;
+    overflow: clip;
   }
   .group--mod { box-shadow: var(--cfg-shadow-card), 0 0 0 1px rgba(79, 140, 255, 0.18); }
   .group__head {
