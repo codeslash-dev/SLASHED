@@ -54,4 +54,10 @@ describe('resolveLightDark', () => {
   test('is safe on unbalanced input', () => {
     assert.equal(resolveLightDark('light-dark(a, b', 'dark'), 'light-dark(a, b');
   });
+  test('honours quoted parentheses when matching boundaries', () => {
+    // The closing ')' inside the quoted string must not terminate the scan.
+    const v = `light-dark("a)b", "c)d") tail`;
+    assert.equal(resolveLightDark(v, 'light'), '"a)b" tail');
+    assert.equal(resolveLightDark(v, 'dark'), '"c)d" tail');
+  });
 });

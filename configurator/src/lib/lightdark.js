@@ -69,10 +69,20 @@ export function resolveLightDark(value, theme) {
 
   const open = idx + 'light-dark('.length;
   let depth = 1;
+  let quote = '';
   let i = open;
   for (; i < value.length && depth > 0; i += 1) {
-    if (value[i] === '(') depth += 1;
-    else if (value[i] === ')') depth -= 1;
+    const ch = value[i];
+    if (quote) {
+      if (ch === quote && value[i - 1] !== '\\') quote = '';
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      quote = ch;
+      continue;
+    }
+    if (ch === '(') depth += 1;
+    else if (ch === ')') depth -= 1;
   }
   // `i` now points just past the matching ')'. If unbalanced, bail out safely.
   if (depth !== 0) return value;
