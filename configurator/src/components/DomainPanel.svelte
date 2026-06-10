@@ -304,4 +304,11 @@
     border-radius: 4px;
     border: 1px solid var(--cfg-border);
   }
+
+  /* Tighter horizontal padding on narrow phones recovers ~16px of content
+     width, reducing the chance of token editors overflowing their container. */
+  @media (max-width: 600px) {
+    .panel__body { padding-inline: 10px; }
+    .panel__head { padding: 12px 12px 10px; }
+  }
 </style>

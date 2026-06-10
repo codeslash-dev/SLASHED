@@ -344,4 +344,11 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
+
+  /* On narrow phones, shrink the number spinbox slightly so the slider gets
+     more room. The "raw" button stays visible — hiding it would lock users out
+     when the slider is disabled (e.g. an existing calc()/clamp() override). */
+  @media (max-width: 600px) {
+    .len__num { flex: 0 0 58px; }
+  }
 </style>
