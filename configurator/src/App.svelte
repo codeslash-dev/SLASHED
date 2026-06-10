@@ -20,6 +20,14 @@
 
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('typography'));
   const isTool = $derived(domain?.tool === 'wcag');
+
+  // The search query is scoped to a domain's Advanced list; clear it when the
+  // active tab changes so a leftover filter never makes the next tab's list
+  // look empty (the search box only renders in Advanced mode).
+  $effect(() => {
+    ui.domain;
+    ui.query = '';
+  });
 </script>
 
 <div class="shell">
@@ -62,7 +70,7 @@
   .main {
     min-width: 0;
     min-height: 0;
-    overflow-y: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }

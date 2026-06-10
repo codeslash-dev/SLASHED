@@ -230,7 +230,7 @@
     <h2 class="wcag__title">Accessibility</h2>
     <p class="wcag__lead">
       WCAG 2.1 contrast for your token palette, resolved with current overrides in
-      <strong>{ui.previewTheme}</strong> mode. Switch the theme from the live preview bar.
+      <strong>{ui.previewTheme}</strong> mode. Switch the theme from the header.
     </p>
   </header>
 
@@ -324,7 +324,7 @@
       <h3 class="card__h">Text on colors — used combinations</h3>
       <p class="card__lead">
         How the auto-contrasting on-color text reads on each brand &amp; status color in
-        <strong>{ui.previewTheme}</strong> mode (button labels, badges). Switch the theme from the live preview bar.
+        <strong>{ui.previewTheme}</strong> mode (button labels, badges). Switch the theme from the header.
       </p>
       <div class="usage">
         {#each usage as u (u.role)}

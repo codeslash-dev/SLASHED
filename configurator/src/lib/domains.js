@@ -21,7 +21,8 @@
  */
 const RULES = [
   // Shadows first — claim *-shadow-* before typography claims --sf-text-*.
-  { id: 'shadows', test: /^--sf-(.*-)?shadow|^--sf-drop-shadow|glow/ },
+  // `(.*-)?shadow` already covers drop-shadow / text-shadow / scroll-shadow.
+  { id: 'shadows', test: /^--sf-(.*-)?shadow|^--sf-.*glow/ },
   // Borders, radii, strokes, dividers, outlines.
   { id: 'borders', test: /^--sf-(border|radius|stroke|divider|outline)/ },
   // Typography (text, fonts, line-height, tracking, prose, headings, display).

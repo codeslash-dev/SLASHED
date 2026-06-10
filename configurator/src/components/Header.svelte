@@ -47,6 +47,22 @@
       </span>
     {/if}
     <span class="hdr__pill hdr__pill--muted">{sync.counts?.tokens ?? 0} tokens</span>
+    <div class="hdr__theme" role="group" aria-label="Preview theme">
+      <button
+        class="hdr__theme-btn"
+        class:hdr__theme-btn--on={ui.previewTheme === 'light'}
+        onclick={() => (ui.previewTheme = 'light')}
+        aria-pressed={ui.previewTheme === 'light'}
+        title="Preview in light mode"
+      >Light</button>
+      <button
+        class="hdr__theme-btn"
+        class:hdr__theme-btn--on={ui.previewTheme === 'dark'}
+        onclick={() => (ui.previewTheme = 'dark')}
+        aria-pressed={ui.previewTheme === 'dark'}
+        title="Preview in dark mode"
+      >Dark</button>
+    </div>
     <label class="hdr__toggle">
       <input type="checkbox" bind:checked={showPreview} />
       <span>Preview</span>
@@ -132,6 +148,23 @@
   }
   .hdr__pill--muted {
     color: var(--cfg-text-muted);
+  }
+  .hdr__theme {
+    display: inline-flex;
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    overflow: hidden;
+  }
+  .hdr__theme-btn {
+    background: var(--cfg-surface-2);
+    color: var(--cfg-text-muted);
+    border: none;
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+  .hdr__theme-btn--on {
+    background: var(--cfg-accent-strong);
+    color: #fff;
   }
   .hdr__toggle {
     display: flex;

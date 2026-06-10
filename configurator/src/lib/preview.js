@@ -20,8 +20,6 @@
 import { allTokens } from './model.js';
 import { resolveLightDark } from './lightdark.js';
 
-export { resolveLightDark, splitTopLevelArgs } from './lightdark.js';
-
 /**
  * @param {Record<string,string>} overrides token name -> value
  * @param {'light'|'dark'} theme preview color scheme

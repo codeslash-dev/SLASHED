@@ -46,6 +46,10 @@
   );
   const grouped = $derived(groupTokens(advancedVisible));
 
+  // Only label each group's category when more than one is present in this
+  // domain (otherwise the repeated "Core tokens" prefix is just noise).
+  const categoryCount = $derived(new Set(grouped.map((c) => c.category)).size);
+
   const basicGenerators = $derived(domain.basicGenerators ?? []);
   const advancedGenerators = $derived(domain.advancedGenerators ?? []);
 </script>
@@ -67,6 +71,19 @@
       />
     {/if}
   </header>
+
+  {#if advanced}
+    <div class="panel__filters">
+      <label class="panel__check">
+        <input type="checkbox" bind:checked={ui.onlyModified} />
+        <span>Modified only</span>
+      </label>
+      <label class="panel__check">
+        <input type="checkbox" bind:checked={ui.showInternal} />
+        <span>Show internal</span>
+      </label>
+    </div>
+  {/if}
 
   <!-- Essentials (always shown) -->
   {#if essentials.length}
@@ -100,7 +117,7 @@
             name={group.name}
             tokens={group.tokens}
             description={group.description}
-            showCategory={cat.category !== domain.label}
+            showCategory={categoryCount > 1}
             category={cat.category}
           />
         {/each}
@@ -141,6 +158,21 @@
     font-size: 13px;
   }
   .panel__search:focus { outline: 2px solid var(--cfg-accent); outline-offset: -1px; }
+
+  .panel__filters {
+    display: flex;
+    gap: 18px;
+    margin-top: -4px;
+  }
+  .panel__check {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--cfg-text-muted);
+    cursor: pointer;
+  }
+  .panel__check input { accent-color: var(--cfg-accent-strong); }
 
   .essentials {
     border: 1px solid var(--cfg-border);
