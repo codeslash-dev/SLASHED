@@ -13,8 +13,8 @@ values see [tokens.md](tokens.md); for the flat name list see
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 680 | Everyday knobs. SemVer-stable. |
-| PUBLIC-ADVANCED | 127 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 670 | Everyday knobs. SemVer-stable. |
+| PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
@@ -62,6 +62,16 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 - `--sf-mask-scrim-start`
 - `--sf-motion-scale`
 - `--sf-optical-sizing`
+- `--sf-palette-mix-100`
+- `--sf-palette-mix-200`
+- `--sf-palette-mix-300`
+- `--sf-palette-mix-400`
+- `--sf-palette-mix-50`
+- `--sf-palette-mix-600`
+- `--sf-palette-mix-700`
+- `--sf-palette-mix-800`
+- `--sf-palette-mix-900`
+- `--sf-palette-mix-950`
 - `--sf-print-base-size`
 - `--sf-print-page-margin`
 - `--sf-print-page-size`
@@ -386,10 +396,10 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-primary-100` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
 | `--sf-color-primary-200` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
 | `--sf-color-primary-300` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
-| `--sf-color-primary-400` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))` |
+| `--sf-color-primary-400` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))` |
 | `--sf-color-primary-50` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
 | `--sf-color-primary-500` | PUBLIC | consumption | Palette (optional) | — | `var(--sf-color-primary)` |
-| `--sf-color-primary-600` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` |
+| `--sf-color-primary-600` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))` |
 | `--sf-color-primary-700` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` |
 | `--sf-color-primary-800` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` |
 | `--sf-color-primary-900` | PUBLIC | consumption | Palette (optional) | — | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` |
@@ -692,16 +702,16 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-opacity-75` | PUBLIC | knob | Core | — | `0.75` |
 | `--sf-opacity-disabled` | PUBLIC | knob | Core | — | `0.45` |
 | `--sf-optical-sizing` | PUBLIC-ADVANCED | knob | Core | — | `auto` |
-| `--sf-palette-mix-100` | PUBLIC | knob | Palette (optional) | — | `8%` |
-| `--sf-palette-mix-200` | PUBLIC | knob | Palette (optional) | — | `20%` |
-| `--sf-palette-mix-300` | PUBLIC | knob | Palette (optional) | — | `40%` |
-| `--sf-palette-mix-400` | PUBLIC | knob | Palette (optional) | — | `65%` |
-| `--sf-palette-mix-50` | PUBLIC | knob | Palette (optional) | — | `4%` |
-| `--sf-palette-mix-600` | PUBLIC | knob | Palette (optional) | — | `82%` |
-| `--sf-palette-mix-700` | PUBLIC | knob | Palette (optional) | — | `62%` |
-| `--sf-palette-mix-800` | PUBLIC | knob | Palette (optional) | — | `38%` |
-| `--sf-palette-mix-900` | PUBLIC | knob | Palette (optional) | — | `18%` |
-| `--sf-palette-mix-950` | PUBLIC | knob | Palette (optional) | — | `8%` |
+| `--sf-palette-mix-100` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `8%` |
+| `--sf-palette-mix-200` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `20%` |
+| `--sf-palette-mix-300` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `40%` |
+| `--sf-palette-mix-400` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `65%` |
+| `--sf-palette-mix-50` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `4%` |
+| `--sf-palette-mix-600` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `82%` |
+| `--sf-palette-mix-700` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `62%` |
+| `--sf-palette-mix-800` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `38%` |
+| `--sf-palette-mix-900` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `18%` |
+| `--sf-palette-mix-950` | PUBLIC-ADVANCED | knob | Palette (optional) | — | `8%` |
 | `--sf-print-base-size` | PUBLIC-ADVANCED | knob | Core | — | `11pt` |
 | `--sf-print-page-margin` | PUBLIC-ADVANCED | knob | Core | — | `2cm` |
 | `--sf-print-page-size` | PUBLIC-ADVANCED | knob | Core | — | `a4` |

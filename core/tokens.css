@@ -1200,6 +1200,9 @@
        will replace this formula once it ships. */
     --sf-contrast-threshold: 0.6;
 
+    /* Device safe-area insets (notches, rounded corners, home indicators).
+       0px on devices without intrusions. Read these in your own padding/
+       margin; the framework consumes them in layout edge spacing. */
     --sf-safe-top:    env(safe-area-inset-top,    0px);
     --sf-safe-bottom: env(safe-area-inset-bottom, 0px);
     --sf-safe-left:   env(safe-area-inset-left,   0px);

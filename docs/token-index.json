@@ -13,8 +13,8 @@
     "counts": {
       "tokens": 808,
       "by_tier": {
-        "PUBLIC": 680,
-        "PUBLIC-ADVANCED": 127,
+        "PUBLIC": 670,
+        "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "by_role": {
@@ -2028,7 +2028,7 @@
         "optional/tokens.palette.css"
       ],
       "fallback": false,
-      "value": "color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))"
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))"
     },
     "--sf-color-primary-50": {
       "tier": "PUBLIC",
@@ -2055,7 +2055,7 @@
         "optional/tokens.palette.css"
       ],
       "fallback": false,
-      "value": "color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))"
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
     "--sf-color-primary-700": {
       "tier": "PUBLIC",
@@ -4809,7 +4809,7 @@
       "value": "auto"
     },
     "--sf-palette-mix-100": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4818,7 +4818,7 @@
       "value": "8%"
     },
     "--sf-palette-mix-200": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4827,7 +4827,7 @@
       "value": "20%"
     },
     "--sf-palette-mix-300": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4836,7 +4836,7 @@
       "value": "40%"
     },
     "--sf-palette-mix-400": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4845,7 +4845,7 @@
       "value": "65%"
     },
     "--sf-palette-mix-50": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4854,7 +4854,7 @@
       "value": "4%"
     },
     "--sf-palette-mix-600": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4863,7 +4863,7 @@
       "value": "82%"
     },
     "--sf-palette-mix-700": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4872,7 +4872,7 @@
       "value": "62%"
     },
     "--sf-palette-mix-800": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4881,7 +4881,7 @@
       "value": "38%"
     },
     "--sf-palette-mix-900": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"
@@ -4890,7 +4890,7 @@
       "value": "18%"
     },
     "--sf-palette-mix-950": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.palette.css"

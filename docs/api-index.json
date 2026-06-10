@@ -37,8 +37,8 @@
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 903,
-        "PUBLIC-ADVANCED": 160
+        "PUBLIC": 893,
+        "PUBLIC-ADVANCED": 170
       },
       "by_role": {
         "consumption": 581,
@@ -6978,7 +6978,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7068,7 +7068,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -16727,7 +16727,7 @@
     {
       "name": "--sf-palette-mix-100",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16757,7 +16757,7 @@
     {
       "name": "--sf-palette-mix-200",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16787,7 +16787,7 @@
     {
       "name": "--sf-palette-mix-300",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16817,7 +16817,7 @@
     {
       "name": "--sf-palette-mix-400",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16847,7 +16847,7 @@
     {
       "name": "--sf-palette-mix-50",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16877,7 +16877,7 @@
     {
       "name": "--sf-palette-mix-600",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16907,7 +16907,7 @@
     {
       "name": "--sf-palette-mix-700",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16937,7 +16937,7 @@
     {
       "name": "--sf-palette-mix-800",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16967,7 +16967,7 @@
     {
       "name": "--sf-palette-mix-900",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -16997,7 +16997,7 @@
     {
       "name": "--sf-palette-mix-950",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
       "category": "Palette tokens",
@@ -18348,7 +18348,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Layout & a11y",
-      "description": "Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈…",
+      "description": "Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing.",
       "value": "env(safe-area-inset-bottom, 0px)",
       "aliasOf": null,
       "registered": false,
@@ -18379,7 +18379,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Layout & a11y",
-      "description": "Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈…",
+      "description": "Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing.",
       "value": "env(safe-area-inset-left, 0px)",
       "aliasOf": null,
       "registered": false,
@@ -18410,7 +18410,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Layout & a11y",
-      "description": "Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈…",
+      "description": "Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing.",
       "value": "env(safe-area-inset-right, 0px)",
       "aliasOf": null,
       "registered": false,
@@ -18441,7 +18441,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Layout & a11y",
-      "description": "Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈…",
+      "description": "Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing.",
       "value": "env(safe-area-inset-top, 0px)",
       "aliasOf": null,
       "registered": false,

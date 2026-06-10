@@ -14,8 +14,8 @@ and a short description. The machine-readable companion (with all columns) is
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 903 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 160 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 893 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 170 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 ## Tokens (841)
@@ -437,10 +437,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-ratio-portrait` | PUBLIC | knob | ratio | `3 / 4` | Aspect ratios |
 | `--sf-ratio-square` | PUBLIC | knob | ratio | `1` | Aspect ratios |
 | `--sf-ratio-video` | PUBLIC | knob | ratio | `16 / 9` | Aspect ratios |
-| `--sf-safe-bottom` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-bottom, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
-| `--sf-safe-left` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-left, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
-| `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
-| `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
+| `--sf-safe-bottom` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-bottom, 0px)` | Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing. |
+| `--sf-safe-left` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-left, 0px)` | Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing. |
+| `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing. |
+| `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Device safe-area insets (notches, rounded corners, home indicators). 0px on devices without intrusions. Read these in your own padding/ margin; the framework consumes them in layout edge spacing. |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | scroll | `cover 30%` | consumer API. Attach these to your own scroll-timeline via animation-range. Not consumed by the framework itself; intended for BEM component authors. |
 | `--sf-scroll-timeline-range-start` | PUBLIC-ADVANCED | knob | scroll | `entry 0%` | consumer API. Attach these to your own scroll-timeline via animation-range. Not consumed by the framework itself; intended for BEM component authors. |
 | `--sf-scrollbar-thumb` | PUBLIC | consumption | scrollbar | `var(--sf-color-neutral)` | Scrollbar |
@@ -704,10 +704,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` | primary |
 | `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` | primary |
 | `--sf-color-primary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` | primary |
-| `--sf-color-primary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))` | primary |
 | `--sf-color-primary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` | primary |
 | `--sf-color-primary-500` | PUBLIC | consumption | color | `var(--sf-color-primary)` | primary |
-| `--sf-color-primary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))` | primary |
 | `--sf-color-primary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` | primary |
 | `--sf-color-primary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` | primary |
 | `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` | primary |
@@ -767,16 +767,16 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 80%, transparent)` | tertiary |
 | `--sf-color-tertiary-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 90%, transparent)` | tertiary |
 | `--sf-color-tertiary-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 95%, transparent)` | tertiary |
-| `--sf-palette-mix-100` | PUBLIC | knob | palette | `8%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-200` | PUBLIC | knob | palette | `20%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-300` | PUBLIC | knob | palette | `40%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-400` | PUBLIC | knob | palette | `65%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-50` | PUBLIC | knob | palette | `4%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-600` | PUBLIC | knob | palette | `82%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-700` | PUBLIC | knob | palette | `62%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-800` | PUBLIC | knob | palette | `38%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-900` | PUBLIC | knob | palette | `18%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
-| `--sf-palette-mix-950` | PUBLIC | knob | palette | `8%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-100` | PUBLIC-ADVANCED | knob | palette | `8%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-200` | PUBLIC-ADVANCED | knob | palette | `20%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-300` | PUBLIC-ADVANCED | knob | palette | `40%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-400` | PUBLIC-ADVANCED | knob | palette | `65%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-50` | PUBLIC-ADVANCED | knob | palette | `4%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-600` | PUBLIC-ADVANCED | knob | palette | `82%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-700` | PUBLIC-ADVANCED | knob | palette | `62%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-800` | PUBLIC-ADVANCED | knob | palette | `38%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-900` | PUBLIC-ADVANCED | knob | palette | `18%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-950` | PUBLIC-ADVANCED | knob | palette | `8%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
 
 ### Sizes-extended tokens (108)
 

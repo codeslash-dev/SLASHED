@@ -3,7 +3,7 @@
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
     "frameworkVersion": "0.5.31",
-    "tokensHash": "e276fb19d760",
+    "tokensHash": "abb9b1598040",
     "bundles": [
       "essential",
       "full",
@@ -14,8 +14,8 @@
     "counts": {
       "tokens": 841,
       "byTier": {
-        "PUBLIC-ADVANCED": 160,
-        "PUBLIC": 680,
+        "PUBLIC-ADVANCED": 170,
+        "PUBLIC": 670,
         "INTERNAL": 1
       },
       "byCategory": {
@@ -5084,7 +5084,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Mid-light primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5150,7 +5150,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Mid-dark primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -12257,7 +12257,7 @@
     },
     {
       "name": "--sf-palette-mix-100",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12279,7 +12279,7 @@
     },
     {
       "name": "--sf-palette-mix-200",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12301,7 +12301,7 @@
     },
     {
       "name": "--sf-palette-mix-300",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12323,7 +12323,7 @@
     },
     {
       "name": "--sf-palette-mix-400",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12345,7 +12345,7 @@
     },
     {
       "name": "--sf-palette-mix-50",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12367,7 +12367,7 @@
     },
     {
       "name": "--sf-palette-mix-600",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12389,7 +12389,7 @@
     },
     {
       "name": "--sf-palette-mix-700",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12411,7 +12411,7 @@
     },
     {
       "name": "--sf-palette-mix-800",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12433,7 +12433,7 @@
     },
     {
       "name": "--sf-palette-mix-900",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",
@@ -12455,7 +12455,7 @@
     },
     {
       "name": "--sf-palette-mix-950",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "namespace": "palette",
       "category": "Palette tokens",
       "group": "Palette shade mix percentages",

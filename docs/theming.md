@@ -226,19 +226,24 @@ you can override any surface token in `slashed.overrides`:
     --sf-color-text--on-primary: oklch(0.12 0 0);
   }
 
-  /* Override text only on the generic .sf-surface macro when
-     a custom --sf-surface-color is in the ambiguous lightness band */
+  /* For generic .sf-surface with a custom --sf-surface-color in the
+     ambiguous lightness band, pin the public surface-facing tokens */
   .my-card.sf-surface {
-    --sf-surface-contrast: oklch(0.10 0 0);
+    --sf-color-text:       oklch(0.10 0 0);
+    --sf-color-heading:    var(--sf-color-text);
+    --sf-focus-ring-color: var(--sf-color-text);
+    --sf-caret-color:      var(--sf-color-text);
   }
 }
 ```
 
-All surface-derived tokens (`--sf-color-text`, `--sf-color-heading`,
-`--sf-color-link`, `--sf-color-border`, `--sf-focus-ring-color`,
-`--sf-caret-color`, …) inside the surface scope inherit from
-`--sf-surface-contrast` or the corresponding `--sf-color-text--on-*` value,
-so a single override fixes every descendant.
+On named variants (`.sf-surface--*`), every surface-derived token
+(`--sf-color-text`, `--sf-color-heading`, `--sf-color-link`,
+`--sf-color-border`, `--sf-focus-ring-color`, `--sf-caret-color`, …) follows
+the variant's `--sf-color-text--on-*` token, so that single override fixes
+every descendant. On the generic `.sf-surface` the foreground is derived
+internally from `--sf-surface-color`; pin the public tokens shown above
+when you need a different result.
 
 For a per-brand-palette shift without per-element overrides, re-declare the
 source token under your own selector — all derived tokens recompute:
