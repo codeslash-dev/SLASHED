@@ -12,11 +12,12 @@
    * so each domain is just curation — no bespoke per-field code.
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
-  import { domainOf } from '../lib/domains.js';
+  import { domainOf, KNOBS_BY_DOMAIN } from '../lib/domains.js';
   import { ui, overrides, clearAll } from '../lib/store.svelte.js';
   import TokenGroup from './TokenGroup.svelte';
   import TokenRow from './TokenRow.svelte';
   import ScaleGenerator from './ScaleGenerator.svelte';
+  import QuickKnobs from './QuickKnobs.svelte';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, essentials?:string[], basicGenerators?:string[], advancedGenerators?:string[] } }} */
   let { domain } = $props();
@@ -62,6 +63,10 @@
 
   const basicGenerators = $derived(domain.basicGenerators ?? []);
   const advancedGenerators = $derived(domain.advancedGenerators ?? []);
+
+  // Quick knobs for this domain (global multipliers that cascade through
+  // many derived tokens — see lib/domains.js → KNOBS_BY_DOMAIN).
+  const knobs = $derived(KNOBS_BY_DOMAIN[domain.id] ?? []);
 
   // Modified tokens within this domain — surfaced as a collapsible block.
   const modifiedHere = $derived(
@@ -127,6 +132,16 @@
         </section>
       {/if}
     {:else}
+      <!-- Quick knobs (global multipliers cascading through dozens of derived
+           tokens). Always shown when the domain has them, in both modes. -->
+      {#if knobs.length}
+        <QuickKnobs
+          {knobs}
+          title="Quick knobs"
+          blurb="One slider, many tokens — these multipliers cascade through the framework."
+        />
+      {/if}
+
       <!-- Essentials (always shown when present) -->
       {#if essentials.length}
         <section class="cfg-card panel__card">

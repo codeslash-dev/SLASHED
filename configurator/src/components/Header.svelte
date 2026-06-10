@@ -14,10 +14,12 @@
    * reachable. Keyboard shortcut: `/` focuses the search box.
    */
   import { sync, allTokens } from '../lib/model.js';
-  import { ui, overrides, overrideCount } from '../lib/store.svelte.js';
+  import { ui, overrides, overrideCount, history, undo, redo } from '../lib/store.svelte.js';
 
   const totalTokens = allTokens.length;
   const modCount = $derived(Object.keys(overrides).length);
+  const canUndo = $derived(history.past.length > 0);
+  const canRedo = $derived(history.future.length > 0);
 </script>
 
 <header class="hdr">
@@ -60,6 +62,23 @@
   </div>
 
   <div class="hdr__controls">
+    <div class="hdr__history" role="group" aria-label="Undo / redo">
+      <button
+        class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane"
+        onclick={() => undo()}
+        disabled={!canUndo}
+        title="Undo last edit ({canUndo ? history.past.length + ' available' : 'no history'}) — ⌘Z"
+        aria-label="Undo"
+      >↶</button>
+      <button
+        class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane"
+        onclick={() => redo()}
+        disabled={!canRedo}
+        title="Redo last undone edit ({canRedo ? history.future.length + ' available' : 'nothing to redo'}) — ⇧⌘Z"
+        aria-label="Redo"
+      >↷</button>
+    </div>
+
     <div class="cfg-seg" role="group" aria-label="Complexity mode">
       <button
         class="cfg-seg__btn"
@@ -194,6 +213,8 @@
     flex-wrap: wrap;
     justify-content: flex-end;
   }
+
+  .hdr__history { display: inline-flex; gap: 2px; }
 
   /* Compact button used in the segmented theme toggle. */
   :global(.cfg-seg__btn--narrow) { padding-inline: 10px; min-width: 32px; }

@@ -4,11 +4,18 @@
  * Module-level `$state` in a `.svelte.js` file is reactive across every
  * component that imports it, so the override map, the live filters, and the
  * derived CSS output all stay in sync without prop-drilling or an event bus.
+ *
+ * The non-reactive ALGORITHMS (history, bulk patch, theme apply) live in
+ * the runes-free `./historyOps.js` so they can be tested under `node --test`
+ * without a Svelte compile pass.
  */
 import { allTokens, tokenByName } from './model.js';
 import { sanitizeValue } from './css.js';
+import { sanitisePreset, loadSavedThemes, persistSavedThemes, slugify } from './themes.js';
+import * as ops from './historyOps.js';
 
 const STORAGE_KEY = 'slashed-configurator/overrides/v1';
+const HISTORY_LIMIT = 50;
 
 /**
  * Override map: token name -> user value (string). Only customised tokens
@@ -47,6 +54,22 @@ export const ui = $state({
 });
 
 /**
+ * Undo/redo stack. Each entry is a JSON snapshot of the override map taken
+ * BEFORE the next mutation; popping the stack reverts to that snapshot.
+ *
+ * Capped at HISTORY_LIMIT to keep memory bounded — pre-PR oldest entries
+ * silently drop off the back.
+ *
+ * @type {{ past: string[], future: string[] }}
+ */
+export const history = $state({ past: [], future: [] });
+
+/** Custom themes saved by the user (named slots in localStorage). */
+export const savedThemes = $state(loadSavedThemes());
+
+// ───────────────────────────── persistence ────────────────────────────────
+
+/**
  * Load persisted overrides from localStorage, ignoring malformed data.
  * @returns {Record<string, string>}
  */
@@ -73,21 +96,37 @@ function loadOverrides() {
   return {};
 }
 
-/**
- * Persist the current overrides. Called after every mutation; cheap enough at
- * this scale and keeps a refresh from losing work.
- */
+/** Persist the current overrides; flips `storage.ok` if blocked. */
 function persist() {
   if (typeof localStorage === 'undefined') return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
     storage.ok = true;
   } catch {
-    // Quota / privacy-mode / blocked storage: keep working in-memory but let
-    // the UI surface that persistence is off.
     storage.ok = false;
   }
 }
+
+// ── Wiring: a stable bag passed to every historyOps.* call. The runes are
+// transparent (the proxy delegates to a plain object), so `historyOps` mutates
+// `overrides` and `history` in place and Svelte sees the changes.
+const opsState = {
+  get overrides() { return overrides; },
+  get history()   { return history; },
+  limit: HISTORY_LIMIT,
+  sanitize: sanitizeValue,
+  isKnown: (name) => tokenByName.has(name),
+  persist,
+};
+
+// ───────────────────────────── history (undo/redo) ─────────────────────────
+
+/** Step backwards: restore the most recent past snapshot. */
+export function undo() { return ops.undoStep(opsState); }
+/** Step forwards: re-apply the most recent redo snapshot. */
+export function redo() { return ops.redoStep(opsState); }
+
+// ───────────────────────────── override mutations ─────────────────────────
 
 /**
  * Set (or clear) a single token override. An empty/whitespace value removes
@@ -95,53 +134,80 @@ function persist() {
  * @param {string} name token custom-property name
  * @param {string} value new value
  */
-export function setOverride(name, value) {
-  const safe = sanitizeValue(value);
-  if (safe === '') {
-    delete overrides[name];
-  } else {
-    overrides[name] = safe;
-  }
-  persist();
-}
+export function setOverride(name, value) { ops.setOne(opsState, name, value); }
 
-/**
- * Remove a single override.
- * @param {string} name
- */
-export function clearOverride(name) {
-  delete overrides[name];
-  persist();
-}
+/** Remove a single override. */
+export function clearOverride(name) { ops.clearOne(opsState, name); }
 
 /** Remove every override. */
-export function clearAll() {
-  for (const key of Object.keys(overrides)) delete overrides[key];
-  persist();
-}
+export function clearAll() { ops.clearEvery(opsState); }
 
 /**
  * Replace the entire override set (used by CSS import). Unknown token names
  * are dropped so a stale paste can't poison the catalogue.
- * @param {Record<string, string>} map token name -> value
  * @returns {{ applied: number, skipped: string[] }}
  */
-export function replaceOverrides(map) {
-  clearAll();
-  let applied = 0;
-  const skipped = [];
-  for (const [name, value] of Object.entries(map || {})) {
-    const safe = sanitizeValue(value);
-    if (tokenByName.has(name) && safe !== '') {
-      overrides[name] = safe;
-      applied += 1;
-    } else {
-      skipped.push(name);
-    }
-  }
-  persist();
+export function replaceOverrides(map) { return ops.replaceAll(opsState, map); }
+
+/**
+ * Bulk-set many tokens in a single history step. Pass `null` (or empty
+ * string) as a value to clear that token.
+ * @param {Record<string, string|null>} patch
+ */
+export function patchOverrides(patch) { return ops.patchMany(opsState, patch); }
+
+// ───────────────────────────── theme presets ──────────────────────────────
+
+/**
+ * Apply a theme preset: WIPES current overrides and replaces them with the
+ * preset's values, in a single history step.
+ *
+ * @param {{ overrides: Record<string,string> }} preset
+ * @returns {{ applied: number, skipped: string[] }}
+ */
+export function applyTheme(preset) {
+  const { map, applied, skipped } = sanitisePreset(preset?.overrides ?? {});
+  ops.applyThemeToState(opsState, map);
   return { applied, skipped };
 }
+
+/**
+ * Save the current override map as a named user theme, persist it, and add
+ * it to the live `savedThemes` array. Existing slots with the same id are
+ * overwritten (so saving twice with the same name is an "update").
+ *
+ * @param {string} name human-readable name
+ * @returns {{ id: string, persisted: boolean }}
+ */
+export function saveCurrentTheme(name) {
+  const id = slugify(name);
+  const display = String(name || '').trim() || 'Untitled';
+  const count = Object.keys(overrides).length;
+  const theme = {
+    id,
+    name: display,
+    icon: '⭅',
+    blurb: `${count} customised token${count === 1 ? '' : 's'}`,
+    overrides: { ...overrides },
+  };
+  const next = savedThemes.filter((t) => t.id !== id);
+  next.push(theme);
+  // Replace the array contents in place so the $state reactivity fires.
+  savedThemes.length = 0;
+  for (const t of next) savedThemes.push(t);
+  const persisted = persistSavedThemes(savedThemes);
+  return { id, persisted };
+}
+
+/** Delete a saved theme by id. */
+export function deleteSavedTheme(id) {
+  const idx = savedThemes.findIndex((t) => t.id === id);
+  if (idx === -1) return false;
+  savedThemes.splice(idx, 1);
+  return persistSavedThemes(savedThemes);
+}
+
+// ───────────────────────────── helpers ────────────────────────────────────
 
 /** Count of active overrides (non-reactive helper for one-off reads). */
 export function overrideCount() {

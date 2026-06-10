@@ -30,6 +30,49 @@ const OVERRIDES = {
 };
 
 /**
+ * Quick-knob definitions per domain.
+ *
+ * A "knob" is a single token whose value cascades through many other tokens
+ * (e.g. `--sf-space-scale=1` drives 45 spacing tokens). Surfacing these as
+ * dedicated sliders at the top of each panel is the headline DX win — one
+ * drag, dozens of derived values move.
+ *
+ * The `driving` count is the number of tokens that reference this knob in
+ * the active framework catalogue (measured against api-index.generated.json).
+ *
+ * Schema is consumed by QuickKnobs.svelte unchanged.
+ *
+ * @type {Record<string, Array<{name:string,label:string,help?:string,default:number,min:number,max:number,step:number,unit?:string,driving?:number}>>}
+ */
+export const KNOBS_BY_DOMAIN = {
+  colors: [
+    { name: '--sf-contrast-bias',      label: '--sf-contrast-bias',      default: 0,    min: -1,  max: 1,   step: 0.05, driving: 3, help: 'Shifts the lightness threshold used by text-on-color pairing toward darker (negative) or lighter (positive) text.' },
+    { name: '--sf-contrast-threshold', label: '--sf-contrast-threshold', default: 0.6,  min: 0,   max: 1,   step: 0.01,            help: 'OKLCH lightness above which a swatch is considered "light" (and gets dark text), below which dark swatches get light text.' },
+    { name: '--sf-focus-ring-width',   label: '--sf-focus-ring-width',   default: 2,    min: 0,   max: 6,   step: 0.5,  unit: 'px', help: 'Thickness of the focus ring on every interactive element.' },
+  ],
+  typography: [
+    { name: '--sf-text-scale',         label: '--sf-text-scale',         default: 1,    min: 0.5, max: 2,   step: 0.05,             help: 'Multiplier applied to the entire fluid text ramp (--sf-text-2xs … --sf-text-2xl).' },
+    { name: '--sf-text-display-scale', label: '--sf-text-display-scale', default: 1,    min: 0.5, max: 2,   step: 0.05,             help: 'Multiplier applied to the display ramp (--sf-text-display-s|m|l).' },
+  ],
+  spacing: [
+    { name: '--sf-space-scale',        label: '--sf-space-scale',        default: 1,    min: 0.5, max: 2,   step: 0.05, driving: 45, help: 'Multiplier applied to every fluid spacing step.' },
+    { name: '--sf-section-scale',      label: '--sf-section-scale',      default: 1,    min: 0.5, max: 2,   step: 0.05,            help: 'Multiplier applied to section paddings only.' },
+  ],
+  borders: [
+    { name: '--sf-radius-scale',       label: '--sf-radius-scale',       default: 1,    min: 0,   max: 2,   step: 0.05, driving: 8, help: 'Multiplier applied to every radius step (set to 0 for sharp brutalist corners).' },
+  ],
+  shadows: [
+    { name: '--sf-shadow-strength',    label: '--sf-shadow-strength',    default: 0.08, min: 0,   max: 1,   step: 0.01, driving: 14, help: 'Opacity multiplier applied to every shadow. The default already lifts in dark mode via --sf-is-dark.' },
+  ],
+  motion: [
+    { name: '--sf-motion-scale',       label: '--sf-motion-scale',       default: 1,    min: 0,   max: 2,   step: 0.05, driving: 13, help: 'Speed multiplier on every duration. Set to 0 to effectively disable motion (matches prefers-reduced-motion).' },
+  ],
+  effects: [
+    { name: '--sf-state-pending-opacity', label: '--sf-state-pending-opacity', default: 0.6, min: 0, max: 1, step: 0.05, help: 'Opacity applied to elements while their async/pending state class is active.' },
+  ],
+};
+
+/**
  * Domain definitions, in tab order.
  *
  *   id            - kebab-cased identifier (used by ui.domain)
@@ -300,6 +343,13 @@ export const DOMAINS = [
     icon: '🧪',
     blurb: 'Contrast checker, text-on-background matrix and accessible-palette generator.',
     tool: 'wcag',
+  },
+  {
+    id: 'themes',
+    label: 'Themes',
+    icon: '🎭',
+    blurb: 'One-click preset looks plus your saved override slots.',
+    tool: 'themes',
   },
   {
     id: 'misc',

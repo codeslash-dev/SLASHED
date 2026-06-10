@@ -20,20 +20,36 @@
    * active domain to its panel.
    */
   import { DOMAIN_BY_ID } from './lib/domains.js';
-  import { ui } from './lib/store.svelte.js';
+  import { ui, undo, redo } from './lib/store.svelte.js';
   import Header from './components/Header.svelte';
   import Sidebar from './components/Sidebar.svelte';
   import DomainPanel from './components/DomainPanel.svelte';
   import OutputPanel from './components/OutputPanel.svelte';
   import Preview from './components/Preview.svelte';
   import WcagPanel from './components/WcagPanel.svelte';
+  import ThemeGallery from './components/ThemeGallery.svelte';
 
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
-  const isTool = $derived(domain?.tool === 'wcag');
+  const tool = $derived(domain?.tool ?? '');
 
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
-  // '[' / ']' cycle domains; 'Escape' clears the search.
+  // '[' / ']' cycle domains; 'Escape' clears the search; Ctrl+Z / Ctrl+Shift+Z
+  // step the override history.
   function onKey(e) {
+    // Ctrl/Cmd + Z handlers run regardless of focus context — undo/redo
+    // is a global affordance, even while typing in an input.
+    const meta = e.ctrlKey || e.metaKey;
+    if (meta && (e.key === 'z' || e.key === 'Z')) {
+      e.preventDefault();
+      if (e.shiftKey) redo(); else undo();
+      return;
+    }
+    if (meta && (e.key === 'y' || e.key === 'Y')) {
+      e.preventDefault();
+      redo();
+      return;
+    }
+
     if (e.target instanceof HTMLElement) {
       const t = e.target;
       if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable) {
@@ -53,7 +69,7 @@
       ui.mode = 'advanced';
     } else if (e.key === '[' || e.key === ']') {
       // Cycle non-tool domains.
-      const ids = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects', 'wcag', 'misc'];
+      const ids = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects', 'wcag', 'themes', 'misc'];
       const i = ids.indexOf(ui.domain);
       if (i !== -1) {
         const next = (i + (e.key === ']' ? 1 : -1) + ids.length) % ids.length;
@@ -71,8 +87,10 @@
   <Sidebar />
 
   <main class="main" aria-label="Configurator main">
-    {#if isTool}
+    {#if tool === 'wcag'}
       <WcagPanel />
+    {:else if tool === 'themes'}
+      <ThemeGallery />
     {:else}
       {#key ui.domain}
         <DomainPanel {domain} />

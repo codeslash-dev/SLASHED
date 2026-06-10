@@ -68,7 +68,7 @@
 
   {#if ui.sidebarOpen}
     <footer class="side__foot">
-      <p class="side__hint"><kbd class="cfg-kbd">/</kbd> search · <kbd class="cfg-kbd">B</kbd>asic / <kbd class="cfg-kbd">A</kbd>dvanced · <kbd class="cfg-kbd">[</kbd> <kbd class="cfg-kbd">]</kbd> next domain</p>
+      <p class="side__hint"><kbd class="cfg-kbd">/</kbd> search · <kbd class="cfg-kbd">B</kbd>asic / <kbd class="cfg-kbd">A</kbd>dvanced · <kbd class="cfg-kbd">[</kbd> <kbd class="cfg-kbd">]</kbd> next domain · <kbd class="cfg-kbd">⌘Z</kbd> undo</p>
     </footer>
   {/if}
 </aside>
