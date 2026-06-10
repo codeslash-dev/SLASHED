@@ -11,7 +11,7 @@ import assert from 'node:assert/strict';
 import { sanitizeValue } from '../src/lib/css.js';
 import {
   setOne, clearOne, clearEvery, replaceAll, patchMany,
-  applyThemeToState, undoStep, redoStep,
+  applyThemeToState, undoStep, redoStep, dragSet, endDrag,
 } from '../src/lib/historyOps.js';
 
 /** Build a fresh test bag with a permissive isKnown predicate. */
@@ -202,5 +202,88 @@ describe('history cap', () => {
     assert.ok(s.history.past.length <= 50, `past.length ${s.history.past.length} should be ≤ 50`);
     // most recent value preserved on top
     assert.equal(s.overrides['--sf-radius-scale'], String(1 + 59 * 0.01));
+  });
+});
+
+describe('drag-flow (dragSet + endDrag)', () => {
+  test('200 dragSet ticks + one endDrag = ONE history entry, ONE persist', () => {
+    // simulate a 200-tick slider drag from 1.0 to 1.5
+    for (let i = 0; i <= 200; i++) {
+      const v = 1 + (i / 200) * 0.5;
+      dragSet(s, '--sf-space-scale', String(v));
+    }
+    // Mid-drag: live value updated, no history, no persist
+    assert.equal(s.history.past.length, 0, 'no history during drag');
+    assert.equal(s.persistCalls, 0, 'no persist during drag');
+    assert.equal(s.overrides['--sf-space-scale'], '1.5');
+
+    const ok = endDrag(s);
+    assert.equal(ok, true);
+    assert.equal(s.history.past.length, 1, 'exactly one history entry after drag commit');
+    assert.equal(s.persistCalls, 1, 'exactly one persist after drag commit');
+
+    // Single undo reverts the WHOLE drag back to the pre-drag state.
+    undoStep(s);
+    assert.equal(s.overrides['--sf-space-scale'], undefined);
+  });
+
+  test('endDrag is a no-op when no drag is pending', () => {
+    assert.equal(endDrag(s), false);
+    assert.equal(s.history.past.length, 0);
+    assert.equal(s.persistCalls, 0);
+  });
+
+  test('endDrag is a no-op when the drag ended back at the start value', () => {
+    setOne(s, '--sf-radius-scale', '1.4');
+    const persistsBefore = s.persistCalls;
+    const lenBefore = s.history.past.length;
+    // simulate scrub up then back down
+    dragSet(s, '--sf-radius-scale', '1.6');
+    dragSet(s, '--sf-radius-scale', '1.5');
+    dragSet(s, '--sf-radius-scale', '1.4'); // back to start
+    const ok = endDrag(s);
+    assert.equal(ok, false, 'no-op because final value matches pre-drag snap');
+    assert.equal(s.history.past.length, lenBefore);
+    assert.equal(s.persistCalls, persistsBefore);
+  });
+
+  test('a follow-up setOne auto-flushes the pending drag', () => {
+    dragSet(s, '--sf-space-scale', '1.2');
+    assert.equal(s.history.past.length, 0);
+    // user touches a different control before releasing the slider
+    setOne(s, '--sf-radius-scale', '1.4');
+    assert.equal(s.history.past.length, 2, 'one entry from drag flush + one from new edit');
+    // First undo reverts the new edit, second reverts the drag
+    undoStep(s);
+    assert.equal(s.overrides['--sf-radius-scale'], undefined);
+    assert.equal(s.overrides['--sf-space-scale'], '1.2');
+    undoStep(s);
+    assert.equal(s.overrides['--sf-space-scale'], undefined);
+  });
+
+  test('undoStep auto-flushes a pending drag', () => {
+    dragSet(s, '--sf-space-scale', '1.2');
+    // The drag is uncommitted but the override is live.
+    assert.equal(s.overrides['--sf-space-scale'], '1.2');
+    // Triggering undo first commits the drag, then undoes it.
+    undoStep(s);
+    assert.equal(s.overrides['--sf-space-scale'], undefined);
+  });
+
+  test('dragSet supports unit-bearing values via sanitize()', () => {
+    dragSet(s, '--sf-radius-m', '12px');
+    dragSet(s, '--sf-radius-m', '14px');
+    endDrag(s);
+    assert.equal(s.overrides['--sf-radius-m'], '14px');
+    assert.equal(s.history.past.length, 1);
+  });
+
+  test('an empty/whitespace dragSet value clears the override', () => {
+    setOne(s, '--sf-radius-m', '12px');
+    dragSet(s, '--sf-radius-m', '');
+    assert.equal(s.overrides['--sf-radius-m'], undefined);
+    endDrag(s);
+    // One step from setOne, one from the drag
+    assert.equal(s.history.past.length, 2);
   });
 });

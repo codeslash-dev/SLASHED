@@ -10,7 +10,9 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
-import { allTokens, dependentsByName, dependentsCount, tokenByName } from '../src/lib/model.js';
+import {
+  allTokens, dependentsByName, dependentsCount, tokenByName, buildDependentsByName,
+} from '../src/lib/model.js';
 
 const known = new Set(allTokens.map((t) => t.name));
 
@@ -54,17 +56,66 @@ describe('dependentsByName map', () => {
     }
   });
 
-  test('a self-reference does not inflate the count', () => {
-    // Construct a fake token that references itself; the production builder
-    // ignores self-refs (per the implementation comment), so the production
-    // map should not show those tokens at >0 just because of self-refs.
-    // Pick any token that has 0 dependents in the live map and verify.
-    let zeroToken = null;
-    for (const [name, n] of dependentsByName) {
-      if (n === 0) { zeroToken = name; break; }
+  test('a self-reference does not inflate the count (synthetic catalogue)', () => {
+    // Drive the algorithm directly with a contrived 3-token catalogue so
+    // we can prove the self-reference exclusion rather than just observe it.
+    const tokens = [
+      { name: '--a', value: 'var(--a)' },               // self-ref ONLY
+      { name: '--b', value: 'var(--a) calc(var(--c) * 2)' }, // refs --a + --c
+      { name: '--c', value: '0' },
+    ];
+    const map = buildDependentsByName(tokens);
+    // --a: only --b references it (self-ref excluded ⇒ 1, not 2).
+    assert.equal(map.get('--a'), 1, 'self-ref must not inflate --a');
+    // --b: nothing references it.
+    assert.equal(map.get('--b'), 0);
+    // --c: only --b references it.
+    assert.equal(map.get('--c'), 1);
+  });
+
+  test('a self-reference does not inflate the count (live catalogue)', () => {
+    // If the framework happens to ship any tokens whose value contains
+    // var(<self>), this test asserts the production map matches the
+    // golden recompute (which itself excludes self-refs). When the
+    // catalogue has zero self-refs, the loop is empty — the synthetic
+    // test above covers the algorithm regardless.
+    const VAR_RE = /var\(\s*(--sf-[\w-]+)/g;
+    let checked = 0;
+    for (const t of data.tokens) {
+      if (typeof t.value !== 'string') continue;
+      let selfRef = false;
+      for (const m of t.value.matchAll(VAR_RE)) {
+        if (m[1] === t.name) { selfRef = true; break; }
+      }
+      if (selfRef) {
+        const golden = countDependentsOf(t.name);
+        assert.equal(dependentsCount(t.name), golden, `${t.name} self-ref handled`);
+        checked += 1;
+      }
     }
-    assert.ok(zeroToken, 'expected at least one token with 0 dependents in catalogue');
-    assert.equal(dependentsCount(zeroToken), 0);
+    // Document — for posterity in test output — how many self-refs the
+    // framework currently ships, so the absence/presence of this signal
+    // remains intentional.
+    assert.ok(checked >= 0, `examined ${checked} self-referencing tokens in live catalogue`);
+  });
+
+  test('multiple var() refs to the same target inside one value count once', () => {
+    const tokens = [
+      { name: '--x', value: 'calc(var(--y) + var(--y))' }, // --y mentioned twice
+      { name: '--y', value: '0' },
+    ];
+    const map = buildDependentsByName(tokens);
+    assert.equal(map.get('--y'), 1, 'duplicate refs in one value de-duped');
+  });
+
+  test('refs to tokens NOT in the catalogue are ignored', () => {
+    const tokens = [
+      { name: '--a', value: 'var(--ghost)' }, // --ghost never declared
+      { name: '--b', value: '0' },
+    ];
+    const map = buildDependentsByName(tokens);
+    assert.equal(map.has('--ghost'), false);
+    assert.equal(map.get('--a'), 0);
   });
 });
 

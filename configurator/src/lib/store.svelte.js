@@ -117,7 +117,8 @@ function persist() {
 
 // ── Wiring: a stable bag passed to every historyOps.* call. The runes are
 // transparent (the proxy delegates to a plain object), so `historyOps` mutates
-// `overrides` and `history` in place and Svelte sees the changes.
+// `overrides` and `history` in place and Svelte sees the changes. `_dragSnap`
+// is the lazy pre-drag snapshot for the dragSet/endDrag transient flow.
 const opsState = {
   get overrides() { return overrides; },
   get history()   { return history; },
@@ -125,6 +126,7 @@ const opsState = {
   sanitize: sanitizeValue,
   isKnown: (name) => tokenByName.has(name),
   persist,
+  _dragSnap: null,
 };
 
 // ───────────────────────────── history (undo/redo) ─────────────────────────
@@ -163,6 +165,24 @@ export function replaceOverrides(map) { return ops.replaceAll(opsState, map); }
  * @param {Record<string, string|null>} patch
  */
 export function patchOverrides(patch) { return ops.patchMany(opsState, patch); }
+
+/**
+ * Transient slider-drag mutation: updates the live override map (so the
+ * preview / contrast badges / slider fill all follow the value in real time)
+ * but does NOT push history or persist to storage. Pair with `endDrag()`.
+ *
+ * @param {string} name
+ * @param {string|number} value
+ */
+export function dragSetOverride(name, value) { ops.dragSet(opsState, name, value); }
+
+/**
+ * Commit a pending slider drag: records exactly one undo entry for the whole
+ * drag and persists once. Wired to the `<input type=range>` `change` event so
+ * mouse releases AND keyboard commits both flush. No-op when no drag is
+ * pending or when the value ended up unchanged.
+ */
+export function endDrag() { return ops.endDrag(opsState); }
 
 // ───────────────────────────── theme presets ──────────────────────────────
 

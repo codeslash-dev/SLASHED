@@ -8,7 +8,7 @@
    *                for calc()/clamp() power-users)
    *   - text     → mono text input
    */
-  import { overrides, setOverride } from '../lib/store.svelte.js';
+  import { overrides, setOverride, dragSetOverride, endDrag } from '../lib/store.svelte.js';
   import { inferControl } from '../lib/model.js';
   import { SYSTEM_STACKS, detectSystemStack, isFontFamilyToken } from '../lib/fonts.js';
   import { parseLength, boundsFor, formatLength, decimalsFor, clamp } from '../lib/length.js';
@@ -74,13 +74,17 @@
   function onSlider(e) {
     const n = parseFloat(e.currentTarget.value);
     if (!Number.isFinite(n)) return;
-    setOverride(token.name, formatLength(n, sliderUnit));
+    // Drag-tick mutation: live preview updates but no history/persist churn.
+    // The slider's `change` event fires `flushSlider` once on commit.
+    dragSetOverride(token.name, formatLength(n, sliderUnit));
   }
   function onSliderNumber(e) {
     const n = parseFloat(e.currentTarget.value);
     if (!Number.isFinite(n)) return;
-    setOverride(token.name, formatLength(clamp(n, sliderBounds), sliderUnit));
+    dragSetOverride(token.name, formatLength(clamp(n, sliderBounds), sliderUnit));
   }
+  /** Drag-end / commit handler — records exactly one history step + one persist. */
+  function flushSlider() { endDrag(); }
 </script>
 
 <div class="editor" class:editor--color={meta.control === 'color'} class:editor--font={isFont}>
@@ -184,6 +188,7 @@
       value={sliderValue}
       style:--p="{sliderProgress}%"
       oninput={onSlider}
+      onchange={flushSlider}
       disabled={sliderDisabled}
       aria-label="{token.name} slider"
       title={sliderDisabled ? 'Slider disabled — value is not a single number+unit. Click "raw" to edit as text.' : `Drag — range ${sliderBounds.min}${sliderUnit} … ${sliderBounds.max}${sliderUnit}`}
@@ -197,6 +202,8 @@
       value={parsedActive ? Number(sliderValue.toFixed(sliderDecimals)) : ''}
       placeholder={parsedDefault.number}
       oninput={onSliderNumber}
+      onchange={flushSlider}
+      onblur={flushSlider}
       aria-label="{token.name} numeric value"
     />
     {#if sliderUnit}<span class="editor__unit">{sliderUnit}</span>{/if}

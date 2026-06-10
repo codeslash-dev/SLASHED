@@ -30,7 +30,7 @@
    *   driving?: number, // optional 'this knob drives N tokens' hint
    * }>} knobs
    */
-  import { overrides, setOverride, patchOverrides } from '../lib/store.svelte.js';
+  import { overrides, setOverride, patchOverrides, dragSetOverride, endDrag } from '../lib/store.svelte.js';
   import { tokenByName } from '../lib/model.js';
 
   let { knobs = [], title = 'Quick knobs', blurb = '' } = $props();
@@ -63,16 +63,18 @@
   }
 
   /**
-   * Map a numeric slider value back into the override store. We DO emit on
-   * every `input` event (smooth live preview), but we don't checkpoint on
-   * each tick — `setOverride` already de-dupes when the value matches, and
-   * we batch-checkpoint only the FIRST change of a drag via the
-   * "drag-active" map. Once the user releases the slider, the next
-   * mutation gets its own checkpoint as usual.
+   * Slider-tick handler. Uses `dragSetOverride` so the preview / contrast
+   * badges / slider track update live, but no history entry is pushed and
+   * no localStorage write happens — both are flushed once on `change` (drag
+   * end) via `endDrag`. So a 200-tick drag becomes one undo step + one
+   * persist instead of 200 of each.
    */
-  function commit(knob, val) {
-    setOverride(knob.name, String(val));
+  function dragCommit(knob, val) {
+    if (Number.isFinite(val)) dragSetOverride(knob.name, String(val));
   }
+
+  /** Drag-end (mouse release / keyboard commit): record the history entry. */
+  function flush() { endDrag(); }
 
   function resetKnob(knob) {
     if (!isModified(knob)) return;
@@ -91,6 +93,14 @@
     const s = String(step);
     const dot = s.indexOf('.');
     return dot === -1 ? 0 : s.length - dot - 1;
+  }
+
+  /** Filled-track percentage used by the CSS background gradient. */
+  function sliderPercent(knob, val) {
+    const range = knob.max - knob.min;
+    if (!Number.isFinite(range) || range <= 0) return 0;
+    const pct = ((val - knob.min) / range) * 100;
+    return Math.max(0, Math.min(100, pct));
   }
 </script>
 
@@ -134,8 +144,10 @@
             max={knob.max}
             step={knob.step}
             value={val}
+            style:--p="{sliderPercent(knob, val)}%"
             aria-label="{knob.label} slider"
-            oninput={(e) => commit(knob, parseFloat(e.currentTarget.value))}
+            oninput={(e) => dragCommit(knob, parseFloat(e.currentTarget.value))}
+            onchange={flush}
           />
 
           <div class="knob__numeric">
@@ -147,7 +159,9 @@
               step={knob.step}
               value={Number.isFinite(val) ? Number(val).toFixed(decimals) : ''}
               aria-label="{knob.label} numeric value"
-              oninput={(e) => commit(knob, parseFloat(e.currentTarget.value))}
+              oninput={(e) => dragCommit(knob, parseFloat(e.currentTarget.value))}
+              onchange={flush}
+              onblur={flush}
             />
             {#if knob.unit}<span class="knob__unit">{knob.unit}</span>{/if}
           </div>

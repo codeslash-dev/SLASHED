@@ -23,6 +23,39 @@ export const defaultsByName = new Map(
 );
 
 /**
+ * Compute the dependents-count map for an arbitrary token list.
+ *
+ * Pure function (no module-state side effects) so the unit tests can drive
+ * it with synthetic inputs to verify edge cases — most importantly that a
+ * token referencing itself (`--a: var(--a)`) does NOT inflate its own
+ * count.
+ *
+ * For each token, we scan its `value` string for `var(--sf-foo)`
+ * references, de-duped per token (so a single value mentioning the same
+ * name twice still only contributes one), skipping self-references.
+ *
+ * @param {Array<{name:string, value?:string}>} tokens
+ * @returns {Map<string, number>}
+ */
+export function buildDependentsByName(tokens) {
+  const map = new Map();
+  for (const t of tokens) map.set(t.name, 0);
+  const VAR_RE = /var\(\s*(--[\w-]+)/g;
+  for (const t of tokens) {
+    if (!t.value) continue;
+    const seen = new Set();
+    for (const m of t.value.matchAll(VAR_RE)) {
+      const ref = m[1];
+      if (ref === t.name) continue; // self-reference doesn't count
+      if (seen.has(ref)) continue;
+      seen.add(ref);
+      if (map.has(ref)) map.set(ref, map.get(ref) + 1);
+    }
+  }
+  return map;
+}
+
+/**
  * Dependents map: token name -> count of OTHER tokens that reference it via
  * `var(--sf-foo)` in their default value.
  *
@@ -33,23 +66,7 @@ export const defaultsByName = new Map(
  *
  * @type {Map<string, number>}
  */
-export const dependentsByName = (() => {
-  const map = new Map();
-  for (const t of allTokens) map.set(t.name, 0);
-  const VAR_RE = /var\(\s*(--sf-[\w-]+)/g;
-  for (const t of allTokens) {
-    if (!t.value) continue;
-    const seen = new Set(); // de-dup multiple refs in the same value
-    for (const m of t.value.matchAll(VAR_RE)) {
-      const ref = m[1];
-      if (ref === t.name) continue; // self-reference doesn't count
-      if (seen.has(ref)) continue;
-      seen.add(ref);
-      if (map.has(ref)) map.set(ref, map.get(ref) + 1);
-    }
-  }
-  return map;
-})();
+export const dependentsByName = buildDependentsByName(allTokens);
 
 /**
  * @param {string} name
