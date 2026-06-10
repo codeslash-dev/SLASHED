@@ -212,6 +212,7 @@
      media query. Do not set directly. */
   @property --sf-is-dark { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
+  /* @property — INTERACTION STATE FLAGS — integer state bits set by JS or :has() */
   @property --sf-is-active  { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -378,10 +379,17 @@
     --sf-scrollbar-track: transparent;
 
     /* ----------------------------------------------------------
-       Shadow — strength scales up in dark mode via --sf-is-dark
+       Shadow — base opacity and glow tint
+       --sf-shadow-strength base value for light mode; auto-boosted by
+       +0.17 in dark mode via --sf-is-dark. Override with a calc() to
+       preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
     --sf-shadow-glow-color: var(--sf-color-primary);
+
+    /* ----------------------------------------------------------
+       Opacity — disabled and pending state effects
+       ---------------------------------------------------------- */
     --sf-opacity-disabled:  0.45;
     --sf-state-pending-opacity: 0.7;
 
@@ -1172,6 +1180,8 @@
       var(--sf-sticky-offset-mobile),
       calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)),
       var(--sf-sticky-offset-desktop));
+    /* Focus ring dimensions and minimum touch-target size. Governs keyboard
+       navigation affordance and WCAG 2.5.5 pointer-target requirements. */
     --sf-focus-ring-width:  2px;
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
@@ -1245,7 +1255,7 @@
 
   }
 
-  /* ── @supports gate: shadow tokens ── */
+  /* @supports — Shadow ramp (box-shadow, text-shadow, drop-shadow) */
   @supports (color: oklch(from red l c h)) {
     :root {
 
@@ -1256,7 +1266,9 @@
          tinted shadows — keep it dark or you get bright slabs:
          oklch(from var(--sf-color-primary) 0.15 c h). */
       --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 c h);
-  
+
+      /* Elevation shadow ramp — box-shadow presets from xs to 2xl.
+         Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. */
       --sf-shadow-none:  none;
       --sf-shadow-xs:    0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7));
       --sf-shadow-s:     0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)),
@@ -1291,7 +1303,10 @@
   }
 
   /* ============================================================
-     TYPOGRAPHY ALIASES
+     TYPOGRAPHY ALIASES — complete per-style typography bundles.
+     Each token captures font-family, size, weight, line-height,
+     and letter-spacing for a named text role (body, code, heading,
+     h1–h6, display). Override one token to retune the whole style.
      ============================================================ */
 
   :root {

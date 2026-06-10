@@ -72,9 +72,7 @@ export const KNOBS_BY_DOMAIN = {
   motion: [
     { name: '--sf-motion-scale',       label: '--sf-motion-scale',       default: 1,    min: 0,   max: 2,   step: 0.05, driving: 13, help: 'Speed multiplier on every duration. Set to 0 to effectively disable motion (matches prefers-reduced-motion).' },
   ],
-  effects: [
-    { name: '--sf-state-pending-opacity', label: '--sf-state-pending-opacity', default: 0.6, min: 0, max: 1, step: 0.05, help: 'Opacity applied to elements while their async/pending state class is active.' },
-  ],
+  effects: [],
 };
 
 /**
@@ -173,8 +171,6 @@ export const DOMAINS = [
       '--sf-font-body',
       '--sf-font-heading',
       '--sf-font-mono',
-      '--sf-text-base-min',
-      '--sf-text-base-max',
       '--sf-leading-normal',
     ],
     basicGenerators: ['type', 'display'],
@@ -195,9 +191,8 @@ export const DOMAINS = [
       /^--sf-content-(gap|width|intrinsic)/,
     ],
     essentials: [
-      '--sf-space-s',
-      '--sf-space-m',
-      '--sf-space-l',
+      '--sf-space-content',
+      '--sf-space-gutter',
       '--sf-section-pad',
       '--sf-component-pad',
     ],
@@ -315,11 +310,8 @@ export const DOMAINS = [
     essentials: [
       '--sf-duration-fast',
       '--sf-duration-normal',
-      '--sf-duration-slow',
-      '--sf-ease-in',
       '--sf-ease-out',
       '--sf-ease-in-out',
-      '--sf-motion-scale',
     ],
   },
   {
@@ -338,7 +330,6 @@ export const DOMAINS = [
     essentials: [
       '--sf-blur-m',
       '--sf-opacity-disabled',
-      '--sf-state-pending-opacity',
     ],
   },
   {
