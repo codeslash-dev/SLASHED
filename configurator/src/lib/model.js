@@ -6,7 +6,7 @@
  * groups -> tokens) and infers an edit control per token. Keeping it
  * rune-free means it is trivially unit-testable and re-usable.
  */
-import data from '../data/api-index.generated.json';
+import data from '../data/api-index.generated.json' with { type: 'json' };
 
 /** Sync metadata (framework version, generated timestamp, counts). */
 export const sync = data._sync ?? {};

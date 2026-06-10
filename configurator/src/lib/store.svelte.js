@@ -27,15 +27,23 @@ export const storage = $state({ ok: true });
 /** UI state: active domain tab, basic/advanced mode, search, filters, preview. */
 export const ui = $state({
   /** Active domain tab id (see lib/domains.js): 'typography' | 'colors' | … */
-  domain: 'typography',
+  domain: 'colors',
   /** Global complexity mode: 'basic' shows curated essentials, 'advanced' all. */
   mode: 'basic',
+  /** Free-text filter, applied to advanced lists. */
   query: '',
+  /** Show the api-index INTERNAL tier (one or two implementation tokens). */
   showInternal: false,
+  /** Restrict the advanced list to tokens with an active override. */
   onlyModified: false,
+  /** Theme used by the live preview / WCAG probes. */
   previewTheme: 'light',
   /** Output framing: 'layer' wraps in @layer slashed.overrides, 'root' is bare :root. */
   outputMode: 'layer',
+  /** Sidebar collapse — for narrow viewports / a focus-mode. */
+  sidebarOpen: true,
+  /** Right-hand preview pane visible. */
+  previewOpen: true,
 });
 
 /**

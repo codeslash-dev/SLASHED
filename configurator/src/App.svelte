@@ -1,54 +1,88 @@
 <script>
   /**
-   * App shell: header (brand · Basic/Advanced mode · preview toggle), the
-   * domain tab strip, the active domain panel (or the WCAG tool) beside the
-   * live preview, and the override-CSS output drawer.
+   * App shell.
    *
-   * State lives in the shared `ui` store; this component just wires the active
-   * domain to its panel.
+   * Layout (desktop ≥ 1100px):
+   *   ┌─────────────────────────────────────────────────────────────────┐
+   *   │ Header (brand · search · basic/advanced · theme · preview)       │
+   *   ├──────────┬───────────────────────────────────────┬──────────────┤
+   *   │          │                                       │              │
+   *   │ Sidebar  │       Domain panel / WCAG tool        │   Preview    │
+   *   │          │                                       │              │
+   *   ├──────────┴───────────────────────────────────────┴──────────────┤
+   *   │ Output drawer (override CSS, copy / download / import)           │
+   *   └─────────────────────────────────────────────────────────────────┘
+   *
+   * Below 1100px the preview hides. Below 760px the sidebar collapses to a
+   * compact icon-only rail and the search box widens to fill the header.
+   *
+   * State lives in the shared `ui` store; this component just wires the
+   * active domain to its panel.
    */
   import { DOMAIN_BY_ID } from './lib/domains.js';
   import { ui } from './lib/store.svelte.js';
   import Header from './components/Header.svelte';
-  import TabNav from './components/TabNav.svelte';
+  import Sidebar from './components/Sidebar.svelte';
   import DomainPanel from './components/DomainPanel.svelte';
   import OutputPanel from './components/OutputPanel.svelte';
   import Preview from './components/Preview.svelte';
   import WcagPanel from './components/WcagPanel.svelte';
 
-  let showPreview = $state(true);
-
-  const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('typography'));
+  const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
   const isTool = $derived(domain?.tool === 'wcag');
 
-  // The search query is scoped to a domain's Advanced list; clear it when the
-  // active tab changes so a leftover filter never makes the next tab's list
-  // look empty (the search box only renders in Advanced mode).
-  $effect(() => {
-    ui.domain;
-    ui.query = '';
-  });
+  // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
+  // '[' / ']' cycle domains; 'Escape' clears the search.
+  function onKey(e) {
+    if (e.target instanceof HTMLElement) {
+      const t = e.target;
+      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable) {
+        if (e.key === 'Escape' && t.tagName === 'INPUT' && (t.type === 'search' || t.type === 'text')) {
+          // Let the search box handle Escape itself.
+        } else {
+          return;
+        }
+      }
+    }
+    if (e.key === '/') {
+      e.preventDefault();
+      document.querySelector('#cfg-search')?.focus();
+    } else if (e.key === 'b' || e.key === 'B') {
+      ui.mode = 'basic';
+    } else if (e.key === 'a' || e.key === 'A') {
+      ui.mode = 'advanced';
+    } else if (e.key === '[' || e.key === ']') {
+      // Cycle non-tool domains.
+      const ids = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects', 'wcag', 'misc'];
+      const i = ids.indexOf(ui.domain);
+      if (i !== -1) {
+        const next = (i + (e.key === ']' ? 1 : -1) + ids.length) % ids.length;
+        ui.domain = ids[next];
+      }
+    }
+  }
 </script>
 
-<div class="shell">
-  <Header bind:showPreview />
-  <TabNav />
+<svelte:window onkeydown={onKey} />
 
-  <div class="body" class:body--no-preview={!showPreview}>
+<div class="shell" class:shell--no-preview={!ui.previewOpen} class:shell--no-sidebar={!ui.sidebarOpen}>
+  <Header />
+
+  <Sidebar />
+
+  <main class="main" aria-label="Configurator main">
     {#if isTool}
-      <main class="main"><WcagPanel /></main>
+      <WcagPanel />
     {:else}
-      <main class="main">
-        {#key ui.domain}
-          <DomainPanel {domain} />
-        {/key}
-      </main>
+      {#key ui.domain}
+        <DomainPanel {domain} />
+      {/key}
     {/if}
+  </main>
 
-    {#if showPreview}
-      <Preview />
-    {/if}
-  </div>
+  {#if ui.previewOpen}
+    <Preview />
+  {/if}
 
   <OutputPanel />
 </div>
@@ -56,37 +90,58 @@
 <style>
   .shell {
     display: grid;
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-columns: 240px minmax(0, 1fr) minmax(360px, 36%);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "header header header"
+      "side main preview"
+      "output output output";
     height: 100vh;
   }
-  .body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(360px, 38%);
-    min-height: 0;
+  .shell--no-preview {
+    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-areas:
+      "header header"
+      "side main"
+      "output output";
   }
-  .body--no-preview {
-    grid-template-columns: minmax(0, 1fr);
+  .shell--no-sidebar {
+    grid-template-columns: 60px minmax(0, 1fr) minmax(360px, 36%);
+  }
+  .shell--no-sidebar.shell--no-preview {
+    grid-template-columns: 60px minmax(0, 1fr);
   }
   .main {
+    grid-area: main;
     min-width: 0;
     min-height: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-  }
-  .main > :global(.wcag),
-  .main > :global(.panel) {
-    flex: 1;
-    min-height: 0;
+    background: var(--cfg-bg);
+    border-left: 1px solid var(--cfg-border);
   }
 
+  /* Mid breakpoint: drop the preview pane. */
   @media (max-width: 1100px) {
-    .body,
-    .body--no-preview {
-      grid-template-columns: minmax(0, 1fr);
+    .shell,
+    .shell--no-preview,
+    .shell--no-sidebar,
+    .shell--no-sidebar.shell--no-preview {
+      grid-template-columns: 60px minmax(0, 1fr);
+      grid-template-areas:
+        "header header"
+        "side main"
+        "output output";
     }
-    .body :global(.preview) {
-      display: none;
+    .shell :global(.preview) { display: none; }
+  }
+  @media (max-width: 600px) {
+    .shell,
+    .shell--no-preview,
+    .shell--no-sidebar,
+    .shell--no-sidebar.shell--no-preview {
+      grid-template-columns: 50px minmax(0, 1fr);
     }
   }
 </style>

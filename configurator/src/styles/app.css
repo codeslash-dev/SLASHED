@@ -3,147 +3,241 @@
  *
  * Intentionally self-contained (its own `cfg-*` custom properties) so the
  * panel UI never collides with the SLASHED tokens it is editing — the only
- * place framework tokens are applied is inside the scoped live preview.
+ * place framework tokens are applied is inside the scoped live preview / WCAG
+ * probes, where each declaration block is set on a contained element.
  */
 
 :root {
-  --cfg-bg: #0f1115;
-  --cfg-surface: #171a21;
-  --cfg-surface-2: #1f242d;
-  --cfg-border: #2a3039;
-  --cfg-border-strong: #3a424e;
-  --cfg-text: #e6e9ef;
-  --cfg-text-muted: #9aa4b2;
-  --cfg-text-faint: #6b7480;
-  --cfg-accent: #6ea8fe;
+  /* Dark surface ramp — slightly bluer than pure neutrals so the accent
+     colour reads as "interactive" rather than tinted of the background. */
+  --cfg-bg: #0d1016;
+  --cfg-bg-2: #11141b;
+  --cfg-surface: #161a23;
+  --cfg-surface-2: #1d222d;
+  --cfg-surface-3: #232938;
+  --cfg-border: #262c39;
+  --cfg-border-strong: #38404f;
+  --cfg-border-focus: #5a82d8;
+
+  --cfg-text: #ecf0f7;
+  --cfg-text-muted: #97a0b0;
+  --cfg-text-faint: #6a7283;
+
+  --cfg-accent: #75a7ff;
   --cfg-accent-strong: #4f8cff;
-  --cfg-danger: #ff6b6b;
-  --cfg-ok: #51cf66;
-  --cfg-warn: #ffd43b;
+  --cfg-accent-soft: rgba(79, 140, 255, 0.16);
+  --cfg-accent-glow: rgba(79, 140, 255, 0.45);
+
+  --cfg-danger: #ff7176;
+  --cfg-danger-soft: rgba(255, 113, 118, 0.18);
+  --cfg-ok: #5ad27a;
+  --cfg-warn: #ffd556;
+
   --cfg-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Menlo", monospace;
-  --cfg-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --cfg-radius: 8px;
-  --cfg-radius-s: 5px;
+  --cfg-sans: system-ui, -apple-system, "Inter", "Segoe UI", Roboto, sans-serif;
+
+  --cfg-radius: 10px;
+  --cfg-radius-s: 6px;
+  --cfg-radius-l: 14px;
+
+  --cfg-shadow-pop: 0 12px 36px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --cfg-shadow-card: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 1px 2px rgba(0, 0, 0, 0.3);
 
   color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+html, body { margin: 0; padding: 0; height: 100%; }
 
 body {
-  background: var(--cfg-bg);
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(79, 140, 255, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 95% 110%, rgba(120, 80, 220, 0.06), transparent 60%),
+    var(--cfg-bg);
   color: var(--cfg-text);
   font-family: var(--cfg-sans);
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-#app {
-  height: 100vh;
-}
+#app { height: 100vh; }
 
-button {
-  font: inherit;
-  cursor: pointer;
-}
+button { font: inherit; cursor: pointer; }
+input, select, textarea { font: inherit; color: inherit; }
+code, kbd { font-family: var(--cfg-mono); }
 
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
-}
-
-code,
-kbd {
-  font-family: var(--cfg-mono);
-}
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
+/* ─── Scrollbars ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-thumb {
   background: var(--cfg-border-strong);
   border-radius: 8px;
-  border: 3px solid var(--cfg-bg);
+  border: 3px solid transparent;
+  background-clip: padding-box;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+::-webkit-scrollbar-thumb:hover { background: #4a5567; background-clip: padding-box; border: 3px solid transparent; }
+::-webkit-scrollbar-track { background: transparent; }
 
-/* Shared small primitives reused across components. */
+/* ─── Shared primitives ─────────────────────────────────────────────────── */
 .cfg-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   background: var(--cfg-surface-2);
   color: var(--cfg-text);
   border: 1px solid var(--cfg-border-strong);
   border-radius: var(--cfg-radius-s);
-  padding: 6px 12px;
+  padding: 7px 13px;
   font-size: 13px;
-  transition: background 0.12s ease, border-color 0.12s ease;
+  font-weight: 500;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.06s ease;
 }
-.cfg-btn:hover {
-  background: var(--cfg-border);
-}
+.cfg-btn:hover:not(:disabled) { background: var(--cfg-surface-3); border-color: #4a5567; }
+.cfg-btn:active:not(:disabled) { transform: translateY(1px); }
+.cfg-btn:focus-visible { outline: 2px solid var(--cfg-accent); outline-offset: 1px; }
+
 .cfg-btn--primary {
   background: var(--cfg-accent-strong);
   border-color: var(--cfg-accent-strong);
   color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 4px 12px var(--cfg-accent-glow);
 }
-.cfg-btn--primary:hover {
-  background: var(--cfg-accent);
-}
+.cfg-btn--primary:hover:not(:disabled) { background: var(--cfg-accent); border-color: var(--cfg-accent); }
+
 .cfg-btn--ghost {
   background: transparent;
   border-color: transparent;
   color: var(--cfg-text-muted);
 }
-.cfg-btn--ghost:hover {
-  background: var(--cfg-surface-2);
-  color: var(--cfg-text);
-}
-.cfg-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
+.cfg-btn--ghost:hover:not(:disabled) { background: var(--cfg-surface-2); color: var(--cfg-text); border-color: transparent; }
 
+.cfg-btn--danger {
+  background: transparent;
+  border-color: var(--cfg-border-strong);
+  color: var(--cfg-danger);
+}
+.cfg-btn--danger:hover:not(:disabled) { background: var(--cfg-danger-soft); border-color: var(--cfg-danger); color: var(--cfg-danger); }
+
+.cfg-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.cfg-btn--sm { padding: 4px 9px; font-size: 12px; }
+.cfg-btn--icon { padding: 6px 8px; }
+
+/* Badge primitive — used for token tier (public / advanced / internal). */
 .cfg-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: 999px;
   border: 1px solid var(--cfg-border-strong);
   color: var(--cfg-text-muted);
+  background: var(--cfg-surface-2);
   white-space: nowrap;
 }
 .cfg-badge--public {
   color: #8ce99a;
-  border-color: #2b8a3e;
+  border-color: rgba(139, 233, 154, 0.4);
   background: rgba(43, 138, 62, 0.12);
 }
 .cfg-badge--advanced {
   color: #ffd8a8;
-  border-color: #b86a14;
-  background: rgba(184, 106, 20, 0.12);
+  border-color: rgba(255, 216, 168, 0.4);
+  background: rgba(184, 106, 20, 0.14);
 }
 .cfg-badge--internal {
   color: #ff8787;
-  border-color: #c92a2a;
-  background: rgba(201, 42, 42, 0.12);
+  border-color: rgba(255, 135, 135, 0.4);
+  background: rgba(201, 42, 42, 0.14);
+}
+
+/* Segmented control primitive — used by the basic/advanced toggle, the output
+   format toggle, and the in-domain scale-kind toggle. */
+.cfg-seg {
+  display: inline-flex;
+  background: var(--cfg-bg);
+  border: 1px solid var(--cfg-border-strong);
+  border-radius: var(--cfg-radius-s);
+  padding: 3px;
+  gap: 2px;
+}
+.cfg-seg__btn {
+  background: transparent;
+  border: none;
+  color: var(--cfg-text-muted);
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background 0.12s, color 0.12s;
+}
+.cfg-seg__btn:hover { color: var(--cfg-text); }
+.cfg-seg__btn--on {
+  background: var(--cfg-accent-strong);
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 1px 4px var(--cfg-accent-glow);
+}
+
+/* Form-control primitive — text inputs, selects and textareas share looks. */
+.cfg-input,
+.cfg-select,
+.cfg-textarea {
+  background: var(--cfg-bg-2);
+  border: 1px solid var(--cfg-border-strong);
+  border-radius: var(--cfg-radius-s);
+  color: var(--cfg-text);
+  padding: 7px 10px;
+  font-size: 13px;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.cfg-input:focus,
+.cfg-select:focus,
+.cfg-textarea:focus {
+  outline: none;
+  border-color: var(--cfg-border-focus);
+  box-shadow: 0 0 0 3px var(--cfg-accent-soft);
+}
+.cfg-input::placeholder { color: var(--cfg-text-faint); }
+.cfg-input--mono { font-family: var(--cfg-mono); font-size: 12px; }
+
+/* Card primitive shared by panel sections, scale generator, WCAG cards, etc. */
+.cfg-card {
+  background: var(--cfg-surface);
+  border: 1px solid var(--cfg-border);
+  border-radius: var(--cfg-radius);
+  box-shadow: var(--cfg-shadow-card);
+}
+
+/* Visually hidden but reachable for screen readers / focus. */
+.cfg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Keyboard shortcut chip used in the empty state / help hover. */
+.cfg-kbd {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--cfg-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  background: var(--cfg-surface-3);
+  border: 1px solid var(--cfg-border-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--cfg-text-muted);
+  line-height: 1.4;
 }

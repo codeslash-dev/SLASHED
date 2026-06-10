@@ -1,4 +1,15 @@
 <script>
+  /**
+   * Floating OKLCH/OKLab picker.
+   *
+   * Renders fixed-positioned over the host swatch, with three sliders driving
+   * either an OKLCH (L · C · H) or OKLab (L · a · b) emission. A HEX input
+   * round-trips legacy 6/8-digit hex via the linear-RGB → OKLab path.
+   *
+   * Why OKLCH: every framework color is authored in OKLCH and shades are
+   * derived with `oklch(from …)`, so picking in OKLCH stays in the same
+   * perceptual space the framework renders.
+   */
   import { onMount } from 'svelte';
 
   let {
@@ -28,9 +39,16 @@
   }
 
   // ── Color conversion utilities ────────────────────────────────────────────
-
   function gammaExpand(c) {
     return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  }
+  function gammaCompress(c) {
+    return c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
+  }
+  function clamp01(x) { return Math.max(0, Math.min(1, x)); }
+  function toHexComp(x) {
+    const v = Math.round(clamp01(x) * 255);
+    return v.toString(16).padStart(2, '0');
   }
 
   function hexToLinearRgb(hex) {
@@ -64,6 +82,18 @@
     };
   }
 
+  function oklabToLinearRgb({ L, a, b }) {
+    const l_ = L + 0.3963377774*a + 0.2158037573*b;
+    const m_ = L - 0.1055613458*a - 0.0638541728*b;
+    const s_ = L - 0.0894841775*a - 1.2914855480*b;
+    const l = l_*l_*l_, m = m_*m_*m_, s = s_*s_*s_;
+    return {
+      r:  4.0767416621*l - 3.3077115913*m + 0.2309699292*s,
+      g: -1.2684380046*l + 2.6097574011*m - 0.3413193965*s,
+      b: -0.0041960863*l - 0.7034186147*m + 1.7076147010*s,
+    };
+  }
+
   function oklabToOklch({ L, a, b }) {
     const C = Math.sqrt(a*a + b*b);
     let H = (Math.atan2(b, a) * 180) / Math.PI;
@@ -78,8 +108,41 @@
     h = ((H % 360) + 360) % 360;
   }
 
-  // ── Parser ────────────────────────────────────────────────────────────────
+  // ── HEX round-trip ───────────────────────────────────────────────────────
+  // Compute current color in HEX (best-effort; uses gamut-mapped sRGB).
+  function currentLinearRgb() {
+    if (mode === 'oklch') {
+      const a = c * Math.cos((h * Math.PI) / 180);
+      const b = c * Math.sin((h * Math.PI) / 180);
+      return oklabToLinearRgb({ L: l, a, b });
+    }
+    return oklabToLinearRgb({ L: ll, a: la, b: lb });
+  }
 
+  const currentHex = $derived.by(() => {
+    const lin = currentLinearRgb();
+    return '#' + toHexComp(gammaCompress(lin.r))
+              + toHexComp(gammaCompress(lin.g))
+              + toHexComp(gammaCompress(lin.b));
+  });
+
+  /** @type {string} */
+  let hexInput = $state('');
+  // Sync the hex input field when the sliders move.
+  $effect(() => { hexInput = currentHex; });
+
+  function onHexChange(e) {
+    const v = (e.currentTarget?.value ?? '').trim();
+    if (/^#?[0-9a-fA-F]{3}$/.test(v) || /^#?[0-9a-fA-F]{6}$/.test(v) || /^#?[0-9a-fA-F]{8}$/.test(v)) {
+      const norm = v.startsWith('#') ? v : '#' + v;
+      try {
+        applyOklch(oklabToOklch(linearRgbToOklab(hexToLinearRgb(norm))));
+        emit();
+      } catch {}
+    }
+  }
+
+  // ── Parser (incoming `value` from the editor) ────────────────────────────
   function parse(v) {
     if (!v) return;
     const s = v.trim();
@@ -104,18 +167,15 @@
       return;
     }
 
-    // hex: #rgb #rgba #rrggbb #rrggbbaa
     if (/^#[0-9a-fA-F]{3,8}$/.test(s)) {
       try { applyOklch(oklabToOklch(linearRgbToOklab(hexToLinearRgb(s)))); } catch {}
       return;
     }
 
-    // hsl() / hsla() — legacy comma or modern space syntax
     const hslM = /^hsla?\(\s*([\d.]+)(?:deg|rad|turn|grad)?\s*[, ]\s*([\d.]+)%?\s*[, ]\s*([\d.]+)%?/.exec(s);
     if (hslM) {
       try { applyOklch(oklabToOklch(linearRgbToOklab(hslToLinearRgb(parseFloat(hslM[1]), parseFloat(hslM[2]), parseFloat(hslM[3]))))); } catch {}
     }
-    // Other (var(), light-dark(), etc.) — leave sliders at current values.
   }
 
   $effect(() => {
@@ -168,6 +228,21 @@
     }
   }
 
+  // Eyedropper API — only some browsers (Chromium-based as of 2024+).
+  const hasEyedropper = typeof window !== 'undefined' && 'EyeDropper' in window;
+  async function pickFromScreen() {
+    try {
+      const dropper = new window.EyeDropper();
+      const result = await dropper.open();
+      if (result?.sRGBHex) {
+        applyOklch(oklabToOklch(linearRgbToOklab(hexToLinearRgb(result.sRGBHex))));
+        emit();
+      }
+    } catch {
+      // user cancelled
+    }
+  }
+
   let el = $state(null);
 
   function onDocPointer(e) {
@@ -200,64 +275,64 @@
 >
   <div class="oklch__preview" style:--pc={cssColor}></div>
 
-  <div class="oklch__modes">
-    <button
-      class="oklch__mode"
-      class:oklch__mode--on={mode === 'oklch'}
-      onclick={() => switchMode('oklch')}
-    >oklch</button>
-    <button
-      class="oklch__mode"
-      class:oklch__mode--on={mode === 'oklab'}
-      onclick={() => switchMode('oklab')}
-    >oklab</button>
+  <div class="oklch__top">
+    <div class="cfg-seg oklch__modes" role="group" aria-label="Color space">
+      <button class="cfg-seg__btn" class:cfg-seg__btn--on={mode === 'oklch'} onclick={() => switchMode('oklch')}>oklch</button>
+      <button class="cfg-seg__btn" class:cfg-seg__btn--on={mode === 'oklab'} onclick={() => switchMode('oklab')}>oklab</button>
+    </div>
+    {#if hasEyedropper}
+      <button class="oklch__icon-btn" type="button" onclick={pickFromScreen} title="Pick a color from the screen" aria-label="Eyedropper">
+        <span aria-hidden="true">⊙</span>
+      </button>
+    {/if}
   </div>
 
   {#if mode === 'oklch'}
     <label class="oklch__row">
       <span class="oklch__ch">L</span>
-      <input class="oklch__slider" type="range" min="0" max="1" step="0.001"
-        bind:value={l} oninput={emit} style:--trk={lBg} />
-      <input class="oklch__num" type="number" min="0" max="1" step="0.001"
-        bind:value={l} oninput={emit} />
+      <input class="oklch__slider" type="range" min="0" max="1" step="0.001" bind:value={l} oninput={emit} style:--trk={lBg} />
+      <input class="oklch__num" type="number" min="0" max="1" step="0.001" bind:value={l} oninput={emit} />
     </label>
     <label class="oklch__row">
       <span class="oklch__ch">C</span>
-      <input class="oklch__slider" type="range" min="0" max="0.4" step="0.001"
-        bind:value={c} oninput={emit} style:--trk={cBg} />
-      <input class="oklch__num" type="number" min="0" max="0.4" step="0.001"
-        bind:value={c} oninput={emit} />
+      <input class="oklch__slider" type="range" min="0" max="0.4" step="0.001" bind:value={c} oninput={emit} style:--trk={cBg} />
+      <input class="oklch__num" type="number" min="0" max="0.4" step="0.001" bind:value={c} oninput={emit} />
     </label>
     <label class="oklch__row">
       <span class="oklch__ch">H</span>
-      <input class="oklch__slider" type="range" min="0" max="360" step="0.5"
-        bind:value={h} oninput={emit} style:--trk={hBg} />
-      <input class="oklch__num" type="number" min="0" max="360" step="0.5"
-        bind:value={h} oninput={emit} />
+      <input class="oklch__slider" type="range" min="0" max="360" step="0.5" bind:value={h} oninput={emit} style:--trk={hBg} />
+      <input class="oklch__num" type="number" min="0" max="360" step="0.5" bind:value={h} oninput={emit} />
     </label>
   {:else}
     <label class="oklch__row">
       <span class="oklch__ch">L</span>
-      <input class="oklch__slider" type="range" min="0" max="1" step="0.001"
-        bind:value={ll} oninput={emit} style:--trk={lBg} />
-      <input class="oklch__num" type="number" min="0" max="1" step="0.001"
-        bind:value={ll} oninput={emit} />
+      <input class="oklch__slider" type="range" min="0" max="1" step="0.001" bind:value={ll} oninput={emit} style:--trk={lBg} />
+      <input class="oklch__num" type="number" min="0" max="1" step="0.001" bind:value={ll} oninput={emit} />
     </label>
     <label class="oklch__row">
       <span class="oklch__ch">a</span>
-      <input class="oklch__slider" type="range" min="-0.4" max="0.4" step="0.001"
-        bind:value={la} oninput={emit} style:--trk={aBg} />
-      <input class="oklch__num" type="number" min="-0.4" max="0.4" step="0.001"
-        bind:value={la} oninput={emit} />
+      <input class="oklch__slider" type="range" min="-0.4" max="0.4" step="0.001" bind:value={la} oninput={emit} style:--trk={aBg} />
+      <input class="oklch__num" type="number" min="-0.4" max="0.4" step="0.001" bind:value={la} oninput={emit} />
     </label>
     <label class="oklch__row">
       <span class="oklch__ch">b</span>
-      <input class="oklch__slider" type="range" min="-0.4" max="0.4" step="0.001"
-        bind:value={lb} oninput={emit} style:--trk={bBg} />
-      <input class="oklch__num" type="number" min="-0.4" max="0.4" step="0.001"
-        bind:value={lb} oninput={emit} />
+      <input class="oklch__slider" type="range" min="-0.4" max="0.4" step="0.001" bind:value={lb} oninput={emit} style:--trk={bBg} />
+      <input class="oklch__num" type="number" min="-0.4" max="0.4" step="0.001" bind:value={lb} oninput={emit} />
     </label>
   {/if}
+
+  <div class="oklch__hex">
+    <span class="oklch__hex-label">HEX</span>
+    <input
+      class="oklch__hex-input"
+      type="text"
+      spellcheck="false"
+      bind:value={hexInput}
+      oninput={onHexChange}
+      maxlength="9"
+      aria-label="Hex value"
+    />
+  </div>
 
   <code class="oklch__out">{cssColor}</code>
 </div>
@@ -270,15 +345,15 @@
     border: 1px solid var(--cfg-border-strong);
     border-radius: var(--cfg-radius);
     padding: 12px;
-    width: 288px;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+    width: 304px;
+    box-shadow: var(--cfg-shadow-pop);
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
   .oklch__preview {
-    height: 40px;
+    height: 44px;
     border-radius: var(--cfg-radius-s);
     border: 1px solid var(--cfg-border);
     background-image:
@@ -287,44 +362,32 @@
     background-size: cover, 12px 12px;
   }
 
-  .oklch__modes {
-    display: flex;
-    gap: 4px;
-  }
-
-  .oklch__mode {
-    flex: 1;
-    padding: 4px 8px;
-    font-size: 11px;
-    font-family: var(--cfg-mono);
+  .oklch__top { display: flex; align-items: center; gap: 8px; }
+  .oklch__modes { flex: 1; }
+  .oklch__icon-btn {
+    width: 32px;
+    height: 28px;
     background: var(--cfg-bg);
-    border: 1px solid var(--cfg-border);
+    border: 1px solid var(--cfg-border-strong);
     border-radius: var(--cfg-radius-s);
     color: var(--cfg-text-muted);
-    cursor: pointer;
-    transition: background 0.1s, color 0.1s;
+    font-size: 16px;
+    line-height: 1;
   }
-
-  .oklch__mode--on {
-    background: var(--cfg-accent);
-    border-color: var(--cfg-accent);
-    color: #fff;
-  }
+  .oklch__icon-btn:hover { color: var(--cfg-text); border-color: var(--cfg-border-focus); }
 
   .oklch__row {
     display: grid;
-    grid-template-columns: 14px 1fr 58px;
+    grid-template-columns: 14px 1fr 60px;
     gap: 8px;
     align-items: center;
   }
-
   .oklch__ch {
     font-family: var(--cfg-mono);
     font-size: 11px;
     color: var(--cfg-text-faint);
     text-align: center;
   }
-
   .oklch__slider {
     -webkit-appearance: none;
     appearance: none;
@@ -335,28 +398,19 @@
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.15);
   }
-
   .oklch__slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #fff;
-    border: 2px solid rgba(0, 0, 0, 0.25);
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; border: 2px solid rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     cursor: pointer;
   }
-
   .oklch__slider::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #fff;
-    border: 2px solid rgba(0, 0, 0, 0.25);
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; border: 2px solid rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     cursor: pointer;
   }
-
   .oklch__num {
     font-family: var(--cfg-mono);
     font-size: 11px;
@@ -368,18 +422,39 @@
     width: 100%;
     text-align: right;
   }
+  .oklch__num:focus { outline: 2px solid var(--cfg-accent); outline-offset: -1px; }
 
-  .oklch__num:focus {
-    outline: 2px solid var(--cfg-accent);
-    outline-offset: -1px;
+  .oklch__hex {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
   }
+  .oklch__hex-label {
+    font-family: var(--cfg-mono);
+    font-size: 11px;
+    color: var(--cfg-text-faint);
+    width: 36px;
+  }
+  .oklch__hex-input {
+    flex: 1;
+    font-family: var(--cfg-mono);
+    font-size: 12px;
+    background: var(--cfg-bg);
+    border: 1px solid var(--cfg-border);
+    border-radius: var(--cfg-radius-s);
+    color: var(--cfg-text);
+    padding: 5px 8px;
+    text-transform: uppercase;
+  }
+  .oklch__hex-input:focus { outline: 2px solid var(--cfg-accent); outline-offset: -1px; border-color: var(--cfg-accent); }
 
   .oklch__out {
     font-family: var(--cfg-mono);
     font-size: 11px;
     color: var(--cfg-text-faint);
     word-break: break-all;
-    padding: 5px 7px;
+    padding: 6px 8px;
     background: var(--cfg-bg);
     border-radius: var(--cfg-radius-s);
     border: 1px solid var(--cfg-border);
