@@ -1,203 +1,225 @@
-# SLASHED — Competitive Gap Analysis
+# SLASHED — Competitive Gap Analysis (v0.5.28)
 
 > **Question:** what is still missing from SLASHED that holds it back versus its
-> direct competitor **Automatic.css (ACSS) v4**, cross-checked against
-> **Bulma v1** and **Tailwind CSS v4**?
+> direct competitor **Automatic.css (ACSS) v4**?
 >
-> **Scope guard (per request):** utility classes and pre-built components are
-> **excluded** on both sides. We compare *engines*: the token/variable system,
-> the generative colour/type/space machinery, theming, and architecture.
+> **Scope guard (per request):** pre-built components, plain utility classes,
+> and ecosystem/community factors are **excluded** on both sides. We compare
+> *engines*: the token/variable API, the generative colour/type/space machinery,
+> theming, contexts, and architecture.
 >
 > **Lens:** every gap is judged against SLASHED's stated philosophy —
 > **no build, no Node, no JS, pure CSS, BEM-first, token-first, modern-only.**
 > A "gap" only counts if closing it is *consistent with that philosophy*. Where a
 > difference is a deliberate philosophical choice, it is flagged as **Not a gap**.
+>
+> This supersedes the earlier revision of this document, which audited a
+> pre-generative-engine build. Two of its Tier-1 gaps have since been closed in
+> source; the verdicts below reflect **v0.5.28** as shipped.
 
 Sources: [ACSS — What's new in 4](https://docs.automaticcss.com/setup/whats-new-in-4),
+[ACSS contextual backgrounds](https://docs.automaticcss.com/backgrounds/contextual-background-colors),
 [ACSS colour palette](https://docs.automaticcss.com/colors/palette-intro),
-[ACSS modern colour-scheme](https://docs.automaticcss.com/color-scheme/modern-color-scheme-workflow),
-[ACSS section spacing](https://docs.automaticcss.com/spacing/section-spacing),
-[ACSS columns](https://docs.automaticcss.com/columns/css-columns),
-[Bulma v1 CSS variables](https://bulma.io/documentation/features/css-variables/),
-[Bulma v1 themes](https://bulma.io/documentation/features/themes/),
-[Tailwind v4 `@theme`](https://medium.com/@sureshdotariya/tailwind-css-4-theme-the-future-of-design-tokens-at-2025-guide-48305a26af06).
+[ACSS section spacing](https://docs.automaticcss.com/spacing/section-spacing).
 *Content was rephrased for compliance with licensing restrictions.*
 
 ---
 
 ## Headline
 
-The single most striking finding: **ACSS v4 has repositioned to "variable-first,
-BEM-first" — the exact space SLASHED occupies.** They are now genuinely the same
-*category* of tool. SLASHED's architecture (cascade layers, OKLCH relative colour,
-`light-dark()`, container-query primitives) is, feature-for-feature, *more modern*
-than ACSS in several places. SLASHED does not lose on **what** it computes.
+ACSS v4 has repositioned to **"variable-first, BEM-first"** with cascade layers,
+OKLCH, `light-dark()`/`color-scheme`, and a breakpoint-free stance — the exact
+category SLASHED occupies. They are now directly comparable engines, and the
+feature-for-feature distance has **narrowed dramatically since the previous
+audit**:
 
-Where it loses is on **how configurable the computation is**. ACSS's whole value
-is that a few inputs *regenerate the entire system*. SLASHED bakes the outputs into
-the token values, so the consumer can recolour but cannot easily *re-shape* the
-scales. That is the gap that holds it back.
+- **The generative fluid engine has landed.** Type, display, and space scales
+  are now computed at runtime from 12 override-able inputs
+  (`--sf-fluid-{min,max}-vw`, `--sf-{text,space}-ratio-{min,max}`,
+  `--sf-{text,space}-base-{min,max}`, `--sf-text-display-base-{min,max}`,
+  `core/tokens.css`). This was the previous audit's #1 gap. SLASHED now matches
+  ACSS's "few inputs regenerate the system" value proposition **without a
+  dashboard or build step** — and exceeds it in one respect: the **dual-ratio**
+  design (a different modular ratio at the min and max viewport) has no ACSS
+  equivalent.
+- **The contextual colour cascade has landed.** `.sf-surface--*` (11 variants,
+  `core/macros.css`) now re-declares ~11 semantic tokens (`--sf-color-text`,
+  `--sf-color-heading`, `--sf-color-link`+states, secondary/placeholder/disabled
+  text, three border weights, shadow colour) so descendants adapt with no extra
+  classes. This is functional parity with ACSS v4 contextual backgrounds.
+- The 72 `-to-` bridge tokens are now **generated from the same engine**
+  (`optional/tokens.sizes-extended.css`) and recalibrate with it, and have been
+  re-tiered PUBLIC-ADVANCED — the "hand-computed matrix" critique no longer
+  applies.
+
+What remains is a shorter list: one genuine platform-bound limitation
+(`fluid()`), one coverage gap (contexts beyond the 11 surfaces), and a cluster
+of **documentation/packaging gaps** — the new engine is barely surfaced in the
+human-readable docs.
 
 ---
 
-## Tier 1 — Real gaps that hold SLASHED back
+## Closed since the previous audit (verified in source)
 
-### 1. The fluid scales are pre-computed, not generative ⭐ (biggest gap)
+| Former gap | Status in v0.5.28 |
+|---|---|
+| #1 Fluid scales pre-computed, not generative | **Closed.** Runtime `pow()`/`calc()` engine over 12 `@property`-typed inputs; every `clamp()` recalibrates from `:root` overrides. |
+| #4 Colour contexts class-gated, shallow | **Largely closed.** `.sf-surface--*` rebinds the full semantic token set for descendants (text, heading, links, borders, shadow colour). |
+| Bridge matrix as "brute-force stand-in" | **Reframed.** Bridges are now engine-derived outputs, consistent by construction. |
 
-ACSS lets you set a **type-scale ratio**, **base min/max size**, and **min/max
-viewport**, and regenerates every `clamp()` from those inputs. Tailwind v4 derives
-its whole spacing scale from a single `--spacing` base via `calc()`. Bulma derives
-shades and sizes from a handful of Sass inputs.
+---
 
-SLASHED bakes the slope and the **360 px (`22.5rem`) lower viewport bound** straight
-into each token value, e.g.:
+## Tier 1 — Remaining real gaps
 
-```css
---sf-text-m: calc(clamp(1rem, calc(0.0037037 * (100vw - 22.5rem) + 1rem), 1.25rem) * var(--sf-text-scale));
-```
+### 1. No ad-hoc `fluid(min, max)` primitive ⭐ (the one ACSS feature with no SLASHED answer)
 
-The only consumer dials are **linear multipliers** (`--sf-text-scale`,
-`--sf-space-scale`, …). You can make everything bigger or smaller, but you **cannot
-change**:
-- the **modular ratio** (1.2 vs 1.25 vs 1.333) of the type scale;
-- the **viewport range** over which fluidity happens (where it starts/stops);
-- the **base size** independently of the curve.
+ACSS v4 ships `fluid()` so *any* property value can interpolate between two
+endpoints. SLASHED offers the fixed scale steps plus the bridge matrix; an
+arbitrary "go from 0.875rem to 1.375rem here" still needs a hand-written
+`clamp()`, and nothing guarantees the author reuses the engine's viewport range.
 
-> **This is the root cause of the 72 "bridge" tokens** flagged in the
-> categorization (`--sf-space-l-to-m`, etc.). They are a brute-force, hand-computed
-> stand-in for the generator ACSS ships. A generator removes the need for the
-> matrix entirely.
+CSS has no cross-browser user-defined functions, so a literal `fluid()` remains
+**a platform limitation, not an oversight**. But it can be closed in stages,
+all philosophy-safe:
 
-**Philosophy verdict: CLOSEABLE without a build.** Pure CSS `calc()` can compute a
-fluid `clamp()` from tokenised inputs at runtime. Expose:
+1. **Now — documented recipe.** One canonical `clamp()` pattern driven by the
+   existing engine tokens, published in `docs/theming.md`/`docs/macros.md`:
 
-```css
---sf-fluid-min-vw: 22.5rem;   /* currently hard-coded */
---sf-fluid-max-vw: 96rem;     /* currently hard-coded */
---sf-text-ratio:   1.25;      /* modular ratio, currently implicit */
-```
+   ```css
+   /* fluid from MIN rem to MAX rem across the engine's viewport range */
+   --my-value: clamp(
+     MINrem,
+     calc((MAX - MIN) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw))
+          * (100vw - var(--sf-fluid-min-vw) * 1rem) + MINrem),
+     MAXrem
+   );
+   ```
 
-and rebuild the scale tokens as `calc()` expressions over those vars (the slope
-`(max - min) / (maxVw - minVw)` is expressible in CSS). This keeps "no build" while
-giving ACSS-level reshaping. **Highest-leverage single improvement.**
+   Because it reads `--sf-fluid-*`, ad-hoc values stay in sync when the engine
+   is recalibrated — the property ACSS's `fluid()` users actually rely on.
+2. **Now — open slots.** A few pre-wired tokens
+   (`--sf-fluid-custom-{1..3}` with `--sf-fluid-custom-N-{min,max}` endpoint
+   inputs) so common cases need only two numbers, no formula.
+3. **Later — native `@function`.** CSS custom functions (`@function --fluid(...)`)
+   shipped in Chromium in 2025 and are progressing elsewhere. An optional
+   `optional/functions.css` module can deliver a true `--fluid()` as progressive
+   enhancement once a second engine ships, without violating no-build. Track it
+   in the roadmap now.
 
-### 2. No `fluid()` primitive for ad-hoc responsive values
+### 2. The generative engine is invisible in the docs and the theming story
 
-ACSS ships a `fluid(min, max)` helper so *any* property can be made responsive
-inline. SLASHED offers only the fixed scale steps plus the bridge matrix; an
-arbitrary "fluidly go from 14px to 22px here" needs hand-written `clamp()`.
+This is the inverse of the old gap: the engine exists, but a consumer reading
+`README.md`, `docs/theming.md`, or `optional/theme-example.css` will not learn
+it exists. Verified: `docs/theming.md` and `docs/architecture.md` contain **no
+mention** of `--sf-text-ratio-*` / `--sf-fluid-*-vw`; `theme-example.css`
+demonstrates every *colour* mechanism but none of the 12 scale dials. ACSS's
+adoption advantage is precisely that its inputs are impossible to miss
+(dashboard); SLASHED's equivalent must be impossible to miss *in the docs*.
 
-CSS has no user-defined functions, so a literal `fluid()` is impossible without a
-build — **a genuine, philosophy-bound limitation, not an oversight.** But it can be
-*mitigated* the same way as gap #1: a documented one-line `clamp()` recipe driven by
-the `--sf-fluid-*` viewport tokens, so consumers compose fluid values consistently
-instead of guessing magic numbers. Worth shipping as a documented pattern + maybe a
-couple of "open" slots (`--sf-fluid-1..3`) authors can define per scope.
+**Fix (docs/packaging, no engine work):**
+- a "Fluid engine" section in `docs/theming.md` (what each of the 12 inputs
+  does, worked examples: change ratio, widen viewport range, scale base);
+- extend `optional/theme-example.css` (or add `optional/config-example.css`)
+  into the **single annotated control panel** the previous audit asked for:
+  6 brand colours + 12 engine inputs + 5 scale multipliers + font families +
+  radius in one copy-paste block;
+- a README paragraph: "change one ratio, the whole system regenerates — no
+  build" is now true and is the headline ACSS-parity claim. Say it.
 
-### 3. No guided configuration / "starter theme" story
+### 3. Colour contexts stop at the 11 surface classes
 
-ACSS's adoption advantage is the **dashboard + live preview**: pick brand colours, a
-scale, spacing, done. Bulma ships a default light theme file you copy and tweak.
-Tailwind centralises everything in one `@theme` block.
+ACSS contexts apply to any palette background, including tints/shades. SLASHED's
+contextual cascade fires only on `.sf-surface--{brand|status|inverse}`. Set
+`background: var(--sf-color-primary-100)` (or any arbitrary background) and
+nothing re-derives; there is also no documented way to *author your own* surface
+that participates in the contract.
 
-SLASHED's onboarding is "override these 6 tokens (and optionally ~16 more), and read
-several docs." There is `optional/theme-example.css`, but no single, copy-paste
-**config block** that surfaces *all* the realistic dials (6 colours + ratio +
-viewport + spacing scale + radius + font families) in one place.
-
-**Philosophy verdict: a visual dashboard is correctly OUT of scope** (it would
-require a runtime/host app — contradicts no-build). **But a single annotated
-`config.css`** "control panel" partial *is* in scope and would close most of the
-ergonomic gap. This is docs/packaging, not engine work.
-
-### 4. Auto colour-context relationships are class-gated, not pervasive
-
-ACSS's "automatic colour relationships": set a background context and the
-**foreground, headings, and links flip automatically** to their correct values.
-
-SLASHED has the pieces — `--sf-color-text--on-*`, the `.sf-surface--*` macros, the
-auto-contrast `code` token — but the auto-flip is **triggered by applying a specific
-class** (`.sf-surface--primary`), not by a general "any element that sets a SLASHED
-background re-derives its own foreground" contract. On an arbitrary
-`background: var(--sf-color-primary)` with no surface class, text/heading/link
-colours do **not** automatically adapt.
-
-**Philosophy verdict: CLOSEABLE.** A small set of context tokens + a documented
-"surface contract" (or having `.sf-surface--*` also rebind `--sf-color-text`,
-`--sf-color-heading`, `--sf-color-link` for descendants) would generalise it.
-Borderline already-present; needs completion + docs.
+**Fix, in order of leverage:**
+1. **Document the surface contract as a recipe** — the 11-token rebinding block
+   is a copy-paste pattern; publishing it lets any BEM component become a
+   conforming surface today.
+2. **Ship a generic surface primitive**: a `.sf-surface` (or `[data-surface]`)
+   that reads one input — `--sf-surface-color: <any colour>` — and derives
+   background, auto-contrast foreground (the `oklch(from …)` lightness-flip
+   technique already used for `--sf-color-text--on-*`), and the contextual
+   token set from it. This generalises contexts to *every* colour, including
+   palette shades, with one class + one custom property — arguably beyond what
+   ACSS offers.
+3. Optional sugar: tint variants (`.sf-surface--primary-subtle` etc.) mapping to
+   the existing `-100`/`-900` ramp with dark-mode-aware flips.
 
 ---
 
 ## Tier 2 — Smaller gaps / polish
 
-### 5. Smart, metric-aware line-height
-ACSS computes line-height from a leading value + the font's x-height ("Smart Line
-Height") rather than a flat ratio. SLASHED uses static `--sf-leading-*` tokens plus
-per-size overrides (`--sf-text-*-line-height`). Result is comparable in practice but
-less "auto". **Closeable** as a documented `calc()` token; low priority.
+### 4. Smart, metric-aware line-height
+ACSS computes line-height from a leading value relative to font size. SLASHED
+has static `--sf-leading-*` plus per-size overrides in `sizes-extended` whose
+*defaults* encode the convention (big = tight) — close in outcome, manual in
+mechanism. **Closeable** with a `calc()` leading formula keyed to the size step
+(the engine exposes everything needed); low priority.
 
-### 6. Section-rhythm system with one knob
-ACSS has a dedicated **section spacing** model: base spacing × a fluid multiplier +
-a gutter, so whole-page vertical rhythm scales from one input. SLASHED has
-`--sf-section-pad-*` + `.sf-section--*` sizes but not a single "multiply all section
-padding by N between mobile and desktop" dial. **Partially present**; could be
-unified with gap #1's generative approach.
+### 5. Section rhythm: indirect dial only
+`--sf-section-pad--*` now derives from the generative space scale, so
+recalibrating the engine or `--sf-space-scale` *does* re-rhythm sections — but
+there is no **independent** section multiplier (ACSS: one section-space input ×
+fluid multiplier). **Fix:** multiply the six `--sf-section-pad--*` definitions
+by a new `--sf-section-scale` (default `1`). One token, ~6 lines.
 
-### 7. Root font-size / rem & zoom accessibility strategy
-ACSS documents root font-size management and rem handling. SLASHED is rem-based and
-has scale multipliers but offers no explicit story for honouring user root-size /
-browser zoom for accessibility. **Mostly a docs gap.**
-
-### 8. One-input → full palette is implicit, not explicit
-Bulma markets "input one colour, get dozens of shades"; ACSS shows the OKLCH ramp in
-its dashboard. SLASHED *does* derive a full ramp from one `-light` token (arguably
-its strongest area — 22 steps per family in `tokens.palette.css`), but this power is
-**buried in advanced docs**. This is a **marketing/discoverability** gap, not a
-capability gap — SLASHED already wins here and should say so louder.
+### 6. Root font-size / zoom accessibility story
+ACSS documents root-size and rem strategy explicitly. SLASHED is rem-based and
+zoom-safe in practice but says nothing about it. **Docs-only gap:** a short
+"root size, rem and user zoom" section in `docs/theming.md` (don't set a px
+root size; how `--sf-*-base-*` interacts with user font-size preferences).
 
 ---
 
 ## Not a gap — deliberate philosophical choices (do NOT "fix")
 
-| Difference vs ACSS/others | Why it is correct for SLASHED |
+| ACSS v4 feature | Why SLASHED should not copy it |
 |---|---|
-| **No breakpoint tokens / breakpoint config** | Container-query-first is a core stance; custom props can't be used in `@media`/`@container` conditions anyway. Intentional. |
-| **No visual dashboard / live preview** | Requires a runtime host app; violates no-build/no-Node. ACSS only has it because it's a WordPress plugin. |
-| **No utility classes** | Explicitly BEM-first; the empty `utilities` layer is a documented stance through v1.0. |
-| **Sass-style functions/mixins (Bulma) / build-time JIT (Tailwind)** | Both need a compiler. SLASHED's "pure CSS, link-and-go" is the differentiator. |
-| **Modern-only floor** | Deliberate; enables `light-dark()` + `oklch(from …)` that the whole colour engine depends on. |
+| **Dashboard / live preview / selective CSS output** | Requires a WordPress plugin runtime. SLASHED's equivalent is the engine tokens + (gap #2) a config partial. |
+| **`?btn`-style expandable Recipes** | Build-time expansion inside a page-builder; needs tooling. SLASHED's macros (`.sf-prose`, `.sf-flow`, …) are runtime recipes — different, philosophy-consistent answer. |
+| **Breakpoint configuration** | Both frameworks are now breakpoint-free; SLASHED is container-query-first on top. Parity-or-better, nothing to add. |
+| **Utility classes** | Excluded from scope; BEM-first stance through v1.0. |
+| **WordPress/builder integrations** | Ecosystem — out of scope per request; handled by the separate `slashed-for-wp` repo anyway. |
 
 ---
 
-## Where SLASHED already leads (context for balance)
+## Where SLASHED leads ACSS v4 (context for balance)
 
-- **Architecture:** explicit, fully-ordered cascade-layer system (`tokens → … →
-  overrides`) — cleaner than ACSS's specificity story.
-- **Zero-dependency portability:** one `<link>`, no plugin, no compiler, runs on any
-  stack. ACSS is WordPress/page-builder-centric; Bulma & Tailwind need a build.
-- **Layout-primitive breadth:** the Every-Layout set (stack, cluster, cover,
-  sidebar, switcher, imposter, reel, frame, content-grid…) is broader and more
-  rigorous than ACSS's grid/flex helpers.
-- **Container-query-native primitives** and a real **print layer**, **motion token
-  system**, and a **40-strong `.is-*` state vocabulary** mapped to ARIA.
+- **Dual-ratio fluid engine** — different modular ratio at min vs max viewport;
+  ACSS exposes single ratios.
+- **Typed tokens** — `@property` registration (animatable colours, typed engine
+  scalars, sane `initial` behaviour). ACSS variables are untyped.
+- **Fully ordered explicit layer stack** (`tokens → … → overrides`) with an
+  always-last consumer layer; ACSS adopted layers in v4 but with a coarser
+  contract.
+- **Container-query-native layout primitives**, a real **print layer**, the
+  **motion token system**, the 40-strong **`.is-*` ARIA-mapped state
+  vocabulary**, and **LumLocker** — no ACSS equivalents.
+- **Zero-dependency portability** — one `<link>`, any stack; ACSS requires the
+  WordPress plugin (noting ecosystem is out of scope, the *architectural*
+  consequence — no runtime requirement — is in scope and favours SLASHED).
+- **One-token→full-ramp palette** (22 steps/family in `tokens.palette.css`)
+  derived in pure CSS — ACSS needs its dashboard to do the same job.
 
 ---
 
 ## Recommended priority order
 
-1. **Tokenise the fluid engine** (`--sf-fluid-min-vw`/`-max-vw`, `--sf-*-ratio`,
-   base-size dials) → unlocks ACSS-level reshaping, and lets you **delete the 72
-   bridge tokens**. *(Tier 1 #1 — biggest win, philosophy-safe.)*
-2. **Ship a single annotated `config.css` "control panel"** partial + a documented
-   `clamp()` fluid recipe over the new viewport tokens. *(Tier 1 #2/#3.)*
-3. **Generalise the surface/colour-context contract** so backgrounds auto-flip
-   foregrounds beyond the `.sf-surface--*` classes. *(Tier 1 #4.)*
-4. **Land the 8 components** (already reserved/0-byte) so `full`/`components` bundles
-   stop being hollow — the credibility gap from the categorization.
-5. Polish: smart line-height token, unified section-rhythm dial, root-size/zoom docs,
-   and **market the existing one-token→full-ramp colour power** prominently.
+1. **Surface the engine** — docs section + single config-example "control
+   panel" partial + README claim. Highest value-per-effort; pure docs. *(Gap #2)*
+2. **Ship the fluid recipe + open slots**, and put native `@function --fluid()`
+   on the roadmap. *(Gap #1)*
+3. **Generalise the surface contract** — document the rebinding recipe, then a
+   `--sf-surface-color`-driven generic surface. *(Gap #3)*
+4. Polish: `--sf-section-scale`, calc-based smart leading, root-size/zoom docs.
+   *(Gaps #4–6)*
 
-> Net: SLASHED is not behind ACSS on *modern CSS* — it is ahead in places. It is
-> behind on **configurability of its generative scales** and **onboarding
-> ergonomics**. Both are closeable without abandoning "no build, pure CSS."
+> Net verdict: with the generative engine and contextual cascade shipped,
+> SLASHED has reached **engine parity with ACSS v4 and leads it on modern-CSS
+> depth** (typed tokens, dual ratios, container queries, layer rigour). The
+> remaining deficit is one platform-bound primitive (`fluid()`, mitigable today,
+> solvable natively soon) and **discoverability**: the engine's configurability
+> currently lives only in source comments and generated references.
