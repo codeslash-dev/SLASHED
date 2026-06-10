@@ -107,21 +107,36 @@
   let suggestion = $state(null);
   let optMsg = $state('');
 
+  // Lock state: a locked role is kept as a fixed anchor; the optimizer then
+  // generates the remaining roles to clear WCAG against it. Lock one or two
+  // brand colors and let the rest be derived compliant.
+  let locked = $state({ base: false, neutral: false, action: false });
+  const OPT_ROLES = ['base', 'neutral', 'action'];
+
+  function toggleLock(role) {
+    locked[role] = !locked[role];
+    // Keep an open suggestion in sync with the new lock set.
+    if (suggestion) runOptimizer();
+  }
+
   function runOptimizer() {
     optMsg = '';
     suggestion = suggestAccessiblePalette({
       baseRgb: resolved[OPT.base],
       neutralRgb: resolved[OPT.neutral],
       actionRgb: resolved[OPT.action],
+      locked: { ...locked },
     });
     if (!suggestion) optMsg = 'Could not resolve base/neutral/action colors to optimize.';
   }
 
   function applySuggestion() {
     if (!suggestion) return;
-    if (suggestion.base) setOverride(OPT.base, suggestion.base.color);
-    if (suggestion.neutral) setOverride(OPT.neutral, suggestion.neutral.color);
-    if (suggestion.action) setOverride(OPT.action, suggestion.action.color);
+    // Only write generated (unlocked) roles — locked anchors keep their value.
+    for (const role of OPT_ROLES) {
+      const s = suggestion[role];
+      if (s && s.color && !s.locked) setOverride(OPT[role], s.color);
+    }
     optMsg = 'Applied ✓';
     suggestion = null;
     setTimeout(() => (optMsg = ''), 2400);
@@ -235,7 +250,27 @@
       <p class="card__lead">
         Keeps your brand hues but searches lightness for the most accessible
         <strong>base</strong>, <strong>neutral</strong> and <strong>action</strong> values.
+        <strong>Lock</strong> one or two colors to pin them as fixed anchors — the rest are
+        generated to clear WCAG against your locked base.
       </p>
+
+      <div class="opt__locks" role="group" aria-label="Lock colors as fixed anchors">
+        {#each OPT_ROLES as role (role)}
+          <button
+            type="button"
+            class="opt__lock"
+            class:opt__lock--on={locked[role]}
+            onclick={() => toggleLock(role)}
+            aria-pressed={locked[role]}
+            title={locked[role] ? `${role} is locked — kept as-is` : `Lock ${role} as a fixed anchor`}
+          >
+            <span class="opt__lock-ico" aria-hidden="true">{locked[role] ? '🔒' : '🔓'}</span>
+            <span class="opt__lock-sw" style="background: var({OPT[role]})"></span>
+            <span class="opt__lock-name">{role}</span>
+          </button>
+        {/each}
+      </div>
+
       <div class="opt__actions">
         <button class="cfg-btn cfg-btn--primary" onclick={runOptimizer}>Suggest accessible palette</button>
         {#if optMsg}<span class="opt__msg">{optMsg}</span>{/if}
@@ -243,13 +278,22 @@
 
       {#if suggestion}
         <div class="opt__results">
-          {#each [['base', suggestion.base], ['neutral', suggestion.neutral], ['action', suggestion.action]] as [role, s] (role)}
+          {#each OPT_ROLES as role (role)}
+            {@const s = suggestion[role]}
             <div class="opt__row">
-              <span class="opt__sw" style="background: {s ? s.color : '#888'}"></span>
-              <span class="opt__role">{role}</span>
+              <span class="opt__sw" style="background: {s && s.color ? s.color : `var(${OPT[role]})`}"></span>
+              <span class="opt__role">{role}{#if s && s.locked} <span class="opt__locked-tag" title="Locked anchor">🔒</span>{/if}</span>
               {#if s}
-                <code class="opt__val">{s.color}</code>
-                {#if s.ratio != null}<span class="badge {levelClass(wcagLevel(s.ratio))}">{s.ratio.toFixed(2)}:1 {wcagLevel(s.ratio)}</span>{:else}<span class="badge badge--neutral">surface</span>{/if}
+                {#if s.color}
+                  <code class="opt__val">{s.color}</code>
+                {:else}
+                  <code class="opt__val opt__val--locked">locked — unchanged</code>
+                {/if}
+                {#if s.ratio != null}
+                  <span class="badge {levelClass(wcagLevel(s.ratio))}">{s.ratio.toFixed(2)}:1 {wcagLevel(s.ratio)}</span>
+                {:else}
+                  <span class="badge badge--neutral">surface</span>
+                {/if}
               {:else}
                 <span class="opt__none">no accessible value on this hue</span>
               {/if}
@@ -386,12 +430,45 @@
   /* Optimizer */
   .opt__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .opt__msg { font-size: 13px; color: var(--cfg-ok); font-weight: 500; }
+
+  /* Lock controls */
+  .opt__locks { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; }
+  .opt__lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    background: var(--cfg-bg);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    color: var(--cfg-text-muted);
+    font-size: 12px;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: border-color 120ms, color 120ms, background 120ms;
+  }
+  .opt__lock:hover { color: var(--cfg-text); }
+  .opt__lock--on {
+    border-color: var(--cfg-accent-strong);
+    color: var(--cfg-text);
+    background: var(--cfg-surface-2);
+    font-weight: 600;
+  }
+  .opt__lock-ico { font-size: 13px; line-height: 1; }
+  .opt__lock-sw {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--cfg-border-strong);
+  }
+  .opt__locked-tag { font-size: 11px; }
   .opt__results { margin-top: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); overflow: hidden; }
   .opt__row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--cfg-border); }
   .opt__row:last-child { border-bottom: none; }
   .opt__sw { width: 30px; height: 30px; border-radius: var(--cfg-radius-s); border: 1px solid var(--cfg-border-strong); flex-shrink: 0; }
   .opt__role { font-weight: 600; text-transform: capitalize; min-width: 70px; }
   .opt__val { font-family: var(--cfg-mono); font-size: 11px; background: var(--cfg-bg); padding: 2px 6px; border-radius: 3px; color: var(--cfg-text-muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .opt__val--locked { font-style: italic; color: var(--cfg-text-faint); }
   .opt__none { color: var(--cfg-text-faint); font-size: 12px; }
   .opt__apply { display: flex; gap: 8px; padding: 12px 14px; background: var(--cfg-surface-2); }
 </style>
