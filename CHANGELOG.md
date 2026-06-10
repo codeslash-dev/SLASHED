@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.29] - 2026-06-10
+
+### Features
+- **configurator:** unify into one palette generator + on-color usage preview
+- **configurator:** add WCAG color locks + richer live preview
+- **pages:** deploy full docs site — docs, demo, coverage, configurator
+
+### Bug Fixes
+- **configurator:** gate usage-preview roles on the on-color token too
+- **configurator:** address self-review of the OKLCH generator
+- **pages:** fix _site permission denied after jekyll-build-pages
+
 ## [0.5.28] - 2026-06-09
 
 ### Features
