@@ -127,11 +127,15 @@
      · --sf-shadow-strength, --sf-shadow-color, --sf-shadow-glow-color (shadow internals)
      · --sf-font-features, --sf-font-variation, --sf-optical-sizing (OpenType)
      · --sf-space-scale, --sf-text-scale, --sf-text-display-scale,
-       --sf-radius-scale, --sf-motion-scale (global multipliers)
+       --sf-radius-scale, --sf-motion-scale, --sf-section-scale (global multipliers)
+     · --sf-leading-taper (progressive per-size leading tightener,
+       consumed by optional/tokens.sizes-extended.css)
      · --sf-fluid-{min,max}-vw (fluid interpolation viewport range, rem/unitless)
      · --sf-text-ratio-{min,max}, --sf-text-base-{min,max},
        --sf-text-display-base-{min,max} (generative TYPE scale inputs)
      · --sf-space-ratio-{min,max}, --sf-space-base-{min,max} (generative SPACE scale inputs)
+     · --sf-fluid-custom-{1,2,3}-{min,max} (custom fluid slot endpoints) and
+       --sf-fluid-custom-{1,2,3} (the fluid slot outputs you read)
      · --sf-{space,text}-{step}-to-{step} (fluid pairwise interpolation bridges,
        optional/tokens.sizes-extended.css — generated OUTPUTS of the same scale
        engine whose inputs above are ADVANCED; one per ordered pair of steps)
@@ -249,6 +253,22 @@
   @property --sf-space-base-min        { syntax: "<number>"; inherits: true; initial-value: 1; }
   @property --sf-space-base-max        { syntax: "<number>"; inherits: true; initial-value: 2; }
 
+  /* Custom fluid slots — open endpoint pairs for ad-hoc fluid values.
+     Set the two endpoints (unitless rem numbers), read the slot:
+       :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; }
+       .my-component { padding-inline: var(--sf-fluid-custom-1); }
+     The slot resolves to a length that interpolates between the endpoints
+     across the engine's viewport range, so ad-hoc values stay calibrated
+     when --sf-fluid-{min,max}-vw are retuned. Endpoints may be redefined
+     per scope. Descending ranges (min > max) are not supported by clamp() —
+     swap the endpoints and negate at the use site instead. */
+  @property --sf-fluid-custom-1-min    { syntax: "<number>"; inherits: true; initial-value: 1; }
+  @property --sf-fluid-custom-1-max    { syntax: "<number>"; inherits: true; initial-value: 2; }
+  @property --sf-fluid-custom-2-min    { syntax: "<number>"; inherits: true; initial-value: 1; }
+  @property --sf-fluid-custom-2-max    { syntax: "<number>"; inherits: true; initial-value: 2; }
+  @property --sf-fluid-custom-3-min    { syntax: "<number>"; inherits: true; initial-value: 1; }
+  @property --sf-fluid-custom-3-max    { syntax: "<number>"; inherits: true; initial-value: 2; }
+
   :root {
     --sf-fluid-min-vw:          22.5;
     --sf-fluid-max-vw:          90;
@@ -262,6 +282,19 @@
     --sf-space-ratio-max:       1.333;
     --sf-space-base-min:        1;
     --sf-space-base-max:        2;
+
+    /* Custom fluid slot endpoints (unitless rem) */
+    --sf-fluid-custom-1-min:    1;
+    --sf-fluid-custom-1-max:    2;
+    --sf-fluid-custom-2-min:    1;
+    --sf-fluid-custom-2-max:    2;
+    --sf-fluid-custom-3-min:    1;
+    --sf-fluid-custom-3-max:    2;
+
+    /* Custom fluid slot outputs — read these */
+    --sf-fluid-custom-1: clamp(calc(var(--sf-fluid-custom-1-min) * 1rem), calc((var(--sf-fluid-custom-1-max) - var(--sf-fluid-custom-1-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-1-min) * 1rem), calc(var(--sf-fluid-custom-1-max) * 1rem));
+    --sf-fluid-custom-2: clamp(calc(var(--sf-fluid-custom-2-min) * 1rem), calc((var(--sf-fluid-custom-2-max) - var(--sf-fluid-custom-2-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-2-min) * 1rem), calc(var(--sf-fluid-custom-2-max) * 1rem));
+    --sf-fluid-custom-3: clamp(calc(var(--sf-fluid-custom-3-min) * 1rem), calc((var(--sf-fluid-custom-3-max) - var(--sf-fluid-custom-3-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-3-min) * 1rem), calc(var(--sf-fluid-custom-3-max) * 1rem));
   }
 
   /* ============================================================
@@ -747,6 +780,7 @@
     --sf-text-display-scale: 1;
     --sf-radius-scale:       1;
     --sf-motion-scale:       1;
+    --sf-section-scale:      1;
 
     /* ----------------------------------------------------------
        Font families
@@ -821,6 +855,13 @@
     --sf-leading-snug:    1.3;
     --sf-leading-normal:  1.5;
     --sf-leading-relaxed: 1.625;
+
+    /* Leading taper — progressive tightener for the per-size line-height
+       tokens in optional/tokens.sizes-extended.css. Each step up the type
+       scale subtracts `step-index × taper` from that step's default leading.
+       0 (default) keeps the curated stepped defaults; try 0.02 for a smooth
+       metric taper across the scale. */
+    --sf-leading-taper: 0;
 
     /* Display line-heights — display sizes need tighter leading than the
        --sf-leading-* scale provides. Not auto-applied (display sizes have no
@@ -1305,13 +1346,15 @@
     /* ----------------------------------------------------------
        Section padding
        ---------------------------------------------------------- */
+    /* All sizes multiply by --sf-section-scale — one dial re-rhythms
+       every section on the page (default 1 = no change). */
     --sf-section-pad:     var(--sf-section-pad--m);
-    --sf-section-pad--xs: var(--sf-space-xl);
-    --sf-section-pad--s:  var(--sf-space-2xl);
-    --sf-section-pad--m:  var(--sf-space-3xl);
-    --sf-section-pad--l:  var(--sf-space-4xl);
-    --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5);
-    --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2);
+    --sf-section-pad--xs: calc(var(--sf-space-xl)  * var(--sf-section-scale));
+    --sf-section-pad--s:  calc(var(--sf-space-2xl) * var(--sf-section-scale));
+    --sf-section-pad--m:  calc(var(--sf-space-3xl) * var(--sf-section-scale));
+    --sf-section-pad--l:  calc(var(--sf-space-4xl) * var(--sf-section-scale));
+    --sf-section-pad--xl: calc(var(--sf-space-4xl) * 1.5 * var(--sf-section-scale));
+    --sf-section-pad--2xl: calc(var(--sf-space-4xl) * 2 * var(--sf-section-scale));
 
     /* ----------------------------------------------------------
        Transition shorthands

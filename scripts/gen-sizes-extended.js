@@ -123,7 +123,9 @@ lines.push(`/* ============================================================
       line-height, font-weight, letter-spacing, and max-width on
       each text size step. The defaults encode typographic convention
       (large text = tight leading; small text = relaxed leading) but
-      every value is a token authors can override.
+      every value is a token authors can override. Line-heights also
+      subtract step-index x --sf-leading-taper (default 0) so one
+      knob progressively tightens leading up the whole scale.
 
    Load after core/tokens.css:
      @import "optional/tokens.sizes-extended.css";
@@ -210,10 +212,15 @@ lines.push(`
          }
        ---------------------------------------------------------- */`);
 
-for (const size of TEXT_SIZE_PROPS) {
+for (const [idx, size] of TEXT_SIZE_PROPS.entries()) {
   const prefix = `--sf-text-${size.name}`;
+  // Leading taper: each step up the scale subtracts idx × --sf-leading-taper
+  // from its curated default. Default taper of 0 keeps values identical.
+  const lineHeight = idx === 0
+    ? size.lineHeight
+    : `calc(${size.lineHeight} - ${idx} * var(--sf-leading-taper))`;
   lines.push('');
-  lines.push(`    ${padName(prefix + '-line-height:', 36)}  ${size.lineHeight};`);
+  lines.push(`    ${padName(prefix + '-line-height:', 36)}  ${lineHeight};`);
   lines.push(`    ${padName(prefix + '-font-weight:', 36)}  ${size.fontWeight};`);
   lines.push(`    ${padName(prefix + '-letter-spacing:', 36)}  ${size.letterSpacing};`);
   lines.push(`    ${padName(prefix + '-max-width:', 36)}  ${size.maxWidth};`);

@@ -138,6 +138,57 @@ test.describe('Typography: line-height tokens', () => {
       expect(lhs[i].val, `${lhs[i].name} < ${lhs[i + 1].name}`).toBeLessThan(lhs[i + 1].val);
     }
   });
+
+  test('--sf-leading-taper tightens per-size line-heights progressively', async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: 900 });
+    await page.goto(FIXTURE);
+    const [before, after] = await page.evaluate(() => {
+      const probe = () => {
+        const el = document.createElement('div');
+        el.textContent = 'x';
+        el.style.fontSize = '16px';
+        el.style.lineHeight = 'var(--sf-text-4xl-line-height)';
+        document.body.appendChild(el);
+        const v = parseFloat(getComputedStyle(el).lineHeight);
+        el.remove();
+        return v;
+      };
+      const a = probe();
+      document.documentElement.style.setProperty('--sf-leading-taper', '0.02');
+      const b = probe();
+      document.documentElement.style.removeProperty('--sf-leading-taper');
+      return [a, b];
+    });
+    // taper 0 (default) = curated default --sf-leading-tight (1.1) → 17.6px
+    expect(before).toBeCloseTo(16 * 1.1, 1);
+    // 4xl is step index 8: 1.1 − 8 × 0.02 = 0.94 → 15.04px
+    expect(after).toBeCloseTo(16 * (1.1 - 8 * 0.02), 1);
+  });
+});
+
+// ── Section rhythm dial ─────────────────────────────────────────
+test.describe('Section padding scale', () => {
+  test('--sf-section-scale: 2 doubles --sf-section-pad--m', async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: 900 });
+    await page.goto(FIXTURE);
+    const [before, after] = await page.evaluate(() => {
+      const probe = () => {
+        const el = document.createElement('div');
+        el.style.paddingTop = 'var(--sf-section-pad--m)';
+        document.body.appendChild(el);
+        const v = parseFloat(getComputedStyle(el).paddingTop);
+        el.remove();
+        return v;
+      };
+      const a = probe();
+      document.documentElement.style.setProperty('--sf-section-scale', '2');
+      const b = probe();
+      document.documentElement.style.removeProperty('--sf-section-scale');
+      return [a, b];
+    });
+    expect(before).toBeGreaterThan(0);
+    expect(after).toBeCloseTo(before * 2, 1);
+  });
 });
 
 // ── Spacing scale ────────────────────────────────────────────────
