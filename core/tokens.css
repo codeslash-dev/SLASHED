@@ -1182,9 +1182,22 @@
        --sf-color-text, --sf-color-text--secondary, --sf-color-heading. */
     --sf-contrast-bias:     0;
     /* Lightness crossover for text-on-color auto-contrast. Colours with
-       L above this value get dark text; below get light text. Default 0.6
-       guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your
-       brand sits in the 0.52-0.60 range and you prefer white text on it. */
+       L above this value get dark text; below get light text.
+       Default 0.6 guarantees ≥ 3:1 for most colours.
+       The binary choice (near-black or near-white) cannot guarantee 4.5:1 when
+       the background sits in the L ≈ 0.52–0.67 band — both extremes land near
+       the crossover. Two escape hatches:
+         1. Shift the threshold per surface — lower (e.g. 0.55) if your brand
+            lands near 0.6 and you prefer white text on it:
+              @layer slashed.overrides {
+                .sf-surface--primary { --sf-contrast-threshold: 0.55; }
+              }
+         2. Override the resolved token directly when an exact colour is needed:
+              @layer slashed.overrides {
+                .sf-surface--primary { --sf-color-text--on-primary: oklch(0.15 0 0); }
+              }
+       CSS `contrast-color()` (currently only in the spec, no browser support)
+       will replace this formula once it ships. */
     --sf-contrast-threshold: 0.6;
 
     --sf-safe-top:    env(safe-area-inset-top,    0px);

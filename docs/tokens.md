@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**864 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**874 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -593,21 +593,21 @@ rebrand workflow.
 
 ## Palette tokens (`optional/tokens.palette.css`)
 
-198 tokens.
+208 tokens.
 
 | Token | Default |
 |---|---|
-| `--sf-color-action-100` | `color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-surface))` |
-| `--sf-color-action-200` | `color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface))` |
-| `--sf-color-action-300` | `color-mix(in oklab, var(--sf-color-action) 40%, var(--sf-color-surface))` |
-| `--sf-color-action-400` | `color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface))` |
-| `--sf-color-action-50` | `color-mix(in oklab, var(--sf-color-action) 4%, var(--sf-color-surface))` |
+| `--sf-color-action-100` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))` |
+| `--sf-color-action-200` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))` |
+| `--sf-color-action-300` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))` |
+| `--sf-color-action-400` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))` |
+| `--sf-color-action-50` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))` |
 | `--sf-color-action-500` | `var(--sf-color-action)` |
-| `--sf-color-action-600` | `color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))` |
-| `--sf-color-action-700` | `color-mix(in oklab, var(--sf-color-action) 62%, var(--sf-color-text))` |
-| `--sf-color-action-800` | `color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text))` |
-| `--sf-color-action-900` | `color-mix(in oklab, var(--sf-color-action) 18%, var(--sf-color-text))` |
-| `--sf-color-action-950` | `color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-text))` |
+| `--sf-color-action-600` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))` |
+| `--sf-color-action-700` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))` |
+| `--sf-color-action-800` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))` |
+| `--sf-color-action-900` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))` |
+| `--sf-color-action-950` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))` |
 | `--sf-color-action-a10` | `color-mix(in oklab, var(--sf-color-action) 10%, transparent)` |
 | `--sf-color-action-a20` | `color-mix(in oklab, var(--sf-color-action) 20%, transparent)` |
 | `--sf-color-action-a30` | `color-mix(in oklab, var(--sf-color-action) 30%, transparent)` |
@@ -630,17 +630,17 @@ rebrand workflow.
 | `--sf-color-action-superlight` | `var(--sf-color-action-50)` |
 | `--sf-color-action-xdark` | `var(--sf-color-action-800)` |
 | `--sf-color-action-xlight` | `var(--sf-color-action-200)` |
-| `--sf-color-base-100` | `color-mix(in oklab, var(--sf-color-text) 8%, var(--sf-color-base))` |
-| `--sf-color-base-200` | `color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))` |
-| `--sf-color-base-300` | `color-mix(in oklab, var(--sf-color-text) 40%, var(--sf-color-base))` |
-| `--sf-color-base-400` | `color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base))` |
-| `--sf-color-base-50` | `color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-base))` |
+| `--sf-color-base-100` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))` |
+| `--sf-color-base-200` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))` |
+| `--sf-color-base-300` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))` |
+| `--sf-color-base-400` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))` |
+| `--sf-color-base-50` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))` |
 | `--sf-color-base-500` | `var(--sf-color-base)` |
-| `--sf-color-base-600` | `color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))` |
-| `--sf-color-base-700` | `color-mix(in oklab, var(--sf-color-base) 62%, var(--sf-color-text))` |
-| `--sf-color-base-800` | `color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))` |
-| `--sf-color-base-900` | `color-mix(in oklab, var(--sf-color-base) 18%, var(--sf-color-text))` |
-| `--sf-color-base-950` | `color-mix(in oklab, var(--sf-color-base) 8%, var(--sf-color-text))` |
+| `--sf-color-base-600` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))` |
+| `--sf-color-base-700` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))` |
+| `--sf-color-base-800` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))` |
+| `--sf-color-base-900` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))` |
+| `--sf-color-base-950` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))` |
 | `--sf-color-base-a10` | `color-mix(in oklab, var(--sf-color-base) 10%, transparent)` |
 | `--sf-color-base-a20` | `color-mix(in oklab, var(--sf-color-base) 20%, transparent)` |
 | `--sf-color-base-a30` | `color-mix(in oklab, var(--sf-color-base) 30%, transparent)` |
@@ -663,17 +663,17 @@ rebrand workflow.
 | `--sf-color-base-superlight` | `var(--sf-color-base-50)` |
 | `--sf-color-base-xdark` | `var(--sf-color-base-800)` |
 | `--sf-color-base-xlight` | `var(--sf-color-base-200)` |
-| `--sf-color-neutral-100` | `color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-surface))` |
-| `--sf-color-neutral-200` | `color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface))` |
-| `--sf-color-neutral-300` | `color-mix(in oklab, var(--sf-color-neutral) 40%, var(--sf-color-surface))` |
-| `--sf-color-neutral-400` | `color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface))` |
-| `--sf-color-neutral-50` | `color-mix(in oklab, var(--sf-color-neutral) 4%, var(--sf-color-surface))` |
+| `--sf-color-neutral-100` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))` |
+| `--sf-color-neutral-200` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` |
+| `--sf-color-neutral-300` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))` |
+| `--sf-color-neutral-400` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))` |
+| `--sf-color-neutral-50` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))` |
 | `--sf-color-neutral-500` | `var(--sf-color-neutral)` |
-| `--sf-color-neutral-600` | `color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text))` |
-| `--sf-color-neutral-700` | `color-mix(in oklab, var(--sf-color-neutral) 62%, var(--sf-color-text))` |
-| `--sf-color-neutral-800` | `color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text))` |
-| `--sf-color-neutral-900` | `color-mix(in oklab, var(--sf-color-neutral) 18%, var(--sf-color-text))` |
-| `--sf-color-neutral-950` | `color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-text))` |
+| `--sf-color-neutral-600` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))` |
+| `--sf-color-neutral-700` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))` |
+| `--sf-color-neutral-800` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))` |
+| `--sf-color-neutral-900` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` |
+| `--sf-color-neutral-950` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))` |
 | `--sf-color-neutral-a10` | `color-mix(in oklab, var(--sf-color-neutral) 10%, transparent)` |
 | `--sf-color-neutral-a20` | `color-mix(in oklab, var(--sf-color-neutral) 20%, transparent)` |
 | `--sf-color-neutral-a30` | `color-mix(in oklab, var(--sf-color-neutral) 30%, transparent)` |
@@ -696,17 +696,17 @@ rebrand workflow.
 | `--sf-color-neutral-superlight` | `var(--sf-color-neutral-50)` |
 | `--sf-color-neutral-xdark` | `var(--sf-color-neutral-800)` |
 | `--sf-color-neutral-xlight` | `var(--sf-color-neutral-200)` |
-| `--sf-color-primary-100` | `color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-surface))` |
-| `--sf-color-primary-200` | `color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface))` |
-| `--sf-color-primary-300` | `color-mix(in oklab, var(--sf-color-primary) 40%, var(--sf-color-surface))` |
+| `--sf-color-primary-100` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
+| `--sf-color-primary-200` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
+| `--sf-color-primary-300` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
 | `--sf-color-primary-400` | `color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))` |
-| `--sf-color-primary-50` | `color-mix(in oklab, var(--sf-color-primary) 4%, var(--sf-color-surface))` |
+| `--sf-color-primary-50` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
 | `--sf-color-primary-500` | `var(--sf-color-primary)` |
 | `--sf-color-primary-600` | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` |
-| `--sf-color-primary-700` | `color-mix(in oklab, var(--sf-color-primary) 62%, var(--sf-color-text))` |
-| `--sf-color-primary-800` | `color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text))` |
-| `--sf-color-primary-900` | `color-mix(in oklab, var(--sf-color-primary) 18%, var(--sf-color-text))` |
-| `--sf-color-primary-950` | `color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-text))` |
+| `--sf-color-primary-700` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` |
+| `--sf-color-primary-800` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` |
+| `--sf-color-primary-900` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` |
+| `--sf-color-primary-950` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))` |
 | `--sf-color-primary-a10` | `color-mix(in oklab, var(--sf-color-primary) 10%, transparent)` |
 | `--sf-color-primary-a20` | `color-mix(in oklab, var(--sf-color-primary) 20%, transparent)` |
 | `--sf-color-primary-a30` | `color-mix(in oklab, var(--sf-color-primary) 30%, transparent)` |
@@ -729,17 +729,17 @@ rebrand workflow.
 | `--sf-color-primary-superlight` | `var(--sf-color-primary-50)` |
 | `--sf-color-primary-xdark` | `var(--sf-color-primary-800)` |
 | `--sf-color-primary-xlight` | `var(--sf-color-primary-200)` |
-| `--sf-color-secondary-100` | `color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-surface))` |
-| `--sf-color-secondary-200` | `color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface))` |
-| `--sf-color-secondary-300` | `color-mix(in oklab, var(--sf-color-secondary) 40%, var(--sf-color-surface))` |
-| `--sf-color-secondary-400` | `color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface))` |
-| `--sf-color-secondary-50` | `color-mix(in oklab, var(--sf-color-secondary) 4%, var(--sf-color-surface))` |
+| `--sf-color-secondary-100` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
+| `--sf-color-secondary-200` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
+| `--sf-color-secondary-300` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
+| `--sf-color-secondary-400` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))` |
+| `--sf-color-secondary-50` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
 | `--sf-color-secondary-500` | `var(--sf-color-secondary)` |
-| `--sf-color-secondary-600` | `color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text))` |
-| `--sf-color-secondary-700` | `color-mix(in oklab, var(--sf-color-secondary) 62%, var(--sf-color-text))` |
-| `--sf-color-secondary-800` | `color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text))` |
-| `--sf-color-secondary-900` | `color-mix(in oklab, var(--sf-color-secondary) 18%, var(--sf-color-text))` |
-| `--sf-color-secondary-950` | `color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-text))` |
+| `--sf-color-secondary-600` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))` |
+| `--sf-color-secondary-700` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))` |
+| `--sf-color-secondary-800` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))` |
+| `--sf-color-secondary-900` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` |
+| `--sf-color-secondary-950` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))` |
 | `--sf-color-secondary-a10` | `color-mix(in oklab, var(--sf-color-secondary) 10%, transparent)` |
 | `--sf-color-secondary-a20` | `color-mix(in oklab, var(--sf-color-secondary) 20%, transparent)` |
 | `--sf-color-secondary-a30` | `color-mix(in oklab, var(--sf-color-secondary) 30%, transparent)` |
@@ -762,17 +762,17 @@ rebrand workflow.
 | `--sf-color-secondary-superlight` | `var(--sf-color-secondary-50)` |
 | `--sf-color-secondary-xdark` | `var(--sf-color-secondary-800)` |
 | `--sf-color-secondary-xlight` | `var(--sf-color-secondary-200)` |
-| `--sf-color-tertiary-100` | `color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-surface))` |
-| `--sf-color-tertiary-200` | `color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface))` |
-| `--sf-color-tertiary-300` | `color-mix(in oklab, var(--sf-color-tertiary) 40%, var(--sf-color-surface))` |
-| `--sf-color-tertiary-400` | `color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface))` |
-| `--sf-color-tertiary-50` | `color-mix(in oklab, var(--sf-color-tertiary) 4%, var(--sf-color-surface))` |
+| `--sf-color-tertiary-100` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
+| `--sf-color-tertiary-200` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
+| `--sf-color-tertiary-300` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
+| `--sf-color-tertiary-400` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))` |
+| `--sf-color-tertiary-50` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
 | `--sf-color-tertiary-500` | `var(--sf-color-tertiary)` |
-| `--sf-color-tertiary-600` | `color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))` |
-| `--sf-color-tertiary-700` | `color-mix(in oklab, var(--sf-color-tertiary) 62%, var(--sf-color-text))` |
-| `--sf-color-tertiary-800` | `color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text))` |
-| `--sf-color-tertiary-900` | `color-mix(in oklab, var(--sf-color-tertiary) 18%, var(--sf-color-text))` |
-| `--sf-color-tertiary-950` | `color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-text))` |
+| `--sf-color-tertiary-600` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))` |
+| `--sf-color-tertiary-700` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))` |
+| `--sf-color-tertiary-800` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))` |
+| `--sf-color-tertiary-900` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` |
+| `--sf-color-tertiary-950` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))` |
 | `--sf-color-tertiary-a10` | `color-mix(in oklab, var(--sf-color-tertiary) 10%, transparent)` |
 | `--sf-color-tertiary-a20` | `color-mix(in oklab, var(--sf-color-tertiary) 20%, transparent)` |
 | `--sf-color-tertiary-a30` | `color-mix(in oklab, var(--sf-color-tertiary) 30%, transparent)` |
@@ -795,6 +795,16 @@ rebrand workflow.
 | `--sf-color-tertiary-superlight` | `var(--sf-color-tertiary-50)` |
 | `--sf-color-tertiary-xdark` | `var(--sf-color-tertiary-800)` |
 | `--sf-color-tertiary-xlight` | `var(--sf-color-tertiary-200)` |
+| `--sf-palette-mix-100` | `8%` |
+| `--sf-palette-mix-200` | `20%` |
+| `--sf-palette-mix-300` | `40%` |
+| `--sf-palette-mix-400` | `65%` |
+| `--sf-palette-mix-50` | `4%` |
+| `--sf-palette-mix-600` | `82%` |
+| `--sf-palette-mix-700` | `62%` |
+| `--sf-palette-mix-800` | `38%` |
+| `--sf-palette-mix-900` | `18%` |
+| `--sf-palette-mix-950` | `8%` |
 
 ## Sizes extended tokens (`optional/tokens.sizes-extended.css`)
 

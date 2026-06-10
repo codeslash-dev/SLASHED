@@ -31,25 +31,51 @@
      shade aliases     superlight/xlight/lighter/darker/xdark/superdark
                        → numeric steps via var() (one override propagates).
      functional aliases hover/active/subtle/muted/ghost → other aliases.
+
+   RAMP SHAPE — PUBLIC-ADVANCED
+   Override --sf-palette-mix-{step} on :root to reshape the entire ramp
+   without editing every token. For example, to make tints spread wider:
+     :root { --sf-palette-mix-200: 30%; --sf-palette-mix-300: 55%; }
+   Applies to all 6 brand families simultaneously. For per-family
+   adjustment override the specific token directly instead:
+     :root { --sf-color-primary-300: color-mix(in oklab, var(--sf-color-primary) 55%, var(--sf-color-surface)); }
    ============================================================ */
 
 @layer slashed.tokens {
   :root {
 
     /* ----------------------------------------------------------
+       Palette shade mix percentages — PUBLIC-ADVANCED
+       Controls how far each numeric step blends toward surface (tints,
+       steps 50-400) or toward text (shades, steps 600-950). 500 = the
+       base color itself (no mixing). These are <percentage> values
+       consumed by color-mix() in every family below.
+       ---------------------------------------------------------- */
+    --sf-palette-mix-50:  4%;
+    --sf-palette-mix-100: 8%;
+    --sf-palette-mix-200: 20%;
+    --sf-palette-mix-300: 40%;
+    --sf-palette-mix-400: 65%;
+    --sf-palette-mix-600: 82%;
+    --sf-palette-mix-700: 62%;
+    --sf-palette-mix-800: 38%;
+    --sf-palette-mix-900: 18%;
+    --sf-palette-mix-950: 8%;
+
+    /* ----------------------------------------------------------
        primary
        ---------------------------------------------------------- */
-    --sf-color-primary-50:  color-mix(in oklab, var(--sf-color-primary)  4%, var(--sf-color-surface));
-    --sf-color-primary-100: color-mix(in oklab, var(--sf-color-primary)  8%, var(--sf-color-surface));
-    --sf-color-primary-200: color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface));
-    --sf-color-primary-300: color-mix(in oklab, var(--sf-color-primary) 40%, var(--sf-color-surface));
+    --sf-color-primary-50:  color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50),  var(--sf-color-surface));
+    --sf-color-primary-100: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface));
+    --sf-color-primary-200: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface));
+    --sf-color-primary-300: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface));
     --sf-color-primary-400: color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface));
     --sf-color-primary-500: var(--sf-color-primary);
     --sf-color-primary-600: color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text));
-    --sf-color-primary-700: color-mix(in oklab, var(--sf-color-primary) 62%, var(--sf-color-text));
-    --sf-color-primary-800: color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text));
-    --sf-color-primary-900: color-mix(in oklab, var(--sf-color-primary) 18%, var(--sf-color-text));
-    --sf-color-primary-950: color-mix(in oklab, var(--sf-color-primary)  8%, var(--sf-color-text));
+    --sf-color-primary-700: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text));
+    --sf-color-primary-800: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text));
+    --sf-color-primary-900: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text));
+    --sf-color-primary-950: color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text));
 
     --sf-color-primary-a5:  color-mix(in oklab, var(--sf-color-primary)  5%, transparent);
     --sf-color-primary-a10: color-mix(in oklab, var(--sf-color-primary) 10%, transparent);
@@ -80,17 +106,17 @@
     /* ----------------------------------------------------------
        secondary
        ---------------------------------------------------------- */
-    --sf-color-secondary-50:  color-mix(in oklab, var(--sf-color-secondary)  4%, var(--sf-color-surface));
-    --sf-color-secondary-100: color-mix(in oklab, var(--sf-color-secondary)  8%, var(--sf-color-surface));
-    --sf-color-secondary-200: color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface));
-    --sf-color-secondary-300: color-mix(in oklab, var(--sf-color-secondary) 40%, var(--sf-color-surface));
-    --sf-color-secondary-400: color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface));
+    --sf-color-secondary-50:  color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50),  var(--sf-color-surface));
+    --sf-color-secondary-100: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface));
+    --sf-color-secondary-200: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface));
+    --sf-color-secondary-300: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface));
+    --sf-color-secondary-400: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface));
     --sf-color-secondary-500: var(--sf-color-secondary);
-    --sf-color-secondary-600: color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text));
-    --sf-color-secondary-700: color-mix(in oklab, var(--sf-color-secondary) 62%, var(--sf-color-text));
-    --sf-color-secondary-800: color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text));
-    --sf-color-secondary-900: color-mix(in oklab, var(--sf-color-secondary) 18%, var(--sf-color-text));
-    --sf-color-secondary-950: color-mix(in oklab, var(--sf-color-secondary)  8%, var(--sf-color-text));
+    --sf-color-secondary-600: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text));
+    --sf-color-secondary-700: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text));
+    --sf-color-secondary-800: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text));
+    --sf-color-secondary-900: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text));
+    --sf-color-secondary-950: color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text));
 
     --sf-color-secondary-a5:  color-mix(in oklab, var(--sf-color-secondary)  5%, transparent);
     --sf-color-secondary-a10: color-mix(in oklab, var(--sf-color-secondary) 10%, transparent);
@@ -121,17 +147,17 @@
     /* ----------------------------------------------------------
        tertiary
        ---------------------------------------------------------- */
-    --sf-color-tertiary-50:  color-mix(in oklab, var(--sf-color-tertiary)  4%, var(--sf-color-surface));
-    --sf-color-tertiary-100: color-mix(in oklab, var(--sf-color-tertiary)  8%, var(--sf-color-surface));
-    --sf-color-tertiary-200: color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface));
-    --sf-color-tertiary-300: color-mix(in oklab, var(--sf-color-tertiary) 40%, var(--sf-color-surface));
-    --sf-color-tertiary-400: color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface));
+    --sf-color-tertiary-50:  color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50),  var(--sf-color-surface));
+    --sf-color-tertiary-100: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface));
+    --sf-color-tertiary-200: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface));
+    --sf-color-tertiary-300: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface));
+    --sf-color-tertiary-400: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface));
     --sf-color-tertiary-500: var(--sf-color-tertiary);
-    --sf-color-tertiary-600: color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text));
-    --sf-color-tertiary-700: color-mix(in oklab, var(--sf-color-tertiary) 62%, var(--sf-color-text));
-    --sf-color-tertiary-800: color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text));
-    --sf-color-tertiary-900: color-mix(in oklab, var(--sf-color-tertiary) 18%, var(--sf-color-text));
-    --sf-color-tertiary-950: color-mix(in oklab, var(--sf-color-tertiary)  8%, var(--sf-color-text));
+    --sf-color-tertiary-600: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text));
+    --sf-color-tertiary-700: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text));
+    --sf-color-tertiary-800: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text));
+    --sf-color-tertiary-900: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text));
+    --sf-color-tertiary-950: color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text));
 
     --sf-color-tertiary-a5:  color-mix(in oklab, var(--sf-color-tertiary)  5%, transparent);
     --sf-color-tertiary-a10: color-mix(in oklab, var(--sf-color-tertiary) 10%, transparent);
@@ -162,17 +188,17 @@
     /* ----------------------------------------------------------
        action
        ---------------------------------------------------------- */
-    --sf-color-action-50:  color-mix(in oklab, var(--sf-color-action)  4%, var(--sf-color-surface));
-    --sf-color-action-100: color-mix(in oklab, var(--sf-color-action)  8%, var(--sf-color-surface));
-    --sf-color-action-200: color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface));
-    --sf-color-action-300: color-mix(in oklab, var(--sf-color-action) 40%, var(--sf-color-surface));
-    --sf-color-action-400: color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface));
+    --sf-color-action-50:  color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50),  var(--sf-color-surface));
+    --sf-color-action-100: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface));
+    --sf-color-action-200: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface));
+    --sf-color-action-300: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface));
+    --sf-color-action-400: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface));
     --sf-color-action-500: var(--sf-color-action);
-    --sf-color-action-600: color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text));
-    --sf-color-action-700: color-mix(in oklab, var(--sf-color-action) 62%, var(--sf-color-text));
-    --sf-color-action-800: color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text));
-    --sf-color-action-900: color-mix(in oklab, var(--sf-color-action) 18%, var(--sf-color-text));
-    --sf-color-action-950: color-mix(in oklab, var(--sf-color-action)  8%, var(--sf-color-text));
+    --sf-color-action-600: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text));
+    --sf-color-action-700: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text));
+    --sf-color-action-800: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text));
+    --sf-color-action-900: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text));
+    --sf-color-action-950: color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text));
 
     --sf-color-action-a5:  color-mix(in oklab, var(--sf-color-action)  5%, transparent);
     --sf-color-action-a10: color-mix(in oklab, var(--sf-color-action) 10%, transparent);
@@ -203,17 +229,17 @@
     /* ----------------------------------------------------------
        neutral
        ---------------------------------------------------------- */
-    --sf-color-neutral-50:  color-mix(in oklab, var(--sf-color-neutral)  4%, var(--sf-color-surface));
-    --sf-color-neutral-100: color-mix(in oklab, var(--sf-color-neutral)  8%, var(--sf-color-surface));
-    --sf-color-neutral-200: color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface));
-    --sf-color-neutral-300: color-mix(in oklab, var(--sf-color-neutral) 40%, var(--sf-color-surface));
-    --sf-color-neutral-400: color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface));
+    --sf-color-neutral-50:  color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50),  var(--sf-color-surface));
+    --sf-color-neutral-100: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface));
+    --sf-color-neutral-200: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface));
+    --sf-color-neutral-300: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface));
+    --sf-color-neutral-400: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface));
     --sf-color-neutral-500: var(--sf-color-neutral);
-    --sf-color-neutral-600: color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text));
-    --sf-color-neutral-700: color-mix(in oklab, var(--sf-color-neutral) 62%, var(--sf-color-text));
-    --sf-color-neutral-800: color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text));
-    --sf-color-neutral-900: color-mix(in oklab, var(--sf-color-neutral) 18%, var(--sf-color-text));
-    --sf-color-neutral-950: color-mix(in oklab, var(--sf-color-neutral)  8%, var(--sf-color-text));
+    --sf-color-neutral-600: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text));
+    --sf-color-neutral-700: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text));
+    --sf-color-neutral-800: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text));
+    --sf-color-neutral-900: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text));
+    --sf-color-neutral-950: color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text));
 
     --sf-color-neutral-a5:  color-mix(in oklab, var(--sf-color-neutral)  5%, transparent);
     --sf-color-neutral-a10: color-mix(in oklab, var(--sf-color-neutral) 10%, transparent);
@@ -242,21 +268,56 @@
 
 
     /* ----------------------------------------------------------
-       base — inverted mix direction (V-shaped ramp by design):
-       tints mix --sf-color-text INTO base, shades mix base INTO text.
-       50 = lightest base, 950 = darkest. See architecture.md.
+       base — V-shaped ramp (inverted tint direction)
+       ────────────────────────────────────────────────────────
+       Unlike every other family, base is a near-white (light mode)
+       or near-black (dark mode) surface token, not a mid-lightness
+       brand colour. There is nowhere "lighter" to go from near-white,
+       so the tint direction is inverted: steps 50-400 mix --sf-color-text
+       INTO base (progressively darker in light mode, progressively
+       lighter in dark mode). Steps 600-950 mix base INTO text in both
+       modes (the same direction as other families' shades).
+
+       Approximate OKLCH L values — default palette, light mode:
+         base-50  ≈ 0.946   barely off-surface (dividers, zebra rows)
+         base-100 ≈ 0.931   subtle surface variant
+         base-200 ≈ 0.900   light gray (well / inset areas)
+         base-300 ≈ 0.840   medium-light gray
+         base-400 ≈ 0.748   medium gray (secondary UI elements)
+         base-500 ≈ 0.960   base itself (source token)
+         base-600 ≈ 0.850   medium-light (toward text, from 500)
+         base-700 ≈ 0.762
+         base-800 ≈ 0.630
+         base-900 ≈ 0.337
+         base-950 ≈ 0.170   near-black
+
+       Dark mode reverses the visual: base-50 becomes near-white-ish,
+       base-950 becomes near-black-ish, base-500 is the dark surface.
+
+       SEMANTIC ALIAS MAPPING (consistent position in ramp, not absolute L):
+         superlight = base-50   (closest to surface — barely distinguishable)
+         xlight     = base-200  (light gray)
+         lighter    = base-400  (medium gray — "lighter contrast" toward text)
+         darker     = base-600  (one step past base toward text from shade side)
+         xdark      = base-800
+         superdark  = base-950  (near ink color)
+
+       When you need surface-level differentiation, prefer
+       --sf-color-inset / --sf-color-raised / --sf-color-bg over the
+       numbered scale. For overlays, prefer the alpha variants (-a10…-a90)
+       which are mode-safe by transparency and compose cleanly on any bg.
        ---------------------------------------------------------- */
-    --sf-color-base-50:  color-mix(in oklab, var(--sf-color-text)  4%, var(--sf-color-base));
-    --sf-color-base-100: color-mix(in oklab, var(--sf-color-text)  8%, var(--sf-color-base));
-    --sf-color-base-200: color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base));
-    --sf-color-base-300: color-mix(in oklab, var(--sf-color-text) 40%, var(--sf-color-base));
-    --sf-color-base-400: color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base));
+    --sf-color-base-50:  color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50),  var(--sf-color-base));
+    --sf-color-base-100: color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base));
+    --sf-color-base-200: color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base));
+    --sf-color-base-300: color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base));
+    --sf-color-base-400: color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base));
     --sf-color-base-500: var(--sf-color-base);
-    --sf-color-base-600: color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text));
-    --sf-color-base-700: color-mix(in oklab, var(--sf-color-base) 62%, var(--sf-color-text));
-    --sf-color-base-800: color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text));
-    --sf-color-base-900: color-mix(in oklab, var(--sf-color-base) 18%, var(--sf-color-text));
-    --sf-color-base-950: color-mix(in oklab, var(--sf-color-base)  8%, var(--sf-color-text));
+    --sf-color-base-600: color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text));
+    --sf-color-base-700: color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text));
+    --sf-color-base-800: color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text));
+    --sf-color-base-900: color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text));
+    --sf-color-base-950: color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text));
 
     --sf-color-base-a5:  color-mix(in oklab, var(--sf-color-base)  5%, transparent);
     --sf-color-base-a10: color-mix(in oklab, var(--sf-color-base) 10%, transparent);

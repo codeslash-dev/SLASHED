@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1054 elements** — 831 tokens, 223 classes.
+**1064 elements** — 841 tokens, 223 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 893 | Everyday surface. SemVer-stable. |
+| PUBLIC | 903 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 160 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (831)
+## Tokens (841)
 
 ### Color fallback (legacy HSL) (33)
 
@@ -275,7 +275,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-container-wide` | PUBLIC | knob | container | `90rem` | Containers |
 | `--sf-content-gap` | PUBLIC | consumption | content | `var(--sf-space-s)` | gap between BEM elements |
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | contrast | `0` | Global text-contrast knob. Nudges derived reading-text colours toward the extremes (darker in light mode, lighter in dark mode). Positive = more contrast; 0 = no change. Consumed by --sf-color-text, --sf-color-text--secondary, --sf-color-heading. |
-| `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
 | `--sf-current-font-weight` | PUBLIC | consumption | current | `var(--sf-font-weight-bold)` | State token — consumed by .is-current in states.css. Override to match your nav design (e.g. semibold for thin fonts). |
 | `--sf-display-l-line-height` | PUBLIC | knob | display | `1` | Display line-heights — display sizes need tighter leading than the --sf-leading-* scale provides. Not auto-applied (display sizes have no dedicated element); wire alongside font-size: h1.hero { font-size: var(--sf-text-display-l); line-height: var(--sf-display-l-line-height); } |
 | `--sf-display-m-line-height` | PUBLIC | knob | display | `1.05` | Display line-heights — display sizes need tighter leading than the --sf-leading-* scale provides. Not auto-applied (display sizes have no dedicated element); wire alongside font-size: h1.hero { font-size: var(--sf-text-display-l); line-height: var(--sf-display-l-line-height); } |
@@ -437,10 +437,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-ratio-portrait` | PUBLIC | knob | ratio | `3 / 4` | Aspect ratios |
 | `--sf-ratio-square` | PUBLIC | knob | ratio | `1` | Aspect ratios |
 | `--sf-ratio-video` | PUBLIC | knob | ratio | `16 / 9` | Aspect ratios |
-| `--sf-safe-bottom` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-bottom, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
-| `--sf-safe-left` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-left, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
-| `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
-| `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. Shift down (e.g. 0.55) if your brand sits in the 0.52-0.60 range and you prefer white text on it. |
+| `--sf-safe-bottom` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-bottom, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
+| `--sf-safe-left` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-left, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
+| `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
+| `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | scroll | `cover 30%` | consumer API. Attach these to your own scroll-timeline via animation-range. Not consumed by the framework itself; intended for BEM component authors. |
 | `--sf-scroll-timeline-range-start` | PUBLIC-ADVANCED | knob | scroll | `entry 0%` | consumer API. Attach these to your own scroll-timeline via animation-range. Not consumed by the framework itself; intended for BEM component authors. |
 | `--sf-scrollbar-thumb` | PUBLIC | consumption | scrollbar | `var(--sf-color-neutral)` | Scrollbar |
@@ -631,21 +631,21 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | input for the generic .sf-surface macro. Set it on any element carrying the class and the macro derives background, auto-contrast foreground, and the full contextual token set from it: <section class="sf-surface" style="--sf-surface-color: var(--sf-color-primary-100)">… |
 | `--sf-truncate-suffix` | PUBLIC-ADVANCED | knob | truncate | `"\\2026"` | ellipsis character for .sf-truncate. Stays as a token so consumers can swap to ASCII "..." or a localised character without rewriting the rule. The CSS text-overflow: ellipsis property doesn't read it directly; it's exposed for consumer-built variants. |
 
-### Palette tokens (132)
+### Palette tokens (142)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
-| `--sf-color-action-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-surface))` | action |
-| `--sf-color-action-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface))` | action |
-| `--sf-color-action-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 40%, var(--sf-color-surface))` | action |
-| `--sf-color-action-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface))` | action |
-| `--sf-color-action-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 4%, var(--sf-color-surface))` | action |
+| `--sf-color-action-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))` | action |
+| `--sf-color-action-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))` | action |
+| `--sf-color-action-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))` | action |
+| `--sf-color-action-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))` | action |
+| `--sf-color-action-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))` | action |
 | `--sf-color-action-500` | PUBLIC | consumption | color | `var(--sf-color-action)` | action |
-| `--sf-color-action-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))` | action |
-| `--sf-color-action-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 62%, var(--sf-color-text))` | action |
-| `--sf-color-action-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text))` | action |
-| `--sf-color-action-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 18%, var(--sf-color-text))` | action |
-| `--sf-color-action-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-text))` | action |
+| `--sf-color-action-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))` | action |
+| `--sf-color-action-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))` | action |
+| `--sf-color-action-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))` | action |
+| `--sf-color-action-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))` | action |
+| `--sf-color-action-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))` | action |
 | `--sf-color-action-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 10%, transparent)` | action |
 | `--sf-color-action-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 20%, transparent)` | action |
 | `--sf-color-action-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 30%, transparent)` | action |
@@ -657,39 +657,39 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 80%, transparent)` | action |
 | `--sf-color-action-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 90%, transparent)` | action |
 | `--sf-color-action-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) 95%, transparent)` | action |
-| `--sf-color-base-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) 8%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) 40%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-base))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-500` | PUBLIC | consumption | color | `var(--sf-color-base)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 62%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 18%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 8%, var(--sf-color-text))` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 10%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 20%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 30%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a40` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 40%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a5` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 5%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 50%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a60` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 60%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a70` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 70%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 80%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 90%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-base-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 95%, transparent)` | inverted mix direction (V-shaped ramp by design): tints mix --sf-color-text INTO base, shades mix base INTO text. 50 = lightest base, 950 = darkest. See architecture.md. |
-| `--sf-color-neutral-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-surface))` | neutral |
-| `--sf-color-neutral-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface))` | neutral |
-| `--sf-color-neutral-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 40%, var(--sf-color-surface))` | neutral |
-| `--sf-color-neutral-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface))` | neutral |
-| `--sf-color-neutral-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 4%, var(--sf-color-surface))` | neutral |
+| `--sf-color-base-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-500` | PUBLIC | consumption | color | `var(--sf-color-base)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 10%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 20%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 30%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a40` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 40%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a5` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 5%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 50%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a60` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 60%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a70` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 70%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 80%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 90%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-base-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) 95%, transparent)` | V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere "lighter" to go from near-white, so the tint direction is inverted: steps 50-400 mix… |
+| `--sf-color-neutral-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))` | neutral |
+| `--sf-color-neutral-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))` | neutral |
 | `--sf-color-neutral-500` | PUBLIC | consumption | color | `var(--sf-color-neutral)` | neutral |
-| `--sf-color-neutral-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text))` | neutral |
-| `--sf-color-neutral-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 62%, var(--sf-color-text))` | neutral |
-| `--sf-color-neutral-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text))` | neutral |
-| `--sf-color-neutral-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 18%, var(--sf-color-text))` | neutral |
-| `--sf-color-neutral-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` | neutral |
+| `--sf-color-neutral-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))` | neutral |
 | `--sf-color-neutral-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 10%, transparent)` | neutral |
 | `--sf-color-neutral-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 20%, transparent)` | neutral |
 | `--sf-color-neutral-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 30%, transparent)` | neutral |
@@ -701,17 +701,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 80%, transparent)` | neutral |
 | `--sf-color-neutral-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 90%, transparent)` | neutral |
 | `--sf-color-neutral-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) 95%, transparent)` | neutral |
-| `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-surface))` | primary |
-| `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface))` | primary |
-| `--sf-color-primary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 40%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` | primary |
+| `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` | primary |
+| `--sf-color-primary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` | primary |
 | `--sf-color-primary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))` | primary |
-| `--sf-color-primary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 4%, var(--sf-color-surface))` | primary |
+| `--sf-color-primary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` | primary |
 | `--sf-color-primary-500` | PUBLIC | consumption | color | `var(--sf-color-primary)` | primary |
 | `--sf-color-primary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` | primary |
-| `--sf-color-primary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 62%, var(--sf-color-text))` | primary |
-| `--sf-color-primary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text))` | primary |
-| `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 18%, var(--sf-color-text))` | primary |
-| `--sf-color-primary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-text))` | primary |
+| `--sf-color-primary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` | primary |
+| `--sf-color-primary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` | primary |
+| `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` | primary |
+| `--sf-color-primary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))` | primary |
 | `--sf-color-primary-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 10%, transparent)` | primary |
 | `--sf-color-primary-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 20%, transparent)` | primary |
 | `--sf-color-primary-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 30%, transparent)` | primary |
@@ -723,17 +723,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 80%, transparent)` | primary |
 | `--sf-color-primary-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 90%, transparent)` | primary |
 | `--sf-color-primary-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) 95%, transparent)` | primary |
-| `--sf-color-secondary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-surface))` | secondary |
-| `--sf-color-secondary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface))` | secondary |
-| `--sf-color-secondary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 40%, var(--sf-color-surface))` | secondary |
-| `--sf-color-secondary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface))` | secondary |
-| `--sf-color-secondary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 4%, var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))` | secondary |
+| `--sf-color-secondary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))` | secondary |
 | `--sf-color-secondary-500` | PUBLIC | consumption | color | `var(--sf-color-secondary)` | secondary |
-| `--sf-color-secondary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text))` | secondary |
-| `--sf-color-secondary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 62%, var(--sf-color-text))` | secondary |
-| `--sf-color-secondary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text))` | secondary |
-| `--sf-color-secondary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 18%, var(--sf-color-text))` | secondary |
-| `--sf-color-secondary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` | secondary |
+| `--sf-color-secondary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))` | secondary |
 | `--sf-color-secondary-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 10%, transparent)` | secondary |
 | `--sf-color-secondary-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 20%, transparent)` | secondary |
 | `--sf-color-secondary-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 30%, transparent)` | secondary |
@@ -745,17 +745,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 80%, transparent)` | secondary |
 | `--sf-color-secondary-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 90%, transparent)` | secondary |
 | `--sf-color-secondary-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) 95%, transparent)` | secondary |
-| `--sf-color-tertiary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-surface))` | tertiary |
-| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface))` | tertiary |
-| `--sf-color-tertiary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 40%, var(--sf-color-surface))` | tertiary |
-| `--sf-color-tertiary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface))` | tertiary |
-| `--sf-color-tertiary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 4%, var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))` | tertiary |
+| `--sf-color-tertiary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))` | tertiary |
 | `--sf-color-tertiary-500` | PUBLIC | consumption | color | `var(--sf-color-tertiary)` | tertiary |
-| `--sf-color-tertiary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))` | tertiary |
-| `--sf-color-tertiary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 62%, var(--sf-color-text))` | tertiary |
-| `--sf-color-tertiary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text))` | tertiary |
-| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 18%, var(--sf-color-text))` | tertiary |
-| `--sf-color-tertiary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` | tertiary |
+| `--sf-color-tertiary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))` | tertiary |
 | `--sf-color-tertiary-a10` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 10%, transparent)` | tertiary |
 | `--sf-color-tertiary-a20` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 20%, transparent)` | tertiary |
 | `--sf-color-tertiary-a30` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 30%, transparent)` | tertiary |
@@ -767,6 +767,16 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-a80` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 80%, transparent)` | tertiary |
 | `--sf-color-tertiary-a90` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 90%, transparent)` | tertiary |
 | `--sf-color-tertiary-a95` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) 95%, transparent)` | tertiary |
+| `--sf-palette-mix-100` | PUBLIC | knob | palette | `8%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-200` | PUBLIC | knob | palette | `20%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-300` | PUBLIC | knob | palette | `40%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-400` | PUBLIC | knob | palette | `65%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-50` | PUBLIC | knob | palette | `4%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-600` | PUBLIC | knob | palette | `82%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-700` | PUBLIC | knob | palette | `62%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-800` | PUBLIC | knob | palette | `38%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-900` | PUBLIC | knob | palette | `18%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
+| `--sf-palette-mix-950` | PUBLIC | knob | palette | `8%` | PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below. |
 
 ### Sizes-extended tokens (108)
 
@@ -901,10 +911,10 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-alternate` | PUBLIC | layout | Alternate (zigzag / media-object) | Alternating two-column layouts (container-query responsive). Every other row reverses its children's order. Establishes a named container `sf-alternate` and binds the responsive query to that name — so a `.sf-alternate` nested inside another container (e.g. `.sf-bento`) still… |
 | `.sf-bento` | PUBLIC | layout | Bento grid | Free-form grid with auto-flow dense, responsive via CQ. Override: style="--sf-bento-cols: 4; --sf-bento-row: 12rem" |
-| `.sf-bento--2` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
-| `.sf-bento--4` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
-| `.sf-bento--compact` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
-| `.sf-bento--tall` | PUBLIC | layout | Bento grid | single column at smallest container sizes |
+| `.sf-bento--2` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
+| `.sf-bento--4` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
+| `.sf-bento--compact` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
+| `.sf-bento--tall` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
 | `.sf-box` | PUBLIC | layout | Box | Isolated unit with padding and an optional border. Outline instead of border — doesn't disturb the box model when toggled. Override: style="--sf-box-padding: 1rem; --sf-box-border-width: 1px" |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
 | `.sf-center` | PUBLIC | layout | Center | Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style="--sf-center-max: 60rem" |
