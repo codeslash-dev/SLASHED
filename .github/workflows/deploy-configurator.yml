@@ -1,55 +1,86 @@
-name: Deploy configurator to Pages
+name: Deploy to Pages
 
-# Builds the standalone configurator (configurator/) and publishes its static
-# dist/ to GitHub Pages. The app's `prebuild` re-syncs its token catalogue from
-# docs/api-index.json, so each deploy reflects the framework API at that commit.
+# Builds the full docs site and publishes to GitHub Pages:
+#   /                  — landing page (index.md via Jekyll)
+#   /docs/             — documentation (docs/*.md via Jekyll + raw HTML files)
+#   /configurator/     — standalone Svelte configurator app
 #
-# Runs on merges to main that touch the app or the API index it is generated
-# from, and on demand via the Actions tab.
+# Jekyll processes docs/*.md into HTML using the default layout.
+# The built CSS bundles (dist/) and optional CSS are injected afterwards so
+# that demo.html's relative paths resolve correctly in the browser.
+#
+# Runs on merges to main that touch any site-relevant path, and on demand.
 
 on:
   push:
     branches: [main]
     paths:
       - 'configurator/**'
-      - 'docs/api-index.json'
+      - 'core/**'
+      - 'optional/**'
+      - 'docs/**'
+      - 'index.md'
+      - '_layouts/**'
+      - '_config.yml'
+      - 'CNAME'
       - '.github/workflows/deploy-configurator.yml'
   workflow_dispatch:
 
-# Least-privilege by default; the deploy job widens to the scopes Pages needs.
 permissions:
   contents: read
 
-# Pages allows only one concurrent deployment. Don't cancel an in-flight
-# deploy (that can leave the environment half-updated); let it finish and
-# queue the newest run after it.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
   build:
-    name: Build configurator
+    name: Build site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
         with:
           persist-credentials: false
+
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: configurator/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            configurator/package-lock.json
+
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d  # v6
-      - name: Install dependencies
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build CSS bundles and docs
+        run: npm run build
+
+      - name: Install configurator dependencies
         working-directory: configurator
         run: npm ci
-      - name: Build (prebuild re-syncs the token catalogue)
+
+      - name: Build configurator
         working-directory: configurator
         run: npm run build
-      - name: Stage for Pages
-        run: mkdir -p _site/configurator && cp -r configurator/dist/. _site/configurator/
+
+      - name: Build Jekyll site
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Inject CSS bundles, optional CSS, and configurator
+        run: |
+          set -euo pipefail
+          mkdir -p _site/dist _site/optional _site/configurator
+          cp -r dist/. _site/dist/
+          cp optional/*.css _site/optional/
+          cp -r configurator/dist/. _site/configurator/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5
         with:
@@ -59,8 +90,6 @@ jobs:
     name: Deploy to Pages
     needs: build
     runs-on: ubuntu-latest
-    # Scopes required by the Pages deployment: an OIDC token (id-token) and
-    # write access to the Pages environment.
     permissions:
       pages: write
       id-token: write
