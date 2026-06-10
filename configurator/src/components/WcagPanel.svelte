@@ -63,7 +63,7 @@
   // which the text-on-surface matrix doesn't cover. Resolved in the preview
   // theme, so it reflects light/dark.
   const USAGE_ROLES = ['primary', 'secondary', 'tertiary', 'action', 'success', 'warning', 'error', 'info'].filter(
-    (r) => tokenByName.has(`--sf-color-${r}`)
+    (r) => tokenByName.has(`--sf-color-${r}`) && tokenByName.has(`--sf-color-text--on-${r}`)
   );
   const usageTokens = USAGE_ROLES.flatMap((r) => [`--sf-color-${r}`, `--sf-color-text--on-${r}`]).filter((n) =>
     tokenByName.has(n)
