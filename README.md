@@ -8,6 +8,9 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 [![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?branch=main&label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/codeslash-dev/SLASHED)](LICENSE)
 [![essential bundle](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/codeslash-dev/SLASHED/dist/badge-essential.json)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css)
+[![optimal bundle](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/codeslash-dev/SLASHED/dist/badge-optimal.json)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css)
+[![runtime deps](https://img.shields.io/badge/runtime_deps-zero-brightgreen)](https://github.com/codeslash-dev/SLASHED/blob/main/package.json)
+[![CDN](https://img.shields.io/badge/CDN-jsDelivr-e84d3d?logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/)
 
 ---
 
