@@ -12,7 +12,7 @@
   // Number of modified tokens in this group — surfaced in the header so a
   // collapsed group still tells you something useful at a glance.
   const modifiedCount = $derived(
-    tokens.reduce((n, t) => (t.name in overrides ? n + 1 : n), 0)
+    tokens.reduce((n, t) => (overrides[t.name] != null ? n + 1 : n), 0)
   );
 </script>
 

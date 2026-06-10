@@ -62,7 +62,12 @@ export const KNOBS_BY_DOMAIN = {
     { name: '--sf-radius-scale',       label: '--sf-radius-scale',       default: 1,    min: 0,   max: 2,   step: 0.05, driving: 8, help: 'Multiplier applied to every radius step (set to 0 for sharp brutalist corners).' },
   ],
   shadows: [
-    { name: '--sf-shadow-strength',    label: '--sf-shadow-strength',    default: 0.08, min: 0,   max: 1,   step: 0.01, driving: 14, help: 'Opacity multiplier applied to every shadow. The default already lifts in dark mode via --sf-is-dark.' },
+    {
+      name: '--sf-shadow-strength', label: '--sf-shadow-strength', default: 0.08, min: 0, max: 1, step: 0.01, driving: 14,
+      help: 'Base shadow opacity. Auto-boosted by +0.17 in dark mode to compensate for dark surfaces. Slider sets the light-mode base; the calc() wraps it automatically.',
+      encode: (v) => `calc(${v} + var(--sf-is-dark) * 0.17)`,
+      decode: (raw) => { const m = /^calc\(\s*([\d.e+-]+)/.exec(String(raw)); return m ? parseFloat(m[1]) : NaN; },
+    },
   ],
   motion: [
     { name: '--sf-motion-scale',       label: '--sf-motion-scale',       default: 1,    min: 0,   max: 2,   step: 0.05, driving: 13, help: 'Speed multiplier on every duration. Set to 0 to effectively disable motion (matches prefers-reduced-motion).' },
@@ -167,14 +172,12 @@ export const DOMAINS = [
     essentials: [
       '--sf-font-body',
       '--sf-font-heading',
-      '--sf-font-display',
       '--sf-font-mono',
       '--sf-text-base-min',
       '--sf-text-base-max',
       '--sf-leading-normal',
-      '--sf-tracking-normal',
     ],
-    advancedGenerators: ['type', 'display'],
+    basicGenerators: ['type', 'display'],
   },
   {
     id: 'spacing',
@@ -192,8 +195,9 @@ export const DOMAINS = [
       /^--sf-content-(gap|width|intrinsic)/,
     ],
     essentials: [
+      '--sf-space-s',
       '--sf-space-m',
-      '--sf-space-content',
+      '--sf-space-l',
       '--sf-section-pad',
       '--sf-component-pad',
     ],
@@ -332,8 +336,8 @@ export const DOMAINS = [
       /^--sf-state-/,
     ],
     essentials: [
-      '--sf-opacity-50',
       '--sf-blur-m',
+      '--sf-opacity-disabled',
       '--sf-state-pending-opacity',
     ],
   },

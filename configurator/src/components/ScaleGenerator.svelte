@@ -34,11 +34,12 @@
 
   const KIND_LABELS = { type: 'Type', display: 'Display', space: 'Space' };
 
-  /** Sensible starting knobs per ramp (display matches core/tokens.css). */
+  /** Starting knobs per ramp — mirror core/tokens.css @property initial-values so
+   *  the generator opens showing the framework's current baseline scale. */
   const DEFAULTS = {
-    type: { baseMin: 1.0, baseMax: 1.25, ratioMin: 1.2, ratioMax: 1.333 },
-    display: { baseMin: 2.4, baseMax: 3.0, ratioMin: 1.2, ratioMax: 1.333 },
-    space: { baseMin: 1.0, baseMax: 1.5, ratioMin: 1.5, ratioMax: 1.5 },
+    type: { baseMin: 1.0, baseMax: 1.25, ratioMin: 1.25, ratioMax: 1.333 },
+    display: { baseMin: 2.4, baseMax: 3.0, ratioMin: 1.25, ratioMax: 1.333 },
+    space: { baseMin: 1.0, baseMax: 2.0, ratioMin: 1.25, ratioMax: 1.333 },
   };
 
   // `kinds` is fixed for the lifetime of an instance (the panel re-mounts the
@@ -94,7 +95,7 @@
     setTimeout(() => (applied = false), 1800);
   }
   function reset() {
-    for (const s of computed) if (s.token in overrides) clearOverride(s.token);
+    for (const s of computed) if (overrides[s.token] != null) clearOverride(s.token);
   }
 </script>
 

@@ -26,9 +26,9 @@ export const RATIOS = [
 
 /** Type steps and their index relative to `m` (the body size at index 0). */
 export const TEXT_STEPS = [
-  { name: '2xs', idx: -4 },
-  { name: 'xs', idx: -3 },
-  { name: 's', idx: -2 },
+  { name: '2xs', idx: -3 },
+  { name: 'xs', idx: -2 },
+  { name: 's', idx: -1 },
   { name: 'm', idx: 0 },
   { name: 'l', idx: 1 },
   { name: 'xl', idx: 2 },
