@@ -216,14 +216,11 @@
   }
 
   /* -- Surface -------------------------------------------------
-     Sets background + auto-flipped foreground in one class.
-     Combines --sf-color-X (resolved semantic, mode-aware) with
-     the matching --sf-color-text--on-X (auto-contrast) so text
-     legibility is automatic without consumer math.
-
-     11 variants cover all brand + status + inverse colors. Base is
-     excluded — base IS the page surface; use plain
-     background: var(--sf-color-bg) if you need it explicitly.
+     Generic surface macro. Set --sf-surface-color on an element with
+     .sf-surface to derive background, auto-contrast foreground, and
+     contextual surface tokens. 11 precomputed variants
+     (.sf-surface--primary through .sf-surface--danger) cover all
+     brand + status + inverse colors.
 
      Composes naturally with .sf-section / .sf-card / .sf-stack:
        <section class="sf-section sf-surface--primary">…</section>
