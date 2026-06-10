@@ -55,8 +55,8 @@ describe('api-index.json ⇄ registry.json sync', () => {
   });
 
   // ── Token parity ─────────────────────────────────────────────────────────
-  // registry.tokens is the canonical 769-token surface; api-index token rows
-  // minus the legacy fallback-only channels must equal it, name-for-name.
+  // registry.tokens is the canonical public token surface; api-index token
+  // rows minus the legacy fallback-only channels must equal it, name-for-name.
   test('token names match registry (excluding fallback-only channels)', () => {
     const indexTokenNames = new Set(
       tokens.filter(t => !t.fallbackOnly).map(t => t.name)

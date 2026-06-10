@@ -36,6 +36,26 @@ const NUMBER_VALUE_RE = /^-?\d+(\.\d+)?$/;
 const HEX_RE = /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
 /**
+ * True when a value has a space outside of any parentheses — i.e. it is a
+ * composite/shorthand (box-shadow, transition, border shorthand…) rather than a
+ * single CSS color. A real `<color>` keeps its spaces inside function parens
+ * (`oklch(…)`, `rgb(…)`, `light-dark(…)`), so a top-level space is a reliable
+ * "this is not just a color" signal.
+ * @param {string} value
+ * @returns {boolean}
+ */
+function hasTopLevelSpace(value) {
+  let depth = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    const ch = value[i];
+    if (ch === '(') depth += 1;
+    else if (ch === ')') depth -= 1;
+    else if (depth === 0 && (ch === ' ' || ch === '\t')) return true;
+  }
+  return false;
+}
+
+/**
  * Decide whether a token represents a color.
  * @param {object} token
  * @returns {boolean}
@@ -45,6 +65,9 @@ export function isColorToken(token) {
   if (token.syntax && /<color>/.test(token.syntax)) return true;
   if (token.namespace === 'color') return true;
   const v = (token.value || '').trim();
+  // Composite values (e.g. `0 1px 2px oklch(…)` shadows) contain a color
+  // function but are NOT colors — don't hand them the color-swatch control.
+  if (hasTopLevelSpace(v)) return false;
   return COLOR_VALUE_RE.test(v);
 }
 

@@ -25,18 +25,7 @@
 <section class="preview">
   <header class="preview__bar">
     <strong>Live preview</strong>
-    <div class="preview__theme" role="group" aria-label="Preview theme">
-      <button
-        class="preview__theme-btn"
-        class:preview__theme-btn--on={ui.previewTheme === 'light'}
-        onclick={() => (ui.previewTheme = 'light')}
-      >Light</button>
-      <button
-        class="preview__theme-btn"
-        class:preview__theme-btn--on={ui.previewTheme === 'dark'}
-        onclick={() => (ui.previewTheme = 'dark')}
-      >Dark</button>
-    </div>
+    <span class="preview__hint">{ui.previewTheme} · theme toggle in header</span>
   </header>
 
   <div class="preview__stage" style={styleStr}>
@@ -200,22 +189,10 @@
     padding: 10px 16px;
     border-bottom: 1px solid var(--cfg-border);
   }
-  .preview__theme {
-    display: inline-flex;
-    border: 1px solid var(--cfg-border-strong);
-    border-radius: var(--cfg-radius-s);
-    overflow: hidden;
-  }
-  .preview__theme-btn {
-    background: var(--cfg-surface-2);
-    color: var(--cfg-text-muted);
-    border: none;
-    padding: 4px 12px;
-    font-size: 12px;
-  }
-  .preview__theme-btn--on {
-    background: var(--cfg-accent-strong);
-    color: #fff;
+  .preview__hint {
+    font-size: 11px;
+    color: var(--cfg-text-faint);
+    text-transform: capitalize;
   }
   .preview__stage {
     flex: 1;

@@ -24,13 +24,13 @@ export const overrides = $state(loadOverrides());
  */
 export const storage = $state({ ok: true });
 
-/** UI state: search, active category, tier visibility, preview theme. */
+/** UI state: active domain tab, basic/advanced mode, search, filters, preview. */
 export const ui = $state({
-  /** Active top-level view: 'tokens' | 'a11y' | 'scales'. */
-  view: 'tokens',
+  /** Active domain tab id (see lib/domains.js): 'typography' | 'colors' | … */
+  domain: 'typography',
+  /** Global complexity mode: 'basic' shows curated essentials, 'advanced' all. */
+  mode: 'basic',
   query: '',
-  activeCategory: '',
-  showAdvanced: true,
   showInternal: false,
   onlyModified: false,
   previewTheme: 'light',

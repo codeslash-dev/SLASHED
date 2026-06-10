@@ -1,17 +1,12 @@
 <script>
   /**
-   * Top bar: product title, framework sync stamp, and the preview toggle.
+   * Top bar: product title, framework sync stamp, the global Basic/Advanced
+   * mode toggle, and the preview toggle.
    */
   import { sync } from '../lib/model.js';
   import { ui } from '../lib/store.svelte.js';
 
   let { showPreview = $bindable(true) } = $props();
-
-  const VIEWS = [
-    { id: 'tokens', label: 'Tokens' },
-    { id: 'a11y', label: 'Accessibility' },
-    { id: 'scales', label: 'Scales' },
-  ];
 </script>
 
 <header class="hdr">
@@ -25,16 +20,22 @@
     </div>
   </div>
 
-  <nav class="hdr__views" aria-label="Views">
-    {#each VIEWS as v (v.id)}
-      <button
-        class="hdr__view"
-        class:hdr__view--on={ui.view === v.id}
-        onclick={() => (ui.view = v.id)}
-        aria-pressed={ui.view === v.id}
-      >{v.label}</button>
-    {/each}
-  </nav>
+  <div class="hdr__mode" role="group" aria-label="Complexity mode">
+    <button
+      class="hdr__mode-btn"
+      class:hdr__mode-btn--on={ui.mode === 'basic'}
+      onclick={() => (ui.mode = 'basic')}
+      aria-pressed={ui.mode === 'basic'}
+      title="Just the essentials most projects need"
+    >Basic</button>
+    <button
+      class="hdr__mode-btn"
+      class:hdr__mode-btn--on={ui.mode === 'advanced'}
+      onclick={() => (ui.mode = 'advanced')}
+      aria-pressed={ui.mode === 'advanced'}
+      title="Every token, scale knob and viewport setting"
+    >Advanced</button>
+  </div>
 
   <div class="hdr__meta">
     {#if sync.frameworkVersion}
@@ -46,6 +47,22 @@
       </span>
     {/if}
     <span class="hdr__pill hdr__pill--muted">{sync.counts?.tokens ?? 0} tokens</span>
+    <div class="hdr__theme" role="group" aria-label="Preview theme">
+      <button
+        class="hdr__theme-btn"
+        class:hdr__theme-btn--on={ui.previewTheme === 'light'}
+        onclick={() => (ui.previewTheme = 'light')}
+        aria-pressed={ui.previewTheme === 'light'}
+        title="Preview in light mode"
+      >Light</button>
+      <button
+        class="hdr__theme-btn"
+        class:hdr__theme-btn--on={ui.previewTheme === 'dark'}
+        onclick={() => (ui.previewTheme = 'dark')}
+        aria-pressed={ui.previewTheme === 'dark'}
+        title="Preview in dark mode"
+      >Dark</button>
+    </div>
     <label class="hdr__toggle">
       <input type="checkbox" bind:checked={showPreview} />
       <span>Preview</span>
@@ -97,27 +114,26 @@
     gap: 10px;
     flex-wrap: wrap;
   }
-  .hdr__views {
+  .hdr__mode {
     display: inline-flex;
-    gap: 2px;
     background: var(--cfg-bg);
     border: 1px solid var(--cfg-border-strong);
     border-radius: var(--cfg-radius);
     padding: 3px;
+    gap: 2px;
   }
-  .hdr__view {
+  .hdr__mode-btn {
     background: transparent;
     border: none;
     color: var(--cfg-text-muted);
-    padding: 6px 14px;
+    padding: 6px 16px;
     font-size: 13px;
+    font-weight: 600;
     border-radius: var(--cfg-radius-s);
     transition: background 0.12s ease, color 0.12s ease;
   }
-  .hdr__view:hover {
-    color: var(--cfg-text);
-  }
-  .hdr__view--on {
+  .hdr__mode-btn:hover { color: var(--cfg-text); }
+  .hdr__mode-btn--on {
     background: var(--cfg-accent-strong);
     color: #fff;
   }
@@ -132,6 +148,23 @@
   }
   .hdr__pill--muted {
     color: var(--cfg-text-muted);
+  }
+  .hdr__theme {
+    display: inline-flex;
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    overflow: hidden;
+  }
+  .hdr__theme-btn {
+    background: var(--cfg-surface-2);
+    color: var(--cfg-text-muted);
+    border: none;
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+  .hdr__theme-btn--on {
+    background: var(--cfg-accent-strong);
+    color: #fff;
   }
   .hdr__toggle {
     display: flex;
