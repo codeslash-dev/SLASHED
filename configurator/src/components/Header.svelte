@@ -247,4 +247,15 @@
     .hdr__sub { display: none; }
     .hdr__title { font-size: 15px; }
   }
+  @media (max-width: 600px) {
+    .hdr { padding: 10px 12px; gap: 8px; }
+    /* Token count pill adds no value on tiny screens — hide to keep brand row compact */
+    .hdr__pill--muted { display: none; }
+    /* Sidebar and preview toggles are both ineffective at this width:
+       preview is always hidden and sidebar is always icon-only regardless of state */
+    .hdr__controls > button { display: none; }
+    /* Prevent remaining controls from wrapping to a second row */
+    .hdr__controls { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 6px; }
+    .hdr__controls::-webkit-scrollbar { display: none; }
+  }
 </style>
