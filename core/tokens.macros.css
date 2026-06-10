@@ -73,6 +73,18 @@
     --sf-prose-table-pad:          var(--sf-space-xs);
 
     /* ----------------------------------------------------------
+       Surface color — input for the generic .sf-surface macro.
+       Set it on any element carrying the class and the macro derives
+       background, auto-contrast foreground, and the full contextual
+       token set from it:
+         <section class="sf-surface"
+                  style="--sf-surface-color: var(--sf-color-primary-100)">
+       Inherits: a nested .sf-surface picks up the outer surface's
+       color unless it sets its own. Any resolvable CSS color works.
+       ---------------------------------------------------------- */
+    --sf-surface-color: var(--sf-color-base);
+
+    /* ----------------------------------------------------------
        Scroll shadow / overflow fade — mask gradient size.
        Used by .sf-scroll-shadow (top+bottom) and .sf-overflow-fade
        (end-edge horizontal fade).
