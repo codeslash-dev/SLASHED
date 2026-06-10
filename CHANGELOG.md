@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.33] - 2026-06-10
+
+### Features
+- **configurator:** add configure/consume usage filter for token classification
+- **badges:** add optimal bundle size, zero-deps, and CDN badges
+
+### Bug Fixes
+- **configurator:** replace overflow:hidden with overflow:clip in panel cards
+- **configurator:** address code-review findings on mobile layout
+- **badges:** use namedLogo instead of logo in endpoint badge JSON
+- **bundle:** warn instead of silently skip when badge bundle is missing
+- **configurator:** fix token editor overflow hiding inputs on mobile
+- **configurator:** correct version display and improve mobile header layout
+
 ## [0.5.32] - 2026-06-10
 
 ### Features
