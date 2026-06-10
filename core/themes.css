@@ -50,6 +50,17 @@
   [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
   [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
 
+  /* Section-level background + foreground reset.
+     When [data-theme] is used on a non-root element, the tokens switch
+     (via the @supports blocks below) but the element keeps whatever
+     background it inherited. This rule gives it the correct surface
+     background and body text colour automatically, with zero specificity
+     (:where) so any explicit background/color in consumer CSS wins.
+     Omits :root and html — body already reads --sf-color-bg globally. */
+  :where([data-theme]:not(:root, html)) {
+    background-color: var(--sf-color-bg);
+    color:            var(--sf-color-text);
+  }
 
   /* LumLocker — opt-in via [data-lumlocker] on :root.
      Locks the 5 brand colors (primary, secondary, tertiary, action,

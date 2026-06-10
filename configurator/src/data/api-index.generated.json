@@ -2,8 +2,8 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "frameworkVersion": "0.5.30",
-    "tokensHash": "17cd4051357b",
+    "frameworkVersion": "0.5.31",
+    "tokensHash": "abb9b1598040",
     "bundles": [
       "essential",
       "full",
@@ -12,9 +12,9 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 831,
+      "tokens": 841,
       "byTier": {
-        "PUBLIC-ADVANCED": 160,
+        "PUBLIC-ADVANCED": 170,
         "PUBLIC": 670,
         "INTERNAL": 1
       },
@@ -23,7 +23,7 @@
         "Layout tokens": 48,
         "Core tokens": 486,
         "Macro tokens": 24,
-        "Palette tokens": 132,
+        "Palette tokens": 142,
         "Sizes-extended tokens": 108
       }
     }
@@ -44,12 +44,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-action-l",
@@ -66,12 +61,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-action-s",
@@ -88,12 +78,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-alternate-gap",
@@ -616,12 +601,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-base-l",
@@ -638,12 +618,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-base-s",
@@ -660,12 +635,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-bento-cols-default",
@@ -1710,7 +1680,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Very light action shade. Hover fills on white surfaces, badge backgrounds.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1732,7 +1702,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Light action shade. Subtle fills and outlined badge backgrounds.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 20%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1754,7 +1724,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Light-mid action shade. Borders on light backgrounds, low-emphasis fills.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 40%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1776,7 +1746,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Mid-light action shade. Disabled state fills, decorative accents.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1798,7 +1768,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Lightest action tint. Background fill for subtle action-tinted surfaces.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 4%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1842,7 +1812,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Mid-dark action shade. Text on light surfaces, icon fills.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1864,7 +1834,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Dark action shade. Strong text and icon fills on light backgrounds.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 62%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1886,7 +1856,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Very dark action shade. High-contrast text on white.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 38%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1908,7 +1878,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Near-black action shade. Extreme contrast on white surfaces.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 18%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -1930,7 +1900,7 @@
       "group": "action",
       "description": "Full numeric shade scale (50–950) plus alpha variants (a5–a95) for the action palette. Use via --sf-color-action-* for component-level overrides.",
       "note": "Darkest action tint. Near-black for dark-theme surface accents.",
-      "value": "color-mix(in oklab, var(--sf-color-action) 8%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2493,7 +2463,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Very light base shade. Hover fills, badge backgrounds.",
-      "value": "color-mix(in oklab, var(--sf-color-text) 8%, var(--sf-color-base))",
+      "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2515,7 +2485,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Light base shade.",
-      "value": "color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))",
+      "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2537,7 +2507,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Light-mid base shade. Borders on light backgrounds.",
-      "value": "color-mix(in oklab, var(--sf-color-text) 40%, var(--sf-color-base))",
+      "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2559,7 +2529,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Mid-light base shade. Disabled fills.",
-      "value": "color-mix(in oklab, var(--sf-color-text) 65%, var(--sf-color-base))",
+      "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2581,7 +2551,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Lightest base tint.",
-      "value": "color-mix(in oklab, var(--sf-color-text) 4%, var(--sf-color-base))",
+      "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2625,7 +2595,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Mid-dark base shade. Text on light surfaces.",
-      "value": "color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2647,7 +2617,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Dark base shade.",
-      "value": "color-mix(in oklab, var(--sf-color-base) 62%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2669,7 +2639,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Very dark base shade.",
-      "value": "color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2691,7 +2661,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Near-black base shade.",
-      "value": "color-mix(in oklab, var(--sf-color-base) 18%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -2713,7 +2683,7 @@
       "group": "base",
       "description": "Full numeric shade scale plus alpha variants for the base palette.",
       "note": "Darkest base tint.",
-      "value": "color-mix(in oklab, var(--sf-color-base) 8%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4242,7 +4212,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Very light neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4264,7 +4234,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Light neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 20%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4286,7 +4256,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Light-mid neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 40%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4308,7 +4278,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Mid-light neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4330,7 +4300,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Lightest neutral tint.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 4%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4374,7 +4344,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Mid-dark neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4396,7 +4366,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Dark neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 62%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4418,7 +4388,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Very dark neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 38%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4440,7 +4410,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Near-black neutral shade.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 18%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -4462,7 +4432,7 @@
       "group": "neutral",
       "description": "Full numeric shade scale plus alpha variants for the neutral palette.",
       "note": "Darkest neutral tint.",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 8%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5048,7 +5018,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Very light primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5070,7 +5040,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Light primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 20%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5092,7 +5062,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Light-mid primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 40%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5114,7 +5084,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Mid-light primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5136,7 +5106,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Lightest primary tint.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 4%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5180,7 +5150,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Mid-dark primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5202,7 +5172,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Dark primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 62%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5224,7 +5194,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Very dark primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 38%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5246,7 +5216,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Near-black primary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 18%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5268,7 +5238,7 @@
       "group": "primary",
       "description": "Full numeric shade scale plus alpha variants for the primary palette.",
       "note": "Darkest primary tint.",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 8%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5877,7 +5847,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Very light secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5899,7 +5869,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Light secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5921,7 +5891,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Light-mid secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 40%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5943,7 +5913,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Mid-light secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -5965,7 +5935,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Lightest secondary tint.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 4%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6009,7 +5979,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Mid-dark secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6031,7 +6001,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Dark secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 62%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6053,7 +6023,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Very dark secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6075,7 +6045,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Near-black secondary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 18%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6097,7 +6067,7 @@
       "group": "secondary",
       "description": "Full numeric shade scale plus alpha variants for the secondary palette.",
       "note": "Darkest secondary tint.",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 8%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6844,7 +6814,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Very light tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6866,7 +6836,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Light tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 20%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6888,7 +6858,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Light-mid tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 40%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6910,7 +6880,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Mid-light tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 65%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6932,7 +6902,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Lightest tertiary tint.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 4%, var(--sf-color-surface))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6976,7 +6946,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Mid-dark tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6998,7 +6968,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Dark tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 62%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -7020,7 +6990,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Very dark tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 38%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -7042,7 +7012,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Near-black tertiary shade.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 18%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -7064,7 +7034,7 @@
       "group": "tertiary",
       "description": "Full numeric shade scale plus alpha variants for the tertiary palette.",
       "note": "Darkest tertiary tint.",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 8%, var(--sf-color-text))",
+      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -8508,12 +8478,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-danger-l",
@@ -8530,12 +8495,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-danger-s",
@@ -8552,12 +8512,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-display-l-line-height",
@@ -9172,12 +9127,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-error-l",
@@ -9194,12 +9144,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-error-s",
@@ -9216,12 +9161,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-field-block",
@@ -11584,12 +11524,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-info-l",
@@ -11606,12 +11541,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-info-s",
@@ -11628,12 +11558,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-is-active",
@@ -12064,12 +11989,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-neutral-l",
@@ -12086,12 +12006,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-neutral-s",
@@ -12108,12 +12023,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-object-fit",
@@ -12346,6 +12256,226 @@
       ]
     },
     {
+      "name": "--sf-palette-mix-100",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "8%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-200",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "20%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-300",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "40%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-400",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "65%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-50",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "4%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-600",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "82%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-700",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "62%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-800",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "38%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-900",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "18%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-palette-mix-950",
+      "tier": "PUBLIC-ADVANCED",
+      "namespace": "palette",
+      "category": "Palette tokens",
+      "group": "Palette shade mix percentages",
+      "description": "PUBLIC-ADVANCED Controls how far each numeric step blends toward surface (tints, steps 50-400) or toward text (shades, steps 600-950). 500 = the base color itself (no mixing). These are <percentage> values consumed by color-mix() in every family below.",
+      "note": "",
+      "value": "8%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-primary-h",
       "tier": "PUBLIC-ADVANCED",
       "namespace": "primary",
@@ -12360,12 +12490,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-primary-l",
@@ -12382,12 +12507,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-primary-s",
@@ -12404,12 +12524,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-print-base-size",
@@ -13645,12 +13760,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-secondary-l",
@@ -13667,12 +13777,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-secondary-s",
@@ -13689,12 +13794,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-section-pad",
@@ -15791,12 +15891,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-success-l",
@@ -15813,12 +15908,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-success-s",
@@ -15835,12 +15925,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-surface-color",
@@ -15926,12 +16011,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-tertiary-l",
@@ -15948,12 +16028,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-tertiary-s",
@@ -15970,12 +16045,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-text-2xl",
@@ -18519,12 +18589,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-warning-l",
@@ -18541,12 +18606,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-warning-s",
@@ -18563,12 +18623,7 @@
       "fallbackOnly": true,
       "optional": false,
       "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
+      "bundles": []
     },
     {
       "name": "--sf-z-base",

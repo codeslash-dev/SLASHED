@@ -4,8 +4,11 @@
  *             the only surviving declarations and never contain light-dark()
  *             or oklch(from …).
  *
- * Simulates an Old_Engine by extracting only non-@supports declarations from
- * the full bundle and asserting they satisfy the sRGB invariant.
+ * The fallbacks file is NOT part of any default bundle — it is a standalone
+ * opt-in loaded before the bundle (see core/tokens.color-fallbacks.css header).
+ * This test simulates that documented integration: fallbacks + full bundle,
+ * then strips @supports blocks to model an Old_Engine and asserts the
+ * surviving declarations satisfy the sRGB invariant.
  *
  * Run: node --test tests/tier1-p7-oldengine.test.js
  */
@@ -17,6 +20,12 @@ import fc   from 'fast-check';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist/slashed.full.css');
+const FALLBACKS = path.join(ROOT, 'core/tokens.color-fallbacks.css');
+
+/** Opt-in load order: fallbacks first, then the bundle. */
+function loadOptInCss() {
+  return fs.readFileSync(FALLBACKS, 'utf8') + '\n' + fs.readFileSync(DIST, 'utf8');
+}
 
 /**
  * Simulate Old_Engine by stripping all @supports blocks from CSS.
@@ -91,7 +100,8 @@ describe('P7: Old-engine cascade simulation', () => {
 
   test('setup: load and strip @supports blocks', () => {
     assert.ok(fs.existsSync(DIST), 'dist/slashed.full.css missing');
-    const full = fs.readFileSync(DIST, 'utf8');
+    assert.ok(fs.existsSync(FALLBACKS), 'core/tokens.color-fallbacks.css missing');
+    const full = loadOptInCss();
     const stripped = stripSupports(full);
     oldEngineDecls = extractCustomDecls(stripped);
     assert.ok(oldEngineDecls.size > 0, 'No declarations found in old-engine simulation');
@@ -152,7 +162,7 @@ describe('P7: Old-engine cascade simulation', () => {
 
   // Simulate dark mode on old engine: [data-theme="dark"] block should also have sRGB
   test('dark-mode [data-theme="dark"] values are sRGB on old engine', () => {
-    const full = fs.readFileSync(DIST, 'utf8');
+    const full = loadOptInCss();
     const stripped = stripSupports(full);
     // Extract just the [data-theme="dark"] block
     const darkStart = stripped.indexOf('[data-theme="dark"]');
