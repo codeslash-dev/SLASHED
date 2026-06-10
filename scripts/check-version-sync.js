@@ -46,6 +46,15 @@ if (!m) {
   );
 }
 
+// 3. configurator generated index frameworkVersion must match package.json.
+const genIndex = JSON.parse(read('configurator/src/data/api-index.generated.json'));
+const genVersion = genIndex?._sync?.frameworkVersion;
+if (genVersion !== version) {
+  errors.push(
+    `configurator/src/data/api-index.generated.json frameworkVersion "${genVersion}" != package.json "${version}" — run \`npm run configurator:sync\``,
+  );
+}
+
 if (errors.length) {
   console.error('version-sync check FAILED:');
   for (const e of errors) console.error(`  - ${e}`);

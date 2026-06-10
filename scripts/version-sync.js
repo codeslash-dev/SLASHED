@@ -55,6 +55,17 @@ changed += sync(
   `roadmap version = ${version}`
 ) ? 1 : 0;
 
+// ── configurator/src/data/api-index.generated.json ──────────────────────────
+// A release bumps package.json but doesn't rebuild the configurator, so without
+// this the panel keeps showing the PREVIOUS version every release. Bump the
+// stamp here too (guarded by check-version-sync.js).
+changed += sync(
+  'configurator/src/data/api-index.generated.json',
+  new RegExp(`("frameworkVersion":\\s*")${SEMVER_RE.source}(")`),
+  `$1${version}$2`,
+  `configurator api-index frameworkVersion = ${version}`
+) ? 1 : 0;
+
 // ── Summary ─────────────────────────────────────────────────────────────────
 if (changed === 0) {
   console.log('\nAll version references are already up to date.\n');
