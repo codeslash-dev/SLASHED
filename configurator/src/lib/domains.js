@@ -126,18 +126,7 @@ export const DOMAINS = [
       /^--sf-palette-/,
       /^--sf-(contrast|lumlocker|surface)-?/,
     ],
-    essentials: [
-      '--sf-color-base-light',
-      '--sf-color-neutral-light',
-      '--sf-color-primary-light',
-      '--sf-color-secondary-light',
-      '--sf-color-tertiary-light',
-      '--sf-color-action-light',
-      '--sf-color-success-light',
-      '--sf-color-warning-light',
-      '--sf-color-error-light',
-      '--sf-color-info-light',
-    ],
+    brandColors: true,
   },
   {
     id: 'typography',
@@ -356,6 +345,13 @@ export const DOMAINS = [
       /^--sf-print-/,
       /^--sf-is-/,
     ],
+  },
+  {
+    id: 'cheatsheet',
+    label: 'Cheatsheet',
+    icon: '📋',
+    blurb: 'Searchable reference for every token and utility class in the framework.',
+    tool: 'cheatsheet',
   },
 ];
 

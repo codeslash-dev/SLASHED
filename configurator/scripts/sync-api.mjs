@@ -89,6 +89,7 @@ function projectToken(e, notes, groupDescs) {
   return {
     name: e.name,
     tier: e.tier,
+    role: e.role || null,
     namespace: e.namespace || null,
     category: e.category || 'Other',
     group: e.group || '',

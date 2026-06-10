@@ -212,7 +212,7 @@
      media query. Do not set directly. */
   @property --sf-is-dark { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
-  /* @property — INTERACTION STATE FLAGS — integer state bits set by JS or :has() */
+  /* @property — INTERACTION STATE FLAGS */
   @property --sf-is-active  { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }

@@ -13,13 +13,15 @@
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN } from '../lib/domains.js';
+  import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { ui, overrides, clearAll } from '../lib/store.svelte.js';
   import TokenGroup from './TokenGroup.svelte';
   import TokenRow from './TokenRow.svelte';
+  import BrandColorRow from './BrandColorRow.svelte';
   import ScaleGenerator from './ScaleGenerator.svelte';
   import QuickKnobs from './QuickKnobs.svelte';
 
-  /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, essentials?:string[], basicGenerators?:string[], advancedGenerators?:string[] } }} */
+  /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, essentials?:string[], basicGenerators?:string[], advancedGenerators?:string[], brandColors?:boolean } }} */
   let { domain } = $props();
 
   const advanced = $derived(ui.mode === 'advanced');
@@ -66,7 +68,6 @@
   const categoryCount = $derived(new Set(grouped.map((c) => c.category)).size);
 
   const basicGenerators = $derived(domain.basicGenerators ?? []);
-  const advancedGenerators = $derived(domain.advancedGenerators ?? []);
 
   // Quick knobs for this domain (global multipliers that cascade through
   // many derived tokens — see lib/domains.js → KNOBS_BY_DOMAIN).
@@ -170,7 +171,23 @@
       {/if}
 
       <!-- Essentials (always shown when present) -->
-      {#if essentials.length}
+      {#if domain.brandColors}
+        <!-- Brand colors domain: light/dark pair rows for every brand color -->
+        <section class="cfg-card panel__card">
+          <header class="panel__card-head">
+            <span class="panel__card-title">Brand &amp; status colors</span>
+            <span class="panel__card-count">{BRAND_COLOR_KEYS.length}</span>
+            {#if !advanced}
+              <span class="panel__card-hint">Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.</span>
+            {/if}
+          </header>
+          <div class="panel__card-rows">
+            {#each BRAND_COLOR_KEYS as { key, label } (key)}
+              <BrandColorRow colorKey={key} {label} />
+            {/each}
+          </div>
+        </section>
+      {:else if essentials.length}
         <section class="cfg-card panel__card">
           <header class="panel__card-head">
             <span class="panel__card-title">Essentials</span>
@@ -193,11 +210,6 @@
       {/each}
 
       {#if advanced}
-        <!-- Advanced generators (e.g. type + display ramps) -->
-        {#if advancedGenerators.length}
-          <ScaleGenerator kinds={advancedGenerators} />
-        {/if}
-
         <!-- Full domain catalogue, grouped -->
         {#if grouped.length === 0}
           <p class="panel__empty">No tokens match the current search and filters.</p>
@@ -214,7 +226,7 @@
             {/each}
           {/each}
         {/if}
-      {:else if essentials.length === 0 && basicGenerators.length === 0}
+      {:else if !domain.brandColors && essentials.length === 0 && basicGenerators.length === 0}
         <!-- Domain has no curated essentials (e.g. Effects, Misc). Surface
              the full advanced list anyway so Basic isn't a dead end. -->
         <p class="panel__hint">

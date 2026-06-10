@@ -387,11 +387,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-icon-s` | PUBLIC | knob | icon | `1em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
 | `--sf-icon-xl` | PUBLIC | knob | icon | `3em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
 | `--sf-icon-xs` | PUBLIC | knob | icon | `0.875em` | em-based by design. Icons are sized in em so they scale with the surrounding text: an icon in a button at --sf-text-m renders at 1rem; moved into a heading at --sf-text-2xl, the same icon scales up automatically. Global scaling flows transitively through --sf-text-scale (parent… |
-| `--sf-is-active` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS — integer state bits set by JS or :has() |
-| `--sf-is-current` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS — integer state bits set by JS or :has() |
+| `--sf-is-active` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS |
+| `--sf-is-current` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS |
 | `--sf-is-dark` | INTERNAL | knob | is | `0` | Mode flag — drives formula direction for non-color dark overrides. Set by themes.css via [data-theme="dark"] and the prefers-color-scheme media query. Do not set directly. |
-| `--sf-is-open` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS — integer state bits set by JS or :has() |
-| `--sf-is-pressed` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS — integer state bits set by JS or :has() |
+| `--sf-is-open` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS |
+| `--sf-is-pressed` | PUBLIC-ADVANCED | knob | is | `0` | INTERACTION STATE FLAGS |
 | `--sf-leading-normal` | PUBLIC | knob | leading | `1.5` | Line heights & letter spacing |
 | `--sf-leading-relaxed` | PUBLIC | knob | leading | `1.625` | Line heights & letter spacing |
 | `--sf-leading-snug` | PUBLIC | knob | leading | `1.3` | Line heights & letter spacing |
