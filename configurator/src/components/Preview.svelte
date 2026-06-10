@@ -10,7 +10,27 @@
   import { overrides, ui } from '../lib/store.svelte.js';
   import { buildPreviewDeclarations } from '../lib/preview.js';
 
-  const styleStr = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
+  /** Viewport width presets — the breakpoints the framework's fluid scale targets. */
+  const VIEWPORTS = [
+    { id: 'mobile',  label: '📱 Mobile',  width: 360,  hint: '360 px' },
+    { id: 'tablet',  label: '📱 Tablet',  width: 768,  hint: '768 px' },
+    { id: 'laptop',  label: '💻 Laptop',  width: 1024, hint: '1024 px' },
+    { id: 'desktop', label: '🖥️ Desktop', width: 1440, hint: '1440 px' },
+    { id: 'fluid',   label: '🌊 Fluid',   width: null, hint: 'fill pane' },
+  ];
+
+  // Combine the framework cascade with optional reduced-motion override.
+  // The reduced-motion override is preview-only — it never touches the
+  // user's actual override map, so they keep whatever motion-scale they
+  // edited even while previewing the a11y experience.
+  const baseStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
+  const styleStr = $derived(
+    ui.previewMotion === 'reduced'
+      ? `${baseStyle}\n--sf-motion-scale: 0;`
+      : baseStyle
+  );
+
+  const activeViewport = $derived(VIEWPORTS.find((v) => v.id === ui.previewWidth) ?? VIEWPORTS[VIEWPORTS.length - 1]);
 
   const brand = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
   const status = ['success', 'warning', 'error', 'info', 'danger'];
@@ -32,10 +52,28 @@
       <span class="preview__dot" aria-hidden="true"></span>
       <strong>Live preview</strong>
     </div>
-    <span class="preview__hint">{ui.previewTheme} · theme toggle in header</span>
+    <div class="preview__viewports cfg-seg" role="group" aria-label="Preview viewport width">
+      {#each VIEWPORTS as v (v.id)}
+        <button
+          class="cfg-seg__btn preview__vp-btn"
+          class:cfg-seg__btn--on={ui.previewWidth === v.id}
+          onclick={() => (ui.previewWidth = v.id)}
+          aria-pressed={ui.previewWidth === v.id}
+          title="{v.label} — {v.hint}"
+        >{v.label}</button>
+      {/each}
+    </div>
+    <span class="preview__hint">
+      {ui.previewTheme}{ui.previewMotion === 'reduced' ? ' · reduced motion' : ''}{activeViewport.width ? ` · ${activeViewport.width} px` : ''}
+    </span>
   </header>
 
-  <div class="preview__stage" style={styleStr}>
+  <div class="preview__viewport">
+    <div
+      class="preview__stage"
+      class:preview__stage--rm={ui.previewMotion === 'reduced'}
+      style="{styleStr}{activeViewport.width ? `;max-inline-size:${activeViewport.width}px;margin-inline:auto;box-shadow:0 0 0 1px var(--cfg-border) inset;` : ''}"
+    >
     <div class="pv">
       <!-- Typography -->
       <section class="pv__block">
@@ -201,6 +239,7 @@
       </section>
     </div>
   </div>
+  </div>
 </section>
 
 <style>
@@ -217,8 +256,44 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     padding: 10px 16px;
     border-bottom: 1px solid var(--cfg-border);
+    flex-wrap: wrap;
+  }
+  .preview__viewports { flex-shrink: 0; }
+  .preview__vp-btn {
+    padding-inline: 9px;
+    font-size: 11.5px;
+  }
+  .preview__viewport {
+    flex: 1;
+    overflow: auto;
+    background: var(--cfg-bg-2);
+    padding: 0;
+    min-height: 0;
+  }
+  .preview__stage {
+    /* When a viewport preset is active the stage is constrained inline so
+       the surrounding `.preview__viewport` "device frame" is visible; when
+       Fluid is active the stage simply fills the pane. */
+    background: var(--sf-color-bg, #fff);
+    color: var(--sf-color-text, #111);
+    min-height: 100%;
+    transition: max-inline-size 0.15s ease;
+  }
+  /* Reduced-motion preview mode disables transitions/animations on EVERY
+     element under the stage — the preview-only --sf-motion-scale: 0 already
+     zeroes durations declared via the framework, but components that ignore
+     the scale still respect this scoped killswitch. */
+  .preview__stage--rm,
+  .preview__stage--rm *,
+  .preview__stage--rm *::before,
+  .preview__stage--rm *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
   .preview__title { display: inline-flex; align-items: center; gap: 8px; }
   .preview__dot {
@@ -233,12 +308,7 @@
     color: var(--cfg-text-faint);
     text-transform: capitalize;
   }
-  .preview__stage {
-    flex: 1;
-    overflow: auto;
-    background: var(--sf-color-bg, #fff);
-    color: var(--sf-color-text, #111);
-  }
+  .preview__stage--orig-was-here { display: none; } /* placeholder eaten */
 
   /* Sample UI authored against framework tokens with sane fallbacks. */
   .pv {

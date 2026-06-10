@@ -45,6 +45,14 @@ export const ui = $state({
   onlyModified: false,
   /** Theme used by the live preview / WCAG probes. */
   previewTheme: 'light',
+  /** Motion mode in the preview only — 'normal' or 'reduced' (forces --sf-motion-scale: 0 on the stage). */
+  previewMotion: 'normal',
+  /**
+   * Preview viewport width preset. `'fluid'` lets the stage fill the pane;
+   * a numeric pixel string constrains it (320 / 768 / 1024 / 1440 are the
+   * common breakpoints the framework's fluid scale was tuned around).
+   */
+  previewWidth: 'fluid',
   /** Output framing: 'layer' wraps in @layer slashed.overrides, 'root' is bare :root. */
   outputMode: 'layer',
   /** Sidebar collapse — for narrow viewports / a focus-mode. */

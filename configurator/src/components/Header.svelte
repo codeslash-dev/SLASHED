@@ -111,6 +111,13 @@
         aria-pressed={ui.previewTheme === 'dark'}
         title="Preview in dark mode"
       >☾</button>
+      <button
+        class="cfg-seg__btn cfg-seg__btn--narrow"
+        class:cfg-seg__btn--on={ui.previewMotion === 'reduced'}
+        onclick={() => (ui.previewMotion = ui.previewMotion === 'reduced' ? 'normal' : 'reduced')}
+        aria-pressed={ui.previewMotion === 'reduced'}
+        title="Reduced motion in preview only — emulates prefers-reduced-motion (does not modify your overrides)"
+      >🐢</button>
     </div>
 
     <button

@@ -4,12 +4,14 @@
    *   - color    → swatch button + popover OKLCH picker + free-text fallback
    *   - font fam → System-stack picker | manual input + live preview
    *   - number   → number input
-   *   - length   → text input + unit chip
+   *   - length   → slider + numeric input + unit chip (with raw-text fallback
+   *                for calc()/clamp() power-users)
    *   - text     → mono text input
    */
   import { overrides, setOverride } from '../lib/store.svelte.js';
   import { inferControl } from '../lib/model.js';
   import { SYSTEM_STACKS, detectSystemStack, isFontFamilyToken } from '../lib/fonts.js';
+  import { parseLength, boundsFor, formatLength, decimalsFor, clamp } from '../lib/length.js';
   import OklchPicker from './OklchPicker.svelte';
 
   let { token } = $props();
@@ -48,6 +50,37 @@
   }
 
   function onPick(v) { setOverride(token.name, v); }
+
+  // ── Length slider state ──────────────────────────────────────────────────
+  // Parse the active value (override → default fallback). When the value is a
+  // single number+unit pair the slider drives it; when it's a calc()/clamp()
+  // expression `parsed` is null and we silently fall back to a plain text
+  // editor (or the user can flip to "raw" mode and stay there).
+  let rawMode = $state(false);
+  const parsedDefault = $derived(parseLength(token.value));
+  const parsedActive = $derived(parseLength(current || token.value));
+  const sliderUnit = $derived(parsedActive?.unit ?? parsedDefault?.unit ?? meta.unit ?? '');
+  const sliderBounds = $derived(boundsFor(sliderUnit));
+  const sliderValue = $derived(parsedActive ? clamp(parsedActive.number, sliderBounds) : parsedDefault?.number ?? 0);
+  const sliderDisabled = $derived(!parsedActive && current.trim() !== '');
+  const sliderDecimals = $derived(decimalsFor(sliderBounds.step));
+  // Filled-track visual: percentage of the slider's range the thumb sits at.
+  const sliderProgress = $derived.by(() => {
+    const range = sliderBounds.max - sliderBounds.min;
+    if (range <= 0) return 0;
+    return Math.max(0, Math.min(100, ((sliderValue - sliderBounds.min) / range) * 100));
+  });
+
+  function onSlider(e) {
+    const n = parseFloat(e.currentTarget.value);
+    if (!Number.isFinite(n)) return;
+    setOverride(token.name, formatLength(n, sliderUnit));
+  }
+  function onSliderNumber(e) {
+    const n = parseFloat(e.currentTarget.value);
+    if (!Number.isFinite(n)) return;
+    setOverride(token.name, formatLength(clamp(n, sliderBounds), sliderUnit));
+  }
 </script>
 
 <div class="editor" class:editor--color={meta.control === 'color'} class:editor--font={isFont}>
@@ -139,6 +172,40 @@
       oninput={onInput}
       aria-label="{token.name} value"
     />
+  {:else if meta.control === 'length' && parsedDefault && !rawMode}
+    <!-- Slider + number combo. The slider's filled track uses --p so the
+         "fill" matches the current thumb position. -->
+    <input
+      class="len__slider"
+      type="range"
+      min={sliderBounds.min}
+      max={sliderBounds.max}
+      step={sliderBounds.step}
+      value={sliderValue}
+      style:--p="{sliderProgress}%"
+      oninput={onSlider}
+      disabled={sliderDisabled}
+      aria-label="{token.name} slider"
+      title={sliderDisabled ? 'Slider disabled — value is not a single number+unit. Click "raw" to edit as text.' : `Drag — range ${sliderBounds.min}${sliderUnit} … ${sliderBounds.max}${sliderUnit}`}
+    />
+    <input
+      class="cfg-input cfg-input--mono len__num"
+      type="number"
+      min={sliderBounds.min}
+      max={sliderBounds.max}
+      step={sliderBounds.step}
+      value={parsedActive ? Number(sliderValue.toFixed(sliderDecimals)) : ''}
+      placeholder={parsedDefault.number}
+      oninput={onSliderNumber}
+      aria-label="{token.name} numeric value"
+    />
+    {#if sliderUnit}<span class="editor__unit">{sliderUnit}</span>{/if}
+    <button
+      type="button"
+      class="cfg-btn cfg-btn--ghost cfg-btn--sm len__raw"
+      onclick={() => (rawMode = true)}
+      title="Switch to raw text — type calc(), clamp(), var() etc."
+    >raw</button>
   {:else if meta.control === 'length'}
     <input
       class="cfg-input cfg-input--mono"
@@ -150,6 +217,14 @@
       aria-label="{token.name} value"
     />
     {#if meta.unit}<span class="editor__unit">{meta.unit}</span>{/if}
+    {#if parsedDefault}
+      <button
+        type="button"
+        class="cfg-btn cfg-btn--ghost cfg-btn--sm len__raw"
+        onclick={() => (rawMode = false)}
+        title="Switch back to slider"
+      >slider</button>
+    {/if}
   {:else}
     <input
       class="cfg-input cfg-input--mono"
@@ -216,5 +291,50 @@
     font-size: 12px;
     min-width: 24px;
     text-align: left;
+  }
+
+  /* ── Length slider ─────────────────────────────────────────────────────── */
+  .len__slider {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1 1 90px;
+    min-width: 60px;
+    height: 6px;
+    margin: 0;
+    border-radius: 3px;
+    background:
+      linear-gradient(to right, var(--cfg-accent-strong) 0, var(--cfg-accent-strong) var(--p, 0%), var(--cfg-surface-3) var(--p, 0%), var(--cfg-surface-3) 100%);
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  .len__slider:focus-visible { box-shadow: 0 0 0 3px var(--cfg-accent-soft); }
+  .len__slider:disabled { opacity: 0.45; cursor: not-allowed; }
+  .len__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--cfg-accent-strong);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .len__slider::-moz-range-thumb {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--cfg-accent-strong);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .len__num {
+    flex: 0 0 70px;
+    text-align: right;
+  }
+  .len__raw {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 </style>

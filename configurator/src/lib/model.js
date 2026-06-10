@@ -22,6 +22,43 @@ export const defaultsByName = new Map(
   allTokens.map((t) => [t.name, t.value ?? ''])
 );
 
+/**
+ * Dependents map: token name -> count of OTHER tokens that reference it via
+ * `var(--sf-foo)` in their default value.
+ *
+ * Built once from the baked api-index, immutable thereafter. Surfaced as a
+ * "drives N" badge on each token row so the user can see at a glance how
+ * far-reaching an edit will be — `--sf-radius-scale` drives 8 tokens, but
+ * `--sf-color-bg` drives ~50.
+ *
+ * @type {Map<string, number>}
+ */
+export const dependentsByName = (() => {
+  const map = new Map();
+  for (const t of allTokens) map.set(t.name, 0);
+  const VAR_RE = /var\(\s*(--sf-[\w-]+)/g;
+  for (const t of allTokens) {
+    if (!t.value) continue;
+    const seen = new Set(); // de-dup multiple refs in the same value
+    for (const m of t.value.matchAll(VAR_RE)) {
+      const ref = m[1];
+      if (ref === t.name) continue; // self-reference doesn't count
+      if (seen.has(ref)) continue;
+      seen.add(ref);
+      if (map.has(ref)) map.set(ref, map.get(ref) + 1);
+    }
+  }
+  return map;
+})();
+
+/**
+ * @param {string} name
+ * @returns {number} how many other tokens reference this one via var(...)
+ */
+export function dependentsCount(name) {
+  return dependentsByName.get(name) ?? 0;
+}
+
 /** Tiers present in the catalogue, ordered most- to least-public. */
 export const TIER_ORDER = ['PUBLIC', 'PUBLIC-ADVANCED', 'INTERNAL'];
 

@@ -11,18 +11,31 @@
    * customised" pill keeps the user oriented even with the body hidden.
    */
   import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
-  import { sync } from '../lib/model.js';
+  import { sync, defaultsByName } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
 
   const count = $derived(Object.keys(overrides).length);
   const css = $derived(generateCSS(overrides, { mode: ui.outputMode }));
   const lineCount = $derived(css ? css.split('\n').length : 0);
 
+  /** Sorted [name, default, override] triples — drives the diff view. */
+  const diffRows = $derived(
+    Object.keys(overrides)
+      .sort((a, b) => a.localeCompare(b))
+      .map((name) => ({
+        name,
+        before: defaultsByName.get(name) || '',
+        after: overrides[name],
+      }))
+  );
+
   let copied = $state(false);
   let importOpen = $state(false);
   let importText = $state('');
   let importMsg = $state('');
   let drawerOpen = $state(true);
+  /** 'css' = generated stylesheet · 'diff' = before/after token list. */
+  let view = $state('css');
 
   async function copy() {
     if (!css) return;
@@ -88,6 +101,20 @@
       <span class="out__count">{count} token{count === 1 ? '' : 's'}{drawerOpen && lineCount ? ` · ${lineCount} lines` : ''}</span>
     </button>
     <div class="out__actions">
+      <div class="cfg-seg out__view" role="group" aria-label="Output view">
+        <button
+          class="cfg-seg__btn"
+          class:cfg-seg__btn--on={view === 'css'}
+          onclick={() => (view = 'css')}
+          title="Generated override stylesheet (copy/download/import)"
+        >CSS</button>
+        <button
+          class="cfg-seg__btn"
+          class:cfg-seg__btn--on={view === 'diff'}
+          onclick={() => (view = 'diff')}
+          title="Before/after diff vs framework defaults"
+        >Diff</button>
+      </div>
       <div class="out__fmt">
         <span
           class="out__fmt-label"
@@ -144,7 +171,28 @@
       </p>
     {/if}
 
-    <pre class="out__code"><code>{@html cssHtml}</code></pre>
+    {#if view === 'diff'}
+      {#if diffRows.length === 0}
+        <p class="out__empty">No overrides yet — every token still uses its framework default.</p>
+      {:else}
+        <div class="diff" role="table" aria-label="Override diff">
+          <div class="diff__head" role="row">
+            <span role="columnheader">Token</span>
+            <span role="columnheader">Framework default</span>
+            <span role="columnheader">Your override</span>
+          </div>
+          {#each diffRows as r (r.name)}
+            <div class="diff__row" role="row">
+              <code class="diff__name" role="cell">{r.name}</code>
+              <code class="diff__before" role="cell" title="Framework default">{r.before || '—'}</code>
+              <code class="diff__after" role="cell" title="Your override">{r.after}</code>
+            </div>
+          {/each}
+        </div>
+      {/if}
+    {:else}
+      <pre class="out__code"><code>{@html cssHtml}</code></pre>
+    {/if}
 
     <footer class="out__foot">
       Synced from <code>{sync.source}</code> · framework
@@ -266,4 +314,57 @@
     flex-shrink: 0;
   }
   .out__foot code { color: var(--cfg-text-muted); }
+
+  /* ── Diff table ────────────────────────────────────────────────────────── */
+  .out__view { margin-right: 4px; }
+  .out__empty {
+    margin: 0;
+    padding: 24px 16px;
+    color: var(--cfg-text-faint);
+    font-size: 13px;
+    text-align: center;
+    flex: 1;
+    border-top: 1px solid var(--cfg-border);
+  }
+  .diff {
+    margin: 0;
+    overflow: auto;
+    flex: 1;
+    min-height: 0;
+    background: var(--cfg-bg);
+    border-top: 1px solid var(--cfg-border);
+    font-family: var(--cfg-mono);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .diff__head, .diff__row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    padding: 6px 16px;
+    align-items: start;
+  }
+  .diff__head {
+    position: sticky;
+    top: 0;
+    background: var(--cfg-surface-2);
+    border-bottom: 1px solid var(--cfg-border);
+    color: var(--cfg-text-muted);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-block: 8px;
+    z-index: 1;
+  }
+  .diff__row { border-bottom: 1px solid var(--cfg-border); }
+  .diff__row:hover { background: rgba(255, 255, 255, 0.025); }
+  .diff__name { color: var(--cfg-text); word-break: break-all; }
+  .diff__before {
+    color: var(--cfg-text-faint);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 113, 118, 0.45);
+    word-break: break-all;
+  }
+  .diff__after { color: #c3e88d; word-break: break-all; }
 </style>

@@ -2,18 +2,35 @@
   /**
    * One token row.
    *
-   * Layout (≥ 720px): [name + tier + alias + note]  [editor]  [reset]
+   * Layout (≥ 720px): [name + tier + drives + (contrast for colors)]  [editor]  [reset]
    * Layout (< 720px): name on top, editor + actions wrap below.
    *
    * The "modified" affordance is a left accent bar plus a subtle background
    * tint, so a customised token reads as live without shouting.
+   *
+   * Two new affordances vs the prior shipped row:
+   *
+   *   1. A "drives N" pill when this token is referenced by ≥ 1 other tokens
+   *      via `var(--sf-foo)` (count from model.dependentsCount). It tells
+   *      the user how far-reaching their edit will be.
+   *
+   *   2. A live WCAG contrast badge for color tokens (ContrastBadge) — the
+   *      ratio of the token's resolved color against pure white/black,
+   *      whichever pairs better. Updates as the user edits.
    */
   import { overrides, clearOverride } from '../lib/store.svelte.js';
+  import { dependentsCount, isColorToken } from '../lib/model.js';
   import TokenEditor from './TokenEditor.svelte';
+  import ContrastBadge from './ContrastBadge.svelte';
 
   let { token } = $props();
 
   const modified = $derived(token.name in overrides);
+  const drives = $derived(dependentsCount(token.name));
+  const isColor = $derived(isColorToken(token));
+  // The effective color value (override if any, else the framework default).
+  // Empty when nothing is set (defensive — every catalogued token has a value).
+  const effectiveValue = $derived(overrides[token.name] || token.value || '');
 
   const tierClass = $derived(
     token.tier === 'PUBLIC'
@@ -51,6 +68,15 @@
         <span class="row__copy" aria-hidden="true">{copied ? '✓' : '⧉'}</span>
       </button>
       <span class="cfg-badge {tierClass}">{tierLabel}</span>
+      {#if drives > 0}
+        <span
+          class="row__drives"
+          title="{drives} other token{drives === 1 ? '' : 's'} reference{drives === 1 ? 's' : ''} this one via var() — editing it cascades."
+        >drives {drives}</span>
+      {/if}
+      {#if isColor}
+        <ContrastBadge value={effectiveValue} />
+      {/if}
       {#if token.aliasOf}
         <span class="row__alias" title="Aliases {token.aliasOf}">→ {token.aliasOf}</span>
       {/if}
@@ -138,6 +164,18 @@
   .row__name:focus-visible {
     outline: 2px solid var(--cfg-accent);
     outline-offset: 1px;
+  }
+  .row__drives {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cfg-accent);
+    background: var(--cfg-accent-soft);
+    border-radius: 999px;
+    padding: 1px 7px;
+    line-height: 1.6;
+    white-space: nowrap;
   }
   .row__alias {
     font-family: var(--cfg-mono);

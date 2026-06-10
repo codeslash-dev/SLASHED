@@ -20,7 +20,8 @@
    * active domain to its panel.
    */
   import { DOMAIN_BY_ID } from './lib/domains.js';
-  import { ui, undo, redo } from './lib/store.svelte.js';
+  import { ui, undo, redo, overrides } from './lib/store.svelte.js';
+  import { setProbeContext } from './lib/probeHost.js';
   import Header from './components/Header.svelte';
   import Sidebar from './components/Sidebar.svelte';
   import DomainPanel from './components/DomainPanel.svelte';
@@ -31,6 +32,13 @@
 
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
   const tool = $derived(domain?.tool ?? '');
+
+  // Keep the contrast-probe host in sync with the user's cascade so every
+  // ContrastBadge resolves `var(...)`, `light-dark()` and `oklch(from ...)`
+  // expressions correctly. setProbeContext is internally idempotent.
+  $effect(() => {
+    setProbeContext({ overrides, theme: ui.previewTheme });
+  });
 
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
   // '[' / ']' cycle domains; 'Escape' clears the search; Ctrl+Z / Ctrl+Shift+Z
