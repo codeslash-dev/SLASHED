@@ -93,9 +93,12 @@ describe('smoke: every editable token routes through the full pipeline', () => {
     const body = css.replace(/^\/\*[\s\S]*?\*\/\n/, '');
     assert.match(body, /^@layer slashed\.overrides \{\n\t:root \{\n/);
     assert.match(body, /\n\t\}\n\}\n$/);
-    // Every edited token appears as a declaration line.
+    // Full regex-escape — `name` is dynamic and any future token whose name
+    // includes a regex metacharacter would otherwise produce a malformed
+    // assertion regex.
+    const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     for (const name of Object.keys(edits)) {
-      assert.match(body, new RegExp(`\\t\\t${name.replace(/-/g, '\\-')}: `));
+      assert.match(body, new RegExp(`\\t\\t${escapeRegExp(name)}: `));
     }
   });
 

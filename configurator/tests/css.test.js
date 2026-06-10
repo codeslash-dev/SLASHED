@@ -83,16 +83,22 @@ describe('generateCSS', () => {
   test('values are sanitised — injection cannot escape the declaration', () => {
     const css = generateCSS({ '--sf-x': '0; } body { display: none } /*' }, { banner: false });
     // The CSS must remain a single, well-formed declaration block. After
-    // sanitisation, the entire payload becomes part of the value (text only)
-    // and the surrounding `:root { … }` braces stay intact.
+    // sanitisation, the payload becomes part of the value (text only) and the
+    // surrounding `:root { … }` braces stay intact.
     const blocks = css.match(/\}/g) || [];
     const opens = css.match(/\{/g) || [];
     assert.equal(opens.length, blocks.length, 'balanced braces');
     // Exactly one `--sf-x:` declaration emitted.
     assert.equal(css.match(/--sf-x:/g).length, 1);
-    // No structural escape characters survive within the value.
-    const valueLine = css.split('\n').find((l) => l.includes('--sf-x:'));
-    assert.doesNotMatch(valueLine, /\{|\}|;\s*[a-zA-Z]/);
+    // The value body itself must contain no structural CSS separators —
+    // not even ones that could chain another declaration like `; --evil: 1`.
+    // We isolate the body (between `--sf-x:` and the terminating `;`) before
+    // asserting, so the closing `;` of the legitimate declaration doesn't
+    // taint the check.
+    const declMatch = css.match(/--sf-x:\s*([^\n]*?);/);
+    assert.ok(declMatch, 'expected --sf-x declaration');
+    const valueBody = declMatch[1];
+    assert.doesNotMatch(valueBody, /[{};]/, `value body still contains structural CSS chars: ${JSON.stringify(valueBody)}`);
   });
 });
 
