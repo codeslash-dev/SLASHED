@@ -276,13 +276,36 @@ Universal browser support.
 
 ---
 
-## `.sf-surface--*`
+## `.sf-surface` and `.sf-surface--*`
 
 Contextual background + auto-contrast text color. Apply to any element
 to give it a filled surface with accessible foreground text.
 
-11 variants: `primary`, `secondary`, `tertiary`, `action`, `neutral`,
-`inverse`, `success`, `warning`, `error`, `info`, `danger`.
+### Generic surface: any color
+
+`.sf-surface` (no modifier) takes **any** color through `--sf-surface-color`
+(default: `--sf-color-base`) — including palette shades — and derives the
+background, an auto-contrast foreground (the same lightness-flip used by
+`--sf-color-text--on-*`), and the full contextual token set:
+
+```html
+<!-- a palette tint surface (requires optional/tokens.palette.css) -->
+<section class="sf-surface" style="--sf-surface-color: var(--sf-color-primary-100)">
+  Text, headings, links and borders re-derive automatically.
+</section>
+
+<!-- any arbitrary color works -->
+<aside class="sf-surface" style="--sf-surface-color: oklch(0.35 0.09 200)">…</aside>
+```
+
+`--sf-surface-color` inherits: a nested `.sf-surface` picks up the outer
+surface's color unless it sets its own. The derivation requires relative
+color syntax; outside the `@supports` gate only the background applies.
+
+### Named variants
+
+11 precomputed variants: `primary`, `secondary`, `tertiary`, `action`,
+`neutral`, `inverse`, `success`, `warning`, `error`, `info`, `danger`.
 
 ```html
 <div class="sf-surface--primary">White text on primary bg</div>
@@ -293,6 +316,37 @@ to give it a filled surface with accessible foreground text.
 Each variant sets `background` to the resolved color token
 (`--sf-color-{name}`) and `color` to the matching on-color token
 (`--sf-color-text--on-{name}`). No extra tokens needed.
+
+### Author your own surface
+
+Both forms rebind the same contextual token set so descendants adapt with no
+extra classes. To make any BEM component a conforming surface, copy the
+contract (shown here seeded from a custom foreground/background pair):
+
+```css
+@supports (color: oklch(from red l c h)) {
+  .my-component {
+    /* pick or derive the foreground for your background */
+    --my-fg: var(--sf-color-text--on-primary);
+
+    --sf-color-text:              var(--my-fg);
+    --sf-color-heading:           var(--my-fg);
+    --sf-color-link:              oklch(from var(--my-fg) l calc(c + 0.08) h);
+    --sf-color-link--hover:       var(--my-fg);
+    --sf-color-link--underline:   oklch(from var(--my-fg) l c h / 0.5);
+    --sf-color-text--secondary:   oklch(from var(--my-fg) l c h / 0.70);
+    --sf-color-text--placeholder: oklch(from var(--my-fg) l c h / 0.45);
+    --sf-color-text--disabled:    oklch(from var(--my-fg) l c h / 0.30);
+    --sf-color-border:            oklch(from var(--my-fg) l c h / 0.20);
+    --sf-color-border--subtle:    oklch(from var(--my-fg) l c h / 0.12);
+    --sf-color-border--strong:    oklch(from var(--my-fg) l c h / 0.35);
+    --sf-shadow-color:            oklch(from var(--my-bg, currentcolor) 0.15 c h);
+  }
+}
+```
+
+In most cases the simpler route is to set `--sf-surface-color` on
+`.sf-surface` and let the framework do this for you.
 
 ---
 

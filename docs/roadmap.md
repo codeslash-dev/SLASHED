@@ -18,12 +18,21 @@ Current version: **0.5.29**
   only.
 - **`@property` for spacing/shadow tokens** — extend typed registration beyond
   colours to enable transitions on layout values and better DevTools inspection.
+- **Consolidate named surfaces onto `.sf-surface`** — the 11 `.sf-surface--*`
+  variants could become one-line `--sf-surface-color` presets of the generic
+  primitive, once a fallback story for the precomputed
+  `tokens.color-fallbacks.css` path is settled.
 
 ## Under consideration
 
 - **Per-layer opt-in bundle via `@import`** — already possible today via the
   granular `core/`/`optional/` files (`core/layers.css` first); needs docs, not
   code.
+- **Native CSS custom functions (`@function`)** — an `optional/functions.css`
+  module exposing a true `--fluid(min, max)` (and friends) as a progressive
+  enhancement over the custom fluid slots, once cross-engine support for
+  `@function` exists. Until then the slot tokens + the documented `clamp()`
+  recipe cover the use case without a build step.
 
 ## Out of scope
 

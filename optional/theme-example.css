@@ -17,6 +17,8 @@
      6. Full token reference (commented out)
 
    See README "Customising tokens" and docs/theming.md.
+   For the scale / typography / fluid-engine control panel see
+   optional/config-example.css.
    ============================================================ */
 
 @layer slashed.themes {
