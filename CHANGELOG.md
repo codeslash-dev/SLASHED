@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.31] - 2026-06-10
+
 ### Added
 - **Custom fluid slots** — `--sf-fluid-custom-{1,2,3}` ad-hoc fluid values: set
   a `-min`/`-max` endpoint pair (unitless rem), read the slot as a length that
