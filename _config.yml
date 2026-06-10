@@ -1,5 +1,36 @@
+title: SLASHED
+description: A modern, layered CSS framework built on @layer
+url: "https://slashed.codeslash.dev"
+
+plugins:
+  - jekyll-optional-front-matter
+
+exclude:
+  - node_modules
+  - configurator
+  - core
+  - optional
+  - scripts
+  - tests
+  - dist
+  - analysis
+  - bundle.config.json
+  - commitlint.config.js
+  - playwright.config.js
+  - ".stylelintrc.json"
+  - ".release-it.json"
+  - package.json
+  - package-lock.json
+  - Gemfile
+  - Gemfile.lock
+
 defaults:
   - scope:
       path: "docs"
     values:
+      layout: default
       render_with_liquid: false
+  - scope:
+      path: ""
+    values:
+      layout: default
