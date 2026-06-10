@@ -1,7 +1,13 @@
 /**
  * Feature: tier-1-color-fallback
  * Property 3: sRGB default source-index strictly less than gated modern
- *             declaration's source-index, per token, in dist/slashed.full.css.
+ *             declaration's source-index, per token, in the documented opt-in
+ *             load order (core/tokens.color-fallbacks.css before the bundle).
+ *
+ * The fallbacks file is NOT part of any default bundle — it is a standalone
+ * opt-in. This test simulates the documented integration order and verifies
+ * that every checked token's ungated sRGB declaration precedes all later
+ * (gated modern) declarations, so capable engines override the fallback.
  *
  * Run: node --test tests/tier1-p3-ordering.test.js
  */
@@ -13,6 +19,7 @@ import fc   from 'fast-check';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist/slashed.full.css');
+const FALLBACKS = path.join(ROOT, 'core/tokens.color-fallbacks.css');
 
 const TOKENS_TO_CHECK = [
   '--sf-color-primary',
@@ -45,21 +52,21 @@ function findDeclarations(css, tokenName) {
 describe('P3: sRGB fallback declared before modern gated expression', () => {
   let full;
 
-  test('dist/slashed.full.css exists', () => {
+  test('source files exist; simulate opt-in load order', () => {
     assert.ok(fs.existsSync(DIST), 'dist/slashed.full.css missing');
-    full = fs.readFileSync(DIST, 'utf8');
+    assert.ok(fs.existsSync(FALLBACKS), 'core/tokens.color-fallbacks.css missing');
+    // Documented opt-in: fallbacks stylesheet linked before the bundle.
+    full = fs.readFileSync(FALLBACKS, 'utf8') + '\n' + fs.readFileSync(DIST, 'utf8');
   });
 
-  // The fallbacks CSS comes before tokens.css in the bundle, so all
-  // declarations from the fallbacks file have smaller source indices.
-  test('tokens.color-fallbacks.css content appears before tokens.css content', () => {
+  // Default bundles must NOT ship the fallbacks — they are opt-in only.
+  test('fallbacks are not embedded in dist/slashed.full.css', () => {
+    const bundle = fs.readFileSync(DIST, 'utf8');
     const fallbacksMarker = 'HSL-based fallbacks for browsers without light-dark()';
-    const tokensMarker    = 'SLASHED — core/tokens.css';
-    const fIdx = full.indexOf(fallbacksMarker);
-    const tIdx = full.indexOf(tokensMarker);
-    assert.ok(fIdx >= 0, 'fallbacks header not found in bundle');
-    assert.ok(tIdx >= 0, 'tokens.css header not found in bundle');
-    assert.ok(fIdx < tIdx, 'fallbacks content should appear before tokens.css in bundle');
+    assert.ok(
+      !bundle.includes(fallbacksMarker),
+      'fallbacks content found inside the default bundle — they must stay opt-in'
+    );
   });
 
   // For each checked token, the sRGB declaration (from fallbacks) must appear

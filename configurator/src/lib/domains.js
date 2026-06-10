@@ -29,8 +29,9 @@ const RULES = [
   { id: 'typography', test: /^--sf-(text|font|leading|tracking|prose|h[1-6]-|heading|display|code|optical|line-height|body|line-clamp|truncate)/ },
   // Spacing & fluid scale engine.
   { id: 'spacing', test: /^--sf-(space|gap|section|fluid|flow|gutter|content-gap|component-pad)/ },
-  // Colors (brand/status sources, resolved colors, links, focus, gradients…).
-  { id: 'colors', test: /^--sf-(color|primary|secondary|tertiary|action|neutral|base|success|warning|error|info|danger|link|focus|gradient|scrim|mask|contrast|lumlocker|current|selection|caret|surface)/ },
+  // Colors (brand/status sources, resolved colors, links, focus, gradients,
+  // palette-mix knobs, contrast biases…).
+  { id: 'colors', test: /^--sf-(color|palette|primary|secondary|tertiary|action|neutral|base|success|warning|error|info|danger|link|focus|gradient|scrim|mask|contrast|lumlocker|current|selection|caret|surface)/ },
   // Motion & effects (animation, transition, easing, blur, opacity, scroll).
   { id: 'motion', test: /^--sf-(duration|ease|transition|animation|motion|scroll|blur|opacity|backdrop|will-change)/ },
   // Layout primitives (grid/flex helpers, containers, sizes, z-index, icons…).

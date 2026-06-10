@@ -262,8 +262,13 @@
   @supports (color: oklch(from red l c h)) {
     .sf-surface {
       /* internal helper, do not consume — auto-contrast foreground via
-         the same lightness flip as --sf-color-text--on-* (tokens.css) */
-      --sf-surface-contrast: oklch(from var(--sf-surface-color) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+         the same lightness flip as --sf-color-text--on-* (tokens.css).
+         / 1 forces full opacity regardless of --sf-surface-color's alpha
+         channel; without it, a semi-transparent source leaks alpha into
+         all derived text/border tokens. Note: L is measured on the raw
+         source color, not on the composed result — keep --sf-surface-color
+         fully opaque for accurate threshold evaluation. */
+      --sf-surface-contrast: oklch(from var(--sf-surface-color) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0 / 1);
       background: var(--sf-surface-color);
       color: var(--sf-surface-contrast);
       --sf-color-text:              var(--sf-surface-contrast);
@@ -277,6 +282,8 @@
       --sf-color-border:            oklch(from var(--sf-surface-contrast) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-surface-contrast) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-surface-contrast) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-surface-contrast);
+      --sf-caret-color:             var(--sf-surface-contrast);
       /* in-family shadow tint — mirrors the named variants' shadow block */
       --sf-shadow-color:            oklch(from var(--sf-surface-color) 0.15 c h);
     }
@@ -292,6 +299,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-primary) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-primary) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-primary) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-primary);
+      --sf-caret-color:             var(--sf-color-text--on-primary);
     }
     .sf-surface--secondary {
       --sf-color-text:              var(--sf-color-text--on-secondary);
@@ -305,6 +314,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-secondary) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-secondary) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-secondary) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-secondary);
+      --sf-caret-color:             var(--sf-color-text--on-secondary);
     }
     .sf-surface--tertiary {
       --sf-color-text:              var(--sf-color-text--on-tertiary);
@@ -318,6 +329,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-tertiary) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-tertiary) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-tertiary) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-tertiary);
+      --sf-caret-color:             var(--sf-color-text--on-tertiary);
     }
     .sf-surface--action {
       --sf-color-text:              var(--sf-color-text--on-action);
@@ -331,6 +344,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-action) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-action) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-action) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-action);
+      --sf-caret-color:             var(--sf-color-text--on-action);
     }
     .sf-surface--neutral {
       --sf-color-text:              var(--sf-color-text--on-neutral);
@@ -344,6 +359,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-neutral) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-neutral) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-neutral) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-neutral);
+      --sf-caret-color:             var(--sf-color-text--on-neutral);
     }
     .sf-surface--inverse {
       --sf-color-text:              var(--sf-color-text--on-inverse);
@@ -357,6 +374,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-inverse) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-inverse) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-inverse) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-inverse);
+      --sf-caret-color:             var(--sf-color-text--on-inverse);
     }
     .sf-surface--success {
       --sf-color-text:              var(--sf-color-text--on-success);
@@ -370,6 +389,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-success) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-success) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-success) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-success);
+      --sf-caret-color:             var(--sf-color-text--on-success);
     }
     .sf-surface--warning {
       --sf-color-text:              var(--sf-color-text--on-warning);
@@ -383,6 +404,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-warning) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-warning) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-warning) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-warning);
+      --sf-caret-color:             var(--sf-color-text--on-warning);
     }
     .sf-surface--error {
       --sf-color-text:              var(--sf-color-text--on-error);
@@ -396,6 +419,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-error) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-error) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-error) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-error);
+      --sf-caret-color:             var(--sf-color-text--on-error);
     }
     .sf-surface--info {
       --sf-color-text:              var(--sf-color-text--on-info);
@@ -409,6 +434,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-info) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-info) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-info) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-info);
+      --sf-caret-color:             var(--sf-color-text--on-info);
     }
     .sf-surface--danger {
       --sf-color-text:              var(--sf-color-text--on-danger);
@@ -422,6 +449,8 @@
       --sf-color-border:            oklch(from var(--sf-color-text--on-danger) l c h / 0.20);
       --sf-color-border--subtle:    oklch(from var(--sf-color-text--on-danger) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-color-text--on-danger) l c h / 0.35);
+      --sf-focus-ring-color:        var(--sf-color-text--on-danger);
+      --sf-caret-color:             var(--sf-color-text--on-danger);
     }
   } /* end @supports (color: oklch(from red l c h)) — surface contextual cascade */
 

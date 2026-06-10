@@ -424,6 +424,7 @@
     align-items: center;
   }
 
+  /* CQ breakpoint L — 48em. Cannot use var() inside @container per CSS spec. */
   @container sf-alternate (min-width: 48em) {
     .sf-alternate > * {
       grid-template-columns: 1fr 1fr;
@@ -457,11 +458,13 @@
     gap:     var(--sf-grid-gap);
   }
 
+  /* CQ breakpoint S — 30em. Cannot use var() inside @container per CSS spec. */
   @container (min-width: 30em) {
     .sf-grid-4 { grid-template-columns: repeat(2, 1fr); }
     .sf-grid-6 { grid-template-columns: repeat(3, 1fr); }
   }
 
+  /* CQ breakpoint L — 48em. Cannot use var() inside @container per CSS spec. */
   @container (min-width: 48em) {
     .sf-grid-2 { grid-template-columns: repeat(2, 1fr); }
     .sf-grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -541,10 +544,12 @@
     gap:                   var(--sf-bento-gap);
   }
 
+  /* CQ breakpoint XS — below 30em. Cannot use var() inside @container per CSS spec. */
   @container (max-width: 29.99em) {
-    .sf-bento { grid-template-columns: 1fr; } /* single column at smallest container sizes */
+    .sf-bento { grid-template-columns: 1fr; }
   }
 
+  /* CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. */
   @container (min-width: 30em) and (max-width: 47.99em) {
     .sf-bento { grid-template-columns: repeat(2, 1fr); }
   }

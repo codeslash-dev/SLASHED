@@ -212,6 +212,80 @@ need a value the formula can't produce):
 Place Tier 3 overrides in `slashed.overrides` (loaded after the bundle) so they
 survive framework updates. See `optional/overrides-example.css`.
 
+## Per-surface color control
+
+`.sf-surface--*` named variants automatically wire text, borders, links, focus
+rings, and caret to the `--sf-color-text--on-*` token for that role. When the
+auto-contrast formula produces a value that still doesn't meet your requirements,
+you can override any surface token in `slashed.overrides`:
+
+```css
+@layer slashed.overrides {
+  /* Force a specific foreground on the primary surface */
+  .sf-surface--primary {
+    --sf-color-text--on-primary: oklch(0.12 0 0);
+  }
+
+  /* For generic .sf-surface with a custom --sf-surface-color in the
+     ambiguous lightness band, pin the public surface-facing tokens */
+  .my-card.sf-surface {
+    --sf-color-text:       oklch(0.10 0 0);
+    --sf-color-heading:    var(--sf-color-text);
+    --sf-focus-ring-color: var(--sf-color-text);
+    --sf-caret-color:      var(--sf-color-text);
+  }
+}
+```
+
+On named variants (`.sf-surface--*`), every surface-derived token
+(`--sf-color-text`, `--sf-color-heading`, `--sf-color-link`,
+`--sf-color-border`, `--sf-focus-ring-color`, `--sf-caret-color`, …) follows
+the variant's `--sf-color-text--on-*` token, so that single override fixes
+every descendant. On the generic `.sf-surface` the foreground is derived
+internally from `--sf-surface-color`; pin the public tokens shown above
+when you need a different result.
+
+For a per-brand-palette shift without per-element overrides, re-declare the
+source token under your own selector — all derived tokens recompute:
+
+```css
+[data-brand="midnight"] {
+  --sf-color-primary-light: oklch(0.28 0.15 260);
+}
+```
+
+## Contrast guarantee
+
+SLASHED auto-picks near-black (`oklch(0.1 0 0)`) or near-white
+(`oklch(0.95 0 0)`) for text on colored surfaces based on the background's
+OKLCH lightness. This guarantees **≥ 3:1** (WCAG AA Large Text / UI components)
+for the vast majority of inputs.
+
+**The ambiguous band (L ≈ 0.52–0.67):** the binary black/white choice cannot
+guarantee 4.5:1 here — both extremes land near the perceptual crossover. If your
+brand color lands in this range you have two options:
+
+1. **Adjust `--sf-contrast-threshold`** — shift the crossover so one of the two
+   extremes moves further from the background:
+   ```css
+   @layer slashed.overrides {
+     /* Primary brand at L ≈ 0.58; shift down so white text is chosen */
+     .sf-surface--primary { --sf-contrast-threshold: 0.55; }
+   }
+   ```
+
+2. **Override the resolved token** — pin a known-good foreground colour:
+   ```css
+   @layer slashed.overrides {
+     :root { --sf-color-text--on-primary: oklch(0.12 0 0); }
+   }
+   ```
+
+The CSS `contrast-color()` function (currently in the specification, not yet
+in any browser) will replace this formula automatically once it ships — the
+framework already uses the same perceptual channel so the migration will be
+mechanical.
+
 ## Link contrast
 
 `--sf-color-link` keeps your action hue but clamps its OKLCH lightness toward a

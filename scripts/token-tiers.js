@@ -80,6 +80,11 @@ const ADVANCED = new Set([
 const STEP = '(?:2xs|xs|s|m|l|xl|2xl|3xl|4xl)';
 const ADVANCED_PATTERNS = [
   new RegExp(`^--sf-(?:space|text)-${STEP}-to-${STEP}$`),
+  //   · Palette ramp-shape knobs (optional/tokens.palette.css):
+  //     `--sf-palette-mix-{step}` — color-mix() percentages reshaping the
+  //     entire numeric palette ladder at once. Niche/powerful, documented
+  //     as PUBLIC-ADVANCED in the palette file header.
+  /^--sf-palette-mix-\d+$/,
 ];
 
 /**
