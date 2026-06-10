@@ -1,10 +1,5 @@
 # Configurator roadmap
 
-A short, honest list of the high-impact DX features the configurator does **not**
-have yet, ordered by impact-vs-effort. Items here came out of an audit against
-[Automatic.css 3.0](https://automaticcss.com/)'s panel — the bar this tool aims
-for.
-
 Anything **below** the "—" line is intentional non-goals; there to make the
 intentional scope of the configurator legible.
 
