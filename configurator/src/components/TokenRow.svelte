@@ -19,7 +19,7 @@
    *      whichever pairs better. Updates as the user edits.
    */
   import { overrides, clearOverride } from '../lib/store.svelte.js';
-  import { dependentsCount, isColorToken } from '../lib/model.js';
+  import { dependentsCount, isColorToken, isConsumptionToken } from '../lib/model.js';
   import TokenEditor from './TokenEditor.svelte';
   import ContrastBadge from './ContrastBadge.svelte';
 
@@ -41,6 +41,15 @@
   );
   const tierLabel = $derived(
     token.tier === 'PUBLIC-ADVANCED' ? 'advanced' : token.tier.toLowerCase()
+  );
+
+  const isConsume = $derived(isConsumptionToken(token));
+  const usageClass = $derived(isConsume ? 'cfg-badge--consume' : 'cfg-badge--configure');
+  const usageLabel = $derived(isConsume ? 'consume' : 'configure');
+  const usageTitle = $derived(
+    isConsume
+      ? 'Consumption token — a derived output you READ in component CSS (e.g. color: var(...)). To change this value, override the upstream configure token instead.'
+      : 'Configure token — a literal input you SET in your :root override to tune the system.'
   );
 
   let copied = $state(false);
@@ -68,6 +77,7 @@
         <span class="row__copy" aria-hidden="true">{copied ? '✓' : '⧉'}</span>
       </button>
       <span class="cfg-badge {tierClass}">{tierLabel}</span>
+      <span class="cfg-badge {usageClass}" title={usageTitle}>{usageLabel}</span>
       {#if drives > 0}
         <span
           class="row__drives"

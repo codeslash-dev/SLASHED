@@ -110,6 +110,18 @@ function hasTopLevelSpace(value) {
 }
 
 /**
+ * True when a token's role is 'consumption' — a derived output you READ in
+ * component CSS (e.g. `color: var(--sf-color-primary)`), not SET in a
+ * theme override. Consumption tokens reference `var(--sf-…)` in their value;
+ * knob tokens are literal primitives you configure.
+ * @param {object} token
+ * @returns {boolean}
+ */
+export function isConsumptionToken(token) {
+  return token?.role === 'consumption';
+}
+
+/**
  * Decide whether a token represents a color.
  * @param {object} token
  * @returns {boolean}
