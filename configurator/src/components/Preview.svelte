@@ -19,6 +19,7 @@
     { var: 'raised', label: 'Raised' },
   ];
   const spaceSteps = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
+  const typeScale = ['2xl', 'xl', 'l', 'm', 's', 'xs'];
 </script>
 
 <section class="preview">
@@ -50,6 +51,27 @@
           <code class="pv__code">--sf-color-code</code> styling inline code.
         </p>
         <p class="pv__muted">Muted caption · secondary hierarchy · auto-contrasting.</p>
+      </section>
+
+      <!-- Display type — the framework's display font sizes -->
+      <section class="pv__block">
+        <p class="pv__eyebrow">Display type</p>
+        <p class="pv__display pv__display--l">Display L</p>
+        <p class="pv__display pv__display--m">Display M</p>
+        <p class="pv__display pv__display--s">Display S</p>
+      </section>
+
+      <!-- Type scale -->
+      <section class="pv__block">
+        <p class="pv__eyebrow">Type scale</p>
+        <div class="pv__scale">
+          {#each typeScale as s (s)}
+            <div class="pv__scale-row">
+              <span class="pv__scale-sample" style="font-size: var(--sf-text-{s});">Aa</span>
+              <code>--sf-text-{s}</code>
+            </div>
+          {/each}
+        </div>
       </section>
 
       <!-- Surfaces / elevation -->
@@ -237,6 +259,34 @@
   .pv__muted {
     margin: 0;
     font-size: var(--sf-text-s, 0.85rem);
+    color: var(--sf-color-text--muted, inherit);
+  }
+
+  /* Display type + type scale */
+  .pv__display {
+    margin: 0;
+    font-family: var(--sf-font-display, var(--sf-font-heading, inherit));
+    font-weight: var(--sf-font-weight-display, 800);
+    color: var(--sf-color-heading, inherit);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+  .pv__display--l { font-size: var(--sf-text-display-l, 3rem); line-height: var(--sf-display-l-line-height, 1.05); }
+  .pv__display--m { font-size: var(--sf-text-display-m, 2.4rem); line-height: var(--sf-display-m-line-height, 1.1); }
+  .pv__display--s { font-size: var(--sf-text-display-s, 1.9rem); line-height: var(--sf-display-s-line-height, 1.15); }
+
+  .pv__scale { display: flex; flex-direction: column; gap: 6px; }
+  .pv__scale-row { display: flex; align-items: baseline; gap: 10px; }
+  .pv__scale-sample {
+    font-family: var(--sf-font-heading, inherit);
+    color: var(--sf-color-text, inherit);
+    line-height: 1.1;
+    min-width: 2.2em;
+  }
+  .pv__scale-row code {
+    font-family: var(--sf-font-mono, monospace);
+    font-size: 11px;
     color: var(--sf-color-text--muted, inherit);
   }
   .pv__a {

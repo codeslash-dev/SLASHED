@@ -218,7 +218,14 @@
   {/each}
 </div>
 
-<div class="wcag">
+<!--
+  declStr (all framework tokens + overrides, current theme) is applied to the
+  VISIBLE panel too — not just the hidden probes — so every `var(--sf-color-*)`
+  swatch, the checker result, the usage chips and the locked-role swatches
+  actually render their color. The configurator never loads the framework
+  stylesheet, so without this the panel showed blank/inherited swatches.
+-->
+<div class="wcag" style={declStr}>
   <header class="wcag__head">
     <h2 class="wcag__title">Accessibility</h2>
     <p class="wcag__lead">

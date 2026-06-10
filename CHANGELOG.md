@@ -27,6 +27,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   `docs/macros.md`; "Fluid engine" section in the README; roadmap entries for a
   native `@function --fluid()` module and surface consolidation.
 
+## [0.5.30] - 2026-06-10
+
+### Bug Fixes
+- **configurator:** render WCAG color swatches, sync to 0.5.29, show display type
+
 ## [0.5.29] - 2026-06-10
 
 ### Features
