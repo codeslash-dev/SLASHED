@@ -205,7 +205,10 @@ function writeSizeBadge(label) {
   const target = fs.existsSync(minPath)
     ? minPath
     : resolveInsideRoot(`dist/slashed.${label}.css`);
-  if (!fs.existsSync(target)) return;
+  if (!fs.existsSync(target)) {
+    console.warn(`[bundle] Badge skipped for "${label}" — bundle not found`);
+    return;
+  }
 
   const gzipKb = zlib.gzipSync(fs.readFileSync(target), { level: 9 }).length / 1024;
   const badge = {
