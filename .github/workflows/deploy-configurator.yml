@@ -73,6 +73,9 @@ jobs:
           source: ./
           destination: ./_site
 
+      - name: Fix _site permissions after Jekyll
+        run: sudo chown -R "$USER" _site/
+
       - name: Inject CSS bundles, optional CSS, and configurator
         run: |
           set -euo pipefail
