@@ -34,7 +34,7 @@
   // Curated "text on background" matrix — the contrast pairs that actually
   // matter for legibility. Filtered to tokens present in this catalogue.
   const FG = ['--sf-color-text', '--sf-color-heading', '--sf-color-text--muted', '--sf-color-link', '--sf-color-action', '--sf-color-primary'].filter((n) => tokenByName.has(n));
-  const BG = ['--sf-color-bg', '--sf-color-surface', '--sf-color-inset', '--sf-color-base', '--sf-color-primary', '--sf-color-action'].filter((n) => tokenByName.has(n));
+  const BG = ['--sf-color-bg', '--sf-color-surface', '--sf-color-inset', '--sf-color-primary', '--sf-color-action'].filter((n) => tokenByName.has(n));
 
   // Unified palette generator — ONE surface, ONE lock set. Every role is a
   // framework brand token; locked roles are kept, the rest generated coherently
@@ -385,6 +385,12 @@
                   <span class="badge badge--neutral">surface</span>
                 {/if}
               </div>
+            {:else if s === null}
+              <div class="opt__row opt__row--warn">
+                <span class="opt__sw" style="background: var({ROLE_TOKENS[role]})"></span>
+                <span class="opt__role">{role}</span>
+                <span class="opt__none">no accessible value on this hue — left unchanged</span>
+              </div>
             {/if}
           {/each}
           <div class="opt__apply">
@@ -567,6 +573,7 @@
   .opt__results { margin-top: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); overflow: hidden; }
   .opt__row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--cfg-border); }
   .opt__row:last-child { border-bottom: none; }
+  .opt__row--warn { opacity: 0.75; }
   .opt__sw { width: 30px; height: 30px; border-radius: var(--cfg-radius-s); border: 1px solid var(--cfg-border-strong); flex-shrink: 0; }
   .opt__role { font-weight: 600; text-transform: capitalize; min-width: 70px; }
   .opt__val { font-family: var(--cfg-mono); font-size: 11px; background: var(--cfg-bg); padding: 2px 6px; border-radius: 3px; color: var(--cfg-text-muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
