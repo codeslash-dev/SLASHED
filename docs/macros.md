@@ -326,8 +326,13 @@ contract (shown here seeded from a custom foreground/background pair):
 ```css
 @supports (color: oklch(from red l c h)) {
   .my-component {
+    /* your component's background */
+    --my-bg: var(--sf-color-primary);
+    background: var(--my-bg);
+
     /* pick or derive the foreground for your background */
     --my-fg: var(--sf-color-text--on-primary);
+    color: var(--my-fg);
 
     --sf-color-text:              var(--my-fg);
     --sf-color-heading:           var(--my-fg);
@@ -340,7 +345,7 @@ contract (shown here seeded from a custom foreground/background pair):
     --sf-color-border:            oklch(from var(--my-fg) l c h / 0.20);
     --sf-color-border--subtle:    oklch(from var(--my-fg) l c h / 0.12);
     --sf-color-border--strong:    oklch(from var(--my-fg) l c h / 0.35);
-    --sf-shadow-color:            oklch(from var(--my-bg, currentcolor) 0.15 c h);
+    --sf-shadow-color:            oklch(from var(--my-bg) 0.15 c h);
   }
 }
 ```

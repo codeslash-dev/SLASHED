@@ -166,6 +166,8 @@ recalibrating the engine or `--sf-space-scale` *does* re-rhythm sections — but
 there is no **independent** section multiplier (competitor: one section-space
 input × fluid multiplier). **Fix:** multiply the six `--sf-section-pad--*`
 definitions by a new `--sf-section-scale` (default `1`). One token, ~6 lines.
+*(Addressed in v0.5.30 / PR #299 — `--sf-section-scale` now multiplies all
+`--sf-section-pad--*` definitions.)*
 
 ### 6. Root font-size / zoom accessibility story
 The reference framework documents root-size and rem strategy explicitly.

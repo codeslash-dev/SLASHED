@@ -13,6 +13,7 @@ const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).hr
 // Self-contained for page.evaluate.
 function resolveTokenPx(tok) {
   const el = document.createElement('div');
+  el.style.display = 'inline-block';
   el.style.width = `var(${tok})`;
   document.body.appendChild(el);
   const val = parseFloat(getComputedStyle(el).width);

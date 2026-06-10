@@ -16,7 +16,7 @@ function probeSurface(surfaceColor) {
   const cv = document.createElement('canvas'); cv.width = cv.height = 1;
   const ctx = cv.getContext('2d', { willReadFrequently: true });
   const toLum = (color) => {
-    ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = '#000'; ctx.fillStyle = color; ctx.fillRect(0, 0, 1, 1);
+    ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = color; ctx.fillRect(0, 0, 1, 1);
     const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
     const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
     return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
