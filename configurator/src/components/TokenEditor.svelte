@@ -345,12 +345,10 @@
     letter-spacing: 0.05em;
   }
 
-  /* On narrow phones the "raw" toggle pushes the slider+number off-screen
-     (clipped by overflow:hidden up the chain). It's an advanced affordance —
-     hiding it recovers ~38px, keeping slider + number fully visible. */
+  /* On narrow phones, shrink the number spinbox slightly so the slider gets
+     more room. The "raw" button stays visible — hiding it would lock users out
+     when the slider is disabled (e.g. an existing calc()/clamp() override). */
   @media (max-width: 600px) {
-    .len__raw { display: none; }
-    /* Shrink the number spinbox slightly so the slider gets more room. */
     .len__num { flex: 0 0 58px; }
   }
 </style>

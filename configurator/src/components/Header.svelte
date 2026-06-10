@@ -254,8 +254,10 @@
     /* Sidebar and preview toggles are both ineffective at this width:
        preview is always hidden and sidebar is always icon-only regardless of state */
     .hdr__controls > button { display: none; }
-    /* Prevent remaining controls from wrapping to a second row */
-    .hdr__controls { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 6px; }
+    /* Prevent remaining controls from wrapping to a second row.
+       flex-start ensures overflow goes right so the first items (undo/redo)
+       stay visible by default on very narrow screens (≤320px). */
+    .hdr__controls { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 6px; justify-content: flex-start; }
     .hdr__controls::-webkit-scrollbar { display: none; }
   }
 </style>
