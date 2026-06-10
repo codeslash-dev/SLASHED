@@ -216,7 +216,7 @@ function writeSizeBadge(label) {
     label,
     message: `${gzipKb.toFixed(1)} kB gzip`,
     color: 'brightgreen',
-    logo: 'css3',
+    namedLogo: 'css3',
   };
   const out = resolveInsideRoot(`dist/badge-${label}.json`);
   fs.writeFileSync(out, `${JSON.stringify(badge, null, 2)}\n`, 'utf8');
