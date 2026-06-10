@@ -22,7 +22,7 @@
     wcagLevelLarge,
     levelClass,
     resolveToRgb,
-    suggestAccessiblePalette,
+    suggestPalette,
   } from '../lib/color.js';
 
   // Every color token, for the free pair picker.
@@ -34,20 +34,48 @@
   // Curated "text on background" matrix — the contrast pairs that actually
   // matter for legibility. Filtered to tokens present in this catalogue.
   const FG = ['--sf-color-text', '--sf-color-heading', '--sf-color-text--muted', '--sf-color-link', '--sf-color-action', '--sf-color-primary'].filter((n) => tokenByName.has(n));
-  const BG = ['--sf-color-bg', '--sf-color-surface', '--sf-color-inset', '--sf-color-base', '--sf-color-primary', '--sf-color-action'].filter((n) => tokenByName.has(n));
+  const BG = ['--sf-color-bg', '--sf-color-surface', '--sf-color-inset', '--sf-color-primary', '--sf-color-action'].filter((n) => tokenByName.has(n));
 
-  // Optimizer source tokens.
-  const OPT = { base: '--sf-color-base', neutral: '--sf-color-neutral', action: '--sf-color-action' };
-  const optAvailable = tokenByName.has(OPT.base) && tokenByName.has(OPT.neutral) && tokenByName.has(OPT.action);
+  // Unified palette generator — ONE surface, ONE lock set. Every role is a
+  // framework brand token; locked roles are kept, the rest generated coherently
+  // against the (possibly locked) base. Generation always works off the LIGHT
+  // source palette, since the framework derives dark mode from it.
+  const ROLE_TOKENS = {
+    base: '--sf-color-base',
+    neutral: '--sf-color-neutral',
+    primary: '--sf-color-primary',
+    secondary: '--sf-color-secondary',
+    tertiary: '--sf-color-tertiary',
+    action: '--sf-color-action',
+  };
+  const PALETTE_ROLES = ['base', 'neutral', 'primary', 'secondary', 'tertiary', 'action'].filter(
+    (r) => tokenByName.has(ROLE_TOKENS[r])
+  );
+  const genAvailable = tokenByName.has(ROLE_TOKENS.base);
+  const paletteMeasured = PALETTE_ROLES.map((r) => ROLE_TOKENS[r]);
 
   // Pair-picker selection.
   let fg = $state(FG[0] ?? colorNames[0] ?? '');
   let bg = $state(BG[0] ?? colorNames[1] ?? colorNames[0] ?? '');
 
-  // Tokens we need a resolved RGB for this render.
-  const measured = $derived([...new Set([...FG, ...BG, fg, bg, OPT.base, OPT.neutral, OPT.action].filter(Boolean))]);
+  // "Used combinations" preview: auto-contrasting on-color text on each brand
+  // & status color — the pairing that actually ships (button labels, badges),
+  // which the text-on-surface matrix doesn't cover. Resolved in the preview
+  // theme, so it reflects light/dark.
+  const USAGE_ROLES = ['primary', 'secondary', 'tertiary', 'action', 'success', 'warning', 'error', 'info'].filter(
+    (r) => tokenByName.has(`--sf-color-${r}`) && tokenByName.has(`--sf-color-text--on-${r}`)
+  );
+  const usageTokens = USAGE_ROLES.flatMap((r) => [`--sf-color-${r}`, `--sf-color-text--on-${r}`]).filter((n) =>
+    tokenByName.has(n)
+  );
+
+  // Tokens we need a resolved RGB for this render (checker + matrix + usage).
+  const measured = $derived([...new Set([...FG, ...BG, ...usageTokens, fg, bg].filter(Boolean))]);
 
   const declStr = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
+  // The generator resolves its inputs in LIGHT mode regardless of the preview
+  // theme, because brand overrides are written as the light source palette.
+  const declLight = $derived(buildPreviewDeclarations(overrides, 'light'));
 
   /** name -> [r,g,b] | null, read from the probe spans after each render. */
   let resolved = $state({});
@@ -82,6 +110,22 @@
     resolved = next;
   });
 
+  // Light-mode resolution for the generator inputs (own probe root).
+  let paletteResolved = $state({});
+  /** @type {Record<string, HTMLElement>} */
+  let paletteProbes = {};
+  $effect(() => {
+    void declLight;
+    const next = {};
+    for (const name of paletteMeasured) {
+      const el = paletteProbes[name];
+      if (!el) continue;
+      const computed = getComputedStyle(el).color;
+      next[name] = parseRgb(computed) ?? resolveToRgb(computed);
+    }
+    paletteResolved = next;
+  });
+
   const fgRgb = $derived(resolved[fg] ?? null);
   const bgRgb = $derived(resolved[bg] ?? null);
   const ratio = $derived(fgRgb && bgRgb ? contrastRatio(fgRgb, bgRgb) : null);
@@ -103,25 +147,57 @@
     )
   );
 
-  // ── Optimizer ──────────────────────────────────────────────────────────
+  // On-color usage chips: contrast of the on-color text against its color.
+  const usage = $derived(
+    USAGE_ROLES.map((role) => {
+      const bgN = `--sf-color-${role}`;
+      const fgN = `--sf-color-text--on-${role}`;
+      const c = resolved[bgN];
+      const t = resolved[fgN];
+      const r = c && t ? contrastRatio(t, c) : null;
+      return { role, bg: bgN, fg: fgN, ratio: r, level: r !== null ? wcagLevel(r) : null };
+    })
+  );
+
+  // ── Unified palette generator ────────────────────────────────────────────
   let suggestion = $state(null);
   let optMsg = $state('');
 
-  function runOptimizer() {
+  // Lock state across ALL roles: a locked role is kept as a fixed anchor, the
+  // rest are generated coherently against the (possibly locked) base. Lock the
+  // one or two brand colors the client gave you and generate the rest WCAG-safe.
+  let locked = $state({
+    base: false,
+    neutral: false,
+    primary: false,
+    secondary: false,
+    tertiary: false,
+    action: false,
+  });
+
+  function toggleLock(role) {
+    locked[role] = !locked[role];
+    if (suggestion) runGenerator();
+  }
+
+  function runGenerator() {
     optMsg = '';
-    suggestion = suggestAccessiblePalette({
-      baseRgb: resolved[OPT.base],
-      neutralRgb: resolved[OPT.neutral],
-      actionRgb: resolved[OPT.action],
-    });
-    if (!suggestion) optMsg = 'Could not resolve base/neutral/action colors to optimize.';
+    const roles = {};
+    for (const role of PALETTE_ROLES) {
+      const rgb = paletteResolved[ROLE_TOKENS[role]];
+      if (rgb) roles[role] = rgb;
+    }
+    suggestion = suggestPalette({ roles, locked: { ...locked } });
+    if (!suggestion) optMsg = 'Could not resolve the base color to generate against.';
   }
 
   function applySuggestion() {
     if (!suggestion) return;
-    if (suggestion.base) setOverride(OPT.base, suggestion.base.color);
-    if (suggestion.neutral) setOverride(OPT.neutral, suggestion.neutral.color);
-    if (suggestion.action) setOverride(OPT.action, suggestion.action.color);
+    // Write only generated (unlocked) roles — locked anchors keep their value.
+    for (const role of PALETTE_ROLES) {
+      const s = suggestion[role];
+      if (s && s.color && !s.locked) setOverride(ROLE_TOKENS[role], s.color);
+    }
     optMsg = 'Applied ✓';
     suggestion = null;
     setTimeout(() => (optMsg = ''), 2400);
@@ -132,6 +208,13 @@
 <div class="wcag-probe" bind:this={probeRoot} style={declStr} aria-hidden="true">
   {#each measured as name (name)}
     <span bind:this={probes[name]} style="color: {cssColor(name)}"></span>
+  {/each}
+</div>
+
+<!-- Light-mode probe root for the palette generator inputs. -->
+<div class="wcag-probe" style={declLight} aria-hidden="true">
+  {#each paletteMeasured as name (name)}
+    <span bind:this={paletteProbes[name]} style="color: {cssColor(name)}"></span>
   {/each}
 </div>
 
@@ -228,32 +311,87 @@
     </section>
   {/if}
 
-  <!-- ── Optimizer ───────────────────────────────────────────────────── -->
-  {#if optAvailable}
+  <!-- ── On-color usage preview ──────────────────────────────────────── -->
+  {#if usage.length}
     <section class="card">
-      <h3 class="card__h">Palette optimizer</h3>
+      <h3 class="card__h">Text on colors — used combinations</h3>
       <p class="card__lead">
-        Keeps your brand hues but searches lightness for the most accessible
-        <strong>base</strong>, <strong>neutral</strong> and <strong>action</strong> values.
+        How the auto-contrasting on-color text reads on each brand &amp; status color in
+        <strong>{ui.previewTheme}</strong> mode (button labels, badges). Switch the theme from the live preview bar.
       </p>
+      <div class="usage">
+        {#each usage as u (u.role)}
+          <div class="usage__chip" style="background: {cssColor(u.bg)}; color: {cssColor(u.fg)};">
+            <span class="usage__aa">Aa</span>
+            <span class="usage__role">{u.role}</span>
+            {#if u.ratio !== null}
+              <span class="badge {levelClass(u.level)}">{u.ratio.toFixed(1)}:1</span>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    </section>
+  {/if}
+
+  <!-- ── Palette generator ───────────────────────────────────────────── -->
+  {#if genAvailable}
+    <section class="card">
+      <h3 class="card__h">Accessible palette generator</h3>
+      <p class="card__lead">
+        One coherent palette, generated against a single surface so the foundation
+        and brand accents never drift. <strong>Lock</strong> the one or two brand
+        colors a client gave you — the rest (and the neutral body text) are generated
+        to clear WCAG, with distinct hues spread around the unlocked colors.
+      </p>
+
+      <div class="opt__locks" role="group" aria-label="Lock colors as fixed anchors">
+        {#each PALETTE_ROLES as role (role)}
+          <button
+            type="button"
+            class="opt__lock"
+            class:opt__lock--on={locked[role]}
+            onclick={() => toggleLock(role)}
+            aria-pressed={locked[role]}
+            title={locked[role] ? `${role} is locked — kept as-is` : `Lock ${role} as a fixed anchor`}
+          >
+            <span class="opt__lock-ico" aria-hidden="true">{locked[role] ? '🔒' : '🔓'}</span>
+            <span class="opt__lock-sw" style="background: var({ROLE_TOKENS[role]})"></span>
+            <span class="opt__lock-name">{role}</span>
+          </button>
+        {/each}
+      </div>
+
       <div class="opt__actions">
-        <button class="cfg-btn cfg-btn--primary" onclick={runOptimizer}>Suggest accessible palette</button>
+        <button class="cfg-btn cfg-btn--primary" onclick={runGenerator}>Generate accessible palette</button>
         {#if optMsg}<span class="opt__msg">{optMsg}</span>{/if}
       </div>
 
       {#if suggestion}
         <div class="opt__results">
-          {#each [['base', suggestion.base], ['neutral', suggestion.neutral], ['action', suggestion.action]] as [role, s] (role)}
-            <div class="opt__row">
-              <span class="opt__sw" style="background: {s ? s.color : '#888'}"></span>
-              <span class="opt__role">{role}</span>
-              {#if s}
-                <code class="opt__val">{s.color}</code>
-                {#if s.ratio != null}<span class="badge {levelClass(wcagLevel(s.ratio))}">{s.ratio.toFixed(2)}:1 {wcagLevel(s.ratio)}</span>{:else}<span class="badge badge--neutral">surface</span>{/if}
-              {:else}
-                <span class="opt__none">no accessible value on this hue</span>
-              {/if}
-            </div>
+          {#each PALETTE_ROLES as role (role)}
+            {@const s = suggestion[role]}
+            {#if s}
+              <div class="opt__row">
+                <span class="opt__sw" style="background: {s.color ? s.color : `var(${ROLE_TOKENS[role]})`}"></span>
+                <span class="opt__role">{role}{#if s.locked} <span class="opt__locked-tag" title="Locked anchor">🔒</span>{/if}</span>
+                {#if s.color}
+                  <code class="opt__val">{s.color}</code>
+                {:else}
+                  <code class="opt__val opt__val--locked">locked — unchanged</code>
+                {/if}
+                {#if s.ratio != null}
+                  <span class="badge {levelClass(wcagLevel(s.ratio))}">{s.ratio.toFixed(2)}:1 {wcagLevel(s.ratio)}</span>
+                {:else}
+                  <span class="badge badge--neutral">surface</span>
+                {/if}
+              </div>
+            {:else if s === null}
+              <div class="opt__row opt__row--warn">
+                <span class="opt__sw" style="background: var({ROLE_TOKENS[role]})"></span>
+                <span class="opt__role">{role}</span>
+                <span class="opt__none">no accessible value on this hue — left unchanged</span>
+              </div>
+            {/if}
           {/each}
           <div class="opt__apply">
             <button class="cfg-btn cfg-btn--primary" onclick={applySuggestion}>Apply to overrides</button>
@@ -383,15 +521,63 @@
   .dot--aa-large { background: #fbe7a8; }
   .dot--fail { background: #f5c2c2; }
 
+  /* On-color usage chips */
+  .usage { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+  .usage__chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 12px;
+    border-radius: var(--cfg-radius-s);
+    border: 1px solid var(--cfg-border);
+    min-height: 52px;
+  }
+  .usage__aa { font-size: 20px; font-weight: 700; line-height: 1; }
+  .usage__role { font-size: 12px; text-transform: capitalize; flex: 1; opacity: 0.92; }
+
   /* Optimizer */
   .opt__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .opt__msg { font-size: 13px; color: var(--cfg-ok); font-weight: 500; }
+
+  /* Lock controls */
+  .opt__locks { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; }
+  .opt__lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    background: var(--cfg-bg);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    color: var(--cfg-text-muted);
+    font-size: 12px;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: border-color 120ms, color 120ms, background 120ms;
+  }
+  .opt__lock:hover { color: var(--cfg-text); }
+  .opt__lock--on {
+    border-color: var(--cfg-accent-strong);
+    color: var(--cfg-text);
+    background: var(--cfg-surface-2);
+    font-weight: 600;
+  }
+  .opt__lock-ico { font-size: 13px; line-height: 1; }
+  .opt__lock-sw {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--cfg-border-strong);
+  }
+  .opt__locked-tag { font-size: 11px; }
   .opt__results { margin-top: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); overflow: hidden; }
   .opt__row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--cfg-border); }
   .opt__row:last-child { border-bottom: none; }
+  .opt__row--warn { opacity: 0.75; }
   .opt__sw { width: 30px; height: 30px; border-radius: var(--cfg-radius-s); border: 1px solid var(--cfg-border-strong); flex-shrink: 0; }
   .opt__role { font-weight: 600; text-transform: capitalize; min-width: 70px; }
   .opt__val { font-family: var(--cfg-mono); font-size: 11px; background: var(--cfg-bg); padding: 2px 6px; border-radius: 3px; color: var(--cfg-text-muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .opt__val--locked { font-style: italic; color: var(--cfg-text-faint); }
   .opt__none { color: var(--cfg-text-faint); font-size: 12px; }
   .opt__apply { display: flex; gap: 8px; padding: 12px 14px; background: var(--cfg-surface-2); }
 </style>
