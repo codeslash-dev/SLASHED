@@ -138,6 +138,25 @@ Or shorthand with `light-dark()`:
 :root { --sf-color-primary: light-dark(#3b5bdb, #748ffc); }
 ```
 
+## Fluid engine
+
+The fluid type, display, and space scales are **generated at runtime** from 12
+input scalars — viewport range, modular ratios (a separate ratio for the min
+and max viewport), and base sizes. Change one ratio and the whole system
+regenerates — no build:
+
+```css
+:root {
+  --sf-text-ratio-max: 1.414;  /* steeper headline hierarchy on desktop */
+  --sf-fluid-max-vw:   110;    /* keep growing until very wide screens  */
+}
+```
+
+Three `--sf-fluid-custom-{1..3}` slots provide ad-hoc fluid values from a pair
+of endpoints. See [docs/theming.md](docs/theming.md#fluid-engine) and the
+all-dials-in-one-file reference
+[`optional/config-example.css`](optional/config-example.css).
+
 ## Dark mode
 
 ```html

@@ -40,6 +40,90 @@ Structural contract: `--sf-color-base-light` must be light and
 
 See the [token reference](tokens.md) for every overridable property.
 
+## Fluid engine
+
+Colour is half the system; the other half is generative too. The fluid type,
+display, and space scales are computed **at runtime** from 12 input scalars —
+change one, and every `clamp()` in the system recalibrates. No build step, no
+token regeneration.
+
+| Input | Default | Effect |
+|---|---|---|
+| `--sf-fluid-min-vw` | `22.5` | viewport (rem) where fluidity starts — below it, all fluid values sit at their minimum |
+| `--sf-fluid-max-vw` | `90` | viewport (rem) where fluidity stops — above it, all fluid values sit at their maximum |
+| `--sf-text-ratio-min` | `1.25` | modular ratio of the type scale at the min viewport |
+| `--sf-text-ratio-max` | `1.333` | modular ratio of the type scale at the max viewport |
+| `--sf-text-base-min` | `1` | `--sf-text-m` at the min viewport (rem) |
+| `--sf-text-base-max` | `1.25` | `--sf-text-m` at the max viewport (rem) |
+| `--sf-text-display-base-min` | `2.4` | `--sf-text-display-s` at the min viewport (rem) |
+| `--sf-text-display-base-max` | `3` | `--sf-text-display-s` at the max viewport (rem) |
+| `--sf-space-ratio-min` | `1.25` | modular ratio of the space scale at the min viewport |
+| `--sf-space-ratio-max` | `1.333` | modular ratio of the space scale at the max viewport |
+| `--sf-space-base-min` | `1` | `--sf-space-m` at the min viewport (rem) |
+| `--sf-space-base-max` | `2` | `--sf-space-m` at the max viewport (rem) |
+
+The dual-ratio design means the scale can be subtle on phones and dramatic on
+desktops — most systems expose a single ratio; SLASHED interpolates between two.
+
+All values are unitless numbers (`@property <number>`), so they compose into
+`pow()` and `calc()`. Worked examples:
+
+```css
+/* steeper headline hierarchy on desktop only */
+:root { --sf-text-ratio-max: 1.414; }
+
+/* keep growing until very wide screens */
+:root { --sf-fluid-max-vw: 110; }
+
+/* denser overall layout: same curve, smaller spacing endpoints */
+:root { --sf-space-base-max: 1.6; }
+```
+
+The bridge tokens in `optional/tokens.sizes-extended.css`
+(`--sf-space-l-to-m` …) are outputs of the same engine and recalibrate with it.
+
+On top of the generative inputs sit linear multipliers — `--sf-text-scale`,
+`--sf-space-scale`, `--sf-text-display-scale`, `--sf-radius-scale`,
+`--sf-motion-scale`, `--sf-section-scale` (one dial for all section padding),
+and `--sf-leading-taper` (progressively tightens the per-size line-heights up
+the scale; default `0`).
+
+For a single copy-paste file exposing every dial, see
+[`optional/config-example.css`](../optional/config-example.css).
+
+### Custom fluid slots
+
+For ad-hoc fluid values — "this padding should go from 0.875rem to 1.375rem" —
+three pre-wired slots avoid hand-written `clamp()`:
+
+```css
+:root {
+  --sf-fluid-custom-1-min: 0.875;  /* unitless rem */
+  --sf-fluid-custom-1-max: 1.375;
+}
+.card { padding-inline: var(--sf-fluid-custom-1); }
+```
+
+The slot interpolates across the engine's viewport range, so it stays
+calibrated when `--sf-fluid-{min,max}-vw` are retuned. Endpoints may be
+redefined per scope. Descending ranges (min > max) are not supported by
+`clamp()` — swap the endpoints and negate at the use site.
+
+Need more than three? The canonical recipe behind the slots is:
+
+```css
+/* fluid from MIN rem to MAX rem across the engine's viewport range */
+--my-value: clamp(
+  MINrem,
+  calc((MAX - MIN) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw))
+       * (100vw - var(--sf-fluid-min-vw) * 1rem) + MINrem),
+  MAXrem
+);
+```
+
+Because it reads `--sf-fluid-*`, every value built this way recalibrates with
+the engine instead of drifting on magic numbers.
+
 ## Dark mode
 
 Dark values derive automatically from the `-light` sources — the 6-token rebrand
@@ -171,3 +255,23 @@ automatically under `@media (prefers-contrast: more)`.
   it; if you hand-roll a theme, set `color-scheme` too.
 - **Images don't auto-adapt.** Swap art with `<picture>` +
   `prefers-color-scheme`, or dim with a token-driven overlay.
+
+## Root size, rem and user zoom
+
+SLASHED is rem-based end to end: every fluid scale, spacing token, and
+container width resolves against the root font size.
+
+- **Don't set a `px` font-size on `:root`/`html`.** A fixed pixel root
+  overrides the user's browser font-size preference and breaks text-only zoom —
+  the whole system would stop honouring it. The framework deliberately leaves
+  the root size alone (user agent default = `16px` unless the user says
+  otherwise).
+- **The engine bases are rem multipliers, not lengths.** `--sf-text-base-min: 1`
+  means "1× the user's root size", so a user who sets a 20px default font gets
+  a proportionally larger system — type, spacing, and section rhythm together.
+- **Zoom is free.** Page zoom and text-only zoom both scale the rem, and
+  everything derived from it follows. Avoid re-introducing `px` values in
+  overrides if you want to keep that property.
+- **Want denser or larger output?** Reach for the multipliers
+  (`--sf-text-scale`, `--sf-space-scale`, …) or the engine bases — never the
+  root font-size.

@@ -4,6 +4,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Added
+- **Custom fluid slots** — `--sf-fluid-custom-{1,2,3}` ad-hoc fluid values: set
+  a `-min`/`-max` endpoint pair (unitless rem), read the slot as a length that
+  interpolates across the engine's viewport range and recalibrates with
+  `--sf-fluid-{min,max}-vw`.
+- **Generic surface** — `.sf-surface` (`core/macros.css`) + `--sf-surface-color`
+  (`core/tokens.macros.css`): give it any color (including palette shades) and
+  it derives background, auto-contrast foreground, and the full contextual
+  token cascade — extending the colour-context contract beyond the 11 named
+  `.sf-surface--*` variants.
+- **`--sf-section-scale`** — global multiplier over every `--sf-section-pad--*`
+  size; one dial re-rhythms all section padding (default `1`, no visual change).
+- **`--sf-leading-taper`** — progressive per-size line-height tightener consumed
+  by `optional/tokens.sizes-extended.css` (default `0`, no visual change).
+- **`optional/config-example.css`** — single annotated "control panel" reference
+  file: brand colours, the 12 fluid-engine inputs, custom slots, all scale
+  multipliers, font families, radius.
+- **docs:** new "Fluid engine" and "Root size, rem and user zoom" sections in
+  `docs/theming.md` (engine inputs, worked examples, canonical `clamp()`
+  recipe); generic-surface + author-your-own-surface recipes in
+  `docs/macros.md`; "Fluid engine" section in the README; roadmap entries for a
+  native `@function --fluid()` module and surface consolidation.
+
 ## [0.5.30] - 2026-06-10
 
 ### Bug Fixes

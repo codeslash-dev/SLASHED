@@ -11,15 +11,15 @@
     ],
     "fallback_source": "core/tokens.color-fallbacks.css",
     "counts": {
-      "tokens": 786,
+      "tokens": 798,
       "by_tier": {
-        "PUBLIC": 669,
-        "PUBLIC-ADVANCED": 116,
+        "PUBLIC": 670,
+        "PUBLIC-ADVANCED": 127,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 209,
-        "consumption": 577
+        "knob": 217,
+        "consumption": 581
       },
       "with_fallback": 57,
       "fallback_only": 33
@@ -3665,6 +3665,87 @@
       "fallback": false,
       "value": "var(--sf-space-content)"
     },
+    "--sf-fluid-custom-1": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "clamp(calc(var(--sf-fluid-custom-1-min) * 1rem), calc((var(--sf-fluid-custom-1-max) - var(--sf-fluid-custom-1-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-1-min) * 1rem), calc(var(--sf-fluid-custom-1-max) * 1rem))"
+    },
+    "--sf-fluid-custom-1-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2"
+    },
+    "--sf-fluid-custom-1-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-fluid-custom-2": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "clamp(calc(var(--sf-fluid-custom-2-min) * 1rem), calc((var(--sf-fluid-custom-2-max) - var(--sf-fluid-custom-2-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-2-min) * 1rem), calc(var(--sf-fluid-custom-2-max) * 1rem))"
+    },
+    "--sf-fluid-custom-2-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2"
+    },
+    "--sf-fluid-custom-2-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
+    "--sf-fluid-custom-3": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "clamp(calc(var(--sf-fluid-custom-3-min) * 1rem), calc((var(--sf-fluid-custom-3-max) - var(--sf-fluid-custom-3-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-3-min) * 1rem), calc(var(--sf-fluid-custom-3-max) * 1rem))"
+    },
+    "--sf-fluid-custom-3-max": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "2"
+    },
+    "--sf-fluid-custom-3-min": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
     "--sf-fluid-max-vw": {
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
@@ -4547,6 +4628,15 @@
       "fallback": false,
       "value": "1.3"
     },
+    "--sf-leading-taper": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "0"
+    },
     "--sf-leading-tight": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -5211,7 +5301,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(var(--sf-space-4xl) * 2)"
+      "value": "calc(var(--sf-space-4xl) * 2 * var(--sf-section-scale))"
     },
     "--sf-section-pad--l": {
       "tier": "PUBLIC",
@@ -5220,7 +5310,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "var(--sf-space-4xl)"
+      "value": "calc(var(--sf-space-4xl) * var(--sf-section-scale))"
     },
     "--sf-section-pad--m": {
       "tier": "PUBLIC",
@@ -5229,7 +5319,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "var(--sf-space-3xl)"
+      "value": "calc(var(--sf-space-3xl) * var(--sf-section-scale))"
     },
     "--sf-section-pad--s": {
       "tier": "PUBLIC",
@@ -5238,7 +5328,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "var(--sf-space-2xl)"
+      "value": "calc(var(--sf-space-2xl) * var(--sf-section-scale))"
     },
     "--sf-section-pad--xl": {
       "tier": "PUBLIC",
@@ -5247,7 +5337,7 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "calc(var(--sf-space-4xl) * 1.5)"
+      "value": "calc(var(--sf-space-4xl) * 1.5 * var(--sf-section-scale))"
     },
     "--sf-section-pad--xs": {
       "tier": "PUBLIC",
@@ -5256,7 +5346,16 @@
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "var(--sf-space-xl)"
+      "value": "calc(var(--sf-space-xl) * var(--sf-section-scale))"
+    },
+    "--sf-section-scale": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
     },
     "--sf-shadow-2xl": {
       "tier": "PUBLIC",
@@ -6014,6 +6113,15 @@
       "fallback": false,
       "value": "1px"
     },
+    "--sf-surface-color": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base)"
+    },
     "--sf-switcher-gap": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -6066,7 +6174,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-snug)"
+      "value": "calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))"
     },
     "--sf-text-2xl-max-width": {
       "tier": "PUBLIC",
@@ -6210,7 +6318,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-tight)"
+      "value": "calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))"
     },
     "--sf-text-3xl-max-width": {
       "tier": "PUBLIC",
@@ -6318,7 +6426,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-tight)"
+      "value": "calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))"
     },
     "--sf-text-4xl-max-width": {
       "tier": "PUBLIC",
@@ -6507,7 +6615,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-normal)"
+      "value": "calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))"
     },
     "--sf-text-l-max-width": {
       "tier": "PUBLIC",
@@ -6588,7 +6696,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-normal)"
+      "value": "calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))"
     },
     "--sf-text-m-max-width": {
       "tier": "PUBLIC",
@@ -6678,7 +6786,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-relaxed)"
+      "value": "calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))"
     },
     "--sf-text-s-max-width": {
       "tier": "PUBLIC",
@@ -6786,7 +6894,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-snug)"
+      "value": "calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))"
     },
     "--sf-text-xl-max-width": {
       "tier": "PUBLIC",
@@ -6876,7 +6984,7 @@
         "optional/tokens.sizes-extended.css"
       ],
       "fallback": false,
-      "value": "var(--sf-leading-relaxed)"
+      "value": "calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))"
     },
     "--sf-text-xs-max-width": {
       "tier": "PUBLIC",

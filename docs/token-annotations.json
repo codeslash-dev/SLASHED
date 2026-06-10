@@ -781,6 +781,19 @@
     "--sf-text-4xl-font-weight": "Font weight for 4×-large text.",
     "--sf-text-4xl-letter-spacing": "Letter-spacing for 4×-large text.",
     "--sf-text-4xl-line-height": "Line height for 4×-large text.",
-    "--sf-text-4xl-max-width": "Optimal line length for 4×-large text."
+    "--sf-text-4xl-max-width": "Optimal line length for 4×-large text.",
+
+    "--sf-fluid-custom-1-min": "Lower endpoint (unitless rem) of custom fluid slot 1. Pair with --sf-fluid-custom-1-max, then read --sf-fluid-custom-1.",
+    "--sf-fluid-custom-1-max": "Upper endpoint (unitless rem) of custom fluid slot 1.",
+    "--sf-fluid-custom-2-min": "Lower endpoint (unitless rem) of custom fluid slot 2.",
+    "--sf-fluid-custom-2-max": "Upper endpoint (unitless rem) of custom fluid slot 2.",
+    "--sf-fluid-custom-3-min": "Lower endpoint (unitless rem) of custom fluid slot 3.",
+    "--sf-fluid-custom-3-max": "Upper endpoint (unitless rem) of custom fluid slot 3.",
+    "--sf-fluid-custom-1": "Ad-hoc fluid value: interpolates between its two endpoint inputs across the engine's viewport range (--sf-fluid-{min,max}-vw). Read this; set the endpoints.",
+    "--sf-fluid-custom-2": "Ad-hoc fluid value: interpolates between its two endpoint inputs across the engine's viewport range.",
+    "--sf-fluid-custom-3": "Ad-hoc fluid value: interpolates between its two endpoint inputs across the engine's viewport range.",
+    "--sf-section-scale": "Global multiplier applied to every --sf-section-pad--* size — one dial re-rhythms all section padding (default 1).",
+    "--sf-leading-taper": "Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token (tokens.sizes-extended). Default 0 keeps the curated defaults.",
+    "--sf-surface-color": "Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it."
   }
 }
