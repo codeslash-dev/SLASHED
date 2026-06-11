@@ -25,7 +25,7 @@
     "Core tokens | Font weights": "Numeric font-weight scale plus named aliases for common roles.",
     "Core tokens | Font sizes": "Fluid font-size scale. Values interpolate between mobile and desktop sizes, so prefer these over fixed rem values.",
     "Core tokens | Line heights & letter spacing": "Typographic fine-tuning tokens: leading (line-height) and tracking (letter-spacing) for every weight class.",
-    "Core tokens | TYPOGRAPHY ALIASES": "Complete per-style typography bundles. Each token captures font-family, size, weight, line-height, and letter-spacing for a named text style.",
+    "Core tokens | TYPOGRAPHY ALIASES": "Part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens.",
     "Core tokens | Border radius": "Border-radius scale from xs hairline to full circle. Stick to this scale so UI elements share a consistent curvature language.",
     "Core tokens | Border shorthands": "Ready-to-use border shorthand values (width + style + color) for the three most common border weights.",
     "Core tokens | Border widths": "Raw border-width values. Use the shorthands above unless you need to override just the width.",

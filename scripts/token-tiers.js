@@ -105,6 +105,16 @@ function tierOf(name) {
 // primitive INPUT.
 const TOKEN_REFERENCE = /var\(\s*--sf-/;
 
+// Explicit knob overrides — tokens whose DEFAULT value happens to reference
+// another token (e.g. for automatic dark-mode adaptation) but are still
+// user-settable inputs. The heuristic would mis-classify these as consumption.
+const FORCED_KNOB = new Set([
+  // Default wraps the scalar in calc(N + var(--sf-is-dark)*0.17) so dark mode
+  // auto-boosts opacity. Users set the base scalar; the calc is the delivery
+  // vehicle, not the consumed output.
+  '--sf-shadow-strength',
+]);
+
 /**
  * Role of a token — whether consumers are expected to SET it (knob) or READ it
  * (consumption) — derived deterministically from its declared value.
@@ -113,10 +123,12 @@ const TOKEN_REFERENCE = /var\(\s*--sf-/;
  * consumption value. Role carries no SemVer meaning; it is a documentation aid.
  *
  * @param {string|null|undefined} value the token's declared value
+ * @param {string} [name] the token name (used for explicit FORCED_KNOB overrides)
  * @returns {'knob'|'consumption'}
  */
-function roleOf(value) {
+function roleOf(value, name) {
+  if (name && FORCED_KNOB.has(name)) return 'knob';
   return TOKEN_REFERENCE.test(value || '') ? 'consumption' : 'knob';
 }
 
-export { INTERNAL, ADVANCED, ADVANCED_PATTERNS, tierOf, roleOf };
+export { INTERNAL, ADVANCED, ADVANCED_PATTERNS, FORCED_KNOB, tierOf, roleOf };

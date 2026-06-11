@@ -29,6 +29,7 @@
   import Preview from './components/Preview.svelte';
   import WcagPanel from './components/WcagPanel.svelte';
   import ThemeGallery from './components/ThemeGallery.svelte';
+  import Cheatsheet from './components/Cheatsheet.svelte';
 
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
   const tool = $derived(domain?.tool ?? '');
@@ -77,7 +78,7 @@
       ui.mode = 'advanced';
     } else if (e.key === '[' || e.key === ']') {
       // Cycle non-tool domains.
-      const ids = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects', 'wcag', 'themes', 'misc'];
+      const ids = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects', 'wcag', 'themes', 'misc', 'cheatsheet'];
       const i = ids.indexOf(ui.domain);
       if (i !== -1) {
         const next = (i + (e.key === ']' ? 1 : -1) + ids.length) % ids.length;
@@ -99,6 +100,8 @@
       <WcagPanel />
     {:else if tool === 'themes'}
       <ThemeGallery />
+    {:else if tool === 'cheatsheet'}
+      <Cheatsheet />
     {:else}
       {#key ui.domain}
         <DomainPanel {domain} />

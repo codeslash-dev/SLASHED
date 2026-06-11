@@ -130,7 +130,7 @@ let withFallback = 0;
 for (const n of names) {
   const e = index.get(n);
   tierCounts[e.tier]++;
-  roleCounts[roleOf(e.value)]++;
+  roleCounts[roleOf(e.value, n)]++;
   if (e.fallback) withFallback++;
 }
 
@@ -152,7 +152,7 @@ const jsonOut = {
   tokens: Object.fromEntries(
     names.map(n => {
       const e = index.get(n);
-      return [n, { tier: e.tier, role: roleOf(e.value), files: e.files, fallback: e.fallback, value: e.value }];
+      return [n, { tier: e.tier, role: roleOf(e.value, n), files: e.files, fallback: e.fallback, value: e.value }];
     })
   ),
   fallback_only: fallbackOnly,
@@ -220,7 +220,7 @@ for (const n of names) {
   const e = index.get(n);
   const files = e.files.map(shortFile).join(' + ');
   const fb = e.fallback ? 'yes' : '—';
-  md += `| \`${n}\` | ${e.tier} | ${roleOf(e.value)} | ${files} | ${fb} | \`${esc(e.value)}\` |\n`;
+  md += `| \`${n}\` | ${e.tier} | ${roleOf(e.value, n)} | ${files} | ${fb} | \`${esc(e.value)}\` |\n`;
 }
 md += '\n';
 

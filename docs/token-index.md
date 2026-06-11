@@ -23,8 +23,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 227 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 581 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 228 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 580 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 **57** tokens have a legacy HSL fallback in `core/tokens.color-fallbacks.css`
 (for engines without `light-dark()` / `oklch(from …)`), plus
@@ -782,7 +782,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-shadow-m` | PUBLIC | consumption | Core | yes | `0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-none` | PUBLIC | knob | Core | yes | `none` |
 | `--sf-shadow-s` | PUBLIC | consumption | Core | yes | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))` |
-| `--sf-shadow-strength` | PUBLIC-ADVANCED | consumption | Core | — | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
+| `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | Core | — | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | PUBLIC | consumption | Core | yes | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | PUBLIC | consumption | Core | yes | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
 | `--sf-sidebar-gap` | PUBLIC | consumption | Layout | — | `var(--sf-space-gap)` |

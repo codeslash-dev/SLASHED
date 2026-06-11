@@ -213,7 +213,6 @@ export const CATEGORY_ORDER = [
   'Macro tokens',
   'Palette tokens',
   'Sizes-extended tokens',
-  'Component tokens',
   'Color fallback (legacy HSL)',
 ];
 

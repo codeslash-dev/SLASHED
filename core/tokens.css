@@ -212,7 +212,7 @@
      media query. Do not set directly. */
   @property --sf-is-dark { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
-  /* @property — INTERACTION STATE FLAGS — integer state bits set by JS or :has() */
+  /* @property — INTERACTION STATE FLAGS */
   @property --sf-is-active  { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -379,12 +379,16 @@
     --sf-scrollbar-track: transparent;
 
     /* ----------------------------------------------------------
-       Shadow — base opacity and glow tint
-       --sf-shadow-strength base value for light mode; auto-boosted by
+       Shadow strength — base opacity for light mode; auto-boosted by
        +0.17 in dark mode via --sf-is-dark. Override with a calc() to
        preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
+    /* ----------------------------------------------------------
+       Shadow glow color — tint used by --sf-shadow-glow. Override to
+       retint glows; opacity/dark-mode adaptation is controlled by
+       --sf-shadow-strength.
+       ---------------------------------------------------------- */
     --sf-shadow-glow-color: var(--sf-color-primary);
 
     /* ----------------------------------------------------------
@@ -1303,10 +1307,10 @@
   }
 
   /* ============================================================
-     TYPOGRAPHY ALIASES — complete per-style typography bundles.
-     Each token captures font-family, size, weight, line-height,
-     and letter-spacing for a named text role (body, code, heading,
-     h1–h6, display). Override one token to retune the whole style.
+     TYPOGRAPHY ALIASES — part of the per-style typography bundle
+     for a named text role (body, code, heading, h1–h6, display).
+     The full bundle spans font-family, size, weight, line-height,
+     and letter-spacing across related tokens.
      ============================================================ */
 
   :root {

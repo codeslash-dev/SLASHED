@@ -445,7 +445,7 @@ function buildTokenEntries(bundlesFor) {
           name,
           type: 'token',
           tier: tierOf(name),
-          role: roleOf(data.value),
+          role: roleOf(data.value, name),
           namespace: namespaceOf(name),
           category: meta.category,
           area: meta.area,
@@ -468,7 +468,7 @@ function buildTokenEntries(bundlesFor) {
         // Token redeclared in a later file — last value wins, union sources.
         existing.value = data.value ?? existing.value;
         existing.aliasOf = aliasTarget(existing.value);
-        existing.role = roleOf(existing.value);
+        existing.role = roleOf(existing.value, name);
         existing.registered = existing.registered || !!data.registered;
         existing.animatable = existing.registered;
         existing.syntax = existing.syntax ?? data.syntax ?? null;
@@ -510,7 +510,7 @@ function buildFallbackOnlyEntries(tokenNames, bundlesFor) {
       name,
       type: 'token',
       tier: 'PUBLIC-ADVANCED',
-      role: roleOf(value),
+      role: roleOf(value, name),
       namespace: namespaceOf(name),
       category: 'Color fallback (legacy HSL)',
       area: 'fallback',
