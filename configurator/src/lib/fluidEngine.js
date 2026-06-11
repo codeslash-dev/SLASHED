@@ -91,7 +91,15 @@ export function engineTokens(kind) {
   ];
 }
 
-/** Format a knob number as a plain CSS value string. */
+/**
+ * Format a knob number as a plain CSS value string.
+ *
+ * Rounds to at most 4 decimals, then deliberately strips trailing zeros via
+ * parseFloat ("1.2500" → "1.25", "1.0000" → "1"): the trimmed form keeps the
+ * exported CSS clean and matches how the framework writes its own defaults,
+ * and `entry()` compares numerically so formatting never affects the
+ * default-detection.
+ */
 function num(v) {
   return String(parseFloat(Number(v).toFixed(4)));
 }

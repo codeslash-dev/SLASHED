@@ -15,7 +15,8 @@ That is our structural advantage and the panel is built to make it felt.
 
 ## 1. Problem statement (pre-restructure)
 
-The configurator was complete (all 841 tokens reachable) but chaotic as a
+The configurator was complete (every token reachable — 841 at the time of
+writing) but chaotic as a
 first-run experience:
 
 - **Quick Knobs opened every Basic panel.** `--sf-space-scale` drives 45

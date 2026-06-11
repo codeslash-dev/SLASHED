@@ -118,9 +118,12 @@ describe('smoke: docs and sources stay vendor-neutral', () => {
   // Product constraint: the configurator never name-drops competitor
   // products — comparisons use generic phrasing ("other framework
   // configurators"). Scans every authored .md/.svelte/.js under
-  // configurator/ (generated data, deps and build output excluded).
+  // configurator/ (generated data is excluded by the extension filter;
+  // deps, VCS and build/coverage output by the dir skip list). The regex is
+  // intentionally scoped to the product names that have actually appeared
+  // in this repo's history — extend it when a new comparison sneaks in.
   const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-  const SKIP_DIRS = new Set(['node_modules', 'dist', '.svelte-kit']);
+  const SKIP_DIRS = new Set(['node_modules', 'dist', '.svelte-kit', 'build', 'coverage', '.git', 'test-results']);
   const VENDOR_RE = /\bacss\b|automatic\.css/i;
 
   function* walk(dir) {
