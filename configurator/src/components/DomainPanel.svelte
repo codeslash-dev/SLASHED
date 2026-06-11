@@ -14,7 +14,7 @@
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN } from '../lib/domains.js';
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
-  import { ui, overrides, clearAll } from '../lib/store.svelte.js';
+  import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
   import TokenGroup from './TokenGroup.svelte';
   import TokenRow from './TokenRow.svelte';
   import BrandColorRow from './BrandColorRow.svelte';
@@ -80,7 +80,8 @@
 
   // "Reset domain" button — clears overrides only for tokens in this domain.
   function resetDomain() {
-    for (const t of modifiedHere) delete overrides[t.name];
+    const patch = Object.fromEntries(modifiedHere.map((t) => [t.name, null]));
+    if (modifiedHere.length) patchOverrides(patch);
   }
 </script>
 

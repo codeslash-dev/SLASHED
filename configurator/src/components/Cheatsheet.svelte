@@ -1,27 +1,17 @@
 <script>
   /**
-   * Cheatsheet — searchable, filterable reference for every token and class in
-   * the SLASHED framework.
+   * Cheatsheet — searchable, filterable reference for every token in the
+   * SLASHED framework.
    *
-   * Shows all 841 tokens + 223 classes with name, tier, role/kind, namespace/
-   * prefix, value, and description. Rows paginate (PAGE_SIZE per page) and the
-   * full set is filtered in-memory so switching filters is instant.
+   * Shows all tokens with name, tier, role, namespace, default value, and
+   * description. Rows paginate (PAGE_SIZE per page) and the full set is
+   * filtered in-memory so switching filters is instant.
    */
   import { allTokens } from '../lib/model.js';
 
   const PAGE_SIZE = 60;
 
-  // Load class entries from the same generated catalogue (they are excluded from
-  // allTokens which filters for type=token only).
-  import rawCatalogue from '../data/api-index.generated.json';
-
-  const allClasses = rawCatalogue.tokens
-    ? [] // if file only has tokens field
-    : [];
-
-  // Combine tokens + classes for the cheatsheet. We reuse the tokens array from
-  // model.js (already filtered to type:token) and add a synthetic type field.
-  const ALL_ENTRIES = allTokens.map((t) => ({ ...t, type: 'token' }));
+  const ALL_ENTRIES = allTokens;
 
   // ── Filters ─────────────────────────────────────────────────────────────────
   let query      = $state('');

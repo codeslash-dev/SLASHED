@@ -3,7 +3,7 @@
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
     "frameworkVersion": "0.5.33",
-    "tokensHash": "df88f670ae68",
+    "tokensHash": "28f54bcf3a47",
     "bundles": [
       "essential",
       "full",
@@ -14818,7 +14818,7 @@
     {
       "name": "--sf-shadow-strength",
       "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "shadow",
       "category": "Core tokens",
       "group": "Shadow",
