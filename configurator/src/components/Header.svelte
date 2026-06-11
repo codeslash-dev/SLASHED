@@ -39,9 +39,18 @@
         {totalTokens} tokens
       </span>
       {#if modCount > 0}
-        <span class="hdr__pill hdr__pill--mod" title="{modCount} active override{modCount === 1 ? '' : 's'}">
-          {modCount} modified
-        </span>
+        <button
+          class="hdr__pill hdr__pill--mod hdr__pill--btn"
+          onclick={() => {
+            ui.outputOpen = true;
+            requestAnimationFrame(() => {
+              document.querySelector('.out')?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+            });
+          }}
+          title="{modCount} active override{modCount === 1 ? '' : 's'} — open the export drawer"
+        >
+          {modCount} customised · Export CSS
+        </button>
       {/if}
     </div>
   </div>
@@ -188,6 +197,14 @@
     color: var(--cfg-warn);
     border-color: rgba(255, 213, 86, 0.4);
     background: rgba(255, 213, 86, 0.12);
+  }
+  .hdr__pill--btn {
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .hdr__pill--btn:hover {
+    background: rgba(255, 213, 86, 0.22);
+    border-color: rgba(255, 213, 86, 0.7);
   }
 
   .hdr__search {

@@ -315,6 +315,16 @@
           This domain has no curated basics — switch to <strong>Advanced</strong> (A) to edit the full catalogue.
         </p>
       {/if}
+
+      {#if domain.docsPath}
+        <p class="panel__docs">
+          <a
+            href="https://github.com/codeslash-dev/SLASHED/blob/main/{domain.docsPath}"
+            target="_blank"
+            rel="noreferrer"
+          >Learn more about {domain.label.toLowerCase()} in the framework docs →</a>
+        </p>
+      {/if}
     {/if}
   </div>
 </section>
@@ -504,6 +514,18 @@
     border-radius: 4px;
     border: 1px solid var(--cfg-border);
   }
+
+  .panel__docs {
+    margin: 4px 0 0;
+    font-size: 12px;
+    text-align: center;
+  }
+  .panel__docs a {
+    color: var(--cfg-text-faint);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+  .panel__docs a:hover { color: var(--cfg-accent); text-decoration: underline; }
 
   /* Tighter horizontal padding on narrow phones recovers ~16px of content
      width, reducing the chance of token editors overflowing their container. */

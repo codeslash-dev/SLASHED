@@ -106,6 +106,8 @@ export const KNOBS_BY_DOMAIN = {
  *                   change it)
  *   powerIntro    - one-line warning copy above the Power-knobs group in
  *                   Advanced (required for any domain with quick knobs)
+ *   docsPath      - repo-relative path to the matching framework doc,
+ *                   linked from the panel footer
  *   tool          - non-token tool slot: 'wcag' renders the WCAG panel
  *   essentials    - curated "basic" token names (rendered as editor rows in
  *                   basic + advanced); names absent from the active catalogue
@@ -130,6 +132,7 @@ export const KNOBS_BY_DOMAIN = {
 export const DOMAINS = [
   {
     id: 'colors',
+    docsPath: 'docs/theming.md',
     label: 'Colors',
     icon: '🎨',
     blurb: 'Brand & status sources, semantic surfaces, links, focus, gradients, palette mix.',
@@ -159,6 +162,7 @@ export const DOMAINS = [
   },
   {
     id: 'typography',
+    docsPath: 'docs/tokens.md',
     label: 'Typography',
     icon: '🔤',
     blurb: 'Font families, fluid type ramp, headings, prose and inline text behaviour.',
@@ -192,6 +196,7 @@ export const DOMAINS = [
   },
   {
     id: 'spacing',
+    docsPath: 'docs/tokens.md',
     label: 'Spacing',
     icon: '📏',
     blurb: 'Fluid spacing scale, gaps, section padding and content rhythm.',
@@ -212,6 +217,7 @@ export const DOMAINS = [
   },
   {
     id: 'layout',
+    docsPath: 'docs/layout.md',
     label: 'Layout',
     icon: '🧱',
     blurb: 'Containers, grids, layout primitives, icons, ratios and z-index.',
@@ -258,6 +264,7 @@ export const DOMAINS = [
   },
   {
     id: 'borders',
+    docsPath: 'docs/tokens.md',
     label: 'Borders',
     icon: '⬜',
     blurb: 'Corner radius, border widths, strokes and dividers.',
@@ -276,6 +283,7 @@ export const DOMAINS = [
   },
   {
     id: 'shadows',
+    docsPath: 'docs/tokens.md',
     label: 'Shadows',
     icon: '🌒',
     blurb: 'Elevation shadow ramp, drop / text / scroll shadows and glow.',
@@ -294,6 +302,7 @@ export const DOMAINS = [
   },
   {
     id: 'motion',
+    docsPath: 'docs/motion.md',
     label: 'Motion',
     icon: '🎞️',
     blurb: 'Durations, easings, transition and animation presets.',
@@ -316,6 +325,7 @@ export const DOMAINS = [
   },
   {
     id: 'effects',
+    docsPath: 'docs/tokens.md',
     label: 'Effects',
     icon: '✨',
     blurb: 'Blur, opacity, scrim, mask and other compositing effects.',
@@ -348,6 +358,7 @@ export const DOMAINS = [
   },
   {
     id: 'misc',
+    docsPath: 'docs/tokens.md',
     label: 'Misc',
     icon: '🧩',
     blurb: 'Print, interaction-state flags, fluid scale slots and other stragglers.',
