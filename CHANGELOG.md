@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.35] - 2026-06-11
+
+### Features
+- **configurator:** docs links per domain, header export shortcut
+- **configurator:** scalar-writing scale generator + style preset rows
+- **configurator:** curated Basic forms with friendly labels
+- **configurator:** demote quick knobs to Advanced, add Basic Home screen
+
+### Bug Fixes
+- **configurator:** address review feedback on PR #311
+
 ## [0.5.34] - 2026-06-11
 
 ### Bug Fixes
