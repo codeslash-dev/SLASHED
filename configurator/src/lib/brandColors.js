@@ -37,9 +37,11 @@ export const BRAND_COLOR_KEYS = [
  */
 export function parseOklch(value) {
   if (!value) return null;
-  const m = /^oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/[^)]+)?\s*\)$/i.exec(value.trim());
+  const m = /^oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:\s*\/[^)]+)?\s*\)$/i.exec(value.trim());
   if (!m) return null;
-  return { l: parseFloat(m[1]), c: parseFloat(m[2]), h: parseFloat(m[3]) };
+  const rawL = m[1];
+  const l = rawL.endsWith('%') ? parseFloat(rawL) / 100 : parseFloat(rawL);
+  return { l, c: parseFloat(m[2]), h: parseFloat(m[3]) };
 }
 
 /**
