@@ -11,6 +11,9 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
 import { domainOf, DOMAINS } from '../src/lib/domains.js';
 import { inferControl } from '../src/lib/model.js';
@@ -108,5 +111,33 @@ describe('smoke: every editable token routes through the full pipeline', () => {
     assert.match(css, /--sf-space-m: clamp\(1rem, 0\.8rem \+ 0\.6vw, 1\.5rem\);/);
     // The oklch() with three space-separated args must round-trip.
     assert.match(css, /--sf-color-primary-light: oklch\(0\.55 0\.22 264\);/);
+  });
+});
+
+describe('smoke: docs and sources stay vendor-neutral', () => {
+  // Product constraint: the configurator never name-drops competitor
+  // products — comparisons use generic phrasing ("other framework
+  // configurators"). Scans every authored .md/.svelte/.js under
+  // configurator/ (generated data, deps and build output excluded).
+  const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+  const SKIP_DIRS = new Set(['node_modules', 'dist', '.svelte-kit']);
+  const VENDOR_RE = /\bacss\b|automatic\.css/i;
+
+  function* walk(dir) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (entry.isDirectory()) {
+        if (!SKIP_DIRS.has(entry.name)) yield* walk(join(dir, entry.name));
+      } else if (/\.(md|svelte|js)$/.test(entry.name)) {
+        yield join(dir, entry.name);
+      }
+    }
+  }
+
+  test('no vendor / competitor product names in authored files', () => {
+    const offenders = [];
+    for (const file of walk(ROOT)) {
+      if (VENDOR_RE.test(readFileSync(file, 'utf8'))) offenders.push(file);
+    }
+    assert.deepEqual(offenders, [], `vendor names found in: ${offenders.join(', ')}`);
   });
 });

@@ -5,13 +5,30 @@ intentional scope of the configurator legible.
 
 ---
 
+## Shipped (Basic/Advanced/Power IA restructure)
+
+- **Basic = per-project checklist**: a Home landing screen plus six curated
+  domains (Colors, Typography, Spacing, Layout, Borders, Shadows) and the
+  Themes tool. Curated controls carry friendly labels, help text and an ⓘ
+  popover revealing the raw token (see `src/lib/basics.js` — validated
+  against the catalogue by `tests/basics.test.js`).
+- **Power knobs** — the global multipliers (`--sf-space-scale` drives 45
+  tokens, `--sf-shadow-strength` 14, `--sf-motion-scale` 13…) moved out of
+  Basic into a collapsed, warning-styled group at the bottom of each
+  Advanced panel.
+- **Scalar-writing scale generators** — Apply writes the framework's live
+  fluid-engine scalars (base/ratio/shared viewport, `src/lib/fluidEngine.js`)
+  instead of baking per-step `clamp()` expressions.
+- **Style preset rows** — one-click Corner style and Shadow style looks on
+  the Basic borders/shadows panels (`src/lib/stylePresets.js`), each a
+  single undo step.
+- Basic search scopes to the curated surface and offers an
+  "N more matches in Advanced" jump that preserves the query.
+
 ## Shipped (PR #303)
 
 - Categorised UI: every one of the **841 framework tokens** is reachable, no
   catch-all bucket. Sidebar nav, basic ↔ advanced global toggle, search.
-- **Quick Knobs** — each domain panel opens with sliders for the global
-  multipliers it owns (`--sf-space-scale` drives 45 tokens,
-  `--sf-shadow-strength` drives 14, `--sf-motion-scale` drives 13…).
 - **Theme presets** + save/load custom slots in `localStorage`.
 - **Undo / Redo** with `Ctrl+Z` / `Ctrl+Shift+Z`, 50-step history, single-step
   bulk operations.
@@ -48,8 +65,8 @@ TokenRow reads to render a glow. Needs Chromium-only API (`computedStyleMap`)
 or a fallback that scans `getComputedStyle` for known `--sf-*` properties.
 
 ### 2. Utility-class copy on relevant tokens  *(½–1 day, blocked on framework)*
-Automatic.css has "copy `.text-l`" / "copy `.bg-primary`" buttons next to
-every value. Whether SLASHED ships utility classes alongside the tokens is a
+Some framework configurators offer "copy `.text-l`" / "copy `.bg-primary`"
+buttons next to every value. Whether SLASHED ships utility classes alongside the tokens is a
 framework question — if yes, the configurator could add a "📋 utility"
 button per row that copies the equivalent class name.
 
