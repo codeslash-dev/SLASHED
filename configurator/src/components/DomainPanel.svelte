@@ -18,11 +18,13 @@
   import { BASIC_BY_DOMAIN } from '../lib/basics.js';
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
+  import { STYLE_PRESETS_BY_DOMAIN } from '../lib/stylePresets.js';
   import TokenGroup from './TokenGroup.svelte';
   import TokenRow from './TokenRow.svelte';
   import BrandColorRow from './BrandColorRow.svelte';
   import ScaleGenerator from './ScaleGenerator.svelte';
   import QuickKnobs from './QuickKnobs.svelte';
+  import StylePresetRow from './StylePresetRow.svelte';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, powerIntro?:string, essentials?:string[], basicGenerators?:string[], advancedGenerators?:string[], brandColors?:boolean } }} */
   let { domain } = $props();
@@ -209,6 +211,14 @@
            projects change it. Basic mode only — Advanced users know. -->
       {#if !advanced && domain.intro}
         <p class="panel__intro">{domain.intro}</p>
+      {/if}
+
+      <!-- One-click style presets (Basic borders/shadows) -->
+      {#if !advanced && STYLE_PRESETS_BY_DOMAIN[domain.id]}
+        <StylePresetRow
+          title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
+          presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
+        />
       {/if}
 
       <!-- Essentials (always shown when present) -->

@@ -1,9 +1,15 @@
 <script>
   /**
-   * Scales view: generate a fluid modular scale for the type, display or space
-   * ramp and write each step straight into the override store as a `clamp()`
-   * expression — the same fluid curve the framework emits, so the result is
-   * drop-in.
+   * Scales view: tune the fluid modular scale of the type, display or space
+   * ramp. The framework derives every step LIVE from a handful of engine
+   * scalars (base min/max, ratio min/max, shared viewport range — see
+   * lib/fluidEngine.js), so Apply writes those scalars in one history step:
+   * the export stays a few numbers instead of nine clamp() walls, and the
+   * engine remains live for later tweaks.
+   *
+   * Fallback: if a scalar token is missing from the active catalogue (an
+   * older framework sync), Apply falls back to writing per-step clamp()
+   * expressions — the same fluid curve, just baked.
    *
    * The scale maths (modular steps + clamp curve) lives in the shared,
    * unit-tested ../lib/scale.js, identical to the WP plugin's generator. The
@@ -15,9 +21,17 @@
    *   (defaults to all three). Lets the Typography tab show type+display and the
    *   Spacing tab show only space.
    */
-  import { overrides, setOverride, clearOverride } from '../lib/store.svelte.js';
+  import { overrides, setOverride, clearOverride, patchOverrides } from '../lib/store.svelte.js';
   import { tokenByName } from '../lib/model.js';
   import { RATIOS, TEXT_STEPS, SPACE_STEPS, computeScale, buildClamp } from '../lib/scale.js';
+  import {
+    ENGINES,
+    VIEWPORT_SCALARS,
+    engineTokens,
+    buildEnginePatch,
+    resetEnginePatch,
+    resetViewportPatch,
+  } from '../lib/fluidEngine.js';
 
   let { kinds = ['type', 'display', 'space'] } = $props();
 
@@ -34,20 +48,34 @@
 
   const KIND_LABELS = { type: 'Type', display: 'Display', space: 'Space' };
 
-  /** Starting knobs per ramp — mirror core/tokens.css @property initial-values so
-   *  the generator opens showing the framework's current baseline scale. */
-  const DEFAULTS = {
-    type: { baseMin: 1.0, baseMax: 1.25, ratioMin: 1.25, ratioMax: 1.333 },
-    display: { baseMin: 2.4, baseMax: 3.0, ratioMin: 1.25, ratioMax: 1.333 },
-    space: { baseMin: 1.0, baseMax: 2.0, ratioMin: 1.25, ratioMax: 1.333 },
-  };
+  /** Numeric seed for one engine scalar: active override if any, else the
+   *  framework default — so the generator always opens on the LIVE scale. */
+  function seedScalar(scalar) {
+    const raw = overrides[scalar.token];
+    const parsed = raw != null ? parseFloat(raw) : NaN;
+    return Number.isFinite(parsed) ? parsed : scalar.default;
+  }
+
+  /** All six knob seeds for a ramp (display borrows the type ratios). */
+  function seedKnobs(k) {
+    const e = ENGINES[k] || ENGINES.type;
+    const ratios = e.sharedRatios ? ENGINES.type.scalars : e.scalars;
+    return {
+      baseMin: seedScalar(e.scalars.baseMin),
+      baseMax: seedScalar(e.scalars.baseMax),
+      ratioMin: seedScalar(ratios.ratioMin),
+      ratioMax: seedScalar(ratios.ratioMax),
+      vpMin: seedScalar(VIEWPORT_SCALARS.vpMin),
+      vpMax: seedScalar(VIEWPORT_SCALARS.vpMax),
+    };
+  }
 
   // `kinds` is fixed for the lifetime of an instance (the panel re-mounts the
   // generator via {#key} when the domain changes), so capturing the first ramp
-  // and its defaults as plain consts is correct — and keeps the $state
+  // and its seeds as plain consts is correct — and keeps the $state
   // initializers from referencing reactive props.
   const FIRST = (kinds && kinds[0]) || 'type';
-  const FIRST_DEFAULTS = DEFAULTS[FIRST] || DEFAULTS.type;
+  const SEED = seedKnobs(FIRST);
 
   let kind = $state(FIRST);
 
@@ -58,23 +86,42 @@
     kind === 'space' ? '--sf-space-' : '--sf-text-'
   );
 
-  // Knobs — seeded from the first ramp's defaults, reset on every kind switch.
-  let baseMin = $state(FIRST_DEFAULTS.baseMin);
-  let baseMax = $state(FIRST_DEFAULTS.baseMax);
-  let ratioMin = $state(FIRST_DEFAULTS.ratioMin);
-  let ratioMax = $state(FIRST_DEFAULTS.ratioMax);
-  let vpMin = $state(22.5);
-  let vpMax = $state(90);
+  // The display ramp reuses the TYPE ratios — its ratio knobs are read-only.
+  const sharedRatios = $derived(Boolean(ENGINES[kind]?.sharedRatios));
+
+  // Scalar-writing only works when every engine token is in the catalogue.
+  const engineLive = $derived(engineTokens(kind).every((t) => tokenByName.has(t)));
+
+  // Knobs — seeded from the live overrides/defaults, reseeded per kind switch.
+  let baseMin = $state(SEED.baseMin);
+  let baseMax = $state(SEED.baseMax);
+  let ratioMin = $state(SEED.ratioMin);
+  let ratioMax = $state(SEED.ratioMax);
+  let vpMin = $state(SEED.vpMin);
+  let vpMax = $state(SEED.vpMax);
+
+  function reseed(k) {
+    const s = seedKnobs(k);
+    baseMin = s.baseMin;
+    baseMax = s.baseMax;
+    ratioMin = s.ratioMin;
+    ratioMax = s.ratioMax;
+    vpMin = s.vpMin;
+    vpMax = s.vpMax;
+  }
 
   function switchKind(next) {
     if (next === kind) return;
     kind = next;
-    const d = DEFAULTS[next] || DEFAULTS.type;
-    baseMin = d.baseMin;
-    baseMax = d.baseMax;
-    ratioMin = d.ratioMin;
-    ratioMax = d.ratioMax;
+    reseed(next);
   }
+
+  // The shared viewport range is currently customised (any ramp may have
+  // set it) — surfaces the dedicated reset affordance.
+  const viewportModified = $derived(
+    overrides[VIEWPORT_SCALARS.vpMin.token] != null ||
+    overrides[VIEWPORT_SCALARS.vpMax.token] != null
+  );
 
   const computed = $derived(
     computeScale(steps, { baseMin, baseMax, ratioMin, ratioMax }).map((s) => ({
@@ -90,12 +137,31 @@
 
   let applied = $state(false);
   function apply() {
-    for (const s of applicable) setOverride(s.token, s.clamp);
+    if (engineLive) {
+      // One history step: write the engine scalars (default values are
+      // cleared, not written) and null this ramp's per-step tokens so a
+      // previously baked clamp() can't mask the live derivation.
+      patchOverrides(buildEnginePatch(kind, { baseMin, baseMax, ratioMin, ratioMax, vpMin, vpMax }));
+    } else {
+      // Catalogue without the engine scalars — bake per-step clamp()s.
+      for (const s of applicable) setOverride(s.token, s.clamp);
+    }
     applied = true;
     setTimeout(() => (applied = false), 1800);
   }
+
   function reset() {
-    for (const s of computed) if (overrides[s.token] != null) clearOverride(s.token);
+    if (engineLive) {
+      patchOverrides(resetEnginePatch(kind));
+    } else {
+      for (const s of computed) if (overrides[s.token] != null) clearOverride(s.token);
+    }
+    reseed(kind);
+  }
+
+  function resetViewport() {
+    patchOverrides(resetViewportPatch());
+    reseed(kind);
   }
 </script>
 
@@ -117,14 +183,21 @@
     <label class="ctl"><span>Base min</span><span class="ctl__in"><input type="number" min="0.1" step="0.01" bind:value={baseMin} /><i>rem</i></span></label>
     <label class="ctl"><span>Base max</span><span class="ctl__in"><input type="number" min="0.1" step="0.01" bind:value={baseMax} /><i>rem</i></span></label>
     <label class="ctl"><span>Ratio (min)</span>
-      <select bind:value={ratioMin}>{#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}</select>
+      <select bind:value={ratioMin} disabled={sharedRatios} title={sharedRatios ? 'Shared with the type scale — tune it on the Type tab' : undefined}>{#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}</select>
     </label>
     <label class="ctl"><span>Ratio (max)</span>
-      <select bind:value={ratioMax}>{#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}</select>
+      <select bind:value={ratioMax} disabled={sharedRatios} title={sharedRatios ? 'Shared with the type scale — tune it on the Type tab' : undefined}>{#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}</select>
     </label>
     <label class="ctl"><span>Viewport min</span><span class="ctl__in"><input type="number" min="1" step="0.5" bind:value={vpMin} /><i>rem</i></span></label>
     <label class="ctl"><span>Viewport max</span><span class="ctl__in"><input type="number" min="1" step="0.5" bind:value={vpMax} /><i>rem</i></span></label>
   </div>
+
+  {#if sharedRatios}
+    <p class="scales__hint">The display ramp reuses the type scale's ratios — only its base sizes are written here.</p>
+  {/if}
+  {#if engineLive}
+    <p class="scales__hint">Viewport range is <strong>shared by every fluid scale</strong> (type, display, space, header height) — change it once, everything follows.</p>
+  {/if}
 
   <div class="preview">
     {#each computed as s (s.token)}
@@ -139,11 +212,20 @@
   </div>
 
   <div class="scales__actions">
-    <button class="cfg-btn cfg-btn--primary" onclick={apply} disabled={applicable.length === 0}>
-      {applied ? 'Applied ✓' : `Apply ${applicable.length} step${applicable.length === 1 ? '' : 's'}`}
+    <button class="cfg-btn cfg-btn--primary" onclick={apply} disabled={!engineLive && applicable.length === 0}>
+      {#if applied}Applied ✓
+      {:else if engineLive}Apply scale
+      {:else}Apply {applicable.length} step{applicable.length === 1 ? '' : 's'}{/if}
     </button>
-    <button class="cfg-btn cfg-btn--ghost" onclick={reset}>Reset these</button>
-    {#if missing > 0}<span class="scales__note">{missing} step(s) not in this catalogue — skipped.</span>{/if}
+    <button class="cfg-btn cfg-btn--ghost" onclick={reset} title="Return this ramp to the framework default">Reset these</button>
+    {#if viewportModified}
+      <button class="cfg-btn cfg-btn--ghost" onclick={resetViewport} title="Clear the shared viewport range override (affects every fluid scale)">Reset viewport range</button>
+    {/if}
+    {#if engineLive}
+      <span class="scales__note">Writes the live engine scalars — a few numbers in your export, never clamp() walls.</span>
+    {:else if missing > 0}
+      <span class="scales__note">{missing} step(s) not in this catalogue — skipped.</span>
+    {/if}
   </div>
 </section>
 
@@ -171,4 +253,6 @@
 
   .scales__actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .scales__note { font-size: 12px; color: var(--cfg-text-faint); }
+  .scales__hint { margin: 0 0 12px; font-size: 12px; line-height: 1.5; color: var(--cfg-text-muted); }
+  .ctl select:disabled { opacity: 0.55; cursor: not-allowed; }
 </style>
