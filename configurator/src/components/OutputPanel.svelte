@@ -33,7 +33,7 @@
   let importOpen = $state(false);
   let importText = $state('');
   let importMsg = $state('');
-  let drawerOpen = $state(true);
+  // Drawer expansion lives in the shared ui store so Home / Header can open it.
   /** 'css' = generated stylesheet · 'diff' = before/after token list. */
   let view = $state('css');
 
@@ -87,18 +87,18 @@
   const cssHtml = $derived(highlight(css || '/* No overrides yet — edit a token to generate CSS. */'));
 </script>
 
-<section class="out" class:out--closed={!drawerOpen}>
+<section class="out" class:out--closed={!ui.outputOpen}>
   <header class="out__head">
     <button
       class="out__toggle"
-      onclick={() => (drawerOpen = !drawerOpen)}
-      aria-expanded={drawerOpen}
-      aria-label="{drawerOpen ? 'Collapse' : 'Expand'} output drawer"
-      title="{drawerOpen ? 'Collapse' : 'Expand'} the output drawer"
+      onclick={() => (ui.outputOpen = !ui.outputOpen)}
+      aria-expanded={ui.outputOpen}
+      aria-label="{ui.outputOpen ? 'Collapse' : 'Expand'} output drawer"
+      title="{ui.outputOpen ? 'Collapse' : 'Expand'} the output drawer"
     >
-      <span class="out__caret" class:out__caret--open={drawerOpen} aria-hidden="true">▶</span>
+      <span class="out__caret" class:out__caret--open={ui.outputOpen} aria-hidden="true">▶</span>
       <strong>Override CSS</strong>
-      <span class="out__count">{count} token{count === 1 ? '' : 's'}{drawerOpen && lineCount ? ` · ${lineCount} lines` : ''}</span>
+      <span class="out__count">{count} token{count === 1 ? '' : 's'}{ui.outputOpen && lineCount ? ` · ${lineCount} lines` : ''}</span>
     </button>
     <div class="out__actions">
       <div class="cfg-seg out__view" role="group" aria-label="Output view">
@@ -144,7 +144,7 @@
     </div>
   </header>
 
-  {#if drawerOpen}
+  {#if ui.outputOpen}
     {#if importOpen}
       <div class="out__import">
         <textarea

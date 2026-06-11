@@ -23,7 +23,22 @@
   import TokenEditor from './TokenEditor.svelte';
   import ContrastBadge from './ContrastBadge.svelte';
 
-  let { token } = $props();
+  /**
+   * @prop token        catalogue token object (required)
+   * @prop label        optional FRIENDLY display name. When set, the row
+   *                    renders the label instead of the raw token name and
+   *                    hides the tier/usage badges — used by the curated
+   *                    Basic panels. Default (no label) leaves the raw row
+   *                    untouched for Advanced mode.
+   * @prop help         optional friendly one-liner shown under the label.
+   * @prop showRawInfo  with `label`, adds an ⓘ toggle revealing the raw
+   *                    token name (click-to-copy), catalogue description,
+   *                    framework default and the "drives N" reach.
+   */
+  let { token, label = '', help = '', showRawInfo = false } = $props();
+
+  const friendly = $derived(Boolean(label));
+  let infoOpen = $state(false);
 
   const modified = $derived(overrides[token.name] != null);
   const drives = $derived(dependentsCount(token.name));
@@ -66,6 +81,50 @@
 
 <div class="row" class:row--modified={modified}>
   <div class="row__info">
+    {#if friendly}
+      <div class="row__name-line">
+        <span class="row__label">{label}</span>
+        {#if isColor}
+          <ContrastBadge value={effectiveValue} />
+        {/if}
+        {#if showRawInfo}
+          <button
+            class="row__info-btn"
+            class:row__info-btn--on={infoOpen}
+            onclick={() => (infoOpen = !infoOpen)}
+            aria-expanded={infoOpen}
+            title="Show the underlying framework token"
+            aria-label="Token details for {token.name}"
+          >ⓘ</button>
+        {/if}
+      </div>
+      {#if help}
+        <p class="row__desc">{help}</p>
+      {/if}
+      {#if infoOpen}
+        <div class="row__raw">
+          <div class="row__raw-line">
+            <button
+              class="row__name"
+              onclick={copyName}
+              title={copied ? 'Copied!' : `Click to copy ${token.name}`}
+            >
+              <code>{token.name}</code>
+              <span class="row__copy" aria-hidden="true">{copied ? '✓' : '⧉'}</span>
+            </button>
+            {#if drives > 0}
+              <span class="row__drives" title="{drives} other token{drives === 1 ? '' : 's'} reference{drives === 1 ? 's' : ''} this one via var() — editing it cascades.">drives {drives}</span>
+            {/if}
+          </div>
+          {#if token.note || token.description}
+            <p class="row__desc row__desc--faint">{token.note || token.description}</p>
+          {/if}
+          {#if token.value}
+            <p class="row__default">default: <code>{token.value}</code></p>
+          {/if}
+        </div>
+      {/if}
+    {:else}
     <div class="row__name-line">
       <button
         class="row__name"
@@ -99,6 +158,7 @@
     {/if}
     {#if !token.note && token.description}
       <p class="row__desc row__desc--faint">{token.description}</p>
+    {/if}
     {/if}
   </div>
 
@@ -210,6 +270,54 @@
     line-height: 1.5;
   }
   .row__desc--faint { color: var(--cfg-text-faint); }
+
+  /* Friendly (Basic) variant — label instead of the raw token name. */
+  .row__label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--cfg-text);
+  }
+  .row__info-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--cfg-text-faint);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.12s;
+  }
+  .row__info-btn:hover,
+  .row__info-btn--on { color: var(--cfg-accent); }
+  .row__raw {
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: var(--cfg-bg-2);
+    border: 1px solid var(--cfg-border);
+    border-radius: var(--cfg-radius-s);
+  }
+  .row__raw-line {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .row__default {
+    margin: 4px 0 0;
+    font-size: 11px;
+    color: var(--cfg-text-faint);
+  }
+  .row__default code {
+    font-family: var(--cfg-mono);
+    font-size: 11px;
+    color: var(--cfg-text-muted);
+    word-break: break-all;
+  }
   .row__control {
     display: flex;
     align-items: center;

@@ -33,8 +33,11 @@ export const storage = $state({ ok: true });
 
 /** UI state: active domain tab, basic/advanced mode, search, filters, preview. */
 export const ui = $state({
-  /** Active domain tab id (see lib/domains.js): 'typography' | 'colors' | … */
-  domain: 'colors',
+  /**
+   * Active domain tab id (see lib/domains.js): 'typography' | 'colors' | …
+   * `'home'` is the synthetic Basic-mode landing screen (setup checklist).
+   */
+  domain: 'home',
   /** Global complexity mode: 'basic' shows curated essentials, 'advanced' all. */
   mode: 'basic',
   /** Free-text filter, applied to advanced lists. */
@@ -66,6 +69,8 @@ export const ui = $state({
   sidebarOpen: true,
   /** Right-hand preview pane visible. */
   previewOpen: true,
+  /** Output drawer (override CSS export) expanded. */
+  outputOpen: true,
 });
 
 /**

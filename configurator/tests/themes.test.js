@@ -131,4 +131,32 @@ describe('KNOBS_BY_DOMAIN registry', () => {
       }
     }
   });
+
+  test('every knob default matches the live framework default', () => {
+    // Default parity is the sync tripwire: if the framework retunes a knob
+    // (e.g. a new base shadow strength), this fails CI instead of letting
+    // the slider open at a stale "default" position.
+    const valueByName = new Map(data.tokens.map((t) => [t.name, t.value]));
+    for (const [domainId, knobs] of Object.entries(KNOBS_BY_DOMAIN)) {
+      for (const k of knobs) {
+        const catalogue = valueByName.get(k.name);
+        if (k.encode) {
+          assert.equal(
+            k.encode(k.default),
+            catalogue,
+            `${domainId}:${k.name} encode(default) drifted from the catalogue value`
+          );
+          if (k.decode) {
+            assert.equal(k.decode(catalogue), k.default, `${domainId}:${k.name} decode(catalogue) !== default`);
+          }
+        } else {
+          assert.equal(
+            parseFloat(catalogue),
+            k.default,
+            `${domainId}:${k.name} default drifted (catalogue ${catalogue} vs knob ${k.default})`
+          );
+        }
+      }
+    }
+  });
 });

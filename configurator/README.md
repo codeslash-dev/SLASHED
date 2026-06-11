@@ -6,9 +6,22 @@ step for consumers — open it, tweak tokens, copy the CSS.
 
 ## What it does
 
-- Lists all `--sf-*` tokens exposed by the framework, grouped by category and
-  source section, with tier badges (`public` / `advanced` / `internal`),
-  descriptions, alias info, and the framework default shown as a placeholder.
+- **Basic mode is a per-project checklist**: a Home landing screen plus six
+  curated domains (Colors, Typography, Spacing, Layout, Borders, Shadows)
+  and the Themes tool. Curated controls use friendly labels with help text;
+  an ⓘ popover reveals the raw token name, description, default and reach.
+- **Advanced mode** lists all `--sf-*` tokens exposed by the framework,
+  grouped by category and source section, with tier badges (`public` /
+  `advanced` / `internal`), descriptions, alias info, and the framework
+  default shown as a placeholder. The global multipliers (e.g.
+  `--sf-space-scale`, which drives 45 tokens) live in a collapsed
+  **Power knobs** group at the bottom of each panel.
+- **Fluid scale generators write the live engine scalars** (base / ratio /
+  shared viewport range) instead of baking per-step `clamp()` expressions —
+  a few numbers in your export, and the engine stays live for later tweaks.
+- **One-click style presets** on the Basic borders/shadows panels (Corner
+  style: Sharp / Subtle / Rounded / Pill · Shadow style: None / Subtle /
+  Soft / Strong), each applied as a single undo step.
 - Smart editors per token: color picker / swatch for colors, numeric and
   length inputs where appropriate, text otherwise.
 - Search across names, descriptions, values and namespaces; filter by tier or
@@ -37,6 +50,17 @@ truth produced by `scripts/gen-api-index.js`).
 So whenever a token is added, renamed, retiered, or re-valued in the CSS and
 the docs are regenerated, the panel picks it up on the next build with zero
 manual edits.
+
+The hand-curated surfaces (`src/lib/basics.js`, `src/lib/stylePresets.js`,
+`src/lib/fluidEngine.js`, the knob registry) are pinned to the catalogue by
+the test suite: after any framework release the upgrade ritual is
+
+```bash
+npm run sync && npm test
+```
+
+A vanished token, a renamed knob, or a drifted default fails CI loudly
+instead of rendering a dead control.
 
 ## Local development
 
