@@ -36,10 +36,12 @@
   const domainTokens = $derived(allTokens.filter((t) => domainOf(t) === domain.id));
 
   // Advanced list: tier + modified + usage + search filters, then grouped.
+  // Use property-access (overrides[t.name]) instead of `in` so Svelte 5's
+  // state proxy triggers reactivity via the `get` trap on every key check.
   const advancedVisible = $derived(
     domainTokens.filter((t) => {
       if (t.tier === 'INTERNAL' && !ui.showInternal) return false;
-      if (ui.onlyModified && !(t.name in overrides)) return false;
+      if (ui.onlyModified && overrides[t.name] == null) return false;
       if (ui.usageFilter === 'configure' && t.role !== 'knob') return false;
       if (ui.usageFilter === 'consume' && t.role !== 'consumption') return false;
       return matchesQuery(t, query);
@@ -72,7 +74,7 @@
 
   // Modified tokens within this domain — surfaced as a collapsible block.
   const modifiedHere = $derived(
-    domainTokens.filter((t) => t.name in overrides)
+    domainTokens.filter((t) => overrides[t.name] != null)
   );
 
   // "Reset domain" button — clears overrides only for tokens in this domain.
@@ -234,47 +236,50 @@
   .panel__head {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 18px 20px 14px;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px 12px;
     border-bottom: 1px solid var(--cfg-border);
     background: var(--cfg-surface);
     flex-wrap: wrap;
   }
   .panel__title-wrap {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
     min-width: 0;
+    flex: 1 1 auto;
   }
   .panel__icon {
     display: inline-grid;
     place-items: center;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: var(--cfg-radius);
     background: linear-gradient(135deg, rgba(79, 140, 255, 0.18), rgba(120, 80, 220, 0.18));
     border: 1px solid var(--cfg-border-strong);
-    font-size: 18px;
+    font-size: 16px;
     flex-shrink: 0;
   }
-  .panel__title { margin: 0; font-size: 18px; font-weight: 600; }
-  .panel__blurb { margin: 3px 0 0; color: var(--cfg-text-muted); font-size: 13px; max-width: 70ch; }
+  .panel__title { margin: 0; font-size: 16px; font-weight: 600; }
+  .panel__blurb { margin: 2px 0 0; color: var(--cfg-text-muted); font-size: 12px; max-width: 70ch; }
 
   .panel__actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
+    flex-shrink: 0;
   }
   .panel__usage-seg :global(.cfg-seg__btn) { padding: 4px 10px; font-size: 11.5px; }
   .panel__check {
     display: flex;
     align-items: center;
-    gap: 7px;
-    font-size: 12.5px;
+    gap: 6px;
+    font-size: 12px;
     color: var(--cfg-text-muted);
     cursor: pointer;
+    white-space: nowrap;
   }
   .panel__check input { accent-color: var(--cfg-accent-strong); }
 
@@ -334,7 +339,19 @@
   /* Tighter horizontal padding on narrow phones recovers ~16px of content
      width, reducing the chance of token editors overflowing their container. */
   @media (max-width: 600px) {
-    .panel__body { padding-inline: 10px; }
-    .panel__head { padding: 12px 12px 10px; }
+    .panel__body { padding: 12px 10px 60px; gap: 12px; }
+    .panel__head { padding: 10px 12px 8px; gap: 8px; }
+    .panel__title { font-size: 14px; }
+    .panel__blurb { display: none; }
+    /* On very narrow screens, actions drop below the title as a full-width strip */
+    .panel__actions {
+      flex-basis: 100%;
+      gap: 8px;
+    }
+    /* The segmented usage filter is too wide on mobile — collapse labels */
+    .panel__usage-seg :global(.cfg-seg__btn) {
+      padding: 4px 8px;
+      font-size: 10.5px;
+    }
   }
 </style>

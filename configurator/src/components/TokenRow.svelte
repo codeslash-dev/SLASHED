@@ -25,7 +25,7 @@
 
   let { token } = $props();
 
-  const modified = $derived(token.name in overrides);
+  const modified = $derived(overrides[token.name] != null);
   const drives = $derived(dependentsCount(token.name));
   const isColor = $derived(isColorToken(token));
   // The effective color value (override if any, else the framework default).
@@ -223,5 +223,12 @@
       grid-template-columns: 1fr;
       gap: 8px;
     }
+  }
+  @media (max-width: 600px) {
+    .row { padding: 10px 12px; }
+    /* Hide secondary metadata badges to reduce clutter on phones */
+    .row__opt,
+    .row__alias { display: none; }
+    .row__desc { font-size: 11.5px; }
   }
 </style>

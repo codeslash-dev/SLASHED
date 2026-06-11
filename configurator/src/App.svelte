@@ -167,7 +167,15 @@
     .shell--no-preview,
     .shell--no-sidebar,
     .shell--no-sidebar.shell--no-preview {
-      grid-template-columns: 50px minmax(0, 1fr);
+      grid-template-columns: 44px minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 400px) {
+    .shell,
+    .shell--no-preview,
+    .shell--no-sidebar,
+    .shell--no-sidebar.shell--no-preview {
+      grid-template-columns: 40px minmax(0, 1fr);
     }
   }
 </style>

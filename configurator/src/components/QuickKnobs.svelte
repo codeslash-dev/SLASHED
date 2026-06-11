@@ -42,6 +42,12 @@
   function liveValue(knob) {
     const raw = overrides[knob.name];
     if (raw == null) return knob.default;
+    // Use a knob-specific decoder when available (e.g. extracting the base
+    // number from a calc() expression that wraps it with dark-mode logic).
+    if (knob.decode) {
+      const decoded = knob.decode(raw);
+      if (Number.isFinite(decoded)) return decoded;
+    }
     // The override may be a calc()/clamp() expression a user typed by hand —
     // fall back to a numeric parse, otherwise show the default for the slider
     // (the slider can't represent arbitrary expressions, so a hand-edited
@@ -52,7 +58,7 @@
 
   /** Whether the live value differs from the framework default. */
   function isModified(knob) {
-    return knob.name in overrides;
+    return overrides[knob.name] != null;
   }
 
   /** Format a value for display next to the slider. */
@@ -68,9 +74,16 @@
    * no localStorage write happens — both are flushed once on `change` (drag
    * end) via `endDrag`. So a 200-tick drag becomes one undo step + one
    * persist instead of 200 of each.
+   *
+   * When a knob has an `encode` function the raw number is wrapped into its
+   * CSS expression (e.g. preserving a calc() dark-mode adaptation) before
+   * being stored.
    */
   function dragCommit(knob, val) {
-    if (Number.isFinite(val)) dragSetOverride(knob.name, String(val));
+    if (Number.isFinite(val)) {
+      const css = knob.encode ? knob.encode(val) : String(val);
+      dragSetOverride(knob.name, css);
+    }
   }
 
   /** Drag-end (mouse release / keyboard commit): record the history entry. */
@@ -212,8 +225,8 @@
   }
   .knob {
     display: grid;
-    grid-template-columns: minmax(140px, 200px) minmax(0, 1fr) minmax(120px, 160px) auto;
-    gap: 14px;
+    grid-template-columns: minmax(160px, 220px) minmax(0, 1fr) minmax(110px, 150px) auto;
+    gap: 12px;
     align-items: center;
     padding: 10px 16px;
     border-bottom: 1px solid var(--cfg-border);
