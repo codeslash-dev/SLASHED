@@ -18,8 +18,8 @@
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 227,
-        "consumption": 581
+        "knob": 228,
+        "consumption": 580
       },
       "with_fallback": 57,
       "fallback_only": 33
@@ -5530,7 +5530,7 @@
     },
     "--sf-shadow-strength": {
       "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
