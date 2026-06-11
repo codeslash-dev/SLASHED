@@ -22,6 +22,12 @@
 import { basicControlTokens } from './basics.js';
 
 /**
+ * Base URL for the per-domain "Learn more" docs links (joined with each
+ * domain's `docsPath`). Single definition so a repo move is a one-line fix.
+ */
+export const DOCS_BASE_URL = 'https://github.com/codeslash-dev/SLASHED/blob/main/';
+
+/**
  * Domains surfaced in BASIC mode (plus the synthetic Home screen).
  *
  * Basic is a per-project checklist: the 11 brand/status colors, the fluid

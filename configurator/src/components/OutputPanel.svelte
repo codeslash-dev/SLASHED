@@ -11,7 +11,7 @@
    * customised" pill keeps the user oriented even with the body hidden.
    */
   import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
-  import { sync, defaultsByName } from '../lib/model.js';
+  import { sync, defaultsByName, tokenByName } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
 
   const count = $derived(Object.keys(overrides).length);
@@ -61,6 +61,17 @@
 
   function runImport() {
     const parsed = parseCSS(importText);
+    // Replace is destructive — only proceed when the paste actually carries
+    // at least one KNOWN token, so a garbage / wrong-clipboard import can
+    // never silently wipe the current overrides.
+    const names = Object.keys(parsed);
+    const known = names.filter((n) => tokenByName.has(n));
+    if (known.length === 0) {
+      importMsg = names.length
+        ? `No known tokens among ${names.length} parsed — nothing imported, your overrides are untouched.`
+        : 'No --sf-* declarations found — nothing imported, your overrides are untouched.';
+      return;
+    }
     const { applied, skipped } = replaceOverrides(parsed);
     importMsg =
       `Imported ${applied} token${applied === 1 ? '' : 's'}` +
@@ -106,12 +117,14 @@
           class="cfg-seg__btn"
           class:cfg-seg__btn--on={view === 'css'}
           onclick={() => (view = 'css')}
+          aria-pressed={view === 'css'}
           title="Generated override stylesheet (copy/download/import)"
         >CSS</button>
         <button
           class="cfg-seg__btn"
           class:cfg-seg__btn--on={view === 'diff'}
           onclick={() => (view = 'diff')}
+          aria-pressed={view === 'diff'}
           title="Before/after diff vs framework defaults"
         >Diff</button>
       </div>
@@ -125,12 +138,14 @@
             class="cfg-seg__btn"
             class:cfg-seg__btn--on={ui.outputMode === 'layer'}
             onclick={() => (ui.outputMode = 'layer')}
+            aria-pressed={ui.outputMode === 'layer'}
             title="@layer slashed.overrides — cascade layers"
           >@layer</button>
           <button
             class="cfg-seg__btn"
             class:cfg-seg__btn--on={ui.outputMode === 'root'}
             onclick={() => (ui.outputMode = 'root')}
+            aria-pressed={ui.outputMode === 'root'}
             title=":root — bare block, no layers"
           >:root</button>
         </div>

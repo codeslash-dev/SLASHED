@@ -249,6 +249,19 @@ export function deleteSavedTheme(id) {
 
 // ───────────────────────────── helpers ────────────────────────────────────
 
+/**
+ * Expand the output drawer and bring it into view. Shared by the header
+ * "N customised — Export CSS" pill and the Home checklist shortcut.
+ */
+export function openOutputDrawer() {
+  ui.outputOpen = true;
+  if (typeof document === 'undefined') return;
+  // The drawer lives at the bottom of the shell — scroll after it expands.
+  requestAnimationFrame(() => {
+    document.querySelector('.out')?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+  });
+}
+
 /** Count of active overrides (non-reactive helper for one-off reads). */
 export function overrideCount() {
   return Object.keys(overrides).length;

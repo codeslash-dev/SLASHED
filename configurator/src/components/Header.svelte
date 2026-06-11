@@ -14,7 +14,7 @@
    * reachable. Keyboard shortcut: `/` focuses the search box.
    */
   import { sync, allTokens } from '../lib/model.js';
-  import { ui, overrides, overrideCount, history, undo, redo } from '../lib/store.svelte.js';
+  import { ui, overrides, overrideCount, history, undo, redo, openOutputDrawer } from '../lib/store.svelte.js';
 
   const totalTokens = allTokens.length;
   const modCount = $derived(Object.keys(overrides).length);
@@ -41,12 +41,7 @@
       {#if modCount > 0}
         <button
           class="hdr__pill hdr__pill--mod hdr__pill--btn"
-          onclick={() => {
-            ui.outputOpen = true;
-            requestAnimationFrame(() => {
-              document.querySelector('.out')?.scrollIntoView({ block: 'end', behavior: 'smooth' });
-            });
-          }}
+          onclick={openOutputDrawer}
           title="{modCount} active override{modCount === 1 ? '' : 's'} — open the export drawer"
         >
           {modCount} customised · Export CSS
@@ -130,7 +125,7 @@
     </div>
 
     <button
-      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane"
+      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__pane--side"
       onclick={() => (ui.sidebarOpen = !ui.sidebarOpen)}
       aria-pressed={ui.sidebarOpen}
       title="{ui.sidebarOpen ? 'Collapse' : 'Expand'} the category sidebar"
@@ -268,9 +263,10 @@
     .hdr { padding: 10px 12px; gap: 8px; }
     /* Token count pill adds no value on tiny screens — hide to keep brand row compact */
     .hdr__pill--muted { display: none; }
-    /* Sidebar and preview toggles are both ineffective at this width:
-       preview is always hidden and sidebar is always icon-only regardless of state */
-    .hdr__controls > button { display: none; }
+    /* The sidebar toggle is ineffective at this width (the rail is always
+       icon-only regardless of state). The preview toggle STAYS — it opens
+       the slide-over preview overlay. */
+    .hdr__pane--side { display: none; }
     /* Prevent remaining controls from wrapping to a second row.
        flex-start ensures overflow goes right so the first items (undo/redo)
        stay visible by default on very narrow screens (≤320px). */

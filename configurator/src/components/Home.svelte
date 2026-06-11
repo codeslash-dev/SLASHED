@@ -8,33 +8,19 @@
    * customised, so the screen doubles as orientation ("what do I change per
    * project?") and progress tracking ("what have I already touched?").
    */
-  import { DOMAINS, BASIC_DOMAIN_IDS, domainOf } from '../lib/domains.js';
-  import { tokenByName } from '../lib/model.js';
-  import { ui, overrides } from '../lib/store.svelte.js';
+  import { DOMAINS, BASIC_DOMAIN_IDS } from '../lib/domains.js';
+  import { modifiedCountsByDomain } from '../lib/model.js';
+  import { ui, overrides, openOutputDrawer } from '../lib/store.svelte.js';
 
   const rows = $derived(DOMAINS.filter((d) => BASIC_DOMAIN_IDS.includes(d.id)));
 
-  // Domain id → number of currently-overridden tokens (same logic as Sidebar).
-  const mods = $derived.by(() => {
-    const c = {};
-    for (const name of Object.keys(overrides)) {
-      const t = tokenByName.get(name);
-      if (!t) continue;
-      const id = domainOf(t);
-      c[id] = (c[id] || 0) + 1;
-    }
-    return c;
-  });
+  // Domain id → number of currently-overridden tokens (same map as Sidebar).
+  const mods = $derived.by(() => modifiedCountsByDomain(overrides));
 
   const totalMods = $derived(Object.keys(overrides).length);
 
-  function openExport() {
-    ui.outputOpen = true;
-    // The drawer lives at the bottom of the shell — bring it into view.
-    requestAnimationFrame(() => {
-      document.querySelector('.out')?.scrollIntoView({ block: 'end', behavior: 'smooth' });
-    });
-  }
+  // The first untouched non-tool domain gets the "start here" pointer.
+  const startId = $derived(rows.find((r) => !r.tool && !mods[r.id])?.id ?? null);
 </script>
 
 <section class="home">
@@ -47,14 +33,14 @@
       (<kbd class="cfg-kbd">A</kbd>).
     </p>
     {#if totalMods > 0}
-      <button class="home__export" onclick={openExport} title="Open the output drawer with your override CSS">
+      <button class="home__export" onclick={openOutputDrawer} title="Open the output drawer with your override CSS">
         {totalMods} token{totalMods === 1 ? '' : 's'} customised — Export CSS ↓
       </button>
     {/if}
   </header>
 
   <ul class="home__list">
-    {#each rows as d, i (d.id)}
+    {#each rows as d (d.id)}
       <li>
         <button class="home__row" onclick={() => (ui.domain = d.id)}>
           <span class="home__icon" aria-hidden="true">{d.icon}</span>
@@ -67,7 +53,7 @@
               <span class="home__count">presets</span>
             {:else if mods[d.id]}
               <span class="home__count home__count--mod">{mods[d.id]} customised</span>
-            {:else if !d.tool && i === rows.findIndex((r) => !r.tool && !mods[r.id])}
+            {:else if d.id === startId}
               <span class="home__count home__count--start">start here →</span>
             {:else}
               <span class="home__count">defaults</span>

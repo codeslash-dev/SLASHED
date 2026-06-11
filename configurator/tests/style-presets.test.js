@@ -70,6 +70,16 @@ describe('preset list invariants', () => {
     });
   }
 
+  test('border presets stay anchored to the framework default radii', () => {
+    // The preset semantics encode knowledge of the defaults: Subtle is half
+    // of 4/8/12px, Rounded IS 4/8/12px, Pill scales beyond them. If the
+    // framework retunes its radius steps this must fail so the presets get
+    // redesigned alongside (same parity idea as the fluid-engine defaults).
+    assert.equal(tokenByName.get('--sf-radius-s').value, 'calc(4px * var(--sf-radius-scale))');
+    assert.equal(tokenByName.get('--sf-radius-m').value, 'calc(8px * var(--sf-radius-scale))');
+    assert.equal(tokenByName.get('--sf-radius-l').value, 'calc(12px * var(--sf-radius-scale))');
+  });
+
   test('STYLE_PRESETS_BY_DOMAIN keys are borders + shadows with titles', () => {
     assert.deepEqual(Object.keys(STYLE_PRESETS_BY_DOMAIN).sort(), ['borders', 'shadows']);
     for (const def of Object.values(STYLE_PRESETS_BY_DOMAIN)) {

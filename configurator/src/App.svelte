@@ -13,7 +13,9 @@
    *   │ Output drawer (override CSS, copy / download / import)           │
    *   └─────────────────────────────────────────────────────────────────┘
    *
-   * Below 1100px the preview hides. Below 760px the sidebar collapses to a
+   * Below 1100px the preview pane becomes a slide-over overlay (closed by
+   * default, opened with the header ◨ toggle, dismissed via the scrim).
+   * Below 760px the sidebar collapses to a
    * compact icon-only rail and the search box widens to fill the header.
    *
    * State lives in the shared `ui` store; this component just wires the
@@ -51,6 +53,21 @@
   // expressions correctly. setProbeContext is internally idempotent.
   $effect(() => {
     setProbeContext({ overrides, theme: ui.previewTheme });
+  });
+
+  // On narrow viewports the preview is a slide-over overlay, so it must start
+  // closed — opening a full-width scrim on first paint would bury the panel.
+  // The media query is tracked live: shrinking the window dismisses the
+  // overlay instead of dropping a scrim onto the app, and widening it back
+  // restores the desktop pane (its default-open state).
+  $effect(() => {
+    const mql = window.matchMedia('(max-width: 1100px)');
+    if (mql.matches) ui.previewOpen = false;
+    const onChange = (e) => {
+      ui.previewOpen = !e.matches;
+    };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
   });
 
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
@@ -126,6 +143,9 @@
   </main>
 
   {#if ui.previewOpen}
+    <!-- Scrim behind the slide-over preview on narrow viewports (≤1100px);
+         display:none on desktop where the preview is a regular grid pane. -->
+    <button class="scrim" aria-label="Close preview" onclick={() => (ui.previewOpen = false)}></button>
     <Preview />
   {/if}
 
@@ -167,7 +187,20 @@
     border-left: 1px solid var(--cfg-border);
   }
 
-  /* Mid breakpoint: drop the preview pane. */
+  .scrim {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 49;
+    background: rgba(0, 0, 0, 0.45);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  /* Mid breakpoint: the preview leaves the grid and becomes a slide-over
+     overlay — still fully functional, opened via the header ◨ toggle and
+     dismissed by tapping the scrim (or the toggle again). */
   @media (max-width: 1100px) {
     .shell,
     .shell--no-preview,
@@ -179,7 +212,15 @@
         "side main"
         "output output";
     }
-    .shell :global(.preview) { display: none; }
+    .scrim { display: block; }
+    .shell :global(.preview) {
+      position: fixed;
+      inset: 0 0 0 auto;
+      width: min(440px, 94vw);
+      z-index: 50;
+      border-left: 1px solid var(--cfg-border-strong);
+      box-shadow: -16px 0 48px rgba(0, 0, 0, 0.5);
+    }
   }
   @media (max-width: 600px) {
     .shell,
