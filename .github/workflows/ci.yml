@@ -147,3 +147,34 @@ jobs:
       # so an explicit build step here would just build twice.
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm test
+
+  configurator:
+    name: Configurator tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
+        with:
+          node-version: 22
+          cache: npm
+      # Root deps first: the configurator's sync script reads docs/api-index.json
+      # via tooling generated at the repo root.
+      - run: npm ci
+      - run: npm ci
+        working-directory: configurator
+      # Unit suite — the sync tripwire: curated Basic controls, presets, fluid
+      # engine scalars and knob defaults all pinned to the live catalogue.
+      - run: npm test
+        working-directory: configurator
+      # Type/diagnostics gate (kept at 0 errors / 0 warnings).
+      - run: npm run check
+        working-directory: configurator
+      # Browser regression suite (test:e2e prebuilds; Playwright manages the
+      # preview server via its webServer option). Chromium only — cross-engine
+      # CSS coverage lives in the root Regression tests job.
+      - run: npx playwright install --with-deps chromium
+        working-directory: configurator
+      - run: npm run test:e2e
+        working-directory: configurator
