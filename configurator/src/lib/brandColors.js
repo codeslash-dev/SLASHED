@@ -26,6 +26,7 @@ export const BRAND_COLOR_KEYS = [
   { key: 'warning',   label: 'Warning',   group: 'status' },
   { key: 'error',     label: 'Error',     group: 'status' },
   { key: 'info',      label: 'Info',      group: 'status' },
+  { key: 'danger',    label: 'Danger',    group: 'status' },
 ];
 
 /**
