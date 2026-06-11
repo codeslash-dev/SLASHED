@@ -117,12 +117,14 @@
           class="cfg-seg__btn"
           class:cfg-seg__btn--on={view === 'css'}
           onclick={() => (view = 'css')}
+          aria-pressed={view === 'css'}
           title="Generated override stylesheet (copy/download/import)"
         >CSS</button>
         <button
           class="cfg-seg__btn"
           class:cfg-seg__btn--on={view === 'diff'}
           onclick={() => (view = 'diff')}
+          aria-pressed={view === 'diff'}
           title="Before/after diff vs framework defaults"
         >Diff</button>
       </div>
@@ -136,12 +138,14 @@
             class="cfg-seg__btn"
             class:cfg-seg__btn--on={ui.outputMode === 'layer'}
             onclick={() => (ui.outputMode = 'layer')}
+            aria-pressed={ui.outputMode === 'layer'}
             title="@layer slashed.overrides — cascade layers"
           >@layer</button>
           <button
             class="cfg-seg__btn"
             class:cfg-seg__btn--on={ui.outputMode === 'root'}
             onclick={() => (ui.outputMode = 'root')}
+            aria-pressed={ui.outputMode === 'root'}
             title=":root — bare block, no layers"
           >:root</button>
         </div>

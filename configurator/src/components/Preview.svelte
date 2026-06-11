@@ -63,9 +63,41 @@
         >{v.label}</button>
       {/each}
     </div>
+    <!-- Theme / motion toggles live in the header too, but on narrow
+         viewports the slide-over overlay covers the header — so the bar
+         carries its own copies (they bind the same ui state). -->
+    <div class="cfg-seg preview__modes" role="group" aria-label="Preview theme and motion">
+      <button
+        class="cfg-seg__btn"
+        class:cfg-seg__btn--on={ui.previewTheme === 'light'}
+        onclick={() => (ui.previewTheme = 'light')}
+        aria-pressed={ui.previewTheme === 'light'}
+        title="Light preview theme"
+      >☀</button>
+      <button
+        class="cfg-seg__btn"
+        class:cfg-seg__btn--on={ui.previewTheme === 'dark'}
+        onclick={() => (ui.previewTheme = 'dark')}
+        aria-pressed={ui.previewTheme === 'dark'}
+        title="Dark preview theme"
+      >☾</button>
+      <button
+        class="cfg-seg__btn"
+        class:cfg-seg__btn--on={ui.previewMotion === 'reduced'}
+        onclick={() => (ui.previewMotion = ui.previewMotion === 'reduced' ? 'normal' : 'reduced')}
+        aria-pressed={ui.previewMotion === 'reduced'}
+        title="Reduced motion in preview only"
+      >🐢</button>
+    </div>
     <span class="preview__hint">
       {ui.previewTheme}{ui.previewMotion === 'reduced' ? ' · reduced motion' : ''}{activeViewport.width ? ` · ${activeViewport.width} px` : ''}
     </span>
+    <button
+      class="preview__close"
+      onclick={() => (ui.previewOpen = false)}
+      title="Close the preview overlay"
+      aria-label="Close preview"
+    >✕</button>
   </header>
 
   <div class="preview__viewport">
@@ -308,8 +340,29 @@
     color: var(--cfg-text-faint);
     text-transform: capitalize;
   }
-  .preview__stage--orig-was-here { display: none; } /* placeholder eaten */
-
+  .preview__modes :global(.cfg-seg__btn) { padding: 4px 9px; font-size: 12px; }
+  /* Close affordance for the slide-over overlay; redundant on desktop where
+     the pane has the header ◨ toggle, so it only renders on narrow widths. */
+  .preview__close {
+    display: none;
+    margin-left: auto;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1;
+    color: var(--cfg-text-muted);
+    background: var(--cfg-surface-2);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    cursor: pointer;
+  }
+  .preview__close:hover { color: var(--cfg-text); border-color: var(--cfg-accent-strong); }
+  @media (max-width: 1100px) {
+    .preview__close { display: inline-grid; place-items: center; }
+    .preview__hint { display: none; }
+    .preview__bar { flex-wrap: wrap; gap: 8px; }
+  }
   /* Sample UI authored against framework tokens with sane fallbacks. */
   .pv {
     font-family: var(--sf-font-body, system-ui, sans-serif);
