@@ -15,6 +15,7 @@
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN } from '../lib/domains.js';
+  import { BASIC_BY_DOMAIN } from '../lib/basics.js';
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
   import TokenGroup from './TokenGroup.svelte';
@@ -34,6 +35,20 @@
     (domain.essentials ?? [])
       .map((name) => tokenByName.get(name))
       .filter(Boolean)
+  );
+
+  // Friendly Basic groups (lib/basics.js): label + help per control, with
+  // controls whose token is missing from the catalogue dropped defensively
+  // (tests/basics.test.js makes that a CI failure, never a silent gap).
+  const basicGroups = $derived(
+    (BASIC_BY_DOMAIN[domain.id]?.groups ?? [])
+      .map((g) => ({
+        ...g,
+        controls: g.controls
+          .map((c) => ({ ...c, tokenObj: tokenByName.get(c.token) }))
+          .filter((c) => c.tokenObj),
+      }))
+      .filter((g) => g.controls.length)
   );
 
   // Every token in this domain.
@@ -213,6 +228,21 @@
             {/each}
           </div>
         </section>
+      {:else if !advanced && basicGroups.length}
+        <!-- Curated Basic forms: friendly labels, help text, ⓘ raw-token info. -->
+        {#each basicGroups as group (group.title)}
+          <section class="cfg-card panel__card">
+            <header class="panel__card-head">
+              <span class="panel__card-title">{group.title}</span>
+              <span class="panel__card-count">{group.controls.length}</span>
+            </header>
+            <div class="panel__card-rows">
+              {#each group.controls as c (c.token)}
+                <TokenRow token={c.tokenObj} label={c.label} help={c.help} showRawInfo />
+              {/each}
+            </div>
+          </section>
+        {/each}
       {:else if essentials.length}
         <section class="cfg-card panel__card">
           <header class="panel__card-head">

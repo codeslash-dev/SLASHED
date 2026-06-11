@@ -19,6 +19,7 @@
  *
  * Pure data + a classifier; no Svelte/DOM, so it is trivially unit-testable.
  */
+import { basicControlTokens } from './basics.js';
 
 /**
  * Domains surfaced in BASIC mode (plus the synthetic Home screen).
@@ -108,7 +109,9 @@ export const KNOBS_BY_DOMAIN = {
  *   tool          - non-token tool slot: 'wcag' renders the WCAG panel
  *   essentials    - curated "basic" token names (rendered as editor rows in
  *                   basic + advanced); names absent from the active catalogue
- *                   are skipped silently
+ *                   are skipped silently. For the Basic checklist domains the
+ *                   list derives from lib/basics.js (the richer labelled
+ *                   shape) so there is exactly one source of truth
  *   basicGenerators / advancedGenerators
  *                 - which scale generator ramps to surface (one of
  *                   'type' | 'display' | 'space')
@@ -184,13 +187,7 @@ export const DOMAINS = [
       /^--sf-optical-/,
       /^--sf-current-/,
     ],
-    essentials: [
-      '--sf-font-body',
-      '--sf-font-heading',
-      '--sf-font-mono',
-      '--sf-leading-normal',
-      '--sf-font-weight-heading',
-    ],
+    essentials: basicControlTokens('typography'),
     basicGenerators: ['type', 'display'],
   },
   {
@@ -210,13 +207,7 @@ export const DOMAINS = [
       /^--sf-component-pad/,
       /^--sf-content-(gap|width|intrinsic)/,
     ],
-    essentials: [
-      // `--sf-content-gap` is the canonical knob; `--sf-space-content` is its alias.
-      '--sf-content-gap',
-      '--sf-space-gutter',
-      '--sf-section-pad',
-      '--sf-component-pad',
-    ],
+    essentials: basicControlTokens('spacing'),
     basicGenerators: ['space'],
   },
   {
@@ -263,14 +254,7 @@ export const DOMAINS = [
       /^--sf-alternate-/,
       /^--sf-field-/,
     ],
-    essentials: [
-      '--sf-container-narrow',
-      '--sf-container-default',
-      '--sf-container-wide',
-      '--sf-container-prose',
-      '--sf-touch-target',
-      '--sf-header-height',
-    ],
+    essentials: basicControlTokens('layout'),
   },
   {
     id: 'borders',
@@ -287,15 +271,8 @@ export const DOMAINS = [
       /^--sf-divider-/,
       /^--sf-outline-/,
     ],
-    essentials: [
-      // `--sf-radius-full` is intentionally unscaled — Advanced only.
-      '--sf-radius-s',
-      '--sf-radius-m',
-      '--sf-radius-l',
-      '--sf-border-width-1',
-      '--sf-divider-width',
-      '--sf-color-border',
-    ],
+    // `--sf-radius-full` is intentionally unscaled — Advanced only.
+    essentials: basicControlTokens('borders'),
   },
   {
     id: 'shadows',
@@ -313,12 +290,7 @@ export const DOMAINS = [
       /^--sf-scroll-shadow/,
       /-glow(\b|[-_])/,        // shadow-glow, shadow-glow-color, etc.
     ],
-    essentials: [
-      '--sf-shadow-s',
-      '--sf-shadow-m',
-      '--sf-shadow-l',
-      '--sf-shadow-xl',
-    ],
+    essentials: basicControlTokens('shadows'),
   },
   {
     id: 'motion',
