@@ -20,6 +20,24 @@
  * Pure data + a classifier; no Svelte/DOM, so it is trivially unit-testable.
  */
 
+/**
+ * Domains surfaced in BASIC mode (plus the synthetic Home screen).
+ *
+ * Basic is a per-project checklist: the 11 brand/status colors, the fluid
+ * type/space generators and a handful of layout/border/shadow anchors.
+ * Everything else lives in Advanced. 'themes' is the one tool that stays —
+ * presets are the friendliest entry point into the override model.
+ */
+export const BASIC_DOMAIN_IDS = [
+  'colors',
+  'typography',
+  'spacing',
+  'layout',
+  'borders',
+  'shadows',
+  'themes',
+];
+
 /** Tokens whose ideal domain doesn't fall out of name patterns alone. */
 const OVERRIDES = {
   // Body-text aliases live in typography even though `--sf-color-body` etc.
@@ -82,6 +100,11 @@ export const KNOBS_BY_DOMAIN = {
  *   label         - display label
  *   icon          - single emoji shown in the tab and section header
  *   blurb         - one-line summary shown above the panel
+ *   intro         - 1–2 sentence orientation copy shown atop the BASIC panel
+ *                   (what this domain controls and whether typical projects
+ *                   change it)
+ *   powerIntro    - one-line warning copy above the Power-knobs group in
+ *                   Advanced (required for any domain with quick knobs)
  *   tool          - non-token tool slot: 'wcag' renders the WCAG panel
  *   essentials    - curated "basic" token names (rendered as editor rows in
  *                   basic + advanced); names absent from the active catalogue
@@ -94,6 +117,7 @@ export const KNOBS_BY_DOMAIN = {
  *
  * @type {Array<{
  *   id: string, label: string, icon: string, blurb: string,
+ *   intro?: string, powerIntro?: string,
  *   tool?: string,
  *   essentials?: string[],
  *   basicGenerators?: string[], advancedGenerators?: string[],
@@ -106,6 +130,8 @@ export const DOMAINS = [
     label: 'Colors',
     icon: '🎨',
     blurb: 'Brand & status sources, semantic surfaces, links, focus, gradients, palette mix.',
+    intro: 'Set the 11 brand and status source colors — shades, surfaces, links and dark mode all derive from them automatically. The highest-impact panel for any project.',
+    powerIntro: 'These thresholds retune how the framework picks light or dark text on every colored surface. Small changes ripple across the whole palette — change with care.',
     namespaces: [
       'color', 'palette', 'gradient',
       'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
@@ -133,6 +159,8 @@ export const DOMAINS = [
     label: 'Typography',
     icon: '🔤',
     blurb: 'Font families, fluid type ramp, headings, prose and inline text behaviour.',
+    intro: 'Pick your font stacks, then tune the fluid type ramp with the generator — a few inputs recalibrate every text size between your smallest and largest viewports.',
+    powerIntro: '--sf-text-scale multiplies the entire fluid text ramp at once. Prefer the generator above unless you want a uniform global resize.',
     namespaces: [
       'font', 'text', 'leading', 'tracking', 'prose',
       'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -161,6 +189,7 @@ export const DOMAINS = [
       '--sf-font-heading',
       '--sf-font-mono',
       '--sf-leading-normal',
+      '--sf-font-weight-heading',
     ],
     basicGenerators: ['type', 'display'],
   },
@@ -169,6 +198,8 @@ export const DOMAINS = [
     label: 'Spacing',
     icon: '📏',
     blurb: 'Fluid spacing scale, gaps, section padding and content rhythm.',
+    intro: 'Tune the fluid spacing ramp with the generator, plus the rhythm tokens most layouts read (section padding, gutters, content gaps).',
+    powerIntro: '--sf-space-scale multiplies all 45 fluid spacing tokens in one drag. Prefer the generator above unless you want a uniform global squeeze or stretch.',
     namespaces: ['space', 'gap', 'section', 'fluid', 'flow', 'gutter', 'component'],
     patterns: [
       /^--sf-space-/,
@@ -180,7 +211,8 @@ export const DOMAINS = [
       /^--sf-content-(gap|width|intrinsic)/,
     ],
     essentials: [
-      '--sf-space-content',
+      // `--sf-content-gap` is the canonical knob; `--sf-space-content` is its alias.
+      '--sf-content-gap',
       '--sf-space-gutter',
       '--sf-section-pad',
       '--sf-component-pad',
@@ -192,6 +224,7 @@ export const DOMAINS = [
     label: 'Layout',
     icon: '🧱',
     blurb: 'Containers, grids, layout primitives, icons, ratios and z-index.',
+    intro: 'Set your content widths and a few global anchors (header height, touch target). Most other layout tokens are fine at their defaults.',
     namespaces: [
       'container', 'grid', 'col', 'cluster', 'stack', 'reel', 'sidebar',
       'switcher', 'cover', 'frame', 'bento', 'center', 'box', 'imposter',
@@ -244,6 +277,8 @@ export const DOMAINS = [
     label: 'Borders',
     icon: '⬜',
     blurb: 'Corner radius, border widths, strokes and dividers.',
+    intro: 'Set the corner radius steps and the default border styling referenced across the framework.',
+    powerIntro: '--sf-radius-scale multiplies every radius step at once (set it to 0 for fully sharp corners).',
     namespaces: ['border', 'radius', 'stroke', 'divider', 'outline'],
     patterns: [
       /^--sf-border(\b|[-_])/,
@@ -253,12 +288,13 @@ export const DOMAINS = [
       /^--sf-outline-/,
     ],
     essentials: [
+      // `--sf-radius-full` is intentionally unscaled — Advanced only.
       '--sf-radius-s',
       '--sf-radius-m',
       '--sf-radius-l',
-      '--sf-radius-full',
       '--sf-border-width-1',
       '--sf-divider-width',
+      '--sf-color-border',
     ],
   },
   {
@@ -266,6 +302,8 @@ export const DOMAINS = [
     label: 'Shadows',
     icon: '🌒',
     blurb: 'Elevation shadow ramp, drop / text / scroll shadows and glow.',
+    intro: 'Tune the four elevation steps used across the framework. Shadow opacity is boosted automatically in dark mode.',
+    powerIntro: '--sf-shadow-strength drives the opacity of all 14 shadow tokens, including the automatic dark-mode boost.',
     // Order MATTERS — these patterns run before typography/colors so that
     // `--sf-text-shadow-*` and `--sf-shadow-color` end up here.
     patterns: [
@@ -287,6 +325,7 @@ export const DOMAINS = [
     label: 'Motion',
     icon: '🎞️',
     blurb: 'Durations, easings, transition and animation presets.',
+    powerIntro: '--sf-motion-scale multiplies every duration in the framework (set it to 0 to disable motion entirely).',
     namespaces: ['duration', 'ease', 'transition', 'animation', 'motion', 'scroll'],
     patterns: [
       /^--sf-duration-/,

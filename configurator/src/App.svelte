@@ -19,7 +19,7 @@
    * State lives in the shared `ui` store; this component just wires the
    * active domain to its panel.
    */
-  import { DOMAIN_BY_ID } from './lib/domains.js';
+  import { DOMAINS, DOMAIN_BY_ID, BASIC_DOMAIN_IDS } from './lib/domains.js';
   import { ui, undo, redo, overrides } from './lib/store.svelte.js';
   import { setProbeContext } from './lib/probeHost.js';
   import Header from './components/Header.svelte';
@@ -30,9 +30,21 @@
   import WcagPanel from './components/WcagPanel.svelte';
   import ThemeGallery from './components/ThemeGallery.svelte';
   import Cheatsheet from './components/Cheatsheet.svelte';
+  import Home from './components/Home.svelte';
 
+  const home = $derived(ui.mode === 'basic' && ui.domain === 'home');
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
   const tool = $derived(domain?.tool ?? '');
+
+  // Keep the active domain valid for the current mode: Home exists only in
+  // Basic, and Basic hides the non-checklist domains (Motion, Effects, …).
+  $effect(() => {
+    if (ui.mode === 'advanced' && ui.domain === 'home') {
+      ui.domain = 'colors';
+    } else if (ui.mode === 'basic' && ui.domain !== 'home' && !BASIC_DOMAIN_IDS.includes(ui.domain)) {
+      ui.domain = 'home';
+    }
+  });
 
   // Keep the contrast-probe host in sync with the user's cascade so every
   // ContrastBadge resolves `var(...)`, `light-dark()` and `oklch(from ...)`
@@ -77,8 +89,10 @@
     } else if (e.key === 'a' || e.key === 'A') {
       ui.mode = 'advanced';
     } else if (e.key === '[' || e.key === ']') {
-      // Cycle non-tool domains.
-      const ids = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects', 'wcag', 'themes', 'misc', 'cheatsheet'];
+      // Cycle the domains visible in the current mode.
+      const ids = ui.mode === 'basic'
+        ? ['home', ...BASIC_DOMAIN_IDS]
+        : DOMAINS.map((d) => d.id);
       const i = ids.indexOf(ui.domain);
       if (i !== -1) {
         const next = (i + (e.key === ']' ? 1 : -1) + ids.length) % ids.length;
@@ -96,7 +110,9 @@
   <Sidebar />
 
   <main class="main" aria-label="Configurator main">
-    {#if tool === 'wcag'}
+    {#if home}
+      <Home />
+    {:else if tool === 'wcag'}
       <WcagPanel />
     {:else if tool === 'themes'}
       <ThemeGallery />

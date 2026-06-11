@@ -2,17 +2,27 @@
   /**
    * Category sidebar (left rail).
    *
-   * Lists every domain (Colors, Typography, Spacing, Layout, Borders, Shadows,
-   * Motion, Effects, WCAG, Misc) plus the per-domain override count. When the
+   * In Basic mode lists the Home screen plus the per-project checklist domains
+   * (Colors, Typography, Spacing, Layout, Borders, Shadows, Themes); Advanced
+   * mode lists the full taxonomy. Each row carries the per-domain override
+   * count. When the
    * sidebar is collapsed (ui.sidebarOpen = false) it shrinks to an icon-only
    * rail; on narrow viewports it always renders in icon-only mode.
    *
    * The category icons are short Unicode glyphs/emoji to avoid pulling in an
    * icon font — keeps the configurator a single self-contained bundle.
    */
-  import { DOMAINS, domainOf } from '../lib/domains.js';
+  import { DOMAINS, BASIC_DOMAIN_IDS, domainOf } from '../lib/domains.js';
   import { allTokens, tokenByName } from '../lib/model.js';
   import { ui, overrides } from '../lib/store.svelte.js';
+
+  // Basic mode shows the per-project checklist only (6 domains + Themes),
+  // prefixed with the Home screen. Advanced shows the full taxonomy.
+  const visibleDomains = $derived(
+    ui.mode === 'basic'
+      ? DOMAINS.filter((d) => BASIC_DOMAIN_IDS.includes(d.id))
+      : DOMAINS
+  );
 
   // Domain id → number of tokens it owns (used as the tab count badge).
   const totals = $derived.by(() => {
@@ -40,7 +50,23 @@
 
 <aside class="side" class:side--narrow={!ui.sidebarOpen} aria-label="Categories">
   <ul class="side__list">
-    {#each DOMAINS as d (d.id)}
+    {#if ui.mode === 'basic'}
+      <li>
+        <button
+          class="side__item"
+          class:side__item--on={ui.domain === 'home'}
+          onclick={() => (ui.domain = 'home')}
+          aria-current={ui.domain === 'home' ? 'page' : undefined}
+          title="Home — project setup checklist"
+        >
+          <span class="side__icon" aria-hidden="true">🏠</span>
+          <span class="side__label">
+            <span class="side__name">Home</span>
+          </span>
+        </button>
+      </li>
+    {/if}
+    {#each visibleDomains as d (d.id)}
       <li>
         <button
           class="side__item"
