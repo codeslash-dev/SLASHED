@@ -7,6 +7,7 @@
  * rune-free means it is trivially unit-testable and re-usable.
  */
 import data from '../data/api-index.generated.json' with { type: 'json' };
+import { domainOf } from './domains.js';
 
 /** Sync metadata (framework version, generated timestamp, counts). */
 export const sync = data._sync ?? {};
@@ -21,6 +22,25 @@ export const tokenByName = new Map(allTokens.map((t) => [t.name, t]));
 export const defaultsByName = new Map(
   allTokens.map((t) => [t.name, t.value ?? ''])
 );
+
+/**
+ * Domain id -> number of currently-overridden tokens it owns. Shared by the
+ * Sidebar badges and the Home checklist so the two counts can never drift.
+ * Unknown override names (stale storage) are skipped, matching loadOverrides.
+ *
+ * @param {Record<string, string>} overrides token name -> value
+ * @returns {Record<string, number>}
+ */
+export function modifiedCountsByDomain(overrides) {
+  const c = {};
+  for (const name of Object.keys(overrides)) {
+    const t = tokenByName.get(name);
+    if (!t) continue;
+    const id = domainOf(t);
+    c[id] = (c[id] || 0) + 1;
+  }
+  return c;
+}
 
 /**
  * Compute the dependents-count map for an arbitrary token list.

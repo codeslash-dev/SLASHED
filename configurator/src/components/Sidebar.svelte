@@ -13,7 +13,7 @@
    * icon font — keeps the configurator a single self-contained bundle.
    */
   import { DOMAINS, BASIC_DOMAIN_IDS, domainOf } from '../lib/domains.js';
-  import { allTokens, tokenByName } from '../lib/model.js';
+  import { allTokens, modifiedCountsByDomain } from '../lib/model.js';
   import { ui, overrides } from '../lib/store.svelte.js';
 
   // Basic mode shows the per-project checklist only (6 domains + Themes),
@@ -36,16 +36,7 @@
   });
 
   // Domain id → number of currently-overridden tokens (the "modified" badge).
-  const mods = $derived.by(() => {
-    const c = {};
-    for (const name of Object.keys(overrides)) {
-      const t = tokenByName.get(name);
-      if (!t) continue;
-      const id = domainOf(t);
-      c[id] = (c[id] || 0) + 1;
-    }
-    return c;
-  });
+  const mods = $derived.by(() => modifiedCountsByDomain(overrides));
 </script>
 
 <aside class="side" class:side--narrow={!ui.sidebarOpen} aria-label="Categories">

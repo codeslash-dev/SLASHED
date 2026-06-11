@@ -57,8 +57,17 @@
 
   // On narrow viewports the preview is a slide-over overlay, so it must start
   // closed — opening a full-width scrim on first paint would bury the panel.
+  // The media query is tracked live: shrinking the window dismisses the
+  // overlay instead of dropping a scrim onto the app, and widening it back
+  // restores the desktop pane (its default-open state).
   $effect(() => {
-    if (window.matchMedia('(max-width: 1100px)').matches) ui.previewOpen = false;
+    const mql = window.matchMedia('(max-width: 1100px)');
+    if (mql.matches) ui.previewOpen = false;
+    const onChange = (e) => {
+      ui.previewOpen = !e.matches;
+    };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
   });
 
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;

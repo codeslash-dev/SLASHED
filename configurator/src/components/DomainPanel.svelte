@@ -14,7 +14,7 @@
    * so each domain is just curation — no bespoke per-field code.
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
-  import { domainOf, KNOBS_BY_DOMAIN } from '../lib/domains.js';
+  import { domainOf, KNOBS_BY_DOMAIN, DOCS_BASE_URL } from '../lib/domains.js';
   import { BASIC_BY_DOMAIN } from '../lib/basics.js';
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
@@ -319,7 +319,7 @@
       {#if domain.docsPath}
         <p class="panel__docs">
           <a
-            href="https://github.com/codeslash-dev/SLASHED/blob/main/{domain.docsPath}"
+            href="{DOCS_BASE_URL}{domain.docsPath}"
             target="_blank"
             rel="noreferrer"
           >Learn more about {domain.label.toLowerCase()} in the framework docs →</a>

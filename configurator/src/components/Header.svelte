@@ -14,7 +14,7 @@
    * reachable. Keyboard shortcut: `/` focuses the search box.
    */
   import { sync, allTokens } from '../lib/model.js';
-  import { ui, overrides, overrideCount, history, undo, redo } from '../lib/store.svelte.js';
+  import { ui, overrides, overrideCount, history, undo, redo, openOutputDrawer } from '../lib/store.svelte.js';
 
   const totalTokens = allTokens.length;
   const modCount = $derived(Object.keys(overrides).length);
@@ -41,12 +41,7 @@
       {#if modCount > 0}
         <button
           class="hdr__pill hdr__pill--mod hdr__pill--btn"
-          onclick={() => {
-            ui.outputOpen = true;
-            requestAnimationFrame(() => {
-              document.querySelector('.out')?.scrollIntoView({ block: 'end', behavior: 'smooth' });
-            });
-          }}
+          onclick={openOutputDrawer}
           title="{modCount} active override{modCount === 1 ? '' : 's'} — open the export drawer"
         >
           {modCount} customised · Export CSS
