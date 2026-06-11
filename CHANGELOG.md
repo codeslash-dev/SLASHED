@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.34] - 2026-06-11
+
+### Bug Fixes
+- address CodeRabbit review comments
+- **tokens:** classify --sf-shadow-strength as role:knob in generation pipeline
+- **configurator:** audit fixes — resetDomain history, shadow role, dead code
+- **configurator:** add danger to brand color keys
+- **configurator:** brand colors, consume/configure filter, cheatsheet tab
+- **configurator:** domain essentials, token descriptions, css source banners
+- **configurator:** address 6 reported issues
+
 ## [0.5.33] - 2026-06-10
 
 ### Features
