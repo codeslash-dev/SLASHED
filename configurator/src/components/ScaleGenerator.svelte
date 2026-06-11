@@ -74,6 +74,7 @@
   // generator via {#key} when the domain changes), so capturing the first ramp
   // and its seeds as plain consts is correct — and keeps the $state
   // initializers from referencing reactive props.
+  // svelte-ignore state_referenced_locally
   const FIRST = (kinds && kinds[0]) || 'type';
   const SEED = seedKnobs(FIRST);
 
