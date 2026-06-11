@@ -11,7 +11,7 @@
    * customised" pill keeps the user oriented even with the body hidden.
    */
   import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
-  import { sync, defaultsByName } from '../lib/model.js';
+  import { sync, defaultsByName, tokenByName } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
 
   const count = $derived(Object.keys(overrides).length);
@@ -61,6 +61,17 @@
 
   function runImport() {
     const parsed = parseCSS(importText);
+    // Replace is destructive — only proceed when the paste actually carries
+    // at least one KNOWN token, so a garbage / wrong-clipboard import can
+    // never silently wipe the current overrides.
+    const names = Object.keys(parsed);
+    const known = names.filter((n) => tokenByName.has(n));
+    if (known.length === 0) {
+      importMsg = names.length
+        ? `No known tokens among ${names.length} parsed — nothing imported, your overrides are untouched.`
+        : 'No --sf-* declarations found — nothing imported, your overrides are untouched.';
+      return;
+    }
     const { applied, skipped } = replaceOverrides(parsed);
     importMsg =
       `Imported ${applied} token${applied === 1 ? '' : 's'}` +
