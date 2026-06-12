@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.36] - 2026-06-12
+
+### Features
+- **configurator:** ux/a11y polish — escape, focus, persisted prefs, meta
+
+### Bug Fixes
+- **configurator:** resolve horizontal overflow + CodeRabbit review fixes
+- **configurator:** font-weight tokens no longer get font-family picker + draggable pane widths
+- **configurator:** preview overlay self-contained controls + a11y polish
+- **configurator:** garbage css import no longer wipes existing overrides
+- **configurator:** track viewport changes live + dedupe count helpers
+- **configurator:** make the live preview reachable on narrow viewports
+
 ## [0.5.35] - 2026-06-11
 
 ### Features
