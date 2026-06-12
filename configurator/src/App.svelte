@@ -5,18 +5,20 @@
    * Layout (desktop ≥ 1100px):
    *   ┌─────────────────────────────────────────────────────────────────┐
    *   │ Header (brand · search · basic/advanced · theme · preview)       │
-   *   ├──────────┬───────────────────────────────────────┬──────────────┤
-   *   │          │                                       │              │
-   *   │ Sidebar  │       Domain panel / WCAG tool        │   Preview    │
-   *   │          │                                       │              │
-   *   ├──────────┴───────────────────────────────────────┴──────────────┤
+   *   ├──────────┬──┬────────────────────────────────────┬──┬───────────┤
+   *   │          │  │                                    │  │           │
+   *   │ Sidebar  │↔│       Domain panel / WCAG tool     │↔│  Preview  │
+   *   │          │  │                                    │  │           │
+   *   ├──────────┴──┴────────────────────────────────────┴──┴───────────┤
    *   │ Output drawer (override CSS, copy / download / import)           │
    *   └─────────────────────────────────────────────────────────────────┘
    *
+   * The ↔ columns are 6 px drag handles — pointer-captured resize of the
+   * sidebar and preview pane widths. Widths persist in localStorage.
+   *
    * Below 1100px the preview pane becomes a slide-over overlay (closed by
    * default, opened with the header ◨ toggle, dismissed via the scrim).
-   * Below 760px the sidebar collapses to a
-   * compact icon-only rail and the search box widens to fill the header.
+   * Below 760px the sidebar collapses to a compact icon-only rail.
    *
    * State lives in the shared `ui` store; this component just wires the
    * active domain to its panel.
@@ -34,6 +36,64 @@
   import ThemeGallery from './components/ThemeGallery.svelte';
   import Cheatsheet from './components/Cheatsheet.svelte';
   import Home from './components/Home.svelte';
+
+  // ── Pane-width resizing ───────────────────────────────────────────────────
+  const WIDTHS_KEY = 'slashed-configurator/pane-widths/v1';
+  const SIDEBAR_MIN = 160;
+  const SIDEBAR_MAX = 500;
+  const PREVIEW_MIN = 260;
+  const PREVIEW_MAX = 680;
+
+  function clampW(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function loadWidths() {
+    if (typeof localStorage === 'undefined') return { sidebar: 240, preview: 380 };
+    try {
+      const raw = localStorage.getItem(WIDTHS_KEY);
+      if (raw) {
+        const p = JSON.parse(raw);
+        return {
+          sidebar: clampW(Number(p.sidebar) || 240, SIDEBAR_MIN, SIDEBAR_MAX),
+          preview: clampW(Number(p.preview) || 380, PREVIEW_MIN, PREVIEW_MAX),
+        };
+      }
+    } catch { /* ignore */ }
+    return { sidebar: 240, preview: 380 };
+  }
+
+  const _w = loadWidths();
+  let sidebarWidth = $state(_w.sidebar);
+  let previewWidth = $state(_w.preview);
+
+  /** Which pane is being dragged ('sidebar' | 'preview' | null). */
+  let dragging = $state(/** @type {'sidebar'|'preview'|null} */ (null));
+  let _dragStartX = 0;
+  let _dragStartW = 0;
+
+  function startResize(pane, /** @type {PointerEvent} */ e) {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragging = pane;
+    _dragStartX = e.clientX;
+    _dragStartW = pane === 'sidebar' ? sidebarWidth : previewWidth;
+    e.preventDefault();
+  }
+
+  function onResizeMove(pane, /** @type {PointerEvent} */ e) {
+    if (dragging !== pane) return;
+    const dx = e.clientX - _dragStartX;
+    if (pane === 'sidebar') {
+      sidebarWidth = clampW(_dragStartW + dx, SIDEBAR_MIN, SIDEBAR_MAX);
+    } else {
+      // Preview handle sits LEFT of the preview pane: dragging right shrinks preview.
+      previewWidth = clampW(_dragStartW - dx, PREVIEW_MIN, PREVIEW_MAX);
+    }
+  }
+
+  function endResize() {
+    if (!dragging) return;
+    dragging = null;
+    try { localStorage.setItem(WIDTHS_KEY, JSON.stringify({ sidebar: sidebarWidth, preview: previewWidth })); } catch { /* ignore */ }
+  }
 
   const home = $derived(ui.mode === 'basic' && ui.domain === 'home');
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
@@ -141,10 +201,31 @@
 
 <svelte:window onkeydown={onKey} />
 
-<div class="shell" class:shell--no-preview={!ui.previewOpen} class:shell--no-sidebar={!ui.sidebarOpen}>
+<div
+  class="shell"
+  class:shell--no-preview={!ui.previewOpen}
+  class:shell--no-sidebar={!ui.sidebarOpen}
+  class:shell--dragging={dragging}
+  style="--shell-sw: {sidebarWidth}px; --shell-pw: {previewWidth}px"
+>
   <Header />
 
   <Sidebar />
+
+  <!-- Sidebar / main drag handle (only when sidebar is expanded) -->
+  {#if ui.sidebarOpen}
+    <div
+      class="resizer resizer--sidebar"
+      role="separator"
+      aria-orientation="vertical"
+      aria-label="Drag to resize sidebar"
+      title="Drag to resize sidebar"
+      onpointerdown={(e) => startResize('sidebar', e)}
+      onpointermove={(e) => onResizeMove('sidebar', e)}
+      onpointerup={endResize}
+      onpointercancel={endResize}
+    ></div>
+  {/if}
 
   <main class="main" aria-label="Configurator main">
     {#if home}
@@ -162,6 +243,21 @@
     {/if}
   </main>
 
+  <!-- Main / preview drag handle (only when preview pane is docked) -->
+  {#if ui.previewOpen}
+    <div
+      class="resizer resizer--preview"
+      role="separator"
+      aria-orientation="vertical"
+      aria-label="Drag to resize live preview"
+      title="Drag to resize live preview"
+      onpointerdown={(e) => startResize('preview', e)}
+      onpointermove={(e) => onResizeMove('preview', e)}
+      onpointerup={endResize}
+      onpointercancel={endResize}
+    ></div>
+  {/if}
+
   {#if ui.previewOpen}
     <!-- Scrim behind the slide-over preview on narrow viewports (≤1100px);
          display:none on desktop where the preview is a regular grid pane. -->
@@ -173,29 +269,60 @@
 </div>
 
 <style>
+  /*
+   * Grid layout — 5-column when all panes visible:
+   *   sidebar | rs1 | main | rs2 | preview
+   *
+   * rs1 / rs2 are the 6 px drag-handle columns. CSS custom properties
+   * --shell-sw and --shell-pw are set via inline style from Svelte state,
+   * defaulting to 240 / 380 px so the layout still works without JS.
+   */
   .shell {
+    --shell-sw: 240px;   /* sidebar width  (overridden by inline style) */
+    --shell-pw: 380px;   /* preview width  (overridden by inline style) */
+    --shell-rs: 6px;     /* drag-handle column width */
+
     display: grid;
-    grid-template-columns: 240px minmax(0, 1fr) minmax(360px, 36%);
+    grid-template-columns: var(--shell-sw) var(--shell-rs) minmax(0, 1fr) var(--shell-rs) var(--shell-pw);
     grid-template-rows: auto minmax(0, 1fr) auto;
     grid-template-areas:
-      "header header header"
-      "side main preview"
-      "output output output";
+      "header header header header header"
+      "side   rs1    main   rs2    preview"
+      "output output output output output";
     height: 100vh;
   }
+
+  /* Preview hidden — only sidebar + drag-handle + main. */
   .shell--no-preview {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: var(--shell-sw) var(--shell-rs) minmax(0, 1fr);
     grid-template-areas:
-      "header header"
-      "side main"
-      "output output";
+      "header header header"
+      "side   rs1    main"
+      "output output output";
   }
+
+  /* Sidebar collapsed (icon rail 60 px) — no rs1 since icon rail isn't resizable. */
   .shell--no-sidebar {
-    grid-template-columns: 60px minmax(0, 1fr) minmax(360px, 36%);
+    grid-template-columns: 60px minmax(0, 1fr) var(--shell-rs) var(--shell-pw);
+    grid-template-areas:
+      "header header header  header"
+      "side   main   rs2     preview"
+      "output output output  output";
   }
+
   .shell--no-sidebar.shell--no-preview {
     grid-template-columns: 60px minmax(0, 1fr);
+    grid-template-areas:
+      "header header"
+      "side   main"
+      "output output";
   }
+
+  /* Global col-resize cursor while dragging — prevents flicker when the
+     pointer strays outside the 6 px handle during fast moves. */
+  .shell--dragging,
+  .shell--dragging * { cursor: col-resize !important; user-select: none; }
+
   .main {
     grid-area: main;
     min-width: 0;
@@ -204,7 +331,37 @@
     display: flex;
     flex-direction: column;
     background: var(--cfg-bg);
-    border-left: 1px solid var(--cfg-border);
+    /* No border-left here — the adjacent resizer column provides separation. */
+  }
+
+  /* Drag handles between panes. */
+  .resizer {
+    position: relative;
+    cursor: col-resize;
+    z-index: 20;
+    touch-action: none; /* prevent scroll-hijack on touch */
+    /* Subtle 1 px center line that matches the existing border style. */
+    background: transparent;
+    transition: background 0.1s;
+  }
+  .resizer--sidebar { grid-area: rs1; }
+  .resizer--preview { grid-area: rs2; }
+
+  /* Center line (visual affordance) */
+  .resizer::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%; transform: translateX(-50%);
+    width: 1px;
+    background: var(--cfg-border);
+    pointer-events: none;
+    transition: background 0.1s, width 0.15s;
+  }
+  .resizer:hover::after,
+  .shell--dragging .resizer::after {
+    background: var(--cfg-accent-strong);
+    width: 3px;
   }
 
   .scrim {
@@ -218,9 +375,8 @@
     cursor: pointer;
   }
 
-  /* Mid breakpoint: the preview leaves the grid and becomes a slide-over
-     overlay — still fully functional, opened via the header ◨ toggle and
-     dismissed by tapping the scrim (or the toggle again). */
+  /* Mid breakpoint: preview becomes a slide-over overlay. Resizers are
+     hidden since the two-column layout is managed by breakpoint CSS. */
   @media (max-width: 1100px) {
     .shell,
     .shell--no-preview,
@@ -232,6 +388,9 @@
         "side main"
         "output output";
     }
+    .resizer { display: none; }
+    /* Restore the left border on main that the resizer normally provides. */
+    .main { border-left: 1px solid var(--cfg-border); }
     .scrim { display: block; }
     .shell :global(.preview) {
       position: fixed;

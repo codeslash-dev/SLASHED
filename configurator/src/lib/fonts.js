@@ -93,12 +93,21 @@ export function detectSystemStack(value) {
 
 /**
  * True when a token name/namespace denotes a font-family token.
+ *
+ * Uses a narrow pattern so that sibling `font` tokens — weight scale
+ * (--sf-font-weight-*), OpenType features (--sf-font-features),
+ * numeric variant (--sf-font-numeric) and variation settings
+ * (--sf-font-variation) — are NOT classified as font-family and therefore
+ * do NOT get the System-stack picker + preview row.
+ *
  * @param {object} token a catalogue token row
  * @returns {boolean}
  */
 export function isFontFamilyToken(token) {
   if (!token) return false;
-  if (token.namespace === 'font') return true;
-  if (/^--sf-font-/.test(token.name || '')) return true;
-  return /font-family/i.test(token.syntax || '');
+  // Explicit syntax annotation is the most reliable signal.
+  if (/font-family/i.test(token.syntax || '')) return true;
+  // Name pattern: --sf-font-* BUT NOT weight/features/numeric/variation tokens.
+  if (/^--sf-font-(?!weight[-_]|features$|numeric$|variation$)/.test(token.name || '')) return true;
+  return false;
 }
