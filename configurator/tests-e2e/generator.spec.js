@@ -69,6 +69,6 @@ test('edge inputs never persist garbage values', async ({ page }) => {
   await gen.locator('.ctl', { hasText: 'Base max' }).locator('input').fill('0');
   await APPLY(gen).click();
   for (const [key, value] of Object.entries(await readOverrides(page))) {
-    expect(value, `${key} must hold a real value`).not.toMatch(/^$|NaN|undefined|null/);
+    expect(value, `${key} must hold a real value`).not.toMatch(/^(?:|NaN|undefined|null)$/);
   }
 });

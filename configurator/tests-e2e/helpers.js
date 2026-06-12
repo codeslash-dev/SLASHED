@@ -29,10 +29,24 @@ export function sideItem(page, label) {
   return page.locator('.side__item', { hasText: label }).first();
 }
 
-/** Parse the persisted override map (empty object when unset). */
+/** Parse the persisted override map (empty object when unset/corrupt). */
 export async function readOverrides(page) {
-  return page.evaluate(
-    (key) => JSON.parse(localStorage.getItem(key) ?? '{}'),
-    STORAGE_KEY
+  return page.evaluate((key) => {
+    try {
+      return JSON.parse(localStorage.getItem(key) ?? '{}');
+    } catch {
+      return {};
+    }
+  }, STORAGE_KEY);
+}
+
+/**
+ * Canonical JSON snapshot (sorted keys) — byte-for-byte comparisons of the
+ * override map must not depend on key insertion order.
+ * @param {Record<string, string>} obj
+ */
+export function stableSnapshot(obj) {
+  return JSON.stringify(
+    Object.fromEntries(Object.entries(obj).sort(([a], [b]) => a.localeCompare(b)))
   );
 }

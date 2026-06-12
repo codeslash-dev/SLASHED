@@ -78,6 +78,9 @@ test('rapid mode toggling never corrupts the active domain', async ({ page }) =>
   await gotoClean(page);
   await sideItem(page, 'Borders').click();
   for (let i = 0; i < 10; i++) await page.keyboard.press(i % 2 ? 'b' : 'a');
-  await expect(page.locator('.side__item.side__item--on')).toHaveCount(1);
+  const active = page.locator('.side__item.side__item--on');
+  await expect(active).toHaveCount(1);
+  // Borders is valid in both modes, so it must survive every toggle.
+  await expect(active).toContainText('Borders');
   expect(errors).toEqual([]);
 });
