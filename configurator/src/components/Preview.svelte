@@ -10,6 +10,20 @@
   import { overrides, ui } from '../lib/store.svelte.js';
   import { buildPreviewDeclarations } from '../lib/preview.js';
 
+  /** @type {HTMLButtonElement | undefined} */
+  let closeBtn;
+
+  // Overlay focus management (narrow viewports): the slide-over behaves like
+  // a dialog, so focus lands on its close button when it opens and returns
+  // to the header toggle when it unmounts. Desktop pane: no-op.
+  $effect(() => {
+    if (!window.matchMedia('(max-width: 1100px)').matches) return;
+    closeBtn?.focus();
+    return () => {
+      document.querySelector('button[aria-label="Toggle preview"]')?.focus();
+    };
+  });
+
   /** Viewport width presets — the breakpoints the framework's fluid scale targets. */
   const VIEWPORTS = [
     { id: 'mobile',  label: '📱 Mobile',  width: 360,  hint: '360 px' },
@@ -93,6 +107,7 @@
       {ui.previewTheme}{ui.previewMotion === 'reduced' ? ' · reduced motion' : ''}{activeViewport.width ? ` · ${activeViewport.width} px` : ''}
     </span>
     <button
+      bind:this={closeBtn}
       class="preview__close"
       onclick={() => (ui.previewOpen = false)}
       title="Close the preview overlay"

@@ -8,6 +8,7 @@
    * filtered in-memory so switching filters is instant.
    */
   import { allTokens } from '../lib/model.js';
+  import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
   const PAGE_SIZE = 60;
 
@@ -63,11 +64,10 @@
   // ── Copy ─────────────────────────────────────────────────────────────────────
   let copied = $state(null);
   async function copyName(name) {
-    try {
-      await navigator.clipboard.writeText(name);
+    if (await copyText(name)) {
       copied = name;
-      setTimeout(() => (copied = null), 1200);
-    } catch { /* silent */ }
+      setTimeout(() => (copied = null), COPY_FEEDBACK_MS);
+    }
   }
 
   // ── Tier colour ──────────────────────────────────────────────────────────────
@@ -360,6 +360,7 @@
     color: var(--cfg-text-muted);
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-break: break-all;

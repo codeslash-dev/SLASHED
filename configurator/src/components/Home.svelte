@@ -46,7 +46,8 @@
           <span class="home__icon" aria-hidden="true">{d.icon}</span>
           <span class="home__body">
             <span class="home__name">{d.label}</span>
-            <span class="home__blurb">{d.intro ?? d.blurb}</span>
+            <!-- Tools (Themes) carry no intro — blurb is their one-liner. -->
+            <span class="home__blurb">{d.tool ? d.blurb : d.intro}</span>
           </span>
           <span class="home__status">
             {#if d.tool}
@@ -141,6 +142,7 @@
     color: var(--cfg-text-muted);
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

@@ -13,6 +13,7 @@
   import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
   import { sync, defaultsByName, tokenByName } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
+  import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
   const count = $derived(Object.keys(overrides).length);
   const css = $derived(generateCSS(overrides, { mode: ui.outputMode }));
@@ -39,11 +40,10 @@
 
   async function copy() {
     if (!css) return;
-    try {
-      await navigator.clipboard.writeText(css);
+    if (await copyText(css)) {
       copied = true;
-      setTimeout(() => (copied = false), 1400);
-    } catch {
+      setTimeout(() => (copied = false), COPY_FEEDBACK_MS);
+    } else {
       importMsg = 'Clipboard blocked — select the text and copy manually.';
     }
   }
@@ -198,9 +198,9 @@
           </div>
           {#each diffRows as r (r.name)}
             <div class="diff__row" role="row">
-              <code class="diff__name" role="cell">{r.name}</code>
-              <code class="diff__before" role="cell" title="Framework default">{r.before || '—'}</code>
-              <code class="diff__after" role="cell" title="Your override">{r.after}</code>
+              <span class="diff__name" role="cell"><code>{r.name}</code></span>
+              <span class="diff__before" role="cell" title="Framework default"><code>{r.before || '—'}</code></span>
+              <span class="diff__after" role="cell" title="Your override"><code>{r.after}</code></span>
             </div>
           {/each}
         </div>
@@ -374,6 +374,9 @@
   }
   .diff__row { border-bottom: 1px solid var(--cfg-border); }
   .diff__row:hover { background: rgba(255, 255, 255, 0.025); }
+  /* Cells are spans (role=cell) wrapping a <code>; keep the code transparent
+     so the per-cell colors/strike-through apply unchanged. */
+  .diff__row code { font: inherit; color: inherit; }
   .diff__name { color: var(--cfg-text); word-break: break-all; }
   .diff__before {
     color: var(--cfg-text-faint);

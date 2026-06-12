@@ -23,6 +23,7 @@
    */
   import { DOMAINS, DOMAIN_BY_ID, BASIC_DOMAIN_IDS } from './lib/domains.js';
   import { ui, undo, redo, overrides } from './lib/store.svelte.js';
+  import { UI_STORAGE_KEY } from './lib/uiState.js';
   import { setProbeContext } from './lib/probeHost.js';
   import Header from './components/Header.svelte';
   import Sidebar from './components/Sidebar.svelte';
@@ -53,6 +54,17 @@
   // expressions correctly. setProbeContext is internally idempotent.
   $effect(() => {
     setProbeContext({ overrides, theme: ui.previewTheme });
+  });
+
+  // Persist the navigation prefs so a reload restores where the user was.
+  // Restore (with validation) happens in store.svelte.js via sanitiseUiState.
+  $effect(() => {
+    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode });
+    try {
+      localStorage.setItem(UI_STORAGE_KEY, snapshot);
+    } catch {
+      /* quota / private mode — non-essential, ignore */
+    }
   });
 
   // On narrow viewports the preview is a slide-over overlay, so it must start
@@ -98,7 +110,15 @@
         }
       }
     }
-    if (e.key === '/') {
+    if (e.key === 'Escape') {
+      // Dismiss the slide-over preview overlay (narrow viewports only — the
+      // desktop pane is a persistent layout region, not a dialog). The search
+      // box's own Escape (clear query) takes precedence when it has focus.
+      const inInput = e.target instanceof HTMLElement && e.target.tagName === 'INPUT';
+      if (!inInput && ui.previewOpen && window.matchMedia('(max-width: 1100px)').matches) {
+        ui.previewOpen = false;
+      }
+    } else if (e.key === '/') {
       e.preventDefault();
       document.querySelector('#cfg-search')?.focus();
     } else if (e.key === 'b' || e.key === 'B') {

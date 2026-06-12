@@ -19,6 +19,7 @@
    *      whichever pairs better. Updates as the user edits.
    */
   import { overrides, clearOverride } from '../lib/store.svelte.js';
+  import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
   import { dependentsCount, isColorToken, isConsumptionToken } from '../lib/model.js';
   import TokenEditor from './TokenEditor.svelte';
   import ContrastBadge from './ContrastBadge.svelte';
@@ -69,12 +70,10 @@
 
   let copied = $state(false);
   async function copyName() {
-    try {
-      await navigator.clipboard.writeText(token.name);
+    // Clipboard blocked → silent fail; the user can still copy manually.
+    if (await copyText(token.name)) {
       copied = true;
-      setTimeout(() => (copied = false), 1200);
-    } catch {
-      // Clipboard blocked — silent fail; the user can still copy manually.
+      setTimeout(() => (copied = false), COPY_FEEDBACK_MS);
     }
   }
 </script>

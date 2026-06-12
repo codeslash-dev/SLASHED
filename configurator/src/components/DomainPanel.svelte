@@ -120,6 +120,16 @@
   }
 </script>
 
+{#snippet cardHead(title, count, hint = '')}
+  <header class="panel__card-head">
+    <span class="panel__card-title">{title}</span>
+    <span class="panel__card-count">{count}</span>
+    {#if hint}
+      <span class="panel__card-hint">{hint}</span>
+    {/if}
+  </header>
+{/snippet}
+
 <section class="panel">
   <header class="panel__head">
     <div class="panel__title-wrap">
@@ -185,10 +195,7 @@
       {:else}
         {#if basicSearch.shown.length}
           <section class="cfg-card panel__card">
-            <header class="panel__card-head">
-              <span class="panel__card-title">Search results</span>
-              <span class="panel__card-count">{basicSearch.shown.length}</span>
-            </header>
+            {@render cardHead('Search results', basicSearch.shown.length)}
             <div class="panel__card-rows">
               {#each basicSearch.shown as token (token.name)}
                 <TokenRow {token} />
@@ -225,13 +232,11 @@
       {#if domain.brandColors}
         <!-- Brand colors domain: light/dark pair rows for every brand color -->
         <section class="cfg-card panel__card">
-          <header class="panel__card-head">
-            <span class="panel__card-title">Brand &amp; status colors</span>
-            <span class="panel__card-count">{BRAND_COLOR_KEYS.length}</span>
-            {#if !advanced}
-              <span class="panel__card-hint">Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.</span>
-            {/if}
-          </header>
+          {@render cardHead(
+            'Brand & status colors',
+            BRAND_COLOR_KEYS.length,
+            advanced ? '' : 'Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.'
+          )}
           <div class="panel__card-rows">
             {#each BRAND_COLOR_KEYS as { key, label } (key)}
               <BrandColorRow colorKey={key} {label} />
@@ -242,10 +247,7 @@
         <!-- Curated Basic forms: friendly labels, help text, ⓘ raw-token info. -->
         {#each basicGroups as group (group.title)}
           <section class="cfg-card panel__card">
-            <header class="panel__card-head">
-              <span class="panel__card-title">{group.title}</span>
-              <span class="panel__card-count">{group.controls.length}</span>
-            </header>
+            {@render cardHead(group.title, group.controls.length)}
             <div class="panel__card-rows">
               {#each group.controls as c (c.token)}
                 <TokenRow token={c.tokenObj} label={c.label} help={c.help} showRawInfo />
@@ -255,13 +257,11 @@
         {/each}
       {:else if essentials.length}
         <section class="cfg-card panel__card">
-          <header class="panel__card-head">
-            <span class="panel__card-title">Essentials</span>
-            <span class="panel__card-count">{essentials.length}</span>
-            {#if !advanced}
-              <span class="panel__card-hint">Curated for most projects · switch to Advanced (A) for the full {domainTokens.length}-token catalogue.</span>
-            {/if}
-          </header>
+          {@render cardHead(
+            'Essentials',
+            essentials.length,
+            advanced ? '' : `Curated for most projects · switch to Advanced (A) for the full ${domainTokens.length}-token catalogue.`
+          )}
           <div class="panel__card-rows">
             {#each essentials as token (token.name)}
               <TokenRow {token} />
