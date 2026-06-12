@@ -11,7 +11,7 @@
    * customised" pill keeps the user oriented even with the body hidden.
    */
   import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
-  import { sync, defaultsByName, tokenByName } from '../lib/model.js';
+  import { sync, defaultsByName, tokenByName, frameworkVersion } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
   import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
@@ -211,7 +211,7 @@
 
     <footer class="out__foot">
       Synced from <code>{sync.source}</code> · framework
-      <code>{sync.frameworkVersion || 'unknown'}</code> ·
+      <code>{frameworkVersion || 'unknown'}</code> ·
       {sync.counts?.tokens ?? 0} tokens in catalogue
     </footer>
   {/if}

@@ -45,21 +45,6 @@ const ANNOTATIONS_FILE = path.join(FRAMEWORK_ROOT, 'docs', 'token-annotations.js
 const OUT_DIR = path.join(CONFIGURATOR_ROOT, 'src', 'data');
 const OUT = path.join(OUT_DIR, 'api-index.generated.json');
 
-/**
- * Read the framework's package version, used only as a display/sync stamp.
- * Falls back to an empty string when the file is unavailable.
- * @returns {string}
- */
-function readFrameworkVersion() {
-  try {
-    const pkg = JSON.parse(
-      fs.readFileSync(path.join(FRAMEWORK_ROOT, 'package.json'), 'utf8')
-    );
-    return typeof pkg.version === 'string' ? pkg.version : '';
-  } catch {
-    return '';
-  }
-}
 
 /**
  * Read the optional token-annotations.json overlay. Returns null if the file
@@ -180,7 +165,10 @@ function main() {
     _sync: {
       generatedBy: 'configurator/scripts/sync-api.mjs',
       source: path.relative(FRAMEWORK_ROOT, SOURCE).split(path.sep).join('/'),
-      frameworkVersion: readFrameworkVersion(),
+      // frameworkVersion is intentionally NOT stored here. It is injected at
+      // Vite build time (vite.config.js `define.__SLASHED_VERSION__`) from the
+      // root package.json, so it always matches the build and never needs a
+      // separate sync step.
       // Content hash of the projected catalogue. Unlike a wall-clock stamp it
       // only changes when the tokens themselves change, so re-running the sync
       // produces no diff unless the framework API actually moved.
@@ -206,8 +194,7 @@ function main() {
 
   console.log(
     `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, OUT)} ← ` +
-      `${out._sync.source} (${tokens.length} tokens, framework ` +
-      `${out._sync.frameworkVersion || 'unknown'})`
+      `${out._sync.source} (${tokens.length} tokens)`
   );
 }
 
