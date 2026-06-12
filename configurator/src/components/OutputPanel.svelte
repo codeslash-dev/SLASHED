@@ -13,6 +13,7 @@
   import { overrides, ui, storage, replaceOverrides, clearAll } from '../lib/store.svelte.js';
   import { sync, defaultsByName, tokenByName } from '../lib/model.js';
   import { generateCSS, parseCSS } from '../lib/css.js';
+  import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
   const count = $derived(Object.keys(overrides).length);
   const css = $derived(generateCSS(overrides, { mode: ui.outputMode }));
@@ -39,11 +40,10 @@
 
   async function copy() {
     if (!css) return;
-    try {
-      await navigator.clipboard.writeText(css);
+    if (await copyText(css)) {
       copied = true;
-      setTimeout(() => (copied = false), 1400);
-    } catch {
+      setTimeout(() => (copied = false), COPY_FEEDBACK_MS);
+    } else {
       importMsg = 'Clipboard blocked — select the text and copy manually.';
     }
   }

@@ -12,6 +12,7 @@
 import { allTokens, tokenByName } from './model.js';
 import { sanitizeValue } from './css.js';
 import { sanitisePreset, loadSavedThemes, persistSavedThemes, slugify } from './themes.js';
+import { sanitiseUiState, UI_STORAGE_KEY } from './uiState.js';
 import * as ops from './historyOps.js';
 
 const STORAGE_KEY = 'slashed-configurator/overrides/v1';
@@ -32,14 +33,15 @@ export const overrides = $state(loadOverrides());
 export const storage = $state({ ok: true });
 
 /** UI state: active domain tab, basic/advanced mode, search, filters, preview. */
+const savedUi = loadUiState();
 export const ui = $state({
   /**
    * Active domain tab id (see lib/domains.js): 'typography' | 'colors' | …
    * `'home'` is the synthetic Basic-mode landing screen (setup checklist).
    */
-  domain: 'home',
+  domain: savedUi.domain ?? 'home',
   /** Global complexity mode: 'basic' shows curated essentials, 'advanced' all. */
-  mode: 'basic',
+  mode: savedUi.mode ?? 'basic',
   /** Free-text filter, applied to advanced lists. */
   query: '',
   /** Show the api-index INTERNAL tier (one or two implementation tokens). */
@@ -64,7 +66,7 @@ export const ui = $state({
    */
   previewWidth: 'fluid',
   /** Output framing: 'layer' wraps in @layer slashed.overrides, 'root' is bare :root. */
-  outputMode: 'layer',
+  outputMode: savedUi.outputMode ?? 'layer',
   /** Sidebar collapse — for narrow viewports / a focus-mode. */
   sidebarOpen: true,
   /** Right-hand preview pane visible. */
@@ -88,6 +90,21 @@ export const history = $state({ past: [], future: [] });
 export const savedThemes = $state(loadSavedThemes());
 
 // ───────────────────────────── persistence ────────────────────────────────
+
+/**
+ * Load the persisted UI preferences (mode / domain / output format),
+ * validated against the live taxonomy. Persisting happens in App.svelte
+ * via an $effect over the same three fields.
+ * @returns {{ mode?: string, domain?: string, outputMode?: string }}
+ */
+function loadUiState() {
+  if (typeof localStorage === 'undefined') return {};
+  try {
+    return sanitiseUiState(localStorage.getItem(UI_STORAGE_KEY));
+  } catch {
+    return {};
+  }
+}
 
 /**
  * Load persisted overrides from localStorage, ignoring malformed data.

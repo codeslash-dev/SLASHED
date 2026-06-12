@@ -53,6 +53,24 @@ test('overlay bar carries working theme / motion / close controls', async ({ pag
   await expect(page.locator('.preview')).toHaveCount(0);
 });
 
+test('Escape dismisses the overlay and focus returns to the toggle', async ({ page }) => {
+  await page.setViewportSize({ width: 480, height: 860 });
+  await gotoClean(page);
+  await page.locator(TOGGLE).click();
+  // Focus lands on the overlay's close button (dialog-like behavior).
+  await expect(page.locator('.preview__close')).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.preview')).toHaveCount(0);
+  await expect(page.locator(TOGGLE)).toBeFocused();
+});
+
+test('Escape does NOT close the persistent desktop pane', async ({ page }) => {
+  await gotoClean(page);
+  await expect(page.locator('.preview')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.preview')).toBeVisible();
+});
+
 test('resize round-trip: wide -> narrow -> wide restores the pane', async ({ page }) => {
   await page.setViewportSize({ width: 1400, height: 900 });
   await gotoClean(page);

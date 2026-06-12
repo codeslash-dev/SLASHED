@@ -58,6 +58,21 @@ test('[ and ] cycle the mode-appropriate domain list with wrap-around', async ({
   expect(errors).toEqual([]);
 });
 
+test('mode, domain and output format persist across reload (validated restore)', async ({ page }) => {
+  await gotoClean(page);
+  await page.keyboard.press('a');
+  await sideItem(page, 'Motion').click();
+  await page.locator('.out [aria-label="Output format"] button', { hasText: ':root' }).click();
+  await page.reload();
+  await expect(page.locator('.panel__title')).toHaveText('Motion');
+  await expect(page.locator('[aria-label="Complexity mode"] button', { hasText: 'Advanced' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.out [aria-label="Output format"] button', { hasText: ':root' })).toHaveAttribute('aria-pressed', 'true');
+  // Corrupt prefs fall back to the defaults instead of crashing.
+  await page.evaluate(() => localStorage.setItem('slashed-configurator/ui/v1', '{broken'));
+  await page.reload();
+  await expect(page.locator('.home__title')).toBeVisible();
+});
+
 test('rapid mode toggling never corrupts the active domain', async ({ page }) => {
   const errors = watchErrors(page);
   await gotoClean(page);
