@@ -7,7 +7,7 @@
  * the cascade, so these win without `!important`). A bare `:root { … }` mode is
  * also offered for consumers who don't use cascade layers.
  */
-import { sync, frameworkVersion } from './model.js';
+import { frameworkVersion } from './model.js';
 
 /**
  * Sanitize a single declaration value so it cannot break out of its CSS
