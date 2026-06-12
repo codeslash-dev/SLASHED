@@ -43,6 +43,7 @@ describe('isFontFamilyToken', () => {
     assert.equal(isFontFamilyToken({ name: '--sf-font-features',       namespace: 'font' }), false);
     assert.equal(isFontFamilyToken({ name: '--sf-font-numeric',        namespace: 'font' }), false);
     assert.equal(isFontFamilyToken({ name: '--sf-font-variation',      namespace: 'font' }), false);
+    assert.equal(isFontFamilyToken({ name: '--sf-font-weight_bold',    namespace: 'font' }), false);
     // Unrelated tokens
     assert.equal(isFontFamilyToken({ name: '--sf-color-primary' }), false);
     assert.equal(isFontFamilyToken(null), false);

@@ -41,24 +41,24 @@
   const WIDTHS_KEY = 'slashed-configurator/pane-widths/v1';
   const SIDEBAR_MIN = 160;
   const SIDEBAR_MAX = 500;
-  const PREVIEW_MIN = 260;
+  const PREVIEW_MIN = 300;
   const PREVIEW_MAX = 680;
 
   function clampW(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
   function loadWidths() {
-    if (typeof localStorage === 'undefined') return { sidebar: 240, preview: 380 };
+    if (typeof localStorage === 'undefined') return { sidebar: 240, preview: 440 };
     try {
       const raw = localStorage.getItem(WIDTHS_KEY);
       if (raw) {
         const p = JSON.parse(raw);
         return {
           sidebar: clampW(Number(p.sidebar) || 240, SIDEBAR_MIN, SIDEBAR_MAX),
-          preview: clampW(Number(p.preview) || 380, PREVIEW_MIN, PREVIEW_MAX),
+          preview: clampW(Number(p.preview) || 440, PREVIEW_MIN, PREVIEW_MAX),
         };
       }
     } catch { /* ignore */ }
-    return { sidebar: 240, preview: 380 };
+    return { sidebar: 240, preview: 440 };
   }
 
   const _w = loadWidths();
@@ -224,6 +224,7 @@
       onpointermove={(e) => onResizeMove('sidebar', e)}
       onpointerup={endResize}
       onpointercancel={endResize}
+      onlostpointercapture={endResize}
     ></div>
   {/if}
 
@@ -255,6 +256,7 @@
       onpointermove={(e) => onResizeMove('preview', e)}
       onpointerup={endResize}
       onpointercancel={endResize}
+      onlostpointercapture={endResize}
     ></div>
   {/if}
 
@@ -279,7 +281,7 @@
    */
   .shell {
     --shell-sw: 240px;   /* sidebar width  (overridden by inline style) */
-    --shell-pw: 380px;   /* preview width  (overridden by inline style) */
+    --shell-pw: 440px;   /* preview width  (overridden by inline style) */
     --shell-rs: 6px;     /* drag-handle column width */
 
     display: grid;
