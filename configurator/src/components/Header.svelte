@@ -100,30 +100,6 @@
       >Advanced</button>
     </div>
 
-    <div class="cfg-seg" role="group" aria-label="Preview theme">
-      <button
-        class="cfg-seg__btn cfg-seg__btn--narrow"
-        class:cfg-seg__btn--on={ui.previewTheme === 'light'}
-        onclick={() => (ui.previewTheme = 'light')}
-        aria-pressed={ui.previewTheme === 'light'}
-        title="Preview in light mode"
-      >☀</button>
-      <button
-        class="cfg-seg__btn cfg-seg__btn--narrow"
-        class:cfg-seg__btn--on={ui.previewTheme === 'dark'}
-        onclick={() => (ui.previewTheme = 'dark')}
-        aria-pressed={ui.previewTheme === 'dark'}
-        title="Preview in dark mode"
-      >☾</button>
-      <button
-        class="cfg-seg__btn cfg-seg__btn--narrow"
-        class:cfg-seg__btn--on={ui.previewMotion === 'reduced'}
-        onclick={() => (ui.previewMotion = ui.previewMotion === 'reduced' ? 'normal' : 'reduced')}
-        aria-pressed={ui.previewMotion === 'reduced'}
-        title="Reduced motion in preview only — emulates prefers-reduced-motion (does not modify your overrides)"
-      >🐢</button>
-    </div>
-
     <button
       class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__theme-toggle"
       onclick={() => (ui.uiTheme = ui.uiTheme === 'dark' ? 'light' : 'dark')}
@@ -242,9 +218,6 @@
   }
 
   .hdr__history { display: inline-flex; gap: 2px; }
-
-  /* Compact button used in the segmented theme toggle. */
-  :global(.cfg-seg__btn--narrow) { padding-inline: 10px; min-width: 32px; }
 
   /* Pane-toggle buttons keep their solid border for affordance. */
   .hdr__pane { border-color: var(--cfg-border-strong); color: var(--cfg-text-muted); }
