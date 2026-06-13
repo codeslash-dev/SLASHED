@@ -32,18 +32,18 @@ test('shadow presets: switching leaves no leftovers from the previous preset', a
 
 test('hand-edited values show NO active preset (never a wrong one)', async ({ page }) => {
   await gotoClean(page);
-  await sideItem(page, 'Borders').click();
-  await page.locator('.presets__btn', { hasText: 'Pill' }).click();
+  await sideItem(page, 'Shadows').click();
+  await page.locator('.presets__btn', { hasText: 'Strong' }).click();
   await page.keyboard.press('a');
-  // Hand-edit one of the preset's tokens in Advanced search.
-  await page.fill('#cfg-search', '--sf-radius-m');
-  const row = page.locator('.row', { hasText: '--sf-radius-m' }).first();
-  const input = row.locator('input[type="text"], input:not([type])').first();
-  await input.fill('3px');
-  await input.press('Enter');
-  await page.fill('#cfg-search', '');
+  // Open the power-knobs section and hand-edit --sf-shadow-strength to a value
+  // that differs from what the Strong preset set, deactivating it.
+  const power = page.locator('details.power');
+  await power.locator('summary').click();
+  const knob = power.locator('.knob', { hasText: '--sf-shadow-strength' });
+  await knob.locator('input[type="number"]').fill('0.05');
+  await knob.locator('input[type="number"]').press('Enter');
   await page.keyboard.press('b');
-  await sideItem(page, 'Borders').click();
+  await sideItem(page, 'Shadows').click();
   await expect(page.locator('.presets__btn[aria-pressed="true"]')).toHaveCount(0);
 });
 
