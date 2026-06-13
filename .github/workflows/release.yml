@@ -141,16 +141,18 @@ jobs:
   # token — so an `on: release` workflow would never fire. The tag push that
   # triggers THIS workflow is a real event, so syncing here always runs.
   #
-  # The sync commit intentionally OMITS [skip ci]: changing the version must
-  # re-trigger publish-dist.yml so the `dist` branch bundles are rebuilt with
-  # the correct version header. The push targets main (a branch), which does
-  # not re-trigger this tag-scoped workflow, so there is no loop.
+  # NOTE: pushes made with GITHUB_TOKEN do NOT trigger push-based workflow
+  # events (deploy-configurator.yml, publish-dist.yml). After pushing, we
+  # explicitly dispatch both via workflow_dispatch (which GITHUB_TOKEN CAN
+  # trigger) so the configurator and dist branch are rebuilt with the correct
+  # version stamp.
   sync-main:
     name: Sync version artifacts to main
     needs: release
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - name: Checkout main
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
@@ -181,6 +183,7 @@ jobs:
       - name: Promote ## Unreleased in CHANGELOG to versioned heading
         run: node scripts/changelog-release.js "${{ steps.ver.outputs.tag }}"
       - name: Commit and push if anything changed
+        id: commit_push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -189,9 +192,25 @@ jobs:
           git add package.json package-lock.json docs/roadmap.md CHANGELOG.md
           if git diff --cached --quiet; then
             echo "Nothing to commit — version artifacts on main already match ${{ steps.ver.outputs.tag }}."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "chore: sync version artifacts to ${{ steps.ver.outputs.tag }}"
             git push \
               "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
               HEAD:main
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
+      - name: Trigger downstream deploys
+        if: steps.commit_push.outputs.pushed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # GITHUB_TOKEN pushes do not emit push events, so deploy-configurator
+          # and publish-dist would never see the new version. Dispatch them
+          # explicitly — GITHUB_TOKEN CAN trigger workflow_dispatch (actions:write
+          # permission granted above). Each call is independent so one failure
+          # does not prevent the other from running.
+          gh workflow run deploy-configurator.yml --ref main
+          echo "Dispatched deploy-configurator.yml"
+          gh workflow run publish-dist.yml --ref main
+          echo "Dispatched publish-dist.yml"
