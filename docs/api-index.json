@@ -30190,7 +30190,7 @@
       "category": "Macro classes",
       "area": "macros",
       "group": "Scroll shadow",
-      "description": "Top + bottom mask gradient that reveals when content is scrolled inside a vertical-scroll container. Pure CSS, no JS. Combine with overflow-y: auto on the same element. Override: style=\"--sf-scroll-shadow-size: 3rem\"",
+      "description": "Top + bottom mask gradient that reveals when content is scrolled inside a vertical-scroll container. Pure CSS, no JS. Combine with overflow-block: auto on the same element. Override: style=\"--sf-scroll-shadow-size: 3rem\"",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
