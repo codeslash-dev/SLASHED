@@ -69,10 +69,17 @@ export const ui = $state({
   outputMode: savedUi.outputMode ?? 'layer',
   /** Sidebar collapse — for narrow viewports / a focus-mode. */
   sidebarOpen: true,
-  /** Right-hand preview pane visible. */
-  previewOpen: true,
-  /** Output drawer (override CSS export) expanded. */
-  outputOpen: true,
+  /**
+   * Right-hand preview pane visible. Initialised from the current viewport so
+   * the mobile slide-over never flashes open on first paint (the App.svelte
+   * effect only handles subsequent viewport changes).
+   */
+  previewOpen: typeof window === 'undefined' || !window.matchMedia('(max-width: 1100px)').matches,
+  /**
+   * Output drawer (override CSS export) expanded. Same viewport-aware
+   * initialisation pattern: phones start collapsed so the main area is usable.
+   */
+  outputOpen: typeof window === 'undefined' || !window.matchMedia('(max-width: 600px)').matches,
 });
 
 /**
