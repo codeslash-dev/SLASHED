@@ -228,8 +228,11 @@
         />
       {/if}
 
-      <!-- Essentials (Basic mode only) -->
-      {#if domain.brandColors}
+      <!-- Basic-mode curated surfaces (brand colors, basic groups, essentials).
+           All three are hidden in Advanced mode — the full filtered catalogue
+           below covers every token, so duplicating them here would bypass the
+           Modified-only and Internal filters and confuse the user. -->
+      {#if domain.brandColors && !advanced}
         <!-- Brand colors domain: light/dark pair rows for every brand color -->
         <section class="cfg-card panel__card">
           {@render cardHead(
