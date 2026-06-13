@@ -36,10 +36,10 @@ test('hand-edited values show NO active preset (never a wrong one)', async ({ pa
   await page.locator('.presets__btn', { hasText: 'Pill' }).click();
   await page.keyboard.press('a');
   // Hand-edit one of the preset's tokens in Advanced search.
-  await page.fill('#cfg-search', '--sf-radius-m');
-  const row = page.locator('.row', { hasText: '--sf-radius-m' }).first();
+  await page.fill('#cfg-search', '--sf-radius-full');
+  const row = page.locator('.row', { hasText: '--sf-radius-full' }).first();
   const input = row.locator('input[type="text"], input:not([type])').first();
-  await input.fill('3px');
+  await input.fill('500px');
   await input.press('Enter');
   await page.fill('#cfg-search', '');
   await page.keyboard.press('b');
