@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.39] - 2026-06-13
+
+### Bug Fixes
+- **configurator:** hide brand-colors card in Advanced mode (filter bypass)
+- **configurator:** hide essentials card in Advanced mode
+
 ## [0.5.38] - 2026-06-13
 
 ### Bug Fixes
