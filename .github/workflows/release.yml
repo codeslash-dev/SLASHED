@@ -152,6 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - name: Checkout main
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
@@ -206,12 +207,10 @@ jobs:
         run: |
           # GITHUB_TOKEN pushes do not emit push events, so deploy-configurator
           # and publish-dist would never see the new version. Dispatch them
-          # explicitly — GITHUB_TOKEN CAN trigger workflow_dispatch events.
-          for wf in deploy-configurator.yml publish-dist.yml; do
-            curl -sS -f -X POST \
-              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/${wf}/dispatches" \
-              -d '{"ref":"main"}'
-            echo "Dispatched ${wf}"
-          done
+          # explicitly — GITHUB_TOKEN CAN trigger workflow_dispatch (actions:write
+          # permission granted above). Each call is independent so one failure
+          # does not prevent the other from running.
+          gh workflow run deploy-configurator.yml --ref main
+          echo "Dispatched deploy-configurator.yml"
+          gh workflow run publish-dist.yml --ref main
+          echo "Dispatched publish-dist.yml"
