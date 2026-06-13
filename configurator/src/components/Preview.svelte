@@ -59,7 +59,7 @@
   const radii = ['s', 'm', 'l', 'xl', 'full'];
   const shadows = ['s', 'm', 'l', 'xl'];
   const gradients = ['primary', 'secondary', 'tertiary', 'brand', 'surface'];
-  const durations = ['shortest', 'short', 'normal', 'long'];
+  const durations = ['instant', 'fast', 'normal', 'slow'];
 </script>
 
 <section class="preview">
@@ -862,20 +862,20 @@
     100% { transform: scaleX(0); transform-origin: right; }
   }
   .pv__anim--pulse {
-    animation: pv-pulse var(--sf-duration-long, 900ms) var(--sf-ease-in-out, ease-in-out) infinite;
+    animation: pv-pulse var(--sf-duration-slow, 900ms) var(--sf-ease-in-out, ease-in-out) infinite;
   }
   .pv__anim--spin {
     border: 3px solid;
     border-radius: var(--sf-radius-full, 999px);
-    animation: pv-spin var(--sf-duration-long, 700ms) linear infinite;
+    animation: pv-spin var(--sf-duration-slow, 700ms) linear infinite;
   }
   .pv__anim--bounce {
     border-radius: var(--sf-radius-m, 8px);
-    animation: pv-bounce var(--sf-duration-long, 700ms) var(--sf-ease-in-out, ease-in-out) infinite;
+    animation: pv-bounce var(--sf-duration-slow, 700ms) var(--sf-ease-in-out, ease-in-out) infinite;
   }
   .pv__anim--slide {
     border-radius: var(--sf-radius-m, 8px);
-    animation: pv-slide calc(var(--sf-duration-long, 700ms) * 1.5) var(--sf-ease-in-out, ease-in-out) infinite;
+    animation: pv-slide calc(var(--sf-duration-slow, 700ms) * 1.5) var(--sf-ease-in-out, ease-in-out) infinite;
   }
   .pv__durations {
     display: flex;
