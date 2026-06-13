@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.43] - 2026-06-13
+
+### Features
+- **configurator:** add light/dark mode toggle for the configurator UI
+
 ## [0.5.42] - 2026-06-13
 
 ### Features
