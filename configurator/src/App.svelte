@@ -144,8 +144,13 @@
 
   // On phone-sized viewports the output drawer starts collapsed so the main
   // area has enough room to be usable. The user can always tap the bar to expand.
+  // Tracked live: rotating to portrait closes it; widening back re-opens it.
   $effect(() => {
-    if (window.matchMedia('(max-width: 600px)').matches) ui.outputOpen = false;
+    const mql = window.matchMedia('(max-width: 600px)');
+    if (mql.matches) ui.outputOpen = false;
+    const onChange = (e) => { ui.outputOpen = !e.matches; };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
   });
 
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
