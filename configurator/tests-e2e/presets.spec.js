@@ -35,14 +35,13 @@ test('hand-edited values show NO active preset (never a wrong one)', async ({ pa
   await sideItem(page, 'Shadows').click();
   await page.locator('.presets__btn', { hasText: 'Strong' }).click();
   await page.keyboard.press('a');
-  // Hand-edit the preset's knob token (--sf-shadow-strength is a configure knob
-  // that renders as a text input in the advanced list).
-  await page.fill('#cfg-search', '--sf-shadow-strength');
-  const row = page.locator('.row', { hasText: '--sf-shadow-strength' }).first();
-  const input = row.locator('input[type="text"], input:not([type])').first();
-  await input.fill('calc(0.05 + var(--sf-is-dark) * 0.17)');
-  await input.press('Enter');
-  await page.fill('#cfg-search', '');
+  // Open the power-knobs section and hand-edit --sf-shadow-strength to a value
+  // that differs from what the Strong preset set, deactivating it.
+  const power = page.locator('details.power');
+  await power.locator('summary').click();
+  const knob = power.locator('.knob', { hasText: '--sf-shadow-strength' });
+  await knob.locator('input[type="number"]').fill('0.05');
+  await knob.locator('input[type="number"]').press('Enter');
   await page.keyboard.press('b');
   await sideItem(page, 'Shadows').click();
   await expect(page.locator('.presets__btn[aria-pressed="true"]')).toHaveCount(0);
