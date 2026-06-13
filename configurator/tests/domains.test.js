@@ -112,7 +112,8 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-color-secondary-100', 'colors'],
     ['--sf-link-underline-offset', 'colors'],
     ['--sf-focus-ring-color', 'colors'],
-    ['--sf-gradient-brand', 'colors'],
+    ['--sf-gradient-brand', 'gradients'],
+    ['--sf-gradient-primary', 'gradients'],
     ['--sf-scrollbar-thumb', 'colors'],
     ['--sf-caret-color', 'colors'],
 
@@ -140,7 +141,7 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-touch-target', 'layout'],
     ['--sf-aspect', 'layout'],
     ['--sf-ratio-golden', 'layout'],
-    ['--sf-field-block', 'layout'],
+    ['--sf-field-block', 'forms'],
 
     ['--sf-radius-m', 'borders'],
     ['--sf-border-width-1', 'borders'],
@@ -162,7 +163,7 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-opacity-50', 'effects'],
     ['--sf-scrim-color', 'effects'],
     ['--sf-mask-scrim-end', 'effects'],
-    ['--sf-state-pending-opacity', 'effects'],
+    ['--sf-state-pending-opacity', 'forms'],
 
     ['--sf-print-page-margin', 'misc'],
     ['--sf-is-active', 'misc'],
