@@ -26,11 +26,11 @@
 
   /** Viewport width presets — the breakpoints the framework's fluid scale targets. */
   const VIEWPORTS = [
-    { id: 'mobile',  label: '📱 Mobile',  width: 360,  hint: '360 px' },
-    { id: 'tablet',  label: '📱 Tablet',  width: 768,  hint: '768 px' },
-    { id: 'laptop',  label: '💻 Laptop',  width: 1024, hint: '1024 px' },
-    { id: 'desktop', label: '🖥️ Desktop', width: 1440, hint: '1440 px' },
-    { id: 'fluid',   label: '🌊 Fluid',   width: null, hint: 'fill pane' },
+    { id: 'mobile',  emoji: '📱', label: 'Mobile',  width: 360,  hint: '360 px' },
+    { id: 'tablet',  emoji: '📱', label: 'Tablet',  width: 768,  hint: '768 px' },
+    { id: 'laptop',  emoji: '💻', label: 'Laptop',  width: 1024, hint: '1024 px' },
+    { id: 'desktop', emoji: '🖥️', label: 'Desktop', width: 1440, hint: '1440 px' },
+    { id: 'fluid',   emoji: '🌊', label: 'Fluid',   width: null, hint: 'fill pane' },
   ];
 
   // Combine the framework cascade with optional reduced-motion override.
@@ -73,8 +73,8 @@
           class:cfg-seg__btn--on={ui.previewWidth === v.id}
           onclick={() => (ui.previewWidth = v.id)}
           aria-pressed={ui.previewWidth === v.id}
-          title="{v.label} — {v.hint}"
-        >{v.label}</button>
+          title="{v.emoji} {v.label} — {v.hint}"
+        >{v.emoji}<span class="preview__vp-text"> {v.label}</span></button>
       {/each}
     </div>
     <!-- Theme / motion toggles live in the header too, but on narrow
@@ -373,12 +373,20 @@
     border: 1px solid var(--cfg-border-strong);
     border-radius: var(--cfg-radius-s);
     cursor: pointer;
+    flex-shrink: 0;
   }
   .preview__close:hover { color: var(--cfg-text); border-color: var(--cfg-accent-strong); }
   @media (max-width: 1100px) {
-    .preview__close { display: inline-grid; place-items: center; }
+    /* Minimum 44 × 44 px touch target per WCAG 2.5.5. */
+    .preview__close { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; }
     .preview__hint { display: none; }
     .preview__bar { flex-wrap: wrap; gap: 8px; }
+  }
+  /* On very narrow phones the viewport-button labels push the row past the
+     pane width; show only the emoji so all five buttons stay accessible. */
+  @media (max-width: 430px) {
+    .preview__vp-text { display: none; }
+    .preview__vp-btn { padding-inline: 7px; }
   }
   /* Sample UI authored against framework tokens with sane fallbacks. */
   .pv {

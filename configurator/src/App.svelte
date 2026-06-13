@@ -127,27 +127,19 @@
     }
   });
 
-  // On narrow viewports the preview is a slide-over overlay, so it must start
-  // closed — opening a full-width scrim on first paint would bury the panel.
-  // The media query is tracked live: shrinking the window dismisses the
-  // overlay instead of dropping a scrim onto the app, and widening it back
-  // restores the desktop pane (its default-open state).
+  // Track live viewport changes for the preview slide-over and output drawer.
+  // Initial values are already set correctly by the store (viewport-aware
+  // initialisation), so these effects only need to handle subsequent changes
+  // (e.g. rotating the device, resizing a desktop window across a breakpoint).
   $effect(() => {
     const mql = window.matchMedia('(max-width: 1100px)');
-    if (mql.matches) ui.previewOpen = false;
-    const onChange = (e) => {
-      ui.previewOpen = !e.matches;
-    };
+    const onChange = (e) => { ui.previewOpen = !e.matches; };
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
   });
 
-  // On phone-sized viewports the output drawer starts collapsed so the main
-  // area has enough room to be usable. The user can always tap the bar to expand.
-  // Tracked live: rotating to portrait closes it; widening back re-opens it.
   $effect(() => {
     const mql = window.matchMedia('(max-width: 600px)');
-    if (mql.matches) ui.outputOpen = false;
     const onChange = (e) => { ui.outputOpen = !e.matches; };
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
