@@ -32,10 +32,8 @@ const edits = {
   '--sf-duration-fast': '120ms',
   '--sf-blur-m': '12px',
   '--sf-print-page-margin': '2cm',
-  // New domains — one representative token each.
+  // Gradients — one representative token.
   '--sf-gradient-primary': 'linear-gradient(135deg, oklch(0.55 0.22 264), oklch(0.45 0.18 280))',
-  '--sf-palette-mix-100': '12%',
-  '--sf-field-block': '2.5rem',
 };
 
 describe('smoke: every editable token routes through the full pipeline', () => {

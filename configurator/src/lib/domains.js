@@ -145,7 +145,7 @@ export const DOMAINS = [
     intro: 'Set the 11 brand and status source colors — shades, surfaces, links and dark mode all derive from them automatically. The highest-impact panel for any project.',
     powerIntro: 'These thresholds retune how the framework picks light or dark text on every colored surface. Small changes ripple across the whole palette — change with care.',
     namespaces: [
-      'color',
+      'color', 'palette',
       'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
       'success', 'warning', 'error', 'info', 'danger',
       'link',
@@ -179,15 +179,6 @@ export const DOMAINS = [
       '--sf-gradient-brand',
       '--sf-gradient-surface',
     ],
-  },
-  {
-    id: 'palette',
-    docsPath: 'docs/theming.md',
-    label: 'Palette',
-    icon: '🖌️',
-    blurb: 'Full numeric (50–950) and alpha (a5–a95) color scales for every brand and status color.',
-    namespaces: ['palette'],
-    patterns: [/^--sf-palette-/],
   },
   {
     id: 'typography',
@@ -256,8 +247,10 @@ export const DOMAINS = [
       'switcher', 'cover', 'frame', 'bento', 'center', 'box', 'imposter',
       'breakout', 'equal', 'object', 'aspect', 'ratio', 'safe', 'sticky',
       'header', 'icon', 'touch', 'z', 'size', 'alternate', 'divide',
+      'field',
     ],
     patterns: [
+      /^--sf-field-/,
       /^--sf-container-/,
       /^--sf-grid-/,
       /^--sf-col-/,
@@ -356,28 +349,17 @@ export const DOMAINS = [
     label: 'Effects',
     icon: '✨',
     blurb: 'Blur, opacity, scrim, mask and other compositing effects.',
-    namespaces: ['blur', 'opacity', 'scrim', 'mask'],
+    namespaces: ['blur', 'opacity', 'scrim', 'mask', 'state'],
     patterns: [
       /^--sf-blur-/,
       /^--sf-opacity-/,
       /^--sf-scrim-/,
       /^--sf-mask-/,
+      /^--sf-state-/,
     ],
     essentials: [
       '--sf-blur-m',
       '--sf-opacity-disabled',
-    ],
-  },
-  {
-    id: 'forms',
-    docsPath: 'docs/tokens.md',
-    label: 'Forms',
-    icon: '📝',
-    blurb: 'Form field sizing, colors, borders and interactive validation states.',
-    namespaces: ['field', 'state'],
-    patterns: [
-      /^--sf-field-/,
-      /^--sf-state-/,
     ],
   },
   {

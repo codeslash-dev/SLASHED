@@ -141,7 +141,7 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-touch-target', 'layout'],
     ['--sf-aspect', 'layout'],
     ['--sf-ratio-golden', 'layout'],
-    ['--sf-field-block', 'forms'],
+    ['--sf-field-block', 'layout'],
 
     ['--sf-radius-m', 'borders'],
     ['--sf-border-width-1', 'borders'],
@@ -163,7 +163,7 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-opacity-50', 'effects'],
     ['--sf-scrim-color', 'effects'],
     ['--sf-mask-scrim-end', 'effects'],
-    ['--sf-state-pending-opacity', 'forms'],
+    ['--sf-state-pending-opacity', 'effects'],
 
     ['--sf-print-page-margin', 'misc'],
     ['--sf-is-active', 'misc'],
