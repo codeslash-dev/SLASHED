@@ -587,16 +587,19 @@
   }
 
   .pv__space { display: flex; flex-direction: column; gap: 4px; }
-  .pv__space-row { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+  .pv__space-row { display: flex; align-items: center; gap: 10px; font-size: 12px; overflow: hidden; }
   .pv__space-row code {
     font-family: var(--sf-font-mono, monospace);
     min-width: 13ch;
+    flex-shrink: 0;
     color: var(--sf-color-text--muted, inherit);
   }
   .pv__space-bar {
     block-size: 12px;
+    max-inline-size: 100%;
     background: var(--sf-color-action, #4f8cff);
     border-radius: 3px;
+    flex-shrink: 1;
   }
 
   .pv__radii {
