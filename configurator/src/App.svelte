@@ -142,6 +142,17 @@
     return () => mql.removeEventListener('change', onChange);
   });
 
+  // On phone-sized viewports the output drawer starts collapsed so the main
+  // area has enough room to be usable. The user can always tap the bar to expand.
+  // Tracked live: rotating to portrait closes it; widening back re-opens it.
+  $effect(() => {
+    const mql = window.matchMedia('(max-width: 600px)');
+    if (mql.matches) ui.outputOpen = false;
+    const onChange = (e) => { ui.outputOpen = !e.matches; };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  });
+
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
   // '[' / ']' cycle domains; 'Escape' clears the search; Ctrl+Z / Ctrl+Shift+Z
   // step the override history.
