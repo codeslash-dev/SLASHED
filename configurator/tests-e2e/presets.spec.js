@@ -32,18 +32,19 @@ test('shadow presets: switching leaves no leftovers from the previous preset', a
 
 test('hand-edited values show NO active preset (never a wrong one)', async ({ page }) => {
   await gotoClean(page);
-  await sideItem(page, 'Borders').click();
-  await page.locator('.presets__btn', { hasText: 'Pill' }).click();
+  await sideItem(page, 'Shadows').click();
+  await page.locator('.presets__btn', { hasText: 'Strong' }).click();
   await page.keyboard.press('a');
-  // Hand-edit one of the preset's tokens in Advanced search.
-  await page.fill('#cfg-search', '--sf-radius-full');
-  const row = page.locator('.row', { hasText: '--sf-radius-full' }).first();
+  // Hand-edit the preset's knob token (--sf-shadow-strength is a configure knob
+  // that renders as a text input in the advanced list).
+  await page.fill('#cfg-search', '--sf-shadow-strength');
+  const row = page.locator('.row', { hasText: '--sf-shadow-strength' }).first();
   const input = row.locator('input[type="text"], input:not([type])').first();
-  await input.fill('500px');
+  await input.fill('calc(0.05 + var(--sf-is-dark) * 0.17)');
   await input.press('Enter');
   await page.fill('#cfg-search', '');
   await page.keyboard.press('b');
-  await sideItem(page, 'Borders').click();
+  await sideItem(page, 'Shadows').click();
   await expect(page.locator('.presets__btn[aria-pressed="true"]')).toHaveCount(0);
 });
 
