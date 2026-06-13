@@ -241,7 +241,7 @@
     flex-basis: calc((var(--sf-switcher-threshold) - 100%) * 999);
   }
 
-  .sf-switcher--no-wrap  { flex-wrap: nowrap; overflow-x: auto; }
+  .sf-switcher--no-wrap  { flex-wrap: nowrap; overflow-inline: auto; }
   .sf-switcher--vertical { flex-direction: column; }
 
   /* -- Grid ----------------------------------------------------
@@ -368,10 +368,10 @@
     display:               flex;
     block-size:            var(--sf-reel-height);
     gap:                   var(--sf-reel-gap);
-    overflow-x:            auto;
-    scroll-snap-type:      x mandatory;
-    scroll-padding-inline: var(--sf-reel-gap);
-    overscroll-behavior-x: contain;
+    overflow-inline:            auto;
+    scroll-snap-type:           inline mandatory;
+    scroll-padding-inline:      var(--sf-reel-gap);
+    overscroll-behavior-inline: contain;
     scrollbar-width:       thin;
   }
 

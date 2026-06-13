@@ -47,7 +47,7 @@
   .sf-prose hr                   { margin-block: var(--sf-prose-hr-margin); }
   .sf-prose figure               { margin-block: var(--sf-prose-figure-margin); }
   .sf-prose figcaption           { font-size: var(--sf-prose-figcaption-size); color: var(--sf-color-text--muted); margin-block-start: var(--sf-prose-list-gap); }
-  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-x: auto; width: 100%; max-width: 100%; }
+  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-inline: auto; inline-size: 100%; max-inline-size: 100%; }
   .sf-prose :is(th, td)          { padding: var(--sf-prose-table-pad); }
   .sf-prose video                { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
 
@@ -72,7 +72,7 @@
   .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
   .sf-prose .sf-not-prose figure     { margin-block: 0; }
   .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
-  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; max-width: revert; }
+  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-inline: revert; inline-size: revert; max-inline-size: revert; }
   .sf-prose .sf-not-prose :is(th,td) { padding: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
 
@@ -149,11 +149,11 @@
   /* -- Scroll shadow -------------------------------------------
      Top + bottom mask gradient that reveals when content is
      scrolled inside a vertical-scroll container. Pure CSS,
-     no JS. Combine with overflow-y: auto on the same element.
+     no JS. Combine with overflow-block: auto on the same element.
      Override: style="--sf-scroll-shadow-size: 3rem"
      ---------------------------------------------------------- */
   .sf-scroll-shadow {
-    overflow-y: auto;
+    overflow-block: auto;
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image:
       linear-gradient(to bottom,
@@ -175,9 +175,9 @@
      For horizontal snap, use the .sf-reel layout primitive.
      ---------------------------------------------------------- */
   .sf-scroll-snap {
-    overflow-y:            auto;
-    scroll-snap-type:      y mandatory;
-    overscroll-behavior-y: contain;
+    overflow-block:            auto;
+    scroll-snap-type:          block mandatory;
+    overscroll-behavior-block: contain;
   }
   .sf-scroll-snap > * {
     scroll-snap-align: start;
