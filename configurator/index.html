@@ -27,6 +27,8 @@
       name="twitter:description"
       content="Configure every SLASHED CSS framework token and generate ready-to-paste override CSS."
     />
+    <!-- Apply saved UI theme before first paint to prevent flash of wrong theme. -->
+    <script>try{var s=localStorage.getItem('slashed-configurator/ui/v1');if(s){var t=JSON.parse(s).uiTheme;if(t==='light'||t==='dark')document.documentElement.dataset.uiTheme=t;}}catch(_){}</script>
   </head>
   <body>
     <div id="app"></div>

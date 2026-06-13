@@ -116,10 +116,16 @@
     setProbeContext({ overrides, theme: ui.previewTheme });
   });
 
+  // Apply the configurator UI theme to <html> so [data-ui-theme="light/dark"]
+  // CSS selectors in app.css take effect across the whole chrome.
+  $effect(() => {
+    document.documentElement.dataset.uiTheme = ui.uiTheme;
+  });
+
   // Persist the navigation prefs so a reload restores where the user was.
   // Restore (with validation) happens in store.svelte.js via sanitiseUiState.
   $effect(() => {
-    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode });
+    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme });
     try {
       localStorage.setItem(UI_STORAGE_KEY, snapshot);
     } catch {
