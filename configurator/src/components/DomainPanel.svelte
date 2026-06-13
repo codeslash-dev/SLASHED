@@ -228,8 +228,11 @@
         />
       {/if}
 
-      <!-- Essentials (always shown when present) -->
-      {#if domain.brandColors}
+      <!-- Basic-mode curated surfaces (brand colors, basic groups, essentials).
+           All three are hidden in Advanced mode — the full filtered catalogue
+           below covers every token, so duplicating them here would bypass the
+           Modified-only and Internal filters and confuse the user. -->
+      {#if domain.brandColors && !advanced}
         <!-- Brand colors domain: light/dark pair rows for every brand color -->
         <section class="cfg-card panel__card">
           {@render cardHead(
@@ -255,12 +258,15 @@
             </div>
           </section>
         {/each}
-      {:else if essentials.length}
+      {:else if !advanced && essentials.length}
+        <!-- In Advanced mode the full filtered catalogue covers everything;
+             showing essentials here would bypass the Modified-only / Internal
+             filters and confuse the user with duplicated unfiltered rows. -->
         <section class="cfg-card panel__card">
           {@render cardHead(
             'Essentials',
             essentials.length,
-            advanced ? '' : `Curated for most projects · switch to Advanced (A) for the full ${domainTokens.length}-token catalogue.`
+            `Curated for most projects · switch to Advanced (A) for the full ${domainTokens.length}-token catalogue.`
           )}
           <div class="panel__card-rows">
             {#each essentials as token (token.name)}
