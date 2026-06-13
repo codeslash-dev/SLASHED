@@ -157,11 +157,12 @@ export function isConsumptionToken(token) {
 export function isColorToken(token) {
   if (!token) return false;
   if (token.syntax && /<color>/.test(token.syntax)) return true;
-  if (token.namespace === 'color') return true;
   const v = (token.value || '').trim();
-  // Composite values (e.g. `0 1px 2px oklch(…)` shadows) contain a color
-  // function but are NOT colors — don't hand them the color-swatch control.
+  // Composite values (e.g. `0 1px 2px oklch(…)` shadows, or CSS keyword lists
+  // like `light dark` for color-scheme) contain a space at the top level and
+  // are never a single colour — don't hand them the colour-swatch control.
   if (hasTopLevelSpace(v)) return false;
+  if (token.namespace === 'color') return true;
   return COLOR_VALUE_RE.test(v);
 }
 

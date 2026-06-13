@@ -397,7 +397,7 @@
     /* Restore the left border on main that the resizer normally provides. */
     .main { border-left: 1px solid var(--cfg-border); }
     .scrim { display: block; }
-    .shell :global(.preview) {
+    .shell :global(section.preview) {
       position: fixed;
       inset: 0 0 0 auto;
       width: min(440px, 94vw);
