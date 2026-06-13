@@ -78,7 +78,7 @@
   }
 </script>
 
-<div class="row" class:row--modified={modified}>
+<div class="row" class:row--modified={modified && !isConsume} class:row--consume={isConsume}>
   <div class="row__info">
     {#if friendly}
       <div class="row__name-line">
@@ -162,14 +162,23 @@
   </div>
 
   <div class="row__control">
-    <TokenEditor {token} />
-    <button
-      class="cfg-btn cfg-btn--ghost cfg-btn--icon row__reset"
-      onclick={() => clearOverride(token.name)}
-      disabled={!modified}
-      title={modified ? 'Reset to framework default' : 'No override to reset'}
-      aria-label="Reset {token.name}"
-    >⟲</button>
+    {#if isConsume}
+      <div
+        class="row__readonly"
+        title="Consumption token — derived from configure tokens. Edit the upstream source instead."
+      >
+        <code class="row__readonly-val">{token.value}</code>
+      </div>
+    {:else}
+      <TokenEditor {token} />
+      <button
+        class="cfg-btn cfg-btn--ghost cfg-btn--icon row__reset"
+        onclick={() => clearOverride(token.name)}
+        disabled={!modified}
+        title={modified ? 'Reset to framework default' : 'No override to reset'}
+        aria-label="Reset {token.name}"
+      >⟲</button>
+    {/if}
   </div>
 </div>
 
@@ -324,6 +333,30 @@
     min-width: 0;
   }
   .row__reset { flex-shrink: 0; font-size: 14px; line-height: 1; }
+
+  /* Consume tokens — whole row is subtly de-emphasised and not interactive. */
+  .row--consume { opacity: 0.7; }
+  .row--consume:hover { background: transparent; }
+
+  .row__readonly {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    padding: 7px 10px;
+    background: var(--cfg-bg-2);
+    border: 1px dashed var(--cfg-border);
+    border-radius: var(--cfg-radius-s);
+    overflow: hidden;
+  }
+  .row__readonly-val {
+    font-family: var(--cfg-mono);
+    font-size: 11.5px;
+    color: var(--cfg-text-faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   @media (max-width: 720px) {
     .row {
