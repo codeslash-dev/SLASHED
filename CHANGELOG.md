@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.41] - 2026-06-13
+
+### Bug Fixes
+- **release:** add actions:write and use gh CLI for workflow dispatch
+- **release:** dispatch deploy/dist workflows after sync-main push
+
 ## [0.5.40] - 2026-06-13
 
 ### Bug Fixes
