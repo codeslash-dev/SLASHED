@@ -229,6 +229,9 @@
     transition: max-height 0.18s ease;
   }
   .out--closed { max-height: 44px; }
+  @media (max-width: 600px) {
+    .out:not(.out--closed) { max-height: 35vh; }
+  }
 
   .out__head {
     display: flex;

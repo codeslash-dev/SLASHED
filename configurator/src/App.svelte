@@ -142,6 +142,12 @@
     return () => mql.removeEventListener('change', onChange);
   });
 
+  // On phone-sized viewports the output drawer starts collapsed so the main
+  // area has enough room to be usable. The user can always tap the bar to expand.
+  $effect(() => {
+    if (window.matchMedia('(max-width: 600px)').matches) ui.outputOpen = false;
+  });
+
   // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
   // '[' / ']' cycle domains; 'Escape' clears the search; Ctrl+Z / Ctrl+Shift+Z
   // step the override history.
