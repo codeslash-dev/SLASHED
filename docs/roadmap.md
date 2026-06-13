@@ -1,15 +1,11 @@
 # SLASHED — Roadmap
 
-Current version: **0.5.41**
+Current version: **0.5.42**
 
 ## Before v1.0
 
-- **Logical property audit** — replace remaining physical properties
-  (`margin-left`, `padding-right`) with logical equivalents
-  (`margin-inline-start`, `padding-inline-end`) for RTL support.
-- **Scoped token snapshot tests** — Playwright snapshot assertions for ~20 key
-  semantic tokens (`--sf-color-text`, `--sf-color-primary`, …) in both modes, to
-  catch value regressions during releases.
+*All pre-v1.0 items are complete as of v0.5.42. The API is frozen for
+non-additive changes; v0.6.x will focus on the components layer.*
 
 ## Post-1.0
 
