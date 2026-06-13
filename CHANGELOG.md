@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.42] - 2026-06-13
+
+### Features
+- **configurator:** add Gradients, Palette, and Forms sidebar domains
+- **configurator:** expand live preview with gradients, navigation, form states, motion
+
+### Bug Fixes
+- **configurator:** use correct duration token names in motion preview
+- **tests:** update assertions for logical property changes + fix version sync
+
 ## [0.5.41] - 2026-06-13
 
 ### Bug Fixes
