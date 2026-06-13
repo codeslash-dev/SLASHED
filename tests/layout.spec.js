@@ -410,7 +410,7 @@ test.describe('layout: .sf-reel', () => {
     }));
     expect(cs.display).toBe('flex');
     expect(cs.overflow).toBe('auto');
-    expect(cs.snap).toContain('x');
+    expect(cs.snap).toContain('inline');
     expect(cs.snap).toContain('mandatory');
   });
 

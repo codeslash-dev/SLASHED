@@ -546,7 +546,7 @@ test.describe('Layout — Reel', () => {
     const snapType = await getStyle(reel, 'scrollSnapType');
     expect(display).toBe('flex');
     expect(overflow).toBe('auto');
-    expect(snapType).toContain('x');
+    expect(snapType).toContain('inline');
   });
 
   test('.sf-reel children have scroll-snap-align', async ({ page }) => {
