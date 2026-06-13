@@ -67,6 +67,8 @@ export const ui = $state({
   previewWidth: 'fluid',
   /** Output framing: 'layer' wraps in @layer slashed.overrides, 'root' is bare :root. */
   outputMode: savedUi.outputMode ?? 'layer',
+  /** Theme for the configurator chrome itself: 'dark' (default) or 'light'. */
+  uiTheme: savedUi.uiTheme ?? 'dark',
   /** Sidebar collapse — for narrow viewports / a focus-mode. */
   sidebarOpen: true,
   /**

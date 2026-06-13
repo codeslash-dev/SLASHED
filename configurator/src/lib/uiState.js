@@ -45,5 +45,10 @@ export function sanitiseUiState(raw) {
   if (parsed.outputMode === 'layer' || parsed.outputMode === 'root') {
     out.outputMode = parsed.outputMode;
   }
+
+  if (parsed.uiTheme === 'light' || parsed.uiTheme === 'dark') {
+    out.uiTheme = parsed.uiTheme;
+  }
+
   return out;
 }
