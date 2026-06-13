@@ -58,6 +58,8 @@
   const typeScale = ['2xl', 'xl', 'l', 'm', 's', 'xs'];
   const radii = ['s', 'm', 'l', 'xl', 'full'];
   const shadows = ['s', 'm', 'l', 'xl'];
+  const gradients = ['primary', 'secondary', 'tertiary', 'brand', 'surface'];
+  const durations = ['shortest', 'short', 'normal', 'long'];
 </script>
 
 <section class="preview">
@@ -184,6 +186,18 @@
         </div>
       </section>
 
+      <!-- Gradients -->
+      <section class="pv__block">
+        <p class="pv__eyebrow">Gradients</p>
+        <div class="pv__gradients">
+          {#each gradients as g (g)}
+            <div class="pv__grad" style="background: var(--sf-gradient-{g}, var(--sf-color-{g}, #888));">
+              <span class="pv__grad-label">{g}</span>
+            </div>
+          {/each}
+        </div>
+      </section>
+
       <!-- Buttons -->
       <section class="pv__block">
         <p class="pv__eyebrow">Buttons</p>
@@ -193,7 +207,26 @@
           <button class="pv__btn pv__btn--action">Action</button>
           <button class="pv__btn pv__btn--outline">Outline</button>
           <button class="pv__btn pv__btn--ghost">Ghost</button>
+          <button class="pv__btn pv__btn--outline pv__btn--focused" tabindex="-1" aria-label="Focus ring demo">Focus ring</button>
         </div>
+      </section>
+
+      <!-- Navigation -->
+      <section class="pv__block">
+        <p class="pv__eyebrow">Navigation</p>
+        <div class="pv__tabs" role="tablist">
+          <button class="pv__tab pv__tab--active" role="tab" aria-selected="true">Overview</button>
+          <button class="pv__tab" role="tab" aria-selected="false">Analytics</button>
+          <button class="pv__tab" role="tab" aria-selected="false">Settings</button>
+          <button class="pv__tab" role="tab" aria-selected="false">Team</button>
+        </div>
+        <nav class="pv__breadcrumb" aria-label="Breadcrumb">
+          <a class="pv__a pv__crumb" href="#a">Home</a>
+          <span class="pv__crumb-sep" aria-hidden="true">›</span>
+          <a class="pv__a pv__crumb" href="#a">Products</a>
+          <span class="pv__crumb-sep" aria-hidden="true">›</span>
+          <span class="pv__crumb" aria-current="page">Design Tokens</span>
+        </nav>
       </section>
 
       <!-- Feedback -->
@@ -238,13 +271,29 @@
         </div>
       </section>
 
-      <!-- Form field -->
+      <!-- Form states -->
       <section class="pv__block">
-        <p class="pv__eyebrow">Form field</p>
-        <label class="pv__field">
-          <span class="pv__field-label">Email address</span>
-          <input class="pv__field-input" type="text" placeholder="you@example.com" readonly />
-        </label>
+        <p class="pv__eyebrow">Form states</p>
+        <div class="pv__form-row">
+          <label class="pv__field">
+            <span class="pv__field-label">Email</span>
+            <input class="pv__field-input" type="text" placeholder="you@example.com" readonly />
+          </label>
+          <label class="pv__field">
+            <span class="pv__field-label pv__field-label--valid">Verified</span>
+            <input class="pv__field-input pv__field-input--valid" type="text" value="alex@example.com" readonly />
+            <span class="pv__field-hint pv__field-hint--valid">✓ Looks good</span>
+          </label>
+          <label class="pv__field">
+            <span class="pv__field-label pv__field-label--error">Password</span>
+            <input class="pv__field-input pv__field-input--error" type="text" value="abc" readonly />
+            <span class="pv__field-hint pv__field-hint--error">✗ At least 8 characters</span>
+          </label>
+          <label class="pv__field">
+            <span class="pv__field-label pv__field-label--disabled">Disabled</span>
+            <input class="pv__field-input pv__field-input--disabled" type="text" placeholder="Not editable" disabled />
+          </label>
+        </div>
       </section>
 
       <!-- Spacing scale -->
@@ -280,6 +329,39 @@
           {#each shadows as s (s)}
             <div class="pv__shadow-item" style="box-shadow: var(--sf-shadow-{s});">
               <code>{s}</code>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <!-- Motion & animation -->
+      <section class="pv__block">
+        <p class="pv__eyebrow">Motion — hit 🐢 to preview reduced motion</p>
+        <div class="pv__motion-demos">
+          <div class="pv__motion-cell">
+            <span class="pv__anim pv__anim--pulse" style="background: var(--sf-color-success, #22c55e);"></span>
+            <code class="pv__anim-label">pulse</code>
+          </div>
+          <div class="pv__motion-cell">
+            <span class="pv__anim pv__anim--spin" style="border-color: var(--sf-color-primary, #4f8cff); border-top-color: transparent;"></span>
+            <code class="pv__anim-label">spin</code>
+          </div>
+          <div class="pv__motion-cell">
+            <span class="pv__anim pv__anim--bounce" style="background: var(--sf-color-action, #0891b2);"></span>
+            <code class="pv__anim-label">bounce</code>
+          </div>
+          <div class="pv__motion-cell">
+            <span class="pv__anim pv__anim--slide" style="background: var(--sf-color-tertiary, #888);"></span>
+            <code class="pv__anim-label">slide·fade</code>
+          </div>
+        </div>
+        <div class="pv__durations">
+          {#each durations as d (d)}
+            <div class="pv__dur-row">
+              <code class="pv__dur-label">--sf-duration-{d}</code>
+              <div class="pv__dur-track">
+                <span class="pv__dur-bar" style="animation-duration: var(--sf-duration-{d}, 200ms);"></span>
+              </div>
             </div>
           {/each}
         </div>
@@ -638,5 +720,195 @@
     color: var(--sf-color-text--muted, inherit);
     font-family: var(--sf-font-mono, monospace);
     font-size: 11px;
+  }
+
+  /* Gradients */
+  .pv__gradients {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 6px;
+  }
+  .pv__grad {
+    aspect-ratio: 2 / 1;
+    border-radius: var(--sf-radius-m, 8px);
+    border: 1px solid var(--sf-color-border, rgba(127, 127, 127, 0.3));
+    display: flex;
+    align-items: flex-end;
+    padding: 6px 8px;
+  }
+  .pv__grad-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Focus ring demo button */
+  .pv__btn--focused {
+    outline: var(--sf-focus-ring-width, 2px) solid var(--sf-focus-ring-color, var(--sf-color-primary, #4f8cff));
+    outline-offset: var(--sf-focus-ring-offset, 2px);
+  }
+
+  /* Navigation: tabs */
+  .pv__tabs {
+    display: flex;
+    border-bottom: 1px solid var(--sf-color-border, rgba(127, 127, 127, 0.3));
+    flex-wrap: wrap;
+  }
+  .pv__tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 7px 14px;
+    font-size: var(--sf-text-s, 0.875rem);
+    font-weight: 500;
+    color: var(--sf-color-text--muted, #888);
+    cursor: default;
+    margin-bottom: -1px;
+  }
+  .pv__tab--active {
+    color: var(--sf-color-primary, #4f8cff);
+    border-bottom-color: var(--sf-color-primary, #4f8cff);
+    font-weight: 600;
+  }
+
+  /* Navigation: breadcrumb */
+  .pv__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--sf-text-s, 0.875rem);
+    flex-wrap: wrap;
+  }
+  .pv__crumb { text-decoration: none; }
+  .pv__crumb[aria-current="page"] { color: var(--sf-color-text, inherit); font-weight: 500; }
+  .pv__crumb-sep { color: var(--sf-color-text--muted, #888); }
+
+  /* Form states */
+  .pv__form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .pv__field-label--valid { color: var(--sf-color-success, #16a34a); }
+  .pv__field-label--error { color: var(--sf-color-error, #dc2626); }
+  .pv__field-label--disabled { color: var(--sf-color-text--muted, #888); }
+  .pv__field-input--valid {
+    border-color: var(--sf-color-success, #16a34a);
+    background: var(--sf-color-success-subtle, rgba(22, 163, 74, 0.08));
+  }
+  .pv__field-input--error {
+    border-color: var(--sf-color-error, #dc2626);
+    background: var(--sf-color-error-subtle, rgba(220, 38, 38, 0.08));
+  }
+  .pv__field-input--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--sf-color-inset, rgba(127, 127, 127, 0.1));
+  }
+  .pv__field-hint {
+    font-size: var(--sf-text-xs, 0.75rem);
+    margin-top: -2px;
+  }
+  .pv__field-hint--valid { color: var(--sf-color-success, #16a34a); }
+  .pv__field-hint--error { color: var(--sf-color-error, #dc2626); }
+
+  /* Motion & animation */
+  .pv__motion-demos {
+    display: flex;
+    gap: var(--sf-space-l, 24px);
+    flex-wrap: wrap;
+    padding: 4px 0;
+  }
+  .pv__motion-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .pv__anim-label {
+    font-family: var(--sf-font-mono, monospace);
+    font-size: 10px;
+    color: var(--sf-color-text--muted, #888);
+    white-space: nowrap;
+  }
+  .pv__anim {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--sf-radius-full, 999px);
+  }
+  @keyframes pv-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  @keyframes pv-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pv-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pv-slide {
+    0% { opacity: 0.25; transform: translateX(-10px); }
+    50% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0.25; transform: translateX(10px); }
+  }
+  @keyframes pv-sweep {
+    0% { transform: scaleX(0); transform-origin: left; }
+    50% { transform: scaleX(1); transform-origin: left; }
+    51% { transform: scaleX(1); transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+  }
+  .pv__anim--pulse {
+    animation: pv-pulse var(--sf-duration-long, 900ms) var(--sf-ease-in-out, ease-in-out) infinite;
+  }
+  .pv__anim--spin {
+    border: 3px solid;
+    border-radius: var(--sf-radius-full, 999px);
+    animation: pv-spin var(--sf-duration-long, 700ms) linear infinite;
+  }
+  .pv__anim--bounce {
+    border-radius: var(--sf-radius-m, 8px);
+    animation: pv-bounce var(--sf-duration-long, 700ms) var(--sf-ease-in-out, ease-in-out) infinite;
+  }
+  .pv__anim--slide {
+    border-radius: var(--sf-radius-m, 8px);
+    animation: pv-slide calc(var(--sf-duration-long, 700ms) * 1.5) var(--sf-ease-in-out, ease-in-out) infinite;
+  }
+  .pv__durations {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 4px;
+  }
+  .pv__dur-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+  }
+  .pv__dur-label {
+    font-family: var(--sf-font-mono, monospace);
+    font-size: 11px;
+    color: var(--sf-color-text--muted, #888);
+    min-width: 16ch;
+    flex-shrink: 0;
+  }
+  .pv__dur-track {
+    flex: 1;
+    height: 10px;
+    background: var(--sf-color-inset, rgba(127, 127, 127, 0.12));
+    border-radius: var(--sf-radius-full, 999px);
+    overflow: hidden;
+    position: relative;
+  }
+  .pv__dur-bar {
+    display: block;
+    height: 100%;
+    background: var(--sf-color-primary, #4f8cff);
+    border-radius: inherit;
+    animation: pv-sweep var(--sf-duration-normal, 250ms) linear infinite;
   }
 </style>
