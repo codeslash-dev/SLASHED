@@ -13,7 +13,7 @@
    * Below ~760px the labels collapse to icons but every control stays
    * reachable. Keyboard shortcut: `/` focuses the search box.
    */
-  import { sync, allTokens } from '../lib/model.js';
+  import { sync, allTokens, frameworkVersion } from '../lib/model.js';
   import { ui, overrides, overrideCount, history, undo, redo, openOutputDrawer } from '../lib/store.svelte.js';
 
   const totalTokens = allTokens.length;
@@ -30,9 +30,9 @@
       <p class="hdr__sub">Edit every framework token. Generate override CSS.</p>
     </div>
     <div class="hdr__pills">
-      {#if sync.frameworkVersion}
+      {#if frameworkVersion}
         <span class="hdr__pill" title="Synced from {sync.source} (catalogue {sync.tokensHash})">
-          v{sync.frameworkVersion}
+          v{frameworkVersion}
         </span>
       {/if}
       <span class="hdr__pill hdr__pill--muted" title="{totalTokens} tokens in the live catalogue">

@@ -9,8 +9,16 @@
 import data from '../data/api-index.generated.json' with { type: 'json' };
 import { domainOf } from './domains.js';
 
-/** Sync metadata (framework version, generated timestamp, counts). */
+/** Sync metadata (catalogue hash, counts — NOT frameworkVersion, which is injected at build time). */
 export const sync = data._sync ?? {};
+
+/**
+ * Framework version, injected at Vite build time from the root package.json.
+ * Declared as `string` via vite.config.js `define`, guaranteed to match
+ * whatever package.json version was current when `vite build` ran.
+ */
+// eslint-disable-next-line no-undef
+export const frameworkVersion = typeof __SLASHED_VERSION__ !== 'undefined' ? __SLASHED_VERSION__ : (sync.frameworkVersion ?? '');
 
 /** Every token row from the synced catalogue. */
 export const allTokens = Array.isArray(data.tokens) ? data.tokens : [];

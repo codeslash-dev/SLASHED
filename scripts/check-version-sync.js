@@ -7,6 +7,10 @@
 //   1. package-lock.json version (root and packages[""]) === package.json
 //   2. docs/roadmap.md "Current version" === package.json
 //
+// Note: configurator/src/data/api-index.generated.json no longer stores a
+// frameworkVersion field — the version is injected at Vite build time from the
+// root package.json (vite.config.js define.__SLASHED_VERSION__), so it is
+// always exactly the version that was built and never needs a sync step.
 // Run locally with: node scripts/check-version-sync.js
 // Wired into CI (.github/workflows/ci.yml).
 
@@ -43,15 +47,6 @@ if (!m) {
 } else if (m[1].trim() !== version) {
   errors.push(
     `docs/roadmap.md version "${m[1].trim()}" != package.json "${version}"`,
-  );
-}
-
-// 3. configurator generated index frameworkVersion must match package.json.
-const genIndex = JSON.parse(read('configurator/src/data/api-index.generated.json'));
-const genVersion = genIndex?._sync?.frameworkVersion;
-if (genVersion !== version) {
-  errors.push(
-    `configurator/src/data/api-index.generated.json frameworkVersion "${genVersion}" != package.json "${version}" — run \`npm run configurator:sync\``,
   );
 }
 
