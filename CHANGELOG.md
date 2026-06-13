@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.40] - 2026-06-13
+
+### Bug Fixes
+- **configurator:** two root-cause bugs on mobile
+- **configurator:** prevent spacing-scale bars from overflowing Preview pane
+- **configurator:** prevent ScaleGenerator preview from overflowing on mobile
+
 ## [0.5.39] - 2026-06-13
 
 ### Bug Fixes
