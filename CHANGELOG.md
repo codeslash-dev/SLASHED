@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.37] - 2026-06-13
+
+### Bug Fixes
+- **configurator:** track viewport changes for output drawer collapse
+- **configurator:** collapse output drawer on mobile + limit max-height
+- **configurator:** remove unused sync import from css.js
+- **configurator:** inject version at build time — eliminates off-by-one release bug
+
 ## [0.5.36] - 2026-06-12
 
 ### Features
