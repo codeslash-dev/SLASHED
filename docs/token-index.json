@@ -3683,7 +3683,7 @@
       "fallback": false,
       "value": "2"
     },
-    "--sf-equal-gap": {
+    "--sf-equal-cols-gap": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [

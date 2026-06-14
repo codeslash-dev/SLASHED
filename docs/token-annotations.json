@@ -379,7 +379,7 @@
     "--sf-bento-cols-default": "Default column count for the bento grid.",
     "--sf-bento-row-compact": "Row height for compact-variant bento items.",
     "--sf-equal-cols": "Number of columns in the fixed equal-column layout.",
-    "--sf-equal-gap": "Gap between equal columns.",
+    "--sf-equal-cols-gap": "Gap between equal columns.",
     "--sf-frame-ratio": "Aspect ratio for the frame (media container) layout.",
     "--sf-gap-size": "Shared base gap consumed by multiple layout primitives.",
     "--sf-imposter-margin": "Margin between the imposter overlay and the viewport edges.",

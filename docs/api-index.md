@@ -593,7 +593,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-cover-min-height` | PUBLIC | knob | cover | `100dvh` | Cover |
 | `--sf-cover-padding` | PUBLIC | consumption | cover | `var(--sf-section-pad)` | Cover |
 | `--sf-equal-cols` | PUBLIC | knob | equal | `2` | Equal columns (fixed, non-responsive) |
-| `--sf-equal-gap` | PUBLIC | consumption | equal | `var(--sf-space-gap)` | Equal columns (fixed, non-responsive) |
+| `--sf-equal-cols-gap` | PUBLIC | consumption | equal | `var(--sf-space-gap)` | Equal columns (fixed, non-responsive) |
 | `--sf-frame-ratio` | PUBLIC | knob | frame | `16 / 9` | Frame |
 | `--sf-gap-size` | PUBLIC | consumption | gap | `var(--sf-space-gap)` | Gap |
 | `--sf-grid-gap` | PUBLIC | consumption | grid | `var(--sf-space-gap)` | Grid (auto-fill, breakpoint-free) |

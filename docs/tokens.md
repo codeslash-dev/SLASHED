@@ -540,7 +540,7 @@ rebrand workflow.
 | `--sf-cover-min-height` | `100dvh` |
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
 | `--sf-equal-cols` | `2` |
-| `--sf-equal-gap` | `var(--sf-space-gap)` |
+| `--sf-equal-cols-gap` | `var(--sf-space-gap)` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-gap-size` | `var(--sf-space-gap)` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |

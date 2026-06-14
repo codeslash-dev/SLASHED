@@ -502,7 +502,7 @@
   .sf-equal-cols {
     display:               grid;
     grid-template-columns: repeat(var(--sf-equal-cols), 1fr);
-    gap:                   var(--sf-equal-gap);
+    gap:                   var(--sf-equal-cols-gap);
   }
   .sf-equal-cols--2 { --sf-equal-cols: 2; }
   .sf-equal-cols--3 { --sf-equal-cols: 3; }

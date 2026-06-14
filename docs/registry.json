@@ -425,7 +425,7 @@
     "--sf-ease-overshoot",
     "--sf-ease-spring",
     "--sf-equal-cols",
-    "--sf-equal-gap",
+    "--sf-equal-cols-gap",
     "--sf-field-block",
     "--sf-field-padding-block",
     "--sf-field-padding-inline",

@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "6eb7e279295d",
+    "tokensHash": "c7cc13167e50",
     "bundles": [
       "essential",
       "full",
@@ -9627,7 +9627,7 @@
       ]
     },
     {
-      "name": "--sf-equal-gap",
+      "name": "--sf-equal-cols-gap",
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "equal",

@@ -12617,7 +12617,7 @@
       ]
     },
     {
-      "name": "--sf-equal-gap",
+      "name": "--sf-equal-cols-gap",
       "type": "token",
       "tier": "PUBLIC",
       "role": "consumption",
