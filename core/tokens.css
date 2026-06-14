@@ -105,7 +105,6 @@
      · caret (--sf-caret-color)
      · scrollbar (--sf-scrollbar-{thumb,track}) — consumed by html { scrollbar-color } in core/base.css
      · breakpoints (--sf-breakpoint-{s,l}) — read-only reference tokens for CQ collapse points
-     · component decoupling (--sf-field-{radius,padding-block,padding-inline}, --sf-button-{radius,padding-block,padding-inline})
      · border scale (--sf-border-scale) — global multiplier for --sf-border-width-{1,2,3,4}
      · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
        --sf-field-required-marker, --sf-link-external-marker)
@@ -1413,18 +1412,6 @@
        ---------------------------------------------------------- */
     --sf-breakpoint-s: 30em;
     --sf-breakpoint-l: 48em;
-
-    /* ----------------------------------------------------------
-       Component decoupling tokens — override these to give buttons
-       and form fields distinct visual languages without affecting
-       global radius/spacing tokens.
-       ---------------------------------------------------------- */
-    --sf-field-radius:         var(--sf-radius-m);
-    --sf-field-padding-block:  var(--sf-space-xs);
-    --sf-field-padding-inline: var(--sf-space-s);
-    --sf-button-radius:         var(--sf-radius-m);
-    --sf-button-padding-block:  var(--sf-space-xs);
-    --sf-button-padding-inline: var(--sf-space-m);
 
     --sf-gap:           var(--sf-space-m);  /* gap between BEM elements */
     --sf-content-gap:   var(--sf-space-s);  /* rhythm within a component */
