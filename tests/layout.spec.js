@@ -256,10 +256,10 @@ test.describe('layout: .sf-switcher', () => {
   });
 });
 
-// ── .sf-grid ────────────────────────────────────────────────────
-test.describe('layout: .sf-grid', () => {
+// ── .sf-grid-auto ────────────────────────────────────────────────────
+test.describe('layout: .sf-grid-auto', () => {
   test('is a CSS grid', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-grid" style="width:800px"><div>A</div></div>`);
+    await setup(page, `<div id="t" class="sf-grid-auto" style="width:800px"><div>A</div></div>`);
     const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
     expect(display).toBe('grid');
   });
@@ -267,10 +267,10 @@ test.describe('layout: .sf-grid', () => {
   test('size modifier --l produces fewer columns than --s at equal width', async ({ page }) => {
     // Larger min = fewer columns that fit in 1200px
     await setup(page, `
-      <div id="s" class="sf-grid sf-grid--s" style="width:1200px">
+      <div id="s" class="sf-grid-auto sf-grid-auto--s" style="width:1200px">
         <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div>
       </div>
-      <div id="l" class="sf-grid sf-grid--l" style="width:1200px">
+      <div id="l" class="sf-grid-auto sf-grid-auto--l" style="width:1200px">
         <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div>
       </div>
     `);
@@ -282,17 +282,17 @@ test.describe('layout: .sf-grid', () => {
   });
 
   test('--dense sets grid-auto-flow: dense', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-grid sf-grid--dense" style="width:800px"><div>A</div></div>`);
+    await setup(page, `<div id="t" class="sf-grid-auto sf-grid-auto--dense" style="width:800px"><div>A</div></div>`);
     const flow = await page.locator('#t').evaluate(el => getComputedStyle(el).gridAutoFlow);
     expect(flow).toContain('dense');
   });
 });
 
-// ── .sf-equal ───────────────────────────────────────────────────
-test.describe('layout: .sf-equal', () => {
+// ── .sf-fixed-cols ───────────────────────────────────────────────────
+test.describe('layout: .sf-fixed-cols', () => {
   test('--3 produces exactly 3 equal columns', async ({ page }) => {
     await setup(page, `
-      <div id="t" class="sf-equal sf-equal--3" style="width:900px">
+      <div id="t" class="sf-fixed-cols sf-fixed-cols--3" style="width:900px">
         <div>A</div><div>B</div><div>C</div>
       </div>
     `);
@@ -304,7 +304,7 @@ test.describe('layout: .sf-equal', () => {
 
   test('--4 produces exactly 4 equal columns', async ({ page }) => {
     await setup(page, `
-      <div id="t" class="sf-equal sf-equal--4" style="width:1200px">
+      <div id="t" class="sf-fixed-cols sf-fixed-cols--4" style="width:1200px">
         <div>A</div><div>B</div><div>C</div><div>D</div>
       </div>
     `);

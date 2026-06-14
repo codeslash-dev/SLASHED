@@ -96,8 +96,8 @@
     --sf-color-primary-xdark:      var(--sf-color-primary-800);
     --sf-color-primary-superdark:  var(--sf-color-primary-950);
 
-    --sf-color-primary-hover:  var(--sf-color-primary-darker);
-    --sf-color-primary-active: var(--sf-color-primary-xdark);
+    --sf-color-primary--hover:  var(--sf-color-primary-darker);
+    --sf-color-primary--active: var(--sf-color-primary-xdark);
     --sf-color-primary-subtle: var(--sf-color-primary-a10);
     --sf-color-primary-muted:  var(--sf-color-primary-a30);
     --sf-color-primary-ghost:  var(--sf-color-primary-a5);
@@ -137,8 +137,8 @@
     --sf-color-secondary-xdark:      var(--sf-color-secondary-800);
     --sf-color-secondary-superdark:  var(--sf-color-secondary-950);
 
-    --sf-color-secondary-hover:  var(--sf-color-secondary-darker);
-    --sf-color-secondary-active: var(--sf-color-secondary-xdark);
+    --sf-color-secondary--hover:  var(--sf-color-secondary-darker);
+    --sf-color-secondary--active: var(--sf-color-secondary-xdark);
     --sf-color-secondary-subtle: var(--sf-color-secondary-a10);
     --sf-color-secondary-muted:  var(--sf-color-secondary-a30);
     --sf-color-secondary-ghost:  var(--sf-color-secondary-a5);
@@ -178,8 +178,8 @@
     --sf-color-tertiary-xdark:      var(--sf-color-tertiary-800);
     --sf-color-tertiary-superdark:  var(--sf-color-tertiary-950);
 
-    --sf-color-tertiary-hover:  var(--sf-color-tertiary-darker);
-    --sf-color-tertiary-active: var(--sf-color-tertiary-xdark);
+    --sf-color-tertiary--hover:  var(--sf-color-tertiary-darker);
+    --sf-color-tertiary--active: var(--sf-color-tertiary-xdark);
     --sf-color-tertiary-subtle: var(--sf-color-tertiary-a10);
     --sf-color-tertiary-muted:  var(--sf-color-tertiary-a30);
     --sf-color-tertiary-ghost:  var(--sf-color-tertiary-a5);
@@ -219,8 +219,8 @@
     --sf-color-action-xdark:      var(--sf-color-action-800);
     --sf-color-action-superdark:  var(--sf-color-action-950);
 
-    --sf-color-action-hover:  var(--sf-color-action-darker);
-    --sf-color-action-active: var(--sf-color-action-xdark);
+    --sf-color-action--hover:  var(--sf-color-action-darker);
+    --sf-color-action--active: var(--sf-color-action-xdark);
     --sf-color-action-subtle: var(--sf-color-action-a10);
     --sf-color-action-muted:  var(--sf-color-action-a30);
     --sf-color-action-ghost:  var(--sf-color-action-a5);
@@ -260,8 +260,8 @@
     --sf-color-neutral-xdark:      var(--sf-color-neutral-800);
     --sf-color-neutral-superdark:  var(--sf-color-neutral-950);
 
-    --sf-color-neutral-hover:  var(--sf-color-neutral-darker);
-    --sf-color-neutral-active: var(--sf-color-neutral-xdark);
+    --sf-color-neutral--hover:  var(--sf-color-neutral-darker);
+    --sf-color-neutral--active: var(--sf-color-neutral-xdark);
     --sf-color-neutral-subtle: var(--sf-color-neutral-a10);
     --sf-color-neutral-muted:  var(--sf-color-neutral-a30);
     --sf-color-neutral-ghost:  var(--sf-color-neutral-a5);
@@ -338,8 +338,8 @@
     --sf-color-base-xdark:      var(--sf-color-base-800);
     --sf-color-base-superdark:  var(--sf-color-base-950);
 
-    --sf-color-base-hover:  var(--sf-color-base-darker);
-    --sf-color-base-active: var(--sf-color-base-xdark);
+    --sf-color-base--hover:  var(--sf-color-base-darker);
+    --sf-color-base--active: var(--sf-color-base-xdark);
     --sf-color-base-subtle: var(--sf-color-base-a10);
     --sf-color-base-muted:  var(--sf-color-base-a30);
     --sf-color-base-ghost:  var(--sf-color-base-a5);

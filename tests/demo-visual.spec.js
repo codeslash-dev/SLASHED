@@ -425,16 +425,16 @@ test.describe('Layout — Switcher', () => {
 // LAYOUT PRIMITIVES — GRID
 // ═══════════════════════════════════════════════════════════════
 test.describe('Layout — Grid', () => {
-  test('.sf-grid uses CSS grid with auto-fill', async ({ page }) => {
+  test('.sf-grid-auto uses CSS grid with auto-fill', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const grid = page.locator('#layout-grid .sf-grid').first();
+    const grid = page.locator('#layout-grid .sf-grid-auto').first();
     const display = await getStyle(grid, 'display');
     expect(display).toBe('grid');
   });
 
-  test('.sf-grid children are laid out in multiple columns', async ({ page }) => {
+  test('.sf-grid-auto children are laid out in multiple columns', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const grid = page.locator('#layout-grid .sf-grid').first();
+    const grid = page.locator('#layout-grid .sf-grid-auto').first();
     const children = grid.locator('.demo-box');
     const firstBox = await children.first().boundingBox();
     const secondBox = await children.nth(1).boundingBox();
@@ -1043,7 +1043,7 @@ test.describe('Responsive', () => {
   test('grid items reflow at different viewport widths', async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: 800 });
     await page.goto(DEMO_URL);
-    const grid = page.locator('#layout-grid .sf-grid').first();
+    const grid = page.locator('#layout-grid .sf-grid-auto').first();
     const items = grid.locator('.demo-box');
     const first = await items.first().boundingBox();
     const second = await items.nth(1).boundingBox();

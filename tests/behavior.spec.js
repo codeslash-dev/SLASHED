@@ -57,7 +57,7 @@ test.describe('Container queries', () => {
 
   test('a fixed-column grid reflows with container width', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const grid = page.locator('.sf-grid--dense').first();
+    const grid = page.locator('.sf-grid-auto--dense').first();
     await expect(grid).toBeVisible();
 
     await page.setViewportSize({ width: 1280, height: 900 });
