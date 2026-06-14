@@ -1,0 +1,4 @@
+source-commit: d7820d8fbcbdd3047fc48b290d448973cb8740c5
+source-ref:    refs/heads/main
+built-at:      2026-06-14T22:10:53Z
+built-by:      .github/workflows/publish-dist.yml
