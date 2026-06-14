@@ -34,7 +34,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
 | `.sf-divider` | token-driven separator; `--vertical`, `--soft`, `--strong`, `--dashed`, `--dotted`, `--gradient` | `--sf-divider-*` |
 | `.sf-gap` | injects gap into any existing flex/grid container without imposing display; `--xs … --2xl` | `--sf-gap-size` |
-| `.sf-equal` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal-cols`, `--sf-equal-gap` |
+| `.sf-fixed-cols` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal-cols`, `--sf-equal-gap` |
 | `.sf-section--collapse` | adjacent sections share padding 50/50 across the boundary | `--sf-section-pad` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --2xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |

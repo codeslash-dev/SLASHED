@@ -52,11 +52,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-divider--soft` |
 | `.sf-divider--strong` |
 | `.sf-divider--vertical` |
-| `.sf-equal` |
-| `.sf-equal--2` |
-| `.sf-equal--3` |
-| `.sf-equal--4` |
-| `.sf-equal--6` |
+| `.sf-fixed-cols` |
+| `.sf-fixed-cols--2` |
+| `.sf-fixed-cols--3` |
+| `.sf-fixed-cols--4` |
+| `.sf-fixed-cols--6` |
 | `.sf-frame` |
 | `.sf-frame--3-2` |
 | `.sf-frame--4-3` |
@@ -73,15 +73,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-gap--s` |
 | `.sf-gap--xl` |
 | `.sf-gap--xs` |
-| `.sf-grid` |
-| `.sf-grid--2xl` |
-| `.sf-grid--dense` |
-| `.sf-grid--fit` |
-| `.sf-grid--l` |
-| `.sf-grid--m` |
-| `.sf-grid--s` |
-| `.sf-grid--xl` |
-| `.sf-grid--xs` |
 | `.sf-grid-1` |
 | `.sf-grid-1-2` |
 | `.sf-grid-1-3` |
@@ -91,6 +82,15 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-grid-3-1` |
 | `.sf-grid-4` |
 | `.sf-grid-6` |
+| `.sf-grid-auto` |
+| `.sf-grid-auto--2xl` |
+| `.sf-grid-auto--dense` |
+| `.sf-grid-auto--fit` |
+| `.sf-grid-auto--l` |
+| `.sf-grid-auto--m` |
+| `.sf-grid-auto--s` |
+| `.sf-grid-auto--xl` |
+| `.sf-grid-auto--xs` |
 | `.sf-icon` |
 | `.sf-icon--2xl` |
 | `.sf-icon--boxed` |
@@ -225,13 +225,15 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Accessibility (`core/accessibility.css`)
 
-3 classes.
+5 classes.
 
 | Class |
 |---|
+| `.is-loading` |
 | `.sf-clickable-parent` |
 | `.sf-focus-parent` |
 | `.sf-focus-shadow` |
+| `.sf-text-gradient` |
 
 ## Motion / entrances (`core/motion.css`)
 

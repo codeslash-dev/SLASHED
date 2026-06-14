@@ -213,17 +213,18 @@ utility classes in 0.x; the layer slot is reserved for the future.
 - **Single dash vs double dash.** Two parallel rules, applied consistently:
   - **`<role>-<variant>` (single dash)** — names a *palette/shade variant*; the
     name describes the colour itself (`--sf-color-primary-light`,
-    `--sf-color-primary-hover`, `--sf-color-success-strong`,
+    `--sf-color-primary-darker`, `--sf-color-success-strong`,
     `--sf-color-action-subtle`). The token IS a colour value.
   - **`<role>--<context>` (double dash)** — names an *application slot*; the
     name describes where/when the colour is applied (`--sf-color-bg--hover`,
     `--sf-color-text--muted`, `--sf-color-link--hover`,
-    `--sf-color-border--subtle`). The token is consumed in a specific
+    `--sf-color-border--subtle`, `--sf-color-primary--hover`,
+    `--sf-color-action--active`). The token is consumed in a specific
     semantic context.
   Read `--variant` as "a flavour of the token to its left" and `-variant` as
-  "a name-derived shade of the role to its left". Brand hover variants
-  (`--sf-color-{primary,...}-hover`) live in `optional/tokens.palette.css` —
-  the palette is the single source of name-derived shades.
+  "a name-derived shade of the role to its left". Brand hover/active slots
+  (`--sf-color-{primary,...}--hover`, `--hover/--active`) live in
+  `optional/tokens.palette.css` — they map interaction states to palette shades.
 - **Stability tiers.** Token-file headers classify every token into one of
   three SemVer tiers: **PUBLIC** (everyday knobs — brand/status sources,
   resolved semantic tokens, scales, BEM consumer aliases), **PUBLIC-ADVANCED**
@@ -436,7 +437,7 @@ Deliberate behaviours, documented so they aren't mistaken for bugs.
   lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
   differs from the conventional monotonic lightness ramp.
 - **Palette token values are not part of the public API.** The *names*
-  (`--sf-color-primary-light`, `--sf-color-action-hover`, etc.) are stable and
+  (`--sf-color-primary-light`, `--sf-color-action--hover`, etc.) are stable and
   covered by SemVer. The *computed colour values* they resolve to may shift
   between minor releases as derivation formulas are refined. Pin your own
   overrides to the 6 source tokens if you need colour stability.

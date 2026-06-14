@@ -30,21 +30,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1064,
+      "total": 1079,
       "by_type": {
         "class": 223,
-        "token": 841
+        "token": 856
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 893,
+        "PUBLIC": 908,
         "PUBLIC-ADVANCED": 170
       },
       "by_role": {
-        "consumption": 580,
-        "knob": 261
+        "consumption": 590,
+        "knob": 266
       },
-      "tokens": 841,
+      "tokens": 856,
       "classes": 223,
       "sf_classes": 174,
       "is_classes": 40,
@@ -53,7 +53,8 @@
       "by_category": {
         "Accessibility": 7,
         "Color fallback (legacy HSL)": 33,
-        "Core tokens": 486,
+        "Component tokens": 6,
+        "Core tokens": 495,
         "Layout primitives": 120,
         "Layout tokens": 48,
         "Macro classes": 36,
@@ -1518,6 +1519,37 @@
       ]
     },
     {
+      "name": "--sf-border-scale",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "border",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Border widths",
+      "description": "--sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable).",
+      "value": "1",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-border-strong",
       "type": "token",
       "tier": "PUBLIC",
@@ -1614,13 +1646,13 @@
       "name": "--sf-border-width-1",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "border",
       "category": "Core tokens",
       "area": "core",
       "group": "Border widths",
-      "description": "--sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for…",
-      "value": "1px",
+      "description": "--sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable).",
+      "value": "calc(1px * var(--sf-border-scale, 1))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -1645,13 +1677,13 @@
       "name": "--sf-border-width-2",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "border",
       "category": "Core tokens",
       "area": "core",
       "group": "Border widths",
-      "description": "--sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for…",
-      "value": "2px",
+      "description": "--sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable).",
+      "value": "calc(2px * var(--sf-border-scale, 1))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -1676,13 +1708,13 @@
       "name": "--sf-border-width-3",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "border",
       "category": "Core tokens",
       "area": "core",
       "group": "Border widths",
-      "description": "--sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for…",
-      "value": "3px",
+      "description": "--sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable).",
+      "value": "calc(3px * var(--sf-border-scale, 1))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -1707,13 +1739,13 @@
       "name": "--sf-border-width-4",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "border",
       "category": "Core tokens",
       "area": "core",
       "group": "Border widths",
-      "description": "--sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for…",
-      "value": "4px",
+      "description": "--sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable).",
+      "value": "calc(4px * var(--sf-border-scale, 1))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -1743,7 +1775,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border widths",
-      "description": "--sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for…",
+      "description": "--sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable).",
       "value": "0.5px",
       "aliasOf": null,
       "registered": false,
@@ -1887,6 +1919,152 @@
         "optimal",
         "optimal-components",
         "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-breakpoint-l",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "breakpoint",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Reference breakpoint tokens",
+      "description": "read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not…",
+      "value": "48em",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-breakpoint-s",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "breakpoint",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Reference breakpoint tokens",
+      "description": "read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not…",
+      "value": "30em",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-button-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-space-xs)",
+      "aliasOf": "--sf-space-xs",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-radius",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-radius-m)",
+      "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
       ]
     },
     {
@@ -2314,6 +2492,70 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-action--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "action",
+      "description": "action",
+      "value": "var(--sf-color-action-xdark)",
+      "aliasOf": "--sf-color-action-xdark",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-action--hover",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "action",
+      "description": "action",
+      "value": "var(--sf-color-action-darker)",
+      "aliasOf": "--sf-color-action-darker",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
       ],
       "bundles": [
         "essential",
@@ -2984,38 +3226,6 @@
       ]
     },
     {
-      "name": "--sf-color-action-active",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "action",
-      "description": "action",
-      "value": "var(--sf-color-action-xdark)",
-      "aliasOf": "--sf-color-action-xdark",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -3059,38 +3269,6 @@
       "description": "action",
       "value": "var(--sf-color-action-a5)",
       "aliasOf": "--sf-color-action-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-action-hover",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "action",
-      "description": "action",
-      "value": "var(--sf-color-action-darker)",
-      "aliasOf": "--sf-color-action-darker",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3388,6 +3566,70 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-base--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "base",
+      "description": "base",
+      "value": "var(--sf-color-base-xdark)",
+      "aliasOf": "--sf-color-base-xdark",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-base--hover",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "base",
+      "description": "base",
+      "value": "var(--sf-color-base-darker)",
+      "aliasOf": "--sf-color-base-darker",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
       ],
       "bundles": [
         "essential",
@@ -4058,38 +4300,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-active",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "base",
-      "value": "var(--sf-color-base-xdark)",
-      "aliasOf": "--sf-color-base-xdark",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -4133,38 +4343,6 @@
       "description": "base",
       "value": "var(--sf-color-base-a5)",
       "aliasOf": "--sf-color-base-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-hover",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "base",
-      "value": "var(--sf-color-base-darker)",
-      "aliasOf": "--sf-color-base-darker",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -5774,6 +5952,70 @@
       ]
     },
     {
+      "name": "--sf-color-neutral--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "neutral",
+      "description": "neutral",
+      "value": "var(--sf-color-neutral-xdark)",
+      "aliasOf": "--sf-color-neutral-xdark",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-neutral--hover",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "neutral",
+      "description": "neutral",
+      "value": "var(--sf-color-neutral-darker)",
+      "aliasOf": "--sf-color-neutral-darker",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-neutral-100",
       "type": "token",
       "tier": "PUBLIC",
@@ -6434,38 +6676,6 @@
       ]
     },
     {
-      "name": "--sf-color-neutral-active",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "var(--sf-color-neutral-xdark)",
-      "aliasOf": "--sf-color-neutral-xdark",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-neutral-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -6509,38 +6719,6 @@
       "description": "neutral",
       "value": "var(--sf-color-neutral-a5)",
       "aliasOf": "--sf-color-neutral-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-neutral-hover",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "var(--sf-color-neutral-darker)",
-      "aliasOf": "--sf-color-neutral-darker",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6869,6 +7047,70 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "primary",
+      "description": "primary",
+      "value": "var(--sf-color-primary-xdark)",
+      "aliasOf": "--sf-color-primary-xdark",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary--hover",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "primary",
+      "description": "primary",
+      "value": "var(--sf-color-primary-darker)",
+      "aliasOf": "--sf-color-primary-darker",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
       ],
       "bundles": [
         "essential",
@@ -7539,38 +7781,6 @@
       ]
     },
     {
-      "name": "--sf-color-primary-active",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "primary",
-      "description": "primary",
-      "value": "var(--sf-color-primary-xdark)",
-      "aliasOf": "--sf-color-primary-xdark",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-primary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -7614,38 +7824,6 @@
       "description": "primary",
       "value": "var(--sf-color-primary-a5)",
       "aliasOf": "--sf-color-primary-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-primary-hover",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "primary",
-      "description": "primary",
-      "value": "var(--sf-color-primary-darker)",
-      "aliasOf": "--sf-color-primary-darker",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8005,6 +8183,70 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-secondary--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "secondary",
+      "description": "secondary",
+      "value": "var(--sf-color-secondary-xdark)",
+      "aliasOf": "--sf-color-secondary-xdark",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-secondary--hover",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "secondary",
+      "description": "secondary",
+      "value": "var(--sf-color-secondary-darker)",
+      "aliasOf": "--sf-color-secondary-darker",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
       ],
       "bundles": [
         "essential",
@@ -8675,38 +8917,6 @@
       ]
     },
     {
-      "name": "--sf-color-secondary-active",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "var(--sf-color-secondary-xdark)",
-      "aliasOf": "--sf-color-secondary-xdark",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-secondary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -8750,38 +8960,6 @@
       "description": "secondary",
       "value": "var(--sf-color-secondary-a5)",
       "aliasOf": "--sf-color-secondary-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-secondary-hover",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "var(--sf-color-secondary-darker)",
-      "aliasOf": "--sf-color-secondary-darker",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -9327,6 +9505,70 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-tertiary--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "tertiary",
+      "description": "tertiary",
+      "value": "var(--sf-color-tertiary-xdark)",
+      "aliasOf": "--sf-color-tertiary-xdark",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-tertiary--hover",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "tertiary",
+      "description": "tertiary",
+      "value": "var(--sf-color-tertiary-darker)",
+      "aliasOf": "--sf-color-tertiary-darker",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
       ],
       "bundles": [
         "essential",
@@ -9997,38 +10239,6 @@
       ]
     },
     {
-      "name": "--sf-color-tertiary-active",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "var(--sf-color-tertiary-xdark)",
-      "aliasOf": "--sf-color-tertiary-xdark",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-tertiary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -10072,38 +10282,6 @@
       "description": "tertiary",
       "value": "var(--sf-color-tertiary-a5)",
       "aliasOf": "--sf-color-tertiary-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-tertiary-hover",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "var(--sf-color-tertiary-darker)",
-      "aliasOf": "--sf-color-tertiary-darker",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -11162,7 +11340,7 @@
       "namespace": "component",
       "category": "Core tokens",
       "area": "core",
-      "group": "Spacing aliases",
+      "group": "Reference breakpoint tokens",
       "description": "rhythm within a component",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
@@ -11348,7 +11526,7 @@
       "namespace": "content",
       "category": "Core tokens",
       "area": "core",
-      "group": "Spacing aliases",
+      "group": "Reference breakpoint tokens",
       "description": "gap between BEM elements",
       "value": "var(--sf-space-s)",
       "aliasOf": "--sf-space-s",
@@ -12552,7 +12730,7 @@
       "namespace": "field",
       "category": "Core tokens",
       "area": "core",
-      "group": "Spacing aliases",
+      "group": "Reference breakpoint tokens",
       "description": "standard component padding",
       "value": "var(--sf-space-l)",
       "aliasOf": "--sf-space-l",
@@ -12576,6 +12754,90 @@
       ]
     },
     {
+      "name": "--sf-field-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "field",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "FIELD TOKENS",
+      "description": "Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens.",
+      "value": "var(--sf-space-xs)",
+      "aliasOf": "--sf-space-xs",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-field-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "field",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "FIELD TOKENS",
+      "description": "Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens.",
+      "value": "var(--sf-space-s)",
+      "aliasOf": "--sf-space-s",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-field-radius",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "field",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "FIELD TOKENS",
+      "description": "Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens.",
+      "value": "var(--sf-radius-m)",
+      "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
       "name": "--sf-field-required-marker",
       "type": "token",
       "tier": "PUBLIC",
@@ -12583,7 +12845,7 @@
       "namespace": "field",
       "category": "Core tokens",
       "area": "core",
-      "group": "Spacing aliases",
+      "group": "Reference breakpoint tokens",
       "description": "form-field block spacing",
       "value": "\" *\"",
       "aliasOf": null,
@@ -13854,8 +14116,8 @@
       "namespace": "gap",
       "category": "Core tokens",
       "area": "core",
-      "group": "Spacing aliases",
-      "description": "BEM consumer API Use in your own BEM classes: .nav { gap: var(--sf-gap); } Source of truth for tokens.layout.css: --sf-space-gap → var(--sf-gap) (all layout primitives) --sf-space-content → var(--sf-content-gap) (stack, prose)",
+      "group": "Reference breakpoint tokens",
+      "description": "read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not…",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
       "registered": false,
@@ -14529,6 +14791,37 @@
       ]
     },
     {
+      "name": "--sf-h1-max-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "h1",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Heading line-length constraints",
+      "description": "public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css.",
+      "value": "none",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-h1-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -14633,6 +14926,37 @@
       "description": "part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens.",
       "value": "var(--sf-leading-tight)",
       "aliasOf": "--sf-leading-tight",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-h2-max-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "h2",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Heading line-length constraints",
+      "description": "public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css.",
+      "value": "none",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -14777,6 +15101,37 @@
       ]
     },
     {
+      "name": "--sf-h3-max-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "h3",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Heading line-length constraints",
+      "description": "public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css.",
+      "value": "none",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-h3-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -14881,6 +15236,37 @@
       "description": "part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens.",
       "value": "var(--sf-leading-snug)",
       "aliasOf": "--sf-leading-snug",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-h4-max-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "h4",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Heading line-length constraints",
+      "description": "public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css.",
+      "value": "none",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -15025,6 +15411,37 @@
       ]
     },
     {
+      "name": "--sf-h5-max-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "h5",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Heading line-length constraints",
+      "description": "public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css.",
+      "value": "none",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-h5-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -15129,6 +15546,37 @@
       "description": "part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens.",
       "value": "var(--sf-leading-normal)",
       "aliasOf": "--sf-leading-normal",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "hasFallback": false,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-h6-max-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "h6",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Heading line-length constraints",
+      "description": "public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css.",
+      "value": "none",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -16130,7 +16578,7 @@
       "namespace": "link",
       "category": "Core tokens",
       "area": "core",
-      "group": "Spacing aliases",
+      "group": "Reference breakpoint tokens",
       "description": "Leading space is baked into the default so consumers can fully disable the indicator with `--sf-link-external-marker: \"\"` — without the space a bare \"\" still left a stray space after the link text. Override with your own glyph (include leading space if you want one): `:root {…",
       "value": "\" \\2197\"",
       "aliasOf": null,
@@ -26373,7 +26821,8 @@
       "optional": false,
       "layer": "slashed.states",
       "sourceFiles": [
-        "core/states.css"
+        "core/states.css",
+        "core/accessibility.css"
       ],
       "bundles": [
         "essential",
@@ -28256,136 +28705,6 @@
       ]
     },
     {
-      "name": "sf-equal",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-equal",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Equal columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-equal--2",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-equal--2",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Equal columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
-      "isVariant": true,
-      "baseClass": "sf-equal",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-equal--3",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-equal--3",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Equal columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
-      "isVariant": true,
-      "baseClass": "sf-equal",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-equal--4",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-equal--4",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Equal columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
-      "isVariant": true,
-      "baseClass": "sf-equal",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-equal--6",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-equal--6",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Equal columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
-      "isVariant": true,
-      "baseClass": "sf-equal",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "sf-equal-height",
       "type": "class",
       "tier": "PUBLIC",
@@ -28454,6 +28773,136 @@
       "layer": "slashed.motion",
       "sourceFiles": [
         "core/motion.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-fixed-cols",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-fixed-cols",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-fixed-cols--2",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-fixed-cols--2",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-fixed-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-fixed-cols--3",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-fixed-cols--3",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-fixed-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-fixed-cols--4",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-fixed-cols--4",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-fixed-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-fixed-cols--6",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-fixed-cols--6",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-fixed-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
       ],
       "bundles": [
         "essential",
@@ -28958,240 +29407,6 @@
       ]
     },
     {
-      "name": "sf-grid",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--2xl",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--2xl",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--dense",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--dense",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including the fixed-column .sf-grid-N.",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--fit",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--fit",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--l",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--l",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--m",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--m",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--s",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--s",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--xl",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--xl",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid--xs",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid--xs",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style=\"--sf-grid-min: 12rem; --sf-grid-gap: 1rem\"",
-      "isVariant": true,
-      "baseClass": "sf-grid",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "sf-grid-1",
       "type": "class",
       "tier": "PUBLIC",
@@ -29412,6 +29627,240 @@
       "description": "Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid…",
       "isVariant": false,
       "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--2xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--2xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--dense",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--dense",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including the fixed-column .sf-grid-N.",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--fit",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--fit",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--l",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--m",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--s",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-auto--xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-auto--xs",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
+      "isVariant": true,
+      "baseClass": "sf-grid-auto",
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
@@ -31418,7 +31867,8 @@
       "optional": false,
       "layer": "slashed.macros",
       "sourceFiles": [
-        "core/macros.css"
+        "core/macros.css",
+        "core/accessibility.css"
       ],
       "bundles": [
         "essential",

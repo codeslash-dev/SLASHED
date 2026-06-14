@@ -78,6 +78,11 @@ live exclusively in `optional/tokens.palette.css` (shipped in the
 the `essential` bundle, you must switch to the `optimal` bundle or
 declare your own hover colour.
 
+> **See also:** The [0.4.x → current](#slashed-04x--current-pre-freeze-cleanup) section
+> documents a further rename: `-hover` → `--hover` (single-dash back to
+> double-dash, now with BEM semantics). Migrating from 0.3.x directly to
+> current: `--sf-color-{family}--hover` is the final canonical name.
+
 ### Class modifiers removed
 
 | Removed | Replacement |
@@ -113,8 +118,9 @@ The component CSS isn't active yet (commented out), so no runtime breakage.
 ## SLASHED 0.4.x → current (pre-freeze cleanup)
 
 Ahead of the token-API freeze, the unreleased line completes the pre-freeze
-cleanup. The only consumer-visible changes are two source-token **renames** and
-one removal — there are no other renamed tokens; everything else is additive.
+cleanup. Consumer-visible changes: two source-token **renames**, one removal,
+two brand-colour token renames (hover/active separator), and two layout-class
+renames — there are no other renamed tokens; everything else is additive.
 
 ### Tokens renamed
 
@@ -122,6 +128,8 @@ one removal — there are no other renamed tokens; everything else is additive.
 |---|---|---|
 | `--sf-color-surface-light` / `-dark` | `--sf-color-base-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base` but **keeps a compat alias**, so the old name still resolves. |
 | `--sf-color-well` | `--sf-color-inset` | Renamed to communicate the recessed / indented surface role. `--sf-color-well` is removed (no alias). |
+| `--sf-color-{family}-hover` | `--sf-color-{family}--hover` | Separator changed from single-dash to double-dash for BEM state-modifier compliance. Applies to all 6 brand families: `primary`, `secondary`, `tertiary`, `action`, `neutral`, `base`. Available in `optional/tokens.palette.css`. No back-compat alias. |
+| `--sf-color-{family}-active` | `--sf-color-{family}--active` | Same BEM separator fix as `-hover` above. Same 6 families. No back-compat alias. |
 
 **The resolved semantic token `--sf-color-surface` (the page-surface anchor)
 is unchanged** — only the underlying *source* family prefix changed. If you
@@ -134,6 +142,13 @@ the page surface, rename those overrides to `--sf-color-base-light` / `-dark`.
 | Removed | Replacement |
 |---|---|
 | `--sf-color-{success,warning,error,info,danger}-{50…950}` | The numeric ramp for status families is gone. Status colours are functional — use the `subtle` / `muted` / base / `strong` aliases, or derive a step with `color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-surface))`. Brand families keep their full numeric scale via `optional/tokens.palette.css`. |
+
+### Classes renamed
+
+| Was | Now | Notes |
+|---|---|---|
+| `.sf-grid` | `.sf-grid-auto` | The auto-fill grid primitive is renamed to remove the namespace collision with the fixed-column `.sf-grid-N` family. All modifier suffixes follow: `.sf-grid--fit` → `.sf-grid-auto--fit`, `.sf-grid--xs/s/m/l/xl/2xl` → `.sf-grid-auto--xs/…/2xl`, `.sf-grid--dense` → `.sf-grid-auto--dense`. |
+| `.sf-equal` | `.sf-fixed-cols` | Renamed for clarity — "equal" was ambiguous with `.sf-equal-height`. Modifiers follow: `.sf-equal--2/3/4/6` → `.sf-fixed-cols--2/3/4/6`. |
 
 ### What's new (additive — no action needed)
 

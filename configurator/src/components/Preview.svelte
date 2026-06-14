@@ -350,8 +350,8 @@
           <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}-darker)"><span style="color:var(--sf-color-text--on-{c},#fff)">darker</span></div>
           <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}-xdark)"><span style="color:#fff">xdark</span></div>
           <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}-superdark)"><span style="color:#fff">superdark</span></div>
-          <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}-hover)"><span style="color:var(--sf-color-text--on-{c},#fff)">hover</span></div>
-          <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}-active)"><span style="color:var(--sf-color-text--on-{c},#fff)">active</span></div>
+          <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}--hover)"><span style="color:var(--sf-color-text--on-{c},#fff)">hover</span></div>
+          <div class="pv__sw pv__sw--sm" style="background:var(--sf-color-{c}--active)"><span style="color:var(--sf-color-text--on-{c},#fff)">active</span></div>
           <div class="pv__sw pv__sw--sm pv__sw--bordered" style="background:var(--sf-color-{c}-subtle)"><span class="pv__sw-dark">subtle</span></div>
           <div class="pv__sw pv__sw--sm pv__sw--bordered" style="background:var(--sf-color-{c}-muted)"><span class="pv__sw-dark">muted</span></div>
           <div class="pv__sw pv__sw--sm pv__sw--bordered" style="background:var(--sf-color-{c}-ghost)"><span class="pv__sw-dark">ghost</span></div>
@@ -662,7 +662,7 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid — auto-fill tiers</p>
+        <p class="pv__eyebrow">.sf-grid-auto — auto-fill tiers</p>
         <div class="pv__lp-stack2">
           {#each [['xs','6rem'],['s','8rem'],['m','10rem'],['l','12rem'],['xl','16rem']] as [tier,min] (tier)}
             <div>
@@ -676,7 +676,7 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid — fixed columns + ratio grids</p>
+        <p class="pv__eyebrow">.sf-grid-N — fixed columns + ratio grids</p>
         <div class="pv__lp-stack2">
           {#each [[2,'grid-2'],[3,'grid-3'],[4,'grid-4']] as [cols,cls] (cls)}
             <div>
@@ -699,11 +699,11 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-equal — never-collapsing fixed columns</p>
+        <p class="pv__eyebrow">.sf-fixed-cols — never-collapsing fixed columns</p>
         <div class="pv__lp-stack2">
           {#each [[2],[3],[4],[6]] as [cols] (cols)}
             <div>
-              <code class="pv__lp-label">.sf-equal--{cols}</code>
+              <code class="pv__lp-label">.sf-fixed-cols--{cols}</code>
               <div style="display:grid;grid-template-columns:repeat({cols},1fr);gap:6px;margin-top:4px">
                 {#each Array(cols) as _,n (n)}<div class="pv__box">{n+1}</div>{/each}
               </div>

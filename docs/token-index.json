@@ -11,15 +11,15 @@
     ],
     "fallback_source": "core/tokens.color-fallbacks.css",
     "counts": {
-      "tokens": 808,
+      "tokens": 823,
       "by_tier": {
-        "PUBLIC": 670,
+        "PUBLIC": 685,
         "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 228,
-        "consumption": 580
+        "knob": 233,
+        "consumption": 590
       },
       "with_fallback": 57,
       "fallback_only": 33
@@ -395,6 +395,15 @@
       "fallback": false,
       "value": "var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)"
     },
+    "--sf-border-scale": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "1"
+    },
     "--sf-border-strong": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -424,39 +433,39 @@
     },
     "--sf-border-width-1": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "1px"
+      "value": "calc(1px * var(--sf-border-scale, 1))"
     },
     "--sf-border-width-2": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "2px"
+      "value": "calc(2px * var(--sf-border-scale, 1))"
     },
     "--sf-border-width-3": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "3px"
+      "value": "calc(3px * var(--sf-border-scale, 1))"
     },
     "--sf-border-width-4": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
       "fallback": false,
-      "value": "4px"
+      "value": "calc(4px * var(--sf-border-scale, 1))"
     },
     "--sf-border-width-hairline": {
       "tier": "PUBLIC",
@@ -502,6 +511,51 @@
       ],
       "fallback": false,
       "value": "var(--sf-container-wide)"
+    },
+    "--sf-breakpoint-l": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "48em"
+    },
+    "--sf-breakpoint-s": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "30em"
+    },
+    "--sf-button-padding-block": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-xs)"
+    },
+    "--sf-button-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-button-radius": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-radius-m)"
     },
     "--sf-caret-color": {
       "tier": "PUBLIC",
@@ -628,6 +682,26 @@
       ],
       "fallback": true,
       "value": "light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-action--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-xdark)"
+    },
+    "--sf-color-action--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-action-darker)"
     },
     "--sf-color-action-100": {
       "tier": "PUBLIC",
@@ -827,16 +901,6 @@
       "fallback": false,
       "value": "color-mix(in oklab, var(--sf-color-action) 95%, transparent)"
     },
-    "--sf-color-action-active": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-action-xdark)"
-    },
     "--sf-color-action-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -856,16 +920,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-color-action-a5)"
-    },
-    "--sf-color-action-hover": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-action-darker)"
     },
     "--sf-color-action-light": {
       "tier": "PUBLIC",
@@ -954,6 +1008,26 @@
       ],
       "fallback": true,
       "value": "light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))"
+    },
+    "--sf-color-base--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-xdark)"
+    },
+    "--sf-color-base--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-base-darker)"
     },
     "--sf-color-base-100": {
       "tier": "PUBLIC",
@@ -1153,16 +1227,6 @@
       "fallback": false,
       "value": "color-mix(in oklab, var(--sf-color-base) 95%, transparent)"
     },
-    "--sf-color-base-active": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-base-xdark)"
-    },
     "--sf-color-base-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1182,16 +1246,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-color-base-a5)"
-    },
-    "--sf-color-base-hover": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-base-darker)"
     },
     "--sf-color-base-light": {
       "tier": "PUBLIC",
@@ -1659,6 +1713,26 @@
       "fallback": true,
       "value": "light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
+    "--sf-color-neutral--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-xdark)"
+    },
+    "--sf-color-neutral--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-neutral-darker)"
+    },
     "--sf-color-neutral-100": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1857,16 +1931,6 @@
       "fallback": false,
       "value": "color-mix(in oklab, var(--sf-color-neutral) 95%, transparent)"
     },
-    "--sf-color-neutral-active": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-neutral-xdark)"
-    },
     "--sf-color-neutral-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1886,16 +1950,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-color-neutral-a5)"
-    },
-    "--sf-color-neutral-hover": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-neutral-darker)"
     },
     "--sf-color-neutral-light": {
       "tier": "PUBLIC",
@@ -1993,6 +2047,26 @@
       ],
       "fallback": true,
       "value": "light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-primary--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-xdark)"
+    },
+    "--sf-color-primary--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-primary-darker)"
     },
     "--sf-color-primary-100": {
       "tier": "PUBLIC",
@@ -2192,16 +2266,6 @@
       "fallback": false,
       "value": "color-mix(in oklab, var(--sf-color-primary) 95%, transparent)"
     },
-    "--sf-color-primary-active": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-primary-xdark)"
-    },
     "--sf-color-primary-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2221,16 +2285,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-color-primary-a5)"
-    },
-    "--sf-color-primary-hover": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-primary-darker)"
     },
     "--sf-color-primary-light": {
       "tier": "PUBLIC",
@@ -2337,6 +2391,26 @@
       ],
       "fallback": true,
       "value": "light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-secondary--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-xdark)"
+    },
+    "--sf-color-secondary--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-secondary-darker)"
     },
     "--sf-color-secondary-100": {
       "tier": "PUBLIC",
@@ -2536,16 +2610,6 @@
       "fallback": false,
       "value": "color-mix(in oklab, var(--sf-color-secondary) 95%, transparent)"
     },
-    "--sf-color-secondary-active": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-secondary-xdark)"
-    },
     "--sf-color-secondary-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2565,16 +2629,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-color-secondary-a5)"
-    },
-    "--sf-color-secondary-hover": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-secondary-darker)"
     },
     "--sf-color-secondary-light": {
       "tier": "PUBLIC",
@@ -2735,6 +2789,26 @@
       ],
       "fallback": true,
       "value": "light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+    },
+    "--sf-color-tertiary--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-xdark)"
+    },
+    "--sf-color-tertiary--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css",
+        "optional/tokens.palette.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-color-tertiary-darker)"
     },
     "--sf-color-tertiary-100": {
       "tier": "PUBLIC",
@@ -2934,16 +3008,6 @@
       "fallback": false,
       "value": "color-mix(in oklab, var(--sf-color-tertiary) 95%, transparent)"
     },
-    "--sf-color-tertiary-active": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-tertiary-xdark)"
-    },
     "--sf-color-tertiary-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2963,16 +3027,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-color-tertiary-a5)"
-    },
-    "--sf-color-tertiary-hover": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
-      ],
-      "fallback": false,
-      "value": "var(--sf-color-tertiary-darker)"
     },
     "--sf-color-tertiary-light": {
       "tier": "PUBLIC",
@@ -3647,6 +3701,33 @@
       "fallback": false,
       "value": "var(--sf-space-l)"
     },
+    "--sf-field-padding-block": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-xs)"
+    },
+    "--sf-field-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-space-s)"
+    },
+    "--sf-field-radius": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "fallback": false,
+      "value": "var(--sf-radius-m)"
+    },
     "--sf-field-required-marker": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -4214,6 +4295,15 @@
       "fallback": false,
       "value": "var(--sf-leading-tight)"
     },
+    "--sf-h1-max-width": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
     "--sf-h1-size": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -4249,6 +4339,15 @@
       ],
       "fallback": false,
       "value": "var(--sf-leading-tight)"
+    },
+    "--sf-h2-max-width": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "none"
     },
     "--sf-h2-size": {
       "tier": "PUBLIC",
@@ -4286,6 +4385,15 @@
       "fallback": false,
       "value": "var(--sf-leading-snug)"
     },
+    "--sf-h3-max-width": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
     "--sf-h3-size": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -4321,6 +4429,15 @@
       ],
       "fallback": false,
       "value": "var(--sf-leading-snug)"
+    },
+    "--sf-h4-max-width": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "none"
     },
     "--sf-h4-size": {
       "tier": "PUBLIC",
@@ -4358,6 +4475,15 @@
       "fallback": false,
       "value": "var(--sf-leading-normal)"
     },
+    "--sf-h5-max-width": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "none"
+    },
     "--sf-h5-size": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -4393,6 +4519,15 @@
       ],
       "fallback": false,
       "value": "var(--sf-leading-normal)"
+    },
+    "--sf-h6-max-width": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "fallback": false,
+      "value": "none"
     },
     "--sf-h6-size": {
       "tier": "PUBLIC",
