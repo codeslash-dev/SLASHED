@@ -352,6 +352,37 @@
     textarea {
       border: var(--sf-border-width-1) solid;
     }
+
+    /* Buttons with transparent borders lose their boundary entirely in
+       forced-colors — they appear as floating, unbordered text blocks.
+       Re-assert the system ButtonBorder colour to restore the boundary. */
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+      border-color: ButtonBorder !important;
+    }
+
+    /* Gradient text (.sf-text-gradient) clips `color: transparent` via
+       background-clip. In forced-colors the gradient is suppressed but
+       transparent color remains, making heading text completely invisible.
+       Restore opaque system text and remove the clip. */
+    .sf-text-gradient {
+      background-image:         none !important;
+      /* stylelint-disable-next-line property-no-vendor-prefix */
+      -webkit-background-clip:  unset !important;
+      background-clip:          unset !important;
+      color:                    CanvasText !important;
+    }
+
+    /* Spinner (.is-loading::after) uses --sf-color-action for the active
+       segment. Forced-colors flattens this to the system background,
+       turning the loader into a static solid circle. Override with system
+       ButtonText / Highlight so the spinning segment stays visible. */
+    .is-loading::after {
+      border-color:             ButtonText !important;
+      border-block-start-color: Highlight !important;
+    }
   }
 
 }
