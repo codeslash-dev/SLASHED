@@ -499,15 +499,15 @@
      Renamed from .sf-equal to avoid confusion with .sf-equal-height.
      Override: style="--sf-equal-cols: 3"
      ---------------------------------------------------------- */
-  .sf-fixed-cols {
+  .sf-equal-cols {
     display:               grid;
     grid-template-columns: repeat(var(--sf-equal-cols), 1fr);
     gap:                   var(--sf-equal-gap);
   }
-  .sf-fixed-cols--2 { --sf-equal-cols: 2; }
-  .sf-fixed-cols--3 { --sf-equal-cols: 3; }
-  .sf-fixed-cols--4 { --sf-equal-cols: 4; }
-  .sf-fixed-cols--6 { --sf-equal-cols: 6; }
+  .sf-equal-cols--2 { --sf-equal-cols: 2; }
+  .sf-equal-cols--3 { --sf-equal-cols: 3; }
+  .sf-equal-cols--4 { --sf-equal-cols: 4; }
+  .sf-equal-cols--6 { --sf-equal-cols: 6; }
 
   /* -- Content grid (breakout pattern) -------------------------
      Full-width grid that lets items break out to breakout or full

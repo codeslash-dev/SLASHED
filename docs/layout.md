@@ -20,7 +20,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-cluster` | wrapping inline group; `--no-wrap` | `--sf-cluster-gap/-align/-justify` |
 | `.sf-sidebar` | content + fixed-ish side panel that wraps when narrow | `--sf-sidebar-*` |
 | `.sf-switcher` | N columns above a threshold, stacked below; `--no-wrap`, `--vertical` | `--sf-switcher-threshold/-gap` |
-| `.sf-grid` | auto-fill responsive grid; `--fit`, `--xs … --2xl`, `--dense` | `--sf-grid-min`, `--sf-grid-gap` |
+| `.sf-grid-auto` | auto-fill responsive grid; `--fit`, `--xs … --2xl`, `--dense` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-grid-1 / -2 / -3 / -4 / -6` | fixed-column grids, container-responsive (no `-5`) | `--sf-grid-gap` |
 | `.sf-grid-1-2 / -2-1 / -1-3 / -3-1` | ratio two-column grids | `--sf-grid-gap` |
 | `.sf-bento` | dense free-form grid; `--sf-bento-cols/-row` overrides | `--sf-bento-*` |
@@ -34,7 +34,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
 | `.sf-divider` | token-driven separator; `--vertical`, `--soft`, `--strong`, `--dashed`, `--dotted`, `--gradient` | `--sf-divider-*` |
 | `.sf-gap` | injects gap into any existing flex/grid container without imposing display; `--xs … --2xl` | `--sf-gap-size` |
-| `.sf-fixed-cols` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal-cols`, `--sf-equal-gap` |
+| `.sf-equal-cols` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal-cols`, `--sf-equal-gap` |
 | `.sf-section--collapse` | adjacent sections share padding 50/50 across the boundary | `--sf-section-pad` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --2xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
@@ -49,12 +49,12 @@ Every size-aware primitive supports the canonical range
 | `.sf-stack`   | block-axis gap         | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-cluster` | inline-axis gap        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-gap`     | layout-agnostic gap    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.sf-grid`    | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-grid-auto` | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
-Three suffixes scale different physical dimensions. `.sf-grid--xs` means "narrow
-column tier" (denser layouts), not "small gap" — gap on `.sf-grid` is controlled
+Three suffixes scale different physical dimensions. `.sf-grid-auto--xs` means "narrow
+column tier" (denser layouts), not "small gap" — gap on `.sf-grid-auto` is controlled
 separately by `--sf-grid-gap`, independent of the column-min modifier. To go beyond
 the built-in scale, override the scoped token directly:
 `style="--sf-stack-gap: var(--sf-space-3xl)"`. The underlying space tokens
@@ -77,7 +77,7 @@ Primitives nest freely:
   <div class="sf-container">
     <div class="sf-stack">
       <h1>Title</h1>
-      <div class="sf-grid sf-grid--m">
+      <div class="sf-grid-auto sf-grid-auto--m">
         <article class="sf-stack sf-stack--s">…</article>
         <article class="sf-stack sf-stack--s">…</article>
       </div>

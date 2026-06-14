@@ -699,11 +699,11 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-fixed-cols — never-collapsing fixed columns</p>
+        <p class="pv__eyebrow">.sf-equal-cols — never-collapsing fixed columns</p>
         <div class="pv__lp-stack2">
           {#each [[2],[3],[4],[6]] as [cols] (cols)}
             <div>
-              <code class="pv__lp-label">.sf-fixed-cols--{cols}</code>
+              <code class="pv__lp-label">.sf-equal-cols--{cols}</code>
               <div style="display:grid;grid-template-columns:repeat({cols},1fr);gap:6px;margin-top:4px">
                 {#each Array(cols) as _,n (n)}<div class="pv__box">{n+1}</div>{/each}
               </div>

@@ -28705,6 +28705,136 @@
       ]
     },
     {
+      "name": "sf-equal-cols",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-equal-cols",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-equal-cols--2",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-equal-cols--2",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-equal-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-equal-cols--3",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-equal-cols--3",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-equal-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-equal-cols--4",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-equal-cols--4",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-equal-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-equal-cols--6",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-equal-cols--6",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Fixed columns",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
+      "isVariant": true,
+      "baseClass": "sf-equal-cols",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-equal-height",
       "type": "class",
       "tier": "PUBLIC",
@@ -28773,136 +28903,6 @@
       "layer": "slashed.motion",
       "sourceFiles": [
         "core/motion.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-fixed-cols",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-fixed-cols",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-fixed-cols--2",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-fixed-cols--2",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
-      "isVariant": true,
-      "baseClass": "sf-fixed-cols",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-fixed-cols--3",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-fixed-cols--3",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
-      "isVariant": true,
-      "baseClass": "sf-fixed-cols",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-fixed-cols--4",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-fixed-cols--4",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
-      "isVariant": true,
-      "baseClass": "sf-fixed-cols",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-fixed-cols--6",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-fixed-cols--6",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Renamed from .sf-equal to avoid confusion with…",
-      "isVariant": true,
-      "baseClass": "sf-fixed-cols",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
       ],
       "bundles": [
         "essential",

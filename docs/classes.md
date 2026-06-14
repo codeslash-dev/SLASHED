@@ -52,11 +52,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-divider--soft` |
 | `.sf-divider--strong` |
 | `.sf-divider--vertical` |
-| `.sf-fixed-cols` |
-| `.sf-fixed-cols--2` |
-| `.sf-fixed-cols--3` |
-| `.sf-fixed-cols--4` |
-| `.sf-fixed-cols--6` |
+| `.sf-equal-cols` |
+| `.sf-equal-cols--2` |
+| `.sf-equal-cols--3` |
+| `.sf-equal-cols--4` |
+| `.sf-equal-cols--6` |
 | `.sf-frame` |
 | `.sf-frame--3-2` |
 | `.sf-frame--4-3` |

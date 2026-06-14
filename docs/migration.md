@@ -148,7 +148,7 @@ the page surface, rename those overrides to `--sf-color-base-light` / `-dark`.
 | Was | Now | Notes |
 |---|---|---|
 | `.sf-grid` | `.sf-grid-auto` | The auto-fill grid primitive is renamed to remove the namespace collision with the fixed-column `.sf-grid-N` family. All modifier suffixes follow: `.sf-grid--fit` → `.sf-grid-auto--fit`, `.sf-grid--xs/s/m/l/xl/2xl` → `.sf-grid-auto--xs/…/2xl`, `.sf-grid--dense` → `.sf-grid-auto--dense`. |
-| `.sf-equal` | `.sf-fixed-cols` | Renamed for clarity — "equal" was ambiguous with `.sf-equal-height`. Modifiers follow: `.sf-equal--2/3/4/6` → `.sf-fixed-cols--2/3/4/6`. |
+| `.sf-equal` | `.sf-equal-cols` | Renamed for clarity — "equal" was ambiguous with `.sf-equal-height`. Modifiers follow: `.sf-equal--2/3/4/6` → `.sf-equal-cols--2/3/4/6`. |
 
 ### What's new (additive — no action needed)
 
