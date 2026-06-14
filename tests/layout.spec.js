@@ -288,11 +288,11 @@ test.describe('layout: .sf-grid-auto', () => {
   });
 });
 
-// ── .sf-equal-cols ───────────────────────────────────────────────────
-test.describe('layout: .sf-equal-cols', () => {
+// ── .sf-equal ───────────────────────────────────────────────────
+test.describe('layout: .sf-equal', () => {
   test('--3 produces exactly 3 equal columns', async ({ page }) => {
     await setup(page, `
-      <div id="t" class="sf-equal-cols sf-equal-cols--3" style="width:900px">
+      <div id="t" class="sf-equal sf-equal--3" style="width:900px">
         <div>A</div><div>B</div><div>C</div>
       </div>
     `);
@@ -304,7 +304,7 @@ test.describe('layout: .sf-equal-cols', () => {
 
   test('--4 produces exactly 4 equal columns', async ({ page }) => {
     await setup(page, `
-      <div id="t" class="sf-equal-cols sf-equal-cols--4" style="width:1200px">
+      <div id="t" class="sf-equal sf-equal--4" style="width:1200px">
         <div>A</div><div>B</div><div>C</div><div>D</div>
       </div>
     `);

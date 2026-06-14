@@ -496,18 +496,18 @@
      .sf-grid-N which uses container queries to stack at small
      sizes. Use when the layout must remain N columns at all
      widths; the caller is responsible for overflow handling.
-     Renamed from .sf-equal to avoid confusion with .sf-equal-height.
+     Non-collapsing fixed-column grid. Unlike .sf-grid-N, never stacks.
      Override: style="--sf-equal-cols: 3"
      ---------------------------------------------------------- */
-  .sf-equal-cols {
+  .sf-equal {
     display:               grid;
     grid-template-columns: repeat(var(--sf-equal-cols), 1fr);
-    gap:                   var(--sf-equal-cols-gap);
+    gap:                   var(--sf-equal-gap);
   }
-  .sf-equal-cols--2 { --sf-equal-cols: 2; }
-  .sf-equal-cols--3 { --sf-equal-cols: 3; }
-  .sf-equal-cols--4 { --sf-equal-cols: 4; }
-  .sf-equal-cols--6 { --sf-equal-cols: 6; }
+  .sf-equal--2 { --sf-equal-cols: 2; }
+  .sf-equal--3 { --sf-equal-cols: 3; }
+  .sf-equal--4 { --sf-equal-cols: 4; }
+  .sf-equal--6 { --sf-equal-cols: 6; }
 
   /* -- Content grid (breakout pattern) -------------------------
      Full-width grid that lets items break out to breakout or full

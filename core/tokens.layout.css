@@ -91,7 +91,7 @@
        Equal columns (fixed, non-responsive)
        ---------------------------------------------------------- */
     --sf-equal-cols: 2;
-    --sf-equal-cols-gap:  var(--sf-space-gap);
+    --sf-equal-gap:  var(--sf-space-gap);
 
     /* ----------------------------------------------------------
        Cover

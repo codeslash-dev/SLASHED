@@ -577,7 +577,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-ease-overshoot` | PUBLIC | knob | Core | — | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` |
 | `--sf-ease-spring` | PUBLIC | knob | Core | — | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` |
 | `--sf-equal-cols` | PUBLIC | knob | Layout | — | `2` |
-| `--sf-equal-cols-gap` | PUBLIC | consumption | Layout | — | `var(--sf-space-gap)` |
+| `--sf-equal-gap` | PUBLIC | consumption | Layout | — | `var(--sf-space-gap)` |
 | `--sf-field-block` | PUBLIC | consumption | Core | — | `var(--sf-space-l)` |
 | `--sf-field-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | — | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | — | `var(--sf-space-s)` |

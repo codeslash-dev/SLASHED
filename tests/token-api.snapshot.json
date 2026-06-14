@@ -392,7 +392,7 @@
   "--sf-ease-overshoot",
   "--sf-ease-spring",
   "--sf-equal-cols",
-  "--sf-equal-cols-gap",
+  "--sf-equal-gap",
   "--sf-field-block",
   "--sf-field-required-marker",
   "--sf-flow-space",
