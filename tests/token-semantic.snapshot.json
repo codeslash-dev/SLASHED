@@ -41,9 +41,9 @@
       "b": 216
     },
     "--sf-color-text--muted": {
-      "r": 97,
-      "g": 105,
-      "b": 120
+      "r": 15,
+      "g": 6,
+      "b": 2
     },
     "--sf-color-text--on-primary": {
       "r": 238,
@@ -93,9 +93,9 @@
       "b": 72
     },
     "--sf-color-text--muted": {
-      "r": 147,
-      "g": 156,
-      "b": 170
+      "r": 227,
+      "g": 237,
+      "b": 250
     },
     "--sf-color-text--on-primary": {
       "r": 3,
