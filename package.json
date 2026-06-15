@@ -68,5 +68,8 @@
     "release-it": "^20.2.0",
     "stylelint": "^17.13.0",
     "stylelint-config-standard": "^40.0.0"
+  },
+  "optionalDependencies": {
+    "lightningcss": "^1.32.0"
   }
 }

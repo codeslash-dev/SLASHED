@@ -183,13 +183,30 @@ function buildOne({ files, output, flat = false }) {
   if (lightningcss) {
     const minPath = outputPath.replace(/\.css$/, '.min.css');
     const mapName = `${path.basename(minPath)}.map`;
+
+    // Extract @layer declaration (layer order) to preserve across minification.
+    // The regex captures the @layer statement that lists all layer names.
+    const layerMatch = result.match(/@layer\s+([\w.-]+(?:\s*,\s*[\w.-]+)*)\s*;/);
+    const layerDecl = layerMatch ? `@layer ${layerMatch[1].replace(/\s+/g, '')};` : '';
+
+    // Remove @layer from source before minification to let lightningcss compress cleanly,
+    // then re-add after minification to ensure the layer order is preserved.
+    const resultWithoutLayer = result.replace(/@layer\s+[\w.-]+(?:\s*,\s*[\w.-]+)*\s*;/, '').trimStart();
+    const resultBuf = Buffer.from(resultWithoutLayer);
+
     const { code, map } = lightningcss.transform({
       filename: path.basename(output),
-      code: unminBuf,
+      code: resultBuf,
       minify: true,
       sourceMap: true,
     });
-    const codeWithRef = Buffer.concat([code, Buffer.from(`\n/*# sourceMappingURL=${mapName} */\n`)]);
+
+    // Prepend minified @layer declaration to minified code (ensures it's first).
+    const minifiedWithLayer = Buffer.concat([
+      Buffer.from(layerDecl + '\n'),
+      code
+    ]);
+    const codeWithRef = Buffer.concat([minifiedWithLayer, Buffer.from(`\n/*# sourceMappingURL=${mapName} */\n`)]);
     fs.writeFileSync(minPath, codeWithRef);
     if (map) fs.writeFileSync(`${minPath}.map`, map);
     console.log(`[bundle] → ${output.replace(/\.css$/, '.min.css')} — ${sizeReport(codeWithRef)}`);
