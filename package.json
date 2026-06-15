@@ -49,7 +49,7 @@
     "check:version": "node scripts/check-version-sync.js",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
-    "pretest": "npm run build && node --test tests/tier1-p1-srgb-validity.test.js tests/tier1-p2-coverage.test.js tests/tier1-p3-ordering.test.js tests/tier1-p7-oldengine.test.js tests/tier1-p10-contrast.test.js tests/tier1-p11-overrides.test.js tests/api-index-sync.test.js",
+    "pretest": "npm run build && node --test tests/tier1-p2-coverage.test.js tests/tier1-p7-oldengine.test.js tests/tier1-p10-contrast.test.js tests/api-index-sync.test.js",
     "test": "playwright test",
     "test:install": "playwright install --with-deps chromium firefox webkit",
     "release": "release-it",

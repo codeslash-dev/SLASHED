@@ -10,53 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1077 elements** — 854 tokens, 223 classes.
+**1044 elements** — 821 tokens, 223 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
 | PUBLIC | 906 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 170 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (854)
-
-### Color fallback (legacy HSL) (33)
-
-| Token | Tier | Role | Namespace | Default | Description |
-|---|---|---|---|---|---|
-| `--sf-action-h` | PUBLIC-ADVANCED | knob | action | `200` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-action-l` | PUBLIC-ADVANCED | knob | action | `32%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-action-s` | PUBLIC-ADVANCED | knob | action | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-base-h` | PUBLIC-ADVANCED | knob | base | `211` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-base-l` | PUBLIC-ADVANCED | knob | base | `95%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-base-s` | PUBLIC-ADVANCED | knob | base | `27%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-danger-h` | PUBLIC-ADVANCED | knob | danger | `340` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-danger-l` | PUBLIC-ADVANCED | knob | danger | `35%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-danger-s` | PUBLIC-ADVANCED | knob | danger | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-error-h` | PUBLIC-ADVANCED | knob | error | `352` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-error-l` | PUBLIC-ADVANCED | knob | error | `38%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-error-s` | PUBLIC-ADVANCED | knob | error | `93%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-info-h` | PUBLIC-ADVANCED | knob | info | `200` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-info-l` | PUBLIC-ADVANCED | knob | info | `30%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-info-s` | PUBLIC-ADVANCED | knob | info | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-neutral-h` | PUBLIC-ADVANCED | knob | neutral | `217` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-neutral-l` | PUBLIC-ADVANCED | knob | neutral | `42%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-neutral-s` | PUBLIC-ADVANCED | knob | neutral | `11%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-primary-h` | PUBLIC-ADVANCED | knob | primary | `226` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-primary-l` | PUBLIC-ADVANCED | knob | primary | `47%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-primary-s` | PUBLIC-ADVANCED | knob | primary | `99%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-secondary-h` | PUBLIC-ADVANCED | knob | secondary | `221` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-secondary-l` | PUBLIC-ADVANCED | knob | secondary | `12%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-secondary-s` | PUBLIC-ADVANCED | knob | secondary | `45%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-success-h` | PUBLIC-ADVANCED | knob | success | `134` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-success-l` | PUBLIC-ADVANCED | knob | success | `24%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-success-s` | PUBLIC-ADVANCED | knob | success | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-tertiary-h` | PUBLIC-ADVANCED | knob | tertiary | `268` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-tertiary-l` | PUBLIC-ADVANCED | knob | tertiary | `39%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-tertiary-s` | PUBLIC-ADVANCED | knob | tertiary | `84%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-warning-h` | PUBLIC-ADVANCED | knob | warning | `42` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-warning-l` | PUBLIC-ADVANCED | knob | warning | `45%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-warning-s` | PUBLIC-ADVANCED | knob | warning | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+## Tokens (821)
 
 ### Component tokens (6)
 
