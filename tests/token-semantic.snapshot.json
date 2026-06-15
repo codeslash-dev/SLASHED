@@ -112,7 +112,7 @@
     "--sf-space-l": "calc(clamp(calc(1 * pow(1.25, 1) * 1rem), calc((2 * pow(1.333, 1) - 1 * pow(1.25, 1)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, 1) * 1rem), calc(2 * pow(1.333, 1) * 1rem)) * 1)",
     "--sf-gap": "calc(clamp(calc(1 * 1rem), calc((2 - 1) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * 1rem), calc(2 * 1rem)) * 1)",
     "--sf-radius-m": "calc(8px  * 1)",
-    "--sf-border-width-1": "1px",
+    "--sf-border-width-1": "calc(1px * 1)",
     "--sf-font-weight-normal": "400",
     "--sf-font-weight-bold": "700"
   }
