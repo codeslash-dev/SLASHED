@@ -20,7 +20,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 821,
+      "tokens": 823,
       "sf_classes": 174,
       "is_classes": 40
     }
@@ -488,6 +488,7 @@
     "--sf-grid-min-s",
     "--sf-grid-min-xl",
     "--sf-grid-min-xs",
+    "--sf-gutter-width",
     "--sf-h1-font-weight",
     "--sf-h1-letter-spacing",
     "--sf-h1-line-height",
@@ -640,6 +641,7 @@
     "--sf-shadow-glow-color",
     "--sf-shadow-inner",
     "--sf-shadow-l",
+    "--sf-shadow-lightness",
     "--sf-shadow-m",
     "--sf-shadow-none",
     "--sf-shadow-s",

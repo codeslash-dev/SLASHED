@@ -289,7 +289,7 @@
       --sf-focus-ring-color:        var(--sf-surface-contrast);
       --sf-caret-color:             var(--sf-surface-contrast);
       /* in-family shadow tint — mirrors the named variants' shadow block */
-      --sf-shadow-color:            oklch(from var(--sf-surface-color) 0.15 c h);
+      --sf-shadow-color:            oklch(from var(--sf-surface-color) var(--sf-shadow-lightness) c h);
     }
     .sf-surface--primary {
       --sf-color-text:              var(--sf-color-text--on-primary);
@@ -471,16 +471,16 @@
      Inverse is intentionally omitted: its background is the page text
      color, so the neutral default already matches. */
   @supports (color: oklch(from red l c h)) {
-    .sf-surface--primary   { --sf-shadow-color: oklch(from var(--sf-color-primary)   0.15 c h); }
-    .sf-surface--secondary { --sf-shadow-color: oklch(from var(--sf-color-secondary) 0.15 c h); }
-    .sf-surface--tertiary  { --sf-shadow-color: oklch(from var(--sf-color-tertiary)  0.15 c h); }
-    .sf-surface--action    { --sf-shadow-color: oklch(from var(--sf-color-action)    0.15 c h); }
-    .sf-surface--neutral   { --sf-shadow-color: oklch(from var(--sf-color-neutral)   0.15 c h); }
-    .sf-surface--success   { --sf-shadow-color: oklch(from var(--sf-color-success)   0.15 c h); }
-    .sf-surface--warning   { --sf-shadow-color: oklch(from var(--sf-color-warning)   0.15 c h); }
-    .sf-surface--error     { --sf-shadow-color: oklch(from var(--sf-color-error)     0.15 c h); }
-    .sf-surface--info      { --sf-shadow-color: oklch(from var(--sf-color-info)      0.15 c h); }
-    .sf-surface--danger    { --sf-shadow-color: oklch(from var(--sf-color-danger)    0.15 c h); }
+    .sf-surface--primary   { --sf-shadow-color: oklch(from var(--sf-color-primary)   var(--sf-shadow-lightness) c h); }
+    .sf-surface--secondary { --sf-shadow-color: oklch(from var(--sf-color-secondary) var(--sf-shadow-lightness) c h); }
+    .sf-surface--tertiary  { --sf-shadow-color: oklch(from var(--sf-color-tertiary)  var(--sf-shadow-lightness) c h); }
+    .sf-surface--action    { --sf-shadow-color: oklch(from var(--sf-color-action)    var(--sf-shadow-lightness) c h); }
+    .sf-surface--neutral   { --sf-shadow-color: oklch(from var(--sf-color-neutral)   var(--sf-shadow-lightness) c h); }
+    .sf-surface--success   { --sf-shadow-color: oklch(from var(--sf-color-success)   var(--sf-shadow-lightness) c h); }
+    .sf-surface--warning   { --sf-shadow-color: oklch(from var(--sf-color-warning)   var(--sf-shadow-lightness) c h); }
+    .sf-surface--error     { --sf-shadow-color: oklch(from var(--sf-color-error)     var(--sf-shadow-lightness) c h); }
+    .sf-surface--info      { --sf-shadow-color: oklch(from var(--sf-color-info)      var(--sf-shadow-lightness) c h); }
+    .sf-surface--danger    { --sf-shadow-color: oklch(from var(--sf-color-danger)    var(--sf-shadow-lightness) c h); }
   }
 
   /* -- Scrim ---------------------------------------------------

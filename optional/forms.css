@@ -222,10 +222,10 @@
   /* ----------------------------------------------------------
      Button / submit / reset
      ---------------------------------------------------------- */
-  button,
-  input[type="submit"],
-  input[type="reset"],
-  input[type="button"] {
+  button:not([class*="sf-"]),
+  input[type="submit"]:not([class*="sf-"]),
+  input[type="reset"]:not([class*="sf-"]),
+  input[type="button"]:not([class*="sf-"]) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -244,27 +244,27 @@
     text-decoration: none;
   }
 
-  button:hover,
-  input[type="submit"]:hover,
-  input[type="reset"]:hover,
-  input[type="button"]:hover {
+  button:not([class*="sf-"]):hover,
+  input[type="submit"]:not([class*="sf-"]):hover,
+  input[type="reset"]:not([class*="sf-"]):hover,
+  input[type="button"]:not([class*="sf-"]):hover {
     /* --sf-color-action--hover defined in optional/tokens.palette.css; fallback to
        action colour so hover degrades gracefully if the palette file is not loaded */
     background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
-  button:focus-visible,
-  input[type="submit"]:focus-visible,
-  input[type="reset"]:focus-visible,
-  input[type="button"]:focus-visible {
+  button:not([class*="sf-"]):focus-visible,
+  input[type="submit"]:not([class*="sf-"]):focus-visible,
+  input[type="reset"]:not([class*="sf-"]):focus-visible,
+  input[type="button"]:not([class*="sf-"]):focus-visible {
     outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  button:disabled,
-  input[type="submit"]:disabled,
-  input[type="reset"]:disabled,
-  input[type="button"]:disabled {
+  button:not([class*="sf-"]):disabled,
+  input[type="submit"]:not([class*="sf-"]):disabled,
+  input[type="reset"]:not([class*="sf-"]):disabled,
+  input[type="button"]:not([class*="sf-"]):disabled {
     opacity: var(--sf-opacity-disabled);
     cursor:  not-allowed;
     /* pointer-events: none is intentionally absent: native :disabled already

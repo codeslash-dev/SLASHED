@@ -29,21 +29,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1044,
+      "total": 1046,
       "by_type": {
         "class": 223,
-        "token": 821
+        "token": 823
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 906,
+        "PUBLIC": 908,
         "PUBLIC-ADVANCED": 137
       },
       "by_role": {
-        "consumption": 590,
-        "knob": 231
+        "consumption": 591,
+        "knob": 232
       },
-      "tokens": 821,
+      "tokens": 823,
       "classes": 223,
       "sf_classes": 174,
       "is_classes": 40,
@@ -51,7 +51,7 @@
       "by_category": {
         "Accessibility": 7,
         "Component tokens": 6,
-        "Core tokens": 493,
+        "Core tokens": 495,
         "Layout primitives": 120,
         "Layout tokens": 48,
         "Macro classes": 36,
@@ -2161,8 +2161,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2191,8 +2190,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2520,7 +2518,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 10%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.10)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2548,7 +2546,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 20%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.20)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2576,7 +2574,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 30%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.30)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2604,7 +2602,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 40%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2632,7 +2630,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 5%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2660,7 +2658,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 50%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.50)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2688,7 +2686,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 60%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.60)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2716,7 +2714,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 70%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.70)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2744,7 +2742,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 80%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.80)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2772,7 +2770,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 90%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.90)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2800,7 +2798,7 @@
       "area": "palette",
       "group": "action",
       "description": "action",
-      "value": "color-mix(in oklab, var(--sf-color-action) 95%, transparent)",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2858,8 +2856,8 @@
       "area": "core",
       "group": "action",
       "description": "action",
-      "value": "var(--sf-color-action-a5)",
-      "aliasOf": "--sf-color-action-a5",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.05)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -2867,8 +2865,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2947,8 +2944,8 @@
       "area": "core",
       "group": "action",
       "description": "action",
-      "value": "var(--sf-color-action-a30)",
-      "aliasOf": "--sf-color-action-a30",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.30)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -2956,8 +2953,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2977,8 +2973,8 @@
       "area": "core",
       "group": "action",
       "description": "action",
-      "value": "var(--sf-color-action-a10)",
-      "aliasOf": "--sf-color-action-a10",
+      "value": "oklch(from var(--sf-color-action) l c h / 0.10)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -2986,8 +2982,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3165,8 +3160,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3195,8 +3189,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3524,7 +3517,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 10%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.10)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3552,7 +3545,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 20%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.20)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3580,7 +3573,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 30%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.30)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3608,7 +3601,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 40%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3636,7 +3629,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 5%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3664,7 +3657,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 50%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.50)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3692,7 +3685,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 60%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.60)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3720,7 +3713,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 70%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.70)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3748,7 +3741,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 80%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.80)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3776,7 +3769,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 90%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.90)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3804,7 +3797,7 @@
       "area": "palette",
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "color-mix(in oklab, var(--sf-color-base) 95%, transparent)",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3862,8 +3855,8 @@
       "area": "core",
       "group": "base",
       "description": "base",
-      "value": "var(--sf-color-base-a5)",
-      "aliasOf": "--sf-color-base-a5",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.05)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3871,8 +3864,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3951,8 +3943,8 @@
       "area": "core",
       "group": "base",
       "description": "base",
-      "value": "var(--sf-color-base-a30)",
-      "aliasOf": "--sf-color-base-a30",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.30)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3960,8 +3952,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3981,8 +3972,8 @@
       "area": "core",
       "group": "base",
       "description": "base",
-      "value": "var(--sf-color-base-a10)",
-      "aliasOf": "--sf-color-base-a10",
+      "value": "oklch(from var(--sf-color-base) l c h / 0.10)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3990,8 +3981,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -4304,7 +4294,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Selection & backdrop",
-      "description": "static values (ungated)",
+      "description": "Dim: classic semi-transparent black for modal backdrops, distinct from --sf-color-overlay",
       "value": "oklch(0% 0 0)",
       "aliasOf": null,
       "registered": false,
@@ -4710,7 +4700,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Selection & backdrop",
-      "description": "static values (ungated)",
+      "description": "Dim: classic semi-transparent black for modal backdrops, distinct from --sf-color-overlay",
       "value": "oklch(0 0 0 / 0.5)",
       "aliasOf": null,
       "registered": false,
@@ -5087,7 +5077,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Surfaces",
-      "description": "derived from --sf-color-base (auto-adapts)",
+      "description": "Overlay: high-opacity wash of the base color for light/dark mode safe layers",
       "value": "oklch(from var(--sf-color-base) calc(1 - l) c h)",
       "aliasOf": null,
       "registered": false,
@@ -5387,8 +5377,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5417,8 +5406,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5746,7 +5734,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 10%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5774,7 +5762,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 20%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.20)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5802,7 +5790,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 30%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5830,7 +5818,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 40%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5858,7 +5846,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 5%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5886,7 +5874,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 50%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.50)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5914,7 +5902,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 60%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.60)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5942,7 +5930,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 70%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.70)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5970,7 +5958,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 80%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.80)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5998,7 +5986,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 90%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.90)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6026,7 +6014,7 @@
       "area": "palette",
       "group": "neutral",
       "description": "neutral",
-      "value": "color-mix(in oklab, var(--sf-color-neutral) 95%, transparent)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6084,8 +6072,8 @@
       "area": "core",
       "group": "neutral",
       "description": "neutral",
-      "value": "var(--sf-color-neutral-a5)",
-      "aliasOf": "--sf-color-neutral-a5",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6093,8 +6081,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6173,8 +6160,8 @@
       "area": "core",
       "group": "neutral",
       "description": "neutral",
-      "value": "var(--sf-color-neutral-a30)",
-      "aliasOf": "--sf-color-neutral-a30",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6182,8 +6169,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6203,8 +6189,8 @@
       "area": "core",
       "group": "neutral",
       "description": "neutral",
-      "value": "var(--sf-color-neutral-a10)",
-      "aliasOf": "--sf-color-neutral-a10",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6212,8 +6198,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6352,7 +6337,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Surfaces",
-      "description": "derived from --sf-color-base (auto-adapts)",
+      "description": "Overlay: high-opacity wash of the base color for light/dark mode safe layers",
       "value": "oklch(from var(--sf-color-base) l c h / 0.9)",
       "aliasOf": null,
       "registered": false,
@@ -6420,8 +6405,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6450,8 +6434,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6779,7 +6762,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 10%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.10)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6807,7 +6790,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 20%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.20)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6835,7 +6818,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 30%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.30)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6863,7 +6846,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 40%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6891,7 +6874,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 5%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6919,7 +6902,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 50%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.50)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6947,7 +6930,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 60%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.60)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6975,7 +6958,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 70%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.70)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7003,7 +6986,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 80%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.80)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7031,7 +7014,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 90%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.90)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7059,7 +7042,7 @@
       "area": "palette",
       "group": "primary",
       "description": "primary",
-      "value": "color-mix(in oklab, var(--sf-color-primary) 95%, transparent)",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7117,8 +7100,8 @@
       "area": "core",
       "group": "primary",
       "description": "primary",
-      "value": "var(--sf-color-primary-a5)",
-      "aliasOf": "--sf-color-primary-a5",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.05)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7126,8 +7109,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7206,8 +7188,8 @@
       "area": "core",
       "group": "primary",
       "description": "primary",
-      "value": "var(--sf-color-primary-a30)",
-      "aliasOf": "--sf-color-primary-a30",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.30)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7215,8 +7197,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7236,8 +7217,8 @@
       "area": "core",
       "group": "primary",
       "description": "primary",
-      "value": "var(--sf-color-primary-a10)",
-      "aliasOf": "--sf-color-primary-a10",
+      "value": "oklch(from var(--sf-color-primary) l c h / 0.10)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7245,8 +7226,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7482,8 +7462,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7512,8 +7491,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7841,7 +7819,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 10%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7869,7 +7847,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 20%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.20)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7897,7 +7875,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 30%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7925,7 +7903,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 40%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7953,7 +7931,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 5%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7981,7 +7959,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 50%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.50)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8009,7 +7987,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 60%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.60)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8037,7 +8015,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 70%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.70)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8065,7 +8043,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 80%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.80)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8093,7 +8071,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 90%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.90)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8121,7 +8099,7 @@
       "area": "palette",
       "group": "secondary",
       "description": "secondary",
-      "value": "color-mix(in oklab, var(--sf-color-secondary) 95%, transparent)",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8179,8 +8157,8 @@
       "area": "core",
       "group": "secondary",
       "description": "secondary",
-      "value": "var(--sf-color-secondary-a5)",
-      "aliasOf": "--sf-color-secondary-a5",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8188,8 +8166,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8268,8 +8245,8 @@
       "area": "core",
       "group": "secondary",
       "description": "secondary",
-      "value": "var(--sf-color-secondary-a30)",
-      "aliasOf": "--sf-color-secondary-a30",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8277,8 +8254,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8298,8 +8274,8 @@
       "area": "core",
       "group": "secondary",
       "description": "secondary",
-      "value": "var(--sf-color-secondary-a10)",
-      "aliasOf": "--sf-color-secondary-a10",
+      "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8307,8 +8283,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8718,8 +8693,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8748,8 +8722,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -9077,7 +9050,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 10%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9105,7 +9078,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 20%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.20)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9133,7 +9106,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 30%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9161,7 +9134,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 40%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9189,7 +9162,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 5%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9217,7 +9190,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 50%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.50)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9245,7 +9218,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 60%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.60)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9273,7 +9246,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 70%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.70)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9301,7 +9274,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 80%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.80)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9329,7 +9302,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 90%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.90)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9357,7 +9330,7 @@
       "area": "palette",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) 95%, transparent)",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9415,8 +9388,8 @@
       "area": "core",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "var(--sf-color-tertiary-a5)",
-      "aliasOf": "--sf-color-tertiary-a5",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -9424,8 +9397,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -9504,8 +9476,8 @@
       "area": "core",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "var(--sf-color-tertiary-a30)",
-      "aliasOf": "--sf-color-tertiary-a30",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -9513,8 +9485,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -9534,8 +9505,8 @@
       "area": "core",
       "group": "tertiary",
       "description": "tertiary",
-      "value": "var(--sf-color-tertiary-a10)",
-      "aliasOf": "--sf-color-tertiary-a10",
+      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -9543,8 +9514,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -9770,9 +9740,9 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Text",
-      "description": "plain var aliases (ungated)",
-      "value": "var(--sf-color-neutral)",
-      "aliasOf": "--sf-color-neutral",
+      "description": "light and dark require opposite formula directions, so each side of light-dark() references its source token.",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -9944,9 +9914,9 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Text-on-color",
-      "description": "compat alias → base",
-      "value": "var(--sf-color-text--inverse)",
-      "aliasOf": "--sf-color-text--inverse",
+      "description": "sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range…",
+      "value": "oklch(from var(--sf-color-inverse) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -10379,7 +10349,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Selection & backdrop",
-      "description": "static values (ungated)",
+      "description": "Dim: classic semi-transparent black for modal backdrops, distinct from --sf-color-overlay",
       "value": "oklch(100% 0 0)",
       "aliasOf": null,
       "registered": false,
@@ -12111,7 +12081,7 @@
       "area": "core",
       "group": "Focus / form colors",
       "description": "Focus / form colors",
-      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)",
+      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -13397,6 +13367,35 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-gutter-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "gutter",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Spacing",
+      "description": "fixed",
+      "value": "var(--sf-space-l)",
+      "aliasOf": "--sf-space-l",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -14778,7 +14777,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "INTERACTION STATE FLAGS",
+      "description": "Public hooks for Style Queries. Allow components to react to states toggled on ancestors via .is-* classes.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -14807,7 +14806,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "INTERACTION STATE FLAGS",
+      "description": "Public hooks for Style Queries. Allow components to react to states toggled on ancestors via .is-* classes.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -14865,7 +14864,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "INTERACTION STATE FLAGS",
+      "description": "Public hooks for Style Queries. Allow components to react to states toggled on ancestors via .is-* classes.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -14894,7 +14893,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "INTERACTION STATE FLAGS",
+      "description": "Public hooks for Style Queries. Allow components to react to states toggled on ancestors via .is-* classes.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -17669,7 +17668,7 @@
       "area": "core",
       "group": "Shadow ramp (box-shadow, text-shadow, drop-shadow)",
       "description": "Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly…",
-      "value": "oklch(from var(--sf-color-neutral) 0.15 c h)",
+      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -17786,6 +17785,35 @@
       "group": "Shadow ramp (box-shadow, text-shadow, drop-shadow)",
       "description": "Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic.",
       "value": "0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-shadow-lightness",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "shadow",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Shadow strength",
+      "description": "Shadow lightness: 0.15 is the default density. Independent token allows tuning shadow depth globally across light/dark and surfaces.",
+      "value": "0.15",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -19040,8 +19068,8 @@
       "area": "core",
       "group": "Spacing",
       "description": "fixed",
-      "value": "var(--sf-space-l)",
-      "aliasOf": "--sf-space-l",
+      "value": "var(--sf-gutter-width)",
+      "aliasOf": "--sf-gutter-width",
       "registered": false,
       "animatable": false,
       "syntax": null,
