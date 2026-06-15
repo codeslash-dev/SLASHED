@@ -1,4 +1,5 @@
 # SLASHED CSS Framework
+<img width="1536" height="268" alt="logo" src="https://github.com/user-attachments/assets/7a1e419b-ab07-439b-956a-9c33deab99ae" />
 
 **S**tandalone · **L**ean · **A**gnostic · **S**tructured · **H**ybrid · **E**xplicit · **D**eterministic
 
