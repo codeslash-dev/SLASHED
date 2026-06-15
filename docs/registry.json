@@ -20,7 +20,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 821,
+      "tokens": 822,
       "sf_classes": 174,
       "is_classes": 40
     }
@@ -167,7 +167,6 @@
     "--sf-color-base-xdark",
     "--sf-color-base-xlight",
     "--sf-color-bg",
-    "--sf-color-bg--active",
     "--sf-color-bg--disabled",
     "--sf-color-bg--focus",
     "--sf-color-bg--hover",
@@ -488,6 +487,7 @@
     "--sf-grid-min-s",
     "--sf-grid-min-xl",
     "--sf-grid-min-xs",
+    "--sf-gutter-width",
     "--sf-h1-font-weight",
     "--sf-h1-letter-spacing",
     "--sf-h1-line-height",
@@ -644,6 +644,7 @@
     "--sf-shadow-none",
     "--sf-shadow-s",
     "--sf-shadow-strength",
+    "--sf-shadow-strength-l",
     "--sf-shadow-xl",
     "--sf-shadow-xs",
     "--sf-sidebar-gap",

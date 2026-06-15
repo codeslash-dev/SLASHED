@@ -208,24 +208,37 @@
      Override path: to use a custom chevron colour or icon, override
      background-image on `select:not([multiple], [size])` in your own CSS. */
   select:not([multiple], [size]) {
-    background-repeat: no-repeat;
-    background-position: right var(--sf-space-s) center;
-    background-size: 1em;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='FieldText' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+    position: relative;
+    background-image: none;
   }
-  /* RTL: mirror the chevron to the inline-end (left) edge. */
-  :dir(rtl) select:not([multiple], [size]) {
-    background-position: left var(--sf-space-s) center;
+
+  /* Custom chevron via mask-image: allows styling with background-color
+     (currentColor) which is more resilient in Safari than system colors
+     inside data-URIs. */
+  select:not([multiple], [size])::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: var(--sf-space-s);
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    inline-size: 1em;
+    block-size: 1em;
+    background-color: currentcolor;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    pointer-events: none;
   }
 
 
   /* ----------------------------------------------------------
      Button / submit / reset
      ---------------------------------------------------------- */
-  button,
-  input[type="submit"],
-  input[type="reset"],
-  input[type="button"] {
+  button:not([class*="sf-"]),
+  input[type="submit"]:not([class*="sf-"]),
+  input[type="reset"]:not([class*="sf-"]),
+  input[type="button"]:not([class*="sf-"]) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -244,27 +257,27 @@
     text-decoration: none;
   }
 
-  button:hover,
-  input[type="submit"]:hover,
-  input[type="reset"]:hover,
-  input[type="button"]:hover {
+  button:not([class*="sf-"]):hover,
+  input[type="submit"]:not([class*="sf-"]):hover,
+  input[type="reset"]:not([class*="sf-"]):hover,
+  input[type="button"]:not([class*="sf-"]):hover {
     /* --sf-color-action--hover defined in optional/tokens.palette.css; fallback to
        action colour so hover degrades gracefully if the palette file is not loaded */
     background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
-  button:focus-visible,
-  input[type="submit"]:focus-visible,
-  input[type="reset"]:focus-visible,
-  input[type="button"]:focus-visible {
+  button:not([class*="sf-"]):focus-visible,
+  input[type="submit"]:not([class*="sf-"]):focus-visible,
+  input[type="reset"]:not([class*="sf-"]):focus-visible,
+  input[type="button"]:not([class*="sf-"]):focus-visible {
     outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  button:disabled,
-  input[type="submit"]:disabled,
-  input[type="reset"]:disabled,
-  input[type="button"]:disabled {
+  button:not([class*="sf-"]):disabled,
+  input[type="submit"]:not([class*="sf-"]):disabled,
+  input[type="reset"]:not([class*="sf-"]):disabled,
+  input[type="button"]:not([class*="sf-"]):disabled {
     opacity: var(--sf-opacity-disabled);
     cursor:  not-allowed;
     /* pointer-events: none is intentionally absent: native :disabled already

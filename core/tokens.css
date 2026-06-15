@@ -214,7 +214,9 @@
      media query. Do not set directly. */
   @property --sf-is-dark { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
-  /* @property — INTERACTION STATE FLAGS */
+  /* @property — INTERACTION STATE FLAGS
+     Public hooks for Style Queries. Allow components to react to states
+     toggled on ancestors via .is-* classes. */
   @property --sf-is-active  { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -335,14 +337,12 @@
     /* ----------------------------------------------------------
        Text — plain var aliases (ungated)
        ---------------------------------------------------------- */
-    --sf-color-text--muted: var(--sf-color-neutral);
 
     /* ----------------------------------------------------------
        Text-on-color — plain var aliases (ungated)
        ---------------------------------------------------------- */
     --sf-color-text--on-base:    var(--sf-color-text);
     --sf-color-text--on-surface: var(--sf-color-text--on-base);   /* compat alias → base */
-    --sf-color-text--on-inverse: var(--sf-color-text--inverse);
 
     /* ----------------------------------------------------------
        Borders — plain var aliases (ungated)
@@ -370,6 +370,7 @@
        ---------------------------------------------------------- */
     --sf-color-selection-text: inherit;
     --sf-color-mark-text:      inherit;
+    /* Dim: classic semi-transparent black for modal backdrops, distinct from --sf-color-overlay */
     --sf-color-dim:            oklch(0 0 0 / 0.5);
     --sf-color-white:          oklch(100% 0 0);
     --sf-color-black:          oklch(0% 0 0);
@@ -385,7 +386,8 @@
        +0.17 in dark mode via --sf-is-dark. Override with a calc() to
        preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).
        ---------------------------------------------------------- */
-    --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
+    --sf-shadow-strength-l: 0.08;
+    --sf-shadow-strength:   calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17);
     /* ----------------------------------------------------------
        Shadow glow color — tint used by --sf-shadow-glow. Override to
        retint glows; opacity/dark-mode adaptation is controlled by
@@ -403,7 +405,7 @@
        Focus / form colors
        ---------------------------------------------------------- */
     --sf-focus-ring-color:  var(--sf-color-action);
-    --sf-focus-ring-shadow: 0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg),
+    --sf-focus-ring-shadow: 0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-light, #fff)),
                             0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color);
     --sf-caret-color:       var(--sf-color-action);
 
@@ -442,6 +444,7 @@
         oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
         oklch(from var(--sf-color-neutral)       clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h)
       );
+      --sf-color-text--muted: oklch(from var(--sf-color-text) l c h / 0.65);
       --sf-color-text--secondary: light-dark(
         oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
         oklch(from var(--sf-color-neutral)       clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h)
@@ -569,6 +572,7 @@
       --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
       --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
       --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
+      /* Overlay: high-opacity wash of the base color for light/dark mode safe layers */
       --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
       --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
 
@@ -587,7 +591,6 @@
          Interactive states — derived from --sf-color-neutral (auto-adapts)
          ---------------------------------------------------------- */
       --sf-color-bg--hover:    oklch(from var(--sf-color-neutral) l c h / 0.08);
-      --sf-color-bg--active:   oklch(from var(--sf-color-neutral) l c h / 0.12);
       --sf-color-bg--selected: oklch(from var(--sf-color-action) l c h / 0.1);
       --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
 
@@ -678,6 +681,7 @@
       --sf-color-text--on-error:     oklch(from var(--sf-color-error)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-info:      oklch(from var(--sf-color-info)       clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-inverse:   oklch(from var(--sf-color-inverse)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
 
     }
   }
@@ -940,7 +944,8 @@
        ---------------------------------------------------------- */
     --sf-space-none:   0;
     --sf-space-px:     1px;
-    --sf-space-gutter: var(--sf-space-l);
+    --sf-gutter-width: var(--sf-space-l);
+    --sf-space-gutter: var(--sf-gutter-width);
 
     /* Spacing — fluid (generative). Same engine as type; space uses base_max=2
        (more dramatic growth than type's 1.25). Step exponent N relative to
@@ -1289,7 +1294,7 @@
          handles dark-mode intensity. Override to a brand colour for explicitly
          tinted shadows — keep it dark or you get bright slabs:
          oklch(from var(--sf-color-primary) 0.15 c h). */
-      --sf-shadow-color: oklch(from var(--sf-color-neutral) 0.15 c h);
+      --sf-shadow-color: oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h);
 
       /* Elevation shadow ramp — box-shadow presets from xs to 2xl.
          Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. */
@@ -1500,6 +1505,14 @@
        the dialog/popover components (slashed.components). Progressive
        enhancement — unsupporting engines simply show/hide instantly.
        Chrome/Edge/Safari and Firefox (2025+) support allow-discrete. */
+    /* Top-layer transition building block (dialog, [popover]).
+       transition-behavior: allow-discrete keeps the discrete `display`
+       and `overlay` properties in the transition so entry animations can
+       fire and exit animations finish before the element leaves the top
+       layer. Compose it into a component transition alongside the visual
+       properties.
+       NOTE: Requires @starting-style to be defined on the element for
+       the entrance transition to trigger. */
     --sf-transition-overlay:
       overlay var(--sf-duration-normal) allow-discrete,
       display var(--sf-duration-normal) allow-discrete;
