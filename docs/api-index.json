@@ -17812,7 +17812,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Shadow strength",
-      "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
+      "description": "Shadow lightness: 0.15 is the default density. Independent token allows tuning shadow depth globally across light/dark and surfaces.",
       "value": "0.15",
       "aliasOf": null,
       "registered": false,

@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "d84d06e41735",
+    "tokensHash": "c2f96e4e0320",
     "bundles": [
       "essential",
       "full",
@@ -14635,7 +14635,7 @@
       "namespace": "shadow",
       "category": "Core tokens",
       "group": "Shadow strength",
-      "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
+      "description": "Shadow lightness: 0.15 is the default density. Independent token allows tuning shadow depth globally across light/dark and surfaces.",
       "note": "",
       "value": "0.15",
       "aliasOf": null,

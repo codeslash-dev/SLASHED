@@ -387,6 +387,8 @@
        preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).
        ---------------------------------------------------------- */
     --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
+    /* Shadow lightness: 0.15 is the default density. Independent token allows
+       tuning shadow depth globally across light/dark and surfaces. */
     --sf-shadow-lightness:  0.15;
     /* ----------------------------------------------------------
        Shadow glow color — tint used by --sf-shadow-glow. Override to
