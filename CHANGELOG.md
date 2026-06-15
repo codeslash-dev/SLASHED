@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.44] - 2026-06-15
+
+### Features
+- **api-freeze:** implement all Category 1 pre-freeze public API changes
+- **preview:** comprehensive framework showcase with 7 tabbed sections
+- notify slashed-plugins when configurator source changes
+- **configurator:** make consume tokens read-only
+
+### Bug Fixes
+- **tests:** sync token-api snapshot with new tokens from merged PR
+- **tests:** update snapshots for new h*-max-width tokens and border-scale
+- **tests:** update api-index-sync and p7-oldengine after HSL fallback removal
+- **docs:** update all references to renamed tokens and layout classes
+- **a11y:** forced-colors fixes for text-gradient, spinner, and button borders
+- **api-freeze:** move component tokens to tokens.components.css, drop premature utility classes
+- **preview:** address CodeRabbit a11y findings
+- add permissions block to notify workflow (CodeQL)
+- **tests:** use power-knob number input for preset-deactivation test
+- **tests:** use shadow-strength knob for preset-deactivation test
+- **tests:** update presets test to use a knob token
+
+### Reverts
+- **layout:** restore .sf-equal class and --sf-equal-cols/--sf-equal-gap tokens
+
 ## [0.5.43] - 2026-06-13
 
 ### Features
