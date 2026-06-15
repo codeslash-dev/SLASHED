@@ -20,7 +20,7 @@
      --sf-color-border--focus, --sf-color-border--subtle,
      --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
      --sf-color-text--disabled, --sf-color-text--on-action,
-     --sf-color-bg--disabled, --sf-color-action, --sf-color-action-hover,
+     --sf-color-bg--disabled, --sf-color-action, --sf-color-action--hover,
      --sf-color-error,
      --sf-field-border-color, --sf-opacity-disabled,
      --sf-space-xs, --sf-space-s, --sf-space-m,
@@ -248,9 +248,9 @@
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover {
-    /* --sf-color-action-hover defined in optional/tokens.palette.css; fallback to
+    /* --sf-color-action--hover defined in optional/tokens.palette.css; fallback to
        action colour so hover degrades gracefully if the palette file is not loaded */
-    background-color: var(--sf-color-action-hover, var(--sf-color-action));
+    background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
   button:focus-visible,
@@ -305,7 +305,7 @@
     transition: var(--sf-transition-colors);
   }
   input[type="file"]::file-selector-button:hover {
-    background-color: var(--sf-color-action-hover, var(--sf-color-action));
+    background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
 

@@ -443,9 +443,9 @@ test.describe('Layout — Grid', () => {
     expect(Math.abs(secondBox.y - firstBox.y)).toBeLessThan(5);
   });
 
-  test('.sf-grid-1-2 ratio grid has wider second column', async ({ page }) => {
+  test('.sf-grid-cols-1-2 ratio grid has wider second column', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const grid = page.locator('#layout-extra .sf-grid-1-2').first();
+    const grid = page.locator('#layout-extra .sf-grid-cols-1-2').first();
     const display = await getStyle(grid, 'display');
     expect(display).toBe('grid');
     const children = grid.locator('.demo-box');

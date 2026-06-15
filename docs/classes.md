@@ -82,15 +82,15 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-grid--s` |
 | `.sf-grid--xl` |
 | `.sf-grid--xs` |
-| `.sf-grid-1` |
-| `.sf-grid-1-2` |
-| `.sf-grid-1-3` |
-| `.sf-grid-2` |
-| `.sf-grid-2-1` |
-| `.sf-grid-3` |
-| `.sf-grid-3-1` |
-| `.sf-grid-4` |
-| `.sf-grid-6` |
+| `.sf-grid-cols-1` |
+| `.sf-grid-cols-1-2` |
+| `.sf-grid-cols-1-3` |
+| `.sf-grid-cols-2` |
+| `.sf-grid-cols-2-1` |
+| `.sf-grid-cols-3` |
+| `.sf-grid-cols-3-1` |
+| `.sf-grid-cols-4` |
+| `.sf-grid-cols-6` |
 | `.sf-icon` |
 | `.sf-icon--2xl` |
 | `.sf-icon--boxed` |
@@ -225,13 +225,15 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Accessibility (`core/accessibility.css`)
 
-3 classes.
+5 classes.
 
 | Class |
 |---|
+| `.is-loading` |
 | `.sf-clickable-parent` |
 | `.sf-focus-parent` |
 | `.sf-focus-shadow` |
+| `.sf-text-gradient` |
 
 ## Motion / entrances (`core/motion.css`)
 

@@ -10,55 +10,28 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1064 elements** — 841 tokens, 223 classes.
+**1044 elements** — 821 tokens, 223 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 893 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 170 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 906 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (841)
+## Tokens (821)
 
-### Color fallback (legacy HSL) (33)
+### Component tokens (6)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
-| `--sf-action-h` | PUBLIC-ADVANCED | knob | action | `200` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-action-l` | PUBLIC-ADVANCED | knob | action | `32%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-action-s` | PUBLIC-ADVANCED | knob | action | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-base-h` | PUBLIC-ADVANCED | knob | base | `211` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-base-l` | PUBLIC-ADVANCED | knob | base | `95%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-base-s` | PUBLIC-ADVANCED | knob | base | `27%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-danger-h` | PUBLIC-ADVANCED | knob | danger | `340` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-danger-l` | PUBLIC-ADVANCED | knob | danger | `35%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-danger-s` | PUBLIC-ADVANCED | knob | danger | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-error-h` | PUBLIC-ADVANCED | knob | error | `352` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-error-l` | PUBLIC-ADVANCED | knob | error | `38%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-error-s` | PUBLIC-ADVANCED | knob | error | `93%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-info-h` | PUBLIC-ADVANCED | knob | info | `200` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-info-l` | PUBLIC-ADVANCED | knob | info | `30%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-info-s` | PUBLIC-ADVANCED | knob | info | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-neutral-h` | PUBLIC-ADVANCED | knob | neutral | `217` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-neutral-l` | PUBLIC-ADVANCED | knob | neutral | `42%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-neutral-s` | PUBLIC-ADVANCED | knob | neutral | `11%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-primary-h` | PUBLIC-ADVANCED | knob | primary | `226` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-primary-l` | PUBLIC-ADVANCED | knob | primary | `47%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-primary-s` | PUBLIC-ADVANCED | knob | primary | `99%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-secondary-h` | PUBLIC-ADVANCED | knob | secondary | `221` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-secondary-l` | PUBLIC-ADVANCED | knob | secondary | `12%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-secondary-s` | PUBLIC-ADVANCED | knob | secondary | `45%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-success-h` | PUBLIC-ADVANCED | knob | success | `134` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-success-l` | PUBLIC-ADVANCED | knob | success | `24%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-success-s` | PUBLIC-ADVANCED | knob | success | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-tertiary-h` | PUBLIC-ADVANCED | knob | tertiary | `268` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-tertiary-l` | PUBLIC-ADVANCED | knob | tertiary | `39%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-tertiary-s` | PUBLIC-ADVANCED | knob | tertiary | `84%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-warning-h` | PUBLIC-ADVANCED | knob | warning | `42` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-warning-l` | PUBLIC-ADVANCED | knob | warning | `45%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
-| `--sf-warning-s` | PUBLIC-ADVANCED | knob | warning | `100%` | override to apply brand colours Values are approximate HSL equivalents of the OKLCH source tokens. |
+| `--sf-button-padding-block` | PUBLIC | consumption | button | `var(--sf-space-xs)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-button-padding-inline` | PUBLIC | consumption | button | `var(--sf-space-m)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-button-radius` | PUBLIC | consumption | button | `var(--sf-radius-m)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-field-padding-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
+| `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
+| `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 
-### Core tokens (486)
+### Core tokens (493)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -95,14 +68,15 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-body-strong-weight` | PUBLIC | consumption | body | `var(--sf-font-weight-bold)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-body-text-wrap` | PUBLIC | knob | body | `pretty` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-border` | PUBLIC | consumption | border | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)` | convenience tokens composing width, style, and color into a single value for the common cases. subtle / strong vary COLOR CONTRAST only — all three use --sf-border-width-1 (1px). This matches the IBM Carbon and GitHub Primer convention where subtle/strong name a color axis, not… |
+| `--sf-border-scale` | PUBLIC | knob | border | `1` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
 | `--sf-border-strong` | PUBLIC | consumption | border | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)` | convenience tokens composing width, style, and color into a single value for the common cases. subtle / strong vary COLOR CONTRAST only — all three use --sf-border-width-1 (1px). This matches the IBM Carbon and GitHub Primer convention where subtle/strong name a color axis, not… |
 | `--sf-border-style` | PUBLIC | knob | border | `solid` | global knob paired with --sf-border-width-* and --sf-color-border*. Consumer BEM: .my-card { border: var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border); } Set once on :root to restyle every framework border, or override per element. For one-off decorative… |
 | `--sf-border-subtle` | PUBLIC | consumption | border | `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)` | convenience tokens composing width, style, and color into a single value for the common cases. subtle / strong vary COLOR CONTRAST only — all three use --sf-border-width-1 (1px). This matches the IBM Carbon and GitHub Primer convention where subtle/strong name a color axis, not… |
-| `--sf-border-width-1` | PUBLIC | knob | border | `1px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
-| `--sf-border-width-2` | PUBLIC | knob | border | `2px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
-| `--sf-border-width-3` | PUBLIC | knob | border | `3px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
-| `--sf-border-width-4` | PUBLIC | knob | border | `4px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
-| `--sf-border-width-hairline` | PUBLIC | knob | border | `0.5px` | --sf-border-width-hairline: device-pixel-dependent. On 1x DPR displays (Windows non-Retina) the browser will round 0.5px up to 1px, so it visually matches --sf-border-width-1. On 2x+ DPR (macOS/iOS Retina, most modern phones) it renders as a true half-pixel hairline. Use it for… |
+| `--sf-border-width-1` | PUBLIC | consumption | border | `calc(1px * var(--sf-border-scale, 1))` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
+| `--sf-border-width-2` | PUBLIC | consumption | border | `calc(2px * var(--sf-border-scale, 1))` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
+| `--sf-border-width-3` | PUBLIC | consumption | border | `calc(3px * var(--sf-border-scale, 1))` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
+| `--sf-border-width-4` | PUBLIC | consumption | border | `calc(4px * var(--sf-border-scale, 1))` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
+| `--sf-border-width-hairline` | PUBLIC | knob | border | `0.5px` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
 | `--sf-caret-color` | PUBLIC | consumption | caret | `var(--sf-color-action)` | Focus / form colors |
 | `--sf-code-font-size` | PUBLIC | knob | code | `0.875em` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-col-rule-width-l` | PUBLIC | consumption | col | `var(--sf-border-width-3)` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
@@ -112,10 +86,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-col-width-m` | PUBLIC | knob | col | `24ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
 | `--sf-col-width-s` | PUBLIC | knob | col | `16ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
 | `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
-| `--sf-color-action-active` | PUBLIC | consumption | color | `var(--sf-color-action-xdark)` | action |
+| `--sf-color-action--active` | PUBLIC | consumption | color | `var(--sf-color-action-xdark)` | action |
+| `--sf-color-action--hover` | PUBLIC | consumption | color | `var(--sf-color-action-darker)` | action |
 | `--sf-color-action-darker` | PUBLIC | consumption | color | `var(--sf-color-action-600)` | action |
 | `--sf-color-action-ghost` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | action |
-| `--sf-color-action-hover` | PUBLIC | consumption | color | `var(--sf-color-action-darker)` | action |
 | `--sf-color-action-light` | PUBLIC | knob | color | `oklch(0.50 0.22 235)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
 | `--sf-color-action-lighter` | PUBLIC | consumption | color | `var(--sf-color-action-400)` | action |
 | `--sf-color-action-muted` | PUBLIC | consumption | color | `var(--sf-color-action-a30)` | action |
@@ -125,10 +99,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | action |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | action |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
-| `--sf-color-base-active` | PUBLIC | consumption | color | `var(--sf-color-base-xdark)` | base |
+| `--sf-color-base--active` | PUBLIC | consumption | color | `var(--sf-color-base-xdark)` | base |
+| `--sf-color-base--hover` | PUBLIC | consumption | color | `var(--sf-color-base-darker)` | base |
 | `--sf-color-base-darker` | PUBLIC | consumption | color | `var(--sf-color-base-600)` | base |
 | `--sf-color-base-ghost` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | base |
-| `--sf-color-base-hover` | PUBLIC | consumption | color | `var(--sf-color-base-darker)` | base |
 | `--sf-color-base-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | initial-value is 0.96 (not 0.99) so the +0.02/+0.04 surface offsets produce visually distinct levels in light mode. At 0.99 all lighter surfaces clamp to pure white and become indistinguishable. 0.96 gives: bg=0.98, inset=0.94, raised=1.0→white — all distinct. Consumers using… |
 | `--sf-color-base-lighter` | PUBLIC | consumption | color | `var(--sf-color-base-400)` | base |
 | `--sf-color-base-muted` | PUBLIC | consumption | color | `var(--sf-color-base-a30)` | base |
@@ -180,10 +154,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-mark-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.25)` | Selection & mark |
 | `--sf-color-mark-text` | PUBLIC | knob | color | `inherit` | static values (ungated) |
 | `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
-| `--sf-color-neutral-active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | neutral |
+| `--sf-color-neutral--active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | neutral |
+| `--sf-color-neutral--hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | neutral |
 | `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | neutral |
 | `--sf-color-neutral-ghost` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | neutral |
-| `--sf-color-neutral-hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | neutral |
 | `--sf-color-neutral-light` | PUBLIC | knob | color | `oklch(0.52 0.025 260)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
 | `--sf-color-neutral-lighter` | PUBLIC | consumption | color | `var(--sf-color-neutral-400)` | neutral |
 | `--sf-color-neutral-muted` | PUBLIC | consumption | color | `var(--sf-color-neutral-a30)` | neutral |
@@ -194,10 +168,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | neutral |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | derived from --sf-color-base (auto-adapts) |
 | `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
-| `--sf-color-primary-active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | primary |
+| `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | primary |
+| `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | primary |
 | `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | primary |
 | `--sf-color-primary-ghost` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | primary |
-| `--sf-color-primary-hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | primary |
 | `--sf-color-primary-light` | PUBLIC | knob | color | `oklch(0.47 0.27 264)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
 | `--sf-color-primary-lighter` | PUBLIC | consumption | color | `var(--sf-color-primary-400)` | primary |
 | `--sf-color-primary-muted` | PUBLIC | consumption | color | `var(--sf-color-primary-a30)` | primary |
@@ -209,10 +183,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | derived from --sf-color-base (auto-adapts) |
 | `--sf-color-scheme` | PUBLIC | knob | color | `light dark` | Color scheme |
 | `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
-| `--sf-color-secondary-active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | secondary |
+| `--sf-color-secondary--active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | secondary |
+| `--sf-color-secondary--hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | secondary |
 | `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | secondary |
 | `--sf-color-secondary-ghost` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | secondary |
-| `--sf-color-secondary-hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | secondary |
 | `--sf-color-secondary-light` | PUBLIC | knob | color | `oklch(0.22 0.04 264)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
 | `--sf-color-secondary-lighter` | PUBLIC | consumption | color | `var(--sf-color-secondary-400)` | secondary |
 | `--sf-color-secondary-muted` | PUBLIC | consumption | color | `var(--sf-color-secondary-a30)` | secondary |
@@ -230,10 +204,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-success-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.12)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-surface` | PUBLIC | consumption | color | `var(--sf-color-base)` | Surface alias (plain var — no IACVT, stays ungated) |
 | `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
-| `--sf-color-tertiary-active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | tertiary |
+| `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | tertiary |
+| `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | tertiary |
 | `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | tertiary |
 | `--sf-color-tertiary-ghost` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | tertiary |
-| `--sf-color-tertiary-hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | tertiary |
 | `--sf-color-tertiary-light` | PUBLIC | knob | color | `oklch(0.42 0.22 295)` | Override these 6 tokens to rebrand — dark mode auto-derives. Optionally set --sf-color-X-dark (no @property) for full control. |
 | `--sf-color-tertiary-lighter` | PUBLIC | consumption | color | `var(--sf-color-tertiary-400)` | tertiary |
 | `--sf-color-tertiary-muted` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a30)` | tertiary |
@@ -354,26 +328,32 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-h1-font-weight` | PUBLIC | consumption | h1 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h1-letter-spacing` | PUBLIC | consumption | h1 | `var(--sf-tracking-tight)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h1-line-height` | PUBLIC | consumption | h1 | `var(--sf-leading-tight)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
+| `--sf-h1-max-width` | PUBLIC | knob | h1 | `none` | public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css. |
 | `--sf-h1-size` | PUBLIC | consumption | h1 | `var(--sf-text-4xl)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h2-font-weight` | PUBLIC | consumption | h2 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h2-letter-spacing` | PUBLIC | consumption | h2 | `var(--sf-tracking-tight)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h2-line-height` | PUBLIC | consumption | h2 | `var(--sf-leading-tight)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
+| `--sf-h2-max-width` | PUBLIC | knob | h2 | `none` | public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css. |
 | `--sf-h2-size` | PUBLIC | consumption | h2 | `var(--sf-text-3xl)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h3-font-weight` | PUBLIC | consumption | h3 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h3-letter-spacing` | PUBLIC | consumption | h3 | `var(--sf-tracking-normal)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h3-line-height` | PUBLIC | consumption | h3 | `var(--sf-leading-snug)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
+| `--sf-h3-max-width` | PUBLIC | knob | h3 | `none` | public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css. |
 | `--sf-h3-size` | PUBLIC | consumption | h3 | `var(--sf-text-2xl)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h4-font-weight` | PUBLIC | consumption | h4 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h4-letter-spacing` | PUBLIC | consumption | h4 | `var(--sf-tracking-normal)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h4-line-height` | PUBLIC | consumption | h4 | `var(--sf-leading-snug)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
+| `--sf-h4-max-width` | PUBLIC | knob | h4 | `none` | public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css. |
 | `--sf-h4-size` | PUBLIC | consumption | h4 | `var(--sf-text-xl)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h5-font-weight` | PUBLIC | consumption | h5 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h5-letter-spacing` | PUBLIC | consumption | h5 | `var(--sf-tracking-normal)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h5-line-height` | PUBLIC | consumption | h5 | `var(--sf-leading-normal)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
+| `--sf-h5-max-width` | PUBLIC | knob | h5 | `none` | public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css. |
 | `--sf-h5-size` | PUBLIC | consumption | h5 | `var(--sf-text-l)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h6-font-weight` | PUBLIC | consumption | h6 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h6-letter-spacing` | PUBLIC | consumption | h6 | `var(--sf-tracking-wide)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h6-line-height` | PUBLIC | consumption | h6 | `var(--sf-leading-normal)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
+| `--sf-h6-max-width` | PUBLIC | knob | h6 | `none` | public control hooks. Default `none` = no constraint. Set to a ch value to cap heading width independently of the prose container: :root { --sf-h1-max-width: 20ch; --sf-h2-max-width: 28ch; } Consumed by h1–h6 in core/base.css. |
 | `--sf-h6-size` | PUBLIC | consumption | h6 | `var(--sf-text-m)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-header-height` | PUBLIC | consumption | header | `clamp( var(--sf-header-height-mobile), calc((var(--sf-header-height-desktop) - var(--sf-header-height-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (--sf-fluid-{min,max}-vw), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. clamp() keeps the… |
 | `--sf-header-height-desktop` | PUBLIC | knob | header | `5rem` | Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (--sf-fluid-{min,max}-vw), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. clamp() keeps the… |
@@ -949,11 +929,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-divider--soft` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
 | `.sf-divider--strong` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
 | `.sf-divider--vertical` | PUBLIC | layout | Divider | Standalone separator primitive. Token-driven; pairs with the `--sf-divider-*` tokens and mirrors the `hr` element default. |
-| `.sf-equal` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--2` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--3` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--4` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--6` | PUBLIC | layout | Equal columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--2` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--3` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--4` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal--6` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
 | `.sf-frame` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
 | `.sf-frame--3-2` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
 | `.sf-frame--4-3` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
@@ -970,24 +950,24 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-gap--s` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
 | `.sf-gap--xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
 | `.sf-gap--xs` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-grid` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--2xl` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--dense` | PUBLIC | layout | Grid | Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including the fixed-column .sf-grid-N. |
-| `.sf-grid--fit` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--l` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--m` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--s` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--xl` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid--xs` | PUBLIC | layout | Grid | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch to fill the gap. Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem" |
-| `.sf-grid-1` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
-| `.sf-grid-1-2` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
-| `.sf-grid-1-3` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
-| `.sf-grid-2` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
-| `.sf-grid-2-1` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
-| `.sf-grid-3` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
-| `.sf-grid-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
-| `.sf-grid-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
-| `.sf-grid-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--2xl` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--dense` | PUBLIC | layout | Grid (auto) | Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including .sf-grid-cols-N. |
+| `.sf-grid--fit` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--l` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--m` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--s` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--xl` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid--xs` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
+| `.sf-grid-cols-1` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-cols-1-2` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-cols-1-3` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-cols-2` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-cols-2-1` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-cols-3` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-cols-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
+| `.sf-grid-cols-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-cols-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
 | `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
 | `.sf-icon--2xl` | PUBLIC | layout | Icon | Inline icon sizing primitive. Uses em-based --sf-icon-* tokens so an icon scales with its surrounding text. Defaults to -m. |
 | `.sf-icon--boxed` | PUBLIC | layout | Icon | Boxed variant — wraps the icon in a padded, bordered, optionally coloured frame. The declared inline-/block-size is the OUTER size (icon + 2× pad); border-box ensures padding is subtracted inward so the glyph content area stays at exactly --sf-icon-size. <span class="sf-icon… |
