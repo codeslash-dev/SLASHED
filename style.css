@@ -23,9 +23,9 @@
     --sf-section-scale: 1.2;
 
     /* Custom Design Tokens */
-    --glass-bg: oklch(100% 0 0 / 0.03);
-    --glass-border: oklch(100% 0 0 / 0.08);
-    --glass-blur: 12px;
+    --sf-glass-bg: oklch(100% 0 0 / 0.03);
+    --sf-glass-border: oklch(100% 0 0 / 0.08);
+    --sf-glass-blur: 12px;
 
     --sf-color-cream: oklch(98% 0.02 60);
   }
@@ -73,11 +73,11 @@
   .btn--ghost-light {
     background: transparent;
     border: 1px solid oklch(100% 0 0 / 0.2);
-    color: white;
+    color: var(--sf-color-neutral-dark);
   }
 
   .cs-card--glass {
-    background: oklch(100% 0 0 / 0.05);
+    --sf-box-bg: oklch(100% 0 0 / 0.05);
     padding: var(--sf-space-xl);
   }
 
@@ -98,7 +98,7 @@
     z-index: var(--sf-z-fixed);
     background: oklch(from var(--sf-color-base-dark) l c h / 0.8);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--sf-glass-border);
     padding-block: var(--sf-space-s);
   }
 
@@ -112,7 +112,7 @@
     font-weight: 800;
     font-size: var(--sf-text-l);
     font-family: var(--sf-font-heading);
-    color: white;
+    color: var(--sf-color-neutral-dark);
   }
 
   .cs-nav__logo span {
@@ -131,7 +131,7 @@
   .cs-nav__link {
     font-size: var(--sf-text-s);
     font-weight: 500;
-    color: white;
+    color: var(--sf-color-neutral-dark);
     opacity: 0.8;
   }
 
@@ -151,13 +151,13 @@
 
   .cs-nav__burger {
     display: none;
-    color: white;
+    color: var(--sf-color-neutral-dark);
     background: transparent;
     border: none;
     cursor: pointer;
   }
 
-  @media (max-width: 900px) {
+  @media (width <= 900px) {
     .cs-nav__links {
       display: none;
       position: absolute;
@@ -167,7 +167,7 @@
       background: var(--sf-color-base-dark);
       flex-direction: column;
       padding: var(--sf-space-xl);
-      border-bottom: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--sf-glass-border);
     }
 
     .cs-nav__links.is-open {
@@ -206,6 +206,7 @@
     object-fit: cover;
     filter: brightness(0.6);
     will-change: transform;
+    --sf-parallax-depth: 0.1;
   }
 
   .cs-hero__content {
@@ -217,7 +218,7 @@
   .cs-hero__stats {
     margin-top: var(--sf-space-xl);
     padding-top: var(--sf-space-xl);
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid var(--sf-glass-border);
   }
 
   .cs-stat {
@@ -230,12 +231,12 @@
   }
 
   .cs-stat__label {
-    color: var(--cs-color-text-soft);
+    color: var(--sf-color-text-soft);
     text-transform: uppercase;
   }
 
   .cs-hero__hl {
-    color: white;
+    color: var(--sf-color-neutral-dark);
     text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
     margin-bottom: var(--sf-space-m);
   }
@@ -246,7 +247,7 @@
   }
 
   .cs-hero__sub {
-    color: white;
+    color: var(--sf-color-neutral-dark);
     opacity: 0.9;
     text-shadow: 0 2px 10px oklch(0 0 0 / 0.5);
     margin-bottom: var(--sf-space-xl);
@@ -267,9 +268,9 @@
 
   /* Cards (Glassmorphism) */
   .cs-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    background: var(--sf-glass-bg);
+    backdrop-filter: blur(var(--sf-glass-blur));
+    border: 1px solid var(--sf-glass-border);
     padding: var(--sf-space-xl);
     border-radius: var(--sf-radius-2xl);
     display: flex;
@@ -292,7 +293,7 @@
 
   .cs-card--dark {
     background: #111;
-    color: white;
+    color: var(--sf-color-neutral-dark);
     border: none;
   }
 
@@ -495,7 +496,7 @@
 
   .cs-feature-card__icon {
     --sf-icon-box-bg: var(--sf-color-primary);
-    color: white;
+    color: var(--sf-color-text--on-primary);
     border: none;
     --sf-icon-box-radius: 12px;
   }
@@ -552,18 +553,19 @@
     --sf-cluster-gap: var(--sf-space-xl);
     margin-top: var(--sf-space-l);
     padding-top: var(--sf-space-m);
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgb(255 255 255 / 0.1);
   }
 
   /* About */
   .cs-portrait-placeholder {
     --sf-aspect: 1;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    background: var(--sf-glass-bg);
+    border: 1px solid var(--sf-glass-border);
     border-radius: var(--sf-radius-large);
     display: grid;
     place-items: center;
     opacity: 0.5;
+    --sf-aspect-ratio: 1;
   }
 
   /* FAQ */
@@ -642,8 +644,8 @@
   /* Input fields */
   .cs-input {
     padding: 1rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    background: var(--sf-glass-bg);
+    border: 1px solid var(--sf-glass-border);
     border-radius: var(--sf-radius-s);
     color: inherit;
     font-family: inherit;
@@ -658,7 +660,7 @@
   /* Footer */
   .cs-footer {
     padding-block: var(--sf-space-2xl);
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid var(--sf-glass-border);
   }
 
   /* Utility overrides if not in framework core */
