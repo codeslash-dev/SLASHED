@@ -20,7 +20,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 823,
+      "tokens": 821,
       "sf_classes": 174,
       "is_classes": 40
     }
@@ -80,8 +80,6 @@
     "--sf-box-border-width",
     "--sf-box-padding",
     "--sf-breakout-width",
-    "--sf-breakpoint-l",
-    "--sf-breakpoint-s",
     "--sf-button-padding-block",
     "--sf-button-padding-inline",
     "--sf-button-radius",

@@ -104,7 +104,6 @@
      · focus ring (--sf-focus-ring-{width,offset,style,color})
      · caret (--sf-caret-color)
      · scrollbar (--sf-scrollbar-{thumb,track}) — consumed by html { scrollbar-color } in core/base.css
-     · breakpoints (--sf-breakpoint-{s,l}) — read-only reference tokens for CQ collapse points
      · border scale (--sf-border-scale) — global multiplier for --sf-border-width-{1,2,3,4}
      · BEM aliases (--sf-gap, --sf-content-gap, --sf-component-pad, --sf-field-block,
        --sf-field-required-marker, --sf-link-external-marker)
@@ -1401,18 +1400,6 @@
          --sf-space-gap     → var(--sf-gap)        (all layout primitives)
          --sf-space-content → var(--sf-content-gap) (stack, prose)
        ---------------------------------------------------------- */
-    /* ----------------------------------------------------------
-       Reference breakpoint tokens — read-only. Grid columns and bento
-       layouts collapse at these container widths (hardcoded in CQ
-       rules because custom properties cannot be used inside
-       @container queries per spec). These tokens expose the collapse
-       points so custom responsive elements can align to the grid.
-       Do not override: changing them does NOT change the actual CQ
-       breakpoints in layout.css.
-       ---------------------------------------------------------- */
-    --sf-breakpoint-s: 30em;
-    --sf-breakpoint-l: 48em;
-
     --sf-gap:           var(--sf-space-m);  /* gap between BEM elements */
     --sf-content-gap:   var(--sf-space-s);  /* rhythm within a component */
     --sf-component-pad: var(--sf-space-m);  /* standard component padding */

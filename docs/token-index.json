@@ -11,14 +11,14 @@
     ],
     "fallback_source": "core/tokens.color-fallbacks.css",
     "counts": {
-      "tokens": 823,
+      "tokens": 821,
       "by_tier": {
-        "PUBLIC": 685,
+        "PUBLIC": 683,
         "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 233,
+        "knob": 231,
         "consumption": 590
       },
       "with_fallback": 57,
@@ -511,24 +511,6 @@
       ],
       "fallback": false,
       "value": "var(--sf-container-wide)"
-    },
-    "--sf-breakpoint-l": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "48em"
-    },
-    "--sf-breakpoint-s": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "fallback": false,
-      "value": "30em"
     },
     "--sf-button-padding-block": {
       "tier": "PUBLIC",

@@ -9,11 +9,11 @@ values see [tokens.md](tokens.md); for the flat name list see
 [registry.json](registry.json); for the tier contract and naming rules see
 [architecture.md](architecture.md).
 
-**823 tokens** (deduplicated by name across the 6 token source files).
+**821 tokens** (deduplicated by name across the 6 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 685 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 683 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 233 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| knob | 231 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
 | consumption | 590 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 **57** tokens have a legacy HSL fallback in `core/tokens.color-fallbacks.css`
@@ -232,8 +232,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-box-border-width` | PUBLIC | knob | Layout | — | `0` |
 | `--sf-box-padding` | PUBLIC | consumption | Layout | — | `var(--sf-space-m)` |
 | `--sf-breakout-width` | PUBLIC | consumption | Layout | — | `var(--sf-container-wide)` |
-| `--sf-breakpoint-l` | PUBLIC | knob | Core | — | `48em` |
-| `--sf-breakpoint-s` | PUBLIC | knob | Core | — | `30em` |
 | `--sf-button-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | — | `var(--sf-space-xs)` |
 | `--sf-button-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | — | `var(--sf-space-m)` |
 | `--sf-button-radius` | PUBLIC | consumption | Components (optional, incomplete) | — | `var(--sf-radius-m)` |

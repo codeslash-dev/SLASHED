@@ -30,21 +30,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1079,
+      "total": 1077,
       "by_type": {
         "class": 223,
-        "token": 856
+        "token": 854
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 908,
+        "PUBLIC": 906,
         "PUBLIC-ADVANCED": 170
       },
       "by_role": {
         "consumption": 590,
-        "knob": 266
+        "knob": 264
       },
-      "tokens": 856,
+      "tokens": 854,
       "classes": 223,
       "sf_classes": 174,
       "is_classes": 40,
@@ -54,7 +54,7 @@
         "Accessibility": 7,
         "Color fallback (legacy HSL)": 33,
         "Component tokens": 6,
-        "Core tokens": 495,
+        "Core tokens": 493,
         "Layout primitives": 120,
         "Layout tokens": 48,
         "Macro classes": 36,
@@ -1912,68 +1912,6 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-breakpoint-l",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "breakpoint",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Reference breakpoint tokens",
-      "description": "read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not…",
-      "value": "48em",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-breakpoint-s",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "breakpoint",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Reference breakpoint tokens",
-      "description": "read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not…",
-      "value": "30em",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "hasFallback": false,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -11340,7 +11278,7 @@
       "namespace": "component",
       "category": "Core tokens",
       "area": "core",
-      "group": "Reference breakpoint tokens",
+      "group": "Spacing aliases",
       "description": "rhythm within a component",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
@@ -11526,7 +11464,7 @@
       "namespace": "content",
       "category": "Core tokens",
       "area": "core",
-      "group": "Reference breakpoint tokens",
+      "group": "Spacing aliases",
       "description": "gap between BEM elements",
       "value": "var(--sf-space-s)",
       "aliasOf": "--sf-space-s",
@@ -12730,7 +12668,7 @@
       "namespace": "field",
       "category": "Core tokens",
       "area": "core",
-      "group": "Reference breakpoint tokens",
+      "group": "Spacing aliases",
       "description": "standard component padding",
       "value": "var(--sf-space-l)",
       "aliasOf": "--sf-space-l",
@@ -12845,7 +12783,7 @@
       "namespace": "field",
       "category": "Core tokens",
       "area": "core",
-      "group": "Reference breakpoint tokens",
+      "group": "Spacing aliases",
       "description": "form-field block spacing",
       "value": "\" *\"",
       "aliasOf": null,
@@ -14116,8 +14054,8 @@
       "namespace": "gap",
       "category": "Core tokens",
       "area": "core",
-      "group": "Reference breakpoint tokens",
-      "description": "read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not…",
+      "group": "Spacing aliases",
+      "description": "BEM consumer API Use in your own BEM classes: .nav { gap: var(--sf-gap); } Source of truth for tokens.layout.css: --sf-space-gap → var(--sf-gap) (all layout primitives) --sf-space-content → var(--sf-content-gap) (stack, prose)",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
       "registered": false,
@@ -16578,7 +16516,7 @@
       "namespace": "link",
       "category": "Core tokens",
       "area": "core",
-      "group": "Reference breakpoint tokens",
+      "group": "Spacing aliases",
       "description": "Leading space is baked into the default so consumers can fully disable the indicator with `--sf-link-external-marker: \"\"` — without the space a bare \"\" still left a stray space after the link text. Override with your own glyph (include leading space if you want one): `:root {…",
       "value": "\" \\2197\"",
       "aliasOf": null,

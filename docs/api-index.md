@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1079 elements** — 856 tokens, 223 classes.
+**1077 elements** — 854 tokens, 223 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 908 | Everyday surface. SemVer-stable. |
+| PUBLIC | 906 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 170 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (856)
+## Tokens (854)
 
 ### Color fallback (legacy HSL) (33)
 
@@ -69,7 +69,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 
-### Core tokens (495)
+### Core tokens (493)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -115,8 +115,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-border-width-3` | PUBLIC | consumption | border | `calc(3px * var(--sf-border-scale, 1))` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
 | `--sf-border-width-4` | PUBLIC | consumption | border | `calc(4px * var(--sf-border-scale, 1))` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
 | `--sf-border-width-hairline` | PUBLIC | knob | border | `0.5px` | --sf-border-scale — global multiplier for border widths. Set to 0 for borderless, 2 for heavy borders. Hairline is intentionally excluded (it's a device-pixel constant, not a design variable). |
-| `--sf-breakpoint-l` | PUBLIC | knob | breakpoint | `48em` | read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not… |
-| `--sf-breakpoint-s` | PUBLIC | knob | breakpoint | `30em` | read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not… |
 | `--sf-caret-color` | PUBLIC | consumption | caret | `var(--sf-color-action)` | Focus / form colors |
 | `--sf-code-font-size` | PUBLIC | knob | code | `0.875em` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-col-rule-width-l` | PUBLIC | consumption | col | `var(--sf-border-width-3)` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
@@ -355,7 +353,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-font-weight-normal` | PUBLIC | knob | font | `400` | Numeric scale |
 | `--sf-font-weight-semibold` | PUBLIC | knob | font | `600` | Numeric scale |
 | `--sf-font-weight-thin` | PUBLIC | knob | font | `100` | Numeric scale |
-| `--sf-gap` | PUBLIC | consumption | gap | `var(--sf-space-m)` | read-only. Grid columns and bento layouts collapse at these container widths (hardcoded in CQ rules because custom properties cannot be used inside @container queries per spec). These tokens expose the collapse points so custom responsive elements can align to the grid. Do not… |
+| `--sf-gap` | PUBLIC | consumption | gap | `var(--sf-space-m)` | BEM consumer API Use in your own BEM classes: .nav { gap: var(--sf-gap); } Source of truth for tokens.layout.css: --sf-space-gap → var(--sf-gap) (all layout primitives) --sf-space-content → var(--sf-content-gap) (stack, prose) |
 | `--sf-gradient-brand` | PUBLIC | consumption | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))` | derived from brand colors (auto-adapt) |
 | `--sf-gradient-fade--b` | PUBLIC | consumption | gradient | `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
 | `--sf-gradient-fade--l` | PUBLIC | consumption | gradient | `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
