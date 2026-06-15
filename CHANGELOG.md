@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.45] - 2026-06-15
+
+### Bug Fixes
+- **tests:** update semantic snapshot for opaque --sf-color-text--muted
+- restore select chevron, make muted text opaque, fix is-* group metadata
+
 ## [0.5.44] - 2026-06-15
 
 ### Features
