@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSlash — Senior WordPress Development Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+
+    <!-- Progress Bar -->
+    <div class="cs-progress" aria-hidden="true">
+        <div id="cs-bar" class="cs-progress__bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="cs-nav">
+        <div class="sf-container cs-nav__inner">
+            <a href="#" class="cs-nav__logo">CODE/<span>codeslash</span></a>
+
+            <nav class="cs-nav__links">
+                <a href="#services" class="cs-nav__link">Services</a>
+                <a href="#process" class="cs-nav__link">Process</a>
+                <a href="#case-studies" class="cs-nav__link">Case Studies</a>
+                <a href="#pricing" class="cs-nav__link">Pricing</a>
+                <a href="#about" class="cs-nav__link">About</a>
+                <a href="#contact" class="cs-nav__cta">Start a Project</a>
+            </nav>
+
+            <button id="cs-burger" class="cs-nav__burger" aria-label="Open menu" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="cs-hero" data-theme="dark">
+            <div class="cs-hero__parallax" aria-hidden="true">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-7.svg" class="cs-parallax-layer" style="--depth: 0.1">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-6.svg" class="cs-parallax-layer" style="--depth: 0.2">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-5.svg" class="cs-parallax-layer" style="--depth: 0.3">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-4.svg" class="cs-parallax-layer" style="--depth: 0.4">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-3.svg" class="cs-parallax-layer" style="--depth: 0.5">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-2.svg" class="cs-parallax-layer" style="--depth: 0.6">
+                <img src="https://2026.dev2.codeslash.net/wp-content/uploads/2026/01/landscape-1.svg" class="cs-parallax-layer" style="--depth: 0.8">
+            </div>
+            <div class="sf-container">
+                <div class="sf-switcher" style="--sf-switcher-threshold: 55rem">
+                    <div class="cs-hero__content sf-stack sf-stack--l">
+                        <span class="cs-badge">WordPress Development Studio — Senior Contractor</span>
+                        <h1 class="cs-hero__hl sf-text-display-m">WordPress sites that load faster, convert better, and <em>actually win business</em></h1>
+                        <p class="cs-hero__sub sf-text-l">Performance-first development, structured process, and direct communication — no middlemen, no agencies, no guesswork. Guaranteed 85+ PageSpeed scores, in the contract.</p>
+
+                        <div class="sf-cluster" style="--sf-cluster-gap: var(--sf-space-m)">
+                            <a href="#contact" class="btn btn--primary">Start a Project
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a href="#case-studies" class="btn btn--ghost-light">See My Work</a>
+                        </div>
+
+                        <div class="cs-hero__stats sf-grid sf-grid--s">
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-3xl">10+</span>
+                                <span class="cs-stat__label sf-text-2xs">Years in WordPress</span>
+                            </div>
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-3xl">85+</span>
+                                <span class="cs-stat__label sf-text-2xs">PageSpeed Guaranteed</span>
+                            </div>
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-3xl">50+</span>
+                                <span class="cs-stat__label sf-text-2xs">Projects Shipped</span>
+                            </div>
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-3xl">12+</span>
+                                <span class="cs-stat__label sf-text-2xs">Countries Served</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section id="services" class="sf-section" data-theme="dark">
+            <div class="sf-container">
+                <div class="cs-section-header sf-stack sf-center">
+                    <span class="cs-card__tag">What I Do</span>
+                    <h2 class="sf-text-display-s">Three ways to work together</h2>
+                    <p class="cs-text-soft sf-text-l">Custom builds, performance improvements, or ongoing maintenance — scope-matched to where you actually are.</p>
+                </div>
+
+                <div class="sf-grid" style="--sf-grid-min: 22rem">
+                    <div class="cs-card">
+                        <p class="cs-card__tag">Build</p>
+                        <h3 class="cs-card__name sf-text-xl">Build</h3>
+                        <p class="cs-text-soft sf-text-s">Custom WordPress sites built right from day one — business websites, e-commerce stores, and platform migrations.</p>
+                        <p class="cs-card__price">From $4,000 <sub>fixed price</sub></p>
+                        <ul class="cs-card__list">
+                            <li>Business & portfolio websites</li>
+                            <li>WooCommerce stores</li>
+                            <li>Platform migrations</li>
+                            <li>85+ PageSpeed guaranteed</li>
+                            <li>5-phase gate process</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--ghost-light">Discuss Your Build</a>
+                    </div>
+
+                    <div class="cs-card cs-card--featured">
+                        <div class="cs-card__badge">Most Requested</div>
+                        <p class="cs-card__tag">Optimize</p>
+                        <h3 class="cs-card__name sf-text-xl">Optimize</h3>
+                        <p class="cs-text-soft sf-text-s">Transform slow, leaky WordPress sites into performance machines. Speed and conversion improvements, guaranteed.</p>
+                        <p class="cs-card__price">From $1,500 <sub>fixed price</sub></p>
+                        <ul class="cs-card__list">
+                            <li>Core Web Vitals audit</li>
+                            <li>85+ PageSpeed guaranteed</li>
+                            <li>Conversion rate review</li>
+                            <li>Code quality assessment</li>
+                            <li>Actionable improvement roadmap</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--primary">Get a Quote</a>
+                    </div>
+
+                    <div class="cs-card">
+                        <p class="cs-card__tag">Sustain</p>
+                        <h3 class="cs-card__name sf-text-xl">Sustain</h3>
+                        <p class="cs-text-soft sf-text-s">Monthly care plans so your site doesn't break at 2am. Ongoing updates, monitoring, and real developer support.</p>
+                        <p class="cs-card__price">From $49/mo <sub>monthly retainer</sub></p>
+                        <ul class="cs-card__list">
+                            <li>Weekly plugin & core updates</li>
+                            <li>Daily offsite backups</li>
+                            <li>24/7 uptime monitoring</li>
+                            <li>Monthly security scans</li>
+                            <li>Monthly performance reports</li>
+                        </ul>
+                        <a href="#pricing" class="btn btn--ghost-light">See Plans</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why CodeSlash -->
+        <section class="sf-section">
+            <div class="sf-container">
+                <div class="sf-stack sf-stack--2xl">
+                    <div class="sf-stack">
+                        <span class="cs-card__tag">Why CodeSlash</span>
+                        <h2 class="sf-text-display-s">Agency results. Freelancer access.</h2>
+                        <p class="sf-text-l cs-text-muted">Senior-level work without the overhead, account managers, or communication lag.</p>
+                    </div>
+
+                    <div class="cs-feature-highlight sf-cluster">
+                        <div class="cs-speed-ring">
+                            <svg viewBox="0 0 100 100" class="cs-speed-ring">
+                                <circle class="cs-speed-ring__track" cx="50" cy="50" r="42"></circle>
+                                <circle class="cs-speed-ring__fill" cx="50" cy="50" r="42" style="stroke-dasharray: 264; stroke-dashoffset: 26;"></circle>
+                            </svg>
+                        </div>
+                        <div class="sf-stack sf-stack--3xs">
+                            <h3 class="sf-text-xl">94/100 Core Web Vitals</h3>
+                            <p class="cs-text-soft">Average performance score across all CodeSlash projects in 2024. Measurable speed, not just a promise.</p>
+                        </div>
+                    </div>
+
+                    <div class="sf-grid" style="--sf-grid-min: 18rem">
+                        <div class="cs-feature-card sf-stack sf-box">
+                            <div class="cs-feature-card__icon sf-icon sf-icon--boxed">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 6.1H3"/><path d="M21 12.1H3"/><path d="M15.1 18.1H3"/></svg>
+                            </div>
+                            <h3 class="sf-text-l">Direct Communication</h3>
+                            <p class="sf-text-s cs-text-soft">You talk to the person building your site. No account managers, no middlemen, no telephone game.</p>
+                        </div>
+                        <div class="cs-feature-card sf-stack sf-box">
+                            <div class="cs-feature-card__icon sf-icon sf-icon--boxed">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7 3 5-3 5"/><path d="m19 7-3 5 3 5"/></svg>
+                            </div>
+                            <h3 class="sf-text-l">Cost-Effective Quality</h3>
+                            <p class="sf-text-s cs-text-soft">Senior-level process and deliverables without the agency markup. You pay for work, not overhead.</p>
+                        </div>
+                        <div class="cs-feature-card sf-stack sf-box">
+                            <div class="cs-feature-card__icon sf-icon sf-icon--boxed">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-2-2"/></svg>
+                            </div>
+                            <h3 class="sf-text-l">Performance Guarantee</h3>
+                            <p class="sf-text-s cs-text-soft">Every site ships with an 85+ PageSpeed score. It's not a target — it's in the contract.</p>
+                        </div>
+                        <div class="cs-feature-card sf-stack sf-box">
+                            <div class="cs-feature-card__icon sf-icon sf-icon--boxed">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                            </div>
+                            <h3 class="sf-text-l">Ongoing Support</h3>
+                            <p class="sf-text-s cs-text-soft">Your site doesn't get abandoned after launch. Care plans keep a real developer on call, not a helpdesk.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="sf-section cs-section-dark" data-theme="dark">
+            <div class="sf-container">
+                <div class="cs-section-header sf-stack sf-center">
+                    <span class="cs-card__tag">Social Proof</span>
+                    <h2 class="sf-text-display-s">4.9★ across 50+ projects</h2>
+                    <p class="cs-text-soft sf-text-l">Real results from real clients — across 12+ countries</p>
+                </div>
+
+                <div class="sf-grid" style="--sf-grid-min: 22rem">
+                    <div class="cs-card">
+                        <div class="cs-testimonial__stars">★★★★★</div>
+                        <p class="cs-testimonial__quote">"Our WooCommerce store went from a 38 PageSpeed to 91 in three weeks. Revenue per session is up 22% since launch."</p>
+                        <div class="cs-testimonial__author sf-cluster">
+                            <div class="cs-testimonial__avatar sf-icon sf-icon--boxed">SL</div>
+                            <div class="cs-testimonial__meta sf-stack">
+                                <div class="sf-text-m" style="font-weight: 700">Sarah L.</div>
+                                <div class="sf-text-xs cs-text-soft">E-commerce Director, Brightwell</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-card">
+                        <div class="cs-testimonial__stars">★★★★★</div>
+                        <p class="cs-testimonial__quote">"Three previous agencies couldn't fix our speed issues. CodeSlash diagnosed it in 48 hours and had us hitting 90+ within a week."</p>
+                        <div class="cs-testimonial__author sf-cluster">
+                            <div class="cs-testimonial__avatar sf-icon sf-icon--boxed">MT</div>
+                            <div class="cs-testimonial__meta sf-stack">
+                                <div class="sf-text-m" style="font-weight: 700">Marcus T.</div>
+                                <div class="sf-text-xs cs-text-soft">Founder, Studio Vale</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-card">
+                        <div class="cs-testimonial__stars">★★★★★</div>
+                        <p class="cs-testimonial__quote">"We've been on a care plan for 18 months. Not a single downtime incident. We renew every year without question."</p>
+                        <div class="cs-testimonial__author sf-cluster">
+                            <div class="cs-testimonial__avatar sf-icon sf-icon--boxed">JH</div>
+                            <div class="cs-testimonial__meta sf-stack">
+                                <div class="sf-text-m" style="font-weight: 700">James H.</div>
+                                <div class="sf-text-xs cs-text-soft">CEO, Finex Capital</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-logo-grid">
+                    <span class="cs-logo-grid__item">FINEX</span>
+                    <span class="cs-logo-grid__item">BRIGHTWELL</span>
+                    <span class="cs-logo-grid__item">STUDIO VALE</span>
+                    <span class="cs-logo-grid__item">VELOUR</span>
+                    <span class="cs-logo-grid__item">MERIDIAN</span>
+                </div>
+
+                <div id="map_2358" class="cs-map"></div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="sf-section cs-section--cream">
+            <div class="sf-container">
+                <div class="sf-stack sf-stack--2xl">
+                    <div class="sf-stack">
+                        <span class="cs-card__tag">How We Work</span>
+                        <h2 class="sf-text-display-s">A 5-phase process. No surprises.</h2>
+                        <p class="sf-text-l">Every project follows the same structured workflow. You know what comes next before it happens.</p>
+                    </div>
+
+                    <div id="cs-stepper" class="cs-stepper" aria-label="Project phases">
+                        <button class="cs-step is-active" data-phase="0">
+                            <span class="cs-step__dot">1</span>
+                            <span class="cs-step__label">Discovery</span>
+                        </button>
+                        <button class="cs-step" data-phase="1">
+                            <span class="cs-step__dot">2</span>
+                            <span class="cs-step__label">Design</span>
+                        </button>
+                        <button class="cs-step" data-phase="2">
+                            <span class="cs-step__dot">3</span>
+                            <span class="cs-step__label">Develop</span>
+                        </button>
+                        <button class="cs-step" data-phase="3">
+                            <span class="cs-step__dot">4</span>
+                            <span class="cs-step__label">Launch</span>
+                        </button>
+                        <button class="cs-step" data-phase="4">
+                            <span class="cs-step__dot">5</span>
+                            <span class="cs-step__label">Care Plan</span>
+                        </button>
+                    </div>
+
+                    <div id="process-content" class="cs-process-card sf-box">
+                        <!-- Phases (JS handled visibility) -->
+                        <div id="phase-0" class="cs-process-item" style="display: block">
+                            <div class="cs-process-card__inner sf-stack sf-box">
+                                <div class="sf-cluster sf-cluster--between">
+                                    <h3 class="sf-text-2xl">01 Discovery</h3>
+                                    <span class="cs-badge">Phase 1</span>
+                                </div>
+                                <p class="sf-text-m cs-text-soft">Scope alignment, budget confirmation, and timeline lock. We leave with a signed brief and clear expectations.</p>
+                                <div class="cs-process-card__grid sf-grid">
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">You provide</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Business goals</li><li>Budget range</li><li>Existing assets</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">I deliver</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Scope document</li><li>Fixed-price quote</li><li>Project timeline</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Timeline</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>1–3 business days</li><li>One discovery call</li></ul>
+                                    </div>
+                                </div>
+                                <div class="cs-process-card__gate sf-box">
+                                    Gate: Signed scope document & 40% deposit received before moving forward
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phase-1" class="cs-process-item" style="display: none">
+                            <div class="cs-process-card__inner sf-stack sf-box">
+                                <div class="sf-cluster sf-cluster--between">
+                                    <h3 class="sf-text-2xl">02 Design</h3>
+                                    <span class="cs-badge">Phase 2</span>
+                                </div>
+                                <p class="sf-text-m cs-text-soft">High-fidelity Figma mockups for key pages, reviewed in two structured rounds.</p>
+                                <div class="cs-process-card__grid sf-grid">
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">You provide</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Brand guidelines</li><li>Content drafts</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">I deliver</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Desktop + mobile mockups</li><li>2 revision rounds</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Timeline</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>1–2 weeks</li><li>Async reviews</li></ul>
+                                    </div>
+                                </div>
+                                <div class="cs-process-card__gate sf-box">
+                                    Gate: Design signed off before development begins — no going back
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phase-2" class="cs-process-item" style="display: none">
+                            <div class="cs-process-card__inner sf-stack sf-box">
+                                <div class="sf-cluster sf-cluster--between">
+                                    <h3 class="sf-text-2xl">03 Develop</h3>
+                                    <span class="cs-badge">Phase 3</span>
+                                </div>
+                                <p class="sf-text-m cs-text-soft">Custom WordPress build — clean PHP, no page-builder bloat. Performance-first from the first commit.</p>
+                                <div class="cs-process-card__grid sf-grid">
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">You provide</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Final content</li><li>Login credentials</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">I deliver</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Staging site</li><li>QA checklist</li><li>85+ PageSpeed score</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Timeline</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>2–6 weeks</li><li>Weekly updates</li></ul>
+                                    </div>
+                                </div>
+                                <div class="cs-process-card__gate sf-box">
+                                    Gate: Your sign-off on staging site before live deployment
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phase-3" class="cs-process-item" style="display: none">
+                            <div class="cs-process-card__inner sf-stack sf-box">
+                                <div class="sf-cluster sf-cluster--between">
+                                    <h3 class="sf-text-2xl">04 Launch</h3>
+                                    <span class="cs-badge">Phase 4</span>
+                                </div>
+                                <p class="sf-text-m cs-text-soft">Go-live, DNS migration, post-launch QA, and analytics verification.</p>
+                                <div class="cs-process-card__grid sf-grid">
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">You provide</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>DNS access</li><li>Final 20% payment</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">I deliver</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Live deployment</li><li>Post-launch QA</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Timeline</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>1–2 days</li><li>Off-peak launch</li></ul>
+                                    </div>
+                                </div>
+                                <div class="cs-process-card__gate sf-box">
+                                    Gate: Final payment received; go-live confirmed in writing
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phase-4" class="cs-process-item" style="display: none">
+                            <div class="cs-process-card__inner sf-stack sf-box">
+                                <div class="sf-cluster sf-cluster--between">
+                                    <h3 class="sf-text-2xl">05 Care Plan</h3>
+                                    <span class="cs-badge">Phase 5</span>
+                                </div>
+                                <p class="sf-text-m cs-text-soft">Ongoing maintenance, monitoring, updates, and support — or a clean handoff.</p>
+                                <div class="cs-process-card__grid sf-grid">
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Care Path</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Monthly retainer</li><li>Proactive monitoring</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Handoff Path</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Full documentation</li><li>30-day support</li></ul>
+                                    </div>
+                                    <div class="sf-stack sf-stack--xs">
+                                        <h4 class="cs-process-card__title sf-text-s">Timeline</h4>
+                                        <ul class="cs-process-card__list sf-stack"><li>Ongoing</li><li>Cancel anytime</li></ul>
+                                    </div>
+                                </div>
+                                <div class="cs-process-card__gate sf-box">
+                                    Your site keeps working — with or without ongoing support from me
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sf-center sf-center--xl">
+                        <a href="#contact" class="btn btn--primary">Start a Conversation</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mid CTA -->
+        <section id="mid-cta" class="sf-section" data-theme="dark">
+            <div class="sf-container">
+                <div class="cs-cta-box sf-stack sf-center">
+                    <h2 class="sf-text-display-s">Ready to build something that <span style="color:var(--sf-color-primary)">actually performs?</span></h2>
+                    <p class="cs-text-soft sf-text-l">Let's talk about your project. I'll respond within 24 hours with a clear scope and a fixed-price quote.</p>
+                    <div class="sf-cluster sf-center">
+                        <a href="#contact" class="btn btn--primary">Start a Project</a>
+                        <a href="#pricing" class="cs-nav__link" style="opacity: 0.8">Or see pricing first →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies Section -->
+        <section id="case-studies" class="sf-section">
+            <div class="sf-container">
+                <div class="sf-stack sf-stack--2xl">
+                    <div class="sf-stack">
+                        <span class="cs-card__tag">Case Studies</span>
+                        <h2 class="sf-text-display-s">Real results, measured</h2>
+                        <p class="cs-text-soft sf-text-l">Before and after — with numbers that actually matter to your business.</p>
+                    </div>
+
+                <div class="sf-grid" style="--sf-grid-min: 22rem">
+                        <div class="cs-card cs-card--dark">
+                            <h3 class="sf-text-xl">Velour Studio</h3>
+                            <p class="cs-text-soft sf-text-s">Boutique fashion brand — full rebuild from Squarespace to WooCommerce.</p>
+                        <div class="cs-case-study__stats sf-cluster">
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-l">38 → 94</span>
+                                <span class="cs-stat__label sf-text-2xs">PageSpeed</span>
+                                </div>
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-l">+34%</span>
+                                <span class="cs-stat__label sf-text-2xs">Conversions</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cs-card cs-card--dark">
+                            <h3 class="sf-text-xl">Finex Capital</h3>
+                            <p class="cs-text-soft sf-text-s">Financial services — performance audit and legacy rebuild.</p>
+                        <div class="cs-case-study__stats sf-cluster">
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-l">44 → 91</span>
+                                <span class="cs-stat__label sf-text-2xs">PageSpeed</span>
+                                </div>
+                            <div class="cs-stat sf-stack">
+                                <span class="cs-stat__value sf-text-l">+22%</span>
+                                <span class="cs-stat__label sf-text-2xs">Engagement</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing / Care Plans -->
+        <section id="pricing" class="sf-section cs-section--cream">
+            <div class="sf-container">
+                <div class="cs-section-header sf-stack sf-center">
+                    <span class="cs-card__tag">Care Plans</span>
+                    <h2 class="sf-text-display-s">Your site doesn't stop working after launch day</h2>
+                </div>
+
+                <div class="sf-grid" style="--sf-grid-gap: var(--sf-space-xl); --sf-grid-min: 22rem">
+                    <div class="cs-card cs-card--white">
+                        <h3 class="cs-card__name sf-text-xl">Core</h3>
+                        <div class="cs-card__price">$49<sub>/mo</sub></div>
+                        <ul class="cs-card__list">
+                            <li>Weekly plugin & core updates</li>
+                            <li>Daily offsite backups</li>
+                            <li>24/7 uptime monitoring</li>
+                            <li>1 hour of edits per month</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--ghost">Choose Core</a>
+                    </div>
+                    <div class="cs-card cs-card--featured cs-card--white">
+                        <div class="cs-card__badge">Most Popular</div>
+                        <h3 class="cs-card__name sf-text-xl">Commerce</h3>
+                        <div class="cs-card__price">$99<sub>/mo</sub></div>
+                        <ul class="cs-card__list">
+                            <li>Everything in Core</li>
+                            <li>WooCommerce monitoring</li>
+                            <li>3 hours of edits per month</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--primary">Choose Commerce</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="sf-section" data-theme="dark">
+            <div class="sf-container">
+                <div class="sf-grid sf-grid--center cs-contact-grid">
+                    <div class="sf-stack sf-stack--l">
+                        <span class="cs-card__tag">About</span>
+                        <h2 class="sf-text-display-s">Senior WordPress developer. 10 years. No fluff.</h2>
+                        <p class="sf-text-l cs-text-soft">Based in Pobiedziska, Poland. Working globally since 2014. I build fast, clean WordPress sites for businesses that understand the connection between site performance and business outcomes.</p>
+                        <div>
+                            <a href="#contact" class="btn btn--primary">Let's talk about your project</a>
+                        </div>
+                    </div>
+                    <div class="cs-portrait-placeholder sf-aspect">
+                        <span style="font-style: italic">[Senior Developer Portrait]</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="sf-section">
+            <div class="sf-container">
+                <div class="cs-section-header sf-stack sf-center">
+                    <span class="cs-card__tag">FAQ</span>
+                    <h2 class="sf-text-display-s">Questions I get asked a lot</h2>
+                </div>
+
+                <div class="cs-faq-list sf-grid">
+                    <div class="sf-stack">
+                        <details class="cs-faq-item sf-box">
+                            <summary class="cs-faq-item__question">What technologies do you use?</summary>
+                            <div class="cs-faq-item__answer">I work exclusively in WordPress with clean, custom PHP — no Elementor, no Divi, no page-builder bloat. On the front end I use modern CSS and vanilla JS where needed.</div>
+                        </details>
+                        <details class="cs-faq-item sf-box">
+                            <summary class="cs-faq-item__question">How long does a typical project take?</summary>
+                            <div class="cs-faq-item__answer">Most builds take 4–8 weeks depending on scope. A focused 5-page site can launch in 3–4 weeks.</div>
+                        </details>
+                    </div>
+                    <div class="sf-stack">
+                        <details class="cs-faq-item sf-box">
+                            <summary class="cs-faq-item__question">What happens after launch?</summary>
+                            <div class="cs-faq-item__answer">You either transition to a Care Plan for ongoing updates, monitoring, and support — or receive a full handoff document.</div>
+                        </details>
+                        <details class="cs-faq-item sf-box">
+                            <summary class="cs-faq-item__question">Do you offer payment plans?</summary>
+                            <div class="cs-faq-item__answer">Yes. Standard structure is: 40% upfront at kickoff, 40% at design sign-off, 20% at launch.</div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="sf-section" data-theme="dark">
+            <div class="sf-container">
+                <div class="cs-contact-grid sf-grid">
+                    <div class="sf-stack sf-stack--l">
+                        <span class="cs-card__tag">Get In Touch</span>
+                        <h2 class="sf-text-display-s">Let's talk about your project</h2>
+                        <p class="sf-text-l cs-text-soft">I respond to every enquiry within 24 hours — with a clear scope and a fixed-price quote.</p>
+                        <a href="mailto:hello@codeslash.net" class="cs-contact-email sf-text-xl">hello@codeslash.net</a>
+                    </div>
+                    <div class="cs-card cs-card--glass sf-box">
+                        <form class="sf-stack">
+                            <div class="cs-field sf-stack">
+                                <label class="cs-field__label sf-text-xs">Name</label>
+                                <input type="text" placeholder="Your name" required class="cs-input">
+                            </div>
+                            <div class="cs-field sf-stack">
+                                <label class="cs-field__label sf-text-xs">Email</label>
+                                <input type="email" placeholder="your@email.com" required class="cs-input">
+                            </div>
+                            <div class="cs-field sf-stack">
+                                <label class="cs-field__label sf-text-xs">Message</label>
+                                <textarea placeholder="Tell me about your project" required class="cs-input cs-textarea"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary" style="width: 100%">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="cs-footer sf-section" data-theme="dark">
+        <div class="sf-container">
+            <div class="sf-cluster sf-cluster--between">
+                <a href="#" class="cs-nav__logo">CODE/<span>codeslash</span></a>
+                <p class="sf-text-s cs-text-soft">© 2026 CodeSlash. Senior WordPress Development.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/worldOutlineLow.js"></script>
+    <script>
+        // Scroll Progress Bar
+        const progressBar = document.getElementById('cs-bar');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+        });
+
+        // Mobile Nav Toggle
+        const burger = document.getElementById('cs-burger');
+        const navLinks = document.querySelector('.cs-nav__links');
+        burger.addEventListener('click', () => {
+            const expanded = burger.getAttribute('aria-expanded') === 'true' || false;
+            burger.setAttribute('aria-expanded', !expanded);
+            navLinks.classList.toggle('is-open');
+        });
+
+        // Close nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                burger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const layers = document.querySelectorAll('.cs-parallax-layer');
+            layers.forEach(layer => {
+                const depthStr = layer.getAttribute('style').match(/--depth: ([\d.]+)/);
+                if (depthStr) {
+                    const depth = parseFloat(depthStr[1]);
+                    const movement = scrolled * depth;
+                    layer.style.transform = `translate3d(0, ${movement}px, 0)`;
+                }
+            });
+        });
+
+        // Stepper Logic
+        const steps = document.querySelectorAll('.cs-step');
+        const items = document.querySelectorAll('.cs-process-item');
+
+        steps.forEach((step, index) => {
+            step.addEventListener('click', () => {
+                steps.forEach(s => s.classList.remove('is-active'));
+                items.forEach(item => item.style.display = 'none');
+
+                step.classList.add('is-active');
+                const phaseId = `phase-${index}`;
+                document.getElementById(phaseId).style.display = 'block';
+            });
+        });
+
+        // Map Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            if(typeof am4core !== 'undefined') {
+                var map = am4core.create("map_2358", am4maps.MapChart);
+                map.geodata = am4geodata_worldOutlineLow;
+                map.projection = new am4maps.projections.Miller();
+
+                var polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
+                polygonSeries.useGeodata = true;
+                polygonSeries.exclude = ["AQ"];
+
+                var polygonTemplate = polygonSeries.mapPolygons.template;
+                polygonTemplate.fill = am4core.color("#3c4c64");
+                polygonTemplate.stroke = am4core.color("#ffffff");
+                polygonTemplate.strokeWidth = 0.5;
+
+                var imageSeries = map.series.push(new am4maps.MapImageSeries());
+                var imageTemplate = imageSeries.mapImages.template;
+                var circle = imageTemplate.createChild(am4core.Circle);
+                circle.radius = 4;
+                circle.fill = am4core.color("#ee3b24");
+                circle.stroke = am4core.color("#fff");
+                circle.strokeWidth = 1;
+
+                imageTemplate.propertyFields.latitude = "latitude";
+                imageTemplate.propertyFields.longitude = "longitude";
+                imageTemplate.tooltipText = "{title}";
+
+                imageSeries.data = [
+                    {"title": "United Kingdom", "latitude": 54.567416, "longitude": -2.296362},
+                    {"title": "Los Angeles / USA", "latitude": 34.052235, "longitude": -118.243683},
+                    {"title": "Germany", "latitude": 51.165691, "longitude": 10.451526},
+                    {"title": "Vancouver / Canada", "latitude": 49.282729, "longitude": -123.120738},
+                    {"title": "Poland", "latitude": 52.229676, "longitude": 21.012229},
+                    {"title": "Austria", "latitude": 47.516231, "longitude": 14.550072},
+                    {"title": "Austin / USA", "latitude": 30.267153, "longitude": -97.743061},
+                    {"title": "New York / USA", "latitude": 40.712776, "longitude": -74.005974},
+                    {"title": "Miami / USA", "latitude": 25.761680, "longitude": -80.191790},
+                    {"title": "UAE", "latitude": 23.424076, "longitude": 53.847818},
+                    {"title": "Netherlands", "latitude": 52.132633, "longitude": 5.291266}
+                ];
+            }
+        });
+    </script>
+</body>
+</html>
