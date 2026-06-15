@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1045 elements** — 822 tokens, 223 classes.
+**1046 elements** — 823 tokens, 223 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 907 | Everyday surface. SemVer-stable. |
+| PUBLIC | 908 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (822)
+## Tokens (823)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 
-### Core tokens (494)
+### Core tokens (495)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -112,6 +112,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-base-xdark` | PUBLIC | consumption | color | `var(--sf-color-base-800)` | base |
 | `--sf-color-base-xlight` | PUBLIC | consumption | color | `var(--sf-color-base-200)` | base |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | derived from --sf-color-base (auto-adapts) |
+| `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | derived from --sf-color-neutral (auto-adapts) |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | plain var aliases (ungated) |
 | `--sf-color-bg--focus` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.06)` | derived from --sf-color-neutral (auto-adapts) |
 | `--sf-color-bg--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.08)` | derived from --sf-color-neutral (auto-adapts) |
@@ -434,16 +435,16 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-section-pad--xs` | PUBLIC | consumption | section | `calc(var(--sf-space-xl) * var(--sf-section-scale))` | All sizes multiply by --sf-section-scale — one dial re-rhythms every section on the page (default 1 = no change). |
 | `--sf-section-scale` | PUBLIC-ADVANCED | knob | section | `1` | Scale multipliers |
 | `--sf-shadow-2xl` | PUBLIC | consumption | shadow | `0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
-| `--sf-shadow-color` | PUBLIC-ADVANCED | consumption | shadow | `oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h)` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
+| `--sf-shadow-color` | PUBLIC-ADVANCED | consumption | shadow | `oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)` | Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly… |
 | `--sf-shadow-glow` | PUBLIC | consumption | shadow | `0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Shadow glow |
 | `--sf-shadow-glow-color` | PUBLIC-ADVANCED | consumption | shadow | `var(--sf-color-primary)` | tint used by --sf-shadow-glow. Override to retint glows; opacity/dark-mode adaptation is controlled by --sf-shadow-strength. |
 | `--sf-shadow-inner` | PUBLIC | consumption | shadow | `inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
 | `--sf-shadow-l` | PUBLIC | consumption | shadow | `0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
+| `--sf-shadow-lightness` | PUBLIC | knob | shadow | `0.15` | base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17). |
 | `--sf-shadow-m` | PUBLIC | consumption | shadow | `0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
 | `--sf-shadow-none` | PUBLIC | knob | shadow | `none` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
 | `--sf-shadow-s` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
-| `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | shadow | `calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17)` | base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17). |
-| `--sf-shadow-strength-l` | PUBLIC | knob | shadow | `0.08` | base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17). |
+| `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | shadow | `calc(0.08 + var(--sf-is-dark) * 0.17)` | base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17). |
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Elevation shadow ramp — box-shadow presets from xs to 2xl. Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. |
 | `--sf-size-l` | PUBLIC | knob | size | `2.75rem` | UI sizes |

@@ -29,21 +29,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1045,
+      "total": 1046,
       "by_type": {
         "class": 223,
-        "token": 822
+        "token": 823
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 907,
+        "PUBLIC": 908,
         "PUBLIC-ADVANCED": 137
       },
       "by_role": {
-        "consumption": 590,
+        "consumption": 591,
         "knob": 232
       },
-      "tokens": 822,
+      "tokens": 823,
       "classes": 223,
       "sf_classes": 174,
       "is_classes": 40,
@@ -51,7 +51,7 @@
       "by_category": {
         "Accessibility": 7,
         "Component tokens": 6,
-        "Core tokens": 494,
+        "Core tokens": 495,
         "Layout primitives": 120,
         "Layout tokens": 48,
         "Macro classes": 36,
@@ -4122,6 +4122,35 @@
       "group": "Surfaces",
       "description": "derived from --sf-color-base (auto-adapts)",
       "value": "oklch(from var(--sf-color-base) calc(l + 0.02) c h)",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-bg--active",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Interactive states",
+      "description": "derived from --sf-color-neutral (auto-adapts)",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.12)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -17639,7 +17668,7 @@
       "area": "core",
       "group": "Shadow ramp (box-shadow, text-shadow, drop-shadow)",
       "description": "Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly…",
-      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h)",
+      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -17775,6 +17804,35 @@
       ]
     },
     {
+      "name": "--sf-shadow-lightness",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "shadow",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Shadow strength",
+      "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
+      "value": "0.15",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-shadow-m",
       "type": "token",
       "tier": "PUBLIC",
@@ -17871,36 +17929,7 @@
       "area": "core",
       "group": "Shadow strength",
       "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
-      "value": "calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-shadow-strength-l",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "shadow",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Shadow strength",
-      "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
-      "value": "0.08",
+      "value": "calc(0.08 + var(--sf-is-dark) * 0.17)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,

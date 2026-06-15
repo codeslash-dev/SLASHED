@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**822 tokens** (deduplicated by name across the 6 token source files).
+**823 tokens** (deduplicated by name across the 6 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 684 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 685 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 232 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 590 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 591 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -314,6 +314,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-base-xdark` | PUBLIC | consumption | Core + Palette (optional) | `var(--sf-color-base-800)` |
 | `--sf-color-base-xlight` | PUBLIC | consumption | Core + Palette (optional) | `var(--sf-color-base-200)` |
 | `--sf-color-bg` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
+| `--sf-color-bg--active` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | Core | `var(--sf-color-inset)` |
 | `--sf-color-bg--focus` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-action) l c h / 0.06)` |
 | `--sf-color-bg--hover` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.08)` |
@@ -782,16 +783,16 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-section-pad--xs` | PUBLIC | consumption | Core | `calc(var(--sf-space-xl) * var(--sf-section-scale))` |
 | `--sf-section-scale` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-shadow-2xl` | PUBLIC | consumption | Core | `0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))` |
-| `--sf-shadow-color` | PUBLIC-ADVANCED | consumption | Core | `oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h)` |
+| `--sf-shadow-color` | PUBLIC-ADVANCED | consumption | Core | `oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)` |
 | `--sf-shadow-glow` | PUBLIC | consumption | Core | `0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-glow-color` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-color-primary)` |
 | `--sf-shadow-inner` | PUBLIC | consumption | Core | `inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-l` | PUBLIC | consumption | Core | `0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
+| `--sf-shadow-lightness` | PUBLIC | knob | Core | `0.15` |
 | `--sf-shadow-m` | PUBLIC | consumption | Core | `0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-none` | PUBLIC | knob | Core | `none` |
 | `--sf-shadow-s` | PUBLIC | consumption | Core | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))` |
-| `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | Core | `calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17)` |
-| `--sf-shadow-strength-l` | PUBLIC | knob | Core | `0.08` |
+| `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | Core | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | PUBLIC | consumption | Core | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | PUBLIC | consumption | Core | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
 | `--sf-sidebar-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |

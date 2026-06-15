@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**858 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**859 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-494 tokens.
+495 tokens.
 
 | Token | Default |
 |---|---|
@@ -95,6 +95,7 @@ rebrand workflow.
 | `--sf-color-base-xdark` | `color-mix(in oklab, var(--sf-color-base) 38%, var(--sf-color-text))` |
 | `--sf-color-base-xlight` | `color-mix(in oklab, var(--sf-color-text) 20%, var(--sf-color-base))` |
 | `--sf-color-bg` | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
+| `--sf-color-bg--active` | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | `var(--sf-color-inset)` |
 | `--sf-color-bg--focus` | `oklch(from var(--sf-color-action) l c h / 0.06)` |
 | `--sf-color-bg--hover` | `oklch(from var(--sf-color-neutral) l c h / 0.08)` |
@@ -417,16 +418,16 @@ rebrand workflow.
 | `--sf-section-pad--xs` | `calc(var(--sf-space-xl) * var(--sf-section-scale))` |
 | `--sf-section-scale` | `1` |
 | `--sf-shadow-2xl` | `0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))` |
-| `--sf-shadow-color` | `oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h)` |
+| `--sf-shadow-color` | `oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)` |
 | `--sf-shadow-glow` | `0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-glow-color` | `var(--sf-color-primary)` |
 | `--sf-shadow-inner` | `inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-l` | `0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
+| `--sf-shadow-lightness` | `0.15` |
 | `--sf-shadow-m` | `0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-shadow-none` | `none` |
 | `--sf-shadow-s` | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))` |
-| `--sf-shadow-strength` | `calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17)` |
-| `--sf-shadow-strength-l` | `0.08` |
+| `--sf-shadow-strength` | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
 | `--sf-size-l` | `2.75rem` |

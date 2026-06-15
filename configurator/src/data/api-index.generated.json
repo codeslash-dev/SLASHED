@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "e8669b2982da",
+    "tokensHash": "d84d06e41735",
     "bundles": [
       "essential",
       "full",
@@ -11,15 +11,15 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 822,
+      "tokens": 823,
       "byTier": {
-        "PUBLIC": 684,
+        "PUBLIC": 685,
         "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 48,
-        "Core tokens": 494,
+        "Core tokens": 495,
         "Macro tokens": 24,
         "Component tokens": 6,
         "Palette tokens": 142,
@@ -3345,6 +3345,30 @@
       "description": "Background surface tokens from page-level to raised cards. Layer these to communicate visual depth.",
       "note": "Base page / component background. The canvas all other surfaces layer on top of.",
       "value": "oklch(from var(--sf-color-base) calc(l + 0.02) c h)",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-bg--active",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "Interactive states",
+      "description": "Background fills for generic interactive states (hover, focus, active, selected, disabled). Apply to any element that needs state feedback.",
+      "note": "Background tint for pressed/active interactive elements.",
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.12)",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -14493,7 +14517,7 @@
       "group": "Shadow ramp (box-shadow, text-shadow, drop-shadow)",
       "description": "Shadow tint — near-black derived from the neutral; the tint simply inherits the neutral's own chroma/hue, so a colourless neutral yields colourless shadows. Forced dark in both modes; --sf-shadow-strength handles dark-mode intensity. Override to a brand colour for explicitly…",
       "note": "",
-      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h)",
+      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -14605,6 +14629,30 @@
       ]
     },
     {
+      "name": "--sf-shadow-lightness",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "shadow",
+      "category": "Core tokens",
+      "group": "Shadow strength",
+      "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
+      "note": "",
+      "value": "0.15",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-shadow-m",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -14685,31 +14733,7 @@
       "group": "Shadow strength",
       "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
       "note": "",
-      "value": "calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17)",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-shadow-strength-l",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "shadow",
-      "category": "Core tokens",
-      "group": "Shadow strength",
-      "description": "base opacity for light mode; auto-boosted by +0.17 in dark mode via --sf-is-dark. Override with a calc() to preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).",
-      "note": "",
-      "value": "0.08",
+      "value": "calc(0.08 + var(--sf-is-dark) * 0.17)",
       "aliasOf": null,
       "registered": false,
       "syntax": null,

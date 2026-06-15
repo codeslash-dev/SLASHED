@@ -386,8 +386,8 @@
        +0.17 in dark mode via --sf-is-dark. Override with a calc() to
        preserve the adaptation: calc(0.1 + var(--sf-is-dark) * 0.17).
        ---------------------------------------------------------- */
-    --sf-shadow-strength-l: 0.08;
-    --sf-shadow-strength:   calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17);
+    --sf-shadow-strength:   calc(0.08 + var(--sf-is-dark) * 0.17);
+    --sf-shadow-lightness:  0.15;
     /* ----------------------------------------------------------
        Shadow glow color — tint used by --sf-shadow-glow. Override to
        retint glows; opacity/dark-mode adaptation is controlled by
@@ -591,6 +591,7 @@
          Interactive states — derived from --sf-color-neutral (auto-adapts)
          ---------------------------------------------------------- */
       --sf-color-bg--hover:    oklch(from var(--sf-color-neutral) l c h / 0.08);
+      --sf-color-bg--active:   oklch(from var(--sf-color-neutral) l c h / 0.12);
       --sf-color-bg--selected: oklch(from var(--sf-color-action) l c h / 0.1);
       --sf-color-bg--focus:    oklch(from var(--sf-color-action) l c h / 0.06);
 
@@ -1294,7 +1295,7 @@
          handles dark-mode intensity. Override to a brand colour for explicitly
          tinted shadows — keep it dark or you get bright slabs:
          oklch(from var(--sf-color-primary) 0.15 c h). */
-      --sf-shadow-color: oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h);
+      --sf-shadow-color: oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h);
 
       /* Elevation shadow ramp — box-shadow presets from xs to 2xl.
          Opacity scales with --sf-shadow-strength so dark-mode boost is automatic. */
@@ -1497,22 +1498,11 @@
        and `overlay` properties in the transition so entry animations can
        fire and exit animations finish before the element leaves the top
        layer. Compose it into a component transition alongside the visual
-       properties:
-         transition: opacity   var(--sf-duration-normal) var(--sf-ease-out),
-                     translate var(--sf-duration-normal) var(--sf-ease-out),
-                     var(--sf-transition-overlay);
-       The matching @starting-style rules are element-specific and ship with
-       the dialog/popover components (slashed.components). Progressive
-       enhancement — unsupporting engines simply show/hide instantly.
-       Chrome/Edge/Safari and Firefox (2025+) support allow-discrete. */
-    /* Top-layer transition building block (dialog, [popover]).
-       transition-behavior: allow-discrete keeps the discrete `display`
-       and `overlay` properties in the transition so entry animations can
-       fire and exit animations finish before the element leaves the top
-       layer. Compose it into a component transition alongside the visual
        properties.
        NOTE: Requires @starting-style to be defined on the element for
-       the entrance transition to trigger. */
+       the entrance transition to trigger.
+       Progressive enhancement — unsupporting engines simply show/hide instantly.
+       Chrome/Edge/Safari and Firefox (2025+) support allow-discrete. */
     --sf-transition-overlay:
       overlay var(--sf-duration-normal) allow-discrete,
       display var(--sf-duration-normal) allow-discrete;

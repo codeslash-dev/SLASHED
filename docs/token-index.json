@@ -10,15 +10,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 822,
+      "tokens": 823,
       "by_tier": {
-        "PUBLIC": 684,
+        "PUBLIC": 685,
         "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 232,
-        "consumption": 590
+        "consumption": 591
       }
     }
   },
@@ -1162,6 +1162,14 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) calc(l + 0.02) c h)"
+    },
+    "--sf-color-bg--active": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(from var(--sf-color-neutral) l c h / 0.12)"
     },
     "--sf-color-bg--disabled": {
       "tier": "PUBLIC",
@@ -4937,7 +4945,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-strength-l, 0.15) c h)"
+      "value": "oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)"
     },
     "--sf-shadow-glow": {
       "tier": "PUBLIC",
@@ -4971,6 +4979,14 @@
       ],
       "value": "0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))"
     },
+    "--sf-shadow-lightness": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "0.15"
+    },
     "--sf-shadow-m": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5001,15 +5017,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "calc(var(--sf-shadow-strength-l) + var(--sf-is-dark) * 0.17)"
-    },
-    "--sf-shadow-strength-l": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0.08"
+      "value": "calc(0.08 + var(--sf-is-dark) * 0.17)"
     },
     "--sf-shadow-xl": {
       "tier": "PUBLIC",
