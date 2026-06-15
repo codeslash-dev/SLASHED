@@ -1012,7 +1012,7 @@
         </div>
 
         <h3>Line Heights (--sf-leading-*)</h3>
-        <div class="sf-grid-auto" style="--sf-grid-min: 14rem">
+        <div class="sf-grid" style="--sf-grid-min: 14rem">
           <div style="background: var(--sf-color-inset); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
             <code style="font-size: var(--sf-text-xs)">--sf-leading-tight (1.1)</code>
             <p style="line-height: var(--sf-leading-tight); margin-top: var(--sf-space-2xs)">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
@@ -1501,9 +1501,9 @@
           <svg class="sf-icon sf-icon--l sf-icon--boxed" viewBox="0 0 24 24" aria-hidden="true" style="--sf-icon-box-radius: var(--sf-radius-full); --sf-icon-box-bg: var(--sf-color-action); color: var(--sf-color-text--on-action); --sf-icon-box-border: none"><circle cx="12" cy="12" r="10"/></svg>
         </div>
 
-        <h3>.sf-grid-auto--dense</h3>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Dense auto-flow lets later items backfill earlier gaps. Add <code>.sf-grid-auto--dense</code> to any grid.</p>
-        <div class="sf-grid-auto sf-grid-auto--s sf-grid-auto--dense" style="font-size: var(--sf-text-xs)">
+        <h3>.sf-grid--dense</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Dense auto-flow lets later items backfill earlier gaps. Add <code>.sf-grid--dense</code> to any grid.</p>
+        <div class="sf-grid sf-grid--s sf-grid--dense" style="font-size: var(--sf-text-xs)">
           <div class="demo-box" style="grid-column: span 2">span 2</div>
           <div class="demo-box">a</div>
           <div class="demo-box">b</div>
@@ -1555,42 +1555,42 @@
           </div>
         </div>
 
-        <h3>.sf-grid-1 / Ratio grids</h3>
+        <h3>.sf-grid-cols-1 / Ratio grids</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
-          <code>.sf-grid-1</code> is intentionally a single-column grid. Ratio grids (<code>.sf-grid-1-2</code> etc.) collapse to a single column on narrow widths and switch to two columns at <code>48em</code> via container queries — the parent must declare <code>container-type: inline-size</code>.
+          <code>.sf-grid-cols-1</code> is intentionally a single-column grid. Ratio grids (<code>.sf-grid-cols-1-2</code> etc.) collapse to a single column on narrow widths and switch to two columns at <code>48em</code> via container queries — the parent must declare <code>container-type: inline-size</code>.
         </p>
         <div class="sf-stack sf-stack--m">
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-1 (single column by design)</code>
-            <div class="sf-grid-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-1 (single column by design)</code>
+            <div class="sf-grid-cols-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">Full width row</div>
               <div class="demo-box demo-box--alt">Full width row</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-1-2 (1fr 2fr)</code>
-            <div class="sf-grid-1-2 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-1-2 (1fr 2fr)</code>
+            <div class="sf-grid-cols-1-2 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">1fr</div>
               <div class="demo-box demo-box--alt">2fr</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-2-1 (2fr 1fr)</code>
-            <div class="sf-grid-2-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-2-1 (2fr 1fr)</code>
+            <div class="sf-grid-cols-2-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">2fr</div>
               <div class="demo-box demo-box--alt">1fr</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-1-3 (1fr 3fr)</code>
-            <div class="sf-grid-1-3 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-1-3 (1fr 3fr)</code>
+            <div class="sf-grid-cols-1-3 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">1fr</div>
               <div class="demo-box demo-box--alt">3fr</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-3-1 (3fr 1fr)</code>
-            <div class="sf-grid-3-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-3-1 (3fr 1fr)</code>
+            <div class="sf-grid-cols-3-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">3fr</div>
               <div class="demo-box demo-box--alt">1fr</div>
             </div>
@@ -1652,50 +1652,50 @@
           </div>
         </div>
 
-        <h3>.sf-grid-6 / .sf-grid-auto--xs … .sf-grid-auto--2xl</h3>
+        <h3>.sf-grid-cols-6 / .sf-grid--xs … .sf-grid--2xl</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
-          Fixed-column grids (<code>.sf-grid-6</code>) use container queries — wrap in <code>container-type: inline-size</code>. Auto-fill grids (<code>.sf-grid-auto--xs/s/m/l/xl/2xl</code>) use <code>repeat(auto-fill, minmax(min(--sf-grid-min, 100%), 1fr))</code> — they collapse to fewer columns as the container narrows. On very narrow viewports both will stack to a single column; resize the window to see them respond.
+          Fixed-column grids (<code>.sf-grid-cols-6</code>) use container queries — wrap in <code>container-type: inline-size</code>. Auto-fill grids (<code>.sf-grid--xs/s/m/l/xl/2xl</code>) use <code>repeat(auto-fill, minmax(min(--sf-grid-min, 100%), 1fr))</code> — they collapse to fewer columns as the container narrows. On very narrow viewports both will stack to a single column; resize the window to see them respond.
         </p>
         <div class="sf-stack sf-stack--m">
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-6</code>
-            <div class="sf-grid-6 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-6</code>
+            <div class="sf-grid-cols-6 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div><div class="demo-box">6</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-auto--xs (min ~10rem)</code>
-            <div class="sf-grid-auto sf-grid-auto--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--xs (min ~10rem)</code>
+            <div class="sf-grid sf-grid--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div><div class="demo-box">D</div><div class="demo-box">E</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-auto--s (min ~13rem)</code>
-            <div class="sf-grid-auto sf-grid-auto--s demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--s (min ~13rem)</code>
+            <div class="sf-grid sf-grid--s demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div><div class="demo-box">D</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-auto--m (min ~16rem)</code>
-            <div class="sf-grid-auto sf-grid-auto--m demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--m (min ~16rem)</code>
+            <div class="sf-grid sf-grid--m demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-auto--l (min ~20rem)</code>
-            <div class="sf-grid-auto sf-grid-auto--l demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--l (min ~20rem)</code>
+            <div class="sf-grid sf-grid--l demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-auto--xl (min ~24rem)</code>
-            <div class="sf-grid-auto sf-grid-auto--xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--xl (min ~24rem)</code>
+            <div class="sf-grid sf-grid--xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">A</div><div class="demo-box">B</div>
             </div>
           </div>
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-auto--2xl (min ~28rem)</code>
-            <div class="sf-grid-auto sf-grid-auto--2xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid--2xl (min ~28rem)</code>
+            <div class="sf-grid sf-grid--2xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">A</div><div class="demo-box">B</div>
             </div>
           </div>
@@ -2066,9 +2066,9 @@
       ══════════════════════════════════════════════════════ -->
       <section id="layout-grid" class="demo-section">
         <h2>Layout — Grid</h2>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-grid-auto</code> — auto-fill CSS grid. Responsive without any media queries.</p>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)"><code>.sf-grid</code> — auto-fill CSS grid. Responsive without any media queries.</p>
 
-        <div class="sf-grid-auto demo-layout-wrap" style="--sf-grid-min: 9rem">
+        <div class="sf-grid demo-layout-wrap" style="--sf-grid-min: 9rem">
           <div class="demo-box">1</div>
           <div class="demo-box">2</div>
           <div class="demo-box">3</div>
@@ -2077,7 +2077,7 @@
           <div class="demo-box demo-box--alt">6</div>
           <div class="demo-box demo-box--action">7</div>
         </div>
-        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-grid-min</code> (min column width), <code>--sf-grid-gap</code>. Modifier: <code>.sf-grid-auto--fit</code> (auto-fit). Fixed columns: <code>.sf-grid-2</code>, <code>.sf-grid-3</code>, <code>.sf-grid-4</code></p>
+        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-grid-min</code> (min column width), <code>--sf-grid-gap</code>. Modifier: <code>.sf-grid--fit</code> (auto-fit). Fixed columns: <code>.sf-grid-cols-2</code>, <code>.sf-grid-cols-3</code>, <code>.sf-grid-cols-4</code></p>
       </section>
 
       <!-- ══════════════════════════════════════════════════════
@@ -2318,7 +2318,7 @@
         <h2>Reset &amp; Base</h2>
 
         <h3>Form Elements (reset.css + base.css)</h3>
-        <div class="sf-grid-auto" style="--sf-grid-min: 14rem; gap: var(--sf-space-m)">
+        <div class="sf-grid" style="--sf-grid-min: 14rem; gap: var(--sf-space-m)">
           <div class="sf-stack sf-stack--xs">
             <label style="font-size: var(--sf-text-s)">Text input</label>
             <input type="text" placeholder="Placeholder text" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text); width: 100%">
@@ -2600,7 +2600,7 @@
         </article>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-surface--*</code> — auto-flipped foreground</h3>
-        <div class="sf-grid-auto sf-grid-auto--m" style="--sf-grid-min: 9rem">
+        <div class="sf-grid sf-grid--m" style="--sf-grid-min: 9rem">
           <div class="sf-surface--primary"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">primary</div>
           <div class="sf-surface--secondary" style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">secondary</div>
           <div class="sf-surface--tertiary"  style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">tertiary</div>

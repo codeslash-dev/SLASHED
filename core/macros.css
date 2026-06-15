@@ -7,7 +7,7 @@
 
    Macro-classes vs layout primitives:
      · Layout primitive = answers "where do my children go?"
-       (e.g. .sf-stack, .sf-grid-auto, .sf-cluster)
+       (e.g. .sf-stack, .sf-grid, .sf-cluster)
      · Macro-class      = answers "what does this element DO or
        LOOK LIKE?" (e.g. .sf-prose, .sf-flow, .sf-truncate)
 

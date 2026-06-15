@@ -26180,7 +26180,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Non-collapsing fixed-column grid. Unlike…",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -26206,7 +26206,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Non-collapsing fixed-column grid. Unlike…",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -26232,7 +26232,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Non-collapsing fixed-column grid. Unlike…",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -26258,7 +26258,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Non-collapsing fixed-column grid. Unlike…",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -26284,7 +26284,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Fixed columns",
-      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-N which uses container queries to stack at small sizes. Use when the layout must remain N columns at all widths; the caller is responsible for overflow handling. Non-collapsing fixed-column grid. Unlike…",
+      "description": "Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style=\"--sf-equal-cols: 3\"",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -26873,10 +26873,244 @@
       ]
     },
     {
-      "name": "sf-grid-1",
+      "name": "sf-grid",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-1",
+      "selector": ".sf-grid",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--2xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--2xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--dense",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--dense",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including .sf-grid-cols-N.",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--fit",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--fit",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--l",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--m",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--s",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid--xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid--xs",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (auto)",
+      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:…",
+      "isVariant": true,
+      "baseClass": "sf-grid",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-cols-1",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-cols-1",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -26899,10 +27133,10 @@
       ]
     },
     {
-      "name": "sf-grid-1-2",
+      "name": "sf-grid-cols-1-2",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-1-2",
+      "selector": ".sf-grid-cols-1-2",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -26925,10 +27159,10 @@
       ]
     },
     {
-      "name": "sf-grid-1-3",
+      "name": "sf-grid-cols-1-3",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-1-3",
+      "selector": ".sf-grid-cols-1-3",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -26951,10 +27185,10 @@
       ]
     },
     {
-      "name": "sf-grid-2",
+      "name": "sf-grid-cols-2",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-2",
+      "selector": ".sf-grid-cols-2",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -26977,10 +27211,10 @@
       ]
     },
     {
-      "name": "sf-grid-2-1",
+      "name": "sf-grid-cols-2-1",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-2-1",
+      "selector": ".sf-grid-cols-2-1",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -27003,10 +27237,10 @@
       ]
     },
     {
-      "name": "sf-grid-3",
+      "name": "sf-grid-cols-3",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-3",
+      "selector": ".sf-grid-cols-3",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -27029,10 +27263,10 @@
       ]
     },
     {
-      "name": "sf-grid-3-1",
+      "name": "sf-grid-cols-3-1",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-3-1",
+      "selector": ".sf-grid-cols-3-1",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -27055,10 +27289,10 @@
       ]
     },
     {
-      "name": "sf-grid-4",
+      "name": "sf-grid-cols-4",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-4",
+      "selector": ".sf-grid-cols-4",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -27081,10 +27315,10 @@
       ]
     },
     {
-      "name": "sf-grid-6",
+      "name": "sf-grid-cols-6",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-grid-6",
+      "selector": ".sf-grid-cols-6",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
@@ -27093,240 +27327,6 @@
       "description": "Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid…",
       "isVariant": false,
       "baseClass": null,
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--2xl",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--2xl",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--dense",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--dense",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including the fixed-column .sf-grid-N.",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--fit",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--fit",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--l",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--l",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--m",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--m",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--s",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--s",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--xl",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--xl",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-grid-auto--xs",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-grid-auto--xs",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "Grid (auto)",
-      "description": "Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches to auto-fit. Renamed from .sf-grid to avoid namespace collision with the fixed-column .sf-grid-N classes (see below). auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid-auto--fit):…",
-      "isVariant": true,
-      "baseClass": "sf-grid-auto",
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [

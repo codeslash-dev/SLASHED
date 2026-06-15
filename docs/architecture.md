@@ -334,9 +334,9 @@ The framework declares two named containers:
 | `.sf-container` | `sf-layout` | `inline-size` | open — consumers can target with `@container sf-layout (...)` in their own CSS |
 | `.sf-alternate` | `sf-alternate` | `inline-size` | framework-internal — the zigzag flip query is bound to this name so a nested `.sf-alternate` flips on its own width, not its outer container's |
 
-The `.sf-bento` and `.sf-grid-*` (fixed-column and ratio) primitives use **anonymous** `@container (...)` queries on purpose. They are designed to react to whatever the nearest `inline-size` ancestor reports — typically `.sf-container`, but legitimately also a parent `.sf-bento`, `.sf-alternate`, or any user-declared container. This portability is the feature: drop `.sf-grid-3` inside any inline-size context and it adapts.
+The `.sf-bento` and `.sf-grid-cols-*` (fixed-column and ratio) primitives use **anonymous** `@container (...)` queries on purpose. They are designed to react to whatever the nearest `inline-size` ancestor reports — typically `.sf-container`, but legitimately also a parent `.sf-bento`, `.sf-alternate`, or any user-declared container. This portability is the feature: drop `.sf-grid-cols-3` inside any inline-size context and it adapts.
 
-If precision is needed in a consumer layout — e.g. a `.sf-grid-3` that must respond to the outer `.sf-container` and ignore an intermediate container — the consumer wraps the grid in their own named container or uses `@container sf-layout (...)` directly in user CSS.
+If precision is needed in a consumer layout — e.g. a `.sf-grid-cols-3` that must respond to the outer `.sf-container` and ignore an intermediate container — the consumer wraps the grid in their own named container or uses `@container sf-layout (...)` directly in user CSS.
 
 ---
 

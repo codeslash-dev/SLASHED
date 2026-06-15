@@ -245,34 +245,33 @@
   .sf-switcher--vertical { flex-direction: column; }
 
   /* -- Grid (auto) ---------------------------------------------
-     Auto-fill CSS grid with no breakpoints. .sf-grid-auto--fit switches
-     to auto-fit. Renamed from .sf-grid to avoid namespace collision with
-     the fixed-column .sf-grid-N classes (see below).
+     Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches
+     to auto-fit. Fixed-column variants live in .sf-grid-cols-N.
      auto-fill: empty tracks preserved, last item doesn't stretch.
-     auto-fit (.sf-grid-auto--fit): empty tracks collapsed, items stretch.
+     auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch.
      Override: style="--sf-grid-min: 12rem; --sf-grid-gap: 1rem"
      ---------------------------------------------------------- */
 
-  .sf-grid-auto {
+  .sf-grid {
     display:               grid;
     grid-template-columns: repeat(auto-fill, minmax(min(var(--sf-grid-min), 100%), 1fr));
     gap:                   var(--sf-grid-gap);
   }
 
-  .sf-grid-auto--fit {
+  .sf-grid--fit {
     grid-template-columns: repeat(auto-fit, minmax(min(var(--sf-grid-min), 100%), 1fr));
   }
 
-  .sf-grid-auto--xs { --sf-grid-min: var(--sf-grid-min-xs); }
-  .sf-grid-auto--s  { --sf-grid-min: var(--sf-grid-min-s); }
-  .sf-grid-auto--m  { --sf-grid-min: var(--sf-grid-min-m); }
-  .sf-grid-auto--l  { --sf-grid-min: var(--sf-grid-min-l); }
-  .sf-grid-auto--xl { --sf-grid-min: var(--sf-grid-min-xl); }
-  .sf-grid-auto--2xl { --sf-grid-min: var(--sf-grid-min-2xl); }
+  .sf-grid--xs { --sf-grid-min: var(--sf-grid-min-xs); }
+  .sf-grid--s  { --sf-grid-min: var(--sf-grid-min-s); }
+  .sf-grid--m  { --sf-grid-min: var(--sf-grid-min-m); }
+  .sf-grid--l  { --sf-grid-min: var(--sf-grid-min-l); }
+  .sf-grid--xl { --sf-grid-min: var(--sf-grid-min-xl); }
+  .sf-grid--2xl { --sf-grid-min: var(--sf-grid-min-2xl); }
 
   /* Dense packing — let later items backfill earlier gaps (as .sf-bento
-     does). Applies to any grid, including the fixed-column .sf-grid-N. */
-  .sf-grid-auto--dense { grid-auto-flow: dense; }
+     does). Applies to any grid, including .sf-grid-cols-N. */
+  .sf-grid--dense { grid-auto-flow: dense; }
 
   /* -- Icon ----------------------------------------------------
      Inline icon sizing primitive. Uses em-based --sf-icon-* tokens
@@ -455,48 +454,47 @@
      Wrap in .sf-container (or any element with container-type: inline-size).
      ---------------------------------------------------------- */
 
-  .sf-grid-1, .sf-grid-2, .sf-grid-3, .sf-grid-4, .sf-grid-6 {
+  .sf-grid-cols-1, .sf-grid-cols-2, .sf-grid-cols-3, .sf-grid-cols-4, .sf-grid-cols-6 {
     display: grid;
     gap:     var(--sf-grid-gap);
   }
 
   /* CQ breakpoint S — 30em. Cannot use var() inside @container per CSS spec. */
   @container (min-width: 30em) {
-    .sf-grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .sf-grid-6 { grid-template-columns: repeat(3, 1fr); }
+    .sf-grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+    .sf-grid-cols-6 { grid-template-columns: repeat(3, 1fr); }
   }
 
   /* CQ breakpoint L — 48em. Cannot use var() inside @container per CSS spec. */
   @container (min-width: 48em) {
-    .sf-grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .sf-grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .sf-grid-4 { grid-template-columns: repeat(4, 1fr); }
-    .sf-grid-6 { grid-template-columns: repeat(6, 1fr); }
+    .sf-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .sf-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .sf-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .sf-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
   }
 
   /* -- Ratio grids ---------------------------------------------
      Two-column ratio grids, container-query responsive.
      ---------------------------------------------------------- */
 
-  .sf-grid-1-2, .sf-grid-2-1,
-  .sf-grid-1-3, .sf-grid-3-1 {
+  .sf-grid-cols-1-2, .sf-grid-cols-2-1,
+  .sf-grid-cols-1-3, .sf-grid-cols-3-1 {
     display: grid;
     gap:     var(--sf-grid-gap);
   }
 
   @container (min-width: 48em) {
-    .sf-grid-1-2 { grid-template-columns: 1fr 2fr; }
-    .sf-grid-2-1 { grid-template-columns: 2fr 1fr; }
-    .sf-grid-1-3 { grid-template-columns: 1fr 3fr; }
-    .sf-grid-3-1 { grid-template-columns: 3fr 1fr; }
+    .sf-grid-cols-1-2 { grid-template-columns: 1fr 2fr; }
+    .sf-grid-cols-2-1 { grid-template-columns: 2fr 1fr; }
+    .sf-grid-cols-1-3 { grid-template-columns: 1fr 3fr; }
+    .sf-grid-cols-3-1 { grid-template-columns: 3fr 1fr; }
   }
 
   /* -- Fixed columns ------------------------------------------
      Fixed N-column grid. Column count NEVER collapses — unlike
-     .sf-grid-N which uses container queries to stack at small
-     sizes. Use when the layout must remain N columns at all
-     widths; the caller is responsible for overflow handling.
-     Non-collapsing fixed-column grid. Unlike .sf-grid-N, never stacks.
+     .sf-grid-cols-N which stacks at narrow container widths.
+     Use when the layout must stay N columns at all widths; the
+     caller is responsible for overflow handling.
      Override: style="--sf-equal-cols: 3"
      ---------------------------------------------------------- */
   .sf-equal {

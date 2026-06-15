@@ -662,7 +662,7 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid-auto — auto-fill tiers</p>
+        <p class="pv__eyebrow">.sf-grid — auto-fill tiers</p>
         <div class="pv__lp-stack2">
           {#each [['xs','6rem'],['s','8rem'],['m','10rem'],['l','12rem'],['xl','16rem']] as [tier,min] (tier)}
             <div>
@@ -687,7 +687,7 @@
             </div>
           {/each}
           <div>
-            <code class="pv__lp-label">.sf-grid-1-2 · .sf-grid-1-3</code>
+            <code class="pv__lp-label">.sf-grid-cols-1-2 · .sf-grid-cols-1-3</code>
             <div style="display:grid;grid-template-columns:1fr 2fr;gap:6px;margin-top:4px">
               <div class="pv__box">1</div><div class="pv__box pv__box--alt">2×</div>
             </div>
