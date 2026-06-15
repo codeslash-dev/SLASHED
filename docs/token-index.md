@@ -509,7 +509,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-text` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-text--disabled` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` |
 | `--sf-color-text--inverse` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` |
-| `--sf-color-text--muted` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-text) l c h / 0.65)` |
+| `--sf-color-text--muted` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )` |
 | `--sf-color-text--on-action` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-text--on-base` | PUBLIC | consumption | Core | `var(--sf-color-text)` |
 | `--sf-color-text--on-danger` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |

@@ -2753,7 +2753,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-text) l c h / 0.65)"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )"
     },
     "--sf-color-text--on-action": {
       "tier": "PUBLIC",
