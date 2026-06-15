@@ -1,14 +1,10 @@
 /**
- * Feature: tier-1-color-fallback
- * Property 7: On Old_Engine (no @supports match), ungated sRGB defaults are
- *             the only surviving declarations and never contain light-dark()
- *             or oklch(from …).
+ * Property 7: After stripping @supports blocks from the built bundle,
+ * no ungated declarations contain light-dark(), oklch(from…), or color-mix().
  *
- * The fallbacks file is NOT part of any default bundle — it is a standalone
- * opt-in loaded before the bundle (see core/tokens.color-fallbacks.css header).
- * This test simulates that documented integration: fallbacks + full bundle,
- * then strips @supports blocks to model an Old_Engine and asserts the
- * surviving declarations satisfy the sRGB invariant.
+ * This is the build-time complement to tier1-p2-coverage.test.js (which
+ * checks the same invariant at source level). P7 verifies the invariant
+ * holds in the final built artifact after bundling and minification.
  *
  * Run: node --test tests/tier1-p7-oldengine.test.js
  */
@@ -20,41 +16,28 @@ import fc   from 'fast-check';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist/slashed.full.css');
-const FALLBACKS = path.join(ROOT, 'core/tokens.color-fallbacks.css');
-
-/** Opt-in load order: fallbacks first, then the bundle. */
-function loadOptInCss() {
-  return fs.readFileSync(FALLBACKS, 'utf8') + '\n' + fs.readFileSync(DIST, 'utf8');
-}
 
 /**
- * Simulate Old_Engine by stripping all @supports blocks from CSS.
- * Returns only the declarations that survive (ungated ones).
+ * Simulate an engine with no @supports by stripping all @supports blocks.
+ * Returns only declarations that survive (ungated ones).
  */
 function stripSupports(css) {
-  // Remove @supports { ... } blocks (handles nesting)
   let result = '';
   let depth = 0;
   let inSupports = false;
   let supportsDepth = 0;
-  const lines = css.split('\n');
-  for (const line of lines) {
+  for (const line of css.split('\n')) {
     const trimmed = line.trim();
     if (trimmed.startsWith('@supports')) {
       inSupports = true;
       supportsDepth = depth;
     }
-    if (!inSupports) {
-      result += line + '\n';
-    }
-    // Count braces
+    if (!inSupports) result += line + '\n';
     for (const ch of line) {
       if (ch === '{') depth++;
       else if (ch === '}') {
         depth--;
-        if (inSupports && depth <= supportsDepth) {
-          inSupports = false;
-        }
+        if (inSupports && depth <= supportsDepth) inSupports = false;
       }
     }
   }
@@ -70,112 +53,62 @@ function extractCustomDecls(css) {
   return decls;
 }
 
-const TESTED_TOKENS = [
-  '--sf-color-primary',
-  '--sf-color-secondary',
-  '--sf-color-action',
-  '--sf-color-neutral',
-  '--sf-color-base',
-  '--sf-color-text',
-  '--sf-color-border',
-  '--sf-color-success',
-  '--sf-color-warning',
+const CHECKED_TOKENS = [
+  '--sf-color-primary', '--sf-color-secondary', '--sf-color-action',
+  '--sf-color-neutral', '--sf-color-base', '--sf-color-text',
+  '--sf-color-border', '--sf-color-success', '--sf-color-warning',
   '--sf-color-error',
 ];
 
-const HEX_RE = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
-const RGB_RE = /^rgb\(\s*\d+\s+\d+\s+\d+\s*(?:\/\s*[\d.]+\s*)?\)$/;
-
-// hsl() can contain var() references (nested parens) — check by prefix/suffix
-function isHSL(v) { return v.startsWith('hsl(') && v.endsWith(')'); }
-
-function isValidSRGBValue(v) {
-  return HEX_RE.test(v) || RGB_RE.test(v) || isHSL(v) ||
-    /^none$/.test(v) || /^transparent$/.test(v) || /^inherit$/.test(v) ||
-    /^oklch\(\s*[\d.]+%?\s+[\d.]+\s+[\d.]+\s*\)$/.test(v); // absolute oklch is OK
-}
-
-describe('P7: Old-engine cascade simulation', () => {
+describe('P7: @supports gating — no modern expressions in ungated bundle declarations', () => {
   let oldEngineDecls;
 
-  test('setup: load and strip @supports blocks', () => {
-    assert.ok(fs.existsSync(DIST), 'dist/slashed.full.css missing');
-    assert.ok(fs.existsSync(FALLBACKS), 'core/tokens.color-fallbacks.css missing');
-    const full = loadOptInCss();
-    const stripped = stripSupports(full);
+  test('setup: build artifact exists and @supports stripping yields declarations', () => {
+    assert.ok(fs.existsSync(DIST), 'dist/slashed.full.css missing — run npm run build first');
+    const css = fs.readFileSync(DIST, 'utf8');
+    const stripped = stripSupports(css);
     oldEngineDecls = extractCustomDecls(stripped);
-    assert.ok(oldEngineDecls.size > 0, 'No declarations found in old-engine simulation');
+    assert.ok(oldEngineDecls.size > 0, 'No declarations survived @supports stripping');
   });
 
-  test('no light-dark() survives on old engine', () => {
+  test('no light-dark() survives @supports stripping', () => {
     const violations = [...oldEngineDecls.entries()]
       .filter(([, v]) => v.includes('light-dark'));
     if (violations.length > 0) {
-      assert.fail('light-dark() survived on Old_Engine: ' +
-        violations.map(([k]) => k).join(', '));
+      assert.fail('Ungated light-dark() in bundle: ' + violations.map(([k]) => k).join(', '));
     }
   });
 
-  test('no oklch(from…) survives on old engine', () => {
+  test('no oklch(from…) survives @supports stripping', () => {
     const violations = [...oldEngineDecls.entries()]
       .filter(([, v]) => v.includes('oklch(from'));
     if (violations.length > 0) {
-      assert.fail('oklch(from…) survived on Old_Engine: ' +
-        violations.map(([k]) => k).join(', '));
+      assert.fail('Ungated oklch(from…) in bundle: ' + violations.map(([k]) => k).join(', '));
     }
   });
 
-  test('no color-mix() in core Tier-1 tokens survives on old engine', () => {
-    // Scope to core semantic tokens (not numeric palette scale from optional/tokens.palette.css)
-    const CORE_TOKEN_PATTERN = /^--sf-color-(?!.+-\d{2,3}$|.+-a\d+$)/;
+  test('no color-mix() in core semantic tokens survives @supports stripping', () => {
+    const CORE = /^--sf-color-(?!.+-\d{2,3}$|.+-a\d+$)/;
     const violations = [...oldEngineDecls.entries()]
-      .filter(([k, v]) => CORE_TOKEN_PATTERN.test(k) && v.includes('color-mix('));
+      .filter(([k, v]) => CORE.test(k) && v.includes('color-mix('));
     if (violations.length > 0) {
-      assert.fail('color-mix() survived on Old_Engine in core tokens: ' +
-        violations.map(([k]) => k).join(', '));
+      assert.fail('Ungated color-mix() in core tokens: ' + violations.map(([k]) => k).join(', '));
     }
   });
 
-  test('all core color tokens have sRGB values on old engine', () => {
-    for (const token of TESTED_TOKENS) {
-      const val = oldEngineDecls.get(token);
-      assert.ok(val, `${token} has no value on Old_Engine`);
-      assert.ok(isValidSRGBValue(val), `${token} value "${val}" is not valid sRGB`);
-    }
-  });
-
-  // fast-check: any sampled core token has a valid sRGB value on old engine
-  test('fast-check: sampled tokens have sRGB values on old engine (100 iterations)', () => {
+  // fast-check: random sample from the checked set — none contain modern expressions
+  test('fast-check: sampled core tokens have no modern expressions when ungated (100 iterations)', () => {
     fc.assert(
       fc.property(
-        fc.integer({ min: 0, max: TESTED_TOKENS.length - 1 }),
+        fc.integer({ min: 0, max: CHECKED_TOKENS.length - 1 }),
         (idx) => {
-          const token = TESTED_TOKENS[idx];
-          const val = oldEngineDecls.get(token);
-          return !!val && isValidSRGBValue(val) &&
-            !val.includes('light-dark') && !val.includes('oklch(from');
+          const val = oldEngineDecls.get(CHECKED_TOKENS[idx]) ?? '';
+          return !val.includes('light-dark') &&
+                 !val.includes('oklch(from') &&
+                 !val.includes('color-mix(');
         }
       ),
       { numRuns: 100 }
     );
-  });
-
-  // Simulate dark mode on old engine: [data-theme="dark"] block should also have sRGB
-  test('dark-mode [data-theme="dark"] values are sRGB on old engine', () => {
-    const full = loadOptInCss();
-    const stripped = stripSupports(full);
-    // Extract just the [data-theme="dark"] block
-    const darkStart = stripped.indexOf('[data-theme="dark"]');
-    if (darkStart < 0) return; // may not be in old-engine content
-
-    const darkBlock = stripped.slice(darkStart, stripped.indexOf('}', darkStart) + 1);
-    const decls = extractCustomDecls(darkBlock);
-    for (const [name, val] of decls) {
-      if (!name.startsWith('--sf-color-')) continue;
-      assert.ok(
-        isValidSRGBValue(val),
-        `Dark-mode ${name} value "${val}" is not valid sRGB`
-      );
-    }
   });
 });

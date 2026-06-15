@@ -882,8 +882,8 @@
           <div class="demo-swatch" style="background: var(--sf-color-primary-darker)">darker</div>
           <div class="demo-swatch" style="background: var(--sf-color-primary-xdark)">xdark</div>
           <div class="demo-swatch" style="background: var(--sf-color-primary-superdark)">superdark</div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-hover)">hover</div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-active)">active</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary--hover)">hover</div>
+          <div class="demo-swatch" style="background: var(--sf-color-primary--active)">active</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-subtle)">subtle</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-muted)">muted</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-ghost)">ghost</div>
@@ -1555,42 +1555,42 @@
           </div>
         </div>
 
-        <h3>.sf-grid-1 / Ratio grids</h3>
+        <h3>.sf-grid-cols-1 / Ratio grids</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
-          <code>.sf-grid-1</code> is intentionally a single-column grid. Ratio grids (<code>.sf-grid-1-2</code> etc.) collapse to a single column on narrow widths and switch to two columns at <code>48em</code> via container queries — the parent must declare <code>container-type: inline-size</code>.
+          <code>.sf-grid-cols-1</code> is intentionally a single-column grid. Ratio grids (<code>.sf-grid-cols-1-2</code> etc.) collapse to a single column on narrow widths and switch to two columns at <code>48em</code> via container queries — the parent must declare <code>container-type: inline-size</code>.
         </p>
         <div class="sf-stack sf-stack--m">
           <div>
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-1 (single column by design)</code>
-            <div class="sf-grid-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-1 (single column by design)</code>
+            <div class="sf-grid-cols-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">Full width row</div>
               <div class="demo-box demo-box--alt">Full width row</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-1-2 (1fr 2fr)</code>
-            <div class="sf-grid-1-2 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-1-2 (1fr 2fr)</code>
+            <div class="sf-grid-cols-1-2 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">1fr</div>
               <div class="demo-box demo-box--alt">2fr</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-2-1 (2fr 1fr)</code>
-            <div class="sf-grid-2-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-2-1 (2fr 1fr)</code>
+            <div class="sf-grid-cols-2-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">2fr</div>
               <div class="demo-box demo-box--alt">1fr</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-1-3 (1fr 3fr)</code>
-            <div class="sf-grid-1-3 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-1-3 (1fr 3fr)</code>
+            <div class="sf-grid-cols-1-3 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">1fr</div>
               <div class="demo-box demo-box--alt">3fr</div>
             </div>
           </div>
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-3-1 (3fr 1fr)</code>
-            <div class="sf-grid-3-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-3-1 (3fr 1fr)</code>
+            <div class="sf-grid-cols-3-1 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">3fr</div>
               <div class="demo-box demo-box--alt">1fr</div>
             </div>
@@ -1652,14 +1652,14 @@
           </div>
         </div>
 
-        <h3>.sf-grid-6 / .sf-grid--xs … .sf-grid--2xl</h3>
+        <h3>.sf-grid-cols-6 / .sf-grid--xs … .sf-grid--2xl</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
-          Fixed-column grids (<code>.sf-grid-6</code>) use container queries — wrap in <code>container-type: inline-size</code>. Auto-fill grids (<code>.sf-grid--xs/s/m/l/xl/2xl</code>) use <code>repeat(auto-fill, minmax(min(--sf-grid-min, 100%), 1fr))</code> — they collapse to fewer columns as the container narrows. On very narrow viewports both will stack to a single column; resize the window to see them respond.
+          Fixed-column grids (<code>.sf-grid-cols-6</code>) use container queries — wrap in <code>container-type: inline-size</code>. Auto-fill grids (<code>.sf-grid--xs/s/m/l/xl/2xl</code>) use <code>repeat(auto-fill, minmax(min(--sf-grid-min, 100%), 1fr))</code> — they collapse to fewer columns as the container narrows. On very narrow viewports both will stack to a single column; resize the window to see them respond.
         </p>
         <div class="sf-stack sf-stack--m">
           <div style="container-type: inline-size">
-            <code style="font-size: var(--sf-text-xs)">.sf-grid-6</code>
-            <div class="sf-grid-6 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-cols-6</code>
+            <div class="sf-grid-cols-6 demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
               <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div><div class="demo-box">6</div>
             </div>
           </div>
@@ -2077,7 +2077,7 @@
           <div class="demo-box demo-box--alt">6</div>
           <div class="demo-box demo-box--action">7</div>
         </div>
-        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-grid-min</code> (min column width), <code>--sf-grid-gap</code>. Modifier: <code>.sf-grid--fit</code> (auto-fit). Fixed columns: <code>.sf-grid-2</code>, <code>.sf-grid-3</code>, <code>.sf-grid-4</code></p>
+        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-grid-min</code> (min column width), <code>--sf-grid-gap</code>. Modifier: <code>.sf-grid--fit</code> (auto-fit). Fixed columns: <code>.sf-grid-cols-2</code>, <code>.sf-grid-cols-3</code>, <code>.sf-grid-cols-4</code></p>
       </section>
 
       <!-- ══════════════════════════════════════════════════════

@@ -96,9 +96,9 @@ describe('api-index.json ⇄ registry.json sync', () => {
     assert.equal(c.sf_classes, registry._meta.counts.sf_classes, 'sf_classes count drift');
     assert.equal(c.is_classes, registry._meta.counts.is_classes, 'is_classes count drift');
     assert.equal(
-      c.tokens - c.fallback_only_tokens,
+      c.tokens,
       registry._meta.counts.tokens,
-      'token surface (excl. fallback-only) != registry token count'
+      'token count in api-index != registry token count'
     );
 
     const byTypeSum = Object.values(c.by_type).reduce((a, b) => a + b, 0);
@@ -126,9 +126,6 @@ describe('api-index.json ⇄ registry.json sync', () => {
       assert.ok('value' in e, `${e.name} missing value`);
       assert.ok('registered' in e && typeof e.registered === 'boolean', `${e.name} bad registered`);
       assert.equal(e.animatable, e.registered, `${e.name} animatable should equal registered`);
-      // fallbackOnly must be present as a boolean on EVERY token row (not sparse).
-      assert.equal(typeof e.fallbackOnly, 'boolean', `${e.name} fallbackOnly must be a boolean`);
-      assert.equal(typeof e.hasFallback, 'boolean', `${e.name} hasFallback must be a boolean`);
       if (e.aliasOf !== null) {
         assert.ok(e.aliasOf.startsWith('--sf-'), `${e.name} aliasOf not a token: ${e.aliasOf}`);
       }

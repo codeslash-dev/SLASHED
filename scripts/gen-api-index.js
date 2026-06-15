@@ -37,9 +37,6 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT    = path.join(ROOT, 'docs', 'api-index.json');
 const OUT_MD = path.join(ROOT, 'docs', 'api-index.md');
 
-// The HSL fallback tier lives in its own file, intentionally excluded from
-// TOKEN_FILES. We read it for fallback coverage + the channel tokens.
-const FALLBACK_FILE = 'core/tokens.color-fallbacks.css';
 const BUNDLE_CONFIG = 'bundle.config.json';
 
 // ── Per-file metadata ─────────────────────────────────────────────────────────
@@ -359,17 +356,6 @@ function aliasTarget(value) {
 // ── Token extraction ──────────────────────────────────────────────────────────
 
 /**
- * Collect every `--sf-*` name declared in the legacy HSL fallback file.
- * @returns {Set<string>}
- */
-function fallbackNames() {
-  const css = maskComments(readFile(FALLBACK_FILE));
-  const names = new Set();
-  for (const m of css.matchAll(/(--sf-[\w-]+)\s*:/g)) names.add(m[1]);
-  return names;
-}
-
-/**
  * Extract every token from one source file with its value, @property metadata
  * and derived group/description. Last declaration wins per file for the value.
  * @param {string} rel source file path
@@ -432,7 +418,6 @@ function extractTokensFromFile(rel) {
  * @returns {Map<string, object>} name → token entry
  */
 function buildTokenEntries(bundlesFor) {
-  const fb = fallbackNames();
   const merged = new Map(); // name -> entry
 
   for (const rel of TOKEN_FILES) {
@@ -457,8 +442,6 @@ function buildTokenEntries(bundlesFor) {
           animatable: !!data.registered,
           syntax: data.syntax ?? null,
           inherits: data.inherits ?? null,
-          hasFallback: fb.has(name),
-          fallbackOnly: false,
           optional: rel.startsWith('optional/'),
           layer: data.layer || null,
           sourceFiles: [rel],
@@ -481,56 +464,6 @@ function buildTokenEntries(bundlesFor) {
     }
   }
   return merged;
-}
-
-/**
- * Build entries for channel tokens that exist ONLY on the legacy HSL fallback
- * tier (`--sf-{family}-h/s/l` + resolved overrides). They are real override
- * knobs on older engines, so we surface them flagged `fallbackOnly: true`.
- * @param {Set<string>} tokenNames names already present in the modern surface
- * @param {(file: string) => string[]} bundlesFor bundle resolver
- * @returns {Map<string, object>} name → fallback-only token entry
- */
-function buildFallbackOnlyEntries(tokenNames, bundlesFor) {
-  const original = readFile(FALLBACK_FILE);
-  const masked   = maskComments(original);
-  const comments = collectComments(original);
-  const layer    = layerOf(masked) || 'slashed.tokens';
-  const seen = new Map();
-
-  const re = /(--sf-[\w-]+)\s*:/g;
-  let m;
-  while ((m = re.exec(masked)) !== null) {
-    const name = m[1];
-    if (tokenNames.has(name) || seen.has(name)) continue;
-    const colon = m.index + m[0].length - 1;
-    const value = readValue(masked, colon);
-    const { group, description } = describe(comments, m.index);
-    seen.set(name, {
-      name,
-      type: 'token',
-      tier: 'PUBLIC-ADVANCED',
-      role: roleOf(value, name),
-      namespace: namespaceOf(name),
-      category: 'Color fallback (legacy HSL)',
-      area: 'fallback',
-      group: group || 'Legacy HSL fallback',
-      description: description || 'Legacy HSL fallback channel/override; consumed only by engines without light-dark()/oklch(from …).',
-      value: value || null,
-      aliasOf: aliasTarget(value),
-      registered: false,
-      animatable: false,
-      syntax: null,
-      inherits: null,
-      hasFallback: false,
-      fallbackOnly: true,
-      optional: false,
-      layer,
-      sourceFiles: [FALLBACK_FILE],
-      bundles: new Set(bundlesFor(FALLBACK_FILE)),
-    });
-  }
-  return seen;
 }
 
 // ── Class extraction ──────────────────────────────────────────────────────────
@@ -753,10 +686,9 @@ function main() {
   const bundleOrderRank = b => (rank.has(b) ? rank.get(b) : Number.MAX_SAFE_INTEGER);
 
   const tokenMap   = buildTokenEntries(bundlesFor);
-  const fbOnlyMap  = buildFallbackOnlyEntries(new Set(tokenMap.keys()), bundlesFor);
   const classMap   = buildClassEntries(bundlesFor);
 
-  const tokenEntries = [...tokenMap.values(), ...fbOnlyMap.values()]
+  const tokenEntries = [...tokenMap.values()]
     .map(e => finalizeEntry(e, bundleOrderRank))
     .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -797,8 +729,6 @@ function main() {
     animatable:  'TOKEN: animatable/transition-able (true for @property-registered tokens).',
     syntax:      'TOKEN: @property syntax descriptor (e.g. <color>), else null.',
     inherits:    'TOKEN: @property inherits flag, else null.',
-    hasFallback: 'TOKEN: a legacy HSL fallback exists in core/tokens.color-fallbacks.css.',
-    fallbackOnly:'TOKEN: true only when the token exists solely on the legacy HSL fallback tier (channel/override knob); false for every normal token.',
     // class-only
     selector:    'CLASS: the CSS selector form (.name).',
     prefix:      "CLASS: 'sf' | 'is' | '' (unprefixed).",
@@ -816,7 +746,6 @@ function main() {
         'Generated from source — do not edit by hand (run: npm run docs:api).',
       token_sources: TOKEN_FILES,
       class_sources: CLASS_FILES,
-      fallback_source: FALLBACK_FILE,
       bundles: allBundles,
       counts: {
         total: entries.length,
@@ -828,7 +757,6 @@ function main() {
         sf_classes: sfClasses.length,
         is_classes: isClasses.length,
         unprefixed_classes: unprefixed.length,
-        fallback_only_tokens: tokenEntries.filter(e => e.fallbackOnly).length,
         by_category: categoryCounts,
       },
       schema,

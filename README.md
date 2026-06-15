@@ -35,7 +35,6 @@ must load **first** and `optional/legacy.css` must load **last**:
 ```html
 <!-- core -->
 <link rel="stylesheet" href="core/layers.css">
-<link rel="stylesheet" href="core/tokens.color-fallbacks.css">
 <link rel="stylesheet" href="core/tokens.css">
 <link rel="stylesheet" href="core/tokens.layout.css">
 <link rel="stylesheet" href="core/tokens.macros.css">

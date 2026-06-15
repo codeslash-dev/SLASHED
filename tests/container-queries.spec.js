@@ -32,9 +32,9 @@ function colCount(el) {
   return cols === 'none' ? 1 : cols.trim().split(/\s+/).length;
 }
 
-// ── .sf-grid-2 ──────────────────────────────────────────────────
-test.describe('CQ: .sf-grid-2', () => {
-  const GRID = '<div id="g" class="sf-grid-2"><div>A</div><div>B</div></div>';
+// ── .sf-grid-cols-2 ──────────────────────────────────────────────────
+test.describe('CQ: .sf-grid-cols-2', () => {
+  const GRID = '<div id="g" class="sf-grid-cols-2"><div>A</div><div>B</div></div>';
 
   test('1 column below 48em (400px container)', async ({ page }) => {
     await setupInContainer(page, 400, GRID);
@@ -49,9 +49,9 @@ test.describe('CQ: .sf-grid-2', () => {
   });
 });
 
-// ── .sf-grid-3 ──────────────────────────────────────────────────
-test.describe('CQ: .sf-grid-3', () => {
-  const GRID = '<div id="g" class="sf-grid-3"><div>A</div><div>B</div><div>C</div></div>';
+// ── .sf-grid-cols-3 ──────────────────────────────────────────────────
+test.describe('CQ: .sf-grid-cols-3', () => {
+  const GRID = '<div id="g" class="sf-grid-cols-3"><div>A</div><div>B</div><div>C</div></div>';
 
   test('1 column below 48em (400px container)', async ({ page }) => {
     await setupInContainer(page, 400, GRID);
@@ -66,9 +66,9 @@ test.describe('CQ: .sf-grid-3', () => {
   });
 });
 
-// ── .sf-grid-4: 3 breakpoints ───────────────────────────────────
-test.describe('CQ: .sf-grid-4', () => {
-  const GRID = '<div id="g" class="sf-grid-4"><div>A</div><div>B</div><div>C</div><div>D</div></div>';
+// ── .sf-grid-cols-4: 3 breakpoints ───────────────────────────────────
+test.describe('CQ: .sf-grid-cols-4', () => {
+  const GRID = '<div id="g" class="sf-grid-cols-4"><div>A</div><div>B</div><div>C</div><div>D</div></div>';
 
   test('1 column below 30em (300px container)', async ({ page }) => {
     await setupInContainer(page, 300, GRID);
@@ -89,9 +89,9 @@ test.describe('CQ: .sf-grid-4', () => {
   });
 });
 
-// ── .sf-grid-6: 3 breakpoints ───────────────────────────────────
-test.describe('CQ: .sf-grid-6', () => {
-  const GRID = '<div id="g" class="sf-grid-6"><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div></div>';
+// ── .sf-grid-cols-6: 3 breakpoints ───────────────────────────────────
+test.describe('CQ: .sf-grid-cols-6', () => {
+  const GRID = '<div id="g" class="sf-grid-cols-6"><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div></div>';
 
   test('1 column below 30em (300px container)', async ({ page }) => {
     await setupInContainer(page, 300, GRID);
@@ -112,9 +112,9 @@ test.describe('CQ: .sf-grid-6', () => {
   });
 });
 
-// ── .sf-grid-1-2 ratio grid ─────────────────────────────────────
-test.describe('CQ: .sf-grid-1-2 ratio grid', () => {
-  const GRID = '<div id="g" class="sf-grid-1-2"><div id="a">Narrow</div><div id="b">Wide</div></div>';
+// ── .sf-grid-cols-1-2 ratio grid ─────────────────────────────────────
+test.describe('CQ: .sf-grid-cols-1-2 ratio grid', () => {
+  const GRID = '<div id="g" class="sf-grid-cols-1-2"><div id="a">Narrow</div><div id="b">Wide</div></div>';
 
   test('single column below 48em (400px container)', async ({ page }) => {
     await setupInContainer(page, 400, GRID);
@@ -134,11 +134,11 @@ test.describe('CQ: .sf-grid-1-2 ratio grid', () => {
   });
 });
 
-// ── .sf-grid-2-1 ratio grid ─────────────────────────────────────
-test.describe('CQ: .sf-grid-2-1 ratio grid', () => {
+// ── .sf-grid-cols-2-1 ratio grid ─────────────────────────────────────
+test.describe('CQ: .sf-grid-cols-2-1 ratio grid', () => {
   test('first column is ~2× wider than second at ≥ 48em', async ({ page }) => {
     await setupInContainer(page, 900,
-      '<div id="g" class="sf-grid-2-1"><div id="a">Wide</div><div id="b">Narrow</div></div>'
+      '<div id="g" class="sf-grid-cols-2-1"><div id="a">Wide</div><div id="b">Narrow</div></div>'
     );
     const [wa, wb] = await Promise.all([
       page.locator('#a').evaluate(el => el.getBoundingClientRect().width),
@@ -149,11 +149,11 @@ test.describe('CQ: .sf-grid-2-1 ratio grid', () => {
   });
 });
 
-// ── .sf-grid-1-3 ratio grid ─────────────────────────────────────
-test.describe('CQ: .sf-grid-1-3 ratio grid', () => {
+// ── .sf-grid-cols-1-3 ratio grid ─────────────────────────────────────
+test.describe('CQ: .sf-grid-cols-1-3 ratio grid', () => {
   test('second column is ~3× wider than first at ≥ 48em', async ({ page }) => {
     await setupInContainer(page, 900,
-      '<div id="g" class="sf-grid-1-3"><div id="a">1</div><div id="b">3</div></div>'
+      '<div id="g" class="sf-grid-cols-1-3"><div id="a">1</div><div id="b">3</div></div>'
     );
     const [wa, wb] = await Promise.all([
       page.locator('#a').evaluate(el => el.getBoundingClientRect().width),

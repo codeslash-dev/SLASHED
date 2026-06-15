@@ -259,7 +259,11 @@
   .sf-surface--info       { background: var(--sf-color-info);      color: var(--sf-color-text--on-info); }
   .sf-surface--danger     { background: var(--sf-color-danger);    color: var(--sf-color-text--on-danger); }
 
-  @supports (color: oklch(from red l c h)) {
+  /* sign() gate: separate from the named-variant block below so Chrome 119–137
+     (which supports oklch(from) but not sign()) doesn't IACVT on the
+     auto-contrast formula. Named variants (.sf-surface--primary etc.) use
+     precomputed --sf-color-text--on-* and are unaffected by this gate. */
+  @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) {
     .sf-surface {
       /* internal helper, do not consume — auto-contrast foreground via
          the same lightness flip as --sf-color-text--on-* (tokens.css).
@@ -452,7 +456,7 @@
       --sf-focus-ring-color:        var(--sf-color-text--on-danger);
       --sf-caret-color:             var(--sf-color-text--on-danger);
     }
-  } /* end @supports (color: oklch(from red l c h)) — surface contextual cascade */
+  } /* end @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) — surface contextual cascade */
 
   /* -- Surface shadow tint -------------------------------------
      Sets background + auto-flipped foreground in one class. Shadows
