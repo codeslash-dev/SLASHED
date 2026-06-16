@@ -156,7 +156,7 @@ describe('domainOf — known compound names route correctly', () => {
 
     ['--sf-duration-fast', 'motion'],
     ['--sf-ease-in-out', 'motion'],
-    ['--sf-transition-all', 'motion'],
+    ['--sf-transition-form-field', 'motion'],
     ['--sf-animation-blink', 'motion'],
 
     ['--sf-blur-m', 'effects'],

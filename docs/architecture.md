@@ -393,9 +393,10 @@ hand-picked optional files. Each bundle also has a layer-flattened `.flat` varia
 
 Plain CSS, no runtime. The notable costs:
 
-- **`transition: all` (`--sf-transition-all`)** watches every animatable
-  property. Prefer a scoped token (`--sf-transition-colors` / `-transform` /
-  `-opacity` / `-shadow`); animate `transform`/`opacity` (compositor-only).
+- **`transition: all`** watches every animatable property and is a known
+  performance footgun — it was removed from the public token API. Use scoped
+  tokens (`--sf-transition-colors` / `-transform` / `-opacity` / `-shadow`);
+  animate `transform`/`opacity` where possible (compositor-only paths).
 - **`oklch` + relative-colour tokens** recompute when their inputs change.
   Animating a registered colour (e.g. `.sf-color-pulse` mutating
   `--sf-color-primary-light`) re-derives everything downstream each frame — fine
@@ -427,10 +428,7 @@ Deliberate behaviours, documented so they aren't mistaken for bugs.
   colours that land in the L≈0.55..0.65 band may require an explicit
   override of their matching `--sf-color-text--on-*` token. A future
   upgrade path is CSS `contrast-color()` once it has broad support.
-- **Smooth scroll is disabled while something has focus.** `core/motion.css` sets
-  `html:focus-within { scroll-behavior: auto }` (the Andy Bell pattern). Clicking an
-  anchor focuses the target, so smooth scroll won't animate for that click — a
-  deliberate trade to avoid hijacking keyboard navigation.
+- **Smooth scroll is always enabled.** `core/base.css` sets `scroll-behavior: smooth` on `html`. There is no focus-based override — keyboard users navigate with arrow keys and smooth scroll does not interfere. To suppress per-element, use `scroll-behavior: auto` locally.
 - **The `base` palette ramp is V-shaped, not monotonic.** In
   `optional/tokens.palette.css`, `base-*` mixes `--sf-color-text` *into* base for
   tints and base *into* text for shades, so it is surface-relative, not a perceptual

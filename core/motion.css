@@ -22,11 +22,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Keyboard navigation must not be hijacked by smooth scroll. */
-    html:focus-within {
-      scroll-behavior: auto;
-    }
-
     /* Broadens the base.css link transition to all interactive
        elements and the full set of animatable UI properties. */
     a, button, input, select, textarea, summary {
@@ -152,7 +147,7 @@
   @supports (@property --x { syntax: "<color>"; inherits: false; initial-value: white; }) {
     @keyframes sf-color-pulse {
       0%   { --sf-color-primary-light: var(--sf-color-primary-light); }
-      50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) calc(l + 0.25) c h); }
+      50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) clamp(0, calc(l + 0.25), 0.9) c h); }
       100% { --sf-color-primary-light: var(--sf-color-primary-light); }
     }
 
@@ -163,11 +158,16 @@
     }
   }
 
-  /* @starting-style — entry animations for elements appearing in the
-     top layer (dialog, [popover]) or via display:none → block. SLASHED
-     ships no global @starting-style rules because the from-state is
-     element/component specific. Consumers opt in per component, e.g.:
+  /* Overlay / display transition for top-layer elements (dialog, popover).
+     allow-discrete enables transitioning display and overlay — making
+     exit animations work before display:none is applied. The from-state
+     (@starting-style) is intentionally consumer-defined per component:
        dialog[open] { opacity: 1; @starting-style { opacity: 0; } }
      Tracked for the future components layer. */
+  @supports (transition-behavior: allow-discrete) {
+    dialog, [popover] {
+      transition: var(--sf-transition-overlay);
+    }
+  }
 
 }

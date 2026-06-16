@@ -28,15 +28,15 @@ your own components:
 
 | Token | Properties | Duration | Easing |
 |---|---|---|---|
-| `--sf-transition-all` | all | normal | ease-out |
 | `--sf-transition-colors` | color, background-color, border-color, text-decoration-color, fill, stroke | normal | ease-out |
+| `--sf-transition-form-field` | color, background-color, text-decoration-color, fill, stroke (normal) · border-color, box-shadow, opacity (fast) | mixed | ease-out |
 | `--sf-transition-transform` | transform | normal | ease-out |
 | `--sf-transition-opacity` | opacity | normal | ease-out |
 | `--sf-transition-shadow` | box-shadow | normal | ease-out |
-| `--sf-transition-fast` | all | fast | ease-out |
-| `--sf-transition-slow` | all | slow | ease-out |
-| `--sf-transition-enter` | all | normal | ease-out |
-| `--sf-transition-exit` | all | fast | ease-out |
+| `--sf-transition-fast` | color, background-color, border-color, box-shadow, opacity, transform, filter | fast | ease-out |
+| `--sf-transition-slow` | color, background-color, border-color, box-shadow, opacity, transform, filter | slow | ease-in-out |
+| `--sf-transition-enter` | color, background-color, border-color, box-shadow, opacity, transform, filter | normal | ease-out |
+| `--sf-transition-exit` | color, background-color, border-color, box-shadow, opacity, transform, filter | fast | ease-in |
 
 ## Duration tokens
 

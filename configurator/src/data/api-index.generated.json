@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "68fb960217b8",
+    "tokensHash": "cc745d997aa1",
     "bundles": [
       "essential",
       "full",
@@ -18937,30 +18937,6 @@
       ]
     },
     {
-      "name": "--sf-transition-all",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "transition",
-      "category": "Core tokens",
-      "group": "Transition shorthands",
-      "description": "Pre-built transition shorthand values for the most common animated properties.",
-      "note": "Transition shorthand for all properties.",
-      "value": "all var(--sf-duration-normal) var(--sf-ease-out)",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-transition-colors",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -19042,6 +19018,30 @@
       "description": "Pre-built transition shorthand values for the most common animated properties.",
       "note": "Fast-duration transition shorthand.",
       "value": "color var(--sf-duration-fast) var(--sf-ease-out), background-color var(--sf-duration-fast) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out), transform var(--sf-duration-fast) var(--sf-ease-out), filter var(--sf-duration-fast) var(--sf-ease-out)",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-transition-form-field",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "transition",
+      "category": "Core tokens",
+      "group": "Transition shorthands",
+      "description": "Pre-built transition shorthand values for the most common animated properties.",
+      "note": "",
+      "value": "color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out)",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
