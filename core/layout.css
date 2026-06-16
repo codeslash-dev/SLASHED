@@ -563,7 +563,6 @@
   }
 
   .sf-bento--2       { --sf-bento-cols: 2; }
-  .sf-bento--3       { --sf-bento-cols: 3; }
   .sf-bento--4       { --sf-bento-cols: 4; }
   .sf-bento--compact { --sf-bento-row: var(--sf-bento-row-compact); }
   .sf-bento--tall    { --sf-bento-row: var(--sf-bento-row-tall); }
