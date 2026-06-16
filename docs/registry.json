@@ -21,7 +21,7 @@
     ],
     "counts": {
       "tokens": 823,
-      "sf_classes": 174,
+      "sf_classes": 179,
       "is_classes": 40
     }
   },
@@ -855,9 +855,14 @@
     "sf-aspect",
     "sf-bento",
     "sf-bento--2",
-    "sf-bento--4",
+    "sf-bento--3",
+    "sf-bento--6",
     "sf-bento--compact",
     "sf-bento--tall",
+    "sf-bento-featured",
+    "sf-bento-full",
+    "sf-bento-tall",
+    "sf-bento-wide",
     "sf-box",
     "sf-breakout",
     "sf-center",
