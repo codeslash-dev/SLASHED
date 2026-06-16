@@ -265,6 +265,30 @@ export function saveCurrentTheme(name) {
   return { id, persisted };
 }
 
+/**
+ * Save an externally-provided theme object (from a JSON import) as a user
+ * theme. Does NOT touch the active overrides. Returns { id, persisted }.
+ *
+ * @param {{ name: string, icon?: string, blurb?: string, overrides: Record<string,string> }} data
+ * @returns {{ id: string, persisted: boolean }}
+ */
+export function saveImportedTheme(data) {
+  const id = slugify(data.name);
+  const theme = {
+    id,
+    name: String(data.name || '').trim() || 'Imported theme',
+    icon: data.icon ?? '⭅',
+    blurb: data.blurb ?? `${Object.keys(data.overrides ?? {}).length} imported tokens`,
+    overrides: { ...(data.overrides ?? {}) },
+  };
+  const next = savedThemes.filter((t) => t.id !== id);
+  next.push(theme);
+  savedThemes.length = 0;
+  for (const t of next) savedThemes.push(t);
+  const persisted = persistSavedThemes(savedThemes);
+  return { id, persisted };
+}
+
 /** Delete a saved theme by id. */
 export function deleteSavedTheme(id) {
   const idx = savedThemes.findIndex((t) => t.id === id);
