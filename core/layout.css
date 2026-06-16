@@ -444,6 +444,18 @@
     min-height:          100dvh;
   }
 
+  /* -- Single-column grid --------------------------------------
+     Plain single-column grid. No container context — it never
+     needs CQ breakpoints (there's only one column). Use when you
+     want consistent gap spacing without affecting container queries
+     on child elements.
+     ---------------------------------------------------------- */
+
+  .sf-grid-cols-1 {
+    display: grid;
+    gap:     var(--sf-grid-gap);
+  }
+
   /* -- Fixed column grids (container-query responsive) ---------
      Responsive fixed-column grids with no media queries.
 
@@ -453,11 +465,6 @@
      queries never match and the grid stays single-column at all widths.
      Wrap in .sf-container (or any element with container-type: inline-size).
      ---------------------------------------------------------- */
-
-  .sf-grid-cols-1 {
-    display: grid;
-    gap:     var(--sf-grid-gap);
-  }
 
   .sf-grid-cols-2, .sf-grid-cols-3, .sf-grid-cols-4, .sf-grid-cols-6 {
     display:   grid;
