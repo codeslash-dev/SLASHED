@@ -241,7 +241,7 @@
     flex-basis: calc((var(--sf-switcher-threshold) - 100%) * 999);
   }
 
-  .sf-switcher--no-wrap  { flex-wrap: nowrap; overflow-inline: auto; }
+  .sf-switcher--no-wrap  { flex-wrap: nowrap; overflow-x: auto; overflow-inline: auto; }
   .sf-switcher--vertical { flex-direction: column; }
 
   /* -- Grid (auto) ---------------------------------------------
@@ -328,7 +328,7 @@
   /* --max intentionally sets min-height: 0 to override .sf-cover's token-driven
      minimum — the cover may collapse below the default min if content is short.
      Pair with padding-block or a min-content guard if collapsing is undesirable. */
-  .sf-cover--max { min-block-size: 0; max-block-size: 100dvh; }
+  .sf-cover--max { min-height: 0; max-block-size: 100dvh; }
   .sf-cover--padding-s { padding-block: var(--sf-space-xl); }
   .sf-cover--padding-l { padding-block: var(--sf-space-4xl); }
 
@@ -369,6 +369,7 @@
     display:               flex;
     block-size:            var(--sf-reel-height);
     gap:                   var(--sf-reel-gap);
+    overflow-x:                 auto; /* Safari < 18.2 fallback for overflow-inline */
     overflow-inline:            auto;
     scroll-snap-type:           inline mandatory;
     scroll-padding-inline:      var(--sf-reel-gap);

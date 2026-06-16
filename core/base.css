@@ -131,6 +131,7 @@
     border-radius: var(--sf-radius-m);
     background:    var(--sf-color-code-block-bg, var(--sf-color-code-bg));
     color:         var(--sf-color-code-block-text, inherit);
+    overflow-x:      auto; /* Safari < 18.2 fallback for overflow-inline */
     overflow-inline: auto;
     tab-size:        2;
     hyphens:       none;

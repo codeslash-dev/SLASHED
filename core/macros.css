@@ -153,6 +153,7 @@
      Override: style="--sf-scroll-shadow-size: 3rem"
      ---------------------------------------------------------- */
   .sf-scroll-shadow {
+    overflow-y:     auto; /* Safari < 18.2 fallback for overflow-block */
     overflow-block: auto;
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image:
@@ -175,6 +176,7 @@
      For horizontal snap, use the .sf-reel layout primitive.
      ---------------------------------------------------------- */
   .sf-scroll-snap {
+    overflow-y:                auto; /* Safari < 18.2 fallback for overflow-block */
     overflow-block:            auto;
     scroll-snap-type:          block mandatory;
     overscroll-behavior-block: contain;
