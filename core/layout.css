@@ -540,7 +540,23 @@
 
   /* -- Bento grid ----------------------------------------------
      Free-form grid with auto-flow dense, responsive via CQ.
-     Override: style="--sf-bento-cols: 4; --sf-bento-row: 12rem"
+     Default: 4 columns (4 divides evenly for 1+3, 2+2, 3+1, 2×2).
+     Override: style="--sf-bento-cols: 6; --sf-bento-row: 12rem"
+
+     Column modifiers (on container):
+       .sf-bento--2   → 2 columns
+       .sf-bento--3   → 3 columns
+       .sf-bento--6   → 6 columns
+
+     Row height modifiers (on container):
+       .sf-bento--compact  → shorter rows
+       .sf-bento--tall     → taller rows
+
+     Span modifiers (on children):
+       .sf-bento-wide      → span 2 columns
+       .sf-bento-full      → span all columns
+       .sf-bento-tall      → span 2 rows
+       .sf-bento-featured  → span 2 columns × 2 rows
      ---------------------------------------------------------- */
 
   .sf-bento {
@@ -557,15 +573,26 @@
     .sf-bento { grid-template-columns: 1fr; }
   }
 
-  /* CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. */
+  /* CQ breakpoint S — 30em–47.99em. 2 columns regardless of modifier. */
   @container (min-width: 30em) and (max-width: 47.99em) {
     .sf-bento { grid-template-columns: repeat(2, 1fr); }
   }
 
+  /* Container column modifiers */
   .sf-bento--2       { --sf-bento-cols: 2; }
-  .sf-bento--4       { --sf-bento-cols: 4; }
+  .sf-bento--3       { --sf-bento-cols: 3; }
+  .sf-bento--6       { --sf-bento-cols: 6; }
+
+  /* Container row height modifiers */
   .sf-bento--compact { --sf-bento-row: var(--sf-bento-row-compact); }
   .sf-bento--tall    { --sf-bento-row: var(--sf-bento-row-tall); }
+
+  /* Child span modifiers — place on individual bento items.
+     grid-auto-flow: dense on the parent fills gaps automatically. */
+  .sf-bento-wide     { grid-column: span 2; }
+  .sf-bento-full     { grid-column: 1 / -1; }
+  .sf-bento-tall     { grid-row:    span 2; }
+  .sf-bento-featured { grid-column: span 2; grid-row: span 2; }
 
   /* -- Subgrid -------------------------------------------------
      A grid child that inherits its parent's tracks.
