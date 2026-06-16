@@ -34,7 +34,7 @@
   }
 
   .sf-prose > * + *              { margin-block-start: var(--sf-prose-paragraph); }
-  .sf-prose :is(h2, h3, h4) + * { margin-block-start: var(--sf-prose-heading-gap); }
+  .sf-prose :is(h2, h3, h4, h5, h6) + * { margin-block-start: var(--sf-prose-heading-gap); }
   .sf-prose li + li              { margin-block-start: var(--sf-prose-list-gap); }
   .sf-prose :is(blockquote, pre) { margin-block: var(--sf-prose-block-margin); }
   .sf-prose blockquote           { font-style: italic; padding-inline-start: var(--sf-prose-blockquote-padding); border-inline-start: var(--sf-prose-blockquote-border); }

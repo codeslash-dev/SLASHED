@@ -100,6 +100,7 @@
       .sf-entrance--fade-left,
       .sf-entrance--fade-right,
       .sf-entrance--scale-up {
+        animation-fill-mode: forwards; /* no backwards fill — element visible before scroll range */
         animation-timeline: view();
         animation-range:    var(--sf-scroll-timeline-range-start, entry 0%)
                             var(--sf-scroll-timeline-range-end,   cover 30%);
