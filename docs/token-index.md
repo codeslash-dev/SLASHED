@@ -195,7 +195,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-animation-slide-in-up` | PUBLIC | consumption | Core | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-spin` | PUBLIC | consumption | Core | `sf-spin var(--sf-duration-slower) linear infinite` |
 | `--sf-aspect` | PUBLIC | knob | Macros | `16 / 9` |
-| `--sf-bento-cols-default` | PUBLIC | knob | Layout | `3` |
+| `--sf-bento-cols-default` | PUBLIC | knob | Layout | `4` |
 | `--sf-bento-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
 | `--sf-bento-row-compact` | PUBLIC | knob | Layout | `6rem` |
 | `--sf-bento-row-default` | PUBLIC | knob | Layout | `10rem` |

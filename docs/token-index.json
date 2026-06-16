@@ -205,7 +205,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "3"
+      "value": "4"
     },
     "--sf-bento-gap": {
       "tier": "PUBLIC",

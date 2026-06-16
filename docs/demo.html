@@ -2216,7 +2216,16 @@
           <div class="demo-box demo-box--secondary">3</div>
           <div class="demo-box demo-box--secondary">4</div>
         </div>
-        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-bento-cols</code> (default 3), <code>--sf-bento-row</code> (row height). Modifiers: <code>.sf-bento--2</code>, <code>.sf-bento--4</code>, <code>.sf-bento--compact</code>, <code>.sf-bento--tall</code></p>
+        <p style="margin-top: var(--sf-space-s); font-size: var(--sf-text-s)">Override: <code>--sf-bento-cols</code> (default 4), <code>--sf-bento-row</code> (row height). Column modifiers: <code>.sf-bento--2</code>, <code>.sf-bento--3</code>, <code>.sf-bento--6</code>. Row modifiers: <code>.sf-bento--compact</code>, <code>.sf-bento--tall</code>. Child span modifiers: <code>.sf-bento-wide</code> (col span 2), <code>.sf-bento-tall</code> (row span 2), <code>.sf-bento-featured</code> (2×2), <code>.sf-bento-full</code> (full width).</p>
+        <div class="sf-bento" style="margin-top: var(--sf-space-s)">
+          <div class="demo-box sf-bento-featured" style="min-height: 8rem">featured<br><small>.sf-bento-featured</small></div>
+          <div class="demo-box sf-bento-wide">wide<br><small>.sf-bento-wide</small></div>
+          <div class="demo-box demo-box--alt">normal</div>
+          <div class="demo-box demo-box--alt">normal</div>
+          <div class="demo-box demo-box--secondary sf-bento-tall">tall<br><small>.sf-bento-tall</small></div>
+          <div class="demo-box demo-box--action sf-bento-full">full width — .sf-bento-full</div>
+        </div>
+        <p style="margin-top: var(--sf-space-xs); font-size: var(--sf-text-xs); color: var(--sf-color-text--secondary)">Column modifiers below use <code>.sf-bento--2</code>, <code>.sf-bento--3</code>, <code>.sf-bento--6</code></p>
       </section>
 
       <!-- ══════════════════════════════════════════════════════

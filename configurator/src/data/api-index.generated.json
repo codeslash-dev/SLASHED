@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "e5e711cd49af",
+    "tokensHash": "68fb960217b8",
     "bundles": [
       "essential",
       "full",
@@ -565,7 +565,7 @@
       "group": "Bento grid",
       "description": "Configuration tokens for the bento-grid layout primitive.",
       "note": "Default column count for the bento grid.",
-      "value": "3",
+      "value": "4",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -12461,7 +12461,7 @@
       "namespace": "lumlocker",
       "category": "Core tokens",
       "group": "LumLocker",
-      "description": "OKLCH L value used by the :root[data-lumlocker] override in core/themes.css. Locks all 5 brand colors (primary, secondary, tertiary, action, neutral) to one shared lightness while keeping their individual hue and chroma. Base is excluded — it must remain near-white in light…",
+      "description": "OKLCH L value used by the :root[data-lumlocker] override in core/themes.css. Locks the 4 brand colors (primary, secondary, tertiary, action) to one shared lightness while keeping their individual hue and chroma. Neutral and base are excluded — neutral is a desaturated grey…",
       "note": "",
       "value": "0.65",
       "aliasOf": null,

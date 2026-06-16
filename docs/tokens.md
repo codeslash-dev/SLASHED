@@ -522,7 +522,7 @@ rebrand workflow.
 |---|---|
 | `--sf-alternate-gap` | `var(--sf-space-content)` |
 | `--sf-alternate-inner-gap` | `var(--sf-space-gap)` |
-| `--sf-bento-cols-default` | `3` |
+| `--sf-bento-cols-default` | `4` |
 | `--sf-bento-gap` | `var(--sf-space-gap)` |
 | `--sf-bento-row-compact` | `6rem` |
 | `--sf-bento-row-default` | `10rem` |

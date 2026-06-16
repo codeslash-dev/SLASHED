@@ -316,10 +316,11 @@
     /* ----------------------------------------------------------
        LumLocker — OKLCH L value used by the
        :root[data-lumlocker] override in core/themes.css.
-       Locks all 5 brand colors (primary, secondary, tertiary,
-       action, neutral) to one shared lightness while keeping their
-       individual hue and chroma. Base is excluded — it must remain
-       near-white in light mode for the page background.
+       Locks the 4 brand colors (primary, secondary, tertiary, action)
+       to one shared lightness while keeping their individual hue and
+       chroma. Neutral and base are excluded — neutral is a desaturated
+       grey (locking it to a brand L would make it chromatic) and base
+       must remain near-white in light mode for the page background.
        Override to change the locked lightness:
          :root { --sf-lumlocker: 0.55 }
        ---------------------------------------------------------- */

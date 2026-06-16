@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1046 elements** — 823 tokens, 223 classes.
+**1051 elements** — 823 tokens, 228 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 908 | Everyday surface. SemVer-stable. |
+| PUBLIC | 913 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -381,7 +381,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-link-external-marker` | PUBLIC | knob | link | `" \\2197"` | Leading space is baked into the default so consumers can fully disable the indicator with `--sf-link-external-marker: ""` — without the space a bare "" still left a stray space after the link text. Override with your own glyph (include leading space if you want one): `:root {… |
 | `--sf-link-underline-offset` | PUBLIC | knob | link | `0.15em` | Underline geometry — consumed by a:link in core/base.css and by the .sf-link--* macros. `auto` defers to the font's own metrics; set an explicit length (e.g. 0.08em) for a uniform rule. |
 | `--sf-link-underline-thickness` | PUBLIC | knob | link | `auto` | Underline geometry — consumed by a:link in core/base.css and by the .sf-link--* macros. `auto` defers to the font's own metrics; set an explicit length (e.g. 0.08em) for a uniform rule. |
-| `--sf-lumlocker` | PUBLIC-ADVANCED | knob | lumlocker | `0.65` | OKLCH L value used by the :root[data-lumlocker] override in core/themes.css. Locks all 5 brand colors (primary, secondary, tertiary, action, neutral) to one shared lightness while keeping their individual hue and chroma. Base is excluded — it must remain near-white in light… |
+| `--sf-lumlocker` | PUBLIC-ADVANCED | knob | lumlocker | `0.65` | OKLCH L value used by the :root[data-lumlocker] override in core/themes.css. Locks the 4 brand colors (primary, secondary, tertiary, action) to one shared lightness while keeping their individual hue and chroma. Neutral and base are excluded — neutral is a desaturated grey… |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | mask | `var(--sf-space-l)` | edge-fade stops for scroll reels / overflow. Use in a mask-image gradient to fade content near an edge: mask-image: linear-gradient(to right, transparent 0, #000 var(--sf-mask-scrim-start), #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%); |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | mask | `var(--sf-space-l)` | edge-fade stops for scroll reels / overflow. Use in a mask-image gradient to fade content near an edge: mask-image: linear-gradient(to right, transparent 0, #000 var(--sf-mask-scrim-start), #000 calc(100% - var(--sf-mask-scrim-end)), transparent 100%); |
 | `--sf-motion-scale` | PUBLIC-ADVANCED | knob | motion | `1` | Scale multipliers |
@@ -537,7 +537,7 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|---|
 | `--sf-alternate-gap` | PUBLIC | consumption | alternate | `var(--sf-space-content)` | Alternate (zigzag) |
 | `--sf-alternate-inner-gap` | PUBLIC | consumption | alternate | `var(--sf-space-gap)` | Alternate (zigzag) |
-| `--sf-bento-cols-default` | PUBLIC | knob | bento | `3` | Bento grid |
+| `--sf-bento-cols-default` | PUBLIC | knob | bento | `4` | Bento grid |
 | `--sf-bento-gap` | PUBLIC | consumption | bento | `var(--sf-space-gap)` | Bento grid |
 | `--sf-bento-row-compact` | PUBLIC | knob | bento | `6rem` | Bento grid |
 | `--sf-bento-row-default` | PUBLIC | knob | bento | `10rem` | Bento grid |
@@ -873,7 +873,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
 | `--sf-text-xs-to-2xs` | PUBLIC-ADVANCED | consumption | text | `clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem))` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract. |
 
-## Classes (223)
+## Classes (228)
 
 ### Accessibility (7)
 
@@ -887,16 +887,21 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | either exposes hidden content visually or hides intended content. All-or-nothing, so the whole set is hardened. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | either exposes hidden content visually or hides intended content. All-or-nothing, so the whole set is hardened. |
 
-### Layout primitives (120)
+### Layout primitives (125)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-alternate` | PUBLIC | layout | Alternate (zigzag / media-object) | Alternating two-column layouts (container-query responsive). Every other row reverses its children's order. Establishes a named container `sf-alternate` and binds the responsive query to that name — so a `.sf-alternate` nested inside another container (e.g. `.sf-bento`) still… |
-| `.sf-bento` | PUBLIC | layout | Bento grid | Free-form grid with auto-flow dense, responsive via CQ. Override: style="--sf-bento-cols: 4; --sf-bento-row: 12rem" |
-| `.sf-bento--2` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
-| `.sf-bento--4` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
-| `.sf-bento--compact` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
-| `.sf-bento--tall` | PUBLIC | layout | Bento grid | CQ breakpoints S/L — 30em / 48em. Cannot use var() inside @container per CSS spec. |
+| `.sf-bento` | PUBLIC | layout | Bento grid | Free-form grid with auto-flow dense, responsive via CQ. Default: 4 columns (4 divides evenly for 1+3, 2+2, 3+1, 2×2). Override: style="--sf-bento-cols: 6; --sf-bento-row: 12rem" Column modifiers (on container): .sf-bento--2 → 2 columns .sf-bento--3 → 3 columns .sf-bento--6 → 6… |
+| `.sf-bento--2` | PUBLIC | layout | Bento grid | Container column modifiers |
+| `.sf-bento--3` | PUBLIC | layout | Bento grid | Container column modifiers |
+| `.sf-bento--6` | PUBLIC | layout | Bento grid | Container column modifiers |
+| `.sf-bento--compact` | PUBLIC | layout | Bento grid | Container row height modifiers |
+| `.sf-bento--tall` | PUBLIC | layout | Bento grid | Container row height modifiers |
+| `.sf-bento-featured` | PUBLIC | layout | Bento grid | Child span modifiers — place on individual bento items. grid-auto-flow: dense on the parent fills gaps automatically. |
+| `.sf-bento-full` | PUBLIC | layout | Bento grid | Child span modifiers — place on individual bento items. grid-auto-flow: dense on the parent fills gaps automatically. |
+| `.sf-bento-tall` | PUBLIC | layout | Bento grid | Child span modifiers — place on individual bento items. grid-auto-flow: dense on the parent fills gaps automatically. |
+| `.sf-bento-wide` | PUBLIC | layout | Bento grid | Child span modifiers — place on individual bento items. grid-auto-flow: dense on the parent fills gaps automatically. |
 | `.sf-box` | PUBLIC | layout | Box | Isolated unit with padding and an optional border. Outline instead of border — doesn't disturb the box model when toggled. Override: style="--sf-box-padding: 1rem; --sf-box-border-width: 1px" |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
 | `.sf-center` | PUBLIC | layout | Center | Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style="--sf-center-max: 60rem" |
@@ -961,7 +966,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-grid--s` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
 | `.sf-grid--xl` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
 | `.sf-grid--xs` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
-| `.sf-grid-cols-1` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
+| `.sf-grid-cols-1` | PUBLIC | layout | Single-column grid | Plain single-column grid. No container context — it never needs CQ breakpoints (there's only one column). Use when you want consistent gap spacing without affecting container queries on child elements. |
 | `.sf-grid-cols-1-2` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
 | `.sf-grid-cols-1-3` | PUBLIC | layout | Ratio grids | Two-column ratio grids, container-query responsive. |
 | `.sf-grid-cols-2` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive fixed-column grids with no media queries. IMPORTANT: These classes use anonymous @container queries, so they react to the nearest ancestor that has a container context (container-type: inline-size). Without a container ancestor the queries never match and the grid… |
