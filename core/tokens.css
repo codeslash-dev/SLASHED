@@ -95,7 +95,7 @@
      · radius (--sf-radius-{none,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
      · duration (--sf-duration-{none,instant,fast,normal,slow,slower})
      · easing (--sf-ease-{linear,out,in,in-out,spring,elastic,bounce,overshoot})
-     · transitions (--sf-transition-{all,colors,transform,opacity,shadow,fast,slow,enter,exit,overlay})
+     · transitions (--sf-transition-{colors,form-field,transform,opacity,shadow,fast,slow,enter,exit,overlay})
      · animations (--sf-animation-{fade-in,fade-out,slide-in-*,scale-*,color-pulse,ping,blink,float,spin,shimmer})
      · animation delays (--sf-animation-delay-{1..5})
      · z-index (--sf-z-{below,base,raised,low,mid,high,top,max})
@@ -1440,21 +1440,11 @@
     /* ----------------------------------------------------------
        Transition shorthands
 
-       --sf-transition-all transitions ALL properties — convenient but
-       a performance footgun (forces the browser to watch every computed
-       value). It is the ONLY token here that uses `all`; reach for it
-       only as a deliberate escape hatch. Every other token below names
-       an explicit property set.
-
-       The tempo presets (fast / slow / enter / exit) transition a curated
+       All tokens name an explicit property set (no `transition: all`).
+       The tempo presets (fast / slow / enter / exit) cover the curated
        "common interactive + entrance" set — color, background-color,
-       border-color, box-shadow, opacity, transform, filter — covering what
-       buttons, cards, links, and entering elements realistically animate,
-       without watching every property. They differ from each other only in
-       duration + easing. (Changed in this release: they previously used
-       `all`, contradicting the warning above — see CHANGELOG.)
+       border-color, box-shadow, opacity, transform, filter.
        ---------------------------------------------------------- */
-    --sf-transition-all:       all var(--sf-duration-normal) var(--sf-ease-out);
     --sf-transition-colors:
       color var(--sf-duration-normal) var(--sf-ease-out),
       background-color var(--sf-duration-normal) var(--sf-ease-out),
@@ -1462,10 +1452,25 @@
       text-decoration-color var(--sf-duration-normal) var(--sf-ease-out),
       fill var(--sf-duration-normal) var(--sf-ease-out),
       stroke var(--sf-duration-normal) var(--sf-ease-out);
+    /* Form fields: color/bg at normal pace, border/shadow/opacity at fast
+       so focus rings and validation states react immediately. */
+    --sf-transition-form-field:
+      color              var(--sf-duration-normal) var(--sf-ease-out),
+      background-color   var(--sf-duration-normal) var(--sf-ease-out),
+      text-decoration-color var(--sf-duration-normal) var(--sf-ease-out),
+      fill               var(--sf-duration-normal) var(--sf-ease-out),
+      stroke             var(--sf-duration-normal) var(--sf-ease-out),
+      border-color       var(--sf-duration-fast)   var(--sf-ease-out),
+      box-shadow         var(--sf-duration-fast)   var(--sf-ease-out),
+      opacity            var(--sf-duration-fast)   var(--sf-ease-out);
+    /* Single-property transition: transform only. */
     --sf-transition-transform: transform var(--sf-duration-normal) var(--sf-ease-out);
+    /* Single-property transition: opacity only. */
     --sf-transition-opacity:   opacity var(--sf-duration-normal) var(--sf-ease-out);
+    /* Single-property transition: box-shadow only. */
     --sf-transition-shadow:    box-shadow var(--sf-duration-normal) var(--sf-ease-out);
 
+    /* All interactive properties at fast duration — for hover/active states that need to feel snappy. */
     --sf-transition-fast:
       color var(--sf-duration-fast) var(--sf-ease-out),
       background-color var(--sf-duration-fast) var(--sf-ease-out),
@@ -1474,6 +1479,7 @@
       opacity var(--sf-duration-fast) var(--sf-ease-out),
       transform var(--sf-duration-fast) var(--sf-ease-out),
       filter var(--sf-duration-fast) var(--sf-ease-out);
+    /* All interactive properties at slow duration — for deliberate, attention-drawing animations. */
     --sf-transition-slow:
       color var(--sf-duration-slow) var(--sf-ease-in-out),
       background-color var(--sf-duration-slow) var(--sf-ease-in-out),
@@ -1482,6 +1488,7 @@
       opacity var(--sf-duration-slow) var(--sf-ease-in-out),
       transform var(--sf-duration-slow) var(--sf-ease-in-out),
       filter var(--sf-duration-slow) var(--sf-ease-in-out);
+    /* Entrance transition: normal duration + ease-out for elements entering the view. */
     --sf-transition-enter:
       color var(--sf-duration-normal) var(--sf-ease-out),
       background-color var(--sf-duration-normal) var(--sf-ease-out),
@@ -1490,6 +1497,7 @@
       opacity var(--sf-duration-normal) var(--sf-ease-out),
       transform var(--sf-duration-normal) var(--sf-ease-out),
       filter var(--sf-duration-normal) var(--sf-ease-out);
+    /* Exit transition: fast duration + ease-in so exits feel crisp and don't linger. */
     --sf-transition-exit:
       color var(--sf-duration-fast) var(--sf-ease-in),
       background-color var(--sf-duration-fast) var(--sf-ease-in),

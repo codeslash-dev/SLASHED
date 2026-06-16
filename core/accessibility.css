@@ -177,7 +177,8 @@
      ---------------------------------------------------------- */
   [disabled],
   [aria-disabled="true"] {
-    cursor: not-allowed;
+    cursor:  not-allowed;
+    opacity: var(--sf-opacity-disabled);
   }
 
   /* ----------------------------------------------------------

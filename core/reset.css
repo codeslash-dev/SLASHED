@@ -81,10 +81,11 @@
      background uses Canvas (UA system color) so the surface adapts to
      color-scheme and forced-colors without hardcoding a hex value. */
   dialog, [popover] {
-    padding:    0;
-    border:     none;
-    background: Canvas;
-    color:      inherit;
+    padding:      0;
+    border:       none;
+    background:   Canvas;
+    color:        inherit;
+    color-scheme: inherit;
   }
 
   /* fieldset: min-width:0 prevents overflow in flex/grid containers

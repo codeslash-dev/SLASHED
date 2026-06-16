@@ -374,6 +374,7 @@
     scroll-padding-inline:      var(--sf-reel-gap);
     overscroll-behavior-inline: contain;
     scrollbar-width:       thin;
+    scrollbar-color:       var(--sf-scrollbar-thumb) var(--sf-scrollbar-track);
   }
 
   .sf-reel > * {

@@ -84,11 +84,7 @@
     background-color: var(--sf-color-surface);
     border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
     border-radius: var(--sf-radius-m);
-    /* border-color is listed twice intentionally: --sf-transition-colors already
-       includes it at normal duration; this override shortens it to fast for
-       snap-responsive focus feedback. The last entry in a transition list wins. */
-    transition: var(--sf-transition-colors),
-                border-color var(--sf-duration-fast) var(--sf-ease-out);
+    transition: var(--sf-transition-form-field);
   }
 
   /* Focus */
@@ -133,14 +129,20 @@
      `:autofill` and the WebKit/Blink `:-webkit-autofill` selectors
      are listed so the rule applies across engines.
      ---------------------------------------------------------- */
-  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-  input:-webkit-autofill,
+  /* stylelint-disable selector-pseudo-class-no-unknown */
+  input:-webkit-autofill {
+    box-shadow: inset 0 0 0 1000px var(--sf-color-surface);
+    -webkit-text-fill-color: var(--sf-color-text);
+    caret-color: var(--sf-color-text);
+    border-color: var(--sf-field-border-color, var(--sf-color-border));
+  }
   input:autofill {
     box-shadow: inset 0 0 0 1000px var(--sf-color-surface);
     -webkit-text-fill-color: var(--sf-color-text);
     caret-color: var(--sf-color-text);
     border-color: var(--sf-field-border-color, var(--sf-color-border));
   }
+  /* stylelint-enable selector-pseudo-class-no-unknown */
 
 
   /* ----------------------------------------------------------
@@ -186,11 +188,15 @@
   textarea {
     min-block-size: 6rem;
     resize:         vertical; /* prevent horizontal resize that overflows 100% width container */
-    /* Auto-grow with content where supported. min-block-size acts as the
-       floor and resize:vertical remains the manual fallback, so on engines
-       without field-sizing the textarea behaves exactly as before — pure
-       progressive enhancement (Chrome/Edge ship it; Firefox/Safari pending). */
-    field-sizing:   content;
+  }
+  /* Auto-grow with content where supported. min-block-size acts as the
+     floor and resize:vertical remains the manual fallback, so on engines
+     without field-sizing the textarea behaves exactly as before — pure
+     progressive enhancement (Chrome/Edge 123+; Firefox/Safari pending). */
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+    }
   }
 
 

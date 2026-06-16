@@ -44,8 +44,6 @@
     margin:        0;             /* UA adds margin-block: 1em */
     text-wrap:     var(--sf-body-text-wrap);
     overflow-wrap: break-word;
-    orphans:       2;
-    widows:        2;
   }
 
   b, strong {
@@ -61,8 +59,8 @@
   }
 
   mark {
-    background-color: var(--sf-color-mark-bg, yellow);
-    color:            var(--sf-color-mark-text, black);
+    background-color: var(--sf-color-mark-bg, Mark);
+    color:            var(--sf-color-mark-text, MarkText);
     border-radius:    var(--sf-radius-xs);
     padding-inline:   0.2em;
   }
