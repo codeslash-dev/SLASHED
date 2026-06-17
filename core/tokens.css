@@ -209,13 +209,35 @@
     --sf-color-danger-light:    oklch(0.48 0.22 12);
   }
 
+  /* @property — DARK SOURCE TOKENS (-dark, animatable)
+     Registers the auto-computed dark counterparts as typed <color> so their
+     resolved absolute value is inherited by child elements (e.g. a section
+     with [data-theme="dark"]). Without @property these tokens inherit as raw
+     text, and the nested var()-in-oklch-from chain fails type-checking on
+     registered child properties.
+     initial-value = dark-mode value derived from the formula in themes.css
+     (clamp(0.65, 0.95 - l*0.5, 0.88) for brand/status; inverted for base).
+     Consumers who set --sf-color-X-dark explicitly do not need to register it
+     — their override is a plain OKLCH literal and passes type-checking directly. */
+  @property --sf-color-primary-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.715 0.243 264);  }
+  @property --sf-color-secondary-dark { syntax: "<color>"; inherits: true; initial-value: oklch(0.84 0.036 264);   }
+  @property --sf-color-tertiary-dark  { syntax: "<color>"; inherits: true; initial-value: oklch(0.74 0.198 295);   }
+  @property --sf-color-action-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.198 235);   }
+  @property --sf-color-neutral-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.69 0.0225 260);  }
+  @property --sf-color-base-dark      { syntax: "<color>"; inherits: true; initial-value: oklch(0.22 0.003 250);   }
+  @property --sf-color-success-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.144 145);   }
+  @property --sf-color-warning-dark   { syntax: "<color>"; inherits: true; initial-value: oklch(0.65 0.153 80);    }
+  @property --sf-color-error-dark     { syntax: "<color>"; inherits: true; initial-value: oklch(0.70 0.18 25);     }
+  @property --sf-color-info-dark      { syntax: "<color>"; inherits: true; initial-value: oklch(0.71 0.162 235);   }
+  @property --sf-color-danger-dark    { syntax: "<color>"; inherits: true; initial-value: oklch(0.71 0.198 12);    }
+
   /* @property — COMPUTED COLOR TOKENS (brand + status)
      Registers the computed tokens as typed <color> so CSS transitions can
      interpolate between light and dark values when [data-theme] changes.
      initial-value = light-mode value (safe fallback if nothing sets the token).
      Child-element theming works because [data-theme="dark"] in themes.css
-     assigns var(--sf-color-X-dark) — a simple var reference, not a
-     var()-in-fallback chain — which type-checks correctly on child elements. */
+     assigns var(--sf-color-X-dark) — now a registered typed <color> whose
+     absolute value is inherited, so no multi-level var() resolution is needed. */
   @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.47 0.27 264); }
   @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(0.22 0.04 264); }
   @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.42 0.22 295); }
@@ -1086,12 +1108,7 @@
     --sf-divider-gap:   var(--sf-space-m);
 
     /* ----------------------------------------------------------
-       Border radius
-       --sf-radius-full: intentionally not scaled by --sf-radius-scale.
-       A pill/circle is a topological constant, not a relative size:
-       any --sf-radius-scale: 0 ("sharp" design system) should still
-       render pill buttons as pills. 9999px is a magic-number convention
-       large enough to clip to half the shorter edge for any realistic UI.
+       Border radius — scale ramp, all multiplied by --sf-radius-scale.
        ---------------------------------------------------------- */
     --sf-radius-none: 0;
     --sf-radius-2xs:  calc(1px  * var(--sf-radius-scale));
@@ -1103,6 +1120,13 @@
     --sf-radius-2xl:  calc(24px * var(--sf-radius-scale));
     --sf-radius-3xl:  calc(32px * var(--sf-radius-scale));
     --sf-radius-4xl:  calc(48px * var(--sf-radius-scale));
+    /* ----------------------------------------------------------
+       Full/pill — topological constants, not scaled by --sf-radius-scale.
+       A pill/circle is a topological constant, not a relative size:
+       any --sf-radius-scale: 0 ("sharp" design system) should still
+       render pill buttons as pills. 9999px is a magic-number convention
+       large enough to clip to half the shorter edge for any realistic UI.
+       ---------------------------------------------------------- */
     --sf-radius-full: 9999px;
     /* Pill — semantic alias of --sf-radius-full. Reach for this name
        on rectangles you want capsule-shaped (badges, tags, chips); use

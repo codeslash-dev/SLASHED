@@ -29,21 +29,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1057,
+      "total": 1068,
       "by_type": {
         "class": 229,
-        "token": 828
+        "token": 839
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 919,
+        "PUBLIC": 930,
         "PUBLIC-ADVANCED": 137
       },
       "by_role": {
         "consumption": 592,
-        "knob": 236
+        "knob": 247
       },
-      "tokens": 828,
+      "tokens": 839,
       "classes": 229,
       "sf_classes": 180,
       "is_classes": 40,
@@ -51,7 +51,7 @@
       "by_category": {
         "Accessibility": 7,
         "Component tokens": 6,
-        "Core tokens": 496,
+        "Core tokens": 507,
         "Layout primitives": 126,
         "Layout tokens": 52,
         "Macro classes": 36,
@@ -2817,6 +2817,35 @@
       ]
     },
     {
+      "name": "--sf-color-action-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.70 0.198 235)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-action-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -3816,6 +3845,35 @@
       ]
     },
     {
+      "name": "--sf-color-base-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.22 0.003 250)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-base-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -4576,6 +4634,35 @@
       ]
     },
     {
+      "name": "--sf-color-danger-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.71 0.198 12)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-danger-light",
       "type": "token",
       "tier": "PUBLIC",
@@ -4750,6 +4837,35 @@
       ]
     },
     {
+      "name": "--sf-color-error-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.70 0.18 25)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-error-light",
       "type": "token",
       "tier": "PUBLIC",
@@ -4905,6 +5021,35 @@
       "group": "STATUS COLORS (-light source tokens)",
       "description": "@property — COMPUTED COLOR TOKENS (brand + status) Registers the computed tokens as typed <color> so CSS transitions can interpolate between light and dark values when [data-theme] changes. initial-value = light-mode value (safe fallback if nothing sets the token).…",
       "value": "light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-info-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.71 0.162 235)",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -6033,6 +6178,35 @@
       ]
     },
     {
+      "name": "--sf-color-neutral-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.69 0.0225 260)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-neutral-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -7054,6 +7228,35 @@
         "optional/tokens.palette.css"
       ],
       "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.715 0.243 264)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8118,6 +8321,35 @@
       ]
     },
     {
+      "name": "--sf-color-secondary-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.84 0.036 264)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-secondary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -8482,6 +8714,35 @@
       "group": "STATUS COLORS (-light source tokens)",
       "description": "@property — COMPUTED COLOR TOKENS (brand + status) Registers the computed tokens as typed <color> so CSS transitions can interpolate between light and dark values when [data-theme] changes. initial-value = light-mode value (safe fallback if nothing sets the token).…",
       "value": "light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-success-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.70 0.144 145)",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -9349,6 +9610,35 @@
       ]
     },
     {
+      "name": "--sf-color-tertiary-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.74 0.198 295)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-tertiary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -10206,6 +10496,35 @@
       "group": "STATUS COLORS (-light source tokens)",
       "description": "@property — COMPUTED COLOR TOKENS (brand + status) Registers the computed tokens as typed <color> so CSS transitions can interpolate between light and dark values when [data-theme] changes. initial-value = light-mode value (safe fallback if nothing sets the token).…",
       "value": "light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-warning-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "@property — DARK SOURCE TOKENS (-dark, animatable) Registers the auto-computed dark counterparts as typed <color> so their resolved absolute value is inherited by child elements (e.g. a section with [data-theme=\"dark\"]). Without @property these tokens inherit as raw text, and…",
+      "value": "oklch(0.65 0.153 80)",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -16478,7 +16797,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(24px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16507,7 +16826,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(1px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16536,7 +16855,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(32px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16565,7 +16884,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(48px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16593,8 +16912,8 @@
       "namespace": "radius",
       "category": "Core tokens",
       "area": "core",
-      "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "group": "Full/pill",
+      "description": "topological constants, not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to half the…",
       "value": "9999px",
       "aliasOf": null,
       "registered": false,
@@ -16623,7 +16942,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(12px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16652,7 +16971,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(8px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16681,7 +17000,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "0",
       "aliasOf": null,
       "registered": false,
@@ -16709,7 +17028,7 @@
       "namespace": "radius",
       "category": "Core tokens",
       "area": "core",
-      "group": "Border radius",
+      "group": "Full/pill",
       "description": "Concentric helper — outer radius for a container that wraps content padded by --sf-component-pad with inner radius m. Keeps inner elements visually proportional inside a padded box. Override per use: .my-card { border-radius: var(--sf-radius-outer); } Maths: outer = inner +…",
       "value": "calc(var(--sf-radius-m) + var(--sf-component-pad))",
       "aliasOf": null,
@@ -16738,7 +17057,7 @@
       "namespace": "radius",
       "category": "Core tokens",
       "area": "core",
-      "group": "Border radius",
+      "group": "Full/pill",
       "description": "Pill — semantic alias of --sf-radius-full. Reach for this name on rectangles you want capsule-shaped (badges, tags, chips); use --sf-radius-full when you mean \"as round as topologically possible\".",
       "value": "var(--sf-radius-full)",
       "aliasOf": "--sf-radius-full",
@@ -16768,7 +17087,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(4px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16826,7 +17145,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(16px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -16855,7 +17174,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Border radius",
-      "description": "--sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to…",
+      "description": "scale ramp, all multiplied by --sf-radius-scale.",
       "value": "calc(2px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,

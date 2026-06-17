@@ -264,6 +264,7 @@
     "--sf-tracking-widest": "Widest letter-spacing for all-caps microcopy.",
     "--sf-font-numeric": "font-variant-numeric shorthand (e.g. tabular-nums) for aligned numeric data.",
     "--sf-radius-none": "Zero border radius — square corners.",
+    "--sf-radius-2xs": "Extra-extra-small radius (~1px). Minimal rounding for very tight UI elements.",
     "--sf-radius-xs": "Hairline radius (~2px). Subtle rounding for tight components.",
     "--sf-radius-s": "Small radius (~4px). Badges, chips, small buttons.",
     "--sf-radius-m": "Medium radius (~6–8px). Default — inputs, standard buttons, cards.",

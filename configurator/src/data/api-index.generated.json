@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "dec2227f08f1",
+    "tokensHash": "e8bd0fe746b0",
     "bundles": [
       "essential",
       "full",
@@ -11,15 +11,15 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 828,
+      "tokens": 839,
       "byTier": {
-        "PUBLIC": 690,
+        "PUBLIC": 701,
         "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 52,
-        "Core tokens": 496,
+        "Core tokens": 507,
         "Macro tokens": 24,
         "Component tokens": 6,
         "Palette tokens": 142,
@@ -2278,6 +2278,30 @@
       ]
     },
     {
+      "name": "--sf-color-action-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.70 0.198 235)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-action-darker",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3096,6 +3120,30 @@
       ]
     },
     {
+      "name": "--sf-color-base-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.22 0.003 250)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-base-darker",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3720,6 +3768,30 @@
       ]
     },
     {
+      "name": "--sf-color-danger-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.71 0.198 12)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-danger-light",
       "tier": "PUBLIC",
       "role": "knob",
@@ -3864,6 +3936,30 @@
       ]
     },
     {
+      "name": "--sf-color-error-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.70 0.18 25)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-error-light",
       "tier": "PUBLIC",
       "role": "knob",
@@ -3993,6 +4089,30 @@
       "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
       "note": "Informational color for neutral tips, hints, and non-urgent notices.",
       "value": "light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-info-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.71 0.162 235)",
       "aliasOf": null,
       "registered": true,
       "syntax": "<color>",
@@ -4922,6 +5042,30 @@
       ]
     },
     {
+      "name": "--sf-color-neutral-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.69 0.0225 260)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-neutral-darker",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5757,6 +5901,30 @@
       "optional": true,
       "layer": "slashed.tokens",
       "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.715 0.243 264)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6630,6 +6798,30 @@
       ]
     },
     {
+      "name": "--sf-color-secondary-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.84 0.036 264)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-secondary-darker",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -6927,6 +7119,30 @@
       "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
       "note": "Positive / success color for confirmation messages and completed-state indicators.",
       "value": "light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-success-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.70 0.144 145)",
       "aliasOf": null,
       "registered": true,
       "syntax": "<color>",
@@ -7640,6 +7856,30 @@
       ]
     },
     {
+      "name": "--sf-color-tertiary-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.74 0.198 295)",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-tertiary-darker",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -8345,6 +8585,30 @@
       "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
       "note": "Warning / caution color for non-critical alerts and degraded-state indicators.",
       "value": "light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<color>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-warning-dark",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "STATUS COLORS (-light source tokens)",
+      "description": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+      "note": "",
+      "value": "oklch(0.65 0.153 80)",
       "aliasOf": null,
       "registered": true,
       "syntax": "<color>",
@@ -13556,7 +13820,7 @@
       "category": "Core tokens",
       "group": "Border radius",
       "description": "Border-radius scale from xs hairline to full circle. Stick to this scale so UI elements share a consistent curvature language.",
-      "note": "",
+      "note": "Extra-extra-small radius (~1px). Minimal rounding for very tight UI elements.",
       "value": "calc(1px * var(--sf-radius-scale))",
       "aliasOf": null,
       "registered": false,
@@ -13626,8 +13890,8 @@
       "role": "knob",
       "namespace": "radius",
       "category": "Core tokens",
-      "group": "Border radius",
-      "description": "Border-radius scale from xs hairline to full circle. Stick to this scale so UI elements share a consistent curvature language.",
+      "group": "Full/pill",
+      "description": "topological constants, not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 (\"sharp\" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to half the…",
       "note": "Full rounding (50%). For circular elements like avatars.",
       "value": "9999px",
       "aliasOf": null,
@@ -13722,8 +13986,8 @@
       "role": "consumption",
       "namespace": "radius",
       "category": "Core tokens",
-      "group": "Border radius",
-      "description": "Border-radius scale from xs hairline to full circle. Stick to this scale so UI elements share a consistent curvature language.",
+      "group": "Full/pill",
+      "description": "Concentric helper — outer radius for a container that wraps content padded by --sf-component-pad with inner radius m. Keeps inner elements visually proportional inside a padded box. Override per use: .my-card { border-radius: var(--sf-radius-outer); } Maths: outer = inner +…",
       "note": "",
       "value": "calc(var(--sf-radius-m) + var(--sf-component-pad))",
       "aliasOf": null,
@@ -13746,8 +14010,8 @@
       "role": "consumption",
       "namespace": "radius",
       "category": "Core tokens",
-      "group": "Border radius",
-      "description": "Border-radius scale from xs hairline to full circle. Stick to this scale so UI elements share a consistent curvature language.",
+      "group": "Full/pill",
+      "description": "Pill — semantic alias of --sf-radius-full. Reach for this name on rectangles you want capsule-shaped (badges, tags, chips); use --sf-radius-full when you mean \"as round as topologically possible\".",
       "note": "Pill rounding (9999px). Tags, toggle pills, status badges.",
       "value": "var(--sf-radius-full)",
       "aliasOf": "--sf-radius-full",
