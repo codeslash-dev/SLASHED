@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**859 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**875 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-495 tokens.
+507 tokens.
 
 | Token | Default |
 |---|---|
@@ -71,6 +71,7 @@ rebrand workflow.
 | `--sf-color-action` | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action--active` | `var(--sf-color-action-xdark)` |
 | `--sf-color-action--hover` | `var(--sf-color-action-darker)` |
+| `--sf-color-action-dark` | `oklch(0.70 0.198 235) *(registered)*` |
 | `--sf-color-action-darker` | `color-mix(in oklab, var(--sf-color-action) 82%, var(--sf-color-text))` |
 | `--sf-color-action-ghost` | `oklch(from var(--sf-color-action) l c h / 0.05)` |
 | `--sf-color-action-light` | `oklch(0.50 0.22 235)` |
@@ -84,6 +85,7 @@ rebrand workflow.
 | `--sf-color-base` | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
 | `--sf-color-base--active` | `var(--sf-color-base-xdark)` |
 | `--sf-color-base--hover` | `var(--sf-color-base-darker)` |
+| `--sf-color-base-dark` | `oklch(0.22 0.003 250) *(registered)*` |
 | `--sf-color-base-darker` | `color-mix(in oklab, var(--sf-color-base) 82%, var(--sf-color-text))` |
 | `--sf-color-base-ghost` | `oklch(from var(--sf-color-base) l c h / 0.05)` |
 | `--sf-color-base-light` | `oklch(0.96 0.006 250)` |
@@ -110,18 +112,21 @@ rebrand workflow.
 | `--sf-color-code-bg` | `var(--sf-color-inset)` |
 | `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-danger-dark` | `oklch(0.71 0.198 12) *(registered)*` |
 | `--sf-color-danger-light` | `oklch(0.48 0.22 12)` |
 | `--sf-color-danger-muted` | `oklch(from var(--sf-color-danger) l c h / 0.3)` |
 | `--sf-color-danger-strong` | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-danger-subtle` | `oklch(from var(--sf-color-danger) l c h / 0.1)` |
 | `--sf-color-dim` | `oklch(0 0 0 / 0.5)` |
 | `--sf-color-error` | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-error-dark` | `oklch(0.70 0.18 25) *(registered)*` |
 | `--sf-color-error-light` | `oklch(0.50 0.20 25)` |
 | `--sf-color-error-muted` | `oklch(from var(--sf-color-error) l c h / 0.3)` |
 | `--sf-color-error-strong` | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-error-subtle` | `oklch(from var(--sf-color-error) l c h / 0.1)` |
 | `--sf-color-heading` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-info` | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-info-dark` | `oklch(0.71 0.162 235) *(registered)*` |
 | `--sf-color-info-light` | `oklch(0.48 0.18 235)` |
 | `--sf-color-info-muted` | `oklch(from var(--sf-color-info) l c h / 0.3)` |
 | `--sf-color-info-strong` | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
@@ -139,6 +144,7 @@ rebrand workflow.
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-neutral--active` | `var(--sf-color-neutral-xdark)` |
 | `--sf-color-neutral--hover` | `var(--sf-color-neutral-darker)` |
+| `--sf-color-neutral-dark` | `oklch(0.69 0.0225 260) *(registered)*` |
 | `--sf-color-neutral-darker` | `color-mix(in oklab, var(--sf-color-neutral) 82%, var(--sf-color-text))` |
 | `--sf-color-neutral-ghost` | `oklch(from var(--sf-color-neutral) l c h / 0.05)` |
 | `--sf-color-neutral-light` | `oklch(0.52 0.025 260)` |
@@ -153,6 +159,7 @@ rebrand workflow.
 | `--sf-color-primary` | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-primary--active` | `var(--sf-color-primary-xdark)` |
 | `--sf-color-primary--hover` | `var(--sf-color-primary-darker)` |
+| `--sf-color-primary-dark` | `oklch(0.715 0.243 264) *(registered)*` |
 | `--sf-color-primary-darker` | `color-mix(in oklab, var(--sf-color-primary) 82%, var(--sf-color-text))` |
 | `--sf-color-primary-ghost` | `oklch(from var(--sf-color-primary) l c h / 0.05)` |
 | `--sf-color-primary-light` | `oklch(0.47 0.27 264)` |
@@ -168,6 +175,7 @@ rebrand workflow.
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-secondary--active` | `var(--sf-color-secondary-xdark)` |
 | `--sf-color-secondary--hover` | `var(--sf-color-secondary-darker)` |
+| `--sf-color-secondary-dark` | `oklch(0.84 0.036 264) *(registered)*` |
 | `--sf-color-secondary-darker` | `color-mix(in oklab, var(--sf-color-secondary) 82%, var(--sf-color-text))` |
 | `--sf-color-secondary-ghost` | `oklch(from var(--sf-color-secondary) l c h / 0.05)` |
 | `--sf-color-secondary-light` | `oklch(0.22 0.04 264)` |
@@ -181,6 +189,7 @@ rebrand workflow.
 | `--sf-color-selection-bg` | `light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
 | `--sf-color-selection-text` | `inherit` |
 | `--sf-color-success` | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-success-dark` | `oklch(0.70 0.144 145) *(registered)*` |
 | `--sf-color-success-light` | `oklch(0.50 0.16 145)` |
 | `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.3)` |
 | `--sf-color-success-strong` | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` |
@@ -189,6 +198,7 @@ rebrand workflow.
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-tertiary--active` | `var(--sf-color-tertiary-xdark)` |
 | `--sf-color-tertiary--hover` | `var(--sf-color-tertiary-darker)` |
+| `--sf-color-tertiary-dark` | `oklch(0.74 0.198 295) *(registered)*` |
 | `--sf-color-tertiary-darker` | `color-mix(in oklab, var(--sf-color-tertiary) 82%, var(--sf-color-text))` |
 | `--sf-color-tertiary-ghost` | `oklch(from var(--sf-color-tertiary) l c h / 0.05)` |
 | `--sf-color-tertiary-light` | `oklch(0.42 0.22 295)` |
@@ -219,6 +229,7 @@ rebrand workflow.
 | `--sf-color-text--placeholder` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` |
 | `--sf-color-text--secondary` | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` |
 | `--sf-color-warning` | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
+| `--sf-color-warning-dark` | `oklch(0.65 0.153 80) *(registered)*` |
 | `--sf-color-warning-light` | `oklch(0.75 0.17 80)` |
 | `--sf-color-warning-muted` | `oklch(from var(--sf-color-warning) l c h / 0.3)` |
 | `--sf-color-warning-strong` | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` |
@@ -382,6 +393,7 @@ rebrand workflow.
 | `--sf-print-page-margin` | `2cm` |
 | `--sf-print-page-size` | `a4` |
 | `--sf-radius-2xl` | `calc(24px * var(--sf-radius-scale))` |
+| `--sf-radius-2xs` | `calc(1px * var(--sf-radius-scale))` |
 | `--sf-radius-3xl` | `calc(32px * var(--sf-radius-scale))` |
 | `--sf-radius-4xl` | `calc(48px * var(--sf-radius-scale))` |
 | `--sf-radius-full` | `9999px` |
@@ -516,7 +528,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-48 tokens.
+52 tokens.
 
 | Token | Default |
 |---|---|
@@ -539,8 +551,12 @@ rebrand workflow.
 | `--sf-content-width` | `var(--sf-container-default)` |
 | `--sf-cover-min-height` | `100dvh` |
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
-| `--sf-equal-cols` | `2` |
 | `--sf-equal-gap` | `var(--sf-space-gap)` |
+| `--sf-equal-min-col` | `16rem` |
+| `--sf-equal-min-col-2` | `28rem` |
+| `--sf-equal-min-col-3` | `15rem` |
+| `--sf-equal-min-col-4` | `16rem` |
+| `--sf-equal-min-col-6` | `10rem` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-gap-size` | `var(--sf-space-gap)` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |

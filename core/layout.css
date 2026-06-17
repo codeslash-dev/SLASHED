@@ -96,6 +96,18 @@
   .sf-container--wide   { max-width: var(--sf-container-wide); }
   .sf-container--full   { max-width: var(--sf-container-full); }
 
+  /* -- Container query context --------------------------------
+     Lightweight CQ scope. Establishes container-type: inline-size
+     so anonymous @container queries on descendants respond to THIS
+     element's width — without the max-width and centering of
+     .sf-container. No visual styles.
+     Use when .sf-container is not available in the ancestor tree
+     and a CQ-dependent primitive needs a container to query.
+     ---------------------------------------------------------- */
+  .sf-cq {
+    container-type: inline-size;
+  }
+
   /* -- Stack ---------------------------------------------------
      Flex column with even vertical spacing between children.
      Override: style="--sf-stack-gap: 2rem"
@@ -505,22 +517,23 @@
     .sf-grid-cols-3-1 { grid-template-columns: 3fr 1fr; }
   }
 
-  /* -- Fixed columns ------------------------------------------
-     Fixed N-column grid. Column count NEVER collapses — unlike
-     .sf-grid-cols-N which stacks at narrow container widths.
-     Use when the layout must stay N columns at all widths; the
-     caller is responsible for overflow handling.
-     Override: style="--sf-equal-cols: 3"
+  /* -- Equal columns (intrinsically responsive) ----------------
+     RAM-pattern grid (Repeat, Auto-fit, Minmax). Columns wrap
+     automatically when they would shrink below --sf-equal-min-col.
+     No container ancestor required — intrinsically responsive.
+     Modifiers set the target min-col width for ~N equal columns
+     at typical container widths; exact count emerges from layout.
+     Override: style="--sf-equal-min-col: 14rem"
      ---------------------------------------------------------- */
   .sf-equal {
     display:               grid;
-    grid-template-columns: repeat(var(--sf-equal-cols), 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--sf-equal-min-col), 100%), 1fr));
     gap:                   var(--sf-equal-gap);
   }
-  .sf-equal--2 { --sf-equal-cols: 2; }
-  .sf-equal--3 { --sf-equal-cols: 3; }
-  .sf-equal--4 { --sf-equal-cols: 4; }
-  .sf-equal--6 { --sf-equal-cols: 6; }
+  .sf-equal--2 { --sf-equal-min-col: var(--sf-equal-min-col-2); }
+  .sf-equal--3 { --sf-equal-min-col: var(--sf-equal-min-col-3); }
+  .sf-equal--4 { --sf-equal-min-col: var(--sf-equal-min-col-4); }
+  .sf-equal--6 { --sf-equal-min-col: var(--sf-equal-min-col-6); }
 
   /* -- Content grid (breakout pattern) -------------------------
      Full-width grid that lets items break out to breakout or full

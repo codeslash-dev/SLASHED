@@ -88,10 +88,16 @@
     --sf-grid-min-2xl:     28rem;
 
     /* ----------------------------------------------------------
-       Equal columns (fixed, non-responsive)
+       Equal columns (intrinsically responsive RAM)
+       min-col-N: minimum column width for the N-column preset.
+       Exact column count emerges from container ÷ min-col.
        ---------------------------------------------------------- */
-    --sf-equal-cols: 2;
-    --sf-equal-gap:  var(--sf-space-gap);
+    --sf-equal-min-col:   16rem;
+    --sf-equal-min-col-2: 28rem;
+    --sf-equal-min-col-3: 15rem;
+    --sf-equal-min-col-4: 16rem;
+    --sf-equal-min-col-6: 10rem;
+    --sf-equal-gap:        var(--sf-space-gap);
 
     /* ----------------------------------------------------------
        Cover
