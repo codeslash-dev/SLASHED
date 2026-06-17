@@ -112,12 +112,14 @@
       display: revert !important;
     }
 
-    /* Preserve <details> content regardless of open state. Only
+    /* Preserve <details> content regardless of open state — scoped to
+       .sf-prose so collapsed navigation, dropdowns, and accordion menus
+       outside prose regions are NOT force-expanded on paper. Only
        `summary` keeps `!important` — the disclosure chevron carries no
        print value and the consumer should not be able to bring it back
        inadvertently. The other two rules win against the UA stylesheet
        on layered-author > UA precedence alone. */
-    details {
+    .sf-prose details {
       display: block;
     }
     details > summary {

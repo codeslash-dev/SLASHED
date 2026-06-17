@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**180 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**182 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -141,7 +141,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-36 classes.
+37 classes.
 
 | Class |
 |---|
@@ -163,6 +163,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-scrim--bottom` |
 | `.sf-scrim--full` |
 | `.sf-scrim--top` |
+| `.sf-scrim__content` |
 | `.sf-scroll-shadow` |
 | `.sf-scroll-snap` |
 | `.sf-surface` |
@@ -231,12 +232,13 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Accessibility (`core/accessibility.css`)
 
-5 classes.
+6 classes.
 
 | Class |
 |---|
 | `.is-loading` |
 | `.sf-clickable-parent` |
+| `.sf-clickable-parent__overlay` |
 | `.sf-focus-parent` |
 | `.sf-focus-shadow` |
 | `.sf-text-gradient` |
@@ -265,9 +267,10 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Print utilities (`core/print.css`)
 
-1 classes.
+2 classes.
 
 | Class |
 |---|
 | `.sf-link-external` |
+| `.sf-prose` |
 

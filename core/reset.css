@@ -31,7 +31,7 @@
     /* stylelint-disable-next-line property-no-vendor-prefix -- Safari <17: unprefixed text-size-adjust only landed in Safari 17 */
     -webkit-text-size-adjust: 100%;
     text-size-adjust:          100%;
-    scroll-padding-block-start: var(--sf-header-height, 5rem);
+    scroll-padding-block-start: calc(var(--sf-header-height, 5rem) + var(--sf-space-m, 1rem));
     scrollbar-gutter:    stable;
     color-scheme:        var(--sf-color-scheme, light dark);
     hanging-punctuation: first last;

@@ -40,6 +40,7 @@
   .sf-prose blockquote           { font-style: italic; padding-inline-start: var(--sf-prose-blockquote-padding); border-inline-start: var(--sf-prose-blockquote-border); }
   .sf-prose img                  { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
   .sf-prose :is(ul, ol)          { padding-inline-start: 1.25em; }
+  .sf-prose > :is(ul, ol)        { margin-block: 0; }
   .sf-prose :is(ul, ol) :is(ul, ol) { margin-block-start: var(--sf-prose-nested-list-gap); }
   .sf-prose ul                   { list-style: disc; }
   .sf-prose ol                   { list-style: decimal; }
@@ -534,8 +535,12 @@
     pointer-events: none;
   }
   /* Lift content above the scrim, but leave media below it so the
-     gradient actually darkens the picture. */
-  .sf-scrim > :not(img, picture, video, svg, canvas) {
+     gradient actually darkens the picture. .sf-scrim__content is the
+     explicit BEM alternative for complex nesting where media elements
+     are wrapped in divs and the classless :not() selector would
+     incorrectly lift the wrapper above the gradient overlay. */
+  .sf-scrim > :not(img, picture, video, svg, canvas),
+  .sf-scrim__content {
     position: relative;
     z-index:  1;
   }
