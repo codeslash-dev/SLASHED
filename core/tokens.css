@@ -225,21 +225,23 @@
     --sf-color-danger-light:    oklch(0.48 0.22 12);
   }
 
-  /* Plain :root mirrors for computed tokens — same values as @property initial-value.
-     Required for engines lacking @property support AND light-dark() support.
-     Overridden by the @supports block below whenever light-dark() is available. */
+  /* Plain :root mirrors for computed tokens — resolve to the -light source token
+     so user overrides to --sf-color-X-light are respected in all browsers.
+     Overridden by the @supports block below whenever light-dark() is available.
+     (@property initial-value is a hardcoded last resort per CSS spec; this
+     declaration is the effective default that picks up user customisation.) */
   :root {
-    --sf-color-primary:   oklch(0.47 0.27 264);
-    --sf-color-secondary: oklch(0.22 0.04 264);
-    --sf-color-tertiary:  oklch(0.42 0.22 295);
-    --sf-color-action:    oklch(0.50 0.22 235);
-    --sf-color-neutral:   oklch(0.52 0.025 260);
-    --sf-color-base:      oklch(0.96 0.006 250);
-    --sf-color-success:   oklch(0.50 0.16 145);
-    --sf-color-warning:   oklch(0.75 0.17 80);
-    --sf-color-error:     oklch(0.50 0.20 25);
-    --sf-color-info:      oklch(0.48 0.18 235);
-    --sf-color-danger:    oklch(0.48 0.22 12);
+    --sf-color-primary:   var(--sf-color-primary-light);
+    --sf-color-secondary: var(--sf-color-secondary-light);
+    --sf-color-tertiary:  var(--sf-color-tertiary-light);
+    --sf-color-action:    var(--sf-color-action-light);
+    --sf-color-neutral:   var(--sf-color-neutral-light);
+    --sf-color-base:      var(--sf-color-base-light);
+    --sf-color-success:   var(--sf-color-success-light);
+    --sf-color-warning:   var(--sf-color-warning-light);
+    --sf-color-error:     var(--sf-color-error-light);
+    --sf-color-info:      var(--sf-color-info-light);
+    --sf-color-danger:    var(--sf-color-danger-light);
   }
 
   /* Mode flag — drives formula direction for non-color dark overrides.
