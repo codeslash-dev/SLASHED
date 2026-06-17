@@ -92,7 +92,7 @@
      · border style (--sf-border-style)
      · border shorthands (--sf-border, --sf-border-subtle, --sf-border-strong)
      · divider (--sf-divider-{width,style,color,gap})
-     · radius (--sf-radius-{none,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
+     · radius (--sf-radius-{none,2xs,xs,s,m,l,xl,2xl,3xl,4xl,full,pill})
      · duration (--sf-duration-{none,instant,fast,normal,slow,slower})
      · easing (--sf-ease-{linear,out,in,in-out,spring,elastic,bounce,overshoot})
      · transitions (--sf-transition-{colors,form-field,transform,opacity,shadow,fast,slow,enter,exit,overlay})
@@ -192,6 +192,22 @@
   @property --sf-color-info-light    { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.18 235); }
   @property --sf-color-danger-light  { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.22 12);  }
 
+  /* @property — COMPUTED COLOR TOKENS (brand + status)
+     initial-value = light-mode value. Acts as a valid fallback when
+     light-dark() is unsupported (the @supports block below won't apply).
+     User overrides to --sf-color-X or --sf-color-X-light always win. */
+  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.47 0.27 264); }
+  @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(0.22 0.04 264); }
+  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.42 0.22 295); }
+  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.22 235); }
+  @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(0.52 0.025 260); }
+  @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(0.96 0.006 250); }
+  @property --sf-color-success   { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.16 145); }
+  @property --sf-color-warning   { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
+  @property --sf-color-error     { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.20 25);  }
+  @property --sf-color-info      { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.18 235); }
+  @property --sf-color-danger    { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.22 12);  }
+
   /* Plain :root mirrors — character-for-character identical to each @property
      initial-value above. Engines lacking @property support read the token value
      from here. Do NOT edit these independently from the initial-value strings. */
@@ -207,6 +223,23 @@
     --sf-color-error-light:     oklch(0.50 0.20 25);
     --sf-color-info-light:      oklch(0.48 0.18 235);
     --sf-color-danger-light:    oklch(0.48 0.22 12);
+  }
+
+  /* Plain :root mirrors for computed tokens — same values as @property initial-value.
+     Required for engines lacking @property support AND light-dark() support.
+     Overridden by the @supports block below whenever light-dark() is available. */
+  :root {
+    --sf-color-primary:   oklch(0.47 0.27 264);
+    --sf-color-secondary: oklch(0.22 0.04 264);
+    --sf-color-tertiary:  oklch(0.42 0.22 295);
+    --sf-color-action:    oklch(0.50 0.22 235);
+    --sf-color-neutral:   oklch(0.52 0.025 260);
+    --sf-color-base:      oklch(0.96 0.006 250);
+    --sf-color-success:   oklch(0.50 0.16 145);
+    --sf-color-warning:   oklch(0.75 0.17 80);
+    --sf-color-error:     oklch(0.50 0.20 25);
+    --sf-color-info:      oklch(0.48 0.18 235);
+    --sf-color-danger:    oklch(0.48 0.22 12);
   }
 
   /* Mode flag — drives formula direction for non-color dark overrides.
@@ -1058,6 +1091,7 @@
        large enough to clip to half the shorter edge for any realistic UI.
        ---------------------------------------------------------- */
     --sf-radius-none: 0;
+    --sf-radius-2xs:  calc(1px  * var(--sf-radius-scale));
     --sf-radius-xs:   calc(2px  * var(--sf-radius-scale));
     --sf-radius-s:    calc(4px  * var(--sf-radius-scale));
     --sf-radius-m:    calc(8px  * var(--sf-radius-scale));

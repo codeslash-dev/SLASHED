@@ -47,7 +47,7 @@
   .sf-prose hr                   { margin-block: var(--sf-prose-hr-margin); }
   .sf-prose figure               { margin-block: var(--sf-prose-figure-margin); }
   .sf-prose figcaption           { font-size: var(--sf-prose-figcaption-size); color: var(--sf-color-text--muted); margin-block-start: var(--sf-prose-list-gap); }
-  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-inline: auto; inline-size: 100%; max-inline-size: 100%; }
+  .sf-prose table                { margin-block: var(--sf-prose-block-margin); display: block; overflow-x: auto; overflow-inline: auto; inline-size: 100%; max-inline-size: 100%; }
   .sf-prose :is(th, td)          { padding: var(--sf-prose-table-pad); }
   .sf-prose video                { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
 
