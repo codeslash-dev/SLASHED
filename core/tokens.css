@@ -209,9 +209,28 @@
     --sf-color-danger-light:    oklch(0.48 0.22 12);
   }
 
+  /* @property — COMPUTED COLOR TOKENS (brand + status)
+     Registers the computed tokens as typed <color> so CSS transitions can
+     interpolate between light and dark values when [data-theme] changes.
+     initial-value = light-mode value (safe fallback if nothing sets the token).
+     Child-element theming works because [data-theme="dark"] in themes.css
+     assigns var(--sf-color-X-dark) — a simple var reference, not a
+     var()-in-fallback chain — which type-checks correctly on child elements. */
+  @property --sf-color-primary   { syntax: "<color>"; inherits: true; initial-value: oklch(0.47 0.27 264); }
+  @property --sf-color-secondary { syntax: "<color>"; inherits: true; initial-value: oklch(0.22 0.04 264); }
+  @property --sf-color-tertiary  { syntax: "<color>"; inherits: true; initial-value: oklch(0.42 0.22 295); }
+  @property --sf-color-action    { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.22 235); }
+  @property --sf-color-neutral   { syntax: "<color>"; inherits: true; initial-value: oklch(0.52 0.025 260); }
+  @property --sf-color-base      { syntax: "<color>"; inherits: true; initial-value: oklch(0.96 0.006 250); }
+  @property --sf-color-success   { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.16 145); }
+  @property --sf-color-warning   { syntax: "<color>"; inherits: true; initial-value: oklch(0.75 0.17 80);  }
+  @property --sf-color-error     { syntax: "<color>"; inherits: true; initial-value: oklch(0.50 0.20 25);  }
+  @property --sf-color-info      { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.18 235); }
+  @property --sf-color-danger    { syntax: "<color>"; inherits: true; initial-value: oklch(0.48 0.22 12);  }
+
   /* Plain :root mirrors for computed tokens — resolve to the -light source token
      so user overrides to --sf-color-X-light are respected in all browsers.
-     Overridden by the @supports block below whenever light-dark() is available. */
+     Overridden by the @supports block in themes.css whenever dark mode is active. */
   :root {
     --sf-color-primary:   var(--sf-color-primary-light);
     --sf-color-secondary: var(--sf-color-secondary-light);
