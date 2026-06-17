@@ -17,13 +17,19 @@
     savedThemes,
     applyTheme,
     saveCurrentTheme,
+    saveImportedTheme,
     deleteSavedTheme,
   } from '../lib/store.svelte.js';
+  import { frameworkVersion } from '../lib/model.js';
 
   let saveName = $state('');
   let lastApplied = $state(null);
   let lastSaved = $state(null);
   let saveError = $state('');
+  let importError = $state('');
+  let importSuccess = $state('');
+  /** @type {HTMLInputElement | undefined} */
+  let fileInput;
 
   /** Number of overrides this theme would set (after sanitisation). */
   function size(theme) {
@@ -33,7 +39,7 @@
   function apply(theme) {
     const { applied, skipped } = applyTheme(theme);
     lastApplied = { id: theme.id, name: theme.name, applied, skipped: skipped.length };
-    setTimeout(() => (lastApplied = null), 2200);
+    setTimeout(() => (lastApplied = null), skipped.length ? 4000 : 2200);
   }
 
   function save() {
@@ -56,7 +62,68 @@
   function remove(theme) {
     deleteSavedTheme(theme.id);
   }
+
+  function exportTheme(theme) {
+    const payload = {
+      name: theme.name,
+      icon: theme.icon ?? '⭐',
+      blurb: theme.blurb ?? '',
+      frameworkVersion: frameworkVersion || null,
+      overrides: theme.overrides ?? {},
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `slashed-theme-${(theme.name || 'theme').toLowerCase().replace(/\s+/g, '-')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function triggerImport() {
+    importError = '';
+    importSuccess = '';
+    fileInput?.click();
+  }
+
+  function handleImportFile(e) {
+    const file = e.target?.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onerror = () => { importError = 'Failed to read the file.'; };
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target?.result ?? '');
+        if (!data || typeof data !== 'object' || typeof data.overrides !== 'object' || data.overrides === null || Array.isArray(data.overrides)) {
+          importError = 'Invalid theme file — missing overrides map.';
+          return;
+        }
+        const total = Object.keys(data.overrides).length;
+        saveImportedTheme(data);
+        const versionNote =
+          data.frameworkVersion && frameworkVersion && data.frameworkVersion !== frameworkVersion
+            ? ` · exported from v${data.frameworkVersion}, current v${frameworkVersion} — apply to see which tokens were skipped.`
+            : '';
+        importSuccess = `Imported "${data.name || 'Imported theme'}" — ${total} override${total === 1 ? '' : 's'}.${versionNote}`;
+        importError = '';
+        setTimeout(() => (importSuccess = ''), versionNote ? 6000 : 3000);
+      } catch {
+        importError = 'Could not parse the file — make sure it is a valid SLASHED theme JSON.';
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  }
 </script>
+
+<input
+  bind:this={fileInput}
+  type="file"
+  accept=".json,application/json"
+  style="display:none"
+  onchange={handleImportFile}
+  aria-hidden="true"
+/>
 
 <section class="themes">
   <header class="themes__head">
@@ -70,9 +137,17 @@
         </p>
       </div>
     </div>
+    <button class="cfg-btn cfg-btn--sm themes__import-btn" onclick={triggerImport} title="Import a theme from a JSON file">Import theme…</button>
   </header>
 
   <div class="themes__body">
+    {#if importSuccess}
+      <p class="themes__msg themes__msg--ok">{importSuccess}</p>
+    {/if}
+    {#if importError}
+      <p class="themes__msg themes__msg--err">{importError}</p>
+    {/if}
+
     <section>
       <h3 class="themes__group">Built-in presets</h3>
       <div class="themes__grid">
@@ -88,9 +163,14 @@
               {/if}
             </header>
             <p class="theme__blurb">{p.blurb}</p>
-            <button class="cfg-btn cfg-btn--primary cfg-btn--sm theme__apply" onclick={() => apply(p)}>
-              {lastApplied?.id === p.id ? `Applied ${lastApplied.applied} ✓` : 'Apply'}
-            </button>
+            <div class="theme__actions">
+              <button class="cfg-btn cfg-btn--primary cfg-btn--sm" onclick={() => apply(p)}>
+                {lastApplied?.id === p.id ? `Applied ${lastApplied.applied}${lastApplied.skipped ? ` · ${lastApplied.skipped} skipped` : ''} ✓` : 'Apply'}
+              </button>
+              {#if size(p) > 0}
+                <button class="cfg-btn cfg-btn--sm" onclick={() => exportTheme(p)} title="Download this preset as a JSON file">Export</button>
+              {/if}
+            </div>
           </article>
         {/each}
       </div>
@@ -151,9 +231,8 @@
                 <button class="cfg-btn cfg-btn--primary cfg-btn--sm" onclick={() => apply(s)}>
                   {lastApplied?.id === s.id ? `Applied ${lastApplied.applied} ✓` : 'Apply'}
                 </button>
-                <button class="cfg-btn cfg-btn--sm cfg-btn--danger" onclick={() => remove(s)} title="Delete this saved theme">
-                  Delete
-                </button>
+                <button class="cfg-btn cfg-btn--sm" onclick={() => exportTheme(s)} title="Download this theme as a JSON file">Export</button>
+                <button class="cfg-btn cfg-btn--sm cfg-btn--danger" onclick={() => remove(s)} title="Delete this saved theme">Delete</button>
               </div>
             </article>
           {/each}
@@ -169,8 +248,13 @@
     padding: 18px 20px 14px;
     border-bottom: 1px solid var(--cfg-border);
     background: var(--cfg-surface);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
   }
-  .themes__title-wrap { display: flex; align-items: flex-start; gap: 12px; }
+  .themes__import-btn { flex-shrink: 0; align-self: center; }
+  .themes__title-wrap { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
   .themes__icon {
     display: inline-grid;
     place-items: center;
@@ -224,9 +308,8 @@
   }
   .theme__size--zero { color: var(--cfg-text-faint); background: var(--cfg-surface-2); }
   .theme__blurb { margin: 0; color: var(--cfg-text-muted); font-size: 12.5px; line-height: 1.5; flex: 1; }
-  .theme__apply { align-self: stretch; margin-top: 4px; }
-  .theme__actions { display: flex; gap: 8px; margin-top: 4px; }
-  .theme__actions .cfg-btn { flex: 1; }
+  .theme__actions { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+  .theme__actions .cfg-btn:first-child { flex: 1; }
 
   .themes__save {
     display: flex;
@@ -240,6 +323,7 @@
 
   .themes__msg { margin: 0 0 12px; font-size: 12.5px; color: var(--cfg-text-muted); }
   .themes__msg--err { color: var(--cfg-warn); }
+  .themes__msg--ok { color: var(--cfg-ok); }
   .themes__msg code { color: var(--cfg-text); }
 
   .themes__empty {

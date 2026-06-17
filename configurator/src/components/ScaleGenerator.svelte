@@ -136,6 +136,8 @@
   const applicable = $derived(computed.filter((s) => tokenByName.has(s.token)));
   const missing = $derived(computed.length - applicable.length);
 
+  let isOpen = $state(false);
+
   let applied = $state(false);
   function apply() {
     if (engineLive) {
@@ -167,6 +169,15 @@
 </script>
 
 <section class="card">
+  <button type="button" class="gen__toggle" onclick={() => (isOpen = !isOpen)} aria-expanded={isOpen}>
+    <span class="gen__caret" class:gen__caret--open={isOpen} aria-hidden="true">▶</span>
+    <span class="gen__title">Scale generator</span>
+    <span class="gen__kind">{KIND_LABELS[kind] ?? kind} ramp</span>
+    {#if applied}<span class="gen__applied">Applied ✓</span>{/if}
+  </button>
+
+  {#if isOpen}
+  <div class="gen__body">
   {#if kinds.length > 1}
     <div class="seg" role="group" aria-label="Scale kind">
       {#each kinds as k (k)}
@@ -228,16 +239,41 @@
       <span class="scales__note">{missing} step(s) not in this catalogue — skipped.</span>
     {/if}
   </div>
+  </div>
+  {/if}
 </section>
 
 <style>
-  .card { background: var(--cfg-surface); border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); padding: 16px; }
+  .card { background: var(--cfg-surface); border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); padding: 0; }
 
-  .seg { display: inline-flex; border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); overflow: hidden; margin-bottom: 16px; }
+  .gen__toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--cfg-text);
+    font: inherit;
+    padding: 14px 16px;
+    border-radius: var(--cfg-radius);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.12s;
+  }
+  .gen__toggle:hover { background: var(--cfg-surface-2); }
+  .gen__caret { font-size: 9px; color: var(--cfg-text-faint); transition: transform 0.12s ease; flex-shrink: 0; }
+  .gen__caret--open { transform: rotate(90deg); }
+  .gen__title { font-size: 13px; font-weight: 600; }
+  .gen__kind { font-size: 12px; color: var(--cfg-text-muted); background: var(--cfg-surface-2); border: 1px solid var(--cfg-border-strong); border-radius: 999px; padding: 1px 9px; }
+  .gen__applied { font-size: 11.5px; color: var(--cfg-ok); margin-left: auto; }
+  .gen__body { padding: 0 16px 16px; border-top: 1px solid var(--cfg-border); }
+
+  .seg { display: inline-flex; border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); overflow: hidden; margin-top: 16px; margin-bottom: 16px; }
   .seg__btn { background: var(--cfg-surface-2); color: var(--cfg-text-muted); border: none; padding: 6px 16px; font-size: 13px; }
   .seg__btn--on { background: var(--cfg-accent-strong); color: #fff; }
 
-  .controls { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; margin-bottom: 16px; }
   .ctl { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--cfg-text-muted); }
   .ctl__in { display: flex; align-items: center; gap: 5px; }
   .ctl__in i { font-style: normal; font-size: 11px; color: var(--cfg-text-faint); }

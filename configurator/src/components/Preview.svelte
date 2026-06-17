@@ -4,6 +4,9 @@
 
   /** @type {HTMLButtonElement | undefined} */
   let closeBtn;
+  /** @type {HTMLElement | undefined} */
+  let previewEl;
+  let isFullscreen = $state(false);
 
   $effect(() => {
     if (!window.matchMedia('(max-width: 1100px)').matches) return;
@@ -12,6 +15,25 @@
       document.querySelector('button[aria-label="Toggle preview"]')?.focus();
     };
   });
+
+  $effect(() => {
+    const handler = () => { isFullscreen = document.fullscreenElement === previewEl; };
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  });
+
+  async function toggleFullscreen() {
+    if (!previewEl) return;
+    try {
+      if (document.fullscreenElement === previewEl) {
+        await document.exitFullscreen?.();
+      } else {
+        await previewEl.requestFullscreen?.();
+      }
+    } catch {
+      // keep UI stable if fullscreen is denied or unavailable
+    }
+  }
 
   const VIEWPORTS = [
     { id: 'mobile',  emoji: '📱', label: 'Mobile',  width: 360,  hint: '360 px' },
@@ -84,7 +106,7 @@
   const preventDemoNav = (e) => e.preventDefault();
 </script>
 
-<section class="preview">
+<section class="preview" bind:this={previewEl}>
   <header class="preview__bar">
     <div class="preview__title">
       <span class="preview__dot" aria-hidden="true"></span>
@@ -107,6 +129,7 @@
       <button class="cfg-seg__btn" class:cfg-seg__btn--on={ui.previewMotion === 'reduced'} onclick={() => (ui.previewMotion = ui.previewMotion === 'reduced' ? 'normal' : 'reduced')} aria-pressed={ui.previewMotion === 'reduced'} aria-label={ui.previewMotion === 'reduced' ? 'Set preview motion to normal' : 'Set preview motion to reduced'} title="Reduced motion in preview only">🐢</button>
     </div>
     <span class="preview__hint">{ui.previewTheme}{ui.previewMotion === 'reduced' ? ' · reduced motion' : ''}{activeViewport.width ? ` · ${activeViewport.width} px` : ''}</span>
+    <button class="preview__fullscreen" onclick={toggleFullscreen} title={isFullscreen ? 'Exit full screen' : 'Full screen preview'} aria-label={isFullscreen ? 'Exit full screen' : 'Full screen preview'} aria-pressed={isFullscreen}>{isFullscreen ? '⤡' : '⤢'}</button>
     <button bind:this={closeBtn} class="preview__close" onclick={() => (ui.previewOpen = false)} title="Close the preview overlay" aria-label="Close preview">✕</button>
   </header>
 
@@ -1028,6 +1051,10 @@
   .preview__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cfg-ok); box-shadow: 0 0 0 3px rgba(90,210,122,.18); }
   .preview__hint { font-size: 11px; color: var(--cfg-text-faint); text-transform: capitalize; }
   .preview__modes :global(.cfg-seg__btn) { padding: 4px 9px; font-size: 12px; }
+  .preview__fullscreen { width: 26px; height: 26px; padding: 0; font-size: 14px; line-height: 1; color: var(--cfg-text-muted); background: var(--cfg-surface-2); border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); cursor: pointer; flex-shrink: 0; display: inline-grid; place-items: center; }
+  .preview__fullscreen:hover { color: var(--cfg-text); border-color: var(--cfg-accent-strong); }
+  .preview:fullscreen { background: var(--cfg-bg); }
+  .preview:fullscreen .preview__close { display: none; }
   .preview__close { display: none; margin-left: auto; width: 26px; height: 26px; padding: 0; font-size: 13px; line-height: 1; color: var(--cfg-text-muted); background: var(--cfg-surface-2); border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); cursor: pointer; flex-shrink: 0; }
   .preview__close:hover { color: var(--cfg-text); border-color: var(--cfg-accent-strong); }
   @media (max-width: 1100px) {

@@ -328,7 +328,7 @@
       </p>
       <div class="usage">
         {#each usage as u (u.role)}
-          <div class="usage__chip" style="background: {cssColor(u.bg)}; color: {cssColor(u.fg)};">
+          <div class="usage__chip" style="background: {cssColor(u.bg)}; color: var({u.fg}, #fff);">
             <span class="usage__aa">Aa</span>
             <span class="usage__role">{u.role}</span>
             {#if u.ratio !== null}
@@ -440,8 +440,8 @@
 
   /* Checker */
   .checker { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: stretch; }
-  .checker__controls { display: flex; align-items: flex-end; gap: 10px; }
-  .checker__field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; }
+  .checker__controls { display: flex; flex-direction: column; gap: 6px; }
+  .checker__field { display: flex; flex-direction: column; gap: 5px; }
   .checker__field span { font-size: 12px; color: var(--cfg-text-muted); }
   .checker__field select {
     width: 100%;
@@ -453,7 +453,7 @@
     font-family: var(--cfg-mono);
     font-size: 12px;
   }
-  .checker__swap { font-size: 16px; padding: 6px 9px; align-self: flex-end; }
+  .checker__swap { font-size: 16px; padding: 4px 9px; align-self: flex-start; }
   .checker__result {
     min-width: 190px;
     border: 1px solid var(--cfg-border-strong);
