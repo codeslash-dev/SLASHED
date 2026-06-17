@@ -190,6 +190,14 @@
       --sf-color-base:      var(--sf-color-base-dark);
       --sf-color-surface:   var(--sf-color-base);
 
+      /* Surface scale — re-derive from dark --sf-color-base so scoped dark
+         sections are not stuck with the light-baked var() text from :root. */
+      --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
+      --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
+      --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
+      --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
+      --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
+
       /* Status */
       --sf-color-success: var(--sf-color-success-dark);
       --sf-color-warning: var(--sf-color-warning-dark);
@@ -277,5 +285,22 @@
     }
 
   } /* end @supports (color: oklch(from red l c h)) */
+
+  /* On-colour text tokens need sign() in addition to relative-color syntax. */
+  @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) {
+    [data-theme="dark"] {
+      --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)  clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-action:    oklch(from var(--sf-color-action)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-neutral:   oklch(from var(--sf-color-neutral)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-success:   oklch(from var(--sf-color-success)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-warning:   oklch(from var(--sf-color-warning)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-error:     oklch(from var(--sf-color-error)     clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-info:      oklch(from var(--sf-color-info)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      --sf-color-text--on-inverse:   oklch(from var(--sf-color-inverse)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+    }
+  }
 
 }
