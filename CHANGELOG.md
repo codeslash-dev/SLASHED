@@ -4,6 +4,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.46] - 2026-06-17
+
+### Features
+- **layout:** add .sf-cq and refactor .sf-equal to RAM pattern
+- **configurator:** foldable generators, fullscreen preview, a11y & theme import/export
+- **bento:** default 4 cols, add child span modifiers (School 1)
+
+### Bug Fixes
+- **themes,tokens:** add [data-theme="light"] scoped token re-declarations and correct -dark token group
+- **themes:** re-declare surface and on-colour tokens in [data-theme="dark"]
+- **tokens,tests,docs:** register -dark tokens as @property <color> and update baselines
+- **tests:** add 11 -dark @property tokens to token-api snapshot
+- **tokens,themes:** re-enable @property <color> for computed tokens via -dark source tokens
+- **tokens:** remove @property registration for computed color tokens
+- **tokens:** computed color mirrors resolve via -light tokens, not hardcoded values
+- **tokens,layout,macros:** pre-freeze audit fixes — overflow fallback, color @property, radius-2xs, equal tokens
+- extend prose heading gap to h5/h6 and fix entrance animation fill-mode
+- **framework:** cover-max min-height bug + overflow logical property fallbacks
+- **framework:** audit — replace transition-all, motion/a11y/form fixes
+- **docs:** update sf-grid-cols-1 description to reflect no container context
+- **ci:** sync configurator api-index.generated.json
+- **ci:** sync docs and registry with bento API changes
+- **bento:** remove redundant .sf-bento--3
+- **lumlocker:** scope to 4 brand colors, fix section-theme bypass
+
 ## [0.5.45] - 2026-06-15
 
 ### Bug Fixes
