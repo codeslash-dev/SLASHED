@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**859 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**864 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-495 tokens.
+496 tokens.
 
 | Token | Default |
 |---|---|
@@ -382,6 +382,7 @@ rebrand workflow.
 | `--sf-print-page-margin` | `2cm` |
 | `--sf-print-page-size` | `a4` |
 | `--sf-radius-2xl` | `calc(24px * var(--sf-radius-scale))` |
+| `--sf-radius-2xs` | `calc(1px * var(--sf-radius-scale))` |
 | `--sf-radius-3xl` | `calc(32px * var(--sf-radius-scale))` |
 | `--sf-radius-4xl` | `calc(48px * var(--sf-radius-scale))` |
 | `--sf-radius-full` | `9999px` |
@@ -516,7 +517,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-48 tokens.
+52 tokens.
 
 | Token | Default |
 |---|---|
@@ -539,8 +540,12 @@ rebrand workflow.
 | `--sf-content-width` | `var(--sf-container-default)` |
 | `--sf-cover-min-height` | `100dvh` |
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
-| `--sf-equal-cols` | `2` |
 | `--sf-equal-gap` | `var(--sf-space-gap)` |
+| `--sf-equal-min-col` | `16rem` |
+| `--sf-equal-min-col-2` | `28rem` |
+| `--sf-equal-min-col-3` | `15rem` |
+| `--sf-equal-min-col-4` | `16rem` |
+| `--sf-equal-min-col-6` | `10rem` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-gap-size` | `var(--sf-space-gap)` |
 | `--sf-grid-gap` | `var(--sf-space-gap)` |

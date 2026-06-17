@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**823 tokens** (deduplicated by name across the 6 token source files).
+**828 tokens** (deduplicated by name across the 6 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 685 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 690 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 232 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 591 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 236 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 592 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -569,8 +569,12 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-ease-out` | PUBLIC | knob | Core | `cubic-bezier(0.25, 0, 0.15, 1)` |
 | `--sf-ease-overshoot` | PUBLIC | knob | Core | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` |
 | `--sf-ease-spring` | PUBLIC | knob | Core | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` |
-| `--sf-equal-cols` | PUBLIC | knob | Layout | `2` |
 | `--sf-equal-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-equal-min-col` | PUBLIC | knob | Layout | `16rem` |
+| `--sf-equal-min-col-2` | PUBLIC | knob | Layout | `28rem` |
+| `--sf-equal-min-col-3` | PUBLIC | knob | Layout | `15rem` |
+| `--sf-equal-min-col-4` | PUBLIC | knob | Layout | `16rem` |
+| `--sf-equal-min-col-6` | PUBLIC | knob | Layout | `10rem` |
 | `--sf-field-block` | PUBLIC | consumption | Core | `var(--sf-space-l)` |
 | `--sf-field-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-s)` |
@@ -739,6 +743,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-prose-paragraph` | PUBLIC | consumption | Layout | `var(--sf-space-content)` |
 | `--sf-prose-table-pad` | PUBLIC | consumption | Macros | `var(--sf-space-xs)` |
 | `--sf-radius-2xl` | PUBLIC | consumption | Core | `calc(24px * var(--sf-radius-scale))` |
+| `--sf-radius-2xs` | PUBLIC | consumption | Core | `calc(1px * var(--sf-radius-scale))` |
 | `--sf-radius-3xl` | PUBLIC | consumption | Core | `calc(32px * var(--sf-radius-scale))` |
 | `--sf-radius-4xl` | PUBLIC | consumption | Core | `calc(48px * var(--sf-radius-scale))` |
 | `--sf-radius-full` | PUBLIC | knob | Core | `9999px` |

@@ -10,15 +10,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 823,
+      "tokens": 828,
       "by_tier": {
-        "PUBLIC": 685,
+        "PUBLIC": 690,
         "PUBLIC-ADVANCED": 137,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 232,
-        "consumption": 591
+        "knob": 236,
+        "consumption": 592
       }
     }
   },
@@ -3227,14 +3227,6 @@
       ],
       "value": "linear(0, 0.5, 1.1, 0.95, 1.02, 1)"
     },
-    "--sf-equal-cols": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "2"
-    },
     "--sf-equal-gap": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3242,6 +3234,46 @@
         "core/tokens.layout.css"
       ],
       "value": "var(--sf-space-gap)"
+    },
+    "--sf-equal-min-col": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "16rem"
+    },
+    "--sf-equal-min-col-2": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "28rem"
+    },
+    "--sf-equal-min-col-3": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "15rem"
+    },
+    "--sf-equal-min-col-4": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "16rem"
+    },
+    "--sf-equal-min-col-6": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "10rem"
     },
     "--sf-field-block": {
       "tier": "PUBLIC",
@@ -4586,6 +4618,14 @@
         "core/tokens.css"
       ],
       "value": "calc(24px * var(--sf-radius-scale))"
+    },
+    "--sf-radius-2xs": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "calc(1px * var(--sf-radius-scale))"
     },
     "--sf-radius-3xl": {
       "tier": "PUBLIC",

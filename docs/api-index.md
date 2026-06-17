@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1051 elements** — 823 tokens, 228 classes.
+**1057 elements** — 828 tokens, 229 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 913 | Everyday surface. SemVer-stable. |
+| PUBLIC | 919 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (823)
+## Tokens (828)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 
-### Core tokens (495)
+### Core tokens (496)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -85,7 +85,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-col-width-l` | PUBLIC | knob | col | `32ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
 | `--sf-col-width-m` | PUBLIC | knob | col | `24ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
 | `--sf-col-width-s` | PUBLIC | knob | col | `16ch` | tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size. |
-| `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-action--active` | PUBLIC | consumption | color | `var(--sf-color-action-xdark)` | action |
 | `--sf-color-action--hover` | PUBLIC | consumption | color | `var(--sf-color-action-darker)` | action |
 | `--sf-color-action-darker` | PUBLIC | consumption | color | `var(--sf-color-action-600)` | action |
@@ -98,7 +98,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | action |
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | action |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | action |
-| `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-base--active` | PUBLIC | consumption | color | `var(--sf-color-base-xdark)` | base |
 | `--sf-color-base--hover` | PUBLIC | consumption | color | `var(--sf-color-base-darker)` | base |
 | `--sf-color-base-darker` | PUBLIC | consumption | color | `var(--sf-color-base-600)` | base |
@@ -126,19 +126,19 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-border--translucent` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.15)` | Border alpha tokens |
 | `--sf-color-code-bg` | PUBLIC | consumption | color | `var(--sf-color-inset)` | plain var aliases (ungated) |
 | `--sf-color-code-text` | PUBLIC | consumption | color | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Inline-code text colour. Auto-contrasts with --sf-color-code-bg using the same luminance formula as --sf-color-text--on-*. This prevents invisible text when code appears inside inverted-colour containers (e.g. sf-imposter with a dark background where inherited colour is… |
-| `--sf-color-danger` | PUBLIC | consumption | color | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-danger` | PUBLIC | consumption | color | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-danger-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | STATUS COLORS (-light source tokens) |
 | `--sf-color-danger-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
 | `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-dim` | PUBLIC | knob | color | `oklch(0 0 0 / 0.5)` | Dim: classic semi-transparent black for modal backdrops, distinct from --sf-color-overlay |
-| `--sf-color-error` | PUBLIC | consumption | color | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-error` | PUBLIC | consumption | color | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-error-light` | PUBLIC | knob | color | `oklch(0.50 0.20 25)` | STATUS COLORS (-light source tokens) |
 | `--sf-color-error-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-error) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-error-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
 | `--sf-color-error-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-error) l c h / 0.1)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
-| `--sf-color-info` | PUBLIC | consumption | color | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-info` | PUBLIC | consumption | color | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-info-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | STATUS COLORS (-light source tokens) |
 | `--sf-color-info-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
@@ -153,7 +153,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-link--visited` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )` | Visited link — 60° hue shift from action gives clearly distinct chroma without colliding with default tertiary (h ≈ 310). Same lightness clamp as the base link. If your brand puts action and tertiary close in hue, override directly: :root { --sf-color-link--visited: #6b46c1; } |
 | `--sf-color-mark-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.25)` | Selection & mark |
 | `--sf-color-mark-text` | PUBLIC | knob | color | `inherit` | static values (ungated) |
-| `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-neutral--active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | neutral |
 | `--sf-color-neutral--hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | neutral |
 | `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | neutral |
@@ -167,7 +167,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | neutral |
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | neutral |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | Overlay: high-opacity wash of the base color for light/dark mode safe layers |
-| `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | primary |
 | `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | primary |
 | `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | primary |
@@ -182,7 +182,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | primary |
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | derived from --sf-color-base (auto-adapts) |
 | `--sf-color-scheme` | PUBLIC | knob | color | `light dark` | Color scheme |
-| `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-secondary--active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | secondary |
 | `--sf-color-secondary--hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | secondary |
 | `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | secondary |
@@ -197,13 +197,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | secondary |
 | `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Selection |
 | `--sf-color-selection-text` | PUBLIC | knob | color | `inherit` | static values (ungated) |
-| `--sf-color-success` | PUBLIC | consumption | color | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-success` | PUBLIC | consumption | color | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-success-light` | PUBLIC | knob | color | `oklch(0.50 0.16 145)` | STATUS COLORS (-light source tokens) |
 | `--sf-color-success-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-success-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
 | `--sf-color-success-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.12)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-surface` | PUBLIC | consumption | color | `var(--sf-color-base)` | Surface alias (plain var — no IACVT, stays ungated) |
-| `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | tertiary |
 | `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | tertiary |
 | `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | tertiary |
@@ -235,7 +235,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-text--on-warning` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | sign(var(--sf-contrast-threshold) - l) * 999 is mode-agnostic: auto-selects light or dark text based on background luminance. Uses resolved tokens — works for any user-supplied color. CONTRAST NOTE: Guarantees ≥ 3:1 (WCAG AA Large Text / UI). Colors in the mid-luminance range… |
 | `--sf-color-text--placeholder` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
 | `--sf-color-text--secondary` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
-| `--sf-color-warning` | PUBLIC | consumption | color | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | auto-switch via light-dark(). Dark auto-derivation formula (brand + status): clamp(0.65, 0.95 - l*0.5, 0.88) lightens dark-mode value relative to the light source. Surface inverts: clamp(0.16, 1.18 - l, 0.24) — near-white flips to near-dark. Override any --sf-color-X-dark to… |
+| `--sf-color-warning` | PUBLIC | consumption | color | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Plain :root mirrors for computed tokens — resolve to the -light source token so user overrides to --sf-color-X-light are respected in all browsers. Overridden by the @supports block below whenever light-dark() is available. |
 | `--sf-color-warning-light` | PUBLIC | knob | color | `oklch(0.75 0.17 80)` | STATUS COLORS (-light source tokens) |
 | `--sf-color-warning-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.3)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-warning-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
@@ -399,6 +399,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-print-page-margin` | PUBLIC-ADVANCED | knob | print | `2cm` | Print |
 | `--sf-print-page-size` | PUBLIC-ADVANCED | knob | print | `a4` | Print |
 | `--sf-radius-2xl` | PUBLIC | consumption | radius | `calc(24px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
+| `--sf-radius-2xs` | PUBLIC | consumption | radius | `calc(1px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
 | `--sf-radius-3xl` | PUBLIC | consumption | radius | `calc(32px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
 | `--sf-radius-4xl` | PUBLIC | consumption | radius | `calc(48px * var(--sf-radius-scale))` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
 | `--sf-radius-full` | PUBLIC | knob | radius | `9999px` | --sf-radius-full: intentionally not scaled by --sf-radius-scale. A pill/circle is a topological constant, not a relative size: any --sf-radius-scale: 0 ("sharp" design system) should still render pill buttons as pills. 9999px is a magic-number convention large enough to clip to… |
@@ -531,7 +532,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-z-toast` | PUBLIC | consumption | z | `var(--sf-z-top)` | 500 menus — clear sticky + fixed |
 | `--sf-z-top` | PUBLIC | knob | z | `900` | Z-index |
 
-### Layout tokens (48)
+### Layout tokens (52)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -554,8 +555,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-content-width` | PUBLIC | consumption | content | `var(--sf-container-default)` | Content grid (breakout pattern) |
 | `--sf-cover-min-height` | PUBLIC | knob | cover | `100dvh` | Cover |
 | `--sf-cover-padding` | PUBLIC | consumption | cover | `var(--sf-section-pad)` | Cover |
-| `--sf-equal-cols` | PUBLIC | knob | equal | `2` | Equal columns (fixed, non-responsive) |
-| `--sf-equal-gap` | PUBLIC | consumption | equal | `var(--sf-space-gap)` | Equal columns (fixed, non-responsive) |
+| `--sf-equal-gap` | PUBLIC | consumption | equal | `var(--sf-space-gap)` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
+| `--sf-equal-min-col` | PUBLIC | knob | equal | `16rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
+| `--sf-equal-min-col-2` | PUBLIC | knob | equal | `28rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
+| `--sf-equal-min-col-3` | PUBLIC | knob | equal | `15rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
+| `--sf-equal-min-col-4` | PUBLIC | knob | equal | `16rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
+| `--sf-equal-min-col-6` | PUBLIC | knob | equal | `10rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-frame-ratio` | PUBLIC | knob | frame | `16 / 9` | Frame |
 | `--sf-gap-size` | PUBLIC | consumption | gap | `var(--sf-space-gap)` | Gap |
 | `--sf-grid-gap` | PUBLIC | consumption | grid | `var(--sf-space-gap)` | Grid (auto-fill, breakpoint-free) |
@@ -873,7 +878,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
 | `--sf-text-xs-to-2xs` | PUBLIC-ADVANCED | consumption | text | `clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem))` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract. |
 
-## Classes (228)
+## Classes (229)
 
 ### Accessibility (7)
 
@@ -887,7 +892,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | either exposes hidden content visually or hides intended content. All-or-nothing, so the whole set is hardened. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | either exposes hidden content visually or hides intended content. All-or-nothing, so the whole set is hardened. |
 
-### Layout primitives (125)
+### Layout primitives (126)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -929,6 +934,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-cover--min` | PUBLIC | layout | Cover | Full-height flex column. A .sf-cover__center child is vertically centered via margin-block: auto. Override: style="--sf-cover-min-height: 50dvh" |
 | `.sf-cover--padding-l` | PUBLIC | layout | Cover | --max intentionally sets min-height: 0 to override .sf-cover's token-driven minimum — the cover may collapse below the default min if content is short. Pair with padding-block or a min-content guard if collapsing is undesirable. |
 | `.sf-cover--padding-s` | PUBLIC | layout | Cover | --max intentionally sets min-height: 0 to override .sf-cover's token-driven minimum — the cover may collapse below the default min if content is short. Pair with padding-block or a min-content guard if collapsing is undesirable. |
+| `.sf-cq` | PUBLIC | layout | Container query context | Lightweight CQ scope. Establishes container-type: inline-size so anonymous @container queries on descendants respond to THIS element's width — without the max-width and centering of .sf-container. No visual styles. Use when .sf-container is not available in the ancestor tree… |
 | `.sf-divider` | PUBLIC | layout | Divider | Standalone separator primitive. Token-driven; pairs with the `--sf-divider-*` tokens and mirrors the `hr` element default. |
 | `.sf-divider--dashed` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
 | `.sf-divider--dotted` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
@@ -936,11 +942,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-divider--soft` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
 | `.sf-divider--strong` | PUBLIC | layout | Divider | Style modifiers — retune the line itself via the same tokens the base rule reads, so they apply to horizontal and vertical alike. |
 | `.sf-divider--vertical` | PUBLIC | layout | Divider | Standalone separator primitive. Token-driven; pairs with the `--sf-divider-*` tokens and mirrors the `hr` element default. |
-| `.sf-equal` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--2` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--3` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--4` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
-| `.sf-equal--6` | PUBLIC | layout | Fixed columns | Fixed N-column grid. Column count NEVER collapses — unlike .sf-grid-cols-N which stacks at narrow container widths. Use when the layout must stay N columns at all widths; the caller is responsible for overflow handling. Override: style="--sf-equal-cols: 3" |
+| `.sf-equal` | PUBLIC | layout | Equal columns (intrinsically responsive) | RAM-pattern grid (Repeat, Auto-fit, Minmax). Columns wrap automatically when they would shrink below --sf-equal-min-col. No container ancestor required — intrinsically responsive. Modifiers set the target min-col width for ~N equal columns at typical container widths; exact… |
+| `.sf-equal--2` | PUBLIC | layout | Equal columns (intrinsically responsive) | RAM-pattern grid (Repeat, Auto-fit, Minmax). Columns wrap automatically when they would shrink below --sf-equal-min-col. No container ancestor required — intrinsically responsive. Modifiers set the target min-col width for ~N equal columns at typical container widths; exact… |
+| `.sf-equal--3` | PUBLIC | layout | Equal columns (intrinsically responsive) | RAM-pattern grid (Repeat, Auto-fit, Minmax). Columns wrap automatically when they would shrink below --sf-equal-min-col. No container ancestor required — intrinsically responsive. Modifiers set the target min-col width for ~N equal columns at typical container widths; exact… |
+| `.sf-equal--4` | PUBLIC | layout | Equal columns (intrinsically responsive) | RAM-pattern grid (Repeat, Auto-fit, Minmax). Columns wrap automatically when they would shrink below --sf-equal-min-col. No container ancestor required — intrinsically responsive. Modifiers set the target min-col width for ~N equal columns at typical container widths; exact… |
+| `.sf-equal--6` | PUBLIC | layout | Equal columns (intrinsically responsive) | RAM-pattern grid (Repeat, Auto-fit, Minmax). Columns wrap automatically when they would shrink below --sf-equal-min-col. No container ancestor required — intrinsically responsive. Modifiers set the target min-col width for ~N equal columns at typical container widths; exact… |
 | `.sf-frame` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
 | `.sf-frame--3-2` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
 | `.sf-frame--4-3` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |

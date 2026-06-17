@@ -72,7 +72,7 @@
   .sf-prose .sf-not-prose img        { margin-block: 0; border-radius: 0; }
   .sf-prose .sf-not-prose figure     { margin-block: 0; }
   .sf-prose .sf-not-prose figcaption { font-size: inherit; color: inherit; margin-block-start: 0; }
-  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-inline: revert; inline-size: revert; max-inline-size: revert; }
+  .sf-prose .sf-not-prose table      { margin-block: 0; display: revert; overflow-x: revert; overflow-inline: revert; inline-size: revert; max-inline-size: revert; }
   .sf-prose .sf-not-prose :is(th,td) { padding: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
 
