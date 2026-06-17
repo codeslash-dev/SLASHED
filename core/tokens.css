@@ -209,8 +209,8 @@
     --sf-color-danger-light:    oklch(0.48 0.22 12);
   }
 
-  /* @property — DARK SOURCE TOKENS (-dark, animatable)
-     Registers the auto-computed dark counterparts as typed <color> so their
+  /* @property — DARK SOURCE TOKENS (-dark, animatable) */
+  /* Registers the auto-computed dark counterparts as typed <color> so their
      resolved absolute value is inherited by child elements (e.g. a section
      with [data-theme="dark"]). Without @property these tokens inherit as raw
      text, and the nested var()-in-oklch-from chain fails type-checking on

@@ -9,6 +9,7 @@
     "Core tokens | tertiary": "Semantic tertiary-color scale derived from --sf-color-tertiary.",
     "Core tokens | BRAND COLORS (-light source tokens, animatable)": "OKLCH lightness source tokens for each brand role. Animating these drives smooth color-scheme transitions without re-painting every dependent token.",
     "Core tokens | STATUS COLORS (-light source tokens)": "OKLCH lightness sources for status colors (danger, error, info, success, warning). Same animation mechanism as brand light tokens.",
+    "Core tokens | DARK SOURCE TOKENS (-dark, animatable)": "OKLCH dark source tokens for brand and status colors. Registered as typed <color> so scoped [data-theme=\"dark\"] sections inherit correct absolute values rather than an unresolved var() text string.",
     "Core tokens | Status triplets": "Three-shade status triplets (subtle / muted / strong) for each status role. Use subtle for backgrounds, muted for fills, strong for text on light surfaces.",
     "Core tokens | Text": "Semantic text colors for every content role. All tokens adapt to light and dark mode automatically.",
     "Core tokens | Surfaces": "Background surface tokens from page-level to raised cards. Layer these to communicate visual depth.",
