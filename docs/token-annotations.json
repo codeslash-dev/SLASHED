@@ -87,7 +87,37 @@
     "Macro tokens | Scrim": "Gradient scrim configuration (direction, size, color) for overlaying images with readable text.",
     "Macro tokens | Scroll shadow / overflow fade": "Size of the scroll-shadow fade effect on overflowing containers.",
     "Macro tokens | Content visibility": "intrinsic-size hint for content-visibility: auto (lazy off-screen rendering).",
-    "Macro tokens | Line clamp": "Number of lines before text truncates with an ellipsis."
+    "Macro tokens | Line clamp": "Number of lines before text truncates with an ellipsis.",
+
+    "Component tokens | BUTTON TOKENS": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+    "Component tokens | FIELD TOKENS": "Padding and radius tokens that control form field geometry. Override these to give inputs a distinct visual language from buttons.",
+
+    "Core tokens | Link alpha token": "Semi-transparent underline color token used to tint the link underline independently from the link text color.",
+    "Core tokens | Selection & mark": "Background and text colors for browser text selections and <mark> highlights. Adapts automatically in dark mode.",
+    "Core tokens | FLUID SCALE ENGINE": "Generative inputs that drive all fluid clamp() type and spacing scales at runtime. Override the base, ratio, and viewport range tokens to globally rescale the entire system without touching individual step tokens.",
+    "Core tokens | Heading line-length constraints": "Per-heading max-inline-size caps. Default none (unconstrained). Set to a ch value to cap a heading level's line length for readability on wide screens.",
+    "Core tokens | LumLocker": "OKLCH lightness lock for the data-lumlocker attribute. Pins surface brightness to a fixed L value — useful for always-dark or always-light sections that must stay stable while the rest of the page switches color-scheme.",
+    "Core tokens | Mask scrim": "Edge-fade stop positions for the scroll-shadow mask effect on overflowing containers. Expressed as percentages or lengths; consumed by mask-image gradients.",
+    "Core tokens | Scale multipliers": "Global proportional multipliers for the four main design axes (type, space, radius, motion). Adjusting one multiplier uniformly scales every clamp() value in that dimension.",
+    "Core tokens | Print": "Page-layout tokens for printed output: paper size, margins, and base font size. These correspond to the @page values in core/print.css.",
+    "Core tokens | Full/pill": "Topological constants for rounding: full (50%) for circles, pill (9999px) for tags. Also provides --sf-radius-outer, a concentric-radius helper for outer containers wrapping inner rounded elements.",
+    "Core tokens | Scroll-driven animation range": "animation-range start and end positions for scroll-driven entrance effects (animation-timeline: view()). Controls how far into the viewport an element must scroll before its entrance animation starts and ends.",
+    "Core tokens | Shadow ramp (box-shadow, text-shadow, drop-shadow)": "Elevation box-shadow ramp from xs to 2xl plus inner, text-shadow, and drop-shadow presets. All opacity values scale with --sf-shadow-strength so dark-mode contrast boost is automatic.",
+    "Core tokens | Shadow glow": "Glow box-shadow shorthand for decorative glow effects. Uses --sf-shadow-glow-color as the tint and adapts opacity with --sf-shadow-strength.",
+    "Core tokens | Shadow glow color": "Tint color used by --sf-shadow-glow. Override to retint glows; opacity and dark-mode adaptation are handled automatically.",
+    "Core tokens | Shadow strength": "Base opacity for the shadow ramp. --sf-shadow-lightness controls tonal density; --sf-shadow-strength is auto-boosted in dark mode so elevation reads on dark surfaces.",
+
+    "Layout tokens | Equal columns (intrinsically responsive RAM)": "Minimum column-width tokens for the equal-columns layout. The RAM pattern (repeat(auto-fill, minmax(min, 1fr))) auto-fills columns; the actual count emerges from the minimum width and available space.",
+    "Layout tokens | Shared spacing aliases": "Layout-scoped semantic aliases for spacing patterns shared across multiple layout primitives.",
+
+    "Macro tokens | Surface color": "Input color for the generic .sf-surface macro. Set any color value; the macro derives the background, auto-contrast foreground, and contextual token set from it.",
+    "Macro tokens | Truncate": "Truncation suffix character for the .sf-truncate line-clamp macro. Default is the ellipsis character (…).",
+
+    "Palette tokens | Palette shade mix percentages": "color-mix() interpolation weights for each numeric shade step (50–950). Override to reshape the tint/shade curve without rewriting individual palette tokens.",
+
+    "Sizes-extended tokens | Spacing bridges": "Fluid clamp() values that interpolate between any two spacing scale steps (--sf-space-{larger}-to-{smaller}). Use to set a gap that smoothly narrows as the viewport shrinks, without a breakpoint.",
+    "Sizes-extended tokens | Text bridges": "Fluid clamp() values interpolating between any two font-size scale steps (--sf-text-{larger}-to-{smaller}). Use for headings or labels that need to transition smoothly between two named type sizes.",
+    "Sizes-extended tokens | Per-text-size sub-properties": "Fine-grained typography sub-property tokens for each text scale step: font-weight, letter-spacing, line-height, and max-width. Tune a specific size's typographic properties without affecting others."
   },
   "tokens": {
     "--sf-color-action": "Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces.",
@@ -799,6 +829,46 @@
     "--sf-fluid-custom-3": "Ad-hoc fluid value: interpolates between its two endpoint inputs across the engine's viewport range.",
     "--sf-section-scale": "Global multiplier applied to every --sf-section-pad--* size — one dial re-rhythms all section padding (default 1).",
     "--sf-leading-taper": "Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token (tokens.sizes-extended). Default 0 keeps the curated defaults.",
-    "--sf-surface-color": "Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it."
+    "--sf-surface-color": "Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it.",
+
+    "--sf-border-scale": "Global border-width multiplier. Set to 0 for borderless UI; 0.5 for hairline-only; 2 to double all border widths across the system.",
+
+    "--sf-button-padding-block": "Vertical (block) inner padding for buttons.",
+    "--sf-button-padding-inline": "Horizontal (inline) inner padding for buttons.",
+    "--sf-button-radius": "Border radius for buttons. Defaults to --sf-radius-m; override to fully pill-round or square all buttons at once.",
+
+    "--sf-color-action-dark": "Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%.",
+    "--sf-color-base-dark": "Registered <color> dark counterpart of --sf-color-base.",
+    "--sf-color-danger-dark": "Registered <color> dark counterpart of --sf-color-danger.",
+    "--sf-color-error-dark": "Registered <color> dark counterpart of --sf-color-error.",
+    "--sf-color-info-dark": "Registered <color> dark counterpart of --sf-color-info.",
+    "--sf-color-neutral-dark": "Registered <color> dark counterpart of --sf-color-neutral.",
+    "--sf-color-primary-dark": "Registered <color> dark counterpart of --sf-color-primary.",
+    "--sf-color-secondary-dark": "Registered <color> dark counterpart of --sf-color-secondary.",
+    "--sf-color-success-dark": "Registered <color> dark counterpart of --sf-color-success.",
+    "--sf-color-tertiary-dark": "Registered <color> dark counterpart of --sf-color-tertiary.",
+    "--sf-color-warning-dark": "Registered <color> dark counterpart of --sf-color-warning.",
+
+    "--sf-equal-min-col": "Minimum column width for the default auto-fill equal-columns layout. Columns fill the row until this width is reached, then wrap to the next line.",
+    "--sf-equal-min-col-2": "Minimum column width for the 2-column equal preset.",
+    "--sf-equal-min-col-3": "Minimum column width for the 3-column equal preset.",
+    "--sf-equal-min-col-4": "Minimum column width for the 4-column equal preset.",
+    "--sf-equal-min-col-6": "Minimum column width for the 6-column equal preset.",
+
+    "--sf-field-padding-block": "Vertical (block) inner padding for form field inputs.",
+    "--sf-field-padding-inline": "Horizontal (inline) inner padding for form field inputs.",
+    "--sf-field-radius": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once.",
+
+    "--sf-gutter-width": "Horizontal gutter consumed by --sf-space-gutter. Set this to control the page-edge margin uniformly across all responsive breakpoints.",
+
+    "--sf-h1-max-width": "Max-inline-size cap for <h1>. Default none (unconstrained). Set to a ch value (e.g. 20ch) to prevent wide headings from spanning the full column on large screens.",
+    "--sf-h2-max-width": "Max-inline-size cap for <h2>. Default none.",
+    "--sf-h3-max-width": "Max-inline-size cap for <h3>. Default none.",
+    "--sf-h4-max-width": "Max-inline-size cap for <h4>. Default none.",
+    "--sf-h5-max-width": "Max-inline-size cap for <h5>. Default none.",
+    "--sf-h6-max-width": "Max-inline-size cap for <h6>. Default none.",
+
+    "--sf-shadow-lightness": "OKLCH lightness component of the shadow color. Lower = denser-looking shadows. Tune this independently of --sf-shadow-strength to control tonal weight without affecting opacity.",
+    "--sf-transition-form-field": "Transition shorthand optimised for form fields: color and background at normal pace so label color shifts feel natural; border, shadow, and opacity at fast pace so focus rings appear crisply."
   }
 }
