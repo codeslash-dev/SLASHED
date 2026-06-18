@@ -28577,8 +28577,7 @@
       "optional": false,
       "layer": "slashed.macros",
       "sourceFiles": [
-        "core/macros.css",
-        "core/print.css"
+        "core/macros.css"
       ],
       "bundles": [
         "essential",

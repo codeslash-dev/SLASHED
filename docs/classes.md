@@ -267,10 +267,9 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Print utilities (`core/print.css`)
 
-2 classes.
+1 classes.
 
 | Class |
 |---|
 | `.sf-link-external` |
-| `.sf-prose` |
 
