@@ -26,7 +26,7 @@
     #demo-header {
       position: sticky;
       top: 0;
-      z-index: var(--sf-z-mid);
+      z-index: var(--sf-z-fixed);
       height: var(--sf-header-height);
       display: flex;
       align-items: center;
@@ -516,7 +516,7 @@
       position: fixed;
       inset: var(--sf-header-height) 0 0 0;
       background: var(--sf-color-dim);
-      z-index: calc(var(--sf-z-high) - 1);
+      z-index: calc(var(--sf-z-dropdown) - 1);
     }
 
     #nav-overlay.is-open {
@@ -536,7 +536,7 @@
         bottom: 0;
         width: min(17rem, 85vw);
         max-height: none;
-        z-index: var(--sf-z-high);
+        z-index: var(--sf-z-dropdown);
         box-shadow: var(--sf-shadow-xl);
         translate: -100%;
         visibility: hidden;
@@ -859,19 +859,13 @@
           <div class="demo-swatch" style="background: var(--sf-color-primary-950)">950</div>
         </div>
 
-        <h3>Alpha Scale a5–a95</h3>
+        <h3>Alpha Scale a5–a80</h3>
         <div class="demo-swatch-row">
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a5)">a5</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a10)">a10</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a20)">a20</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a30)">a30</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a40)">a40</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a50)">a50</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a60)">a60</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a70)">a70</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a80)">a80</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a90)">a90</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a95)">a95</div>
         </div>
 
         <h3>Semantic &amp; Functional Aliases</h3>

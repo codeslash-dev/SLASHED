@@ -79,9 +79,6 @@ All values are unitless numbers (`@property <number>`), so they compose into
 :root { --sf-space-base-max: 1.6; }
 ```
 
-The bridge tokens in `optional/tokens.sizes-extended.css`
-(`--sf-space-l-to-m` …) are outputs of the same engine and recalibrate with it.
-
 On top of the generative inputs sit linear multipliers — `--sf-text-scale`,
 `--sf-space-scale`, `--sf-text-display-scale`, `--sf-radius-scale`,
 `--sf-motion-scale`, `--sf-section-scale` (one dial for all section padding),
@@ -91,25 +88,11 @@ the scale; default `0`).
 For a single copy-paste file exposing every dial, see
 [`optional/config-example.css`](../optional/config-example.css).
 
-### Custom fluid slots
+### Ad-hoc fluid values
 
-For ad-hoc fluid values — "this padding should go from 0.875rem to 1.375rem" —
-three pre-wired slots avoid hand-written `clamp()`:
-
-```css
-:root {
-  --sf-fluid-custom-1-min: 0.875;  /* unitless rem */
-  --sf-fluid-custom-1-max: 1.375;
-}
-.card { padding-inline: var(--sf-fluid-custom-1); }
-```
-
-The slot interpolates across the engine's viewport range, so it stays
-calibrated when `--sf-fluid-{min,max}-vw` are retuned. Endpoints may be
-redefined per scope. Descending ranges (min > max) are not supported by
-`clamp()` — swap the endpoints and negate at the use site.
-
-Need more than three? The canonical recipe behind the slots is:
+For a one-off fluid value — "this padding should go from 0.875rem to 1.375rem" —
+write a `clamp()` that reads the engine's viewport range so it recalibrates with
+the rest of the scale instead of drifting on magic numbers:
 
 ```css
 /* fluid from MIN rem to MAX rem across the engine's viewport range */

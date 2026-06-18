@@ -56,7 +56,7 @@
      · consumption — a ready-to-use OUTPUT you READ; a value DERIVED from other
                      tokens (references var(--sf-…), incl. light-dark()/
                      oklch(from …)/color-mix()). e.g. --sf-color-bg,
-                     --sf-color-primary-600, --sf-space-xl-to-m.
+                     --sf-color-primary-600, --sf-color-text.
    Role is computed deterministically from the declared value; see
    scripts/token-tiers.js (roleOf) and docs/token-index.md.
 
