@@ -1,14 +1,18 @@
-# SLASHED Token Cleanup Proposal — v2 (decisions locked)
+# SLASHED Token Cleanup Proposal — v2 (IMPLEMENTED in v0.6.0)
 
+> **Status:** Shipped in v0.6.0. This is the planning record; the authoritative
+> change list is `CHANGELOG.md` and the upgrade guide is `docs/migration.md`.
+> One item below changed during implementation after inspecting the code:
+> **item #8 was NOT done** — `--sf-is-pressed`/`--sf-is-open` turned out to be
+> wired to the `.is-pressed`/`.is-open` disclosure patterns in `core/states.css`,
+> so all four interaction-state flags were kept.
+>
 > **Purpose:** Reduce the *conceptual surface* of SLASHED's `--sf-*` token API for its real audience —
 > people building **marketing sites, landing pages, and business/corporate websites**. Bytes are not
 > the goal (gzip handles those); the goal is shrinking what an author must understand.
 >
 > **Decision rule:** keep a family if a landing-page / business-site builder would plausibly reach for
 > it; trim or cut it if it's power-user or vestigial (they'd inline a value or use the base scale).
->
-> This v2 reflects the decisions made on review. Items marked **CONFIRM** still need your sign-off on
-> a naming/shape detail before implementation.
 
 - **Current surface:** ~899 `--sf-*` tokens
 - **Proposed removal:** ~213 tokens (~24%), +1 added (theme-transition knob)
@@ -83,10 +87,12 @@
   macro (`core/macros.css:100`) and `.is-truncated` (`core/states.css:281`) both hardcode
   `text-overflow: ellipsis`. Remove the token (and the doc reference at `core/tokens.css:147`).
 
-### 8. Unused interaction-state flags — **CUT 2 of 5**
-- `core/tokens.css:278-281`. Remove `--sf-is-pressed`, `--sf-is-open` (never set or read).
-- **KEEP** `--sf-is-current` (`core/states.css:144`), `--sf-is-active` (`core/states.css:132`),
-  `--sf-is-dark` (`:273`, theming flag).
+### 8. Interaction-state flags — **NOT DONE (all four kept)**
+- ⚠️ Reversed during implementation. The premise "never set or read" was wrong:
+  `--sf-is-pressed` and `--sf-is-open` are set by `.is-pressed` / `.is-open` /
+  `.is-collapsed` in `core/states.css` and drive the disclosure/accordion
+  style-query pattern (a real marketing-site need). All four flags
+  (`--sf-is-active/current/pressed/open`, plus `--sf-is-dark`) are kept.
 
 ### 10. Fluid custom slots — **CUT ALL**
 - `core/tokens.css:328-360`. Remove `--sf-fluid-custom-{1,2,3}` + 6 `-min`/`-max` endpoints (9).
