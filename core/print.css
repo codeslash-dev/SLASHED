@@ -122,10 +122,10 @@
     .sf-prose details {
       display: block;
     }
-    details > summary {
+    .sf-prose details > summary {
       display: none !important;
     }
-    details > :not(summary) {
+    .sf-prose details > :not(summary) {
       display: block;
     }
 
