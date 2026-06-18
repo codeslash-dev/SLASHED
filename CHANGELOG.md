@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.5.47] - 2026-06-18
+
+### Bug Fixes
+- **tokens:** add static fallbacks for --sf-color-text--on-* outside sign() gate
+- **print:** globally force-expand all <details> in print
+- **macros:** correct margin-block-end-only on prose lists
+- **print:** scope details rules to .sf-prose; remove sub-floor RTL fallback
+- **demo:** add sf-scrim__content and sf-clickable-parent__overlay examples
+- **post-freeze:** implement category-2 audit fixes for issue #327
+
 ## [0.5.46] - 2026-06-17
 
 ### Features
