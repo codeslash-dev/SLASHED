@@ -164,6 +164,7 @@
 
   .sf-center {
     box-sizing:      content-box;
+    width:           auto; /* guard: prevents width:100% + content-box padding from causing overflow */
     margin-inline:   auto;
     max-inline-size: var(--sf-center-max);
     padding-inline:  var(--sf-center-gutter);
@@ -389,6 +390,11 @@
     scrollbar-width:       thin;
     scrollbar-color:       var(--sf-scrollbar-thumb) var(--sf-scrollbar-track);
   }
+
+  /* WebKit (Safari) does not support scrollbar-width; use legacy pseudo-elements. */
+  .sf-reel::-webkit-scrollbar        { block-size: 6px; }
+  .sf-reel::-webkit-scrollbar-track  { background: var(--sf-scrollbar-track); border-radius: var(--sf-radius-full); }
+  .sf-reel::-webkit-scrollbar-thumb  { background: var(--sf-scrollbar-thumb); border-radius: var(--sf-radius-full); }
 
   .sf-reel > * {
     flex:              0 0 var(--sf-reel-item-width);

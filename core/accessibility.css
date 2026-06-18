@@ -287,9 +287,13 @@
      for single-link cards. Secondary links that also receive ::after are
      lifted to position:relative (interactive rule below), which scopes
      their ::after to themselves and keeps them independently clickable.
-     Explicit mode  — only [data-overlay-link] fills the card.          */
-  .sf-clickable-parent:not(:has([data-overlay-link])) a:where(:any-link)::after,
-  .sf-clickable-parent [data-overlay-link]::after {
+     Explicit mode  — only [data-overlay-link] or .sf-clickable-parent__overlay
+     fills the card. Use explicit mode when secondary links live at
+     different nesting depths (automatic :not(:first-of-type) is sibling-scoped
+     and does not see links nested inside wrappers).                    */
+  .sf-clickable-parent:not(:has([data-overlay-link], .sf-clickable-parent__overlay)) a:where(:any-link)::after,
+  .sf-clickable-parent [data-overlay-link]::after,
+  .sf-clickable-parent .sf-clickable-parent__overlay::after {
     content:        "";
     position:       absolute;
     inset:          0;
@@ -310,7 +314,8 @@
     [role="button"], [data-no-overlay]
   ),
   .sf-clickable-parent:has([data-overlay-link]) a:where(:any-link):not([data-overlay-link]),
-  .sf-clickable-parent:not(:has([data-overlay-link])) a:where(:any-link):not(:first-of-type) {
+  .sf-clickable-parent:has(.sf-clickable-parent__overlay) a:where(:any-link):not(.sf-clickable-parent__overlay),
+  .sf-clickable-parent:not(:has([data-overlay-link], .sf-clickable-parent__overlay)) a:where(:any-link):not(:first-of-type) {
     position: relative;
     z-index:  calc(var(--sf-clickable-overlay-z) + 1);
   }

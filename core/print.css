@@ -112,20 +112,15 @@
       display: revert !important;
     }
 
-    /* Preserve <details> content regardless of open state. Only
-       `summary` keeps `!important` — the disclosure chevron carries no
-       print value and the consumer should not be able to bring it back
-       inadvertently. The other two rules win against the UA stylesheet
-       on layered-author > UA precedence alone. */
-    details {
-      display: block;
-    }
-    details > summary {
-      display: none !important;
-    }
-    details > :not(summary) {
-      display: block;
-    }
+    /* Preserve <details> content regardless of open state. nav, aside,
+       and other interactive chrome are already hidden by the hide list
+       above, so the remaining <details> are content — force them open.
+       Only `summary` keeps `!important` — the disclosure chevron carries
+       no print value and the consumer should not be able to bring it back
+       inadvertently. */
+    details { display: block; }
+    details > summary { display: none !important; }
+    details > :not(summary) { display: block; }
 
     /* ── Opt-in colour treatment ─────────────────────────────────── */
 

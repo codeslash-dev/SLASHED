@@ -2616,6 +2616,17 @@
           </div>
         </article>
 
+        <p style="margin-block: var(--sf-space-m) var(--sf-space-xs); font-size: var(--sf-text-s)">
+          <strong>Class mode (<code>.sf-clickable-parent__overlay</code>)</strong> — alternative to <code>data-overlay-link</code>; resolves nesting fragility when secondary links live at different depths.
+        </p>
+        <article class="sf-clickable-parent" style="display: grid; gap: var(--sf-space-xs); padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m); max-inline-size: 26rem">
+          <h4 style="margin: 0"><a href="#macros" class="sf-clickable-parent__overlay">Primary link via class overlay</a></h4>
+          <p style="margin: 0">Click anywhere on the card to follow the primary link.</p>
+          <div style="display: flex; gap: var(--sf-space-s); flex-wrap: wrap; align-items: center">
+            <a href="#states-full" style="font-size: var(--sf-text-s)">Secondary link</a>
+          </div>
+        </article>
+
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-surface--*</code> — auto-flipped foreground</h3>
         <div class="sf-grid sf-grid--m" style="--sf-grid-min: 9rem">
           <div class="sf-surface--primary"   style="padding: var(--sf-space-m); border-radius: var(--sf-radius-m)">primary</div>
@@ -2669,6 +2680,14 @@
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Crect width='160' height='90' fill='%23e0a' /%3E%3C/svg%3E" alt="" style="display: block; inline-size: 100%; block-size: 100%; object-fit: cover">
             <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
               <strong>&lt;img&gt; child</strong>
+            </div>
+          </div>
+          <div class="sf-scrim sf-scrim--bottom" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; background: linear-gradient(120deg, #256, #084)">
+            <div style="display: flex; block-size: 100%">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Crect width='160' height='90' fill='%23378' /%3E%3C/svg%3E" alt="" style="display: block; inline-size: 100%; block-size: 100%; object-fit: cover">
+            </div>
+            <div class="sf-scrim__content" style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
+              <strong>.sf-scrim__content — wrapped img</strong>
             </div>
           </div>
         </div>

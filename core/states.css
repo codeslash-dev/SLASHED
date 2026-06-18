@@ -65,6 +65,12 @@
     position:       relative;
   }
 
+  /* color:transparent hides text but not hardcoded SVGs or inline images.
+     Hiding direct children ensures no layout artifacts overlap the spinner. */
+  .is-loading > * {
+    opacity: 0 !important;
+  }
+
   .is-loading::after {
     content:             "";
     position:            absolute;
@@ -92,6 +98,13 @@
        (unlike .is-loading, which masks content with a spinner). */
     opacity: var(--sf-state-pending-opacity);
     cursor:  progress;
+  }
+
+  /* Native <img> renders its source above the CSS background, hiding the shimmer.
+     Forcing opacity:0 allows the skeleton gradient to show through. */
+  img.is-skeleton,
+  .is-skeleton img {
+    opacity: 0 !important;
   }
 
   .is-skeleton {

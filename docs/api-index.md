@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1068 elements** — 839 tokens, 229 classes.
+**1070 elements** — 839 tokens, 231 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 930 | Everyday surface. SemVer-stable. |
+| PUBLIC | 932 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 137 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -889,14 +889,15 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your… |
 | `--sf-text-xs-to-2xs` | PUBLIC-ADVANCED | consumption | text | `clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem))` | Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract. |
 
-## Classes (229)
+## Classes (231)
 
-### Accessibility (7)
+### Accessibility (8)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.no-motion` | PUBLIC | accessibility | Reduced motion. Token override helps components that read | Manual motion opt-out — same suppression as the OS preference above, but consumer-toggled (e.g. a site-level "reduce motion" switch). Works regardless of the OS setting. |
 | `.sf-clickable-parent` | PUBLIC | accessibility | Clickable-parent | the card-with-link a11y pattern. Applied to the card container. Two modes: Automatic (single primary link): <article class="sf-clickable-parent"> <h3><a href="…">Title</a></h3> <p>Description</p> <button>Independent action</button> </article> Explicit (multiple links — add… |
+| `.sf-clickable-parent__overlay` | PUBLIC | accessibility | Clickable-parent | Overlay: the link's ::after fills the containing card. Automatic mode — every :any-link gets the overlay; works reliably for single-link cards. Secondary links that also receive ::after are lifted to position:relative (interactive rule below), which scopes their ::after to… |
 | `.sf-focus-parent` | PUBLIC | accessibility | Focus-parent | Uses --sf-focus-ring-color (same token as :focus-visible) so the ring is visually consistent whether focus lands on the parent or a child. |
 | `.sf-focus-shadow` | PUBLIC | accessibility | Focus-shadow opt-in | switches the focus indicator from the default `outline` ring to a `box-shadow` ring (the composite --sf-focus-ring-shadow token). Useful when the outline clips awkwardly on rounded corners or overflow:hidden containers, where box-shadow follows border-radius. Opt-in per… |
 | `.skip-link` | PUBLIC | accessibility | Skip link | appearance belongs to the integrator's design. Left normal so position/colour can be themed freely. |
@@ -921,7 +922,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-box` | PUBLIC | layout | Box | Isolated unit with padding and an optional border. Outline instead of border — doesn't disturb the box model when toggled. Override: style="--sf-box-padding: 1rem; --sf-box-border-width: 1px" |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
 | `.sf-center` | PUBLIC | layout | Center | Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style="--sf-center-max: 60rem" |
-| `.sf-center--intrinsic` | PUBLIC | layout | Center | Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style="--sf-center-max: 60rem" |
+| `.sf-center--intrinsic` | PUBLIC | layout | Center | guard: prevents width:100% + content-box padding from causing overflow |
 | `.sf-cluster` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
 | `.sf-cluster--2xl` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
 | `.sf-cluster--between` | PUBLIC | layout | Cluster | Flex-wrap group of variable-width items. Override: style="--sf-cluster-gap: 0.5rem; --sf-cluster-justify: center" |
@@ -1034,7 +1035,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switches between a column (narrow viewport) and a row (wide). Uses calc((threshold - 100%) * 999) — zero media queries. Override: style="--sf-switcher-threshold: 40rem" |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switches between a column (narrow viewport) and a row (wide). Uses calc((threshold - 100%) * 999) — zero media queries. Override: style="--sf-switcher-threshold: 40rem" |
 
-### Macro classes (36)
+### Macro classes (37)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1053,9 +1054,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overflow-fade` | PUBLIC | macro | Overflow fade | End-edge horizontal fade for clipped inline content (e.g. a row of tags overflowing a card). Pure mask, so it respects the element's actual background. |
 | `.sf-prose` | PUBLIC | macro | Prose | Long-form text column with automatic vertical rhythm. .sf-not-prose resets styles inside a prose block. |
 | `.sf-scrim` | PUBLIC | macro | Scrim | Darkening overlay for text placed over a background image, so the text clears contrast without dimming the whole picture. Apply to a positioned wrapper that holds the image + text; the scrim paints as a ::before gradient between them. The wrapper must establish a… |
+| `.sf-scrim__content` | PUBLIC | macro | Scrim | Lift content above the scrim, but leave media below it so the gradient actually darkens the picture. .sf-scrim__content is the explicit BEM alternative for complex nesting where media elements are wrapped in divs and the classless :not() selector would incorrectly lift the… |
 | `.sf-scrim--bottom` | PUBLIC | macro | Scrim | text anchored at the top |
 | `.sf-scrim--full` | PUBLIC | macro | Scrim | text anchored at the bottom (default) |
-| `.sf-scrim--top` | PUBLIC | macro | Scrim | Lift content above the scrim, but leave media below it so the gradient actually darkens the picture. |
+| `.sf-scrim--top` | PUBLIC | macro | Scrim | Lift content above the scrim, but leave media below it so the gradient actually darkens the picture. .sf-scrim__content is the explicit BEM alternative for complex nesting where media elements are wrapped in divs and the classless :not() selector would incorrectly lift the… |
 | `.sf-scroll-shadow` | PUBLIC | macro | Scroll shadow | Top + bottom mask gradient that reveals when content is scrolled inside a vertical-scroll container. Pure CSS, no JS. Combine with overflow-block: auto on the same element. Override: style="--sf-scroll-shadow-size: 3rem" |
 | `.sf-scroll-snap` | PUBLIC | macro | Scroll snap | Vertical scroll-snap container for vertically stacked sections. Pairs with consumer-supplied scroll-snap-align on children. For horizontal snap, use the .sf-reel layout primitive. |
 | `.sf-surface` | PUBLIC | macro | Surface | Generic surface macro. Set --sf-surface-color on an element with .sf-surface to derive background, auto-contrast foreground, and contextual surface tokens. 11 precomputed variants (.sf-surface--primary through .sf-surface--danger) cover all brand + status + inverse colors.… |
@@ -1140,7 +1142,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.is-resizable` | PUBLIC | state | POSITION / STICKINESS | App-managed fullscreen overlay. For the native Fullscreen API, prefer the `:fullscreen` pseudo-class; this is the JS-toggled equivalent for elements not entered via that API. |
 | `.is-scrollable` | PUBLIC | state | OVERFLOW / CLIPPING | OVERFLOW / CLIPPING |
 | `.is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Generic active indicator — components add visual specifics. Sets a scoped token for components to consume. |
-| `.is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Optimistic UI — request in flight but content still visible/usable (unlike .is-loading, which masks content with a spinner). |
+| `.is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Native <img> renders its source above the CSS background, hiding the shimmer. Forcing opacity:0 allows the skeleton gradient to show through. |
 | `.is-sticky` | PUBLIC | state | POSITION / STICKINESS | POSITION / STICKINESS |
 | `.is-success` | PUBLIC | state | VALIDATION / FEEDBACK | NOTE: .is-valid and .is-success share identical CSS values by design. The semantic distinction is intentional (see docs/states.md): · .is-valid → form-field validation result (maps to aria-invalid="false"). Use on <input> elements. · .is-success → general component feedback,… |
 | `.is-truncated` | PUBLIC | state | OVERFLOW / CLIPPING | OVERFLOW / CLIPPING |

@@ -29,14 +29,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1068,
+      "total": 1070,
       "by_type": {
-        "class": 229,
+        "class": 231,
         "token": 839
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 930,
+        "PUBLIC": 932,
         "PUBLIC-ADVANCED": 137
       },
       "by_role": {
@@ -44,17 +44,17 @@
         "knob": 247
       },
       "tokens": 839,
-      "classes": 229,
-      "sf_classes": 180,
+      "classes": 231,
+      "sf_classes": 182,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
-        "Accessibility": 7,
+        "Accessibility": 8,
         "Component tokens": 6,
         "Core tokens": 507,
         "Layout primitives": 126,
         "Layout tokens": 52,
-        "Macro classes": 36,
+        "Macro classes": 37,
         "Macro tokens": 24,
         "Motion / animation": 15,
         "Palette tokens": 142,
@@ -25034,7 +25034,7 @@
       "category": "State classes",
       "area": "states",
       "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Optimistic UI — request in flight but content still visible/usable (unlike .is-loading, which masks content with a spinner).",
+      "description": "Native <img> renders its source above the CSS background, hiding the shimmer. Forcing opacity:0 allows the skeleton gradient to show through.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -25762,7 +25762,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Center",
-      "description": "Centers content with a max-inline-size and side gutters. content-box: max-inline-size applies to content only; padding is additive. Override: style=\"--sf-center-max: 60rem\"",
+      "description": "guard: prevents width:100% + content-box padding from causing overflow",
       "isVariant": true,
       "baseClass": "sf-center",
       "optional": false,
@@ -25789,6 +25789,32 @@
       "area": "accessibility",
       "group": "Clickable-parent",
       "description": "the card-with-link a11y pattern. Applied to the card container. Two modes: Automatic (single primary link): <article class=\"sf-clickable-parent\"> <h3><a href=\"…\">Title</a></h3> <p>Description</p> <button>Independent action</button> </article> Explicit (multiple links — add…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.accessibility",
+      "sourceFiles": [
+        "core/accessibility.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-clickable-parent__overlay",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-clickable-parent__overlay",
+      "prefix": "sf",
+      "kind": "accessibility",
+      "category": "Accessibility",
+      "area": "accessibility",
+      "group": "Clickable-parent",
+      "description": "Overlay: the link's ::after fills the containing card. Automatic mode — every :any-link gets the overlay; works reliably for single-link cards. Secondary links that also receive ::after are lifted to position:relative (interactive rule below), which scopes their ::after to…",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -28666,6 +28692,32 @@
       ]
     },
     {
+      "name": "sf-scrim__content",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-scrim__content",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "Scrim",
+      "description": "Lift content above the scrim, but leave media below it so the gradient actually darkens the picture. .sf-scrim__content is the explicit BEM alternative for complex nesting where media elements are wrapped in divs and the classless :not() selector would incorrectly lift the…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-scrim--bottom",
       "type": "class",
       "tier": "PUBLIC",
@@ -28727,7 +28779,7 @@
       "category": "Macro classes",
       "area": "macros",
       "group": "Scrim",
-      "description": "Lift content above the scrim, but leave media below it so the gradient actually darkens the picture.",
+      "description": "Lift content above the scrim, but leave media below it so the gradient actually darkens the picture. .sf-scrim__content is the explicit BEM alternative for complex nesting where media elements are wrapped in divs and the classless :not() selector would incorrectly lift the…",
       "isVariant": true,
       "baseClass": "sf-scrim",
       "optional": false,

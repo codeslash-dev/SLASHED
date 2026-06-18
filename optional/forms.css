@@ -381,10 +381,12 @@
   }
 
   /* Required-field marker — classless, no markup convention.
-     Covers both <label>Name <input required></label> and
-     <label>Name</label><input required>. */
+     Covers: <label>Name <input required></label> (nested inside),
+     <label>Name</label><input required> (direct sibling), and
+     <label>Name</label><div><input required></div> (wrapped sibling). */
   label:has(:required)::after,
-  label:has(+ :required)::after {
+  label:has(+ :required)::after,
+  label:has(+ * :required)::after {
     content: var(--sf-field-required-marker, " *");
     color: var(--sf-color-error);
   }
