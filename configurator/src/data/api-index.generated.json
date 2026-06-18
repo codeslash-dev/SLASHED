@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "3786ee1fa572",
+    "tokensHash": "95a189cc0924",
     "bundles": [
       "essential",
       "full",
@@ -3725,8 +3725,8 @@
       "role": "consumption",
       "namespace": "color",
       "category": "Core tokens",
-      "group": "Code text",
-      "description": "Foreground color for inline code and pre-formatted text.",
+      "group": "Text-on-color",
+      "description": "Accessible foreground colors guaranteed to pass WCAG contrast on each colored background surface.",
       "note": "Text color for inline code and monospace preformatted text.",
       "value": "oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)",
       "aliasOf": null,
