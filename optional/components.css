@@ -21,78 +21,127 @@
 
   /* ============================================================
    * .sf-button — primary action component
-   * ============================================================
-   *
-   * .sf-button {
-   *   display:          inline-flex;
-   *   align-items:      center;
-   *   justify-content:  center;
-   *   gap:              var(--sf-button-gap);
-   *   padding:          var(--sf-button-pad-y) var(--sf-button-pad-x);
-   *   min-block-size:   var(--sf-button-min-height);
-   *   border:           var(--sf-button-border-width) var(--sf-border-style) transparent;
-   *   border-radius:    var(--sf-button-radius);
-   *   font:             inherit;
-   *   font-weight:      var(--sf-button-font-weight);
-   *   cursor:           pointer;
-   *   user-select:      none;
-   * }
-   * .sf-button--primary {
-   *   background:       var(--sf-color-primary);
-   *   color:            var(--sf-color-text--on-primary);
-   * }
-   * .sf-button--secondary {
-   *   background:       transparent;
-   *   color:            var(--sf-color-text);
-   *   border-color:     var(--sf-color-border);
-   * }
-   * .sf-button--ghost {
-   *   background:       transparent;
-   *   color:            var(--sf-color-link);
-   * }
-   * .sf-button--danger {
-   *   background:       var(--sf-color-danger);
-   *   color:            var(--sf-color-text--on-danger);
-   * }
-   * .sf-button--s   { --sf-button-pad-x: var(--sf-space-s); --sf-button-pad-y: var(--sf-space-2xs); }
-   * .sf-button--m   { --sf-button-pad-x: var(--sf-space-m); --sf-button-pad-y: var(--sf-space-s);   }
-   * .sf-button--l   { --sf-button-pad-x: var(--sf-space-l); --sf-button-pad-y: var(--sf-space-m);   }
-   */
+   * ============================================================ */
+
+  .sf-button {
+    display:          inline-flex;
+    align-items:      center;
+    justify-content:  center;
+    gap:              var(--sf-button-gap);
+    padding-block:    var(--sf-button-padding-block);
+    padding-inline:   var(--sf-button-padding-inline);
+    min-block-size:   var(--sf-button-min-height);
+    border:           var(--sf-button-border-width) var(--sf-border-style) transparent;
+    border-radius:    var(--sf-button-radius);
+    font:             inherit;
+    font-size:        var(--sf-text-m);
+    font-weight:      var(--sf-button-font-weight);
+    line-height:      var(--sf-leading-tight);
+    text-decoration:  none;
+    cursor:           pointer;
+    user-select:      none;
+    transition:       var(--sf-transition-colors);
+    background:       var(--sf-color-action);
+    color:            var(--sf-color-text--on-action);
+  }
+
+  .sf-button:hover {
+    background: var(--sf-color-action--hover, var(--sf-color-action));
+  }
+
+  .sf-button:focus-visible {
+    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
+    outline-offset: var(--sf-focus-ring-offset);
+  }
+
+  .sf-button:disabled,
+  .sf-button[aria-disabled="true"] {
+    opacity:        var(--sf-opacity-disabled);
+    cursor:         not-allowed;
+    pointer-events: none;
+  }
+
+  .sf-button--primary {
+    background: var(--sf-color-primary);
+    color:      var(--sf-color-text--on-primary);
+  }
+  .sf-button--primary:hover {
+    background: var(--sf-color-primary--hover, var(--sf-color-primary));
+  }
+
+  .sf-button--secondary {
+    background:   transparent;
+    color:        var(--sf-color-text);
+    border-color: var(--sf-color-border);
+  }
+  .sf-button--secondary:hover {
+    background: var(--sf-color-bg--hover);
+  }
+
+  .sf-button--ghost {
+    background: transparent;
+    color:      var(--sf-color-link);
+    border:     none;
+  }
+  .sf-button--ghost:hover {
+    background: var(--sf-color-bg--hover);
+  }
+
+  .sf-button--danger {
+    background: var(--sf-color-danger);
+    color:      var(--sf-color-text--on-danger);
+  }
+
+  .sf-button--s {
+    --sf-button-padding-inline: var(--sf-space-s);
+    --sf-button-padding-block:  var(--sf-space-2xs);
+    font-size: var(--sf-text-s);
+  }
+  .sf-button--l {
+    --sf-button-padding-inline: var(--sf-space-l);
+    --sf-button-padding-block:  var(--sf-space-m);
+    font-size: var(--sf-text-l);
+  }
 
   /* ============================================================
    * .sf-card — content container with concentric radius
-   * ============================================================
-   *
-   * .sf-card {
-   *   display:          flex;
-   *   flex-direction:   column;
-   *   gap:              var(--sf-card-gap);
-   *   padding:          var(--sf-card-padding);
-   *   background:       var(--sf-card-bg);
-   *   border-radius:    var(--sf-card-radius-outer);
-   *   box-shadow:       var(--sf-card-shadow);
-   * }
-   * .sf-card--bordered {
-   *   border:           var(--sf-card-border-width) var(--sf-border-style) var(--sf-card-border-color);
-   *   box-shadow:       none;
-   * }
-   * .sf-card--elevated {
-   *   box-shadow:       var(--sf-shadow-l);
-   * }
-   * .sf-card--interactive {
-   *   transition:       transform var(--sf-duration-fast) var(--sf-ease-out),
-   *                     box-shadow var(--sf-duration-fast) var(--sf-ease-out);
-   * }
-   * .sf-card--interactive:hover {
-   *   transform:        translateY(-2px);
-   *   box-shadow:       var(--sf-shadow-l);
-   * }
-   * .sf-card__header,
-   * .sf-card__body,
-   * .sf-card__footer {
-   *   display: contents;
-   * }
-   */
+   * ============================================================ */
+
+  .sf-card {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--sf-card-gap);
+    padding:        var(--sf-card-padding);
+    background:     var(--sf-card-bg);
+    border:         var(--sf-card-border-width) var(--sf-border-style) transparent;
+    border-radius:  var(--sf-card-radius-outer);
+    box-shadow:     var(--sf-card-shadow);
+  }
+
+  .sf-card--bordered {
+    border-color: var(--sf-card-border-color);
+    box-shadow:   none;
+  }
+
+  .sf-card--elevated {
+    box-shadow: var(--sf-shadow-l);
+  }
+
+  .sf-card--interactive {
+    transition: transform var(--sf-duration-fast) var(--sf-ease-out),
+                box-shadow var(--sf-duration-fast) var(--sf-ease-out);
+  }
+
+  .sf-card--interactive:hover {
+    transform:  translateY(-2px);
+    box-shadow: var(--sf-shadow-l);
+  }
+
+  .sf-card__header,
+  .sf-card__body,
+  .sf-card__footer {
+    display: contents;
+  }
 
   /* ============================================================
    * .sf-badge — small status / count

@@ -6,66 +6,136 @@
 
   /* ============================================================
    * HEADING HELPER CLASSES (.sf-h1 – .sf-h6)
-   * ============================================================
    * Apply heading visual style to any element without altering
    * semantics — e.g. a <p> styled as an h2, or an <h1> visually
    * displayed at h3 scale for SEO/a11y reasons.
    * Maps to the same --sf-h{N}-* tokens consumed by core/base.css.
-   *
-   * .sf-h1 {
-   *   font-size:       var(--sf-h1-size);
-   *   line-height:     var(--sf-h1-line-height);
-   *   font-weight:     var(--sf-h1-font-weight);
-   *   letter-spacing:  var(--sf-h1-letter-spacing);
-   *   font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
-   *   color:           var(--sf-heading-color, var(--sf-color-heading));
-   *   max-inline-size: var(--sf-h1-max-width);
-   * }
-   * .sf-h2 {
-   *   font-size:       var(--sf-h2-size);
-   *   line-height:     var(--sf-h2-line-height);
-   *   font-weight:     var(--sf-h2-font-weight);
-   *   letter-spacing:  var(--sf-h2-letter-spacing);
-   *   font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
-   *   color:           var(--sf-heading-color, var(--sf-color-heading));
-   *   max-inline-size: var(--sf-h2-max-width);
-   * }
-   * .sf-h3 {
-   *   font-size:       var(--sf-h3-size);
-   *   line-height:     var(--sf-h3-line-height);
-   *   font-weight:     var(--sf-h3-font-weight);
-   *   letter-spacing:  var(--sf-h3-letter-spacing);
-   *   font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
-   *   color:           var(--sf-heading-color, var(--sf-color-heading));
-   *   max-inline-size: var(--sf-h3-max-width);
-   * }
-   * .sf-h4 {
-   *   font-size:       var(--sf-h4-size);
-   *   line-height:     var(--sf-h4-line-height);
-   *   font-weight:     var(--sf-h4-font-weight);
-   *   letter-spacing:  var(--sf-h4-letter-spacing);
-   *   font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
-   *   color:           var(--sf-heading-color, var(--sf-color-heading));
-   *   max-inline-size: var(--sf-h4-max-width);
-   * }
-   * .sf-h5 {
-   *   font-size:       var(--sf-h5-size);
-   *   line-height:     var(--sf-h5-line-height);
-   *   font-weight:     var(--sf-h5-font-weight);
-   *   letter-spacing:  var(--sf-h5-letter-spacing);
-   *   font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
-   *   color:           var(--sf-heading-color, var(--sf-color-heading));
-   *   max-inline-size: var(--sf-h5-max-width);
-   * }
-   * .sf-h6 {
-   *   font-size:       var(--sf-h6-size);
-   *   line-height:     var(--sf-h6-line-height);
-   *   font-weight:     var(--sf-h6-font-weight);
-   *   letter-spacing:  var(--sf-h6-letter-spacing);
-   *   font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
-   *   color:           var(--sf-heading-color, var(--sf-color-heading));
-   *   max-inline-size: var(--sf-h6-max-width);
-   * }
-   */
+   * ============================================================ */
+  .sf-h1 {
+    font-size:       var(--sf-h1-size);
+    line-height:     var(--sf-h1-line-height);
+    font-weight:     var(--sf-h1-font-weight);
+    letter-spacing:  var(--sf-h1-letter-spacing);
+    font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
+    color:           var(--sf-heading-color, var(--sf-color-heading));
+    max-inline-size: var(--sf-h1-max-width);
+  }
+  .sf-h2 {
+    font-size:       var(--sf-h2-size);
+    line-height:     var(--sf-h2-line-height);
+    font-weight:     var(--sf-h2-font-weight);
+    letter-spacing:  var(--sf-h2-letter-spacing);
+    font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
+    color:           var(--sf-heading-color, var(--sf-color-heading));
+    max-inline-size: var(--sf-h2-max-width);
+  }
+  .sf-h3 {
+    font-size:       var(--sf-h3-size);
+    line-height:     var(--sf-h3-line-height);
+    font-weight:     var(--sf-h3-font-weight);
+    letter-spacing:  var(--sf-h3-letter-spacing);
+    font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
+    color:           var(--sf-heading-color, var(--sf-color-heading));
+    max-inline-size: var(--sf-h3-max-width);
+  }
+  .sf-h4 {
+    font-size:       var(--sf-h4-size);
+    line-height:     var(--sf-h4-line-height);
+    font-weight:     var(--sf-h4-font-weight);
+    letter-spacing:  var(--sf-h4-letter-spacing);
+    font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
+    color:           var(--sf-heading-color, var(--sf-color-heading));
+    max-inline-size: var(--sf-h4-max-width);
+  }
+  .sf-h5 {
+    font-size:       var(--sf-h5-size);
+    line-height:     var(--sf-h5-line-height);
+    font-weight:     var(--sf-h5-font-weight);
+    letter-spacing:  var(--sf-h5-letter-spacing);
+    font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
+    color:           var(--sf-heading-color, var(--sf-color-heading));
+    max-inline-size: var(--sf-h5-max-width);
+  }
+  .sf-h6 {
+    font-size:       var(--sf-h6-size);
+    line-height:     var(--sf-h6-line-height);
+    font-weight:     var(--sf-h6-font-weight);
+    letter-spacing:  var(--sf-h6-letter-spacing);
+    font-family:     var(--sf-heading-font-family, var(--sf-font-heading));
+    color:           var(--sf-heading-color, var(--sf-color-heading));
+    max-inline-size: var(--sf-h6-max-width);
+  }
+
+  /* ============================================================
+   * DISPLAY
+   * ============================================================ */
+  .sf-d-block        { display: block; }
+  .sf-d-inline       { display: inline; }
+  .sf-d-inline-block { display: inline-block; }
+  .sf-d-flex         { display: flex; }
+  .sf-d-inline-flex  { display: inline-flex; }
+  .sf-d-grid         { display: grid; }
+  .sf-d-inline-grid  { display: inline-grid; }
+  .sf-d-none         { display: none; }
+
+  /* ============================================================
+   * TEXT ALIGNMENT — logical (respects writing-mode + direction)
+   * ============================================================ */
+  .sf-text-start   { text-align: start; }
+  .sf-text-center  { text-align: center; }
+  .sf-text-end     { text-align: end; }
+  .sf-text-justify { text-align: justify; }
+
+  /* ============================================================
+   * FLEX / GRID ITEM ALIGNMENT
+   * Self-alignment for flex/grid children. Use on the item,
+   * not the container.
+   * ============================================================ */
+  .sf-self-start   { align-self: start; }
+  .sf-self-center  { align-self: center; }
+  .sf-self-end     { align-self: end; }
+  .sf-self-stretch { align-self: stretch; }
+
+  /* Justify-self (grid only) */
+  .sf-justify-self-start   { justify-self: start; }
+  .sf-justify-self-center  { justify-self: center; }
+  .sf-justify-self-end     { justify-self: end; }
+  .sf-justify-self-stretch { justify-self: stretch; }
+
+  /* ============================================================
+   * CONTENT WIDTH
+   * Max-inline-size presets tied to the container token scale.
+   * Override: --sf-content-width, --sf-breakout-width, --sf-container-full.
+   * Pair with margin-inline: auto to center the element.
+   * ============================================================ */
+  .sf-width-content {
+    max-inline-size: var(--sf-content-width, var(--sf-container-prose));
+    margin-inline:   auto;
+  }
+  .sf-width-wide {
+    max-inline-size: var(--sf-breakout-width, var(--sf-container-wide));
+    margin-inline:   auto;
+  }
+  .sf-width-full {
+    max-inline-size: 100%;
+    inline-size:     100%;
+  }
+
+  /* ============================================================
+   * SCREEN-READER ALIASES
+   * ============================================================ */
+  .sf-visually-hidden,
+  .visuallyhidden {
+    position:    absolute !important;
+    width:       1px      !important;
+    height:      1px      !important;
+    padding:     0        !important;
+    margin:      -1px     !important;
+    overflow:    hidden   !important;
+    overflow:    clip     !important;
+    clip-path:   inset(50%) !important;
+    white-space: nowrap   !important;
+    border:      0        !important;
+  }
 
 }
