@@ -257,15 +257,17 @@
     --sf-focus-ring-color:  var(--sf-color-border--focus);
     */
 
-    /* --- Z-index scale ---
+    /* --- Z-index scale (semantic, Bootstrap/Chakra-style) ---
     --sf-z-below:  -1;
     --sf-z-base:    0;
     --sf-z-raised:  1;
-    --sf-z-low:    10;
-    --sf-z-mid:   100;
-    --sf-z-high:  500;
-    --sf-z-top:   900;
-    --sf-z-max:  9999;
+    --sf-z-sticky:   1000;
+    --sf-z-fixed:    1010;
+    --sf-z-dropdown: 1020;
+    --sf-z-overlay:  1030;
+    --sf-z-modal:    1040;
+    --sf-z-toast:    1050;
+    --sf-z-tooltip:  1060;
     */
 
     /* --- Icon ---

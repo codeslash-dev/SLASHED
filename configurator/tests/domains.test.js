@@ -124,12 +124,10 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-leading-tight', 'typography'],
     ['--sf-prose-block-margin', 'typography'],
     ['--sf-line-clamp', 'typography'],
-    ['--sf-truncate-suffix', 'typography'],
     ['--sf-current-font-weight', 'typography'],
 
     ['--sf-space-m', 'spacing'],
     ['--sf-section-pad', 'spacing'],
-    ['--sf-fluid-custom-1', 'spacing'],
     ['--sf-flow-space', 'spacing'],
     ['--sf-component-pad', 'spacing'],
     ['--sf-content-gap', 'spacing'],
@@ -145,7 +143,6 @@ describe('domainOf — known compound names route correctly', () => {
 
     ['--sf-radius-m', 'borders'],
     ['--sf-border-width-1', 'borders'],
-    ['--sf-stroke-bold', 'borders'],
     ['--sf-divider-color', 'borders'],
 
     ['--sf-shadow-m', 'shadows'],
@@ -159,8 +156,8 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-transition-form-field', 'motion'],
     ['--sf-animation-blink', 'motion'],
 
-    ['--sf-blur-m', 'effects'],
-    ['--sf-opacity-50', 'effects'],
+    ['--sf-blur', 'effects'],
+    ['--sf-opacity-muted', 'effects'],
     ['--sf-scrim-color', 'effects'],
     ['--sf-mask-scrim-end', 'effects'],
     ['--sf-state-pending-opacity', 'effects'],

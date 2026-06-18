@@ -4,6 +4,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.0] - 2026-06-18
+
+A usability-driven token-surface reduction: ~178 tokens removed from the public
+API (876 → 698) by cutting power-user/vestigial families that real marketing,
+landing, and business sites never reach for, while keeping (and clarifying) the
+families they do. See `docs/migration.md` for the upgrade guide.
+
+### Features
+- **themes:** add opt-in `.sf-theme-transition` helper + `--sf-theme-transition-duration` knob for a soft light/dark cross-fade
+- **tokens:** add `--sf-blur` (single frosted-surface default) and `--sf-opacity-muted`
+- **tokens:** add semantic font-weight roles `--sf-font-weight-interactive` and `--sf-font-weight-strong`
+- **tokens:** z-index is now a semantic, Bootstrap/Chakra-style ladder — adds `--sf-z-modal`, `--sf-z-tooltip`
+
+### ⚠️ Breaking Changes
+- **tokens:** removed the combinatorial fluid-pair "bridge" matrix `--sf-{space,text}-{step}-to-{step}` (optional/tokens.sizes-extended.css). Use the already-fluid base scales, or a custom `clamp()`.
+- **tokens:** trimmed alpha ramps to 5 steps per family — kept `-a5/-a10/-a30/-a50/-a80`; removed `-a20/-a40/-a60/-a70/-a90/-a95`. For an intermediate alpha use `oklch(from var(--sf-color-x) l c h / .NN)`.
+- **tokens:** removed the custom fluid slots `--sf-fluid-custom-{1,2,3}` and their `-min`/`-max` endpoints. Write a `clamp()` directly; engine knobs `--sf-fluid-{min,max}-vw` are unchanged.
+- **tokens:** collapsed the 5-step blur scale `--sf-blur-{xs,s,m,l,xl}` to a single `--sf-blur`. Other amounts: inline `blur(Npx)`.
+- **tokens:** removed the numeric opacity scale `--sf-opacity-{0,10,25,50,75,100}`. Kept `--sf-opacity-disabled`; added `--sf-opacity-muted` (0.5).
+- **tokens:** removed stroke presets `--sf-stroke-{thin,regular,bold,heavy}`. Set SVG `stroke-width` directly or reuse `--sf-border-width-*`.
+- **tokens:** removed multi-column presets `--sf-col-width-{s,m,l}` and `--sf-col-rule-width-{s,m,l}`.
+- **tokens:** removed `--sf-truncate-suffix` (was never read — `text-overflow` string values are Firefox-only).
+- **tokens:** removed rare font-weights `--sf-font-weight-{thin,extralight,extrabold,black}`. Kept `light/normal/medium/semibold/bold`; for an off-scale weight write `font-weight: 100` or override a role token. **`--sf-body-strong-weight` now references `--sf-font-weight-strong`.**
+- **tokens:** removed the z-index numeric ladder `--sf-z-{low,mid,high,top,max}`. Use the semantic roles `--sf-z-{sticky,fixed,dropdown,overlay,modal,toast,tooltip}` (values shifted to the 1000-base Bootstrap/Chakra convention).
+
 ## [0.5.47] - 2026-06-18
 
 ### Bug Fixes

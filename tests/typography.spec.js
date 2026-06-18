@@ -299,11 +299,11 @@ test.describe('Border radius scale', () => {
 
 // ── Z-index scale ────────────────────────────────────────────────
 test.describe('Z-index scale', () => {
-  test('z-index tokens increase: below < base < raised < low < mid < high < top < max', async ({ page }) => {
+  test('z-index tokens increase: below < base < raised < sticky < fixed < dropdown < overlay < modal < toast < tooltip', async ({ page }) => {
     await page.goto(FIXTURE);
     const zs = await page.evaluate(() => {
       const r = getComputedStyle(document.documentElement);
-      return ['below', 'base', 'raised', 'low', 'mid', 'high', 'top', 'max'].map(s => ({
+      return ['below', 'base', 'raised', 'sticky', 'fixed', 'dropdown', 'overlay', 'modal', 'toast', 'tooltip'].map(s => ({
         name: s,
         val:  parseInt(r.getPropertyValue(`--sf-z-${s}`).trim(), 10),
       }));
@@ -322,12 +322,18 @@ test.describe('Z-index scale', () => {
     expect(val).toBeLessThan(0);
   });
 
-  test('--sf-z-max is the highest (9999)', async ({ page }) => {
+  test('--sf-z-tooltip is the highest semantic rung', async ({ page }) => {
     await page.goto(FIXTURE);
-    const val = await page.evaluate(() =>
-      parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sf-z-max').trim(), 10)
-    );
-    expect(val).toBeGreaterThanOrEqual(9999);
+    const vals = await page.evaluate(() => {
+      const g = (t) => parseInt(getComputedStyle(document.documentElement).getPropertyValue(t).trim(), 10);
+      return {
+        tooltip: g('--sf-z-tooltip'), toast: g('--sf-z-toast'),
+        modal: g('--sf-z-modal'), sticky: g('--sf-z-sticky'),
+      };
+    });
+    expect(vals.tooltip).toBeGreaterThan(vals.toast);
+    expect(vals.toast).toBeGreaterThan(vals.modal);
+    expect(vals.modal).toBeGreaterThan(vals.sticky);
   });
 });
 

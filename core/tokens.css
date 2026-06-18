@@ -26,7 +26,7 @@
      }
 
    BEM CONSUMER API — most tokens are intentionally unused by the
-   framework itself. Tokens such as --sf-shadow-*, --sf-blur-*, --sf-gap,
+   framework itself. Tokens such as --sf-shadow-*, --sf-blur, --sf-gap,
    --sf-gradient-* etc. are meant for use in your own BEM classes:
      .card { box-shadow: var(--sf-shadow-m); gap: var(--sf-gap); }
    "Not used internally" does NOT mean dead code: every token is exercised
@@ -75,11 +75,11 @@
      · gradients (--sf-gradient-*)
      · shadows (--sf-shadow-{none,xs,s,m,l,xl,2xl,inner})
      · text/drop shadows (--sf-text-shadow-*, --sf-drop-shadow-*)
-     · blur (--sf-blur-*)
-     · opacity (--sf-opacity-{0,10,25,50,75,100}, --sf-opacity-disabled, --sf-state-pending-opacity)
+     · blur (--sf-blur)
+     · opacity (--sf-opacity-muted, --sf-opacity-disabled, --sf-state-pending-opacity)
      · spacing (--sf-space-{none,px,gutter,2xs..4xl})
      · font families (--sf-font-{body,heading,display,mono,humanist,geometric,slab})
-     · font weights (--sf-font-weight-{thin..black,body,heading,display})
+     · font weights (--sf-font-weight-{light,normal,medium,semibold,bold,body,heading,display,interactive,strong})
      · font sizes (--sf-text-{2xs..4xl}, --sf-text-display-{s,m,l})
      · leading (--sf-leading-{tight,snug,normal,relaxed})
      · tracking (--sf-tracking-{tight,normal,wide,wider,widest})
@@ -113,9 +113,7 @@
      · current-font-weight (--sf-current-font-weight)
      · color scheme (--sf-color-scheme)
      · color anchors (--sf-color-white, --sf-color-black)
-     · stroke (--sf-stroke-{thin,regular,bold,heavy})
      · object fit (--sf-object-fit, --sf-object-position)
-     · multi-column (--sf-col-width-{s,m,l}, --sf-col-rule-width-{s,m,l})
      · layout tokens — all of tokens.layout.css (per-primitive gaps, sidebar, grid, bento, etc.)
      · macro tokens — all of tokens.macros.css (flow-space, line-clamp, aspect, scroll-shadow-size)
      · palette tokens — all of optional/tokens.palette.css
@@ -136,15 +134,9 @@
      · --sf-text-ratio-{min,max}, --sf-text-base-{min,max},
        --sf-text-display-base-{min,max} (generative TYPE scale inputs)
      · --sf-space-ratio-{min,max}, --sf-space-base-{min,max} (generative SPACE scale inputs)
-     · --sf-fluid-custom-{1,2,3}-{min,max} (custom fluid slot endpoints) and
-       --sf-fluid-custom-{1,2,3} (the fluid slot outputs you read)
-     · --sf-{space,text}-{step}-to-{step} (fluid pairwise interpolation bridges,
-       optional/tokens.sizes-extended.css — generated OUTPUTS of the same scale
-       engine whose inputs above are ADVANCED; one per ordered pair of steps)
      · --sf-scroll-timeline-range-{start,end} (scroll-driven animation)
      · --sf-mask-scrim-{start,end} (edge-fade masks)
      · --sf-safe-{top,bottom,left,right} (safe-area insets)
-     · --sf-truncate-suffix (ellipsis character override)
      · --sf-radius-outer (concentric radius helper)
      · --sf-is-active, --sf-is-current, --sf-is-pressed, --sf-is-open (state flags)
      · --sf-focus-ring-shadow (composite focus shadow)
@@ -316,22 +308,6 @@
   @property --sf-space-base-min        { syntax: "<number>"; inherits: true; initial-value: 1; }
   @property --sf-space-base-max        { syntax: "<number>"; inherits: true; initial-value: 2; }
 
-  /* Custom fluid slots — open endpoint pairs for ad-hoc fluid values.
-     Set the two endpoints (unitless rem numbers), read the slot:
-       :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; }
-       .my-component { padding-inline: var(--sf-fluid-custom-1); }
-     The slot resolves to a length that interpolates between the endpoints
-     across the engine's viewport range, so ad-hoc values stay calibrated
-     when --sf-fluid-{min,max}-vw are retuned. Endpoints may be redefined
-     per scope. Descending ranges (min > max) are not supported by clamp() —
-     swap the endpoints and negate at the use site instead. */
-  @property --sf-fluid-custom-1-min    { syntax: "<number>"; inherits: true; initial-value: 1; }
-  @property --sf-fluid-custom-1-max    { syntax: "<number>"; inherits: true; initial-value: 2; }
-  @property --sf-fluid-custom-2-min    { syntax: "<number>"; inherits: true; initial-value: 1; }
-  @property --sf-fluid-custom-2-max    { syntax: "<number>"; inherits: true; initial-value: 2; }
-  @property --sf-fluid-custom-3-min    { syntax: "<number>"; inherits: true; initial-value: 1; }
-  @property --sf-fluid-custom-3-max    { syntax: "<number>"; inherits: true; initial-value: 2; }
-
   :root {
     --sf-fluid-min-vw:          22.5;
     --sf-fluid-max-vw:          90;
@@ -345,19 +321,6 @@
     --sf-space-ratio-max:       1.333;
     --sf-space-base-min:        1;
     --sf-space-base-max:        2;
-
-    /* Custom fluid slot endpoints (unitless rem) */
-    --sf-fluid-custom-1-min:    1;
-    --sf-fluid-custom-1-max:    2;
-    --sf-fluid-custom-2-min:    1;
-    --sf-fluid-custom-2-max:    2;
-    --sf-fluid-custom-3-min:    1;
-    --sf-fluid-custom-3-max:    2;
-
-    /* Custom fluid slot outputs — read these */
-    --sf-fluid-custom-1: clamp(calc(var(--sf-fluid-custom-1-min) * 1rem), calc((var(--sf-fluid-custom-1-max) - var(--sf-fluid-custom-1-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-1-min) * 1rem), calc(var(--sf-fluid-custom-1-max) * 1rem));
-    --sf-fluid-custom-2: clamp(calc(var(--sf-fluid-custom-2-min) * 1rem), calc((var(--sf-fluid-custom-2-max) - var(--sf-fluid-custom-2-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-2-min) * 1rem), calc(var(--sf-fluid-custom-2-max) * 1rem));
-    --sf-fluid-custom-3: clamp(calc(var(--sf-fluid-custom-3-min) * 1rem), calc((var(--sf-fluid-custom-3-max) - var(--sf-fluid-custom-3-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-3-min) * 1rem), calc(var(--sf-fluid-custom-3-max) * 1rem));
   }
 
   /* ============================================================
@@ -920,21 +883,22 @@
     /* ----------------------------------------------------------
        Font weights
        ---------------------------------------------------------- */
-    /* Numeric scale */
-    --sf-font-weight-thin:       100;
-    --sf-font-weight-extralight: 200;
-    --sf-font-weight-light:      300;
-    --sf-font-weight-normal:     400;
-    --sf-font-weight-medium:     500;
-    --sf-font-weight-semibold:   600;
-    --sf-font-weight-bold:       700;
-    --sf-font-weight-extrabold:  800;
-    --sf-font-weight-black:      900;
+    /* Base weights — trimmed, recognizable names. For an off-scale weight
+       (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune
+       a role token below globally — every weight here is overridable. */
+    --sf-font-weight-light:    300;
+    --sf-font-weight-normal:   400;
+    --sf-font-weight-medium:   500;
+    --sf-font-weight-semibold: 600;
+    --sf-font-weight-bold:     700;
 
-    /* Semantic aliases — reference the numeric scale */
-    --sf-font-weight-body:    var(--sf-font-weight-normal);
-    --sf-font-weight-heading: var(--sf-font-weight-semibold);
-    --sf-font-weight-display: var(--sf-font-weight-bold);
+    /* Semantic role aliases — set intent, not a number. Override these to
+       reweight the whole site (e.g. --sf-font-weight-body: 300). */
+    --sf-font-weight-body:        var(--sf-font-weight-normal);    /* body copy            */
+    --sf-font-weight-heading:     var(--sf-font-weight-semibold);  /* h1–h6                */
+    --sf-font-weight-display:     var(--sf-font-weight-bold);      /* hero / display       */
+    --sf-font-weight-interactive: var(--sf-font-weight-semibold);  /* buttons, badges, nav */
+    --sf-font-weight-strong:      var(--sf-font-weight-bold);      /* <strong> / emphasis  */
 
     /* State token — consumed by .is-current in states.css.
        Override to match your nav design (e.g. semibold for thin fonts). */
@@ -1168,19 +1132,13 @@
 
     /* ----------------------------------------------------------
        Blur & opacity
+       One frosted-surface default (nav/overlay glass) and one general
+       de-emphasis opacity. For other amounts write the value directly:
+       backdrop-filter: blur(24px); opacity: .3;
+       (--sf-opacity-disabled is defined with the interaction tokens.)
        ---------------------------------------------------------- */
-    --sf-blur-xs: 4px;
-    --sf-blur-s:  8px;
-    --sf-blur-m:  16px;
-    --sf-blur-l:  32px;
-    --sf-blur-xl: 48px;
-
-    --sf-opacity-0:   0;
-    --sf-opacity-10:  0.1;
-    --sf-opacity-25:  0.25;
-    --sf-opacity-50:  0.5;
-    --sf-opacity-75:  0.75;
-    --sf-opacity-100: 1;
+    --sf-blur:          12px;
+    --sf-opacity-muted: 0.5;
 
     /* ----------------------------------------------------------
        Motion & easing
@@ -1191,6 +1149,11 @@
     --sf-duration-normal:  calc(250ms * var(--sf-motion-scale));
     --sf-duration-slow:    calc(400ms * var(--sf-motion-scale));
     --sf-duration-slower:  calc(600ms * var(--sf-motion-scale));
+
+    /* Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition
+       (core/themes.css). Registered <color> tokens make the fade possible;
+       this controls how long it takes. */
+    --sf-theme-transition-duration: calc(300ms * var(--sf-motion-scale));
 
     --sf-ease-linear:  linear;
     --sf-ease-out:     cubic-bezier(0.25, 0, 0.15, 1);
@@ -1250,32 +1213,26 @@
     /* ----------------------------------------------------------
        Z-index
        ---------------------------------------------------------- */
+    /* Semantic z-index ladder — UI roles, not magic integers. Follows the
+       Bootstrap/Chakra convention (1000-base, ordered by stacking role) so
+       the names are familiar and the gaps leave room to insert custom layers.
+       Low-level rungs (below/base/raised) handle local stacking; the named
+       roles handle page chrome and overlays.
+
+       Modal / popover / tooltip components render in the browser TOP LAYER
+       (native <dialog> / [popover]), ordered above the page independently of
+       z-index. The --sf-z-modal / --sf-z-overlay / --sf-z-tooltip rungs are
+       the fallback for non-top-layer implementations that must beat the page. */
     --sf-z-below:  -1;
     --sf-z-base:    0;
     --sf-z-raised:  1;
-    --sf-z-low:    10;
-    --sf-z-mid:   100;
-    --sf-z-high:  500;
-    --sf-z-top:   900;
-    --sf-z-max:  9999;
-
-    /* Semantic z-index aliases — map UI roles onto the numeric ladder
-       above so component authors target intent, not magic integers.
-       Every role that can overlap another on the scroll plane gets its
-       OWN rung, ordered: raised < sticky < fixed < dropdown < toast.
-       Notably --sf-z-dropdown sits ABOVE sticky and fixed so a navbar
-       menu clears the sticky header it opens from (and any fixed chrome).
-       Modal / popover / tooltip are intentionally absent: SLASHED's
-       dialog & popover components render in the browser TOP LAYER (native
-       <dialog> / [popover]), which is ordered above the page and its
-       ::backdrop independently of z-index — a z token there would be dead.
-       The --sf-z-overlay fallback is provided only for non-top-layer
-       implementations that still need to beat everything else. */
-    --sf-z-sticky:   var(--sf-z-low);   /* 10   sticky headers / sidebars      */
-    --sf-z-fixed:    var(--sf-z-mid);   /* 100  fixed app chrome (navbar, FAB)  */
-    --sf-z-dropdown: var(--sf-z-high);  /* 500  menus — clear sticky + fixed    */
-    --sf-z-toast:    var(--sf-z-top);   /* 900  transient notifications         */
-    --sf-z-overlay:  var(--sf-z-max);   /* 9999 non-top-layer modal/popover fallback */
+    --sf-z-sticky:   1000;  /* sticky headers / sidebars            */
+    --sf-z-fixed:    1010;  /* fixed app chrome (navbar, FAB)       */
+    --sf-z-dropdown: 1020;  /* menus — clear sticky + fixed         */
+    --sf-z-overlay:  1030;  /* scrims / non-top-layer backdrops     */
+    --sf-z-modal:    1040;  /* dialogs (non-top-layer fallback)     */
+    --sf-z-toast:    1050;  /* transient notifications              */
+    --sf-z-tooltip:  1060;  /* tooltips — above everything          */
 
     /* ----------------------------------------------------------
        Layout & a11y
@@ -1343,32 +1300,12 @@
     --sf-print-base-size:   11pt;
 
     /* ----------------------------------------------------------
-       Stroke widths
-       ---------------------------------------------------------- */
-    --sf-stroke-thin:    1px;
-    --sf-stroke-regular: 1.5px;
-    --sf-stroke-bold:    2px;
-    --sf-stroke-heavy:   3px;
-
-    /* ----------------------------------------------------------
        Object fit / position — global defaults for replaced elements.
        Applied in core/base.css on img and video. Override per element
        via inline style="--sf-object-position: top" or in BEM CSS.
        ---------------------------------------------------------- */
     --sf-object-fit:      cover;
     --sf-object-position: 50% 50%;
-
-    /* ----------------------------------------------------------
-       CSS multi-column — tokens for the `columns` layout property.
-       column-width is ch-based (character units) so columns maintain
-       a comfortable reading measure regardless of font-size.
-       ---------------------------------------------------------- */
-    --sf-col-width-s:       16ch;
-    --sf-col-width-m:       24ch;
-    --sf-col-width-l:       32ch;
-    --sf-col-rule-width-s:  var(--sf-border-width-1);
-    --sf-col-rule-width-m:  var(--sf-border-width-2);
-    --sf-col-rule-width-l:  var(--sf-border-width-3);
 
   }
 
@@ -1433,7 +1370,7 @@
     --sf-body-font-family:   var(--sf-font-body);
     --sf-body-color:         var(--sf-color-text);
     --sf-body-text-wrap:     pretty;
-    --sf-body-strong-weight: var(--sf-font-weight-bold);
+    --sf-body-strong-weight: var(--sf-font-weight-strong);
     --sf-body-em-style:      italic;
 
     --sf-code-font-size:     0.875em;

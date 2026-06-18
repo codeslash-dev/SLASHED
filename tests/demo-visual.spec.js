@@ -125,15 +125,15 @@ test.describe('Typography', () => {
     }
   });
 
-  test('font weight scale goes from 100 to 900', async ({ page }) => {
+  test('font weight scale goes from light (300) to bold (700)', async ({ page }) => {
     await page.goto(DEMO_URL);
     const section = page.locator('#typography');
-    const thin = section.locator('span[style*="weight-thin"]').first();
-    const black = section.locator('span[style*="weight-black"]').first();
-    const thinWeight = parseInt(await getStyle(thin, 'fontWeight'));
-    const blackWeight = parseInt(await getStyle(black, 'fontWeight'));
-    expect(thinWeight).toBe(100);
-    expect(blackWeight).toBe(900);
+    const light = section.locator('span[style*="weight-light"]').first();
+    const bold = section.locator('span[style*="weight-bold"]').first();
+    const lightWeight = parseInt(await getStyle(light, 'fontWeight'));
+    const boldWeight = parseInt(await getStyle(bold, 'fontWeight'));
+    expect(lightWeight).toBe(300);
+    expect(boldWeight).toBe(700);
   });
 
   test('monospace font family resolves to monospace stack', async ({ page }) => {

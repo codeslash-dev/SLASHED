@@ -14,10 +14,9 @@
    Sections:
      1. Brand colors (6 source tokens)
      2. Fluid engine (12 generative inputs)
-     3. Custom fluid slots (ad-hoc fluid values)
-     4. Global scale multipliers
-     5. Font families
-     6. Radius
+     3. Global scale multipliers
+     4. Font families
+     5. Radius
 
    For color theming beyond the 6 source tokens (dark-mode
    overrides, multi-brand scoping, per-component tokens) see
@@ -71,24 +70,7 @@
     --sf-space-base-max:        2;     /* --sf-space-m at max viewport (rem) */
 
     /* ===========================================================
-       3. CUSTOM FLUID SLOTS — ad-hoc fluid values
-       ===========================================================
-       Three pre-wired slots: set the two endpoints (unitless rem),
-       read the slot anywhere. The value interpolates across the
-       engine's viewport range, so it stays calibrated when the
-       range above is retuned.
-
-         .my-hero { padding-block: var(--sf-fluid-custom-1); }
-    */
-    /* --sf-fluid-custom-1-min: 0.875; */
-    /* --sf-fluid-custom-1-max: 1.375; */
-    /* --sf-fluid-custom-2-min: 1;     */
-    /* --sf-fluid-custom-2-max: 2;     */
-    /* --sf-fluid-custom-3-min: 1;     */
-    /* --sf-fluid-custom-3-max: 2;     */
-
-    /* ===========================================================
-       4. GLOBAL SCALE MULTIPLIERS
+       3. GLOBAL SCALE MULTIPLIERS
        ===========================================================
        Linear dials applied on top of the generative scales. */
     --sf-text-scale:         1;     /* all body text sizes        */
@@ -104,7 +86,7 @@
     --sf-leading-taper:      0;
 
     /* ===========================================================
-       5. FONT FAMILIES
+       4. FONT FAMILIES
        =========================================================== */
     --sf-font-body:    system-ui, -apple-system, sans-serif;
     --sf-font-heading: var(--sf-font-body);
@@ -112,9 +94,9 @@
     --sf-font-mono:    ui-monospace, monospace;
 
     /* ===========================================================
-       6. RADIUS
+       5. RADIUS
        ===========================================================
-       --sf-radius-scale (section 4) scales the whole set; override
+       --sf-radius-scale (section 3) scales the whole set; override
        individual steps only when the curve itself must change. */
     /* --sf-radius-s: calc(4px  * var(--sf-radius-scale)); */
     /* --sf-radius-m: calc(8px  * var(--sf-radius-scale)); */

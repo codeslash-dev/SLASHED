@@ -3,6 +3,59 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.5.x → 0.6.0
+
+v0.6.0 removes ~178 tokens from the public API (876 → 698). The cuts target
+power-user / vestigial token families that marketing, landing, and business
+sites don't reach for. **No classes were removed and no colour/theming behaviour
+changed** — only token names. If your site never referenced the tokens below,
+no changes are needed.
+
+### Removed tokens → what to use instead
+
+| Removed | Replacement |
+|---|---|
+| `--sf-{space,text}-{step}-to-{step}` (fluid bridge matrix) | Use the base `--sf-space-*` / `--sf-text-*` scales (already fluid), or a custom `clamp()` |
+| `--sf-color-*-a{20,40,60,70,90,95}` | Kept steps `-a5/-a10/-a30/-a50/-a80`; for others `oklch(from var(--sf-color-x) l c h / .NN)` |
+| `--sf-fluid-custom-{1,2,3}` (+ `-min`/`-max`) | Write a `clamp()` directly; `--sf-fluid-{min,max}-vw` unchanged |
+| `--sf-blur-{xs,s,m,l,xl}` | `--sf-blur` (single default), or inline `blur(Npx)` |
+| `--sf-opacity-{0,10,25,50,75,100}` | `--sf-opacity-muted` (0.5) and `--sf-opacity-disabled`, or a literal value |
+| `--sf-stroke-{thin,regular,bold,heavy}` | SVG `stroke-width="N"` or `--sf-border-width-*` |
+| `--sf-col-width-{s,m,l}`, `--sf-col-rule-width-{s,m,l}` | Set `column-width` / `column-rule-width` directly |
+| `--sf-truncate-suffix` | (was never read) — `.sf-truncate` uses `text-overflow: ellipsis` |
+| `--sf-font-weight-{thin,extralight,extrabold,black}` | `font-weight: 100/200/800/900` inline, or override a role token |
+| `--sf-z-{low,mid,high,top,max}` | Semantic roles below |
+
+### Renamed / re-pointed
+
+| Was | Now |
+|---|---|
+| `--sf-z-low` | `--sf-z-sticky` (1000) |
+| `--sf-z-mid` | `--sf-z-fixed` (1010) |
+| `--sf-z-high` | `--sf-z-dropdown` (1020) |
+| `--sf-z-max` (modal fallback) | `--sf-z-overlay` (1030) / `--sf-z-modal` (1040) |
+| `--sf-z-top` | `--sf-z-toast` (1050) |
+| — | `--sf-z-tooltip` (1060, new top rung) |
+| `--sf-body-strong-weight` → `var(--sf-font-weight-bold)` | now `var(--sf-font-weight-strong)` (same value) |
+
+### Font weights are now base + semantic roles
+
+Base weights `light(300) / normal(400) / medium(500) / semibold(600) / bold(700)`
+plus semantic roles you can override to reweight the whole site:
+`--sf-font-weight-{body,heading,display,interactive,strong}`. To go lighter or
+heavier than the named set, write `font-weight: 300` directly, or re-tune a role:
+
+```css
+:root { --sf-font-weight-body: 300; --sf-font-weight-heading: 400; }
+```
+
+### New: opt-in theme cross-fade
+
+Add `class="sf-theme-transition"` to `<html>` (or any subtree) so colours fade
+instead of switching instantly when `[data-theme]` flips. Tune with
+`--sf-theme-transition-duration` (default 300ms). Disabled under
+`prefers-reduced-motion`.
+
 ## SLASHED 0.2.x → 0.3.0
 
 v0.3.0 adds the `slashed.macros` cascade layer and relocates three class

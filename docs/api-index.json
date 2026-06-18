@@ -29,21 +29,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1070,
+      "total": 929,
       "by_type": {
         "class": 231,
-        "token": 839
+        "token": 698
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 932,
-        "PUBLIC-ADVANCED": 137
+        "PUBLIC": 873,
+        "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 592,
-        "knob": 247
+        "consumption": 476,
+        "knob": 222
       },
-      "tokens": 839,
+      "tokens": 698,
       "classes": 231,
       "sf_classes": 182,
       "is_classes": 40,
@@ -51,15 +51,15 @@
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
-        "Core tokens": 507,
+        "Core tokens": 475,
         "Layout primitives": 126,
         "Layout tokens": 52,
         "Macro classes": 37,
-        "Macro tokens": 24,
+        "Macro tokens": 23,
         "Motion / animation": 15,
-        "Palette tokens": 142,
+        "Palette tokens": 106,
         "Print": 4,
-        "Sizes-extended tokens": 108,
+        "Sizes-extended tokens": 36,
         "State classes": 40,
         "Theme example": 1
       }
@@ -876,7 +876,7 @@
       ]
     },
     {
-      "name": "--sf-blur-l",
+      "name": "--sf-blur",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
@@ -884,124 +884,8 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "32px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-blur-m",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "blur",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "16px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-blur-s",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "blur",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "8px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-blur-xl",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "blur",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "48px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-blur-xs",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "blur",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "4px",
+      "description": "One frosted-surface default (nav/overlay glass) and one general de-emphasis opacity. For other amounts write the value directly: backdrop-filter: blur(24px); opacity: .3; (--sf-opacity-disabled is defined with the interaction tokens.)",
+      "value": "12px",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -1204,8 +1088,8 @@
       "area": "core",
       "group": "TYPOGRAPHY ALIASES",
       "description": "part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens.",
-      "value": "var(--sf-font-weight-bold)",
-      "aliasOf": "--sf-font-weight-bold",
+      "value": "var(--sf-font-weight-strong)",
+      "aliasOf": "--sf-font-weight-strong",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -1940,180 +1824,6 @@
       ]
     },
     {
-      "name": "--sf-col-rule-width-l",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "col",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "CSS multi-column",
-      "description": "tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size.",
-      "value": "var(--sf-border-width-3)",
-      "aliasOf": "--sf-border-width-3",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-col-rule-width-m",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "col",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "CSS multi-column",
-      "description": "tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size.",
-      "value": "var(--sf-border-width-2)",
-      "aliasOf": "--sf-border-width-2",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-col-rule-width-s",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "col",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "CSS multi-column",
-      "description": "tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size.",
-      "value": "var(--sf-border-width-1)",
-      "aliasOf": "--sf-border-width-1",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-col-width-l",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "col",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "CSS multi-column",
-      "description": "tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size.",
-      "value": "32ch",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-col-width-m",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "col",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "CSS multi-column",
-      "description": "tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size.",
-      "value": "24ch",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-col-width-s",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "col",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "CSS multi-column",
-      "description": "tokens for the `columns` layout property. column-width is ch-based (character units) so columns maintain a comfortable reading measure regardless of font-size.",
-      "value": "16ch",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action",
       "type": "token",
       "tier": "PUBLIC",
@@ -2537,34 +2247,6 @@
       ]
     },
     {
-      "name": "--sf-color-action-a20",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "action",
-      "description": "action",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.20)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action-a30",
       "type": "token",
       "tier": "PUBLIC",
@@ -2575,34 +2257,6 @@
       "group": "action",
       "description": "action",
       "value": "oklch(from var(--sf-color-action) l c h / 0.30)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-action-a40",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "action",
-      "description": "action",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -2677,62 +2331,6 @@
       ]
     },
     {
-      "name": "--sf-color-action-a60",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "action",
-      "description": "action",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.60)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-action-a70",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "action",
-      "description": "action",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.70)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action-a80",
       "type": "token",
       "tier": "PUBLIC",
@@ -2743,62 +2341,6 @@
       "group": "action",
       "description": "action",
       "value": "oklch(from var(--sf-color-action) l c h / 0.80)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-action-a90",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "action",
-      "description": "action",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.90)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-action-a95",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "action",
-      "description": "action",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3565,34 +3107,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-a20",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "base",
-      "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.20)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-a30",
       "type": "token",
       "tier": "PUBLIC",
@@ -3603,34 +3117,6 @@
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
       "value": "oklch(from var(--sf-color-base) l c h / 0.30)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-a40",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "base",
-      "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3705,62 +3191,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-a60",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "base",
-      "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.60)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-a70",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "base",
-      "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.70)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-a80",
       "type": "token",
       "tier": "PUBLIC",
@@ -3771,62 +3201,6 @@
       "group": "base",
       "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-a90",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "base",
-      "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.90)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-a95",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "base",
-      "description": "V-shaped ramp (inverted tint direction) Unlike every other family, base is a near-white (light mode) or near-black (dark mode) surface token, not a mid-lightness brand colour. There is nowhere \"lighter\" to go from near-white, so the tint direction is inverted: steps 50-400 mix…",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5898,34 +5272,6 @@
       ]
     },
     {
-      "name": "--sf-color-neutral-a20",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.20)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-neutral-a30",
       "type": "token",
       "tier": "PUBLIC",
@@ -5936,34 +5282,6 @@
       "group": "neutral",
       "description": "neutral",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-neutral-a40",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6038,62 +5356,6 @@
       ]
     },
     {
-      "name": "--sf-color-neutral-a60",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.60)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-neutral-a70",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.70)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-neutral-a80",
       "type": "token",
       "tier": "PUBLIC",
@@ -6104,62 +5366,6 @@
       "group": "neutral",
       "description": "neutral",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.80)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-neutral-a90",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.90)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-neutral-a95",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "neutral",
-      "description": "neutral",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -6955,34 +6161,6 @@
       ]
     },
     {
-      "name": "--sf-color-primary-a20",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "primary",
-      "description": "primary",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.20)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-primary-a30",
       "type": "token",
       "tier": "PUBLIC",
@@ -6993,34 +6171,6 @@
       "group": "primary",
       "description": "primary",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.30)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-primary-a40",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "primary",
-      "description": "primary",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7095,62 +6245,6 @@
       ]
     },
     {
-      "name": "--sf-color-primary-a60",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "primary",
-      "description": "primary",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.60)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-primary-a70",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "primary",
-      "description": "primary",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.70)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-primary-a80",
       "type": "token",
       "tier": "PUBLIC",
@@ -7161,62 +6255,6 @@
       "group": "primary",
       "description": "primary",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.80)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-primary-a90",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "primary",
-      "description": "primary",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.90)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-primary-a95",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "primary",
-      "description": "primary",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8041,34 +7079,6 @@
       ]
     },
     {
-      "name": "--sf-color-secondary-a20",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.20)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-secondary-a30",
       "type": "token",
       "tier": "PUBLIC",
@@ -8079,34 +7089,6 @@
       "group": "secondary",
       "description": "secondary",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-secondary-a40",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8181,62 +7163,6 @@
       ]
     },
     {
-      "name": "--sf-color-secondary-a60",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.60)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-secondary-a70",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.70)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-secondary-a80",
       "type": "token",
       "tier": "PUBLIC",
@@ -8247,62 +7173,6 @@
       "group": "secondary",
       "description": "secondary",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.80)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-secondary-a90",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.90)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-secondary-a95",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "secondary",
-      "description": "secondary",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9330,34 +8200,6 @@
       ]
     },
     {
-      "name": "--sf-color-tertiary-a20",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.20)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-tertiary-a30",
       "type": "token",
       "tier": "PUBLIC",
@@ -9368,34 +8210,6 @@
       "group": "tertiary",
       "description": "tertiary",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-tertiary-a40",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.40)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9470,62 +8284,6 @@
       ]
     },
     {
-      "name": "--sf-color-tertiary-a60",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.60)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-tertiary-a70",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.70)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-tertiary-a80",
       "type": "token",
       "tier": "PUBLIC",
@@ -9536,62 +8294,6 @@
       "group": "tertiary",
       "description": "tertiary",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.80)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-tertiary-a90",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.90)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.palette.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-tertiary-a95",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
-      "group": "tertiary",
-      "description": "tertiary",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.95)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -11567,7 +10269,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)",
       "aliasOf": null,
       "registered": false,
@@ -11596,7 +10298,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "linear(0, 0.3, 1.2, 0.9, 1.05, 1)",
       "aliasOf": null,
       "registered": false,
@@ -11625,7 +10327,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "cubic-bezier(0.5, 0, 0.75, 0.25)",
       "aliasOf": null,
       "registered": false,
@@ -11654,7 +10356,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "cubic-bezier(0.4, 0, 0.2, 1)",
       "aliasOf": null,
       "registered": false,
@@ -11683,7 +10385,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "linear",
       "aliasOf": null,
       "registered": false,
@@ -11712,7 +10414,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "cubic-bezier(0.25, 0, 0.15, 1)",
       "aliasOf": null,
       "registered": false,
@@ -11741,7 +10443,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)",
       "aliasOf": null,
       "registered": false,
@@ -11770,7 +10472,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Motion & easing",
-      "description": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
       "value": "linear(0, 0.5, 1.1, 0.95, 1.02, 1)",
       "aliasOf": null,
       "registered": false,
@@ -12120,267 +10822,6 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-1",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slot outputs — read these",
-      "value": "clamp(calc(var(--sf-fluid-custom-1-min) * 1rem), calc((var(--sf-fluid-custom-1-max) - var(--sf-fluid-custom-1-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-1-min) * 1rem), calc(var(--sf-fluid-custom-1-max) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-1-max",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slots — open endpoint pairs for ad-hoc fluid values. Set the two endpoints (unitless rem numbers), read the slot: :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; } .my-component { padding-inline: var(--sf-fluid-custom-1); } The slot resolves…",
-      "value": "2",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<number>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-1-min",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slots — open endpoint pairs for ad-hoc fluid values. Set the two endpoints (unitless rem numbers), read the slot: :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; } .my-component { padding-inline: var(--sf-fluid-custom-1); } The slot resolves…",
-      "value": "1",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<number>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-2",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slot outputs — read these",
-      "value": "clamp(calc(var(--sf-fluid-custom-2-min) * 1rem), calc((var(--sf-fluid-custom-2-max) - var(--sf-fluid-custom-2-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-2-min) * 1rem), calc(var(--sf-fluid-custom-2-max) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-2-max",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slots — open endpoint pairs for ad-hoc fluid values. Set the two endpoints (unitless rem numbers), read the slot: :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; } .my-component { padding-inline: var(--sf-fluid-custom-1); } The slot resolves…",
-      "value": "2",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<number>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-2-min",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slots — open endpoint pairs for ad-hoc fluid values. Set the two endpoints (unitless rem numbers), read the slot: :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; } .my-component { padding-inline: var(--sf-fluid-custom-1); } The slot resolves…",
-      "value": "1",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<number>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-3",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slot outputs — read these",
-      "value": "clamp(calc(var(--sf-fluid-custom-3-min) * 1rem), calc((var(--sf-fluid-custom-3-max) - var(--sf-fluid-custom-3-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-3-min) * 1rem), calc(var(--sf-fluid-custom-3-max) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-3-max",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slots — open endpoint pairs for ad-hoc fluid values. Set the two endpoints (unitless rem numbers), read the slot: :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; } .my-component { padding-inline: var(--sf-fluid-custom-1); } The slot resolves…",
-      "value": "2",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<number>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-fluid-custom-3-min",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "fluid",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "FLUID SCALE ENGINE",
-      "description": "Custom fluid slots — open endpoint pairs for ad-hoc fluid values. Set the two endpoints (unitless rem numbers), read the slot: :root { --sf-fluid-custom-1-min: 0.875; --sf-fluid-custom-1-max: 1.375; } .my-component { padding-inline: var(--sf-fluid-custom-1); } The slot resolves…",
-      "value": "1",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<number>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -12884,35 +11325,6 @@
       ]
     },
     {
-      "name": "--sf-font-weight-black",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "font",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Font weights",
-      "description": "Numeric scale",
-      "value": "900",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-font-weight-body",
       "type": "token",
       "tier": "PUBLIC",
@@ -12921,7 +11333,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Semantic aliases — reference the numeric scale",
+      "description": "Semantic role aliases — set intent, not a number. Override these to reweight the whole site (e.g. --sf-font-weight-body: 300).",
       "value": "var(--sf-font-weight-normal)",
       "aliasOf": "--sf-font-weight-normal",
       "registered": false,
@@ -12950,7 +11362,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Numeric scale",
+      "description": "Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable.",
       "value": "700",
       "aliasOf": null,
       "registered": false,
@@ -12979,67 +11391,9 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Semantic aliases — reference the numeric scale",
+      "description": "h1–h6",
       "value": "var(--sf-font-weight-bold)",
       "aliasOf": "--sf-font-weight-bold",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-font-weight-extrabold",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "font",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Font weights",
-      "description": "Numeric scale",
-      "value": "800",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-font-weight-extralight",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "font",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Font weights",
-      "description": "Numeric scale",
-      "value": "200",
-      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -13066,7 +11420,36 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Semantic aliases — reference the numeric scale",
+      "description": "body copy",
+      "value": "var(--sf-font-weight-semibold)",
+      "aliasOf": "--sf-font-weight-semibold",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-font-weight-interactive",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "font",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Font weights",
+      "description": "hero / display",
       "value": "var(--sf-font-weight-semibold)",
       "aliasOf": "--sf-font-weight-semibold",
       "registered": false,
@@ -13095,7 +11478,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Numeric scale",
+      "description": "Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable.",
       "value": "300",
       "aliasOf": null,
       "registered": false,
@@ -13124,7 +11507,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Numeric scale",
+      "description": "Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable.",
       "value": "500",
       "aliasOf": null,
       "registered": false,
@@ -13153,7 +11536,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Numeric scale",
+      "description": "Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable.",
       "value": "400",
       "aliasOf": null,
       "registered": false,
@@ -13182,7 +11565,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Numeric scale",
+      "description": "Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable.",
       "value": "600",
       "aliasOf": null,
       "registered": false,
@@ -13203,17 +11586,17 @@
       ]
     },
     {
-      "name": "--sf-font-weight-thin",
+      "name": "--sf-font-weight-strong",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "font",
       "category": "Core tokens",
       "area": "core",
       "group": "Font weights",
-      "description": "Numeric scale",
-      "value": "100",
-      "aliasOf": null,
+      "description": "buttons, badges, nav",
+      "value": "var(--sf-font-weight-bold)",
+      "aliasOf": "--sf-font-weight-bold",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -15784,180 +14167,6 @@
       ]
     },
     {
-      "name": "--sf-opacity-0",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "opacity",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "0",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-opacity-10",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "opacity",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "0.1",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-opacity-100",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "opacity",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "1",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-opacity-25",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "opacity",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "0.25",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-opacity-50",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "opacity",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "0.5",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-opacity-75",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "opacity",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Blur & opacity",
-      "description": "Blur & opacity",
-      "value": "0.75",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-opacity-disabled",
       "type": "token",
       "tier": "PUBLIC",
@@ -15968,6 +14177,35 @@
       "group": "Opacity",
       "description": "disabled and pending state effects",
       "value": "0.45",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-opacity-muted",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "opacity",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Blur & opacity",
+      "description": "One frosted-surface default (nav/overlay glass) and one general de-emphasis opacity. For other amounts write the value directly: backdrop-filter: blur(24px); opacity: .3; (--sf-opacity-disabled is defined with the interaction tokens.)",
+      "value": "0.5",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -18732,174 +16970,6 @@
       ]
     },
     {
-      "name": "--sf-space-2xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-2xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-2xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-2xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-2xl-to-xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-2xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-space-2xs",
       "type": "token",
       "tier": "PUBLIC",
@@ -18958,202 +17028,6 @@
       ]
     },
     {
-      "name": "--sf-space-3xl-to-2xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-3xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-3xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-3xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-3xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-3xl-to-xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-3xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-space-4xl",
       "type": "token",
       "tier": "PUBLIC",
@@ -19176,230 +17050,6 @@
       ],
       "bundles": [
         "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-2xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-3xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-4xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
         "full",
         "optimal",
         "optimal-components",
@@ -19581,118 +17231,6 @@
       ]
     },
     {
-      "name": "--sf-space-l-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-l-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-l-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-l-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-space-m",
       "type": "token",
       "tier": "PUBLIC",
@@ -19715,90 +17253,6 @@
       ],
       "bundles": [
         "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-m-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-m-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-m-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
         "full",
         "optimal",
         "optimal-components",
@@ -19951,62 +17405,6 @@
       ]
     },
     {
-      "name": "--sf-space-s-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-s-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-space-scale",
       "type": "token",
       "tier": "PUBLIC-ADVANCED",
@@ -20065,146 +17463,6 @@
       ]
     },
     {
-      "name": "--sf-space-xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-space-xs",
       "type": "token",
       "tier": "PUBLIC",
@@ -20227,34 +17485,6 @@
       ],
       "bundles": [
         "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-space-xs-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "space",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Spacing bridges",
-      "description": "Full descending matrix: --sf-space-{larger}-to-{smaller} Each token is a fluid clamp spanning from the larger step's max value down to the smaller step's min value. Respects --sf-space-scale like all fluid spacing tokens.",
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
         "full",
         "optimal",
         "optimal-components",
@@ -20389,122 +17619,6 @@
       "description": "Header height fluidly interpolates between the mobile and desktop tokens across the framework viewport range (--sf-fluid-{min,max}-vw), the same range used by the fluid type/space scales. Override either endpoint to retune; set both equal for a fixed height. clamp() keeps the…",
       "value": "var(--sf-header-height-mobile)",
       "aliasOf": "--sf-header-height-mobile",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-stroke-bold",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "stroke",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Stroke widths",
-      "description": "Stroke widths",
-      "value": "2px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-stroke-heavy",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "stroke",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Stroke widths",
-      "description": "Stroke widths",
-      "value": "3px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-stroke-regular",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "stroke",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Stroke widths",
-      "description": "Stroke widths",
-      "value": "1.5px",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-stroke-thin",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "stroke",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Stroke widths",
-      "description": "Stroke widths",
-      "value": "1px",
-      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -20733,174 +17847,6 @@
       "group": "Per-text-size sub-properties",
       "description": "Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your…",
       "value": "none",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-2xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-2xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-2xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-2xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-2xl-to-xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-2xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -21201,202 +18147,6 @@
       ]
     },
     {
-      "name": "--sf-text-3xl-to-2xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-3xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-3xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-3xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-3xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-3xl-to-xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-3xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-text-4xl",
       "type": "token",
       "tier": "PUBLIC",
@@ -21520,230 +18270,6 @@
       "group": "Per-text-size sub-properties",
       "description": "Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your…",
       "value": "none",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-2xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-3xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-xl",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-4xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -22135,118 +18661,6 @@
       ]
     },
     {
-      "name": "--sf-text-l-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-l-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-l-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-l-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-text-m",
       "type": "token",
       "tier": "PUBLIC",
@@ -22370,90 +18784,6 @@
       "group": "Per-text-size sub-properties",
       "description": "Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your…",
       "value": "65ch",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-m-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-m-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-m-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * 1rem))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -22653,62 +18983,6 @@
       "group": "Per-text-size sub-properties",
       "description": "Override knobs for each body text size step. Defaults encode standard typographic conventions; override any value globally here or locally via CSS custom property on a scoped element. These tokens are NOT auto-applied — they are opt-in composable overrides. Wire them up in your…",
       "value": "65ch",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-s-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-s-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -23013,146 +19287,6 @@
       ]
     },
     {
-      "name": "--sf-text-xl-to-2xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-xl-to-l",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-xl-to-m",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-xl-to-s",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-text-xl-to-xs",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-text-xs",
       "type": "token",
       "tier": "PUBLIC",
@@ -23294,27 +19428,28 @@
       ]
     },
     {
-      "name": "--sf-text-xs-to-2xs",
+      "name": "--sf-theme-transition-duration",
       "type": "token",
-      "tier": "PUBLIC-ADVANCED",
+      "tier": "PUBLIC",
       "role": "consumption",
-      "namespace": "text",
-      "category": "Sizes-extended tokens",
-      "area": "sizes",
-      "group": "Text bridges",
-      "description": "Full descending matrix: --sf-text-{larger}-to-{smaller} No --sf-text-scale multiplier — consistent with how the base text tokens are consumed by the text-bridge contract.",
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem))",
+      "namespace": "theme",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Motion & easing",
+      "description": "Opt-in light/dark cross-fade duration — the knob for .sf-theme-transition (core/themes.css). Registered <color> tokens make the fade possible; this controls how long it takes.",
+      "value": "calc(300ms * var(--sf-motion-scale))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.sizes-extended.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -23786,35 +19921,6 @@
       ]
     },
     {
-      "name": "--sf-truncate-suffix",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "truncate",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Truncate",
-      "description": "ellipsis character for .sf-truncate. Stays as a token so consumers can swap to ASCII \"...\" or a localised character without rewriting the rule. The CSS text-overflow: ellipsis property doesn't read it directly; it's exposed for consumer-built variants.",
-      "value": "\"\\2026\"",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-z-base",
       "type": "token",
       "tier": "PUBLIC",
@@ -23823,7 +19929,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Z-index",
+      "description": "Semantic z-index ladder — UI roles, not magic integers. Follows the Bootstrap/Chakra convention (1000-base, ordered by stacking role) so the names are familiar and the gaps leave room to insert custom layers. Low-level rungs (below/base/raised) handle local stacking; the named…",
       "value": "0",
       "aliasOf": null,
       "registered": false,
@@ -23852,7 +19958,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Z-index",
+      "description": "Semantic z-index ladder — UI roles, not magic integers. Follows the Bootstrap/Chakra convention (1000-base, ordered by stacking role) so the names are familiar and the gaps leave room to insert custom layers. Low-level rungs (below/base/raised) handle local stacking; the named…",
       "value": "-1",
       "aliasOf": null,
       "registered": false,
@@ -23876,14 +19982,14 @@
       "name": "--sf-z-dropdown",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "z",
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "100 fixed app chrome (navbar, FAB)",
-      "value": "var(--sf-z-high)",
-      "aliasOf": "--sf-z-high",
+      "description": "fixed app chrome (navbar, FAB)",
+      "value": "1020",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -23905,42 +20011,13 @@
       "name": "--sf-z-fixed",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "z",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Z-index",
-      "description": "10 sticky headers / sidebars",
-      "value": "var(--sf-z-mid)",
-      "aliasOf": "--sf-z-mid",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-z-high",
-      "type": "token",
-      "tier": "PUBLIC",
       "role": "knob",
       "namespace": "z",
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Z-index",
-      "value": "500",
+      "description": "sticky headers / sidebars",
+      "value": "1010",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -23960,7 +20037,7 @@
       ]
     },
     {
-      "name": "--sf-z-low",
+      "name": "--sf-z-modal",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
@@ -23968,66 +20045,8 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Z-index",
-      "value": "10",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-z-max",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "z",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Z-index",
-      "description": "Z-index",
-      "value": "9999",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-z-mid",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "z",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Z-index",
-      "description": "Z-index",
-      "value": "100",
+      "description": "scrims / non-top-layer backdrops",
+      "value": "1040",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -24050,14 +20069,14 @@
       "name": "--sf-z-overlay",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "z",
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "900 transient notifications",
-      "value": "var(--sf-z-max)",
-      "aliasOf": "--sf-z-max",
+      "description": "menus — clear sticky + fixed",
+      "value": "1030",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -24084,7 +20103,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Z-index",
+      "description": "Semantic z-index ladder — UI roles, not magic integers. Follows the Bootstrap/Chakra convention (1000-base, ordered by stacking role) so the names are familiar and the gaps leave room to insert custom layers. Low-level rungs (below/base/raised) handle local stacking; the named…",
       "value": "1",
       "aliasOf": null,
       "registered": false,
@@ -24108,14 +20127,14 @@
       "name": "--sf-z-sticky",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "z",
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Semantic z-index aliases — map UI roles onto the numeric ladder above so component authors target intent, not magic integers. Every role that can overlap another on the scroll plane gets its OWN rung, ordered: raised < sticky < fixed < dropdown < toast. Notably --sf-z-dropdown…",
-      "value": "var(--sf-z-low)",
-      "aliasOf": "--sf-z-low",
+      "description": "Semantic z-index ladder — UI roles, not magic integers. Follows the Bootstrap/Chakra convention (1000-base, ordered by stacking role) so the names are familiar and the gaps leave room to insert custom layers. Low-level rungs (below/base/raised) handle local stacking; the named…",
+      "value": "1000",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -24137,14 +20156,14 @@
       "name": "--sf-z-toast",
       "type": "token",
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "z",
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "500 menus — clear sticky + fixed",
-      "value": "var(--sf-z-top)",
-      "aliasOf": "--sf-z-top",
+      "description": "dialogs (non-top-layer fallback)",
+      "value": "1050",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -24163,7 +20182,7 @@
       ]
     },
     {
-      "name": "--sf-z-top",
+      "name": "--sf-z-tooltip",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
@@ -24171,8 +20190,8 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Z-index",
-      "description": "Z-index",
-      "value": "900",
+      "description": "transient notifications",
+      "value": "1060",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -24617,7 +20636,7 @@
       "category": "State classes",
       "area": "states",
       "group": "POSITION / STICKINESS",
-      "description": "Intentionally bare — position only. Consumers must supply placement (inset, inset-block-start, etc.) and z-index via a modifier or inline style. Example: <div class=\"is-fixed\" style=\"inset: 0; z-index: var(--sf-z-max)\">",
+      "description": "Intentionally bare — position only. Consumers must supply placement (inset, inset-block-start, etc.) and z-index via a modifier or inline style. Example: <div class=\"is-fixed\" style=\"inset: 0; z-index: var(--sf-z-overlay)\">",
       "isVariant": false,
       "baseClass": null,
       "optional": false,

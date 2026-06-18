@@ -138,11 +138,7 @@
   @media (prefers-reduced-data: reduce) {
     :root {
       --sf-shadow-strength: 0;
-      --sf-blur-xs: 0px;
-      --sf-blur-s:  0px;
-      --sf-blur-m:  0px;
-      --sf-blur-l:  0px;
-      --sf-blur-xl: 0px;
+      --sf-blur: 0px;
     }
   }
 
@@ -208,7 +204,7 @@
     position:          absolute;
     inset-block-start: -100%;
     inset-inline-start: var(--sf-space-m);
-    z-index:           var(--sf-z-max);
+    z-index:           var(--sf-z-tooltip);
     padding:           var(--sf-space-s) var(--sf-space-m);
     background:        var(--sf-color-bg);
     color:             var(--sf-color-text);

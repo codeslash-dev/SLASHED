@@ -136,15 +136,11 @@ function measure({ theme, tokenNames }) {
     return Number(w);
   };
   const weights = {
-    thin: weight('--sf-font-weight-thin'),
-    extralight: weight('--sf-font-weight-extralight'),
     light: weight('--sf-font-weight-light'),
     normal: weight('--sf-font-weight-normal'),
     medium: weight('--sf-font-weight-medium'),
     semibold: weight('--sf-font-weight-semibold'),
     bold: weight('--sf-font-weight-bold'),
-    extrabold: weight('--sf-font-weight-extrabold'),
-    black: weight('--sf-font-weight-black'),
   };
 
   // Animation preset tokens.
@@ -216,10 +212,9 @@ for (const theme of ['light', 'dark']) {
       }
     });
 
-    test('font-weight scale resolves 100…900', () => {
+    test('font-weight scale resolves 300…700', () => {
       expect(data.weights).toEqual({
-        thin: 100, extralight: 200, light: 300, normal: 400, medium: 500,
-        semibold: 600, bold: 700, extrabold: 800, black: 900,
+        light: 300, normal: 400, medium: 500, semibold: 600, bold: 700,
       });
     });
 

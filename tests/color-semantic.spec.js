@@ -219,7 +219,7 @@ test.describe('Palette scale — primary', () => {
 
 // ── Alpha palette variants ───────────────────────────────────────
 test.describe('Palette alpha variants', () => {
-  test('--sf-color-primary-a5 is more transparent than --sf-color-primary-a95', async ({ page }) => {
+  test('--sf-color-primary-a5 is more transparent than --sf-color-primary-a80', async ({ page }) => {
     await page.goto(FIXTURE);
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
 
@@ -238,9 +238,9 @@ test.describe('Palette alpha variants', () => {
         ctx.fillRect(0, 0, 1, 1);
         return ctx.getImageData(0, 0, 1, 1).data[3]; // 0–255
       };
-      return { a5: getAlpha('--sf-color-primary-a5'), a95: getAlpha('--sf-color-primary-a95') };
+      return { a5: getAlpha('--sf-color-primary-a5'), a80: getAlpha('--sf-color-primary-a80') };
     });
-    expect(alphas.a5).toBeLessThan(alphas.a95);
+    expect(alphas.a5).toBeLessThan(alphas.a80);
   });
 });
 
