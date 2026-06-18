@@ -13,7 +13,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 |---|---|---|
 | `.sf-section` | vertical page rhythm; sizes `--xs/--s/--m/--l/--xl/--2xl` | `--sf-section-pad*` |
 | `.sf-section-group` | collapses the gap between adjacent sections | — |
-| `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-space-gutter` |
+| `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-gutter-width` |
 | `.sf-box` | isolated unit with padding and optional border outline | `--sf-box-padding`, `--sf-box-border-width`, `--sf-box-border-color` |
 | `.sf-center` | intrinsic centering with max-width and gutters; `--intrinsic` | `--sf-center-max`, `--sf-center-gutter` |
 | `.sf-stack` | vertical flow with consistent gap (the "owl") | `--sf-stack-gap` |

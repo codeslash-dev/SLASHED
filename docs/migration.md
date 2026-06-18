@@ -78,10 +78,10 @@ live exclusively in `optional/tokens.palette.css` (shipped in the
 the `essential` bundle, you must switch to the `optimal` bundle or
 declare your own hover colour.
 
-> **See also:** The [0.4.x → current](#slashed-04x--current-pre-freeze-cleanup) section
+> **See also:** The [0.4.x → 0.5.x](#slashed-04x--05x) section
 > documents a further rename: `-hover` → `--hover` (single-dash back to
 > double-dash, now with BEM semantics). Migrating from 0.3.x directly to
-> current: `--sf-color-{family}--hover` is the final canonical name.
+> 0.6.0: `--sf-color-{family}--hover` is the final canonical name.
 
 ### Class modifiers removed
 
@@ -115,10 +115,9 @@ The component CSS isn't active yet (commented out), so no runtime breakage.
 
 ---
 
-## SLASHED 0.4.x → current (pre-freeze cleanup)
+## SLASHED 0.4.x → 0.5.x
 
-Ahead of the token-API freeze, the unreleased line completes the pre-freeze
-cleanup. Consumer-visible changes: two source-token **renames**, one removal,
+Pre-1.0 cleanup ahead of the API freeze. Consumer-visible changes: two source-token **renames**, one removal,
 two brand-colour token renames (hover/active separator), and two layout-class
 renames — there are no other renamed tokens; everything else is additive.
 
@@ -162,7 +161,52 @@ the page surface, rename those overrides to `--sf-color-base-light` / `-dark`.
   (`--sf-border`, `-subtle`, `-strong`), object-fit/position and multi-column
   tokens.
 
-See [`CHANGELOG.md`](../CHANGELOG.md) for the full list under *Unreleased*.
+---
+
+## SLASHED 0.5.x → 0.6.0
+
+No breaking changes. All changes are additive or internal.
+
+### Tokens moved to core (now available in essential bundle)
+
+The brand semantic alpha tokens — `ghost`, `subtle`, and `muted` — were previously
+declared in `optional/tokens.palette.css` and only available in the `optimal`+
+bundles. In 0.6.0 they live in `core/tokens.css` and ship in every bundle:
+
+| Family | Tokens now in core |
+|---|---|
+| primary, secondary, tertiary | `--sf-color-{family}-ghost` / `-subtle` / `-muted` |
+| action, neutral, base | `--sf-color-{family}-ghost` / `-subtle` / `-muted` |
+
+No markup or CSS changes are required — the token names are unchanged.
+If you were on the `essential` bundle and used these tokens via a `<link>` to
+`optional/tokens.palette.css`, you can remove that extra link; they're now in core.
+
+### New token
+
+| Token | Default | Notes |
+|---|---|---|
+| `--sf-gutter-width` | `var(--sf-space-l)` | Canonical source for container gutters. `--sf-space-gutter` is now an alias of this token; both names resolve identically. |
+
+### Color syntax change (internal, no consumer impact)
+
+Alpha transparency for the brand ghost/subtle/muted tokens now uses
+`oklch(from var(--sf-color-X) l c h / α)` instead of
+`color-mix(in oklab, var(--sf-color-X) N%, transparent)`. The computed colours
+are equivalent; the change improves color-space fidelity and allows these tokens
+to live in core without depending on the optional palette file.
+
+The numeric alpha scale (`-a5` … `-a95`) in `optional/tokens.palette.css` is now
+gated behind `@supports (color: oklch(from red l c h))`. Browsers below the
+framework floor do not load these tokens.
+
+### Bug fixes
+
+| Fixed | Details |
+|---|---|
+| `--sf-color-text--muted` | Now uses a contrast-aware formula (clamped neutral lightness) instead of a plain neutral reference. |
+| `--sf-color-text--on-inverse` | Now correctly derives from `--sf-color-inverse` rather than the text inverse alias. |
+| `--sf-focus-ring-shadow` | Now includes a `var(--sf-color-bg, …)` fallback for contexts where `--sf-color-bg` is not set. |
 
 ---
 

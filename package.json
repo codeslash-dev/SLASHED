@@ -1,7 +1,7 @@
 {
   "name": "slashed",
   "type": "module",
-  "version": "0.5.47",
+  "version": "0.6.0",
   "engines": {
     "node": ">=20.11.0"
   },
@@ -71,5 +71,8 @@
   },
   "optionalDependencies": {
     "lightningcss": "^1.32.0"
+  },
+  "overrides": {
+    "undici": ">=7.28.0"
   }
 }

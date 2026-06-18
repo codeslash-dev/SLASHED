@@ -1,11 +1,11 @@
 # SLASHED — Roadmap
 
-Current version: **0.5.47**
+Current version: **0.6.0**
 
 ## Before v1.0
 
-*All pre-v1.0 items are complete as of v0.5.42. The API is frozen for
-non-additive changes; v0.6.x will focus on the components layer.*
+*All pre-v1.0 items are complete as of v0.6.0. The API is frozen for
+non-additive changes; the v0.6.x series focuses on the components layer.*
 
 ## Post-1.0
 
