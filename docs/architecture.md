@@ -47,7 +47,7 @@ core/
   accessibility.css            slashed.accessibility
   print.css                    slashed.print
 optional/
-  tokens.palette.css      slashed.tokens  (tints/shades/alpha for brand colors; ships in optimal+ bundles)
+  tokens.palette.css      slashed.tokens  (numeric tints/shades + alpha scale (-a5 … -a95) for brand colors; ships in optimal+ bundles)
   tokens.sizes-extended.css slashed.tokens  (space/text bridge tokens + per-size sub-props; ships in optimal+ bundles)
   tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
@@ -140,7 +140,7 @@ Two conceptually-macro classes stay in `layout.css` in 0.x for compatibility:
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional tints/shades), `tokens.sizes-extended.css` (optional space/text bridges + per-size sub-properties), `tokens.components.css` (optional component-level tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/alpha tokens including ghost/subtle/muted), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional numeric tints/shades + alpha scale for brand colors), `tokens.sizes-extended.css` (optional space/text bridges + per-size sub-properties), `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -202,8 +202,8 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 ## Tokens
 
-- Colors: `oklch()` with relative color syntax for derived values; `color-mix(in oklab)` for tints/shades in palette
-- `@property` registration for brand & status colors (enables animation and `initial` reset)
+- Colors: `oklch()` with relative color syntax for derived values; `oklch(from …)` for semantic alpha variants (ghost/subtle/muted) in core; `color-mix(in oklab)` for numeric tints/shades in the optional palette; the optional palette's numeric alpha scale (-a5 … -a95) is gated behind `@supports (color: oklch(from red l c h))`
+- `@property` registration for 22 source colours (11 `-light` + 11 `-dark`, brand + status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals
@@ -241,8 +241,8 @@ utility classes in 0.x; the layer slot is reserved for the future.
   both index docs.
 - **Canonical-source aliases.** A few public tokens have two names by design —
   `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
-  `--sf-section-pad`→`--sf-section-pad--m`. Override the canonical (right-hand)
-  token. Aside from these, the alias graph traverses at most 3 nodes
+  `--sf-section-pad`→`--sf-section-pad--m`, `--sf-gutter-width`→`--sf-space-gutter`.
+  Override the canonical (left-hand) token. Aside from these, the alias graph traverses at most 3 nodes
   (per-primitive → layout-system → canonical source, i.e. ≤2 indirections)
   with no duplicates/dangling/cycles.
 
@@ -402,7 +402,7 @@ Plain CSS, no runtime. The notable costs:
   `--sf-color-primary-light`) re-derives everything downstream each frame — fine
   for a small accent, not for a token hundreds of elements read. A theme toggle
   re-resolves the graph once (negligible).
-- **`@property` registration** (11 colours + `--sf-is-dark`) is a one-time parse
+- **`@property` registration** (22 colours + 5 state flags) is a one-time parse
   cost; immaterial.
 - **`@layer`** has no runtime cost — resolved at parse time. Low-specificity
   selectors keep style recalc fast.

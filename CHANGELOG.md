@@ -4,6 +4,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.0] - 2026-06-18
+
+### Features
+
+- **tokens:** brand ghost/subtle/muted tokens (`--sf-color-{primary,secondary,tertiary,action,neutral,base}-{ghost,subtle,muted}`) moved from `optional/tokens.palette.css` to `core/tokens.css` — now available in the essential bundle, no longer requiring the optional palette file
+- **tokens:** add `--sf-gutter-width` token as canonical source for container gutters; `--sf-space-gutter` is now an alias
+
+### Bug Fixes
+
+- **tokens:** `--sf-color-text--muted` now uses a contrast-aware neutral-lightness formula instead of a plain neutral reference
+- **tokens:** `--sf-color-text--on-inverse` now correctly references `--sf-color-inverse` (was `--sf-color-text--inverse`)
+- **tokens:** add `var(--sf-color-bg, …)` fallback to `--sf-focus-ring-shadow` for contexts where `--sf-color-bg` is unset
+- **forms:** scope button default styles to `:not([class*="sf-"])` to avoid overriding Slashed UI component classes
+
+### Changed
+
+- **tokens:** alpha transparency for brand ghost/subtle/muted tokens now uses `oklch(from …)` syntax instead of `color-mix(…, transparent)` — equivalent output, better color-space fidelity
+- **optional/tokens.palette.css:** numeric alpha scale (`-a5` … `-a95`) is now gated behind `@supports (color: oklch(from red l c h))`; older engines receive no alpha tokens instead of invalid values
+
 ## [0.5.47] - 2026-06-18
 
 ### Bug Fixes
