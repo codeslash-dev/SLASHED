@@ -30,6 +30,8 @@
 
 @layer slashed.print {
 
+  /* ── Print visibility utilities ──────────────────────────────── */
+
   /* Screen default: print-only content is hidden until the page is printed. */
   .print-only {
     display: none;

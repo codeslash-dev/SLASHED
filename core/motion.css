@@ -41,6 +41,8 @@
       }
     }
 
+    /* ── Animation presets ──────────────────────────────────────── */
+
     /* Animation presets — opt-in classes. Scoped to no-preference so
        reduced-motion users never trigger them (accessibility.css also
        neutralises animation-duration as a hard guarantee). These are
@@ -55,6 +57,8 @@
     .sf-slide-in-right { animation: var(--sf-animation-slide-in-right); }
     .sf-scale-up       { animation: var(--sf-animation-scale-up); }
     .sf-scale-down     { animation: var(--sf-animation-scale-down); }
+
+    /* ── Scroll-driven entrances ─────────────────────────────────── */
 
     /* Scroll-driven entrance effects — element animates into view
        as it enters the viewport. Uses CSS scroll-driven animations
@@ -139,6 +143,8 @@
   @keyframes sf-ping  { 75%, 100% { scale: 2; opacity: 0; } }
   @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
   @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
+
+  /* ── @property color animation ───────────────────────────────── */
 
   /* @property color interpolation — animates --sf-color-primary-light smoothly
      because it is registered with syntax:"<color>" (see @property in tokens.css).
