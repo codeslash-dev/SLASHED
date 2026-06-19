@@ -571,20 +571,12 @@
      `background-clip: text` and `color: transparent` are required
      together — without clipping, transparent text is invisible.
 
-     WebKit only added the standard, unprefixed `background-clip: text`
-     in Safari 18; the framework floor is Safari 17.5, where the value
-     is recognised ONLY through `-webkit-background-clip`. The prefixed
-     declaration is therefore required, or gradient headings render as
-     invisible (transparent fill, unclipped background) on Safari
-     17.5–17.x. The unprefixed property is listed last so Chrome 125+,
-     Firefox 128+ and Safari 18+ use the standard form, while Safari
-     17.5–17.x fall back to the prefixed one (last valid wins per
-     browser). Firefox has never needed the prefix.
+     `background-clip: text` (unprefixed) is supported at the framework
+     floor (Safari 18.0+, Chrome 125+, Firefox 129+). The -webkit- prefix
+     is no longer required.
      ---------------------------------------------------------- */
   .sf-text-gradient {
     background-image: var(--sf-gradient-primary);
-    /* stylelint-disable-next-line property-no-vendor-prefix -- Safari <18 only supports background-clip:text via the -webkit- prefix; floor is Safari 17.5 */
-    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }

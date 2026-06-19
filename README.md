@@ -171,10 +171,11 @@ all-dials-in-one-file reference
 
 ## Browser support
 
-**Floor: Chrome 125+, Safari 17.5+, Firefox 128+** (≈ April–July 2024). Set by
-colour-system and fluid-engine features that arrived in 2024 with no graceful
-fallback — below the floor, derived colours collapse to `initial` and the
-generative scales stop computing.
+**Floor: Chrome 125+, Safari 18.0+, Firefox 129+** (≈ April–September 2024). Set by
+colour-system, fluid-engine, and scroll-driven animation features that arrived
+in 2024 with no graceful fallback — below the floor, derived colours collapse
+to `initial`, the generative scales stop computing, and scroll-driven animations
+are unavailable.
 
 | Feature | Used for | Chrome | Safari | Firefox |
 |---|---|---|---|---|
@@ -182,6 +183,8 @@ generative scales stop computing.
 | `@property` with `inherits: true` | animatable brand/status colours, `initial` reset | 85 | 16.4 | 128 |
 | `oklch(from …)` relative colour | hover/tint/shade/dark derivation | 119 | 16.4 | 128 |
 | `pow()` math function | generative fluid type/space scales (ratio + viewport) | 125 | 15.4 | 118 |
+| `animation-timeline: view()` | scroll-driven animations | 115 | 18.0 | 114 |
+| `@starting-style` | dialog / modal entry animations | 117 | 17.5 | 129 |
 
 The effective floor is the maximum per engine. Cascade layers (`@layer`) are
 foundational — below cascade-layer support (~2022) the architecture collapses.

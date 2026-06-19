@@ -7,10 +7,11 @@
 
    IMPORTANT — what this file is NOT
    ─────────────────────────────────
-   The framework's real support floor is Chrome 125+, Safari 17.5+,
-   Firefox 128+ (April–July 2024). That floor is set by the colour
-   system: light-dark(), @property with inherits, and the oklch()
-   relative-color form. This file does NOT extend the floor below @layer support.
+   The framework's real support floor is Chrome 125+, Safari 18.0+,
+   Firefox 129+ (April–September 2024). That floor is set by the colour
+   system (light-dark(), @property with inherits, oklch() relative-color),
+   scroll-driven animations (animation-timeline: view()), and @starting-style.
+   This file does NOT extend the floor below @layer support.
 
    What this file IS
    ─────────────────
