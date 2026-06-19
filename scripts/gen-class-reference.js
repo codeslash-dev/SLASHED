@@ -19,6 +19,7 @@ const FILE_META = {
   'core/accessibility.css': { title: 'Accessibility',         prefix: 'sf-' },
   'core/motion.css':        { title: 'Motion / entrances',    prefix: 'sf-' },
   'core/print.css':         { title: 'Print utilities',       prefix: ''    },
+  'core/themes.css':        { title: 'Theme utilities',       prefix: 'sf-' },
   'optional/forms.css':     { title: 'Forms',                 prefix: 'sf-' },
   'optional/components.css':{ title: 'Components',            prefix: 'sf-' },
   'optional/theme-example.css': { title: 'Theme example',     prefix: ''    },
