@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.2] - 2026-06-19
+
+### Bug Fixes
+- **configurator:** prioritize group description annotations over source descriptions
+- **docs:** correct sf-bento--compact annotation to row height not gap
+- **docs:** add core/themes.css to gen-class-reference and regenerate
+- **docs:** correct token descriptions in generated API index
+
 ## [0.6.1] - 2026-06-19
 
 ### Breaking Changes
