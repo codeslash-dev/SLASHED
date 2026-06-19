@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.3] - 2026-06-19
+
+### Bug Fixes
+- **ci:** ensure both downstream dispatches run even if one fails
+- **ci:** always dispatch configurator deploy on release
+
 ## [0.6.2] - 2026-06-19
 
 ### Bug Fixes
