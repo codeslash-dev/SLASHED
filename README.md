@@ -155,8 +155,9 @@ regenerates — no build:
 }
 ```
 
-Three `--sf-fluid-custom-{1..3}` slots provide ad-hoc fluid values from a pair
-of endpoints. See [docs/theming.md](docs/theming.md#fluid-engine) and the
+For a one-off fluid value, write a `clamp()` that reads the engine's viewport
+range so it recalibrates with the scale. See
+[docs/theming.md](docs/theming.md#fluid-engine) and the
 all-dials-in-one-file reference
 [`optional/config-example.css`](optional/config-example.css).
 

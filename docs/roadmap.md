@@ -25,10 +25,9 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   granular `core/`/`optional/` files (`core/layers.css` first); needs docs, not
   code.
 - **Native CSS custom functions (`@function`)** — an `optional/functions.css`
-  module exposing a true `--fluid(min, max)` (and friends) as a progressive
-  enhancement over the custom fluid slots, once cross-engine support for
-  `@function` exists. Until then the slot tokens + the documented `clamp()`
-  recipe cover the use case without a build step.
+  module exposing a true `--fluid(min, max)` (and friends), once cross-engine
+  support for `@function` exists. Until then the documented `clamp()` recipe
+  covers ad-hoc fluid values without a build step.
 
 ## Out of scope
 
