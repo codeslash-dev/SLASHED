@@ -50,6 +50,7 @@ families they do. See `docs/migration.md` for the upgrade guide.
 - **tokens:** removed rare font-weights `--sf-font-weight-{thin,extralight,extrabold,black}`. Kept `light/normal/medium/semibold/bold`; for an off-scale weight write `font-weight: 100` or override a role token. **`--sf-body-strong-weight` now references `--sf-font-weight-strong`.**
 - **tokens:** removed the z-index numeric ladder `--sf-z-{low,mid,high,top,max}`. Use the semantic roles `--sf-z-{sticky,fixed,dropdown,overlay,modal,toast,tooltip}` (values shifted to the 1000-base Bootstrap/Chakra convention).
 - **tokens:** flattened the gap aliases. Removed the middle "layout" tier `--sf-space-gap`, `--sf-space-content`, `--sf-space-gutter`, `--sf-gap-size`, and folded the container gutter into a single `--sf-gutter` (no separate `--sf-gutter-width`/`--sf-space-gutter`). Layout primitives now default straight to the semantic `--sf-gap` / `--sf-content-gap` / `--sf-gutter`. To retune all primitives at once, override the semantic token (e.g. `--sf-gap`); per-primitive knobs (`--sf-cluster-gap`, …) are unchanged.
+- **tokens:** removed the `--sf-color-text--on-surface` compat alias — use `--sf-color-text--on-base`. SLASHED is pre-1.0 and retains no backward-compat aliases.
 
 ## [0.5.47] - 2026-06-18
 

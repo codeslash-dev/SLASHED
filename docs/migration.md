@@ -25,6 +25,7 @@ no changes are needed.
 | `--sf-truncate-suffix` | (was never read) — `.sf-truncate` uses `text-overflow: ellipsis` |
 | `--sf-font-weight-{thin,extralight,extrabold,black}` | `font-weight: 100/200/800/900` inline, or override a role token |
 | `--sf-z-{low,mid,high,top,max}` | Semantic roles below |
+| `--sf-color-text--on-surface` | `--sf-color-text--on-base` (was a pre-1.0 compat alias; none are retained) |
 
 ### Renamed / re-pointed
 
@@ -200,7 +201,7 @@ renames — there are no other renamed tokens; everything else is additive.
 
 | Was | Now | Notes |
 |---|---|---|
-| `--sf-color-surface-light` / `-dark` | `--sf-color-base-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base` but **keeps a compat alias**, so the old name still resolves. |
+| `--sf-color-surface-light` / `-dark` | `--sf-color-base-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base`; the compat alias was dropped in 0.6.0 (see the 0.5→0.6 section). |
 | `--sf-color-well` | `--sf-color-inset` | Renamed to communicate the recessed / indented surface role. `--sf-color-well` is removed (no alias). |
 | `--sf-color-{family}-hover` | `--sf-color-{family}--hover` | Separator changed from single-dash to double-dash for BEM state-modifier compliance. Applies to all 6 brand families: `primary`, `secondary`, `tertiary`, `action`, `neutral`, `base`. Available in `optional/tokens.palette.css`. No back-compat alias. |
 | `--sf-color-{family}-active` | `--sf-color-{family}--active` | Same BEM separator fix as `-hover` above. Same 6 families. No back-compat alias. |
