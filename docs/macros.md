@@ -71,7 +71,7 @@ Tokens:
 
 | Token | Default | What it controls |
 |---|---|---|
-| `--sf-flow-space` | `var(--sf-space-content)` | distance between consecutive children |
+| `--sf-flow-space` | `var(--sf-content-gap)` | distance between consecutive children |
 
 Override per element: `style="--sf-flow-space: 2rem"`.
 

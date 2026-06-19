@@ -196,7 +196,7 @@
 
     /* --- Spacing (fluid clamp * scale) ---
     --sf-space-scale: 1;
-    --sf-space-gutter: var(--sf-space-l);
+    --sf-gutter: var(--sf-space-l);
     */
 
     /* --- Radii ---

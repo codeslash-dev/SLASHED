@@ -24,7 +24,7 @@
        Flow — distance between flow children (lobotomized owl).
        Consumed by .sf-flow > * + *.
        ---------------------------------------------------------- */
-    --sf-flow-space: var(--sf-space-content);
+    --sf-flow-space: var(--sf-content-gap);
 
     /* ----------------------------------------------------------
        Line clamp — default line count for .sf-line-clamp-N.

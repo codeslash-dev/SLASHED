@@ -10,15 +10,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 698,
+      "tokens": 694,
       "by_tier": {
-        "PUBLIC": 642,
+        "PUBLIC": 638,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 222,
-        "consumption": 476
+        "consumption": 472
       }
     }
   },
@@ -29,7 +29,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-alternate-inner-gap": {
       "tier": "PUBLIC",
@@ -37,7 +37,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-animation-blink": {
       "tier": "PUBLIC",
@@ -213,7 +213,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-bento-row-compact": {
       "tier": "PUBLIC",
@@ -461,7 +461,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gutter)"
+      "value": "var(--sf-gutter)"
     },
     "--sf-center-max": {
       "tier": "PUBLIC",
@@ -485,7 +485,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-cluster-justify": {
       "tier": "PUBLIC",
@@ -2953,7 +2953,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-equal-min-col": {
       "tier": "PUBLIC",
@@ -3041,7 +3041,7 @@
       "files": [
         "core/tokens.macros.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-fluid-max-vw": {
       "tier": "PUBLIC-ADVANCED",
@@ -3275,14 +3275,6 @@
       ],
       "value": "var(--sf-space-m)"
     },
-    "--sf-gap-size": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-space-gap)"
-    },
     "--sf-gradient-brand": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3361,7 +3353,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-grid-min": {
       "tier": "PUBLIC",
@@ -3419,7 +3411,7 @@
       ],
       "value": "10rem"
     },
-    "--sf-gutter-width": {
+    "--sf-gutter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
@@ -4193,7 +4185,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-prose-table-pad": {
       "tier": "PUBLIC",
@@ -4377,7 +4369,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-reel-height": {
       "tier": "PUBLIC",
@@ -4673,7 +4665,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-sidebar-min-width": {
       "tier": "PUBLIC",
@@ -4779,30 +4771,6 @@
       ],
       "value": "1"
     },
-    "--sf-space-content": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-content-gap)"
-    },
-    "--sf-space-gap": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-gap)"
-    },
-    "--sf-space-gutter": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-gutter-width)"
-    },
     "--sf-space-l": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -4889,7 +4857,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-state-pending-opacity": {
       "tier": "PUBLIC",
@@ -4937,7 +4905,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-switcher-threshold": {
       "tier": "PUBLIC",

@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**698 tokens** (deduplicated by name across the 6 token source files).
+**694 tokens** (deduplicated by name across the 6 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 642 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 638 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 222 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 476 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 472 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -91,8 +91,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Token | Tier | Role | File(s) | Default |
 |---|---|---|---|---|
-| `--sf-alternate-gap` | PUBLIC | consumption | Layout | `var(--sf-space-content)` |
-| `--sf-alternate-inner-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-alternate-gap` | PUBLIC | consumption | Layout | `var(--sf-content-gap)` |
+| `--sf-alternate-inner-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-animation-blink` | PUBLIC | consumption | Core | `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite` |
 | `--sf-animation-color-pulse` | PUBLIC | consumption | Core | `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite` |
 | `--sf-animation-delay-1` | PUBLIC | consumption | Core | `calc(75ms * var(--sf-motion-scale))` |
@@ -114,7 +114,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-animation-spin` | PUBLIC | consumption | Core | `sf-spin var(--sf-duration-slower) linear infinite` |
 | `--sf-aspect` | PUBLIC | knob | Macros | `16 / 9` |
 | `--sf-bento-cols-default` | PUBLIC | knob | Layout | `4` |
-| `--sf-bento-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-bento-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-bento-row-compact` | PUBLIC | knob | Layout | `6rem` |
 | `--sf-bento-row-default` | PUBLIC | knob | Layout | `10rem` |
 | `--sf-bento-row-tall` | PUBLIC | knob | Layout | `16rem` |
@@ -145,10 +145,10 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-button-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
 | `--sf-button-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
 | `--sf-caret-color` | PUBLIC | consumption | Core | `var(--sf-color-action)` |
-| `--sf-center-gutter` | PUBLIC | consumption | Layout | `var(--sf-space-gutter)` |
+| `--sf-center-gutter` | PUBLIC | consumption | Layout | `var(--sf-gutter)` |
 | `--sf-center-max` | PUBLIC | consumption | Layout | `var(--sf-container-default)` |
 | `--sf-cluster-align` | PUBLIC | knob | Layout | `center` |
-| `--sf-cluster-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-cluster-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-cluster-justify` | PUBLIC | knob | Layout | `flex-start` |
 | `--sf-code-font-size` | PUBLIC | knob | Core | `0.875em` |
 | `--sf-color-action` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
@@ -452,7 +452,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-ease-out` | PUBLIC | knob | Core | `cubic-bezier(0.25, 0, 0.15, 1)` |
 | `--sf-ease-overshoot` | PUBLIC | knob | Core | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` |
 | `--sf-ease-spring` | PUBLIC | knob | Core | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` |
-| `--sf-equal-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-equal-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-equal-min-col` | PUBLIC | knob | Layout | `16rem` |
 | `--sf-equal-min-col-2` | PUBLIC | knob | Layout | `28rem` |
 | `--sf-equal-min-col-3` | PUBLIC | knob | Layout | `15rem` |
@@ -463,7 +463,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-field-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-s)` |
 | `--sf-field-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
 | `--sf-field-required-marker` | PUBLIC | knob | Core | `" *"` |
-| `--sf-flow-space` | PUBLIC | consumption | Macros | `var(--sf-space-content)` |
+| `--sf-flow-space` | PUBLIC | consumption | Macros | `var(--sf-content-gap)` |
 | `--sf-fluid-max-vw` | PUBLIC-ADVANCED | knob | Core | `90` |
 | `--sf-fluid-min-vw` | PUBLIC-ADVANCED | knob | Core | `22.5` |
 | `--sf-focus-ring-color` | PUBLIC | consumption | Core | `var(--sf-color-action)` |
@@ -493,7 +493,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-font-weight-strong` | PUBLIC | consumption | Core | `var(--sf-font-weight-bold)` |
 | `--sf-frame-ratio` | PUBLIC | knob | Layout | `16 / 9` |
 | `--sf-gap` | PUBLIC | consumption | Core | `var(--sf-space-m)` |
-| `--sf-gap-size` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
 | `--sf-gradient-brand` | PUBLIC | consumption | Core | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))` |
 | `--sf-gradient-fade--b` | PUBLIC | consumption | Core | `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))` |
 | `--sf-gradient-fade--l` | PUBLIC | consumption | Core | `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))` |
@@ -503,7 +502,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-gradient-secondary` | PUBLIC | consumption | Core | `linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))` |
 | `--sf-gradient-surface` | PUBLIC | consumption | Core | `linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))` |
 | `--sf-gradient-tertiary` | PUBLIC | consumption | Core | `linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))` |
-| `--sf-grid-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-grid-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-grid-min` | PUBLIC | knob | Layout | `16rem` |
 | `--sf-grid-min-2xl` | PUBLIC | knob | Layout | `28rem` |
 | `--sf-grid-min-l` | PUBLIC | knob | Layout | `20rem` |
@@ -511,7 +510,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-grid-min-s` | PUBLIC | knob | Layout | `13rem` |
 | `--sf-grid-min-xl` | PUBLIC | knob | Layout | `24rem` |
 | `--sf-grid-min-xs` | PUBLIC | knob | Layout | `10rem` |
-| `--sf-gutter-width` | PUBLIC | consumption | Core | `var(--sf-space-l)` |
+| `--sf-gutter` | PUBLIC | consumption | Core | `var(--sf-space-l)` |
 | `--sf-h1-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-heading)` |
 | `--sf-h1-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-tight)` |
 | `--sf-h1-line-height` | PUBLIC | consumption | Core | `var(--sf-leading-tight)` |
@@ -607,7 +606,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-prose-media-margin` | PUBLIC | consumption | Macros | `var(--sf-space-m)` |
 | `--sf-prose-media-radius` | PUBLIC | consumption | Macros | `var(--sf-radius-m)` |
 | `--sf-prose-nested-list-gap` | PUBLIC | consumption | Macros | `var(--sf-space-2xs)` |
-| `--sf-prose-paragraph` | PUBLIC | consumption | Layout | `var(--sf-space-content)` |
+| `--sf-prose-paragraph` | PUBLIC | consumption | Layout | `var(--sf-content-gap)` |
 | `--sf-prose-table-pad` | PUBLIC | consumption | Macros | `var(--sf-space-xs)` |
 | `--sf-radius-2xl` | PUBLIC | consumption | Core | `calc(24px * var(--sf-radius-scale))` |
 | `--sf-radius-2xs` | PUBLIC | consumption | Core | `calc(1px * var(--sf-radius-scale))` |
@@ -630,7 +629,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-ratio-portrait` | PUBLIC | knob | Core | `3 / 4` |
 | `--sf-ratio-square` | PUBLIC | knob | Core | `1` |
 | `--sf-ratio-video` | PUBLIC | knob | Core | `16 / 9` |
-| `--sf-reel-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-reel-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-reel-height` | PUBLIC | knob | Layout | `auto` |
 | `--sf-reel-item-width` | PUBLIC | knob | Layout | `max-content` |
 | `--sf-safe-bottom` | PUBLIC-ADVANCED | knob | Core | `env(safe-area-inset-bottom, 0px)` |
@@ -667,7 +666,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | Core | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | PUBLIC | consumption | Core | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | PUBLIC | consumption | Core | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
-| `--sf-sidebar-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-sidebar-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-sidebar-min-width` | PUBLIC | knob | Layout | `50%` |
 | `--sf-sidebar-width` | PUBLIC | knob | Layout | `18rem` |
 | `--sf-size-l` | PUBLIC | knob | Core | `2.75rem` |
@@ -681,9 +680,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-space-4xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-base-max` | PUBLIC-ADVANCED | knob | Core | `2` |
 | `--sf-space-base-min` | PUBLIC-ADVANCED | knob | Core | `1` |
-| `--sf-space-content` | PUBLIC | consumption | Layout | `var(--sf-content-gap)` |
-| `--sf-space-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
-| `--sf-space-gutter` | PUBLIC | consumption | Core | `var(--sf-gutter-width)` |
 | `--sf-space-l` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-m` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-none` | PUBLIC | knob | Core | `0` |
@@ -694,13 +690,13 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-space-scale` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-space-xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
-| `--sf-stack-gap` | PUBLIC | consumption | Layout | `var(--sf-space-content)` |
+| `--sf-stack-gap` | PUBLIC | consumption | Layout | `var(--sf-content-gap)` |
 | `--sf-state-pending-opacity` | PUBLIC | knob | Core | `0.7` |
 | `--sf-sticky-offset` | PUBLIC | consumption | Core | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | PUBLIC | consumption | Core | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | PUBLIC | consumption | Core | `var(--sf-header-height-mobile)` |
 | `--sf-surface-color` | PUBLIC | consumption | Macros | `var(--sf-color-base)` |
-| `--sf-switcher-gap` | PUBLIC | consumption | Layout | `var(--sf-space-gap)` |
+| `--sf-switcher-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-switcher-threshold` | PUBLIC | knob | Layout | `30rem` |
 | `--sf-text-2xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-2xl-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-heading)` |

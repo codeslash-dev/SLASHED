@@ -13,7 +13,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 |---|---|---|
 | `.sf-section` | vertical page rhythm; sizes `--xs/--s/--m/--l/--xl/--2xl` | `--sf-section-pad*` |
 | `.sf-section-group` | collapses the gap between adjacent sections | — |
-| `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-space-gutter` |
+| `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-gutter` |
 | `.sf-box` | isolated unit with padding and optional border outline | `--sf-box-padding`, `--sf-box-border-width`, `--sf-box-border-color` |
 | `.sf-center` | intrinsic centering with max-width and gutters; `--intrinsic` | `--sf-center-max`, `--sf-center-gutter` |
 | `.sf-stack` | vertical flow with consistent gap (the "owl") | `--sf-stack-gap` |
@@ -24,7 +24,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-grid-cols-1 / -2 / -3 / -4 / -6` | fixed-column grids, container-responsive (no `-5`) | `--sf-grid-gap` |
 | `.sf-grid-cols-1-2 / -2-1 / -1-3 / -3-1` | ratio two-column grids | `--sf-grid-gap` |
 | `.sf-bento` | dense free-form grid; `--sf-bento-cols/-row` overrides | `--sf-bento-*` |
-| `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-space-content`, `--sf-space-gap` |
+| `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-content-gap`, `--sf-gap` |
 | `.sf-pancake` | sticky-footer grid: header / main(1fr) / footer | — |
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed` | `--sf-content-width`, `--sf-breakout-width` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |
@@ -33,7 +33,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |
 | `.sf-divider` | token-driven separator; `--vertical`, `--soft`, `--strong`, `--dashed`, `--dotted`, `--gradient` | `--sf-divider-*` |
-| `.sf-gap` | injects gap into any existing flex/grid container without imposing display; `--xs … --2xl` | `--sf-gap-size` |
+| `.sf-gap` | injects gap into any existing flex/grid container without imposing display; `--xs … --2xl` | `--sf-gap` |
 | `.sf-equal` | fixed N-column grid that never collapses; `--2/--3/--4/--6` | `--sf-equal`, `--sf-equal-gap` |
 | `.sf-section--collapse` | adjacent sections share padding 50/50 across the boundary | `--sf-section-pad` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --2xl` | `--sf-icon-*` |

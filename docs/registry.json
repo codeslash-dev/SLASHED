@@ -20,7 +20,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 698,
+      "tokens": 694,
       "sf_classes": 182,
       "is_classes": 40
     }
@@ -428,7 +428,6 @@
     "--sf-font-weight-strong",
     "--sf-frame-ratio",
     "--sf-gap",
-    "--sf-gap-size",
     "--sf-gradient-brand",
     "--sf-gradient-fade--b",
     "--sf-gradient-fade--l",
@@ -446,7 +445,7 @@
     "--sf-grid-min-s",
     "--sf-grid-min-xl",
     "--sf-grid-min-xs",
-    "--sf-gutter-width",
+    "--sf-gutter",
     "--sf-h1-font-weight",
     "--sf-h1-letter-spacing",
     "--sf-h1-line-height",
@@ -616,9 +615,6 @@
     "--sf-space-4xl",
     "--sf-space-base-max",
     "--sf-space-base-min",
-    "--sf-space-content",
-    "--sf-space-gap",
-    "--sf-space-gutter",
     "--sf-space-l",
     "--sf-space-m",
     "--sf-space-none",

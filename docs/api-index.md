@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**929 elements** — 698 tokens, 231 classes.
+**925 elements** — 694 tokens, 231 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 873 | Everyday surface. SemVer-stable. |
+| PUBLIC | 869 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (698)
+## Tokens (694)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 
-### Core tokens (475)
+### Core tokens (474)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -242,13 +242,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-warning-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` | strong (direction-dependent, uses light-dark) error = form validation, input errors danger = destructive actions (delete, remove) |
 | `--sf-color-warning-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.12)` | subtle/muted (alpha variants) bg/border use same formula both modes |
 | `--sf-color-white` | PUBLIC | knob | color | `oklch(100% 0 0)` | Dim: classic semi-transparent black for modal backdrops, distinct from --sf-color-overlay |
-| `--sf-component-pad` | PUBLIC | consumption | component | `var(--sf-space-m)` | rhythm within a component |
+| `--sf-component-pad` | PUBLIC | consumption | component | `var(--sf-space-m)` | wide: page/section gutters |
 | `--sf-container-default` | PUBLIC | knob | container | `75rem` | Containers |
 | `--sf-container-full` | PUBLIC | knob | container | `100%` | Containers |
 | `--sf-container-narrow` | PUBLIC | knob | container | `38rem` | Containers |
 | `--sf-container-prose` | PUBLIC | knob | container | `65ch` | Containers |
 | `--sf-container-wide` | PUBLIC | knob | container | `90rem` | Containers |
-| `--sf-content-gap` | PUBLIC | consumption | content | `var(--sf-space-s)` | gap between BEM elements |
+| `--sf-content-gap` | PUBLIC | consumption | content | `var(--sf-space-s)` | loose: between components |
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | contrast | `0` | Global text-contrast knob. Nudges derived reading-text colours toward the extremes (darker in light mode, lighter in dark mode). Positive = more contrast; 0 = no change. Consumed by --sf-color-text, --sf-color-text--secondary, --sf-color-heading. |
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | Lightness crossover for text-on-color auto-contrast. Colours with L above this value get dark text; below get light text. Default 0.6 guarantees ≥ 3:1 for most colours. The binary choice (near-black or near-white) cannot guarantee 4.5:1 when the background sits in the L ≈… |
 | `--sf-current-font-weight` | PUBLIC | consumption | current | `var(--sf-font-weight-bold)` | State token — consumed by .is-current in states.css. Override to match your nav design (e.g. semibold for thin fonts). |
@@ -305,7 +305,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-font-weight-normal` | PUBLIC | knob | font | `400` | Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable. |
 | `--sf-font-weight-semibold` | PUBLIC | knob | font | `600` | Base weights — trimmed, recognizable names. For an off-scale weight (e.g. 100/900 display work) write font-weight: 100 directly, or re-tune a role token below globally — every weight here is overridable. |
 | `--sf-font-weight-strong` | PUBLIC | consumption | font | `var(--sf-font-weight-bold)` | buttons, badges, nav |
-| `--sf-gap` | PUBLIC | consumption | gap | `var(--sf-space-m)` | BEM consumer API Use in your own BEM classes: .nav { gap: var(--sf-gap); } Source of truth for tokens.layout.css: --sf-space-gap → var(--sf-gap) (all layout primitives) --sf-space-content → var(--sf-content-gap) (stack, prose) |
+| `--sf-gap` | PUBLIC | consumption | gap | `var(--sf-space-m)` | the three rhythms every layout primitive defaults to. Also the BEM consumer API: .nav { gap: var(--sf-gap); } Override globally to retune all primitives of that rhythm at once. |
 | `--sf-gradient-brand` | PUBLIC | consumption | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))` | derived from brand colors (auto-adapt) |
 | `--sf-gradient-fade--b` | PUBLIC | consumption | gradient | `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
 | `--sf-gradient-fade--l` | PUBLIC | consumption | gradient | `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
@@ -315,7 +315,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-gradient-secondary` | PUBLIC | consumption | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))` | derived from brand colors (auto-adapt) |
 | `--sf-gradient-surface` | PUBLIC | consumption | gradient | `linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))` | derived from brand colors (auto-adapt) |
 | `--sf-gradient-tertiary` | PUBLIC | consumption | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))` | derived from brand colors (auto-adapt) |
-| `--sf-gutter-width` | PUBLIC | consumption | gutter | `var(--sf-space-l)` | fixed |
+| `--sf-gutter` | PUBLIC | consumption | gutter | `var(--sf-space-l)` | tight: within content |
 | `--sf-h1-font-weight` | PUBLIC | consumption | h1 | `var(--sf-font-weight-heading)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h1-letter-spacing` | PUBLIC | consumption | h1 | `var(--sf-tracking-tight)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
 | `--sf-h1-line-height` | PUBLIC | consumption | h1 | `var(--sf-leading-tight)` | part of the per-style typography bundle for a named text role (body, code, heading, h1–h6, display). The full bundle spans font-family, size, weight, line-height, and letter-spacing across related tokens. |
@@ -444,7 +444,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-space-4xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))` | Spacing — fluid (generative). Same engine as type; space uses base_max=2 (more dramatic growth than type's 1.25). Step exponent N relative to --sf-space-m (N=0): 2xs=-3 … 4xl=5. |
 | `--sf-space-base-max` | PUBLIC-ADVANCED | knob | space | `2` | generative inputs The fluid type / space / display scales are computed at runtime from these scalars. Override any of them on :root and every clamp() recalibrates — no build step, no token regeneration. --sf-fluid-min-vw / --sf-fluid-max-vw viewport range (rem, unitless) over… |
 | `--sf-space-base-min` | PUBLIC-ADVANCED | knob | space | `1` | generative inputs The fluid type / space / display scales are computed at runtime from these scalars. Override any of them on :root and every clamp() recalibrates — no build step, no token regeneration. --sf-fluid-min-vw / --sf-fluid-max-vw viewport range (rem, unitless) over… |
-| `--sf-space-gutter` | PUBLIC | consumption | space | `var(--sf-gutter-width)` | fixed |
 | `--sf-space-l` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))` | Spacing — fluid (generative). Same engine as type; space uses base_max=2 (more dramatic growth than type's 1.25). Step exponent N relative to --sf-space-m (N=0): 2xs=-3 … 4xl=5. |
 | `--sf-space-m` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))` | Spacing — fluid (generative). Same engine as type; space uses base_max=2 (more dramatic growth than type's 1.25). Step exponent N relative to --sf-space-m (N=0): 2xs=-3 … 4xl=5. |
 | `--sf-space-none` | PUBLIC | knob | space | `0` | fixed |
@@ -511,14 +510,14 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-z-toast` | PUBLIC | knob | z | `1050` | dialogs (non-top-layer fallback) |
 | `--sf-z-tooltip` | PUBLIC | knob | z | `1060` | transient notifications |
 
-### Layout tokens (52)
+### Layout tokens (49)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
-| `--sf-alternate-gap` | PUBLIC | consumption | alternate | `var(--sf-space-content)` | Alternate (zigzag) |
-| `--sf-alternate-inner-gap` | PUBLIC | consumption | alternate | `var(--sf-space-gap)` | Alternate (zigzag) |
+| `--sf-alternate-gap` | PUBLIC | consumption | alternate | `var(--sf-content-gap)` | Alternate (zigzag) |
+| `--sf-alternate-inner-gap` | PUBLIC | consumption | alternate | `var(--sf-gap)` | Alternate (zigzag) |
 | `--sf-bento-cols-default` | PUBLIC | knob | bento | `4` | Bento grid |
-| `--sf-bento-gap` | PUBLIC | consumption | bento | `var(--sf-space-gap)` | Bento grid |
+| `--sf-bento-gap` | PUBLIC | consumption | bento | `var(--sf-gap)` | Bento grid |
 | `--sf-bento-row-compact` | PUBLIC | knob | bento | `6rem` | Bento grid |
 | `--sf-bento-row-default` | PUBLIC | knob | bento | `10rem` | Bento grid |
 | `--sf-bento-row-tall` | PUBLIC | knob | bento | `16rem` | Bento grid |
@@ -526,23 +525,22 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-box-border-width` | PUBLIC | knob | box | `0` | Box |
 | `--sf-box-padding` | PUBLIC | consumption | box | `var(--sf-space-m)` | Box |
 | `--sf-breakout-width` | PUBLIC | consumption | breakout | `var(--sf-container-wide)` | Content grid (breakout pattern) |
-| `--sf-center-gutter` | PUBLIC | consumption | center | `var(--sf-space-gutter)` | Center |
+| `--sf-center-gutter` | PUBLIC | consumption | center | `var(--sf-gutter)` | Center |
 | `--sf-center-max` | PUBLIC | consumption | center | `var(--sf-container-default)` | Center |
 | `--sf-cluster-align` | PUBLIC | knob | cluster | `center` | Cluster |
-| `--sf-cluster-gap` | PUBLIC | consumption | cluster | `var(--sf-space-gap)` | Cluster |
+| `--sf-cluster-gap` | PUBLIC | consumption | cluster | `var(--sf-gap)` | Cluster |
 | `--sf-cluster-justify` | PUBLIC | knob | cluster | `flex-start` | Cluster |
 | `--sf-content-width` | PUBLIC | consumption | content | `var(--sf-container-default)` | Content grid (breakout pattern) |
 | `--sf-cover-min-height` | PUBLIC | knob | cover | `100dvh` | Cover |
 | `--sf-cover-padding` | PUBLIC | consumption | cover | `var(--sf-section-pad)` | Cover |
-| `--sf-equal-gap` | PUBLIC | consumption | equal | `var(--sf-space-gap)` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
+| `--sf-equal-gap` | PUBLIC | consumption | equal | `var(--sf-gap)` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-equal-min-col` | PUBLIC | knob | equal | `16rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-equal-min-col-2` | PUBLIC | knob | equal | `28rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-equal-min-col-3` | PUBLIC | knob | equal | `15rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-equal-min-col-4` | PUBLIC | knob | equal | `16rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-equal-min-col-6` | PUBLIC | knob | equal | `10rem` | min-col-N: minimum column width for the N-column preset. Exact column count emerges from container ÷ min-col. |
 | `--sf-frame-ratio` | PUBLIC | knob | frame | `16 / 9` | Frame |
-| `--sf-gap-size` | PUBLIC | consumption | gap | `var(--sf-space-gap)` | Gap |
-| `--sf-grid-gap` | PUBLIC | consumption | grid | `var(--sf-space-gap)` | Grid (auto-fill, breakpoint-free) |
+| `--sf-grid-gap` | PUBLIC | consumption | grid | `var(--sf-gap)` | Grid (auto-fill, breakpoint-free) |
 | `--sf-grid-min` | PUBLIC | knob | grid | `16rem` | Grid (auto-fill, breakpoint-free) |
 | `--sf-grid-min-2xl` | PUBLIC | knob | grid | `28rem` | Grid (auto-fill, breakpoint-free) |
 | `--sf-grid-min-l` | PUBLIC | knob | grid | `20rem` | Grid (auto-fill, breakpoint-free) |
@@ -555,17 +553,15 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-icon-box-pad` | PUBLIC | knob | icon | `0.5em` | extras for .sf-icon--boxed. The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in core/tokens.css alongside the typography scale. |
 | `--sf-icon-box-radius` | PUBLIC | consumption | icon | `var(--sf-radius-s)` | extras for .sf-icon--boxed. The naked .sf-icon sizing tokens (--sf-icon-xs..xl) live in core/tokens.css alongside the typography scale. |
 | `--sf-imposter-margin` | PUBLIC | consumption | imposter | `var(--sf-space-m)` | Imposter (centered absolute/fixed overlay) |
-| `--sf-prose-paragraph` | PUBLIC | consumption | prose | `var(--sf-space-content)` | Prose |
-| `--sf-reel-gap` | PUBLIC | consumption | reel | `var(--sf-space-gap)` | Reel |
+| `--sf-prose-paragraph` | PUBLIC | consumption | prose | `var(--sf-content-gap)` | Prose |
+| `--sf-reel-gap` | PUBLIC | consumption | reel | `var(--sf-gap)` | Reel |
 | `--sf-reel-height` | PUBLIC | knob | reel | `auto` | Reel |
 | `--sf-reel-item-width` | PUBLIC | knob | reel | `max-content` | Reel |
-| `--sf-sidebar-gap` | PUBLIC | consumption | sidebar | `var(--sf-space-gap)` | Sidebar |
+| `--sf-sidebar-gap` | PUBLIC | consumption | sidebar | `var(--sf-gap)` | Sidebar |
 | `--sf-sidebar-min-width` | PUBLIC | knob | sidebar | `50%` | Sidebar |
 | `--sf-sidebar-width` | PUBLIC | knob | sidebar | `18rem` | content column minimum |
-| `--sf-space-content` | PUBLIC | consumption | space | `var(--sf-content-gap)` | component-level gap |
-| `--sf-space-gap` | PUBLIC | consumption | space | `var(--sf-gap)` | Shared spacing aliases |
-| `--sf-stack-gap` | PUBLIC | consumption | stack | `var(--sf-space-content)` | Stack |
-| `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-space-gap)` | Switcher |
+| `--sf-stack-gap` | PUBLIC | consumption | stack | `var(--sf-content-gap)` | Stack |
+| `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Switcher |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Switcher |
 
 ### Macro tokens (23)
@@ -574,7 +570,7 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|---|
 | `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | default for .sf-aspect (generic ratio container, distinct from layout's .sf-frame which has its own --sf-frame-ratio). |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | placeholder size for .sf-content-auto. Feeds contain-intrinsic-size so offscreen sections reserve space before their first render, keeping the scrollbar and scroll position stable. Override per element: style="--sf-content-intrinsic-size: 800px". |
-| `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-space-content)` | distance between flow children (lobotomized owl). Consumed by .sf-flow > * + *. |
+| `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | distance between flow children (lobotomized owl). Consumed by .sf-flow > * + *. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | default line count for .sf-line-clamp-N. Override per element: style="--sf-line-clamp: 5". The fixed-N variants .sf-line-clamp-2 / -3 don't read this token (they hardcode the value), so the default only applies to .sf-line-clamp-N callers. |
 | `--sf-prose-block-margin` | PUBLIC | consumption | prose | `var(--sf-space-m)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
 | `--sf-prose-blockquote-border` | PUBLIC | consumption | prose | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` | per-instance override knobs for .sf-prose. All values default to system spacing/color tokens so prose stays in sync with the global scale unless overridden. Override per-element: style="--sf-prose-marker-color: var(--sf-color-secondary)" |
@@ -827,13 +823,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-frame--square` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
 | `.sf-frame--video` | PUBLIC | layout | Frame | Aspect-ratio container. Media children: fill + cover. Override: style="--sf-frame-ratio: 4 / 3" |
 | `.sf-full-bleed` | PUBLIC | layout | Content grid (breakout pattern) | Full-width grid that lets items break out to breakout or full width. Children default to the content column. |
-| `.sf-gap` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-gap--2xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-gap--l` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-gap--m` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-gap--s` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-gap--xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
-| `.sf-gap--xs` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override:… |
+| `.sf-gap` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
+| `.sf-gap--2xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
+| `.sf-gap--l` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
+| `.sf-gap--m` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
+| `.sf-gap--s` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
+| `.sf-gap--xl` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
+| `.sf-gap--xs` | PUBLIC | layout | Gap | Injects gap into any existing flex or grid container without imposing a display type or axis. Unlike .sf-stack (flex column) or .sf-cluster (flex-wrap row), .sf-gap is layout- agnostic — use it on elements that already have their own display context. Override one instance:… |
 | `.sf-grid` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
 | `.sf-grid--2xl` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid with no breakpoints. .sf-grid--fit switches to auto-fit. Fixed-column variants live in .sf-grid-cols-N. auto-fill: empty tracks preserved, last item doesn't stretch. auto-fit (.sf-grid--fit): empty tracks collapsed, items stretch. Override:… |
 | `.sf-grid--dense` | PUBLIC | layout | Grid (auto) | Dense packing — let later items backfill earlier gaps (as .sf-bento does). Applies to any grid, including .sf-grid-cols-N. |

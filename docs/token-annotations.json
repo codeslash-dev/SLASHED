@@ -242,9 +242,8 @@
     "--sf-space-2xl": "48px-equivalent spacing. Large section spacing.",
     "--sf-space-3xl": "64px-equivalent spacing. Extra-large layout gaps.",
     "--sf-space-4xl": "96px-equivalent spacing. Hero / page-level section padding.",
-    "--sf-space-gutter": "Horizontal gutter / margin for page-edge spacing.",
     "--sf-component-pad": "Standard inner padding for interactive components (buttons, form inputs, chips).",
-    "--sf-content-gap": "Gap between stacked content blocks within a section.",
+    "--sf-content-gap": "Tight gap within related content (stack, flow, prose). Override globally to retune all tight primitives at once.",
     "--sf-field-block": "Vertical (block) padding inside form fields.",
     "--sf-font-body": "Font family stack for body text. Override to set your primary typeface.",
     "--sf-font-display": "Font family for display/marketing text. Override for large headline typefaces.",
@@ -387,11 +386,8 @@
     "--sf-bento-row-compact": "Row height for compact-variant bento items.",
     "--sf-equal-gap": "Gap between equal columns.",
     "--sf-frame-ratio": "Aspect ratio for the frame (media container) layout.",
-    "--sf-gap-size": "Shared base gap consumed by multiple layout primitives.",
     "--sf-imposter-margin": "Margin between the imposter overlay and the viewport edges.",
     "--sf-prose-paragraph": "Max width of prose paragraphs (layout token for the prose layout).",
-    "--sf-space-content": "Semantic alias for the content-column horizontal gap.",
-    "--sf-space-gap": "Semantic alias for the default layout gap.",
     "--sf-breakout-width": "Width of full-bleed breakout elements inside a content grid.",
     "--sf-content-width": "Max-width of the main content column in a content grid.",
     "--sf-box-padding": "Inner padding for the box layout primitive.",
@@ -646,7 +642,7 @@
     "--sf-text-shadow-m": "Medium text-shadow. Use for text overlaid on images to improve legibility.",
     "--sf-text-shadow-l": "Large text-shadow for high-contrast text over busy or dark image backgrounds.",
     "--sf-field-required-marker": "CSS content value for required-field markers (e.g. \" *\"). Used by pseudo-elements in the .required utility pattern.",
-    "--sf-gap": "Alias for the default layout gap. Do not override directly — adjust --sf-gap-size or the specific layout primitive's gap token.",
+    "--sf-gap": "Default gap between components (the loose rhythm). Layout primitives like cluster/grid/sidebar default to it. Override globally to retune them all at once, or set a primitive token (e.g. --sf-cluster-gap) for one element.",
     "--sf-link-external-marker": "CSS content value appended to external links (e.g. \" ↗\"). Used by the .external-link pseudo-element pattern.",
     "--sf-gradient-brand": "Multi-stop brand gradient spanning primary and secondary palette colors. Use for hero backgrounds and brand accents.",
     "--sf-gradient-fade--b": "Fade-to-bottom gradient (transparent → surface). Use to fade content into a background below (infinite scroll fade, content cutoff).",
@@ -742,7 +738,6 @@
     "--sf-field-padding-block": "Vertical (block) inner padding for form field inputs.",
     "--sf-field-padding-inline": "Horizontal (inline) inner padding for form field inputs.",
     "--sf-field-radius": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once.",
-    "--sf-gutter-width": "Horizontal gutter consumed by --sf-space-gutter. Set this to control the page-edge margin uniformly across all responsive breakpoints.",
     "--sf-h1-max-width": "Max-inline-size cap for <h1>. Default none (unconstrained). Set to a ch value (e.g. 20ch) to prevent wide headings from spanning the full column on large screens.",
     "--sf-h2-max-width": "Max-inline-size cap for <h2>. Default none.",
     "--sf-h3-max-width": "Max-inline-size cap for <h3>. Default none.",
@@ -750,6 +745,7 @@
     "--sf-h5-max-width": "Max-inline-size cap for <h5>. Default none.",
     "--sf-h6-max-width": "Max-inline-size cap for <h6>. Default none.",
     "--sf-shadow-lightness": "OKLCH lightness component of the shadow color. Lower = denser-looking shadows. Tune this independently of --sf-shadow-strength to control tonal weight without affecting opacity.",
-    "--sf-transition-form-field": "Transition shorthand optimised for form fields: color and background at normal pace so label color shifts feel natural; border, shadow, and opacity at fast pace so focus rings appear crisply."
+    "--sf-transition-form-field": "Transition shorthand optimised for form fields: color and background at normal pace so label color shifts feel natural; border, shadow, and opacity at fast pace so focus rings appear crisply.",
+    "--sf-gutter": "Wide page/section-edge gutter (used by center/container). Override to set the page-edge breathing room across breakpoints."
   }
 }

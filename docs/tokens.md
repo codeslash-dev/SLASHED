@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**734 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**730 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-475 tokens.
+474 tokens.
 
 | Token | Default |
 |---|---|
@@ -298,7 +298,7 @@ rebrand workflow.
 | `--sf-gradient-secondary` | `linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))` |
 | `--sf-gradient-surface` | `linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))` |
 | `--sf-gradient-tertiary` | `linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))` |
-| `--sf-gutter-width` | `var(--sf-space-l)` |
+| `--sf-gutter` | `var(--sf-space-l)` |
 | `--sf-h1-font-weight` | `var(--sf-font-weight-heading)` |
 | `--sf-h1-letter-spacing` | `var(--sf-tracking-tight)` |
 | `--sf-h1-line-height` | `var(--sf-leading-tight)` |
@@ -427,7 +427,6 @@ rebrand workflow.
 | `--sf-space-4xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-base-max` | `2` |
 | `--sf-space-base-min` | `1` |
-| `--sf-space-gutter` | `var(--sf-gutter-width)` |
 | `--sf-space-l` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-m` | `calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-none` | `0` |
@@ -496,14 +495,14 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-52 tokens.
+49 tokens.
 
 | Token | Default |
 |---|---|
-| `--sf-alternate-gap` | `var(--sf-space-content)` |
-| `--sf-alternate-inner-gap` | `var(--sf-space-gap)` |
+| `--sf-alternate-gap` | `var(--sf-content-gap)` |
+| `--sf-alternate-inner-gap` | `var(--sf-gap)` |
 | `--sf-bento-cols-default` | `4` |
-| `--sf-bento-gap` | `var(--sf-space-gap)` |
+| `--sf-bento-gap` | `var(--sf-gap)` |
 | `--sf-bento-row-compact` | `6rem` |
 | `--sf-bento-row-default` | `10rem` |
 | `--sf-bento-row-tall` | `16rem` |
@@ -511,23 +510,22 @@ rebrand workflow.
 | `--sf-box-border-width` | `0` |
 | `--sf-box-padding` | `var(--sf-space-m)` |
 | `--sf-breakout-width` | `var(--sf-container-wide)` |
-| `--sf-center-gutter` | `var(--sf-space-gutter)` |
+| `--sf-center-gutter` | `var(--sf-gutter)` |
 | `--sf-center-max` | `var(--sf-container-default)` |
 | `--sf-cluster-align` | `center` |
-| `--sf-cluster-gap` | `var(--sf-space-gap)` |
+| `--sf-cluster-gap` | `var(--sf-gap)` |
 | `--sf-cluster-justify` | `flex-start` |
 | `--sf-content-width` | `var(--sf-container-default)` |
 | `--sf-cover-min-height` | `100dvh` |
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
-| `--sf-equal-gap` | `var(--sf-space-gap)` |
+| `--sf-equal-gap` | `var(--sf-gap)` |
 | `--sf-equal-min-col` | `16rem` |
 | `--sf-equal-min-col-2` | `28rem` |
 | `--sf-equal-min-col-3` | `15rem` |
 | `--sf-equal-min-col-4` | `16rem` |
 | `--sf-equal-min-col-6` | `10rem` |
 | `--sf-frame-ratio` | `16 / 9` |
-| `--sf-gap-size` | `var(--sf-space-gap)` |
-| `--sf-grid-gap` | `var(--sf-space-gap)` |
+| `--sf-grid-gap` | `var(--sf-gap)` |
 | `--sf-grid-min` | `16rem` |
 | `--sf-grid-min-2xl` | `28rem` |
 | `--sf-grid-min-l` | `20rem` |
@@ -540,17 +538,15 @@ rebrand workflow.
 | `--sf-icon-box-pad` | `0.5em` |
 | `--sf-icon-box-radius` | `var(--sf-radius-s)` |
 | `--sf-imposter-margin` | `var(--sf-space-m)` |
-| `--sf-prose-paragraph` | `var(--sf-space-content)` |
-| `--sf-reel-gap` | `var(--sf-space-gap)` |
+| `--sf-prose-paragraph` | `var(--sf-content-gap)` |
+| `--sf-reel-gap` | `var(--sf-gap)` |
 | `--sf-reel-height` | `auto` |
 | `--sf-reel-item-width` | `max-content` |
-| `--sf-sidebar-gap` | `var(--sf-space-gap)` |
+| `--sf-sidebar-gap` | `var(--sf-gap)` |
 | `--sf-sidebar-min-width` | `50%` |
 | `--sf-sidebar-width` | `18rem` |
-| `--sf-space-content` | `var(--sf-content-gap)` |
-| `--sf-space-gap` | `var(--sf-gap)` |
-| `--sf-stack-gap` | `var(--sf-space-content)` |
-| `--sf-switcher-gap` | `var(--sf-space-gap)` |
+| `--sf-stack-gap` | `var(--sf-content-gap)` |
+| `--sf-switcher-gap` | `var(--sf-gap)` |
 | `--sf-switcher-threshold` | `30rem` |
 
 ## Macro tokens (`core/tokens.macros.css`)
@@ -561,7 +557,7 @@ rebrand workflow.
 |---|---|
 | `--sf-aspect` | `16 / 9` |
 | `--sf-content-intrinsic-size` | `500px` |
-| `--sf-flow-space` | `var(--sf-space-content)` |
+| `--sf-flow-space` | `var(--sf-content-gap)` |
 | `--sf-line-clamp` | `3` |
 | `--sf-prose-block-margin` | `var(--sf-space-m)` |
 | `--sf-prose-blockquote-border` | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` |

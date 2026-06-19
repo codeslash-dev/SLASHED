@@ -33,10 +33,11 @@
    in docs/demo.html and validated by the regression suite (tests/), so an
    unreferenced token is never untested or orphaned.
 
-   RELATION TO tokens.layout.css — the spacing aliases in the "Spacing
-   aliases" section are the source of truth for --sf-space-gap and
-   --sf-space-content in tokens.layout.css. Overriding --sf-gap changes the
-   gaps across all layout primitives (cluster, grid, sidebar, etc.).
+   RELATION TO tokens.layout.css — the semantic gap tokens here
+   (--sf-gap, --sf-content-gap, --sf-gutter) are the source of truth that
+   every layout primitive defaults to. Overriding --sf-gap changes the
+   gaps across all layout primitives (cluster, grid, sidebar, etc.); a
+   single primitive is overridden via its own token (e.g. --sf-cluster-gap).
 
    PUBLIC API vs INTERNAL (token-API freeze contract)
    ─────────────────────────────────────────────────
@@ -145,15 +146,14 @@
    INTERNAL — implementation detail, may change without a major bump:
      · --sf-is-dark (mode flag — set via data-theme, not directly)
 
-   CANONICAL-SOURCE ALIASES (intentional synonym hops, kept by design):
-     · --sf-space-gap     → --sf-gap          (layout primitives read this name)
-     · --sf-space-content → --sf-content-gap  (stack / prose rhythm)
-     · --sf-section-pad   → --sf-section-pad--m (unsuffixed = the -m default)
-   These are deliberate two-name contracts: override the canonical token
-   (right side) to move everything downstream. The alias graph is otherwise
-   ≤3 hops (per-primitive → layout-system → canonical source), giving three
-   override levels: local (style="--sf-cluster-gap"), all-primitives
-   (--sf-space-gap), or global (--sf-gap).
+   SEMANTIC GAP TOKENS (base → semantic → component model):
+     · --sf-gap         (loose: between components — cluster, grid, sidebar…)
+     · --sf-content-gap (tight: within content — stack, flow, prose)
+     · --sf-gutter      (wide: page/section edge gutters — center, container)
+     · --sf-section-pad → --sf-section-pad--m (unsuffixed = the -m default)
+   Two override levels: global (set --sf-gap to move every loose primitive)
+   or local (style="--sf-cluster-gap: …" for one element). Each primitive
+   token defaults directly to its semantic source — no middle alias tier.
    ============================================================ */
 
 @layer slashed.tokens {
@@ -993,8 +993,6 @@
        ---------------------------------------------------------- */
     --sf-space-none:   0;
     --sf-space-px:     1px;
-    --sf-gutter-width: var(--sf-space-l);
-    --sf-space-gutter: var(--sf-gutter-width);
 
     /* Spacing — fluid (generative). Same engine as type; space uses base_max=2
        (more dramatic growth than type's 1.25). Step exponent N relative to
@@ -1424,15 +1422,14 @@
     --sf-h6-max-width: none;
 
     /* ----------------------------------------------------------
-       Spacing aliases — BEM consumer API
-       Use in your own BEM classes: .nav { gap: var(--sf-gap); }
-       Source of truth for tokens.layout.css:
-         --sf-space-gap     → var(--sf-gap)        (all layout primitives)
-         --sf-space-content → var(--sf-content-gap) (stack, prose)
+       Semantic gap tokens — the three rhythms every layout primitive
+       defaults to. Also the BEM consumer API: .nav { gap: var(--sf-gap); }
+       Override globally to retune all primitives of that rhythm at once.
        ---------------------------------------------------------- */
-    --sf-gap:           var(--sf-space-m);  /* gap between BEM elements */
-    --sf-content-gap:   var(--sf-space-s);  /* rhythm within a component */
-    --sf-component-pad: var(--sf-space-m);  /* standard component padding */
+    --sf-gap:           var(--sf-space-m);  /* loose: between components   */
+    --sf-content-gap:   var(--sf-space-s);  /* tight: within content       */
+    --sf-gutter:        var(--sf-space-l);  /* wide: page/section gutters  */
+    --sf-component-pad: var(--sf-space-m);  /* standard component padding  */
     --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
     --sf-field-required-marker: " *";
     /* Leading space is baked into the default so consumers can fully

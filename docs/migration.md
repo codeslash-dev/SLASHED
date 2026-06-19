@@ -56,6 +56,28 @@ instead of switching instantly when `[data-theme]` flips. Tune with
 `--sf-theme-transition-duration` (default 300ms). Disabled under
 `prefers-reduced-motion`.
 
+### Gap tokens flattened (base → semantic → component)
+
+The middle "layout" tier of gap aliases is gone; layout primitives now default
+straight to three semantic rhythms. Only matters if you overrode the middle tier.
+
+| Removed / renamed | Use instead |
+|---|---|
+| `--sf-space-gap` | `--sf-gap` (loose: between components) |
+| `--sf-space-content` | `--sf-content-gap` (tight: within content) |
+| `--sf-space-gutter` | `--sf-gutter` (wide: page/section edges) |
+| `--sf-gutter-width` | `--sf-gutter` (renamed) |
+| `--sf-gap-size` | `--sf-gap` (the `.sf-gap` utility now reads it) |
+
+Override scopes are unchanged in spirit:
+- **All loose primitives at once:** set `--sf-gap` (was `--sf-space-gap`).
+- **One primitive:** set its own token, e.g. `style="--sf-cluster-gap: 0.5rem"` (unchanged).
+
+```css
+/* before */ :root { --sf-space-gap: 2rem; }
+/* after  */ :root { --sf-gap: 2rem; }
+```
+
 ## SLASHED 0.2.x → 0.3.0
 
 v0.3.0 adds the `slashed.macros` cascade layer and relocates three class
