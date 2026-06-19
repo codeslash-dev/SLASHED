@@ -37,7 +37,27 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT    = path.join(ROOT, 'docs', 'api-index.json');
 const OUT_MD = path.join(ROOT, 'docs', 'api-index.md');
 
-const BUNDLE_CONFIG = 'bundle.config.json';
+const BUNDLE_CONFIG      = 'bundle.config.json';
+const ANNOTATIONS_FILE   = path.join(ROOT, 'docs', 'token-annotations.json');
+
+/**
+ * Read docs/token-annotations.json — the curated overlay for per-token notes
+ * and per-class descriptions. Returns a shape with `tokens` and `classes`
+ * objects; both default to {} when the file is absent or unreadable.
+ * @returns {{ tokens: Record<string,string>, classes: Record<string,string> }}
+ */
+function readAnnotations() {
+  if (!fs.existsSync(ANNOTATIONS_FILE)) return { tokens: {}, classes: {} };
+  try {
+    const parsed = JSON.parse(fs.readFileSync(ANNOTATIONS_FILE, 'utf8'));
+    return {
+      tokens:  parsed.tokens  ?? {},
+      classes: parsed.classes ?? {},
+    };
+  } catch {
+    return { tokens: {}, classes: {} };
+  }
+}
 
 // ── Per-file metadata ─────────────────────────────────────────────────────────
 // `category` is the high-level, human-facing area. `area` is a short machine
@@ -417,55 +437,6 @@ function extractTokensFromFile(rel) {
  * @param {(file: string) => string[]} bundlesFor bundle resolver
  * @returns {Map<string, object>} name → token entry
  */
-function buildTokenEntries(bundlesFor) {
-  const merged = new Map(); // name -> entry
-
-  for (const rel of TOKEN_FILES) {
-    const rows = extractTokensFromFile(rel);
-    const meta = FILE_META[rel];
-    for (const [name, data] of rows) {
-      const existing = merged.get(name);
-      if (!existing) {
-        merged.set(name, {
-          name,
-          type: 'token',
-          tier: tierOf(name),
-          role: roleOf(data.value, name),
-          namespace: namespaceOf(name),
-          category: meta.category,
-          area: meta.area,
-          group: data.group || '',
-          description: data.description || '',
-          value: data.value ?? null,
-          aliasOf: aliasTarget(data.value),
-          registered: !!data.registered,
-          animatable: !!data.registered,
-          syntax: data.syntax ?? null,
-          inherits: data.inherits ?? null,
-          optional: rel.startsWith('optional/'),
-          layer: data.layer || null,
-          sourceFiles: [rel],
-          bundles: new Set(bundlesFor(rel)),
-        });
-      } else {
-        // Token redeclared in a later file — last value wins, union sources.
-        existing.value = data.value ?? existing.value;
-        existing.aliasOf = aliasTarget(existing.value);
-        existing.role = roleOf(existing.value, name);
-        existing.registered = existing.registered || !!data.registered;
-        existing.animatable = existing.registered;
-        existing.syntax = existing.syntax ?? data.syntax ?? null;
-        existing.inherits = existing.inherits ?? data.inherits ?? null;
-        if (!existing.group && data.group) existing.group = data.group;
-        if (!existing.description && data.description) existing.description = data.description;
-        if (!existing.sourceFiles.includes(rel)) existing.sourceFiles.push(rel);
-        for (const b of bundlesFor(rel)) existing.bundles.add(b);
-      }
-    }
-  }
-  return merged;
-}
-
 // ── Class extraction ──────────────────────────────────────────────────────────
 
 /**
@@ -537,12 +508,74 @@ function extractClassesFromFile(rel) {
 let bundlesFor_ = () => [];
 
 /**
+ * Merge tokens across all TOKEN_FILES with curated per-token annotations.
+ * @param {(file: string) => string[]} bundlesFor bundle resolver
+ * @param {Record<string,string>} tokenAnnotations token name → curated description
+ * @returns {Map<string, object>} name → token entry
+ */
+function buildTokenEntries(bundlesFor, tokenAnnotations = {}) {
+  const merged = new Map(); // name -> entry
+
+  for (const rel of TOKEN_FILES) {
+    const rows = extractTokensFromFile(rel);
+    const meta = FILE_META[rel];
+    for (const [name, data] of rows) {
+      const existing = merged.get(name);
+      if (!existing) {
+        merged.set(name, {
+          name,
+          type: 'token',
+          tier: tierOf(name),
+          role: roleOf(data.value, name),
+          namespace: namespaceOf(name),
+          category: meta.category,
+          area: meta.area,
+          group: data.group || '',
+          description: data.description || '',
+          value: data.value ?? null,
+          aliasOf: aliasTarget(data.value),
+          registered: !!data.registered,
+          animatable: !!data.registered,
+          syntax: data.syntax ?? null,
+          inherits: data.inherits ?? null,
+          optional: rel.startsWith('optional/'),
+          layer: data.layer || null,
+          sourceFiles: [rel],
+          bundles: new Set(bundlesFor(rel)),
+        });
+      } else {
+        // Token redeclared in a later file — last value wins, union sources.
+        existing.value = data.value ?? existing.value;
+        existing.aliasOf = aliasTarget(existing.value);
+        existing.role = roleOf(existing.value, name);
+        existing.registered = existing.registered || !!data.registered;
+        existing.animatable = existing.registered;
+        existing.syntax = existing.syntax ?? data.syntax ?? null;
+        existing.inherits = existing.inherits ?? data.inherits ?? null;
+        if (!existing.group && data.group) existing.group = data.group;
+        if (!existing.description && data.description) existing.description = data.description;
+        if (!existing.sourceFiles.includes(rel)) existing.sourceFiles.push(rel);
+        for (const b of bundlesFor(rel)) existing.bundles.add(b);
+      }
+    }
+  }
+  // Overlay curated per-token descriptions from token-annotations.json.
+  for (const [name, entry] of merged) {
+    if (tokenAnnotations[name]) entry.description = tokenAnnotations[name];
+  }
+  return merged;
+}
+
+/**
  * Merge classes across all CLASS_FILES into finished entries, unioning source
  * files and bundle membership for classes declared in more than one file.
+ * Per-class descriptions from docs/token-annotations.json["classes"] override
+ * the auto-derived banner-comment description when present.
  * @param {(file: string) => string[]} bundlesFor bundle resolver
+ * @param {Record<string,string>} classAnnotations class name → curated description
  * @returns {Map<string, object>} name → class entry
  */
-function buildClassEntries(bundlesFor) {
+function buildClassEntries(bundlesFor, classAnnotations = {}) {
   bundlesFor_ = bundlesFor;
   const merged = new Map(); // name -> entry (union of files)
   for (const rel of CLASS_FILES) {
@@ -558,6 +591,11 @@ function buildClassEntries(bundlesFor) {
         if (!existing.description && entry.description) existing.description = entry.description;
       }
     }
+  }
+  // Overlay curated per-class descriptions from token-annotations.json.
+  // The annotation wins unconditionally so the curated text always appears.
+  for (const [name, entry] of merged) {
+    if (classAnnotations[name]) entry.description = classAnnotations[name];
   }
   return merged;
 }
@@ -685,8 +723,9 @@ function main() {
   const rank = new Map(allBundles.map((b, i) => [b, i]));
   const bundleOrderRank = b => (rank.has(b) ? rank.get(b) : Number.MAX_SAFE_INTEGER);
 
-  const tokenMap   = buildTokenEntries(bundlesFor);
-  const classMap   = buildClassEntries(bundlesFor);
+  const annotations = readAnnotations();
+  const tokenMap   = buildTokenEntries(bundlesFor, annotations.tokens);
+  const classMap   = buildClassEntries(bundlesFor, annotations.classes);
 
   const tokenEntries = [...tokenMap.values()]
     .map(e => finalizeEntry(e, bundleOrderRank))
