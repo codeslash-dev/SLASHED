@@ -78,7 +78,7 @@ function projectToken(e, notes, groupDescs) {
     namespace: e.namespace || null,
     category: e.category || 'Other',
     group: e.group || '',
-    description: groupDescs[groupKey] || e.description || '',
+    description: e.description || groupDescs[groupKey] || '',
     note: notes[e.name] || '',
     value: e.value ?? null,
     aliasOf: e.aliasOf ?? null,

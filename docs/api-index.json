@@ -17,6 +17,7 @@
       "core/accessibility.css",
       "core/motion.css",
       "core/print.css",
+      "core/themes.css",
       "optional/forms.css",
       "optional/components.css",
       "optional/theme-example.css"
@@ -29,14 +30,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 924,
+      "total": 925,
       "by_type": {
-        "class": 231,
+        "class": 232,
         "token": 693
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 868,
+        "PUBLIC": 869,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -44,8 +45,8 @@
         "knob": 222
       },
       "tokens": 693,
-      "classes": 231,
-      "sf_classes": 182,
+      "classes": 232,
+      "sf_classes": 183,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
@@ -61,7 +62,8 @@
         "Print": 4,
         "Sizes-extended tokens": 36,
         "State classes": 40,
-        "Theme example": 1
+        "Theme example": 1,
+        "Theme utilities": 1
       }
     },
     "schema": {
@@ -24236,7 +24238,7 @@
       "category": "Macro classes",
       "area": "macros",
       "group": "Truncate / line-clamp",
-      "description": "Clamps text to a custom N lines. Set --sf-line-clamp-n on the element to control the number of visible lines.",
+      "description": "Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -25935,6 +25937,32 @@
       "layer": "slashed.macros",
       "sourceFiles": [
         "core/macros.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-theme-transition",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-theme-transition",
+      "prefix": "sf",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "area": "theme",
+      "group": "OPT-IN THEME CROSS-FADE",
+      "description": "Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.themes",
+      "sourceFiles": [
+        "core/themes.css"
       ],
       "bundles": [
         "essential",

@@ -54,7 +54,8 @@ function readAnnotations() {
       tokens:  parsed.tokens  ?? {},
       classes: parsed.classes ?? {},
     };
-  } catch {
+  } catch (err) {
+    console.warn(`[docs] Failed to parse ${ANNOTATIONS_FILE}:`, err.message);
     return { tokens: {}, classes: {} };
   }
 }
@@ -77,6 +78,7 @@ const FILE_META = {
   'core/accessibility.css':     { category: 'Accessibility',         area: 'accessibility', kind: 'accessibility' },
   'core/motion.css':            { category: 'Motion / animation',    area: 'motion',        kind: 'motion'        },
   'core/print.css':             { category: 'Print',                 area: 'print',         kind: 'print'         },
+  'core/themes.css':            { category: 'Theme utilities',        area: 'theme',         kind: 'theme'         },
   'optional/forms.css':         { category: 'Forms (classless)',     area: 'forms',         kind: 'form'          },
   'optional/components.css':    { category: 'Components',             area: 'components',    kind: 'component'     },
   'optional/theme-example.css': { category: 'Theme example',         area: 'theme',         kind: 'theme'         },

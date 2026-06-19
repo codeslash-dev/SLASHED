@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**924 elements** — 693 tokens, 231 classes.
+**925 elements** — 693 tokens, 232 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 868 | Everyday surface. SemVer-stable. |
+| PUBLIC | 869 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -743,7 +743,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-xs-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` | Line height for extra-small text. |
 | `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Optimal line length for extra-small text. |
 
-## Classes (231)
+## Classes (232)
 
 ### Accessibility (8)
 
@@ -899,7 +899,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
 | `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
 | `.sf-line-clamp-3` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3. |
-| `.sf-line-clamp-N` | PUBLIC | macro | Truncate / line-clamp | Clamps text to a custom N lines. Set --sf-line-clamp-n on the element to control the number of visible lines. |
+| `.sf-line-clamp-N` | PUBLIC | macro | Truncate / line-clamp | Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines. |
 | `.sf-link--reverse` | PUBLIC | macro | Link variants | Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse. |
 | `.sf-link--subtle` | PUBLIC | macro | Link variants | Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover. |
 | `.sf-link-external` | PUBLIC | macro | External link indication | Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain. |
@@ -1010,4 +1010,10 @@ and a short description. The machine-readable companion (with all columns) is
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.theme-transition` | PUBLIC | theme | 5. SMOOTH THEME-TRANSITION HELPER | Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches. |
+
+### Theme utilities (1)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 

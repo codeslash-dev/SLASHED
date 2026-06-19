@@ -949,7 +949,7 @@
     "sf-flow": "Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers.",
     "sf-line-clamp-2": "Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2.",
     "sf-line-clamp-3": "Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3.",
-    "sf-line-clamp-N": "Clamps text to a custom N lines. Set --sf-line-clamp-n on the element to control the number of visible lines.",
+    "sf-line-clamp-N": "Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines.",
     "sf-link--reverse": "Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse.",
     "sf-link--subtle": "Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover.",
     "sf-link-external": "Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain.",
