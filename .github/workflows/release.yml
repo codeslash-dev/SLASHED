@@ -201,16 +201,28 @@ jobs:
             echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Trigger downstream deploys
-        if: steps.commit_push.outputs.pushed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # GITHUB_TOKEN pushes do not emit push events, so deploy-configurator
-          # and publish-dist would never see the new version. Dispatch them
-          # explicitly — GITHUB_TOKEN CAN trigger workflow_dispatch (actions:write
-          # permission granted above). Each call is independent so one failure
-          # does not prevent the other from running.
-          gh workflow run deploy-configurator.yml --ref main
-          echo "Dispatched deploy-configurator.yml"
-          gh workflow run publish-dist.yml --ref main
-          echo "Dispatched publish-dist.yml"
+          # Always redeploy on every release, regardless of whether main needed
+          # a version-artifact commit. When release-it already pushed the bump
+          # before the tag fired, commit_push.pushed is false but the deploy
+          # must still run so the configurator reflects the new version.
+          # GITHUB_TOKEN CAN trigger workflow_dispatch (actions:write granted above).
+          # Each call is independent so one failure does not prevent the other.
+          fail=0
+          if gh workflow run deploy-configurator.yml --ref main; then
+            echo "Dispatched deploy-configurator.yml"
+          else
+            echo "::error::Failed to dispatch deploy-configurator.yml"
+            fail=1
+          fi
+
+          if gh workflow run publish-dist.yml --ref main; then
+            echo "Dispatched publish-dist.yml"
+          else
+            echo "::error::Failed to dispatch publish-dist.yml"
+            fail=1
+          fi
+
+          exit "$fail"
