@@ -305,9 +305,11 @@ automatically under `@media (prefers-contrast: more)`.
 ## Gotchas
 
 - **Don't transition every colour globally.** A blanket `transition: all` on `*`
-  while toggling themes is a paint footgun. Use the opt-in `.theme-transition`
-  class (`optional/theme-example.css`) only while the toggle is in flight, or
-  rely on the view transition.
+  while toggling themes is a paint footgun. Use the opt-in `.sf-theme-transition`
+  helper (add it to `<html>` or a subtree) — it cross-fades only the registered
+  `@property` colour tokens, tuned by `--sf-theme-transition-duration` (default
+  300ms) and disabled under `prefers-reduced-motion`. Or rely on the view
+  transition.
 - **`color-scheme` matters for form controls and scrollbars.** `data-theme` flips
   it; if you hand-roll a theme, set `color-scheme` too.
 - **Images don't auto-adapt.** Swap art with `<picture>` +

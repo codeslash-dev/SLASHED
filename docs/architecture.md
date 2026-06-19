@@ -47,8 +47,8 @@ core/
   accessibility.css            slashed.accessibility
   print.css                    slashed.print
 optional/
-  tokens.palette.css      slashed.tokens  (numeric tints/shades + alpha scale (-a5 … -a95) for brand colors; ships in optimal+ bundles)
-  tokens.sizes-extended.css slashed.tokens  (space/text bridge tokens + per-size sub-props; ships in optimal+ bundles)
+  tokens.palette.css      slashed.tokens  (numeric tints/shades + alpha variants (-a5/-a10/-a30/-a50/-a80) for brand colors; ships in optimal+ bundles)
+  tokens.sizes-extended.css slashed.tokens  (per-size typography sub-properties; ships in optimal+ bundles)
   tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
@@ -140,7 +140,7 @@ Two conceptually-macro classes stay in `layout.css` in 0.x for compatibility:
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/alpha tokens including ghost/subtle/muted), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional numeric tints/shades + alpha scale for brand colors), `tokens.sizes-extended.css` (optional space/text bridges + per-size sub-properties), `tokens.components.css` (optional component-level tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/alpha tokens including ghost/subtle/muted), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional numeric tints/shades + alpha variants for brand colors), `tokens.sizes-extended.css` (optional per-size typography sub-properties), `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -202,7 +202,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 ## Tokens
 
-- Colors: `oklch()` with relative color syntax for derived values; `oklch(from …)` for semantic alpha variants (ghost/subtle/muted) in core; `color-mix(in oklab)` for numeric tints/shades in the optional palette; the optional palette's numeric alpha scale (-a5 … -a95) is gated behind `@supports (color: oklch(from red l c h))`
+- Colors: `oklch()` with relative color syntax for derived values; `oklch(from …)` for semantic alpha variants (ghost/subtle/muted) in core; `color-mix(in oklab)` for numeric tints/shades in the optional palette; the optional palette's numeric alpha variants (-a5/-a10/-a30/-a50/-a80) are gated behind `@supports (color: oklch(from red l c h))`
 - `@property` registration for 22 source colours (11 `-light` + 11 `-dark`, brand + status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
@@ -229,7 +229,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
   three SemVer tiers: **PUBLIC** (everyday knobs — brand/status sources,
   resolved semantic tokens, scales, BEM consumer aliases), **PUBLIC-ADVANCED**
   (same SemVer guarantee but niche/powerful — e.g. generative scale inputs and
-  the `--sf-{space,text}-{step}-to-{step}` fluid interpolation bridges), and
+  the per-size typography sub-properties in `tokens.sizes-extended.css`), and
   **INTERNAL** (`--sf-is-dark` — implementation detail, may change without a
   major bump). The enumerated tier sets live in `scripts/token-tiers.js`; the
   full cross-reference is [token-index.md](token-index.md).
