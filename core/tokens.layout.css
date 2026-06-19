@@ -6,13 +6,10 @@
    Prefix: --sf-
 
    DEPENDENCIES — requires tokens.css (loaded earlier).
-   Spacing aliases inherit from the BEM consumer API in tokens.css:
-     --sf-space-gap     → var(--sf-gap)         from tokens.css
-     --sf-space-content → var(--sf-content-gap) from tokens.css
-   Override --sf-gap or --sf-content-gap (the canonical source) to change
-   the gaps across all layout primitives at once. --sf-space-gap and
-   --sf-space-content are CANONICAL-SOURCE ALIASES — a second public name
-   kept for layout-primitive readability, not a redundant indirection.
+   Every primitive gap defaults directly to a semantic gap token from
+   tokens.css: --sf-gap (loose), --sf-content-gap (tight), --sf-gutter
+   (wide). Override one of those to retune all primitives of that rhythm
+   at once; override a single primitive via its own token.
 
    PUBLIC API — every --sf-*-gap / --sf-*-padding / --sf-*-min / etc. here
    is a per-primitive override knob (e.g. style="--sf-cluster-gap: …").
@@ -26,20 +23,9 @@
   :root {
 
     /* ----------------------------------------------------------
-       Shared spacing aliases
-       ---------------------------------------------------------- */
-    --sf-space-gap:     var(--sf-gap);       /* component-level gap */
-    --sf-space-content: var(--sf-content-gap);   /* within-component rhythm */
-
-    /* ----------------------------------------------------------
        Stack
        ---------------------------------------------------------- */
-    --sf-stack-gap: var(--sf-space-content);
-
-    /* ----------------------------------------------------------
-       Gap
-       ---------------------------------------------------------- */
-    --sf-gap-size: var(--sf-space-gap);
+    --sf-stack-gap: var(--sf-content-gap);
 
     /* ----------------------------------------------------------
        Box
@@ -52,19 +38,19 @@
        Center
        ---------------------------------------------------------- */
     --sf-center-max:    var(--sf-container-default);
-    --sf-center-gutter: var(--sf-space-gutter);
+    --sf-center-gutter: var(--sf-gutter);
 
     /* ----------------------------------------------------------
        Cluster
        ---------------------------------------------------------- */
-    --sf-cluster-gap:     var(--sf-space-gap);
+    --sf-cluster-gap:     var(--sf-gap);
     --sf-cluster-align:   center;
     --sf-cluster-justify: flex-start;
 
     /* ----------------------------------------------------------
        Sidebar
        ---------------------------------------------------------- */
-    --sf-sidebar-gap:           var(--sf-space-gap);
+    --sf-sidebar-gap:           var(--sf-gap);
     --sf-sidebar-min-width:     50%;           /* content column minimum */
     --sf-sidebar-width:         18rem;         /* sidebar panel default size */
 
@@ -72,13 +58,13 @@
        Switcher
        ---------------------------------------------------------- */
     --sf-switcher-threshold: 30rem;
-    --sf-switcher-gap:       var(--sf-space-gap);
+    --sf-switcher-gap:       var(--sf-gap);
 
     /* ----------------------------------------------------------
        Grid (auto-fill, breakpoint-free)
        ---------------------------------------------------------- */
     --sf-grid-min:         16rem;
-    --sf-grid-gap:         var(--sf-space-gap);
+    --sf-grid-gap:         var(--sf-gap);
 
     --sf-grid-min-xs:      10rem;
     --sf-grid-min-s:       13rem;
@@ -97,7 +83,7 @@
     --sf-equal-min-col-3: 15rem;
     --sf-equal-min-col-4: 16rem;
     --sf-equal-min-col-6: 10rem;
-    --sf-equal-gap:        var(--sf-space-gap);
+    --sf-equal-gap:        var(--sf-gap);
 
     /* ----------------------------------------------------------
        Cover
@@ -124,7 +110,7 @@
        Reel
        ---------------------------------------------------------- */
     --sf-reel-item-width: max-content;
-    --sf-reel-gap:        var(--sf-space-gap);
+    --sf-reel-gap:        var(--sf-gap);
     --sf-reel-height:     auto;
 
     /* ----------------------------------------------------------
@@ -139,7 +125,7 @@
     --sf-bento-row-default:  10rem;
     --sf-bento-row-compact:  6rem;
     --sf-bento-row-tall:     16rem;
-    --sf-bento-gap:          var(--sf-space-gap);
+    --sf-bento-gap:          var(--sf-gap);
 
     /* ----------------------------------------------------------
        Content grid (breakout pattern)
@@ -150,13 +136,13 @@
     /* ----------------------------------------------------------
        Prose
        ---------------------------------------------------------- */
-    --sf-prose-paragraph: var(--sf-space-content);
+    --sf-prose-paragraph: var(--sf-content-gap);
 
     /* ----------------------------------------------------------
        Alternate (zigzag)
        ---------------------------------------------------------- */
-    --sf-alternate-gap:       var(--sf-space-content);
-    --sf-alternate-inner-gap: var(--sf-space-gap);
+    --sf-alternate-gap:       var(--sf-content-gap);
+    --sf-alternate-inner-gap: var(--sf-gap);
 
   }
 }

@@ -71,7 +71,7 @@ Tokens:
 
 | Token | Default | What it controls |
 |---|---|---|
-| `--sf-flow-space` | `var(--sf-space-content)` | distance between consecutive children |
+| `--sf-flow-space` | `var(--sf-content-gap)` | distance between consecutive children |
 
 Override per element: `style="--sf-flow-space: 2rem"`.
 
@@ -88,11 +88,7 @@ the overflow to actually clip.
 </div>
 ```
 
-Tokens:
-
-| Token | Default | What it controls |
-|---|---|---|
-| `--sf-truncate-suffix` | `"\2026"` (`…`) | character used for consumer-built variants. The `text-overflow: ellipsis` property doesn't read it directly. |
+The ellipsis is supplied by `text-overflow: ellipsis`; no token is needed.
 
 ---
 

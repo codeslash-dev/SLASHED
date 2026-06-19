@@ -89,7 +89,7 @@
     width:          100%;
     max-width:      var(--sf-container-default);
     margin-inline:  auto;
-    padding-inline: var(--sf-space-gutter);
+    padding-inline: var(--sf-gutter);
   }
   .sf-container--narrow { max-width: var(--sf-container-narrow); }
   .sf-container--prose  { max-width: var(--sf-container-prose); }
@@ -135,9 +135,9 @@
      column) or .sf-cluster (flex-wrap row), .sf-gap is layout-
      agnostic — use it on elements that already have their own
      display context.
-     Override: style="--sf-gap-size: 2rem"
+     Override one instance: style="--sf-gap: 2rem"
      ---------------------------------------------------------- */
-  .sf-gap { gap: var(--sf-gap-size); }
+  .sf-gap { gap: var(--sf-gap); }
   .sf-gap--xs  { gap: var(--sf-space-xs); }
   .sf-gap--s   { gap: var(--sf-space-s); }
   .sf-gap--m   { gap: var(--sf-space-m); }
@@ -550,15 +550,15 @@
     display: grid;
     grid-template-columns:
       [full-start]
-      minmax(var(--sf-space-gutter), 1fr)
+      minmax(var(--sf-gutter), 1fr)
       [breakout-start]
       minmax(0, calc((var(--sf-breakout-width) - var(--sf-content-width)) / 2))
       [content-start]
-      min(var(--sf-content-width), 100% - var(--sf-space-gutter) * 2)
+      min(var(--sf-content-width), 100% - var(--sf-gutter) * 2)
       [content-end]
       minmax(0, calc((var(--sf-breakout-width) - var(--sf-content-width)) / 2))
       [breakout-end]
-      minmax(var(--sf-space-gutter), 1fr)
+      minmax(var(--sf-gutter), 1fr)
       [full-end];
   }
 

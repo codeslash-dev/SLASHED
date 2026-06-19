@@ -27,7 +27,8 @@
                   Tints (50-400) mix toward --sf-color-surface; shades
                   (600-950) mix toward --sf-color-text. Both auto-adapt
                   to light/dark. (base inverts the mix direction.)
-     -a5 … -a95   alpha variants (mixed with transparent).
+     -a5/a10/a30/a50/a80   alpha variants (mixed with transparent).
+                  For an intermediate alpha use oklch(from var(--sf-color-x) l c h / .NN).
      shade aliases     superlight/xlight/lighter/darker/xdark/superdark
                        → numeric steps via var() (one override propagates).
      functional aliases hover/active/subtle/muted/ghost → other aliases.
@@ -81,15 +82,9 @@
 
     --sf-color-primary-a5:  oklch(from var(--sf-color-primary) l c h / 0.05);
     --sf-color-primary-a10: oklch(from var(--sf-color-primary) l c h / 0.10);
-    --sf-color-primary-a20: oklch(from var(--sf-color-primary) l c h / 0.20);
     --sf-color-primary-a30: oklch(from var(--sf-color-primary) l c h / 0.30);
-    --sf-color-primary-a40: oklch(from var(--sf-color-primary) l c h / 0.40);
     --sf-color-primary-a50: oklch(from var(--sf-color-primary) l c h / 0.50);
-    --sf-color-primary-a60: oklch(from var(--sf-color-primary) l c h / 0.60);
-    --sf-color-primary-a70: oklch(from var(--sf-color-primary) l c h / 0.70);
     --sf-color-primary-a80: oklch(from var(--sf-color-primary) l c h / 0.80);
-    --sf-color-primary-a90: oklch(from var(--sf-color-primary) l c h / 0.90);
-    --sf-color-primary-a95: oklch(from var(--sf-color-primary) l c h / 0.95);
 
     --sf-color-primary-superlight: var(--sf-color-primary-50);
     --sf-color-primary-xlight:     var(--sf-color-primary-200);
@@ -117,15 +112,9 @@
 
     --sf-color-secondary-a5:  oklch(from var(--sf-color-secondary) l c h / 0.05);
     --sf-color-secondary-a10: oklch(from var(--sf-color-secondary) l c h / 0.10);
-    --sf-color-secondary-a20: oklch(from var(--sf-color-secondary) l c h / 0.20);
     --sf-color-secondary-a30: oklch(from var(--sf-color-secondary) l c h / 0.30);
-    --sf-color-secondary-a40: oklch(from var(--sf-color-secondary) l c h / 0.40);
     --sf-color-secondary-a50: oklch(from var(--sf-color-secondary) l c h / 0.50);
-    --sf-color-secondary-a60: oklch(from var(--sf-color-secondary) l c h / 0.60);
-    --sf-color-secondary-a70: oklch(from var(--sf-color-secondary) l c h / 0.70);
     --sf-color-secondary-a80: oklch(from var(--sf-color-secondary) l c h / 0.80);
-    --sf-color-secondary-a90: oklch(from var(--sf-color-secondary) l c h / 0.90);
-    --sf-color-secondary-a95: oklch(from var(--sf-color-secondary) l c h / 0.95);
 
     --sf-color-secondary-superlight: var(--sf-color-secondary-50);
     --sf-color-secondary-xlight:     var(--sf-color-secondary-200);
@@ -153,15 +142,9 @@
 
     --sf-color-tertiary-a5:  oklch(from var(--sf-color-tertiary) l c h / 0.05);
     --sf-color-tertiary-a10: oklch(from var(--sf-color-tertiary) l c h / 0.10);
-    --sf-color-tertiary-a20: oklch(from var(--sf-color-tertiary) l c h / 0.20);
     --sf-color-tertiary-a30: oklch(from var(--sf-color-tertiary) l c h / 0.30);
-    --sf-color-tertiary-a40: oklch(from var(--sf-color-tertiary) l c h / 0.40);
     --sf-color-tertiary-a50: oklch(from var(--sf-color-tertiary) l c h / 0.50);
-    --sf-color-tertiary-a60: oklch(from var(--sf-color-tertiary) l c h / 0.60);
-    --sf-color-tertiary-a70: oklch(from var(--sf-color-tertiary) l c h / 0.70);
     --sf-color-tertiary-a80: oklch(from var(--sf-color-tertiary) l c h / 0.80);
-    --sf-color-tertiary-a90: oklch(from var(--sf-color-tertiary) l c h / 0.90);
-    --sf-color-tertiary-a95: oklch(from var(--sf-color-tertiary) l c h / 0.95);
 
     --sf-color-tertiary-superlight: var(--sf-color-tertiary-50);
     --sf-color-tertiary-xlight:     var(--sf-color-tertiary-200);
@@ -189,15 +172,9 @@
 
     --sf-color-action-a5:  oklch(from var(--sf-color-action) l c h / 0.05);
     --sf-color-action-a10: oklch(from var(--sf-color-action) l c h / 0.10);
-    --sf-color-action-a20: oklch(from var(--sf-color-action) l c h / 0.20);
     --sf-color-action-a30: oklch(from var(--sf-color-action) l c h / 0.30);
-    --sf-color-action-a40: oklch(from var(--sf-color-action) l c h / 0.40);
     --sf-color-action-a50: oklch(from var(--sf-color-action) l c h / 0.50);
-    --sf-color-action-a60: oklch(from var(--sf-color-action) l c h / 0.60);
-    --sf-color-action-a70: oklch(from var(--sf-color-action) l c h / 0.70);
     --sf-color-action-a80: oklch(from var(--sf-color-action) l c h / 0.80);
-    --sf-color-action-a90: oklch(from var(--sf-color-action) l c h / 0.90);
-    --sf-color-action-a95: oklch(from var(--sf-color-action) l c h / 0.95);
 
     --sf-color-action-superlight: var(--sf-color-action-50);
     --sf-color-action-xlight:     var(--sf-color-action-200);
@@ -225,15 +202,9 @@
 
     --sf-color-neutral-a5:  oklch(from var(--sf-color-neutral) l c h / 0.05);
     --sf-color-neutral-a10: oklch(from var(--sf-color-neutral) l c h / 0.10);
-    --sf-color-neutral-a20: oklch(from var(--sf-color-neutral) l c h / 0.20);
     --sf-color-neutral-a30: oklch(from var(--sf-color-neutral) l c h / 0.30);
-    --sf-color-neutral-a40: oklch(from var(--sf-color-neutral) l c h / 0.40);
     --sf-color-neutral-a50: oklch(from var(--sf-color-neutral) l c h / 0.50);
-    --sf-color-neutral-a60: oklch(from var(--sf-color-neutral) l c h / 0.60);
-    --sf-color-neutral-a70: oklch(from var(--sf-color-neutral) l c h / 0.70);
     --sf-color-neutral-a80: oklch(from var(--sf-color-neutral) l c h / 0.80);
-    --sf-color-neutral-a90: oklch(from var(--sf-color-neutral) l c h / 0.90);
-    --sf-color-neutral-a95: oklch(from var(--sf-color-neutral) l c h / 0.95);
 
     --sf-color-neutral-superlight: var(--sf-color-neutral-50);
     --sf-color-neutral-xlight:     var(--sf-color-neutral-200);
@@ -281,7 +252,7 @@
 
        When you need surface-level differentiation, prefer
        --sf-color-inset / --sf-color-raised / --sf-color-bg over the
-       numbered scale. For overlays, prefer the alpha variants (-a10…-a90)
+       numbered scale. For overlays, prefer the alpha variants (-a10…-a80)
        which are mode-safe by transparency and compose cleanly on any bg.
        ---------------------------------------------------------- */
     --sf-color-base-50:  color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50),  var(--sf-color-base));
@@ -298,15 +269,9 @@
 
     --sf-color-base-a5:  oklch(from var(--sf-color-base) l c h / 0.05);
     --sf-color-base-a10: oklch(from var(--sf-color-base) l c h / 0.10);
-    --sf-color-base-a20: oklch(from var(--sf-color-base) l c h / 0.20);
     --sf-color-base-a30: oklch(from var(--sf-color-base) l c h / 0.30);
-    --sf-color-base-a40: oklch(from var(--sf-color-base) l c h / 0.40);
     --sf-color-base-a50: oklch(from var(--sf-color-base) l c h / 0.50);
-    --sf-color-base-a60: oklch(from var(--sf-color-base) l c h / 0.60);
-    --sf-color-base-a70: oklch(from var(--sf-color-base) l c h / 0.70);
     --sf-color-base-a80: oklch(from var(--sf-color-base) l c h / 0.80);
-    --sf-color-base-a90: oklch(from var(--sf-color-base) l c h / 0.90);
-    --sf-color-base-a95: oklch(from var(--sf-color-base) l c h / 0.95);
 
     --sf-color-base-superlight: var(--sf-color-base-50);
     --sf-color-base-xlight:     var(--sf-color-base-200);

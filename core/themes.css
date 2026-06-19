@@ -324,4 +324,37 @@
     }
   }
 
+  /* ─────────────────────────────────────────────────────────────────
+     OPT-IN THEME CROSS-FADE
+     ─────────────────────────────────────────────────────────────────
+     Add .sf-theme-transition to <html> (or any subtree) so colours fade
+     instead of switching instantly when [data-theme] flips. Tune the speed
+     with --sf-theme-transition-duration (core/tokens.css).
+
+     Implementation: transition the registered @property <color> SOURCE
+     tokens on the element itself — NOT background-color/color on every
+     descendant. The source tokens are inherited (and the surface/text/
+     border tokens derive from them via relative color), so the whole
+     subtree cross-fades while component-level `transition` declarations on
+     descendants (button hovers, transforms, etc.) are left untouched.
+     Disabled automatically under prefers-reduced-motion. */
+  .sf-theme-transition {
+    transition:
+      --sf-color-primary   var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-secondary var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-tertiary  var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-action    var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-neutral   var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-base      var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-success   var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-warning   var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-error     var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-info      var(--sf-theme-transition-duration) var(--sf-ease-out),
+      --sf-color-danger    var(--sf-theme-transition-duration) var(--sf-ease-out);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sf-theme-transition { transition: none; }
+  }
+
 }

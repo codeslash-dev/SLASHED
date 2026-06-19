@@ -30,7 +30,7 @@ const edits = {
   '--sf-radius-m': '10px',
   '--sf-shadow-m': '0 4px 16px rgba(0, 0, 0, 0.16)',
   '--sf-duration-fast': '120ms',
-  '--sf-blur-m': '12px',
+  '--sf-blur': '12px',
   '--sf-print-page-margin': '2cm',
   // Gradients — one representative token.
   '--sf-gradient-primary': 'linear-gradient(135deg, oklch(0.55 0.22 264), oklch(0.45 0.18 280))',
@@ -66,7 +66,7 @@ describe('smoke: every editable token routes through the full pipeline', () => {
     // default is a bare length (e.g. blur-m: 16px).
     const expectedControl = {
       '--sf-color-primary-light': 'color',
-      '--sf-blur-m': 'length',
+      '--sf-blur': 'length',
       // Anything calc()-based renders as a free-text editor:
       '--sf-radius-m': 'text',
       '--sf-duration-fast': 'text',

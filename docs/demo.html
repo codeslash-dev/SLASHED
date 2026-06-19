@@ -26,7 +26,7 @@
     #demo-header {
       position: sticky;
       top: 0;
-      z-index: var(--sf-z-mid);
+      z-index: var(--sf-z-fixed);
       height: var(--sf-header-height);
       display: flex;
       align-items: center;
@@ -516,7 +516,7 @@
       position: fixed;
       inset: var(--sf-header-height) 0 0 0;
       background: var(--sf-color-dim);
-      z-index: calc(var(--sf-z-high) - 1);
+      z-index: calc(var(--sf-z-dropdown) - 1);
     }
 
     #nav-overlay.is-open {
@@ -536,7 +536,7 @@
         bottom: 0;
         width: min(17rem, 85vw);
         max-height: none;
-        z-index: var(--sf-z-high);
+        z-index: var(--sf-z-dropdown);
         box-shadow: var(--sf-shadow-xl);
         translate: -100%;
         visibility: hidden;
@@ -859,19 +859,13 @@
           <div class="demo-swatch" style="background: var(--sf-color-primary-950)">950</div>
         </div>
 
-        <h3>Alpha Scale a5–a95</h3>
+        <h3>Alpha Scale a5–a80</h3>
         <div class="demo-swatch-row">
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a5)">a5</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a10)">a10</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a20)">a20</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a30)">a30</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a40)">a40</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a50)">a50</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a60)">a60</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a70)">a70</div>
           <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a80)">a80</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a90)">a90</div>
-          <div class="demo-swatch demo-swatch--bordered" style="background: var(--sf-color-primary-a95)">a95</div>
         </div>
 
         <h3>Semantic &amp; Functional Aliases</h3>
@@ -950,6 +944,17 @@
             </div>
           </div>
         </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)">Opt-in theme cross-fade <code style="font-size: var(--sf-text-xs)">.sf-theme-transition</code></h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">
+          Add <code>class="sf-theme-transition"</code> to <code>&lt;html&gt;</code> (or any subtree) so colours
+          fade instead of switching instantly when the theme flips. Tune the speed with
+          <code>--sf-theme-transition-duration</code>. Toggle dark mode in the header to see this block cross-fade.
+        </p>
+        <div class="sf-theme-transition" style="background: var(--sf-color-raised); color: var(--sf-color-text); padding: var(--sf-space-l); border-radius: var(--sf-radius-m); border: 1px solid var(--sf-color-border)">
+          <strong style="color: var(--sf-color-heading)">Smooth theme transition</strong>
+          <p style="color: var(--sf-color-text--secondary); font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">This card fades its background, text and border colours when the mode changes.</p>
+        </div>
       </section>
 
       <!-- ══════════════════════════════════════════════════════
@@ -985,17 +990,21 @@
           <div style="font-size: var(--sf-text-display-l)">display-l</div>
         </div>
 
-        <h3>Font Weights — numeric scale 100–900</h3>
+        <h3>Font Weights — base weights + semantic roles</h3>
         <div class="sf-stack sf-stack--xs">
-          <span style="font-weight: var(--sf-font-weight-thin)">100 thin — The quick brown fox</span>
-          <span style="font-weight: var(--sf-font-weight-extralight)">200 extralight — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-light)">300 light — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-normal)">400 normal — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-medium)">500 medium — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-semibold)">600 semibold — The quick brown fox</span>
           <span style="font-weight: var(--sf-font-weight-bold)">700 bold — The quick brown fox</span>
-          <span style="font-weight: var(--sf-font-weight-extrabold)">800 extrabold — The quick brown fox</span>
-          <span style="font-weight: var(--sf-font-weight-black)">900 black — The quick brown fox</span>
+        </div>
+        <p style="margin-block-start: var(--sf-space-s); color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">Semantic roles (override to reweight the whole site):</p>
+        <div class="sf-stack sf-stack--xs">
+          <span style="font-weight: var(--sf-font-weight-body)">body — The quick brown fox</span>
+          <span style="font-weight: var(--sf-font-weight-interactive)">interactive — buttons, badges, nav</span>
+          <span style="font-weight: var(--sf-font-weight-heading)">heading — section titles</span>
+          <span style="font-weight: var(--sf-font-weight-strong)">strong — inline emphasis</span>
+          <span style="font-weight: var(--sf-font-weight-display)">display — hero headlines</span>
         </div>
 
         <h3>Semantic Weight Aliases &amp; Font Stacks</h3>

@@ -23,7 +23,7 @@
     }
     body { background: var(--sf-color-bg); color: var(--sf-color-text); }
     .demo-header {
-      position: sticky; top: 0; z-index: var(--sf-z-mid);
+      position: sticky; top: 0; z-index: var(--sf-z-fixed);
       display: flex; align-items: center; justify-content: space-between;
       gap: var(--sf-space-m); flex-wrap: wrap;
       padding: var(--sf-space-s) var(--sf-space-l);
@@ -126,17 +126,13 @@
         <div style="font-size: var(--sf-text-display-l)">display-l</div>
       </div>
 
-      <h3>Font weights 100–900</h3>
+      <h3>Font weights 300–700</h3>
       <div class="sf-stack sf-stack--xs">
-        <span style="font-weight: var(--sf-font-weight-thin)">100 thin</span>
-        <span style="font-weight: var(--sf-font-weight-extralight)">200 extralight</span>
         <span style="font-weight: var(--sf-font-weight-light)">300 light</span>
         <span style="font-weight: var(--sf-font-weight-normal)">400 normal</span>
         <span style="font-weight: var(--sf-font-weight-medium)">500 medium</span>
         <span style="font-weight: var(--sf-font-weight-semibold)">600 semibold</span>
         <span style="font-weight: var(--sf-font-weight-bold)">700 bold</span>
-        <span style="font-weight: var(--sf-font-weight-extrabold)">800 extrabold</span>
-        <span style="font-weight: var(--sf-font-weight-black)">900 black</span>
       </div>
 
       <h3>Semantic weight aliases</h3>
@@ -217,9 +213,9 @@
         <div class="demo-space-row"><span class="demo-space-label">--sf-space-2xl</span><div class="demo-space-bar" style="width: var(--sf-space-2xl)"></div></div>
         <div class="demo-space-row"><span class="demo-space-label">--sf-space-3xl</span><div class="demo-space-bar" style="width: var(--sf-space-3xl)"></div></div>
         <div class="demo-space-row"><span class="demo-space-label">--sf-space-4xl</span><div class="demo-space-bar" style="width: var(--sf-space-4xl)"></div></div>
-        <div class="demo-space-row"><span class="demo-space-label">--sf-space-gutter</span><div class="demo-space-bar" style="width: var(--sf-space-gutter)"></div></div>
-        <div class="demo-space-row"><span class="demo-space-label">--sf-space-gap</span><div class="demo-space-bar" style="width: var(--sf-space-gap)"></div></div>
-        <div class="demo-space-row"><span class="demo-space-label">--sf-space-content</span><div class="demo-space-bar" style="width: var(--sf-space-content)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-gutter</span><div class="demo-space-bar" style="width: var(--sf-gutter)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-gap</span><div class="demo-space-bar" style="width: var(--sf-gap)"></div></div>
+        <div class="demo-space-row"><span class="demo-space-label">--sf-content-gap</span><div class="demo-space-bar" style="width: var(--sf-content-gap)"></div></div>
         <div class="demo-space-row"><span class="demo-space-label">--sf-gap</span><div class="demo-space-bar" style="width: var(--sf-gap)"></div></div>
         <div class="demo-space-row"><span class="demo-space-label">--sf-content-gap</span><div class="demo-space-bar" style="width: var(--sf-content-gap)"></div></div>
         <div class="demo-space-row"><span class="demo-space-label">--sf-component-pad</span><div class="demo-space-bar" style="width: var(--sf-component-pad)"></div></div>
@@ -306,12 +302,12 @@
         <div style="border: var(--sf-border-strong); padding: var(--sf-space-2xs)">--sf-border-strong</div>
         <div style="border: var(--sf-border-subtle); padding: var(--sf-space-2xs)">--sf-border-subtle</div>
       </div>
-      <h3>Stroke widths</h3>
+      <h3>SVG stroke widths (inline — set stroke-width directly)</h3>
       <div class="sf-cluster sf-cluster--l" style="align-items: center">
-        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-thin)"/></svg>
-        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-regular)"/></svg>
-        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-bold)"/></svg>
-        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="var(--sf-stroke-heavy)"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="1"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="1.5"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="2"/></svg>
+        <svg width="60" height="24" aria-hidden="true"><line x1="2" y1="12" x2="58" y2="12" stroke="currentColor" stroke-width="3"/></svg>
       </div>
     </section>
 
@@ -320,20 +316,12 @@
       <h2>Blur &amp; opacity</h2>
       <h3>Backdrop / filter blur</h3>
       <div class="sf-cluster sf-cluster--m">
-        <div class="demo-box" style="filter: blur(var(--sf-blur-xs))">xs</div>
-        <div class="demo-box" style="filter: blur(var(--sf-blur-s))">s</div>
-        <div class="demo-box" style="filter: blur(var(--sf-blur-m))">m</div>
-        <div class="demo-box" style="filter: blur(var(--sf-blur-l))">l</div>
-        <div class="demo-box" style="filter: blur(var(--sf-blur-xl))">xl</div>
+        <div class="demo-box" style="filter: blur(var(--sf-blur))">--sf-blur</div>
+        <div class="demo-box" style="filter: blur(24px)">blur(24px)</div>
       </div>
       <h3>Opacity tokens</h3>
       <div class="sf-cluster sf-cluster--m">
-        <div class="demo-tile" style="opacity: var(--sf-opacity-0)"></div>
-        <div class="demo-tile" style="opacity: var(--sf-opacity-10)"></div>
-        <div class="demo-tile" style="opacity: var(--sf-opacity-25)"></div>
-        <div class="demo-tile" style="opacity: var(--sf-opacity-50)"></div>
-        <div class="demo-tile" style="opacity: var(--sf-opacity-75)"></div>
-        <div class="demo-tile" style="opacity: var(--sf-opacity-100)"></div>
+        <div class="demo-tile" style="opacity: var(--sf-opacity-muted)"></div>
         <div class="demo-tile" style="opacity: var(--sf-opacity-disabled)"></div>
       </div>
     </section>
@@ -387,11 +375,11 @@
         <span style="position: absolute; left: 0;   top: 0; z-index: var(--sf-z-below); background: var(--sf-color-neutral-300); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s)">below</span>
         <span style="position: absolute; left: 2rem; top: 0.5rem; z-index: var(--sf-z-base); background: var(--sf-color-neutral-400); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s)">base</span>
         <span style="position: absolute; left: 4rem; top: 1rem; z-index: var(--sf-z-raised); background: var(--sf-color-primary-300); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s)">raised</span>
-        <span style="position: absolute; left: 6rem; top: 1.5rem; z-index: var(--sf-z-low); background: var(--sf-color-primary-400); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-primary)">low</span>
-        <span style="position: absolute; left: 8rem; top: 2rem; z-index: var(--sf-z-mid); background: var(--sf-color-action); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-action)">mid</span>
-        <span style="position: absolute; left: 10rem; top: 2.5rem; z-index: var(--sf-z-high); background: var(--sf-color-tertiary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-tertiary)">high</span>
-        <span style="position: absolute; left: 12rem; top: 3rem; z-index: var(--sf-z-top); background: var(--sf-color-secondary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-secondary)">top</span>
-        <span style="position: absolute; left: 14rem; top: 3.5rem; z-index: var(--sf-z-max); background: var(--sf-color-primary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-primary)">max</span>
+        <span style="position: absolute; left: 6rem; top: 1.5rem; z-index: var(--sf-z-sticky); background: var(--sf-color-primary-400); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-primary)">low</span>
+        <span style="position: absolute; left: 8rem; top: 2rem; z-index: var(--sf-z-fixed); background: var(--sf-color-action); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-action)">mid</span>
+        <span style="position: absolute; left: 10rem; top: 2.5rem; z-index: var(--sf-z-dropdown); background: var(--sf-color-tertiary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-tertiary)">high</span>
+        <span style="position: absolute; left: 12rem; top: 3rem; z-index: var(--sf-z-toast); background: var(--sf-color-secondary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-secondary)">top</span>
+        <span style="position: absolute; left: 14rem; top: 3.5rem; z-index: var(--sf-z-overlay); background: var(--sf-color-primary); padding: var(--sf-space-xs); border-radius: var(--sf-radius-s); color: var(--sf-color-text--on-primary)">max</span>
       </div>
 
       <h3>Perspective (near / normal / far)</h3>

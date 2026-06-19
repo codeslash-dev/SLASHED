@@ -24,7 +24,7 @@
        Flow — distance between flow children (lobotomized owl).
        Consumed by .sf-flow > * + *.
        ---------------------------------------------------------- */
-    --sf-flow-space: var(--sf-space-content);
+    --sf-flow-space: var(--sf-content-gap);
 
     /* ----------------------------------------------------------
        Line clamp — default line count for .sf-line-clamp-N.
@@ -34,15 +34,6 @@
        applies to .sf-line-clamp-N callers.
        ---------------------------------------------------------- */
     --sf-line-clamp: 3;
-
-    /* ----------------------------------------------------------
-       Truncate — ellipsis character for .sf-truncate.
-       Stays as a token so consumers can swap to ASCII "..." or a
-       localised character without rewriting the rule. The CSS
-       text-overflow: ellipsis property doesn't read it directly;
-       it's exposed for consumer-built variants.
-       ---------------------------------------------------------- */
-    --sf-truncate-suffix: "\2026";
 
     /* ----------------------------------------------------------
        Aspect ratio — default for .sf-aspect (generic ratio container,

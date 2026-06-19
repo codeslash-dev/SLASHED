@@ -239,12 +239,14 @@ utility classes in 0.x; the layer slot is reserved for the future.
   derived from other tokens via `var(--sf-…)`. Role is computed deterministically
   from the declared value (`roleOf` in `scripts/token-tiers.js`) and surfaced in
   both index docs.
-- **Canonical-source aliases.** A few public tokens have two names by design —
-  `--sf-space-gap`→`--sf-gap`, `--sf-space-content`→`--sf-content-gap`,
-  `--sf-section-pad`→`--sf-section-pad--m`, `--sf-gutter-width`→`--sf-space-gutter`.
-  Override the canonical (left-hand) token. Aside from these, the alias graph traverses at most 3 nodes
-  (per-primitive → layout-system → canonical source, i.e. ≤2 indirections)
-  with no duplicates/dangling/cycles.
+- **Semantic gap layer (base → semantic → component).** Layout primitives
+  default directly to one of three semantic gap tokens — `--sf-gap` (loose),
+  `--sf-content-gap` (tight), `--sf-gutter` (wide) — which in turn read the
+  `--sf-space-*` scale. Override the semantic token to move every primitive of
+  that rhythm at once, or a per-primitive token (e.g. `--sf-cluster-gap`) for
+  one element. The alias graph traverses at most 3 nodes
+  (per-primitive → semantic → scale) with no duplicates/dangling/cycles.
+  (`--sf-section-pad`→`--sf-section-pad--m` is a similar unsuffixed default.)
 
 ### BEM consumer-API tokens
 

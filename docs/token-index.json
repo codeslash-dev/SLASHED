@@ -10,15 +10,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 839,
+      "tokens": 694,
       "by_tier": {
-        "PUBLIC": 701,
-        "PUBLIC-ADVANCED": 137,
+        "PUBLIC": 638,
+        "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 247,
-        "consumption": 592
+        "knob": 222,
+        "consumption": 472
       }
     }
   },
@@ -29,7 +29,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-alternate-inner-gap": {
       "tier": "PUBLIC",
@@ -37,7 +37,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-animation-blink": {
       "tier": "PUBLIC",
@@ -213,7 +213,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-bento-row-compact": {
       "tier": "PUBLIC",
@@ -239,45 +239,13 @@
       ],
       "value": "16rem"
     },
-    "--sf-blur-l": {
+    "--sf-blur": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "32px"
-    },
-    "--sf-blur-m": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "16px"
-    },
-    "--sf-blur-s": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "8px"
-    },
-    "--sf-blur-xl": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "48px"
-    },
-    "--sf-blur-xs": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "4px"
+      "value": "12px"
     },
     "--sf-body-color": {
       "tier": "PUBLIC",
@@ -333,7 +301,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-font-weight-bold)"
+      "value": "var(--sf-font-weight-strong)"
     },
     "--sf-body-text-wrap": {
       "tier": "PUBLIC",
@@ -493,7 +461,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gutter)"
+      "value": "var(--sf-gutter)"
     },
     "--sf-center-max": {
       "tier": "PUBLIC",
@@ -517,7 +485,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-cluster-justify": {
       "tier": "PUBLIC",
@@ -534,54 +502,6 @@
         "core/tokens.css"
       ],
       "value": "0.875em"
-    },
-    "--sf-col-rule-width-l": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-border-width-3)"
-    },
-    "--sf-col-rule-width-m": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-border-width-2)"
-    },
-    "--sf-col-rule-width-s": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-border-width-1)"
-    },
-    "--sf-col-width-l": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "32ch"
-    },
-    "--sf-col-width-m": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "24ch"
-    },
-    "--sf-col-width-s": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "16ch"
     },
     "--sf-color-action": {
       "tier": "PUBLIC",
@@ -703,14 +623,6 @@
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.10)"
     },
-    "--sf-color-action-a20": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.20)"
-    },
     "--sf-color-action-a30": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -718,14 +630,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.30)"
-    },
-    "--sf-color-action-a40": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.40)"
     },
     "--sf-color-action-a5": {
       "tier": "PUBLIC",
@@ -743,22 +647,6 @@
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.50)"
     },
-    "--sf-color-action-a60": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.60)"
-    },
-    "--sf-color-action-a70": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.70)"
-    },
     "--sf-color-action-a80": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -766,22 +654,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.80)"
-    },
-    "--sf-color-action-a90": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.90)"
-    },
-    "--sf-color-action-a95": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.95)"
     },
     "--sf-color-action-dark": {
       "tier": "PUBLIC",
@@ -997,14 +869,6 @@
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.10)"
     },
-    "--sf-color-base-a20": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.20)"
-    },
     "--sf-color-base-a30": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1012,14 +876,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.30)"
-    },
-    "--sf-color-base-a40": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.40)"
     },
     "--sf-color-base-a5": {
       "tier": "PUBLIC",
@@ -1037,22 +893,6 @@
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.50)"
     },
-    "--sf-color-base-a60": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.60)"
-    },
-    "--sf-color-base-a70": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.70)"
-    },
     "--sf-color-base-a80": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1060,22 +900,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)"
-    },
-    "--sf-color-base-a90": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.90)"
-    },
-    "--sf-color-base-a95": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.95)"
     },
     "--sf-color-base-dark": {
       "tier": "PUBLIC",
@@ -1651,14 +1475,6 @@
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)"
     },
-    "--sf-color-neutral-a20": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.20)"
-    },
     "--sf-color-neutral-a30": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1666,14 +1482,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)"
-    },
-    "--sf-color-neutral-a40": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.40)"
     },
     "--sf-color-neutral-a5": {
       "tier": "PUBLIC",
@@ -1691,22 +1499,6 @@
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.50)"
     },
-    "--sf-color-neutral-a60": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.60)"
-    },
-    "--sf-color-neutral-a70": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.70)"
-    },
     "--sf-color-neutral-a80": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1714,22 +1506,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.80)"
-    },
-    "--sf-color-neutral-a90": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.90)"
-    },
-    "--sf-color-neutral-a95": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.95)"
     },
     "--sf-color-neutral-dark": {
       "tier": "PUBLIC",
@@ -1953,14 +1729,6 @@
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.10)"
     },
-    "--sf-color-primary-a20": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.20)"
-    },
     "--sf-color-primary-a30": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1968,14 +1736,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.30)"
-    },
-    "--sf-color-primary-a40": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.40)"
     },
     "--sf-color-primary-a5": {
       "tier": "PUBLIC",
@@ -1993,22 +1753,6 @@
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.50)"
     },
-    "--sf-color-primary-a60": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.60)"
-    },
-    "--sf-color-primary-a70": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.70)"
-    },
     "--sf-color-primary-a80": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2016,22 +1760,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.80)"
-    },
-    "--sf-color-primary-a90": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.90)"
-    },
-    "--sf-color-primary-a95": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.95)"
     },
     "--sf-color-primary-dark": {
       "tier": "PUBLIC",
@@ -2263,14 +1991,6 @@
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)"
     },
-    "--sf-color-secondary-a20": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.20)"
-    },
     "--sf-color-secondary-a30": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2278,14 +1998,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)"
-    },
-    "--sf-color-secondary-a40": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.40)"
     },
     "--sf-color-secondary-a5": {
       "tier": "PUBLIC",
@@ -2303,22 +2015,6 @@
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.50)"
     },
-    "--sf-color-secondary-a60": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.60)"
-    },
-    "--sf-color-secondary-a70": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.70)"
-    },
     "--sf-color-secondary-a80": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2326,22 +2022,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.80)"
-    },
-    "--sf-color-secondary-a90": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.90)"
-    },
-    "--sf-color-secondary-a95": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.95)"
     },
     "--sf-color-secondary-dark": {
       "tier": "PUBLIC",
@@ -2629,14 +2309,6 @@
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)"
     },
-    "--sf-color-tertiary-a20": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.20)"
-    },
     "--sf-color-tertiary-a30": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2644,14 +2316,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)"
-    },
-    "--sf-color-tertiary-a40": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.40)"
     },
     "--sf-color-tertiary-a5": {
       "tier": "PUBLIC",
@@ -2669,22 +2333,6 @@
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.50)"
     },
-    "--sf-color-tertiary-a60": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.60)"
-    },
-    "--sf-color-tertiary-a70": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.70)"
-    },
     "--sf-color-tertiary-a80": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2692,22 +2340,6 @@
         "optional/tokens.palette.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.80)"
-    },
-    "--sf-color-tertiary-a90": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.90)"
-    },
-    "--sf-color-tertiary-a95": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.palette.css"
-      ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.95)"
     },
     "--sf-color-tertiary-dark": {
       "tier": "PUBLIC",
@@ -3321,7 +2953,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-equal-min-col": {
       "tier": "PUBLIC",
@@ -3409,79 +3041,7 @@
       "files": [
         "core/tokens.macros.css"
       ],
-      "value": "var(--sf-space-content)"
-    },
-    "--sf-fluid-custom-1": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "clamp(calc(var(--sf-fluid-custom-1-min) * 1rem), calc((var(--sf-fluid-custom-1-max) - var(--sf-fluid-custom-1-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-1-min) * 1rem), calc(var(--sf-fluid-custom-1-max) * 1rem))"
-    },
-    "--sf-fluid-custom-1-max": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "2"
-    },
-    "--sf-fluid-custom-1-min": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1"
-    },
-    "--sf-fluid-custom-2": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "clamp(calc(var(--sf-fluid-custom-2-min) * 1rem), calc((var(--sf-fluid-custom-2-max) - var(--sf-fluid-custom-2-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-2-min) * 1rem), calc(var(--sf-fluid-custom-2-max) * 1rem))"
-    },
-    "--sf-fluid-custom-2-max": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "2"
-    },
-    "--sf-fluid-custom-2-min": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1"
-    },
-    "--sf-fluid-custom-3": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "clamp(calc(var(--sf-fluid-custom-3-min) * 1rem), calc((var(--sf-fluid-custom-3-max) - var(--sf-fluid-custom-3-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-fluid-custom-3-min) * 1rem), calc(var(--sf-fluid-custom-3-max) * 1rem))"
-    },
-    "--sf-fluid-custom-3-max": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "2"
-    },
-    "--sf-fluid-custom-3-min": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-fluid-max-vw": {
       "tier": "PUBLIC-ADVANCED",
@@ -3619,14 +3179,6 @@
       ],
       "value": "normal"
     },
-    "--sf-font-weight-black": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "900"
-    },
     "--sf-font-weight-body": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3651,23 +3203,15 @@
       ],
       "value": "var(--sf-font-weight-bold)"
     },
-    "--sf-font-weight-extrabold": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "800"
-    },
-    "--sf-font-weight-extralight": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "200"
-    },
     "--sf-font-weight-heading": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-font-weight-semibold)"
+    },
+    "--sf-font-weight-interactive": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
@@ -3707,13 +3251,13 @@
       ],
       "value": "600"
     },
-    "--sf-font-weight-thin": {
+    "--sf-font-weight-strong": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "100"
+      "value": "var(--sf-font-weight-bold)"
     },
     "--sf-frame-ratio": {
       "tier": "PUBLIC",
@@ -3730,14 +3274,6 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-space-m)"
-    },
-    "--sf-gap-size": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-space-gap)"
     },
     "--sf-gradient-brand": {
       "tier": "PUBLIC",
@@ -3817,7 +3353,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-grid-min": {
       "tier": "PUBLIC",
@@ -3875,7 +3411,7 @@
       ],
       "value": "10rem"
     },
-    "--sf-gutter-width": {
+    "--sf-gutter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
@@ -4419,54 +3955,6 @@
       ],
       "value": "50% 50%"
     },
-    "--sf-opacity-0": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0"
-    },
-    "--sf-opacity-10": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0.1"
-    },
-    "--sf-opacity-100": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1"
-    },
-    "--sf-opacity-25": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0.25"
-    },
-    "--sf-opacity-50": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0.5"
-    },
-    "--sf-opacity-75": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0.75"
-    },
     "--sf-opacity-disabled": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -4474,6 +3962,14 @@
         "core/tokens.css"
       ],
       "value": "0.45"
+    },
+    "--sf-opacity-muted": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "0.5"
     },
     "--sf-optical-sizing": {
       "tier": "PUBLIC-ADVANCED",
@@ -4689,7 +4185,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-prose-table-pad": {
       "tier": "PUBLIC",
@@ -4873,7 +4369,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-reel-height": {
       "tier": "PUBLIC",
@@ -5169,7 +4665,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-sidebar-min-width": {
       "tier": "PUBLIC",
@@ -5235,54 +4731,6 @@
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
     },
-    "--sf-space-2xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-2xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-2xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-2xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-2xl-to-xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-2xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))"
-    },
     "--sf-space-2xs": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5299,62 +4747,6 @@
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
     },
-    "--sf-space-3xl-to-2xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-3xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-3xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-3xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-3xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-3xl-to-xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-3xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))"
-    },
     "--sf-space-4xl": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5362,70 +4754,6 @@
         "core/tokens.css"
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-2xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-3xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-4xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-base-max": {
       "tier": "PUBLIC-ADVANCED",
@@ -5443,30 +4771,6 @@
       ],
       "value": "1"
     },
-    "--sf-space-content": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-content-gap)"
-    },
-    "--sf-space-gap": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-gap)"
-    },
-    "--sf-space-gutter": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-gutter-width)"
-    },
     "--sf-space-l": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5475,38 +4779,6 @@
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
     },
-    "--sf-space-l-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-l-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-l-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-l-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))"
-    },
     "--sf-space-m": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5514,30 +4786,6 @@
         "core/tokens.css"
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-m-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-m-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-m-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))"
     },
     "--sf-space-none": {
       "tier": "PUBLIC",
@@ -5579,22 +4827,6 @@
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
     },
-    "--sf-space-s-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-s-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))"
-    },
     "--sf-space-scale": {
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
@@ -5611,46 +4843,6 @@
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
     },
-    "--sf-space-xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
-    },
-    "--sf-space-xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))"
-    },
     "--sf-space-xs": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5659,21 +4851,13 @@
       ],
       "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))"
     },
-    "--sf-space-xs-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))"
-    },
     "--sf-stack-gap": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-content)"
+      "value": "var(--sf-content-gap)"
     },
     "--sf-state-pending-opacity": {
       "tier": "PUBLIC",
@@ -5707,38 +4891,6 @@
       ],
       "value": "var(--sf-header-height-mobile)"
     },
-    "--sf-stroke-bold": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "2px"
-    },
-    "--sf-stroke-heavy": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "3px"
-    },
-    "--sf-stroke-regular": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1.5px"
-    },
-    "--sf-stroke-thin": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1px"
-    },
     "--sf-surface-color": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5753,7 +4905,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "var(--sf-space-gap)"
+      "value": "var(--sf-gap)"
     },
     "--sf-switcher-threshold": {
       "tier": "PUBLIC",
@@ -5802,54 +4954,6 @@
         "optional/tokens.sizes-extended.css"
       ],
       "value": "none"
-    },
-    "--sf-text-2xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
-    },
-    "--sf-text-2xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
-    },
-    "--sf-text-2xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
-    },
-    "--sf-text-2xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
-    },
-    "--sf-text-2xl-to-xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
-    },
-    "--sf-text-2xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem))"
     },
     "--sf-text-2xs": {
       "tier": "PUBLIC",
@@ -5931,62 +5035,6 @@
       ],
       "value": "none"
     },
-    "--sf-text-3xl-to-2xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
-    "--sf-text-3xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
-    "--sf-text-3xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
-    "--sf-text-3xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
-    "--sf-text-3xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
-    "--sf-text-3xl-to-xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
-    "--sf-text-3xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem))"
-    },
     "--sf-text-4xl": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -6026,70 +5074,6 @@
         "optional/tokens.sizes-extended.css"
       ],
       "value": "none"
-    },
-    "--sf-text-4xl-to-2xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-3xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-xl": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
-    },
-    "--sf-text-4xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem))"
     },
     "--sf-text-base-max": {
       "tier": "PUBLIC-ADVANCED",
@@ -6195,38 +5179,6 @@
       ],
       "value": "none"
     },
-    "--sf-text-l-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
-    },
-    "--sf-text-l-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
-    },
-    "--sf-text-l-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
-    },
-    "--sf-text-l-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem))"
-    },
     "--sf-text-m": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -6266,30 +5218,6 @@
         "optional/tokens.sizes-extended.css"
       ],
       "value": "65ch"
-    },
-    "--sf-text-m-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
-    },
-    "--sf-text-m-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
-    },
-    "--sf-text-m-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * 1rem))"
     },
     "--sf-text-ratio-max": {
       "tier": "PUBLIC-ADVANCED",
@@ -6346,22 +5274,6 @@
         "optional/tokens.sizes-extended.css"
       ],
       "value": "65ch"
-    },
-    "--sf-text-s-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))"
-    },
-    "--sf-text-s-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem))"
     },
     "--sf-text-scale": {
       "tier": "PUBLIC-ADVANCED",
@@ -6443,46 +5355,6 @@
       ],
       "value": "none"
     },
-    "--sf-text-xl-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
-    },
-    "--sf-text-xl-to-l": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
-    },
-    "--sf-text-xl-to-m": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
-    },
-    "--sf-text-xl-to-s": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
-    },
-    "--sf-text-xl-to-xs": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.sizes-extended.css"
-      ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem))"
-    },
     "--sf-text-xs": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -6523,13 +5395,13 @@
       ],
       "value": "60ch"
     },
-    "--sf-text-xs-to-2xs": {
-      "tier": "PUBLIC-ADVANCED",
+    "--sf-theme-transition-duration": {
+      "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.sizes-extended.css"
+        "core/tokens.css"
       ],
-      "value": "clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem))"
+      "value": "calc(300ms * var(--sf-motion-scale))"
     },
     "--sf-touch-target": {
       "tier": "PUBLIC",
@@ -6659,14 +5531,6 @@
       ],
       "value": "transform var(--sf-duration-normal) var(--sf-ease-out)"
     },
-    "--sf-truncate-suffix": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "\"\\2026\""
-    },
     "--sf-z-base": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -6685,59 +5549,35 @@
     },
     "--sf-z-dropdown": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-z-high)"
+      "value": "1020"
     },
     "--sf-z-fixed": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-z-mid)"
+      "value": "1010"
     },
-    "--sf-z-high": {
+    "--sf-z-modal": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "500"
-    },
-    "--sf-z-low": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "10"
-    },
-    "--sf-z-max": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "9999"
-    },
-    "--sf-z-mid": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "100"
+      "value": "1040"
     },
     "--sf-z-overlay": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-z-max)"
+      "value": "1030"
     },
     "--sf-z-raised": {
       "tier": "PUBLIC",
@@ -6749,27 +5589,27 @@
     },
     "--sf-z-sticky": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-z-low)"
+      "value": "1000"
     },
     "--sf-z-toast": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-z-top)"
-    },
-    "--sf-z-top": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "900"
+      "value": "1050"
+    },
+    "--sf-z-tooltip": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "1060"
     }
   }
 }
