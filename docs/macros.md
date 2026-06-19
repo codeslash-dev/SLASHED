@@ -366,7 +366,7 @@ Fills text with a gradient (default `--sf-gradient-primary`).
 
 `background-clip: text` and `color: transparent` are applied unconditionally (no
 `@supports` gate). Both prefixed (`-webkit-background-clip`) and unprefixed
-properties are emitted; at the floor (Safari 17.5) only the prefixed form works.
+The unprefixed `background-clip: text` is used unconditionally — it is supported at the framework floor (Safari 18.0+).
 Browsers that don't clip backgrounds to text render the text invisible — an
 accepted consequence of the support floor.
 
