@@ -10,15 +10,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 694,
+      "tokens": 693,
       "by_tier": {
-        "PUBLIC": 638,
+        "PUBLIC": 637,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 222,
-        "consumption": 472
+        "consumption": 471
       }
     }
   },
@@ -2546,14 +2546,6 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
-    },
-    "--sf-color-text--on-surface": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-text--on-base)"
     },
     "--sf-color-text--on-tertiary": {
       "tier": "PUBLIC",

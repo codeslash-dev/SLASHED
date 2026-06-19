@@ -364,7 +364,6 @@
        Text-on-color — plain var aliases (ungated)
        ---------------------------------------------------------- */
     --sf-color-text--on-base:    var(--sf-color-text);
-    --sf-color-text--on-surface: var(--sf-color-text--on-base);   /* compat alias → base */
 
     /* Static fallbacks for engines that support oklch(from …) but not sign()
        (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these
