@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "a7cafc9f6028",
+    "tokensHash": "38de509cb7c7",
     "bundles": [
       "essential",
       "full",
@@ -11,15 +11,15 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 694,
+      "tokens": 693,
       "byTier": {
-        "PUBLIC": 638,
+        "PUBLIC": 637,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 49,
-        "Core tokens": 474,
+        "Core tokens": 473,
         "Macro tokens": 23,
         "Component tokens": 6,
         "Palette tokens": 106,
@@ -7374,30 +7374,6 @@
       "note": "Accessible foreground for text on success-colored backgrounds.",
       "value": "oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)",
       "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-text--on-surface",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "Text-on-color",
-      "description": "Accessible foreground colors guaranteed to pass WCAG contrast on each colored background surface.",
-      "note": "Accessible foreground for text on elevated surface backgrounds (cards, panels).",
-      "value": "var(--sf-color-text--on-base)",
-      "aliasOf": "--sf-color-text--on-base",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

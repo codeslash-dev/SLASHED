@@ -29,21 +29,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 925,
+      "total": 924,
       "by_type": {
         "class": 231,
-        "token": 694
+        "token": 693
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 869,
+        "PUBLIC": 868,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 472,
+        "consumption": 471,
         "knob": 222
       },
-      "tokens": 694,
+      "tokens": 693,
       "classes": 231,
       "sf_classes": 182,
       "is_classes": 40,
@@ -51,7 +51,7 @@
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
-        "Core tokens": 474,
+        "Core tokens": 473,
         "Layout primitives": 126,
         "Layout tokens": 49,
         "Macro classes": 37,
@@ -9025,35 +9025,6 @@
       "description": "Static fallbacks for engines that support oklch(from …) but not sign() (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these with the exact auto-contrast formula when the engine supports it. Derived from the default palette at threshold 0.6: surfaces with L <…",
       "value": "oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)",
       "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-text--on-surface",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Text-on-color",
-      "description": "plain var aliases (ungated)",
-      "value": "var(--sf-color-text--on-base)",
-      "aliasOf": "--sf-color-text--on-base",
       "registered": false,
       "animatable": false,
       "syntax": null,

@@ -628,7 +628,6 @@
     "--sf-color-text--on-neutral": "Accessible foreground for text placed on neutral-colored backgrounds.",
     "--sf-color-text--on-primary": "Accessible foreground for text placed on primary-colored backgrounds.",
     "--sf-color-text--on-secondary": "Accessible foreground for text placed on secondary-colored backgrounds.",
-    "--sf-color-text--on-surface": "Accessible foreground for text on elevated surface backgrounds (cards, panels).",
     "--sf-color-text--on-tertiary": "Accessible foreground for text placed on tertiary-colored backgrounds.",
     "--sf-display-l-line-height": "Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes.",
     "--sf-display-m-line-height": "Line height for medium display text (--sf-text-display-m).",

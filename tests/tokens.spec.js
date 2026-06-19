@@ -116,7 +116,7 @@ function measure({ theme, tokenNames }) {
 
   // On-color contrast for every color family.
   const families = [
-    'primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface',
+    'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
     'success', 'warning', 'error', 'info', 'danger',
   ];
   const onColor = {};
@@ -204,7 +204,7 @@ for (const theme of ['light', 'dark']) {
       // (e.g. L=0.55..0.65) may need an explicit override of its
       // matching --sf-color-text--on-* token. See architecture.md.
       const FAMILIES = [
-        'primary', 'secondary', 'tertiary', 'action', 'neutral', 'surface',
+        'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
         'success', 'warning', 'error', 'info', 'danger',
       ];
       for (const name of FAMILIES) {

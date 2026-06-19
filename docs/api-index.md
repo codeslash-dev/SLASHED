@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**925 elements** — 694 tokens, 231 classes.
+**924 elements** — 693 tokens, 231 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 869 | Everyday surface. SemVer-stable. |
+| PUBLIC | 868 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (694)
+## Tokens (693)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Override to give form fields a distinct visual language from buttons without touching global radius/spacing tokens. |
 
-### Core tokens (474)
+### Core tokens (473)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -230,7 +230,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-text--on-primary` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Static fallbacks for engines that support oklch(from …) but not sign() (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these with the exact auto-contrast formula when the engine supports it. Derived from the default palette at threshold 0.6: surfaces with L <… |
 | `--sf-color-text--on-secondary` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Static fallbacks for engines that support oklch(from …) but not sign() (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these with the exact auto-contrast formula when the engine supports it. Derived from the default palette at threshold 0.6: surfaces with L <… |
 | `--sf-color-text--on-success` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Static fallbacks for engines that support oklch(from …) but not sign() (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these with the exact auto-contrast formula when the engine supports it. Derived from the default palette at threshold 0.6: surfaces with L <… |
-| `--sf-color-text--on-surface` | PUBLIC | consumption | color | `var(--sf-color-text--on-base)` | plain var aliases (ungated) |
 | `--sf-color-text--on-tertiary` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Static fallbacks for engines that support oklch(from …) but not sign() (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these with the exact auto-contrast formula when the engine supports it. Derived from the default palette at threshold 0.6: surfaces with L <… |
 | `--sf-color-text--on-warning` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Static fallbacks for engines that support oklch(from …) but not sign() (Chrome 125–137, Firefox 128–130). The sign() gate below overrides these with the exact auto-contrast formula when the engine supports it. Derived from the default palette at threshold 0.6: surfaces with L <… |
 | `--sf-color-text--placeholder` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` | light and dark require opposite formula directions, so each side of light-dark() references its source token. |
