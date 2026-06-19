@@ -17,6 +17,17 @@ families they do. See `docs/migration.md` for the upgrade guide.
 - **tokens:** add semantic font-weight roles `--sf-font-weight-interactive` and `--sf-font-weight-strong`
 - **tokens:** z-index is now a semantic, Bootstrap/Chakra-style ladder — adds `--sf-z-modal`, `--sf-z-tooltip`
 - **tokens:** flatten the gap system to a base→semantic→component model — three semantic rhythms `--sf-gap` (loose), `--sf-content-gap` (tight), `--sf-gutter` (wide); every layout primitive defaults straight to one
+- **tokens:** brand ghost/subtle/muted tokens (`--sf-color-{primary,secondary,tertiary,action,neutral,base}-{ghost,subtle,muted}`) moved from `optional/tokens.palette.css` to `core/tokens.css` — now available in the essential bundle, no longer requiring the optional palette file
+
+### Bug Fixes
+- **tokens:** `--sf-color-text--muted` now uses a contrast-aware neutral-lightness formula instead of a plain neutral reference
+- **tokens:** `--sf-color-text--on-inverse` now correctly references `--sf-color-inverse` (was `--sf-color-text--inverse`)
+- **tokens:** add `var(--sf-color-bg, …)` fallback to `--sf-focus-ring-shadow` for contexts where `--sf-color-bg` is unset
+- **forms:** scope button default styles to `:not([class*="sf-"])` to avoid overriding Slashed UI component classes
+
+### Changed
+- **tokens:** alpha transparency for brand ghost/subtle/muted tokens now uses `oklch(from …)` syntax instead of `color-mix(…, transparent)` — equivalent output, better color-space fidelity
+- **optional/tokens.palette.css:** numeric alpha scale is now gated behind `@supports (color: oklch(from red l c h))`; older engines receive no alpha tokens instead of invalid values
 
 ### ⚠️ Breaking Changes
 - **tokens:** removed the combinatorial fluid-pair "bridge" matrix `--sf-{space,text}-{step}-to-{step}` (optional/tokens.sizes-extended.css). Use the already-fluid base scales, or a custom `clamp()`.
@@ -29,7 +40,7 @@ families they do. See `docs/migration.md` for the upgrade guide.
 - **tokens:** removed `--sf-truncate-suffix` (was never read — `text-overflow` string values are Firefox-only).
 - **tokens:** removed rare font-weights `--sf-font-weight-{thin,extralight,extrabold,black}`. Kept `light/normal/medium/semibold/bold`; for an off-scale weight write `font-weight: 100` or override a role token. **`--sf-body-strong-weight` now references `--sf-font-weight-strong`.**
 - **tokens:** removed the z-index numeric ladder `--sf-z-{low,mid,high,top,max}`. Use the semantic roles `--sf-z-{sticky,fixed,dropdown,overlay,modal,toast,tooltip}` (values shifted to the 1000-base Bootstrap/Chakra convention).
-- **tokens:** flattened the gap aliases. Removed the middle "layout" tier `--sf-space-gap`, `--sf-space-content`, `--sf-space-gutter`, `--sf-gap-size`, and renamed `--sf-gutter-width` → `--sf-gutter`. Layout primitives now default straight to the semantic `--sf-gap` / `--sf-content-gap` / `--sf-gutter`. To retune all primitives at once, override the semantic token (e.g. `--sf-gap`) instead of `--sf-space-gap`; per-primitive knobs (`--sf-cluster-gap`, …) are unchanged.
+- **tokens:** flattened the gap aliases. Removed the middle "layout" tier `--sf-space-gap`, `--sf-space-content`, `--sf-space-gutter`, `--sf-gap-size`, and folded the container gutter into a single `--sf-gutter` (no separate `--sf-gutter-width`/`--sf-space-gutter`). Layout primitives now default straight to the semantic `--sf-gap` / `--sf-content-gap` / `--sf-gutter`. To retune all primitives at once, override the semantic token (e.g. `--sf-gap`); per-primitive knobs (`--sf-cluster-gap`, …) are unchanged.
 
 ## [0.5.47] - 2026-06-18
 

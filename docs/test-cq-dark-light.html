@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLASHED — CQ Layout + Dark/Light Test</title>
+  <link rel="stylesheet" href="../dist/slashed.full.css">
+  <style>
+    /* Pin font-size so rem/em in @container queries resolve to stable px values.
+       Body uses SLASHED's fluid clamp scale, so we must pin it too.
+       This affects only this test page — not the framework's CSS logic. */
+    html, body { font-size: 16px !important; }
+
+    :root {
+      --sf-color-primary-light:   oklch(0.52 0.22 260);
+      --sf-color-secondary-light: oklch(0.30 0.08 260);
+      --sf-color-tertiary-light:  oklch(0.55 0.20 30);
+      --sf-color-action-light:    oklch(0.50 0.20 160);
+      --sf-color-neutral-light:   oklch(0.45 0.02 260);
+      --sf-color-base-light:      oklch(0.98 0.005 260);
+    }
+
+    body {
+      background: var(--sf-color-bg);
+      color: var(--sf-color-text);
+      font-family: system-ui, sans-serif;
+      margin: 0;
+    }
+
+    /* ── Test scaffold ──────────────────────────────────────── */
+    .t-page    { padding: 2rem; max-width: none; }
+    .t-section { margin-block: 3rem; }
+    .t-section > h2 {
+      font-size: 1.25rem; font-weight: 700; margin-block: 0 1.5rem;
+      padding-block-end: .5rem;
+      border-bottom: 2px solid var(--sf-color-primary);
+      color: var(--sf-color-primary);
+    }
+    .t-section > h3 {
+      font-size: .9rem; font-weight: 600; color: var(--sf-color-text--secondary);
+      margin-block: 1.25rem .5rem; text-transform: uppercase; letter-spacing: .05em;
+    }
+
+    /* Constraint wrappers: explicit px so CQ thresholds are deterministic
+       (at 16px: 30em=480px, 48em=768px; 384px < 480px; 608px ∈ 480-768px; 800px > 768px). */
+    .t-narrow  { width: 384px;  container-type: inline-size; }
+    .t-medium  { width: 608px;  container-type: inline-size; }
+    .t-wide    { width: 800px;  container-type: inline-size; }
+    .t-trio {
+      display: grid;
+      grid-template-columns: 384px 608px 800px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .t-trio > div { container-type: inline-size; }
+
+    /* result label */
+    .t-label {
+      font-size: .75rem; color: var(--sf-color-text--muted);
+      margin-block: 0 .25rem;
+    }
+    .t-label strong { color: var(--sf-color-primary); }
+
+    /* placeholder cards for layout demos */
+    .card {
+      padding: .75rem; border-radius: .375rem; text-align: center;
+      font-size: .8rem; font-weight: 600; min-height: 3.5rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-a { background: oklch(0.90 0.08 260); color: oklch(0.30 0.12 260); }
+    .card-b { background: oklch(0.90 0.10 160); color: oklch(0.28 0.14 160); }
+    .card-c { background: oklch(0.90 0.08 30);  color: oklch(0.30 0.14 30); }
+    .card-d { background: oklch(0.90 0.06 310); color: oklch(0.30 0.12 310); }
+    .card-e { background: oklch(0.88 0.04 200); color: oklch(0.28 0.06 200); }
+
+    /* ── Dark/light nesting scaffold ────────────────────────── */
+    .theme-block {
+      padding: 1.25rem;
+      border-radius: .5rem;
+      margin-block: .5rem;
+      border: 1.5px solid var(--sf-color-border);
+    }
+    .theme-block > .label {
+      font-size: .7rem; font-weight: 700; opacity: .6;
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-block-end: .75rem;
+    }
+    .swatch-row { display: flex; gap: .5rem; flex-wrap: wrap; margin-block: .5rem; }
+    .swatch {
+      font-size: .7rem; padding: .3rem .6rem; border-radius: .25rem;
+      border: 1px solid var(--sf-color-border);
+    }
+    .swatch-bg   { background: var(--sf-color-bg);           color: var(--sf-color-text); }
+    .swatch-sur  { background: var(--sf-color-surface);      color: var(--sf-color-text); }
+    .swatch-pri  { background: var(--sf-color-primary);      color: var(--sf-color-text--on-primary); }
+    .swatch-txt  { background: var(--sf-color-text--secondary); color: var(--sf-color-bg); }
+    .swatch-brd  { background: var(--sf-color-border);       color: var(--sf-color-text); }
+  </style>
+</head>
+<body>
+
+<div class="t-page">
+
+  <div style="display:flex;align-items:baseline;gap:1rem;margin-block:0 .25rem">
+    <h1 style="font-size:1.5rem;margin:0">SLASHED — CQ Layout + Dark/Light Tests</h1>
+    <button id="theme-toggle"
+      onclick="(function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');document.getElementById('theme-toggle').textContent=h.getAttribute('data-theme')==='dark'?'☀ Light':'☾ Dark';})()"
+      style="margin-left:auto;padding:.35rem .85rem;border-radius:.375rem;border:1.5px solid var(--sf-color-border);background:var(--sf-color-surface);color:var(--sf-color-text);font-size:.8rem;cursor:pointer;flex-shrink:0">
+      ☾ Dark
+    </button>
+  </div>
+  <p style="font-size:.85rem;color:var(--sf-color-text--muted);margin-block:0 0">
+    Each CQ layout is shown at three explicit widths (384 px / 608 px / 800 px) inside
+    <code>container-type: inline-size</code> wrappers. Font-size is pinned to 16 px so
+    30 em = 480 px and 48 em = 768 px are stable. The alternate layout is self-sizing
+    (named container). Toggle theme to verify dark/light token switching.
+  </p>
+
+  <!-- ── BENTO ─────────────────────────────────────────────────── -->
+  <div class="t-section" id="bento">
+    <h2>Bento — container-query responsive</h2>
+    <p style="font-size:.8rem;color:var(--sf-color-text--muted);margin-block:0 1rem">
+      <code>.sf-bento</code> uses <strong>unnamed</strong> <code>@container</code> queries
+      so it reads its <em>ancestor</em> container's width.<br>
+      • ≤29.99em → 1 col &nbsp;•&nbsp; 30–47.99em → 2 cols &nbsp;•&nbsp; ≥48em → default 4 cols
+    </p>
+
+    <h3>Default 4-col bento at 3 widths</h3>
+    <p style="font-size:.75rem;color:var(--sf-color-text--muted);margin-block:0 .75rem">
+      JS ✓/✗ badges use <code>gridTemplateColumns</code> to count explicit columns.
+      Plain children only (no <code>sf-bento-wide</code>) to avoid implicit track noise.
+    </p>
+    <div class="t-trio">
+      <div>
+        <p class="t-label"><strong>384 px (24 rem)</strong> → expect <strong>1</strong> col</p>
+        <div class="sf-bento" id="bento-narrow">
+          <div class="card card-a">A</div>
+          <div class="card card-b">B</div>
+          <div class="card card-c">C</div>
+          <div class="card card-d">D</div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>608 px (38 rem)</strong> → expect <strong>2</strong> cols</p>
+        <div class="sf-bento" id="bento-medium">
+          <div class="card card-a">A</div>
+          <div class="card card-b">B</div>
+          <div class="card card-c">C</div>
+          <div class="card card-d">D</div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>800 px (50 rem)</strong> → expect <strong>4</strong> cols</p>
+        <div class="sf-bento" id="bento-wide">
+          <div class="card card-a">A</div>
+          <div class="card card-b">B</div>
+          <div class="card card-c">C</div>
+          <div class="card card-d">D</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Bento column modifiers (.sf-bento--2 / --3 / --6)</h3>
+    <div class="t-trio">
+      <div>
+        <p class="t-label"><strong>24 rem</strong> → all collapse to 1 col (CQ override)</p>
+        <div class="sf-stack" style="gap:.75rem">
+          <div>
+            <p class="t-label">--2</p>
+            <div class="sf-bento sf-bento--2">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div><div class="card card-d">D</div>
+            </div>
+          </div>
+          <div>
+            <p class="t-label">--3</p>
+            <div class="sf-bento sf-bento--3">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div>
+            </div>
+          </div>
+          <div>
+            <p class="t-label">--6</p>
+            <div class="sf-bento sf-bento--6">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div><div class="card card-d">D</div>
+              <div class="card card-e">E</div><div class="card card-a">F</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>38 rem</strong> → all forced to 2 col by CQ</p>
+        <div class="sf-stack" style="gap:.75rem">
+          <div>
+            <p class="t-label">--2</p>
+            <div class="sf-bento sf-bento--2">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div><div class="card card-d">D</div>
+            </div>
+          </div>
+          <div>
+            <p class="t-label">--3</p>
+            <div class="sf-bento sf-bento--3">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div>
+            </div>
+          </div>
+          <div>
+            <p class="t-label">--6</p>
+            <div class="sf-bento sf-bento--6">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div><div class="card card-d">D</div>
+              <div class="card card-e">E</div><div class="card card-a">F</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>full width</strong> → each uses its own col count</p>
+        <div class="sf-stack" style="gap:.75rem">
+          <div>
+            <p class="t-label">--2</p>
+            <div class="sf-bento sf-bento--2">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div><div class="card card-d">D</div>
+            </div>
+          </div>
+          <div>
+            <p class="t-label">--3</p>
+            <div class="sf-bento sf-bento--3">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div>
+            </div>
+          </div>
+          <div>
+            <p class="t-label">--6</p>
+            <div class="sf-bento sf-bento--6">
+              <div class="card card-a">A</div><div class="card card-b">B</div>
+              <div class="card card-c">C</div><div class="card card-d">D</div>
+              <div class="card card-e">E</div><div class="card card-a">F</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Bento child span modifiers (.sf-bento-wide / tall / featured / full)</h3>
+    <div class="t-wide" style="container-type: inline-size">
+      <div class="sf-bento" style="--sf-bento-cols: 4; min-height: 12rem">
+        <div class="card card-a sf-bento-featured">featured<br>2col × 2row</div>
+        <div class="card card-b sf-bento-wide">wide (2 col)</div>
+        <div class="card card-c">C</div>
+        <div class="card card-d sf-bento-tall">tall<br>(2 row)</div>
+        <div class="card card-e">E</div>
+        <div class="card card-a sf-bento-full">full width</div>
+        <div class="card card-b">G</div>
+        <div class="card card-c">H</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FIXED-COLUMN GRIDS ──────────────────────────────────── -->
+  <div class="t-section" id="grid-cols">
+    <h2>Fixed-column grids — container-query responsive</h2>
+    <p style="font-size:.8rem;color:var(--sf-color-text--muted);margin-block:0 1rem">
+      <code>.sf-grid-cols-2/3/4/6</code> use <strong>unnamed</strong> <code>@container</code>
+      queries — same ancestor-width rule as bento.<br>
+      • ≥30em: 4-col→2col, 6-col→3col &nbsp;•&nbsp; ≥48em: full target columns
+    </p>
+
+    <div class="t-trio">
+      <div>
+        <p class="t-label"><strong>24 rem</strong> → all single-column (below 30em)</p>
+        <div class="sf-stack" style="gap:.75rem">
+          <div><p class="t-label">sf-grid-cols-2</p>
+            <div class="sf-grid-cols-2">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-3</p>
+            <div class="sf-grid-cols-3">
+              <div class="card card-a">1</div><div class="card card-b">2</div><div class="card card-c">3</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-4</p>
+            <div class="sf-grid-cols-4">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+              <div class="card card-c">3</div><div class="card card-d">4</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-6</p>
+            <div class="sf-grid-cols-6">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+              <div class="card card-c">3</div><div class="card card-d">4</div>
+              <div class="card card-e">5</div><div class="card card-a">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>38 rem</strong> → 4-col→2 cols, 6-col→3 cols (30–48em range)</p>
+        <div class="sf-stack" style="gap:.75rem">
+          <div><p class="t-label">sf-grid-cols-2 (still 1 col — breaks at 48em)</p>
+            <div class="sf-grid-cols-2">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-3 (still 1 col — breaks at 48em)</p>
+            <div class="sf-grid-cols-3">
+              <div class="card card-a">1</div><div class="card card-b">2</div><div class="card card-c">3</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-4 → 2 cols</p>
+            <div class="sf-grid-cols-4">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+              <div class="card card-c">3</div><div class="card card-d">4</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-6 → 3 cols</p>
+            <div class="sf-grid-cols-6">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+              <div class="card card-c">3</div><div class="card card-d">4</div>
+              <div class="card card-e">5</div><div class="card card-a">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>full width</strong> → all at target column count</p>
+        <div class="sf-stack" style="gap:.75rem">
+          <div><p class="t-label">sf-grid-cols-2 → 2 cols</p>
+            <div class="sf-grid-cols-2">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-3 → 3 cols</p>
+            <div class="sf-grid-cols-3">
+              <div class="card card-a">1</div><div class="card card-b">2</div><div class="card card-c">3</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-4 → 4 cols</p>
+            <div class="sf-grid-cols-4">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+              <div class="card card-c">3</div><div class="card card-d">4</div>
+            </div>
+          </div>
+          <div><p class="t-label">sf-grid-cols-6 → 6 cols</p>
+            <div class="sf-grid-cols-6">
+              <div class="card card-a">1</div><div class="card card-b">2</div>
+              <div class="card card-c">3</div><div class="card card-d">4</div>
+              <div class="card card-e">5</div><div class="card card-a">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Ratio grids (1-2, 2-1, 1-3, 3-1) — also use unnamed @container</h3>
+    <div class="t-trio">
+      <div>
+        <p class="t-label"><strong>24 rem</strong> → all single-column (below 48em)</p>
+        <div class="sf-stack" style="gap:.5rem">
+          <div class="sf-grid-cols-1-2"><div class="card card-a">1</div><div class="card card-b">2</div></div>
+          <div class="sf-grid-cols-2-1"><div class="card card-a">2</div><div class="card card-b">1</div></div>
+          <div class="sf-grid-cols-1-3"><div class="card card-a">1</div><div class="card card-b">3</div></div>
+          <div class="sf-grid-cols-3-1"><div class="card card-a">3</div><div class="card card-b">1</div></div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>38 rem</strong> → still single-column (below 48em)</p>
+        <div class="sf-stack" style="gap:.5rem">
+          <div class="sf-grid-cols-1-2"><div class="card card-a">1</div><div class="card card-b">2</div></div>
+          <div class="sf-grid-cols-2-1"><div class="card card-a">2</div><div class="card card-b">1</div></div>
+          <div class="sf-grid-cols-1-3"><div class="card card-a">1</div><div class="card card-b">3</div></div>
+          <div class="sf-grid-cols-3-1"><div class="card card-a">3</div><div class="card card-b">1</div></div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>full width</strong> → two-column with correct ratios</p>
+        <div class="sf-stack" style="gap:.5rem">
+          <div class="sf-grid-cols-1-2"><div class="card card-a">1 (narrow)</div><div class="card card-b">2 (wide)</div></div>
+          <div class="sf-grid-cols-2-1"><div class="card card-a">2 (wide)</div><div class="card card-b">1 (narrow)</div></div>
+          <div class="sf-grid-cols-1-3"><div class="card card-a">1 (narrow)</div><div class="card card-b">3 (wide)</div></div>
+          <div class="sf-grid-cols-3-1"><div class="card card-a">3 (wide)</div><div class="card card-b">1 (narrow)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ALTERNATE ───────────────────────────────────────────── -->
+  <div class="t-section" id="alternate">
+    <h2>Alternate (zigzag) — self-sizing via named container</h2>
+    <p style="font-size:.8rem;color:var(--sf-color-text--muted);margin-block:0 1rem">
+      <code>.sf-alternate</code> uses <code>@container sf-alternate (min-width: 48em)</code>
+      — a <strong>named</strong> query so it responds to its OWN inline-size, no ancestor needed.<br>
+      • Below 48em → stacked (single column per row) &nbsp;•&nbsp; ≥48em → 2 cols, even rows reversed
+    </p>
+
+    <div class="t-trio">
+      <div>
+        <p class="t-label"><strong>24 rem</strong> → single-column (stacked)</p>
+        <div class="sf-alternate">
+          <div>
+            <div class="card card-a" style="min-height:5rem">Row 1 — image</div>
+            <div style="padding:.5rem"><strong>Row 1</strong><br><small>normal order</small></div>
+          </div>
+          <div>
+            <div class="card card-b" style="min-height:5rem">Row 2 — image</div>
+            <div style="padding:.5rem"><strong>Row 2</strong><br><small>would flip ≥48em</small></div>
+          </div>
+          <div>
+            <div class="card card-c" style="min-height:5rem">Row 3 — image</div>
+            <div style="padding:.5rem"><strong>Row 3</strong><br><small>normal order</small></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>38 rem</strong> → still stacked (below 48em)</p>
+        <div class="sf-alternate">
+          <div>
+            <div class="card card-a" style="min-height:5rem">Row 1 — image</div>
+            <div style="padding:.5rem"><strong>Row 1</strong><br><small>normal order</small></div>
+          </div>
+          <div>
+            <div class="card card-b" style="min-height:5rem">Row 2 — image</div>
+            <div style="padding:.5rem"><strong>Row 2</strong><br><small>would flip ≥48em</small></div>
+          </div>
+          <div>
+            <div class="card card-c" style="min-height:5rem">Row 3 — image</div>
+            <div style="padding:.5rem"><strong>Row 3</strong><br><small>normal order</small></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="t-label"><strong>full width</strong> → 2-col zigzag; even rows (2nd) flip image right</p>
+        <div class="sf-alternate">
+          <div>
+            <div class="card card-a" style="min-height:6rem">Row 1 — image (LEFT)</div>
+            <div style="padding:.5rem"><strong>Row 1 — text</strong><br><small>image leads (order:0)</small></div>
+          </div>
+          <div>
+            <div class="card card-b" style="min-height:6rem">Row 2 — image (RIGHT)</div>
+            <div style="padding:.5rem"><strong>Row 2 — text</strong><br><small>text leads, image flipped right</small></div>
+          </div>
+          <div>
+            <div class="card card-c" style="min-height:6rem">Row 3 — image (LEFT)</div>
+            <div style="padding:.5rem"><strong>Row 3 — text</strong><br><small>image leads again</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Alternate nested inside narrow bento cell — CQ isolation check</h3>
+    <p style="font-size:.8rem;color:var(--sf-color-text--muted);margin-block:0 .75rem">
+      Outer container is narrow (24rem). Bento creates its named <code>sf-bento</code>
+      context. The alternate inside should still query its OWN width (also 24rem here),
+      so it should stay stacked — not get confused by the bento's container context.
+    </p>
+    <div class="t-narrow">
+      <div class="sf-bento sf-bento--2">
+        <div class="card card-e">Bento A</div>
+        <div class="card card-e">Bento B</div>
+        <div style="grid-column: 1 / -1">
+          <div class="sf-alternate" style="border: 1px dashed oklch(.7 .08 260); padding:.5rem; border-radius:.375rem">
+            <div>
+              <div class="card card-a" style="min-height:4rem">Alternate image</div>
+              <div style="padding:.375rem"><small>Row 1 — should be stacked in 24rem</small></div>
+            </div>
+            <div>
+              <div class="card card-b" style="min-height:4rem">Alternate image 2</div>
+              <div style="padding:.375rem"><small>Row 2 — should not flip</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DARK / LIGHT NESTING ────────────────────────────────── -->
+  <div class="t-section" id="dark-light">
+    <h2>Dark / Light nesting — multi-level</h2>
+    <p style="font-size:.8rem;color:var(--sf-color-text--muted);margin-block:0 1rem">
+      Each <code>[data-theme]</code> block auto-resets its own background and text color.
+      Swatches show resolved token values — they must visually differ between light and dark zones.
+    </p>
+
+    <!-- Root is data-theme="light" (set on <html>) -->
+    <div class="theme-block" data-theme="light">
+      <p class="label">data-theme="light" (level 1)</p>
+      <div class="swatch-row">
+        <span class="swatch swatch-bg">--sf-color-bg</span>
+        <span class="swatch swatch-sur">--sf-color-surface</span>
+        <span class="swatch swatch-pri">--sf-color-primary</span>
+        <span class="swatch swatch-txt">text-secondary</span>
+        <span class="swatch swatch-brd">border</span>
+      </div>
+      <p style="margin-block:.5rem 0;font-size:.8rem">
+        Text is <code>var(--sf-color-text)</code>. Should be dark on a light background.
+      </p>
+
+      <!-- L2 dark -->
+      <div class="theme-block" data-theme="dark">
+        <p class="label">data-theme="dark" (level 2)</p>
+        <div class="swatch-row">
+          <span class="swatch swatch-bg">--sf-color-bg</span>
+          <span class="swatch swatch-sur">--sf-color-surface</span>
+          <span class="swatch swatch-pri">--sf-color-primary</span>
+          <span class="swatch swatch-txt">text-secondary</span>
+          <span class="swatch swatch-brd">border</span>
+        </div>
+        <p style="margin-block:.5rem 0;font-size:.8rem">
+          Should be dark background, light text. Primary should be lighter/brighter.
+        </p>
+
+        <!-- L3 light inside dark -->
+        <div class="theme-block" data-theme="light">
+          <p class="label">data-theme="light" (level 3 — inside dark)</p>
+          <div class="swatch-row">
+            <span class="swatch swatch-bg">--sf-color-bg</span>
+            <span class="swatch swatch-sur">--sf-color-surface</span>
+            <span class="swatch swatch-pri">--sf-color-primary</span>
+            <span class="swatch swatch-txt">text-secondary</span>
+            <span class="swatch swatch-brd">border</span>
+          </div>
+          <p style="margin-block:.5rem 0;font-size:.8rem">
+            Should revert to light theme. Same visual as level 1.
+          </p>
+
+          <!-- L4 no theme — inherits from L3 light -->
+          <div class="theme-block" style="border-style: dashed">
+            <p class="label">no data-theme (level 4 — inherits level 3 light)</p>
+            <div class="swatch-row">
+              <span class="swatch swatch-bg">--sf-color-bg</span>
+              <span class="swatch swatch-sur">--sf-color-surface</span>
+              <span class="swatch swatch-pri">--sf-color-primary</span>
+              <span class="swatch swatch-txt">text-secondary</span>
+            </div>
+            <p style="margin-block:.5rem 0;font-size:.8rem">
+              No theme set — should inherit light from parent.
+              Background is transparent so the parent's bg shows through.
+            </p>
+          </div>
+
+          <!-- L4 dark nested in L3 light -->
+          <div class="theme-block" data-theme="dark">
+            <p class="label">data-theme="dark" (level 4 — nested dark inside light)</p>
+            <div class="swatch-row">
+              <span class="swatch swatch-bg">--sf-color-bg</span>
+              <span class="swatch swatch-sur">--sf-color-surface</span>
+              <span class="swatch swatch-pri">--sf-color-primary</span>
+              <span class="swatch swatch-txt">text-secondary</span>
+            </div>
+            <p style="margin-block:.5rem 0;font-size:.8rem">
+              Should be dark again. 4 levels deep — dark/light/light/dark.
+            </p>
+          </div>
+        </div>
+
+        <!-- L3 no theme — inherits from L2 dark -->
+        <div class="theme-block" style="border-style: dashed">
+          <p class="label">no data-theme (level 3 — inherits level 2 dark)</p>
+          <div class="swatch-row">
+            <span class="swatch swatch-bg">--sf-color-bg</span>
+            <span class="swatch swatch-sur">--sf-color-surface</span>
+            <span class="swatch swatch-pri">--sf-color-primary</span>
+            <span class="swatch swatch-txt">text-secondary</span>
+          </div>
+          <p style="margin-block:.5rem 0;font-size:.8rem">
+            No theme set — should look dark (inherits L2).
+          </p>
+        </div>
+      </div>
+
+      <!-- L2 dark-again from light root (sibling to check isolation) -->
+      <div class="theme-block" data-theme="dark">
+        <p class="label">data-theme="dark" (level 2, sibling — isolated from sibling above)</p>
+        <div class="swatch-row">
+          <span class="swatch swatch-bg">--sf-color-bg</span>
+          <span class="swatch swatch-sur">--sf-color-surface</span>
+          <span class="swatch swatch-pri">--sf-color-primary</span>
+        </div>
+        <p style="font-size:.8rem;margin-block:.5rem 0">
+          Sibling dark block — should also be dark, independent of the previous block.
+        </p>
+      </div>
+    </div>
+
+    <h3>is-active / is-current state flags inside dark and light</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+      <div class="theme-block" data-theme="light">
+        <p class="label">light</p>
+        <nav class="sf-cluster" style="flex-wrap:wrap; gap: .5rem">
+          <a href="#" class="sf-box" style="--sf-box-border-width:1px; text-decoration:none; padding:.4rem .9rem; border-radius:.3rem; font-size:.8rem">Default</a>
+          <a href="#" class="sf-box is-active" style="--sf-box-border-width:1px; text-decoration:none; padding:.4rem .9rem; border-radius:.3rem; font-size:.8rem">is-active</a>
+          <a href="#" class="sf-box is-current" style="--sf-box-border-width:1px; text-decoration:none; padding:.4rem .9rem; border-radius:.3rem; font-size:.8rem">is-current</a>
+        </nav>
+      </div>
+      <div class="theme-block" data-theme="dark">
+        <p class="label">dark</p>
+        <nav class="sf-cluster" style="flex-wrap:wrap; gap: .5rem">
+          <a href="#" class="sf-box" style="--sf-box-border-width:1px; text-decoration:none; padding:.4rem .9rem; border-radius:.3rem; font-size:.8rem">Default</a>
+          <a href="#" class="sf-box is-active" style="--sf-box-border-width:1px; text-decoration:none; padding:.4rem .9rem; border-radius:.3rem; font-size:.8rem">is-active</a>
+          <a href="#" class="sf-box is-current" style="--sf-box-border-width:1px; text-decoration:none; padding:.4rem .9rem; border-radius:.3rem; font-size:.8rem">is-current</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // JS: read computed column count for each bento/grid test and log failures
+  document.addEventListener('DOMContentLoaded', function () {
+    var results = [];
+
+    function getCols(el) {
+      var cols = getComputedStyle(el).gridTemplateColumns;
+      if (!cols || cols === 'none') return 1;
+      // Split on whitespace between px values; each "Xpx" token = one column track.
+      return cols.trim().split(/\s+/).length;
+    }
+
+    // Wait one frame for layout
+    requestAnimationFrame(function () {
+      // Bento: narrow should be 1 col
+      var bn = document.getElementById('bento-narrow');
+      var bm = document.getElementById('bento-medium');
+      var bw = document.getElementById('bento-wide');
+
+      if (bn) {
+        var cols = getCols(bn);
+        results.push({ id: 'bento-narrow', expected: 1, actual: cols, pass: cols === 1 });
+      }
+      if (bm) {
+        var cols = getCols(bm);
+        results.push({ id: 'bento-medium', expected: 2, actual: cols, pass: cols === 2 });
+      }
+      if (bw) {
+        var cols = getCols(bw);
+        results.push({ id: 'bento-wide', expected: 4, actual: cols, pass: cols === 4 });
+      }
+
+      // Log summary
+      var pass = results.filter(function(r){ return r.pass; }).length;
+      var fail = results.filter(function(r){ return !r.pass; }).length;
+      console.log('[CQ TEST] Results:', pass + ' pass, ' + fail + ' fail');
+      results.forEach(function(r) {
+        var icon = r.pass ? '✓' : '✗';
+        console.log(icon + ' ' + r.id + ': expected ' + r.expected + ' col(s), got ' + r.actual);
+      });
+
+      // Expose globally so Playwright can read them
+      window.__cqTestResults = results;
+    });
+  });
+</script>
+</body>
+</html>
