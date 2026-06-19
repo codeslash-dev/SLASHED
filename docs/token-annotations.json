@@ -822,7 +822,7 @@
     "sf-bento--2": "Bento grid variant with a 2-column base layout.",
     "sf-bento--3": "Bento grid variant with a 3-column base layout.",
     "sf-bento--6": "Bento grid variant with a 6-column base layout.",
-    "sf-bento--compact": "Bento grid variant with reduced gap between cells.",
+    "sf-bento--compact": "Bento grid variant with shorter default row height.",
     "sf-bento--tall": "Bento grid variant with taller default row height.",
     "sf-bento-featured": "Span modifier for a bento item: takes up 2×2 cells (featured hero placement).",
     "sf-bento-full": "Span modifier for a bento item: stretches across all columns (full-width banner).",

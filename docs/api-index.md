@@ -767,7 +767,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento--2` | PUBLIC | layout | Bento grid | Bento grid variant with a 2-column base layout. |
 | `.sf-bento--3` | PUBLIC | layout | Bento grid | Bento grid variant with a 3-column base layout. |
 | `.sf-bento--6` | PUBLIC | layout | Bento grid | Bento grid variant with a 6-column base layout. |
-| `.sf-bento--compact` | PUBLIC | layout | Bento grid | Bento grid variant with reduced gap between cells. |
+| `.sf-bento--compact` | PUBLIC | layout | Bento grid | Bento grid variant with shorter default row height. |
 | `.sf-bento--tall` | PUBLIC | layout | Bento grid | Bento grid variant with taller default row height. |
 | `.sf-bento-featured` | PUBLIC | layout | Bento grid | Span modifier for a bento item: takes up 2×2 cells (featured hero placement). |
 | `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |

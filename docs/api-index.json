@@ -21404,7 +21404,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Bento grid",
-      "description": "Bento grid variant with reduced gap between cells.",
+      "description": "Bento grid variant with shorter default row height.",
       "isVariant": true,
       "baseClass": "sf-bento",
       "optional": false,
