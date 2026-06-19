@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.0] - 2026-06-19
+
+### Breaking Changes
+- flatten gap tokens to base→semantic→component model
+- v0.6.0 usability-driven token-surface reduction
+
+### Bug Fixes
+- pin undici to >=7.28.0 via overrides to resolve high-severity CVEs
+
 ## [0.6.0] - 2026-06-18
 
 A usability-driven token-surface reduction: ~182 tokens removed from the public
