@@ -14,7 +14,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-473 tokens.
+509 tokens.
 
 | Token | Default |
 |---|---|
@@ -441,9 +441,25 @@ rebrand workflow.
 | `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | `var(--sf-header-height-mobile)` |
 | `--sf-text-2xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-2xl-font-weight` | `var(--sf-font-weight-heading)` |
+| `--sf-text-2xl-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-2xl-line-height` | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` |
+| `--sf-text-2xl-max-width` | `none` |
 | `--sf-text-2xs` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-2xs-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-2xs-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-2xs-line-height` | `var(--sf-leading-relaxed)` |
+| `--sf-text-2xs-max-width` | `55ch` |
 | `--sf-text-3xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-3xl-font-weight` | `var(--sf-font-weight-heading)` |
+| `--sf-text-3xl-letter-spacing` | `var(--sf-tracking-tight)` |
+| `--sf-text-3xl-line-height` | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` |
+| `--sf-text-3xl-max-width` | `none` |
 | `--sf-text-4xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-4xl-font-weight` | `var(--sf-font-weight-heading)` |
+| `--sf-text-4xl-letter-spacing` | `var(--sf-tracking-tight)` |
+| `--sf-text-4xl-line-height` | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` |
+| `--sf-text-4xl-max-width` | `none` |
 | `--sf-text-base-max` | `1.25` |
 | `--sf-text-base-min` | `1` |
 | `--sf-text-display-base-max` | `3` |
@@ -453,17 +469,37 @@ rebrand workflow.
 | `--sf-text-display-s` | `calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))` |
 | `--sf-text-display-scale` | `1` |
 | `--sf-text-l` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-l-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-l-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-l-line-height` | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` |
+| `--sf-text-l-max-width` | `none` |
 | `--sf-text-m` | `calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-m-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-m-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-m-line-height` | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` |
+| `--sf-text-m-max-width` | `65ch` |
 | `--sf-text-ratio-max` | `1.333` |
 | `--sf-text-ratio-min` | `1.25` |
 | `--sf-text-s` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-s-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-s-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-s-line-height` | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` |
+| `--sf-text-s-max-width` | `65ch` |
 | `--sf-text-scale` | `1` |
 | `--sf-text-shadow-l` | `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-text-shadow-m` | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-text-shadow-none` | `none` |
 | `--sf-text-shadow-s` | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
 | `--sf-text-xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-xl-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-xl-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-xl-line-height` | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` |
+| `--sf-text-xl-max-width` | `none` |
 | `--sf-text-xs` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-xs-font-weight` | `var(--sf-font-weight-body)` |
+| `--sf-text-xs-letter-spacing` | `var(--sf-tracking-normal)` |
+| `--sf-text-xs-line-height` | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
+| `--sf-text-xs-max-width` | `60ch` |
 | `--sf-theme-transition-duration` | `calc(300ms * var(--sf-motion-scale))` |
 | `--sf-touch-target` | `var(--sf-size-l)` |
 | `--sf-tracking-normal` | `0` |

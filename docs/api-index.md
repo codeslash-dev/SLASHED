@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
 
-### Core tokens (473)
+### Core tokens (509)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -365,7 +365,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-leading-normal` | PUBLIC | knob | leading | `1.5` | Normal line height (~1.5). Default for body text. |
 | `--sf-leading-relaxed` | PUBLIC | knob | leading | `1.625` | Relaxed line height (~1.65). Long-form reading text. |
 | `--sf-leading-snug` | PUBLIC | knob | leading | `1.3` | Snug line height (~1.35). Use for sub-headings. |
-| `--sf-leading-taper` | PUBLIC-ADVANCED | knob | leading | `0` | Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token (tokens.sizes-extended). Default 0 keeps the curated defaults. |
+| `--sf-leading-taper` | PUBLIC-ADVANCED | knob | leading | `0` | Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token. Default 0 keeps the curated defaults. |
 | `--sf-leading-tight` | PUBLIC | knob | leading | `1.1` | Tight line height (~1.2). Use for large display headings. |
 | `--sf-link-external-marker` | PUBLIC | knob | link | `" \\2197"` | CSS content value appended to external links (e.g. " ↗"). Used by the .external-link pseudo-element pattern. |
 | `--sf-link-underline-offset` | PUBLIC | knob | link | `0.15em` | Vertical offset of the link underline from the text baseline. |
@@ -458,9 +458,25 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-sticky-offset-desktop` | PUBLIC | consumption | sticky | `var(--sf-header-height-desktop)` | Sticky offset at desktop breakpoints. |
 | `--sf-sticky-offset-mobile` | PUBLIC | consumption | sticky | `var(--sf-header-height-mobile)` | Sticky offset at mobile breakpoints. |
 | `--sf-text-2xl` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))` | 2× large font size (~24px). Section headings. |
+| `--sf-text-2xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-heading)` | Font weight for 2×-large text. |
+| `--sf-text-2xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for 2×-large text. |
+| `--sf-text-2xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` | Line height for 2×-large text. |
+| `--sf-text-2xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for 2×-large text. |
 | `--sf-text-2xs` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))` | Extra-extra-small font size (~11px). Fine print, badges. |
+| `--sf-text-2xs-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for 2×-extra-small text. Override to deviate from the global weight at this size. |
+| `--sf-text-2xs-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for 2×-extra-small text. |
+| `--sf-text-2xs-line-height` | PUBLIC | consumption | text | `var(--sf-leading-relaxed)` | Line height for 2×-extra-small text. |
+| `--sf-text-2xs-max-width` | PUBLIC | knob | text | `55ch` | Optimal line length (max-width in ch) for 2×-extra-small text. |
 | `--sf-text-3xl` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))` | 3× large font size (~30px). Major headings. |
+| `--sf-text-3xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-heading)` | Font weight for 3×-large text. |
+| `--sf-text-3xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-tight)` | Letter-spacing for 3×-large text. Typically negative to tighten large headings. |
+| `--sf-text-3xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` | Line height for 3×-large text. |
+| `--sf-text-3xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for 3×-large text. |
 | `--sf-text-4xl` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))` | 4× large font size (~36px). Display-level headings. |
+| `--sf-text-4xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-heading)` | Font weight for 4×-large text. |
+| `--sf-text-4xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-tight)` | Letter-spacing for 4×-large text. |
+| `--sf-text-4xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` | Line height for 4×-large text. |
+| `--sf-text-4xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for 4×-large text. |
 | `--sf-text-base-max` | PUBLIC-ADVANCED | knob | text | `1.25` | Maximum base font size (rem) at the widest viewport. End point for the fluid type scale at wide screens. Part of the fluid scale engine. |
 | `--sf-text-base-min` | PUBLIC-ADVANCED | knob | text | `1` | Minimum base font size (rem) at the narrowest viewport. Starting point for the fluid type scale at narrow screens. Part of the fluid scale engine. |
 | `--sf-text-display-base-max` | PUBLIC-ADVANCED | knob | text | `3` | Maximum display/hero font size (rem) at the widest viewport. Drives the ceiling of the fluid display type scale. Part of the fluid scale engine. |
@@ -470,17 +486,37 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-display-s` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))` | Small display font size (~42px). Hero sub-headings. |
 | `--sf-text-display-scale` | PUBLIC-ADVANCED | knob | text | `1` | Multiplier applied only to the display/hero type scale (--sf-text-display-*). Tune headline impact independently of body text. |
 | `--sf-text-l` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))` | Large font size (~18px). Lead paragraphs, prominent labels. |
+| `--sf-text-l-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for large text. |
+| `--sf-text-l-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for large text. |
+| `--sf-text-l-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` | Line height for large text. |
+| `--sf-text-l-max-width` | PUBLIC | knob | text | `none` | Optimal line length for large text. |
 | `--sf-text-m` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))` | Medium / base font size (~16px). Typical body text. |
+| `--sf-text-m-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for medium (body) text. |
+| `--sf-text-m-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for medium text. |
+| `--sf-text-m-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` | Line height for medium text. |
+| `--sf-text-m-max-width` | PUBLIC | knob | text | `65ch` | Optimal reading line length for medium text (~65–75ch). |
 | `--sf-text-ratio-max` | PUBLIC-ADVANCED | knob | text | `1.333` | Modular type scale ratio at the widest viewport. Controls step-to-step size growth. Default 1.333. Part of the fluid scale engine. |
 | `--sf-text-ratio-min` | PUBLIC-ADVANCED | knob | text | `1.25` | Modular type scale ratio at the narrowest viewport. Controls step-to-step size growth in the fluid type ramp. Default 1.25. Part of the fluid scale engine. |
 | `--sf-text-s` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))` | Small font size (~14px). Secondary content, UI annotations. |
+| `--sf-text-s-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for small text. |
+| `--sf-text-s-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for small text. |
+| `--sf-text-s-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` | Line height for small text. |
+| `--sf-text-s-max-width` | PUBLIC | knob | text | `65ch` | Optimal line length for small text. |
 | `--sf-text-scale` | PUBLIC-ADVANCED | knob | text | `1` | Global type-size multiplier. Scales the entire fluid type scale. 1.08 gives noticeably larger body text without breaking layout. |
 | `--sf-text-shadow-l` | PUBLIC | consumption | text | `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Large text-shadow for high-contrast text over busy or dark image backgrounds. |
 | `--sf-text-shadow-m` | PUBLIC | consumption | text | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Medium text-shadow. Use for text overlaid on images to improve legibility. |
 | `--sf-text-shadow-none` | PUBLIC | knob | text | `none` | Removes text-shadow (use to explicitly reset inherited shadows). |
 | `--sf-text-shadow-s` | PUBLIC | consumption | text | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` | Small text-shadow for subtle depth on display headings. |
 | `--sf-text-xl` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` | Extra-large font size (~20px). Sub-headings, callout text. |
+| `--sf-text-xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for extra-large text. |
+| `--sf-text-xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for extra-large text. |
+| `--sf-text-xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` | Line height for extra-large text. |
+| `--sf-text-xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for extra-large text. |
 | `--sf-text-xs` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))` | Extra-small font size (~12px). Labels, captions, metadata. |
+| `--sf-text-xs-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for extra-small text. |
+| `--sf-text-xs-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for extra-small text. |
+| `--sf-text-xs-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` | Line height for extra-small text. |
+| `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Optimal line length for extra-small text. |
 | `--sf-theme-transition-duration` | PUBLIC | consumption | theme | `calc(300ms * var(--sf-motion-scale))` | Duration of the .sf-theme-transition animated color-scheme crossfade. Scales with --sf-motion-scale so reduced-motion preferences are respected. Default 300ms. |
 | `--sf-touch-target` | PUBLIC | consumption | touch | `var(--sf-size-l)` | Minimum touch-target size for interactive elements per WCAG 2.5.5. |
 | `--sf-tracking-normal` | PUBLIC | knob | tracking | `0` | Normal letter-spacing (0). Default for body text. |
@@ -701,47 +737,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-palette-mix-800` | PUBLIC-ADVANCED | knob | palette | `38%` | Color-mix percentage for palette step 800 (dark shade). Controls blend depth toward text. Default 38%. |
 | `--sf-palette-mix-900` | PUBLIC-ADVANCED | knob | palette | `18%` | Color-mix percentage for palette step 900 (very dark shade). Controls blend depth toward text. Default 18%. |
 | `--sf-palette-mix-950` | PUBLIC-ADVANCED | knob | palette | `8%` | Color-mix percentage for the darkest palette step (950). Controls how far step 950 blends toward the text color. Default 8%. |
-
-### Sizes-extended tokens (36)
-
-| Token | Tier | Role | Namespace | Default | Description |
-|---|---|---|---|---|---|
-| `--sf-text-2xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-heading)` | Font weight for 2×-large text. |
-| `--sf-text-2xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for 2×-large text. |
-| `--sf-text-2xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` | Line height for 2×-large text. |
-| `--sf-text-2xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for 2×-large text. |
-| `--sf-text-2xs-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for 2×-extra-small text. Override to deviate from the global weight at this size. |
-| `--sf-text-2xs-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for 2×-extra-small text. |
-| `--sf-text-2xs-line-height` | PUBLIC | consumption | text | `var(--sf-leading-relaxed)` | Line height for 2×-extra-small text. |
-| `--sf-text-2xs-max-width` | PUBLIC | knob | text | `55ch` | Optimal line length (max-width in ch) for 2×-extra-small text. |
-| `--sf-text-3xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-heading)` | Font weight for 3×-large text. |
-| `--sf-text-3xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-tight)` | Letter-spacing for 3×-large text. Typically negative to tighten large headings. |
-| `--sf-text-3xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` | Line height for 3×-large text. |
-| `--sf-text-3xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for 3×-large text. |
-| `--sf-text-4xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-heading)` | Font weight for 4×-large text. |
-| `--sf-text-4xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-tight)` | Letter-spacing for 4×-large text. |
-| `--sf-text-4xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` | Line height for 4×-large text. |
-| `--sf-text-4xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for 4×-large text. |
-| `--sf-text-l-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for large text. |
-| `--sf-text-l-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for large text. |
-| `--sf-text-l-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` | Line height for large text. |
-| `--sf-text-l-max-width` | PUBLIC | knob | text | `none` | Optimal line length for large text. |
-| `--sf-text-m-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for medium (body) text. |
-| `--sf-text-m-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for medium text. |
-| `--sf-text-m-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` | Line height for medium text. |
-| `--sf-text-m-max-width` | PUBLIC | knob | text | `65ch` | Optimal reading line length for medium text (~65–75ch). |
-| `--sf-text-s-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for small text. |
-| `--sf-text-s-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for small text. |
-| `--sf-text-s-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` | Line height for small text. |
-| `--sf-text-s-max-width` | PUBLIC | knob | text | `65ch` | Optimal line length for small text. |
-| `--sf-text-xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for extra-large text. |
-| `--sf-text-xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for extra-large text. |
-| `--sf-text-xl-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` | Line height for extra-large text. |
-| `--sf-text-xl-max-width` | PUBLIC | knob | text | `none` | Optimal line length for extra-large text. |
-| `--sf-text-xs-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for extra-small text. |
-| `--sf-text-xs-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for extra-small text. |
-| `--sf-text-xs-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` | Line height for extra-small text. |
-| `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Optimal line length for extra-small text. |
 
 ## Classes (232)
 
