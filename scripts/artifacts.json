@@ -18,5 +18,5 @@
     "srcPrefixes": ["docs/token-annotations.json", "docs/api-index.json"],
     "buildCmd": "npm run configurator:sync",
     "outputs": ["configurator/src/data/api-index.generated.json"]
-  },
+  }
 ]
