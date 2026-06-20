@@ -66,12 +66,9 @@ const ADVANCED = new Set([
 // niche/powerful character. Kept deliberately tiny and tightly anchored so a
 // pattern can never accidentally capture an everyday PUBLIC token.
 //
-//   · Fluid pairwise interpolation bridges (optional/tokens.sizes-extended.css):
-//     `--sf-{space|text}-{step}-to-{step}` — every ordered pair of scale steps,
-//     used to fluidly interpolate one step into another across the viewport.
-//     These are the OUTPUTS of the same generative engine whose INPUTS
-//     (--sf-{text,space}-ratio-*, -base-*, --sf-fluid-*-vw) are already
-//     ADVANCED, so the family belongs to the same tier for consistency.
+//   · Fluid pairwise interpolation bridges (removed in v0.6.0):
+//     `--sf-{space|text}-{step}-to-{step}` — pattern retained so any stale
+//     reference in user CSS doesn't accidentally tier-promote a future token.
 const STEP = '(?:2xs|xs|s|m|l|xl|2xl|3xl|4xl)';
 const ADVANCED_PATTERNS = [
   new RegExp(`^--sf-(?:space|text)-${STEP}-to-${STEP}$`),

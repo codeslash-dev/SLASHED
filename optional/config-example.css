@@ -80,8 +80,8 @@
     --sf-radius-scale:       1;     /* all border radii           */
     --sf-motion-scale:       1;     /* all durations              */
     /* Progressive leading tightener for the per-size line-height
-       tokens (optional/tokens.sizes-extended.css): each step up the
-       type scale subtracts step-index × taper from its default.
+       tokens (core/tokens.css): each step up the type scale
+       subtracts step-index × taper from its default.
        0 keeps the curated defaults; try 0.02 for a smooth taper. */
     --sf-leading-taper:      0;
 

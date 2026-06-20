@@ -29,7 +29,6 @@ const FILE_TITLES = {
   'core/tokens.layout.css':             'Layout',
   'core/tokens.macros.css':             'Macros',
   'optional/tokens.palette.css':        'Palette (optional)',
-  'optional/tokens.sizes-extended.css': 'Sizes-extended (optional)',
   'optional/tokens.components.css':     'Components (optional, incomplete)',
 };
 

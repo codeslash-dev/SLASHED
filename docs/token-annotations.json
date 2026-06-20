@@ -712,7 +712,7 @@
     "--sf-text-4xl-line-height": "Line height for 4×-large text.",
     "--sf-text-4xl-max-width": "Optimal line length for 4×-large text.",
     "--sf-section-scale": "Global multiplier applied to every --sf-section-pad--* size — one dial re-rhythms all section padding (default 1).",
-    "--sf-leading-taper": "Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token (tokens.sizes-extended). Default 0 keeps the curated defaults.",
+    "--sf-leading-taper": "Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token. Default 0 keeps the curated defaults.",
     "--sf-surface-color": "Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it.",
     "--sf-border-scale": "Global border-width multiplier. Set to 0 for borderless UI; 0.5 for hairline-only; 2 to double all border widths across the system.",
     "--sf-button-padding-block": "Vertical (block) inner padding for buttons.",

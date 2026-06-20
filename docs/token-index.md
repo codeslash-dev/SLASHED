@@ -8,7 +8,7 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**693 tokens** (deduplicated by name across the 6 token source files).
+**693 tokens** (deduplicated by name across the 5 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
@@ -698,25 +698,25 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-switcher-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-switcher-threshold` | PUBLIC | knob | Layout | `30rem` |
 | `--sf-text-2xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-2xl-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-heading)` |
-| `--sf-text-2xl-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-2xl-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` |
-| `--sf-text-2xl-max-width` | PUBLIC | knob | Sizes-extended (optional) | `none` |
+| `--sf-text-2xl-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-heading)` |
+| `--sf-text-2xl-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-2xl-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` |
+| `--sf-text-2xl-max-width` | PUBLIC | knob | Core | `none` |
 | `--sf-text-2xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-2xs-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-body)` |
-| `--sf-text-2xs-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-2xs-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-leading-relaxed)` |
-| `--sf-text-2xs-max-width` | PUBLIC | knob | Sizes-extended (optional) | `55ch` |
+| `--sf-text-2xs-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
+| `--sf-text-2xs-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-2xs-line-height` | PUBLIC | consumption | Core | `var(--sf-leading-relaxed)` |
+| `--sf-text-2xs-max-width` | PUBLIC | knob | Core | `55ch` |
 | `--sf-text-3xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-3xl-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-heading)` |
-| `--sf-text-3xl-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-tight)` |
-| `--sf-text-3xl-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` |
-| `--sf-text-3xl-max-width` | PUBLIC | knob | Sizes-extended (optional) | `none` |
+| `--sf-text-3xl-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-heading)` |
+| `--sf-text-3xl-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-tight)` |
+| `--sf-text-3xl-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` |
+| `--sf-text-3xl-max-width` | PUBLIC | knob | Core | `none` |
 | `--sf-text-4xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-4xl-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-heading)` |
-| `--sf-text-4xl-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-tight)` |
-| `--sf-text-4xl-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` |
-| `--sf-text-4xl-max-width` | PUBLIC | knob | Sizes-extended (optional) | `none` |
+| `--sf-text-4xl-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-heading)` |
+| `--sf-text-4xl-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-tight)` |
+| `--sf-text-4xl-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` |
+| `--sf-text-4xl-max-width` | PUBLIC | knob | Core | `none` |
 | `--sf-text-base-max` | PUBLIC-ADVANCED | knob | Core | `1.25` |
 | `--sf-text-base-min` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-text-display-base-max` | PUBLIC-ADVANCED | knob | Core | `3` |
@@ -726,37 +726,37 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-text-display-s` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))` |
 | `--sf-text-display-scale` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-text-l` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-l-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-body)` |
-| `--sf-text-l-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-l-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` |
-| `--sf-text-l-max-width` | PUBLIC | knob | Sizes-extended (optional) | `none` |
+| `--sf-text-l-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
+| `--sf-text-l-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-l-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` |
+| `--sf-text-l-max-width` | PUBLIC | knob | Core | `none` |
 | `--sf-text-m` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-m-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-body)` |
-| `--sf-text-m-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-m-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` |
-| `--sf-text-m-max-width` | PUBLIC | knob | Sizes-extended (optional) | `65ch` |
+| `--sf-text-m-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
+| `--sf-text-m-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-m-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` |
+| `--sf-text-m-max-width` | PUBLIC | knob | Core | `65ch` |
 | `--sf-text-ratio-max` | PUBLIC-ADVANCED | knob | Core | `1.333` |
 | `--sf-text-ratio-min` | PUBLIC-ADVANCED | knob | Core | `1.25` |
 | `--sf-text-s` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-s-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-body)` |
-| `--sf-text-s-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-s-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` |
-| `--sf-text-s-max-width` | PUBLIC | knob | Sizes-extended (optional) | `65ch` |
+| `--sf-text-s-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
+| `--sf-text-s-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-s-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` |
+| `--sf-text-s-max-width` | PUBLIC | knob | Core | `65ch` |
 | `--sf-text-scale` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-text-shadow-l` | PUBLIC | consumption | Core | `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-text-shadow-m` | PUBLIC | consumption | Core | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-text-shadow-none` | PUBLIC | knob | Core | `none` |
 | `--sf-text-shadow-s` | PUBLIC | consumption | Core | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
 | `--sf-text-xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-xl-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-body)` |
-| `--sf-text-xl-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-xl-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` |
-| `--sf-text-xl-max-width` | PUBLIC | knob | Sizes-extended (optional) | `none` |
+| `--sf-text-xl-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
+| `--sf-text-xl-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-xl-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` |
+| `--sf-text-xl-max-width` | PUBLIC | knob | Core | `none` |
 | `--sf-text-xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))` |
-| `--sf-text-xs-font-weight` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-font-weight-body)` |
-| `--sf-text-xs-letter-spacing` | PUBLIC | consumption | Sizes-extended (optional) | `var(--sf-tracking-normal)` |
-| `--sf-text-xs-line-height` | PUBLIC | consumption | Sizes-extended (optional) | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
-| `--sf-text-xs-max-width` | PUBLIC | knob | Sizes-extended (optional) | `60ch` |
+| `--sf-text-xs-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
+| `--sf-text-xs-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |
+| `--sf-text-xs-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
+| `--sf-text-xs-max-width` | PUBLIC | knob | Core | `60ch` |
 | `--sf-theme-transition-duration` | PUBLIC | consumption | Core | `calc(300ms * var(--sf-motion-scale))` |
 | `--sf-touch-target` | PUBLIC | consumption | Core | `var(--sf-size-l)` |
 | `--sf-tracking-normal` | PUBLIC | knob | Core | `0` |

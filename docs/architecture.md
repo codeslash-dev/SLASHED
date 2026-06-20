@@ -48,7 +48,6 @@ core/
   print.css                    slashed.print
 optional/
   tokens.palette.css      slashed.tokens  (numeric tints/shades + alpha variants (-a5/-a10/-a30/-a50/-a80) for brand colors; ships in optimal+ bundles)
-  tokens.sizes-extended.css slashed.tokens  (per-size typography sub-properties; ships in optimal+ bundles)
   tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
@@ -140,7 +139,7 @@ Two conceptually-macro classes stay in `layout.css` in 0.x for compatibility:
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/alpha tokens including ghost/subtle/muted), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional numeric tints/shades + alpha variants for brand colors), `tokens.sizes-extended.css` (optional per-size typography sub-properties), `tokens.components.css` (optional component-level tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/alpha tokens including ghost/subtle/muted), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional numeric tints/shades + alpha variants for brand colors), `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -229,7 +228,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
   three SemVer tiers: **PUBLIC** (everyday knobs — brand/status sources,
   resolved semantic tokens, scales, BEM consumer aliases), **PUBLIC-ADVANCED**
   (same SemVer guarantee but niche/powerful — e.g. generative scale inputs and
-  the per-size typography sub-properties in `tokens.sizes-extended.css`), and
+  the per-size typography sub-properties in `core/tokens.css`), and
   **INTERNAL** (`--sf-is-dark` — implementation detail, may change without a
   major bump). The enumerated tier sets live in `scripts/token-tiers.js`; the
   full cross-reference is [token-index.md](token-index.md).
@@ -375,7 +374,7 @@ so `bundle.config.json` lists ten outputs in total — are built by
 | Bundle | Adds to essential |
 |---|---|
 | `slashed.essential.css` | — (all `core/`) |
-| `slashed.optimal.css` | `tokens.palette` + `tokens.sizes-extended` + `forms` + `legacy` |
+| `slashed.optimal.css` | `tokens.palette` + `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |

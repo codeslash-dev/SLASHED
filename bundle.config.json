@@ -54,7 +54,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/legacy.css"
       ]
@@ -77,7 +76,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/legacy.css"
       ]
@@ -99,7 +97,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -124,7 +121,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -148,7 +144,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/utilities.css",
         "optional/legacy.css"
@@ -172,7 +167,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/utilities.css",
         "optional/legacy.css"
@@ -195,7 +189,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -221,7 +214,6 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/tokens.palette.css",
-        "optional/tokens.sizes-extended.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
