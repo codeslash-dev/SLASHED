@@ -129,8 +129,7 @@
      · --sf-font-features, --sf-font-variation, --sf-optical-sizing (OpenType)
      · --sf-space-scale, --sf-text-scale, --sf-text-display-scale,
        --sf-radius-scale, --sf-motion-scale, --sf-section-scale (global multipliers)
-     · --sf-leading-taper (progressive per-size leading tightener,
-       consumed by optional/tokens.sizes-extended.css)
+     · --sf-leading-taper (progressive per-size leading tightener)
      · --sf-fluid-{min,max}-vw (fluid interpolation viewport range, rem/unitless)
      · --sf-text-ratio-{min,max}, --sf-text-base-{min,max},
        --sf-text-display-base-{min,max} (generative TYPE scale inputs)
@@ -937,8 +936,8 @@
     --sf-leading-relaxed: 1.625;
 
     /* Leading taper — progressive tightener for the per-size line-height
-       tokens in optional/tokens.sizes-extended.css. Each step up the type
-       scale subtracts `step-index × taper` from that step's default leading.
+       tokens below. Each step up the type scale subtracts
+       `step-index × taper` from that step's default leading.
        0 (default) keeps the curated stepped defaults; try 0.02 for a smooth
        metric taper across the scale. */
     --sf-leading-taper: 0;
@@ -965,6 +964,61 @@
        `.price { font-variant-numeric: var(--sf-font-numeric); }`.
        Universal browser support. */
     --sf-font-numeric: tabular-nums;
+
+    /* ----------------------------------------------------------
+       Per-size typography sub-properties
+       Not auto-applied — opt-in composable overrides. Wire alongside
+       font-size in your own rules:
+         .element { line-height: var(--sf-text-xl-line-height); }
+       Small text: relaxed leading. Body: normal. Large: progressively
+       tighter. --sf-leading-taper (default 0) tightens the whole
+       scale at once.
+       ---------------------------------------------------------- */
+
+    --sf-text-2xs-line-height:            var(--sf-leading-relaxed);
+    --sf-text-2xs-font-weight:            var(--sf-font-weight-body);
+    --sf-text-2xs-letter-spacing:         var(--sf-tracking-normal);
+    --sf-text-2xs-max-width:              55ch;
+
+    --sf-text-xs-line-height:             calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper));
+    --sf-text-xs-font-weight:             var(--sf-font-weight-body);
+    --sf-text-xs-letter-spacing:          var(--sf-tracking-normal);
+    --sf-text-xs-max-width:               60ch;
+
+    --sf-text-s-line-height:              calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper));
+    --sf-text-s-font-weight:              var(--sf-font-weight-body);
+    --sf-text-s-letter-spacing:           var(--sf-tracking-normal);
+    --sf-text-s-max-width:                65ch;
+
+    --sf-text-m-line-height:              calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper));
+    --sf-text-m-font-weight:              var(--sf-font-weight-body);
+    --sf-text-m-letter-spacing:           var(--sf-tracking-normal);
+    --sf-text-m-max-width:                65ch;
+
+    --sf-text-l-line-height:              calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper));
+    --sf-text-l-font-weight:              var(--sf-font-weight-body);
+    --sf-text-l-letter-spacing:           var(--sf-tracking-normal);
+    --sf-text-l-max-width:                none;
+
+    --sf-text-xl-line-height:             calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper));
+    --sf-text-xl-font-weight:             var(--sf-font-weight-body);
+    --sf-text-xl-letter-spacing:          var(--sf-tracking-normal);
+    --sf-text-xl-max-width:               none;
+
+    --sf-text-2xl-line-height:            calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper));
+    --sf-text-2xl-font-weight:            var(--sf-font-weight-heading);
+    --sf-text-2xl-letter-spacing:         var(--sf-tracking-normal);
+    --sf-text-2xl-max-width:              none;
+
+    --sf-text-3xl-line-height:            calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper));
+    --sf-text-3xl-font-weight:            var(--sf-font-weight-heading);
+    --sf-text-3xl-letter-spacing:         var(--sf-tracking-tight);
+    --sf-text-3xl-max-width:              none;
+
+    --sf-text-4xl-line-height:            calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper));
+    --sf-text-4xl-font-weight:            var(--sf-font-weight-heading);
+    --sf-text-4xl-letter-spacing:         var(--sf-tracking-tight);
+    --sf-text-4xl-max-width:              none;
 
     /* ----------------------------------------------------------
        Icon sizes — em-based by design.

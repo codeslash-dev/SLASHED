@@ -51,7 +51,6 @@ must load **first** and `optional/legacy.css` must load **last**:
 
 <!-- optional -->
 <link rel="stylesheet" href="optional/tokens.palette.css">
-<link rel="stylesheet" href="optional/tokens.sizes-extended.css">
 <link rel="stylesheet" href="optional/forms.css">
 <link rel="stylesheet" href="optional/legacy.css">
 ```
@@ -98,7 +97,7 @@ parent module. All token files share the `slashed.tokens` layer.
 | Bundle | Contents |
 | --- | --- |
 | `slashed.essential.css` | all `core/` |
-| `slashed.optimal.css` | essential + `tokens.palette` + `tokens.sizes-extended` + `forms` + `legacy` |
+| `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |

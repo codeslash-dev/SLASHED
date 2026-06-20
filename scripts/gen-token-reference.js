@@ -13,7 +13,6 @@ const FILE_TITLES = {
   'core/tokens.layout.css':        'Layout tokens',
   'core/tokens.macros.css':        'Macro tokens',
   'optional/tokens.palette.css':        'Palette tokens',
-  'optional/tokens.sizes-extended.css': 'Sizes extended tokens',
   'optional/tokens.components.css':     'Component tokens',
 };
 

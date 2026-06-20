@@ -230,8 +230,7 @@ the page surface, rename those overrides to `--sf-color-base-light` / `-dark`.
 - Macros: `.sf-content-auto`, `.sf-tabular-nums`, `.sf-scrim` / `.sf-text-protect`,
   `.sf-focus-shadow`, `.sf-link--subtle` / `.sf-link--reverse`, divider modifiers
   (`--soft` / `--strong` / `--dashed` / `--dotted` / `--gradient`).
-- New optional module `optional/tokens.sizes-extended.css` (spacing/typography
-  bridge scales + per-text-size sub-properties), included at `optimal`+.
+- Per-text-size sub-properties (`--sf-text-{size}-{line-height,font-weight,letter-spacing,max-width}`) merged into `core/tokens.css`.
 - Contextual on-surface colour cascade for `.sf-surface--*` variants.
 - Colour anchors `--sf-color-white` / `--sf-color-black`, border shorthands
   (`--sf-border`, `-subtle`, `-strong`), object-fit/position and multi-column

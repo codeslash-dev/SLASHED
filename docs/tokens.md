@@ -727,49 +727,6 @@ rebrand workflow.
 | `--sf-palette-mix-900` | `18%` |
 | `--sf-palette-mix-950` | `8%` |
 
-## Sizes extended tokens (`optional/tokens.sizes-extended.css`)
-
-36 tokens.
-
-| Token | Default |
-|---|---|
-| `--sf-text-2xl-font-weight` | `var(--sf-font-weight-heading)` |
-| `--sf-text-2xl-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-2xl-line-height` | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` |
-| `--sf-text-2xl-max-width` | `none` |
-| `--sf-text-2xs-font-weight` | `var(--sf-font-weight-body)` |
-| `--sf-text-2xs-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-2xs-line-height` | `var(--sf-leading-relaxed)` |
-| `--sf-text-2xs-max-width` | `55ch` |
-| `--sf-text-3xl-font-weight` | `var(--sf-font-weight-heading)` |
-| `--sf-text-3xl-letter-spacing` | `var(--sf-tracking-tight)` |
-| `--sf-text-3xl-line-height` | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` |
-| `--sf-text-3xl-max-width` | `none` |
-| `--sf-text-4xl-font-weight` | `var(--sf-font-weight-heading)` |
-| `--sf-text-4xl-letter-spacing` | `var(--sf-tracking-tight)` |
-| `--sf-text-4xl-line-height` | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` |
-| `--sf-text-4xl-max-width` | `none` |
-| `--sf-text-l-font-weight` | `var(--sf-font-weight-body)` |
-| `--sf-text-l-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-l-line-height` | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` |
-| `--sf-text-l-max-width` | `none` |
-| `--sf-text-m-font-weight` | `var(--sf-font-weight-body)` |
-| `--sf-text-m-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-m-line-height` | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` |
-| `--sf-text-m-max-width` | `65ch` |
-| `--sf-text-s-font-weight` | `var(--sf-font-weight-body)` |
-| `--sf-text-s-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-s-line-height` | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` |
-| `--sf-text-s-max-width` | `65ch` |
-| `--sf-text-xl-font-weight` | `var(--sf-font-weight-body)` |
-| `--sf-text-xl-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-xl-line-height` | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` |
-| `--sf-text-xl-max-width` | `none` |
-| `--sf-text-xs-font-weight` | `var(--sf-font-weight-body)` |
-| `--sf-text-xs-letter-spacing` | `var(--sf-tracking-normal)` |
-| `--sf-text-xs-line-height` | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
-| `--sf-text-xs-max-width` | `60ch` |
-
 ## Component tokens (`optional/tokens.components.css`)
 
 6 tokens.
