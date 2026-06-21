@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.5] - 2026-06-21
+
+### Features
+- **configurator:** dogfood SLASHED's own tokens + theme for the chrome
+- **configurator:** bundle / module picker (Install panel)
+- **configurator:** shareable config URLs + component-test harness
+
+### Bug Fixes
+- **e2e:** use page.reload() for share URL restoration test
+- **configurator:** load shared URL config before \$state proxy is created
+- **configurator:** resolve three CI test failures
+- **configurator:** resolve 3 review issues
+- sync configurator version with framework on every release
+
 ## [0.6.4] - 2026-06-21
 
 ### Features
