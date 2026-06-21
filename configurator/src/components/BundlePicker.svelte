@@ -107,7 +107,7 @@
           {copiedKey === 'dropin' ? 'Copied ✓' : 'Copy setup'}
         </button>
       </div>
-      <pre class="snippet__code"><code>{dropIn}</code></pre>
+      <pre class="snippet__code" tabindex="0"><code>{dropIn}</code></pre>
       <p class="snippet__note">
         {#if overrideCount === 0}
           No overrides yet — this loads the framework defaults. Customise tokens,

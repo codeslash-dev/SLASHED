@@ -26,9 +26,14 @@ async function importOverride(page, css) {
 test('chrome aliases are sourced from framework tokens', async ({ page }) => {
   await gotoClean(page);
   // The --cfg-* layer points at --sf-* tokens (the dogfood contract).
-  expect(await cssVar(page, 'root', '--cfg-bg')).toBe('var(--sf-color-bg)');
-  expect(await cssVar(page, 'root', '--cfg-text')).toBe('var(--sf-color-text)');
-  expect(await cssVar(page, 'root', '--cfg-accent')).toBe('var(--sf-color-primary)');
+  // Modern browsers resolve var() in getPropertyValue, so we compare resolved
+  // values: if --cfg-bg: var(--sf-color-bg) both must resolve identically.
+  const sfBg = await cssVar(page, 'root', '--sf-color-bg');
+  const sfText = await cssVar(page, 'root', '--sf-color-text');
+  const sfAccent = await cssVar(page, 'root', '--sf-color-primary');
+  expect(await cssVar(page, 'root', '--cfg-bg')).toBe(sfBg);
+  expect(await cssVar(page, 'root', '--cfg-text')).toBe(sfText);
+  expect(await cssVar(page, 'root', '--cfg-accent')).toBe(sfAccent);
 });
 
 test('overrides restyle the preview stage but never the chrome', async ({ page }) => {

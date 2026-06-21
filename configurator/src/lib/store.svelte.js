@@ -170,6 +170,20 @@ const opsState = {
   _dragSnap: null,
 };
 
+// ── Synchronous shared-config init ────────────────────────────────────────
+// Apply any URL-fragment config BEFORE Svelte mounts the component tree so
+// the override map and its localStorage persist are guaranteed to land by the
+// time effects run. The exported loadSharedConfig() becomes a no-op when this
+// block has already processed the hash.
+let _sharedInitDone = false;
+if (typeof location !== 'undefined') {
+  const _initShared = readShareFromHash(location.hash);
+  if (Object.keys(_initShared).length > 0) {
+    ops.replaceAll(opsState, _initShared);
+    _sharedInitDone = true;
+  }
+}
+
 // ───────────────────────────── history (undo/redo) ─────────────────────────
 
 /** Step backwards: restore the most recent past snapshot. */
@@ -312,6 +326,8 @@ export function deleteSavedTheme(id) {
  */
 export function loadSharedConfig() {
   if (typeof location === 'undefined') return 0;
+  if (_sharedInitDone) return 0; // already applied synchronously at module init
+  _sharedInitDone = true;
   const map = readShareFromHash(location.hash);
   if (Object.keys(map).length === 0) return 0;
   const { applied } = replaceOverrides(map);
