@@ -46,7 +46,7 @@ describe('encode/decode round-trip', () => {
 
 describe('decode tolerance & safety', () => {
   test('malformed payloads decode to an empty map, never throw', () => {
-    for (const bad of ['', '   ', 'garbage', '1.', '1.@@@', '2.abc', null, undefined, 42]) {
+    for (const bad of ['', '   ', 'garbage', '!!!', '----', '@@@', null, undefined, 42]) {
       assert.deepEqual(decodeOverrides(bad, { isKnown }), {});
     }
   });
@@ -64,9 +64,15 @@ describe('decode tolerance & safety', () => {
     assert.ok(!decoded[realToken]?.includes('}'), 'braces stripped');
   });
 
-  test('an unknown schema version is rejected', () => {
-    const payload = encodeOverrides({ [realToken]: '1rem' }).split('.')[1];
-    assert.deepEqual(decodeOverrides(`9.${payload}`, { isKnown }), {});
+  test('a code with an unknown binary version is rejected', () => {
+    // Flip the leading version byte (byte 0) of a valid code and confirm the
+    // decoder rejects it wholesale rather than misreading the payload.
+    const code = encodeOverrides({ [realToken]: '1rem' });
+    const b64 = code.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(code.length / 4) * 4, '=');
+    const bytes = Buffer.from(b64, 'base64');
+    bytes[0] = 0x09; // bogus schema version
+    const bogus = bytes.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    assert.deepEqual(decodeOverrides(bogus, { isKnown }), {});
   });
 });
 

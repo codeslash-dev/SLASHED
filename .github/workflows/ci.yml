@@ -79,6 +79,9 @@ jobs:
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
         with:
+          # Full history so check-token-registry.js can diff the registry
+          # against the base branch (id-permanence gate) rather than HEAD.
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
         with:
@@ -88,6 +91,7 @@ jobs:
       - run: npm run audit:check
       - run: node scripts/check-artifacts.js --check
       - run: node scripts/check-version-sync.js
+      - run: node scripts/check-token-registry.js
 
   dependency-audit:
     name: Dependency vulnerability audit

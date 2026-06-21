@@ -42,10 +42,12 @@ const SOURCE =
 
 const ANNOTATIONS_FILE = path.join(FRAMEWORK_ROOT, 'docs', 'token-annotations.json');
 const BUNDLE_CONFIG_FILE = path.join(FRAMEWORK_ROOT, 'bundle.config.json');
+const REGISTRY_FILE = path.join(FRAMEWORK_ROOT, 'token-registry.json');
 
 const OUT_DIR = path.join(CONFIGURATOR_ROOT, 'src', 'data');
 const OUT = path.join(OUT_DIR, 'api-index.generated.json');
 const BUNDLES_OUT = path.join(OUT_DIR, 'bundles.generated.json');
+const REGISTRY_OUT = path.join(OUT_DIR, 'token-registry.generated.json');
 
 // jsDelivr serves the published dist branch (see .github/workflows/publish-dist.yml)
 // at the repo root, so a bundle's minified file is <CDN_BASE>/slashed.<id>.min.css.
@@ -271,6 +273,43 @@ function main() {
   console.log(
     `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, BUNDLES_OUT)} ← ` +
       `${bundlesOut._sync.source} (${manifest.bundles.length} bundles)`
+  );
+
+  // Token id registry for the shareable config codec (src/lib/codec.js). Copied
+  // verbatim so the configurator imports it the same way model.js imports the
+  // api-index — and so the runtime can never drift from the committed registry.
+  syncRegistry();
+}
+
+/**
+ * Copy token-registry.json → src/data/token-registry.generated.json. The
+ * registry is the canonical, append-only id map maintained by
+ * scripts/gen-token-registry.js; this is just a build-time mirror.
+ */
+function syncRegistry() {
+  if (!fs.existsSync(REGISTRY_FILE)) {
+    console.error(
+      `[configurator:sync] token-registry.json not found at ${REGISTRY_FILE}\n` +
+        `Run \`npm run gen:registry\` in the framework root first.`
+    );
+    process.exit(1);
+  }
+  let registry;
+  try {
+    registry = JSON.parse(fs.readFileSync(REGISTRY_FILE, 'utf8'));
+  } catch (err) {
+    console.error(`[configurator:sync] ${REGISTRY_FILE} is not valid JSON (${err.message}).`);
+    process.exit(1);
+  }
+  const tokenCount = Array.isArray(registry.tokens) ? registry.tokens.length : 0;
+  if (tokenCount === 0) {
+    console.error(`[configurator:sync] token-registry.json has no tokens — refusing to write an empty registry.`);
+    process.exit(1);
+  }
+  fs.writeFileSync(REGISTRY_OUT, JSON.stringify(registry, null, 2) + '\n', 'utf8');
+  console.log(
+    `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, REGISTRY_OUT)} ← ` +
+      `token-registry.json (${tokenCount} ids)`
   );
 }
 
