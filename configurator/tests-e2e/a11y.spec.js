@@ -7,7 +7,7 @@ import { test, expect } from '@playwright/test';
 import { watchErrors, gotoClean, sideItem } from './helpers.js';
 
 const WIDTHS = [1600, 1000, 768, 480, 360];
-const BASIC_LABELS = ['Home', 'Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Themes'];
+const BASIC_LABELS = ['Home', 'Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Themes', 'Install'];
 
 test('no horizontal overflow on any basic panel at any width', async ({ page }) => {
   for (const width of WIDTHS) {
