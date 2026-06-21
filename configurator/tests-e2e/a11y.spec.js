@@ -79,7 +79,10 @@ test('search filters the catalogue and shows an empty state for no match', async
   // bar and at least one matching row are visible.
   await page.fill('#cfg-search', 'gap');
   await expect(page.locator('.allvars__filters')).toBeVisible();
-  await expect(page.locator('.row').first()).toBeVisible();
+  // Scope to catalogue rows (TokenGroup .group) — not any row on the page.
+  // During search the catalogue renders directly in the body, not inside the
+  // collapsed details, so .group .row is the correct cross-context selector.
+  await expect(page.locator('.group .row').first()).toBeVisible();
   // A query with no matches shows the empty state, not a dead panel.
   await page.fill('#cfg-search', 'zzz-nothing-matches');
   await expect(page.locator('.panel__empty')).toBeVisible();

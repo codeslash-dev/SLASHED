@@ -109,7 +109,7 @@ export const savedThemes = $state(loadSavedThemes());
  * Load the persisted UI preferences (domain / output format / theme / bundle),
  * validated against the live taxonomy. Persisting happens in App.svelte
  * via an $effect over the same fields.
- * @returns {{ domain?: string, outputMode?: string }}
+ * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string }}
  */
 function loadUiState() {
   if (typeof localStorage === 'undefined') return {};
