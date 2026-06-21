@@ -10,21 +10,21 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { BASIC_BY_DOMAIN, basicControlTokens, basicTokenNames } from '../src/lib/basics.js';
-import { BASIC_DOMAIN_IDS, DOMAIN_BY_ID } from '../src/lib/domains.js';
+import { OVERVIEW_DOMAIN_IDS, DOMAIN_BY_ID } from '../src/lib/domains.js';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
 
 const tokenByName = new Map(data.tokens.map((t) => [t.name, t]));
 
 describe('BASIC_BY_DOMAIN structure', () => {
-  test('every key is a Basic domain id', () => {
+  test('every key is an overview domain id', () => {
     for (const id of Object.keys(BASIC_BY_DOMAIN)) {
-      assert.ok(BASIC_DOMAIN_IDS.includes(id), `${id} is in BASIC_DOMAIN_IDS`);
+      assert.ok(OVERVIEW_DOMAIN_IDS.includes(id), `${id} is in OVERVIEW_DOMAIN_IDS`);
       assert.ok(DOMAIN_BY_ID.has(id), `${id} is a known domain`);
     }
   });
 
-  test('every non-color, non-tool Basic domain has curated groups', () => {
-    for (const id of BASIC_DOMAIN_IDS) {
+  test('every non-color, non-tool curated domain has groups', () => {
+    for (const id of OVERVIEW_DOMAIN_IDS) {
       const d = DOMAIN_BY_ID.get(id);
       if (d.tool || d.brandColors) continue; // themes (tool) + colors (brand rows)
       const def = BASIC_BY_DOMAIN[id];

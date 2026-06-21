@@ -1,6 +1,6 @@
 /**
  * History: a chain of five mixed operations (two style presets, a scale
- * generator apply, a power knob, a theme preset) must unwind to the empty
+ * generator apply, a scaling knob, a theme preset) must unwind to the empty
  * state in exactly five undos and replay byte-for-byte in five redos.
  */
 import { test, expect } from '@playwright/test';
@@ -28,12 +28,9 @@ test('5-step mixed chain unwinds and replays exactly', async ({ page }) => {
   await gen.locator('button', { hasText: /Apply scale/ }).first().click();
   snapshots.push(stableSnapshot(await readOverrides(page)));
 
-  // 4. Power knob (advanced)
-  await page.keyboard.press('a');
+  // 4. Scaling knob (Settings "Scaling" group)
   await sideItem(page, 'Spacing').click();
-  const power = page.locator('details.power');
-  await power.locator('summary').click();
-  const knob = power.locator('.knob', { hasText: '--sf-space-scale' });
+  const knob = page.locator('.knobs .knob', { hasText: '--sf-space-scale' });
   await knob.locator('input[type="number"]').fill('1.3');
   await knob.locator('input[type="number"]').press('Enter');
   snapshots.push(stableSnapshot(await readOverrides(page)));

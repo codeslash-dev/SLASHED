@@ -3,11 +3,11 @@
  *
  * Splits the full token catalogue (~840 tokens) into the user-facing domains
  * the UI navigates (Colors, Typography, Spacing, Layout, Borders, Shadows,
- * Motion, Effects, …). Each domain ships a small curated set of "basic"
- * essentials — the handful of tokens a typical user always touches — plus
- * optional in-place generators (modular type / display / space scale, etc.).
- * Advanced mode then exposes the FULL catalogue for that domain so nothing is
- * ever out of reach.
+ * Motion, Effects, …). Each domain leads with a curated Settings surface —
+ * the system inputs a typical user touches (brand colors, font stacks, scale
+ * generators, global multipliers) — and a collapsed "All variables" section
+ * underneath exposes the FULL catalogue for that domain, so nothing is ever
+ * out of reach.
  *
  * Classification is deterministic: each domain owns a list of token-name
  * prefixes/regexes plus a list of namespaces, evaluated in the order the
@@ -28,14 +28,13 @@ import { basicControlTokens } from './basics.js';
 export const DOCS_BASE_URL = 'https://github.com/codeslash-dev/SLASHED/blob/main/';
 
 /**
- * Domains surfaced in BASIC mode (plus the synthetic Home screen).
- *
- * Basic is a per-project checklist: the 11 brand/status colors, the fluid
- * type/space generators and a handful of layout/border/shadow anchors.
- * Everything else lives in Advanced. 'themes' is the one tool that stays —
- * presets are the friendliest entry point into the override model.
+ * Domains highlighted on the Overview (home) screen as the per-project
+ * setup checklist: the 11 brand/status colors, the fluid type/space
+ * generators and a handful of layout/border/shadow anchors, plus the
+ * Themes/Install tools. Every domain is always reachable from the sidebar —
+ * this list only decides what the Overview surfaces as "start here".
  */
-export const BASIC_DOMAIN_IDS = [
+export const OVERVIEW_DOMAIN_IDS = [
   'colors',
   'typography',
   'spacing',
@@ -60,8 +59,8 @@ const OVERRIDES = {
  *
  * A "knob" is a single token whose value cascades through many other tokens
  * (e.g. `--sf-space-scale=1` drives 45 spacing tokens). Surfacing these as
- * dedicated sliders at the top of each panel is the headline DX win — one
- * drag, dozens of derived values move.
+ * dedicated sliders in each panel's Settings ("Scaling" group) is a headline
+ * DX win — one drag, dozens of derived values move.
  *
  * The `driving` count is the number of tokens that reference this knob in
  * the active framework catalogue (measured against api-index.generated.json).
@@ -108,31 +107,31 @@ export const KNOBS_BY_DOMAIN = {
  *   label         - display label
  *   icon          - single emoji shown in the tab and section header
  *   blurb         - one-line summary shown above the panel
- *   intro         - 1–2 sentence orientation copy shown atop the BASIC panel
+ *   intro         - 1–2 sentence orientation copy shown atop the panel
  *                   (what this domain controls and whether typical projects
  *                   change it)
- *   powerIntro    - one-line warning copy above the Power-knobs group in
- *                   Advanced (required for any domain with quick knobs)
+ *   scaleIntro    - one-line explainer above the Settings "Scaling" group
+ *                   (required for any domain with scaling knobs)
  *   docsPath      - repo-relative path to the matching framework doc,
  *                   linked from the panel footer
  *   tool          - non-token tool slot: 'wcag' renders the WCAG panel
- *   essentials    - curated "basic" token names (rendered as editor rows in
- *                   basic + advanced); names absent from the active catalogue
- *                   are skipped silently. For the Basic checklist domains the
- *                   list derives from lib/basics.js (the richer labelled
- *                   shape) so there is exactly one source of truth
- *   basicGenerators / advancedGenerators
- *                 - which scale generator ramps to surface (one of
- *                   'type' | 'display' | 'space')
+ *   essentials    - curated token names rendered as Settings editor rows;
+ *                   names absent from the active catalogue are skipped
+ *                   silently. For the curated checklist domains the list
+ *                   derives from lib/basics.js (the richer labelled shape) so
+ *                   there is exactly one source of truth
+ *   basicGenerators
+ *                 - which scale generator ramps to surface in Settings (one
+ *                   of 'type' | 'display' | 'space')
  *   namespaces    - api-index `namespace` values that belong to this domain
  *   patterns      - additional token-name regexes that map into this domain
  *
  * @type {Array<{
  *   id: string, label: string, icon: string, blurb: string,
- *   intro?: string, powerIntro?: string,
+ *   intro?: string, scaleIntro?: string,
  *   tool?: string,
  *   essentials?: string[],
- *   basicGenerators?: string[], advancedGenerators?: string[],
+ *   basicGenerators?: string[],
  *   namespaces?: string[], patterns?: RegExp[]
  * }>}
  */
@@ -144,7 +143,7 @@ export const DOMAINS = [
     icon: '🎨',
     blurb: 'Brand & status sources, semantic surfaces, links, focus and dark-mode contrast.',
     intro: 'Set the 11 brand and status source colors — shades, surfaces, links and dark mode all derive from them automatically. The highest-impact panel for any project.',
-    powerIntro: 'These thresholds retune how the framework picks light or dark text on every colored surface. Small changes ripple across the whole palette — change with care.',
+    scaleIntro: 'These thresholds retune how the framework picks light or dark text on every colored surface. Small changes ripple across the whole palette — change with care.',
     namespaces: [
       'color', 'palette',
       'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
@@ -188,7 +187,7 @@ export const DOMAINS = [
     icon: '🔤',
     blurb: 'Font families, fluid type ramp, headings, prose and inline text behaviour.',
     intro: 'Pick your font stacks, then tune the fluid type ramp with the generator — a few inputs recalibrate every text size between your smallest and largest viewports.',
-    powerIntro: '--sf-text-scale multiplies the entire fluid text ramp at once. Prefer the generator above unless you want a uniform global resize.',
+    scaleIntro: '--sf-text-scale multiplies the entire fluid text ramp at once. Prefer the generator above unless you want a uniform global resize.',
     namespaces: [
       'font', 'text', 'leading', 'tracking', 'prose',
       'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -222,7 +221,7 @@ export const DOMAINS = [
     icon: '📏',
     blurb: 'Fluid spacing scale, gaps, section padding and content rhythm.',
     intro: 'Tune the fluid spacing ramp with the generator, plus the rhythm tokens most layouts read (section padding, gutters, content gaps).',
-    powerIntro: '--sf-space-scale multiplies all 45 fluid spacing tokens in one drag. Prefer the generator above unless you want a uniform global squeeze or stretch.',
+    scaleIntro: '--sf-space-scale multiplies all 45 fluid spacing tokens in one drag. Prefer the generator above unless you want a uniform global squeeze or stretch.',
     namespaces: ['space', 'gap', 'section', 'fluid', 'flow', 'gutter', 'component'],
     patterns: [
       /^--sf-space-/,
@@ -289,7 +288,7 @@ export const DOMAINS = [
     icon: '⬜',
     blurb: 'Corner radius, border widths and dividers.',
     intro: 'Set the corner radius steps and the default border styling referenced across the framework.',
-    powerIntro: '--sf-radius-scale multiplies every radius step at once (set it to 0 for fully sharp corners).',
+    scaleIntro: '--sf-radius-scale multiplies every radius step at once (set it to 0 for fully sharp corners).',
     namespaces: ['border', 'radius', 'divider', 'outline'],
     patterns: [
       /^--sf-border(\b|[-_])/,
@@ -307,7 +306,7 @@ export const DOMAINS = [
     icon: '🌒',
     blurb: 'Elevation shadow ramp, drop / text / scroll shadows and glow.',
     intro: 'Tune the four elevation steps used across the framework. Shadow opacity is boosted automatically in dark mode.',
-    powerIntro: '--sf-shadow-strength drives the opacity of all 14 shadow tokens, including the automatic dark-mode boost.',
+    scaleIntro: '--sf-shadow-strength drives the opacity of all 14 shadow tokens, including the automatic dark-mode boost.',
     // Order MATTERS — these patterns run before typography/colors so that
     // `--sf-text-shadow-*` and `--sf-shadow-color` end up here.
     patterns: [
@@ -325,7 +324,7 @@ export const DOMAINS = [
     label: 'Motion',
     icon: '🎞️',
     blurb: 'Durations, easings, transition and animation presets.',
-    powerIntro: '--sf-motion-scale multiplies every duration in the framework (set it to 0 to disable motion entirely).',
+    scaleIntro: '--sf-motion-scale multiplies every duration in the framework (set it to 0 to disable motion entirely).',
     namespaces: ['duration', 'ease', 'transition', 'animation', 'motion', 'scroll'],
     patterns: [
       /^--sf-duration-/,

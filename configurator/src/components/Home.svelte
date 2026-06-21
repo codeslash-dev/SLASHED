@@ -1,18 +1,18 @@
 <script>
   /**
-   * Home — the Basic-mode landing screen.
+   * Overview — the landing screen.
    *
-   * A project setup checklist: one large row per Basic domain (Colors,
-   * Typography, Spacing, Layout, Borders, Shadows) plus the Themes tool.
-   * Each row shows what the domain controls and how many of its tokens are
-   * customised, so the screen doubles as orientation ("what do I change per
-   * project?") and progress tracking ("what have I already touched?").
+   * A project setup checklist: one large row per highlighted domain (Colors,
+   * Typography, Spacing, Layout, Borders, Shadows) plus the Themes / Install
+   * tools. Each row shows what the domain controls and how many of its tokens
+   * are customised, so the screen doubles as orientation ("what do I change
+   * per project?") and progress tracking ("what have I already touched?").
    */
-  import { DOMAINS, BASIC_DOMAIN_IDS } from '../lib/domains.js';
+  import { DOMAINS, OVERVIEW_DOMAIN_IDS } from '../lib/domains.js';
   import { modifiedCountsByDomain } from '../lib/model.js';
   import { ui, overrides, openOutputDrawer } from '../lib/store.svelte.js';
 
-  const rows = $derived(DOMAINS.filter((d) => BASIC_DOMAIN_IDS.includes(d.id)));
+  const rows = $derived(DOMAINS.filter((d) => OVERVIEW_DOMAIN_IDS.includes(d.id)));
 
   // Domain id → number of currently-overridden tokens (same map as Sidebar).
   const mods = $derived.by(() => modifiedCountsByDomain(overrides));
@@ -28,9 +28,9 @@
     <h2 class="home__title">Set up your design</h2>
     <p class="home__lead">
       Work through the panels below — they cover everything most projects
-      change from the framework defaults. Everything else already has a good
-      default and stays reachable in <strong>Advanced</strong> mode
-      (<kbd class="cfg-kbd">A</kbd>).
+      change from the framework defaults. Every other token already has a good
+      default and is one click away under each category's
+      <strong>All variables</strong> section.
     </p>
     {#if totalMods > 0}
       <button class="home__export" onclick={openOutputDrawer} title="Open the output drawer with your override CSS">

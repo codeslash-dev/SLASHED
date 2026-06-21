@@ -4,7 +4,7 @@
    *
    * Layout (desktop ≥ 1100px):
    *   ┌─────────────────────────────────────────────────────────────────┐
-   *   │ Header (brand · search · basic/advanced · theme · preview)       │
+   *   │ Header (brand · search · undo/redo · theme · preview)            │
    *   ├──────────┬──┬────────────────────────────────────┬──┬───────────┤
    *   │          │  │                                    │  │           │
    *   │ Sidebar  │↔│       Domain panel / WCAG tool     │↔│  Preview  │
@@ -23,7 +23,7 @@
    * State lives in the shared `ui` store; this component just wires the
    * active domain to its panel.
    */
-  import { DOMAINS, DOMAIN_BY_ID, BASIC_DOMAIN_IDS } from './lib/domains.js';
+  import { DOMAINS, DOMAIN_BY_ID } from './lib/domains.js';
   import { ui, undo, redo, overrides, loadSharedConfig } from './lib/store.svelte.js';
   import { buildShareUrl } from './lib/share.js';
   import { UI_STORAGE_KEY } from './lib/uiState.js';
@@ -97,19 +97,9 @@
     try { localStorage.setItem(WIDTHS_KEY, JSON.stringify({ sidebar: sidebarWidth, preview: previewWidth })); } catch { /* ignore */ }
   }
 
-  const home = $derived(ui.mode === 'basic' && ui.domain === 'home');
+  const home = $derived(ui.domain === 'home');
   const domain = $derived(DOMAIN_BY_ID.get(ui.domain) ?? DOMAIN_BY_ID.get('colors'));
   const tool = $derived(domain?.tool ?? '');
-
-  // Keep the active domain valid for the current mode: Home exists only in
-  // Basic, and Basic hides the non-checklist domains (Motion, Effects, …).
-  $effect(() => {
-    if (ui.mode === 'advanced' && ui.domain === 'home') {
-      ui.domain = 'colors';
-    } else if (ui.mode === 'basic' && ui.domain !== 'home' && !BASIC_DOMAIN_IDS.includes(ui.domain)) {
-      ui.domain = 'home';
-    }
-  });
 
   // Keep the contrast-probe host in sync with the user's cascade so every
   // ContrastBadge resolves `var(...)`, `light-dark()` and `oklch(from ...)`
@@ -157,7 +147,7 @@
   // Persist the navigation prefs so a reload restores where the user was.
   // Restore (with validation) happens in store.svelte.js via sanitiseUiState.
   $effect(() => {
-    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme, bundle: ui.bundle });
+    const snapshot = JSON.stringify({ domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme, bundle: ui.bundle });
     try {
       localStorage.setItem(UI_STORAGE_KEY, snapshot);
     } catch {
@@ -183,9 +173,8 @@
     return () => mql.removeEventListener('change', onChange);
   });
 
-  // Keyboard shortcuts: '/' focuses the search box; 'b'/'a' switch mode;
-  // '[' / ']' cycle domains; 'Escape' clears the search; Ctrl+Z / Ctrl+Shift+Z
-  // step the override history.
+  // Keyboard shortcuts: '/' focuses the search box; '[' / ']' cycle domains;
+  // 'Escape' clears the search; Ctrl+Z / Ctrl+Shift+Z step the override history.
   function onKey(e) {
     // Ctrl/Cmd + Z handlers run regardless of focus context — undo/redo
     // is a global affordance, even while typing in an input.
@@ -222,15 +211,9 @@
     } else if (e.key === '/') {
       e.preventDefault();
       document.querySelector('#cfg-search')?.focus();
-    } else if (e.key === 'b' || e.key === 'B') {
-      ui.mode = 'basic';
-    } else if (e.key === 'a' || e.key === 'A') {
-      ui.mode = 'advanced';
     } else if (e.key === '[' || e.key === ']') {
-      // Cycle the domains visible in the current mode.
-      const ids = ui.mode === 'basic'
-        ? ['home', ...BASIC_DOMAIN_IDS]
-        : DOMAINS.map((d) => d.id);
+      // Cycle Overview + the full domain taxonomy.
+      const ids = ['home', ...DOMAINS.map((d) => d.id)];
       const i = ids.indexOf(ui.domain);
       if (i !== -1) {
         const next = (i + (e.key === ']' ? 1 : -1) + ids.length) % ids.length;

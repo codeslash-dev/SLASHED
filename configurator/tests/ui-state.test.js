@@ -4,29 +4,33 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { sanitiseUiState, UI_STORAGE_KEY } from '../src/lib/uiState.js';
-import { BASIC_DOMAIN_IDS } from '../src/lib/domains.js';
+import { DOMAINS } from '../src/lib/domains.js';
 
 describe('sanitiseUiState', () => {
-  test('round-trips a fully valid payload', () => {
-    const raw = JSON.stringify({ mode: 'advanced', domain: 'motion', outputMode: 'root' });
-    assert.deepEqual(sanitiseUiState(raw), { mode: 'advanced', domain: 'motion', outputMode: 'root' });
+  test('round-trips a valid payload', () => {
+    const raw = JSON.stringify({ domain: 'motion', outputMode: 'root' });
+    assert.deepEqual(sanitiseUiState(raw), { domain: 'motion', outputMode: 'root' });
   });
 
-  test('accepts home and every checklist domain in basic mode', () => {
-    for (const domain of ['home', ...BASIC_DOMAIN_IDS]) {
-      const raw = JSON.stringify({ mode: 'basic', domain });
+  test('accepts home and every domain id', () => {
+    for (const domain of ['home', ...DOMAINS.map((d) => d.id)]) {
+      const raw = JSON.stringify({ domain });
       assert.equal(sanitiseUiState(raw).domain, domain, domain);
     }
   });
 
-  test('drops a domain invalid for the saved mode', () => {
-    // motion is advanced-only; home does not exist in advanced.
-    assert.equal(sanitiseUiState(JSON.stringify({ mode: 'basic', domain: 'motion' })).domain, undefined);
-    assert.equal(sanitiseUiState(JSON.stringify({ mode: 'advanced', domain: 'home' })).domain, undefined);
+  test('ignores a legacy mode field (flat IA has no complexity mode)', () => {
+    const out = sanitiseUiState(JSON.stringify({ mode: 'advanced', domain: 'motion' }));
+    assert.equal(out.mode, undefined);
+    assert.equal(out.domain, 'motion');
+  });
+
+  test('drops an unknown domain id', () => {
+    assert.equal(sanitiseUiState(JSON.stringify({ domain: 'nope' })).domain, undefined);
   });
 
   test('drops unknown values field by field', () => {
-    const raw = JSON.stringify({ mode: 'turbo', domain: 'nope', outputMode: 'yaml', extra: 1 });
+    const raw = JSON.stringify({ domain: 'nope', outputMode: 'yaml', extra: 1 });
     assert.deepEqual(sanitiseUiState(raw), {});
   });
 

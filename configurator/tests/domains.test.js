@@ -8,7 +8,7 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { domainOf, DOMAINS, DOMAIN_BY_ID, BASIC_DOMAIN_IDS, KNOBS_BY_DOMAIN } from '../src/lib/domains.js';
+import { domainOf, DOMAINS, DOMAIN_BY_ID, OVERVIEW_DOMAIN_IDS, KNOBS_BY_DOMAIN } from '../src/lib/domains.js';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
 
 const tokens = data.tokens;
@@ -35,41 +35,41 @@ describe('DOMAINS metadata', () => {
   });
 });
 
-describe('BASIC mode surface', () => {
-  test('every BASIC_DOMAIN_IDS entry is a real domain id', () => {
-    for (const id of BASIC_DOMAIN_IDS) {
+describe('Overview surface', () => {
+  test('every OVERVIEW_DOMAIN_IDS entry is a real domain id', () => {
+    for (const id of OVERVIEW_DOMAIN_IDS) {
       assert.ok(DOMAIN_BY_ID.has(id), `${id} is a known domain`);
     }
   });
 
-  test('basic ids are unique', () => {
-    assert.equal(new Set(BASIC_DOMAIN_IDS).size, BASIC_DOMAIN_IDS.length);
+  test('overview ids are unique', () => {
+    assert.equal(new Set(OVERVIEW_DOMAIN_IDS).size, OVERVIEW_DOMAIN_IDS.length);
   });
 
-  test('every non-tool basic domain has intro copy', () => {
-    for (const id of BASIC_DOMAIN_IDS) {
+  test('every non-tool overview domain has intro copy', () => {
+    for (const id of OVERVIEW_DOMAIN_IDS) {
       const d = DOMAIN_BY_ID.get(id);
       if (d.tool) continue;
       assert.ok(
         typeof d.intro === 'string' && d.intro.trim().length > 0,
-        `${id} has non-empty intro copy for its Basic panel`
+        `${id} has non-empty intro copy for its panel`
       );
     }
   });
 
-  test('every domain with power knobs has powerIntro copy', () => {
+  test('every domain with scaling knobs has scaleIntro copy', () => {
     for (const [id, knobs] of Object.entries(KNOBS_BY_DOMAIN)) {
       if (!knobs.length) continue;
       const d = DOMAIN_BY_ID.get(id);
       assert.ok(d, `${id} (KNOBS_BY_DOMAIN key) is a known domain`);
       assert.ok(
-        typeof d.powerIntro === 'string' && d.powerIntro.trim().length > 0,
-        `${id} has non-empty powerIntro for its Power-knobs group`
+        typeof d.scaleIntro === 'string' && d.scaleIntro.trim().length > 0,
+        `${id} has non-empty scaleIntro for its Scaling group`
       );
     }
   });
 
-  test('every power knob token exists in the catalogue', () => {
+  test('every scaling knob token exists in the catalogue', () => {
     const known = new Set(tokens.map((t) => t.name));
     for (const knobs of Object.values(KNOBS_BY_DOMAIN)) {
       for (const k of knobs) {
