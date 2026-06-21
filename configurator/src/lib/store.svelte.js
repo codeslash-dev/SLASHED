@@ -70,6 +70,8 @@ export const ui = $state({
   outputMode: savedUi.outputMode ?? 'layer',
   /** Theme for the configurator chrome itself: 'dark' (default) or 'light'. */
   uiTheme: savedUi.uiTheme ?? 'dark',
+  /** Selected dist bundle id for the install/setup picker (see lib/bundles.js). */
+  bundle: savedUi.bundle ?? 'optimal',
   /** Sidebar collapse — for narrow viewports / a focus-mode. */
   sidebarOpen: true,
   /**

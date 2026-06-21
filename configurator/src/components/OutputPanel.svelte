@@ -212,7 +212,10 @@
     <footer class="out__foot">
       Synced from <code>{sync.source}</code> · framework
       <code>{frameworkVersion || 'unknown'}</code> ·
-      {sync.counts?.tokens ?? 0} tokens in catalogue
+      {sync.counts?.tokens ?? 0} tokens in catalogue ·
+      <button class="out__link" onclick={() => (ui.domain = 'setup')}>
+        Need the framework <code>&lt;link&gt;</code>? → Install
+      </button>
     </footer>
   {/if}
 </section>
@@ -332,6 +335,16 @@
     flex-shrink: 0;
   }
   .out__foot code { color: var(--cfg-text-muted); }
+  .out__link {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: var(--cfg-accent);
+    cursor: pointer;
+  }
+  .out__link:hover { text-decoration: underline; }
+  .out__link code { color: inherit; }
 
   /* ── Diff table ────────────────────────────────────────────────────────── */
   .out__view { margin-right: 4px; }

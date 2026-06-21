@@ -36,6 +36,7 @@
   import WcagPanel from './components/WcagPanel.svelte';
   import ThemeGallery from './components/ThemeGallery.svelte';
   import Cheatsheet from './components/Cheatsheet.svelte';
+  import BundlePicker from './components/BundlePicker.svelte';
   import Home from './components/Home.svelte';
 
   // ── Pane-width resizing ───────────────────────────────────────────────────
@@ -153,7 +154,7 @@
   // Persist the navigation prefs so a reload restores where the user was.
   // Restore (with validation) happens in store.svelte.js via sanitiseUiState.
   $effect(() => {
-    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme });
+    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme, bundle: ui.bundle });
     try {
       localStorage.setItem(UI_STORAGE_KEY, snapshot);
     } catch {
@@ -272,6 +273,8 @@
       <WcagPanel />
     {:else if tool === 'themes'}
       <ThemeGallery />
+    {:else if tool === 'setup'}
+      <BundlePicker />
     {:else if tool === 'cheatsheet'}
       <Cheatsheet />
     {:else}
