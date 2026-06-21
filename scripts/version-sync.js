@@ -55,6 +55,31 @@ changed += sync(
   `roadmap version = ${version}`
 ) ? 1 : 0;
 
+// ── configurator/package.json + package-lock.json ───────────────────────────
+function syncJsonVersion(rel, label) {
+  const filePath = path.join(ROOT, rel);
+  const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  let dirty = false;
+  if (parsed.version !== version) {
+    parsed.version = version;
+    dirty = true;
+  }
+  if (parsed.packages?.['']?.version !== undefined && parsed.packages[''].version !== version) {
+    parsed.packages[''].version = version;
+    dirty = true;
+  }
+  if (!dirty) {
+    console.log(`  ok   ${rel}  (${label} already up to date)`);
+    return false;
+  }
+  fs.writeFileSync(filePath, JSON.stringify(parsed, null, 2) + '\n', 'utf8');
+  console.log(`  bump ${rel}  → ${label}`);
+  return true;
+}
+
+changed += syncJsonVersion('configurator/package.json', `configurator version = ${version}`) ? 1 : 0;
+changed += syncJsonVersion('configurator/package-lock.json', `configurator lock version = ${version}`) ? 1 : 0;
+
 // ── Summary ─────────────────────────────────────────────────────────────────
 if (changed === 0) {
   console.log('\nAll version references are already up to date.\n');
