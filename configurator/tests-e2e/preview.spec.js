@@ -86,7 +86,7 @@ test('preview is live: editing a brand color repaints the sample button', async 
   await page.locator('.side__item', { hasText: 'Colors' }).first().click();
   const btn = page.locator('.pv__btn--primary').first();
   const before = await btn.evaluate((el) => getComputedStyle(el).backgroundColor);
-  const input = page.locator('input[aria-label="--sf-color-primary-light value"]');
+  const input = page.locator('input.bcr__input[aria-label="--sf-color-primary-light value"]');
   await input.fill('oklch(0.5 0.2 140)');
   await input.press('Enter');
   await expect
