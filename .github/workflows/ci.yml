@@ -88,6 +88,7 @@ jobs:
       - run: npm run audit:check
       - run: node scripts/check-artifacts.js --check
       - run: node scripts/check-version-sync.js
+      - run: node scripts/check-token-registry.js
 
   dependency-audit:
     name: Dependency vulnerability audit

@@ -19,9 +19,6 @@
     "pretest:e2e": "npm run build",
     "test:e2e": "playwright test"
   },
-  "dependencies": {
-    "lz-string": "^1.5.0"
-  },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
     "@playwright/test": "^1.60.0",

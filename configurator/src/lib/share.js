@@ -6,47 +6,36 @@
  * deploy step. The fragment never reaches the server, which keeps the payload
  * private to the link and avoids request-size limits.
  *
- * The payload is the same name->value map the rest of the app uses, so it is
- * inherently future-proof: when the framework adds, renames, or removes tokens
- * the link format does not change — unknown keys are simply dropped on decode
- * (exactly like a stale localStorage payload, see store.svelte.js:loadOverrides).
+ * The wire format is the Guild-Wars-2-style binary config code from codec.js:
+ * each token is referenced by a permanent 16-bit id (token-registry.json), and
+ * the config is a base64url-packed list of (id, value) pairs. This is inherently
+ * future-proof — unknown ids are skipped on decode and missing ids fall back to
+ * defaults — so a link minted today keeps working in every later build (exactly
+ * like a stale localStorage payload, see store.svelte.js:loadOverrides).
  *
- * Wire format:  #c=<schemaVersion>.<lz-string-compressed-json>
- *   - schemaVersion lets us evolve the container later without silently
- *     misreading old links.
- *   - compression is lz-string's URL-safe variant, so the value is already a
- *     valid URI component (no extra encodeURIComponent needed).
+ * The same codec.js + token-registry.json pair is vendored by the SLASHED
+ * WordPress plugin so its "Open in Configurator" button mints identical codes.
+ *
+ * Wire format:  #c=<base64url-config-code>
  */
-// lz-string ships as CommonJS; import the default and destructure so this works
-// under both Vite (interop) and Node's native ESM (used by `node --test`).
-import lzString from 'lz-string';
 import { sanitizeValue } from './css.js';
 import { tokenByName } from './model.js';
+import { encode, decode } from './codec.js';
+import registry from '../data/token-registry.generated.json' with { type: 'json' };
 
-const { compressToEncodedURIComponent, decompressFromEncodedURIComponent } = lzString;
-
-/** Fragment key under which the config lives, e.g. `#c=1.NoE...`. */
+/** Fragment key under which the config lives, e.g. `#c=AAE...`. */
 export const SHARE_PARAM = 'c';
-/** Bumped only if the container format (not the token set) changes. */
-export const SHARE_SCHEMA = '1';
 
 /**
- * Compress an override map into a URL-fragment-safe string.
+ * Encode an override map into a URL-fragment-safe config code.
  * Empty / invalid maps encode to '' so callers can treat "nothing to share"
  * uniformly.
  *
  * @param {Record<string, string>} map token name -> value
- * @returns {string} `<schema>.<compressed>` or '' when there is nothing to share
+ * @returns {string} base64url config code, or '' when there is nothing to share
  */
 export function encodeOverrides(map) {
-  if (!map || typeof map !== 'object') return '';
-  const clean = {};
-  for (const [k, v] of Object.entries(map)) {
-    if (typeof k === 'string' && typeof v === 'string' && v !== '') clean[k] = v;
-  }
-  if (Object.keys(clean).length === 0) return '';
-  const json = JSON.stringify(clean);
-  return `${SHARE_SCHEMA}.${compressToEncodedURIComponent(json)}`;
+  return encode(map, registry);
 }
 
 /**
@@ -57,39 +46,18 @@ export function encodeOverrides(map) {
  * Tolerant by design: any malformed input returns an empty map rather than
  * throwing, so a broken `#c=` fragment degrades to "open with defaults".
  *
- * @param {string} encoded `<schema>.<compressed>` (with or without a leading '#c=')
+ * @param {string} encoded the config code (with or without a leading '#c=')
  * @param {{ isKnown?: (name: string) => boolean }} [opts] validator override (tests)
  * @returns {Record<string, string>}
  */
 export function decodeOverrides(encoded, opts = {}) {
   const isKnown = opts.isKnown ?? ((name) => tokenByName.has(name));
-  try {
-    let raw = String(encoded ?? '').trim();
-    if (raw === '') return {};
-    // Accept a full fragment ("#c=...") or a bare payload.
-    const fromFragment = raw.match(/[#&]?c=([^&]+)/);
-    if (fromFragment) raw = fromFragment[1];
-    // Strip the schema prefix; reject unknown schema versions.
-    const dot = raw.indexOf('.');
-    if (dot === -1) return {};
-    const schema = raw.slice(0, dot);
-    if (schema !== SHARE_SCHEMA) return {};
-    const payload = raw.slice(dot + 1);
-    const json = decompressFromEncodedURIComponent(payload);
-    if (!json) return {};
-    const parsed = JSON.parse(json);
-    if (!parsed || typeof parsed !== 'object') return {};
-    const clean = {};
-    for (const [k, v] of Object.entries(parsed)) {
-      if (typeof k !== 'string' || typeof v !== 'string') continue;
-      if (!isKnown(k)) continue;
-      const safe = sanitizeValue(v);
-      if (safe !== '') clean[k] = safe;
-    }
-    return clean;
-  } catch {
-    return {};
-  }
+  let raw = String(encoded ?? '').trim();
+  if (raw === '') return {};
+  // Accept a full fragment ("#c=...") or a bare payload.
+  const fromFragment = raw.match(/[#&]?c=([^&]+)/);
+  if (fromFragment) raw = fromFragment[1];
+  return decode(raw, registry, { sanitize: sanitizeValue, isKnown });
 }
 
 /**
