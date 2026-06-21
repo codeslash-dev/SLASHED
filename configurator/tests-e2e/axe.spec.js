@@ -36,7 +36,7 @@ for (const theme of ['dark', 'light']) {
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     }
 
-    // Home (Basic landing).
+    // Overview (landing).
     expect(await audit(page)).toEqual([]);
 
     // Install panel (new bundle picker).

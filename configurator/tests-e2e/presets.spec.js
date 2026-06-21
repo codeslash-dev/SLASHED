@@ -1,5 +1,5 @@
 /**
- * Style preset rows (Basic borders/shadows) and power knobs (Advanced):
+ * Style preset rows (borders / shadows) and the Settings "Scaling" knobs:
  * default detection, no cross-preset leftovers, single-undo-step semantics,
  * the shadow-strength encode/decode round-trip.
  */
@@ -34,44 +34,32 @@ test('hand-edited values show NO active preset (never a wrong one)', async ({ pa
   await gotoClean(page);
   await sideItem(page, 'Shadows').click();
   await page.locator('.presets__btn', { hasText: 'Strong' }).click();
-  await page.keyboard.press('a');
-  // Open the power-knobs section and hand-edit --sf-shadow-strength to a value
-  // that differs from what the Strong preset set, deactivating it.
-  const power = page.locator('details.power');
-  await power.locator('summary').click();
-  const knob = power.locator('.knob', { hasText: '--sf-shadow-strength' });
+  // Hand-edit --sf-shadow-strength to a value that differs from Strong,
+  // deactivating it. The knob lives in the Settings "Scaling" group.
+  const knob = page.locator('.knobs .knob', { hasText: '--sf-shadow-strength' });
   await knob.locator('input[type="number"]').fill('0.05');
   await knob.locator('input[type="number"]').press('Enter');
-  await page.keyboard.press('b');
-  await sideItem(page, 'Shadows').click();
   await expect(page.locator('.presets__btn[aria-pressed="true"]')).toHaveCount(0);
 });
 
-test('power knobs live only in Advanced, collapsed at the panel bottom', async ({ page }) => {
+test('scaling knobs live in Settings for scale domains, absent otherwise', async ({ page }) => {
   await gotoClean(page);
-  for (const label of ['Colors', 'Typography', 'Spacing', 'Borders', 'Shadows']) {
-    await sideItem(page, label).click();
-    await expect(page.locator('.knobs'), `${label}: no knobs in Basic`).toHaveCount(0);
-  }
-  await page.keyboard.press('a');
   await sideItem(page, 'Spacing').click();
-  const power = page.locator('details.power');
-  await expect(power).toHaveCount(1);
-  expect(await power.evaluate((el) => el.open)).toBe(false);
-  await power.locator('summary').click();
-  const knob = power.locator('.knob', { hasText: '--sf-space-scale' });
+  const knobs = page.locator('.knobs');
+  await expect(knobs).toBeVisible();
+  const knob = knobs.locator('.knob', { hasText: '--sf-space-scale' });
   await knob.locator('input[type="number"]').fill('1.3');
   await knob.locator('input[type="number"]').press('Enter');
   expect((await readOverrides(page))['--sf-space-scale']).toBe('1.3');
+  // Layout has no scaling knobs.
+  await sideItem(page, 'Layout').click();
+  await expect(page.locator('.knobs')).toHaveCount(0);
 });
 
 test('shadow-strength knob round-trips its dark-mode calc() encoding', async ({ page }) => {
   await gotoClean(page);
-  await page.keyboard.press('a');
   await sideItem(page, 'Shadows').click();
-  const power = page.locator('details.power');
-  await power.locator('summary').click();
-  const knob = power.locator('.knob', { hasText: '--sf-shadow-strength' });
+  const knob = page.locator('.knobs .knob', { hasText: '--sf-shadow-strength' });
   await knob.locator('input[type="number"]').fill('0.2');
   await knob.locator('input[type="number"]').press('Enter');
   expect((await readOverrides(page))['--sf-shadow-strength']).toBe('calc(0.2 + var(--sf-is-dark) * 0.17)');

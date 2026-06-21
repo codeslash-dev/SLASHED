@@ -7,13 +7,17 @@ import { test, expect } from '@playwright/test';
 import { watchErrors, gotoClean, sideItem } from './helpers.js';
 
 const WIDTHS = [1600, 1000, 768, 480, 360];
-const BASIC_LABELS = ['Home', 'Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Themes', 'Install'];
+const NAV_LABELS = [
+  'Overview', 'Colors', 'Gradients', 'Typography', 'Spacing', 'Layout',
+  'Borders', 'Shadows', 'Motion', 'Effects', 'WCAG', 'Themes', 'Install',
+  'Misc', 'Cheatsheet',
+];
 
-test('no horizontal overflow on any basic panel at any width', async ({ page }) => {
+test('no horizontal overflow on any panel at any width', async ({ page }) => {
   for (const width of WIDTHS) {
     await page.setViewportSize({ width, height: 900 });
     await gotoClean(page);
-    for (const label of BASIC_LABELS) {
+    for (const label of NAV_LABELS) {
       await sideItem(page, label).click();
       const overflow = await page.evaluate(
         () => document.scrollingElement.scrollWidth - window.innerWidth
@@ -23,11 +27,12 @@ test('no horizontal overflow on any basic panel at any width', async ({ page }) 
   }
 });
 
-test('no horizontal overflow on advanced colors + cheatsheet at any width', async ({ page }) => {
+test('no horizontal overflow with the full catalogue expanded', async ({ page }) => {
   for (const width of WIDTHS) {
     await page.setViewportSize({ width, height: 900 });
     await gotoClean(page);
-    await page.keyboard.press('a');
+    await sideItem(page, 'Colors').click();
+    await page.locator('details.allvars summary').click();
     for (const label of ['Colors', 'Cheatsheet']) {
       await sideItem(page, label).click();
       const overflow = await page.evaluate(
@@ -40,7 +45,7 @@ test('no horizontal overflow on advanced colors + cheatsheet at any width', asyn
 
 test('every button exposes an accessible name', async ({ page }) => {
   await gotoClean(page);
-  for (const label of ['Home', 'Colors', 'Borders']) {
+  for (const label of ['Overview', 'Colors', 'Borders']) {
     await sideItem(page, label).click();
     const nameless = await page.evaluate(() =>
       [...document.querySelectorAll('button')]
@@ -53,8 +58,7 @@ test('every button exposes an accessible name', async ({ page }) => {
 
 test('segmented controls expose aria-pressed; info buttons aria-expanded', async ({ page }) => {
   await gotoClean(page);
-  // Header mode segment + output drawer segments: exactly one pressed each.
-  await expect(page.locator('[aria-label="Complexity mode"] [aria-pressed="true"]')).toHaveCount(1);
+  // Output drawer segments: exactly one pressed each.
   await expect(page.locator('.out [aria-label="Output view"] [aria-pressed="true"]')).toHaveCount(1);
   await expect(page.locator('.out [aria-label="Output format"] [aria-pressed="true"]')).toHaveCount(1);
   // ⓘ popover toggles aria-expanded and reveals the raw token.
@@ -67,17 +71,19 @@ test('segmented controls expose aria-pressed; info buttons aria-expanded', async
   await expect(row.locator('.row__raw')).toContainText('--sf-container-prose');
 });
 
-test('basic search scopes to the curated surface with an advanced jump', async ({ page }) => {
+test('search filters the catalogue and shows an empty state for no match', async ({ page }) => {
   const errors = watchErrors(page);
   await gotoClean(page);
   await sideItem(page, 'Spacing').click();
+  // A query collapses the panel to the filtered catalogue; the usage filter
+  // bar and at least one matching row are visible.
   await page.fill('#cfg-search', 'gap');
-  const more = page.locator('.panel__more');
-  await expect(more).toBeVisible();
-  await more.click();
-  await expect(page.locator('#cfg-search')).toHaveValue('gap'); // query survives the mode switch
-  await page.keyboard.press('b');
-  await sideItem(page, 'Spacing').click();
+  await expect(page.locator('.allvars__filters')).toBeVisible();
+  // Scope to catalogue rows (TokenGroup .group) — not any row on the page.
+  // During search the catalogue renders directly in the body, not inside the
+  // collapsed details, so .group .row is the correct cross-context selector.
+  await expect(page.locator('.group .row').first()).toBeVisible();
+  // A query with no matches shows the empty state, not a dead panel.
   await page.fill('#cfg-search', 'zzz-nothing-matches');
   await expect(page.locator('.panel__empty')).toBeVisible();
   expect(errors).toEqual([]);

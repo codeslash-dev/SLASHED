@@ -4,11 +4,9 @@
    *
    * Contents (left → right):
    *   • Brand mark + product title + framework version pill
-   *   • Global search input (filters tokens across the active domain;
-   *     also triggers cross-domain matches in advanced mode via the panel)
-   *   • Basic / Advanced segmented control (global mode toggle)
-   *   • Light / Dark preview-theme toggle
-   *   • Sidebar / Preview pane toggles
+   *   • Global search input (filters the active domain's All-variables list)
+   *   • Undo / redo
+   *   • Share-link / Light-Dark theme / Sidebar / Preview pane toggles
    *
    * Below ~760px the labels collapse to icons but every control stays
    * reachable. Keyboard shortcut: `/` focuses the search box.
@@ -93,23 +91,6 @@
         title="Redo last undone edit ({canRedo ? history.future.length + ' available' : 'nothing to redo'}) — ⇧⌘Z"
         aria-label="Redo"
       >↷</button>
-    </div>
-
-    <div class="cfg-seg" role="group" aria-label="Complexity mode">
-      <button
-        class="cfg-seg__btn"
-        class:cfg-seg__btn--on={ui.mode === 'basic'}
-        onclick={() => (ui.mode = 'basic')}
-        aria-pressed={ui.mode === 'basic'}
-        title="Basic — the curated essentials most projects need (B)"
-      >Basic</button>
-      <button
-        class="cfg-seg__btn"
-        class:cfg-seg__btn--on={ui.mode === 'advanced'}
-        onclick={() => (ui.mode = 'advanced')}
-        aria-pressed={ui.mode === 'advanced'}
-        title="Advanced — every token, generator and viewport knob (A)"
-      >Advanced</button>
     </div>
 
     <button

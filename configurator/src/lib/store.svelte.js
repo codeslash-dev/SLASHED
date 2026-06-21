@@ -37,17 +37,15 @@ export const overrides = $state(loadOverrides());
  */
 export const storage = $state({ ok: true });
 
-/** UI state: active domain tab, basic/advanced mode, search, filters, preview. */
+/** UI state: active domain tab, search, filters, preview. */
 const savedUi = loadUiState();
 export const ui = $state({
   /**
    * Active domain tab id (see lib/domains.js): 'typography' | 'colors' | …
-   * `'home'` is the synthetic Basic-mode landing screen (setup checklist).
+   * `'home'` is the synthetic Overview landing screen (setup checklist).
    */
   domain: savedUi.domain ?? 'home',
-  /** Global complexity mode: 'basic' shows curated essentials, 'advanced' all. */
-  mode: savedUi.mode ?? 'basic',
-  /** Free-text filter, applied to advanced lists. */
+  /** Free-text filter, applied to each panel's All-variables catalogue. */
   query: '',
   /** Show the api-index INTERNAL tier (one or two implementation tokens). */
   showInternal: false,
@@ -108,10 +106,10 @@ export const savedThemes = $state(loadSavedThemes());
 // ───────────────────────────── persistence ────────────────────────────────
 
 /**
- * Load the persisted UI preferences (mode / domain / output format),
+ * Load the persisted UI preferences (domain / output format / theme / bundle),
  * validated against the live taxonomy. Persisting happens in App.svelte
- * via an $effect over the same three fields.
- * @returns {{ mode?: string, domain?: string, outputMode?: string }}
+ * via an $effect over the same fields.
+ * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string }}
  */
 function loadUiState() {
   if (typeof localStorage === 'undefined') return {};

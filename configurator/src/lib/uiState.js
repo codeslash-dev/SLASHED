@@ -6,19 +6,20 @@
  * (older app versions, hand edits, corruption), so everything is checked
  * against the live taxonomy before it reaches the ui store.
  */
-import { BASIC_DOMAIN_IDS, DOMAIN_BY_ID } from './domains.js';
+import { DOMAIN_BY_ID } from './domains.js';
 import { BUNDLE_ORDER } from './bundles.js';
 
 export const UI_STORAGE_KEY = 'slashed-configurator/ui/v1';
 
 /**
  * Validate a raw localStorage payload into a partial ui-state patch.
- * Unknown / invalid fields are dropped; an invalid domain for the saved
- * mode is dropped too (the App-level guard would bounce it anyway, but a
- * clean restore avoids a visible redirect flash).
+ * Unknown / invalid fields are dropped; an unknown domain id is dropped too
+ * (the App-level fallback would bounce it anyway, but a clean restore avoids
+ * a visible redirect flash). A legacy `mode` field from older app versions is
+ * simply ignored — the flat IA has no complexity mode.
  *
  * @param {string|null} raw JSON string from localStorage (or null)
- * @returns {{ mode?: 'basic'|'advanced', domain?: string, outputMode?: 'layer'|'root' }}
+ * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string }}
  */
 export function sanitiseUiState(raw) {
   const out = {};
@@ -31,16 +32,9 @@ export function sanitiseUiState(raw) {
   }
   if (!parsed || typeof parsed !== 'object') return out;
 
-  if (parsed.mode === 'basic' || parsed.mode === 'advanced') out.mode = parsed.mode;
-
-  const mode = out.mode ?? 'basic';
   const domain = parsed.domain;
-  if (typeof domain === 'string') {
-    const valid =
-      mode === 'basic'
-        ? domain === 'home' || BASIC_DOMAIN_IDS.includes(domain)
-        : DOMAIN_BY_ID.has(domain);
-    if (valid) out.domain = domain;
+  if (typeof domain === 'string' && (domain === 'home' || DOMAIN_BY_ID.has(domain))) {
+    out.domain = domain;
   }
 
   if (parsed.outputMode === 'layer' || parsed.outputMode === 'root') {

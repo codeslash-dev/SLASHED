@@ -2,16 +2,24 @@
   /**
    * One domain tab (Colors, Typography, Spacing, …).
    *
-   * BASIC mode  → intro copy + curated essential rows + the domain's basic
-   *               generator (e.g. fluid spacing scale). No quick knobs —
-   *               global multipliers are a power tool, not a starting point.
-   * ADVANCED   → essentials + every generator + the FULL domain catalogue
-   *               (grouped, searchable, tier-filtered, modified-only filter),
-   *               capped by a collapsed "Power knobs" group for the global
-   *               multipliers, so nothing is ever out of reach.
+   * The panel has two stacked zones, in the same order for every category:
    *
-   * Reuses the existing TokenRow / TokenEditor / OklchPicker / ScaleGenerator,
-   * so each domain is just curation — no bespoke per-field code.
+   *   SETTINGS (always visible, inputs-first) — the system inputs a typical
+   *     project sets: one-click presets, brand colors, font stacks, scale
+   *     generators and the global "Scaling" multipliers. Curated via
+   *     lib/basics.js + domains.js so each domain is just curation, no
+   *     bespoke per-field code.
+   *
+   *   ALL VARIABLES (progressive disclosure) — a collapsed disclosure holding
+   *     the FULL domain catalogue (grouped, with tier / modified / usage
+   *     filters), so every token is one click away. Domains with no curated
+   *     Settings surface (e.g. Misc) render the catalogue inline instead of
+   *     hiding it behind a redundant click.
+   *
+   * An active search collapses the panel to the filtered catalogue alone —
+   * search means "find any token in this category", curated forms aside.
+   *
+   * Reuses the existing TokenRow / TokenEditor / OklchPicker / ScaleGenerator.
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN, DOCS_BASE_URL } from '../lib/domains.js';
@@ -26,11 +34,11 @@
   import QuickKnobs from './QuickKnobs.svelte';
   import StylePresetRow from './StylePresetRow.svelte';
 
-  /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, powerIntro?:string, essentials?:string[], basicGenerators?:string[], advancedGenerators?:string[], brandColors?:boolean } }} */
+  /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
   let { domain } = $props();
 
-  const advanced = $derived(ui.mode === 'advanced');
   const query = $derived(ui.query.trim().toLowerCase());
+  const searching = $derived(query.length > 0);
 
   // Curated essential rows — only those present in the active catalogue.
   const essentials = $derived(
@@ -39,7 +47,7 @@
       .filter(Boolean)
   );
 
-  // Friendly Basic groups (lib/basics.js): label + help per control, with
+  // Friendly curated groups (lib/basics.js): label + help per control, with
   // controls whose token is missing from the catalogue dropped defensively
   // (tests/basics.test.js makes that a CI failure, never a silent gap).
   const basicGroups = $derived(
@@ -56,10 +64,10 @@
   // Every token in this domain.
   const domainTokens = $derived(allTokens.filter((t) => domainOf(t) === domain.id));
 
-  // Advanced list: tier + modified + usage + search filters, then grouped.
+  // All-variables catalogue: tier + modified + usage + search filters, grouped.
   // Use property-access (overrides[t.name]) instead of `in` so Svelte 5's
   // state proxy triggers reactivity via the `get` trap on every key check.
-  const advancedVisible = $derived(
+  const catalogueVisible = $derived(
     domainTokens.filter((t) => {
       if (t.tier === 'INTERNAL' && !ui.showInternal) return false;
       if (ui.onlyModified && overrides[t.name] == null) return false;
@@ -68,47 +76,35 @@
       return matchesQuery(t, query);
     })
   );
-  const grouped = $derived(groupTokens(advancedVisible));
-
-  // The curated Basic surface for this domain: essentials plus the brand
-  // light/dark pair tokens. Basic search renders matches from this set only;
-  // everything else is one click away via the "more in Advanced" affordance.
-  const basicSurface = $derived.by(() => {
-    const s = new Set(domain.essentials ?? []);
-    if (domain.brandColors) {
-      for (const { key } of BRAND_COLOR_KEYS) {
-        s.add(`--sf-color-${key}-light`);
-        s.add(`--sf-color-${key}-dark`);
-      }
-    }
-    return s;
-  });
-
-  // Basic mode + active search: matches across the whole domain, split into
-  // curated-surface hits (rendered) and the advanced-only remainder (count).
-  const basicSearch = $derived.by(() => {
-    if (advanced || !query) return null;
-    const hits = domainTokens.filter((t) => {
-      if (t.tier === 'INTERNAL' && !ui.showInternal) return false;
-      return matchesQuery(t, query);
-    });
-    const shown = hits.filter((t) => basicSurface.has(t.name));
-    return { shown, hiddenCount: hits.length - shown.length };
-  });
+  const grouped = $derived(groupTokens(catalogueVisible));
 
   // Only label each group's category when more than one is present in this
   // domain (otherwise the repeated "Core tokens" prefix is just noise).
   const categoryCount = $derived(new Set(grouped.map((c) => c.category)).size);
 
-  const basicGenerators = $derived(domain.basicGenerators ?? []);
+  const generators = $derived(domain.basicGenerators ?? []);
 
-  // Power knobs for this domain (global multipliers that cascade through
-  // many derived tokens — see lib/domains.js → KNOBS_BY_DOMAIN). Advanced
-  // only: they sit in a collapsed, visually fenced group below the catalogue.
+  // Scaling knobs for this domain (global multipliers that cascade through
+  // many derived tokens — see lib/domains.js → KNOBS_BY_DOMAIN). They sit in
+  // the Settings zone as a "Scaling" group.
   const knobs = $derived(KNOBS_BY_DOMAIN[domain.id] ?? []);
-  const totalDriven = $derived(knobs.reduce((n, k) => n + (k.driving ?? 1), 0));
 
-  // Modified tokens within this domain — surfaced as a collapsible block.
+  // Does this domain expose a curated Settings surface above the raw
+  // catalogue? When it does not (e.g. Misc), the All-variables list is the
+  // whole panel and renders inline rather than behind a disclosure.
+  const hasSettings = $derived(
+    !!domain.brandColors ||
+    !!STYLE_PRESETS_BY_DOMAIN[domain.id] ||
+    basicGroups.length > 0 ||
+    essentials.length > 0 ||
+    generators.length > 0 ||
+    knobs.length > 0
+  );
+
+  // "Show all variables" disclosure state (only meaningful when hasSettings).
+  let showAll = $state(false);
+
+  // Modified tokens within this domain — drives the header "Reset N" button.
   const modifiedHere = $derived(
     domainTokens.filter((t) => overrides[t.name] != null)
   );
@@ -130,6 +126,66 @@
   </header>
 {/snippet}
 
+{#snippet filters()}
+  <div class="allvars__filters">
+    <div class="cfg-seg panel__usage-seg" role="group" aria-label="Usage filter">
+      <button
+        class="cfg-seg__btn"
+        class:cfg-seg__btn--on={ui.usageFilter === 'all'}
+        onclick={() => (ui.usageFilter = 'all')}
+        aria-pressed={ui.usageFilter === 'all'}
+        title="Show all tokens"
+      >All</button>
+      <button
+        class="cfg-seg__btn"
+        class:cfg-seg__btn--on={ui.usageFilter === 'configure'}
+        onclick={() => (ui.usageFilter = 'configure')}
+        aria-pressed={ui.usageFilter === 'configure'}
+        title="Show only configure tokens — literal inputs you SET in :root"
+      >Configure</button>
+      <button
+        class="cfg-seg__btn"
+        class:cfg-seg__btn--on={ui.usageFilter === 'consume'}
+        onclick={() => (ui.usageFilter = 'consume')}
+        aria-pressed={ui.usageFilter === 'consume'}
+        title="Show only consume tokens — derived outputs you READ in component CSS"
+      >Consume</button>
+    </div>
+    <label class="panel__check" title="Restrict to tokens with an active override">
+      <input type="checkbox" bind:checked={ui.onlyModified} />
+      <span>Modified only</span>
+    </label>
+    <label class="panel__check" title="Show INTERNAL-tier implementation tokens">
+      <input type="checkbox" bind:checked={ui.showInternal} />
+      <span>Internal</span>
+    </label>
+  </div>
+{/snippet}
+
+{#snippet catalogue()}
+  {#if grouped.length === 0}
+    {#if searching}
+      <p class="panel__empty">
+        No <strong>{domain.label.toLowerCase()}</strong> tokens match <code>{ui.query}</code>.
+      </p>
+    {:else}
+      <p class="panel__empty">No tokens match the current filters.</p>
+    {/if}
+  {:else}
+    {#each grouped as cat (cat.category)}
+      {#each cat.groups as group (group.name)}
+        <TokenGroup
+          name={group.name}
+          tokens={group.tokens}
+          description={group.description}
+          showCategory={categoryCount > 1}
+          category={cat.category}
+        />
+      {/each}
+    {/each}
+  {/if}
+{/snippet}
+
 <section class="panel">
   <header class="panel__head">
     <div class="panel__title-wrap">
@@ -141,39 +197,6 @@
     </div>
 
     <div class="panel__actions">
-      {#if advanced}
-        <div class="cfg-seg panel__usage-seg" role="group" aria-label="Usage filter">
-          <button
-            class="cfg-seg__btn"
-            class:cfg-seg__btn--on={ui.usageFilter === 'all'}
-            onclick={() => (ui.usageFilter = 'all')}
-            aria-pressed={ui.usageFilter === 'all'}
-            title="Show all tokens"
-          >All</button>
-          <button
-            class="cfg-seg__btn"
-            class:cfg-seg__btn--on={ui.usageFilter === 'configure'}
-            onclick={() => (ui.usageFilter = 'configure')}
-            aria-pressed={ui.usageFilter === 'configure'}
-            title="Show only configure tokens — literal inputs you SET in :root"
-          >Configure</button>
-          <button
-            class="cfg-seg__btn"
-            class:cfg-seg__btn--on={ui.usageFilter === 'consume'}
-            onclick={() => (ui.usageFilter = 'consume')}
-            aria-pressed={ui.usageFilter === 'consume'}
-            title="Show only consume tokens — derived outputs you READ in component CSS"
-          >Consume</button>
-        </div>
-        <label class="panel__check" title="Restrict to tokens with an active override">
-          <input type="checkbox" bind:checked={ui.onlyModified} />
-          <span>Modified only</span>
-        </label>
-        <label class="panel__check" title="Show INTERNAL-tier implementation tokens">
-          <input type="checkbox" bind:checked={ui.showInternal} />
-          <span>Internal</span>
-        </label>
-      {/if}
       {#if modifiedHere.length}
         <button
           class="cfg-btn cfg-btn--sm cfg-btn--danger"
@@ -185,60 +208,35 @@
   </header>
 
   <div class="panel__body">
-    {#if basicSearch}
-      <!-- Basic mode + active search: curated hits + an Advanced affordance. -->
-      {#if basicSearch.shown.length === 0 && basicSearch.hiddenCount === 0}
-        <p class="panel__empty">
-          No <strong>{domain.label.toLowerCase()}</strong> tokens match
-          <code>{ui.query}</code>. Try Advanced mode to widen filters.
-        </p>
-      {:else}
-        {#if basicSearch.shown.length}
-          <section class="cfg-card panel__card">
-            {@render cardHead('Search results', basicSearch.shown.length)}
-            <div class="panel__card-rows">
-              {#each basicSearch.shown as token (token.name)}
-                <TokenRow {token} />
-              {/each}
-            </div>
-          </section>
-        {/if}
-        {#if basicSearch.hiddenCount > 0}
-          <button
-            class="panel__more"
-            onclick={() => (ui.mode = 'advanced')}
-            title="Switch to Advanced mode — your search is kept"
-          >
-            {basicSearch.hiddenCount} more match{basicSearch.hiddenCount === 1 ? '' : 'es'} in Advanced →
-          </button>
-        {/if}
-      {/if}
+    {#if searching}
+      <!-- Active search: the filtered catalogue is the whole panel — search
+           means "find any token in this category". -->
+      {@render filters()}
+      {@render catalogue()}
     {:else}
+      <!-- ── SETTINGS (inputs-first) ─────────────────────────────────────── -->
+
       <!-- Orientation copy: what this domain controls, whether typical
-           projects change it. Basic mode only — Advanced users know. -->
-      {#if !advanced && domain.intro}
+           projects change it. -->
+      {#if domain.intro}
         <p class="panel__intro">{domain.intro}</p>
       {/if}
 
-      <!-- One-click style presets (Basic borders/shadows) -->
-      {#if !advanced && STYLE_PRESETS_BY_DOMAIN[domain.id]}
+      <!-- One-click style presets (borders / shadows) -->
+      {#if STYLE_PRESETS_BY_DOMAIN[domain.id]}
         <StylePresetRow
           title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
           presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
         />
       {/if}
 
-      <!-- Basic-mode curated surfaces (brand colors, basic groups, essentials).
-           All three are hidden in Advanced mode — the full filtered catalogue
-           below covers every token, so duplicating them here would bypass the
-           Modified-only and Internal filters and confuse the user. -->
-      {#if domain.brandColors && !advanced}
-        <!-- Brand colors domain: light/dark pair rows for every brand color -->
+      <!-- Curated input surfaces: brand colors, friendly forms, or essentials. -->
+      {#if domain.brandColors}
         <section class="cfg-card panel__card">
           {@render cardHead(
             'Brand & status colors',
             BRAND_COLOR_KEYS.length,
-            advanced ? '' : 'Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.'
+            'Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.'
           )}
           <div class="panel__card-rows">
             {#each BRAND_COLOR_KEYS as { key, label } (key)}
@@ -246,8 +244,7 @@
             {/each}
           </div>
         </section>
-      {:else if !advanced && basicGroups.length}
-        <!-- Curated Basic forms: friendly labels, help text, ⓘ raw-token info. -->
+      {:else if basicGroups.length}
         {#each basicGroups as group (group.title)}
           <section class="cfg-card panel__card">
             {@render cardHead(group.title, group.controls.length)}
@@ -258,16 +255,9 @@
             </div>
           </section>
         {/each}
-      {:else if !advanced && essentials.length}
-        <!-- In Advanced mode the full filtered catalogue covers everything;
-             showing essentials here would bypass the Modified-only / Internal
-             filters and confuse the user with duplicated unfiltered rows. -->
+      {:else if essentials.length}
         <section class="cfg-card panel__card">
-          {@render cardHead(
-            'Essentials',
-            essentials.length,
-            `Curated for most projects · switch to Advanced (A) for the full ${domainTokens.length}-token catalogue.`
-          )}
+          {@render cardHead('Essentials', essentials.length, 'Curated for most projects.')}
           <div class="panel__card-rows">
             {#each essentials as token (token.name)}
               <TokenRow {token} />
@@ -276,50 +266,34 @@
         </section>
       {/if}
 
-      <!-- Basic generators (e.g. fluid spacing scale) -->
-      {#each basicGenerators as g (g)}
+      <!-- Scale generators (fluid type / display / space ramps) -->
+      {#each generators as g (g)}
         <ScaleGenerator kinds={[g]} />
       {/each}
 
-      {#if advanced}
-        <!-- Full domain catalogue, grouped -->
-        {#if grouped.length === 0}
-          <p class="panel__empty">No tokens match the current search and filters.</p>
-        {:else}
-          {#each grouped as cat (cat.category)}
-            {#each cat.groups as group (group.name)}
-              <TokenGroup
-                name={group.name}
-                tokens={group.tokens}
-                description={group.description}
-                showCategory={categoryCount > 1}
-                category={cat.category}
-              />
-            {/each}
-          {/each}
-        {/if}
+      <!-- Scaling: global multipliers that cascade through many tokens. -->
+      {#if knobs.length}
+        <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+      {/if}
 
-        <!-- Power knobs: global multipliers with atomic reach. Deliberately
-             last and collapsed — one drag here moves dozens of tokens. -->
-        {#if knobs.length}
-          <details class="power">
-            <summary class="power__summary">
-              <span class="power__bolt" aria-hidden="true">⚡</span>
-              <span class="power__title">Power knobs</span>
-              <span class="power__chip">drives {totalDriven} token{totalDriven === 1 ? '' : 's'}</span>
-            </summary>
-            {#if domain.powerIntro}
-              <p class="power__intro">{domain.powerIntro}</p>
-            {/if}
-            <QuickKnobs {knobs} title="Global multipliers" blurb="" />
-          </details>
-        {/if}
-      {:else if !domain.brandColors && essentials.length === 0 && basicGenerators.length === 0}
-        <!-- Domain has no curated essentials (e.g. Effects, Misc). Surface
-             the full advanced list anyway so Basic isn't a dead end. -->
-        <p class="panel__hint">
-          This domain has no curated basics — switch to <strong>Advanced</strong> (A) to edit the full catalogue.
-        </p>
+      <!-- ── ALL VARIABLES (progressive disclosure) ──────────────────────── -->
+      {#if hasSettings}
+        <details class="allvars" bind:open={showAll}>
+          <summary class="allvars__summary">
+            <span class="allvars__chev" aria-hidden="true">›</span>
+            <span class="allvars__title">{showAll ? 'Hide' : 'Show'} all variables</span>
+            <span class="allvars__count">{domainTokens.length} token{domainTokens.length === 1 ? '' : 's'}</span>
+          </summary>
+          <div class="allvars__body">
+            {@render filters()}
+            {@render catalogue()}
+          </div>
+        </details>
+      {:else}
+        <!-- No curated Settings surface (e.g. Misc): show the catalogue inline
+             so the category is never a dead end. -->
+        {@render filters()}
+        {@render catalogue()}
       {/if}
 
       {#if domain.docsPath}
@@ -443,31 +417,14 @@
     border-radius: var(--cfg-radius-s);
   }
 
-  .panel__more {
-    align-self: center;
-    padding: 8px 16px;
-    font-size: 12.5px;
-    color: var(--cfg-text-muted);
-    background: var(--cfg-surface-2);
-    border: 1px dashed var(--cfg-border-strong);
-    border-radius: var(--cfg-radius-s);
-    cursor: pointer;
-    transition: color 0.12s, border-color 0.12s;
-  }
-  .panel__more:hover {
-    color: var(--cfg-text);
-    border-color: var(--cfg-accent-strong);
-  }
-
-  /* Power knobs — visually fenced: these multipliers cascade through dozens
-     of tokens, so the group reads as "handle with intent". */
-  .power {
-    border: 1px solid rgba(240, 173, 78, 0.45);
+  /* All-variables disclosure — the full domain catalogue, one click away. */
+  .allvars {
+    border: 1px solid var(--cfg-border);
     border-radius: var(--cfg-radius);
-    background: rgba(240, 173, 78, 0.06);
+    background: var(--cfg-surface);
     overflow: clip;
   }
-  .power__summary {
+  .allvars__summary {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -476,38 +433,44 @@
     list-style: none;
     user-select: none;
   }
-  .power__summary::-webkit-details-marker { display: none; }
-  .power__summary:hover { background: rgba(240, 173, 78, 0.1); }
-  .power__bolt { font-size: 14px; }
-  .power__title {
+  .allvars__summary::-webkit-details-marker { display: none; }
+  .allvars__summary:hover { background: var(--cfg-surface-2); }
+  .allvars__chev {
+    font-size: 16px;
+    line-height: 1;
+    color: var(--cfg-text-faint);
+    transition: transform 0.15s;
+  }
+  .allvars[open] .allvars__chev { transform: rotate(90deg); }
+  .allvars__title {
     font-size: 12.5px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    color: var(--cfg-text);
   }
-  .power__chip {
+  .allvars__count {
     font-family: var(--cfg-mono);
-    font-size: 10.5px;
-    color: rgb(240, 173, 78);
-    border: 1px solid rgba(240, 173, 78, 0.45);
-    border-radius: 999px;
-    padding: 1px 8px;
+    font-size: 11px;
+    color: var(--cfg-text-faint);
   }
-  .power__intro {
-    margin: 0;
-    padding: 0 16px 10px;
-    font-size: 12.5px;
-    line-height: 1.55;
-    color: var(--cfg-text-muted);
-  }
-  .power > :global(.knobs) {
-    border: 0;
-    border-top: 1px solid rgba(240, 173, 78, 0.25);
-    border-radius: 0;
+  .allvars__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    border-top: 1px solid var(--cfg-border);
   }
 
-  .panel__empty,
-  .panel__hint {
+  /* Filter bar above the catalogue (usage segment + modified/internal toggles). */
+  .allvars__filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .panel__empty {
     color: var(--cfg-text-faint);
     font-size: 13.5px;
     padding: 20px 4px;
