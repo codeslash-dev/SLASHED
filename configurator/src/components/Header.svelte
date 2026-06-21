@@ -14,12 +14,24 @@
    * reachable. Keyboard shortcut: `/` focuses the search box.
    */
   import { sync, allTokens, frameworkVersion } from '../lib/model.js';
-  import { ui, overrides, overrideCount, history, undo, redo, openOutputDrawer } from '../lib/store.svelte.js';
+  import { ui, overrides, overrideCount, history, undo, redo, openOutputDrawer, currentShareUrl } from '../lib/store.svelte.js';
+  import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
   const totalTokens = allTokens.length;
   const modCount = $derived(Object.keys(overrides).length);
   const canUndo = $derived(history.past.length > 0);
   const canRedo = $derived(history.future.length > 0);
+
+  // Share: copy a link whose URL fragment encodes the current override map.
+  let shareCopied = $state(false);
+  let _shareTimer;
+  async function shareLink() {
+    const ok = await copyText(currentShareUrl());
+    if (!ok) return;
+    shareCopied = true;
+    clearTimeout(_shareTimer);
+    _shareTimer = setTimeout(() => (shareCopied = false), COPY_FEEDBACK_MS);
+  }
 </script>
 
 <header class="hdr">
@@ -99,6 +111,15 @@
         title="Advanced — every token, generator and viewport knob (A)"
       >Advanced</button>
     </div>
+
+    <button
+      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__share"
+      class:hdr__share--ok={shareCopied}
+      onclick={shareLink}
+      disabled={modCount === 0}
+      title={modCount === 0 ? 'Customise a token first, then share the link' : 'Copy a shareable link that restores this exact configuration'}
+      aria-label="Copy shareable configuration link"
+    >{shareCopied ? '✓' : '🔗'}</button>
 
     <button
       class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__theme-toggle"
@@ -224,6 +245,9 @@
 
   /* Extra right margin to visually separate the UI theme toggle from the pane toggles. */
   .hdr__theme-toggle { margin-right: 4px; }
+
+  /* Share-link confirmation flashes the accent-positive colour briefly. */
+  .hdr__share--ok { color: var(--cfg-ok); border-color: var(--cfg-ok); }
 
   @media (max-width: 1100px) {
     .hdr {

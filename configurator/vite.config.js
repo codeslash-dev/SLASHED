@@ -38,5 +38,10 @@ export default defineConfig({
   },
   server: {
     port: 5180,
+    fs: {
+      // Allow importing the framework's source CSS (../core, ../optional) so the
+      // chrome can dogfood SLASHED's token + theme layers (see src/main.js).
+      allow: ['..'],
+    },
   },
 });

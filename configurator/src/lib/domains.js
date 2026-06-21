@@ -43,6 +43,7 @@ export const BASIC_DOMAIN_IDS = [
   'borders',
   'shadows',
   'themes',
+  'setup',
 ];
 
 /** Tokens whose ideal domain doesn't fall out of name patterns alone. */
@@ -373,6 +374,13 @@ export const DOMAINS = [
     icon: '🎭',
     blurb: 'One-click preset looks plus your saved override slots.',
     tool: 'themes',
+  },
+  {
+    id: 'setup',
+    label: 'Install',
+    icon: '📦',
+    blurb: 'Pick the dist bundle to ship and copy the drop-in <link> + your overrides.',
+    tool: 'setup',
   },
   {
     id: 'misc',

@@ -50,7 +50,9 @@
             <span class="home__blurb">{d.tool ? d.blurb : d.intro}</span>
           </span>
           <span class="home__status">
-            {#if d.tool}
+            {#if d.tool === 'setup'}
+              <span class="home__count">install</span>
+            {:else if d.tool}
               <span class="home__count">presets</span>
             {:else if mods[d.id]}
               <span class="home__count home__count--mod">{mods[d.id]} customised</span>

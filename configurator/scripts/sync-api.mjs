@@ -41,9 +41,15 @@ const SOURCE =
   path.join(FRAMEWORK_ROOT, 'docs', 'api-index.json');
 
 const ANNOTATIONS_FILE = path.join(FRAMEWORK_ROOT, 'docs', 'token-annotations.json');
+const BUNDLE_CONFIG_FILE = path.join(FRAMEWORK_ROOT, 'bundle.config.json');
 
 const OUT_DIR = path.join(CONFIGURATOR_ROOT, 'src', 'data');
 const OUT = path.join(OUT_DIR, 'api-index.generated.json');
+const BUNDLES_OUT = path.join(OUT_DIR, 'bundles.generated.json');
+
+// jsDelivr serves the published dist branch (see .github/workflows/publish-dist.yml)
+// at the repo root, so a bundle's minified file is <CDN_BASE>/slashed.<id>.min.css.
+const CDN_BASE = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist';
 
 
 /**
@@ -117,6 +123,60 @@ function readIndex(file) {
     );
     process.exit(1);
   }
+}
+
+/**
+ * Derive the bundle manifest the configurator's bundle picker consumes from the
+ * framework's `bundle.config.json` — the same file the build uses — so the
+ * picker can never drift from what actually ships. Only the *logical* bundles
+ * are emitted (the `.flat` no-`@layer` variants are an output detail, not a user
+ * choice). Per-bundle module composition is structural and comes from here;
+ * the human "what each optional module adds" prose lives configurator-side in
+ * src/lib/bundles.js (the same data/curation split as basics.js).
+ *
+ * @returns {{ bundles: object[], cdnBase: string }}
+ */
+function buildBundleManifest() {
+  let cfg;
+  try {
+    cfg = JSON.parse(fs.readFileSync(BUNDLE_CONFIG_FILE, 'utf8'));
+  } catch (err) {
+    console.error(
+      `[configurator:sync] Could not read ${BUNDLE_CONFIG_FILE}: ${err.message}\n` +
+        `The bundle picker needs it — is this running from the framework repo?`
+    );
+    process.exit(1);
+  }
+
+  const all = Array.isArray(cfg.bundles) ? cfg.bundles : [];
+  const bundles = all
+    // Skip the flattened (no-@layer) variants — same modules, output detail only.
+    .filter((b) => !b.flat && typeof b.output === 'string')
+    .map((b) => {
+      const id = b.output.replace(/^dist\//, '').replace(/^slashed\./, '').replace(/\.css$/, '');
+      const files = Array.isArray(b.files) ? b.files : [];
+      const optionalModules = files.filter((f) => f.startsWith('optional/'));
+      return {
+        id,
+        output: b.output.replace(/^dist\//, ''),
+        min: b.output.replace(/^dist\//, '').replace(/\.css$/, '.min.css'),
+        cdn: `${CDN_BASE}/${b.output.replace(/^dist\//, '').replace(/\.css$/, '.min.css')}`,
+        fileCount: files.length,
+        optionalModules,
+      };
+    })
+    // Smallest → largest footprint, so the picker can present a natural ramp and
+    // recommend the leanest bundle that covers a config.
+    .sort((a, b) => a.fileCount - b.fileCount);
+
+  if (bundles.length === 0) {
+    console.error(
+      `[configurator:sync] No bundles found in ${BUNDLE_CONFIG_FILE} — refusing ` +
+        `to write an empty bundle manifest.`
+    );
+    process.exit(1);
+  }
+  return { bundles, cdnBase: CDN_BASE };
 }
 
 function main() {
@@ -195,6 +255,22 @@ function main() {
   console.log(
     `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, OUT)} ← ` +
       `${out._sync.source} (${tokens.length} tokens)`
+  );
+
+  // Bundle manifest for the picker — derived from bundle.config.json.
+  const manifest = buildBundleManifest();
+  const bundlesOut = {
+    _sync: {
+      generatedBy: 'configurator/scripts/sync-api.mjs',
+      source: path.relative(FRAMEWORK_ROOT, BUNDLE_CONFIG_FILE).split(path.sep).join('/'),
+      cdnBase: manifest.cdnBase,
+    },
+    bundles: manifest.bundles,
+  };
+  fs.writeFileSync(BUNDLES_OUT, JSON.stringify(bundlesOut, null, 2) + '\n', 'utf8');
+  console.log(
+    `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, BUNDLES_OUT)} ← ` +
+      `${bundlesOut._sync.source} (${manifest.bundles.length} bundles)`
   );
 }
 

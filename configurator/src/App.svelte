@@ -24,7 +24,8 @@
    * active domain to its panel.
    */
   import { DOMAINS, DOMAIN_BY_ID, BASIC_DOMAIN_IDS } from './lib/domains.js';
-  import { ui, undo, redo, overrides } from './lib/store.svelte.js';
+  import { ui, undo, redo, overrides, loadSharedConfig } from './lib/store.svelte.js';
+  import { buildShareUrl } from './lib/share.js';
   import { UI_STORAGE_KEY } from './lib/uiState.js';
   import { setProbeContext } from './lib/probeHost.js';
   import Header from './components/Header.svelte';
@@ -35,6 +36,7 @@
   import WcagPanel from './components/WcagPanel.svelte';
   import ThemeGallery from './components/ThemeGallery.svelte';
   import Cheatsheet from './components/Cheatsheet.svelte';
+  import BundlePicker from './components/BundlePicker.svelte';
   import Home from './components/Home.svelte';
 
   // ── Pane-width resizing ───────────────────────────────────────────────────
@@ -116,16 +118,46 @@
     setProbeContext({ overrides, theme: ui.previewTheme });
   });
 
-  // Apply the configurator UI theme to <html> so [data-ui-theme="light/dark"]
-  // CSS selectors in app.css take effect across the whole chrome.
+  // Apply the chrome theme to <html> via SLASHED's own [data-theme] attribute.
+  // Because app.css sources every --cfg-* from --sf-* tokens, the framework's
+  // light-dark()/themes.css machinery themes the whole chrome — true dogfooding.
+  // The live preview keeps an independent theme (ui.previewTheme), resolved
+  // per-stage in preview.js, so the two never interfere.
   $effect(() => {
-    document.documentElement.dataset.uiTheme = ui.uiTheme;
+    document.documentElement.dataset.theme = ui.uiTheme;
+  });
+
+  // One-time: apply a configuration shared via the URL fragment (#c=…). Runs as
+  // a single undoable step so it layers over the localStorage-restored state.
+  let _sharedLoaded = false;
+  $effect(() => {
+    if (_sharedLoaded) return;
+    _sharedLoaded = true;
+    loadSharedConfig();
+  });
+
+  // Keep the URL fragment in sync with the live override map (debounced) so the
+  // address bar is always a shareable snapshot. replaceState (not pushState)
+  // keeps it out of the back/forward history.
+  let _hashTimer;
+  $effect(() => {
+    const snapshot = JSON.stringify(overrides); // track the override map
+    void snapshot;
+    clearTimeout(_hashTimer);
+    _hashTimer = setTimeout(() => {
+      try {
+        history.replaceState(history.state, '', buildShareUrl(overrides));
+      } catch {
+        /* history API blocked (e.g. file://) — non-essential, ignore */
+      }
+    }, 400);
+    return () => clearTimeout(_hashTimer);
   });
 
   // Persist the navigation prefs so a reload restores where the user was.
   // Restore (with validation) happens in store.svelte.js via sanitiseUiState.
   $effect(() => {
-    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme });
+    const snapshot = JSON.stringify({ mode: ui.mode, domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme, bundle: ui.bundle });
     try {
       localStorage.setItem(UI_STORAGE_KEY, snapshot);
     } catch {
@@ -244,6 +276,8 @@
       <WcagPanel />
     {:else if tool === 'themes'}
       <ThemeGallery />
+    {:else if tool === 'setup'}
+      <BundlePicker />
     {:else if tool === 'cheatsheet'}
       <Cheatsheet />
     {:else}

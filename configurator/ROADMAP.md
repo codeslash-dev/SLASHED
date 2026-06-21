@@ -5,6 +5,25 @@ intentional scope of the configurator legible.
 
 ---
 
+## Shipped (v2 — dogfood, share links, bundle picker, test hardening)
+
+- **Dogfood SLASHED**: the configurator chrome renders with the framework's own
+  `--sf-*` tokens and `[data-theme]` light/dark. `src/main.js` loads SLASHED's
+  token + theme layers at `:root`; `styles/app.css` sources every `--cfg-*`
+  alias from a matching `--sf-*` token. User overrides stay scoped to the
+  preview stage, so the chrome always shows framework defaults (isolation
+  contract, asserted by `tests-e2e/dogfood.spec.js`).
+- **Shareable config URLs**: the override map is encoded into the URL fragment
+  (`#c=…`, lz-string) and restored on load. `src/lib/share.js`, a header Share
+  button, debounced `replaceState` sync (`src/App.svelte`).
+- **Bundle / module picker** (Install panel): pick a dist bundle and copy a
+  complete drop-in (framework `<link>` + your overrides in cascade order). Data
+  auto-synced from `bundle.config.json` (`src/lib/bundles.js`,
+  `BundlePicker.svelte`); recommends the leanest bundle that covers your edits.
+- **Test hardening**: Vitest + @testing-library/svelte component tests; e2e for
+  share / dogfood-isolation / axe a11y; Firefox + WebKit added to the e2e
+  matrix; a `check:curation` tripwire keeps every public knob mapped to a domain.
+
 ## Shipped (Basic/Advanced/Power IA restructure)
 
 - **Basic = per-project checklist**: a Home landing screen plus six curated
@@ -92,11 +111,6 @@ the page level — not just at the token level.
 A toggle in the panel header that collapses every row into a one-line
 table — name · default · override · drives — for power users scanning the
 entire catalogue.
-
-### 6. Shareable URLs  *(½ day)*
-Encode the override map (or a preset id + delta) into the URL fragment so a
-configuration is shareable without a deploy step. `lz-string` over the
-override JSON is enough to fit thousands of bytes into a URL.
 
 ---
 

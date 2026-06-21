@@ -33,6 +33,24 @@ step for consumers — open it, tweak tokens, copy the CSS.
   containing only the tokens you changed. Copy, download, or re-import an
   existing override sheet.
 - Overrides are persisted to `localStorage` so a refresh keeps your work.
+- **Shareable config links** — the override map is encoded into the URL
+  fragment (`#c=…`), so a whole configuration is shareable / bookmarkable with
+  no deploy. Opening the link restores it (unknown tokens are dropped, values
+  sanitised — same safety as a CSS import). See `src/lib/share.js`.
+- **Install panel** — pick which dist bundle to ship (Essential → Full) and copy
+  a complete drop-in: the framework `<link>` first, then your overrides in
+  cascade order. The bundle list is auto-synced from the framework's
+  `bundle.config.json`; it recommends the leanest bundle that covers your edits.
+
+## Dogfooding the framework
+
+The configurator chrome is built from SLASHED's own design tokens. `src/main.js`
+loads the framework's token + theme layers at `:root`, and `src/styles/app.css`
+sources every `--cfg-*` alias from the matching `--sf-*` token, so the panel's
+colours, radii, shadows, fonts and **light/dark mode** are the framework's own
+(`[data-theme]` + `light-dark()`). Editing a token only restyles the scoped live
+preview — never the chrome — so the tool always demonstrates the framework
+defaults while you work. `tests-e2e/dogfood.spec.js` asserts this isolation.
 
 ## Auto-sync with the framework API
 

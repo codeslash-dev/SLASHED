@@ -165,16 +165,21 @@ jobs:
       - run: npm ci
         working-directory: configurator
       # Unit suite — the sync tripwire: curated Basic controls, presets, fluid
-      # engine scalars and knob defaults all pinned to the live catalogue.
+      # engine scalars and knob defaults all pinned to the live catalogue —
+      # plus the Vitest component suite (test runs both via test:unit/components).
       - run: npm test
+        working-directory: configurator
+      # Future-proofing tripwire: every public knob must map to a real domain.
+      - run: npm run check:curation
         working-directory: configurator
       # Type/diagnostics gate (kept at 0 errors / 0 warnings).
       - run: npm run check
         working-directory: configurator
       # Browser regression suite (test:e2e prebuilds; Playwright manages the
-      # preview server via its webServer option). Chromium only — cross-engine
-      # CSS coverage lives in the root Regression tests job.
-      - run: npx playwright install --with-deps chromium
+      # preview server via its webServer option). Cross-engine: the full suite
+      # runs on Chromium; core behaviour + the dogfood/isolation contract also
+      # run on Firefox and WebKit (see playwright.config.js projects).
+      - run: npx playwright install --with-deps chromium firefox webkit
         working-directory: configurator
       - run: npm run test:e2e
         working-directory: configurator

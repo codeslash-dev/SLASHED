@@ -13,10 +13,15 @@ import { allTokens, tokenByName } from './model.js';
 import { sanitizeValue } from './css.js';
 import { sanitisePreset, loadSavedThemes, persistSavedThemes, slugify } from './themes.js';
 import { sanitiseUiState, UI_STORAGE_KEY } from './uiState.js';
+import { readShareFromHash, buildShareUrl } from './share.js';
 import * as ops from './historyOps.js';
 
 const STORAGE_KEY = 'slashed-configurator/overrides/v1';
 const HISTORY_LIMIT = 50;
+
+// Flag set by loadOverrides() when the URL fragment provided the initial
+// overrides, so loadSharedConfig() can skip the redundant second load.
+let _sharedInitDone = false;
 
 /**
  * Override map: token name -> user value (string). Only customised tokens
@@ -69,6 +74,8 @@ export const ui = $state({
   outputMode: savedUi.outputMode ?? 'layer',
   /** Theme for the configurator chrome itself: 'dark' (default) or 'light'. */
   uiTheme: savedUi.uiTheme ?? 'dark',
+  /** Selected dist bundle id for the install/setup picker (see lib/bundles.js). */
+  bundle: savedUi.bundle ?? 'optimal',
   /** Sidebar collapse — for narrow viewports / a focus-mode. */
   sidebarOpen: true,
   /**
@@ -117,10 +124,22 @@ function loadUiState() {
 
 /**
  * Load persisted overrides from localStorage, ignoring malformed data.
+ * If a URL-fragment share config is present it takes precedence and is
+ * written straight to localStorage here (as a plain object, before the
+ * $state proxy exists) so readOverrides() can see it immediately.
  * @returns {Record<string, string>}
  */
 function loadOverrides() {
   if (typeof localStorage === 'undefined') return {};
+  // URL fragment share config takes precedence over local storage.
+  if (typeof location !== 'undefined') {
+    const shared = readShareFromHash(location.hash);
+    if (Object.keys(shared).length > 0) {
+      _sharedInitDone = true;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(shared)); } catch {}
+      return shared;
+    }
+  }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
@@ -295,6 +314,31 @@ export function deleteSavedTheme(id) {
   if (idx === -1) return false;
   savedThemes.splice(idx, 1);
   return persistSavedThemes(savedThemes);
+}
+
+// ───────────────────────────── shareable links ────────────────────────────
+
+/**
+ * Apply a configuration encoded in the current URL fragment (`#c=…`), if any.
+ * Runs as a single undoable history step (via `replaceOverrides`) so a shared
+ * link layers cleanly over whatever was restored from localStorage and can be
+ * reverted with one Ctrl+Z. No-op (returns 0) when no link config is present.
+ *
+ * @returns {number} count of tokens applied from the link
+ */
+export function loadSharedConfig() {
+  if (typeof location === 'undefined') return 0;
+  if (_sharedInitDone) return 0; // already applied synchronously at module init
+  _sharedInitDone = true;
+  const map = readShareFromHash(location.hash);
+  if (Object.keys(map).length === 0) return 0;
+  const { applied } = replaceOverrides(map);
+  return applied;
+}
+
+/** Absolute, shareable URL that encodes the current override map. */
+export function currentShareUrl() {
+  return buildShareUrl(overrides);
 }
 
 // ───────────────────────────── helpers ────────────────────────────────────

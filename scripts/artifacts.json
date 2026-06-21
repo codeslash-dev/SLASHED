@@ -10,13 +10,17 @@
       "docs/token-index.json",
       "docs/api-index.json",
       "docs/api-index.md",
-      "configurator/src/data/api-index.generated.json"
+      "configurator/src/data/api-index.generated.json",
+      "configurator/src/data/bundles.generated.json"
     ]
   },
   {
     "name": "configurator api sync",
-    "srcPrefixes": ["docs/token-annotations.json", "docs/api-index.json"],
+    "srcPrefixes": ["docs/token-annotations.json", "docs/api-index.json", "bundle.config.json"],
     "buildCmd": "npm run configurator:sync",
-    "outputs": ["configurator/src/data/api-index.generated.json"]
+    "outputs": [
+      "configurator/src/data/api-index.generated.json",
+      "configurator/src/data/bundles.generated.json"
+    ]
   }
 ]

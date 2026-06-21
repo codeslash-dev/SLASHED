@@ -5,15 +5,15 @@
 import { test, expect } from '@playwright/test';
 import { watchErrors, gotoClean, sideItem } from './helpers.js';
 
-const BASIC_LABELS = ['Home', 'Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Themes'];
-const ADVANCED_LABELS = ['Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Motion', 'Effects', 'WCAG', 'Themes', 'Misc', 'Cheatsheet'];
+const BASIC_LABELS = ['Home', 'Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Themes', 'Install'];
+const ADVANCED_LABELS = ['Colors', 'Typography', 'Spacing', 'Layout', 'Borders', 'Shadows', 'Motion', 'Effects', 'WCAG', 'Themes', 'Install', 'Misc', 'Cheatsheet'];
 
 test('basic lands on Home with the setup checklist', async ({ page }) => {
   const errors = watchErrors(page);
   await gotoClean(page);
   await expect(page.locator('.home__title')).toHaveText('Set up your design');
   await expect(page.locator('.side__item')).toHaveCount(BASIC_LABELS.length);
-  await expect(page.locator('.home__row')).toHaveCount(7);
+  await expect(page.locator('.home__row')).toHaveCount(8);
   // Clean slate: exactly one "start here" pointer, themes row reads "presets".
   await expect(page.locator('.home__count--start')).toHaveCount(1);
   await expect(page.locator('.home__row', { hasText: 'Themes' }).locator('.home__count')).toHaveText('presets');
@@ -50,8 +50,8 @@ test('[ and ] cycle the mode-appropriate domain list with wrap-around', async ({
   await expect(page.locator('.panel__title')).toHaveText('Colors');
   await page.keyboard.press('[');
   await expect(page.locator('.home__title')).toBeVisible();
-  await page.keyboard.press('['); // wraps backwards to Themes (tool)
-  await expect(page.locator('main')).toContainText(/preset/i);
+  await page.keyboard.press('['); // wraps backwards to the last basic domain (Install)
+  await expect(page.locator('main')).toContainText(/install/i);
   // 20 forward presses in basic stay inside the checklist and end on a valid view
   for (let i = 0; i < 20; i++) await page.keyboard.press(']');
   await expect(page.locator('.side__item.side__item--on')).toHaveCount(1);

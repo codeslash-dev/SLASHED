@@ -72,8 +72,8 @@ preserves the query.
 
 ## 4. Basic mode contents
 
-Sidebar in Basic: **Home + six domains + Themes**. Motion, Effects, WCAG,
-Misc, Cheatsheet appear only in Advanced.
+Sidebar in Basic: **Home + six domains + Themes + Install**. Motion, Effects,
+WCAG, Misc, Cheatsheet appear only in Advanced.
 
 - **Home** — setup-checklist landing: one row per domain with intro copy,
   per-domain customised counts, "start here" pointer and an Export CSS
@@ -94,6 +94,9 @@ Misc, Cheatsheet appear only in Advanced.
   + the four elevation steps.
 - **Themes** — preset gallery + saved slots (the friendliest entry point
   into the override model).
+- **Install** — pick the dist bundle to ship and copy a complete drop-in (the
+  framework `<link>` + your overrides in cascade order). Bundle list auto-synced
+  from `bundle.config.json`; recommends the leanest bundle covering your edits.
 
 ## 5. Keeping it in lockstep with the framework
 

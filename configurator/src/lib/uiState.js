@@ -7,6 +7,7 @@
  * against the live taxonomy before it reaches the ui store.
  */
 import { BASIC_DOMAIN_IDS, DOMAIN_BY_ID } from './domains.js';
+import { BUNDLE_ORDER } from './bundles.js';
 
 export const UI_STORAGE_KEY = 'slashed-configurator/ui/v1';
 
@@ -48,6 +49,10 @@ export function sanitiseUiState(raw) {
 
   if (parsed.uiTheme === 'light' || parsed.uiTheme === 'dark') {
     out.uiTheme = parsed.uiTheme;
+  }
+
+  if (typeof parsed.bundle === 'string' && BUNDLE_ORDER.includes(parsed.bundle)) {
+    out.bundle = parsed.bundle;
   }
 
   return out;
