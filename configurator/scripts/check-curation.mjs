@@ -16,6 +16,7 @@
  * Usage:  node scripts/check-curation.mjs        # exits 1 on any orphan
  * It is also asserted by tests/curation.test.js so CI catches it either way.
  */
+import { pathToFileURL } from 'url';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
 import { DOMAINS } from '../src/lib/domains.js';
 
@@ -57,7 +58,7 @@ export function findUncategorisedKnobs() {
 }
 
 // Run as a CLI when invoked directly.
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const orphans = findUncategorisedKnobs();
   if (orphans.length) {
     console.error(

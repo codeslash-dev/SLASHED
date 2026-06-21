@@ -43,6 +43,5 @@ test('the Share button copies a link with the config fragment', async ({ page, b
   await importOverride(page, ':root{--sf-radius-scale:0.5;}');
 
   await page.locator('[aria-label="Copy shareable configuration link"]').click();
-  const copied = await page.evaluate(() => navigator.clipboard.readText());
-  expect(copied).toContain('#c=');
+  await expect.poll(async () => await page.evaluate(() => navigator.clipboard.readText())).toContain('#c=');
 });

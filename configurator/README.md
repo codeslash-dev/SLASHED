@@ -45,7 +45,7 @@ step for consumers — open it, tweak tokens, copy the CSS.
 ## Dogfooding the framework
 
 The configurator chrome is built from SLASHED's own design tokens. `src/main.js`
-loads the framework's token + theme layers at `:root`, and `styles/app.css`
+loads the framework's token + theme layers at `:root`, and `src/styles/app.css`
 sources every `--cfg-*` alias from the matching `--sf-*` token, so the panel's
 colours, radii, shadows, fonts and **light/dark mode** are the framework's own
 (`[data-theme]` + `light-dark()`). Editing a token only restyles the scoped live
