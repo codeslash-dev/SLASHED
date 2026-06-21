@@ -26,11 +26,14 @@ test('opening a shared URL on a clean slate restores the overrides', async ({ pa
   await gotoClean(page);
   await importOverride(page, ':root{--sf-radius-scale:0.5;}');
   await expect.poll(() => page.url()).toContain('#c=');
-  const shareUrl = page.url();
 
-  // Simulate a fresh visitor: wipe storage, then open the shared link.
+  // Simulate a fresh visitor: wipe storage, then reload the shared URL.
+  // page.reload() is used instead of page.goto(shareUrl) because navigating
+  // to the same URL (the hash sync already updated it) is a same-document
+  // navigation in Chromium/Firefox — the JS modules don't reinitialise and
+  // loadOverrides() never runs.  reload() always forces a full page load.
   await page.evaluate(() => localStorage.clear());
-  await page.goto(shareUrl);
+  await page.reload();
 
   await expect.poll(async () => (await readOverrides(page))['--sf-radius-scale']).toBe('0.5');
 });
