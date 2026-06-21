@@ -38,29 +38,59 @@ function readJson(file) {
 }
 
 /**
- * The registry as committed at HEAD (the baseline we must not violate). Returns
- * null when there is no committed version yet (first introduction) — there is
- * nothing to diff against, so invariants 1–3 are vacuously satisfied.
+ * Resolve the git ref to diff against — the integration baseline this branch
+ * must not violate. Comparing against HEAD would be a no-op in CI (the registry
+ * is already committed, so HEAD == working tree); the meaningful baseline is
+ * what's already on the target/default branch. Tries, in order: the PR base
+ * branch (GITHUB_BASE_REF in CI), origin/main, main, then HEAD~1 as a local
+ * fallback. Returns null when none resolve (e.g. first introduction).
+ * @returns {string|null}
+ */
+function baselineRef() {
+  const candidates = [];
+  if (process.env.GITHUB_BASE_REF) candidates.push(`origin/${process.env.GITHUB_BASE_REF}`, process.env.GITHUB_BASE_REF);
+  candidates.push('origin/main', 'main', 'HEAD~1');
+  for (const ref of candidates) {
+    try {
+      execFileSync('git', ['rev-parse', '--verify', '--quiet', `${ref}^{commit}`], {
+        cwd: ROOT,
+        stdio: ['ignore', 'ignore', 'ignore'],
+      });
+      return ref;
+    } catch {
+      /* ref not present in this checkout — try the next */
+    }
+  }
+  return null;
+}
+
+/**
+ * The registry as committed on the baseline ref (the version we must not
+ * violate). Returns null when there is no baseline (first introduction, or the
+ * file doesn't exist there yet) — nothing to diff, so invariants 1–3 are
+ * vacuously satisfied.
  * @returns {object|null}
  */
-function readHeadRegistry() {
+function readBaselineRegistry() {
+  const ref = baselineRef();
+  if (!ref) return null;
   try {
-    const text = execFileSync('git', ['show', 'HEAD:token-registry.json'], {
+    const text = execFileSync('git', ['show', `${ref}:token-registry.json`], {
       cwd: ROOT,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     });
     return JSON.parse(text);
   } catch {
-    return null; // not committed yet, or not a git checkout
+    return null; // file absent on the baseline, or not a git checkout
   }
 }
 
 const current = readJson(REGISTRY);
 const currentTokens = Array.isArray(current.tokens) ? current.tokens : [];
-const head = readHeadRegistry();
+const head = readBaselineRegistry();
 
-// ── 1–2: diff against HEAD (id permanence) ───────────────────────────────────
+// ── 1–2: diff against the baseline branch (id permanence) ────────────────────
 if (head) {
   const currentById = new Map(currentTokens.map((t) => [t.id, t]));
   for (const prev of head.tokens ?? []) {
@@ -81,8 +111,13 @@ if (head) {
   }
 }
 
-// ── 3 (cont.): nextId is past every id ───────────────────────────────────────
+// ── 3 (cont.): nextId is past every id, and every id fits the uint16 wire ─────
+// field the codec serialises ids into (configurator/src/lib/codec.js).
+const MAX_ID = 0xffff;
 const maxId = currentTokens.reduce((m, t) => Math.max(m, t.id ?? -1), -1);
+if (maxId > MAX_ID) {
+  errors.push(`id ${maxId} exceeds the uint16 wire limit (${MAX_ID}); the codec cannot encode it without truncation.`);
+}
 if ((current._meta?.nextId ?? 0) <= maxId) {
   errors.push(`_meta.nextId (${current._meta?.nextId}) must be greater than the max id (${maxId}).`);
 }

@@ -29,6 +29,14 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const SOURCE = path.join(ROOT, 'docs', 'api-index.json');
 const OUT = path.join(ROOT, 'token-registry.json');
 
+// Ids are serialised as a 2-byte (uint16) field in the wire codec
+// (configurator/src/lib/codec.js). Once nextId would exceed this, a freshly
+// assigned id would be truncated on encode and alias an existing token, so we
+// refuse to mint it. 65536 ids is far beyond the framework's token count; this
+// guard exists purely to fail loudly rather than corrupt links if that ever
+// changes (e.g. a new id namespace).
+const MAX_ID = 0xffff;
+
 /**
  * Read the existing registry, or seed an empty one on first run.
  * @returns {{ _meta: { generatedBy: string, nextId: number }, tokens: Array<{id:number,name:string,removed?:boolean}> }}
@@ -93,6 +101,14 @@ function main() {
   for (const name of [...catalogue].sort((a, b) => a.localeCompare(b))) {
     const entry = known.get(name);
     if (!entry) {
+      if (registry._meta.nextId > MAX_ID) {
+        console.error(
+          `[docs:registry] id space exhausted: nextId ${registry._meta.nextId} exceeds ` +
+            `the uint16 wire limit (${MAX_ID}). Cannot mint an id for "${name}" without ` +
+            `corrupting existing share links. The codec needs a wider id field.`
+        );
+        process.exit(1);
+      }
       registry.tokens.push({ id: registry._meta.nextId++, name });
       appended++;
     } else if (entry.removed) {

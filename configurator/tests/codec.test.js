@@ -65,6 +65,21 @@ describe('forward / backward compatibility', () => {
     assert.deepEqual(decode(code, small), { [t0]: '1px' });
   });
 
+  test('ids outside the uint16 range are dropped, not truncated', () => {
+    // An out-of-range id (0x10001) masks down to 0x0001 on the wire — if it
+    // were encoded it would alias whatever token owns id 1. It must be dropped.
+    const bad = {
+      tokens: [
+        { id: 0x10001, name: '--sf-overflow-token' },
+        ...registry.tokens,
+      ],
+    };
+    const code = encode({ '--sf-overflow-token': '9px', [t1]: '2px' }, bad);
+    const out = decode(code, bad);
+    assert.equal(out['--sf-overflow-token'], undefined, 'overflow id not encoded');
+    assert.equal(out[t1], '2px');
+  });
+
   test('removed tokens are not encoded', () => {
     const flagged = {
       tokens: registry.tokens.map((t) => (t.name === t0 ? { ...t, removed: true } : t)),
