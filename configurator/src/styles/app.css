@@ -7,86 +7,59 @@
  * probes, where each declaration block is set on a contained element.
  */
 
+/*
+ * DOGFOOD: every chrome colour, radius, shadow and font below is sourced from
+ * SLASHED's own design tokens (--sf-*). The framework's token + theme layers are
+ * loaded at :root (see src/main.js), so the configurator literally renders with
+ * the system it edits — and the chrome's light/dark mode IS the framework's
+ * [data-theme] / light-dark() machinery (toggled from App.svelte). The cfg-*
+ * names are kept as a thin semantic alias layer so component styles read clearly
+ * and a future token rename is a one-line change here, not a sweep.
+ *
+ * Isolation: user overrides are applied only to the scoped preview stage
+ * (lib/preview.js), never :root — so editing a token restyles the preview, not
+ * the chrome. The chrome always reflects the framework defaults.
+ */
 :root {
-  /* Dark surface ramp — slightly bluer than pure neutrals so the accent
-     colour reads as "interactive" rather than tinted of the background. */
-  --cfg-bg: #0d1016;
-  --cfg-bg-2: #11141b;
-  --cfg-surface: #161a23;
-  --cfg-surface-2: #1d222d;
-  --cfg-surface-3: #232938;
-  --cfg-border: #262c39;
-  --cfg-border-strong: #38404f;
-  --cfg-border-focus: #5a82d8;
+  /* Surface ramp — bg → inset → raised, then mixed lifts for hover layers. */
+  --cfg-bg: var(--sf-color-bg);
+  --cfg-bg-2: var(--sf-color-inset);
+  --cfg-surface: var(--sf-color-raised);
+  --cfg-surface-2: color-mix(in oklab, var(--sf-color-raised), var(--sf-color-text) 5%);
+  --cfg-surface-3: color-mix(in oklab, var(--sf-color-raised), var(--sf-color-text) 10%);
+  --cfg-border: var(--sf-color-border);
+  --cfg-border-strong: var(--sf-color-border--strong);
+  --cfg-border-focus: var(--sf-color-action);
 
-  --cfg-text: #ecf0f7;
-  --cfg-text-muted: #97a0b0;
-  --cfg-text-faint: #6a7283;
+  --cfg-text: var(--sf-color-text);
+  --cfg-text-muted: var(--sf-color-text--muted);
+  --cfg-text-faint: var(--sf-color-text--placeholder);
 
-  --cfg-accent: #75a7ff;
-  --cfg-accent-strong: #4f8cff;
-  --cfg-accent-soft: rgba(79, 140, 255, 0.16);
-  --cfg-accent-glow: rgba(79, 140, 255, 0.45);
+  --cfg-accent: var(--sf-color-primary);
+  --cfg-accent-strong: var(--sf-color-primary--hover);
+  --cfg-accent-soft: var(--sf-color-primary-subtle);
+  --cfg-accent-glow: color-mix(in oklab, var(--sf-color-primary) 40%, transparent);
 
-  --cfg-danger: #ff7176;
-  --cfg-danger-soft: rgba(255, 113, 118, 0.18);
-  --cfg-ok: #5ad27a;
-  --cfg-warn: #ffd556;
+  --cfg-danger: var(--sf-color-error);
+  --cfg-danger-soft: var(--sf-color-error-subtle);
+  --cfg-ok: var(--sf-color-success);
+  --cfg-warn: var(--sf-color-warning);
 
-  --cfg-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Menlo", monospace;
-  --cfg-sans: system-ui, -apple-system, "Inter", "Segoe UI", Roboto, sans-serif;
+  --cfg-mono: var(--sf-font-mono);
+  --cfg-sans: var(--sf-font-body);
 
-  --cfg-radius: 10px;
-  --cfg-radius-s: 6px;
-  --cfg-radius-l: 14px;
+  --cfg-radius: var(--sf-radius-l);
+  --cfg-radius-s: var(--sf-radius-s);
+  --cfg-radius-l: var(--sf-radius-xl);
 
-  --cfg-shadow-pop: 0 12px 36px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
-  --cfg-shadow-card: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 1px 2px rgba(0, 0, 0, 0.3);
+  --cfg-shadow-pop: var(--sf-shadow-xl);
+  --cfg-shadow-card: var(--sf-shadow-xs);
 
-  /* Gradient overlay colours used in body background (overridden per theme). */
-  --cfg-grad-a: rgba(79, 140, 255, 0.08);
-  --cfg-grad-b: rgba(120, 80, 220, 0.06);
-
-  /* Scrollbar thumb hover — slightly lighter than border-strong. */
-  --cfg-scrollbar-hover: #4a5567;
-
-  color-scheme: dark;
-}
-
-/* ─── Light UI theme ────────────────────────────────────────────────────── */
-[data-ui-theme="light"] {
-  --cfg-bg: #f4f6fb;
-  --cfg-bg-2: #edf0f8;
-  --cfg-surface: #ffffff;
-  --cfg-surface-2: #f0f3fa;
-  --cfg-surface-3: #e8ecf5;
-  --cfg-border: #d2d8e8;
-  --cfg-border-strong: #bbc4d8;
-  --cfg-border-focus: #4a72c8;
-
-  --cfg-text: #111827;
-  --cfg-text-muted: #4a5468;
-  --cfg-text-faint: #8896aa;
-
-  --cfg-accent: #2d64d8;
-  --cfg-accent-strong: #1f53c7;
-  --cfg-accent-soft: rgba(31, 83, 199, 0.1);
-  --cfg-accent-glow: rgba(31, 83, 199, 0.22);
-
-  --cfg-danger: #c8282e;
-  --cfg-danger-soft: rgba(200, 40, 46, 0.1);
-  --cfg-ok: #1a7f3c;
-  --cfg-warn: #a86000;
-
-  --cfg-shadow-pop: 0 12px 36px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.08);
-  --cfg-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
-
-  --cfg-grad-a: rgba(31, 83, 199, 0.05);
-  --cfg-grad-b: rgba(120, 80, 220, 0.03);
-
-  --cfg-scrollbar-hover: #8896aa;
-
-  color-scheme: light;
+  /* Gradient overlays + scrollbar hover, derived from brand tokens so they
+     follow the theme automatically. */
+  --cfg-grad-a: color-mix(in oklab, var(--sf-color-primary) 8%, transparent);
+  --cfg-grad-b: color-mix(in oklab, var(--sf-color-tertiary) 6%, transparent);
+  --cfg-scrollbar-hover: color-mix(in oklab, var(--sf-color-border--strong), var(--sf-color-text) 20%);
 }
 
 * { box-sizing: border-box; }
@@ -184,30 +157,32 @@ code, kbd { font-family: var(--cfg-mono); }
   background: var(--cfg-surface-2);
   white-space: nowrap;
 }
+/* Tier / role badges dogfood the framework's status + brand colours, so they
+   stay legible in both themes with no per-theme overrides. */
 .cfg-badge--public {
-  color: #8ce99a;
-  border-color: rgba(139, 233, 154, 0.4);
-  background: rgba(43, 138, 62, 0.12);
+  color: var(--sf-color-success);
+  border-color: color-mix(in oklab, var(--sf-color-success) 40%, transparent);
+  background: color-mix(in oklab, var(--sf-color-success) 12%, transparent);
 }
 .cfg-badge--advanced {
-  color: #ffd8a8;
-  border-color: rgba(255, 216, 168, 0.4);
-  background: rgba(184, 106, 20, 0.14);
+  color: var(--sf-color-warning);
+  border-color: color-mix(in oklab, var(--sf-color-warning) 40%, transparent);
+  background: color-mix(in oklab, var(--sf-color-warning) 14%, transparent);
 }
 .cfg-badge--internal {
-  color: #ff8787;
-  border-color: rgba(255, 135, 135, 0.4);
-  background: rgba(201, 42, 42, 0.14);
+  color: var(--sf-color-error);
+  border-color: color-mix(in oklab, var(--sf-color-error) 40%, transparent);
+  background: color-mix(in oklab, var(--sf-color-error) 14%, transparent);
 }
 .cfg-badge--configure {
-  color: #74c0fc;
-  border-color: rgba(116, 192, 252, 0.35);
-  background: rgba(24, 100, 171, 0.14);
+  color: var(--sf-color-info);
+  border-color: color-mix(in oklab, var(--sf-color-info) 35%, transparent);
+  background: color-mix(in oklab, var(--sf-color-info) 14%, transparent);
 }
 .cfg-badge--consume {
-  color: #b197fc;
-  border-color: rgba(177, 151, 252, 0.35);
-  background: rgba(95, 61, 196, 0.14);
+  color: var(--sf-color-tertiary);
+  border-color: color-mix(in oklab, var(--sf-color-tertiary) 35%, transparent);
+  background: color-mix(in oklab, var(--sf-color-tertiary) 14%, transparent);
 }
 
 /* Segmented control primitive — used by the basic/advanced toggle, the output
@@ -295,40 +270,5 @@ code, kbd { font-family: var(--cfg-mono); }
   line-height: 1.4;
 }
 
-/* ─── Light-theme badge colour overrides ───────────────────────────────── */
-[data-ui-theme="light"] .cfg-badge--public {
-  color: #166534;
-  border-color: rgba(22, 101, 52, 0.35);
-  background: rgba(22, 101, 52, 0.08);
-}
-[data-ui-theme="light"] .cfg-badge--advanced {
-  color: #92400e;
-  border-color: rgba(146, 64, 14, 0.35);
-  background: rgba(146, 64, 14, 0.08);
-}
-[data-ui-theme="light"] .cfg-badge--internal {
-  color: #991b1b;
-  border-color: rgba(153, 27, 27, 0.35);
-  background: rgba(153, 27, 27, 0.08);
-}
-[data-ui-theme="light"] .cfg-badge--configure {
-  color: #1e40af;
-  border-color: rgba(30, 64, 175, 0.35);
-  background: rgba(30, 64, 175, 0.08);
-}
-[data-ui-theme="light"] .cfg-badge--consume {
-  color: #5b21b6;
-  border-color: rgba(91, 33, 182, 0.35);
-  background: rgba(91, 33, 182, 0.08);
-}
-
-/* Adjust primary button highlight — the white inset glow looks odd on a
-   lighter accent colour. */
-[data-ui-theme="light"] .cfg-btn--primary {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 4px 12px var(--cfg-accent-glow);
-}
-
-/* Segmented active pill on light background. */
-[data-ui-theme="light"] .cfg-seg__btn--on {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 4px var(--cfg-accent-glow);
-}
+/* No per-theme overrides needed: every chrome colour derives from --sf-* tokens
+   that already adapt to the framework's [data-theme] light/dark switch. */

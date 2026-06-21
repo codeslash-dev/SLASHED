@@ -27,8 +27,9 @@
       name="twitter:description"
       content="Configure every SLASHED CSS framework token and generate ready-to-paste override CSS."
     />
-    <!-- Apply saved UI theme before first paint to prevent flash of wrong theme. -->
-    <script>try{var s=localStorage.getItem('slashed-configurator/ui/v1');if(s){var t=JSON.parse(s).uiTheme;if(t==='light'||t==='dark')document.documentElement.dataset.uiTheme=t;}}catch(_){}</script>
+    <!-- Apply saved chrome theme before first paint (via SLASHED's own
+         [data-theme]) to prevent a flash of the wrong theme. Defaults to dark. -->
+    <script>try{var s=localStorage.getItem('slashed-configurator/ui/v1');var t=s?JSON.parse(s).uiTheme:null;document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:'dark';}catch(_){document.documentElement.dataset.theme='dark';}</script>
   </head>
   <body>
     <div id="app"></div>

@@ -118,10 +118,13 @@
     setProbeContext({ overrides, theme: ui.previewTheme });
   });
 
-  // Apply the configurator UI theme to <html> so [data-ui-theme="light/dark"]
-  // CSS selectors in app.css take effect across the whole chrome.
+  // Apply the chrome theme to <html> via SLASHED's own [data-theme] attribute.
+  // Because app.css sources every --cfg-* from --sf-* tokens, the framework's
+  // light-dark()/themes.css machinery themes the whole chrome — true dogfooding.
+  // The live preview keeps an independent theme (ui.previewTheme), resolved
+  // per-stage in preview.js, so the two never interfere.
   $effect(() => {
-    document.documentElement.dataset.uiTheme = ui.uiTheme;
+    document.documentElement.dataset.theme = ui.uiTheme;
   });
 
   // One-time: apply a configuration shared via the URL fragment (#c=…). Runs as
