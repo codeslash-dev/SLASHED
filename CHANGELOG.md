@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.6] - 2026-06-21
+
+### Features
+- **configurator:** replace lz-string share links with binary config codes
+
+### Bug Fixes
+- **configurator:** harden token-registry id-permanence and uint16 bounds
+
 ## [0.6.5] - 2026-06-21
 
 ### Features
