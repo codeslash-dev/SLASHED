@@ -13,6 +13,7 @@ import { allTokens, tokenByName } from './model.js';
 import { sanitizeValue } from './css.js';
 import { sanitisePreset, loadSavedThemes, persistSavedThemes, slugify } from './themes.js';
 import { sanitiseUiState, UI_STORAGE_KEY } from './uiState.js';
+import { readShareFromHash, buildShareUrl } from './share.js';
 import * as ops from './historyOps.js';
 
 const STORAGE_KEY = 'slashed-configurator/overrides/v1';
@@ -295,6 +296,29 @@ export function deleteSavedTheme(id) {
   if (idx === -1) return false;
   savedThemes.splice(idx, 1);
   return persistSavedThemes(savedThemes);
+}
+
+// ───────────────────────────── shareable links ────────────────────────────
+
+/**
+ * Apply a configuration encoded in the current URL fragment (`#c=…`), if any.
+ * Runs as a single undoable history step (via `replaceOverrides`) so a shared
+ * link layers cleanly over whatever was restored from localStorage and can be
+ * reverted with one Ctrl+Z. No-op (returns 0) when no link config is present.
+ *
+ * @returns {number} count of tokens applied from the link
+ */
+export function loadSharedConfig() {
+  if (typeof location === 'undefined') return 0;
+  const map = readShareFromHash(location.hash);
+  if (Object.keys(map).length === 0) return 0;
+  const { applied } = replaceOverrides(map);
+  return applied;
+}
+
+/** Absolute, shareable URL that encodes the current override map. */
+export function currentShareUrl() {
+  return buildShareUrl(overrides);
 }
 
 // ───────────────────────────── helpers ────────────────────────────────────

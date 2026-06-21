@@ -24,7 +24,8 @@
    * active domain to its panel.
    */
   import { DOMAINS, DOMAIN_BY_ID, BASIC_DOMAIN_IDS } from './lib/domains.js';
-  import { ui, undo, redo, overrides } from './lib/store.svelte.js';
+  import { ui, undo, redo, overrides, loadSharedConfig } from './lib/store.svelte.js';
+  import { buildShareUrl } from './lib/share.js';
   import { UI_STORAGE_KEY } from './lib/uiState.js';
   import { setProbeContext } from './lib/probeHost.js';
   import Header from './components/Header.svelte';
@@ -120,6 +121,33 @@
   // CSS selectors in app.css take effect across the whole chrome.
   $effect(() => {
     document.documentElement.dataset.uiTheme = ui.uiTheme;
+  });
+
+  // One-time: apply a configuration shared via the URL fragment (#c=…). Runs as
+  // a single undoable step so it layers over the localStorage-restored state.
+  let _sharedLoaded = false;
+  $effect(() => {
+    if (_sharedLoaded) return;
+    _sharedLoaded = true;
+    loadSharedConfig();
+  });
+
+  // Keep the URL fragment in sync with the live override map (debounced) so the
+  // address bar is always a shareable snapshot. replaceState (not pushState)
+  // keeps it out of the back/forward history.
+  let _hashTimer;
+  $effect(() => {
+    const snapshot = JSON.stringify(overrides); // track the override map
+    void snapshot;
+    clearTimeout(_hashTimer);
+    _hashTimer = setTimeout(() => {
+      try {
+        history.replaceState(history.state, '', buildShareUrl(overrides));
+      } catch {
+        /* history API blocked (e.g. file://) — non-essential, ignore */
+      }
+    }, 400);
+    return () => clearTimeout(_hashTimer);
   });
 
   // Persist the navigation prefs so a reload restores where the user was.
