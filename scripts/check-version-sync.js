@@ -50,6 +50,28 @@ if (!m) {
   );
 }
 
+// 3. configurator/package.json must match package.json.
+const configPkg = JSON.parse(read('configurator/package.json'));
+if (configPkg.version !== version) {
+  errors.push(
+    `configurator/package.json version "${configPkg.version}" != package.json "${version}"`,
+  );
+}
+
+// 4. configurator/package-lock.json must match package.json.
+const configLock = JSON.parse(read('configurator/package-lock.json'));
+if (configLock.version !== version) {
+  errors.push(
+    `configurator/package-lock.json version "${configLock.version}" != package.json "${version}"`,
+  );
+}
+const configLockSelf = configLock.packages?.['']?.version;
+if (configLockSelf !== undefined && configLockSelf !== version) {
+  errors.push(
+    `configurator/package-lock.json packages[""].version "${configLockSelf}" != package.json "${version}"`,
+  );
+}
+
 if (errors.length) {
   console.error('version-sync check FAILED:');
   for (const e of errors) console.error(`  - ${e}`);
