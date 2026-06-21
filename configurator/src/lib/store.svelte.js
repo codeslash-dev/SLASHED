@@ -19,6 +19,10 @@ import * as ops from './historyOps.js';
 const STORAGE_KEY = 'slashed-configurator/overrides/v1';
 const HISTORY_LIMIT = 50;
 
+// Flag set by loadOverrides() when the URL fragment provided the initial
+// overrides, so loadSharedConfig() can skip the redundant second load.
+let _sharedInitDone = false;
+
 /**
  * Override map: token name -> user value (string). Only customised tokens
  * live here; an absent key means "use the framework default".
@@ -120,10 +124,22 @@ function loadUiState() {
 
 /**
  * Load persisted overrides from localStorage, ignoring malformed data.
+ * If a URL-fragment share config is present it takes precedence and is
+ * written straight to localStorage here (as a plain object, before the
+ * $state proxy exists) so readOverrides() can see it immediately.
  * @returns {Record<string, string>}
  */
 function loadOverrides() {
   if (typeof localStorage === 'undefined') return {};
+  // URL fragment share config takes precedence over local storage.
+  if (typeof location !== 'undefined') {
+    const shared = readShareFromHash(location.hash);
+    if (Object.keys(shared).length > 0) {
+      _sharedInitDone = true;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(shared)); } catch {}
+      return shared;
+    }
+  }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
@@ -169,20 +185,6 @@ const opsState = {
   persist,
   _dragSnap: null,
 };
-
-// ── Synchronous shared-config init ────────────────────────────────────────
-// Apply any URL-fragment config BEFORE Svelte mounts the component tree so
-// the override map and its localStorage persist are guaranteed to land by the
-// time effects run. The exported loadSharedConfig() becomes a no-op when this
-// block has already processed the hash.
-let _sharedInitDone = false;
-if (typeof location !== 'undefined') {
-  const _initShared = readShareFromHash(location.hash);
-  if (Object.keys(_initShared).length > 0) {
-    ops.replaceAll(opsState, _initShared);
-    _sharedInitDone = true;
-  }
-}
 
 // ───────────────────────────── history (undo/redo) ─────────────────────────
 
