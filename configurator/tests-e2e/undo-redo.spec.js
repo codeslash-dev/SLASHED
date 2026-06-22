@@ -22,9 +22,8 @@ test('5-step mixed chain unwinds and replays exactly', async ({ page }) => {
 
   // 3. Type-scale apply
   await sideItem(page, 'Typography').click();
-  const gen = page.locator('.card').first();
-  await gen.locator('.gen__toggle').click();
-  await gen.locator('.ctl', { hasText: 'Ratio (min)' }).locator('select:not([disabled])').selectOption('1.414');
+  const gen = page.locator('.gen').first();
+  await gen.locator('.ctl', { hasText: 'Ratio (mobile)' }).locator('select:not([disabled])').selectOption('1.414');
   await gen.locator('button', { hasText: /Apply scale/ }).first().click();
   snapshots.push(stableSnapshot(await readOverrides(page)));
 
