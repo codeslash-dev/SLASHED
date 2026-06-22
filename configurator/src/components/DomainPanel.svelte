@@ -35,6 +35,7 @@
   import StylePresetRow from './StylePresetRow.svelte';
   import ColorAssignments from './ColorAssignments.svelte';
   import DomainPreview from './DomainPreview.svelte';
+  import Icon from './Icon.svelte';
   import { DOMAIN_PREVIEWS } from '../lib/domainPreviews.js';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
@@ -110,12 +111,14 @@
   // Colors panel: progressive disclosure for secondary brand / status groups.
   let showSecondary = $state(false);
   let showStatus = $state(false);
-  let showColorRoles = $state(false);
+  // Semantic-roles preview leads the Colors panel — open by default.
+  let showColorRoles = $state(true);
 
-  // Other token domains: an inline live preview accordion (the generalisation
-  // of the Colors "Semantic roles" section). Present only for domains with a
-  // curated spec in lib/domainPreviews.js.
-  let showPreview = $state(false);
+  // Other token domains: an inline live preview that LEADS the panel (the
+  // generalisation of the Colors "Semantic roles" section). Present only for
+  // domains with a curated spec in lib/domainPreviews.js. Open by default so
+  // the live preview is the first thing visible; still collapsible.
+  let showPreview = $state(true);
   const previewSpec = $derived(DOMAIN_PREVIEWS[domain.id]);
 
   // Partition brand color keys for the Colors panel accordion.
@@ -214,7 +217,7 @@
 <section class="panel">
   <header class="panel__head">
     <div class="panel__title-wrap">
-      <span class="panel__icon" aria-hidden="true">{domain.icon}</span>
+      <span class="panel__icon"><Icon name={domain.icon} size={18} /></span>
       <div>
         <h2 class="panel__title">{domain.label}</h2>
         <p class="panel__blurb">{domain.blurb}</p>
@@ -239,6 +242,32 @@
       {@render filters()}
       {@render catalogue()}
     {:else}
+      <!-- ── LIVE PREVIEW (leads every token category) ───────────────────── -->
+
+      <!-- The domain's tokens rendered live against the current overrides, as
+           the FIRST thing in the panel and open by default. Colors has no
+           DOMAIN_PREVIEWS spec — it leads with the semantic-roles map instead,
+           so every token category opens with a live preview. -->
+      {#if previewSpec}
+        <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
+          <summary class="panel__card-head panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__card-title">Preview</span>
+            <span class="panel__expand-count">{previewSpec.blurb}</span>
+          </summary>
+          <DomainPreview domain={domain.id} />
+        </details>
+      {:else if domain.brandColors}
+        <details class="cfg-card panel__card panel__card--lead" bind:open={showColorRoles}>
+          <summary class="panel__card-head panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__card-title">Semantic roles</span>
+            <span class="panel__expand-count">How your brand colors surface</span>
+          </summary>
+          <ColorAssignments />
+        </details>
+      {/if}
+
       <!-- ── SETTINGS (inputs-first) ─────────────────────────────────────── -->
 
       <!-- Orientation copy: what this domain controls, whether typical
@@ -304,16 +333,6 @@
             {/each}
           </div>
         </details>
-
-        <!-- Semantic role preview (where your brand colors surface) -->
-        <details class="cfg-card panel__card" bind:open={showColorRoles}>
-          <summary class="panel__card-head panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__card-title">Semantic roles</span>
-            <span class="panel__expand-count">How your brand colors surface</span>
-          </summary>
-          <ColorAssignments />
-        </details>
       {:else if basicGroups.length}
         {#each basicGroups as group (group.title)}
           <section class="cfg-card panel__card">
@@ -344,19 +363,6 @@
       <!-- Scaling: global multipliers that cascade through many tokens. -->
       {#if knobs.length}
         <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
-      {/if}
-
-      <!-- Inline live preview — this domain's tokens, rendered against your
-           overrides (the generalisation of the Colors "Semantic roles" card). -->
-      {#if previewSpec}
-        <details class="cfg-card panel__card" bind:open={showPreview}>
-          <summary class="panel__card-head panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__card-title">Preview</span>
-            <span class="panel__expand-count">{previewSpec.blurb}</span>
-          </summary>
-          <DomainPreview domain={domain.id} />
-        </details>
       {/if}
 
       <!-- ── ALL VARIABLES (progressive disclosure) ──────────────────────── -->
@@ -460,6 +466,10 @@
   }
 
   .panel__card { overflow: clip; }
+  /* The live preview that leads every category gets a faint accent edge so it
+     reads as the panel's headline, not just another card. */
+  .panel__card--lead { border-color: var(--cfg-border-strong); }
+  .panel__card--lead > summary { border-left: 3px solid var(--cfg-accent-strong); }
   .panel__card-head {
     display: flex;
     align-items: baseline;

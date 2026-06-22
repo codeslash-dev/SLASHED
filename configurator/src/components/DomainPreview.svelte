@@ -10,9 +10,10 @@
    * roles" swatch grid to every other token domain.
    *
    * The rendering switches on the spec's `kind`: radius corners, elevation
-   * cards, gradient tiles, motion bars, a type specimen, spacing bars,
-   * container widths and blur/opacity samples each get a purpose-built layout,
-   * but all share the one scoped stage.
+   * cards, gradient tiles, motion bars, a type specimen, spacing bars, the
+   * layout panel (proportional container widths + aspect/sizing tiles) and
+   * blur/opacity/scrim samples each get a purpose-built layout, but all share
+   * the one scoped stage.
    */
   import { overrides, ui } from '../lib/store.svelte.js';
   import { buildPreviewDeclarations } from '../lib/preview.js';
@@ -31,6 +32,35 @@
       ? `${buildPreviewDeclarations(overrides, ui.previewTheme)}\n--sf-motion-scale: 0;`
       : buildPreviewDeclarations(overrides, ui.previewTheme)
   );
+
+  // ── Layout: proportional container widths ────────────────────────────────
+  // Container max-widths (narrow…wide) all dwarf this panel, so clamping each
+  // to the track width would render them identical. Instead we measure the
+  // RESOLVED width of each via a hidden probe carrying the live cascade, then
+  // draw each bar as a % of the widest — so they stay visibly distinct and the
+  // real px value is shown. Re-measures whenever the cascade (stageStyle)
+  // changes, i.e. on every edit.
+  const containerItems = $derived(
+    spec?.groups.find((g) => g.section === 'Container widths')?.items ?? []
+  );
+  /** @type {HTMLElement[]} */
+  let probeEls = $state([]);
+  /** @type {{ px: number, pct: number }[]} */
+  let measured = $state([]);
+
+  $effect(() => {
+    // Touch stageStyle + the item list so the effect re-runs on any edit.
+    stageStyle;
+    containerItems.length;
+    const els = probeEls.filter(Boolean);
+    if (els.length === 0) {
+      measured = [];
+      return;
+    }
+    const widths = els.map((el) => el.getBoundingClientRect().width);
+    const max = Math.max(...widths, 1);
+    measured = widths.map((w) => ({ px: Math.round(w), pct: (w / max) * 100 }));
+  });
 </script>
 
 {#if spec}
@@ -70,15 +100,44 @@
             {/each}
           </div>
 
-        <!-- ── Container widths ───────────────────────────────────────── -->
-        {:else if spec.kind === 'container'}
+        <!-- ── Layout: proportional container widths ──────────────────── -->
+        {:else if spec.kind === 'layout' && group.section === 'Container widths'}
           <div class="dp__bars">
-            {#each group.items as it (it.token)}
+            {#each group.items as it, i (it.token)}
               <div class="dp__bar-row">
                 <code class="dp__code dp__code--w">{it.label}</code>
                 <span class="dp__track">
-                  <span class="dp__track-fill" style="inline-size: min(100%, var({it.token}))"></span>
+                  <span class="dp__track-fill" style="inline-size: {measured[i]?.pct ?? 100}%"></span>
                 </span>
+                <code class="dp__code dp__px">{measured[i] ? measured[i].px + 'px' : ''}</code>
+              </div>
+            {/each}
+          </div>
+          <!-- Off-layout probes: width = the real token, measured for the bars. -->
+          <div class="dp__probes" aria-hidden="true">
+            {#each group.items as it, i (it.token)}
+              <div class="dp__probe" bind:this={probeEls[i]} style="inline-size: var({it.token})"></div>
+            {/each}
+          </div>
+
+        <!-- ── Layout: aspect-ratio tiles ─────────────────────────────── -->
+        {:else if spec.kind === 'layout' && group.section === 'Aspect ratios'}
+          <div class="dp__ratios">
+            {#each group.items as it (it.token)}
+              <div class="dp__ratio-item">
+                <span class="dp__ratio" style="aspect-ratio: var({it.token})"></span>
+                <code class="dp__code">{it.label}</code>
+              </div>
+            {/each}
+          </div>
+
+        <!-- ── Layout: sizing swatches (header / touch / icon) ────────── -->
+        {:else if spec.kind === 'layout'}
+          <div class="dp__sizes">
+            {#each group.items as it (it.token)}
+              <div class="dp__size-item">
+                <span class="dp__size" style="inline-size: var({it.token}); block-size: var({it.token})"></span>
+                <code class="dp__code">{it.label}</code>
               </div>
             {/each}
           </div>
@@ -143,7 +202,7 @@
             {/each}
           </div>
 
-        <!-- ── Effects (blur + opacity) ───────────────────────────────── -->
+        <!-- ── Effects: blur ──────────────────────────────────────────── -->
         {:else if spec.kind === 'effect' && group.section === 'Blur'}
           {#each group.items as it (it.token)}
             <div class="dp__blur">
@@ -153,15 +212,27 @@
               </div>
             </div>
           {/each}
-        {:else if spec.kind === 'effect'}
-          <div class="dp__tiles">
+
+        <!-- ── Effects: opacity as a real UI state ────────────────────── -->
+        {:else if spec.kind === 'effect' && group.section === 'Opacity'}
+          <div class="dp__opacities">
             {#each group.items as it (it.token)}
-              <div class="dp__opacity">
-                <span class="dp__opacity-fill" style="opacity: var({it.token})"></span>
+              <div class="dp__opacity-row">
+                <span class="dp__opacity-chip" style="opacity: var({it.token})">Button</span>
                 <code class="dp__code">{it.label}</code>
               </div>
             {/each}
           </div>
+
+        <!-- ── Effects: scrim gradient over content ───────────────────── -->
+        {:else if spec.kind === 'effect'}
+          {#each group.items as it (it.token)}
+            <div class="dp__scrim">
+              <div class="dp__scrim-bg">Content behind the scrim</div>
+              <div class="dp__scrim-layer" style="background: var({it.token})"></div>
+              <code class="dp__code dp__scrim-label">{it.label}</code>
+            </div>
+          {/each}
         {/if}
       {/each}
     </div>
@@ -177,6 +248,7 @@
 
   /* The scoped stage owns the framework cascade; samples inside read var(--sf-*). */
   .dp__stage {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -240,6 +312,56 @@
     height: 100%;
     background: var(--sf-color-primary-subtle, var(--cfg-accent));
     border-right: 2px solid var(--sf-color-primary, var(--cfg-accent-strong));
+    transition: inline-size 0.18s ease;
+  }
+  .dp__px {
+    min-width: 5ch;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  /* Off-layout probes: real token widths, measured but never seen. */
+  .dp__probes {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 0;
+    block-size: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .dp__probe { block-size: 1px; }
+
+  /* Layout — aspect-ratio tiles */
+  .dp__ratios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 12px;
+    align-items: end;
+  }
+  .dp__ratio-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .dp__ratio {
+    inline-size: 100%;
+    background: var(--sf-color-surface, var(--cfg-surface));
+    border: var(--sf-border-width-2, 2px) solid var(--sf-color-primary, var(--cfg-accent-strong));
+    border-radius: var(--sf-radius-s, 4px);
+  }
+
+  /* Layout — sizing swatches (header / touch / icon), drawn at real size */
+  .dp__sizes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 18px;
+  }
+  .dp__size-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .dp__size {
+    display: block;
+    max-inline-size: 96px;
+    max-block-size: 96px;
+    background: var(--sf-color-primary-subtle, var(--cfg-accent));
+    border: 1px solid var(--sf-color-primary, var(--cfg-accent-strong));
+    border-radius: var(--sf-radius-s, 4px);
   }
 
   /* Gradient tiles */
@@ -363,13 +485,48 @@
     place-items: center;
   }
 
-  /* Effects — opacity */
-  .dp__opacity { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-  .dp__opacity-fill {
-    width: 100%;
-    height: 48px;
-    border-radius: var(--sf-radius-s, 6px);
+  /* Effects — opacity applied to a real UI chip (reads as a state) */
+  .dp__opacities { display: flex; flex-wrap: wrap; gap: 16px; }
+  .dp__opacity-row { display: flex; align-items: center; gap: 8px; }
+  .dp__opacity-chip {
+    display: inline-grid;
+    place-items: center;
+    min-width: 84px;
+    padding: 8px 16px;
+    border-radius: var(--sf-radius-m, 6px);
     background: var(--sf-color-primary, var(--cfg-accent-strong));
+    color: var(--sf-color-on-primary, #fff);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Effects — scrim gradient over content */
+  .dp__scrim {
+    position: relative;
+    height: 80px;
+    border-radius: var(--sf-radius-m, 8px);
+    overflow: hidden;
+    background: var(--sf-color-surface, var(--cfg-surface));
+    display: grid;
+    place-items: center;
+  }
+  .dp__scrim-bg {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sf-color-text, var(--cfg-text));
+    padding: 0 12px;
+    text-align: center;
+  }
+  .dp__scrim-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .dp__scrim-label {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    color: var(--sf-color-text, var(--cfg-text));
   }
 
   .dp__note {

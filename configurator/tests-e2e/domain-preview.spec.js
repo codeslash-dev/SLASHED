@@ -1,8 +1,8 @@
 /**
  * Inline domain previews: every token domain (Borders, Shadows, Motion, …)
- * carries a collapsed "Preview" accordion that renders its tokens live against
+ * LEADS its panel with a live "Preview" card that renders its tokens against
  * the current overrides — the generalisation of the Colors "Semantic roles"
- * card. The accordion is collapsed by default and expands on click.
+ * card. The preview is the first thing in the panel and open by default.
  */
 import { test, expect } from '@playwright/test';
 import { watchErrors, gotoClean, sideItem } from './helpers.js';
@@ -17,26 +17,44 @@ const PREVIEW_DOMAINS = [
 const previewCard = (page) =>
   page.locator('details.panel__card', { has: page.locator('.panel__card-title', { hasText: /^Preview$/ }) });
 
-test('every token domain exposes a collapsed Preview accordion that opens', async ({ page }) => {
+test('every token domain leads with an open Preview card', async ({ page }) => {
   const errors = watchErrors(page);
   await gotoClean(page);
   for (const label of PREVIEW_DOMAINS) {
     await sideItem(page, label).click();
     const card = previewCard(page);
     await expect(card, `${label} has a Preview card`).toHaveCount(1);
-    // Collapsed by default — the scoped stage is not rendered visible yet.
-    expect(await card.evaluate((el) => el.open), `${label} Preview starts collapsed`).toBe(false);
-    await card.locator('summary').click();
-    await expect(card.locator('.dp__stage'), `${label} stage renders when opened`).toBeVisible();
+    // Open by default — the scoped stage is visible immediately.
+    expect(await card.evaluate((el) => el.open), `${label} Preview is open by default`).toBe(true);
+    await expect(card.locator('.dp__stage'), `${label} stage is visible`).toBeVisible();
+    // It is the FIRST card in the panel body.
+    const isFirst = await card.evaluate((el) => {
+      const body = el.closest('.panel__body');
+      return body?.querySelector('.cfg-card, .panel__card, .panel__intro') === el;
+    });
+    expect(isFirst, `${label} Preview is the first thing in the panel`).toBe(true);
   }
   expect(errors).toEqual([]);
+});
+
+test('the Layout preview renders distinct, proportional container widths', async ({ page }) => {
+  await gotoClean(page);
+  await sideItem(page, 'Layout').click();
+  const stage = previewCard(page).locator('.dp__stage');
+  await expect(stage).toBeVisible();
+  // The fix: container bars are measured to true relative scale, so their
+  // widths differ (the old clamp-to-100% rendered all four identical).
+  const widths = await stage.locator('.dp__track-fill').evaluateAll((els) =>
+    els.map((el) => el.getBoundingClientRect().width)
+  );
+  expect(widths.length).toBe(4);
+  expect(new Set(widths.map((w) => Math.round(w))).size, 'widths are not all identical').toBeGreaterThan(1);
 });
 
 test('the preview reflects a live override', async ({ page }) => {
   await gotoClean(page);
   await sideItem(page, 'Borders').click();
   const card = previewCard(page);
-  await card.locator('summary').click();
   const stage = card.locator('.dp__stage');
   await expect(stage).toBeVisible();
 

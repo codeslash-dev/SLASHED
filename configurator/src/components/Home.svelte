@@ -11,6 +11,7 @@
   import { DOMAINS, OVERVIEW_DOMAIN_IDS } from '../lib/domains.js';
   import { modifiedCountsByDomain } from '../lib/model.js';
   import { ui, overrides, openOutputDrawer } from '../lib/store.svelte.js';
+  import Icon from './Icon.svelte';
 
   const rows = $derived(DOMAINS.filter((d) => OVERVIEW_DOMAIN_IDS.includes(d.id)));
 
@@ -43,7 +44,7 @@
     {#each rows as d (d.id)}
       <li>
         <button class="home__row" onclick={() => (ui.domain = d.id)}>
-          <span class="home__icon" aria-hidden="true">{d.icon}</span>
+          <span class="home__icon"><Icon name={d.icon} size={22} /></span>
           <span class="home__body">
             <span class="home__name">{d.label}</span>
             <!-- Tools (Themes) carry no intro — blurb is their one-liner. -->
