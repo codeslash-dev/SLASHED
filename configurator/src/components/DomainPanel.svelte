@@ -115,6 +115,12 @@
   const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary'].includes(c.key));
   const BRAND_STATUS = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
 
+  // A brand color is "modified" if EITHER its light or dark variant is pinned
+  // (a dark-only override must still surface the badge).
+  const hasBrandOverride = (key) =>
+    overrides[`--sf-color-${key}-light`] != null ||
+    overrides[`--sf-color-${key}-dark`] != null;
+
   // Modified tokens within this domain — drives the header "Reset N" button.
   const modifiedHere = $derived(
     domainTokens.filter((t) => overrides[t.name] != null)
@@ -263,7 +269,7 @@
             <span class="panel__expand-chev" aria-hidden="true">›</span>
             <span class="panel__expand-title">Extended brand colors</span>
             <span class="panel__expand-count">{BRAND_SECONDARY.length} colors</span>
-            {#if BRAND_SECONDARY.some((c) => overrides[`--sf-color-${c.key}-light`] != null)}
+            {#if BRAND_SECONDARY.some((c) => hasBrandOverride(c.key))}
               <span class="panel__expand-badge">modified</span>
             {/if}
           </summary>
@@ -280,7 +286,7 @@
             <span class="panel__expand-chev" aria-hidden="true">›</span>
             <span class="panel__expand-title">Status colors</span>
             <span class="panel__expand-count">{BRAND_STATUS.length} colors</span>
-            {#if BRAND_STATUS.some((c) => overrides[`--sf-color-${c.key}-light`] != null)}
+            {#if BRAND_STATUS.some((c) => hasBrandOverride(c.key))}
               <span class="panel__expand-badge">modified</span>
             {/if}
           </summary>

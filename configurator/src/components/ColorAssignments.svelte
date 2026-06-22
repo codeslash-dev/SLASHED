@@ -17,7 +17,9 @@
   let resolved = $state({});
 
   $effect(() => {
-    void overrides;         // reactive dep
+    // Read each override value so in-place key mutations retrigger this effect
+    // — `void overrides` alone subscribes to the binding, not its properties.
+    for (const key in overrides) void overrides[key];
     void ui.previewTheme;   // reactive dep
     queueMicrotask(() => {
       const next = {};
