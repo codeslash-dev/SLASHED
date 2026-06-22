@@ -299,6 +299,10 @@
     border: 1px solid var(--cfg-border);
     border-radius: var(--cfg-radius);
     overflow: hidden;
+    /* In the panel's flex-column scroll container, don't let the section be
+       compressed below its content — a shrunk grid would overflow and overlap
+       the Apply button and the next card (chromium hit-testing). */
+    flex-shrink: 0;
   }
 
   .gen__head {
@@ -332,6 +336,10 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    /* Keep the interactive column (Apply/Reset) above the ramp, which is
+       painted later in DOM order. */
+    position: relative;
+    z-index: 1;
   }
 
   .ctl-grid {

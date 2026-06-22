@@ -39,8 +39,8 @@ test('every destination renders console-clean at 3 widths', async ({ page }) => 
 test('every category panel leads with Settings, with All variables collapsed below', async ({ page }) => {
   await gotoClean(page);
   await sideItem(page, 'Colors').click();
-  // Inputs-first: the brand-colors card is visible before any raw catalogue.
-  await expect(page.locator('.panel__card', { hasText: 'Brand & status colors' })).toBeVisible();
+  // Inputs-first: the core brand-colors card is visible before any raw catalogue.
+  await expect(page.locator('.panel__card', { hasText: 'Core brand colors' })).toBeVisible();
   // The full catalogue lives in a collapsed disclosure.
   const allvars = page.locator('details.allvars');
   await expect(allvars).toHaveCount(1);
