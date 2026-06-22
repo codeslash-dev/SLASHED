@@ -48,7 +48,10 @@ test('the Layout preview renders distinct, proportional container widths', async
     els.map((el) => el.getBoundingClientRect().width)
   );
   expect(widths.length).toBe(4);
-  expect(new Set(widths.map((w) => Math.round(w))).size, 'widths are not all identical').toBeGreaterThan(1);
+  // The four containers (narrow/prose/default/wide) are genuinely different
+  // sizes, so proportional scaling should yield distinct widths — require most
+  // of them distinct, a stronger guard than merely "not all identical".
+  expect(new Set(widths.map((w) => Math.round(w))).size, 'most widths are distinct').toBeGreaterThanOrEqual(3);
 });
 
 test('the preview reflects a live override', async ({ page }) => {
