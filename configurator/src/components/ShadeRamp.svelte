@@ -78,7 +78,7 @@
             <div
               class="sr__swatch"
               class:sr__swatch--empty={!bg}
-              style:background={bg ?? 'transparent'}
+              style:background-color={bg ?? 'transparent'}
               title="{token}: {bg ?? 'resolving…'}"
             >
               {#if !bg}

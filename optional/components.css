@@ -203,7 +203,6 @@
     cursor:     pointer;
     transition: transform var(--sf-duration-fast) var(--sf-ease-out),
                 box-shadow var(--sf-duration-fast) var(--sf-ease-out);
-    will-change: transform;
   }
   .sf-card--interactive:hover {
     transform:  translateY(-2px);
@@ -233,6 +232,12 @@
   .sf-card--horizontal {
     flex-direction: row;
     align-items:    stretch;
+  }
+  .sf-card--horizontal .sf-card__header,
+  .sf-card--horizontal .sf-card__body,
+  .sf-card--horizontal .sf-card__footer {
+    display: flex;
+    flex-direction: column;
   }
 
   /* No padding — for edge-to-edge content (images, full-bleed headers).
