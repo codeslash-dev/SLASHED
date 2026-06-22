@@ -322,7 +322,10 @@
   }
   .dp__motion-bar--ease {
     animation-name: dp-slide;
-    animation-duration: 1.1s;
+    /* A longer, equal duration makes easing curves comparable — but still
+       scaled by --sf-motion-scale so the reduced-motion toggle (which sets it
+       to 0 on the stage) freezes these bars too, like the duration bars. */
+    animation-duration: calc(1.1s * var(--sf-motion-scale, 1));
   }
   @keyframes dp-slide {
     from { transform: translateX(0); }

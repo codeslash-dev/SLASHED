@@ -39,10 +39,21 @@ test('the preview reflects a live override', async ({ page }) => {
   await card.locator('summary').click();
   const stage = card.locator('.dp__stage');
   await expect(stage).toBeVisible();
-  // The scoped stage carries the full framework cascade as inline custom
-  // properties; editing radius-m in the catalogue must flow into it.
+
+  // Baseline: the scoped stage carries the full framework cascade, so the
+  // radius knob is present at its default.
   const before = await stage.getAttribute('style');
-  expect(before).toContain('--sf-radius-m');
+  expect(before).toContain('--sf-radius-scale');
+
+  // radius-m is a read-only consumption token (calc of the scale), so drive
+  // its upstream knob — --sf-radius-scale — via the Scaling panel and assert
+  // the new value flows live into the stage's inline custom properties.
+  const knob = page.getByLabel('--sf-radius-scale numeric value');
+  await knob.fill('1.75');
+  await knob.blur();
+
+  await expect(stage).toHaveAttribute('style', /--sf-radius-scale:\s*1\.75/);
+  expect(await stage.getAttribute('style')).not.toBe(before);
 });
 
 test('the Colors panel keeps its bespoke Semantic roles card (no generic Preview)', async ({ page }) => {
