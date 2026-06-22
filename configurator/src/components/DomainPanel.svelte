@@ -33,6 +33,7 @@
   import ScaleGenerator from './ScaleGenerator.svelte';
   import QuickKnobs from './QuickKnobs.svelte';
   import StylePresetRow from './StylePresetRow.svelte';
+  import ColorAssignments from './ColorAssignments.svelte';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
   let { domain } = $props();
@@ -103,6 +104,16 @@
 
   // "Show all variables" disclosure state (only meaningful when hasSettings).
   let showAll = $state(false);
+
+  // Colors panel: progressive disclosure for secondary brand / status groups.
+  let showSecondary = $state(false);
+  let showStatus = $state(false);
+  let showColorRoles = $state(false);
+
+  // Partition brand color keys for the Colors panel accordion.
+  const BRAND_PRIMARY = BRAND_COLOR_KEYS.filter((c) => ['base', 'neutral', 'primary'].includes(c.key));
+  const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary'].includes(c.key));
+  const BRAND_STATUS = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
 
   // Modified tokens within this domain — drives the header "Reset N" button.
   const modifiedHere = $derived(
@@ -232,18 +243,63 @@
 
       <!-- Curated input surfaces: brand colors, friendly forms, or essentials. -->
       {#if domain.brandColors}
+        <!-- Core brand colors — always shown -->
         <section class="cfg-card panel__card">
           {@render cardHead(
-            'Brand & status colors',
-            BRAND_COLOR_KEYS.length,
+            'Core brand colors',
+            BRAND_PRIMARY.length,
             'Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.'
           )}
           <div class="panel__card-rows">
-            {#each BRAND_COLOR_KEYS as { key, label } (key)}
+            {#each BRAND_PRIMARY as { key, label } (key)}
               <BrandColorRow colorKey={key} {label} />
             {/each}
           </div>
         </section>
+
+        <!-- Extended brand colors (secondary / tertiary) — opt-in -->
+        <details class="panel__expand" bind:open={showSecondary}>
+          <summary class="panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__expand-title">Extended brand colors</span>
+            <span class="panel__expand-count">{BRAND_SECONDARY.length} colors</span>
+            {#if BRAND_SECONDARY.some((c) => overrides[`--sf-color-${c.key}-light`] != null)}
+              <span class="panel__expand-badge">modified</span>
+            {/if}
+          </summary>
+          <div class="panel__card-rows">
+            {#each BRAND_SECONDARY as { key, label } (key)}
+              <BrandColorRow colorKey={key} {label} />
+            {/each}
+          </div>
+        </details>
+
+        <!-- Status colors — opt-in -->
+        <details class="panel__expand" bind:open={showStatus}>
+          <summary class="panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__expand-title">Status colors</span>
+            <span class="panel__expand-count">{BRAND_STATUS.length} colors</span>
+            {#if BRAND_STATUS.some((c) => overrides[`--sf-color-${c.key}-light`] != null)}
+              <span class="panel__expand-badge">modified</span>
+            {/if}
+          </summary>
+          <div class="panel__card-rows">
+            {#each BRAND_STATUS as { key, label } (key)}
+              <BrandColorRow colorKey={key} {label} />
+            {/each}
+          </div>
+        </details>
+
+        <!-- Semantic role preview (where your brand colors surface) -->
+        <details class="cfg-card panel__card" bind:open={showColorRoles}>
+          <summary class="panel__card-head panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__card-title">Semantic roles</span>
+            <span class="panel__expand-count">How your brand colors surface</span>
+          </summary>
+          <ColorAssignments />
+        </details>
       {:else if basicGroups.length}
         {#each basicGroups as group (group.title)}
           <section class="cfg-card panel__card">
@@ -495,6 +551,60 @@
     transition: color 0.12s;
   }
   .panel__docs a:hover { color: var(--cfg-accent); text-decoration: underline; }
+
+  /* Progressive disclosure for Colors panel brand-color groups. */
+  .panel__expand {
+    border: 1px solid var(--cfg-border);
+    border-radius: var(--cfg-radius);
+    background: var(--cfg-surface);
+    overflow: clip;
+  }
+  .panel__expand-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .panel__expand-summary::-webkit-details-marker { display: none; }
+  .panel__expand-summary:hover { background: var(--cfg-surface-2); }
+  .panel__expand-chev {
+    font-size: 15px;
+    line-height: 1;
+    color: var(--cfg-text-faint);
+    transition: transform 0.14s;
+  }
+  .panel__expand[open] .panel__expand-chev,
+  details.cfg-card[open] .panel__expand-chev { transform: rotate(90deg); }
+  .panel__expand-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cfg-text);
+  }
+  .panel__expand-count {
+    font-family: var(--cfg-mono);
+    font-size: 11px;
+    color: var(--cfg-text-faint);
+  }
+  .panel__expand-badge {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cfg-accent-strong);
+    border: 1px solid var(--cfg-accent-strong);
+    border-radius: 999px;
+    padding: 1px 7px;
+    line-height: 1.6;
+  }
+  /* When the disclosure card (Semantic roles) is open, its summary gets a border. */
+  details.cfg-card[open] > .panel__card-head.panel__expand-summary {
+    border-bottom: 1px solid var(--cfg-border);
+  }
 
   /* Tighter horizontal padding on narrow phones recovers ~16px of content
      width, reducing the chance of token editors overflowing their container. */

@@ -136,7 +136,11 @@
   const applicable = $derived(computed.filter((s) => tokenByName.has(s.token)));
   const missing = $derived(computed.length - applicable.length);
 
-  let isOpen = $state(false);
+  // Base anchor step name (idx === 0) — marked with a pill in the ramp.
+  const baseStepName = $derived(steps.find((s) => s.idx === 0)?.name ?? 'm');
+
+  // Max value across all steps — used to size the proportional bars.
+  const maxVal = $derived(Math.max(...computed.map((s) => s.max), 0.001));
 
   let applied = $state(false);
   function apply() {
@@ -168,134 +172,297 @@
   }
 </script>
 
-<section class="card">
-  <button type="button" class="gen__toggle" onclick={() => (isOpen = !isOpen)} aria-expanded={isOpen}>
-    <span class="gen__caret" class:gen__caret--open={isOpen} aria-hidden="true">▶</span>
+<section class="gen">
+  <!-- ── header / kind tabs ─────────────────────────────────────────────── -->
+  <div class="gen__head">
     <span class="gen__title">Scale generator</span>
-    <span class="gen__kind">{KIND_LABELS[kind] ?? kind} ramp</span>
+    {#if kinds.length > 1}
+      <div class="seg" role="group" aria-label="Scale kind">
+        {#each kinds as k (k)}
+          <button
+            class="seg__btn"
+            class:seg__btn--on={kind === k}
+            aria-pressed={kind === k}
+            onclick={() => switchKind(k)}
+          >{KIND_LABELS[k] ?? k}</button>
+        {/each}
+      </div>
+    {/if}
     {#if applied}<span class="gen__applied">Applied ✓</span>{/if}
-  </button>
+  </div>
 
-  {#if isOpen}
+  <!-- ── two-column body: inputs left, live ramp right ─────────────────── -->
   <div class="gen__body">
-  {#if kinds.length > 1}
-    <div class="seg" role="group" aria-label="Scale kind">
-      {#each kinds as k (k)}
-        <button
-          class="seg__btn"
-          class:seg__btn--on={kind === k}
-          aria-pressed={kind === k}
-          onclick={() => switchKind(k)}
-        >{KIND_LABELS[k] ?? k}</button>
+    <!-- LEFT: knob inputs -->
+    <div class="gen__inputs">
+      <div class="ctl-grid">
+        <label class="ctl">
+          <span class="ctl__lbl">Base min</span>
+          <span class="ctl__in"><input type="number" min="0.1" step="0.01" bind:value={baseMin} /><i>rem</i></span>
+        </label>
+        <label class="ctl">
+          <span class="ctl__lbl">Base max</span>
+          <span class="ctl__in"><input type="number" min="0.1" step="0.01" bind:value={baseMax} /><i>rem</i></span>
+        </label>
+        <label class="ctl">
+          <span class="ctl__lbl">Ratio (mobile)</span>
+          <select bind:value={ratioMin} disabled={sharedRatios} title={sharedRatios ? 'Shared with the type scale — tune it on the Type tab' : undefined}>
+            {#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}
+          </select>
+        </label>
+        <label class="ctl">
+          <span class="ctl__lbl">Ratio (desktop)</span>
+          <select bind:value={ratioMax} disabled={sharedRatios} title={sharedRatios ? 'Shared with the type scale — tune it on the Type tab' : undefined}>
+            {#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}
+          </select>
+        </label>
+        <label class="ctl">
+          <span class="ctl__lbl">Viewport min</span>
+          <span class="ctl__in"><input type="number" min="1" step="0.5" bind:value={vpMin} /><i>rem</i></span>
+        </label>
+        <label class="ctl">
+          <span class="ctl__lbl">Viewport max</span>
+          <span class="ctl__in"><input type="number" min="1" step="0.5" bind:value={vpMax} /><i>rem</i></span>
+        </label>
+      </div>
+
+      {#if sharedRatios}
+        <p class="gen__hint">Display ramp reuses the type ratios — tune them on the Type tab.</p>
+      {/if}
+      {#if engineLive}
+        <p class="gen__hint">Viewport range is <strong>shared</strong> across every fluid scale.</p>
+      {/if}
+
+      <div class="gen__actions">
+        <button class="cfg-btn cfg-btn--primary" onclick={apply} disabled={!engineLive && applicable.length === 0}>
+          {#if applied}Applied ✓
+          {:else if engineLive}Apply scale
+          {:else}Apply {applicable.length} step{applicable.length === 1 ? '' : 's'}{/if}
+        </button>
+        <button class="cfg-btn cfg-btn--ghost" onclick={reset} title="Return this ramp to the framework default">Reset</button>
+        {#if viewportModified}
+          <button class="cfg-btn cfg-btn--ghost" onclick={resetViewport} title="Clear the shared viewport range override (affects every fluid scale)">Reset viewport</button>
+        {/if}
+      </div>
+      {#if engineLive}
+        <p class="gen__note">Writes engine scalars — a few numbers, never clamp() walls.</p>
+      {:else if missing > 0}
+        <p class="gen__note">{missing} step(s) not in this catalogue — skipped.</p>
+      {/if}
+    </div>
+
+    <!-- RIGHT: live step ramp -->
+    <div class="ramp" aria-label="{KIND_LABELS[kind] ?? kind} scale ramp">
+      {#each computed as s (s.token)}
+        {@const isBase = s.name === baseStepName}
+        {@const barPct = Math.round((s.max / maxVal) * 100)}
+        <div class="ramp__row" class:ramp__row--missing={!tokenByName.has(s.token)}>
+          <div class="ramp__label">
+            <code class="ramp__name">{s.name}</code>
+            {#if isBase}<span class="ramp__anchor" title="Base anchor (index 0)">base</span>{/if}
+          </div>
+
+          <div class="ramp__bars">
+            <!-- Mobile bar (min value) -->
+            <div class="ramp__bar-row">
+              <span class="ramp__device" aria-label="Mobile">📱</span>
+              <div class="ramp__track">
+                <div class="ramp__fill ramp__fill--min" style="width: {Math.round((s.min / maxVal) * 100)}%"></div>
+              </div>
+              <span class="ramp__val">{s.min.toFixed(3)}<i>rem</i></span>
+            </div>
+            <!-- Desktop bar (max value) -->
+            <div class="ramp__bar-row">
+              <span class="ramp__device" aria-label="Desktop">🖥</span>
+              <div class="ramp__track">
+                <div class="ramp__fill ramp__fill--max" style="width: {barPct}%"></div>
+              </div>
+              <span class="ramp__val">{s.max.toFixed(3)}<i>rem</i></span>
+            </div>
+          </div>
+
+          {#if kind !== 'space'}
+            <span class="ramp__sample" style="font-size: {s.clamp}" aria-hidden="true">Ag</span>
+          {/if}
+        </div>
       {/each}
     </div>
-  {/if}
-
-  <div class="controls">
-    <label class="ctl"><span>Base min</span><span class="ctl__in"><input type="number" min="0.1" step="0.01" bind:value={baseMin} /><i>rem</i></span></label>
-    <label class="ctl"><span>Base max</span><span class="ctl__in"><input type="number" min="0.1" step="0.01" bind:value={baseMax} /><i>rem</i></span></label>
-    <label class="ctl"><span>Ratio (min)</span>
-      <select bind:value={ratioMin} disabled={sharedRatios} title={sharedRatios ? 'Shared with the type scale — tune it on the Type tab' : undefined}>{#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}</select>
-    </label>
-    <label class="ctl"><span>Ratio (max)</span>
-      <select bind:value={ratioMax} disabled={sharedRatios} title={sharedRatios ? 'Shared with the type scale — tune it on the Type tab' : undefined}>{#each RATIOS as r (r.value)}<option value={r.value}>{r.label}</option>{/each}</select>
-    </label>
-    <label class="ctl"><span>Viewport min</span><span class="ctl__in"><input type="number" min="1" step="0.5" bind:value={vpMin} /><i>rem</i></span></label>
-    <label class="ctl"><span>Viewport max</span><span class="ctl__in"><input type="number" min="1" step="0.5" bind:value={vpMax} /><i>rem</i></span></label>
   </div>
-
-  {#if sharedRatios}
-    <p class="scales__hint">The display ramp reuses the type scale's ratios — only its base sizes are written here.</p>
-  {/if}
-  {#if engineLive}
-    <p class="scales__hint">Viewport range is <strong>shared by every fluid scale</strong> (type, display, space, header height) — change it once, everything follows.</p>
-  {/if}
-
-  <div class="preview">
-    {#each computed as s (s.token)}
-      <div class="preview__row" class:preview__row--missing={!tokenByName.has(s.token)}>
-        <code class="preview__token">{s.token}</code>
-        <span class="preview__sample" style="font-size: {kind === 'space' ? '1rem' : s.clamp}">
-          {#if kind === 'space'}<span class="preview__bar" style="inline-size: {s.clamp}"></span>{:else}Ag{/if}
-        </span>
-        <code class="preview__clamp">{s.clamp}</code>
-      </div>
-    {/each}
-  </div>
-
-  <div class="scales__actions">
-    <button class="cfg-btn cfg-btn--primary" onclick={apply} disabled={!engineLive && applicable.length === 0}>
-      {#if applied}Applied ✓
-      {:else if engineLive}Apply scale
-      {:else}Apply {applicable.length} step{applicable.length === 1 ? '' : 's'}{/if}
-    </button>
-    <button class="cfg-btn cfg-btn--ghost" onclick={reset} title="Return this ramp to the framework default">Reset these</button>
-    {#if viewportModified}
-      <button class="cfg-btn cfg-btn--ghost" onclick={resetViewport} title="Clear the shared viewport range override (affects every fluid scale)">Reset viewport range</button>
-    {/if}
-    {#if engineLive}
-      <span class="scales__note">Writes the live engine scalars — a few numbers in your export, never clamp() walls.</span>
-    {:else if missing > 0}
-      <span class="scales__note">{missing} step(s) not in this catalogue — skipped.</span>
-    {/if}
-  </div>
-  </div>
-  {/if}
 </section>
 
 <style>
-  .card { background: var(--cfg-surface); border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); padding: 0; }
+  .gen {
+    background: var(--cfg-surface);
+    border: 1px solid var(--cfg-border);
+    border-radius: var(--cfg-radius);
+    overflow: hidden;
+  }
 
-  .gen__toggle {
+  .gen__head {
     display: flex;
     align-items: center;
-    gap: 10px;
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: var(--cfg-text);
-    font: inherit;
-    padding: 14px 16px;
-    border-radius: var(--cfg-radius);
-    cursor: pointer;
-    text-align: left;
-    transition: background 0.12s;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--cfg-border);
+    background: var(--cfg-surface-2);
+    flex-wrap: wrap;
   }
-  .gen__toggle:hover { background: var(--cfg-surface-2); }
-  .gen__caret { font-size: 9px; color: var(--cfg-text-faint); transition: transform 0.12s ease; flex-shrink: 0; }
-  .gen__caret--open { transform: rotate(90deg); }
   .gen__title { font-size: 13px; font-weight: 600; }
-  .gen__kind { font-size: 12px; color: var(--cfg-text-muted); background: var(--cfg-surface-2); border: 1px solid var(--cfg-border-strong); border-radius: 999px; padding: 1px 9px; }
   .gen__applied { font-size: 11.5px; color: var(--cfg-ok); margin-left: auto; }
-  .gen__body { padding: 0 16px 16px; border-top: 1px solid var(--cfg-border); }
 
-  .seg { display: inline-flex; border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); overflow: hidden; margin-top: 16px; margin-bottom: 16px; }
-  .seg__btn { background: var(--cfg-surface-2); color: var(--cfg-text-muted); border: none; padding: 6px 16px; font-size: 13px; }
+  .seg { display: inline-flex; border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); overflow: hidden; }
+  .seg__btn { background: var(--cfg-surface-2); color: var(--cfg-text-muted); border: none; padding: 4px 12px; font-size: 12px; cursor: pointer; }
   .seg__btn--on { background: var(--cfg-accent-strong); color: #fff; }
 
-  .controls { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; margin-bottom: 16px; }
-  .ctl { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--cfg-text-muted); }
-  .ctl__in { display: flex; align-items: center; gap: 5px; }
-  .ctl__in i { font-style: normal; font-size: 11px; color: var(--cfg-text-faint); }
-  .ctl input { width: 84px; background: var(--cfg-bg); color: var(--cfg-text); border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); padding: 6px 8px; }
-  .ctl select { background: var(--cfg-bg); color: var(--cfg-text); border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); padding: 6px 8px; font-size: 12px; }
-
-  .preview { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; border-top: 1px solid var(--cfg-border); padding-top: 12px; }
-  .preview__row { display: grid; grid-template-columns: 16ch 1fr minmax(0, 32ch); gap: 12px; align-items: center; }
-  .preview__row--missing { opacity: 0.4; }
-  .preview__token { font-family: var(--cfg-mono); font-size: 11.5px; color: var(--cfg-text-muted); }
-  .preview__sample { color: var(--cfg-text); line-height: 1; display: flex; align-items: center; overflow: hidden; max-block-size: 3rem; }
-  .preview__bar { block-size: 12px; background: var(--cfg-accent-strong); border-radius: 3px; max-inline-size: 100%; }
-  .preview__clamp { font-family: var(--cfg-mono); font-size: 11px; color: var(--cfg-text-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-  @media (max-width: 600px) {
-    .preview__row { grid-template-columns: minmax(0, 15ch) minmax(0, 1fr); gap: 8px; }
-    .preview__sample { display: none; }
-    .preview__clamp { white-space: normal; overflow-wrap: break-word; text-overflow: clip; }
+  /* Two-column layout: inputs | ramp */
+  .gen__body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    align-items: start;
   }
 
-  .scales__actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .scales__note { font-size: 12px; color: var(--cfg-text-faint); }
-  .scales__hint { margin: 0 0 12px; font-size: 12px; line-height: 1.5; color: var(--cfg-text-muted); }
+  /* ── LEFT column: inputs ── */
+  .gen__inputs {
+    padding: 16px;
+    border-right: 1px solid var(--cfg-border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ctl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 12px;
+  }
+  .ctl { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: var(--cfg-text-muted); }
+  .ctl__lbl { font-size: 11px; }
+  .ctl__in { display: flex; align-items: center; gap: 4px; }
+  .ctl__in i { font-style: normal; font-size: 10px; color: var(--cfg-text-faint); }
+  .ctl input {
+    width: 100%;
+    min-width: 0;
+    background: var(--cfg-bg);
+    color: var(--cfg-text);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    padding: 5px 7px;
+    font-size: 12px;
+  }
+  .ctl select {
+    width: 100%;
+    background: var(--cfg-bg);
+    color: var(--cfg-text);
+    border: 1px solid var(--cfg-border-strong);
+    border-radius: var(--cfg-radius-s);
+    padding: 5px 7px;
+    font-size: 11.5px;
+  }
   .ctl select:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .gen__hint { margin: 0; font-size: 11.5px; line-height: 1.4; color: var(--cfg-text-muted); }
+  .gen__note { margin: 0; font-size: 11px; color: var(--cfg-text-faint); }
+
+  .gen__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* ── RIGHT column: ramp ── */
+  .ramp {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .ramp__row {
+    display: grid;
+    grid-template-columns: 6ch 1fr auto;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: var(--cfg-radius-s);
+    transition: background 0.08s;
+  }
+  .ramp__row:hover { background: var(--cfg-surface-2); }
+  .ramp__row--missing { opacity: 0.35; }
+
+  .ramp__label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .ramp__name { font-family: var(--cfg-mono); font-size: 11.5px; color: var(--cfg-text-muted); }
+  .ramp__anchor {
+    font-size: 9.5px;
+    background: var(--cfg-accent-strong);
+    color: #fff;
+    border-radius: 999px;
+    padding: 1px 6px;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  .ramp__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .ramp__bar-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .ramp__device { font-size: 10px; flex-shrink: 0; line-height: 1; }
+  .ramp__track {
+    flex: 1;
+    height: 6px;
+    background: var(--cfg-bg);
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .ramp__fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.18s ease;
+    min-width: 2px;
+  }
+  .ramp__fill--min { background: var(--cfg-accent); opacity: 0.55; }
+  .ramp__fill--max { background: var(--cfg-accent-strong); }
+
+  .ramp__val {
+    font-family: var(--cfg-mono);
+    font-size: 10.5px;
+    color: var(--cfg-text-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 5ch;
+    text-align: right;
+  }
+  .ramp__val i { font-style: normal; font-size: 9.5px; margin-left: 1px; }
+
+  .ramp__sample {
+    color: var(--cfg-text);
+    line-height: 1;
+    overflow: hidden;
+    max-block-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+    width: 3ch;
+    justify-content: center;
+  }
+
+  /* Narrow: stack inputs above ramp */
+  @media (max-width: 780px) {
+    .gen__body { grid-template-columns: 1fr; }
+    .gen__inputs { border-right: none; border-bottom: 1px solid var(--cfg-border); }
+    .ramp__sample { display: none; }
+  }
+  @media (max-width: 480px) {
+    .ctl-grid { grid-template-columns: 1fr; }
+  }
 </style>
