@@ -11,7 +11,7 @@
 |---|---|---|
 | **Środowisko** | Framework agnostyczny — czyste CSS, działa wszędzie | Wtyczka WordPress (Bricks Builder + Gutenberg) |
 | **Instalacja** | `npm install` / CDN / skopiuj plik CSS | Wtyczka WP + GUI dashboard w wp-admin |
-| **Konfiguracja** | Edycja CSS / tokenów / zmiennych bezpośrednio w kodzie | Wizualny panel w dashboardzie WordPress |
+| **Konfiguracja** | Webowy konfigurator (GUI Svelte app) **lub** edycja CSS bezpośrednio — konfigurator eksportuje `@layer :root {}` z overridami do wklejenia | Wizualny panel w dashboardzie WordPress (wbudowany, działa bez osobnego narzędzia) |
 | **Wersja backward-compat** | Tak (semantyczne aliasy + migracja) | NIE — v4 nie jest kompatybilna z v3 |
 | **Podejście do architektura** | Token-first → klasy wtórne do tokenów | Variable-first + BEM-first (klasy i zmienne równorzędne) |
 | **Builder support** | Dowolny HTML/CSS | Tylko Bricks + Gutenberg (usunięto Oxygen, Breakdance, etc.) |
@@ -216,6 +216,10 @@
 
 ### SLASHED — co konfigurujesz
 
+Przez **konfigurator** (webowy GUI): picker OKLCH dla kolorów, slidery skali typografii i spacingu, podgląd na żywo, eksport gotowego bloku CSS.
+
+Przez **bezpośrednią edycję CSS** (po eksporcie lub bez konfiguratora):
+
 ```css
 /* Kolory źródłowe — kanały OKLCH */
 --sf-color-primary-l: 0.55;
@@ -311,7 +315,7 @@ background: color-mix(in oklch, var(--primary), transparent 30%);
 | Kryterium | SLASHED | ACSS v4 |
 |---|---|---|
 | **Dla kogo** | Każdy projekt CSS — agnostyczny | WordPress (Bricks + Gutenberg) |
-| **Konfiguracja** | Edycja CSS / tokenów w kodzie | GUI dashboard w WP |
+| **Konfiguracja** | Webowy konfigurator (GUI) + eksport CSS **lub** edycja bezpośrednia | GUI dashboard w WP (wbudowany w wtyczkę) |
 | **Prefiks zmiennych** | `--sf-` (namespace) | Brak prefiksu (ryzyko kolizji) |
 | **Skala kolorów** | 11-stopniowa numeryczna | 7-stopniowa opisowa |
 | **Przestrzeń kolorów** | OKLCH | OKLCH |
