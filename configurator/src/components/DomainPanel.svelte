@@ -112,7 +112,7 @@
 
   // Partition brand color keys for the Colors panel accordion.
   const BRAND_PRIMARY = BRAND_COLOR_KEYS.filter((c) => ['base', 'neutral', 'primary'].includes(c.key));
-  const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary'].includes(c.key));
+  const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary', 'action'].includes(c.key));
   const BRAND_STATUS = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
 
   // A brand color is "modified" if EITHER its light or dark variant is pinned

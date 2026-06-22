@@ -21,7 +21,7 @@ export const BRAND_COLOR_KEYS = [
   { key: 'primary',   label: 'Primary',   group: 'brand' },
   { key: 'secondary', label: 'Secondary', group: 'brand' },
   { key: 'tertiary',  label: 'Tertiary',  group: 'brand' },
-  { key: 'action',    label: 'Action',    group: 'status' },
+  { key: 'action',    label: 'Action',    group: 'brand' },
   { key: 'success',   label: 'Success',   group: 'status' },
   { key: 'warning',   label: 'Warning',   group: 'status' },
   { key: 'error',     label: 'Error',     group: 'status' },
