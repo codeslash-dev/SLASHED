@@ -34,6 +34,8 @@
   import QuickKnobs from './QuickKnobs.svelte';
   import StylePresetRow from './StylePresetRow.svelte';
   import ColorAssignments from './ColorAssignments.svelte';
+  import DomainPreview from './DomainPreview.svelte';
+  import { DOMAIN_PREVIEWS } from '../lib/domainPreviews.js';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
   let { domain } = $props();
@@ -109,6 +111,12 @@
   let showSecondary = $state(false);
   let showStatus = $state(false);
   let showColorRoles = $state(false);
+
+  // Other token domains: an inline live preview accordion (the generalisation
+  // of the Colors "Semantic roles" section). Present only for domains with a
+  // curated spec in lib/domainPreviews.js.
+  let showPreview = $state(false);
+  const previewSpec = $derived(DOMAIN_PREVIEWS[domain.id]);
 
   // Partition brand color keys for the Colors panel accordion.
   const BRAND_PRIMARY = BRAND_COLOR_KEYS.filter((c) => ['base', 'neutral', 'primary'].includes(c.key));
@@ -336,6 +344,19 @@
       <!-- Scaling: global multipliers that cascade through many tokens. -->
       {#if knobs.length}
         <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+      {/if}
+
+      <!-- Inline live preview — this domain's tokens, rendered against your
+           overrides (the generalisation of the Colors "Semantic roles" card). -->
+      {#if previewSpec}
+        <details class="cfg-card panel__card" bind:open={showPreview}>
+          <summary class="panel__card-head panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__card-title">Preview</span>
+            <span class="panel__expand-count">{previewSpec.blurb}</span>
+          </summary>
+          <DomainPreview domain={domain.id} />
+        </details>
       {/if}
 
       <!-- ── ALL VARIABLES (progressive disclosure) ──────────────────────── -->
