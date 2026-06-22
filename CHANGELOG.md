@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.8] - 2026-06-22
+
+### Bug Fixes
+- **ci:** stamp publish-dist provenance with checked-out SHA, not trigger SHA
+- **ci:** eliminate race condition between version-sync push and deploy dispatch
+- move Action color from status to brand section in Colors panel
+
 ## [0.6.7] - 2026-06-22
 
 ### Features
