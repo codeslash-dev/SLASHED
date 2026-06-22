@@ -139,8 +139,11 @@
   // Base anchor step name (idx === 0) — marked with a pill in the ramp.
   const baseStepName = $derived(steps.find((s) => s.idx === 0)?.name ?? 'm');
 
-  // Max value across all steps — used to size the proportional bars.
-  const maxVal = $derived(Math.max(...computed.map((s) => s.max), 0.001));
+  // Max value across all steps (both endpoints) — used to size the proportional
+  // bars. Considering min AND max keeps the mobile bar within the track even
+  // for inverted knob combos (baseMin > baseMax) where a step's mobile value
+  // exceeds every desktop value.
+  const maxVal = $derived(Math.max(...computed.map((s) => Math.max(s.min, s.max)), 0.001));
 
   let applied = $state(false);
   function apply() {
