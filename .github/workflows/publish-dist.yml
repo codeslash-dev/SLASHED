@@ -15,6 +15,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      git_ref:
+        description: 'Exact git SHA or ref to build from (leave blank to use HEAD of the triggered ref)'
+        required: false
+        default: ''
 
 # Skip only commits that explicitly opt out via [skip ci] in the message.
 # The version-sync commit pushed by release.yml deliberately does NOT carry
@@ -44,6 +49,16 @@ jobs:
           # (npm install, npm run build) shouldn't have implicit push
           # credentials. We re-authenticate explicitly at push time below.
           persist-credentials: false
+          # When dispatched from release.yml, git_ref is the exact post-sync SHA
+          # so the dist bundles are always stamped with the released version.
+          ref: ${{ inputs.git_ref || github.sha }}
+
+      # Resolve the SHA that was actually checked out. When dispatched with a
+      # custom git_ref, GITHUB_SHA still points at the dispatch trigger commit,
+      # not the built tree — use this for provenance stamping instead.
+      - name: Resolve checked-out source SHA
+        id: source
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       # No dependency cache on the publish path: a poisoned cache could be
       # baked into the dist bundles served from the CDN. Fetch fresh from the
@@ -71,7 +86,7 @@ jobs:
           # Stamp file so consumers can verify exactly which source commit
           # produced this dist tree.
           {
-            echo "source-commit: ${GITHUB_SHA}"
+            echo "source-commit: ${{ steps.source.outputs.sha }}"
             echo "source-ref:    ${GITHUB_REF}"
             echo "built-at:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "built-by:      .github/workflows/publish-dist.yml"
@@ -100,7 +115,7 @@ jobs:
           shopt -s dotglob
           cp -R /tmp/sf-dist/. .
           git add -A
-          git commit -m "build: dist for ${GITHUB_SHA}"
+          git commit -m "build: dist for ${{ steps.source.outputs.sha }}"
           git push --force \
             "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
             dist

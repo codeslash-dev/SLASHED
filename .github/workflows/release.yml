@@ -200,6 +200,10 @@ jobs:
               HEAD:main
             echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
+          # Capture the exact SHA now (post-push) so downstream dispatches use
+          # the version-bumped commit, not a racy resolution of "main" via the
+          # GitHub API (which may still see the pre-push HEAD for a few seconds).
+          echo "deploy_ref=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Trigger downstream deploys
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -210,16 +214,21 @@ jobs:
           # must still run so the configurator reflects the new version.
           # GITHUB_TOKEN CAN trigger workflow_dispatch (actions:write granted above).
           # Each call is independent so one failure does not prevent the other.
+          # Use the exact post-sync SHA (not --ref main) so the deploy workflows
+          # always build from the version-bumped commit. The GitHub API can lag
+          # a few seconds behind a just-completed push, causing a racy --ref main
+          # dispatch to resolve to the pre-bump HEAD and bake the wrong version.
+          DEPLOY_REF="${{ steps.commit_push.outputs.deploy_ref }}"
           fail=0
-          if gh workflow run deploy-configurator.yml --ref main; then
-            echo "Dispatched deploy-configurator.yml"
+          if gh workflow run deploy-configurator.yml --ref main -F git_ref="$DEPLOY_REF"; then
+            echo "Dispatched deploy-configurator.yml at $DEPLOY_REF"
           else
             echo "::error::Failed to dispatch deploy-configurator.yml"
             fail=1
           fi
 
-          if gh workflow run publish-dist.yml --ref main; then
-            echo "Dispatched publish-dist.yml"
+          if gh workflow run publish-dist.yml --ref main -F git_ref="$DEPLOY_REF"; then
+            echo "Dispatched publish-dist.yml at $DEPLOY_REF"
           else
             echo "::error::Failed to dispatch publish-dist.yml"
             fail=1
