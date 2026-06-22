@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.7] - 2026-06-22
+
+### Features
+- **configurator:** dx slice 1 — scale generator, color roles, accordion brand colors
+
+### Bug Fixes
+- **configurator:** keep always-open generator from overlapping; update shell title
+- **configurator:** normalize ramp bars on both endpoints; pin color-role tokens
+- **configurator:** track override keys in role effect; badge dark-only overrides
+
 ## [0.6.6] - 2026-06-21
 
 ### Features
