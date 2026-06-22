@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 693
+    "nextId": 705
   },
   "tokens": [
     {
@@ -2775,6 +2775,54 @@
     {
       "id": 692,
       "name": "--sf-z-tooltip"
+    },
+    {
+      "id": 693,
+      "name": "--sf-button-border-width"
+    },
+    {
+      "id": 694,
+      "name": "--sf-button-font-weight"
+    },
+    {
+      "id": 695,
+      "name": "--sf-button-gap"
+    },
+    {
+      "id": 696,
+      "name": "--sf-button-min-height"
+    },
+    {
+      "id": 697,
+      "name": "--sf-card-bg"
+    },
+    {
+      "id": 698,
+      "name": "--sf-card-border-color"
+    },
+    {
+      "id": 699,
+      "name": "--sf-card-border-width"
+    },
+    {
+      "id": 700,
+      "name": "--sf-card-gap"
+    },
+    {
+      "id": 701,
+      "name": "--sf-card-padding"
+    },
+    {
+      "id": 702,
+      "name": "--sf-card-radius"
+    },
+    {
+      "id": 703,
+      "name": "--sf-card-radius-outer"
+    },
+    {
+      "id": 704,
+      "name": "--sf-card-shadow"
     }
   ]
 }

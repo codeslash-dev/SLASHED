@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**729 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**741 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 Tokens defined in multiple files (e.g. shade aliases overridden in
 `optional/tokens.palette.css`) are listed once per section — so this count is
 higher than `docs/registry.json` (which deduplicates by name). See
@@ -765,13 +765,25 @@ rebrand workflow.
 
 ## Component tokens (`optional/tokens.components.css`)
 
-6 tokens.
+18 tokens.
 
 | Token | Default |
 |---|---|
+| `--sf-button-border-width` | `var(--sf-border-width-1)` |
+| `--sf-button-font-weight` | `var(--sf-font-weight-interactive)` |
+| `--sf-button-gap` | `var(--sf-space-2xs)` |
+| `--sf-button-min-height` | `var(--sf-touch-target)` |
 | `--sf-button-padding-block` | `var(--sf-space-xs)` |
 | `--sf-button-padding-inline` | `var(--sf-space-m)` |
 | `--sf-button-radius` | `var(--sf-radius-m)` |
+| `--sf-card-bg` | `var(--sf-color-surface)` |
+| `--sf-card-border-color` | `var(--sf-color-border)` |
+| `--sf-card-border-width` | `var(--sf-border-width-1)` |
+| `--sf-card-gap` | `var(--sf-space-m)` |
+| `--sf-card-padding` | `var(--sf-space-l)` |
+| `--sf-card-radius` | `var(--sf-radius-m)` |
+| `--sf-card-radius-outer` | `calc(var(--sf-card-radius) + var(--sf-card-padding))` |
+| `--sf-card-shadow` | `var(--sf-shadow-s)` |
 | `--sf-field-padding-block` | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | `var(--sf-space-s)` |
 | `--sf-field-radius` | `var(--sf-radius-m)` |

@@ -10,23 +10,35 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**925 elements** — 693 tokens, 232 classes.
+**962 elements** — 705 tokens, 257 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 869 | Everyday surface. SemVer-stable. |
+| PUBLIC | 906 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (693)
+## Tokens (705)
 
-### Component tokens (6)
+### Component tokens (18)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
+| `--sf-button-border-width` | PUBLIC | consumption | button | `var(--sf-border-width-1)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-button-font-weight` | PUBLIC | consumption | button | `var(--sf-font-weight-interactive)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-button-gap` | PUBLIC | consumption | button | `var(--sf-space-2xs)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-button-min-height` | PUBLIC | consumption | button | `var(--sf-touch-target)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
 | `--sf-button-padding-block` | PUBLIC | consumption | button | `var(--sf-space-xs)` | Vertical (block) inner padding for buttons. |
 | `--sf-button-padding-inline` | PUBLIC | consumption | button | `var(--sf-space-m)` | Horizontal (inline) inner padding for buttons. |
 | `--sf-button-radius` | PUBLIC | consumption | button | `var(--sf-radius-m)` | Border radius for buttons. Defaults to --sf-radius-m; override to fully pill-round or square all buttons at once. |
+| `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-border-width` | PUBLIC | consumption | card | `var(--sf-border-width-1)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-gap` | PUBLIC | consumption | card | `var(--sf-space-m)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-padding` | PUBLIC | consumption | card | `var(--sf-space-l)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-radius` | PUBLIC | consumption | card | `var(--sf-radius-m)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-radius-outer` | PUBLIC | consumption | card | `calc(var(--sf-card-radius) + var(--sf-card-padding))` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
+| `--sf-card-shadow` | PUBLIC | consumption | card | `var(--sf-shadow-s)` | Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card. |
 | `--sf-field-padding-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Vertical (block) inner padding for form field inputs. |
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
@@ -738,7 +750,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-palette-mix-900` | PUBLIC-ADVANCED | knob | palette | `18%` | Color-mix percentage for palette step 900 (very dark shade). Controls blend depth toward text. Default 18%. |
 | `--sf-palette-mix-950` | PUBLIC-ADVANCED | knob | palette | `8%` | Color-mix percentage for the darkest palette step (950). Controls how far step 950 blends toward the text color. Default 8%. |
 
-## Classes (232)
+## Classes (257)
 
 ### Accessibility (8)
 
@@ -753,7 +765,35 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
-### Layout primitives (126)
+### Components (23)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-button` | PUBLIC | component | .sf-button | primary action component Works on <button>, <a>, <input type="submit">, <label>. Focus rings are inherited from core/base.css. Transitions are inherited from core/motion.css (interactive elements). Disabled visual is provided by .is-disabled (states.css) or :disabled. Loading… |
+| `.sf-button--danger` | PUBLIC | component | .sf-button | ── Colour variants ─── |
+| `.sf-button--full` | PUBLIC | component | .sf-button | ── Full-width ─── |
+| `.sf-button--ghost` | PUBLIC | component | .sf-button | ── Colour variants ─── |
+| `.sf-button--icon` | PUBLIC | component | .sf-button | Icon-only: square aspect. Keep padding-block so touch target stays ≥ var(--sf-touch-target). |
+| `.sf-button--l` | PUBLIC | component | .sf-button | ── Size variants ─── |
+| `.sf-button--neutral` | PUBLIC | component | .sf-button | ── Colour variants ─── |
+| `.sf-button--pill` | PUBLIC | component | .sf-button | Icon-only: square aspect. Keep padding-block so touch target stays ≥ var(--sf-touch-target). |
+| `.sf-button--primary` | PUBLIC | component | .sf-button | ── Colour variants ─── |
+| `.sf-button--s` | PUBLIC | component | .sf-button | ── Size variants ─── |
+| `.sf-button--secondary` | PUBLIC | component | .sf-button | ── Colour variants ─── |
+| `.sf-card` | PUBLIC | component | .sf-card | content container with concentric radius Concentric radius: --sf-card-radius-outer = radius + padding, so inner elements using the global --sf-radius-m stay visually proportional. Sections (__header, __body, __footer) are transparent layout wrappers (display: contents). The… |
+| `.sf-card__body` | PUBLIC | component | .sf-card | Semantic section wrappers — transparent to layout by default. Children flow directly into the card's flex column. |
+| `.sf-card__footer` | PUBLIC | component | .sf-card | Semantic section wrappers — transparent to layout by default. Children flow directly into the card's flex column. |
+| `.sf-card__header` | PUBLIC | component | .sf-card | Semantic section wrappers — transparent to layout by default. Children flow directly into the card's flex column. |
+| `.sf-card--bordered` | PUBLIC | component | .sf-card | ── Style variants ─── |
+| `.sf-card--divided` | PUBLIC | component | .sf-card | ── Divided variant ─── Adds visible top/bottom separators on header/footer. Restores sections to block elements so they can carry their own padding and borders. |
+| `.sf-card--elevated` | PUBLIC | component | .sf-card | ── Style variants ─── |
+| `.sf-card--flat` | PUBLIC | component | .sf-card | Flat — no shadow, no border. Relies on background for separation. |
+| `.sf-card--glow` | PUBLIC | component | .sf-card | Glow — a coloured ambient shadow using the primary brand colour. |
+| `.sf-card--horizontal` | PUBLIC | component | .sf-card | Horizontal (media-object style): image left, content right. |
+| `.sf-card--interactive` | PUBLIC | component | .sf-card | Interactive / hover-lift — applies transition; hover lifts the card. Reduced motion: motion.css gates animation on prefers-reduced-motion; the translate still fires but accessibility.css zeroes animation-duration on *, so the card snaps rather than animates. |
+| `.sf-card--no-pad` | PUBLIC | component | .sf-card | No padding — for edge-to-edge content (images, full-bleed headers). The consumer must pad child __body / __header / __footer elements directly using the --sf-card-padding token or inline style. |
+
+### Layout primitives (128)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -855,11 +895,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-imposter--fixed` | PUBLIC | layout | Imposter | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
 | `.sf-pancake` | PUBLIC | layout | Pancake (sticky footer) | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
 | `.sf-reel` | PUBLIC | layout | Reel | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
+| `.sf-scroll-target` | PUBLIC | layout | Collapse modifier | Scroll margin target — anchor elements (#id links) stay visible when a sticky header is present. Browsers scroll the element to the viewport top; this pushes the effective snap point down by the header height. Use on any element with an id= that serves as a scroll destination:… |
 | `.sf-section` | PUBLIC | layout | Section | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
 | `.sf-section--2xl` | PUBLIC | layout | Section | Section variant with 2xl vertical padding. |
 | `.sf-section--collapse` | PUBLIC | layout | Collapse modifier | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
 | `.sf-section--l` | PUBLIC | layout | Section | Section variant with large (l) vertical padding. |
 | `.sf-section--m` | PUBLIC | layout | Section | Section variant with medium (m) vertical padding. |
+| `.sf-section--offset-header` | PUBLIC | layout | Collapse modifier | Offset-header modifier — extends padding-block-start by --sf-sticky-offset so the section's top content clears a sticky/fixed header on first load and after hash navigation. Pairs with .sf-scroll-target below. Override the offset per-section: style="--sf-sticky-offset: 4rem" |
 | `.sf-section--s` | PUBLIC | layout | Section | Section variant with small (s) vertical padding. |
 | `.sf-section--xl` | PUBLIC | layout | Section | Section variant with xl vertical padding. |
 | `.sf-section--xs` | PUBLIC | layout | Section | Section variant with xs vertical padding. |

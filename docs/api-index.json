@@ -29,30 +29,31 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 925,
+      "total": 962,
       "by_type": {
-        "class": 232,
-        "token": 693
+        "class": 257,
+        "token": 705
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 869,
+        "PUBLIC": 906,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 471,
+        "consumption": 483,
         "knob": 222
       },
-      "tokens": 693,
-      "classes": 232,
-      "sf_classes": 183,
+      "tokens": 705,
+      "classes": 257,
+      "sf_classes": 208,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
-        "Component tokens": 6,
+        "Component tokens": 18,
+        "Components": 23,
         "Core tokens": 509,
-        "Layout primitives": 126,
+        "Layout primitives": 128,
         "Layout tokens": 49,
         "Macro classes": 37,
         "Macro tokens": 23,
@@ -1543,6 +1544,110 @@
       ]
     },
     {
+      "name": "--sf-button-border-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-font-weight",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-font-weight-interactive)",
+      "aliasOf": "--sf-font-weight-interactive",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-gap",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-space-2xs)",
+      "aliasOf": "--sf-space-2xs",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-min-height",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.",
+      "value": "var(--sf-touch-target)",
+      "aliasOf": "--sf-touch-target",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
       "name": "--sf-button-padding-block",
       "type": "token",
       "tier": "PUBLIC",
@@ -1606,6 +1711,214 @@
       "description": "Border radius for buttons. Defaults to --sf-radius-m; override to fully pill-round or square all buttons at once.",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-bg",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-color-surface)",
+      "aliasOf": "--sf-color-surface",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-border-color",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-border-width",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-gap",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-padding",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-space-l)",
+      "aliasOf": "--sf-space-l",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-radius",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-radius-m)",
+      "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-radius-outer",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "calc(var(--sf-card-radius) + var(--sf-card-padding))",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-shadow",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "value": "var(--sf-shadow-s)",
+      "aliasOf": "--sf-shadow-s",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -21637,6 +21950,535 @@
       ]
     },
     {
+      "name": "sf-button",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "primary action component Works on <button>, <a>, <input type=\"submit\">, <label>. Focus rings are inherited from core/base.css. Transitions are inherited from core/motion.css (interactive elements). Disabled visual is provided by .is-disabled (states.css) or :disabled. Loading…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--danger",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--danger",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Colour variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--full",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--full",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Full-width ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--ghost",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--ghost",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Colour variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--icon",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--icon",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "Icon-only: square aspect. Keep padding-block so touch target stays ≥ var(--sf-touch-target).",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--l",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Size variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--neutral",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--neutral",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Colour variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--pill",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--pill",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "Icon-only: square aspect. Keep padding-block so touch target stays ≥ var(--sf-touch-target).",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--primary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--primary",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Colour variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--s",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Size variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-button--secondary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-button--secondary",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-button",
+      "description": "── Colour variants ───",
+      "isVariant": true,
+      "baseClass": "sf-button",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "content container with concentric radius Concentric radius: --sf-card-radius-outer = radius + padding, so inner elements using the global --sf-radius-m stay visually proportional. Sections (__header, __body, __footer) are transparent layout wrappers (display: contents). The…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card__body",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card__body",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Semantic section wrappers — transparent to layout by default. Children flow directly into the card's flex column.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card__footer",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card__footer",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Semantic section wrappers — transparent to layout by default. Children flow directly into the card's flex column.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card__header",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card__header",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Semantic section wrappers — transparent to layout by default. Children flow directly into the card's flex column.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--bordered",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--bordered",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "── Style variants ───",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--divided",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--divided",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "── Divided variant ─── Adds visible top/bottom separators on header/footer. Restores sections to block elements so they can carry their own padding and borders.",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--elevated",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--elevated",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "── Style variants ───",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--flat",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--flat",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Flat — no shadow, no border. Relies on background for separation.",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--glow",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--glow",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Glow — a coloured ambient shadow using the primary brand colour.",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--horizontal",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--horizontal",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Horizontal (media-object style): image left, content right.",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--interactive",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--interactive",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "Interactive / hover-lift — applies transition; hover lifts the card. Reduced motion: motion.css gates animation on prefers-reduced-motion; the translate still fires but accessibility.css zeroes animation-duration on *, so the card snaps rather than animates.",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-card--no-pad",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-card--no-pad",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-card",
+      "description": "No padding — for edge-to-edge content (images, full-bleed headers). The consumer must pad child __body / __header / __footer elements directly using the --sf-card-padding token or inline style.",
+      "isVariant": true,
+      "baseClass": "sf-card",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
       "name": "sf-center",
       "type": "class",
       "tier": "PUBLIC",
@@ -24758,6 +25600,32 @@
       ]
     },
     {
+      "name": "sf-scroll-target",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-scroll-target",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Collapse modifier",
+      "description": "Scroll margin target — anchor elements (#id links) stay visible when a sticky header is present. Browsers scroll the element to the viewport top; this pushes the effective snap point down by the header height. Use on any element with an id= that serves as a scroll destination:…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-section",
       "type": "class",
       "tier": "PUBLIC",
@@ -24872,6 +25740,32 @@
       "area": "layout",
       "group": "Section",
       "description": "Section variant with medium (m) vertical padding.",
+      "isVariant": true,
+      "baseClass": "sf-section",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-section--offset-header",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-section--offset-header",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Collapse modifier",
+      "description": "Offset-header modifier — extends padding-block-start by --sf-sticky-offset so the section's top content clears a sticky/fixed header on first load and after hash navigation. Pairs with .sf-scroll-target below. Override the offset per-section: style=\"--sf-sticky-offset: 4rem\"",
       "isVariant": true,
       "baseClass": "sf-section",
       "optional": false,

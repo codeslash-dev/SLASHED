@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**183 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**208 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-126 classes.
+128 classes.
 
 | Class |
 |---|
@@ -110,11 +110,13 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-imposter--fixed` |
 | `.sf-pancake` |
 | `.sf-reel` |
+| `.sf-scroll-target` |
 | `.sf-section` |
 | `.sf-section--2xl` |
 | `.sf-section--collapse` |
 | `.sf-section--l` |
 | `.sf-section--m` |
+| `.sf-section--offset-header` |
 | `.sf-section--s` |
 | `.sf-section--xl` |
 | `.sf-section--xs` |
@@ -280,4 +282,34 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | Class |
 |---|
 | `.sf-theme-transition` |
+
+## Components (`optional/components.css`)
+
+23 classes.
+
+| Class |
+|---|
+| `.sf-button` |
+| `.sf-button--danger` |
+| `.sf-button--full` |
+| `.sf-button--ghost` |
+| `.sf-button--icon` |
+| `.sf-button--l` |
+| `.sf-button--neutral` |
+| `.sf-button--pill` |
+| `.sf-button--primary` |
+| `.sf-button--s` |
+| `.sf-button--secondary` |
+| `.sf-card` |
+| `.sf-card--bordered` |
+| `.sf-card--divided` |
+| `.sf-card--elevated` |
+| `.sf-card--flat` |
+| `.sf-card--glow` |
+| `.sf-card--horizontal` |
+| `.sf-card--interactive` |
+| `.sf-card--no-pad` |
+| `.sf-card__body` |
+| `.sf-card__footer` |
+| `.sf-card__header` |
 

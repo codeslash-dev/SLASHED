@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "d247f2bc7e25",
+    "tokensHash": "95f5918f0b94",
     "bundles": [
       "essential",
       "full",
@@ -11,9 +11,9 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 693,
+      "tokens": 705,
       "byTier": {
-        "PUBLIC": 637,
+        "PUBLIC": 649,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
@@ -21,7 +21,7 @@
         "Layout tokens": 49,
         "Core tokens": 509,
         "Macro tokens": 23,
-        "Component tokens": 6,
+        "Component tokens": 18,
         "Palette tokens": 106
       }
     }
@@ -1228,6 +1228,90 @@
       ]
     },
     {
+      "name": "--sf-button-border-width",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-font-weight",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "var(--sf-font-weight-interactive)",
+      "aliasOf": "--sf-font-weight-interactive",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "var(--sf-space-2xs)",
+      "aliasOf": "--sf-space-2xs",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-button-min-height",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "button",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "var(--sf-touch-target)",
+      "aliasOf": "--sf-touch-target",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
       "name": "--sf-button-padding-block",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1280,6 +1364,174 @@
       "note": "Border radius for buttons. Defaults to --sf-radius-m; override to fully pill-round or square all buttons at once.",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-bg",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-color-surface)",
+      "aliasOf": "--sf-color-surface",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-border-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-border-width",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-padding",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-space-l)",
+      "aliasOf": "--sf-space-l",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-radius",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-radius-m)",
+      "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-radius-outer",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "calc(var(--sf-card-radius) + var(--sf-card-padding))",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-shadow",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Concentric radius math: outer = inner + padding. Keeps inner elements that use the global --sf-radius-m visually proportional inside a padded card.",
+      "note": "",
+      "value": "var(--sf-shadow-s)",
+      "aliasOf": "--sf-shadow-s",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

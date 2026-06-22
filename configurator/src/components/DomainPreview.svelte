@@ -70,7 +70,16 @@
         {#if group.section}<p class="dp__section">{group.section}</p>{/if}
 
         <!-- ── Type specimen ──────────────────────────────────────────── -->
-        {#if spec.kind === 'type' && group.section === 'Font stacks'}
+        {#if spec.kind === 'type' && group.section === 'Specimen'}
+          <div class="dp__specimen-box">
+            <p class="dp__specimen-heading">The quick brown fox jumps over the lazy dog.</p>
+            <p class="dp__specimen-body">Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief.</p>
+            <p class="dp__specimen-meta">
+              <span class="dp__specimen-tag">Heading: <code>--sf-font-heading</code></span>
+              <span class="dp__specimen-tag">Body: <code>--sf-font-body</code></span>
+            </p>
+          </div>
+        {:else if spec.kind === 'type' && group.section === 'Font stacks'}
           <div class="dp__fonts">
             {#each group.items as it (it.token)}
               <div class="dp__font-row" style="font-family: var({it.token})">
@@ -289,6 +298,47 @@
   .dp__font-row { display: flex; flex-direction: column; gap: 1px; }
   .dp__font-label { font-size: 10px; color: var(--cfg-text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
   .dp__font-sample { font-size: 15px; }
+
+  /* Font pairing specimen */
+  .dp__specimen-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--sf-color-border, var(--cfg-border));
+    border-radius: var(--sf-radius-m, 8px);
+    background: var(--sf-color-bg, var(--cfg-bg));
+  }
+  .dp__specimen-heading {
+    margin: 0;
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h2-size, 1.75rem);
+    font-weight: var(--sf-h2-font-weight, 700);
+    line-height: var(--sf-h2-line-height, 1.2);
+    color: var(--sf-color-heading, var(--sf-color-text, var(--cfg-text)));
+  }
+  .dp__specimen-body {
+    margin: 0;
+    font-family: var(--sf-font-body);
+    font-size: var(--sf-text-m, 1rem);
+    line-height: var(--sf-leading-normal, 1.6);
+    color: var(--sf-color-text--secondary, var(--cfg-text-muted));
+  }
+  .dp__specimen-meta {
+    margin: 4px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dp__specimen-tag {
+    font-size: 10px;
+    color: var(--cfg-text-faint);
+  }
+  .dp__specimen-tag code {
+    font-family: var(--cfg-mono);
+    font-size: 9.5px;
+    color: var(--cfg-accent, var(--cfg-text-faint));
+  }
 
   /* Spacing + container bars */
   .dp__bars { display: flex; flex-direction: column; gap: 6px; }

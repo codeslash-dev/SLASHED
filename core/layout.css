@@ -43,6 +43,23 @@
     padding-block-start: calc(var(--sf-section-pad) / 2);
   }
 
+  /* Offset-header modifier — extends padding-block-start by --sf-sticky-offset
+     so the section's top content clears a sticky/fixed header on first load
+     and after hash navigation. Pairs with .sf-scroll-target below.
+     Override the offset per-section: style="--sf-sticky-offset: 4rem" */
+  .sf-section--offset-header {
+    padding-block-start: calc(var(--sf-section-pad) + var(--sf-sticky-offset, 0px));
+  }
+
+  /* Scroll margin target — anchor elements (#id links) stay visible when
+     a sticky header is present. Browsers scroll the element to the viewport
+     top; this pushes the effective snap point down by the header height.
+     Use on any element with an id= that serves as a scroll destination:
+       <section id="features" class="sf-section sf-scroll-target"> */
+  .sf-scroll-target {
+    scroll-margin-block-start: var(--sf-sticky-offset, 0px);
+  }
+
   /* -- Divider -------------------------------------------------
      Standalone separator primitive. Token-driven; pairs with the
      `--sf-divider-*` tokens and mirrors the `hr` element default.
