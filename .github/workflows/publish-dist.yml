@@ -15,6 +15,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      git_ref:
+        description: 'Exact git SHA or ref to build from (leave blank to use HEAD of the triggered ref)'
+        required: false
+        default: ''
 
 # Skip only commits that explicitly opt out via [skip ci] in the message.
 # The version-sync commit pushed by release.yml deliberately does NOT carry
@@ -44,6 +49,9 @@ jobs:
           # (npm install, npm run build) shouldn't have implicit push
           # credentials. We re-authenticate explicitly at push time below.
           persist-credentials: false
+          # When dispatched from release.yml, git_ref is the exact post-sync SHA
+          # so the dist bundles are always stamped with the released version.
+          ref: ${{ inputs.git_ref || github.sha }}
 
       # No dependency cache on the publish path: a poisoned cache could be
       # baked into the dist bundles served from the CDN. Fetch fresh from the
