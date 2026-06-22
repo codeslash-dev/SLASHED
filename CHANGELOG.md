@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.9] - 2026-06-22
+
+### Features
+- **configurator:** inline live preview for every token domain
+
+### Bug Fixes
+- **configurator:** respect reduced-motion for easing bars; assert live override in e2e
+
 ## [0.6.8] - 2026-06-22
 
 ### Bug Fixes
