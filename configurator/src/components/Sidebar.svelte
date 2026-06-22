@@ -8,12 +8,14 @@
    * sidebar is collapsed (ui.sidebarOpen = false) it shrinks to an icon-only
    * rail; on narrow viewports it always renders in icon-only mode.
    *
-   * The category icons are short Unicode glyphs/emoji to avoid pulling in an
-   * icon font — keeps the configurator a single self-contained bundle.
+   * The category icons are inline SVGs (Icon.svelte / lib/icons.js) that inherit
+   * the theme colour via currentColor — no icon font, single self-contained
+   * bundle.
    */
   import { DOMAINS, domainOf } from '../lib/domains.js';
   import { allTokens, modifiedCountsByDomain } from '../lib/model.js';
   import { ui, overrides } from '../lib/store.svelte.js';
+  import Icon from './Icon.svelte';
 
   // The flat IA always shows the full taxonomy.
   const visibleDomains = DOMAINS;
@@ -43,7 +45,7 @@
         aria-current={ui.domain === 'home' ? 'page' : undefined}
         title="Overview — project setup checklist"
       >
-        <span class="side__icon" aria-hidden="true">🏠</span>
+        <span class="side__icon"><Icon name="home" size={18} /></span>
         <span class="side__label">
           <span class="side__name">Overview</span>
         </span>
@@ -58,7 +60,7 @@
           aria-current={ui.domain === d.id ? 'page' : undefined}
           title={d.label + (d.tool ? '' : ` — ${totals[d.id]} tokens`)}
         >
-          <span class="side__icon" aria-hidden="true">{d.icon}</span>
+          <span class="side__icon"><Icon name={d.icon} /></span>
           <span class="side__label">
             <span class="side__name">{d.label}</span>
             {#if !d.tool}

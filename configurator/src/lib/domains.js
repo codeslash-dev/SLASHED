@@ -105,7 +105,7 @@ export const KNOBS_BY_DOMAIN = {
  *
  *   id            - kebab-cased identifier (used by ui.domain)
  *   label         - display label
- *   icon          - single emoji shown in the tab and section header
+ *   icon          - Icon.svelte key (lib/icons.js) shown in the tab and header
  *   blurb         - one-line summary shown above the panel
  *   intro         - 1–2 sentence orientation copy shown atop the panel
  *                   (what this domain controls and whether typical projects
@@ -140,7 +140,7 @@ export const DOMAINS = [
     id: 'colors',
     docsPath: 'docs/theming.md',
     label: 'Colors',
-    icon: '🎨',
+    icon: 'palette',
     blurb: 'Brand & status sources, semantic surfaces, links, focus and dark-mode contrast.',
     intro: 'Set the 11 brand and status source colors — shades, surfaces, links and dark mode all derive from them automatically. The highest-impact panel for any project.',
     scaleIntro: 'These thresholds retune how the framework picks light or dark text on every colored surface. Small changes ripple across the whole palette — change with care.',
@@ -168,7 +168,7 @@ export const DOMAINS = [
     id: 'gradients',
     docsPath: 'docs/theming.md',
     label: 'Gradients',
-    icon: '🌈',
+    icon: 'gradient',
     blurb: 'Brand, surface and directional gradient shorthands.',
     namespaces: ['gradient'],
     patterns: [/^--sf-gradient-/],
@@ -184,7 +184,7 @@ export const DOMAINS = [
     id: 'typography',
     docsPath: 'docs/tokens.md',
     label: 'Typography',
-    icon: '🔤',
+    icon: 'type',
     blurb: 'Font families, fluid type ramp, headings, prose and inline text behaviour.',
     intro: 'Pick your font stacks, then tune the fluid type ramp with the generator — a few inputs recalibrate every text size between your smallest and largest viewports.',
     scaleIntro: '--sf-text-scale multiplies the entire fluid text ramp at once. Prefer the generator above unless you want a uniform global resize.',
@@ -218,7 +218,7 @@ export const DOMAINS = [
     id: 'spacing',
     docsPath: 'docs/tokens.md',
     label: 'Spacing',
-    icon: '📏',
+    icon: 'ruler',
     blurb: 'Fluid spacing scale, gaps, section padding and content rhythm.',
     intro: 'Tune the fluid spacing ramp with the generator, plus the rhythm tokens most layouts read (section padding, gutters, content gaps).',
     scaleIntro: '--sf-space-scale multiplies all 45 fluid spacing tokens in one drag. Prefer the generator above unless you want a uniform global squeeze or stretch.',
@@ -239,7 +239,7 @@ export const DOMAINS = [
     id: 'layout',
     docsPath: 'docs/layout.md',
     label: 'Layout',
-    icon: '🧱',
+    icon: 'layout',
     blurb: 'Containers, grids, layout primitives, icons, ratios and z-index.',
     intro: 'Set your content widths and a few global anchors (header height, touch target). Most other layout tokens are fine at their defaults.',
     namespaces: [
@@ -285,7 +285,7 @@ export const DOMAINS = [
     id: 'borders',
     docsPath: 'docs/tokens.md',
     label: 'Borders',
-    icon: '⬜',
+    icon: 'square',
     blurb: 'Corner radius, border widths and dividers.',
     intro: 'Set the corner radius steps and the default border styling referenced across the framework.',
     scaleIntro: '--sf-radius-scale multiplies every radius step at once (set it to 0 for fully sharp corners).',
@@ -303,7 +303,7 @@ export const DOMAINS = [
     id: 'shadows',
     docsPath: 'docs/tokens.md',
     label: 'Shadows',
-    icon: '🌒',
+    icon: 'layers',
     blurb: 'Elevation shadow ramp, drop / text / scroll shadows and glow.',
     intro: 'Tune the four elevation steps used across the framework. Shadow opacity is boosted automatically in dark mode.',
     scaleIntro: '--sf-shadow-strength drives the opacity of all 14 shadow tokens, including the automatic dark-mode boost.',
@@ -322,7 +322,7 @@ export const DOMAINS = [
     id: 'motion',
     docsPath: 'docs/motion.md',
     label: 'Motion',
-    icon: '🎞️',
+    icon: 'motion',
     blurb: 'Durations, easings, transition and animation presets.',
     scaleIntro: '--sf-motion-scale multiplies every duration in the framework (set it to 0 to disable motion entirely).',
     namespaces: ['duration', 'ease', 'transition', 'animation', 'motion', 'scroll'],
@@ -345,7 +345,7 @@ export const DOMAINS = [
     id: 'effects',
     docsPath: 'docs/tokens.md',
     label: 'Effects',
-    icon: '✨',
+    icon: 'sparkles',
     blurb: 'Blur, opacity, scrim, mask and other compositing effects.',
     namespaces: ['blur', 'opacity', 'scrim', 'mask', 'state'],
     patterns: [
@@ -363,21 +363,21 @@ export const DOMAINS = [
   {
     id: 'wcag',
     label: 'WCAG',
-    icon: '🧪',
+    icon: 'contrast',
     blurb: 'Contrast checker, text-on-background matrix and accessible-palette generator.',
     tool: 'wcag',
   },
   {
     id: 'themes',
     label: 'Themes',
-    icon: '🎭',
+    icon: 'swatches',
     blurb: 'One-click preset looks plus your saved override slots.',
     tool: 'themes',
   },
   {
     id: 'setup',
     label: 'Install',
-    icon: '📦',
+    icon: 'package',
     blurb: 'Pick the dist bundle to ship and copy the drop-in <link> + your overrides.',
     tool: 'setup',
   },
@@ -385,7 +385,7 @@ export const DOMAINS = [
     id: 'misc',
     docsPath: 'docs/tokens.md',
     label: 'Misc',
-    icon: '🧩',
+    icon: 'puzzle',
     blurb: 'Print, interaction-state flags, fluid scale slots and other stragglers.',
     namespaces: ['print', 'is'],
     patterns: [
@@ -396,7 +396,7 @@ export const DOMAINS = [
   {
     id: 'cheatsheet',
     label: 'Cheatsheet',
-    icon: '📋',
+    icon: 'list',
     blurb: 'Searchable reference for every token and utility class in the framework.',
     tool: 'cheatsheet',
   },

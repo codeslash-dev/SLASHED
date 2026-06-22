@@ -6,7 +6,8 @@
  * extends that idea to every other token domain: each entry names the handful
  * of framework tokens worth showing in a compact, domain-shaped preview
  * (radius corners, elevation cards, gradient tiles, motion bars, a type
- * specimen, spacing bars, container widths, blur/opacity samples).
+ * specimen, spacing bars, proportional container widths + aspect/sizing tiles,
+ * blur/opacity/scrim samples).
  *
  * DomainPreview.svelte renders these inside a scoped stage carrying the full
  * framework cascade + the user's overrides (via buildPreviewDeclarations), so
@@ -70,15 +71,33 @@ export const DOMAIN_PREVIEWS = {
   },
 
   layout: {
-    kind: 'container',
-    blurb: 'Container max-widths, drawn to relative scale.',
+    kind: 'layout',
+    blurb: 'Container widths, aspect ratios and sizing anchors.',
     groups: [
       {
+        section: 'Container widths',
         items: [
           { token: '--sf-container-narrow', label: 'Narrow' },
           { token: '--sf-container-prose', label: 'Prose' },
           { token: '--sf-container-default', label: 'Default' },
           { token: '--sf-container-wide', label: 'Wide' },
+        ],
+      },
+      {
+        section: 'Aspect ratios',
+        items: [
+          { token: '--sf-ratio-square', label: 'square' },
+          { token: '--sf-ratio-video', label: 'video' },
+          { token: '--sf-ratio-golden', label: 'golden' },
+          { token: '--sf-ratio-portrait', label: 'portrait' },
+        ],
+      },
+      {
+        section: 'Sizing',
+        items: [
+          { token: '--sf-header-height', label: 'header' },
+          { token: '--sf-touch-target', label: 'touch' },
+          { token: '--sf-icon-m', label: 'icon m' },
         ],
       },
     ],
@@ -176,7 +195,7 @@ export const DOMAIN_PREVIEWS = {
 
   effects: {
     kind: 'effect',
-    blurb: 'Blur and opacity compositing effects.',
+    blurb: 'Blur, opacity states and the scrim gradient.',
     groups: [
       {
         section: 'Blur',
@@ -188,6 +207,10 @@ export const DOMAIN_PREVIEWS = {
           { token: '--sf-opacity-muted', label: 'muted' },
           { token: '--sf-opacity-disabled', label: 'disabled' },
         ],
+      },
+      {
+        section: 'Scrim',
+        items: [{ token: '--sf-scrim-gradient', label: 'scrim' }],
       },
     ],
   },

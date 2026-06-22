@@ -35,6 +35,18 @@ describe('DomainPreview', () => {
     });
   }
 
+  test('layout preview renders proportional container bars (not clamped)', () => {
+    const { container } = render(DomainPreview, { props: { domain: 'layout' } });
+    // The proportional track is driven by hidden width probes — their presence
+    // is what distinguishes the real measurement from the old clamp-to-100%
+    // bars that rendered every container identically.
+    const probes = container.querySelectorAll('.dp__probes .dp__probe');
+    expect(probes.length, 'one width probe per container token').toBe(4);
+    // Aspect-ratio tiles and sizing swatches round out the layout panel.
+    expect(container.querySelector('.dp__ratios'), 'aspect-ratio tiles present').toBeTruthy();
+    expect(container.querySelector('.dp__sizes'), 'sizing swatches present').toBeTruthy();
+  });
+
   test('renders nothing for a domain with no preview spec', () => {
     const { container } = render(DomainPreview, { props: { domain: 'colors' } });
     expect(container.querySelector('.dp')).toBeNull();
