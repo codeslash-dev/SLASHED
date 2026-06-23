@@ -184,11 +184,19 @@ export function smartSettingsFor(domainId) {
   return SMART_SETTINGS_BY_DOMAIN[domainId] ?? [];
 }
 
-export function smartTokensFor(domainId) {
-  return smartSettingsFor(domainId).flatMap((section) => [
+export function sectionTokenNames(section) {
+  const names = [
     ...(section.controls?.map((c) => c.token) ?? []),
     ...(section.tokens ?? []),
     ...(section.durationTokens ?? []),
     ...(section.easingTokens ?? []),
-  ]);
+  ];
+  for (const preset of section.presets ?? []) {
+    if (preset.patch) names.push(...Object.keys(preset.patch));
+  }
+  return [...new Set(names)];
+}
+
+export function smartTokensFor(domainId) {
+  return smartSettingsFor(domainId).flatMap(sectionTokenNames);
 }

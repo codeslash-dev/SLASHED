@@ -8,7 +8,7 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { SMART_SETTINGS_BY_DOMAIN, smartSettingsFor, smartTokensFor } from '../src/lib/domainSettings.js';
+import { SMART_SETTINGS_BY_DOMAIN, sectionTokenNames, smartSettingsFor, smartTokensFor } from '../src/lib/domainSettings.js';
 import { DOMAIN_BY_ID } from '../src/lib/domains.js';
 import { sanitizeValue } from '../src/lib/css.js';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
@@ -49,6 +49,22 @@ describe('smart settings are wired to real tokens', () => {
       const names = smartTokensFor(id);
       assert.equal(new Set(names).size, names.length, `${id}: duplicate token references`);
     });
+  }
+});
+
+
+describe('smart setting reset coverage', () => {
+  for (const [id, sections] of Object.entries(SMART_SETTINGS_BY_DOMAIN)) {
+    for (const section of sections) {
+      test(`${id}/${section.id}: default/reset can clear every preset-touched token`, () => {
+        const sectionNames = new Set(sectionTokenNames(section));
+        for (const preset of section.presets ?? []) {
+          for (const name of Object.keys(preset.patch ?? {})) {
+            assert.ok(sectionNames.has(name), `${id}/${section.id}: ${name} must be reset by the section`);
+          }
+        }
+      });
+    }
   }
 });
 

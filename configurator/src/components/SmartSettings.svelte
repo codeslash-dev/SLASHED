@@ -1,7 +1,7 @@
 <script>
   import { overrides, patchOverrides, setOverride, dragSetOverride, endDrag } from '../lib/store.svelte.js';
   import { tokenByName } from '../lib/model.js';
-  import { smartSettingsFor } from '../lib/domainSettings.js';
+  import { sectionTokenNames, smartSettingsFor } from '../lib/domainSettings.js';
   import TokenRow from './TokenRow.svelte';
 
   let { domainId } = $props();
@@ -11,13 +11,7 @@
   const token = (name) => tokenByName.get(name);
 
   function cleanPatch(section, patch) {
-    const names = new Set([
-      ...(section.controls?.map((c) => c.token) ?? []),
-      ...(section.tokens ?? []),
-      ...(section.durationTokens ?? []),
-      ...(section.easingTokens ?? []),
-      ...Object.keys(patch ?? {}),
-    ].filter(exists));
+    const names = new Set(sectionTokenNames(section).filter(exists));
     if (patch == null) return Object.fromEntries([...names].map((name) => [name, null]));
     return Object.fromEntries(Object.entries(patch).filter(([name]) => exists(name)));
   }
