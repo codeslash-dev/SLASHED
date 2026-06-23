@@ -23,7 +23,7 @@ const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).hr
 
 const SURFACES = [
   'primary', 'secondary', 'tertiary', 'action', 'neutral',
-  'inverse', 'success', 'warning', 'error', 'info', 'danger',
+  'inverse', 'success', 'warning', 'info', 'danger',
 ];
 
 

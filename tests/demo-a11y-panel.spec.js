@@ -14,12 +14,12 @@ test.describe('Live accessibility report', () => {
     // Each pair row has 3 direct spans: label + light wrapper + dark wrapper
     // (the header uses <strong>). 13 pairs → 39 spans.
     const spans = await page.$$eval('[data-a11y-body] > span', (els) => els.length);
-    expect(spans).toBe(13 * 3);
-    // The grade cells are nested spans stating a ratio + verdict (26 = 13 × 2).
+    expect(spans).toBe(12 * 3);
+    // The grade cells are nested spans stating a ratio + verdict (24 = 12 × 2).
     const grades = await page.$$eval('[data-a11y-body] > span > span', (els) =>
       els.map((e) => (e.textContent || '').trim())
     );
-    expect(grades.length).toBe(13 * 2);
+    expect(grades.length).toBe(12 * 2);
     expect(grades.every((c) => /\d\.\d{2}:1\s+(✓ AA( Large)?|✗ Fail)/.test(c))).toBe(true);
   });
 
@@ -35,7 +35,7 @@ test.describe('Live accessibility report', () => {
       return out;
     });
     // Body text and the auto-derived on-colours must pass AA in both modes.
-    for (const key of ['Body text / bg', 'Text on primary', 'Text on action', 'Text on error']) {
+    for (const key of ['Body text / bg', 'Text on primary', 'Text on action', 'Text on danger']) {
       expect(verdicts[key][0]).toContain('✓ AA');
       expect(verdicts[key][1]).toContain('✓ AA');
     }

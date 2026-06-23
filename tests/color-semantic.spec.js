@@ -166,7 +166,7 @@ for (const theme of ['light', 'dark']) {
     });
 
     // ── Status colours non-transparent ──────────────────────────
-    for (const status of ['success', 'warning', 'error', 'info', 'danger']) {
+    for (const status of ['success', 'warning', 'info', 'danger']) {
       test(`--sf-color-${status} resolves to an opaque colour`, async ({ page }) => {
         const alpha = await page.evaluate((tok) => {
           const cv = document.createElement('canvas'); cv.width = cv.height = 1;
