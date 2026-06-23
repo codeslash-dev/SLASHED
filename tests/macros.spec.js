@@ -211,3 +211,171 @@ test.describe('macro: .sf-scroll-shadow / .sf-overflow-fade', () => {
     expect(mask).toContain('linear-gradient');
   });
 });
+
+test.describe('macro: .sf-prose / .sf-not-prose', () => {
+  test('consecutive children get non-zero margin-block-start', async ({ page }) => {
+    await setup(page, `
+      <div class="sf-prose" id="t">
+        <p id="p1">First</p>
+        <p id="p2">Second</p>
+      </div>
+    `);
+    const margins = await page.evaluate(() => ({
+      first:  getComputedStyle(document.querySelector('#p1')).marginBlockStart,
+      second: getComputedStyle(document.querySelector('#p2')).marginBlockStart,
+    }));
+    expect(margins.first).toBe('0px');
+    expect(parseFloat(margins.second)).toBeGreaterThan(0);
+  });
+
+  test('sets overflow-wrap: break-word on the container', async ({ page }) => {
+    await setup(page, `<div class="sf-prose" id="t"></div>`);
+    const ow = await page.locator('#t').evaluate(el => getComputedStyle(el).overflowWrap);
+    expect(ow).toBe('break-word');
+  });
+
+  test('.sf-not-prose resets prose child margins inside a prose block', async ({ page }) => {
+    await setup(page, `
+      <div class="sf-prose">
+        <div class="sf-not-prose" id="np">
+          <p id="p1">One</p>
+          <p id="p2">Two</p>
+        </div>
+      </div>
+    `);
+    const margin = await page.evaluate(() =>
+      getComputedStyle(document.querySelector('#p2')).marginBlockStart
+    );
+    expect(margin).toBe('0px');
+  });
+});
+
+test.describe('macro: .sf-scrim', () => {
+  test('sets position: relative and isolation: isolate', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-scrim"></div>`);
+    const cs = await page.locator('#t').evaluate(el => ({
+      position:  getComputedStyle(el).position,
+      isolation: getComputedStyle(el).isolation,
+    }));
+    expect(cs.position).toBe('relative');
+    expect(cs.isolation).toBe('isolate');
+  });
+
+  test('::before pseudo-element has a gradient background', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-scrim" style="position:relative; width:200px; height:200px"></div>`);
+    const bg = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el, '::before').backgroundImage
+    );
+    expect(bg).toContain('linear-gradient');
+  });
+});
+
+test.describe('macro: .sf-text-protect', () => {
+  test('applies a text-shadow halo (not none)', async ({ page }) => {
+    await setup(page, `<h2 id="t" class="sf-text-protect">text</h2>`);
+    const ts = await page.locator('#t').evaluate(el => getComputedStyle(el).textShadow);
+    expect(ts).not.toBe('none');
+    expect(ts.length).toBeGreaterThan(0);
+  });
+});
+
+test.describe('macro: .sf-text-gradient', () => {
+  test('clips background to text and makes color transparent', async ({ page }) => {
+    await setup(page, `<h2 id="t" class="sf-text-gradient">Gradient</h2>`);
+    const cs = await page.locator('#t').evaluate(el => ({
+      bgClip: getComputedStyle(el).backgroundClip,
+      color:  getComputedStyle(el).color,
+    }));
+    expect(cs.bgClip).toBe('text');
+    // transparent resolves to rgba(0,0,0,0) across all engines
+    expect(cs.color).toBe('rgba(0, 0, 0, 0)');
+  });
+});
+
+test.describe('macro: .sf-link-external', () => {
+  test('::after pseudo-element has non-empty content', async ({ page }) => {
+    await setup(page, `<a id="t" class="sf-link-external" href="#">Example</a>`);
+    const content = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el, '::after').content
+    );
+    // content is a CSS string; "none" or '""' means no marker
+    expect(content).not.toBe('none');
+    expect(content).not.toBe('""');
+    expect(content.length).toBeGreaterThan(0);
+  });
+});
+
+test.describe('macro: .sf-link--subtle / .sf-link--reverse', () => {
+  test('.sf-link--subtle: no underline at rest, underline on hover', async ({ page }) => {
+    await setup(page, `<a id="t" class="sf-link--subtle" href="#">link</a>`);
+    const restLine = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).textDecorationLine
+    );
+    expect(restLine).toBe('none');
+
+    await page.locator('#t').hover();
+    const hoverLine = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).textDecorationLine
+    );
+    expect(hoverLine).toBe('underline');
+  });
+
+  test('.sf-link--reverse: underline at rest, no underline on hover', async ({ page }) => {
+    await setup(page, `<a id="t" class="sf-link--reverse" href="#">link</a>`);
+    const restLine = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).textDecorationLine
+    );
+    expect(restLine).toBe('underline');
+
+    await page.locator('#t').hover();
+    const hoverLine = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).textDecorationLine
+    );
+    expect(hoverLine).toBe('none');
+  });
+});
+
+test.describe('macro: .sf-content-auto', () => {
+  test('sets content-visibility: auto', async ({ page }) => {
+    await setup(page, `<section id="t" class="sf-content-auto">content</section>`);
+    const cv = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).contentVisibility
+    );
+    // Safari < 18 does not support content-visibility; the property may be
+    // unrecognised and return ''. Accept both so the test is engine-portable.
+    expect(['auto', '']).toContain(cv);
+  });
+});
+
+test.describe('macro: .sf-tabular-nums', () => {
+  test('sets font-variant-numeric to tabular-nums', async ({ page }) => {
+    await setup(page, `<table id="t" class="sf-tabular-nums"><tr><td>123</td></tr></table>`);
+    const fvn = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).fontVariantNumeric
+    );
+    expect(fvn).toContain('tabular-nums');
+  });
+});
+
+test.describe('macro: .sf-entrance--fade', () => {
+  test('animation-name is set when reduced motion is not preferred', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await setup(page, `<div id="t" class="sf-entrance--fade">content</div>`);
+    const name = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).animationName
+    );
+    expect(name).not.toBe('none');
+    expect(name.length).toBeGreaterThan(0);
+  });
+
+  test('animation does not apply when prefers-reduced-motion: reduce', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await setup(page, `<div id="t" class="sf-entrance--fade">content</div>`);
+    const name = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).animationName
+    );
+    // Gated by @media (prefers-reduced-motion: no-preference) — so under
+    // 'reduce', the animation rule doesn't apply and name should be 'none'.
+    expect(name).toBe('none');
+  });
+});

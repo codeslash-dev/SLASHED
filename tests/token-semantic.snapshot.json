@@ -108,10 +108,17 @@
     "--sf-text-s": "calc(clamp(calc(1 * pow(1.25, -1) * 1rem), calc((1.25 * pow(1.333, -1) - 1 * pow(1.25, -1)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, -1) * 1rem), calc(1.25 * pow(1.333, -1) * 1rem)) * 1)",
     "--sf-text-l": "calc(clamp(calc(1 * pow(1.25, 1) * 1rem), calc((1.25 * pow(1.333, 1) - 1 * pow(1.25, 1)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, 1) * 1rem), calc(1.25 * pow(1.333, 1) * 1rem)) * 1)",
     "--sf-h1-size": "calc(clamp(calc(1 * pow(1.25, 5) * 1rem), calc((1.25 * pow(1.333, 5) - 1 * pow(1.25, 5)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, 5) * 1rem), calc(1.25 * pow(1.333, 5) * 1rem)) * 1)",
-    "--sf-space-m": "calc(clamp(calc(1 * 1rem), calc((2 - 1) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * 1rem), calc(2 * 1rem)) * 1)",
-    "--sf-space-l": "calc(clamp(calc(1 * pow(1.25, 1) * 1rem), calc((2 * pow(1.333, 1) - 1 * pow(1.25, 1)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, 1) * 1rem), calc(2 * pow(1.333, 1) * 1rem)) * 1)",
-    "--sf-gap": "calc(clamp(calc(1 * 1rem), calc((2 - 1) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * 1rem), calc(2 * 1rem)) * 1)",
-    "--sf-radius-m": "calc(8px  * 1)",
+    "--sf-radius-m": "8px",
+    "--sf-border-width-1": "calc(1px * 1)",
+    "--sf-font-weight-normal": "400",
+    "--sf-font-weight-bold": "700"
+  },
+  "raw.dark": {
+    "--sf-text-m": "calc(clamp(calc(1 * 1rem), calc((1.25 - 1) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * 1rem), calc(1.25 * 1rem)) * 1)",
+    "--sf-text-s": "calc(clamp(calc(1 * pow(1.25, -1) * 1rem), calc((1.25 * pow(1.333, -1) - 1 * pow(1.25, -1)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, -1) * 1rem), calc(1.25 * pow(1.333, -1) * 1rem)) * 1)",
+    "--sf-text-l": "calc(clamp(calc(1 * pow(1.25, 1) * 1rem), calc((1.25 * pow(1.333, 1) - 1 * pow(1.25, 1)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, 1) * 1rem), calc(1.25 * pow(1.333, 1) * 1rem)) * 1)",
+    "--sf-h1-size": "calc(clamp(calc(1 * pow(1.25, 5) * 1rem), calc((1.25 * pow(1.333, 5) - 1 * pow(1.25, 5)) / (90 - 22.5) * (100vw - 22.5 * 1rem) + 1 * pow(1.25, 5) * 1rem), calc(1.25 * pow(1.333, 5) * 1rem)) * 1)",
+    "--sf-radius-m": "8px",
     "--sf-border-width-1": "calc(1px * 1)",
     "--sf-font-weight-normal": "400",
     "--sf-font-weight-bold": "700"
