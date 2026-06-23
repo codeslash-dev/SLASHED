@@ -49,6 +49,13 @@ export const DOMAIN_PREVIEWS = {
           { token: '--sf-font-mono', label: 'Mono' },
         ],
       },
+      {
+        section: 'Specimen',
+        items: [
+          { token: '--sf-h2-size', label: 'Heading size' },
+          { token: '--sf-leading-normal', label: 'Body leading' },
+        ],
+      },
     ],
   },
 
