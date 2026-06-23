@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.11] - 2026-06-23
+
+### Features
+- **configurator:** add shade ramp without new utility classes
+- **docs:** add CI gate to keep llm-guide.md in sync with token registry
+- **configurator:** add smart settings panels
+- **configurator:** restructure domain panels for clarity and better DX
+
+### Bug Fixes
+- **ShadeRamp:** use canonical BRAND_COLOR_KEYS, shared parseRgb, declarative isBase
+- **docs:** restore scoped override tokens; extend live set to CSS source
+- **configurator:** keep curated groups with smart panels
+- **configurator:** reset all smart setting preset tokens
+- **configurator:** restore preview-leads-panel for all domains; keep generators adjacent
+
 ## [0.6.10] - 2026-06-22
 
 ### Features
