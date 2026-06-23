@@ -24,6 +24,7 @@
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN, DOCS_BASE_URL } from '../lib/domains.js';
+  import { smartSettingsFor } from '../lib/domainSettings.js';
   import { BASIC_BY_DOMAIN } from '../lib/basics.js';
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
@@ -36,6 +37,7 @@
   import StylePresetRow from './StylePresetRow.svelte';
   import ColorAssignments from './ColorAssignments.svelte';
   import DomainPreview from './DomainPreview.svelte';
+  import SmartSettings from './SmartSettings.svelte';
   import Icon from './Icon.svelte';
   import { DOMAIN_PREVIEWS } from '../lib/domainPreviews.js';
 
@@ -78,6 +80,7 @@
 
   const generators = $derived(domain.basicGenerators ?? []);
   const knobs = $derived(KNOBS_BY_DOMAIN[domain.id] ?? []);
+  const smartSections = $derived(smartSettingsFor(domain.id));
 
   // Domains with a scale generator (typography, spacing): preview goes BELOW
   // the generator so the specimen updates right next to the controls.
@@ -89,7 +92,8 @@
     basicGroups.length > 0 ||
     essentials.length > 0 ||
     generators.length > 0 ||
-    knobs.length > 0
+    knobs.length > 0 ||
+    smartSections.length > 0
   );
 
   let showAll = $state(false);
@@ -279,6 +283,10 @@
           title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
           presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
         />
+      {/if}
+
+      {#if smartSections.length}
+        <SmartSettings domainId={domain.id} />
       {/if}
 
       <!-- Curated input surfaces — brand colors, friendly groups, or essentials.
