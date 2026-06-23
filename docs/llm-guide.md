@@ -297,6 +297,9 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 --sf-color-code-bg          /* Inline code background — var(--sf-color-inset) */
 --sf-color-code-text        /* Inline code text — auto-contrasts with code bg */
 
+/* Scoped override hooks for code blocks — set these on .sf-code-block or your own class */
+--sf-color-code-block-bg    /* falls back to --sf-color-code-bg when unset */
+--sf-color-code-block-text  /* falls back to inherit when unset */
 ```
 
 ### 5.10 Semantic shade aliases
@@ -952,6 +955,10 @@ Used by `.is-active`, `.is-current`, etc. in `core/states.css`. Allow components
 ```css
 --sf-field-required-marker: " *"               /* required field marker */
 --sf-link-external-marker:  " ↗"              /* marker for .sf-link-external */
+
+/* Scoped override hooks — set per-field/form to override global borders/text */
+--sf-field-border-color     /* set by validation states (error/success/warning/info/danger) */
+--sf-field-text-color       /* set by validation states for text color feedback */
 ```
 
 Component tokens from `optional/tokens.components.css`:

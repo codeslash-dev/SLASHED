@@ -1,14 +1,22 @@
 #!/usr/bin/env node
 /**
- * CI gate: docs/llm-guide.md must stay in sync with the live token registry.
+ * CI gate: docs/llm-guide.md must stay in sync with the live token set.
  *
- * Check 1 (hard fail): every --sf-* name mentioned in the guide must exist in
- * token-registry.json as a live (non-removed) token. A stale reference means
- * the guide documents a renamed or deleted token.
+ * Check 1 (hard fail): every --sf-* name mentioned in the guide must exist as
+ * a live token. The live set is the union of:
+ *   a) token-registry.json (non-removed entries) — the catalogued public API
+ *   b) --sf-* custom property declarations in core/ and optional/ CSS files —
+ *      catches scoped override hooks (e.g. --sf-field-border-color) that are
+ *      actively used in the framework but not yet catalogued in the registry.
  *
  * Check 2 (warning): PUBLIC and PUBLIC-ADVANCED *knob* tokens absent from the
  * guide are reported so authors know what coverage gaps exist. This is a
  * warning, not a failure — the guide is intentionally curated, not exhaustive.
+ *
+ * Note on shorthand notation: the guide uses compact forms like
+ * "--sf-animation-fade-in / -fade-out". Only the first fully-prefixed name in
+ * each group is validated by Check 1. Shorthand suffixes (/ -foo) are not
+ * individually checked — authors must verify those manually when renaming tokens.
  *
  * Run:
  *   node scripts/check-llm-guide.js          # check only
@@ -41,10 +49,23 @@ const guideText = fs.readFileSync(GUIDE, 'utf8');
 const registry = readJson(REGISTRY);
 const apiIndex = readJson(API_INDEX);
 
-// Live token names (not flagged removed).
+// Live set a): token-registry.json (non-removed entries).
 const liveTokens = new Set(
   registry.tokens.filter((t) => !t.removed).map((t) => t.name),
 );
+
+// Live set b): any --sf-* declared as a custom property in CSS source files.
+// Matches "  --sf-foo:" (declaration) and "--sf-foo," / "--sf-foo)" in
+// comment-listed token inventories in tokens.css headers.
+const CSS_DECL_RE = /--sf-[a-z0-9_-]+(?=\s*[:,)])/g;
+const cssDirs = [path.join(ROOT, 'core'), path.join(ROOT, 'optional')];
+for (const dir of cssDirs) {
+  if (!fs.existsSync(dir)) continue;
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.css'))) {
+    const text = fs.readFileSync(path.join(dir, file), 'utf8');
+    for (const m of text.matchAll(CSS_DECL_RE)) liveTokens.add(m[0]);
+  }
+}
 
 // PUBLIC + PUBLIC-ADVANCED knob tokens — the ones most likely to need docs.
 const publicKnobs = new Set(
