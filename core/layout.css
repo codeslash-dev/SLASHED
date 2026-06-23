@@ -19,6 +19,11 @@
   .sf-section--l  { --sf-section-pad: var(--sf-section-pad--l); }
   .sf-section--xl { --sf-section-pad: var(--sf-section-pad--xl); }
   .sf-section--2xl { --sf-section-pad: var(--sf-section-pad--2xl); }
+  /* Adds horizontal page gutters directly to a section — use when you want
+     to skip a separate .sf-container wrapper (gutterless layout inside section).
+     Neutralises container gutter to prevent double padding. */
+  .sf-section--guttered { padding-inline: var(--sf-gutter); }
+  .sf-section--guttered .sf-container { padding-inline: 0; }
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 

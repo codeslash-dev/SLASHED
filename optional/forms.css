@@ -21,7 +21,7 @@
      --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
      --sf-color-text--disabled, --sf-color-text--on-action,
      --sf-color-bg--disabled, --sf-color-action, --sf-color-action--hover,
-     --sf-color-error,
+     --sf-color-danger,
      --sf-field-border-color, --sf-opacity-disabled,
      --sf-space-xs, --sf-space-s, --sf-space-m,
      --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
@@ -161,7 +161,7 @@
   input:user-invalid,
   select:user-invalid,
   textarea:user-invalid {
-    --sf-field-border-color: var(--sf-color-error);
+    --sf-field-border-color: var(--sf-color-danger);
   }
 
   input:user-valid,
@@ -388,7 +388,7 @@
   label:has(+ :required)::after,
   label:has(+ * :required)::after {
     content: var(--sf-field-required-marker, " *");
-    color: var(--sf-color-error);
+    color: var(--sf-color-danger);
   }
 
 }

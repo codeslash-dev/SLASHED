@@ -55,12 +55,12 @@ describe('sanitisePreset', () => {
   test('keeps known tokens with safe values', () => {
     const { map, applied, skipped } = sanitisePreset({
       '--sf-radius-scale': '1.2',
-      '--sf-color-primary-light': 'oklch(0.5 0.2 220)',
+      '--sf-color-primary-source-light': 'oklch(0.5 0.2 220)',
     });
     assert.equal(applied, 2);
     assert.equal(skipped.length, 0);
     assert.equal(map['--sf-radius-scale'], '1.2');
-    assert.equal(map['--sf-color-primary-light'], 'oklch(0.5 0.2 220)');
+    assert.equal(map['--sf-color-primary-source-light'], 'oklch(0.5 0.2 220)');
   });
 
   test('drops unknown tokens', () => {

@@ -40,8 +40,8 @@
   --cfg-accent-soft: var(--sf-color-primary-subtle);
   --cfg-accent-glow: color-mix(in oklab, var(--sf-color-primary) 40%, transparent);
 
-  --cfg-danger: var(--sf-color-error);
-  --cfg-danger-soft: var(--sf-color-error-subtle);
+  --cfg-danger: var(--sf-color-danger);
+  --cfg-danger-soft: var(--sf-color-danger-subtle);
   --cfg-ok: var(--sf-color-success);
   --cfg-warn: var(--sf-color-warning);
 
@@ -170,9 +170,9 @@ code, kbd { font-family: var(--cfg-mono); }
   background: color-mix(in oklab, var(--sf-color-warning) 14%, transparent);
 }
 .cfg-badge--internal {
-  color: var(--sf-color-error);
-  border-color: color-mix(in oklab, var(--sf-color-error) 40%, transparent);
-  background: color-mix(in oklab, var(--sf-color-error) 14%, transparent);
+  color: var(--sf-color-danger);
+  border-color: color-mix(in oklab, var(--sf-color-danger) 40%, transparent);
+  background: color-mix(in oklab, var(--sf-color-danger) 14%, transparent);
 }
 .cfg-badge--configure {
   color: var(--sf-color-info);

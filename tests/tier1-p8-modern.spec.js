@@ -20,14 +20,14 @@ const BASELINE = path.join(import.meta.dirname, 'baseline-modern.json');
 const TIER1_TOKENS = [
   '--sf-color-primary', '--sf-color-secondary', '--sf-color-tertiary',
   '--sf-color-action', '--sf-color-neutral', '--sf-color-base',
-  '--sf-color-success', '--sf-color-warning', '--sf-color-error',
+  '--sf-color-success', '--sf-color-warning',
   '--sf-color-info', '--sf-color-danger',
   '--sf-color-bg', '--sf-color-inset', '--sf-color-raised',
   '--sf-color-text', '--sf-color-text--secondary', '--sf-color-heading',
   '--sf-color-border', '--sf-color-border--subtle', '--sf-color-border--strong',
   '--sf-color-link', '--sf-color-selection-bg',
   '--sf-color-success-strong', '--sf-color-warning-strong',
-  '--sf-color-error-strong', '--sf-color-info-strong', '--sf-color-danger-strong',
+  '--sf-color-info-strong', '--sf-color-danger-strong',
   '--sf-shadow-xs', '--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l',
 ];
 

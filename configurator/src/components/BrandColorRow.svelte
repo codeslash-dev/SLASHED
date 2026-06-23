@@ -1,11 +1,11 @@
 <script>
   /**
-   * Brand color light/dark pair row.
+   * Brand color source-light/source-dark pair row.
    *
-   * Each brand color in SLASHED has a `-light` knob (e.g. --sf-color-primary-light)
+   * Each brand color in SLASHED has a `-source-light` knob (e.g. --sf-color-primary-source-light)
    * that the user sets, and an auto-generated dark variant derived via relative
    * OKLCH math. The dark variant can optionally be pinned by setting
-   * --sf-color-X-dark.
+   * --sf-color-X-source-dark.
    *
    * Layout:
    *   [label]  [light swatch | text input]  →  [dark swatch | "auto" or value]  [⟲]
@@ -18,8 +18,8 @@
   /** @type {{ colorKey: string, label: string }} */
   let { colorKey, label } = $props();
 
-  const lightName = $derived(`--sf-color-${colorKey}-light`);
-  const darkName  = $derived(`--sf-color-${colorKey}-dark`);
+  const lightName = $derived(`--sf-color-${colorKey}-source-light`);
+  const darkName  = $derived(`--sf-color-${colorKey}-source-dark`);
 
   const lightDefault = $derived(defaultsByName.get(lightName) ?? '');
   const lightValue   = $derived(overrides[lightName] ?? '');

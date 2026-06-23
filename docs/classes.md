@@ -8,7 +8,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-126 classes.
+127 classes.
 
 | Class |
 |---|
@@ -113,6 +113,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-section` |
 | `.sf-section--2xl` |
 | `.sf-section--collapse` |
+| `.sf-section--guttered` |
 | `.sf-section--l` |
 | `.sf-section--m` |
 | `.sf-section--s` |
@@ -141,7 +142,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-37 classes.
+36 classes.
 
 | Class |
 |---|
@@ -169,7 +170,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-surface` |
 | `.sf-surface--action` |
 | `.sf-surface--danger` |
-| `.sf-surface--error` |
 | `.sf-surface--info` |
 | `.sf-surface--inverse` |
 | `.sf-surface--neutral` |

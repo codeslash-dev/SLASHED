@@ -45,8 +45,8 @@ export const PRESETS = [
     icon: '🔥',
     blurb: 'Saturated brand colors, larger type, snappier motion, stronger elevation.',
     overrides: {
-      '--sf-color-primary-light': 'oklch(0.55 0.28 264)',
-      '--sf-color-action-light': 'oklch(0.62 0.23 18)',
+      '--sf-color-primary-source-light': 'oklch(0.55 0.28 264)',
+      '--sf-color-action-source-light': 'oklch(0.62 0.23 18)',
       '--sf-text-scale': '1.08',
       '--sf-text-display-scale': '1.15',
       '--sf-shadow-strength': 'calc(0.18 + var(--sf-is-dark) * 0.22)',
@@ -76,8 +76,8 @@ export const PRESETS = [
     icon: '🫧',
     blurb: 'Lower chroma, larger radii, diffuse shadows — a calmer marketing look.',
     overrides: {
-      '--sf-color-primary-light': 'oklch(0.62 0.12 250)',
-      '--sf-color-secondary-light': 'oklch(0.7 0.06 200)',
+      '--sf-color-primary-source-light': 'oklch(0.62 0.12 250)',
+      '--sf-color-secondary-source-light': 'oklch(0.7 0.06 200)',
       '--sf-radius-scale': '1.6',
       '--sf-shadow-strength': 'calc(0.06 + var(--sf-is-dark) * 0.1)',
       '--sf-space-scale': '1.05',
@@ -92,8 +92,8 @@ export const PRESETS = [
     overrides: {
       '--sf-contrast-bias': '0.15',
       '--sf-contrast-threshold': '0.5',
-      '--sf-color-primary-light': 'oklch(0.45 0.28 264)',
-      '--sf-color-action-light': 'oklch(0.4 0.25 18)',
+      '--sf-color-primary-source-light': 'oklch(0.45 0.28 264)',
+      '--sf-color-action-source-light': 'oklch(0.4 0.25 18)',
       '--sf-shadow-strength': 'calc(0.22 + var(--sf-is-dark) * 0.28)',
       '--sf-motion-scale': '0',
       '--sf-focus-ring-width': '3px',

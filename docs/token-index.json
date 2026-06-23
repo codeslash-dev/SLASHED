@@ -9,15 +9,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 693,
+      "tokens": 686,
       "by_tier": {
-        "PUBLIC": 637,
+        "PUBLIC": 630,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 222,
-        "consumption": 471
+        "knob": 220,
+        "consumption": 466
       }
     }
   },
@@ -508,7 +508,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+      "value": "light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-action--active": {
       "tier": "PUBLIC",
@@ -654,14 +654,6 @@
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.80)"
     },
-    "--sf-color-action-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.70 0.198 235) (registered)"
-    },
     "--sf-color-action-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -679,14 +671,6 @@
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.05)"
     },
-    "--sf-color-action-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.50 0.22 235)"
-    },
     "--sf-color-action-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -703,6 +687,22 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.30)"
+    },
+    "--sf-color-action-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.70 0.198 235) (registered)"
+    },
+    "--sf-color-action-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.50 0.22 235)"
     },
     "--sf-color-action-subtle": {
       "tier": "PUBLIC",
@@ -754,7 +754,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))"
+      "value": "light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))"
     },
     "--sf-color-base--active": {
       "tier": "PUBLIC",
@@ -900,14 +900,6 @@
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)"
     },
-    "--sf-color-base-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.22 0.003 250) (registered)"
-    },
     "--sf-color-base-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -925,14 +917,6 @@
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.05)"
     },
-    "--sf-color-base-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.96 0.006 250)"
-    },
     "--sf-color-base-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -949,6 +933,22 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.30)"
+    },
+    "--sf-color-base-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.22 0.003 250) (registered)"
+    },
+    "--sf-color-base-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.96 0.006 250)"
     },
     "--sf-color-base-subtle": {
       "tier": "PUBLIC",
@@ -1056,7 +1056,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )"
     },
     "--sf-color-border--disabled": {
       "tier": "PUBLIC",
@@ -1080,7 +1080,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )"
     },
     "--sf-color-border--subtle": {
       "tier": "PUBLIC",
@@ -1088,7 +1088,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )"
     },
     "--sf-color-border--translucent": {
       "tier": "PUBLIC",
@@ -1120,23 +1120,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
-    },
-    "--sf-color-danger-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.71 0.198 12) (registered)"
-    },
-    "--sf-color-danger-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.48 0.22 12)"
+      "value": "light-dark(var(--sf-color-danger-source-light), var(--sf-color-danger-source-dark, oklch(from var(--sf-color-danger-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-danger-muted": {
       "tier": "PUBLIC",
@@ -1146,13 +1130,29 @@
       ],
       "value": "oklch(from var(--sf-color-danger) l c h / 0.3)"
     },
+    "--sf-color-danger-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.71 0.198 12) (registered)"
+    },
+    "--sf-color-danger-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.48 0.22 12)"
+    },
     "--sf-color-danger-strong": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )"
     },
     "--sf-color-danger-subtle": {
       "tier": "PUBLIC",
@@ -1170,61 +1170,13 @@
       ],
       "value": "oklch(0 0 0 / 0.5)"
     },
-    "--sf-color-error": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
-    },
-    "--sf-color-error-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.70 0.18 25) (registered)"
-    },
-    "--sf-color-error-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.50 0.20 25)"
-    },
-    "--sf-color-error-muted": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(from var(--sf-color-error) l c h / 0.3)"
-    },
-    "--sf-color-error-strong": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )"
-    },
-    "--sf-color-error-subtle": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(from var(--sf-color-error) l c h / 0.1)"
-    },
     "--sf-color-heading": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )"
     },
     "--sf-color-info": {
       "tier": "PUBLIC",
@@ -1232,23 +1184,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
-    },
-    "--sf-color-info-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.71 0.162 235) (registered)"
-    },
-    "--sf-color-info-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.48 0.18 235)"
+      "value": "light-dark(var(--sf-color-info-source-light), var(--sf-color-info-source-dark, oklch(from var(--sf-color-info-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-info-muted": {
       "tier": "PUBLIC",
@@ -1258,13 +1194,29 @@
       ],
       "value": "oklch(from var(--sf-color-info) l c h / 0.3)"
     },
+    "--sf-color-info-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.71 0.162 235) (registered)"
+    },
+    "--sf-color-info-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.48 0.18 235)"
+    },
     "--sf-color-info-strong": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )"
     },
     "--sf-color-info-subtle": {
       "tier": "PUBLIC",
@@ -1360,7 +1312,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+      "value": "light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-neutral--active": {
       "tier": "PUBLIC",
@@ -1506,14 +1458,6 @@
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.80)"
     },
-    "--sf-color-neutral-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.69 0.0225 260) (registered)"
-    },
     "--sf-color-neutral-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1531,14 +1475,6 @@
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)"
     },
-    "--sf-color-neutral-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.52 0.025 260)"
-    },
     "--sf-color-neutral-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1555,6 +1491,22 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)"
+    },
+    "--sf-color-neutral-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.69 0.0225 260) (registered)"
+    },
+    "--sf-color-neutral-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.52 0.025 260)"
     },
     "--sf-color-neutral-subtle": {
       "tier": "PUBLIC",
@@ -1614,7 +1566,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+      "value": "light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-primary--active": {
       "tier": "PUBLIC",
@@ -1760,14 +1712,6 @@
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.80)"
     },
-    "--sf-color-primary-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.715 0.243 264) (registered)"
-    },
     "--sf-color-primary-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1785,14 +1729,6 @@
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.05)"
     },
-    "--sf-color-primary-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.47 0.27 264)"
-    },
     "--sf-color-primary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1809,6 +1745,22 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.30)"
+    },
+    "--sf-color-primary-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.715 0.243 264) (registered)"
+    },
+    "--sf-color-primary-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.47 0.27 264)"
     },
     "--sf-color-primary-subtle": {
       "tier": "PUBLIC",
@@ -1876,7 +1828,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+      "value": "light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-secondary--active": {
       "tier": "PUBLIC",
@@ -2022,14 +1974,6 @@
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.80)"
     },
-    "--sf-color-secondary-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.84 0.036 264) (registered)"
-    },
     "--sf-color-secondary-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2047,14 +1991,6 @@
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)"
     },
-    "--sf-color-secondary-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.22 0.04 264)"
-    },
     "--sf-color-secondary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2071,6 +2007,22 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)"
+    },
+    "--sf-color-secondary-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.84 0.036 264) (registered)"
+    },
+    "--sf-color-secondary-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.22 0.04 264)"
     },
     "--sf-color-secondary-subtle": {
       "tier": "PUBLIC",
@@ -2122,7 +2074,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )"
+      "value": "light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )"
     },
     "--sf-color-selection-text": {
       "tier": "PUBLIC",
@@ -2138,23 +2090,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
-    },
-    "--sf-color-success-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.70 0.144 145) (registered)"
-    },
-    "--sf-color-success-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.50 0.16 145)"
+      "value": "light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-success-muted": {
       "tier": "PUBLIC",
@@ -2164,13 +2100,29 @@
       ],
       "value": "oklch(from var(--sf-color-success) l c h / 0.3)"
     },
+    "--sf-color-success-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.70 0.144 145) (registered)"
+    },
+    "--sf-color-success-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.50 0.16 145)"
+    },
     "--sf-color-success-strong": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )"
     },
     "--sf-color-success-subtle": {
       "tier": "PUBLIC",
@@ -2194,7 +2146,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
+      "value": "light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-tertiary--active": {
       "tier": "PUBLIC",
@@ -2340,14 +2292,6 @@
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.80)"
     },
-    "--sf-color-tertiary-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.74 0.198 295) (registered)"
-    },
     "--sf-color-tertiary-darker": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2365,14 +2309,6 @@
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)"
     },
-    "--sf-color-tertiary-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.42 0.22 295)"
-    },
     "--sf-color-tertiary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2389,6 +2325,22 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)"
+    },
+    "--sf-color-tertiary-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.74 0.198 295) (registered)"
+    },
+    "--sf-color-tertiary-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.42 0.22 295)"
     },
     "--sf-color-tertiary-subtle": {
       "tier": "PUBLIC",
@@ -2440,7 +2392,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )"
     },
     "--sf-color-text--disabled": {
       "tier": "PUBLIC",
@@ -2448,7 +2400,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )"
     },
     "--sf-color-text--inverse": {
       "tier": "PUBLIC",
@@ -2456,7 +2408,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )"
     },
     "--sf-color-text--muted": {
       "tier": "PUBLIC",
@@ -2464,7 +2416,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )"
     },
     "--sf-color-text--on-action": {
       "tier": "PUBLIC",
@@ -2489,14 +2441,6 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
-    },
-    "--sf-color-text--on-error": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)"
     },
     "--sf-color-text--on-info": {
       "tier": "PUBLIC",
@@ -2568,7 +2512,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )"
     },
     "--sf-color-text--secondary": {
       "tier": "PUBLIC",
@@ -2576,7 +2520,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )"
     },
     "--sf-color-warning": {
       "tier": "PUBLIC",
@@ -2584,23 +2528,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
-    },
-    "--sf-color-warning-dark": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.65 0.153 80) (registered)"
-    },
-    "--sf-color-warning-light": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "oklch(0.75 0.17 80)"
+      "value": "light-dark(var(--sf-color-warning-source-light), var(--sf-color-warning-source-dark, oklch(from var(--sf-color-warning-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))"
     },
     "--sf-color-warning-muted": {
       "tier": "PUBLIC",
@@ -2610,13 +2538,29 @@
       ],
       "value": "oklch(from var(--sf-color-warning) l c h / 0.3)"
     },
+    "--sf-color-warning-source-dark": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.65 0.153 80) (registered)"
+    },
+    "--sf-color-warning-source-light": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(0.75 0.17 80)"
+    },
     "--sf-color-warning-strong": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )"
+      "value": "light-dark( oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )"
     },
     "--sf-color-warning-subtle": {
       "tier": "PUBLIC",
@@ -3072,7 +3016,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)"
+      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-source-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)"
     },
     "--sf-focus-ring-style": {
       "tier": "PUBLIC",

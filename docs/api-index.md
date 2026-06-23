@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**925 elements** — 693 tokens, 232 classes.
+**918 elements** — 686 tokens, 232 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 869 | Everyday surface. SemVer-stable. |
+| PUBLIC | 862 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (693)
+## Tokens (686)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
 
-### Core tokens (509)
+### Core tokens (502)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -75,29 +75,29 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-border-width-hairline` | PUBLIC | knob | border | `0.5px` | 1px border width (hairline). |
 | `--sf-caret-color` | PUBLIC | consumption | caret | `var(--sf-color-action)` | Cursor caret color inside text inputs and contenteditable elements. |
 | `--sf-code-font-size` | PUBLIC | knob | code | `0.875em` | Font size for inline <code> and <pre>. Usually slightly smaller than body text so monospace doesn't feel oversized. |
-| `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces. |
+| `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces. |
 | `--sf-color-action--active` | PUBLIC | consumption | color | `var(--sf-color-action-xdark)` | Action color at pressed/active brightness. |
 | `--sf-color-action--hover` | PUBLIC | consumption | color | `var(--sf-color-action-darker)` | Action color at hover brightness. |
-| `--sf-color-action-dark` | PUBLIC | knob | color | `oklch(0.70 0.198 235)` | Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%. |
 | `--sf-color-action-darker` | PUBLIC | consumption | color | `var(--sf-color-action-600)` | Deep action shade for high-contrast contexts. |
 | `--sf-color-action-ghost` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.05)` | Near-transparent action tint for ghost-button hover backgrounds. |
-| `--sf-color-action-light` | PUBLIC | knob | color | `oklch(0.50 0.22 235)` | OKLCH lightness source for the action color. Animate this to smoothly transition between light and dark brand themes. |
 | `--sf-color-action-lighter` | PUBLIC | consumption | color | `var(--sf-color-action-400)` | Light action shade for soft accents. |
 | `--sf-color-action-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.30)` | Medium action fill — outlined button hover backgrounds. |
+| `--sf-color-action-source-dark` | PUBLIC | knob | color | `oklch(0.70 0.198 235)` | Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%. |
+| `--sf-color-action-source-light` | PUBLIC | knob | color | `oklch(0.50 0.22 235)` | OKLCH lightness source for the action color. Animate this to smoothly transition between light and dark brand themes. |
 | `--sf-color-action-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.10)` | Lightest action tint — selected rows, active nav, chips. |
 | `--sf-color-action-superdark` | PUBLIC | consumption | color | `var(--sf-color-action-950)` | Near-black action shade for maximum contrast on light surfaces. |
 | `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | Near-white action shade for maximum contrast on dark surfaces. |
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
-| `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Secondary interactive color for supporting actions and secondary buttons. |
+| `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Secondary interactive color for supporting actions and secondary buttons. |
 | `--sf-color-base--active` | PUBLIC | consumption | color | `var(--sf-color-base-xdark)` | Base color at pressed/active brightness. |
 | `--sf-color-base--hover` | PUBLIC | consumption | color | `var(--sf-color-base-darker)` | Base color at hover brightness. |
-| `--sf-color-base-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. |
 | `--sf-color-base-darker` | PUBLIC | consumption | color | `var(--sf-color-base-600)` | Deep base shade. |
 | `--sf-color-base-ghost` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | Near-transparent base tint for ghost-button hover backgrounds. |
-| `--sf-color-base-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH lightness source for the base color. |
 | `--sf-color-base-lighter` | PUBLIC | consumption | color | `var(--sf-color-base-400)` | Light base shade. |
 | `--sf-color-base-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.30)` | Medium base fill. |
+| `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. |
+| `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH lightness source for the base color. |
 | `--sf-color-base-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.10)` | Lightest base tint. |
 | `--sf-color-base-superdark` | PUBLIC | consumption | color | `var(--sf-color-base-950)` | Near-black base shade. |
 | `--sf-color-base-superlight` | PUBLIC | consumption | color | `var(--sf-color-base-50)` | Near-white base shade. |
@@ -110,33 +110,27 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-bg--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.08)` | Background tint for hovered interactive elements (rows, list items, etc.). |
 | `--sf-color-bg--selected` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.1)` | Background for selected items (checked rows, active nav links). |
 | `--sf-color-black` | PUBLIC | knob | color | `oklch(0% 0 0)` | Absolute black reference value. |
-| `--sf-color-border` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )` | Default border for dividers and component edges. |
+| `--sf-color-border` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )` | Default border for dividers and component edges. |
 | `--sf-color-border--disabled` | PUBLIC | consumption | color | `oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)` | Semi-transparent border for disabled element edges. |
 | `--sf-color-border--focus` | PUBLIC | consumption | color | `var(--sf-color-action)` | Focus indicator border, used alongside --sf-focus-ring-color. |
-| `--sf-color-border--strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )` | Stronger border for visually prominent edges and active outlines. |
-| `--sf-color-border--subtle` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` | Low-contrast border for subtle separation without strong visual weight. |
+| `--sf-color-border--strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )` | Stronger border for visually prominent edges and active outlines. |
+| `--sf-color-border--subtle` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` | Low-contrast border for subtle separation without strong visual weight. |
 | `--sf-color-border--translucent` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.15)` | Translucent border for glass-morphism and frosted surfaces. |
 | `--sf-color-code-bg` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for inline <code> elements. Usually a subtle tint of the inset surface. |
 | `--sf-color-code-text` | PUBLIC | consumption | color | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Text color for inline code and monospace preformatted text. |
-| `--sf-color-danger` | PUBLIC | consumption | color | `light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Destructive / danger state color. Used for delete actions, error alerts, and critical warnings. |
-| `--sf-color-danger-dark` | PUBLIC | knob | color | `oklch(0.71 0.198 12)` | Registered <color> dark counterpart of --sf-color-danger. |
-| `--sf-color-danger-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | OKLCH lightness source for the danger status color. |
+| `--sf-color-danger` | PUBLIC | consumption | color | `light-dark(var(--sf-color-danger-source-light), var(--sf-color-danger-source-dark, oklch(from var(--sf-color-danger-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Destructive / danger state color. Used for delete actions, error alerts, and critical warnings. |
 | `--sf-color-danger-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.3)` | Medium danger fill for icon backgrounds and badge fills. |
-| `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast danger color for alert body text and icons. |
+| `--sf-color-danger-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.198 12)` | Registered <color> dark counterpart of --sf-color-danger. |
+| `--sf-color-danger-source-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | OKLCH lightness source for the danger status color (covers destructive actions and form validation errors). |
+| `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast danger color for alert body text and icons. |
 | `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | Light danger tint for error row backgrounds and alert container fills. |
 | `--sf-color-dim` | PUBLIC | knob | color | `oklch(0 0 0 / 0.5)` | Backdrop overlay color for modals, drawers, and lightboxes. |
-| `--sf-color-error` | PUBLIC | consumption | color | `light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Form validation error color. Typically same hue as danger but can be tuned independently. |
-| `--sf-color-error-dark` | PUBLIC | knob | color | `oklch(0.70 0.18 25)` | Registered <color> dark counterpart of --sf-color-error. |
-| `--sf-color-error-light` | PUBLIC | knob | color | `oklch(0.50 0.20 25)` | OKLCH lightness source for the error status color. |
-| `--sf-color-error-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-error) l c h / 0.3)` | Medium error fill for icons and inline badges. |
-| `--sf-color-error-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast error color for validation message text. |
-| `--sf-color-error-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-error) l c h / 0.1)` | Light error tint for validation field backgrounds. |
-| `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Heading text color. Slightly stronger contrast than body text for visual hierarchy. |
-| `--sf-color-info` | PUBLIC | consumption | color | `light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Informational color for neutral tips, hints, and non-urgent notices. |
-| `--sf-color-info-dark` | PUBLIC | knob | color | `oklch(0.71 0.162 235)` | Registered <color> dark counterpart of --sf-color-info. |
-| `--sf-color-info-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | OKLCH lightness source for the info status color. |
+| `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Heading text color. Slightly stronger contrast than body text for visual hierarchy. |
+| `--sf-color-info` | PUBLIC | consumption | color | `light-dark(var(--sf-color-info-source-light), var(--sf-color-info-source-dark, oklch(from var(--sf-color-info-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Informational color for neutral tips, hints, and non-urgent notices. |
 | `--sf-color-info-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.3)` | Medium info fill for info icons and hint chips. |
-| `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast info color for hint body text. |
+| `--sf-color-info-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.162 235)` | Registered <color> dark counterpart of --sf-color-info. |
+| `--sf-color-info-source-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | OKLCH lightness source for the info status color. |
+| `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast info color for hint body text. |
 | `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.1)` | Light info tint for informational note backgrounds. |
 | `--sf-color-inset` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` | Slightly inset surface for nested areas — inputs, code blocks, sidebar panels. |
 | `--sf-color-inverse` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(1 - l) c h)` | Inverted (dark-on-light / light-on-dark) surface for high-contrast banners or tooltips. |
@@ -148,30 +142,30 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-link--visited` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )` | Visited link color. |
 | `--sf-color-mark-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.25)` | Background color for highlighted <mark> elements. |
 | `--sf-color-mark-text` | PUBLIC | knob | color | `inherit` | Text color inside highlighted <mark> elements. |
-| `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Neutral interactive color for low-emphasis actions and tertiary buttons. |
+| `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Neutral interactive color for low-emphasis actions and tertiary buttons. |
 | `--sf-color-neutral--active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | Neutral color at pressed/active brightness. |
 | `--sf-color-neutral--hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | Neutral color at hover brightness. |
-| `--sf-color-neutral-dark` | PUBLIC | knob | color | `oklch(0.69 0.0225 260)` | Registered <color> dark counterpart of --sf-color-neutral. |
 | `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | Deep neutral shade for high-contrast contexts. |
 | `--sf-color-neutral-ghost` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.05)` | Near-transparent neutral tint for ghost-button hover backgrounds. |
-| `--sf-color-neutral-light` | PUBLIC | knob | color | `oklch(0.52 0.025 260)` | OKLCH lightness source for the neutral color. |
 | `--sf-color-neutral-lighter` | PUBLIC | consumption | color | `var(--sf-color-neutral-400)` | Light neutral shade. |
 | `--sf-color-neutral-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.30)` | Muted neutral fill for low-emphasis contexts. |
+| `--sf-color-neutral-source-dark` | PUBLIC | knob | color | `oklch(0.69 0.0225 260)` | Registered <color> dark counterpart of --sf-color-neutral. |
+| `--sf-color-neutral-source-light` | PUBLIC | knob | color | `oklch(0.52 0.025 260)` | OKLCH lightness source for the neutral color. |
 | `--sf-color-neutral-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.10)` | Lightest neutral semantic tint. |
 | `--sf-color-neutral-superdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-950)` | Near-black neutral shade. |
 | `--sf-color-neutral-superlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-50)` | Near-white neutral shade. |
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade. |
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | Extra-light neutral shade. |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | Overlay surface for floating panels, sheets, and modals. |
-| `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw primary palette token aliased from the action role by default. Override to decouple primary from action. |
+| `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw primary palette token aliased from the action role by default. Override to decouple primary from action. |
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | Primary color at pressed/active brightness. |
 | `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | Primary color at hover brightness. |
-| `--sf-color-primary-dark` | PUBLIC | knob | color | `oklch(0.715 0.243 264)` | Registered <color> dark counterpart of --sf-color-primary. |
 | `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | Deep primary shade. |
 | `--sf-color-primary-ghost` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.05)` | Near-transparent primary tint for ghost-button hover backgrounds. |
-| `--sf-color-primary-light` | PUBLIC | knob | color | `oklch(0.47 0.27 264)` | OKLCH lightness source for the primary color. |
 | `--sf-color-primary-lighter` | PUBLIC | consumption | color | `var(--sf-color-primary-400)` | Light primary shade. |
 | `--sf-color-primary-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.30)` | Muted primary fill. |
+| `--sf-color-primary-source-dark` | PUBLIC | knob | color | `oklch(0.715 0.243 264)` | Registered <color> dark counterpart of --sf-color-primary. |
+| `--sf-color-primary-source-light` | PUBLIC | knob | color | `oklch(0.47 0.27 264)` | OKLCH lightness source for the primary color. |
 | `--sf-color-primary-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.10)` | Lightest primary semantic tint. |
 | `--sf-color-primary-superdark` | PUBLIC | consumption | color | `var(--sf-color-primary-950)` | Near-black primary shade. |
 | `--sf-color-primary-superlight` | PUBLIC | consumption | color | `var(--sf-color-primary-50)` | Near-white primary shade. |
@@ -179,51 +173,50 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | Extra-light primary shade. |
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | Elevated card surface that floats above the page background. |
 | `--sf-color-scheme` | PUBLIC | knob | color | `light dark` | Preferred color scheme hint (light / dark / normal). Sent to the browser to influence UA chrome styling. |
-| `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw secondary palette token for the secondary brand color. |
+| `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw secondary palette token for the secondary brand color. |
 | `--sf-color-secondary--active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | Secondary color at pressed/active brightness. |
 | `--sf-color-secondary--hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | Secondary color at hover brightness. |
-| `--sf-color-secondary-dark` | PUBLIC | knob | color | `oklch(0.84 0.036 264)` | Registered <color> dark counterpart of --sf-color-secondary. |
 | `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | Deep secondary shade. |
 | `--sf-color-secondary-ghost` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.05)` | Near-transparent secondary tint for ghost-button hover backgrounds. |
-| `--sf-color-secondary-light` | PUBLIC | knob | color | `oklch(0.22 0.04 264)` | OKLCH lightness source for the secondary color. |
 | `--sf-color-secondary-lighter` | PUBLIC | consumption | color | `var(--sf-color-secondary-400)` | Light secondary shade. |
 | `--sf-color-secondary-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.30)` | Muted secondary fill. |
+| `--sf-color-secondary-source-dark` | PUBLIC | knob | color | `oklch(0.84 0.036 264)` | Registered <color> dark counterpart of --sf-color-secondary. |
+| `--sf-color-secondary-source-light` | PUBLIC | knob | color | `oklch(0.22 0.04 264)` | OKLCH lightness source for the secondary color. |
 | `--sf-color-secondary-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.10)` | Lightest secondary semantic tint. |
 | `--sf-color-secondary-superdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-950)` | Near-black secondary shade. |
 | `--sf-color-secondary-superlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-50)` | Near-white secondary shade. |
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade. |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade. |
-| `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
+| `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
 | `--sf-color-selection-text` | PUBLIC | knob | color | `inherit` | Text color inside browser text selections. |
-| `--sf-color-success` | PUBLIC | consumption | color | `light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Positive / success color for confirmation messages and completed-state indicators. |
-| `--sf-color-success-dark` | PUBLIC | knob | color | `oklch(0.70 0.144 145)` | Registered <color> dark counterpart of --sf-color-success. |
-| `--sf-color-success-light` | PUBLIC | knob | color | `oklch(0.50 0.16 145)` | OKLCH lightness source for the success status color. |
+| `--sf-color-success` | PUBLIC | consumption | color | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Positive / success color for confirmation messages and completed-state indicators. |
 | `--sf-color-success-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.3)` | Medium success fill for success icons and status chips. |
-| `--sf-color-success-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast success color for confirmation message text. |
+| `--sf-color-success-source-dark` | PUBLIC | knob | color | `oklch(0.70 0.144 145)` | Registered <color> dark counterpart of --sf-color-success. |
+| `--sf-color-success-source-light` | PUBLIC | knob | color | `oklch(0.50 0.16 145)` | OKLCH lightness source for the success status color. |
+| `--sf-color-success-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast success color for confirmation message text. |
 | `--sf-color-success-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.12)` | Light success tint for confirmation backgrounds. |
 | `--sf-color-surface` | PUBLIC | consumption | color | `var(--sf-color-base)` | Elevated surface color (e.g. card background one step above page background). |
-| `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw tertiary palette token for the third brand color. |
+| `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw tertiary palette token for the third brand color. |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | Tertiary color at pressed/active brightness. |
 | `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | Tertiary color at hover brightness. |
-| `--sf-color-tertiary-dark` | PUBLIC | knob | color | `oklch(0.74 0.198 295)` | Registered <color> dark counterpart of --sf-color-tertiary. |
 | `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | Deep tertiary shade. |
 | `--sf-color-tertiary-ghost` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.05)` | Near-transparent tertiary tint for ghost-button hover backgrounds. |
-| `--sf-color-tertiary-light` | PUBLIC | knob | color | `oklch(0.42 0.22 295)` | OKLCH lightness source for the tertiary color. |
 | `--sf-color-tertiary-lighter` | PUBLIC | consumption | color | `var(--sf-color-tertiary-400)` | Light tertiary shade. |
 | `--sf-color-tertiary-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.30)` | Muted tertiary fill. |
+| `--sf-color-tertiary-source-dark` | PUBLIC | knob | color | `oklch(0.74 0.198 295)` | Registered <color> dark counterpart of --sf-color-tertiary. |
+| `--sf-color-tertiary-source-light` | PUBLIC | knob | color | `oklch(0.42 0.22 295)` | OKLCH lightness source for the tertiary color. |
 | `--sf-color-tertiary-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.10)` | Lightest tertiary semantic tint. |
 | `--sf-color-tertiary-superdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-950)` | Near-black tertiary shade. |
 | `--sf-color-tertiary-superlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-50)` | Near-white tertiary shade. |
 | `--sf-color-tertiary-xdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-800)` | Extra-dark tertiary shade. |
 | `--sf-color-tertiary-xlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-200)` | Extra-light tertiary shade. |
-| `--sf-color-text` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Primary text color. Contrasts against --sf-color-bg for body copy. |
-| `--sf-color-text--disabled` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` | Text color for disabled UI elements. Intentionally low contrast. |
-| `--sf-color-text--inverse` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` | Text color for use on dark/inverted backgrounds. |
-| `--sf-color-text--muted` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )` | Muted text for metadata, timestamps, and low-priority annotations. |
+| `--sf-color-text` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Primary text color. Contrasts against --sf-color-bg for body copy. |
+| `--sf-color-text--disabled` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` | Text color for disabled UI elements. Intentionally low contrast. |
+| `--sf-color-text--inverse` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` | Text color for use on dark/inverted backgrounds. |
+| `--sf-color-text--muted` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )` | Muted text for metadata, timestamps, and low-priority annotations. |
 | `--sf-color-text--on-action` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground color for text on action-colored backgrounds. |
 | `--sf-color-text--on-base` | PUBLIC | consumption | color | `var(--sf-color-text)` | Accessible foreground for text on base-colored backgrounds. |
 | `--sf-color-text--on-danger` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text on danger-colored backgrounds. |
-| `--sf-color-text--on-error` | PUBLIC | consumption | color | `oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text on error-colored backgrounds. |
 | `--sf-color-text--on-info` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text on info-colored backgrounds. |
 | `--sf-color-text--on-inverse` | PUBLIC | consumption | color | `oklch(from var(--sf-color-inverse) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text on inverted (dark-on-light / light-on-dark) backgrounds. |
 | `--sf-color-text--on-neutral` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text placed on neutral-colored backgrounds. |
@@ -232,13 +225,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-text--on-success` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text on success-colored backgrounds. |
 | `--sf-color-text--on-tertiary` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text placed on tertiary-colored backgrounds. |
 | `--sf-color-text--on-warning` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` | Accessible foreground for text on warning-colored backgrounds. |
-| `--sf-color-text--placeholder` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` | Placeholder text color for inputs and textareas. |
-| `--sf-color-text--secondary` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` | De-emphasised secondary text (captions, labels, supporting copy). |
-| `--sf-color-warning` | PUBLIC | consumption | color | `light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Warning / caution color for non-critical alerts and degraded-state indicators. |
-| `--sf-color-warning-dark` | PUBLIC | knob | color | `oklch(0.65 0.153 80)` | Registered <color> dark counterpart of --sf-color-warning. |
-| `--sf-color-warning-light` | PUBLIC | knob | color | `oklch(0.75 0.17 80)` | OKLCH lightness source for the warning status color. |
+| `--sf-color-text--placeholder` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )` | Placeholder text color for inputs and textareas. |
+| `--sf-color-text--secondary` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )` | De-emphasised secondary text (captions, labels, supporting copy). |
+| `--sf-color-warning` | PUBLIC | consumption | color | `light-dark(var(--sf-color-warning-source-light), var(--sf-color-warning-source-dark, oklch(from var(--sf-color-warning-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Warning / caution color for non-critical alerts and degraded-state indicators. |
 | `--sf-color-warning-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.3)` | Medium warning fill for icons and caution chips. |
-| `--sf-color-warning-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` | High-contrast warning color for caution text. |
+| `--sf-color-warning-source-dark` | PUBLIC | knob | color | `oklch(0.65 0.153 80)` | Registered <color> dark counterpart of --sf-color-warning. |
+| `--sf-color-warning-source-light` | PUBLIC | knob | color | `oklch(0.75 0.17 80)` | OKLCH lightness source for the warning status color. |
+| `--sf-color-warning-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` | High-contrast warning color for caution text. |
 | `--sf-color-warning-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.12)` | Light warning tint for warning notification backgrounds. |
 | `--sf-color-white` | PUBLIC | knob | color | `oklch(100% 0 0)` | Absolute white reference value. |
 | `--sf-component-pad` | PUBLIC | consumption | component | `var(--sf-space-m)` | Standard inner padding for interactive components (buttons, form inputs, chips). |
@@ -281,7 +274,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-fluid-min-vw` | PUBLIC-ADVANCED | knob | fluid | `22.5` | Minimum viewport width (in rem) at which the fluid scale clamps to its smallest values. Default 22.5rem (~360px). Part of the fluid scale engine. |
 | `--sf-focus-ring-color` | PUBLIC | consumption | focus | `var(--sf-color-action)` | Color of the keyboard focus ring. Ensure sufficient contrast against all background surfaces. |
 | `--sf-focus-ring-offset` | PUBLIC | knob | focus | `2px` | Gap between the element edge and the focus ring. |
-| `--sf-focus-ring-shadow` | PUBLIC-ADVANCED | consumption | focus | `0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)` | Computed box-shadow value for the focus ring — two-layer technique: offset shadow in bg color, then ring shadow in focus-ring color. Tune via --sf-focus-ring-width and --sf-focus-ring-color instead of overriding this directly. |
+| `--sf-focus-ring-shadow` | PUBLIC-ADVANCED | consumption | focus | `0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-source-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)` | Computed box-shadow value for the focus ring — two-layer technique: offset shadow in bg color, then ring shadow in focus-ring color. Tune via --sf-focus-ring-width and --sf-focus-ring-color instead of overriding this directly. |
 | `--sf-focus-ring-style` | PUBLIC | knob | focus | `solid` | Border style of the focus ring (solid, dashed, dotted). |
 | `--sf-focus-ring-width` | PUBLIC | knob | focus | `2px` | Stroke width of the focus ring outline. |
 | `--sf-font-body` | PUBLIC | knob | font | `system-ui, -apple-system, sans-serif` | Font family stack for body text. Override to set your primary typeface. |
@@ -753,7 +746,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
-### Layout primitives (126)
+### Layout primitives (127)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -783,7 +776,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-cluster--s` | PUBLIC | layout | Cluster | Cluster variant with small (s) gap between items. |
 | `.sf-cluster--xl` | PUBLIC | layout | Cluster | Cluster variant with xl gap between items. |
 | `.sf-cluster--xs` | PUBLIC | layout | Cluster | Cluster variant with xs gap between items. |
-| `.sf-container` | PUBLIC | layout | Container | Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m. |
+| `.sf-container` | PUBLIC | layout | Section | Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m. |
 | `.sf-container--full` | PUBLIC | layout | Container | Container variant that spans the full viewport width (no max-width cap). |
 | `.sf-container--narrow` | PUBLIC | layout | Container | Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms. |
 | `.sf-container--prose` | PUBLIC | layout | Container | Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content. |
@@ -858,6 +851,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-section` | PUBLIC | layout | Section | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
 | `.sf-section--2xl` | PUBLIC | layout | Section | Section variant with 2xl vertical padding. |
 | `.sf-section--collapse` | PUBLIC | layout | Collapse modifier | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
+| `.sf-section--guttered` | PUBLIC | layout | Section | Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding. |
 | `.sf-section--l` | PUBLIC | layout | Section | Section variant with large (l) vertical padding. |
 | `.sf-section--m` | PUBLIC | layout | Section | Section variant with medium (m) vertical padding. |
 | `.sf-section--s` | PUBLIC | layout | Section | Section variant with small (s) vertical padding. |
@@ -884,7 +878,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (37)
+### Macro classes (36)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -912,7 +906,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-surface` | PUBLIC | macro | Surface | Generic semantic surface: applies --sf-surface-color as the background and automatically sets a contrasting text color. Tone variants (--primary, --action, etc.) activate preset palettes. |
 | `.sf-surface--action` | PUBLIC | macro | Surface | Surface variant using the action color palette (button/CTA primary color). |
 | `.sf-surface--danger` | PUBLIC | macro | Surface | Surface variant using the danger status palette. |
-| `.sf-surface--error` | PUBLIC | macro | Surface | Surface variant using the error status palette. |
 | `.sf-surface--info` | PUBLIC | macro | Surface | Surface variant using the info status palette. |
 | `.sf-surface--inverse` | PUBLIC | macro | Surface | Surface variant that inverts light/dark, creating an always-dark surface in light mode and always-light in dark mode. |
 | `.sf-surface--neutral` | PUBLIC | macro | Surface | Surface variant using the neutral palette (muted/gray). |
@@ -965,13 +958,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `.is-clipped` | PUBLIC | state | OVERFLOW / CLIPPING | Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary. |
 | `.is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with is-expanded or is-open. Components add transitions. |
 | `.is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
-| `.is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens. Semantic variant of is-error for destructive actions (e.g. a delete confirmation dialog). |
+| `.is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
 | `.is-disabled` | PUBLIC | state | INTERACTIVITY | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
 | `.is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
 | `.is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
 | `.is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
 | `.is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
-| `.is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — applies error color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid. |
+| `.is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid. |
 | `.is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of is-collapsed. Components add transitions. |
 | `.is-fixed` | PUBLIC | state | POSITION / STICKINESS | Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning). |
 | `.is-focused` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select). |
@@ -979,7 +972,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.is-hidden` | PUBLIC | state | VISIBILITY | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
 | `.is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
 | `.is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
-| `.is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies error color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context. |
+| `.is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context. |
 | `.is-invisible` | PUBLIC | state | VISIBILITY | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
 | `.is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
 | `.is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to is-collapsed/is-hidden. Sets --sf-is-open to 1 for calc() branching. |

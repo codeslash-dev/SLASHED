@@ -157,31 +157,30 @@ Set these 6 `oklch()` tokens — dark mode and all derived palettes are computed
 
 ```css
 /* Light mode — the only values you need to change for rebranding */
---sf-color-primary-light:   oklch(0.47 0.27 264)   /* Primary brand color */
---sf-color-secondary-light: oklch(0.22 0.04 264)   /* Secondary brand color */
---sf-color-tertiary-light:  oklch(0.42 0.22 295)   /* Tertiary brand color */
---sf-color-action-light:    oklch(0.50 0.22 235)   /* CTAs, links, focus ring */
---sf-color-neutral-light:   oklch(0.52 0.025 260)  /* Slightly chromatic grey */
---sf-color-base-light:      oklch(0.96 0.006 250)  /* Near-white base surface */
+--sf-color-primary-source-light:   oklch(0.47 0.27 264)   /* Primary brand color */
+--sf-color-secondary-source-light: oklch(0.22 0.04 264)   /* Secondary brand color */
+--sf-color-tertiary-source-light:  oklch(0.42 0.22 295)   /* Tertiary brand color */
+--sf-color-action-source-light:    oklch(0.50 0.22 235)   /* CTAs, links, focus ring */
+--sf-color-neutral-source-light:   oklch(0.52 0.025 260)  /* Slightly chromatic grey */
+--sf-color-base-source-light:      oklch(0.96 0.006 250)  /* Near-white base surface */
 
 /* Dark mode — optional override (auto-computed by default) */
 /* Auto formula: clamp(0.65, 0.95 - l*0.5, 0.88) for brand, chroma * 0.9 */
 /* For base: clamp(0.16, 1.18 - l, 0.24) — near-white → near-dark */
---sf-color-primary-dark:    oklch(0.715 0.243 264)  /* Optional full override */
-/* similarly: -secondary-dark, -tertiary-dark, -action-dark, -neutral-dark, -base-dark */
+--sf-color-primary-source-dark:    oklch(0.715 0.243 264)  /* Optional full override */
+/* similarly: -secondary-source-dark, -tertiary-source-dark, -action-source-dark, -neutral-source-dark, -base-source-dark */
 ```
 
 ### 5.3 Status colors
 
 ```css
 /* Light mode (knob) */
---sf-color-success-light:  oklch(0.50 0.16 145)  /* Green */
---sf-color-warning-light:  oklch(0.75 0.17 80)   /* Yellow — L=0.75 → dark text auto */
---sf-color-error-light:    oklch(0.50 0.20 25)   /* Red — form validation */
---sf-color-info-light:     oklch(0.48 0.18 235)  /* Blue */
---sf-color-danger-light:   oklch(0.48 0.22 12)   /* Red — destructive actions */
+--sf-color-success-source-light:  oklch(0.50 0.16 145)  /* Green */
+--sf-color-warning-source-light:  oklch(0.75 0.17 80)   /* Yellow — L=0.75 → dark text auto */
+--sf-color-info-source-light:     oklch(0.48 0.18 235)  /* Blue */
+--sf-color-danger-source-light:   oklch(0.48 0.22 12)   /* Red — destructive actions AND form validation errors */
 
-/* Dark mode — same auto-derivation as brand, or override with -dark variants */
+/* Dark mode — same auto-derivation as brand, or override with -source-dark variants */
 ```
 
 ### 5.4 Resolved colors — use these in components
@@ -199,8 +198,8 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 --sf-color-surface          /* Alias for --sf-color-base */
 
 /* Status */
---sf-color-success   --sf-color-warning   --sf-color-error
---sf-color-info      --sf-color-danger
+--sf-color-success   --sf-color-warning   --sf-color-danger
+--sf-color-info
 ```
 
 ### 5.5 Text colors
@@ -222,7 +221,6 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 --sf-color-text--on-neutral
 --sf-color-text--on-success
 --sf-color-text--on-warning
---sf-color-text--on-error
 --sf-color-text--on-info
 --sf-color-text--on-danger
 --sf-color-text--on-inverse
@@ -328,7 +326,7 @@ Examples: `--sf-color-primary-superlight`, `--sf-color-action-muted`, `--sf-colo
 
 ### 5.11 Status triplets
 
-For each status (`success`, `warning`, `error`, `info`, `danger`):
+For each status (`success`, `warning`, `info`, `danger`):
 
 ```css
 --sf-color-{status}-subtle    /* color / 0.12 — alert background */
@@ -336,7 +334,7 @@ For each status (`success`, `warning`, `error`, `info`, `danger`):
 --sf-color-{status}-strong    /* Status text — darker in light mode, lighter in dark */
 ```
 
-Examples: `--sf-color-error-subtle`, `--sf-color-warning-strong`.
+Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 
 ### 5.12 Gradients
 
@@ -398,7 +396,7 @@ Loading `optional/tokens.palette.css` adds 11 steps for each of the 6 brand fami
 --sf-palette-mix-100: 8%;    /* … and so on up to -950 */
 ```
 
-Status families (success/warning/error/info/danger) have **no numeric scale** — use their triplets.
+Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
 
 ### 5.15 Scrollbar and color scheme
 
@@ -604,6 +602,22 @@ Pattern: `--sf-h1-{property}` through `--sf-h6-{property}`
 --sf-section-pad--xl   /* space-4xl × 1.5 × section-scale */
 --sf-section-pad--2xl  /* space-4xl × 2   × section-scale */
 ```
+
+**Layout pattern — two approaches for horizontal gutters:**
+
+```html
+<!-- Standard: container owns the horizontal gutter -->
+<section class="sf-section">
+  <div class="sf-container">…</div>
+</section>
+
+<!-- Alternative: section owns the gutter (skip nested container) -->
+<section class="sf-section sf-section--guttered">
+  <div class="sf-stack">…</div>
+</section>
+```
+
+Use `sf-section--guttered` when the section contains a single layout without needing per-column width control. Use `sf-container` (nested inside the section) when you need `--narrow`, `--wide`, or multiple width zones in one section.
 
 ### 7.5 Icons and UI sizes
 
@@ -1171,10 +1185,10 @@ Each step up the type scale subtracts `step-index × taper` from that step's def
 }
 
 /* Status alert */
-.alert--error {
-    background: var(--sf-color-error-subtle);
-    border: 1px solid var(--sf-color-error-muted);
-    color: var(--sf-color-error-strong);
+.alert--danger {
+    background: var(--sf-color-danger-subtle);
+    border: 1px solid var(--sf-color-danger-muted);
+    color: var(--sf-color-danger-strong);
 }
 
 /* Link with proper contrast */
@@ -1223,12 +1237,12 @@ a:visited { color: var(--sf-color-link--visited); }
 
 ```css
 :root {
-    --sf-color-primary-light:   oklch(0.50 0.25 30);    /* Your primary color */
-    --sf-color-secondary-light: oklch(0.25 0.05 30);    /* Secondary color */
-    --sf-color-tertiary-light:  oklch(0.45 0.20 60);    /* Tertiary color */
-    --sf-color-action-light:    oklch(0.52 0.22 220);   /* CTAs, links, focus */
-    --sf-color-neutral-light:   oklch(0.50 0.02 30);    /* Grey (slightly tinted) */
-    --sf-color-base-light:      oklch(0.97 0.003 30);   /* Near-white */
+    --sf-color-primary-source-light:   oklch(0.50 0.25 30);    /* Your primary color */
+    --sf-color-secondary-source-light: oklch(0.25 0.05 30);    /* Secondary color */
+    --sf-color-tertiary-source-light:  oklch(0.45 0.20 60);    /* Tertiary color */
+    --sf-color-action-source-light:    oklch(0.52 0.22 220);   /* CTAs, links, focus */
+    --sf-color-neutral-source-light:   oklch(0.50 0.02 30);    /* Grey (slightly tinted) */
+    --sf-color-base-source-light:      oklch(0.97 0.003 30);   /* Near-white */
 }
 /* Dark mode computed automatically */
 ```
@@ -1278,7 +1292,7 @@ a:visited { color: var(--sf-color-link--visited); }
 
 ```css
 :root {
-    --sf-color-primary-dark: oklch(0.80 0.15 30);  /* Manual override */
+    --sf-color-primary-source-dark: oklch(0.80 0.15 30);  /* Manual override */
     /* All other colors still auto-computed */
 }
 ```
@@ -1303,10 +1317,10 @@ a:visited { color: var(--sf-color-link--visited); }
 ```
 
 **5. `knob` tokens are for setting; `consumption` tokens are for using.**
-- You edit `--sf-color-primary-light` (knob).
+- You edit `--sf-color-primary-source-light` (knob).
 - You reference `--sf-color-primary` (consumption) in component CSS.
 
-**6. Dark mode is free — don't fight it.** Don't set `--sf-color-primary-dark` unless you want full manual control. The framework handles it.
+**6. Dark mode is free — don't fight it.** Don't set `--sf-color-primary-source-dark` unless you want full manual control. The framework handles it.
 
 **7. One multiplier = global redesign.**
 - `--sf-radius-scale: 0` → sharp design system.
@@ -1329,7 +1343,7 @@ a:visited { color: var(--sf-color-link--visited); }
 
 | What you want to do | Token / approach |
 |---|---|
-| Rebranding | 6 `--sf-color-*-light` tokens |
+| Rebranding | 6 `--sf-color-*-source-light` tokens |
 | Font | `--sf-font-body`, `--sf-font-heading` |
 | Sharp corners globally | `--sf-radius-scale: 0` |
 | Disable animations | `--sf-motion-scale: 0` |

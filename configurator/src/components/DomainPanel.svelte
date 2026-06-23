@@ -115,8 +115,8 @@
   const BRAND_STATUS = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
 
   const hasBrandOverride = (key) =>
-    overrides[`--sf-color-${key}-light`] != null ||
-    overrides[`--sf-color-${key}-dark`] != null;
+    overrides[`--sf-color-${key}-source-light`] != null ||
+    overrides[`--sf-color-${key}-source-dark`] != null;
 
   const modifiedHere = $derived(
     domainTokens.filter((t) => overrides[t.name] != null)

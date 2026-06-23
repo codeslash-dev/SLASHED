@@ -3,6 +3,54 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.6.x → 0.7.0
+
+### Color source tokens renamed
+
+Source tokens (the ones you set for rebranding) are now named `-source-light` / `-source-dark`
+instead of `-light` / `-dark`. This prevents confusion with the shade aliases
+(`-lighter`, `-xlight`, `-superlight`, etc.).
+
+| Was | Now |
+|---|---|
+| `--sf-color-primary-light` | `--sf-color-primary-source-light` |
+| `--sf-color-primary-dark` | `--sf-color-primary-source-dark` |
+| `--sf-color-secondary-light` | `--sf-color-secondary-source-light` |
+| … (all 6 brand + 4 status source tokens) | … |
+
+The resolved semantic tokens (`--sf-color-primary`, `--sf-color-danger`, etc.) are **unchanged**.
+
+### `--sf-color-error` removed — use `--sf-color-danger`
+
+`danger` is the single canonical red status token (destructive actions,
+form validation errors, negative states). The `error` family has been removed.
+
+- **Replace** `--sf-color-error` → `--sf-color-danger`
+- **Replace** `--sf-color-error-subtle` → `--sf-color-danger-subtle`
+- **Replace** `--sf-color-error-muted` → `--sf-color-danger-muted`
+- **Replace** `--sf-color-error-strong` → `--sf-color-danger-strong`
+- **Remove** any overrides to `--sf-color-error-source-light` / `--sf-color-error-source-dark`
+  (they no longer exist). Override `--sf-color-danger-source-light` instead.
+
+### New: `.sf-section--guttered`
+
+Adds horizontal page gutters (`--sf-gutter`) directly to a section, so a separate
+`.sf-container` wrapper is not needed:
+
+```html
+<!-- before (still valid) -->
+<section class="sf-section">
+  <div class="sf-container">…</div>
+</section>
+
+<!-- new alternative -->
+<section class="sf-section sf-section--guttered">
+  <div class="sf-stack">…</div>
+</section>
+```
+
+---
+
 ## SLASHED 0.5.x → 0.6.0
 
 v0.6.0 removes ~178 tokens from the public API (876 → 698). The cuts target
@@ -201,7 +249,7 @@ renames — there are no other renamed tokens; everything else is additive.
 
 | Was | Now | Notes |
 |---|---|---|
-| `--sf-color-surface-light` / `-dark` | `--sf-color-base-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base`; the compat alias was dropped in 0.6.0 (see the 0.5→0.6 section). |
+| `--sf-color-surface-source-light` / `-dark` | `--sf-color-base-source-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base`; the compat alias was dropped in 0.6.0 (see the 0.5→0.6 section). |
 | `--sf-color-well` | `--sf-color-inset` | Renamed to communicate the recessed / indented surface role. `--sf-color-well` is removed (no alias). |
 | `--sf-color-{family}-hover` | `--sf-color-{family}--hover` | Separator changed from single-dash to double-dash for BEM state-modifier compliance. Applies to all 6 brand families: `primary`, `secondary`, `tertiary`, `action`, `neutral`, `base`. Available in `optional/tokens.palette.css`. No back-compat alias. |
 | `--sf-color-{family}-active` | `--sf-color-{family}--active` | Same BEM separator fix as `-hover` above. Same 6 families. No back-compat alias. |
@@ -209,14 +257,14 @@ renames — there are no other renamed tokens; everything else is additive.
 **The resolved semantic token `--sf-color-surface` (the page-surface anchor)
 is unchanged** — only the underlying *source* family prefix changed. If you
 only ever consumed `var(--sf-color-surface)`, nothing changes. If you
-**overrode** `--sf-color-surface-light` / `--sf-color-surface-dark` to rebrand
-the page surface, rename those overrides to `--sf-color-base-light` / `-dark`.
+**overrode** `--sf-color-surface-source-light` / `--sf-color-surface-source-dark` to rebrand
+the page surface, rename those overrides to `--sf-color-base-source-light` / `-dark`.
 
 ### Tokens removed
 
 | Removed | Replacement |
 |---|---|
-| `--sf-color-{success,warning,error,info,danger}-{50…950}` | The numeric ramp for status families is gone. Status colours are functional — use the `subtle` / `muted` / base / `strong` aliases, or derive a step with `color-mix(in oklab, var(--sf-color-error) 40%, var(--sf-color-surface))`. Brand families keep their full numeric scale via `optional/tokens.palette.css`. |
+| `--sf-color-{success,warning,error,info,danger}-{50…950}` | The numeric ramp for status families is gone. Status colours are functional — use the `subtle` / `muted` / base / `strong` aliases, or derive a step with `color-mix(in oklab, var(--sf-color-danger) 40%, var(--sf-color-surface))`. Brand families keep their full numeric scale via `optional/tokens.palette.css`. |
 
 ### Classes renamed
 

@@ -112,25 +112,24 @@ layer-flattened `.flat` variant. `npm run build` prints raw / gzip / brotli size
 ## Customising tokens
 
 Override the source tokens in your own stylesheet — any valid CSS color works. The
-minimum rebrand is the 6 brand `-light` tokens; optionally add `-dark`
-counterparts for per-mode control. The 5 status colours
-(`success`/`warning`/`danger`/`error`/`info`) auto-derive but are overridable
-too, for up to 22 color tokens total (11 light + 11 dark):
-
+minimum rebrand is the 6 brand `-source-light` tokens; optionally add `-source-dark`
+counterparts for per-mode control. The 4 status colours
+(`success`/`warning`/`danger`/`info`) auto-derive but are overridable
+too, for up to 20 color tokens total (10 source-light + 10 source-dark).
 ```css
 :root {
-  --sf-color-primary-light:   #3b5bdb;
-  --sf-color-secondary-light: #5c677d;
-  --sf-color-tertiary-light:  #0c8599;
-  --sf-color-action-light:    #0ca678;
-  --sf-color-neutral-light:   #495057;
-  --sf-color-base-light:      #f8f9fa;
+  --sf-color-primary-source-light:   #3b5bdb;
+  --sf-color-secondary-source-light: #5c677d;
+  --sf-color-tertiary-source-light:  #0c8599;
+  --sf-color-action-source-light:    #0ca678;
+  --sf-color-neutral-source-light:   #495057;
+  --sf-color-base-source-light:      #f8f9fa;
 
   /* optional dark counterparts for per-mode control */
-  --sf-color-primary-dark:    #748ffc;
-  --sf-color-action-dark:     #38d9a9;
-  --sf-color-neutral-dark:    #adb5bd;
-  --sf-color-base-dark:       #1a1b1e;
+  --sf-color-primary-source-dark:    #748ffc;
+  --sf-color-action-source-dark:     #38d9a9;
+  --sf-color-neutral-source-dark:    #adb5bd;
+  --sf-color-base-source-dark:       #1a1b1e;
 }
 ```
 

@@ -33,12 +33,12 @@
        Any valid CSS color works. Dark mode auto-derives; the full
        shade ramps, status colors, text-on-color and surface system
        all regenerate from these. */
-    --sf-color-primary-light:   oklch(0.47 0.27 264);  /* brand / links     */
-    --sf-color-secondary-light: oklch(0.22 0.04 264);  /* muted brand       */
-    --sf-color-tertiary-light:  oklch(0.42 0.22 295);  /* accent            */
-    --sf-color-action-light:    oklch(0.50 0.22 235);  /* primary CTA       */
-    --sf-color-neutral-light:   oklch(0.52 0.025 260); /* greys / text base */
-    --sf-color-base-light:      oklch(0.96 0.006 250); /* page surface      */
+    --sf-color-primary-source-light:   oklch(0.47 0.27 264);  /* brand / links     */
+    --sf-color-secondary-source-light: oklch(0.22 0.04 264);  /* muted brand       */
+    --sf-color-tertiary-source-light:  oklch(0.42 0.22 295);  /* accent            */
+    --sf-color-action-source-light:    oklch(0.50 0.22 235);  /* primary CTA       */
+    --sf-color-neutral-source-light:   oklch(0.52 0.025 260); /* greys / text base */
+    --sf-color-base-source-light:      oklch(0.96 0.006 250); /* page surface      */
 
     /* ===========================================================
        2. FLUID ENGINE — generative scale inputs

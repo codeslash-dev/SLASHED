@@ -187,7 +187,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 **slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/theme-example.css`).
 
-**slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`. Transition tokens live in `core/tokens.css` — see [motion.md](motion.md). `.sf-color-pulse` animates `--sf-color-primary-light` lightness, demonstrating `@property` colour interpolation in oklch.
+**slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`. Transition tokens live in `core/tokens.css` — see [motion.md](motion.md). `.sf-color-pulse` animates `--sf-color-primary-source-light` lightness, demonstrating `@property` colour interpolation in oklch.
 
 **slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` and `.sf-clickable-parent`. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`).
 
@@ -202,7 +202,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 ## Tokens
 
 - Colors: `oklch()` with relative color syntax for derived values; `oklch(from …)` for semantic alpha variants (ghost/subtle/muted) in core; `color-mix(in oklab)` for numeric tints/shades in the optional palette; the optional palette's numeric alpha variants (-a5/-a10/-a30/-a50/-a80) are gated behind `@supports (color: oklch(from red l c h))`
-- `@property` registration for 22 source colours (11 `-light` + 11 `-dark`, brand + status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
+- `@property` registration for 18 source colours (10 `-source-light` + 10 `-source-dark`, 6 brand + 4 status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals
@@ -211,7 +211,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 - **Single dash vs double dash.** Two parallel rules, applied consistently:
   - **`<role>-<variant>` (single dash)** — names a *palette/shade variant*; the
-    name describes the colour itself (`--sf-color-primary-light`,
+    name describes the colour itself (`--sf-color-primary-source-light`,
     `--sf-color-primary-darker`, `--sf-color-success-strong`,
     `--sf-color-action-subtle`). The token IS a colour value.
   - **`<role>--<context>` (double dash)** — names an *application slot*; the
@@ -400,7 +400,7 @@ Plain CSS, no runtime. The notable costs:
   animate `transform`/`opacity` where possible (compositor-only paths).
 - **`oklch` + relative-colour tokens** recompute when their inputs change.
   Animating a registered colour (e.g. `.sf-color-pulse` mutating
-  `--sf-color-primary-light`) re-derives everything downstream each frame — fine
+  `--sf-color-primary-source-light`) re-derives everything downstream each frame — fine
   for a small accent, not for a token hundreds of elements read. A theme toggle
   re-resolves the graph once (negligible).
 - **`@property` registration** (22 colours + 5 state flags) is a one-time parse
@@ -436,7 +436,7 @@ Deliberate behaviours, documented so they aren't mistaken for bugs.
   lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
   differs from the conventional monotonic lightness ramp.
 - **Palette token values are not part of the public API.** The *names*
-  (`--sf-color-primary-light`, `--sf-color-action--hover`, etc.) are stable and
+  (`--sf-color-primary-source-light`, `--sf-color-action--hover`, etc.) are stable and
   covered by SemVer. The *computed colour values* they resolve to may shift
   between minor releases as derivation formulas are refined. Pin your own
   overrides to the 6 source tokens if you need colour stability.
