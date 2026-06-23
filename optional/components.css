@@ -23,74 +23,228 @@
    * .sf-button — primary action component
    * ============================================================
    *
+   * Works on <button>, <a>, <input type="submit">, <label>.
+   * Focus rings inherited from core/base.css.
+   * Transitions inherited from core/motion.css (interactive elements).
+   * Disabled visual via :disabled / aria-disabled="true".
+   * Loading spinner via .is-loading (states.css).
+   * ============================================================
+   *
+   * Base
+   * ────
    * .sf-button {
-   *   display:          inline-flex;
-   *   align-items:      center;
-   *   justify-content:  center;
-   *   gap:              var(--sf-button-gap);
-   *   padding:          var(--sf-button-pad-y) var(--sf-button-pad-x);
-   *   min-block-size:   var(--sf-button-min-height);
-   *   border:           var(--sf-button-border-width) var(--sf-border-style) transparent;
-   *   border-radius:    var(--sf-button-radius);
-   *   font:             inherit;
-   *   font-weight:      var(--sf-button-font-weight);
-   *   cursor:           pointer;
-   *   user-select:      none;
+   *   display:         inline-flex;
+   *   align-items:     center;
+   *   justify-content: center;
+   *   gap:             var(--sf-button-gap);
+   *   padding:         var(--sf-button-padding-block) var(--sf-button-padding-inline);
+   *   min-block-size:  var(--sf-button-min-height);
+   *   border:          var(--sf-button-border-width) solid transparent;
+   *   border-radius:   var(--sf-button-radius);
+   *   font:            inherit;
+   *   font-size:       inherit;
+   *   font-weight:     var(--sf-button-font-weight);
+   *   line-height:     1;
+   *   text-decoration: none;
+   *   white-space:     nowrap;
+   *   cursor:          pointer;
+   *   user-select:     none;
+   *   appearance:      none;
+   *   position:        relative;
    * }
+   *
+   * Native <button> OS chrome reset
+   * .sf-button:where(button) { background: none; }
+   *
+   * Colour variants
+   * ───────────────
    * .sf-button--primary {
-   *   background:       var(--sf-color-primary);
-   *   color:            var(--sf-color-text--on-primary);
+   *   background: var(--sf-color-primary);
+   *   color:      var(--sf-color-text--on-primary);
    * }
+   * .sf-button--primary:hover:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-primary--hover);
+   * }
+   * .sf-button--primary:active:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-primary--active);
+   * }
+   *
    * .sf-button--secondary {
-   *   background:       transparent;
-   *   color:            var(--sf-color-text);
-   *   border-color:     var(--sf-color-border);
+   *   background:   transparent;
+   *   color:        var(--sf-color-text);
+   *   border-color: var(--sf-color-border--strong);
    * }
+   * .sf-button--secondary:hover:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-bg--hover);
+   * }
+   * .sf-button--secondary:active:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-bg--selected);
+   * }
+   *
    * .sf-button--ghost {
-   *   background:       transparent;
-   *   color:            var(--sf-color-link);
+   *   background: transparent;
+   *   color:      var(--sf-color-link);
    * }
+   * .sf-button--ghost:hover:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-primary-subtle);
+   * }
+   * .sf-button--ghost:active:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-primary-muted);
+   * }
+   *
    * .sf-button--danger {
-   *   background:       var(--sf-color-danger);
-   *   color:            var(--sf-color-text--on-danger);
+   *   background:   var(--sf-color-danger);
+   *   color:        var(--sf-color-text--on-danger);
+   *   border-color: transparent;
    * }
-   * .sf-button--s   { --sf-button-pad-x: var(--sf-space-s); --sf-button-pad-y: var(--sf-space-2xs); }
-   * .sf-button--m   { --sf-button-pad-x: var(--sf-space-m); --sf-button-pad-y: var(--sf-space-s);   }
-   * .sf-button--l   { --sf-button-pad-x: var(--sf-space-l); --sf-button-pad-y: var(--sf-space-m);   }
+   * .sf-button--danger:hover:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-danger-darker,
+   *     color-mix(in oklab, var(--sf-color-danger) 82%, var(--sf-color-text)));
+   * }
+   * .sf-button--danger:active:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-danger-xdark,
+   *     color-mix(in oklab, var(--sf-color-danger) 60%, var(--sf-color-text)));
+   * }
+   *
+   * .sf-button--neutral {
+   *   background:   var(--sf-color-inset);
+   *   color:        var(--sf-color-text);
+   *   border-color: var(--sf-color-border);
+   * }
+   * .sf-button--neutral:hover:not(:disabled, [aria-disabled="true"]) {
+   *   background: var(--sf-color-bg--hover);
+   * }
+   *
+   * Size variants  (m is the token default)
+   * ───────────────────────────────────────
+   * .sf-button--s {
+   *   --sf-button-padding-block:  var(--sf-space-2xs);
+   *   --sf-button-padding-inline: var(--sf-space-s);
+   *   font-size: var(--sf-text-s);
+   * }
+   * .sf-button--l {
+   *   --sf-button-padding-block:  var(--sf-space-s);
+   *   --sf-button-padding-inline: var(--sf-space-l);
+   *   font-size: var(--sf-text-l);
+   * }
+   *
+   * Shape variants
+   * ──────────────
+   * Icon-only — square; keep padding-block so touch target stays ≥ --sf-touch-target
+   * .sf-button--icon {
+   *   --sf-button-padding-inline: var(--sf-button-padding-block);
+   *   aspect-ratio: 1;
+   * }
+   * .sf-button--pill { border-radius: var(--sf-radius-pill, 9999px); }
+   * .sf-button--full { display: flex; inline-size: 100%; }
+   *
+   * Disabled state
+   * ──────────────
+   * Covers native :disabled and aria-disabled="true" (<a> buttons).
+   * No pointer-events reset — keep focus reachable so tooltips can
+   * explain why a button is disabled.
+   * .sf-button:disabled,
+   * .sf-button[aria-disabled="true"] {
+   *   opacity: var(--sf-opacity-disabled);
+   *   cursor:  not-allowed;
+   * }
    */
 
   /* ============================================================
    * .sf-card — content container with concentric radius
    * ============================================================
    *
+   * Concentric radius: --sf-card-radius-outer = radius + padding,
+   * so inner elements using the global --sf-radius-m stay visually
+   * proportional inside a padded card.
+   *
+   * Sections (__header, __body, __footer) are transparent layout
+   * wrappers (display: contents). The card's flex + gap controls
+   * vertical rhythm.
+   *
+   * Note: overflow:hidden is intentionally NOT set on the base rule —
+   * it clips tooltips and dropdowns inside the card. Apply it only
+   * when needed (e.g. edge-to-edge image cards via .sf-card--no-pad).
+   * ============================================================
+   *
+   * Base
+   * ────
    * .sf-card {
-   *   display:          flex;
-   *   flex-direction:   column;
-   *   gap:              var(--sf-card-gap);
-   *   padding:          var(--sf-card-padding);
-   *   background:       var(--sf-card-bg);
-   *   border-radius:    var(--sf-card-radius-outer);
-   *   box-shadow:       var(--sf-card-shadow);
+   *   display:        flex;
+   *   flex-direction: column;
+   *   gap:            var(--sf-card-gap);
+   *   padding:        var(--sf-card-padding);
+   *   background:     var(--sf-card-bg);
+   *   border-radius:  var(--sf-card-radius-outer);
+   *   box-shadow:     var(--sf-card-shadow);
    * }
-   * .sf-card--bordered {
-   *   border:           var(--sf-card-border-width) var(--sf-border-style) var(--sf-card-border-color);
-   *   box-shadow:       none;
-   * }
-   * .sf-card--elevated {
-   *   box-shadow:       var(--sf-shadow-l);
-   * }
-   * .sf-card--interactive {
-   *   transition:       transform var(--sf-duration-fast) var(--sf-ease-out),
-   *                     box-shadow var(--sf-duration-fast) var(--sf-ease-out);
-   * }
-   * .sf-card--interactive:hover {
-   *   transform:        translateY(-2px);
-   *   box-shadow:       var(--sf-shadow-l);
-   * }
+   *
+   * Semantic section wrappers — transparent to layout by default
    * .sf-card__header,
    * .sf-card__body,
-   * .sf-card__footer {
-   *   display: contents;
+   * .sf-card__footer { display: contents; }
+   *
+   * Style variants
+   * ──────────────
+   * .sf-card--bordered {
+   *   border:     var(--sf-card-border-width) solid var(--sf-card-border-color);
+   *   box-shadow: none;
+   * }
+   * .sf-card--elevated { box-shadow: var(--sf-shadow-l); }
+   *
+   * Interactive / hover-lift
+   * .sf-card--interactive {
+   *   cursor:     pointer;
+   *   transition: transform var(--sf-duration-fast) var(--sf-ease-out),
+   *               box-shadow var(--sf-duration-fast) var(--sf-ease-out);
+   * }
+   * .sf-card--interactive:hover {
+   *   transform:  translateY(-2px);
+   *   box-shadow: var(--sf-shadow-l);
+   * }
+   * .sf-card--interactive:active {
+   *   transform:  translateY(0);
+   *   box-shadow: var(--sf-card-shadow);
+   * }
+   *
+   * Glow — coloured ambient shadow via the primary brand colour
+   * .sf-card--glow { box-shadow: var(--sf-shadow-glow); }
+   * .sf-card--glow.sf-card--interactive:hover {
+   *   box-shadow: var(--sf-shadow-glow), var(--sf-shadow-l);
+   * }
+   *
+   * .sf-card--flat { box-shadow: none; }
+   *
+   * Layout variants
+   * ───────────────
+   * Horizontal — media-object style: image left, content right
+   * .sf-card--horizontal {
+   *   flex-direction: row;
+   *   align-items:    stretch;
+   * }
+   * .sf-card--horizontal .sf-card__header,
+   * .sf-card--horizontal .sf-card__body,
+   * .sf-card--horizontal .sf-card__footer {
+   *   display:        flex;
+   *   flex-direction: column;
+   * }
+   *
+   * No padding — edge-to-edge content (images, full-bleed headers).
+   * Add overflow:hidden to the card when using this modifier.
+   * .sf-card--no-pad { --sf-card-padding: 0; gap: 0; }
+   *
+   * Divided — visible header/footer separators.
+   * Restores sections to block so they can carry own padding and borders.
+   * .sf-card--divided .sf-card__header,
+   * .sf-card--divided .sf-card__body,
+   * .sf-card--divided .sf-card__footer { display: block; }
+   * .sf-card--divided .sf-card__header {
+   *   padding-block-end: var(--sf-card-gap);
+   *   border-block-end:  var(--sf-card-border-width) solid var(--sf-card-border-color);
+   * }
+   * .sf-card--divided .sf-card__footer {
+   *   padding-block-start: var(--sf-card-gap);
+   *   border-block-start:  var(--sf-card-border-width) solid var(--sf-card-border-color);
    * }
    */
 

@@ -29,14 +29,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 925,
+      "total": 927,
       "by_type": {
-        "class": 232,
+        "class": 234,
         "token": 693
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 869,
+        "PUBLIC": 871,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -44,15 +44,15 @@
         "knob": 222
       },
       "tokens": 693,
-      "classes": 232,
-      "sf_classes": 183,
+      "classes": 234,
+      "sf_classes": 185,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
         "Core tokens": 509,
-        "Layout primitives": 126,
+        "Layout primitives": 128,
         "Layout tokens": 49,
         "Macro classes": 37,
         "Macro tokens": 23,
@@ -24758,6 +24758,32 @@
       ]
     },
     {
+      "name": "sf-scroll-target",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-scroll-target",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Collapse modifier",
+      "description": "Anchor targets (#id links) stay visible under a sticky header. Browsers scroll the element to the viewport top; this pushes the effective snap point down by the header height. Use on any element with an id= that serves as a scroll destination: <section id=\"features\"…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-section",
       "type": "class",
       "tier": "PUBLIC",
@@ -24872,6 +24898,32 @@
       "area": "layout",
       "group": "Section",
       "description": "Section variant with medium (m) vertical padding.",
+      "isVariant": true,
+      "baseClass": "sf-section",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-section--offset-header",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-section--offset-header",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Collapse modifier",
+      "description": "Extends padding-block-start by --sf-sticky-offset so the section's top content clears a sticky/fixed header on first load and after hash navigation. Pairs with .sf-scroll-target below. Override the offset per-section: style=\"--sf-sticky-offset: 4rem\"",
       "isVariant": true,
       "baseClass": "sf-section",
       "optional": false,

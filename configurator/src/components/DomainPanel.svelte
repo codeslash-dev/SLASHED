@@ -35,6 +35,7 @@
   import QuickKnobs from './QuickKnobs.svelte';
   import StylePresetRow from './StylePresetRow.svelte';
   import ColorAssignments from './ColorAssignments.svelte';
+  import ShadeRamp from './ShadeRamp.svelte';
   import DomainPreview from './DomainPreview.svelte';
   import Icon from './Icon.svelte';
   import { DOMAIN_PREVIEWS } from '../lib/domainPreviews.js';
@@ -98,6 +99,7 @@
   let showSecondary = $state(false);
   let showStatus = $state(false);
   let showColorRoles = $state(true);
+  let showShadeRamp = $state(false);
 
   // Preview disclosure (open by default; for generator domains it appears below generators).
   let showPreview = $state(true);
@@ -327,6 +329,16 @@
               <BrandColorRow colorKey={key} {label} />
             {/each}
           </div>
+        </details>
+
+        <!-- Shade ramp (superlight → superdark for each brand color) -->
+        <details class="cfg-card panel__card" bind:open={showShadeRamp}>
+          <summary class="panel__card-head panel__expand-summary">
+            <span class="panel__expand-chev" aria-hidden="true">›</span>
+            <span class="panel__card-title">Shade ramp</span>
+            <span class="panel__expand-count">7-step scale per brand color</span>
+          </summary>
+          <ShadeRamp />
         </details>
 
       {:else if basicGroups.length}

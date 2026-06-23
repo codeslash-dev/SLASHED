@@ -21,7 +21,7 @@
     ],
     "counts": {
       "tokens": 693,
-      "sf_classes": 183,
+      "sf_classes": 185,
       "is_classes": 40
     }
   },
@@ -855,11 +855,13 @@
     "sf-scrim__content",
     "sf-scroll-shadow",
     "sf-scroll-snap",
+    "sf-scroll-target",
     "sf-section",
     "sf-section--2xl",
     "sf-section--collapse",
     "sf-section--l",
     "sf-section--m",
+    "sf-section--offset-header",
     "sf-section--s",
     "sf-section--xl",
     "sf-section--xs",
