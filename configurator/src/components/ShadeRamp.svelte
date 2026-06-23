@@ -12,21 +12,16 @@
    */
   import { overrides, ui } from '../lib/store.svelte.js';
   import { measureBackground } from '../lib/probeHost.js';
+  import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
+  import { parseRgb } from '../lib/contrast.js';
 
-  const BRAND_KEYS = [
-    { key: 'primary',   label: 'Primary'   },
-    { key: 'secondary', label: 'Secondary' },
-    { key: 'tertiary',  label: 'Tertiary'  },
-    { key: 'action',    label: 'Action'    },
-    { key: 'neutral',   label: 'Neutral'   },
-    { key: 'base',      label: 'Base'      },
-  ];
+  const BRAND_KEYS = BRAND_COLOR_KEYS.filter((k) => k.group === 'brand');
 
   const SHADE_STEPS = [
     { suffix: '-superlight', label: 'superlight' },
     { suffix: '-xlight',     label: 'xlight'     },
     { suffix: '-lighter',    label: 'lighter'     },
-    { suffix: '',            label: 'base'        },
+    { suffix: '',            label: 'base',  isBase: true },
     { suffix: '-darker',     label: 'darker'      },
     { suffix: '-xdark',      label: 'xdark'       },
     { suffix: '-superdark',  label: 'superdark'   },
@@ -54,10 +49,9 @@
 
   /** Perceived lightness (0–255) — decides whether to use dark or light text on a swatch. */
   function perceived(rgb) {
-    if (!rgb) return 128;
-    const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(rgb);
-    if (!m) return 128;
-    return 0.299 * +m[1] + 0.587 * +m[2] + 0.114 * +m[3];
+    const c = parseRgb(rgb);
+    if (!c) return 128;
+    return (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) * 255;
   }
 </script>
 
@@ -70,7 +64,7 @@
     <div class="sr__row">
       <span class="sr__name">{label}</span>
       <div class="sr__swatches">
-        {#each SHADE_STEPS as { suffix, label: stepLabel } (`${key}${suffix}`)}
+        {#each SHADE_STEPS as { suffix, label: stepLabel, isBase } (`${key}${suffix}`)}
           {@const token = `--sf-color-${key}${suffix}`}
           {@const bg = resolved[token]}
           {@const isLight = bg ? perceived(bg) > 128 : true}
@@ -83,7 +77,7 @@
             >
               {#if !bg}
                 <span class="sr__dots" aria-hidden="true">···</span>
-              {:else if suffix === ''}
+              {:else if isBase}
                 <span class="sr__base-dot" class:sr__base-dot--dark={!isLight} aria-hidden="true">●</span>
               {/if}
             </div>
@@ -95,7 +89,7 @@
   {/each}
 
   <p class="sr__note">
-    Theme: <strong>{ui.previewTheme}</strong> · toggle in the preview pane to compare modes.
+    Toggle in the preview pane to compare modes.
   </p>
 </div>
 
