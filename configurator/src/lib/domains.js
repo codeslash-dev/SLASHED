@@ -361,6 +361,18 @@ export const DOMAINS = [
     ],
   },
   {
+    id: 'misc',
+    docsPath: 'docs/tokens.md',
+    label: 'Misc',
+    icon: 'puzzle',
+    blurb: 'Print, interaction-state flags, fluid scale slots and other stragglers.',
+    namespaces: ['print', 'is'],
+    patterns: [
+      /^--sf-print-/,
+      /^--sf-is-/,
+    ],
+  },
+  {
     id: 'wcag',
     label: 'WCAG',
     icon: 'contrast',
@@ -380,18 +392,6 @@ export const DOMAINS = [
     icon: 'package',
     blurb: 'Pick the dist bundle to ship and copy the drop-in <link> + your overrides.',
     tool: 'setup',
-  },
-  {
-    id: 'misc',
-    docsPath: 'docs/tokens.md',
-    label: 'Misc',
-    icon: 'puzzle',
-    blurb: 'Print, interaction-state flags, fluid scale slots and other stragglers.',
-    namespaces: ['print', 'is'],
-    patterns: [
-      /^--sf-print-/,
-      /^--sf-is-/,
-    ],
   },
   {
     id: 'cheatsheet',

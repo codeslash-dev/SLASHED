@@ -102,9 +102,13 @@
   const tool = $derived(domain?.tool ?? '');
 
   // Keep the contrast-probe host in sync with the user's cascade so every
-  // ContrastBadge resolves `var(...)`, `light-dark()` and `oklch(from ...)`
-  // expressions correctly. setProbeContext is internally idempotent.
+  // ContrastBadge and the Semantic-roles swatch grid resolve `var(...)`,
+  // `light-dark()` and `oklch(from ...)` expressions correctly.
+  // Iterate overrides keys so Svelte 5's proxy tracks per-property changes —
+  // without this, only adds/removes (not value edits) would re-run the effect.
   $effect(() => {
+    for (const key in overrides) void overrides[key];
+    void ui.previewTheme;
     setProbeContext({ overrides, theme: ui.previewTheme });
   });
 
