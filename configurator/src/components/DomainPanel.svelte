@@ -2,24 +2,25 @@
   /**
    * One domain tab (Colors, Typography, Spacing, …).
    *
-   * The panel has two stacked zones, in the same order for every category:
+   * Layout principle: every panel follows the same three-zone rhythm:
    *
-   *   SETTINGS (always visible, inputs-first) — the system inputs a typical
-   *     project sets: one-click presets, brand colors, font stacks, scale
-   *     generators and the global "Scaling" multipliers. Curated via
-   *     lib/basics.js + domains.js so each domain is just curation, no
-   *     bespoke per-field code.
+   *   1. LIVE PREVIEW (always visible, leads the panel)
+   *      — Colors:              Semantic-roles swatch grid
+   *      — Generator domains:   Preview rendered BELOW the generators so the
+   *                             specimen updates as you tune (no separate top card)
+   *      — All other domains:   DomainPreview card at top, open by default
    *
-   *   ALL VARIABLES (progressive disclosure) — a collapsed disclosure holding
-   *     the FULL domain catalogue (grouped, with tier / modified / usage
-   *     filters), so every token is one click away. Domains with no curated
-   *     Settings surface (e.g. Misc) render the catalogue inline instead of
-   *     hiding it behind a redundant click.
+   *   2. QUICK CONTROLS (immediately after the preview)
+   *      — QuickKnobs (scaling sliders) follow the preview so the primary
+   *        control is always close to the output it drives.
+   *      — Style presets and intro text sit here too.
+   *      — Curated groups (lib/basics.js) are now collapsible cards so you can
+   *        reach lower sections while still watching the preview.
    *
-   * An active search collapses the panel to the filtered catalogue alone —
-   * search means "find any token in this category", curated forms aside.
-   *
-   * Reuses the existing TokenRow / TokenEditor / OklchPicker / ScaleGenerator.
+   *   3. ALL VARIABLES (progressive disclosure)
+   *      — A collapsed `<details>` holding the full domain catalogue (grouped,
+   *        with tier / modified / usage filters). Domains with no curated
+   *        Settings surface (e.g. Misc) render the catalogue inline.
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN, DOCS_BASE_URL } from '../lib/domains.js';
@@ -44,16 +45,12 @@
   const query = $derived(ui.query.trim().toLowerCase());
   const searching = $derived(query.length > 0);
 
-  // Curated essential rows — only those present in the active catalogue.
   const essentials = $derived(
     (domain.essentials ?? [])
       .map((name) => tokenByName.get(name))
       .filter(Boolean)
   );
 
-  // Friendly curated groups (lib/basics.js): label + help per control, with
-  // controls whose token is missing from the catalogue dropped defensively
-  // (tests/basics.test.js makes that a CI failure, never a silent gap).
   const basicGroups = $derived(
     (BASIC_BY_DOMAIN[domain.id]?.groups ?? [])
       .map((g) => ({
@@ -65,12 +62,8 @@
       .filter((g) => g.controls.length)
   );
 
-  // Every token in this domain.
   const domainTokens = $derived(allTokens.filter((t) => domainOf(t) === domain.id));
 
-  // All-variables catalogue: tier + modified + usage + search filters, grouped.
-  // Use property-access (overrides[t.name]) instead of `in` so Svelte 5's
-  // state proxy triggers reactivity via the `get` trap on every key check.
   const catalogueVisible = $derived(
     domainTokens.filter((t) => {
       if (t.tier === 'INTERNAL' && !ui.showInternal) return false;
@@ -81,21 +74,15 @@
     })
   );
   const grouped = $derived(groupTokens(catalogueVisible));
-
-  // Only label each group's category when more than one is present in this
-  // domain (otherwise the repeated "Core tokens" prefix is just noise).
   const categoryCount = $derived(new Set(grouped.map((c) => c.category)).size);
 
   const generators = $derived(domain.basicGenerators ?? []);
-
-  // Scaling knobs for this domain (global multipliers that cascade through
-  // many derived tokens — see lib/domains.js → KNOBS_BY_DOMAIN). They sit in
-  // the Settings zone as a "Scaling" group.
   const knobs = $derived(KNOBS_BY_DOMAIN[domain.id] ?? []);
 
-  // Does this domain expose a curated Settings surface above the raw
-  // catalogue? When it does not (e.g. Misc), the All-variables list is the
-  // whole panel and renders inline rather than behind a disclosure.
+  // Domains with a scale generator (typography, spacing): preview goes BELOW
+  // the generator so the specimen updates right next to the controls.
+  const hasGenerators = $derived(generators.length > 0);
+
   const hasSettings = $derived(
     !!domain.brandColors ||
     !!STYLE_PRESETS_BY_DOMAIN[domain.id] ||
@@ -105,53 +92,49 @@
     knobs.length > 0
   );
 
-  // "Show all variables" disclosure state (only meaningful when hasSettings).
   let showAll = $state(false);
 
-  // Colors panel: progressive disclosure for secondary brand / status groups.
+  // Colors panel accordion states.
   let showSecondary = $state(false);
   let showStatus = $state(false);
-  // Semantic-roles preview leads the Colors panel — open by default.
   let showColorRoles = $state(true);
 
-  // Other token domains: an inline live preview that LEADS the panel (the
-  // generalisation of the Colors "Semantic roles" section). Present only for
-  // domains with a curated spec in lib/domainPreviews.js. Open by default so
-  // the live preview is the first thing visible; still collapsible.
+  // Preview disclosure (open by default; for generator domains it appears below generators).
   let showPreview = $state(true);
+
   const previewSpec = $derived(DOMAIN_PREVIEWS[domain.id]);
 
-  // Partition brand color keys for the Colors panel accordion.
   const BRAND_PRIMARY = BRAND_COLOR_KEYS.filter((c) => ['base', 'neutral', 'primary'].includes(c.key));
   const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary', 'action'].includes(c.key));
   const BRAND_STATUS = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
 
-  // A brand color is "modified" if EITHER its light or dark variant is pinned
-  // (a dark-only override must still surface the badge).
   const hasBrandOverride = (key) =>
     overrides[`--sf-color-${key}-light`] != null ||
     overrides[`--sf-color-${key}-dark`] != null;
 
-  // Modified tokens within this domain — drives the header "Reset N" button.
   const modifiedHere = $derived(
     domainTokens.filter((t) => overrides[t.name] != null)
   );
 
-  // "Reset domain" button — clears overrides only for tokens in this domain.
   function resetDomain() {
     const patch = Object.fromEntries(modifiedHere.map((t) => [t.name, null]));
     if (modifiedHere.length) patchOverrides(patch);
   }
 </script>
 
-{#snippet cardHead(title, count, hint = '')}
-  <header class="panel__card-head">
+{#snippet expandSummary(title, count, hint = '')}
+  <summary class="panel__expand-summary panel__card-head">
+    <span class="panel__expand-chev" aria-hidden="true">›</span>
     <span class="panel__card-title">{title}</span>
-    <span class="panel__card-count">{count}</span>
+    {#if typeof count === 'number'}
+      <span class="panel__card-count">{count}</span>
+    {:else if count}
+      <span class="panel__expand-count">{count}</span>
+    {/if}
     {#if hint}
       <span class="panel__card-hint">{hint}</span>
     {/if}
-  </header>
+  </summary>
 {/snippet}
 
 {#snippet filters()}
@@ -237,46 +220,45 @@
 
   <div class="panel__body">
     {#if searching}
-      <!-- Active search: the filtered catalogue is the whole panel — search
-           means "find any token in this category". -->
+      <!-- Active search: filtered catalogue only -->
       {@render filters()}
       {@render catalogue()}
     {:else}
-      <!-- ── LIVE PREVIEW (leads every token category) ───────────────────── -->
 
-      <!-- The domain's tokens rendered live against the current overrides, as
-           the FIRST thing in the panel and open by default. Colors has no
-           DOMAIN_PREVIEWS spec — it leads with the semantic-roles map instead,
-           so every token category opens with a live preview. -->
-      {#if previewSpec}
-        <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
-          <summary class="panel__card-head panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__card-title">Preview</span>
-            <span class="panel__expand-count">{previewSpec.blurb}</span>
-          </summary>
-          <DomainPreview domain={domain.id} />
-        </details>
-      {:else if domain.brandColors}
+      <!-- ── ZONE 1: LIVE PREVIEW ─────────────────────────────────────────
+           Colors: semantic-roles swatch grid (always leads).
+           Generator domains (typography/spacing): preview appears BELOW the
+           generators in zone 2 so the specimen updates next to the controls.
+           All other token domains: DomainPreview card at top, open by default.
+      ─────────────────────────────────────────────────────────────────────── -->
+
+      {#if domain.brandColors}
         <details class="cfg-card panel__card panel__card--lead" bind:open={showColorRoles}>
-          <summary class="panel__card-head panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__card-title">Semantic roles</span>
-            <span class="panel__expand-count">How your brand colors surface</span>
-          </summary>
+          {@render expandSummary('Semantic roles', 'How your brand colors surface')}
           <ColorAssignments />
         </details>
+        <!-- Knobs right after the roles they control -->
+        {#if knobs.length}
+          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+        {/if}
+
+      {:else if previewSpec && !hasGenerators}
+        <!-- Non-generator domains: preview leads, knobs follow immediately -->
+        <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
+          {@render expandSummary('Preview', previewSpec.blurb)}
+          <DomainPreview domain={domain.id} />
+        </details>
+        {#if knobs.length}
+          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+        {/if}
       {/if}
 
-      <!-- ── SETTINGS (inputs-first) ─────────────────────────────────────── -->
+      <!-- ── ZONE 2: SETTINGS (inputs-first) ────────────────────────────── -->
 
-      <!-- Orientation copy: what this domain controls, whether typical
-           projects change it. -->
       {#if domain.intro}
         <p class="panel__intro">{domain.intro}</p>
       {/if}
 
-      <!-- One-click style presets (borders / shadows) -->
       {#if STYLE_PRESETS_BY_DOMAIN[domain.id]}
         <StylePresetRow
           title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
@@ -284,23 +266,21 @@
         />
       {/if}
 
-      <!-- Curated input surfaces: brand colors, friendly forms, or essentials. -->
+      <!-- Curated input surfaces — brand colors, friendly groups, or essentials.
+           All section cards are now collapsible (<details>) so you can fold a
+           section out of the way while still watching the preview above. -->
       {#if domain.brandColors}
-        <!-- Core brand colors — always shown -->
-        <section class="cfg-card panel__card">
-          {@render cardHead(
-            'Core brand colors',
-            BRAND_PRIMARY.length,
-            'Set light-mode values — dark mode is auto-derived. Click the dark swatch to pin a custom value.'
-          )}
+        <!-- Core brand colors — collapsible, open by default -->
+        <details class="panel__expand cfg-card panel__card" open>
+          {@render expandSummary('Core brand colors', BRAND_PRIMARY.length, 'Light values — dark mode is auto-derived. Click the dark swatch to pin.')}
           <div class="panel__card-rows">
             {#each BRAND_PRIMARY as { key, label } (key)}
               <BrandColorRow colorKey={key} {label} />
             {/each}
           </div>
-        </section>
+        </details>
 
-        <!-- Extended brand colors (secondary / tertiary) — opt-in -->
+        <!-- Extended brand colors — opt-in -->
         <details class="panel__expand" bind:open={showSecondary}>
           <summary class="panel__expand-summary">
             <span class="panel__expand-chev" aria-hidden="true">›</span>
@@ -333,39 +313,52 @@
             {/each}
           </div>
         </details>
+
       {:else if basicGroups.length}
+        <!-- Curated groups — each group is now a collapsible card -->
         {#each basicGroups as group (group.title)}
-          <section class="cfg-card panel__card">
-            {@render cardHead(group.title, group.controls.length)}
+          <details class="panel__expand cfg-card panel__card" open>
+            {@render expandSummary(group.title, group.controls.length)}
             <div class="panel__card-rows">
               {#each group.controls as c (c.token)}
                 <TokenRow token={c.tokenObj} label={c.label} help={c.help} showRawInfo />
               {/each}
             </div>
-          </section>
+          </details>
         {/each}
+
       {:else if essentials.length}
-        <section class="cfg-card panel__card">
-          {@render cardHead('Essentials', essentials.length, 'Curated for most projects.')}
+        <details class="panel__expand cfg-card panel__card" open>
+          {@render expandSummary('Essentials', essentials.length, 'Curated for most projects.')}
           <div class="panel__card-rows">
             {#each essentials as token (token.name)}
               <TokenRow {token} />
             {/each}
           </div>
-        </section>
+        </details>
       {/if}
 
-      <!-- Scale generators (fluid type / display / space ramps) -->
+      <!-- Scale generators (typography / spacing).
+           For these domains the preview lives BELOW so the specimen updates
+           in direct visual response to Apply. -->
       {#each generators as g (g)}
         <ScaleGenerator kinds={[g]} />
       {/each}
 
-      <!-- Scaling: global multipliers that cascade through many tokens. -->
-      {#if knobs.length}
+      <!-- Preview for generator domains: immediately after the generators. -->
+      {#if previewSpec && hasGenerators}
+        <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
+          {@render expandSummary('Preview', previewSpec.blurb)}
+          <DomainPreview domain={domain.id} />
+        </details>
+      {/if}
+
+      <!-- Scaling knobs for generator domains go after the generators+preview. -->
+      {#if knobs.length && hasGenerators}
         <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
       {/if}
 
-      <!-- ── ALL VARIABLES (progressive disclosure) ──────────────────────── -->
+      <!-- ── ZONE 3: ALL VARIABLES (progressive disclosure) ──────────────── -->
       {#if hasSettings}
         <details class="allvars" bind:open={showAll}>
           <summary class="allvars__summary">
@@ -379,8 +372,7 @@
           </div>
         </details>
       {:else}
-        <!-- No curated Settings surface (e.g. Misc): show the catalogue inline
-             so the category is never a dead end. -->
+        <!-- No curated Settings surface (e.g. Misc): inline catalogue. -->
         {@render filters()}
         {@render catalogue()}
       {/if}
@@ -466,8 +458,7 @@
   }
 
   .panel__card { overflow: clip; }
-  /* The live preview that leads every category gets a faint accent edge so it
-     reads as the panel's headline, not just another card. */
+  /* The live-preview card that leads each category gets a faint accent edge. */
   .panel__card--lead { border-color: var(--cfg-border-strong); }
   .panel__card--lead > summary { border-left: 3px solid var(--cfg-accent-strong); }
   .panel__card-head {
@@ -510,7 +501,7 @@
     border-radius: var(--cfg-radius-s);
   }
 
-  /* All-variables disclosure — the full domain catalogue, one click away. */
+  /* All-variables disclosure */
   .allvars {
     border: 1px solid var(--cfg-border);
     border-radius: var(--cfg-radius);
@@ -555,7 +546,7 @@
     border-top: 1px solid var(--cfg-border);
   }
 
-  /* Filter bar above the catalogue (usage segment + modified/internal toggles). */
+  /* Filter bar */
   .allvars__filters {
     display: flex;
     align-items: center;
@@ -589,7 +580,7 @@
   }
   .panel__docs a:hover { color: var(--cfg-accent); text-decoration: underline; }
 
-  /* Progressive disclosure for Colors panel brand-color groups. */
+  /* Progressive disclosure for collapsible section cards (brand colors, basic groups, essentials). */
   .panel__expand {
     border: 1px solid var(--cfg-border);
     border-radius: var(--cfg-radius);
@@ -613,6 +604,7 @@
     color: var(--cfg-text-faint);
     transition: transform 0.14s;
   }
+  /* Chevron rotation when any collapsible card is open */
   .panel__expand[open] .panel__expand-chev,
   details.cfg-card[open] .panel__expand-chev { transform: rotate(90deg); }
   .panel__expand-title {
@@ -638,24 +630,21 @@
     padding: 1px 7px;
     line-height: 1.6;
   }
-  /* When the disclosure card (Semantic roles) is open, its summary gets a border. */
-  details.cfg-card[open] > .panel__card-head.panel__expand-summary {
+  /* When the disclosure card is open its summary gets a border */
+  details.cfg-card[open] > .panel__card-head.panel__expand-summary,
+  details.panel__expand[open] > .panel__card-head.panel__expand-summary {
     border-bottom: 1px solid var(--cfg-border);
   }
 
-  /* Tighter horizontal padding on narrow phones recovers ~16px of content
-     width, reducing the chance of token editors overflowing their container. */
   @media (max-width: 600px) {
     .panel__body { padding: 12px 10px 60px; gap: 12px; }
     .panel__head { padding: 10px 12px 8px; gap: 8px; }
     .panel__title { font-size: 14px; }
     .panel__blurb { display: none; }
-    /* On very narrow screens, actions drop below the title as a full-width strip */
     .panel__actions {
       flex-basis: 100%;
       gap: 8px;
     }
-    /* The segmented usage filter is too wide on mobile — collapse labels */
     .panel__usage-seg :global(.cfg-seg__btn) {
       padding: 4px 8px;
       font-size: 10.5px;
