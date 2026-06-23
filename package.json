@@ -42,6 +42,7 @@
     "docs": "node scripts/audit.js && node scripts/gen-token-reference.js && node scripts/gen-class-reference.js && node scripts/gen-token-index.js && node scripts/gen-api-index.js && npm run gen:registry && npm run configurator:sync",
     "gen:registry": "node scripts/gen-token-registry.js",
     "check:registry": "node scripts/check-token-registry.js",
+    "check:llm-guide": "node scripts/check-llm-guide.js",
     "configurator:sync": "node configurator/scripts/sync-api.mjs",
     "docs:tokens": "node scripts/gen-token-reference.js",
     "docs:index": "node scripts/gen-token-index.js",

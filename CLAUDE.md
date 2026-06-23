@@ -50,6 +50,7 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run build` | Build all CSS bundles + docs + sync configurator API |
 | `npm run version-sync` | Sync all version references to root `package.json` |
 | `npm run check:version` | Verify all version references match (CI gate — run before every commit that touches versions) |
+| `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens (CI gate) |
 | `npm run docs` | Regenerate docs and sync configurator API index |
 | `npm run configurator:sync` | Push `docs/api-index.json` → `configurator/src/data/api-index.generated.json` |
 | `npm run audit` | Audit CSS tokens for consistency |
@@ -82,6 +83,32 @@ After the tag is pushed, GitHub Actions (`release.yml`) does the rest:
 - Every unminified dist bundle is stamped with `/* SLASHED vX.Y.Z ... */`.
 - The stamp version must match `package.json` — `release.yml` verifies this
   before publishing the GitHub Release.
+
+## LLM guide sync — MANDATORY
+
+`docs/llm-guide.md` is the authoritative LLM reference for the framework API.
+It must stay in sync with the live token set. The CI gate `check:llm-guide`
+enforces this mechanically — but the gate only catches **renamed or deleted
+tokens**. You are responsible for the qualitative layer:
+
+**Any PR that touches `core/*.css`, `optional/*.css`, or `token-registry.json`
+must also review `docs/llm-guide.md` and update it if needed.**
+
+Changes that always require a guide update:
+- New PUBLIC or PUBLIC-ADVANCED token added → add it to the relevant section
+- Token renamed or deleted → the CI gate will catch stale refs; fix them
+- New token role, tier, or behaviour documented in a token's description
+
+Changes that may require a guide update:
+- Default value changed for a widely-used knob
+- New layout primitive or macro added
+- New browser support floor or feature gating change
+
+After any token-touching PR, verify with:
+
+```bash
+npm run check:llm-guide   # must pass — CI fails if it doesn't
+```
 
 ## Tests
 

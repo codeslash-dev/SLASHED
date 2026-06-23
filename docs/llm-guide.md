@@ -121,7 +121,7 @@ Slashed requires modern CSS features. Effective minimum:
 | Chrome / Edge | 125+ | CSS `pow()` in `calc()` (generative scale) |
 | Safari | 18.0+ | `oklch(from …)` relative color + `light-dark()` |
 | Firefox | 129+ | `color-mix()` + relative color syntax |
-| Chrome / Edge | 138+ (for auto-contrast) | `sign()` in `oklch()` for `--sf-color-text--on-*` |
+| Chrome / Edge | 138+ (for auto-contrast) | `sign()` in `oklch()` for `--sf-color-text--on-{family}` |
 
 **Graceful degradation:** color tokens live inside `@supports` blocks, so older engines receive sensible fallbacks (the `initial-value` from `@property`). The generative fluid scale requires CSS `pow()` — without it the token resolves to its `@property` initial value.
 
@@ -297,9 +297,6 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 --sf-color-code-bg          /* Inline code background — var(--sf-color-inset) */
 --sf-color-code-text        /* Inline code text — auto-contrasts with code bg */
 
-/* Per-block overrides (for .sf-code-block or your own classes) */
---sf-color-code-block-bg
---sf-color-code-block-text
 ```
 
 ### 5.10 Semantic shade aliases
@@ -517,7 +514,7 @@ Not applied automatically — opt in: `line-height: var(--sf-text-xl-line-height
 
 ### 6.8 Heading aliases h1–h6
 
-Pattern: `--sf-h{N}-{property}`
+Pattern: `--sf-h1-{property}` through `--sf-h6-{property}`
 
 ```css
 --sf-h1-size:           var(--sf-text-4xl)
@@ -955,8 +952,6 @@ Used by `.is-active`, `.is-current`, etc. in `core/states.css`. Allow components
 ```css
 --sf-field-required-marker: " *"               /* required field marker */
 --sf-link-external-marker:  " ↗"              /* marker for .sf-link-external */
---sf-field-border-color:    var(--sf-color-border)   /* scoped override for fields */
---sf-field-text-color:      var(--sf-color-text)     /* scoped override */
 ```
 
 Component tokens from `optional/tokens.components.css`:
@@ -1296,8 +1291,8 @@ a:visited { color: var(--sf-color-link--visited); }
 /* Correct */
 .spacious-section { padding-block: calc(var(--sf-section-pad) * 1.5); }
 
-/* Wrong */
-:root { --sf-section-pad-xl-plus: 8rem; }
+/* Wrong — don't invent new tokens; compose with calc() instead */
+:root { --my-section-pad-xl-plus: 8rem; }
 ```
 
 **5. `knob` tokens are for setting; `consumption` tokens are for using.**
