@@ -337,7 +337,7 @@
           </div>
         </details>
 
-      {:else if basicGroups.length && !smartSections.length}
+      {:else if basicGroups.length}
         <!-- Curated groups — each group is now a collapsible card -->
         {#each basicGroups as group (group.title)}
           <details class="panel__expand cfg-card panel__card" open>
@@ -350,7 +350,7 @@
           </details>
         {/each}
 
-      {:else if essentials.length && !smartSections.length}
+      {:else if essentials.length}
         <details class="panel__expand cfg-card panel__card" open>
           {@render expandSummary('Essentials', essentials.length, 'Curated for most projects.')}
           <div class="panel__card-rows">

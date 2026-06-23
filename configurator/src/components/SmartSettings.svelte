@@ -67,16 +67,18 @@
           <span class="smart__chev" aria-hidden="true">›</span>
           <span class="smart__title">{section.title}</span>
           {#if section.hint}<span class="smart__hint">{section.hint}</span>{/if}
-          <button type="button" class="cfg-btn cfg-btn--ghost cfg-btn--sm smart__reset" onclick={(e) => { e.preventDefault(); resetSection(section); }}>Reset section</button>
         </summary>
 
-        {#if section.presets?.length}
-          <div class="smart__presets" aria-label="{section.title} presets">
-            {#each section.presets as preset (preset.label)}
-              <button type="button" class="cfg-btn cfg-btn--sm" onclick={() => applyPreset(section, preset)}>{preset.label}</button>
-            {/each}
-          </div>
-        {/if}
+        <div class="smart__actions" aria-label="{section.title} actions">
+          {#if section.presets?.length}
+            <div class="smart__presets" aria-label="{section.title} presets">
+              {#each section.presets as preset (preset.label)}
+                <button type="button" class="cfg-btn cfg-btn--sm" onclick={() => applyPreset(section, preset)}>{preset.label}</button>
+              {/each}
+            </div>
+          {/if}
+          <button type="button" class="cfg-btn cfg-btn--ghost cfg-btn--sm smart__reset" onclick={() => resetSection(section)}>Reset section</button>
+        </div>
 
         {#if section.kind === 'sliders'}
           <div class="smart__sliders">
@@ -162,8 +164,9 @@
   .smart__chev { color: var(--cfg-text-faint); transition: transform .14s; }
   .smart__title { font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
   .smart__hint { color: var(--cfg-text-faint); font-size: 12px; flex: 1 1 260px; }
+  .smart__actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--cfg-border); flex-wrap: wrap; }
   .smart__reset { margin-left: auto; }
-  .smart__presets { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--cfg-border); }
+  .smart__presets { display: flex; gap: 8px; flex-wrap: wrap; }
   .smart__rows { display: flex; flex-direction: column; }
   .smart__sliders { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; padding: 16px; }
   .smart-slider { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); }
