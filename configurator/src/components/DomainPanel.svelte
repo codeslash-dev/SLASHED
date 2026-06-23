@@ -225,11 +225,12 @@
       {@render catalogue()}
     {:else}
 
-      <!-- ── ZONE 1: LIVE PREVIEW ─────────────────────────────────────────
-           Colors: semantic-roles swatch grid (always leads).
-           Generator domains (typography/spacing): preview appears BELOW the
-           generators in zone 2 so the specimen updates next to the controls.
-           All other token domains: DomainPreview card at top, open by default.
+      <!-- ── ZONE 1: LIVE PREVIEW (always leads the panel) ─────────────────
+           Colors:           Semantic-roles swatch grid.
+           All token domains: DomainPreview card, open by default.
+           For generator domains (typography/spacing) the generators are
+           placed immediately BELOW the preview so the specimen updates in
+           direct visual response to Apply — no scrolling required.
       ─────────────────────────────────────────────────────────────────────── -->
 
       {#if domain.brandColors}
@@ -237,19 +238,33 @@
           {@render expandSummary('Semantic roles', 'How your brand colors surface')}
           <ColorAssignments />
         </details>
-        <!-- Knobs right after the roles they control -->
+        <!-- Contrast/focus knobs right after the roles they control -->
         {#if knobs.length}
           <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
         {/if}
 
-      {:else if previewSpec && !hasGenerators}
-        <!-- Non-generator domains: preview leads, knobs follow immediately -->
+      {:else if previewSpec}
+        <!-- Preview leads for every token domain — generator or not -->
         <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
           {@render expandSummary('Preview', previewSpec.blurb)}
           <DomainPreview domain={domain.id} />
         </details>
-        {#if knobs.length}
-          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+
+        <!-- Generator domains: scale generators immediately below the preview
+             so the specimen is in direct view while the user tunes the ramp. -->
+        {#if hasGenerators}
+          {#each generators as g (g)}
+            <ScaleGenerator kinds={[g]} />
+          {/each}
+          <!-- Scaling knobs follow the generator controls -->
+          {#if knobs.length}
+            <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+          {/if}
+        {:else}
+          <!-- Non-generator domains: knobs follow the preview directly -->
+          {#if knobs.length}
+            <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+          {/if}
         {/if}
       {/if}
 
@@ -336,26 +351,6 @@
             {/each}
           </div>
         </details>
-      {/if}
-
-      <!-- Scale generators (typography / spacing).
-           For these domains the preview lives BELOW so the specimen updates
-           in direct visual response to Apply. -->
-      {#each generators as g (g)}
-        <ScaleGenerator kinds={[g]} />
-      {/each}
-
-      <!-- Preview for generator domains: immediately after the generators. -->
-      {#if previewSpec && hasGenerators}
-        <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
-          {@render expandSummary('Preview', previewSpec.blurb)}
-          <DomainPreview domain={domain.id} />
-        </details>
-      {/if}
-
-      <!-- Scaling knobs for generator domains go after the generators+preview. -->
-      {#if knobs.length && hasGenerators}
-        <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
       {/if}
 
       <!-- ── ZONE 3: ALL VARIABLES (progressive disclosure) ──────────────── -->
