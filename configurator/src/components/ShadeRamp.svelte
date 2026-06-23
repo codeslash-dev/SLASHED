@@ -11,7 +11,7 @@
    * shade ramp — they expose only the subtle/muted/strong triplet.
    */
   import { overrides, ui } from '../lib/store.svelte.js';
-  import { measureBackground } from '../lib/probeHost.js';
+  import { measureBackground, setProbeContext } from '../lib/probeHost.js';
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { parseRgb } from '../lib/contrast.js';
 
@@ -38,6 +38,11 @@
     for (const k in overrides) void overrides[k];
     void ui.previewTheme;
     queueMicrotask(() => {
+      // Keep the probe host scoped to this component's live state. App.svelte
+      // also refreshes the same singleton for contrast badges, but the shade
+      // ramp must remain correct when mounted in isolation by component tests
+      // and whenever the framework adds derived/registered color tokens.
+      setProbeContext({ overrides, theme: ui.previewTheme });
       const next = {};
       for (const token of ALL_SHADE_TOKENS) {
         const rgb = measureBackground(`var(${token})`);
