@@ -150,12 +150,10 @@ test.describe('Auto-colour — private-variable overrides', () => {
     expect(changed.after).not.toBe(changed.before);
   });
 
-  // The on-colour token recomputes from a ROOT brand override (auto-contrast
-  // tracks the new colour, not a baked value). It is declared at :root, so —
-  // exactly like --sf-color-link above — an *element-scoped* brand override
-  // does NOT re-derive it; the supported re-theming entry point is :root.
-  // This test pins both halves of that contract.
-  test('root brand override recomputes on-colour; element-scoped does not', async ({ page }) => {
+  // After surface consolidation, named variants are thin aliases that set
+  // --sf-surface-color dynamically, so the auto-contrast formula tracks ANY
+  // brand override — both :root and element-scoped. Both paths re-derive.
+  test('brand override recomputes on-colour at both :root and element scope', async ({ page }) => {
     const res = await page.evaluate(() => {
       const cv = document.createElement('canvas'); cv.width = cv.height = 1;
       const ctx = cv.getContext('2d', { willReadFrequently: true });
@@ -172,8 +170,7 @@ test.describe('Auto-colour — private-variable overrides', () => {
       };
       const root = document.documentElement;
 
-      // Supported path: override the brand at :root → on-colour re-derives,
-      // staying legible on a near-white primary (text must flip to dark).
+      // :root override → on-colour re-derives, staying legible on near-white.
       const elRoot = document.createElement('div');
       elRoot.className = 'sf-surface--primary'; elRoot.textContent = 'x';
       document.body.appendChild(elRoot);
@@ -182,24 +179,25 @@ test.describe('Auto-colour — private-variable overrides', () => {
       root.style.removeProperty('--sf-color-primary');
       elRoot.remove();
 
-      // Documented limitation: an element-scoped brand override does NOT
-      // re-derive the :root-declared on-colour, so the painted text colour
-      // is unchanged from the default.
+      // Element-scoped override: --sf-surface-color re-evaluates inline,
+      // so the formula flips text colour to stay legible.
       const elScoped = document.createElement('div');
       elScoped.className = 'sf-surface--primary'; elScoped.textContent = 'x';
       document.body.appendChild(elScoped);
       const defaultText = getComputedStyle(elScoped).color;
       elScoped.style.setProperty('--sf-color-primary', 'oklch(0.95 0.03 250)');
       const scopedText = getComputedStyle(elScoped).color;
+      const scopedContrast = contrast(elScoped);
       elScoped.remove();
 
-      return { rootContrast, defaultText, scopedText };
+      return { rootContrast, defaultText, scopedText, scopedContrast };
     });
 
-    // Root override re-derives the on-colour → still legible on near-white.
+    // Root override re-derives → legible.
     expect(res.rootContrast).toBeGreaterThanOrEqual(3.0);
-    // Element-scoped override is intentionally NOT re-derived (text unchanged).
-    expect(res.scopedText).toBe(res.defaultText);
+    // Element-scoped override also re-derives → text flips from default.
+    expect(res.scopedText).not.toBe(res.defaultText);
+    expect(res.scopedContrast).toBeGreaterThanOrEqual(3.0);
   });
 });
 
@@ -262,6 +260,69 @@ test.describe('Auto-colour — links and underlines', () => {
       return l;
     });
     expect(line).toBe('none');
+  });
+
+  // .sf-link--subtle hover reveals the underline.
+  test('.sf-link--subtle hover reveals underline', async ({ page }) => {
+    await page.evaluate(() => {
+      const a = document.createElement('a');
+      a.id = 'hover-link'; a.href = '#'; a.className = 'sf-link--subtle'; a.textContent = 'link';
+      document.body.appendChild(a);
+    });
+    await page.hover('#hover-link');
+    const hoverLine = await page.evaluate(() =>
+      getComputedStyle(document.querySelector('#hover-link')).textDecorationLine
+    );
+    expect(hoverLine).toBe('underline');
+  });
+
+  // .sf-link--reverse carries an underline at rest (inverse of .sf-link--subtle).
+  test('.sf-link--reverse has underline at rest', async ({ page }) => {
+    const line = await page.evaluate(() => {
+      const a = document.createElement('a');
+      a.href = '#'; a.className = 'sf-link--reverse'; a.textContent = 'link';
+      document.body.appendChild(a);
+      const l = getComputedStyle(a).textDecorationLine;
+      a.remove();
+      return l;
+    });
+    expect(line).toBe('underline');
+  });
+
+  // Dark theme — link underline token is defined and resolves to a non-transparent colour.
+  // Uses .sf-link--reverse which renders an underline at rest, so the colour assertion
+  // only fires when an underline is actually present.
+  test('dark theme: link underline token is non-transparent', async ({ page }) => {
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    const info = await page.evaluate(() => {
+      const a = document.createElement('a');
+      a.href = '#'; a.className = 'sf-link--reverse'; a.textContent = 'link';
+      document.body.appendChild(a);
+      const cs = getComputedStyle(a);
+      const tokenRaw = getComputedStyle(document.documentElement)
+        .getPropertyValue('--sf-color-link--underline').trim();
+      const out = { line: cs.textDecorationLine, decoColor: cs.textDecorationColor, hasToken: tokenRaw.length > 0 };
+      a.remove();
+      return out;
+    });
+    expect(info.hasToken).toBe(true);
+    expect(info.line).toBe('underline');
+    expect(info.decoColor).not.toBe('rgba(0, 0, 0, 0)');
+  });
+
+  // --sf-color-link--visited is declared and differs from --sf-color-link so
+  // visited anchors can adopt a distinct visual treatment without extra classes.
+  test('--sf-color-link--visited token differs from --sf-color-link', async ({ page }) => {
+    const tokens = await page.evaluate(() => {
+      const cs = getComputedStyle(document.documentElement);
+      return {
+        link:    cs.getPropertyValue('--sf-color-link').trim(),
+        visited: cs.getPropertyValue('--sf-color-link--visited').trim(),
+      };
+    });
+    expect(tokens.link.length).toBeGreaterThan(0);
+    expect(tokens.visited.length).toBeGreaterThan(0);
+    expect(tokens.visited).not.toBe(tokens.link);
   });
 });
 

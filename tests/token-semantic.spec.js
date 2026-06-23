@@ -39,14 +39,15 @@ const COLOR_TOKENS = [
 ];
 
 // Scale/geometry tokens — stored as raw CSS value strings, mode-insensitive.
+// Note: tokens registered via @property <length> resolve to computed pixel
+// values (not expression strings). Viewport-dependent clamp() tokens
+// (--sf-space-*, --sf-gap) are excluded — they resolve to a viewport-specific
+// px value that would make the snapshot fragile across environments.
 const RAW_TOKENS = [
   '--sf-text-m',
   '--sf-text-s',
   '--sf-text-l',
   '--sf-h1-size',
-  '--sf-space-m',
-  '--sf-space-l',
-  '--sf-gap',
   '--sf-radius-m',
   '--sf-border-width-1',
   '--sf-font-weight-normal',

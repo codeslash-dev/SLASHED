@@ -307,6 +307,66 @@
   @property --sf-space-base-min        { syntax: "<number>"; inherits: true; initial-value: 1; }
   @property --sf-space-base-max        { syntax: "<number>"; inherits: true; initial-value: 2; }
 
+  /* ── Output token @property registrations ──────────────────────────────────
+     Radius + space: <length> syntax enables CSS transitions on layout values —
+     border-radius/padding/gap etc. now interpolate instead of snapping.
+     Shadow: syntax:"*" (no <shadow> type in spec); inherits:true so :root values
+     cascade normally; registers the properties formally for DevTools inspection. */
+
+  @property --sf-radius-none  { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-2xs   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-xs    { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-s     { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-m     { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-l     { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-xl    { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-2xl   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-3xl   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-4xl   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-radius-full  { syntax: "<length>"; inherits: true; initial-value: 9999px; }
+  @property --sf-radius-pill  { syntax: "<length>"; inherits: true; initial-value: 9999px; }
+  @property --sf-radius-outer { syntax: "<length>"; inherits: true; initial-value: 0; }
+
+  @property --sf-space-none       { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-px         { syntax: "<length>"; inherits: true; initial-value: 1px; }
+  @property --sf-space-2xs        { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-xs         { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-s          { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-m          { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-l          { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-xl         { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-2xl        { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-3xl        { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-space-4xl        { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-gap              { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-content-gap      { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-gutter           { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-component-pad    { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-field-block      { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-section-pad--xs  { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-section-pad--s   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-section-pad--m   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-section-pad--l   { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-section-pad--xl  { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-section-pad--2xl { syntax: "<length>"; inherits: true; initial-value: 0; }
+
+  @property --sf-shadow-none      { syntax: "*"; inherits: true; }
+  @property --sf-shadow-xs        { syntax: "*"; inherits: true; }
+  @property --sf-shadow-s         { syntax: "*"; inherits: true; }
+  @property --sf-shadow-m         { syntax: "*"; inherits: true; }
+  @property --sf-shadow-l         { syntax: "*"; inherits: true; }
+  @property --sf-shadow-xl        { syntax: "*"; inherits: true; }
+  @property --sf-shadow-2xl       { syntax: "*"; inherits: true; }
+  @property --sf-shadow-inner     { syntax: "*"; inherits: true; }
+  @property --sf-text-shadow-none { syntax: "*"; inherits: true; }
+  @property --sf-text-shadow-s    { syntax: "*"; inherits: true; }
+  @property --sf-text-shadow-m    { syntax: "*"; inherits: true; }
+  @property --sf-text-shadow-l    { syntax: "*"; inherits: true; }
+  @property --sf-drop-shadow-s    { syntax: "*"; inherits: true; }
+  @property --sf-drop-shadow-m    { syntax: "*"; inherits: true; }
+  @property --sf-drop-shadow-l    { syntax: "*"; inherits: true; }
+  @property --sf-shadow-glow      { syntax: "*"; inherits: true; }
+
   :root {
     --sf-fluid-min-vw:          22.5;
     --sf-fluid-max-vw:          90;

@@ -292,3 +292,47 @@ test.describe('CQ: .sf-container named container', () => {
     expect(color).toBe('rgb(255, 0, 0)');
   });
 });
+
+test.describe('CQ: .sf-cq unnamed container', () => {
+  test('establishes an anonymous inline-size container', async ({ page }) => {
+    // Place a narrow .sf-cq (200px) inside a wide viewport (1400px).
+    // @container queries on children should resolve against the .sf-cq width,
+    // not the viewport. We confirm this by checking which breakpoints fire:
+    //   ≥10em (160px): must fire   (200 > 160)
+    //   ≥30em (480px): must not fire (200 < 480)
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.setContent(`
+      <!doctype html><html>
+      <head>
+        <style>
+          :root, html, body { font-size: 16px !important; }
+          /* Base colour applied by selector — lower specificity than @container block */
+          .probe { color: rgb(255, 0, 0); }
+          /* 10em = 160px — should fire since .sf-cq is 200px */
+          @container (min-width: 10em) {
+            .probe.at-10em { color: rgb(0, 0, 255); }
+          }
+          /* 30em = 480px — must NOT fire since .sf-cq is 200px */
+          @container (min-width: 30em) {
+            .probe.at-30em { color: rgb(0, 128, 0); }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="sf-cq" style="width:200px">
+          <div id="at-10em" class="probe at-10em">probe</div>
+          <div id="at-30em" class="probe at-30em">probe</div>
+        </div>
+      </body></html>
+    `);
+    await page.addStyleTag({ path: BUNDLE });
+
+    const color10em = await page.locator('#at-10em').evaluate(el => getComputedStyle(el).color);
+    const color30em = await page.locator('#at-30em').evaluate(el => getComputedStyle(el).color);
+
+    // 200px ≥ 160px → 10em query fires → blue
+    expect(color10em).toBe('rgb(0, 0, 255)');
+    // 200px < 480px → 30em query does NOT fire → stays red
+    expect(color30em).toBe('rgb(255, 0, 0)');
+  });
+});
