@@ -290,20 +290,23 @@ test.describe('Auto-colour — links and underlines', () => {
   });
 
   // Dark theme — link underline token is defined and resolves to a non-transparent colour.
+  // Uses .sf-link--reverse which renders an underline at rest, so the colour assertion
+  // only fires when an underline is actually present.
   test('dark theme: link underline token is non-transparent', async ({ page }) => {
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
     const info = await page.evaluate(() => {
       const a = document.createElement('a');
-      a.href = '#'; a.textContent = 'link';
+      a.href = '#'; a.className = 'sf-link--reverse'; a.textContent = 'link';
       document.body.appendChild(a);
       const cs = getComputedStyle(a);
       const tokenRaw = getComputedStyle(document.documentElement)
         .getPropertyValue('--sf-color-link--underline').trim();
-      const out = { decoColor: cs.textDecorationColor, hasToken: tokenRaw.length > 0 };
+      const out = { line: cs.textDecorationLine, decoColor: cs.textDecorationColor, hasToken: tokenRaw.length > 0 };
       a.remove();
       return out;
     });
     expect(info.hasToken).toBe(true);
+    expect(info.line).toBe('underline');
     expect(info.decoColor).not.toBe('rgba(0, 0, 0, 0)');
   });
 

@@ -252,20 +252,23 @@
 
   /* Named variants are thin aliases — they set --sf-surface-color (for the
      auto-contrast formula) and background directly (so they work standalone
-     without also adding .sf-surface). Old engines (Chrome <119 / Safari <16.4)
-     get the background only, with inherited text colour. The --sf-color-text--on-*
-     tokens remain as standalone public tokens for custom components. */
-  .sf-surface--primary   { --sf-surface-color: var(--sf-color-primary);   background: var(--sf-color-primary); }
-  .sf-surface--secondary { --sf-surface-color: var(--sf-color-secondary); background: var(--sf-color-secondary); }
-  .sf-surface--tertiary  { --sf-surface-color: var(--sf-color-tertiary);  background: var(--sf-color-tertiary); }
-  .sf-surface--action    { --sf-surface-color: var(--sf-color-action);    background: var(--sf-color-action); }
-  .sf-surface--neutral   { --sf-surface-color: var(--sf-color-neutral);   background: var(--sf-color-neutral); }
-  .sf-surface--inverse   { --sf-surface-color: var(--sf-color-inverse);   background: var(--sf-color-inverse); }
-  .sf-surface--success   { --sf-surface-color: var(--sf-color-success);   background: var(--sf-color-success); }
-  .sf-surface--warning   { --sf-surface-color: var(--sf-color-warning);   background: var(--sf-color-warning); }
-  .sf-surface--error     { --sf-surface-color: var(--sf-color-error);     background: var(--sf-color-error); }
-  .sf-surface--info      { --sf-surface-color: var(--sf-color-info);      background: var(--sf-color-info); }
-  .sf-surface--danger    { --sf-surface-color: var(--sf-color-danger);    background: var(--sf-color-danger); }
+     without also adding .sf-surface). color: var(--sf-color-text--on-*) is the
+     fallback for Chrome 125–137 / Firefox 128–130, which have oklch(from) but
+     not sign(): in those browsers the @supports block below is skipped, so
+     without an explicit color declaration the element would inherit the page
+     body text on a coloured background. Old engines (Chrome <119, Safari <16.4)
+     get background + colour only; no contextual cascade. */
+  .sf-surface--primary   { --sf-surface-color: var(--sf-color-primary);   background: var(--sf-color-primary);   color: var(--sf-color-text--on-primary); }
+  .sf-surface--secondary { --sf-surface-color: var(--sf-color-secondary); background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary); }
+  .sf-surface--tertiary  { --sf-surface-color: var(--sf-color-tertiary);  background: var(--sf-color-tertiary);  color: var(--sf-color-text--on-tertiary); }
+  .sf-surface--action    { --sf-surface-color: var(--sf-color-action);    background: var(--sf-color-action);    color: var(--sf-color-text--on-action); }
+  .sf-surface--neutral   { --sf-surface-color: var(--sf-color-neutral);   background: var(--sf-color-neutral);   color: var(--sf-color-text--on-neutral); }
+  .sf-surface--inverse   { --sf-surface-color: var(--sf-color-inverse);   background: var(--sf-color-inverse);   color: var(--sf-color-text--on-inverse); }
+  .sf-surface--success   { --sf-surface-color: var(--sf-color-success);   background: var(--sf-color-success);   color: var(--sf-color-text--on-success); }
+  .sf-surface--warning   { --sf-surface-color: var(--sf-color-warning);   background: var(--sf-color-warning);   color: var(--sf-color-text--on-warning); }
+  .sf-surface--error     { --sf-surface-color: var(--sf-color-error);     background: var(--sf-color-error);     color: var(--sf-color-text--on-error); }
+  .sf-surface--info      { --sf-surface-color: var(--sf-color-info);      background: var(--sf-color-info);      color: var(--sf-color-text--on-info); }
+  .sf-surface--danger    { --sf-surface-color: var(--sf-color-danger);    background: var(--sf-color-danger);    color: var(--sf-color-text--on-danger); }
 
   /* sign() gate: the auto-contrast formula requires both oklch(from) AND sign().
      Named variants set --sf-surface-color so the generic .sf-surface formula

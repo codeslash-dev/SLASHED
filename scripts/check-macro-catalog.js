@@ -74,6 +74,7 @@ if (!fs.existsSync(docsPath)) {
 const docsText = fs.readFileSync(docsPath, 'utf8');
 
 const docsClasses = new Set();
+const unmatchedWildcards = [];
 
 // Single pass: match every `.sf-...` token and check if a `*` follows it.
 const SF_CLASS_RE = /\.(sf-[\w-]+)(\*)?/g;
@@ -81,9 +82,11 @@ for (const [, name, glob] of docsText.matchAll(SF_CLASS_RE)) {
   if (glob) {
     // Wildcard: `.sf-entrance--*` — expand against CSS classes
     const prefix = `.${name}`;
+    let matched = false;
     for (const cls of cssClasses) {
-      if (cls.startsWith(prefix)) docsClasses.add(cls);
+      if (cls.startsWith(prefix)) { docsClasses.add(cls); matched = true; }
     }
+    if (!matched) unmatchedWildcards.push(`${prefix}*`);
   } else {
     docsClasses.add(`.${name}`);
   }
@@ -97,6 +100,12 @@ const inCssOnly  = [...cssClasses].filter(c => !docsClasses.has(c)).sort();
 const inDocsOnly = [...docsClasses].filter(c => !cssClasses.has(c)).sort();
 
 let ok = true;
+
+if (unmatchedWildcards.length > 0) {
+  ok = false;
+  console.error('[check:macros] Wildcards in docs/macros.md with no matching source classes:');
+  for (const w of unmatchedWildcards) console.error(`  ${w}`);
+}
 
 if (inCssOnly.length > 0) {
   ok = false;
