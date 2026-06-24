@@ -401,7 +401,16 @@ Loading `optional/tokens.palette.css` adds 11 steps for each of the 6 brand fami
 
 /* PUBLIC-ADVANCED: ramp shape */
 --sf-palette-mix-50:  4%;    /* How far step 50 blends toward surface */
---sf-palette-mix-100: 8%;    /* … and so on up to -950 */
+--sf-palette-mix-100: 8%;    /* … */
+--sf-palette-mix-200: 20%;
+--sf-palette-mix-300: 40%;
+--sf-palette-mix-400: 65%;
+/* step 500 is the source color itself; no separate mix knob exists */
+--sf-palette-mix-600: 82%;
+--sf-palette-mix-700: 62%;
+--sf-palette-mix-800: 38%;
+--sf-palette-mix-900: 18%;
+--sf-palette-mix-950: 8%;     /* deepest step */
 ```
 
 Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
@@ -492,6 +501,11 @@ Pattern: `--sf-text-{size}-{property}`
 --sf-text-{size}-font-weight     /* body for small, heading for large */
 --sf-text-{size}-letter-spacing  /* tight for large, normal for small */
 --sf-text-{size}-max-width       /* line length in ch (or none) */
+
+/* Explicit max-width knobs by size */
+--sf-text-2xs-max-width / --sf-text-xs-max-width / --sf-text-s-max-width
+--sf-text-m-max-width / --sf-text-l-max-width / --sf-text-xl-max-width
+--sf-text-2xl-max-width / --sf-text-3xl-max-width / --sf-text-4xl-max-width
 ```
 
 Not applied automatically — opt in: `line-height: var(--sf-text-xl-line-height)`.
@@ -533,11 +547,16 @@ Pattern: `--sf-h1-{property}` through `--sf-h6-{property}`
 --sf-h1-max-width:      none   /* e.g. 20ch — caps heading line length */
 
 --sf-h2-size:           var(--sf-text-3xl)   /* tracking-tight */
+--sf-h2-max-width:      none
 --sf-h3-size:           var(--sf-text-2xl)   /* tracking-normal */
+--sf-h3-max-width:      none
 --sf-h4-size:           var(--sf-text-xl)    /* tracking-normal */
+--sf-h4-max-width:      none
 --sf-h5-size:           var(--sf-text-l)     /* tracking-normal */
+--sf-h5-max-width:      none
 --sf-h6-size:           var(--sf-text-m)     /* tracking-wide */
-/* similarly: -line-height, -font-weight, -letter-spacing, -max-width for each */
+--sf-h6-max-width:      none
+/* similarly: -line-height, -font-weight, -letter-spacing for each */
 ```
 
 ### 6.9 Global heading aliases
@@ -754,12 +773,14 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 /* Grid (auto-fill, breakpoint-free) */
 --sf-grid-gap:     var(--sf-gap)
 --sf-grid-min:     16rem           /* minimum column width */
---sf-grid-min-xs / -s / -m / -l / -xl / -2xl   /* 10rem … 28rem */
+--sf-grid-min-xs / --sf-grid-min-s / --sf-grid-min-m
+--sf-grid-min-l / --sf-grid-min-xl / --sf-grid-min-2xl   /* 10rem … 28rem */
 
 /* Equal columns */
 --sf-equal-gap:        var(--sf-gap)
 --sf-equal-min-col:    16rem
---sf-equal-min-col-2 / -3 / -4 / -6
+--sf-equal-min-col-2 / --sf-equal-min-col-3
+--sf-equal-min-col-4 / --sf-equal-min-col-6
 
 /* Cover */
 --sf-cover-min-height: 100dvh
@@ -779,7 +800,8 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 /* Bento */
 --sf-bento-cols-default: 4
 --sf-bento-gap:          var(--sf-gap)
---sf-bento-row-default / -compact / -tall   /* 10rem / 6rem / 16rem */
+--sf-bento-row-default / --sf-bento-row-compact / --sf-bento-row-tall
+                                    /* 10rem / 6rem / 16rem */
 
 /* Content grid (breakout pattern) */
 --sf-content-width:  var(--sf-container-default)
@@ -837,7 +859,8 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-sticky-offset:         clamp(…)    /* fluid offset for top: var(--sf-sticky-offset) */
 
 /* Safe area (notches, home indicators) */
---sf-safe-top / -bottom / -left / -right  /* env(safe-area-inset-*) */
+--sf-safe-top / --sf-safe-bottom / --sf-safe-left / --sf-safe-right
+                                    /* env(safe-area-inset-*) */
 ```
 
 ### 8.8 Replaced elements (img, video)
@@ -1114,7 +1137,8 @@ Each step up the type scale subtracts `step-index × taper` from that step's def
 ### 11.8 Safe area insets
 
 ```css
---sf-safe-top / -bottom / -left / -right   /* env(safe-area-inset-*) */
+--sf-safe-top / --sf-safe-bottom / --sf-safe-left / --sf-safe-right
+                                    /* env(safe-area-inset-*) */
 ```
 
 ### 11.9 Focus ring shadow

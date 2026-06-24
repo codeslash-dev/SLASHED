@@ -1,18 +1,4 @@
-/* SLASHED — core/motion.css
-   @layer slashed.motion
-
-   Extends the base interactive transition (defined in base.css)
-   with a broader property set and adds scroll/view-transition
-   behaviour. Optional and independently loadable.
-
-   Reduced-motion handling is intentionally NOT duplicated here:
-   accessibility.css (a higher cascade layer, shipped in the
-   'essential' bundle) neutralises animation/transition via
-   property-level !important. The no-preference wrapper below is
-   a defensive opt-in stance — animations apply only when the
-   user has not requested their absence — and remains correct
-   even if motion.css is served without accessibility.css.
-   ─────────────────────────────────────────────────── */
+/* SLASHED — core/motion.css */
 
 @layer slashed.motion {
 
@@ -22,8 +8,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Broadens the base.css link transition to all interactive
-       elements and the full set of animatable UI properties. */
     a, button, input, select, textarea, summary {
       transition-property:
         color, background-color, border-color, text-decoration-color,
@@ -41,14 +25,7 @@
       }
     }
 
-    /* ── Animation presets ──────────────────────────────────────── */
-
-    /* Animation presets — opt-in classes. Scoped to no-preference so
-       reduced-motion users never trigger them (accessibility.css also
-       neutralises animation-duration as a hard guarantee). These are
-       DECORATIVE: under reduced motion they simply don't run, so never
-       rely on one (e.g. .sf-fade-out) as the sole way to show/hide
-       content — drive real state with hidden/display/JS instead. */
+    
     .sf-fade-in        { animation: var(--sf-animation-fade-in); }
     .sf-fade-out       { animation: var(--sf-animation-fade-out); }
     .sf-slide-in-up    { animation: var(--sf-animation-slide-in-up); }
@@ -58,35 +35,7 @@
     .sf-scale-up       { animation: var(--sf-animation-scale-up); }
     .sf-scale-down     { animation: var(--sf-animation-scale-down); }
 
-    /* ── Scroll-driven entrances ─────────────────────────────────── */
-
-    /* Scroll-driven entrance effects — element animates into view
-       as it enters the viewport. Uses CSS scroll-driven animations
-       via animation-timeline: view(). Range tokens
-       (--sf-scroll-timeline-range-{start,end}, declared in
-       core/tokens.css) control where the animation starts and ends
-       along the scroll progress.
-
-       Example:
-         <article class="sf-entrance--fade-up">…</article>
-
-       Reduced-motion: gated by the no-preference wrapper above, so
-       these are inert when the user opts out. The core animation
-       (translate/opacity) still composes correctly with reduced-motion
-       neutralisation in accessibility.css if a consumer accidentally
-       writes them outside the gate.
-
-       Browser support — animation-timeline ships in Chrome/Edge 115+.
-       Firefox keeps it behind a flag (the scroll-driven-animations
-       preference) and Safari has not shipped it (tracked at WebKit
-       bug 264057); on those engines the @supports block below is
-       skipped, so the rule falls back to a one-shot time-driven
-       animation playing once at --sf-duration-slow.
-       animation-duration is set unconditionally because without it
-       a non-supporting engine would default to 0s and snap to the
-       end state instantly — there'd be no visible entrance at all.
-       Where animation-timeline is supported the timeline drives
-       progress and the duration is ignored. */
+    
     .sf-entrance--fade,
     .sf-entrance--fade-up,
     .sf-entrance--fade-down,
@@ -104,7 +53,7 @@
       .sf-entrance--fade-left,
       .sf-entrance--fade-right,
       .sf-entrance--scale-up {
-        animation-fill-mode: forwards; /* no backwards fill — element visible before scroll range */
+        animation-fill-mode: forwards;
         animation-timeline: view();
         animation-range:    var(--sf-scroll-timeline-range-start, entry 0%)
                             var(--sf-scroll-timeline-range-end,   cover 30%);
@@ -119,11 +68,6 @@
 
   }
 
-  /* Keyframes — inert until referenced, so they live outside the
-     no-preference wrapper (consumers may reference them at will).
-     Spinner and shimmer are used by .is-loading / .is-skeleton in
-     core/states.css; the rest power the .sf-* animation classes
-     above. */
   @keyframes sf-fade-in   { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sf-fade-out  { from { opacity: 1; } to { opacity: 0; } }
   @keyframes sf-slide-in-up    { from { opacity: 0; translate: 0 1rem;  } to { opacity: 1; translate: 0 0; } }
@@ -136,21 +80,11 @@
   @keyframes sf-spin    { to { rotate: 360deg; } }
   @keyframes sf-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
-  /* Notification ping (expanding fading ring), cursor blink, gentle float.
-     Keyframes only — apply via your own BEM/component rules or the
-     --sf-animation-ping / -blink / -float presets. No utility classes
-     ship for these (by design). */
   @keyframes sf-ping  { 75%, 100% { scale: 2; opacity: 0; } }
   @keyframes sf-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
   @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
 
-  /* ── @property color animation ───────────────────────────────── */
-
-  /* @property color interpolation — animates --sf-color-primary-source-light smoothly
-     because it is registered with syntax:"<color>" (see @property in tokens.css).
-     Without that registration the browser cannot interpolate between color values
-     and the animation will snap at 50% with no intermediate frames.
-     Gated behind @supports so unsupporting engines simply skip it. */
+  
   @supports (@property --x { syntax: "<color>"; inherits: false; initial-value: white; }) {
     @keyframes sf-color-pulse {
       0%   { --sf-color-primary-source-light: var(--sf-color-primary-source-light); }
@@ -165,12 +99,6 @@
     }
   }
 
-  /* Overlay / display transition for top-layer elements (dialog, popover).
-     allow-discrete enables transitioning display and overlay — making
-     exit animations work before display:none is applied. The from-state
-     (@starting-style) is intentionally consumer-defined per component:
-       dialog[open] { opacity: 1; @starting-style { opacity: 0; } }
-     Tracked for the future components layer. */
   @supports (transition-behavior: allow-discrete) {
     dialog, [popover] {
       transition: var(--sf-transition-overlay);

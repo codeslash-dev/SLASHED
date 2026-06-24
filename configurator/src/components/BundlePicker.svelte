@@ -107,6 +107,7 @@
           {copiedKey === 'dropin' ? 'Copied ✓' : 'Copy setup'}
         </button>
       </div>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex: the snippet is horizontally scrollable, so keyboard users need a focus target. -->
       <pre class="snippet__code" tabindex="0"><code>{dropIn}</code></pre>
       <p class="snippet__note">
         {#if overrideCount === 0}

@@ -1,59 +1,9 @@
-/* ============================================================
-   SLASHED — optional/forms.css
-   @layer slashed.forms
-
-   Classless form styling — opt-in element-level defaults for
-   <input>, <select>, <textarea>, and <button> without any classes.
-
-   USAGE:
-     @import 'slashed/optional/forms.css';
-     — or include in a custom bundle via bundle.config.json.
-
-   PHILOSOPHY:
-     This file is OPTIONAL. SLASHED core does not style native form
-     elements beyond reset (font-inherit, box-sizing). If you prefer
-     full control via BEM components, skip this file entirely.
-
-   TOKENS CONSUMED:
-     --sf-radius-m, --sf-radius-full, --sf-border-width-1,
-     --sf-border-width-3, --sf-color-border,
-     --sf-color-border--focus, --sf-color-border--subtle,
-     --sf-color-surface, --sf-color-text, --sf-color-text--placeholder,
-     --sf-color-text--disabled, --sf-color-text--on-action,
-     --sf-color-bg--disabled, --sf-color-action, --sf-color-action--hover,
-     --sf-color-danger,
-     --sf-field-border-color, --sf-opacity-disabled,
-     --sf-space-xs, --sf-space-s, --sf-space-m,
-     --sf-text-m, --sf-leading-normal, --sf-font-weight-heading,
-     --sf-font-numeric,
-     --sf-duration-fast, --sf-ease-out, --sf-transition-colors,
-     --sf-focus-ring-width, --sf-focus-ring-style, --sf-focus-ring-offset,
-     --sf-field-required-marker
-
-   STATE INTEGRATION:
-     The shared field border reads --sf-field-border-color (set by the
-     `.is-valid/.is-invalid/.is-error/.is-warning/.is-success/.is-info/
-     .is-danger` classes in core/states.css), falling back to
-     --sf-color-border. Add a validation `.is-*` class to recolour a field.
-
-     Validation states also set --sf-field-text-color (e.g. error-strong,
-     success-strong). The framework does NOT consume this token — it is a
-     hook for your own component CSS. Wire it to your error message, label,
-     or helper-text class:
-       .form-error { color: var(--sf-field-text-color, inherit); }
-     The token inherits, so place the .is-* class on a wrapper and all
-     descendants can read it.
-   ============================================================ */
+/* SLASHED — optional/forms.css */
 
 @layer slashed.forms {
 
-  /* ----------------------------------------------------------
-     Shared base for text-like inputs, select, textarea
-     ---------------------------------------------------------- */
-  /* [type="color"] is intentionally excluded: it is a compact swatch button,
-     not a text field. Applying appearance:none and 100% width to a color input
-     removes the native swatch in WebKit and produces a broken box in Chrome.
-     Style color inputs separately if needed. */
+  /* Shared base for text-like inputs, select, textarea */
+
   input:where(
     [type="text"], [type="email"], [type="password"], [type="url"],
     [type="tel"], [type="number"], [type="search"], [type="date"],
@@ -62,16 +12,7 @@
   ),
   select,
   textarea {
-    /* Strip native form-control rendering so the CSS background-color
-       below actually paints. Without this, WebKit (Safari) overlays its
-       own dark-mode default field background (≈ #5f6163) on top of the
-       framework's --sf-color-surface, producing a 1.78 : 1 contrast
-       failure flagged by axe. Chromium and Firefox honour the CSS
-       background-color even without this; WebKit needs the explicit
-       opt-out. Native rendering of checkbox / radio / range / file /
-       datetime pickers is preserved because this :where() block only
-       matches text-like inputs (and select / textarea, which already
-       had `appearance: none` for chevron control). */
+
     appearance: none;
 
     display: block;
@@ -118,17 +59,7 @@
     opacity: 1;
   }
 
-
-  /* ----------------------------------------------------------
-     Autofill — repaint the browser's autofill highlight to match
-     the framework surface. Browsers refuse to let CSS override the
-     autofill background-color directly; the inset box-shadow trick
-     paints over it (the only CSS-only workaround). A faint tint may
-     still bleed through on some browser/OS combinations — that is a
-     browser limitation, not a framework one. Both the standard
-     `:autofill` and the WebKit/Blink `:-webkit-autofill` selectors
-     are listed so the rule applies across engines.
-     ---------------------------------------------------------- */
+  /* Autofill */
   /* stylelint-disable selector-pseudo-class-no-unknown */
   input:-webkit-autofill {
     box-shadow: inset 0 0 0 1000px var(--sf-color-surface);
@@ -144,20 +75,7 @@
   }
   /* stylelint-enable selector-pseudo-class-no-unknown */
 
-
-  /* ----------------------------------------------------------
-     Native validation states — :user-invalid / :user-valid fire
-     only AFTER the user has interacted with a field (typed + blurred),
-     so a pristine required form never glows red before it is touched.
-     These set the same --sf-field-border-color token consumed by the
-     shared border rule above, so they slot in without duplication.
-
-     ADDITIVE — the JS-driven .is-valid / .is-invalid classes
-     (core/states.css) remain for server-side errors, cross-field
-     validation, and flows that need to control timing or show
-     messages (which these pseudo-classes cannot do on their own).
-     Universal browser support (Chrome, Firefox, Safari).
-     ---------------------------------------------------------- */
+  /* Native validation states */
   input:user-invalid,
   select:user-invalid,
   textarea:user-invalid {
@@ -170,64 +88,40 @@
     --sf-field-border-color: var(--sf-color-success);
   }
 
-
-  /* ----------------------------------------------------------
-     Numeric inputs — tabular figures so digits share a fixed
-     advance width and align in vertical columns (prices, quantities,
-     totals). Reads the public --sf-font-numeric token so consumers
-     can override it. Universal browser support.
-     ---------------------------------------------------------- */
+  /* Numeric inputs */
   input[type="number"] {
     font-variant-numeric: var(--sf-font-numeric, tabular-nums);
   }
 
-
-  /* ----------------------------------------------------------
-     Textarea specifics
-     ---------------------------------------------------------- */
+  /* Textarea specifics */
   textarea {
     min-block-size: 6rem;
-    resize:         vertical; /* prevent horizontal resize that overflows 100% width container */
+    resize:         vertical;
   }
-  /* Auto-grow with content where supported. min-block-size acts as the
-     floor and resize:vertical remains the manual fallback, so on engines
-     without field-sizing the textarea behaves exactly as before — pure
-     progressive enhancement (Chrome/Edge 123+; Firefox/Safari pending). */
+
   @supports (field-sizing: content) {
     textarea {
       field-sizing: content;
     }
   }
 
-
-  /* ----------------------------------------------------------
-     Select
-     ---------------------------------------------------------- */
+  /* Select */
   select {
     padding-inline-end: calc(var(--sf-space-s) + 1.5em);
   }
-  /* Single-line selects get a chevron. CSS custom properties and `currentColor`
-     don't propagate into data-URI SVG backgrounds, so the stroke uses the CSS
-     system color `FieldText` — it resolves against the element's `color-scheme`
-     and therefore tracks scoped [data-theme] regions automatically.
 
-     Override path: to use a custom chevron colour or icon, override
-     background-image on `select:not([multiple], [size])` in your own CSS. */
   select:not([multiple], [size]) {
     background-repeat: no-repeat;
     background-position: right var(--sf-space-s) center;
     background-size: 1em;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='FieldText' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
   }
-  /* RTL: mirror the chevron to the inline-end (left) edge. */
+
   :dir(rtl) select:not([multiple], [size]) {
     background-position: left var(--sf-space-s) center;
   }
 
-
-  /* ----------------------------------------------------------
-     Button / submit / reset
-     ---------------------------------------------------------- */
+  /* Button / submit / reset */
   button:not([class*="sf-"]),
   input[type="submit"]:not([class*="sf-"]),
   input[type="reset"]:not([class*="sf-"]),
@@ -254,8 +148,7 @@
   input[type="submit"]:not([class*="sf-"]):hover,
   input[type="reset"]:not([class*="sf-"]):hover,
   input[type="button"]:not([class*="sf-"]):hover {
-    /* --sf-color-action--hover defined in optional/tokens.palette.css; fallback to
-       action colour so hover degrades gracefully if the palette file is not loaded */
+
     background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
@@ -273,27 +166,20 @@
   input[type="button"]:not([class*="sf-"]):disabled {
     opacity: var(--sf-opacity-disabled);
     cursor:  not-allowed;
-    /* pointer-events: none is intentionally absent: native :disabled already
-       blocks interaction; adding pointer-events:none silences the cursor above. */
+
   }
 
-
-  /* ----------------------------------------------------------
-     Checkbox & radio — minimal accent styling
-     ---------------------------------------------------------- */
+  /* Checkbox & radio */
   input[type="checkbox"],
   input[type="radio"] {
     inline-size:    1.125em;
     block-size:     1.125em;
     accent-color:   var(--sf-color-action);
     cursor:         pointer;
-    vertical-align: middle; /* center against adjacent inline label text */
+    vertical-align: middle;
   }
 
-
-  /* ----------------------------------------------------------
-     File input — style the selector button like a button
-     ---------------------------------------------------------- */
+  /* File input */
   input[type="file"] {
     cursor: pointer;
   }
@@ -314,10 +200,7 @@
     background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
-
-  /* ----------------------------------------------------------
-     Range — track + thumb (WebKit + Firefox)
-     ---------------------------------------------------------- */
+  /* Range */
   input[type="range"] {
     appearance: none;
     inline-size: 100%;
@@ -354,10 +237,7 @@
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-
-  /* ----------------------------------------------------------
-     Fieldset & legend
-     ---------------------------------------------------------- */
+  /* Fieldset & legend */
   fieldset {
     border: var(--sf-border-width-1) solid var(--sf-color-border--subtle);
     border-radius: var(--sf-radius-m);
@@ -369,10 +249,7 @@
     padding-inline: var(--sf-space-xs);
   }
 
-
-  /* ----------------------------------------------------------
-     Label
-     ---------------------------------------------------------- */
+  /* Label */
   label {
     display: block;
     font-weight: var(--sf-font-weight-heading);
@@ -380,10 +257,6 @@
     color: var(--sf-field-text-color, inherit);
   }
 
-  /* Required-field marker — classless, no markup convention.
-     Covers: <label>Name <input required></label> (nested inside),
-     <label>Name</label><input required> (direct sibling), and
-     <label>Name</label><div><input required></div> (wrapped sibling). */
   label:has(:required)::after,
   label:has(+ :required)::after,
   label:has(+ * :required)::after {

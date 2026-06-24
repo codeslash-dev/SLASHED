@@ -1,43 +1,7 @@
-/* SLASHED — core/themes.css
-   @layer slashed.themes
-
-   Theme switching: token reassignments only. No new selectors,
-   no new properties — strictly remaps existing tokens based on
-   system preference and explicit data-theme attributes.
-
-   Cascade position is significant. slashed.themes sits ABOVE
-   slashed.{states, utilities, components, layout, base} (see
-   core/layers.css), so a theme's token reassignment cannot be
-   accidentally beaten by a component or utility rule of equal
-   specificity. Only consumer code in slashed.overrides (or
-   unlayered CSS) can override a theme.
-
-   USAGE
-     <html>                        → follows OS preference
-     <html data-theme="dark">      → whole page dark
-     <section data-theme="dark">   → only this section dark
-     <section data-theme="light">  → only this section light
-
-   The base color-scheme: var(--sf-color-scheme, light dark)
-   declaration lives in core/reset.css and provides the baseline.
-   This layer flips it.
-
-   MULTI-BRAND — scope a palette to any subtree by re-declaring the 6
-   source tokens under a selector (e.g. [data-brand="x"]). See
-   optional/theme-example.css and docs/theming.md.
-
-   THEME TRANSITION — toggling [data-theme] via document.startViewTransition()
-   animates through the ::view-transition(root) rules in core/motion.css.
-   For a plain cross-fade of colours, opt into a transition class on <html>
-   (example in optional/theme-example.css) — never transition every colour
-   globally and permanently (perf footgun).
-   ─────────────────────────────────────────────────── */
+/* SLASHED — core/themes.css */
 
 @layer slashed.themes {
 
-  /* OS preference — only when no data-theme is set on :root.
-     A section-level [data-theme] still wins via the explicit
-     selectors below (higher specificity within the same layer). */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
       color-scheme: dark;
@@ -45,54 +9,15 @@
     }
   }
 
-  /* Explicit theme — works on :root (whole page) or any element
-     (section-level theming). */
   [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
   [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
 
-  /* Section-level background + foreground reset.
-     When [data-theme] is used on a non-root element, the tokens switch
-     (via the @supports blocks below) but the element keeps whatever
-     background it inherited. This rule gives it the correct surface
-     background and body text colour automatically, with zero specificity
-     (:where) so any explicit background/color in consumer CSS wins.
-     Omits :root and html — body already reads --sf-color-bg globally. */
   :where([data-theme]:not(:root, html)) {
     background-color: var(--sf-color-bg);
     color:            var(--sf-color-text);
   }
 
-  /* LumLocker — opt-in via [data-lumlocker] on :root.
-     Locks the 4 brand colors (primary, secondary, tertiary, action)
-     to one shared OKLCH L value (--sf-lumlocker, default 0.65 in
-     core/tokens.css), keeping each color's own hue and chroma.
-     Useful when a brand picker produces colors with wildly different
-     L values that look mismatched in weight.
-
-     Neutral is excluded by design — it is semantically a desaturated
-     grey, and forcing it to the same L as saturated brand colors would
-     make it appear chromatic and break its design role.
-     Base is also excluded — it is the source token for the page-surface
-     ladder, and locking it would distort derived backgrounds.
-
-     Default state: OFF. Without the attribute, every brand keeps its
-     own L. Add :root[data-lumlocker] (or set via JS) to enable.
-
-     Per-color escape: override --sf-color-X under
-     :root[data-lumlocker] to opt that one color out:
-       :root[data-lumlocker] { --sf-color-primary: #yourColor; }
-
-     The dark-side input falls back to -source-light when -source-dark isn't
-     explicitly set, so this works even without per-mode overrides.
-
-     Section-level [data-theme] fix: the combinator rules below
-     re-apply the lock inside nested [data-theme] subtrees, which
-     would otherwise bypass the :root-level locked value because
-     light-dark() resolves at declaration time, not inheritance time.
-
-     Requires CSS relative color syntax (Chrome 119+, Safari 16.4+,
-     Firefox 128+). Wrapped in @supports — unsupporting engines skip
-     the block silently; brand colors remain unmodified. */
+  /* LumLocker */
   @supports (color: oklch(from red l c h)) {
   :root[data-lumlocker] {
     --sf-color-primary: light-dark(
@@ -113,12 +38,6 @@
     );
   }
 
-  /* Re-apply lock inside section-level [data-theme] subtrees.
-     The section re-theme block above (slashed.themes @supports) sets
-     brand colors from source tokens directly, bypassing the lumlocked
-     value on :root. These higher-specificity rules (2 attr selectors)
-     restore the lock for any [data-theme] descendant when lumlocker is
-     active. The -dark token falls back to -light if not set. */
   :root[data-lumlocker] [data-theme="dark"] {
     --sf-color-primary:   oklch(from var(--sf-color-primary-source-dark,   var(--sf-color-primary-source-light))   var(--sf-lumlocker) c h);
     --sf-color-secondary: oklch(from var(--sf-color-secondary-source-dark, var(--sf-color-secondary-source-light)) var(--sf-lumlocker) c h);
@@ -131,39 +50,13 @@
     --sf-color-tertiary:  oklch(from var(--sf-color-tertiary-source-light)  var(--sf-lumlocker) c h);
     --sf-color-action:    oklch(from var(--sf-color-action-source-light)    var(--sf-lumlocker) c h);
   }
-  } /* end @supports (color: oklch(from red l c h)) */
+  }
 
-  /* ─────────────────────────────────────────────────────────────────
-     SECTION-LEVEL THEMING — full token re-declaration
-     ─────────────────────────────────────────────────────────────────
-     `light-dark()` resolves when a property is *declared* (on :root),
-     not when it is *inherited*. Setting `color-scheme: dark` on a
-     child element changes native UI controls and scrollbars but does
-     NOT cause any inherited custom-property `light-dark()` value to
-     re-evaluate — those values were already baked when :root computed
-     them.
-
-     The blocks below fix this by re-declaring every mode-sensitive
-     token directly on [data-theme] elements, using the explicit
-     light or dark formula rather than light-dark(). This makes
-     headers, sections, cards, or any subtree with [data-theme] fully
-     independent of the root's colour mode.
-
-     Requires relative colour syntax (Chrome 119+, Safari 16.4+,
-     Firefox 128+). Engines that don't support it skip the whole
-     @supports block and fall back to the :root values — a graceful
-     degradation with no visible breakage on older browsers. On :root
-     itself these rules are redundant (light-dark() already resolves
-     correctly) but harmless.
-
-     Manual per-token overrides still apply — a consumer-set
-     [data-theme="dark"] { --sf-color-primary: red } placed in
-     slashed.overrides will win over these re-declarations. */
+  /* SECTION-LEVEL THEMING */
 
   @supports (color: oklch(from red l c h)) {
 
-    /* ── -dark source tokens — auto-computed from -light, user-overridable ── */
-    :root {
+        :root {
       --sf-color-primary-source-dark:   oklch(from var(--sf-color-primary-source-light)   clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h);
       --sf-color-secondary-source-dark: oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h);
       --sf-color-tertiary-source-dark:  oklch(from var(--sf-color-tertiary-source-light)  clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h);
@@ -176,11 +69,8 @@
       --sf-color-danger-source-dark:    oklch(from var(--sf-color-danger-source-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h);
     }
 
-    /* ── [data-theme="dark"] — explicit dark values ──────────── */
-    [data-theme="dark"] {
+        [data-theme="dark"] {
 
-      /* Brand — simple var reference; -source-dark tokens defined on :root above.
-         Override --sf-color-X-source-dark anywhere in the cascade to customise. */
       --sf-color-primary:   var(--sf-color-primary-source-dark);
       --sf-color-secondary: var(--sf-color-secondary-source-dark);
       --sf-color-tertiary:  var(--sf-color-tertiary-source-dark);
@@ -189,21 +79,17 @@
       --sf-color-base:      var(--sf-color-base-source-dark);
       --sf-color-surface:   var(--sf-color-base);
 
-      /* Surface scale — re-derive from dark --sf-color-base so scoped dark
-         sections are not stuck with the light-baked var() text from :root. */
       --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
       --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
       --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
       --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
       --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
 
-      /* Status */
       --sf-color-success: var(--sf-color-success-source-dark);
       --sf-color-warning: var(--sf-color-warning-source-dark);
       --sf-color-info:    var(--sf-color-info-source-dark);
       --sf-color-danger:  var(--sf-color-danger-source-dark);
 
-      /* Text — dark formula (references --sf-color-neutral re-declared above) */
       --sf-color-text:              oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h);
       --sf-color-text--secondary:   oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h);
       --sf-color-text--placeholder: oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1),  0.65) c h);
@@ -211,31 +97,25 @@
       --sf-color-text--inverse:     oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4),  0.35) c h);
       --sf-color-heading:           oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h);
 
-      /* Borders — dark formula */
       --sf-color-border:         oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h);
       --sf-color-border--subtle: oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h);
       --sf-color-border--strong: oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1),  0.65) 0.02  h);
 
-      /* Links — dark formula */
       --sf-color-link:          oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h);
       --sf-color-link--hover:   oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h);
       --sf-color-link--active:  oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h);
       --sf-color-link--visited: oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60));
 
-      /* Selection */
       --sf-color-selection-bg: oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55);
 
-      /* Status — strong variants (dark: push lightness up) */
       --sf-color-success-strong: oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h);
       --sf-color-warning-strong: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
       --sf-color-info-strong:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
       --sf-color-danger-strong:  oklch(from var(--sf-color-danger)  clamp(0.70, calc(l + 0.15), 1) c h);
     }
 
-    /* ── [data-theme="light"] — explicit light values ─────────── */
-    [data-theme="light"] {
+        [data-theme="light"] {
 
-      /* Brand — explicit light values */
       --sf-color-primary:   var(--sf-color-primary-source-light);
       --sf-color-secondary: var(--sf-color-secondary-source-light);
       --sf-color-tertiary:  var(--sf-color-tertiary-source-light);
@@ -244,21 +124,17 @@
       --sf-color-base:      var(--sf-color-base-source-light);
       --sf-color-surface:   var(--sf-color-base);
 
-      /* Surface scale — re-derive from light --sf-color-base so scoped light
-         sections inside a dark root are not stuck with the dark-baked value. */
       --sf-color-bg:      oklch(from var(--sf-color-base) calc(l + 0.02) c h);
       --sf-color-inset:   oklch(from var(--sf-color-base) calc(l - 0.02) c h);
       --sf-color-raised:  oklch(from var(--sf-color-base) calc(l + 0.04) c h);
       --sf-color-overlay: oklch(from var(--sf-color-base) l c h / 0.9);
       --sf-color-inverse: oklch(from var(--sf-color-base) calc(1 - l) c h);
 
-      /* Status — explicit light values */
       --sf-color-success: var(--sf-color-success-source-light);
       --sf-color-warning: var(--sf-color-warning-source-light);
       --sf-color-info:    var(--sf-color-info-source-light);
       --sf-color-danger:  var(--sf-color-danger-source-light);
 
-      /* Text — light formula */
       --sf-color-text:              oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h);
       --sf-color-text--secondary:   oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h);
       --sf-color-text--placeholder: oklch(from var(--sf-color-neutral-source-light) clamp(0.45, calc(l + 0.15), 0.75) c h);
@@ -266,30 +142,25 @@
       --sf-color-text--inverse:     oklch(from var(--sf-color-neutral-source-light) clamp(0.85, calc(l + 0.4),  0.98) c h);
       --sf-color-heading:           oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h);
 
-      /* Borders — light formula */
       --sf-color-border:         oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h);
       --sf-color-border--subtle: oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h);
       --sf-color-border--strong: oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1),  0.85) 0.02  h);
 
-      /* Links — light formula */
       --sf-color-link:          oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h);
       --sf-color-link--hover:   oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h);
       --sf-color-link--active:  oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h);
       --sf-color-link--visited: oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60));
 
-      /* Selection */
       --sf-color-selection-bg: oklch(from var(--sf-color-action-source-light) l c h / 0.28);
 
-      /* Status — strong variants (light: push lightness down) */
       --sf-color-success-strong: oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h);
       --sf-color-warning-strong: oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h);
       --sf-color-info-strong:    oklch(from var(--sf-color-info-source-light)    calc(l - 0.1)  c h);
       --sf-color-danger-strong:  oklch(from var(--sf-color-danger-source-light)  calc(l - 0.1)  c h);
     }
 
-  } /* end @supports (color: oklch(from red l c h)) */
+  }
 
-  /* On-colour text tokens need sign() in addition to relative-color syntax. */
   @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) {
     [data-theme="dark"] {
       --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
@@ -317,20 +188,7 @@
     }
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     OPT-IN THEME CROSS-FADE
-     ─────────────────────────────────────────────────────────────────
-     Add .sf-theme-transition to <html> (or any subtree) so colours fade
-     instead of switching instantly when [data-theme] flips. Tune the speed
-     with --sf-theme-transition-duration (core/tokens.css).
-
-     Implementation: transition the registered @property <color> SOURCE
-     tokens on the element itself — NOT background-color/color on every
-     descendant. The source tokens are inherited (and the surface/text/
-     border tokens derive from them via relative color), so the whole
-     subtree cross-fades while component-level `transition` declarations on
-     descendants (button hovers, transforms, etc.) are left untouched.
-     Disabled automatically under prefers-reduced-motion. */
+  /* OPT-IN THEME CROSS-FADE */
   .sf-theme-transition {
     transition:
       --sf-color-primary   var(--sf-theme-transition-duration) var(--sf-ease-out),

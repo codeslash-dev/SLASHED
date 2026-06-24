@@ -13,6 +13,8 @@ import { tick } from 'svelte';
 import DomainPreview from '../src/components/DomainPreview.svelte';
 import { DOMAIN_PREVIEWS } from '../src/lib/domainPreviews.js';
 import { setOverride, clearAll } from '../src/lib/store.svelte.js';
+import apiIndex from '../src/data/api-index.generated.json';
+import domainPreviewSource from '../src/components/DomainPreview.svelte?raw';
 
 beforeEach(() => clearAll());
 
@@ -58,5 +60,18 @@ describe('DomainPreview', () => {
     await tick();
     const style = container.querySelector('.dp__stage')?.getAttribute('style') ?? '';
     expect(style).toContain('--sf-radius-m: 20px');
+  });
+
+  test('hard-coded framework var() references point at live tokens', () => {
+    const source = domainPreviewSource;
+    const liveTokens = new Set(apiIndex.tokens.map((token) => token.name));
+    const refs = [...source.matchAll(/var\((--sf-[A-Za-z0-9_-]+(?:--[A-Za-z0-9_-]+)?)/g)]
+      .map((match) => match[1])
+      // Documentation comments intentionally mention wildcard/pattern examples;
+      // this assertion protects actual hard-coded sample styles.
+      .filter((name) => !name.endsWith('-'));
+
+    const missing = [...new Set(refs)].filter((name) => !liveTokens.has(name)).sort();
+    expect(missing).toEqual([]);
   });
 });
