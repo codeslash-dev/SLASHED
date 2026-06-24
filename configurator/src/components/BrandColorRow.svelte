@@ -79,7 +79,8 @@
   let shadeColors = $state([]);
 
   $effect(() => {
-    for (const k in overrides) void overrides[k];
+    void overrides[lightName];
+    void overrides[darkName];
     void ui.previewTheme;
     queueMicrotask(() => {
       setProbeContext({ overrides, theme: ui.previewTheme });
