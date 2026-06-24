@@ -223,7 +223,7 @@
       --sf-color-link--visited: oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60));
 
       /* Selection */
-      --sf-color-selection-bg: oklch(from var(--sf-color-action-source-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55);
+      --sf-color-selection-bg: oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55);
 
       /* Status — strong variants (dark: push lightness up) */
       --sf-color-success-strong: oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h);
