@@ -124,7 +124,7 @@
                       <button type="button" class="cfg-btn cfg-btn--sm" onclick={() => setGradient(name, 135, stops[0], stops[1])}>Preset {i + 1}</button>
                     {/each}
                   </div>
-                  <TokenRow token={token(name)} label="Raw gradient" help="Power-user CSS value: linear/radial/conic, stops, color-mix(), vars." showRawInfo />
+                  <TokenRow token={token(name)} label="Raw gradient" help="Power-user CSS value: linear/radial/conic, stops, color-mix(), vars." showRawInfo forceEditable />
                 </div>
               </article>
             {/each}
@@ -138,14 +138,14 @@
             </div>
             <div class="smart__rows">
               {#each [...section.durationTokens, ...section.easingTokens].filter(exists) as name (name)}
-                <TokenRow token={token(name)} label={name.replace('--sf-', '').replaceAll('-', ' ')} help="Editable timing token; use raw mode for calc(), var() or cubic-bezier()." showRawInfo />
+                <TokenRow token={token(name)} label={name.replace('--sf-', '').replaceAll('-', ' ')} help="Editable timing token; use raw mode for calc(), var() or cubic-bezier()." showRawInfo forceEditable />
               {/each}
             </div>
           </div>
         {:else}
           <div class="smart__rows">
             {#each section.controls.filter((c) => exists(c.token)) as c (c.token)}
-              <TokenRow token={token(c.token)} label={c.label} help={c.help} showRawInfo />
+              <TokenRow token={token(c.token)} label={c.label} help={c.help} showRawInfo forceEditable />
             {/each}
           </div>
         {/if}
