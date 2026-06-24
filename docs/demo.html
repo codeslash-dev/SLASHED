@@ -805,7 +805,6 @@
           <div style="background: var(--sf-color-warning-subtle); color: var(--sf-color-warning-strong); border: 1px solid var(--sf-color-warning-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Warning</div>
           <div style="background: var(--sf-color-danger-subtle); color: var(--sf-color-danger-strong); border: 1px solid var(--sf-color-danger-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Danger</div>
           <div style="background: var(--sf-color-info-subtle); color: var(--sf-color-info-strong); border: 1px solid var(--sf-color-info-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Info</div>
-          <div style="background: var(--sf-color-danger-subtle); color: var(--sf-color-danger-strong); border: 1px solid var(--sf-color-danger-muted); padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s)">Danger</div>
         </div>
 
         <h3>Text Hierarchy</h3>
@@ -1057,8 +1056,8 @@
         </p>
         <pre><code>/* pre + code block */
 :root {
-  --sf-color-primary-light: oklch(0.47 0.27 264);
-  --sf-color-neutral-light: oklch(0.52 0.025 260);
+  --sf-color-primary-source-light: oklch(0.47 0.27 264);
+  --sf-color-neutral-source-light: oklch(0.52 0.025 260);
 }</code></pre>
         <blockquote style="border-inline-start: 3px solid var(--sf-color-primary); padding-inline-start: var(--sf-space-m); color: var(--sf-color-text--secondary); margin: 0">
           A blockquote. Try selecting this text to see <code>--sf-color-selection-bg</code>.
@@ -1273,10 +1272,10 @@
         <h3>@property Color Interpolation <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — sf-color-pulse)</small></h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--secondary); margin-block-end: var(--sf-space-s)">
           Demonstrates smooth <code>oklch</code> color animation via <code>@property</code>-registered tokens.
-          The box below pulses its <code>--sf-color-primary-light</code> lightness. Only works in browsers supporting <code>@property inherits</code>.
+          The box below pulses its <code>--sf-color-primary-source-light</code> lightness. Only works in browsers supporting <code>@property inherits</code>.
         </p>
         <div class="sf-color-pulse" style="padding: var(--sf-space-l); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-m); text-align: center; font-weight: var(--sf-font-weight-semibold)">
-          .sf-color-pulse — animating --sf-color-primary-light
+          .sf-color-pulse — animating --sf-color-primary-source-light
         </div>
 
         <h3>Duration Tokens</h3>
@@ -2771,20 +2770,24 @@
       // Approximations of the @property defaults in core/tokens.css; rarely
       // hit because every supported engine resolves oklch directly.
       const HEX_FALLBACKS = {
-        '--sf-color-primary-light':   '#4a30d0', '--sf-color-secondary-light': '#141530',
-        '--sf-color-tertiary-light':  '#5c20cc', '--sf-color-action-light':    '#1c58cc',
-        '--sf-color-neutral-light':   '#5e6880', '--sf-color-base-light':      '#f8f9ff',
-        '--sf-color-success-light':   '#1a8040', '--sf-color-warning-light':   '#c58c1a',
-        '--sf-color-info-light':      '#1a5ec8',
-        '--sf-color-danger-light':    '#c82010'
+        '--sf-color-primary-source-light':   '#4a30d0', '--sf-color-secondary-source-light': '#141530',
+        '--sf-color-tertiary-source-light':  '#5c20cc', '--sf-color-action-source-light':    '#1c58cc',
+        '--sf-color-neutral-source-light':   '#5e6880', '--sf-color-base-source-light':      '#f8f9ff',
+        '--sf-color-success-source-light':   '#1a8040', '--sf-color-warning-source-light':   '#c58c1a',
+        '--sf-color-info-source-light':      '#1a5ec8', '--sf-color-danger-source-light':    '#c82010',
+        '--sf-color-primary-source-dark':    '#9080f0', '--sf-color-secondary-source-dark':  '#9090c0',
+        '--sf-color-tertiary-source-dark':   '#a070e0', '--sf-color-action-source-dark':     '#6090e0',
+        '--sf-color-neutral-source-dark':    '#9098a8', '--sf-color-base-source-dark':       '#c0c4d0',
+        '--sf-color-success-source-dark':    '#60c080', '--sf-color-warning-source-dark':    '#e0b060',
+        '--sf-color-info-source-dark':       '#60a0e0', '--sf-color-danger-source-dark':     '#e06050'
       };
 
-      // data-token is the SOURCE token an input writes to (…-light / …-dark);
+      // data-token is the SOURCE token an input writes to (…-source-light / …-source-dark);
       // the swatch shows the RESOLVED base token (--sf-color-*) in that mode,
       // so dark always reflects the live auto-derived (or overridden) value.
       function resolvedHex(token) {
-        const mode  = token.endsWith('-dark') ? 'dark' : 'light';
-        const base  = token.replace(/-(light|dark)$/, '');
+        const mode  = token.endsWith('-source-dark') ? 'dark' : 'light';
+        const base  = token.replace(/-(source-light|source-dark)$/, '');
         const probe = probes[mode];
         probe.style.color = 'initial';
         probe.style.color = 'var(' + base + ')';
@@ -2914,13 +2917,13 @@
         syncAll();
       });
 
-      // Randomize brand hues — set only -light and let dark auto-derive, to
+      // Randomize brand hues — set only -source-light and let dark auto-derive, to
       // showcase single-input branding.
       document.getElementById('cz-randomize').addEventListener('click', () => {
         ['primary', 'secondary', 'tertiary', 'action'].forEach(key => {
           const hue = Math.floor(Math.random() * 360);
-          root.style.setProperty('--sf-color-' + key + '-light', 'oklch(0.50 0.18 ' + hue + ')');
-          root.style.removeProperty('--sf-color-' + key + '-dark');
+          root.style.setProperty('--sf-color-' + key + '-source-light', 'oklch(0.50 0.18 ' + hue + ')');
+          root.style.removeProperty('--sf-color-' + key + '-source-dark');
         });
         syncAll();
       });

@@ -624,7 +624,7 @@
         <p class="pv__eyebrow">Inline elements &amp; semantic HTML</p>
         <p class="pv__p"><strong>strong</strong>, <em>em</em>, <mark class="pv__mark">mark</mark>, <code class="pv__code">code</code>, <kbd class="pv__kbd">Ctrl</kbd>+<kbd class="pv__kbd">C</kbd>, H<sub>2</sub>O, E=mc<sup>2</sup>, <small>small</small>, <a class="pv__a" href="#a" onclick={preventDemoNav}>link</a>, <del>deleted</del>, <ins>inserted</ins></p>
         <pre class="pv__pre"><code>:root &#123;
-  --sf-color-primary-light: oklch(0.55 0.22 160);
+  --sf-color-primary-source-light: oklch(0.55 0.22 160);
 &#125;</code></pre>
         <blockquote class="pv__blockquote">A blockquote inside sf-prose gets consistent spacing via the flow space token.</blockquote>
       </section>

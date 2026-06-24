@@ -9,7 +9,7 @@
 
    THEMING — override just the 6 -source-light tokens. Dark mode auto-adapts via
      relative color syntax — zero extra work. For full control over dark mode,
-     optionally override the -source-dark tokens (unregistered custom properties).
+     optionally override the registered -source-dark tokens.
 
      Quick branding (6 tokens):
      :root {
@@ -160,7 +160,7 @@
   /* ============================================================
      @property — BRAND COLORS (-source-light source tokens, animatable)
      Override these 6 tokens to rebrand — dark mode auto-derives.
-     Optionally set --sf-color-X-source-dark (no @property) for full control.
+     Optionally set --sf-color-X-source-dark for full control.
      ============================================================ */
 
   @property --sf-color-primary-source-light   { syntax: "<color>"; inherits: true; initial-value: oklch(0.47 0.27 264); }
@@ -630,7 +630,7 @@
          ---------------------------------------------------------- */
       --sf-color-selection-bg:   light-dark(
         oklch(from var(--sf-color-action-source-light) l c h / 0.28),
-        oklch(from var(--sf-color-action-source-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55)
+        oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55)
       );
 
       /* ----------------------------------------------------------

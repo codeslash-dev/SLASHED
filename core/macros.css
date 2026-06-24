@@ -221,7 +221,7 @@
   /* -- Surface -------------------------------------------------
      Generic surface macro. Set --sf-surface-color on an element with
      .sf-surface to derive background, auto-contrast foreground, and
-     contextual surface tokens. 11 precomputed variants
+     contextual surface tokens. 10 precomputed variants
      (.sf-surface--primary through .sf-surface--danger) cover all
      brand + status + inverse colors.
 

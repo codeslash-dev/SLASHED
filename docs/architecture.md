@@ -202,7 +202,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 ## Tokens
 
 - Colors: `oklch()` with relative color syntax for derived values; `oklch(from …)` for semantic alpha variants (ghost/subtle/muted) in core; `color-mix(in oklab)` for numeric tints/shades in the optional palette; the optional palette's numeric alpha variants (-a5/-a10/-a30/-a50/-a80) are gated behind `@supports (color: oklch(from red l c h))`
-- `@property` registration for 18 source colours (10 `-source-light` + 10 `-source-dark`, 6 brand + 4 status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
+- `@property` registration for 20 source colours (10 `-source-light` + 10 `-source-dark`, 6 brand + 4 status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals
