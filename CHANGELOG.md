@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.14] - 2026-06-24
+
+### Bug Fixes
+- **configurator:** add component swatch to Colors preview section to fix failing e2e test
+- **configurator:** address PR #398 review — ARIA tabs, dynamic bar count, shade-strip perf
+- **configurator:** address preview hub review feedback
+- **configurator:** make radius mini controls accessible
+- **gen-api-index:** detect condensed file headers without requiring DIVIDER_RUN
+- **configurator:** show effective value + reset in readonly consume rows; guard picker on parseability
+- **css:** restore source comments, revert badge sizes, fix indentation
+- **configurator:** make Smart Settings controls editable when tagged consumption
+- address live preview review feedback
+
 ## [0.6.13] - 2026-06-24
 
 ### Bug Fixes
