@@ -52,9 +52,15 @@
     const below = window.innerHeight - r.bottom;
     pickerTop  = below >= pickerH ? r.bottom + 6 : r.top - pickerH - 6;
     pickerLeft = Math.min(r.left, window.innerWidth - 312);
-    pickerValue = mode === 'light' ? (lightValue || lightDefault) : (darkOverride || autoDark || '');
     pickerMode  = mode;
   }
+
+  // Keep pickerValue in sync with the live text input while the picker is open,
+  // so typing in the input is reflected in the picker's sliders and vice-versa.
+  $effect(() => {
+    if (pickerMode === 'light') pickerValue = lightValue || lightDefault;
+    else if (pickerMode === 'dark') pickerValue = darkOverride ?? autoDark ?? '';
+  });
 
   function onPick(v) {
     if (pickerMode === 'light') setOverride(lightName, v);
