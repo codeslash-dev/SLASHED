@@ -330,7 +330,7 @@
         </details>
 
       {:else if domain.id === 'typography'}
-        <!-- Heading-level tab editor (ACSS-style) replaces flat basicGroups -->
+        <!-- Heading-level tab editor replaces flat basicGroups -->
         <HeadingEditor />
 
       {:else if domain.id === 'borders'}
