@@ -4,9 +4,8 @@
    * Renders a proportional bar for each --sf-container-* token so users can
    * compare relative widths at a glance and see the live value alongside it.
    */
-  import { overrides, ui } from '../lib/store.svelte.js';
+  import { overrides } from '../lib/store.svelte.js';
   import { tokenByName, defaultsByName } from '../lib/model.js';
-  import { measureBackground, setProbeContext } from '../lib/probeHost.js';
 
   const CONTAINERS = [
     { name: '--sf-container-narrow', label: 'Narrow',  help: 'Asides and narrow columns' },
@@ -17,7 +16,6 @@
   ];
 
   const exists = (name) => tokenByName.has(name);
-  const token = (name) => tokenByName.get(name);
 
   /** Extract a pixel value from a CSS value string (handles rem, ch, px, %). */
   function parsePx(raw) {
@@ -49,7 +47,7 @@
 
 <div class="cbars">
   {#each rows as row (row.name)}
-    {@const pct = row.px != null ? Math.min(100, (row.px / maxPx) * 100) : 100}
+    {@const pct = row.px != null ? Math.min(100, (row.px / maxPx) * 100) : 0}
     {@const mod = modified(row.name)}
     <div class="cbars__row" class:cbars__row--mod={mod}>
       <div class="cbars__meta">

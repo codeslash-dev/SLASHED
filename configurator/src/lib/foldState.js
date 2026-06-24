@@ -16,7 +16,7 @@ let _state = {};
 if (typeof localStorage !== 'undefined') {
   try {
     const raw = localStorage.getItem(FOLD_KEY);
-    if (raw) _state = JSON.parse(raw);
+    if (raw) { const parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') _state = parsed; }
   } catch { /* ignore */ }
 }
 

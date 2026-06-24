@@ -14,7 +14,6 @@
   import { defaultsByName } from '../lib/model.js';
   import { computeAutoDark } from '../lib/brandColors.js';
   import { measureBackground, setProbeContext } from '../lib/probeHost.js';
-  import { parseRgb } from '../lib/contrast.js';
   import OklchPicker from './OklchPicker.svelte';
 
   /** @type {{ colorKey: string, label: string }} */
@@ -91,11 +90,6 @@
     });
   });
 
-  function perceived(rgb) {
-    const c = parseRgb(rgb);
-    if (!c) return 128;
-    return (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) * 255;
-  }
 </script>
 
 <div class="bcr" class:bcr--light-mod={lightModified} class:bcr--dark-mod={darkModified}>

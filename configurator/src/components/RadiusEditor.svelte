@@ -31,7 +31,7 @@
   let activeTab = $state('all');
 
   function tabHasOverride(tabId) {
-    if (tabId === 'all') return GLOBAL_TOKENS.some(hasOverride);
+    if (tabId === 'all') return [...GLOBAL_TOKENS, ...LEVELS.map((l) => l.token)].some(hasOverride);
     const lvl = LEVELS.find((l) => l.id === tabId);
     return lvl ? hasOverride(lvl.token) : false;
   }

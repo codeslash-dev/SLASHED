@@ -188,7 +188,7 @@
     {#if collapsible}
       <button
         class="gen__toggle"
-        onclick={() => { open = !open; if (collapsible) setFold(foldKey, open); }}
+        onclick={() => { open = !open; setFold(foldKey, open); }}
         aria-expanded={open}
         aria-label={open ? 'Collapse scale generator' : 'Expand scale generator'}
       ><span class="gen__chev" class:gen__chev--open={open} aria-hidden="true">›</span></button>

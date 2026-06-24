@@ -55,7 +55,7 @@
   let activeTab = $state('all');
 
   function tabHasOverride(tabId) {
-    if (tabId === 'all') return GLOBAL_HEADING_TOKENS.some(hasOverride);
+    if (tabId === 'all') return [...GLOBAL_HEADING_TOKENS, ...BODY_TOKENS, ...MONO_TOKENS, ...LEVELS.flatMap(PER_LEVEL_TOKENS)].some(hasOverride);
     if (tabId === 'body') return BODY_TOKENS.some(hasOverride);
     if (tabId === 'mono') return MONO_TOKENS.some(hasOverride);
     return PER_LEVEL_TOKENS(tabId).some(hasOverride);

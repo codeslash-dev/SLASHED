@@ -1165,10 +1165,6 @@
               <code>{r}</code>
             </div>
           {/each}
-          <div class="pv__radii-item">
-            <span class="pv__radii-box" style="border-radius:var(--sf-radius-full,999px)"></span>
-            <code>full</code>
-          </div>
         </div>
       </section>
 
