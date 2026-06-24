@@ -82,7 +82,7 @@
   }
 </script>
 
-<div class="row" class:row--modified={modified && (!isConsume || forceEditable)} class:row--consume={isConsume && !forceEditable}>
+<div class="row" class:row--modified={modified} class:row--consume={isConsume && !forceEditable}>
   <div class="row__info">
     {#if friendly}
       <div class="row__name-line">
@@ -171,8 +171,16 @@
         class="row__readonly"
         title="Consumption token — derived from configure tokens. Edit the upstream source instead."
       >
-        <code class="row__readonly-val">{token.value}</code>
+        <code class="row__readonly-val">{effectiveValue}</code>
       </div>
+      {#if modified}
+        <button
+          class="cfg-btn cfg-btn--ghost cfg-btn--icon row__reset"
+          onclick={() => clearOverride(token.name)}
+          title="Reset to framework default"
+          aria-label="Reset {token.name}"
+        >⟲</button>
+      {/if}
     {:else}
       <TokenEditor {token} />
       <button
