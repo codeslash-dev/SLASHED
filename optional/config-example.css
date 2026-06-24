@@ -1,106 +1,52 @@
-/* ============================================================
-   SLASHED — optional/config-example.css   (COPY & CUSTOMISE)
-   @layer slashed.themes
-
-   The control panel. Every system-wide dial in one place: brand
-   colors, the generative fluid engine, custom fluid slots, global
-   scale multipliers, font families, and radius. Every value below
-   is the framework default — copying this file verbatim changes
-   nothing. Tune a value, and every token derived from it
-   recalculates at runtime. No build step.
-
-   NOT part of any bundle — this is a docs/reference file only.
-
-   Sections:
-     1. Brand colors (6 source tokens)
-     2. Fluid engine (12 generative inputs)
-     3. Global scale multipliers
-     4. Font families
-     5. Radius
-
-   For color theming beyond the 6 source tokens (dark-mode
-   overrides, multi-brand scoping, per-component tokens) see
-   optional/theme-example.css and docs/theming.md.
-   ============================================================ */
+/* SLASHED — optional/config-example.css   (COPY & CUSTOMISE) */
 
 @layer slashed.themes {
 
   :root {
 
-    /* ===========================================================
-       1. BRAND COLORS — the 6 source tokens
-       ===========================================================
-       Any valid CSS color works. Dark mode auto-derives; the full
-       shade ramps, status colors, text-on-color and surface system
-       all regenerate from these. */
-    --sf-color-primary-source-light:   oklch(0.47 0.27 264);  /* brand / links     */
-    --sf-color-secondary-source-light: oklch(0.22 0.04 264);  /* muted brand       */
-    --sf-color-tertiary-source-light:  oklch(0.42 0.22 295);  /* accent            */
-    --sf-color-action-source-light:    oklch(0.50 0.22 235);  /* primary CTA       */
-    --sf-color-neutral-source-light:   oklch(0.52 0.025 260); /* greys / text base */
-    --sf-color-base-source-light:      oklch(0.96 0.006 250); /* page surface      */
+    /* 1. BRAND COLORS */
+    --sf-color-primary-source-light:   oklch(0.47 0.27 264);
+    --sf-color-secondary-source-light: oklch(0.22 0.04 264);
+    --sf-color-tertiary-source-light:  oklch(0.42 0.22 295);
+    --sf-color-action-source-light:    oklch(0.50 0.22 235);
+    --sf-color-neutral-source-light:   oklch(0.52 0.025 260);
+    --sf-color-base-source-light:      oklch(0.96 0.006 250);
 
-    /* ===========================================================
-       2. FLUID ENGINE — generative scale inputs
-       ===========================================================
-       The fluid type / space / display scales are computed at
-       runtime from these scalars (all unitless; vw/base values are
-       rem multipliers). Change one, and every clamp() in the
-       system recalibrates. */
+    /* 2. FLUID ENGINE */
 
-    /* Viewport range over which all fluid values interpolate */
-    --sf-fluid-min-vw:          22.5;  /* fluidity starts (× 1rem = 360px) */
-    --sf-fluid-max-vw:          90;    /* fluidity stops  (× 1rem = 1440px) */
+    --sf-fluid-min-vw:          22.5;
+    --sf-fluid-max-vw:          90;
 
-    /* TYPE scale — dual modular ratio: subtler on small viewports,
-       larger on wide ones */
-    --sf-text-ratio-min:        1.25;  /* ratio at min viewport */
-    --sf-text-ratio-max:        1.333; /* ratio at max viewport */
-    --sf-text-base-min:         1;     /* --sf-text-m at min viewport (rem) */
-    --sf-text-base-max:         1.25;  /* --sf-text-m at max viewport (rem) */
+    --sf-text-ratio-min:        1.25;
+    --sf-text-ratio-max:        1.333;
+    --sf-text-base-min:         1;
+    --sf-text-base-max:         1.25;
 
-    /* DISPLAY scale — own base, reuses the type ratios */
-    --sf-text-display-base-min: 2.4;   /* --sf-text-display-s at min vw (rem) */
-    --sf-text-display-base-max: 3;     /* --sf-text-display-s at max vw (rem) */
+    --sf-text-display-base-min: 2.4;
+    --sf-text-display-base-max: 3;
 
-    /* SPACE scale — independent ratio and base */
     --sf-space-ratio-min:       1.25;
     --sf-space-ratio-max:       1.333;
-    --sf-space-base-min:        1;     /* --sf-space-m at min viewport (rem) */
-    --sf-space-base-max:        2;     /* --sf-space-m at max viewport (rem) */
+    --sf-space-base-min:        1;
+    --sf-space-base-max:        2;
 
-    /* ===========================================================
-       3. GLOBAL SCALE MULTIPLIERS
-       ===========================================================
-       Linear dials applied on top of the generative scales. */
-    --sf-text-scale:         1;     /* all body text sizes        */
-    --sf-text-display-scale: 1;     /* display sizes              */
-    --sf-space-scale:        1;     /* all fluid spacing          */
-    --sf-section-scale:      1;     /* all section padding sizes  */
-    --sf-radius-scale:       1;     /* all border radii           */
-    --sf-motion-scale:       1;     /* all durations              */
-    /* Progressive leading tightener for the per-size line-height
-       tokens (core/tokens.css): each step up the type scale
-       subtracts step-index × taper from its default.
-       0 keeps the curated defaults; try 0.02 for a smooth taper. */
+    /* 3. GLOBAL SCALE MULTIPLIERS */
+    --sf-text-scale:         1;
+    --sf-text-display-scale: 1;
+    --sf-space-scale:        1;
+    --sf-section-scale:      1;
+    --sf-radius-scale:       1;
+    --sf-motion-scale:       1;
+
     --sf-leading-taper:      0;
 
-    /* ===========================================================
-       4. FONT FAMILIES
-       =========================================================== */
+    /* 4. FONT FAMILIES */
     --sf-font-body:    system-ui, -apple-system, sans-serif;
     --sf-font-heading: var(--sf-font-body);
     --sf-font-display: var(--sf-font-heading);
     --sf-font-mono:    ui-monospace, monospace;
 
-    /* ===========================================================
-       5. RADIUS
-       ===========================================================
-       --sf-radius-scale (section 3) scales the whole set; override
-       individual steps only when the curve itself must change. */
-    /* --sf-radius-s: calc(4px  * var(--sf-radius-scale)); */
-    /* --sf-radius-m: calc(8px  * var(--sf-radius-scale)); */
-    /* --sf-radius-l: calc(12px * var(--sf-radius-scale)); */
+    /* 5. RADIUS */
 
   }
 }

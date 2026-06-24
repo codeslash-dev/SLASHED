@@ -1,39 +1,8 @@
-/* SLASHED — optional/legacy.css
-   @layer slashed.legacy
-
-   Load LAST, after every framework file. slashed.legacy is
-   declared before slashed.overrides in layers.css, so user
-   overrides always win.
-
-   IMPORTANT — what this file is NOT
-   ─────────────────────────────────
-   The framework's real support floor is Chrome 125+, Safari 18.0+,
-   Firefox 129+ (April–September 2024). That floor is set by the colour
-   system (light-dark(), @property with inherits, oklch() relative-color),
-   scroll-driven animations (animation-timeline: view()), and @starting-style.
-   This file does NOT extend the floor below @layer support.
-
-   What this file IS
-   ─────────────────
-   Property-level smoothing for non-colour features that landed
-   later than @layer itself. Specifically: dvh on Safari 15.0–15.3,
-   :focus-visible on Safari pre-15.4, scrollbar-gutter on Safari
-   (still missing). Useful only for users who pin to early-2022
-   Safari for non-colour reasons; on modern engines every block
-   below is inert via @supports not (...).
-
-   Scope: covers gaps in reset.css, base.css, accessibility.css.
-   ─────────────────────────────────────────────────── */
+/* SLASHED — optional/legacy.css */
 
 @layer slashed.legacy {
 
-  /* ============================================================
-     1. Dynamic viewport units — dvh
-     Safari gained dvh in 15.4; 15.0–15.3 do not have it.
-     reset.css: body { min-height: 100dvh } → fall back to vh.
-     Safe degradation otherwise (no breakage), but the address-bar
-     gap on iOS is worth correcting where we can.
-     ============================================================ */
+  /* 1. Dynamic viewport units */
 
   @supports not (height: 100dvh) {
     body {
@@ -41,19 +10,7 @@
     }
   }
 
-
-  /* ============================================================
-     2. :focus-visible — CRITICAL accessibility
-     Safari < 15.4 lacks :focus-visible. Without a fallback the
-     entire accessibility.css focus rule is dropped (unknown
-     selector ⇒ whole rule invalid) and keyboard users lose the
-     visible focus ring — a WCAG 2.4.7 failure.
-
-     Established pattern: when :focus-visible is unsupported, every
-     :focus shows the ring (slightly broader than ideal, but
-     correct and accessible — visible focus on mouse too is far
-     better than none on keyboard).
-     ============================================================ */
+  /* 2. :focus-visible */
 
   @supports not selector(:focus-visible) {
     :focus {
@@ -64,15 +21,7 @@
     }
   }
 
-
-  /* ============================================================
-     3. scrollbar-gutter: stable — layout-shift prevention
-     Absent in Safari (all versions to date). Degrades safely on
-     its own (possible horizontal shift when a scrollbar appears,
-     no breakage). Classic fallback reserves the bar permanently;
-     it has a cost (always-visible track) so it is applied only
-     where the modern property is missing.
-     ============================================================ */
+  /* 3. scrollbar-gutter: stable */
 
   @supports not (scrollbar-gutter: stable) {
     html {

@@ -1,25 +1,8 @@
-/* SLASHED — core/accessibility.css
-   @layer slashed.accessibility
-
-   Critical a11y rules use !important to survive unlayered CSS and
-   third-party resets (unlayered normal beats any layered normal).
-   Protection is SELECTIVE — only rules whose override is a genuine
-   user-facing barrier are hardened. Rules that are legitimately
-   customised (touch targets, skip-link position, contrast boost,
-   cursor) are left normal on purpose.
-
-   Audit note: reset.css/base.css contain no !important on outline,
-   animation-* or transition-*, so the reversed important-layer order
-   cannot let a lower layer defeat these rules.
-   ─────────────────────────────────────────────────── */
+/* SLASHED — core/accessibility.css */
 
 @layer slashed.accessibility {
 
-  /* ----------------------------------------------------------
-     Focus — keyboard visibility is WCAG 2.4.7, hard barrier.
-     Ring definition lives here (not base.css) so all focus
-     logic is in one high-priority layer. Hardened.
-     ---------------------------------------------------------- */
+  /* Focus */
   :focus:not(:focus-visible) {
     outline: none;
   }
@@ -29,28 +12,12 @@
     outline-offset: var(--sf-focus-ring-offset) !important;
   }
 
-  /* ----------------------------------------------------------
-     Focus-shadow opt-in — switches the focus indicator from the
-     default `outline` ring to a `box-shadow` ring (the composite
-     --sf-focus-ring-shadow token). Useful when the outline clips
-     awkwardly on rounded corners or overflow:hidden containers,
-     where box-shadow follows border-radius. Opt-in per element:
-       <a class="sf-focus-shadow" href="…">…</a>
-
-     The base :focus-visible outline is hardened with !important
-     (WCAG 2.4.7), so this opt-in must also use !important to take
-     over — it replaces one always-visible ring with another, so
-     the keyboard-focus guarantee is preserved, not weakened.
-     outline:none here only removes the now-redundant outline ring
-     in favour of the box-shadow ring on the same element.
-     ---------------------------------------------------------- */
+  /* Focus-shadow opt-in */
   .sf-focus-shadow:focus-visible {
     outline:    none                         !important;
     box-shadow: var(--sf-focus-ring-shadow)  !important;
   }
-  /* Forced-colors (Windows High Contrast) drops box-shadow entirely, which
-     would leave this element with NO focus indicator. Restore a system-colour
-     outline ring there so the WCAG 2.4.7 guarantee holds in that mode too. */
+
   @media (forced-colors: active) {
     .sf-focus-shadow:focus-visible {
       outline:        var(--sf-focus-ring-width) solid !important;
@@ -59,12 +26,7 @@
     }
   }
 
-  /* ----------------------------------------------------------
-     Reduced motion. Token override helps components that read
-     duration tokens in other contexts; the property-level
-     !important block is the real guarantee and works
-     independently of tokens (and of unlayered token overrides).
-     ---------------------------------------------------------- */
+  /* Reduced motion. Token override helps components that read */
   @media (prefers-reduced-motion: reduce) {
     :root {
       --sf-duration-instant: 0.01ms;
@@ -84,9 +46,6 @@
     }
   }
 
-  /* Manual motion opt-out — same suppression as the OS preference above,
-     but consumer-toggled (e.g. a site-level "reduce motion" switch). Works
-     regardless of the OS setting. */
   .no-motion,
   .no-motion *,
   .no-motion *::before,
@@ -97,15 +56,11 @@
     scroll-behavior:           auto   !important;
   }
 
-  /* ----------------------------------------------------------
-     High contrast — enhancement, not a barrier. Left normal:
-     if overridden the focus ring still exists, just thinner.
-     ---------------------------------------------------------- */
+  /* High contrast */
   @media (prefers-contrast: more) {
     :root {
       --sf-focus-ring-width: 3px;
-      /* Push derived reading-text colours toward the extremes (see the
-         --sf-contrast-bias knob in tokens.css). */
+
       --sf-contrast-bias: 0.06;
     }
 
@@ -114,9 +69,6 @@
     }
   }
 
-  /* ----------------------------------------------------------
-     Reduced transparency.
-     ---------------------------------------------------------- */
   @media (prefers-reduced-transparency: reduce) {
     ::backdrop {
       background-color: var(--sf-color-neutral);
@@ -124,17 +76,7 @@
     }
   }
 
-  /* ----------------------------------------------------------
-     Reduced data — Save-Data / metered-connection preference.
-     Enhancement, not a barrier (left normal, no !important): we
-     only neutralise the framework's paint-heaviest *decorative*
-     output via its own master knobs, so layout and legibility are
-     untouched. --sf-shadow-strength: 0 zeroes every box/text/drop
-     shadow and the glow in one step (they all derive their alpha
-     from it); the blur tokens collapse so backdrop/filter blurs
-     stop compositing expensive layers. Progressive enhancement —
-     engines without prefers-reduced-data simply ignore this block.
-     ---------------------------------------------------------- */
+  /* Reduced data */
   @media (prefers-reduced-data: reduce) {
     :root {
       --sf-shadow-strength: 0;
@@ -142,12 +84,7 @@
     }
   }
 
-  /* ----------------------------------------------------------
-     Minimum touch targets — WCAG 2.5.5 has documented
-     exceptions; dense desktop-first UIs legitimately go below
-     44px with other hit-area strategies. Left normal ON PURPOSE
-     so it stays a recommendation, not an unbreakable rule.
-     ---------------------------------------------------------- */
+  /* Minimum touch targets */
   @media (pointer: coarse) {
     button,
     input[type="button"],
@@ -158,9 +95,7 @@
       min-block-size:  var(--sf-touch-target);
       min-inline-size: var(--sf-touch-target);
     }
-    /* Checkboxes and radios are replaced elements — no display change needed.
-       The UA renders them as a fixed small square; min-size expands the
-       hit area without touching layout. */
+
     input[type="checkbox"],
     input[type="radio"] {
       min-block-size:  var(--sf-touch-target);
@@ -168,20 +103,14 @@
     }
   }
 
-  /* ----------------------------------------------------------
-     Disabled states — cosmetic, left normal.
-     ---------------------------------------------------------- */
+  /* Disabled states */
   [disabled],
   [aria-disabled="true"] {
     cursor:  not-allowed;
     opacity: var(--sf-opacity-disabled);
   }
 
-  /* ----------------------------------------------------------
-     Screen-reader-only. Atomic contract: a partial override
-     either exposes hidden content visually or hides intended
-     content. All-or-nothing, so the whole set is hardened.
-     ---------------------------------------------------------- */
+  /* Screen-reader-only. Atomic contract: a partial override */
   .sr-only,
   .sr-only-focusable:not(:focus, :focus-within) {
     position:    absolute            !important;
@@ -189,17 +118,14 @@
     height:      1px                 !important;
     padding:     0                   !important;
     margin:      -1px                !important;
-    overflow:    hidden              !important; /* fallback for Safari <16 */
+    overflow:    hidden              !important;
     overflow:    clip                !important;
     clip-path:   inset(50%)          !important;
     white-space: nowrap              !important;
     border:      0                   !important;
   }
 
-  /* ----------------------------------------------------------
-     Skip link — appearance belongs to the integrator's design.
-     Left normal so position/colour can be themed freely.
-     ---------------------------------------------------------- */
+  /* Skip link */
   .skip-link {
     position:          absolute;
     inset-block-start: -100%;
@@ -216,77 +142,20 @@
     inset-block-start: var(--sf-space-m);
   }
 
+  /* Focus-parent */
 
-  /* ----------------------------------------------------------
-     Focus-parent — an a11y *pattern*, not a state. Lives in the
-     accessibility layer (was previously in states.css; moved in
-     v0.3.0) so that all focus-related a11y rules share one home
-     and survive third-party resets at the same priority as the
-     focus-visible ring above. Cannot be hardened with !important
-     because the outline shorthand is consumer-customisable.
-     Canonical name: .sf-focus-parent (prefixed).
-     ---------------------------------------------------------- */
-  /* Uses --sf-focus-ring-color (same token as :focus-visible) so the ring
-     is visually consistent whether focus lands on the parent or a child. */
   .sf-focus-parent:focus-within {
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  /* ----------------------------------------------------------
-     Clickable-parent — the card-with-link a11y pattern.
-     Applied to the card container. Two modes:
-
-     Automatic (single primary link):
-       <article class="sf-clickable-parent">
-         <h3><a href="…">Title</a></h3>
-         <p>Description</p>
-         <button>Independent action</button>
-       </article>
-
-     Explicit (multiple links — add [data-overlay-link] to the primary):
-       <article class="sf-clickable-parent">
-         <h3><a href="…" data-overlay-link>Title</a></h3>
-         <p>Description</p>
-         <a href="/category">Category</a>  ← lifted automatically
-         <button>Action</button>           ← lifted automatically
-       </article>
-
-     Mechanic: the link's ::after fills the card via position:absolute;
-     inset:0. It is contained by .sf-clickable-parent (position:relative)
-     only if the link itself has no positioned ancestor between it and the
-     card — so no element containing the overlay link should be given
-     position:relative. Flow children are therefore intentionally left at
-     position:static; they sit below the overlay in stacking order.
-
-     Trade-off: card text is NOT user-selectable by mouse. A JavaScript
-     click-delegate could restore selectability while preserving
-     full-card navigation.
-
-     Key features:
-       • [data-overlay-link] explicit mode — reliable multi-link cards
-       • `:focus-within` card ring — always included, no extra recipe
-       • --sf-clickable-overlay-z — escape parent stacking contexts
-       • Wider interactive-element exceptions (summary, video, audio…)
-
-     Tune --sf-clickable-overlay-z to escape a parent stacking context.
-     [data-no-overlay] opts any descendant above the overlay.
-     ---------------------------------------------------------- */
+  /* Clickable-parent */
   .sf-clickable-parent {
     --sf-clickable-overlay-z: 1;
     position: relative;
     cursor:   pointer;
   }
 
-  /* Overlay: the link's ::after fills the containing card.
-     Automatic mode — every :any-link gets the overlay; works reliably
-     for single-link cards. Secondary links that also receive ::after are
-     lifted to position:relative (interactive rule below), which scopes
-     their ::after to themselves and keeps them independently clickable.
-     Explicit mode  — only [data-overlay-link] or .sf-clickable-parent__overlay
-     fills the card. Use explicit mode when secondary links live at
-     different nesting depths (automatic :not(:first-of-type) is sibling-scoped
-     and does not see links nested inside wrappers).                    */
   .sf-clickable-parent:not(:has([data-overlay-link], .sf-clickable-parent__overlay)) a:where(:any-link)::after,
   .sf-clickable-parent [data-overlay-link]::after,
   .sf-clickable-parent .sf-clickable-parent__overlay::after {
@@ -297,13 +166,6 @@
     pointer-events: auto;
   }
 
-  /* Interactive descendants beat the overlay and stay functional.
-     Explicit mode: every non-designated :any-link is lifted — robust at
-     any nesting depth, no :first-of-type fragility.
-     Automatic mode: links that are :not(:first-of-type) among siblings
-     are lifted. Sibling-scoped — use explicit mode for cards where
-     secondary links live at different nesting depths.
-     [data-no-overlay] is the per-element consumer escape hatch.         */
   .sf-clickable-parent :is(
     button, input, textarea, select,
     summary, video, audio,
@@ -316,22 +178,12 @@
     z-index:  calc(var(--sf-clickable-overlay-z) + 1);
   }
 
-  /* Card-level focus ring — keyboard users see which card is active.
-     The focus ring is always included without requiring a separate
-     recipe. Suppress with outline:none
-     if the card design provides its own focus indicator.               */
   .sf-clickable-parent:focus-within {
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  /* ----------------------------------------------------------
-     Forced colors (Windows High Contrast). Outline-based focus
-     already survives; we only (a) adopt the system Highlight
-     colour for the ring and (b) drop decorative shadows that
-     forced-colors would otherwise flatten into solid slabs.
-     Shadow removal is zero-specificity so any rule can win it back.
-     ---------------------------------------------------------- */
+  /* Forced colors (Windows High Contrast). Outline-based focus */
   @media (forced-colors: active) {
     :root {
       --sf-focus-ring-color: Highlight;
@@ -346,18 +198,12 @@
       text-shadow: none;
     }
 
-    /* Form controls otherwise lose their visible boundary in forced-colors
-       (their token-driven border colour is replaced by the system canvas).
-       Re-assert a system-coloured border so fields stay distinguishable. */
     input,
     select,
     textarea {
       border: var(--sf-border-width-1) solid;
     }
 
-    /* Buttons with transparent borders lose their boundary entirely in
-       forced-colors — they appear as floating, unbordered text blocks.
-       Re-assert the system ButtonBorder colour to restore the boundary. */
     button,
     input[type="submit"],
     input[type="reset"],
@@ -365,10 +211,6 @@
       border-color: ButtonBorder !important;
     }
 
-    /* Gradient text (.sf-text-gradient) clips `color: transparent` via
-       background-clip. In forced-colors the gradient is suppressed but
-       transparent color remains, making heading text completely invisible.
-       Restore opaque system text and remove the clip. */
     .sf-text-gradient {
       background-image:         none !important;
       /* stylelint-disable-next-line property-no-vendor-prefix */
@@ -377,10 +219,6 @@
       color:                    CanvasText !important;
     }
 
-    /* Spinner (.is-loading::after) uses --sf-color-action for the active
-       segment. Forced-colors flattens this to the system background,
-       turning the loader into a static solid circle. Override with system
-       ButtonText / Highlight so the spinning segment stays visible. */
     .is-loading::after {
       border-color:             ButtonText !important;
       border-block-start-color: Highlight !important;

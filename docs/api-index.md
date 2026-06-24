@@ -737,271 +737,271 @@ and a short description. The machine-readable companion (with all columns) is
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.no-motion` | PUBLIC | accessibility | Reduced motion. Token override helps components that read | Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference. |
-| `.sf-clickable-parent` | PUBLIC | accessibility | Clickable-parent | Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>. |
-| `.sf-clickable-parent__overlay` | PUBLIC | accessibility | Clickable-parent | The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks. |
-| `.sf-focus-parent` | PUBLIC | accessibility | Focus-parent | Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>. |
-| `.sf-focus-shadow` | PUBLIC | accessibility | Focus-shadow opt-in | Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly. |
-| `.skip-link` | PUBLIC | accessibility | Skip link | Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>. |
-| `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
-| `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
+| `.no-motion` | PUBLIC | accessibility | — | Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference. |
+| `.sf-clickable-parent` | PUBLIC | accessibility | — | Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>. |
+| `.sf-clickable-parent__overlay` | PUBLIC | accessibility | — | The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks. |
+| `.sf-focus-parent` | PUBLIC | accessibility | — | Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>. |
+| `.sf-focus-shadow` | PUBLIC | accessibility | — | Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly. |
+| `.skip-link` | PUBLIC | accessibility | — | Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>. |
+| `.sr-only` | PUBLIC | accessibility | — | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
+| `.sr-only-focusable` | PUBLIC | accessibility | — | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
 ### Layout primitives (127)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-alternate` | PUBLIC | layout | Alternate (zigzag / media-object) | Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint. |
-| `.sf-bento` | PUBLIC | layout | Bento grid | Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid. |
-| `.sf-bento--2` | PUBLIC | layout | Bento grid | Bento grid variant with a 2-column base layout. |
-| `.sf-bento--3` | PUBLIC | layout | Bento grid | Bento grid variant with a 3-column base layout. |
-| `.sf-bento--6` | PUBLIC | layout | Bento grid | Bento grid variant with a 6-column base layout. |
-| `.sf-bento--compact` | PUBLIC | layout | Bento grid | Bento grid variant with shorter default row height. |
-| `.sf-bento--tall` | PUBLIC | layout | Bento grid | Bento grid variant with taller default row height. |
-| `.sf-bento-featured` | PUBLIC | layout | Bento grid | Span modifier for a bento item: takes up 2×2 cells (featured hero placement). |
-| `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |
-| `.sf-bento-tall` | PUBLIC | layout | Bento grid | Span modifier for a bento item: doubles the row height (tall card). |
-| `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
-| `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
-| `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
-| `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
-| `.sf-center--intrinsic` | PUBLIC | layout | Center | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |
-| `.sf-cluster` | PUBLIC | layout | Cluster | Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows. |
-| `.sf-cluster--2xl` | PUBLIC | layout | Cluster | Cluster variant with 2xl gap between items. |
-| `.sf-cluster--between` | PUBLIC | layout | Cluster | Cluster variant that distributes items with space-between alignment. |
-| `.sf-cluster--center` | PUBLIC | layout | Cluster | Cluster variant that centers the item row horizontally. |
-| `.sf-cluster--end` | PUBLIC | layout | Cluster | Cluster variant that aligns items to the inline end (right in LTR). |
-| `.sf-cluster--l` | PUBLIC | layout | Cluster | Cluster variant with large (l) gap between items. |
-| `.sf-cluster--m` | PUBLIC | layout | Cluster | Cluster variant with medium (m) gap between items. |
-| `.sf-cluster--no-wrap` | PUBLIC | layout | Cluster | Cluster variant that prevents item wrapping (single-line row). |
-| `.sf-cluster--s` | PUBLIC | layout | Cluster | Cluster variant with small (s) gap between items. |
-| `.sf-cluster--xl` | PUBLIC | layout | Cluster | Cluster variant with xl gap between items. |
-| `.sf-cluster--xs` | PUBLIC | layout | Cluster | Cluster variant with xs gap between items. |
-| `.sf-container` | PUBLIC | layout | Section | Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m. |
-| `.sf-container--full` | PUBLIC | layout | Container | Container variant that spans the full viewport width (no max-width cap). |
-| `.sf-container--narrow` | PUBLIC | layout | Container | Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms. |
-| `.sf-container--prose` | PUBLIC | layout | Container | Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content. |
-| `.sf-container--wide` | PUBLIC | layout | Container | Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media. |
-| `.sf-content-grid` | PUBLIC | layout | Content grid (breakout pattern) | Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column. |
-| `.sf-cover` | PUBLIC | layout | Cover | Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections. |
-| `.sf-cover__center` | PUBLIC | layout | Cover | The centered focal element inside an sf-cover. Stays vertically centered even when the cover content is shorter than the viewport. |
-| `.sf-cover--max` | PUBLIC | layout | Cover | Cover variant that uses a max-height instead of min-height for the viewport constraint. |
-| `.sf-cover--min` | PUBLIC | layout | Cover | Cover variant that reduces the minimum height to half a viewport. |
-| `.sf-cover--padding-l` | PUBLIC | layout | Cover | Cover variant with large vertical padding above and below the centered content. |
-| `.sf-cover--padding-s` | PUBLIC | layout | Cover | Cover variant with small vertical padding above and below the centered content. |
-| `.sf-cq` | PUBLIC | layout | Container query context | Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens. |
-| `.sf-divider` | PUBLIC | layout | Divider | Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation. |
-| `.sf-divider--dashed` | PUBLIC | layout | Divider | Divider variant with a dashed stroke. |
-| `.sf-divider--dotted` | PUBLIC | layout | Divider | Divider variant with a dotted stroke. |
-| `.sf-divider--gradient` | PUBLIC | layout | Divider | Divider variant rendered as a gradient that fades to transparent at both ends. |
-| `.sf-divider--soft` | PUBLIC | layout | Divider | Divider variant with reduced opacity (subtle separator). |
-| `.sf-divider--strong` | PUBLIC | layout | Divider | Divider variant with stronger/darker color for a more prominent separator. |
-| `.sf-divider--vertical` | PUBLIC | layout | Divider | Divider variant rendered as a vertical line. Use inside flex or grid containers. |
-| `.sf-equal` | PUBLIC | layout | Equal columns (intrinsically responsive) | Auto-fill equal-columns grid. Columns fill the row and wrap when they hit --sf-equal-min-col. No breakpoints needed. |
-| `.sf-equal--2` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 2 columns using --sf-equal-min-col-2. |
-| `.sf-equal--3` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 3 columns using --sf-equal-min-col-3. |
-| `.sf-equal--4` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 4 columns using --sf-equal-min-col-4. |
-| `.sf-equal--6` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 6 columns using --sf-equal-min-col-6. |
-| `.sf-frame` | PUBLIC | layout | Frame | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
-| `.sf-frame--3-2` | PUBLIC | layout | Frame | Frame variant locked to a 3:2 aspect ratio. |
-| `.sf-frame--4-3` | PUBLIC | layout | Frame | Frame variant locked to a 4:3 aspect ratio. |
-| `.sf-frame--cinema` | PUBLIC | layout | Frame | Frame variant locked to a cinematic 21:9 aspect ratio. |
-| `.sf-frame--golden` | PUBLIC | layout | Frame | Frame variant locked to the golden ratio (1.618:1). |
-| `.sf-frame--portrait` | PUBLIC | layout | Frame | Frame variant locked to a portrait 2:3 aspect ratio. |
-| `.sf-frame--square` | PUBLIC | layout | Frame | Frame variant locked to a square 1:1 aspect ratio. |
-| `.sf-frame--video` | PUBLIC | layout | Frame | Frame variant locked to the standard 16:9 video aspect ratio. |
-| `.sf-full-bleed` | PUBLIC | layout | Content grid (breakout pattern) | Forces an element to span the full viewport width, breaking out of any centered container. Use for full-bleed images and section backgrounds. |
-| `.sf-gap` | PUBLIC | layout | Gap | Injects the default --sf-gap into an existing flex or grid container without imposing display:flex itself. Use when the parent is already a flex or grid. |
-| `.sf-gap--2xl` | PUBLIC | layout | Gap | Gap injection variant with 2xl gap value. |
-| `.sf-gap--l` | PUBLIC | layout | Gap | Gap injection variant with large (l) gap value. |
-| `.sf-gap--m` | PUBLIC | layout | Gap | Gap injection variant with medium (m) gap value. |
-| `.sf-gap--s` | PUBLIC | layout | Gap | Gap injection variant with small (s) gap value. |
-| `.sf-gap--xl` | PUBLIC | layout | Gap | Gap injection variant with xl gap value. |
-| `.sf-gap--xs` | PUBLIC | layout | Gap | Gap injection variant with xs gap value. |
-| `.sf-grid` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col. |
-| `.sf-grid--2xl` | PUBLIC | layout | Grid (auto) | Grid variant with a 2xl minimum column width. |
-| `.sf-grid--dense` | PUBLIC | layout | Grid (auto) | Grid variant with grid-auto-flow: dense, allowing the grid to fill holes created by span modifiers. |
-| `.sf-grid--fit` | PUBLIC | layout | Grid (auto) | Grid variant that switches from auto-fill to auto-fit, collapsing empty columns. |
-| `.sf-grid--l` | PUBLIC | layout | Grid (auto) | Grid variant with a large (l) minimum column width. |
-| `.sf-grid--m` | PUBLIC | layout | Grid (auto) | Grid variant with a medium (m) minimum column width. |
-| `.sf-grid--s` | PUBLIC | layout | Grid (auto) | Grid variant with a small (s) minimum column width. |
-| `.sf-grid--xl` | PUBLIC | layout | Grid (auto) | Grid variant with an xl minimum column width. |
-| `.sf-grid--xs` | PUBLIC | layout | Grid (auto) | Grid variant with an xs minimum column width. |
-| `.sf-grid-cols-1` | PUBLIC | layout | Single-column grid | Single-column layout (forces all children to one column). |
-| `.sf-grid-cols-1-2` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 1fr, second takes 2fr. Container-query responsive. |
-| `.sf-grid-cols-1-3` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 1fr, second takes 3fr. Container-query responsive. |
-| `.sf-grid-cols-2` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 2-column fixed grid. Uses container queries to collapse to one column on narrow containers. |
-| `.sf-grid-cols-2-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 2fr, second takes 1fr. Container-query responsive. |
-| `.sf-grid-cols-3` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 3-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-cols-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
-| `.sf-grid-cols-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-cols-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
-| `.sf-icon--2xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
-| `.sf-icon--boxed` | PUBLIC | layout | Icon | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
-| `.sf-icon--l` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-l (large). |
-| `.sf-icon--m` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-m (medium, same as base sf-icon). |
-| `.sf-icon--s` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-s (small). |
-| `.sf-icon--xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-xl (extra-large). |
-| `.sf-icon--xs` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-xs (extra-small). |
-| `.sf-imposter` | PUBLIC | layout | Imposter | Absolutely positions an element at the center of its nearest positioned ancestor. Use for overlays, badges, and floating labels. |
-| `.sf-imposter--contain` | PUBLIC | layout | Imposter | Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent. |
-| `.sf-imposter--fixed` | PUBLIC | layout | Imposter | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
-| `.sf-pancake` | PUBLIC | layout | Pancake (sticky footer) | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
-| `.sf-reel` | PUBLIC | layout | Reel | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
-| `.sf-section` | PUBLIC | layout | Section | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
-| `.sf-section--2xl` | PUBLIC | layout | Section | Section variant with 2xl vertical padding. |
-| `.sf-section--collapse` | PUBLIC | layout | Collapse modifier | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
-| `.sf-section--guttered` | PUBLIC | layout | Section | Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding. |
-| `.sf-section--l` | PUBLIC | layout | Section | Section variant with large (l) vertical padding. |
-| `.sf-section--m` | PUBLIC | layout | Section | Section variant with medium (m) vertical padding. |
-| `.sf-section--s` | PUBLIC | layout | Section | Section variant with small (s) vertical padding. |
-| `.sf-section--xl` | PUBLIC | layout | Section | Section variant with xl vertical padding. |
-| `.sf-section--xs` | PUBLIC | layout | Section | Section variant with xs vertical padding. |
-| `.sf-section-group` | PUBLIC | layout | Section | Groups adjacent sf-section elements so their combined padding collapses correctly at the top and bottom edges. |
-| `.sf-sidebar` | PUBLIC | layout | Sidebar | Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left. |
-| `.sf-sidebar--narrow` | PUBLIC | layout | Sidebar | Sidebar variant with a narrower sidebar column. |
-| `.sf-sidebar--right` | PUBLIC | layout | Sidebar | Sidebar variant with the sidebar on the right (second child becomes the sidebar). |
-| `.sf-sidebar--wide` | PUBLIC | layout | Sidebar | Sidebar variant with a wider sidebar column. |
-| `.sf-stack` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm. |
-| `.sf-stack--2xl` | PUBLIC | layout | Stack | Stack variant with 2xl gap between children. |
-| `.sf-stack--center` | PUBLIC | layout | Stack | Stack variant that centers children on the cross axis. |
-| `.sf-stack--end` | PUBLIC | layout | Stack | Stack variant that aligns children to the cross-axis end (right in LTR). |
-| `.sf-stack--l` | PUBLIC | layout | Stack | Stack variant with large (l) gap between children. |
-| `.sf-stack--m` | PUBLIC | layout | Stack | Stack variant with medium (m) gap between children. |
-| `.sf-stack--s` | PUBLIC | layout | Stack | Stack variant with small (s) gap between children. |
-| `.sf-stack--stretch` | PUBLIC | layout | Stack | Stack variant that stretches children to fill the full available width. |
-| `.sf-stack--xl` | PUBLIC | layout | Stack | Stack variant with xl gap between children. |
-| `.sf-stack--xs` | PUBLIC | layout | Stack | Stack variant with xs gap between children. |
-| `.sf-subgrid` | PUBLIC | layout | Subgrid | Passes the parent grid columns through to children via subgrid. Place on a grid item that should align its own children to the outer grid columns. |
-| `.sf-subgrid-rows` | PUBLIC | layout | Subgrid | Passes the parent grid rows through to children via subgrid. Place on a grid item that should align its own children to the outer grid rows. |
-| `.sf-switcher` | PUBLIC | layout | Switcher | Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold. |
-| `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
-| `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
+| `.sf-alternate` | PUBLIC | layout | — | Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint. |
+| `.sf-bento` | PUBLIC | layout | — | Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid. |
+| `.sf-bento--2` | PUBLIC | layout | — | Bento grid variant with a 2-column base layout. |
+| `.sf-bento--3` | PUBLIC | layout | — | Bento grid variant with a 3-column base layout. |
+| `.sf-bento--6` | PUBLIC | layout | — | Bento grid variant with a 6-column base layout. |
+| `.sf-bento--compact` | PUBLIC | layout | — | Bento grid variant with shorter default row height. |
+| `.sf-bento--tall` | PUBLIC | layout | — | Bento grid variant with taller default row height. |
+| `.sf-bento-featured` | PUBLIC | layout | — | Span modifier for a bento item: takes up 2×2 cells (featured hero placement). |
+| `.sf-bento-full` | PUBLIC | layout | — | Span modifier for a bento item: stretches across all columns (full-width banner). |
+| `.sf-bento-tall` | PUBLIC | layout | — | Span modifier for a bento item: doubles the row height (tall card). |
+| `.sf-bento-wide` | PUBLIC | layout | — | Span modifier for a bento item: spans 2 columns (wide card). |
+| `.sf-box` | PUBLIC | layout | — | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
+| `.sf-breakout` | PUBLIC | layout | — | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
+| `.sf-center` | PUBLIC | layout | — | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
+| `.sf-center--intrinsic` | PUBLIC | layout | — | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |
+| `.sf-cluster` | PUBLIC | layout | — | Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows. |
+| `.sf-cluster--2xl` | PUBLIC | layout | — | Cluster variant with 2xl gap between items. |
+| `.sf-cluster--between` | PUBLIC | layout | — | Cluster variant that distributes items with space-between alignment. |
+| `.sf-cluster--center` | PUBLIC | layout | — | Cluster variant that centers the item row horizontally. |
+| `.sf-cluster--end` | PUBLIC | layout | — | Cluster variant that aligns items to the inline end (right in LTR). |
+| `.sf-cluster--l` | PUBLIC | layout | — | Cluster variant with large (l) gap between items. |
+| `.sf-cluster--m` | PUBLIC | layout | — | Cluster variant with medium (m) gap between items. |
+| `.sf-cluster--no-wrap` | PUBLIC | layout | — | Cluster variant that prevents item wrapping (single-line row). |
+| `.sf-cluster--s` | PUBLIC | layout | — | Cluster variant with small (s) gap between items. |
+| `.sf-cluster--xl` | PUBLIC | layout | — | Cluster variant with xl gap between items. |
+| `.sf-cluster--xs` | PUBLIC | layout | — | Cluster variant with xs gap between items. |
+| `.sf-container` | PUBLIC | layout | — | Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m. |
+| `.sf-container--full` | PUBLIC | layout | — | Container variant that spans the full viewport width (no max-width cap). |
+| `.sf-container--narrow` | PUBLIC | layout | — | Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms. |
+| `.sf-container--prose` | PUBLIC | layout | — | Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content. |
+| `.sf-container--wide` | PUBLIC | layout | — | Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media. |
+| `.sf-content-grid` | PUBLIC | layout | — | Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column. |
+| `.sf-cover` | PUBLIC | layout | — | Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections. |
+| `.sf-cover__center` | PUBLIC | layout | — | The centered focal element inside an sf-cover. Stays vertically centered even when the cover content is shorter than the viewport. |
+| `.sf-cover--max` | PUBLIC | layout | — | Cover variant that uses a max-height instead of min-height for the viewport constraint. |
+| `.sf-cover--min` | PUBLIC | layout | — | Cover variant that reduces the minimum height to half a viewport. |
+| `.sf-cover--padding-l` | PUBLIC | layout | — | Cover variant with large vertical padding above and below the centered content. |
+| `.sf-cover--padding-s` | PUBLIC | layout | — | Cover variant with small vertical padding above and below the centered content. |
+| `.sf-cq` | PUBLIC | layout | — | Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens. |
+| `.sf-divider` | PUBLIC | layout | — | Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation. |
+| `.sf-divider--dashed` | PUBLIC | layout | — | Divider variant with a dashed stroke. |
+| `.sf-divider--dotted` | PUBLIC | layout | — | Divider variant with a dotted stroke. |
+| `.sf-divider--gradient` | PUBLIC | layout | — | Divider variant rendered as a gradient that fades to transparent at both ends. |
+| `.sf-divider--soft` | PUBLIC | layout | — | Divider variant with reduced opacity (subtle separator). |
+| `.sf-divider--strong` | PUBLIC | layout | — | Divider variant with stronger/darker color for a more prominent separator. |
+| `.sf-divider--vertical` | PUBLIC | layout | — | Divider variant rendered as a vertical line. Use inside flex or grid containers. |
+| `.sf-equal` | PUBLIC | layout | — | Auto-fill equal-columns grid. Columns fill the row and wrap when they hit --sf-equal-min-col. No breakpoints needed. |
+| `.sf-equal--2` | PUBLIC | layout | — | Equal-columns variant locked to 2 columns using --sf-equal-min-col-2. |
+| `.sf-equal--3` | PUBLIC | layout | — | Equal-columns variant locked to 3 columns using --sf-equal-min-col-3. |
+| `.sf-equal--4` | PUBLIC | layout | — | Equal-columns variant locked to 4 columns using --sf-equal-min-col-4. |
+| `.sf-equal--6` | PUBLIC | layout | — | Equal-columns variant locked to 6 columns using --sf-equal-min-col-6. |
+| `.sf-frame` | PUBLIC | layout | — | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
+| `.sf-frame--3-2` | PUBLIC | layout | — | Frame variant locked to a 3:2 aspect ratio. |
+| `.sf-frame--4-3` | PUBLIC | layout | — | Frame variant locked to a 4:3 aspect ratio. |
+| `.sf-frame--cinema` | PUBLIC | layout | — | Frame variant locked to a cinematic 21:9 aspect ratio. |
+| `.sf-frame--golden` | PUBLIC | layout | — | Frame variant locked to the golden ratio (1.618:1). |
+| `.sf-frame--portrait` | PUBLIC | layout | — | Frame variant locked to a portrait 2:3 aspect ratio. |
+| `.sf-frame--square` | PUBLIC | layout | — | Frame variant locked to a square 1:1 aspect ratio. |
+| `.sf-frame--video` | PUBLIC | layout | — | Frame variant locked to the standard 16:9 video aspect ratio. |
+| `.sf-full-bleed` | PUBLIC | layout | — | Forces an element to span the full viewport width, breaking out of any centered container. Use for full-bleed images and section backgrounds. |
+| `.sf-gap` | PUBLIC | layout | — | Injects the default --sf-gap into an existing flex or grid container without imposing display:flex itself. Use when the parent is already a flex or grid. |
+| `.sf-gap--2xl` | PUBLIC | layout | — | Gap injection variant with 2xl gap value. |
+| `.sf-gap--l` | PUBLIC | layout | — | Gap injection variant with large (l) gap value. |
+| `.sf-gap--m` | PUBLIC | layout | — | Gap injection variant with medium (m) gap value. |
+| `.sf-gap--s` | PUBLIC | layout | — | Gap injection variant with small (s) gap value. |
+| `.sf-gap--xl` | PUBLIC | layout | — | Gap injection variant with xl gap value. |
+| `.sf-gap--xs` | PUBLIC | layout | — | Gap injection variant with xs gap value. |
+| `.sf-grid` | PUBLIC | layout | — | Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col. |
+| `.sf-grid--2xl` | PUBLIC | layout | — | Grid variant with a 2xl minimum column width. |
+| `.sf-grid--dense` | PUBLIC | layout | — | Grid variant with grid-auto-flow: dense, allowing the grid to fill holes created by span modifiers. |
+| `.sf-grid--fit` | PUBLIC | layout | — | Grid variant that switches from auto-fill to auto-fit, collapsing empty columns. |
+| `.sf-grid--l` | PUBLIC | layout | — | Grid variant with a large (l) minimum column width. |
+| `.sf-grid--m` | PUBLIC | layout | — | Grid variant with a medium (m) minimum column width. |
+| `.sf-grid--s` | PUBLIC | layout | — | Grid variant with a small (s) minimum column width. |
+| `.sf-grid--xl` | PUBLIC | layout | — | Grid variant with an xl minimum column width. |
+| `.sf-grid--xs` | PUBLIC | layout | — | Grid variant with an xs minimum column width. |
+| `.sf-grid-cols-1` | PUBLIC | layout | — | Single-column layout (forces all children to one column). |
+| `.sf-grid-cols-1-2` | PUBLIC | layout | — | Two-column ratio grid: first child takes 1fr, second takes 2fr. Container-query responsive. |
+| `.sf-grid-cols-1-3` | PUBLIC | layout | — | Two-column ratio grid: first child takes 1fr, second takes 3fr. Container-query responsive. |
+| `.sf-grid-cols-2` | PUBLIC | layout | — | Responsive 2-column fixed grid. Uses container queries to collapse to one column on narrow containers. |
+| `.sf-grid-cols-2-1` | PUBLIC | layout | — | Two-column ratio grid: first child takes 2fr, second takes 1fr. Container-query responsive. |
+| `.sf-grid-cols-3` | PUBLIC | layout | — | Responsive 3-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-grid-cols-3-1` | PUBLIC | layout | — | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
+| `.sf-grid-cols-4` | PUBLIC | layout | — | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-grid-cols-6` | PUBLIC | layout | — | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-icon` | PUBLIC | layout | — | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
+| `.sf-icon--2xl` | PUBLIC | layout | — | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
+| `.sf-icon--boxed` | PUBLIC | layout | — | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
+| `.sf-icon--l` | PUBLIC | layout | — | Icon variant sized to --sf-icon-l (large). |
+| `.sf-icon--m` | PUBLIC | layout | — | Icon variant sized to --sf-icon-m (medium, same as base sf-icon). |
+| `.sf-icon--s` | PUBLIC | layout | — | Icon variant sized to --sf-icon-s (small). |
+| `.sf-icon--xl` | PUBLIC | layout | — | Icon variant sized to --sf-icon-xl (extra-large). |
+| `.sf-icon--xs` | PUBLIC | layout | — | Icon variant sized to --sf-icon-xs (extra-small). |
+| `.sf-imposter` | PUBLIC | layout | — | Absolutely positions an element at the center of its nearest positioned ancestor. Use for overlays, badges, and floating labels. |
+| `.sf-imposter--contain` | PUBLIC | layout | — | Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent. |
+| `.sf-imposter--fixed` | PUBLIC | layout | — | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
+| `.sf-pancake` | PUBLIC | layout | — | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
+| `.sf-reel` | PUBLIC | layout | — | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
+| `.sf-section` | PUBLIC | layout | — | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
+| `.sf-section--2xl` | PUBLIC | layout | — | Section variant with 2xl vertical padding. |
+| `.sf-section--collapse` | PUBLIC | layout | — | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
+| `.sf-section--guttered` | PUBLIC | layout | — | SLASHED — core/layout.css |
+| `.sf-section--l` | PUBLIC | layout | — | Section variant with large (l) vertical padding. |
+| `.sf-section--m` | PUBLIC | layout | — | Section variant with medium (m) vertical padding. |
+| `.sf-section--s` | PUBLIC | layout | — | Section variant with small (s) vertical padding. |
+| `.sf-section--xl` | PUBLIC | layout | — | Section variant with xl vertical padding. |
+| `.sf-section--xs` | PUBLIC | layout | — | Section variant with xs vertical padding. |
+| `.sf-section-group` | PUBLIC | layout | — | Groups adjacent sf-section elements so their combined padding collapses correctly at the top and bottom edges. |
+| `.sf-sidebar` | PUBLIC | layout | — | Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left. |
+| `.sf-sidebar--narrow` | PUBLIC | layout | — | Sidebar variant with a narrower sidebar column. |
+| `.sf-sidebar--right` | PUBLIC | layout | — | Sidebar variant with the sidebar on the right (second child becomes the sidebar). |
+| `.sf-sidebar--wide` | PUBLIC | layout | — | Sidebar variant with a wider sidebar column. |
+| `.sf-stack` | PUBLIC | layout | — | Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm. |
+| `.sf-stack--2xl` | PUBLIC | layout | — | Stack variant with 2xl gap between children. |
+| `.sf-stack--center` | PUBLIC | layout | — | Stack variant that centers children on the cross axis. |
+| `.sf-stack--end` | PUBLIC | layout | — | Stack variant that aligns children to the cross-axis end (right in LTR). |
+| `.sf-stack--l` | PUBLIC | layout | — | Stack variant with large (l) gap between children. |
+| `.sf-stack--m` | PUBLIC | layout | — | Stack variant with medium (m) gap between children. |
+| `.sf-stack--s` | PUBLIC | layout | — | Stack variant with small (s) gap between children. |
+| `.sf-stack--stretch` | PUBLIC | layout | — | Stack variant that stretches children to fill the full available width. |
+| `.sf-stack--xl` | PUBLIC | layout | — | Stack variant with xl gap between children. |
+| `.sf-stack--xs` | PUBLIC | layout | — | Stack variant with xs gap between children. |
+| `.sf-subgrid` | PUBLIC | layout | — | Passes the parent grid columns through to children via subgrid. Place on a grid item that should align its own children to the outer grid columns. |
+| `.sf-subgrid-rows` | PUBLIC | layout | — | Passes the parent grid rows through to children via subgrid. Place on a grid item that should align its own children to the outer grid rows. |
+| `.sf-switcher` | PUBLIC | layout | — | Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold. |
+| `.sf-switcher--no-wrap` | PUBLIC | layout | — | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
+| `.sf-switcher--vertical` | PUBLIC | layout | — | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
 ### Macro classes (36)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
-| `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
-| `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
-| `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
-| `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
-| `.sf-line-clamp-3` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3. |
-| `.sf-line-clamp-N` | PUBLIC | macro | Truncate / line-clamp | Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines. |
-| `.sf-link--reverse` | PUBLIC | macro | Link variants | Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse. |
-| `.sf-link--subtle` | PUBLIC | macro | Link variants | Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover. |
-| `.sf-link-external` | PUBLIC | macro | External link indication | Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain. |
-| `.sf-no-tap-highlight` | PUBLIC | macro | No tap highlight | Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state. |
-| `.sf-not-prose` | PUBLIC | macro | Prose | Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles. |
-| `.sf-overflow-fade` | PUBLIC | macro | Overflow fade | Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container. |
-| `.sf-prose` | PUBLIC | macro | Prose | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
-| `.sf-scrim` | PUBLIC | macro | Scrim | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
-| `.sf-scrim__content` | PUBLIC | macro | Scrim | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |
-| `.sf-scrim--bottom` | PUBLIC | macro | Scrim | Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade). |
-| `.sf-scrim--full` | PUBLIC | macro | Scrim | Scrim variant that covers the entire surface with a uniform translucent overlay. |
-| `.sf-scrim--top` | PUBLIC | macro | Scrim | Scrim variant with the gradient emanating from the top edge (top-to-bottom fade). |
-| `.sf-scroll-shadow` | PUBLIC | macro | Scroll shadow | Adds inset box-shadows at the top and bottom of a scrollable container to indicate hidden overflow above or below. |
-| `.sf-scroll-snap` | PUBLIC | macro | Scroll snap | Enables CSS scroll-snap-type: x mandatory on a horizontal scroll container. Children should have scroll-snap-align. |
-| `.sf-surface` | PUBLIC | macro | Surface | Generic semantic surface: applies --sf-surface-color as the background and automatically sets a contrasting text color. Tone variants (--primary, --action, etc.) activate preset palettes. |
-| `.sf-surface--action` | PUBLIC | macro | Surface | Surface variant using the action color palette (button/CTA primary color). |
-| `.sf-surface--danger` | PUBLIC | macro | Surface | Surface variant using the danger status palette. |
-| `.sf-surface--info` | PUBLIC | macro | Surface | Surface variant using the info status palette. |
-| `.sf-surface--inverse` | PUBLIC | macro | Surface | Surface variant that inverts light/dark, creating an always-dark surface in light mode and always-light in dark mode. |
-| `.sf-surface--neutral` | PUBLIC | macro | Surface | Surface variant using the neutral palette (muted/gray). |
-| `.sf-surface--primary` | PUBLIC | macro | Surface | Surface variant using the primary brand color palette. |
-| `.sf-surface--secondary` | PUBLIC | macro | Surface | Surface variant using the secondary brand color palette. |
-| `.sf-surface--success` | PUBLIC | macro | Surface | Surface variant using the success status palette. |
-| `.sf-surface--tertiary` | PUBLIC | macro | Surface | Surface variant using the tertiary brand color palette. |
-| `.sf-surface--warning` | PUBLIC | macro | Surface | Surface variant using the warning status palette. |
-| `.sf-tabular-nums` | PUBLIC | macro | Tabular figures | Forces tabular (monospaced) number rendering. Use on price tables, counters, and anywhere numbers need to align vertically across rows. |
-| `.sf-text-gradient` | PUBLIC | macro | Text gradient | Applies a brand gradient to inline text. Sets the background to the gradient, clips it to the text, and makes the text color transparent. |
-| `.sf-text-protect` | PUBLIC | macro | Text protect | Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image. |
-| `.sf-truncate` | PUBLIC | macro | Truncate / line-clamp | Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis). |
+| `.sf-aspect` | PUBLIC | macro | — | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
+| `.sf-content-auto` | PUBLIC | macro | — | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
+| `.sf-equal-height` | PUBLIC | macro | — | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
+| `.sf-flow` | PUBLIC | macro | — | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
+| `.sf-line-clamp-2` | PUBLIC | macro | — | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
+| `.sf-line-clamp-3` | PUBLIC | macro | — | Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3. |
+| `.sf-line-clamp-N` | PUBLIC | macro | — | Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines. |
+| `.sf-link--reverse` | PUBLIC | macro | — | Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse. |
+| `.sf-link--subtle` | PUBLIC | macro | — | Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover. |
+| `.sf-link-external` | PUBLIC | macro | — | Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain. |
+| `.sf-no-tap-highlight` | PUBLIC | macro | — | Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state. |
+| `.sf-not-prose` | PUBLIC | macro | — | Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles. |
+| `.sf-overflow-fade` | PUBLIC | macro | — | Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container. |
+| `.sf-prose` | PUBLIC | macro | — | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
+| `.sf-scrim` | PUBLIC | macro | — | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
+| `.sf-scrim__content` | PUBLIC | macro | — | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |
+| `.sf-scrim--bottom` | PUBLIC | macro | — | Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade). |
+| `.sf-scrim--full` | PUBLIC | macro | — | Scrim variant that covers the entire surface with a uniform translucent overlay. |
+| `.sf-scrim--top` | PUBLIC | macro | — | Scrim variant with the gradient emanating from the top edge (top-to-bottom fade). |
+| `.sf-scroll-shadow` | PUBLIC | macro | — | Adds inset box-shadows at the top and bottom of a scrollable container to indicate hidden overflow above or below. |
+| `.sf-scroll-snap` | PUBLIC | macro | — | Enables CSS scroll-snap-type: x mandatory on a horizontal scroll container. Children should have scroll-snap-align. |
+| `.sf-surface` | PUBLIC | macro | — | Generic semantic surface: applies --sf-surface-color as the background and automatically sets a contrasting text color. Tone variants (--primary, --action, etc.) activate preset palettes. |
+| `.sf-surface--action` | PUBLIC | macro | — | Surface variant using the action color palette (button/CTA primary color). |
+| `.sf-surface--danger` | PUBLIC | macro | — | Surface variant using the danger status palette. |
+| `.sf-surface--info` | PUBLIC | macro | — | Surface variant using the info status palette. |
+| `.sf-surface--inverse` | PUBLIC | macro | — | Surface variant that inverts light/dark, creating an always-dark surface in light mode and always-light in dark mode. |
+| `.sf-surface--neutral` | PUBLIC | macro | — | Surface variant using the neutral palette (muted/gray). |
+| `.sf-surface--primary` | PUBLIC | macro | — | Surface variant using the primary brand color palette. |
+| `.sf-surface--secondary` | PUBLIC | macro | — | Surface variant using the secondary brand color palette. |
+| `.sf-surface--success` | PUBLIC | macro | — | Surface variant using the success status palette. |
+| `.sf-surface--tertiary` | PUBLIC | macro | — | Surface variant using the tertiary brand color palette. |
+| `.sf-surface--warning` | PUBLIC | macro | — | Surface variant using the warning status palette. |
+| `.sf-tabular-nums` | PUBLIC | macro | — | Forces tabular (monospaced) number rendering. Use on price tables, counters, and anywhere numbers need to align vertically across rows. |
+| `.sf-text-gradient` | PUBLIC | macro | — | Applies a brand gradient to inline text. Sets the background to the gradient, clips it to the text, and makes the text color transparent. |
+| `.sf-text-protect` | PUBLIC | macro | — | Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image. |
+| `.sf-truncate` | PUBLIC | macro | — | Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis). |
 
 ### Motion / animation (15)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-color-pulse` | PUBLIC | motion | @property color animation | Applies a gentle color-pulse animation to draw attention to a dynamic value change (e.g. a counter updating). Scoped to users who have not requested reduced motion. |
-| `.sf-entrance--fade` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in as it enters the viewport. Animation tied to scroll progress via animation-timeline. |
-| `.sf-entrance--fade-down` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving downward into position. |
-| `.sf-entrance--fade-left` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving from the right toward the left. |
-| `.sf-entrance--fade-right` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving from the left toward the right. |
-| `.sf-entrance--fade-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving upward into position. |
-| `.sf-entrance--scale-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while scaling up from a slightly smaller size. |
-| `.sf-fade-in` | PUBLIC | motion | Animation presets | One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users. |
-| `.sf-fade-out` | PUBLIC | motion | Animation presets | One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference. |
-| `.sf-scale-down` | PUBLIC | motion | Animation presets | One-shot scale-down animation (element shrinks from full size). Scoped to no-preference. |
-| `.sf-scale-up` | PUBLIC | motion | Animation presets | One-shot scale-up animation (element grows from smaller size). Scoped to no-preference. |
-| `.sf-slide-in-down` | PUBLIC | motion | Animation presets | One-shot slide-in-from-above animation. Scoped to no-preference. |
-| `.sf-slide-in-left` | PUBLIC | motion | Animation presets | One-shot slide-in-from-right animation (slides to the left). Scoped to no-preference. |
-| `.sf-slide-in-right` | PUBLIC | motion | Animation presets | One-shot slide-in-from-left animation (slides to the right). Scoped to no-preference. |
-| `.sf-slide-in-up` | PUBLIC | motion | Animation presets | One-shot slide-in-from-below animation. Scoped to no-preference. |
+| `.sf-color-pulse` | PUBLIC | motion | — | Applies a gentle color-pulse animation to draw attention to a dynamic value change (e.g. a counter updating). Scoped to users who have not requested reduced motion. |
+| `.sf-entrance--fade` | PUBLIC | motion | — | Scroll-driven entrance: element fades in as it enters the viewport. Animation tied to scroll progress via animation-timeline. |
+| `.sf-entrance--fade-down` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving downward into position. |
+| `.sf-entrance--fade-left` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving from the right toward the left. |
+| `.sf-entrance--fade-right` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving from the left toward the right. |
+| `.sf-entrance--fade-up` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving upward into position. |
+| `.sf-entrance--scale-up` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while scaling up from a slightly smaller size. |
+| `.sf-fade-in` | PUBLIC | motion | — | One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users. |
+| `.sf-fade-out` | PUBLIC | motion | — | One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference. |
+| `.sf-scale-down` | PUBLIC | motion | — | One-shot scale-down animation (element shrinks from full size). Scoped to no-preference. |
+| `.sf-scale-up` | PUBLIC | motion | — | One-shot scale-up animation (element grows from smaller size). Scoped to no-preference. |
+| `.sf-slide-in-down` | PUBLIC | motion | — | One-shot slide-in-from-above animation. Scoped to no-preference. |
+| `.sf-slide-in-left` | PUBLIC | motion | — | One-shot slide-in-from-right animation (slides to the left). Scoped to no-preference. |
+| `.sf-slide-in-right` | PUBLIC | motion | — | One-shot slide-in-from-left animation (slides to the right). Scoped to no-preference. |
+| `.sf-slide-in-up` | PUBLIC | motion | — | One-shot slide-in-from-below animation. Scoped to no-preference. |
 
 ### Print (4)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.no-print` | PUBLIC | print | Print visibility utilities | Hides the element in @media print. Use on sidebars, navigation bars, and decorative elements that should not appear on paper. |
-| `.print-color-exact` | PUBLIC | print | Opt-in colour treatment | Forces exact color rendering in print (print-color-adjust: exact). Use on charts and colored badges that must preserve their fill colors in print. |
-| `.print-no-color` | PUBLIC | print | Opt-in colour treatment | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
-| `.print-only` | PUBLIC | print | Print visibility utilities | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
+| `.no-print` | PUBLIC | print | — | Hides the element in @media print. Use on sidebars, navigation bars, and decorative elements that should not appear on paper. |
+| `.print-color-exact` | PUBLIC | print | — | Forces exact color rendering in print (print-color-adjust: exact). Use on charts and colored badges that must preserve their fill colors in print. |
+| `.print-no-color` | PUBLIC | print | — | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
+| `.print-only` | PUBLIC | print | — | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
 ### State classes (40)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
-| `.is-busy` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Busy state — shows a progress cursor to indicate background processing. Does not mask content; use is-loading when content should be hidden during loading. |
-| `.is-clickable` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Makes the element appear interactive (pointer cursor). Use when an element has a click handler but no native button or link role. |
-| `.is-clipped` | PUBLIC | state | OVERFLOW / CLIPPING | Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary. |
-| `.is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with is-expanded or is-open. Components add transitions. |
-| `.is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
-| `.is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
-| `.is-disabled` | PUBLIC | state | INTERACTIVITY | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
-| `.is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
-| `.is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
-| `.is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
-| `.is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
-| `.is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid. |
-| `.is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of is-collapsed. Components add transitions. |
-| `.is-fixed` | PUBLIC | state | POSITION / STICKINESS | Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning). |
-| `.is-focused` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select). |
-| `.is-fullscreen` | PUBLIC | state | POSITION / STICKINESS | Fullscreen positioning state — stretches the element to cover the viewport. Bare positioning only; consumers supply inset values. |
-| `.is-hidden` | PUBLIC | state | VISIBILITY | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
-| `.is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
-| `.is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
-| `.is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context. |
-| `.is-invisible` | PUBLIC | state | VISIBILITY | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
-| `.is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
-| `.is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to is-collapsed/is-hidden. Sets --sf-is-open to 1 for calc() branching. |
-| `.is-overlay` | PUBLIC | state | OVERLAY / BACKDROP | Overlay positioning state — renders the element as a full-screen fixed overlay with a backdrop scrim. Use for modal backgrounds. |
-| `.is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from is-loading (which hides content entirely). |
-| `.is-pinned` | PUBLIC | state | POSITION / STICKINESS | Pinned / sticky state — applies a visual affordance (e.g. border or shadow) to indicate the element is in its stuck (sticky) position. Toggle via IntersectionObserver. |
-| `.is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
-| `.is-readonly` | PUBLIC | state | INTERACTIVITY | Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited. |
-| `.is-resizable` | PUBLIC | state | POSITION / STICKINESS | Resizable state — enables user resize handle on the element (resize: both). Typically applied to textareas or panels. |
-| `.is-scrollable` | PUBLIC | state | OVERFLOW / CLIPPING | Makes the element scrollable (overflow: auto) when its content overflows. Applies to both axes. |
-| `.is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
-| `.is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
-| `.is-sticky` | PUBLIC | state | POSITION / STICKINESS | Sticky positioning state — sets position: sticky with a top offset from --sf-sticky-offset. Useful for sticky headers and sidebar sub-menus. |
-| `.is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
-| `.is-truncated` | PUBLIC | state | OVERFLOW / CLIPPING | Single-line truncation state — clips overflowing text with an ellipsis (overflow: hidden, text-overflow: ellipsis, white-space: nowrap). |
-| `.is-unselectable` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Prevents text selection (user-select: none) on the element. Use on interactive drag handles, labels, and UI chrome that shouldn't be selected. |
-| `.is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to is-success; the name signals form-field context. |
-| `.is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
-| `.is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
+| `.is-active` | PUBLIC | state | — | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
+| `.is-busy` | PUBLIC | state | — | Busy state — shows a progress cursor to indicate background processing. Does not mask content; use is-loading when content should be hidden during loading. |
+| `.is-clickable` | PUBLIC | state | — | Makes the element appear interactive (pointer cursor). Use when an element has a click handler but no native button or link role. |
+| `.is-clipped` | PUBLIC | state | — | Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary. |
+| `.is-collapsed` | PUBLIC | state | — | Collapsed state for disclosure widgets — hides the expandable region. Pair with is-expanded or is-open. Components add transitions. |
+| `.is-current` | PUBLIC | state | — | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
+| `.is-danger` | PUBLIC | state | — | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
+| `.is-disabled` | PUBLIC | state | — | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
+| `.is-draggable` | PUBLIC | state | — | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
+| `.is-dragging` | PUBLIC | state | — | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
+| `.is-drop-target` | PUBLIC | state | — | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
+| `.is-empty` | PUBLIC | state | — | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
+| `.is-error` | PUBLIC | state | — | Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid. |
+| `.is-expanded` | PUBLIC | state | — | Expanded state for disclosure widgets — shows the expandable region. Inverse of is-collapsed. Components add transitions. |
+| `.is-fixed` | PUBLIC | state | — | Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning). |
+| `.is-focused` | PUBLIC | state | — | Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select). |
+| `.is-fullscreen` | PUBLIC | state | — | Fullscreen positioning state — stretches the element to cover the viewport. Bare positioning only; consumers supply inset values. |
+| `.is-hidden` | PUBLIC | state | — | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
+| `.is-highlighted` | PUBLIC | state | — | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
+| `.is-info` | PUBLIC | state | — | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
+| `.is-invalid` | PUBLIC | state | — | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context. |
+| `.is-invisible` | PUBLIC | state | — | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
+| `.is-loading` | PUBLIC | state | — | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
+| `.is-open` | PUBLIC | state | — | Open/shown state for modals, dropdowns, and drawers — counterpart to is-collapsed/is-hidden. Sets --sf-is-open to 1 for calc() branching. |
+| `.is-overlay` | PUBLIC | state | — | Overlay positioning state — renders the element as a full-screen fixed overlay with a backdrop scrim. Use for modal backgrounds. |
+| `.is-pending` | PUBLIC | state | — | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from is-loading (which hides content entirely). |
+| `.is-pinned` | PUBLIC | state | — | Pinned / sticky state — applies a visual affordance (e.g. border or shadow) to indicate the element is in its stuck (sticky) position. Toggle via IntersectionObserver. |
+| `.is-pressed` | PUBLIC | state | — | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
+| `.is-readonly` | PUBLIC | state | — | Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited. |
+| `.is-resizable` | PUBLIC | state | — | Resizable state — enables user resize handle on the element (resize: both). Typically applied to textareas or panels. |
+| `.is-scrollable` | PUBLIC | state | — | Makes the element scrollable (overflow: auto) when its content overflows. Applies to both axes. |
+| `.is-selected` | PUBLIC | state | — | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
+| `.is-skeleton` | PUBLIC | state | — | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
+| `.is-sticky` | PUBLIC | state | — | Sticky positioning state — sets position: sticky with a top offset from --sf-sticky-offset. Useful for sticky headers and sidebar sub-menus. |
+| `.is-success` | PUBLIC | state | — | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
+| `.is-truncated` | PUBLIC | state | — | Single-line truncation state — clips overflowing text with an ellipsis (overflow: hidden, text-overflow: ellipsis, white-space: nowrap). |
+| `.is-unselectable` | PUBLIC | state | — | Prevents text selection (user-select: none) on the element. Use on interactive drag handles, labels, and UI chrome that shouldn't be selected. |
+| `.is-valid` | PUBLIC | state | — | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to is-success; the name signals form-field context. |
+| `.is-visible` | PUBLIC | state | — | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
+| `.is-warning` | PUBLIC | state | — | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
 
 ### Theme example (1)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.theme-transition` | PUBLIC | theme | 5. SMOOTH THEME-TRANSITION HELPER | Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches. |
+| `.theme-transition` | PUBLIC | theme | — | Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches. |
 
 ### Theme utilities (1)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
+| `.sf-theme-transition` | PUBLIC | theme | — | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 

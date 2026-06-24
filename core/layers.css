@@ -1,6 +1,4 @@
-/* SLASHED — core/layers.css
-   CSS cascade layer order. Load this file first, always.
-   ─────────────────────────────────────────────────── */
+/* SLASHED — core/layers.css */
 
 @layer
   slashed.tokens,

@@ -1,28 +1,7 @@
-/* SLASHED — core/reset.css
-   @layer slashed.reset
-
-   Lightweight normalize: corrects cross-browser inconsistencies and
-   sets sensible modern baselines. Deliberately does NOT zero global
-   margins/padding, strip list markers, or change form-element font
-   inheritance — those are component-level concerns. This keeps the
-   reset composable with any third-party UI on the same page (admin
-   toolbars, embedded widget chrome, cookie banners, etc.) without
-   element-specific exclusions.
-
-   A heavier "full reset" (zeroing all margins/padding, stripping list
-   markers, etc.) is intentionally NOT shipped — it would conflict with
-   the third-party UI this reset is designed to coexist with. Note that
-   core/base.css already sets the most useful of those defaults on its
-   own terms (media as display:block with capped width, form controls
-   inheriting font/color). Author any further reset in your own CSS.
-   ─────────────────────────────────────────────────── */
+/* SLASHED — core/reset.css */
 
 @layer slashed.reset {
 
-  /* Box-sizing — near-universal baseline, safe to set globally.
-     Does not affect layout of third-party UI that explicitly
-     overrides it; UA agents and most third-party stylesheets do not
-     set box-sizing, so this wins by default but harmlessly. */
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -37,11 +16,6 @@
     hanging-punctuation: first last;
   }
 
-  /* interpolate-size enables animations to/from intrinsic sizing
-     keywords (auto, min-content, max-content, fit-content). Shipped:
-     Chrome 129 (Aug 2024), Safari 18 (Sep 2024). Firefox: behind a
-     flag as of 2026-Q2. Wrapped in @supports so unsupporting engines
-     get clean progressive enhancement, not an unknown-declaration. */
   @supports (interpolate-size: allow-keywords) {
     html { interpolate-size: allow-keywords; }
   }
@@ -51,35 +25,26 @@
     min-inline-size: 320px;
   }
 
-  /* Normalize button text-transform — Chrome/Edge capitalize UA rule. */
   button {
     text-transform: none;
   }
 
-  /* <search> is a block element per spec; Safari ≤16 renders it inline. */
   search {
     display: block;
   }
 
-  /* summary cursor: normalize across browsers. */
   summary {
     cursor: pointer;
   }
 
-  /* table: collapse borders (UA default varies). */
   table {
     border-collapse: collapse;
   }
 
-  /* [hidden] polyfill — flex/grid containers ignore the attribute in
-     some older engines without this. */
   [hidden] {
     display: none !important;
   }
 
-  /* dialog/popover: normalize padding/border differences.
-     background uses Canvas (UA system color) so the surface adapts to
-     color-scheme and forced-colors without hardcoding a hex value. */
   dialog, [popover] {
     padding:      0;
     border:       none;
@@ -88,8 +53,6 @@
     color-scheme: inherit;
   }
 
-  /* fieldset: min-width:0 prevents overflow in flex/grid containers
-     (genuine browser bug, not an opinion). */
   fieldset {
     min-width: 0;
   }

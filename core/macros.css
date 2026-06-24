@@ -1,33 +1,8 @@
-/* ============================================================
-   SLASHED — core/macros.css
-   ★ shipped in essential bundle
-   Macro-classes (recipes / patterns).
-   Requires: core/tokens.css, core/tokens.macros.css
-   Layer:    slashed.macros
-
-   Macro-classes vs layout primitives:
-     · Layout primitive = answers "where do my children go?"
-       (e.g. .sf-stack, .sf-grid, .sf-cluster)
-     · Macro-class      = answers "what does this element DO or
-       LOOK LIKE?" (e.g. .sf-prose, .sf-flow, .sf-truncate)
-
-   Cascade position:
-     layout → components → macros → utilities → states → …
-     Macros may compose with primitives and components, but a
-     single-property utility still wins on the same selector.
-
-   PUBLIC API — every class here is part of the public surface.
-   Tokens consumed by these classes are listed in
-   core/tokens.macros.css.
-   ============================================================ */
+/* SLASHED — core/macros.css */
 
 @layer slashed.macros {
 
-  /* -- Prose ---------------------------------------------------
-     Long-form text column with automatic vertical rhythm.
-     .sf-not-prose resets styles inside a prose block.
-     ---------------------------------------------------------- */
-
+  
   .sf-prose {
     max-width:     var(--sf-container-prose);
     overflow-wrap: break-word;
@@ -52,15 +27,9 @@
   .sf-prose :is(th, td)          { padding: var(--sf-prose-table-pad); }
   .sf-prose video                { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
 
-  /* .sf-not-prose resets — specificity 0-2-1 intentionally exceeds the
-     general 0-2-0 budget because these rules must override the .sf-prose
-     child selectors above (also 0-2-0). This is a documented exception. */
   .sf-prose .sf-not-prose > * + *    { margin-block-start: 0; }
   .sf-prose .sf-not-prose li + li    { margin-block-start: 0; }
-  /* `revert` in a cascade layer rolls back past all layers to the UA
-     stylesheet — restoring browser-default list styling. In the flat
-     bundle (layers stripped), `revert` falls back to the UA stylesheet
-     directly. Both paths produce the same result: native list bullets. */
+
   .sf-prose .sf-not-prose :is(ul,ol) { list-style: revert; padding-inline-start: revert; }
   .sf-prose .sf-not-prose ::marker   { color: inherit; }
   .sf-prose .sf-not-prose blockquote {
@@ -77,27 +46,11 @@
   .sf-prose .sf-not-prose :is(th,td) { padding: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
 
-  /* -- Flow ----------------------------------------------------
-     Heydon Pickering's "lobotomized owl" — every flow child gets
-     equal margin-block-start. Useful for content blocks where you
-     don't know in advance which elements will be present.
-     Override: style="--sf-flow-space: 2rem"
-     ---------------------------------------------------------- */
-  .sf-flow > * + * {
+    .sf-flow > * + * {
     margin-block-start: var(--sf-flow-space);
   }
 
-  /* -- Truncate / line-clamp -----------------------------------
-     Single-line ellipsis (.sf-truncate) and N-line clamp
-     (.sf-line-clamp-2 / -3 / -N). The fixed-count variants
-     hardcode -webkit-line-clamp; -N reads --sf-line-clamp.
-
-     Note: -webkit-line-clamp is not vendor-locked despite the
-     prefix — every modern browser implements it as the de-facto
-     standard. The unprefixed CSS Overflow 4 `line-clamp` exists
-     but is not yet widely shipped.
-     ---------------------------------------------------------- */
-  .sf-truncate {
+    .sf-truncate {
     overflow:      hidden;
     text-overflow: ellipsis;
     white-space:   nowrap;
@@ -111,9 +64,7 @@
     -webkit-box-orient: vertical;
     overflow:           hidden;
   }
-  /* line-clamp (unprefixed) is not yet shipped in any production browser as of
-     2026 — only -webkit-line-clamp is effective. The prefixed form is the de
-     facto standard across all engines despite the name. */
+
   /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
   .sf-line-clamp-2 { -webkit-line-clamp: 2; }
   /* stylelint-disable-next-line property-no-vendor-prefix -- see above */
@@ -123,12 +74,7 @@
     -webkit-line-clamp: var(--sf-line-clamp);
   }
 
-  /* -- Equal height --------------------------------------------
-     Force grid/flex children to share the tallest one's height.
-     Works in flex (default `align-items: stretch`) and is
-     re-asserted here for cases where a wrapper resets it.
-     ---------------------------------------------------------- */
-  .sf-equal-height {
+    .sf-equal-height {
     display:     flex;
     align-items: stretch;
   }
@@ -137,24 +83,12 @@
     flex:       1 1 auto;
   }
 
-  /* -- Aspect --------------------------------------------------
-     Generic aspect-ratio container. Distinct from layout's
-     .sf-frame which targets media (object-fit: cover) — .sf-aspect
-     is content-agnostic.
-     Override: style="--sf-aspect: 4 / 3"
-     ---------------------------------------------------------- */
-  .sf-aspect {
-    aspect-ratio: var(--sf-aspect, 16 / 9); /* fallback: widescreen; override via style="--sf-aspect:4/3" */
+    .sf-aspect {
+    aspect-ratio: var(--sf-aspect, 16 / 9);
   }
 
-  /* -- Scroll shadow -------------------------------------------
-     Top + bottom mask gradient that reveals when content is
-     scrolled inside a vertical-scroll container. Pure CSS,
-     no JS. Combine with overflow-block: auto on the same element.
-     Override: style="--sf-scroll-shadow-size: 3rem"
-     ---------------------------------------------------------- */
-  .sf-scroll-shadow {
-    overflow-y:     auto; /* Safari < 18.2 fallback for overflow-block */
+    .sf-scroll-shadow {
+    overflow-y:     auto;
     overflow-block: auto;
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image:
@@ -171,13 +105,8 @@
         transparent 100%);
   }
 
-  /* -- Scroll snap ---------------------------------------------
-     Vertical scroll-snap container for vertically stacked sections.
-     Pairs with consumer-supplied scroll-snap-align on children.
-     For horizontal snap, use the .sf-reel layout primitive.
-     ---------------------------------------------------------- */
-  .sf-scroll-snap {
-    overflow-y:                auto; /* Safari < 18.2 fallback for overflow-block */
+    .sf-scroll-snap {
+    overflow-y:                auto;
     overflow-block:            auto;
     scroll-snap-type:          block mandatory;
     overscroll-behavior-block: contain;
@@ -186,12 +115,7 @@
     scroll-snap-align: start;
   }
 
-  /* -- Overflow fade -------------------------------------------
-     End-edge horizontal fade for clipped inline content
-     (e.g. a row of tags overflowing a card). Pure mask, so it
-     respects the element's actual background.
-     ---------------------------------------------------------- */
-  .sf-overflow-fade {
+    .sf-overflow-fade {
     overflow: hidden;
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image: linear-gradient(
@@ -208,56 +132,13 @@
     );
   }
 
-  /* -- No tap highlight ----------------------------------------
-     Suppresses the WebKit/Android grey tap-highlight overlay on
-     interactive elements where it conflicts with the framework's
-     own .is-active / hover treatment.
-     ---------------------------------------------------------- */
-  .sf-no-tap-highlight {
+    .sf-no-tap-highlight {
     /* stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent */
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* -- Surface -------------------------------------------------
-     Generic surface macro. Set --sf-surface-color on an element with
-     .sf-surface to derive background, auto-contrast foreground, and
-     contextual surface tokens. 10 precomputed variants
-     (.sf-surface--primary through .sf-surface--danger) cover all
-     brand + status + inverse colors.
+    .sf-surface { background: var(--sf-surface-color); }
 
-     Composes naturally with .sf-section / .sf-card / .sf-stack:
-       <section class="sf-section sf-surface--primary">…</section>
-
-     Contextual color cascade (in @supports block below):
-     Re-declares the eight core semantic tokens on the surface element
-     so every descendant that reads var(--sf-color-text), --heading,
-     --border etc. automatically gets the surface-appropriate value
-     via inheritance — no extra classes needed on children.
-     Links inherit the surface text color (underline provides the
-     affordance); override --sf-color-link in slashed.overrides
-     if you want a branded link hue on a specific surface.
-
-     Generic surface (.sf-surface, no modifier):
-     Takes ANY color via --sf-surface-color (tokens.macros.css,
-     default --sf-color-base) — including palette shades — and
-     derives background, auto-contrast foreground, and the same
-     contextual cascade as the named variants. Requires relative
-     color syntax; outside the @supports gate only the background
-     applies. Named variants are thin aliases that set --sf-surface-color
-     and delegate entirely to this formula.
-       <section class="sf-surface"
-                style="--sf-surface-color: var(--sf-color-primary-100)">
-     ---------------------------------------------------------- */
-  .sf-surface { background: var(--sf-surface-color); }
-
-  /* Named variants are thin aliases — they set --sf-surface-color (for the
-     auto-contrast formula) and background directly (so they work standalone
-     without also adding .sf-surface). color: var(--sf-color-text--on-*) is the
-     fallback for Chrome 125–137 / Firefox 128–130, which have oklch(from) but
-     not sign(): in those browsers the @supports block below is skipped, so
-     without an explicit color declaration the element would inherit the page
-     body text on a coloured background. Old engines (Chrome <119, Safari <16.4)
-     get background + colour only; no contextual cascade. */
   .sf-surface--primary   { --sf-surface-color: var(--sf-color-primary);   background: var(--sf-color-primary);   color: var(--sf-color-text--on-primary); }
   .sf-surface--secondary { --sf-surface-color: var(--sf-color-secondary); background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary); }
   .sf-surface--tertiary  { --sf-surface-color: var(--sf-color-tertiary);  background: var(--sf-color-tertiary);  color: var(--sf-color-text--on-tertiary); }
@@ -269,23 +150,13 @@
   .sf-surface--info      { --sf-surface-color: var(--sf-color-info);      background: var(--sf-color-info);      color: var(--sf-color-text--on-info); }
   .sf-surface--danger    { --sf-surface-color: var(--sf-color-danger);    background: var(--sf-color-danger);    color: var(--sf-color-text--on-danger); }
 
-  /* sign() gate: the auto-contrast formula requires both oklch(from) AND sign().
-     Named variants set --sf-surface-color so the generic .sf-surface formula
-     picks up the correct background; the :is() selector applies the contextual
-     cascade to standalone named variants too (no .sf-surface class needed). */
   @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) {
     :is(.sf-surface,
         .sf-surface--primary, .sf-surface--secondary, .sf-surface--tertiary,
         .sf-surface--action, .sf-surface--neutral, .sf-surface--inverse,
         .sf-surface--success, .sf-surface--warning,
         .sf-surface--info, .sf-surface--danger) {
-      /* internal helper, do not consume — auto-contrast foreground via
-         the same lightness flip as --sf-color-text--on-* (tokens.css).
-         / 1 forces full opacity regardless of --sf-surface-color's alpha
-         channel; without it, a semi-transparent source leaks alpha into
-         all derived text/border tokens. Note: L is measured on the raw
-         source color, not on the composed result — keep --sf-surface-color
-         fully opaque for accurate threshold evaluation. */
+
       --sf-surface-contrast: oklch(from var(--sf-surface-color) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0 / 1);
       background: var(--sf-surface-color);
       color: var(--sf-surface-contrast);
@@ -302,47 +173,11 @@
       --sf-color-border--strong:    oklch(from var(--sf-surface-contrast) l c h / 0.35);
       --sf-focus-ring-color:        var(--sf-surface-contrast);
       --sf-caret-color:             var(--sf-surface-contrast);
-      /* in-family shadow tint — mirrors the named variants' shadow block */
+
       --sf-shadow-color:            oklch(from var(--sf-surface-color) var(--sf-shadow-lightness) c h);
     }
-  } /* end @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) — surface contextual cascade */
-  /* -- Scrim ---------------------------------------------------
-     Darkening overlay for text placed over a background image, so
-     the text clears contrast without dimming the whole picture.
-     Apply to a positioned wrapper that holds the image + text; the
-     scrim paints as a ::before gradient between them. The wrapper
-     must establish a stacking/positioning context, so the macro
-     sets position: relative and isolation: isolate itself.
-
-     Two layouts work:
-     (a) image as a CSS background on the wrapper (simplest):
-       <div class="sf-scrim sf-scrim--bottom" style="background-image: url(hero.jpg)">
-         <div class="sf-scrim__content">…</div>
-       </div>
-     (b) image as a child element (use object-fit to fill, and
-         position the content over it):
-       <div class="sf-scrim sf-scrim--bottom">
-         <img src="hero.jpg" alt="" style="block-size:100%; object-fit:cover">
-         <div class="sf-scrim__content" style="position:absolute; inset-block-end:0">…</div>
-       </div>
-     In (b) the image is left in the background layer (media children
-     are NOT lifted) so the scrim darkens it; the content is lifted.
-
-     The gradient defaults to bottom-anchored (text sits at the
-     bottom). Retune via tokens:
-       style="--sf-scrim-direction: to top right"
-       style="--sf-scrim-color: oklch(0 0 0 / 0.75)"
-     or replace the whole gradient with --sf-scrim-gradient.
-
-     Direction modifiers cover the common anchors without inline
-     styles. Stacking order is image (background layer) → scrim
-     (::before) → content, so the image MUST sit below the scrim:
-     media children (img/picture/video/svg) are intentionally NOT
-     lifted, only the text/content children are. (Lifting every
-     child would promote the image above the scrim and the overlay
-     would never darken it.)
-     ---------------------------------------------------------- */
-  .sf-scrim {
+  }
+    .sf-scrim {
     position:  relative;
     isolation: isolate;
   }
@@ -354,125 +189,43 @@
     background:     var(--sf-scrim-gradient);
     pointer-events: none;
   }
-  /* Lift content above the scrim, but leave media below it so the
-     gradient actually darkens the picture. .sf-scrim__content is the
-     explicit BEM alternative for complex nesting where media elements
-     are wrapped in divs and the classless :not() selector would
-     incorrectly lift the wrapper above the gradient overlay. */
+
   .sf-scrim > :not(img, picture, video, svg, canvas),
   .sf-scrim__content {
     position: relative;
     z-index:  1;
   }
-  .sf-scrim--top    { --sf-scrim-direction: to bottom; } /* text anchored at the top */
-  .sf-scrim--bottom { --sf-scrim-direction: to top; }    /* text anchored at the bottom (default) */
-  .sf-scrim--full   { --sf-scrim-gradient: var(--sf-scrim-color); } /* even wash over the whole image */
+  .sf-scrim--top    { --sf-scrim-direction: to bottom; }
+  .sf-scrim--bottom { --sf-scrim-direction: to top; }
+  .sf-scrim--full   { --sf-scrim-gradient: var(--sf-scrim-color); }
 
-  /* -- Text protect --------------------------------------------
-     Lighter-weight alternative to .sf-scrim: protects legibility
-     of text over a busy image WITHOUT a darkening layer, using a
-     soft shadow halo behind the glyphs. Apply directly to the text
-     element sitting over the image.
-       <h2 class="sf-text-protect">Over a photo</h2>
-     ---------------------------------------------------------- */
-  .sf-text-protect {
+    .sf-text-protect {
     text-shadow: var(--sf-scrim-text-shadow);
   }
 
-  /* -- Text gradient -------------------------------------------
-     Fills text with a gradient. Defaults to --sf-gradient-primary
-     (auto-adapts to brand + dark mode). Override the background-image
-     per-instance for any other gradient or radial:
-       <h1 class="sf-text-gradient" style="background-image: var(--sf-gradient-secondary)">…</h1>
-
-     Selection on gradient text inherits the clipping — that's a
-     known browser limitation across all engines, accepted as-is.
-
-     `background-clip: text` and `color: transparent` are required
-     together — without clipping, transparent text is invisible.
-
-     `background-clip: text` (unprefixed) is supported at the framework
-     floor (Safari 18.0+, Chrome 125+, Firefox 129+). The -webkit- prefix
-     is no longer required.
-     ---------------------------------------------------------- */
-  .sf-text-gradient {
+    .sf-text-gradient {
     background-image: var(--sf-gradient-primary);
     background-clip: text;
     color: transparent;
   }
 
-  /* -- External link indication --------------------------------
-     Adds an external-link glyph after the link text. Opt-in per
-     element via class — for global auto-detection, write your
-     own rule in unlayered CSS:
-       a[rel~="external"]:not(.no-external)::after {
-         content: var(--sf-link-external-marker);
-       }
-
-     Marker is tokenised so consumers can swap to " →", " ⤴", or
-     unset (empty string fully disables it — the default token
-     value bakes the leading space in, so `""` leaves nothing
-     after the link):
-       :root { --sf-link-external-marker: "" }
-     ---------------------------------------------------------- */
-  .sf-link-external::after {
+    .sf-link-external::after {
     content:         var(--sf-link-external-marker);
     display:         inline-block;
     font-size:       0.85em;
     text-decoration: none;
   }
 
-  /* -- Content visibility --------------------------------------
-     Skip rendering (layout + paint) for offscreen content until it
-     scrolls near the viewport — a large initial-render win on long
-     pages (product grids, long articles). contain-intrinsic-size
-     reserves a placeholder box so the scrollbar and scroll position
-     stay stable before a section is first rendered; the `auto`
-     keyword then caches each section's last-rendered size. Override
-     the placeholder per element:
-       style="--sf-content-intrinsic-size: 800px"
-
-     Unsupported engines (e.g. Safari < 18) simply ignore both
-     declarations and render normally — pure progressive enhancement.
-
-     Deliberately NOT paired with `will-change`: that pre-creates
-     compositing layers and usually HURTS performance when applied
-     broadly. `will-change` belongs on JS, set only while an element
-     is actively about to animate.
-     ---------------------------------------------------------- */
-  .sf-content-auto {
+    .sf-content-auto {
     content-visibility:     auto;
     contain-intrinsic-size: auto var(--sf-content-intrinsic-size, 500px);
   }
 
-  /* -- Tabular figures -----------------------------------------
-     Fixed-width digits so numbers align in vertical columns
-     (price lists, totals, invoices, dashboards). Reads the public
-     --sf-font-numeric token. Universal browser support.
-     ---------------------------------------------------------- */
-  .sf-tabular-nums {
+    .sf-tabular-nums {
     font-variant-numeric: var(--sf-font-numeric, tabular-nums);
   }
 
-  /* -- Link variants -------------------------------------------
-     Opt-in link treatments composed from the link tokens. They
-     don't change link COLOR (that stays the auto-contrast
-     --sf-color-link); they only adjust the underline affordance.
-
-     .sf-link--subtle  — underline hidden until hover/focus. Use
-       for dense link lists (nav, footers) where a permanent
-       underline is visually noisy. The hover underline keeps the
-       affordance for the moment of interaction.
-     .sf-link--reverse — the literal inverse: underlined by
-       default, underline removed on hover/focus. Use where the
-       resting state should read as an obvious link and hover is
-       the "active" de-emphasis.
-
-     All four rules are gated on :link/:visited (like base a:link)
-     so the resting and hover halves stay symmetric — the classes
-     are meant for real anchors with an href.
-     ---------------------------------------------------------- */
-  .sf-link--subtle:link,
+    .sf-link--subtle:link,
   .sf-link--subtle:visited {
     text-decoration-line: none;
   }
