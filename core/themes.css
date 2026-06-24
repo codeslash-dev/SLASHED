@@ -20,7 +20,8 @@
     color:            var(--sf-color-text);
   }
 
-  /* LumLocker */
+  /* LumLocker: locks 4 brand colors to shared OKLCH L. Neutral/base excluded —
+     forcing them to the same L breaks their semantic role. */
   @supports (color: oklch(from red l c h)) {
   :root[data-lumlocker] {
     --sf-color-primary: light-dark(
@@ -56,7 +57,8 @@
   }
 
   /* SECTION-LEVEL THEMING */
-
+  /* light-dark() bakes at :root declaration time; re-declarations on [data-theme]
+     elements are required for section-level theming to work. */
   @supports (color: oklch(from red l c h)) {
 
         :root {

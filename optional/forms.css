@@ -62,7 +62,8 @@
     opacity: 1;
   }
 
-  /* Autofill */
+  /* Autofill: strips Safari's own dark-mode autofill background; Chromium/Firefox honour
+     the CSS background without this, but WebKit doesn't. */
   /* stylelint-disable selector-pseudo-class-no-unknown */
   input:-webkit-autofill {
     box-shadow: inset 0 0 0 1000px var(--sf-color-surface);
@@ -108,7 +109,8 @@
     }
   }
 
-  /* Select */
+  /* Select: chevron uses FieldText system color — custom properties don't propagate
+     into data-URI SVG backgrounds. */
   select {
     padding-inline-end: calc(var(--sf-space-s) + 1.5em);
   }

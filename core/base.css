@@ -80,6 +80,8 @@
   sup { top:    -0.5em; }
   sub { bottom: -0.25em; }
 
+  /* :link (0,1,1) not bare a: beats WebKit UA rule a:link { color: -webkit-link }
+     that silently overrides --sf-color-link in dark mode. */
   a:link {
     color:                   var(--sf-color-link);
     text-decoration-color:   var(--sf-color-link--underline);

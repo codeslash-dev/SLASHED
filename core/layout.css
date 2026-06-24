@@ -27,7 +27,7 @@
     padding-block-start: calc(var(--sf-section-pad) / 2);
   }
 
-    .sf-divider {
+  .sf-divider {
     border:             none;
     border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
     margin-block:       var(--sf-divider-gap);
@@ -64,7 +64,9 @@
   .sf-container--wide   { max-width: var(--sf-container-wide); }
   .sf-container--full   { max-width: var(--sf-container-full); }
 
-    .sf-cq {
+  /* .sf-cq: CQ scope without .sf-container's max-width/centering.
+     Use when a CQ-dependent primitive needs a container ancestor but no layout chrome. */
+  .sf-cq {
     container-type: inline-size;
   }
 
@@ -85,7 +87,7 @@
   .sf-stack--end     { align-items: flex-end; }
   .sf-stack--stretch { align-items: stretch; }
 
-    .sf-gap { gap: var(--sf-gap); }
+  .sf-gap { gap: var(--sf-gap); }
   .sf-gap--xs  { gap: var(--sf-space-xs); }
   .sf-gap--s   { gap: var(--sf-space-s); }
   .sf-gap--m   { gap: var(--sf-space-m); }
@@ -201,7 +203,7 @@
 
   .sf-grid--dense { grid-auto-flow: dense; }
 
-    .sf-icon {
+  .sf-icon {
     display:        inline-block;
     inline-size:    var(--sf-icon-size, var(--sf-icon-m));
     block-size:     var(--sf-icon-size, var(--sf-icon-m));
@@ -292,6 +294,8 @@
   }
 
   
+  /* Physical left (not inset-inline-start): translate() uses the physical axis,
+     so logical + translate breaks centering in RTL layouts. */
   .sf-imposter {
     position:          absolute;
     inset-block-start: 50%;
@@ -350,6 +354,7 @@
     container: sf-grid / inline-size;
   }
 
+  /* Cannot use var() inside @container per CSS spec — breakpoints hardcoded. */
   @container (min-width: 30em) {
     .sf-grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
     .sf-grid-cols-6 { grid-template-columns: repeat(3, 1fr); }
@@ -376,7 +381,7 @@
     .sf-grid-cols-3-1 { grid-template-columns: 3fr 1fr; }
   }
 
-    .sf-equal {
+  .sf-equal {
     display:               grid;
     grid-template-columns: repeat(auto-fit, minmax(min(var(--sf-equal-min-col), 100%), 1fr));
     gap:                   var(--sf-equal-gap);

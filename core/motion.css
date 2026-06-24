@@ -39,6 +39,8 @@
     .sf-scale-down     { animation: var(--sf-animation-scale-down); }
 
     
+    /* animation-duration set unconditionally: without it, engines without
+       animation-timeline snap to end state at 0s. */
     .sf-entrance--fade,
     .sf-entrance--fade-up,
     .sf-entrance--fade-down,

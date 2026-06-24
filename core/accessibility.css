@@ -15,12 +15,15 @@
     outline-offset: var(--sf-focus-ring-offset) !important;
   }
 
-  /* Focus-shadow opt-in */
+  /* .sf-focus-shadow: replaces outline ring with box-shadow ring; !important required
+     to take over the hardened :focus-visible outline (WCAG 2.4.7 still met). */
   .sf-focus-shadow:focus-visible {
     outline:    none                         !important;
     box-shadow: var(--sf-focus-ring-shadow)  !important;
   }
 
+  /* forced-colors: box-shadow vanishes — restore outline ring for WCAG 2.4.7
+     in Windows High Contrast. */
   @media (forced-colors: active) {
     .sf-focus-shadow:focus-visible {
       outline:        var(--sf-focus-ring-width) solid !important;
@@ -113,7 +116,8 @@
     opacity: var(--sf-opacity-disabled);
   }
 
-  /* Screen-reader-only. Atomic contract: a partial override */
+  /* Screen-reader-only. Atomic contract: partial override either exposes hidden content
+     or hides intended content — all-or-nothing, whole set hardened. */
   .sr-only,
   .sr-only-focusable:not(:focus, :focus-within) {
     position:    absolute            !important;

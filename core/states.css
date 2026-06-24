@@ -21,6 +21,8 @@
 
   /* INTERACTIVITY */
 
+  /* cursor: not-allowed inherits to children with pointer-events: auto —
+     intentional, part of the .is-disabled API surface. */
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;

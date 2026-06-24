@@ -30,6 +30,8 @@
   .sf-prose :is(th, td)          { padding: var(--sf-prose-table-pad); }
   .sf-prose video                { margin-block: var(--sf-prose-media-margin); border-radius: var(--sf-prose-media-radius); }
 
+  /* Specificity 0-2-1 intentionally beats .sf-prose's 0-2-0 child selectors —
+     documented exception. */
   .sf-prose .sf-not-prose > * + *    { margin-block-start: 0; }
   .sf-prose .sf-not-prose li + li    { margin-block-start: 0; }
 
@@ -49,11 +51,11 @@
   .sf-prose .sf-not-prose :is(th,td) { padding: revert; }
   .sf-prose .sf-not-prose video      { margin-block: 0; border-radius: 0; }
 
-    .sf-flow > * + * {
+  .sf-flow > * + * {
     margin-block-start: var(--sf-flow-space);
   }
 
-    .sf-truncate {
+  .sf-truncate {
     overflow:      hidden;
     text-overflow: ellipsis;
     white-space:   nowrap;
@@ -77,7 +79,7 @@
     -webkit-line-clamp: var(--sf-line-clamp);
   }
 
-    .sf-equal-height {
+  .sf-equal-height {
     display:     flex;
     align-items: stretch;
   }
@@ -86,11 +88,11 @@
     flex:       1 1 auto;
   }
 
-    .sf-aspect {
+  .sf-aspect {
     aspect-ratio: var(--sf-aspect, 16 / 9);
   }
 
-    .sf-scroll-shadow {
+  .sf-scroll-shadow {
     overflow-y:     auto;
     overflow-block: auto;
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
@@ -108,7 +110,7 @@
         transparent 100%);
   }
 
-    .sf-scroll-snap {
+  .sf-scroll-snap {
     overflow-y:                auto;
     overflow-block:            auto;
     scroll-snap-type:          block mandatory;
@@ -118,7 +120,7 @@
     scroll-snap-align: start;
   }
 
-    .sf-overflow-fade {
+  .sf-overflow-fade {
     overflow: hidden;
     /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 15.4 */
     -webkit-mask-image: linear-gradient(
@@ -135,12 +137,12 @@
     );
   }
 
-    .sf-no-tap-highlight {
+  .sf-no-tap-highlight {
     /* stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent */
     -webkit-tap-highlight-color: transparent;
   }
 
-    .sf-surface { background: var(--sf-surface-color); }
+  .sf-surface { background: var(--sf-surface-color); }
 
   .sf-surface--primary   { --sf-surface-color: var(--sf-color-primary);   background: var(--sf-color-primary);   color: var(--sf-color-text--on-primary); }
   .sf-surface--secondary { --sf-surface-color: var(--sf-color-secondary); background: var(--sf-color-secondary); color: var(--sf-color-text--on-secondary); }
@@ -180,7 +182,7 @@
       --sf-shadow-color:            oklch(from var(--sf-surface-color) var(--sf-shadow-lightness) c h);
     }
   }
-    .sf-scrim {
+  .sf-scrim {
     position:  relative;
     isolation: isolate;
   }
@@ -202,33 +204,33 @@
   .sf-scrim--bottom { --sf-scrim-direction: to top; }
   .sf-scrim--full   { --sf-scrim-gradient: var(--sf-scrim-color); }
 
-    .sf-text-protect {
+  .sf-text-protect {
     text-shadow: var(--sf-scrim-text-shadow);
   }
 
-    .sf-text-gradient {
+  .sf-text-gradient {
     background-image: var(--sf-gradient-primary);
     background-clip: text;
     color: transparent;
   }
 
-    .sf-link-external::after {
+  .sf-link-external::after {
     content:         var(--sf-link-external-marker);
     display:         inline-block;
     font-size:       0.85em;
     text-decoration: none;
   }
 
-    .sf-content-auto {
+  .sf-content-auto {
     content-visibility:     auto;
     contain-intrinsic-size: auto var(--sf-content-intrinsic-size, 500px);
   }
 
-    .sf-tabular-nums {
+  .sf-tabular-nums {
     font-variant-numeric: var(--sf-font-numeric, tabular-nums);
   }
 
-    .sf-link--subtle:link,
+  .sf-link--subtle:link,
   .sf-link--subtle:visited {
     text-decoration-line: none;
   }
