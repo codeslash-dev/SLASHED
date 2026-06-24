@@ -71,6 +71,10 @@
     motion:     'motion',
     effects:    'effects',
     misc:       'tokens',
+    wcag:       'colors',
+    themes:     'palette',
+    setup:      'overview',
+    cheatsheet: 'tokens',
   };
 
   let activeSection = $state('overview');

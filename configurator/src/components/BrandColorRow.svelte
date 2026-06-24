@@ -13,7 +13,7 @@
   import { overrides, setOverride, clearOverride, ui } from '../lib/store.svelte.js';
   import { defaultsByName } from '../lib/model.js';
   import { computeAutoDark } from '../lib/brandColors.js';
-  import { measureBackground, setProbeContext } from '../lib/probeHost.js';
+  import { measureBackground } from '../lib/probeHost.js';
   import OklchPicker from './OklchPicker.svelte';
 
   /** @type {{ colorKey: string, label: string }} */
@@ -82,7 +82,6 @@
     for (const k in overrides) void overrides[k];
     void ui.previewTheme;
     queueMicrotask(() => {
-      setProbeContext({ overrides, theme: ui.previewTheme });
       shadeColors = SHADE_SUFFIXES.map((s) => {
         const rgb = measureBackground(`var(--sf-color-${colorKey}${s})`);
         return rgb && rgb !== 'rgba(0, 0, 0, 0)' ? rgb : null;

@@ -11,12 +11,22 @@
  */
 const FOLD_KEY = 'slashed-configurator/fold/v1';
 
-let _state = {};
+function createState(seed) {
+  const state = Object.create(null);
+  if (!seed || typeof seed !== 'object' || Array.isArray(seed)) return state;
+
+  for (const [key, value] of Object.entries(seed)) {
+    state[key] = Boolean(value);
+  }
+  return state;
+}
+
+let _state = createState();
 
 if (typeof localStorage !== 'undefined') {
   try {
     const raw = localStorage.getItem(FOLD_KEY);
-    if (raw) { const parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') _state = parsed; }
+    if (raw) _state = createState(JSON.parse(raw));
   } catch { /* ignore */ }
 }
 
@@ -31,7 +41,7 @@ function _persist() {
  * @returns {boolean}
  */
 export function getFold(key, def = false) {
-  return key in _state ? Boolean(_state[key]) : def;
+  return Object.hasOwn(_state, key) ? Boolean(_state[key]) : def;
 }
 
 /**

@@ -40,7 +40,7 @@
   // svelte-ignore state_referenced_locally
   const foldKey = `generator:${kinds[0]}`;
   // svelte-ignore state_referenced_locally
-  let open = $state(collapsible ? getFold(foldKey, false) : true);
+  let open = $state(collapsible ? getFold(foldKey, true) : true);
 
   /**
    * The framework's display ramp: --sf-text-display-{s,m,l}, a separate modular

@@ -68,7 +68,7 @@
     {#each sections as section (section.id)}
       <details
         class="cfg-card smart__section"
-        open={getFold(`${domainId}:${section.id}`, false)}
+        open={getFold(`${domainId}:${section.id}`, true)}
         ontoggle={(e) => setFold(`${domainId}:${section.id}`, e.currentTarget.open)}
       >
         <summary class="smart__summary">
