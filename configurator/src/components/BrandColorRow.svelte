@@ -10,9 +10,11 @@
    * Layout:
    *   [label]  [light swatch | text input]  →  [dark swatch | "auto" or value]  [⟲]
    */
-  import { overrides, setOverride, clearOverride } from '../lib/store.svelte.js';
+  import { overrides, setOverride, clearOverride, ui } from '../lib/store.svelte.js';
   import { defaultsByName } from '../lib/model.js';
   import { computeAutoDark } from '../lib/brandColors.js';
+  import { measureBackground, setProbeContext } from '../lib/probeHost.js';
+  import { parseRgb } from '../lib/contrast.js';
   import OklchPicker from './OklchPicker.svelte';
 
   /** @type {{ colorKey: string, label: string }} */
@@ -72,6 +74,28 @@
 
   function resetLight() { clearOverride(lightName); }
   function resetDark()  { clearOverride(darkName); }
+
+  // ── Inline shade strip ───────────────────────────────────────────────────
+  const SHADE_SUFFIXES = ['-superlight', '-xlight', '-lighter', '', '-darker', '-xdark', '-superdark'];
+  let shadeColors = $state([]);
+
+  $effect(() => {
+    for (const k in overrides) void overrides[k];
+    void ui.previewTheme;
+    queueMicrotask(() => {
+      setProbeContext({ overrides, theme: ui.previewTheme });
+      shadeColors = SHADE_SUFFIXES.map((s) => {
+        const rgb = measureBackground(`var(--sf-color-${colorKey}${s})`);
+        return rgb && rgb !== 'rgba(0, 0, 0, 0)' ? rgb : null;
+      });
+    });
+  });
+
+  function perceived(rgb) {
+    const c = parseRgb(rgb);
+    if (!c) return 128;
+    return (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) * 255;
+  }
 </script>
 
 <div class="bcr" class:bcr--light-mod={lightModified} class:bcr--dark-mod={darkModified}>
@@ -140,6 +164,18 @@
       <span class="bcr__auto" title="Auto-derived from the light color via OKLCH. Click the swatch to pin a custom value.">auto</span>
     {/if}
   </div>
+
+  <!-- Inline shade strip -->
+  <div class="bcr__strip" aria-label="{label} shade ramp">
+    {#each shadeColors as bg, i (i)}
+      <div
+        class="bcr__strip-swatch"
+        class:bcr__strip-swatch--empty={!bg}
+        style:background-color={bg ?? 'transparent'}
+        title="--sf-color-{colorKey}{SHADE_SUFFIXES[i] || ' (base)'}"
+      ></div>
+    {/each}
+  </div>
 </div>
 
 <!-- Floating picker (shared for light and dark) -->
@@ -158,9 +194,10 @@
   .bcr {
     display: grid;
     grid-template-columns: 80px 1fr 18px 1fr;
+    grid-template-rows: auto auto;
     gap: 8px;
     align-items: center;
-    padding: 8px 16px;
+    padding: 8px 16px 10px;
     border-bottom: 1px solid var(--cfg-border);
     transition: background 0.15s;
   }
@@ -235,6 +272,25 @@
     line-height: 1.6;
     white-space: nowrap;
     cursor: default;
+  }
+
+  .bcr__strip {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    border-radius: var(--cfg-radius-s, 4px);
+    overflow: clip;
+  }
+
+  .bcr__strip-swatch {
+    height: 8px;
+    background-image: conic-gradient(#444 25%, #2a2a2a 0 50%, #444 0 75%, #2a2a2a 0);
+    background-size: 6px 6px;
+    transition: background-color 0.2s ease;
+  }
+  .bcr__strip-swatch:not(.bcr__strip-swatch--empty) {
+    background-image: none;
   }
 
   @media (max-width: 720px) {

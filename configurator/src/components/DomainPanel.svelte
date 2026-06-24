@@ -39,6 +39,8 @@
   import ShadeRamp from './ShadeRamp.svelte';
   import SmartSettings from './SmartSettings.svelte';
   import HeadingEditor from './HeadingEditor.svelte';
+  import RadiusEditor from './RadiusEditor.svelte';
+  import ContainerBars from './ContainerBars.svelte';
   import Icon from './Icon.svelte';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
@@ -330,6 +332,14 @@
       {:else if domain.id === 'typography'}
         <!-- Heading-level tab editor (ACSS-style) replaces flat basicGroups -->
         <HeadingEditor />
+
+      {:else if domain.id === 'borders'}
+        <!-- Radius level tab editor with shape specimens -->
+        <RadiusEditor />
+
+      {:else if domain.id === 'layout'}
+        <!-- Container width comparison bars -->
+        <ContainerBars />
 
       {:else if basicGroups.length}
         <!-- Curated groups — each group is now a collapsible card -->
