@@ -150,9 +150,10 @@ function readFile(rel) {
 
 // ── Section-banner parsing ──────────────────────────────────────────────────
 // A "banner" is a block comment that contains a long divider run (>=10 of '='
-// or '-'). The file-header banner (it names the file: "SLASHED — path") is
-// recognised separately and never used as an element's group. Plain NOTE
-// comments (no divider) are not treated as section banners.
+// or '-'). The file-header comment (starts with "SLASHED —" at offset 0) is
+// recognised separately and never used as an element's group — regardless of
+// whether it contains a divider run. Plain NOTE comments (no divider) are not
+// treated as section banners.
 
 const DIVIDER_RUN = /[-=─═]{10,}/;
 
@@ -227,7 +228,7 @@ function collectComments(css) {
     const raw    = m[0];
     const start  = m.index;
     const end    = m.index + raw.length;
-    const isHeader = /SLASHED\s+[—-]/.test(raw) && DIVIDER_RUN.test(raw) && start < 4;
+    const isHeader = /SLASHED\s+[—-]/.test(raw) && start < 4;
     // A banner is either a divider-fenced comment, a "/* -- Title -- */" form,
     // or a single-line at-rule sub-header ("/* @property — STATUS COLORS */").
     const singleLineSubHeader = !/\n/.test(raw.trim()) && /^\/\*\s*@[\w-]+\s+[—–-]\s+\S/.test(raw);
