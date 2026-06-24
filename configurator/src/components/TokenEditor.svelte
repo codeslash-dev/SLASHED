@@ -32,6 +32,22 @@
   }
 
   // ── Color picker ──────────────────────────────────────────────────────────
+  // OklchPicker.parse() only handles literal oklch/oklab/hex/hsl values.
+  // Derived expressions like oklch(from var(...)) cannot be parsed, so the
+  // picker would open with no initialized state and overwrite the expression
+  // with an unrelated literal on first interaction. Gate the swatch on this.
+  function isPickerParseable(v) {
+    if (!v) return false;
+    const s = v.trim();
+    if (/^oklch\(\s*[\d.]+%?\s+[\d.]+\s+[\d.]+/.test(s)) return true;
+    if (/^oklab\(\s*[\d.]+%?\s+[-\d.]+\s+[-\d.]+/.test(s)) return true;
+    if (/^#[0-9a-fA-F]{3,8}$/.test(s)) return true;
+    if (/^hsla?\(/.test(s)) return true;
+    return false;
+  }
+  const pickerColorValue = $derived(current || token.value || '');
+  const canUsePicker = $derived(isPickerParseable(pickerColorValue));
+
   let pickerOpen = $state(false);
   let pickerTop = $state(0);
   let pickerLeft = $state(0);
@@ -136,25 +152,27 @@
       {/if}
     </div>
   {:else if meta.control === 'color'}
-    <button
-      class="editor__swatch"
-      bind:this={swatchEl}
-      style:--probe={current || token.value}
-      onclick={togglePicker}
-      title="Open color picker"
-      aria-label="{token.name} color picker"
-      aria-expanded={pickerOpen}
-    ></button>
+    {#if canUsePicker}
+      <button
+        class="editor__swatch"
+        bind:this={swatchEl}
+        style:--probe={pickerColorValue}
+        onclick={togglePicker}
+        title="Open color picker"
+        aria-label="{token.name} color picker"
+        aria-expanded={pickerOpen}
+      ></button>
 
-    {#if pickerOpen}
-      <OklchPicker
-        value={current || token.value || ''}
-        top={pickerTop}
-        left={pickerLeft}
-        triggerEl={swatchEl}
-        onpick={onPick}
-        onclose={() => (pickerOpen = false)}
-      />
+      {#if pickerOpen}
+        <OklchPicker
+          value={pickerColorValue}
+          top={pickerTop}
+          left={pickerLeft}
+          triggerEl={swatchEl}
+          onpick={onPick}
+          onclose={() => (pickerOpen = false)}
+        />
+      {/if}
     {/if}
 
     <input

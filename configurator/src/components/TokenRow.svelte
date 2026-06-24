@@ -25,18 +25,22 @@
   import ContrastBadge from './ContrastBadge.svelte';
 
   /**
-   * @prop token        catalogue token object (required)
-   * @prop label        optional FRIENDLY display name. When set, the row
-   *                    renders the label instead of the raw token name and
-   *                    hides the tier/usage badges — used by the curated
-   *                    Basic panels. Default (no label) leaves the raw row
-   *                    untouched for Advanced mode.
-   * @prop help         optional friendly one-liner shown under the label.
-   * @prop showRawInfo  with `label`, adds an ⓘ toggle revealing the raw
-   *                    token name (click-to-copy), catalogue description,
-   *                    framework default and the "drives N" reach.
+   * @prop token         catalogue token object (required)
+   * @prop label         optional FRIENDLY display name. When set, the row
+   *                     renders the label instead of the raw token name and
+   *                     hides the tier/usage badges — used by the curated
+   *                     Basic panels. Default (no label) leaves the raw row
+   *                     untouched for Advanced mode.
+   * @prop help          optional friendly one-liner shown under the label.
+   * @prop showRawInfo   with `label`, adds an ⓘ toggle revealing the raw
+   *                     token name (click-to-copy), catalogue description,
+   *                     framework default and the "drives N" reach.
+   * @prop forceEditable when true, renders the TokenEditor even for
+   *                     consumption-role tokens. Use in Smart Settings panels
+   *                     where a token is explicitly surfaced as a configurable
+   *                     entry point regardless of its catalogue role.
    */
-  let { token, label = '', help = '', showRawInfo = false } = $props();
+  let { token, label = '', help = '', showRawInfo = false, forceEditable = false } = $props();
 
   const friendly = $derived(Boolean(label));
   let infoOpen = $state(false);
@@ -78,7 +82,7 @@
   }
 </script>
 
-<div class="row" class:row--modified={modified && !isConsume} class:row--consume={isConsume}>
+<div class="row" class:row--modified={modified} class:row--consume={isConsume && !forceEditable}>
   <div class="row__info">
     {#if friendly}
       <div class="row__name-line">
@@ -162,13 +166,21 @@
   </div>
 
   <div class="row__control">
-    {#if isConsume}
+    {#if isConsume && !forceEditable}
       <div
         class="row__readonly"
         title="Consumption token — derived from configure tokens. Edit the upstream source instead."
       >
-        <code class="row__readonly-val">{token.value}</code>
+        <code class="row__readonly-val">{effectiveValue}</code>
       </div>
+      {#if modified}
+        <button
+          class="cfg-btn cfg-btn--ghost cfg-btn--icon row__reset"
+          onclick={() => clearOverride(token.name)}
+          title="Reset to framework default"
+          aria-label="Reset {token.name}"
+        >⟲</button>
+      {/if}
     {:else}
       <TokenEditor {token} />
       <button
