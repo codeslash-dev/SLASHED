@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.12] - 2026-06-24
+
+### Features
+- @property typed tokens, surface consolidation, macro/CQ tests, drift-check
+
+### Bug Fixes
+- **themes:** use --sf-color-action-source-dark in dark selection-bg
+- **test:** update P8 baseline for --sf-color-selection-bg dark branch
+- **review:** complete source-token migration in demo, coverage pages, configurator
+- **tests+demo:** remove error color refs, add sf-section--guttered demo
+- **configurator:** align shade ramp probe with live framework cascade
+- restore named-surface colour fallbacks and harden catalog/test checks
+
 ## [0.6.11] - 2026-06-23
 
 ### Features
