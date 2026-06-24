@@ -3,6 +3,7 @@
   import { tokenByName } from '../lib/model.js';
   import { sectionTokenNames, smartSettingsFor } from '../lib/domainSettings.js';
   import { buildPreviewDeclarations } from '../lib/preview.js';
+  import { getFold, setFold } from '../lib/foldState.js';
   import TokenRow from './TokenRow.svelte';
 
   const stageStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
@@ -65,7 +66,11 @@
 {#if sections.length}
   <div class="smart">
     {#each sections as section (section.id)}
-      <details class="cfg-card smart__section" open>
+      <details
+        class="cfg-card smart__section"
+        open={getFold(`${domainId}:${section.id}`, false)}
+        ontoggle={(e) => setFold(`${domainId}:${section.id}`, e.currentTarget.open)}
+      >
         <summary class="smart__summary">
           <span class="smart__chev" aria-hidden="true">›</span>
           <span class="smart__title">{section.title}</span>

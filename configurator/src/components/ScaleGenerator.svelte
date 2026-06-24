@@ -32,12 +32,15 @@
     resetEnginePatch,
     resetViewportPatch,
   } from '../lib/fluidEngine.js';
+  import { getFold, setFold } from '../lib/foldState.js';
 
   /** @type {{ kinds?: Array<'type'|'display'|'space'>, collapsible?: boolean }} */
   let { kinds = ['type', 'display', 'space'], collapsible = false } = $props();
 
   // svelte-ignore state_referenced_locally
-  let open = $state(!collapsible);
+  const foldKey = `generator:${kinds[0]}`;
+  // svelte-ignore state_referenced_locally
+  let open = $state(collapsible ? getFold(foldKey, false) : true);
 
   /**
    * The framework's display ramp: --sf-text-display-{s,m,l}, a separate modular
@@ -185,7 +188,7 @@
     {#if collapsible}
       <button
         class="gen__toggle"
-        onclick={() => (open = !open)}
+        onclick={() => { open = !open; if (collapsible) setFold(foldKey, open); }}
         aria-expanded={open}
         aria-label={open ? 'Collapse scale generator' : 'Expand scale generator'}
       ><span class="gen__chev" class:gen__chev--open={open} aria-hidden="true">›</span></button>
