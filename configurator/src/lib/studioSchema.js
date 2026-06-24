@@ -29,7 +29,7 @@ export const TYPOGRAPHY_PANELS = [
     id: 'Code',
     label: 'Code',
     description: 'Monospace family and inline-code sizing/padding.',
-    tokens: ['--sf-font-mono', '--sf-code-font-size', '--sf-code-padding-inline', '--sf-code-padding-block', '--sf-color-code-bg', '--sf-color-code-text'],
+    tokens: ['--sf-font-mono', '--sf-code-font-size', '--sf-font-numeric', '--sf-font-features', '--sf-font-variation'],
   },
 ];
 
