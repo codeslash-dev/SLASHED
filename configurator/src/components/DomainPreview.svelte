@@ -548,7 +548,7 @@
     padding: 8px 16px;
     border-radius: var(--sf-radius-m, 6px);
     background: var(--sf-color-primary, var(--cfg-accent-strong));
-    color: var(--sf-color-on-primary, #fff);
+    color: var(--sf-color-text--on-primary, #fff);
     font-size: 12px;
     font-weight: 600;
   }

@@ -133,7 +133,7 @@
 
   function onHexChange(e) {
     const v = (e.currentTarget?.value ?? '').trim();
-    if (/^#?[0-9a-fA-F]{3}$/.test(v) || /^#?[0-9a-fA-F]{6}$/.test(v) || /^#?[0-9a-fA-F]{8}$/.test(v)) {
+    if (/^#?[0-9a-fA-F]{6}$/.test(v) || /^#?[0-9a-fA-F]{8}$/.test(v)) {
       const norm = v.startsWith('#') ? v : '#' + v;
       try {
         applyOklch(oklabToOklch(linearRgbToOklab(hexToLinearRgb(norm))));
@@ -222,10 +222,23 @@
   }
 
   function switchMode(m) {
-    if (m !== mode) {
-      mode = m;
-      emit();
+    if (m === mode) return;
+    if (m === 'oklab') {
+      // Convert current OKLCH → OKLab channels so sliders stay consistent
+      ll = l;
+      la = c * Math.cos((h * Math.PI) / 180);
+      lb = c * Math.sin((h * Math.PI) / 180);
+    } else {
+      // Convert current OKLab → OKLCH channels
+      const C = Math.sqrt(la * la + lb * lb);
+      let H = (Math.atan2(lb, la) * 180) / Math.PI;
+      if (H < 0) H += 360;
+      l = ll;
+      c = Math.min(0.4, C);
+      h = H;
     }
+    mode = m;
+    emit();
   }
 
   // Eyedropper API — only some browsers (Chromium-based as of 2024+).

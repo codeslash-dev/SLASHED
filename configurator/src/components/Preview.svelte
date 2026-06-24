@@ -639,7 +639,7 @@
         <div class="pv__lp-row">
           {#each ['xs','s','m','l','xl','2xl'] as g (g)}
             <div class="pv__lp-col">
-              <div class="pv__lp-stack" style="gap:var(--sf-space-{g})">
+              <div class="sf-stack sf-stack--{g}">
                 <div class="pv__box">A</div><div class="pv__box">B</div>
               </div>
               <code class="pv__lp-label">--{g}</code>
@@ -651,9 +651,9 @@
       <section class="pv__block">
         <p class="pv__eyebrow">.sf-stack — alignment variants</p>
         <div class="pv__lp-row">
-          {#each [['center','center'],['end','flex-end'],['stretch','stretch']] as [n,v] (n)}
+          {#each [['center','sf-stack--center'],['end','sf-stack--end'],['stretch','sf-stack--stretch']] as [n,cls] (n)}
             <div class="pv__lp-col pv__lp-col--wide">
-              <div class="pv__lp-stack" style="gap:8px;align-items:{v}">
+              <div class="sf-stack {cls}" style="gap:8px">
                 <div class="pv__box" style="width:4rem">A</div><div class="pv__box" style="width:6rem">B</div>
               </div>
               <code class="pv__lp-label">--{n}</code>
@@ -667,30 +667,30 @@
         <div class="pv__lp-stack2">
           {#each ['xs','s','m','l','xl','2xl'] as g (g)}
             <div class="pv__lp-wrap">
-              <div class="pv__lp-cluster" style="gap:var(--sf-space-{g})">
+              <div class="sf-cluster sf-cluster--{g}">
                 <div class="pv__box">A</div><div class="pv__box">B</div><div class="pv__box">C</div>
               </div>
               <code class="pv__lp-label">--{g}</code>
             </div>
           {/each}
           <div class="pv__lp-wrap">
-            <div class="pv__lp-cluster" style="justify-content:center;gap:8px"><div class="pv__box">center</div><div class="pv__box">layout</div></div>
+            <div class="sf-cluster sf-cluster--center" style="gap:8px"><div class="pv__box">center</div><div class="pv__box">layout</div></div>
             <code class="pv__lp-label">--center</code>
           </div>
           <div class="pv__lp-wrap">
-            <div class="pv__lp-cluster" style="justify-content:space-between;gap:8px"><div class="pv__box">between</div><div class="pv__box">items</div></div>
+            <div class="sf-cluster sf-cluster--between" style="gap:8px"><div class="pv__box">between</div><div class="pv__box">items</div></div>
             <code class="pv__lp-label">--between</code>
           </div>
         </div>
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid — auto-fill tiers</p>
+        <p class="pv__eyebrow">.sf-grid — auto-fill tiers (min-item widths from layout tokens)</p>
         <div class="pv__lp-stack2">
-          {#each [['xs','6rem'],['s','8rem'],['m','10rem'],['l','12rem'],['xl','16rem']] as [tier,min] (tier)}
+          {#each ['xs','s','m','l','xl'] as tier (tier)}
             <div>
-              <code class="pv__lp-label">--{tier} (min {min})</code>
-              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({min},1fr));gap:6px;margin-top:4px">
+              <code class="pv__lp-label">.sf-grid--{tier} (--sf-grid-min-{tier})</code>
+              <div class="sf-grid sf-grid--{tier}" style="margin-top:4px">
                 {#each [1,2,3,4] as n (n)}<div class="pv__box">{n}</div>{/each}
               </div>
             </div>
@@ -699,22 +699,22 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid-N — fixed columns + ratio grids</p>
+        <p class="pv__eyebrow">.sf-grid-cols-N — fixed columns + ratio grids (CQ-responsive)</p>
         <div class="pv__lp-stack2">
-          {#each [[2,'grid-2'],[3,'grid-3'],[4,'grid-4']] as [cols,cls] (cls)}
-            <div>
-              <code class="pv__lp-label">.sf-{cls}</code>
-              <div style="display:grid;grid-template-columns:repeat({cols},1fr);gap:6px;margin-top:4px">
+          {#each [2,3,4] as cols (cols)}
+            <div class="sf-cq">
+              <code class="pv__lp-label">.sf-grid-cols-{cols}</code>
+              <div class="sf-grid-cols-{cols}" style="margin-top:4px">
                 {#each Array(cols) as _,n (n)}<div class="pv__box">{n+1}</div>{/each}
               </div>
             </div>
           {/each}
-          <div>
+          <div class="sf-cq">
             <code class="pv__lp-label">.sf-grid-cols-1-2 · .sf-grid-cols-1-3</code>
-            <div style="display:grid;grid-template-columns:1fr 2fr;gap:6px;margin-top:4px">
+            <div class="sf-grid-cols-1-2" style="margin-top:4px">
               <div class="pv__box">1</div><div class="pv__box pv__box--alt">2×</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 3fr;gap:6px;margin-top:6px">
+            <div class="sf-grid-cols-1-3" style="margin-top:6px">
               <div class="pv__box">1</div><div class="pv__box pv__box--alt">3×</div>
             </div>
           </div>
@@ -722,12 +722,12 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-equal — never-collapsing fixed columns</p>
+        <p class="pv__eyebrow">.sf-equal — intrinsically responsive auto-fit columns</p>
         <div class="pv__lp-stack2">
-          {#each [[2],[3],[4],[6]] as [cols] (cols)}
+          {#each [2,3,4,6] as cols (cols)}
             <div>
               <code class="pv__lp-label">.sf-equal--{cols}</code>
-              <div style="display:grid;grid-template-columns:repeat({cols},1fr);gap:6px;margin-top:4px">
+              <div class="sf-equal sf-equal--{cols}" style="margin-top:4px">
                 {#each Array(cols) as _,n (n)}<div class="pv__box">{n+1}</div>{/each}
               </div>
             </div>
@@ -739,24 +739,24 @@
         <p class="pv__eyebrow">.sf-sidebar — flex layout variants</p>
         <div class="pv__lp-stack2">
           <div>
-            <code class="pv__lp-label">default (sidebar left ~18rem)</code>
-            <div style="display:flex;gap:12px;margin-top:4px">
-              <div class="pv__box pv__box--alt" style="min-width:6rem">sidebar</div>
-              <div class="pv__box" style="flex:1">main content</div>
+            <code class="pv__lp-label">default (sidebar left, ~18rem)</code>
+            <div class="sf-sidebar" style="margin-top:4px">
+              <div class="pv__box pv__box--alt">sidebar</div>
+              <div class="pv__box">main content</div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">--right</code>
-            <div style="display:flex;gap:12px;margin-top:4px">
-              <div class="pv__box" style="flex:1">main content</div>
-              <div class="pv__box pv__box--alt" style="min-width:6rem">sidebar</div>
+            <code class="pv__lp-label">--right (sidebar right)</code>
+            <div class="sf-sidebar sf-sidebar--right" style="margin-top:4px">
+              <div class="pv__box">main content</div>
+              <div class="pv__box pv__box--alt">sidebar</div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">--narrow</code>
-            <div style="display:flex;gap:12px;margin-top:4px">
-              <div class="pv__box pv__box--alt" style="min-width:4rem">nav</div>
-              <div class="pv__box" style="flex:1">main content</div>
+            <code class="pv__lp-label">--narrow (12rem panel)</code>
+            <div class="sf-sidebar sf-sidebar--narrow" style="margin-top:4px">
+              <div class="pv__box pv__box--alt">nav</div>
+              <div class="pv__box">main content</div>
             </div>
           </div>
         </div>
@@ -766,31 +766,36 @@
         <p class="pv__eyebrow">.sf-switcher · .sf-cover · .sf-frame · .sf-bento</p>
         <div class="pv__lp-stack2">
           <div>
-            <code class="pv__lp-label">.sf-switcher (wraps below threshold)</code>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-              <div class="pv__box" style="flex:1 1 8rem">A</div>
-              <div class="pv__box" style="flex:1 1 8rem">B</div>
-              <div class="pv__box" style="flex:1 1 8rem">C</div>
+            <code class="pv__lp-label">.sf-switcher (column below --sf-switcher-threshold)</code>
+            <div class="sf-switcher" style="margin-top:4px">
+              <div class="pv__box">A</div>
+              <div class="pv__box">B</div>
+              <div class="pv__box">C</div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">.sf-cover (centered, min-height)</code>
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:5rem;background:var(--sf-color-inset);border-radius:var(--sf-radius-m);margin-top:4px">
-              <div class="pv__box">Centered content</div>
+            <code class="pv__lp-label">.sf-cover .sf-cover__center</code>
+            <div class="sf-cover" style="--sf-cover-min-height:5rem;margin-top:4px;background:var(--sf-color-inset);border-radius:var(--sf-radius-m)">
+              <div class="sf-cover__center">
+                <div class="pv__box">Centered content</div>
+              </div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">.sf-frame (16:9 aspect ratio)</code>
-            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-tertiary));border-radius:var(--sf-radius-m);display:grid;place-items:center;margin-top:4px;max-width:180px">
+            <code class="pv__lp-label">.sf-frame .sf-frame--video</code>
+            <div class="sf-frame sf-frame--video" style="margin-top:4px;max-width:180px;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-tertiary));border-radius:var(--sf-radius-m)">
               <span style="color:#fff;font-size:var(--sf-text-s)">16:9</span>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">.sf-bento (asymmetric grid)</code>
-            <div style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:8px;margin-top:4px">
-              <div class="pv__box" style="grid-row:span 2;min-height:60px">Wide tall</div>
-              <div class="pv__box pv__box--alt">A</div>
-              <div class="pv__box pv__box--action">B</div>
+            <code class="pv__lp-label">.sf-bento--3 + .sf-bento-wide · .sf-bento-featured</code>
+            <div class="sf-cq" style="margin-top:4px">
+              <div class="sf-bento sf-bento--3 sf-bento--compact">
+                <div class="pv__box sf-bento-featured">Featured</div>
+                <div class="pv__box pv__box--alt">B</div>
+                <div class="pv__box pv__box--alt">C</div>
+                <div class="pv__box pv__box--action sf-bento-wide">Wide D</div>
+              </div>
             </div>
           </div>
         </div>
@@ -799,11 +804,10 @@
       <section class="pv__block">
         <p class="pv__eyebrow">.sf-container — max-width tiers</p>
         <div class="pv__lp-stack2">
-          {#each [['narrow','480px'],['prose','65ch'],['wide','1200px'],['full','100%']] as [tier,width] (tier)}
+          {#each [['narrow','var(--sf-container-narrow,480px)','narrow'],['prose','var(--sf-container-prose,65ch)','prose'],['default','var(--sf-container-default,72rem)','default'],['wide','var(--sf-container-wide,90rem)','wide']] as [tier,w,hint] (tier)}
             <div style="display:flex;align-items:center;gap:10px">
               <code class="pv__lp-label" style="flex-shrink:0;min-width:7ch">--{tier}</code>
-              <div style="height:18px;background:var(--sf-color-primary-subtle);border-radius:3px;width:min(100%,{width});border:1px solid var(--sf-color-primary-muted)"></div>
-              <span style="font-size:10px;color:var(--sf-color-text--muted);flex-shrink:0">{width}</span>
+              <div style="height:18px;background:var(--sf-color-primary-subtle);border-radius:3px;max-width:min(100%,{w});flex:1;border:1px solid var(--sf-color-primary-muted)"></div>
             </div>
           {/each}
         </div>
@@ -812,14 +816,14 @@
       <section class="pv__block">
         <p class="pv__eyebrow">.sf-divider — variants</p>
         <div class="pv__lp-stack2">
-          {#each [['default','1px solid var(--sf-color-border)'],['--subtle','1px solid var(--sf-color-border--subtle)'],['--strong','2px solid var(--sf-color-border--strong)'],['--dashed','1px dashed var(--sf-color-border)'],['--dotted','1px dotted var(--sf-color-border)']] as [n,style] (n)}
+          {#each [['default',''],['--soft','sf-divider--soft'],['--strong','sf-divider--strong'],['--dashed','sf-divider--dashed'],['--dotted','sf-divider--dotted']] as [n,cls] (n)}
             <div style="display:flex;align-items:center;gap:10px;padding-block:4px">
-              <div style="flex:1;border-bottom:{style}"></div>
+              <div class="sf-divider {cls}" style="flex:1;margin:0"></div>
               <code class="pv__lp-label">{n}</code>
             </div>
           {/each}
           <div>
-            <div style="height:3px;background:var(--sf-gradient-primary,linear-gradient(90deg,var(--sf-color-primary),var(--sf-color-tertiary)));border-radius:2px"></div>
+            <div class="sf-divider sf-divider--gradient" style="margin:0"></div>
             <code class="pv__lp-label">--gradient</code>
           </div>
         </div>
@@ -834,56 +838,56 @@
         <p class="pv__eyebrow">sf-surface--* color macros (11 variants)</p>
         <div class="pv__macro-grid">
           {#each statusMacros as c (c)}
-            <div class="pv__surface-cell pv__surface-{c}">surface--{c}</div>
+            <div class="pv__surface-cell sf-surface--{c}">surface--{c}</div>
           {/each}
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-text-gradient · sf-text-protect</p>
-        <p class="pv__text-grad" style="font-size:var(--sf-text-2xl);font-weight:800;line-height:1.1">Gradient headline text</p>
+        <p class="sf-text-gradient" style="font-size:var(--sf-text-2xl);font-weight:800;line-height:1.1;margin:0">Gradient headline text</p>
         <div class="pv__photo">
-          <p class="pv__text-protect">Protected text over image gradient</p>
+          <p class="sf-text-protect" style="margin:0;color:#fff;font-size:var(--sf-text-xl,1.5rem);font-weight:700">Protected text over image gradient</p>
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-truncate · sf-line-clamp-2 · sf-line-clamp-3 · sf-line-clamp-N</p>
-        <p class="pv__truncate">This is a very long single line that will be truncated with an ellipsis once it overflows its inline size box — lorem ipsum dolor sit amet consectetur adipiscing.</p>
-        <p class="pv__clamp2">Two-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
-        <p class="pv__clamp3">Three-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco.</p>
-        <p class="pv__clampn" style="--pv-clamp:4">Four-line clamp (--sf-line-clamp: 4). Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+        <p class="sf-truncate" style="margin:0;font-size:var(--sf-text-s,.875rem)">This is a very long single line that will be truncated with an ellipsis once it overflows its inline size box — lorem ipsum dolor sit amet consectetur adipiscing.</p>
+        <p class="sf-line-clamp-2" style="margin:0;font-size:var(--sf-text-s,.875rem)">Two-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+        <p class="sf-line-clamp-3" style="margin:0;font-size:var(--sf-text-s,.875rem)">Three-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco.</p>
+        <p class="sf-line-clamp-N" style="--sf-line-clamp:4;margin:0;font-size:var(--sf-text-s,.875rem)">Four-line clamp (--sf-line-clamp: 4). Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip.</p>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-prose · sf-not-prose · sf-flow</p>
-        <div class="pv__prose-demo">
-          <h3 class="pv__prose-h">Prose heading</h3>
-          <p class="pv__prose-p">Automatic vertical rhythm. Direct children get spacing automatically via flow space token.</p>
-          <ul class="pv__prose-ul"><li>Restored bullets</li><li>Nested indentation preserved</li></ul>
-          <div class="pv__not-prose">.sf-not-prose — opts this widget out of prose spacing rules.</div>
-          <p class="pv__prose-p">Back to prose body text.</p>
+        <div class="sf-prose" style="background:var(--sf-color-inset,rgba(127,127,127,.08));padding:12px;border-radius:var(--sf-radius-m,8px)">
+          <h3>Prose heading</h3>
+          <p>Automatic vertical rhythm. Direct children get spacing automatically via flow space token.</p>
+          <ul><li>Restored bullets</li><li>Nested indentation preserved</li></ul>
+          <div class="sf-not-prose" style="padding:6px 8px;background:var(--sf-color-surface,#fff);border-radius:var(--sf-radius-s,4px);font-size:var(--sf-text-xs,.75rem);font-weight:600;border:1px solid var(--sf-color-border,rgba(127,127,127,.2))">.sf-not-prose — opts this widget out of prose spacing rules.</div>
+          <p>Back to prose body text.</p>
         </div>
         <p class="pv__eyebrow" style="margin-top:10px">sf-flow (lobotomized owl — * + *)</p>
-        <div class="pv__flow-demo">
-          <p>First (no top margin)</p>
-          <p>Second (gets --sf-space-m top margin via * + *)</p>
-          <p>Third (same)</p>
+        <div class="sf-flow" style="background:var(--sf-color-inset,rgba(127,127,127,.08));padding:10px;border-radius:var(--sf-radius-s,4px);font-size:var(--sf-text-s,.875rem);color:var(--sf-color-text--secondary,inherit)">
+          <p style="margin:0">First (no top margin)</p>
+          <p style="margin:0">Second (gets --sf-flow-space top margin via * + *)</p>
+          <p style="margin:0">Third (same)</p>
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-scroll-shadow (vertical overflow)</p>
-        <div class="pv__scroll-shadow">
+        <div class="sf-scroll-shadow" style="block-size:8rem;background:var(--sf-color-inset,rgba(127,127,127,.08));padding:10px 12px;border-radius:var(--sf-radius-m,8px);font-size:var(--sf-text-s,.875rem)">
           {#each Array(8) as _,i (i)}
-            <p style="margin:0 0 6px">Line {i+1}{i===0?' (scroll me)':i===7?' (bottom)':''}</p>
+            <p style="margin:0 0 6px;color:var(--sf-color-text--secondary,inherit)">Line {i+1}{i===0?' (scroll me)':i===7?' (bottom)':''}</p>
           {/each}
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-overflow-fade (horizontal tag list)</p>
-        <div class="pv__overflow-fade">
+        <div class="sf-overflow-fade" style="display:flex;gap:6px;white-space:nowrap">
           {#each ['one','two','three','four','five','six','seven','eight','nine','ten'] as t (t)}
             <span class="pv__tag">tag {t}</span>
           {/each}
@@ -893,11 +897,11 @@
       <section class="pv__block">
         <p class="pv__eyebrow">Link macros · sf-tabular-nums</p>
         <div class="pv__chips" style="margin-bottom:10px">
-          <a class="pv__link-subtle" href="#a" onclick={preventDemoNav}>sf-link--subtle (underline on hover)</a>
-          <a class="pv__link-reverse" href="#a" onclick={preventDemoNav}>sf-link--reverse (always underlined)</a>
-          <a class="pv__link-ext" href="#a" onclick={preventDemoNav}>sf-link-external ↗</a>
+          <a class="pv__a sf-link--subtle" href="#a" onclick={preventDemoNav}>sf-link--subtle (underline on hover)</a>
+          <a class="pv__a sf-link--reverse" href="#a" onclick={preventDemoNav}>sf-link--reverse (always underlined)</a>
+          <a class="pv__a sf-link-external" href="#a" onclick={preventDemoNav}>sf-link-external</a>
         </div>
-        <table class="pv__tbl">
+        <table class="pv__tbl sf-tabular-nums">
           <tbody>
             <tr><td>Item Alpha</td><td>1,234.50</td></tr>
             <tr><td>Item Beta</td><td>9,876.10</td></tr>
@@ -1215,8 +1219,6 @@
   .pv__lp-row  { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
   .pv__lp-col  { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .pv__lp-col--wide { min-width: 8rem; }
-  .pv__lp-stack  { display: flex; flex-direction: column; }
-  .pv__lp-cluster{ display: flex; flex-wrap: wrap; }
   .pv__lp-stack2 { display: flex; flex-direction: column; gap: 10px; }
   .pv__lp-wrap   { background: var(--sf-color-inset, rgba(127,127,127,.06)); padding: 8px; border-radius: var(--sf-radius-s,4px); }
   .pv__lp-label  { font-family: var(--sf-font-mono,monospace); font-size: 10px; color: var(--sf-color-text--muted,#888); }
@@ -1224,43 +1226,9 @@
   /* ── Macros section ── */
   .pv__macro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem,1fr)); gap: 6px; }
   .pv__surface-cell { padding: 8px 10px; border-radius: var(--sf-radius-m,8px); font-size: 11px; font-weight: 600; min-height: 2.5rem; display: flex; align-items: center; border: 1px solid var(--sf-color-border, rgba(127,127,127,.2)); }
-  .pv__surface-primary   { background: var(--sf-color-primary-subtle,   rgba(79,140,255,.1));  color: var(--sf-color-primary,#4f8cff); }
-  .pv__surface-secondary { background: var(--sf-color-secondary-subtle, rgba(107,114,128,.1)); color: var(--sf-color-secondary,#6b7280); }
-  .pv__surface-tertiary  { background: var(--sf-color-tertiary-subtle,  rgba(136,88,255,.1));  color: var(--sf-color-tertiary,#8858ff); }
-  .pv__surface-action    { background: var(--sf-color-action-subtle,    rgba(8,145,178,.1));   color: var(--sf-color-action,#0891b2); }
-  .pv__surface-neutral   { background: var(--sf-color-neutral-subtle,   rgba(82,82,82,.1));    color: var(--sf-color-neutral,#525252); }
-  .pv__surface-inverse   { background: var(--sf-color-inverse,#111);    color: var(--sf-color-text--inverse,#fff); }
-  .pv__surface-success   { background: var(--sf-color-success-subtle,   rgba(22,163,74,.1));   color: var(--sf-color-success,#16a34a); }
-  .pv__surface-warning   { background: var(--sf-color-warning-subtle,   rgba(202,138,4,.1));   color: var(--sf-color-warning-strong,#854d0e); }
-  .pv__surface-danger     { background: var(--sf-color-danger-subtle,    rgba(220,38,38,.1));   color: var(--sf-color-danger,#dc2626); }
-  .pv__surface-info      { background: var(--sf-color-info-subtle,      rgba(8,145,178,.1));   color: var(--sf-color-info,#0891b2); }
-  .pv__surface-danger    { background: var(--sf-color-danger-subtle,    rgba(220,38,38,.1));   color: var(--sf-color-danger,#dc2626); }
-  .pv__text-grad { background: var(--sf-gradient-primary, linear-gradient(135deg, var(--sf-color-primary,#4f8cff), var(--sf-color-tertiary,#8858ff))); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin: 0; }
   .pv__photo { position: relative; height: 6rem; border-radius: var(--sf-radius-m,8px); overflow: hidden; background: linear-gradient(135deg, var(--sf-color-tertiary,#8858ff), var(--sf-color-action,#0891b2)); display: grid; place-items: center; }
-  .pv__text-protect { margin: 0; color: #fff; font-size: var(--sf-text-xl,1.5rem); font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
-  .pv__truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__clamp2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__clamp3 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__clampn { overflow: hidden; display: -webkit-box; -webkit-line-clamp: var(--pv-clamp,4); -webkit-box-orient: vertical; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__prose-demo { background: var(--sf-color-inset, rgba(127,127,127,.08)); padding: 12px; border-radius: var(--sf-radius-m,8px); }
-  .pv__prose-h  { margin: 0 0 8px; font-size: var(--sf-text-l,1.25rem); font-family: var(--sf-font-heading,inherit); color: var(--sf-color-heading,inherit); }
-  .pv__prose-p  { margin: 0 0 8px; font-size: var(--sf-text-s,.875rem); color: var(--sf-color-text--secondary,inherit); }
-  .pv__prose-ul { margin: 0 0 8px; padding-inline-start: 1.4em; font-size: var(--sf-text-s,.875rem); color: var(--sf-color-text--secondary,inherit); }
-  .pv__not-prose{ padding: 6px 8px; background: var(--sf-color-surface,#fff); border-radius: var(--sf-radius-s,4px); font-size: var(--sf-text-xs,.75rem); font-weight: 600; border: 1px solid var(--sf-color-border, rgba(127,127,127,.2)); }
-  .pv__flow-demo { background: var(--sf-color-inset, rgba(127,127,127,.08)); padding: 10px; border-radius: var(--sf-radius-s,4px); font-size: var(--sf-text-s,.875rem); color: var(--sf-color-text--secondary,inherit); }
-  .pv__flow-demo p { margin: 0; }
-  .pv__flow-demo p + p { margin-top: var(--sf-space-s,8px); }
-  .pv__scroll-shadow { block-size: 8rem; overflow-y: auto; background: var(--sf-color-inset, rgba(127,127,127,.08)); padding: 10px 12px; border-radius: var(--sf-radius-m,8px); font-size: var(--sf-text-s,.875rem); background-image: linear-gradient(var(--sf-color-bg,#fff),var(--sf-color-bg,#fff)), linear-gradient(var(--sf-color-bg,#fff),var(--sf-color-bg,#fff)), linear-gradient(rgba(0,0,0,.1),transparent), linear-gradient(transparent,rgba(0,0,0,.1)); background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px; background-position: 0 0, 0 100%, 0 0, 0 100%; background-repeat: no-repeat; background-attachment: local,local,scroll,scroll; }
-  .pv__scroll-shadow p { margin: 0 0 6px; color: var(--sf-color-text--secondary,inherit); }
-  .pv__overflow-fade { display: flex; gap: 6px; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, black 70%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%); }
   .pv__tag { display: inline-flex; padding: 4px 10px; background: var(--sf-color-surface,#fff); border: 1px solid var(--sf-color-border, rgba(127,127,127,.3)); border-radius: var(--sf-radius-m,8px); font-size: 11px; white-space: nowrap; }
-  .pv__link-subtle  { color: var(--sf-color-text--secondary,#555); text-decoration: none; }
-  .pv__link-subtle:hover { text-decoration: underline; }
-  .pv__link-reverse { color: var(--sf-color-link,#4f8cff); text-decoration: underline; }
-  .pv__link-reverse:hover { text-decoration: none; }
-  .pv__link-ext { color: var(--sf-color-link,#4f8cff); }
-  .pv__link-ext::after { content: ' ↗'; font-size: .8em; }
-  .pv__tbl { font-variant-numeric: tabular-nums; font-size: var(--sf-text-s,.875rem); border-collapse: collapse; }
+  .pv__tbl { font-size: var(--sf-text-s,.875rem); border-collapse: collapse; }
   .pv__tbl td { padding: 4px 12px 4px 0; color: var(--sf-color-text--secondary,inherit); }
   .pv__tbl td:last-child { text-align: right; font-family: var(--sf-font-mono,monospace); }
   .pv__state-cell { padding: 8px 10px; border-radius: var(--sf-radius-m,8px); font-size: 11px; font-weight: 600; min-height: 2.5rem; display: flex; align-items: center; background: var(--sf-color-surface,#fff); border: 1px solid var(--sf-color-border, rgba(127,127,127,.2)); color: var(--sf-color-text,inherit); }

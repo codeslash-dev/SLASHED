@@ -25,6 +25,15 @@ import '../../core/tokens.layout.css';
 import '../../core/tokens.macros.css';
 import '../../core/themes.css';
 import '../../optional/tokens.palette.css';
+// Layout primitives — only .sf-* class selectors, safe alongside chrome styles.
+// Required so the live-preview Layout tab can demonstrate real sf-* classes
+// (sf-stack, sf-cluster, sf-grid, sf-bento, sf-sidebar, etc.) instead of
+// custom simulations. User overrides still scope only to the preview stage.
+import '../../core/layout.css';
+// Macro-classes — only .sf-* class selectors in @layer slashed.macros, safe
+// alongside chrome styles. Required so the live-preview Macros tab can
+// demonstrate real sf-surface--*, sf-prose, sf-truncate, sf-scroll-shadow, etc.
+import '../../core/macros.css';
 
 import './styles/app.css';
 
