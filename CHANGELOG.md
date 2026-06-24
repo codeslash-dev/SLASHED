@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.13] - 2026-06-24
+
+### Bug Fixes
+- **configurator:** replace all pv__* macro simulations with real sf-* framework classes
+- **configurator:** use real sf-* layout classes in live preview Layout tab
+- **configurator:** fix hardcoded/stale color previews across panels
+- three bugs in configurator colors panel
+
 ## [0.6.12] - 2026-06-24
 
 ### Features
