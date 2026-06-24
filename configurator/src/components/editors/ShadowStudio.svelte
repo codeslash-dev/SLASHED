@@ -1,0 +1,3 @@
+<script>import StudioFrame from './StudioFrame.svelte'; const levels=['xs','s','m','l','xl'];</script>
+<StudioFrame title="Shadow Studio" description="Elevation stack pokazuje siłę cieni w kontekście light/dark."><div class="stack">{#each levels as l}<article style:box-shadow={`var(--sf-shadow-${l}, var(--sf-shadow-m))`}><b>{l}</b></article>{/each}</div></StudioFrame>
+<style>.stack{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end}.stack article{min-height:70px;border-radius:14px;background:var(--sf-color-raised);border:1px solid var(--sf-color-border);display:grid;place-items:center}.stack b{text-transform:uppercase;color:var(--cfg-text-muted)}@media(max-width:700px){.stack{grid-template-columns:repeat(2,1fr)}}</style>

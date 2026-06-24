@@ -41,7 +41,17 @@
   import HeadingEditor from './HeadingEditor.svelte';
   import RadiusEditor from './RadiusEditor.svelte';
   import ContainerBars from './ContainerBars.svelte';
-  import Icon from './Icon.svelte';
+  import CategoryHeader from './CategoryHeader.svelte';
+  import ControlSection from './ControlSection.svelte';
+  import FriendlyControl from './FriendlyControl.svelte';
+  import TypographyStudio from './editors/TypographyStudio.svelte';
+  import ColorStudio from './editors/ColorStudio.svelte';
+  import SpacingStudio from './editors/SpacingStudio.svelte';
+  import LayoutStudio from './editors/LayoutStudio.svelte';
+  import ShapeStudio from './editors/ShapeStudio.svelte';
+  import ShadowStudio from './editors/ShadowStudio.svelte';
+  import MotionStudio from './editors/MotionStudio.svelte';
+  import EffectsStudio from './editors/EffectsStudio.svelte';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
   let { domain } = $props();
@@ -200,32 +210,32 @@
 {/snippet}
 
 <section class="panel">
-  <header class="panel__head">
-    <div class="panel__title-wrap">
-      <span class="panel__icon"><Icon name={domain.icon} size={18} /></span>
-      <div>
-        <h2 class="panel__title">{domain.label}</h2>
-        <p class="panel__blurb">{domain.blurb}</p>
-      </div>
-    </div>
-
-    <div class="panel__actions">
-      {#if modifiedHere.length}
-        <button
-          class="cfg-btn cfg-btn--sm cfg-btn--danger"
-          onclick={resetDomain}
-          title="Reset all {modifiedHere.length} modified token{modifiedHere.length === 1 ? '' : 's'} in this domain"
-        >Reset {modifiedHere.length}</button>
-      {/if}
-    </div>
-  </header>
-
   <div class="panel__body">
+    <CategoryHeader domain={domain} modifiedCount={modifiedHere.length} tokenCount={domainTokens.length} onreset={resetDomain} />
     {#if searching}
       <!-- Active search: filtered catalogue only -->
       {@render filters()}
       {@render catalogue()}
     {:else}
+
+
+      {#if domain.id === 'typography'}
+        <TypographyStudio />
+      {:else if domain.id === 'colors'}
+        <ColorStudio />
+      {:else if domain.id === 'spacing'}
+        <SpacingStudio />
+      {:else if domain.id === 'layout'}
+        <LayoutStudio />
+      {:else if domain.id === 'borders'}
+        <ShapeStudio />
+      {:else if domain.id === 'shadows'}
+        <ShadowStudio />
+      {:else if domain.id === 'motion'}
+        <MotionStudio />
+      {:else if domain.id === 'effects'}
+        <EffectsStudio />
+      {/if}
 
       <!-- ── ZONE 1: CONTROLS (live preview now lives in the right Preview Hub) ──
            Colors:    Semantic-roles swatch grid (editing UI, not just preview).
@@ -344,25 +354,23 @@
       {:else if basicGroups.length}
         <!-- Curated groups — each group is now a collapsible card -->
         {#each basicGroups as group (group.title)}
-          <details class="panel__expand cfg-card panel__card" open>
-            {@render expandSummary(group.title, group.controls.length)}
+          <ControlSection title={group.title} modifiedCount={group.controls.filter((c) => overrides[c.token] != null).length}>
             <div class="panel__card-rows">
               {#each group.controls as c (c.token)}
-                <TokenRow token={c.tokenObj} label={c.label} help={c.help} showRawInfo />
+                <FriendlyControl token={c.tokenObj} label={c.label} help={c.help} />
               {/each}
             </div>
-          </details>
+          </ControlSection>
         {/each}
 
       {:else if essentials.length}
-        <details class="panel__expand cfg-card panel__card" open>
-          {@render expandSummary('Essentials', essentials.length, 'Curated for most projects.')}
+        <ControlSection title="Essentials" hint="Curated for most projects." modifiedCount={essentials.filter((t) => overrides[t.name] != null).length}>
           <div class="panel__card-rows">
             {#each essentials as token (token.name)}
-              <TokenRow {token} />
+              <FriendlyControl {token} showToken />
             {/each}
           </div>
-        </details>
+        </ControlSection>
       {/if}
 
       <!-- ── ZONE 3: ALL VARIABLES (progressive disclosure) ──────────────── -->
@@ -404,44 +412,6 @@
     flex-direction: column;
     height: 100%;
     min-height: 0;
-  }
-  .panel__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px 12px;
-    border-bottom: 1px solid var(--cfg-border);
-    background: var(--cfg-surface);
-    flex-wrap: wrap;
-  }
-  .panel__title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    flex: 1 1 auto;
-  }
-  .panel__icon {
-    display: inline-grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--cfg-radius);
-    background: linear-gradient(135deg, rgba(79, 140, 255, 0.18), rgba(120, 80, 220, 0.18));
-    border: 1px solid var(--cfg-border-strong);
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .panel__title { margin: 0; font-size: 16px; font-weight: 600; }
-  .panel__blurb { margin: 2px 0 0; color: var(--cfg-text-muted); font-size: 12px; max-width: 70ch; }
-
-  .panel__actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    flex-shrink: 0;
   }
   .panel__usage-seg :global(.cfg-seg__btn) { padding: 4px 10px; font-size: 11.5px; }
   .panel__check {
@@ -645,13 +615,6 @@
 
   @media (max-width: 600px) {
     .panel__body { padding: 12px 10px 60px; gap: 12px; }
-    .panel__head { padding: 10px 12px 8px; gap: 8px; }
-    .panel__title { font-size: 14px; }
-    .panel__blurb { display: none; }
-    .panel__actions {
-      flex-basis: 100%;
-      gap: 8px;
-    }
     .panel__usage-seg :global(.cfg-seg__btn) {
       padding: 4px 8px;
       font-size: 10.5px;
