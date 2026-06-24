@@ -381,6 +381,17 @@
       {#if activeSection === 'colors'}
 
       <section class="pv__block">
+        <p class="pv__eyebrow">Applied to components</p>
+        <div class="pv__btns">
+          <button class="pv__btn pv__btn--primary">Primary</button>
+          <button class="pv__btn pv__btn--secondary">Secondary</button>
+          <button class="pv__btn pv__btn--action">Action</button>
+          <button class="pv__btn pv__btn--outline">Outline</button>
+          <button class="pv__btn pv__btn--ghost">Ghost</button>
+        </div>
+      </section>
+
+      <section class="pv__block">
         <p class="pv__eyebrow">Brand colors + on-color text (auto WCAG black/white)</p>
         <div class="pv__swatches">
           {#each brand as c (c)}
