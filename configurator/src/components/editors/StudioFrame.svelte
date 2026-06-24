@@ -10,15 +10,21 @@
     <p>{eyebrow}</p>
     <h3>{title}</h3>
     {#if description}<span>{description}</span>{/if}
+    <div class="studio__steps" aria-label="Studio workflow">
+      <b>01 Preview</b><b>02 Tune</b><b>03 Verify</b>
+    </div>
   </div>
   <div class="studio__surface">{@render children?.()}</div>
 </section>
 
 <style>
-  .studio { display:grid; grid-template-columns:minmax(180px,.42fr) minmax(0,1fr); gap:18px; padding:18px; border:1px solid var(--cfg-border); border-radius:var(--cfg-radius-l); background:linear-gradient(135deg, color-mix(in oklab, var(--cfg-accent) 9%, transparent), transparent 45%), var(--cfg-surface); overflow:hidden; }
-  .studio__copy p { margin:0 0 6px; color:var(--cfg-accent); font-size:11px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
-  .studio__copy h3 { margin:0; font-size:24px; line-height:1.05; }
-  .studio__copy span { display:block; margin-top:8px; color:var(--cfg-text-muted); font-size:13px; }
-  .studio__surface { min-width:0; }
-  @media(max-width:820px){ .studio { grid-template-columns:1fr; } }
+  .studio { display: grid; grid-template-columns: minmax(190px, .36fr) minmax(0, 1fr); gap: 18px; padding: 18px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-l); background: radial-gradient(circle at 0 0, color-mix(in oklab, var(--cfg-accent) 16%, transparent), transparent 34%), linear-gradient(135deg, color-mix(in oklab, var(--cfg-accent) 8%, transparent), transparent 48%), var(--cfg-surface); overflow: hidden; }
+  .studio__copy { position: sticky; top: 10px; align-self: start; display: grid; gap: 10px; }
+  .studio__copy p { margin: 0; color: var(--cfg-accent); font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+  .studio__copy h3 { margin: 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.02; letter-spacing: -.03em; }
+  .studio__copy span { display: block; color: var(--cfg-text-muted); font-size: 13px; line-height: 1.45; }
+  .studio__steps { display: grid; gap: 6px; margin-top: 6px; }
+  .studio__steps b { padding: 7px 9px; border: 1px solid var(--cfg-border); border-radius: 999px; background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+  .studio__surface { min-width: 0; }
+  @media (max-width: 820px) { .studio { grid-template-columns: 1fr; padding: 12px; } .studio__copy { position: static; } .studio__steps { grid-template-columns: repeat(3, 1fr); } }
 </style>

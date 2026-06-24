@@ -1,10 +1,31 @@
 <script>
-  import { tokenByName } from '../../lib/model.js';
+  import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
-  import FriendlyControl from '../FriendlyControl.svelte';
-  const steps=['2xs','xs','s','m','l','xl','2xl','3xl'];
-  const names=['--sf-section-pad','--sf-content-gap','--sf-gutter','--sf-component-pad','--sf-space-scale','--sf-section-scale'];
-  const tokens = names.map((name) => tokenByName.get(name)).filter(Boolean);
+  import StudioControls from './StudioControls.svelte';
+  const steps = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
+  const groups = resolveStudioGroups(STUDIO_GROUPS.spacing);
 </script>
-<StudioFrame title="Spacing Studio" description="Ruler, rhythm i layout preview zamiast samych wartości liczbowych."><div class="spacing-studio"><div class="ruler">{#each steps as s,i}<div><span style:width={`${18+i*18}px`}></span><b>{s}</b></div>{/each}</div><div class="cards"><article></article><article></article><article></article></div><div class="controls">{#each tokens as token (token.name)}<FriendlyControl {token} showToken />{/each}</div></div></StudioFrame>
-<style>.spacing-studio{display:grid;gap:12px}.ruler{display:grid;gap:8px}.ruler div{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:10px}.ruler span{display:block;height:12px;border-radius:999px;background:var(--cfg-accent-strong)}.ruler b{font-size:11px;text-transform:uppercase;color:var(--cfg-text-muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sf-content-gap,1rem)}.cards article{min-height:72px;border:1px solid var(--cfg-border);border-radius:var(--cfg-radius);background:var(--cfg-bg-2);padding:var(--sf-component-pad,1rem)}.controls{border:1px solid var(--cfg-border);border-radius:var(--cfg-radius);overflow:clip}@media(max-width:640px){.cards{grid-template-columns:1fr}}</style>
+
+<StudioFrame title="Spacing Studio" description="Ruler, rhythm i layout preview zamiast samych wartości liczbowych.">
+  <div class="spacing-studio">
+    <section class="canvas">
+      <div class="ruler">{#each steps as s, i}<div><span style:width={`${18 + i * 18}px`}></span><b>{s}</b></div>{/each}</div>
+      <div class="cards"><article><b>Card</b><p>Component padding</p></article><article><b>Stack</b><p>Content rhythm</p></article><article><b>Section</b><p>Large vertical space</p></article></div>
+    </section>
+    <StudioControls {groups} />
+  </div>
+</StudioFrame>
+
+<style>
+  .spacing-studio { display: grid; gap: 12px; }
+  .canvas { display: grid; grid-template-columns: minmax(180px, .7fr) 1fr; gap: 14px; padding: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-bg-2); }
+  .ruler { display: grid; gap: 8px; align-content: center; }
+  .ruler div { display: grid; grid-template-columns: 1fr 42px; align-items: center; gap: 10px; }
+  .ruler span { display: block; height: 12px; border-radius: 999px; background: var(--cfg-accent-strong); justify-self: end; }
+  .ruler b { font-size: 11px; text-transform: uppercase; color: var(--cfg-text-muted); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sf-content-gap, 1rem); }
+  .cards article { min-height: 112px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-surface); padding: var(--sf-component-pad, 1rem); }
+  .cards b, .cards p { margin: 0; }
+  .cards p { margin-top: var(--sf-content-gap, .75rem); color: var(--cfg-text-muted); }
+  @media (max-width: 760px) { .canvas, .cards { grid-template-columns: 1fr; } }
+</style>

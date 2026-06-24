@@ -25,6 +25,14 @@
     <p class="ctrl-preview__wrap" style:text-wrap={active || 'balance'}>A heading wraps cleanly in a narrow preview.</p>
   {:else if type === 'opacity'}
     <div class="ctrl-preview__opacity"><span style:opacity={active || '.5'}></span></div>
+  {:else if type === 'gradient'}
+    <div class="ctrl-preview__gradient" style:--scrim={active}></div>
+  {:else if type === 'border'}
+    <div class="ctrl-preview__border" style:border-style={active || 'solid'}></div>
+  {:else if type === 'media'}
+    <div class="ctrl-preview__media"><span style:object-fit={active || 'cover'}></span></div>
+  {:else if type === 'scale'}
+    <div class="ctrl-preview__scale"><span style:transform={`scale(${active || 1})`}></span></div>
   {:else}
     <div class="ctrl-preview__spacing"><span style:inline-size={active || '40%'}></span></div>
   {/if}
@@ -43,6 +51,12 @@
   .ctrl-preview__lines, .ctrl-preview__wrap { margin: 0; font-size: 12px; max-inline-size: 190px; }
   .ctrl-preview__wrap { font-size: 18px; font-weight: 800; }
   .ctrl-preview__opacity span { display:block; block-size: 34px; border-radius: 8px; background: var(--cfg-accent-strong); }
+  .ctrl-preview__gradient { min-height: 38px; border-radius: 9px; background: linear-gradient(var(--scrim, to top), oklch(0 0 0 / .62), transparent), linear-gradient(135deg, var(--cfg-accent), var(--cfg-accent-soft)); }
+  .ctrl-preview__border { min-height: 36px; border: 3px solid var(--cfg-accent-strong); border-radius: 10px; background: var(--cfg-surface); }
+  .ctrl-preview__media { min-height: 38px; border-radius: 10px; overflow: hidden; background: var(--cfg-surface-3); }
+  .ctrl-preview__media span { display:block; inline-size:100%; block-size:42px; background: radial-gradient(circle at 30% 25%, var(--cfg-accent), transparent 28%), linear-gradient(135deg, var(--cfg-accent-soft), var(--cfg-surface-3)); }
+  .ctrl-preview__scale { min-height: 38px; display:grid; place-items:center; }
+  .ctrl-preview__scale span { inline-size:30px; block-size:30px; border-radius:8px; background:var(--cfg-accent-strong); }
   .ctrl-preview__spacing { min-height: 34px; display:flex; align-items:center; }
   .ctrl-preview__spacing span { display:block; block-size: 14px; max-inline-size:100%; min-inline-size:12px; border-radius:999px; background: var(--cfg-accent-strong); }
   @keyframes cp-move { to { transform: translateX(min(120px, 35vw)); } }

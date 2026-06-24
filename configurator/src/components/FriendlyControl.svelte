@@ -1,5 +1,5 @@
 <script>
-  import { overrides, clearOverride } from '../lib/store.svelte.js';
+  import { overrides, clearOverride, setOverride } from '../lib/store.svelte.js';
   import { controlForToken } from '../lib/controlSchema.js';
   import TokenEditor from './TokenEditor.svelte';
   import ControlPreview from './ControlPreview.svelte';
@@ -8,7 +8,12 @@
   const title = $derived(label || meta.label);
   const desc = $derived(help || meta.description);
   const modified = $derived(overrides[token.name] != null);
+  const activeValue = $derived(overrides[token.name] ?? token.value ?? '');
   let rawOpen = $state(false);
+
+  function onSelect(e) {
+    setOverride(token.name, e.currentTarget.value);
+  }
 </script>
 
 <article class="friendly" class:friendly--modified={modified}>
@@ -20,7 +25,17 @@
     {#if desc}<p>{desc}</p>{/if}
     {#if showToken || rawOpen}<code class="friendly__token">{token.name}</code>{/if}
   </div>
-  <div class="friendly__editor"><TokenEditor {token} /></div>
+  <div class="friendly__editor">
+    {#if meta.control === 'select' && meta.options?.length}
+      <select class="cfg-select friendly__select" value={activeValue} onchange={onSelect} aria-label={token.name}>
+        {#each meta.options as option (option)}
+          <option value={option}>{option}</option>
+        {/each}
+      </select>
+    {:else}
+      <TokenEditor {token} />
+    {/if}
+  </div>
   <ControlPreview {token} type={meta.preview} />
   <div class="friendly__actions">
     <button class="cfg-btn cfg-btn--ghost cfg-btn--sm" type="button" onclick={() => (rawOpen = !rawOpen)}>{rawOpen ? 'Hide token' : 'Show token'}</button>
@@ -39,6 +54,7 @@
   .friendly__copy p { margin: 0; color: var(--cfg-text-muted); font-size: 12px; }
   .friendly__token { color: var(--cfg-text-faint); font-size: 11px; word-break: break-all; }
   .friendly__editor { min-width: 0; }
+  .friendly__select { width: 100%; }
   .friendly__actions { display:flex; gap:6px; justify-content:flex-end; flex-wrap:wrap; }
   @media (max-width: 980px) { .friendly { grid-template-columns: 1fr; align-items: stretch; } .friendly__actions { justify-content:flex-start; } }
 </style>
