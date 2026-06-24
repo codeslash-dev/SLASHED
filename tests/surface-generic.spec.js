@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-// fixture.html loads slashed.full.css (includes tokens.palette.css)
+// fixture.html loads slashed.full.css (palette tokens are core)
 const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
 // Builds a .sf-surface probe with the given --sf-surface-color value and
@@ -58,7 +58,7 @@ function probeSurface(surfaceColor) {
 const SAMPLES = [
   'oklch(0.2 0.1 260)',                 // dark arbitrary color → light text
   'oklch(0.9 0.05 100)',                // light arbitrary color → dark text
-  'var(--sf-color-primary-300)',        // palette shade (optional/tokens.palette.css)
+  'var(--sf-color-primary-300)',        // palette shade (core/tokens.css)
 ];
 
 test.describe('Generic surface (.sf-surface)', () => {

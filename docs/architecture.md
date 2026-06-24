@@ -47,7 +47,6 @@ core/
   accessibility.css            slashed.accessibility
   print.css                    slashed.print
 optional/
-  tokens.palette.css      slashed.tokens  (numeric tints/shades + alpha variants (-a5/-a10/-a30/-a50/-a80) for brand colors; ships in optimal+ bundles)
   tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
@@ -139,7 +138,7 @@ Two conceptually-macro classes stay in `layout.css` in 0.x for compatibility:
 
 ## Layers
 
-**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/alpha tokens including ghost/subtle/muted), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), `tokens.palette.css` (optional numeric tints/shades + alpha variants for brand colors), `tokens.components.css` (optional component-level tokens).
+**slashed.tokens** — custom properties only, `:root` only. No element rules. All values consumers might override are tokens. Spread across multiple files: `tokens.css` (core — brand/status/semantic/numeric palette/alpha tokens), `tokens.layout.css` (layout primitives), `tokens.macros.css` (macros), and `tokens.components.css` (optional component-level tokens).
 
 **slashed.reset** — browser normalization. Minimal `var()` usage (only with hardcoded fallbacks for critical layout values like `scroll-padding-top`).
 
@@ -223,7 +222,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
   Read `--variant` as "a flavour of the token to its left" and `-variant` as
   "a name-derived shade of the role to its left". Brand hover/active slots
   (`--sf-color-{primary,...}--hover`, `--hover/--active`) live in
-  `optional/tokens.palette.css` — they map interaction states to palette shades.
+  `core/tokens.css` — they map interaction states to palette shades.
 - **Stability tiers.** Token-file headers classify every token into one of
   three SemVer tiers: **PUBLIC** (everyday knobs — brand/status sources,
   resolved semantic tokens, scales, BEM consumer aliases), **PUBLIC-ADVANCED**
@@ -374,7 +373,7 @@ so `bundle.config.json` lists ten outputs in total — are built by
 | Bundle | Adds to essential |
 |---|---|
 | `slashed.essential.css` | — (all `core/`) |
-| `slashed.optimal.css` | `tokens.palette` + `forms` + `legacy` |
+| `slashed.optimal.css` | `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
@@ -431,7 +430,7 @@ Deliberate behaviours, documented so they aren't mistaken for bugs.
   upgrade path is CSS `contrast-color()` once it has broad support.
 - **Smooth scroll is always enabled.** `core/base.css` sets `scroll-behavior: smooth` on `html`. There is no focus-based override — keyboard users navigate with arrow keys and smooth scroll does not interfere. To suppress per-element, use `scroll-behavior: auto` locally.
 - **The `base` palette ramp is V-shaped, not monotonic.** In
-  `optional/tokens.palette.css`, `base-*` mixes `--sf-color-text` *into* base for
+  `core/tokens.css`, `base-*` mixes `--sf-color-text` *into* base for
   tints and base *into* text for shades, so it is surface-relative, not a perceptual
   lightness ramp. `base-600` can be lighter than `base-400`. This is intentional and
   differs from the conventional monotonic lightness ramp.

@@ -494,7 +494,7 @@
       {#if activeSection === 'palette'}
 
       <section class="pv__block">
-        <p class="pv__eyebrow">primary 50–950 numeric scale <small style="font-weight:400;text-transform:none">(tokens.palette.css)</small></p>
+        <p class="pv__eyebrow">primary 50–950 numeric scale <small style="font-weight:400;text-transform:none">(core/tokens.css)</small></p>
         <div class="pv__pal-row">
           {#each paletteSteps as s (s)}
             <div class="pv__pal" style="background:var(--sf-color-primary-{s});color:{parseInt(s)>=500?'#fff':'var(--sf-color-primary-900)'}"><span>{s}</span></div>

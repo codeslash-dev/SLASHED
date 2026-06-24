@@ -18,9 +18,8 @@
       "output": "slashed.optimal.css",
       "min": "slashed.optimal.min.css",
       "cdn": "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css",
-      "fileCount": 16,
+      "fileCount": 15,
       "optionalModules": [
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/legacy.css"
       ]
@@ -30,9 +29,8 @@
       "output": "slashed.optimal-utilities.css",
       "min": "slashed.optimal-utilities.min.css",
       "cdn": "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal-utilities.min.css",
-      "fileCount": 17,
+      "fileCount": 16,
       "optionalModules": [
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/utilities.css",
         "optional/legacy.css"
@@ -43,9 +41,8 @@
       "output": "slashed.optimal-components.css",
       "min": "slashed.optimal-components.min.css",
       "cdn": "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal-components.min.css",
-      "fileCount": 18,
+      "fileCount": 17,
       "optionalModules": [
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -57,9 +54,8 @@
       "output": "slashed.full.css",
       "min": "slashed.full.min.css",
       "cdn": "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.full.min.css",
-      "fileCount": 19,
+      "fileCount": 18,
       "optionalModules": [
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",

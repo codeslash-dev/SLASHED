@@ -6,7 +6,6 @@
       "core/tokens.css",
       "core/tokens.layout.css",
       "core/tokens.macros.css",
-      "optional/tokens.palette.css",
       "optional/tokens.components.css"
     ],
     "class_sources": [
@@ -51,13 +50,12 @@
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
-        "Core tokens": 502,
+        "Core tokens": 608,
         "Layout primitives": 127,
         "Layout tokens": 49,
         "Macro classes": 36,
         "Macro tokens": 23,
         "Motion / animation": 15,
-        "Palette tokens": 106,
         "Print": 4,
         "State classes": 40,
         "Theme example": 1,
@@ -1916,8 +1914,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Very light action shade. Hover fills on white surfaces, badge backgrounds.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))",
@@ -1926,12 +1924,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1944,8 +1943,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Light action shade. Subtle fills and outlined badge backgrounds.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))",
@@ -1954,12 +1953,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1972,8 +1972,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Light-mid action shade. Borders on light backgrounds, low-emphasis fills.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))",
@@ -1982,12 +1982,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2000,8 +2001,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Mid-light action shade. Disabled state fills, decorative accents.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))",
@@ -2010,12 +2011,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2028,8 +2030,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Lightest action tint. Background fill for subtle action-tinted surfaces.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))",
@@ -2038,12 +2040,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2056,8 +2059,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Mid action shade — the 'pure' hue. Accessible on both light and dark backgrounds.",
       "value": "var(--sf-color-action)",
@@ -2066,12 +2069,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2084,8 +2088,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Mid-dark action shade. Text on light surfaces, icon fills.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))",
@@ -2094,12 +2098,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2112,8 +2117,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Dark action shade. Strong text and icon fills on light backgrounds.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))",
@@ -2122,12 +2127,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2140,8 +2146,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Very dark action shade. High-contrast text on white.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))",
@@ -2150,12 +2156,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2168,8 +2175,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Near-black action shade. Extreme contrast on white surfaces.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))",
@@ -2178,12 +2185,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2196,8 +2204,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "Darkest action tint. Near-black for dark-theme surface accents.",
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))",
@@ -2206,12 +2214,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2224,8 +2233,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "10% opacity action tint. Subtle hover or selected-row background.",
       "value": "oklch(from var(--sf-color-action) l c h / 0.10)",
@@ -2234,12 +2243,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2252,8 +2262,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "30% opacity action tint.",
       "value": "oklch(from var(--sf-color-action) l c h / 0.30)",
@@ -2262,12 +2272,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2280,8 +2291,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "5% opacity action tint. Barely-there hover highlight.",
       "value": "oklch(from var(--sf-color-action) l c h / 0.05)",
@@ -2290,12 +2301,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2308,8 +2320,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "50% opacity action tint. Mid-transparency badge or overlay.",
       "value": "oklch(from var(--sf-color-action) l c h / 0.50)",
@@ -2318,12 +2330,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2336,8 +2349,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "action",
       "description": "80% opacity action tint.",
       "value": "oklch(from var(--sf-color-action) l c h / 0.80)",
@@ -2346,12 +2359,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2377,8 +2391,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2398,8 +2411,8 @@
       "area": "core",
       "group": "action",
       "description": "Near-transparent action tint for ghost-button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.05)",
-      "aliasOf": null,
+      "value": "var(--sf-color-action-a5)",
+      "aliasOf": "--sf-color-action-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -2436,8 +2449,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2457,8 +2469,8 @@
       "area": "core",
       "group": "action",
       "description": "Medium action fill — outlined button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.30)",
-      "aliasOf": null,
+      "value": "var(--sf-color-action-a30)",
+      "aliasOf": "--sf-color-action-a30",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -2544,8 +2556,8 @@
       "area": "core",
       "group": "action",
       "description": "Lightest action tint — selected rows, active nav, chips.",
-      "value": "oklch(from var(--sf-color-action) l c h / 0.10)",
-      "aliasOf": null,
+      "value": "var(--sf-color-action-a10)",
+      "aliasOf": "--sf-color-action-a10",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -2582,8 +2594,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2612,8 +2623,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2642,8 +2652,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2672,8 +2681,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -2776,8 +2784,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Very light base shade. Hover fills, badge backgrounds.",
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))",
@@ -2786,12 +2794,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2804,8 +2813,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Light base shade.",
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))",
@@ -2814,12 +2823,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2832,8 +2842,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Light-mid base shade. Borders on light backgrounds.",
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))",
@@ -2842,12 +2852,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2860,8 +2871,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Mid-light base shade. Disabled fills.",
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))",
@@ -2870,12 +2881,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2888,8 +2900,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Lightest base tint.",
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))",
@@ -2898,12 +2910,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2916,8 +2929,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Mid base shade — the 'pure' hue.",
       "value": "var(--sf-color-base)",
@@ -2926,12 +2939,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2944,8 +2958,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Mid-dark base shade. Text on light surfaces.",
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))",
@@ -2954,12 +2968,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2972,8 +2987,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Dark base shade.",
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))",
@@ -2982,12 +2997,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3000,8 +3016,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Very dark base shade.",
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))",
@@ -3010,12 +3026,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3028,8 +3045,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Near-black base shade.",
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))",
@@ -3038,12 +3055,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3056,8 +3074,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "Darkest base tint.",
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))",
@@ -3066,12 +3084,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3084,8 +3103,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "10% opacity base tint.",
       "value": "oklch(from var(--sf-color-base) l c h / 0.10)",
@@ -3094,12 +3113,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3112,8 +3132,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "30% opacity base tint.",
       "value": "oklch(from var(--sf-color-base) l c h / 0.30)",
@@ -3122,12 +3142,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3140,8 +3161,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "5% opacity base tint.",
       "value": "oklch(from var(--sf-color-base) l c h / 0.05)",
@@ -3150,12 +3171,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3168,8 +3190,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "50% opacity base tint.",
       "value": "oklch(from var(--sf-color-base) l c h / 0.50)",
@@ -3178,12 +3200,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3196,8 +3219,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "base",
       "description": "80% opacity base tint.",
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)",
@@ -3206,12 +3229,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3237,8 +3261,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3258,8 +3281,8 @@
       "area": "core",
       "group": "base",
       "description": "Near-transparent base tint for ghost-button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.05)",
-      "aliasOf": null,
+      "value": "var(--sf-color-base-a5)",
+      "aliasOf": "--sf-color-base-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3296,8 +3319,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3317,8 +3339,8 @@
       "area": "core",
       "group": "base",
       "description": "Medium base fill.",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.30)",
-      "aliasOf": null,
+      "value": "var(--sf-color-base-a30)",
+      "aliasOf": "--sf-color-base-a30",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3404,8 +3426,8 @@
       "area": "core",
       "group": "base",
       "description": "Lightest base tint.",
-      "value": "oklch(from var(--sf-color-base) l c h / 0.10)",
-      "aliasOf": null,
+      "value": "var(--sf-color-base-a10)",
+      "aliasOf": "--sf-color-base-a10",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3442,8 +3464,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3472,8 +3493,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3502,8 +3522,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -3532,8 +3551,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -4767,8 +4785,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Very light neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))",
@@ -4777,12 +4795,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4795,8 +4814,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Light neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))",
@@ -4805,12 +4824,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4823,8 +4843,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Light-mid neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))",
@@ -4833,12 +4853,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4851,8 +4872,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Mid-light neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))",
@@ -4861,12 +4882,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4879,8 +4901,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Lightest neutral tint.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))",
@@ -4889,12 +4911,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4907,8 +4930,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Mid neutral shade — the 'pure' hue.",
       "value": "var(--sf-color-neutral)",
@@ -4917,12 +4940,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4935,8 +4959,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Mid-dark neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))",
@@ -4945,12 +4969,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4963,8 +4988,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Dark neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))",
@@ -4973,12 +4998,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4991,8 +5017,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Very dark neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))",
@@ -5001,12 +5027,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5019,8 +5046,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Near-black neutral shade.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))",
@@ -5029,12 +5056,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5047,8 +5075,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "Darkest neutral tint.",
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))",
@@ -5057,12 +5085,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5075,8 +5104,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "10% opacity neutral tint.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)",
@@ -5085,12 +5114,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5103,8 +5133,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "30% opacity neutral tint.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)",
@@ -5113,12 +5143,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5131,8 +5162,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "5% opacity neutral tint.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)",
@@ -5141,12 +5172,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5159,8 +5191,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "50% opacity neutral tint.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.50)",
@@ -5169,12 +5201,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5187,8 +5220,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "neutral",
       "description": "80% opacity neutral tint.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.80)",
@@ -5197,12 +5230,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5228,8 +5262,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5249,8 +5282,8 @@
       "area": "core",
       "group": "neutral",
       "description": "Near-transparent neutral tint for ghost-button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)",
-      "aliasOf": null,
+      "value": "var(--sf-color-neutral-a5)",
+      "aliasOf": "--sf-color-neutral-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -5287,8 +5320,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5308,8 +5340,8 @@
       "area": "core",
       "group": "neutral",
       "description": "Muted neutral fill for low-emphasis contexts.",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)",
-      "aliasOf": null,
+      "value": "var(--sf-color-neutral-a30)",
+      "aliasOf": "--sf-color-neutral-a30",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -5395,8 +5427,8 @@
       "area": "core",
       "group": "neutral",
       "description": "Lightest neutral semantic tint.",
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)",
-      "aliasOf": null,
+      "value": "var(--sf-color-neutral-a10)",
+      "aliasOf": "--sf-color-neutral-a10",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -5433,8 +5465,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5463,8 +5494,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5493,8 +5523,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5523,8 +5552,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -5656,8 +5684,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Very light primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))",
@@ -5666,12 +5694,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5684,8 +5713,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Light primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))",
@@ -5694,12 +5723,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5712,8 +5742,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Light-mid primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))",
@@ -5722,12 +5752,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5740,8 +5771,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Mid-light primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))",
@@ -5750,12 +5781,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5768,8 +5800,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Lightest primary tint.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))",
@@ -5778,12 +5810,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5796,8 +5829,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Mid primary shade — the 'pure' hue.",
       "value": "var(--sf-color-primary)",
@@ -5806,12 +5839,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5824,8 +5858,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Mid-dark primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))",
@@ -5834,12 +5868,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5852,8 +5887,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Dark primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))",
@@ -5862,12 +5897,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5880,8 +5916,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Very dark primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))",
@@ -5890,12 +5926,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5908,8 +5945,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Near-black primary shade.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))",
@@ -5918,12 +5955,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5936,8 +5974,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "Darkest primary tint.",
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))",
@@ -5946,12 +5984,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5964,8 +6003,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "10% opacity primary tint.",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.10)",
@@ -5974,12 +6013,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5992,8 +6032,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "30% opacity primary tint.",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.30)",
@@ -6002,12 +6042,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6020,8 +6061,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "5% opacity primary tint.",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.05)",
@@ -6030,12 +6071,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6048,8 +6090,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "50% opacity primary tint.",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.50)",
@@ -6058,12 +6100,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6076,8 +6119,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "primary",
       "description": "80% opacity primary tint.",
       "value": "oklch(from var(--sf-color-primary) l c h / 0.80)",
@@ -6086,12 +6129,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6117,8 +6161,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6138,8 +6181,8 @@
       "area": "core",
       "group": "primary",
       "description": "Near-transparent primary tint for ghost-button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.05)",
-      "aliasOf": null,
+      "value": "var(--sf-color-primary-a5)",
+      "aliasOf": "--sf-color-primary-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6176,8 +6219,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6197,8 +6239,8 @@
       "area": "core",
       "group": "primary",
       "description": "Muted primary fill.",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.30)",
-      "aliasOf": null,
+      "value": "var(--sf-color-primary-a30)",
+      "aliasOf": "--sf-color-primary-a30",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6284,8 +6326,8 @@
       "area": "core",
       "group": "primary",
       "description": "Lightest primary semantic tint.",
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.10)",
-      "aliasOf": null,
+      "value": "var(--sf-color-primary-a10)",
+      "aliasOf": "--sf-color-primary-a10",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6322,8 +6364,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6352,8 +6393,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6382,8 +6422,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6412,8 +6451,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -6574,8 +6612,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Very light secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))",
@@ -6584,12 +6622,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6602,8 +6641,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Light secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))",
@@ -6612,12 +6651,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6630,8 +6670,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Light-mid secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))",
@@ -6640,12 +6680,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6658,8 +6699,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Mid-light secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))",
@@ -6668,12 +6709,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6686,8 +6728,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Lightest secondary tint.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))",
@@ -6696,12 +6738,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6714,8 +6757,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Mid secondary shade — the 'pure' hue.",
       "value": "var(--sf-color-secondary)",
@@ -6724,12 +6767,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6742,8 +6786,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Mid-dark secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))",
@@ -6752,12 +6796,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6770,8 +6815,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Dark secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))",
@@ -6780,12 +6825,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6798,8 +6844,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Very dark secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))",
@@ -6808,12 +6854,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6826,8 +6873,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Near-black secondary shade.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))",
@@ -6836,12 +6883,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6854,8 +6902,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "Darkest secondary tint.",
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))",
@@ -6864,12 +6912,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6882,8 +6931,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "10% opacity secondary tint.",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)",
@@ -6892,12 +6941,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6910,8 +6960,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "30% opacity secondary tint.",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)",
@@ -6920,12 +6970,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6938,8 +6989,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "5% opacity secondary tint.",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)",
@@ -6948,12 +6999,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6966,8 +7018,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "50% opacity secondary tint.",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.50)",
@@ -6976,12 +7028,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6994,8 +7047,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "secondary",
       "description": "80% opacity secondary tint.",
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.80)",
@@ -7004,12 +7057,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7035,8 +7089,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7056,8 +7109,8 @@
       "area": "core",
       "group": "secondary",
       "description": "Near-transparent secondary tint for ghost-button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)",
-      "aliasOf": null,
+      "value": "var(--sf-color-secondary-a5)",
+      "aliasOf": "--sf-color-secondary-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7094,8 +7147,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7115,8 +7167,8 @@
       "area": "core",
       "group": "secondary",
       "description": "Muted secondary fill.",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)",
-      "aliasOf": null,
+      "value": "var(--sf-color-secondary-a30)",
+      "aliasOf": "--sf-color-secondary-a30",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7202,8 +7254,8 @@
       "area": "core",
       "group": "secondary",
       "description": "Lightest secondary semantic tint.",
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)",
-      "aliasOf": null,
+      "value": "var(--sf-color-secondary-a10)",
+      "aliasOf": "--sf-color-secondary-a10",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7240,8 +7292,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7270,8 +7321,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7300,8 +7350,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7330,8 +7379,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -7695,8 +7743,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Very light tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))",
@@ -7705,12 +7753,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7723,8 +7772,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Light tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))",
@@ -7733,12 +7782,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7751,8 +7801,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Light-mid tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))",
@@ -7761,12 +7811,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7779,8 +7830,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Mid-light tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))",
@@ -7789,12 +7840,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7807,8 +7859,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Lightest tertiary tint.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))",
@@ -7817,12 +7869,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7835,8 +7888,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Mid tertiary shade — the 'pure' hue.",
       "value": "var(--sf-color-tertiary)",
@@ -7845,12 +7898,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7863,8 +7917,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Mid-dark tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))",
@@ -7873,12 +7927,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7891,8 +7946,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Dark tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))",
@@ -7901,12 +7956,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7919,8 +7975,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Very dark tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))",
@@ -7929,12 +7985,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7947,8 +8004,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Near-black tertiary shade.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))",
@@ -7957,12 +8014,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7975,8 +8033,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "Darkest tertiary tint.",
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))",
@@ -7985,12 +8043,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8003,8 +8062,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "10% opacity tertiary tint.",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)",
@@ -8013,12 +8072,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8031,8 +8091,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "30% opacity tertiary tint.",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)",
@@ -8041,12 +8101,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8059,8 +8120,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "5% opacity tertiary tint.",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)",
@@ -8069,12 +8130,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8087,8 +8149,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "50% opacity tertiary tint.",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.50)",
@@ -8097,12 +8159,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8115,8 +8178,8 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "namespace": "color",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "tertiary",
       "description": "80% opacity tertiary tint.",
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.80)",
@@ -8125,12 +8188,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8156,8 +8220,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8177,8 +8240,8 @@
       "area": "core",
       "group": "tertiary",
       "description": "Near-transparent tertiary tint for ghost-button hover backgrounds.",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)",
-      "aliasOf": null,
+      "value": "var(--sf-color-tertiary-a5)",
+      "aliasOf": "--sf-color-tertiary-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8215,8 +8278,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8236,8 +8298,8 @@
       "area": "core",
       "group": "tertiary",
       "description": "Muted tertiary fill.",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)",
-      "aliasOf": null,
+      "value": "var(--sf-color-tertiary-a30)",
+      "aliasOf": "--sf-color-tertiary-a30",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8323,8 +8385,8 @@
       "area": "core",
       "group": "tertiary",
       "description": "Lightest tertiary semantic tint.",
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)",
-      "aliasOf": null,
+      "value": "var(--sf-color-tertiary-a10)",
+      "aliasOf": "--sf-color-tertiary-a10",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -8361,8 +8423,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8391,8 +8452,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8421,8 +8481,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -8451,8 +8510,7 @@
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
         "essential",
@@ -13998,8 +14056,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 100. Controls blend depth toward the surface. Default 8%.",
       "value": "8%",
@@ -14008,12 +14066,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14026,8 +14085,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 200. Controls blend depth toward the surface. Default 20%.",
       "value": "20%",
@@ -14036,12 +14095,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14054,8 +14114,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 300. Controls blend depth toward the surface. Default 40%.",
       "value": "40%",
@@ -14064,12 +14124,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14082,8 +14143,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 400 (near-mid tint). Controls blend depth. Default 65%.",
       "value": "65%",
@@ -14092,12 +14153,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14110,8 +14172,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for the lightest palette step (50). Controls how far step 50 blends toward the surface. Default 4%.",
       "value": "4%",
@@ -14120,12 +14182,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14138,8 +14201,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 600 (near-mid shade). Controls blend depth toward the text color. Default 82%.",
       "value": "82%",
@@ -14148,12 +14211,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14166,8 +14230,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 700. Controls blend depth toward the text color. Default 62%.",
       "value": "62%",
@@ -14176,12 +14240,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14194,8 +14259,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 800 (dark shade). Controls blend depth toward text. Default 38%.",
       "value": "38%",
@@ -14204,12 +14269,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14222,8 +14288,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for palette step 900 (very dark shade). Controls blend depth toward text. Default 18%.",
       "value": "18%",
@@ -14232,12 +14298,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14250,8 +14317,8 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "palette",
-      "category": "Palette tokens",
-      "area": "palette",
+      "category": "Core tokens",
+      "area": "core",
       "group": "Palette shade mix percentages",
       "description": "Color-mix percentage for the darkest palette step (950). Controls how far step 950 blends toward the text color. Default 8%.",
       "value": "8%",
@@ -14260,12 +14327,13 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
-      "optional": true,
+      "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "bundles": [
+        "essential",
         "full",
         "optimal",
         "optimal-components",

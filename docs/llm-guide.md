@@ -58,7 +58,6 @@ slashed/
 │   ├── motion.css           # @keyframes for animations + view-transition
 │   └── print.css            # Print styles
 └── optional/
-    ├── tokens.palette.css    # Extended 50–950 numeric palette + alpha variants
     ├── tokens.components.css # Component tokens (field, button…)
     ├── forms.css             # Form styles
     ├── utilities.css         # Utility classes
@@ -66,7 +65,7 @@ slashed/
     └── overrides-example.css / theme-example.css / config-example.css
 ```
 
-**Optional files** (`optional/`) are loaded only when needed. `tokens.palette.css` adds the full numeric scale; without it you have semantic aliases (`-superlight`, `-xlight`, etc.).
+**Optional files** (`optional/`) are loaded only when needed. The full numeric color scale lives in `core/tokens.css` alongside the semantic aliases (`-superlight`, `-xlight`, etc.).
 
 > **Important:** `tokens.macros.css` lives in `core/`, not `optional/`.
 
@@ -387,9 +386,9 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 --sf-shadow-color           /* Computed shadow color — rarely override */
 ```
 
-### 5.14 Optional numeric palette (tokens.palette.css)
+### 5.14 Core numeric palette
 
-Loading `optional/tokens.palette.css` adds 11 steps for each of the 6 brand families:
+`core/tokens.css` ships 11 steps for each of the 6 brand families:
 
 ```css
 --sf-color-{family}-50      /* Lightest */
@@ -1404,5 +1403,5 @@ a:visited { color: var(--sf-color-link--visited); }
 | Image ratio | `aspect-ratio: var(--sf-ratio-video)` |
 | Tabular numbers / prices | `font-variant-numeric: var(--sf-font-numeric)` |
 | Notch / home indicator padding | `padding-top: var(--sf-safe-top)` |
-| Full numeric color ramp | `tokens.palette.css` → `--sf-color-primary-500` |
+| Full numeric color ramp | `core/tokens.css` → `--sf-color-primary-500` |
 | Reshape fluid scale | change `--sf-text-ratio-max` / `--sf-space-base-max` |

@@ -27,7 +27,7 @@ const BUNDLE_META = {
   },
   optimal: {
     label: 'Optimal',
-    tagline: 'Essential + colour palette, form styling and legacy shims. Recommended default.',
+    tagline: 'Essential + form styling and legacy shims. Recommended default.',
   },
   'optimal-utilities': {
     label: 'Optimal + Utilities',
@@ -39,13 +39,12 @@ const BUNDLE_META = {
   },
   full: {
     label: 'Full',
-    tagline: 'Everything — palette, forms, components, utilities and legacy shims.',
+    tagline: 'Everything — forms, components, utilities and legacy shims.',
   },
 };
 
 /** What each optional module adds, keyed by its source path. */
 const MODULE_META = {
-  'optional/tokens.palette.css': 'Numeric colour scales (50–950) + alpha steps per brand family',
   'optional/forms.css': 'Classless styling for native form controls (input, select, checkbox…)',
   'optional/tokens.components.css': 'Tokens that drive the optional component classes',
   'optional/components.css': 'Ready-made component classes (.sf-button, .sf-card, .sf-badge…)',
@@ -86,7 +85,7 @@ export function bundleById(id) {
 /**
  * Recommend the leanest bundle that includes every token the user has
  * overridden. Core tokens belong to every bundle, so a core-only config
- * recommends Essential; touching a palette/component/utility token narrows the
+ * recommends Essential; touching a component/utility token narrows the
  * choice automatically. An unknown token (no bundle membership) falls back to
  * the full superset so the config can't silently lose a token at runtime.
  *

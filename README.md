@@ -23,7 +23,7 @@ Use a pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/
 <!-- core only -->
 <link rel="stylesheet" href="slashed.essential.css">
 
-<!-- core + palette + forms + legacy (recommended for most sites) -->
+<!-- core + forms + legacy (recommended for most sites) -->
 <link rel="stylesheet" href="slashed.optimal.css">
 
 <!-- everything, including the (currently empty) component/utility stubs -->
@@ -50,7 +50,6 @@ must load **first** and `optional/legacy.css` must load **last**:
 <link rel="stylesheet" href="core/print.css">
 
 <!-- optional -->
-<link rel="stylesheet" href="optional/tokens.palette.css">
 <link rel="stylesheet" href="optional/forms.css">
 <link rel="stylesheet" href="optional/legacy.css">
 ```
@@ -97,7 +96,7 @@ parent module. All token files share the `slashed.tokens` layer.
 | Bundle | Contents |
 | --- | --- |
 | `slashed.essential.css` | all `core/` |
-| `slashed.optimal.css` | essential + `tokens.palette` + `forms` + `legacy` |
+| `slashed.optimal.css` | essential + `forms` + `legacy` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |

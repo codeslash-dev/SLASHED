@@ -285,7 +285,7 @@ background, an auto-contrast foreground (the same lightness-flip used by
 `--sf-color-text--on-*`), and the full contextual token set:
 
 ```html
-<!-- a palette tint surface (requires optional/tokens.palette.css) -->
+<!-- a palette tint surface -->
 <section class="sf-surface" style="--sf-surface-color: var(--sf-color-primary-100)">
   Text, headings, links and borders re-derive automatically.
 </section>

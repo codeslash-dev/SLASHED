@@ -12,7 +12,6 @@ const FILE_TITLES = {
   'core/tokens.css':               'Core tokens',
   'core/tokens.layout.css':        'Layout tokens',
   'core/tokens.macros.css':        'Macro tokens',
-  'optional/tokens.palette.css':        'Palette tokens',
   'optional/tokens.components.css':     'Component tokens',
 };
 
@@ -63,8 +62,7 @@ let out = `# Token reference
 > run \`npm run docs:tokens\` to refresh. Do not edit by hand.
 
 Every \`--sf-*\` custom property and its default value, grouped by source file.
-Tokens defined in multiple files (e.g. shade aliases overridden in
-\`optional/tokens.palette.css\`) are listed once per section — so this count is
+Tokens defined in multiple files are listed once per section — so this count is
 higher than \`docs/registry.json\` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
 contract and naming conventions (a DEPRECATED tier will be introduced when
