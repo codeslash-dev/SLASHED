@@ -71,8 +71,7 @@ describe('DomainPreview', () => {
       // this assertion protects actual hard-coded sample styles.
       .filter((name) => !name.endsWith('-'));
 
-    expect([...new Set(refs)].sort()).toEqual(
-      [...new Set(refs)].filter((name) => liveTokens.has(name)).sort()
-    );
+    const missing = [...new Set(refs)].filter((name) => !liveTokens.has(name)).sort();
+    expect(missing).toEqual([]);
   });
 });
