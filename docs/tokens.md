@@ -170,7 +170,7 @@ rebrand workflow.
 | `--sf-color-secondary-superlight` | `color-mix(in oklab, var(--sf-color-secondary) 4%, var(--sf-color-surface))` |
 | `--sf-color-secondary-xdark` | `color-mix(in oklab, var(--sf-color-secondary) 38%, var(--sf-color-text))` |
 | `--sf-color-secondary-xlight` | `color-mix(in oklab, var(--sf-color-secondary) 20%, var(--sf-color-surface))` |
-| `--sf-color-selection-bg` | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
+| `--sf-color-selection-bg` | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
 | `--sf-color-selection-text` | `inherit` |
 | `--sf-color-success` | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.3)` |

@@ -167,8 +167,12 @@ Set these 6 `oklch()` tokens — dark mode and all derived palettes are computed
 /* Dark mode — optional override (auto-computed by default) */
 /* Auto formula: clamp(0.65, 0.95 - l*0.5, 0.88) for brand, chroma * 0.9 */
 /* For base: clamp(0.16, 1.18 - l, 0.24) — near-white → near-dark */
---sf-color-primary-source-dark:    oklch(0.715 0.243 264)  /* Optional full override */
-/* similarly: -secondary-source-dark, -tertiary-source-dark, -action-source-dark, -neutral-source-dark, -base-source-dark */
+--sf-color-primary-source-dark:    oklch(0.715 0.243 264)  /* Optional — auto-derived if omitted */
+--sf-color-secondary-source-dark:  /* same — override or omit */
+--sf-color-tertiary-source-dark:   /* same */
+--sf-color-action-source-dark:     /* same */
+--sf-color-neutral-source-dark:    /* same */
+--sf-color-base-source-dark:       /* same — near-dark surface when omitted */
 ```
 
 ### 5.3 Status colors
@@ -180,7 +184,11 @@ Set these 6 `oklch()` tokens — dark mode and all derived palettes are computed
 --sf-color-info-source-light:     oklch(0.48 0.18 235)  /* Blue */
 --sf-color-danger-source-light:   oklch(0.48 0.22 12)   /* Red — destructive actions AND form validation errors */
 
-/* Dark mode — same auto-derivation as brand, or override with -source-dark variants */
+/* Dark mode — optional override (same auto-derivation as brand) */
+--sf-color-success-source-dark:   /* auto-derived if omitted */
+--sf-color-warning-source-dark:   /* auto-derived if omitted */
+--sf-color-info-source-dark:      /* auto-derived if omitted */
+--sf-color-danger-source-dark:    /* auto-derived if omitted */
 ```
 
 ### 5.4 Resolved colors — use these in components

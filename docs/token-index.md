@@ -343,7 +343,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-secondary-superlight` | PUBLIC | consumption | Core + Palette (optional) | `var(--sf-color-secondary-50)` |
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | Core + Palette (optional) | `var(--sf-color-secondary-800)` |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | Core + Palette (optional) | `var(--sf-color-secondary-200)` |
-| `--sf-color-selection-bg` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
+| `--sf-color-selection-bg` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
 | `--sf-color-selection-text` | PUBLIC | knob | Core | `inherit` |
 | `--sf-color-success` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-success-muted` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-success) l c h / 0.3)` |
