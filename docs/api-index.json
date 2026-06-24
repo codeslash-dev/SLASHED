@@ -29,21 +29,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 925,
+      "total": 918,
       "by_type": {
         "class": 232,
-        "token": 693
+        "token": 686
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 869,
+        "PUBLIC": 862,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 471,
-        "knob": 222
+        "consumption": 466,
+        "knob": 220
       },
-      "tokens": 693,
+      "tokens": 686,
       "classes": 232,
       "sf_classes": 183,
       "is_classes": 40,
@@ -51,10 +51,10 @@
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
-        "Core tokens": 509,
-        "Layout primitives": 126,
+        "Core tokens": 502,
+        "Layout primitives": 127,
         "Layout tokens": 49,
-        "Macro classes": 37,
+        "Macro classes": 36,
         "Macro tokens": 23,
         "Motion / animation": 15,
         "Palette tokens": 106,
@@ -1833,7 +1833,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces.",
-      "value": "light-dark(var(--sf-color-action-light), var(--sf-color-action-dark, oklch(from var(--sf-color-action-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "value": "light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -2359,35 +2359,6 @@
       ]
     },
     {
-      "name": "--sf-color-action-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%.",
-      "value": "oklch(0.70 0.198 235)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -2447,35 +2418,6 @@
       ]
     },
     {
-      "name": "--sf-color-action-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "BRAND COLORS (-light source tokens, animatable)",
-      "description": "OKLCH lightness source for the action color. Animate this to smoothly transition between light and dark brand themes.",
-      "value": "oklch(0.50 0.22 235)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -2521,6 +2463,64 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-action-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%.",
+      "value": "oklch(0.70 0.198 235)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-action-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "BRAND COLORS (-source-light source tokens, animatable)",
+      "description": "OKLCH lightness source for the action color. Animate this to smoothly transition between light and dark brand themes.",
+      "value": "oklch(0.50 0.22 235)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -2693,7 +2693,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Secondary interactive color for supporting actions and secondary buttons.",
-      "value": "light-dark(var(--sf-color-base-light), var(--sf-color-base-dark, oklch(from var(--sf-color-base-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))",
+      "value": "light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -3219,35 +3219,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-base.",
-      "value": "oklch(0.22 0.003 250)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -3307,35 +3278,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "BRAND COLORS (-light source tokens, animatable)",
-      "description": "OKLCH lightness source for the base color.",
-      "value": "oklch(0.96 0.006 250)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -3381,6 +3323,64 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-base-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-base.",
+      "value": "oklch(0.22 0.003 250)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-base-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "BRAND COLORS (-source-light source tokens, animatable)",
+      "description": "OKLCH lightness source for the base color.",
+      "value": "oklch(0.96 0.006 250)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -3756,7 +3756,7 @@
       "area": "core",
       "group": "Borders",
       "description": "Default border for dividers and component edges.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3843,7 +3843,7 @@
       "area": "core",
       "group": "Borders",
       "description": "Stronger border for visually prominent edges and active outlines.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3872,7 +3872,7 @@
       "area": "core",
       "group": "Borders",
       "description": "Low-contrast border for subtle separation without strong visual weight.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -3988,65 +3988,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Destructive / danger state color. Used for delete actions, error alerts, and critical warnings.",
-      "value": "light-dark(var(--sf-color-danger-light), var(--sf-color-danger-dark, oklch(from var(--sf-color-danger-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-danger-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-danger.",
-      "value": "oklch(0.71 0.198 12)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-danger-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "STATUS COLORS (-light source tokens)",
-      "description": "OKLCH lightness source for the danger status color.",
-      "value": "oklch(0.48 0.22 12)",
+      "value": "light-dark(var(--sf-color-danger-source-light), var(--sf-color-danger-source-dark, oklch(from var(--sf-color-danger-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -4095,6 +4037,64 @@
       ]
     },
     {
+      "name": "--sf-color-danger-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-danger.",
+      "value": "oklch(0.71 0.198 12)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-danger-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-source-light source tokens)",
+      "description": "OKLCH lightness source for the danger status color (covers destructive actions and form validation errors).",
+      "value": "oklch(0.48 0.22 12)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-danger-strong",
       "type": "token",
       "tier": "PUBLIC",
@@ -4104,7 +4104,7 @@
       "area": "core",
       "group": "Status triplets",
       "description": "High-contrast danger color for alert body text and icons.",
-      "value": "light-dark( oklch(from var(--sf-color-danger-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -4182,180 +4182,6 @@
       ]
     },
     {
-      "name": "--sf-color-error",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Form validation error color. Typically same hue as danger but can be tuned independently.",
-      "value": "light-dark(var(--sf-color-error-light), var(--sf-color-error-dark, oklch(from var(--sf-color-error-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-error-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-error.",
-      "value": "oklch(0.70 0.18 25)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-error-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "STATUS COLORS (-light source tokens)",
-      "description": "OKLCH lightness source for the error status color.",
-      "value": "oklch(0.50 0.20 25)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-error-muted",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Status triplets",
-      "description": "Medium error fill for icons and inline badges.",
-      "value": "oklch(from var(--sf-color-error) l c h / 0.3)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-error-strong",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Status triplets",
-      "description": "High-contrast error color for validation message text.",
-      "value": "light-dark( oklch(from var(--sf-color-error-light) calc(l - 0.1) c h), oklch(from var(--sf-color-error) clamp(0.70, calc(l + 0.15), 1) c h) )",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-error-subtle",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Status triplets",
-      "description": "Light error tint for validation field backgrounds.",
-      "value": "oklch(from var(--sf-color-error) l c h / 0.1)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-heading",
       "type": "token",
       "tier": "PUBLIC",
@@ -4365,7 +4191,7 @@
       "area": "core",
       "group": "Text",
       "description": "Heading text color. Slightly stronger contrast than body text for visual hierarchy.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -4394,65 +4220,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Informational color for neutral tips, hints, and non-urgent notices.",
-      "value": "light-dark(var(--sf-color-info-light), var(--sf-color-info-dark, oklch(from var(--sf-color-info-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-info-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-info.",
-      "value": "oklch(0.71 0.162 235)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-info-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "STATUS COLORS (-light source tokens)",
-      "description": "OKLCH lightness source for the info status color.",
-      "value": "oklch(0.48 0.18 235)",
+      "value": "light-dark(var(--sf-color-info-source-light), var(--sf-color-info-source-dark, oklch(from var(--sf-color-info-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -4501,6 +4269,64 @@
       ]
     },
     {
+      "name": "--sf-color-info-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-info.",
+      "value": "oklch(0.71 0.162 235)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-info-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-source-light source tokens)",
+      "description": "OKLCH lightness source for the info status color.",
+      "value": "oklch(0.48 0.18 235)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-info-strong",
       "type": "token",
       "tier": "PUBLIC",
@@ -4510,7 +4336,7 @@
       "area": "core",
       "group": "Status triplets",
       "description": "High-contrast info color for hint body text.",
-      "value": "light-dark( oklch(from var(--sf-color-info-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -4858,7 +4684,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Neutral interactive color for low-emphasis actions and tertiary buttons.",
-      "value": "light-dark(var(--sf-color-neutral-light), var(--sf-color-neutral-dark, oklch(from var(--sf-color-neutral-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "value": "light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -5384,35 +5210,6 @@
       ]
     },
     {
-      "name": "--sf-color-neutral-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-neutral.",
-      "value": "oklch(0.69 0.0225 260)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-neutral-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -5472,35 +5269,6 @@
       ]
     },
     {
-      "name": "--sf-color-neutral-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "BRAND COLORS (-light source tokens, animatable)",
-      "description": "OKLCH lightness source for the neutral color.",
-      "value": "oklch(0.52 0.025 260)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-neutral-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -5546,6 +5314,64 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-neutral-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-neutral.",
+      "value": "oklch(0.69 0.0225 260)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-neutral-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "BRAND COLORS (-source-light source tokens, animatable)",
+      "description": "OKLCH lightness source for the neutral color.",
+      "value": "oklch(0.52 0.025 260)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -5747,7 +5573,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Raw primary palette token aliased from the action role by default. Override to decouple primary from action.",
-      "value": "light-dark(var(--sf-color-primary-light), var(--sf-color-primary-dark, oklch(from var(--sf-color-primary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "value": "light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -6273,35 +6099,6 @@
       ]
     },
     {
-      "name": "--sf-color-primary-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-primary.",
-      "value": "oklch(0.715 0.243 264)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-primary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -6361,35 +6158,6 @@
       ]
     },
     {
-      "name": "--sf-color-primary-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "BRAND COLORS (-light source tokens, animatable)",
-      "description": "OKLCH lightness source for the primary color.",
-      "value": "oklch(0.47 0.27 264)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-primary-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -6435,6 +6203,64 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-primary.",
+      "value": "oklch(0.715 0.243 264)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "BRAND COLORS (-source-light source tokens, animatable)",
+      "description": "OKLCH lightness source for the primary color.",
+      "value": "oklch(0.47 0.27 264)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -6665,7 +6491,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Raw secondary palette token for the secondary brand color.",
-      "value": "light-dark(var(--sf-color-secondary-light), var(--sf-color-secondary-dark, oklch(from var(--sf-color-secondary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "value": "light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -7191,35 +7017,6 @@
       ]
     },
     {
-      "name": "--sf-color-secondary-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-secondary.",
-      "value": "oklch(0.84 0.036 264)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-secondary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -7279,35 +7076,6 @@
       ]
     },
     {
-      "name": "--sf-color-secondary-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "BRAND COLORS (-light source tokens, animatable)",
-      "description": "OKLCH lightness source for the secondary color.",
-      "value": "oklch(0.22 0.04 264)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-secondary-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -7353,6 +7121,64 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-secondary-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-secondary.",
+      "value": "oklch(0.84 0.036 264)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-secondary-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "BRAND COLORS (-source-light source tokens, animatable)",
+      "description": "OKLCH lightness source for the secondary color.",
+      "value": "oklch(0.22 0.04 264)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -7525,7 +7351,7 @@
       "area": "core",
       "group": "Selection",
       "description": "Background color applied to browser text selections.",
-      "value": "light-dark( oklch(from var(--sf-color-action-light) l c h / 0.28), oklch(from var(--sf-color-action-light) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )",
+      "value": "light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7583,65 +7409,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Positive / success color for confirmation messages and completed-state indicators.",
-      "value": "light-dark(var(--sf-color-success-light), var(--sf-color-success-dark, oklch(from var(--sf-color-success-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-success-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-success.",
-      "value": "oklch(0.70 0.144 145)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-success-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "STATUS COLORS (-light source tokens)",
-      "description": "OKLCH lightness source for the success status color.",
-      "value": "oklch(0.50 0.16 145)",
+      "value": "light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -7690,6 +7458,64 @@
       ]
     },
     {
+      "name": "--sf-color-success-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-success.",
+      "value": "oklch(0.70 0.144 145)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-success-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-source-light source tokens)",
+      "description": "OKLCH lightness source for the success status color.",
+      "value": "oklch(0.50 0.16 145)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-success-strong",
       "type": "token",
       "tier": "PUBLIC",
@@ -7699,7 +7525,7 @@
       "area": "core",
       "group": "Status triplets",
       "description": "High-contrast success color for confirmation message text.",
-      "value": "light-dark( oklch(from var(--sf-color-success-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7786,7 +7612,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Raw tertiary palette token for the third brand color.",
-      "value": "light-dark(var(--sf-color-tertiary-light), var(--sf-color-tertiary-dark, oklch(from var(--sf-color-tertiary-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
+      "value": "light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -8312,35 +8138,6 @@
       ]
     },
     {
-      "name": "--sf-color-tertiary-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-tertiary.",
-      "value": "oklch(0.74 0.198 295)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-tertiary-darker",
       "type": "token",
       "tier": "PUBLIC",
@@ -8400,35 +8197,6 @@
       ]
     },
     {
-      "name": "--sf-color-tertiary-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "BRAND COLORS (-light source tokens, animatable)",
-      "description": "OKLCH lightness source for the tertiary color.",
-      "value": "oklch(0.42 0.22 295)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-tertiary-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -8474,6 +8242,64 @@
       "animatable": false,
       "syntax": null,
       "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-tertiary-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-tertiary.",
+      "value": "oklch(0.74 0.198 295)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-tertiary-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "BRAND COLORS (-source-light source tokens, animatable)",
+      "description": "OKLCH lightness source for the tertiary color.",
+      "value": "oklch(0.42 0.22 295)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -8646,7 +8472,7 @@
       "area": "core",
       "group": "Text",
       "description": "Primary text color. Contrasts against --sf-color-bg for body copy.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8675,7 +8501,7 @@
       "area": "core",
       "group": "Text",
       "description": "Text color for disabled UI elements. Intentionally low contrast.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8704,7 +8530,7 @@
       "area": "core",
       "group": "Text",
       "description": "Text color for use on dark/inverted backgrounds.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8733,7 +8559,7 @@
       "area": "core",
       "group": "Text",
       "description": "Muted text for metadata, timestamps, and low-priority annotations.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8821,35 +8647,6 @@
       "group": "Text-on-color",
       "description": "Accessible foreground for text on danger-colored backgrounds.",
       "value": "oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-text--on-error",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Text-on-color",
-      "description": "Accessible foreground for text on error-colored backgrounds.",
-      "value": "oklch(from var(--sf-color-error) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9110,7 +8907,7 @@
       "area": "core",
       "group": "Text",
       "description": "Placeholder text color for inputs and textareas.",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9139,7 +8936,7 @@
       "area": "core",
       "group": "Text",
       "description": "De-emphasised secondary text (captions, labels, supporting copy).",
-      "value": "light-dark( oklch(from var(--sf-color-neutral-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9168,65 +8965,7 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Warning / caution color for non-critical alerts and degraded-state indicators.",
-      "value": "light-dark(var(--sf-color-warning-light), var(--sf-color-warning-dark, oklch(from var(--sf-color-warning-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-warning-dark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "DARK SOURCE TOKENS (-dark, animatable)",
-      "description": "Registered <color> dark counterpart of --sf-color-warning.",
-      "value": "oklch(0.65 0.153 80)",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<color>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-warning-light",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "STATUS COLORS (-light source tokens)",
-      "description": "OKLCH lightness source for the warning status color.",
-      "value": "oklch(0.75 0.17 80)",
+      "value": "light-dark(var(--sf-color-warning-source-light), var(--sf-color-warning-source-dark, oklch(from var(--sf-color-warning-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))",
       "aliasOf": null,
       "registered": true,
       "animatable": true,
@@ -9275,6 +9014,64 @@
       ]
     },
     {
+      "name": "--sf-color-warning-source-dark",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "DARK SOURCE TOKENS (-dark, animatable)",
+      "description": "Registered <color> dark counterpart of --sf-color-warning.",
+      "value": "oklch(0.65 0.153 80)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-warning-source-light",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "STATUS COLORS (-source-light source tokens)",
+      "description": "OKLCH lightness source for the warning status color.",
+      "value": "oklch(0.75 0.17 80)",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<color>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-warning-strong",
       "type": "token",
       "tier": "PUBLIC",
@@ -9284,7 +9081,7 @@
       "area": "core",
       "group": "Status triplets",
       "description": "High-contrast warning color for caution text.",
-      "value": "light-dark( oklch(from var(--sf-color-warning-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )",
+      "value": "light-dark( oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -10928,7 +10725,7 @@
       "area": "core",
       "group": "Focus / form colors",
       "description": "Computed box-shadow value for the focus ring — two-layer technique: offset shadow in bg color, then ring shadow in focus-ring color. Tune via --sf-focus-ring-width and --sf-focus-ring-color instead of overriding this directly.",
-      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)",
+      "value": "0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-source-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -20267,7 +20064,7 @@
       "category": "State classes",
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
-      "description": "Danger status state — applies danger color tokens. Semantic variant of is-error for destructive actions (e.g. a delete confirmation dialog).",
+      "description": "Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -20423,7 +20220,7 @@
       "category": "State classes",
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
-      "description": "Error state — applies error color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid.",
+      "description": "Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -20631,7 +20428,7 @@
       "category": "State classes",
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
-      "description": "Invalid state — applies error color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context.",
+      "description": "Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -22061,7 +21858,7 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Container",
+      "group": "Section",
       "description": "Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m.",
       "isVariant": false,
       "baseClass": null,
@@ -24836,6 +24633,32 @@
       ]
     },
     {
+      "name": "sf-section--guttered",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-section--guttered",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Section",
+      "description": "Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding.",
+      "isVariant": true,
+      "baseClass": "sf-section",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "essential",
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-section--l",
       "type": "class",
       "tier": "PUBLIC",
@@ -25574,32 +25397,6 @@
       "area": "macros",
       "group": "Surface",
       "description": "Surface variant using the danger status palette.",
-      "isVariant": true,
-      "baseClass": "sf-surface",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "essential",
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-surface--error",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-surface--error",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "Surface",
-      "description": "Surface variant using the error status palette.",
       "isVariant": true,
       "baseClass": "sf-surface",
       "optional": false,

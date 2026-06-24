@@ -204,11 +204,12 @@
 
   /* NOTE: .is-invalid and .is-error share identical CSS values by design.
      · .is-invalid → form-field validation failure (maps to aria-invalid="true").
-     · .is-error   → general component error state (failed save, network error). */
+     · .is-error   → general component error state (failed save, network error).
+     Both use --sf-color-danger (error is an alias for danger). */
   .is-invalid,
   .is-error {
-    --sf-field-border-color: var(--sf-color-error);
-    --sf-field-text-color:   var(--sf-color-error-strong);
+    --sf-field-border-color: var(--sf-color-danger);
+    --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
   .is-warning {

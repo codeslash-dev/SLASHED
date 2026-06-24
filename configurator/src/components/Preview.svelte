@@ -65,7 +65,7 @@
   const activeViewport = $derived(VIEWPORTS.find((v) => v.id === ui.previewWidth) ?? VIEWPORTS[VIEWPORTS.length - 1]);
 
   const brand   = ['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'];
-  const status  = ['success', 'warning', 'error', 'info', 'danger'];
+  const status  = ['success', 'warning', 'info', 'danger'];
   const surfaces = [
     { var: 'inset', label: 'Inset' },
     { var: 'bg', label: 'Background' },
@@ -90,7 +90,7 @@
   const lineHeights  = ['tight','snug','normal','relaxed'];
   const trackings    = ['tight','normal','wide','wider','widest'];
   const fontStacks   = ['body','heading','display','humanist','geometric','slab','mono'];
-  const statusMacros = ['primary','secondary','tertiary','action','neutral','inverse','success','warning','error','info','danger'];
+  const statusMacros = ['primary','secondary','tertiary','action','neutral','inverse','success','warning','info','danger'];
   const stateClasses = [
     {cls:'is-active',label:'is-active'},
     {cls:'is-current',label:'is-current'},
@@ -284,9 +284,9 @@
             <span class="pv__field-hint pv__field-hint--valid">✓ Looks good</span>
           </label>
           <label class="pv__field">
-            <span class="pv__field-label pv__field-label--error">Password</span>
-            <input class="pv__field-input pv__field-input--error" type="text" value="abc" readonly />
-            <span class="pv__field-hint pv__field-hint--error">✗ At least 8 characters</span>
+            <span class="pv__field-label pv__field-label--danger">Password</span>
+            <input class="pv__field-input pv__field-input--danger" type="text" value="abc" readonly />
+            <span class="pv__field-hint pv__field-hint--danger">✗ At least 8 characters</span>
           </label>
           <label class="pv__field">
             <span class="pv__field-label pv__field-label--disabled">Disabled</span>
@@ -624,7 +624,7 @@
         <p class="pv__eyebrow">Inline elements &amp; semantic HTML</p>
         <p class="pv__p"><strong>strong</strong>, <em>em</em>, <mark class="pv__mark">mark</mark>, <code class="pv__code">code</code>, <kbd class="pv__kbd">Ctrl</kbd>+<kbd class="pv__kbd">C</kbd>, H<sub>2</sub>O, E=mc<sup>2</sup>, <small>small</small>, <a class="pv__a" href="#a" onclick={preventDemoNav}>link</a>, <del>deleted</del>, <ins>inserted</ins></p>
         <pre class="pv__pre"><code>:root &#123;
-  --sf-color-primary-light: oklch(0.55 0.22 160);
+  --sf-color-primary-source-light: oklch(0.55 0.22 160);
 &#125;</code></pre>
         <blockquote class="pv__blockquote">A blockquote inside sf-prose gets consistent spacing via the flow space token.</blockquote>
       </section>
@@ -991,7 +991,7 @@
           <div class="pv__motion-cell"><span class="pv__anim pv__anim--bounce" style="background:var(--sf-color-action,#0891b2)"></span><code class="pv__anim-label">bounce</code></div>
           <div class="pv__motion-cell"><span class="pv__anim pv__anim--slide" style="background:var(--sf-color-tertiary,#888)"></span><code class="pv__anim-label">slide</code></div>
           <div class="pv__motion-cell"><span class="pv__anim pv__anim--shimmer" style="background:linear-gradient(90deg,var(--sf-color-neutral-200,#e5e7eb) 25%,var(--sf-color-neutral-100,#f3f4f6) 50%,var(--sf-color-neutral-200,#e5e7eb) 75%);background-size:200% 100%"></span><code class="pv__anim-label">shimmer</code></div>
-          <div class="pv__motion-cell"><span class="pv__anim pv__anim--ping" style="background:var(--sf-color-error,#dc2626)"></span><code class="pv__anim-label">ping</code></div>
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--ping" style="background:var(--sf-color-danger,#dc2626)"></span><code class="pv__anim-label">ping</code></div>
         </div>
         <div class="pv__durations">
           {#each durations as d (d)}
@@ -1126,14 +1126,14 @@
   .pv__field-label { font-size: var(--sf-text-xs,.8rem); font-weight: 600; color: var(--sf-color-text--secondary,inherit); }
   .pv__field-input { font-size: var(--sf-text-s,.9rem); padding: 7px 10px; border-radius: var(--sf-radius-s,4px); border: 1px solid var(--sf-color-border, rgba(127,127,127,.4)); background: var(--sf-color-bg,#fff); color: var(--sf-color-text,inherit); }
   .pv__field-label--valid    { color: var(--sf-color-success,#16a34a); }
-  .pv__field-label--error    { color: var(--sf-color-error,#dc2626); }
+  .pv__field-label--danger    { color: var(--sf-color-danger,#dc2626); }
   .pv__field-label--disabled { color: var(--sf-color-text--muted,#888); }
   .pv__field-input--valid    { border-color: var(--sf-color-success,#16a34a); background: var(--sf-color-success-subtle, rgba(22,163,74,.08)); }
-  .pv__field-input--error    { border-color: var(--sf-color-error,#dc2626);   background: var(--sf-color-error-subtle,   rgba(220,38,38,.08)); }
+  .pv__field-input--danger    { border-color: var(--sf-color-danger,#dc2626);   background: var(--sf-color-danger-subtle,  rgba(220,38,38,.08)); }
   .pv__field-input--disabled { opacity: .5; cursor: not-allowed; background: var(--sf-color-inset, rgba(127,127,127,.1)); }
   .pv__field-hint         { font-size: var(--sf-text-xs,.75rem); margin-top: -2px; }
   .pv__field-hint--valid  { color: var(--sf-color-success,#16a34a); }
-  .pv__field-hint--error  { color: var(--sf-color-error,#dc2626); }
+  .pv__field-hint--danger  { color: var(--sf-color-danger,#dc2626); }
   .pv__space { display: flex; flex-direction: column; gap: 4px; }
   .pv__space-row { display: flex; align-items: center; gap: 10px; font-size: 12px; overflow: hidden; }
   .pv__space-row code { font-family: var(--sf-font-mono,monospace); min-width: 13ch; flex-shrink: 0; color: var(--sf-color-text--muted,inherit); }
@@ -1232,7 +1232,7 @@
   .pv__surface-inverse   { background: var(--sf-color-inverse,#111);    color: var(--sf-color-text--inverse,#fff); }
   .pv__surface-success   { background: var(--sf-color-success-subtle,   rgba(22,163,74,.1));   color: var(--sf-color-success,#16a34a); }
   .pv__surface-warning   { background: var(--sf-color-warning-subtle,   rgba(202,138,4,.1));   color: var(--sf-color-warning-strong,#854d0e); }
-  .pv__surface-error     { background: var(--sf-color-error-subtle,     rgba(220,38,38,.1));   color: var(--sf-color-error,#dc2626); }
+  .pv__surface-danger     { background: var(--sf-color-danger-subtle,    rgba(220,38,38,.1));   color: var(--sf-color-danger,#dc2626); }
   .pv__surface-info      { background: var(--sf-color-info-subtle,      rgba(8,145,178,.1));   color: var(--sf-color-info,#0891b2); }
   .pv__surface-danger    { background: var(--sf-color-danger-subtle,    rgba(220,38,38,.1));   color: var(--sf-color-danger,#dc2626); }
   .pv__text-grad { background: var(--sf-gradient-primary, linear-gradient(135deg, var(--sf-color-primary,#4f8cff), var(--sf-color-tertiary,#8858ff))); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin: 0; }
@@ -1270,7 +1270,7 @@
   .pv__state--open     { background: var(--sf-color-action-subtle, rgba(8,145,178,.12)); color: var(--sf-color-action,#0891b2); border-color: var(--sf-color-action-muted, rgba(8,145,178,.3)); }
   .pv__state--loading  { opacity: .6; background: var(--sf-color-inset, rgba(127,127,127,.1)); }
   .pv__state--disabled { opacity: .4; cursor: not-allowed; }
-  .pv__state--invalid  { background: var(--sf-color-error-subtle, rgba(220,38,38,.08)); color: var(--sf-color-error,#dc2626); border-color: var(--sf-color-error,#dc2626); }
+  .pv__state--danger  { background: var(--sf-color-danger-subtle, rgba(220,38,38,.08)); color: var(--sf-color-danger,#dc2626); border-color: var(--sf-color-danger,#dc2626); }
   .pv__state--valid    { background: var(--sf-color-success-subtle, rgba(22,163,74,.08)); color: var(--sf-color-success,#16a34a); border-color: var(--sf-color-success,#16a34a); }
 
   /* ── Tokens section ── */

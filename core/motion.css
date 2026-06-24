@@ -146,16 +146,16 @@
 
   /* ── @property color animation ───────────────────────────────── */
 
-  /* @property color interpolation — animates --sf-color-primary-light smoothly
+  /* @property color interpolation — animates --sf-color-primary-source-light smoothly
      because it is registered with syntax:"<color>" (see @property in tokens.css).
      Without that registration the browser cannot interpolate between color values
      and the animation will snap at 50% with no intermediate frames.
      Gated behind @supports so unsupporting engines simply skip it. */
   @supports (@property --x { syntax: "<color>"; inherits: false; initial-value: white; }) {
     @keyframes sf-color-pulse {
-      0%   { --sf-color-primary-light: var(--sf-color-primary-light); }
-      50%  { --sf-color-primary-light: oklch(from var(--sf-color-primary-light) clamp(0, calc(l + 0.25), 0.9) c h); }
-      100% { --sf-color-primary-light: var(--sf-color-primary-light); }
+      0%   { --sf-color-primary-source-light: var(--sf-color-primary-source-light); }
+      50%  { --sf-color-primary-source-light: oklch(from var(--sf-color-primary-source-light) clamp(0, calc(l + 0.25), 0.9) c h); }
+      100% { --sf-color-primary-source-light: var(--sf-color-primary-source-light); }
     }
 
     @media (prefers-reduced-motion: no-preference) {

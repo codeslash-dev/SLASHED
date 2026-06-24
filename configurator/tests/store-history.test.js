@@ -60,7 +60,7 @@ describe('setOne / clearOne', () => {
   test('a fresh edit after undo drops the redo branch', () => {
     setOne(s, '--sf-radius-scale', '1.4');
     undoStep(s);
-    setOne(s, '--sf-color-primary-light', 'oklch(0.5 0.2 220)');
+    setOne(s, '--sf-color-primary-source-light', 'oklch(0.5 0.2 220)');
     assert.equal(s.history.future.length, 0, 'redo branch dropped on new edit');
   });
 
@@ -157,9 +157,9 @@ describe('patchMany', () => {
 describe('replaceAll', () => {
   test('replaces every override and reports applied/skipped', () => {
     setOne(s, '--sf-radius-scale', '1.4');
-    s.isKnown = (name) => name === '--sf-color-primary-light';
+    s.isKnown = (name) => name === '--sf-color-primary-source-light';
     const { applied, skipped } = replaceAll(s, {
-      '--sf-color-primary-light': 'oklch(0.5 0.2 220)',
+      '--sf-color-primary-source-light': 'oklch(0.5 0.2 220)',
       '--sf-not-real': 'oops',
     });
     assert.equal(applied, 1);
@@ -173,16 +173,16 @@ describe('applyThemeToState', () => {
   test('replaces overrides with the preset map (one history step)', () => {
     setOne(s, '--sf-radius-scale', '1.4');
     applyThemeToState(s, {
-      '--sf-color-primary-light': 'oklch(0.5 0.2 220)',
+      '--sf-color-primary-source-light': 'oklch(0.5 0.2 220)',
       '--sf-shadow-strength': '0.2',
     });
     assert.equal(s.overrides['--sf-radius-scale'], undefined);
-    assert.equal(s.overrides['--sf-color-primary-light'], 'oklch(0.5 0.2 220)');
+    assert.equal(s.overrides['--sf-color-primary-source-light'], 'oklch(0.5 0.2 220)');
 
     // single undo restores the pre-theme state
     undoStep(s);
     assert.equal(s.overrides['--sf-radius-scale'], '1.4');
-    assert.equal(s.overrides['--sf-color-primary-light'], undefined);
+    assert.equal(s.overrides['--sf-color-primary-source-light'], undefined);
   });
 
   test('an empty map acts as a "reset" theme', () => {

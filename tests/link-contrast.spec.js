@@ -26,7 +26,7 @@ test.describe('Link contrast under brand overrides', () => {
       const ratio = await page.evaluate((actionColor) => {
         const root = document.documentElement;
         root.setAttribute('data-theme', 'light');
-        root.style.setProperty('--sf-color-action-light', actionColor);
+        root.style.setProperty('--sf-color-action-source-light', actionColor);
 
         const link = document.querySelector('main a');
         const cs = getComputedStyle(link);

@@ -205,7 +205,7 @@ for (const theme of ['light', 'dark']) {
       // matching --sf-color-text--on-* token. See architecture.md.
       const FAMILIES = [
         'primary', 'secondary', 'tertiary', 'action', 'neutral', 'base',
-        'success', 'warning', 'error', 'info', 'danger',
+        'success', 'warning', 'info', 'danger',
       ];
       for (const name of FAMILIES) {
         expect(data.onColor[name], `on-${name}`).toBeGreaterThanOrEqual(4.5);

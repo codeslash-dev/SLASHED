@@ -8,17 +8,17 @@ Starter file: [`optional/theme-example.css`](../optional/theme-example.css).
 
 ## Rebrand in 6 tokens
 
-Override the six `-light` source tokens. Any valid CSS colour works (hex,
+Override the six `-source-light` tokens. Any valid CSS colour works (hex,
 `oklch`, `hsl`, …):
 
 ```css
 :root {
-  --sf-color-primary-light:   oklch(0.55 0.18 280); /* brand / links          */
-  --sf-color-secondary-light: oklch(0.30 0.04 280); /* muted brand            */
-  --sf-color-tertiary-light:  oklch(0.62 0.15 200); /* accent                 */
-  --sf-color-action-light:    oklch(0.62 0.16 150); /* primary call-to-action */
-  --sf-color-neutral-light:   oklch(0.45 0.01 280); /* greys / text base      */
-  --sf-color-base-light:      oklch(0.99 0.004 280);/* page surface           */
+  --sf-color-primary-source-light:   oklch(0.55 0.18 280); /* brand / links          */
+  --sf-color-secondary-source-light: oklch(0.30 0.04 280); /* muted brand            */
+  --sf-color-tertiary-source-light:  oklch(0.62 0.15 200); /* accent                 */
+  --sf-color-action-source-light:    oklch(0.62 0.16 150); /* primary call-to-action */
+  --sf-color-neutral-source-light:   oklch(0.45 0.01 280); /* greys / text base      */
+  --sf-color-base-source-light:      oklch(0.99 0.004 280);/* page surface           */
 }
 ```
 
@@ -29,13 +29,13 @@ dark mode) stay consistent across hues. Hex/hsl inputs are converted internally.
 
 | You set | Framework derives |
 |---|---|
-| `--sf-color-*-light` (6) | dark equivalents, hover/active variants, ghost/subtle/muted alpha variants (core), numeric tints/shades (optional palette), status mixes |
-| `--sf-color-neutral-light` | `--sf-color-text`, `--sf-color-text--secondary`, `--sf-color-heading`, borders |
-| `--sf-color-base-light` | `--sf-color-bg`, `--sf-color-inset`, `--sf-color-raised`, `--sf-color-overlay`, `--sf-color-inverse` |
+| `--sf-color-*-source-light` (6) | dark equivalents, hover/active variants, ghost/subtle/muted alpha variants (core), numeric tints/shades (optional palette), status mixes |
+| `--sf-color-neutral-source-light` | `--sf-color-text`, `--sf-color-text--secondary`, `--sf-color-heading`, borders |
+| `--sf-color-base-source-light` | `--sf-color-bg`, `--sf-color-inset`, `--sf-color-raised`, `--sf-color-overlay`, `--sf-color-inverse` |
 | any brand colour | `--sf-color-text--on-*` (auto black/white for WCAG AA) |
 
-Structural contract: `--sf-color-base-light` must be light and
-`--sf-color-base-dark` must be dark (they are the page surfaces);
+Structural contract: `--sf-color-base-source-light` must be light and
+`--sf-color-base-source-dark` must be dark (they are the page surfaces);
 `--sf-color-neutral` is the greyscale/text base. Inverting this breaks contrast.
 
 See the [token reference](tokens.md) for every overridable property.
@@ -109,7 +109,7 @@ the engine instead of drifting on magic numbers.
 
 ## Dark mode
 
-Dark values derive automatically from the `-light` sources — the 6-token rebrand
+Dark values derive automatically from the `-source-light` tokens — the 6-token rebrand
 themes both modes. `data-theme` flips `color-scheme`:
 
 ```html
@@ -159,8 +159,8 @@ palette and mode together:
 
 ```css
 [data-brand="sunset"] {
-  --sf-color-primary-light: oklch(0.62 0.20 35);
-  --sf-color-action-light:  oklch(0.70 0.18 60);
+  --sf-color-primary-source-light: oklch(0.62 0.20 35);
+  --sf-color-action-source-light:  oklch(0.70 0.18 60);
 }
 ```
 
@@ -177,12 +177,12 @@ Three tiers, least to most specific:
 
 **Tier 1 — source token** (changes both modes):
 ```css
-:root { --sf-color-primary-light: oklch(0.55 0.18 280); }
+:root { --sf-color-primary-source-light: oklch(0.55 0.18 280); }
 ```
 
 **Tier 2 — dark source token** (changes dark mode only):
 ```css
-:root { --sf-color-primary-dark: oklch(0.78 0.16 280); }
+:root { --sf-color-primary-source-dark: oklch(0.78 0.16 280); }
 ```
 
 **Tier 3 — resolved token** (overrides the final computed value; use when you
@@ -233,7 +233,7 @@ source token under your own selector — all derived tokens recompute:
 
 ```css
 [data-brand="midnight"] {
-  --sf-color-primary-light: oklch(0.28 0.15 260);
+  --sf-color-primary-source-light: oklch(0.28 0.15 260);
 }
 ```
 

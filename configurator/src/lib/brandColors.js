@@ -1,10 +1,10 @@
 /**
  * Brand-color utilities for the light/dark pairing UI.
  *
- * The framework stores brand colors as `-light` knobs and derives the dark
+ * The framework stores brand colors as `-source-light` knobs and derives the dark
  * variant automatically via `oklch(from L …)` relative-color math in the
  * `light-dark()` expression on `--sf-color-X`. Users can optionally override
- * the dark variant by setting `--sf-color-X-dark`.
+ * the dark variant by setting `--sf-color-X-source-dark`.
  *
  * This module exposes the JavaScript equivalent of that auto-dark formula so
  * the configurator can preview the computed dark swatch without needing the
@@ -24,7 +24,6 @@ export const BRAND_COLOR_KEYS = [
   { key: 'action',    label: 'Action',    group: 'brand' },
   { key: 'success',   label: 'Success',   group: 'status' },
   { key: 'warning',   label: 'Warning',   group: 'status' },
-  { key: 'error',     label: 'Error',     group: 'status' },
   { key: 'info',      label: 'Info',      group: 'status' },
   { key: 'danger',    label: 'Danger',    group: 'status' },
 ];
@@ -55,7 +54,7 @@ export function parseOklch(value) {
  * (e.g. it uses var() or another function) — callers should fall back to the
  * probe-host measurement in that case.
  *
- * @param {string} lightValue  CSS value of the `--sf-color-X-light` token
+ * @param {string} lightValue  CSS value of the `--sf-color-X-source-light` token
  * @param {string} colorKey    e.g. 'primary', 'base', 'neutral', …
  * @returns {string | null}    `oklch(L C H)` string or null
  */

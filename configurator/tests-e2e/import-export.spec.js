@@ -52,13 +52,13 @@ test('layer / :root format toggle reshapes the export', async ({ page }) => {
 test('hostile input value is sanitised before it reaches storage', async ({ page }) => {
   await gotoClean(page);
   await sideItem(page, 'Colors').click();
-  const input = page.locator('input.bcr__input[aria-label="--sf-color-primary-light value"]');
+  const input = page.locator('input.bcr__input[aria-label="--sf-color-primary-source-light value"]');
   await input.fill(';} body{background:red} :root{');
   await input.press('Enter');
   const value = (await page.evaluate(
     (key) => JSON.parse(localStorage.getItem(key) ?? '{}'),
     STORAGE_KEY
-  ))['--sf-color-primary-light'] ?? '';
+  ))['--sf-color-primary-source-light'] ?? '';
   expect(value, 'structural characters must be stripped').not.toMatch(/[{};]/);
 });
 

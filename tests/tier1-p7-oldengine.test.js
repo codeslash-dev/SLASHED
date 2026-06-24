@@ -57,7 +57,7 @@ const CHECKED_TOKENS = [
   '--sf-color-primary', '--sf-color-secondary', '--sf-color-action',
   '--sf-color-neutral', '--sf-color-base', '--sf-color-text',
   '--sf-color-border', '--sf-color-success', '--sf-color-warning',
-  '--sf-color-error',
+  '--sf-color-danger',
 ];
 
 describe('P7: @supports gating — no modern expressions in ungated bundle declarations', () => {

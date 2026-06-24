@@ -166,7 +166,7 @@ for (const theme of ['light', 'dark']) {
     });
 
     // ── Status colours non-transparent ──────────────────────────
-    for (const status of ['success', 'warning', 'error', 'info', 'danger']) {
+    for (const status of ['success', 'warning', 'info', 'danger']) {
       test(`--sf-color-${status} resolves to an opaque colour`, async ({ page }) => {
         const alpha = await page.evaluate((tok) => {
           const cv = document.createElement('canvas'); cv.width = cv.height = 1;
@@ -312,7 +312,7 @@ test.describe('Dark mode auto-derivation', () => {
   test('explicit dark override overrides auto-derived value', async ({ page }) => {
     // Set a mid-tone orange light color.
     await page.evaluate(() => {
-      document.documentElement.style.setProperty('--sf-color-primary-light', 'oklch(0.55 0.22 45)');
+      document.documentElement.style.setProperty('--sf-color-primary-source-light', 'oklch(0.55 0.22 45)');
     });
 
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
@@ -320,7 +320,7 @@ test.describe('Dark mode auto-derivation', () => {
 
     // Inject a very different explicit dark value (low L ≈ 0.25 = very dark orange).
     await page.evaluate(() => {
-      document.documentElement.style.setProperty('--sf-color-primary-dark', 'oklch(0.25 0.15 45)');
+      document.documentElement.style.setProperty('--sf-color-primary-source-dark', 'oklch(0.25 0.15 45)');
     });
     const overrideLum = await page.evaluate(resolveTokenLuminance, '--sf-color-primary');
 

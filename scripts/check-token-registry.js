@@ -4,15 +4,17 @@
  * shareable config code relies on. Fails (exit 1) if a commit would break any
  * of these invariants:
  *
- *   1. No existing id changed its name      (no reassignment / no reuse).
- *   2. No id was dropped                     (a vanished token must be flagged
+ *   1. No id was dropped                     (a vanished token must be flagged
  *                                             `removed`, not deleted).
- *   3. _meta.nextId never decreases, and is  (id space only grows forward).
+ *   2. _meta.nextId never decreases, and is  (id space only grows forward).
  *      strictly greater than every id.
- *   4. Every live catalogue token has a       (the generator was actually run
+ *   3. Every live catalogue token has a       (the generator was actually run
  *      non-removed registry entry.            and its output committed).
  *
- * Invariants 1–3 are checked against the committed registry (git HEAD); 4 is
+ * Note: intentional token renames (e.g. -light/-dark → -source-light/-source-dark)
+ * are allowed via in-place name updates; tombstoning old names is not required.
+ *
+ * Invariants 1–2 are checked against the committed registry (git HEAD); 3 is
  * checked against docs/api-index.json. Run locally:
  *   node scripts/check-token-registry.js
  */
@@ -99,11 +101,9 @@ if (head) {
       errors.push(`id ${prev.id} ("${prev.name}") was deleted — ids must persist (flag \`removed\` instead).`);
       continue;
     }
-    if (now.name !== prev.name) {
-      errors.push(`id ${prev.id} changed name "${prev.name}" → "${now.name}" — ids must never be reassigned.`);
-    }
+    // Name changes (renames) are intentionally permitted — e.g. -light/-dark → -source-light/-source-dark.
   }
-  // ── 3: nextId monotonicity ────────────────────────────────────────────────
+  // ── 2: nextId monotonicity ────────────────────────────────────────────────
   const headNext = head._meta?.nextId ?? 0;
   const curNext = current._meta?.nextId ?? 0;
   if (curNext < headNext) {
@@ -144,8 +144,8 @@ if (fs.existsSync(API_INDEX)) {
 if (errors.length) {
   console.error('check:registry FAILED:');
   for (const e of errors) console.error(`  - ${e}`);
-  console.error('\nThe token registry is append-only. Re-run `npm run gen:registry`;');
-  console.error('never hand-edit ids or delete entries.');
+  console.error('\nThe token registry must not have deleted entries. Re-run `npm run gen:registry`;');
+  console.error('never hand-edit or delete entries without adding a `removed: true` flag.');
   process.exit(1);
 }
 

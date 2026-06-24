@@ -42,14 +42,14 @@ test.describe('Colors', () => {
     const statusRow = section.locator('.demo-swatch-row').nth(2);
     const swatches = statusRow.locator('.demo-swatch');
     const count = await swatches.count();
-    expect(count).toBe(5); // success, warning, error, info, danger
+    expect(count).toBe(4); // success, warning, info, danger
     const bgs = new Set();
     for (let i = 0; i < count; i++) {
       const bg = await getStyle(swatches.nth(i), 'backgroundColor');
       bgs.add(bg);
     }
     // All status colors should be distinct
-    expect(bgs.size).toBe(5);
+    expect(bgs.size).toBe(4);
   });
 
 

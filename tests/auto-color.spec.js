@@ -23,7 +23,7 @@ const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).hr
 
 const SURFACES = [
   'primary', 'secondary', 'tertiary', 'action', 'neutral',
-  'inverse', 'success', 'warning', 'error', 'info', 'danger',
+  'inverse', 'success', 'warning', 'info', 'danger',
 ];
 
 
@@ -74,7 +74,7 @@ for (const theme of ['light', 'dark']) {
 // ── #204: on-colour auto-pick flips at the threshold (lightness sweep) ──
 // --sf-color-text--on-neutral is computed from --sf-color-neutral via
 // sign(threshold - l) * 999 → near-black on light backgrounds, near-white
-// on dark ones. Drive --sf-color-neutral-light across a lightness sweep
+// on dark ones. Drive --sf-color-neutral-source-light across a lightness sweep
 // and assert the picked text colour always clears 3:1 on its own surface,
 // and that it actually flips polarity from dark→light as L drops.
 test.describe('Auto-colour — on-colour auto-pick (lightness sweep)', () => {
@@ -94,7 +94,7 @@ test.describe('Auto-colour — on-colour auto-pick (lightness sweep)', () => {
       const root = document.documentElement;
       const out = [];
       for (const L of [0.10, 0.30, 0.45, 0.60, 0.75, 0.95]) {
-        root.style.setProperty('--sf-color-neutral-light', `oklch(${L} 0.02 250)`);
+        root.style.setProperty('--sf-color-neutral-source-light', `oklch(${L} 0.02 250)`);
         const el = document.createElement('div');
         el.className = 'sf-surface--neutral';
         el.textContent = 'x';
@@ -105,7 +105,7 @@ test.describe('Auto-colour — on-colour auto-pick (lightness sweep)', () => {
         el.remove();
         out.push({ L, fg, contrast: (Math.max(fg, bg) + 0.05) / (Math.min(fg, bg) + 0.05) });
       }
-      root.style.removeProperty('--sf-color-neutral-light');
+      root.style.removeProperty('--sf-color-neutral-source-light');
       return out;
     });
 
