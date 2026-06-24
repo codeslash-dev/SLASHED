@@ -30,6 +30,10 @@ import '../../optional/tokens.palette.css';
 // (sf-stack, sf-cluster, sf-grid, sf-bento, sf-sidebar, etc.) instead of
 // custom simulations. User overrides still scope only to the preview stage.
 import '../../core/layout.css';
+// Macro-classes — only .sf-* class selectors in @layer slashed.macros, safe
+// alongside chrome styles. Required so the live-preview Macros tab can
+// demonstrate real sf-surface--*, sf-prose, sf-truncate, sf-scroll-shadow, etc.
+import '../../core/macros.css';
 
 import './styles/app.css';
 

@@ -838,56 +838,56 @@
         <p class="pv__eyebrow">sf-surface--* color macros (11 variants)</p>
         <div class="pv__macro-grid">
           {#each statusMacros as c (c)}
-            <div class="pv__surface-cell pv__surface-{c}">surface--{c}</div>
+            <div class="pv__surface-cell sf-surface--{c}">surface--{c}</div>
           {/each}
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-text-gradient · sf-text-protect</p>
-        <p class="pv__text-grad" style="font-size:var(--sf-text-2xl);font-weight:800;line-height:1.1">Gradient headline text</p>
+        <p class="sf-text-gradient" style="font-size:var(--sf-text-2xl);font-weight:800;line-height:1.1;margin:0">Gradient headline text</p>
         <div class="pv__photo">
-          <p class="pv__text-protect">Protected text over image gradient</p>
+          <p class="sf-text-protect" style="margin:0;color:#fff;font-size:var(--sf-text-xl,1.5rem);font-weight:700">Protected text over image gradient</p>
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-truncate · sf-line-clamp-2 · sf-line-clamp-3 · sf-line-clamp-N</p>
-        <p class="pv__truncate">This is a very long single line that will be truncated with an ellipsis once it overflows its inline size box — lorem ipsum dolor sit amet consectetur adipiscing.</p>
-        <p class="pv__clamp2">Two-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
-        <p class="pv__clamp3">Three-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco.</p>
-        <p class="pv__clampn" style="--pv-clamp:4">Four-line clamp (--sf-line-clamp: 4). Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+        <p class="sf-truncate" style="margin:0;font-size:var(--sf-text-s,.875rem)">This is a very long single line that will be truncated with an ellipsis once it overflows its inline size box — lorem ipsum dolor sit amet consectetur adipiscing.</p>
+        <p class="sf-line-clamp-2" style="margin:0;font-size:var(--sf-text-s,.875rem)">Two-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+        <p class="sf-line-clamp-3" style="margin:0;font-size:var(--sf-text-s,.875rem)">Three-line clamp. Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco.</p>
+        <p class="sf-line-clamp-N" style="--sf-line-clamp:4;margin:0;font-size:var(--sf-text-s,.875rem)">Four-line clamp (--sf-line-clamp: 4). Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip.</p>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-prose · sf-not-prose · sf-flow</p>
-        <div class="pv__prose-demo">
-          <h3 class="pv__prose-h">Prose heading</h3>
-          <p class="pv__prose-p">Automatic vertical rhythm. Direct children get spacing automatically via flow space token.</p>
-          <ul class="pv__prose-ul"><li>Restored bullets</li><li>Nested indentation preserved</li></ul>
-          <div class="pv__not-prose">.sf-not-prose — opts this widget out of prose spacing rules.</div>
-          <p class="pv__prose-p">Back to prose body text.</p>
+        <div class="sf-prose" style="background:var(--sf-color-inset,rgba(127,127,127,.08));padding:12px;border-radius:var(--sf-radius-m,8px)">
+          <h3>Prose heading</h3>
+          <p>Automatic vertical rhythm. Direct children get spacing automatically via flow space token.</p>
+          <ul><li>Restored bullets</li><li>Nested indentation preserved</li></ul>
+          <div class="sf-not-prose" style="padding:6px 8px;background:var(--sf-color-surface,#fff);border-radius:var(--sf-radius-s,4px);font-size:var(--sf-text-xs,.75rem);font-weight:600;border:1px solid var(--sf-color-border,rgba(127,127,127,.2))">.sf-not-prose — opts this widget out of prose spacing rules.</div>
+          <p>Back to prose body text.</p>
         </div>
         <p class="pv__eyebrow" style="margin-top:10px">sf-flow (lobotomized owl — * + *)</p>
-        <div class="pv__flow-demo">
-          <p>First (no top margin)</p>
-          <p>Second (gets --sf-space-m top margin via * + *)</p>
-          <p>Third (same)</p>
+        <div class="sf-flow" style="background:var(--sf-color-inset,rgba(127,127,127,.08));padding:10px;border-radius:var(--sf-radius-s,4px);font-size:var(--sf-text-s,.875rem);color:var(--sf-color-text--secondary,inherit)">
+          <p style="margin:0">First (no top margin)</p>
+          <p style="margin:0">Second (gets --sf-flow-space top margin via * + *)</p>
+          <p style="margin:0">Third (same)</p>
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-scroll-shadow (vertical overflow)</p>
-        <div class="pv__scroll-shadow">
+        <div class="sf-scroll-shadow" style="block-size:8rem;background:var(--sf-color-inset,rgba(127,127,127,.08));padding:10px 12px;border-radius:var(--sf-radius-m,8px);font-size:var(--sf-text-s,.875rem)">
           {#each Array(8) as _,i (i)}
-            <p style="margin:0 0 6px">Line {i+1}{i===0?' (scroll me)':i===7?' (bottom)':''}</p>
+            <p style="margin:0 0 6px;color:var(--sf-color-text--secondary,inherit)">Line {i+1}{i===0?' (scroll me)':i===7?' (bottom)':''}</p>
           {/each}
         </div>
       </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">sf-overflow-fade (horizontal tag list)</p>
-        <div class="pv__overflow-fade">
+        <div class="sf-overflow-fade" style="display:flex;gap:6px;white-space:nowrap">
           {#each ['one','two','three','four','five','six','seven','eight','nine','ten'] as t (t)}
             <span class="pv__tag">tag {t}</span>
           {/each}
@@ -897,11 +897,11 @@
       <section class="pv__block">
         <p class="pv__eyebrow">Link macros · sf-tabular-nums</p>
         <div class="pv__chips" style="margin-bottom:10px">
-          <a class="pv__link-subtle" href="#a" onclick={preventDemoNav}>sf-link--subtle (underline on hover)</a>
-          <a class="pv__link-reverse" href="#a" onclick={preventDemoNav}>sf-link--reverse (always underlined)</a>
-          <a class="pv__link-ext" href="#a" onclick={preventDemoNav}>sf-link-external ↗</a>
+          <a class="pv__a sf-link--subtle" href="#a" onclick={preventDemoNav}>sf-link--subtle (underline on hover)</a>
+          <a class="pv__a sf-link--reverse" href="#a" onclick={preventDemoNav}>sf-link--reverse (always underlined)</a>
+          <a class="pv__a sf-link-external" href="#a" onclick={preventDemoNav}>sf-link-external</a>
         </div>
-        <table class="pv__tbl">
+        <table class="pv__tbl sf-tabular-nums">
           <tbody>
             <tr><td>Item Alpha</td><td>1,234.50</td></tr>
             <tr><td>Item Beta</td><td>9,876.10</td></tr>
@@ -1226,43 +1226,9 @@
   /* ── Macros section ── */
   .pv__macro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem,1fr)); gap: 6px; }
   .pv__surface-cell { padding: 8px 10px; border-radius: var(--sf-radius-m,8px); font-size: 11px; font-weight: 600; min-height: 2.5rem; display: flex; align-items: center; border: 1px solid var(--sf-color-border, rgba(127,127,127,.2)); }
-  .pv__surface-primary   { background: var(--sf-color-primary-subtle,   rgba(79,140,255,.1));  color: var(--sf-color-primary,#4f8cff); }
-  .pv__surface-secondary { background: var(--sf-color-secondary-subtle, rgba(107,114,128,.1)); color: var(--sf-color-secondary,#6b7280); }
-  .pv__surface-tertiary  { background: var(--sf-color-tertiary-subtle,  rgba(136,88,255,.1));  color: var(--sf-color-tertiary,#8858ff); }
-  .pv__surface-action    { background: var(--sf-color-action-subtle,    rgba(8,145,178,.1));   color: var(--sf-color-action,#0891b2); }
-  .pv__surface-neutral   { background: var(--sf-color-neutral-subtle,   rgba(82,82,82,.1));    color: var(--sf-color-neutral,#525252); }
-  .pv__surface-inverse   { background: var(--sf-color-inverse,#111);    color: var(--sf-color-text--inverse,#fff); }
-  .pv__surface-success   { background: var(--sf-color-success-subtle,   rgba(22,163,74,.1));   color: var(--sf-color-success,#16a34a); }
-  .pv__surface-warning   { background: var(--sf-color-warning-subtle,   rgba(202,138,4,.1));   color: var(--sf-color-warning-strong,#854d0e); }
-  .pv__surface-danger     { background: var(--sf-color-danger-subtle,    rgba(220,38,38,.1));   color: var(--sf-color-danger,#dc2626); }
-  .pv__surface-info      { background: var(--sf-color-info-subtle,      rgba(8,145,178,.1));   color: var(--sf-color-info,#0891b2); }
-  .pv__surface-danger    { background: var(--sf-color-danger-subtle,    rgba(220,38,38,.1));   color: var(--sf-color-danger,#dc2626); }
-  .pv__text-grad { background: var(--sf-gradient-primary, linear-gradient(135deg, var(--sf-color-primary,#4f8cff), var(--sf-color-tertiary,#8858ff))); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin: 0; }
   .pv__photo { position: relative; height: 6rem; border-radius: var(--sf-radius-m,8px); overflow: hidden; background: linear-gradient(135deg, var(--sf-color-tertiary,#8858ff), var(--sf-color-action,#0891b2)); display: grid; place-items: center; }
-  .pv__text-protect { margin: 0; color: #fff; font-size: var(--sf-text-xl,1.5rem); font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
-  .pv__truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__clamp2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__clamp3 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__clampn { overflow: hidden; display: -webkit-box; -webkit-line-clamp: var(--pv-clamp,4); -webkit-box-orient: vertical; margin: 0; font-size: var(--sf-text-s,.875rem); }
-  .pv__prose-demo { background: var(--sf-color-inset, rgba(127,127,127,.08)); padding: 12px; border-radius: var(--sf-radius-m,8px); }
-  .pv__prose-h  { margin: 0 0 8px; font-size: var(--sf-text-l,1.25rem); font-family: var(--sf-font-heading,inherit); color: var(--sf-color-heading,inherit); }
-  .pv__prose-p  { margin: 0 0 8px; font-size: var(--sf-text-s,.875rem); color: var(--sf-color-text--secondary,inherit); }
-  .pv__prose-ul { margin: 0 0 8px; padding-inline-start: 1.4em; font-size: var(--sf-text-s,.875rem); color: var(--sf-color-text--secondary,inherit); }
-  .pv__not-prose{ padding: 6px 8px; background: var(--sf-color-surface,#fff); border-radius: var(--sf-radius-s,4px); font-size: var(--sf-text-xs,.75rem); font-weight: 600; border: 1px solid var(--sf-color-border, rgba(127,127,127,.2)); }
-  .pv__flow-demo { background: var(--sf-color-inset, rgba(127,127,127,.08)); padding: 10px; border-radius: var(--sf-radius-s,4px); font-size: var(--sf-text-s,.875rem); color: var(--sf-color-text--secondary,inherit); }
-  .pv__flow-demo p { margin: 0; }
-  .pv__flow-demo p + p { margin-top: var(--sf-space-s,8px); }
-  .pv__scroll-shadow { block-size: 8rem; overflow-y: auto; background: var(--sf-color-inset, rgba(127,127,127,.08)); padding: 10px 12px; border-radius: var(--sf-radius-m,8px); font-size: var(--sf-text-s,.875rem); background-image: linear-gradient(var(--sf-color-bg,#fff),var(--sf-color-bg,#fff)), linear-gradient(var(--sf-color-bg,#fff),var(--sf-color-bg,#fff)), linear-gradient(rgba(0,0,0,.1),transparent), linear-gradient(transparent,rgba(0,0,0,.1)); background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px; background-position: 0 0, 0 100%, 0 0, 0 100%; background-repeat: no-repeat; background-attachment: local,local,scroll,scroll; }
-  .pv__scroll-shadow p { margin: 0 0 6px; color: var(--sf-color-text--secondary,inherit); }
-  .pv__overflow-fade { display: flex; gap: 6px; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, black 70%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%); }
   .pv__tag { display: inline-flex; padding: 4px 10px; background: var(--sf-color-surface,#fff); border: 1px solid var(--sf-color-border, rgba(127,127,127,.3)); border-radius: var(--sf-radius-m,8px); font-size: 11px; white-space: nowrap; }
-  .pv__link-subtle  { color: var(--sf-color-text--secondary,#555); text-decoration: none; }
-  .pv__link-subtle:hover { text-decoration: underline; }
-  .pv__link-reverse { color: var(--sf-color-link,#4f8cff); text-decoration: underline; }
-  .pv__link-reverse:hover { text-decoration: none; }
-  .pv__link-ext { color: var(--sf-color-link,#4f8cff); }
-  .pv__link-ext::after { content: ' ↗'; font-size: .8em; }
-  .pv__tbl { font-variant-numeric: tabular-nums; font-size: var(--sf-text-s,.875rem); border-collapse: collapse; }
+  .pv__tbl { font-size: var(--sf-text-s,.875rem); border-collapse: collapse; }
   .pv__tbl td { padding: 4px 12px 4px 0; color: var(--sf-color-text--secondary,inherit); }
   .pv__tbl td:last-child { text-align: right; font-family: var(--sf-font-mono,monospace); }
   .pv__state-cell { padding: 8px 10px; border-radius: var(--sf-radius-m,8px); font-size: 11px; font-weight: 600; min-height: 2.5rem; display: flex; align-items: center; background: var(--sf-color-surface,#fff); border: 1px solid var(--sf-color-border, rgba(127,127,127,.2)); color: var(--sf-color-text,inherit); }
