@@ -1,38 +1,11 @@
 /* SLASHED — core/print.css
    @layer slashed.print
-
-   Print rules and @page definition. Print tokens (--sf-print-*)
-   are declared in core/tokens.css.
-
-   Color contract (Phase 3):
-   authored colour is preserved by default. Browsers apply their own
-   ink-saving heuristics via the default `print-color-adjust: economy`,
-   so semantic colours (badges, status pills, <mark>, syntax highlighting)
-   reach paper intact. Two opt-in classes give consumers control:
-
-     .print-color-exact  → force every descendant to print colours
-                           verbatim (for colour-coded data that loses
-                           meaning when the browser flattens it).
-     .print-no-color     → force everything to ink-on-paper:
-                           transparent backgrounds + system text colour.
-                           The legacy blanket reset, now opt-in.
-
-   `!important` is reserved for selectors whose semantics require
-   defeating consumer-authored CSS:
-     - `.no-print` and the hide-list (nav, aside, button, …) — these
-       are content negative-space and must vanish from print regardless
-       of authored display rules.
-     - `details > summary` — disclosure widget carries no print value.
-     - The two opt-in colour classes above — when the consumer marks a
-       region with them they are explicitly asking to override authored
-       colour, so `!important` is the contract.
-   ─────────────────────────────────────────────────── */
+   Print-only visibility, page defaults, ink-saving resets, and URL disclosure.
+   Prefix: .print-* for explicit print helpers. */
 
 @layer slashed.print {
 
-  /* ── Print visibility utilities ──────────────────────────────── */
-
-  /* Screen default: print-only content is hidden until the page is printed. */
+  
   .print-only {
     display: none;
   }
@@ -40,8 +13,7 @@
   @media print {
 
     @page {
-      /* var() is not valid inside @page — hardcode values here.
-         Consumers who need a different page size must override @page directly. */
+
       size:   a4 portrait;
       margin: 2cm;
     }
@@ -50,8 +22,6 @@
       font-size: var(--sf-print-base-size, 11pt);
     }
 
-    /* Decorative shadows are paper-noise. No `!important` — an authored
-       shadow that explicitly survives into print is the consumer's call. */
     *,
     *::before,
     *::after {
@@ -59,9 +29,6 @@
       text-shadow: none;
     }
 
-    /* Expand URLs after link text — exclude fragment, javascript:, mailto:,
-       tel: links (already readable or noisy on paper) and .sf-link-external
-       (which has its own ::after marker). */
     a[href]:not([href^="#"], [href^="javascript:" i], [href^="mailto:" i], [href^="tel:" i], .sf-link-external)::after {
       content:    " (" attr(href) ")";
       font-size:  90%;
@@ -74,7 +41,7 @@
 
     img, svg, canvas, figure, table, pre, blockquote {
       break-inside: avoid;
-      /* video is excluded — it is already hidden in print (see hide list below) */
+
     }
 
     thead {
@@ -87,7 +54,7 @@
 
     h1, h2, h3, h4, h5, h6 {
       break-after: avoid;
-      /* orphans/widows on single-line headings have no effect — set on p below */
+
     }
 
     p {
@@ -100,45 +67,26 @@
       padding: var(--sf-space-s);
     }
 
-    /* Hide non-essential interactive and decorative elements.
-       `!important` is justified: these elements are content negative-space
-       in print, and consumer-authored display rules must not bring them
-       back accidentally. */
     nav, aside, button, input, select, textarea,
     audio, video, dialog, [popover], .no-print {
       display: none !important;
     }
 
-    /* Reveal print-only content (overrides the screen default above). */
     .print-only {
       display: revert !important;
     }
 
-    /* Preserve <details> content regardless of open state. nav, aside,
-       and other interactive chrome are already hidden by the hide list
-       above, so the remaining <details> are content — force them open.
-       Only `summary` keeps `!important` — the disclosure chevron carries
-       no print value and the consumer should not be able to bring it back
-       inadvertently. */
     details { display: block; }
     details > summary { display: none !important; }
     details > :not(summary) { display: block; }
 
-    /* ── Opt-in colour treatment ─────────────────────────────────── */
-
-    /* Force colour-faithful rendering. Use on regions where a tinted
-       background or coloured text encodes meaning (status pills,
-       severity callouts, syntax highlighting, charts). */
+    
     .print-color-exact,
     .print-color-exact * {
       print-color-adjust:         exact !important;
       -webkit-print-color-adjust: exact !important;
     }
 
-    /* Opt back into the legacy blanket reset: transparent backgrounds
-       and system text colour everywhere inside the marked subtree.
-       Use on regions where ink-saving is the contract (corporate
-       boilerplate forms, append-to-existing-document templates). */
     .print-no-color,
     .print-no-color *,
     .print-no-color *::before,

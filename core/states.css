@@ -1,28 +1,11 @@
 /* SLASHED — core/states.css
    @layer slashed.states
-
-   Stateful classes toggled by JS or ARIA attributes.
-   Prefix: .is-*  (exclusive to this layer — never used in utilities).
-
-   These are NOT utility classes. They describe dynamic,
-   runtime states that change in response to user interaction
-   or application logic. Utilities describe static intent;
-   states describe current condition.
-
-   Design principles:
-   ─ Generic states only — component-specific overrides belong
-     in slashed.components (e.g. .sf-modal.is-open).
-   ─ Tokens first — every value references a design token.
-   ─ Low specificity — single class, no nesting.
-   ─ Minimal property sets — states set the MINIMUM needed
-     to communicate the state. Components layer on top.
-   ─────────────────────────────────────────────────── */
+   Generic runtime states toggled by JS or ARIA: visibility, interactivity, selection, busy/current.
+   Prefix: .is-*; not utilities or component-specific variants. */
 
 @layer slashed.states {
 
-  /* ============================================================
-     VISIBILITY
-     ============================================================ */
+  /* VISIBILITY */
 
   .is-hidden {
     display: none !important;
@@ -36,16 +19,14 @@
     visibility: visible;
   }
 
-  /* ============================================================
-     INTERACTIVITY — DISABLED / READONLY
-     ============================================================ */
+  /* INTERACTIVITY */
 
+  /* cursor: not-allowed inherits to children with pointer-events: auto —
+     intentional, part of the .is-disabled API surface. */
   .is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
-    /* cursor: not-allowed is intentional even though pointer-events:none means it never renders
-       on this element itself. The CSS value IS inherited by child elements that have
-       pointer-events:auto re-enabled, and it is part of the documented .is-disabled API surface. */
+
     cursor:         not-allowed;
     user-select:    none;
   }
@@ -55,9 +36,7 @@
     user-select:    none;
   }
 
-  /* ============================================================
-     LOADING / ASYNC FEEDBACK
-     ============================================================ */
+  /* LOADING / ASYNC FEEDBACK */
 
   .is-loading {
     color:          transparent !important;
@@ -65,8 +44,6 @@
     position:       relative;
   }
 
-  /* color:transparent hides text but not hardcoded SVGs or inline images.
-     Hiding direct children ensures no layout artifacts overlap the spinner. */
   .is-loading > * {
     opacity: 0 !important;
   }
@@ -83,9 +60,7 @@
     border:        var(--sf-border-width-2) solid var(--sf-color-border--strong);
     border-block-start-color: var(--sf-color-action);
     border-radius: var(--sf-radius-full);
-    /* Reduced-motion: accessibility.css kills animation-duration via
-       !important on *, *::before, *::after — so this spinner stops
-       even without a local reduced-motion wrapper. */
+
     animation: var(--sf-animation-spin);
   }
 
@@ -94,14 +69,11 @@
   }
 
   .is-pending {
-    /* Optimistic UI — request in flight but content still visible/usable
-       (unlike .is-loading, which masks content with a spinner). */
+
     opacity: var(--sf-state-pending-opacity);
     cursor:  progress;
   }
 
-  /* Native <img> renders its source above the CSS background, hiding the shimmer.
-     Forcing opacity:0 allows the skeleton gradient to show through. */
   img.is-skeleton,
   .is-skeleton img {
     opacity: 0 !important;
@@ -122,13 +94,10 @@
     user-select:     none;
   }
 
-  /* ============================================================
-     ACTIVE / SELECTED / CURRENT — navigation & toggling
-     ============================================================ */
+  /* ACTIVE / SELECTED / CURRENT */
 
   .is-active {
-    /* Generic active indicator — components add visual specifics.
-       Sets a scoped token for components to consume. */
+
     --sf-is-active: 1;
   }
 
@@ -137,10 +106,7 @@
   }
 
   .is-current {
-    /* Navigation: marks the current page/route.
-       Components style via .sf-nav .is-current etc.
-       Weight is tokenised so consumers can override without specificity battles:
-         :root { --sf-current-font-weight: var(--sf-font-weight-semibold); } */
+
     --sf-is-current: 1;
     font-weight: var(--sf-current-font-weight, var(--sf-font-weight-bold));
   }
@@ -150,19 +116,12 @@
   }
 
   .is-pressed {
-    /* Toggle buttons (aria-pressed="true"). Components add specifics. */
+
     --sf-is-pressed: 1;
     background-color: var(--sf-color-bg--selected);
   }
 
-  /* ============================================================
-     OPEN / CLOSED — disclosure widgets, modals, dropdowns
-
-     .is-open / .is-collapsed — a thing is shown vs hidden (modal,
-       dropdown, drawer). .is-expanded — maps to aria-expanded on a
-       disclosure/accordion trigger. They share the --sf-is-open flag
-       but signal different intent to consumers.
-     ============================================================ */
+  /* OPEN / CLOSED */
 
   .is-open {
     --sf-is-open: 1;
@@ -176,36 +135,14 @@
     --sf-is-open: 1;
   }
 
-  /* ============================================================
-     VALIDATION / FEEDBACK
+  /* VALIDATION / FEEDBACK */
 
-     Overlap semantics (see docs/states.md):
-     · .is-invalid / .is-valid — form-field validation (maps to
-       aria-invalid). Use on inputs.
-     · .is-error / .is-success — general component feedback, not tied
-       to a single field (a failed save, a completed step).
-     · .is-danger — destructive-action context (a delete button), NOT
-       a validation result. Distinct from .is-error.
-     ============================================================ */
-
-  /* NOTE: .is-valid and .is-success share identical CSS values by design.
-     The semantic distinction is intentional (see docs/states.md):
-     · .is-valid  → form-field validation result (maps to aria-invalid="false").
-       Use on <input> elements.
-     · .is-success → general component feedback, not tied to a form field.
-       Use on containers, banners, step indicators.
-     They share the same visual treatment because both represent a "positive"
-     state, but consuming them interchangeably is a semantic error. */
   .is-valid,
   .is-success {
     --sf-field-border-color: var(--sf-color-success);
     --sf-field-text-color:   var(--sf-color-success-strong);
   }
 
-  /* NOTE: .is-invalid and .is-error share identical CSS values by design.
-     · .is-invalid → form-field validation failure (maps to aria-invalid="true").
-     · .is-error   → general component error state (failed save, network error).
-     Both use --sf-color-danger (error is an alias for danger). */
   .is-invalid,
   .is-error {
     --sf-field-border-color: var(--sf-color-danger);
@@ -227,13 +164,11 @@
     --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
-  /* ============================================================
-     POSITION / STICKINESS
-     ============================================================ */
+  /* POSITION / STICKINESS */
 
   .is-sticky {
     position:         sticky;
-    inset-block-start: var(--sf-sticky-offset, 0); /* logical: respects writing-mode */
+    inset-block-start: var(--sf-sticky-offset, 0);
     z-index:           var(--sf-z-sticky);
   }
 
@@ -244,16 +179,12 @@
   }
 
   .is-fixed {
-    /* Intentionally bare — position only. Consumers must supply placement
-       (inset, inset-block-start, etc.) and z-index via a modifier or inline style.
-       Example: <div class="is-fixed" style="inset: 0; z-index: var(--sf-z-overlay)"> */
+
     position: fixed;
   }
 
   .is-fullscreen {
-    /* App-managed fullscreen overlay. For the native Fullscreen API,
-       prefer the `:fullscreen` pseudo-class; this is the JS-toggled
-       equivalent for elements not entered via that API. */
+
     position: fixed;
     inset:    0;
     z-index:  var(--sf-z-overlay);
@@ -262,13 +193,11 @@
   .is-resizable {
     resize:          both;
     overflow:        auto;
-    min-inline-size: var(--sf-space-xl, 3.55rem); /* prevent collapsing to zero on drag */
+    min-inline-size: var(--sf-space-xl, 3.55rem);
     min-block-size:  var(--sf-space-xl, 3.55rem);
   }
 
-  /* ============================================================
-     OVERFLOW / CLIPPING
-     ============================================================ */
+  /* OVERFLOW / CLIPPING */
 
   .is-clipped {
     overflow: hidden !important;
@@ -285,9 +214,7 @@
     white-space:   nowrap;
   }
 
-  /* ============================================================
-     DRAG & DROP
-     ============================================================ */
+  /* DRAG & DROP */
 
   .is-dragging {
     opacity: var(--sf-opacity-muted);
@@ -303,18 +230,14 @@
     cursor: grab;
   }
 
-  /* ============================================================
-     OVERLAY / BACKDROP
-     ============================================================ */
+  /* OVERLAY / BACKDROP */
 
   .is-overlay {
     position: absolute;
     inset:    0;
   }
 
-  /* ============================================================
-     FOCUS / INTERACTION MODIFIERS
-     ============================================================ */
+  /* FOCUS / INTERACTION MODIFIERS */
 
   .is-clickable {
     cursor:  pointer;
@@ -325,33 +248,17 @@
   }
 
   .is-focused {
-    /* Programmatic / JS-driven focus indicator, independent of
-       :focus-visible. Normal weight so consumers can restyle. */
+
     outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  /* ============================================================
-     EMPTY STATE
-     ============================================================ */
+  /* EMPTY STATE */
 
-  /* NOTE: :empty only matches elements with NO child nodes — including no
-     whitespace. Server-rendered HTML often includes space between tags, which
-     prevents the match. When toggling via JS, call element.textContent = ""
-     before adding this class (or use element.innerHTML = "" to clear all nodes
-     including whitespace text nodes). */
   .is-empty:empty {
     display: none;
   }
 
-  /* ============================================================
-     KEYFRAMES (used by states above)
-
-     Spinner and shimmer keyframes live in core/motion.css alongside
-     the rest of the framework's @keyframes. They are referenced from
-     here by name (sf-spin, sf-shimmer) and are inert until applied.
-     If you load core/states.css without core/motion.css, define them
-     in your own CSS or copy them from motion.css.
-     ============================================================ */
+  /* KEYFRAMES (used by states above) */
 
 }

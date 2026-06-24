@@ -1,46 +1,7 @@
-/* ============================================================
-   SLASHED — optional/tokens.palette.css
-   Optional module. Auto-generates a full numeric scale, alpha
-   variants, and semantic + functional aliases for the 6 brand
-   color tokens using color-mix(in oklab). No build step required.
-   oklab (Cartesian) is used instead of oklch (polar) to prevent
-   hue drift when mixing colors with distant hues (e.g. yellow
-   mixed toward a blue-ish base would sweep through greens in oklch).
-
-   Status colors keep their subtle/muted/strong triplets in
-   core/tokens.css — they are NOT duplicated here.
-
-   This is a deliberate design choice: brand colours need a full 50-950
-   ramp for decorative/compositional use (backgrounds, borders, hover
-   states at arbitrary intensities). Status colours are functional — you
-   need a subtle background, a strong readable text, and a muted accent.
-   A full numeric scale for status/warnings would add ~185 tokens that
-   most consumers never use. If you need --sf-color-danger-300, replicate
-   the brand-palette formula:
-     --sf-color-danger-300: color-mix(in oklab, var(--sf-color-danger) 40%, var(--sf-color-surface));
-
-   Load after core/tokens.css:
-     @import "optional/tokens.palette.css";
-
-   Token families (per brand color):
-     -50 … -950   numeric scale. 500 = the base color.
-                  Tints (50-400) mix toward --sf-color-surface; shades
-                  (600-950) mix toward --sf-color-text. Both auto-adapt
-                  to light/dark. (base inverts the mix direction.)
-     -a5/a10/a30/a50/a80   alpha variants (mixed with transparent).
-                  For an intermediate alpha use oklch(from var(--sf-color-x) l c h / .NN).
-     shade aliases     superlight/xlight/lighter/darker/xdark/superdark
-                       → numeric steps via var() (one override propagates).
-     functional aliases hover/active/subtle/muted/ghost → other aliases.
-
-   RAMP SHAPE — PUBLIC-ADVANCED
-   Override --sf-palette-mix-{step} on :root to reshape the entire ramp
-   without editing every token. For example, to make tints spread wider:
-     :root { --sf-palette-mix-200: 30%; --sf-palette-mix-300: 55%; }
-   Applies to all 6 brand families simultaneously. For per-family
-   adjustment override the specific token directly instead:
-     :root { --sf-color-primary-300: color-mix(in oklab, var(--sf-color-primary) 55%, var(--sf-color-surface)); }
-   ============================================================ */
+/* SLASHED — optional/tokens.palette.css
+   @layer slashed.tokens
+   Optional numeric brand palettes, alpha variants, and semantic aliases generated with color-mix(in oklab).
+   Prefix: --sf-color-*; load after core/tokens.css. */
 
 @layer slashed.tokens {
   /* ── @supports gate: oklch(from …) alpha scale ── */

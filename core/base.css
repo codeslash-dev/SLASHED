@@ -1,19 +1,16 @@
 /* SLASHED — core/base.css
    @layer slashed.base
-   ─────────────────────────────────────────────────── */
+   Element defaults for typography, media, links, tables, and forms.
+   Token-first, classless foundation. */
 
 @layer slashed.base {
-
-  /* Dark/light mode lives in core/themes.css (slashed.themes layer).
-     The baseline color-scheme: var(--sf-color-scheme, light dark) is
-     set on html in core/reset.css. */
 
   html {
     scrollbar-color: var(--sf-scrollbar-thumb) var(--sf-scrollbar-track);
   }
 
   body {
-    margin:           0;          /* UA default is 8px */
+    margin:           0;
     font-family:      var(--sf-body-font-family, var(--sf-font-body));
     font-size:        var(--sf-body-font-size,   var(--sf-text-m));
     line-height:      var(--sf-body-line-height, var(--sf-leading-normal));
@@ -23,7 +20,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    margin:            0;         /* UA adds top/bottom margins */
+    margin:            0;
     font-family:       var(--sf-heading-font-family, var(--sf-font-heading));
     line-height:       var(--sf-leading-tight);
     color:             var(--sf-heading-color, var(--sf-color-heading));
@@ -40,7 +37,7 @@
   h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); font-weight: var(--sf-h6-font-weight); letter-spacing: var(--sf-h6-letter-spacing); max-inline-size: var(--sf-h6-max-width); }
 
   p {
-    margin:        0;             /* UA adds margin-block: 1em */
+    margin:        0;
     text-wrap:     var(--sf-body-text-wrap);
     overflow-wrap: break-word;
   }
@@ -83,18 +80,8 @@
   sup { top:    -0.5em; }
   sub { bottom: -0.25em; }
 
-  /* `a:link` (specificity 0,1,1) rather than bare `a` (0,0,1) so the
-     author rule wins over WebKit's UA stylesheet rule
-     `a:link { color: -webkit-link; }`. The bare-`a` form silently
-     loses to the UA `:link` rule on unvisited anchors in WebKit,
-     which paints `-webkit-link` (≈ #00728f in dark mode) regardless
-     of whatever `--sf-color-link` resolves to — producing axe's
-     3.12 : 1 dark-mode contrast failure that survived four attempts
-     to "fix" the link colour formula (PR #73, then three iterations
-     of PR #76). The colour formula was never the problem; the
-     selector specificity was. Hover / visited / active rules already
-     used pseudo-classes so they had matching specificity and were
-     never affected. */
+  /* :link (0,1,1) not bare a: beats WebKit UA rule a:link { color: -webkit-link }
+     that silently overrides --sf-color-link in dark mode. */
   a:link {
     color:                   var(--sf-color-link);
     text-decoration-color:   var(--sf-color-link--underline);
@@ -130,7 +117,7 @@
     border-radius: var(--sf-radius-m);
     background:    var(--sf-color-code-block-bg, var(--sf-color-code-bg));
     color:         var(--sf-color-code-block-text, inherit);
-    overflow-x:      auto; /* Safari < 18.2 fallback for overflow-inline */
+    overflow-x:      auto;
     overflow-inline: auto;
     tab-size:        2;
     hyphens:       none;
@@ -143,17 +130,12 @@
     border-radius: 0;
   }
 
-  /* Media: block display prevents the UA inline baseline gap and
-     caps width to the container. Intentionally NOT in reset.css —
-     third-party UI (admin toolbars, embedded widget chrome) uses
-     inline SVG icons that must remain inline. */
   img, picture, video, canvas {
     display:         block;
     max-inline-size: 100%;
     block-size:      auto;
   }
 
-  /* object-fit only applies to replaced elements with intrinsic dimensions */
   img, video {
     object-fit:      var(--sf-object-fit);
     object-position: var(--sf-object-position);
@@ -193,11 +175,6 @@
     background-color: var(--sf-color-dim);
   }
 
-  /* Form elements: normalize font/color/cursor behaviour.
-     UA stylesheets intentionally break font/color inheritance for
-     form controls; these rules restore conventional inheritance.
-     Scoped to base.css (not reset.css) so third-party form UI that
-     ships its own unlayered stylesheet retains cascade priority. */
   button, input, select, textarea {
     font:           inherit;
     color:          inherit;
@@ -218,8 +195,6 @@
   optgroup { font: inherit; }
   ::placeholder { opacity: 1; color: var(--sf-color-text--placeholder, currentcolor); }
 
-  /* Minimal rich-block defaults — just enough to distinguish from <p>.
-     Full styling lives in .sf-prose (core/layout.css). */
   blockquote {
     border-inline-start: var(--sf-border-width-3) var(--sf-border-style) var(--sf-color-border);
     padding-inline-start: var(--sf-space-m);

@@ -23,9 +23,9 @@
  *   4. Token tiers come from scripts/token-tiers.js (single source of truth).
  * so its token/class counts line up with the other generators.
  *
- * Descriptions and groups are DERIVED from the section-banner comments that
- * already document the source (no new annotation syntax is introduced): every
- * element is attributed to the nearest preceding banner comment.
+ * Descriptions and groups prefer curated docs metadata, then fall back to the
+ * previous generated API index, and finally to concise source section banners.
+ * This keeps source CSS comments terse without erasing public API docs.
  */
 
 import fs   from 'node:fs';
@@ -58,6 +58,34 @@ function readAnnotations() {
     console.warn(`[docs] Failed to parse ${ANNOTATIONS_FILE}:`, err.message);
     return { tokens: {}, classes: {} };
   }
+}
+
+/**
+ * Read the previously generated API index as a compatibility overlay. This
+ * preserves curated groups/descriptions when source comments are intentionally
+ * reduced to terse category markers.
+ * @returns {{ tokens: Map<string, object>, classes: Map<string, object> }}
+ */
+function readExistingApiIndex() {
+  const empty = { tokens: new Map(), classes: new Map() };
+  if (!fs.existsSync(OUT)) return empty;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(OUT, 'utf8'));
+    const tokens = new Map();
+    const classes = new Map();
+    for (const entry of parsed.entries ?? []) {
+      if (entry.type === 'token') tokens.set(entry.name, entry);
+      if (entry.type === 'class') classes.set(entry.name, entry);
+    }
+    return { tokens, classes };
+  } catch (err) {
+    console.warn(`[docs] Failed to parse existing ${OUT}:`, err.message);
+    return empty;
+  }
+}
+
+function isUsefulDescription(description) {
+  return Boolean(description && !/^SLASHED\s+[—-]/.test(description));
 }
 
 // ── Per-file metadata ─────────────────────────────────────────────────────────
@@ -122,9 +150,10 @@ function readFile(rel) {
 
 // ── Section-banner parsing ──────────────────────────────────────────────────
 // A "banner" is a block comment that contains a long divider run (>=10 of '='
-// or '-'). The file-header banner (it names the file: "SLASHED — path") is
-// recognised separately and never used as an element's group. Plain NOTE
-// comments (no divider) are not treated as section banners.
+// or '-'). The file-header comment (starts with "SLASHED —" at offset 0) is
+// recognised separately and never used as an element's group — regardless of
+// whether it contains a divider run. Plain NOTE comments (no divider) are not
+// treated as section banners.
 
 const DIVIDER_RUN = /[-=─═]{10,}/;
 
@@ -199,7 +228,7 @@ function collectComments(css) {
     const raw    = m[0];
     const start  = m.index;
     const end    = m.index + raw.length;
-    const isHeader = /SLASHED\s+[—-]/.test(raw) && DIVIDER_RUN.test(raw) && start < 4;
+    const isHeader = /SLASHED\s+[—-]/.test(raw) && start < 4;
     // A banner is either a divider-fenced comment, a "/* -- Title -- */" form,
     // or a single-line at-rule sub-header ("/* @property — STATUS COLORS */").
     const singleLineSubHeader = !/\n/.test(raw.trim()) && /^\/\*\s*@[\w-]+\s+[—–-]\s+\S/.test(raw);
@@ -514,7 +543,7 @@ let bundlesFor_ = () => [];
  * @param {Record<string,string>} tokenAnnotations token name → curated description
  * @returns {Map<string, object>} name → token entry
  */
-function buildTokenEntries(bundlesFor, tokenAnnotations = {}) {
+function buildTokenEntries(bundlesFor, tokenAnnotations = {}, existingTokens = new Map()) {
   const merged = new Map(); // name -> entry
 
   for (const rel of TOKEN_FILES) {
@@ -562,6 +591,11 @@ function buildTokenEntries(bundlesFor, tokenAnnotations = {}) {
   }
   // Overlay curated per-token descriptions from token-annotations.json.
   for (const [name, entry] of merged) {
+    const previous = existingTokens.get(name);
+    if (previous) {
+      if (!entry.group && previous.group) entry.group = previous.group;
+      if (!isUsefulDescription(entry.description) && previous.description) entry.description = previous.description;
+    }
     if (tokenAnnotations[name]) entry.description = tokenAnnotations[name];
   }
   return merged;
@@ -576,7 +610,7 @@ function buildTokenEntries(bundlesFor, tokenAnnotations = {}) {
  * @param {Record<string,string>} classAnnotations class name → curated description
  * @returns {Map<string, object>} name → class entry
  */
-function buildClassEntries(bundlesFor, classAnnotations = {}) {
+function buildClassEntries(bundlesFor, classAnnotations = {}, existingClasses = new Map()) {
   bundlesFor_ = bundlesFor;
   const merged = new Map(); // name -> entry (union of files)
   for (const rel of CLASS_FILES) {
@@ -596,6 +630,11 @@ function buildClassEntries(bundlesFor, classAnnotations = {}) {
   // Overlay curated per-class descriptions from token-annotations.json.
   // The annotation wins unconditionally so the curated text always appears.
   for (const [name, entry] of merged) {
+    const previous = existingClasses.get(name);
+    if (previous) {
+      if (!entry.group && previous.group) entry.group = previous.group;
+      if (!isUsefulDescription(entry.description) && previous.description) entry.description = previous.description;
+    }
     if (classAnnotations[name]) entry.description = classAnnotations[name];
   }
   return merged;
@@ -725,8 +764,9 @@ function main() {
   const bundleOrderRank = b => (rank.has(b) ? rank.get(b) : Number.MAX_SAFE_INTEGER);
 
   const annotations = readAnnotations();
-  const tokenMap   = buildTokenEntries(bundlesFor, annotations.tokens);
-  const classMap   = buildClassEntries(bundlesFor, annotations.classes);
+  const existing = readExistingApiIndex();
+  const tokenMap   = buildTokenEntries(bundlesFor, annotations.tokens, existing.tokens);
+  const classMap   = buildClassEntries(bundlesFor, annotations.classes, existing.classes);
 
   const tokenEntries = [...tokenMap.values()]
     .map(e => finalizeEntry(e, bundleOrderRank))
