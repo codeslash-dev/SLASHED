@@ -46,14 +46,43 @@
   const SECTIONS = [
     { id: 'overview',   label: 'Overview' },
     { id: 'colors',     label: 'Colors' },
+    { id: 'gradients',  label: 'Gradients' },
     { id: 'palette',    label: 'Palette' },
-    { id: 'typography', label: 'Typography' },
+    { id: 'typography', label: 'Type' },
+    { id: 'spacing',    label: 'Spacing' },
     { id: 'layout',     label: 'Layout' },
+    { id: 'borders',    label: 'Borders' },
+    { id: 'shadows',    label: 'Shadows' },
+    { id: 'motion',     label: 'Motion' },
+    { id: 'effects',    label: 'Effects' },
     { id: 'macros',     label: 'Macros' },
     { id: 'tokens',     label: 'Tokens' },
   ];
 
+  const DOMAIN_TO_SECTION = {
+    home:       'overview',
+    colors:     'colors',
+    gradients:  'gradients',
+    typography: 'typography',
+    spacing:    'spacing',
+    layout:     'layout',
+    borders:    'borders',
+    shadows:    'shadows',
+    motion:     'motion',
+    effects:    'effects',
+    misc:       'tokens',
+    wcag:       'colors',
+    themes:     'palette',
+    setup:      'overview',
+    cheatsheet: 'tokens',
+  };
+
   let activeSection = $state('overview');
+
+  $effect(() => {
+    const sec = DOMAIN_TO_SECTION[ui.domain];
+    if (sec) activeSection = sec;
+  });
 
   const baseStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
   const styleStr = $derived(
@@ -350,6 +379,17 @@
 
       <!-- ═══════════ COLORS ═══════════ -->
       {#if activeSection === 'colors'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Applied to components</p>
+        <div class="pv__btns">
+          <button class="pv__btn pv__btn--primary">Primary</button>
+          <button class="pv__btn pv__btn--secondary">Secondary</button>
+          <button class="pv__btn pv__btn--action">Action</button>
+          <button class="pv__btn pv__btn--outline">Outline</button>
+          <button class="pv__btn pv__btn--ghost">Ghost</button>
+        </div>
+      </section>
 
       <section class="pv__block">
         <p class="pv__eyebrow">Brand colors + on-color text (auto WCAG black/white)</p>
@@ -1031,6 +1071,331 @@
 
       {/if}
 
+      <!-- ═══════════ GRADIENTS ═══════════ -->
+      {#if activeSection === 'gradients'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Brand gradients — --sf-gradient-*</p>
+        <div class="pv__gradients">
+          {#each gradients as g (g)}
+            <div class="pv__grad" style="background:var(--sf-gradient-{g},var(--sf-color-{g},#888))"><span class="pv__grad-label">{g}</span></div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Directional fade gradients</p>
+        <div class="pv__gradients">
+          {#each ['fade--t','fade--b','fade--l','fade--r'] as g (g)}
+            <div class="pv__grad pv__grad--bordered" style="background:var(--sf-gradient-{g},transparent)"><span class="pv__grad-label pv__grad-label--muted">{g}</span></div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Gradient on real content — card + hero strip</p>
+        <div class="pv__grad-card">
+          <div class="pv__grad-card__hero" style="background:var(--sf-gradient-primary,linear-gradient(135deg,var(--sf-color-primary,#4f8cff),var(--sf-color-tertiary,#8858ff)))">
+            <p class="pv__grad-card__title">Hero headline</p>
+            <p class="pv__grad-card__sub">Gradient background from --sf-gradient-primary</p>
+          </div>
+          <div class="pv__grad-card__row">
+            {#each ['secondary','tertiary','brand'] as g (g)}
+              <div class="pv__grad-card__chip" style="background:var(--sf-gradient-{g},var(--sf-color-{g},#888))">{g}</div>
+            {/each}
+          </div>
+        </div>
+      </section>
+
+      {/if}
+
+      <!-- ═══════════ SPACING ═══════════ -->
+      {#if activeSection === 'spacing'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Full space scale — --sf-space-* (resize viewport to see fluid values)</p>
+        <div class="pv__space pv__space--full">
+          {#each ['2xs','xs','s','m','l','xl','2xl','3xl'] as s (s)}
+            <div class="pv__space-row">
+              <code>--sf-space-{s}</code>
+              <span class="pv__space-bar" style="inline-size:var(--sf-space-{s})"></span>
+              <span class="pv__space-val" style="font-size:10px;color:var(--sf-color-text--muted,#888);white-space:nowrap;font-family:monospace">{s}</span>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Component spacing — gaps and padding</p>
+        <div class="pv__sp-demos">
+          <div class="pv__sp-card">
+            <div class="pv__sp-card__inner" style="gap:var(--sf-space-s,8px)">
+              <div class="pv__box">Item</div>
+              <div class="pv__box">Item</div>
+              <div class="pv__box">Item</div>
+            </div>
+            <code class="pv__lp-label">gap: --sf-space-s</code>
+          </div>
+          <div class="pv__sp-card">
+            <div class="pv__sp-card__inner" style="gap:var(--sf-space-m,16px)">
+              <div class="pv__box">Item</div>
+              <div class="pv__box">Item</div>
+              <div class="pv__box">Item</div>
+            </div>
+            <code class="pv__lp-label">gap: --sf-space-m</code>
+          </div>
+          <div class="pv__sp-card">
+            <div class="pv__sp-card__inner" style="gap:var(--sf-space-l,24px)">
+              <div class="pv__box">Item</div>
+              <div class="pv__box">Item</div>
+              <div class="pv__box">Item</div>
+            </div>
+            <code class="pv__lp-label">gap: --sf-space-l</code>
+          </div>
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Section padding — --sf-section-pad · --sf-content-gap</p>
+        <div class="pv__sec-demo">
+          <div class="pv__sec-inner">
+            <div class="pv__box pv__box--alt" style="min-height:3rem;width:100%">Section content</div>
+            <div class="pv__box pv__box--alt" style="min-height:2rem;width:100%">More content</div>
+          </div>
+          <p class="pv__muted" style="margin-top:6px">Padding: --sf-section-pad · Gap: --sf-content-gap</p>
+        </div>
+      </section>
+
+      {/if}
+
+      <!-- ═══════════ BORDERS ═══════════ -->
+      {#if activeSection === 'borders'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Border radius scale — --sf-radius-*</p>
+        <div class="pv__radii">
+          {#each radii as r (r)}
+            <div class="pv__radii-item">
+              <span class="pv__radii-box" style="border-radius:var(--sf-radius-{r})"></span>
+              <code>{r}</code>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Borders on real components</p>
+        <div class="pv__border-cards">
+          {#each ['s','m','l','xl','full'] as r (r)}
+            <div class="pv__border-card" style="border-radius:var(--sf-radius-{r});border-width:var(--sf-border-width-1,1px)">
+              <span>radius-{r}</span>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Border color variants — --sf-color-border-*</p>
+        <div class="pv__borders">
+          {#each ['border','border--subtle','border--strong','border--focus','border--disabled','border--translucent'] as b (b)}
+            <div class="pv__border-row">
+              <div style="flex:1;border-bottom:2px solid var(--sf-color-{b})"></div>
+              <code class="pv__border-label">--sf-color-{b}</code>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Focus ring — --sf-focus-ring-*</p>
+        <div class="pv__chips" style="gap:16px">
+          <button class="pv__btn pv__btn--primary pv__btn--focused" tabindex="-1">Primary focused</button>
+          <button class="pv__btn pv__btn--outline pv__btn--focused" tabindex="-1">Outline focused</button>
+          <button class="pv__btn pv__btn--ghost pv__btn--focused" tabindex="-1">Ghost focused</button>
+        </div>
+        <div class="pv__chips" style="margin-top:8px">
+          <code class="pv__code">--sf-focus-ring-width</code>
+          <code class="pv__code">--sf-focus-ring-color</code>
+          <code class="pv__code">--sf-focus-ring-offset</code>
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Border widths — --sf-border-width-*</p>
+        <div class="pv__weights">
+          {#each [1,2,3,4] as w (w)}
+            <div style="border-bottom:calc(var(--sf-border-width-{w},{w}px)) solid var(--sf-color-border,rgba(127,127,127,.4));padding-block:8px;font-size:11px;font-family:monospace;color:var(--sf-color-text--muted)">--sf-border-width-{w} ({w}px default)</div>
+          {/each}
+        </div>
+      </section>
+
+      {/if}
+
+      <!-- ═══════════ SHADOWS ═══════════ -->
+      {#if activeSection === 'shadows'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Elevation ramp — --sf-shadow-*</p>
+        <div class="pv__elev-row">
+          {#each ['xs','s','m','l','xl','2xl'] as s (s)}
+            <div class="pv__elev-card" style="box-shadow:var(--sf-shadow-{s})">
+              <code class="pv__elev-label">{s}</code>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Shadows on real UI components</p>
+        <div class="pv__shadow-ui">
+          <div class="pv__card" style="box-shadow:var(--sf-shadow-s)">
+            <div class="pv__card-body" style="padding:12px">
+              <p class="pv__card-title">Card — shadow-s</p>
+              <p class="pv__card-sub">Subtle lift above background</p>
+            </div>
+          </div>
+          <div class="pv__card" style="box-shadow:var(--sf-shadow-m)">
+            <div class="pv__card-body" style="padding:12px">
+              <p class="pv__card-title">Card — shadow-m</p>
+              <p class="pv__card-sub">Default card elevation</p>
+            </div>
+          </div>
+          <div class="pv__card" style="box-shadow:var(--sf-shadow-xl)">
+            <div class="pv__card-body" style="padding:12px">
+              <p class="pv__card-title">Card — shadow-xl</p>
+              <p class="pv__card-sub">Modal / overlay elevation</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Specialty shadows</p>
+        <div class="pv__chips" style="gap:16px;flex-wrap:wrap">
+          <span style="text-shadow:var(--sf-text-shadow,0 1px 3px rgba(0,0,0,.4));font-size:var(--sf-text-xl,1.5rem);font-weight:700;color:var(--sf-color-heading)">Text shadow</span>
+          <div style="filter:drop-shadow(var(--sf-drop-shadow,0 4px 8px rgba(0,0,0,.2)));display:inline-block">
+            <div class="pv__badge" style="background:var(--sf-color-primary);color:var(--sf-color-text--on-primary,#fff);padding:6px 14px;font-size:12px">Drop shadow</div>
+          </div>
+          <span style="box-shadow:0 0 16px var(--sf-glow-color,var(--sf-color-primary,#4f8cff));padding:6px 14px;border-radius:var(--sf-radius-m);border:1px solid var(--sf-color-primary);color:var(--sf-color-primary)">Glow</span>
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Inner shadow — --sf-shadow-inner</p>
+        <div class="pv__chips">
+          <div style="box-shadow:var(--sf-shadow-inner,inset 0 2px 4px rgba(0,0,0,.12));background:var(--sf-color-inset,rgba(127,127,127,.1));border:1px solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:10px 16px;font-size:var(--sf-text-s);color:var(--sf-color-text--secondary)">Inset / inner shadow</div>
+        </div>
+      </section>
+
+      {/if}
+
+      <!-- ═══════════ MOTION ═══════════ -->
+      {#if activeSection === 'motion'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Live animations — hit 🐢 above to preview reduced motion</p>
+        <div class="pv__motion-demos">
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--pulse" style="background:var(--sf-color-success,#22c55e)"></span><code class="pv__anim-label">pulse</code></div>
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--spin" style="border-color:var(--sf-color-primary,#4f8cff);border-top-color:transparent"></span><code class="pv__anim-label">spin</code></div>
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--bounce" style="background:var(--sf-color-action,#0891b2)"></span><code class="pv__anim-label">bounce</code></div>
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--slide" style="background:var(--sf-color-tertiary,#888)"></span><code class="pv__anim-label">slide·fade</code></div>
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--shimmer" style="background:linear-gradient(90deg,var(--sf-color-neutral-200,#e5e7eb) 25%,var(--sf-color-neutral-100,#f3f4f6) 50%,var(--sf-color-neutral-200,#e5e7eb) 75%);background-size:200% 100%"></span><code class="pv__anim-label">shimmer</code></div>
+          <div class="pv__motion-cell"><span class="pv__anim pv__anim--ping" style="background:var(--sf-color-danger,#dc2626)"></span><code class="pv__anim-label">ping</code></div>
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Duration scale — sweeping bar shows the relative timing</p>
+        <div class="pv__durations">
+          {#each ['instant','fast','normal','slow'] as d (d)}
+            <div class="pv__dur-row">
+              <code class="pv__dur-label">--sf-duration-{d}</code>
+              <div class="pv__dur-track"><span class="pv__dur-bar" style="animation-duration:var(--sf-duration-{d},200ms)"></span></div>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Easing functions — --sf-ease-* (bar sweeps with each easing)</p>
+        <div class="pv__eases">
+          {#each ['in','out','in-out','spring','bounce'] as e (e)}
+            <div class="pv__ease-row">
+              <code class="pv__ease-label">--sf-ease-{e}</code>
+              <div class="pv__ease-bar" style="--pv-ease:var(--sf-ease-{e},ease)"></div>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Transition on hover — using duration + easing tokens</p>
+        <div class="pv__trans-demo">
+          <div class="pv__trans-card">Hover me — color transition</div>
+          <div class="pv__trans-card pv__trans-card--scale">Hover me — scale transform</div>
+        </div>
+      </section>
+
+      {/if}
+
+      <!-- ═══════════ EFFECTS ═══════════ -->
+      {#if activeSection === 'effects'}
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Blur scale — --sf-blur-*</p>
+        <div class="pv__blur-row">
+          {#each [['none','0px'],['subtle','2px'],['base','8px'],['strong','16px'],['heavy','40px']] as [label, fb] (label)}
+            <div class="pv__blur-item">
+              <div class="pv__blur-box" style="backdrop-filter:blur(var(--sf-blur-{label},{fb}));-webkit-backdrop-filter:blur(var(--sf-blur-{label},{fb}))"></div>
+              <code class="pv__lp-label">{label}</code>
+            </div>
+          {/each}
+        </div>
+        <p class="pv__muted" style="margin-top:6px">Applied as backdrop-filter — requires a translucent background to be visible.</p>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Opacity scale — --sf-opacity-*</p>
+        <div class="pv__opac-row">
+          {#each [['disabled','0.4'],['muted','0.6'],['subtle','0.75'],['mid','0.85'],['full','1.0']] as [label, fb] (label)}
+            <div class="pv__opac-item" style="opacity:var(--sf-opacity-{label},{fb})">
+              <div class="pv__badge" style="background:var(--sf-color-primary);color:var(--sf-color-text--on-primary,#fff);padding:4px 10px">{label}</div>
+              <code class="pv__lp-label" style="opacity:1">{fb}</code>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Scrim / overlay — --sf-scrim · --sf-overlay</p>
+        <div class="pv__scrim-demo">
+          <div class="pv__scrim-photo">
+            <div class="pv__scrim-layer" style="background:var(--sf-scrim,rgba(0,0,0,0.5))">
+              <span style="color:#fff;font-weight:600;font-size:var(--sf-text-s)">--sf-scrim overlay</span>
+            </div>
+          </div>
+          <div class="pv__scrim-photo pv__scrim-photo--alt">
+            <div class="pv__scrim-layer" style="background:var(--sf-overlay,rgba(0,0,0,0.3))">
+              <span style="color:#fff;font-weight:600;font-size:var(--sf-text-s)">--sf-overlay</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pv__block">
+        <p class="pv__eyebrow">Frosted glass — backdrop-filter + surface</p>
+        <div class="pv__glass-demo">
+          <div class="pv__glass-bg">
+            <div class="pv__glass-panel">
+              <p style="margin:0;font-weight:600;font-size:var(--sf-text-s)">Glass surface</p>
+              <p class="pv__muted" style="margin:4px 0 0">backdrop-filter: blur + translucent surface color</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/if}
+
     </div>
   </div>
   </div>
@@ -1248,4 +1613,52 @@
   .pv__ease-row { display: flex; align-items: center; gap: 10px; }
   .pv__ease-label { font-family: var(--sf-font-mono,monospace); font-size: 11px; color: var(--sf-color-text--muted,#888); min-width: 14ch; flex-shrink: 0; }
   .pv__ease-bar { height: 8px; flex: 1; background: var(--sf-color-primary,#4f8cff); border-radius: 4px; transform-origin: left; animation: pv-sweep 2s var(--pv-ease,ease) infinite; }
+
+  /* ── Gradients section ── */
+  .pv__grad-card { display: flex; flex-direction: column; gap: 8px; border-radius: var(--sf-radius-m,8px); overflow: hidden; border: 1px solid var(--sf-color-border,rgba(127,127,127,.3)); }
+  .pv__grad-card__hero { padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 4px; min-height: 5rem; }
+  .pv__grad-card__title { margin: 0; font-size: var(--sf-text-xl,1.5rem); font-weight: 700; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+  .pv__grad-card__sub { margin: 0; font-size: var(--sf-text-s,.875rem); color: rgba(255,255,255,.8); }
+  .pv__grad-card__row { display: flex; gap: 6px; padding: 8px; background: var(--sf-color-inset,rgba(127,127,127,.06)); }
+  .pv__grad-card__chip { flex: 1; min-height: 2.5rem; border-radius: var(--sf-radius-m,8px); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.3); }
+
+  /* ── Spacing section ── */
+  .pv__space--full .pv__space-row { padding-block: 2px; }
+  .pv__sp-demos { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; }
+  .pv__sp-card { background: var(--sf-color-inset,rgba(127,127,127,.06)); border: 1px solid var(--sf-color-border,rgba(127,127,127,.2)); border-radius: var(--sf-radius-m,8px); padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .pv__sp-card__inner { display: flex; flex-direction: column; }
+  .pv__sec-demo { background: var(--sf-color-inset,rgba(127,127,127,.06)); border: 1px solid var(--sf-color-border,rgba(127,127,127,.2)); border-radius: var(--sf-radius-m,8px); padding: var(--sf-section-pad,clamp(2rem,5vw,5rem)) var(--sf-gutter,1.5rem); }
+  .pv__sec-inner { display: flex; flex-direction: column; gap: var(--sf-content-gap,clamp(1rem,3vw,2rem)); }
+
+  /* ── Borders section ── */
+  .pv__border-cards { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pv__border-card { padding: 12px 16px; background: var(--sf-color-surface,#fff); border: 1px solid var(--sf-color-border,rgba(127,127,127,.3)); font-size: 11px; font-family: monospace; color: var(--sf-color-text--muted,#888); min-width: 6rem; display: flex; align-items: center; justify-content: center; }
+
+  /* ── Shadows section ── */
+  .pv__elev-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; padding: 12px 4px 20px; }
+  .pv__elev-card { background: var(--sf-color-surface,#fff); border-radius: var(--sf-radius-m,8px); width: 72px; height: 72px; display: grid; place-items: center; border: 1px solid var(--sf-color-border,rgba(127,127,127,.1)); }
+  .pv__elev-label { font-family: monospace; font-size: 10px; color: var(--sf-color-text--muted,#888); }
+  .pv__shadow-ui { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 16px; padding: 8px 4px 4px; }
+
+  /* ── Motion section ── */
+  .pv__trans-demo { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pv__trans-card { padding: 12px 20px; background: var(--sf-color-surface,#fff); border: 1px solid var(--sf-color-border,rgba(127,127,127,.3)); border-radius: var(--sf-radius-m,8px); font-size: var(--sf-text-s,.875rem); font-weight: 500; cursor: default; transition: background var(--sf-duration-normal,250ms) var(--sf-ease-out,ease-out), color var(--sf-duration-normal,250ms) var(--sf-ease-out,ease-out), box-shadow var(--sf-duration-normal,250ms) var(--sf-ease-out,ease-out); }
+  .pv__trans-card:hover { background: var(--sf-color-primary,#4f8cff); color: var(--sf-color-text--on-primary,#fff); box-shadow: var(--sf-shadow-m,0 2px 8px rgba(0,0,0,.15)); }
+  .pv__trans-card--scale { transition: transform var(--sf-duration-normal,250ms) var(--sf-ease-spring,cubic-bezier(.34,1.56,.64,1)); }
+  .pv__trans-card--scale:hover { transform: scale(1.06); }
+
+  /* ── Effects section ── */
+  .pv__blur-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pv__blur-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .pv__blur-box { width: 70px; height: 70px; border-radius: var(--sf-radius-m,8px); background: var(--sf-color-surface,rgba(255,255,255,.3)); border: 1px solid var(--sf-color-border,rgba(255,255,255,.3)); position: relative; overflow: hidden; }
+  .pv__blur-box::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,var(--sf-color-primary,#4f8cff),var(--sf-color-tertiary,#8858ff)); opacity: 0.7; }
+  .pv__opac-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .pv__opac-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .pv__scrim-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pv__scrim-photo { height: 80px; border-radius: var(--sf-radius-m,8px); overflow: hidden; background: linear-gradient(135deg,var(--sf-color-primary,#4f8cff),var(--sf-color-action,#0891b2)); position: relative; }
+  .pv__scrim-photo--alt { background: linear-gradient(135deg,var(--sf-color-tertiary,#8858ff),var(--sf-color-secondary,#6b7280)); }
+  .pv__scrim-layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .pv__glass-demo { border-radius: var(--sf-radius-m,8px); overflow: hidden; }
+  .pv__glass-bg { padding: 24px; background: linear-gradient(135deg,var(--sf-color-primary,#4f8cff) 0%,var(--sf-color-tertiary,#8858ff) 50%,var(--sf-color-action,#0891b2) 100%); display: flex; align-items: center; justify-content: center; min-height: 8rem; }
+  .pv__glass-panel { background: rgba(255,255,255,.15); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.3); border-radius: var(--sf-radius-m,8px); padding: 16px 20px; color: #fff; max-width: 280px; width: 100%; }
 </style>
