@@ -1,4 +1,7 @@
-/* SLASHED — optional/components.css */
+/* SLASHED — optional/components.css
+   @layer slashed.components
+   Reserved component class surface for button, card, badge, tag, alert, avatar, modal, skeleton.
+   Imports optional component tokens. */
 
 @import "./tokens.components.css";
 

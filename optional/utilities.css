@@ -1,4 +1,7 @@
-/* SLASHED — optional/utilities.css */
+/* SLASHED — optional/utilities.css
+   @layer slashed.utilities
+   Static opt-in utility helpers.
+   Prefix: .sf-*; keep dynamic state in .is-* classes. */
 
 @layer slashed.utilities {
 

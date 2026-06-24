@@ -1,4 +1,7 @@
-/* SLASHED — optional/config-example.css   (COPY & CUSTOMISE) */
+/* SLASHED — optional/config-example.css
+   @layer slashed.themes
+   Copy-and-customise starter config for brand colors, fluid scales, radii, shadows, and motion.
+   Override tokens here, not compiled framework files. */
 
 @layer slashed.themes {
 

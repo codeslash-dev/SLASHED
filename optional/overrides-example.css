@@ -1,4 +1,7 @@
-/* SLASHED — optional/overrides-example.css   (COPY & CUSTOMISE) */
+/* SLASHED — optional/overrides-example.css
+   @layer slashed.overrides
+   Copy-and-customise examples for element, class, primitive-instance, third-party, and opt-in overrides.
+   Last layer by design. */
 
 @layer slashed.overrides {
 

@@ -1,4 +1,7 @@
-/* SLASHED — core/themes.css */
+/* SLASHED — core/themes.css
+   @layer slashed.themes
+   Light/dark activation, scoped theme color inheritance, LumLocker, and scheme-aware color adjustments.
+   Uses data-theme and token overrides. */
 
 @layer slashed.themes {
 

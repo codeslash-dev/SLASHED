@@ -1,4 +1,6 @@
-/* SLASHED — core/layers.css */
+/* SLASHED — core/layers.css
+   Global cascade order for every SLASHED layer.
+   Import before all framework modules. */
 
 @layer
   slashed.tokens,

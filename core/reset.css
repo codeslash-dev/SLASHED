@@ -1,4 +1,7 @@
-/* SLASHED — core/reset.css */
+/* SLASHED — core/reset.css
+   @layer slashed.reset
+   Browser normalization, sizing defaults, viewport behavior, media safety, and form inheritance.
+   No component styling. */
 
 @layer slashed.reset {
 

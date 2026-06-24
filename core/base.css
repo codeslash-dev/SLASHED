@@ -1,4 +1,7 @@
-/* SLASHED — core/base.css */
+/* SLASHED — core/base.css
+   @layer slashed.base
+   Element defaults for typography, media, links, tables, and forms.
+   Token-first, classless foundation. */
 
 @layer slashed.base {
 

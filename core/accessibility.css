@@ -1,4 +1,7 @@
-/* SLASHED — core/accessibility.css */
+/* SLASHED — core/accessibility.css
+   @layer slashed.accessibility
+   Focus rings, screen-reader helpers, skip links, and reduced-friction a11y utilities.
+   Prefix: .sf-* plus native focus selectors. */
 
 @layer slashed.accessibility {
 

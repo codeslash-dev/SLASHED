@@ -1,4 +1,7 @@
-/* SLASHED — core/print.css */
+/* SLASHED — core/print.css
+   @layer slashed.print
+   Print-only visibility, page defaults, ink-saving resets, and URL disclosure.
+   Prefix: .print-* for explicit print helpers. */
 
 @layer slashed.print {
 

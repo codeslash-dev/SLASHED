@@ -1,4 +1,7 @@
-/* SLASHED — core/states.css */
+/* SLASHED — core/states.css
+   @layer slashed.states
+   Generic runtime states toggled by JS or ARIA: visibility, interactivity, selection, busy/current.
+   Prefix: .is-*; not utilities or component-specific variants. */
 
 @layer slashed.states {
 

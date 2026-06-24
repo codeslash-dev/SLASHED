@@ -1,4 +1,7 @@
-/* SLASHED — optional/forms.css */
+/* SLASHED — optional/forms.css
+   @layer slashed.forms
+   Classless form controls: text inputs, selects, textareas, checks/radios, fieldsets, labels.
+   Values resolve through core and optional component tokens. */
 
 @layer slashed.forms {
 

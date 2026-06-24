@@ -1,23 +1,7 @@
-/* ============================================================
-   SLASHED — optional/tokens.components.css
-   Component tokens.
-   Layer: slashed.tokens
-
-   This file is not yet complete. All token declarations below are
-   commented out — minified bundles ship 0 bytes from this file.
-   The @layer declaration is real so the cascade slot is in place.
-
-   These tokens pair with the 8 component names taken in
-   optional/components.css: button, card, badge, tag, alert,
-   avatar, modal, skeleton.
-
-   When the matching component classes ship, every token here
-   becomes public API and is covered by SemVer.
-
-   CARD TOKENS — note the card token block lives here (rather
-   than in core/tokens.css) so that the entire component-related
-   surface — classes AND tokens — moves together.
-   ============================================================ */
+/* SLASHED — optional/tokens.components.css
+   @layer slashed.tokens
+   Reserved component token surface for the optional component module.
+   Prefix: --sf-*; declarations stay commented until matching classes ship. */
 
 @layer slashed.tokens {
   :root {

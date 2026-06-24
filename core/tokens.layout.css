@@ -1,23 +1,7 @@
-/* ============================================================
-   SLASHED — core/tokens.layout.css
-   Semantic tokens for layout primitives.
-   Load before: core/layout.css
-   Layer: slashed.tokens
-   Prefix: --sf-
-
-   DEPENDENCIES — requires tokens.css (loaded earlier).
-   Every primitive gap defaults directly to a semantic gap token from
-   tokens.css: --sf-gap (loose), --sf-content-gap (tight), --sf-gutter
-   (wide). Override one of those to retune all primitives of that rhythm
-   at once; override a single primitive via its own token.
-
-   PUBLIC API — every --sf-*-gap / --sf-*-padding / --sf-*-min / etc. here
-   is a per-primitive override knob (e.g. style="--sf-cluster-gap: …").
-   No INTERNAL tokens live in this file.
-
-   Each layout primitive (cluster, grid, sidebar…) has its own
-   tokens (--sf-cluster-gap etc.) for local overrides.
-   ============================================================ */
+/* SLASHED — core/tokens.layout.css
+   @layer slashed.tokens
+   Layout primitive override tokens for gaps, padding, min sizes, tracks, and containers.
+   Prefix: --sf-*; loaded before core/layout.css. */
 
 @layer slashed.tokens {
   :root {

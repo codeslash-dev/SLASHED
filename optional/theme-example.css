@@ -1,4 +1,7 @@
-/* SLASHED — optional/theme-example.css   (COPY & CUSTOMISE) */
+/* SLASHED — optional/theme-example.css
+   @layer slashed.themes
+   Copy-and-customise examples for quick rebrand, dark-mode overrides, scoped brands, and theme packs.
+   Demonstrates token-only theming. */
 
 @layer slashed.themes {
 

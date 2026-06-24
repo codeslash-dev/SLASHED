@@ -1,4 +1,7 @@
-/* SLASHED — optional/legacy.css */
+/* SLASHED — optional/legacy.css
+   @layer slashed.legacy
+   Fallbacks for older browser gaps: dynamic viewport units, focus-visible, scrollbar gutter, has(), dvh.
+   Load only when legacy support is needed. */
 
 @layer slashed.legacy {
 

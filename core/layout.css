@@ -1,4 +1,7 @@
-/* SLASHED — core/layout.css */
+/* SLASHED — core/layout.css
+   @layer slashed.layout
+   Layout primitives: section, container, stack, cluster, grid, sidebar, switcher, frame.
+   Prefix: .sf-*; local rhythm via --sf-*-gap / sizing tokens. */
 
 @layer slashed.layout {
 

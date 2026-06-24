@@ -1,4 +1,7 @@
-/* SLASHED — core/motion.css */
+/* SLASHED — core/motion.css
+   @layer slashed.motion
+   Global transitions, view transitions, keyframes, and motion helpers.
+   Respects prefers-reduced-motion and --sf-motion-scale. */
 
 @layer slashed.motion {
 

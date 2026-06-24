@@ -1,4 +1,7 @@
-/* SLASHED — core/macros.css */
+/* SLASHED — core/macros.css
+   @layer slashed.macros
+   Reusable recipes: prose, surface, flow, cards, media, hero, scrims, clamps.
+   Prefix: .sf-*; values resolve through macro tokens. */
 
 @layer slashed.macros {
 
