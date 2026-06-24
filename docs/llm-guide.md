@@ -404,12 +404,13 @@ Loading `optional/tokens.palette.css` adds 11 steps for each of the 6 brand fami
 --sf-palette-mix-100: 8%;    /* … */
 --sf-palette-mix-200: 20%;
 --sf-palette-mix-300: 40%;
---sf-palette-mix-400: 55%;
---sf-palette-mix-600: 88%;
---sf-palette-mix-700: 76%;
---sf-palette-mix-800: 64%;
---sf-palette-mix-900: 52%;
---sf-palette-mix-950: 44%;    /* deepest step */
+--sf-palette-mix-400: 65%;
+/* step 500 is the source color itself; no separate mix knob exists */
+--sf-palette-mix-600: 82%;
+--sf-palette-mix-700: 62%;
+--sf-palette-mix-800: 38%;
+--sf-palette-mix-900: 18%;
+--sf-palette-mix-950: 8%;     /* deepest step */
 ```
 
 Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
