@@ -639,7 +639,7 @@
         <div class="pv__lp-row">
           {#each ['xs','s','m','l','xl','2xl'] as g (g)}
             <div class="pv__lp-col">
-              <div class="pv__lp-stack" style="gap:var(--sf-space-{g})">
+              <div class="sf-stack sf-stack--{g}">
                 <div class="pv__box">A</div><div class="pv__box">B</div>
               </div>
               <code class="pv__lp-label">--{g}</code>
@@ -651,9 +651,9 @@
       <section class="pv__block">
         <p class="pv__eyebrow">.sf-stack — alignment variants</p>
         <div class="pv__lp-row">
-          {#each [['center','center'],['end','flex-end'],['stretch','stretch']] as [n,v] (n)}
+          {#each [['center','sf-stack--center'],['end','sf-stack--end'],['stretch','sf-stack--stretch']] as [n,cls] (n)}
             <div class="pv__lp-col pv__lp-col--wide">
-              <div class="pv__lp-stack" style="gap:8px;align-items:{v}">
+              <div class="sf-stack {cls}" style="gap:8px">
                 <div class="pv__box" style="width:4rem">A</div><div class="pv__box" style="width:6rem">B</div>
               </div>
               <code class="pv__lp-label">--{n}</code>
@@ -667,30 +667,30 @@
         <div class="pv__lp-stack2">
           {#each ['xs','s','m','l','xl','2xl'] as g (g)}
             <div class="pv__lp-wrap">
-              <div class="pv__lp-cluster" style="gap:var(--sf-space-{g})">
+              <div class="sf-cluster sf-cluster--{g}">
                 <div class="pv__box">A</div><div class="pv__box">B</div><div class="pv__box">C</div>
               </div>
               <code class="pv__lp-label">--{g}</code>
             </div>
           {/each}
           <div class="pv__lp-wrap">
-            <div class="pv__lp-cluster" style="justify-content:center;gap:8px"><div class="pv__box">center</div><div class="pv__box">layout</div></div>
+            <div class="sf-cluster sf-cluster--center" style="gap:8px"><div class="pv__box">center</div><div class="pv__box">layout</div></div>
             <code class="pv__lp-label">--center</code>
           </div>
           <div class="pv__lp-wrap">
-            <div class="pv__lp-cluster" style="justify-content:space-between;gap:8px"><div class="pv__box">between</div><div class="pv__box">items</div></div>
+            <div class="sf-cluster sf-cluster--between" style="gap:8px"><div class="pv__box">between</div><div class="pv__box">items</div></div>
             <code class="pv__lp-label">--between</code>
           </div>
         </div>
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid — auto-fill tiers</p>
+        <p class="pv__eyebrow">.sf-grid — auto-fill tiers (min-item widths from layout tokens)</p>
         <div class="pv__lp-stack2">
-          {#each [['xs','6rem'],['s','8rem'],['m','10rem'],['l','12rem'],['xl','16rem']] as [tier,min] (tier)}
+          {#each ['xs','s','m','l','xl'] as tier (tier)}
             <div>
-              <code class="pv__lp-label">--{tier} (min {min})</code>
-              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({min},1fr));gap:6px;margin-top:4px">
+              <code class="pv__lp-label">.sf-grid--{tier} (--sf-grid-min-{tier})</code>
+              <div class="sf-grid sf-grid--{tier}" style="margin-top:4px">
                 {#each [1,2,3,4] as n (n)}<div class="pv__box">{n}</div>{/each}
               </div>
             </div>
@@ -699,22 +699,22 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-grid-N — fixed columns + ratio grids</p>
+        <p class="pv__eyebrow">.sf-grid-cols-N — fixed columns + ratio grids (CQ-responsive)</p>
         <div class="pv__lp-stack2">
-          {#each [[2,'grid-2'],[3,'grid-3'],[4,'grid-4']] as [cols,cls] (cls)}
-            <div>
-              <code class="pv__lp-label">.sf-{cls}</code>
-              <div style="display:grid;grid-template-columns:repeat({cols},1fr);gap:6px;margin-top:4px">
+          {#each [2,3,4] as cols (cols)}
+            <div class="sf-cq">
+              <code class="pv__lp-label">.sf-grid-cols-{cols}</code>
+              <div class="sf-grid-cols-{cols}" style="margin-top:4px">
                 {#each Array(cols) as _,n (n)}<div class="pv__box">{n+1}</div>{/each}
               </div>
             </div>
           {/each}
-          <div>
+          <div class="sf-cq">
             <code class="pv__lp-label">.sf-grid-cols-1-2 · .sf-grid-cols-1-3</code>
-            <div style="display:grid;grid-template-columns:1fr 2fr;gap:6px;margin-top:4px">
+            <div class="sf-grid-cols-1-2" style="margin-top:4px">
               <div class="pv__box">1</div><div class="pv__box pv__box--alt">2×</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 3fr;gap:6px;margin-top:6px">
+            <div class="sf-grid-cols-1-3" style="margin-top:6px">
               <div class="pv__box">1</div><div class="pv__box pv__box--alt">3×</div>
             </div>
           </div>
@@ -722,12 +722,12 @@
       </section>
 
       <section class="pv__block">
-        <p class="pv__eyebrow">.sf-equal — never-collapsing fixed columns</p>
+        <p class="pv__eyebrow">.sf-equal — intrinsically responsive auto-fit columns</p>
         <div class="pv__lp-stack2">
-          {#each [[2],[3],[4],[6]] as [cols] (cols)}
+          {#each [2,3,4,6] as cols (cols)}
             <div>
               <code class="pv__lp-label">.sf-equal--{cols}</code>
-              <div style="display:grid;grid-template-columns:repeat({cols},1fr);gap:6px;margin-top:4px">
+              <div class="sf-equal sf-equal--{cols}" style="margin-top:4px">
                 {#each Array(cols) as _,n (n)}<div class="pv__box">{n+1}</div>{/each}
               </div>
             </div>
@@ -739,24 +739,24 @@
         <p class="pv__eyebrow">.sf-sidebar — flex layout variants</p>
         <div class="pv__lp-stack2">
           <div>
-            <code class="pv__lp-label">default (sidebar left ~18rem)</code>
-            <div style="display:flex;gap:12px;margin-top:4px">
-              <div class="pv__box pv__box--alt" style="min-width:6rem">sidebar</div>
-              <div class="pv__box" style="flex:1">main content</div>
+            <code class="pv__lp-label">default (sidebar left, ~18rem)</code>
+            <div class="sf-sidebar" style="margin-top:4px">
+              <div class="pv__box pv__box--alt">sidebar</div>
+              <div class="pv__box">main content</div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">--right</code>
-            <div style="display:flex;gap:12px;margin-top:4px">
-              <div class="pv__box" style="flex:1">main content</div>
-              <div class="pv__box pv__box--alt" style="min-width:6rem">sidebar</div>
+            <code class="pv__lp-label">--right (sidebar right)</code>
+            <div class="sf-sidebar sf-sidebar--right" style="margin-top:4px">
+              <div class="pv__box">main content</div>
+              <div class="pv__box pv__box--alt">sidebar</div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">--narrow</code>
-            <div style="display:flex;gap:12px;margin-top:4px">
-              <div class="pv__box pv__box--alt" style="min-width:4rem">nav</div>
-              <div class="pv__box" style="flex:1">main content</div>
+            <code class="pv__lp-label">--narrow (12rem panel)</code>
+            <div class="sf-sidebar sf-sidebar--narrow" style="margin-top:4px">
+              <div class="pv__box pv__box--alt">nav</div>
+              <div class="pv__box">main content</div>
             </div>
           </div>
         </div>
@@ -766,31 +766,36 @@
         <p class="pv__eyebrow">.sf-switcher · .sf-cover · .sf-frame · .sf-bento</p>
         <div class="pv__lp-stack2">
           <div>
-            <code class="pv__lp-label">.sf-switcher (wraps below threshold)</code>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-              <div class="pv__box" style="flex:1 1 8rem">A</div>
-              <div class="pv__box" style="flex:1 1 8rem">B</div>
-              <div class="pv__box" style="flex:1 1 8rem">C</div>
+            <code class="pv__lp-label">.sf-switcher (column below --sf-switcher-threshold)</code>
+            <div class="sf-switcher" style="margin-top:4px">
+              <div class="pv__box">A</div>
+              <div class="pv__box">B</div>
+              <div class="pv__box">C</div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">.sf-cover (centered, min-height)</code>
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:5rem;background:var(--sf-color-inset);border-radius:var(--sf-radius-m);margin-top:4px">
-              <div class="pv__box">Centered content</div>
+            <code class="pv__lp-label">.sf-cover .sf-cover__center</code>
+            <div class="sf-cover" style="--sf-cover-min-height:5rem;margin-top:4px;background:var(--sf-color-inset);border-radius:var(--sf-radius-m)">
+              <div class="sf-cover__center">
+                <div class="pv__box">Centered content</div>
+              </div>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">.sf-frame (16:9 aspect ratio)</code>
-            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-tertiary));border-radius:var(--sf-radius-m);display:grid;place-items:center;margin-top:4px;max-width:180px">
+            <code class="pv__lp-label">.sf-frame .sf-frame--video</code>
+            <div class="sf-frame sf-frame--video" style="margin-top:4px;max-width:180px;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-tertiary));border-radius:var(--sf-radius-m)">
               <span style="color:#fff;font-size:var(--sf-text-s)">16:9</span>
             </div>
           </div>
           <div>
-            <code class="pv__lp-label">.sf-bento (asymmetric grid)</code>
-            <div style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:8px;margin-top:4px">
-              <div class="pv__box" style="grid-row:span 2;min-height:60px">Wide tall</div>
-              <div class="pv__box pv__box--alt">A</div>
-              <div class="pv__box pv__box--action">B</div>
+            <code class="pv__lp-label">.sf-bento--3 + .sf-bento-wide · .sf-bento-featured</code>
+            <div class="sf-cq" style="margin-top:4px">
+              <div class="sf-bento sf-bento--3 sf-bento--compact">
+                <div class="pv__box sf-bento-featured">Featured</div>
+                <div class="pv__box pv__box--alt">B</div>
+                <div class="pv__box pv__box--alt">C</div>
+                <div class="pv__box pv__box--action sf-bento-wide">Wide D</div>
+              </div>
             </div>
           </div>
         </div>
@@ -799,11 +804,10 @@
       <section class="pv__block">
         <p class="pv__eyebrow">.sf-container — max-width tiers</p>
         <div class="pv__lp-stack2">
-          {#each [['narrow','480px'],['prose','65ch'],['wide','1200px'],['full','100%']] as [tier,width] (tier)}
+          {#each [['narrow','var(--sf-container-narrow,480px)','narrow'],['prose','var(--sf-container-prose,65ch)','prose'],['default','var(--sf-container-default,72rem)','default'],['wide','var(--sf-container-wide,90rem)','wide']] as [tier,w,hint] (tier)}
             <div style="display:flex;align-items:center;gap:10px">
               <code class="pv__lp-label" style="flex-shrink:0;min-width:7ch">--{tier}</code>
-              <div style="height:18px;background:var(--sf-color-primary-subtle);border-radius:3px;width:min(100%,{width});border:1px solid var(--sf-color-primary-muted)"></div>
-              <span style="font-size:10px;color:var(--sf-color-text--muted);flex-shrink:0">{width}</span>
+              <div style="height:18px;background:var(--sf-color-primary-subtle);border-radius:3px;max-width:min(100%,{w});flex:1;border:1px solid var(--sf-color-primary-muted)"></div>
             </div>
           {/each}
         </div>
@@ -812,14 +816,14 @@
       <section class="pv__block">
         <p class="pv__eyebrow">.sf-divider — variants</p>
         <div class="pv__lp-stack2">
-          {#each [['default','1px solid var(--sf-color-border)'],['--subtle','1px solid var(--sf-color-border--subtle)'],['--strong','2px solid var(--sf-color-border--strong)'],['--dashed','1px dashed var(--sf-color-border)'],['--dotted','1px dotted var(--sf-color-border)']] as [n,style] (n)}
+          {#each [['default',''],['--soft','sf-divider--soft'],['--strong','sf-divider--strong'],['--dashed','sf-divider--dashed'],['--dotted','sf-divider--dotted']] as [n,cls] (n)}
             <div style="display:flex;align-items:center;gap:10px;padding-block:4px">
-              <div style="flex:1;border-bottom:{style}"></div>
+              <div class="sf-divider {cls}" style="flex:1;margin:0"></div>
               <code class="pv__lp-label">{n}</code>
             </div>
           {/each}
           <div>
-            <div style="height:3px;background:var(--sf-gradient-primary,linear-gradient(90deg,var(--sf-color-primary),var(--sf-color-tertiary)));border-radius:2px"></div>
+            <div class="sf-divider sf-divider--gradient" style="margin:0"></div>
             <code class="pv__lp-label">--gradient</code>
           </div>
         </div>
@@ -1215,8 +1219,6 @@
   .pv__lp-row  { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
   .pv__lp-col  { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .pv__lp-col--wide { min-width: 8rem; }
-  .pv__lp-stack  { display: flex; flex-direction: column; }
-  .pv__lp-cluster{ display: flex; flex-wrap: wrap; }
   .pv__lp-stack2 { display: flex; flex-direction: column; gap: 10px; }
   .pv__lp-wrap   { background: var(--sf-color-inset, rgba(127,127,127,.06)); padding: 8px; border-radius: var(--sf-radius-s,4px); }
   .pv__lp-label  { font-family: var(--sf-font-mono,monospace); font-size: 10px; color: var(--sf-color-text--muted,#888); }
