@@ -26,21 +26,14 @@
   import { domainOf, KNOBS_BY_DOMAIN, DOCS_BASE_URL } from '../lib/domains.js';
   import { smartSettingsFor } from '../lib/domainSettings.js';
   import { BASIC_BY_DOMAIN } from '../lib/basics.js';
-  import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
   import { STYLE_PRESETS_BY_DOMAIN } from '../lib/stylePresets.js';
   import TokenGroup from './TokenGroup.svelte';
   import TokenRow from './TokenRow.svelte';
-  import BrandColorRow from './BrandColorRow.svelte';
   import ScaleGenerator from './ScaleGenerator.svelte';
   import QuickKnobs from './QuickKnobs.svelte';
   import StylePresetRow from './StylePresetRow.svelte';
-  import ColorAssignments from './ColorAssignments.svelte';
-  import ShadeRamp from './ShadeRamp.svelte';
   import SmartSettings from './SmartSettings.svelte';
-  import HeadingEditor from './HeadingEditor.svelte';
-  import RadiusEditor from './RadiusEditor.svelte';
-  import ContainerBars from './ContainerBars.svelte';
   import CategoryHeader from './CategoryHeader.svelte';
   import ControlSection from './ControlSection.svelte';
   import FriendlyControl from './FriendlyControl.svelte';
@@ -93,6 +86,8 @@
   const generators = $derived(domain.basicGenerators ?? []);
   const knobs = $derived(KNOBS_BY_DOMAIN[domain.id] ?? []);
   const smartSections = $derived(smartSettingsFor(domain.id));
+  const redesignedDomains = new Set(['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects']);
+  const usesVisualStudio = $derived(redesignedDomains.has(domain.id));
 
   // Domains with a scale generator (typography, spacing): preview goes BELOW
   // the generator so the specimen updates right next to the controls.
@@ -110,19 +105,6 @@
 
   let showAll = $state(false);
 
-  // Colors panel accordion states.
-  let showSecondary = $state(false);
-  let showStatus = $state(false);
-  let showColorRoles = $state(true);
-  let showShadeRamp = $state(false);
-
-  const BRAND_PRIMARY = BRAND_COLOR_KEYS.filter((c) => ['base', 'neutral', 'primary'].includes(c.key));
-  const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary', 'action'].includes(c.key));
-  const BRAND_STATUS = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
-
-  const hasBrandOverride = (key) =>
-    overrides[`--sf-color-${key}-source-light`] != null ||
-    overrides[`--sf-color-${key}-source-dark`] != null;
 
   const modifiedHere = $derived(
     domainTokens.filter((t) => overrides[t.name] != null)
@@ -134,20 +116,6 @@
   }
 </script>
 
-{#snippet expandSummary(title, count, hint = '')}
-  <summary class="panel__expand-summary panel__card-head">
-    <span class="panel__expand-chev" aria-hidden="true">›</span>
-    <span class="panel__card-title">{title}</span>
-    {#if typeof count === 'number'}
-      <span class="panel__card-count">{count}</span>
-    {:else if count}
-      <span class="panel__expand-count">{count}</span>
-    {/if}
-    {#if hint}
-      <span class="panel__card-hint">{hint}</span>
-    {/if}
-  </summary>
-{/snippet}
 
 {#snippet filters()}
   <div class="allvars__filters">
@@ -237,30 +205,14 @@
         <EffectsStudio />
       {/if}
 
-      <!-- ── ZONE 1: CONTROLS (live preview now lives in the right Preview Hub) ──
-           Colors:    Semantic-roles swatch grid (editing UI, not just preview).
-           Generators (typography/spacing): collapsible ScaleGenerator.
-           All domains: QuickKnobs (scaling multipliers) if present.
-      ─────────────────────────────────────────────────────────────────────── -->
+      <!-- ── ZONE 1: HIGH-IMPACT CONTROLS ─────────────────────────────── -->
 
-      {#if domain.brandColors}
-        <details class="cfg-card panel__card panel__card--lead" bind:open={showColorRoles}>
-          {@render expandSummary('Semantic roles', 'How your brand colors surface')}
-          <ColorAssignments />
-        </details>
-        {#if knobs.length}
-          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
-        {/if}
-
-      {:else if hasGenerators}
+      {#if !usesVisualStudio && hasGenerators}
         {#each generators as g (g)}
           <ScaleGenerator kinds={[g]} collapsible />
         {/each}
-        {#if knobs.length}
-          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
-        {/if}
-
-      {:else if knobs.length}
+      {/if}
+      {#if knobs.length}
         <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
       {/if}
 
@@ -281,78 +233,8 @@
         <SmartSettings domainId={domain.id} />
       {/if}
 
-      <!-- Curated input surfaces — brand colors, friendly groups, or essentials.
-           All section cards are now collapsible (<details>) so you can fold a
-           section out of the way while still watching the preview above. -->
-      {#if domain.brandColors}
-        <!-- Core brand colors — collapsible, open by default -->
-        <details class="panel__expand cfg-card panel__card" open>
-          {@render expandSummary('Core brand colors', BRAND_PRIMARY.length, 'Light values — dark mode is auto-derived. Click the dark swatch to pin.')}
-          <div class="panel__card-rows">
-            {#each BRAND_PRIMARY as { key, label } (key)}
-              <BrandColorRow colorKey={key} {label} />
-            {/each}
-          </div>
-        </details>
-
-        <!-- Extended brand colors — opt-in -->
-        <details class="panel__expand" bind:open={showSecondary}>
-          <summary class="panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__expand-title">Extended brand colors</span>
-            <span class="panel__expand-count">{BRAND_SECONDARY.length} colors</span>
-            {#if BRAND_SECONDARY.some((c) => hasBrandOverride(c.key))}
-              <span class="panel__expand-badge">modified</span>
-            {/if}
-          </summary>
-          <div class="panel__card-rows">
-            {#each BRAND_SECONDARY as { key, label } (key)}
-              <BrandColorRow colorKey={key} {label} />
-            {/each}
-          </div>
-        </details>
-
-        <!-- Status colors — opt-in -->
-        <details class="panel__expand" bind:open={showStatus}>
-          <summary class="panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__expand-title">Status colors</span>
-            <span class="panel__expand-count">{BRAND_STATUS.length} colors</span>
-            {#if BRAND_STATUS.some((c) => hasBrandOverride(c.key))}
-              <span class="panel__expand-badge">modified</span>
-            {/if}
-          </summary>
-          <div class="panel__card-rows">
-            {#each BRAND_STATUS as { key, label } (key)}
-              <BrandColorRow colorKey={key} {label} />
-            {/each}
-          </div>
-        </details>
-
-        <!-- Shade ramp (superlight → superdark for each brand color) -->
-        <details class="cfg-card panel__card" bind:open={showShadeRamp}>
-          <summary class="panel__card-head panel__expand-summary">
-            <span class="panel__expand-chev" aria-hidden="true">›</span>
-            <span class="panel__card-title">Shade ramp</span>
-            <span class="panel__expand-count">7-step scale per brand color</span>
-          </summary>
-          <ShadeRamp />
-        </details>
-
-      {:else if domain.id === 'typography'}
-        <!-- Heading-level tab editor replaces flat basicGroups -->
-        <HeadingEditor />
-
-      {:else if domain.id === 'borders'}
-        <!-- Radius level tab editor with shape specimens -->
-        <RadiusEditor />
-
-      {:else if domain.id === 'layout'}
-        <!-- Container width comparison bars -->
-        <ContainerBars />
-
-      {:else if basicGroups.length}
-        <!-- Curated groups — each group is now a collapsible card -->
+      <!-- Curated friendly controls for domains that do not yet own a full studio. -->
+      {#if !usesVisualStudio && basicGroups.length}
         {#each basicGroups as group (group.title)}
           <ControlSection title={group.title} modifiedCount={group.controls.filter((c) => overrides[c.token] != null).length}>
             <div class="panel__card-rows">
@@ -362,8 +244,7 @@
             </div>
           </ControlSection>
         {/each}
-
-      {:else if essentials.length}
+      {:else if !usesVisualStudio && essentials.length}
         <ControlSection title="Essentials" hint="Curated for most projects." modifiedCount={essentials.filter((t) => overrides[t.name] != null).length}>
           <div class="panel__card-rows">
             {#each essentials as token (token.name)}
@@ -432,38 +313,6 @@
     flex-direction: column;
     gap: 16px;
     min-height: 0;
-  }
-
-  .panel__card { overflow: clip; }
-  /* The live-preview card that leads each category gets a faint accent edge. */
-  .panel__card--lead { border-color: var(--cfg-border-strong); }
-  .panel__card--lead > summary { border-left: 3px solid var(--cfg-accent-strong); }
-  .panel__card-head {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--cfg-border);
-    background: var(--cfg-surface-2);
-    flex-wrap: wrap;
-  }
-  .panel__card-title {
-    font-size: 12.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--cfg-text);
-  }
-  .panel__card-count {
-    font-family: var(--cfg-mono);
-    font-size: 11px;
-    color: var(--cfg-text-faint);
-  }
-  .panel__card-hint {
-    flex: 1 1 auto;
-    text-align: right;
-    font-size: 11.5px;
-    color: var(--cfg-text-faint);
   }
 
   .panel__intro {
@@ -556,62 +405,6 @@
     transition: color 0.12s;
   }
   .panel__docs a:hover { color: var(--cfg-accent); text-decoration: underline; }
-
-  /* Progressive disclosure for collapsible section cards (brand colors, basic groups, essentials). */
-  .panel__expand {
-    border: 1px solid var(--cfg-border);
-    border-radius: var(--cfg-radius);
-    background: var(--cfg-surface);
-    overflow: clip;
-  }
-  .panel__expand-summary {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 16px;
-    cursor: pointer;
-    list-style: none;
-    user-select: none;
-  }
-  .panel__expand-summary::-webkit-details-marker { display: none; }
-  .panel__expand-summary:hover { background: var(--cfg-surface-2); }
-  .panel__expand-chev {
-    font-size: 15px;
-    line-height: 1;
-    color: var(--cfg-text-faint);
-    transition: transform 0.14s;
-  }
-  /* Chevron rotation when any collapsible card is open */
-  .panel__expand[open] .panel__expand-chev,
-  details.cfg-card[open] .panel__expand-chev { transform: rotate(90deg); }
-  .panel__expand-title {
-    font-size: 12.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--cfg-text);
-  }
-  .panel__expand-count {
-    font-family: var(--cfg-mono);
-    font-size: 11px;
-    color: var(--cfg-text-faint);
-  }
-  .panel__expand-badge {
-    font-size: 9.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--cfg-accent-strong);
-    border: 1px solid var(--cfg-accent-strong);
-    border-radius: 999px;
-    padding: 1px 7px;
-    line-height: 1.6;
-  }
-  /* When the disclosure card is open its summary gets a border */
-  details.cfg-card[open] > .panel__card-head.panel__expand-summary,
-  details.panel__expand[open] > .panel__card-head.panel__expand-summary {
-    border-bottom: 1px solid var(--cfg-border);
-  }
 
   @media (max-width: 600px) {
     .panel__body { padding: 12px 10px 60px; gap: 12px; }

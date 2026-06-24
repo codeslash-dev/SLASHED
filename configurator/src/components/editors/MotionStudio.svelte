@@ -1,3 +1,9 @@
-<script>import StudioFrame from './StudioFrame.svelte';</script>
-<StudioFrame title="Motion Studio" description="Durations i easing jako animowane chipy, nie martwe wartości."><div class="motion"><span class="fast">fast</span><span class="normal">normal</span><span class="slow">slow</span></div></StudioFrame>
-<style>.motion{display:grid;gap:12px;padding:16px;border-radius:14px;background:var(--cfg-bg-2);overflow:hidden}.motion span{width:92px;text-align:center;padding:8px 12px;border-radius:999px;background:var(--cfg-accent-strong);color:white;animation:move var(--sf-duration-normal,300ms) var(--sf-ease-in-out,ease-in-out) infinite alternate}.motion .fast{animation-duration:var(--sf-duration-fast,150ms)}.motion .slow{animation-duration:var(--sf-duration-slow,600ms)}@keyframes move{to{transform:translateX(min(360px,55vw))}}</style>
+<script>
+  import { tokenByName } from '../../lib/model.js';
+  import StudioFrame from './StudioFrame.svelte';
+  import FriendlyControl from '../FriendlyControl.svelte';
+  const names=['--sf-motion-scale','--sf-duration-fast','--sf-duration-normal','--sf-duration-slow','--sf-ease-out','--sf-ease-in-out'];
+  const tokens=names.map((name)=>tokenByName.get(name)).filter(Boolean);
+</script>
+<StudioFrame title="Motion Studio" description="Durations i easing jako animowane chipy, nie martwe wartości."><div class="motion-studio"><div class="motion"><span class="fast">fast</span><span class="normal">normal</span><span class="slow">slow</span></div><div class="controls">{#each tokens as token (token.name)}<FriendlyControl {token} showToken />{/each}</div></div></StudioFrame>
+<style>.motion-studio{display:grid;gap:12px}.motion{display:grid;gap:12px;padding:16px;border-radius:14px;background:var(--cfg-bg-2);overflow:hidden}.motion span{width:92px;text-align:center;padding:8px 12px;border-radius:999px;background:var(--cfg-accent-strong);color:white;animation:move var(--sf-duration-normal,300ms) var(--sf-ease-in-out,ease-in-out) infinite alternate}.motion .fast{animation-duration:var(--sf-duration-fast,150ms)}.motion .slow{animation-duration:var(--sf-duration-slow,600ms)}.controls{border:1px solid var(--cfg-border);border-radius:var(--cfg-radius);overflow:clip}@keyframes move{to{transform:translateX(min(360px,55vw))}}</style>

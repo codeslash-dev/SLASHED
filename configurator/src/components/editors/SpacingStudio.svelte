@@ -1,3 +1,10 @@
-<script>import StudioFrame from './StudioFrame.svelte'; const steps=['2xs','xs','s','m','l','xl','2xl','3xl'];</script>
-<StudioFrame title="Spacing Studio" description="Ruler, rhythm i layout preview zamiast samych wartości liczbowych."><div class="ruler">{#each steps as s,i}<div><span style:width={`${18+i*18}px`}></span><b>{s}</b></div>{/each}</div><div class="cards"><article></article><article></article><article></article></div></StudioFrame>
-<style>.ruler{display:grid;gap:8px}.ruler div{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:10px}.ruler span{display:block;height:12px;border-radius:999px;background:var(--cfg-accent-strong)}.ruler b{font-size:11px;text-transform:uppercase;color:var(--cfg-text-muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sf-content-gap,1rem);margin-top:16px}.cards article{min-height:72px;border:1px solid var(--cfg-border);border-radius:var(--cfg-radius);background:var(--cfg-bg-2);padding:var(--sf-component-pad,1rem)}@media(max-width:640px){.cards{grid-template-columns:1fr}}</style>
+<script>
+  import { tokenByName } from '../../lib/model.js';
+  import StudioFrame from './StudioFrame.svelte';
+  import FriendlyControl from '../FriendlyControl.svelte';
+  const steps=['2xs','xs','s','m','l','xl','2xl','3xl'];
+  const names=['--sf-section-pad','--sf-content-gap','--sf-gutter','--sf-component-pad','--sf-space-scale','--sf-section-scale'];
+  const tokens = names.map((name) => tokenByName.get(name)).filter(Boolean);
+</script>
+<StudioFrame title="Spacing Studio" description="Ruler, rhythm i layout preview zamiast samych wartości liczbowych."><div class="spacing-studio"><div class="ruler">{#each steps as s,i}<div><span style:width={`${18+i*18}px`}></span><b>{s}</b></div>{/each}</div><div class="cards"><article></article><article></article><article></article></div><div class="controls">{#each tokens as token (token.name)}<FriendlyControl {token} showToken />{/each}</div></div></StudioFrame>
+<style>.spacing-studio{display:grid;gap:12px}.ruler{display:grid;gap:8px}.ruler div{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:10px}.ruler span{display:block;height:12px;border-radius:999px;background:var(--cfg-accent-strong)}.ruler b{font-size:11px;text-transform:uppercase;color:var(--cfg-text-muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sf-content-gap,1rem)}.cards article{min-height:72px;border:1px solid var(--cfg-border);border-radius:var(--cfg-radius);background:var(--cfg-bg-2);padding:var(--sf-component-pad,1rem)}.controls{border:1px solid var(--cfg-border);border-radius:var(--cfg-radius);overflow:clip}@media(max-width:640px){.cards{grid-template-columns:1fr}}</style>

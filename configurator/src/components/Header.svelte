@@ -49,7 +49,7 @@
       <button onclick={() => redo()} disabled={!canRedo} title="Redo — ⇧⌘Z" aria-label="Redo">↷</button>
     </div>
     <div class="hdr__group" role="group" aria-label="Session">
-      <button class:ok={shareCopied} onclick={shareLink} disabled={modCount === 0} title="Copy shareable configuration link" aria-label="Copy share link">{shareCopied ? '✓' : '🔗'}</button>
+      <button class:ok={shareCopied} onclick={shareLink} disabled={modCount === 0} title="Copy shareable configuration link" aria-label="Copy shareable configuration link">{shareCopied ? '✓' : '🔗'}</button>
       <button onclick={() => (ui.uiTheme = ui.uiTheme === 'dark' ? 'light' : 'dark')} aria-pressed={ui.uiTheme === 'light'} title="Toggle configurator theme" aria-label="Toggle configurator theme">{ui.uiTheme === 'dark' ? '☀' : '☾'}</button>
     </div>
     <div class="hdr__group" role="group" aria-label="Workspace">
