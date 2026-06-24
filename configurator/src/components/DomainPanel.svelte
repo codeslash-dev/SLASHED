@@ -37,10 +37,11 @@
   import StylePresetRow from './StylePresetRow.svelte';
   import ColorAssignments from './ColorAssignments.svelte';
   import ShadeRamp from './ShadeRamp.svelte';
-  import DomainPreview from './DomainPreview.svelte';
   import SmartSettings from './SmartSettings.svelte';
+  import HeadingEditor from './HeadingEditor.svelte';
+  import RadiusEditor from './RadiusEditor.svelte';
+  import ContainerBars from './ContainerBars.svelte';
   import Icon from './Icon.svelte';
-  import { DOMAIN_PREVIEWS } from '../lib/domainPreviews.js';
 
   /** @type {{ domain: { id:string, label:string, icon:string, blurb:string, intro?:string, scaleIntro?:string, essentials?:string[], basicGenerators?:string[], brandColors?:boolean, docsPath?:string } }} */
   let { domain } = $props();
@@ -104,11 +105,6 @@
   let showStatus = $state(false);
   let showColorRoles = $state(true);
   let showShadeRamp = $state(false);
-
-  // Preview disclosure (open by default; for generator domains it appears below generators).
-  let showPreview = $state(true);
-
-  const previewSpec = $derived(DOMAIN_PREVIEWS[domain.id]);
 
   const BRAND_PRIMARY = BRAND_COLOR_KEYS.filter((c) => ['base', 'neutral', 'primary'].includes(c.key));
   const BRAND_SECONDARY = BRAND_COLOR_KEYS.filter((c) => ['secondary', 'tertiary', 'action'].includes(c.key));
@@ -231,12 +227,10 @@
       {@render catalogue()}
     {:else}
 
-      <!-- ── ZONE 1: LIVE PREVIEW (always leads the panel) ─────────────────
-           Colors:           Semantic-roles swatch grid.
-           All token domains: DomainPreview card, open by default.
-           For generator domains (typography/spacing) the generators are
-           placed immediately BELOW the preview so the specimen updates in
-           direct visual response to Apply — no scrolling required.
+      <!-- ── ZONE 1: CONTROLS (live preview now lives in the right Preview Hub) ──
+           Colors:    Semantic-roles swatch grid (editing UI, not just preview).
+           Generators (typography/spacing): collapsible ScaleGenerator.
+           All domains: QuickKnobs (scaling multipliers) if present.
       ─────────────────────────────────────────────────────────────────────── -->
 
       {#if domain.brandColors}
@@ -244,34 +238,20 @@
           {@render expandSummary('Semantic roles', 'How your brand colors surface')}
           <ColorAssignments />
         </details>
-        <!-- Contrast/focus knobs right after the roles they control -->
         {#if knobs.length}
           <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
         {/if}
 
-      {:else if previewSpec}
-        <!-- Preview leads for every token domain — generator or not -->
-        <details class="cfg-card panel__card panel__card--lead" bind:open={showPreview}>
-          {@render expandSummary('Preview', previewSpec.blurb)}
-          <DomainPreview domain={domain.id} />
-        </details>
-
-        <!-- Generator domains: scale generators immediately below the preview
-             so the specimen is in direct view while the user tunes the ramp. -->
-        {#if hasGenerators}
-          {#each generators as g (g)}
-            <ScaleGenerator kinds={[g]} />
-          {/each}
-          <!-- Scaling knobs follow the generator controls -->
-          {#if knobs.length}
-            <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
-          {/if}
-        {:else}
-          <!-- Non-generator domains: knobs follow the preview directly -->
-          {#if knobs.length}
-            <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
-          {/if}
+      {:else if hasGenerators}
+        {#each generators as g (g)}
+          <ScaleGenerator kinds={[g]} collapsible />
+        {/each}
+        {#if knobs.length}
+          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
         {/if}
+
+      {:else if knobs.length}
+        <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
       {/if}
 
       <!-- ── ZONE 2: SETTINGS (inputs-first) ────────────────────────────── -->
@@ -348,6 +328,18 @@
           </summary>
           <ShadeRamp />
         </details>
+
+      {:else if domain.id === 'typography'}
+        <!-- Heading-level tab editor replaces flat basicGroups -->
+        <HeadingEditor />
+
+      {:else if domain.id === 'borders'}
+        <!-- Radius level tab editor with shape specimens -->
+        <RadiusEditor />
+
+      {:else if domain.id === 'layout'}
+        <!-- Container width comparison bars -->
+        <ContainerBars />
 
       {:else if basicGroups.length}
         <!-- Curated groups — each group is now a collapsible card -->

@@ -32,8 +32,15 @@
     resetEnginePatch,
     resetViewportPatch,
   } from '../lib/fluidEngine.js';
+  import { getFold, setFold } from '../lib/foldState.js';
 
-  let { kinds = ['type', 'display', 'space'] } = $props();
+  /** @type {{ kinds?: Array<'type'|'display'|'space'>, collapsible?: boolean }} */
+  let { kinds = ['type', 'display', 'space'], collapsible = false } = $props();
+
+  // svelte-ignore state_referenced_locally
+  const foldKey = `generator:${kinds[0]}`;
+  // svelte-ignore state_referenced_locally
+  let open = $state(collapsible ? getFold(foldKey, false) : true);
 
   /**
    * The framework's display ramp: --sf-text-display-{s,m,l}, a separate modular
@@ -178,6 +185,14 @@
 <section class="gen">
   <!-- ── header / kind tabs ─────────────────────────────────────────────── -->
   <div class="gen__head">
+    {#if collapsible}
+      <button
+        class="gen__toggle"
+        onclick={() => { open = !open; setFold(foldKey, open); }}
+        aria-expanded={open}
+        aria-label={open ? 'Collapse scale generator' : 'Expand scale generator'}
+      ><span class="gen__chev" class:gen__chev--open={open} aria-hidden="true">›</span></button>
+    {/if}
     <span class="gen__title">Scale generator</span>
     {#if kinds.length > 1}
       <div class="seg" role="group" aria-label="Scale kind">
@@ -195,6 +210,7 @@
   </div>
 
   <!-- ── two-column body: inputs left, live ramp right ─────────────────── -->
+  {#if !collapsible || open}
   <div class="gen__body">
     <!-- LEFT: knob inputs -->
     <div class="gen__inputs">
@@ -291,6 +307,7 @@
       {/each}
     </div>
   </div>
+  {/if}
 </section>
 
 <style>
@@ -316,6 +333,10 @@
   }
   .gen__title { font-size: 13px; font-weight: 600; }
   .gen__applied { font-size: 11.5px; color: var(--cfg-ok); margin-left: auto; }
+  .gen__toggle { background: none; border: none; padding: 0 2px; cursor: pointer; display: inline-flex; align-items: center; color: var(--cfg-text-faint); flex-shrink: 0; }
+  .gen__toggle:hover { color: var(--cfg-text); }
+  .gen__chev { font-size: 15px; line-height: 1; transition: transform 0.14s; display: block; }
+  .gen__chev--open { transform: rotate(90deg); }
 
   .seg { display: inline-flex; border: 1px solid var(--cfg-border-strong); border-radius: var(--cfg-radius-s); overflow: hidden; }
   .seg__btn { background: var(--cfg-surface-2); color: var(--cfg-text-muted); border: none; padding: 4px 12px; font-size: 12px; cursor: pointer; }
