@@ -1,8 +1,11 @@
 <script>
-  import { overrides, patchOverrides, setOverride, dragSetOverride, endDrag } from '../lib/store.svelte.js';
+  import { overrides, ui, patchOverrides, setOverride, dragSetOverride, endDrag } from '../lib/store.svelte.js';
   import { tokenByName } from '../lib/model.js';
   import { sectionTokenNames, smartSettingsFor } from '../lib/domainSettings.js';
+  import { buildPreviewDeclarations } from '../lib/preview.js';
   import TokenRow from './TokenRow.svelte';
+
+  const stageStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
 
   let { domainId } = $props();
   const sections = $derived(smartSettingsFor(domainId));
@@ -108,7 +111,7 @@
           <div class="gradient-grid">
             {#each section.tokens.filter(exists) as name (name)}
               <article class="gradient-card">
-                <div class="gradient-card__swatch" style:background={gradientValue(name)}></div>
+                <div class="gradient-card__swatch" style={stageStyle} style:background={gradientValue(name)}></div>
                 <div class="gradient-card__body">
                   <code>{name}</code>
                   <div class="gradient-card__buttons">

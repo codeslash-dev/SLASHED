@@ -31,7 +31,7 @@
   let info = $state(null);
 
   $effect(() => {
-    void overrides;        // reactive dep
+    for (const key in overrides) void overrides[key]; // track per-property changes
     void ui.previewTheme;  // reactive dep
     if (!value) { info = null; return; }
     // Defer to a microtask so the probe-host effect in App.svelte has a
