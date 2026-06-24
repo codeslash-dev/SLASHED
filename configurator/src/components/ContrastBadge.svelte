@@ -4,7 +4,7 @@
    *
    * Resolves the token's effective value through a hidden probe element that
    * has the entire framework cascade in scope (see lib/probeHost.js — that's
-   * how `light-dark()`, `oklch(from var(...) …)` and plain `var(--sf-bg)`
+   * how `light-dark()`, `oklch(from var(...) …)` and plain `var(--sf-color-bg)`
    * references all resolve to a real `rgb(…)`). Then it asks lib/contrast.js
    * which of pure-white or pure-black gives the higher WCAG 2.1 ratio against
    * that color, and renders the badge:
