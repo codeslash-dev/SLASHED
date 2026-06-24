@@ -54,6 +54,14 @@
 
   let activeTab = $state('all');
 
+  function navigateTabs(e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const idx = TABS.findIndex((t) => t.id === activeTab);
+    const next = e.key === 'ArrowRight' ? (idx + 1) % TABS.length : (idx - 1 + TABS.length) % TABS.length;
+    activeTab = TABS[next].id;
+    e.currentTarget.querySelectorAll('[role="tab"]')[next]?.focus();
+  }
+
   function tabHasOverride(tabId) {
     if (tabId === 'all') return [...GLOBAL_HEADING_TOKENS, ...BODY_TOKENS, ...MONO_TOKENS, ...LEVELS.flatMap(PER_LEVEL_TOKENS)].some(hasOverride);
     if (tabId === 'body') return BODY_TOKENS.some(hasOverride);
@@ -72,12 +80,15 @@
 </script>
 
 <div class="hed">
-  <div class="hed__tabs" role="tablist" aria-label="Heading level">
+  <div class="hed__tabs" role="tablist" aria-label="Heading level" onkeydown={navigateTabs}>
     {#each TABS as tab (tab.id)}
       {@const modified = tabHasOverride(tab.id)}
       <button
+        id="hed-tab-{tab.id}"
         role="tab"
         aria-selected={activeTab === tab.id}
+        aria-controls="hed-panel"
+        tabindex={activeTab === tab.id ? 0 : -1}
         class="hed__tab"
         class:hed__tab--active={activeTab === tab.id}
         class:hed__tab--modified={modified}
@@ -86,7 +97,7 @@
     {/each}
   </div>
 
-  <div class="hed__body" style={stageStyle}>
+  <div id="hed-panel" role="tabpanel" aria-labelledby="hed-tab-{activeTab}" class="hed__body" style={stageStyle}>
     {#if activeTab === 'all'}
       <div class="hed__specimen hed__specimen--all">
         {#each LEVELS as lvl (lvl)}

@@ -30,6 +30,14 @@
 
   let activeTab = $state('all');
 
+  function navigateTabs(e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const idx = TABS.findIndex((t) => t.id === activeTab);
+    const next = e.key === 'ArrowRight' ? (idx + 1) % TABS.length : (idx - 1 + TABS.length) % TABS.length;
+    activeTab = TABS[next].id;
+    e.currentTarget.querySelectorAll('[role="tab"]')[next]?.focus();
+  }
+
   function tabHasOverride(tabId) {
     if (tabId === 'all') return [...GLOBAL_TOKENS, ...LEVELS.map((l) => l.token)].some(hasOverride);
     const lvl = LEVELS.find((l) => l.id === tabId);
@@ -44,12 +52,15 @@
 </script>
 
 <div class="rad">
-  <div class="rad__tabs" role="tablist" aria-label="Radius level">
+  <div class="rad__tabs" role="tablist" aria-label="Radius level" onkeydown={navigateTabs}>
     {#each TABS as tab (tab.id)}
       {@const modified = tabHasOverride(tab.id)}
       <button
+        id="rad-tab-{tab.id}"
         role="tab"
         aria-selected={activeTab === tab.id}
+        aria-controls="rad-panel"
+        tabindex={activeTab === tab.id ? 0 : -1}
         class="rad__tab"
         class:rad__tab--active={activeTab === tab.id}
         class:rad__tab--modified={modified}
@@ -58,7 +69,7 @@
     {/each}
   </div>
 
-  <div class="rad__body">
+  <div id="rad-panel" role="tabpanel" aria-labelledby="rad-tab-{activeTab}" class="rad__body">
     {#if activeTab === 'all'}
       <div class="rad__specimen rad__specimen--all">
         {#each LEVELS.filter((l) => exists(l.token)) as lvl (lvl.id)}
