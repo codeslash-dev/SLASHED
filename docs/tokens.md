@@ -4,8 +4,8 @@
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
 **686 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
-Tokens defined in multiple files are listed once per section — so this count is
-higher than `docs/registry.json` (which deduplicates by name). See
+If a token is defined in multiple files, it is listed once per section — so this
+count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
 contract and naming conventions (a DEPRECATED tier will be introduced when
 tokens are first retired), and [theming.md](theming.md) for the

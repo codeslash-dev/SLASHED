@@ -293,8 +293,8 @@ No breaking changes. All changes are additive or internal.
 ### Tokens moved to core (now available in essential bundle)
 
 The brand semantic alpha tokens — `ghost`, `subtle`, and `muted` — were previously
-declared in `core/tokens.css` and available in every
-bundles. In 0.6.0 they live in `core/tokens.css` and ship in every bundle:
+declared in `optional/tokens.palette.css`. In 0.6.0 they live in `core/tokens.css`
+and ship in every bundle:
 
 | Family | Tokens now in core |
 |---|---|
@@ -303,7 +303,7 @@ bundles. In 0.6.0 they live in `core/tokens.css` and ship in every bundle:
 
 No markup or CSS changes are required — the token names are unchanged.
 If you were on the `essential` bundle and used these tokens via a `<link>` to
-`core/tokens.css`; no extra palette link is needed.
+`optional/tokens.palette.css`, no extra palette link is needed.
 
 ### New token
 
@@ -319,7 +319,7 @@ Alpha transparency for the brand ghost/subtle/muted tokens now uses
 are equivalent; the change improves color-space fidelity and allows these tokens
 to live in core without depending on the optional palette file.
 
-The numeric alpha scale (`-a5` … `-a95`) in `core/tokens.css` is now
+The numeric alpha scale (`-a5`, `-a10`, `-a30`, `-a50`, `-a80`) in `core/tokens.css` is now
 gated behind `@supports (color: oklch(from red l c h))`. Browsers below the
 framework floor do not load these tokens.
 
