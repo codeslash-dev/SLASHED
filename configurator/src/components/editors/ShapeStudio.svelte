@@ -1,18 +1,21 @@
 <script>
-  import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
+  import { tokenByName } from '../../lib/model.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
-  const groups = resolveStudioGroups(STUDIO_GROUPS.borders);
-  const workflow = ['Radius', 'Borders', 'Dividers', 'Focus'];
+  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
+  const panels = [
+    panel('Radius', 'Corner scale from utility chips to cards.', ['--sf-radius-scale', '--sf-radius-xs', '--sf-radius-s', '--sf-radius-m', '--sf-radius-l', '--sf-radius-xl', '--sf-radius-full']),
+    panel('Borders', 'Stroke weight and style for framed components.', ['--sf-border-scale', '--sf-border-style', '--sf-border-width-hairline', '--sf-border-width-1', '--sf-border-width-2']),
+    panel('Dividers', 'Rule width and style for separating content.', ['--sf-divider-width', '--sf-divider-style']),
+    panel('Focus', 'Keyboard focus ring width, offset and color.', ['--sf-focus-ring-width', '--sf-focus-ring-offset', '--sf-color-border--focus']),
+  ];
   const radii = ['xs', 's', 'm', 'l', 'xl', 'full'];
   const components = ['Button', 'Input', 'Card', 'Badge'];
 </script>
 
-<StudioFrame title="Shape Studio" description="Radius, border, divider and focus ring shown as a complete shape system — from the corner scale down to accessible focus outlines.">
+<StudioFrame {panels} title="Shape Studio" description="Radius, border, divider and focus ring shown as a complete shape system — from the corner scale down to accessible focus outlines.">
   <div class="shape-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Shape workflow" />
 
     <section class="radius-lab" aria-label="Radius scale preview">
       <div class="lab-copy"><strong>Radius system</strong><span>One scale controls components from sharp utility chips to fully pill-shaped actions.</span></div>
@@ -37,9 +40,11 @@
       <article><b>Divider rhythm</b><p>Content before divider</p><hr /><p>Content after divider</p></article>
       <article class="focus-card"><b>Focus ring</b><button>Focused action</button><small>Width + offset preview</small></article>
     </section>
-
-    <StudioControls {groups} />
   </div>
+
+    {#snippet controls(activePanel)}
+      <StudioControls groups={activePanel.groups} />
+    {/snippet}
 </StudioFrame>
 
 <style>

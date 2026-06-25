@@ -19,7 +19,7 @@ export const UI_STORAGE_KEY = 'slashed-configurator/ui/v1';
  * simply ignored — the flat IA has no complexity mode.
  *
  * @param {string|null} raw JSON string from localStorage (or null)
- * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string }}
+ * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string, showTokens?: boolean }}
  */
 export function sanitiseUiState(raw) {
   const out = {};
@@ -47,6 +47,10 @@ export function sanitiseUiState(raw) {
 
   if (typeof parsed.bundle === 'string' && BUNDLE_ORDER.includes(parsed.bundle)) {
     out.bundle = parsed.bundle;
+  }
+
+  if (typeof parsed.showTokens === 'boolean') {
+    out.showTokens = parsed.showTokens;
   }
 
   return out;

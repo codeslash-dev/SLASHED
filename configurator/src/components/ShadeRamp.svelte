@@ -15,7 +15,10 @@
   import { BRAND_COLOR_KEYS } from '../lib/brandColors.js';
   import { parseRgb } from '../lib/contrast.js';
 
+  let { colorKey = null, showIntro = true } = $props();
+
   const BRAND_KEYS = BRAND_COLOR_KEYS.filter((k) => k.group === 'brand');
+  const visibleBrandKeys = $derived(colorKey ? BRAND_KEYS.filter((k) => k.key === colorKey) : BRAND_KEYS);
 
   const SHADE_STEPS = [
     { suffix: '-superlight', label: 'superlight' },
@@ -27,9 +30,9 @@
     { suffix: '-superdark',  label: 'superdark'   },
   ];
 
-  const ALL_SHADE_TOKENS = BRAND_KEYS.flatMap(({ key }) =>
+  const ALL_SHADE_TOKENS = $derived(visibleBrandKeys.flatMap(({ key }) =>
     SHADE_STEPS.map(({ suffix }) => `--sf-color-${key}${suffix}`)
-  );
+  ));
 
   /** @type {Record<string, string>} token → resolved rgb() string */
   let resolved = $state({});
@@ -58,14 +61,27 @@
     if (!c) return 128;
     return (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) * 255;
   }
+
+  function shadeMetrics(rgb) {
+    const c = parseRgb(rgb);
+    if (!c) return { lightness: '…', chroma: '…' };
+    const max = Math.max(c.r, c.g, c.b);
+    const min = Math.min(c.r, c.g, c.b);
+    return {
+      lightness: `${Math.round(perceived(rgb) / 2.55)}%`,
+      chroma: (max - min).toFixed(3),
+    };
+  }
 </script>
 
 <div class="sr">
-  <p class="sr__intro">
-    7-step ramp for each brand color, resolved against the <strong>{ui.previewTheme}</strong> theme.
-  </p>
+  {#if showIntro}
+    <p class="sr__intro">
+      7-step ramp for each brand color, resolved against the <strong>{ui.previewTheme}</strong> theme.
+    </p>
+  {/if}
 
-  {#each BRAND_KEYS as { key, label } (key)}
+  {#each visibleBrandKeys as { key, label } (key)}
     <div class="sr__row">
       <span class="sr__name">{label}</span>
       <div class="sr__swatches">
@@ -90,12 +106,24 @@
           </div>
         {/each}
       </div>
+      <table class="sr__table">
+        <thead><tr><th>Shade</th><th>Lightness</th><th>Chroma</th></tr></thead>
+        <tbody>
+          {#each SHADE_STEPS as { suffix, label: stepLabel } (`table-${key}${suffix}`)}
+            {@const token = `--sf-color-${key}${suffix}`}
+            {@const metrics = shadeMetrics(resolved[token])}
+            <tr><td>{stepLabel}</td><td>{metrics.lightness}</td><td>{metrics.chroma}</td></tr>
+          {/each}
+        </tbody>
+      </table>
     </div>
   {/each}
 
+  {#if showIntro}
   <p class="sr__note">
     Toggle in the preview pane to compare modes.
   </p>
+  {/if}
 </div>
 
 <style>
@@ -180,6 +208,10 @@
     white-space: nowrap;
     max-width: 100%;
   }
+
+  .sr__table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; overflow: hidden; border-radius: var(--cfg-radius-s); }
+  .sr__table th, .sr__table td { padding: 6px 8px; border: 1px solid var(--cfg-border); text-align: left; }
+  .sr__table th { color: var(--cfg-text-faint); text-transform: uppercase; letter-spacing: .06em; background: var(--cfg-surface-2); }
 
   .sr__note {
     margin: 4px 0 0;

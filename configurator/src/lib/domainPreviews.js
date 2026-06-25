@@ -110,7 +110,7 @@ export const DOMAIN_PREVIEWS = {
     ],
   },
 
-  gradients: {
+  colors: {
     kind: 'gradient',
     blurb: 'Brand and surface gradient shorthands.',
     groups: [

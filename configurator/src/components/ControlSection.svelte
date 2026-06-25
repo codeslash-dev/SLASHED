@@ -14,7 +14,7 @@
 </details>
 
 <style>
-  .control-section { border:1px solid var(--cfg-border); border-radius:var(--cfg-radius); background:var(--cfg-surface); overflow:clip; }
+  .control-section { border:1px solid var(--cfg-border); border-radius:var(--cfg-radius); background:var(--cfg-surface); }
   summary { display:flex; align-items:center; gap:10px; padding:14px 16px; cursor:pointer; list-style:none; background:linear-gradient(to right, rgba(79,140,255,.06), transparent), var(--cfg-surface-2); border-bottom:1px solid var(--cfg-border); }
   summary::-webkit-details-marker { display:none; }
   .control-section:not([open]) summary { border-bottom:0; }

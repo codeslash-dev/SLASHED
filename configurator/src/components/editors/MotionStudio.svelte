@@ -1,18 +1,21 @@
 <script>
-  import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
+  import { tokenByName } from '../../lib/model.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
-  const groups = resolveStudioGroups(STUDIO_GROUPS.motion);
-  const workflow = ['Duration', 'Easing', 'Presets', 'Reduced'];
+  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
+  const panels = [
+    panel('Durations', 'Global motion scale and duration tokens.', ['--sf-motion-scale', '--sf-duration-none', '--sf-duration-instant', '--sf-duration-fast', '--sf-duration-normal', '--sf-duration-slow', '--sf-duration-slower']),
+    panel('Easing', 'Curve choices for enter, exit and spring movement.', ['--sf-ease-linear', '--sf-ease-in', '--sf-ease-out', '--sf-ease-in-out', '--sf-ease-spring', '--sf-ease-overshoot']),
+    panel('Presets', 'Named animation presets consumed by utilities.', ['--sf-animation-fade-in', '--sf-animation-slide-in-up', '--sf-animation-scale-up', '--sf-animation-float', '--sf-animation-shimmer']),
+    panel('Reduced motion', 'Tune motion scale toward calmer state changes.', ['--sf-motion-scale', '--sf-duration-none']),
+  ];
   const durations = ['instant', 'fast', 'normal', 'slow'];
   const easings = ['linear', 'in', 'out', 'spring'];
 </script>
 
-<StudioFrame title="Motion Studio" description="Durations, easing and animation presets shown as live interactions: see timing, curves and UI states without guessing from token names.">
+<StudioFrame {panels} title="Motion Studio" description="Durations, easing and animation presets shown as live interactions: see timing, curves and UI states without guessing from token names.">
   <div class="motion-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Motion workflow" />
 
     <section class="duration-lab" aria-label="Duration scale preview">
       <div class="lab-copy"><strong>Speed scale</strong><span>Motion scale controls the feel of every duration without editing each preset by hand.</span></div>
@@ -41,9 +44,11 @@
       <p>When motion scale approaches zero, the interface should still communicate state changes with opacity and color.</p>
       <div><span></span><span></span><span></span></div>
     </section>
-
-    <StudioControls {groups} />
   </div>
+
+    {#snippet controls(activePanel)}
+      <StudioControls groups={activePanel.groups} />
+    {/snippet}
 </StudioFrame>
 
 <style>
