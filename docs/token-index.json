@@ -5,7 +5,6 @@
       "core/tokens.css",
       "core/tokens.layout.css",
       "core/tokens.macros.css",
-      "optional/tokens.palette.css",
       "optional/tokens.components.css"
     ],
     "counts": {
@@ -530,7 +529,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))"
     },
@@ -538,7 +537,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))"
     },
@@ -546,7 +545,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))"
     },
@@ -554,7 +553,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))"
     },
@@ -562,7 +561,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))"
     },
@@ -570,7 +569,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action)"
     },
@@ -578,7 +577,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
@@ -586,7 +585,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))"
     },
@@ -594,7 +593,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))"
     },
@@ -602,7 +601,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))"
     },
@@ -610,7 +609,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))"
     },
@@ -618,7 +617,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.10)"
     },
@@ -626,7 +625,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.30)"
     },
@@ -634,7 +633,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.05)"
     },
@@ -642,7 +641,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.50)"
     },
@@ -650,7 +649,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-action) l c h / 0.80)"
     },
@@ -658,8 +657,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action-600)"
     },
@@ -669,14 +667,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.05)"
+      "value": "var(--sf-color-action-a5)"
     },
     "--sf-color-action-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action-400)"
     },
@@ -686,7 +683,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.30)"
+      "value": "var(--sf-color-action-a30)"
     },
     "--sf-color-action-source-dark": {
       "tier": "PUBLIC",
@@ -710,14 +707,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-action) l c h / 0.10)"
+      "value": "var(--sf-color-action-a10)"
     },
     "--sf-color-action-superdark": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action-950)"
     },
@@ -725,8 +721,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action-50)"
     },
@@ -734,8 +729,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action-800)"
     },
@@ -743,8 +737,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-action-200)"
     },
@@ -776,7 +769,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))"
     },
@@ -784,7 +777,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))"
     },
@@ -792,7 +785,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))"
     },
@@ -800,7 +793,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))"
     },
@@ -808,7 +801,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))"
     },
@@ -816,7 +809,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base)"
     },
@@ -824,7 +817,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
@@ -832,7 +825,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))"
     },
@@ -840,7 +833,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))"
     },
@@ -848,7 +841,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))"
     },
@@ -856,7 +849,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))"
     },
@@ -864,7 +857,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.10)"
     },
@@ -872,7 +865,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.30)"
     },
@@ -880,7 +873,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.05)"
     },
@@ -888,7 +881,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.50)"
     },
@@ -896,7 +889,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)"
     },
@@ -904,8 +897,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base-600)"
     },
@@ -915,14 +907,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.05)"
+      "value": "var(--sf-color-base-a5)"
     },
     "--sf-color-base-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base-400)"
     },
@@ -932,7 +923,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.30)"
+      "value": "var(--sf-color-base-a30)"
     },
     "--sf-color-base-source-dark": {
       "tier": "PUBLIC",
@@ -956,14 +947,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-base) l c h / 0.10)"
+      "value": "var(--sf-color-base-a10)"
     },
     "--sf-color-base-superdark": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base-950)"
     },
@@ -971,8 +961,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base-50)"
     },
@@ -980,8 +969,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base-800)"
     },
@@ -989,8 +977,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-base-200)"
     },
@@ -1334,7 +1321,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))"
     },
@@ -1342,7 +1329,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))"
     },
@@ -1350,7 +1337,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))"
     },
@@ -1358,7 +1345,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))"
     },
@@ -1366,7 +1353,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))"
     },
@@ -1374,7 +1361,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral)"
     },
@@ -1382,7 +1369,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
@@ -1390,7 +1377,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))"
     },
@@ -1398,7 +1385,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))"
     },
@@ -1406,7 +1393,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))"
     },
@@ -1414,7 +1401,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))"
     },
@@ -1422,7 +1409,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)"
     },
@@ -1430,7 +1417,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)"
     },
@@ -1438,7 +1425,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)"
     },
@@ -1446,7 +1433,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.50)"
     },
@@ -1454,7 +1441,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.80)"
     },
@@ -1462,8 +1449,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-600)"
     },
@@ -1473,14 +1459,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.05)"
+      "value": "var(--sf-color-neutral-a5)"
     },
     "--sf-color-neutral-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-400)"
     },
@@ -1490,7 +1475,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.30)"
+      "value": "var(--sf-color-neutral-a30)"
     },
     "--sf-color-neutral-source-dark": {
       "tier": "PUBLIC",
@@ -1514,14 +1499,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-neutral) l c h / 0.10)"
+      "value": "var(--sf-color-neutral-a10)"
     },
     "--sf-color-neutral-superdark": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-950)"
     },
@@ -1529,8 +1513,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-50)"
     },
@@ -1538,8 +1521,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-800)"
     },
@@ -1547,8 +1529,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-200)"
     },
@@ -1588,7 +1569,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))"
     },
@@ -1596,7 +1577,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))"
     },
@@ -1604,7 +1585,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))"
     },
@@ -1612,7 +1593,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))"
     },
@@ -1620,7 +1601,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))"
     },
@@ -1628,7 +1609,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary)"
     },
@@ -1636,7 +1617,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
@@ -1644,7 +1625,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))"
     },
@@ -1652,7 +1633,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))"
     },
@@ -1660,7 +1641,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))"
     },
@@ -1668,7 +1649,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))"
     },
@@ -1676,7 +1657,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.10)"
     },
@@ -1684,7 +1665,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.30)"
     },
@@ -1692,7 +1673,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.05)"
     },
@@ -1700,7 +1681,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.50)"
     },
@@ -1708,7 +1689,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-primary) l c h / 0.80)"
     },
@@ -1716,8 +1697,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-600)"
     },
@@ -1727,14 +1707,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.05)"
+      "value": "var(--sf-color-primary-a5)"
     },
     "--sf-color-primary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-400)"
     },
@@ -1744,7 +1723,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.30)"
+      "value": "var(--sf-color-primary-a30)"
     },
     "--sf-color-primary-source-dark": {
       "tier": "PUBLIC",
@@ -1768,14 +1747,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-primary) l c h / 0.10)"
+      "value": "var(--sf-color-primary-a10)"
     },
     "--sf-color-primary-superdark": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-950)"
     },
@@ -1783,8 +1761,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-50)"
     },
@@ -1792,8 +1769,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-800)"
     },
@@ -1801,8 +1777,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-200)"
     },
@@ -1850,7 +1825,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))"
     },
@@ -1858,7 +1833,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))"
     },
@@ -1866,7 +1841,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))"
     },
@@ -1874,7 +1849,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))"
     },
@@ -1882,7 +1857,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))"
     },
@@ -1890,7 +1865,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary)"
     },
@@ -1898,7 +1873,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
@@ -1906,7 +1881,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))"
     },
@@ -1914,7 +1889,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))"
     },
@@ -1922,7 +1897,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))"
     },
@@ -1930,7 +1905,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))"
     },
@@ -1938,7 +1913,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)"
     },
@@ -1946,7 +1921,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)"
     },
@@ -1954,7 +1929,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)"
     },
@@ -1962,7 +1937,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.50)"
     },
@@ -1970,7 +1945,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-secondary) l c h / 0.80)"
     },
@@ -1978,8 +1953,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-600)"
     },
@@ -1989,14 +1963,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.05)"
+      "value": "var(--sf-color-secondary-a5)"
     },
     "--sf-color-secondary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-400)"
     },
@@ -2006,7 +1979,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.30)"
+      "value": "var(--sf-color-secondary-a30)"
     },
     "--sf-color-secondary-source-dark": {
       "tier": "PUBLIC",
@@ -2030,14 +2003,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-secondary) l c h / 0.10)"
+      "value": "var(--sf-color-secondary-a10)"
     },
     "--sf-color-secondary-superdark": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-950)"
     },
@@ -2045,8 +2017,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-50)"
     },
@@ -2054,8 +2025,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-800)"
     },
@@ -2063,8 +2033,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-200)"
     },
@@ -2168,7 +2137,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))"
     },
@@ -2176,7 +2145,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))"
     },
@@ -2184,7 +2153,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))"
     },
@@ -2192,7 +2161,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))"
     },
@@ -2200,7 +2169,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))"
     },
@@ -2208,7 +2177,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary)"
     },
@@ -2216,7 +2185,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))"
     },
@@ -2224,7 +2193,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))"
     },
@@ -2232,7 +2201,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))"
     },
@@ -2240,7 +2209,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))"
     },
@@ -2248,7 +2217,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))"
     },
@@ -2256,7 +2225,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)"
     },
@@ -2264,7 +2233,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)"
     },
@@ -2272,7 +2241,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)"
     },
@@ -2280,7 +2249,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.50)"
     },
@@ -2288,7 +2257,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-tertiary) l c h / 0.80)"
     },
@@ -2296,8 +2265,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-600)"
     },
@@ -2307,14 +2275,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.05)"
+      "value": "var(--sf-color-tertiary-a5)"
     },
     "--sf-color-tertiary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-400)"
     },
@@ -2324,7 +2291,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.30)"
+      "value": "var(--sf-color-tertiary-a30)"
     },
     "--sf-color-tertiary-source-dark": {
       "tier": "PUBLIC",
@@ -2348,14 +2315,13 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-tertiary) l c h / 0.10)"
+      "value": "var(--sf-color-tertiary-a10)"
     },
     "--sf-color-tertiary-superdark": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-950)"
     },
@@ -2363,8 +2329,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-50)"
     },
@@ -2372,8 +2337,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-800)"
     },
@@ -2381,8 +2345,7 @@
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
-        "core/tokens.css",
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-200)"
     },
@@ -3918,7 +3881,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "8%"
     },
@@ -3926,7 +3889,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "20%"
     },
@@ -3934,7 +3897,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "40%"
     },
@@ -3942,7 +3905,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "65%"
     },
@@ -3950,7 +3913,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "4%"
     },
@@ -3958,7 +3921,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "82%"
     },
@@ -3966,7 +3929,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "62%"
     },
@@ -3974,7 +3937,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "38%"
     },
@@ -3982,7 +3945,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "18%"
     },
@@ -3990,7 +3953,7 @@
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
-        "optional/tokens.palette.css"
+        "core/tokens.css"
       ],
       "value": "8%"
     },

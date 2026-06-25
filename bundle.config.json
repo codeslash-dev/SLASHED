@@ -53,7 +53,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/legacy.css"
       ]
@@ -75,7 +74,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/legacy.css"
       ]
@@ -96,7 +94,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -120,7 +117,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -143,7 +139,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/utilities.css",
         "optional/legacy.css"
@@ -166,7 +161,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/utilities.css",
         "optional/legacy.css"
@@ -188,7 +182,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
@@ -213,7 +206,6 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/tokens.palette.css",
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",

@@ -190,14 +190,14 @@ freeze. These changes are additive or removal-only — no renamed tokens.
 | `--sf-ratio-photo` | Use `--sf-ratio-3-2` (identical value) or `--sf-ratio-4-3` |
 | `--sf-sidebar-width-default` | Override `--sf-sidebar-width` directly (now declared as `18rem`) |
 | `--sf-grid-min-default` | Override `--sf-grid-min` directly (now declared as `16rem`) |
-| `--sf-color-primary--hover` | Use `--sf-color-primary-hover` from `optional/tokens.palette.css` |
-| `--sf-color-secondary--hover` | Use `--sf-color-secondary-hover` from `optional/tokens.palette.css` |
-| `--sf-color-tertiary--hover` | Use `--sf-color-tertiary-hover` from `optional/tokens.palette.css` |
-| `--sf-color-action--hover` | Use `--sf-color-action-hover` from `optional/tokens.palette.css` |
-| `--sf-color-neutral--hover` | Use `--sf-color-neutral-hover` from `optional/tokens.palette.css` |
+| `--sf-color-primary--hover` | Use `--sf-color-primary-hover` from `core/tokens.css` |
+| `--sf-color-secondary--hover` | Use `--sf-color-secondary-hover` from `core/tokens.css` |
+| `--sf-color-tertiary--hover` | Use `--sf-color-tertiary-hover` from `core/tokens.css` |
+| `--sf-color-action--hover` | Use `--sf-color-action-hover` from `core/tokens.css` |
+| `--sf-color-neutral--hover` | Use `--sf-color-neutral-hover` from `core/tokens.css` |
 
 **Note:** The single-dash brand hover variants (`--sf-color-{role}-hover`)
-live exclusively in `optional/tokens.palette.css` (shipped in the
+live in `core/tokens.css` (shipped in the
 `optimal`+ bundles). If you relied on the double-dash hover tokens in
 the `essential` bundle, you must switch to the `optimal` bundle or
 declare your own hover colour.
@@ -251,7 +251,7 @@ renames — there are no other renamed tokens; everything else is additive.
 |---|---|---|
 | `--sf-color-surface-source-light` / `-dark` | `--sf-color-base-source-light` / `-dark` | The page-surface **source** family is renamed for clarity. The full scale (`-50` … `-950`) and alpha steps follow the same rename and have **no** back-compat alias. The on-colour token `--sf-color-text--on-surface` was renamed to `--sf-color-text--on-base`; the compat alias was dropped in 0.6.0 (see the 0.5→0.6 section). |
 | `--sf-color-well` | `--sf-color-inset` | Renamed to communicate the recessed / indented surface role. `--sf-color-well` is removed (no alias). |
-| `--sf-color-{family}-hover` | `--sf-color-{family}--hover` | Separator changed from single-dash to double-dash for BEM state-modifier compliance. Applies to all 6 brand families: `primary`, `secondary`, `tertiary`, `action`, `neutral`, `base`. Available in `optional/tokens.palette.css`. No back-compat alias. |
+| `--sf-color-{family}-hover` | `--sf-color-{family}--hover` | Separator changed from single-dash to double-dash for BEM state-modifier compliance. Applies to all 6 brand families: `primary`, `secondary`, `tertiary`, `action`, `neutral`, `base`. Available in `core/tokens.css`. No back-compat alias. |
 | `--sf-color-{family}-active` | `--sf-color-{family}--active` | Same BEM separator fix as `-hover` above. Same 6 families. No back-compat alias. |
 
 **The resolved semantic token `--sf-color-surface` (the page-surface anchor)
@@ -264,7 +264,7 @@ the page surface, rename those overrides to `--sf-color-base-source-light` / `-d
 
 | Removed | Replacement |
 |---|---|
-| `--sf-color-{success,warning,error,info,danger}-{50…950}` | The numeric ramp for status families is gone. Status colours are functional — use the `subtle` / `muted` / base / `strong` aliases, or derive a step with `color-mix(in oklab, var(--sf-color-danger) 40%, var(--sf-color-surface))`. Brand families keep their full numeric scale via `optional/tokens.palette.css`. |
+| `--sf-color-{success,warning,error,info,danger}-{50…950}` | The numeric ramp for status families is gone. Status colours are functional — use the `subtle` / `muted` / base / `strong` aliases, or derive a step with `color-mix(in oklab, var(--sf-color-danger) 40%, var(--sf-color-surface))`. Brand families keep their full numeric scale via `core/tokens.css`. |
 
 ### Classes renamed
 
@@ -293,8 +293,8 @@ No breaking changes. All changes are additive or internal.
 ### Tokens moved to core (now available in essential bundle)
 
 The brand semantic alpha tokens — `ghost`, `subtle`, and `muted` — were previously
-declared in `optional/tokens.palette.css` and only available in the `optimal`+
-bundles. In 0.6.0 they live in `core/tokens.css` and ship in every bundle:
+declared in `optional/tokens.palette.css`. In 0.6.0 they live in `core/tokens.css`
+and ship in every bundle:
 
 | Family | Tokens now in core |
 |---|---|
@@ -303,7 +303,7 @@ bundles. In 0.6.0 they live in `core/tokens.css` and ship in every bundle:
 
 No markup or CSS changes are required — the token names are unchanged.
 If you were on the `essential` bundle and used these tokens via a `<link>` to
-`optional/tokens.palette.css`, you can remove that extra link; they're now in core.
+`optional/tokens.palette.css`, no extra palette link is needed.
 
 ### New token
 
@@ -319,7 +319,7 @@ Alpha transparency for the brand ghost/subtle/muted tokens now uses
 are equivalent; the change improves color-space fidelity and allows these tokens
 to live in core without depending on the optional palette file.
 
-The numeric alpha scale (`-a5` … `-a95`) in `optional/tokens.palette.css` is now
+The numeric alpha scale (`-a5`, `-a10`, `-a30`, `-a50`, `-a80`) in `core/tokens.css` is now
 gated behind `@supports (color: oklch(from red l c h))`. Browsers below the
 framework floor do not load these tokens.
 

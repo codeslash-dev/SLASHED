@@ -96,7 +96,6 @@ const FILE_META = {
   'core/tokens.css':                    { category: 'Core tokens',              area: 'core',     kind: 'token' },
   'core/tokens.layout.css':             { category: 'Layout tokens',            area: 'layout',   kind: 'token' },
   'core/tokens.macros.css':             { category: 'Macro tokens',             area: 'macros',   kind: 'token' },
-  'optional/tokens.palette.css':        { category: 'Palette tokens',           area: 'palette',  kind: 'token' },
   'optional/tokens.components.css':     { category: 'Component tokens',         area: 'components', kind: 'token' },
   // Class files
   'core/layout.css':            { category: 'Layout primitives',     area: 'layout',        kind: 'layout'        },

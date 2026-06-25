@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-// fixture.html loads slashed.full.css (includes tokens.palette.css)
+// fixture.html loads slashed.full.css (palette tokens are core)
 const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
 // ── Serialisable in-browser helpers ─────────────────────────────
