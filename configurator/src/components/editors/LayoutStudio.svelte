@@ -5,17 +5,12 @@
   import ContainerBars from '../ContainerBars.svelte';
 
   const groups = resolveStudioGroups(STUDIO_GROUPS.layout);
-  const workflow = ['Containers', 'Grid', 'Measure', 'Anchors'];
+  const nav = ['Containers', 'Grid', 'Measure', 'Anchors'];
   const devices = ['Mobile', 'Tablet', 'Desktop'];
 </script>
 
-<StudioFrame title="Layout Studio" description="Container widths, reading measure, grid and global anchors shown as a live layout system — from viewport down to sections, sidebar and sticky offsets.">
+<StudioFrame title="Layout Studio" description="Container widths, reading measure, grid and global anchors shown as a live layout system — from viewport down to sections, sidebar and sticky offsets." {nav}>
   <div class="layout-studio">
-    <nav class="workflow" aria-label="Layout workflow">
-      <ol>
-        {#each workflow as step, index (step)}<li><b>{index + 1}</b>{step}</li>{/each}
-      </ol>
-    </nav>
 
     <section class="viewport-lab" aria-label="Viewport and container preview">
       <div class="viewport-lab__header">
@@ -58,10 +53,6 @@
 
 <style>
   .layout-studio { display: grid; gap: 12px; }
-  .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .workflow ol { display: contents; list-style: none; margin: 0; padding: 0; }
-  .workflow li { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-  .workflow b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 999px; background: var(--cfg-accent-strong); color: white; font-size: 10px; }
   .viewport-lab { display: grid; gap: 12px; padding: 16px; border: 1px dashed var(--cfg-border-strong); border-radius: 16px; background: var(--cfg-bg-2); }
   .viewport-lab__header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
   .viewport-lab__header strong { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
@@ -87,6 +78,5 @@
   .legend { display: flex; gap: 10px; flex-wrap: wrap; }
   .legend b { font-size: 11px; color: var(--cfg-text-muted); text-transform: uppercase; }
   @media (max-width: 840px) { .composition, .measure-lab { grid-template-columns: 1fr; } }
-  @media (max-width: 640px) { .workflow, .device-strip { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 480px) { .workflow { grid-template-columns: repeat(4, minmax(110px, 1fr)); overflow-x: auto; padding-bottom: 4px; } }
+  @media (max-width: 640px) { .device-strip { grid-template-columns: 1fr 1fr; } }
 </style>

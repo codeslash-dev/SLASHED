@@ -2,17 +2,15 @@
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
   const groups = resolveStudioGroups(STUDIO_GROUPS.borders);
-  const workflow = ['Radius', 'Borders', 'Dividers', 'Focus'];
+  const nav = ['Radius', 'Borders', 'Dividers', 'Focus'];
   const radii = ['xs', 's', 'm', 'l', 'xl', 'full'];
   const components = ['Button', 'Input', 'Card', 'Badge'];
 </script>
 
-<StudioFrame title="Shape Studio" description="Radius, border, divider and focus ring shown as a complete shape system — from the corner scale down to accessible focus outlines.">
+<StudioFrame title="Shape Studio" description="Radius, border, divider and focus ring shown as a complete shape system — from the corner scale down to accessible focus outlines." {nav}>
   <div class="shape-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Shape workflow" />
 
     <section class="radius-lab" aria-label="Radius scale preview">
       <div class="lab-copy"><strong>Radius system</strong><span>One scale controls components from sharp utility chips to fully pill-shaped actions.</span></div>

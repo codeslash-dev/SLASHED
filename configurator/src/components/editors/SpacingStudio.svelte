@@ -4,15 +4,12 @@
   import StudioControls from './StudioControls.svelte';
 
   const steps = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
-  const workflow = ['Scale', 'Rhythm', 'Components', 'Sections'];
+  const nav = ['Scale', 'Rhythm', 'Components', 'Sections'];
   const groups = resolveStudioGroups(STUDIO_GROUPS.spacing);
 </script>
 
-<StudioFrame title="Spacing Studio" description="Scale ruler, rhythm and layout preview — from the global space multiplier down to real component and section gaps.">
+<StudioFrame title="Spacing Studio" description="Scale ruler, rhythm and layout preview — from the global space multiplier down to real component and section gaps." {nav}>
   <div class="spacing-studio">
-    <nav class="workflow" aria-label="Spacing workflow">
-      {#each workflow as step, index (step)}<span><b>{index + 1}</b>{step}</span>{/each}
-    </nav>
 
     <section class="scale-lab" aria-label="Space map">
       <div class="scale-lab__intro">
@@ -55,9 +52,6 @@
 
 <style>
   .spacing-studio { display: grid; gap: 12px; }
-  .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .workflow span { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-  .workflow b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 999px; background: var(--cfg-accent-strong); color: white; font-size: 10px; }
   .scale-lab { display: grid; grid-template-columns: minmax(190px, .5fr) 1fr; gap: 14px; padding: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-bg-2); }
   .scale-lab__intro { display: grid; align-content: center; gap: 6px; }
   .scale-lab__intro strong { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
@@ -80,5 +74,4 @@
   .component-grid div { display: flex; flex-wrap: wrap; gap: var(--sf-gap, .75rem); }
   .component-grid span { display: grid; place-items: center; inline-size: 34px; block-size: 34px; border-radius: 999px; background: var(--cfg-accent-soft); }
   @media (max-width: 820px) { .scale-lab, .rhythm-preview, .component-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 640px) { .workflow { grid-template-columns: 1fr 1fr; } }
 </style>

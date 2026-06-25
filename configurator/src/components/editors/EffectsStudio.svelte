@@ -2,16 +2,14 @@
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
   const groups = resolveStudioGroups(STUDIO_GROUPS.effects);
-  const workflow = ['Glass', 'Opacity', 'Scrim', 'Masks'];
+  const nav = ['Glass', 'Opacity', 'Scrim', 'Masks'];
   const states = ['normal', 'muted', 'disabled', 'pending'];
 </script>
 
-<StudioFrame title="Effects Studio" description="Blur, opacity, scrim and mask fades shown as ready UI patterns: media cards, disabled states and scroll fade overlays.">
+<StudioFrame title="Effects Studio" description="Blur, opacity, scrim and mask fades shown as ready UI patterns: media cards, disabled states and scroll fade overlays." {nav}>
   <div class="effects-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Effects workflow" />
 
     <section class="glass-lab" aria-label="Glass and blur preview">
       <div class="glass-card"><small>Glass & blur</small><h4>Readable media card</h4><p>Scrim, blur and muted states preview.</p><button>Primary action</button></div>

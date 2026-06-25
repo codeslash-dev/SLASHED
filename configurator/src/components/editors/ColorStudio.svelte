@@ -19,14 +19,11 @@
     '--sf-focus-ring-width',
     '--sf-focus-ring-offset',
   ].map((name) => tokenByName.get(name)).filter(Boolean);
-  const workflow = ['Source pairs', 'Role map', 'Shade ramp', 'Usage check'];
+  const nav = ['Main colors', 'Semantic colors', 'Gradients', 'Shade curve', 'Contrast', 'Assignments'];
 </script>
 
-<StudioFrame title="Color Studio" description="Set brand sources first, then verify semantic roles, status colors, shade ramp, contrast, and real usage." tone="color">
+<StudioFrame title="Color Studio" description="Set brand sources first, then verify semantic roles, status colors, shade ramp, contrast, and real usage." tone="color" {nav}>
   <div class="color-studio">
-    <nav class="workflow" aria-label="Color workflow">
-      {#each workflow as step, index (step)}<span><b>{index + 1}</b>{step}</span>{/each}
-    </nav>
 
     <section class="usage" aria-label="Usage preview">
       <button>Primary button</button>
@@ -68,9 +65,6 @@
 
 <style>
   .color-studio { display: grid; gap: 12px; }
-  .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .workflow span { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-  .workflow b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 999px; background: var(--cfg-accent-strong); color: white; font-size: 10px; }
   .usage { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 14px; border-radius: 14px; background: var(--sf-color-raised); border: 1px solid var(--sf-color-border); }
   .usage button { border: 0; border-radius: 999px; background: var(--sf-color-primary); color: var(--sf-color-primary-text, white); padding: 10px 14px; }
   .usage p { margin: 2px 0 0; color: var(--sf-color-text--muted); }
@@ -100,6 +94,6 @@
   details { border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-surface); overflow: clip; }
   summary { padding: 12px 14px; cursor: pointer; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: .06em; background: var(--cfg-surface-2); }
   .rows { display: grid; }
-  @media (max-width: 800px) { .workflow, .theme-pair, .role-map__grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 640px) { .usage, .workflow, .theme-pair, .role-map__grid { grid-template-columns: 1fr; } .swatches { grid-template-columns: repeat(5, 1fr); } }
+  @media (max-width: 800px) { .theme-pair, .role-map__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .usage, .theme-pair, .role-map__grid { grid-template-columns: 1fr; } .swatches { grid-template-columns: repeat(5, 1fr); } }
 </style>

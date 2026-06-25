@@ -2,16 +2,14 @@
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
   const levels = ['xs', 's', 'm', 'l', 'xl', '2xl'];
-  const workflow = ['Elevation', 'Surfaces', 'Overlays', 'Media'];
+  const nav = ['Elevation', 'Surfaces', 'Overlays', 'Media'];
   const groups = resolveStudioGroups(STUDIO_GROUPS.shadows);
 </script>
 
-<StudioFrame title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media.">
+<StudioFrame title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media." {nav}>
   <div class="shadow-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Shadow workflow" />
 
     <section class="elevation-lab" aria-label="Elevation scale preview">
       <div class="lab-copy"><strong>Elevation stack</strong><span>Compare every shadow level on the same surface and tune global strength/lightness once.</span></div>

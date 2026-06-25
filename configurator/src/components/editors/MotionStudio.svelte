@@ -2,17 +2,15 @@
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
   const groups = resolveStudioGroups(STUDIO_GROUPS.motion);
-  const workflow = ['Duration', 'Easing', 'Presets', 'Reduced'];
+  const nav = ['Duration', 'Easing', 'Presets', 'Reduced'];
   const durations = ['instant', 'fast', 'normal', 'slow'];
   const easings = ['linear', 'in', 'out', 'spring'];
 </script>
 
-<StudioFrame title="Motion Studio" description="Durations, easing and animation presets shown as live interactions: see timing, curves and UI states without guessing from token names.">
+<StudioFrame title="Motion Studio" description="Durations, easing and animation presets shown as live interactions: see timing, curves and UI states without guessing from token names." {nav}>
   <div class="motion-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Motion workflow" />
 
     <section class="duration-lab" aria-label="Duration scale preview">
       <div class="lab-copy"><strong>Speed scale</strong><span>Motion scale controls the feel of every duration without editing each preset by hand.</span></div>

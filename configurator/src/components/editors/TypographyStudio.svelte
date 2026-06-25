@@ -13,16 +13,9 @@
   const scale = $derived(overrides['--sf-text-scale'] || 'var(--sf-text-scale, 1)');
 </script>
 
-<StudioFrame title="Typography Studio" description="The live specimen is your canvas: pick a scope, set the font, scale, rhythm and wrap — and see the result next to the controls." tone="type">
+<StudioFrame title="Typography Studio" description="The live specimen is your canvas: pick a scope, set the font, scale, rhythm and wrap — and see the result next to the controls." tone="type" nav={TYPOGRAPHY_PANELS} activePanel={active} onSelectPanel={(id) => (active = id)}>
   <div class="type-studio">
-    <div class="type-studio__toolbar">
-      <div class="tabs" role="tablist" aria-label="Typography editing scope">
-        {#each TYPOGRAPHY_PANELS as p (p.id)}
-          <button role="tab" aria-selected={active === p.id} class:active={active === p.id} onclick={() => (active = p.id)}>{p.label}</button>
-        {/each}
-      </div>
-      <p>{panel.description}</p>
-    </div>
+    <p class="panel-description">{panel.description}</p>
 
     <div class="specimen" style:--type-scale={scale}>
       <div class="specimen__measure"><span>mobile</span><span>tablet</span><span>desktop</span></div>
@@ -52,11 +45,7 @@
 
 <style>
   .type-studio { display: grid; gap: 12px; }
-  .type-studio__toolbar { display: grid; gap: 8px; }
-  .type-studio__toolbar p { margin: 0; color: var(--cfg-text-muted); font-size: 13px; }
-  .tabs { display: flex; gap: 0; overflow: auto; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); }
-  .tabs button { border: 0; border-right: 1px solid var(--cfg-border); background: transparent; color: var(--cfg-text-muted); padding: 8px 12px; font-weight: 800; font-size: 11px; text-transform: uppercase; white-space: nowrap; }
-  .tabs button.active { background: var(--cfg-accent-strong); color: white; }
+  .panel-description { margin: 0; color: var(--cfg-text-muted); font-size: 13px; }
   .specimen { padding: clamp(16px, 4vw, 28px); border-radius: var(--cfg-radius); background: var(--sf-color-bg); color: var(--sf-color-text); border: 1px solid var(--cfg-border); overflow: hidden; }
   .specimen__measure { display: grid; grid-template-columns: .5fr .75fr 1fr; gap: 6px; margin-bottom: 16px; color: var(--cfg-text-faint); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
   .specimen__measure span { border-top: 2px solid var(--cfg-border-strong); padding-top: 4px; }
