@@ -29,6 +29,13 @@ export const SMART_SETTINGS_BY_DOMAIN = {
         { label: 'Punchy', patch: { '--sf-palette-mix-50': '15%', '--sf-palette-mix-100': '24%', '--sf-palette-mix-200': '36%', '--sf-palette-mix-300': '50%', '--sf-palette-mix-400': '68%', '--sf-palette-mix-600': '68%', '--sf-palette-mix-700': '50%', '--sf-palette-mix-800': '36%', '--sf-palette-mix-900': '24%', '--sf-palette-mix-950': '15%' } },
       ],
     },
+    {
+      id: 'gradient-builder',
+      title: 'Gradient builder',
+      hint: 'Visual controls for direction, stops and presets; raw CSS stays below.',
+      kind: 'gradient',
+      tokens: ['--sf-gradient-primary', '--sf-gradient-secondary', '--sf-gradient-tertiary', '--sf-gradient-brand', '--sf-gradient-surface', '--sf-gradient-fade--t', '--sf-gradient-fade--b'],
+    },
   ],
 
   typography: [
@@ -71,16 +78,6 @@ export const SMART_SETTINGS_BY_DOMAIN = {
         { label: 'Comfortable', patch: { '--sf-space-scale': '1.12', '--sf-section-scale': '1.15' } },
         { label: 'Spacious', patch: { '--sf-space-scale': '1.28', '--sf-section-scale': '1.35' } },
       ],
-    },
-  ],
-
-  gradients: [
-    {
-      id: 'gradient-builder',
-      title: 'Gradient builder',
-      hint: 'Visual controls for direction, stops and presets; raw CSS stays below.',
-      kind: 'gradient',
-      tokens: ['--sf-gradient-primary', '--sf-gradient-secondary', '--sf-gradient-tertiary', '--sf-gradient-brand', '--sf-gradient-surface', '--sf-gradient-fade--t', '--sf-gradient-fade--b'],
     },
   ],
 

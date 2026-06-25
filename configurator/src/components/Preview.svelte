@@ -46,7 +46,6 @@
   const SECTIONS = [
     { id: 'overview',   label: 'Overview' },
     { id: 'colors',     label: 'Colors' },
-    { id: 'gradients',  label: 'Gradients' },
     { id: 'palette',    label: 'Palette' },
     { id: 'typography', label: 'Type' },
     { id: 'spacing',    label: 'Spacing' },
@@ -62,7 +61,6 @@
   const DOMAIN_TO_SECTION = {
     home:       'overview',
     colors:     'colors',
-    gradients:  'gradients',
     typography: 'typography',
     spacing:    'spacing',
     layout:     'layout',
@@ -1066,44 +1064,6 @@
           <code class="pv__code">--sf-focus-ring-width</code>
           <code class="pv__code">--sf-focus-ring-color</code>
           <code class="pv__code">--sf-focus-ring-offset</code>
-        </div>
-      </section>
-
-      {/if}
-
-      <!-- ═══════════ GRADIENTS ═══════════ -->
-      {#if activeSection === 'gradients'}
-
-      <section class="pv__block">
-        <p class="pv__eyebrow">Brand gradients — --sf-gradient-*</p>
-        <div class="pv__gradients">
-          {#each gradients as g (g)}
-            <div class="pv__grad" style="background:var(--sf-gradient-{g},var(--sf-color-{g},#888))"><span class="pv__grad-label">{g}</span></div>
-          {/each}
-        </div>
-      </section>
-
-      <section class="pv__block">
-        <p class="pv__eyebrow">Directional fade gradients</p>
-        <div class="pv__gradients">
-          {#each ['fade--t','fade--b','fade--l','fade--r'] as g (g)}
-            <div class="pv__grad pv__grad--bordered" style="background:var(--sf-gradient-{g},transparent)"><span class="pv__grad-label pv__grad-label--muted">{g}</span></div>
-          {/each}
-        </div>
-      </section>
-
-      <section class="pv__block">
-        <p class="pv__eyebrow">Gradient on real content — card + hero strip</p>
-        <div class="pv__grad-card">
-          <div class="pv__grad-card__hero" style="background:var(--sf-gradient-primary,linear-gradient(135deg,var(--sf-color-primary,#4f8cff),var(--sf-color-tertiary,#8858ff)))">
-            <p class="pv__grad-card__title">Hero headline</p>
-            <p class="pv__grad-card__sub">Gradient background from --sf-gradient-primary</p>
-          </div>
-          <div class="pv__grad-card__row">
-            {#each ['secondary','tertiary','brand'] as g (g)}
-              <div class="pv__grad-card__chip" style="background:var(--sf-gradient-{g},var(--sf-color-{g},#888))">{g}</div>
-            {/each}
-          </div>
         </div>
       </section>
 

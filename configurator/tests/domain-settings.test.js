@@ -14,7 +14,7 @@ import { sanitizeValue } from '../src/lib/css.js';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
 
 const tokenByName = new Map(data.tokens.map((t) => [t.name, t]));
-const REQUIRED = ['colors', 'typography', 'spacing', 'gradients', 'layout', 'borders', 'shadows', 'motion', 'effects'];
+const REQUIRED = ['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects'];
 
 describe('smart domain settings coverage', () => {
   test('high-impact token domains have at least one smart panel', () => {
