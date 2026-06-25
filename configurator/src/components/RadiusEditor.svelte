@@ -52,7 +52,7 @@
 </script>
 
 <div class="rad">
-  <div class="rad__tabs" role="tablist" aria-label="Radius level" onkeydown={navigateTabs}>
+  <div class="rad__tabs" role="tablist" tabindex="0" aria-label="Radius level" onkeydown={navigateTabs}>
     {#each TABS as tab (tab.id)}
       {@const modified = tabHasOverride(tab.id)}
       <button

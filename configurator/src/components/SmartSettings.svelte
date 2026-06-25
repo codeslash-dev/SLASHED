@@ -5,6 +5,7 @@
   import { buildPreviewDeclarations } from '../lib/preview.js';
   import { getFold, setFold } from '../lib/foldState.js';
   import TokenRow from './TokenRow.svelte';
+  import FriendlyControl from './FriendlyControl.svelte';
 
   const stageStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
 
@@ -143,14 +144,14 @@
             </div>
             <div class="smart__rows">
               {#each [...section.durationTokens, ...section.easingTokens].filter(exists) as name (name)}
-                <TokenRow token={token(name)} label={name.replace('--sf-', '').replaceAll('-', ' ')} help="Editable timing token; use raw mode for calc(), var() or cubic-bezier()." showRawInfo forceEditable />
+                <FriendlyControl token={token(name)} label={name.replace('--sf-', '').replaceAll('-', ' ')} help="Editable timing token; use raw mode for calc(), var() or cubic-bezier()." />
               {/each}
             </div>
           </div>
         {:else}
           <div class="smart__rows">
             {#each section.controls.filter((c) => exists(c.token)) as c (c.token)}
-              <TokenRow token={token(c.token)} label={c.label} help={c.help} showRawInfo forceEditable />
+              <FriendlyControl token={token(c.token)} label={c.label} help={c.help} />
             {/each}
           </div>
         {/if}

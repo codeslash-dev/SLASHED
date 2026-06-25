@@ -1,28 +1,18 @@
 <script>
-  /**
-   * Top bar.
-   *
-   * Contents (left → right):
-   *   • Brand mark + product title + framework version pill
-   *   • Global search input (filters the active domain's All-variables list)
-   *   • Undo / redo
-   *   • Share-link / Light-Dark theme / Sidebar / Preview pane toggles
-   *
-   * Below ~760px the labels collapse to icons but every control stays
-   * reachable. Keyboard shortcut: `/` focuses the search box.
-   */
-  import { sync, allTokens, frameworkVersion } from '../lib/model.js';
-  import { ui, overrides, overrideCount, history, undo, redo, openOutputDrawer, currentShareUrl } from '../lib/store.svelte.js';
+  import { onDestroy } from 'svelte';
+  import { sync, allTokens, frameworkVersion, modifiedCountsByDomain } from '../lib/model.js';
+  import { DOMAIN_BY_ID } from '../lib/domains.js';
+  import { ui, overrides, history, undo, redo, openOutputDrawer, currentShareUrl } from '../lib/store.svelte.js';
   import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
   const totalTokens = allTokens.length;
-  const modCount = $derived(Object.keys(overrides).length);
+  const modCount = $derived(Object.values(modifiedCountsByDomain(overrides)).reduce((sum, n) => sum + n, 0));
   const canUndo = $derived(history.past.length > 0);
   const canRedo = $derived(history.future.length > 0);
-
-  // Share: copy a link whose URL fragment encodes the current override map.
+  const activeDomain = $derived(ui.domain === 'home' ? { label: 'Overview' } : DOMAIN_BY_ID.get(ui.domain));
   let shareCopied = $state(false);
   let _shareTimer;
+  onDestroy(() => clearTimeout(_shareTimer));
   async function shareLink() {
     const ok = await copyText(currentShareUrl());
     if (!ok) return;
@@ -35,231 +25,67 @@
 <header class="hdr">
   <div class="hdr__brand">
     <span class="hdr__mark" aria-hidden="true">/</span>
-    <div class="hdr__title-wrap">
-      <h1 class="hdr__title">SLASHED Configurator</h1>
-      <p class="hdr__sub">Edit every framework token. Generate override CSS.</p>
+    <div>
+      <strong>SLASHED</strong>
+      <span>Configurator</span>
     </div>
-    <div class="hdr__pills">
-      {#if frameworkVersion}
-        <span class="hdr__pill" title="Synced from {sync.source} (catalogue {sync.tokensHash})">
-          v{frameworkVersion}
-        </span>
-      {/if}
-      <span class="hdr__pill hdr__pill--muted" title="{totalTokens} tokens in the live catalogue">
-        {totalTokens} tokens
-      </span>
-      {#if modCount > 0}
-        <button
-          class="hdr__pill hdr__pill--mod hdr__pill--btn"
-          onclick={openOutputDrawer}
-          title="{modCount} active override{modCount === 1 ? '' : 's'} — open the export drawer"
-        >
-          {modCount} customised · Export CSS
-        </button>
-      {/if}
+    {#if frameworkVersion}<em title="Synced from {sync.source} (catalogue {sync.tokensHash})">v{frameworkVersion}</em>{/if}
+  </div>
+
+  <div class="hdr__command">
+    <label class="hdr__search">
+      <span aria-hidden="true">⌕</span>
+      <input id="cfg-search" type="search" placeholder="Search variables, presets, controls…" bind:value={ui.query} onkeydown={(e) => { if (e.key === 'Escape') ui.query = ''; }} spellcheck="false" />
+      <kbd>/</kbd>
+    </label>
+    <div class="hdr__status">
+      <span>{activeDomain?.label ?? 'Configurator'}</span>
+      <span>{modCount} override{modCount === 1 ? '' : 's'}</span>
+      <span>{totalTokens} variables</span>
     </div>
   </div>
 
-  <div class="hdr__search">
-    <span class="hdr__search-icon" aria-hidden="true">⌕</span>
-    <input
-      id="cfg-search"
-      class="cfg-input hdr__search-input"
-      type="search"
-      placeholder="Filter tokens by name, value, group…"
-      aria-label="Filter tokens"
-      bind:value={ui.query}
-      onkeydown={(e) => { if (e.key === 'Escape') ui.query = ''; }}
-      spellcheck="false"
-    />
-    <kbd class="hdr__search-kbd cfg-kbd" aria-hidden="true">/</kbd>
-  </div>
-
-  <div class="hdr__controls">
-    <div class="hdr__history" role="group" aria-label="Undo / redo">
-      <button
-        class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane"
-        onclick={() => undo()}
-        disabled={!canUndo}
-        title="Undo last edit ({canUndo ? history.past.length + ' available' : 'no history'}) — ⌘Z"
-        aria-label="Undo"
-      >↶</button>
-      <button
-        class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane"
-        onclick={() => redo()}
-        disabled={!canRedo}
-        title="Redo last undone edit ({canRedo ? history.future.length + ' available' : 'nothing to redo'}) — ⇧⌘Z"
-        aria-label="Redo"
-      >↷</button>
+  <nav class="hdr__actions" aria-label="Configurator actions">
+    <div class="hdr__group" role="group" aria-label="History">
+      <button onclick={() => undo()} disabled={!canUndo} title="Undo — ⌘Z" aria-label="Undo">↶</button>
+      <button onclick={() => redo()} disabled={!canRedo} title="Redo — ⇧⌘Z" aria-label="Redo">↷</button>
     </div>
-
-    <button
-      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__share"
-      class:hdr__share--ok={shareCopied}
-      onclick={shareLink}
-      disabled={modCount === 0}
-      title={modCount === 0 ? 'Customise a token first, then share the link' : 'Copy a shareable link that restores this exact configuration'}
-      aria-label="Copy shareable configuration link"
-    >{shareCopied ? '✓' : '🔗'}</button>
-
-    <button
-      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__theme-toggle"
-      onclick={() => (ui.uiTheme = ui.uiTheme === 'dark' ? 'light' : 'dark')}
-      aria-pressed={ui.uiTheme === 'light'}
-      title="{ui.uiTheme === 'dark' ? 'Switch configurator to light mode' : 'Switch configurator to dark mode'}"
-      aria-label="Toggle configurator theme"
-    >{ui.uiTheme === 'dark' ? '☀' : '☾'}</button>
-
-    <button
-      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane hdr__pane--side"
-      onclick={() => (ui.sidebarOpen = !ui.sidebarOpen)}
-      aria-pressed={ui.sidebarOpen}
-      title="{ui.sidebarOpen ? 'Collapse' : 'Expand'} the category sidebar"
-      aria-label="Toggle sidebar"
-    >{ui.sidebarOpen ? '◧' : '▤'}</button>
-
-    <button
-      class="cfg-btn cfg-btn--ghost cfg-btn--icon hdr__pane"
-      onclick={() => (ui.previewOpen = !ui.previewOpen)}
-      aria-pressed={ui.previewOpen}
-      title="{ui.previewOpen ? 'Hide' : 'Show'} the live preview pane"
-      aria-label="Toggle preview"
-    >◨</button>
-  </div>
+    <div class="hdr__group" role="group" aria-label="Session">
+      <button class:ok={shareCopied} onclick={shareLink} disabled={modCount === 0} title="Copy shareable configuration link" aria-label="Copy shareable configuration link">{shareCopied ? '✓' : '🔗'}</button>
+      <button onclick={() => (ui.uiTheme = ui.uiTheme === 'dark' ? 'light' : 'dark')} aria-pressed={ui.uiTheme === 'light'} title="Toggle configurator theme" aria-label="Toggle configurator theme">{ui.uiTheme === 'dark' ? '☀' : '☾'}</button>
+    </div>
+    <div class="hdr__group" role="group" aria-label="Workspace">
+      <button class="hdr__optional" onclick={() => (ui.sidebarOpen = !ui.sidebarOpen)} aria-pressed={ui.sidebarOpen} title="Toggle sidebar" aria-label="Toggle sidebar">{ui.sidebarOpen ? '◧' : '▤'}</button>
+      <button onclick={() => (ui.previewOpen = !ui.previewOpen)} aria-pressed={ui.previewOpen} title="Toggle live preview" aria-label="Toggle preview">◨</button>
+      <button class="hdr__export" class:hdr__export--ready={modCount > 0} onclick={openOutputDrawer} title="Open export drawer">Export CSS</button>
+    </div>
+  </nav>
 </header>
 
 <style>
-  .hdr {
-    grid-area: header;
-    display: grid;
-    grid-template-columns: minmax(280px, 1fr) minmax(220px, 480px) auto;
-    align-items: center;
-    gap: 18px;
-    padding: 12px 18px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent), var(--cfg-surface);
-    border-bottom: 1px solid var(--cfg-border);
-  }
-  .hdr__brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-width: 0; }
-  .hdr__mark {
-    font-family: var(--cfg-mono);
-    font-weight: 800;
-    font-size: 26px;
-    color: var(--cfg-accent);
-    background: linear-gradient(135deg, rgba(79, 140, 255, 0.18), rgba(120, 80, 220, 0.18));
-    border: 1px solid var(--cfg-border-strong);
-    border-radius: var(--cfg-radius);
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-  }
-  .hdr__title-wrap { min-width: 0; }
-  .hdr__title { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0.005em; }
-  .hdr__sub { margin: 1px 0 0; font-size: 11.5px; color: var(--cfg-text-muted); }
-  .hdr__pills { display: inline-flex; gap: 6px; flex-wrap: wrap; }
-  .hdr__pill {
-    font-family: var(--cfg-mono);
-    font-size: 10.5px;
-    font-weight: 600;
-    color: var(--cfg-accent);
-    border: 1px solid rgba(117, 167, 255, 0.4);
-    background: rgba(79, 140, 255, 0.1);
-    border-radius: 999px;
-    padding: 2px 9px;
-    line-height: 1.6;
-  }
-  .hdr__pill--muted {
-    color: var(--cfg-text-muted);
-    border-color: var(--cfg-border-strong);
-    background: var(--cfg-surface-2);
-  }
-  .hdr__pill--mod {
-    color: var(--cfg-warn);
-    border-color: rgba(255, 213, 86, 0.4);
-    background: rgba(255, 213, 86, 0.12);
-  }
-  .hdr__pill--btn {
-    cursor: pointer;
-    transition: background 0.12s, border-color 0.12s;
-  }
-  .hdr__pill--btn:hover {
-    background: rgba(255, 213, 86, 0.22);
-    border-color: rgba(255, 213, 86, 0.7);
-  }
-
-  .hdr__search {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  .hdr__search-icon {
-    position: absolute;
-    left: 10px;
-    color: var(--cfg-text-faint);
-    font-size: 14px;
-    pointer-events: none;
-  }
-  .hdr__search-input {
-    width: 100%;
-    padding-left: 28px;
-    padding-right: 30px;
-  }
-  .hdr__search-kbd {
-    position: absolute;
-    right: 8px;
-    pointer-events: none;
-  }
-
-  .hdr__controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .hdr__history { display: inline-flex; gap: 2px; }
-
-  /* Pane-toggle buttons keep their solid border for affordance. */
-  .hdr__pane { border-color: var(--cfg-border-strong); color: var(--cfg-text-muted); }
-
-  /* Extra right margin to visually separate the UI theme toggle from the pane toggles. */
-  .hdr__theme-toggle { margin-right: 4px; }
-
-  /* Share-link confirmation flashes the accent-positive colour briefly. */
-  .hdr__share--ok { color: var(--cfg-ok); border-color: var(--cfg-ok); }
-
-  @media (max-width: 1100px) {
-    .hdr {
-      grid-template-columns: minmax(0, 1fr) minmax(180px, 320px) auto;
-    }
-    .hdr__sub { display: none; }
-  }
-  @media (max-width: 760px) {
-    .hdr {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: auto auto;
-      gap: 10px;
-    }
-    .hdr__brand { order: 1; }
-    .hdr__search { order: 3; grid-column: 1; }
-    .hdr__controls { order: 2; justify-content: flex-end; }
-    .hdr__sub { display: none; }
-    .hdr__title { font-size: 15px; }
-  }
-  @media (max-width: 600px) {
-    .hdr { padding: 10px 12px; gap: 8px; }
-    /* Token count pill adds no value on tiny screens — hide to keep brand row compact */
-    .hdr__pill--muted { display: none; }
-    /* The sidebar toggle is ineffective at this width (the rail is always
-       icon-only regardless of state). The preview toggle STAYS — it opens
-       the slide-over preview overlay. */
-    .hdr__pane--side { display: none; }
-    /* Prevent remaining controls from wrapping to a second row.
-       flex-start ensures overflow goes right so the first items (undo/redo)
-       stay visible by default on very narrow screens (≤320px). */
-    .hdr__controls { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 6px; justify-content: flex-start; }
-    .hdr__controls::-webkit-scrollbar { display: none; }
-  }
+  .hdr { grid-area: header; display:grid; grid-template-columns:minmax(220px,auto) minmax(260px,1fr) auto; gap:16px; align-items:center; padding:12px 16px; background:linear-gradient(180deg,rgba(255,255,255,.025),transparent), var(--cfg-surface); border-bottom:1px solid var(--cfg-border); }
+  .hdr__brand { display:flex; align-items:center; gap:10px; min-width:0; }
+  .hdr__mark { width:42px; height:42px; display:grid; place-items:center; flex:0 0 auto; border-radius:14px; border:1px solid color-mix(in oklab,var(--cfg-accent) 35%,transparent); color:var(--cfg-accent); background:color-mix(in oklab,var(--cfg-accent) 10%,transparent); font:900 25px/1 var(--cfg-mono); }
+  .hdr__brand div { display:grid; line-height:1.05; }
+  .hdr__brand strong { font-size:15px; letter-spacing:.04em; }
+  .hdr__brand span { color:var(--cfg-text-muted); font-size:12px; }
+  .hdr__brand em { font-style:normal; color:var(--cfg-text-faint); border:1px solid var(--cfg-border); border-radius:999px; padding:3px 8px; font-size:11px; }
+  .hdr__command { display:grid; gap:6px; min-width:0; }
+  .hdr__search { position:relative; display:flex; align-items:center; min-width:0; }
+  .hdr__search span { position:absolute; left:12px; color:var(--cfg-text-faint); }
+  .hdr__search input { width:100%; min-height:40px; padding:0 40px 0 34px; border:1px solid var(--cfg-border-strong); border-radius:999px; background:var(--cfg-bg-2); color:var(--cfg-text); outline:none; }
+  .hdr__search input:focus { border-color:var(--cfg-accent); box-shadow:0 0 0 3px var(--cfg-accent-soft); }
+  .hdr__search kbd { position:absolute; right:12px; color:var(--cfg-text-faint); border:1px solid var(--cfg-border); border-radius:6px; padding:1px 6px; font-size:11px; }
+  .hdr__status { display:flex; gap:10px; flex-wrap:wrap; color:var(--cfg-text-faint); font-size:11px; padding-inline:4px; }
+  .hdr__status span:not(:last-child)::after { content:'·'; margin-left:10px; }
+  .hdr__actions { display:flex; align-items:center; gap:8px; justify-content:flex-end; flex-wrap:wrap; }
+  .hdr__group { display:flex; gap:4px; padding:3px; border:1px solid var(--cfg-border); border-radius:999px; background:var(--cfg-bg-2); }
+  button { min-width:34px; min-height:34px; border:0; border-radius:999px; background:transparent; color:var(--cfg-text-muted); padding:0 10px; font-weight:700; }
+  button:hover:not(:disabled) { background:var(--cfg-surface-3); color:var(--cfg-text); }
+  button:disabled { opacity:.38; cursor:not-allowed; }
+  button.ok { color:var(--cfg-ok); }
+  .hdr__export { min-width:auto; padding-inline:14px; background:var(--cfg-surface-3); color:var(--cfg-text); }
+  .hdr__export--ready { background:var(--cfg-accent-strong); color:white; box-shadow:0 8px 24px var(--cfg-accent-glow); }
+  @media (max-width: 900px) { .hdr { grid-template-columns:1fr auto; } .hdr__command { grid-column:1 / -1; grid-row:2; } .hdr__actions { grid-column:2; grid-row:1; } .hdr__optional { display:none; } }
+  @media (max-width: 560px) { .hdr { padding:10px; gap:10px; } .hdr__brand em,.hdr__brand span { display:none; } .hdr__group { gap:2px; } button { min-width:38px; min-height:38px; padding-inline:9px; } .hdr__export { font-size:0; min-width:38px; } .hdr__export::before { content:'CSS'; font-size:12px; } }
 </style>

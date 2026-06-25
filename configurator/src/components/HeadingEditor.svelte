@@ -80,7 +80,7 @@
 </script>
 
 <div class="hed">
-  <div class="hed__tabs" role="tablist" aria-label="Heading level" onkeydown={navigateTabs}>
+  <div class="hed__tabs" role="tablist" tabindex="0" aria-label="Heading level" onkeydown={navigateTabs}>
     {#each TABS as tab (tab.id)}
       {@const modified = tabHasOverride(tab.id)}
       <button
