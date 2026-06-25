@@ -29,9 +29,13 @@ export function controlForToken(token, override = {}) {
   } else if (/text-wrap/.test(name)) {
     schema = { ...schema, control: 'select', preview: 'wrap', options: ['balance', 'pretty', 'wrap', 'normal'] };
   } else if (/scrim|gradient/.test(name)) {
-    schema = { ...schema, control: /direction/.test(name) ? 'select' : 'text', preview: 'gradient' };
+    const isDir = /direction/.test(name);
+    schema = { ...schema, control: isDir ? 'select' : 'text', preview: 'gradient',
+      ...(isDir ? { options: ['to top', 'to bottom', 'to right', 'to left', '135deg', '225deg'] } : {}) };
   } else if (/color|palette|hsl|oklch|hex|focus|link|caret|border/.test(name) && /(#[0-9a-f]|oklch|oklab|hsl|rgb|var\(--sf-color)/i.test(value + name)) {
     schema = { ...schema, control: 'color', preview: 'color' };
+  } else if (/font-weight/.test(name)) {
+    schema = { ...schema, control: 'number', preview: 'font' };
   } else if (/font/.test(name)) {
     schema = { ...schema, control: 'font', preview: 'font' };
   } else if (/duration|motion-scale|animation|transition/.test(name)) {

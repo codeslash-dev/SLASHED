@@ -63,7 +63,8 @@ test('segmented controls expose aria-pressed; info buttons aria-expanded', async
   await expect(page.locator('.out [aria-label="Output format"] [aria-pressed="true"]')).toHaveCount(1);
   // ⓘ popover toggles aria-expanded and reveals the raw token.
   await sideItem(page, 'Layout').click();
-  const row = page.locator('.row', { hasText: 'Reading width' }).first();
+  await page.locator('details.allvars summary').click();
+  const row = page.locator('.allvars__body .row', { hasText: 'Reading width' }).first();
   const info = row.locator('.row__info-btn');
   await expect(info).toHaveAttribute('aria-expanded', 'false');
   await info.click();

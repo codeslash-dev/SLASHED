@@ -9,7 +9,7 @@
   const states = ['normal', 'muted', 'disabled', 'pending'];
 </script>
 
-<StudioFrame title="Effects Studio" description="Blur, opacity, scrim, mask fades i compositing pokazane jako gotowe UI patterns: media cards, disabled states i scroll fades.">
+<StudioFrame title="Effects Studio" description="Blur, opacity, scrim and mask fades shown as ready UI patterns: media cards, disabled states and scroll fade overlays.">
   <div class="effects-studio">
     <StudioWorkflow steps={workflow} ariaLabel="Effects workflow" />
 

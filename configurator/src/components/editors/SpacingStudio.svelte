@@ -8,7 +8,7 @@
   const groups = resolveStudioGroups(STUDIO_GROUPS.spacing);
 </script>
 
-<StudioFrame title="Spacing Studio" description="Ruler, rhythm i layout preview zamiast samych wartości liczbowych: od globalnej skali po realne odstępy w komponentach i sekcjach.">
+<StudioFrame title="Spacing Studio" description="Scale ruler, rhythm and layout preview — from the global space multiplier down to real component and section gaps.">
   <div class="spacing-studio">
     <nav class="workflow" aria-label="Spacing workflow">
       {#each workflow as step, index (step)}<span><b>{index + 1}</b>{step}</span>{/each}

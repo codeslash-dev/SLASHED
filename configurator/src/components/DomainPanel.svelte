@@ -207,7 +207,7 @@
 
       <!-- ── ZONE 1: HIGH-IMPACT CONTROLS ─────────────────────────────── -->
 
-      {#if !usesVisualStudio && hasGenerators}
+      {#if hasGenerators}
         {#each generators as g (g)}
           <ScaleGenerator kinds={[g]} collapsible />
         {/each}

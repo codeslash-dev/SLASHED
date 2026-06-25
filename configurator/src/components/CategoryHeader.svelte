@@ -7,7 +7,7 @@
   <div class="cat-hero__icon"><Icon name={domain.icon} size={22} /></div>
   <div class="cat-hero__copy">
     <p class="cat-hero__eyebrow">Visual framework editor</p>
-    <h2>{domain.label}</h2>
+    <h2 class="panel__title">{domain.label}</h2>
     <p>{domain.blurb}</p>
   </div>
   <div class="cat-hero__stats">

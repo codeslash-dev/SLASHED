@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from 'svelte';
   import { sync, allTokens, frameworkVersion } from '../lib/model.js';
   import { DOMAIN_BY_ID } from '../lib/domains.js';
   import { ui, overrides, history, undo, redo, openOutputDrawer, currentShareUrl } from '../lib/store.svelte.js';
@@ -11,6 +12,7 @@
   const activeDomain = $derived(ui.domain === 'home' ? { label: 'Overview' } : DOMAIN_BY_ID.get(ui.domain));
   let shareCopied = $state(false);
   let _shareTimer;
+  onDestroy(() => clearTimeout(_shareTimer));
   async function shareLink() {
     const ok = await copyText(currentShareUrl());
     if (!ok) return;

@@ -22,7 +22,7 @@
   const workflow = ['Source pairs', 'Role map', 'Shade ramp', 'Usage check'];
 </script>
 
-<StudioFrame title="Color Studio" description="Najpierw ustaw źródła marki, potem sprawdź semantic roles, statusy, shade ramp, kontrast i realne użycie koloru." tone="color">
+<StudioFrame title="Color Studio" description="Set brand sources first, then verify semantic roles, status colors, shade ramp, contrast, and real usage." tone="color">
   <div class="color-studio">
     <nav class="workflow" aria-label="Color workflow">
       {#each workflow as step, index (step)}<span><b>{index + 1}</b>{step}</span>{/each}
@@ -58,7 +58,7 @@
       </div>
     </section>
 
-    <details open><summary>Main colors</summary><div class="rows">{#each main as {key,label} (key)}<BrandColorRow colorKey={key} {label} />{/each}</div></details>
+    <details class="panel__card cfg-card" open><summary>Core brand colors</summary><div class="rows">{#each main as {key,label} (key)}<BrandColorRow colorKey={key} {label} />{/each}</div></details>
     <details><summary>Semantic colors</summary><div class="rows">{#each status as {key,label} (key)}<BrandColorRow colorKey={key} {label} />{/each}</div></details>
     <details><summary>Contrast & palette tuning</summary><div class="rows">{#each tuning as token (token.name)}<FriendlyControl {token} showToken />{/each}</div></details>
     <details><summary>Semantic role preview</summary><ColorAssignments /></details>

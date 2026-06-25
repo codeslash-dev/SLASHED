@@ -2,16 +2,19 @@
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
+  import ContainerBars from '../ContainerBars.svelte';
 
   const groups = resolveStudioGroups(STUDIO_GROUPS.layout);
   const workflow = ['Containers', 'Grid', 'Measure', 'Anchors'];
   const devices = ['Mobile', 'Tablet', 'Desktop'];
 </script>
 
-<StudioFrame title="Layout Studio" description="Container, reading width, grid i global anchors pokazane jako system layoutu: od viewportu po realne sekcje, sidebar i sticky offsets.">
+<StudioFrame title="Layout Studio" description="Container widths, reading measure, grid and global anchors shown as a live layout system — from viewport down to sections, sidebar and sticky offsets.">
   <div class="layout-studio">
     <nav class="workflow" aria-label="Layout workflow">
-      {#each workflow as step, index (step)}<span><b>{index + 1}</b>{step}</span>{/each}
+      <ol>
+        {#each workflow as step, index (step)}<li><b>{index + 1}</b>{step}</li>{/each}
+      </ol>
     </nav>
 
     <section class="viewport-lab" aria-label="Viewport and container preview">
@@ -22,12 +25,7 @@
       <div class="device-strip">
         {#each devices as device (device)}<span>{device}</span>{/each}
       </div>
-      <div class="container-rails">
-        <span class="rail rail--wide"><b>wide</b></span>
-        <span class="rail rail--default"><b>default</b></span>
-        <span class="rail rail--prose"><b>prose</b></span>
-        <span class="rail rail--narrow"><b>narrow</b></span>
-      </div>
+      <ContainerBars />
     </section>
 
     <section class="composition" aria-label="Grid and sidebar composition">
@@ -61,7 +59,8 @@
 <style>
   .layout-studio { display: grid; gap: 12px; }
   .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .workflow span { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+  .workflow ol { display: contents; list-style: none; margin: 0; padding: 0; }
+  .workflow li { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
   .workflow b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 999px; background: var(--cfg-accent-strong); color: white; font-size: 10px; }
   .viewport-lab { display: grid; gap: 12px; padding: 16px; border: 1px dashed var(--cfg-border-strong); border-radius: 16px; background: var(--cfg-bg-2); }
   .viewport-lab__header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
@@ -69,12 +68,6 @@
   .viewport-lab__header span { color: var(--cfg-text-muted); font-size: 12px; }
   .device-strip { display: grid; grid-template-columns: .45fr .75fr 1fr; gap: 8px; align-items: end; }
   .device-strip span { border-top: 2px solid var(--cfg-border-strong); padding-top: 5px; color: var(--cfg-text-muted); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-  .container-rails { position: relative; min-height: 180px; border-radius: 14px; border: 1px solid var(--cfg-border); background: linear-gradient(180deg, var(--cfg-surface), var(--cfg-bg-2)); overflow: hidden; }
-  .rail { position: absolute; inset-block: 16px; left: 50%; transform: translateX(-50%); border: 2px solid color-mix(in oklab, var(--cfg-accent) 70%, transparent); border-radius: 14px; display: grid; align-items: start; justify-items: center; padding-top: 8px; color: var(--cfg-text-muted); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-  .rail--wide { width: min(94%, var(--sf-container-wide, 90rem)); }
-  .rail--default { width: min(82%, var(--sf-container-default, 72rem)); inset-block: 36px; }
-  .rail--prose { width: min(62%, var(--sf-container-prose, 65ch)); inset-block: 56px; }
-  .rail--narrow { width: min(42%, var(--sf-container-narrow, 48rem)); inset-block: 76px; }
   .composition { display: grid; grid-template-columns: minmax(140px, var(--sf-sidebar-width, 18rem)) 1fr; gap: var(--sf-gutter, 1rem); padding: 16px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-bg-2); }
   aside { display: grid; align-content: end; min-height: 170px; padding: 14px; border-radius: 12px; background: var(--cfg-surface-3); }
   aside small { color: var(--cfg-text-muted); margin-top: 4px; }

@@ -13,7 +13,7 @@
   const scale = $derived(overrides['--sf-text-scale'] || 'var(--sf-text-scale, 1)');
 </script>
 
-<StudioFrame title="Typography Studio" description="Duży specimen jest centrum pracy: wybierz zakres, ustaw font, skalę, rytm i wrap, a efekt widzisz przy kontrolkach." tone="type">
+<StudioFrame title="Typography Studio" description="The live specimen is your canvas: pick a scope, set the font, scale, rhythm and wrap — and see the result next to the controls." tone="type">
   <div class="type-studio">
     <div class="type-studio__toolbar">
       <div class="tabs" role="tablist" aria-label="Typography editing scope">
@@ -26,13 +26,18 @@
 
     <div class="specimen" style:--type-scale={scale}>
       <div class="specimen__measure"><span>mobile</span><span>tablet</span><span>desktop</span></div>
-      <h1 style:font-family={headingFont}>The quick brown fox</h1>
-      <h2 style:font-family={headingFont}>Jumps over the lazy dog</h2>
-      <h3 style:font-family={headingFont}>Typography at every scale</h3>
-      <h4 style:font-family={headingFont}>Fluid, readable, precise</h4>
-      <strong style:font-family={headingFont}>Fine-tune each heading level</strong>
-      <code style:font-family={monoFont}>Pixel-perfect control</code>
-      <p style:font-family={bodyFont}>Body: The quick brown fox jumps over the lazy dog. A short paragraph shows body rhythm, line height, measure and spacing at a glance.</p>
+      {#if active === 'Overview' || active === 'Fluid scale' || active === 'Headings'}
+        <h1 style:font-family={headingFont}>The quick brown fox</h1>
+        <h2 style:font-family={headingFont}>Jumps over the lazy dog</h2>
+        <h3 style:font-family={headingFont}>Typography at every scale</h3>
+        <h4 style:font-family={headingFont}>Fluid, readable, precise</h4>
+      {/if}
+      {#if active === 'Overview' || active === 'Body'}
+        <p style:font-family={bodyFont}>Body: The quick brown fox jumps over the lazy dog. A short paragraph shows body rhythm, line height, measure and spacing at a glance.</p>
+      {/if}
+      {#if active === 'Overview' || active === 'Code'}
+        <code style:font-family={monoFont}>Pixel-perfect control — const token = true;</code>
+      {/if}
     </div>
 
     <div class="mini-previews">

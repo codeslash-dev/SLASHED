@@ -83,4 +83,8 @@
   @keyframes shimmer { to { background-position: -220% 0; } }
   @media (max-width: 860px) { .duration-lab, .easing-lab, .preset-lab { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .duration-lab, .easing-lab, .preset-lab { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) {
+    .motion-rails span, .enter, .exit, .shimmer { animation: none; }
+    .preset-lab article { transition: none; }
+  }
 </style>
