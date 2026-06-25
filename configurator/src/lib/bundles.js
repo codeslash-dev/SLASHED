@@ -21,25 +21,21 @@ export const DEFAULT_BUNDLE_ID = 'optimal';
 
 /** Per-bundle copy. Falls back to a humanised id for any future bundle. */
 const BUNDLE_META = {
-  essential: {
-    label: 'Essential',
-    tagline: 'Core only — tokens, layout, macros, states. The leanest drop-in.',
-  },
   optimal: {
     label: 'Optimal',
-    tagline: 'Essential + form styling and legacy shims. Recommended default.',
-  },
-  'optimal-utilities': {
-    label: 'Optimal + Utilities',
-    tagline: 'Optimal plus the utility classes (truncate, line-clamp, aspect…).',
+    tagline: 'Core + classless form styling. Recommended default for most projects.',
   },
   'optimal-components': {
     label: 'Optimal + Components',
     tagline: 'Optimal plus ready-made component classes (.sf-button, .sf-card…).',
   },
+  'optimal-utilities': {
+    label: 'Optimal + Utilities',
+    tagline: 'Optimal plus the utility classes (truncate, line-clamp, aspect…).',
+  },
   full: {
     label: 'Full',
-    tagline: 'Everything — forms, components, utilities and legacy shims.',
+    tagline: 'Everything — forms, components and utilities.',
   },
 };
 
@@ -85,7 +81,7 @@ export function bundleById(id) {
 /**
  * Recommend the leanest bundle that includes every token the user has
  * overridden. Core tokens belong to every bundle, so a core-only config
- * recommends Essential; touching a component/utility token narrows the
+ * recommends Optimal; touching a component/utility token narrows the
  * choice automatically. An unknown token (no bundle membership) falls back to
  * the full superset so the config can't silently lose a token at runtime.
  *

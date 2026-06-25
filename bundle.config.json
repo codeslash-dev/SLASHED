@@ -1,43 +1,6 @@
 {
   "bundles": [
     {
-      "output": "dist/slashed.essential.css",
-      "files": [
-        "core/layers.css",
-        "core/tokens.css",
-        "core/tokens.layout.css",
-        "core/tokens.macros.css",
-        "core/reset.css",
-        "core/base.css",
-        "core/themes.css",
-        "core/layout.css",
-        "core/macros.css",
-        "core/states.css",
-        "core/motion.css",
-        "core/accessibility.css",
-        "core/print.css"
-      ]
-    },
-    {
-      "output": "dist/slashed.essential.flat.css",
-      "flat": true,
-      "files": [
-        "core/layers.css",
-        "core/tokens.css",
-        "core/tokens.layout.css",
-        "core/tokens.macros.css",
-        "core/reset.css",
-        "core/base.css",
-        "core/themes.css",
-        "core/layout.css",
-        "core/macros.css",
-        "core/states.css",
-        "core/motion.css",
-        "core/accessibility.css",
-        "core/print.css"
-      ]
-    },
-    {
       "output": "dist/slashed.optimal.css",
       "files": [
         "core/layers.css",
@@ -53,8 +16,7 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/forms.css",
-        "optional/legacy.css"
+        "optional/forms.css"
       ]
     },
     {
@@ -74,8 +36,7 @@
         "core/motion.css",
         "core/accessibility.css",
         "core/print.css",
-        "optional/forms.css",
-        "optional/legacy.css"
+        "optional/forms.css"
       ]
     },
     {
@@ -96,8 +57,7 @@
         "core/print.css",
         "optional/forms.css",
         "optional/tokens.components.css",
-        "optional/components.css",
-        "optional/legacy.css"
+        "optional/components.css"
       ]
     },
     {
@@ -119,8 +79,7 @@
         "core/print.css",
         "optional/forms.css",
         "optional/tokens.components.css",
-        "optional/components.css",
-        "optional/legacy.css"
+        "optional/components.css"
       ]
     },
     {
@@ -140,8 +99,7 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/forms.css",
-        "optional/utilities.css",
-        "optional/legacy.css"
+        "optional/utilities.css"
       ]
     },
     {
@@ -162,8 +120,7 @@
         "core/accessibility.css",
         "core/print.css",
         "optional/forms.css",
-        "optional/utilities.css",
-        "optional/legacy.css"
+        "optional/utilities.css"
       ]
     },
     {
@@ -185,8 +142,7 @@
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
-        "optional/utilities.css",
-        "optional/legacy.css"
+        "optional/utilities.css"
       ]
     },
     {
@@ -209,8 +165,7 @@
         "optional/forms.css",
         "optional/tokens.components.css",
         "optional/components.css",
-        "optional/utilities.css",
-        "optional/legacy.css"
+        "optional/utilities.css"
       ]
     }
   ]

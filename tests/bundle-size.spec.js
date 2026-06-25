@@ -13,7 +13,6 @@ const DIST = path.resolve(import.meta.dirname, '..', 'dist');
 // Updated after adding core/tokens.color-fallbacks.css (Tier-1 sRGB fallbacks),
 // which adds ~1.5–2kB gzip to each bundle containing color tokens.
 const BUDGETS = {
-  'slashed.essential.min.css': 18,
   'slashed.optimal.min.css': 22,
   'slashed.full.min.css': 22,
 };

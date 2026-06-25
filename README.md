@@ -8,7 +8,6 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 [![version](https://img.shields.io/github/v/tag/codeslash-dev/SLASHED?sort=semver&label=version&color=blueviolet&logo=css3)](https://github.com/codeslash-dev/SLASHED/tags)
 [![CI](https://img.shields.io/github/actions/workflow/status/codeslash-dev/SLASHED/ci.yml?branch=main&label=CI&logo=github)](https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/codeslash-dev/SLASHED)](LICENSE)
-[![essential bundle](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/codeslash-dev/SLASHED/dist/badge-essential.json)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css)
 [![optimal bundle](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/codeslash-dev/SLASHED/dist/badge-optimal.json)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css)
 [![runtime deps](https://img.shields.io/badge/runtime_deps-zero-brightgreen)](https://github.com/codeslash-dev/SLASHED/blob/main/package.json)
 [![CDN](https://img.shields.io/badge/CDN-jsDelivr-e84d3d?logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/)
@@ -20,18 +19,22 @@ A cascade-layer CSS framework. No build step. No Node. No runtime dependencies.
 Use a pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/releases)):
 
 ```html
-<!-- core only -->
-<link rel="stylesheet" href="slashed.essential.css">
-
-<!-- core + forms + legacy (recommended for most sites) -->
+<!-- core + classless form styling (recommended for most sites) -->
 <link rel="stylesheet" href="slashed.optimal.css">
 
-<!-- everything, including the (currently empty) component/utility stubs -->
+<!-- optimal + components -->
+<link rel="stylesheet" href="slashed.optimal-components.css">
+
+<!-- optimal + utilities -->
+<link rel="stylesheet" href="slashed.optimal-utilities.css">
+
+<!-- everything -->
 <link rel="stylesheet" href="slashed.full.css">
 ```
 
 À la carte is also supported. When wiring up individual files, `core/layers.css`
-must load **first** and `optional/legacy.css` must load **last**:
+must load **first**. `optional/legacy.css` is not bundled by default — add it
+explicitly if you need back-compat shims and load it **last**:
 
 ```html
 <!-- core -->
@@ -51,7 +54,9 @@ must load **first** and `optional/legacy.css` must load **last**:
 
 <!-- optional -->
 <link rel="stylesheet" href="optional/forms.css">
-<link rel="stylesheet" href="optional/legacy.css">
+
+<!-- legacy shims (opt-in only) -->
+<!-- <link rel="stylesheet" href="optional/legacy.css"> -->
 ```
 
 `optional/components.css` and `optional/tokens.components.css` are incomplete:
@@ -95,17 +100,17 @@ parent module. All token files share the `slashed.tokens` layer.
 
 | Bundle | Contents |
 | --- | --- |
-| `slashed.essential.css` | all `core/` |
-| `slashed.optimal.css` | essential + `forms` + `legacy` |
+| `slashed.optimal.css` | all `core/` + `forms` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
 
-`optional/legacy.css` is always concatenated last. Every rule lives in an
-`@layer`, so concatenation order never affects the cascade. Each bundle is emitted
-readable and minified with a source map: `dist/slashed.<name>.css`,
-`dist/slashed.<name>.min.css`, `dist/slashed.<name>.min.css.map`, plus a
-layer-flattened `.flat` variant. `npm run build` prints raw / gzip / brotli sizes;
+`optional/legacy.css` is **not bundled by default** — add it explicitly when you
+need back-compat shims. Every rule lives in an `@layer`, so concatenation order
+never affects the cascade. Each bundle is emitted readable and minified with a
+source map: `dist/slashed.<name>.css`, `dist/slashed.<name>.min.css`,
+`dist/slashed.<name>.min.css.map`, plus a layer-flattened `.flat` variant.
+`npm run build` prints raw / gzip / brotli sizes;
 `tests/bundle-size.spec.js` guards against bloat.
 
 ## Customising tokens

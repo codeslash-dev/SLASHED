@@ -3,7 +3,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
 
-const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.essential.css');
+const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal.css');
 
 async function setup(page, html) {
   await page.setViewportSize({ width: 1200, height: 900 });

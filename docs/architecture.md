@@ -342,7 +342,8 @@ If precision is needed in a consumer layout — e.g. a `.sf-grid-cols-3` that mu
 
 ## Bundle configuration
 
-The essential bundle (`dist/slashed.essential.css`) includes core files in order:
+The optimal bundle (`dist/slashed.optimal.css`) — the recommended default —
+includes core files plus classless form styling in order:
 
 ```text
 core/layers.css
@@ -358,6 +359,7 @@ core/states.css
 core/motion.css
 core/accessibility.css
 core/print.css
+optional/forms.css
 ```
 
 Each bundle is emitted readable **and** minified with a source map
@@ -366,26 +368,27 @@ not down-level modern colour syntax (no `targets`), so `light-dark()` and
 `oklch(from …)` survive. `npm run build` reports raw/gzip/brotli sizes.
 Custom hand-built bundles must load `core/layers.css` first.
 
-Five tiered bundles — each also emitted as a layer-flattened `.flat` variant,
-so `bundle.config.json` lists ten outputs in total — are built by
+Four tiered bundles — each also emitted as a layer-flattened `.flat` variant,
+so `bundle.config.json` lists eight outputs in total — are built by
 `scripts/bundle.js`:
 
-| Bundle | Adds to essential |
+| Bundle | Contents |
 |---|---|
-| `slashed.essential.css` | — (all `core/`) |
-| `slashed.optimal.css` | `forms` + `legacy` |
+| `slashed.optimal.css` | all `core/` + `forms` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
 | `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
 
-`optional/legacy.css` is always concatenated last. Because every rule sits in an
-`@layer`, concatenation order within a bundle does not affect the cascade. The
-bundler strips local `@import` statements (the explicit file list resolves them),
-so the `tokens.components` import inside `components.css` is inlined by listing the
-token file first. `components.css` and `tokens.components.css` are incomplete
-(every selector/token commented out, no CSS emitted); `utilities.css` is an empty
-stub. Consumers can also build à la carte: `essential` (or raw `core/`) plus
-hand-picked optional files. Each bundle also has a layer-flattened `.flat` variant.
+`optional/legacy.css` is **not bundled by default** — add it explicitly when
+you need back-compat shims. Because every rule sits in an `@layer`,
+concatenation order within a bundle does not affect the cascade. The bundler
+strips local `@import` statements (the explicit file list resolves them), so
+the `tokens.components` import inside `components.css` is inlined by listing
+the token file first. `components.css` and `tokens.components.css` are
+incomplete (every selector/token commented out, no CSS emitted);
+`utilities.css` is an empty stub. Consumers can also build à la carte: raw
+`core/` plus hand-picked optional files. Each bundle also has a
+layer-flattened `.flat` variant.
 
 ---
 

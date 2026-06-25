@@ -12,8 +12,6 @@
   "jsdelivr": "dist/slashed.full.min.css",
   "exports": {
     ".": "./dist/slashed.full.css",
-    "./essential": "./dist/slashed.essential.css",
-    "./essential/flat": "./dist/slashed.essential.flat.css",
     "./optimal": "./dist/slashed.optimal.css",
     "./optimal/flat": "./dist/slashed.optimal.flat.css",
     "./optimal-components": "./dist/slashed.optimal-components.css",

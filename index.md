@@ -31,10 +31,10 @@ A modern, layered CSS framework built on `@layer`.
 
 ```css
 /* jsDelivr CDN */
-@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css";
+@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css";
 ```
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css">
+  href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css">
 ```

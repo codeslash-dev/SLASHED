@@ -7,7 +7,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
 
-const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.essential.css');
+const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal.css');
 
 // Wraps grid HTML in a container of a known inline-size so anonymous
 // @container queries fire against that width, not the viewport.
