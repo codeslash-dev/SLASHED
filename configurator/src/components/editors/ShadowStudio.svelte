@@ -1,17 +1,20 @@
 <script>
-  import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
+  import { tokenByName } from '../../lib/model.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
+  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
   const levels = ['xs', 's', 'm', 'l', 'xl', '2xl'];
-  const workflow = ['Elevation', 'Surfaces', 'Overlays', 'Media'];
-  const groups = resolveStudioGroups(STUDIO_GROUPS.shadows);
+  const panels = [
+    panel('Elevation', 'Global shadow strength, color and elevation outputs.', ['--sf-shadow-strength', '--sf-shadow-lightness', '--sf-shadow-color', '--sf-shadow-xs', '--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l', '--sf-shadow-xl', '--sf-shadow-2xl']),
+    panel('Surfaces', 'Depth for cards and raised surfaces.', ['--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l']),
+    panel('Overlays', 'Modal and popover depth plus glow color.', ['--sf-shadow-xl', '--sf-shadow-2xl', '--sf-shadow-glow-color']),
+    panel('Text & media', 'Text, drop and media glow shadows.', ['--sf-text-shadow-s', '--sf-text-shadow-m', '--sf-text-shadow-l', '--sf-drop-shadow-s', '--sf-drop-shadow-m', '--sf-drop-shadow-l', '--sf-shadow-glow-color']),
+  ];
 </script>
 
-<StudioFrame title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media.">
+<StudioFrame {panels} title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media.">
   <div class="shadow-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Shadow workflow" />
 
     <section class="elevation-lab" aria-label="Elevation scale preview">
       <div class="lab-copy"><strong>Elevation stack</strong><span>Compare every shadow level on the same surface and tune global strength/lightness once.</span></div>
@@ -30,9 +33,11 @@
       <article class="media"><h4>Media card glow</h4><p>Text and image overlays use the same shadow language.</p></article>
       <article class="text-shadow"><small>Text shadows</small><h3>Readable over media</h3><p>Drop and text shadows protect contrast on rich backgrounds.</p></article>
     </section>
-
-    <StudioControls {groups} />
   </div>
+
+    {#snippet controls(activePanel)}
+      <StudioControls groups={activePanel.groups} />
+    {/snippet}
 </StudioFrame>
 
 <style>

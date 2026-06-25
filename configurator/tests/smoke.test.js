@@ -32,8 +32,6 @@ const edits = {
   '--sf-duration-fast': '120ms',
   '--sf-blur': '12px',
   '--sf-print-page-margin': '2cm',
-  // Gradients — one representative token.
-  '--sf-gradient-primary': 'linear-gradient(135deg, oklch(0.55 0.22 264), oklch(0.45 0.18 280))',
 };
 
 describe('smoke: every editable token routes through the full pipeline', () => {

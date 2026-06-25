@@ -50,7 +50,7 @@ describe('DomainPreview', () => {
   });
 
   test('renders nothing for a domain with no preview spec', () => {
-    const { container } = render(DomainPreview, { props: { domain: 'colors' } });
+    const { container } = render(DomainPreview, { props: { domain: 'misc' } });
     expect(container.querySelector('.dp')).toBeNull();
   });
 

@@ -112,8 +112,8 @@ describe('domainOf — known compound names route correctly', () => {
     ['--sf-color-secondary-100', 'colors'],
     ['--sf-link-underline-offset', 'colors'],
     ['--sf-focus-ring-color', 'colors'],
-    ['--sf-gradient-brand', 'gradients'],
-    ['--sf-gradient-primary', 'gradients'],
+    ['--sf-gradient-brand', 'colors'],
+    ['--sf-gradient-primary', 'colors'],
     ['--sf-scrollbar-thumb', 'colors'],
     ['--sf-caret-color', 'colors'],
 

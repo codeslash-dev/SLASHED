@@ -14,6 +14,7 @@ const APPLY = (gen) => gen.locator('button', { hasText: /Apply scale/ }).first()
 test('type generator writes engine scalars only', async ({ page }) => {
   await gotoClean(page);
   await sideItem(page, 'Typography').click();
+  await page.locator('.tabs button[role="tab"]', { hasText: 'Scale' }).click();
   const gen = page.locator('.gen').first();
   await gen.locator('.ctl', { hasText: 'Ratio (mobile)' }).locator('select:not([disabled])').selectOption('1.125');
   await APPLY(gen).click();
@@ -27,9 +28,11 @@ test('type generator writes engine scalars only', async ({ page }) => {
 test('display tab: ratio selects are read-only (shared with type)', async ({ page }) => {
   await gotoClean(page);
   await sideItem(page, 'Typography').click();
-  const display = page.locator('.gen').nth(1);
-  await expect(display.locator('select[disabled]')).toHaveCount(2);
-  await expect(display.locator('.gen__hint').first()).toContainText('reuses the type ratios');
+  await page.locator('.tabs button[role="tab"]', { hasText: 'Scale' }).click();
+  const gen = page.locator('.gen').first();
+  await gen.locator('.seg__btn', { hasText: 'Display' }).click();
+  await expect(gen.locator('select[disabled]')).toHaveCount(2);
+  await expect(gen.locator('.gen__hint').first()).toContainText('reuses the type ratios');
 });
 
 test('viewport range is shared: space sets it, type seeds it, reset clears it', async ({ page }) => {
@@ -41,6 +44,7 @@ test('viewport range is shared: space sets it, type seeds it, reset clears it', 
   expect((await readOverrides(page))['--sf-fluid-max-vw']).toBe('100');
 
   await sideItem(page, 'Typography').click();
+  await page.locator('.tabs button[role="tab"]', { hasText: 'Scale' }).click();
   const type = page.locator('.gen').first();
   await expect(type.locator('.ctl', { hasText: 'Viewport max' }).locator('input')).toHaveValue('100');
   // Re-applying with the seeded (unchanged) viewport must not clear it.

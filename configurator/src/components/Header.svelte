@@ -53,6 +53,7 @@
     <div class="hdr__group" role="group" aria-label="Session">
       <button class:ok={shareCopied} onclick={shareLink} disabled={modCount === 0} title="Copy shareable configuration link" aria-label="Copy shareable configuration link">{shareCopied ? '✓' : '🔗'}</button>
       <button onclick={() => (ui.uiTheme = ui.uiTheme === 'dark' ? 'light' : 'dark')} aria-pressed={ui.uiTheme === 'light'} title="Toggle configurator theme" aria-label="Toggle configurator theme">{ui.uiTheme === 'dark' ? '☀' : '☾'}</button>
+      <button onclick={() => (ui.showTokens = !ui.showTokens)} aria-pressed={ui.showTokens} title={ui.showTokens ? 'Hide token names' : 'Show token names'} aria-label={ui.showTokens ? 'Hide token names' : 'Show token names'}>{ui.showTokens ? '--' : '{ }'}</button>
     </div>
     <div class="hdr__group" role="group" aria-label="Workspace">
       <button class="hdr__optional" onclick={() => (ui.sidebarOpen = !ui.sidebarOpen)} aria-pressed={ui.sidebarOpen} title="Toggle sidebar" aria-label="Toggle sidebar">{ui.sidebarOpen ? '◧' : '▤'}</button>

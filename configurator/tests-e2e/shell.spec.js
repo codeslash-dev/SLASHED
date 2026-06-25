@@ -8,7 +8,7 @@ import { watchErrors, gotoClean, sideItem } from './helpers.js';
 
 // Overview + the full domain taxonomy — every category is always reachable.
 const NAV_LABELS = [
-  'Overview', 'Colors', 'Gradients', 'Typography', 'Spacing', 'Layout',
+  'Overview', 'Colors', 'Typography', 'Spacing', 'Layout',
   'Borders', 'Shadows', 'Motion', 'Effects', 'WCAG', 'Themes', 'Install',
   'Misc', 'Cheatsheet',
 ];
@@ -39,8 +39,8 @@ test('every destination renders console-clean at 3 widths', async ({ page }) => 
 test('every category panel leads with Settings, with All variables collapsed below', async ({ page }) => {
   await gotoClean(page);
   await sideItem(page, 'Colors').click();
-  // Inputs-first: the core brand-colors card is visible before any raw catalogue.
-  await expect(page.locator('.panel__card', { hasText: 'Core brand colors' })).toBeVisible();
+  // Inputs-first: the Color Studio is visible before any raw catalogue.
+  await expect(page.locator('.color-studio')).toBeVisible();
   // The full catalogue lives in a collapsed disclosure.
   const allvars = page.locator('details.allvars');
   await expect(allvars).toHaveCount(1);

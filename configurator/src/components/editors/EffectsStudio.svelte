@@ -1,17 +1,20 @@
 <script>
-  import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
+  import { tokenByName } from '../../lib/model.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
-  import StudioWorkflow from './StudioWorkflow.svelte';
 
-  const groups = resolveStudioGroups(STUDIO_GROUPS.effects);
-  const workflow = ['Glass', 'Opacity', 'Scrim', 'Masks'];
+  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
+  const panels = [
+    panel('Glass', 'Backdrop blur and frosted surfaces.', ['--sf-blur']),
+    panel('Opacity', 'Muted, disabled and pending state opacity.', ['--sf-opacity-muted', '--sf-opacity-disabled', '--sf-state-pending-opacity']),
+    panel('Scrims', 'Readable media overlays and scrim text shadow.', ['--sf-scrim-color', '--sf-scrim-direction', '--sf-scrim-text-shadow']),
+    panel('Masks', 'Scroll and edge fade masks.', ['--sf-mask-scrim-start', '--sf-mask-scrim-end']),
+  ];
   const states = ['normal', 'muted', 'disabled', 'pending'];
 </script>
 
-<StudioFrame title="Effects Studio" description="Blur, opacity, scrim and mask fades shown as ready UI patterns: media cards, disabled states and scroll fade overlays.">
+<StudioFrame {panels} title="Effects Studio" description="Blur, opacity, scrim and mask fades shown as ready UI patterns: media cards, disabled states and scroll fade overlays.">
   <div class="effects-studio">
-    <StudioWorkflow steps={workflow} ariaLabel="Effects workflow" />
 
     <section class="glass-lab" aria-label="Glass and blur preview">
       <div class="glass-card"><small>Glass & blur</small><h4>Readable media card</h4><p>Scrim, blur and muted states preview.</p><button>Primary action</button></div>
@@ -33,9 +36,11 @@
       <strong>Mask fade</strong>
       <div class="strip"><span></span><span></span><span></span><span></span><span></span></div>
     </section>
-
-    <StudioControls {groups} />
   </div>
+
+    {#snippet controls(activePanel)}
+      <StudioControls groups={activePanel.groups} />
+    {/snippet}
 </StudioFrame>
 
 <style>

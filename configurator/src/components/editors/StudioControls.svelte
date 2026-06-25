@@ -1,9 +1,10 @@
 <script>
   import ControlSection from '../ControlSection.svelte';
   import FriendlyControl from '../FriendlyControl.svelte';
-  import { overrides } from '../../lib/store.svelte.js';
+  import { overrides, ui } from '../../lib/store.svelte.js';
 
   let { groups = [] } = $props();
+  const showToken = $derived(ui.showTokens);
 </script>
 
 <div class="studio-controls">
@@ -11,7 +12,7 @@
     <ControlSection title={group.title} hint={group.hint} modifiedCount={group.tokens.filter((token) => overrides[token.name] != null).length}>
       <div class="studio-controls__rows">
         {#each group.tokens as token (token.name)}
-          <FriendlyControl {token} showToken />
+          <FriendlyControl {token} {showToken} />
         {/each}
       </div>
     </ControlSection>

@@ -2,25 +2,10 @@
   /**
    * One domain tab (Colors, Typography, Spacing, …).
    *
-   * Layout principle: every panel follows the same three-zone rhythm:
-   *
-   *   1. LIVE PREVIEW (always visible, leads the panel)
-   *      — Colors:              Semantic-roles swatch grid
-   *      — Generator domains:   Preview rendered BELOW the generators so the
-   *                             specimen updates as you tune (no separate top card)
-   *      — All other domains:   DomainPreview card at top, open by default
-   *
-   *   2. QUICK CONTROLS (immediately after the preview)
-   *      — QuickKnobs (scaling sliders) follow the preview so the primary
-   *        control is always close to the output it drives.
-   *      — Style presets and intro text sit here too.
-   *      — Curated groups (lib/basics.js) are now collapsible cards so you can
-   *        reach lower sections while still watching the preview.
-   *
-   *   3. ALL VARIABLES (progressive disclosure)
-   *      — A collapsed `<details>` holding the full domain catalogue (grouped,
-   *        with tier / modified / usage filters). Domains with no curated
-   *        Settings surface (e.g. Misc) render the catalogue inline.
+   * Studio domains intentionally use a strict three-part layout:
+   * CategoryHeader → the domain Studio → All variables. Legacy quick controls,
+   * presets, intros and curated sections remain only for domains without a
+   * dedicated Studio component (for example Misc/Gradients).
    */
   import { allTokens, groupTokens, matchesQuery, tokenByName } from '../lib/model.js';
   import { domainOf, KNOBS_BY_DOMAIN, DOCS_BASE_URL } from '../lib/domains.js';
@@ -29,7 +14,6 @@
   import { ui, overrides, patchOverrides } from '../lib/store.svelte.js';
   import { STYLE_PRESETS_BY_DOMAIN } from '../lib/stylePresets.js';
   import TokenGroup from './TokenGroup.svelte';
-  import TokenRow from './TokenRow.svelte';
   import ScaleGenerator from './ScaleGenerator.svelte';
   import QuickKnobs from './QuickKnobs.svelte';
   import StylePresetRow from './StylePresetRow.svelte';
@@ -95,17 +79,20 @@
   const usesVisualStudio = $derived(Studio != null);
 
   // Domains with a scale generator (typography, spacing): preview goes BELOW
-  // the generator so the specimen updates right next to the controls.
+  // the generator in the legacy fallback layout so the specimen updates right
+  // next to the controls. Studio domains own these controls inside the Studio.
   const hasGenerators = $derived(generators.length > 0);
 
-  const hasSettings = $derived(
-    !!domain.brandColors ||
-    !!STYLE_PRESETS_BY_DOMAIN[domain.id] ||
-    basicGroups.length > 0 ||
-    essentials.length > 0 ||
-    generators.length > 0 ||
-    knobs.length > 0 ||
-    smartSections.length > 0
+  const hasLegacySettings = $derived(
+    !usesVisualStudio && (
+      !!domain.brandColors ||
+      !!STYLE_PRESETS_BY_DOMAIN[domain.id] ||
+      basicGroups.length > 0 ||
+      essentials.length > 0 ||
+      generators.length > 0 ||
+      knobs.length > 0 ||
+      smartSections.length > 0
+    )
   );
 
   let showAll = $state(false);
@@ -193,60 +180,65 @@
 
 
       {#if Studio}
-        <svelte:component this={Studio} />
-      {/if}
+        {#if knobs.length}
+          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+        {/if}
+        {#if STYLE_PRESETS_BY_DOMAIN[domain.id]}
+          <StylePresetRow
+            title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
+            presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
+          />
+        {/if}
+        <Studio />
+      {:else}
+        <!-- Legacy fallback layout for domains that do not yet own a Studio. -->
+        {#if hasGenerators}
+          {#each generators as g (g)}
+            <ScaleGenerator kinds={[g]} collapsible />
+          {/each}
+        {/if}
+        {#if knobs.length}
+          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+        {/if}
 
-      <!-- ── ZONE 1: HIGH-IMPACT CONTROLS ─────────────────────────────── -->
+        {#if domain.intro}
+          <p class="panel__intro">{domain.intro}</p>
+        {/if}
 
-      {#if hasGenerators}
-        {#each generators as g (g)}
-          <ScaleGenerator kinds={[g]} collapsible />
-        {/each}
-      {/if}
-      {#if knobs.length}
-        <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
-      {/if}
+        {#if STYLE_PRESETS_BY_DOMAIN[domain.id]}
+          <StylePresetRow
+            title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
+            presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
+          />
+        {/if}
 
-      <!-- ── ZONE 2: SETTINGS (inputs-first) ────────────────────────────── -->
+        {#if smartSections.length}
+          <SmartSettings domainId={domain.id} />
+        {/if}
 
-      {#if domain.intro}
-        <p class="panel__intro">{domain.intro}</p>
-      {/if}
-
-      {#if STYLE_PRESETS_BY_DOMAIN[domain.id]}
-        <StylePresetRow
-          title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
-          presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
-        />
-      {/if}
-
-      {#if smartSections.length}
-        <SmartSettings domainId={domain.id} />
-      {/if}
-
-      <!-- Curated friendly controls for domains that do not yet own a full studio. -->
-      {#if !usesVisualStudio && basicGroups.length}
-        {#each basicGroups as group (group.title)}
-          <ControlSection title={group.title} modifiedCount={group.controls.filter((c) => overrides[c.token] != null).length}>
+        {#if basicGroups.length}
+          {#each basicGroups as group (group.title)}
+            <ControlSection title={group.title} modifiedCount={group.controls.filter((c) => overrides[c.token] != null).length}>
+              <div class="panel__card-rows">
+                {#each group.controls as c (c.token)}
+                  <FriendlyControl token={c.tokenObj} label={c.label} help={c.help} />
+                {/each}
+              </div>
+            </ControlSection>
+          {/each}
+        {:else if essentials.length}
+          <ControlSection title="Essentials" hint="Curated for most projects." modifiedCount={essentials.filter((t) => overrides[t.name] != null).length}>
             <div class="panel__card-rows">
-              {#each group.controls as c (c.token)}
-                <FriendlyControl token={c.tokenObj} label={c.label} help={c.help} />
+              {#each essentials as token (token.name)}
+                <FriendlyControl {token} showToken />
               {/each}
             </div>
           </ControlSection>
-        {/each}
-      {:else if !usesVisualStudio && essentials.length}
-        <ControlSection title="Essentials" hint="Curated for most projects." modifiedCount={essentials.filter((t) => overrides[t.name] != null).length}>
-          <div class="panel__card-rows">
-            {#each essentials as token (token.name)}
-              <FriendlyControl {token} showToken />
-            {/each}
-          </div>
-        </ControlSection>
+        {/if}
       {/if}
 
-      <!-- ── ZONE 3: ALL VARIABLES (progressive disclosure) ──────────────── -->
-      {#if hasSettings}
+      <!-- ── ALL VARIABLES (progressive disclosure) ─────────────────────── -->
+      {#if usesVisualStudio || hasLegacySettings}
         <details class="allvars" bind:open={showAll}>
           <summary class="allvars__summary">
             <span class="allvars__chev" aria-hidden="true">›</span>
@@ -264,7 +256,7 @@
         {@render catalogue()}
       {/if}
 
-      {#if domain.docsPath}
+      {#if !usesVisualStudio && domain.docsPath}
         <p class="panel__docs">
           <a
             href="{DOCS_BASE_URL}{domain.docsPath}"

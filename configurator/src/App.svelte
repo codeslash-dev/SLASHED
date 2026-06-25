@@ -151,7 +151,7 @@
   // Persist the navigation prefs so a reload restores where the user was.
   // Restore (with validation) happens in store.svelte.js via sanitiseUiState.
   $effect(() => {
-    const snapshot = JSON.stringify({ domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme, bundle: ui.bundle });
+    const snapshot = JSON.stringify({ domain: ui.domain, outputMode: ui.outputMode, uiTheme: ui.uiTheme, bundle: ui.bundle, showTokens: ui.showTokens });
     try {
       localStorage.setItem(UI_STORAGE_KEY, snapshot);
     } catch {
