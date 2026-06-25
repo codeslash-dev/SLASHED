@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.16] - 2026-06-25
+
+### Features
+- redesign bundle structure — drop essential, remove legacy from defaults
+- **configurator:** consolidate studio redesign
+
+### Bug Fixes
+- remove essential bundle from release artifacts list
+- update demo.html and bundle-picker test to drop essential references
+- **configurator/tests:** fix display-tab generator test for unified ScaleGenerator
+- **configurator:** update e2e tests and DomainPanel for Studio refactor
+- **tests:** update DomainPreview no-spec test to use 'misc' domain
+- **docs:** address CodeRabbit review comments on PR #400
+
 ## [0.6.15] - 2026-06-25
 
 ### Features
