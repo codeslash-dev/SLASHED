@@ -26,7 +26,7 @@ const STUDIOS = [
   ['Typography Studio', TypographyStudio, ['The quick brown fox', 'Fluid scale']],
   ['Color Studio', ColorStudio, ['Source pairs', 'Role map', 'Auto-derived pair', 'Contrast & palette tuning']],
   ['Spacing Studio', SpacingStudio, ['Space map', 'Stack rhythm', 'Input gap', 'Global scale']],
-  ['Layout Studio', LayoutStudio, ['Containers', 'Grid & composition', 'Global anchors']],
+  ['Layout Studio', LayoutStudio, ['Container map', 'Responsive grid', 'Reading width', 'Sticky offset']],
   ['Shape Studio', ShapeStudio, ['Radius system', 'Focus ring', 'Focused action']],
   ['Shadow Studio', ShadowStudio, ['Elevation strength', 'Box shadows', 'Media card glow']],
   ['Motion Studio', MotionStudio, ['Speed scale', 'Easing curves', 'fast']],
