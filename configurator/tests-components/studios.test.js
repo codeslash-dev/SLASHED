@@ -28,9 +28,9 @@ const STUDIOS = [
   ['Spacing Studio', SpacingStudio, ['Space map', 'Stack rhythm', 'Input gap', 'Global scale']],
   ['Layout Studio', LayoutStudio, ['Container map', 'Responsive grid', 'Reading width', 'Sticky offset']],
   ['Shape Studio', ShapeStudio, ['Radius system', 'Focus ring', 'Focused action']],
-  ['Shadow Studio', ShadowStudio, ['Elevation strength', 'Box shadows', 'Media card glow']],
-  ['Motion Studio', MotionStudio, ['Speed scale', 'Easing curves', 'fast']],
-  ['Effects Studio', EffectsStudio, ['Glass & blur', 'Opacity states', 'Readable media card']],
+  ['Shadow Studio', ShadowStudio, ['Elevation', 'Text & media', 'Media card glow']],
+  ['Motion Studio', MotionStudio, ['Durations', 'Easing', 'fast']],
+  ['Effects Studio', EffectsStudio, ['Glass', 'Opacity', 'Readable media card']],
 ];
 
 describe('visual studios', () => {
