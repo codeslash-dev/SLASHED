@@ -65,7 +65,7 @@
   h2 { font-size: calc(clamp(32px, 5vw, 54px) * var(--type-scale, 1)); line-height: 1; text-wrap: var(--sf-heading-text-wrap, balance); }
   h3 { font-size: calc(clamp(24px, 3.5vw, 38px) * var(--type-scale, 1)); margin-top: 8px; }
   h4 { font-size: calc(clamp(19px, 2.6vw, 28px) * var(--type-scale, 1)); margin-top: 8px; }
-  strong, code { display: block; margin-top: 8px; font-size: 18px; }
+  code { display: block; margin-top: 8px; font-size: 18px; }
   p { margin-top: 12px; color: var(--sf-color-text--muted); font-size: 16px; line-height: var(--sf-leading-normal, 1.5); max-width: 68ch; text-wrap: var(--sf-body-text-wrap, pretty); }
   .mini-previews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .mini-previews article { padding: 12px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); display: grid; gap: 4px; }

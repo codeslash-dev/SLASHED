@@ -64,6 +64,7 @@
   .strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; padding: 12px; border-radius: 14px; background: linear-gradient(90deg, transparent, var(--cfg-surface) var(--sf-mask-scrim-start, 2rem), var(--cfg-surface) calc(100% - var(--sf-mask-scrim-end, 2rem)), transparent); border: 1px solid var(--cfg-border); }
   .strip span { height: 54px; border-radius: 10px; background: var(--cfg-accent-soft); }
   @keyframes shimmer { to { background-position: -220% 0; } }
+  @media (prefers-reduced-motion: reduce) { .pending { animation: none; } }
   @media (max-width: 820px) { .glass-lab, .scrim-lab, .state-lab { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .glass-lab, .scrim-lab, .state-lab { grid-template-columns: 1fr; } }
 </style>

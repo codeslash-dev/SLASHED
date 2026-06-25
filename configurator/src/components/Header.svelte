@@ -1,12 +1,12 @@
 <script>
   import { onDestroy } from 'svelte';
-  import { sync, allTokens, frameworkVersion } from '../lib/model.js';
+  import { sync, allTokens, frameworkVersion, modifiedCountsByDomain } from '../lib/model.js';
   import { DOMAIN_BY_ID } from '../lib/domains.js';
   import { ui, overrides, history, undo, redo, openOutputDrawer, currentShareUrl } from '../lib/store.svelte.js';
   import { copyText, COPY_FEEDBACK_MS } from '../lib/clipboard.js';
 
   const totalTokens = allTokens.length;
-  const modCount = $derived(Object.keys(overrides).length);
+  const modCount = $derived(Object.values(modifiedCountsByDomain(overrides)).reduce((sum, n) => sum + n, 0));
   const canUndo = $derived(history.past.length > 0);
   const canRedo = $derived(history.future.length > 0);
   const activeDomain = $derived(ui.domain === 'home' ? { label: 'Overview' } : DOMAIN_BY_ID.get(ui.domain));

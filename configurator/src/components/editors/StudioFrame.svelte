@@ -10,9 +10,9 @@
     <p>{eyebrow}</p>
     <h3>{title}</h3>
     {#if description}<span>{description}</span>{/if}
-    <div class="studio__steps" aria-label="Studio workflow">
-      <b>01 Preview</b><b>02 Tune</b><b>03 Verify</b>
-    </div>
+    <ol class="studio__steps" aria-label="Studio workflow">
+      <li>01 Preview</li><li>02 Tune</li><li>03 Verify</li>
+    </ol>
   </div>
   <div class="studio__surface">{@render children?.()}</div>
 </section>
@@ -23,8 +23,8 @@
   .studio__copy p { margin: 0; color: var(--cfg-accent); font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
   .studio__copy h3 { margin: 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.02; letter-spacing: -.03em; }
   .studio__copy span { display: block; color: var(--cfg-text-muted); font-size: 13px; line-height: 1.45; }
-  .studio__steps { display: grid; gap: 6px; margin-top: 6px; }
-  .studio__steps b { padding: 7px 9px; border: 1px solid var(--cfg-border); border-radius: 999px; background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+  .studio__steps { display: grid; gap: 6px; margin-top: 6px; list-style: none; padding: 0; }
+  .studio__steps li { padding: 7px 9px; border: 1px solid var(--cfg-border); border-radius: 999px; background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
   .studio__surface { min-width: 0; }
   @media (max-width: 820px) { .studio { grid-template-columns: 1fr; padding: 12px; } .studio__copy { position: static; } .studio__steps { grid-template-columns: repeat(3, 1fr); } }
 </style>

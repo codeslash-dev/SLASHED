@@ -9,7 +9,7 @@
   const groups = resolveStudioGroups(STUDIO_GROUPS.shadows);
 </script>
 
-<StudioFrame title="Shadow Studio" description="Elevation stack pokazuje siłę, kolor i dark-mode charakter cieni w kontekście kart, popoverów, dialogów i mediów.">
+<StudioFrame title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media.">
   <div class="shadow-studio">
     <StudioWorkflow steps={workflow} ariaLabel="Shadow workflow" />
 

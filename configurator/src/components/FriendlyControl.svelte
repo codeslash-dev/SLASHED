@@ -28,6 +28,9 @@
   <div class="friendly__editor">
     {#if meta.control === 'select' && meta.options?.length}
       <select class="cfg-select friendly__select" value={activeValue} onchange={onSelect} aria-label={token.name}>
+        {#if activeValue && !meta.options.includes(activeValue)}
+          <option value={activeValue}>{activeValue}</option>
+        {/if}
         {#each meta.options as option (option)}
           <option value={option}>{option}</option>
         {/each}

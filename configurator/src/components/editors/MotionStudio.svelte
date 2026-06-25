@@ -10,7 +10,7 @@
   const easings = ['linear', 'in', 'out', 'spring'];
 </script>
 
-<StudioFrame title="Motion Studio" description="Durations, easing i animation presets jako żywe interakcje: widzisz timing, krzywe i stany UI bez zgadywania po tokenach.">
+<StudioFrame title="Motion Studio" description="Durations, easing and animation presets shown as live interactions: see timing, curves and UI states without guessing from token names.">
   <div class="motion-studio">
     <StudioWorkflow steps={workflow} ariaLabel="Motion workflow" />
 

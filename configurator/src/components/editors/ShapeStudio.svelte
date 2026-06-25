@@ -10,7 +10,7 @@
   const components = ['Button', 'Input', 'Card', 'Badge'];
 </script>
 
-<StudioFrame title="Shape Studio" description="Radius, border, divider i focus ring pokazane jako kompletny system kształtu: od skali narożników po accessibility focus.">
+<StudioFrame title="Shape Studio" description="Radius, border, divider and focus ring shown as a complete shape system — from the corner scale down to accessible focus outlines.">
   <div class="shape-studio">
     <StudioWorkflow steps={workflow} ariaLabel="Shape workflow" />
 

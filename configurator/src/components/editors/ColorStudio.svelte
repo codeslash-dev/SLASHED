@@ -30,7 +30,7 @@
 
     <section class="usage" aria-label="Usage preview">
       <button>Primary button</button>
-      <div><strong>Surface card</strong><p>Text, link, border and subtle background preview.</p><a href="/">Example link</a></div>
+      <div><strong>Surface card</strong><p>Text, link, border and subtle background preview.</p><span role="link" tabindex="0" class="usage__link">Example link</span></div>
       <mark>Status message</mark>
     </section>
 
@@ -74,7 +74,7 @@
   .usage { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 14px; border-radius: 14px; background: var(--sf-color-raised); border: 1px solid var(--sf-color-border); }
   .usage button { border: 0; border-radius: 999px; background: var(--sf-color-primary); color: var(--sf-color-primary-text, white); padding: 10px 14px; }
   .usage p { margin: 2px 0 0; color: var(--sf-color-text--muted); }
-  .usage a { color: var(--sf-color-link); }
+  .usage__link { color: var(--sf-color-link); cursor: pointer; text-decoration: underline; }
   mark { border-radius: 999px; background: var(--sf-color-warning-subtle); color: var(--sf-color-warning); padding: 7px 10px; }
   .theme-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .theme-card { min-height: 118px; display: grid; align-content: end; gap: 4px; padding: 14px; border-radius: 16px; border: 1px solid var(--cfg-border); }

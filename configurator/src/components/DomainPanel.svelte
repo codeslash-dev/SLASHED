@@ -86,8 +86,13 @@
   const generators = $derived(domain.basicGenerators ?? []);
   const knobs = $derived(KNOBS_BY_DOMAIN[domain.id] ?? []);
   const smartSections = $derived(smartSettingsFor(domain.id));
-  const redesignedDomains = new Set(['colors', 'typography', 'spacing', 'layout', 'borders', 'shadows', 'motion', 'effects']);
-  const usesVisualStudio = $derived(redesignedDomains.has(domain.id));
+  const STUDIO_BY_DOMAIN = {
+    typography: TypographyStudio, colors: ColorStudio, spacing: SpacingStudio,
+    layout: LayoutStudio, borders: ShapeStudio, shadows: ShadowStudio,
+    motion: MotionStudio, effects: EffectsStudio,
+  };
+  const Studio = $derived(STUDIO_BY_DOMAIN[domain.id] ?? null);
+  const usesVisualStudio = $derived(Studio != null);
 
   // Domains with a scale generator (typography, spacing): preview goes BELOW
   // the generator so the specimen updates right next to the controls.
@@ -187,22 +192,8 @@
     {:else}
 
 
-      {#if domain.id === 'typography'}
-        <TypographyStudio />
-      {:else if domain.id === 'colors'}
-        <ColorStudio />
-      {:else if domain.id === 'spacing'}
-        <SpacingStudio />
-      {:else if domain.id === 'layout'}
-        <LayoutStudio />
-      {:else if domain.id === 'borders'}
-        <ShapeStudio />
-      {:else if domain.id === 'shadows'}
-        <ShadowStudio />
-      {:else if domain.id === 'motion'}
-        <MotionStudio />
-      {:else if domain.id === 'effects'}
-        <EffectsStudio />
+      {#if Studio}
+        <svelte:component this={Studio} />
       {/if}
 
       <!-- ── ZONE 1: HIGH-IMPACT CONTROLS ─────────────────────────────── -->
