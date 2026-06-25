@@ -8,7 +8,7 @@ import { watchErrors, gotoClean, sideItem } from './helpers.js';
 
 const WIDTHS = [1600, 1000, 768, 480, 360];
 const NAV_LABELS = [
-  'Overview', 'Colors', 'Gradients', 'Typography', 'Spacing', 'Layout',
+  'Overview', 'Colors', 'Typography', 'Spacing', 'Layout',
   'Borders', 'Shadows', 'Motion', 'Effects', 'WCAG', 'Themes', 'Install',
   'Misc', 'Cheatsheet',
 ];
@@ -62,8 +62,9 @@ test('segmented controls expose aria-pressed; info buttons aria-expanded', async
   await expect(page.locator('.out [aria-label="Output view"] [aria-pressed="true"]')).toHaveCount(1);
   await expect(page.locator('.out [aria-label="Output format"] [aria-pressed="true"]')).toHaveCount(1);
   // ⓘ popover toggles aria-expanded and reveals the raw token.
-  // Gradients domain has SmartSettings with gradient kind, which renders TokenRow with showRawInfo.
-  await sideItem(page, 'Gradients').click();
+  // The Gradients panel inside Color Studio renders TokenRow with showRawInfo.
+  await sideItem(page, 'Colors').click();
+  await page.locator('.studio-nav button', { hasText: 'Gradients' }).click();
   const row = page.locator('.row', { hasText: 'Raw gradient' }).first();
   const info = row.locator('.row__info-btn');
   await expect(info).toHaveAttribute('aria-expanded', 'false');

@@ -11,7 +11,6 @@ import { watchErrors, gotoClean, sideItem } from './helpers.js';
 const SECTION_BY_DOMAIN = [
   ['Overview', 'Overview'],
   ['Colors', 'Colors'],
-  ['Gradients', 'Gradients'],
   ['Typography', 'Type'],
   ['Spacing', 'Spacing'],
   ['Layout', 'Layout'],

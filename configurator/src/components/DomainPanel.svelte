@@ -180,6 +180,15 @@
 
 
       {#if Studio}
+        {#if knobs.length}
+          <QuickKnobs {knobs} title="Scaling" blurb={domain.scaleIntro ?? ''} />
+        {/if}
+        {#if STYLE_PRESETS_BY_DOMAIN[domain.id]}
+          <StylePresetRow
+            title={STYLE_PRESETS_BY_DOMAIN[domain.id].title}
+            presets={STYLE_PRESETS_BY_DOMAIN[domain.id].presets}
+          />
+        {/if}
         <Studio />
       {:else}
         <!-- Legacy fallback layout for domains that do not yet own a Studio. -->
