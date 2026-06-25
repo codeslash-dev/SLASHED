@@ -97,7 +97,7 @@
   .role-chip p { display: grid; gap: 1px; margin: 0; min-width: 0; }
   .role-chip b { font-size: 11px; }
   .role-chip code { color: var(--cfg-text-faint); font-size: 9.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  details { border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-surface); overflow: clip; }
+  details { border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-surface); }
   summary { padding: 12px 14px; cursor: pointer; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: .06em; background: var(--cfg-surface-2); }
   .rows { display: grid; }
   @media (max-width: 800px) { .workflow, .theme-pair, .role-map__grid { grid-template-columns: 1fr 1fr; } }

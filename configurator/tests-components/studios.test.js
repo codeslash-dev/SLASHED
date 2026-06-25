@@ -17,6 +17,7 @@ import ShadowStudio from '../src/components/editors/ShadowStudio.svelte';
 import MotionStudio from '../src/components/editors/MotionStudio.svelte';
 import EffectsStudio from '../src/components/editors/EffectsStudio.svelte';
 import FriendlyControl from '../src/components/FriendlyControl.svelte';
+import studioFrameSource from '../src/components/editors/StudioFrame.svelte?raw';
 import { tokenByName } from '../src/lib/model.js';
 import { clearAll, overrides } from '../src/lib/store.svelte.js';
 
@@ -44,6 +45,21 @@ describe('visual studios', () => {
       }
     });
   }
+
+
+  test('Studio frame keeps the main container from clipping control panels', () => {
+    const { container } = render(ColorStudio);
+    const studio = container.querySelector('.studio');
+    const colorDetails = container.querySelector('.color-studio details');
+    const { container: controlsContainer } = render(EffectsStudio);
+    const controlPanel = controlsContainer.querySelector('.control-section');
+
+    expect(studio).toBeTruthy();
+    expect(studioFrameSource).toMatch(/\.studio\s*\{[^}]*overflow:\s*visible;/s);
+    expect(studioFrameSource).not.toMatch(/\.studio\s*\{[^}]*overflow:\s*(hidden|clip);/s);
+    expect(['hidden', 'clip']).not.toContain(getComputedStyle(controlPanel).overflow);
+    expect(['hidden', 'clip']).not.toContain(getComputedStyle(colorDetails).overflow);
+  });
 
   test('Typography Studio switches scopes and renders active panel controls', async () => {
     const { getByRole, getByText, getAllByText } = render(TypographyStudio);
