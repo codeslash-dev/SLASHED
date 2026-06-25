@@ -32,10 +32,10 @@ describe('BundlePicker', () => {
 
   test('selecting a bundle updates ui.bundle', async () => {
     const { getByRole } = render(BundlePicker);
-    const essential = bundleById('essential');
-    const btn = getByRole('button', { pressed: false, name: new RegExp(essential.label) });
+    const target = bundleById('full');
+    const btn = getByRole('button', { pressed: false, name: new RegExp(target.label) });
     await fireEvent.click(btn);
-    expect(ui.bundle).toBe('essential');
+    expect(ui.bundle).toBe('full');
   });
 
   test('shows a Recommended badge', () => {
