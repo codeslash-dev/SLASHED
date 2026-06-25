@@ -1,18 +1,82 @@
 <script>
-  import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
+  import { resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
+  import ScaleGenerator from '../ScaleGenerator.svelte';
 
   const steps = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
-  const workflow = ['Scale', 'Rhythm', 'Components', 'Sections'];
-  const groups = resolveStudioGroups(STUDIO_GROUPS.spacing);
+  const panels = [
+    {
+      id: 'Scale',
+      description: 'Fluid space generator and global multipliers that shape the full spacing ramp.',
+      groups: [
+        { title: 'Global scale', hint: 'One multiplier for the complete spacing ramp.', tokens: ['--sf-space-scale', '--sf-section-scale'] },
+      ],
+    },
+    {
+      id: 'Rhythm',
+      description: 'Layout rhythm tokens used by stacks, gaps and flow spacing.',
+      groups: [
+        { title: 'Rhythm tokens', hint: 'Core page and content cadence.', tokens: ['--sf-space-scale', '--sf-gap', '--sf-content-gap', '--sf-flow-space'] },
+      ],
+    },
+    {
+      id: 'Sections',
+      description: 'Section padding presets from compact bands to large marketing blocks.',
+      groups: [
+        { title: 'Section tokens', hint: 'All --sf-section-* controls and outputs.', tokens: ['--sf-section-scale', '--sf-section-pad', '--sf-section-pad--xs', '--sf-section-pad--s', '--sf-section-pad--m', '--sf-section-pad--l', '--sf-section-pad--xl', '--sf-section-pad--2xl'] },
+      ],
+    },
+    {
+      id: 'Components',
+      description: 'Interior padding and common component spacing hooks.',
+      groups: [
+        { title: 'Component spacing', hint: 'Frequently-used component padding and gap tokens.', tokens: ['--sf-component-pad', '--sf-button-padding-block', '--sf-button-padding-inline', '--sf-field-padding-block', '--sf-field-padding-inline', '--sf-field-block', '--sf-box-padding', '--sf-card-padding', '--sf-icon-box-pad', '--sf-cluster-gap', '--sf-stack-gap'] },
+      ],
+    },
+    {
+      id: 'Advanced',
+      description: 'Source values for the fluid spacing engine and composition-specific gaps.',
+      groups: [
+        { title: 'Fluid engine', hint: 'Low-level source values behind the generated --sf-space-* ramp.', tokens: ['--sf-space-base-min', '--sf-space-base-max', '--sf-space-ratio-min', '--sf-space-ratio-max'] },
+        { title: 'Composition gaps', hint: 'Specialized gap tokens used by layout primitives.', tokens: ['--sf-gutter', '--sf-grid-gap', '--sf-sidebar-gap', '--sf-switcher-gap', '--sf-cluster-gap', '--sf-reel-gap', '--sf-bento-gap', '--sf-equal-gap', '--sf-alternate-gap', '--sf-alternate-inner-gap'] },
+      ],
+    },
+  ];
+
+  let activePanelId = $state('Scale');
+  const activePanel = $derived(panels.find((panel) => panel.id === activePanelId) ?? panels[0]);
+  const activeGroups = $derived(resolveStudioGroups(activePanel.groups));
 </script>
 
 <StudioFrame title="Spacing Studio" description="Scale ruler, rhythm and layout preview — from the global space multiplier down to real component and section gaps.">
   <div class="spacing-studio">
     <nav class="workflow" aria-label="Spacing workflow">
-      {#each workflow as step, index (step)}<span><b>{index + 1}</b>{step}</span>{/each}
+      {#each panels as panel, index (panel.id)}
+        <button
+          type="button"
+          class:workflow__button--active={activePanelId === panel.id}
+          onclick={() => (activePanelId = panel.id)}
+          aria-pressed={activePanelId === panel.id}
+        >
+          <b>{index + 1}</b>{panel.id}
+        </button>
+      {/each}
     </nav>
+
+    <section class="studio-panel" aria-labelledby="spacing-panel-title">
+      <div class="studio-panel__header">
+        <span>Panel</span>
+        <h3 id="spacing-panel-title">{activePanel.id}</h3>
+        <p>{activePanel.description}</p>
+      </div>
+
+      {#if activePanel.id === 'Scale'}
+        <ScaleGenerator kinds={['space']} collapsible />
+      {/if}
+
+      <StudioControls groups={activeGroups} />
+    </section>
 
     <section class="scale-lab" aria-label="Space map">
       <div class="scale-lab__intro">
@@ -48,16 +112,20 @@
       <article><b>Form</b><label for="spacing-field">Input gap</label><input id="spacing-field" placeholder="Field spacing" /></article>
       <article><b>Cluster</b><div><span>A</span><span>B</span><span>C</span></div></article>
     </section>
-
-    <StudioControls {groups} />
   </div>
 </StudioFrame>
 
 <style>
   .spacing-studio { display: grid; gap: 12px; }
-  .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .workflow span { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+  .workflow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .workflow button { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+  .workflow button:hover, .workflow__button--active { border-color: var(--cfg-accent-strong); color: var(--cfg-text); background: var(--cfg-surface); }
   .workflow b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 999px; background: var(--cfg-accent-strong); color: white; font-size: 10px; }
+  .studio-panel { display: grid; gap: 12px; padding: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-bg-2); }
+  .studio-panel__header { display: grid; gap: 4px; }
+  .studio-panel__header span { color: var(--cfg-text-faint); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .studio-panel__header h3 { margin: 0; font-size: 16px; }
+  .studio-panel__header p { margin: 0; color: var(--cfg-text-muted); font-size: 12px; line-height: 1.45; }
   .scale-lab { display: grid; grid-template-columns: minmax(190px, .5fr) 1fr; gap: 14px; padding: 14px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-bg-2); }
   .scale-lab__intro { display: grid; align-content: center; gap: 6px; }
   .scale-lab__intro strong { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
@@ -70,7 +138,7 @@
   .section-card, .stack-card, .component-grid article { border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius); background: var(--cfg-surface); }
   .section-card { padding: var(--sf-section-pad, clamp(2rem, 6vw, 5rem)); }
   .section-card__inner { padding: var(--sf-component-pad, 1rem); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); }
-  .stack-card { display: grid; gap: var(--sf-content-gap, .75rem); align-content: start; padding: var(--sf-component-pad, 1rem); }
+  .stack-card { display: grid; gap: var(--sf-flow-space, var(--sf-content-gap, .75rem)); align-content: start; padding: var(--sf-component-pad, 1rem); }
   .section-card small, .stack-card small { color: var(--cfg-text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: .06em; }
   h3, h4, p { margin: 0; }
   .stack-card button { justify-self: start; border: 0; border-radius: 999px; padding: .7em 1em; background: var(--cfg-accent-strong); color: white; }
@@ -80,5 +148,5 @@
   .component-grid div { display: flex; flex-wrap: wrap; gap: var(--sf-gap, .75rem); }
   .component-grid span { display: grid; place-items: center; inline-size: 34px; block-size: 34px; border-radius: 999px; background: var(--cfg-accent-soft); }
   @media (max-width: 820px) { .scale-lab, .rhythm-preview, .component-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 640px) { .workflow { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 700px) { .workflow { grid-template-columns: 1fr 1fr; } }
 </style>

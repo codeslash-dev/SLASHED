@@ -96,7 +96,7 @@
 
   // Domains with a scale generator (typography, spacing): preview goes BELOW
   // the generator so the specimen updates right next to the controls.
-  const hasGenerators = $derived(generators.length > 0);
+  const hasGenerators = $derived(generators.length > 0 && domain.id !== 'spacing');
 
   const hasSettings = $derived(
     !!domain.brandColors ||
