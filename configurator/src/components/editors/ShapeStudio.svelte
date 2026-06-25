@@ -1,15 +1,9 @@
 <script>
-  import { tokenByName } from '../../lib/model.js';
+  import { STUDIO_PANELS, resolveStudioPanels } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
 
-  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
-  const panels = [
-    panel('Radius', 'Corner scale from utility chips to cards.', ['--sf-radius-scale', '--sf-radius-xs', '--sf-radius-s', '--sf-radius-m', '--sf-radius-l', '--sf-radius-xl', '--sf-radius-full']),
-    panel('Borders', 'Stroke weight and style for framed components.', ['--sf-border-scale', '--sf-border-style', '--sf-border-width-hairline', '--sf-border-width-1', '--sf-border-width-2']),
-    panel('Dividers', 'Rule width and style for separating content.', ['--sf-divider-width', '--sf-divider-style']),
-    panel('Focus', 'Keyboard focus ring width, offset and color.', ['--sf-focus-ring-width', '--sf-focus-ring-offset', '--sf-color-border--focus']),
-  ];
+  const panels = resolveStudioPanels(STUDIO_PANELS.borders);
   const radii = ['xs', 's', 'm', 'l', 'xl', 'full'];
   const components = ['Button', 'Input', 'Card', 'Badge'];
 </script>

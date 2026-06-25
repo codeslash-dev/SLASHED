@@ -1,16 +1,10 @@
 <script>
-  import { tokenByName } from '../../lib/model.js';
+  import { STUDIO_PANELS, resolveStudioPanels } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
   import ContainerBars from '../ContainerBars.svelte';
 
-  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
-  const panels = [
-    panel('Containers', 'Viewport widths and container rails.', ['--sf-container-narrow', '--sf-container-default', '--sf-container-wide']),
-    panel('Grid', 'Responsive columns, gutters and sidebar composition.', ['--sf-grid-min', '--sf-grid-min-s', '--sf-grid-min-l', '--sf-sidebar-width', '--sf-switcher-threshold', '--sf-gutter']),
-    panel('Measure', 'Readable prose width for editorial content.', ['--sf-container-prose']),
-    panel('Anchors', 'Header heights, sticky offsets and touch targets.', ['--sf-header-height-mobile', '--sf-header-height-desktop', '--sf-touch-target', '--sf-sticky-offset-mobile', '--sf-sticky-offset-desktop']),
-  ];
+  const panels = resolveStudioPanels(STUDIO_PANELS.layout);
   const devices = ['Mobile', 'Tablet', 'Desktop'];
 </script>
 

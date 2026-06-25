@@ -1,6 +1,14 @@
 <script>
   let { title, hint = '', modifiedCount = 0, defaultOpen = true, children } = $props();
-  let open = $state(window.innerWidth >= 768 ? defaultOpen : false);
+  let open = $state(false);
+  let initialised = false;
+
+  $effect(() => {
+    if (!initialised) {
+      open = window.innerWidth >= 768 ? defaultOpen : false;
+      initialised = true;
+    }
+  });
 </script>
 
 <details class="control-section" open={open} ontoggle={(e) => (open = e.currentTarget.open)}>

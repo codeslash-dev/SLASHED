@@ -1,16 +1,10 @@
 <script>
-  import { tokenByName } from '../../lib/model.js';
+  import { STUDIO_PANELS, resolveStudioPanels } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
 
-  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
+  const panels = resolveStudioPanels(STUDIO_PANELS.shadows);
   const levels = ['xs', 's', 'm', 'l', 'xl', '2xl'];
-  const panels = [
-    panel('Elevation', 'Global shadow strength, color and elevation outputs.', ['--sf-shadow-strength', '--sf-shadow-lightness', '--sf-shadow-color', '--sf-shadow-xs', '--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l', '--sf-shadow-xl', '--sf-shadow-2xl']),
-    panel('Surfaces', 'Depth for cards and raised surfaces.', ['--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l']),
-    panel('Overlays', 'Modal and popover depth plus glow color.', ['--sf-shadow-xl', '--sf-shadow-2xl', '--sf-shadow-glow-color']),
-    panel('Text & media', 'Text, drop and media glow shadows.', ['--sf-text-shadow-s', '--sf-text-shadow-m', '--sf-text-shadow-l', '--sf-drop-shadow-s', '--sf-drop-shadow-m', '--sf-drop-shadow-l', '--sf-shadow-glow-color']),
-  ];
 </script>
 
 <StudioFrame {panels} title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media.">

@@ -1,15 +1,9 @@
 <script>
-  import { tokenByName } from '../../lib/model.js';
+  import { STUDIO_PANELS, resolveStudioPanels } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
 
-  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
-  const panels = [
-    panel('Durations', 'Global motion scale and duration tokens.', ['--sf-motion-scale', '--sf-duration-none', '--sf-duration-instant', '--sf-duration-fast', '--sf-duration-normal', '--sf-duration-slow', '--sf-duration-slower']),
-    panel('Easing', 'Curve choices for enter, exit and spring movement.', ['--sf-ease-linear', '--sf-ease-in', '--sf-ease-out', '--sf-ease-in-out', '--sf-ease-spring', '--sf-ease-overshoot']),
-    panel('Presets', 'Named animation presets consumed by utilities.', ['--sf-animation-fade-in', '--sf-animation-slide-in-up', '--sf-animation-scale-up', '--sf-animation-float', '--sf-animation-shimmer']),
-    panel('Reduced motion', 'Tune motion scale toward calmer state changes.', ['--sf-motion-scale', '--sf-duration-none']),
-  ];
+  const panels = resolveStudioPanels(STUDIO_PANELS.motion);
   const durations = ['instant', 'fast', 'normal', 'slow'];
   const easings = ['linear', 'in', 'out', 'spring'];
 </script>

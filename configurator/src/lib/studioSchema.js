@@ -33,6 +33,39 @@ export const TYPOGRAPHY_PANELS = [
   },
 ];
 
+export const STUDIO_PANELS = {
+  layout: [
+    { label: 'Containers', description: 'Viewport widths and container rails.', tokens: ['--sf-container-narrow', '--sf-container-default', '--sf-container-wide'] },
+    { label: 'Grid', description: 'Responsive columns, gutters and sidebar composition.', tokens: ['--sf-grid-min', '--sf-grid-min-s', '--sf-grid-min-l', '--sf-sidebar-width', '--sf-switcher-threshold', '--sf-gutter'] },
+    { label: 'Measure', description: 'Readable prose width for editorial content.', tokens: ['--sf-container-prose'] },
+    { label: 'Anchors', description: 'Header heights, sticky offsets and touch targets.', tokens: ['--sf-header-height-mobile', '--sf-header-height-desktop', '--sf-touch-target', '--sf-sticky-offset-mobile', '--sf-sticky-offset-desktop'] },
+  ],
+  borders: [
+    { label: 'Radius', description: 'Corner scale from utility chips to cards.', tokens: ['--sf-radius-scale', '--sf-radius-xs', '--sf-radius-s', '--sf-radius-m', '--sf-radius-l', '--sf-radius-xl', '--sf-radius-full'] },
+    { label: 'Borders', description: 'Stroke weight and style for framed components.', tokens: ['--sf-border-scale', '--sf-border-style', '--sf-border-width-hairline', '--sf-border-width-1', '--sf-border-width-2'] },
+    { label: 'Dividers', description: 'Rule width and style for separating content.', tokens: ['--sf-divider-width', '--sf-divider-style'] },
+    { label: 'Focus', description: 'Keyboard focus ring width, offset and color.', tokens: ['--sf-focus-ring-width', '--sf-focus-ring-offset', '--sf-color-border--focus'] },
+  ],
+  shadows: [
+    { label: 'Elevation', description: 'Global shadow strength, color and elevation outputs.', tokens: ['--sf-shadow-strength', '--sf-shadow-lightness', '--sf-shadow-color', '--sf-shadow-xs', '--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l', '--sf-shadow-xl', '--sf-shadow-2xl'] },
+    { label: 'Surfaces', description: 'Depth for cards and raised surfaces.', tokens: ['--sf-shadow-s', '--sf-shadow-m', '--sf-shadow-l'] },
+    { label: 'Overlays', description: 'Modal and popover depth plus glow color.', tokens: ['--sf-shadow-xl', '--sf-shadow-2xl', '--sf-shadow-glow-color'] },
+    { label: 'Text & media', description: 'Text, drop and media glow shadows.', tokens: ['--sf-text-shadow-s', '--sf-text-shadow-m', '--sf-text-shadow-l', '--sf-drop-shadow-s', '--sf-drop-shadow-m', '--sf-drop-shadow-l', '--sf-shadow-glow-color'] },
+  ],
+  motion: [
+    { label: 'Durations', description: 'Global motion scale and duration tokens.', tokens: ['--sf-motion-scale', '--sf-duration-none', '--sf-duration-instant', '--sf-duration-fast', '--sf-duration-normal', '--sf-duration-slow', '--sf-duration-slower'] },
+    { label: 'Easing', description: 'Curve choices for enter, exit and spring movement.', tokens: ['--sf-ease-linear', '--sf-ease-in', '--sf-ease-out', '--sf-ease-in-out', '--sf-ease-spring', '--sf-ease-overshoot'] },
+    { label: 'Presets', description: 'Named animation presets consumed by utilities.', tokens: ['--sf-animation-fade-in', '--sf-animation-slide-in-up', '--sf-animation-scale-up', '--sf-animation-float', '--sf-animation-shimmer'] },
+    { label: 'Reduced motion', description: 'Tune motion scale toward calmer state changes.', tokens: ['--sf-motion-scale', '--sf-duration-none'] },
+  ],
+  effects: [
+    { label: 'Glass', description: 'Backdrop blur and frosted surfaces.', tokens: ['--sf-blur'] },
+    { label: 'Opacity', description: 'Muted, disabled and pending state opacity.', tokens: ['--sf-opacity-muted', '--sf-opacity-disabled', '--sf-state-pending-opacity'] },
+    { label: 'Scrims', description: 'Readable media overlays and scrim text shadow.', tokens: ['--sf-scrim-color', '--sf-scrim-direction', '--sf-scrim-text-shadow'] },
+    { label: 'Masks', description: 'Scroll and edge fade masks.', tokens: ['--sf-mask-scrim-start', '--sf-mask-scrim-end'] },
+  ],
+};
+
 export const STUDIO_GROUPS = {
   spacing: [
     { title: 'Global scale', hint: 'One multiplier for the complete spacing ramp.', tokens: ['--sf-space-scale', '--sf-section-scale'] },
@@ -73,4 +106,17 @@ export function resolveStudioGroups(groups) {
       tokens: group.tokens.map((name) => tokenByName.get(name)).filter(Boolean),
     }))
     .filter((group) => group.tokens.length);
+}
+
+export function resolveStudioPanels(panels) {
+  return panels
+    .map((panel) => {
+      const tokens = panel.tokens.map((name) => tokenByName.get(name)).filter(Boolean);
+      return {
+        ...panel,
+        id: panel.id ?? panel.label,
+        groups: tokens.length ? [{ title: panel.label, hint: panel.description, tokens }] : [],
+      };
+    })
+    .filter((panel) => panel.groups.length);
 }

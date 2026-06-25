@@ -193,7 +193,7 @@
 
 
       {#if Studio}
-        <svelte:component this={Studio} />
+        <Studio />
       {/if}
 
       <!-- ── ZONE 1: HIGH-IMPACT CONTROLS ─────────────────────────────── -->

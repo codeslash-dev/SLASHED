@@ -1,15 +1,9 @@
 <script>
-  import { tokenByName } from '../../lib/model.js';
+  import { STUDIO_PANELS, resolveStudioPanels } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
 
-  const panel = (label, description, tokens) => ({ label, description, groups: [{ title: label, hint: description, tokens: tokens.map((name) => tokenByName.get(name)).filter(Boolean) }] });
-  const panels = [
-    panel('Glass', 'Backdrop blur and frosted surfaces.', ['--sf-blur']),
-    panel('Opacity', 'Muted, disabled and pending state opacity.', ['--sf-opacity-muted', '--sf-opacity-disabled', '--sf-state-pending-opacity']),
-    panel('Scrims', 'Readable media overlays and scrim text shadow.', ['--sf-scrim-color', '--sf-scrim-direction', '--sf-scrim-text-shadow']),
-    panel('Masks', 'Scroll and edge fade masks.', ['--sf-mask-scrim-start', '--sf-mask-scrim-end']),
-  ];
+  const panels = resolveStudioPanels(STUDIO_PANELS.effects);
   const states = ['normal', 'muted', 'disabled', 'pending'];
 </script>
 

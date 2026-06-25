@@ -6,7 +6,7 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { TYPOGRAPHY_PANELS, STUDIO_GROUPS, resolveStudioGroups } from '../src/lib/studioSchema.js';
+import { TYPOGRAPHY_PANELS, STUDIO_GROUPS, STUDIO_PANELS, resolveStudioGroups, resolveStudioPanels } from '../src/lib/studioSchema.js';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
 
 const known = new Set(data.tokens.map((token) => token.name));
@@ -42,6 +42,35 @@ describe('studio schema', () => {
         }
       }
     }
+  });
+
+  test('every shared studio panel has metadata and real tokens', () => {
+    for (const [domain, panels] of Object.entries(STUDIO_PANELS)) {
+      assert.ok(panels.length > 0, `${domain} has studio panels`);
+      const labels = panels.map((panel) => panel.label);
+      assert.equal(new Set(labels).size, labels.length, `${domain} panel labels are unique`);
+
+      for (const panel of panels) {
+        assert.ok(panel.label?.trim(), `${domain}: panel has a label`);
+        assert.ok(panel.description?.trim(), `${domain}/${panel.label}: panel has a description`);
+        assert.ok(panel.tokens.length > 0, `${domain}/${panel.label}: panel has tokens`);
+        for (const name of panel.tokens) {
+          assert.ok(known.has(name), `${domain}/${panel.label}: ${name} is in api-index`);
+        }
+      }
+    }
+  });
+
+  test('resolveStudioPanels creates one scoped group per active panel', () => {
+    const resolved = resolveStudioPanels([
+      { label: 'Mixed', description: 'Contains one valid token and one stale token.', tokens: ['--sf-space-scale', '--sf-not-real'] },
+      { label: 'Empty', description: 'Should disappear.', tokens: ['--sf-not-real'] },
+    ]);
+
+    assert.equal(resolved.length, 1);
+    assert.equal(resolved[0].id, 'Mixed');
+    assert.equal(resolved[0].groups[0].title, 'Mixed');
+    assert.deepEqual(resolved[0].groups[0].tokens.map((token) => token.name), ['--sf-space-scale']);
   });
 
   test('resolveStudioGroups removes dead token references without mutating labels', () => {
