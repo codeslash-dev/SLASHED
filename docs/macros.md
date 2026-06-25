@@ -9,7 +9,7 @@ Layer: `slashed.macros` (between `slashed.components` and
 but a single-property utility still wins on the same selector.
 
 All tokens listed below live in `core/tokens.macros.css` and ship
-in the essential bundle.
+in the optimal bundle.
 
 ---
 

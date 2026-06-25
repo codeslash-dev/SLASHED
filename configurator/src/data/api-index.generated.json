@@ -2,9 +2,8 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "ecc6b3ed5509",
+    "tokensHash": "5286f722a01c",
     "bundles": [
-      "essential",
       "full",
       "optimal",
       "optimal-components",
@@ -43,7 +42,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -67,7 +65,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -91,7 +88,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -115,7 +111,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -139,7 +134,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -163,7 +157,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -187,7 +180,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -211,7 +203,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -235,7 +226,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -259,7 +249,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -283,7 +272,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -307,7 +295,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -331,7 +318,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -355,7 +341,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -379,7 +364,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -403,7 +387,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -427,7 +410,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -451,7 +433,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -475,7 +456,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -499,7 +479,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -523,7 +502,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -547,7 +525,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -571,7 +548,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -595,7 +571,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -619,7 +594,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -643,7 +617,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -667,7 +640,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -691,7 +663,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -715,7 +686,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -739,7 +709,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -763,7 +732,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -787,7 +755,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -811,7 +778,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -835,7 +801,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -859,7 +824,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -883,7 +847,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -907,7 +870,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -931,7 +893,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -955,7 +916,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -979,7 +939,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1003,7 +962,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1027,7 +985,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1051,7 +1008,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1075,7 +1031,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1099,7 +1054,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1123,7 +1077,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1147,7 +1100,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1171,7 +1123,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1195,7 +1146,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1219,7 +1169,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1306,7 +1255,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1330,7 +1278,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1354,7 +1301,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1378,7 +1324,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1402,7 +1347,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1426,7 +1370,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1450,7 +1393,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1474,7 +1416,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1498,7 +1439,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1522,7 +1462,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1546,7 +1485,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1570,7 +1508,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1594,7 +1531,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1618,7 +1554,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1642,7 +1577,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1666,7 +1600,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1690,7 +1623,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1714,7 +1646,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1738,7 +1669,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1762,7 +1692,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1786,7 +1715,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1810,7 +1738,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1834,7 +1761,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1858,7 +1784,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1882,7 +1807,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1906,7 +1830,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1930,7 +1853,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1954,7 +1876,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -1978,7 +1899,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2002,7 +1922,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2026,7 +1945,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2050,7 +1968,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2074,7 +1991,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2098,7 +2014,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2122,7 +2037,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2146,7 +2060,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2170,7 +2083,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2194,7 +2106,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2218,7 +2129,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2242,7 +2152,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2266,7 +2175,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2290,7 +2198,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2314,7 +2221,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2338,7 +2244,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2362,7 +2267,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2386,7 +2290,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2410,7 +2313,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2434,7 +2336,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2458,7 +2359,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2482,7 +2382,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2506,7 +2405,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2530,7 +2428,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2554,7 +2451,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2578,7 +2474,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2602,7 +2497,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2626,7 +2520,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2650,7 +2543,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2674,7 +2566,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2698,7 +2589,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2722,7 +2612,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2746,7 +2635,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2770,7 +2658,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2794,7 +2681,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2818,7 +2704,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2842,7 +2727,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2866,7 +2750,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2890,7 +2773,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2914,7 +2796,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2938,7 +2819,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2962,7 +2842,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -2986,7 +2865,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3010,7 +2888,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3034,7 +2911,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3058,7 +2934,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3082,7 +2957,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3106,7 +2980,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3130,7 +3003,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3154,7 +3026,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3178,7 +3049,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3202,7 +3072,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3226,7 +3095,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3250,7 +3118,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3274,7 +3141,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3298,7 +3164,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3322,7 +3187,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3346,7 +3210,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3370,7 +3233,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3394,7 +3256,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3418,7 +3279,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3442,7 +3302,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3466,7 +3325,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3490,7 +3348,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3514,7 +3371,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3538,7 +3394,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3562,7 +3417,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3586,7 +3440,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3610,7 +3463,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3634,7 +3486,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3658,7 +3509,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3682,7 +3532,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3706,7 +3555,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3730,7 +3578,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3754,7 +3601,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3778,7 +3624,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3802,7 +3647,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3826,7 +3670,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3850,7 +3693,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3874,7 +3716,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3898,7 +3739,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3922,7 +3762,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3946,7 +3785,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3970,7 +3808,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -3994,7 +3831,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4018,7 +3854,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4042,7 +3877,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4066,7 +3900,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4090,7 +3923,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4114,7 +3946,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4138,7 +3969,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4162,7 +3992,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4186,7 +4015,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4210,7 +4038,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4234,7 +4061,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4258,7 +4084,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4282,7 +4107,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4306,7 +4130,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4330,7 +4153,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4354,7 +4176,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4378,7 +4199,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4402,7 +4222,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4426,7 +4245,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4450,7 +4268,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4474,7 +4291,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4498,7 +4314,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4522,7 +4337,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4546,7 +4360,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4570,7 +4383,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4594,7 +4406,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4618,7 +4429,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4642,7 +4452,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4666,7 +4475,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4690,7 +4498,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4714,7 +4521,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4738,7 +4544,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4762,7 +4567,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4786,7 +4590,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4810,7 +4613,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4834,7 +4636,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4858,7 +4659,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4882,7 +4682,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4906,7 +4705,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4930,7 +4728,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4954,7 +4751,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -4978,7 +4774,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5002,7 +4797,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5026,7 +4820,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5050,7 +4843,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5074,7 +4866,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5098,7 +4889,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5122,7 +4912,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5146,7 +4935,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5170,7 +4958,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5194,7 +4981,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5218,7 +5004,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5242,7 +5027,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5266,7 +5050,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5290,7 +5073,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5314,7 +5096,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5338,7 +5119,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5362,7 +5142,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5386,7 +5165,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5410,7 +5188,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5434,7 +5211,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5458,7 +5234,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5482,7 +5257,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5506,7 +5280,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5530,7 +5303,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5554,7 +5326,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5578,7 +5349,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5602,7 +5372,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5626,7 +5395,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5650,7 +5418,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5674,7 +5441,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5698,7 +5464,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5722,7 +5487,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5746,7 +5510,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5770,7 +5533,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5794,7 +5556,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5818,7 +5579,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5842,7 +5602,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5866,7 +5625,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5890,7 +5648,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5914,7 +5671,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5938,7 +5694,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5962,7 +5717,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -5986,7 +5740,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6010,7 +5763,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6034,7 +5786,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6058,7 +5809,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6082,7 +5832,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6106,7 +5855,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6130,7 +5878,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6154,7 +5901,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6178,7 +5924,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6202,7 +5947,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6226,7 +5970,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6250,7 +5993,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6274,7 +6016,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6298,7 +6039,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6322,7 +6062,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6346,7 +6085,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6370,7 +6108,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6394,7 +6131,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6418,7 +6154,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6442,7 +6177,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6466,7 +6200,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6490,7 +6223,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6514,7 +6246,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6538,7 +6269,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6562,7 +6292,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6586,7 +6315,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6610,7 +6338,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6634,7 +6361,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6658,7 +6384,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6682,7 +6407,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6706,7 +6430,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6730,7 +6453,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6754,7 +6476,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6778,7 +6499,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6802,7 +6522,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6826,7 +6545,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6850,7 +6568,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6874,7 +6591,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6898,7 +6614,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6922,7 +6637,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6946,7 +6660,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6970,7 +6683,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -6994,7 +6706,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7018,7 +6729,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7042,7 +6752,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7066,7 +6775,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7090,7 +6798,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7114,7 +6821,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7138,7 +6844,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7162,7 +6867,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7186,7 +6890,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7210,7 +6913,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7234,7 +6936,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7258,7 +6959,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7282,7 +6982,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7306,7 +7005,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7330,7 +7028,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7354,7 +7051,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7378,7 +7074,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7402,7 +7097,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7426,7 +7120,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7450,7 +7143,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7474,7 +7166,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7498,7 +7189,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7522,7 +7212,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7546,7 +7235,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7570,7 +7258,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7594,7 +7281,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7618,7 +7304,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7642,7 +7327,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7666,7 +7350,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7690,7 +7373,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7714,7 +7396,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7738,7 +7419,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7762,7 +7442,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7786,7 +7465,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7810,7 +7488,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7834,7 +7511,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7858,7 +7534,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7882,7 +7557,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7906,7 +7580,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7930,7 +7603,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7954,7 +7626,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -7978,7 +7649,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8002,7 +7672,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8026,7 +7695,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8050,7 +7718,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8074,7 +7741,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8098,7 +7764,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8122,7 +7787,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8146,7 +7810,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8170,7 +7833,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8194,7 +7856,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8218,7 +7879,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8242,7 +7902,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8266,7 +7925,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8290,7 +7948,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8314,7 +7971,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8338,7 +7994,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8362,7 +8017,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8386,7 +8040,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8410,7 +8063,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8434,7 +8086,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8458,7 +8109,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8482,7 +8132,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8506,7 +8155,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8530,7 +8178,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8554,7 +8201,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8578,7 +8224,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8602,7 +8247,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8626,7 +8270,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8650,7 +8293,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8737,7 +8379,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8761,7 +8402,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8785,7 +8425,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8809,7 +8448,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8833,7 +8471,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8857,7 +8494,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8881,7 +8517,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8905,7 +8540,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8929,7 +8563,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8953,7 +8586,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -8977,7 +8609,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9001,7 +8632,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9025,7 +8655,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9049,7 +8678,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9073,7 +8701,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9097,7 +8724,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9121,7 +8747,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9145,7 +8770,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9169,7 +8793,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9193,7 +8816,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9217,7 +8839,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9241,7 +8862,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9265,7 +8885,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9289,7 +8908,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9313,7 +8931,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9337,7 +8954,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9361,7 +8977,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9385,7 +9000,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9409,7 +9023,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9433,7 +9046,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9457,7 +9069,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9481,7 +9092,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9505,7 +9115,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9529,7 +9138,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9553,7 +9161,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9577,7 +9184,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9601,7 +9207,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9625,7 +9230,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9649,7 +9253,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9673,7 +9276,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9697,7 +9299,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9721,7 +9322,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9745,7 +9345,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9769,7 +9368,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9793,7 +9391,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9817,7 +9414,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9841,7 +9437,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9865,7 +9460,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9889,7 +9483,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9913,7 +9506,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9937,7 +9529,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9961,7 +9552,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -9985,7 +9575,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10009,7 +9598,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10033,7 +9621,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10057,7 +9644,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10081,7 +9667,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10105,7 +9690,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10129,7 +9713,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10153,7 +9736,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10177,7 +9759,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10201,7 +9782,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10225,7 +9805,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10249,7 +9828,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10273,7 +9851,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10297,7 +9874,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10321,7 +9897,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10345,7 +9920,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10369,7 +9943,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10393,7 +9966,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10417,7 +9989,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10441,7 +10012,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10465,7 +10035,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10489,7 +10058,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10513,7 +10081,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10537,7 +10104,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10561,7 +10127,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10585,7 +10150,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10609,7 +10173,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10633,7 +10196,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10657,7 +10219,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10681,7 +10242,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10705,7 +10265,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10729,7 +10288,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10753,7 +10311,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10777,7 +10334,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10801,7 +10357,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10825,7 +10380,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10849,7 +10403,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10873,7 +10426,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10897,7 +10449,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10921,7 +10472,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10945,7 +10495,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10969,7 +10518,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -10993,7 +10541,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11017,7 +10564,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11041,7 +10587,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11065,7 +10610,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11089,7 +10633,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11113,7 +10656,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11137,7 +10679,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11161,7 +10702,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11185,7 +10725,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11209,7 +10748,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11233,7 +10771,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11257,7 +10794,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11281,7 +10817,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11305,7 +10840,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11329,7 +10863,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11353,7 +10886,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11377,7 +10909,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11401,7 +10932,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11425,7 +10955,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11449,7 +10978,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11473,7 +11001,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11497,7 +11024,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11521,7 +11047,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11545,7 +11070,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11569,7 +11093,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11593,7 +11116,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11617,7 +11139,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11641,7 +11162,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11665,7 +11185,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11689,7 +11208,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11713,7 +11231,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11737,7 +11254,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11761,7 +11277,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11785,7 +11300,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11809,7 +11323,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11833,7 +11346,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11857,7 +11369,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11881,7 +11392,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11905,7 +11415,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11929,7 +11438,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11953,7 +11461,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -11977,7 +11484,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12001,7 +11507,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12025,7 +11530,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12049,7 +11553,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12073,7 +11576,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12097,7 +11599,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12121,7 +11622,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12145,7 +11645,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12169,7 +11668,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12193,7 +11691,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12217,7 +11714,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12241,7 +11737,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12265,7 +11760,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12289,7 +11783,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12313,7 +11806,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12337,7 +11829,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12361,7 +11852,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12385,7 +11875,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12409,7 +11898,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12433,7 +11921,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12457,7 +11944,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12481,7 +11967,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12505,7 +11990,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12529,7 +12013,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12553,7 +12036,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12577,7 +12059,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12601,7 +12082,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12625,7 +12105,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12649,7 +12128,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12673,7 +12151,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12697,7 +12174,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12721,7 +12197,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12745,7 +12220,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12769,7 +12243,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12793,7 +12266,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12817,7 +12289,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12841,7 +12312,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12865,7 +12335,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12889,7 +12358,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12913,7 +12381,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12937,7 +12404,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12961,7 +12427,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -12985,7 +12450,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13009,7 +12473,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13033,7 +12496,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13057,7 +12519,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13081,7 +12542,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13105,7 +12565,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13129,7 +12588,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13153,7 +12611,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13177,7 +12634,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13201,7 +12657,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13225,7 +12680,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13249,7 +12703,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13273,7 +12726,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13297,7 +12749,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13321,7 +12772,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13345,7 +12795,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13369,7 +12818,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13393,7 +12841,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13417,7 +12864,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13441,7 +12887,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13465,7 +12910,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13489,7 +12933,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13513,7 +12956,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13537,7 +12979,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13561,7 +13002,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13585,7 +13025,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13609,7 +13048,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13633,7 +13071,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13657,7 +13094,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13681,7 +13117,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13705,7 +13140,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13729,7 +13163,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13753,7 +13186,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13777,7 +13209,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13801,7 +13232,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13825,7 +13255,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13849,7 +13278,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13873,7 +13301,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13897,7 +13324,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13921,7 +13347,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13945,7 +13370,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13969,7 +13393,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -13993,7 +13416,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14017,7 +13439,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14041,7 +13462,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14065,7 +13485,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14089,7 +13508,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14113,7 +13531,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14137,7 +13554,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14161,7 +13577,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14185,7 +13600,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14209,7 +13623,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14233,7 +13646,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14257,7 +13669,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14281,7 +13692,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14305,7 +13715,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14329,7 +13738,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14353,7 +13761,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14377,7 +13784,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14401,7 +13807,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14425,7 +13830,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14449,7 +13853,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14473,7 +13876,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14497,7 +13899,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14521,7 +13922,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14545,7 +13945,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14569,7 +13968,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14593,7 +13991,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14617,7 +14014,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14641,7 +14037,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14665,7 +14060,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14689,7 +14083,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14713,7 +14106,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14737,7 +14129,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14761,7 +14152,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14785,7 +14175,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14809,7 +14198,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14833,7 +14221,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14857,7 +14244,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14881,7 +14267,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14905,7 +14290,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14929,7 +14313,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14953,7 +14336,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -14977,7 +14359,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15001,7 +14382,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15025,7 +14405,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15049,7 +14428,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15073,7 +14451,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15097,7 +14474,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15121,7 +14497,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15145,7 +14520,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15169,7 +14543,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15193,7 +14566,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15217,7 +14589,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15241,7 +14612,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15265,7 +14635,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15289,7 +14658,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15313,7 +14681,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15337,7 +14704,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15361,7 +14727,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15385,7 +14750,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15409,7 +14773,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15433,7 +14796,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15457,7 +14819,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15481,7 +14842,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15505,7 +14865,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15529,7 +14888,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15553,7 +14911,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15577,7 +14934,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15601,7 +14957,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15625,7 +14980,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15649,7 +15003,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15673,7 +15026,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15697,7 +15049,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15721,7 +15072,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15745,7 +15095,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15769,7 +15118,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15793,7 +15141,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15817,7 +15164,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15841,7 +15187,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15865,7 +15210,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15889,7 +15233,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15913,7 +15256,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15937,7 +15279,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15961,7 +15302,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -15985,7 +15325,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16009,7 +15348,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16033,7 +15371,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16057,7 +15394,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16081,7 +15417,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16105,7 +15440,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16129,7 +15463,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16153,7 +15486,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16177,7 +15509,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16201,7 +15532,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16225,7 +15555,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16249,7 +15578,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16273,7 +15601,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16297,7 +15624,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16321,7 +15647,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16345,7 +15670,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16369,7 +15693,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16393,7 +15716,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16417,7 +15739,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16441,7 +15762,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",
@@ -16465,7 +15785,6 @@
       "optional": false,
       "layer": "slashed.tokens",
       "bundles": [
-        "essential",
         "full",
         "optimal",
         "optimal-components",

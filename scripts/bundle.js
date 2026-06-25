@@ -242,7 +242,6 @@ function writeSizeBadge(label) {
 
 function bundle() {
   getBundles().forEach(buildOne);
-  writeSizeBadge('essential');
   writeSizeBadge('optimal');
 }
 

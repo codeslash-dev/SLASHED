@@ -7,7 +7,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
-const BUNDLE  = path.join(process.cwd(), 'dist', 'slashed.essential.css');
+const BUNDLE  = path.join(process.cwd(), 'dist', 'slashed.optimal.css');
 
 async function setup(page, html) {
   await page.setViewportSize({ width: 1200, height: 900 });
