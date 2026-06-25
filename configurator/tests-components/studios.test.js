@@ -25,7 +25,7 @@ beforeEach(() => clearAll());
 const STUDIOS = [
   ['Typography Studio', TypographyStudio, ['The quick brown fox', 'Fluid scale']],
   ['Color Studio', ColorStudio, ['Source pairs', 'Role map', 'Auto-derived pair', 'Contrast & palette tuning']],
-  ['Spacing Studio', SpacingStudio, ['Global scale', 'Page rhythm', 'Component rhythm']],
+  ['Spacing Studio', SpacingStudio, ['Space map', 'Stack rhythm', 'Input gap', 'Global scale']],
   ['Layout Studio', LayoutStudio, ['Containers', 'Grid & composition', 'Global anchors']],
   ['Shape Studio', ShapeStudio, ['Radius system', 'Focus ring', 'Focused action']],
   ['Shadow Studio', ShadowStudio, ['Elevation strength', 'Box shadows', 'Media card glow']],
