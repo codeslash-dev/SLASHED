@@ -1,10 +1,11 @@
 <script>
   import { overrides, ui, patchOverrides, setOverride, dragSetOverride, endDrag } from '../lib/store.svelte.js';
-  import { tokenByName } from '../lib/model.js';
+  import { tokenByName, dependentsCount } from '../lib/model.js';
   import { sectionTokenNames, smartSettingsFor } from '../lib/domainSettings.js';
   import { buildPreviewDeclarations } from '../lib/preview.js';
   import { getFold, setFold } from '../lib/foldState.js';
   import TokenRow from './TokenRow.svelte';
+  import FriendlyControl from './FriendlyControl.svelte';
 
   const stageStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
 
@@ -13,6 +14,10 @@
 
   const exists = (name) => tokenByName.has(name);
   const token = (name) => tokenByName.get(name);
+
+  function sectionDrives(section) {
+    return sectionTokenNames(section).filter(exists).reduce((acc, name) => acc + dependentsCount(name), 0);
+  }
 
   function cleanPatch(section, patch) {
     const names = new Set(sectionTokenNames(section).filter(exists));
@@ -66,6 +71,8 @@
 {#if sections.length}
   <div class="smart">
     {#each sections as section (section.id)}
+      {@const totalDrives = sectionDrives(section)}
+      {@const tokenCount = sectionTokenNames(section).filter(exists).length}
       <details
         class="cfg-card smart__section"
         open={getFold(`${domainId}:${section.id}`, true)}
@@ -75,6 +82,7 @@
           <span class="smart__chev" aria-hidden="true">›</span>
           <span class="smart__title">{section.title}</span>
           {#if section.hint}<span class="smart__hint">{section.hint}</span>{/if}
+          {#if totalDrives > 0}<span class="smart__drives">drives {totalDrives}</span>{/if}
         </summary>
 
         <div class="smart__actions" aria-label="{section.title} actions">
@@ -85,7 +93,7 @@
               {/each}
             </div>
           {/if}
-          <button type="button" class="cfg-btn cfg-btn--ghost cfg-btn--sm smart__reset" onclick={() => resetSection(section)}>Reset section</button>
+          <button type="button" class="cfg-btn cfg-btn--ghost cfg-btn--sm smart__reset" onclick={() => resetSection(section)}>Reset section ({tokenCount})</button>
         </div>
 
         {#if section.kind === 'sliders'}
@@ -143,14 +151,14 @@
             </div>
             <div class="smart__rows">
               {#each [...section.durationTokens, ...section.easingTokens].filter(exists) as name (name)}
-                <TokenRow token={token(name)} label={name.replace('--sf-', '').replaceAll('-', ' ')} help="Editable timing token; use raw mode for calc(), var() or cubic-bezier()." showRawInfo forceEditable />
+                <FriendlyControl token={token(name)} label={name.replace('--sf-', '').replaceAll('-', ' ')} help="Editable timing token; use raw mode for calc(), var() or cubic-bezier()." />
               {/each}
             </div>
           </div>
         {:else}
           <div class="smart__rows">
             {#each section.controls.filter((c) => exists(c.token)) as c (c.token)}
-              <TokenRow token={token(c.token)} label={c.label} help={c.help} showRawInfo forceEditable />
+              <FriendlyControl token={token(c.token)} label={c.label} help={c.help} />
             {/each}
           </div>
         {/if}
@@ -172,6 +180,7 @@
   .smart__chev { color: var(--cfg-text-faint); transition: transform .14s; }
   .smart__title { font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
   .smart__hint { color: var(--cfg-text-faint); font-size: 12px; flex: 1 1 260px; }
+  .smart__drives { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--cfg-accent); border: 1px solid color-mix(in oklab, var(--cfg-accent) 35%, transparent); border-radius: 999px; padding: 2px 7px; }
   .smart__actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--cfg-border); flex-wrap: wrap; }
   .smart__reset { margin-left: auto; }
   .smart__presets { display: flex; gap: 8px; flex-wrap: wrap; }

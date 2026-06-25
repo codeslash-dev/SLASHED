@@ -31,9 +31,10 @@ export default defineConfig({
     viewport: { width: 1600, height: 1000 },
   },
   projects: [
-    { name: 'chromium', use: { browserName: 'chromium' } },
+    { name: 'chromium', use: { browserName: 'chromium' }, testIgnore: '**/screenshots.spec.js' },
     { name: 'firefox', use: { browserName: 'firefox' }, testMatch: CROSS_ENGINE },
     { name: 'webkit', use: { browserName: 'webkit' }, testMatch: CROSS_ENGINE },
+    { name: 'screenshots', use: { browserName: 'chromium' }, testMatch: '**/screenshots.spec.js' },
   ],
   webServer: {
     command: 'npm run preview -- --port 4173 --strictPort',

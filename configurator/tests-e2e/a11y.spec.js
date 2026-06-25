@@ -62,13 +62,14 @@ test('segmented controls expose aria-pressed; info buttons aria-expanded', async
   await expect(page.locator('.out [aria-label="Output view"] [aria-pressed="true"]')).toHaveCount(1);
   await expect(page.locator('.out [aria-label="Output format"] [aria-pressed="true"]')).toHaveCount(1);
   // ⓘ popover toggles aria-expanded and reveals the raw token.
-  await sideItem(page, 'Layout').click();
-  const row = page.locator('.row', { hasText: 'Reading width' }).first();
+  // Gradients domain has SmartSettings with gradient kind, which renders TokenRow with showRawInfo.
+  await sideItem(page, 'Gradients').click();
+  const row = page.locator('.row', { hasText: 'Raw gradient' }).first();
   const info = row.locator('.row__info-btn');
   await expect(info).toHaveAttribute('aria-expanded', 'false');
   await info.click();
   await expect(info).toHaveAttribute('aria-expanded', 'true');
-  await expect(row.locator('.row__raw')).toContainText('--sf-container-prose');
+  await expect(row.locator('.row__raw')).toContainText('--sf-gradient-');
 });
 
 test('search filters the catalogue and shows an empty state for no match', async ({ page }) => {
