@@ -5,7 +5,7 @@ name: Publish dist branch
 # orphan (no shared history with main) and contains only the generated
 # bundles at its root, so consumers can reference them via:
 #
-#   https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.essential.min.css
+#   https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css
 #
 # Source files (core/, optional/, etc.) live only on main; built files live
 # only on dist. This keeps main free of generated artifacts while still
