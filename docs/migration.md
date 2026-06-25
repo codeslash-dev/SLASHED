@@ -3,7 +3,7 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
-## SLASHED 0.6.x → 0.7.0
+## SLASHED 0.6.10 → 0.6.11
 
 ### Color source tokens renamed
 
