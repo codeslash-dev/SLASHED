@@ -1,6 +1,7 @@
 <script>
   import { overrides, clearOverride, setOverride } from '../lib/store.svelte.js';
   import { controlForToken } from '../lib/controlSchema.js';
+  import { dependentsCount } from '../lib/model.js';
   import TokenEditor from './TokenEditor.svelte';
   import ControlPreview from './ControlPreview.svelte';
   let { token, label = '', help = '', schema = {}, showToken = false } = $props();
@@ -9,6 +10,7 @@
   const desc = $derived(help || meta.description);
   const modified = $derived(overrides[token.name] != null);
   const activeValue = $derived(overrides[token.name] ?? token.value ?? '');
+  const drives = $derived(dependentsCount(token?.name ?? ''));
   let rawOpen = $state(false);
 
   function onSelect(e) {
@@ -20,7 +22,10 @@
   <div class="friendly__copy">
     <div class="friendly__top">
       <strong>{title}</strong>
-      {#if modified}<span>modified</span>{/if}
+      {#if modified}<span class="friendly__mod">modified</span>{/if}
+      {#if drives > 0}
+        <span class="friendly__drives" class:friendly__drives--master={drives >= 10} title="{drives} token{drives === 1 ? '' : 's'} reference this via var()">drives {drives}</span>
+      {/if}
     </div>
     {#if desc}<p>{desc}</p>{/if}
     {#if showToken || rawOpen}<code class="friendly__token">{token.name}</code>{/if}
@@ -53,7 +58,9 @@
   .friendly__copy { min-width: 0; display:grid; gap:4px; }
   .friendly__top { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .friendly__top strong { font-size: 13px; }
-  .friendly__top span { font-size: 10px; text-transform: uppercase; color: var(--cfg-accent); border: 1px solid color-mix(in oklab, var(--cfg-accent) 40%, transparent); border-radius: 999px; padding: 1px 6px; }
+  .friendly__mod { font-size: 10px; text-transform: uppercase; color: var(--cfg-accent); border: 1px solid color-mix(in oklab, var(--cfg-accent) 40%, transparent); border-radius: 999px; padding: 1px 6px; }
+  .friendly__drives { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--cfg-text-faint); border: 1px solid var(--cfg-border); border-radius: 999px; padding: 1px 6px; }
+  .friendly__drives--master { color: var(--cfg-accent); border-color: color-mix(in oklab, var(--cfg-accent) 40%, transparent); }
   .friendly__copy p { margin: 0; color: var(--cfg-text-muted); font-size: 12px; }
   .friendly__token { color: var(--cfg-text-faint); font-size: 11px; word-break: break-all; }
   .friendly__editor { min-width: 0; }

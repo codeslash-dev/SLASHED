@@ -26,5 +26,11 @@
   .studio__steps { display: grid; gap: 6px; margin-top: 6px; list-style: none; padding: 0; }
   .studio__steps li { padding: 7px 9px; border: 1px solid var(--cfg-border); border-radius: 999px; background: var(--cfg-bg-2); color: var(--cfg-text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
   .studio__surface { min-width: 0; }
-  @media (max-width: 820px) { .studio { grid-template-columns: 1fr; padding: 12px; } .studio__copy { position: static; } .studio__steps { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 820px) {
+    .studio { grid-template-columns: 1fr; padding: 12px; }
+    .studio__copy { position: static; }
+    .studio__copy h3 { font-size: clamp(18px, 4vw, 26px); }
+    .studio__copy span { display: none; }
+    .studio__steps { grid-template-columns: repeat(3, 1fr); }
+  }
 </style>

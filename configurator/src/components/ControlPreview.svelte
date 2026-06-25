@@ -4,6 +4,13 @@
   let { token, value = '', type = 'text', label = '' } = $props();
   const active = $derived(value || overrides[token?.name] || token?.value || '');
   const stageStyle = $derived(buildPreviewDeclarations(overrides, ui.previewTheme));
+  const LABELS = {
+    color: 'colour', font: 'typeface', radius: 'corner', shadow: 'elevation',
+    motion: 'timing', 'line-height': 'leading', wrap: 'text wrap',
+    opacity: 'opacity', gradient: 'gradient', border: 'border style',
+    media: 'object fit', scale: 'scale', spacing: 'size',
+  };
+  const caption = $derived(LABELS[type] ?? type);
 </script>
 
 <div class="ctrl-preview" style={stageStyle} title={token?.name || label}>
@@ -37,6 +44,7 @@
     <div class="ctrl-preview__spacing"><span style:inline-size={active || '40%'}></span></div>
   {/if}
 </div>
+<p class="ctrl-preview__cap">{caption}</p>
 
 <style>
   .ctrl-preview { min-height: 54px; border: 1px solid var(--cfg-border); border-radius: var(--cfg-radius-s); background: var(--cfg-bg-2); padding: 10px; overflow: hidden; color: var(--sf-color-text, var(--cfg-text)); }
@@ -59,5 +67,6 @@
   .ctrl-preview__scale span { inline-size:30px; block-size:30px; border-radius:8px; background:var(--cfg-accent-strong); }
   .ctrl-preview__spacing { min-height: 34px; display:flex; align-items:center; }
   .ctrl-preview__spacing span { display:block; block-size: 14px; max-inline-size:100%; min-inline-size:12px; border-radius:999px; background: var(--cfg-accent-strong); }
+  .ctrl-preview__cap { margin: 2px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--cfg-text-faint); text-align: center; }
   @keyframes cp-move { to { transform: translateX(min(120px, 35vw)); } }
 </style>

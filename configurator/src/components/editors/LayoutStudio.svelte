@@ -88,4 +88,5 @@
   .legend b { font-size: 11px; color: var(--cfg-text-muted); text-transform: uppercase; }
   @media (max-width: 840px) { .composition, .measure-lab { grid-template-columns: 1fr; } }
   @media (max-width: 640px) { .workflow, .device-strip { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .workflow { grid-template-columns: repeat(4, minmax(110px, 1fr)); overflow-x: auto; padding-bottom: 4px; } }
 </style>
