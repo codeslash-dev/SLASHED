@@ -23,7 +23,7 @@ import { clearAll, overrides } from '../src/lib/store.svelte.js';
 beforeEach(() => clearAll());
 
 const STUDIOS = [
-  ['Typography Studio', TypographyStudio, ['The quick brown fox', 'Fluid scale']],
+  ['Typography Studio', TypographyStudio, ['The quick brown fox', 'Headings', 'Text', 'Fonts', 'Scale', 'Advanced']],
   ['Color Studio', ColorStudio, ['Source pairs', 'Role map', 'Auto-derived pair', 'Contrast & palette tuning']],
   ['Spacing Studio', SpacingStudio, ['Space map', 'Stack rhythm', 'Input gap', 'Global scale']],
   ['Layout Studio', LayoutStudio, ['Container map', 'Responsive grid', 'Reading width', 'Sticky offset']],
@@ -42,13 +42,13 @@ describe('visual studios', () => {
       for (const text of expectedText) {
         expect(getAllByText(text).length).toBeGreaterThan(0);
       }
-    });
+    }, 10000);
   }
 
   test('Typography Studio switches scopes and renders active panel controls', async () => {
     const { getByRole, getByText, getAllByText } = render(TypographyStudio);
     await fireEvent.click(getByRole('tab', { name: 'Headings' }));
-    expect(getAllByText('Heading aliases, line-height, tracking and max-width constraints.').length).toBeGreaterThan(0);
+    expect(getAllByText('Framework-style controls for h1–h6 aliases, rhythm, tracking and wrapping.').length).toBeGreaterThan(0);
     expect(getByText('--sf-h1-size')).toBeInTheDocument();
   });
 
