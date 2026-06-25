@@ -29,9 +29,10 @@ test('display tab: ratio selects are read-only (shared with type)', async ({ pag
   await gotoClean(page);
   await sideItem(page, 'Typography').click();
   await page.locator('.tabs button[role="tab"]', { hasText: 'Scale' }).click();
-  const display = page.locator('.gen').nth(1);
-  await expect(display.locator('select[disabled]')).toHaveCount(2);
-  await expect(display.locator('.gen__hint').first()).toContainText('reuses the type ratios');
+  const gen = page.locator('.gen').first();
+  await gen.locator('.seg__btn', { hasText: 'Display' }).click();
+  await expect(gen.locator('select[disabled]')).toHaveCount(2);
+  await expect(gen.locator('.gen__hint').first()).toContainText('reuses the type ratios');
 });
 
 test('viewport range is shared: space sets it, type seeds it, reset clears it', async ({ page }) => {
