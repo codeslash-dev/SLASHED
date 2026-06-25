@@ -58,6 +58,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [0.6.11] - 2026-06-23
 
+### ⚠️ Breaking Changes
+- **tokens:** removed `--sf-color-error` family (7 tokens: `--sf-color-error`, `-dark`, `-light`, `-muted`, `-strong`, `-subtle`, `--sf-color-text--on-error`) — use `--sf-color-danger` equivalents; see `docs/migration.md`
+- **tokens:** brand + status source tokens renamed from `-light`/`-dark` to `-source-light`/`-source-dark` (e.g. `--sf-color-primary-light` → `--sf-color-primary-source-light`); resolved semantic tokens are unchanged
+
 ### Features
 - **configurator:** add shade ramp without new utility classes
 - **docs:** add CI gate to keep llm-guide.md in sync with token registry
@@ -131,14 +135,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Bug Fixes
 - remove trailing comma in artifacts.json
 
-## [0.6.4] - 2026-06-20
-
-### Features
-- merge per-size typography sub-properties into core/tokens.css
-
-### Bug Fixes
-- remove trailing comma in artifacts.json
-
 ## [0.6.3] - 2026-06-19
 
 ### Bug Fixes
@@ -160,15 +156,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [0.6.0] - 2026-06-19
 
-### Breaking Changes
-- flatten gap tokens to base→semantic→component model
-- v0.6.0 usability-driven token-surface reduction
-
-### Bug Fixes
-- pin undici to >=7.28.0 via overrides to resolve high-severity CVEs
-
-## [0.6.0] - 2026-06-18
-
 A usability-driven token-surface reduction: ~182 tokens removed from the public
 API (876 → 694) by cutting power-user/vestigial families that real marketing,
 landing, and business sites never reach for, while keeping (and clarifying) the
@@ -187,6 +174,7 @@ families they do. See `docs/migration.md` for the upgrade guide.
 - **tokens:** `--sf-color-text--on-inverse` now correctly references `--sf-color-inverse` (was `--sf-color-text--inverse`)
 - **tokens:** add `var(--sf-color-bg, …)` fallback to `--sf-focus-ring-shadow` for contexts where `--sf-color-bg` is unset
 - **forms:** scope button default styles to `:not([class*="sf-"])` to avoid overriding Slashed UI component classes
+- **deps:** pin undici to >=7.28.0 via overrides to resolve high-severity CVEs
 
 ### Changed
 - **tokens:** alpha transparency for brand ghost/subtle/muted tokens now uses `oklch(from …)` syntax instead of `color-mix(…, transparent)` — equivalent output, better color-space fidelity
