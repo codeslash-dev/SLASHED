@@ -24,7 +24,7 @@ beforeEach(() => clearAll());
 
 const STUDIOS = [
   ['Typography Studio', TypographyStudio, ['The quick brown fox', 'Fluid scale']],
-  ['Color Studio', ColorStudio, ['Main colors', 'Semantic role preview', 'Contrast & palette tuning']],
+  ['Color Studio', ColorStudio, ['Source pairs', 'Role map', 'Auto-derived pair', 'Contrast & palette tuning']],
   ['Spacing Studio', SpacingStudio, ['Global scale', 'Page rhythm', 'Component rhythm']],
   ['Layout Studio', LayoutStudio, ['Containers', 'Grid & composition', 'Global anchors']],
   ['Shape Studio', ShapeStudio, ['Radius system', 'Focus ring', 'Focused action']],
@@ -36,11 +36,11 @@ const STUDIOS = [
 describe('visual studios', () => {
   for (const [name, Component, expectedText] of STUDIOS) {
     test(`${name} mounts with preview and curated controls`, () => {
-      const { container, getByText } = render(Component);
+      const { container, getByText, getAllByText } = render(Component);
       expect(container.querySelector('.studio')).toBeTruthy();
       expect(getByText(name)).toBeInTheDocument();
       for (const text of expectedText) {
-        expect(getByText(text)).toBeInTheDocument();
+        expect(getAllByText(text).length).toBeGreaterThan(0);
       }
     });
   }
