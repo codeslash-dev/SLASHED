@@ -220,7 +220,7 @@
         />
       {/if}
 
-      {#if smartSections.length}
+      {#if smartSections.length && domain.id !== 'colors' && domain.id !== 'gradients'}
         <SmartSettings domainId={domain.id} />
       {/if}
 
