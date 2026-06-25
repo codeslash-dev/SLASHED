@@ -4,6 +4,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.15] - 2026-06-25
+
+### Features
+- **configurator:** screenshot QA, mobile ergonomics, control UX
+- **configurator:** deepen remaining studio workflows
+- **configurator:** deepen layout studio workflow
+- **configurator:** deepen spacing studio workflow
+- **configurator:** deepen color studio workflow
+- **configurator:** expand studio redesign controls
+- **configurator:** deepen visual studios
+- **configurator:** redesign visual editor panels
+
+### Bug Fixes
+- **configurator:** address CodeRabbit review comments
+- **configurator:** address all open PR #402 review threads
+- **configurator:** correct a11y test to use Gradients domain for row__info-btn
+- **configurator:** resolve CI failures and address CodeRabbit review comments on PR #401
+
 ## [0.6.14] - 2026-06-24
 
 ### Bug Fixes
