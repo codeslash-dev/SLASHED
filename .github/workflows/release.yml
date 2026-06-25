@@ -100,12 +100,6 @@ jobs:
           tag_name: ${{ steps.version.outputs.tag }}
           body: ${{ steps.changelog.outputs.notes }}
           files: |
-            dist/slashed.essential.css
-            dist/slashed.essential.min.css
-            dist/slashed.essential.min.css.map
-            dist/slashed.essential.flat.css
-            dist/slashed.essential.flat.min.css
-            dist/slashed.essential.flat.min.css.map
             dist/slashed.optimal.css
             dist/slashed.optimal.min.css
             dist/slashed.optimal.min.css.map
