@@ -270,5 +270,14 @@ code, kbd { font-family: var(--cfg-mono); }
   line-height: 1.4;
 }
 
+/* ─── Touch targets (WCAG 2.5.5 — 44×44px minimum) ────────────────────── */
+@media (max-width: 980px) {
+  .cfg-btn           { min-height: 44px; padding-block: 10px; }
+  .cfg-btn--sm       { min-height: 36px; padding-block: 6px; }
+  .cfg-input,
+  .cfg-select        { min-height: 44px; padding-block: 10px; }
+  input[type='range'] { min-height: 36px; }
+}
+
 /* No per-theme overrides needed: every chrome colour derives from --sf-* tokens
    that already adapt to the framework's [data-theme] light/dark switch. */
