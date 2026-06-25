@@ -7,6 +7,8 @@
   import FriendlyControl from '../FriendlyControl.svelte';
   import ShadeRamp from '../ShadeRamp.svelte';
   import StudioFrame from './StudioFrame.svelte';
+  import QuickKnobs from '../QuickKnobs.svelte';
+  import { KNOBS_BY_DOMAIN } from '../../lib/domains.js';
 
   const main = BRAND_COLOR_KEYS.filter((c) => c.group === 'brand');
   const status = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
@@ -20,6 +22,7 @@
     '--sf-focus-ring-offset',
   ].map((name) => tokenByName.get(name)).filter(Boolean);
   const workflow = ['Source pairs', 'Role map', 'Shade ramp', 'Usage check'];
+  const knobs = KNOBS_BY_DOMAIN.colors ?? [];
 </script>
 
 <StudioFrame title="Color Studio" description="Set brand sources first, then verify semantic roles, status colors, shade ramp, contrast, and real usage." tone="color">
@@ -63,6 +66,9 @@
     <details><summary>Contrast & palette tuning</summary><div class="rows">{#each tuning as token (token.name)}<FriendlyControl {token} showToken />{/each}</div></details>
     <details><summary>Semantic role preview</summary><ColorAssignments /></details>
     <details><summary>Generated shade ramp</summary><ShadeRamp /></details>
+    {#if knobs.length}
+      <QuickKnobs {knobs} title="Scaling" blurb="Contrast and focus controls live inside Color Studio." />
+    {/if}
   </div>
 </StudioFrame>
 

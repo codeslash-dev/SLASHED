@@ -1,13 +1,19 @@
 <script>
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
+  import QuickKnobs from '../QuickKnobs.svelte';
+  import { KNOBS_BY_DOMAIN } from '../../lib/domains.js';
   import StudioControls from './StudioControls.svelte';
   import StudioWorkflow from './StudioWorkflow.svelte';
+  import StylePresetRow from '../StylePresetRow.svelte';
+  import { STYLE_PRESETS_BY_DOMAIN } from '../../lib/stylePresets.js';
 
   const groups = resolveStudioGroups(STUDIO_GROUPS.borders);
+  const stylePresets = STYLE_PRESETS_BY_DOMAIN.borders;
   const workflow = ['Radius', 'Borders', 'Dividers', 'Focus'];
   const radii = ['xs', 's', 'm', 'l', 'xl', 'full'];
   const components = ['Button', 'Input', 'Card', 'Badge'];
+  const knobs = KNOBS_BY_DOMAIN.borders ?? [];
 </script>
 
 <StudioFrame title="Shape Studio" description="Radius, border, divider and focus ring shown as a complete shape system — from the corner scale down to accessible focus outlines.">
@@ -37,6 +43,14 @@
       <article><b>Divider rhythm</b><p>Content before divider</p><hr /><p>Content after divider</p></article>
       <article class="focus-card"><b>Focus ring</b><button>Focused action</button><small>Width + offset preview</small></article>
     </section>
+
+    {#if stylePresets}
+      <StylePresetRow title={stylePresets.title} presets={stylePresets.presets} />
+    {/if}
+
+    {#if knobs.length}
+      <QuickKnobs {knobs} title="Scaling" blurb="Global multiplier controls live inside this Studio." />
+    {/if}
 
     <StudioControls {groups} />
   </div>

@@ -2,10 +2,14 @@
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
+  import ScaleGenerator from '../ScaleGenerator.svelte';
+  import QuickKnobs from '../QuickKnobs.svelte';
+  import { KNOBS_BY_DOMAIN } from '../../lib/domains.js';
 
   const steps = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
   const workflow = ['Scale', 'Rhythm', 'Components', 'Sections'];
   const groups = resolveStudioGroups(STUDIO_GROUPS.spacing);
+  const knobs = KNOBS_BY_DOMAIN.spacing ?? [];
 </script>
 
 <StudioFrame title="Spacing Studio" description="Scale ruler, rhythm and layout preview — from the global space multiplier down to real component and section gaps.">
@@ -48,6 +52,9 @@
       <article><b>Form</b><label for="spacing-field">Input gap</label><input id="spacing-field" placeholder="Field spacing" /></article>
       <article><b>Cluster</b><div><span>A</span><span>B</span><span>C</span></div></article>
     </section>
+
+    <ScaleGenerator kinds={['space']} collapsible />
+    <QuickKnobs {knobs} title="Scaling" blurb="Global spacing multipliers live inside Spacing Studio so All variables can remain the only section below it." />
 
     <StudioControls {groups} />
   </div>

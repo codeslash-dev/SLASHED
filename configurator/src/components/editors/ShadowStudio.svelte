@@ -1,12 +1,18 @@
 <script>
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
+  import QuickKnobs from '../QuickKnobs.svelte';
+  import { KNOBS_BY_DOMAIN } from '../../lib/domains.js';
   import StudioControls from './StudioControls.svelte';
   import StudioWorkflow from './StudioWorkflow.svelte';
+  import StylePresetRow from '../StylePresetRow.svelte';
+  import { STYLE_PRESETS_BY_DOMAIN } from '../../lib/stylePresets.js';
 
   const levels = ['xs', 's', 'm', 'l', 'xl', '2xl'];
   const workflow = ['Elevation', 'Surfaces', 'Overlays', 'Media'];
   const groups = resolveStudioGroups(STUDIO_GROUPS.shadows);
+  const stylePresets = STYLE_PRESETS_BY_DOMAIN.shadows;
+  const knobs = KNOBS_BY_DOMAIN.shadows ?? [];
 </script>
 
 <StudioFrame title="Shadow Studio" description="Elevation stack shows strength, colour and dark-mode character across cards, popovers, dialogs and media.">
@@ -30,6 +36,14 @@
       <article class="media"><h4>Media card glow</h4><p>Text and image overlays use the same shadow language.</p></article>
       <article class="text-shadow"><small>Text shadows</small><h3>Readable over media</h3><p>Drop and text shadows protect contrast on rich backgrounds.</p></article>
     </section>
+
+    {#if stylePresets}
+      <StylePresetRow title={stylePresets.title} presets={stylePresets.presets} />
+    {/if}
+
+    {#if knobs.length}
+      <QuickKnobs {knobs} title="Scaling" blurb="Global multiplier controls live inside this Studio." />
+    {/if}
 
     <StudioControls {groups} />
   </div>

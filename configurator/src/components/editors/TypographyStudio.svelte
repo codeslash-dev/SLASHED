@@ -3,6 +3,9 @@
   import { TYPOGRAPHY_PANELS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
   import StudioControls from './StudioControls.svelte';
+  import ScaleGenerator from '../ScaleGenerator.svelte';
+  import QuickKnobs from '../QuickKnobs.svelte';
+  import { KNOBS_BY_DOMAIN } from '../../lib/domains.js';
 
   let active = $state('Overview');
   const panel = $derived(TYPOGRAPHY_PANELS.find((p) => p.id === active) ?? TYPOGRAPHY_PANELS[0]);
@@ -11,6 +14,7 @@
   const bodyFont = $derived(overrides['--sf-font-body'] || 'var(--sf-font-body)');
   const monoFont = $derived(overrides['--sf-font-mono'] || 'var(--sf-font-mono)');
   const scale = $derived(overrides['--sf-text-scale'] || 'var(--sf-text-scale, 1)');
+  const knobs = KNOBS_BY_DOMAIN.typography ?? [];
 </script>
 
 <StudioFrame title="Typography Studio" description="The live specimen is your canvas: pick a scope, set the font, scale, rhythm and wrap — and see the result next to the controls." tone="type">
@@ -45,6 +49,9 @@
       <article><b>Body rhythm</b><span>Line height and content gap define reading comfort.</span></article>
       <article><b>Code / mono</b><code style:font-family={monoFont}>const token = true;</code></article>
     </div>
+
+    <ScaleGenerator kinds={['type', 'display']} collapsible />
+    <QuickKnobs {knobs} title="Scaling" blurb="Global text scaling lives inside Typography Studio so the panel stays Header → Studio → All variables." />
 
     <StudioControls {groups} />
   </div>

@@ -1,6 +1,8 @@
 <script>
   import { STUDIO_GROUPS, resolveStudioGroups } from '../../lib/studioSchema.js';
   import StudioFrame from './StudioFrame.svelte';
+  import QuickKnobs from '../QuickKnobs.svelte';
+  import { KNOBS_BY_DOMAIN } from '../../lib/domains.js';
   import StudioControls from './StudioControls.svelte';
   import StudioWorkflow from './StudioWorkflow.svelte';
 
@@ -8,6 +10,7 @@
   const workflow = ['Duration', 'Easing', 'Presets', 'Reduced'];
   const durations = ['instant', 'fast', 'normal', 'slow'];
   const easings = ['linear', 'in', 'out', 'spring'];
+  const knobs = KNOBS_BY_DOMAIN.motion ?? [];
 </script>
 
 <StudioFrame title="Motion Studio" description="Durations, easing and animation presets shown as live interactions: see timing, curves and UI states without guessing from token names.">
@@ -41,6 +44,10 @@
       <p>When motion scale approaches zero, the interface should still communicate state changes with opacity and color.</p>
       <div><span></span><span></span><span></span></div>
     </section>
+
+    {#if knobs.length}
+      <QuickKnobs {knobs} title="Scaling" blurb="Global multiplier controls live inside this Studio." />
+    {/if}
 
     <StudioControls {groups} />
   </div>
