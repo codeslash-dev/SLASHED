@@ -5,9 +5,11 @@
   import BrandColorRow from '../BrandColorRow.svelte';
   import ColorAssignments from '../ColorAssignments.svelte';
   import FriendlyControl from '../FriendlyControl.svelte';
+  import { ui } from '../../lib/store.svelte.js';
   import ShadeRamp from '../ShadeRamp.svelte';
   import StudioFrame from './StudioFrame.svelte';
 
+  const showToken = $derived(ui.showTokens);
   const main = BRAND_COLOR_KEYS.filter((c) => c.group === 'brand');
   const status = BRAND_COLOR_KEYS.filter((c) => c.group === 'status');
   const tuning = [
@@ -60,7 +62,7 @@
 
     <details class="panel__card cfg-card" open><summary>Core brand colors</summary><div class="rows">{#each main as {key,label} (key)}<BrandColorRow colorKey={key} {label} />{/each}</div></details>
     <details><summary>Semantic colors</summary><div class="rows">{#each status as {key,label} (key)}<BrandColorRow colorKey={key} {label} />{/each}</div></details>
-    <details><summary>Contrast & palette tuning</summary><div class="rows">{#each tuning as token (token.name)}<FriendlyControl {token} showToken />{/each}</div></details>
+    <details><summary>Contrast & palette tuning</summary><div class="rows">{#each tuning as token (token.name)}<FriendlyControl {token} {showToken} />{/each}</div></details>
     <details><summary>Semantic role preview</summary><ColorAssignments /></details>
     <details><summary>Generated shade ramp</summary><ShadeRamp /></details>
   </div>

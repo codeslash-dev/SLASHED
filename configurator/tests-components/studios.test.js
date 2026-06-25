@@ -18,9 +18,12 @@ import MotionStudio from '../src/components/editors/MotionStudio.svelte';
 import EffectsStudio from '../src/components/editors/EffectsStudio.svelte';
 import FriendlyControl from '../src/components/FriendlyControl.svelte';
 import { tokenByName } from '../src/lib/model.js';
-import { clearAll, overrides } from '../src/lib/store.svelte.js';
+import { clearAll, overrides, ui } from '../src/lib/store.svelte.js';
 
-beforeEach(() => clearAll());
+beforeEach(() => {
+  clearAll();
+  ui.showTokens = false;
+});
 
 const STUDIOS = [
   ['Typography Studio', TypographyStudio, ['The quick brown fox', 'Fluid scale']],
@@ -46,10 +49,36 @@ describe('visual studios', () => {
   }
 
   test('Typography Studio switches scopes and renders active panel controls', async () => {
+    ui.showTokens = true;
     const { getByRole, getByText, getAllByText } = render(TypographyStudio);
     await fireEvent.click(getByRole('tab', { name: 'Headings' }));
     expect(getAllByText('Heading aliases, line-height, tracking and max-width constraints.').length).toBeGreaterThan(0);
     expect(getByText('--sf-h1-size')).toBeInTheDocument();
+  });
+
+
+
+  test('Studio token names follow the global show/hide token setting', async () => {
+    const { queryByText, getByText } = render(TypographyStudio);
+
+    expect(queryByText('--sf-font-body')).not.toBeInTheDocument();
+
+    ui.showTokens = true;
+    await tick();
+    expect(getByText('--sf-font-body')).toBeInTheDocument();
+
+    ui.showTokens = false;
+    await tick();
+    expect(queryByText('--sf-font-body')).not.toBeInTheDocument();
+  });
+
+  test('FriendlyControl can still reveal raw token info locally', async () => {
+    const token = tokenByName.get('--sf-heading-text-wrap');
+    const { getByRole, getByText, queryByText } = render(FriendlyControl, { props: { token } });
+
+    expect(queryByText('--sf-heading-text-wrap')).not.toBeInTheDocument();
+    await fireEvent.click(getByRole('button', { name: 'Show token' }));
+    expect(getByText('--sf-heading-text-wrap')).toBeInTheDocument();
   });
 
   test('FriendlyControl renders schema select controls and writes overrides', async () => {

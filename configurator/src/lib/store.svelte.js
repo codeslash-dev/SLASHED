@@ -74,6 +74,8 @@ export const ui = $state({
   uiTheme: savedUi.uiTheme ?? 'dark',
   /** Selected dist bundle id for the install/setup picker (see lib/bundles.js). */
   bundle: savedUi.bundle ?? 'optimal',
+  /** Show raw --sf-* token names in friendly/studio controls. */
+  showTokens: savedUi.showTokens ?? false,
   /** Sidebar collapse — for narrow viewports / a focus-mode. */
   sidebarOpen: true,
   /**
@@ -109,7 +111,7 @@ export const savedThemes = $state(loadSavedThemes());
  * Load the persisted UI preferences (domain / output format / theme / bundle),
  * validated against the live taxonomy. Persisting happens in App.svelte
  * via an $effect over the same fields.
- * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string }}
+ * @returns {{ domain?: string, outputMode?: 'layer'|'root', uiTheme?: 'light'|'dark', bundle?: string, showTokens?: boolean }}
  */
 function loadUiState() {
   if (typeof localStorage === 'undefined') return {};
