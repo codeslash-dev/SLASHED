@@ -8,6 +8,7 @@ plugins:
 exclude:
   - node_modules
   - configurator
+  - configurator-archive
   - core
   - optional
   - scripts
