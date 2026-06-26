@@ -15,6 +15,6 @@
   },
   "hooks": {
     "before:init": ["npm run lint:css"],
-    "after:bump": ["node scripts/version-sync.js", "npm run build"]
+    "after:bump": ["npm version ${version} --no-git-tag-version --allow-same-version", "node scripts/version-sync.js", "npm run build"]
   }
 }
