@@ -106,9 +106,13 @@
   let showStatus = $state(false);
   let showSemanticOverrides = $state(false);
 
-  // Track which color rows are in Auto dark mode (dark is not manually overridden)
+  // Track which color rows are in Auto dark mode.
+  // A key starts in auto only if its dark token is NOT already in overrides — otherwise the user
+  // has an existing dark value (loaded from URL/localStorage) that we must not silently overwrite.
   let autoDarkSet = $state<Set<string>>(new Set(
-    BRAND_SOURCES.filter(s => s.side === "light").map(s => s.colorKey)
+    BRAND_SOURCES.filter(s => s.side === "light" && !(
+      BRAND_SOURCES.find(d => d.colorKey === s.colorKey && d.side === "dark")?.name ?? "" in overrides
+    )).map(s => s.colorKey)
   ));
 
   let sourceTokenMap = $derived(() => {
