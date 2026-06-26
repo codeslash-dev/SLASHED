@@ -183,11 +183,7 @@
   <meta charset="UTF-8">
   <title>SLASHED Preview</title>
   <style id="slashed-framework">${frameworkCSS}</style>
-  <style id="slashed-overrides">
-:root {
-${css}
-}
-  </style>
+  <style id="slashed-overrides">${css}</style>
   <style>
     html, body { height: 100%; margin: 0; padding: 0; }
     body {
@@ -225,28 +221,31 @@ ${BODIES[template]}
   let iframeEl = $state<HTMLIFrameElement | null>(null);
   let splitLightEl = $state<HTMLIFrameElement | null>(null);
   let splitDarkEl = $state<HTMLIFrameElement | null>(null);
-  let loaded = $state(false);
-  let splitLightLoaded = $state(false);
-  let splitDarkLoaded = $state(false);
+  // Counters increment on every load event so effects re-run after iframe reloads.
+  let loadCount = $state(0);
+  let splitLightLoadCount = $state(0);
+  let splitDarkLoadCount = $state(0);
   let refresh = $state(0);
 
-  let html = $derived(buildIframeHTML(overrides, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic));
-  let htmlLight = $derived(buildIframeHTML(overrides, "light", previewMotion, previewTemplate, frameworkCSSStatic));
-  let htmlDark = $derived(buildIframeHTML(overrides, "dark", previewMotion, previewTemplate, frameworkCSSStatic));
+  // srcdoc only encodes layout/motion/template — overrides and theme are applied
+  // by the effects below, avoiding a full iframe reload on every token change.
+  let html = $derived(buildIframeHTML({}, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic));
+  let htmlLight = $derived(buildIframeHTML({}, "light", previewMotion, previewTemplate, frameworkCSSStatic));
+  let htmlDark = $derived(buildIframeHTML({}, "dark", previewMotion, previewTemplate, frameworkCSSStatic));
 
   $effect(() => {
     const _ov = overrides;
     const _theme = previewTheme;
+    const _count = loadCount;
 
     const iframe = iframeEl;
-    if (!iframe || !loaded) return;
+    if (_count === 0 || !iframe) return;
     const doc = iframe.contentDocument;
     if (!doc) return;
 
     const styleEl = doc.getElementById("slashed-overrides");
     if (styleEl) {
-      const css = fa(_ov, { mode: "root", banner: false });
-      styleEl.textContent = `:root {\n${css}\n}`;
+      styleEl.textContent = fa(_ov, { mode: "root", banner: false });
     }
 
     if (_theme === "dark") {
@@ -258,20 +257,22 @@ ${BODIES[template]}
 
   $effect(() => {
     const _ov = overrides;
+    const _lightCount = splitLightLoadCount;
+    const _darkCount = splitDarkLoadCount;
     const css = fa(_ov, { mode: "root", banner: false });
 
-    if (splitLightEl && splitLightLoaded) {
+    if (splitLightEl && _lightCount > 0) {
       const doc = splitLightEl.contentDocument;
       if (doc) {
         const styleEl = doc.getElementById("slashed-overrides");
-        if (styleEl) styleEl.textContent = `:root {\n${css}\n}`;
+        if (styleEl) styleEl.textContent = css;
       }
     }
-    if (splitDarkEl && splitDarkLoaded) {
+    if (splitDarkEl && _darkCount > 0) {
       const doc = splitDarkEl.contentDocument;
       if (doc) {
         const styleEl = doc.getElementById("slashed-overrides");
-        if (styleEl) styleEl.textContent = `:root {\n${css}\n}`;
+        if (styleEl) styleEl.textContent = css;
       }
     }
   });
@@ -364,7 +365,7 @@ ${BODIES[template]}
 
     <!-- Refresh -->
     <button
-      onclick={() => { loaded = false; refresh += 1; }}
+      onclick={() => { loadCount = 0; splitLightLoadCount = 0; splitDarkLoadCount = 0; refresh += 1; }}
       title="Reload preview"
       class="p-1 rounded-md text-slate-500 hover:text-slate-300 hover:bg-white/8 transition-all cursor-pointer"
     >
@@ -374,7 +375,7 @@ ${BODIES[template]}
     <!-- Open in new tab -->
     <button
       onclick={() => {
-        const blob = new Blob([html], { type: "text/html" });
+        const blob = new Blob([buildIframeHTML(overrides, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic)], { type: "text/html" });
         const url = URL.createObjectURL(blob);
         window.open(url, "_blank");
       }}
@@ -401,7 +402,7 @@ ${BODIES[template]}
               bind:this={splitLightEl}
               srcdoc={htmlLight}
               sandbox="allow-scripts allow-same-origin allow-forms"
-              onload={() => { splitLightLoaded = true; }}
+              onload={() => { splitLightLoadCount += 1; }}
               class="flex-1 w-full border-0"
               title="SLASHED light preview"
             ></iframe>
@@ -418,7 +419,7 @@ ${BODIES[template]}
               bind:this={splitDarkEl}
               srcdoc={htmlDark}
               sandbox="allow-scripts allow-same-origin allow-forms"
-              onload={() => { splitDarkLoaded = true; }}
+              onload={() => { splitDarkLoadCount += 1; }}
               class="flex-1 w-full border-0"
               title="SLASHED dark preview"
             ></iframe>
@@ -432,7 +433,7 @@ ${BODIES[template]}
             bind:this={iframeEl}
             srcdoc={html}
             sandbox="allow-scripts allow-same-origin allow-forms"
-            onload={() => { loaded = true; }}
+            onload={() => { loadCount += 1; }}
             class="w-full h-full border-0"
             title="SLASHED live preview"
           ></iframe>
