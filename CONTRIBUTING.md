@@ -10,12 +10,12 @@ npm run test:install   # one-time: install the Chromium test browser
 ```
 
 There is no build step for consumers — `scripts/bundle.js` concatenates `core/`
-+ `optional/` into `dist/` bundles for maintainers.
++ `optional/` into `badges/` bundles for maintainers.
 
 ## Workflow
 
 ```sh
-npm run build        # rebuild dist/ bundles
+npm run build        # rebuild badges/ bundles
 npm run watch        # rebuild on change
 npm run lint:css     # stylelint (must pass)
 npm run lint:css:fix # auto-fix
@@ -24,7 +24,7 @@ npm run docs:tokens  # regenerate docs/tokens.md from source
 ```
 
 Before opening a PR: `npm run lint:css && npm run build && npm test` must pass,
-and `dist/` must be rebuilt and committed.
+and `badges/` must be rebuilt and committed.
 
 ## Conventions (enforced)
 

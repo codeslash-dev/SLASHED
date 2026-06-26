@@ -13,7 +13,7 @@ of these in sync:
 | `docs/roadmap.md` | `Current version: **X.Y.Z**` line |
 | `configurator/package.json` | `.version` |
 | `configurator/package-lock.json` | `.version` + `.packages[""].version` |
-| `dist/*.css` (unminified) | `/* SLASHED vX.Y.Z */` comment header |
+| `badges/*.css` (unminified) | `/* SLASHED vX.Y.Z */` comment header |
 | Configurator UI version pill | baked in via Vite `__SLASHED_VERSION__` at build time |
 
 **Never edit version numbers by hand.** Use `npm version` then the sync script:
@@ -22,7 +22,7 @@ of these in sync:
 npm version <new-version> --no-git-tag-version   # bump the source of truth
 npm run version-sync                              # propagates to all files above
 npm run check:version                             # must pass — CI fails if it doesn't
-npm run build                                     # rebuilds dist with stamped headers
+npm run build                                     # rebuilds badges/ with stamped headers
 ```
 
 If you are not bumping the version but you touch any of the files in the table
@@ -79,7 +79,7 @@ After the tag is pushed, GitHub Actions (`release.yml`) does the rest:
 ## CSS architecture
 
 - Source lives in `core/` (required) and `optional/` (opt-in).
-- `scripts/bundle.js` concatenates and builds `dist/`.
+- `scripts/bundle.js` concatenates and builds `badges/`.
 - Every unminified dist bundle is stamped with `/* SLASHED vX.Y.Z ... */`.
 - The stamp version must match `package.json` — `release.yml` verifies this
   before publishing the GitHub Release.
@@ -117,5 +117,5 @@ npm test              # full suite (requires built dist — runs build automatic
 npm run test:install  # install Playwright browsers (first time only)
 ```
 
-Do not skip the pretest build step. Tests import from `dist/` and will fail
+Do not skip the pretest build step. Tests import from `badges/` and will fail
 with stale bundles.

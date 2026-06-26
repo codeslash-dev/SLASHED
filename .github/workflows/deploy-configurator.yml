@@ -6,7 +6,7 @@ name: Deploy to Pages
 #   /configurator/     — standalone Svelte configurator app
 #
 # Jekyll processes docs/*.md into HTML using the default layout.
-# The built CSS bundles (dist/) and optional CSS are injected afterwards so
+# The built CSS bundles (badges/) and optional CSS are injected afterwards so
 # that demo.html's relative paths resolve correctly in the browser.
 #
 # Runs on merges to main that touch any site-relevant path, and on demand.
@@ -87,8 +87,8 @@ jobs:
       - name: Inject CSS bundles, optional CSS, and configurator
         run: |
           set -euo pipefail
-          mkdir -p _site/dist _site/optional _site/configurator
-          cp -r dist/. _site/dist/
+          mkdir -p _site/badges _site/optional _site/configurator
+          cp -r badges/. _site/badges/
           cp optional/*.css _site/optional/
           cp -r configurator/dist/. _site/configurator/
 

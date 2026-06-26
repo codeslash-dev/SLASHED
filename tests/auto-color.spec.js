@@ -13,7 +13,7 @@
 //   #205 — links, underlines, and per-element colour overwrites resolve
 //          as documented (on the page, on surfaces, and when overridden).
 //
-// fixture.html loads dist/slashed.full.css, so both the `a:link` rules
+// fixture.html loads badges/slashed.full.css, so both the `a:link` rules
 // (base) and the .sf-surface--* / .sf-link--* macros are present.
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
