@@ -31,7 +31,7 @@
   let tools = $derived(NAV_ITEMS.filter((i) => i.group === "tools"));
 </script>
 
-<nav class="w-14 bg-[#0a0a0f] border-r border-white/8 flex flex-col items-center py-3 gap-1 shrink-0 overflow-y-auto">
+<nav class="w-14 bg-[#0a0a0f] border-r border-white/8 flex flex-col items-center py-3 gap-1 shrink-0 overflow-y-auto overflow-x-hidden">
   <div class="flex flex-col items-center gap-1 w-full px-2">
     {#each tokens as item (item.id)}
       {@const isActive = activeId === item.id}
