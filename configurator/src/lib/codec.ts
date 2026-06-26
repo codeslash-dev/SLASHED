@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { deflateSync, inflateSync } from "fflate";
 import tokensData from "../data/token-registry.generated.json";
 
 declare const __SLASHED_VERSION__: string;
@@ -14,6 +15,8 @@ const Na = 65535;
 const Pa = new TextEncoder();
 const Fa = new TextDecoder("utf-8", { fatal: false });
 const Ia = 65535;
+const MAX_COMPRESSED_BYTES = 32 * 1024;
+const MAX_DECOMPRESSED_BYTES = 256 * 1024;
 
 function La(e: number): boolean {
   return Number.isInteger(e) && e >= 0 && e <= Ia;
@@ -71,7 +74,7 @@ export function Ha(e: Record<string, string>, t: any = Wa): string {
   if (!e || typeof e !== "object") return "";
   const n = Ra(t);
   const r: { id: number; valueBytes: Uint8Array }[] = [];
-  
+
   for (const [key, val] of Object.entries(e)) {
     if (typeof key !== "string" || typeof val !== "string" || val === "") continue;
     const id = n.get(key);
@@ -80,47 +83,70 @@ export function Ha(e: Record<string, string>, t: any = Wa): string {
     if (valueBytes.length > Na) continue;
     r.push({ id, valueBytes });
   }
-  
+
   if (r.length === 0) return "";
   r.sort((a, b) => a.id - b.id);
-  
-  let totalLength = 1;
-  for (const item of r) {
-    totalLength += 4 + item.valueBytes.length;
-  }
-  
-  const a = new Uint8Array(totalLength);
+
+  let payloadLen = 0;
+  for (const item of r) payloadLen += 4 + item.valueBytes.length;
+
+  const payload = new Uint8Array(payloadLen);
   let o = 0;
-  a[o++] = 1; // version 1
-  
   for (const { id, valueBytes } of r) {
-    a[o++] = (id >> 8) & 255;
-    a[o++] = id & 255;
-    a[o++] = (valueBytes.length >> 8) & 255;
-    a[o++] = valueBytes.length & 255;
-    a.set(valueBytes, o);
+    payload[o++] = (id >> 8) & 255;
+    payload[o++] = id & 255;
+    payload[o++] = (valueBytes.length >> 8) & 255;
+    payload[o++] = valueBytes.length & 255;
+    payload.set(valueBytes, o);
     o += valueBytes.length;
   }
-  
-  return Ba(a);
+
+  const compressed = deflateSync(payload);
+  if (compressed.length > MAX_COMPRESSED_BYTES) {
+    console.warn(`[codec] compressed payload too large (${compressed.length} B > ${MAX_COMPRESSED_BYTES} B); refusing to encode.`);
+    return "";
+  }
+  const out = new Uint8Array(1 + compressed.length);
+  out[0] = 2;
+  out.set(compressed, 1);
+  return Ba(out);
 }
 
 export function Ua(e: string, t: any = Wa, n: any = {}): Record<string, string> {
   const r = String(e ?? "").trim();
   if (r === "") return {};
-  const i = Va(r);
-  if (!i || i.length === 0) return {};
-  
-  if (i[0] !== 1) {
-    console.warn(`[codec] unknown config-code version ${i[0]} (expected 1); ignoring.`);
+  const rawBytes = Va(r);
+  if (!rawBytes || rawBytes.length === 0) return {};
+
+  if (rawBytes[0] !== 2) {
+    console.warn(`[codec] unknown config-code version ${rawBytes[0]} (expected 2); ignoring.`);
     return {};
   }
-  
+
+  const compressedLen = rawBytes.length - 1;
+  if (compressedLen > MAX_COMPRESSED_BYTES) {
+    console.warn(`[codec] compressed payload too large (${compressedLen} B > ${MAX_COMPRESSED_BYTES} B); ignoring.`);
+    return {};
+  }
+
+  let i: Uint8Array;
+  try {
+    i = inflateSync(rawBytes.subarray(1));
+  } catch {
+    console.warn("[codec] failed to decompress config; ignoring.");
+    return {};
+  }
+  if (!i || i.length === 0) return {};
+  if (i.length > MAX_DECOMPRESSED_BYTES) {
+    console.warn(`[codec] decompressed payload too large (${i.length} B > ${MAX_DECOMPRESSED_BYTES} B); ignoring.`);
+    return {};
+  }
+
   const a = za(t);
   const sanitize = typeof n.sanitize === "function" ? n.sanitize : (val: string) => val;
   const isKnown = typeof n.isKnown === "function" ? n.isKnown : () => true;
   const c: Record<string, string> = {};
-  let l = 1;
+  let l = 0;
   
   try {
     while (l < i.length) {
@@ -257,5 +283,5 @@ export const parseCSS = pa;
 export const encodeOverrides = Ga;
 export const buildShareUrl = qa;
 export const readShareFromHash = Ka;
-export const CODEC_VERSION = 1;
+export const CODEC_VERSION = 2;
 export const SHARE_PARAM = "c";

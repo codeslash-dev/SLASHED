@@ -6,7 +6,7 @@
  */
 import { describe, test, expect } from 'vitest';
 import data from '../src/data/api-index.generated.json';
-import { encodeOverrides, readShareFromHash, buildShareUrl, SHARE_PARAM } from '../src/lib/codec';
+import { encodeOverrides, readShareFromHash, buildShareUrl, SHARE_PARAM, CODEC_VERSION } from '../src/lib/codec';
 
 const known = new Set(data.tokens.map(t => t.name));
 const isKnown = name => known.has(name);
@@ -73,5 +73,39 @@ describe('error resilience', () => {
 
   test('readShareFromHash handles no c= param gracefully', () => {
     expect(readShareFromHash('other=param')).toEqual({});
+  });
+});
+
+describe('codec v2 (deflate compression)', () => {
+  test('CODEC_VERSION is 2', () => {
+    expect(CODEC_VERSION).toBe(2);
+  });
+
+  test('large configs encode successfully and grow sub-linearly', () => {
+    const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 20);
+    expect(tokens.length).toBeGreaterThanOrEqual(10);
+    const small = encodeOverrides({ [realToken]: '1rem' });
+    const large = encodeOverrides(Object.fromEntries(tokens.map((t, i) => [t.name, `${i + 1}.${i}rem`])));
+    expect(large.length).toBeGreaterThan(0);
+    // 20 tokens should not produce a code 20× longer than 1 token (compression helps)
+    expect(large.length).toBeLessThan(small.length * 20);
+  });
+
+  test('v2 compressed codes round-trip losslessly', () => {
+    const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 15);
+    expect(tokens.length).toBeGreaterThanOrEqual(5);
+    const map = Object.fromEntries(tokens.map((t, i) => [t.name, `${(i + 1) * 4}px`]));
+    const code = encodeOverrides(map);
+    const decoded = readShareFromHash(`${SHARE_PARAM}=${code}`, { isKnown });
+    expect(decoded).toEqual(map);
+  });
+
+  test('unknown version byte decodes to empty map', () => {
+    // A raw byte 0x01 (old v1) should be rejected cleanly now that only v2 is supported.
+    const buf = new Uint8Array([0x01, 0x00]);
+    let str = '';
+    for (let i = 0; i < buf.length; i++) str += String.fromCharCode(buf[i]);
+    const oldCode = btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    expect(readShareFromHash(`${SHARE_PARAM}=${oldCode}`)).toEqual({});
   });
 });
