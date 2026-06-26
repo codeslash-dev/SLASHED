@@ -111,7 +111,7 @@
   // has an existing dark value (loaded from URL/localStorage) that we must not silently overwrite.
   let autoDarkSet = $state<Set<string>>(new Set(
     BRAND_SOURCES.filter(s => s.side === "light" && !(
-      BRAND_SOURCES.find(d => d.colorKey === s.colorKey && d.side === "dark")?.name ?? "" in overrides
+      (BRAND_SOURCES.find(d => d.colorKey === s.colorKey && d.side === "dark")?.name ?? "") in overrides
     )).map(s => s.colorKey)
   ));
 

@@ -201,7 +201,7 @@
         e.preventDefault();
         handleRedo();
       }
-      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+      if ((e.ctrlKey || e.metaKey) && !e.repeat && e.key.toLowerCase() === "k") {
         e.preventDefault();
         showPalette = !showPalette;
       }

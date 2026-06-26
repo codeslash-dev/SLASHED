@@ -55,6 +55,7 @@
   })());
 
   $effect(() => {
+    query; // re-run when query changes so selectedIndex stays in bounds
     selectedIndex = 0;
   });
 
@@ -69,6 +70,11 @@
 
   function handleKeydown(e: KeyboardEvent) {
     if (e.key === "Escape") { e.preventDefault(); onClose(); return; }
+    if (results.length === 0 && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+      e.preventDefault();
+      selectedIndex = 0;
+      return;
+    }
     if (e.key === "ArrowDown") { e.preventDefault(); selectedIndex = Math.min(selectedIndex + 1, results.length - 1); return; }
     if (e.key === "ArrowUp") { e.preventDefault(); selectedIndex = Math.max(selectedIndex - 1, 0); return; }
     if (e.key === "Enter" && results[selectedIndex]) {
