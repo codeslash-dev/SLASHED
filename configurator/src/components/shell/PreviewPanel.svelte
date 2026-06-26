@@ -26,116 +26,116 @@
   ];
 
   const MARKETING_BODY = `
-<header class="sf-site-header" style="position:sticky;top:0;z-index:50;background:var(--sf-color-surface-1);border-bottom:var(--sf-border-width-1) solid var(--sf-color-border);padding:var(--sf-space-3) var(--sf-space-6);">
+<header class="sf-site-header" style="position:sticky;top:0;z-index:50;background:var(--sf-color-base);border-bottom:var(--sf-border-width-1) solid var(--sf-color-border);padding:var(--sf-space-s) var(--sf-space-l);">
   <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
-    <div style="font-weight:700;font-size:var(--sf-text-lg);color:var(--sf-color-primary-600);">SlashedUI</div>
-    <nav style="display:flex;gap:var(--sf-space-4);font-size:var(--sf-text-sm);">
-      <a href="#" style="color:var(--sf-color-text-2);text-decoration:none;">Docs</a>
-      <a href="#" style="color:var(--sf-color-text-2);text-decoration:none;">Components</a>
-      <a href="#" style="color:var(--sf-color-text-2);text-decoration:none;">Themes</a>
+    <div style="font-weight:700;font-size:var(--sf-text-l);color:var(--sf-color-primary-600);">SlashedUI</div>
+    <nav style="display:flex;gap:var(--sf-space-m);font-size:var(--sf-text-s);">
+      <a href="#" style="color:var(--sf-color-text--secondary);text-decoration:none;">Docs</a>
+      <a href="#" style="color:var(--sf-color-text--secondary);text-decoration:none;">Components</a>
+      <a href="#" style="color:var(--sf-color-text--secondary);text-decoration:none;">Themes</a>
     </nav>
-    <button class="sf-btn sf-btn-primary" style="font-size:var(--sf-text-sm);">Get Started</button>
+    <button class="sf-btn sf-btn-primary" style="font-size:var(--sf-text-s);">Get Started</button>
   </div>
 </header>
-<main style="max-width:1200px;margin:0 auto;padding:var(--sf-space-12) var(--sf-space-6);">
-  <section style="text-align:center;margin-bottom:var(--sf-space-16);">
-    <div style="display:inline-flex;align-items:center;gap:var(--sf-space-2);background:var(--sf-color-primary-50);color:var(--sf-color-primary-700);border:var(--sf-border-width-1) solid var(--sf-color-primary-200);border-radius:var(--sf-radius-full);padding:var(--sf-space-1) var(--sf-space-3);font-size:var(--sf-text-xs);font-weight:600;margin-bottom:var(--sf-space-6);">
+<main style="max-width:1200px;margin:0 auto;padding:var(--sf-space-2xl) var(--sf-space-l);">
+  <section style="text-align:center;margin-bottom:var(--sf-space-2xl);">
+    <div style="display:inline-flex;align-items:center;gap:var(--sf-space-xs);background:var(--sf-color-primary-50);color:var(--sf-color-primary-700);border:var(--sf-border-width-1) solid var(--sf-color-primary-200);border-radius:var(--sf-radius-full);padding:var(--sf-space-2xs) var(--sf-space-s);font-size:var(--sf-text-xs);font-weight:600;margin-bottom:var(--sf-space-l);">
       ✨ Now in v2 — OKLCH color engine
     </div>
-    <h1 style="font-size:var(--sf-text-display-l);font-weight:800;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-5);line-height:1.1;">
+    <h1 style="font-size:var(--sf-text-display-l);font-weight:800;color:var(--sf-color-text);margin-bottom:var(--sf-space-l);line-height:1.1;">
       Design systems,<br/><span style="color:var(--sf-color-primary-600);">perfected.</span>
     </h1>
-    <p style="font-size:var(--sf-text-lg);color:var(--sf-color-text-2);max-width:540px;margin:0 auto var(--sf-space-8);">
+    <p style="font-size:var(--sf-text-l);color:var(--sf-color-text--secondary);max-width:540px;margin:0 auto var(--sf-space-xl);">
       A CSS framework built on 840 design tokens. One line to install, infinitely customisable.
     </p>
-    <div style="display:flex;gap:var(--sf-space-3);justify-content:center;flex-wrap:wrap;">
-      <button class="sf-btn sf-btn-primary" style="font-size:var(--sf-text-base);">Start for free</button>
-      <button class="sf-btn sf-btn-ghost" style="font-size:var(--sf-text-base);">View docs →</button>
+    <div style="display:flex;gap:var(--sf-space-s);justify-content:center;flex-wrap:wrap;">
+      <button class="sf-btn sf-btn-primary" style="font-size:var(--sf-text-m);">Start for free</button>
+      <button class="sf-btn sf-btn-ghost" style="font-size:var(--sf-text-m);">View docs →</button>
     </div>
   </section>
-  <section style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sf-space-5);margin-bottom:var(--sf-space-16);">
-    <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-6);">
-      <div style="font-size:2rem;margin-bottom:var(--sf-space-3);">🎨</div>
-      <h3 style="font-size:var(--sf-text-lg);font-weight:700;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-2);">OKLCH Colors</h3>
-      <p style="font-size:var(--sf-text-sm);color:var(--sf-color-text-2);line-height:1.6;">Perceptually uniform color ramps with auto dark-mode derivation.</p>
+  <section style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sf-space-l);margin-bottom:var(--sf-space-2xl);">
+    <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+      <div style="font-size:2rem;margin-bottom:var(--sf-space-s);">🎨</div>
+      <h3 style="font-size:var(--sf-text-l);font-weight:700;color:var(--sf-color-text);margin-bottom:var(--sf-space-xs);">OKLCH Colors</h3>
+      <p style="font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);line-height:1.6;">Perceptually uniform color ramps with auto dark-mode derivation.</p>
     </div>
-    <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-6);">
-      <div style="font-size:2rem;margin-bottom:var(--sf-space-3);">📐</div>
-      <h3 style="font-size:var(--sf-text-lg);font-weight:700;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-2);">Fluid Scales</h3>
-      <p style="font-size:var(--sf-text-sm);color:var(--sf-color-text-2);line-height:1.6;">Type and space that scales smoothly from mobile to 4K.</p>
+    <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+      <div style="font-size:2rem;margin-bottom:var(--sf-space-s);">📐</div>
+      <h3 style="font-size:var(--sf-text-l);font-weight:700;color:var(--sf-color-text);margin-bottom:var(--sf-space-xs);">Fluid Scales</h3>
+      <p style="font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);line-height:1.6;">Type and space that scales smoothly from mobile to 4K.</p>
     </div>
-    <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-6);">
-      <div style="font-size:2rem;margin-bottom:var(--sf-space-3);">⚡</div>
-      <h3 style="font-size:var(--sf-text-lg);font-weight:700;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-2);">Zero JS</h3>
-      <p style="font-size:var(--sf-text-sm);color:var(--sf-color-text-2);line-height:1.6;">Pure CSS custom properties — works with any framework.</p>
+    <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+      <div style="font-size:2rem;margin-bottom:var(--sf-space-s);">⚡</div>
+      <h3 style="font-size:var(--sf-text-l);font-weight:700;color:var(--sf-color-text);margin-bottom:var(--sf-space-xs);">Zero JS</h3>
+      <p style="font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);line-height:1.6;">Pure CSS custom properties — works with any framework.</p>
     </div>
   </section>
-  <section style="background:linear-gradient(135deg,var(--sf-color-primary-600),var(--sf-color-action-600,var(--sf-color-primary-700)));border-radius:var(--sf-radius-xl);padding:var(--sf-space-10) var(--sf-space-8);text-align:center;color:#fff;">
-    <h2 style="font-size:var(--sf-text-display-s);font-weight:800;margin-bottom:var(--sf-space-3);">Ready to ship faster?</h2>
-    <p style="font-size:var(--sf-text-base);opacity:0.85;margin-bottom:var(--sf-space-6);">Join 12,000+ developers using SLASHED in production.</p>
-    <button style="background:#fff;color:var(--sf-color-primary-700);border:none;border-radius:var(--sf-radius-m);padding:var(--sf-space-3) var(--sf-space-7);font-size:var(--sf-text-base);font-weight:700;cursor:pointer;">Install now — it's free</button>
+  <section style="background:linear-gradient(135deg,var(--sf-color-primary-600),var(--sf-color-action-600,var(--sf-color-primary-700)));border-radius:var(--sf-radius-xl);padding:var(--sf-space-xl) var(--sf-space-xl);text-align:center;color:#fff;">
+    <h2 style="font-size:var(--sf-text-display-s);font-weight:800;margin-bottom:var(--sf-space-s);">Ready to ship faster?</h2>
+    <p style="font-size:var(--sf-text-m);opacity:0.85;margin-bottom:var(--sf-space-l);">Join 12,000+ developers using SLASHED in production.</p>
+    <button style="background:#fff;color:var(--sf-color-primary-700);border:none;border-radius:var(--sf-radius-m);padding:var(--sf-space-s) var(--sf-space-l);font-size:var(--sf-text-m);font-weight:700;cursor:pointer;">Install now — it's free</button>
   </section>
 </main>`;
 
   const DOCS_BODY = `
 <div style="display:grid;grid-template-columns:240px 1fr;height:100%;gap:0;">
-  <aside style="background:var(--sf-color-surface-1);border-right:var(--sf-border-width-1) solid var(--sf-color-border);padding:var(--sf-space-6);overflow-y:auto;">
-    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--sf-space-3);">Getting started</div>
-    <ul style="list-style:none;padding:0;margin:0 0 var(--sf-space-5);">
-      <li style="padding:var(--sf-space-1-5) var(--sf-space-2);border-radius:var(--sf-radius-s);background:var(--sf-color-primary-100);color:var(--sf-color-primary-700);font-size:var(--sf-text-sm);font-weight:600;margin-bottom:2px;">Introduction</li>
-      <li style="padding:var(--sf-space-1-5) var(--sf-space-2);font-size:var(--sf-text-sm);color:var(--sf-color-text-2);margin-bottom:2px;cursor:pointer;">Installation</li>
-      <li style="padding:var(--sf-space-1-5) var(--sf-space-2);font-size:var(--sf-text-sm);color:var(--sf-color-text-2);margin-bottom:2px;cursor:pointer;">Quick start</li>
+  <aside style="background:var(--sf-color-base);border-right:var(--sf-border-width-1) solid var(--sf-color-border);padding:var(--sf-space-l);overflow-y:auto;">
+    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--sf-space-s);">Getting started</div>
+    <ul style="list-style:none;padding:0;margin:0 0 var(--sf-space-l);">
+      <li style="padding:var(--sf-space-xs) var(--sf-space-xs);border-radius:var(--sf-radius-s);background:var(--sf-color-primary-100);color:var(--sf-color-primary-700);font-size:var(--sf-text-s);font-weight:600;margin-bottom:2px;">Introduction</li>
+      <li style="padding:var(--sf-space-xs) var(--sf-space-xs);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);margin-bottom:2px;cursor:pointer;">Installation</li>
+      <li style="padding:var(--sf-space-xs) var(--sf-space-xs);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);margin-bottom:2px;cursor:pointer;">Quick start</li>
     </ul>
   </aside>
-  <main style="padding:var(--sf-space-8) var(--sf-space-10);overflow-y:auto;max-width:800px;">
-    <h1 style="font-size:var(--sf-text-display-s);font-weight:800;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-4);">Introduction</h1>
-    <p style="font-size:var(--sf-text-base);color:var(--sf-color-text-2);line-height:1.7;margin-bottom:var(--sf-space-5);">SLASHED is a CSS design-token framework built around ~840 custom properties.</p>
-    <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-4) var(--sf-space-5);font-family:var(--sf-font-mono);font-size:var(--sf-text-sm);color:var(--sf-color-text-1);margin-bottom:var(--sf-space-6);">npm install slashed</div>
+  <main style="padding:var(--sf-space-xl) var(--sf-space-xl);overflow-y:auto;max-width:800px;">
+    <h1 style="font-size:var(--sf-text-display-s);font-weight:800;color:var(--sf-color-text);margin-bottom:var(--sf-space-m);">Introduction</h1>
+    <p style="font-size:var(--sf-text-m);color:var(--sf-color-text--secondary);line-height:1.7;margin-bottom:var(--sf-space-l);">SLASHED is a CSS design-token framework built around ~840 custom properties.</p>
+    <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-m) var(--sf-space-l);font-family:var(--sf-font-mono);font-size:var(--sf-text-s);color:var(--sf-color-text);margin-bottom:var(--sf-space-l);">npm install slashed</div>
   </main>
 </div>`;
 
   const DASHBOARD_BODY = `
-<div style="display:grid;grid-template-columns:200px 1fr;height:100%;background:var(--sf-color-surface-1);">
-  <aside style="background:var(--sf-color-surface-1);border-right:var(--sf-border-width-1) solid var(--sf-color-border);padding:var(--sf-space-4);">
-    <div style="font-size:var(--sf-text-sm);font-weight:700;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-5);padding:var(--sf-space-2);">⚡ Dashboard</div>
+<div style="display:grid;grid-template-columns:200px 1fr;height:100%;background:var(--sf-color-base);">
+  <aside style="background:var(--sf-color-base);border-right:var(--sf-border-width-1) solid var(--sf-color-border);padding:var(--sf-space-m);">
+    <div style="font-size:var(--sf-text-s);font-weight:700;color:var(--sf-color-text);margin-bottom:var(--sf-space-l);padding:var(--sf-space-xs);">⚡ Dashboard</div>
     <ul style="list-style:none;padding:0;margin:0;">
-      <li style="padding:var(--sf-space-2) var(--sf-space-3);border-radius:var(--sf-radius-s);background:var(--sf-color-primary-100);color:var(--sf-color-primary-700);font-size:var(--sf-text-sm);font-weight:600;margin-bottom:2px;">Overview</li>
-      <li style="padding:var(--sf-space-2) var(--sf-space-3);font-size:var(--sf-text-sm);color:var(--sf-color-text-2);margin-bottom:2px;cursor:pointer;">Analytics</li>
-      <li style="padding:var(--sf-space-2) var(--sf-space-3);font-size:var(--sf-text-sm);color:var(--sf-color-text-2);margin-bottom:2px;cursor:pointer;">Users</li>
+      <li style="padding:var(--sf-space-xs) var(--sf-space-s);border-radius:var(--sf-radius-s);background:var(--sf-color-primary-100);color:var(--sf-color-primary-700);font-size:var(--sf-text-s);font-weight:600;margin-bottom:2px;">Overview</li>
+      <li style="padding:var(--sf-space-xs) var(--sf-space-s);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);margin-bottom:2px;cursor:pointer;">Analytics</li>
+      <li style="padding:var(--sf-space-xs) var(--sf-space-s);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);margin-bottom:2px;cursor:pointer;">Users</li>
     </ul>
   </aside>
-  <main style="padding:var(--sf-space-6);overflow-y:auto;">
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sf-space-4);margin-bottom:var(--sf-space-6);">
-      <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-5);">
-        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text-3);text-transform:uppercase;margin-bottom:var(--sf-space-2);">Revenue</div>
-        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text-1);">$48.2k</div>
-        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-success-600);">↑ 12% vs last month</div>
+  <main style="padding:var(--sf-space-l);overflow-y:auto;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sf-space-m);margin-bottom:var(--sf-space-l);">
+      <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text--muted);text-transform:uppercase;margin-bottom:var(--sf-space-xs);">Revenue</div>
+        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text);">$48.2k</div>
+        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-success);">↑ 12% vs last month</div>
       </div>
-      <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-5);">
-        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text-3);text-transform:uppercase;margin-bottom:var(--sf-space-2);">Users</div>
-        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text-1);">12,431</div>
-        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-success-600);">↑ 8% vs last month</div>
+      <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text--muted);text-transform:uppercase;margin-bottom:var(--sf-space-xs);">Users</div>
+        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text);">12,431</div>
+        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-success);">↑ 8% vs last month</div>
       </div>
-      <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-5);">
-        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text-3);text-transform:uppercase;margin-bottom:var(--sf-space-2);">Conversions</div>
-        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text-1);">3.6%</div>
-        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-warning-600);">→ Flat</div>
+      <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text--muted);text-transform:uppercase;margin-bottom:var(--sf-space-xs);">Conversions</div>
+        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text);">3.6%</div>
+        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-warning);">→ Flat</div>
       </div>
-      <div style="background:var(--sf-color-surface-2);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-5);">
-        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text-3);text-transform:uppercase;margin-bottom:var(--sf-space-2);">Tickets open</div>
-        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text-1);">24</div>
-        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-error-600);">↑ 3 since yesterday</div>
+      <div style="background:var(--sf-color-base-50);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l);padding:var(--sf-space-l);">
+        <div style="font-size:var(--sf-text-xs);font-weight:600;color:var(--sf-color-text--muted);text-transform:uppercase;margin-bottom:var(--sf-space-xs);">Tickets open</div>
+        <div style="font-size:var(--sf-text-2xl);font-weight:800;color:var(--sf-color-text);">24</div>
+        <div style="font-size:var(--sf-text-xs);color:var(--sf-color-danger);">↑ 3 since yesterday</div>
       </div>
     </div>
   </main>
 </div>`;
 
   const COMPONENTS_BODY = `
-<div style="padding:var(--sf-space-6);background:var(--sf-color-surface-1);min-height:100%;">
-  <h2 style="font-size:var(--sf-text-xl);font-weight:700;color:var(--sf-color-text-1);margin-bottom:var(--sf-space-6);">Component showcase</h2>
-  <div style="margin-bottom:var(--sf-space-8);">
-    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--sf-space-3);">Buttons</div>
-    <div style="display:flex;gap:var(--sf-space-3);flex-wrap:wrap;align-items:center;">
+<div style="padding:var(--sf-space-l);background:var(--sf-color-base);min-height:100%;">
+  <h2 style="font-size:var(--sf-text-xl);font-weight:700;color:var(--sf-color-text);margin-bottom:var(--sf-space-l);">Component showcase</h2>
+  <div style="margin-bottom:var(--sf-space-xl);">
+    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--sf-space-s);">Buttons</div>
+    <div style="display:flex;gap:var(--sf-space-s);flex-wrap:wrap;align-items:center;">
       <button class="sf-btn sf-btn-primary">Primary</button>
       <button class="sf-btn sf-btn-secondary">Secondary</button>
       <button class="sf-btn sf-btn-ghost">Ghost</button>
@@ -143,14 +143,14 @@
       <button class="sf-btn sf-btn-primary" disabled>Disabled</button>
     </div>
   </div>
-  <div style="margin-bottom:var(--sf-space-8);">
-    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--sf-space-3);">Typography ramp</div>
-    <div style="display:flex;flex-direction:column;gap:var(--sf-space-2);">
-      <div style="font-size:var(--sf-text-display-m);font-weight:800;color:var(--sf-color-text-1);line-height:1.1;">Display M</div>
-      <div style="font-size:var(--sf-text-2xl);font-weight:700;color:var(--sf-color-text-1);">Heading 2XL</div>
-      <div style="font-size:var(--sf-text-xl);font-weight:600;color:var(--sf-color-text-1);">Heading XL</div>
-      <div style="font-size:var(--sf-text-base);color:var(--sf-color-text-2);line-height:1.6;">Body text. The quick brown fox jumps over the lazy dog.</div>
-      <div style="font-size:var(--sf-text-sm);color:var(--sf-color-text-3);line-height:1.5;">Small caption text for metadata and secondary info.</div>
+  <div style="margin-bottom:var(--sf-space-xl);">
+    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--sf-space-s);">Typography ramp</div>
+    <div style="display:flex;flex-direction:column;gap:var(--sf-space-xs);">
+      <div style="font-size:var(--sf-text-display-m);font-weight:800;color:var(--sf-color-text);line-height:1.1;">Display M</div>
+      <div style="font-size:var(--sf-text-2xl);font-weight:700;color:var(--sf-color-text);">Heading 2XL</div>
+      <div style="font-size:var(--sf-text-xl);font-weight:600;color:var(--sf-color-text);">Heading XL</div>
+      <div style="font-size:var(--sf-text-m);color:var(--sf-color-text--secondary);line-height:1.6;">Body text. The quick brown fox jumps over the lazy dog.</div>
+      <div style="font-size:var(--sf-text-s);color:var(--sf-color-text--muted);line-height:1.5;">Small caption text for metadata and secondary info.</div>
     </div>
   </div>
 </div>`;
@@ -192,24 +192,24 @@ ${css}
     html, body { height: 100%; margin: 0; padding: 0; }
     body {
       font-family: var(--sf-font-body, "Inter", sans-serif);
-      background: var(--sf-color-bg, var(--sf-color-surface-1, #fff));
-      color: var(--sf-color-text-1, #111);
+      background: var(--sf-color-bg, var(--sf-color-base, #fff));
+      color: var(--sf-color-text, #111);
       box-sizing: border-box;
     }
     .sf-btn {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: var(--sf-space-2) var(--sf-space-4);
+      padding: var(--sf-space-xs) var(--sf-space-m);
       border-radius: var(--sf-radius-m);
-      font-size: var(--sf-text-sm); font-weight: 600;
+      font-size: var(--sf-text-s); font-weight: 600;
       border: var(--sf-border-width-1) solid transparent;
       cursor: pointer; transition: all 0.15s ease;
     }
     .sf-btn-primary { background: var(--sf-color-primary-600); color: #fff; border-color: var(--sf-color-primary-600); }
     .sf-btn-primary:hover { background: var(--sf-color-primary-700); }
-    .sf-btn-secondary { background: var(--sf-color-surface-2); color: var(--sf-color-text-1); border-color: var(--sf-color-border); }
-    .sf-btn-ghost { background: transparent; color: var(--sf-color-text-2); border-color: transparent; }
-    .sf-btn-ghost:hover { background: var(--sf-color-surface-2); }
-    .sf-btn-danger { background: var(--sf-color-error-600); color: #fff; }
+    .sf-btn-secondary { background: var(--sf-color-base-50); color: var(--sf-color-text); border-color: var(--sf-color-border); }
+    .sf-btn-ghost { background: transparent; color: var(--sf-color-text--secondary); border-color: transparent; }
+    .sf-btn-ghost:hover { background: var(--sf-color-base-50); }
+    .sf-btn-danger { background: var(--sf-color-danger); color: #fff; }
     .sf-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     ${motionCSS}
   </style>
