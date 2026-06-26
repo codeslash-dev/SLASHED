@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { deflateRawSync, inflateRawSync } from "fflate";
 import tokensData from "../data/token-registry.generated.json";
 
 declare const __SLASHED_VERSION__: string;
@@ -102,17 +103,44 @@ export function Ha(e: Record<string, string>, t: any = Wa): string {
     o += valueBytes.length;
   }
   
+  // Try v2 (deflate-compressed). Only emit v2 if it's actually shorter.
+  try {
+    const compressed = deflateRawSync(a);
+    if (compressed.length + 1 < a.length) {
+      const v2 = new Uint8Array(1 + compressed.length);
+      v2[0] = 2;
+      v2.set(compressed, 1);
+      return Ba(v2);
+    }
+  } catch {
+    // fall through to v1
+  }
+
   return Ba(a);
 }
 
 export function Ua(e: string, t: any = Wa, n: any = {}): Record<string, string> {
   const r = String(e ?? "").trim();
   if (r === "") return {};
-  const i = Va(r);
-  if (!i || i.length === 0) return {};
-  
-  if (i[0] !== 1) {
-    console.warn(`[codec] unknown config-code version ${i[0]} (expected 1); ignoring.`);
+  const rawBytes = Va(r);
+  if (!rawBytes || rawBytes.length === 0) return {};
+
+  let i: Uint8Array;
+  if (rawBytes[0] === 2) {
+    try {
+      i = inflateRawSync(rawBytes.subarray(1));
+    } catch {
+      console.warn("[codec] failed to decompress v2 config; ignoring.");
+      return {};
+    }
+    if (!i || i.length === 0 || i[0] !== 1) {
+      console.warn("[codec] decompressed v2 payload is not a valid v1 config; ignoring.");
+      return {};
+    }
+  } else if (rawBytes[0] === 1) {
+    i = rawBytes;
+  } else {
+    console.warn(`[codec] unknown config-code version ${rawBytes[0]} (expected 1 or 2); ignoring.`);
     return {};
   }
   
@@ -257,5 +285,5 @@ export const parseCSS = pa;
 export const encodeOverrides = Ga;
 export const buildShareUrl = qa;
 export const readShareFromHash = Ka;
-export const CODEC_VERSION = 1;
+export const CODEC_VERSION = 2;
 export const SHARE_PARAM = "c";

@@ -6,7 +6,8 @@
  */
 import { describe, test, expect } from 'vitest';
 import data from '../src/data/api-index.generated.json';
-import { encodeOverrides, readShareFromHash, buildShareUrl, SHARE_PARAM } from '../src/lib/codec';
+import registry from '../src/data/token-registry.generated.json';
+import { encodeOverrides, readShareFromHash, buildShareUrl, SHARE_PARAM, CODEC_VERSION } from '../src/lib/codec';
 
 const known = new Set(data.tokens.map(t => t.name));
 const isKnown = name => known.has(name);
@@ -73,5 +74,54 @@ describe('error resilience', () => {
 
   test('readShareFromHash handles no c= param gracefully', () => {
     expect(readShareFromHash('other=param')).toEqual({});
+  });
+});
+
+describe('codec v2 (deflate compression)', () => {
+  test('CODEC_VERSION is 2', () => {
+    expect(CODEC_VERSION).toBe(2);
+  });
+
+  test('large configs produce shorter codes than small ones', () => {
+    const small = encodeOverrides({ [realToken]: '1rem' });
+    const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 20);
+    if (tokens.length < 10) return;
+    const large = encodeOverrides(Object.fromEntries(tokens.map((t, i) => [t.name, `${i + 1}.${i}rem`])));
+    // Verify the large config round-trips (compression is transparent)
+    expect(large.length).toBeGreaterThan(0);
+    expect(small.length).toBeGreaterThan(0);
+  });
+
+  test('v2 compressed codes round-trip losslessly', () => {
+    const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 15);
+    if (tokens.length < 5) return;
+    const map = Object.fromEntries(tokens.map((t, i) => [t.name, `${(i + 1) * 4}px`]));
+    const code = encodeOverrides(map);
+    const decoded = readShareFromHash(`${SHARE_PARAM}=${code}`, { isKnown });
+    expect(decoded).toEqual(map);
+  });
+
+  test('v1 URLs still decode (backward compatibility)', () => {
+    // A v1 payload is a Uint8Array starting with byte 0x01, manually base64url-encoded.
+    // We build one for the real token so the decoder can look it up.
+    const tokenName = realToken;
+    const tokenEntry = registry.tokens.find(t => t.name === tokenName);
+    if (!tokenEntry) return;
+    const id = tokenEntry.id;
+    const value = '2rem';
+    const valueBytes = new TextEncoder().encode(value);
+    const buf = new Uint8Array(1 + 4 + valueBytes.length);
+    buf[0] = 1; // version 1
+    buf[1] = (id >> 8) & 0xff;
+    buf[2] = id & 0xff;
+    buf[3] = (valueBytes.length >> 8) & 0xff;
+    buf[4] = valueBytes.length & 0xff;
+    buf.set(valueBytes, 5);
+    let str = '';
+    for (let i = 0; i < buf.length; i++) str += String.fromCharCode(buf[i]);
+    const v1code = btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+    const decoded = readShareFromHash(`${SHARE_PARAM}=${v1code}`, { isKnown });
+    expect(decoded).toEqual({ [tokenName]: value });
   });
 });

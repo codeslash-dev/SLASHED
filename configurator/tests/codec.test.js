@@ -78,7 +78,7 @@ describe('error resilience', () => {
 });
 
 describe('CODEC_VERSION', () => {
-  test('is 1', () => {
-    expect(CODEC_VERSION).toBe(1);
+  test('is 2', () => {
+    expect(CODEC_VERSION).toBe(2);
   });
 });
