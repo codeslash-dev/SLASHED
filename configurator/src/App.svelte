@@ -231,7 +231,7 @@
     <div class="w-[360px] shrink-0 bg-[#0c0c15] border-r border-white/8 flex flex-col min-h-0">
       <!-- Panel heading -->
       <div class="h-9 flex items-center px-4 border-b border-white/6 shrink-0">
-        <span class="text-[11px] font-bold text-slate-300 uppercase tracking-widest flex-1">
+        <span data-testid="panel-heading" class="text-[11px] font-bold text-slate-300 uppercase tracking-widest flex-1">
           {DOMAIN_LABELS[domain] ?? domain}
         </span>
       </div>

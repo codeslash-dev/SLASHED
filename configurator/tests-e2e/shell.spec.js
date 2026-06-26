@@ -13,7 +13,7 @@ const NAV_LABELS = [
 test('loads with the SLASHED Studio branding', async ({ page }) => {
   const errors = watchErrors(page);
   await gotoClean(page);
-  await expect(page.getByText('SLASHED Studio')).toBeVisible();
+  await expect(page.locator('header')).toContainText('SLASHED Studio');
   await expect(page.locator('nav')).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -29,7 +29,7 @@ test('clicking sidebar items switches the panel heading', async ({ page }) => {
   await gotoClean(page);
   for (const label of ['Colors', 'Typography', 'Spacing']) {
     await navButton(page, label).click();
-    await expect(page.getByText(label.toUpperCase(), { exact: false })).toBeVisible();
+    await expect(page.locator('[data-testid="panel-heading"]')).toContainText(label, { ignoreCase: true });
   }
 });
 
@@ -44,7 +44,8 @@ test('reset-all button starts disabled', async ({ page }) => {
   await expect(page.getByTitle('Reset all overrides')).toBeDisabled();
 });
 
-test('share button copies a URL to clipboard', async ({ page }) => {
+test('share button copies a URL to clipboard', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Clipboard permissions only supported in Chromium');
   await gotoClean(page);
   await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.getByTitle('Copy share link').click();
