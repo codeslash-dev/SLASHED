@@ -2,8 +2,8 @@
   import { Sun, Moon, Smartphone, Tablet, Monitor, RefreshCw, ExternalLink, Columns2 } from 'lucide-svelte';
   import type { PreviewTemplate } from '../../types';
   import { fa } from '../../lib/codec';
-  // Import the built framework CSS at Vite compile time — always in sync with dist.
-  import frameworkCSSStatic from '../../../../dist/slashed.full.css?raw';
+  // Import the built framework CSS at Vite compile time — always in sync with badges/.
+  import frameworkCSSStatic from '../../../../badges/slashed.full.css?raw';
 
   let { overrides, previewTheme, previewWidth, previewMotion, previewTemplate,
     onThemeChange, onWidthChange, onMotionChange, onTemplateChange }: {
