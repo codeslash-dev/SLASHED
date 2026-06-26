@@ -1,6 +1,13 @@
 #!/usr/bin/env node
-// Updates non-JS version references to match the version in package.json.
-// Currently: docs/roadmap.md ("Current version" line).
+// Propagates the version from package.json to every other artifact that must
+// stay in sync: docs/roadmap.md, configurator/package.json, and both lock files
+// under configurator/.
+//
+// Does NOT touch the root package-lock.json — that is updated by npm itself
+// when `npm version` runs (called by the release-it after:bump hook before this
+// script). Running `npm run version-sync` standalone therefore requires that
+// `npm version <v> --no-git-tag-version` has already been run first.
+//
 // Run after every version bump: npm run version-sync
 // Wired into .release-it.json hooks so it executes automatically during releases.
 

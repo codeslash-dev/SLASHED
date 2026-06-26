@@ -139,6 +139,7 @@ jobs:
   test:
     name: Regression tests
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
         with:
@@ -148,14 +149,20 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # `npm test` runs the `pretest` hook (build + unit tests) before Playwright,
-      # so an explicit build step here would just build twice.
+      # Reuse the dist/ artifact from the build job — no need to rebuild.
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      # Run unit tests directly (skipping the pretest build hook).
+      - run: npm run test:unit
       - run: npx playwright install --with-deps chromium firefox webkit
-      - run: npm test
+      - run: npx playwright test
 
   configurator:
     name: Configurator tests
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
         with:
@@ -169,6 +176,13 @@ jobs:
       - run: npm ci
       - run: npm ci
         working-directory: configurator
+      # Reuse the dist/ artifact from the build job so the configurator Vite
+      # build can resolve PreviewPanel.svelte's ?raw CSS import without a
+      # redundant root rebuild.
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
       # Unit suite — the sync tripwire: curated Basic controls, presets, fluid
       # engine scalars and knob defaults all pinned to the live catalogue —
       # plus the Vitest component suite (test runs both via test:unit/components).
@@ -180,14 +194,10 @@ jobs:
       # Type/diagnostics gate (kept at 0 errors / 0 warnings).
       - run: npm run check
         working-directory: configurator
-      # Build root dist/ so PreviewPanel.svelte's ?raw CSS import resolves
-      # during the Vite build. dist/*.css is gitignored and only produced by
-      # `npm run build` at the repo root.
-      - run: npm run build
-      # Browser regression suite (test:e2e prebuilds; Playwright manages the
-      # preview server via its webServer option). Cross-engine: the full suite
-      # runs on Chromium; core behaviour + the dogfood/isolation contract also
-      # run on Firefox and WebKit (see playwright.config.js projects).
+      # Browser regression suite (test:e2e prebuilds the configurator via Vite;
+      # Playwright manages the preview server via its webServer option).
+      # Cross-engine: the full suite runs on Chromium; core behaviour + the
+      # dogfood/isolation contract also run on Firefox and WebKit.
       - run: npx playwright install --with-deps chromium firefox webkit
         working-directory: configurator
       - run: npm run test:e2e
