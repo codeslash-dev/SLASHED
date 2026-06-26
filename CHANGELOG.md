@@ -4,6 +4,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.17] - 2026-06-26
+
+### Features
+- **configurator:** p0-p5 improvements — bug fixes, new controls, split preview, ⌘k search
+- replace configurator with conf-v2 redesign, wire to framework
+
+### Bug Fixes
+- **configurator:** address review feedback (partial — interrupted)
+- **configurator:** don't auto-dark colors that already have dark overrides
+- **tests:** remove redundant fillStyle assignment in contrastBetween
+- **release:** sync root package-lock.json on every version bump
+- **configurator:** suppress horizontal scroll in sidebar nav
+- **configurator:** correct all live preview CSS variables to real SLASHED tokens
+- **tests:** resolve 3 CI failures in configurator e2e shell spec
+- **ci:** build root dist before configurator E2E tests
+- **configurator:** resolve svelte-check type errors
+- **ci:** add test infrastructure and fix lint exclusion for configurator v2
+
+### Performance Improvements
+- **ci:** eliminate redundant builds and extract shared test helpers
+
 ## [0.6.16] - 2026-06-25
 
 ### Features
