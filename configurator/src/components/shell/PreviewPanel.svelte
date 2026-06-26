@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Sun, Moon, Smartphone, Tablet, Monitor, RefreshCw, ExternalLink } from 'lucide-svelte';
+  import { Sun, Moon, Smartphone, Tablet, Monitor, RefreshCw, ExternalLink, Columns2 } from 'lucide-svelte';
   import type { PreviewTemplate } from '../../types';
   import { fa } from '../../lib/codec';
   // Import the built framework CSS at Vite compile time — always in sync with dist.
@@ -220,14 +220,21 @@ ${BODIES[template]}
 </html>`;
   }
 
+  let splitMode = $state(false);
+
   let iframeEl = $state<HTMLIFrameElement | null>(null);
+  let splitLightEl = $state<HTMLIFrameElement | null>(null);
+  let splitDarkEl = $state<HTMLIFrameElement | null>(null);
   let loaded = $state(false);
+  let splitLightLoaded = $state(false);
+  let splitDarkLoaded = $state(false);
   let refresh = $state(0);
 
   let html = $derived(buildIframeHTML(overrides, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic));
+  let htmlLight = $derived(buildIframeHTML(overrides, "light", previewMotion, previewTemplate, frameworkCSSStatic));
+  let htmlDark = $derived(buildIframeHTML(overrides, "dark", previewMotion, previewTemplate, frameworkCSSStatic));
 
   $effect(() => {
-    // Track reactive deps
     const _ov = overrides;
     const _theme = previewTheme;
 
@@ -246,6 +253,26 @@ ${BODIES[template]}
       doc.documentElement.classList.add("sf-dark");
     } else {
       doc.documentElement.classList.remove("sf-dark");
+    }
+  });
+
+  $effect(() => {
+    const _ov = overrides;
+    const css = fa(_ov, { mode: "root", banner: false });
+
+    if (splitLightEl && splitLightLoaded) {
+      const doc = splitLightEl.contentDocument;
+      if (doc) {
+        const styleEl = doc.getElementById("slashed-overrides");
+        if (styleEl) styleEl.textContent = `:root {\n${css}\n}`;
+      }
+    }
+    if (splitDarkEl && splitDarkLoaded) {
+      const doc = splitDarkEl.contentDocument;
+      if (doc) {
+        const styleEl = doc.getElementById("slashed-overrides");
+        if (styleEl) styleEl.textContent = `:root {\n${css}\n}`;
+      }
     }
   });
 
@@ -297,19 +324,28 @@ ${BODIES[template]}
       {/each}
     </div>
 
-    <!-- Light/dark -->
+    <!-- Light/dark/split -->
     <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5">
       <button
-        onclick={() => onThemeChange("light")}
-        class={`p-1 rounded-md transition-all cursor-pointer ${previewTheme === "light" ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"}`}
+        onclick={() => { splitMode = false; onThemeChange("light"); }}
+        title="Light mode"
+        class={`p-1 rounded-md transition-all cursor-pointer ${!splitMode && previewTheme === "light" ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"}`}
       >
         <Sun class="w-3 h-3" />
       </button>
       <button
-        onclick={() => onThemeChange("dark")}
-        class={`p-1 rounded-md transition-all cursor-pointer ${previewTheme === "dark" ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"}`}
+        onclick={() => { splitMode = false; onThemeChange("dark"); }}
+        title="Dark mode"
+        class={`p-1 rounded-md transition-all cursor-pointer ${!splitMode && previewTheme === "dark" ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"}`}
       >
         <Moon class="w-3 h-3" />
+      </button>
+      <button
+        onclick={() => { splitMode = !splitMode; }}
+        title="Split: light + dark side by side"
+        class={`p-1 rounded-md transition-all cursor-pointer ${splitMode ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"}`}
+      >
+        <Columns2 class="w-3 h-3" />
       </button>
     </div>
 
@@ -350,18 +386,58 @@ ${BODIES[template]}
   </div>
 
   <!-- Preview area -->
-  <div class={`flex-1 min-h-0 flex items-center justify-center overflow-auto ${isConstrained ? "bg-[#06060a]" : ""}`}>
-    <div style={getWidthStyle()} class={isConstrained ? "" : "w-full h-full"}>
-      {#key refresh}
-        <iframe
-          bind:this={iframeEl}
-          srcdoc={html}
-          sandbox="allow-scripts allow-same-origin allow-forms"
-          onload={() => { loaded = true; }}
-          class="w-full h-full border-0"
-          title="SLASHED live preview"
-        ></iframe>
-      {/key}
-    </div>
+  <div class={`flex-1 min-h-0 flex overflow-auto ${isConstrained && !splitMode ? "items-center justify-center bg-[#06060a]" : ""}`}>
+    {#if splitMode}
+      <!-- Split view: light left, dark right -->
+      <div class="flex-1 flex min-w-0 h-full">
+        <div class="flex-1 flex flex-col min-w-0 border-r border-white/8">
+          <div class="h-6 flex items-center justify-center bg-[#0d0d14] border-b border-white/6 shrink-0">
+            <span class="text-[9px] font-bold text-slate-600 uppercase tracking-widest flex items-center gap-1">
+              <Sun class="w-2.5 h-2.5" /> Light
+            </span>
+          </div>
+          {#key refresh}
+            <iframe
+              bind:this={splitLightEl}
+              srcdoc={htmlLight}
+              sandbox="allow-scripts allow-same-origin allow-forms"
+              onload={() => { splitLightLoaded = true; }}
+              class="flex-1 w-full border-0"
+              title="SLASHED light preview"
+            ></iframe>
+          {/key}
+        </div>
+        <div class="flex-1 flex flex-col min-w-0">
+          <div class="h-6 flex items-center justify-center bg-[#0d0d14] border-b border-white/6 shrink-0">
+            <span class="text-[9px] font-bold text-slate-600 uppercase tracking-widest flex items-center gap-1">
+              <Moon class="w-2.5 h-2.5" /> Dark
+            </span>
+          </div>
+          {#key refresh}
+            <iframe
+              bind:this={splitDarkEl}
+              srcdoc={htmlDark}
+              sandbox="allow-scripts allow-same-origin allow-forms"
+              onload={() => { splitDarkLoaded = true; }}
+              class="flex-1 w-full border-0"
+              title="SLASHED dark preview"
+            ></iframe>
+          {/key}
+        </div>
+      </div>
+    {:else}
+      <div style={getWidthStyle()} class={isConstrained ? "" : "w-full h-full"}>
+        {#key refresh}
+          <iframe
+            bind:this={iframeEl}
+            srcdoc={html}
+            sandbox="allow-scripts allow-same-origin allow-forms"
+            onload={() => { loaded = true; }}
+            class="w-full h-full border-0"
+            title="SLASHED live preview"
+          ></iframe>
+        {/key}
+      </div>
+    {/if}
   </div>
 </div>

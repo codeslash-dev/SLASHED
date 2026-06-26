@@ -3,10 +3,11 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
 
-  let { overrides, onSet, onReset }: {
+  let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
+    onBulkChange: (patch: Record<string, string | null>) => void;
   } = $props();
 
   const DURATIONS = [
@@ -28,10 +29,19 @@
     { label: "Overshoot",  token: "--sf-ease-overshoot", value: "cubic-bezier(0.34, 1.56, 0.64, 1)",  preview: "M0,40 C8,40 20,-10 40,0" },
   ];
 
+  // animation-delay-N base is 75ms * N; stagger base is 75ms
+  const STAGGER_TOKENS = ["--sf-animation-delay-1","--sf-animation-delay-2","--sf-animation-delay-3","--sf-animation-delay-4","--sf-animation-delay-5"];
+
   const knobs = KNOBS_BY_DOMAIN["motion"] ?? [];
 
   let scale = $derived(parseFloat(overrides["--sf-motion-scale"] ?? "1"));
   let motionDisabled = $derived(overrides["--sf-motion-scale"] === "0");
+  let themeTransition = $derived(parseFloat(overrides["--sf-theme-transition-duration"]?.replace("ms","") ?? String(300 * scale)));
+  let staggerBase = $derived(() => {
+    const raw = overrides[STAGGER_TOKENS[0]];
+    if (raw) return parseFloat(raw.replace("ms",""));
+    return 75 * scale;
+  });
 
   // Animation demo state
   let animating = $state(false);
@@ -52,6 +62,20 @@
       animOffsetX = 0;
       setTimeout(() => { animating = false; }, dur);
     }, dur);
+  }
+
+  function setStaggerBase(baseMs: number) {
+    const patch: Record<string, string> = {};
+    for (let i = 1; i <= 5; i++) {
+      patch[`--sf-animation-delay-${i}`] = `${Math.round(baseMs * i)}ms`;
+    }
+    onBulkChange(patch);
+  }
+
+  function resetStagger() {
+    const patch: Record<string, null> = {};
+    for (let i = 1; i <= 5; i++) patch[`--sf-animation-delay-${i}`] = null;
+    onBulkChange(patch);
   }
 </script>
 
@@ -79,6 +103,12 @@
     </button>
   </div>
 
+  {#if motionDisabled}
+    <div class="rounded-lg bg-amber-500/10 border border-amber-500/20 p-2.5">
+      <p class="text-[10px] text-amber-300">Motion is disabled — duration sliders have no effect while scale is 0.</p>
+    </div>
+  {/if}
+
   <!-- Global scale knob -->
   <div>
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Global scale</div>
@@ -95,11 +125,26 @@
 
   <div class="h-px bg-white/6"></div>
 
+  <!-- THEME TRANSITION -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Theme transition</div>
+    <SliderRow
+      label="Dark/light switch speed" value={Math.round(300 * scale)} min={0} max={600} step={10} unit="ms"
+      help="--sf-theme-transition-duration — color-scheme switch animation speed"
+      overridden={"--sf-theme-transition-duration" in overrides}
+      onChange={(v) => onSet("--sf-theme-transition-duration", `${v}ms`)}
+      onReset={() => onReset("--sf-theme-transition-duration")}
+    />
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
   <!-- INDIVIDUAL DURATIONS -->
   <section class="space-y-4">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Duration overrides</div>
     <p class="text-[10px] text-slate-600 leading-relaxed">
       Set absolute ms values to override the fluid scale calculation.
+      {#if motionDisabled}<span class="text-amber-400"> (No effect while motion is disabled.)</span>{/if}
     </p>
     {#each DURATIONS as d (d.token)}
       {@const computed = getDuration(d.token, d.base)}
@@ -115,6 +160,44 @@
         onReset={() => onReset(d.token)}
       />
     {/each}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- STAGGER BASE -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Stagger base</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      One slider sets all five stagger delays (delay-1 through delay-5 are multiples of this base).
+    </p>
+    <div class="group">
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="text-[11px] font-semibold text-slate-200">Stagger base</span>
+        {#if STAGGER_TOKENS.some(t => t in overrides)}
+          <button onclick={resetStagger} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer opacity-0 group-hover:opacity-100">reset</button>
+        {/if}
+      </div>
+      <SliderRow
+        label="" value={Math.round(staggerBase())} min={0} max={200} step={5} unit="ms"
+        help="Base unit for --sf-animation-delay-1 through -5"
+        overridden={STAGGER_TOKENS.some(t => t in overrides)}
+        onChange={(v) => setStaggerBase(v)}
+        onReset={resetStagger}
+      />
+    </div>
+    <!-- Stagger preview -->
+    <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-1">
+      {#each [1,2,3,4,5] as n (n)}
+        {@const delayMs = Math.round(staggerBase() * n)}
+        <div class="flex items-center gap-2">
+          <span class="text-[9px] font-mono text-slate-600 w-6">–{n}</span>
+          <div class="flex-1 h-1.5 bg-white/8 rounded-full">
+            <div class="h-full bg-indigo-500 rounded-full" style={`width: ${Math.min((delayMs / 600) * 100, 100)}%`}></div>
+          </div>
+          <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{delayMs}ms</span>
+        </div>
+      {/each}
+    </div>
   </section>
 
   <div class="h-px bg-white/6"></div>

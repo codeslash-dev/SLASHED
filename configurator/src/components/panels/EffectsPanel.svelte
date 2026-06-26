@@ -14,6 +14,12 @@
     { label: "To right",  value: "to right" },
   ];
 
+  const TEXT_SHADOW_PRESETS = [
+    { label: "None",   patch: { "--sf-text-shadow-s": "none", "--sf-text-shadow-m": "none", "--sf-text-shadow-l": "none" } },
+    { label: "Subtle", patch: null },
+    { label: "Strong", patch: { "--sf-shadow-strength": "calc(0.25 + var(--sf-is-dark) * 0.17)" } },
+  ];
+
   function parseNum(val: string | undefined, fallback: number, strip?: string): number {
     if (!val) return fallback;
     const v = parseFloat(strip ? val.replace(strip, "") : val);
@@ -24,6 +30,11 @@
   let opacityMuted    = $derived(parseNum(overrides["--sf-opacity-muted"], 0.5));
   let opacityDisabled = $derived(parseNum(overrides["--sf-opacity-disabled"], 0.45));
   let scrimDir        = $derived(overrides["--sf-scrim-direction"] ?? "to top");
+  let scrimColor      = $derived(overrides["--sf-scrim-color"] ?? "");
+  let scrollShadowSize = $derived(parseNum(overrides["--sf-scroll-shadow-size"]?.replace("rem",""), 2));
+  let pendingOpacity  = $derived(parseNum(overrides["--sf-state-pending-opacity"], 0.7));
+  let scrollbarThumb  = $derived(overrides["--sf-scrollbar-thumb"] ?? "");
+  let scrollbarTrack  = $derived(overrides["--sf-scrollbar-track"] ?? "");
 </script>
 
 <div class="p-4 space-y-6">
@@ -73,18 +84,26 @@
       onChange={(v) => onSet("--sf-opacity-disabled", String(v))}
       onReset={() => onReset("--sf-opacity-disabled")}
     />
+    <SliderRow
+      label="Pending opacity" value={pendingOpacity} min={0.1} max={1} step={0.05}
+      help="--sf-state-pending-opacity — opacity of elements in loading/pending state"
+      overridden={"--sf-state-pending-opacity" in overrides}
+      onChange={(v) => onSet("--sf-state-pending-opacity", String(v))}
+      onReset={() => onReset("--sf-state-pending-opacity")}
+    />
     <!-- Opacity preview -->
     <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
-      <div class="flex items-center gap-3">
-        <span class="text-[9px] text-slate-600 w-16">muted</span>
-        <div class="flex-1 h-4 bg-indigo-400 rounded" style={`opacity: ${opacityMuted}`}></div>
-        <span class="text-[9px] font-mono text-slate-500 w-8">{opacityMuted}</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="text-[9px] text-slate-600 w-16">disabled</span>
-        <div class="flex-1 h-4 bg-indigo-400 rounded" style={`opacity: ${opacityDisabled}`}></div>
-        <span class="text-[9px] font-mono text-slate-500 w-8">{opacityDisabled}</span>
-      </div>
+      {#each [
+        { label: "muted", val: opacityMuted },
+        { label: "disabled", val: opacityDisabled },
+        { label: "pending", val: pendingOpacity },
+      ] as row (row.label)}
+        <div class="flex items-center gap-3">
+          <span class="text-[9px] text-slate-600 w-14">{row.label}</span>
+          <div class="flex-1 h-4 bg-indigo-400 rounded" style={`opacity: ${row.val}`}></div>
+          <span class="text-[9px] font-mono text-slate-500 w-8">{row.val}</span>
+        </div>
+      {/each}
     </div>
   </section>
 
@@ -96,6 +115,21 @@
     <p class="text-[10px] text-slate-600 leading-relaxed">
       Gradient overlay for hero images and media content. Used by the <code class="text-slate-400">.sf-scrim</code> macro.
     </p>
+
+    <!-- Scrim color -->
+    <div class="flex items-center gap-2">
+      <div class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Color</div>
+      <input
+        type="color"
+        value={scrimColor || "#000000"}
+        oninput={(e) => onSet("--sf-scrim-color", (e.target as HTMLInputElement).value)}
+        class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+      />
+      <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{scrimColor || "default (base color)"}</span>
+      {#if "--sf-scrim-color" in overrides}
+        <button onclick={() => onReset("--sf-scrim-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+      {/if}
+    </div>
 
     <div>
       <div class="text-[10px] font-semibold text-slate-400 mb-2">Direction</div>
@@ -123,10 +157,86 @@
       >
         <div
           class="absolute inset-0"
-          style={`background: linear-gradient(${scrimDir}, oklch(0 0 0 / 0.6), transparent)`}
+          style={`background: linear-gradient(${scrimDir}, ${scrimColor || "oklch(0 0 0 / 0.6)"}, transparent)`}
         ></div>
         <div class="absolute bottom-2 left-3 text-[10px] text-white/80 font-medium">Scrim preview</div>
       </div>
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- SCROLLBAR -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrollbar</div>
+    {#each [
+      { label: "Thumb color", token: "--sf-scrollbar-thumb", val: scrollbarThumb, default: "#6366f1" },
+      { label: "Track color", token: "--sf-scrollbar-track", val: scrollbarTrack, default: "transparent" },
+    ] as row (row.token)}
+      <div class="flex items-center gap-2">
+        <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">{row.label}</div>
+        <input
+          type="color"
+          value={row.val || row.default}
+          oninput={(e) => onSet(row.token, (e.target as HTMLInputElement).value)}
+          class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+        />
+        <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{row.val || "default"}</span>
+        {#if row.token in overrides}
+          <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+        {/if}
+      </div>
+    {/each}
+    <!-- Scrollbar strip preview -->
+    <div class="flex items-center gap-2 p-2 rounded-lg bg-white/4 border border-white/8">
+      <div class="w-16 h-3 rounded-full" style={`background: ${scrollbarTrack || "rgba(255,255,255,0.08)"}`}>
+        <div class="w-6 h-3 rounded-full" style={`background: ${scrollbarThumb || "oklch(0.52 0.025 260)"}`}></div>
+      </div>
+      <span class="text-[9px] text-slate-600">Scrollbar preview</span>
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- SCROLL SHADOW -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
+    <SliderRow
+      label="Shadow size" value={scrollShadowSize} min={0} max={6} step={0.25} unit="rem"
+      help="--sf-scroll-shadow-size — gradient edge mask on .sf-scroll-shadow elements"
+      overridden={"--sf-scroll-shadow-size" in overrides}
+      onChange={(v) => onSet("--sf-scroll-shadow-size", `${v}rem`)}
+      onReset={() => onReset("--sf-scroll-shadow-size")}
+    />
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- TEXT SHADOW PRESETS -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text shadow</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      Controls text legibility over images. Applied via <code class="text-slate-400">text-shadow: var(--sf-text-shadow-m)</code>.
+    </p>
+    <div class="flex gap-2">
+      {#each TEXT_SHADOW_PRESETS as p (p.label)}
+        <button
+          onclick={() => {
+            if (p.patch === null) {
+              onReset("--sf-text-shadow-s"); onReset("--sf-text-shadow-m"); onReset("--sf-text-shadow-l");
+            } else {
+              for (const [k, v] of Object.entries(p.patch)) onSet(k, v);
+            }
+          }}
+          class={`flex-1 py-2 rounded-lg text-[10px] border transition-all cursor-pointer ${
+            p.label === "None" && overrides["--sf-text-shadow-s"] === "none"
+              ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+              : p.patch === null && !("--sf-text-shadow-s" in overrides)
+              ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+              : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+          }`}
+        >{p.label}</button>
+      {/each}
     </div>
   </section>
 </div>

@@ -88,17 +88,17 @@
           {:else if domain === "spacing"}
             <SpacingPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "layout"}
-            <LayoutPanel {overrides} {onSet} {onReset} />
+            <LayoutPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "borders"}
             <BordersPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "shadows"}
             <ShadowsPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "motion"}
-            <MotionPanel {overrides} {onSet} {onReset} />
+            <MotionPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "effects"}
             <EffectsPanel {overrides} {onSet} {onReset} />
           {:else if domain === "misc"}
-            <MiscPanel {overrides} {onSet} {onReset} />
+            <MiscPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else}
             <GenericTokenPanel {domain} {tokens} {overrides} {onSet} {onReset} />
           {/if}
