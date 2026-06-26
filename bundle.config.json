@@ -1,7 +1,7 @@
 {
   "bundles": [
     {
-      "output": "dist/slashed.optimal.css",
+      "output": "badges/slashed.optimal.css",
       "files": [
         "core/layers.css",
         "core/tokens.css",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "output": "dist/slashed.optimal.flat.css",
+      "output": "badges/slashed.optimal.flat.css",
       "flat": true,
       "files": [
         "core/layers.css",
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "output": "dist/slashed.optimal-components.css",
+      "output": "badges/slashed.optimal-components.css",
       "files": [
         "core/layers.css",
         "core/tokens.css",
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "output": "dist/slashed.optimal-components.flat.css",
+      "output": "badges/slashed.optimal-components.flat.css",
       "flat": true,
       "files": [
         "core/layers.css",
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "output": "dist/slashed.optimal-utilities.css",
+      "output": "badges/slashed.optimal-utilities.css",
       "files": [
         "core/layers.css",
         "core/tokens.css",
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "output": "dist/slashed.optimal-utilities.flat.css",
+      "output": "badges/slashed.optimal-utilities.flat.css",
       "flat": true,
       "files": [
         "core/layers.css",
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "output": "dist/slashed.full.css",
+      "output": "badges/slashed.full.css",
       "files": [
         "core/layers.css",
         "core/tokens.css",
@@ -146,7 +146,7 @@
       ]
     },
     {
-      "output": "dist/slashed.full.flat.css",
+      "output": "badges/slashed.full.flat.css",
       "flat": true,
       "files": [
         "core/layers.css",

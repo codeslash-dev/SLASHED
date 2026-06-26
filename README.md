@@ -108,8 +108,8 @@ parent module. All token files share the `slashed.tokens` layer.
 `optional/legacy.css` is **not bundled by default** — add it explicitly when you
 need back-compat shims. Every rule lives in an `@layer`, so concatenation order
 never affects the cascade. Each bundle is emitted readable and minified with a
-source map: `dist/slashed.<name>.css`, `dist/slashed.<name>.min.css`,
-`dist/slashed.<name>.min.css.map`, plus a layer-flattened `.flat` variant.
+source map: `badges/slashed.<name>.css`, `badges/slashed.<name>.min.css`,
+`badges/slashed.<name>.min.css.map`, plus a layer-flattened `.flat` variant.
 `npm run build` prints raw / gzip / brotli sizes;
 `tests/bundle-size.spec.js` guards against bloat.
 
@@ -218,7 +218,7 @@ The WordPress plugin (Bricks Builder + Gutenberg) lives in its own repository:
 ## Development
 
 ```sh
-npm run build        # build all dist/ bundles
+npm run build        # build all badges/ bundles
 npm run watch        # rebuild on change
 npm run docs:tokens  # regenerate docs/tokens.md from source
 npm run lint:css     # stylelint all CSS
