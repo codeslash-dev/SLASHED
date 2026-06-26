@@ -169,6 +169,7 @@
     template: PreviewTemplate,
     frameworkCSS: string,
   ): string {
+    // fa() with mode:"root" already emits a full :root { } block — don't wrap again.
     const css = fa(ov, { mode: "root", banner: false });
     const motionCSS =
       motion === "slow"
@@ -183,11 +184,7 @@
   <meta charset="UTF-8">
   <title>SLASHED Preview</title>
   <style id="slashed-framework">${frameworkCSS}</style>
-  <style id="slashed-overrides">
-:root {
-${css}
-}
-  </style>
+  <style id="slashed-overrides">${css}</style>
   <style>
     html, body { height: 100%; margin: 0; padding: 0; }
     body {
@@ -213,6 +210,7 @@ ${css}
     .sf-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     ${motionCSS}
   </style>
+  <script>document.addEventListener('click',function(e){var a=e.target.closest('a');if(a){e.preventDefault();e.stopPropagation();}});<\/script>
 </head>
 <body>
 ${BODIES[template]}
@@ -221,25 +219,27 @@ ${BODIES[template]}
   }
 
   let iframeEl = $state<HTMLIFrameElement | null>(null);
-  let loaded = $state(false);
+  // Increments each time the iframe finishes loading so the effect re-fires after reloads.
+  let loadCount = $state(0);
   let refresh = $state(0);
 
-  let html = $derived(buildIframeHTML(overrides, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic));
+  // Overrides are patched live via $effect — don't bake them into srcdoc so the iframe
+  // doesn't reload on every token change.
+  let html = $derived(buildIframeHTML({}, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic));
 
   $effect(() => {
-    // Track reactive deps
     const _ov = overrides;
     const _theme = previewTheme;
+    const _count = loadCount; // re-run after every iframe load
 
-    const iframe = iframeEl;
-    if (!iframe || !loaded) return;
-    const doc = iframe.contentDocument;
+    if (!iframeEl || _count === 0) return;
+    const doc = iframeEl.contentDocument;
     if (!doc) return;
 
     const styleEl = doc.getElementById("slashed-overrides");
     if (styleEl) {
-      const css = fa(_ov, { mode: "root", banner: false });
-      styleEl.textContent = `:root {\n${css}\n}`;
+      // fa() already returns a full :root { } block (or empty string).
+      styleEl.textContent = fa(_ov, { mode: "root", banner: false });
     }
 
     if (_theme === "dark") {
@@ -328,7 +328,7 @@ ${BODIES[template]}
 
     <!-- Refresh -->
     <button
-      onclick={() => { loaded = false; refresh += 1; }}
+      onclick={() => { refresh += 1; }}
       title="Reload preview"
       class="p-1 rounded-md text-slate-500 hover:text-slate-300 hover:bg-white/8 transition-all cursor-pointer"
     >
@@ -338,7 +338,8 @@ ${BODIES[template]}
     <!-- Open in new tab -->
     <button
       onclick={() => {
-        const blob = new Blob([html], { type: "text/html" });
+        const exportHtml = buildIframeHTML(overrides, previewTheme, previewMotion, previewTemplate, frameworkCSSStatic);
+        const blob = new Blob([exportHtml], { type: "text/html" });
         const url = URL.createObjectURL(blob);
         window.open(url, "_blank");
       }}
@@ -357,7 +358,7 @@ ${BODIES[template]}
           bind:this={iframeEl}
           srcdoc={html}
           sandbox="allow-scripts allow-same-origin allow-forms"
-          onload={() => { loaded = true; }}
+          onload={() => { loadCount += 1; }}
           class="w-full h-full border-0"
           title="SLASHED live preview"
         ></iframe>
