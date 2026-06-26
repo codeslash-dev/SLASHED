@@ -15,3 +15,6 @@ semantic-review/
 badges/slashed.zip
 badges/*.css
 badges/*.map
+
+# Legacy build output dir (build script still emits here; real artifacts live in badges/)
+dist/
