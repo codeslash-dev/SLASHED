@@ -5,54 +5,12 @@
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { resolveTokenLuminance, contrastBetween } from './color-helpers.js';
 
 // fixture.html loads slashed.full.css (palette tokens are core)
 const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
-// ── Serialisable in-browser helpers ─────────────────────────────
-// Functions passed directly to page.evaluate() must be self-contained
-// (no closure over Node.js variables). Single-token helpers are called
-// from Node.js with page.evaluate(fn, tokenName) so callers can compose
-// them without duplicating the canvas boilerplate.
-
-// Returns WCAG luminance of the resolved value of one CSS custom property.
-// Self-contained: safe to pass to page.evaluate(resolveTokenLuminance, tok).
-function resolveTokenLuminance(tok) {
-  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
-  const ctx = cv.getContext('2d', { willReadFrequently: true });
-  const el = document.createElement('div'); el.style.backgroundColor = `var(${tok})`;
-  document.body.appendChild(el);
-  ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=getComputedStyle(el).backgroundColor; el.remove();
-  ctx.fillRect(0,0,1,1);
-  const [r,g,b] = ctx.getImageData(0,0,1,1).data;
-  const lin = v => { v/=255; return v<=0.03928 ? v/12.92 : ((v+0.055)/1.055)**2.4; };
-  return 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
-}
-
-// Returns WCAG contrast ratio between two CSS custom property tokens.
-// Accepts a two-element array [token1, token2] for Playwright 1.60 compatibility
-// (page.evaluate only accepts a single argument).
-function contrastBetween([token1, token2]) {
-  // Must be self-contained: re-declare helpers (page.evaluate serialises the fn body).
-  const cv = document.createElement('canvas'); cv.width = cv.height = 1;
-  const ctx = cv.getContext('2d', { willReadFrequently: true });
-  const toLum = (color) => {
-    ctx.clearRect(0,0,1,1); ctx.fillStyle='#000'; ctx.fillStyle=color; ctx.fillRect(0,0,1,1);
-    const [r,g,b] = ctx.getImageData(0,0,1,1).data;
-    const lin = v => { v/=255; return v<=0.03928 ? v/12.92 : ((v+0.055)/1.055)**2.4; };
-    return 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
-  };
-  const resolve = (tok) => {
-    const el = document.createElement('div'); el.style.backgroundColor = `var(${tok})`;
-    document.body.appendChild(el); const c = getComputedStyle(el).backgroundColor; el.remove(); return c;
-  };
-  const a = toLum(resolve(token1));
-  const b = toLum(resolve(token2));
-  return (Math.max(a,b) + 0.05) / (Math.min(a,b) + 0.05);
-}
-
-// Node.js async helpers — compose page.evaluate(resolveTokenLuminance) calls
-// so the canvas boilerplate lives in exactly one place.
+// Node.js async helpers — compose page.evaluate(resolveTokenLuminance) calls.
 
 async function getSurfaceLuminances(page) {
   const [bg, raised, inset] = await Promise.all([
@@ -63,18 +21,19 @@ async function getSurfaceLuminances(page) {
   return { bg, raised, inset };
 }
 
-// Returns {step, lum} pairs for the primary palette steps provided.
+// Returns {step, lum} pairs for the primary palette steps.
+// Self-contained for page.evaluate. One canvas reused across all steps.
 function paletteLuminances(steps) {
   const cv = document.createElement('canvas'); cv.width = cv.height = 1;
   const ctx = cv.getContext('2d', { willReadFrequently: true });
+  const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
   return steps.map(s => {
-    ctx.clearRect(0,0,1,1); ctx.fillStyle='#000';
-    const el=document.createElement('div'); el.style.backgroundColor=`var(--sf-color-primary-${s})`;
-    document.body.appendChild(el); ctx.fillStyle=getComputedStyle(el).backgroundColor; el.remove();
-    ctx.fillRect(0,0,1,1);
-    const [r,g,b]=ctx.getImageData(0,0,1,1).data;
-    const lin=v=>{v/=255;return v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4;};
-    return { step: s, lum: 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b) };
+    ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = '#000';
+    const el = document.createElement('div'); el.style.backgroundColor = `var(--sf-color-primary-${s})`;
+    document.body.appendChild(el); ctx.fillStyle = getComputedStyle(el).backgroundColor; el.remove();
+    ctx.fillRect(0, 0, 1, 1);
+    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+    return { step: s, lum: 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b) };
   });
 }
 
