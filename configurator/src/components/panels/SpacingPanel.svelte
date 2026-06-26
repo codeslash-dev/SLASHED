@@ -3,6 +3,7 @@
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     tokens: SlashedToken[];
@@ -40,6 +41,8 @@
   let baseMin    = $derived(num("--sf-space-base-min", 1));
   let baseMax    = $derived(num("--sf-space-base-max", 2));
   let spaceScale = $derived(num("--sf-space-scale", 1));
+  let gapVal     = $derived(num("--sf-gap", 1));
+  let contentGapVal = $derived(num("--sf-content-gap", 0.5));
 
   let activeRatio = $derived(RATIO_PRESETS.find(
     (p) => Math.abs(p.value - ratioMin) < 0.0015 && Math.abs(p.value - ratioMax) < 0.0015
@@ -53,6 +56,30 @@
 </script>
 
 <div class="p-4 space-y-6">
+
+  <!-- GAP TOKENS — most used, at the top -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Layout gap</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      The two most-referenced spacing tokens. Referenced by every layout primitive (cluster, grid, stack, bento…).
+    </p>
+    <SliderRow
+      label="Gap" value={gapVal} min={0} max={4} step={0.0625} unit="rem"
+      help="--sf-gap — spacing between layout items (cluster, grid, reel, stack, sidebar, bento)"
+      overridden={"--sf-gap" in overrides}
+      onChange={(v) => onSet("--sf-gap", `${v}rem`)}
+      onReset={() => onReset("--sf-gap")}
+    />
+    <SliderRow
+      label="Content gap" value={contentGapVal} min={0} max={2} step={0.0625} unit="rem"
+      help="--sf-content-gap — tighter gap within components (defaults to space-s)"
+      overridden={"--sf-content-gap" in overrides}
+      onChange={(v) => onSet("--sf-content-gap", `${v}rem`)}
+      onReset={() => onReset("--sf-content-gap")}
+    />
+  </section>
+
+  <div class="h-px bg-white/6"></div>
 
   <!-- DENSITY PRESETS -->
   <section class="space-y-3">
@@ -97,39 +124,46 @@
         {/each}
       </div>
       {#if !activeRatio}
-        <div class="mt-3 space-y-3 pl-2 border-l border-amber-500/25">
-          <SliderRow
-            label="Ratio min (mobile)" value={ratioMin} min={1.1} max={1.8} step={0.001}
-            overridden={"--sf-space-ratio-min" in overrides}
-            onChange={(v) => onSet("--sf-space-ratio-min", String(v))}
-            onReset={() => onReset("--sf-space-ratio-min")}
-          />
-          <SliderRow
-            label="Ratio max (desktop)" value={ratioMax} min={1.1} max={1.8} step={0.001}
-            overridden={"--sf-space-ratio-max" in overrides}
-            onChange={(v) => onSet("--sf-space-ratio-max", String(v))}
-            onReset={() => onReset("--sf-space-ratio-max")}
-          />
+        <div class="mt-3 space-y-2 pl-2 border-l border-amber-500/25">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <div class="text-[9px] text-slate-600 mb-1">Ratio min (mobile)</div>
+              <RangeWithNumber value={ratioMin} min={1.1} max={1.8} step={0.001}
+                onChange={(v) => onSet("--sf-space-ratio-min", String(v))} />
+            </div>
+            <div>
+              <div class="text-[9px] text-slate-600 mb-1">Ratio max (desktop)</div>
+              <RangeWithNumber value={ratioMax} min={1.1} max={1.8} step={0.001}
+                onChange={(v) => onSet("--sf-space-ratio-max", String(v))} />
+            </div>
+          </div>
         </div>
       {/if}
     </div>
 
-    <div class="space-y-3">
-      <div class="text-[10px] font-semibold text-slate-400">Base unit — fluid clamp endpoints</div>
-      <SliderRow
-        label="Min (mobile)" value={baseMin} min={0.5} max={2} step={0.05} unit="rem"
-        help="Smallest --sf-space-m value (mobile viewport)"
-        overridden={"--sf-space-base-min" in overrides}
-        onChange={(v) => onSet("--sf-space-base-min", String(v))}
-        onReset={() => onReset("--sf-space-base-min")}
-      />
-      <SliderRow
-        label="Max (desktop)" value={baseMax} min={1} max={4} step={0.05} unit="rem"
-        help="Largest --sf-space-m value (desktop viewport)"
-        overridden={"--sf-space-base-max" in overrides}
-        onChange={(v) => onSet("--sf-space-base-max", String(v))}
-        onReset={() => onReset("--sf-space-base-max")}
-      />
+    <!-- Compact base unit min/max pair -->
+    <div>
+      <div class="text-[10px] font-semibold text-slate-400 mb-2">Base unit (fluid clamp)</div>
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <div class="text-[9px] text-slate-600 mb-1">Min (mobile)</div>
+          <RangeWithNumber value={baseMin} min={0.5} max={2} step={0.05} unit="rem"
+            onChange={(v) => onSet("--sf-space-base-min", String(v))} />
+        </div>
+        <div>
+          <div class="text-[9px] text-slate-600 mb-1">Max (desktop)</div>
+          <RangeWithNumber value={baseMax} min={1} max={4} step={0.05} unit="rem"
+            onChange={(v) => onSet("--sf-space-base-max", String(v))} />
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 mt-1">
+        {#if "--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
+          <button
+            onclick={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}
+            class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer"
+          >reset</button>
+        {/if}
+      </div>
     </div>
 
     <div class="space-y-4">

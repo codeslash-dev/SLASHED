@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SlashedToken } from '../../types';
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
+  import { parseOklch, stringifyOklch, oklchToRgb, getRelativeLuminance, getContrastRatio } from '../../lib/colorUtils';
   import OklchColorDesk from '../inputs/OklchColorDesk.svelte';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
@@ -13,7 +14,11 @@
     onBulkChange: (patch: Record<string, string | null>) => void;
   } = $props();
 
-  const BRAND_SOURCES = [
+  type ColorSource = {
+    name: string; label: string; side: "light" | "dark"; default: string; colorKey: string;
+  };
+
+  const BRAND_SOURCES: ColorSource[] = [
     { name: "--sf-color-primary-source-light",   label: "Primary",   side: "light", default: "oklch(0.47 0.27 264)", colorKey: "primary" },
     { name: "--sf-color-primary-source-dark",    label: "Primary",   side: "dark",  default: "oklch(0.715 0.243 264)", colorKey: "primary" },
     { name: "--sf-color-secondary-source-light", label: "Secondary", side: "light", default: "oklch(0.22 0.04 264)", colorKey: "secondary" },
@@ -28,7 +33,7 @@
     { name: "--sf-color-base-source-dark",       label: "Base",      side: "dark",  default: "oklch(0.22 0.003 250)", colorKey: "base" },
   ];
 
-  const STATUS_SOURCES = [
+  const STATUS_SOURCES: ColorSource[] = [
     { name: "--sf-color-success-source-light", label: "Success", side: "light", default: "oklch(0.50 0.16 145)", colorKey: "success" },
     { name: "--sf-color-success-source-dark",  label: "Success", side: "dark",  default: "oklch(0.70 0.144 145)", colorKey: "success" },
     { name: "--sf-color-warning-source-light", label: "Warning", side: "light", default: "oklch(0.75 0.17 80)", colorKey: "warning" },
@@ -77,11 +82,38 @@
     },
   ];
 
+  const SEMANTIC_OVERRIDES = [
+    { name: "--sf-color-link",        label: "Link" },
+    { name: "--sf-color-link--visited", label: "Link visited" },
+    { name: "--sf-color-mark-bg",     label: "Mark background" },
+    { name: "--sf-color-mark-text",   label: "Mark text" },
+    { name: "--sf-color-code-bg",     label: "Code background" },
+    { name: "--sf-color-code-text",   label: "Code text" },
+    { name: "--sf-color-overlay",     label: "Overlay" },
+  ];
+
   const SWATCH_STEPS = ["50","100","200","300","400","500","600","700","800","900","950"];
   const BRAND_COLOR_KEYS = ["primary","secondary","tertiary","action","neutral"];
 
-  const knobs = KNOBS_BY_DOMAIN["colors"] ?? [];
+  // Separate contrast/focus knobs
+  const contrastKnobs = (KNOBS_BY_DOMAIN["colors"] ?? []).filter(
+    (k) => k.name === "--sf-contrast-bias" || k.name === "--sf-contrast-threshold"
+  );
+  const focusKnobs = (KNOBS_BY_DOMAIN["colors"] ?? []).filter(
+    (k) => k.name === "--sf-focus-ring-width"
+  );
+
   let showStatus = $state(false);
+  let showSemanticOverrides = $state(false);
+
+  // Track which color rows are in Auto dark mode.
+  // A key starts in auto only if its dark token is NOT already in overrides — otherwise the user
+  // has an existing dark value (loaded from URL/localStorage) that we must not silently overwrite.
+  let autoDarkSet = $state<Set<string>>(new Set(
+    BRAND_SOURCES.filter(s => s.side === "light" && !(
+      (BRAND_SOURCES.find(d => d.colorKey === s.colorKey && d.side === "dark")?.name ?? "") in overrides
+    )).map(s => s.colorKey)
+  ));
 
   let sourceTokenMap = $derived(() => {
     const map: Record<string, SlashedToken> = {};
@@ -104,15 +136,58 @@
     return parseFloat(raw);
   }
 
-  // Build brand pairs: group sources by colorKey then render light/dark side by side
-  const BRAND_PAIRS: [typeof BRAND_SOURCES[0], typeof BRAND_SOURCES[0] | undefined][] = [];
+  // Build brand pairs: group by colorKey then render light/dark
+  const BRAND_PAIRS: [ColorSource, ColorSource | undefined][] = [];
   for (let i = 0; i < BRAND_SOURCES.length; i += 2) {
     BRAND_PAIRS.push([BRAND_SOURCES[i], BRAND_SOURCES[i + 1]]);
   }
-  const STATUS_PAIRS: [typeof STATUS_SOURCES[0], typeof STATUS_SOURCES[0] | undefined][] = [];
+  const STATUS_PAIRS: [ColorSource, ColorSource | undefined][] = [];
   for (let i = 0; i < STATUS_SOURCES.length; i += 2) {
     STATUS_PAIRS.push([STATUS_SOURCES[i], STATUS_SOURCES[i + 1]]);
   }
+
+  function deriveDarkFromLight(lightVal: string): string {
+    const { l, c, h, valid } = parseOklch(lightVal);
+    if (!valid) return lightVal;
+    const darkL = Math.min(l + 0.27, 0.95);
+    const darkC = c * 0.9;
+    return stringifyOklch(darkL, darkC, h);
+  }
+
+  function handleLightChange(light: ColorSource, dark: ColorSource | undefined, newVal: string) {
+    if (dark && autoDarkSet.has(light.colorKey)) {
+      onBulkChange({ [light.name]: newVal, [dark.name]: deriveDarkFromLight(newVal) });
+    } else {
+      onSet(light.name, newVal);
+    }
+  }
+
+  function toggleDarkMode(colorKey: string, dark: ColorSource | undefined, lightName: string) {
+    if (autoDarkSet.has(colorKey)) {
+      // Switch to manual — just remove from auto set, keep current dark value
+      autoDarkSet = new Set([...autoDarkSet].filter(k => k !== colorKey));
+    } else {
+      // Switch to auto — derive dark from current light and apply
+      const lightVal = overrides[lightName] ?? BRAND_SOURCES.find(s => s.name === lightName)?.default ?? "";
+      if (dark) onSet(dark.name, deriveDarkFromLight(lightVal));
+      autoDarkSet = new Set([...autoDarkSet, colorKey]);
+    }
+  }
+
+  // Compute live AA/AAA against primary for contrast knobs
+  let contrastRatio = $derived(() => {
+    const primaryVal = overrides["--sf-color-primary-source-light"] ?? "oklch(0.47 0.27 264)";
+    const { l, c, h, valid } = parseOklch(primaryVal);
+    if (!valid) return null;
+    const [r, g, b] = oklchToRgb(l, c, h);
+    const bgLum = getRelativeLuminance(r, g, b);
+    const whiteLum = 1;
+    const blackLum = 0;
+    const threshold = parseFloat(overrides["--sf-contrast-threshold"] ?? "0.6");
+    const textIsLight = l < threshold;
+    const textLum = textIsLight ? whiteLum : blackLum;
+    return getContrastRatio(bgLum, textLum);
+  });
 </script>
 
 <div class="p-4 space-y-6">
@@ -125,15 +200,34 @@
     </p>
     <div class="space-y-3">
       {#each BRAND_PAIRS as [light, dark] (light.name)}
+        {@const isAutoMode = autoDarkSet.has(light.colorKey)}
         <div class="space-y-1">
-          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">{light.label}</div>
+          <div class="flex items-center justify-between">
+            <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">{light.label}</div>
+            {#if dark}
+              <button
+                onclick={() => toggleDarkMode(light.colorKey, dark, light.name)}
+                class={`text-[8px] px-1.5 py-0.5 rounded border transition-all cursor-pointer ${
+                  isAutoMode
+                    ? "border-indigo-500/40 bg-indigo-500/15 text-indigo-300"
+                    : "border-white/10 text-slate-500 hover:text-slate-300"
+                }`}
+              >{isAutoMode ? "Auto dark" : "Manual dark"}</button>
+            {/if}
+          </div>
           <OklchColorDesk
-            label={`${light.label} light`}
+            label={`${light.label} (light)`}
             tokenName={light.name}
             value={overrides[light.name] ?? sourceTokenMap()[light.name]?.value ?? light.default}
             overridden={light.name in overrides}
-            onChange={(v) => onSet(light.name, v)}
-            onReset={() => onReset(light.name)}
+            onChange={(v) => handleLightChange(light, dark, v)}
+            onReset={() => {
+              if (dark && isAutoMode) {
+                onBulkChange({ [light.name]: null, [dark.name]: null });
+              } else {
+                onReset(light.name);
+              }
+            }}
           />
           <!-- Palette swatch strip for brand colors -->
           {#if BRAND_COLOR_KEYS.includes(light.colorKey)}
@@ -147,15 +241,19 @@
               {/each}
             </div>
           {/if}
-          {#if dark}
+          {#if dark && !isAutoMode}
             <OklchColorDesk
-              label={`${dark.label} dark`}
+              label={`${dark.label} (dark mode)`}
               tokenName={dark.name}
               value={overrides[dark.name] ?? sourceTokenMap()[dark.name]?.value ?? dark.default}
               overridden={dark.name in overrides}
               onChange={(v) => onSet(dark.name, v)}
               onReset={() => onReset(dark.name)}
             />
+          {:else if dark && isAutoMode}
+            <div class="text-[9px] text-slate-600 pl-1">
+              Dark: auto-derived ({deriveDarkFromLight(overrides[light.name] ?? light.default)})
+            </div>
           {/if}
         </div>
       {/each}
@@ -200,6 +298,47 @@
         {/each}
       </div>
     {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- TEXT CONTRAST -->
+  <section class="space-y-4">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text contrast</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      Controls whether text on brand-coloured surfaces is light or dark.
+    </p>
+    {#each contrastKnobs as k (k.name)}
+      <PowerKnobRow
+        knob={k}
+        {overrides}
+        onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
+      />
+    {/each}
+
+    <!-- Live AA/AAA badge against primary -->
+    {#if contrastRatio() !== null}
+      {@const ratio = contrastRatio()!}
+      <div class="flex items-center gap-2 p-2 rounded-lg bg-white/4 border border-white/8">
+        <span class="text-[9px] text-slate-500">vs. primary:</span>
+        <span class="text-[10px] font-mono font-bold text-slate-200">{ratio.toFixed(2)}:1</span>
+        <span class={`text-[9px] font-bold px-1.5 py-0.5 rounded ${ratio >= 4.5 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
+          {ratio >= 4.5 ? "AA ✓" : "AA ✗"}
+        </span>
+        <span class={`text-[9px] font-bold px-1.5 py-0.5 rounded ${ratio >= 7 ? "bg-emerald-500/20 text-emerald-300" : "bg-slate-500/20 text-slate-400"}`}>
+          {ratio >= 7 ? "AAA ✓" : "AAA ✗"}
+        </span>
+      </div>
+    {/if}
+
+    <!-- Focus ring width — logically belongs with contrast/accessibility -->
+    {#each focusKnobs as k (k.name)}
+      <PowerKnobRow
+        knob={k}
+        {overrides}
+        onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
+      />
+    {/each}
   </section>
 
   <div class="h-px bg-white/6"></div>
@@ -281,16 +420,39 @@
 
   <div class="h-px bg-white/6"></div>
 
-  <!-- GLOBAL ADJUSTMENTS -->
-  <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global adjustments</div>
-    {#each knobs as k (k.name)}
-      <PowerKnobRow
-        knob={k}
-        {overrides}
-        onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
-      />
-    {/each}
+  <!-- SEMANTIC OVERRIDES -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showSemanticOverrides = !showSemanticOverrides; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Semantic overrides</div>
+      <span class="text-[10px] text-slate-500">{showSemanticOverrides ? "▲" : "▼"}</span>
+    </button>
+    {#if showSemanticOverrides}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Direct color overrides for tokens the framework auto-derives. Use for edge cases.
+      </p>
+      <div class="space-y-2">
+        {#each SEMANTIC_OVERRIDES as s (s.name)}
+          <div>
+            <div class="text-[10px] font-semibold text-slate-400 mb-1">{s.label}</div>
+            <div class="flex items-center gap-2">
+              <input
+                type="color"
+                value={overrides[s.name] ?? "#6366f1"}
+                oninput={(e) => onSet(s.name, (e.target as HTMLInputElement).value)}
+                class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer shrink-0"
+              />
+              <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{overrides[s.name] ?? "auto-derived"}</span>
+              {#if s.name in overrides}
+                <button onclick={() => onReset(s.name)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+              {/if}
+            </div>
+          </div>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="rounded-lg bg-white/3 border border-white/6 p-3">

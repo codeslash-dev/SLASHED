@@ -25,9 +25,19 @@
     { step: "2xl", name: "--sf-radius-2xl", default: 20, max: 80, step_size: 2   },
   ];
 
+  const COMPONENT_TOKENS = [
+    { label: "Button radius",         token: "--sf-button-radius",          unit: "rem", min: 0, max: 2, step: 0.05, default: 0.375, help: "--sf-button-radius" },
+    { label: "Button padding block",  token: "--sf-button-padding-block",   unit: "rem", min: 0, max: 1, step: 0.025, default: 0.375, help: "--sf-button-padding-block" },
+    { label: "Button padding inline", token: "--sf-button-padding-inline",  unit: "rem", min: 0, max: 2, step: 0.025, default: 0.875, help: "--sf-button-padding-inline" },
+    { label: "Field radius",          token: "--sf-field-radius",           unit: "rem", min: 0, max: 2, step: 0.05, default: 0.375, help: "--sf-field-radius" },
+    { label: "Field padding block",   token: "--sf-field-padding-block",    unit: "rem", min: 0, max: 1, step: 0.025, default: 0.375, help: "--sf-field-padding-block" },
+    { label: "Field padding inline",  token: "--sf-field-padding-inline",   unit: "rem", min: 0, max: 2, step: 0.025, default: 0.75, help: "--sf-field-padding-inline" },
+  ];
+
   const knobs = KNOBS_BY_DOMAIN["borders"] ?? [];
 
   let showFineTune = $state(false);
+  let showComponents = $state(false);
 
   function parseNum(val: string | undefined, fallback: number, strip?: string): number {
     if (!val) return fallback;
@@ -39,6 +49,11 @@
   let borderScale  = $derived(parseNum(overrides["--sf-border-scale"], 1));
   let focusWidth   = $derived(parseNum(overrides["--sf-focus-ring-width"], 2, "px"));
   let focusOffset  = $derived(parseNum(overrides["--sf-focus-ring-offset"], 2, "px"));
+  let dividerWidth = $derived(parseNum(overrides["--sf-divider-width"]?.replace("px",""), 1));
+  let dividerGap   = $derived(parseNum(overrides["--sf-divider-gap"]?.replace("rem",""), 1));
+  let borderColor  = $derived(overrides["--sf-color-border"] ?? "");
+  let focusRingColor = $derived(overrides["--sf-focus-ring-color"] ?? "");
+  let dividerColor = $derived(overrides["--sf-divider-color"] ?? "");
 
   function getStyleCurrent(tokenName: string, defaultVal: string): string {
     return overrides[tokenName] ?? defaultVal;
@@ -47,6 +62,12 @@
   function getRadiusValue(r: typeof RADIUS_FINE[0]): number {
     const raw = overrides[r.name];
     if (!raw) return r.default;
+    return parseFloat(raw);
+  }
+
+  function getComponentVal(t: typeof COMPONENT_TOKENS[0]): number {
+    const raw = overrides[t.token];
+    if (!raw) return t.default;
     return parseFloat(raw);
   }
 </script>
@@ -60,6 +81,28 @@
     {overrides}
     onApply={onBulkChange}
   />
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- BORDER COLOR — most impactful, first -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border color</div>
+    <div class="flex items-center gap-2">
+      <input
+        type="color"
+        value={borderColor || "#e2e8f0"}
+        oninput={(e) => onSet("--sf-color-border", (e.target as HTMLInputElement).value)}
+        class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
+      />
+      <span class="text-[9px] font-mono text-slate-400 flex-1">{borderColor || "auto-derived"}</span>
+      {#if "--sf-color-border" in overrides}
+        <button onclick={() => onReset("--sf-color-border")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+      {/if}
+    </div>
+    <p class="text-[9px] text-slate-600">
+      Drives --sf-color-border--strong, --subtle, --translucent automatically.
+    </p>
+  </section>
 
   <div class="h-px bg-white/6"></div>
 
@@ -93,37 +136,69 @@
 
   <div class="h-px bg-white/6"></div>
 
-  <!-- LINE STYLES -->
+  <!-- LINE STYLES — compact 2-column -->
   <section class="space-y-4">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line styles</div>
-
-    {#each [
-      { label: "Border style", token: "--sf-border-style", default: "solid" },
-      { label: "Divider style", token: "--sf-divider-style", default: "solid" },
-    ] as row (row.token)}
-      <div>
-        <div class="text-[10px] font-semibold text-slate-400 mb-2">{row.label}</div>
-        <div class="flex gap-1">
-          {#each BORDER_STYLES as s (s)}
-            {@const current = getStyleCurrent(row.token, row.default)}
-            <button
-              onclick={() => s === row.default ? onReset(row.token) : onSet(row.token, s)}
-              class={`flex-1 py-2 rounded-lg text-[10px] border transition-all cursor-pointer capitalize ${
-                current === s
-                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-                  : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-              }`}
-            >
-              <span
-                class="block mx-auto mb-1"
-                style={`width: 28px; height: 0; border-bottom: 2px ${s} currentColor; opacity: 0.7`}
-              ></span>
-              {s}
-            </button>
-          {/each}
+    <div class="grid grid-cols-2 gap-3">
+      {#each [
+        { label: "Border", token: "--sf-border-style", default: "solid" },
+        { label: "Divider", token: "--sf-divider-style", default: "solid" },
+      ] as row (row.token)}
+        <div>
+          <div class="text-[9px] text-slate-500 mb-1.5">{row.label}</div>
+          <div class="flex flex-col gap-1">
+            {#each BORDER_STYLES as s (s)}
+              {@const current = getStyleCurrent(row.token, row.default)}
+              <button
+                onclick={() => s === row.default ? onReset(row.token) : onSet(row.token, s)}
+                class={`px-2 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer text-center ${
+                  current === s
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                }`}
+              >
+                <span class="block mx-auto mb-0.5" style={`width: 20px; height: 0; border-bottom: 2px ${s} currentColor; opacity: 0.7`}></span>
+                {s}
+              </button>
+            {/each}
+          </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- DIVIDERS -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Dividers</div>
+    <div class="flex items-center gap-2">
+      <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Color</div>
+      <input
+        type="color"
+        value={dividerColor || "#e2e8f0"}
+        oninput={(e) => onSet("--sf-divider-color", (e.target as HTMLInputElement).value)}
+        class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+      />
+      <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{dividerColor || "inherits border"}</span>
+      {#if "--sf-divider-color" in overrides}
+        <button onclick={() => onReset("--sf-divider-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+      {/if}
+    </div>
+    <SliderRow
+      label="Width" value={dividerWidth} min={0.5} max={4} step={0.5} unit="px"
+      help="--sf-divider-width"
+      overridden={"--sf-divider-width" in overrides}
+      onChange={(v) => onSet("--sf-divider-width", `${v}px`)}
+      onReset={() => onReset("--sf-divider-width")}
+    />
+    <SliderRow
+      label="Gap" value={dividerGap} min={0} max={4} step={0.125} unit="rem"
+      help="--sf-divider-gap — spacing around divider lines"
+      overridden={"--sf-divider-gap" in overrides}
+      onChange={(v) => onSet("--sf-divider-gap", `${v}rem`)}
+      onReset={() => onReset("--sf-divider-gap")}
+    />
   </section>
 
   <div class="h-px bg-white/6"></div>
@@ -145,11 +220,24 @@
       onChange={(v) => onSet("--sf-focus-ring-offset", `${v}px`)}
       onReset={() => onReset("--sf-focus-ring-offset")}
     />
+    <div class="flex items-center gap-2">
+      <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Ring color</div>
+      <input
+        type="color"
+        value={focusRingColor || "#6366f1"}
+        oninput={(e) => onSet("--sf-focus-ring-color", (e.target as HTMLInputElement).value)}
+        class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+      />
+      <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{focusRingColor || "default (action)"}</span>
+      {#if "--sf-focus-ring-color" in overrides}
+        <button onclick={() => onReset("--sf-focus-ring-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+      {/if}
+    </div>
     <!-- Focus ring preview -->
     <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center">
       <div
         class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-200"
-        style={`outline: ${focusWidth}px solid oklch(0.7 0.2 235); outline-offset: ${focusOffset}px`}
+        style={`outline: ${focusWidth}px solid ${focusRingColor || "oklch(0.7 0.2 235)"}; outline-offset: ${focusOffset}px`}
       >
         Focus preview
       </div>
@@ -218,5 +306,31 @@
         {/each}
       </div>
     </div>
+  </div>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- COMPONENT SHAPE -->
+  <div>
+    <button
+      onclick={() => { showComponents = !showComponents; }}
+      class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
+    >
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Component shape</span>
+      <span class="text-[10px] text-slate-500">{showComponents ? "▲" : "▼"}</span>
+    </button>
+    {#if showComponents}
+      <div class="mt-2 space-y-2">
+        {#each COMPONENT_TOKENS as t (t.token)}
+          <SliderRow
+            label={t.label} value={getComponentVal(t)} min={t.min} max={t.max} step={t.step} unit={t.unit}
+            help={t.help}
+            overridden={t.token in overrides}
+            onChange={(v) => onSet(t.token, `${v}${t.unit}`)}
+            onReset={() => onReset(t.token)}
+          />
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>

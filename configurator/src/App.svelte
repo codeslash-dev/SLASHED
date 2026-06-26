@@ -8,6 +8,7 @@
   import DomainPanel from './components/DomainPanel.svelte';
   import { Ja, Ga, fa } from './lib/codec';
   import tokensRaw from './data/api-index.generated.json';
+  import CommandPalette from './components/CommandPalette.svelte';
 
   const ALL_TOKENS = ((tokensRaw as any).tokens ?? tokensRaw) as SlashedToken[];
 
@@ -55,6 +56,7 @@
   let future = $state<Record<string, string>[]>([]);
 
   let domain = $state("home");
+  let showPalette = $state(false);
   let previewTheme = $state<"light" | "dark">("light");
   let previewWidth = $state<"fluid" | "mobile" | "tablet" | "desktop">("fluid");
   let previewMotion = $state<"normal" | "slow" | "none">("normal");
@@ -199,6 +201,10 @@
         e.preventDefault();
         handleRedo();
       }
+      if ((e.ctrlKey || e.metaKey) && !e.repeat && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        showPalette = !showPalette;
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -272,4 +278,14 @@
     {overridesCount}
     domain={DOMAIN_LABELS[domain] ?? domain}
   />
+
+  <!-- Command palette -->
+  {#if showPalette}
+    <CommandPalette
+      tokens={ALL_TOKENS}
+      {overrides}
+      onNavigate={(d) => { domain = d; }}
+      onClose={() => { showPalette = false; }}
+    />
+  {/if}
 </div>

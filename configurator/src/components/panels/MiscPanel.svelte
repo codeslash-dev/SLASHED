@@ -1,10 +1,11 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
 
-  let { overrides, onSet, onReset }: {
+  let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
+    onBulkChange: (patch: Record<string, string | null>) => void;
   } = $props();
 
   const Z_INDEX_STEPS = [
@@ -22,6 +23,14 @@
     { label: "Auto",   value: "auto"   },
   ];
 
+  const SIZE_TOKENS = [
+    { label: "XS", token: "--sf-size-xs", default: 1.5 },
+    { label: "S",  token: "--sf-size-s",  default: 2   },
+    { label: "M",  token: "--sf-size-m",  default: 2.5 },
+    { label: "L",  token: "--sf-size-l",  default: 2.75 },
+    { label: "XL", token: "--sf-size-xl", default: 3.5 },
+  ];
+
   function parseNum(val: string | undefined, fallback: number, strip?: string): number {
     if (!val) return fallback;
     const v = parseFloat(strip ? val.replace(strip, "") : val);
@@ -31,6 +40,13 @@
   let touchTarget = $derived(parseNum(overrides["--sf-touch-target"], 44, "px"));
   let scrollBehavior = $derived(overrides["--sf-scroll-behavior"] ?? "smooth");
   let zBaseOffset = $derived(parseNum(overrides["--sf-z-base"], 0));
+  let caretColor = $derived(overrides["--sf-caret-color"] ?? "");
+  let underlineOffset = $derived(parseNum(overrides["--sf-link-underline-offset"]?.replace("em",""), 0.15));
+  let underlineThickness = $derived(overrides["--sf-link-underline-thickness"] ?? "auto");
+
+  function getSizeValue(t: typeof SIZE_TOKENS[0]): number {
+    return parseNum(overrides[t.token]?.replace("rem",""), t.default);
+  }
 </script>
 
 <div class="p-4 space-y-6">
@@ -115,13 +131,13 @@
         <div class="flex items-center gap-2">
           <input
             type="color"
-            value={overrides["--sf-selection-bg"] ?? "#6366f1"}
-            oninput={(e) => onSet("--sf-selection-bg", (e.target as HTMLInputElement).value)}
+            value={overrides["--sf-color-selection-bg"] ?? "#6366f1"}
+            oninput={(e) => onSet("--sf-color-selection-bg", (e.target as HTMLInputElement).value)}
             class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
           />
-          <span class="text-[9px] font-mono text-slate-400 flex-1">{overrides["--sf-selection-bg"] ?? "default"}</span>
-          {#if "--sf-selection-bg" in overrides}
-            <button onclick={() => onReset("--sf-selection-bg")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+          <span class="text-[9px] font-mono text-slate-400 flex-1">{overrides["--sf-color-selection-bg"] ?? "default"}</span>
+          {#if "--sf-color-selection-bg" in overrides}
+            <button onclick={() => onReset("--sf-color-selection-bg")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
           {/if}
         </div>
       </div>
@@ -130,13 +146,13 @@
         <div class="flex items-center gap-2">
           <input
             type="color"
-            value={overrides["--sf-selection-color"] ?? "#ffffff"}
-            oninput={(e) => onSet("--sf-selection-color", (e.target as HTMLInputElement).value)}
+            value={overrides["--sf-color-selection-text"] ?? "#ffffff"}
+            oninput={(e) => onSet("--sf-color-selection-text", (e.target as HTMLInputElement).value)}
             class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
           />
-          <span class="text-[9px] font-mono text-slate-400 flex-1">{overrides["--sf-selection-color"] ?? "default"}</span>
-          {#if "--sf-selection-color" in overrides}
-            <button onclick={() => onReset("--sf-selection-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+          <span class="text-[9px] font-mono text-slate-400 flex-1">{overrides["--sf-color-selection-text"] ?? "default"}</span>
+          {#if "--sf-color-selection-text" in overrides}
+            <button onclick={() => onReset("--sf-color-selection-text")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
           {/if}
         </div>
       </div>
@@ -144,7 +160,7 @@
       <div class="bg-white/4 rounded-xl border border-white/8 p-3">
         <p
           class="text-[11px] text-slate-200 select-all"
-          style={`--sf-selection-bg: ${overrides["--sf-selection-bg"] ?? "#6366f1"}; --sf-selection-color: ${overrides["--sf-selection-color"] ?? "#ffffff"}`}
+          style={`--sf-color-selection-bg: ${overrides["--sf-color-selection-bg"] ?? "#6366f1"}; --sf-color-selection-text: ${overrides["--sf-color-selection-text"] ?? "#ffffff"}`}
         >
           Select this text to preview the selection color.
         </p>
@@ -171,6 +187,90 @@
           {style}
         </button>
       {/each}
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- COMPONENT SIZES -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Component size scale</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      Controls the height / tap-target of all sized components (buttons, inputs, badges).
+    </p>
+    <div class="space-y-2">
+      {#each SIZE_TOKENS as s (s.token)}
+        {@const val = getSizeValue(s)}
+        <SliderRow
+          label={s.label} value={val} min={1} max={5} step={0.05} unit="rem"
+          help={`${s.token} — component size step ${s.label}`}
+          overridden={s.token in overrides}
+          onChange={(v) => onSet(s.token, `${v}rem`)}
+          onReset={() => onReset(s.token)}
+        />
+      {/each}
+    </div>
+    <!-- Visual preview -->
+    <div class="bg-white/4 rounded-xl border border-white/8 p-3 flex items-end gap-2">
+      {#each SIZE_TOKENS as s (s.token)}
+        {@const val = getSizeValue(s)}
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div
+            class="w-full bg-indigo-500/30 border border-indigo-500/30 rounded flex items-center justify-center"
+            style={`height: ${Math.min(val * 14, 64)}px`}
+          ></div>
+          <span class="text-[8px] font-mono text-slate-600">{s.label}</span>
+        </div>
+      {/each}
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- CARET & LINKS -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Caret & links</div>
+    <div>
+      <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Caret color</div>
+      <div class="flex items-center gap-2">
+        <input
+          type="color"
+          value={caretColor || "#6366f1"}
+          oninput={(e) => onSet("--sf-caret-color", (e.target as HTMLInputElement).value)}
+          class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
+        />
+        <span class="text-[9px] font-mono text-slate-400 flex-1">{caretColor || "default (action color)"}</span>
+        {#if "--sf-caret-color" in overrides}
+          <button onclick={() => onReset("--sf-caret-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+        {/if}
+      </div>
+    </div>
+    <SliderRow
+      label="Underline offset" value={underlineOffset} min={0} max={0.5} step={0.01} unit="em"
+      help="--sf-link-underline-offset — gap between text baseline and underline"
+      overridden={"--sf-link-underline-offset" in overrides}
+      onChange={(v) => onSet("--sf-link-underline-offset", `${v}em`)}
+      onReset={() => onReset("--sf-link-underline-offset")}
+    />
+    <div class="group">
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="text-[11px] font-semibold text-slate-200">Underline thickness</span>
+        {#if "--sf-link-underline-thickness" in overrides}
+          <button onclick={() => onReset("--sf-link-underline-thickness")} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer opacity-0 group-hover:opacity-100">reset</button>
+        {/if}
+      </div>
+      <div class="flex gap-1">
+        {#each [["auto", "auto"], ["1px", "1px"], ["2px", "2px"], ["3px", "3px"]] as [label, val] (val)}
+          <button
+            onclick={() => val === "auto" ? onReset("--sf-link-underline-thickness") : onSet("--sf-link-underline-thickness", val)}
+            class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer ${
+              underlineThickness === val
+                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+            }`}
+          >{label}</button>
+        {/each}
+      </div>
     </div>
   </section>
 </div>
