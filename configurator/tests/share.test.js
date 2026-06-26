@@ -81,14 +81,14 @@ describe('codec v2 (deflate compression)', () => {
     expect(CODEC_VERSION).toBe(2);
   });
 
-  test('large configs produce shorter codes than small ones', () => {
-    const small = encodeOverrides({ [realToken]: '1rem' });
+  test('large configs encode successfully and grow sub-linearly', () => {
     const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 20);
     if (tokens.length < 10) return;
+    const small = encodeOverrides({ [realToken]: '1rem' });
     const large = encodeOverrides(Object.fromEntries(tokens.map((t, i) => [t.name, `${i + 1}.${i}rem`])));
-    // Verify the large config round-trips (compression is transparent)
     expect(large.length).toBeGreaterThan(0);
-    expect(small.length).toBeGreaterThan(0);
+    // 20 tokens should not produce a code 20× longer than 1 token (compression helps)
+    expect(large.length).toBeLessThan(small.length * 20);
   });
 
   test('v2 compressed codes round-trip losslessly', () => {

@@ -15,6 +15,8 @@ const Na = 65535;
 const Pa = new TextEncoder();
 const Fa = new TextDecoder("utf-8", { fatal: false });
 const Ia = 65535;
+const MAX_COMPRESSED_BYTES = 32 * 1024;
+const MAX_DECOMPRESSED_BYTES = 256 * 1024;
 
 function La(e: number): boolean {
   return Number.isInteger(e) && e >= 0 && e <= Ia;
@@ -117,6 +119,12 @@ export function Ua(e: string, t: any = Wa, n: any = {}): Record<string, string> 
     return {};
   }
 
+  const compressedLen = rawBytes.length - 1;
+  if (compressedLen > MAX_COMPRESSED_BYTES) {
+    console.warn(`[codec] compressed payload too large (${compressedLen} B > ${MAX_COMPRESSED_BYTES} B); ignoring.`);
+    return {};
+  }
+
   let i: Uint8Array;
   try {
     i = inflateSync(rawBytes.subarray(1));
@@ -125,6 +133,10 @@ export function Ua(e: string, t: any = Wa, n: any = {}): Record<string, string> 
     return {};
   }
   if (!i || i.length === 0) return {};
+  if (i.length > MAX_DECOMPRESSED_BYTES) {
+    console.warn(`[codec] decompressed payload too large (${i.length} B > ${MAX_DECOMPRESSED_BYTES} B); ignoring.`);
+    return {};
+  }
 
   const a = za(t);
   const sanitize = typeof n.sanitize === "function" ? n.sanitize : (val: string) => val;
