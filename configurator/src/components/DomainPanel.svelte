@@ -1,6 +1,7 @@
 <script lang="ts">
   import { SlidersHorizontal, List } from 'lucide-svelte';
   import type { SlashedToken, PresetTheme } from '../types';
+  import { DOMAIN_PATTERNS } from '../lib/domains';
   import HomePanel from './panels/HomePanel.svelte';
   import ColorsPanel from './panels/ColorsPanel.svelte';
   import TypographyPanel from './panels/TypographyPanel.svelte';
@@ -28,18 +29,6 @@
     onResetAll: () => void;
   } = $props();
 
-  // Token name patterns that define each domain's scope
-  const DOMAIN_PATTERNS: Record<string, string[]> = {
-    colors:     ["color"],
-    typography: ["font", "--sf-text", "leading", "tracking", "weight", "body-font", "heading-font"],
-    spacing:    ["space", "section", "gutter", "gap", "content-gap", "component-pad"],
-    layout:     ["container", "layout", "grid", "breakpoint", "measure", "column", "header-height", "touch-target"],
-    borders:    ["radius", "border-width", "divider"],
-    shadows:    ["shadow"],
-    motion:     ["motion", "duration", "easing", "ease"],
-    effects:    ["filter", "blur", "backdrop", "opacity", "effect"],
-    misc:       ["z-index", "cursor", "ring", "focus", "outline", "selection", "scroll"],
-  };
 
   // Domains that skip the two-tab treatment
   const NO_CONTROLS_TAB = new Set(["home", "themes", "wcag", "setup", "cheatsheet"]);

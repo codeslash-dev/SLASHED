@@ -247,3 +247,15 @@ export function Ja(e: string, t: any = {}): Record<string, string> {
   const n = String(e ?? "");
   return n.includes("c=") ? Ka(n, t) : {};
 }
+
+// Named aliases for tests and external consumers
+export const encode = Ha;
+export const decode = Ua;
+export const sanitizeValue = da;
+export const generateCSS = fa;
+export const parseCSS = pa;
+export const encodeOverrides = Ga;
+export const buildShareUrl = qa;
+export const readShareFromHash = Ka;
+export const CODEC_VERSION = 1;
+export const SHARE_PARAM = "c";
