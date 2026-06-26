@@ -1,38 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SLASHED Configurator</title>
-    <meta
-      name="description"
-      content="Configure every SLASHED CSS framework token and generate ready-to-paste override CSS."
-    />
-    <meta name="theme-color" content="#16181d" />
-    <!-- Inline SVG favicon (the framework's "/" mark) — keeps the app a
-         single self-contained bundle with no binary assets. -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316181d'/%3E%3Ctext x='16' y='24' font-family='monospace' font-size='24' font-weight='800' fill='%234f8cff' text-anchor='middle'%3E/%3C/text%3E%3C/svg%3E"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="SLASHED Configurator" />
-    <meta
-      property="og:description"
-      content="Configure every SLASHED CSS framework token and generate ready-to-paste override CSS. Buildless: live preview, instant export."
-    />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="SLASHED Configurator" />
-    <meta
-      name="twitter:description"
-      content="Configure every SLASHED CSS framework token and generate ready-to-paste override CSS."
-    />
-    <!-- Apply saved chrome theme before first paint (via SLASHED's own
-         [data-theme]) to prevent a flash of the wrong theme. Defaults to dark. -->
-    <script>try{var s=localStorage.getItem('slashed-configurator/ui/v1');var t=s?JSON.parse(s).uiTheme:null;document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:'dark';}catch(_){document.documentElement.dataset.theme='dark';}</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLASHED Studio</title>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
-  "ignoreFiles": ["dist/**", "node_modules/**", "configurator/**"],
+  "ignoreFiles": ["dist/**", "node_modules/**", "configurator/**", "configurator-archive/**"],
   "rules": {
     "color-function-notation": "modern",
     "alpha-value-notation": "number",

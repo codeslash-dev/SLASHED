@@ -180,6 +180,10 @@ jobs:
       # Type/diagnostics gate (kept at 0 errors / 0 warnings).
       - run: npm run check
         working-directory: configurator
+      # Build root dist/ so PreviewPanel.svelte's ?raw CSS import resolves
+      # during the Vite build. dist/*.css is gitignored and only produced by
+      # `npm run build` at the repo root.
+      - run: npm run build
       # Browser regression suite (test:e2e prebuilds; Playwright manages the
       # preview server via its webServer option). Cross-engine: the full suite
       # runs on Chromium; core behaviour + the dogfood/isolation contract also

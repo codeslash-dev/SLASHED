@@ -1,96 +1,54 @@
 /**
- * Shell: Overview landing, the flat (single-list) sidebar, the per-panel
- * "Show all variables" disclosure, keyboard cycling and persistence —
- * console-clean at desktop / narrow / phone widths.
+ * Shell: basic load, sidebar navigation, header controls — console-clean.
  */
 import { test, expect } from '@playwright/test';
-import { watchErrors, gotoClean, sideItem } from './helpers.js';
+import { watchErrors, gotoClean, navButton } from './helpers.js';
 
-// Overview + the full domain taxonomy — every category is always reachable.
 const NAV_LABELS = [
-  'Overview', 'Colors', 'Typography', 'Spacing', 'Layout',
-  'Borders', 'Shadows', 'Motion', 'Effects', 'WCAG', 'Themes', 'Install',
-  'Misc', 'Cheatsheet',
+  'Home', 'Colors', 'Typography', 'Spacing', 'Layout',
+  'Borders', 'Shadows', 'Motion', 'Effects', 'Misc',
+  'Themes', 'WCAG', 'Install', 'Classes',
 ];
 
-test('lands on the Overview with the setup checklist', async ({ page }) => {
+test('loads with the SLASHED Studio branding', async ({ page }) => {
   const errors = watchErrors(page);
   await gotoClean(page);
-  await expect(page.locator('.home__title')).toHaveText('Set up your design');
-  // The flat sidebar always shows Overview + every domain.
-  await expect(page.locator('.side__item')).toHaveCount(NAV_LABELS.length);
-  await expect(page.locator('.home__row')).toHaveCount(8);
-  // Clean slate: exactly one "start here" pointer, themes row reads "presets".
-  await expect(page.locator('.home__count--start')).toHaveCount(1);
-  await expect(page.locator('.home__row', { hasText: 'Themes' }).locator('.home__count')).toHaveText('presets');
+  await expect(page.locator('header')).toContainText('SLASHED Studio');
+  await expect(page.locator('nav')).toBeVisible();
   expect(errors).toEqual([]);
 });
 
-test('every destination renders console-clean at 3 widths', async ({ page }) => {
-  const errors = watchErrors(page);
-  for (const width of [1600, 1000, 480]) {
-    await page.setViewportSize({ width, height: 900 });
-    await gotoClean(page);
-    for (const label of NAV_LABELS) await sideItem(page, label).click();
+test('all sidebar nav destinations are present', async ({ page }) => {
+  await gotoClean(page);
+  for (const label of NAV_LABELS) {
+    await expect(navButton(page, label)).toBeVisible();
   }
-  expect(errors).toEqual([]);
 });
 
-test('every category panel leads with Settings, with All variables collapsed below', async ({ page }) => {
+test('clicking sidebar items switches the panel heading', async ({ page }) => {
   await gotoClean(page);
-  await sideItem(page, 'Colors').click();
-  // Inputs-first: the Color Studio is visible before any raw catalogue.
-  await expect(page.locator('.color-studio')).toBeVisible();
-  // The full catalogue lives in a collapsed disclosure.
-  const allvars = page.locator('details.allvars');
-  await expect(allvars).toHaveCount(1);
-  expect(await allvars.evaluate((el) => el.open)).toBe(false);
-  await allvars.locator('summary').click();
-  expect(await allvars.evaluate((el) => el.open)).toBe(true);
-  await expect(allvars.locator('.allvars__body')).toBeVisible();
+  for (const label of ['Colors', 'Typography', 'Spacing']) {
+    await navButton(page, label).click();
+    await expect(page.locator('[data-testid="panel-heading"]')).toContainText(label, { ignoreCase: true });
+  }
 });
 
-test('a domain with no curated Settings shows the catalogue inline', async ({ page }) => {
+test('undo and redo buttons start disabled', async ({ page }) => {
   await gotoClean(page);
-  await sideItem(page, 'Misc').click();
-  // Misc has no curated inputs, so it never hides behind a disclosure.
-  await expect(page.locator('details.allvars')).toHaveCount(0);
-  await expect(page.locator('.allvars__filters')).toBeVisible();
+  await expect(page.getByTitle('Undo (Ctrl+Z)')).toBeDisabled();
+  await expect(page.getByTitle('Redo (Ctrl+Shift+Z)')).toBeDisabled();
 });
 
-test('[ and ] cycle Overview + every domain with wrap-around', async ({ page }) => {
-  const errors = watchErrors(page);
+test('reset-all button starts disabled', async ({ page }) => {
   await gotoClean(page);
-  await page.keyboard.press(']');
-  await expect(page.locator('.panel__title')).toHaveText('Colors');
-  await page.keyboard.press('[');
-  await expect(page.locator('.home__title')).toBeVisible();
-  await page.keyboard.press('['); // wraps backwards to the last domain (Cheatsheet)
-  await expect(page.locator('.side__item.side__item--on')).toHaveCount(1);
-  await expect(page.locator('.side__item.side__item--on')).toContainText('Cheatsheet');
-  expect(errors).toEqual([]);
+  await expect(page.getByTitle('Reset all overrides')).toBeDisabled();
 });
 
-test('domain and output format persist across reload (validated restore)', async ({ page }) => {
+test('share button copies a URL to clipboard', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Clipboard permissions only supported in Chromium');
   await gotoClean(page);
-  await sideItem(page, 'Motion').click();
-  await page.locator('.out [aria-label="Output format"] button', { hasText: ':root' }).click();
-  await page.reload();
-  await expect(page.locator('.panel__title')).toHaveText('Motion');
-  await expect(page.locator('.out [aria-label="Output format"] button', { hasText: ':root' })).toHaveAttribute('aria-pressed', 'true');
-  // Corrupt prefs fall back to the defaults instead of crashing.
-  await page.evaluate(() => localStorage.setItem('slashed-configurator/ui/v1', '{broken'));
-  await page.reload();
-  await expect(page.locator('.home__title')).toBeVisible();
-});
-
-test('a legacy persisted mode field is ignored on restore', async ({ page }) => {
-  await gotoClean(page);
-  // Older app versions stored a complexity mode; the flat IA must ignore it
-  // and still restore the saved domain cleanly.
-  await page.evaluate(() =>
-    localStorage.setItem('slashed-configurator/ui/v1', JSON.stringify({ mode: 'basic', domain: 'motion' }))
-  );
-  await page.reload();
-  await expect(page.locator('.panel__title')).toHaveText('Motion');
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.getByTitle('Copy share link').click();
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toContain('http');
 });

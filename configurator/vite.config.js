@@ -2,33 +2,21 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
-// Read the framework's package.json for the version stamp. Using the file
-// directly (rather than package.json imports) keeps this compatible with both
-// ESM and CJS Vite configs, and avoids assert{type:'json'} compat issues.
 const pkg = JSON.parse(
   readFileSync(resolve(import.meta.dirname, '../package.json'), 'utf8')
 );
 
-/**
- * Build config for the standalone SLASHED configurator.
- *
- * This is a fully self-contained static SPA — no backend, no runtime
- * dependency on SLASHED itself. The token catalogue is baked in at build
- * time from src/data/api-index.generated.json (produced by
- * scripts/sync-api.mjs from the framework's docs/api-index.json).
- *
- * `base: './'` keeps every asset reference relative so the built site in
- * dist/ can be hosted from any sub-path (GitHub Pages project site, a CDN
- * folder, file://, etc.) without reconfiguration.
- *
- * `__SLASHED_VERSION__` is injected at build time from the root package.json
- * so the version pill in the header is always exactly the version that was
- * built — no separate sync step needed, no off-by-one after releases.
- */
 export default defineConfig({
   base: './',
-  plugins: [svelte()],
+  plugins: [svelte(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': path.resolve(import.meta.dirname, '.'),
+    },
+  },
   define: {
     __SLASHED_VERSION__: JSON.stringify(pkg.version),
   },
@@ -38,9 +26,9 @@ export default defineConfig({
   },
   server: {
     port: 5180,
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
     fs: {
-      // Allow importing the framework's source CSS (../core, ../optional) so the
-      // chrome can dogfood SLASHED's token + theme layers (see src/main.js).
       allow: ['..'],
     },
   },

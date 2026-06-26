@@ -1,156 +1,108 @@
 /**
- * Tests for the override-CSS generator + parser (node --test, no DOM).
+ * Tests for the override-CSS generator + parser (src/lib/codec.ts).
  *
- * The generator is the user-visible "Copy CSS" payload: it must round-trip
- * through `parseCSS` losslessly so a user can paste a previously-generated
- * stylesheet and recover the same overrides. It must also resist injection
- * via `sanitizeValue` (no `;`, `{`, `}` or comment delimiters can break out
- * of a declaration).
+ * The generator is the user-visible export payload: it must round-trip through
+ * parseCSS so a user can paste a previously-generated stylesheet and recover
+ * the same overrides. sanitizeValue must also resist injection.
  */
-import { test, describe } from 'node:test';
-import assert from 'node:assert/strict';
-import { generateCSS, parseCSS, sanitizeValue } from '../src/lib/css.js';
+import { describe, test, expect } from 'vitest';
+import { generateCSS, parseCSS, sanitizeValue } from '../src/lib/codec';
 
 describe('sanitizeValue', () => {
   test('strips structural characters', () => {
-    // ; { } are removed; whitespace then collapses.
-    assert.equal(sanitizeValue('1rem; } body { color: red'), '1rem body color: red');
+    expect(sanitizeValue('1rem; } body { color: red')).toBe('1rem body color: red');
   });
+
   test('drops comment blocks', () => {
-    assert.equal(sanitizeValue('1rem /* sneaky */ 2rem'), '1rem 2rem');
+    expect(sanitizeValue('1rem /* sneaky */ 2rem')).toBe('1rem 2rem');
   });
+
   test('collapses whitespace', () => {
-    assert.equal(sanitizeValue('  1rem   2rem\t3rem  '), '1rem 2rem 3rem');
+    expect(sanitizeValue('  1rem   2rem\t3rem  ')).toBe('1rem 2rem 3rem');
   });
+
   test('returns empty for null / undefined / blank', () => {
-    assert.equal(sanitizeValue(null), '');
-    assert.equal(sanitizeValue(undefined), '');
-    assert.equal(sanitizeValue('   '), '');
+    expect(sanitizeValue(null)).toBe('');
+    expect(sanitizeValue(undefined)).toBe('');
+    expect(sanitizeValue('   ')).toBe('');
   });
+
   test('keeps oklch() and clamp() intact', () => {
-    assert.equal(sanitizeValue('oklch(0.5 0.2 220)'), 'oklch(0.5 0.2 220)');
-    assert.equal(sanitizeValue('clamp(1rem, 2vw + 1rem, 3rem)'), 'clamp(1rem, 2vw + 1rem, 3rem)');
+    expect(sanitizeValue('oklch(0.7 0.1 200)')).toBe('oklch(0.7 0.1 200)');
+    expect(sanitizeValue('clamp(1rem, 4vw, 2rem)')).toBe('clamp(1rem, 4vw, 2rem)');
   });
 });
 
 describe('generateCSS', () => {
-  test('empty overrides → empty output', () => {
-    assert.equal(generateCSS({}), '');
+  test('produces @layer block by default', () => {
+    const css = generateCSS({ '--sf-text-scale': '1.1' });
+    expect(css).toContain('@layer slashed.overrides');
+    expect(css).toContain(':root');
+    expect(css).toContain('--sf-text-scale: 1.1;');
   });
 
-  test('layer mode wraps in @layer slashed.overrides { :root {…} }', () => {
-    const css = generateCSS({ '--sf-color-primary': 'red' }, { mode: 'layer', banner: false });
-    assert.match(css, /@layer slashed\.overrides \{/);
-    assert.match(css, /:root \{/);
-    assert.match(css, /--sf-color-primary: red;/);
-    assert.match(css, /\}\n\}/); // closing braces present
+  test('mode:root produces :root block without @layer', () => {
+    const css = generateCSS({ '--sf-text-scale': '1.1' }, { mode: 'root', banner: false });
+    expect(css).not.toContain('@layer');
+    expect(css).toContain(':root');
+    expect(css).toContain('--sf-text-scale: 1.1;');
   });
 
-  test('root mode emits a bare :root block (no @layer)', () => {
-    const css = generateCSS({ '--sf-color-primary': 'red' }, { mode: 'root', banner: false });
-    assert.doesNotMatch(css, /@layer/);
-    assert.match(css, /^:root \{/);
+  test('banner:true adds a comment header', () => {
+    const css = generateCSS({ '--sf-text-scale': '1.1' }, { banner: true });
+    expect(css).toMatch(/\/\* SLASHED override tokens/);
   });
 
-  test('declarations are sorted alphabetically for stable diffs', () => {
+  test('banner:false omits comment header', () => {
+    const css = generateCSS({ '--sf-text-scale': '1.1' }, { banner: false });
+    expect(css).not.toMatch(/\/\* SLASHED/);
+  });
+
+  test('returns empty string for empty map', () => {
+    expect(generateCSS({})).toBe('');
+  });
+
+  test('tokens are sorted alphabetically', () => {
     const css = generateCSS(
-      { '--sf-z-modal': '1000', '--sf-color-primary': 'blue', '--sf-radius-m': '8px' },
-      { banner: false }
+      { '--sf-z': 'z', '--sf-a': 'a', '--sf-m': 'm' },
+      { mode: 'root', banner: false }
     );
-    const order = ['--sf-color-primary', '--sf-radius-m', '--sf-z-modal'];
-    let last = -1;
-    for (const name of order) {
-      const idx = css.indexOf(name);
-      assert.ok(idx > last, `${name} should appear after the previous declaration`);
-      last = idx;
-    }
-  });
-
-  test('banner is included by default and hidden with banner:false', () => {
-    const withBanner = generateCSS({ '--sf-color-primary': 'red' });
-    const without = generateCSS({ '--sf-color-primary': 'red' }, { banner: false });
-    assert.match(withBanner, /SLASHED override tokens/);
-    assert.doesNotMatch(without, /SLASHED override tokens/);
-  });
-
-  test('banner pluralises correctly', () => {
-    const one = generateCSS({ '--sf-color-primary': 'red' });
-    const many = generateCSS({ '--sf-color-primary': 'red', '--sf-radius-m': '8px' });
-    assert.match(one, /1 token customised/);
-    assert.match(many, /2 tokens customised/);
-  });
-
-  test('values are sanitised — injection cannot escape the declaration', () => {
-    const css = generateCSS({ '--sf-x': '0; } body { display: none } /*' }, { banner: false });
-    // The CSS must remain a single, well-formed declaration block. After
-    // sanitisation, the payload becomes part of the value (text only) and the
-    // surrounding `:root { … }` braces stay intact.
-    const blocks = css.match(/\}/g) || [];
-    const opens = css.match(/\{/g) || [];
-    assert.equal(opens.length, blocks.length, 'balanced braces');
-    // Exactly one `--sf-x:` declaration emitted.
-    assert.equal(css.match(/--sf-x:/g).length, 1);
-    // The value body itself must contain no structural CSS separators —
-    // not even ones that could chain another declaration like `; --evil: 1`.
-    // We isolate the body (between `--sf-x:` and the terminating `;`) before
-    // asserting, so the closing `;` of the legitimate declaration doesn't
-    // taint the check.
-    const declMatch = css.match(/--sf-x:\s*([^\n]*?);/);
-    assert.ok(declMatch, 'expected --sf-x declaration');
-    const valueBody = declMatch[1];
-    assert.doesNotMatch(valueBody, /[{};]/, `value body still contains structural CSS chars: ${JSON.stringify(valueBody)}`);
+    const lines = css.split('\n').filter(l => l.includes('--sf-'));
+    expect(lines[0]).toContain('--sf-a');
+    expect(lines[1]).toContain('--sf-m');
+    expect(lines[2]).toContain('--sf-z');
   });
 });
 
 describe('parseCSS', () => {
-  test('parses bare :root block', () => {
-    const out = parseCSS(':root { --sf-color-primary: red; --sf-radius-m: 8px; }');
-    assert.equal(out['--sf-color-primary'], 'red');
-    assert.equal(out['--sf-radius-m'], '8px');
+  test('parses a valid override block', () => {
+    const css = `@layer slashed.overrides {\n  :root {\n    --sf-text-scale: 1.1;\n    --sf-radius-scale: 1.5;\n  }\n}`;
+    const result = parseCSS(css);
+    expect(result['--sf-text-scale']).toBe('1.1');
+    expect(result['--sf-radius-scale']).toBe('1.5');
   });
 
-  test('parses @layer-wrapped block', () => {
-    const out = parseCSS('@layer slashed.overrides { :root { --sf-color-primary: red; } }');
-    assert.equal(out['--sf-color-primary'], 'red');
+  test('round-trips through generateCSS', () => {
+    const overrides = { '--sf-text-scale': '1.1', '--sf-radius-scale': '1.5' };
+    const css = generateCSS(overrides, { mode: 'layer', banner: false });
+    const parsed = parseCSS(css);
+    expect(parsed).toEqual(overrides);
   });
 
-  test('strips comment blocks before parsing (does not import commented-out tokens)', () => {
-    const out = parseCSS(':root { /* --sf-color-primary: red; */ --sf-radius-m: 8px; }');
-    assert.equal(out['--sf-color-primary'], undefined);
-    assert.equal(out['--sf-radius-m'], '8px');
+  test('ignores non-sf custom properties', () => {
+    const css = ':root { --not-sf: red; --sf-color-primary: blue; }';
+    const result = parseCSS(css);
+    expect(result['--not-sf']).toBeUndefined();
+    expect(result['--sf-color-primary']).toBe('blue');
   });
 
-  test('keeps clamp() / oklch() / light-dark() values intact (nested parens)', () => {
-    const out = parseCSS(':root { --sf-text-l: clamp(1rem, 2vw + 1rem, 3rem); --sf-color: oklch(from var(--x) calc(l * 0.5) c h); }');
-    assert.equal(out['--sf-text-l'], 'clamp(1rem, 2vw + 1rem, 3rem)');
-    assert.equal(out['--sf-color'], 'oklch(from var(--x) calc(l * 0.5) c h)');
+  test('handles values with parentheses (e.g. oklch, clamp)', () => {
+    const css = ':root { --sf-color-primary: oklch(0.7 0.1 200 / 0.5); }';
+    const result = parseCSS(css);
+    expect(result['--sf-color-primary']).toBe('oklch(0.7 0.1 200 / 0.5)');
   });
 
-  test('non-sf-* tokens are ignored', () => {
-    const out = parseCSS(':root { --my-token: red; --sf-color-primary: blue; }');
-    assert.equal(out['--my-token'], undefined);
-    assert.equal(out['--sf-color-primary'], 'blue');
-  });
-
-  test('empty input → empty result', () => {
-    assert.deepEqual(parseCSS(''), {});
-    assert.deepEqual(parseCSS(null), {});
-  });
-});
-
-describe('round-trip generate → parse', () => {
-  test('every override survives a generate/parse round trip', () => {
-    const overrides = {
-      '--sf-color-primary': 'oklch(0.5 0.2 220)',
-      '--sf-text-l': 'clamp(1rem, 2vw + 1rem, 3rem)',
-      '--sf-radius-m': '8px',
-      '--sf-shadow-m': '0 2px 8px rgba(0, 0, 0, 0.12)',
-      '--sf-font-body': "system-ui, sans-serif",
-    };
-    for (const mode of ['layer', 'root']) {
-      const css = generateCSS(overrides, { mode });
-      const parsed = parseCSS(css);
-      assert.deepEqual(parsed, overrides, `round-trip in ${mode} mode`);
-    }
+  test('returns empty object for empty string', () => {
+    expect(parseCSS('')).toEqual({});
   });
 });

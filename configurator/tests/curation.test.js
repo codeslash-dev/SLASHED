@@ -1,24 +1,21 @@
 /**
  * Future-proofing: every public knob must have a home domain.
  *
- * Mirrors scripts/check-curation.mjs so the guarantee is enforced in CI's test
- * run as well as the standalone check. If the framework adds a knob whose name
- * domains.js doesn't recognise, this fails with the offending names — the cue to
- * add a pattern (or allowlist it) so Basic/Advanced stay comprehensive.
+ * If the framework adds a knob whose name no domain pattern recognises,
+ * this fails with the offending names — the cue to add a pattern to
+ * DOMAIN_PATTERNS in scripts/check-curation.mjs and src/lib/domains.ts.
  */
-import { test, describe } from 'node:test';
-import assert from 'node:assert/strict';
+import { describe, test, expect } from 'vitest';
 import { findUncategorisedKnobs } from '../scripts/check-curation.mjs';
 
 describe('token curation coverage', () => {
   test('no public knob falls through to the Misc fallback bucket', () => {
     const orphans = findUncategorisedKnobs();
-    assert.deepEqual(
+    expect(
       orphans,
-      [],
       orphans.length
-        ? `Uncategorised knobs (add a pattern to src/lib/domains.js): ${orphans.join(', ')}`
+        ? `Uncategorised knobs (add a pattern to DOMAIN_PATTERNS): ${orphans.join(', ')}`
         : ''
-    );
+    ).toEqual([]);
   });
 });
