@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.18] - 2026-06-26
+
+### Bug Fixes
+- **configurator:** live preview now reacts to panel changes
+- **tests:** update Playwright spec paths from dist/ to badges/
+- update configurator dist/ references to badges/
+
 ## [0.6.17] - 2026-06-26
 
 ### Features
