@@ -6,7 +6,6 @@
  */
 import { describe, test, expect } from 'vitest';
 import data from '../src/data/api-index.generated.json';
-import registry from '../src/data/token-registry.generated.json';
 import { encodeOverrides, readShareFromHash, buildShareUrl, SHARE_PARAM, CODEC_VERSION } from '../src/lib/codec';
 
 const known = new Set(data.tokens.map(t => t.name));
@@ -101,27 +100,12 @@ describe('codec v2 (deflate compression)', () => {
     expect(decoded).toEqual(map);
   });
 
-  test('v1 URLs still decode (backward compatibility)', () => {
-    // A v1 payload is a Uint8Array starting with byte 0x01, manually base64url-encoded.
-    // We build one for the real token so the decoder can look it up.
-    const tokenName = realToken;
-    const tokenEntry = registry.tokens.find(t => t.name === tokenName);
-    if (!tokenEntry) return;
-    const id = tokenEntry.id;
-    const value = '2rem';
-    const valueBytes = new TextEncoder().encode(value);
-    const buf = new Uint8Array(1 + 4 + valueBytes.length);
-    buf[0] = 1; // version 1
-    buf[1] = (id >> 8) & 0xff;
-    buf[2] = id & 0xff;
-    buf[3] = (valueBytes.length >> 8) & 0xff;
-    buf[4] = valueBytes.length & 0xff;
-    buf.set(valueBytes, 5);
+  test('unknown version byte decodes to empty map', () => {
+    // A raw byte 0x01 (old v1) should be rejected cleanly now that only v2 is supported.
+    const buf = new Uint8Array([0x01, 0x00]);
     let str = '';
     for (let i = 0; i < buf.length; i++) str += String.fromCharCode(buf[i]);
-    const v1code = btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
-    const decoded = readShareFromHash(`${SHARE_PARAM}=${v1code}`, { isKnown });
-    expect(decoded).toEqual({ [tokenName]: value });
+    const oldCode = btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    expect(readShareFromHash(`${SHARE_PARAM}=${oldCode}`)).toEqual({});
   });
 });

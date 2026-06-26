@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { deflateRawSync, inflateRawSync } from "fflate";
+import { deflateSync, inflateSync } from "fflate";
 import tokensData from "../data/token-registry.generated.json";
 
 declare const __SLASHED_VERSION__: string;
@@ -72,7 +72,7 @@ export function Ha(e: Record<string, string>, t: any = Wa): string {
   if (!e || typeof e !== "object") return "";
   const n = Ra(t);
   const r: { id: number; valueBytes: Uint8Array }[] = [];
-  
+
   for (const [key, val] of Object.entries(e)) {
     if (typeof key !== "string" || typeof val !== "string" || val === "") continue;
     const id = n.get(key);
@@ -81,42 +81,29 @@ export function Ha(e: Record<string, string>, t: any = Wa): string {
     if (valueBytes.length > Na) continue;
     r.push({ id, valueBytes });
   }
-  
+
   if (r.length === 0) return "";
   r.sort((a, b) => a.id - b.id);
-  
-  let totalLength = 1;
-  for (const item of r) {
-    totalLength += 4 + item.valueBytes.length;
-  }
-  
-  const a = new Uint8Array(totalLength);
+
+  let payloadLen = 0;
+  for (const item of r) payloadLen += 4 + item.valueBytes.length;
+
+  const payload = new Uint8Array(payloadLen);
   let o = 0;
-  a[o++] = 1; // version 1
-  
   for (const { id, valueBytes } of r) {
-    a[o++] = (id >> 8) & 255;
-    a[o++] = id & 255;
-    a[o++] = (valueBytes.length >> 8) & 255;
-    a[o++] = valueBytes.length & 255;
-    a.set(valueBytes, o);
+    payload[o++] = (id >> 8) & 255;
+    payload[o++] = id & 255;
+    payload[o++] = (valueBytes.length >> 8) & 255;
+    payload[o++] = valueBytes.length & 255;
+    payload.set(valueBytes, o);
     o += valueBytes.length;
   }
-  
-  // Try v2 (deflate-compressed). Only emit v2 if it's actually shorter.
-  try {
-    const compressed = deflateRawSync(a);
-    if (compressed.length + 1 < a.length) {
-      const v2 = new Uint8Array(1 + compressed.length);
-      v2[0] = 2;
-      v2.set(compressed, 1);
-      return Ba(v2);
-    }
-  } catch {
-    // fall through to v1
-  }
 
-  return Ba(a);
+  const compressed = deflateSync(payload);
+  const out = new Uint8Array(1 + compressed.length);
+  out[0] = 2;
+  out.set(compressed, 1);
+  return Ba(out);
 }
 
 export function Ua(e: string, t: any = Wa, n: any = {}): Record<string, string> {
@@ -125,30 +112,25 @@ export function Ua(e: string, t: any = Wa, n: any = {}): Record<string, string> 
   const rawBytes = Va(r);
   if (!rawBytes || rawBytes.length === 0) return {};
 
-  let i: Uint8Array;
-  if (rawBytes[0] === 2) {
-    try {
-      i = inflateRawSync(rawBytes.subarray(1));
-    } catch {
-      console.warn("[codec] failed to decompress v2 config; ignoring.");
-      return {};
-    }
-    if (!i || i.length === 0 || i[0] !== 1) {
-      console.warn("[codec] decompressed v2 payload is not a valid v1 config; ignoring.");
-      return {};
-    }
-  } else if (rawBytes[0] === 1) {
-    i = rawBytes;
-  } else {
-    console.warn(`[codec] unknown config-code version ${rawBytes[0]} (expected 1 or 2); ignoring.`);
+  if (rawBytes[0] !== 2) {
+    console.warn(`[codec] unknown config-code version ${rawBytes[0]} (expected 2); ignoring.`);
     return {};
   }
-  
+
+  let i: Uint8Array;
+  try {
+    i = inflateSync(rawBytes.subarray(1));
+  } catch {
+    console.warn("[codec] failed to decompress config; ignoring.");
+    return {};
+  }
+  if (!i || i.length === 0) return {};
+
   const a = za(t);
   const sanitize = typeof n.sanitize === "function" ? n.sanitize : (val: string) => val;
   const isKnown = typeof n.isKnown === "function" ? n.isKnown : () => true;
   const c: Record<string, string> = {};
-  let l = 1;
+  let l = 0;
   
   try {
     while (l < i.length) {
