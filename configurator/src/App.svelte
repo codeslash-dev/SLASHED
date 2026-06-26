@@ -83,7 +83,7 @@
       styleEl.id = "sf-parent-overrides";
       document.head.appendChild(styleEl);
     }
-    styleEl.textContent = `:root {\n${fa(_ov, { mode: "root", banner: false })}\n}`;
+    styleEl.textContent = fa(_ov, { mode: "root", banner: false });
   });
 
   function setOverrides(updater: ((prev: Record<string, string>) => Record<string, string>) | Record<string, string>) {
