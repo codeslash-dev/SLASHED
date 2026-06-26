@@ -6,7 +6,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
 
-const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal.css');
+const BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
 
 async function setup(page, html) {
   await page.setViewportSize({ width: 800, height: 600 });
