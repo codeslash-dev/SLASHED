@@ -83,7 +83,7 @@ describe('codec v2 (deflate compression)', () => {
 
   test('large configs encode successfully and grow sub-linearly', () => {
     const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 20);
-    if (tokens.length < 10) return;
+    expect(tokens.length).toBeGreaterThanOrEqual(10);
     const small = encodeOverrides({ [realToken]: '1rem' });
     const large = encodeOverrides(Object.fromEntries(tokens.map((t, i) => [t.name, `${i + 1}.${i}rem`])));
     expect(large.length).toBeGreaterThan(0);
@@ -93,7 +93,7 @@ describe('codec v2 (deflate compression)', () => {
 
   test('v2 compressed codes round-trip losslessly', () => {
     const tokens = data.tokens.filter(t => t.role === 'knob').slice(0, 15);
-    if (tokens.length < 5) return;
+    expect(tokens.length).toBeGreaterThanOrEqual(5);
     const map = Object.fromEntries(tokens.map((t, i) => [t.name, `${(i + 1) * 4}px`]));
     const code = encodeOverrides(map);
     const decoded = readShareFromHash(`${SHARE_PARAM}=${code}`, { isKnown });

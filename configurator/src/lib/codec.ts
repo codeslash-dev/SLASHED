@@ -102,6 +102,10 @@ export function Ha(e: Record<string, string>, t: any = Wa): string {
   }
 
   const compressed = deflateSync(payload);
+  if (compressed.length > MAX_COMPRESSED_BYTES) {
+    console.warn(`[codec] compressed payload too large (${compressed.length} B > ${MAX_COMPRESSED_BYTES} B); refusing to encode.`);
+    return "";
+  }
   const out = new Uint8Array(1 + compressed.length);
   out[0] = 2;
   out.set(compressed, 1);
