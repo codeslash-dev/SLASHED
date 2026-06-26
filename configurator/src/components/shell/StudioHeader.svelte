@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Undo2, Redo2, Trash2, Share2, FolderOpen, Check } from 'lucide-svelte';
 
-  declare const __SLASHED_VERSION__: string;
   const version = typeof __SLASHED_VERSION__ !== "undefined" ? __SLASHED_VERSION__ : "";
 
   let { overridesCount, canUndo, canRedo, onUndo, onRedo, onResetAll, onImport, onExport }: {
