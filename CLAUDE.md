@@ -13,7 +13,7 @@ of these in sync:
 | `docs/roadmap.md` | `Current version: **X.Y.Z**` line |
 | `configurator/package.json` | `.version` |
 | `configurator/package-lock.json` | `.version` + `.packages[""].version` |
-| `dist/*.css` (unminified) | `/* SLASHED vX.Y.Z */` comment header |
+| `badges/*.css` (unminified) | `/* SLASHED vX.Y.Z */` comment header |
 | Configurator UI version pill | baked in via Vite `__SLASHED_VERSION__` at build time |
 
 **Never edit version numbers by hand.** Use `npm version` then the sync script:

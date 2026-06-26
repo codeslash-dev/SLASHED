@@ -87,8 +87,8 @@ jobs:
       - name: Inject CSS bundles, optional CSS, and configurator
         run: |
           set -euo pipefail
-          mkdir -p _site/dist _site/optional _site/configurator
-          cp -r dist/. _site/dist/
+          mkdir -p _site/badges _site/optional _site/configurator
+          cp -r badges/. _site/badges/
           cp optional/*.css _site/optional/
           cp -r configurator/dist/. _site/configurator/
 
