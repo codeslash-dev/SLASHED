@@ -4,7 +4,7 @@
     parseOklch, stringifyOklch, oklchToRgb,
     getRelativeLuminance, getContrastRatio,
   } from '../../lib/colorUtils';
-  import { resolveColor, resolveRgb, previewVersion } from '../../lib/previewResolver.svelte';
+  import { resolveColor, resolveRgb, previewVersion, getActiveTheme } from '../../lib/previewResolver.svelte';
 
   let { overrides, onSet }: {
     tokens: SlashedToken[];
@@ -30,17 +30,17 @@
     { label: "Bg",       expr: "var(--sf-color-bg)" },
     { label: "Border",   expr: "var(--sf-color-border)" },
   ];
-  // Brand/status roles — base + key steps; base maps to an editable source.
+  // Brand/status roles — base + key steps; base maps to editable light + dark sources.
   const ROLE_DEFS = [
-    { key: "primary",   src: "--sf-color-primary-source-light",   def: "oklch(0.47 0.27 264)" },
-    { key: "secondary", src: "--sf-color-secondary-source-light", def: "oklch(0.22 0.04 264)" },
-    { key: "tertiary",  src: "--sf-color-tertiary-source-light",  def: "oklch(0.42 0.22 295)" },
-    { key: "action",    src: "--sf-color-action-source-light",    def: "oklch(0.50 0.22 235)" },
-    { key: "neutral",   src: "--sf-color-neutral-source-light",   def: "oklch(0.52 0.025 260)" },
-    { key: "success",   src: "--sf-color-success-source-light",   def: "oklch(0.50 0.16 145)" },
-    { key: "warning",   src: "--sf-color-warning-source-light",   def: "oklch(0.75 0.17 80)" },
-    { key: "danger",    src: "--sf-color-danger-source-light",    def: "oklch(0.48 0.22 12)" },
-    { key: "info",      src: "--sf-color-info-source-light",      def: "oklch(0.48 0.18 235)" },
+    { key: "primary",   srcLight: "--sf-color-primary-source-light",   defLight: "oklch(0.47 0.27 264)",   srcDark: "--sf-color-primary-source-dark",   defDark: "oklch(0.715 0.243 264)" },
+    { key: "secondary", srcLight: "--sf-color-secondary-source-light", defLight: "oklch(0.22 0.04 264)",   srcDark: "--sf-color-secondary-source-dark", defDark: "oklch(0.84 0.036 264)" },
+    { key: "tertiary",  srcLight: "--sf-color-tertiary-source-light",  defLight: "oklch(0.42 0.22 295)",   srcDark: "--sf-color-tertiary-source-dark",  defDark: "oklch(0.74 0.198 295)" },
+    { key: "action",    srcLight: "--sf-color-action-source-light",    defLight: "oklch(0.50 0.22 235)",   srcDark: "--sf-color-action-source-dark",    defDark: "oklch(0.70 0.198 235)" },
+    { key: "neutral",   srcLight: "--sf-color-neutral-source-light",   defLight: "oklch(0.52 0.025 260)",  srcDark: "--sf-color-neutral-source-dark",   defDark: "oklch(0.69 0.0225 260)" },
+    { key: "success",   srcLight: "--sf-color-success-source-light",   defLight: "oklch(0.50 0.16 145)",   srcDark: "--sf-color-success-source-dark",   defDark: "oklch(0.70 0.144 145)" },
+    { key: "warning",   srcLight: "--sf-color-warning-source-light",   defLight: "oklch(0.75 0.17 80)",    srcDark: "--sf-color-warning-source-dark",   defDark: "oklch(0.65 0.153 80)" },
+    { key: "danger",    srcLight: "--sf-color-danger-source-light",    defLight: "oklch(0.48 0.22 12)",    srcDark: "--sf-color-danger-source-dark",    defDark: "oklch(0.71 0.198 12)" },
+    { key: "info",      srcLight: "--sf-color-info-source-light",      defLight: "oklch(0.48 0.18 235)",   srcDark: "--sf-color-info-source-dark",      defDark: "oklch(0.71 0.162 235)" },
   ];
   const ROLE_OPTS: ColorOpt[] = ROLE_DEFS.flatMap((r) => [
     { label: `${r.key} (base)`, expr: `var(--sf-color-${r.key})`, editKey: r.key },
@@ -102,6 +102,11 @@
     if (bo) bgLabel = bo.label;
   }
 
+  function paint(expr: string): string {
+    void previewVersion.value;
+    return resolveColor(expr) || expr;
+  }
+
   // ---- Auto-fix: nudge the FG source color's OKLCH lightness to pass --------
   let suggestion = $state<{ token: string; value: string; ratio: number } | null>(null);
 
@@ -109,7 +114,10 @@
     suggestion = null;
     const ed = fg.editKey ? EDIT_BY_KEY[fg.editKey] : null;
     if (!ed) return;
-    const cur = overrides[ed.src] ?? ed.def;
+    const isDark = getActiveTheme() === "dark";
+    const src = isDark ? ed.srcDark : ed.srcLight;
+    const def = isDark ? ed.defDark : ed.defLight;
+    const cur = overrides[src] ?? def;
     const { c, h, l, valid } = parseOklch(cur);
     if (!valid) return;
     const b = resolveRgb(bg.expr);
@@ -125,7 +133,7 @@
     if (best === null) return;
     const [r, g, bb] = oklchToRgb(best, c, h);
     const ratio = getContrastRatio(getRelativeLuminance(r, g, bb), bgLum);
-    suggestion = { token: ed.src, value: stringifyOklch(best, c, h), ratio };
+    suggestion = { token: src, value: stringifyOklch(best, c, h), ratio };
   }
 
   function applyFix() {
@@ -172,8 +180,8 @@
 
     <!-- Sample + result -->
     <div class="rounded-xl border border-white/8 overflow-hidden">
-      <div class="h-24 flex items-center justify-center" style={`background:${resolveColor(bg.expr) || bg.expr}`}>
-        <span class="text-[26px] font-bold" style={`color:${resolveColor(fg.expr) || fg.expr}`}>Aa Bb Cc</span>
+      <div class="h-24 flex items-center justify-center" style={`background:${paint(bg.expr)}`}>
+        <span class="text-[26px] font-bold" style={`color:${paint(fg.expr)}`}>Aa Bb Cc</span>
       </div>
       {#if pairRatio !== null}
         {@const lvl = levelOf(pairRatio)}
@@ -196,7 +204,7 @@
     <!-- Auto-fix -->
     <div class="rounded-xl bg-white/4 border border-white/8 p-3 space-y-2">
       <div class="flex items-center justify-between">
-        <span class="text-[10px] font-bold text-slate-300">Auto-fix to pass</span>
+        <span class="text-[10px] font-bold text-slate-300">Auto-fix to pass <span class="text-slate-600 font-normal">(for {getActiveTheme()} mode)</span></span>
         <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5">
           {#each ["AA", "AAA"] as t (t)}
             <button onclick={() => { targetLevel = t as "AA" | "AAA"; }} class={`px-2 py-0.5 rounded-md text-[10px] font-bold cursor-pointer ${targetLevel === t ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"}`}>{t}</button>
@@ -209,7 +217,7 @@
         <p class="text-[9px] text-emerald-300">Already passes {targetLevel}. 🎉</p>
       {:else if suggestion}
         <div class="flex items-center gap-2">
-          <span class="w-7 h-7 rounded border border-white/10 shrink-0" style={`background:${resolveColor(suggestion.value) || suggestion.value}`}></span>
+          <span class="w-7 h-7 rounded border border-white/10 shrink-0" style={`background:${paint(suggestion.value)}`}></span>
           <div class="flex-1 min-w-0">
             <div class="text-[9px] font-mono text-slate-400 truncate">{suggestion.value}</div>
             <div class="text-[9px] text-emerald-300">→ {suggestion.ratio.toFixed(2)}:1 ({targetLevel} ✓)</div>

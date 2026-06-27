@@ -81,12 +81,12 @@
     ></div>
     <input
       type="range" {min} {max} {step} value={minValue}
-      oninput={(e) => onMinChange(clamp(parseFloat((e.target as HTMLInputElement).value)))}
+      oninput={(e) => onMinChange(Math.min(clamp(parseFloat((e.target as HTMLInputElement).value)), maxValue))}
       class="clampRange absolute inset-0 w-full" aria-label={`${title} min`}
     />
     <input
       type="range" {min} {max} {step} value={maxValue}
-      oninput={(e) => onMaxChange(clamp(parseFloat((e.target as HTMLInputElement).value)))}
+      oninput={(e) => onMaxChange(Math.max(clamp(parseFloat((e.target as HTMLInputElement).value)), minValue))}
       class="clampRange absolute inset-0 w-full" aria-label={`${title} max`}
     />
     <div class="absolute w-3 h-3 bg-white rounded-full shadow-md border border-indigo-400/40 pointer-events-none" style={`left: calc(${minPct}% - 6px)`}></div>
@@ -145,13 +145,13 @@
           <label class="flex items-center gap-1.5">
             <span class="text-[9px] text-slate-500 shrink-0">min</span>
             <input type="number" min={ratioMin_bound} max={ratioMax_bound} step={0.001} value={ratioMin}
-              onchange={(e) => onRatioMinChange?.(parseFloat((e.target as HTMLInputElement).value))}
+              onchange={(e) => { const n = parseFloat((e.target as HTMLInputElement).value); if (Number.isFinite(n)) onRatioMinChange?.(Math.min(ratioMax_bound, Math.max(ratioMin_bound, n))); }}
               class="w-full bg-white/5 border border-white/10 rounded text-[11px] font-mono text-slate-200 text-right px-1.5 py-0.5 focus:outline-none focus:border-indigo-500" />
           </label>
           <label class="flex items-center gap-1.5">
             <span class="text-[9px] text-slate-500 shrink-0">max</span>
             <input type="number" min={ratioMin_bound} max={ratioMax_bound} step={0.001} value={ratioMax}
-              onchange={(e) => onRatioMaxChange?.(parseFloat((e.target as HTMLInputElement).value))}
+              onchange={(e) => { const n = parseFloat((e.target as HTMLInputElement).value); if (Number.isFinite(n)) onRatioMaxChange?.(Math.min(ratioMax_bound, Math.max(ratioMin_bound, n))); }}
               class="w-full bg-white/5 border border-white/10 rounded text-[11px] font-mono text-slate-200 text-right px-1.5 py-0.5 focus:outline-none focus:border-indigo-500" />
           </label>
         </div>

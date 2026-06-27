@@ -37,10 +37,20 @@ let counter = 0;
 
 /** Register (or replace) the document the resolver reads from. */
 export function registerPreviewDoc(doc: Document | null): void {
+  if (activeDoc === doc) {
+    bumpPreviewVersion();
+    return;
+  }
+  if (probe) probe.remove();
   activeDoc = doc;
-  probe = null;   // recreated lazily inside the new doc
-  normCtx = null; // ditto for the normalisation canvas
+  probe = null;
+  normCtx = null;
   bumpPreviewVersion();
+}
+
+/** Return the theme currently active in the registered preview document. */
+export function getActiveTheme(): "light" | "dark" {
+  return activeDoc?.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
 }
 
 /** Signal consumers that resolved values may have changed. */
@@ -99,7 +109,6 @@ export function resolveRgb(cssExpr: string): [number, number, number] | null {
   const ctx = getCtx();
   if (!ctx) return null;
   ctx.clearRect(0, 0, 1, 1);
-  ctx.fillStyle = "#000";
   ctx.fillStyle = css;
   ctx.fillRect(0, 0, 1, 1);
   try {
