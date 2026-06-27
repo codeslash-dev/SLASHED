@@ -365,7 +365,6 @@
     <button
       onclick={() => { showMore = !showMore; }}
       aria-expanded={showMore}
-      aria-expanded={showMore}
       aria-controls="more-layout-primitives"
       class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
     >
