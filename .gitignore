@@ -4,7 +4,9 @@ playwright-report/
 *.tgz
 .DS_Store
 .agents/
-.claude/
+.claude/*.lock
+.claude/todos/
+.claude/cache/
 
 # Semantic review artifacts (sub-agent output, not source)
 semantic-review/

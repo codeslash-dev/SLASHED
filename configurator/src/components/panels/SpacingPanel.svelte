@@ -70,6 +70,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showLayoutGap = !showLayoutGap; }}
+      aria-expanded={showLayoutGap}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Layout gap</div>
@@ -109,6 +110,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showDensityPresets = !showDensityPresets; }}
+      aria-expanded={showDensityPresets}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Density presets</div>
@@ -139,6 +141,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showModularScale = !showModularScale; }}
+      aria-expanded={showModularScale}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
@@ -198,6 +201,7 @@
   <section>
     <button
       onclick={() => { showSpacePreview = !showSpacePreview; }}
+      aria-expanded={showSpacePreview}
       class="w-full flex items-center justify-between cursor-pointer mb-2"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Space scale preview</div>

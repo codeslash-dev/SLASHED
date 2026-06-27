@@ -64,6 +64,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showTouchTarget = !showTouchTarget; }}
+      aria-expanded={showTouchTarget}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Touch target</div>
@@ -96,6 +97,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showScrollBehavior = !showScrollBehavior; }}
+      aria-expanded={showScrollBehavior}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll behavior</div>
@@ -125,6 +127,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showZIndex = !showZIndex; }}
+      aria-expanded={showZIndex}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Z-index layers</div>
@@ -159,6 +162,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showTextSelection = !showTextSelection; }}
+      aria-expanded={showTextSelection}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text selection</div>
@@ -215,6 +219,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showFocusRingStyle = !showFocusRingStyle; }}
+      aria-expanded={showFocusRingStyle}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Focus ring style</div>
@@ -254,6 +259,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showComponentSizes = !showComponentSizes; }}
+      aria-expanded={showComponentSizes}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Component size scale</div>
@@ -297,6 +303,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showCaretLinks = !showCaretLinks; }}
+      aria-expanded={showCaretLinks}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Caret &amp; links</div>

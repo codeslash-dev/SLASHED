@@ -78,6 +78,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showContainerWidths = !showContainerWidths; }}
+      aria-expanded={showContainerWidths}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Container widths</div>
@@ -153,6 +154,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showCenterWrapper = !showCenterWrapper; }}
+      aria-expanded={showCenterWrapper}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Center wrapper</div>
@@ -182,6 +184,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showAutoGrid = !showAutoGrid; }}
+      aria-expanded={showAutoGrid}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Auto grid</div>
@@ -215,6 +218,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showHeaderHeight = !showHeaderHeight; }}
+      aria-expanded={showHeaderHeight}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Header height</div>
@@ -264,6 +268,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showStickyOffset = !showStickyOffset; }}
+      aria-expanded={showStickyOffset}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sticky offset</div>
@@ -300,6 +305,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showSidebar = !showSidebar; }}
+      aria-expanded={showSidebar}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sidebar</div>
@@ -331,6 +337,7 @@
   <div>
     <button
       onclick={() => { showBento = !showBento; }}
+      aria-expanded={showBento}
       class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
     >
       <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Bento grid</span>
@@ -357,6 +364,7 @@
   <div>
     <button
       onclick={() => { showMore = !showMore; }}
+      aria-expanded={showMore}
       aria-expanded={showMore}
       aria-controls="more-layout-primitives"
       class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"

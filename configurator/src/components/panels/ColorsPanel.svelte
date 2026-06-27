@@ -328,6 +328,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showBrandSources = !showBrandSources; }}
+      aria-expanded={showBrandSources}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Brand color sources</div>
@@ -428,6 +429,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showLumlocker = !showLumlocker; }}
+      aria-expanded={showLumlocker}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">LumLocker</div>
@@ -485,6 +487,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showStatus = !showStatus; }}
+      aria-expanded={showStatus}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status colors</div>
@@ -544,6 +547,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showTextContrast = !showTextContrast; }}
+      aria-expanded={showTextContrast}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text contrast</div>
@@ -604,6 +608,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showShadeCurve = !showShadeCurve; }}
+      aria-expanded={showShadeCurve}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Shade / tint curve</div>
@@ -739,6 +744,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showGradients = !showGradients; }}
+      aria-expanded={showGradients}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Gradients</div>
@@ -835,6 +841,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showSemanticOverrides = !showSemanticOverrides; }}
+      aria-expanded={showSemanticOverrides}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Semantic overrides</div>

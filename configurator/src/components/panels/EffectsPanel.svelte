@@ -50,6 +50,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showBlur = !showBlur; }}
+      aria-expanded={showBlur}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Blur</div>
@@ -86,6 +87,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showOpacity = !showOpacity; }}
+      aria-expanded={showOpacity}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Opacity</div>
@@ -136,6 +138,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showScrim = !showScrim; }}
+      aria-expanded={showScrim}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrim overlay</div>
@@ -201,6 +204,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showScrollbar = !showScrollbar; }}
+      aria-expanded={showScrollbar}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrollbar</div>
@@ -215,7 +219,7 @@
           <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">{row.label}</div>
           <input
             type="color"
-            value={row.val || row.default}
+            value={row.val || (row.default === "transparent" ? "#000000" : row.default)}
             oninput={(e) => onSet(row.token, (e.target as HTMLInputElement).value)}
             class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
           />
@@ -241,6 +245,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showScrollShadow = !showScrollShadow; }}
+      aria-expanded={showScrollShadow}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
@@ -263,6 +268,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showTextShadow = !showTextShadow; }}
+      aria-expanded={showTextShadow}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text shadow</div>

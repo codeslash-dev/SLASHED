@@ -107,6 +107,9 @@
     return resolveColor(expr) || expr;
   }
 
+  let showPairChecker = $state(true);
+  let showMatrix      = $state(true);
+
   // ---- Auto-fix: nudge the FG source color's OKLCH lightness to pass --------
   let suggestion = $state<{ token: string; value: string; ratio: number } | null>(null);
 
@@ -142,6 +145,7 @@
 
   // Recompute the suggestion whenever inputs change but only if FG is editable.
   $effect(() => {
+    if (!showPairChecker) { suggestion = null; return; }
     void previewVersion.value;
     void fgLabel; void bgLabel; void targetLevel;
     if (fg.editKey && pairRatio !== null && pairRatio < (targetLevel === "AAA" ? 7 : 4.5)) {
@@ -151,8 +155,6 @@
     }
   });
 
-  let showPairChecker = $state(true);
-  let showMatrix      = $state(true);
 </script>
 
 <div class="p-4 space-y-6">
@@ -167,6 +169,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showPairChecker = !showPairChecker; }}
+      aria-expanded={showPairChecker}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Pair checker</div>
@@ -248,6 +251,7 @@
   <section class="space-y-2">
     <button
       onclick={() => { showMatrix = !showMatrix; }}
+      aria-expanded={showMatrix}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Contrast matrix</div>

@@ -43,6 +43,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showShadowAppearance = !showShadowAppearance; }}
+      aria-expanded={showShadowAppearance}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Shadow appearance</div>
@@ -75,6 +76,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showShadowColor = !showShadowColor; }}
+      aria-expanded={showShadowColor}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Shadow color</div>
@@ -106,6 +108,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showGlow = !showGlow; }}
+      aria-expanded={showGlow}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Glow</div>
@@ -160,6 +163,7 @@
   <div>
     <button
       onclick={() => { showElevationPreview = !showElevationPreview; }}
+      aria-expanded={showElevationPreview}
       class="w-full flex items-center justify-between cursor-pointer mb-2"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Elevation preview</div>

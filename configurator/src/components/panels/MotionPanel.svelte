@@ -121,6 +121,7 @@
   <div>
     <button
       onclick={() => { showGlobalScale = !showGlobalScale; }}
+      aria-expanded={showGlobalScale}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global scale</div>
@@ -145,6 +146,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showThemeTransition = !showThemeTransition; }}
+      aria-expanded={showThemeTransition}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Theme transition</div>
@@ -152,7 +154,7 @@
     </button>
     {#if showThemeTransition}
       <SliderRow
-        label="Dark/light switch speed" value={Math.round(300 * scale)} min={0} max={600} step={10} unit="ms"
+        label="Dark/light switch speed" value={themeTransition} min={0} max={600} step={10} unit="ms"
         help="--sf-theme-transition-duration — color-scheme switch animation speed"
         overridden={"--sf-theme-transition-duration" in overrides}
         onChange={(v) => onSet("--sf-theme-transition-duration", `${v}ms`)}
@@ -167,6 +169,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showDurationOverrides = !showDurationOverrides; }}
+      aria-expanded={showDurationOverrides}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Duration overrides</div>
@@ -200,6 +203,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showStaggerBase = !showStaggerBase; }}
+      aria-expanded={showStaggerBase}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Stagger base</div>
@@ -246,6 +250,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showEasingCurves = !showEasingCurves; }}
+      aria-expanded={showEasingCurves}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Easing curves</div>
@@ -288,6 +293,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showAnimationDemo = !showAnimationDemo; }}
+      aria-expanded={showAnimationDemo}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Animation demo</div>
@@ -318,6 +324,7 @@
   <div>
     <button
       onclick={() => { showDurationPreview = !showDurationPreview; }}
+      aria-expanded={showDurationPreview}
       class="w-full flex items-center justify-between cursor-pointer mb-2"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Duration preview</div>

@@ -80,6 +80,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showFlow = !showFlow; }}
+      aria-expanded={showFlow}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Flow rhythm</div>
@@ -107,6 +108,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showLineClamp = !showLineClamp; }}
+      aria-expanded={showLineClamp}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line clamp</div>
@@ -140,6 +142,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showAspect = !showAspect; }}
+      aria-expanded={showAspect}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Aspect ratio</div>
@@ -174,6 +177,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showScrollShadow = !showScrollShadow; }}
+      aria-expanded={showScrollShadow}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
@@ -202,6 +206,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showScrim = !showScrim; }}
+      aria-expanded={showScrim}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrim overlay</div>
@@ -254,6 +259,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showProse = !showProse; }}
+      aria-expanded={showProse}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Prose rhythm</div>

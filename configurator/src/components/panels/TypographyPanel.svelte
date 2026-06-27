@@ -246,6 +246,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showFontFamilies = !showFontFamilies; }}
+      aria-expanded={showFontFamilies}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font families</div>
@@ -329,6 +330,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showPerType = !showPerType; }}
+      aria-expanded={showPerType}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Per-type styles</div>
@@ -452,6 +454,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showBodyText = !showBodyText; }}
+      aria-expanded={showBodyText}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Body text</div>
@@ -548,6 +551,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showDisplayType = !showDisplayType; }}
+      aria-expanded={showDisplayType}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Display type</div>
@@ -605,6 +609,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showModularScale = !showModularScale; }}
+      aria-expanded={showModularScale}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
@@ -715,6 +720,7 @@
   <section>
     <button
       onclick={() => { showScalePreview = !showScalePreview; }}
+      aria-expanded={showScalePreview}
       class="w-full flex items-center justify-between cursor-pointer mb-3"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scale preview</div>

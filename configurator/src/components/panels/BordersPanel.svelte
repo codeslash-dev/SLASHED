@@ -96,6 +96,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showBorderColor = !showBorderColor; }}
+      aria-expanded={showBorderColor}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border color</div>
@@ -126,6 +127,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showBorderWidths = !showBorderWidths; }}
+      aria-expanded={showBorderWidths}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border widths</div>
@@ -164,6 +166,7 @@
   <section class="space-y-4">
     <button
       onclick={() => { showLineStyles = !showLineStyles; }}
+      aria-expanded={showLineStyles}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line styles</div>
@@ -216,6 +219,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showDividers = !showDividers; }}
+      aria-expanded={showDividers}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Dividers</div>
@@ -258,6 +262,7 @@
   <section class="space-y-3">
     <button
       onclick={() => { showFocusRing = !showFocusRing; }}
+      aria-expanded={showFocusRing}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Focus ring</div>
@@ -309,6 +314,7 @@
   <div>
     <button
       onclick={() => { showRadiusScale = !showRadiusScale; }}
+      aria-expanded={showRadiusScale}
       class="w-full flex items-center justify-between cursor-pointer"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Radius scale</div>
@@ -331,6 +337,7 @@
   <div>
     <button
       onclick={() => { showFineTune = !showFineTune; }}
+      aria-expanded={showFineTune}
       class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
     >
       <span>Fine-tune radius steps</span>
@@ -359,6 +366,7 @@
   <div>
     <button
       onclick={() => { showRadiusPreview = !showRadiusPreview; }}
+      aria-expanded={showRadiusPreview}
       class="w-full flex items-center justify-between cursor-pointer mb-2"
     >
       <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Radius preview</div>
@@ -389,6 +397,7 @@
   <div>
     <button
       onclick={() => { showComponents = !showComponents; }}
+      aria-expanded={showComponents}
       class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
     >
       <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Component shape</span>
