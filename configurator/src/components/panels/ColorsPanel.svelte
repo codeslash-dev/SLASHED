@@ -167,6 +167,9 @@
     (k) => k.name === "--sf-focus-ring-width"
   );
 
+  let showBrandSources = $state(true);
+  let showTextContrast = $state(true);
+  let showShadeCurve = $state(true);
   let showStatus = $state(false);
   let showSemanticOverrides = $state(false);
   let showGradients = $state(false);
@@ -323,7 +326,14 @@
 
   <!-- BRAND SOURCES -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Brand color sources</div>
+    <button
+      onclick={() => { showBrandSources = !showBrandSources; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Brand color sources</div>
+      <span class="text-[10px] text-slate-500">{showBrandSources ? "▲" : "▼"}</span>
+    </button>
+    {#if showBrandSources}
     <p class="text-[10px] text-slate-600 leading-relaxed">
       OKLCH source values — all 200+ derived color steps are computed automatically.
     </p>
@@ -409,6 +419,7 @@
         </div>
       {/each}
     </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
@@ -531,7 +542,14 @@
 
   <!-- TEXT CONTRAST -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text contrast</div>
+    <button
+      onclick={() => { showTextContrast = !showTextContrast; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text contrast</div>
+      <span class="text-[10px] text-slate-500">{showTextContrast ? "▲" : "▼"}</span>
+    </button>
+    {#if showTextContrast}
     <p class="text-[10px] text-slate-600 leading-relaxed">
       Controls whether text on brand-coloured surfaces is light or dark.
     </p>
@@ -577,13 +595,21 @@
         onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
       />
     {/each}
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- SHADE CURVE -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Shade / tint curve</div>
+    <button
+      onclick={() => { showShadeCurve = !showShadeCurve; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Shade / tint curve</div>
+      <span class="text-[10px] text-slate-500">{showShadeCurve ? "▲" : "▼"}</span>
+    </button>
+    {#if showShadeCurve}
     <p class="text-[10px] text-slate-600 leading-relaxed">
       Controls how much color is mixed into each palette step. Step 500 is always the source color.
     </p>
@@ -672,6 +698,39 @@
       </div>
       <p class="text-[8px] text-slate-600 mt-2">Bar height = mix amount · fill = the resolved primary palette swatch at each step</p>
     </div>
+
+    <!-- Mini palettes: all brand colors × all steps, reactive to light/dark toggle -->
+    <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-[9px] text-slate-600">Mini palettes — all brand colors</span>
+        <div class="flex bg-white/5 border border-white/8 rounded p-0.5 gap-0.5">
+          {#each ["light", "dark"] as side (side)}
+            <button
+              onclick={() => { curvePreviewSide = side as "light" | "dark"; }}
+              class={`px-1.5 py-0.5 rounded text-[8px] font-bold cursor-pointer transition-all ${
+                curvePreviewSide === side ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"
+              }`}
+            >{side === "light" ? "Light" : "Dark"}</button>
+          {/each}
+        </div>
+      </div>
+      {#each BRAND_COLOR_KEYS as colorKey (colorKey)}
+        <div class="flex items-center gap-1.5">
+          <span class="text-[7px] font-mono text-slate-600 w-12 shrink-0 truncate">{colorKey}</span>
+          <div class="flex gap-0.5 flex-1">
+            {#each SWATCH_STEPS as step (step)}
+              {@const swatch = paintTheme(`var(--sf-color-${colorKey}-${step})`, curvePreviewSide, `var(--sf-color-${colorKey}-${step})`)}
+              <div
+                class="flex-1 h-4 rounded-sm border border-white/10"
+                style={`background:${swatch}`}
+                title={`${colorKey}-${step} (${curvePreviewSide})`}
+              ></div>
+            {/each}
+          </div>
+        </div>
+      {/each}
+    </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
@@ -707,7 +766,7 @@
                 </div>
 
                 <!-- Structured controls -->
-                {#if g.kind === "dir"}
+                {#if g.kind === "dir" && g.group !== "fade"}
                   <div class="flex items-center gap-1">
                     <span class="text-[8px] text-slate-500 w-10 shrink-0">Dir</span>
                     {#each ["top", "right", "bottom", "left"] as d (d)}
@@ -719,7 +778,7 @@
                       >{d}</button>
                     {/each}
                   </div>
-                {:else}
+                {:else if g.kind !== "dir"}
                   <div class="flex items-center gap-2">
                     <span class="text-[8px] text-slate-500 w-10 shrink-0">Angle</span>
                     <input
