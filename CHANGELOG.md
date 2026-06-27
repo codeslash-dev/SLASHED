@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.20] - 2026-06-27
+
+### Features
+- **configurator:** make all setting groups collapsible across panels
+- **configurator:** collapsible color panel sections + shade curve mini palettes + fade gradient fix
+- **configurator:** lumlocker preview, gradient editor, macros panel, layout UI
+- **configurator:** show both light and dark palette previews in color controls
+
+### Bug Fixes
+- **configurator:** remove duplicate aria-expanded in LayoutPanel
+- **configurator:** aria-expanded, session hook, and review bug fixes
+- **configurator:** gradient tab crash and dark palette swatch bugs
+
+### Performance Improvements
+- **configurator:** cache getComputedStyle results per preview version
+
 ## [0.6.19] - 2026-06-27
 
 ### Features
