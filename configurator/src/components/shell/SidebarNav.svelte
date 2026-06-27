@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
     Home, Palette, Type, Ruler, Layout, Square, Layers, Zap, Sparkles, Puzzle,
-    SwatchBook, ShieldCheck, Package, BookOpen,
+    Blocks, SwatchBook, ShieldCheck, Package, BookOpen,
   } from 'lucide-svelte';
 
   let { activeId, onSelect, overridesByDomain = {} }: {
@@ -20,6 +20,7 @@
     { id: "shadows",    icon: Layers,      label: "Shadows",    group: "tokens" },
     { id: "motion",     icon: Zap,         label: "Motion",     group: "tokens" },
     { id: "effects",    icon: Sparkles,    label: "Effects",    group: "tokens" },
+    { id: "macros",     icon: Blocks,      label: "Macros",     group: "tokens" },
     { id: "misc",       icon: Puzzle,      label: "Misc",       group: "tokens" },
     { id: "themes",     icon: SwatchBook,  label: "Themes",     group: "tools" },
     { id: "wcag",       icon: ShieldCheck, label: "WCAG",       group: "tools" },

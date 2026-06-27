@@ -11,6 +11,7 @@
   import ShadowsPanel from './panels/ShadowsPanel.svelte';
   import MotionPanel from './panels/MotionPanel.svelte';
   import EffectsPanel from './panels/EffectsPanel.svelte';
+  import MacrosPanel from './panels/MacrosPanel.svelte';
   import MiscPanel from './panels/MiscPanel.svelte';
   import ThemesPanel from './panels/ThemesPanel.svelte';
   import ExportPanel from './panels/ExportPanel.svelte';
@@ -98,6 +99,8 @@
             <MotionPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "effects"}
             <EffectsPanel {overrides} {onSet} {onReset} />
+          {:else if domain === "macros"}
+            <MacrosPanel {overrides} {onSet} {onReset} />
           {:else if domain === "misc"}
             <MiscPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else}

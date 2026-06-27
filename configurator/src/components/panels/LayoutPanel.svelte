@@ -36,12 +36,34 @@
   ];
 
   let showBento = $state(false);
+  let showMore = $state(false);
 
   function getBentoVal(t: typeof BENTO_TOKENS[0]): number {
     const raw = overrides[t.token];
     if (!raw) return t.default;
     return parseFloat(raw);
   }
+
+  // Additional layout primitives (switcher, sidebar, equal, cover, frame, reel,
+  // imposter, content-grid, alternate) — tokens exist but had no UI.
+  let switcherThreshold = $derived(parseRem(overrides["--sf-switcher-threshold"], 30));
+  let sidebarMinWidth   = $derived(parseRem(overrides["--sf-sidebar-min-width"], 50));
+  let equalMinCol       = $derived(parseRem(overrides["--sf-equal-min-col"], 16));
+  let coverMinHeight    = $derived(parseRem(overrides["--sf-cover-min-height"], 100));
+  let imposterMargin    = $derived(parseRem(overrides["--sf-imposter-margin"], 1));
+  let breakoutWidth     = $derived(parseRem(overrides["--sf-breakout-width"], 90));
+  let contentWidth      = $derived(parseRem(overrides["--sf-content-width"], 75));
+  let alternateInnerGap = $derived(parseRem(overrides["--sf-alternate-inner-gap"], 1));
+  let frameRatio        = $derived(overrides["--sf-frame-ratio"] ?? "16 / 9");
+  let reelItemWidth     = $derived(overrides["--sf-reel-item-width"] ?? "max-content");
+
+  const FRAME_PRESETS = ["16 / 9", "4 / 3", "3 / 2", "1 / 1", "21 / 9"];
+  const REEL_PRESETS = [
+    { label: "auto",  value: "max-content" },
+    { label: "12rem", value: "12rem" },
+    { label: "16rem", value: "16rem" },
+    { label: "20rem", value: "20rem" },
+  ];
 </script>
 
 <div class="p-4 space-y-6">
@@ -272,6 +294,152 @@
             onReset={() => onReset(t.token)}
           />
         {/each}
+      </div>
+    {/if}
+  </div>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- MORE LAYOUT PRIMITIVES -->
+  <div>
+    <button
+      onclick={() => { showMore = !showMore; }}
+      aria-expanded={showMore}
+      aria-controls="more-layout-primitives"
+      class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
+    >
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">More layout primitives</span>
+      <span class="text-[10px] text-slate-500">{showMore ? "▲" : "▼"}</span>
+    </button>
+    {#if showMore}
+      <div id="more-layout-primitives" class="mt-3 space-y-5">
+
+        <!-- Switcher -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Switcher</div>
+          <SliderRow
+            label="Threshold" value={switcherThreshold} min={10} max={60} step={1} unit="rem"
+            help="--sf-switcher-threshold — width below which .sf-switcher stacks vertically"
+            overridden={"--sf-switcher-threshold" in overrides}
+            onChange={(v) => onSet("--sf-switcher-threshold", `${v}rem`)}
+            onReset={() => onReset("--sf-switcher-threshold")}
+          />
+        </section>
+
+        <!-- Sidebar content min -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Sidebar content</div>
+          <SliderRow
+            label="Content min width" value={sidebarMinWidth} min={20} max={80} step={1} unit="%"
+            help="--sf-sidebar-min-width — minimum width of the .sf-sidebar content column before it wraps"
+            overridden={"--sf-sidebar-min-width" in overrides}
+            onChange={(v) => onSet("--sf-sidebar-min-width", `${v}%`)}
+            onReset={() => onReset("--sf-sidebar-min-width")}
+          />
+        </section>
+
+        <!-- Equal grid -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Equal grid</div>
+          <SliderRow
+            label="Min column" value={equalMinCol} min={6} max={36} step={0.5} unit="rem"
+            help="--sf-equal-min-col — minimum column width for .sf-equal"
+            overridden={"--sf-equal-min-col" in overrides}
+            onChange={(v) => onSet("--sf-equal-min-col", `${v}rem`)}
+            onReset={() => onReset("--sf-equal-min-col")}
+          />
+        </section>
+
+        <!-- Cover -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Cover</div>
+          <SliderRow
+            label="Min height" value={coverMinHeight} min={20} max={100} step={1} unit="dvh"
+            help="--sf-cover-min-height — minimum height of the .sf-cover layout"
+            overridden={"--sf-cover-min-height" in overrides}
+            onChange={(v) => onSet("--sf-cover-min-height", `${v}dvh`)}
+            onReset={() => onReset("--sf-cover-min-height")}
+          />
+        </section>
+
+        <!-- Frame ratio -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Frame ratio</div>
+          <p class="text-[9px] text-slate-600">--sf-frame-ratio — aspect ratio for .sf-frame</p>
+          <div class="grid grid-cols-5 gap-1">
+            {#each FRAME_PRESETS as r (r)}
+              <button
+                onclick={() => r === "16 / 9" ? onReset("--sf-frame-ratio") : onSet("--sf-frame-ratio", r)}
+                class={`py-1 rounded-lg text-[9px] border transition-all cursor-pointer font-mono ${
+                  frameRatio.replace(/\s/g, "") === r.replace(/\s/g, "")
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                }`}
+              >{r}</button>
+            {/each}
+          </div>
+        </section>
+
+        <!-- Reel -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Reel</div>
+          <p class="text-[9px] text-slate-600">--sf-reel-item-width — width of each item in a horizontal .sf-reel</p>
+          <div class="grid grid-cols-4 gap-1">
+            {#each REEL_PRESETS as p (p.value)}
+              <button
+                onclick={() => p.value === "max-content" ? onReset("--sf-reel-item-width") : onSet("--sf-reel-item-width", p.value)}
+                class={`py-1 rounded-lg text-[9px] border transition-all cursor-pointer ${
+                  reelItemWidth === p.value
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                }`}
+              >{p.label}</button>
+            {/each}
+          </div>
+        </section>
+
+        <!-- Imposter -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Imposter</div>
+          <SliderRow
+            label="Margin" value={imposterMargin} min={0} max={4} step={0.125} unit="rem"
+            help="--sf-imposter-margin — viewport inset for the centered .sf-imposter overlay"
+            overridden={"--sf-imposter-margin" in overrides}
+            onChange={(v) => onSet("--sf-imposter-margin", `${v}rem`)}
+            onReset={() => onReset("--sf-imposter-margin")}
+          />
+        </section>
+
+        <!-- Content grid (breakout) -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Content grid (breakout)</div>
+          <SliderRow
+            label="Content width" value={contentWidth} min={40} max={120} step={1} unit="rem"
+            help="--sf-content-width — default reading column width in .sf-content-grid"
+            overridden={"--sf-content-width" in overrides}
+            onChange={(v) => onSet("--sf-content-width", `${v}rem`)}
+            onReset={() => onReset("--sf-content-width")}
+          />
+          <SliderRow
+            label="Breakout width" value={breakoutWidth} min={50} max={160} step={1} unit="rem"
+            help="--sf-breakout-width — wide breakout column width in .sf-content-grid"
+            overridden={"--sf-breakout-width" in overrides}
+            onChange={(v) => onSet("--sf-breakout-width", `${v}rem`)}
+            onReset={() => onReset("--sf-breakout-width")}
+          />
+        </section>
+
+        <!-- Alternate -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Alternate (zigzag)</div>
+          <SliderRow
+            label="Inner gap" value={alternateInnerGap} min={0} max={4} step={0.125} unit="rem"
+            help="--sf-alternate-inner-gap — gap between media and text within an .sf-alternate row"
+            overridden={"--sf-alternate-inner-gap" in overrides}
+            onChange={(v) => onSet("--sf-alternate-inner-gap", `${v}rem`)}
+            onReset={() => onReset("--sf-alternate-inner-gap")}
+          />
+        </section>
       </div>
     {/if}
   </div>

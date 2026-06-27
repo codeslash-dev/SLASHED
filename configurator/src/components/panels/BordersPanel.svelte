@@ -52,6 +52,7 @@
   let dividerWidth = $derived(parseNum(overrides["--sf-divider-width"]?.replace("px",""), 1));
   let dividerGap   = $derived(parseNum(overrides["--sf-divider-gap"]?.replace("rem",""), 1));
   let borderColor  = $derived(overrides["--sf-color-border"] ?? "");
+  let borderStyle  = $derived(overrides["--sf-border-style"] ?? "solid");
   let focusRingColor = $derived(overrides["--sf-focus-ring-color"] ?? "");
   let dividerColor = $derived(overrides["--sf-divider-color"] ?? "");
 
@@ -164,6 +165,17 @@
           </div>
         </div>
       {/each}
+    </div>
+
+    <!-- Combined border preview (width × style × color) -->
+    <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center gap-3">
+      <div
+        class="px-4 py-2 rounded-lg text-[11px] text-slate-300 bg-white/4"
+        style={`border: ${Math.max(borderScale, 0.5)}px ${borderStyle} ${borderColor || "var(--sf-color-border, #64748b)"}`}
+      >
+        Border sample
+      </div>
+      <span class="text-[9px] font-mono text-slate-600">{(1 * borderScale).toFixed(1)}px · {borderStyle}</span>
     </div>
   </section>
 

@@ -1,20 +1,26 @@
 /** Token name substrings that define each domain's scope. Shared by DomainPanel and check-curation. */
 export const DOMAIN_PATTERNS: Record<string, string[]> = {
+  // macros is listed first so its tokens win over broad substrings in other
+  // domains (e.g. "scrim"/"surface-color" would otherwise match "color").
+  macros: [
+    "prose", "flow-space", "line-clamp", "aspect", "scroll-shadow",
+    "scrim", "surface-color",
+  ],
   colors: [
-    "color", "contrast", "palette-mix", "lumlocker", "scrim", "gradient",
+    "color", "contrast", "palette-mix", "lumlocker", "gradient",
   ],
   typography: [
     "font", "--sf-text", "leading", "tracking", "weight", "body-font", "heading-font",
     "body-em", "body-text", "heading-text", "display-l-", "display-m-",
     "-h1-", "-h2-", "-h3-", "-h4-", "-h5-", "-h6-",
-    "line-clamp", "link-", "optical-sizing", "fluid-min-vw", "fluid-max-vw",
+    "link-", "optical-sizing", "fluid-min-vw", "fluid-max-vw",
   ],
   spacing: [
     "space", "section", "gutter", "content-gap", "component-pad",
   ],
   layout: [
     "container", "layout", "grid", "breakpoint", "measure", "column",
-    "header-height", "touch-target", "aspect", "bento", "cluster",
+    "header-height", "touch-target", "bento", "cluster",
     "content-intrinsic", "cover-min", "equal-min", "frame", "ratio-",
     "reel", "safe-", "sidebar", "switcher",
   ],

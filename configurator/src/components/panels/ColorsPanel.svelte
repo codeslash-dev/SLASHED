@@ -3,6 +3,7 @@
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import { parseOklch, stringifyOklch, getRelativeLuminance, getContrastRatio } from '../../lib/colorUtils';
   import { resolveColor, resolveColorForTheme, resolveRgb, resolveBackground, previewVersion } from '../../lib/previewResolver.svelte';
+  import { lumlockerPreview } from '../../lib/lumlockerPreview.svelte';
   import OklchColorDesk from '../inputs/OklchColorDesk.svelte';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
@@ -34,16 +35,47 @@
     return r || fallback;
   }
 
-  const GRADIENT_TOKENS = [
-    { name: "--sf-gradient-primary",   label: "Primary",   group: "brand" },
-    { name: "--sf-gradient-secondary", label: "Secondary", group: "brand" },
-    { name: "--sf-gradient-tertiary",  label: "Tertiary",  group: "brand" },
-    { name: "--sf-gradient-brand",     label: "Brand",     group: "brand" },
-    { name: "--sf-gradient-surface",   label: "Surface",   group: "brand" },
-    { name: "--sf-gradient-fade--r",   label: "Fade →",    group: "fade" },
-    { name: "--sf-gradient-fade--l",   label: "Fade ←",    group: "fade" },
-    { name: "--sf-gradient-fade--t",   label: "Fade ↑",    group: "fade" },
-    { name: "--sf-gradient-fade--b",   label: "Fade ↓",    group: "fade" },
+  // Each gradient carries its default formula plus the structured pieces
+  // (interpolation space, angle/direction, and the two colour stops) so the UI
+  // can offer granular controls and still show what the framework derives.
+  type GradientDef = {
+    name: string; label: string; group: "brand" | "fade";
+    kind: "angle" | "dir"; space: "oklch" | "oklab";
+    angle: number; dir: "right" | "left" | "top" | "bottom";
+    stop1: string; stop2: string; formula: string;
+  };
+  const GRADIENT_TOKENS: GradientDef[] = [
+    { name: "--sf-gradient-primary",   label: "Primary",   group: "brand", kind: "angle", space: "oklch", angle: 135, dir: "right",
+      stop1: "var(--sf-color-primary)",   stop2: "oklch(from var(--sf-color-primary) calc(l - 0.08) c h)",
+      formula: "linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h))" },
+    { name: "--sf-gradient-secondary", label: "Secondary", group: "brand", kind: "angle", space: "oklch", angle: 135, dir: "right",
+      stop1: "var(--sf-color-secondary)", stop2: "oklch(from var(--sf-color-secondary) calc(l - 0.08) c h)",
+      formula: "linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))" },
+    { name: "--sf-gradient-tertiary",  label: "Tertiary",  group: "brand", kind: "angle", space: "oklch", angle: 135, dir: "right",
+      stop1: "var(--sf-color-tertiary)",  stop2: "oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h)",
+      formula: "linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))" },
+    { name: "--sf-gradient-brand",     label: "Brand",     group: "brand", kind: "angle", space: "oklch", angle: 135, dir: "right",
+      stop1: "var(--sf-color-primary)",   stop2: "oklch(from var(--sf-color-primary) l c calc(h + 30))",
+      formula: "linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))" },
+    { name: "--sf-gradient-surface",   label: "Surface",   group: "brand", kind: "angle", space: "oklab", angle: 180, dir: "bottom",
+      stop1: "var(--sf-color-surface)",   stop2: "var(--sf-color-bg)",
+      formula: "linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))" },
+    { name: "--sf-gradient-fade--r",   label: "Fade →",    group: "fade", kind: "dir", space: "oklch", angle: 90,  dir: "right",
+      stop1: "transparent", stop2: "var(--sf-color-bg)", formula: "linear-gradient(in oklch to right, transparent, var(--sf-color-bg))" },
+    { name: "--sf-gradient-fade--l",   label: "Fade ←",    group: "fade", kind: "dir", space: "oklch", angle: 270, dir: "left",
+      stop1: "transparent", stop2: "var(--sf-color-bg)", formula: "linear-gradient(in oklch to left, transparent, var(--sf-color-bg))" },
+    { name: "--sf-gradient-fade--t",   label: "Fade ↑",    group: "fade", kind: "dir", space: "oklch", angle: 0,   dir: "top",
+      stop1: "transparent", stop2: "var(--sf-color-bg)", formula: "linear-gradient(in oklch to top, transparent, var(--sf-color-bg))" },
+    { name: "--sf-gradient-fade--b",   label: "Fade ↓",    group: "fade", kind: "dir", space: "oklch", angle: 180, dir: "bottom",
+      stop1: "transparent", stop2: "var(--sf-color-bg)", formula: "linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))" },
+  ];
+
+  // Brand colours the luminance lock (:root[data-lumlocker]) remaps.
+  const LOCKABLE = [
+    { key: "primary",   label: "Primary" },
+    { key: "secondary", label: "Secondary" },
+    { key: "tertiary",  label: "Tertiary" },
+    { key: "action",    label: "Action" },
   ];
 
   type ColorSource = {
@@ -138,6 +170,62 @@
   let showStatus = $state(false);
   let showSemanticOverrides = $state(false);
   let showGradients = $state(false);
+  let showLumlocker = $state(false);
+  let curvePreviewSide = $state<"light" | "dark">("light");
+  // Per-gradient structured editors, seeded lazily from the defaults above.
+  let gradientEdits = $state<Record<string, { space: string; kind: string; angle: number; dir: string; stop1: string; stop2: string }>>({});
+
+  let lumlockerL = $derived(parseFloat(overrides["--sf-lumlocker"] ?? "0.65"));
+
+  function parseLinearGradient(css: string): { space: string; kind: string; angle: number; dir: string; stop1: string; stop2: string } | null {
+    const m = css.match(/^linear-gradient\(\s*in\s+(\S+)\s+(to\s+\w+|\d+deg)\s*,(.+)\)$/i);
+    if (!m) return null;
+    const space = m[1];
+    const head = m[2].trim();
+    const isDir = head.startsWith("to ");
+    const dir = isDir ? head.slice(3).trim() : "right";
+    const angle = isDir ? 0 : parseInt(head);
+    // Paren-aware comma split for stops
+    let depth = 0, start = 0;
+    const stops: string[] = [];
+    const s = m[3];
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] === "(") depth++;
+      else if (s[i] === ")") depth--;
+      else if (s[i] === "," && depth === 0) { stops.push(s.slice(start, i).trim()); start = i + 1; }
+    }
+    stops.push(s.slice(start).trim());
+    if (stops.length < 2) return null;
+    return { space, kind: isDir ? "dir" : "angle", angle, dir, stop1: stops[0], stop2: stops[1] };
+  }
+
+  function gradEdit(g: GradientDef) {
+    if (!gradientEdits[g.name]) {
+      const raw = overrides[g.name];
+      const fromOverride = raw ? parseLinearGradient(raw) : null;
+      gradientEdits[g.name] = fromOverride ?? { space: g.space, kind: g.kind, angle: g.angle, dir: g.dir, stop1: g.stop1, stop2: g.stop2 };
+    }
+    return gradientEdits[g.name];
+  }
+  function composeGradient(g: GradientDef): string {
+    const e = gradEdit(g);
+    const head = e.kind === "dir" ? `to ${e.dir}` : `${e.angle}deg`;
+    return `linear-gradient(in ${e.space} ${head}, ${e.stop1}, ${e.stop2})`;
+  }
+  function setGradientPart(g: GradientDef, part: "angle" | "dir" | "stop1" | "stop2", value: string | number) {
+    const e = gradEdit(g);
+    (e as Record<string, string | number>)[part] = value;
+    onSet(g.name, composeGradient(g));
+  }
+
+  // LumLocker swatch preview: mirrors the framework's oklch(from <source> L c h).
+  // Works for any valid CSS color input, not just oklch() literals.
+  function lockedColor(colorKey: string, side: "light" | "dark"): string {
+    const srcName = `--sf-color-${colorKey}-source-${side}`;
+    const src = overrides[srcName] ?? BRAND_SOURCES.find(s => s.name === srcName)?.default ?? "";
+    if (!src) return "";
+    return `oklch(from ${src} ${lumlockerL} c h)`;
+  }
 
   // Track which color rows are in Auto dark mode.
   // A key starts in auto only if its dark token is NOT already in overrides — otherwise the user
@@ -322,6 +410,63 @@
 
   <div class="h-px bg-white/6"></div>
 
+  <!-- LUMLOCKER -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showLumlocker = !showLumlocker; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">LumLocker</div>
+      <span class="text-[10px] text-slate-500">{showLumlocker ? "▲" : "▼"}</span>
+    </button>
+    {#if showLumlocker}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Pins brand colors (primary, secondary, tertiary, action) to a fixed OKLCH
+        lightness — useful for always-stable sections. Enable on canvas to preview.
+      </p>
+      <SliderRow
+        label="LumLocker lightness (L)" value={lumlockerL} min={0} max={1} step={0.01}
+        help="--sf-lumlocker — fixed OKLCH L applied to lockable brand colors under [data-lumlocker]"
+        overridden={"--sf-lumlocker" in overrides}
+        onChange={(v) => onSet("--sf-lumlocker", String(v))}
+        onReset={() => onReset("--sf-lumlocker")}
+      />
+
+      <!-- Before / after preview for every lockable color -->
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
+        <div class="flex items-center text-[8px] font-mono text-slate-600 uppercase tracking-widest">
+          <span class="w-16 shrink-0">Color</span>
+          <span class="flex-1 text-center">Current</span>
+          <span class="flex-1 text-center">Locked</span>
+        </div>
+        {#each LOCKABLE as lk (lk.key)}
+          {#each ["light", "dark"] as side (side)}
+            {@const cur = paintTheme(`var(--sf-color-${lk.key}-source-${side})`, side as "light" | "dark", "")}
+            {@const locked = lockedColor(lk.key, side as "light" | "dark")}
+            <div class="flex items-center gap-1">
+              <span class="text-[9px] text-slate-500 w-16 shrink-0">{lk.label} <span class="text-slate-600">{side === "light" ? "L" : "D"}</span></span>
+              <span class="flex-1 h-5 rounded border border-white/10" style={`background:${cur || `var(--sf-color-${lk.key})`}`}></span>
+              <span class="text-slate-600 text-[10px] px-1">→</span>
+              <span class="flex-1 h-5 rounded border border-white/10" style={`background:${paint(locked, locked)}`} title={locked}></span>
+            </div>
+          {/each}
+        {/each}
+      </div>
+
+      <!-- Toggle the lock on the live canvas -->
+      <button
+        onclick={() => { lumlockerPreview.value = !lumlockerPreview.value; }}
+        class={`w-full py-2 rounded-lg text-[10px] font-bold border transition-all cursor-pointer ${
+          lumlockerPreview.value
+            ? "bg-indigo-600/25 border-indigo-500/40 text-indigo-200"
+            : "border-white/10 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+        }`}
+      >{lumlockerPreview.value ? "✓ LumLocker active on canvas — click to disable" : "Preview LumLocker on live canvas"}</button>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
   <!-- STATUS SOURCES -->
   <section class="space-y-3">
     <button
@@ -354,6 +499,25 @@
                 onReset={() => onReset(dark.name)}
               />
             {/if}
+            <!-- Constrained light + dark palette strips -->
+            <div class="mt-1 pl-1 space-y-px">
+              {#each [["L", "light"], ["D", "dark"]] as [tag, side] (tag)}
+                <div class="flex items-center gap-1">
+                  <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">{tag}</span>
+                  <div class="flex gap-0.5">
+                    {#each SWATCH_STEPS as step (step)}
+                      {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
+                      {@const resolved = paintTheme(expr, side as "light" | "dark", expr)}
+                      <div
+                        class="w-5 h-3 rounded-sm border border-white/10"
+                        style={`background: ${resolved}`}
+                        title={`${light.colorKey}-${step} (${side}) — ${resolved}`}
+                      ></div>
+                    {/each}
+                  </div>
+                </div>
+              {/each}
+            </div>
           </div>
         {/each}
       </div>
@@ -471,21 +635,39 @@
       </div>
     </div>
 
-    <!-- Curve preview -->
+    <!-- Curve preview = live palette. Each step shows the real resolved swatch
+         AND the mix amount as a height bar, so the curve doubles as a palette. -->
     <div class="bg-white/4 rounded-xl border border-white/8 p-3">
-      <div class="text-[9px] text-slate-600 mb-2">Curve shape preview</div>
-      <div class="flex items-end gap-0.5 h-12">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-[9px] text-slate-600">Palette &amp; curve preview</span>
+        <div class="flex bg-white/5 border border-white/8 rounded p-0.5 gap-0.5">
+          {#each ["light", "dark"] as side (side)}
+            <button
+              onclick={() => { curvePreviewSide = side as "light" | "dark"; }}
+              class={`px-1.5 py-0.5 rounded text-[8px] font-bold cursor-pointer transition-all ${
+                curvePreviewSide === side ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"
+              }`}
+            >{side === "light" ? "Light" : "Dark"}</button>
+          {/each}
+        </div>
+      </div>
+      <div class="flex items-end gap-0.5 h-20">
         {#each MIX_STEPS as s (s.name)}
           {@const val = getMixValue(s)}
-          <div class="flex-1 flex flex-col items-center gap-0.5">
+          {@const step = s.label}
+          {@const swatch = paintTheme(`var(--sf-color-primary-${step})`, curvePreviewSide, `var(--sf-color-primary-${step})`)}
+          <div class="flex-1 flex flex-col items-center gap-0.5 h-full justify-end">
+            <span class="text-[7px] font-mono text-slate-600">{Math.round(val)}</span>
             <div
-              class={`w-full rounded-sm ${s.step === "tint" ? "bg-indigo-400/60" : "bg-indigo-700/70"}`}
-              style={`height: ${(val / 100) * 44}px; min-height: 2px`}
+              class="w-full rounded-sm border-x border-t border-white/10"
+              style={`background:${swatch}; height: ${Math.max((val / 100) * 56, 6)}px`}
+              title={`primary-${step} (${curvePreviewSide}) · mix ${Math.round(val)}%`}
             ></div>
-            <span class="text-[7px] font-mono text-slate-600">{s.label}</span>
+            <span class="text-[7px] font-mono text-slate-600">{step}</span>
           </div>
         {/each}
       </div>
+      <p class="text-[8px] text-slate-600 mt-2">Bar height = mix amount · fill = the resolved primary palette swatch at each step</p>
     </div>
   </section>
 
@@ -502,30 +684,81 @@
     </button>
     {#if showGradients}
       <p class="text-[10px] text-slate-600 leading-relaxed">
-        Auto-derived from your brand colors. Edit the raw value to fully customise.
+        Auto-derived from your brand colors. Use the angle/direction and stop
+        controls, or edit the raw value for full control.
       </p>
       {#each ["brand", "fade"] as grp (grp)}
         <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest pt-1">{grp === "brand" ? "Brand & surface" : "Edge fades"}</div>
         <div class="space-y-2">
           {#each GRADIENT_TOKENS.filter((g) => g.group === grp) as g (g.name)}
             {@const expr = `var(${g.name})`}
+            {@const e = gradEdit(g)}
             <div class="rounded-lg border border-white/8 bg-white/3 overflow-hidden">
               <div class="h-9 w-full" style={`background:${paintBg(expr, expr)}`}></div>
-              <div class="flex items-center gap-2 px-2 py-1.5">
-                <span class="text-[10px] font-semibold text-slate-300 w-16 shrink-0">{g.label}</span>
+              <div class="px-2 py-1.5 space-y-1.5">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-semibold text-slate-300 flex-1">{g.label}</span>
+                  {#if g.name in overrides}
+                    <button onclick={() => { delete gradientEdits[g.name]; onReset(g.name); }} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+                  {/if}
+                </div>
+
+                <!-- Structured controls -->
+                {#if g.kind === "dir"}
+                  <div class="flex items-center gap-1">
+                    <span class="text-[8px] text-slate-500 w-10 shrink-0">Dir</span>
+                    {#each ["top", "right", "bottom", "left"] as d (d)}
+                      <button
+                        onclick={() => setGradientPart(g, "dir", d)}
+                        class={`flex-1 py-0.5 rounded text-[9px] border transition-all cursor-pointer capitalize ${
+                          e.dir === d ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400 hover:bg-white/5"
+                        }`}
+                      >{d}</button>
+                    {/each}
+                  </div>
+                {:else}
+                  <div class="flex items-center gap-2">
+                    <span class="text-[8px] text-slate-500 w-10 shrink-0">Angle</span>
+                    <input
+                      type="range" min="0" max="360" step="1" value={e.angle}
+                      oninput={(ev) => setGradientPart(g, "angle", parseInt((ev.target as HTMLInputElement).value))}
+                      class="flex-1 accent-indigo-500"
+                    />
+                    <span class="text-[9px] font-mono text-slate-400 w-9 text-right shrink-0">{e.angle}°</span>
+                  </div>
+                {/if}
+
+                <div class="flex items-center gap-1">
+                  <span class="text-[8px] text-slate-500 w-10 shrink-0">Stops</span>
+                  <input
+                    type="text" value={e.stop1}
+                    onchange={(ev) => setGradientPart(g, "stop1", (ev.target as HTMLInputElement).value.trim())}
+                    class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-[8px] font-mono text-slate-300 focus:outline-none focus:border-indigo-500"
+                  />
+                  <input
+                    type="text" value={e.stop2}
+                    onchange={(ev) => setGradientPart(g, "stop2", (ev.target as HTMLInputElement).value.trim())}
+                    class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-[8px] font-mono text-slate-300 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+
+                <!-- Default formula reference -->
+                <div class="text-[8px] font-mono text-slate-600 leading-snug break-all">
+                  <span class="text-slate-500">default:</span> {g.formula}
+                </div>
+
+                <!-- Raw escape hatch -->
                 <input
                   type="text"
                   value={overrides[g.name] ?? ""}
-                  placeholder="auto-derived"
-                  onchange={(e) => {
-                    const v = (e.target as HTMLInputElement).value.trim();
+                  placeholder="raw override (auto-derived if blank)"
+                  onchange={(ev) => {
+                    const v = (ev.target as HTMLInputElement).value.trim();
+                    delete gradientEdits[g.name];
                     v ? onSet(g.name, v) : onReset(g.name);
                   }}
-                  class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+                  class="w-full bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
                 />
-                {#if g.name in overrides}
-                  <button onclick={() => onReset(g.name)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-                {/if}
               </div>
             </div>
           {/each}
