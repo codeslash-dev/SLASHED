@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.19] - 2026-06-27
+
+### Features
+- **configurator:** add contrast tool, fix split preview, enrich panels
+- **configurator:** compress share URLs with deflate (codec v2)
+- **configurator:** google fonts in preview iframe + stylescape template
+
+### Bug Fixes
+- **configurator:** address pr review findings
+- **configurator:** guard isAutoMode against external dark overrides
+- **configurator:** align Auto dark derivation with CSS formula
+- **configurator:** symmetric size cap in encoder, harden test preconditions
+- **configurator:** guard against decompression bomb in share URL decoder
+
 ## [0.6.18] - 2026-06-26
 
 ### Bug Fixes
