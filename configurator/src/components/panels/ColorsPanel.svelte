@@ -165,7 +165,9 @@
   }
 
   function toggleDarkMode(colorKey: string, dark: ColorSource | undefined, lightName: string) {
-    if (autoDarkSet.has(colorKey)) {
+    const darkOverridden = !!(dark && (dark.name in overrides));
+    const effectivelyAuto = autoDarkSet.has(colorKey) && !darkOverridden;
+    if (effectivelyAuto) {
       // Switch to manual — populate dark with the derived value as a starting point
       const lightVal = overrides[lightName] ?? BRAND_SOURCES.find(s => s.name === lightName)?.default ?? "";
       if (dark) onSet(dark.name, deriveDarkFromLight(lightVal, colorKey));
@@ -203,7 +205,8 @@
     </p>
     <div class="space-y-3">
       {#each BRAND_PAIRS as [light, dark] (light.name)}
-        {@const isAutoMode = autoDarkSet.has(light.colorKey)}
+        {@const darkOverridden = !!(dark && (dark.name in overrides))}
+        {@const isAutoMode = autoDarkSet.has(light.colorKey) && !darkOverridden}
         <div class="space-y-1">
           <div class="flex items-center justify-between">
             <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">{light.label}</div>
