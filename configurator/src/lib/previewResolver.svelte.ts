@@ -59,6 +59,7 @@ export function bumpPreviewVersion(): void {
   previewVersion.value = counter;
 }
 
+/** Return (or lazily create) the hidden probe element inside the active preview doc. */
 function getProbe(): HTMLElement | null {
   if (!activeDoc || !activeDoc.body) return null;
   if (probe && probe.ownerDocument === activeDoc && probe.isConnected) return probe;
@@ -88,6 +89,7 @@ export function resolveColor(cssExpr: string): string {
   return resolved;
 }
 
+/** Return (or lazily create) a 1×1 canvas context inside the active preview doc for sRGB normalisation. */
 function getCtx(): CanvasRenderingContext2D | null {
   if (!activeDoc) return null;
   if (normCtx && normCtx.canvas.ownerDocument === activeDoc) return normCtx;
