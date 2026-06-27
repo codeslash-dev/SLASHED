@@ -36,6 +36,13 @@
 
   const knobs = KNOBS_BY_DOMAIN["borders"] ?? [];
 
+  let showBorderColor = $state(true);
+  let showBorderWidths = $state(true);
+  let showLineStyles = $state(true);
+  let showDividers = $state(true);
+  let showFocusRing = $state(true);
+  let showRadiusScale = $state(true);
+  let showRadiusPreview = $state(true);
   let showFineTune = $state(false);
   let showComponents = $state(false);
 
@@ -85,191 +92,239 @@
 
   <div class="h-px bg-white/6"></div>
 
-  <!-- BORDER COLOR — most impactful, first -->
+  <!-- BORDER COLOR -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border color</div>
-    <div class="flex items-center gap-2">
-      <input
-        type="color"
-        value={borderColor || "#e2e8f0"}
-        oninput={(e) => onSet("--sf-color-border", (e.target as HTMLInputElement).value)}
-        class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-      />
-      <span class="text-[9px] font-mono text-slate-400 flex-1">{borderColor || "auto-derived"}</span>
-      {#if "--sf-color-border" in overrides}
-        <button onclick={() => onReset("--sf-color-border")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-      {/if}
-    </div>
-    <p class="text-[9px] text-slate-600">
-      Drives --sf-color-border--strong, --subtle, --translucent automatically.
-    </p>
+    <button
+      onclick={() => { showBorderColor = !showBorderColor; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border color</div>
+      <span class="text-[10px] text-slate-500">{showBorderColor ? "▲" : "▼"}</span>
+    </button>
+    {#if showBorderColor}
+      <div class="flex items-center gap-2">
+        <input
+          type="color"
+          value={borderColor || "#e2e8f0"}
+          oninput={(e) => onSet("--sf-color-border", (e.target as HTMLInputElement).value)}
+          class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
+        />
+        <span class="text-[9px] font-mono text-slate-400 flex-1">{borderColor || "auto-derived"}</span>
+        {#if "--sf-color-border" in overrides}
+          <button onclick={() => onReset("--sf-color-border")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+        {/if}
+      </div>
+      <p class="text-[9px] text-slate-600">
+        Drives --sf-color-border--strong, --subtle, --translucent automatically.
+      </p>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- BORDER SCALE -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border widths</div>
-    <SliderRow
-      label="Border scale" value={borderScale} min={0} max={4} step={0.25}
-      help="Multiplier applied to all border widths. 0 hides all borders."
-      overridden={"--sf-border-scale" in overrides}
-      onChange={(v) => onSet("--sf-border-scale", String(v))}
-      onReset={() => onReset("--sf-border-scale")}
-    />
+    <button
+      onclick={() => { showBorderWidths = !showBorderWidths; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border widths</div>
+      <span class="text-[10px] text-slate-500">{showBorderWidths ? "▲" : "▼"}</span>
+    </button>
+    {#if showBorderWidths}
+      <SliderRow
+        label="Border scale" value={borderScale} min={0} max={4} step={0.25}
+        help="Multiplier applied to all border widths. 0 hides all borders."
+        overridden={"--sf-border-scale" in overrides}
+        onChange={(v) => onSet("--sf-border-scale", String(v))}
+        onReset={() => onReset("--sf-border-scale")}
+      />
 
-    <!-- Width preview -->
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
-      {#each [1, 2, 3, 4] as base (base)}
-        <div class="flex items-center gap-3">
-          <span class="text-[9px] font-mono text-slate-600 w-10">{base}px →</span>
-          <div
-            class="flex-1 bg-indigo-400/50 rounded"
-            style={`height: ${Math.max(base * borderScale, 0.5)}px`}
-          ></div>
-          <span class="text-[9px] font-mono text-slate-500 w-10 text-right">
-            {(base * borderScale).toFixed(1)}px
-          </span>
-        </div>
-      {/each}
-    </div>
+      <!-- Width preview -->
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
+        {#each [1, 2, 3, 4] as base (base)}
+          <div class="flex items-center gap-3">
+            <span class="text-[9px] font-mono text-slate-600 w-10">{base}px →</span>
+            <div
+              class="flex-1 bg-indigo-400/50 rounded"
+              style={`height: ${Math.max(base * borderScale, 0.5)}px`}
+            ></div>
+            <span class="text-[9px] font-mono text-slate-500 w-10 text-right">
+              {(base * borderScale).toFixed(1)}px
+            </span>
+          </div>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
-  <!-- LINE STYLES — compact 2-column -->
+  <!-- LINE STYLES -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line styles</div>
-    <div class="grid grid-cols-2 gap-3">
-      {#each [
-        { label: "Border", token: "--sf-border-style", default: "solid" },
-        { label: "Divider", token: "--sf-divider-style", default: "solid" },
-      ] as row (row.token)}
-        <div>
-          <div class="text-[9px] text-slate-500 mb-1.5">{row.label}</div>
-          <div class="flex flex-col gap-1">
-            {#each BORDER_STYLES as s (s)}
-              {@const current = getStyleCurrent(row.token, row.default)}
-              <button
-                onclick={() => s === row.default ? onReset(row.token) : onSet(row.token, s)}
-                class={`px-2 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer text-center ${
-                  current === s
-                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-                    : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-                }`}
-              >
-                <span class="block mx-auto mb-0.5" style={`width: 20px; height: 0; border-bottom: 2px ${s} currentColor; opacity: 0.7`}></span>
-                {s}
-              </button>
-            {/each}
+    <button
+      onclick={() => { showLineStyles = !showLineStyles; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line styles</div>
+      <span class="text-[10px] text-slate-500">{showLineStyles ? "▲" : "▼"}</span>
+    </button>
+    {#if showLineStyles}
+      <div class="grid grid-cols-2 gap-3">
+        {#each [
+          { label: "Border", token: "--sf-border-style", default: "solid" },
+          { label: "Divider", token: "--sf-divider-style", default: "solid" },
+        ] as row (row.token)}
+          <div>
+            <div class="text-[9px] text-slate-500 mb-1.5">{row.label}</div>
+            <div class="flex flex-col gap-1">
+              {#each BORDER_STYLES as s (s)}
+                {@const current = getStyleCurrent(row.token, row.default)}
+                <button
+                  onclick={() => s === row.default ? onReset(row.token) : onSet(row.token, s)}
+                  class={`px-2 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer text-center ${
+                    current === s
+                      ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                      : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                  }`}
+                >
+                  <span class="block mx-auto mb-0.5" style={`width: 20px; height: 0; border-bottom: 2px ${s} currentColor; opacity: 0.7`}></span>
+                  {s}
+                </button>
+              {/each}
+            </div>
           </div>
-        </div>
-      {/each}
-    </div>
-
-    <!-- Combined border preview (width × style × color) -->
-    <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center gap-3">
-      <div
-        class="px-4 py-2 rounded-lg text-[11px] text-slate-300 bg-white/4"
-        style={`border: ${Math.max(borderScale, 0.5)}px ${borderStyle} ${borderColor || "var(--sf-color-border, #64748b)"}`}
-      >
-        Border sample
+        {/each}
       </div>
-      <span class="text-[9px] font-mono text-slate-600">{(1 * borderScale).toFixed(1)}px · {borderStyle}</span>
-    </div>
+
+      <!-- Combined border preview (width × style × color) -->
+      <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center gap-3">
+        <div
+          class="px-4 py-2 rounded-lg text-[11px] text-slate-300 bg-white/4"
+          style={`border: ${Math.max(borderScale, 0.5)}px ${borderStyle} ${borderColor || "var(--sf-color-border, #64748b)"}`}
+        >
+          Border sample
+        </div>
+        <span class="text-[9px] font-mono text-slate-600">{(1 * borderScale).toFixed(1)}px · {borderStyle}</span>
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- DIVIDERS -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Dividers</div>
-    <div class="flex items-center gap-2">
-      <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Color</div>
-      <input
-        type="color"
-        value={dividerColor || "#e2e8f0"}
-        oninput={(e) => onSet("--sf-divider-color", (e.target as HTMLInputElement).value)}
-        class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+    <button
+      onclick={() => { showDividers = !showDividers; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Dividers</div>
+      <span class="text-[10px] text-slate-500">{showDividers ? "▲" : "▼"}</span>
+    </button>
+    {#if showDividers}
+      <div class="flex items-center gap-2">
+        <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Color</div>
+        <input
+          type="color"
+          value={dividerColor || "#e2e8f0"}
+          oninput={(e) => onSet("--sf-divider-color", (e.target as HTMLInputElement).value)}
+          class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+        />
+        <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{dividerColor || "inherits border"}</span>
+        {#if "--sf-divider-color" in overrides}
+          <button onclick={() => onReset("--sf-divider-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+        {/if}
+      </div>
+      <SliderRow
+        label="Width" value={dividerWidth} min={0.5} max={4} step={0.5} unit="px"
+        help="--sf-divider-width"
+        overridden={"--sf-divider-width" in overrides}
+        onChange={(v) => onSet("--sf-divider-width", `${v}px`)}
+        onReset={() => onReset("--sf-divider-width")}
       />
-      <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{dividerColor || "inherits border"}</span>
-      {#if "--sf-divider-color" in overrides}
-        <button onclick={() => onReset("--sf-divider-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-      {/if}
-    </div>
-    <SliderRow
-      label="Width" value={dividerWidth} min={0.5} max={4} step={0.5} unit="px"
-      help="--sf-divider-width"
-      overridden={"--sf-divider-width" in overrides}
-      onChange={(v) => onSet("--sf-divider-width", `${v}px`)}
-      onReset={() => onReset("--sf-divider-width")}
-    />
-    <SliderRow
-      label="Gap" value={dividerGap} min={0} max={4} step={0.125} unit="rem"
-      help="--sf-divider-gap — spacing around divider lines"
-      overridden={"--sf-divider-gap" in overrides}
-      onChange={(v) => onSet("--sf-divider-gap", `${v}rem`)}
-      onReset={() => onReset("--sf-divider-gap")}
-    />
+      <SliderRow
+        label="Gap" value={dividerGap} min={0} max={4} step={0.125} unit="rem"
+        help="--sf-divider-gap — spacing around divider lines"
+        overridden={"--sf-divider-gap" in overrides}
+        onChange={(v) => onSet("--sf-divider-gap", `${v}rem`)}
+        onReset={() => onReset("--sf-divider-gap")}
+      />
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- FOCUS RING -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Focus ring</div>
-    <SliderRow
-      label="Ring width" value={focusWidth} min={0} max={6} step={0.5} unit="px"
-      help="Thickness of the keyboard focus indicator"
-      overridden={"--sf-focus-ring-width" in overrides}
-      onChange={(v) => onSet("--sf-focus-ring-width", `${v}px`)}
-      onReset={() => onReset("--sf-focus-ring-width")}
-    />
-    <SliderRow
-      label="Ring offset" value={focusOffset} min={0} max={8} step={0.5} unit="px"
-      help="Gap between element edge and focus ring"
-      overridden={"--sf-focus-ring-offset" in overrides}
-      onChange={(v) => onSet("--sf-focus-ring-offset", `${v}px`)}
-      onReset={() => onReset("--sf-focus-ring-offset")}
-    />
-    <div class="flex items-center gap-2">
-      <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Ring color</div>
-      <input
-        type="color"
-        value={focusRingColor || "#6366f1"}
-        oninput={(e) => onSet("--sf-focus-ring-color", (e.target as HTMLInputElement).value)}
-        class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+    <button
+      onclick={() => { showFocusRing = !showFocusRing; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Focus ring</div>
+      <span class="text-[10px] text-slate-500">{showFocusRing ? "▲" : "▼"}</span>
+    </button>
+    {#if showFocusRing}
+      <SliderRow
+        label="Ring width" value={focusWidth} min={0} max={6} step={0.5} unit="px"
+        help="Thickness of the keyboard focus indicator"
+        overridden={"--sf-focus-ring-width" in overrides}
+        onChange={(v) => onSet("--sf-focus-ring-width", `${v}px`)}
+        onReset={() => onReset("--sf-focus-ring-width")}
       />
-      <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{focusRingColor || "default (action)"}</span>
-      {#if "--sf-focus-ring-color" in overrides}
-        <button onclick={() => onReset("--sf-focus-ring-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-      {/if}
-    </div>
-    <!-- Focus ring preview -->
-    <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center">
-      <div
-        class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-200"
-        style={`outline: ${focusWidth}px solid ${focusRingColor || "oklch(0.7 0.2 235)"}; outline-offset: ${focusOffset}px`}
-      >
-        Focus preview
+      <SliderRow
+        label="Ring offset" value={focusOffset} min={0} max={8} step={0.5} unit="px"
+        help="Gap between element edge and focus ring"
+        overridden={"--sf-focus-ring-offset" in overrides}
+        onChange={(v) => onSet("--sf-focus-ring-offset", `${v}px`)}
+        onReset={() => onReset("--sf-focus-ring-offset")}
+      />
+      <div class="flex items-center gap-2">
+        <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Ring color</div>
+        <input
+          type="color"
+          value={focusRingColor || "#6366f1"}
+          oninput={(e) => onSet("--sf-focus-ring-color", (e.target as HTMLInputElement).value)}
+          class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+        />
+        <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{focusRingColor || "default (action)"}</span>
+        {#if "--sf-focus-ring-color" in overrides}
+          <button onclick={() => onReset("--sf-focus-ring-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+        {/if}
       </div>
-    </div>
+      <!-- Focus ring preview -->
+      <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center">
+        <div
+          class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-200"
+          style={`outline: ${focusWidth}px solid ${focusRingColor || "oklch(0.7 0.2 235)"}; outline-offset: ${focusOffset}px`}
+        >
+          Focus preview
+        </div>
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- RADIUS SCALE KNOB -->
   <div>
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Radius scale</div>
-    <div class="space-y-4">
-      {#each knobs as k (k.name)}
-        <PowerKnobRow
-          knob={k}
-          {overrides}
-          onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
-        />
-      {/each}
-    </div>
+    <button
+      onclick={() => { showRadiusScale = !showRadiusScale; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Radius scale</div>
+      <span class="text-[10px] text-slate-500">{showRadiusScale ? "▲" : "▼"}</span>
+    </button>
+    {#if showRadiusScale}
+      <div class="mt-3 space-y-4">
+        {#each knobs as k (k.name)}
+          <PowerKnobRow
+            knob={k}
+            {overrides}
+            onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
+          />
+        {/each}
+      </div>
+    {/if}
   </div>
 
   <!-- Fine-tune radius steps collapsible -->
@@ -302,22 +357,30 @@
 
   <!-- Radius preview -->
   <div>
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Radius preview</div>
-    <div class="bg-white/4 rounded-xl border border-white/8 p-4">
-      <div class="flex gap-3 flex-wrap">
-        {#each RADIUS_STEPS as step (step)}
-          {@const base = BASE_RADII[step] ?? 6}
-          {@const computed = step === "full" ? 9999 : base * radiusScale}
-          <div class="flex flex-col items-center gap-1">
-            <div
-              class="w-10 h-10 bg-indigo-500/40 border border-indigo-500/30"
-              style={`border-radius: ${Math.min(computed, 9999)}px`}
-            ></div>
-            <span class="text-[8px] font-mono text-slate-600">{step}</span>
-          </div>
-        {/each}
+    <button
+      onclick={() => { showRadiusPreview = !showRadiusPreview; }}
+      class="w-full flex items-center justify-between cursor-pointer mb-2"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Radius preview</div>
+      <span class="text-[10px] text-slate-500">{showRadiusPreview ? "▲" : "▼"}</span>
+    </button>
+    {#if showRadiusPreview}
+      <div class="bg-white/4 rounded-xl border border-white/8 p-4">
+        <div class="flex gap-3 flex-wrap">
+          {#each RADIUS_STEPS as step (step)}
+            {@const base = BASE_RADII[step] ?? 6}
+            {@const computed = step === "full" ? 9999 : base * radiusScale}
+            <div class="flex flex-col items-center gap-1">
+              <div
+                class="w-10 h-10 bg-indigo-500/40 border border-indigo-500/30"
+                style={`border-radius: ${Math.min(computed, 9999)}px`}
+              ></div>
+              <span class="text-[8px] font-mono text-slate-600">{step}</span>
+            </div>
+          {/each}
+        </div>
       </div>
-    </div>
+    {/if}
   </div>
 
   <div class="h-px bg-white/6"></div>

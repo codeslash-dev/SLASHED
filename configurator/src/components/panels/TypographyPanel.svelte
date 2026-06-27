@@ -159,6 +159,13 @@
     (p) => Math.abs(p.value - ratioMin) < 0.0015 && Math.abs(p.value - ratioMax) < 0.0015
   ));
 
+  let showFontFamilies  = $state(true);
+  let showPerType       = $state(true);
+  let showBodyText      = $state(true);
+  let showDisplayType   = $state(true);
+  let showModularScale  = $state(true);
+  let showScalePreview  = $state(true);
+
   let currentBodyFont    = $derived(overrides["--sf-font-body"] ?? "");
   let currentHeadingFont = $derived(overrides["--sf-font-heading"] ?? "");
   let currentMonoFont    = $derived(overrides["--sf-font-mono"] ?? "ui-monospace, monospace");
@@ -237,8 +244,14 @@
 
   <!-- FONT FAMILIES (compact dropdowns) -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font families</div>
-
+    <button
+      onclick={() => { showFontFamilies = !showFontFamilies; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font families</div>
+      <span class="text-[10px] text-slate-500">{showFontFamilies ? "▲" : "▼"}</span>
+    </button>
+    {#if showFontFamilies}
     {#each [
       { label: "Body", token: "--sf-font-body", current: currentBodyFont, opts: BODY_STACKS },
       { label: "Heading", token: "--sf-font-heading", current: currentHeadingFont, opts: HEADING_STACKS },
@@ -307,13 +320,21 @@
         Load &amp; apply to {customFontTarget}
       </button>
     </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- PER-TYPE (body + h1–h6) -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Per-type styles</div>
+    <button
+      onclick={() => { showPerType = !showPerType; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Per-type styles</div>
+      <span class="text-[10px] text-slate-500">{showPerType ? "▲" : "▼"}</span>
+    </button>
+    {#if showPerType}
 
     <!-- Level selector -->
     <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5">
@@ -422,13 +443,21 @@
         >reset {activeLevel.label}</button>
       {/if}
     </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- BODY TEXT -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Body text</div>
+    <button
+      onclick={() => { showBodyText = !showBodyText; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Body text</div>
+      <span class="text-[10px] text-slate-500">{showBodyText ? "▲" : "▼"}</span>
+    </button>
+    {#if showBodyText}
 
     <!-- Font weights -->
     {#each [
@@ -510,13 +539,21 @@
         </div>
       </div>
     {/each}
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- DISPLAY TYPE -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Display type</div>
+    <button
+      onclick={() => { showDisplayType = !showDisplayType; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Display type</div>
+      <span class="text-[10px] text-slate-500">{showDisplayType ? "▲" : "▼"}</span>
+    </button>
+    {#if showDisplayType}
 
     <ClampField
       title="Display base size"
@@ -559,13 +596,21 @@
         </div>
       </div>
     {/each}
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- FINE-TUNE (type ramp clamp + rhythm + tracking) -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
+    <button
+      onclick={() => { showModularScale = !showModularScale; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
+      <span class="text-[10px] text-slate-500">{showModularScale ? "▲" : "▼"}</span>
+    </button>
+    {#if showModularScale}
     <p class="text-[10px] text-slate-600 leading-relaxed">
       Utopia-style fluid scale. Each endpoint has three values — viewport width,
       base size, and modular ratio. Sizes interpolate fluidly between mobile and desktop.
@@ -661,13 +706,21 @@
         {/each}
       </div>
     </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- SCALE PREVIEW -->
   <section>
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Scale preview</div>
+    <button
+      onclick={() => { showScalePreview = !showScalePreview; }}
+      class="w-full flex items-center justify-between cursor-pointer mb-3"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scale preview</div>
+      <span class="text-[10px] text-slate-500">{showScalePreview ? "▲" : "▼"}</span>
+    </button>
+    {#if showScalePreview}
     <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-1 overflow-hidden">
       {#each [...TEXT_STEPS].reverse() as { label, factor } (label)}
         {@const midBase = (baseMin + baseMax) / 2}
@@ -684,5 +737,6 @@
         </div>
       {/each}
     </div>
+    {/if}
   </section>
 </div>

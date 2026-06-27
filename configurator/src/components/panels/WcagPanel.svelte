@@ -150,6 +150,9 @@
       suggestion = null;
     }
   });
+
+  let showPairChecker = $state(true);
+  let showMatrix      = $state(true);
 </script>
 
 <div class="p-4 space-y-6">
@@ -162,6 +165,14 @@
 
   <!-- PAIR CHECKER -->
   <section class="space-y-3">
+    <button
+      onclick={() => { showPairChecker = !showPairChecker; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Pair checker</div>
+      <span class="text-[10px] text-slate-500">{showPairChecker ? "▲" : "▼"}</span>
+    </button>
+    {#if showPairChecker}
     <div class="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
       <div>
         <div class="text-[9px] text-slate-500 mb-1">Foreground</div>
@@ -228,13 +239,21 @@
         <p class="text-[9px] text-slate-600">No lightness of this hue reaches {targetLevel} on this background — try a different background or hue.</p>
       {/if}
     </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- MATRIX -->
   <section class="space-y-2">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Contrast matrix</div>
+    <button
+      onclick={() => { showMatrix = !showMatrix; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Contrast matrix</div>
+      <span class="text-[10px] text-slate-500">{showMatrix ? "▲" : "▼"}</span>
+    </button>
+    {#if showMatrix}
     <p class="text-[10px] text-slate-600">Foreground (rows) × background (cols). Click a cell to load it above.</p>
     <div class="overflow-x-auto">
       <table class="border-collapse text-[9px]">
@@ -270,5 +289,6 @@
         </tbody>
       </table>
     </div>
+    {/if}
   </section>
 </div>

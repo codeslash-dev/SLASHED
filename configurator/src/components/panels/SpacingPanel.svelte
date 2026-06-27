@@ -57,131 +57,168 @@
       v === null ? !(k in overrides) : overrides[k] === v
     )
   ));
+
+  let showLayoutGap = $state(true);
+  let showDensityPresets = $state(true);
+  let showModularScale = $state(true);
+  let showSpacePreview = $state(true);
 </script>
 
 <div class="p-4 space-y-6">
 
   <!-- GAP TOKENS — most used, at the top -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Layout gap</div>
-    <p class="text-[10px] text-slate-600 leading-relaxed">
-      The two most-referenced spacing tokens. Referenced by every layout primitive (cluster, grid, stack, bento…).
-    </p>
-    <SliderRow
-      label="Gap" value={gapVal} min={0} max={4} step={0.0625} unit="rem"
-      help="--sf-gap — spacing between layout items (cluster, grid, reel, stack, sidebar, bento)"
-      overridden={"--sf-gap" in overrides}
-      onChange={(v) => onSet("--sf-gap", `${v}rem`)}
-      onReset={() => onReset("--sf-gap")}
-    />
-    <SliderRow
-      label="Content gap" value={contentGapVal} min={0} max={2} step={0.0625} unit="rem"
-      help="--sf-content-gap — tighter gap within components (defaults to space-s)"
-      overridden={"--sf-content-gap" in overrides}
-      onChange={(v) => onSet("--sf-content-gap", `${v}rem`)}
-      onReset={() => onReset("--sf-content-gap")}
-    />
-    <SliderRow
-      label="Gutter" value={gutterVal} min={0} max={6} step={0.0625} unit="rem"
-      help="--sf-gutter — wide page/section side gutter (containers, .sf-section--guttered)"
-      overridden={"--sf-gutter" in overrides}
-      onChange={(v) => onSet("--sf-gutter", `${v}rem`)}
-      onReset={() => onReset("--sf-gutter")}
-    />
+    <button
+      onclick={() => { showLayoutGap = !showLayoutGap; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Layout gap</div>
+      <span class="text-[10px] text-slate-500">{showLayoutGap ? "▲" : "▼"}</span>
+    </button>
+    {#if showLayoutGap}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        The two most-referenced spacing tokens. Referenced by every layout primitive (cluster, grid, stack, bento…).
+      </p>
+      <SliderRow
+        label="Gap" value={gapVal} min={0} max={4} step={0.0625} unit="rem"
+        help="--sf-gap — spacing between layout items (cluster, grid, reel, stack, sidebar, bento)"
+        overridden={"--sf-gap" in overrides}
+        onChange={(v) => onSet("--sf-gap", `${v}rem`)}
+        onReset={() => onReset("--sf-gap")}
+      />
+      <SliderRow
+        label="Content gap" value={contentGapVal} min={0} max={2} step={0.0625} unit="rem"
+        help="--sf-content-gap — tighter gap within components (defaults to space-s)"
+        overridden={"--sf-content-gap" in overrides}
+        onChange={(v) => onSet("--sf-content-gap", `${v}rem`)}
+        onReset={() => onReset("--sf-content-gap")}
+      />
+      <SliderRow
+        label="Gutter" value={gutterVal} min={0} max={6} step={0.0625} unit="rem"
+        help="--sf-gutter — wide page/section side gutter (containers, .sf-section--guttered)"
+        overridden={"--sf-gutter" in overrides}
+        onChange={(v) => onSet("--sf-gutter", `${v}rem`)}
+        onReset={() => onReset("--sf-gutter")}
+      />
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- DENSITY PRESETS -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Density presets</div>
-    <div class="grid grid-cols-3 gap-2">
-      {#each DENSITY_PRESETS as d (d.label)}
-        <button
-          onclick={() => onBulkChange(d.patch as Record<string, string | null>)}
-          class={`flex flex-col items-center gap-1 p-3 rounded-xl border transition-all cursor-pointer ${
-            activeDensity?.label === d.label
-              ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-              : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-          }`}
-        >
-          <span class="text-[11px] font-bold">{d.label}</span>
-          <span class="text-[9px] text-slate-500 text-center">{d.desc}</span>
-        </button>
-      {/each}
-    </div>
+    <button
+      onclick={() => { showDensityPresets = !showDensityPresets; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Density presets</div>
+      <span class="text-[10px] text-slate-500">{showDensityPresets ? "▲" : "▼"}</span>
+    </button>
+    {#if showDensityPresets}
+      <div class="grid grid-cols-3 gap-2">
+        {#each DENSITY_PRESETS as d (d.label)}
+          <button
+            onclick={() => onBulkChange(d.patch as Record<string, string | null>)}
+            class={`flex flex-col items-center gap-1 p-3 rounded-xl border transition-all cursor-pointer ${
+              activeDensity?.label === d.label
+                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+            }`}
+          >
+            <span class="text-[11px] font-bold">{d.label}</span>
+            <span class="text-[9px] text-slate-500 text-center">{d.desc}</span>
+          </button>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- FLUID SCALE -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
-    <p class="text-[10px] text-slate-600 leading-relaxed">
-      Utopia-style fluid scale — viewport width, base unit and ratio per endpoint.
-      The viewport range is shared with the type scale.
-    </p>
+    <button
+      onclick={() => { showModularScale = !showModularScale; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
+      <span class="text-[10px] text-slate-500">{showModularScale ? "▲" : "▼"}</span>
+    </button>
+    {#if showModularScale}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Utopia-style fluid scale — viewport width, base unit and ratio per endpoint.
+        The viewport range is shared with the type scale.
+      </p>
 
-    <ClampField
-      title="Viewport range"
-      minValue={vwMin} maxValue={vwMax}
-      min={15} max={120} step={0.5} unit="rem"
-      minLabel="Mobile" maxLabel="Desktop"
-      overridden={"--sf-fluid-min-vw" in overrides || "--sf-fluid-max-vw" in overrides}
-      onReset={() => { onReset("--sf-fluid-min-vw"); onReset("--sf-fluid-max-vw"); }}
-      onMinChange={(v) => onSet("--sf-fluid-min-vw", String(v))}
-      onMaxChange={(v) => onSet("--sf-fluid-max-vw", String(v))}
-    />
+      <ClampField
+        title="Viewport range"
+        minValue={vwMin} maxValue={vwMax}
+        min={15} max={120} step={0.5} unit="rem"
+        minLabel="Mobile" maxLabel="Desktop"
+        overridden={"--sf-fluid-min-vw" in overrides || "--sf-fluid-max-vw" in overrides}
+        onReset={() => { onReset("--sf-fluid-min-vw"); onReset("--sf-fluid-max-vw"); }}
+        onMinChange={(v) => onSet("--sf-fluid-min-vw", String(v))}
+        onMaxChange={(v) => onSet("--sf-fluid-max-vw", String(v))}
+      />
 
-    <ClampField
-      title="Base unit &amp; ratio"
-      minValue={baseMin} maxValue={baseMax}
-      min={0.5} max={4} step={0.05} unit="rem"
-      minLabel="Mobile" maxLabel="Desktop"
-      previewKind="space"
-      overridden={"--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
-      onReset={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}
-      onMinChange={(v) => onSet("--sf-space-base-min", String(v))}
-      onMaxChange={(v) => onSet("--sf-space-base-max", String(v))}
-      ratioPresets={RATIO_PRESETS}
-      activeRatioValue={activeRatio?.value}
-      ratioMin={ratioMin} ratioMax={ratioMax}
-      ratioMin_bound={1.1} ratioMax_bound={1.8}
-      onRatioPreset={(v) => onBulkChange({ "--sf-space-ratio-min": String(v), "--sf-space-ratio-max": String(v) })}
-      onRatioMinChange={(v) => onSet("--sf-space-ratio-min", String(v))}
-      onRatioMaxChange={(v) => onSet("--sf-space-ratio-max", String(v))}
-    />
+      <ClampField
+        title="Base unit &amp; ratio"
+        minValue={baseMin} maxValue={baseMax}
+        min={0.5} max={4} step={0.05} unit="rem"
+        minLabel="Mobile" maxLabel="Desktop"
+        previewKind="space"
+        overridden={"--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
+        onReset={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}
+        onMinChange={(v) => onSet("--sf-space-base-min", String(v))}
+        onMaxChange={(v) => onSet("--sf-space-base-max", String(v))}
+        ratioPresets={RATIO_PRESETS}
+        activeRatioValue={activeRatio?.value}
+        ratioMin={ratioMin} ratioMax={ratioMax}
+        ratioMin_bound={1.1} ratioMax_bound={1.8}
+        onRatioPreset={(v) => onBulkChange({ "--sf-space-ratio-min": String(v), "--sf-space-ratio-max": String(v) })}
+        onRatioMinChange={(v) => onSet("--sf-space-ratio-min", String(v))}
+        onRatioMaxChange={(v) => onSet("--sf-space-ratio-max", String(v))}
+      />
 
-    <div class="space-y-4">
-      {#each knobs as k (k.name)}
-        <PowerKnobRow
-          knob={k}
-          {overrides}
-          onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
-        />
-      {/each}
-    </div>
+      <div class="space-y-4">
+        {#each knobs as k (k.name)}
+          <PowerKnobRow
+            knob={k}
+            {overrides}
+            onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
+          />
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- SCALE PREVIEW -->
   <section>
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Space scale preview</div>
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
-      {#each SPACE_STEPS as step, i (step)}
-        {@const midBase = (baseMin + baseMax) / 2}
-        {@const ratio = (ratioMin + ratioMax) / 2}
-        {@const offset = i - 4}
-        {@const rawRem = offset >= 0 ? midBase * Math.pow(ratio, offset) : midBase / Math.pow(ratio, -offset)}
-        {@const scaled = rawRem * spaceScale}
-        {@const barWidth = Math.min(scaled * 28, 240)}
-        <div class="flex items-center gap-2">
-          <span class="text-[9px] font-mono text-slate-600 w-6 text-right shrink-0">{step}</span>
-          <div class="bg-indigo-500/50 rounded shrink-0 h-3" style={`width: ${barWidth}px; min-width: 3px`}></div>
-          <span class="text-[9px] font-mono text-slate-500 shrink-0">{scaled.toFixed(2)}rem</span>
-        </div>
-      {/each}
-    </div>
+    <button
+      onclick={() => { showSpacePreview = !showSpacePreview; }}
+      class="w-full flex items-center justify-between cursor-pointer mb-2"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Space scale preview</div>
+      <span class="text-[10px] text-slate-500">{showSpacePreview ? "▲" : "▼"}</span>
+    </button>
+    {#if showSpacePreview}
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
+        {#each SPACE_STEPS as step, i (step)}
+          {@const midBase = (baseMin + baseMax) / 2}
+          {@const ratio = (ratioMin + ratioMax) / 2}
+          {@const offset = i - 4}
+          {@const rawRem = offset >= 0 ? midBase * Math.pow(ratio, offset) : midBase / Math.pow(ratio, -offset)}
+          {@const scaled = rawRem * spaceScale}
+          {@const barWidth = Math.min(scaled * 28, 240)}
+          <div class="flex items-center gap-2">
+            <span class="text-[9px] font-mono text-slate-600 w-6 text-right shrink-0">{step}</span>
+            <div class="bg-indigo-500/50 rounded shrink-0 h-3" style={`width: ${barWidth}px; min-width: 3px`}></div>
+            <span class="text-[9px] font-mono text-slate-500 shrink-0">{scaled.toFixed(2)}rem</span>
+          </div>
+        {/each}
+      </div>
+    {/if}
   </section>
 </div>

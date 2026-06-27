@@ -44,6 +44,11 @@
     { label: "HR margin",         token: "--sf-prose-hr-margin",         def: 1.5,  max: 4 },
   ];
 
+  let showFlow = $state(true);
+  let showLineClamp = $state(true);
+  let showAspect = $state(true);
+  let showScrollShadow = $state(true);
+  let showScrim = $state(true);
   let showProse = $state(false);
 
   let lineClamp   = $derived(num("--sf-line-clamp", 3));
@@ -73,134 +78,174 @@
 
   <!-- FLOW -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Flow rhythm</div>
-    <SliderRow
-      label="Flow space" value={flowSpace} min={0} max={4} step={0.0625} unit="rem"
-      help="--sf-flow-space — vertical gap between adjacent children of .sf-flow"
-      overridden={"--sf-flow-space" in overrides}
-      onChange={(v) => onSet("--sf-flow-space", `${v}rem`)}
-      onReset={() => onReset("--sf-flow-space")}
-    />
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3" style={`display:flex;flex-direction:column;gap:${flowSpace}rem`}>
-      {#each [0, 1, 2] as i (i)}
-        <div class="h-2.5 rounded bg-indigo-500/40" style={`width:${90 - i * 12}%`}></div>
-      {/each}
-    </div>
+    <button
+      onclick={() => { showFlow = !showFlow; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Flow rhythm</div>
+      <span class="text-[10px] text-slate-500">{showFlow ? "▲" : "▼"}</span>
+    </button>
+    {#if showFlow}
+      <SliderRow
+        label="Flow space" value={flowSpace} min={0} max={4} step={0.0625} unit="rem"
+        help="--sf-flow-space — vertical gap between adjacent children of .sf-flow"
+        overridden={"--sf-flow-space" in overrides}
+        onChange={(v) => onSet("--sf-flow-space", `${v}rem`)}
+        onReset={() => onReset("--sf-flow-space")}
+      />
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3" style={`display:flex;flex-direction:column;gap:${flowSpace}rem`}>
+        {#each [0, 1, 2] as i (i)}
+          <div class="h-2.5 rounded bg-indigo-500/40" style={`width:${90 - i * 12}%`}></div>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- LINE CLAMP -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line clamp</div>
-    <SliderRow
-      label="Default lines" value={lineClamp} min={1} max={8} step={1}
-      help="--sf-line-clamp — default line count for .sf-line-clamp (override per element)"
-      overridden={"--sf-line-clamp" in overrides}
-      onChange={(v) => onSet("--sf-line-clamp", String(v))}
-      onReset={() => onReset("--sf-line-clamp")}
-    />
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3">
-      <p
-        class="text-[11px] text-slate-300 leading-relaxed"
-        style={`display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:${lineClamp};overflow:hidden`}
-      >
-        SLASHED is a token-first CSS framework. This sample paragraph repeats so you
-        can see exactly how many lines survive the clamp before the ellipsis kicks in.
-        Drag the slider above and watch the visible line count change in real time.
-        Extra filler text keeps the block taller than the clamp at every setting.
-      </p>
-    </div>
+    <button
+      onclick={() => { showLineClamp = !showLineClamp; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line clamp</div>
+      <span class="text-[10px] text-slate-500">{showLineClamp ? "▲" : "▼"}</span>
+    </button>
+    {#if showLineClamp}
+      <SliderRow
+        label="Default lines" value={lineClamp} min={1} max={8} step={1}
+        help="--sf-line-clamp — default line count for .sf-line-clamp (override per element)"
+        overridden={"--sf-line-clamp" in overrides}
+        onChange={(v) => onSet("--sf-line-clamp", String(v))}
+        onReset={() => onReset("--sf-line-clamp")}
+      />
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3">
+        <p
+          class="text-[11px] text-slate-300 leading-relaxed"
+          style={`display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:${lineClamp};overflow:hidden`}
+        >
+          SLASHED is a token-first CSS framework. This sample paragraph repeats so you
+          can see exactly how many lines survive the clamp before the ellipsis kicks in.
+          Drag the slider above and watch the visible line count change in real time.
+          Extra filler text keeps the block taller than the clamp at every setting.
+        </p>
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- ASPECT -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Aspect ratio</div>
-    <p class="text-[9px] text-slate-600">--sf-aspect — default ratio for .sf-aspect / .sf-frame</p>
-    <div class="grid grid-cols-3 gap-1.5">
-      {#each ASPECT_PRESETS as p (p.value)}
-        <button
-          onclick={() => p.value === "16 / 9" ? onReset("--sf-aspect") : onSet("--sf-aspect", p.value)}
-          class={`py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
-            aspectVal.replace(/\s/g, "") === p.value.replace(/\s/g, "")
-              ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-              : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-          }`}
-        >{p.label}</button>
-      {/each}
-    </div>
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3 flex justify-center">
-      <div
-        class="bg-indigo-500/30 border border-indigo-500/30 rounded-lg flex items-center justify-center text-[9px] font-mono text-indigo-200"
-        style={`aspect-ratio:${aspectVal};max-height:120px;max-width:100%;width:auto;height:120px`}
-      >{aspectVal}</div>
-    </div>
+    <button
+      onclick={() => { showAspect = !showAspect; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Aspect ratio</div>
+      <span class="text-[10px] text-slate-500">{showAspect ? "▲" : "▼"}</span>
+    </button>
+    {#if showAspect}
+      <p class="text-[9px] text-slate-600">--sf-aspect — default ratio for .sf-aspect / .sf-frame</p>
+      <div class="grid grid-cols-3 gap-1.5">
+        {#each ASPECT_PRESETS as p (p.value)}
+          <button
+            onclick={() => p.value === "16 / 9" ? onReset("--sf-aspect") : onSet("--sf-aspect", p.value)}
+            class={`py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
+              aspectVal.replace(/\s/g, "") === p.value.replace(/\s/g, "")
+                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+            }`}
+          >{p.label}</button>
+        {/each}
+      </div>
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3 flex justify-center">
+        <div
+          class="bg-indigo-500/30 border border-indigo-500/30 rounded-lg flex items-center justify-center text-[9px] font-mono text-indigo-200"
+          style={`aspect-ratio:${aspectVal};max-height:120px;max-width:100%;width:auto;height:120px`}
+        >{aspectVal}</div>
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- SCROLL SHADOW -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
-    <SliderRow
-      label="Fade size" value={scrollSize} min={0} max={6} step={0.25} unit="rem"
-      help="--sf-scroll-shadow-size — size of the edge fade mask on .sf-scroll-shadow / .sf-overflow-fade"
-      overridden={"--sf-scroll-shadow-size" in overrides}
-      onChange={(v) => onSet("--sf-scroll-shadow-size", `${v}rem`)}
-      onReset={() => onReset("--sf-scroll-shadow-size")}
-    />
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3">
-      <div
-        class="h-8 rounded bg-indigo-500/40"
-        style={`mask:linear-gradient(to right, transparent, #000 ${scrollSize}rem, #000 calc(100% - ${scrollSize}rem), transparent)`}
-      ></div>
-    </div>
+    <button
+      onclick={() => { showScrollShadow = !showScrollShadow; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
+      <span class="text-[10px] text-slate-500">{showScrollShadow ? "▲" : "▼"}</span>
+    </button>
+    {#if showScrollShadow}
+      <SliderRow
+        label="Fade size" value={scrollSize} min={0} max={6} step={0.25} unit="rem"
+        help="--sf-scroll-shadow-size — size of the edge fade mask on .sf-scroll-shadow / .sf-overflow-fade"
+        overridden={"--sf-scroll-shadow-size" in overrides}
+        onChange={(v) => onSet("--sf-scroll-shadow-size", `${v}rem`)}
+        onReset={() => onReset("--sf-scroll-shadow-size")}
+      />
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3">
+        <div
+          class="h-8 rounded bg-indigo-500/40"
+          style={`mask:linear-gradient(to right, transparent, #000 ${scrollSize}rem, #000 calc(100% - ${scrollSize}rem), transparent)`}
+        ></div>
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- SCRIM -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrim overlay</div>
-    <p class="text-[9px] text-slate-600">--sf-scrim-color / --sf-scrim-direction — darkening gradient for .sf-scrim</p>
-    <div class="flex items-center gap-2">
-      <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">Color</div>
-      <input
-        type="text"
-        value={overrides["--sf-scrim-color"] ?? ""}
-        placeholder="oklch(0 0 0 / 0.55)"
-        oninput={(e) => {
-          const v = (e.target as HTMLInputElement).value.trim();
-          v ? onSet("--sf-scrim-color", v) : onReset("--sf-scrim-color");
-        }}
-        class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-      />
-      {#if "--sf-scrim-color" in overrides}
-        <button onclick={() => onReset("--sf-scrim-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-      {/if}
-    </div>
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Direction</div>
-      <div class="grid grid-cols-3 gap-1">
-        {#each SCRIM_DIRECTIONS as d (d.value)}
-          <button
-            onclick={() => d.value === "to top" ? onReset("--sf-scrim-direction") : onSet("--sf-scrim-direction", d.value)}
-            class={`py-1 rounded-lg text-[10px] border transition-all cursor-pointer ${
-              scrimDir === d.value
-                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-            }`}
-          >{d.label}</button>
-        {/each}
+    <button
+      onclick={() => { showScrim = !showScrim; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrim overlay</div>
+      <span class="text-[10px] text-slate-500">{showScrim ? "▲" : "▼"}</span>
+    </button>
+    {#if showScrim}
+      <p class="text-[9px] text-slate-600">--sf-scrim-color / --sf-scrim-direction — darkening gradient for .sf-scrim</p>
+      <div class="flex items-center gap-2">
+        <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">Color</div>
+        <input
+          type="text"
+          value={overrides["--sf-scrim-color"] ?? ""}
+          placeholder="oklch(0 0 0 / 0.55)"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet("--sf-scrim-color", v) : onReset("--sf-scrim-color");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-scrim-color" in overrides}
+          <button onclick={() => onReset("--sf-scrim-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
       </div>
-    </div>
-    <div class="relative h-24 rounded-xl border border-white/8 overflow-hidden flex items-end p-2"
-      style="background:repeating-linear-gradient(45deg,#475569,#475569 8px,#334155 8px,#334155 16px)">
-      <div class="absolute inset-0" style={`background:linear-gradient(${scrimDir}, ${scrimColor}, transparent)`}></div>
-      <span class="relative text-[11px] font-bold text-white">Caption over scrim</span>
-    </div>
+      <div>
+        <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Direction</div>
+        <div class="grid grid-cols-3 gap-1">
+          {#each SCRIM_DIRECTIONS as d (d.value)}
+            <button
+              onclick={() => d.value === "to top" ? onReset("--sf-scrim-direction") : onSet("--sf-scrim-direction", d.value)}
+              class={`py-1 rounded-lg text-[10px] border transition-all cursor-pointer ${
+                scrimDir === d.value
+                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                  : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+              }`}
+            >{d.label}</button>
+          {/each}
+        </div>
+      </div>
+      <div class="relative h-24 rounded-xl border border-white/8 overflow-hidden flex items-end p-2"
+        style="background:repeating-linear-gradient(45deg,#475569,#475569 8px,#334155 8px,#334155 16px)">
+        <div class="absolute inset-0" style={`background:linear-gradient(${scrimDir}, ${scrimColor}, transparent)`}></div>
+        <span class="relative text-[11px] font-bold text-white">Caption over scrim</span>
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
