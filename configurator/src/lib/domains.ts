@@ -36,6 +36,7 @@ export const DOMAIN_PATTERNS: Record<string, string[]> = {
   ],
 };
 
+/** Return the domain key for a given token name, falling back to "misc". */
 export function domainOf(tokenName: string): string {
   for (const [domain, patterns] of Object.entries(DOMAIN_PATTERNS)) {
     if (domain === "misc") continue;
