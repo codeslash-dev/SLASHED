@@ -199,13 +199,14 @@
     return { space, kind: isDir ? "dir" : "angle", angle, dir, stop1: stops[0], stop2: stops[1] };
   }
 
+  function gradEditDefaults(g: GradientDef) {
+    const raw = overrides[g.name];
+    const fromOverride = raw ? parseLinearGradient(raw) : null;
+    return fromOverride ?? { space: g.space, kind: g.kind, angle: g.angle, dir: g.dir, stop1: g.stop1, stop2: g.stop2 };
+  }
+  // Pure read — safe to call during template render (no $state mutation).
   function gradEdit(g: GradientDef) {
-    if (!gradientEdits[g.name]) {
-      const raw = overrides[g.name];
-      const fromOverride = raw ? parseLinearGradient(raw) : null;
-      gradientEdits[g.name] = fromOverride ?? { space: g.space, kind: g.kind, angle: g.angle, dir: g.dir, stop1: g.stop1, stop2: g.stop2 };
-    }
-    return gradientEdits[g.name];
+    return gradientEdits[g.name] ?? gradEditDefaults(g);
   }
   function composeGradient(g: GradientDef): string {
     const e = gradEdit(g);
@@ -213,8 +214,10 @@
     return `linear-gradient(in ${e.space} ${head}, ${e.stop1}, ${e.stop2})`;
   }
   function setGradientPart(g: GradientDef, part: "angle" | "dir" | "stop1" | "stop2", value: string | number) {
-    const e = gradEdit(g);
-    (e as Record<string, string | number>)[part] = value;
+    if (!gradientEdits[g.name]) {
+      gradientEdits[g.name] = gradEditDefaults(g);
+    }
+    (gradientEdits[g.name] as Record<string, string | number>)[part] = value;
     onSet(g.name, composeGradient(g));
   }
 
@@ -236,7 +239,7 @@
     )).map(s => s.colorKey)
   ));
 
-  let sourceTokenMap = $derived(() => {
+  let sourceTokenMap = $derived.by(() => {
     const map: Record<string, SlashedToken> = {};
     const ALL_SOURCES = [...BRAND_SOURCES, ...STATUS_SOURCES];
     for (const t of tokens) {
@@ -345,7 +348,7 @@
           <OklchColorDesk
             label={`${light.label} (light)`}
             tokenName={light.name}
-            value={overrides[light.name] ?? sourceTokenMap()[light.name]?.value ?? light.default}
+            value={overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default}
             overridden={light.name in overrides}
             onChange={(v) => handleLightChange(light, dark, v)}
             onReset={() => onReset(light.name)}
@@ -369,7 +372,7 @@
               </div>
               <div class="flex items-center gap-1">
                 <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">D</span>
-                <div class="flex gap-0.5">
+                <div class="flex gap-0.5 bg-white/12 rounded-b px-0.5 pb-0.5">
                   {#each SWATCH_STEPS as step (step)}
                     {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
                     {@const resolved = paintTheme(expr, "dark", expr)}
@@ -387,7 +390,7 @@
             <OklchColorDesk
               label={`${dark.label} (dark mode)`}
               tokenName={dark.name}
-              value={overrides[dark.name] ?? sourceTokenMap()[dark.name]?.value ?? dark.default}
+              value={overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default}
               overridden={dark.name in overrides}
               onChange={(v) => onSet(dark.name, v)}
               onReset={() => onReset(dark.name)}
@@ -484,7 +487,7 @@
             <OklchColorDesk
               label={`${light.label} light`}
               tokenName={light.name}
-              value={overrides[light.name] ?? sourceTokenMap()[light.name]?.value ?? light.default}
+              value={overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default}
               overridden={light.name in overrides}
               onChange={(v) => onSet(light.name, v)}
               onReset={() => onReset(light.name)}
@@ -493,7 +496,7 @@
               <OklchColorDesk
                 label={`${dark.label} dark`}
                 tokenName={dark.name}
-                value={overrides[dark.name] ?? sourceTokenMap()[dark.name]?.value ?? dark.default}
+                value={overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default}
                 overridden={dark.name in overrides}
                 onChange={(v) => onSet(dark.name, v)}
                 onReset={() => onReset(dark.name)}
@@ -504,7 +507,7 @@
               {#each [["L", "light"], ["D", "dark"]] as [tag, side] (tag)}
                 <div class="flex items-center gap-1">
                   <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">{tag}</span>
-                  <div class="flex gap-0.5">
+                  <div class={`flex gap-0.5 ${side === "dark" ? "bg-white/12 rounded-b px-0.5 pb-0.5" : ""}`}>
                     {#each SWATCH_STEPS as step (step)}
                       {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
                       {@const resolved = paintTheme(expr, side as "light" | "dark", expr)}
