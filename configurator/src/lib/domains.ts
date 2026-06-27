@@ -1,7 +1,7 @@
 /** Token name substrings that define each domain's scope. Shared by DomainPanel and check-curation. */
 export const DOMAIN_PATTERNS: Record<string, string[]> = {
   colors: [
-    "color", "contrast", "palette-mix", "lumlocker", "scrim",
+    "color", "contrast", "palette-mix", "lumlocker", "scrim", "gradient",
   ],
   typography: [
     "font", "--sf-text", "leading", "tracking", "weight", "body-font", "heading-font",
@@ -36,6 +36,7 @@ export const DOMAIN_PATTERNS: Record<string, string[]> = {
   ],
 };
 
+/** Return the domain key for a given token name, falling back to "misc". */
 export function domainOf(tokenName: string): string {
   for (const [domain, patterns] of Object.entries(DOMAIN_PATTERNS)) {
     if (domain === "misc") continue;

@@ -3,7 +3,7 @@
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
-  import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
+  import ClampField from '../inputs/ClampField.svelte';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     tokens: SlashedToken[];
@@ -107,64 +107,23 @@
   <section class="space-y-4">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fluid scale</div>
 
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-2">Modular scale ratio</div>
-      <div class="grid grid-cols-2 gap-1">
-        {#each RATIO_PRESETS as p (p.value)}
-          <button
-            onclick={() => onBulkChange({ "--sf-space-ratio-min": String(p.value), "--sf-space-ratio-max": String(p.value) })}
-            class={`px-2 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer text-left ${
-              activeRatio?.value === p.value
-                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-            }`}
-          >
-            {p.label}
-          </button>
-        {/each}
-      </div>
-      {#if !activeRatio}
-        <div class="mt-3 space-y-2 pl-2 border-l border-amber-500/25">
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <div class="text-[9px] text-slate-600 mb-1">Ratio min (mobile)</div>
-              <RangeWithNumber value={ratioMin} min={1.1} max={1.8} step={0.001}
-                onChange={(v) => onSet("--sf-space-ratio-min", String(v))} />
-            </div>
-            <div>
-              <div class="text-[9px] text-slate-600 mb-1">Ratio max (desktop)</div>
-              <RangeWithNumber value={ratioMax} min={1.1} max={1.8} step={0.001}
-                onChange={(v) => onSet("--sf-space-ratio-max", String(v))} />
-            </div>
-          </div>
-        </div>
-      {/if}
-    </div>
-
-    <!-- Compact base unit min/max pair -->
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-2">Base unit (fluid clamp)</div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <div class="text-[9px] text-slate-600 mb-1">Min (mobile)</div>
-          <RangeWithNumber value={baseMin} min={0.5} max={2} step={0.05} unit="rem"
-            onChange={(v) => onSet("--sf-space-base-min", String(v))} />
-        </div>
-        <div>
-          <div class="text-[9px] text-slate-600 mb-1">Max (desktop)</div>
-          <RangeWithNumber value={baseMax} min={1} max={4} step={0.05} unit="rem"
-            onChange={(v) => onSet("--sf-space-base-max", String(v))} />
-        </div>
-      </div>
-      <div class="flex justify-end gap-2 mt-1">
-        {#if "--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
-          <button
-            onclick={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}
-            class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer"
-          >reset</button>
-        {/if}
-      </div>
-    </div>
+    <ClampField
+      title="Base unit (fluid clamp)"
+      minValue={baseMin} maxValue={baseMax}
+      min={0.5} max={4} step={0.05} unit="rem"
+      previewKind="space"
+      overridden={"--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
+      onReset={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}
+      onMinChange={(v) => onSet("--sf-space-base-min", String(v))}
+      onMaxChange={(v) => onSet("--sf-space-base-max", String(v))}
+      ratioPresets={RATIO_PRESETS}
+      activeRatioValue={activeRatio?.value}
+      ratioMin={ratioMin} ratioMax={ratioMax}
+      ratioMin_bound={1.1} ratioMax_bound={1.8}
+      onRatioPreset={(v) => onBulkChange({ "--sf-space-ratio-min": String(v), "--sf-space-ratio-max": String(v) })}
+      onRatioMinChange={(v) => onSet("--sf-space-ratio-min", String(v))}
+      onRatioMaxChange={(v) => onSet("--sf-space-ratio-max", String(v))}
+    />
 
     <div class="space-y-4">
       {#each knobs as k (k.name)}

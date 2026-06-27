@@ -1,18 +1,45 @@
 <script lang="ts">
   import type { SlashedToken } from '../../types';
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
-  import { parseOklch, stringifyOklch, oklchToRgb, getRelativeLuminance, getContrastRatio } from '../../lib/colorUtils';
+  import { parseOklch, stringifyOklch, getRelativeLuminance, getContrastRatio } from '../../lib/colorUtils';
+  import { resolveColor, resolveRgb, resolveBackground, previewVersion } from '../../lib/previewResolver.svelte';
   import OklchColorDesk from '../inputs/OklchColorDesk.svelte';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
 
-  let { tokens, overrides, onSet, onReset, onBulkChange }: {
+  let { tokens, overrides, onSet, onReset, onBulkChange, onSelectDomain }: {
     tokens: SlashedToken[];
     overrides: Record<string, string>;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
     onBulkChange: (patch: Record<string, string | null>) => void;
+    onSelectDomain?: (d: string) => void;
   } = $props();
+
+  // Resolve real, browser-computed colors from the live preview iframe.
+  // Reading previewVersion.value makes these reactive to override changes.
+  function paint(expr: string, fallback: string): string {
+    void previewVersion.value;
+    const r = resolveColor(expr);
+    return r || fallback;
+  }
+  function paintBg(expr: string, fallback: string): string {
+    void previewVersion.value;
+    const r = resolveBackground(expr);
+    return r && r !== "none" ? r : fallback;
+  }
+
+  const GRADIENT_TOKENS = [
+    { name: "--sf-gradient-primary",   label: "Primary",   group: "brand" },
+    { name: "--sf-gradient-secondary", label: "Secondary", group: "brand" },
+    { name: "--sf-gradient-tertiary",  label: "Tertiary",  group: "brand" },
+    { name: "--sf-gradient-brand",     label: "Brand",     group: "brand" },
+    { name: "--sf-gradient-surface",   label: "Surface",   group: "brand" },
+    { name: "--sf-gradient-fade--r",   label: "Fade →",    group: "fade" },
+    { name: "--sf-gradient-fade--l",   label: "Fade ←",    group: "fade" },
+    { name: "--sf-gradient-fade--t",   label: "Fade ↑",    group: "fade" },
+    { name: "--sf-gradient-fade--b",   label: "Fade ↓",    group: "fade" },
+  ];
 
   type ColorSource = {
     name: string; label: string; side: "light" | "dark"; default: string; colorKey: string;
@@ -105,6 +132,7 @@
 
   let showStatus = $state(false);
   let showSemanticOverrides = $state(false);
+  let showGradients = $state(false);
 
   // Track which color rows are in Auto dark mode.
   // A key starts in auto only if its dark token is NOT already in overrides — otherwise the user
@@ -179,20 +207,20 @@
     }
   }
 
-  // Compute live AA/AAA against primary for contrast knobs
-  let contrastRatio = $derived(() => {
-    const primaryVal = overrides["--sf-color-primary-source-light"] ?? "oklch(0.47 0.27 264)";
-    const { l, c, h, valid } = parseOklch(primaryVal);
-    if (!valid) return null;
-    const [r, g, b] = oklchToRgb(l, c, h);
-    const bgLum = getRelativeLuminance(r, g, b);
-    const whiteLum = 1;
-    const blackLum = 0;
-    const threshold = parseFloat(overrides["--sf-contrast-threshold"] ?? "0.6");
-    const textIsLight = l < threshold;
-    const textLum = textIsLight ? whiteLum : blackLum;
-    return getContrastRatio(bgLum, textLum);
-  });
+  // Live contrast summary — resolves real on-screen colors from the preview.
+  const KEY_CONTRAST_PAIRS = [
+    { label: "Body text on surface",  fg: "var(--sf-color-text)",    bg: "var(--sf-color-surface)" },
+    { label: "White on primary",      fg: "#ffffff",                 bg: "var(--sf-color-primary)" },
+    { label: "Primary on surface",    fg: "var(--sf-color-primary)", bg: "var(--sf-color-surface)" },
+  ];
+
+  function pairRatio(fg: string, bg: string): number | null {
+    void previewVersion.value;
+    const f = resolveRgb(fg);
+    const b = resolveRgb(bg);
+    if (!f || !b) return null;
+    return getContrastRatio(getRelativeLuminance(...f), getRelativeLuminance(...b));
+  }
 </script>
 
 <div class="p-4 space-y-6">
@@ -233,10 +261,12 @@
           {#if BRAND_COLOR_KEYS.includes(light.colorKey)}
             <div class="flex gap-1 mt-1 pl-1">
               {#each SWATCH_STEPS as step (step)}
+                {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
+                {@const resolved = paint(expr, expr)}
                 <div
                   class="w-5 h-5 rounded border border-white/10"
-                  style={`background: var(--sf-color-${light.colorKey}-${step})`}
-                  title={`${light.colorKey}-${step}`}
+                  style={`background: ${resolved}`}
+                  title={`${light.colorKey}-${step} — ${resolved}`}
                 ></div>
               {/each}
             </div>
@@ -251,8 +281,14 @@
               onReset={() => onReset(dark.name)}
             />
           {:else if dark && isAutoMode}
-            <div class="text-[9px] text-slate-600 pl-1">
-              Dark: auto-derived ({deriveDarkFromLight(overrides[light.name] ?? light.default, light.colorKey)})
+            {@const derivedDark = deriveDarkFromLight(overrides[light.name] ?? light.default, light.colorKey)}
+            <div class="flex items-center gap-1.5 text-[9px] text-slate-600 pl-1">
+              <span
+                class="w-3.5 h-3.5 rounded border border-white/10 shrink-0"
+                style={`background: ${paint(derivedDark, derivedDark)}`}
+                title={derivedDark}
+              ></span>
+              Dark: auto-derived ({derivedDark})
             </div>
           {/if}
         </div>
@@ -316,20 +352,31 @@
       />
     {/each}
 
-    <!-- Live AA/AAA badge against primary -->
-    {#if contrastRatio() !== null}
-      {@const ratio = contrastRatio()!}
-      <div class="flex items-center gap-2 p-2 rounded-lg bg-white/4 border border-white/8">
-        <span class="text-[9px] text-slate-500">vs. primary:</span>
-        <span class="text-[10px] font-mono font-bold text-slate-200">{ratio.toFixed(2)}:1</span>
-        <span class={`text-[9px] font-bold px-1.5 py-0.5 rounded ${ratio >= 4.5 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
-          {ratio >= 4.5 ? "AA ✓" : "AA ✗"}
-        </span>
-        <span class={`text-[9px] font-bold px-1.5 py-0.5 rounded ${ratio >= 7 ? "bg-emerald-500/20 text-emerald-300" : "bg-slate-500/20 text-slate-400"}`}>
-          {ratio >= 7 ? "AAA ✓" : "AAA ✗"}
-        </span>
-      </div>
-    {/if}
+    <!-- Live contrast summary (links to the full WCAG tool) -->
+    <div class="rounded-lg bg-white/4 border border-white/8 p-2.5 space-y-2">
+      {#each KEY_CONTRAST_PAIRS as pair (pair.label)}
+        {@const ratio = pairRatio(pair.fg, pair.bg)}
+        {#if ratio !== null}
+          <div class="flex items-center gap-2">
+            <span
+              class="w-6 h-6 rounded border border-white/10 shrink-0 flex items-center justify-center text-[10px] font-bold"
+              style={`background:${paint(pair.bg, pair.bg)}; color:${paint(pair.fg, pair.fg)}`}
+            >Aa</span>
+            <span class="text-[9px] text-slate-500 flex-1 truncate">{pair.label}</span>
+            <span class="text-[10px] font-mono font-bold text-slate-200">{ratio.toFixed(2)}:1</span>
+            <span class={`text-[9px] font-bold px-1.5 py-0.5 rounded ${ratio >= 4.5 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
+              {ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA-L" : "✗"}
+            </span>
+          </div>
+        {/if}
+      {/each}
+      {#if onSelectDomain}
+        <button
+          onclick={() => onSelectDomain?.("wcag")}
+          class="w-full mt-1 py-1.5 rounded-lg bg-indigo-600/15 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold cursor-pointer hover:bg-indigo-600/25 transition-all"
+        >Open contrast tool →</button>
+      {/if}
+    </div>
 
     <!-- Focus ring width — logically belongs with contrast/accessibility -->
     {#each focusKnobs as k (k.name)}
@@ -420,6 +467,51 @@
 
   <div class="h-px bg-white/6"></div>
 
+  <!-- GRADIENTS -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showGradients = !showGradients; }}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Gradients</div>
+      <span class="text-[10px] text-slate-500">{showGradients ? "▲" : "▼"}</span>
+    </button>
+    {#if showGradients}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Auto-derived from your brand colors. Edit the raw value to fully customise.
+      </p>
+      {#each ["brand", "fade"] as grp (grp)}
+        <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest pt-1">{grp === "brand" ? "Brand & surface" : "Edge fades"}</div>
+        <div class="space-y-2">
+          {#each GRADIENT_TOKENS.filter((g) => g.group === grp) as g (g.name)}
+            {@const expr = `var(${g.name})`}
+            <div class="rounded-lg border border-white/8 bg-white/3 overflow-hidden">
+              <div class="h-9 w-full" style={`background:${paintBg(expr, expr)}`}></div>
+              <div class="flex items-center gap-2 px-2 py-1.5">
+                <span class="text-[10px] font-semibold text-slate-300 w-16 shrink-0">{g.label}</span>
+                <input
+                  type="text"
+                  value={overrides[g.name] ?? ""}
+                  placeholder="auto-derived"
+                  onchange={(e) => {
+                    const v = (e.target as HTMLInputElement).value.trim();
+                    v ? onSet(g.name, v) : onReset(g.name);
+                  }}
+                  class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+                />
+                {#if g.name in overrides}
+                  <button onclick={() => onReset(g.name)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+                {/if}
+              </div>
+            </div>
+          {/each}
+        </div>
+      {/each}
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
   <!-- SEMANTIC OVERRIDES -->
   <section class="space-y-3">
     <button
@@ -435,16 +527,22 @@
       </p>
       <div class="space-y-2">
         {#each SEMANTIC_OVERRIDES as s (s.name)}
+          {@const resolved = paint(`var(${s.name})`, "")}
           <div>
             <div class="text-[10px] font-semibold text-slate-400 mb-1">{s.label}</div>
             <div class="flex items-center gap-2">
-              <input
-                type="color"
-                value={overrides[s.name] ?? "#6366f1"}
-                oninput={(e) => onSet(s.name, (e.target as HTMLInputElement).value)}
-                class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer shrink-0"
-              />
-              <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{overrides[s.name] ?? "auto-derived"}</span>
+              <span class="relative w-7 h-7 rounded border border-white/10 shrink-0 overflow-hidden" style={`background:${(s.name in overrides ? "" : resolved) || "transparent"}`}>
+                <input
+                  type="color"
+                  value={overrides[s.name] ?? "#6366f1"}
+                  oninput={(e) => onSet(s.name, (e.target as HTMLInputElement).value)}
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+                {#if s.name in overrides}
+                  <span class="absolute inset-0" style={`background:${overrides[s.name]}`}></span>
+                {/if}
+              </span>
+              <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{overrides[s.name] ?? (resolved ? `auto-derived · ${resolved}` : "auto-derived")}</span>
               {#if s.name in overrides}
                 <button onclick={() => onReset(s.name)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
               {/if}

@@ -2,6 +2,7 @@
   import { Sun, Moon, Smartphone, Tablet, Monitor, RefreshCw, ExternalLink, Columns2 } from 'lucide-svelte';
   import type { PreviewTemplate } from '../../types';
   import { fa } from '../../lib/codec';
+  import { registerPreviewDoc, bumpPreviewVersion } from '../../lib/previewResolver.svelte';
   // Import the built framework CSS at Vite compile time — always in sync with badges/.
   import frameworkCSSStatic from '../../../../badges/slashed.full.css?raw';
 
@@ -279,6 +280,15 @@
         <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-info-700,var(--sf-color-primary-700));">Info</div>
       </div>
     </div>
+
+    <!-- Gradients -->
+    <div style="font-size:9px;color:var(--sf-color-text--muted);font-family:monospace;margin:var(--sf-space-m) 0 var(--sf-space-xs);">Gradients</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sf-space-s);">
+      <div><div style="height:44px;border-radius:var(--sf-radius-m);background:var(--sf-gradient-primary);border:1px solid var(--sf-color-border);"></div><div style="font-size:8px;color:var(--sf-color-text--muted);font-family:monospace;margin-top:3px;">primary</div></div>
+      <div><div style="height:44px;border-radius:var(--sf-radius-m);background:var(--sf-gradient-brand);border:1px solid var(--sf-color-border);"></div><div style="font-size:8px;color:var(--sf-color-text--muted);font-family:monospace;margin-top:3px;">brand</div></div>
+      <div><div style="height:44px;border-radius:var(--sf-radius-m);background:var(--sf-gradient-tertiary);border:1px solid var(--sf-color-border);"></div><div style="font-size:8px;color:var(--sf-color-text--muted);font-family:monospace;margin-top:3px;">tertiary</div></div>
+      <div><div style="height:44px;border-radius:var(--sf-radius-m);background:var(--sf-gradient-surface);border:1px solid var(--sf-color-border);"></div><div style="font-size:8px;color:var(--sf-color-text--muted);font-family:monospace;margin-top:3px;">surface</div></div>
+    </div>
   </section>
 
   <!-- TYPOGRAPHY -->
@@ -370,6 +380,47 @@
     </div>
   </section>
 
+  <!-- LAYOUTS & MACROS -->
+  <section style="margin-bottom:var(--sf-space-2xl);">
+    <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--sf-space-m);">Layouts &amp; macros</div>
+
+    <!-- Text gradient + gradient divider -->
+    <h3 class="sf-text-gradient" style="font-size:var(--sf-text-2xl);font-weight:800;font-family:var(--sf-font-heading,inherit);margin:0 0 var(--sf-space-s);">.sf-text-gradient heading</h3>
+    <div class="sf-divider sf-divider--gradient" style="margin-bottom:var(--sf-space-l);"></div>
+
+    <!-- Cluster -->
+    <div style="font-size:9px;color:var(--sf-color-text--muted);font-family:monospace;margin-bottom:4px;">.sf-cluster</div>
+    <div class="sf-cluster" style="margin-bottom:var(--sf-space-l);">
+      <span class="sf-btn sf-btn-primary">Tag</span>
+      <span class="sf-btn sf-btn-secondary">Another</span>
+      <span class="sf-btn sf-btn-ghost">Ghost</span>
+      <span class="sf-btn sf-btn-secondary">Wraps nicely</span>
+    </div>
+
+    <!-- Grid -->
+    <div style="font-size:9px;color:var(--sf-color-text--muted);font-family:monospace;margin-bottom:4px;">.sf-grid</div>
+    <div class="sf-grid sf-grid--m" style="margin-bottom:var(--sf-space-l);">
+      <div style="background:var(--sf-color-base-50);border:1px solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-m);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);">Grid item 1</div>
+      <div style="background:var(--sf-color-base-50);border:1px solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-m);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);">Grid item 2</div>
+      <div style="background:var(--sf-color-base-50);border:1px solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-m);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);">Grid item 3</div>
+    </div>
+
+    <!-- Sidebar + Stack -->
+    <div style="font-size:9px;color:var(--sf-color-text--muted);font-family:monospace;margin-bottom:4px;">.sf-sidebar + .sf-stack</div>
+    <div class="sf-sidebar sf-sidebar--narrow">
+      <div style="background:var(--sf-color-primary-100);border-radius:var(--sf-radius-m);padding:var(--sf-space-m);">
+        <div class="sf-stack sf-stack--s">
+          <span style="font-size:var(--sf-text-s);font-weight:700;color:var(--sf-color-primary-700);">Sidebar</span>
+          <span style="font-size:var(--sf-text-xs);color:var(--sf-color-primary-700);">Stacked</span>
+          <span style="font-size:var(--sf-text-xs);color:var(--sf-color-primary-700);">items</span>
+        </div>
+      </div>
+      <div style="background:var(--sf-color-base-50);border:1px solid var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-m);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);">
+        Main content area — the sidebar holds its width while this region fills the rest, collapsing to a single column when space runs out.
+      </div>
+    </div>
+  </section>
+
   <!-- SPACING -->
   <section style="margin-bottom:var(--sf-space-xl);">
     <div style="font-size:var(--sf-text-xs);font-weight:700;color:var(--sf-color-text--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--sf-space-m);">Spacing scale</div>
@@ -417,7 +468,7 @@
       .join("\n");
 
     return `<!DOCTYPE html>
-<html lang="en" ${theme === "dark" ? 'class="sf-dark"' : ""} style="height:100%;margin:0;padding:0;">
+<html lang="en" data-theme="${theme}" style="height:100%;margin:0;padding:0;">
 <head>
   <meta charset="UTF-8">
   <title>SLASHED Preview</title>
@@ -489,11 +540,13 @@ ${BODIES[template]}
 
     injectFontsIntoDoc(doc, _ov);
 
-    if (_theme === "dark") {
-      doc.documentElement.classList.add("sf-dark");
-    } else {
-      doc.documentElement.classList.remove("sf-dark");
-    }
+    // Framework activates dark mode via [data-theme="dark"] (color-scheme +
+    // light-dark()), NOT a class — keep this in sync with buildIframeHTML.
+    doc.documentElement.setAttribute("data-theme", _theme);
+
+    // This single-mode iframe is the canonical resolver source.
+    registerPreviewDoc(doc);
+    bumpPreviewVersion();
   });
 
   $effect(() => {
@@ -508,6 +561,8 @@ ${BODIES[template]}
         const styleEl = doc.getElementById("slashed-overrides");
         if (styleEl) styleEl.textContent = css;
         injectFontsIntoDoc(doc, _ov);
+        // In split mode the light pane is the canonical resolver source.
+        registerPreviewDoc(doc);
       }
     }
     if (splitDarkEl && _darkCount > 0) {
@@ -518,6 +573,7 @@ ${BODIES[template]}
         injectFontsIntoDoc(doc, _ov);
       }
     }
+    bumpPreviewVersion();
   });
 
   let isConstrained = $derived(previewWidth !== "fluid");
