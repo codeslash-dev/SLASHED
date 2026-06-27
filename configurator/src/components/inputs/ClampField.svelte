@@ -16,6 +16,8 @@
     max,
     step,
     unit = "rem",
+    minLabel = "Min",
+    maxLabel = "Max",
     onMinChange,
     onMaxChange,
     overridden = false,
@@ -40,6 +42,8 @@
     max: number;
     step: number;
     unit?: string;
+    minLabel?: string;
+    maxLabel?: string;
     onMinChange: (v: number) => void;
     onMaxChange: (v: number) => void;
     overridden?: boolean;
@@ -96,13 +100,13 @@
   <!-- Min / Max numeric pair -->
   <div class="grid grid-cols-2 gap-2">
     <label class="flex items-center gap-1.5">
-      <span class="text-[9px] text-slate-500 w-7 shrink-0">Min</span>
+      <span class="text-[9px] text-slate-500 shrink-0">{minLabel}</span>
       <input type="number" {min} {max} {step} value={minValue}
         onchange={(e) => onMinChange(clamp(parseFloat((e.target as HTMLInputElement).value) || min))}
         class="w-full bg-white/5 border border-white/10 rounded text-[11px] font-mono text-slate-200 text-right px-1.5 py-0.5 focus:outline-none focus:border-indigo-500" />
     </label>
     <label class="flex items-center gap-1.5">
-      <span class="text-[9px] text-slate-500 w-7 shrink-0">Max</span>
+      <span class="text-[9px] text-slate-500 shrink-0">{maxLabel}</span>
       <input type="number" {min} {max} {step} value={maxValue}
         onchange={(e) => onMaxChange(clamp(parseFloat((e.target as HTMLInputElement).value) || max))}
         class="w-full bg-white/5 border border-white/10 rounded text-[11px] font-mono text-slate-200 text-right px-1.5 py-0.5 focus:outline-none focus:border-indigo-500" />
@@ -112,8 +116,8 @@
   <!-- Min → Max preview -->
   {#if previewKind === "type"}
     <div class="flex items-baseline justify-between gap-3 mt-2 px-1 overflow-hidden">
-      <span class="text-slate-500 leading-none truncate" style={`font-size:${Math.min(minValue, 2)}rem`}>Aa<span class="text-[8px] font-mono align-middle ml-1">min</span></span>
-      <span class="text-white/80 leading-none truncate" style={`font-size:${Math.min(maxValue, 2.6)}rem`}>Aa<span class="text-[8px] font-mono align-middle ml-1">max</span></span>
+      <span class="text-slate-500 leading-none truncate" style={`font-size:${Math.min(minValue, 2)}rem`}>Aa<span class="text-[8px] font-mono align-middle ml-1">{minLabel.toLowerCase()}</span></span>
+      <span class="text-white/80 leading-none truncate" style={`font-size:${Math.min(maxValue, 2.6)}rem`}>Aa<span class="text-[8px] font-mono align-middle ml-1">{maxLabel.toLowerCase()}</span></span>
     </div>
   {:else if previewKind === "space"}
     <div class="flex items-center gap-2 mt-2 px-1">
@@ -143,13 +147,13 @@
       {#if customRatioOpen}
         <div class="grid grid-cols-2 gap-2 mt-2 pl-2 border-l border-amber-500/25">
           <label class="flex items-center gap-1.5">
-            <span class="text-[9px] text-slate-500 shrink-0">min</span>
+            <span class="text-[9px] text-slate-500 shrink-0">{minLabel.toLowerCase()}</span>
             <input type="number" min={ratioMin_bound} max={ratioMax_bound} step={0.001} value={ratioMin}
               onchange={(e) => { const n = parseFloat((e.target as HTMLInputElement).value); if (Number.isFinite(n)) onRatioMinChange?.(Math.min(ratioMax_bound, Math.max(ratioMin_bound, n))); }}
               class="w-full bg-white/5 border border-white/10 rounded text-[11px] font-mono text-slate-200 text-right px-1.5 py-0.5 focus:outline-none focus:border-indigo-500" />
           </label>
           <label class="flex items-center gap-1.5">
-            <span class="text-[9px] text-slate-500 shrink-0">max</span>
+            <span class="text-[9px] text-slate-500 shrink-0">{maxLabel.toLowerCase()}</span>
             <input type="number" min={ratioMin_bound} max={ratioMax_bound} step={0.001} value={ratioMax}
               onchange={(e) => { const n = parseFloat((e.target as HTMLInputElement).value); if (Number.isFinite(n)) onRatioMaxChange?.(Math.min(ratioMax_bound, Math.max(ratioMin_bound, n))); }}
               class="w-full bg-white/5 border border-white/10 rounded text-[11px] font-mono text-slate-200 text-right px-1.5 py-0.5 focus:outline-none focus:border-indigo-500" />

@@ -7,6 +7,7 @@
   import PreviewPanel from './components/shell/PreviewPanel.svelte';
   import DomainPanel from './components/DomainPanel.svelte';
   import { Ja, Ga, fa } from './lib/codec';
+  import { domainOf } from './lib/domains';
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
 
@@ -15,8 +16,8 @@
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
     layout: "Layout", borders: "Borders", shadows: "Shadows", motion: "Motion",
-    effects: "Effects", misc: "Misc", themes: "Themes", wcag: "WCAG",
-    setup: "Install", cheatsheet: "Classes",
+    effects: "Effects", macros: "Macros", misc: "Misc", themes: "Themes",
+    wcag: "WCAG", setup: "Install", cheatsheet: "Classes",
   };
 
   function initOverrides(): Record<string, string> {
@@ -35,16 +36,7 @@
   function overridesByDomain(ov: Record<string, string>): Record<string, number> {
     const map: Record<string, number> = {};
     for (const k of Object.keys(ov)) {
-      const dom =
-        k.includes("color") ? "colors" :
-        k.includes("font") || k.includes("text") || k.includes("leading") ? "typography" :
-        k.includes("space") || k.includes("section") ? "spacing" :
-        k.includes("layout") || k.includes("container") || k.includes("grid") ? "layout" :
-        k.includes("radius") || k.includes("border") ? "borders" :
-        k.includes("shadow") ? "shadows" :
-        k.includes("motion") || k.includes("duration") || k.includes("easing") ? "motion" :
-        k.includes("blur") || k.includes("filter") || k.includes("opacity") ? "effects" :
-        "misc";
+      const dom = domainOf(k);
       map[dom] = (map[dom] ?? 0) + 1;
     }
     return map;

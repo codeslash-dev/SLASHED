@@ -42,7 +42,11 @@
   let baseMax    = $derived(num("--sf-space-base-max", 2));
   let spaceScale = $derived(num("--sf-space-scale", 1));
   let gapVal     = $derived(num("--sf-gap", 1));
+  let gutterVal  = $derived(num("--sf-gutter", 1.5));
   let contentGapVal = $derived(num("--sf-content-gap", 0.5));
+  // Shared fluid viewport endpoints (rem, unitless). Min = mobile, max = desktop.
+  let vwMin      = $derived(num("--sf-fluid-min-vw", 22.5));
+  let vwMax      = $derived(num("--sf-fluid-max-vw", 90));
 
   let activeRatio = $derived(RATIO_PRESETS.find(
     (p) => Math.abs(p.value - ratioMin) < 0.0015 && Math.abs(p.value - ratioMax) < 0.0015
@@ -77,6 +81,13 @@
       onChange={(v) => onSet("--sf-content-gap", `${v}rem`)}
       onReset={() => onReset("--sf-content-gap")}
     />
+    <SliderRow
+      label="Gutter" value={gutterVal} min={0} max={6} step={0.0625} unit="rem"
+      help="--sf-gutter — wide page/section side gutter (containers, .sf-section--guttered)"
+      overridden={"--sf-gutter" in overrides}
+      onChange={(v) => onSet("--sf-gutter", `${v}rem`)}
+      onReset={() => onReset("--sf-gutter")}
+    />
   </section>
 
   <div class="h-px bg-white/6"></div>
@@ -105,12 +116,28 @@
 
   <!-- FLUID SCALE -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fluid scale</div>
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      Utopia-style fluid scale — viewport width, base unit and ratio per endpoint.
+      The viewport range is shared with the type scale.
+    </p>
 
     <ClampField
-      title="Base unit (fluid clamp)"
+      title="Viewport range"
+      minValue={vwMin} maxValue={vwMax}
+      min={15} max={120} step={0.5} unit="rem"
+      minLabel="Mobile" maxLabel="Desktop"
+      overridden={"--sf-fluid-min-vw" in overrides || "--sf-fluid-max-vw" in overrides}
+      onReset={() => { onReset("--sf-fluid-min-vw"); onReset("--sf-fluid-max-vw"); }}
+      onMinChange={(v) => onSet("--sf-fluid-min-vw", String(v))}
+      onMaxChange={(v) => onSet("--sf-fluid-max-vw", String(v))}
+    />
+
+    <ClampField
+      title="Base unit &amp; ratio"
       minValue={baseMin} maxValue={baseMax}
       min={0.5} max={4} step={0.05} unit="rem"
+      minLabel="Mobile" maxLabel="Desktop"
       previewKind="space"
       overridden={"--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
       onReset={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}

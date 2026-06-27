@@ -151,6 +151,9 @@
   let dispMax   = $derived(num("--sf-text-display-base-max", 3));
   let taper     = $derived(num("--sf-leading-taper", 0));
   let textScale = $derived(num("--sf-text-scale", 1));
+  // Shared fluid viewport endpoints (rem, unitless). Min = mobile, max = desktop.
+  let vwMin     = $derived(num("--sf-fluid-min-vw", 22.5));
+  let vwMax     = $derived(num("--sf-fluid-max-vw", 90));
 
   let activeRatio = $derived(RATIO_PRESETS.find(
     (p) => Math.abs(p.value - ratioMin) < 0.0015 && Math.abs(p.value - ratioMax) < 0.0015
@@ -562,12 +565,29 @@
 
   <!-- FINE-TUNE (type ramp clamp + rhythm + tracking) -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fine-tune</div>
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
+    <p class="text-[10px] text-slate-600 leading-relaxed">
+      Utopia-style fluid scale. Each endpoint has three values — viewport width,
+      base size, and modular ratio. Sizes interpolate fluidly between mobile and desktop.
+    </p>
+
+    <!-- Viewport endpoints (shared by the type + space scales) -->
+    <ClampField
+      title="Viewport range"
+      minValue={vwMin} maxValue={vwMax}
+      min={15} max={120} step={0.5} unit="rem"
+      minLabel="Mobile" maxLabel="Desktop"
+      overridden={"--sf-fluid-min-vw" in overrides || "--sf-fluid-max-vw" in overrides}
+      onReset={() => { onReset("--sf-fluid-min-vw"); onReset("--sf-fluid-max-vw"); }}
+      onMinChange={(v) => onSet("--sf-fluid-min-vw", String(v))}
+      onMaxChange={(v) => onSet("--sf-fluid-max-vw", String(v))}
+    />
 
     <ClampField
-      title="Base size &amp; scale (fluid clamp)"
+      title="Base size &amp; ratio"
       minValue={baseMin} maxValue={baseMax}
       min={0.7} max={2} step={0.01} unit="rem"
+      minLabel="Mobile" maxLabel="Desktop"
       previewKind="type"
       overridden={"--sf-text-base-min" in overrides || "--sf-text-base-max" in overrides}
       onReset={() => { onReset("--sf-text-base-min"); onReset("--sf-text-base-max"); }}

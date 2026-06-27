@@ -43,6 +43,7 @@
   let caretColor = $derived(overrides["--sf-caret-color"] ?? "");
   let underlineOffset = $derived(parseNum(overrides["--sf-link-underline-offset"]?.replace("em",""), 0.15));
   let underlineThickness = $derived(overrides["--sf-link-underline-thickness"] ?? "auto");
+  let focusRingStyle = $derived(overrides["--sf-focus-ring-style"] ?? "solid");
 
   function getSizeValue(t: typeof SIZE_TOKENS[0]): number {
     return parseNum(overrides[t.token]?.replace("rem",""), t.default);
@@ -188,6 +189,15 @@
         </button>
       {/each}
     </div>
+    <!-- Focus ring style preview -->
+    <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center">
+      <div
+        class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-200"
+        style={`outline: 2px ${focusRingStyle} ${overrides["--sf-focus-ring-color"] || "oklch(0.7 0.2 235)"}; outline-offset: 2px`}
+      >
+        Focus ring · {focusRingStyle}
+      </div>
+    </div>
   </section>
 
   <div class="h-px bg-white/6"></div>
@@ -272,5 +282,34 @@
         {/each}
       </div>
     </div>
+    <!-- Live sample: caret (type in the field) + underlined link -->
+    <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">
+      <input
+        type="text"
+        placeholder="Click and type to see the caret…"
+        style={`caret-color:${caretColor || "#6366f1"}`}
+        class="w-full bg-white/5 border border-white/10 rounded px-2 py-1.5 text-[11px] text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+      />
+      <p class="text-[11px] text-slate-300">
+        A <a
+          href="#sample-link"
+          onclick={(e) => e.preventDefault()}
+          class="text-indigo-300"
+          style={`text-decoration:underline;text-underline-offset:${underlineOffset}em;text-decoration-thickness:${underlineThickness}`}
+        >sample link</a> with the current underline settings.
+      </p>
+    </div>
   </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- PREVIEW NOTE -->
+  <div class="rounded-lg bg-white/3 border border-white/6 p-3">
+    <p class="text-[10px] text-slate-500 leading-relaxed">
+      Selection colors, caret, links, focus ring, borders and sizes all render in the
+      live preview (try the <span class="text-slate-400 font-semibold">Components</span> template).
+      <span class="text-slate-400 font-semibold">Scroll behavior</span> applies to the page
+      itself and can't be shown in the static canvas.
+    </p>
+  </div>
 </div>
