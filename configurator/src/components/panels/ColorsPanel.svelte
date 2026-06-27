@@ -2,7 +2,7 @@
   import type { SlashedToken } from '../../types';
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import { parseOklch, stringifyOklch, getRelativeLuminance, getContrastRatio } from '../../lib/colorUtils';
-  import { resolveColor, resolveRgb, resolveBackground, previewVersion } from '../../lib/previewResolver.svelte';
+  import { resolveColor, resolveColorForTheme, resolveRgb, resolveBackground, previewVersion } from '../../lib/previewResolver.svelte';
   import OklchColorDesk from '../inputs/OklchColorDesk.svelte';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
@@ -27,6 +27,11 @@
     void previewVersion.value;
     const r = resolveBackground(expr);
     return r && r !== "none" ? r : fallback;
+  }
+  function paintTheme(expr: string, theme: "light" | "dark", fallback: string): string {
+    void previewVersion.value;
+    const r = resolveColorForTheme(expr, theme);
+    return r || fallback;
   }
 
   const GRADIENT_TOKENS = [
@@ -257,18 +262,37 @@
             onChange={(v) => handleLightChange(light, dark, v)}
             onReset={() => onReset(light.name)}
           />
-          <!-- Palette swatch strip for brand colors -->
+          <!-- Palette swatch strips — light row then dark row -->
           {#if BRAND_COLOR_KEYS.includes(light.colorKey)}
-            <div class="flex gap-1 mt-1 pl-1">
-              {#each SWATCH_STEPS as step (step)}
-                {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
-                {@const resolved = paint(expr, expr)}
-                <div
-                  class="w-5 h-5 rounded border border-white/10"
-                  style={`background: ${resolved}`}
-                  title={`${light.colorKey}-${step} — ${resolved}`}
-                ></div>
-              {/each}
+            <div class="mt-1 pl-1 space-y-px">
+              <div class="flex items-center gap-1">
+                <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">L</span>
+                <div class="flex gap-0.5">
+                  {#each SWATCH_STEPS as step (step)}
+                    {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
+                    {@const resolved = paintTheme(expr, "light", expr)}
+                    <div
+                      class="w-5 h-3 rounded-t border-x border-t border-white/10"
+                      style={`background: ${resolved}`}
+                      title={`${light.colorKey}-${step} (light) — ${resolved}`}
+                    ></div>
+                  {/each}
+                </div>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">D</span>
+                <div class="flex gap-0.5">
+                  {#each SWATCH_STEPS as step (step)}
+                    {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
+                    {@const resolved = paintTheme(expr, "dark", expr)}
+                    <div
+                      class="w-5 h-3 rounded-b border-x border-b border-white/10"
+                      style={`background: ${resolved}`}
+                      title={`${light.colorKey}-${step} (dark) — ${resolved}`}
+                    ></div>
+                  {/each}
+                </div>
+              </div>
             </div>
           {/if}
           {#if dark && !isAutoMode}

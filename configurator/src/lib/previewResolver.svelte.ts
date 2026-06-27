@@ -24,6 +24,10 @@
 let activeDoc: Document | null = null;
 let probe: HTMLElement | null = null;
 let normCtx: CanvasRenderingContext2D | null = null;
+let probeLightWrapper: HTMLElement | null = null;
+let probeDarkWrapper: HTMLElement | null = null;
+let probeLightEl: HTMLElement | null = null;
+let probeDarkEl: HTMLElement | null = null;
 
 /** Reactive version counter — Svelte runes pick this up via `.value`. */
 export const previewVersion = $state({ value: 0 });
@@ -42,9 +46,15 @@ export function registerPreviewDoc(doc: Document | null): void {
     return;
   }
   if (probe) probe.remove();
+  if (probeLightWrapper) probeLightWrapper.remove();
+  if (probeDarkWrapper) probeDarkWrapper.remove();
   activeDoc = doc;
   probe = null;
   normCtx = null;
+  probeLightWrapper = null;
+  probeDarkWrapper = null;
+  probeLightEl = null;
+  probeDarkEl = null;
   bumpPreviewVersion();
 }
 
@@ -87,6 +97,45 @@ export function resolveColor(cssExpr: string): string {
   // An invalid expression leaves color unchanged (inherited) — treat the
   // framework's default text color as "couldn't resolve" only if empty.
   return resolved;
+}
+
+/** Return (or lazily create) a hidden probe element scoped to a specific theme via a [data-theme] wrapper. */
+function getThemedProbe(theme: "light" | "dark"): HTMLElement | null {
+  if (!activeDoc || !activeDoc.body) return null;
+  if (theme === "light") {
+    if (probeLightEl && probeLightEl.isConnected) return probeLightEl;
+    if (probeLightWrapper) probeLightWrapper.remove();
+    probeLightWrapper = activeDoc.createElement("div");
+    probeLightWrapper.setAttribute("data-theme", "light");
+    probeLightWrapper.style.cssText = "position:absolute;width:0;height:0;pointer-events:none;visibility:hidden;";
+    probeLightEl = activeDoc.createElement("div");
+    probeLightWrapper.appendChild(probeLightEl);
+    activeDoc.body.appendChild(probeLightWrapper);
+    return probeLightEl;
+  } else {
+    if (probeDarkEl && probeDarkEl.isConnected) return probeDarkEl;
+    if (probeDarkWrapper) probeDarkWrapper.remove();
+    probeDarkWrapper = activeDoc.createElement("div");
+    probeDarkWrapper.setAttribute("data-theme", "dark");
+    probeDarkWrapper.style.cssText = "position:absolute;width:0;height:0;pointer-events:none;visibility:hidden;";
+    probeDarkEl = activeDoc.createElement("div");
+    probeDarkWrapper.appendChild(probeDarkEl);
+    activeDoc.body.appendChild(probeDarkWrapper);
+    return probeDarkEl;
+  }
+}
+
+/**
+ * Resolve a CSS color expression for a specific theme regardless of the
+ * preview's current active theme. Uses a hidden probe element inside a
+ * [data-theme] wrapper so section-level theming applies correctly.
+ */
+export function resolveColorForTheme(cssExpr: string, theme: "light" | "dark"): string {
+  const el = getThemedProbe(theme);
+  if (!el || !activeDoc) return "";
+  el.style.color = "";
+  el.style.color = cssExpr;
+  return activeDoc.defaultView?.getComputedStyle(el).color ?? "";
 }
 
 /** Return (or lazily create) a 1×1 canvas context inside the active preview doc for sRGB normalisation. */
