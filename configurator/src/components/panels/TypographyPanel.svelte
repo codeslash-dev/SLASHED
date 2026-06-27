@@ -4,6 +4,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
+  import ClampField from '../inputs/ClampField.svelte';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     tokens: SlashedToken[];
@@ -24,7 +25,7 @@
   ];
 
   const BODY_STACKS = [
-    { label: "System sans-serif", value: "system-ui, -apple-system, sans-serif" },
+    { label: "System sans-serif", value: "" },
     { label: "Inter", value: "Inter, system-ui, sans-serif" },
     { label: "Georgia (serif)", value: "Georgia, 'Times New Roman', serif" },
     { label: "Merriweather (serif)", value: "'Merriweather', Georgia, serif" },
@@ -42,6 +43,15 @@
     { label: "System mono", value: "ui-monospace, monospace" },
     { label: "JetBrains Mono", value: "'JetBrains Mono', 'Fira Code', monospace" },
     { label: "Source Code Pro", value: "'Source Code Pro', 'Courier New', monospace" },
+  ];
+
+  // Curated Google Fonts for the dropdown loader.
+  const GOOGLE_FONTS = [
+    "Inter", "Roboto", "Open Sans", "Lato", "Montserrat", "Poppins",
+    "Source Sans 3", "Raleway", "Nunito", "Work Sans", "Manrope", "DM Sans",
+    "Outfit", "Plus Jakarta Sans", "Geist", "Space Grotesk", "Figtree",
+    "Merriweather", "Playfair Display", "Lora", "Source Serif 4", "Roboto Slab",
+    "IBM Plex Sans", "IBM Plex Mono", "JetBrains Mono", "Fira Code", "Space Mono",
   ];
 
   const WRAP_OPTIONS = [
@@ -85,6 +95,47 @@
     { label: "Relaxed", token: "--sf-leading-relaxed", default: 1.625 },
   ];
 
+  // ---- Per-type (body + h1–h6) editor data ------------------------------
+  // Size options map to the modular scale steps + display sizes (the framework
+  // defaults reference these var()s, so editing stays semantic).
+  const SIZE_OPTIONS = [
+    { label: "2xs", value: "var(--sf-text-2xs)", approx: 0.64 },
+    { label: "xs",  value: "var(--sf-text-xs)",  approx: 0.75 },
+    { label: "s",   value: "var(--sf-text-s)",   approx: 0.875 },
+    { label: "m",   value: "var(--sf-text-m)",   approx: 1 },
+    { label: "l",   value: "var(--sf-text-l)",   approx: 1.125 },
+    { label: "xl",  value: "var(--sf-text-xl)",  approx: 1.25 },
+    { label: "2xl", value: "var(--sf-text-2xl)", approx: 1.5 },
+    { label: "3xl", value: "var(--sf-text-3xl)", approx: 1.875 },
+    { label: "4xl", value: "var(--sf-text-4xl)", approx: 2.25 },
+    { label: "display-s", value: "var(--sf-text-display-s)", approx: 2.6 },
+    { label: "display-m", value: "var(--sf-text-display-m)", approx: 3.2 },
+    { label: "display-l", value: "var(--sf-text-display-l)", approx: 3.8 },
+  ];
+  const LEADING_OPTIONS = LEADING_TOKENS.map((t) => ({ label: t.label, value: `var(${t.token})`, num: t.default }));
+  const TRACKING_OPTIONS = TRACKING_TOKENS.map((t) => ({ label: t.label, value: `var(${t.token})`, em: t.default }));
+
+  // level → { tokens + framework defaults }
+  const TYPE_LEVELS = [
+    { id: "body", label: "Body", size: "--sf-body-font-size", lh: "--sf-body-line-height", wt: "--sf-body-font-weight", ls: null,
+      dSize: "var(--sf-text-m)", dLh: "var(--sf-leading-normal)", dWt: "400", dLs: "" },
+    { id: "h1", label: "H1", size: "--sf-h1-size", lh: "--sf-h1-line-height", wt: "--sf-h1-font-weight", ls: "--sf-h1-letter-spacing",
+      dSize: "var(--sf-text-4xl)", dLh: "var(--sf-leading-tight)", dWt: "600", dLs: "var(--sf-tracking-tight)" },
+    { id: "h2", label: "H2", size: "--sf-h2-size", lh: "--sf-h2-line-height", wt: "--sf-h2-font-weight", ls: "--sf-h2-letter-spacing",
+      dSize: "var(--sf-text-3xl)", dLh: "var(--sf-leading-tight)", dWt: "600", dLs: "var(--sf-tracking-tight)" },
+    { id: "h3", label: "H3", size: "--sf-h3-size", lh: "--sf-h3-line-height", wt: "--sf-h3-font-weight", ls: "--sf-h3-letter-spacing",
+      dSize: "var(--sf-text-2xl)", dLh: "var(--sf-leading-snug)", dWt: "600", dLs: "var(--sf-tracking-normal)" },
+    { id: "h4", label: "H4", size: "--sf-h4-size", lh: "--sf-h4-line-height", wt: "--sf-h4-font-weight", ls: "--sf-h4-letter-spacing",
+      dSize: "var(--sf-text-xl)", dLh: "var(--sf-leading-snug)", dWt: "600", dLs: "var(--sf-tracking-normal)" },
+    { id: "h5", label: "H5", size: "--sf-h5-size", lh: "--sf-h5-line-height", wt: "--sf-h5-font-weight", ls: "--sf-h5-letter-spacing",
+      dSize: "var(--sf-text-l)", dLh: "var(--sf-leading-normal)", dWt: "600", dLs: "var(--sf-tracking-normal)" },
+    { id: "h6", label: "H6", size: "--sf-h6-size", lh: "--sf-h6-line-height", wt: "--sf-h6-font-weight", ls: "--sf-h6-letter-spacing",
+      dSize: "var(--sf-text-m)", dLh: "var(--sf-leading-normal)", dWt: "600", dLs: "var(--sf-tracking-wide)" },
+  ] as const;
+
+  let activeLevelId = $state<string>("h1");
+  let activeLevel = $derived(TYPE_LEVELS.find((l) => l.id === activeLevelId)!);
+
   const knobs = KNOBS_BY_DOMAIN["typography"] ?? [];
 
   function num(name: string, fallback: number) {
@@ -100,7 +151,6 @@
   let dispMax   = $derived(num("--sf-text-display-base-max", 3));
   let taper     = $derived(num("--sf-leading-taper", 0));
   let textScale = $derived(num("--sf-text-scale", 1));
-  let codeFontSize = $derived(num("--sf-code-font-size".replace("em",""), 0.875));
 
   let activeRatio = $derived(RATIO_PRESETS.find(
     (p) => Math.abs(p.value - ratioMin) < 0.0015 && Math.abs(p.value - ratioMax) < 0.0015
@@ -108,9 +158,9 @@
 
   let currentBodyFont    = $derived(overrides["--sf-font-body"] ?? "");
   let currentHeadingFont = $derived(overrides["--sf-font-heading"] ?? "");
-  let currentMonoFont    = $derived(overrides["--sf-font-mono"] ?? "");
+  let currentMonoFont    = $derived(overrides["--sf-font-mono"] ?? "ui-monospace, monospace");
 
-  let customBodyFont = $state("");
+  let googleFontChoice = $state("");
   let customFontTarget = $state<"body" | "heading">("body");
 
   function getTrackingVal(t: typeof TRACKING_TOKENS[0]): number {
@@ -141,97 +191,233 @@
     const token = target === "body" ? "--sf-font-body" : "--sf-font-heading";
     onSet(token, `'${fontName}', sans-serif`);
   }
+
+  // Per-type helpers
+  function levelVal(token: string | null, dflt: string): string {
+    if (!token) return dflt;
+    return overrides[token] ?? dflt;
+  }
+  function setLevel(token: string | null, value: string, dflt: string) {
+    if (!token) return;
+    if (value === dflt) onReset(token); else onSet(token, value);
+  }
+  // Approximate sample size (rem) for the active level's current size.
+  let sampleSize = $derived.by(() => {
+    const v = levelVal(activeLevel.size, activeLevel.dSize);
+    const opt = SIZE_OPTIONS.find((o) => o.value === v);
+    const mid = (baseMin + baseMax) / 2;
+    return Math.min((opt?.approx ?? 1) * mid * textScale, 2.4);
+  });
+  let sampleWeight = $derived.by(() => {
+    const v = levelVal(activeLevel.wt, activeLevel.dWt);
+    const n = parseInt(v);
+    return isNaN(n) ? 600 : n;
+  });
+  let sampleTracking = $derived.by(() => {
+    if (!activeLevel.ls) return 0;
+    const v = levelVal(activeLevel.ls, activeLevel.dLs);
+    const opt = TRACKING_OPTIONS.find((o) => o.value === v);
+    if (opt) return opt.em;
+    const parsed = parseFloat(v.replace("em", ""));
+    return isNaN(parsed) ? 0 : parsed;
+  });
+  let sampleLeading = $derived.by(() => {
+    const v = levelVal(activeLevel.lh, activeLevel.dLh);
+    const opt = LEADING_OPTIONS.find((o) => o.value === v);
+    if (opt) return opt.num;
+    const parsed = parseFloat(v);
+    return isNaN(parsed) ? 1.3 : parsed;
+  });
 </script>
 
 <div class="p-4 space-y-6">
 
-  <!-- FONT FAMILIES (most impactful, first) -->
-  <section class="space-y-4">
+  <!-- FONT FAMILIES (compact dropdowns) -->
+  <section class="space-y-3">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font families</div>
 
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Body font</div>
-      <div class="flex flex-col gap-1">
-        {#each BODY_STACKS as s (s.label)}
-          <button
-            onclick={() => s.value ? onSet("--sf-font-body", s.value) : onReset("--sf-font-body")}
-            class={`flex items-center gap-2 px-3 py-2 rounded-lg border text-left cursor-pointer transition-all ${
-              currentBodyFont === s.value
-                ? "bg-indigo-500/12 border-indigo-500/30 text-indigo-200"
-                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-            }`}
-          >
-            <span class="text-[12px]" style={`font-family: ${s.value || "inherit"}`}>{s.label}</span>
-            <span class="text-[9px] text-slate-600 ml-auto font-mono truncate max-w-[7rem]">{s.value || "default"}</span>
-          </button>
-        {/each}
+    {#each [
+      { label: "Body", token: "--sf-font-body", current: currentBodyFont, opts: BODY_STACKS },
+      { label: "Heading", token: "--sf-font-heading", current: currentHeadingFont, opts: HEADING_STACKS },
+      { label: "Mono", token: "--sf-font-mono", current: currentMonoFont, opts: MONO_STACKS },
+    ] as f (f.token)}
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-14 shrink-0">{f.label}</span>
+        <select
+          value={f.current}
+          onchange={(e) => {
+            const v = (e.target as HTMLSelectElement).value;
+            v ? onSet(f.token, v) : onReset(f.token);
+          }}
+          class="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+          style={`font-family: ${f.current || "inherit"}`}
+        >
+          {#each f.opts as o (o.label)}
+            <option value={o.value} style="font-family:inherit;background:#16161e;">{o.label}</option>
+          {/each}
+          {#if f.current && !f.opts.some((o) => o.value === f.current)}
+            <option value={f.current} style="background:#16161e;">Custom: {f.current.split(",")[0].replace(/['"]/g, "")}</option>
+          {/if}
+        </select>
+        {#if f.token in overrides}
+          <button onclick={() => onReset(f.token)} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
       </div>
-    </div>
+    {/each}
 
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Heading font</div>
-      <div class="flex flex-col gap-1">
-        {#each HEADING_STACKS as s (s.label)}
-          <button
-            onclick={() => s.value ? onSet("--sf-font-heading", s.value) : onReset("--sf-font-heading")}
-            class={`flex items-center gap-2 px-3 py-2 rounded-lg border text-left cursor-pointer transition-all ${
-              currentHeadingFont === s.value
-                ? "bg-indigo-500/12 border-indigo-500/30 text-indigo-200"
-                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-            }`}
-          >
-            <span class="text-[12px]" style={`font-family: ${s.value || "inherit"}`}>{s.label}</span>
-            <span class="text-[9px] text-slate-600 ml-auto font-mono truncate max-w-[7rem]">{s.value || "inherits body"}</span>
-          </button>
-        {/each}
-      </div>
-    </div>
-
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Mono font</div>
-      <div class="flex flex-col gap-1">
-        {#each MONO_STACKS as s (s.label)}
-          <button
-            onclick={() => onSet("--sf-font-mono", s.value)}
-            class={`flex items-center gap-2 px-3 py-2 rounded-lg border text-left cursor-pointer transition-all ${
-              currentMonoFont === s.value || (!currentMonoFont && s.value === "ui-monospace, monospace")
-                ? "bg-indigo-500/12 border-indigo-500/30 text-indigo-200"
-                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-            }`}
-          >
-            <span class="text-[12px] font-mono">{s.label}</span>
-            <span class="text-[9px] text-slate-600 ml-auto font-mono truncate max-w-[7rem]">{s.value.split(",")[0]}</span>
-          </button>
-        {/each}
-      </div>
-    </div>
-
-    <!-- Custom font loader -->
+    <!-- Google font loader (dropdown + custom) -->
     <div class="rounded-xl bg-white/4 border border-white/8 p-3 space-y-2">
-      <div class="text-[10px] font-semibold text-slate-400">Custom Google Font</div>
+      <div class="text-[10px] font-semibold text-slate-400">Google Font</div>
+      <div class="flex gap-2">
+        <select
+          value={googleFontChoice}
+          onchange={(e) => { googleFontChoice = (e.target as HTMLSelectElement).value; }}
+          class="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+        >
+          <option value="" style="background:#16161e;">Pick a font…</option>
+          {#each GOOGLE_FONTS as g (g)}
+            <option value={g} style="background:#16161e;">{g}</option>
+          {/each}
+        </select>
+        <div class="flex gap-1 shrink-0">
+          <button
+            onclick={() => { customFontTarget = "body"; }}
+            class={`px-2 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === "body" ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400"}`}
+          >Body</button>
+          <button
+            onclick={() => { customFontTarget = "heading"; }}
+            class={`px-2 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === "heading" ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400"}`}
+          >Heading</button>
+        </div>
+      </div>
       <input
         type="text"
-        placeholder="e.g. Roboto, Geist, Outfit…"
-        value={customBodyFont}
-        oninput={(e) => { customBodyFont = (e.target as HTMLInputElement).value; }}
+        placeholder="…or type any Google font name"
+        oninput={(e) => { googleFontChoice = (e.target as HTMLInputElement).value; }}
+        value={googleFontChoice}
         class="w-full bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
       />
-      <div class="flex gap-1">
-        <button
-          onclick={() => { customFontTarget = "body"; }}
-          class={`flex-1 py-1 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === "body" ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400"}`}
-        >Apply to body</button>
-        <button
-          onclick={() => { customFontTarget = "heading"; }}
-          class={`flex-1 py-1 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === "heading" ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400"}`}
-        >Apply to heading</button>
-      </div>
       <button
-        onclick={() => applyCustomFont(customBodyFont, customFontTarget)}
+        onclick={() => applyCustomFont(googleFontChoice, customFontTarget)}
         class="w-full py-1.5 rounded-lg bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold cursor-pointer hover:bg-indigo-600/30 transition-all"
       >
-        Load & Apply
+        Load &amp; apply to {customFontTarget}
       </button>
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- PER-TYPE (body + h1–h6) -->
+  <section class="space-y-3">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Per-type styles</div>
+
+    <!-- Level selector -->
+    <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5">
+      {#each TYPE_LEVELS as lvl (lvl.id)}
+        {@const isOv = (lvl.size in overrides) || (lvl.lh in overrides) || (lvl.wt in overrides) || (!!lvl.ls && lvl.ls in overrides)}
+        <button
+          onclick={() => { activeLevelId = lvl.id; }}
+          class={`relative flex-1 py-1 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
+            activeLevelId === lvl.id ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"
+          }`}
+        >
+          {lvl.label}
+          {#if isOv}<span class="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-indigo-400"></span>{/if}
+        </button>
+      {/each}
+    </div>
+
+    <!-- Live sample -->
+    <div class="bg-white/4 rounded-xl border border-white/8 px-3 py-3 overflow-hidden">
+      <div
+        class="text-white/85 truncate"
+        style={`font-size:${sampleSize}rem; font-weight:${sampleWeight}; letter-spacing:${sampleTracking}em; line-height:${sampleLeading}; font-family:${activeLevel.id === "body" ? (currentBodyFont || "inherit") : (currentHeadingFont || currentBodyFont || "inherit")}`}
+      >The quick brown fox
+      </div>
+    </div>
+
+    <!-- Size -->
+    <div class="flex items-center gap-2">
+      <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Size</span>
+      <select
+        value={levelVal(activeLevel.size, activeLevel.dSize)}
+        onchange={(e) => setLevel(activeLevel.size, (e.target as HTMLSelectElement).value, activeLevel.dSize)}
+        class="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+      >
+        {#each SIZE_OPTIONS as o (o.value)}
+          <option value={o.value} style="background:#16161e;">{o.label}</option>
+        {/each}
+        {#if !SIZE_OPTIONS.some((o) => o.value === levelVal(activeLevel.size, activeLevel.dSize))}
+          <option value={levelVal(activeLevel.size, activeLevel.dSize)} style="background:#16161e;">custom</option>
+        {/if}
+      </select>
+    </div>
+
+    <!-- Line height -->
+    <div class="flex items-center gap-2">
+      <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Line height</span>
+      <select
+        value={levelVal(activeLevel.lh, activeLevel.dLh)}
+        onchange={(e) => setLevel(activeLevel.lh, (e.target as HTMLSelectElement).value, activeLevel.dLh)}
+        class="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+      >
+        {#each LEADING_OPTIONS as o (o.value)}
+          <option value={o.value} style="background:#16161e;">{o.label} · {o.num}</option>
+        {/each}
+        {#if !LEADING_OPTIONS.some((o) => o.value === levelVal(activeLevel.lh, activeLevel.dLh))}
+          <option value={levelVal(activeLevel.lh, activeLevel.dLh)} style="background:#16161e;">custom</option>
+        {/if}
+      </select>
+    </div>
+
+    <!-- Weight -->
+    <div>
+      <span class="text-[10px] font-semibold text-slate-400">Weight</span>
+      <div class="flex gap-1 mt-1">
+        {#each WEIGHT_OPTIONS as w (w)}
+          {@const cur = levelVal(activeLevel.wt, activeLevel.dWt)}
+          <button
+            onclick={() => setLevel(activeLevel.wt, w, activeLevel.dWt)}
+            style={`font-weight:${parseInt(w)}`}
+            class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
+              cur === w ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+            }`}
+          >{w}</button>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Letter spacing (headings only) -->
+    {#if activeLevel.ls}
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Tracking</span>
+        <select
+          value={levelVal(activeLevel.ls, activeLevel.dLs)}
+          onchange={(e) => setLevel(activeLevel.ls, (e.target as HTMLSelectElement).value, activeLevel.dLs)}
+          class="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+        >
+          {#each TRACKING_OPTIONS as o (o.value)}
+            <option value={o.value} style="background:#16161e;">{o.label}</option>
+          {/each}
+          {#if !TRACKING_OPTIONS.some((o) => o.value === levelVal(activeLevel.ls, activeLevel.dLs))}
+            <option value={levelVal(activeLevel.ls, activeLevel.dLs)} style="background:#16161e;">custom</option>
+          {/if}
+        </select>
+      </div>
+    {/if}
+
+    <div class="flex justify-end">
+      {#if (activeLevel.size in overrides) || (activeLevel.lh in overrides) || (activeLevel.wt in overrides) || (!!activeLevel.ls && activeLevel.ls in overrides)}
+        <button
+          onclick={() => {
+            const patch: Record<string, null> = { [activeLevel.size]: null, [activeLevel.lh]: null, [activeLevel.wt]: null };
+            if (activeLevel.ls) patch[activeLevel.ls] = null;
+            onBulkChange(patch);
+          }}
+          class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer"
+        >reset {activeLevel.label}</button>
+      {/if}
     </div>
   </section>
 
@@ -243,11 +429,10 @@
 
     <!-- Font weights -->
     {#each [
-      { label: "Body",        tokenName: "--sf-font-weight-body" },
       { label: "Body strong", tokenName: "--sf-font-weight-strong" },
       { label: "Interactive", tokenName: "--sf-font-weight-interactive" },
     ] as row (row.tokenName)}
-      {@const defaultVal = WEIGHT_DEFAULTS[row.tokenName] ?? "400"}
+      {@const defaultVal = WEIGHT_DEFAULTS[row.tokenName] ?? "600"}
       {@const current = overrides[row.tokenName] ?? defaultVal}
       {@const isOverridden = row.tokenName in overrides}
       <div class="group">
@@ -330,34 +515,16 @@
   <section class="space-y-4">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Display type</div>
 
-    <!-- Compact min/max pair -->
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-2">Display base size</div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <div class="text-[9px] text-slate-600 mb-1">Min (mobile)</div>
-          <RangeWithNumber
-            value={dispMin} min={1.5} max={4} step={0.05} unit="rem"
-            onChange={(v) => onSet("--sf-text-display-base-min", String(v))}
-          />
-        </div>
-        <div>
-          <div class="text-[9px] text-slate-600 mb-1">Max (desktop)</div>
-          <RangeWithNumber
-            value={dispMax} min={2} max={6} step={0.05} unit="rem"
-            onChange={(v) => onSet("--sf-text-display-base-max", String(v))}
-          />
-        </div>
-      </div>
-      <div class="flex justify-end gap-2 mt-1">
-        {#if "--sf-text-display-base-min" in overrides || "--sf-text-display-base-max" in overrides}
-          <button
-            onclick={() => { onReset("--sf-text-display-base-min"); onReset("--sf-text-display-base-max"); }}
-            class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer"
-          >reset</button>
-        {/if}
-      </div>
-    </div>
+    <ClampField
+      title="Display base size"
+      minValue={dispMin} maxValue={dispMax}
+      min={1.5} max={6} step={0.05} unit="rem"
+      previewKind="type"
+      overridden={"--sf-text-display-base-min" in overrides || "--sf-text-display-base-max" in overrides}
+      onReset={() => { onReset("--sf-text-display-base-min"); onReset("--sf-text-display-base-max"); }}
+      onMinChange={(v) => onSet("--sf-text-display-base-min", String(v))}
+      onMaxChange={(v) => onSet("--sf-text-display-base-max", String(v))}
+    />
 
     <!-- Display weight -->
     {#each [
@@ -393,69 +560,27 @@
 
   <div class="h-px bg-white/6"></div>
 
-  <!-- FINE-TUNE (type ramp + rhythm + tracking) -->
+  <!-- FINE-TUNE (type ramp clamp + rhythm + tracking) -->
   <section class="space-y-4">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fine-tune</div>
 
-    <!-- Type ramp -->
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-2">Modular scale ratio</div>
-      <div class="grid grid-cols-2 gap-1">
-        {#each RATIO_PRESETS as p (p.value)}
-          <button
-            onclick={() => onBulkChange({ "--sf-text-ratio-min": String(p.value), "--sf-text-ratio-max": String(p.value) })}
-            class={`px-2 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer text-left ${
-              activeRatio?.value === p.value
-                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
-            }`}
-          >
-            {p.label}
-          </button>
-        {/each}
-      </div>
-      {#if !activeRatio}
-        <div class="mt-3 space-y-2 pl-2 border-l border-amber-500/25">
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <div class="text-[9px] text-slate-600 mb-1">Ratio min (mobile)</div>
-              <RangeWithNumber value={ratioMin} min={1.05} max={1.8} step={0.001}
-                onChange={(v) => onSet("--sf-text-ratio-min", String(v))} />
-            </div>
-            <div>
-              <div class="text-[9px] text-slate-600 mb-1">Ratio max (desktop)</div>
-              <RangeWithNumber value={ratioMax} min={1.05} max={1.8} step={0.001}
-                onChange={(v) => onSet("--sf-text-ratio-max", String(v))} />
-            </div>
-          </div>
-        </div>
-      {/if}
-    </div>
-
-    <!-- Compact base size min/max -->
-    <div>
-      <div class="text-[10px] font-semibold text-slate-400 mb-2">Base size (fluid clamp)</div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <div class="text-[9px] text-slate-600 mb-1">Min (mobile)</div>
-          <RangeWithNumber value={baseMin} min={0.7} max={1.4} step={0.01} unit="rem"
-            onChange={(v) => onSet("--sf-text-base-min", String(v))} />
-        </div>
-        <div>
-          <div class="text-[9px] text-slate-600 mb-1">Max (desktop)</div>
-          <RangeWithNumber value={baseMax} min={0.875} max={2} step={0.01} unit="rem"
-            onChange={(v) => onSet("--sf-text-base-max", String(v))} />
-        </div>
-      </div>
-      <div class="flex justify-end gap-2 mt-1">
-        {#if "--sf-text-base-min" in overrides || "--sf-text-base-max" in overrides}
-          <button
-            onclick={() => { onReset("--sf-text-base-min"); onReset("--sf-text-base-max"); }}
-            class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer"
-          >reset</button>
-        {/if}
-      </div>
-    </div>
+    <ClampField
+      title="Base size &amp; scale (fluid clamp)"
+      minValue={baseMin} maxValue={baseMax}
+      min={0.7} max={2} step={0.01} unit="rem"
+      previewKind="type"
+      overridden={"--sf-text-base-min" in overrides || "--sf-text-base-max" in overrides}
+      onReset={() => { onReset("--sf-text-base-min"); onReset("--sf-text-base-max"); }}
+      onMinChange={(v) => onSet("--sf-text-base-min", String(v))}
+      onMaxChange={(v) => onSet("--sf-text-base-max", String(v))}
+      ratioPresets={RATIO_PRESETS}
+      activeRatioValue={activeRatio?.value}
+      ratioMin={ratioMin} ratioMax={ratioMax}
+      ratioMin_bound={1.05} ratioMax_bound={1.8}
+      onRatioPreset={(v) => onBulkChange({ "--sf-text-ratio-min": String(v), "--sf-text-ratio-max": String(v) })}
+      onRatioMinChange={(v) => onSet("--sf-text-ratio-min", String(v))}
+      onRatioMaxChange={(v) => onSet("--sf-text-ratio-max", String(v))}
+    />
 
     <!-- Power knobs -->
     <div class="space-y-4">
@@ -492,7 +617,7 @@
       onReset={() => onReset("--sf-leading-taper")}
     />
 
-    <!-- Letter-spacing scale (real tokens — propagates to headings automatically) -->
+    <!-- Letter-spacing scale -->
     <div>
       <div class="text-[10px] font-semibold text-slate-400 mb-2">Letter-spacing scale</div>
       <p class="text-[9px] text-slate-600 mb-2">

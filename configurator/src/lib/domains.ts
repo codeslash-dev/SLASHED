@@ -1,7 +1,7 @@
 /** Token name substrings that define each domain's scope. Shared by DomainPanel and check-curation. */
 export const DOMAIN_PATTERNS: Record<string, string[]> = {
   colors: [
-    "color", "contrast", "palette-mix", "lumlocker", "scrim",
+    "color", "contrast", "palette-mix", "lumlocker", "scrim", "gradient",
   ],
   typography: [
     "font", "--sf-text", "leading", "tracking", "weight", "body-font", "heading-font",

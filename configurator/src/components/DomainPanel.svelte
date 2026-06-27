@@ -16,6 +16,7 @@
   import ExportPanel from './panels/ExportPanel.svelte';
   import GenericTokenPanel from './panels/GenericTokenPanel.svelte';
   import AllTokensTab from './panels/AllTokensTab.svelte';
+  import WcagPanel from './panels/WcagPanel.svelte';
 
   let { domain, tokens, overrides, onSet, onReset, onBulkChange, onApplyTheme, onSelectDomain, onResetAll }: {
     domain: string;
@@ -71,7 +72,7 @@
   {:else if domain === "themes"}
     <ThemesPanel {overrides} {onApplyTheme} {onResetAll} />
   {:else if domain === "wcag"}
-    <GenericTokenPanel domain="wcag" {tokens} {overrides} {onSet} {onReset} patterns={["contrast", "focus", "a11y", "accessible"]} />
+    <WcagPanel {tokens} {overrides} {onSet} {onBulkChange} />
   {:else if domain === "setup" || domain === "cheatsheet"}
     <ExportPanel {overrides} />
   {/if}
@@ -82,7 +83,7 @@
       {#if view === "controls"}
         <div class="h-full overflow-y-auto">
           {#if domain === "colors"}
-            <ColorsPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} />
+            <ColorsPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} {onSelectDomain} />
           {:else if domain === "typography"}
             <TypographyPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "spacing"}
