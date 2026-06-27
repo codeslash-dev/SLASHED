@@ -68,6 +68,7 @@
       </button>
       <button
         onclick={() => { showInternal = !showInternal; }}
+      aria-expanded={showInternal}
         class={`flex items-center gap-1 text-[9px] font-bold transition-colors cursor-pointer ${showInternal ? "text-amber-400" : "text-slate-600 hover:text-slate-400"}`}
       >
         <div class={`w-2.5 h-2.5 rounded border flex items-center justify-center transition-colors ${showInternal ? "bg-amber-600 border-amber-500" : "border-white/20"}`}>

@@ -47,6 +47,14 @@
   let animating = $state(false);
   let animOffsetX = $state(0);
 
+  let showGlobalScale = $state(true);
+  let showThemeTransition = $state(true);
+  let showDurationOverrides = $state(true);
+  let showStaggerBase = $state(true);
+  let showEasingCurves = $state(true);
+  let showAnimationDemo = $state(true);
+  let showDurationPreview = $state(true);
+
   function getDuration(token: string, base: number): number {
     const raw = overrides[token];
     if (raw) return parseFloat(raw);
@@ -111,170 +119,233 @@
 
   <!-- Global scale knob -->
   <div>
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Global scale</div>
-    <div class="space-y-4">
-      {#each knobs as k (k.name)}
-        <PowerKnobRow
-          knob={k}
-          {overrides}
-          onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
-        />
-      {/each}
-    </div>
+    <button
+      onclick={() => { showGlobalScale = !showGlobalScale; }}
+      aria-expanded={showGlobalScale}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global scale</div>
+      <span class="text-[10px] text-slate-500">{showGlobalScale ? "▲" : "▼"}</span>
+    </button>
+    {#if showGlobalScale}
+      <div class="mt-3 space-y-4">
+        {#each knobs as k (k.name)}
+          <PowerKnobRow
+            knob={k}
+            {overrides}
+            onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
+          />
+        {/each}
+      </div>
+    {/if}
   </div>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- THEME TRANSITION -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Theme transition</div>
-    <SliderRow
-      label="Dark/light switch speed" value={Math.round(300 * scale)} min={0} max={600} step={10} unit="ms"
-      help="--sf-theme-transition-duration — color-scheme switch animation speed"
-      overridden={"--sf-theme-transition-duration" in overrides}
-      onChange={(v) => onSet("--sf-theme-transition-duration", `${v}ms`)}
-      onReset={() => onReset("--sf-theme-transition-duration")}
-    />
+    <button
+      onclick={() => { showThemeTransition = !showThemeTransition; }}
+      aria-expanded={showThemeTransition}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Theme transition</div>
+      <span class="text-[10px] text-slate-500">{showThemeTransition ? "▲" : "▼"}</span>
+    </button>
+    {#if showThemeTransition}
+      <SliderRow
+        label="Dark/light switch speed" value={themeTransition} min={0} max={600} step={10} unit="ms"
+        help="--sf-theme-transition-duration — color-scheme switch animation speed"
+        overridden={"--sf-theme-transition-duration" in overrides}
+        onChange={(v) => onSet("--sf-theme-transition-duration", `${v}ms`)}
+        onReset={() => onReset("--sf-theme-transition-duration")}
+      />
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- INDIVIDUAL DURATIONS -->
   <section class="space-y-4">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Duration overrides</div>
-    <p class="text-[10px] text-slate-600 leading-relaxed">
-      Set absolute ms values to override the fluid scale calculation.
-      {#if motionDisabled}<span class="text-amber-400"> (No effect while motion is disabled.)</span>{/if}
-    </p>
-    {#each DURATIONS as d (d.token)}
-      {@const computed = getDuration(d.token, d.base)}
-      <SliderRow
-        label={d.label}
-        value={computed}
-        min={0}
-        max={d.max}
-        step={10}
-        unit="ms"
-        overridden={d.token in overrides}
-        onChange={(v) => onSet(d.token, `${v}ms`)}
-        onReset={() => onReset(d.token)}
-      />
-    {/each}
+    <button
+      onclick={() => { showDurationOverrides = !showDurationOverrides; }}
+      aria-expanded={showDurationOverrides}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Duration overrides</div>
+      <span class="text-[10px] text-slate-500">{showDurationOverrides ? "▲" : "▼"}</span>
+    </button>
+    {#if showDurationOverrides}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Set absolute ms values to override the fluid scale calculation.
+        {#if motionDisabled}<span class="text-amber-400"> (No effect while motion is disabled.)</span>{/if}
+      </p>
+      {#each DURATIONS as d (d.token)}
+        {@const computed = getDuration(d.token, d.base)}
+        <SliderRow
+          label={d.label}
+          value={computed}
+          min={0}
+          max={d.max}
+          step={10}
+          unit="ms"
+          overridden={d.token in overrides}
+          onChange={(v) => onSet(d.token, `${v}ms`)}
+          onReset={() => onReset(d.token)}
+        />
+      {/each}
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- STAGGER BASE -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Stagger base</div>
-    <p class="text-[10px] text-slate-600 leading-relaxed">
-      One slider sets all five stagger delays (delay-1 through delay-5 are multiples of this base).
-    </p>
-    <div class="group">
-      <div class="flex items-center justify-between mb-1.5">
-        <span class="text-[11px] font-semibold text-slate-200">Stagger base</span>
-        {#if STAGGER_TOKENS.some(t => t in overrides)}
-          <button onclick={resetStagger} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer opacity-0 group-hover:opacity-100">reset</button>
-        {/if}
-      </div>
-      <SliderRow
-        label="" value={Math.round(staggerBase())} min={0} max={200} step={5} unit="ms"
-        help="Base unit for --sf-animation-delay-1 through -5"
-        overridden={STAGGER_TOKENS.some(t => t in overrides)}
-        onChange={(v) => setStaggerBase(v)}
-        onReset={resetStagger}
-      />
-    </div>
-    <!-- Stagger preview -->
-    <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-1">
-      {#each [1,2,3,4,5] as n (n)}
-        {@const delayMs = Math.round(staggerBase() * n)}
-        <div class="flex items-center gap-2">
-          <span class="text-[9px] font-mono text-slate-600 w-6">–{n}</span>
-          <div class="flex-1 h-1.5 bg-white/8 rounded-full">
-            <div class="h-full bg-indigo-500 rounded-full" style={`width: ${Math.min((delayMs / 600) * 100, 100)}%`}></div>
-          </div>
-          <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{delayMs}ms</span>
+    <button
+      onclick={() => { showStaggerBase = !showStaggerBase; }}
+      aria-expanded={showStaggerBase}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Stagger base</div>
+      <span class="text-[10px] text-slate-500">{showStaggerBase ? "▲" : "▼"}</span>
+    </button>
+    {#if showStaggerBase}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        One slider sets all five stagger delays (delay-1 through delay-5 are multiples of this base).
+      </p>
+      <div class="group">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-semibold text-slate-200">Stagger base</span>
+          {#if STAGGER_TOKENS.some(t => t in overrides)}
+            <button onclick={resetStagger} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer opacity-0 group-hover:opacity-100">reset</button>
+          {/if}
         </div>
-      {/each}
-    </div>
+        <SliderRow
+          label="" value={Math.round(staggerBase())} min={0} max={200} step={5} unit="ms"
+          help="Base unit for --sf-animation-delay-1 through -5"
+          overridden={STAGGER_TOKENS.some(t => t in overrides)}
+          onChange={(v) => setStaggerBase(v)}
+          onReset={resetStagger}
+        />
+      </div>
+      <!-- Stagger preview -->
+      <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-1">
+        {#each [1,2,3,4,5] as n (n)}
+          {@const delayMs = Math.round(staggerBase() * n)}
+          <div class="flex items-center gap-2">
+            <span class="text-[9px] font-mono text-slate-600 w-6">–{n}</span>
+            <div class="flex-1 h-1.5 bg-white/8 rounded-full">
+              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${Math.min((delayMs / 600) * 100, 100)}%`}></div>
+            </div>
+            <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{delayMs}ms</span>
+          </div>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- EASING CURVES -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Easing curves</div>
-    <p class="text-[10px] text-slate-600 leading-relaxed">
-      Customize the named easing tokens used throughout the design system.
-    </p>
-    <div class="grid grid-cols-2 gap-1.5">
-      {#each EASINGS as e (e.token)}
-        {@const isOverridden = e.token in overrides}
-        <div class={`p-2.5 rounded-xl border transition-all ${
-          isOverridden
-            ? "bg-indigo-500/10 border-indigo-500/30"
-            : "border-white/8 bg-white/3"
-        }`}>
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] font-semibold text-slate-300">{e.label}</span>
-            {#if isOverridden}
-              <button
-                onclick={() => onReset(e.token)}
-                class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer"
-              >reset</button>
-            {/if}
+    <button
+      onclick={() => { showEasingCurves = !showEasingCurves; }}
+      aria-expanded={showEasingCurves}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Easing curves</div>
+      <span class="text-[10px] text-slate-500">{showEasingCurves ? "▲" : "▼"}</span>
+    </button>
+    {#if showEasingCurves}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Customize the named easing tokens used throughout the design system.
+      </p>
+      <div class="grid grid-cols-2 gap-1.5">
+        {#each EASINGS as e (e.token)}
+          {@const isOverridden = e.token in overrides}
+          <div class={`p-2.5 rounded-xl border transition-all ${
+            isOverridden
+              ? "bg-indigo-500/10 border-indigo-500/30"
+              : "border-white/8 bg-white/3"
+          }`}>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-semibold text-slate-300">{e.label}</span>
+              {#if isOverridden}
+                <button
+                  onclick={() => onReset(e.token)}
+                  class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer"
+                >reset</button>
+              {/if}
+            </div>
+            <svg width="40" height="28" viewBox="0 0 40 28" class="overflow-visible">
+              <path d={e.preview} stroke="rgb(99 102 241 / 0.6)" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            </svg>
+            <div class="text-[8px] font-mono text-slate-600 mt-1 truncate">{e.token.replace("--sf-ease-", "")}</div>
           </div>
-          <svg width="40" height="28" viewBox="0 0 40 28" class="overflow-visible">
-            <path d={e.preview} stroke="rgb(99 102 241 / 0.6)" stroke-width="1.5" fill="none" stroke-linecap="round" />
-          </svg>
-          <div class="text-[8px] font-mono text-slate-600 mt-1 truncate">{e.token.replace("--sf-ease-", "")}</div>
-        </div>
-      {/each}
-    </div>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- ANIMATION DEMO -->
   <section class="space-y-3">
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Animation demo</div>
-    <div class="bg-white/4 rounded-xl border border-white/8 p-4">
-      <div class="relative h-10 overflow-hidden rounded">
-        <div
-          class="absolute top-1 h-8 w-8 bg-indigo-500 rounded-lg"
-          style={`transform: translateX(${animOffsetX}px); transition: transform ${getDuration("--sf-duration-normal", 250)}ms ${overrides["--sf-ease-out"] ?? "cubic-bezier(0.25, 0, 0.15, 1)"}`}
-        ></div>
+    <button
+      onclick={() => { showAnimationDemo = !showAnimationDemo; }}
+      aria-expanded={showAnimationDemo}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Animation demo</div>
+      <span class="text-[10px] text-slate-500">{showAnimationDemo ? "▲" : "▼"}</span>
+    </button>
+    {#if showAnimationDemo}
+      <div class="bg-white/4 rounded-xl border border-white/8 p-4">
+        <div class="relative h-10 overflow-hidden rounded">
+          <div
+            class="absolute top-1 h-8 w-8 bg-indigo-500 rounded-lg"
+            style={`transform: translateX(${animOffsetX}px); transition: transform ${getDuration("--sf-duration-normal", 250)}ms ${overrides["--sf-ease-out"] ?? "cubic-bezier(0.25, 0, 0.15, 1)"}`}
+          ></div>
+        </div>
+        <button
+          onclick={playDemo}
+          disabled={animating}
+          class="mt-3 w-full py-1.5 rounded-lg text-[10px] font-bold border border-indigo-500/40 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 transition-all cursor-pointer disabled:opacity-40"
+        >
+          {animating ? "Animating…" : "▶ Play"}
+        </button>
       </div>
-      <button
-        onclick={playDemo}
-        disabled={animating}
-        class="mt-3 w-full py-1.5 rounded-lg text-[10px] font-bold border border-indigo-500/40 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 transition-all cursor-pointer disabled:opacity-40"
-      >
-        {animating ? "Animating…" : "▶ Play"}
-      </button>
-    </div>
+    {/if}
   </section>
 
   <div class="h-px bg-white/6"></div>
 
   <!-- Duration preview -->
   <div>
-    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Duration preview</div>
-    <div class="bg-white/4 rounded-xl border border-white/8 p-4 space-y-3">
-      {#each DURATIONS as d (d.label)}
-        {@const actual = getDuration(d.token, d.base)}
-        <div class="flex items-center gap-3">
-          <span class="text-[10px] text-slate-500 w-14 shrink-0">{d.label}</span>
-          <div class="flex-1 h-1 bg-white/8 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-indigo-500 rounded-full"
-              style={`width: ${Math.min((actual / 1200) * 100, 100)}%`}
-            ></div>
+    <button
+      onclick={() => { showDurationPreview = !showDurationPreview; }}
+      aria-expanded={showDurationPreview}
+      class="w-full flex items-center justify-between cursor-pointer mb-2"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Duration preview</div>
+      <span class="text-[10px] text-slate-500">{showDurationPreview ? "▲" : "▼"}</span>
+    </button>
+    {#if showDurationPreview}
+      <div class="bg-white/4 rounded-xl border border-white/8 p-4 space-y-3">
+        {#each DURATIONS as d (d.label)}
+          {@const actual = getDuration(d.token, d.base)}
+          <div class="flex items-center gap-3">
+            <span class="text-[10px] text-slate-500 w-14 shrink-0">{d.label}</span>
+            <div class="flex-1 h-1 bg-white/8 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-indigo-500 rounded-full"
+                style={`width: ${Math.min((actual / 1200) * 100, 100)}%`}
+              ></div>
+            </div>
+            <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{actual}ms</span>
           </div>
-          <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{actual}ms</span>
-        </div>
-      {/each}
-    </div>
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>
