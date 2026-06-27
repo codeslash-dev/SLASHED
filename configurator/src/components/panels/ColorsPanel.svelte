@@ -146,30 +146,35 @@
     STATUS_PAIRS.push([STATUS_SOURCES[i], STATUS_SOURCES[i + 1]]);
   }
 
-  function deriveDarkFromLight(lightVal: string): string {
+  function deriveDarkFromLight(lightVal: string, colorKey: string): string {
     const { l, c, h, valid } = parseOklch(lightVal);
     if (!valid) return lightVal;
-    const darkL = Math.min(l + 0.27, 0.95);
-    const darkC = c * 0.9;
+    let darkL: number, darkC: number;
+    if (colorKey === 'base') {
+      darkL = Math.max(0.16, Math.min(1.18 - l, 0.24));
+      darkC = c * 0.5;
+    } else {
+      darkL = Math.max(0.65, Math.min(0.95 - l * 0.5, 0.88));
+      darkC = c * 0.9;
+    }
     return stringifyOklch(darkL, darkC, h);
   }
 
   function handleLightChange(light: ColorSource, dark: ColorSource | undefined, newVal: string) {
-    if (dark && autoDarkSet.has(light.colorKey)) {
-      onBulkChange({ [light.name]: newVal, [dark.name]: deriveDarkFromLight(newVal) });
-    } else {
-      onSet(light.name, newVal);
-    }
+    onSet(light.name, newVal);
   }
 
   function toggleDarkMode(colorKey: string, dark: ColorSource | undefined, lightName: string) {
-    if (autoDarkSet.has(colorKey)) {
-      // Switch to manual — just remove from auto set, keep current dark value
+    const darkOverridden = !!(dark && (dark.name in overrides));
+    const effectivelyAuto = autoDarkSet.has(colorKey) && !darkOverridden;
+    if (effectivelyAuto) {
+      // Switch to manual — populate dark with the derived value as a starting point
+      const lightVal = overrides[lightName] ?? BRAND_SOURCES.find(s => s.name === lightName)?.default ?? "";
+      if (dark) onSet(dark.name, deriveDarkFromLight(lightVal, colorKey));
       autoDarkSet = new Set([...autoDarkSet].filter(k => k !== colorKey));
     } else {
-      // Switch to auto — derive dark from current light and apply
-      const lightVal = overrides[lightName] ?? BRAND_SOURCES.find(s => s.name === lightName)?.default ?? "";
-      if (dark) onSet(dark.name, deriveDarkFromLight(lightVal));
+      // Switch to auto — remove dark override so the CSS formula handles it at runtime
+      if (dark) onBulkChange({ [dark.name]: null });
       autoDarkSet = new Set([...autoDarkSet, colorKey]);
     }
   }
@@ -200,7 +205,8 @@
     </p>
     <div class="space-y-3">
       {#each BRAND_PAIRS as [light, dark] (light.name)}
-        {@const isAutoMode = autoDarkSet.has(light.colorKey)}
+        {@const darkOverridden = !!(dark && (dark.name in overrides))}
+        {@const isAutoMode = autoDarkSet.has(light.colorKey) && !darkOverridden}
         <div class="space-y-1">
           <div class="flex items-center justify-between">
             <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">{light.label}</div>
@@ -221,13 +227,7 @@
             value={overrides[light.name] ?? sourceTokenMap()[light.name]?.value ?? light.default}
             overridden={light.name in overrides}
             onChange={(v) => handleLightChange(light, dark, v)}
-            onReset={() => {
-              if (dark && isAutoMode) {
-                onBulkChange({ [light.name]: null, [dark.name]: null });
-              } else {
-                onReset(light.name);
-              }
-            }}
+            onReset={() => onReset(light.name)}
           />
           <!-- Palette swatch strip for brand colors -->
           {#if BRAND_COLOR_KEYS.includes(light.colorKey)}
@@ -252,7 +252,7 @@
             />
           {:else if dark && isAutoMode}
             <div class="text-[9px] text-slate-600 pl-1">
-              Dark: auto-derived ({deriveDarkFromLight(overrides[light.name] ?? light.default)})
+              Dark: auto-derived ({deriveDarkFromLight(overrides[light.name] ?? light.default, light.colorKey)})
             </div>
           {/if}
         </div>
