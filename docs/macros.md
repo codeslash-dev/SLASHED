@@ -194,8 +194,11 @@ Gradient mask fade for overflowing content. Pure alpha mask — respects
 the element's actual background. Reads `--sf-mask-scrim-start` /
 `--sf-mask-scrim-end` for fade depth.
 
-The base class fades the **right (inline-end) edge**. Directional
-modifier classes work standalone and target a specific edge or axis:
+All directions are **physical** (not logical): `--right` always fades
+the physical right edge regardless of writing direction. For logical
+inline-end fading in RTL layouts, add a `:dir(rtl)` override that
+swaps the gradient direction. Modifier classes work standalone and
+target a specific edge or axis:
 
 | Class | Fades |
 |---|---|
