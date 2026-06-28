@@ -54,6 +54,7 @@
   let showEasingCurves = $state(false);
   let showAnimationDemo = $state(false);
   let showDurationPreview = $state(false);
+  let showScrollTimeline = $state(false);
 
   function getDuration(token: string, base: number): number {
     const raw = overrides[token];
@@ -315,6 +316,46 @@
           {animating ? "Animating…" : "▶ Play"}
         </button>
       </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- SCROLL TIMELINE -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showScrollTimeline = !showScrollTimeline; }}
+      aria-expanded={showScrollTimeline}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll timeline range</div>
+      <span class="text-[10px] text-slate-500">{showScrollTimeline ? "▲" : "▼"}</span>
+    </button>
+    {#if showScrollTimeline}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Default animation-range for scroll-driven animations using the <span class="font-mono text-slate-400">.sf-scroll-timeline</span> utility.
+      </p>
+      {#each [
+        { label: "Range start", token: "--sf-scroll-timeline-range-start", placeholder: "entry 0%" },
+        { label: "Range end",   token: "--sf-scroll-timeline-range-end",   placeholder: "cover 30%" },
+      ] as r (r.token)}
+        <div class="flex items-center gap-2">
+          <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">{r.label}</div>
+          <input
+            type="text"
+            value={overrides[r.token] ?? ""}
+            placeholder={r.placeholder}
+            oninput={(e) => {
+              const v = (e.target as HTMLInputElement).value.trim();
+              v ? onSet(r.token, v) : onReset(r.token);
+            }}
+            class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+          />
+          {#if r.token in overrides}
+            <button onclick={() => onReset(r.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+          {/if}
+        </div>
+      {/each}
     {/if}
   </section>
 

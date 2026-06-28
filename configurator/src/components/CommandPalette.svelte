@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { SlashedToken } from '../types';
+  import { domainOf } from '../lib/domains';
 
   let { tokens, overrides, onNavigate, onClose }: {
     tokens: SlashedToken[];
@@ -12,28 +13,6 @@
   let query = $state("");
   let selectedIndex = $state(0);
   let inputEl = $state<HTMLInputElement | null>(null);
-
-  const DOMAIN_MAP: Record<string, string> = {
-    macros: "macros", prose: "macros", "flow-space": "macros", "line-clamp": "macros",
-    aspect: "macros", "scroll-shadow": "macros", scrim: "macros", "surface-color": "macros",
-    colors: "colors", colour: "colors", color: "colors", gradient: "colors", lumlocker: "colors", "palette-mix": "colors", contrast: "colors",
-    typography: "typography", font: "typography", text: "typography", leading: "typography", tracking: "typography",
-    spacing: "spacing", space: "spacing", gap: "spacing", section: "spacing",
-    layout: "layout", container: "layout", grid: "layout", center: "layout", sidebar: "layout", header: "layout", bento: "layout", sticky: "layout",
-    borders: "borders", border: "borders", radius: "borders", focus: "borders", divider: "borders", ring: "borders",
-    shadows: "shadows", shadow: "shadows", elevation: "shadows", glow: "shadows",
-    motion: "motion", duration: "motion", ease: "motion", easing: "motion", animation: "motion", delay: "motion", transition: "motion",
-    effects: "effects", blur: "effects", opacity: "effects", scrollbar: "effects", scroll: "effects",
-    misc: "misc",
-  };
-
-  function inferDomain(name: string): string {
-    const lower = name.replace(/^--sf-/, "").toLowerCase();
-    for (const [key, domain] of Object.entries(DOMAIN_MAP)) {
-      if (lower.includes(key)) return domain;
-    }
-    return "misc";
-  }
 
   const DOMAIN_LABELS: Record<string, string> = {
     colors: "Colors", typography: "Typography", spacing: "Spacing", layout: "Layout",
@@ -50,7 +29,7 @@
       const nameMatch = t.name.toLowerCase().includes(q);
       const descMatch = t.description?.toLowerCase().includes(q) ?? false;
       if (nameMatch || descMatch) {
-        matches.push({ token: t, domain: inferDomain(t.name), overridden: t.name in overrides });
+        matches.push({ token: t, domain: domainOf(t.name), overridden: t.name in overrides });
         if (matches.length >= 40) break;
       }
     }
