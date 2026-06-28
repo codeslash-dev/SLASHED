@@ -2569,7 +2569,7 @@
         </div>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-overflow-fade</code> — end-edge mask</h3>
-        <div class="sf-overflow-fade" style="inline-size: 24rem; --sf-scroll-shadow-size: 4rem">
+        <div class="sf-overflow-fade" style="inline-size: 24rem">
           <div class="sf-cluster sf-cluster--no-wrap" style="white-space: nowrap">
             <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-one</span>
             <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-two</span>
@@ -2577,6 +2577,16 @@
             <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-four</span>
             <span style="background: var(--sf-color-inset); padding: var(--sf-space-2xs) var(--sf-space-s); border-radius: var(--sf-radius-pill)">tag-five</span>
           </div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-overflow-fade--*</code> — directional variants</h3>
+        <div style="display: grid; gap: var(--sf-space-s); grid-template-columns: repeat(3, 1fr)">
+          <div class="sf-overflow-fade--right" style="white-space: nowrap; font-size: var(--sf-text-s)">right: tag-one tag-two tag-three tag-four tag-five</div>
+          <div class="sf-overflow-fade--left" style="white-space: nowrap; font-size: var(--sf-text-s)">left: tag-one tag-two tag-three tag-four tag-five</div>
+          <div class="sf-overflow-fade--inline" style="white-space: nowrap; font-size: var(--sf-text-s)">inline: tag-one tag-two tag-three tag-four tag-five</div>
+          <div class="sf-overflow-fade--top" style="block-size: 4rem; font-size: var(--sf-text-s)">top: line one<br>line two<br>line three<br>line four<br>line five</div>
+          <div class="sf-overflow-fade--bottom" style="block-size: 4rem; font-size: var(--sf-text-s)">bottom: line one<br>line two<br>line three<br>line four<br>line five</div>
+          <div class="sf-overflow-fade--block" style="block-size: 4rem; font-size: var(--sf-text-s)">block: line one<br>line two<br>line three<br>line four<br>line five</div>
         </div>
 
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-no-tap-highlight</code> — suppress mobile tap overlay</h3>
