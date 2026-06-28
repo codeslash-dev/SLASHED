@@ -6,7 +6,8 @@
   import StatusBar from './components/shell/StatusBar.svelte';
   import PreviewPanel from './components/shell/PreviewPanel.svelte';
   import DomainPanel from './components/DomainPanel.svelte';
-  import { Ja, Ga, fa } from './lib/codec';
+  import { fa } from './lib/codec';
+  import { loadInitialOverrides, persistOverrides } from './lib/persistence';
   import { domainOf } from './lib/domains';
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
@@ -20,19 +21,6 @@
     wcag: "WCAG", setup: "Install", cheatsheet: "Classes",
   };
 
-  function initOverrides(): Record<string, string> {
-    if (typeof window === "undefined") return {};
-    const hash = window.location.hash;
-    if (hash?.includes("c=")) {
-      try { return Ja(hash); } catch {}
-    }
-    const local = localStorage.getItem("slashed-studio/overrides/v2");
-    if (local) {
-      try { return JSON.parse(local); } catch {}
-    }
-    return {};
-  }
-
   function overridesByDomain(ov: Record<string, string>): Record<string, number> {
     const map: Record<string, number> = {};
     for (const k of Object.keys(ov)) {
@@ -43,7 +31,7 @@
   }
 
   // Core state
-  let overrides = $state<Record<string, string>>(initOverrides());
+  let overrides = $state<Record<string, string>>(loadInitialOverrides());
   let past = $state<Record<string, string>[]>([]);
   let future = $state<Record<string, string>[]>([]);
 
@@ -60,22 +48,9 @@
   let canUndo = $derived(past.length > 0);
   let canRedo = $derived(future.length > 0);
 
-  // Persist + URL sync + style injection
+  // Persist + URL sync (standalone) or REST save (WP) + live style injection.
   $effect(() => {
-    const _ov = overrides;
-    localStorage.setItem("slashed-studio/overrides/v2", JSON.stringify(_ov));
-    const code = Ga(_ov);
-    const nextHash = code ? `c=${code}` : "";
-    if (window.location.hash.replace("#", "") !== nextHash) {
-      window.location.hash = nextHash;
-    }
-    let styleEl = document.getElementById("sf-parent-overrides");
-    if (!styleEl) {
-      styleEl = document.createElement("style");
-      styleEl.id = "sf-parent-overrides";
-      document.head.appendChild(styleEl);
-    }
-    styleEl.textContent = fa(_ov, { mode: "root", banner: false });
+    persistOverrides(overrides);
   });
 
   function setOverrides(updater: ((prev: Record<string, string>) => Record<string, string>) | Record<string, string>) {
