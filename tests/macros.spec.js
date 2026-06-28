@@ -210,6 +210,25 @@ test.describe('macro: .sf-scroll-shadow / .sf-overflow-fade', () => {
     const mask = await page.locator('#t').evaluate(el => getComputedStyle(el).maskImage);
     expect(mask).toContain('linear-gradient');
   });
+
+  for (const cls of [
+    'sf-overflow-fade--right',
+    'sf-overflow-fade--left',
+    'sf-overflow-fade--top',
+    'sf-overflow-fade--bottom',
+    'sf-overflow-fade--block',
+    'sf-overflow-fade--inline',
+  ]) {
+    test(`.${cls} sets a mask gradient and overflow hidden`, async ({ page }) => {
+      await setup(page, `<div id="t" class="${cls}" style="width:100px;height:100px"></div>`);
+      const cs = await page.locator('#t').evaluate(el => ({
+        mask:     getComputedStyle(el).maskImage,
+        overflow: getComputedStyle(el).overflow,
+      }));
+      expect(cs.mask).toContain('linear-gradient');
+      expect(cs.overflow).toBe('hidden');
+    });
+  }
 });
 
 test.describe('macro: .sf-prose / .sf-not-prose', () => {
