@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Added
+- **layout:** `.sf-bg` background-layer primitive — absolutely-positioned cover media that sits behind a parent's content (parent auto-positions and isolates via `:has()`), composing under `.sf-scrim`. New knobs: `--sf-bg-inset`, `--sf-bg-fit`, `--sf-bg-position`, `--sf-bg-radius`, `--sf-bg-z`.
+
+### Staged (commented out — not yet shipped)
+- **utilities:** staged `.sf-balance`/`.sf-pretty` (text-wrap) and `.sf-object-cover`/`-contain`/`-top`/`-center`/`-bottom` (object-fit/position) helpers in `optional/utilities.css`, commented out like `optional/components.css`. SLASHED stays BEM-first and ships no utility classes in 0.x; uncomment to activate.
+
 ## [0.6.20] - 2026-06-27
 
 ### Features

@@ -29,6 +29,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed` | `--sf-content-width`, `--sf-breakout-width` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |
 | `.sf-frame` | aspect-ratio media box | `--sf-frame-ratio` |
+| `.sf-bg` | cover media layer behind the parent's content (parent auto-positions + isolates); composes under `.sf-scrim` | `--sf-bg-inset/-fit/-position/-radius/-z` |
 | `.sf-reel` | horizontal scroll strip | `--sf-reel-*`, `--sf-mask-scrim-*` |
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |

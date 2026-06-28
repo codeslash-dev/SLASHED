@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**918 elements** — 686 tokens, 232 classes.
+**924 elements** — 691 tokens, 233 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 862 | Everyday surface. SemVer-stable. |
+| PUBLIC | 868 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (686)
+## Tokens (691)
 
 ### Component tokens (6)
 
@@ -644,7 +644,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-z-toast` | PUBLIC | knob | z | `1050` | Z-index for toast / snackbar notifications. |
 | `--sf-z-tooltip` | PUBLIC | knob | z | `1060` | Z-index for tooltips and transient floating notifications. Highest named layer in the z-index stack. Default 1060. |
 
-### Layout tokens (49)
+### Layout tokens (54)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -655,6 +655,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-bento-row-compact` | PUBLIC | knob | bento | `6rem` | Row height for compact-variant bento items. |
 | `--sf-bento-row-default` | PUBLIC | knob | bento | `10rem` | Default row height for standard bento grid cells. |
 | `--sf-bento-row-tall` | PUBLIC | knob | bento | `16rem` | Tall row height for visually prominent or hero bento cells. |
+| `--sf-bg-fit` | PUBLIC | knob | bg | `cover` | cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly. |
+| `--sf-bg-inset` | PUBLIC | knob | bg | `0` | cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly. |
+| `--sf-bg-position` | PUBLIC | knob | bg | `50% 50%` | cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly. |
+| `--sf-bg-radius` | PUBLIC | knob | bg | `0` | cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly. |
+| `--sf-bg-z` | PUBLIC | knob | bg | `-2` | cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly. |
 | `--sf-box-border-color` | PUBLIC | consumption | box | `var(--sf-color-border)` | Border color for the box layout primitive. |
 | `--sf-box-border-width` | PUBLIC | knob | box | `0` | Border width for the box layout primitive. |
 | `--sf-box-padding` | PUBLIC | consumption | box | `var(--sf-space-m)` | Inner padding for the box layout primitive. |
@@ -726,7 +731,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (232)
+## Classes (233)
 
 ### Accessibility (8)
 
@@ -741,7 +746,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
-### Layout primitives (127)
+### Layout primitives (128)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -756,6 +761,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |
 | `.sf-bento-tall` | PUBLIC | layout | Bento grid | Span modifier for a bento item: doubles the row height (tall card). |
 | `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
+| `.sf-bg` | PUBLIC | layout | — | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img… |
 | `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
 | `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
