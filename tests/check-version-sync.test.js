@@ -45,18 +45,14 @@ function buildFixture(version = '1.2.3') {
 }
 
 /**
- * Run the checker script against `dir` by copying it with ROOT patched to `dir`.
+ * Run the checker script against `dir` via the SLASHED_ROOT env var override.
  * Returns the spawnSync result { status, stdout, stderr }.
  */
 function runChecker(dir) {
-  const src = fs.readFileSync(CHECKER, 'utf8');
-  const patched = src.replace(
-    /const ROOT = path\.resolve\(import\.meta\.dirname,\s*'\.\.'\);/,
-    `const ROOT = ${JSON.stringify(dir)};`
-  );
-  const tmpScript = path.join(dir, '_check-version-sync.mjs');
-  fs.writeFileSync(tmpScript, patched);
-  return spawnSync(process.execPath, [tmpScript], { encoding: 'utf8' });
+  return spawnSync(process.execPath, [CHECKER], {
+    encoding: 'utf8',
+    env: { ...process.env, SLASHED_ROOT: dir },
+  });
 }
 
 describe('check-version-sync failure cases', () => {
