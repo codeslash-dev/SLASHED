@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**924 elements** — 691 tokens, 233 classes.
+**930 elements** — 691 tokens, 239 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 868 | Everyday surface. SemVer-stable. |
+| PUBLIC | 874 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -731,7 +731,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (233)
+## Classes (239)
 
 ### Accessibility (8)
 
@@ -879,7 +879,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (36)
+### Macro classes (42)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -896,6 +896,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-no-tap-highlight` | PUBLIC | macro | No tap highlight | Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state. |
 | `.sf-not-prose` | PUBLIC | macro | Prose | Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles. |
 | `.sf-overflow-fade` | PUBLIC | macro | Overflow fade | Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container. |
+| `.sf-overflow-fade--block` | PUBLIC | macro | — | Overflow fade variant: fades both the top and bottom edges simultaneously (block axis). |
+| `.sf-overflow-fade--bottom` | PUBLIC | macro | — | Overflow fade variant: fades the bottom (block-end) edge. |
+| `.sf-overflow-fade--inline` | PUBLIC | macro | — | Overflow fade variant: fades both the left and right edges simultaneously (inline axis). |
+| `.sf-overflow-fade--left` | PUBLIC | macro | — | Overflow fade variant: fades the left (inline-start) edge. |
+| `.sf-overflow-fade--right` | PUBLIC | macro | — | Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour. |
+| `.sf-overflow-fade--top` | PUBLIC | macro | — | Overflow fade variant: fades the top (block-start) edge. |
 | `.sf-prose` | PUBLIC | macro | Prose | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
 | `.sf-scrim` | PUBLIC | macro | Scrim | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
 | `.sf-scrim__content` | PUBLIC | macro | Scrim | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |

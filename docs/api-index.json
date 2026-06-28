@@ -27,14 +27,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 924,
+      "total": 930,
       "by_type": {
-        "class": 233,
+        "class": 239,
         "token": 691
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 868,
+        "PUBLIC": 874,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -42,8 +42,8 @@
         "knob": 225
       },
       "tokens": 691,
-      "classes": 233,
-      "sf_classes": 184,
+      "classes": 239,
+      "sf_classes": 190,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
@@ -52,7 +52,7 @@
         "Core tokens": 608,
         "Layout primitives": 128,
         "Layout tokens": 54,
-        "Macro classes": 36,
+        "Macro classes": 42,
         "Macro tokens": 23,
         "Motion / animation": 15,
         "Print": 4,
@@ -23615,6 +23615,156 @@
       "description": "Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container.",
       "isVariant": false,
       "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overflow-fade--block",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overflow-fade--block",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overflow fade variant: fades both the top and bottom edges simultaneously (block axis).",
+      "isVariant": true,
+      "baseClass": "sf-overflow-fade",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overflow-fade--bottom",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overflow-fade--bottom",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overflow fade variant: fades the bottom (block-end) edge.",
+      "isVariant": true,
+      "baseClass": "sf-overflow-fade",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overflow-fade--inline",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overflow-fade--inline",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overflow fade variant: fades both the left and right edges simultaneously (inline axis).",
+      "isVariant": true,
+      "baseClass": "sf-overflow-fade",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overflow-fade--left",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overflow-fade--left",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overflow fade variant: fades the left (inline-start) edge.",
+      "isVariant": true,
+      "baseClass": "sf-overflow-fade",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overflow-fade--right",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overflow-fade--right",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour.",
+      "isVariant": true,
+      "baseClass": "sf-overflow-fade",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overflow-fade--top",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overflow-fade--top",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overflow fade variant: fades the top (block-start) edge.",
+      "isVariant": true,
+      "baseClass": "sf-overflow-fade",
       "optional": false,
       "layer": "slashed.macros",
       "sourceFiles": [

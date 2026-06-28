@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 691,
-      "sf_classes": 184,
+      "sf_classes": 190,
       "is_classes": 40
     }
   },
@@ -841,6 +841,12 @@
     "sf-no-tap-highlight",
     "sf-not-prose",
     "sf-overflow-fade",
+    "sf-overflow-fade--block",
+    "sf-overflow-fade--bottom",
+    "sf-overflow-fade--inline",
+    "sf-overflow-fade--left",
+    "sf-overflow-fade--right",
+    "sf-overflow-fade--top",
     "sf-pancake",
     "sf-prose",
     "sf-reel",

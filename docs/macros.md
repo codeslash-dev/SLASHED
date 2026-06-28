@@ -190,19 +190,39 @@ For horizontal snap, use the `.sf-reel` layout primitive.
 
 ## `.sf-overflow-fade`
 
-End-edge horizontal fade for inline content that overflows its
-container (e.g. a row of tags, a wide code block). Pure mask, so it
-respects the element's actual background.
+Gradient mask fade for overflowing content. Pure alpha mask — respects
+the element's actual background. Reads `--sf-mask-scrim-start` /
+`--sf-mask-scrim-end` for fade depth.
+
+All directions are **physical** (not logical): `--right` always fades
+the physical right edge regardless of writing direction. For logical
+inline-end fading in RTL layouts, add a `:dir(rtl)` override that
+swaps the gradient direction. Modifier classes work standalone and
+target a specific edge or axis:
+
+| Class | Fades |
+|---|---|
+| `.sf-overflow-fade` | right edge (default) |
+| `.sf-overflow-fade--right` | right edge (explicit) |
+| `.sf-overflow-fade--left` | left edge |
+| `.sf-overflow-fade--top` | top edge |
+| `.sf-overflow-fade--bottom` | bottom edge |
+| `.sf-overflow-fade--block` | top **and** bottom edges |
+| `.sf-overflow-fade--inline` | left **and** right edges |
 
 ```html
-<div class="sf-overflow-fade" style="white-space: nowrap; overflow: hidden">
-  <span class="tag">…</span>
+<!-- Single edge -->
+<div class="sf-overflow-fade" style="white-space: nowrap">
   <span class="tag">…</span>
   <span class="tag">…</span>
 </div>
-```
 
-Reads `--sf-scroll-shadow-size` for the fade width.
+<!-- Both inline edges (left + right) -->
+<div class="sf-overflow-fade--inline" style="white-space: nowrap">…</div>
+
+<!-- Bottom-only (e.g. truncated prose preview) -->
+<div class="sf-overflow-fade--bottom" style="max-height: 6rem">…</div>
+```
 
 ---
 

@@ -1685,6 +1685,66 @@
       "layer": "slashed.macros"
     },
     {
+      "name": "sf-overflow-fade--block",
+      "selector": ".sf-overflow-fade--block",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Overflow fade variant: fades both the top and bottom edges simultaneously (block axis).",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-overflow-fade--bottom",
+      "selector": ".sf-overflow-fade--bottom",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Overflow fade variant: fades the bottom (block-end) edge.",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-overflow-fade--inline",
+      "selector": ".sf-overflow-fade--inline",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Overflow fade variant: fades both the left and right edges simultaneously (inline axis).",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-overflow-fade--left",
+      "selector": ".sf-overflow-fade--left",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Overflow fade variant: fades the left (inline-start) edge.",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-overflow-fade--right",
+      "selector": ".sf-overflow-fade--right",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour.",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-overflow-fade--top",
+      "selector": ".sf-overflow-fade--top",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Overflow fade variant: fades the top (block-start) edge.",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
       "name": "sf-pancake",
       "selector": ".sf-pancake",
       "kind": "layout",
