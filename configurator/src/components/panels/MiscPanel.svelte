@@ -592,6 +592,9 @@
           {@const cur = overrides[f.token] ?? "0"}
           <div class="flex items-center gap-2 py-0.5">
             <button
+              type="button"
+              aria-label={f.label}
+              aria-pressed={cur === "1"}
               onclick={() => cur === "1" ? onReset(f.token) : onSet(f.token, "1")}
               class={`w-8 h-4 rounded-full transition-colors relative cursor-pointer shrink-0 ${cur === "1" ? "bg-indigo-600" : "bg-white/10"}`}
             >
