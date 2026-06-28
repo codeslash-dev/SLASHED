@@ -4,6 +4,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import StylePresetCards from '../inputs/StylePresetCards.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import ColorInput from '../inputs/ColorInput.svelte';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
@@ -85,18 +86,14 @@
     {#if showShadowColor}
       <div>
         <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Shadow color</div>
-        <div class="flex items-center gap-2">
-          <input
-            type="color"
-            value={shadowColor || "#1a1a2e"}
-            oninput={(e) => onSet("--sf-shadow-color", (e.target as HTMLInputElement).value)}
-            class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-          />
-          <span class="text-[9px] font-mono text-slate-400 flex-1">{shadowColor || "auto (neutral hue)"}</span>
-          {#if "--sf-shadow-color" in overrides}
-            <button onclick={() => onReset("--sf-shadow-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-          {/if}
-        </div>
+        <ColorInput
+          token="--sf-shadow-color"
+          value={shadowColor}
+          placeholder="auto (neutral hue)"
+          isOverridden={"--sf-shadow-color" in overrides}
+          onSet={(v) => onSet("--sf-shadow-color", v)}
+          onReset={() => onReset("--sf-shadow-color")}
+        />
         <p class="text-[9px] text-slate-600 mt-1">Warm, cool or brand-tinted shadows. Default uses neutral hue.</p>
       </div>
     {/if}
@@ -139,18 +136,14 @@
       {#if !glowDisabled}
         <div>
           <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Glow color</div>
-          <div class="flex items-center gap-2">
-            <input
-              type="color"
-              value={shadowGlowColor || "#6366f1"}
-              oninput={(e) => onSet("--sf-shadow-glow-color", (e.target as HTMLInputElement).value)}
-              class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-            />
-            <span class="text-[9px] font-mono text-slate-400 flex-1">{shadowGlowColor || "default (primary color)"}</span>
-            {#if "--sf-shadow-glow-color" in overrides}
-              <button onclick={() => onReset("--sf-shadow-glow-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-            {/if}
-          </div>
+          <ColorInput
+            token="--sf-shadow-glow-color"
+            value={shadowGlowColor}
+            placeholder="default (primary color)"
+            isOverridden={"--sf-shadow-glow-color" in overrides}
+            onSet={(v) => onSet("--sf-shadow-glow-color", v)}
+            onReset={() => onReset("--sf-shadow-glow-color")}
+          />
           <p class="text-[9px] text-slate-600 mt-1">Which brand color radiates the glow. Defaults to primary.</p>
         </div>
       {/if}

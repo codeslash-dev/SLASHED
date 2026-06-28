@@ -1,5 +1,6 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
+  import ColorInput from '../inputs/ColorInput.svelte';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
@@ -180,33 +181,25 @@
       <div class="space-y-2">
         <div>
           <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Selection background</div>
-          <div class="flex items-center gap-2">
-            <input
-              type="color"
-              value={overrides["--sf-color-selection-bg"] ?? "#6366f1"}
-              oninput={(e) => onSet("--sf-color-selection-bg", (e.target as HTMLInputElement).value)}
-              class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-            />
-            <span class="text-[9px] font-mono text-slate-400 flex-1">{overrides["--sf-color-selection-bg"] ?? "default"}</span>
-            {#if "--sf-color-selection-bg" in overrides}
-              <button onclick={() => onReset("--sf-color-selection-bg")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-            {/if}
-          </div>
+          <ColorInput
+            token="--sf-color-selection-bg"
+            value={overrides["--sf-color-selection-bg"] ?? ""}
+            placeholder="default"
+            isOverridden={"--sf-color-selection-bg" in overrides}
+            onSet={(v) => onSet("--sf-color-selection-bg", v)}
+            onReset={() => onReset("--sf-color-selection-bg")}
+          />
         </div>
         <div>
           <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Selection text color</div>
-          <div class="flex items-center gap-2">
-            <input
-              type="color"
-              value={overrides["--sf-color-selection-text"] ?? "#ffffff"}
-              oninput={(e) => onSet("--sf-color-selection-text", (e.target as HTMLInputElement).value)}
-              class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-            />
-            <span class="text-[9px] font-mono text-slate-400 flex-1">{overrides["--sf-color-selection-text"] ?? "default"}</span>
-            {#if "--sf-color-selection-text" in overrides}
-              <button onclick={() => onReset("--sf-color-selection-text")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-            {/if}
-          </div>
+          <ColorInput
+            token="--sf-color-selection-text"
+            value={overrides["--sf-color-selection-text"] ?? ""}
+            placeholder="default"
+            isOverridden={"--sf-color-selection-text" in overrides}
+            onSet={(v) => onSet("--sf-color-selection-text", v)}
+            onReset={() => onReset("--sf-color-selection-text")}
+          />
         </div>
         <!-- Selection preview -->
         <div class="bg-white/4 rounded-xl border border-white/8 p-3">
@@ -320,18 +313,14 @@
     {#if showCaretLinks}
       <div>
         <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Caret color</div>
-        <div class="flex items-center gap-2">
-          <input
-            type="color"
-            value={caretColor || "#6366f1"}
-            oninput={(e) => onSet("--sf-caret-color", (e.target as HTMLInputElement).value)}
-            class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-          />
-          <span class="text-[9px] font-mono text-slate-400 flex-1">{caretColor || "default (action color)"}</span>
-          {#if "--sf-caret-color" in overrides}
-            <button onclick={() => onReset("--sf-caret-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-          {/if}
-        </div>
+        <ColorInput
+          token="--sf-caret-color"
+          value={caretColor}
+          placeholder="default (action color)"
+          isOverridden={"--sf-caret-color" in overrides}
+          onSet={(v) => onSet("--sf-caret-color", v)}
+          onReset={() => onReset("--sf-caret-color")}
+        />
       </div>
       <SliderRow
         label="Underline offset" value={underlineOffset} min={0} max={0.5} step={0.01} unit="em"

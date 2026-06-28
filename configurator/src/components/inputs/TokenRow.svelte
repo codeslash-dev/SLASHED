@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SlashedToken } from '../../types';
+  import { resolveColor, previewVersion } from '../../lib/previewResolver.svelte';
 
   let { token, overrideValue, onSet, onReset }: {
     token: SlashedToken;
@@ -21,6 +22,12 @@
 
   let displayValue = $derived(overrideValue ?? token.value);
   let isOverridden = $derived(overrideValue !== undefined);
+
+  function paintSwatch(expr: string): string {
+    void previewVersion.value;
+    return resolveColor(expr) || resolveColor(`var(${token.name})`) || expr;
+  }
+  let swatchColor = $derived(paintSwatch(displayValue));
   let type = $derived(guessType(token));
   let shortName = $derived(token.name.replace("--sf-", ""));
 </script>
@@ -31,7 +38,7 @@
   {#if type === "color"}
     <div
       class="w-4 h-4 rounded-sm border border-white/10 shrink-0"
-      style={`background: ${displayValue}`}
+      style={`background: ${swatchColor}`}
     ></div>
   {:else}
     <div class="w-4 h-4 shrink-0"></div>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
+  import ColorInput from '../inputs/ColorInput.svelte';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -152,16 +153,14 @@
       <!-- Scrim color -->
       <div class="flex items-center gap-2">
         <div class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Color</div>
-        <input
-          type="color"
-          value={scrimColor || "#000000"}
-          oninput={(e) => onSet("--sf-scrim-color", (e.target as HTMLInputElement).value)}
-          class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+        <ColorInput
+          token="--sf-scrim-color"
+          value={scrimColor}
+          placeholder="default (base color)"
+          isOverridden={"--sf-scrim-color" in overrides}
+          onSet={(v) => onSet("--sf-scrim-color", v)}
+          onReset={() => onReset("--sf-scrim-color")}
         />
-        <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{scrimColor || "default (base color)"}</span>
-        {#if "--sf-scrim-color" in overrides}
-          <button onclick={() => onReset("--sf-scrim-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-        {/if}
       </div>
 
       <div>
@@ -212,21 +211,19 @@
     </button>
     {#if showScrollbar}
       {#each [
-        { label: "Thumb color", token: "--sf-scrollbar-thumb", val: scrollbarThumb, default: "#6366f1" },
-        { label: "Track color", token: "--sf-scrollbar-track", val: scrollbarTrack, default: "transparent" },
+        { label: "Thumb color", token: "--sf-scrollbar-thumb", val: scrollbarThumb },
+        { label: "Track color", token: "--sf-scrollbar-track", val: scrollbarTrack },
       ] as row (row.token)}
         <div class="flex items-center gap-2">
           <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">{row.label}</div>
-          <input
-            type="color"
-            value={row.val || (row.default === "transparent" ? "#000000" : row.default)}
-            oninput={(e) => onSet(row.token, (e.target as HTMLInputElement).value)}
-            class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+          <ColorInput
+            token={row.token}
+            value={row.val}
+            placeholder="default"
+            isOverridden={row.token in overrides}
+            onSet={(v) => onSet(row.token, v)}
+            onReset={() => onReset(row.token)}
           />
-          <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{row.val || "default"}</span>
-          {#if row.token in overrides}
-            <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-          {/if}
         </div>
       {/each}
       <!-- Scrollbar strip preview -->

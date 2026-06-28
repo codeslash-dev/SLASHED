@@ -4,6 +4,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import StylePresetCards from '../inputs/StylePresetCards.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import ColorInput from '../inputs/ColorInput.svelte';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
@@ -103,18 +104,14 @@
       <span class="text-[10px] text-slate-500">{showBorderColor ? "▲" : "▼"}</span>
     </button>
     {#if showBorderColor}
-      <div class="flex items-center gap-2">
-        <input
-          type="color"
-          value={borderColor || "#e2e8f0"}
-          oninput={(e) => onSet("--sf-color-border", (e.target as HTMLInputElement).value)}
-          class="w-8 h-8 rounded border border-white/10 bg-transparent cursor-pointer"
-        />
-        <span class="text-[9px] font-mono text-slate-400 flex-1">{borderColor || "auto-derived"}</span>
-        {#if "--sf-color-border" in overrides}
-          <button onclick={() => onReset("--sf-color-border")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-        {/if}
-      </div>
+      <ColorInput
+        token="--sf-color-border"
+        value={borderColor}
+        placeholder="auto-derived"
+        isOverridden={"--sf-color-border" in overrides}
+        onSet={(v) => onSet("--sf-color-border", v)}
+        onReset={() => onReset("--sf-color-border")}
+      />
       <p class="text-[9px] text-slate-600">
         Drives --sf-color-border--strong, --subtle, --translucent automatically.
       </p>
@@ -242,16 +239,14 @@
     {#if showDividers}
       <div class="flex items-center gap-2">
         <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Color</div>
-        <input
-          type="color"
-          value={dividerColor || "#e2e8f0"}
-          oninput={(e) => onSet("--sf-divider-color", (e.target as HTMLInputElement).value)}
-          class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+        <ColorInput
+          token="--sf-divider-color"
+          value={dividerColor}
+          placeholder="inherits border"
+          isOverridden={"--sf-divider-color" in overrides}
+          onSet={(v) => onSet("--sf-divider-color", v)}
+          onReset={() => onReset("--sf-divider-color")}
         />
-        <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{dividerColor || "inherits border"}</span>
-        {#if "--sf-divider-color" in overrides}
-          <button onclick={() => onReset("--sf-divider-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-        {/if}
       </div>
       <SliderRow
         label="Width" value={dividerWidth} min={0.5} max={4} step={0.5} unit="px"
@@ -299,16 +294,14 @@
       />
       <div class="flex items-center gap-2">
         <div class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Ring color</div>
-        <input
-          type="color"
-          value={focusRingColor || "#6366f1"}
-          oninput={(e) => onSet("--sf-focus-ring-color", (e.target as HTMLInputElement).value)}
-          class="w-7 h-7 rounded border border-white/10 bg-transparent cursor-pointer"
+        <ColorInput
+          token="--sf-focus-ring-color"
+          value={focusRingColor}
+          placeholder="default (action)"
+          isOverridden={"--sf-focus-ring-color" in overrides}
+          onSet={(v) => onSet("--sf-focus-ring-color", v)}
+          onReset={() => onReset("--sf-focus-ring-color")}
         />
-        <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{focusRingColor || "default (action)"}</span>
-        {#if "--sf-focus-ring-color" in overrides}
-          <button onclick={() => onReset("--sf-focus-ring-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
-        {/if}
       </div>
       <!-- Focus ring preview -->
       <div class="bg-white/4 rounded-xl border border-white/8 p-4 flex items-center justify-center">
