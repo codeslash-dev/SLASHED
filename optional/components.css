@@ -13,9 +13,18 @@
   /* ============================================================
    * .sf-btn
    * Interactive call-to-action element. Apply to <button> or <a>.
-   * Variants: --secondary | --ghost | --danger
-   * States:   :disabled / .is-disabled | .is-loading
+   * Style variants:    --secondary | --ghost
+   * Semantic variants: --primary | --neutral | --success | --warning |
+   *                    --info | --danger
+   * Width:  intrinsic by default (like every other framework). --block
+   *         forces full width everywhere; --block-cq opts into full width
+   *         only inside a query container narrower than 20rem (needs a
+   *         container ancestor — the layout primitives or .sf-cq provide
+   *         one). No @media breakpoints.
+   * States: :disabled / .is-disabled | .is-loading
    * Base .sf-btn uses --sf-color-action (the default action color).
+   * Semantic hover: brand colors use the --hover token; status colors
+   * (success/warning/info/danger) use the direction-aware -strong triplet.
    * ============================================================ */
   /*
   .sf-btn {
@@ -27,7 +36,7 @@
     padding-inline:   var(--sf-btn-padding-inline);
     min-block-size:   var(--sf-touch-target);
     font-family:      inherit;
-    font-size:        var(--sf-text-m);
+    font-size:        var(--sf-btn-font-size, var(--sf-text-m));
     font-weight:      var(--sf-btn-font-weight, var(--sf-font-weight-interactive));
     line-height:      var(--sf-leading-tight);
     text-decoration:  none;
@@ -64,13 +73,64 @@
     background: color-mix(in oklab, var(--sf-color-action) 8%, transparent);
   }
 
+  .sf-btn--primary {
+    background:   var(--sf-color-primary);
+    color:        var(--sf-color-text--on-primary);
+    border-color: var(--sf-color-primary);
+  }
+  .sf-btn--primary:hover:not(:disabled, .is-disabled, .is-loading) {
+    background:   var(--sf-color-primary--hover);
+    border-color: var(--sf-color-primary--hover);
+  }
+
+  .sf-btn--neutral {
+    background:   var(--sf-color-neutral);
+    color:        var(--sf-color-text--on-neutral);
+    border-color: var(--sf-color-neutral);
+  }
+  .sf-btn--neutral:hover:not(:disabled, .is-disabled, .is-loading) {
+    background:   var(--sf-color-neutral--hover);
+    border-color: var(--sf-color-neutral--hover);
+  }
+
+  .sf-btn--success {
+    background:   var(--sf-color-success);
+    color:        var(--sf-color-text--on-success);
+    border-color: var(--sf-color-success);
+  }
+  .sf-btn--success:hover:not(:disabled, .is-disabled, .is-loading) {
+    background:   var(--sf-color-success-strong);
+    border-color: var(--sf-color-success-strong);
+  }
+
+  .sf-btn--warning {
+    background:   var(--sf-color-warning);
+    color:        var(--sf-color-text--on-warning);
+    border-color: var(--sf-color-warning);
+  }
+  .sf-btn--warning:hover:not(:disabled, .is-disabled, .is-loading) {
+    background:   var(--sf-color-warning-strong);
+    border-color: var(--sf-color-warning-strong);
+  }
+
+  .sf-btn--info {
+    background:   var(--sf-color-info);
+    color:        var(--sf-color-text--on-info);
+    border-color: var(--sf-color-info);
+  }
+  .sf-btn--info:hover:not(:disabled, .is-disabled, .is-loading) {
+    background:   var(--sf-color-info-strong);
+    border-color: var(--sf-color-info-strong);
+  }
+
   .sf-btn--danger {
     background:   var(--sf-color-danger);
     color:        var(--sf-color-text--on-danger);
     border-color: var(--sf-color-danger);
   }
   .sf-btn--danger:hover:not(:disabled, .is-disabled, .is-loading) {
-    filter: brightness(1.08);
+    background:   var(--sf-color-danger-strong);
+    border-color: var(--sf-color-danger-strong);
   }
 
   .sf-btn:disabled,
@@ -99,6 +159,16 @@
     border-radius:            var(--sf-radius-full);
     animation:                sf-spin var(--sf-duration-slower) linear infinite;
   }
+
+  .sf-btn--block {
+    inline-size: 100%;
+  }
+
+  @container (max-width: 20rem) {
+    .sf-btn--block-cq {
+      inline-size: 100%;
+    }
+  }
   */
 
   /* ============================================================
@@ -107,6 +177,9 @@
    * Concentric radius: --sf-card-radius-outer on the card,
    * --sf-card-radius on inner elements (mirrors the math in
    * tokens.components.css).
+   * Subcomponents: __media (16/9 cover image), __avatar (round),
+   * __title (unified heading size). Nested .sf-btn shrinks to
+   * --sf-card-btn-font-size.
    * ============================================================ */
   /*
   .sf-card {
@@ -134,6 +207,32 @@
     padding-block-start: var(--sf-card-gap, var(--sf-space-m));
     border-block-start:  var(--sf-border-subtle);
     margin-block-start:  var(--sf-card-gap, var(--sf-space-m));
+  }
+
+  .sf-card__media {
+    inline-size:   100%;
+    aspect-ratio:  var(--sf-card-media-ratio, var(--sf-ratio-video));
+    object-fit:    cover;
+    border-radius: var(--sf-card-media-radius, var(--sf-card-radius, var(--sf-radius-m)));
+    overflow:      clip;
+  }
+
+  .sf-card__avatar {
+    inline-size:   var(--sf-avatar-size, 2.5rem);
+    block-size:    var(--sf-avatar-size, 2.5rem);
+    aspect-ratio:  1;
+    object-fit:    cover;
+    border-radius: var(--sf-radius-full);
+    flex-shrink:   0;
+  }
+
+  .sf-card__title {
+    font-size: var(--sf-card-heading-size, var(--sf-text-xl));
+    color:     var(--sf-color-heading);
+  }
+
+  .sf-card .sf-btn {
+    --sf-btn-font-size: var(--sf-card-btn-font-size, var(--sf-text-s));
   }
   */
 

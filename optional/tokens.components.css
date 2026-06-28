@@ -22,6 +22,15 @@
      * --sf-card-border-width:   var(--sf-border-width-1);
      * --sf-card-border-color:   var(--sf-color-border);
      * --sf-card-shadow:         var(--sf-shadow-s);
+     *
+     * Smart-card subcomponents (.sf-card__media / __avatar / __title and the
+     * scoped button font-size override). Media defaults to the 16/9 ratio
+     * token; inner media radius mirrors the card's inner radius.
+     *
+     * --sf-card-media-ratio:    var(--sf-ratio-video);
+     * --sf-card-media-radius:   var(--sf-card-radius, var(--sf-radius-m));
+     * --sf-card-heading-size:   var(--sf-text-xl);
+     * --sf-card-btn-font-size:  var(--sf-text-s);
      */
 
     /* ============================================================
@@ -43,9 +52,16 @@
     --sf-btn-padding-inline: var(--sf-space-m);
     /*
      * --sf-btn-gap:          var(--sf-space-2xs);
+     * --sf-btn-font-size:    var(--sf-text-m);
      * --sf-btn-font-weight:  var(--sf-font-weight-interactive);
      * --sf-btn-min-height:   var(--sf-touch-target);
      * --sf-btn-border-width: var(--sf-border-width-1);
+     *
+     * Full-width: .sf-btn--block is unconditional; .sf-btn--block-cq
+     * stretches to 100% only inside a query container narrower than 20rem
+     * (no @media breakpoints). The threshold is a literal in the
+     * @container condition — query conditions cannot read var(), so
+     * there is no token for it.
      */
 
     /* ============================================================
