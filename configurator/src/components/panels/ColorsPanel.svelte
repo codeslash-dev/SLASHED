@@ -167,9 +167,9 @@
     (k) => k.name === "--sf-focus-ring-width"
   );
 
-  let showBrandSources = $state(true);
-  let showTextContrast = $state(true);
-  let showShadeCurve = $state(true);
+  let showBrandSources = $state(false);
+  let showTextContrast = $state(false);
+  let showShadeCurve = $state(false);
   let showStatus = $state(false);
   let showSemanticOverrides = $state(false);
   let showGradients = $state(false);
@@ -287,6 +287,46 @@
     return stringifyOklch(darkL, darkC, h);
   }
 
+  // Endpoint colors for palette step computation — approximated from source tokens so we
+  // can build concrete color-mix() expressions without relying on the themed probe.
+  function getLightSurface(): string {
+    return overrides["--sf-color-base-source-light"] ?? "oklch(0.96 0.006 250)";
+  }
+
+  function getDarkSurface(): string {
+    const custom = overrides["--sf-color-base-source-dark"];
+    if (custom) return custom;
+    return deriveDarkFromLight(overrides["--sf-color-base-source-light"] ?? "oklch(0.96 0.006 250)", "base");
+  }
+
+  function getLightText(): string {
+    const n = overrides["--sf-color-neutral-source-light"] ?? "oklch(0.52 0.025 260)";
+    const { l, c, h, valid } = parseOklch(n);
+    if (!valid) return "oklch(0.12 0.02 260)";
+    return stringifyOklch(Math.max(0.05, Math.min(l - 0.38, 0.3)), c * 0.8, h);
+  }
+
+  function getDarkText(): string {
+    const n = overrides["--sf-color-neutral-source-dark"] ?? "oklch(0.69 0.0225 260)";
+    const { l, c, h, valid } = parseOklch(n);
+    if (!valid) return "oklch(0.92 0.02 260)";
+    return stringifyOklch(Math.min(1.0, Math.max(l + 0.22, 0.88)), c * 0.8, h);
+  }
+
+  // Build a concrete color-mix() expression and resolve it via the regular preview probe.
+  // Bypasses the themed probe entirely — produces correct dark tints/shades from literal values.
+  function computePaletteSwatch(sourceColor: string, step: string, surface: string, text: string): string {
+    void previewVersion.value;
+    if (step === "500") return resolveColor(sourceColor) || sourceColor;
+    const isTint = parseInt(step) < 500;
+    const mixStepDef = MIX_STEPS.find((s) => s.label === step);
+    if (!mixStepDef) return sourceColor;
+    const pct = getMixValue(mixStepDef);
+    const endpoint = isTint ? surface : text;
+    const expr = `color-mix(in oklab, ${sourceColor} ${pct}%, ${endpoint})`;
+    return resolveColor(expr) || expr;
+  }
+
   function handleLightChange(light: ColorSource, dark: ColorSource | undefined, newVal: string) {
     onSet(light.name, newVal);
   }
@@ -364,15 +404,22 @@
             onChange={(v) => handleLightChange(light, dark, v)}
             onReset={() => onReset(light.name)}
           />
-          <!-- Palette swatch strips — light row then dark row -->
+          <!-- Palette swatch strips — light row then dark row, computed from concrete values -->
           {#if BRAND_COLOR_KEYS.includes(light.colorKey)}
+            {@const lightSrcVal = overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default}
+            {@const darkSrcVal = isAutoMode
+              ? deriveDarkFromLight(lightSrcVal, light.colorKey)
+              : (dark ? (overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default) : lightSrcVal)}
+            {@const lSurface = getLightSurface()}
+            {@const dSurface = getDarkSurface()}
+            {@const lText = getLightText()}
+            {@const dText = getDarkText()}
             <div class="mt-1 pl-1 space-y-px">
               <div class="flex items-center gap-1">
                 <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">L</span>
                 <div class="flex gap-0.5">
                   {#each SWATCH_STEPS as step (step)}
-                    {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
-                    {@const resolved = paintTheme(expr, "light", expr)}
+                    {@const resolved = computePaletteSwatch(lightSrcVal, step, lSurface, lText)}
                     <div
                       class="w-5 h-3 rounded-t border-x border-t border-white/10"
                       style={`background: ${resolved}`}
@@ -383,10 +430,9 @@
               </div>
               <div class="flex items-center gap-1">
                 <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">D</span>
-                <div class="flex gap-0.5 bg-white/12 rounded-b px-0.5 pb-0.5">
+                <div class="flex gap-0.5">
                   {#each SWATCH_STEPS as step (step)}
-                    {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
-                    {@const resolved = paintTheme(expr, "dark", expr)}
+                    {@const resolved = computePaletteSwatch(darkSrcVal, step, dSurface, dText)}
                     <div
                       class="w-5 h-3 rounded-b border-x border-b border-white/10"
                       style={`background: ${resolved}`}
@@ -516,15 +562,17 @@
                 onReset={() => onReset(dark.name)}
               />
             {/if}
-            <!-- Constrained light + dark palette strips -->
+            <!-- Constrained light + dark palette strips, computed from concrete values -->
             <div class="mt-1 pl-1 space-y-px">
-              {#each [["L", "light"], ["D", "dark"]] as [tag, side] (tag)}
+              {#each [
+                ["L", "light", overrides[light.name] ?? light.default, getLightSurface(), getLightText()],
+                ["D", "dark", dark ? (overrides[dark.name] ?? dark.default) : (overrides[light.name] ?? light.default), getDarkSurface(), getDarkText()]
+              ] as [tag, side, srcVal, sfc, txt] (tag)}
                 <div class="flex items-center gap-1">
                   <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">{tag}</span>
-                  <div class={`flex gap-0.5 ${side === "dark" ? "bg-white/12 rounded-b px-0.5 pb-0.5" : ""}`}>
+                  <div class="flex gap-0.5">
                     {#each SWATCH_STEPS as step (step)}
-                      {@const expr = `var(--sf-color-${light.colorKey}-${step})`}
-                      {@const resolved = paintTheme(expr, side as "light" | "dark", expr)}
+                      {@const resolved = computePaletteSwatch(srcVal as string, step, sfc as string, txt as string)}
                       <div
                         class="w-5 h-3 rounded-sm border border-white/10"
                         style={`background: ${resolved}`}
@@ -615,6 +663,16 @@
       <span class="text-[10px] text-slate-500">{showShadeCurve ? "▲" : "▼"}</span>
     </button>
     {#if showShadeCurve}
+    {@const _curvePrimLightSrc = overrides["--sf-color-primary-source-light"] ?? BRAND_SOURCES.find(s => s.name === "--sf-color-primary-source-light")?.default ?? "oklch(0.47 0.27 264)"}
+    {@const _curvePrimDarkOv = overrides["--sf-color-primary-source-dark"]}
+    {@const _curvePrimDarkSrc = _curvePrimDarkOv ?? (!autoDarkSet.has("primary") || _curvePrimDarkOv
+      ? (BRAND_SOURCES.find(s => s.name === "--sf-color-primary-source-dark")?.default ?? deriveDarkFromLight(_curvePrimLightSrc, "primary"))
+      : deriveDarkFromLight(_curvePrimLightSrc, "primary"))}
+    {@const _curvePrimSrc = curvePreviewSide === "light" ? _curvePrimLightSrc : _curvePrimDarkSrc}
+    {@const _curveSurface = curvePreviewSide === "light" ? getLightSurface() : getDarkSurface()}
+    {@const _curveText = curvePreviewSide === "light" ? getLightText() : getDarkText()}
+    {@const _miniSurface = curvePreviewSide === "light" ? getLightSurface() : getDarkSurface()}
+    {@const _miniText = curvePreviewSide === "light" ? getLightText() : getDarkText()}
     <p class="text-[10px] text-slate-600 leading-relaxed">
       Controls how much color is mixed into each palette step. Step 500 is always the source color.
     </p>
@@ -689,7 +747,7 @@
         {#each MIX_STEPS as s (s.name)}
           {@const val = getMixValue(s)}
           {@const step = s.label}
-          {@const swatch = paintTheme(`var(--sf-color-primary-${step})`, curvePreviewSide, `var(--sf-color-primary-${step})`)}
+          {@const swatch = computePaletteSwatch(_curvePrimSrc, step, _curveSurface, _curveText)}
           <div class="flex-1 flex flex-col items-center gap-0.5 h-full justify-end">
             <span class="text-[7px] font-mono text-slate-600">{Math.round(val)}</span>
             <div
@@ -720,11 +778,17 @@
         </div>
       </div>
       {#each BRAND_COLOR_KEYS as colorKey (colorKey)}
+        {@const miniLSrc = overrides[`--sf-color-${colorKey}-source-light`] ?? BRAND_SOURCES.find(s => s.name === `--sf-color-${colorKey}-source-light`)?.default ?? "oklch(0.5 0.15 264)"}
+        {@const miniDOvKey = `--sf-color-${colorKey}-source-dark`}
+        {@const miniDSrc = overrides[miniDOvKey] ?? (autoDarkSet.has(colorKey) && !overrides[miniDOvKey]
+          ? deriveDarkFromLight(miniLSrc, colorKey)
+          : (BRAND_SOURCES.find(s => s.name === miniDOvKey)?.default ?? deriveDarkFromLight(miniLSrc, colorKey)))}
+        {@const miniSrc = curvePreviewSide === "light" ? miniLSrc : miniDSrc}
         <div class="flex items-center gap-1.5">
           <span class="text-[7px] font-mono text-slate-600 w-12 shrink-0 truncate">{colorKey}</span>
           <div class="flex gap-0.5 flex-1">
             {#each SWATCH_STEPS as step (step)}
-              {@const swatch = paintTheme(`var(--sf-color-${colorKey}-${step})`, curvePreviewSide, `var(--sf-color-${colorKey}-${step})`)}
+              {@const swatch = computePaletteSwatch(miniSrc, step, _miniSurface, _miniText)}
               <div
                 class="flex-1 h-4 rounded-sm border border-white/10"
                 style={`background:${swatch}`}

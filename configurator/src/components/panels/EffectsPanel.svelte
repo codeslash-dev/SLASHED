@@ -36,12 +36,12 @@
   let scrollbarThumb  = $derived(overrides["--sf-scrollbar-thumb"] ?? "");
   let scrollbarTrack  = $derived(overrides["--sf-scrollbar-track"] ?? "");
 
-  let showBlur = $state(true);
-  let showOpacity = $state(true);
-  let showScrim = $state(true);
-  let showScrollbar = $state(true);
-  let showScrollShadow = $state(true);
-  let showTextShadow = $state(true);
+  let showBlur = $state(false);
+  let showOpacity = $state(false);
+  let showScrim = $state(false);
+  let showScrollbar = $state(false);
+  let showScrollShadow = $state(false);
+  let showTextShadow = $state(false);
 </script>
 
 <div class="p-4 space-y-6">

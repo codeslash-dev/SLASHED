@@ -21,10 +21,10 @@
   let shadowGlowColor = $derived(overrides["--sf-shadow-glow-color"] ?? "");
   let glowDisabled = $derived(overrides["--sf-shadow-glow"] === "none");
 
-  let showShadowAppearance = $state(true);
-  let showShadowColor = $state(true);
-  let showGlow = $state(true);
-  let showElevationPreview = $state(true);
+  let showShadowAppearance = $state(false);
+  let showShadowColor = $state(false);
+  let showGlow = $state(false);
+  let showElevationPreview = $state(false);
 </script>
 
 <div class="p-4 space-y-5">

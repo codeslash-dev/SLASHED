@@ -47,13 +47,13 @@
   let animating = $state(false);
   let animOffsetX = $state(0);
 
-  let showGlobalScale = $state(true);
-  let showThemeTransition = $state(true);
-  let showDurationOverrides = $state(true);
-  let showStaggerBase = $state(true);
-  let showEasingCurves = $state(true);
-  let showAnimationDemo = $state(true);
-  let showDurationPreview = $state(true);
+  let showGlobalScale = $state(false);
+  let showThemeTransition = $state(false);
+  let showDurationOverrides = $state(false);
+  let showStaggerBase = $state(false);
+  let showEasingCurves = $state(false);
+  let showAnimationDemo = $state(false);
+  let showDurationPreview = $state(false);
 
   function getDuration(token: string, base: number): number {
     const raw = overrides[token];

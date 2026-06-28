@@ -35,12 +35,12 @@
     { label: "Row tall",   token: "--sf-bento-row-tall",     min: 8, max: 32, step: 0.5, unit: "rem", default: 16 },
   ];
 
-  let showContainerWidths = $state(true);
-  let showCenterWrapper = $state(true);
-  let showAutoGrid = $state(true);
-  let showHeaderHeight = $state(true);
-  let showStickyOffset = $state(true);
-  let showSidebar = $state(true);
+  let showContainerWidths = $state(false);
+  let showCenterWrapper = $state(false);
+  let showAutoGrid = $state(false);
+  let showHeaderHeight = $state(false);
+  let showStickyOffset = $state(false);
+  let showSidebar = $state(false);
   let showBento = $state(false);
   let showMore = $state(false);
 

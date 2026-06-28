@@ -15,6 +15,7 @@
   import MiscPanel from './panels/MiscPanel.svelte';
   import ThemesPanel from './panels/ThemesPanel.svelte';
   import ExportPanel from './panels/ExportPanel.svelte';
+  import CheatsheetPanel from './panels/CheatsheetPanel.svelte';
   import GenericTokenPanel from './panels/GenericTokenPanel.svelte';
   import AllTokensTab from './panels/AllTokensTab.svelte';
   import WcagPanel from './panels/WcagPanel.svelte';
@@ -74,8 +75,10 @@
     <ThemesPanel {overrides} {onApplyTheme} {onResetAll} />
   {:else if domain === "wcag"}
     <WcagPanel {tokens} {overrides} {onSet} {onBulkChange} />
-  {:else if domain === "setup" || domain === "cheatsheet"}
+  {:else if domain === "setup"}
     <ExportPanel {overrides} />
+  {:else if domain === "cheatsheet"}
+    <CheatsheetPanel />
   {/if}
 {:else}
   <div class="flex flex-col h-full min-h-0">
