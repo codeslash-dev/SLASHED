@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 - **layout:** `.sf-bg` background-layer primitive — absolutely-positioned cover media that sits behind a parent's content (parent auto-positions and isolates via `:has()`), composing under `.sf-scrim`. New knobs: `--sf-bg-inset`, `--sf-bg-fit`, `--sf-bg-position`, `--sf-bg-radius`, `--sf-bg-z`.
+- **utilities:** ship `.sf-balance`/`.sf-pretty` (text-wrap escape hatches) and `.sf-object-cover`/`-contain`/`-top`/`-center`/`-bottom` (per-element object-fit/position) in `optional/utilities.css` (`optimal-utilities` and `full` bundles).
 
 ## [0.6.20] - 2026-06-27
 
