@@ -324,7 +324,7 @@
     const pct = getMixValue(mixStepDef);
     const endpoint = isTint ? surface : text;
     const expr = `color-mix(in oklab, ${sourceColor} ${pct}%, ${endpoint})`;
-    return resolveColor(expr) || sourceColor;
+    return resolveColor(expr) || expr;
   }
 
   function handleLightChange(light: ColorSource, dark: ColorSource | undefined, newVal: string) {

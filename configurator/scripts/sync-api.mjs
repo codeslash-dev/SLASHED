@@ -275,6 +275,15 @@ function main() {
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
+  if (classes.length === 0) {
+    console.error(
+      `[configurator:sync] No \`type: "class"\` entries found in ${SOURCE}.\n` +
+        `The api-index schema may have changed — refusing to write an empty ` +
+        `catalogue.`
+    );
+    process.exit(1);
+  }
+
   const classesOut = {
     _sync: { generatedBy: 'configurator/scripts/sync-api.mjs', source: out._sync.source },
     classes,

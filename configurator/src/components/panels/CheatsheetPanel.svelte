@@ -53,11 +53,17 @@
   let classGroups = $derived(groupBy(filteredClasses()));
   let tokenGroups = $derived(groupBy(filteredTokens()));
 
+  let copiedResetTimer: ReturnType<typeof setTimeout> | null = null;
+
   async function copyText(text: string) {
     try {
       await navigator.clipboard.writeText(text);
       copied = text;
-      setTimeout(() => { copied = ''; }, 1500);
+      if (copiedResetTimer) clearTimeout(copiedResetTimer);
+      copiedResetTimer = setTimeout(() => {
+        if (copied === text) copied = '';
+        copiedResetTimer = null;
+      }, 1500);
     } catch { /* ignore */ }
   }
 
@@ -135,7 +141,7 @@
                   <button
                     onclick={() => copyText(cls.selector)}
                     title="Copy selector"
-                    class="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer p-1 rounded hover:bg-white/8"
+                    class="shrink-0 opacity-40 hover:opacity-100 transition-opacity cursor-pointer p-1 rounded hover:bg-white/8"
                   >
                     {#if copied === cls.selector}
                       <Check class="w-3 h-3 text-emerald-400" />
@@ -184,7 +190,7 @@
                   <button
                     onclick={() => copyText(`var(${tok.name})`)}
                     title="Copy var()"
-                    class="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer p-1 rounded hover:bg-white/8"
+                    class="shrink-0 opacity-40 hover:opacity-100 transition-opacity cursor-pointer p-1 rounded hover:bg-white/8"
                   >
                     {#if copied === `var(${tok.name})`}
                       <Check class="w-3 h-3 text-emerald-400" />
