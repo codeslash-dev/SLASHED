@@ -687,7 +687,7 @@
           onReset={() => onReset("--sf-bg-radius")}
         />
         <SliderRow
-          label="Z-index" value={parseFloat(overrides["--sf-bg-z"] ?? "-2")} min={-10} max={0} step={1}
+          label="Z-index" value={parseRem(overrides["--sf-bg-z"], -2)} min={-10} max={0} step={1}
           help="--sf-bg-z — stack order of the background pseudo-element (typically negative)"
           overridden={"--sf-bg-z" in overrides}
           onChange={(v) => onSet("--sf-bg-z", String(v))}
