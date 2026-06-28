@@ -34,7 +34,7 @@
     gap:              var(--sf-btn-gap, var(--sf-space-2xs));
     padding-block:    var(--sf-btn-padding-block);
     padding-inline:   var(--sf-btn-padding-inline);
-    min-block-size:   var(--sf-touch-target);
+    min-block-size:   var(--sf-btn-min-height, var(--sf-touch-target));
     font-family:      inherit;
     font-size:        var(--sf-btn-font-size, var(--sf-text-m));
     font-weight:      var(--sf-btn-font-weight, var(--sf-font-weight-interactive));
@@ -210,6 +210,7 @@
   }
 
   .sf-card__media {
+    display:       block;
     inline-size:   100%;
     aspect-ratio:  var(--sf-card-media-ratio, var(--sf-ratio-video));
     object-fit:    cover;
