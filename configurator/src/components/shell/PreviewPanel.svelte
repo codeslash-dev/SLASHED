@@ -5,7 +5,8 @@
   import { registerPreviewDoc, bumpPreviewVersion } from '../../lib/previewResolver.svelte';
   import { lumlockerPreview } from '../../lib/lumlockerPreview.svelte';
   // Import the built framework CSS at Vite compile time — always in sync with badges/.
-  import frameworkCSSStatic from '../../../../badges/slashed.full.css?raw';
+  // The @framework-css alias is remapped by the WP plugin to its vendored bundle.
+  import frameworkCSSStatic from '@framework-css/badges/slashed.full.css?raw';
 
   let { overrides, previewTheme, previewWidth, previewMotion, previewTemplate,
     onThemeChange, onWidthChange, onMotionChange, onTemplateChange }: {
