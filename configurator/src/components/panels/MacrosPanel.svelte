@@ -44,11 +44,11 @@
     { label: "HR margin",         token: "--sf-prose-hr-margin",         def: 1.5,  max: 4 },
   ];
 
-  let showFlow = $state(true);
-  let showLineClamp = $state(true);
-  let showAspect = $state(true);
-  let showScrollShadow = $state(true);
-  let showScrim = $state(true);
+  let showFlow = $state(false);
+  let showLineClamp = $state(false);
+  let showAspect = $state(false);
+  let showScrollShadow = $state(false);
+  let showScrim = $state(false);
   let showProse = $state(false);
 
   let lineClamp   = $derived(num("--sf-line-clamp", 3));

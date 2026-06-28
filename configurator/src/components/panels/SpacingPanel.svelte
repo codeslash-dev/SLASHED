@@ -58,10 +58,10 @@
     )
   ));
 
-  let showLayoutGap = $state(true);
-  let showDensityPresets = $state(true);
-  let showModularScale = $state(true);
-  let showSpacePreview = $state(true);
+  let showLayoutGap = $state(false);
+  let showDensityPresets = $state(false);
+  let showModularScale = $state(false);
+  let showSpacePreview = $state(false);
 </script>
 
 <div class="p-4 space-y-6">

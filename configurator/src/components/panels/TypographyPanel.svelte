@@ -159,12 +159,12 @@
     (p) => Math.abs(p.value - ratioMin) < 0.0015 && Math.abs(p.value - ratioMax) < 0.0015
   ));
 
-  let showFontFamilies  = $state(true);
-  let showPerType       = $state(true);
-  let showBodyText      = $state(true);
-  let showDisplayType   = $state(true);
-  let showModularScale  = $state(true);
-  let showScalePreview  = $state(true);
+  let showFontFamilies  = $state(false);
+  let showPerType       = $state(false);
+  let showBodyText      = $state(false);
+  let showDisplayType   = $state(false);
+  let showModularScale  = $state(false);
+  let showScalePreview  = $state(false);
 
   let currentBodyFont    = $derived(overrides["--sf-font-body"] ?? "");
   let currentHeadingFont = $derived(overrides["--sf-font-heading"] ?? "");

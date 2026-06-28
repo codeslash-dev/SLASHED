@@ -45,13 +45,13 @@
   let underlineThickness = $derived(overrides["--sf-link-underline-thickness"] ?? "auto");
   let focusRingStyle = $derived(overrides["--sf-focus-ring-style"] ?? "solid");
 
-  let showTouchTarget = $state(true);
-  let showScrollBehavior = $state(true);
-  let showZIndex = $state(true);
-  let showTextSelection = $state(true);
-  let showFocusRingStyle = $state(true);
-  let showComponentSizes = $state(true);
-  let showCaretLinks = $state(true);
+  let showTouchTarget = $state(false);
+  let showScrollBehavior = $state(false);
+  let showZIndex = $state(false);
+  let showTextSelection = $state(false);
+  let showFocusRingStyle = $state(false);
+  let showComponentSizes = $state(false);
+  let showCaretLinks = $state(false);
 
   function getSizeValue(t: typeof SIZE_TOKENS[0]): number {
     return parseNum(overrides[t.token]?.replace("rem",""), t.default);

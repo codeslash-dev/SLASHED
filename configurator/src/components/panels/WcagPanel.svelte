@@ -107,8 +107,8 @@
     return resolveColor(expr) || expr;
   }
 
-  let showPairChecker = $state(true);
-  let showMatrix      = $state(true);
+  let showPairChecker = $state(false);
+  let showMatrix      = $state(false);
 
   // ---- Auto-fix: nudge the FG source color's OKLCH lightness to pass --------
   let suggestion = $state<{ token: string; value: string; ratio: number } | null>(null);

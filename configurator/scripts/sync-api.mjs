@@ -46,6 +46,7 @@ const REGISTRY_FILE = path.join(FRAMEWORK_ROOT, 'token-registry.json');
 
 const OUT_DIR = path.join(CONFIGURATOR_ROOT, 'src', 'data');
 const OUT = path.join(OUT_DIR, 'api-index.generated.json');
+const CLASSES_OUT = path.join(OUT_DIR, 'classes.generated.json');
 const BUNDLES_OUT = path.join(OUT_DIR, 'bundles.generated.json');
 const REGISTRY_OUT = path.join(OUT_DIR, 'token-registry.generated.json');
 
@@ -257,6 +258,31 @@ function main() {
   console.log(
     `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, OUT)} ← ` +
       `${out._sync.source} (${tokens.length} tokens)`
+  );
+
+  // Class catalogue for the cheatsheet — project class entries from api-index.
+  const classes = entries
+    .filter((e) => e && e.type === 'class' && e.tier !== 'INTERNAL')
+    .map((e) => ({
+      name: e.name,
+      selector: e.selector || `.${e.name}`,
+      kind: e.kind || '',
+      category: e.category || 'Other',
+      group: e.group || '',
+      description: e.description || '',
+      optional: !!e.optional,
+      layer: e.layer || null,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const classesOut = {
+    _sync: { generatedBy: 'configurator/scripts/sync-api.mjs', source: out._sync.source },
+    classes,
+  };
+  fs.writeFileSync(CLASSES_OUT, JSON.stringify(classesOut, null, 2) + '\n', 'utf8');
+  console.log(
+    `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, CLASSES_OUT)} ← ` +
+      `${out._sync.source} (${classes.length} classes)`
   );
 
   // Bundle manifest for the picker — derived from bundle.config.json.

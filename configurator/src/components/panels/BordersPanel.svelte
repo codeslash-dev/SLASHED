@@ -36,13 +36,13 @@
 
   const knobs = KNOBS_BY_DOMAIN["borders"] ?? [];
 
-  let showBorderColor = $state(true);
-  let showBorderWidths = $state(true);
-  let showLineStyles = $state(true);
-  let showDividers = $state(true);
-  let showFocusRing = $state(true);
-  let showRadiusScale = $state(true);
-  let showRadiusPreview = $state(true);
+  let showBorderColor = $state(false);
+  let showBorderWidths = $state(false);
+  let showLineStyles = $state(false);
+  let showDividers = $state(false);
+  let showFocusRing = $state(false);
+  let showRadiusScale = $state(false);
+  let showRadiusPreview = $state(false);
   let showFineTune = $state(false);
   let showComponents = $state(false);
 

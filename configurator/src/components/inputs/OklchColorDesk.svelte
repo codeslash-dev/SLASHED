@@ -61,9 +61,9 @@
     ></div>
     <div class="flex-1 text-left min-w-0">
       <div class="text-[11px] font-semibold text-slate-200">{label}</div>
-      <div class="text-[9px] font-mono text-slate-500 truncate">{shortName}</div>
+      <div class="text-[9px] font-mono text-slate-500">{shortName}</div>
+      <div class="text-[9px] font-mono text-slate-600">{value}</div>
     </div>
-    <div class="text-[10px] font-mono text-slate-500 shrink-0">{value.slice(0, 18)}…</div>
     {#if overridden}
       <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></div>
     {/if}
