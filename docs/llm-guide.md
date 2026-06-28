@@ -1021,9 +1021,9 @@ Component tokens from `optional/tokens.components.css`:
 --sf-field-padding-inline:  var(--sf-space-s)
 
 /* Buttons */
---sf-button-radius:         var(--sf-radius-m)
---sf-button-padding-block:  var(--sf-space-xs)
---sf-button-padding-inline: var(--sf-space-m)
+--sf-btn-radius:         var(--sf-radius-m)
+--sf-btn-padding-block:  var(--sf-space-xs)
+--sf-btn-padding-inline: var(--sf-space-m)
 ```
 
 ---
