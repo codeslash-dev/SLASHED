@@ -9,12 +9,15 @@
   } = $props();
 
   const Z_INDEX_STEPS = [
+    { label: "Below",     token: "--sf-z-below",     note: "Behind content (e.g. decorative BG)" },
+    { label: "Raised",    token: "--sf-z-raised",    note: "Slightly above flow" },
     { label: "Dropdown",  token: "--sf-z-dropdown",  note: "Dropdowns, popovers" },
     { label: "Sticky",    token: "--sf-z-sticky",    note: "Sticky headers, toolbars" },
     { label: "Fixed",     token: "--sf-z-fixed",     note: "Fixed UI chrome" },
     { label: "Overlay",   token: "--sf-z-overlay",   note: "Modals, drawers backdrop" },
     { label: "Modal",     token: "--sf-z-modal",     note: "Modal dialogs" },
     { label: "Popover",   token: "--sf-z-popover",   note: "Tooltips, menus" },
+    { label: "Tooltip",   token: "--sf-z-tooltip",   note: "Inline tooltips" },
     { label: "Toast",     token: "--sf-z-toast",     note: "Notifications" },
   ];
 
@@ -52,6 +55,11 @@
   let showFocusRingStyle = $state(false);
   let showComponentSizes = $state(false);
   let showCaretLinks = $state(false);
+  let showIconSizes = $state(false);
+  let showObjectFit = $state(false);
+  let showPrint = $state(false);
+  let showSafeArea = $state(false);
+  let showStateFlags = $state(false);
 
   function getSizeValue(t: typeof SIZE_TOKENS[0]): number {
     return parseNum(overrides[t.token]?.replace("rem",""), t.default);
@@ -368,6 +376,253 @@
             style={`text-decoration:underline;text-underline-offset:${underlineOffset}em;text-decoration-thickness:${underlineThickness}`}
           >sample link</a> with the current underline settings.
         </p>
+      </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- ICON SIZES -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showIconSizes = !showIconSizes; }}
+      aria-expanded={showIconSizes}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Icon sizes</div>
+      <span class="text-[10px] text-slate-500">{showIconSizes ? "▲" : "▼"}</span>
+    </button>
+    {#if showIconSizes}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Icon scale tokens used by <span class="font-mono text-slate-400">.sf-icon-*</span> utilities. Values are in <span class="font-mono text-slate-400">em</span> units relative to surrounding text.
+      </p>
+      <div class="space-y-1.5">
+        {#each [
+          { label: "xs",  token: "--sf-icon-xs",  def: 0.875 },
+          { label: "s",   token: "--sf-icon-s",   def: 1     },
+          { label: "m",   token: "--sf-icon-m",   def: 1.5   },
+          { label: "l",   token: "--sf-icon-l",   def: 2     },
+          { label: "xl",  token: "--sf-icon-xl",  def: 3     },
+          { label: "2xl", token: "--sf-icon-2xl", def: 4     },
+        ] as ic (ic.token)}
+          <SliderRow
+            label={ic.label} value={parseNum(overrides[ic.token]?.replace("em",""), ic.def)} min={0.5} max={6} step={0.125} unit="em"
+            overridden={ic.token in overrides}
+            onChange={(v) => onSet(ic.token, `${v}em`)}
+            onReset={() => onReset(ic.token)}
+          />
+        {/each}
+      </div>
+      <SliderRow
+        label="Box padding" value={parseNum(overrides["--sf-icon-box-pad"]?.replace("em",""), 0.5)} min={0} max={2} step={0.125} unit="em"
+        help="--sf-icon-box-pad — padding around icon when using .sf-icon-box"
+        overridden={"--sf-icon-box-pad" in overrides}
+        onChange={(v) => onSet("--sf-icon-box-pad", `${v}em`)}
+        onReset={() => onReset("--sf-icon-box-pad")}
+      />
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- OBJECT FIT / POSITION -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showObjectFit = !showObjectFit; }}
+      aria-expanded={showObjectFit}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Object fit</div>
+      <span class="text-[10px] text-slate-500">{showObjectFit ? "▲" : "▼"}</span>
+    </button>
+    {#if showObjectFit}
+      <p class="text-[9px] text-slate-600">Default values for <span class="font-mono text-slate-400">.sf-media</span> images and replaced elements.</p>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Fit</span>
+        <div class="flex gap-1 flex-1">
+          {#each ["cover","contain","fill","none"] as v (v)}
+            {@const cur = overrides["--sf-object-fit"] ?? "cover"}
+            <button
+              onclick={() => v === "cover" ? onReset("--sf-object-fit") : onSet("--sf-object-fit", v)}
+              class={`flex-1 py-1.5 rounded-lg text-[9px] border transition-all cursor-pointer ${cur === v ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400 hover:bg-white/5"}`}
+            >{v}</button>
+          {/each}
+        </div>
+        {#if "--sf-object-fit" in overrides}
+          <button onclick={() => onReset("--sf-object-fit")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer">reset</button>
+        {/if}
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Position</span>
+        <input
+          type="text"
+          value={overrides["--sf-object-position"] ?? ""}
+          placeholder="50% 50%"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet("--sf-object-position", v) : onReset("--sf-object-position");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-object-position" in overrides}
+          <button onclick={() => onReset("--sf-object-position")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
+      </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- SAFE AREA INSETS -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showSafeArea = !showSafeArea; }}
+      aria-expanded={showSafeArea}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Safe area insets</div>
+      <span class="text-[10px] text-slate-500">{showSafeArea ? "▲" : "▼"}</span>
+    </button>
+    {#if showSafeArea}
+      <p class="text-[9px] text-slate-600 leading-relaxed">
+        Default to the device's <span class="font-mono text-slate-400">env(safe-area-inset-*)</span>. Override only if you need fixed padding regardless of notch/home-indicator.
+      </p>
+      <div class="space-y-1.5">
+        {#each [
+          { label: "Top",    token: "--sf-safe-top",    placeholder: "env(safe-area-inset-top, 0px)" },
+          { label: "Right",  token: "--sf-safe-right",  placeholder: "env(safe-area-inset-right, 0px)" },
+          { label: "Bottom", token: "--sf-safe-bottom", placeholder: "env(safe-area-inset-bottom, 0px)" },
+          { label: "Left",   token: "--sf-safe-left",   placeholder: "env(safe-area-inset-left, 0px)" },
+        ] as row (row.token)}
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-semibold text-slate-400 w-14 shrink-0">{row.label}</span>
+            <input
+              type="text"
+              value={overrides[row.token] ?? ""}
+              placeholder={row.placeholder}
+              oninput={(e) => {
+                const v = (e.target as HTMLInputElement).value.trim();
+                v ? onSet(row.token, v) : onReset(row.token);
+              }}
+              class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+            />
+            {#if row.token in overrides}
+              <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- PRINT -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showPrint = !showPrint; }}
+      aria-expanded={showPrint}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Print styles</div>
+      <span class="text-[10px] text-slate-500">{showPrint ? "▲" : "▼"}</span>
+    </button>
+    {#if showPrint}
+      <p class="text-[9px] text-slate-600">Applied inside <span class="font-mono text-slate-400">@media print</span> via <span class="font-mono text-slate-400">optional/print.css</span>.</p>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Page size</span>
+        <div class="flex gap-1 flex-1">
+          {#each ["a4","letter","legal","a3"] as v (v)}
+            {@const cur = overrides["--sf-print-page-size"] ?? "a4"}
+            <button
+              onclick={() => v === "a4" ? onReset("--sf-print-page-size") : onSet("--sf-print-page-size", v)}
+              class={`flex-1 py-1.5 rounded-lg text-[9px] border transition-all cursor-pointer ${cur === v ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200" : "border-white/8 text-slate-400 hover:bg-white/5"}`}
+            >{v}</button>
+          {/each}
+        </div>
+      </div>
+      {#each [
+        { label: "Base size", token: "--sf-print-base-size", placeholder: "11pt" },
+        { label: "Page margin", token: "--sf-print-page-margin", placeholder: "2cm" },
+      ] as row (row.token)}
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">{row.label}</span>
+          <input
+            type="text"
+            value={overrides[row.token] ?? ""}
+            placeholder={row.placeholder}
+            oninput={(e) => {
+              const v = (e.target as HTMLInputElement).value.trim();
+              v ? onSet(row.token, v) : onReset(row.token);
+            }}
+            class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+          />
+          {#if row.token in overrides}
+            <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+          {/if}
+        </div>
+      {/each}
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- STATE FLAGS -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showStateFlags = !showStateFlags; }}
+      aria-expanded={showStateFlags}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">State flags</div>
+      <span class="text-[10px] text-slate-500">{showStateFlags ? "▲" : "▼"}</span>
+    </button>
+    {#if showStateFlags}
+      <p class="text-[10px] text-slate-600 leading-relaxed">
+        Boolean CSS custom property flags (0 = off, 1 = on). Components toggle these to activate state-specific styles.
+        Overriding globally forces all matching elements into that state — useful for testing and demos.
+      </p>
+      <div class="space-y-1.5">
+        {#each [
+          { label: "is-active",  token: "--sf-is-active",  note: "Active/selected state" },
+          { label: "is-current", token: "--sf-is-current", note: "Current page/item" },
+          { label: "is-open",    token: "--sf-is-open",    note: "Open/expanded state" },
+          { label: "is-pressed", token: "--sf-is-pressed", note: "Pressed/depressed state" },
+        ] as f (f.token)}
+          {@const cur = overrides[f.token] ?? "0"}
+          <div class="flex items-center gap-2 py-0.5">
+            <button
+              type="button"
+              aria-label={f.label}
+              aria-pressed={cur === "1"}
+              onclick={() => cur === "1" ? onReset(f.token) : onSet(f.token, "1")}
+              class={`w-8 h-4 rounded-full transition-colors relative cursor-pointer shrink-0 ${cur === "1" ? "bg-indigo-600" : "bg-white/10"}`}
+            >
+              <div class={`absolute top-0.5 w-3 h-3 bg-white rounded-full shadow transition-transform ${cur === "1" ? "translate-x-4" : "translate-x-0.5"}`}></div>
+            </button>
+            <span class="text-[9px] font-mono text-slate-300 w-24 shrink-0">{f.label}</span>
+            <span class="text-[9px] text-slate-600 flex-1">{f.note}</span>
+            {#if f.token in overrides}
+              <button onclick={() => onReset(f.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
+          </div>
+        {/each}
+      </div>
+      <div class="flex items-center gap-2 pt-1">
+        <span class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Required marker</span>
+        <input
+          type="text"
+          value={overrides["--sf-field-required-marker"] ?? ""}
+          placeholder=" *"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value;
+            v ? onSet("--sf-field-required-marker", v) : onReset("--sf-field-required-marker");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-field-required-marker" in overrides}
+          <button onclick={() => onReset("--sf-field-required-marker")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
       </div>
     {/if}
   </section>

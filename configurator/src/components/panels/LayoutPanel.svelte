@@ -43,6 +43,8 @@
   let showSidebar = $state(false);
   let showBento = $state(false);
   let showMore = $state(false);
+  let showBgLayer = $state(false);
+  let showNamedRatios = $state(false);
 
   function getBentoVal(t: typeof BENTO_TOKENS[0]): number {
     const raw = overrides[t.token];
@@ -198,6 +200,27 @@
         onChange={(v) => onSet("--sf-grid-min", `${v}rem`)}
         onReset={() => onReset("--sf-grid-min")}
       />
+      <!-- Named grid size tokens -->
+      <div>
+        <div class="text-[9px] text-slate-600 mb-1.5">Named sizes (grid-min-xs → 2xl)</div>
+        <div class="space-y-1.5">
+          {#each [
+            { label: "xs",  token: "--sf-grid-min-xs",  def: 10 },
+            { label: "s",   token: "--sf-grid-min-s",   def: 13 },
+            { label: "m",   token: "--sf-grid-min-m",   def: 16 },
+            { label: "l",   token: "--sf-grid-min-l",   def: 20 },
+            { label: "xl",  token: "--sf-grid-min-xl",  def: 24 },
+            { label: "2xl", token: "--sf-grid-min-2xl", def: 28 },
+          ] as g (g.token)}
+            <SliderRow
+              label={g.label} value={parseRem(overrides[g.token], g.def)} min={6} max={40} step={0.5} unit="rem"
+              overridden={g.token in overrides}
+              onChange={(v) => onSet(g.token, `${v}rem`)}
+              onReset={() => onReset(g.token)}
+            />
+          {/each}
+        </div>
+      </div>
       <div class="bg-white/4 rounded-xl border border-white/8 p-3">
         <div class="text-[9px] text-slate-600 mb-2 font-mono">Preview at 360px panel width</div>
         <div
@@ -398,6 +421,34 @@
           />
         </section>
 
+        <!-- Cluster -->
+        <section class="space-y-2">
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Cluster</div>
+          {#each [
+            { label: "Align",   token: "--sf-cluster-align",   def: "center",     opts: ["flex-start","center","flex-end","stretch","baseline"] },
+            { label: "Justify", token: "--sf-cluster-justify", def: "flex-start", opts: ["flex-start","center","flex-end","space-between","space-around"] },
+          ] as row (row.token)}
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">{row.label}</span>
+              <select
+                value={overrides[row.token] ?? row.def}
+                onchange={(e) => {
+                  const v = (e.target as HTMLSelectElement).value;
+                  v === row.def ? onReset(row.token) : onSet(row.token, v);
+                }}
+                class="flex-1 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 focus:outline-none focus:border-indigo-500 cursor-pointer"
+              >
+                {#each row.opts as o (o)}
+                  <option value={o} style="background:#16161e;">{o}</option>
+                {/each}
+              </select>
+              {#if row.token in overrides}
+                <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+              {/if}
+            </div>
+          {/each}
+        </section>
+
         <!-- Equal grid -->
         <section class="space-y-2">
           <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Equal grid</div>
@@ -408,6 +459,24 @@
             onChange={(v) => onSet("--sf-equal-min-col", `${v}rem`)}
             onReset={() => onReset("--sf-equal-min-col")}
           />
+          <div>
+            <div class="text-[9px] text-slate-600 mb-1.5">Named column counts (equal-min-col-2/3/4/6)</div>
+            <div class="space-y-1.5">
+              {#each [
+                { label: "2-col", token: "--sf-equal-min-col-2", def: 28 },
+                { label: "3-col", token: "--sf-equal-min-col-3", def: 15 },
+                { label: "4-col", token: "--sf-equal-min-col-4", def: 16 },
+                { label: "6-col", token: "--sf-equal-min-col-6", def: 10 },
+              ] as c (c.token)}
+                <SliderRow
+                  label={c.label} value={parseRem(overrides[c.token], c.def)} min={4} max={36} step={0.5} unit="rem"
+                  overridden={c.token in overrides}
+                  onChange={(v) => onSet(c.token, `${v}rem`)}
+                  onReset={() => onReset(c.token)}
+                />
+              {/each}
+            </div>
+          </div>
         </section>
 
         <!-- Cover -->
@@ -456,6 +525,22 @@
               >{p.label}</button>
             {/each}
           </div>
+          <div class="flex items-center gap-2 pt-0.5">
+            <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Height</span>
+            <input
+              type="text"
+              value={overrides["--sf-reel-height"] ?? ""}
+              placeholder="auto"
+              oninput={(e) => {
+                const v = (e.target as HTMLInputElement).value.trim();
+                v ? onSet("--sf-reel-height", v) : onReset("--sf-reel-height");
+              }}
+              class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+            />
+            {#if "--sf-reel-height" in overrides}
+              <button onclick={() => onReset("--sf-reel-height")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
+          </div>
         </section>
 
         <!-- Imposter -->
@@ -500,6 +585,114 @@
             onReset={() => onReset("--sf-alternate-inner-gap")}
           />
         </section>
+      </div>
+    {/if}
+  </div>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- NAMED RATIOS -->
+  <div>
+    <button
+      onclick={() => { showNamedRatios = !showNamedRatios; }}
+      aria-expanded={showNamedRatios}
+      class="w-full flex items-center justify-between cursor-pointer py-1"
+    >
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Named ratios</span>
+      <span class="text-[10px] text-slate-500">{showNamedRatios ? "▲" : "▼"}</span>
+    </button>
+    {#if showNamedRatios}
+      <div class="mt-2 space-y-2">
+        <p class="text-[9px] text-slate-600">Override the built-in named aspect ratios used by <span class="font-mono text-slate-400">.sf-ratio-*</span> utilities.</p>
+        {#each [
+          { label: "Square",   token: "--sf-ratio-square",   def: "1"       },
+          { label: "Portrait", token: "--sf-ratio-portrait", def: "3 / 4"   },
+          { label: "3:2",      token: "--sf-ratio-3-2",      def: "3 / 2"   },
+          { label: "4:3",      token: "--sf-ratio-4-3",      def: "4 / 3"   },
+          { label: "Video",    token: "--sf-ratio-video",    def: "16 / 9"  },
+          { label: "Cinema",   token: "--sf-ratio-cinema",   def: "21 / 9"  },
+          { label: "Golden",   token: "--sf-ratio-golden",   def: "1.618 / 1" },
+        ] as r (r.token)}
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">{r.label}</span>
+            <input
+              type="text"
+              value={overrides[r.token] ?? ""}
+              placeholder={r.def}
+              oninput={(e) => {
+                const v = (e.target as HTMLInputElement).value.trim();
+                v ? onSet(r.token, v) : onReset(r.token);
+              }}
+              class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+            />
+            {#if r.token in overrides}
+              <button onclick={() => onReset(r.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {/if}
+  </div>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- BACKGROUND LAYER -->
+  <div>
+    <button
+      onclick={() => { showBgLayer = !showBgLayer; }}
+      aria-expanded={showBgLayer}
+      class="w-full flex items-center justify-between cursor-pointer py-1"
+    >
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Background layer (.sf-bg)</span>
+      <span class="text-[10px] text-slate-500">{showBgLayer ? "▲" : "▼"}</span>
+    </button>
+    {#if showBgLayer}
+      <div class="mt-2 space-y-3">
+        <p class="text-[9px] text-slate-600">Default values for the <span class="font-mono text-slate-400">.sf-bg</span> full-bleed background utility.</p>
+        {#each [
+          { label: "Fit",      token: "--sf-bg-fit",      placeholder: "cover",    opts: ["cover","contain","fill","none","scale-down"] },
+          { label: "Position", token: "--sf-bg-position", placeholder: "50% 50%",  opts: ["50% 50%","top","bottom","left","right","center"] },
+        ] as row (row.token)}
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">{row.label}</span>
+            <select
+              value={overrides[row.token] ?? row.placeholder}
+              onchange={(e) => {
+                const v = (e.target as HTMLSelectElement).value;
+                v === row.placeholder ? onReset(row.token) : onSet(row.token, v);
+              }}
+              class="flex-1 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 focus:outline-none focus:border-indigo-500 cursor-pointer"
+            >
+              {#each row.opts as o (o)}
+                <option value={o} style="background:#16161e;">{o}</option>
+              {/each}
+            </select>
+            {#if row.token in overrides}
+              <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
+          </div>
+        {/each}
+        <SliderRow
+          label="Inset" value={parseRem(overrides["--sf-bg-inset"], 0)} min={0} max={4} step={0.25} unit="rem"
+          help="--sf-bg-inset — inset the background from the container edges"
+          overridden={"--sf-bg-inset" in overrides}
+          onChange={(v) => onSet("--sf-bg-inset", `${v}rem`)}
+          onReset={() => onReset("--sf-bg-inset")}
+        />
+        <SliderRow
+          label="Radius" value={parseRem(overrides["--sf-bg-radius"], 0)} min={0} max={4} step={0.125} unit="rem"
+          help="--sf-bg-radius — corner radius of the background element"
+          overridden={"--sf-bg-radius" in overrides}
+          onChange={(v) => onSet("--sf-bg-radius", `${v}rem`)}
+          onReset={() => onReset("--sf-bg-radius")}
+        />
+        <SliderRow
+          label="Z-index" value={parseRem(overrides["--sf-bg-z"], -2)} min={-10} max={0} step={1}
+          help="--sf-bg-z — stack order of the background pseudo-element (typically negative)"
+          overridden={"--sf-bg-z" in overrides}
+          onChange={(v) => onSet("--sf-bg-z", String(v))}
+          onReset={() => onReset("--sf-bg-z")}
+        />
       </div>
     {/if}
   </div>

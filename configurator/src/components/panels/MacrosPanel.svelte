@@ -50,6 +50,7 @@
   let showScrollShadow = $state(false);
   let showScrim = $state(false);
   let showProse = $state(false);
+  let showContentIntrinsic = $state(false);
 
   let lineClamp   = $derived(num("--sf-line-clamp", 3));
   let flowSpace   = $derived(num("--sf-flow-space", 0.5, "rem"));
@@ -250,6 +251,22 @@
         <div class="absolute inset-0" style={`background:linear-gradient(${scrimDir}, ${scrimColor}, transparent)`}></div>
         <span class="relative text-[11px] font-bold text-white">Caption over scrim</span>
       </div>
+      <div class="flex items-center gap-2">
+        <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">Text shadow</div>
+        <input
+          type="text"
+          value={overrides["--sf-scrim-text-shadow"] ?? ""}
+          placeholder="0 1px 3px oklch(0 0 0 / 0.6)"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet("--sf-scrim-text-shadow", v) : onReset("--sf-scrim-text-shadow");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-scrim-text-shadow" in overrides}
+          <button onclick={() => onReset("--sf-scrim-text-shadow")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
+      </div>
     {/if}
   </section>
 
@@ -300,6 +317,39 @@
             <button onclick={() => onReset("--sf-prose-marker-color")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
           {/if}
         </div>
+      </div>
+    {/if}
+  </section>
+
+  <!-- CONTENT VISIBILITY -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showContentIntrinsic = !showContentIntrinsic; }}
+      aria-expanded={showContentIntrinsic}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Content visibility</div>
+      <span class="text-[10px] text-slate-500">{showContentIntrinsic ? "▲" : "▼"}</span>
+    </button>
+    {#if showContentIntrinsic}
+      <p class="text-[9px] text-slate-600 leading-relaxed">
+        --sf-content-intrinsic-size — placeholder size used with <span class="font-mono text-slate-400">content-visibility: auto</span> to improve scroll performance on tall pages.
+      </p>
+      <div class="flex items-center gap-2">
+        <div class="text-[10px] font-semibold text-slate-400 w-20 shrink-0">Intrinsic size</div>
+        <input
+          type="text"
+          value={overrides["--sf-content-intrinsic-size"] ?? ""}
+          placeholder="500px"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet("--sf-content-intrinsic-size", v) : onReset("--sf-content-intrinsic-size");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-content-intrinsic-size" in overrides}
+          <button onclick={() => onReset("--sf-content-intrinsic-size")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
       </div>
     {/if}
   </section>

@@ -141,6 +141,20 @@
         onChange={(v) => onSet("--sf-border-scale", String(v))}
         onReset={() => onReset("--sf-border-scale")}
       />
+      <SliderRow
+        label="Hairline" value={parseNum(overrides["--sf-border-width-hairline"]?.replace("px",""), 0.5)} min={0} max={1} step={0.25} unit="px"
+        help="--sf-border-width-hairline — ultra-thin border for retina displays"
+        overridden={"--sf-border-width-hairline" in overrides}
+        onChange={(v) => onSet("--sf-border-width-hairline", `${v}px`)}
+        onReset={() => onReset("--sf-border-width-hairline")}
+      />
+      <SliderRow
+        label="Box border" value={parseNum(overrides["--sf-box-border-width"]?.replace("px",""), 0)} min={0} max={4} step={0.5} unit="px"
+        help="--sf-box-border-width — box-shadow border drawn without affecting layout"
+        overridden={"--sf-box-border-width" in overrides}
+        onChange={(v) => onSet("--sf-box-border-width", `${v}px`)}
+        onReset={() => onReset("--sf-box-border-width")}
+      />
 
       <!-- Width preview -->
       <div class="bg-white/4 rounded-xl border border-white/8 p-3 space-y-2">

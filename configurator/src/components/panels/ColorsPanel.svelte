@@ -154,6 +154,9 @@
     { name: "--sf-color-code-bg",     label: "Code background" },
     { name: "--sf-color-code-text",   label: "Code text" },
     { name: "--sf-color-overlay",     label: "Overlay" },
+    { name: "--sf-color-black",       label: "Black" },
+    { name: "--sf-color-white",       label: "White" },
+    { name: "--sf-color-dim",         label: "Dim (translucent black)" },
   ];
 
   const SWATCH_STEPS = ["50","100","200","300","400","500","600","700","800","900","950"];
@@ -172,6 +175,7 @@
   let showShadeCurve = $state(false);
   let showStatus = $state(false);
   let showSemanticOverrides = $state(false);
+  let showColorScheme = $state(false);
   let showGradients = $state(false);
   let showLumlocker = $state(false);
   let curvePreviewSide = $state<"light" | "dark">("light");
@@ -896,6 +900,38 @@
           {/each}
         </div>
       {/each}
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- COLOR SCHEME -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showColorScheme = !showColorScheme; }}
+      aria-expanded={showColorScheme}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Color scheme</div>
+      <span class="text-[10px] text-slate-500">{showColorScheme ? "▲" : "▼"}</span>
+    </button>
+    {#if showColorScheme}
+      <p class="text-[9px] text-slate-600 leading-relaxed">
+        --sf-color-scheme — sets the CSS <span class="font-mono text-slate-400">color-scheme</span> property on the root, controlling browser UI (scrollbars, inputs) and default background.
+      </p>
+      <div class="flex gap-1">
+        {#each [["light dark", "light dark (default)"], ["light", "Light only"], ["dark", "Dark only"]] as [val, label] (val)}
+          {@const current = overrides["--sf-color-scheme"] ?? "light dark"}
+          <button
+            onclick={() => val === "light dark" ? onReset("--sf-color-scheme") : onSet("--sf-color-scheme", val)}
+            class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer ${
+              current === val
+                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+            }`}
+          >{label}</button>
+        {/each}
+      </div>
     {/if}
   </section>
 

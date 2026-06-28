@@ -26,6 +26,9 @@
 
   const BODY_STACKS = [
     { label: "System sans-serif", value: "" },
+    { label: "Geometric (Avenir, Montserrat…)", value: "var(--sf-font-geometric)" },
+    { label: "Humanist (Seravek, Gill Sans…)", value: "var(--sf-font-humanist)" },
+    { label: "Slab serif (Rockwell, Roboto Slab…)", value: "var(--sf-font-slab)" },
     { label: "Inter", value: "Inter, system-ui, sans-serif" },
     { label: "Georgia (serif)", value: "Georgia, 'Times New Roman', serif" },
     { label: "Merriweather (serif)", value: "'Merriweather', Georgia, serif" },
@@ -34,6 +37,9 @@
 
   const HEADING_STACKS = [
     { label: "Same as body", value: "" },
+    { label: "Geometric (Avenir, Montserrat…)", value: "var(--sf-font-geometric)" },
+    { label: "Humanist (Seravek, Gill Sans…)", value: "var(--sf-font-humanist)" },
+    { label: "Slab serif (Rockwell, Roboto Slab…)", value: "var(--sf-font-slab)" },
     { label: "Inter", value: "Inter, system-ui, sans-serif" },
     { label: "Georgia (serif)", value: "Georgia, 'Times New Roman', serif" },
     { label: "Impact / condensed", value: "Impact, 'Arial Narrow', sans-serif" },
@@ -165,6 +171,9 @@
   let showDisplayType   = $state(false);
   let showModularScale  = $state(false);
   let showScalePreview  = $state(false);
+  let showAdvancedType  = $state(false);
+  let showLineLengths   = $state(false);
+  let showFontWeights   = $state(false);
 
   let currentBodyFont    = $derived(overrides["--sf-font-body"] ?? "");
   let currentHeadingFont = $derived(overrides["--sf-font-heading"] ?? "");
@@ -433,6 +442,27 @@
       </div>
     {/if}
 
+    <!-- Max width (heading levels only) -->
+    {#if activeLevel.id !== "body"}
+      {@const maxWidthToken = `--sf-${activeLevel.id}-max-width`}
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-16 shrink-0">Max width</span>
+        <input
+          type="text"
+          value={overrides[maxWidthToken] ?? ""}
+          placeholder="none"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet(maxWidthToken, v) : onReset(maxWidthToken);
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if maxWidthToken in overrides}
+          <button onclick={() => onReset(maxWidthToken)} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
+      </div>
+    {/if}
+
     <div class="flex justify-end">
       {#if (activeLevel.size in overrides) || (activeLevel.lh in overrides) || (activeLevel.wt in overrides) || (!!activeLevel.ls && activeLevel.ls in overrides)}
         <button
@@ -542,6 +572,71 @@
         </div>
       </div>
     {/each}
+
+    <!-- Link external marker -->
+    <div class="flex items-center gap-2">
+      <span class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">External marker</span>
+      <input
+        type="text"
+        value={overrides["--sf-link-external-marker"] ?? ""}
+        placeholder={'" ↗"'}
+        oninput={(e) => {
+          const v = (e.target as HTMLInputElement).value;
+          v ? onSet("--sf-link-external-marker", v) : onReset("--sf-link-external-marker");
+        }}
+        class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[11px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+      />
+      {#if "--sf-link-external-marker" in overrides}
+        <button onclick={() => onReset("--sf-link-external-marker")} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+      {/if}
+    </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- FONT WEIGHT SCALE -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showFontWeights = !showFontWeights; }}
+      aria-expanded={showFontWeights}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font weight scale</div>
+      <span class="text-[10px] text-slate-500">{showFontWeights ? "▲" : "▼"}</span>
+    </button>
+    {#if showFontWeights}
+      <p class="text-[9px] text-slate-600 leading-relaxed">Named weight tokens. Override if your font uses non-standard axis values.</p>
+      {#each [
+        { label: "Light",    token: "--sf-font-weight-light",    def: 300 },
+        { label: "Normal",   token: "--sf-font-weight-normal",   def: 400 },
+        { label: "Medium",   token: "--sf-font-weight-medium",   def: 500 },
+        { label: "Semibold", token: "--sf-font-weight-semibold", def: 600 },
+        { label: "Bold",     token: "--sf-font-weight-bold",     def: 700 },
+      ] as row (row.token)}
+        <div class="group">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] font-semibold text-slate-200">{row.label}</span>
+            {#if row.token in overrides}
+              <button onclick={() => onReset(row.token)} class="text-[9px] text-slate-500 hover:text-rose-400 cursor-pointer opacity-0 group-hover:opacity-100">reset</button>
+            {/if}
+          </div>
+          <div class="flex gap-1">
+            {#each WEIGHT_OPTIONS as w (w)}
+              {@const cur = overrides[row.token] ?? String(row.def)}
+              <button
+                onclick={() => w === String(row.def) && !(row.token in overrides) ? undefined : (w === String(row.def) ? onReset(row.token) : onSet(row.token, w))}
+                style={`font-weight:${parseInt(w)}`}
+                class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
+                  cur === w
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                }`}
+              >{w}</button>
+            {/each}
+          </div>
+        </div>
+      {/each}
     {/if}
   </section>
 
@@ -569,6 +664,24 @@
       onMinChange={(v) => onSet("--sf-text-display-base-min", String(v))}
       onMaxChange={(v) => onSet("--sf-text-display-base-max", String(v))}
     />
+
+    <!-- Display line heights -->
+    <div class="grid grid-cols-2 gap-3">
+      {#each [
+        { label: "Display L line-height", token: "--sf-display-l-line-height", def: 1 },
+        { label: "Display M line-height", token: "--sf-display-m-line-height", def: 1.05 },
+      ] as row (row.token)}
+        <div>
+          <div class="text-[9px] text-slate-600 mb-1">{row.label}</div>
+          <SliderRow
+            label="" value={num(row.token, row.def)} min={0.8} max={1.5} step={0.025}
+            overridden={row.token in overrides}
+            onChange={(v) => onSet(row.token, String(v))}
+            onReset={() => onReset(row.token)}
+          />
+        </div>
+      {/each}
+    </div>
 
     <!-- Display weight -->
     {#each [
@@ -743,6 +856,144 @@
         </div>
       {/each}
     </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- LINE LENGTHS -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showLineLengths = !showLineLengths; }}
+      aria-expanded={showLineLengths}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line lengths (max-width)</div>
+      <span class="text-[10px] text-slate-500">{showLineLengths ? "▲" : "▼"}</span>
+    </button>
+    {#if showLineLengths}
+      <p class="text-[9px] text-slate-600 leading-relaxed">
+        Per-text-size max-width caps on <span class="font-mono text-slate-400">.sf-text-*</span> elements. Set to <span class="font-mono text-slate-400">none</span> to remove the constraint; use <span class="font-mono text-slate-400">ch</span> units for character-based measures.
+      </p>
+      <div class="space-y-1.5">
+        {#each [
+          { label: "2xs", token: "--sf-text-2xs-max-width", def: "55ch" },
+          { label: "xs",  token: "--sf-text-xs-max-width",  def: "60ch" },
+          { label: "s",   token: "--sf-text-s-max-width",   def: "65ch" },
+          { label: "m",   token: "--sf-text-m-max-width",   def: "65ch" },
+          { label: "l",   token: "--sf-text-l-max-width",   def: "none" },
+          { label: "xl",  token: "--sf-text-xl-max-width",  def: "none" },
+          { label: "2xl", token: "--sf-text-2xl-max-width", def: "none" },
+          { label: "3xl", token: "--sf-text-3xl-max-width", def: "none" },
+          { label: "4xl", token: "--sf-text-4xl-max-width", def: "none" },
+        ] as row (row.token)}
+          <div class="flex items-center gap-2">
+            <span class="text-[9px] font-mono text-slate-400 w-6 shrink-0">{row.label}</span>
+            <input
+              type="text"
+              value={overrides[row.token] ?? ""}
+              placeholder={row.def}
+              oninput={(e) => {
+                const v = (e.target as HTMLInputElement).value.trim();
+                v ? onSet(row.token, v) : onReset(row.token);
+              }}
+              class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+            />
+            {#if row.token in overrides}
+              <button onclick={() => onReset(row.token)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {/if}
+  </section>
+
+  <div class="h-px bg-white/6"></div>
+
+  <!-- ADVANCED TYPOGRAPHY -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showAdvancedType = !showAdvancedType; }}
+      aria-expanded={showAdvancedType}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Advanced typography</div>
+      <span class="text-[10px] text-slate-500">{showAdvancedType ? "▲" : "▼"}</span>
+    </button>
+    {#if showAdvancedType}
+      <p class="text-[9px] text-slate-600 leading-relaxed">Advanced OpenType and variable-font axes. Leave as <span class="font-mono text-slate-400">normal</span> unless your font supports these features.</p>
+
+      <!-- font-numeric -->
+      <div>
+        <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Numeric figures</div>
+        <div class="flex gap-1">
+          {#each [["tabular-nums", "tabular-nums (default)"], ["proportional-nums", "proportional-nums"], ["normal", "normal"]] as [val, label] (val)}
+            {@const cur = overrides["--sf-font-numeric"] ?? "tabular-nums"}
+            <button
+              onclick={() => val === "tabular-nums" ? onReset("--sf-font-numeric") : onSet("--sf-font-numeric", val)}
+              class={`flex-1 py-1.5 rounded-lg text-[9px] border transition-all cursor-pointer ${
+                cur === val
+                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                  : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+              }`}
+            >{label}</button>
+          {/each}
+        </div>
+      </div>
+
+      <!-- optical-sizing -->
+      <div>
+        <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Optical sizing</div>
+        <div class="flex gap-1">
+          {#each [["auto", "auto (default)"], ["none", "none"]] as [val, label] (val)}
+            {@const cur = overrides["--sf-optical-sizing"] ?? "auto"}
+            <button
+              onclick={() => val === "auto" ? onReset("--sf-optical-sizing") : onSet("--sf-optical-sizing", val)}
+              class={`flex-1 py-2 rounded-lg text-[10px] border transition-all cursor-pointer ${
+                cur === val
+                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                  : "border-white/8 text-slate-400 hover:bg-white/5 hover:text-slate-200"
+              }`}
+            >{label}</button>
+          {/each}
+        </div>
+      </div>
+
+      <!-- font-features -->
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Font features</span>
+        <input
+          type="text"
+          value={overrides["--sf-font-features"] ?? ""}
+          placeholder="normal"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet("--sf-font-features", v) : onReset("--sf-font-features");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-font-features" in overrides}
+          <button onclick={() => onReset("--sf-font-features")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
+      </div>
+
+      <!-- font-variation -->
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-semibold text-slate-400 w-24 shrink-0">Variation</span>
+        <input
+          type="text"
+          value={overrides["--sf-font-variation"] ?? ""}
+          placeholder="normal"
+          oninput={(e) => {
+            const v = (e.target as HTMLInputElement).value.trim();
+            v ? onSet("--sf-font-variation", v) : onReset("--sf-font-variation");
+          }}
+          class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+        />
+        {#if "--sf-font-variation" in overrides}
+          <button onclick={() => onReset("--sf-font-variation")} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+        {/if}
+      </div>
     {/if}
   </section>
 </div>
