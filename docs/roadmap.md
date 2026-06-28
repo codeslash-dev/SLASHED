@@ -12,8 +12,11 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 - **Components layer** — the `slashed.components` layer and its stubs are already
   declared; the eight `.sf-*` components land incrementally after v1.0, additive
   only.
-- **`@property` for spacing/shadow tokens** — extend typed registration beyond
-  colours to enable transitions on layout values and better DevTools inspection.
+- ~~**`@property` for spacing/shadow tokens**~~ ✓ **Done** — spacing (`--sf-radius-*`,
+  `--sf-space-*`, semantic spacing) and shadow (`--sf-shadow-*`, `--sf-text-shadow-*`,
+  `--sf-drop-shadow-*`) tokens are already registered via `@property` in
+  `core/tokens.css`, alongside the existing colour registrations. Transitions on
+  layout values and DevTools inspection both work.
 - **Consolidate named surfaces onto `.sf-surface`** — the 11 `.sf-surface--*`
   variants could become one-line `--sf-surface-color` presets of the generic
   primitive, once a fallback story for the precomputed
@@ -48,6 +51,10 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 - **Remaining optional components** — after the first component tranche, complete
   `.sf-alert`, `.sf-avatar`, and `.sf-modal` with token-driven variants and
   native `<dialog>` compatibility where applicable.
+- **Decorative animation utility classes** — the keyframes for `sf-spin`,
+  `sf-shimmer`, `sf-ping`, `sf-blink`, and `sf-float` are already defined in
+  `core/motion.css`; they need corresponding `.sf-spin`, `.sf-shimmer`, etc.
+  utility classes in `optional/utilities.css` to be usable from markup.
 - **Interactive `drives N` exploration** — turn the configurator's passive
   dependency-count badge into a keyboard-accessible popover/list that navigates
   to dependent tokens.
@@ -67,9 +74,6 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 - **Animated link effects** — extend existing link variants with opt-in effects
   such as underline growth or fade behaviours while preserving accessible
   reduced-motion fallbacks.
-- **Decorative animation utilities** — decide whether to expose token-backed
-  animation helpers for ping, blink, float, spin, and shimmer as optional utility
-  classes.
 
 ## Out of scope
 

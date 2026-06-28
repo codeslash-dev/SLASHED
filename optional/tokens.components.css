@@ -122,5 +122,31 @@
      * --sf-skeleton-line-height: 0.8em;
      */
 
+    /* ============================================================
+     * FORM LAYOUT HELPER TOKENS
+     * Gap tokens for .sf-field, .sf-form-row, .sf-form-col,
+     * and .sf-form-inline declared in optional/components.css.
+     * ============================================================
+     *
+     * --sf-field-gap:          var(--sf-space-2xs);
+     * --sf-form-row-gap:       var(--sf-space-m);
+     * --sf-form-col-gap:       var(--sf-space-s);
+     * --sf-form-inline-gap:    var(--sf-space-s);
+     */
+
+    /* ============================================================
+     * TABLE TOKENS
+     * Sizing tokens for .sf-table declared in
+     * optional/components.css.
+     * ============================================================
+     *
+     * --sf-table-cell-pad-block:  var(--sf-space-xs);
+     * --sf-table-cell-pad-inline: var(--sf-space-s);
+     * --sf-table-border-color:    var(--sf-color-border);
+     * --sf-table-stripe-bg:       var(--sf-color-inset);
+     * --sf-table-header-weight:   var(--sf-font-weight-semibold);
+     * --sf-table-compact-pad:     var(--sf-space-3xs, 0.125rem);
+     */
+
   }
 }
