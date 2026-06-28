@@ -461,7 +461,7 @@
       ],
       "value": "var(--sf-container-wide)"
     },
-    "--sf-button-padding-block": {
+    "--sf-btn-padding-block": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
@@ -469,7 +469,7 @@
       ],
       "value": "var(--sf-space-xs)"
     },
-    "--sf-button-padding-inline": {
+    "--sf-btn-padding-inline": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [
@@ -477,7 +477,7 @@
       ],
       "value": "var(--sf-space-m)"
     },
-    "--sf-button-radius": {
+    "--sf-btn-radius": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [

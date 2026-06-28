@@ -723,9 +723,9 @@ rebrand workflow.
 
 | Token | Default |
 |---|---|
-| `--sf-button-padding-block` | `var(--sf-space-xs)` |
-| `--sf-button-padding-inline` | `var(--sf-space-m)` |
-| `--sf-button-radius` | `var(--sf-radius-m)` |
+| `--sf-btn-padding-block` | `var(--sf-space-xs)` |
+| `--sf-btn-padding-inline` | `var(--sf-space-m)` |
+| `--sf-btn-radius` | `var(--sf-radius-m)` |
 | `--sf-field-padding-block` | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | `var(--sf-space-s)` |
 | `--sf-field-radius` | `var(--sf-radius-m)` |

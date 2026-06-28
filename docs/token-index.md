@@ -146,9 +146,9 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-box-border-width` | PUBLIC | knob | Layout | `0` |
 | `--sf-box-padding` | PUBLIC | consumption | Layout | `var(--sf-space-m)` |
 | `--sf-breakout-width` | PUBLIC | consumption | Layout | `var(--sf-container-wide)` |
-| `--sf-button-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
-| `--sf-button-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
-| `--sf-button-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
+| `--sf-btn-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
+| `--sf-btn-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
+| `--sf-btn-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
 | `--sf-caret-color` | PUBLIC | consumption | Core | `var(--sf-color-action)` |
 | `--sf-center-gutter` | PUBLIC | consumption | Layout | `var(--sf-gutter)` |
 | `--sf-center-max` | PUBLIC | consumption | Layout | `var(--sf-container-default)` |

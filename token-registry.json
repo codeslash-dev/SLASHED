@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 698
+    "nextId": 701
   },
   "tokens": [
     {
@@ -206,15 +206,18 @@
     },
     {
       "id": 50,
-      "name": "--sf-button-padding-block"
+      "name": "--sf-button-padding-block",
+      "removed": true
     },
     {
       "id": 51,
-      "name": "--sf-button-padding-inline"
+      "name": "--sf-button-padding-inline",
+      "removed": true
     },
     {
       "id": 52,
-      "name": "--sf-button-radius"
+      "name": "--sf-button-radius",
+      "removed": true
     },
     {
       "id": 53,
@@ -2802,6 +2805,18 @@
     {
       "id": 697,
       "name": "--sf-bg-z"
+    },
+    {
+      "id": 698,
+      "name": "--sf-btn-padding-block"
+    },
+    {
+      "id": 699,
+      "name": "--sf-btn-padding-inline"
+    },
+    {
+      "id": 700,
+      "name": "--sf-btn-radius"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "42abb1f85f56",
+    "tokensHash": "99d86a47c17a",
     "bundles": [
       "full",
       "optimal",
@@ -1291,14 +1291,14 @@
       ]
     },
     {
-      "name": "--sf-button-padding-block",
+      "name": "--sf-btn-padding-block",
       "tier": "PUBLIC",
       "role": "consumption",
-      "namespace": "button",
+      "namespace": "btn",
       "category": "Component tokens",
       "group": "BUTTON TOKENS",
       "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Vertical (block) inner padding for buttons.",
+      "note": "",
       "value": "var(--sf-space-xs)",
       "aliasOf": "--sf-space-xs",
       "registered": false,
@@ -1312,14 +1312,14 @@
       ]
     },
     {
-      "name": "--sf-button-padding-inline",
+      "name": "--sf-btn-padding-inline",
       "tier": "PUBLIC",
       "role": "consumption",
-      "namespace": "button",
+      "namespace": "btn",
       "category": "Component tokens",
       "group": "BUTTON TOKENS",
       "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Horizontal (inline) inner padding for buttons.",
+      "note": "",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
       "registered": false,
@@ -1333,14 +1333,14 @@
       ]
     },
     {
-      "name": "--sf-button-radius",
+      "name": "--sf-btn-radius",
       "tier": "PUBLIC",
       "role": "consumption",
-      "namespace": "button",
+      "namespace": "btn",
       "category": "Component tokens",
       "group": "BUTTON TOKENS",
       "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Border radius for buttons. Defaults to --sf-radius-m; override to fully pill-round or square all buttons at once.",
+      "note": "",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
       "registered": false,
