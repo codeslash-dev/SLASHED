@@ -13,8 +13,9 @@
   /* ============================================================
    * .sf-button
    * Interactive call-to-action element. Apply to <button> or <a>.
-   * Variants: --primary | --secondary | --ghost | --danger
+   * Variants: --secondary | --ghost | --danger
    * States:   :disabled / .is-disabled | .is-loading
+   * Base .sf-button uses --sf-color-action (the default action color).
    * ============================================================ */
   /*
   .sf-button {
@@ -31,23 +32,16 @@
     line-height:      var(--sf-leading-tight);
     text-decoration:  none;
     white-space:      nowrap;
-    border:           var(--sf-button-border-width, var(--sf-border-width-1)) solid transparent;
+    border:           var(--sf-button-border-width, var(--sf-border-width-1)) solid var(--sf-color-action);
     border-radius:    var(--sf-button-radius);
     cursor:           pointer;
     user-select:      none;
     appearance:       none;
     transition:       var(--sf-transition-form-field);
-    background:       var(--sf-color-inset);
-    color:            var(--sf-color-text);
-    border-color:     var(--sf-color-border);
+    background:       var(--sf-color-action);
+    color:            var(--sf-color-text--on-action);
   }
-
-  .sf-button--primary {
-    background:   var(--sf-color-action);
-    color:        var(--sf-color-text--on-action);
-    border-color: var(--sf-color-action);
-  }
-  .sf-button--primary:hover:not(:disabled, .is-disabled, .is-loading) {
+  .sf-button:hover:not(:disabled, .is-disabled, .is-loading) {
     background:   var(--sf-color-action--hover);
     border-color: var(--sf-color-action--hover);
   }
