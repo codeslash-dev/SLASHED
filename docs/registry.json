@@ -19,8 +19,8 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 686,
-      "sf_classes": 183,
+      "tokens": 691,
+      "sf_classes": 184,
       "is_classes": 40
     }
   },
@@ -52,6 +52,11 @@
     "--sf-bento-row-compact",
     "--sf-bento-row-default",
     "--sf-bento-row-tall",
+    "--sf-bg-fit",
+    "--sf-bg-inset",
+    "--sf-bg-position",
+    "--sf-bg-radius",
+    "--sf-bg-z",
     "--sf-blur",
     "--sf-body-color",
     "--sf-body-em-style",
@@ -725,6 +730,7 @@
     "sf-bento-full",
     "sf-bento-tall",
     "sf-bento-wide",
+    "sf-bg",
     "sf-box",
     "sf-breakout",
     "sf-center",

@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "5286f722a01c",
+    "tokensHash": "33a5779d4a1f",
     "bundles": [
       "full",
       "optimal",
@@ -10,14 +10,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 686,
+      "tokens": 691,
       "byTier": {
-        "PUBLIC": 630,
+        "PUBLIC": 635,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
-        "Layout tokens": 49,
+        "Layout tokens": 54,
         "Core tokens": 608,
         "Macro tokens": 23,
         "Component tokens": 6
@@ -633,6 +633,121 @@
       "description": "Configuration tokens for the bento-grid layout primitive.",
       "note": "Tall row height for visually prominent or hero bento cells.",
       "value": "16rem",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-fit",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "note": "",
+      "value": "cover",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-inset",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "note": "",
+      "value": "0",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-position",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "note": "",
+      "value": "50% 50%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-radius",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "note": "",
+      "value": "0",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-z",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "note": "",
+      "value": "-2",
       "aliasOf": null,
       "registered": false,
       "syntax": null,

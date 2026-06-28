@@ -27,31 +27,31 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 918,
+      "total": 924,
       "by_type": {
-        "class": 232,
-        "token": 686
+        "class": 233,
+        "token": 691
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 862,
+        "PUBLIC": 868,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
         "consumption": 466,
-        "knob": 220
+        "knob": 225
       },
-      "tokens": 686,
-      "classes": 232,
-      "sf_classes": 183,
+      "tokens": 691,
+      "classes": 233,
+      "sf_classes": 184,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
         "Core tokens": 608,
-        "Layout primitives": 127,
-        "Layout tokens": 49,
+        "Layout primitives": 128,
+        "Layout tokens": 54,
         "Macro classes": 36,
         "Macro tokens": 23,
         "Motion / animation": 15,
@@ -828,6 +828,146 @@
       "group": "Bento grid",
       "description": "Tall row height for visually prominent or hero bento cells.",
       "value": "16rem",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-fit",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "area": "layout",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "value": "cover",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-inset",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "area": "layout",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "value": "0",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-position",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "area": "layout",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "value": "50% 50%",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-radius",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "area": "layout",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "value": "0",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-z",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "area": "layout",
+      "group": "Background layer (.sf-bg)",
+      "description": "cover media behind sibling content. inset is a single length applied to every edge; the layer size is derived from it, so a non-zero inset still fills correctly.",
+      "value": "-2",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -20697,6 +20837,31 @@
       "area": "layout",
       "group": "Bento grid",
       "description": "Span modifier for a bento item: spans 2 columns (wide card).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-bg",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-bg",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img…",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
