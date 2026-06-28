@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.22] - 2026-06-28
+
+### Features
+- **configurator:** make the configurator embeddable
+
+### Bug Fixes
+- **configurator:** isolate WP embedded mode and surface save failures
+
 ## [0.6.21] - 2026-06-28
 
 ### Added
