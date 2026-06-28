@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.23] - 2026-06-28
+
+### Bug Fixes
+- **tests:** replace brittle source-patch with SLASHED_ROOT env var override
+
 ## [0.6.22] - 2026-06-28
 
 ### Features
