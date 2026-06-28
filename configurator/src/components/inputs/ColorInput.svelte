@@ -18,6 +18,7 @@
   } = $props();
 
   let editing = $state(false);
+  let cancelBlur = $state(false);
 
   // Bare "--token" is a UI shorthand; normalize to "var(--token)" before resolving or storing.
   function normalize(v: string): string {
@@ -71,6 +72,7 @@
       value={value}
       autofocus
       onblur={(e) => {
+        if (cancelBlur) { cancelBlur = false; editing = false; return; }
         const v = normalize((e.target as HTMLInputElement).value);
         if (!v) onReset();
         else onSet(v);
@@ -78,7 +80,7 @@
       }}
       onkeydown={(e) => {
         if (e.key === "Enter") (e.currentTarget as HTMLInputElement).blur();
-        if (e.key === "Escape") editing = false;
+        if (e.key === "Escape") { cancelBlur = true; editing = false; }
       }}
       placeholder={placeholder ?? "default"}
       class="flex-1 bg-white/8 border border-indigo-500/50 rounded px-1.5 py-0.5 text-[10px] font-mono text-slate-200 focus:outline-none"
