@@ -19,9 +19,16 @@
 
   let editing = $state(false);
 
+  // Bare "--token" is a UI shorthand; normalize to "var(--token)" before resolving or storing.
+  function normalize(v: string): string {
+    const t = v.trim();
+    return t.startsWith("--") && !t.startsWith("var(") ? `var(${t})` : t;
+  }
+
   function paint(expr: string): string {
     void previewVersion.value;
-    return resolveColor(expr) || expr || "transparent";
+    const norm = normalize(expr);
+    return resolveColor(norm) || norm || "transparent";
   }
 
   let swatchColor = $derived(paint(value || `var(${token})`));
@@ -29,11 +36,17 @@
   // Detect if the current value is a CSS variable reference (can't use native picker)
   let isVar = $derived(value.trim().startsWith("var(") || value.trim().startsWith("--"));
 
-  // Convert rgb(...) string to hex for native picker seed
-  function toHex(rgb: string): string {
-    const m = rgb.match(/rgb\w*\((\d+)[,\s]+(\d+)[,\s]+(\d+)/);
-    if (!m) return "#6366f1";
-    return "#" + [m[1], m[2], m[3]].map(n => parseInt(n).toString(16).padStart(2, "0")).join("");
+  // Convert a resolved rgb(...) or a raw hex string to a #RRGGBB seed for the native picker.
+  function toHex(color: string): string {
+    // Pass through hex colors directly (3- or 6-digit)
+    const hex6 = color.match(/^#([0-9a-fA-F]{6})$/);
+    if (hex6) return color.toLowerCase();
+    const hex3 = color.match(/^#([0-9a-fA-F]{3})$/);
+    if (hex3) return "#" + hex3[1].split("").map(c => c + c).join("");
+    // Parse computed rgb()/rgba() strings from resolveColor
+    const m = color.match(/rgb\w*\((\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+    if (m) return "#" + [m[1], m[2], m[3]].map(n => parseInt(n).toString(16).padStart(2, "0")).join("");
+    return "#6366f1";
   }
 </script>
 
@@ -58,7 +71,7 @@
       value={value}
       autofocus
       onblur={(e) => {
-        const v = (e.target as HTMLInputElement).value.trim();
+        const v = normalize((e.target as HTMLInputElement).value);
         if (!v) onReset();
         else onSet(v);
         editing = false;

@@ -22,14 +22,15 @@
 
   let displayValue = $derived(overrideValue ?? token.value);
   let isOverridden = $derived(overrideValue !== undefined);
+  let type = $derived(guessType(token));
+  let shortName = $derived(token.name.replace("--sf-", ""));
 
   function paintSwatch(expr: string): string {
     void previewVersion.value;
     return resolveColor(expr) || resolveColor(`var(${token.name})`) || expr;
   }
-  let swatchColor = $derived(paintSwatch(displayValue));
-  let type = $derived(guessType(token));
-  let shortName = $derived(token.name.replace("--sf-", ""));
+  // Only subscribe to previewVersion for color tokens to avoid unnecessary recomputation.
+  let swatchColor = $derived(type === "color" ? paintSwatch(displayValue) : "");
 </script>
 
 <div class={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors group ${isOverridden ? "bg-indigo-500/8 border border-indigo-500/15" : "hover:bg-white/4"}`}>
