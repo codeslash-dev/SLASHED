@@ -276,7 +276,7 @@
      stacking context via :has(), so .sf-bg composes natively under .sf-scrim
      (background → scrim gradient → content). Works as a bare <img class="sf-bg">
      or as a wrapper with a nested > img / > video. */
-  :has(> .sf-bg) {
+  :where(:has(> .sf-bg)) {
     position:  relative;
     isolation: isolate;
   }
@@ -300,6 +300,7 @@
     object-fit:      var(--sf-bg-fit);
     object-position: var(--sf-bg-position);
     border-radius:   var(--sf-bg-radius);
+    pointer-events:  none;
   }
 
 
