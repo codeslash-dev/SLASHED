@@ -7,6 +7,7 @@
   import OklchColorDesk from '../inputs/OklchColorDesk.svelte';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import ColorInput from '../inputs/ColorInput.svelte';
 
   let { tokens, overrides, onSet, onReset, onBulkChange, onSelectDomain }: {
     tokens: SlashedToken[];
@@ -956,23 +957,14 @@
           {@const resolved = paint(`var(${s.name})`, "")}
           <div>
             <div class="text-[10px] font-semibold text-slate-400 mb-1">{s.label}</div>
-            <div class="flex items-center gap-2">
-              <span class="relative w-7 h-7 rounded border border-white/10 shrink-0 overflow-hidden" style={`background:${(s.name in overrides ? "" : resolved) || "transparent"}`}>
-                <input
-                  type="color"
-                  value={overrides[s.name] ?? "#6366f1"}
-                  oninput={(e) => onSet(s.name, (e.target as HTMLInputElement).value)}
-                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                {#if s.name in overrides}
-                  <span class="absolute inset-0" style={`background:${overrides[s.name]}`}></span>
-                {/if}
-              </span>
-              <span class="text-[9px] font-mono text-slate-500 flex-1 truncate">{overrides[s.name] ?? (resolved ? `auto-derived · ${resolved}` : "auto-derived")}</span>
-              {#if s.name in overrides}
-                <button onclick={() => onReset(s.name)} class="text-[8px] text-slate-500 hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-              {/if}
-            </div>
+            <ColorInput
+              token={s.name}
+              value={overrides[s.name] ?? ""}
+              placeholder={resolved ? `auto-derived · ${resolved}` : "auto-derived"}
+              isOverridden={s.name in overrides}
+              onSet={(v) => onSet(s.name, v)}
+              onReset={() => onReset(s.name)}
+            />
           </div>
         {/each}
       </div>
