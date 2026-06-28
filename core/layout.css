@@ -293,8 +293,16 @@
     pointer-events:  none;
   }
 
-  .sf-bg > img,
-  .sf-bg > video {
+  .sf-bg > :is(img, video, picture) {
+    inline-size:     100%;
+    block-size:      100%;
+    object-fit:      var(--sf-bg-fit);
+    object-position: var(--sf-bg-position);
+    border-radius:   var(--sf-bg-radius);
+    pointer-events:  none;
+  }
+
+  .sf-bg > picture > img {
     inline-size:     100%;
     block-size:      100%;
     object-fit:      var(--sf-bg-fit);
