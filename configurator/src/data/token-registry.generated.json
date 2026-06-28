@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 693
+    "nextId": 698
   },
   "tokens": [
     {
@@ -2782,6 +2782,26 @@
     {
       "id": 692,
       "name": "--sf-z-tooltip"
+    },
+    {
+      "id": 693,
+      "name": "--sf-bg-fit"
+    },
+    {
+      "id": 694,
+      "name": "--sf-bg-inset"
+    },
+    {
+      "id": 695,
+      "name": "--sf-bg-position"
+    },
+    {
+      "id": 696,
+      "name": "--sf-bg-radius"
+    },
+    {
+      "id": 697,
+      "name": "--sf-bg-z"
     }
   ]
 }

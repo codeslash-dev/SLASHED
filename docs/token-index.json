@@ -8,14 +8,14 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 686,
+      "tokens": 691,
       "by_tier": {
-        "PUBLIC": 630,
+        "PUBLIC": 635,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 220,
+        "knob": 225,
         "consumption": 466
       }
     }
@@ -236,6 +236,46 @@
         "core/tokens.layout.css"
       ],
       "value": "16rem"
+    },
+    "--sf-bg-fit": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "cover"
+    },
+    "--sf-bg-inset": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "0"
+    },
+    "--sf-bg-position": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "50% 50%"
+    },
+    "--sf-bg-radius": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "0"
+    },
+    "--sf-bg-z": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.layout.css"
+      ],
+      "value": "-2"
     },
     "--sf-blur": {
       "tier": "PUBLIC",

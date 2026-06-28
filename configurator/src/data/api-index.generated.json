@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "5286f722a01c",
+    "tokensHash": "42abb1f85f56",
     "bundles": [
       "full",
       "optimal",
@@ -10,14 +10,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 686,
+      "tokens": 691,
       "byTier": {
-        "PUBLIC": 630,
+        "PUBLIC": 635,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
-        "Layout tokens": 49,
+        "Layout tokens": 54,
         "Core tokens": 608,
         "Macro tokens": 23,
         "Component tokens": 6
@@ -633,6 +633,121 @@
       "description": "Configuration tokens for the bento-grid layout primitive.",
       "note": "Tall row height for visually prominent or hero bento cells.",
       "value": "16rem",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-fit",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
+      "note": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
+      "value": "cover",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-inset",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
+      "note": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
+      "value": "0",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-position",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
+      "note": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
+      "value": "50% 50%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-radius",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+      "note": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+      "value": "0",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-bg-z",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "bg",
+      "category": "Layout tokens",
+      "group": "Background layer (.sf-bg)",
+      "description": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.",
+      "note": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.",
+      "value": "-2",
       "aliasOf": null,
       "registered": false,
       "syntax": null,

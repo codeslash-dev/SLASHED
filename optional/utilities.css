@@ -1,10 +1,26 @@
 /* SLASHED — optional/utilities.css
    @layer slashed.utilities
    Static opt-in utility helpers.
-   Prefix: .sf-*; keep dynamic state in .is-* classes. */
+   Prefix: .sf-*; keep dynamic state in .is-* classes.
+
+   STAGED — definitions are commented out, like optional/components.css.
+   SLASHED is BEM-first by design and ships no utility classes in 0.x;
+   uncomment to activate. */
 
 @layer slashed.utilities {
 
-  /* HEADING HELPER CLASSES (.sf-h1 – .sf-h6) */
+  /* Text wrap — per-element override of the global text-wrap defaults
+     (--sf-heading-text-wrap / --sf-body-text-wrap). */
+  /* .sf-balance { text-wrap: balance; } */
+  /* .sf-pretty  { text-wrap: pretty; } */
+
+  /* Object fit / position — per-element control of replaced media (img,
+     video) without touching the global --sf-object-* tokens. */
+  /* .sf-object-cover   { object-fit: cover; } */
+  /* .sf-object-contain { object-fit: contain; } */
+
+  /* .sf-object-top    { object-position: top; } */
+  /* .sf-object-center { object-position: center; } */
+  /* .sf-object-bottom { object-position: bottom; } */
 
 }

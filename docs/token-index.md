@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**686 tokens** (deduplicated by name across the 4 token source files).
+**691 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 630 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 635 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -22,7 +22,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 220 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| knob | 225 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
 | consumption | 466 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
@@ -118,6 +118,11 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-bento-row-compact` | PUBLIC | knob | Layout | `6rem` |
 | `--sf-bento-row-default` | PUBLIC | knob | Layout | `10rem` |
 | `--sf-bento-row-tall` | PUBLIC | knob | Layout | `16rem` |
+| `--sf-bg-fit` | PUBLIC | knob | Layout | `cover` |
+| `--sf-bg-inset` | PUBLIC | knob | Layout | `0` |
+| `--sf-bg-position` | PUBLIC | knob | Layout | `50% 50%` |
+| `--sf-bg-radius` | PUBLIC | knob | Layout | `0` |
+| `--sf-bg-z` | PUBLIC | knob | Layout | `-2` |
 | `--sf-blur` | PUBLIC | knob | Core | `12px` |
 | `--sf-body-color` | PUBLIC | consumption | Core | `var(--sf-color-text)` |
 | `--sf-body-em-style` | PUBLIC | knob | Core | `italic` |
