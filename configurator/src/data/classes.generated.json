@@ -575,6 +575,16 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-bg",
+      "selector": ".sf-bg",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Background",
+      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg\"> or as a wrapper with a nested > img / > video / > picture.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
       "name": "sf-box",
       "selector": ".sf-box",
       "kind": "layout",

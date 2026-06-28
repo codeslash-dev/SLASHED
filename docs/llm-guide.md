@@ -788,6 +788,13 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 /* Frame (ratio box) */
 --sf-frame-ratio: 16 / 9
 
+/* Background layer (.sf-bg) — cover media behind sibling content */
+--sf-bg-inset:    0          /* single length, applied to every edge */
+--sf-bg-fit:      cover
+--sf-bg-position: 50% 50%
+--sf-bg-radius:   0
+--sf-bg-z:        -2         /* behind content, above the parent background */
+
 /* Reel (horizontal scroll) */
 --sf-reel-item-width: max-content
 --sf-reel-gap:        var(--sf-gap)

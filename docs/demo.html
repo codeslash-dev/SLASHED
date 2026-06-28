@@ -2688,6 +2688,21 @@
           </div>
         </div>
 
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-bg</code> — background-layer primitive</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Absolutely-positioned cover layer that sits behind a parent's content. The parent auto-promotes to a positioned stacking context via <code>:has()</code>. Compose under <code>.sf-scrim</code> for background → gradient → content layering.</p>
+        <div class="sf-cluster sf-cluster--m">
+          <div style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; display: grid; place-items: center">
+            <div class="sf-bg" style="background: linear-gradient(135deg, #4f7, #07c)"></div>
+            <span style="position: relative; font-size: var(--sf-text-s); font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.5)">bare .sf-bg div</span>
+          </div>
+          <div class="sf-scrim sf-scrim--bottom" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden">
+            <div class="sf-bg" style="background: linear-gradient(135deg, #f70, #c07)"></div>
+            <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
+              <strong>.sf-bg + .sf-scrim</strong>
+            </div>
+          </div>
+        </div>
+
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-focus-shadow</code> — box-shadow focus ring (opt-in)</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">Tab to this link: the focus indicator follows the rounded corner via <code>box-shadow: var(--sf-focus-ring-shadow)</code> instead of the default outline.</p>
         <p>

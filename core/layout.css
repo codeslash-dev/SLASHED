@@ -270,7 +270,48 @@
   .sf-frame--3-2      { aspect-ratio: var(--sf-ratio-3-2); }
   .sf-frame--golden   { aspect-ratio: var(--sf-ratio-golden); }
 
-  
+
+  /* Background layer — absolutely-positioned cover media that sits behind a
+     parent's content. The parent is auto-promoted to a positioned, isolated
+     stacking context via :has(), so .sf-bg composes natively under .sf-scrim
+     (background → scrim gradient → content). Works as a bare <img class="sf-bg">
+     or as a wrapper with a nested > img / > video. */
+  :where(:has(> .sf-bg)) {
+    position:  relative;
+    isolation: isolate;
+  }
+
+  .sf-bg {
+    position:        absolute;
+    inset:           var(--sf-bg-inset);
+    inline-size:     calc(100% - 2 * var(--sf-bg-inset));
+    block-size:      calc(100% - 2 * var(--sf-bg-inset));
+    object-fit:      var(--sf-bg-fit);
+    object-position: var(--sf-bg-position);
+    border-radius:   var(--sf-bg-radius);
+    z-index:         var(--sf-bg-z);
+    pointer-events:  none;
+  }
+
+  .sf-bg > :is(img, video, picture) {
+    inline-size:     100%;
+    block-size:      100%;
+    object-fit:      var(--sf-bg-fit);
+    object-position: var(--sf-bg-position);
+    border-radius:   var(--sf-bg-radius);
+    pointer-events:  none;
+  }
+
+  .sf-bg > picture > img {
+    inline-size:     100%;
+    block-size:      100%;
+    object-fit:      var(--sf-bg-fit);
+    object-position: var(--sf-bg-position);
+    border-radius:   var(--sf-bg-radius);
+    pointer-events:  none;
+  }
+
+
   .sf-reel {
     display:               flex;
     block-size:            var(--sf-reel-height);

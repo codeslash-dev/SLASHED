@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**686 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**691 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -628,7 +628,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-49 tokens.
+54 tokens.
 
 | Token | Default |
 |---|---|
@@ -639,6 +639,11 @@ rebrand workflow.
 | `--sf-bento-row-compact` | `6rem` |
 | `--sf-bento-row-default` | `10rem` |
 | `--sf-bento-row-tall` | `16rem` |
+| `--sf-bg-fit` | `cover` |
+| `--sf-bg-inset` | `0` |
+| `--sf-bg-position` | `50% 50%` |
+| `--sf-bg-radius` | `0` |
+| `--sf-bg-z` | `-2` |
 | `--sf-box-border-color` | `var(--sf-color-border)` |
 | `--sf-box-border-width` | `0` |
 | `--sf-box-padding` | `var(--sf-space-m)` |
