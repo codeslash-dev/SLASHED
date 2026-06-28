@@ -38,14 +38,14 @@
      * Override to give buttons a distinct visual language from
      * form fields without touching global radius/spacing tokens.
      * ============================================================ */
-    --sf-button-radius:         var(--sf-radius-m);
-    --sf-button-padding-block:  var(--sf-space-xs);
-    --sf-button-padding-inline: var(--sf-space-m);
+    --sf-btn-radius:         var(--sf-radius-m);
+    --sf-btn-padding-block:  var(--sf-space-xs);
+    --sf-btn-padding-inline: var(--sf-space-m);
     /*
-     * --sf-button-gap:          var(--sf-space-2xs);
-     * --sf-button-font-weight:  var(--sf-font-weight-interactive);
-     * --sf-button-min-height:   var(--sf-touch-target);
-     * --sf-button-border-width: var(--sf-border-width-1);
+     * --sf-btn-gap:          var(--sf-space-2xs);
+     * --sf-btn-font-weight:  var(--sf-font-weight-interactive);
+     * --sf-btn-min-height:   var(--sf-touch-target);
+     * --sf-btn-border-width: var(--sf-border-width-1);
      */
 
     /* ============================================================

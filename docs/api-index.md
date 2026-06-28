@@ -24,9 +24,9 @@ and a short description. The machine-readable companion (with all columns) is
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
-| `--sf-button-padding-block` | PUBLIC | consumption | button | `var(--sf-space-xs)` | Vertical (block) inner padding for buttons. |
-| `--sf-button-padding-inline` | PUBLIC | consumption | button | `var(--sf-space-m)` | Horizontal (inline) inner padding for buttons. |
-| `--sf-button-radius` | PUBLIC | consumption | button | `var(--sf-radius-m)` | Border radius for buttons. Defaults to --sf-radius-m; override to fully pill-round or square all buttons at once. |
+| `--sf-btn-padding-block` | PUBLIC | consumption | btn | `var(--sf-space-xs)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-btn-padding-inline` | PUBLIC | consumption | btn | `var(--sf-space-m)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
 | `--sf-field-padding-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Vertical (block) inner padding for form field inputs. |
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
