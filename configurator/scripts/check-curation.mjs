@@ -32,7 +32,7 @@ const DOMAIN_PATTERNS = {
     "container", "layout", "grid", "breakpoint", "measure", "column",
     "header-height", "touch-target", "aspect", "bento", "cluster",
     "content-intrinsic", "cover-min", "equal-min", "frame", "ratio-",
-    "reel", "safe-", "sidebar", "switcher",
+    "reel", "safe-", "sidebar", "switcher", "-bg-",
   ],
   borders: [
     "radius", "border-width", "border-scale", "border-style", "divider",
