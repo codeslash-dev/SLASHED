@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 - **layout:** `.sf-bg` background-layer primitive — absolutely-positioned cover media that sits behind a parent's content (parent auto-positions and isolates via `:has()`), composing under `.sf-scrim`. New knobs: `--sf-bg-inset`, `--sf-bg-fit`, `--sf-bg-position`, `--sf-bg-radius`, `--sf-bg-z`.
 
+### ⚠️ Breaking Changes
+- **tokens:** `--sf-button-radius`, `--sf-button-padding-block`, and `--sf-button-padding-inline` renamed to `--sf-btn-radius`, `--sf-btn-padding-block`, and `--sf-btn-padding-inline`. The button component class is also renamed from `.sf-button` to `.sf-btn`. Both were staged/commented-out and never shipped in a release.
+
 ### Staged (commented out — not yet shipped)
 - **utilities:** staged `.sf-balance`/`.sf-pretty` (text-wrap) and `.sf-object-cover`/`-contain`/`-top`/`-center`/`-bottom` (object-fit/position) helpers in `optional/utilities.css`, commented out like `optional/components.css`. SLASHED stays BEM-first and ships no utility classes in 0.x; uncomment to activate.
 
