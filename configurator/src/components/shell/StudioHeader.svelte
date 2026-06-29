@@ -79,7 +79,7 @@
       disabled={!hasPendingChanges || saveState === 'saving'}
       title={hasPendingChanges ? "Save changes (Ctrl+S)" : "No unsaved changes"}
       class={[
-        "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer",
+        "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-colors cursor-pointer",
         saveState === 'saved'
           ? "bg-emerald-900/40 border border-emerald-500/30 text-emerald-300"
           : hasPendingChanges

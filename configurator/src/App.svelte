@@ -48,10 +48,17 @@
   let canUndo = $derived(past.length > 0);
   let canRedo = $derived(future.length > 0);
 
+  // Shallow equality for flat string records — much cheaper than JSON.stringify on every tick.
+  function shallowEq(a: Record<string, string>, b: Record<string, string>): boolean {
+    const ak = Object.keys(a);
+    if (ak.length !== Object.keys(b).length) return false;
+    return ak.every((k) => a[k] === b[k]);
+  }
+
   // Save state — hasPendingChanges is derived so undo/redo update it automatically.
-  let lastSavedSnapshot = $state(JSON.stringify(overrides));
+  let lastSavedOverrides = $state<Record<string, string>>({ ...overrides });
   let saveState = $state<'idle' | 'saving' | 'saved'>('idle');
-  let hasPendingChanges = $derived(JSON.stringify(overrides) !== lastSavedSnapshot);
+  let hasPendingChanges = $derived(!shallowEq(overrides, lastSavedOverrides));
   let saveStateTimer: ReturnType<typeof setTimeout> | null = null;
 
   // Live CSS preview on every change — actual persistence only on explicit save.
@@ -60,7 +67,7 @@
   function setOverrides(updater: ((prev: Record<string, string>) => Record<string, string>) | Record<string, string>) {
     const prev = overrides;
     const next = typeof updater === "function" ? updater(prev) : updater;
-    if (JSON.stringify(prev) !== JSON.stringify(next)) {
+    if (!shallowEq(prev, next)) {
       past = [...past.slice(-49), prev];
       future = [];
       if (saveState === 'saved') saveState = 'idle';
@@ -70,13 +77,13 @@
 
   async function handleSave() {
     if (!hasPendingChanges || saveState === 'saving') return;
-    const snapshot = JSON.stringify(overrides);
+    const snapshot = { ...overrides };
     saveState = 'saving';
     try {
       await saveOverrides(overrides);
       // Only mark clean if overrides haven't changed since save started.
-      if (JSON.stringify(overrides) === snapshot) {
-        lastSavedSnapshot = snapshot;
+      if (shallowEq(overrides, snapshot)) {
+        lastSavedOverrides = snapshot;
         saveState = 'saved';
         if (saveStateTimer) clearTimeout(saveStateTimer);
         saveStateTimer = setTimeout(() => {
