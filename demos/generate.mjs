@@ -364,11 +364,172 @@ ${items.map(tile).join('\n')}
     </section>`;
 }
 
+// ─────────────────────────────────────────────────────────────────────────
+// PART 2 — complete token reference (every token, live computed value).
+// ─────────────────────────────────────────────────────────────────────────
+function tokenVisual(t) {
+  const n = t.name, ns = t.namespace, v = t.value;
+  if (/gradient\(/.test(v)) return `<div class="tvis" style="background:var(${n})"></div>`;
+  if (ns === 'color') return `<div class="tvis" style="background:var(${n})"></div>`;
+  if (ns === 'drop' || /drop-shadow\(/.test(v)) return `<div class="tvis tvis--card" style="filter:var(${n})"></div>`;
+  if (ns === 'shadow') {
+    if (n === '--sf-shadow-color') return `<div class="tvis" style="background:var(${n})"></div>`;
+    if (/none|strength|lightness/.test(n)) return '';
+    return `<div class="tvis tvis--card" style="box-shadow:var(${n})"></div>`;
+  }
+  if (ns === 'radius') return /scale/.test(n) ? '' : `<div class="tvis tvis--rad" style="border-radius:var(${n})"></div>`;
+  if (ns === 'animation') return /delay/.test(n) ? '' : `<div class="tvis tvis--anim" data-anim="${n}"></div>`;
+  if (ns === 'opacity') return `<div class="tvis tvis--op" style="opacity:var(${n})"></div>`;
+  if (ns === 'leading') return `<p class="tvis tvis--lead" style="line-height:var(${n})">Aa Bb<br>Cc Dd</p>`;
+  if (ns === 'tracking') return `<span class="tvis tvis--txt" style="letter-spacing:var(${n})">AVTAW</span>`;
+  if (ns === 'font') {
+    if (/weight/.test(n)) return `<span class="tvis tvis--txt" style="font-weight:var(${n})">Ag</span>`;
+    if (/body|mono|humanist|geometric|slab|family/.test(n)) return `<span class="tvis tvis--txt" style="font-family:var(${n})">Ag f</span>`;
+    return '';
+  }
+  if (ns === 'text') {
+    if (/max-width/.test(n)) return `<div class="tvis tvis--bar" style="inline-size:min(var(${n}),100%)"></div>`;
+    if (/base|ratio|scale/.test(n)) return '';
+    return `<span class="tvis tvis--txt" style="font-size:var(${n})">Aa</span>`;
+  }
+  const lenNs = new Set(['space', 'size', 'icon', 'blur', 'gap', 'gutter', 'container', 'sidebar', 'grid', 'equal',
+    'bento', 'cover', 'header', 'touch', 'mask', 'scroll', 'focus', 'box', 'content', 'section', 'divider', 'reel',
+    'prose', 'stack', 'cluster', 'switcher', 'imposter', 'breakout', 'alternate', 'center', 'btn', 'field', 'scrim',
+    'sticky', 'heading']);
+  if (lenNs.has(ns) && /(\d|\bvar\()/.test(v) && !/\//.test(v) && !/,/.test(v)
+      && !/^(none|auto|inherit|normal|max-content|min-content|transparent)/.test(v)) {
+    return `<div class="tvis tvis--bar" style="inline-size:min(max(var(${n}),3px),100%)"></div>`;
+  }
+  return '';
+}
+
+function tokenTile(t) {
+  const vis = tokenVisual(t);
+  const tier = t.tier === 'PUBLIC' ? '' : ` <span class="ttile__tier">${t.tier === 'PUBLIC-ADVANCED' ? 'adv' : t.tier.toLowerCase()}</span>`;
+  return `<figure class="ttile" data-token="${t.name}"><code class="ttile__name">${esc(t.name)}${tier}</code>${vis ? `<div class="ttile__vis">${vis}</div>` : ''}<output class="ttile__val">…</output></figure>`;
+}
+
+function tokenReferenceSection() {
+  const byNs = {};
+  tokens.forEach((t) => (byNs[t.namespace] ||= []).push(t));
+  const pref = ['color', 'gradient', 'shadow', 'drop', 'radius', 'space', 'size', 'text', 'font', 'leading', 'tracking',
+    'duration', 'ease', 'transition', 'animation', 'border', 'focus', 'opacity', 'blur', 'z'];
+  const order = [...pref.filter((n) => byNs[n]), ...Object.keys(byNs).filter((n) => !pref.includes(n)).sort()];
+  const blocks = order.map((ns) => {
+    const items = byNs[ns].sort((a, b) => a.name.localeCompare(b.name));
+    return `      <h3>${ns} <span class="count">${items.length}</span></h3>\n      <div class="ref-grid">${items.map(tokenTile).join('')}</div>`;
+  }).join('\n');
+  return `    <section id="reference">
+      <h2>Part 2 — Complete token reference <span class="count">${tokens.length} tokens · live values</span></h2>
+      <div class="notice">Every <code>--sf-*</code> token — knob and consumption, all tiers — with its <strong>live computed value</strong> (filled by JS). Toggle the theme or the override in the toolbar and watch every value recompute. Tokens that resolve to a colour, length, shadow, gradient, type or motion value also show a visual.</div>
+${blocks}
+    </section>`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Interactive functions — animations, easings, durations, transitions,
+// gradients, drop-shadows. Driven by section-level class toggles + JS replay.
+// ─────────────────────────────────────────────────────────────────────────
+function fxList(items, render) { return `<div class="fx-grid">${items.map(render).join('')}</div>`; }
+function functionsSection() {
+  const anims = tokens.filter((t) => t.namespace === 'animation' && !/delay/.test(t.name));
+  const eases = tokens.filter((t) => t.namespace === 'ease');
+  const durs = tokens.filter((t) => t.namespace === 'duration');
+  const trans = tokens.filter((t) => t.namespace === 'transition');
+  const grads = tokens.filter((t) => t.namespace === 'gradient');
+  const drops = tokens.filter((t) => t.namespace === 'drop');
+  const cap = (t) => `<code>${t.name.replace('--sf-', '')}</code>`;
+  return `    <section id="functions">
+      <h2>Interactive functions <span class="count">motion · transitions · gradients</span></h2>
+
+      <h3>Animations <button data-act="replay-anim">▶ replay</button></h3>
+      ${fxList(anims, (t) => `<figure class="fx"><div class="fx-anim" data-anim="${t.name}"></div>${cap(t)}</figure>`)}
+
+      <h3>Easing curves <button data-act="run-ease">▶ run</button></h3>
+      <div id="fx-ease">${fxList(eases, (t) => `<figure class="fx"><div class="fx-track"><div class="fx-dot" style="transition:transform 1.1s var(${t.name})"></div></div>${cap(t)}</figure>`)}</div>
+
+      <h3>Durations <button data-act="run-dur">▶ run</button></h3>
+      <div id="fx-dur">${fxList(durs, (t) => `<figure class="fx"><div class="fx-track"><div class="fx-grow" style="transition:inline-size var(${t.name}) linear"></div></div>${cap(t)}</figure>`)}</div>
+
+      <h3>Transitions <button data-act="toggle-trans">⇄ toggle state</button></h3>
+      <div id="fx-trans">${fxList(trans, (t) => `<figure class="fx"><div class="fx-trans" style="transition:var(${t.name})">box</div>${cap(t)}</figure>`)}</div>
+
+      <h3>Gradients</h3>
+      ${fxList(grads, (t) => `<figure class="fx"><div class="fx-grad" style="background:var(${t.name})"></div>${cap(t)}</figure>`)}
+
+      <h3>Drop shadows (filter)</h3>
+      ${fxList(drops, (t) => `<figure class="fx"><div class="fx-drop" style="filter:var(${t.name})"></div>${cap(t)}</figure>`)}
+    </section>`;
+}
+
+function toolbar() {
+  return `  <nav class="toolbar" aria-label="demo controls">
+    <span class="tb-label">theme</span>
+    <span class="seg">
+      <button data-act="theme:auto" data-theme-btn="auto" class="active">Auto</button>
+      <button data-act="theme:light" data-theme-btn="light">Light</button>
+      <button data-act="theme:dark" data-theme-btn="dark">Dark</button>
+    </span>
+    <button data-act="lumlocker">LumLocker</button>
+    <button data-act="crossfade">Cross-fade</button>
+    <button id="ovBtn" data-act="override">Ultimate override</button>
+    <button data-act="replay">▶ Replay all</button>
+  </nav>`;
+}
+
+const PAGE_SCRIPT = [
+  '(function () {',
+  '  var root = document.documentElement;',
+  '  function refresh() {',
+  '    var cs = getComputedStyle(root);',
+  '    document.querySelectorAll("[data-token]").forEach(function (el) {',
+  '      var v = cs.getPropertyValue(el.getAttribute("data-token")).trim();',
+  '      var o = el.querySelector(".ttile__val"); if (o) o.textContent = v || "(empty)";',
+  '    });',
+  '  }',
+  '  function playAnims() {',
+  '    document.querySelectorAll("[data-anim]").forEach(function (el) {',
+  '      var n = el.getAttribute("data-anim");',
+  '      el.style.animation = "none"; void el.offsetWidth; el.style.animation = "var(" + n + ")";',
+  '    });',
+  '  }',
+  '  function retrigger(id) { var s = document.getElementById(id); if (!s) return; s.classList.remove("go"); void s.offsetWidth; s.classList.add("go"); }',
+  '  function setTheme(t) {',
+  '    if (t === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);',
+  '    document.querySelectorAll("[data-theme-btn]").forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-theme-btn") === t); });',
+  '    setTimeout(refresh, 60);',
+  '  }',
+  '  var ov = document.getElementById("ov");',
+  '  function setOverride(on) {',
+  '    if (on) { if (!ov) { ov = document.createElement("link"); ov.rel = "stylesheet"; ov.href = "ultimate-override.css"; ov.id = "ov"; document.head.appendChild(ov); } }',
+  '    else if (ov) { ov.remove(); ov = null; }',
+  '    var b = document.getElementById("ovBtn"); if (b) b.classList.toggle("active", !!ov);',
+  '    setTimeout(refresh, 90);',
+  '  }',
+  '  document.addEventListener("click", function (e) {',
+  '    var t = e.target.closest("[data-act]"); if (!t) return;',
+  '    var a = t.getAttribute("data-act");',
+  '    if (a.indexOf("theme:") === 0) setTheme(a.slice(6));',
+  '    else if (a === "lumlocker") { root.toggleAttribute("data-lumlocker"); t.classList.toggle("active", root.hasAttribute("data-lumlocker")); setTimeout(refresh, 60); }',
+  '    else if (a === "crossfade") { root.classList.toggle("sf-theme-transition"); t.classList.toggle("active", root.classList.contains("sf-theme-transition")); }',
+  '    else if (a === "override") setOverride(!ov);',
+  '    else if (a === "replay") { playAnims(); retrigger("fx-ease"); retrigger("fx-dur"); var tr = document.getElementById("fx-trans"); if (tr) tr.classList.toggle("on"); }',
+  '    else if (a === "replay-anim") playAnims();',
+  '    else if (a === "run-ease") retrigger("fx-ease");',
+  '    else if (a === "run-dur") retrigger("fx-dur");',
+  '    else if (a === "toggle-trans") { var s = document.getElementById("fx-trans"); if (s) s.classList.toggle("on"); }',
+  '  });',
+  '  setOverride(!!ov);',
+  '  refresh();',
+  '  requestAnimationFrame(playAnims);',
+  '})();',
+].join('\n');
+
 function buildDemo({ withOverride }) {
-  const overrideLink = withOverride ? `\n  <link rel="stylesheet" href="ultimate-override.css">` : '';
+  const overrideLink = withOverride ? `\n  <link rel="stylesheet" href="ultimate-override.css" id="ov">` : '';
   const banner = withOverride
-    ? `<div class="notice"><strong>ultimate-override.css is ACTIVE.</strong> Every value below is recomputed from perturbed knob tokens — compare against <a href="full-api-demo.html">the un-overridden page</a>.</div>`
-    : `<div class="notice">Baseline render with default tokens. The override variant is <a href="full-api-demo-with-overrides.html">full-api-demo-with-overrides.html</a>.</div>`;
+    ? `<div class="notice"><strong>ultimate-override.css is ACTIVE.</strong> Every value below is recomputed from perturbed knob tokens — toggle it off in the toolbar, or compare against <a href="full-api-demo.html">the un-overridden page</a>.</div>`
+    : `<div class="notice">Baseline render with default tokens. Use the toolbar to switch theme, toggle the ultimate override live, or replay motion. The always-on override variant is <a href="full-api-demo-with-overrides.html">full-api-demo-with-overrides.html</a>.</div>`;
   const kinds = [
     ['layout', 'Layout primitives'],
     ['macro', 'Macro classes'],
@@ -430,16 +591,71 @@ function buildDemo({ withOverride }) {
             place-items: center; font: var(--sf-text-xs) var(--sf-font-mono); color: var(--sf-color-text--muted); }
     .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: var(--sf-space-l);
                padding: var(--sf-space-l); background: var(--sf-color-inset); border-radius: var(--sf-radius-m); }
+    /* toolbar */
+    .toolbar { position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; gap: var(--sf-space-xs); align-items: center;
+               padding: var(--sf-space-xs) var(--sf-space-l); background: var(--sf-color-overlay);
+               backdrop-filter: blur(8px); border-block-end: 1px solid var(--sf-color-border); }
+    .tb-label { font: var(--sf-text-xs) var(--sf-font-mono); color: var(--sf-color-text--muted); }
+    .toolbar button { font: var(--sf-text-s) var(--sf-font-body); padding: .35em .8em; border: 1px solid var(--sf-color-border);
+                      background: var(--sf-color-surface); color: var(--sf-color-text); border-radius: var(--sf-radius-s); cursor: pointer; }
+    .toolbar .seg { display: inline-flex; }
+    .toolbar .seg button { border-radius: 0; border-inline-width: 0; }
+    .toolbar .seg button:first-child { border-radius: var(--sf-radius-s) 0 0 var(--sf-radius-s); border-inline-start-width: 1px; }
+    .toolbar .seg button:last-child { border-radius: 0 var(--sf-radius-s) var(--sf-radius-s) 0; border-inline-end-width: 1px; }
+    .toolbar button.active { background: var(--sf-color-primary); color: var(--sf-color-text--on-primary, #fff); border-color: var(--sf-color-primary); }
+    h3 button { margin-inline-start: var(--sf-space-s); font: var(--sf-text-xs) var(--sf-font-body); padding: .2em .7em;
+                border: 1px solid var(--sf-color-border); background: var(--sf-color-surface); color: var(--sf-color-text);
+                border-radius: var(--sf-radius-s); cursor: pointer; }
+    /* part 2 token reference */
+    .ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: var(--sf-space-s); }
+    .ttile { margin: 0; display: grid; gap: var(--sf-space-2xs); padding: var(--sf-space-xs);
+             border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-s); background: var(--sf-color-surface); }
+    .ttile__name { font: var(--sf-text-2xs)/1.35 var(--sf-font-mono); color: var(--sf-color-text--secondary); word-break: break-all; }
+    .ttile__tier { color: var(--sf-color-warning); }
+    .ttile__val { font: var(--sf-text-2xs)/1.35 var(--sf-font-mono); color: var(--sf-color-text--muted);
+                  word-break: break-all; max-block-size: 4.5em; overflow: auto; }
+    .ttile__vis { min-block-size: 2.5rem; display: grid; place-items: center; border-radius: var(--sf-radius-xs);
+                  background: repeating-conic-gradient(var(--sf-color-inset) 0 25%, transparent 0 50%) 0 0 / 1rem 1rem, var(--sf-color-surface); overflow: hidden; }
+    .tvis { inline-size: 100%; block-size: 2.5rem; }
+    .tvis--rad { background: var(--sf-color-primary); }
+    .tvis--card { inline-size: 72%; block-size: 2.2rem; background: var(--sf-color-surface); border-radius: var(--sf-radius-s); }
+    .tvis--bar { block-size: .9rem; background: linear-gradient(90deg, var(--sf-color-primary), var(--sf-color-action));
+                 border-radius: var(--sf-radius-full); justify-self: start; align-self: center; }
+    .tvis--txt { inline-size: auto; block-size: auto; color: var(--sf-color-text); line-height: 1; }
+    .tvis--lead { inline-size: auto; block-size: auto; margin: 0; font-size: var(--sf-text-2xs); color: var(--sf-color-text); }
+    .tvis--op { background: var(--sf-color-primary); }
+    .tvis--anim { inline-size: 2.5rem; background: var(--sf-color-action); border-radius: var(--sf-radius-s); }
+    /* interactive functions */
+    .fx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: var(--sf-space-m); margin-block-end: var(--sf-space-m); }
+    .fx { margin: 0; display: grid; gap: var(--sf-space-2xs); justify-items: center; text-align: center; }
+    .fx code { font-size: var(--sf-text-2xs); color: var(--sf-color-text--muted); word-break: break-all; }
+    .fx-anim { inline-size: 3rem; block-size: 3rem; background: var(--sf-color-action); border-radius: var(--sf-radius-m); }
+    .fx-track { position: relative; inline-size: 100%; min-inline-size: 10rem; block-size: 1.4rem;
+                background: var(--sf-color-inset); border-radius: var(--sf-radius-full); overflow: hidden; }
+    .fx-dot { position: absolute; inset-block: .12rem; inset-inline-start: .12rem; inline-size: 1.15rem;
+              background: var(--sf-color-primary); border-radius: 50%; transform: translateX(0); }
+    #fx-ease.go .fx-dot { transform: translateX(8rem); }
+    .fx-grow { block-size: 1.4rem; inline-size: 0; border-radius: var(--sf-radius-full);
+               background: linear-gradient(90deg, var(--sf-color-primary), var(--sf-color-action)); }
+    #fx-dur.go .fx-grow { inline-size: 100%; }
+    .fx-trans { padding: var(--sf-space-s); inline-size: 100%; border: 1px solid var(--sf-color-border);
+                border-radius: var(--sf-radius-m); background: var(--sf-color-surface); }
+    #fx-trans.on .fx-trans { background: var(--sf-color-primary); color: var(--sf-color-text--on-primary, #fff);
+                             transform: translateY(-4px) scale(1.03); box-shadow: var(--sf-shadow-l); border-color: var(--sf-color-primary); opacity: .92; }
+    .fx-grad { inline-size: 100%; block-size: 3rem; border-radius: var(--sf-radius-m); }
+    .fx-drop { inline-size: 3rem; block-size: 3rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-m); }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
+${toolbar()}
   <main id="main">
     <h1>SLASHED Full API Demo</h1>
-    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal bundle from jsDelivr CDN · ${classes.length} classes · ${knobs.length} configurable tokens</p>
+    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal bundle from jsDelivr CDN · ${classes.length} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
     ${banner}
 
     <section id="tokens">
-      <h2>Token galleries <span class="count">derived values</span></h2>
+      <h2>Token galleries <span class="count">highlights</span></h2>
       <h3>Color ramps</h3>
       ${['primary', 'secondary', 'tertiary', 'action', 'neutral', 'base'].map(colorRamp).join('\n      ')}
       <h3>Semantic / role colors</h3>
@@ -454,8 +670,13 @@ function buildDemo({ withOverride }) {
       <div class="gallery">${shadowSwatches()}</div>
     </section>
 
+${functionsSection()}
+
 ${kinds.map(([k, t]) => classSection(k, t)).join('\n')}
+
+${tokenReferenceSection()}
   </main>
+  <script>${PAGE_SCRIPT}</script>
 </body>
 </html>
 `;
@@ -470,9 +691,16 @@ const emitted = new Set();
 for (const c of classes) emitted.add(c.name);
 if (emitted.size !== classes.length) throw new Error('class de-dup mismatch');
 
-fs.writeFileSync(path.join(ROOT, 'full-api-demo.html'), buildDemo({ withOverride: false }));
+const baseHtml = buildDemo({ withOverride: false });
+fs.writeFileSync(path.join(ROOT, 'full-api-demo.html'), baseHtml);
 fs.writeFileSync(path.join(ROOT, 'full-api-demo-with-overrides.html'), buildDemo({ withOverride: true }));
 
+// completeness assertion for tokens: every token must appear once in Part 2
+const tokenTiles = (baseHtml.match(/data-token="/g) || []).length;
+if (tokenTiles !== tokens.length) {
+  throw new Error(`Part 2 token reference: ${tokenTiles} tiles != ${tokens.length} tokens`);
+}
+
 console.log(`ultimate-override.css        → ${handledCount}/${knobs.length} knobs overridden, ${Object.keys(SKIP).length} skipped (documented)`);
-console.log(`full-api-demo.html           → ${classes.length} classes, all rendered`);
+console.log(`full-api-demo.html           → ${classes.length} classes + ${tokens.length} tokens (Part 2), all rendered`);
 console.log(`full-api-demo-with-overrides.html → same body + override link`);
