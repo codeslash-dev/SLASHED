@@ -127,6 +127,7 @@ title: Home
   <div class="hero-actions">
     <a class="btn-primary" href="/configurator/">Open Configurator →</a>
     <a class="btn-secondary" href="/docs/demo.html">View Demo</a>
+    <a class="btn-secondary" href="/demos/full-api-demo.html">Full API Demo</a>
     <a class="btn-secondary" href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
   </div>
 </div>
@@ -224,6 +225,8 @@ title: Home
       <li><a href="/docs/api-index">API Index <span>machine-readable catalogue</span></a></li>
       <li><a href="/docs/source-comment-policy">Comment Policy <span>contributor conventions</span></a></li>
       <li><a href="/docs/demo.html">Demo <span>full component showcase</span></a></li>
+      <li><a href="/demos/full-api-demo.html">Full API Demo <span>every class &amp; token, live · dark mode</span></a></li>
+      <li><a href="/demos/full-api-demo-with-overrides.html">Full API Demo — overridden <span>ultimate-override.css applied</span></a></li>
       <li><a href="/docs/test-coverage.html">Test Coverage <span>visual regression suite</span></a></li>
     </ul>
   </div>
