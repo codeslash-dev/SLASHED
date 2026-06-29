@@ -4,1375 +4,1072 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLASHED — Full API Demo</title>
-  <!-- Load optimal bundle from jsDelivr CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css">
   <style>
-    /* ─────────────────────────────────────────────────────────────
-       FULL API DEMO STYLES
-       Tests every token and class available in the framework
-    ───────────────────────────────────────────────────────────────── */
-
-    body {
-      background: var(--sf-color-bg);
-      color: var(--sf-color-text);
-      font-family: var(--sf-font-body);
-      margin: 0;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: var(--sf-z-fixed);
-      background: var(--sf-color-surface);
-      border-bottom: var(--sf-border);
-      padding: var(--sf-space-m) var(--sf-space-l);
-      box-shadow: var(--sf-shadow-s);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: var(--sf-text-3xl);
-      color: var(--sf-color-primary);
-      font-weight: var(--sf-font-weight-heading);
-    }
-
-    h2 {
-      font-size: var(--sf-text-2xl);
-      color: var(--sf-color-heading);
-      margin-block: var(--sf-space-xl) var(--sf-space-m);
-      padding-block-end: var(--sf-space-s);
-      border-bottom: 2px solid var(--sf-color-primary-200);
-    }
-
-    h3 {
-      font-size: var(--sf-text-l);
-      color: var(--sf-color-text--secondary);
-      margin-block: var(--sf-space-l) var(--sf-space-s);
-      font-weight: var(--sf-font-weight-strong);
-    }
-
-    h4 {
-      font-size: var(--sf-text-m);
-      font-weight: var(--sf-font-weight-heading);
-      color: var(--sf-color-text--muted);
-      margin-block: var(--sf-space-m) var(--sf-space-xs);
-      text-transform: uppercase;
-      letter-spacing: var(--sf-tracking-wide);
-    }
-
-    main {
-      max-width: var(--sf-container-max);
-      margin: 0 auto;
-      padding: var(--sf-space-2xl);
-    }
-
-    /* ─── LAYOUT PRIMITIVES DEMO ──── */
-    .demo-layout-section {
-      margin-block-end: var(--sf-space-3xl);
-      padding: var(--sf-space-xl);
-      background: var(--sf-color-surface);
-      border: var(--sf-border);
-      border-radius: var(--sf-radius-l);
-    }
-
-    /* Stack demo */
-    .demo-stack-item {
-      padding: var(--sf-space-m);
-      background: var(--sf-color-action-100);
-      border: var(--sf-border-subtle);
-      border-radius: var(--sf-radius-m);
-      color: var(--sf-color-text);
-    }
-
-    /* Cluster demo */
-    .demo-cluster-item {
-      padding: var(--sf-space-m);
-      background: var(--sf-color-primary-100);
-      border: var(--sf-border-subtle);
-      border-radius: var(--sf-radius-m);
-      color: var(--sf-color-text);
-    }
-
-    /* Grid demo */
-    .demo-grid-item {
-      padding: var(--sf-space-l);
-      background: var(--sf-color-info-100);
-      border: var(--sf-border-subtle);
-      border-radius: var(--sf-radius-m);
-      text-align: center;
-      color: var(--sf-color-text);
-    }
-
-    /* Sidebar demo */
-    .demo-sidebar-item {
-      padding: var(--sf-space-m);
-      background: var(--sf-color-surface);
-      border: var(--sf-border);
-      border-radius: var(--sf-radius-m);
-    }
-
-    /* Icon demo */
-    .demo-icon-label {
-      display: flex;
-      align-items: center;
-      gap: var(--sf-space-s);
-      padding: var(--sf-space-m);
-      background: var(--sf-color-bg);
-      border-radius: var(--sf-radius-s);
-    }
-
-    .demo-icon {
-      width: 1.5em;
-      height: 1.5em;
-      background: var(--sf-color-action);
-      border-radius: var(--sf-radius-s);
-      display: inline-flex;
-    }
-
-    /* Color swatches */
-    .demo-swatch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-      gap: var(--sf-space-m);
-      margin-block: var(--sf-space-m);
-    }
-
-    .demo-swatch {
-      aspect-ratio: 1;
-      border-radius: var(--sf-radius-m);
-      border: 1px solid var(--sf-color-border);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: var(--sf-space-xs);
-      font-size: var(--sf-text-2xs);
-      font-family: var(--sf-font-mono);
-      color: var(--sf-color-text);
-      font-weight: var(--sf-font-weight-strong);
-    }
-
-    .demo-swatch-label {
-      font-family: var(--sf-font-mono);
-      font-size: var(--sf-text-xs);
-      color: var(--sf-color-text--muted);
-      margin-block-start: var(--sf-space-xs);
-    }
-
-    /* Typography scale */
-    .demo-text-scale {
-      margin-block: var(--sf-space-m) 0;
-    }
-
-    .demo-text-item {
-      display: flex;
-      gap: var(--sf-space-m);
-      align-items: baseline;
-      margin-block-end: var(--sf-space-m);
-    }
-
-    .demo-text-label {
-      font-family: var(--sf-font-mono);
-      font-size: var(--sf-text-s);
-      color: var(--sf-color-text--muted);
-      min-width: 10rem;
-      flex-shrink: 0;
-    }
-
-    .demo-text-sample {
-      flex: 1;
-    }
-
-    /* Spacing scale */
-    .demo-space-row {
-      display: flex;
-      align-items: center;
-      gap: var(--sf-space-m);
-      margin-block-end: var(--sf-space-s);
-    }
-
-    .demo-space-label {
-      font-family: var(--sf-font-mono);
-      font-size: var(--sf-text-xs);
-      color: var(--sf-color-text--muted);
-      min-width: 10rem;
-      flex-shrink: 0;
-    }
-
-    .demo-space-bar {
-      height: 1.5rem;
-      background: linear-gradient(90deg, var(--sf-color-primary), var(--sf-color-action));
-      border-radius: var(--sf-radius-s);
-      min-width: 2px;
-    }
-
-    /* Radius swatches */
-    .demo-radius-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-      gap: var(--sf-space-m);
-      margin-block: var(--sf-space-m);
-    }
-
-    .demo-radius {
-      aspect-ratio: 1;
-      background: var(--sf-color-primary);
-      border: 2px solid var(--sf-color-primary-600);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--sf-text-xs);
-      font-family: var(--sf-font-mono);
-      color: white;
-      font-weight: var(--sf-font-weight-heading);
-    }
-
-    /* Shadow demo */
-    .demo-shadow-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-      gap: var(--sf-space-2xl);
-      padding: var(--sf-space-xl);
-      background: var(--sf-color-bg);
-      border-radius: var(--sf-radius-l);
-      margin-block: var(--sf-space-m);
-    }
-
-    .demo-shadow {
-      aspect-ratio: 1;
-      background: var(--sf-color-surface);
-      border-radius: var(--sf-radius-m);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--sf-text-xs);
-      font-family: var(--sf-font-mono);
-      color: var(--sf-color-text--muted);
-      text-align: center;
-      padding: var(--sf-space-s);
-    }
-
-    /* Border styles */
-    .demo-border-row {
-      display: flex;
-      gap: var(--sf-space-m);
-      align-items: center;
-      margin-block-end: var(--sf-space-m);
-    }
-
-    .demo-border {
-      flex: 1;
-      padding: var(--sf-space-m);
-      border-radius: var(--sf-radius-m);
-      background: var(--sf-color-surface);
-      font-size: var(--sf-text-xs);
-      font-family: var(--sf-font-mono);
-      color: var(--sf-color-text--muted);
-      text-align: center;
-    }
-
-    /* Animation demo */
-    .demo-animation-item {
-      width: 3rem;
-      height: 3rem;
-      background: var(--sf-color-action);
-      border-radius: var(--sf-radius-m);
-      display: inline-flex;
-      margin: var(--sf-space-m) var(--sf-space-s);
-    }
-
-    .demo-animation-fade {
-      animation: var(--sf-animation-fade-in);
-    }
-
-    .demo-animation-slide-up {
-      animation: var(--sf-animation-slide-in-up);
-    }
-
-    .demo-animation-scale-up {
-      animation: var(--sf-animation-scale-up);
-    }
-
-    .demo-animation-spin {
-      animation: var(--sf-animation-spin);
-    }
-
-    .demo-animation-float {
-      animation: var(--sf-animation-float);
-    }
-
-    .demo-animation-ping {
-      animation: var(--sf-animation-ping);
-    }
-
-    .demo-animation-pulse {
-      animation: var(--sf-animation-color-pulse);
-    }
-
-    .demo-animation-shimmer {
-      animation: var(--sf-animation-shimmer);
-    }
-
-    .demo-animation-blink {
-      animation: var(--sf-animation-blink);
-    }
-
-    /* State demo */
-    .demo-state-box {
-      padding: var(--sf-space-m);
-      border: var(--sf-border);
-      border-radius: var(--sf-radius-m);
-      margin-block-end: var(--sf-space-m);
-      background: var(--sf-color-surface);
-    }
-
-    /* Macro demo */
-    .demo-prose-container {
-      background: var(--sf-color-bg);
-      padding: var(--sf-space-l);
-      border-radius: var(--sf-radius-l);
-      border: var(--sf-border);
-    }
-
-    .demo-line-clamp {
-      background: var(--sf-color-surface);
-      padding: var(--sf-space-m);
-      border: var(--sf-border-subtle);
-      border-radius: var(--sf-radius-m);
-      margin-block-end: var(--sf-space-s);
-    }
-
-    /* Utilities */
-    .demo-code-block {
-      background: var(--sf-color-code-bg);
-      color: var(--sf-color-code-text);
-      padding: var(--sf-space-m);
-      border-radius: var(--sf-radius-m);
-      font-family: var(--sf-font-mono);
-      font-size: var(--sf-code-font-size);
-      overflow-x: auto;
-      margin-block: var(--sf-space-m);
-    }
-
-    .demo-feature-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-      gap: var(--sf-space-l);
-      margin-block: var(--sf-space-l);
-    }
-
-    .demo-feature-card {
-      padding: var(--sf-space-l);
-      background: var(--sf-color-surface);
-      border: var(--sf-border);
-      border-radius: var(--sf-radius-l);
-    }
-
-    .demo-feature-card h4 {
-      margin-block-start: 0;
-    }
-
-    /* Cover layout */
-    .demo-cover {
-      min-height: 15rem;
-      background: linear-gradient(135deg, var(--sf-color-primary), var(--sf-color-action));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      border-radius: var(--sf-radius-l);
-      margin-block: var(--sf-space-m);
-      padding: var(--sf-space-2xl);
-    }
-
-    /* Frame ratio demo */
-    .demo-frame {
-      background: linear-gradient(45deg, var(--sf-color-info), var(--sf-color-action));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      border-radius: var(--sf-radius-m);
-      font-weight: var(--sf-font-weight-heading);
-      margin-block-end: var(--sf-space-m);
-    }
-
-    /* Divider styles */
-    .demo-divider-example {
-      padding: var(--sf-space-l);
-      background: var(--sf-color-surface);
-      border-radius: var(--sf-radius-m);
-      margin-block-end: var(--sf-space-m);
-    }
-
-    /* Surface utilities */
-    .demo-surface {
-      padding: var(--sf-space-m);
-      border-radius: var(--sf-radius-m);
-      margin-block-end: var(--sf-space-s);
-      border: var(--sf-border-subtle);
-    }
-
-    /* Duration and easing demo */
-    .demo-duration-item {
-      padding: var(--sf-space-m);
-      background: var(--sf-color-action);
-      border-radius: var(--sf-radius-m);
-      color: white;
-      text-align: center;
-      font-size: var(--sf-text-s);
-      margin-block-end: var(--sf-space-m);
-      transition: all var(--sf-duration-normal) var(--sf-ease-out);
-    }
-
-    .demo-duration-item:hover {
-      transform: scale(1.05);
-      background: var(--sf-color-action-600);
-    }
-
-    /* Z-index demo */
-    .demo-z-item {
-      position: relative;
-      padding: var(--sf-space-m);
-      background: var(--sf-color-surface);
-      border: var(--sf-border);
-      border-radius: var(--sf-radius-m);
-      margin-block-end: var(--sf-space-m);
-    }
-
-    /* Focus styles */
-    .demo-focusable {
-      padding: var(--sf-space-m);
-      border: var(--sf-border);
-      border-radius: var(--sf-radius-m);
-      background: var(--sf-color-surface);
-      cursor: pointer;
-      transition: all var(--sf-duration-fast) var(--sf-ease-out);
-    }
-
-    .demo-focusable:focus-visible {
-      outline: 3px solid var(--sf-color-focus);
-      outline-offset: 2px;
-    }
-
-    footer {
-      border-top: var(--sf-border);
-      padding: var(--sf-space-l);
-      text-align: center;
-      color: var(--sf-color-text--muted);
-      font-size: var(--sf-text-s);
-      margin-top: var(--sf-space-3xl);
-    }
+    body { background: var(--sf-color-bg); color: var(--sf-color-text); font-family: var(--sf-font-body); margin: 0; }
+    main { max-width: var(--sf-container-default); margin-inline: auto; padding: var(--sf-space-l); }
+    h1 { color: var(--sf-color-primary); font-size: var(--sf-text-3xl); margin-block: 0 var(--sf-space-xs); }
+    h2 { color: var(--sf-color-heading); font-size: var(--sf-text-xl); margin-block: var(--sf-space-2xl) var(--sf-space-m);
+         padding-block-end: var(--sf-space-xs); border-block-end: 2px solid var(--sf-color-primary-300); }
+    h3 { color: var(--sf-color-text--secondary); font-size: var(--sf-text-m); margin-block: var(--sf-space-l) var(--sf-space-s); }
+    .count { font: var(--sf-font-weight-normal) var(--sf-text-s)/1 var(--sf-font-mono); color: var(--sf-color-text--muted); }
+    .notice { padding: var(--sf-space-m); background: var(--sf-color-info-subtle);
+              border-inline-start: 4px solid var(--sf-color-info); border-radius: var(--sf-radius-m); margin-block: var(--sf-space-m); }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: var(--sf-space-m); }
+    .tile { margin: 0; border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m);
+            background: var(--sf-color-surface); overflow: hidden; }
+    .tile__cap { font: var(--sf-text-xs)/1.4 var(--sf-font-mono); padding: var(--sf-space-2xs) var(--sf-space-xs);
+                 background: var(--sf-color-inset); border-block-end: 1px solid var(--sf-color-border); color: var(--sf-color-text--secondary); }
+    .tile__warn { color: var(--sf-color-warning); }
+    /* contain traps position:fixed/absolute-fill classes (is-fullscreen,
+       is-overlay, sf-imposter--fixed) inside their own tile instead of the page. */
+    .tile__stage { padding: var(--sf-space-m); position: relative; overflow: hidden;
+                   contain: layout paint; min-block-size: 4rem; }
+    .dbox { padding: var(--sf-space-s); background: var(--sf-color-primary-100); border: 1px solid var(--sf-color-primary-300);
+            border-radius: var(--sf-radius-s); text-align: center; color: var(--sf-color-text); min-block-size: 2rem; }
+    .dbox--anim { inline-size: 6rem; }
+    .dpad { padding: var(--sf-space-s); border-radius: var(--sf-radius-s); }
+    .dmedia { display: grid; place-items: center; min-block-size: 6rem; color: var(--sf-color-text); }
+    .swatch { aspect-ratio: 1; display: grid; place-items: end center; padding: 2px; font: var(--sf-text-2xs) var(--sf-font-mono);
+              color: #fff; text-shadow: 0 1px 2px #0009; }
+    .swatch--lg { aspect-ratio: 3/2; border-radius: var(--sf-radius-s); }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: var(--sf-space-xs); }
+    .ramp { margin-block-end: var(--sf-space-s); }
+    .ramp__name { font: var(--sf-text-xs) var(--sf-font-mono); color: var(--sf-color-text--muted); }
+    .ramp__cells { display: grid; grid-template-columns: repeat(11, 1fr); }
+    .ramp__cells .swatch:first-child { border-start-start-radius: var(--sf-radius-s); border-end-start-radius: var(--sf-radius-s); }
+    .ramp__cells .swatch:last-child { border-start-end-radius: var(--sf-radius-s); border-end-end-radius: var(--sf-radius-s); }
+    .bar-row { display: flex; align-items: center; gap: var(--sf-space-s); margin-block-end: var(--sf-space-2xs); }
+    .bar-row code { inline-size: 7rem; font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); }
+    .bar { block-size: 1rem; background: linear-gradient(90deg, var(--sf-color-primary), var(--sf-color-action)); border-radius: var(--sf-radius-xs); }
+    .ts-row { display: flex; align-items: baseline; gap: var(--sf-space-s); margin-block-end: var(--sf-space-2xs); }
+    .ts-row code { inline-size: 5rem; font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); flex: none; }
+    .rad { aspect-ratio: 1; background: var(--sf-color-primary); color: #fff; display: grid; place-items: center;
+           font: var(--sf-text-xs) var(--sf-font-mono); }
+    .shad { aspect-ratio: 1; background: var(--sf-color-surface); border-radius: var(--sf-radius-m); display: grid;
+            place-items: center; font: var(--sf-text-xs) var(--sf-font-mono); color: var(--sf-color-text--muted); }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: var(--sf-space-l);
+               padding: var(--sf-space-l); background: var(--sf-color-inset); border-radius: var(--sf-radius-m); }
   </style>
 </head>
 <body>
-  <header>
+  <main id="main">
     <h1>SLASHED Full API Demo</h1>
-    <p style="margin: var(--sf-space-xs) 0; color: var(--sf-color-text--muted); font-size: var(--sf-text-s);">
-      Comprehensive test of every token, class, and feature
-    </p>
-  </header>
+    <p style="color:var(--sf-color-text--muted)">v0.6.25 · optimal bundle from jsDelivr CDN · 239 classes · 225 configurable tokens</p>
+    <div class="notice">Baseline render with default tokens. The override variant is <a href="full-api-demo-with-overrides.html">full-api-demo-with-overrides.html</a>.</div>
 
-  <main>
-    <!-- ═══════════════════════════════════════════════════════════════
-         LAYOUT PRIMITIVES
-    ═══════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Layout Primitives</h2>
-
-      <h3>Stack (Vertical Flow)</h3>
-      <div class="demo-layout-section sf-stack sf-stack--m">
-        <div class="demo-stack-item">Stack Item 1</div>
-        <div class="demo-stack-item">Stack Item 2 (with gap between)</div>
-        <div class="demo-stack-item">Stack Item 3</div>
-      </div>
-
-      <h3>Cluster (Wrapping Inline Group)</h3>
-      <div class="demo-layout-section sf-cluster sf-cluster--m">
-        <div class="demo-cluster-item">Cluster 1</div>
-        <div class="demo-cluster-item">Cluster 2</div>
-        <div class="demo-cluster-item">Cluster 3</div>
-        <div class="demo-cluster-item">Cluster 4</div>
-      </div>
-
-      <h3>Grid (Responsive Auto-fill)</h3>
-      <div class="demo-layout-section sf-grid sf-grid--m">
-        <div class="demo-grid-item">Grid 1</div>
-        <div class="demo-grid-item">Grid 2</div>
-        <div class="demo-grid-item">Grid 3</div>
-        <div class="demo-grid-item">Grid 4</div>
-        <div class="demo-grid-item">Grid 5</div>
-        <div class="demo-grid-item">Grid 6</div>
-      </div>
-
-      <h3>Fixed Column Grids</h3>
-      <div style="display: grid; gap: var(--sf-space-l);">
-        <div>
-          <h4>2-Column</h4>
-          <div class="demo-layout-section sf-grid-cols-2">
-            <div class="demo-grid-item">Col 1</div>
-            <div class="demo-grid-item">Col 2</div>
-          </div>
-        </div>
-        <div>
-          <h4>3-Column</h4>
-          <div class="demo-layout-section sf-grid-cols-3">
-            <div class="demo-grid-item">Col 1</div>
-            <div class="demo-grid-item">Col 2</div>
-            <div class="demo-grid-item">Col 3</div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Container & Box</h3>
-      <div class="sf-container" style="padding: var(--sf-space-l); background: var(--sf-color-surface); border-radius: var(--sf-radius-l); border: var(--sf-border); margin-block: var(--sf-space-l);">
-        <p>Centered container with max-width constraint</p>
-      </div>
-
-      <div class="sf-box" style="padding: var(--sf-space-l); background: var(--sf-color-surface); margin-block: var(--sf-space-l);">
-        <p>Box with padding and optional border outline</p>
-      </div>
-
-      <h3>Center (Intrinsic Centering)</h3>
-      <div class="sf-center" style="padding: var(--sf-space-l); background: var(--sf-color-surface); border-radius: var(--sf-radius-l); border: var(--sf-border); margin-block: var(--sf-space-l);">
-        <p>Intrinsically centered content with max-width</p>
-      </div>
-
-      <h3>Section & Section-Group</h3>
-      <section class="sf-section sf-section--m" style="background: var(--sf-color-surface); border: var(--sf-border);">
-        <h4>Section with standard padding</h4>
-        <p>Content goes here</p>
-      </section>
-
-      <h3>Sidebar (Content + Side Panel)</h3>
-      <div class="demo-layout-section sf-sidebar">
-        <div class="demo-sidebar-item"><strong>Main</strong> - This is the primary content area</div>
-        <div class="demo-sidebar-item" style="background: var(--sf-color-primary-100);"><strong>Sidebar</strong> - Side panel</div>
-      </div>
-
-      <h3>Switcher (Responsive Columns)</h3>
-      <div class="demo-layout-section sf-switcher" style="--sf-switcher-threshold: 30rem;">
-        <div class="demo-grid-item">Switch 1</div>
-        <div class="demo-grid-item">Switch 2</div>
-        <div class="demo-grid-item">Switch 3</div>
-      </div>
-
-      <h3>Icon Sizing</h3>
-      <div style="display: flex; flex-wrap: wrap; gap: var(--sf-space-m); margin-block: var(--sf-space-m);">
-        <div class="sf-icon sf-icon--xs"><span style="display: inline-block; width: 100%; height: 100%; background: var(--sf-color-action); border-radius: var(--sf-radius-s);"></span></div>
-        <div class="sf-icon sf-icon--s"><span style="display: inline-block; width: 100%; height: 100%; background: var(--sf-color-action); border-radius: var(--sf-radius-s);"></span></div>
-        <div class="sf-icon sf-icon--m"><span style="display: inline-block; width: 100%; height: 100%; background: var(--sf-color-action); border-radius: var(--sf-radius-s);"></span></div>
-        <div class="sf-icon sf-icon--l"><span style="display: inline-block; width: 100%; height: 100%; background: var(--sf-color-action); border-radius: var(--sf-radius-s);"></span></div>
-        <div class="sf-icon sf-icon--xl"><span style="display: inline-block; width: 100%; height: 100%; background: var(--sf-color-action); border-radius: var(--sf-radius-s);"></span></div>
-        <div class="sf-icon sf-icon--2xl"><span style="display: inline-block; width: 100%; height: 100%; background: var(--sf-color-action); border-radius: var(--sf-radius-s);"></span></div>
-      </div>
-
-      <h3>Dividers</h3>
-      <div class="demo-divider-example">
-        <p>Content above</p>
-        <div class="sf-divider"></div>
-        <p>Divider between content</p>
-        <div class="sf-divider sf-divider--dashed"></div>
-        <p>Dashed divider</p>
-        <div class="sf-divider sf-divider--dotted"></div>
-        <p>Dotted divider</p>
-        <div class="sf-divider sf-divider--strong"></div>
-        <p>Strong divider</p>
-      </div>
-
-      <h3>Gap Utility</h3>
-      <div style="display: flex; gap: 0;" class="sf-gap sf-gap--m">
-        <div style="flex: 1; padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Gap 1</div>
-        <div style="flex: 1; padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Gap 2</div>
-      </div>
+    <section id="tokens">
+      <h2>Token galleries <span class="count">derived values</span></h2>
+      <h3>Color ramps</h3>
+      <div class="ramp"><div class="ramp__name">primary</div><div class="ramp__cells"><div class="swatch" style="background:var(--sf-color-primary-50)"><span>50</span></div><div class="swatch" style="background:var(--sf-color-primary-100)"><span>100</span></div><div class="swatch" style="background:var(--sf-color-primary-200)"><span>200</span></div><div class="swatch" style="background:var(--sf-color-primary-300)"><span>300</span></div><div class="swatch" style="background:var(--sf-color-primary-400)"><span>400</span></div><div class="swatch" style="background:var(--sf-color-primary-500)"><span>500</span></div><div class="swatch" style="background:var(--sf-color-primary-600)"><span>600</span></div><div class="swatch" style="background:var(--sf-color-primary-700)"><span>700</span></div><div class="swatch" style="background:var(--sf-color-primary-800)"><span>800</span></div><div class="swatch" style="background:var(--sf-color-primary-900)"><span>900</span></div><div class="swatch" style="background:var(--sf-color-primary-950)"><span>950</span></div></div></div>
+      <div class="ramp"><div class="ramp__name">secondary</div><div class="ramp__cells"><div class="swatch" style="background:var(--sf-color-secondary-50)"><span>50</span></div><div class="swatch" style="background:var(--sf-color-secondary-100)"><span>100</span></div><div class="swatch" style="background:var(--sf-color-secondary-200)"><span>200</span></div><div class="swatch" style="background:var(--sf-color-secondary-300)"><span>300</span></div><div class="swatch" style="background:var(--sf-color-secondary-400)"><span>400</span></div><div class="swatch" style="background:var(--sf-color-secondary-500)"><span>500</span></div><div class="swatch" style="background:var(--sf-color-secondary-600)"><span>600</span></div><div class="swatch" style="background:var(--sf-color-secondary-700)"><span>700</span></div><div class="swatch" style="background:var(--sf-color-secondary-800)"><span>800</span></div><div class="swatch" style="background:var(--sf-color-secondary-900)"><span>900</span></div><div class="swatch" style="background:var(--sf-color-secondary-950)"><span>950</span></div></div></div>
+      <div class="ramp"><div class="ramp__name">tertiary</div><div class="ramp__cells"><div class="swatch" style="background:var(--sf-color-tertiary-50)"><span>50</span></div><div class="swatch" style="background:var(--sf-color-tertiary-100)"><span>100</span></div><div class="swatch" style="background:var(--sf-color-tertiary-200)"><span>200</span></div><div class="swatch" style="background:var(--sf-color-tertiary-300)"><span>300</span></div><div class="swatch" style="background:var(--sf-color-tertiary-400)"><span>400</span></div><div class="swatch" style="background:var(--sf-color-tertiary-500)"><span>500</span></div><div class="swatch" style="background:var(--sf-color-tertiary-600)"><span>600</span></div><div class="swatch" style="background:var(--sf-color-tertiary-700)"><span>700</span></div><div class="swatch" style="background:var(--sf-color-tertiary-800)"><span>800</span></div><div class="swatch" style="background:var(--sf-color-tertiary-900)"><span>900</span></div><div class="swatch" style="background:var(--sf-color-tertiary-950)"><span>950</span></div></div></div>
+      <div class="ramp"><div class="ramp__name">action</div><div class="ramp__cells"><div class="swatch" style="background:var(--sf-color-action-50)"><span>50</span></div><div class="swatch" style="background:var(--sf-color-action-100)"><span>100</span></div><div class="swatch" style="background:var(--sf-color-action-200)"><span>200</span></div><div class="swatch" style="background:var(--sf-color-action-300)"><span>300</span></div><div class="swatch" style="background:var(--sf-color-action-400)"><span>400</span></div><div class="swatch" style="background:var(--sf-color-action-500)"><span>500</span></div><div class="swatch" style="background:var(--sf-color-action-600)"><span>600</span></div><div class="swatch" style="background:var(--sf-color-action-700)"><span>700</span></div><div class="swatch" style="background:var(--sf-color-action-800)"><span>800</span></div><div class="swatch" style="background:var(--sf-color-action-900)"><span>900</span></div><div class="swatch" style="background:var(--sf-color-action-950)"><span>950</span></div></div></div>
+      <div class="ramp"><div class="ramp__name">neutral</div><div class="ramp__cells"><div class="swatch" style="background:var(--sf-color-neutral-50)"><span>50</span></div><div class="swatch" style="background:var(--sf-color-neutral-100)"><span>100</span></div><div class="swatch" style="background:var(--sf-color-neutral-200)"><span>200</span></div><div class="swatch" style="background:var(--sf-color-neutral-300)"><span>300</span></div><div class="swatch" style="background:var(--sf-color-neutral-400)"><span>400</span></div><div class="swatch" style="background:var(--sf-color-neutral-500)"><span>500</span></div><div class="swatch" style="background:var(--sf-color-neutral-600)"><span>600</span></div><div class="swatch" style="background:var(--sf-color-neutral-700)"><span>700</span></div><div class="swatch" style="background:var(--sf-color-neutral-800)"><span>800</span></div><div class="swatch" style="background:var(--sf-color-neutral-900)"><span>900</span></div><div class="swatch" style="background:var(--sf-color-neutral-950)"><span>950</span></div></div></div>
+      <div class="ramp"><div class="ramp__name">base</div><div class="ramp__cells"><div class="swatch" style="background:var(--sf-color-base-50)"><span>50</span></div><div class="swatch" style="background:var(--sf-color-base-100)"><span>100</span></div><div class="swatch" style="background:var(--sf-color-base-200)"><span>200</span></div><div class="swatch" style="background:var(--sf-color-base-300)"><span>300</span></div><div class="swatch" style="background:var(--sf-color-base-400)"><span>400</span></div><div class="swatch" style="background:var(--sf-color-base-500)"><span>500</span></div><div class="swatch" style="background:var(--sf-color-base-600)"><span>600</span></div><div class="swatch" style="background:var(--sf-color-base-700)"><span>700</span></div><div class="swatch" style="background:var(--sf-color-base-800)"><span>800</span></div><div class="swatch" style="background:var(--sf-color-base-900)"><span>900</span></div><div class="swatch" style="background:var(--sf-color-base-950)"><span>950</span></div></div></div>
+      <h3>Semantic / role colors</h3>
+      <div class="swatches"><div class="swatch swatch--lg" style="background:var(--sf-color-primary)"><span>primary</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-secondary)"><span>secondary</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-tertiary)"><span>tertiary</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-action)"><span>action</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-neutral)"><span>neutral</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-danger)"><span>danger</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-warning)"><span>warning</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-success)"><span>success</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-info)"><span>info</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-surface)"><span>surface</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-bg)"><span>bg</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-inset)"><span>inset</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-text)"><span>text</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-heading)"><span>heading</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-link)"><span>link</span></div><div class="swatch swatch--lg" style="background:var(--sf-color-border)"><span>border</span></div></div>
+      <h3>Spacing scale</h3>
+      <div class="bar-row"><code>space-2xs</code><div class="bar" style="inline-size:var(--sf-space-2xs)"></div></div><div class="bar-row"><code>space-xs</code><div class="bar" style="inline-size:var(--sf-space-xs)"></div></div><div class="bar-row"><code>space-s</code><div class="bar" style="inline-size:var(--sf-space-s)"></div></div><div class="bar-row"><code>space-m</code><div class="bar" style="inline-size:var(--sf-space-m)"></div></div><div class="bar-row"><code>space-l</code><div class="bar" style="inline-size:var(--sf-space-l)"></div></div><div class="bar-row"><code>space-xl</code><div class="bar" style="inline-size:var(--sf-space-xl)"></div></div><div class="bar-row"><code>space-2xl</code><div class="bar" style="inline-size:var(--sf-space-2xl)"></div></div><div class="bar-row"><code>space-3xl</code><div class="bar" style="inline-size:var(--sf-space-3xl)"></div></div>
+      <h3>Type scale</h3>
+      <div class="ts-row"><code>text-2xs</code><span style="font-size:var(--sf-text-2xs)">Quick brown fox</span></div><div class="ts-row"><code>text-xs</code><span style="font-size:var(--sf-text-xs)">Quick brown fox</span></div><div class="ts-row"><code>text-s</code><span style="font-size:var(--sf-text-s)">Quick brown fox</span></div><div class="ts-row"><code>text-m</code><span style="font-size:var(--sf-text-m)">Quick brown fox</span></div><div class="ts-row"><code>text-l</code><span style="font-size:var(--sf-text-l)">Quick brown fox</span></div><div class="ts-row"><code>text-xl</code><span style="font-size:var(--sf-text-xl)">Quick brown fox</span></div><div class="ts-row"><code>text-2xl</code><span style="font-size:var(--sf-text-2xl)">Quick brown fox</span></div><div class="ts-row"><code>text-3xl</code><span style="font-size:var(--sf-text-3xl)">Quick brown fox</span></div><div class="ts-row"><code>text-4xl</code><span style="font-size:var(--sf-text-4xl)">Quick brown fox</span></div>
+      <h3>Radius</h3>
+      <div class="gallery"><div class="rad" style="border-radius:var(--sf-radius-2xs)">2xs</div><div class="rad" style="border-radius:var(--sf-radius-xs)">xs</div><div class="rad" style="border-radius:var(--sf-radius-s)">s</div><div class="rad" style="border-radius:var(--sf-radius-m)">m</div><div class="rad" style="border-radius:var(--sf-radius-l)">l</div><div class="rad" style="border-radius:var(--sf-radius-xl)">xl</div><div class="rad" style="border-radius:var(--sf-radius-2xl)">2xl</div></div>
+      <h3>Shadow</h3>
+      <div class="gallery"><div class="shad" style="box-shadow:var(--sf-shadow-xs)">xs</div><div class="shad" style="box-shadow:var(--sf-shadow-s)">s</div><div class="shad" style="box-shadow:var(--sf-shadow-m)">m</div><div class="shad" style="box-shadow:var(--sf-shadow-l)">l</div><div class="shad" style="box-shadow:var(--sf-shadow-xl)">xl</div><div class="shad" style="box-shadow:var(--sf-shadow-2xl)">2xl</div></div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         COLOR TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Color Tokens</h2>
-
-      <h3>Primary Palette</h3>
-      <div class="demo-swatch-grid">
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-50);"></div>
-          <div class="demo-swatch-label">primary-50</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-100);"></div>
-          <div class="demo-swatch-label">primary-100</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-200);"></div>
-          <div class="demo-swatch-label">primary-200</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-300);"></div>
-          <div class="demo-swatch-label">primary-300</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-400);"></div>
-          <div class="demo-swatch-label">primary-400</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-500);"></div>
-          <div class="demo-swatch-label">primary-500</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-600);"></div>
-          <div class="demo-swatch-label">primary-600</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-700);"></div>
-          <div class="demo-swatch-label">primary-700</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-800);"></div>
-          <div class="demo-swatch-label">primary-800</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-900);"></div>
-          <div class="demo-swatch-label">primary-900</div>
-        </div>
-        <div>
-          <div class="demo-swatch" style="background: var(--sf-color-primary-950);"></div>
-          <div class="demo-swatch-label">primary-950</div>
-        </div>
-      </div>
-
-      <h3>Action, Neutral, Base Palettes</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-l); margin-block: var(--sf-space-l);">
-        <div>
-          <h4>Action</h4>
-          <div style="display: flex; gap: var(--sf-space-2xs);">
-            <div class="demo-swatch" style="background: var(--sf-color-action-lighter); width: 2rem;"></div>
-            <div class="demo-swatch" style="background: var(--sf-color-action); width: 2rem;"></div>
-            <div class="demo-swatch" style="background: var(--sf-color-action-darker); width: 2rem;"></div>
-          </div>
-        </div>
-        <div>
-          <h4>Neutral</h4>
-          <div style="display: flex; gap: var(--sf-space-2xs);">
-            <div class="demo-swatch" style="background: var(--sf-color-neutral-lighter); width: 2rem;"></div>
-            <div class="demo-swatch" style="background: var(--sf-color-neutral); width: 2rem;"></div>
-            <div class="demo-swatch" style="background: var(--sf-color-neutral-darker); width: 2rem;"></div>
-          </div>
-        </div>
-        <div>
-          <h4>Base</h4>
-          <div style="display: flex; gap: var(--sf-space-2xs);">
-            <div class="demo-swatch" style="background: var(--sf-color-base-lighter); width: 2rem;"></div>
-            <div class="demo-swatch" style="background: var(--sf-color-base); width: 2rem;"></div>
-            <div class="demo-swatch" style="background: var(--sf-color-base-darker); width: 2rem;"></div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Semantic Colors</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-danger-subtle); border-left: 4px solid var(--sf-color-danger); border-radius: var(--sf-radius-m);">
-          <strong>Danger</strong>
-          <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs);">Error/destructive</div>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-warning-subtle); border-left: 4px solid var(--sf-color-warning); border-radius: var(--sf-radius-m);">
-          <strong>Warning</strong>
-          <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs);">Caution</div>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-success-subtle); border-left: 4px solid var(--sf-color-success); border-radius: var(--sf-radius-m);">
-          <strong>Success</strong>
-          <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs);">Positive</div>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-info-subtle); border-left: 4px solid var(--sf-color-info); border-radius: var(--sf-radius-m);">
-          <strong>Info</strong>
-          <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs);">Information</div>
-        </div>
-      </div>
-
-      <h3>Special Colors</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div>
-          <h4>Surfaces</h4>
-          <div style="margin-block: var(--sf-space-s);">
-            <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s);">Surface</div>
-          </div>
-          <div style="padding: var(--sf-space-m); background: var(--sf-color-bg); border: var(--sf-border); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s);">Background</div>
-          <div style="padding: var(--sf-space-m); background: var(--sf-color-inset); border: var(--sf-border); border-radius: var(--sf-radius-m); font-size: var(--sf-text-s);">Inset</div>
-        </div>
-        <div>
-          <h4>Text Colors</h4>
-          <div style="margin-block: var(--sf-space-s);">
-            <div style="color: var(--sf-color-text); padding: var(--sf-space-m); background: var(--sf-color-surface); border-radius: var(--sf-radius-m);">Primary text</div>
-          </div>
-          <div style="color: var(--sf-color-text--secondary); padding: var(--sf-space-m); background: var(--sf-color-surface); border-radius: var(--sf-radius-m);">Secondary text</div>
-          <div style="color: var(--sf-color-text--muted); padding: var(--sf-space-m); background: var(--sf-color-surface); border-radius: var(--sf-radius-m);">Muted text</div>
-        </div>
-        <div>
-          <h4>Interactive</h4>
-          <div style="color: var(--sf-color-link); padding: var(--sf-space-m); background: var(--sf-color-surface); border-radius: var(--sf-radius-m); cursor: pointer;">Link</div>
-          <div style="color: var(--sf-color-caret); padding: var(--sf-space-m); background: var(--sf-color-surface); border-radius: var(--sf-radius-m); border: 1px solid var(--sf-color-caret);">Caret color</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         TYPOGRAPHY TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Typography Tokens</h2>
-
-      <h3>Text Scale</h3>
-      <div class="demo-text-scale">
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-3xl</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-3xl); font-weight: var(--sf-font-weight-heading);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-2xl</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-2xl); font-weight: var(--sf-font-weight-heading);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-xl</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-xl);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-l</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-l);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-m</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-m);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-s</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-s);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-xs</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-xs);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">text-2xs</div>
-          <div class="demo-text-sample" style="font-size: var(--sf-text-2xs);">The quick brown fox jumps over the lazy dog</div>
-        </div>
-      </div>
-
-      <h3>Font Families</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Body font</h4>
-          <p style="font-family: var(--sf-font-body);">The quick brown fox jumps over the lazy dog</p>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Heading font</h4>
-          <p style="font-family: var(--sf-font-heading);">The quick brown fox jumps over the lazy dog</p>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Mono font</h4>
-          <p style="font-family: var(--sf-font-mono);">The quick brown fox jumps over the lazy dog</p>
-        </div>
-      </div>
-
-      <h3>Font Weights</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-text-item">
-          <div class="demo-text-label">body</div>
-          <div class="demo-text-sample" style="font-weight: var(--sf-font-weight-body);">Regular body text</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">strong</div>
-          <div class="demo-text-sample" style="font-weight: var(--sf-font-weight-strong);">Strong text</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">heading</div>
-          <div class="demo-text-sample" style="font-weight: var(--sf-font-weight-heading);">Heading text</div>
-        </div>
-      </div>
-
-      <h3>Line Heights (Leading)</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-text-item">
-          <div class="demo-text-label">tight</div>
-          <div class="demo-text-sample" style="line-height: var(--sf-leading-tight);">The quick brown fox jumps over the lazy dog and continues on to the next line with tight spacing</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">normal</div>
-          <div class="demo-text-sample" style="line-height: var(--sf-leading-normal);">The quick brown fox jumps over the lazy dog and continues on to the next line with normal spacing</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">loose</div>
-          <div class="demo-text-sample" style="line-height: var(--sf-leading-loose);">The quick brown fox jumps over the lazy dog and continues on to the next line with loose spacing</div>
-        </div>
-      </div>
-
-      <h3>Letter Spacing (Tracking)</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-text-item">
-          <div class="demo-text-label">tight</div>
-          <div class="demo-text-sample" style="letter-spacing: var(--sf-tracking-tight);">THE QUICK BROWN FOX</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">normal</div>
-          <div class="demo-text-sample" style="letter-spacing: var(--sf-tracking-normal);">THE QUICK BROWN FOX</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">wide</div>
-          <div class="demo-text-sample" style="letter-spacing: var(--sf-tracking-wide);">THE QUICK BROWN FOX</div>
-        </div>
-        <div class="demo-text-item">
-          <div class="demo-text-label">wider</div>
-          <div class="demo-text-sample" style="letter-spacing: var(--sf-tracking-wider);">THE QUICK BROWN FOX</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         SPACING TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Spacing Tokens</h2>
-
-      <h3>Space Scale</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-4xs</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-4xs);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-3xs</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-3xs);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-2xs</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-2xs);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-xs</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-xs);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-s</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-s);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-m</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-m);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-l</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-l);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-xl</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-xl);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-2xl</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-2xl);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-3xl</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-3xl);"></div>
-        </div>
-        <div class="demo-space-row">
-          <div class="demo-space-label">space-4xl</div>
-          <div class="demo-space-bar" style="width: var(--sf-space-4xl);"></div>
-        </div>
-      </div>
-
-      <h3>Content & Container Gaps</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">content-gap</h4>
-          <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted);" class="sf-code-block">var(--sf-content-gap)</div>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">container-gutter</h4>
-          <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted);" class="sf-code-block">var(--sf-gutter)</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         BORDER & RADIUS TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Border & Radius Tokens</h2>
-
-      <h3>Border Widths</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-border-row">
-          <div style="flex-shrink: 0; width: 10rem; font-family: var(--sf-font-mono); font-size: var(--sf-text-s); color: var(--sf-color-text--muted);">width-1</div>
-          <div class="demo-border" style="border-width: var(--sf-border-width-1); border-style: solid; border-color: var(--sf-color-primary);">Default border</div>
-        </div>
-        <div class="demo-border-row">
-          <div style="flex-shrink: 0; width: 10rem; font-family: var(--sf-font-mono); font-size: var(--sf-text-s); color: var(--sf-color-text--muted);">width-2</div>
-          <div class="demo-border" style="border-width: var(--sf-border-width-2); border-style: solid; border-color: var(--sf-color-primary);">Thicker border</div>
-        </div>
-        <div class="demo-border-row">
-          <div style="flex-shrink: 0; width: 10rem; font-family: var(--sf-font-mono); font-size: var(--sf-text-s); color: var(--sf-color-text--muted);">width-3</div>
-          <div class="demo-border" style="border-width: var(--sf-border-width-3); border-style: solid; border-color: var(--sf-color-primary);">Even thicker</div>
-        </div>
-        <div class="demo-border-row">
-          <div style="flex-shrink: 0; width: 10rem; font-family: var(--sf-font-mono); font-size: var(--sf-text-s); color: var(--sf-color-text--muted);">hairline</div>
-          <div class="demo-border" style="border-width: var(--sf-border-width-hairline); border-style: solid; border-color: var(--sf-color-primary);">Hairline border</div>
-        </div>
-      </div>
-
-      <h3>Border Styles</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-border-row">
-          <div style="flex: 1; padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface);">Solid (default)</div>
-          <div style="flex: 1; padding: var(--sf-space-m); border: var(--sf-border-width-1) dashed var(--sf-color-primary); border-radius: var(--sf-radius-m); background: var(--sf-color-surface);">Dashed</div>
-          <div style="flex: 1; padding: var(--sf-space-m); border: var(--sf-border-width-1) dotted var(--sf-color-primary); border-radius: var(--sf-radius-m); background: var(--sf-color-surface);">Dotted</div>
-        </div>
-      </div>
-
-      <h3>Border Colors</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Default</h4>
-          <div style="border: var(--sf-border); padding: var(--sf-space-m); border-radius: var(--sf-radius-s); background: var(--sf-color-bg);"></div>
-        </div>
-        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Subtle</h4>
-          <div style="border: var(--sf-border-subtle); padding: var(--sf-space-m); border-radius: var(--sf-radius-s); background: var(--sf-color-bg);"></div>
-        </div>
-        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Strong</h4>
-          <div style="border: var(--sf-border-strong); padding: var(--sf-space-m); border-radius: var(--sf-radius-s); background: var(--sf-color-bg);"></div>
-        </div>
-      </div>
-
-      <h3>Border Radius</h3>
-      <div class="demo-radius-grid">
-        <div class="demo-radius" style="border-radius: var(--sf-radius-2xs);">2xs</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-xs);">xs</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-s);">s</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-m);">m</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-l);">l</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-xl);">xl</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-2xl);">2xl</div>
-        <div class="demo-radius" style="border-radius: var(--sf-radius-full);">full</div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         SHADOW TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Shadow Tokens</h2>
-
-      <div class="demo-shadow-grid">
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-xs);">shadow-xs</div>
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-s);">shadow-s</div>
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-m);">shadow-m</div>
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-l);">shadow-l</div>
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-xl);">shadow-xl</div>
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-2xl);">shadow-2xl</div>
-        <div class="demo-shadow" style="box-shadow: var(--sf-shadow-inner);">shadow-inner</div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         ANIMATION TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Animation Tokens</h2>
-
-      <h3>Duration & Easing</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div>
-          <h4>Durations</h4>
-          <div class="demo-code-block" style="font-size: var(--sf-text-2xs);">
-            <div>fast: var(--sf-duration-fast)</div>
-            <div>normal: var(--sf-duration-normal)</div>
-            <div>slow: var(--sf-duration-slow)</div>
-            <div>slower: var(--sf-duration-slower)</div>
-          </div>
-        </div>
-        <div>
-          <h4>Easing Functions</h4>
-          <div class="demo-code-block" style="font-size: var(--sf-text-2xs);">
-            <div>linear</div>
-            <div>in / out / in-out</div>
-            <div>overshoot / elastic</div>
-            <div>spring</div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Animation Examples</h3>
-      <div style="margin-block: var(--sf-space-l); padding: var(--sf-space-l); background: var(--sf-color-bg); border-radius: var(--sf-radius-l);">
-        <div style="display: flex; flex-wrap: wrap; gap: var(--sf-space-m);">
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-fade"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">fade-in</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-slide-up"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">slide-up</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-scale-up"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">scale-up</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-spin"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">spin</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-float"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">float</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-ping"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">ping</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-pulse"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">pulse</div>
-          </div>
-          <div style="text-align: center;">
-            <div class="demo-animation-item demo-animation-shimmer"></div>
-            <div style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-top: var(--sf-space-s);">shimmer</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         STATE CLASSES
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>State Classes (.is-*)</h2>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div class="demo-state-box is-active" style="border-color: var(--sf-color-action);">
-          <strong>.is-active</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Active/selected item</p>
-        </div>
-        <div class="demo-state-box is-disabled" style="opacity: 0.6;">
-          <strong>.is-disabled</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Non-interactive state</p>
-        </div>
-        <div class="demo-state-box is-busy" style="cursor: wait;">
-          <strong>.is-busy</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Processing indicator</p>
-        </div>
-        <div class="demo-state-box is-invalid" style="border-color: var(--sf-color-danger);">
-          <strong>.is-invalid</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-danger); margin: var(--sf-space-xs) 0;">Form field invalid</p>
-        </div>
-        <div class="demo-state-box is-valid" style="border-color: var(--sf-color-success);">
-          <strong>.is-valid</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-success); margin: var(--sf-space-xs) 0;">Form field valid</p>
-        </div>
-        <div class="demo-state-box is-success" style="background: var(--sf-color-success-subtle); border-color: var(--sf-color-success);">
-          <strong>.is-success</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">General success</p>
-        </div>
-        <div class="demo-state-box is-error" style="background: var(--sf-color-danger-subtle); border-color: var(--sf-color-danger);">
-          <strong>.is-error</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">General error</p>
-        </div>
-        <div class="demo-state-box is-warning" style="background: var(--sf-color-warning-subtle); border-color: var(--sf-color-warning);">
-          <strong>.is-warning</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Warning state</p>
-        </div>
-        <div class="demo-state-box is-info" style="background: var(--sf-color-info-subtle); border-color: var(--sf-color-info);">
-          <strong>.is-info</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Information</p>
-        </div>
-        <div class="demo-state-box is-loading">
-          <strong>.is-loading</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Content loading</p>
-        </div>
-        <div class="demo-state-box is-skeleton">
-          <strong>.is-skeleton</strong>
-          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: var(--sf-space-xs) 0;">Placeholder shimmer</p>
-        </div>
-        <div class="demo-state-box is-hidden" style="display: none;">
-          <strong>.is-hidden</strong>
-        </div>
-      </div>
-
-      <div style="padding: var(--sf-space-l); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-l); margin-block-end: var(--sf-space-l);">
-        <h4 style="margin-top: 0;">Additional States Available</h4>
-        <ul style="margin: 0; padding-inline-start: var(--sf-space-l); color: var(--sf-color-text--muted); font-size: var(--sf-text-s);">
-          <li>.is-invisible / .is-visible</li>
-          <li>.is-readonly</li>
-          <li>.is-pending</li>
-          <li>.is-selected</li>
-          <li>.is-current</li>
-          <li>.is-pressed</li>
-          <li>.is-highlighted</li>
-          <li>.is-open / .is-collapsed</li>
-          <li>.is-expanded</li>
-          <li>.is-danger</li>
-          <li>.is-sticky / .is-pinned / .is-fixed</li>
-          <li>.is-fullscreen</li>
-          <li>.is-clipped / .is-scrollable / .is-truncated</li>
-          <li>.is-resizable</li>
-          <li>.is-dragging / .is-drop-target / .is-draggable</li>
-          <li>.is-overlay</li>
-          <li>.is-clickable / .is-unselectable</li>
-          <li>.is-focused</li>
-          <li>.is-empty:empty</li>
-          <li>.no-motion</li>
-          <li>.sr-only-focusable</li>
-        </ul>
+    <section id="layout">
+      <h2>Layout primitives <span class="count">128</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="sf-alternate">
+        <figcaption class="tile__cap"><code>.sf-alternate</code></figcaption>
+        <div class="tile__stage"><div class="sf-alternate"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento">
+        <figcaption class="tile__cap"><code>.sf-bento</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div><div class="dbox">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento--2">
+        <figcaption class="tile__cap"><code>.sf-bento--2</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento sf-bento--2"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div><div class="dbox">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento--3">
+        <figcaption class="tile__cap"><code>.sf-bento--3</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento sf-bento--3"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div><div class="dbox">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento--6">
+        <figcaption class="tile__cap"><code>.sf-bento--6</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento sf-bento--6"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div><div class="dbox">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento--compact">
+        <figcaption class="tile__cap"><code>.sf-bento--compact</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento sf-bento--compact"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div><div class="dbox">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento--tall">
+        <figcaption class="tile__cap"><code>.sf-bento--tall</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento sf-bento--tall"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div><div class="dbox">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento-featured">
+        <figcaption class="tile__cap"><code>.sf-bento-featured</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento"><div class="sf-bento-featured dbox">featured</div><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento-full">
+        <figcaption class="tile__cap"><code>.sf-bento-full</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento"><div class="sf-bento-full dbox">full</div><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento-tall">
+        <figcaption class="tile__cap"><code>.sf-bento-tall</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento"><div class="sf-bento-tall dbox">tall</div><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bento-wide">
+        <figcaption class="tile__cap"><code>.sf-bento-wide</code></figcaption>
+        <div class="tile__stage"><div class="sf-bento"><div class="sf-bento-wide dbox">wide</div><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div><div class="dbox">5</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-bg">
+        <figcaption class="tile__cap"><code>.sf-bg</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;color:#fff"><div class="sf-bg" style="background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"></div><div style="position:relative;padding:var(--sf-space-m)">content over bg</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-box">
+        <figcaption class="tile__cap"><code>.sf-box</code></figcaption>
+        <div class="tile__stage"><div class="sf-box"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-breakout">
+        <figcaption class="tile__cap"><code>.sf-breakout</code></figcaption>
+        <div class="tile__stage"><div class="sf-content-grid"><p class="dbox">content</p><div class="sf-breakout dbox">breakout</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-center">
+        <figcaption class="tile__cap"><code>.sf-center</code></figcaption>
+        <div class="tile__stage"><div class="sf-center"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-center--intrinsic">
+        <figcaption class="tile__cap"><code>.sf-center--intrinsic</code></figcaption>
+        <div class="tile__stage"><div class="sf-center sf-center--intrinsic"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster">
+        <figcaption class="tile__cap"><code>.sf-cluster</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--2xl">
+        <figcaption class="tile__cap"><code>.sf-cluster--2xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--2xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--between">
+        <figcaption class="tile__cap"><code>.sf-cluster--between</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--between"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--center">
+        <figcaption class="tile__cap"><code>.sf-cluster--center</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--center"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--end">
+        <figcaption class="tile__cap"><code>.sf-cluster--end</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--end"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--l">
+        <figcaption class="tile__cap"><code>.sf-cluster--l</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--l"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--m">
+        <figcaption class="tile__cap"><code>.sf-cluster--m</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--m"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--no-wrap">
+        <figcaption class="tile__cap"><code>.sf-cluster--no-wrap</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--no-wrap"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--s">
+        <figcaption class="tile__cap"><code>.sf-cluster--s</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--s"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--xl">
+        <figcaption class="tile__cap"><code>.sf-cluster--xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cluster--xs">
+        <figcaption class="tile__cap"><code>.sf-cluster--xs</code></figcaption>
+        <div class="tile__stage"><div class="sf-cluster sf-cluster--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-container">
+        <figcaption class="tile__cap"><code>.sf-container</code></figcaption>
+        <div class="tile__stage"><div class="sf-container"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-container--full">
+        <figcaption class="tile__cap"><code>.sf-container--full</code></figcaption>
+        <div class="tile__stage"><div class="sf-container sf-container--full"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-container--narrow">
+        <figcaption class="tile__cap"><code>.sf-container--narrow</code></figcaption>
+        <div class="tile__stage"><div class="sf-container sf-container--narrow"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-container--prose">
+        <figcaption class="tile__cap"><code>.sf-container--prose</code></figcaption>
+        <div class="tile__stage"><div class="sf-container sf-container--prose"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-container--wide">
+        <figcaption class="tile__cap"><code>.sf-container--wide</code></figcaption>
+        <div class="tile__stage"><div class="sf-container sf-container--wide"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-content-grid">
+        <figcaption class="tile__cap"><code>.sf-content-grid</code></figcaption>
+        <div class="tile__stage"><div class="sf-content-grid"><p class="dbox">content</p><div class="sf-breakout dbox">breakout</div><div class="sf-full-bleed dbox">full-bleed</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cover">
+        <figcaption class="tile__cap"><code>.sf-cover</code></figcaption>
+        <div class="tile__stage"><div class="sf-cover" style="min-block-size:9rem;background:var(--sf-color-inset)"><div class="sf-cover__center dbox">cover</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cover__center">
+        <figcaption class="tile__cap"><code>.sf-cover__center</code></figcaption>
+        <div class="tile__stage"><div class="sf-cover" style="min-block-size:8rem"><div class="sf-cover__center dbox">center</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cover--max">
+        <figcaption class="tile__cap"><code>.sf-cover--max</code></figcaption>
+        <div class="tile__stage"><div class="sf-cover sf-cover--max" style="min-block-size:9rem;background:var(--sf-color-inset)"><div class="sf-cover__center dbox">cover</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cover--min">
+        <figcaption class="tile__cap"><code>.sf-cover--min</code></figcaption>
+        <div class="tile__stage"><div class="sf-cover sf-cover--min" style="min-block-size:9rem;background:var(--sf-color-inset)"><div class="sf-cover__center dbox">cover</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cover--padding-l">
+        <figcaption class="tile__cap"><code>.sf-cover--padding-l</code></figcaption>
+        <div class="tile__stage"><div class="sf-cover sf-cover--padding-l" style="min-block-size:9rem;background:var(--sf-color-inset)"><div class="sf-cover__center dbox">cover</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cover--padding-s">
+        <figcaption class="tile__cap"><code>.sf-cover--padding-s</code></figcaption>
+        <div class="tile__stage"><div class="sf-cover sf-cover--padding-s" style="min-block-size:9rem;background:var(--sf-color-inset)"><div class="sf-cover__center dbox">cover</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-cq">
+        <figcaption class="tile__cap"><code>.sf-cq</code></figcaption>
+        <div class="tile__stage"><div class="sf-cq"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider">
+        <figcaption class="tile__cap"><code>.sf-divider</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider--dashed">
+        <figcaption class="tile__cap"><code>.sf-divider--dashed</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider sf-divider--dashed"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider--dotted">
+        <figcaption class="tile__cap"><code>.sf-divider--dotted</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider sf-divider--dotted"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider--gradient">
+        <figcaption class="tile__cap"><code>.sf-divider--gradient</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider sf-divider--gradient"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider--soft">
+        <figcaption class="tile__cap"><code>.sf-divider--soft</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider sf-divider--soft"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider--strong">
+        <figcaption class="tile__cap"><code>.sf-divider--strong</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider sf-divider--strong"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-divider--vertical">
+        <figcaption class="tile__cap"><code>.sf-divider--vertical</code></figcaption>
+        <div class="tile__stage"><p>above</p><div class="sf-divider sf-divider--vertical"></div><p>below</p></div>
+      </figure>
+      <figure class="tile" data-class="sf-equal">
+        <figcaption class="tile__cap"><code>.sf-equal</code></figcaption>
+        <div class="tile__stage"><div class="sf-equal"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-equal--2">
+        <figcaption class="tile__cap"><code>.sf-equal--2</code></figcaption>
+        <div class="tile__stage"><div class="sf-equal sf-equal--2"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-equal--3">
+        <figcaption class="tile__cap"><code>.sf-equal--3</code></figcaption>
+        <div class="tile__stage"><div class="sf-equal sf-equal--3"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-equal--4">
+        <figcaption class="tile__cap"><code>.sf-equal--4</code></figcaption>
+        <div class="tile__stage"><div class="sf-equal sf-equal--4"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-equal--6">
+        <figcaption class="tile__cap"><code>.sf-equal--6</code></figcaption>
+        <div class="tile__stage"><div class="sf-equal sf-equal--6"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame">
+        <figcaption class="tile__cap"><code>.sf-frame</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--3-2">
+        <figcaption class="tile__cap"><code>.sf-frame--3-2</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--3-2" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--4-3">
+        <figcaption class="tile__cap"><code>.sf-frame--4-3</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--4-3" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--cinema">
+        <figcaption class="tile__cap"><code>.sf-frame--cinema</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--cinema" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--golden">
+        <figcaption class="tile__cap"><code>.sf-frame--golden</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--golden" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--portrait">
+        <figcaption class="tile__cap"><code>.sf-frame--portrait</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--portrait" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--square">
+        <figcaption class="tile__cap"><code>.sf-frame--square</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--square" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-frame--video">
+        <figcaption class="tile__cap"><code>.sf-frame--video</code></figcaption>
+        <div class="tile__stage"><div class="sf-frame sf-frame--video" style="background:var(--sf-color-primary-200)"><div class="dmedia">media</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-full-bleed">
+        <figcaption class="tile__cap"><code>.sf-full-bleed</code></figcaption>
+        <div class="tile__stage"><div class="sf-content-grid"><p class="dbox">content</p><div class="sf-full-bleed dbox">full-bleed</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap">
+        <figcaption class="tile__cap"><code>.sf-gap</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap--2xl">
+        <figcaption class="tile__cap"><code>.sf-gap--2xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap sf-gap--2xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap--l">
+        <figcaption class="tile__cap"><code>.sf-gap--l</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap sf-gap--l"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap--m">
+        <figcaption class="tile__cap"><code>.sf-gap--m</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap sf-gap--m"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap--s">
+        <figcaption class="tile__cap"><code>.sf-gap--s</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap sf-gap--s"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap--xl">
+        <figcaption class="tile__cap"><code>.sf-gap--xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap sf-gap--xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-gap--xs">
+        <figcaption class="tile__cap"><code>.sf-gap--xs</code></figcaption>
+        <div class="tile__stage"><div class="sf-gap sf-gap--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid">
+        <figcaption class="tile__cap"><code>.sf-grid</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--2xl">
+        <figcaption class="tile__cap"><code>.sf-grid--2xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--2xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--dense">
+        <figcaption class="tile__cap"><code>.sf-grid--dense</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--dense"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--fit">
+        <figcaption class="tile__cap"><code>.sf-grid--fit</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--fit"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--l">
+        <figcaption class="tile__cap"><code>.sf-grid--l</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--l"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--m">
+        <figcaption class="tile__cap"><code>.sf-grid--m</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--m"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--s">
+        <figcaption class="tile__cap"><code>.sf-grid--s</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--s"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--xl">
+        <figcaption class="tile__cap"><code>.sf-grid--xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid--xs">
+        <figcaption class="tile__cap"><code>.sf-grid--xs</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-1">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-1</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-1"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-1-2">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-1-2</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-1-2"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-1-3">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-1-3</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-1-3"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-2">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-2</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-2"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-2-1">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-2-1</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-2-1"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-3">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-3</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-3"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-3-1">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-3-1</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-3-1"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-4">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-4</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-4"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-grid-cols-6">
+        <figcaption class="tile__cap"><code>.sf-grid-cols-6</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid-cols-6"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon">
+        <figcaption class="tile__cap"><code>.sf-icon</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--2xl">
+        <figcaption class="tile__cap"><code>.sf-icon--2xl</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--2xl" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--boxed">
+        <figcaption class="tile__cap"><code>.sf-icon--boxed</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--boxed" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--l">
+        <figcaption class="tile__cap"><code>.sf-icon--l</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--l" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--m">
+        <figcaption class="tile__cap"><code>.sf-icon--m</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--m" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--s">
+        <figcaption class="tile__cap"><code>.sf-icon--s</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--s" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--xl">
+        <figcaption class="tile__cap"><code>.sf-icon--xl</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--xl" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-icon--xs">
+        <figcaption class="tile__cap"><code>.sf-icon--xs</code></figcaption>
+        <div class="tile__stage"><span class="sf-icon sf-icon--xs" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span></div>
+      </figure>
+      <figure class="tile" data-class="sf-imposter">
+        <figcaption class="tile__cap"><code>.sf-imposter</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;background:var(--sf-color-inset)">base<div class="sf-imposter dbox">imposter</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-imposter--contain">
+        <figcaption class="tile__cap"><code>.sf-imposter--contain</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;background:var(--sf-color-inset)">base<div class="sf-imposter sf-imposter--contain dbox">imposter</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-imposter--fixed">
+        <figcaption class="tile__cap"><code>.sf-imposter--fixed</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;background:var(--sf-color-inset)">base<div class="sf-imposter sf-imposter--fixed dbox">imposter</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-pancake">
+        <figcaption class="tile__cap"><code>.sf-pancake</code></figcaption>
+        <div class="tile__stage"><div class="sf-pancake" style="min-block-size:8rem"><div class="dbox">header</div><div class="dbox">main</div><div class="dbox">footer</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-reel">
+        <figcaption class="tile__cap"><code>.sf-reel</code></figcaption>
+        <div class="tile__stage"><div class="sf-reel"><div class="dbox" style="inline-size:9rem">1</div><div class="dbox" style="inline-size:9rem">2</div><div class="dbox" style="inline-size:9rem">3</div><div class="dbox" style="inline-size:9rem">4</div><div class="dbox" style="inline-size:9rem">5</div><div class="dbox" style="inline-size:9rem">6</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section">
+        <figcaption class="tile__cap"><code>.sf-section</code></figcaption>
+        <div class="tile__stage"><div class="sf-section"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--2xl">
+        <figcaption class="tile__cap"><code>.sf-section--2xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--2xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--collapse">
+        <figcaption class="tile__cap"><code>.sf-section--collapse</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--collapse"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--guttered">
+        <figcaption class="tile__cap"><code>.sf-section--guttered</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--guttered"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--l">
+        <figcaption class="tile__cap"><code>.sf-section--l</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--l"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--m">
+        <figcaption class="tile__cap"><code>.sf-section--m</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--m"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--s">
+        <figcaption class="tile__cap"><code>.sf-section--s</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--s"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--xl">
+        <figcaption class="tile__cap"><code>.sf-section--xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section--xs">
+        <figcaption class="tile__cap"><code>.sf-section--xs</code></figcaption>
+        <div class="tile__stage"><div class="sf-section sf-section--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-section-group">
+        <figcaption class="tile__cap"><code>.sf-section-group</code></figcaption>
+        <div class="tile__stage"><div class="sf-section-group"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-sidebar">
+        <figcaption class="tile__cap"><code>.sf-sidebar</code></figcaption>
+        <div class="tile__stage"><div class="sf-sidebar"><div class="dbox">main</div><div class="dbox">aside</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-sidebar--narrow">
+        <figcaption class="tile__cap"><code>.sf-sidebar--narrow</code></figcaption>
+        <div class="tile__stage"><div class="sf-sidebar sf-sidebar--narrow"><div class="dbox">main</div><div class="dbox">aside</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-sidebar--right">
+        <figcaption class="tile__cap"><code>.sf-sidebar--right</code></figcaption>
+        <div class="tile__stage"><div class="sf-sidebar sf-sidebar--right"><div class="dbox">main</div><div class="dbox">aside</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-sidebar--wide">
+        <figcaption class="tile__cap"><code>.sf-sidebar--wide</code></figcaption>
+        <div class="tile__stage"><div class="sf-sidebar sf-sidebar--wide"><div class="dbox">main</div><div class="dbox">aside</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack">
+        <figcaption class="tile__cap"><code>.sf-stack</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--2xl">
+        <figcaption class="tile__cap"><code>.sf-stack--2xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--2xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--center">
+        <figcaption class="tile__cap"><code>.sf-stack--center</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--center"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--end">
+        <figcaption class="tile__cap"><code>.sf-stack--end</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--end"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--l">
+        <figcaption class="tile__cap"><code>.sf-stack--l</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--l"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--m">
+        <figcaption class="tile__cap"><code>.sf-stack--m</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--m"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--s">
+        <figcaption class="tile__cap"><code>.sf-stack--s</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--s"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--stretch">
+        <figcaption class="tile__cap"><code>.sf-stack--stretch</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--stretch"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--xl">
+        <figcaption class="tile__cap"><code>.sf-stack--xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-stack--xs">
+        <figcaption class="tile__cap"><code>.sf-stack--xs</code></figcaption>
+        <div class="tile__stage"><div class="sf-stack sf-stack--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-subgrid">
+        <figcaption class="tile__cap"><code>.sf-subgrid</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid-cols-3"><div class="sf-subgrid"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div></div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-subgrid-rows">
+        <figcaption class="tile__cap"><code>.sf-subgrid-rows</code></figcaption>
+        <div class="tile__stage"><div class="sf-grid sf-grid-cols-3"><div class="sf-subgrid-rows"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div></div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-switcher">
+        <figcaption class="tile__cap"><code>.sf-switcher</code></figcaption>
+        <div class="tile__stage"><div class="sf-switcher"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-switcher--no-wrap">
+        <figcaption class="tile__cap"><code>.sf-switcher--no-wrap</code></figcaption>
+        <div class="tile__stage"><div class="sf-switcher sf-switcher--no-wrap"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-switcher--vertical">
+        <figcaption class="tile__cap"><code>.sf-switcher--vertical</code></figcaption>
+        <div class="tile__stage"><div class="sf-switcher sf-switcher--vertical"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div></div></div>
+      </figure>
       </div>
     </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         MACRO CLASSES
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Macro Classes</h2>
-
-      <h3>Prose (Long-form text)</h3>
-      <div class="demo-prose-container sf-prose">
-        <h4>Article Title</h4>
-        <p>This is a paragraph of long-form text that gets automatic vertical rhythm with the <code>.sf-prose</code> class. Each element gets proper spacing.</p>
-        <p>This is a second paragraph. Notice how the spacing is automatic and consistent.</p>
-        <ul>
-          <li>First list item</li>
-          <li>Second list item</li>
-          <li>Third list item</li>
-        </ul>
-        <p>More content after the list, properly spaced.</p>
-      </div>
-
-      <h3>Flow (Owl Selector)</h3>
-      <div class="demo-layout-section sf-flow">
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Flow item 1</div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Flow item 2 (has automatic top margin)</div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Flow item 3 (has automatic top margin)</div>
-      </div>
-
-      <h3>Line Clamp</h3>
-      <div style="margin-block: var(--sf-space-m);">
-        <h4>Line Clamp 2</h4>
-        <div class="demo-line-clamp sf-line-clamp-2">
-          This is a long text that will be clamped to 2 lines with an ellipsis at the end if it overflows. The ellipsis will appear after exactly two lines of text.
-        </div>
-        <h4>Line Clamp 3</h4>
-        <div class="demo-line-clamp sf-line-clamp-3">
-          This is a long text that will be clamped to 3 lines with an ellipsis at the end if it overflows. The ellipsis will appear after exactly three lines of text. You can use .sf-line-clamp-N for dynamic clamps.
-        </div>
-      </div>
-
-      <h3>Link Variants</h3>
-      <div style="padding: var(--sf-space-l); background: var(--sf-color-surface); border-radius: var(--sf-radius-l); display: flex; gap: var(--sf-space-l); flex-wrap: wrap;">
-        <a href="#" style="color: var(--sf-color-link); text-decoration: underline;">Default link</a>
-        <a href="#" class="sf-link--subtle" style="color: var(--sf-color-text); text-decoration: none;">Subtle link</a>
-        <a href="#" class="sf-link--reverse" style="color: var(--sf-color-text); text-decoration: none;">Reverse link</a>
-        <a href="#" class="sf-link-external" style="color: var(--sf-color-link);">External link →</a>
-      </div>
-
-      <h3>Surface Utilities</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div class="demo-surface sf-surface">Default surface</div>
-        <div class="demo-surface sf-surface sf-surface--action">Action surface</div>
-        <div class="demo-surface sf-surface sf-surface--primary">Primary surface</div>
-        <div class="demo-surface sf-surface sf-surface--danger">Danger surface</div>
-      </div>
-
-      <h3>Text Utilities</h3>
-      <div style="margin-block: var(--sf-space-l);">
-        <div class="demo-state-box" style="margin-block-end: var(--sf-space-m);">
-          <div class="sf-truncate" style="max-inline-size: 20rem;">.sf-truncate - This very long sentence will be truncated with an ellipsis when it overflows the container width</div>
-        </div>
-        <div class="demo-state-box sf-text-gradient" style="background: linear-gradient(90deg, var(--sf-color-primary), var(--sf-color-action)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-block-end: var(--sf-space-m);">
-          .sf-text-gradient - Text with gradient effect
-        </div>
-        <div class="demo-state-box sf-tabular-nums" style="font-family: var(--sf-font-mono); font-size: var(--sf-text-m);">
-          12 34 56 78 90 (tabular numbers for alignment)
-        </div>
-      </div>
-
-      <h3>Overflow Fade</h3>
-      <div class="demo-state-box sf-overflow-fade" style="max-height: 6rem; overflow-y: auto;">
-        <div style="padding: var(--sf-space-m);">
-          <p>This content has overflow fade applied. Notice the fade effect at the bottom when scrolling.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-        </div>
-      </div>
-
-      <h3>Scroll Shadow</h3>
-      <div class="demo-state-box sf-scroll-shadow" style="max-height: 6rem; overflow-y: auto;">
-        <div style="padding: var(--sf-space-m);">
-          <p>This element has scroll shadows. A shadow appears when there's scrollable content.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-        </div>
-      </div>
-
-      <h3>Scroll Snap</h3>
-      <div class="demo-state-box sf-scroll-snap" style="max-height: 10rem; overflow-x: auto; display: flex; gap: var(--sf-space-m); padding: var(--sf-space-m);">
-        <div style="flex-shrink: 0; width: 12rem; height: 8rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center; color: white;">Snap 1</div>
-        <div style="flex-shrink: 0; width: 12rem; height: 8rem; background: var(--sf-color-action); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center; color: white;">Snap 2</div>
-        <div style="flex-shrink: 0; width: 12rem; height: 8rem; background: var(--sf-color-info); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center; color: white;">Snap 3</div>
-      </div>
-
-      <h3>Content Auto (Aspect Ratio)</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div class="sf-content-auto" style="background: linear-gradient(135deg, var(--sf-color-primary), var(--sf-color-action)); border-radius: var(--sf-radius-m); display: flex; align-items: center; justify-content: center; color: white;">
-          Aspect 1:1
-        </div>
-      </div>
-
-      <h3>Equal Height</h3>
-      <div style="display: flex; gap: var(--sf-space-m); margin-block: var(--sf-space-m);">
-        <div class="sf-equal-height" style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Column 1</h4>
-          <p>Short content</p>
-        </div>
-        <div class="sf-equal-height" style="padding: var(--sf-space-m); background: var(--sf-color-action-100); border-radius: var(--sf-radius-m);">
-          <h4 style="margin-top: 0;">Column 2</h4>
-          <p>This column has more content and both columns stretch to the same height thanks to .sf-equal-height</p>
-        </div>
-      </div>
-
-      <h3>Scrim (Gradient Overlay)</h3>
-      <div style="position: relative; height: 15rem; background: linear-gradient(135deg, var(--sf-color-primary), var(--sf-color-action)); border-radius: var(--sf-radius-l); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-        <div class="sf-scrim sf-scrim--bottom"></div>
-        <div style="color: white; font-weight: var(--sf-font-weight-heading); font-size: var(--sf-text-l); position: relative; z-index: 1;">Content with scrim overlay at bottom</div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         ACCESSIBILITY & FOCUS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Accessibility & Focus</h2>
-
-      <h3>Focus Styles</h3>
-      <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m); margin-block: var(--sf-space-l);">
-        <button class="demo-focusable" tabindex="0">Click or Tab to focus (shows focus ring)</button>
-      </div>
-
-      <h3>Skip Link (sr-only-focusable)</h3>
-      <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m);">
-        <a href="#main" class="sr-only-focusable" style="display: inline-block; padding: var(--sf-space-m); background: var(--sf-color-action); color: white; text-decoration: none; border-radius: var(--sf-radius-m);">Skip to main content (hidden until focused)</a>
-      </div>
-
-      <h3>No Motion (Respects prefers-reduced-motion)</h3>
-      <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m); margin-block-start: var(--sf-space-l);">
-        <div class="no-motion" style="animation: var(--sf-animation-fade-in); width: 3rem; height: 3rem; background: var(--sf-color-action); border-radius: var(--sf-radius-m);"></div>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-s);">This animation respects .no-motion class (affected by prefers-reduced-motion)</p>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         MISCELLANEOUS TOKENS
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Miscellaneous Tokens</h2>
-
-      <h3>Container Sizes</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m); margin-block: var(--sf-space-l);">
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m); font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-          <strong>Max Width</strong>
-          <div style="color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs);">var(--sf-container-max)</div>
-        </div>
-        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-m); font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-          <strong>Narrow</strong>
-          <div style="color: var(--sf-color-text--muted); margin-top: var(--sf-space-xs);">var(--sf-container-narrow)</div>
-        </div>
-      </div>
-
-      <h3>Z-Index Scale</h3>
-      <div style="padding: var(--sf-space-l); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-l); margin-block: var(--sf-space-l);">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-m);">
-          <div style="font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-            <div style="color: var(--sf-color-text--muted);">z-default</div>
-            <div style="color: var(--sf-color-text); margin-top: var(--sf-space-2xs);">var(--sf-z-default)</div>
-          </div>
-          <div style="font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-            <div style="color: var(--sf-color-text--muted);">z-dropdown</div>
-            <div style="color: var(--sf-color-text); margin-top: var(--sf-space-2xs);">var(--sf-z-dropdown)</div>
-          </div>
-          <div style="font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-            <div style="color: var(--sf-color-text--muted);">z-fixed</div>
-            <div style="color: var(--sf-color-text); margin-top: var(--sf-space-2xs);">var(--sf-z-fixed)</div>
-          </div>
-          <div style="font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-            <div style="color: var(--sf-color-text--muted);">z-modal</div>
-            <div style="color: var(--sf-color-text); margin-top: var(--sf-space-2xs);">var(--sf-z-modal)</div>
-          </div>
-          <div style="font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-            <div style="color: var(--sf-color-text--muted);">z-popover</div>
-            <div style="color: var(--sf-color-text); margin-top: var(--sf-space-2xs);">var(--sf-z-popover)</div>
-          </div>
-          <div style="font-family: var(--sf-font-mono); font-size: var(--sf-text-s);">
-            <div style="color: var(--sf-color-text--muted);">z-tooltip</div>
-            <div style="color: var(--sf-color-text); margin-top: var(--sf-space-2xs);">var(--sf-z-tooltip)</div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Blur Token</h3>
-      <div style="position: relative; height: 10rem; margin-block: var(--sf-space-l);">
-        <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(45deg, var(--sf-color-primary), var(--sf-color-action)); border-radius: var(--sf-radius-l); filter: blur(var(--sf-blur));"></div>
-        <div style="position: relative; z-index: 1; padding: var(--sf-space-m); color: white; font-weight: var(--sf-font-weight-heading);">
-          Blurred background (var(--sf-blur))
-        </div>
-      </div>
-
-      <h3>Code & Syntax</h3>
-      <div style="padding: var(--sf-space-l); background: var(--sf-color-surface); border: var(--sf-border); border-radius: var(--sf-radius-l); margin-block: var(--sf-space-l);">
-        <div class="sf-code-block">
-const greeting = "Hello, SLASHED!";
-console.log(greeting);
-        </div>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block: var(--sf-space-m) 0;">
-          Uses code colors: <code style="background: var(--sf-color-code-bg); color: var(--sf-color-code-text); padding: var(--sf-space-2xs) var(--sf-space-xs); border-radius: var(--sf-radius-s);">var(--sf-color-code-bg/text)</code>
-        </p>
+    <section id="macro">
+      <h2>Macro classes <span class="count">42</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="sf-aspect">
+        <figcaption class="tile__cap"><code>.sf-aspect</code></figcaption>
+        <div class="tile__stage"><div class="sf-aspect dbox" style="--sf-aspect:16/9;inline-size:14rem">16 / 9</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-content-auto">
+        <figcaption class="tile__cap"><code>.sf-content-auto</code></figcaption>
+        <div class="tile__stage"><div class="sf-content-auto dpad">content-auto</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-equal-height">
+        <figcaption class="tile__cap"><code>.sf-equal-height</code></figcaption>
+        <div class="tile__stage"><div style="display:flex;gap:var(--sf-space-s)"><div class="sf-equal-height dpad">short</div><div class="sf-equal-height dpad">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-flow">
+        <figcaption class="tile__cap"><code>.sf-flow</code></figcaption>
+        <div class="tile__stage"><div class="sf-flow"><p>one</p><p>two</p><p>three</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-line-clamp-2">
+        <figcaption class="tile__cap"><code>.sf-line-clamp-2</code></figcaption>
+        <div class="tile__stage"><div class="sf-line-clamp-2" style="--sf-line-clamp:3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-line-clamp-3">
+        <figcaption class="tile__cap"><code>.sf-line-clamp-3</code></figcaption>
+        <div class="tile__stage"><div class="sf-line-clamp-3" style="--sf-line-clamp:3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-line-clamp-N">
+        <figcaption class="tile__cap"><code>.sf-line-clamp-N</code></figcaption>
+        <div class="tile__stage"><div class="sf-line-clamp-N" style="--sf-line-clamp:3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-link--reverse">
+        <figcaption class="tile__cap"><code>.sf-link--reverse</code></figcaption>
+        <div class="tile__stage"><a href="#x" class="sf-link sf-link--reverse">A link--reverse link</a></div>
+      </figure>
+      <figure class="tile" data-class="sf-link--subtle">
+        <figcaption class="tile__cap"><code>.sf-link--subtle</code></figcaption>
+        <div class="tile__stage"><a href="#x" class="sf-link sf-link--subtle">A link--subtle link</a></div>
+      </figure>
+      <figure class="tile" data-class="sf-link-external">
+        <figcaption class="tile__cap"><code>.sf-link-external</code></figcaption>
+        <div class="tile__stage"><a href="#x" class="sf-link-external">A link-external link</a></div>
+      </figure>
+      <figure class="tile" data-class="sf-no-tap-highlight">
+        <figcaption class="tile__cap"><code>.sf-no-tap-highlight</code></figcaption>
+        <div class="tile__stage"><div class="sf-no-tap-highlight dpad">no-tap-highlight</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-not-prose">
+        <figcaption class="tile__cap"><code>.sf-not-prose</code></figcaption>
+        <div class="tile__stage"><div class="sf-prose"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><div class="sf-not-prose dbox">opted out of prose</div><p>more.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade--block">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade--block</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade sf-overflow-fade--block" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade--bottom">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade--bottom</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade sf-overflow-fade--bottom" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade--inline">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade--inline</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade sf-overflow-fade--inline" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade--left">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade--left</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade sf-overflow-fade--left" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade--right">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade--right</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade sf-overflow-fade--right" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-overflow-fade--top">
+        <figcaption class="tile__cap"><code>.sf-overflow-fade--top</code></figcaption>
+        <div class="tile__stage"><div class="sf-overflow-fade sf-overflow-fade--top" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-prose">
+        <figcaption class="tile__cap"><code>.sf-prose</code></figcaption>
+        <div class="tile__stage"><div class="sf-prose"><h4>Heading</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><ul><li>one</li><li>two</li></ul><p>Another paragraph.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scrim">
+        <figcaption class="tile__cap"><code>.sf-scrim</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;color:#fff;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"><div class="sf-scrim"></div><div style="position:relative;padding:var(--sf-space-m)">over scrim</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scrim__content">
+        <figcaption class="tile__cap"><code>.sf-scrim__content</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;color:#fff;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"><div class="sf-scrim"></div><div class="sf-scrim__content" style="padding:var(--sf-space-m)">scrim content</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scrim--bottom">
+        <figcaption class="tile__cap"><code>.sf-scrim--bottom</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;color:#fff;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"><div class="sf-scrim sf-scrim--bottom"></div><div style="position:relative;padding:var(--sf-space-m)">over scrim</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scrim--full">
+        <figcaption class="tile__cap"><code>.sf-scrim--full</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;color:#fff;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"><div class="sf-scrim sf-scrim--full"></div><div style="position:relative;padding:var(--sf-space-m)">over scrim</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scrim--top">
+        <figcaption class="tile__cap"><code>.sf-scrim--top</code></figcaption>
+        <div class="tile__stage"><div style="position:relative;min-block-size:7rem;color:#fff;background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"><div class="sf-scrim sf-scrim--top"></div><div style="position:relative;padding:var(--sf-space-m)">over scrim</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scroll-shadow">
+        <figcaption class="tile__cap"><code>.sf-scroll-shadow</code></figcaption>
+        <div class="tile__stage"><div class="sf-scroll-shadow" style="max-block-size:6rem;overflow:auto"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scroll-snap">
+        <figcaption class="tile__cap"><code>.sf-scroll-snap</code></figcaption>
+        <div class="tile__stage"><div class="sf-scroll-snap" style="display:flex;gap:var(--sf-space-s);overflow-x:auto"><div class="dbox" style="flex:0 0 9rem">1</div><div class="dbox" style="flex:0 0 9rem">2</div><div class="dbox" style="flex:0 0 9rem">3</div><div class="dbox" style="flex:0 0 9rem">4</div><div class="dbox" style="flex:0 0 9rem">5</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface">
+        <figcaption class="tile__cap"><code>.sf-surface</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface dpad">surface</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--action">
+        <figcaption class="tile__cap"><code>.sf-surface--action</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--action dpad">surface--action</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--danger">
+        <figcaption class="tile__cap"><code>.sf-surface--danger</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--danger dpad">surface--danger</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--info">
+        <figcaption class="tile__cap"><code>.sf-surface--info</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--info dpad">surface--info</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--inverse">
+        <figcaption class="tile__cap"><code>.sf-surface--inverse</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--inverse dpad">surface--inverse</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--neutral">
+        <figcaption class="tile__cap"><code>.sf-surface--neutral</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--neutral dpad">surface--neutral</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--primary">
+        <figcaption class="tile__cap"><code>.sf-surface--primary</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--primary dpad">surface--primary</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--secondary">
+        <figcaption class="tile__cap"><code>.sf-surface--secondary</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--secondary dpad">surface--secondary</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--success">
+        <figcaption class="tile__cap"><code>.sf-surface--success</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--success dpad">surface--success</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--tertiary">
+        <figcaption class="tile__cap"><code>.sf-surface--tertiary</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--tertiary dpad">surface--tertiary</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-surface--warning">
+        <figcaption class="tile__cap"><code>.sf-surface--warning</code></figcaption>
+        <div class="tile__stage"><div class="sf-surface sf-surface--warning dpad">surface--warning</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-tabular-nums">
+        <figcaption class="tile__cap"><code>.sf-tabular-nums</code></figcaption>
+        <div class="tile__stage"><div class="sf-tabular-nums" style="font-size:var(--sf-text-l)">1234567890<br>0987654321</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-text-gradient">
+        <figcaption class="tile__cap"><code>.sf-text-gradient</code></figcaption>
+        <div class="tile__stage"><div class="sf-text-gradient" style="font-size:var(--sf-text-2xl);font-weight:var(--sf-font-weight-bold)">Gradient text</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-text-protect">
+        <figcaption class="tile__cap"><code>.sf-text-protect</code></figcaption>
+        <div class="tile__stage"><div class="sf-text-protect dpad">text-protect</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-truncate">
+        <figcaption class="tile__cap"><code>.sf-truncate</code></figcaption>
+        <div class="tile__stage"><div class="sf-truncate" style="max-inline-size:18rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div></div>
+      </figure>
       </div>
     </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         FEATURE SHOWCASE
-    ═════════════════════════════════════════════════════════════════ -->
-    <section>
-      <h2>Framework Features Summary</h2>
-      <div class="demo-feature-row">
-        <div class="demo-feature-card">
-          <h4>128 Layout Primitives</h4>
-          <p>Container-query driven layouts that adapt to their width, not viewport breakpoints. Stack, Cluster, Grid, Sidebar, and more.</p>
-        </div>
-        <div class="demo-feature-card">
-          <h4>691 Tokens</h4>
-          <p>Custom properties for colors, typography, spacing, borders, shadows, animations, and more. All scoped with --sf- prefix.</p>
-        </div>
-        <div class="demo-feature-card">
-          <h4>42 Macro Classes</h4>
-          <p>Recipes for prose, truncation, line clamping, link variants, text gradients, surfaces, and overflow handling.</p>
-        </div>
-        <div class="demo-feature-card">
-          <h4>40 State Classes</h4>
-          <p>.is-* classes for runtime conditions like active, disabled, loading, valid, error, and more. Minimal but complete.</p>
-        </div>
-        <div class="demo-feature-card">
-          <h4>Optimal Bundles</h4>
-          <p>Load only what you need. Optimal CSS includes layout + essentials. Optional components ship as needed.</p>
-        </div>
-        <div class="demo-feature-card">
-          <h4>Theming Ready</h4>
-          <p>Every color, spacing, and timing value is configurable. Hundreds of tokens to customize for your brand.</p>
-        </div>
+    <section id="state">
+      <h2>State classes <span class="count">40</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="is-active">
+        <figcaption class="tile__cap"><code>.is-active</code></figcaption>
+        <div class="tile__stage"><div class="is-active dpad">is-active</div></div>
+      </figure>
+      <figure class="tile" data-class="is-busy">
+        <figcaption class="tile__cap"><code>.is-busy</code></figcaption>
+        <div class="tile__stage"><div class="is-busy dpad" aria-busy="true">is-busy</div></div>
+      </figure>
+      <figure class="tile" data-class="is-clickable">
+        <figcaption class="tile__cap"><code>.is-clickable</code></figcaption>
+        <div class="tile__stage"><div class="is-clickable dpad">is-clickable</div></div>
+      </figure>
+      <figure class="tile" data-class="is-clipped">
+        <figcaption class="tile__cap"><code>.is-clipped</code></figcaption>
+        <div class="tile__stage"><div class="is-clipped dpad">is-clipped</div></div>
+      </figure>
+      <figure class="tile" data-class="is-collapsed">
+        <figcaption class="tile__cap"><code>.is-collapsed</code></figcaption>
+        <div class="tile__stage"><div class="is-collapsed dpad">is-collapsed</div></div>
+      </figure>
+      <figure class="tile" data-class="is-current">
+        <figcaption class="tile__cap"><code>.is-current</code></figcaption>
+        <div class="tile__stage"><div class="is-current dpad" aria-current="page">is-current</div></div>
+      </figure>
+      <figure class="tile" data-class="is-danger">
+        <figcaption class="tile__cap"><code>.is-danger</code></figcaption>
+        <div class="tile__stage"><div class="is-danger dpad">is-danger</div></div>
+      </figure>
+      <figure class="tile" data-class="is-disabled">
+        <figcaption class="tile__cap"><code>.is-disabled</code></figcaption>
+        <div class="tile__stage"><div class="is-disabled dpad" aria-disabled="true">is-disabled</div></div>
+      </figure>
+      <figure class="tile" data-class="is-draggable">
+        <figcaption class="tile__cap"><code>.is-draggable</code></figcaption>
+        <div class="tile__stage"><div class="is-draggable dpad">is-draggable</div></div>
+      </figure>
+      <figure class="tile" data-class="is-dragging">
+        <figcaption class="tile__cap"><code>.is-dragging</code></figcaption>
+        <div class="tile__stage"><div class="is-dragging dpad">is-dragging</div></div>
+      </figure>
+      <figure class="tile" data-class="is-drop-target">
+        <figcaption class="tile__cap"><code>.is-drop-target</code></figcaption>
+        <div class="tile__stage"><div class="is-drop-target dpad">is-drop-target</div></div>
+      </figure>
+      <figure class="tile" data-class="is-empty">
+        <figcaption class="tile__cap"><code>.is-empty</code></figcaption>
+        <div class="tile__stage"><div class="is-empty dpad">is-empty</div></div>
+      </figure>
+      <figure class="tile" data-class="is-error">
+        <figcaption class="tile__cap"><code>.is-error</code></figcaption>
+        <div class="tile__stage"><div class="is-error dpad">is-error</div></div>
+      </figure>
+      <figure class="tile" data-class="is-expanded">
+        <figcaption class="tile__cap"><code>.is-expanded</code></figcaption>
+        <div class="tile__stage"><div class="is-expanded dpad" aria-expanded="true">is-expanded</div></div>
+      </figure>
+      <figure class="tile" data-class="is-fixed">
+        <figcaption class="tile__cap"><code>.is-fixed</code></figcaption>
+        <div class="tile__stage"><div class="is-fixed dpad">is-fixed</div></div>
+      </figure>
+      <figure class="tile" data-class="is-focused">
+        <figcaption class="tile__cap"><code>.is-focused</code></figcaption>
+        <div class="tile__stage"><div class="is-focused dpad">is-focused</div></div>
+      </figure>
+      <figure class="tile" data-class="is-fullscreen">
+        <figcaption class="tile__cap"><code>.is-fullscreen</code></figcaption>
+        <div class="tile__stage"><div class="is-fullscreen dpad">is-fullscreen</div></div>
+      </figure>
+      <figure class="tile" data-class="is-hidden">
+        <figcaption class="tile__cap"><code>.is-hidden</code></figcaption>
+        <div class="tile__stage"><div class="is-hidden dpad" hidden>is-hidden</div></div>
+      </figure>
+      <figure class="tile" data-class="is-highlighted">
+        <figcaption class="tile__cap"><code>.is-highlighted</code></figcaption>
+        <div class="tile__stage"><div class="is-highlighted dpad">is-highlighted</div></div>
+      </figure>
+      <figure class="tile" data-class="is-info">
+        <figcaption class="tile__cap"><code>.is-info</code></figcaption>
+        <div class="tile__stage"><div class="is-info dpad">is-info</div></div>
+      </figure>
+      <figure class="tile" data-class="is-invalid">
+        <figcaption class="tile__cap"><code>.is-invalid</code></figcaption>
+        <div class="tile__stage"><div class="is-invalid dpad" aria-invalid="true">is-invalid</div></div>
+      </figure>
+      <figure class="tile" data-class="is-invisible">
+        <figcaption class="tile__cap"><code>.is-invisible</code></figcaption>
+        <div class="tile__stage"><div class="is-invisible dpad">is-invisible</div></div>
+      </figure>
+      <figure class="tile" data-class="is-loading">
+        <figcaption class="tile__cap"><code>.is-loading</code></figcaption>
+        <div class="tile__stage"><div class="is-loading dpad" aria-busy="true">is-loading</div></div>
+      </figure>
+      <figure class="tile" data-class="is-open">
+        <figcaption class="tile__cap"><code>.is-open</code></figcaption>
+        <div class="tile__stage"><div class="is-open dpad">is-open</div></div>
+      </figure>
+      <figure class="tile" data-class="is-overlay">
+        <figcaption class="tile__cap"><code>.is-overlay</code></figcaption>
+        <div class="tile__stage"><div class="is-overlay dpad">is-overlay</div></div>
+      </figure>
+      <figure class="tile" data-class="is-pending">
+        <figcaption class="tile__cap"><code>.is-pending</code></figcaption>
+        <div class="tile__stage"><div class="is-pending dpad" aria-busy="true">is-pending</div></div>
+      </figure>
+      <figure class="tile" data-class="is-pinned">
+        <figcaption class="tile__cap"><code>.is-pinned</code></figcaption>
+        <div class="tile__stage"><div class="is-pinned dpad">is-pinned</div></div>
+      </figure>
+      <figure class="tile" data-class="is-pressed">
+        <figcaption class="tile__cap"><code>.is-pressed</code></figcaption>
+        <div class="tile__stage"><div class="is-pressed dpad" aria-pressed="true">is-pressed</div></div>
+      </figure>
+      <figure class="tile" data-class="is-readonly">
+        <figcaption class="tile__cap"><code>.is-readonly</code></figcaption>
+        <div class="tile__stage"><div class="is-readonly dpad" aria-readonly="true">is-readonly</div></div>
+      </figure>
+      <figure class="tile" data-class="is-resizable">
+        <figcaption class="tile__cap"><code>.is-resizable</code></figcaption>
+        <div class="tile__stage"><div class="is-resizable dpad">is-resizable</div></div>
+      </figure>
+      <figure class="tile" data-class="is-scrollable">
+        <figcaption class="tile__cap"><code>.is-scrollable</code></figcaption>
+        <div class="tile__stage"><div class="is-scrollable dpad">is-scrollable</div></div>
+      </figure>
+      <figure class="tile" data-class="is-selected">
+        <figcaption class="tile__cap"><code>.is-selected</code></figcaption>
+        <div class="tile__stage"><div class="is-selected dpad" aria-selected="true">is-selected</div></div>
+      </figure>
+      <figure class="tile" data-class="is-skeleton">
+        <figcaption class="tile__cap"><code>.is-skeleton</code></figcaption>
+        <div class="tile__stage"><div class="is-skeleton dpad">is-skeleton</div></div>
+      </figure>
+      <figure class="tile" data-class="is-sticky">
+        <figcaption class="tile__cap"><code>.is-sticky</code></figcaption>
+        <div class="tile__stage"><div class="is-sticky dpad">is-sticky</div></div>
+      </figure>
+      <figure class="tile" data-class="is-success">
+        <figcaption class="tile__cap"><code>.is-success</code></figcaption>
+        <div class="tile__stage"><div class="is-success dpad">is-success</div></div>
+      </figure>
+      <figure class="tile" data-class="is-truncated">
+        <figcaption class="tile__cap"><code>.is-truncated</code></figcaption>
+        <div class="tile__stage"><div class="is-truncated dpad">is-truncated</div></div>
+      </figure>
+      <figure class="tile" data-class="is-unselectable">
+        <figcaption class="tile__cap"><code>.is-unselectable</code></figcaption>
+        <div class="tile__stage"><div class="is-unselectable dpad">is-unselectable</div></div>
+      </figure>
+      <figure class="tile" data-class="is-valid">
+        <figcaption class="tile__cap"><code>.is-valid</code></figcaption>
+        <div class="tile__stage"><div class="is-valid dpad">is-valid</div></div>
+      </figure>
+      <figure class="tile" data-class="is-visible">
+        <figcaption class="tile__cap"><code>.is-visible</code></figcaption>
+        <div class="tile__stage"><div class="is-visible dpad">is-visible</div></div>
+      </figure>
+      <figure class="tile" data-class="is-warning">
+        <figcaption class="tile__cap"><code>.is-warning</code></figcaption>
+        <div class="tile__stage"><div class="is-warning dpad">is-warning</div></div>
+      </figure>
+      </div>
+    </section>
+    <section id="motion">
+      <h2>Motion / animation <span class="count">15</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="sf-color-pulse">
+        <figcaption class="tile__cap"><code>.sf-color-pulse</code></figcaption>
+        <div class="tile__stage"><div class="sf-color-pulse dbox dbox--anim">color-pulse</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-entrance--fade">
+        <figcaption class="tile__cap"><code>.sf-entrance--fade</code></figcaption>
+        <div class="tile__stage"><div class="sf-entrance sf-entrance--fade dbox dbox--anim">entrance--fade</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-entrance--fade-down">
+        <figcaption class="tile__cap"><code>.sf-entrance--fade-down</code></figcaption>
+        <div class="tile__stage"><div class="sf-entrance sf-entrance--fade-down dbox dbox--anim">entrance--fade-down</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-entrance--fade-left">
+        <figcaption class="tile__cap"><code>.sf-entrance--fade-left</code></figcaption>
+        <div class="tile__stage"><div class="sf-entrance sf-entrance--fade-left dbox dbox--anim">entrance--fade-left</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-entrance--fade-right">
+        <figcaption class="tile__cap"><code>.sf-entrance--fade-right</code></figcaption>
+        <div class="tile__stage"><div class="sf-entrance sf-entrance--fade-right dbox dbox--anim">entrance--fade-right</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-entrance--fade-up">
+        <figcaption class="tile__cap"><code>.sf-entrance--fade-up</code></figcaption>
+        <div class="tile__stage"><div class="sf-entrance sf-entrance--fade-up dbox dbox--anim">entrance--fade-up</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-entrance--scale-up">
+        <figcaption class="tile__cap"><code>.sf-entrance--scale-up</code></figcaption>
+        <div class="tile__stage"><div class="sf-entrance sf-entrance--scale-up dbox dbox--anim">entrance--scale-up</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-fade-in">
+        <figcaption class="tile__cap"><code>.sf-fade-in</code></figcaption>
+        <div class="tile__stage"><div class="sf-fade-in dbox dbox--anim">fade-in</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-fade-out">
+        <figcaption class="tile__cap"><code>.sf-fade-out</code></figcaption>
+        <div class="tile__stage"><div class="sf-fade-out dbox dbox--anim">fade-out</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scale-down">
+        <figcaption class="tile__cap"><code>.sf-scale-down</code></figcaption>
+        <div class="tile__stage"><div class="sf-scale-down dbox dbox--anim">scale-down</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-scale-up">
+        <figcaption class="tile__cap"><code>.sf-scale-up</code></figcaption>
+        <div class="tile__stage"><div class="sf-scale-up dbox dbox--anim">scale-up</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-slide-in-down">
+        <figcaption class="tile__cap"><code>.sf-slide-in-down</code></figcaption>
+        <div class="tile__stage"><div class="sf-slide-in-down dbox dbox--anim">slide-in-down</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-slide-in-left">
+        <figcaption class="tile__cap"><code>.sf-slide-in-left</code></figcaption>
+        <div class="tile__stage"><div class="sf-slide-in-left dbox dbox--anim">slide-in-left</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-slide-in-right">
+        <figcaption class="tile__cap"><code>.sf-slide-in-right</code></figcaption>
+        <div class="tile__stage"><div class="sf-slide-in-right dbox dbox--anim">slide-in-right</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-slide-in-up">
+        <figcaption class="tile__cap"><code>.sf-slide-in-up</code></figcaption>
+        <div class="tile__stage"><div class="sf-slide-in-up dbox dbox--anim">slide-in-up</div></div>
+      </figure>
+      </div>
+    </section>
+    <section id="accessibility">
+      <h2>Accessibility <span class="count">8</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="no-motion">
+        <figcaption class="tile__cap"><code>.no-motion</code></figcaption>
+        <div class="tile__stage"><div class="no-motion dbox sf-fade-in">animation suppressed</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-clickable-parent">
+        <figcaption class="tile__cap"><code>.sf-clickable-parent</code></figcaption>
+        <div class="tile__stage"><div class="sf-clickable-parent" style="position:relative;padding:var(--sf-space-m)">card <a href="#x" class="sf-clickable-parent__overlay"></a></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-clickable-parent__overlay">
+        <figcaption class="tile__cap"><code>.sf-clickable-parent__overlay</code></figcaption>
+        <div class="tile__stage"><div class="sf-clickable-parent" style="position:relative;padding:var(--sf-space-m)">card <a href="#x" class="sf-clickable-parent__overlay"></a> (overlay link)</div></div>
+      </figure>
+      <figure class="tile" data-class="sf-focus-parent">
+        <figcaption class="tile__cap"><code>.sf-focus-parent</code></figcaption>
+        <div class="tile__stage"><div class="sf-focus-parent" style="padding:var(--sf-space-m)"><button>focus me</button></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-focus-shadow">
+        <figcaption class="tile__cap"><code>.sf-focus-shadow</code></figcaption>
+        <div class="tile__stage"><div class="sf-focus-shadow" style="padding:var(--sf-space-m)"><button>focus me</button></div></div>
+      </figure>
+      <figure class="tile" data-class="skip-link">
+        <figcaption class="tile__cap"><code>.skip-link</code></figcaption>
+        <div class="tile__stage"><a href="#main" class="skip-link">skip-link link (Tab to reveal)</a> <span style="color:var(--sf-color-text--muted)">← focusable</span></div>
+      </figure>
+      <figure class="tile" data-class="sr-only">
+        <figcaption class="tile__cap"><code>.sr-only</code></figcaption>
+        <div class="tile__stage"><a href="#main" class="sr-only">sr-only link (Tab to reveal)</a> <span style="color:var(--sf-color-text--muted)">← focusable</span></div>
+      </figure>
+      <figure class="tile" data-class="sr-only-focusable">
+        <figcaption class="tile__cap"><code>.sr-only-focusable</code></figcaption>
+        <div class="tile__stage"><a href="#main" class="sr-only-focusable">sr-only-focusable link (Tab to reveal)</a> <span style="color:var(--sf-color-text--muted)">← focusable</span></div>
+      </figure>
+      </div>
+    </section>
+    <section id="print">
+      <h2>Print <span class="count">4</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="no-print">
+        <figcaption class="tile__cap"><code>.no-print</code></figcaption>
+        <div class="tile__stage"><div class="no-print dpad">no-print — affects print preview (Ctrl/Cmd-P)</div></div>
+      </figure>
+      <figure class="tile" data-class="print-color-exact">
+        <figcaption class="tile__cap"><code>.print-color-exact</code></figcaption>
+        <div class="tile__stage"><div class="print-color-exact dpad">print-color-exact — affects print preview (Ctrl/Cmd-P)</div></div>
+      </figure>
+      <figure class="tile" data-class="print-no-color">
+        <figcaption class="tile__cap"><code>.print-no-color</code></figcaption>
+        <div class="tile__stage"><div class="print-no-color dpad">print-no-color — affects print preview (Ctrl/Cmd-P)</div></div>
+      </figure>
+      <figure class="tile" data-class="print-only">
+        <figcaption class="tile__cap"><code>.print-only</code></figcaption>
+        <div class="tile__stage"><div class="print-only dpad">print-only — affects print preview (Ctrl/Cmd-P)</div></div>
+      </figure>
+      </div>
+    </section>
+    <section id="theme">
+      <h2>Theme <span class="count">2</span></h2>
+      <div class="tiles">
+      <figure class="tile" data-class="sf-theme-transition">
+        <figcaption class="tile__cap"><code>.sf-theme-transition</code></figcaption>
+        <div class="tile__stage"><div class="sf-theme-transition dpad">sf-theme-transition</div></div>
+      </figure>
+      <figure class="tile" data-class="theme-transition">
+        <figcaption class="tile__cap"><code>.theme-transition</code> <span class="tile__warn">not in optimal bundle</span></figcaption>
+        <div class="tile__stage"><div class="theme-transition dpad">theme-transition</div></div>
+      </figure>
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>SLASHED v0.6.25 — Full API Demo | <a href="https://github.com/codeslash-dev/SLASHED" style="color: var(--sf-color-link); text-decoration: underline;">GitHub</a></p>
-  </footer>
 </body>
 </html>
