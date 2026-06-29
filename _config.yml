@@ -15,6 +15,9 @@ exclude:
   - tests
   - dist
   - analysis
+  - demos/generate.mjs
+  - demos/validate.mjs
+  - demos/.validate
   - bundle.config.json
   - commitlint.config.js
   - playwright.config.js

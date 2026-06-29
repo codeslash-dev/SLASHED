@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const OUT = path.join(ROOT, 'demos'); // generated artifacts live alongside this script
 const api = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/api-index.json'), 'utf8'));
 const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css';
 const VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version;
@@ -684,7 +685,7 @@ ${tokenReferenceSection()}
 
 // ─────────────────────────────────────────────────────────────────────────
 const { css, handledCount } = buildOverride();
-fs.writeFileSync(path.join(ROOT, 'ultimate-override.css'), css);
+fs.writeFileSync(path.join(OUT, 'ultimate-override.css'), css);
 
 // completeness assertion for classes
 const emitted = new Set();
@@ -692,8 +693,8 @@ for (const c of classes) emitted.add(c.name);
 if (emitted.size !== classes.length) throw new Error('class de-dup mismatch');
 
 const baseHtml = buildDemo({ withOverride: false });
-fs.writeFileSync(path.join(ROOT, 'full-api-demo.html'), baseHtml);
-fs.writeFileSync(path.join(ROOT, 'full-api-demo-with-overrides.html'), buildDemo({ withOverride: true }));
+fs.writeFileSync(path.join(OUT, 'full-api-demo.html'), baseHtml);
+fs.writeFileSync(path.join(OUT, 'full-api-demo-with-overrides.html'), buildDemo({ withOverride: true }));
 
 // completeness assertion for tokens: every token must appear once in Part 2
 const tokenTiles = (baseHtml.match(/data-token="/g) || []).length;
@@ -701,6 +702,6 @@ if (tokenTiles !== tokens.length) {
   throw new Error(`Part 2 token reference: ${tokenTiles} tiles != ${tokens.length} tokens`);
 }
 
-console.log(`ultimate-override.css        → ${handledCount}/${knobs.length} knobs overridden, ${Object.keys(SKIP).length} skipped (documented)`);
-console.log(`full-api-demo.html           → ${classes.length} classes + ${tokens.length} tokens (Part 2), all rendered`);
-console.log(`full-api-demo-with-overrides.html → same body + override link`);
+console.log(`demos/ultimate-override.css        → ${handledCount}/${knobs.length} knobs overridden, ${Object.keys(SKIP).length} skipped (documented)`);
+console.log(`demos/full-api-demo.html           → ${classes.length} classes + ${tokens.length} tokens (Part 2), all rendered`);
+console.log(`demos/full-api-demo-with-overrides.html → same body + override link`);

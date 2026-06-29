@@ -12,19 +12,20 @@ const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.opti
 const LOCAL = path.join(ROOT, 'badges/slashed.optimal.css');
 const TMP = path.join(ROOT, 'demos/.validate');
 fs.mkdirSync(TMP, { recursive: true });
+const DEMOS = path.join(ROOT, 'demos');
 // make the runtime-injected override reachable from the temp copy
-fs.copyFileSync(path.join(ROOT, 'ultimate-override.css'), path.join(TMP, 'ultimate-override.css'));
+fs.copyFileSync(path.join(DEMOS, 'ultimate-override.css'), path.join(TMP, 'ultimate-override.css'));
 
 function localCopy(srcName, outName) {
-  let html = fs.readFileSync(path.join(ROOT, srcName), 'utf8');
+  let html = fs.readFileSync(path.join(DEMOS, srcName), 'utf8');
   html = html.replaceAll(CDN, 'file://' + LOCAL);
   const out = path.join(TMP, outName);
   fs.writeFileSync(out, html);
   return 'file://' + out;
 }
 const baseUrl = localCopy('full-api-demo.html', 'base.html');
-const expectClasses = (fs.readFileSync(path.join(ROOT, 'full-api-demo.html'), 'utf8').match(/class="tile"/g) || []).length;
-const expectTokens = (fs.readFileSync(path.join(ROOT, 'full-api-demo.html'), 'utf8').match(/data-token="/g) || []).length;
+const expectClasses = (fs.readFileSync(path.join(DEMOS, 'full-api-demo.html'), 'utf8').match(/class="tile"/g) || []).length;
+const expectTokens = (fs.readFileSync(path.join(DEMOS, 'full-api-demo.html'), 'utf8').match(/data-token="/g) || []).length;
 
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const page = await browser.newPage({ viewport: { width: 1280, height: 1600 } });
