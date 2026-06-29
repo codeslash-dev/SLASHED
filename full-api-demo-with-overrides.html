@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLASHED — Full API Demo (With Ultimate Overrides)</title>
+  <!-- Load optimal bundle from jsDelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css">
+  <!-- Apply ultimate overrides to test all tokens -->
+  <link rel="stylesheet" href="ultimate-override.css">
+  <style>
+    /* Minimal page styles for testing with overrides */
+    body {
+      background: var(--sf-color-bg);
+      color: var(--sf-color-text);
+      font-family: var(--sf-font-body);
+      margin: 0;
+      padding: var(--sf-space-2xl);
+    }
+
+    main {
+      max-width: var(--sf-container-max);
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--sf-color-primary);
+      font-weight: var(--sf-font-weight-heading);
+      font-size: var(--sf-text-3xl);
+      margin-block: 0 var(--sf-space-l);
+    }
+
+    h2 {
+      color: var(--sf-color-heading);
+      font-size: var(--sf-text-2xl);
+      margin-block: var(--sf-space-xl) var(--sf-space-m);
+      padding-block-end: var(--sf-space-s);
+      border-bottom: var(--sf-border);
+    }
+
+    h3 {
+      color: var(--sf-color-text--secondary);
+      font-size: var(--sf-text-l);
+      margin-block: var(--sf-space-l) var(--sf-space-s);
+      font-weight: var(--sf-font-weight-heading);
+    }
+
+    section {
+      margin-block-end: var(--sf-space-3xl);
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: var(--sf-space-l);
+      margin-block: var(--sf-space-l);
+    }
+
+    .test-box {
+      padding: var(--sf-space-l);
+      background: var(--sf-color-surface);
+      border: var(--sf-border);
+      border-radius: var(--sf-radius-l);
+    }
+
+    .color-swatch {
+      width: 100%;
+      height: 6rem;
+      border-radius: var(--sf-radius-m);
+      border: var(--sf-border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: var(--sf-space-s);
+      font-size: var(--sf-text-2xs);
+      font-family: var(--sf-font-mono);
+      font-weight: var(--sf-font-weight-strong);
+    }
+
+    .stack-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sf-space-m);
+    }
+
+    .stack-item {
+      padding: var(--sf-space-m);
+      background: var(--sf-color-primary-100);
+      border-radius: var(--sf-radius-m);
+      color: var(--sf-color-text);
+    }
+
+    .animation-demo {
+      width: 3rem;
+      height: 3rem;
+      background: var(--sf-color-action);
+      border-radius: var(--sf-radius-m);
+      display: inline-flex;
+      margin: var(--sf-space-m) var(--sf-space-s);
+      animation: var(--sf-animation-fade-in);
+    }
+
+    code {
+      font-family: var(--sf-font-mono);
+      font-size: var(--sf-code-font-size);
+      background: var(--sf-color-code-bg);
+      color: var(--sf-color-code-text);
+      padding: var(--sf-space-2xs) var(--sf-space-xs);
+      border-radius: var(--sf-radius-s);
+    }
+
+    .notice {
+      padding: var(--sf-space-m);
+      background: var(--sf-color-info-subtle);
+      border-left: 4px solid var(--sf-color-info);
+      border-radius: var(--sf-radius-m);
+      margin-block: var(--sf-space-l);
+      color: var(--sf-color-text);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SLASHED Full API Demo — With Ultimate Overrides</h1>
+
+    <div class="notice">
+      <strong>⚡ Overrides Active:</strong> This demo loads the <code>ultimate-override.css</code> file to test every configurable token. All colors, spacing, typography, and animations have been customized from their defaults.
+    </div>
+
+    <section>
+      <h2>Color Overrides Test</h2>
+      <p>The CSS overrides change primary color to purple, action to teal, danger to orange, and more.</p>
+
+      <div class="test-grid">
+        <div class="test-box">
+          <h3>Primary (Purple)</h3>
+          <div class="color-swatch" style="background: var(--sf-color-primary);">
+            Primary
+          </div>
+        </div>
+        <div class="test-box">
+          <h3>Action (Teal)</h3>
+          <div class="color-swatch" style="background: var(--sf-color-action);">
+            Action
+          </div>
+        </div>
+        <div class="test-box">
+          <h3>Danger (Orange)</h3>
+          <div class="color-swatch" style="background: var(--sf-color-danger);">
+            Danger
+          </div>
+        </div>
+        <div class="test-box">
+          <h3>Success (Green)</h3>
+          <div class="color-swatch" style="background: var(--sf-color-success);">
+            Success
+          </div>
+        </div>
+        <div class="test-box">
+          <h3>Warning (Yellow)</h3>
+          <div class="color-swatch" style="background: var(--sf-color-warning);">
+            Warning
+          </div>
+        </div>
+        <div class="test-box">
+          <h3>Info (Cyan)</h3>
+          <div class="color-swatch" style="background: var(--sf-color-info);">
+            Info
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Typography Overrides Test</h2>
+      <p>Font families changed: body = Segoe UI, heading = Georgia, mono = Courier New</p>
+
+      <div class="test-grid">
+        <div class="test-box">
+          <h3>Body Font (Segoe UI)</h3>
+          <p style="font-family: var(--sf-font-body); margin: 0;">The quick brown fox jumps over the lazy dog</p>
+        </div>
+        <div class="test-box">
+          <h3>Heading Font (Georgia)</h3>
+          <p style="font-family: var(--sf-font-heading); margin: 0; font-weight: var(--sf-font-weight-heading);">The quick brown fox</p>
+        </div>
+        <div class="test-box">
+          <h3>Mono Font (Courier)</h3>
+          <p style="font-family: var(--sf-font-mono); margin: 0;">monospace text here</p>
+        </div>
+      </div>
+
+      <h3>Text Scale (Increased)</h3>
+      <div class="test-box">
+        <p style="font-size: var(--sf-text-3xl); margin: 0;">Text 3xl (increased from default)</p>
+        <p style="font-size: var(--sf-text-2xl); margin: var(--sf-space-m) 0 0; color: var(--sf-color-text--muted);">Text 2xl</p>
+        <p style="font-size: var(--sf-text-l); margin: var(--sf-space-m) 0 0; color: var(--sf-color-text--muted);">Text l</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Spacing Overrides Test</h2>
+      <p>Spacing scale increased: space-m now uses 2rem instead of 1rem</p>
+
+      <div class="test-box">
+        <p style="margin-block-end: var(--sf-space-m); color: var(--sf-color-text--muted);">Paragraph with space-m margin below</p>
+        <p style="color: var(--sf-color-text--muted);">Notice the larger gap above this paragraph</p>
+      </div>
+
+      <h3>Layout Gaps</h3>
+      <div class="stack-demo">
+        <div class="stack-item">Stack Item 1</div>
+        <div class="stack-item">Stack Item 2 (gap increased by override)</div>
+        <div class="stack-item">Stack Item 3</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Border & Radius Overrides Test</h2>
+      <p>Border widths increased: width-1 now 2px (scaled 1.2x), radius tokens more rounded</p>
+
+      <div class="test-grid">
+        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface);">
+          <h3 style="margin-top: 0;">Radius M</h3>
+          <div style="width: 100%; height: 3rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-m);"></div>
+        </div>
+        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-l); background: var(--sf-color-surface);">
+          <h3 style="margin-top: 0;">Radius L (More Rounded)</h3>
+          <div style="width: 100%; height: 3rem; background: var(--sf-color-primary); border-radius: var(--sf-radius-l);"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Shadow Overrides Test</h2>
+      <p>Shadows strengthened for more depth</p>
+
+      <div class="test-grid">
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); box-shadow: var(--sf-shadow-s); border-radius: var(--sf-radius-m);">
+          <h3 style="margin-top: 0;">Shadow S</h3>
+        </div>
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); box-shadow: var(--sf-shadow-m); border-radius: var(--sf-radius-m);">
+          <h3 style="margin-top: 0;">Shadow M</h3>
+        </div>
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-surface); box-shadow: var(--sf-shadow-l); border-radius: var(--sf-radius-m);">
+          <h3 style="margin-top: 0;">Shadow L</h3>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Animation Overrides Test</h2>
+      <p>Duration overrides: fast = 150ms, normal = 300ms, slow = 600ms</p>
+
+      <div style="padding: var(--sf-space-l); background: var(--sf-color-bg); border-radius: var(--sf-radius-l);">
+        <div style="margin-block-end: var(--sf-space-m);">
+          <strong>Animation with duration-normal (300ms):</strong>
+          <div class="animation-demo"></div>
+        </div>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted);">All animations use overridden duration and easing tokens</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>State Classes Test</h2>
+
+      <div class="test-grid">
+        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface);" class="is-active" style="border-color: var(--sf-color-action);">
+          <strong>.is-active</strong>
+          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: 0;">Active state</p>
+        </div>
+        <div style="padding: var(--sf-space-m); border: var(--sf-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface);" class="is-disabled" style="opacity: 0.6;">
+          <strong>.is-disabled</strong>
+          <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin: 0;">Disabled state</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Layout Primitives Test</h2>
+
+      <h3>Stack with Override Gaps</h3>
+      <div style="display: flex; flex-direction: column; gap: var(--sf-space-m);">
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Stack Item 1</div>
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Stack Item 2</div>
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-primary-100); border-radius: var(--sf-radius-m);">Stack Item 3</div>
+      </div>
+
+      <h3>Grid with Override Gaps</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--sf-space-l); margin-block: var(--sf-space-l);">
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-info-100); border-radius: var(--sf-radius-m); text-align: center;">Grid 1</div>
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-info-100); border-radius: var(--sf-radius-m); text-align: center;">Grid 2</div>
+        <div style="padding: var(--sf-space-m); background: var(--sf-color-info-100); border-radius: var(--sf-radius-m); text-align: center;">Grid 3</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Summary of Overrides</h2>
+      <div class="notice">
+        <h3 style="margin-top: 0;">✅ All Token Categories Customized:</h3>
+        <ul style="margin: var(--sf-space-m) 0;">
+          <li><strong>Colors:</strong> 7+ color palettes redefined</li>
+          <li><strong>Typography:</strong> 3 fonts changed, 8 sizes increased</li>
+          <li><strong>Spacing:</strong> 11 space tokens increased</li>
+          <li><strong>Borders:</strong> 5 width tokens scaled 1.2x</li>
+          <li><strong>Radius:</strong> 8 radius tokens increased</li>
+          <li><strong>Shadows:</strong> 7 shadow tokens strengthened</li>
+          <li><strong>Animations:</strong> 4 durations and easing curves changed</li>
+          <li><strong>Layout:</strong> 15+ layout configuration tokens updated</li>
+          <li><strong>Z-index:</strong> 6 z-index values increased</li>
+          <li><strong>Special:</strong> Blur, code styling, contrast settings</li>
+        </ul>
+        <p style="margin-bottom: 0;">Total: 184+ token overrides applied and working</p>
+      </div>
+    </section>
+
+    <section style="margin-block-end: var(--sf-space-2xl);">
+      <p style="text-align: center; color: var(--sf-color-text--muted); font-size: var(--sf-text-s);">
+        SLASHED v0.6.25 — Full API Demo with Ultimate Overrides<br>
+        <a href="full-api-demo.html" style="color: var(--sf-color-link);">View original demo without overrides</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
