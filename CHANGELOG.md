@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.25] - 2026-06-29
+
+### Features
+- **configurator:** add reset-all confirmation dialog; move save button left
+
+### Bug Fixes
+- **configurator:** raw input no longer clears while typing
+- **configurator:** correct token defaults and add raw CSS input mode
+- add focus management to reset confirmation dialog in StudioHeader
+
+### Performance Improvements
+- replace JSON.stringify comparisons with shallow equality for slider responsiveness
+
 ## [0.6.24] - 2026-06-29
 
 ### Features
