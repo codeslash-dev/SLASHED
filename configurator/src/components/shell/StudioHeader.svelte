@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from 'svelte';
   import { Undo2, Redo2, Trash2, Share2, FolderOpen, Check, Save, Loader2 } from 'lucide-svelte';
 
   const version = typeof __SLASHED_VERSION__ !== "undefined" ? __SLASHED_VERSION__ : "";
@@ -19,6 +20,14 @@
 
   let shareFeedback = $state(false);
   let showResetConfirm = $state(false);
+  let resetCancelBtn = $state<HTMLButtonElement | null>(null);
+  let resetConfirmBtn = $state<HTMLButtonElement | null>(null);
+
+  $effect(() => {
+    if (showResetConfirm) {
+      tick().then(() => resetCancelBtn?.focus());
+    }
+  });
 
   async function handleShare() {
     try {
@@ -155,6 +164,16 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="reset-confirm-title"
+    onclick={(e) => { if (e.target === e.currentTarget) cancelReset(); }}
+    onkeydown={(e) => {
+      if (e.key === 'Escape') { e.stopPropagation(); cancelReset(); }
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const focused = document.activeElement;
+        if (focused === resetCancelBtn) resetConfirmBtn?.focus();
+        else resetCancelBtn?.focus();
+      }
+    }}
   >
     <div class="bg-[#1a1a2e] border border-white/10 rounded-xl p-6 max-w-sm w-full mx-4 shadow-2xl">
       <h3 id="reset-confirm-title" class="text-white font-bold text-sm mb-2">Reset all overrides?</h3>
@@ -164,12 +183,14 @@
       </p>
       <div class="flex gap-2 justify-end">
         <button
+          bind:this={resetCancelBtn}
           onclick={cancelReset}
           class="px-3 py-1.5 text-xs rounded-lg bg-white/8 text-slate-300 hover:bg-white/12 transition-colors cursor-pointer"
         >
           Cancel
         </button>
         <button
+          bind:this={resetConfirmBtn}
           onclick={confirmReset}
           class="px-3 py-1.5 text-xs rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold transition-colors cursor-pointer"
         >
