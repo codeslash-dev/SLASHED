@@ -150,7 +150,7 @@ jobs:
           cache: npm
       - run: npm ci
       # Reuse the badges/ artifact from the build job — no need to rebuild.
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: badges
           path: badges/
@@ -179,7 +179,7 @@ jobs:
       # Reuse the badges/ artifact from the build job so the configurator Vite
       # build can resolve PreviewPanel.svelte's ?raw CSS import without a
       # redundant root rebuild.
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: badges
           path: badges/
