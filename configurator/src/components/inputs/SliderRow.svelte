@@ -5,7 +5,7 @@
     label, help, value, min, max, step, unit, overridden, onChange, onReset,
     rawDefault, currentRaw, onRawSet
   }: {
-    label: string;
+    label?: string;
     help?: string;
     value: number;
     min: number;
@@ -28,6 +28,17 @@
   );
 
   let showRaw = $derived(!!(rawDefault && onRawSet && (userRawMode || isRawOverride)));
+
+  // Local draft so typing is never interrupted by re-renders
+  let rawDraft = $state(currentRaw ?? '');
+  let isEditing = $state(false);
+
+  // Sync draft from external currentRaw changes only when user is not actively editing
+  $effect(() => {
+    if (!isEditing) {
+      rawDraft = currentRaw ?? '';
+    }
+  });
 </script>
 
 <div class="group">
@@ -61,10 +72,13 @@
   {#if showRaw && rawDefault}
     <input
       type="text"
-      value={isRawOverride ? (currentRaw ?? '') : ''}
+      value={rawDraft}
       placeholder={rawDefault}
+      onfocus={() => { isEditing = true; }}
+      onblur={() => { isEditing = false; }}
       oninput={(e) => {
-        const v = (e.target as HTMLInputElement).value.trim();
+        rawDraft = (e.target as HTMLInputElement).value;
+        const v = rawDraft.trim();
         if (!v) {
           onReset();
         } else if (onRawSet) {
