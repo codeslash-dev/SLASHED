@@ -47,7 +47,7 @@
   /* Font families — using different system stacks */
   --sf-font-body: 'Segoe UI', 'Helvetica Neue', sans-serif;
   --sf-font-heading: 'Georgia', 'Times New Roman', serif;
-  --sf-font-mono: 'Courier New', Courier, monospace;
+  --sf-font-mono: 'Courier New', courier, monospace;
 
   /* Font weights */
   --sf-font-weight-body: 450;
