@@ -53,7 +53,7 @@
   }
 </script>
 
-<header class="h-[52px] bg-[#0d0d14] border-b border-white/8 flex items-center px-3 gap-3 shrink-0 z-20">
+<header class="h-[52px] bg-[#0d0d14] border-b border-white/8 flex items-center px-3 gap-2 sm:gap-3 shrink-0 z-20">
   <div class="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-lg leading-none select-none shadow-lg shadow-indigo-600/30 shrink-0">
     /
   </div>
@@ -65,7 +65,7 @@
         v{version}
       </span>
     </div>
-    <div class="text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-0.5">
+    <div class="hidden sm:block text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-0.5">
       Token Architect
     </div>
   </div>
@@ -76,7 +76,7 @@
       class="flex items-center gap-1.5 px-2.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-lg text-indigo-300 text-[10px] font-bold font-mono hover:bg-indigo-500/20 transition-colors cursor-pointer shrink-0"
     >
       <span class="w-4 h-4 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[9px] font-black">{overridesCount}</span>
-      customised · Export →
+      <span class="hidden sm:inline">customised · </span>Export →
     </button>
   {/if}
 
@@ -130,7 +130,7 @@
     <button
       onclick={handleShare}
       title="Copy share link"
-      class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
+      class="hidden sm:block p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
     >
       {#if shareFeedback}
         <Check class="w-3.5 h-3.5 text-emerald-400" />
@@ -142,7 +142,7 @@
     <button
       onclick={onImport}
       title="Import CSS overrides"
-      class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
+      class="hidden sm:block p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
     >
       <FolderOpen class="w-3.5 h-3.5" />
     </button>

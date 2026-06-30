@@ -616,13 +616,13 @@ ${BODIES[template]}
 
 <div class="flex flex-col flex-1 min-h-0 bg-[#09090e]">
   <!-- Preview toolbar -->
-  <div class="h-10 bg-[#0d0d14] border-b border-white/8 flex items-center px-3 gap-2 shrink-0">
+  <div class="min-h-10 bg-[#0d0d14] border-b border-white/8 flex flex-wrap md:flex-nowrap items-center px-3 gap-2 py-1.5 md:py-0 shrink-0">
     <!-- Template tabs -->
-    <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5">
+    <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5 max-w-full overflow-x-auto">
       {#each TEMPLATES as t (t.id)}
         <button
           onclick={() => onTemplateChange(t.id)}
-          class={`px-2.5 py-0.5 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
+          class={`shrink-0 px-2.5 py-0.5 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
             previewTemplate === t.id ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"
           }`}
         >
@@ -677,7 +677,7 @@ ${BODIES[template]}
       </button>
     </div>
 
-    <div class="flex-1"></div>
+    <div class="hidden md:block md:flex-1"></div>
 
     <!-- Motion -->
     <select

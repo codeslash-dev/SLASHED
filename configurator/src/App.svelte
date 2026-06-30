@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
+  import { SlidersHorizontal, Eye } from 'lucide-svelte';
   import type { PreviewTemplate, SlashedToken } from './types';
   import StudioHeader from './components/shell/StudioHeader.svelte';
   import SidebarNav from './components/shell/SidebarNav.svelte';
@@ -37,6 +38,9 @@
 
   let domain = $state("home");
   let showPalette = $state(false);
+  // On narrow screens the controls panel and the live preview can't both fit, so
+  // we show one at a time and let the user fold between them (desktop shows both).
+  let mobileView = $state<"controls" | "preview">("controls");
   let previewTheme = $state<"light" | "dark">("light");
   let previewWidth = $state<"fluid" | "mobile" | "tablet" | "desktop">("fluid");
   let previewMotion = $state<"normal" | "slow" | "none">("normal");
@@ -236,15 +240,17 @@
 
   <!-- Main body: sidebar + left panel + preview -->
   <div class="flex flex-1 min-h-0">
-    <!-- Icon nav rail -->
-    <SidebarNav
-      activeId={domain}
-      onSelect={(d) => { domain = d; }}
-      overridesByDomain={domainBadges}
-    />
+    <!-- Icon nav rail — hidden on mobile while the preview is folded open -->
+    <div class={`shrink-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
+      <SidebarNav
+        activeId={domain}
+        onSelect={(d) => { domain = d; }}
+        overridesByDomain={domainBadges}
+      />
+    </div>
 
-    <!-- Left domain panel — fixed 360px -->
-    <div class="w-[360px] shrink-0 bg-[#0c0c15] border-r border-white/8 flex flex-col min-h-0">
+    <!-- Left domain panel — full width on mobile, fixed 360px on desktop -->
+    <div class={`w-full md:w-[360px] shrink-0 bg-[#0c0c15] border-r border-white/8 flex-col min-h-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
       <!-- Panel heading -->
       <div class="h-9 flex items-center px-4 border-b border-white/6 shrink-0">
         <span data-testid="panel-heading" class="text-[11px] font-bold text-slate-300 uppercase tracking-widest flex-1">
@@ -267,8 +273,8 @@
       </div>
     </div>
 
-    <!-- Right: live preview -->
-    <div class="flex-1 flex flex-col min-h-0 min-w-0">
+    <!-- Right: live preview — full screen on mobile when folded open -->
+    <div class={`flex-1 flex-col min-h-0 min-w-0 ${mobileView === "controls" ? "hidden md:flex" : "flex"}`}>
       <PreviewPanel
         {overrides}
         {previewTheme}
@@ -281,6 +287,31 @@
         onTemplateChange={(t) => { previewTemplate = t; }}
       />
     </div>
+  </div>
+
+  <!-- Mobile fold toggle: switch between the controls panel and the live preview -->
+  <div class="md:hidden flex items-stretch border-t border-white/8 bg-[#0d0d14] shrink-0">
+    <button
+      onclick={() => { mobileView = "controls"; }}
+      aria-pressed={mobileView === "controls"}
+      class={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold transition-colors cursor-pointer ${
+        mobileView === "controls" ? "text-indigo-300 bg-indigo-500/10" : "text-slate-500 hover:text-slate-300"
+      }`}
+    >
+      <SlidersHorizontal class="w-3.5 h-3.5" /> Controls
+    </button>
+    <button
+      onclick={() => { mobileView = "preview"; }}
+      aria-pressed={mobileView === "preview"}
+      class={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold transition-colors cursor-pointer ${
+        mobileView === "preview" ? "text-indigo-300 bg-indigo-500/10" : "text-slate-500 hover:text-slate-300"
+      }`}
+    >
+      <Eye class="w-3.5 h-3.5" /> Preview
+      {#if overridesCount > 0}
+        <span class="w-4 h-4 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[8px] font-black">{overridesCount > 9 ? "9+" : overridesCount}</span>
+      {/if}
+    </button>
   </div>
 
   <!-- Status bar -->
