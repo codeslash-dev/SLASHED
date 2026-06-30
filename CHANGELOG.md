@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.30] - 2026-06-30
+
+### Bug Fixes
+- **configurator:** validate JSON-import keys against the token allowlist
+- **configurator:** guard empty JSON import, fix dark-surface precedence
+- **configurator:** sanitize override keys before CSS emission
+- **configurator:** null-safe JSON import, finite-number guards, style-injection hardening
+
 ## [0.6.29] - 2026-06-30
 
 ### Features
