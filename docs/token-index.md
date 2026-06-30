@@ -187,8 +187,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-action-xdark` | PUBLIC | consumption | Core | `var(--sf-color-action-800)` |
 | `--sf-color-action-xlight` | PUBLIC | consumption | Core | `var(--sf-color-action-200)` |
 | `--sf-color-base` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
-| `--sf-color-base--active` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08), 0.99) c h)` |
-| `--sf-color-base--hover` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04), 0.99) c h)` |
+| `--sf-color-base--active` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)` |
+| `--sf-color-base--hover` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)` |
 | `--sf-color-base-100` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) 0.94 c h)` |
 | `--sf-color-base-200` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) 0.88 c h)` |
 | `--sf-color-base-300` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) 0.78 c h)` |

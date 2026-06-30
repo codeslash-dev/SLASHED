@@ -106,8 +106,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Secondary interactive color for supporting actions and secondary buttons. |
-| `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08), 0.99) c h)` | Base color at pressed/active brightness. |
-| `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04), 0.99) c h)` | Base color at hover brightness. |
+| `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)` | Base color at pressed/active brightness. |
+| `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)` | Base color at hover brightness. |
 | `--sf-color-base-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.94 c h)` | Very light base shade. Hover fills, badge backgrounds. |
 | `--sf-color-base-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.88 c h)` | Light base shade. |
 | `--sf-color-base-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.78 c h)` | Light-mid base shade. Borders on light backgrounds. |

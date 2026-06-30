@@ -795,7 +795,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08), 0.99) c h)"
+      "value": "oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)"
     },
     "--sf-color-base--hover": {
       "tier": "PUBLIC",
@@ -803,7 +803,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04), 0.99) c h)"
+      "value": "oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)"
     },
     "--sf-color-base-100": {
       "tier": "PUBLIC",

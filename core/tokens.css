@@ -885,8 +885,8 @@
     --sf-color-base-darker:     var(--sf-color-base-600);
     --sf-color-base-xdark:      var(--sf-color-base-800);
     --sf-color-base-superdark:  var(--sf-color-base-950);
-    --sf-color-base--hover:     oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04), 0.99) c h);
-    --sf-color-base--active:    oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08), 0.99) c h);
+    --sf-color-base--hover:     oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h);
+    --sf-color-base--active:    oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h);
     --sf-color-base-subtle:     var(--sf-color-base-a10);
     --sf-color-base-muted:      var(--sf-color-base-a30);
     --sf-color-base-ghost:      var(--sf-color-base-a5);
