@@ -176,6 +176,33 @@
 
   const ALL_SOURCES: ColorSource[] = [...BRAND_SOURCES, ...STATUS_SOURCES];
 
+  // Live semantic-color preview shown at the very top of the panel. Each tile
+  // is painted with the resolved semantic background and its paired on-color
+  // text, so it doubles as a real legibility check. Resolved from the live
+  // canvas via paint(), so it tracks both overrides and the active theme.
+  const SEMANTIC_PREVIEW: { heading: string; items: { name: string; label: string; fg: string }[] }[] = [
+    { heading: "Brand", items: [
+      { name: "--sf-color-primary",   label: "Primary",   fg: "--sf-color-text--on-primary" },
+      { name: "--sf-color-secondary", label: "Secondary", fg: "--sf-color-text--on-secondary" },
+      { name: "--sf-color-tertiary",  label: "Tertiary",  fg: "--sf-color-text--on-tertiary" },
+      { name: "--sf-color-action",    label: "Action",    fg: "--sf-color-text--on-action" },
+      { name: "--sf-color-neutral",   label: "Neutral",   fg: "--sf-color-text--on-neutral" },
+    ] },
+    { heading: "Status", items: [
+      { name: "--sf-color-success", label: "Success", fg: "--sf-color-text--on-success" },
+      { name: "--sf-color-warning", label: "Warning", fg: "--sf-color-text--on-warning" },
+      { name: "--sf-color-info",    label: "Info",    fg: "--sf-color-text--on-info" },
+      { name: "--sf-color-danger",  label: "Danger",  fg: "--sf-color-text--on-danger" },
+    ] },
+    { heading: "Surfaces & text", items: [
+      { name: "--sf-color-bg",      label: "Bg",      fg: "--sf-color-text" },
+      { name: "--sf-color-surface", label: "Surface", fg: "--sf-color-text" },
+      { name: "--sf-color-raised",  label: "Raised",  fg: "--sf-color-text" },
+      { name: "--sf-color-inset",   label: "Inset",   fg: "--sf-color-text" },
+      { name: "--sf-color-inverse", label: "Inverse", fg: "--sf-color-text--on-inverse" },
+    ] },
+  ];
+
   // Separate contrast/focus knobs
   const contrastKnobs = (KNOBS_BY_DOMAIN["colors"] ?? []).filter(
     (k) => k.name === "--sf-contrast-bias" || k.name === "--sf-contrast-threshold"
@@ -399,6 +426,37 @@
 </script>
 
 <div class="p-4 space-y-6">
+
+  <!-- LIVE SEMANTIC PREVIEW -->
+  <section class="space-y-2">
+    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Semantic colors</div>
+    <p class="text-[9px] text-slate-600 leading-relaxed">
+      Live preview — every semantic role on its on-color text, resolved from the canvas. Updates as you edit and follows the active theme.
+    </p>
+    <div class="space-y-2">
+      {#each SEMANTIC_PREVIEW as grp (grp.heading)}
+        <div class="space-y-1">
+          <div class="text-[8px] font-semibold text-slate-600 uppercase tracking-widest">{grp.heading}</div>
+          <div class="grid grid-cols-5 gap-1">
+            {#each grp.items as it (it.name)}
+              {@const bg = paint(`var(${it.name})`, "transparent")}
+              {@const fg = paint(`var(${it.fg})`, "currentColor")}
+              <div
+                class="rounded-md border border-white/10 px-1 py-1.5 flex flex-col items-center justify-center gap-0.5 min-h-[34px]"
+                style={`background:${bg}; color:${fg}`}
+                title={`${it.name} — ${bg}`}
+              >
+                <span class="text-[11px] font-bold leading-none">Aa</span>
+                <span class="text-[7px] leading-none opacity-90">{it.label}</span>
+              </div>
+            {/each}
+          </div>
+        </div>
+      {/each}
+    </div>
+  </section>
+
+  <div class="h-px bg-white/6"></div>
 
   <!-- BRAND SOURCES -->
   <section class="space-y-3">
