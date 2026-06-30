@@ -1,0 +1,3429 @@
+{
+  "summary": {
+    "totalClasses": 239,
+    "consoleErrors": 0,
+    "selectorPresentInBundle": 238,
+    "notInOptimalBundle": [
+      "theme-transition [bundles=none]"
+    ],
+    "noStageElement": [],
+    "behaviourChecked": 69,
+    "behaviourPassed": 69,
+    "behaviourMismatch": []
+  },
+  "consoleErrors": [],
+  "rows": [
+    {
+      "name": "is-active",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-busy",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-clickable",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-clipped",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-collapsed",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-current",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-danger",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-disabled",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-draggable",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-dragging",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-drop-target",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-empty",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-error",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-expanded",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-fixed",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-focused",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-fullscreen",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-hidden",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "none",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-highlighted",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-info",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-invalid",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-invisible",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-loading",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-open",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-overlay",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-pending",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-pinned",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-pressed",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-readonly",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-resizable",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-scrollable",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-selected",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-skeleton",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-sticky",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-success",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-truncated",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-unselectable",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-valid",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "is-visible",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "is-warning",
+      "category": "State classes",
+      "kind": "state",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "no-motion",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "no-print",
+      "category": "Print",
+      "kind": "print",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "print-color-exact",
+      "category": "Print",
+      "kind": "print",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "print-no-color",
+      "category": "Print",
+      "kind": "print",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "print-only",
+      "category": "Print",
+      "kind": "print",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "none",
+      "checked": false
+    },
+    {
+      "name": "sf-alternate",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-aspect",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-bento",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-bento--2",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-bento--3",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-bento--6",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-bento--compact",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-bento--tall",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-bento-featured",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-bento-full",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-bento-tall",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-bento-wide",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-bg",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-box",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-breakout",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-center",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-center--intrinsic",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-clickable-parent",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-clickable-parent__overlay",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline",
+      "checked": false
+    },
+    {
+      "name": "sf-cluster",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--2xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--between",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--center",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--end",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--m",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--no-wrap",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cluster--xs",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-color-pulse",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-container",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-container--full",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-container--narrow",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-container--prose",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-container--wide",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-content-auto",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-content-grid",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-cover",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-cover__center",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-cover--max",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-cover--min",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-cover--padding-l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-cover--padding-s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-cq",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider--dashed",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider--dotted",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider--gradient",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider--soft",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider--strong",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-divider--vertical",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-entrance--fade",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-entrance--fade-down",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-entrance--fade-left",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-entrance--fade-right",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-entrance--fade-up",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-entrance--scale-up",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-equal",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-equal--2",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-equal--3",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-equal--4",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-equal--6",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-equal-height",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-fade-in",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-fade-out",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-flow",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-focus-parent",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-focus-shadow",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-frame",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--3-2",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--4-3",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--cinema",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--golden",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--portrait",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--square",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-frame--video",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-full-bleed",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap--2xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap--l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap--m",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap--s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap--xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-gap--xs",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-grid",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--2xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--dense",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--fit",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--m",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid--xs",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-grid-cols-1",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-1-2",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-1-3",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-2",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-2-1",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-3",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-3-1",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-4",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-grid-cols-6",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-icon",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--2xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--boxed",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--m",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-icon--xs",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline-block",
+      "checked": false
+    },
+    {
+      "name": "sf-imposter",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-imposter--contain",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-imposter--fixed",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-line-clamp-2",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flow-root",
+      "checked": false
+    },
+    {
+      "name": "sf-line-clamp-3",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flow-root",
+      "checked": false
+    },
+    {
+      "name": "sf-line-clamp-N",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flow-root",
+      "checked": false
+    },
+    {
+      "name": "sf-link--reverse",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline",
+      "checked": false
+    },
+    {
+      "name": "sf-link--subtle",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline",
+      "checked": false
+    },
+    {
+      "name": "sf-link-external",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "inline",
+      "checked": false
+    },
+    {
+      "name": "sf-no-tap-highlight",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-not-prose",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade--block",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade--bottom",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade--inline",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade--left",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade--right",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-overflow-fade--top",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-pancake",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-prose",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-reel",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-scale-down",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scale-up",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scrim",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scrim__content",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scrim--bottom",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scrim--full",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scrim--top",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scroll-shadow",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-scroll-snap",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-section",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--2xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--collapse",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--guttered",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--m",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section--xs",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-section-group",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-sidebar",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-sidebar--narrow",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-sidebar--right",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-sidebar--wide",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": false
+    },
+    {
+      "name": "sf-slide-in-down",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-slide-in-left",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-slide-in-right",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-slide-in-up",
+      "category": "Motion / animation",
+      "kind": "motion",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-stack",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--2xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--center",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--end",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--l",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--m",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--s",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--stretch",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--xl",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-stack--xs",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-subgrid",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-subgrid-rows",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "grid",
+      "checked": false
+    },
+    {
+      "name": "sf-surface",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--action",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--danger",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--info",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--inverse",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--neutral",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--primary",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--secondary",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--success",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--tertiary",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-surface--warning",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-switcher",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-switcher--no-wrap",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-switcher--vertical",
+      "category": "Layout primitives",
+      "kind": "layout",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "flex",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sf-tabular-nums",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-text-gradient",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-text-protect",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-theme-transition",
+      "category": "Theme utilities",
+      "kind": "theme",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sf-truncate",
+      "category": "Macro classes",
+      "kind": "macro",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "skip-link",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "sr-only",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": true,
+      "behaviourOk": true
+    },
+    {
+      "name": "sr-only-focusable",
+      "category": "Accessibility",
+      "kind": "accessibility",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ],
+      "issues": [],
+      "display": "block",
+      "checked": false
+    },
+    {
+      "name": "theme-transition",
+      "category": "Theme example",
+      "kind": "theme",
+      "bundles": [],
+      "issues": [
+        "SELECTOR_NOT_IN_OPTIMAL_BUNDLE"
+      ],
+      "display": "block",
+      "checked": false
+    }
+  ]
+}

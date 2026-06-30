@@ -1,0 +1,183 @@
+{
+  "powerKnobs": [
+    {
+      "domain": "Colors",
+      "section": "Focus ring",
+      "label": "Focus ring width",
+      "token": "--sf-focus-ring-width",
+      "set": 5,
+      "driven": [
+        "--sf-focus-ring-width"
+      ],
+      "ok": false,
+      "notes": [
+        "ERR TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('xpath=(//*[normalize-spac"
+      ]
+    },
+    {
+      "domain": "Typography",
+      "section": "Text scale",
+      "label": "Text scale",
+      "token": "--sf-text-scale",
+      "set": 1.6,
+      "driven": [
+        "--sf-text-m",
+        "--sf-text-2xl"
+      ],
+      "ok": false,
+      "notes": [
+        "ERR TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('xpath=(//*[normalize-spac"
+      ]
+    },
+    {
+      "domain": "Spacing",
+      "section": "Space scale",
+      "label": "Space scale",
+      "token": "--sf-space-scale",
+      "set": 1.7,
+      "driven": [
+        "--sf-space-m",
+        "--sf-space-2xl"
+      ],
+      "ok": false,
+      "notes": [
+        "ERR TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('xpath=(//*[normalize-spac"
+      ]
+    },
+    {
+      "domain": "Borders",
+      "section": "Radius scale",
+      "label": "Radius scale",
+      "token": "--sf-radius-scale",
+      "set": 1.8,
+      "driven": [
+        "--sf-radius-m",
+        "--sf-radius-l"
+      ],
+      "ok": false,
+      "notes": [
+        "ERR TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('xpath=(//*[normalize-spac"
+      ]
+    },
+    {
+      "domain": "Shadows",
+      "section": "Shadow strength",
+      "label": "Shadow strength",
+      "token": "--sf-shadow-strength",
+      "set": 0.4,
+      "driven": [
+        "--sf-shadow-m"
+      ],
+      "ok": false,
+      "notes": [
+        "ERR TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('xpath=(//*[normalize-spac"
+      ]
+    },
+    {
+      "domain": "Motion",
+      "section": "Motion scale",
+      "label": "Motion scale",
+      "token": "--sf-motion-scale",
+      "set": 0.3,
+      "driven": [
+        "--sf-duration-normal"
+      ],
+      "ok": false,
+      "notes": [
+        "ERR TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('xpath=(//*[normalize-spac"
+      ]
+    }
+  ],
+  "genericRows": [
+    {
+      "domain": "Colors",
+      "token": "--sf-color-primary-source-light",
+      "value": "oklch(0.6 0.25 20)",
+      "check": [
+        "--sf-color-primary"
+      ],
+      "ok": true,
+      "notes": [],
+      "injectedParent": true,
+      "injectedPreview": true,
+      "checkMoved": [
+        "--sf-color-primary"
+      ]
+    },
+    {
+      "domain": "Borders",
+      "token": "--sf-border-style",
+      "value": "dotted",
+      "check": [
+        "--sf-border-style"
+      ],
+      "ok": true,
+      "notes": [],
+      "injectedParent": true,
+      "injectedPreview": true,
+      "checkMoved": [
+        "--sf-border-style"
+      ]
+    },
+    {
+      "domain": "Borders",
+      "token": "--sf-border-width-1",
+      "value": "4px",
+      "check": [
+        "--sf-border-width-1"
+      ],
+      "ok": true,
+      "notes": [],
+      "injectedParent": true,
+      "injectedPreview": true,
+      "checkMoved": [
+        "--sf-border-width-1"
+      ]
+    },
+    {
+      "domain": "Typography",
+      "token": "--sf-font-body",
+      "value": "\"Georgia\", serif",
+      "check": [
+        "--sf-font-body"
+      ],
+      "ok": true,
+      "notes": [],
+      "injectedParent": true,
+      "injectedPreview": true,
+      "checkMoved": [
+        "--sf-font-body"
+      ]
+    },
+    {
+      "domain": "Spacing",
+      "token": "--sf-gutter",
+      "value": "5rem",
+      "check": [
+        "--sf-gutter"
+      ],
+      "ok": true,
+      "notes": [],
+      "injectedParent": true,
+      "injectedPreview": true,
+      "checkMoved": [
+        "--sf-gutter"
+      ]
+    }
+  ],
+  "preset": {
+    "error": "TimeoutError: locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Borders"
+  },
+  "reset": {
+    "error": "TimeoutError: locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Colors', exact: true }).fir"
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "summary": {
+    "powerKnobsOk": "0/6",
+    "genericRowsOk": "5/5",
+    "presetOk": false,
+    "consoleErrors": 1
+  }
+}
