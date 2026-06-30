@@ -177,7 +177,12 @@
     ${SHADOWS.map((s) => `.pv-shadow--${s}{box-shadow:var(--sf-shadow-${s});}`).join("")}
     /* Spacing scale bars */
     .pv-space-bar{background:var(--sf-color-primary-400);border-radius:2px;min-inline-size:3px;min-block-size:3px;}
-    ${SPACES.map((s) => `.pv-space--${s}{inline-size:var(--sf-space-${s});block-size:var(--sf-space-${s});}`).join("")}
+    ${SPACES.map((s) => {
+      // --sf-space-3xs is not a defined core token (core starts at 2xs); give it
+      // the same fallback the framework uses elsewhere so the bar still renders.
+      const size = s === "3xs" ? "var(--sf-space-3xs,0.125rem)" : `var(--sf-space-${s})`;
+      return `.pv-space--${s}{inline-size:${size};block-size:${size};}`;
+    }).join("")}
     .pv-swatch-label{font-size:var(--sf-text-2xs);font-family:var(--sf-font-mono);color:var(--sf-color-text--muted);}
     /* Stylescape demo layout */
     .pv-heading{font-family:var(--sf-font-heading);color:var(--sf-color-heading);}
