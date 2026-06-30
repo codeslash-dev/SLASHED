@@ -14,7 +14,7 @@
 
   const knobs = KNOBS_BY_DOMAIN["shadows"] ?? [];
 
-  let lightness = $derived(parseFloat(overrides["--sf-shadow-lightness"] ?? "0.15"));
+  let lightness = $derived((() => { const v = parseFloat(overrides["--sf-shadow-lightness"] ?? "0.15"); return isFinite(v) ? v : 0.15; })());
   let shadowColor = $derived(overrides["--sf-shadow-color"] ?? "");
   let shadowGlowColor = $derived(overrides["--sf-shadow-glow-color"] ?? "");
   let glowDisabled = $derived(overrides["--sf-shadow-glow"] === "none");

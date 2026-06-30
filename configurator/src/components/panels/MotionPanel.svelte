@@ -33,9 +33,9 @@
 
   const knobs = KNOBS_BY_DOMAIN["motion"] ?? [];
 
-  let scale = $derived(parseFloat(overrides["--sf-motion-scale"] ?? "1"));
+  let scale = $derived((() => { const v = parseFloat(overrides["--sf-motion-scale"] ?? "1"); return isFinite(v) ? v : 1; })());
   let motionDisabled = $derived(overrides["--sf-motion-scale"] === "0");
-  let themeTransition = $derived(parseFloat(overrides["--sf-theme-transition-duration"]?.replace("ms","") ?? String(300 * scale)));
+  let themeTransition = $derived((() => { const v = parseFloat(overrides["--sf-theme-transition-duration"]?.replace("ms","") ?? String(300 * scale)); return isFinite(v) ? v : Math.round(300 * scale); })());
   let staggerBase = $derived(() => {
     const raw = overrides[STAGGER_TOKENS[0]];
     if (raw) return parseFloat(raw.replace("ms",""));
@@ -55,7 +55,10 @@
 
   function getDuration(token: string, base: number): number {
     const raw = overrides[token];
-    if (raw) return parseFloat(raw);
+    if (raw) {
+      const parsed = parseFloat(raw);
+      if (isFinite(parsed)) return parsed;
+    }
     return Math.round(base * scale);
   }
 
@@ -132,6 +135,7 @@
       <div class="flex items-center gap-2">
         <select
           value={demoEase}
+          aria-label="Preview easing"
           onchange={(e) => { demoEase = (e.target as HTMLSelectElement).value; }}
           class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[10px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
         >
@@ -141,6 +145,7 @@
         </select>
         <select
           value={demoDuration}
+          aria-label="Preview duration"
           onchange={(e) => { demoDuration = (e.target as HTMLSelectElement).value; }}
           class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-[10px] text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
         >

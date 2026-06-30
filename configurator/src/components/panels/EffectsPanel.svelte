@@ -285,8 +285,8 @@
               value={overrides[t.token] ?? ""}
               placeholder={t.default}
               oninput={(e) => {
-                const v = (e.target as HTMLInputElement).value.trim();
-                v ? onSet(t.token, v) : onReset(t.token);
+                const v = (e.target as HTMLInputElement).value;
+                v.trim() ? onSet(t.token, v) : onReset(t.token);
               }}
               class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
             />
