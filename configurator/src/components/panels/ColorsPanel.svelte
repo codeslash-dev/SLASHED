@@ -431,26 +431,31 @@
   <section class="space-y-2">
     <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Semantic colors</div>
     <p class="text-[9px] text-slate-600 leading-relaxed">
-      Live preview — every semantic role on its on-color text, resolved from the canvas. Updates as you edit and follows the active theme.
+      Live preview — every semantic role on its on-color text, shown in light and dark. Resolved from the canvas, updates as you edit.
     </p>
-    <div class="space-y-2">
+    <div class="space-y-2.5">
       {#each SEMANTIC_PREVIEW as grp (grp.heading)}
         <div class="space-y-1">
           <div class="text-[8px] font-semibold text-slate-600 uppercase tracking-widest">{grp.heading}</div>
-          <div class="grid grid-cols-5 gap-1">
-            {#each grp.items as it (it.name)}
-              {@const bg = paint(`var(${it.name})`, "transparent")}
-              {@const fg = paint(`var(${it.fg})`, "currentColor")}
-              <div
-                class="rounded-md border border-white/10 px-1 py-1.5 flex flex-col items-center justify-center gap-0.5 min-h-[34px]"
-                style={`background:${bg}; color:${fg}`}
-                title={`${it.name} — ${bg}`}
-              >
-                <span class="text-[11px] font-bold leading-none">Aa</span>
-                <span class="text-[7px] leading-none opacity-90">{it.label}</span>
+          {#each ["light", "dark"] as side (side)}
+            <div class="flex items-center gap-1">
+              <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none uppercase">{side === "light" ? "L" : "D"}</span>
+              <div class="grid grid-cols-5 gap-1 flex-1">
+                {#each grp.items as it (it.name)}
+                  {@const bg = paintTheme(`var(${it.name})`, side as "light" | "dark", "transparent")}
+                  {@const fg = paintTheme(`var(${it.fg})`, side as "light" | "dark", "currentColor")}
+                  <div
+                    class="rounded-md border border-white/10 px-1 py-1.5 flex flex-col items-center justify-center gap-0.5 min-h-[34px]"
+                    style={`background:${bg}; color:${fg}`}
+                    title={`${it.name} (${side}) — ${bg}`}
+                  >
+                    <span class="text-[11px] font-bold leading-none">Aa</span>
+                    <span class="text-[7px] leading-none opacity-90">{it.label}</span>
+                  </div>
+                {/each}
               </div>
-            {/each}
-          </div>
+            </div>
+          {/each}
         </div>
       {/each}
     </div>
