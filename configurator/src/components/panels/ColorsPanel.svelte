@@ -295,6 +295,15 @@
     return map;
   });
 
+  // Resolve a source token's effective value with the panel-wide precedence:
+  // explicit override → loaded token value → hardcoded default. Every place
+  // that reads or derives from a source value must go through this so the
+  // auto-dark seed/preview never disagrees with the swatch strips and inputs.
+  function sourceValue(source: ColorSource | undefined): string {
+    if (!source) return "";
+    return overrides[source.name] ?? sourceTokenMap[source.name]?.value ?? source.default;
+  }
+
   let activeCurvePreset = $derived(CURVE_PRESETS.find((p) =>
     Object.entries(p.patch).every(([k, v]) =>
       v === null ? !(k in overrides) : overrides[k] === v
@@ -399,7 +408,7 @@
     const effectivelyAuto = autoDarkSet.has(colorKey) && !darkOverridden;
     if (effectivelyAuto) {
       // Switch to manual — populate dark with the derived value as a starting point
-      const lightVal = overrides[lightName] ?? ALL_SOURCES.find(s => s.name === lightName)?.default ?? "";
+      const lightVal = sourceValue(ALL_SOURCES.find(s => s.name === lightName));
       if (dark) onSet(dark.name, deriveDarkFromLight(lightVal, colorKey));
       autoDarkSet = new Set([...autoDarkSet].filter(k => k !== colorKey));
     } else {
@@ -498,17 +507,17 @@
           <OklchColorDesk
             label={`${light.label} (light)`}
             tokenName={light.name}
-            value={overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default}
+            value={sourceValue(light)}
             overridden={light.name in overrides}
             onChange={(v) => handleLightChange(light, dark, v)}
             onReset={() => onReset(light.name)}
           />
           <!-- Palette swatch strips — light row then dark row, computed from concrete values -->
           {#if PALETTE_COLOR_KEYS.includes(light.colorKey)}
-            {@const lightSrcVal = overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default}
+            {@const lightSrcVal = sourceValue(light)}
             {@const darkSrcVal = isAutoMode
               ? deriveDarkFromLight(lightSrcVal, light.colorKey)
-              : (dark ? (overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default) : lightSrcVal)}
+              : (dark ? (sourceValue(dark)) : lightSrcVal)}
             {@const lSurface = getLightSurface()}
             {@const dSurface = getDarkSurface()}
             {@const lText = getLightText()}
@@ -551,13 +560,13 @@
             <OklchColorDesk
               label={`${dark.label} (dark mode)`}
               tokenName={dark.name}
-              value={overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default}
+              value={sourceValue(dark)}
               overridden={dark.name in overrides}
               onChange={(v) => onSet(dark.name, v)}
               onReset={() => onReset(dark.name)}
             />
           {:else if dark && isAutoMode}
-            {@const derivedDark = deriveDarkFromLight(overrides[light.name] ?? light.default, light.colorKey)}
+            {@const derivedDark = deriveDarkFromLight(sourceValue(light), light.colorKey)}
             <div class="flex items-center gap-1.5 text-[9px] text-slate-600 pl-1">
               <span
                 class="w-3.5 h-3.5 rounded border border-white/10 shrink-0"
@@ -669,7 +678,7 @@
             <OklchColorDesk
               label={`${light.label} light`}
               tokenName={light.name}
-              value={overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default}
+              value={sourceValue(light)}
               overridden={light.name in overrides}
               onChange={(v) => onSet(light.name, v)}
               onReset={() => onReset(light.name)}
@@ -678,13 +687,13 @@
               <OklchColorDesk
                 label={`${dark.label} dark`}
                 tokenName={dark.name}
-                value={overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default}
+                value={sourceValue(dark)}
                 overridden={dark.name in overrides}
                 onChange={(v) => onSet(dark.name, v)}
                 onReset={() => onReset(dark.name)}
               />
             {:else if dark && isAutoMode}
-              {@const derivedDark = deriveDarkFromLight(overrides[light.name] ?? light.default, light.colorKey)}
+              {@const derivedDark = deriveDarkFromLight(sourceValue(light), light.colorKey)}
               <div class="flex items-center gap-1.5 text-[9px] text-slate-600 pl-1">
                 <span
                   class="w-3.5 h-3.5 rounded border border-white/10 shrink-0"
@@ -697,10 +706,10 @@
             <!-- Constrained light + dark palette strips, computed from concrete values -->
             <div class="mt-1 pl-1 space-y-px">
               {#each [
-                ["L", "light", overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default, getLightSurface(), getLightText()],
+                ["L", "light", sourceValue(light), getLightSurface(), getLightText()],
                 ["D", "dark", isAutoMode
-                  ? deriveDarkFromLight(overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default, light.colorKey)
-                  : (dark ? (overrides[dark.name] ?? sourceTokenMap[dark.name]?.value ?? dark.default) : (overrides[light.name] ?? sourceTokenMap[light.name]?.value ?? light.default)), getDarkSurface(), getDarkText()]
+                  ? deriveDarkFromLight(sourceValue(light), light.colorKey)
+                  : (dark ? (sourceValue(dark)) : (sourceValue(light))), getDarkSurface(), getDarkText()]
               ] as [tag, side, srcVal, sfc, txt] (tag)}
                 <div class="flex items-center gap-1">
                   <span class="text-[7px] text-slate-600 w-2.5 shrink-0 text-right select-none">{tag}</span>
