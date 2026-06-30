@@ -88,19 +88,19 @@ rebrand workflow.
 | `--sf-color-action-xdark` | `var(--sf-color-action-800)` |
 | `--sf-color-action-xlight` | `var(--sf-color-action-200)` |
 | `--sf-color-base` | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
-| `--sf-color-base--active` | `var(--sf-color-base-xdark)` |
-| `--sf-color-base--hover` | `var(--sf-color-base-darker)` |
-| `--sf-color-base-100` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))` |
-| `--sf-color-base-200` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))` |
-| `--sf-color-base-300` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))` |
-| `--sf-color-base-400` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))` |
-| `--sf-color-base-50` | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))` |
-| `--sf-color-base-500` | `var(--sf-color-base)` |
-| `--sf-color-base-600` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))` |
-| `--sf-color-base-700` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))` |
-| `--sf-color-base-800` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))` |
-| `--sf-color-base-900` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))` |
-| `--sf-color-base-950` | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))` |
+| `--sf-color-base--active` | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08), 0.99) c h)` |
+| `--sf-color-base--hover` | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04), 0.99) c h)` |
+| `--sf-color-base-100` | `oklch(from var(--sf-color-base) 0.94 c h)` |
+| `--sf-color-base-200` | `oklch(from var(--sf-color-base) 0.88 c h)` |
+| `--sf-color-base-300` | `oklch(from var(--sf-color-base) 0.78 c h)` |
+| `--sf-color-base-400` | `oklch(from var(--sf-color-base) 0.65 c h)` |
+| `--sf-color-base-50` | `oklch(from var(--sf-color-base) 0.97 c h)` |
+| `--sf-color-base-500` | `oklch(from var(--sf-color-base) 0.50 c h)` |
+| `--sf-color-base-600` | `oklch(from var(--sf-color-base) 0.37 c h)` |
+| `--sf-color-base-700` | `oklch(from var(--sf-color-base) 0.27 c h)` |
+| `--sf-color-base-800` | `oklch(from var(--sf-color-base) 0.17 c h)` |
+| `--sf-color-base-900` | `oklch(from var(--sf-color-base) 0.11 c h)` |
+| `--sf-color-base-950` | `oklch(from var(--sf-color-base) 0.06 c h)` |
 | `--sf-color-base-a10` | `oklch(from var(--sf-color-base) l c h / 0.10)` |
 | `--sf-color-base-a30` | `oklch(from var(--sf-color-base) l c h / 0.30)` |
 | `--sf-color-base-a5` | `oklch(from var(--sf-color-base) l c h / 0.05)` |

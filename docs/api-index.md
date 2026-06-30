@@ -106,19 +106,19 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Secondary interactive color for supporting actions and secondary buttons. |
-| `--sf-color-base--active` | PUBLIC | consumption | color | `var(--sf-color-base-xdark)` | Base color at pressed/active brightness. |
-| `--sf-color-base--hover` | PUBLIC | consumption | color | `var(--sf-color-base-darker)` | Base color at hover brightness. |
-| `--sf-color-base-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))` | Very light base shade. Hover fills, badge backgrounds. |
-| `--sf-color-base-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))` | Light base shade. |
-| `--sf-color-base-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))` | Light-mid base shade. Borders on light backgrounds. |
-| `--sf-color-base-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))` | Mid-light base shade. Disabled fills. |
-| `--sf-color-base-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))` | Lightest base tint. |
-| `--sf-color-base-500` | PUBLIC | consumption | color | `var(--sf-color-base)` | Mid base shade — the 'pure' hue. |
-| `--sf-color-base-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark base shade. Text on light surfaces. |
-| `--sf-color-base-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark base shade. |
-| `--sf-color-base-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark base shade. |
-| `--sf-color-base-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black base shade. |
-| `--sf-color-base-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest base tint. |
+| `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08), 0.99) c h)` | Base color at pressed/active brightness. |
+| `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04), 0.99) c h)` | Base color at hover brightness. |
+| `--sf-color-base-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.94 c h)` | Very light base shade. Hover fills, badge backgrounds. |
+| `--sf-color-base-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.88 c h)` | Light base shade. |
+| `--sf-color-base-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.78 c h)` | Light-mid base shade. Borders on light backgrounds. |
+| `--sf-color-base-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.65 c h)` | Mid-light base shade. Disabled fills. |
+| `--sf-color-base-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.97 c h)` | Lightest base tint. |
+| `--sf-color-base-500` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.50 c h)` | Mid base shade — the 'pure' hue. |
+| `--sf-color-base-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.37 c h)` | Mid-dark base shade. Text on light surfaces. |
+| `--sf-color-base-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.27 c h)` | Dark base shade. |
+| `--sf-color-base-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.17 c h)` | Very dark base shade. |
+| `--sf-color-base-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.11 c h)` | Near-black base shade. |
+| `--sf-color-base-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.06 c h)` | Darkest base tint. |
 | `--sf-color-base-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.10)` | 10% opacity base tint. |
 | `--sf-color-base-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.30)` | 30% opacity base tint. |
 | `--sf-color-base-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | 5% opacity base tint. |

@@ -398,7 +398,7 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 /* Alpha variants */
 --sf-color-{family}-a5 / -a10 / -a30 / -a50 / -a80
 
-/* PUBLIC-ADVANCED: ramp shape */
+/* PUBLIC-ADVANCED: ramp shape for the five mid-tone brand families */
 --sf-palette-mix-50:  4%;    /* How far step 50 blends toward surface */
 --sf-palette-mix-100: 8%;    /* … */
 --sf-palette-mix-200: 20%;
@@ -412,7 +412,7 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 --sf-palette-mix-950: 8%;     /* deepest step */
 ```
 
-The 50=Lightest / 950=Darkest contract holds for the five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`). **`base` is a surface-elevation family and is exempt**: its source color is near-white (oklch≈0.96), so steps 50–400 blend the source toward `--sf-color-text` (darkening), step 500 is the near-white source itself, and steps 600–950 blend back from source toward text (re-darkening). This creates a bidirectional ramp, not a monotonic light→dark scale. Use the semantic aliases instead of numeric steps for `base`: `base-superlight` / `base-xlight` / `base-lighter` / `base-darker` / `base-xdark` / `base-superdark`.
+All six families honour the 50=Lightest / 950=Darkest contract. The five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`) are generated with `color-mix` anchored to `--sf-color-surface` and `--sf-color-text` as the two poles. **`base` uses fixed OKLCH lightness steps** (0.97 at step 50 → 0.06 at step 950) preserving the source hue and chroma — the same approach as Tailwind/Radix. The `--sf-palette-mix-*` knobs do not affect `base`. For mode-adaptive surface adjustments on base-coloured elements use `--sf-color-inset` / `--sf-color-raised` / `--sf-color-bg` or the `--sf-color-base--hover` / `--sf-color-base--active` tokens (which use relative oklch offsets and adapt to both modes automatically).
 
 Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
 
