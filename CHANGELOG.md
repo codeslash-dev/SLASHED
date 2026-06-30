@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.27] - 2026-06-30
+
+### Bug Fixes
+- **configurator:** give undefined --sf-space-3xs a fallback in preview skin
+- **configurator:** rebuild live-preview templates on the framework, drop inline styles
+
 ## [0.6.26] - 2026-06-30
 
 ### ⚠️ Breaking Changes
