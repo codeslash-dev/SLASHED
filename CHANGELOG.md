@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.29] - 2026-06-30
+
+### Features
+- **configurator:** show light and dark in semantic color preview
+- **configurator:** live semantic color preview atop colors panel
+- **configurator:** base palette display + status auto-dark default
+
+### Bug Fixes
+- **configurator:** resolve auto-dark from loaded token value, not default
+
 ## [0.6.28] - 2026-06-30
 
 ### Features
