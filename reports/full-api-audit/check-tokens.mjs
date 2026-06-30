@@ -1,5 +1,5 @@
 // Ground 1A — token correctness against the baseline demo.
-// Reads the live computed value of all 691 tokens, cross-checks the demo's own
+// Reads the live computed value of all current tokens, cross-checks the demo's own
 // displayed value, compares literals to the oracle's declared default, verifies
 // aliases resolve to their target, and confirms dark mode re-resolves colours.
 import { localDemo, oracle, browser, save } from './lib.mjs';

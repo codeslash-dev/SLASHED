@@ -1,7 +1,7 @@
 # SLASHED Full-API Testing Operation — Report
 
 **Framework:** SLASHED v0.6.25 · **Date:** 2026-06-30
-**Surface tested:** 691 tokens + 239 classes (930 API elements)
+**Surface tested:** 685 tokens + 239 classes (924 API elements)
 **Method:** local build (`npm run build`) + configurator dev server, driven with
 Playwright/Chromium; computed values diffed against the source-of-truth oracle
 `docs/api-index.json`. Harness scripts live alongside this report in
@@ -13,21 +13,20 @@ Playwright/Chromium; computed values diffed against the source-of-truth oracle
 
 | Ground | Scope | Result |
 |--------|-------|--------|
-| **1 — Correctness** (demos + framework) | 691 tokens, 239 classes, 225 knobs, dark mode, visuals | **PASS** — no framework functional defects. 4 demo/framework polish findings (F1–F4), all low/medium. |
+| **1 — Correctness** (demos + framework) | 685 tokens, 239 classes, 225 knobs, dark mode, visuals | **PASS** — no framework functional defects. 3 demo-packaging polish findings (F1, F2, F4), all low/medium. |
 | **2 — Configurator fidelity** | control coverage + live override + preview reflection | **PASS** — every editable knob reachable and overridable; previews reflect changes; 59/59 configurator unit+component tests green. |
 
 **Headline numbers**
 
-- Tokens: **691/691** rendered, **0** console errors, **683/691** resolve at `:root` (the 8 "empty" are fully explained below — none is a framework bug). Demo's displayed value matched the independently-read computed value for **691/691** tokens (0 misreports). Aliases: **0** mismatches. Dark mode re-resolves **272** tokens.
+- Tokens: **685/685** rendered, **0** console errors, **677/685** resolve at `:root` (the 8 "empty" are fully explained below — none is a framework bug). Demo's displayed value matched the independently-read computed value for **685/685** tokens (0 misreports). Aliases: **0** mismatches. Dark mode re-resolves **266** tokens.
 - Classes: **239/239** rendered, **238/239** ship in the loaded bundle, **69/69** behavioural contracts pass, **0** console errors.
-- Override wiring (overrides demo): **202/202** perturbed knobs move; the **23** non-perturbed knobs exactly equal the **23** documented skips (0 undocumented); **460/466** consumption tokens recompute downstream.
+- Override wiring (overrides demo): **202/202** perturbed knobs move; the **23** non-perturbed knobs exactly equal the **23** documented skips (0 undocumented); **460/460** consumption tokens recompute downstream.
 - Configurator: **224/224** editable PUBLIC knobs reachable as controls; **8/8** power knobs (`knobs-report.json`) and **5/5** sampled generic rows (`configurator-report.json`) inject overrides *and* update the live preview; preset + reset work (`preset-reset-report.json`); **59/59** configurator unit+component tests pass (`results/configurator-unit-tests.txt`).
 
 **Verdict:** The two demo pages are accurate, faithful reflections of the
 framework, and the framework itself behaves correctly. The configurator
 correctly implements the full token surface and every control overrides the
-live preview as intended. Findings are limited to demo-packaging polish (F1, F2,
-F4) and one framework design question (F3).
+live preview as intended. Findings are limited to demo-packaging polish (F1, F2, F4).
 
 ---
 
@@ -35,8 +34,8 @@ F4) and one framework design question (F3).
 
 ### 2.1 Tokens (`check-tokens.mjs`)
 
-All 691 tokens render with a live value tile; the demo's `getComputedStyle`
-readout matches an independent read for every token (no misreporting). 272
+All 685 tokens render with a live value tile; the demo's `getComputedStyle`
+readout matches an independent read for every token (no misreporting). 266
 tokens change under `data-theme="dark"`, confirming the dark-mode engine.
 
 **The 8 tokens that read empty at `:root`:**
@@ -68,7 +67,7 @@ Diffing the baseline vs the always-on overrides demo:
 |-------|--------|
 | Perturbed knobs that moved | **202 / 202** |
 | Knobs not perturbed vs documented skips | **23 = 23** (0 undocumented, 0 mismatched) |
-| Consumption tokens that recomputed | **460 / 466** |
+| Consumption tokens that recomputed | **460 / 460** |
 | Tokens unchanged | 29 = 23 skips + 6 component tokens (F1) |
 | Console errors (both demos) | 0 |
 
@@ -92,7 +91,7 @@ dashed borders) that proves the cascade.
 ### 3.1 Coverage (`probe-panels.mjs` + configurator test suite)
 
 - `catalogue-projection`, `smoke`, `curation` tests pass → the configurator's
-  `api-index.generated.json` matches the framework (no drift), all 691 tokens
+  `api-index.generated.json` matches the framework (no drift), all 685 tokens
   present, every PUBLIC knob has a domain pattern (no orphans).
 - **224/224 editable PUBLIC knobs** are reachable as controls. The only knob
   not exposed is the **INTERNAL** `--sf-is-dark` (correctly hidden — "do not
@@ -148,7 +147,6 @@ all Ground 1 harnesses.
 |----|--------|-------|----------|---------|---------------|
 | **F1** | 1 | demo | Medium | "Full-API" demos load `slashed.optimal.css`, which omits `optional/tokens.components.css`; 6 component tokens render "(empty)". | Load `slashed.full.css` (or `optimal-components`) in the demos, or annotate the 6 tiles. `demos/generate.mjs`, demo HTML. |
 | **F2** | 1 | demo | Low | `--sf-color-mark-text` / `--sf-color-selection-text` show "(empty)" at `:root` (declared `inherit`); they work contextually + in the overrides demo. | Label fallback-only/`inherit` tokens so "(empty)" isn't read as breakage. |
-| **F3** | 1 | framework | Low | `--sf-color-base-*` numeric ramp is non-monotonic: `base-500` anchors at the near-white source, so the ramp darkens 50→400, jumps light at 500, darkens 600→950 — contradicts the guide's "50 lightest → 950 darkest" contract (holds for the other 5 families). | Confirm intent; give `base` a one-directional ramp, or document it as a surface-elevation scale exempt from the contract. `core/tokens.css`, `docs/llm-guide.md`. |
 | **F4** | 1 | demo | Low | `theme-transition` tile is inert — the class ships in no bundle (`bundles: []`, example-only). | Exclude unbundled example-only classes from the full-API demo. |
 | N1 | 1 | none | Info | `radius-none`/`space-none` compute `0px` not `0` — `@property <length>` normalization. Not a defect. | — |
 | N2 | 2 | none | Info | An intermittent `404` console error appears on ~2 of ~11 configurator loads (0 `requestfailed` events; not reproducible across 3 back-to-back loads); functionality unaffected (rows 5/5, knobs 8/8). Likely a Vite dep-optimize/favicon timing artifact. | Identify + re-check if it recurs in CI. |
@@ -160,7 +158,7 @@ functional; it has no defects in this audit.
 
 ## 5. Coverage statement
 
-- **Tokens: 691/691** checked on both grounds. Ground 1: rendered + value-verified + alias + dark-mode + override-wiring. Ground 2: present in configurator data (no drift) + reachable as controls (224/224 editable knobs; 49 consumption aliases recompute by design; 1 INTERNAL hidden by design).
+- **Tokens: 685/685** checked on both grounds. Ground 1: rendered + value-verified + alias + dark-mode + override-wiring. Ground 2: present in configurator data (no drift) + reachable as controls (224/224 editable knobs; 49 consumption aliases recompute by design; 1 INTERNAL hidden by design).
 - **Classes: 239/239** checked. 238 ship in-bundle (1 example-only, F4); 69 strong behavioural contracts all pass; remainder verified present + rendered.
 - **Knobs: 225/225** accounted for (202 perturbed-and-moved + 23 documented skips).
 - **Power knobs:** 8/10 driven live through the UI (all 6 domains); 2 identical-path knobs untested.
