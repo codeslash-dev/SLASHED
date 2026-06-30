@@ -1,0 +1,60 @@
+{
+  "findings": [
+    {
+      "id": "F1",
+      "ground": 1,
+      "fault": "demo",
+      "severity": "medium",
+      "title": "full-API demos load the 'optimal' bundle, which omits component tokens",
+      "detail": "Both demos link slashed.optimal.css. That bundle excludes optional/tokens.components.css, so 6 component tokens never resolve and render as '(empty)': --sf-btn-radius, --sf-btn-padding-block, --sf-btn-padding-inline, --sf-field-radius, --sf-field-padding-block, --sf-field-padding-inline. The framework is correct — these resolve (e.g. var(--sf-radius-m), var(--sf-space-xs)) under slashed.full.css and slashed.optimal-components.css.",
+      "suggestedFix": "Point the full-api-demo pages at slashed.full.css (or optimal-components) so 100% of the token surface actually resolves; or annotate the 6 tiles as 'requires components bundle'.",
+      "files": ["demos/full-api-demo.html", "demos/full-api-demo-with-overrides.html", "demos/generate.mjs", "bundle.config.json"]
+    },
+    {
+      "id": "F2",
+      "ground": 1,
+      "fault": "demo",
+      "severity": "low",
+      "title": "inherit-valued color tokens show '(empty)' though they work contextually",
+      "detail": "--sf-color-mark-text and --sf-color-selection-text are declared `inherit` (fallback-only override hooks consumed as var(--token, MarkText)). getComputedStyle at :root returns empty per CSS rules, so the demo tile reads '(empty)'. This is accurate but can read as a defect.",
+      "suggestedFix": "Optionally label fallback-only/inherit tokens in the demo so '(empty)' isn't mistaken for breakage.",
+      "files": ["core/tokens.css", "core/base.css", "demos/generate.mjs"]
+    },
+    {
+      "id": "F3",
+      "ground": 1,
+      "fault": "framework",
+      "severity": "low",
+      "title": "base numeric ramp is non-monotonic (50→950 not strictly light→dark)",
+      "detail": "docs/llm-guide.md documents all 6 brand families as -50 Lightest … -950 Darkest. For 5 families that holds (source-500 is a mid tone). For `base`, --sf-color-base-500 = the near-white source (oklch(0.96)), while base-50…400 mix toward a dark anchor at 4%→65%. Result: the ramp darkens 50→400, spikes back near-white at 500, then darkens 600→950 — a visible 'V' in the demo's base ramp (see baseline-desktop.png). The demo is faithful; this is the framework applying the mid-anchored bidirectional formula to a near-white-anchored family.",
+      "suggestedFix": "Confirm intent for the base family. If base should read as a normal light→dark ramp, give it a one-directional formula anchored at the near-white 50; otherwise document base as a surface-elevation ramp that is exempt from the 50=lightest/950=darkest contract.",
+      "files": ["core/tokens.css", "docs/llm-guide.md"]
+    },
+    {
+      "id": "F4",
+      "ground": 1,
+      "fault": "demo",
+      "severity": "low",
+      "title": "theme-transition tile is inert (class ships in no bundle)",
+      "detail": "The demo renders a .tile for `theme-transition`, but that class lives only in optional/theme-example.css (bundles: []) and is not in any shipped bundle, so the tile demonstrates nothing under the loaded optimal bundle. 238/239 class selectors are present; this is the one exception.",
+      "suggestedFix": "Either exclude unbundled example-only classes from the full-API demo, or load a CSS that defines them.",
+      "files": ["demos/generate.mjs", "optional/theme-example.css"]
+    },
+    {
+      "id": "N1",
+      "ground": 1,
+      "fault": "none",
+      "severity": "info",
+      "title": "radius-none / space-none render 0px not 0 (not a defect)",
+      "detail": "--sf-radius-none and --sf-space-none declare `0`; registered as @property <length> so the computed value normalizes to `0px`. Correct CSS behaviour, flagged only as a harness false-positive."
+    },
+    {
+      "id": "N2",
+      "ground": 2,
+      "fault": "none",
+      "severity": "info",
+      "title": "intermittent 404 on configurator load",
+      "detail": "An intermittent 404 console error appears on ~2 of ~11 configurator loads; 0 requestfailed events recorded and not reproducible across 3 back-to-back loads. Functionality unaffected (rows 5/5, knobs 8/8). Likely a Vite dep-optimize/favicon timing artifact. Identify + re-check if it recurs in CI."
+    }
+  ]
+}

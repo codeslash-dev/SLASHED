@@ -23,3 +23,4 @@ dist/
 
 # full-api demo validator scratch
 demos/.validate/
+demos/.audit/
