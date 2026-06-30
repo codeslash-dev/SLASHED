@@ -23,7 +23,8 @@
   } = $props();
 
   function withDerivedOverrides(ov: Record<string, string>): Record<string, string> {
-    const derived = computeDerivedOverrides(ov);
+    const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const derived = computeDerivedOverrides(ov, { reduceMotion });
     return Object.keys(derived).length > 0 ? { ...derived, ...ov } : ov;
   }
 

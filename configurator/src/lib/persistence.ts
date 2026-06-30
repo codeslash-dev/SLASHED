@@ -89,7 +89,7 @@ function fluidClamp(
   return `clamp(${fmt(sMin)}rem, calc(${fmt(slope)} * (100vw - ${fmt(vwMin)}rem) + ${fmt(sMin)}rem), ${fmt(sMax)}rem)`;
 }
 
-export function computeDerivedOverrides(ov: Record<string, string>): Record<string, string> {
+export function computeDerivedOverrides(ov: Record<string, string>, { reduceMotion = false } = {}): Record<string, string> {
   const derived: Record<string, string> = {};
   const keys = Object.keys(ov);
   const hasText   = keys.some((k) => TEXT_SCALE_SRC.has(k));
@@ -137,8 +137,10 @@ export function computeDerivedOverrides(ov: Record<string, string>): Record<stri
     }
     derived['--sf-radius-none']  = '0';
     derived['--sf-radius-full']  = '9999px';
-    derived['--sf-radius-pill']  = '9999px';
-    derived['--sf-radius-outer'] = `calc(${fmt(8 * scale)}px + var(--sf-component-pad))`;
+    // Keep relationship-based — mirrors framework token graph so fine-tune
+    // overrides on --sf-radius-full / --sf-radius-m still win.
+    derived['--sf-radius-pill']  = 'var(--sf-radius-full)';
+    derived['--sf-radius-outer'] = 'calc(var(--sf-radius-m) + var(--sf-component-pad))';
   }
 
   if (hasBorder) {
@@ -148,7 +150,10 @@ export function computeDerivedOverrides(ov: Record<string, string>): Record<stri
     }
   }
 
-  if (hasMotion) {
+  // Skip motion tokens when the OS prefers reduced motion — emitting them as
+  // unlayered :root CSS would override the framework's @media
+  // (prefers-reduced-motion: reduce) duration clamps that live inside @layer.
+  if (hasMotion && !reduceMotion) {
     const scale = getNum(ov, '--sf-motion-scale', 1);
     for (const [name, base] of DURATION_STEPS) {
       derived[`--sf-duration-${name}`] = `${fmt(base * scale)}ms`;
@@ -216,7 +221,8 @@ export function injectLivePreview(ov: Record<string, string>): void {
   }
   // Include pre-computed derived tokens alongside source tokens so they win
   // as unlayered CSS over any hardcoded clamp values in @layer slashed.overrides.
-  const derived = computeDerivedOverrides(ov);
+  const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  const derived = computeDerivedOverrides(ov, { reduceMotion });
   const preview = Object.keys(derived).length > 0 ? { ...derived, ...ov } : ov;
   styleEl.textContent = fa(preview, { mode: "root", banner: false });
 }
