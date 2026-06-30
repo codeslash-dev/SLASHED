@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.28] - 2026-06-30
+
+### Features
+- **configurator:** keep all header actions on mobile; drop docs/dashboard previews
+- **configurator:** responsive mobile layout for studio shell
+- **configurator:** token-first controls, user themes, motion overhaul
+
+### Bug Fixes
+- **configurator:** address review findings from CodeRabbit and Qodo
+
 ## [0.6.27] - 2026-06-30
 
 ### Bug Fixes
