@@ -4,7 +4,13 @@
 import { chromium } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
+// Portable Chromium resolution: honour an explicit override, fall back to the
+// preinstalled browser in this environment, else let Playwright resolve its own
+// managed browser (so the harness runs on a standard `npx playwright install`).
+const CHROMIUM = process.env.PLAYWRIGHT_CHROMIUM_PATH
+  || (fs.existsSync('/opt/pw-browsers/chromium') ? '/opt/pw-browsers/chromium' : undefined);
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const DEMOS = path.join(ROOT, 'demos');
@@ -24,10 +30,10 @@ fs.copyFileSync(path.join(DEMOS, 'ultimate-override.css'), path.join(TMP, 'ultim
 // next to the override css so relative hrefs resolve.
 export function localDemo(srcName, outName) {
   let html = fs.readFileSync(path.join(DEMOS, srcName), 'utf8');
-  html = html.replaceAll(CDN, 'file://' + LOCAL);
+  html = html.replaceAll(CDN, pathToFileURL(LOCAL).href);
   const out = path.join(TMP, outName);
   fs.writeFileSync(out, html);
-  return 'file://' + out;
+  return pathToFileURL(out).href;
 }
 
 // Parse docs/api-index.json into the oracle the whole audit checks against.
@@ -40,7 +46,7 @@ export function oracle() {
 }
 
 export async function browser() {
-  return chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  return chromium.launch(CHROMIUM ? { executablePath: CHROMIUM } : {});
 }
 
 export function save(name, obj) {

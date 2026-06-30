@@ -1,7 +1,9 @@
 // Walk every domain panel, collect the union of token-row names reachable
 // through the UI, and capture any failed network requests.
-import { chromium } from '@playwright/test';
-const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+import fs from 'node:fs';
+import path from 'node:path';
+import { browser, RESULTS } from './lib.mjs';
+const b = await browser();
 const page = await b.newPage({ viewport: { width: 1600, height: 1000 } });
 const failed = [];
 page.on('requestfailed', (r) => failed.push(r.url() + ' :: ' + r.failure()?.errorText));
@@ -35,5 +37,4 @@ console.log('per-panel token-row counts:', JSON.stringify(perPanel));
 console.log('UNION reachable token rows:', reachable.size);
 console.log('failed/4xx requests:', JSON.stringify([...new Set(failed)], null, 2));
 await b.close();
-import fs from 'node:fs';
-fs.writeFileSync('/home/user/SLASHED/reports/full-api-audit/results/reachable-ui.json', JSON.stringify([...reachable].sort(), null, 2));
+fs.writeFileSync(path.join(RESULTS, 'reachable-ui.json'), JSON.stringify([...reachable].sort(), null, 2));

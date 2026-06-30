@@ -7,13 +7,13 @@
 // the corner-style preset + per-row reset by check-preset-reset.mjs
 // (preset-reset-report.json). Keeping each area in its own harness avoids the
 // cross-step coupling that produced a stale combined artifact earlier.
-import { chromium } from '@playwright/test';
 import fs from 'node:fs';
+import path from 'node:path';
+import { browser, RESULTS } from './lib.mjs';
 
-const URL = 'http://127.0.0.1:5180/';
-const OUT = '/home/user/SLASHED/reports/full-api-audit/results';
+const URL = process.env.SLASHED_CONFIGURATOR_URL || 'http://127.0.0.1:5180/';
 
-const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const b = await browser();
 const page = await b.newPage({ viewport: { width: 1700, height: 1050 } });
 const consoleErrors = [];
 const requestFailures = [];
@@ -97,5 +97,5 @@ results.summary = {
   requestFailures: requestFailures.length,
   note: 'power knobs -> knobs-report.json (8/8); preset+reset -> preset-reset-report.json',
 };
-fs.writeFileSync(OUT + '/configurator-report.json', JSON.stringify(results, null, 2));
+fs.writeFileSync(path.join(RESULTS, 'configurator-report.json'), JSON.stringify(results, null, 2));
 console.log('\nSUMMARY', JSON.stringify(results.summary, null, 2));

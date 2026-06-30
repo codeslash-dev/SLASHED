@@ -15,8 +15,14 @@ const ovCss = fs.readFileSync(path.join(DEMOS, 'ultimate-override.css'), 'utf8')
 const perturbed = new Set(
   [...ovCss.matchAll(/^\s*(--sf-[a-z0-9-]+)\s*:/gim)].map((m) => m[1]),
 );
-// documented skip list lives in the trailing comment block
-const skipBlock = ovCss.slice(ovCss.indexOf('Intentionally NOT overridden'));
+// documented skip list lives in the trailing comment block — fail fast if the
+// header marker is missing so the skip reconciliation can't silently go wrong.
+const SKIP_MARKER = 'Intentionally NOT overridden';
+const markerIdx = ovCss.indexOf(SKIP_MARKER);
+if (markerIdx === -1) {
+  throw new Error(`skip marker "${SKIP_MARKER}" not found in ultimate-override.css — update diff-overrides.mjs if the header changed`);
+}
+const skipBlock = ovCss.slice(markerIdx);
 const skips = new Set([...skipBlock.matchAll(/(--sf-[a-z0-9-]+)\s+—/g)].map((m) => m[1]));
 
 async function readAll(srcName, outName) {

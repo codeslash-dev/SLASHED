@@ -3,18 +3,24 @@
 // uniquely identifies it within its panel. We expand all accordion sections,
 // set the knob, and confirm the override is injected and driven tokens move in
 // the live preview iframe.
-import { chromium } from '@playwright/test';
 import fs from 'node:fs';
+import path from 'node:path';
+import { browser, RESULTS } from './lib.mjs';
 
-const URL = 'http://127.0.0.1:5180/';
-const OUT = '/home/user/SLASHED/reports/full-api-audit/results';
-const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const URL = process.env.SLASHED_CONFIGURATOR_URL || 'http://127.0.0.1:5180/';
+const b = await browser();
 const page = await b.newPage({ viewport: { width: 1700, height: 1050 } });
 await page.goto(URL, { waitUntil: 'networkidle', timeout: 60000 });
 await page.waitForTimeout(800);
 await page.getByRole('button', { name: 'Stylescape', exact: true }).first().click().catch(() => {});
 await page.waitForTimeout(400);
-const frame = () => page.frames().find((f) => f !== page.mainFrame());
+// the live preview is rendered in an iframe; fail loudly if it never attaches
+await page.waitForSelector('iframe', { timeout: 15000 });
+const frame = () => {
+  const f = page.frames().find((x) => x !== page.mainFrame());
+  if (!f) throw new Error('preview iframe not found');
+  return f;
+};
 const computed = (ts) => frame().evaluate((a) => { const cs = getComputedStyle(document.documentElement); const o = {}; a.forEach((t) => o[t] = cs.getPropertyValue(t).trim()); return o; }, ts);
 const parentCss = () => page.evaluate(() => document.getElementById('sf-parent-overrides')?.textContent || '');
 const previewCss = () => frame().evaluate(() => document.getElementById('slashed-overrides')?.textContent || '');
@@ -65,6 +71,6 @@ for (const k of KNOBS) {
   console.log(`KNOB ${k.token} (${k.panel}): ok=${r.ok} inputs=${r.matchingInputs} inject(p=${r.injectedParent},prev=${r.injectedPreview}) moved=${(r.drivenMoved || []).length} ${r.notes.join(';')}`);
 }
 const okN = results.filter((r) => r.ok).length;
-fs.writeFileSync(OUT + '/knobs-report.json', JSON.stringify({ summary: `${okN}/${results.length}`, results }, null, 2));
+fs.writeFileSync(path.join(RESULTS, 'knobs-report.json'), JSON.stringify({ summary: `${okN}/${results.length}`, results }, null, 2));
 console.log('\nKNOBS SUMMARY', `${okN}/${results.length}`);
 await b.close();
