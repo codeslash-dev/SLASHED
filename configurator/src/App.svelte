@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import type { PreviewTemplate, PresetTheme, SlashedToken } from './types';
+  import type { PreviewTemplate, SlashedToken } from './types';
   import StudioHeader from './components/shell/StudioHeader.svelte';
   import SidebarNav from './components/shell/SidebarNav.svelte';
   import StatusBar from './components/shell/StatusBar.svelte';
@@ -122,12 +122,9 @@
     });
   }
 
-  function handleApplyTheme(theme: PresetTheme) {
-    if (theme.id === "default") {
-      setOverrides({});
-    } else {
-      handleBulkChange(theme.overrides as Record<string, string | null>);
-    }
+  // Applying a saved theme replaces the entire override set with the snapshot.
+  function handleApplyTheme(themeOverrides: Record<string, string>) {
+    setOverrides({ ...themeOverrides });
   }
 
   function handleResetAll() {

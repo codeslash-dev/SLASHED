@@ -34,15 +34,6 @@ export interface SlashedCategory {
   tool?: string;
 }
 
-export interface PresetTheme {
-  id: string;
-  name: string;
-  icon: string;
-  blurb: string;
-  tags?: string[];
-  overrides: Record<string, string>;
-}
-
 export interface SavedSlot {
   id: string;
   name: string;
@@ -70,12 +61,6 @@ export interface ConfiguratorState {
 export interface HistoryState {
   past: string[];
   future: string[];
-}
-
-export interface StylePreset {
-  id: string;
-  label: string;
-  patch: Record<string, string | null>;
 }
 
 export interface PowerKnob {
