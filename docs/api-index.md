@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**930 elements** — 691 tokens, 239 classes.
+**924 elements** — 685 tokens, 239 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 874 | Everyday surface. SemVer-stable. |
+| PUBLIC | 868 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (691)
+## Tokens (685)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
 
-### Core tokens (608)
+### Core tokens (602)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -106,35 +106,29 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Secondary interactive color for supporting actions and secondary buttons. |
-| `--sf-color-base--active` | PUBLIC | consumption | color | `var(--sf-color-base-xdark)` | Base color at pressed/active brightness. |
-| `--sf-color-base--hover` | PUBLIC | consumption | color | `var(--sf-color-base-darker)` | Base color at hover brightness. |
-| `--sf-color-base-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-100), var(--sf-color-base))` | Very light base shade. Hover fills, badge backgrounds. |
-| `--sf-color-base-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-200), var(--sf-color-base))` | Light base shade. |
-| `--sf-color-base-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-300), var(--sf-color-base))` | Light-mid base shade. Borders on light backgrounds. |
-| `--sf-color-base-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-400), var(--sf-color-base))` | Mid-light base shade. Disabled fills. |
-| `--sf-color-base-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-text) var(--sf-palette-mix-50), var(--sf-color-base))` | Lightest base tint. |
-| `--sf-color-base-500` | PUBLIC | consumption | color | `var(--sf-color-base)` | Mid base shade — the 'pure' hue. |
-| `--sf-color-base-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark base shade. Text on light surfaces. |
-| `--sf-color-base-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark base shade. |
-| `--sf-color-base-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark base shade. |
-| `--sf-color-base-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black base shade. |
-| `--sf-color-base-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-base) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest base tint. |
+| `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)` | Base color at pressed/active brightness. |
+| `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)` | Base color at hover brightness. |
+| `--sf-color-base-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.94 c h)` | Very light base shade. Hover fills, badge backgrounds. |
+| `--sf-color-base-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.88 c h)` | Light base shade. |
+| `--sf-color-base-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.78 c h)` | Light-mid base shade. Borders on light backgrounds. |
+| `--sf-color-base-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.65 c h)` | Mid-light base shade. Disabled fills. |
+| `--sf-color-base-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.97 c h)` | Lightest base tint. |
+| `--sf-color-base-500` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.50 c h)` | Mid base shade — the 'pure' hue. |
+| `--sf-color-base-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.37 c h)` | Mid-dark base shade. Text on light surfaces. |
+| `--sf-color-base-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.27 c h)` | Dark base shade. |
+| `--sf-color-base-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.17 c h)` | Very dark base shade. |
+| `--sf-color-base-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.11 c h)` | Near-black base shade. |
+| `--sf-color-base-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.06 c h)` | Darkest base tint. |
 | `--sf-color-base-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.10)` | 10% opacity base tint. |
 | `--sf-color-base-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.30)` | 30% opacity base tint. |
 | `--sf-color-base-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | 5% opacity base tint. |
 | `--sf-color-base-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.50)` | 50% opacity base tint. |
 | `--sf-color-base-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.80)` | 80% opacity base tint. |
-| `--sf-color-base-darker` | PUBLIC | consumption | color | `var(--sf-color-base-600)` | Deep base shade. |
 | `--sf-color-base-ghost` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base tint for ghost-button hover backgrounds. |
-| `--sf-color-base-lighter` | PUBLIC | consumption | color | `var(--sf-color-base-400)` | Light base shade. |
 | `--sf-color-base-muted` | PUBLIC | consumption | color | `var(--sf-color-base-a30)` | Medium base fill. |
 | `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. |
 | `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH lightness source for the base color. |
 | `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Lightest base tint. |
-| `--sf-color-base-superdark` | PUBLIC | consumption | color | `var(--sf-color-base-950)` | Near-black base shade. |
-| `--sf-color-base-superlight` | PUBLIC | consumption | color | `var(--sf-color-base-50)` | Near-white base shade. |
-| `--sf-color-base-xdark` | PUBLIC | consumption | color | `var(--sf-color-base-800)` | Extra-dark base shade. |
-| `--sf-color-base-xlight` | PUBLIC | consumption | color | `var(--sf-color-base-200)` | Extra-light base shade. |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | Base page / component background. The canvas all other surfaces layer on top of. |
 | `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | Background tint for pressed/active interactive elements. |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for disabled interactive elements. |

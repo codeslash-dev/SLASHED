@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### ⚠️ Breaking Changes
+- **tokens:** remove the six `base` relative shade aliases (`--sf-color-base-superlight`, `-xlight`, `-lighter`, `-darker`, `-xdark`, `-superdark`). `base` is an absolute scale, so direction-named aliases were misleading (e.g. `-lighter` resolved darker than a near-white base in light mode). Use the numeric ramp (`--sf-color-base-50`…`-950`) for fixed shades, or the surface tokens (`--sf-color-bg` / `-inset` / `-raised`) for mode-adaptive elevation. See `docs/migration.md`.
+
 ## [0.6.25] - 2026-06-29
 
 ### Features

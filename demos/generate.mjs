@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'demos'); // generated artifacts live alongside this script
 const api = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/api-index.json'), 'utf8'));
-const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css';
+const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal-components.css';
 const VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version;
 
 const tokens = api.entries.filter((e) => e.type === 'token');
@@ -356,7 +356,7 @@ function shadowSwatches() {
 }
 
 function classSection(kind, title) {
-  const items = classes.filter((c) => c.kind === kind).sort((a, b) => a.name.localeCompare(b.name));
+  const items = classes.filter((c) => c.kind === kind && c.bundles.length > 0).sort((a, b) => a.name.localeCompare(b.name));
   return `    <section id="${kind}">
       <h2>${title} <span class="count">${items.length}</span></h2>
       <div class="tiles">
@@ -404,10 +404,13 @@ function tokenVisual(t) {
   return '';
 }
 
+const INHERIT_TOKENS = new Set(['--sf-color-mark-text', '--sf-color-selection-text']);
+
 function tokenTile(t) {
   const vis = tokenVisual(t);
   const tier = t.tier === 'PUBLIC' ? '' : ` <span class="ttile__tier">${t.tier === 'PUBLIC-ADVANCED' ? 'adv' : t.tier.toLowerCase()}</span>`;
-  return `<figure class="ttile" data-token="${t.name}"><code class="ttile__name">${esc(t.name)}${tier}</code>${vis ? `<div class="ttile__vis">${vis}</div>` : ''}<output class="ttile__val">…</output></figure>`;
+  const inheritAttr = INHERIT_TOKENS.has(t.name) ? ' data-inherit="true"' : '';
+  return `<figure class="ttile" data-token="${t.name}"${inheritAttr}><code class="ttile__name">${esc(t.name)}${tier}</code>${vis ? `<div class="ttile__vis">${vis}</div>` : ''}<output class="ttile__val">…</output></figure>`;
 }
 
 function tokenReferenceSection() {
@@ -485,7 +488,7 @@ const PAGE_SCRIPT = [
   '    var cs = getComputedStyle(root);',
   '    document.querySelectorAll("[data-token]").forEach(function (el) {',
   '      var v = cs.getPropertyValue(el.getAttribute("data-token")).trim();',
-  '      var o = el.querySelector(".ttile__val"); if (o) o.textContent = v || "(empty)";',
+  '      var o = el.querySelector(".ttile__val"); if (o) o.textContent = v || (el.dataset.inherit ? "inherit (contextual)" : "(empty)");',
   '    });',
   '  }',
   '  function playAnims() {',
@@ -525,6 +528,8 @@ const PAGE_SCRIPT = [
   '  requestAnimationFrame(playAnims);',
   '})();',
 ].join('\n');
+
+const bundledClassCount = classes.filter((c) => c.bundles.length > 0).length;
 
 function buildDemo({ withOverride }) {
   const overrideLink = withOverride ? `\n  <link rel="stylesheet" href="ultimate-override.css" id="ov">` : '';
@@ -652,7 +657,7 @@ function buildDemo({ withOverride }) {
 ${toolbar()}
   <main id="main">
     <h1>SLASHED Full API Demo</h1>
-    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal bundle from jsDelivr CDN · ${classes.length} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
+    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal-components bundle from jsDelivr CDN · ${bundledClassCount} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
     ${banner}
 
     <section id="tokens">
@@ -703,5 +708,5 @@ if (tokenTiles !== tokens.length) {
 }
 
 console.log(`demos/ultimate-override.css        → ${handledCount}/${knobs.length} knobs overridden, ${Object.keys(SKIP).length} skipped (documented)`);
-console.log(`demos/full-api-demo.html           → ${classes.length} classes + ${tokens.length} tokens (Part 2), all rendered`);
+console.log(`demos/full-api-demo.html           → ${bundledClassCount} bundled classes (${classes.length - bundledClassCount} example-only excluded) + ${tokens.length} tokens (Part 2), all rendered`);
 console.log(`demos/full-api-demo-with-overrides.html → same body + override link`);
