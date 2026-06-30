@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'demos'); // generated artifacts live alongside this script
 const api = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/api-index.json'), 'utf8'));
-const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.full.css';
+const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal-components.css';
 const VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version;
 
 const tokens = api.entries.filter((e) => e.type === 'token');
@@ -655,7 +655,7 @@ function buildDemo({ withOverride }) {
 ${toolbar()}
   <main id="main">
     <h1>SLASHED Full API Demo</h1>
-    <p style="color:var(--sf-color-text--muted)">v${VERSION} · full bundle from jsDelivr CDN · ${classes.length} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
+    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal-components bundle from jsDelivr CDN · ${classes.length} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
     ${banner}
 
     <section id="tokens">
