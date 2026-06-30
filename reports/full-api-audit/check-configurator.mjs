@@ -25,18 +25,23 @@ const results = { genericRows: [] };
 try {
   await page.goto(URL, { waitUntil: 'networkidle', timeout: 60000 });
   await page.waitForTimeout(1000);
-  const previewFrame = () => page.frames().find((f) => f !== page.mainFrame());
+  // fail fast if the preview iframe never attaches, so a harness setup failure
+  // can't be misattributed to product behaviour in configurator-report.json
+  await page.waitForSelector('iframe', { timeout: 15000 });
+  const previewFrame = () => {
+    const f = page.frames().find((x) => x !== page.mainFrame());
+    if (!f) throw new Error('preview iframe not found');
+    return f;
+  };
   async function frameComputed(tokens) {
-    const f = previewFrame();
-    if (!f) return {};
-    return f.evaluate((ts) => {
+    return previewFrame().evaluate((ts) => {
       const cs = getComputedStyle(document.documentElement);
       const o = {};
       ts.forEach((t) => { o[t] = cs.getPropertyValue(t).trim(); });
       return o;
     }, tokens);
   }
-  const frameOverrideCss = () => previewFrame()?.evaluate(() => document.getElementById('slashed-overrides')?.textContent || '') ?? '';
+  const frameOverrideCss = () => previewFrame().evaluate(() => document.getElementById('slashed-overrides')?.textContent || '');
   const parentOverrideCss = () => page.evaluate(() => document.getElementById('sf-parent-overrides')?.textContent || '');
   async function nav(name) {
     await page.keyboard.press('Escape').catch(() => {});
@@ -78,7 +83,7 @@ try {
       r.injectedParent = pcss.includes(row.token);
       r.injectedPreview = fcss.includes(row.token);
       r.checkMoved = row.check.filter((t) => before[t] !== after[t]);
-      r.ok = (r.injectedParent || r.injectedPreview) && r.checkMoved.length > 0;
+      r.ok = r.injectedParent && r.injectedPreview && r.checkMoved.length > 0;
       if (r.checkMoved.length === 0) r.notes.push(`computed unchanged before=${JSON.stringify(before)} after=${JSON.stringify(after)}`);
     } catch (e) { r.notes.push('ERR ' + String(e).slice(0, 140)); }
     results.genericRows.push(r);
