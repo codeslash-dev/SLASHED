@@ -28,26 +28,29 @@ const skips = new Set([...skipBlock.matchAll(/(--sf-[a-z0-9-]+)\s+—/g)].map((m
 async function readAll(srcName, outName) {
   const url = localDemo(srcName, outName);
   const b = await browser();
-  const page = await b.newPage({ viewport: { width: 1280, height: 1600 } });
-  const errs = [];
-  page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
-  page.on('pageerror', (e) => errs.push(String(e)));
-  page.on('requestfailed', (req) => errs.push(`requestfailed ${req.url()} :: ${req.failure()?.errorText ?? 'unknown'}`));
-  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForTimeout(900);
-  if (outName.includes('ov')) {
-    await page.screenshot({ path: path.join(SHOTS, 'overrides-desktop.png') });
-  }
-  const vals = await page.evaluate(() => {
-    const cs = getComputedStyle(document.documentElement);
-    const o = {};
-    document.querySelectorAll('[data-token]').forEach((el) => {
-      o[el.getAttribute('data-token')] = cs.getPropertyValue(el.getAttribute('data-token')).trim();
+  try {
+    const page = await b.newPage({ viewport: { width: 1280, height: 1600 } });
+    const errs = [];
+    page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
+    page.on('pageerror', (e) => errs.push(String(e)));
+    page.on('requestfailed', (req) => errs.push(`requestfailed ${req.url()} :: ${req.failure()?.errorText ?? 'unknown'}`));
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.waitForTimeout(900);
+    if (outName.includes('ov')) {
+      await page.screenshot({ path: path.join(SHOTS, 'overrides-desktop.png') });
+    }
+    const vals = await page.evaluate(() => {
+      const cs = getComputedStyle(document.documentElement);
+      const o = {};
+      document.querySelectorAll('[data-token]').forEach((el) => {
+        o[el.getAttribute('data-token')] = cs.getPropertyValue(el.getAttribute('data-token')).trim();
+      });
+      return o;
     });
-    return o;
-  });
-  await b.close();
-  return { vals, errs };
+    return { vals, errs };
+  } finally {
+    await b.close();
+  }
 }
 
 const base = await readAll('full-api-demo.html', 'diff-base.html');
