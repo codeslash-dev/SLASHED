@@ -30,8 +30,6 @@
 
   const TEMPLATES: { id: PreviewTemplate; label: string }[] = [
     { id: "marketing", label: "Marketing" },
-    { id: "docs", label: "Docs" },
-    { id: "dashboard", label: "Dashboard" },
     { id: "components", label: "Components" },
     { id: "stylescape", label: "Stylescape" },
   ];
@@ -240,59 +238,6 @@
   </section>
 </main>`;
 
-  const DOCS_BODY = `
-<div class="sf-sidebar sf-sidebar--narrow">
-  <aside class="pv-panel sf-section--s sf-stack sf-stack--s">
-    <div class="pv-eyebrow">Getting started</div>
-    <ul class="pv-nav">
-      <li class="pv-nav__item is-active">Introduction</li>
-      <li class="pv-nav__item">Installation</li>
-      <li class="pv-nav__item">Quick start</li>
-    </ul>
-  </aside>
-  <main class="sf-section--s sf-container--prose sf-prose">
-    <h1 class="pv-type--display-s">Introduction</h1>
-    <p class="pv-secondary">SLASHED is a CSS design-token framework built around ~840 custom properties.</p>
-    <pre class="pv-code-block"><code>npm install slashed</code></pre>
-  </main>
-</div>`;
-
-  const DASHBOARD_BODY = `
-<div class="sf-sidebar sf-sidebar--narrow">
-  <aside class="pv-panel sf-section--s sf-stack sf-stack--m">
-    <div class="pv-brand">⚡ Dashboard</div>
-    <ul class="pv-nav">
-      <li class="pv-nav__item is-active">Overview</li>
-      <li class="pv-nav__item">Analytics</li>
-      <li class="pv-nav__item">Users</li>
-    </ul>
-  </aside>
-  <main class="sf-section--s sf-container">
-    <div class="sf-grid sf-grid-cols-4">
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Revenue</div>
-        <div class="pv-stat">$48.2k</div>
-        <div class="pv-delta pv-delta--up">↑ 12% vs last month</div>
-      </article>
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Users</div>
-        <div class="pv-stat">12,431</div>
-        <div class="pv-delta pv-delta--up">↑ 8% vs last month</div>
-      </article>
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Conversions</div>
-        <div class="pv-stat">3.6%</div>
-        <div class="pv-delta pv-delta--flat">→ Flat</div>
-      </article>
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Tickets open</div>
-        <div class="pv-stat">24</div>
-        <div class="pv-delta pv-delta--down">↑ 3 since yesterday</div>
-      </article>
-    </div>
-  </main>
-</div>`;
-
   const COMPONENTS_BODY = `
 <div class="sf-container sf-section sf-stack sf-stack--xl">
   <h2>Component showcase</h2>
@@ -473,8 +418,6 @@
 
   const BODIES: Record<PreviewTemplate, string> = {
     marketing: MARKETING_BODY,
-    docs: DOCS_BODY,
-    dashboard: DASHBOARD_BODY,
     components: COMPONENTS_BODY,
     stylescape: STYLESCAPE_BODY,
   };
@@ -616,13 +559,13 @@ ${BODIES[template]}
 
 <div class="flex flex-col flex-1 min-h-0 bg-[#09090e]">
   <!-- Preview toolbar -->
-  <div class="h-10 bg-[#0d0d14] border-b border-white/8 flex items-center px-3 gap-2 shrink-0">
+  <div class="min-h-10 bg-[#0d0d14] border-b border-white/8 flex flex-wrap md:flex-nowrap items-center px-3 gap-2 py-1.5 md:py-0 shrink-0">
     <!-- Template tabs -->
-    <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5">
+    <div class="flex bg-white/5 border border-white/8 rounded-lg p-0.5 gap-0.5 max-w-full overflow-x-auto">
       {#each TEMPLATES as t (t.id)}
         <button
           onclick={() => onTemplateChange(t.id)}
-          class={`px-2.5 py-0.5 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
+          class={`shrink-0 px-2.5 py-0.5 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
             previewTemplate === t.id ? "bg-white/12 text-white" : "text-slate-500 hover:text-slate-300"
           }`}
         >
@@ -677,7 +620,7 @@ ${BODIES[template]}
       </button>
     </div>
 
-    <div class="flex-1"></div>
+    <div class="hidden md:block md:flex-1"></div>
 
     <!-- Motion -->
     <select

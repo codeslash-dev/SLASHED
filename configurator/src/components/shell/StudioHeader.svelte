@@ -53,12 +53,12 @@
   }
 </script>
 
-<header class="h-[52px] bg-[#0d0d14] border-b border-white/8 flex items-center px-3 gap-3 shrink-0 z-20">
+<header class="h-[52px] bg-[#0d0d14] border-b border-white/8 flex items-center px-3 gap-2 sm:gap-3 shrink-0 z-20">
   <div class="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-lg leading-none select-none shadow-lg shadow-indigo-600/30 shrink-0">
     /
   </div>
 
-  <div class="shrink-0">
+  <div class="hidden sm:block shrink-0">
     <div class="text-[11px] font-bold text-white tracking-tight leading-none flex items-center gap-1.5">
       SLASHED Studio
       <span class="text-[9px] bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 font-bold px-1.5 py-0.5 rounded-full font-mono">
@@ -76,7 +76,7 @@
       class="flex items-center gap-1.5 px-2.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-lg text-indigo-300 text-[10px] font-bold font-mono hover:bg-indigo-500/20 transition-colors cursor-pointer shrink-0"
     >
       <span class="w-4 h-4 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[9px] font-black">{overridesCount}</span>
-      customised · Export →
+      <span class="hidden sm:inline">customised · </span>Export →
     </button>
   {/if}
 
