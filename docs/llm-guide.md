@@ -412,6 +412,8 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 --sf-palette-mix-950: 8%;     /* deepest step */
 ```
 
+The 50=Lightest / 950=Darkest contract holds for the five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`). **`base` is a surface-elevation family and is exempt**: its source color is near-white (oklch≈0.96), so steps 50–400 blend the source toward `--sf-color-text` (darkening), step 500 is the near-white source itself, and steps 600–950 blend back from source toward text (re-darkening). This creates a bidirectional ramp, not a monotonic light→dark scale. Use the semantic aliases instead of numeric steps for `base`: `base-superlight` / `base-xlight` / `base-lighter` / `base-darker` / `base-xdark` / `base-superdark`.
+
 Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
 
 ### 5.15 Scrollbar and color scheme
