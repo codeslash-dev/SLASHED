@@ -3,6 +3,37 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.6.25 → next
+
+### `base` relative shade aliases removed
+
+The `base` family is an **absolute** lightness scale (step 50 is always
+near-white, step 950 always near-black), so relative aliases whose names
+imply a direction from the source were misleading — e.g. against a
+near-white base in light mode `--sf-color-base-lighter` actually resolved
+*darker* than `--sf-color-base`. These six aliases have been removed:
+
+| Removed | Replace with |
+|---|---|
+| `--sf-color-base-superlight` | `--sf-color-base-50` |
+| `--sf-color-base-xlight` | `--sf-color-base-200` |
+| `--sf-color-base-lighter` | `--sf-color-base-400` |
+| `--sf-color-base-darker` | `--sf-color-base-600` |
+| `--sf-color-base-xdark` | `--sf-color-base-800` |
+| `--sf-color-base-superdark` | `--sf-color-base-950` |
+
+If you wanted **mode-adaptive surface elevation** (lighter in light mode,
+lighter-than-background in dark mode) rather than a fixed shade, switch to
+the surface tokens instead: `--sf-color-bg`, `--sf-color-inset`,
+`--sf-color-raised` (or `--sf-color-base--hover` / `--sf-color-base--active`
+for interaction states). These adapt to both colour schemes automatically.
+
+The numeric ramp (`--sf-color-base-50` … `-950`), alpha variants
+(`-a5` … `-a80`), `-subtle` / `-muted` / `-ghost`, and `--hover` / `--active`
+are unchanged. The relative aliases on the five mid-tone brand families
+(`primary`, `secondary`, `tertiary`, `action`, `neutral`) are **unaffected** —
+they remain valid there because those sources sit mid-ramp.
+
 ## SLASHED 0.6.10 → 0.6.11
 
 ### Color source tokens renamed

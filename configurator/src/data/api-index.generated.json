@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "1a248e1d36b5",
+    "tokensHash": "a6a2fe9aab66",
     "bundles": [
       "full",
       "optimal",
@@ -10,15 +10,15 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 691,
+      "tokens": 685,
       "byTier": {
-        "PUBLIC": 635,
+        "PUBLIC": 629,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 54,
-        "Core tokens": 608,
+        "Core tokens": 602,
         "Macro tokens": 23,
         "Component tokens": 6
       }
@@ -2642,29 +2642,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-darker",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "base",
-      "description": "Semantic base-color scale derived from --sf-color-base. Covers fills, hover/active states, and ghost variants for secondary interactive elements.",
-      "note": "Deep base shade.",
-      "value": "var(--sf-color-base-600)",
-      "aliasOf": "--sf-color-base-600",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-ghost",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2675,29 +2652,6 @@
       "note": "Near-transparent base tint for ghost-button hover backgrounds.",
       "value": "var(--sf-color-base-a5)",
       "aliasOf": "--sf-color-base-a5",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-lighter",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "base",
-      "description": "Semantic base-color scale derived from --sf-color-base. Covers fills, hover/active states, and ghost variants for secondary interactive elements.",
-      "note": "Light base shade.",
-      "value": "var(--sf-color-base-400)",
-      "aliasOf": "--sf-color-base-400",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,
@@ -2790,98 +2744,6 @@
       "note": "Lightest base tint.",
       "value": "var(--sf-color-base-a10)",
       "aliasOf": "--sf-color-base-a10",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-superdark",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "base",
-      "description": "Semantic base-color scale derived from --sf-color-base. Covers fills, hover/active states, and ghost variants for secondary interactive elements.",
-      "note": "Near-black base shade.",
-      "value": "var(--sf-color-base-950)",
-      "aliasOf": "--sf-color-base-950",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-superlight",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "base",
-      "description": "Semantic base-color scale derived from --sf-color-base. Covers fills, hover/active states, and ghost variants for secondary interactive elements.",
-      "note": "Near-white base shade.",
-      "value": "var(--sf-color-base-50)",
-      "aliasOf": "--sf-color-base-50",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-xdark",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "base",
-      "description": "Semantic base-color scale derived from --sf-color-base. Covers fills, hover/active states, and ghost variants for secondary interactive elements.",
-      "note": "Extra-dark base shade.",
-      "value": "var(--sf-color-base-800)",
-      "aliasOf": "--sf-color-base-800",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-xlight",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "group": "base",
-      "description": "Semantic base-color scale derived from --sf-color-base. Covers fills, hover/active states, and ghost variants for secondary interactive elements.",
-      "note": "Extra-light base shade.",
-      "value": "var(--sf-color-base-200)",
-      "aliasOf": "--sf-color-base-200",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**691 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**685 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-608 tokens.
+602 tokens.
 
 | Token | Default |
 |---|---|
@@ -106,17 +106,11 @@ rebrand workflow.
 | `--sf-color-base-a5` | `oklch(from var(--sf-color-base) l c h / 0.05)` |
 | `--sf-color-base-a50` | `oklch(from var(--sf-color-base) l c h / 0.50)` |
 | `--sf-color-base-a80` | `oklch(from var(--sf-color-base) l c h / 0.80)` |
-| `--sf-color-base-darker` | `var(--sf-color-base-600)` |
 | `--sf-color-base-ghost` | `var(--sf-color-base-a5)` |
-| `--sf-color-base-lighter` | `var(--sf-color-base-400)` |
 | `--sf-color-base-muted` | `var(--sf-color-base-a30)` |
 | `--sf-color-base-source-dark` | `oklch(0.22 0.003 250) *(registered)*` |
 | `--sf-color-base-source-light` | `oklch(0.96 0.006 250)` |
 | `--sf-color-base-subtle` | `var(--sf-color-base-a10)` |
-| `--sf-color-base-superdark` | `var(--sf-color-base-950)` |
-| `--sf-color-base-superlight` | `var(--sf-color-base-50)` |
-| `--sf-color-base-xdark` | `var(--sf-color-base-800)` |
-| `--sf-color-base-xlight` | `var(--sf-color-base-200)` |
 | `--sf-color-bg` | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
 | `--sf-color-bg--active` | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | `var(--sf-color-inset)` |

@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**930 elements** — 691 tokens, 239 classes.
+**924 elements** — 685 tokens, 239 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 874 | Everyday surface. SemVer-stable. |
+| PUBLIC | 868 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (691)
+## Tokens (685)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
 
-### Core tokens (608)
+### Core tokens (602)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -124,17 +124,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-base-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | 5% opacity base tint. |
 | `--sf-color-base-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.50)` | 50% opacity base tint. |
 | `--sf-color-base-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.80)` | 80% opacity base tint. |
-| `--sf-color-base-darker` | PUBLIC | consumption | color | `var(--sf-color-base-600)` | Deep base shade. |
 | `--sf-color-base-ghost` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base tint for ghost-button hover backgrounds. |
-| `--sf-color-base-lighter` | PUBLIC | consumption | color | `var(--sf-color-base-400)` | Light base shade. |
 | `--sf-color-base-muted` | PUBLIC | consumption | color | `var(--sf-color-base-a30)` | Medium base fill. |
 | `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. |
 | `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH lightness source for the base color. |
 | `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Lightest base tint. |
-| `--sf-color-base-superdark` | PUBLIC | consumption | color | `var(--sf-color-base-950)` | Near-black base shade. |
-| `--sf-color-base-superlight` | PUBLIC | consumption | color | `var(--sf-color-base-50)` | Near-white base shade. |
-| `--sf-color-base-xdark` | PUBLIC | consumption | color | `var(--sf-color-base-800)` | Extra-dark base shade. |
-| `--sf-color-base-xlight` | PUBLIC | consumption | color | `var(--sf-color-base-200)` | Extra-light base shade. |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | Base page / component background. The canvas all other surfaces layer on top of. |
 | `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | Background tint for pressed/active interactive elements. |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for disabled interactive elements. |

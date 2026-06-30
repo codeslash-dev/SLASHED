@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**691 tokens** (deduplicated by name across the 4 token source files).
+**685 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 635 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 629 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 225 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 466 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 460 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -205,17 +205,11 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-base-a5` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.05)` |
 | `--sf-color-base-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.50)` |
 | `--sf-color-base-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.80)` |
-| `--sf-color-base-darker` | PUBLIC | consumption | Core | `var(--sf-color-base-600)` |
 | `--sf-color-base-ghost` | PUBLIC | consumption | Core | `var(--sf-color-base-a5)` |
-| `--sf-color-base-lighter` | PUBLIC | consumption | Core | `var(--sf-color-base-400)` |
 | `--sf-color-base-muted` | PUBLIC | consumption | Core | `var(--sf-color-base-a30)` |
 | `--sf-color-base-source-dark` | PUBLIC | knob | Core | `oklch(0.22 0.003 250) (registered)` |
 | `--sf-color-base-source-light` | PUBLIC | knob | Core | `oklch(0.96 0.006 250)` |
 | `--sf-color-base-subtle` | PUBLIC | consumption | Core | `var(--sf-color-base-a10)` |
-| `--sf-color-base-superdark` | PUBLIC | consumption | Core | `var(--sf-color-base-950)` |
-| `--sf-color-base-superlight` | PUBLIC | consumption | Core | `var(--sf-color-base-50)` |
-| `--sf-color-base-xdark` | PUBLIC | consumption | Core | `var(--sf-color-base-800)` |
-| `--sf-color-base-xlight` | PUBLIC | consumption | Core | `var(--sf-color-base-200)` |
 | `--sf-color-bg` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
 | `--sf-color-bg--active` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | Core | `var(--sf-color-inset)` |

@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 691,
+      "tokens": 685,
       "by_tier": {
-        "PUBLIC": 635,
+        "PUBLIC": 629,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 225,
-        "consumption": 466
+        "consumption": 460
       }
     }
   },
@@ -933,14 +933,6 @@
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)"
     },
-    "--sf-color-base-darker": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-600)"
-    },
     "--sf-color-base-ghost": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -948,14 +940,6 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-base-a5)"
-    },
-    "--sf-color-base-lighter": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-400)"
     },
     "--sf-color-base-muted": {
       "tier": "PUBLIC",
@@ -988,38 +972,6 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-base-a10)"
-    },
-    "--sf-color-base-superdark": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-950)"
-    },
-    "--sf-color-base-superlight": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-50)"
-    },
-    "--sf-color-base-xdark": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-800)"
-    },
-    "--sf-color-base-xlight": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-200)"
     },
     "--sf-color-bg": {
       "tier": "PUBLIC",

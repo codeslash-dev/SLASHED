@@ -27,21 +27,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 930,
+      "total": 924,
       "by_type": {
         "class": 239,
-        "token": 691
+        "token": 685
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 874,
+        "PUBLIC": 868,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 466,
+        "consumption": 460,
         "knob": 225
       },
-      "tokens": 691,
+      "tokens": 685,
       "classes": 239,
       "sf_classes": 190,
       "is_classes": 40,
@@ -49,7 +49,7 @@
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
-        "Core tokens": 608,
+        "Core tokens": 602,
         "Layout primitives": 128,
         "Layout tokens": 54,
         "Macro classes": 42,
@@ -3276,34 +3276,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-darker",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Deep base shade.",
-      "value": "var(--sf-color-base-600)",
-      "aliasOf": "--sf-color-base-600",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-ghost",
       "type": "token",
       "tier": "PUBLIC",
@@ -3315,34 +3287,6 @@
       "description": "Near-transparent base tint for ghost-button hover backgrounds.",
       "value": "var(--sf-color-base-a5)",
       "aliasOf": "--sf-color-base-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-lighter",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Light base shade.",
-      "value": "var(--sf-color-base-400)",
-      "aliasOf": "--sf-color-base-400",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3455,118 +3399,6 @@
       "description": "Lightest base tint.",
       "value": "var(--sf-color-base-a10)",
       "aliasOf": "--sf-color-base-a10",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-superdark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Near-black base shade.",
-      "value": "var(--sf-color-base-950)",
-      "aliasOf": "--sf-color-base-950",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-superlight",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Near-white base shade.",
-      "value": "var(--sf-color-base-50)",
-      "aliasOf": "--sf-color-base-50",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-xdark",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Extra-dark base shade.",
-      "value": "var(--sf-color-base-800)",
-      "aliasOf": "--sf-color-base-800",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-color-base-xlight",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Extra-light base shade.",
-      "value": "var(--sf-color-base-200)",
-      "aliasOf": "--sf-color-base-200",
       "registered": false,
       "animatable": false,
       "syntax": null,

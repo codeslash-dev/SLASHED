@@ -840,8 +840,7 @@
        colour. The ramp uses oklch() relative syntax with fixed L steps
        spanning 0.97 → 0.06, preserving the base source's hue and chroma.
        50 is always near-white; 950 is always near-black regardless of
-       light/dark mode or the source colour's position. This is the same
-       approach used by Tailwind and Radix.
+       light/dark mode or the source colour's position.
 
        OKLCH L values (fixed, mode-independent):
          base-50  = 0.97   near-white
@@ -879,12 +878,11 @@
     --sf-color-base-a50: oklch(from var(--sf-color-base) l c h / 0.50);
     --sf-color-base-a80: oklch(from var(--sf-color-base) l c h / 0.80);
 
-    --sf-color-base-superlight: var(--sf-color-base-50);
-    --sf-color-base-xlight:     var(--sf-color-base-200);
-    --sf-color-base-lighter:    var(--sf-color-base-400);
-    --sf-color-base-darker:     var(--sf-color-base-600);
-    --sf-color-base-xdark:      var(--sf-color-base-800);
-    --sf-color-base-superdark:  var(--sf-color-base-950);
+    /* No relative aliases (lighter/darker/xlight/…) on base: it is an
+       absolute scale, so a step's name would lie depending on where the
+       source sits (e.g. "lighter" would be darker than a near-white base
+       in light mode). For relative, mode-adaptive surface elevation use
+       --sf-color-bg / --sf-color-inset / --sf-color-raised instead. */
     --sf-color-base--hover:     oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h);
     --sf-color-base--active:    oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h);
     --sf-color-base-subtle:     var(--sf-color-base-a10);
