@@ -30,8 +30,6 @@
 
   const TEMPLATES: { id: PreviewTemplate; label: string }[] = [
     { id: "marketing", label: "Marketing" },
-    { id: "docs", label: "Docs" },
-    { id: "dashboard", label: "Dashboard" },
     { id: "components", label: "Components" },
     { id: "stylescape", label: "Stylescape" },
   ];
@@ -240,59 +238,6 @@
   </section>
 </main>`;
 
-  const DOCS_BODY = `
-<div class="sf-sidebar sf-sidebar--narrow">
-  <aside class="pv-panel sf-section--s sf-stack sf-stack--s">
-    <div class="pv-eyebrow">Getting started</div>
-    <ul class="pv-nav">
-      <li class="pv-nav__item is-active">Introduction</li>
-      <li class="pv-nav__item">Installation</li>
-      <li class="pv-nav__item">Quick start</li>
-    </ul>
-  </aside>
-  <main class="sf-section--s sf-container--prose sf-prose">
-    <h1 class="pv-type--display-s">Introduction</h1>
-    <p class="pv-secondary">SLASHED is a CSS design-token framework built around ~840 custom properties.</p>
-    <pre class="pv-code-block"><code>npm install slashed</code></pre>
-  </main>
-</div>`;
-
-  const DASHBOARD_BODY = `
-<div class="sf-sidebar sf-sidebar--narrow">
-  <aside class="pv-panel sf-section--s sf-stack sf-stack--m">
-    <div class="pv-brand">⚡ Dashboard</div>
-    <ul class="pv-nav">
-      <li class="pv-nav__item is-active">Overview</li>
-      <li class="pv-nav__item">Analytics</li>
-      <li class="pv-nav__item">Users</li>
-    </ul>
-  </aside>
-  <main class="sf-section--s sf-container">
-    <div class="sf-grid sf-grid-cols-4">
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Revenue</div>
-        <div class="pv-stat">$48.2k</div>
-        <div class="pv-delta pv-delta--up">↑ 12% vs last month</div>
-      </article>
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Users</div>
-        <div class="pv-stat">12,431</div>
-        <div class="pv-delta pv-delta--up">↑ 8% vs last month</div>
-      </article>
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Conversions</div>
-        <div class="pv-stat">3.6%</div>
-        <div class="pv-delta pv-delta--flat">→ Flat</div>
-      </article>
-      <article class="pv-card sf-stack sf-stack--xs">
-        <div class="pv-stat-label">Tickets open</div>
-        <div class="pv-stat">24</div>
-        <div class="pv-delta pv-delta--down">↑ 3 since yesterday</div>
-      </article>
-    </div>
-  </main>
-</div>`;
-
   const COMPONENTS_BODY = `
 <div class="sf-container sf-section sf-stack sf-stack--xl">
   <h2>Component showcase</h2>
@@ -473,8 +418,6 @@
 
   const BODIES: Record<PreviewTemplate, string> = {
     marketing: MARKETING_BODY,
-    docs: DOCS_BODY,
-    dashboard: DASHBOARD_BODY,
     components: COMPONENTS_BODY,
     stylescape: STYLESCAPE_BODY,
   };

@@ -42,7 +42,7 @@ export interface SavedSlot {
   overrides: Record<string, string>;
 }
 
-export type PreviewTemplate = "marketing" | "docs" | "dashboard" | "components" | "stylescape";
+export type PreviewTemplate = "marketing" | "components" | "stylescape";
 
 export interface ConfiguratorState {
   domain: string;

@@ -58,14 +58,14 @@
     /
   </div>
 
-  <div class="shrink-0">
+  <div class="hidden sm:block shrink-0">
     <div class="text-[11px] font-bold text-white tracking-tight leading-none flex items-center gap-1.5">
       SLASHED Studio
       <span class="text-[9px] bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 font-bold px-1.5 py-0.5 rounded-full font-mono">
         v{version}
       </span>
     </div>
-    <div class="hidden sm:block text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-0.5">
+    <div class="text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-0.5">
       Token Architect
     </div>
   </div>
@@ -130,7 +130,7 @@
     <button
       onclick={handleShare}
       title="Copy share link"
-      class="hidden sm:block p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
+      class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
     >
       {#if shareFeedback}
         <Check class="w-3.5 h-3.5 text-emerald-400" />
@@ -142,7 +142,7 @@
     <button
       onclick={onImport}
       title="Import CSS overrides"
-      class="hidden sm:block p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
+      class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
     >
       <FolderOpen class="w-3.5 h-3.5" />
     </button>
