@@ -105,30 +105,30 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | Near-white action shade for maximum contrast on dark surfaces. |
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
-| `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Secondary interactive color for supporting actions and secondary buttons. |
-| `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)` | Base color at pressed/active brightness. |
-| `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)` | Base color at hover brightness. |
-| `--sf-color-base-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.94 c h)` | Very light base shade. Hover fills, badge backgrounds. |
-| `--sf-color-base-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.88 c h)` | Light base shade. |
-| `--sf-color-base-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.78 c h)` | Light-mid base shade. Borders on light backgrounds. |
-| `--sf-color-base-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.65 c h)` | Mid-light base shade. Disabled fills. |
-| `--sf-color-base-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.97 c h)` | Lightest base tint. |
-| `--sf-color-base-500` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.50 c h)` | Mid base shade — the 'pure' hue. |
-| `--sf-color-base-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.37 c h)` | Mid-dark base shade. Text on light surfaces. |
-| `--sf-color-base-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.27 c h)` | Dark base shade. |
-| `--sf-color-base-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.17 c h)` | Very dark base shade. |
-| `--sf-color-base-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.11 c h)` | Near-black base shade. |
-| `--sf-color-base-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.06 c h)` | Darkest base tint. |
-| `--sf-color-base-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.10)` | 10% opacity base tint. |
-| `--sf-color-base-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.30)` | 30% opacity base tint. |
-| `--sf-color-base-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | 5% opacity base tint. |
-| `--sf-color-base-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.50)` | 50% opacity base tint. |
-| `--sf-color-base-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.80)` | 80% opacity base tint. |
-| `--sf-color-base-ghost` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base tint for ghost-button hover backgrounds. |
-| `--sf-color-base-muted` | PUBLIC | consumption | color | `var(--sf-color-base-a30)` | Medium base fill. |
-| `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. |
-| `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH lightness source for the base color. |
-| `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Lightest base tint. |
+| `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Mode-adaptive base surface color. Drives the page canvas and the surface elevation family; not an interactive/brand role. |
+| `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)` | Pressed/active surface derived from --sf-color-base for subtle background interactions. |
+| `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)` | Hover-state surface derived from --sf-color-base for subtle background interactions. |
+| `--sf-color-base-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.94 c h)` | Very light base-surface level. |
+| `--sf-color-base-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.88 c h)` | Light base-surface level. |
+| `--sf-color-base-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.78 c h)` | Light-mid base-surface level. |
+| `--sf-color-base-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.65 c h)` | Mid-light base-surface level. |
+| `--sf-color-base-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.97 c h)` | Lightest base-surface level. |
+| `--sf-color-base-500` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.50 c h)` | Mid base-surface level. |
+| `--sf-color-base-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.37 c h)` | Mid-dark base-surface level. |
+| `--sf-color-base-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.27 c h)` | Dark base-surface level. |
+| `--sf-color-base-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.17 c h)` | Very dark base-surface level. |
+| `--sf-color-base-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.11 c h)` | Near-black base-surface level. |
+| `--sf-color-base-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) 0.06 c h)` | Darkest base-surface level. |
+| `--sf-color-base-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.10)` | 10% opacity base-surface tint. |
+| `--sf-color-base-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.30)` | 30% opacity base-surface tint. |
+| `--sf-color-base-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | 5% opacity base-surface tint. |
+| `--sf-color-base-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.50)` | 50% opacity base-surface tint. |
+| `--sf-color-base-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.80)` | 80% opacity base-surface tint. |
+| `--sf-color-base-ghost` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint for ghost backgrounds. |
+| `--sf-color-base-muted` | PUBLIC | consumption | color | `var(--sf-color-base-a30)` | Medium base-surface fill for muted containers or overlays. |
+| `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. Keep near-black for dark-mode surfaces and elevation offsets. |
+| `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH source color for the light-mode base surface. Keep near-white so --sf-color-bg, --sf-color-surface, and raised/inset levels have room to separate. |
+| `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Subtle base-surface tint for low-emphasis backgrounds. |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | Base page / component background. The canvas all other surfaces layer on top of. |
 | `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | Background tint for pressed/active interactive elements. |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for disabled interactive elements. |
@@ -199,7 +199,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade. |
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | Extra-light neutral shade. |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | Overlay surface for floating panels, sheets, and modals. |
-| `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw primary palette token aliased from the action role by default. Override to decouple primary from action. |
+| `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary brand palette color. Independent from --sf-color-action by default; override either source token to couple or separate brand and action roles. |
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | Primary color at pressed/active brightness. |
 | `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | Primary color at hover brightness. |
 | `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light primary shade. |
@@ -269,7 +269,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-success-source-light` | PUBLIC | knob | color | `oklch(0.50 0.16 145)` | OKLCH lightness source for the success status color. |
 | `--sf-color-success-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast success color for confirmation message text. |
 | `--sf-color-success-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.12)` | Light success tint for confirmation backgrounds. |
-| `--sf-color-surface` | PUBLIC | consumption | color | `var(--sf-color-base)` | Elevated surface color (e.g. card background one step above page background). |
+| `--sf-color-surface` | PUBLIC | consumption | color | `var(--sf-color-base)` | Default component surface color. Alias of --sf-color-base; use --sf-color-raised for an elevated card/background level. |
 | `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw tertiary palette token for the third brand color. |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | Tertiary color at pressed/active brightness. |
 | `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | Tertiary color at hover brightness. |

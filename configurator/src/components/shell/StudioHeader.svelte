@@ -164,6 +164,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="reset-confirm-title"
+    tabindex="-1"
     onclick={(e) => { if (e.target === e.currentTarget) cancelReset(); }}
     onkeydown={(e) => {
       if (e.key === 'Escape') { e.stopPropagation(); cancelReset(); }
