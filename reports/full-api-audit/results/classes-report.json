@@ -2,6 +2,7 @@
   "summary": {
     "totalClasses": 239,
     "consoleErrors": 0,
+    "requestFailures": 0,
     "selectorPresentInBundle": 238,
     "notInOptimalBundle": [
       "theme-transition [bundles=none]"
@@ -12,6 +13,7 @@
     "behaviourMismatch": []
   },
   "consoleErrors": [],
+  "requestFailures": [],
   "rows": [
     {
       "name": "is-active",

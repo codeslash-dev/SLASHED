@@ -7,15 +7,19 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const { classes } = oracle();
-const byName = new Map(classes.map((c) => [c.name, c]));
 const bundleCss = fs.readFileSync(path.join(ROOT, 'badges/slashed.optimal.css'), 'utf8');
+// word-boundary check so e.g. `sf-grid` isn't matched by `sf-grid--dense` alone
+const escapeCls = (c) => c.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+const inBundle = (c) => new RegExp(`\\.${escapeCls(c)}(?![A-Za-z0-9_-])`).test(bundleCss);
 const url = localDemo('full-api-demo.html', 'classes-base.html');
 
 const b = await browser();
 const page = await b.newPage({ viewport: { width: 1280, height: 1600 } });
 const consoleErrors = [];
+const requestFailures = [];
 page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
 page.on('pageerror', (e) => consoleErrors.push(String(e)));
+page.on('requestfailed', (req) => requestFailures.push(`${req.method()} ${req.url()} :: ${req.failure()?.errorText ?? 'unknown'}`));
 await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 await page.waitForTimeout(800);
 
@@ -105,7 +109,7 @@ for (const c of classes) {
   const cls = c.name;
   const s = data[cls];
   const r = { name: cls, category: c.category, kind: c.kind, bundles: c.bundles || [], issues: [] };
-  if (!(bundleCss.includes('.' + cls))) r.issues.push('SELECTOR_NOT_IN_OPTIMAL_BUNDLE');
+  if (!inBundle(cls)) r.issues.push('SELECTOR_NOT_IN_OPTIMAL_BUNDLE');
   if (!s) { r.issues.push('NO_STAGE_ELEMENT'); rows.push(r); continue; }
   r.display = s.display;
   // rendered: visible-area or intentionally display:none
@@ -129,6 +133,7 @@ const checked = rows.filter((r) => r.checked);
 const summary = {
   totalClasses: classes.length,
   consoleErrors: consoleErrors.length,
+  requestFailures: requestFailures.length,
   selectorPresentInBundle: classes.length - notInBundle.length,
   notInOptimalBundle: notInBundle.map((r) => `${r.name} [bundles=${r.bundles.join('|') || 'none'}]`),
   noStageElement: noStage.map((r) => r.name),
@@ -137,5 +142,5 @@ const summary = {
   behaviourMismatch: behaviourMismatch.map((r) => `${r.name} (display=${r.display})`),
 };
 
-save('classes-report.json', { summary, consoleErrors, rows });
+save('classes-report.json', { summary, consoleErrors, requestFailures, rows });
 console.log('CLASSES SUMMARY', JSON.stringify(summary, null, 2));

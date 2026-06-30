@@ -26,6 +26,7 @@ async function readAll(srcName, outName) {
   const errs = [];
   page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
   page.on('pageerror', (e) => errs.push(String(e)));
+  page.on('requestfailed', (req) => errs.push(`requestfailed ${req.url()} :: ${req.failure()?.errorText ?? 'unknown'}`));
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForTimeout(900);
   if (outName.includes('ov')) {

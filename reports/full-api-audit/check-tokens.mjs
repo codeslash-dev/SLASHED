@@ -2,8 +2,7 @@
 // Reads the live computed value of all 691 tokens, cross-checks the demo's own
 // displayed value, compares literals to the oracle's declared default, verifies
 // aliases resolve to their target, and confirms dark mode re-resolves colours.
-import { localDemo, oracle, browser, save, SHOTS } from './lib.mjs';
-import path from 'node:path';
+import { localDemo, oracle, browser, save } from './lib.mjs';
 
 const { tokens } = oracle();
 const byName = new Map(tokens.map((t) => [t.name, t]));
@@ -12,8 +11,10 @@ const url = localDemo('full-api-demo.html', 'tokens-base.html');
 const b = await browser();
 const page = await b.newPage({ viewport: { width: 1280, height: 1600 } });
 const consoleErrors = [];
+const requestFailures = [];
 page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
 page.on('pageerror', (e) => consoleErrors.push(String(e)));
+page.on('requestfailed', (req) => requestFailures.push(`${req.method()} ${req.url()} :: ${req.failure()?.errorText ?? 'unknown'}`));
 await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 await page.waitForTimeout(900);
 
@@ -84,6 +85,7 @@ const summary = {
   totalTokens: tokens.length,
   rendered: rows.length - notRendered.length,
   consoleErrors: consoleErrors.length,
+  requestFailures: requestFailures.length,
   empties: empties.length,
   demoShownMismatch: shownMismatch.length,
   literalDefaultMismatch: literalMismatch.length,
@@ -92,7 +94,7 @@ const summary = {
   changedInDarkMode: darkChanges,
 };
 
-save('tokens-report.json', { summary, consoleErrors, rows });
+save('tokens-report.json', { summary, consoleErrors, requestFailures, rows });
 console.log('TOKENS SUMMARY', JSON.stringify(summary, null, 2));
 console.log('\nEMPTY tokens:', empties.map((r) => r.name).join(', ') || '(none)');
 console.log('\nDEMO shown!=computed:', shownMismatch.map((r) => `${r.name}[shown=${r.shown}|computed=${r.computed}]`).slice(0, 20).join('\n  ') || '(none)');

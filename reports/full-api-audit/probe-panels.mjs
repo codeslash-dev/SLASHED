@@ -18,11 +18,15 @@ for (const name of panels) {
   });
   await page.waitForTimeout(400);
   // some panels have sub-tabs (e.g. "Tokens"); click any tab that says Tokens/All
-  const tabs = await page.getByRole('button').allInnerTexts().catch(() => []);
   for (const t of ['Tokens', 'All', 'All tokens', 'Advanced']) {
     const btn = page.getByRole('button', { name: t, exact: true }).first();
     if (await btn.count()) { await btn.click().catch(() => {}); await page.waitForTimeout(250); }
   }
+  // NOTE: the per-panel counts below are page-wide, not scoped to the active
+  // panel (the configurator doesn't wrap panel content in a single stable
+  // container). They are indicative only. The conclusion uses the deduped
+  // UNION across panels, which is a valid reachability metric: any token whose
+  // row is in the DOM is reachable as a control.
   const names = await page.$$eval('[title^="--sf-"]', (els) => els.map((e) => e.getAttribute('title')));
   perPanel[name] = names.length;
   names.forEach((n) => reachable.add(n));

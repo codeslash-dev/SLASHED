@@ -14,14 +14,14 @@ Playwright/Chromium; computed values diffed against the source-of-truth oracle
 | Ground | Scope | Result |
 |--------|-------|--------|
 | **1 — Correctness** (demos + framework) | 691 tokens, 239 classes, 225 knobs, dark mode, visuals | **PASS** — no framework functional defects. 4 demo/framework polish findings (F1–F4), all low/medium. |
-| **2 — Configurator fidelity** | control coverage + live override + preview reflection | **PASS** — every editable knob reachable and overridable; previews reflect changes; 54/54 configurator tests green. |
+| **2 — Configurator fidelity** | control coverage + live override + preview reflection | **PASS** — every editable knob reachable and overridable; previews reflect changes; 59/59 configurator unit+component tests green. |
 
 **Headline numbers**
 
 - Tokens: **691/691** rendered, **0** console errors, **683/691** resolve at `:root` (the 8 "empty" are fully explained below — none is a framework bug). Demo's displayed value matched the independently-read computed value for **691/691** tokens (0 misreports). Aliases: **0** mismatches. Dark mode re-resolves **272** tokens.
 - Classes: **239/239** rendered, **238/239** ship in the loaded bundle, **69/69** behavioural contracts pass, **0** console errors.
 - Override wiring (overrides demo): **202/202** perturbed knobs move; the **23** non-perturbed knobs exactly equal the **23** documented skips (0 undocumented); **460/466** consumption tokens recompute downstream.
-- Configurator: **224/224** editable PUBLIC knobs reachable as controls; **8/8** power knobs and **5/5** sampled generic rows inject overrides *and* update the live preview; preset + reset work; **54/54** unit/e2e tests pass.
+- Configurator: **224/224** editable PUBLIC knobs reachable as controls; **8/8** power knobs (`knobs-report.json`) and **5/5** sampled generic rows (`configurator-report.json`) inject overrides *and* update the live preview; preset + reset work (`preset-reset-report.json`); **59/59** configurator unit+component tests pass (`results/configurator-unit-tests.txt`).
 
 **Verdict:** The two demo pages are accurate, faithful reflections of the
 framework, and the framework itself behaves correctly. The configurator
@@ -106,20 +106,39 @@ Mechanism: a control's `onChange` → `overrides` state → an `$effect` writes 
 override CSS into `<style id="sf-parent-overrides">` (chrome) and the preview
 iframe's `<style id="slashed-overrides">`. Verified end-to-end:
 
-| Control type | Tested | Injected (parent+preview) | Preview computed reflects |
-|--------------|--------|---------------------------|---------------------------|
-| Power knobs (all 6 domains) | 8/10* | 8/8 | 8/8 (driven tokens move) |
-| Generic token rows (color/keyword/length/font) | 5/5 | 5/5 | 5/5 |
-| Corner-style preset (Pill) | 1 | radius injected | radius-scale 1→2, radius-m 8→16px |
-| Per-row reset (✕) | 1 | — | override added then removed ✓ |
+| Control type | Tested | Injected (parent+preview) | Preview computed reflects | Artifact |
+|--------------|--------|---------------------------|---------------------------|----------|
+| Power knobs (all 6 domains) | 8/10* | 8/8 | 8/8 (driven tokens move) | `knobs-report.json` |
+| Generic token rows (color/keyword/length/font) | 5/5 | 5/5 | 5/5 | `configurator-report.json` |
+| Corner-style preset (Pill) | 1 | radius injected | radius-scale 1→2, radius-m 8→16px | `preset-reset-report.json` |
+| Per-row reset (✕) | 1 | — | override added then removed ✓ | `preset-reset-report.json` |
 
 *8 of 10 power knobs driven (every scale multiplier + focus ring, spanning all
 6 domains); the 2 untested are the Colors contrast knobs, which use the
-identical `RangeWithNumber` path.
+identical `RangeWithNumber` path. Each control type lives in its own harness +
+artifact (see §3.3) so the JSON evidence is internally coherent.
 
 Screenshot `configurator-overridden.png` shows the Stylescape preview reflecting
 live overrides (red primary ramp, serif body font, dashed gradient borders) with
 "5 overrides active".
+
+### 3.3 Harness corrections (post-review reconciliation)
+
+An earlier **combined** configurator harness committed a stale, contradictory
+`configurator-report.json` (`0/6` power knobs + preset/reset timeouts). That was
+a **harness-selector bug**, not a configurator defect: the power-knob accordion
+sections are titled e.g. "MODULAR SCALE", "GLOBAL SCALE", "SHADOW APPEARANCE",
+which the harness's section regexes didn't match, so the inputs never mounted
+and the clicks timed out (cascading into the preset/reset steps). Once the
+section names were corrected, **all 8 knobs pass**. To keep each artifact
+internally coherent and avoid cross-step coupling, coverage was split:
+`check-knobs.mjs` (knobs), `check-preset-reset.mjs` (preset + reset),
+`check-configurator.mjs` (generic rows only). The CodeRabbit review correctly
+flagged the contradiction between the stale artifact and this report; the
+numbers here are now backed 1:1 by the regenerated artifacts. Additional
+review-driven hardening: word-boundary selector match in `check-classes.mjs`
+(verified zero impact — 238/239 unchanged) and `requestfailed` capture across
+all Ground 1 harnesses.
 
 ---
 
@@ -132,7 +151,7 @@ live overrides (red primary ramp, serif body font, dashed gradient borders) with
 | **F3** | 1 | framework | Low | `--sf-color-base-*` numeric ramp is non-monotonic: `base-500` anchors at the near-white source, so the ramp darkens 50→400, jumps light at 500, darkens 600→950 — contradicts the guide's "50 lightest → 950 darkest" contract (holds for the other 5 families). | Confirm intent; give `base` a one-directional ramp, or document it as a surface-elevation scale exempt from the contract. `core/tokens.css`, `docs/llm-guide.md`. |
 | **F4** | 1 | demo | Low | `theme-transition` tile is inert — the class ships in no bundle (`bundles: []`, example-only). | Exclude unbundled example-only classes from the full-API demo. |
 | N1 | 1 | none | Info | `radius-none`/`space-none` compute `0px` not `0` — `@property <length>` normalization. Not a defect. | — |
-| N2 | 2 | none | Info | A single `404` appeared on one early configurator load; not reproduced across 4 later runs. Transient (likely favicon/sourcemap). | Re-check if it recurs in CI. |
+| N2 | 2 | none | Info | An intermittent `404` console error appears on ~2 of ~11 configurator loads (0 `requestfailed` events; not reproducible across 3 back-to-back loads); functionality unaffected (rows 5/5, knobs 8/8). Likely a Vite dep-optimize/favicon timing artifact. | Identify + re-check if it recurs in CI. |
 
 No framework **functional** bugs were found. The configurator is fully
 functional; it has no defects in this audit.

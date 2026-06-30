@@ -3,6 +3,7 @@
     "totalTokens": 691,
     "rendered": 691,
     "consoleErrors": 0,
+    "requestFailures": 0,
     "empties": 8,
     "demoShownMismatch": 0,
     "literalDefaultMismatch": 2,
@@ -11,6 +12,7 @@
     "changedInDarkMode": 272
   },
   "consoleErrors": [],
+  "requestFailures": [],
   "rows": [
     {
       "name": "--sf-alternate-gap",
