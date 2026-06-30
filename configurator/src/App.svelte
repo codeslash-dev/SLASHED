@@ -167,7 +167,17 @@
         if (file.name.endsWith(".json")) {
           try {
             const data = JSON.parse(text);
-            if (typeof data === "object") setOverrides(data);
+            if (data !== null && typeof data === "object" && !Array.isArray(data)) {
+              // Restrict to real token-name keys too, not just string values — an
+              // imported JSON file is untrusted input and its keys end up as
+              // object property names downstream (CodeQL: remote-property-injection).
+              const safe = Object.fromEntries(
+                Object.entries(data as Record<string, unknown>).filter(
+                  ([k, v]) => typeof v === "string" && /^--sf-[\w-]+$/.test(k)
+                )
+              ) as Record<string, string>;
+              if (Object.keys(safe).length > 0) setOverrides(safe);
+            }
           } catch {}
         } else {
           const parsed: Record<string, string> = {};
