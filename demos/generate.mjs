@@ -529,6 +529,8 @@ const PAGE_SCRIPT = [
   '})();',
 ].join('\n');
 
+const bundledClassCount = classes.filter((c) => c.bundles.length > 0).length;
+
 function buildDemo({ withOverride }) {
   const overrideLink = withOverride ? `\n  <link rel="stylesheet" href="ultimate-override.css" id="ov">` : '';
   const banner = withOverride
@@ -655,7 +657,7 @@ function buildDemo({ withOverride }) {
 ${toolbar()}
   <main id="main">
     <h1>SLASHED Full API Demo</h1>
-    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal-components bundle from jsDelivr CDN · ${classes.length} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
+    <p style="color:var(--sf-color-text--muted)">v${VERSION} · optimal-components bundle from jsDelivr CDN · ${bundledClassCount} classes · ${tokens.length} tokens (${knobs.length} configurable)</p>
     ${banner}
 
     <section id="tokens">
@@ -706,6 +708,5 @@ if (tokenTiles !== tokens.length) {
 }
 
 console.log(`demos/ultimate-override.css        → ${handledCount}/${knobs.length} knobs overridden, ${Object.keys(SKIP).length} skipped (documented)`);
-const bundledClassCount = classes.filter((c) => c.bundles.length > 0).length;
 console.log(`demos/full-api-demo.html           → ${bundledClassCount} bundled classes (${classes.length - bundledClassCount} example-only excluded) + ${tokens.length} tokens (Part 2), all rendered`);
 console.log(`demos/full-api-demo-with-overrides.html → same body + override link`);
