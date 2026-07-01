@@ -455,6 +455,7 @@
        appear and easy to miss on these small swatches, so pair it with an
        instant floating label. -->
   <span
+    aria-hidden="true"
     class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-1 z-20 whitespace-nowrap rounded bg-slate-900 border border-white/10 px-1.5 py-0.5 text-[8px] font-mono text-slate-200 opacity-0 group-hover:opacity-100 transition-opacity"
   >{name}</span>
 {/snippet}
