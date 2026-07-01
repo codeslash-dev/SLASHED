@@ -2,6 +2,8 @@
 
 **Date:** 2026-07-01 · **Version audited:** 0.6.32 · **Scope:** full repo (`core/`, `optional/`, `configurator/`, `scripts/`, `tests/`, `docs/`)
 
+See [`technical-debt-remediation-plan.md`](./technical-debt-remediation-plan.md) for the sequenced, multi-PR plan to fix every finding below.
+
 This is a living audit. Re-run it periodically; mark resolved findings `RESOLVED` and tag new ones `NEW` rather than starting over.
 
 ## Tooling baseline (ground truth before manual review)
