@@ -1,7 +1,7 @@
 <script lang="ts">
   import { SlidersHorizontal, List } from 'lucide-svelte';
   import type { SlashedToken } from '../types';
-  import { DOMAIN_PATTERNS } from '../lib/domains';
+  import { DOMAIN_PATTERNS, domainOf } from '../lib/domains';
   import HomePanel from './panels/HomePanel.svelte';
   import ColorsPanel from './panels/ColorsPanel.svelte';
   import TypographyPanel from './panels/TypographyPanel.svelte';
@@ -46,26 +46,13 @@
 
   let patterns = $derived(DOMAIN_PATTERNS[domain] ?? [domain]);
 
+  // Uses domainOf() rather than the raw patterns list so this badge always
+  // agrees with App.svelte's "Reset N" count — matching against a single
+  // domain's patterns in isolation over-counts where patterns overlap (e.g.
+  // layout's "-bg-" also appears in color tokens like --sf-color-bg--active).
   let domainOverridesInTokenTab = $derived(
-    tokens.filter((t) =>
-      patterns.some((p) => t.name.includes(p)) && t.name in overrides
-    ).length
+    tokens.filter((t) => domainOf(t.name) === domain && t.name in overrides).length
   );
-
-  // Count overrides belonging to this domain for the reset button
-  let domainOverridesCount = $derived(
-    Object.keys(overrides).filter((k) =>
-      patterns.some((p) => k.includes(p))
-    ).length
-  );
-
-  function handleDomainReset() {
-    const patch: Record<string, null> = {};
-    for (const k of Object.keys(overrides)) {
-      if (patterns.some((p) => k.includes(p))) patch[k] = null;
-    }
-    onBulkChange(patch);
-  }
 </script>
 
 {#if NO_CONTROLS_TAB.has(domain)}
