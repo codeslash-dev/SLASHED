@@ -257,6 +257,33 @@
     onSave={handleSave}
   />
 
+  <!-- Mobile fold toggle: switch between the controls panel and the live
+       preview. Lives right under the header (not at the bottom) so it's
+       visible without scrolling and doesn't compete with the status bar. -->
+  <div class="md:hidden flex items-stretch border-b border-white/8 bg-[#0d0d14] shrink-0">
+    <button
+      onclick={() => { mobileView = "controls"; }}
+      aria-pressed={mobileView === "controls"}
+      class={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold transition-colors cursor-pointer ${
+        mobileView === "controls" ? "text-indigo-300 bg-indigo-500/10" : "text-slate-500 hover:text-slate-300"
+      }`}
+    >
+      <SlidersHorizontal class="w-3.5 h-3.5" /> Controls
+    </button>
+    <button
+      onclick={() => { mobileView = "preview"; }}
+      aria-pressed={mobileView === "preview"}
+      class={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold transition-colors cursor-pointer ${
+        mobileView === "preview" ? "text-indigo-300 bg-indigo-500/10" : "text-slate-500 hover:text-slate-300"
+      }`}
+    >
+      <Eye class="w-3.5 h-3.5" /> Preview
+      {#if overridesCount > 0}
+        <span class="w-4 h-4 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[8px] font-black">{overridesCount > 9 ? "9+" : overridesCount}</span>
+      {/if}
+    </button>
+  </div>
+
   <!-- Main body: sidebar + left panel + preview -->
   <div class="flex flex-1 min-h-0">
     <!-- Icon nav rail — hidden on mobile while the preview is folded open -->
@@ -268,8 +295,10 @@
       />
     </div>
 
-    <!-- Left domain panel — full width on mobile, fixed 360px on desktop -->
-    <div class={`w-full md:w-[360px] shrink-0 bg-[#0c0c15] border-r border-white/8 flex-col min-h-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
+    <!-- Left domain panel — fills remaining row width on mobile (the icon
+         rail above already claims its own space, so w-full here would mean
+         100% of the whole row and overflow past it), fixed 360px on desktop -->
+    <div class={`flex-1 min-w-0 md:flex-none md:w-[360px] bg-[#0c0c15] border-r border-white/8 flex-col min-h-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
       <!-- Panel heading -->
       <div class="h-9 flex items-center px-4 border-b border-white/6 shrink-0">
         <span data-testid="panel-heading" class="text-[11px] font-bold text-slate-300 uppercase tracking-widest flex-1">
@@ -306,31 +335,6 @@
         onTemplateChange={(t) => { previewTemplate = t; }}
       />
     </div>
-  </div>
-
-  <!-- Mobile fold toggle: switch between the controls panel and the live preview -->
-  <div class="md:hidden flex items-stretch border-t border-white/8 bg-[#0d0d14] shrink-0">
-    <button
-      onclick={() => { mobileView = "controls"; }}
-      aria-pressed={mobileView === "controls"}
-      class={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold transition-colors cursor-pointer ${
-        mobileView === "controls" ? "text-indigo-300 bg-indigo-500/10" : "text-slate-500 hover:text-slate-300"
-      }`}
-    >
-      <SlidersHorizontal class="w-3.5 h-3.5" /> Controls
-    </button>
-    <button
-      onclick={() => { mobileView = "preview"; }}
-      aria-pressed={mobileView === "preview"}
-      class={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold transition-colors cursor-pointer ${
-        mobileView === "preview" ? "text-indigo-300 bg-indigo-500/10" : "text-slate-500 hover:text-slate-300"
-      }`}
-    >
-      <Eye class="w-3.5 h-3.5" /> Preview
-      {#if overridesCount > 0}
-        <span class="w-4 h-4 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[8px] font-black">{overridesCount > 9 ? "9+" : overridesCount}</span>
-      {/if}
-    </button>
   </div>
 
   <!-- Status bar -->
