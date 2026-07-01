@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.33] - 2026-07-01
+
+### Bug Fixes
+- **configurator:** let the preview toolbar grow instead of clipping
+- **configurator:** keep preview toolbar to a single row on mobile
+
 ## [0.6.32] - 2026-07-01
 
 ### Bug Fixes
