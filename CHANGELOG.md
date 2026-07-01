@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.31] - 2026-07-01
+
+### Bug Fixes
+- **configurator:** hide swatch hover label from assistive tech
+- **configurator:** stop faking a 50-950 ramp for status colors
+- **configurator:** use host-presence check for embedded layout sizing
+- **configurator:** stop full-viewport sizing from clipping inside WP admin
+
 ## [0.6.30] - 2026-06-30
 
 ### Bug Fixes
