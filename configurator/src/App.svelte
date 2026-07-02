@@ -79,7 +79,7 @@
 
   // Save state — hasPendingChanges is derived so undo/redo update it automatically.
   let lastSavedOverrides = $state<Record<string, string>>(untrack(() => ({ ...overrides })));
-  let saveState = $state<'idle' | 'saving' | 'saved'>('idle');
+  let saveState = $state<'idle' | 'saving' | 'saved' | 'error'>('idle');
   let hasPendingChanges = $derived(!shallowEq(overrides, lastSavedOverrides));
   let saveStateTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -92,7 +92,7 @@
     if (!shallowEq(prev, next)) {
       past = [...past.slice(-49), prev];
       future = [];
-      if (saveState === 'saved') saveState = 'idle';
+      if (saveState === 'saved' || saveState === 'error') saveState = 'idle';
     }
     overrides = next;
   }
@@ -117,7 +117,7 @@
       }
     } catch (err) {
       console.warn('slashed: save failed', err);
-      saveState = 'idle';
+      saveState = 'error';
     }
   }
 
