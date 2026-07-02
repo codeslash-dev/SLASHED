@@ -521,18 +521,27 @@ ${BODIES[template]}
       else doc.documentElement.removeAttribute("data-lumlocker");
 
       // This single-mode iframe is the canonical resolver source.
+      // registerPreviewDoc() always bumps internally (both its
+      // activeDoc-unchanged early-return and its replace-doc path do), so an
+      // explicit bumpPreviewVersion() here would double-bump/double-clear
+      // resolveCache for no reason.
       registerPreviewDoc(doc);
-      bumpPreviewVersion();
     });
 
     return () => cancelAnimationFrame(rafId);
   });
 
   $effect(() => {
+    const _splitMode = splitMode;
     const _ov = overrides;
     const _lightCount = splitLightLoadCount;
     const _darkCount = splitDarkLoadCount;
     const _lock = lumlockerPreview.value;
+
+    // Split iframes only exist in the DOM under {#if splitMode} below — skip
+    // scheduling entirely rather than doing per-frame no-op work while the
+    // single-iframe effect above is the one actually driving the preview.
+    if (!_splitMode) return;
 
     const rafId = requestAnimationFrame(() => {
       const css = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
@@ -541,6 +550,12 @@ ${BODIES[template]}
         if (_lock) doc.documentElement.setAttribute("data-lumlocker", "");
         else doc.documentElement.removeAttribute("data-lumlocker");
       };
+
+      // registerPreviewDoc() (light pane) already bumps internally; only
+      // bump explicitly when the dark pane was the sole one updated this
+      // frame, so consumers still get notified without double-bumping.
+      let lightApplied = false;
+      let darkApplied = false;
 
       if (splitLightEl && _lightCount > 0) {
         const doc = splitLightEl.contentDocument;
@@ -551,6 +566,7 @@ ${BODIES[template]}
           applyLock(doc);
           // In split mode the light pane is the canonical resolver source.
           registerPreviewDoc(doc);
+          lightApplied = true;
         }
       }
       if (splitDarkEl && _darkCount > 0) {
@@ -560,9 +576,10 @@ ${BODIES[template]}
           if (styleEl) styleEl.textContent = css;
           injectFontsIntoDoc(doc, _ov);
           applyLock(doc);
+          darkApplied = true;
         }
       }
-      bumpPreviewVersion();
+      if (darkApplied && !lightApplied) bumpPreviewVersion();
     });
 
     return () => cancelAnimationFrame(rafId);
