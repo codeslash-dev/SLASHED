@@ -70,7 +70,7 @@ describe('StudioHeader', () => {
       expect(btn).toHaveTextContent('Saving…');
     });
 
-    test('saved: button reads "Saved" with a distinct title from a fresh, unattempted save', () => {
+    test('saved: button reads "Saved" (title matches idle\'s "no pending changes" state)', () => {
       render(StudioHeader, { props: { ...baseProps, hasPendingChanges: false, saveState: 'saved' } });
       const btn = screen.getByTitle('No unsaved changes');
       expect(btn).toHaveTextContent('Saved');
