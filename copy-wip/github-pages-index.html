@@ -65,9 +65,20 @@ layout: null
         letter-spacing: var(--sf-tracking-tight);
       }
       .site-nav .brand b { color: var(--sf-color-primary); }
+      /* The link cluster is the part that has room to give: on narrow
+         viewports it's dropped in favor of the primary CTA + theme toggle,
+         instead of wrapping into three cramped rows. */
+      @media (max-width: 47.99em) {
+        .nav-links { display: none; }
+        .nav-actions .btn { padding: var(--sf-space-2xs) var(--sf-space-s); font-size: var(--sf-text-xs); }
+      }
 
       /* ---------- hero ---------- */
-      .hero { position: relative; overflow: hidden; }
+      .hero {
+        position:   relative;
+        overflow:   hidden;
+        background-image: radial-gradient(ellipse 60% 50% at 50% 0%, var(--sf-color-primary-a10), transparent 70%);
+      }
       .hero::before {
         content:          "/";
         position:         absolute;
@@ -85,53 +96,70 @@ layout: null
         user-select:      none;
       }
 
-      /* The name unfolds into the manifesto. Pure CSS. */
+      /* The name unfolds into the manifesto. Pure CSS.
+         Default (touch / no-hover — i.e. almost every phone): there is no
+         working hover affordance on touch, so there's nothing to hide —
+         the words are shown straight away, wrapped like a normal heading.
+         Hover-capable devices instead get the collapsed letter-row below,
+         with each word unfolding on hover. */
+      .hero { container-type: inline-size; container-name: hero; }
       .acronym-hero {
         display:         flex;
         flex-wrap:       wrap;
+        row-gap:         var(--sf-space-2xs);
         justify-content: center;
         align-items:     baseline;
-        font-size:       var(--sf-text-4xl);
-        line-height:     var(--sf-display-l-line-height);
+        font-size:       var(--sf-text-3xl);
+        line-height:     var(--sf-display-s-line-height);
         letter-spacing:  var(--sf-tracking-tight);
         font-weight:     var(--sf-font-weight-display);
         color:           var(--sf-color-heading);
         margin:          0;
       }
-      .al { display: inline-flex; align-items: baseline; white-space: nowrap; cursor: default; }
+      .al { display: inline-flex; align-items: baseline; cursor: default; }
       .al b {
         background-image: var(--sf-gradient-brand);
         background-clip:  text;
         color:            transparent;
         transition:       opacity var(--sf-duration-fast) var(--sf-ease-out);
       }
-      .al .rest {
-        display:     inline-block;
-        width:       0;
-        opacity:     0;
-        overflow:    hidden;
-        font-weight: inherit; /* identical metrics to the row, so ch units agree */
+      .al .rest { font-weight: inherit; }
+      .al + .al::before {
+        content:      "/";
+        color:        var(--sf-color-border--strong);
+        font-weight:  var(--sf-font-weight-light);
+        margin-inline: 0.1em;
       }
-      /* Per-word widths (ch). Each word expands to exactly --w, and the
-         centered row is counter-shifted by --w/2, so the hovered letter
-         stays put under the cursor instead of sliding onto a neighbour
-         and re-firing the hover. */
-      .al:nth-of-type(1) { --w: 8.2ch; }
-      .al:nth-of-type(2) { --w: 3.1ch; }
-      .al:nth-of-type(3) { --w: 6ch; }
-      .al:nth-of-type(4) { --w: 7.8ch; }
-      .al:nth-of-type(5) { --w: 4.3ch; }
-      .al:nth-of-type(6) { --w: 5ch; }
-      .al:nth-of-type(7) { --w: 9.8ch; }
       @media (any-hover: hover) {
+        /* Per-word widths (ch). Each word expands to exactly --w, and the
+           centered row is counter-shifted by --w/2, so the hovered letter
+           stays put under the cursor instead of sliding onto a neighbour
+           and re-firing the hover. */
+        .al:nth-of-type(1) { --w: 8.2ch; }
+        .al:nth-of-type(2) { --w: 3.1ch; }
+        .al:nth-of-type(3) { --w: 6ch; }
+        .al:nth-of-type(4) { --w: 7.8ch; }
+        .al:nth-of-type(5) { --w: 4.3ch; }
+        .al:nth-of-type(6) { --w: 5ch; }
+        .al:nth-of-type(7) { --w: 9.8ch; }
         .acronym-hero {
-          /* Never wrap mid-interaction, and cap the size so the widest
-             unfolded word still fits the row on one line. */
-          flex-wrap: nowrap;
-          font-size: min(var(--sf-text-4xl), 4.4vw);
+          /* Never wrap mid-interaction, and cap the size — relative to the
+             hero's own container, with a floor so a hover-capable device
+             at a narrow width (a resized browser, a laptop touchscreen)
+             never shrinks below a readable size — so the widest unfolded
+             word still fits the row on one line. */
+          flex-wrap:  nowrap;
+          row-gap:    0;
+          font-size:  max(2.75rem, min(var(--sf-text-4xl), 4.4cqi));
+          line-height: var(--sf-display-l-line-height);
           transition: translate var(--sf-duration-slow) var(--sf-ease-out);
         }
+        .al { white-space: nowrap; }
         .al .rest {
+          display:     inline-block;
+          width:       0;
+          opacity:     0;
+          overflow:    hidden;
           transition: width   var(--sf-duration-slow) var(--sf-ease-out),
                       opacity var(--sf-duration-normal) var(--sf-ease-out);
         }
@@ -148,12 +176,6 @@ layout: null
       }
       @media (prefers-reduced-motion: reduce) {
         .acronym-hero, .al b, .al .rest { transition: none; }
-      }
-      .al + .al::before {
-        content:      "/";
-        color:        var(--sf-color-border--strong);
-        font-weight:  var(--sf-font-weight-light);
-        margin-inline: 0.06em;
       }
 
       .tagline {
@@ -197,22 +219,56 @@ layout: null
         text-transform: uppercase;
         color:       var(--sf-color-text--muted);
       }
+      .stats { padding-block: var(--sf-space-l); }
+      .stats > .stat:not(:first-child) { border-inline-start: 1px solid var(--sf-color-border--subtle); }
 
       /* ---------- cards ---------- */
       .card {
+        position:      relative;
         background:    var(--sf-color-surface);
         border:        1px solid var(--sf-color-border--subtle);
         border-radius: var(--sf-radius-l);
         padding:       var(--sf-space-m);
         box-shadow:    var(--sf-shadow-xs);
+        overflow:      hidden;
         transition:    box-shadow var(--sf-duration-fast) var(--sf-ease-out),
                        translate  var(--sf-duration-fast) var(--sf-ease-out),
                        border-color var(--sf-duration-fast) var(--sf-ease-out);
       }
       .card:hover { box-shadow: var(--sf-shadow-l); translate: 0 -3px; border-color: var(--sf-color-border); }
+      /* A quiet gradient edge on every card — the same brand gradient the
+         buttons and headings use, so the color shows up at rest too, not
+         only on hover. */
+      .card::before {
+        content:           "";
+        position:          absolute;
+        inset-block-start: 0;
+        inset-inline:      0;
+        block-size:        3px;
+        background-image:  var(--sf-gradient-brand);
+      }
       .card h3 { font-size: var(--sf-text-m); }
       .card p  { font-size: var(--sf-text-s); color: var(--sf-color-text--secondary); }
       .card .demo { margin-block-start: auto; }
+
+      /* The featured tile spans two rows — center its content as a group
+         instead of anchoring the demo to the bottom, which left a dead
+         zone the height of a whole extra card. */
+      .sf-bento-featured { justify-content: center; }
+      .sf-bento-featured .demo { margin-block-start: 0; }
+      .sf-bento-featured .ramp i { height: var(--sf-space-4xl); }
+      .ramp-label {
+        display:     block;
+        font-size:   var(--sf-text-xs);
+        font-weight: var(--sf-font-weight-semibold);
+        color:       var(--sf-color-text--muted);
+        margin-block-end: var(--sf-space-2xs);
+      }
+      .ramp-alpha {
+        background:    var(--sf-gradient-brand);
+        border-radius: var(--sf-radius-m);
+        padding:       var(--sf-space-2xs);
+      }
 
       /* card demos — every visual below is live framework tokens */
       .ramp { display: flex; gap: var(--sf-space-px); }
@@ -265,6 +321,14 @@ layout: null
         color:     var(--sf-color-text--secondary);
       }
 
+      /* A quiet tinted band for visual rhythm between the plain-bg
+         sections above and below it. */
+      .band-surface {
+        background: var(--sf-color-surface);
+        border-block: 1px solid var(--sf-color-border--subtle);
+      }
+      .band-surface .card { background: var(--sf-color-bg); }
+
       /* ---------- dark band (data-theme demo) ---------- */
       .band-dark {
         background: var(--sf-color-bg);
@@ -301,6 +365,9 @@ layout: null
       .doc-list a small { color: var(--sf-color-text--muted); margin-inline-start: var(--sf-space-2xs); }
 
       .footer-meta, .footer-meta a { color: var(--sf-color-text--muted); font-size: var(--sf-text-xs); }
+      /* The hover hint only makes sense where hovering is a thing. */
+      .hover-hint { display: none; }
+      @media (any-hover: hover) { .hover-hint { display: inline; } }
 
       .eyebrow {
         font-size:      var(--sf-text-xs);
@@ -321,13 +388,15 @@ layout: null
 <body>
 
   <header class="sf-section sf-section--xs sf-section--guttered">
-    <nav class="sf-container sf-container--wide sf-cluster sf-cluster--between site-nav" aria-label="Site">
+    <nav class="sf-container sf-container--wide sf-cluster sf-cluster--between sf-cluster--no-wrap site-nav" aria-label="Site">
       <a class="brand" href="/">SLASHED<b>/</b></a>
-      <div class="sf-cluster sf-cluster--s">
+      <div class="nav-links sf-cluster sf-cluster--s sf-cluster--no-wrap">
         <a href="/docs/architecture">Docs</a>
         <a href="/docs/tokens">Tokens</a>
         <a href="/docs/demo.html">Demo</a>
         <a href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
+      </div>
+      <div class="nav-actions sf-cluster sf-cluster--xs sf-cluster--no-wrap">
         <a class="btn btn--primary" href="/configurator/">Configurator&nbsp;→</a>
         <button class="btn btn--quiet" id="theme-toggle" type="button" aria-label="Toggle color scheme">Auto</button>
       </div>
@@ -355,13 +424,13 @@ layout: null
           <a class="btn btn--quiet" href="/demos/full-api-demo.html">Full API Demo</a>
           <a class="btn btn--quiet" href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
         </div>
-        <p class="footer-meta">Psst — hover the name. And this page is styled by <code>slashed.optimal.css</code> itself: switch your OS to dark mode and watch it follow.</p>
+        <p class="footer-meta"><span class="hover-hint">Psst — hover the name. </span>This page is styled by <code>slashed.optimal.css</code> itself: switch your OS to dark mode and watch it follow.</p>
       </div>
     </section>
 
     <!-- Stats strip -->
     <section class="sf-section sf-section--s sf-section--guttered">
-      <dl class="sf-container sf-container--wide sf-grid sf-grid--fit sf-grid--s sf-gap--m" style="text-align: center; margin: 0;">
+      <dl class="stats sf-container sf-container--wide sf-grid sf-grid--fit sf-grid--s sf-gap--m" style="text-align: center; margin: 0;">
         <div class="stat sf-tabular-nums"><dt>685</dt><dd>design tokens</dd></div>
         <div class="stat sf-tabular-nums"><dt>15</dt><dd>cascade layers</dd></div>
         <div class="stat sf-tabular-nums"><dt>0</dt><dd>lines of frontend JS</dd></div>
@@ -378,12 +447,21 @@ layout: null
         </div>
         <div class="sf-bento sf-bento--3 sf-gap--m">
 
-          <div class="card sf-bento-featured sf-stack sf-stack--s sf-entrance--fade-up">
-            <h3>🎨 OKLCH Color Engine</h3>
-            <p>Six brand colors in, a full palette out. Hover states, tints, shades, status colors, and the entire dark palette derive automatically in plain CSS. This ramp is not an image — it's the live <code>--sf-color-primary</code> scale, 50→950:</p>
-            <div class="demo sf-stack sf-stack--xs">
-              <div class="ramp" aria-hidden="true">
-                <i style="background: var(--sf-color-primary-50)"></i><i style="background: var(--sf-color-primary-100)"></i><i style="background: var(--sf-color-primary-200)"></i><i style="background: var(--sf-color-primary-300)"></i><i style="background: var(--sf-color-primary-400)"></i><i style="background: var(--sf-color-primary-500)"></i><i style="background: var(--sf-color-primary-600)"></i><i style="background: var(--sf-color-primary-700)"></i><i style="background: var(--sf-color-primary-800)"></i><i style="background: var(--sf-color-primary-900)"></i><i style="background: var(--sf-color-primary-950)"></i>
+          <div class="card sf-bento-featured sf-stack sf-stack--m sf-entrance--fade-up">
+            <h3>OKLCH Color Engine</h3>
+            <p>Six brand colors in, a full palette out. Hover states, tints, shades, status colors, and the entire dark palette all derive in plain CSS — nothing on this card is an image.</p>
+            <div class="demo sf-stack sf-stack--m">
+              <div>
+                <span class="ramp-label"><code>--sf-color-primary</code> · 50 → 950</span>
+                <div class="ramp" aria-hidden="true">
+                  <i style="background: var(--sf-color-primary-50)"></i><i style="background: var(--sf-color-primary-100)"></i><i style="background: var(--sf-color-primary-200)"></i><i style="background: var(--sf-color-primary-300)"></i><i style="background: var(--sf-color-primary-400)"></i><i style="background: var(--sf-color-primary-500)"></i><i style="background: var(--sf-color-primary-600)"></i><i style="background: var(--sf-color-primary-700)"></i><i style="background: var(--sf-color-primary-800)"></i><i style="background: var(--sf-color-primary-900)"></i><i style="background: var(--sf-color-primary-950)"></i>
+                </div>
+              </div>
+              <div>
+                <span class="ramp-label"><code>--sf-color-primary-a5</code> → <code>a80</code> · alpha ramp</span>
+                <div class="ramp ramp-alpha" aria-hidden="true">
+                  <i style="background: var(--sf-color-primary-a5)"></i><i style="background: var(--sf-color-primary-a10)"></i><i style="background: var(--sf-color-primary-a30)"></i><i style="background: var(--sf-color-primary-a50)"></i><i style="background: var(--sf-color-primary-a80)"></i>
+                </div>
               </div>
               <div class="sf-cluster sf-cluster--xs">
                 <span class="chip" style="background: var(--sf-color-primary); color: var(--sf-color-text--on-primary)">primary</span>
@@ -398,7 +476,7 @@ layout: null
           </div>
 
           <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
-            <h3>🌗 Automatic Dark Mode</h3>
+            <h3>Automatic Dark Mode</h3>
             <p>Follows the OS by default. Mix modes on one page with a single attribute — like these two panels:</p>
             <div class="demo sf-cluster sf-cluster--xs" style="align-items: stretch;">
               <div class="mini" data-theme="light">Aa <small>data-theme="light"</small></div>
@@ -407,7 +485,7 @@ layout: null
           </div>
 
           <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
-            <h3>📐 Fluid Type &amp; Space</h3>
+            <h3>Fluid Type &amp; Space</h3>
             <p>Modular scales computed in the browser from 12 dials using <code>pow()</code> and <code>clamp()</code> — phone to 4K, no breakpoints. Resize the window:</p>
             <div class="demo type-row" aria-hidden="true">
               <span style="font-size: var(--sf-text-s)">Aa</span>
@@ -417,7 +495,7 @@ layout: null
           </div>
 
           <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
-            <h3>🔩 @layer Architecture</h3>
+            <h3>@layer Architecture</h3>
             <p>Fifteen named cascade layers in a fixed order. No <code>!important</code>, no specificity wars:</p>
             <div class="demo layer-stack" aria-hidden="true">
               <span style="background: var(--sf-color-primary-50);  color: var(--sf-color-primary-900)">tokens → reset → base…</span>
@@ -427,14 +505,14 @@ layout: null
           </div>
 
           <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
-            <h3>⚡ Zero Build Step</h3>
+            <h3>Zero Build Step</h3>
             <p>Pure CSS custom properties. No Node, no Sass, no purge step. The entire install is:</p>
             <p class="demo"><code>&lt;link rel="stylesheet" href="slashed.optimal.css"&gt;</code></p>
           </div>
 
           <a class="card card--link sf-entrance--fade-up" href="/configurator/">
             <span class="sf-stack sf-stack--xs">
-              <h3>🛠️ Visual Configurator</h3>
+              <h3>Visual Configurator</h3>
               <p>Tune every token with a live light/dark preview, export override CSS, or share a config link — in the browser, nothing to install.</p>
               <span class="demo" style="color: var(--sf-color-primary); font-weight: var(--sf-font-weight-interactive);">Open it →</span>
             </span>
@@ -445,7 +523,7 @@ layout: null
     </section>
 
     <!-- Philosophy — the acronym, spelled out -->
-    <section class="sf-section sf-section--l sf-section--guttered">
+    <section class="sf-section sf-section--l sf-section--guttered band-surface">
       <div class="sf-container sf-container--wide sf-stack sf-stack--m">
         <div class="sf-stack sf-stack--xs">
           <p class="eyebrow">Philosophy</p>
