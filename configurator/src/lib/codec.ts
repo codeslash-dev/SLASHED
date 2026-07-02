@@ -10,6 +10,9 @@ declare const __SLASHED_VERSION__: string;
 
 const frameworkVersion: string = typeof __SLASHED_VERSION__ !== "undefined" ? __SLASHED_VERSION__ : "0.0.0";
 
+export const CODEC_VERSION = 2;
+export const SHARE_PARAM = "c";
+
 const MAX_VALUE_BYTES = 65535;
 const MAX_ID = 65535;
 const textEncoder = new TextEncoder();
@@ -106,7 +109,7 @@ export function encode(overrides: Record<string, string>, registry: any = tokens
     return "";
   }
   const out = new Uint8Array(1 + compressed.length);
-  out[0] = 2;
+  out[0] = CODEC_VERSION;
   out.set(compressed, 1);
   return bytesToBase64Url(out);
 }
@@ -117,8 +120,8 @@ export function decode(code: string, registry: any = tokensData, options: any = 
   const rawBytes = base64UrlToBytes(trimmed);
   if (!rawBytes || rawBytes.length === 0) return {};
 
-  if (rawBytes[0] !== 2) {
-    console.warn(`[codec] unknown config-code version ${rawBytes[0]} (expected 2); ignoring.`);
+  if (rawBytes[0] !== CODEC_VERSION) {
+    console.warn(`[codec] unknown config-code version ${rawBytes[0]} (expected ${CODEC_VERSION}); ignoring.`);
     return {};
   }
 
@@ -253,11 +256,13 @@ export function encodeOverrides(overrides: Record<string, string>): string {
   return encode(overrides, tokensData);
 }
 
+const SHARE_PARAM_RE = new RegExp(`[#&]?${SHARE_PARAM}=([^&]+)`);
+
 export function readShareFromHash(hashOrParam: string, options: any = {}): Record<string, string> {
   const knownTokensSet = new Set(tokensData.tokens.map((tok: any) => tok.name));
   const isKnown = options.isKnown ?? ((name: string) => knownTokensSet.has(name));
   let trimmed = String(hashOrParam ?? "").trim();
-  const match = trimmed.match(/[#&]?c=([^&]+)/);
+  const match = trimmed.match(SHARE_PARAM_RE);
   if (match) {
     trimmed = match[1];
   }
@@ -269,14 +274,11 @@ export function buildShareUrl(overrides: Record<string, string>, baseUrlOverride
   const baseUrl = baseUrlOverride ?? fallbackUrl;
   const url = new URL(baseUrl);
   const code = encodeOverrides(overrides);
-  url.hash = code ? `c=${code}` : "";
+  url.hash = code ? `${SHARE_PARAM}=${code}` : "";
   return url.toString();
 }
 
 export function readShareFromHashIfPresent(hash: string, options: any = {}): Record<string, string> {
   const value = String(hash ?? "");
-  return value.includes("c=") ? readShareFromHash(value, options) : {};
+  return value.includes(`${SHARE_PARAM}=`) ? readShareFromHash(value, options) : {};
 }
-
-export const CODEC_VERSION = 2;
-export const SHARE_PARAM = "c";
