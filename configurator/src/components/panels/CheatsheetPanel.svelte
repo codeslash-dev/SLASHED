@@ -5,7 +5,7 @@
 <script lang="ts">
   import classesData from '../../data/classes.generated.json';
   import tokensData from '../../data/api-index.generated.json';
-  import { Copy, Check } from 'lucide-svelte';
+  import { Copy, Check } from '@lucide/svelte';
   import type { SlashedClass } from '../../types';
 
   const classes = classesData.classes;

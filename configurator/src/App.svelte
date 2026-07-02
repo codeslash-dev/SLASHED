@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { SlidersHorizontal, Eye, RotateCcw } from 'lucide-svelte';
+  import { SlidersHorizontal, Eye, RotateCcw } from '@lucide/svelte';
   import type { PreviewTemplate, SlashedToken, ApiIndex } from './types';
   import StudioHeader from './components/shell/StudioHeader.svelte';
   import SidebarNav from './components/shell/SidebarNav.svelte';

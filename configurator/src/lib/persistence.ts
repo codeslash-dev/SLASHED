@@ -14,6 +14,7 @@
  * chrome + preview reflect the current overrides immediately.
  */
 import { readShareFromHashIfPresent, encodeOverrides, generateCSS } from "./codec";
+import { isStringRecord } from "./savedThemes";
 
 const LS_KEY = "slashed-studio/overrides/v2";
 
@@ -216,7 +217,10 @@ export function loadInitialOverrides(): Record<string, string> {
   }
   const local = localStorage.getItem(LS_KEY);
   if (local) {
-    try { return JSON.parse(local); } catch { /* fall through */ }
+    try {
+      const parsed: unknown = JSON.parse(local);
+      if (isStringRecord(parsed)) return parsed;
+    } catch { /* fall through */ }
   }
   return {};
 }
