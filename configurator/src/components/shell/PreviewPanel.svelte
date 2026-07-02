@@ -481,35 +481,51 @@ ${BODIES[template]}
   let htmlLight = $derived(buildIframeHTML({}, "light", previewMotion, previewTemplate, frameworkCSSStatic));
   let htmlDark = $derived(buildIframeHTML({}, "dark", previewMotion, previewTemplate, frameworkCSSStatic));
 
+  // SL-020: the DOM writes below (style/attribute mutation on the iframe
+  // document, plus bumpPreviewVersion()'s resolveCache.clear()) are cheap
+  // individually but these effects re-run on every override tick — e.g. every
+  // input event while dragging a slider, many times per animation frame.
+  // rAF-coalescing collapses a burst of same-frame reruns into a single
+  // apply using the latest captured values ("coalesce to latest"), since only
+  // the frame actually painted to the user matters. The effect body above
+  // this comment still runs synchronously on every change (so Svelte's
+  // dependency tracking is unaffected) — only the DOM-writing work below is
+  // deferred. The `return () => cancelAnimationFrame(rafId)` cleanup fires
+  // before Svelte re-runs this effect (or on unmount), so a still-pending
+  // frame from a superseded run is cancelled before scheduling the next one.
   $effect(() => {
     const _ov = overrides;
     const _theme = previewTheme;
     const _count = loadCount;
     const _lock = lumlockerPreview.value;
 
-    const iframe = iframeEl;
-    if (_count === 0 || !iframe) return;
-    const doc = iframe.contentDocument;
-    if (!doc) return;
+    const rafId = requestAnimationFrame(() => {
+      const iframe = iframeEl;
+      if (_count === 0 || !iframe) return;
+      const doc = iframe.contentDocument;
+      if (!doc) return;
 
-    const styleEl = doc.getElementById("slashed-overrides");
-    if (styleEl) {
-      styleEl.textContent = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
-    }
+      const styleEl = doc.getElementById("slashed-overrides");
+      if (styleEl) {
+        styleEl.textContent = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
+      }
 
-    injectFontsIntoDoc(doc, _ov);
+      injectFontsIntoDoc(doc, _ov);
 
-    // Framework activates dark mode via [data-theme="dark"] (color-scheme +
-    // light-dark()), NOT a class — keep this in sync with buildIframeHTML.
-    doc.documentElement.setAttribute("data-theme", _theme);
+      // Framework activates dark mode via [data-theme="dark"] (color-scheme +
+      // light-dark()), NOT a class — keep this in sync with buildIframeHTML.
+      doc.documentElement.setAttribute("data-theme", _theme);
 
-    // Luminance lock preview — mirrors :root[data-lumlocker] in core/themes.css.
-    if (_lock) doc.documentElement.setAttribute("data-lumlocker", "");
-    else doc.documentElement.removeAttribute("data-lumlocker");
+      // Luminance lock preview — mirrors :root[data-lumlocker] in core/themes.css.
+      if (_lock) doc.documentElement.setAttribute("data-lumlocker", "");
+      else doc.documentElement.removeAttribute("data-lumlocker");
 
-    // This single-mode iframe is the canonical resolver source.
-    registerPreviewDoc(doc);
-    bumpPreviewVersion();
+      // This single-mode iframe is the canonical resolver source.
+      registerPreviewDoc(doc);
+      bumpPreviewVersion();
+    });
+
+    return () => cancelAnimationFrame(rafId);
   });
 
   $effect(() => {
@@ -517,34 +533,39 @@ ${BODIES[template]}
     const _lightCount = splitLightLoadCount;
     const _darkCount = splitDarkLoadCount;
     const _lock = lumlockerPreview.value;
-    const css = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
 
-    const applyLock = (doc: Document) => {
-      if (_lock) doc.documentElement.setAttribute("data-lumlocker", "");
-      else doc.documentElement.removeAttribute("data-lumlocker");
-    };
+    const rafId = requestAnimationFrame(() => {
+      const css = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
 
-    if (splitLightEl && _lightCount > 0) {
-      const doc = splitLightEl.contentDocument;
-      if (doc) {
-        const styleEl = doc.getElementById("slashed-overrides");
-        if (styleEl) styleEl.textContent = css;
-        injectFontsIntoDoc(doc, _ov);
-        applyLock(doc);
-        // In split mode the light pane is the canonical resolver source.
-        registerPreviewDoc(doc);
+      const applyLock = (doc: Document) => {
+        if (_lock) doc.documentElement.setAttribute("data-lumlocker", "");
+        else doc.documentElement.removeAttribute("data-lumlocker");
+      };
+
+      if (splitLightEl && _lightCount > 0) {
+        const doc = splitLightEl.contentDocument;
+        if (doc) {
+          const styleEl = doc.getElementById("slashed-overrides");
+          if (styleEl) styleEl.textContent = css;
+          injectFontsIntoDoc(doc, _ov);
+          applyLock(doc);
+          // In split mode the light pane is the canonical resolver source.
+          registerPreviewDoc(doc);
+        }
       }
-    }
-    if (splitDarkEl && _darkCount > 0) {
-      const doc = splitDarkEl.contentDocument;
-      if (doc) {
-        const styleEl = doc.getElementById("slashed-overrides");
-        if (styleEl) styleEl.textContent = css;
-        injectFontsIntoDoc(doc, _ov);
-        applyLock(doc);
+      if (splitDarkEl && _darkCount > 0) {
+        const doc = splitDarkEl.contentDocument;
+        if (doc) {
+          const styleEl = doc.getElementById("slashed-overrides");
+          if (styleEl) styleEl.textContent = css;
+          injectFontsIntoDoc(doc, _ov);
+          applyLock(doc);
+        }
       }
-    }
-    bumpPreviewVersion();
+      bumpPreviewVersion();
+    });
+
+    return () => cancelAnimationFrame(rafId);
   });
 
   let isConstrained = $derived(previewWidth !== "fluid");
