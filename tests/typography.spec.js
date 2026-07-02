@@ -5,14 +5,12 @@
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { renderWithBundle } from './render-helpers.js';
 
 const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
-const BUNDLE  = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
 
 async function setup(page, html) {
-  await page.setViewportSize({ width: 1200, height: 900 });
-  await page.setContent(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
-  await page.addStyleTag({ path: BUNDLE });
+  await renderWithBundle(page, html, { width: 1200, height: 900 });
 }
 
 // ── Heading size scale ───────────────────────────────────────────

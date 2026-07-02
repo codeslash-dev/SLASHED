@@ -4,6 +4,9 @@
  * Verifies the mathematical invariant: dark text on a light background
  * always meets 4.5:1 across the ranges used by the framework's defaults.
  *
+ * The P2/P7/P8/P10 numbering gaps (no P1, P3-P6, P9 test files) are
+ * explained in tests/README.md — not dead history, don't renumber.
+ *
  * Run: node --test tests/tier1-p10-contrast.test.js
  */
 import { test, describe } from 'node:test';

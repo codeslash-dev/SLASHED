@@ -1,14 +1,10 @@
 // @ts-check
 // Behavioural tests for core/layout.css — every layout primitive.
 import { test, expect } from '@playwright/test';
-import path from 'node:path';
-
-const BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
+import { renderWithBundle } from './render-helpers.js';
 
 async function setup(page, html) {
-  await page.setViewportSize({ width: 1200, height: 900 });
-  await page.setContent(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
-  await page.addStyleTag({ path: BUNDLE });
+  await renderWithBundle(page, html, { width: 1200, height: 900 });
 }
 
 // ── .sf-section ────────────────────────────────────────────────

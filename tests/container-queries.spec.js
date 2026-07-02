@@ -5,9 +5,7 @@
 // setupInContainer pins font-size to 16px so em-based CQ thresholds are stable
 // across browsers (WebKit 26+ resolves em against inherited font-size, not 16px).
 import { test, expect } from '@playwright/test';
-import path from 'node:path';
-
-const BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
+import { BUNDLE } from './render-helpers.js';
 
 // Wraps grid HTML in a container of a known inline-size so anonymous
 // @container queries fire against that width, not the viewport.

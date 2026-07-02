@@ -5,6 +5,7 @@
 
 import { deflateSync, inflateSync } from "fflate";
 import tokensData from "../data/token-registry.generated.json";
+import type { TokenRegistry, DecodeOptions, ShareOptions } from "../types";
 
 declare const __SLASHED_VERSION__: string;
 
@@ -13,6 +14,11 @@ const frameworkVersion: string = typeof __SLASHED_VERSION__ !== "undefined" ? __
 export const CODEC_VERSION = 2;
 export const SHARE_PARAM = "c";
 
+// SL-026: MAX_VALUE_BYTES and MAX_ID happen to share the same value (both
+// bounded by the 2-byte length-prefix / id field in the wire format — see
+// encode()'s payload layout below) but are independent limits for unrelated
+// things (a value's encoded byte length vs. a token's registry id). Don't
+// assume changing one should change the other.
 const MAX_VALUE_BYTES = 65535;
 const MAX_ID = 65535;
 const textEncoder = new TextEncoder();
@@ -24,7 +30,7 @@ function isValidId(id: number): boolean {
   return Number.isInteger(id) && id >= 0 && id <= MAX_ID;
 }
 
-function buildNameToIdMap(registry: any): Map<string, number> {
+function buildNameToIdMap(registry: TokenRegistry): Map<string, number> {
   const nameToId = new Map<string, number>();
   for (const entry of registry?.tokens ?? []) {
     if (entry && !entry.removed && typeof entry.name === "string" && isValidId(entry.id)) {
@@ -34,7 +40,7 @@ function buildNameToIdMap(registry: any): Map<string, number> {
   return nameToId;
 }
 
-function buildIdToNameMap(registry: any): Map<number, string> {
+function buildIdToNameMap(registry: TokenRegistry): Map<number, string> {
   const idToName = new Map<number, string>();
   for (const entry of registry?.tokens ?? []) {
     if (entry && typeof entry.name === "string" && Number.isInteger(entry.id)) {
@@ -72,7 +78,7 @@ function base64UrlToBytes(value: string): Uint8Array | null {
   }
 }
 
-export function encode(overrides: Record<string, string>, registry: any = tokensData): string {
+export function encode(overrides: Record<string, string>, registry: TokenRegistry = tokensData): string {
   if (!overrides || typeof overrides !== "object") return "";
   const nameToId = buildNameToIdMap(registry);
   const entries: { id: number; valueBytes: Uint8Array }[] = [];
@@ -114,7 +120,7 @@ export function encode(overrides: Record<string, string>, registry: any = tokens
   return bytesToBase64Url(out);
 }
 
-export function decode(code: string, registry: any = tokensData, options: any = {}): Record<string, string> {
+export function decode(code: string, registry: TokenRegistry = tokensData, options: DecodeOptions = {}): Record<string, string> {
   const trimmed = String(code ?? "").trim();
   if (trimmed === "") return {};
   const rawBytes = base64UrlToBytes(trimmed);
@@ -258,8 +264,8 @@ export function encodeOverrides(overrides: Record<string, string>): string {
 
 const SHARE_PARAM_RE = new RegExp(`[#&]?${SHARE_PARAM}=([^&]+)`);
 
-export function readShareFromHash(hashOrParam: string, options: any = {}): Record<string, string> {
-  const knownTokensSet = new Set(tokensData.tokens.map((tok: any) => tok.name));
+export function readShareFromHash(hashOrParam: string, options: ShareOptions = {}): Record<string, string> {
+  const knownTokensSet = new Set(tokensData.tokens.map((tok) => tok.name));
   const isKnown = options.isKnown ?? ((name: string) => knownTokensSet.has(name));
   let trimmed = String(hashOrParam ?? "").trim();
   const match = trimmed.match(SHARE_PARAM_RE);
@@ -278,7 +284,7 @@ export function buildShareUrl(overrides: Record<string, string>, baseUrlOverride
   return url.toString();
 }
 
-export function readShareFromHashIfPresent(hash: string, options: any = {}): Record<string, string> {
+export function readShareFromHashIfPresent(hash: string, options: ShareOptions = {}): Record<string, string> {
   const value = String(hash ?? "");
   return value.includes(`${SHARE_PARAM}=`) ? readShareFromHash(value, options) : {};
 }

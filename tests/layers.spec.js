@@ -1,6 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import path from 'node:path';
+import { BUNDLE } from './render-helpers.js';
 
 /**
  * Layer ordering invariant test.
@@ -26,7 +26,7 @@ test.describe('Layer ordering', () => {
       </style>
       <div class="layer-check">test</div>
     `);
-    await page.addStyleTag({ path: path.join(process.cwd(), 'badges', 'slashed.optimal.css') });
+    await page.addStyleTag({ path: BUNDLE });
 
     const color = await page.locator('.layer-check').evaluate(el =>
       getComputedStyle(el).color
@@ -42,7 +42,7 @@ test.describe('Layer ordering', () => {
       </style>
       <div class="layer-check-2">test</div>
     `);
-    await page.addStyleTag({ path: path.join(process.cwd(), 'badges', 'slashed.optimal.css') });
+    await page.addStyleTag({ path: BUNDLE });
 
     const opacity = await page.locator('.layer-check-2').evaluate(el =>
       getComputedStyle(el).opacity
@@ -58,7 +58,7 @@ test.describe('Layer ordering', () => {
       </style>
       <div class="layer-check-3">test</div>
     `);
-    await page.addStyleTag({ path: path.join(process.cwd(), 'badges', 'slashed.optimal.css') });
+    await page.addStyleTag({ path: BUNDLE });
 
     const opacity = await page.locator('.layer-check-3').evaluate(el =>
       getComputedStyle(el).opacity
@@ -76,7 +76,7 @@ test.describe('Layer ordering', () => {
       </style>
       <div class="layer-check-4">test</div>
     `);
-    await page.addStyleTag({ path: path.join(process.cwd(), 'badges', 'slashed.optimal.css') });
+    await page.addStyleTag({ path: BUNDLE });
 
     const color = await page.locator('.layer-check-4').evaluate(el =>
       getComputedStyle(el).color
@@ -94,7 +94,7 @@ test.describe('Layer ordering', () => {
       </style>
       <div class="layer-check-5">test</div>
     `);
-    await page.addStyleTag({ path: path.join(process.cwd(), 'badges', 'slashed.optimal.css') });
+    await page.addStyleTag({ path: BUNDLE });
 
     const opacity = await page.locator('.layer-check-5').evaluate(el =>
       getComputedStyle(el).opacity
@@ -113,7 +113,7 @@ test.describe('Layer ordering', () => {
       </style>
       <div class="layer-check-6">test</div>
     `);
-    await page.addStyleTag({ path: path.join(process.cwd(), 'badges', 'slashed.optimal.css') });
+    await page.addStyleTag({ path: BUNDLE });
 
     const opacity = await page.locator('.layer-check-6').evaluate(el =>
       getComputedStyle(el).opacity

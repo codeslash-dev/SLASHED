@@ -802,6 +802,7 @@
   },
   "classes": {
     "no-motion": "Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference.",
+    "sf-section--guttered": "Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding.",
     "sf-clickable-parent": "Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>.",
     "sf-clickable-parent__overlay": "The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks.",
     "sf-focus-parent": "Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>.",

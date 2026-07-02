@@ -89,6 +89,7 @@ function readCatalogueTokens() {
 
 function main() {
   const registry = readRegistry();
+  const previousCount = registry.tokens.length;
   const catalogue = readCatalogueTokens();
   const known = new Map(registry.tokens.map((t) => [t.name, t]));
 
@@ -129,6 +130,18 @@ function main() {
 
   // Stable on-disk order: by id (= creation order). nextId stays monotonic.
   registry.tokens.sort((a, b) => a.id - b.id);
+
+  // Regression guard (SL-010/SL-012): this file's own contract (see header
+  // comment) is append-only — entries are flagged `removed`, never deleted.
+  // A shrink here can only mean a bug (e.g. a bad catalogue read truncating
+  // `registry.tokens` before the merge), never a legitimate edit.
+  if (registry.tokens.length < previousCount) {
+    throw new Error(
+      `[docs:registry] refusing to write ${OUT}: entry count shrank from ` +
+        `${previousCount} to ${registry.tokens.length}. This registry is append-only ` +
+        `(tokens are flagged removed, never deleted) — a shrink means a bug upstream, not an intentional edit.`
+    );
+  }
 
   fs.writeFileSync(OUT, JSON.stringify(registry, null, 2) + '\n', 'utf8');
 

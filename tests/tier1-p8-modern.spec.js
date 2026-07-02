@@ -6,6 +6,9 @@
  *             This proves that adding core/tokens.color-fallbacks.css before
  *             core/tokens.css did NOT change any resolved value on modern browsers.
  *
+ * The P2/P7/P8/P10 numbering gaps (no P1, P3-P6, P9 test files) are
+ * explained in tests/README.md — not dead history, don't renumber.
+ *
  * Regenerate baseline: BASELINE_CAPTURE=1 npx playwright test tests/tier1-p8-modern.spec.js --project=chromium
  * Run: npx playwright test tests/tier1-p8-modern.spec.js --project=chromium
  */
