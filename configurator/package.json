@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "fflate": "^0.8.3",
-    "lucide-svelte": "^0.468.0",
-    "motion": "^12.23.24"
+    "lucide-svelte": "^0.468.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
