@@ -13,11 +13,12 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { readFile as readFileLib } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
 function readFile(rel) {
-  return fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  return readFileLib(rel, ROOT);
 }
 
 function writeFile(rel, content) {

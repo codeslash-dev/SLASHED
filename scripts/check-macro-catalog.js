@@ -14,6 +14,7 @@
 
 import fs   from 'node:fs';
 import path from 'node:path';
+import { stripComments, stripStrings } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -39,14 +40,6 @@ const SKIP_IN_CSS = new Set([
 const SKIP_IN_DOCS = new Set([
   '.sf-frame', '.sf-reel',
 ]);
-
-function stripComments(css) {
-  return css.replace(/\/\*[\s\S]*?\*\//g, '');
-}
-
-function stripStrings(css) {
-  return css.replace(/"[^"]*"|'[^']*'/g, '""');
-}
 
 // ── 1. Collect classes from CSS ───────────────────────────────────────────────
 

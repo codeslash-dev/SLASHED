@@ -5,6 +5,7 @@
 import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES } from './registry-sources.js';
+import { stripComments, readValue, requireFile } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -17,27 +18,9 @@ const FILE_TITLES = {
 
 const SOURCES = TOKEN_FILES.map(f => ({ file: f, title: `${FILE_TITLES[f]} (\`${f}\`)` }));
 
-// Read the value of a custom-property declaration starting at `:` index,
-// honouring nested parentheses so light-dark()/oklch() values stay intact.
-function readValue(css, colonIdx) {
-  let depth = 0;
-  let out = '';
-  for (let i = colonIdx + 1; i < css.length; i++) {
-    const ch = css[i];
-    if (ch === '(') depth++;
-    else if (ch === ')') depth--;
-    else if (ch === ';' && depth === 0) break;
-    out += ch;
-  }
-  return out.replace(/\s+/g, ' ').trim();
-}
-
 function extract(file) {
   const abs = path.join(ROOT, file);
-  if (!fs.existsSync(abs)) {
-    throw new Error(`[docs:tokens] Missing canonical token source file: ${abs}`);
-  }
-  const css = fs.readFileSync(abs, 'utf8').replace(/\/\*[\s\S]*?\*\//g, ''); // strip comments first
+  const css = stripComments(requireFile(file, ROOT, `[docs:tokens] Missing canonical token source file: ${abs}`));
   const rows = new Map(); // name -> value (last declaration wins)
 
   // @property registrations: initial-value — scanned AFTER comment stripping

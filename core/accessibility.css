@@ -157,6 +157,11 @@
   }
 
   /* Clickable-parent */
+  /* Perf note (SL-002): the two selector groups below each combine multiple
+     :has()-bearing branches, forcing subtree re-evaluation on DOM mutation
+     inside .sf-clickable-parent. Fine for typical card/list-item usage; avoid
+     applying this class to large (100+ node) grids or lists without profiling
+     first. */
   .sf-clickable-parent {
     --sf-clickable-overlay-z: 1;
     position: relative;

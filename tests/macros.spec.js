@@ -3,14 +3,12 @@
 // Each macro is exercised against a synthetic fixture and its
 // observable effect verified via getComputedStyle / layout reads.
 import { test, expect } from '@playwright/test';
-import path from 'node:path';
-
-const BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
+import { renderWithBundle } from './render-helpers.js';
 
 async function setup(page, html) {
-  await page.setViewportSize({ width: 800, height: 600 });
-  await page.setContent(`<!doctype html><html><body>${html}</body></html>`);
-  await page.addStyleTag({ path: BUNDLE });
+  // Unlike the other spec files' setup(), body has no margin:0 here —
+  // preserved as-is (bodyMargin: null omits the style attribute entirely).
+  await renderWithBundle(page, html, { width: 800, height: 600, bodyMargin: null });
 }
 
 test.describe('macro: .sf-flow', () => {

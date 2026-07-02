@@ -6,6 +6,9 @@
  * checks the same invariant at source level). P7 verifies the invariant
  * holds in the final built artifact after bundling and minification.
  *
+ * The P2/P7/P8/P10 numbering gaps (no P1, P3-P6, P9 test files) are
+ * explained in tests/README.md — not dead history, don't renumber.
+ *
  * Run: node --test tests/tier1-p7-oldengine.test.js
  */
 import { test, describe } from 'node:test';

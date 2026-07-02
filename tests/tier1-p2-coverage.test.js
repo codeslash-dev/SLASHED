@@ -2,6 +2,9 @@
  * Property 2: tokens.css uses @supports gating — no bare light-dark() or
  *             oklch(from…)/color-mix() declarations outside a @supports block.
  *
+ * The P2/P7/P8/P10 numbering gaps (no P1, P3-P6, P9 test files) are
+ * explained in tests/README.md — not dead history, don't renumber.
+ *
  * Run: node --test tests/tier1-p2-coverage.test.js
  */
 import { test, describe } from 'node:test';

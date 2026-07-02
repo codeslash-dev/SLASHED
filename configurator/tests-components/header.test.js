@@ -2,7 +2,7 @@
  * Component smoke test for StudioHeader.
  * Verifies that the header renders the branding text and responds to props.
  */
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import StudioHeader from '../src/components/shell/StudioHeader.svelte';
 
@@ -10,11 +10,14 @@ const baseProps = {
   overridesCount: 0,
   canUndo: false,
   canRedo: false,
+  hasPendingChanges: false,
+  saveState: 'idle',
   onUndo: () => {},
   onRedo: () => {},
   onResetAll: () => {},
   onImport: () => {},
   onExport: () => {},
+  onSave: () => {},
 };
 
 describe('StudioHeader', () => {
@@ -43,5 +46,51 @@ describe('StudioHeader', () => {
   test('export badge is absent when overridesCount is 0', () => {
     render(StudioHeader, { props: { ...baseProps, overridesCount: 0 } });
     expect(screen.queryByText('customised · Export →')).toBeNull();
+  });
+
+  // SL-018: a failed save must be visibly distinguishable from "never
+  // attempted" (idle) or "in progress" (saving), and must stay retryable.
+  describe('save state', () => {
+    test('idle: save button is disabled and reads "Save" when there are no pending changes', () => {
+      render(StudioHeader, { props: { ...baseProps, hasPendingChanges: false, saveState: 'idle' } });
+      const btn = screen.getByTitle('No unsaved changes');
+      expect(btn).toBeDisabled();
+      expect(btn).toHaveTextContent('Save');
+    });
+
+    test('idle: save button is enabled when there are pending changes', () => {
+      render(StudioHeader, { props: { ...baseProps, hasPendingChanges: true, saveState: 'idle' } });
+      expect(screen.getByTitle('Save changes (Ctrl+S)')).not.toBeDisabled();
+    });
+
+    test('saving: button is disabled and reads "Saving…" regardless of pending changes', () => {
+      render(StudioHeader, { props: { ...baseProps, hasPendingChanges: true, saveState: 'saving' } });
+      const btn = screen.getByTitle('Save changes (Ctrl+S)');
+      expect(btn).toBeDisabled();
+      expect(btn).toHaveTextContent('Saving…');
+    });
+
+    test('saved: button reads "Saved" with a distinct title from a fresh, unattempted save', () => {
+      render(StudioHeader, { props: { ...baseProps, hasPendingChanges: false, saveState: 'saved' } });
+      const btn = screen.getByTitle('No unsaved changes');
+      expect(btn).toHaveTextContent('Saved');
+    });
+
+    test('error: button surfaces a distinct "Save failed" title and label, and stays clickable to retry', async () => {
+      const onSave = vi.fn();
+      render(StudioHeader, { props: { ...baseProps, hasPendingChanges: true, saveState: 'error', onSave } });
+      const btn = screen.getByTitle('Save failed — click to retry');
+      expect(btn).toHaveTextContent('Save failed');
+      expect(btn).not.toBeDisabled();
+      await btn.click();
+      expect(onSave).toHaveBeenCalledOnce();
+    });
+
+    test('error: a subsequent save is still blocked while actually saving', () => {
+      // Mirrors App.svelte's handleSave guard (saveState === 'saving' disables
+      // retry) even though the button was left enabled after a prior error.
+      render(StudioHeader, { props: { ...baseProps, hasPendingChanges: true, saveState: 'saving' } });
+      expect(screen.getByTitle('Save changes (Ctrl+S)')).toBeDisabled();
+    });
   });
 });

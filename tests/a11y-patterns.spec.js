@@ -4,16 +4,11 @@
 //   .sf-focus-parent, .sf-clickable-parent,
 //   touch-target token, forced-colors, disabled cursor.
 import { test, expect } from '@playwright/test';
-import path from 'node:path';
-
-const BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
+import { renderWithBundle, NO_TRANSITIONS_STYLE } from './render-helpers.js';
 
 async function setup(page, html) {
-  await page.setViewportSize({ width: 800, height: 600 });
-  await page.setContent(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
-  await page.addStyleTag({ path: BUNDLE });
   // Disable transitions so computed property reads are stable (no mid-animation values).
-  await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation-duration: 0s !important; }' });
+  await renderWithBundle(page, html, { width: 800, height: 600, extraStyle: NO_TRANSITIONS_STYLE });
 }
 
 // ── .sr-only ────────────────────────────────────────────────────

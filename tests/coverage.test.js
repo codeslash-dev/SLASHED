@@ -1,8 +1,3 @@
-// @ts-check
-import { test, expect } from '@playwright/test';
-import fs from 'node:fs';
-import path from 'node:path';
-
 /**
  * Selector inventory coverage test.
  *
@@ -15,11 +10,20 @@ import path from 'node:path';
  *   an example in comments, .sf-nav .is-current — component-layer refs)
  * - BEM children (.sf-cover__center) — checked by their parent
  * - Selectors that only exist in comments
+ *
+ * Run: node --test tests/coverage.test.js
  */
-test.describe('Selector coverage', () => {
-  test('every .sf-* and .is-* class from core/*.css appears in docs/demo.html', async () => {
-    const coreDir = path.resolve(process.cwd(), 'core');
-    const demoPath = path.resolve(process.cwd(), 'docs', 'demo.html');
+import { test, describe } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const ROOT = path.resolve(import.meta.dirname, '..');
+
+describe('Selector coverage', () => {
+  test('every .sf-* and .is-* class from core/*.css appears in docs/demo.html', () => {
+    const coreDir = path.join(ROOT, 'core');
+    const demoPath = path.join(ROOT, 'docs', 'demo.html');
 
     // Read all core CSS files
     const cssFiles = fs.readdirSync(coreDir).filter(f => f.endsWith('.css'));
@@ -62,6 +66,6 @@ test.describe('Selector coverage', () => {
     if (missing.length > 0) {
       console.log('Missing from demo.html:', missing.sort().join(', '));
     }
-    expect(missing).toEqual([]);
+    assert.deepEqual(missing, []);
   });
 });

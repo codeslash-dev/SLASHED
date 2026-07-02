@@ -33,7 +33,9 @@ Use a pre-built bundle (see [Releases](https://github.com/codeslash-dev/SLASHED/
 ```
 
 À la carte is also supported. When wiring up individual files, `core/layers.css`
-must load **first**. `optional/legacy.css` is not bundled by default — add it
+must load **first** — it declares the `@layer` order once, and that order (not
+`<link>` order) controls the cascade, so the snippet below simply mirrors it
+for readability. `optional/legacy.css` is not bundled by default — add it
 explicitly if you need back-compat shims and load it **last**:
 
 ```html
@@ -44,10 +46,10 @@ explicitly if you need back-compat shims and load it **last**:
 <link rel="stylesheet" href="core/tokens.macros.css">
 <link rel="stylesheet" href="core/reset.css">
 <link rel="stylesheet" href="core/base.css">
-<link rel="stylesheet" href="core/themes.css">
 <link rel="stylesheet" href="core/layout.css">
 <link rel="stylesheet" href="core/macros.css">
 <link rel="stylesheet" href="core/states.css">
+<link rel="stylesheet" href="core/themes.css">
 <link rel="stylesheet" href="core/motion.css">
 <link rel="stylesheet" href="core/accessibility.css">
 <link rel="stylesheet" href="core/print.css">

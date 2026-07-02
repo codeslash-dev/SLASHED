@@ -51,9 +51,21 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run version-sync` | Sync all version references to root `package.json` |
 | `npm run check:version` | Verify all version references match (CI gate — run before every commit that touches versions) |
 | `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens (CI gate) |
+| `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (not currently wired into CI — run manually before committing macro changes) |
+| `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
+| `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |
+| `npm run lint:css` | Lint all CSS source with stylelint (CI gate) |
+| `npm run lint:css:fix` | Lint CSS source and auto-fix violations |
 | `npm run docs` | Regenerate docs and sync configurator API index |
+| `npm run docs:tokens` | Regenerate `docs/tokens.md` only |
+| `npm run docs:index` | Regenerate `docs/token-index.md` + `.json` only |
+| `npm run docs:api` | Regenerate `docs/api-index.md` + `.json` only |
+| `npm run docs:classes` | Regenerate `docs/classes.md` only |
+| `npm run gen:registry` | Regenerate `token-registry.json` (stable id assignments) |
 | `npm run configurator:sync` | Push `docs/api-index.json` → `configurator/src/data/api-index.generated.json` |
-| `npm run audit` | Audit CSS tokens for consistency |
+| `npm run audit` | Audit CSS tokens for consistency, writing `docs/registry.json` |
+| `npm run watch` | Rebuild CSS bundles on file change (dev watch mode) |
+| `npm run test:unit` | Run the Node `--test` unit suite only, without the Playwright e2e build. Some tests read from `badges/` — run `npm run build` first on a clean checkout (CI instead downloads the `badges` artifact from the `build` job before this step) |
 | `npm test` | Full suite: build → unit → Playwright e2e |
 
 ## Release process

@@ -21,6 +21,7 @@ import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES } from './registry-sources.js';
 import { INTERNAL, ADVANCED, tierOf, roleOf } from './token-tiers.js';
+import { stripComments, readValue, requireFile } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -39,31 +40,8 @@ export { INTERNAL, ADVANCED, tierOf, roleOf };
 
 // ── Parsing (matches scripts/gen-token-reference.js contract) ─────────────────
 
-function stripComments(css) {
-  return css.replace(/\/\*[\s\S]*?\*\//g, '');
-}
-
-// Read a custom-property value starting at its `:` index, honouring nested
-// parentheses so light-dark()/oklch()/clamp() values stay intact.
-function readValue(css, colonIdx) {
-  let depth = 0;
-  let out = '';
-  for (let i = colonIdx + 1; i < css.length; i++) {
-    const ch = css[i];
-    if (ch === '(') depth++;
-    else if (ch === ')') depth--;
-    else if (ch === ';' && depth === 0) break;
-    out += ch;
-  }
-  return out.replace(/\s+/g, ' ').trim();
-}
-
 function readSource(rel) {
-  const abs = path.join(ROOT, rel);
-  if (!fs.existsSync(abs)) {
-    throw new Error(`[docs:index] Missing token source file: ${rel}`);
-  }
-  return stripComments(fs.readFileSync(abs, 'utf8'));
+  return stripComments(requireFile(rel, ROOT, `[docs:index] Missing token source file: ${rel}`));
 }
 
 // Extract ordered [name, value] pairs (last declaration wins per file).
@@ -132,11 +110,31 @@ const jsonOut = {
   ),
 };
 
-fs.writeFileSync(
-  path.join(ROOT, 'docs', 'token-index.json'),
-  JSON.stringify(jsonOut, null, 2) + '\n',
-  'utf8'
-);
+// Regression guard (SL-010/SL-012): a bad regex/tier-set change should fail
+// loudly, not silently truncate the index every consumer (check:llm-guide,
+// the configurator) trusts. A real token removal is legitimate but rare and
+// small in number; a >20% drop is far more likely a parsing bug.
+const TOKEN_INDEX_JSON = path.join(ROOT, 'docs', 'token-index.json');
+if (fs.existsSync(TOKEN_INDEX_JSON)) {
+  try {
+    const previous = JSON.parse(fs.readFileSync(TOKEN_INDEX_JSON, 'utf8'));
+    const previousCount = Object.keys(previous.tokens ?? {}).length;
+    if (previousCount > 0 && names.length < previousCount * 0.8) {
+      throw new Error(
+        `[docs:index] refusing to write ${TOKEN_INDEX_JSON}: token count dropped from ` +
+          `${previousCount} to ${names.length} (>20% shrink) — looks like a parsing regression, not an intentional change.`
+      );
+    }
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      console.warn(`[docs:index] Failed to parse existing ${TOKEN_INDEX_JSON} for the regression check:`, err.message);
+    } else {
+      throw err;
+    }
+  }
+}
+
+fs.writeFileSync(TOKEN_INDEX_JSON, JSON.stringify(jsonOut, null, 2) + '\n', 'utf8');
 
 // ── Emit Markdown ─────────────────────────────────────────────────────────────
 
