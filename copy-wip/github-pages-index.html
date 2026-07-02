@@ -112,6 +112,19 @@ layout: null
         text-transform: uppercase;
         color:          var(--sf-color-text--muted);
       }
+
+      .acronym { margin: 0; }
+      .acronym dt {
+        font-size:   var(--sf-text-m);
+        font-weight: var(--sf-font-weight-heading);
+        color:       var(--sf-color-heading);
+      }
+      .acronym dt b { color: var(--sf-color-primary); }
+      .acronym dd {
+        margin:    0;
+        font-size: var(--sf-text-s);
+        color:     var(--sf-color-text--secondary);
+      }
     }
   </style>
 </head>
@@ -151,6 +164,47 @@ layout: null
           <a class="btn btn--quiet" href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
         </div>
         <p class="footer-meta">This page is styled by <code>slashed.optimal.css</code> itself — switch your OS to dark mode and watch it follow.</p>
+      </div>
+    </section>
+
+    <!-- Philosophy — the acronym -->
+    <section class="sf-section sf-section--m sf-section--guttered">
+      <div class="sf-container sf-container--wide sf-stack sf-stack--m">
+        <div class="sf-stack sf-stack--xs">
+          <p class="eyebrow">Philosophy</p>
+          <h2>The name is the manifesto</h2>
+          <p class="lede">Every letter of SLASHED is a design commitment — and each one is checkable against the source.</p>
+        </div>
+        <dl class="sf-grid sf-grid--fit sf-grid--m sf-gap--m acronym">
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>S</b>tandalone</dt>
+            <dd>One stylesheet. No build step, no Node, no runtime dependencies.</dd>
+          </div>
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>L</b>ean</dt>
+            <dd>A foundation, not a kit. No utility bloat, nothing to purge, nothing you didn't ask for.</dd>
+          </div>
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>A</b>gnostic</dt>
+            <dd>No stack assumptions. Any CMS, any builder, any framework, plain HTML — no vendor lock-in, ever.</dd>
+          </div>
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>S</b>tructured</dt>
+            <dd>Fifteen named cascade layers in a fixed order, and a catalogued token API with stability tiers.</dd>
+          </div>
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>H</b>ybrid</dt>
+            <dd>Classless where it can be — base elements, opt-in forms — class-based where it counts: layout, macros, states.</dd>
+          </div>
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>E</b>xplicit</dt>
+            <dd>Every visual value is a named token; hardcoded numbers are treated as bugs. Even the browser floor is stated up front.</dd>
+          </div>
+          <div class="card sf-stack sf-stack--xs">
+            <dt><b>D</b>eterministic</dt>
+            <dd>Same tokens in, same design out. Load order never changes the cascade; every derived color is computed by formula.</dd>
+          </div>
+        </dl>
       </div>
     </section>
 
