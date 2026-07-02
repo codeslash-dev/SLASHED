@@ -4,8 +4,8 @@
  * Contract: standalone mode reads/writes localStorage + URL hash; WP-embedded
  * mode (window.slashedApp present) reads PHP-hydrated overrides and writes via
  * REST. Covers both branches of loadInitialOverrides/saveOverrides, including
- * the malformed-localStorage edge case flagged by SL-019 (not fixed in this
- * pass — the assertions below document the current, unguarded behavior).
+ * the malformed-localStorage edge cases fixed by SL-019 (shape-guarded via
+ * savedThemes.ts's isStringRecord()).
  */
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import registry from '../src/data/token-registry.generated.json';
@@ -87,13 +87,17 @@ describe('loadInitialOverrides — standalone mode', () => {
     expect(loadInitialOverrides()).toEqual({});
   });
 
-  // SL-019 (not fixed here): loadInitialOverrides' standalone/localStorage path
-  // trusts JSON.parse's result as Record<string,string> with no shape guard,
-  // unlike savedThemes.ts's equivalent read path. This test pins today's real
-  // (unguarded) behavior so a future SL-019 fix has a test to update.
-  test('SL-019: currently returns non-object JSON as-is instead of {} (documented gap)', () => {
+  // SL-019: loadInitialOverrides' standalone/localStorage path now reuses
+  // savedThemes.ts's isStringRecord() shape guard, matching that module's
+  // equivalent read path, instead of trusting JSON.parse's result outright.
+  test('SL-019: returns {} for non-object JSON instead of passing it through', () => {
     localStorage.setItem(LS_KEY, JSON.stringify(['not', 'an', 'object']));
-    expect(loadInitialOverrides()).toEqual(['not', 'an', 'object']);
+    expect(loadInitialOverrides()).toEqual({});
+  });
+
+  test('SL-019: returns {} when a value in the stored record is not a string', () => {
+    localStorage.setItem(LS_KEY, JSON.stringify({ [t0]: '5rem', [t1]: 42 }));
+    expect(loadInitialOverrides()).toEqual({});
   });
 });
 
