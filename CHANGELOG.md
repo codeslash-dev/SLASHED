@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.34] - 2026-07-02
+
+### Bug Fixes
+- **configurator:** clean up leaked test iframes and decouple canvas test from environment
+- **configurator:** remove redundant previewVersion bumps and skip split-mode effect when inactive
+- **configurator:** stop advertising an ignored sanitize option on share-link readers
+- **configurator,scripts:** address CodeRabbit review on PR 474
+- **configurator:** surface save failures instead of silently reverting (SL-018)
+- **configurator:** align All-tokens badge count with domainOf() scoping
+- **configurator:** scope category reset by domainOf(), not raw pattern overlap
+- **configurator:** add per-category reset button, fix invisible reset icons
+
+### Performance Improvements
+- **configurator:** rAF-coalesce preview iframe writes during rapid override changes
+
 ## [0.6.33] - 2026-07-01
 
 ### Bug Fixes
