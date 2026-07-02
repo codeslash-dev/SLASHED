@@ -540,7 +540,8 @@ layout: null
     (function () {
       var btn = document.getElementById('theme-toggle');
       var states = ['auto', 'dark', 'light'];
-      var current = localStorage.getItem('slashed-home-theme') || 'auto';
+      var current = 'auto';
+      try { current = localStorage.getItem('slashed-home-theme') || 'auto'; } catch (e) {}
       function apply(state) {
         if (state === 'auto') document.documentElement.removeAttribute('data-theme');
         else document.documentElement.setAttribute('data-theme', state);
@@ -549,7 +550,7 @@ layout: null
       apply(current);
       btn.addEventListener('click', function () {
         current = states[(states.indexOf(current) + 1) % states.length];
-        localStorage.setItem('slashed-home-theme', current);
+        try { localStorage.setItem('slashed-home-theme', current); } catch (e) {}
         apply(current);
       });
     })();
