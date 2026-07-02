@@ -15,7 +15,7 @@
  * invalidation/theme-scoping logic, not real CSS cascade computation (the
  * browser's job, already trusted).
  */
-import { describe, test, expect, vi } from 'vitest';
+import { describe, test, expect, vi, afterEach } from 'vitest';
 import {
   previewVersion,
   registerPreviewDoc,
@@ -27,13 +27,25 @@ import {
   resolveBackground,
 } from '../src/lib/previewResolver.svelte';
 
+// Tracks every <iframe> created by makePreviewDoc() so afterEach can remove
+// them — registerPreviewDoc() only tears down the resolver's own internal
+// probe elements, not the fixtures this file appends to document.body.
+let createdIframes = [];
+
 function makePreviewDoc(theme = 'light') {
   const iframe = document.createElement('iframe');
   document.body.appendChild(iframe);
+  createdIframes.push(iframe);
   const doc = iframe.contentDocument;
   doc.documentElement.setAttribute('data-theme', theme);
   return doc;
 }
+
+afterEach(() => {
+  registerPreviewDoc(null);
+  createdIframes.forEach((iframe) => iframe.remove());
+  createdIframes = [];
+});
 
 describe('registerPreviewDoc / getActiveTheme', () => {
   test('bumps previewVersion when registering a new document', () => {
@@ -147,16 +159,35 @@ describe('resolveRgb', () => {
     expect(resolveRgb('red')).toBeNull();
   });
 
-  // This sandbox has no `canvas` npm package installed, so jsdom's
-  // HTMLCanvasElement.getContext('2d') is unimplemented and logs (but does
-  // not throw) a "not implemented" error — resolveRgb must degrade to null
-  // rather than propagating that. Silencing the expected console.error here
-  // to keep test output clean; the assertion is what matters.
+  // Explicitly stubbing getContext('2d') to return null (rather than relying
+  // on this sandbox's jsdom having no `canvas` npm package installed) so this
+  // test asserts resolveRgb's documented contract, not an environment detail
+  // that would silently start failing if a canvas backend became available.
+  //
+  // Spies on the preview *iframe's own* HTMLCanvasElement, not the top-level
+  // test file's global one — each iframe is a separate jsdom realm with its
+  // own constructors, so a canvas created via activeDoc.createElement('canvas')
+  // is an instance of doc.defaultView.HTMLCanvasElement, not window.HTMLCanvasElement.
   test('degrades to null (not a throw) when no 2D canvas context is available', () => {
-    registerPreviewDoc(makePreviewDoc());
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const doc = makePreviewDoc();
+    registerPreviewDoc(doc);
+    const spy = vi.spyOn(doc.defaultView.HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
     expect(() => resolveRgb('red')).not.toThrow();
     expect(resolveRgb('red')).toBeNull();
+    spy.mockRestore();
+  });
+
+  test('converts a resolved color to an [r,g,b] triple when a 2D context is available', () => {
+    const doc = makePreviewDoc();
+    registerPreviewDoc(doc);
+    const fakeCtx = {
+      clearRect: vi.fn(),
+      fillRect: vi.fn(),
+      fillStyle: '',
+      getImageData: vi.fn(() => ({ data: new Uint8ClampedArray([255, 0, 0, 255]) })),
+    };
+    const spy = vi.spyOn(doc.defaultView.HTMLCanvasElement.prototype, 'getContext').mockReturnValue(fakeCtx);
+    expect(resolveRgb('red')).toEqual([255, 0, 0]);
     spy.mockRestore();
   });
 });
