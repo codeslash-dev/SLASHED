@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Sun, Moon, Smartphone, Tablet, Monitor, RefreshCw, ExternalLink, Columns2 } from 'lucide-svelte';
   import type { PreviewTemplate } from '../../types';
-  import { fa } from '../../lib/codec';
+  import { generateCSS } from '../../lib/codec';
   import { computeDerivedOverrides } from '../../lib/persistence';
   import { registerPreviewDoc, bumpPreviewVersion } from '../../lib/previewResolver.svelte';
   import { lumlockerPreview } from '../../lib/lumlockerPreview.svelte';
@@ -429,7 +429,7 @@
     template: PreviewTemplate,
     frameworkCSS: string,
   ): string {
-    const css = fa(withDerivedOverrides(ov), { mode: "root", banner: false });
+    const css = generateCSS(withDerivedOverrides(ov), { mode: "root", banner: false });
     const motionCSS =
       motion === "slow"
         ? "*, *::before, *::after { transition-duration: 200% !important; animation-duration: 200% !important; }"
@@ -494,7 +494,7 @@ ${BODIES[template]}
 
     const styleEl = doc.getElementById("slashed-overrides");
     if (styleEl) {
-      styleEl.textContent = fa(withDerivedOverrides(_ov), { mode: "root", banner: false });
+      styleEl.textContent = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
     }
 
     injectFontsIntoDoc(doc, _ov);
@@ -517,7 +517,7 @@ ${BODIES[template]}
     const _lightCount = splitLightLoadCount;
     const _darkCount = splitDarkLoadCount;
     const _lock = lumlockerPreview.value;
-    const css = fa(withDerivedOverrides(_ov), { mode: "root", banner: false });
+    const css = generateCSS(withDerivedOverrides(_ov), { mode: "root", banner: false });
 
     const applyLock = (doc: Document) => {
       if (_lock) doc.documentElement.setAttribute("data-lumlocker", "");

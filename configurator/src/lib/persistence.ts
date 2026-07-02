@@ -13,7 +13,7 @@
  * In every mode a live `<style id="sf-parent-overrides">` is injected so the
  * chrome + preview reflect the current overrides immediately.
  */
-import { Ja, Ga, fa } from "./codec";
+import { readShareFromHashIfPresent, encodeOverrides, generateCSS } from "./codec";
 
 const LS_KEY = "slashed-studio/overrides/v2";
 
@@ -212,7 +212,7 @@ export function loadInitialOverrides(): Record<string, string> {
   // Standalone: URL hash (shareable config) takes priority over localStorage.
   const hash = window.location.hash;
   if (hash?.includes("c=")) {
-    try { return Ja(hash); } catch { /* fall through */ }
+    try { return readShareFromHashIfPresent(hash); } catch { /* fall through */ }
   }
   const local = localStorage.getItem(LS_KEY);
   if (local) {
@@ -235,7 +235,7 @@ export function injectLivePreview(ov: Record<string, string>): void {
   const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const derived = computeDerivedOverrides(ov, { reduceMotion });
   const preview = Object.keys(derived).length > 0 ? { ...derived, ...ov } : ov;
-  styleEl.textContent = fa(preview, { mode: "root", banner: false });
+  styleEl.textContent = generateCSS(preview, { mode: "root", banner: false });
 }
 
 async function wpSave(rest: { url?: string; nonce?: string }, ov: Record<string, string>): Promise<void> {
@@ -259,7 +259,7 @@ async function wpSave(rest: { url?: string; nonce?: string }, ov: Record<string,
 
 function saveStandalone(ov: Record<string, string>): void {
   try { localStorage.setItem(LS_KEY, JSON.stringify(ov)); } catch { /* quota */ }
-  const code = Ga(ov);
+  const code = encodeOverrides(ov);
   const nextHash = code ? `c=${code}` : "";
   if (window.location.hash.replace("#", "") !== nextHash) {
     window.location.hash = nextHash;

@@ -7,7 +7,7 @@
   import StatusBar from './components/shell/StatusBar.svelte';
   import PreviewPanel from './components/shell/PreviewPanel.svelte';
   import DomainPanel from './components/DomainPanel.svelte';
-  import { fa } from './lib/codec';
+  import { generateCSS } from './lib/codec';
   import { loadInitialOverrides, injectLivePreview, saveOverrides, hasWpBoot } from './lib/persistence';
   import { domainOf } from './lib/domains';
   import tokensRaw from './data/api-index.generated.json';
@@ -219,7 +219,7 @@
   }
 
   function handleExport() {
-    const css = fa(overrides, { mode: "layer", banner: true });
+    const css = generateCSS(overrides, { mode: "layer", banner: true });
     const blob = new Blob([css], { type: "text/css" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
