@@ -3,7 +3,7 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
-## SLASHED 0.6.25 → next
+## SLASHED 0.6.25 → 0.6.26
 
 ### `base` relative shade aliases removed
 
