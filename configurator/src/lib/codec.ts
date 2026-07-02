@@ -5,7 +5,7 @@
 
 import { deflateSync, inflateSync } from "fflate";
 import tokensData from "../data/token-registry.generated.json";
-import type { TokenRegistry, DecodeOptions } from "../types";
+import type { TokenRegistry, DecodeOptions, ShareOptions } from "../types";
 
 declare const __SLASHED_VERSION__: string;
 
@@ -264,7 +264,7 @@ export function encodeOverrides(overrides: Record<string, string>): string {
 
 const SHARE_PARAM_RE = new RegExp(`[#&]?${SHARE_PARAM}=([^&]+)`);
 
-export function readShareFromHash(hashOrParam: string, options: DecodeOptions = {}): Record<string, string> {
+export function readShareFromHash(hashOrParam: string, options: ShareOptions = {}): Record<string, string> {
   const knownTokensSet = new Set(tokensData.tokens.map((tok) => tok.name));
   const isKnown = options.isKnown ?? ((name: string) => knownTokensSet.has(name));
   let trimmed = String(hashOrParam ?? "").trim();
@@ -284,7 +284,7 @@ export function buildShareUrl(overrides: Record<string, string>, baseUrlOverride
   return url.toString();
 }
 
-export function readShareFromHashIfPresent(hash: string, options: DecodeOptions = {}): Record<string, string> {
+export function readShareFromHashIfPresent(hash: string, options: ShareOptions = {}): Record<string, string> {
   const value = String(hash ?? "");
   return value.includes(`${SHARE_PARAM}=`) ? readShareFromHash(value, options) : {};
 }

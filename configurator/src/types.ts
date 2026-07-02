@@ -67,11 +67,19 @@ export interface TokenRegistry {
   tokens: TokenRegistryEntry[];
 }
 
-/** Options accepted by codec.ts's decode() / readShareFromHash() / readShareFromHashIfPresent(). */
+/** Options accepted by codec.ts's decode(). */
 export interface DecodeOptions {
   sanitize?: (value: string) => string;
   isKnown?: (tokenName: string) => boolean;
 }
+
+/**
+ * Options accepted by codec.ts's readShareFromHash() / readShareFromHashIfPresent().
+ * Deliberately omits `sanitize` (unlike DecodeOptions): these are the public
+ * share-link entry points and always force sanitizeValue as a CSS-injection
+ * safeguard, so a caller-supplied sanitize is never honoured.
+ */
+export type ShareOptions = Pick<DecodeOptions, "isKnown">;
 
 export interface SlashedCategory {
   id: string;
