@@ -60,7 +60,7 @@ slashed/
 └── optional/
     ├── tokens.components.css # Component tokens (field, button…)
     ├── forms.css             # Form styles
-    ├── utilities.css         # Utility classes
+    ├── utilities.css         # Utility classes (staged — commented out, not yet active)
     ├── components.css        # Optional components
     └── overrides-example.css / theme-example.css / config-example.css
 ```

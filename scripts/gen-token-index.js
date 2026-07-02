@@ -21,6 +21,7 @@ import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES } from './registry-sources.js';
 import { INTERNAL, ADVANCED, tierOf, roleOf } from './token-tiers.js';
+import { stripComments, readValue, requireFile } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -39,31 +40,8 @@ export { INTERNAL, ADVANCED, tierOf, roleOf };
 
 // ── Parsing (matches scripts/gen-token-reference.js contract) ─────────────────
 
-function stripComments(css) {
-  return css.replace(/\/\*[\s\S]*?\*\//g, '');
-}
-
-// Read a custom-property value starting at its `:` index, honouring nested
-// parentheses so light-dark()/oklch()/clamp() values stay intact.
-function readValue(css, colonIdx) {
-  let depth = 0;
-  let out = '';
-  for (let i = colonIdx + 1; i < css.length; i++) {
-    const ch = css[i];
-    if (ch === '(') depth++;
-    else if (ch === ')') depth--;
-    else if (ch === ';' && depth === 0) break;
-    out += ch;
-  }
-  return out.replace(/\s+/g, ' ').trim();
-}
-
 function readSource(rel) {
-  const abs = path.join(ROOT, rel);
-  if (!fs.existsSync(abs)) {
-    throw new Error(`[docs:index] Missing token source file: ${rel}`);
-  }
-  return stripComments(fs.readFileSync(abs, 'utf8'));
+  return stripComments(requireFile(rel, ROOT, `[docs:index] Missing token source file: ${rel}`));
 }
 
 // Extract ordered [name, value] pairs (last declaration wins per file).

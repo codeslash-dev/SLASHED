@@ -27,6 +27,7 @@
 import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES, CLASS_FILES } from './registry-sources.js';
+import { stripComments, stripStrings, requireFile } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -39,21 +40,8 @@ const ALL_SOURCE_FILES = [
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-function stripComments(css) {
-  return css.replace(/\/\*[\s\S]*?\*\//g, '');
-}
-
-function stripStrings(css) {
-  // Prevent matching class names that appear inside CSS string values
-  return css.replace(/"[^"]*"|'[^']*'/g, '""');
-}
-
 function readFile(rel) {
-  const abs = path.join(ROOT, rel);
-  if (!fs.existsSync(abs)) {
-    throw new Error(`[audit] Missing canonical source file: ${rel}`);
-  }
-  return fs.readFileSync(abs, 'utf8');
+  return requireFile(rel, ROOT, `[audit] Missing canonical source file: ${rel}`);
 }
 
 // ── Token extraction ─────────────────────────────────────────────────────────

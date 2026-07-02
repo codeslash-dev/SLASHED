@@ -32,6 +32,7 @@ import fs   from 'node:fs';
 import path from 'node:path';
 import { TOKEN_FILES, CLASS_FILES } from './registry-sources.js';
 import { tierOf, roleOf } from './token-tiers.js';
+import { maskComments, maskStrings, readValue, requireFile } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT    = path.join(ROOT, 'docs', 'api-index.json');
@@ -114,37 +115,11 @@ const FILE_META = {
 // Replacing comment/string bodies with spaces (NOT removing them) keeps every
 // character index stable, so a token/class match found in the masked text can
 // be looked up against section banners parsed from the original text.
+// maskComments/maskStrings (offset-preserving) come from scripts/lib/parse.js —
+// NOT the same contract as that module's stripComments/stripStrings.
 
-/**
- * Mask block-comment bodies with spaces (length-preserving) so character
- * offsets stay stable for later banner/section lookups.
- * @param {string} css source CSS
- * @returns {string} CSS with comment bodies blanked
- */
-function maskComments(css) {
-  return css.replace(/\/\*[\s\S]*?\*\//g, m => m.replace(/[^\n]/g, ' '));
-}
-/**
- * Mask string-literal bodies with spaces (length-preserving) so quoted class
- * names inside `content:"…"` aren't mistaken for selectors.
- * @param {string} css source CSS
- * @returns {string} CSS with string bodies blanked
- */
-function maskStrings(css) {
-  return css.replace(/"[^"]*"|'[^']*'/g, m => m.replace(/[^\n]/g, ' '));
-}
-
-/**
- * Read a workspace-relative source file, throwing a clear error if missing.
- * @param {string} rel path relative to repo root
- * @returns {string} file contents
- */
 function readFile(rel) {
-  const abs = path.join(ROOT, rel);
-  if (!fs.existsSync(abs)) {
-    throw new Error(`[docs:api] Missing source file: ${rel}`);
-  }
-  return fs.readFileSync(abs, 'utf8');
+  return requireFile(rel, ROOT, `[docs:api] Missing source file: ${rel}`);
 }
 
 // ── Section-banner parsing ──────────────────────────────────────────────────
@@ -312,26 +287,8 @@ function truncate(str, max = 280) {
   return clean.slice(0, max - 1).replace(/\s+\S*$/, '') + '…';
 }
 
-/**
- * Read a custom-property value starting at its `:` offset, honouring nested
- * parentheses so light-dark()/oklch()/clamp() values stay intact. (Identical
- * contract to gen-token-index.js / gen-token-reference.js.)
- * @param {string} css source (comment-masked)
- * @param {number} colonIdx offset of the `:` after the property name
- * @returns {string} the normalised value text
- */
-function readValue(css, colonIdx) {
-  let depth = 0;
-  let out = '';
-  for (let i = colonIdx + 1; i < css.length; i++) {
-    const ch = css[i];
-    if (ch === '(') depth++;
-    else if (ch === ')') depth--;
-    else if (ch === ';' && depth === 0) break;
-    out += ch;
-  }
-  return out.replace(/\s+/g, ' ').trim();
-}
+// readValue (comment-masked-safe, identical contract to gen-token-index.js /
+// gen-token-reference.js) comes from scripts/lib/parse.js.
 
 /**
  * Find the first `@layer` a file declares (e.g. "slashed.layout").
