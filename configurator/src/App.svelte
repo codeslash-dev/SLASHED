@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
   import { SlidersHorizontal, Eye, RotateCcw } from 'lucide-svelte';
-  import type { PreviewTemplate, SlashedToken } from './types';
+  import type { PreviewTemplate, SlashedToken, ApiIndex } from './types';
   import StudioHeader from './components/shell/StudioHeader.svelte';
   import SidebarNav from './components/shell/SidebarNav.svelte';
   import StatusBar from './components/shell/StatusBar.svelte';
@@ -13,7 +13,7 @@
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
 
-  const ALL_TOKENS = ((tokensRaw as any).tokens ?? tokensRaw) as SlashedToken[];
+  const ALL_TOKENS = ((tokensRaw as ApiIndex).tokens ?? tokensRaw) as SlashedToken[];
 
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
