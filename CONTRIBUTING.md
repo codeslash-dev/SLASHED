@@ -46,7 +46,7 @@ and `badges/` must be rebuilt and committed.
 ## Tests & demo coverage
 
 - Any new `.sf-*` or `.is-*` class in `core/*.css` must appear in `docs/demo.html`
-  (`tests/coverage.spec.js`).
+  (`tests/coverage.test.js`).
 - Any new token must resolve in both themes (`tests/tokens.spec.js`); tokens whose
   value is `inherit` go in that file's `EXPECTED_EMPTY` allowlist.
 - Add a focused assertion when you fix a bug.
