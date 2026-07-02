@@ -1,0 +1,294 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLASHED — a cascade-layer CSS framework</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27 font-family=%27system-ui%27 font-weight=%27800%27%3E/%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="A cascade-layer CSS framework: 685 design tokens, automatic dark mode, fluid type & spacing — zero JavaScript, zero build step.">
+
+  <!-- The page is styled by the framework it advertises. -->
+  <link rel="stylesheet" href="/badges/slashed.optimal.css">
+
+  <style>
+    /* Page-specific rules live in the reserved top layer and compose
+       framework tokens only — exactly the customisation path the
+       framework documents. No raw colors, sizes, or fonts. */
+    @layer slashed.overrides {
+      .btn {
+        display:         inline-flex;
+        align-items:     center;
+        gap:             var(--sf-space-2xs);
+        padding:         var(--sf-space-2xs) var(--sf-space-m);
+        border-radius:   var(--sf-radius-m);
+        font-weight:     var(--sf-font-weight-interactive);
+        font-size:       var(--sf-text-s);
+        text-decoration: none;
+        transition:      background-color var(--sf-duration-fast) var(--sf-ease-out);
+      }
+      .btn--primary {
+        background: var(--sf-color-primary);
+        color:      var(--sf-color-text--on-primary);
+      }
+      .btn--primary:hover {
+        background: var(--sf-color-primary--hover);
+        color:      var(--sf-color-text--on-primary);
+      }
+      .btn--quiet {
+        background: var(--sf-color-surface);
+        color:      var(--sf-color-text);
+        border:     1px solid var(--sf-color-border);
+      }
+      .btn--quiet:hover { background: var(--sf-color-bg--hover); }
+
+      .site-nav a {
+        text-decoration: none;
+        color:           var(--sf-color-text--secondary);
+        font-size:       var(--sf-text-s);
+        font-weight:     var(--sf-font-weight-medium);
+      }
+      .site-nav a:hover  { color: var(--sf-color-primary); }
+      .site-nav .brand   {
+        color:          var(--sf-color-heading);
+        font-weight:    var(--sf-font-weight-display);
+        font-size:      var(--sf-text-m);
+        letter-spacing: var(--sf-tracking-tight);
+      }
+
+      .hero h1 {
+        font-size:      var(--sf-text-4xl);
+        line-height:    var(--sf-display-l-line-height);
+        letter-spacing: var(--sf-tracking-tight);
+        max-width:      22ch;
+      }
+      .lede {
+        font-size: var(--sf-text-l);
+        color:     var(--sf-color-text--secondary);
+        max-width: 52ch;
+      }
+      .pill {
+        display:       inline-block;
+        padding:       var(--sf-space-px) var(--sf-space-s);
+        border:        1px solid var(--sf-color-border--subtle);
+        border-radius: var(--sf-radius-pill);
+        background:    var(--sf-color-surface);
+        color:         var(--sf-color-text--secondary);
+        font-size:     var(--sf-text-xs);
+        font-weight:   var(--sf-font-weight-semibold);
+        text-decoration: none;
+      }
+      .pill:hover { border-color: var(--sf-color-primary); color: var(--sf-color-primary); }
+
+      .card {
+        background:    var(--sf-color-surface);
+        border:        1px solid var(--sf-color-border--subtle);
+        border-radius: var(--sf-radius-l);
+        padding:       var(--sf-space-m);
+        box-shadow:    var(--sf-shadow-xs);
+      }
+      .card h3 { font-size: var(--sf-text-m); }
+      .card p  { font-size: var(--sf-text-s); color: var(--sf-color-text--secondary); }
+
+      .doc-list a {
+        display:         block;
+        padding-block:   var(--sf-space-2xs);
+        border-bottom:   1px solid var(--sf-color-border--subtle);
+        text-decoration: none;
+        color:           var(--sf-color-text);
+        font-size:       var(--sf-text-s);
+      }
+      .doc-list a:hover { color: var(--sf-color-primary); }
+      .doc-list a small { color: var(--sf-color-text--muted); margin-inline-start: var(--sf-space-2xs); }
+
+      .footer-meta, .footer-meta a { color: var(--sf-color-text--muted); font-size: var(--sf-text-xs); }
+
+      .eyebrow {
+        font-size:      var(--sf-text-xs);
+        font-weight:    var(--sf-font-weight-bold);
+        letter-spacing: var(--sf-tracking-widest);
+        text-transform: uppercase;
+        color:          var(--sf-color-text--muted);
+      }
+    }
+  </style>
+</head>
+
+<!-- No data-theme attribute: the whole page follows the OS light/dark
+     preference out of the box — that IS the demo. -->
+<body>
+
+  <header class="sf-section sf-section--xs sf-section--guttered">
+    <nav class="sf-container sf-container--wide sf-cluster sf-cluster--between site-nav" aria-label="Site">
+      <a class="brand" href="/">SLASHED</a>
+      <div class="sf-cluster sf-cluster--s">
+        <a href="/docs/architecture">Docs</a>
+        <a href="/docs/tokens">Tokens</a>
+        <a href="/docs/demo.html">Demo</a>
+        <a href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
+        <a class="btn btn--primary" href="/configurator/">Configurator&nbsp;→</a>
+        <button class="btn btn--quiet" id="theme-toggle" type="button" aria-label="Toggle color scheme">Auto</button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="sf-divider sf-divider--soft" role="presentation"></div>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="sf-section sf-section--xl sf-section--guttered hero">
+      <div class="sf-container sf-stack sf-stack--m sf-stack--center" style="text-align: center;">
+        <a class="pill" href="https://github.com/codeslash-dev/SLASHED/releases">Latest release — see what's new →</a>
+        <h1>The framework is just <span class="sf-text-gradient">a&nbsp;stylesheet</span></h1>
+        <p class="lede">SLASHED is a cascade-layer CSS framework: 685 design tokens, automatic dark mode, fluid type &amp; spacing — with zero JavaScript and zero build step. Override six tokens and the whole site rebrands.</p>
+        <div class="sf-cluster sf-cluster--center sf-cluster--s">
+          <a class="btn btn--primary" href="/configurator/">Open Configurator →</a>
+          <a class="btn btn--quiet" href="/docs/demo.html">View Demo</a>
+          <a class="btn btn--quiet" href="/demos/full-api-demo.html">Full API Demo</a>
+          <a class="btn btn--quiet" href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
+        </div>
+        <p class="footer-meta">This page is styled by <code>slashed.optimal.css</code> itself — switch your OS to dark mode and watch it follow.</p>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="sf-section sf-section--m sf-section--guttered">
+      <div class="sf-container sf-container--wide sf-grid sf-grid--fit sf-grid--l sf-gap--m">
+        <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
+          <h3>🎨 OKLCH Color Engine</h3>
+          <p>Six brand colors in, a full palette out. Hover states, tints, shades, status colors, and the entire dark palette derive automatically in plain CSS.</p>
+        </div>
+        <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
+          <h3>📐 Fluid Type &amp; Space</h3>
+          <p>Modular scales computed in the browser from 12 dials using <code>pow()</code> and <code>clamp()</code> — smooth from phone to 4K, no breakpoints.</p>
+        </div>
+        <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
+          <h3>🌗 Automatic Dark Mode</h3>
+          <p>Follows the OS by default. Force it — or mix light and dark sections on one page — with <code>data-theme</code>. No script, no flash.</p>
+        </div>
+        <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
+          <h3>⚡ Zero Build Step</h3>
+          <p>Pure CSS custom properties. Drop in one <code>&lt;link&gt;</code> tag and customise with <code>:root</code> overrides. No Node, no Sass, no purge step.</p>
+        </div>
+        <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
+          <h3>🔩 @layer Architecture</h3>
+          <p>Fifteen named cascade layers in a fixed order. Your overrides sit in the top layer and always win — no <code>!important</code>, no specificity wars.</p>
+        </div>
+        <div class="card sf-stack sf-stack--xs sf-entrance--fade-up">
+          <h3>🛠️ Visual Configurator</h3>
+          <p>Tune every token with a live light/dark preview, export override CSS, or share a config link — all in the browser, nothing to install.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section class="sf-section sf-section--m sf-section--guttered">
+      <div class="sf-container sf-stack sf-stack--m">
+        <p class="eyebrow">Install</p>
+
+<pre><code>/* jsDelivr CDN — drop into your CSS */
+@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css";</code></pre>
+
+<pre><code>&lt;!-- or a &lt;link&gt; tag --&gt;
+&lt;link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css"&gt;</code></pre>
+
+        <div class="sf-prose">
+          <table>
+            <thead>
+              <tr><th>Bundle</th><th>Includes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>slashed.optimal.css</code></td><td>Everything live today: core + classless forms — <strong>recommended</strong></td></tr>
+              <tr><td><code>slashed.optimal-components.css</code></td><td>Optimal + the staged component layer <em>(inert until v0.8)</em></td></tr>
+              <tr><td><code>slashed.optimal-utilities.css</code></td><td>Optimal + the staged utility layer <em>(inert in 0.x)</em></td></tr>
+              <tr><td><code>slashed.full.css</code></td><td>Optimal + both staged layers</td></tr>
+            </tbody>
+          </table>
+          <p>SLASHED relies on 2024 CSS — <code>light-dark()</code>, OKLCH relative colors, <code>@property</code>, <code>pow()</code> — so the browser floor is <strong>Chrome 125+, Safari 18+, Firefox 129+</strong>.</p>
+        </div>
+
+        <p class="sf-cluster sf-cluster--s footer-meta">
+          <a href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/">All CDN bundles →</a>
+          <a href="https://github.com/codeslash-dev/SLASHED/releases">GitHub Releases</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Documentation -->
+    <section class="sf-section sf-section--m sf-section--guttered">
+      <div class="sf-container sf-container--wide sf-stack sf-stack--m">
+        <p class="eyebrow">Documentation</p>
+        <div class="sf-grid sf-grid--fit sf-grid--m sf-gap--l">
+          <div class="sf-stack sf-stack--xs doc-list">
+            <h3 class="eyebrow">Guides</h3>
+            <a href="/docs/architecture">Architecture <small>layers, cascade, bundle structure</small></a>
+            <a href="/docs/theming">Theming <small>dark mode, overrides, fluid engine</small></a>
+            <a href="/docs/migration">Migration <small>upgrade across versions</small></a>
+            <a href="/docs/roadmap">Roadmap <small>planned features</small></a>
+          </div>
+          <div class="sf-stack sf-stack--xs doc-list">
+            <h3 class="eyebrow">Reference</h3>
+            <a href="/docs/tokens">Tokens <small>every design token + defaults</small></a>
+            <a href="/docs/token-index">Token Index <small>browseable index</small></a>
+            <a href="/docs/classes">Classes <small>every shipped class</small></a>
+            <a href="/docs/layout">Layout <small>container, stack, grid, cluster…</small></a>
+            <a href="/docs/macros">Macros <small>prose, flow, aspect, scroll-shadow</small></a>
+            <a href="/docs/motion">Motion <small>animation &amp; transition tokens</small></a>
+          </div>
+          <div class="sf-stack sf-stack--xs doc-list">
+            <h3 class="eyebrow">Developer</h3>
+            <a href="/docs/llm-guide">LLM Guide <small>AI-assisted development reference</small></a>
+            <a href="/docs/api-index">API Index <small>machine-readable catalogue</small></a>
+            <a href="/docs/source-comment-policy">Comment Policy <small>contributor conventions</small></a>
+            <a href="/docs/demo.html">Demo <small>live showcase</small></a>
+            <a href="/demos/full-api-demo.html">Full API Demo <small>every class &amp; token, live · dark mode</small></a>
+            <a href="/docs/test-coverage.html">Test Coverage <small>visual regression suite</small></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="sf-section sf-section--m sf-section--guttered">
+    <div class="sf-container sf-container--wide sf-stack sf-stack--s">
+      <div class="sf-divider sf-divider--soft" role="presentation"></div>
+      <div class="sf-cluster sf-cluster--between footer-meta">
+        <div class="sf-cluster sf-cluster--s">
+          <a href="/CHANGELOG">Changelog</a>
+          <a href="/CONTRIBUTING">Contributing</a>
+          <a href="https://github.com/codeslash-dev/SLASHED/actions/workflows/ci.yml">CI status</a>
+          <a href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
+          <a href="https://github.com/codeslash-dev/SLASHED-Plugins">WordPress plugin</a>
+        </div>
+        <span>MIT · © CODE/</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Page nicety, not framework: cycle auto → dark → light. The framework's
+    // dark mode itself is pure CSS (light-dark() + [data-theme]).
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      var states = ['auto', 'dark', 'light'];
+      var current = localStorage.getItem('slashed-home-theme') || 'auto';
+      function apply(state) {
+        if (state === 'auto') document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme', state);
+        btn.textContent = state[0].toUpperCase() + state.slice(1);
+      }
+      apply(current);
+      btn.addEventListener('click', function () {
+        current = states[(states.indexOf(current) + 1) % states.length];
+        localStorage.setItem('slashed-home-theme', current);
+        apply(current);
+      });
+    })();
+  </script>
+</body>
+</html>
