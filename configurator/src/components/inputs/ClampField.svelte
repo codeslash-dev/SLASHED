@@ -6,7 +6,13 @@
    * band, a live clamp readout, an optional min→max preview, and optional
    * modular-scale ratio preset chips folded into the same card.
    */
+  import { themeState } from '../../lib/theme.svelte';
+
   type RatioPreset = { label: string; value: number };
+
+  // <option> only reliably accepts a background via inline style (no dark:
+  // variant support), so it's derived from the chrome theme directly.
+  let optionBg = $derived(themeState.value === 'dark' ? '#16161e' : '#ffffff');
 
   let {
     title,
@@ -160,10 +166,10 @@
               class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded text-[10px] text-slate-800 dark:text-slate-200 px-1.5 py-1 focus:outline-none focus:border-indigo-500 cursor-pointer"
             >
               {#if row.active === undefined}
-                <option value="" style="background:#16161e;">Custom</option>
+                <option value="" style={`background:${optionBg};`}>Custom</option>
               {/if}
               {#each ratioPresets as p (p.value)}
-                <option value={String(p.value)} style="background:#16161e;">{p.label}</option>
+                <option value={String(p.value)} style={`background:${optionBg};`}>{p.label}</option>
               {/each}
             </select>
             <input
