@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.6.35] - 2026-07-03
+
 ### ⚠️ Breaking Changes
 - **layout:** `.sf-equal` now implements real CSS multi-column flowing layout (`column-width`/`column-count`/`column-gap`) instead of duplicating `.sf-grid--fit`'s `auto-fit` grid. Content now flows between columns like a newspaper — the previous grid-cell placement is gone. `--sf-equal-min-col-2/-3/-4/-6` are removed; `.sf-equal--2/--3/--4/--6` now set `column-count` directly instead of tuning a width threshold. See `docs/layout.md`.
 
