@@ -11,7 +11,16 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 
 - **Components layer** — the `slashed.components` layer and its stubs are already
   declared; the eight `.sf-*` components land incrementally after v1.0, additive
-  only.
+  only. Tracked in [#384](https://github.com/codeslash-dev/SLASHED/issues/384)
+  (consolidated tranche), with `.sf-btn` and `.sf-card` broken out individually
+  in [#493](https://github.com/codeslash-dev/SLASHED/issues/493) /
+  [#494](https://github.com/codeslash-dev/SLASHED/issues/494) — both fully
+  written but commented out in `optional/components.css` pending v0.8. An
+  outline `.sf-btn` variant is queued as a follow-on in
+  [#486](https://github.com/codeslash-dev/SLASHED/issues/486) once the base
+  variant set ships. **Note:** #384 and #493/#494 currently overlap in scope
+  (same button/card work tracked twice) — worth consolidating before v0.8
+  implementation starts.
 - ~~**`@property` for spacing/shadow tokens**~~ ✓ **Done** — spacing (`--sf-radius-*`,
   `--sf-space-*`, semantic spacing) and shadow (`--sf-shadow-*`, `--sf-text-shadow-*`,
   `--sf-drop-shadow-*`) tokens are already registered via `@property` in
@@ -21,6 +30,11 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   variants could become one-line `--sf-surface-color` presets of the generic
   primitive, once a fallback story for the precomputed
   `tokens.color-fallbacks.css` path is settled.
+- **Curated core utility set** — visibility/display, text-alignment,
+  flex/grid item-alignment, gap, and content-width (default/wide/full)
+  utilities, shipped enabled (not staged) in a new `slashed.utilities` layer
+  in `core/` — distinct from the staged, opt-in `optional/utilities.css`.
+  Tracked in [#248](https://github.com/codeslash-dev/SLASHED/issues/248).
 
 ## Under consideration
 
@@ -36,12 +50,17 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   changing document semantics.
 - **Skeleton shape component** — ship `.sf-skeleton` plus shape modifiers such as
   `.sf-skeleton--text`, `.sf-skeleton--line`, `.sf-skeleton--avatar`, and
-  `.sf-skeleton--card` in the optional components layer.
+  `.sf-skeleton--card` in the optional components layer. Item 8 of
+  [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
 - **Z-index utilities** — expose the named z-index scale as `.sf-z-*` classes
   (for example `.sf-z-modal` and `.sf-z-tooltip`) in `optional/utilities.css`.
 - **First component tranche** — implement `.sf-button`, `.sf-card`, `.sf-badge`,
   and `.sf-tag` first, using `optional/tokens.components.css` and existing
-  `.is-*` states where appropriate.
+  `.is-*` states where appropriate. Tracked in
+  [#384](https://github.com/codeslash-dev/SLASHED/issues/384); `.sf-btn`/`.sf-card`
+  specifically in [#493](https://github.com/codeslash-dev/SLASHED/issues/493) /
+  [#494](https://github.com/codeslash-dev/SLASHED/issues/494) (see Post-1.0 note
+  on overlapping tracking above).
 - **Standalone table pattern** — add `.sf-table`, `.sf-table-scroll`, and compact
   variants such as striped, bordered, and compact tables without changing global
   `table` styles or `.sf-prose table` behaviour.
@@ -50,20 +69,83 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   `.sf-field__error`, `.sf-form-row`, `.sf-form-col`, and `.sf-form-inline`.
 - **Remaining optional components** — after the first component tranche, complete
   `.sf-alert`, `.sf-avatar`, and `.sf-modal` with token-driven variants and
-  native `<dialog>` compatibility where applicable.
+  native `<dialog>` compatibility where applicable. Items 5–7 of
+  [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
+- **Outline button variant** — a border-only `.sf-btn--outline` style, plus a
+  possible gradient-border follow-up, once the base `.sf-btn` variant set ships.
+  Tracked in [#486](https://github.com/codeslash-dev/SLASHED/issues/486).
 - **Decorative animation utility classes** — the keyframes for `sf-spin`,
   `sf-shimmer`, `sf-ping`, `sf-blink`, and `sf-float` are already defined in
   `core/motion.css`; they need corresponding `.sf-spin`, `.sf-shimmer`, etc.
   utility classes in `optional/utilities.css` to be usable from markup.
+- **Hover-transform utility classes** — grow/shrink/float/sink/slide hover
+  transforms as a documented utility group, built on existing
+  `--sf-transition-*`/`--sf-animation-*` tokens.
+  Tracked in [#487](https://github.com/codeslash-dev/SLASHED/issues/487).
+- **Overflow-detection debug utility** — an opt-in class that visually flags
+  the element causing horizontal page overflow, for diagnosing layout bugs.
+  Tracked in [#495](https://github.com/codeslash-dev/SLASHED/issues/495).
 - **Interactive `drives N` exploration** — turn the configurator's passive
   dependency-count badge into a keyboard-accessible popover/list that navigates
   to dependent tokens.
 - **Motion configurator UX expansion** — extend the existing motion domain with
   richer previews, motion presets, `--sf-motion-scale` affordances, animation
   tokens, and transition-token editing.
+- **Configurator: live hover preview in CheatsheetPanel** — hovering a
+  class/token entry in `CheatsheetPanel.svelte` live-previews it against the
+  current `PreviewPanel` element, reverting on mouseleave.
+  Tracked in [#470](https://github.com/codeslash-dev/SLASHED/issues/470).
 - **Design-token export formats** — CSS and SLASHED theme JSON already exist;
   consider Figma Tokens, W3C Design Tokens, and Style Dictionary export/import if
-  design-tool workflows become a priority.
+  design-tool workflows become a priority. DTCG/W3C export specifically tracked
+  in [#361](https://github.com/codeslash-dev/SLASHED/issues/361).
+- **Versioned token manifest + JSON Schema** — promote `docs/api-index.json` to
+  a versioned, published artifact with a companion JSON Schema so external
+  tools (WP plugin, configurator, editors, linters) can consume the
+  token/class catalogue against a stable contract, validated in CI.
+  Tracked in [#360](https://github.com/codeslash-dev/SLASHED/issues/360).
+- **Consumer-facing Stylelint plugin/config** — a shippable, separately
+  published Stylelint config that lints *consumer* projects using SLASHED
+  (`@layer` order, `sf-`/`is-` reserved-name collisions, raw values that
+  should be tokens). Tracked in
+  [#363](https://github.com/codeslash-dev/SLASHED/issues/363).
+- **Distilled AI-assistant context file (`llms.txt`)** — a compact,
+  build-generated distillation of `docs/llm-guide.md` for consumers to drop
+  into their own AI coding assistant's context.
+  Tracked in [#472](https://github.com/codeslash-dev/SLASHED/issues/472).
+- **MCP server for live token/class data** — explore an MCP server exposing
+  the generated token/class/API-index data as live tools/resources
+  (`search_tokens`, `get_class_info`, etc.) for AI coding assistants, as a
+  live alternative to the static `llms.txt`.
+  Tracked in [#473](https://github.com/codeslash-dev/SLASHED/issues/473).
+- **Concave/inverted corner utility** — a utility for a corner that curves
+  away from a box (mask/gradient/`clip-path` technique), as opposed to normal
+  convex `border-radius`. Needs a technique spike before implementation.
+  Tracked in [#484](https://github.com/codeslash-dev/SLASHED/issues/484).
+- **Boxed-section layout primitive** — a named "boxed" section primitive
+  (inset content with visible border/shadow/radius framing) as the logical
+  counterpart to `.sf-full-bleed`/`.sf-breakout` in `core/layout.css`.
+  Tracked in [#485](https://github.com/codeslash-dev/SLASHED/issues/485).
+- **Flex-based grid alternative** — a flex-based layout utility as an
+  explicit alternative to `.sf-grid`/`.sf-equal`/`.sf-grid-cols-*` for
+  uneven item counts, reusing existing gap tokens. Needs docs clarifying when
+  to use it over the existing grid primitives.
+  Tracked in [#488](https://github.com/codeslash-dev/SLASHED/issues/488).
+- **Unified background media overlay macro** — one macro that layers a
+  color/gradient overlay on a background image/video with automatic
+  stacking, composing the existing `.sf-scrim`, `.is-overlay`, and
+  `--sf-z-overlay` primitives rather than new tokens.
+  Tracked in [#489](https://github.com/codeslash-dev/SLASHED/issues/489).
+- **Concrete recipe macros** — border-radius, overlap, and card-container
+  recipes on top of the existing `core/macros.css` mechanism, each shipped
+  and documented independently.
+  Tracked in [#490](https://github.com/codeslash-dev/SLASHED/issues/490).
+- **Container-relative fluid scale** — the `--sf-text-*`/`--sf-space-*` fluid
+  scales are `100vw`-driven and don't respond to `@container` width the way
+  the layout primitives do; investigate a `cqi`-based opt-in variant for
+  nested/narrow contexts (sidebars, cards) without replacing the
+  viewport-based page-level default.
+  Tracked in [#497](https://github.com/codeslash-dev/SLASHED/issues/497).
 - **Hero recipe / alias** — document or optionally add a `.sf-hero` convenience
   pattern that composes existing `.sf-cover` and `.sf-scrim` behaviour.
 - **Scroll progress bar recipe** — consider an optional JS-assisted or
