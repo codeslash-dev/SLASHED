@@ -2,6 +2,11 @@
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import { themeState } from '../../lib/theme.svelte';
+
+  // <option> only reliably accepts a background via inline style (no dark:
+  // variant support), so it's derived from the chrome theme directly.
+  let optionBg = $derived(themeState.value === 'dark' ? '#16161e' : '#ffffff');
 
   let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
@@ -140,7 +145,7 @@
           class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[10px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
         >
           {#each EASINGS as e (e.token)}
-            <option value={e.token} style="background:#16161e;">{e.label}</option>
+            <option value={e.token} style={`background:${optionBg};`}>{e.label}</option>
           {/each}
         </select>
         <select
@@ -150,7 +155,7 @@
           class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[10px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
         >
           {#each DURATIONS as d (d.token)}
-            <option value={d.token} style="background:#16161e;">{d.label}</option>
+            <option value={d.token} style={`background:${optionBg};`}>{d.label}</option>
           {/each}
         </select>
         <button

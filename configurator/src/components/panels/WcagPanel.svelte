@@ -5,6 +5,11 @@
     getRelativeLuminance, getContrastRatio,
   } from '../../lib/colorUtils';
   import { resolveColor, resolveRgb, previewVersion, getActiveTheme } from '../../lib/previewResolver.svelte';
+  import { themeState } from '../../lib/theme.svelte';
+
+  // <option> only reliably accepts a background via inline style (no dark:
+  // variant support), so it's derived from the chrome theme directly.
+  let optionBg = $derived(themeState.value === 'dark' ? '#16161e' : '#ffffff');
 
   let { overrides, onSet }: {
     tokens: SlashedToken[];
@@ -180,14 +185,14 @@
       <div>
         <div class="text-[9px] text-slate-500 mb-1">Foreground</div>
         <select bind:value={fgLabel} class="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer">
-          {#each ALL_OPTS as o (o.label)}<option value={o.label} style="background:#16161e;">{o.label}</option>{/each}
+          {#each ALL_OPTS as o (o.label)}<option value={o.label} style={`background:${optionBg};`}>{o.label}</option>{/each}
         </select>
       </div>
       <button onclick={swap} title="Swap" class="mb-0.5 px-2 py-1.5 rounded-lg border border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer text-[12px]">⇄</button>
       <div>
         <div class="text-[9px] text-slate-500 mb-1">Background</div>
         <select bind:value={bgLabel} class="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer">
-          {#each ALL_OPTS as o (o.label)}<option value={o.label} style="background:#16161e;">{o.label}</option>{/each}
+          {#each ALL_OPTS as o (o.label)}<option value={o.label} style={`background:${optionBg};`}>{o.label}</option>{/each}
         </select>
       </div>
     </div>

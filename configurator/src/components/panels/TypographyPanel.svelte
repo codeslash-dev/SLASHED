@@ -5,6 +5,11 @@
   import SliderRow from '../inputs/SliderRow.svelte';
   import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
   import ClampField from '../inputs/ClampField.svelte';
+  import { themeState } from '../../lib/theme.svelte';
+
+  // <option> only reliably accepts a background via inline style (no dark:
+  // variant support), so it's derived from the chrome theme directly.
+  let optionBg = $derived(themeState.value === 'dark' ? '#16161e' : '#ffffff');
 
   let { overrides, onSet, onReset, onBulkChange }: {
     tokens: SlashedToken[];
@@ -276,10 +281,10 @@
           style={`font-family: ${f.current || "inherit"}`}
         >
           {#each f.opts as o (o.label)}
-            <option value={o.value} style="font-family:inherit;background:#16161e;">{o.label}</option>
+            <option value={o.value} style={`font-family:inherit;background:${optionBg};`}>{o.label}</option>
           {/each}
           {#if f.current && !f.opts.some((o) => o.value === f.current)}
-            <option value={f.current} style="background:#16161e;">Custom: {f.current.split(",")[0].replace(/['"]/g, "")}</option>
+            <option value={f.current} style={`background:${optionBg};`}>Custom: {f.current.split(",")[0].replace(/['"]/g, "")}</option>
           {/if}
         </select>
         {#if f.token in overrides}
@@ -297,9 +302,9 @@
           onchange={(e) => { googleFontChoice = (e.target as HTMLSelectElement).value; }}
           class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
         >
-          <option value="" style="background:#16161e;">Pick a font…</option>
+          <option value="" style={`background:${optionBg};`}>Pick a font…</option>
           {#each GOOGLE_FONTS as g (g)}
-            <option value={g} style="background:#16161e;">{g}</option>
+            <option value={g} style={`background:${optionBg};`}>{g}</option>
           {/each}
         </select>
         <div class="flex gap-1 shrink-0">
@@ -378,10 +383,10 @@
         class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
       >
         {#each SIZE_OPTIONS as o (o.value)}
-          <option value={o.value} style="background:#16161e;">{o.label}</option>
+          <option value={o.value} style={`background:${optionBg};`}>{o.label}</option>
         {/each}
         {#if !SIZE_OPTIONS.some((o) => o.value === levelVal(activeLevel.size, activeLevel.dSize))}
-          <option value={levelVal(activeLevel.size, activeLevel.dSize)} style="background:#16161e;">custom</option>
+          <option value={levelVal(activeLevel.size, activeLevel.dSize)} style={`background:${optionBg};`}>custom</option>
         {/if}
       </select>
     </div>
@@ -395,10 +400,10 @@
         class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
       >
         {#each LEADING_OPTIONS as o (o.value)}
-          <option value={o.value} style="background:#16161e;">{o.label} · {o.num}</option>
+          <option value={o.value} style={`background:${optionBg};`}>{o.label} · {o.num}</option>
         {/each}
         {#if !LEADING_OPTIONS.some((o) => o.value === levelVal(activeLevel.lh, activeLevel.dLh))}
-          <option value={levelVal(activeLevel.lh, activeLevel.dLh)} style="background:#16161e;">custom</option>
+          <option value={levelVal(activeLevel.lh, activeLevel.dLh)} style={`background:${optionBg};`}>custom</option>
         {/if}
       </select>
     </div>
@@ -430,10 +435,10 @@
           class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
         >
           {#each TRACKING_OPTIONS as o (o.value)}
-            <option value={o.value} style="background:#16161e;">{o.label}</option>
+            <option value={o.value} style={`background:${optionBg};`}>{o.label}</option>
           {/each}
           {#if !TRACKING_OPTIONS.some((o) => o.value === levelVal(activeLevel.ls, activeLevel.dLs))}
-            <option value={levelVal(activeLevel.ls, activeLevel.dLs)} style="background:#16161e;">custom</option>
+            <option value={levelVal(activeLevel.ls, activeLevel.dLs)} style={`background:${optionBg};`}>custom</option>
           {/if}
         </select>
       </div>
