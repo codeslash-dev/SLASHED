@@ -58,6 +58,19 @@ export function toggleTheme() {
   setTheme(themeState.value === "dark" ? "light" : "dark");
 }
 
+/**
+ * Force a theme without persisting it or treating it as a user choice —
+ * for embedding contexts that need a fixed theme (e.g. a host shell that's
+ * permanently dark) without touching the user's own saved preference or
+ * leaving them subject to a later live OS-preference change flipping it
+ * back, since that only happens while `followSystem` is still true.
+ */
+export function pinTheme(t: Theme) {
+  followSystem = false;
+  themeState.value = t;
+  applyToRoot();
+}
+
 if (typeof matchMedia !== "undefined") {
   const mql = matchMedia("(prefers-color-scheme: dark)");
   const onChange = (e: MediaQueryListEvent) => {
