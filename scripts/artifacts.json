@@ -11,6 +11,7 @@
       "docs/api-index.json",
       "docs/api-index.md",
       "token-registry.json",
+      "badges/css-custom-data.json",
       "configurator/src/data/api-index.generated.json",
       "configurator/src/data/bundles.generated.json",
       "configurator/src/data/token-registry.generated.json"

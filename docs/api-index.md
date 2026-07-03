@@ -878,9 +878,9 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
-| `.sf-drop-shadow-l` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent |
-| `.sf-drop-shadow-m` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent |
-| `.sf-drop-shadow-s` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent |
+| `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
 | `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
 | `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |

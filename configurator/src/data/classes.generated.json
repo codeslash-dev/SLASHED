@@ -980,7 +980,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
       "optional": false,
       "layer": "slashed.macros"
     },
@@ -990,7 +990,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
       "optional": false,
       "layer": "slashed.macros"
     },
@@ -1000,7 +1000,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
       "optional": false,
       "layer": "slashed.macros"
     },
