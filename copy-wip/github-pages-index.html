@@ -660,7 +660,10 @@ layout: null
       var btn = document.getElementById('theme-toggle');
       var states = ['auto', 'dark', 'light'];
       var current = 'auto';
-      try { current = localStorage.getItem('slashed-home-theme') || 'auto'; } catch (e) {}
+      try {
+        var stored = localStorage.getItem('slashed-home-theme');
+        if (states.indexOf(stored) !== -1) current = stored;
+      } catch (e) {}
       function apply(state) {
         if (state === 'auto') document.documentElement.removeAttribute('data-theme');
         else document.documentElement.setAttribute('data-theme', state);
