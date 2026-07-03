@@ -292,6 +292,24 @@ Universal browser support.
 
 ---
 
+## `.sf-drop-shadow-s` / `.sf-drop-shadow-m` / `.sf-drop-shadow-l`
+
+Applies `filter: drop-shadow(...)` — unlike `box-shadow`, this follows the
+actual alpha shape of the element (PNG cutouts, SVG icons, transparent
+logos) instead of hugging the bounding box.
+
+```html
+<img class="sf-drop-shadow-m" src="logo.svg" alt="">
+```
+
+Tokens:
+
+| Token | What it controls |
+|---|---|
+| `--sf-drop-shadow-s` / `-m` / `-l` | drop-shadow value consumed 1:1 by the matching class (`core/tokens.css`) |
+
+---
+
 ## `.sf-surface` and `.sf-surface--*`
 
 Contextual background + auto-contrast text color. Apply to any element

@@ -27,23 +27,23 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 924,
+      "total": 926,
       "by_type": {
-        "class": 239,
-        "token": 685
+        "class": 242,
+        "token": 684
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 868,
+        "PUBLIC": 870,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 460,
-        "knob": 225
+        "consumption": 461,
+        "knob": 223
       },
-      "tokens": 685,
-      "classes": 239,
-      "sf_classes": 190,
+      "tokens": 684,
+      "classes": 242,
+      "sf_classes": 193,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
@@ -51,8 +51,8 @@
         "Component tokens": 6,
         "Core tokens": 602,
         "Layout primitives": 128,
-        "Layout tokens": 54,
-        "Macro classes": 42,
+        "Layout tokens": 53,
+        "Macro classes": 45,
         "Macro tokens": 23,
         "Motion / animation": 15,
         "Print": 4,
@@ -9947,7 +9947,7 @@
       "namespace": "equal",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Equal columns (intrinsically responsive RAM)",
+      "group": "Equal columns",
       "description": "Gap between equal columns.",
       "value": "var(--sf-gap)",
       "aliasOf": "--sf-gap",
@@ -9975,8 +9975,8 @@
       "namespace": "equal",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Equal columns (intrinsically responsive RAM)",
-      "description": "Minimum column width for the default auto-fill equal-columns layout. Columns fill the row until this width is reached, then wrap to the next line.",
+      "group": "Equal columns",
+      "description": "column-width floor for .sf-equal's flowing CSS multi-column layout (not a grid) — the browser won't go narrower than this.",
       "value": "16rem",
       "aliasOf": null,
       "registered": false,
@@ -9996,16 +9996,44 @@
       ]
     },
     {
-      "name": "--sf-equal-min-col-2",
+      "name": "--sf-equal-rule-color",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "equal",
+      "category": "Layout tokens",
+      "area": "layout",
+      "group": "Equal columns",
+      "description": "column-rule color between .sf-equal's flowing columns.",
+      "value": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-equal-rule-style",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "equal",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Equal columns (intrinsically responsive RAM)",
-      "description": "Minimum column width for the 2-column equal preset.",
-      "value": "28rem",
+      "group": "Equal columns",
+      "description": "column-rule style between .sf-equal's flowing columns.",
+      "value": "solid",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -10024,72 +10052,16 @@
       ]
     },
     {
-      "name": "--sf-equal-min-col-3",
+      "name": "--sf-equal-rule-width",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "equal",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Equal columns (intrinsically responsive RAM)",
-      "description": "Minimum column width for the 3-column equal preset.",
-      "value": "15rem",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-equal-min-col-4",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "equal",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Equal columns (intrinsically responsive RAM)",
-      "description": "Minimum column width for the 4-column equal preset.",
-      "value": "16rem",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-equal-min-col-6",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "equal",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Equal columns (intrinsically responsive RAM)",
-      "description": "Minimum column width for the 6-column equal preset.",
-      "value": "10rem",
+      "group": "Equal columns",
+      "description": "column-rule width between .sf-equal's flowing columns. 0 (default) means no rule.",
+      "value": "0",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -21684,6 +21656,81 @@
       ]
     },
     {
+      "name": "sf-drop-shadow-l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-drop-shadow-l",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-drop-shadow-m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-drop-shadow-m",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-drop-shadow-s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-drop-shadow-s",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- no unprefixed equivalent",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-entrance--fade",
       "type": "class",
       "tier": "PUBLIC",
@@ -21843,7 +21890,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Equal columns (intrinsically responsive)",
-      "description": "Auto-fill equal-columns grid. Columns fill the row and wrap when they hit --sf-equal-min-col. No breakpoints needed.",
+      "description": "Flowing CSS multi-column layout (not a grid) — content distributes across columns like a newspaper instead of sitting in fixed cells. Reach for .sf-grid/.sf-grid--fit for discrete grid cells instead.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -21868,7 +21915,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Equal columns (intrinsically responsive)",
-      "description": "Equal-columns variant locked to 2 columns using --sf-equal-min-col-2.",
+      "description": "Equal-columns variant locked to column-count: 2.",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -21893,7 +21940,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Equal columns (intrinsically responsive)",
-      "description": "Equal-columns variant locked to 3 columns using --sf-equal-min-col-3.",
+      "description": "Equal-columns variant locked to column-count: 3.",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -21918,7 +21965,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Equal columns (intrinsically responsive)",
-      "description": "Equal-columns variant locked to 4 columns using --sf-equal-min-col-4.",
+      "description": "Equal-columns variant locked to column-count: 4.",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,
@@ -21943,7 +21990,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "Equal columns (intrinsically responsive)",
-      "description": "Equal-columns variant locked to 6 columns using --sf-equal-min-col-6.",
+      "description": "Equal-columns variant locked to column-count: 6.",
       "isVariant": true,
       "baseClass": "sf-equal",
       "optional": false,

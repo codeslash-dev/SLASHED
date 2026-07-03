@@ -13,7 +13,7 @@ of these in sync:
 | `docs/roadmap.md` | `Current version: **X.Y.Z**` line |
 | `configurator/package.json` | `.version` |
 | `configurator/package-lock.json` | `.version` + `.packages[""].version` |
-| `badges/*.css` (unminified) | `/* SLASHED vX.Y.Z */` comment header |
+| `badges/*.css` (unminified) | `/*! SLASHED vX.Y.Z */` comment header |
 | Configurator UI version pill | baked in via Vite `__SLASHED_VERSION__` at build time |
 
 **Never edit version numbers by hand.** Use `npm version` then the sync script:
@@ -92,7 +92,7 @@ After the tag is pushed, GitHub Actions (`release.yml`) does the rest:
 
 - Source lives in `core/` (required) and `optional/` (opt-in).
 - `scripts/bundle.js` concatenates and builds `badges/`.
-- Every unminified dist bundle is stamped with `/* SLASHED vX.Y.Z ... */`.
+- Every unminified dist bundle is stamped with a minifier-safe `/*! SLASHED vX.Y.Z ... */` header (bang-comment, per MIT's copyright-notice requirement — see LICENSE).
 - The stamp version must match `package.json` — `release.yml` verifies this
   before publishing the GitHub Release.
 

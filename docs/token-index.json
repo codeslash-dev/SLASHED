@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 685,
+      "tokens": 684,
       "by_tier": {
-        "PUBLIC": 629,
+        "PUBLIC": 628,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 225,
-        "consumption": 460
+        "knob": 223,
+        "consumption": 461
       }
     }
   },
@@ -2853,37 +2853,29 @@
       ],
       "value": "16rem"
     },
-    "--sf-equal-min-col-2": {
+    "--sf-equal-rule-color": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "28rem"
+      "value": "var(--sf-color-border)"
     },
-    "--sf-equal-min-col-3": {
+    "--sf-equal-rule-style": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "15rem"
+      "value": "solid"
     },
-    "--sf-equal-min-col-4": {
+    "--sf-equal-rule-width": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "16rem"
-    },
-    "--sf-equal-min-col-6": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "10rem"
+      "value": "0"
     },
     "--sf-field-block": {
       "tier": "PUBLIC",

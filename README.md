@@ -217,6 +217,19 @@ colour floor. If you must support older engines, SLASHED is not the right tool.
 The WordPress plugin (Bricks Builder + Gutenberg) lives in its own repository:
 [slashed-for-wp](https://github.com/codeslash-dev/slashed-for-wp).
 
+## Editor integration
+
+A generated [VS Code CSS Custom Data](https://github.com/microsoft/vscode-css-languageservice/blob/main/docs/customData.md)
+file ships alongside the bundles, so every `--sf-*` token autocompletes with
+its description and default value in any editor that supports the format.
+
+```json
+// .vscode/settings.json
+{
+  "css.customData": ["./node_modules/slashed/badges/css-custom-data.json"]
+}
+```
+
 ## Development
 
 ```sh

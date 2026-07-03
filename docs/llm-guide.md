@@ -373,7 +373,7 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 --sf-text-shadow-none
 --sf-text-shadow-s / -m / -l
 
-/* Drop shadow (respects alpha — PNG, SVG) */
+/* Drop shadow (respects alpha — PNG, SVG) — consumed by .sf-drop-shadow-s/-m/-l */
 --sf-drop-shadow-s / -m / -l
 
 /* Glow */
@@ -777,11 +777,14 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-grid-min-xs / --sf-grid-min-s / --sf-grid-min-m
 --sf-grid-min-l / --sf-grid-min-xl / --sf-grid-min-2xl   /* 10rem … 28rem */
 
-/* Equal columns */
+/* Equal columns — flowing CSS multi-column (.sf-equal), NOT a grid: content
+   distributes across columns like a newspaper instead of sitting in fixed
+   cells. --2/--3/--4/--6 modifiers set column-count directly. */
 --sf-equal-gap:        var(--sf-gap)
---sf-equal-min-col:    16rem
---sf-equal-min-col-2 / --sf-equal-min-col-3
---sf-equal-min-col-4 / --sf-equal-min-col-6
+--sf-equal-min-col:    16rem       /* column-width floor */
+--sf-equal-rule-width: 0           /* column-rule width — 0 = off */
+--sf-equal-rule-style: solid
+--sf-equal-rule-color: var(--sf-color-border)
 
 /* Cover */
 --sf-cover-min-height: 100dvh

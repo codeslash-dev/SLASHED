@@ -374,6 +374,16 @@ test.describe('macro: .sf-tabular-nums', () => {
   });
 });
 
+test.describe('macro: .sf-drop-shadow-*', () => {
+  for (const size of ['s', 'm', 'l']) {
+    test(`--${size} sets a non-none filter`, async ({ page }) => {
+      await setup(page, `<img id="t" class="sf-drop-shadow-${size}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">`);
+      const filter = await page.locator('#t').evaluate(el => getComputedStyle(el).filter);
+      expect(filter).not.toBe('none');
+    });
+  }
+});
+
 test.describe('macro: .sf-entrance--fade', () => {
   test('animation-name is set when reduced motion is not preferred', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });

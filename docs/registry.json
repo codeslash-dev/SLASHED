@@ -19,8 +19,8 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 685,
-      "sf_classes": 190,
+      "tokens": 684,
+      "sf_classes": 193,
       "is_classes": 40
     }
   },
@@ -379,10 +379,9 @@
     "--sf-ease-spring",
     "--sf-equal-gap",
     "--sf-equal-min-col",
-    "--sf-equal-min-col-2",
-    "--sf-equal-min-col-3",
-    "--sf-equal-min-col-4",
-    "--sf-equal-min-col-6",
+    "--sf-equal-rule-color",
+    "--sf-equal-rule-style",
+    "--sf-equal-rule-width",
     "--sf-field-block",
     "--sf-field-padding-block",
     "--sf-field-padding-inline",
@@ -764,6 +763,9 @@
     "sf-divider--soft",
     "sf-divider--strong",
     "sf-divider--vertical",
+    "sf-drop-shadow-l",
+    "sf-drop-shadow-m",
+    "sf-drop-shadow-s",
     "sf-entrance--fade",
     "sf-entrance--fade-down",
     "sf-entrance--fade-left",

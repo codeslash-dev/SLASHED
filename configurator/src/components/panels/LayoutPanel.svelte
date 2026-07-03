@@ -57,6 +57,7 @@
   let switcherThreshold = $derived(parseRem(overrides["--sf-switcher-threshold"], 30));
   let sidebarMinWidth   = $derived(parseRem(overrides["--sf-sidebar-min-width"], 50));
   let equalMinCol       = $derived(parseRem(overrides["--sf-equal-min-col"], 16));
+  let equalRuleWidth    = $derived(parseFloat(overrides["--sf-equal-rule-width"] ?? "0"));
   let coverMinHeight    = $derived(parseRem(overrides["--sf-cover-min-height"], 100));
   let imposterMargin    = $derived(parseRem(overrides["--sf-imposter-margin"], 1));
   let breakoutWidth     = $derived(parseRem(overrides["--sf-breakout-width"], 90));
@@ -461,34 +462,24 @@
           {/each}
         </section>
 
-        <!-- Equal grid -->
+        <!-- Equal columns (flowing CSS multi-column, not a grid) -->
         <section class="space-y-2">
-          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Equal grid</div>
+          <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Equal columns (flowing)</div>
+          <div class="text-[9px] text-slate-600">Content flows between columns like a newspaper — use .sf-grid for discrete grid cells instead.</div>
           <SliderRow
-            label="Min column" value={equalMinCol} min={6} max={36} step={0.5} unit="rem"
-            help="--sf-equal-min-col — minimum column width for .sf-equal"
+            label="Min column width" value={equalMinCol} min={6} max={36} step={0.5} unit="rem"
+            help="--sf-equal-min-col — column-width floor for .sf-equal"
             overridden={"--sf-equal-min-col" in overrides}
             onChange={(v) => onSet("--sf-equal-min-col", `${v}rem`)}
             onReset={() => onReset("--sf-equal-min-col")}
           />
-          <div>
-            <div class="text-[9px] text-slate-600 mb-1.5">Named column counts (equal-min-col-2/3/4/6)</div>
-            <div class="space-y-1.5">
-              {#each [
-                { label: "2-col", token: "--sf-equal-min-col-2", def: 28 },
-                { label: "3-col", token: "--sf-equal-min-col-3", def: 15 },
-                { label: "4-col", token: "--sf-equal-min-col-4", def: 16 },
-                { label: "6-col", token: "--sf-equal-min-col-6", def: 10 },
-              ] as c (c.token)}
-                <SliderRow
-                  label={c.label} value={parseRem(overrides[c.token], c.def)} min={4} max={36} step={0.5} unit="rem"
-                  overridden={c.token in overrides}
-                  onChange={(v) => onSet(c.token, `${v}rem`)}
-                  onReset={() => onReset(c.token)}
-                />
-              {/each}
-            </div>
-          </div>
+          <SliderRow
+            label="Rule width" value={equalRuleWidth} min={0} max={4} step={0.5} unit="px"
+            help="--sf-equal-rule-width — column-rule width between flowing columns, 0 = off"
+            overridden={"--sf-equal-rule-width" in overrides}
+            onChange={(v) => onSet("--sf-equal-rule-width", `${v}px`)}
+            onReset={() => onReset("--sf-equal-rule-width")}
+          />
         </section>
 
         <!-- Cover -->

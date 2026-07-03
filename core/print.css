@@ -57,6 +57,16 @@
 
     }
 
+    /* Fluid --sf-h*-size tokens resolve via 100vw clamp()s, which have no
+       reliable meaning on a print page box. Pin print heading sizes to
+       static pt values instead. */
+    h1 { font-size: 24pt; }
+    h2 { font-size: 20pt; }
+    h3 { font-size: 16pt; }
+    h4 { font-size: 14pt; }
+    h5 { font-size: 12pt; }
+    h6 { font-size: 11pt; }
+
     p {
       orphans: 3;
       widows:  3;

@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**685 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**684 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -622,7 +622,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-54 tokens.
+53 tokens.
 
 | Token | Default |
 |---|---|
@@ -652,10 +652,9 @@ rebrand workflow.
 | `--sf-cover-padding` | `var(--sf-section-pad)` |
 | `--sf-equal-gap` | `var(--sf-gap)` |
 | `--sf-equal-min-col` | `16rem` |
-| `--sf-equal-min-col-2` | `28rem` |
-| `--sf-equal-min-col-3` | `15rem` |
-| `--sf-equal-min-col-4` | `16rem` |
-| `--sf-equal-min-col-6` | `10rem` |
+| `--sf-equal-rule-color` | `var(--sf-color-border)` |
+| `--sf-equal-rule-style` | `solid` |
+| `--sf-equal-rule-width` | `0` |
 | `--sf-frame-ratio` | `16 / 9` |
 | `--sf-grid-gap` | `var(--sf-gap)` |
 | `--sf-grid-min` | `16rem` |
