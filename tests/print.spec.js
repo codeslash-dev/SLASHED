@@ -57,4 +57,17 @@ test.describe('Print styles', () => {
 
     expect(pca).toBe('exact');
   });
+
+  test('headings get static pt sizes, not the fluid vw-based scale', async ({ page }) => {
+    await page.setContent(`<h1 id="h1">Title</h1><h6 id="h6">Subtitle</h6>`);
+    await page.addStyleTag({ path: BUNDLE });
+    await page.emulateMedia({ media: 'print' });
+
+    const h1Size = await page.locator('#h1').evaluate(el => getComputedStyle(el).fontSize);
+    const h6Size = await page.locator('#h6').evaluate(el => getComputedStyle(el).fontSize);
+
+    // 24pt = 32px, 11pt ≈ 14.67px at 96dpi — static values, not vw-derived.
+    expect(h1Size).toBe('32px');
+    expect(parseFloat(h6Size)).toBeCloseTo(14.67, 1);
+  });
 });

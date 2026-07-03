@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**924 elements** — 685 tokens, 239 classes.
+**926 elements** — 684 tokens, 242 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 868 | Everyday surface. SemVer-stable. |
+| PUBLIC | 870 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (685)
+## Tokens (684)
 
 ### Component tokens (6)
 
@@ -638,7 +638,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-z-toast` | PUBLIC | knob | z | `1050` | Z-index for toast / snackbar notifications. |
 | `--sf-z-tooltip` | PUBLIC | knob | z | `1060` | Z-index for tooltips and transient floating notifications. Highest named layer in the z-index stack. Default 1060. |
 
-### Layout tokens (54)
+### Layout tokens (53)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -667,11 +667,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-cover-min-height` | PUBLIC | knob | cover | `100dvh` | Minimum height of the cover layout (typically 100svh). |
 | `--sf-cover-padding` | PUBLIC | consumption | cover | `var(--sf-section-pad)` | Inner padding for the cover layout. |
 | `--sf-equal-gap` | PUBLIC | consumption | equal | `var(--sf-gap)` | Gap between equal columns. |
-| `--sf-equal-min-col` | PUBLIC | knob | equal | `16rem` | Minimum column width for the default auto-fill equal-columns layout. Columns fill the row until this width is reached, then wrap to the next line. |
-| `--sf-equal-min-col-2` | PUBLIC | knob | equal | `28rem` | Minimum column width for the 2-column equal preset. |
-| `--sf-equal-min-col-3` | PUBLIC | knob | equal | `15rem` | Minimum column width for the 3-column equal preset. |
-| `--sf-equal-min-col-4` | PUBLIC | knob | equal | `16rem` | Minimum column width for the 4-column equal preset. |
-| `--sf-equal-min-col-6` | PUBLIC | knob | equal | `10rem` | Minimum column width for the 6-column equal preset. |
+| `--sf-equal-min-col` | PUBLIC | knob | equal | `16rem` | column-width floor for .sf-equal's flowing CSS multi-column layout (not a grid) — the browser won't go narrower than this. |
+| `--sf-equal-rule-color` | PUBLIC | consumption | equal | `var(--sf-color-border)` | column-rule color between .sf-equal's flowing columns. |
+| `--sf-equal-rule-style` | PUBLIC | knob | equal | `solid` | column-rule style between .sf-equal's flowing columns. |
+| `--sf-equal-rule-width` | PUBLIC | knob | equal | `0` | column-rule width between .sf-equal's flowing columns. 0 (default) means no rule. |
 | `--sf-frame-ratio` | PUBLIC | knob | frame | `16 / 9` | Aspect ratio for the frame (media container) layout. |
 | `--sf-grid-gap` | PUBLIC | consumption | grid | `var(--sf-gap)` | Gap between auto-fill grid cells. |
 | `--sf-grid-min` | PUBLIC | knob | grid | `16rem` | Minimum column width for the auto-fill grid. |
@@ -725,7 +724,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (239)
+## Classes (242)
 
 ### Accessibility (8)
 
@@ -791,11 +790,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-divider--soft` | PUBLIC | layout | Divider | Divider variant with reduced opacity (subtle separator). |
 | `.sf-divider--strong` | PUBLIC | layout | Divider | Divider variant with stronger/darker color for a more prominent separator. |
 | `.sf-divider--vertical` | PUBLIC | layout | Divider | Divider variant rendered as a vertical line. Use inside flex or grid containers. |
-| `.sf-equal` | PUBLIC | layout | Equal columns (intrinsically responsive) | Auto-fill equal-columns grid. Columns fill the row and wrap when they hit --sf-equal-min-col. No breakpoints needed. |
-| `.sf-equal--2` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 2 columns using --sf-equal-min-col-2. |
-| `.sf-equal--3` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 3 columns using --sf-equal-min-col-3. |
-| `.sf-equal--4` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 4 columns using --sf-equal-min-col-4. |
-| `.sf-equal--6` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to 6 columns using --sf-equal-min-col-6. |
+| `.sf-equal` | PUBLIC | layout | Equal columns (intrinsically responsive) | Flowing CSS multi-column layout (not a grid) — content distributes across columns like a newspaper instead of sitting in fixed cells. Reach for .sf-grid/.sf-grid--fit for discrete grid cells instead. |
+| `.sf-equal--2` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 2. |
+| `.sf-equal--3` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 3. |
+| `.sf-equal--4` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 4. |
+| `.sf-equal--6` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 6. |
 | `.sf-frame` | PUBLIC | layout | Frame | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
 | `.sf-frame--3-2` | PUBLIC | layout | Frame | Frame variant locked to a 3:2 aspect ratio. |
 | `.sf-frame--4-3` | PUBLIC | layout | Frame | Frame variant locked to a 4:3 aspect ratio. |
@@ -873,12 +872,15 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (42)
+### Macro classes (45)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
+| `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
 | `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
 | `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |

@@ -285,29 +285,48 @@ test.describe('layout: .sf-grid', () => {
 });
 
 // ── .sf-equal ───────────────────────────────────────────────────
+// .sf-equal is CSS multi-column flowing layout, not a grid: content
+// distributes across columns like a newspaper instead of sitting in
+// discrete grid cells (that's what .sf-grid/.sf-grid--fit is for).
 test.describe('layout: .sf-equal', () => {
-  test('--3 produces exactly 3 equal columns', async ({ page }) => {
+  test('--3 sets column-count: 3', async ({ page }) => {
     await setup(page, `
       <div id="t" class="sf-equal sf-equal--3" style="width:900px">
-        <div>A</div><div>B</div><div>C</div>
+        <p>A</p><p>B</p><p>C</p>
       </div>
     `);
-    const cols = await page.locator('#t').evaluate(el =>
-      getComputedStyle(el).gridTemplateColumns.split(' ').length
-    );
-    expect(cols).toBe(3);
+    const columnCount = await page.locator('#t').evaluate(el => getComputedStyle(el).columnCount);
+    expect(columnCount).toBe('3');
   });
 
-  test('--4 produces exactly 4 equal columns', async ({ page }) => {
+  test('--4 sets column-count: 4', async ({ page }) => {
     await setup(page, `
       <div id="t" class="sf-equal sf-equal--4" style="width:1200px">
-        <div>A</div><div>B</div><div>C</div><div>D</div>
+        <p>A</p><p>B</p><p>C</p><p>D</p>
       </div>
     `);
-    const cols = await page.locator('#t').evaluate(el =>
-      getComputedStyle(el).gridTemplateColumns.split(' ').length
-    );
-    expect(cols).toBe(4);
+    const columnCount = await page.locator('#t').evaluate(el => getComputedStyle(el).columnCount);
+    expect(columnCount).toBe('4');
+  });
+
+  test('base class sets column-width from --sf-equal-min-col', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-equal" style="width:900px; --sf-equal-min-col: 12rem">
+        <p>A</p><p>B</p><p>C</p>
+      </div>
+    `);
+    const columnWidth = await page.locator('#t').evaluate(el => getComputedStyle(el).columnWidth);
+    expect(columnWidth).toBe('192px'); // 12rem @ default 16px root
+  });
+
+  test('children get break-inside: avoid', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-equal sf-equal--2" style="width:900px">
+        <p id="child">A</p>
+      </div>
+    `);
+    const breakInside = await page.locator('#child').evaluate(el => getComputedStyle(el).breakInside);
+    expect(breakInside).toBe('avoid');
   });
 });
 

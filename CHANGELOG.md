@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### ⚠️ Breaking Changes
+- **layout:** `.sf-equal` now implements real CSS multi-column flowing layout (`column-width`/`column-count`/`column-gap`) instead of duplicating `.sf-grid--fit`'s `auto-fit` grid. Content now flows between columns like a newspaper — the previous grid-cell placement is gone. `--sf-equal-min-col-2/-3/-4/-6` are removed; `.sf-equal--2/--3/--4/--6` now set `column-count` directly instead of tuning a width threshold. See `docs/layout.md`.
+
+### Added
+- **layout:** `--sf-equal-rule-width` / `-style` / `-color` — optional `column-rule` between `.sf-equal`'s flowing columns, off by default.
+- **macros:** `.sf-drop-shadow-s` / `-m` / `-l` utility classes consuming the existing `--sf-drop-shadow-*` tokens.
+- **print:** static pt heading sizes (`h1`–`h6`) inside `@media print`, replacing the unreliable viewport-relative fluid scale.
+- **tooling:** generated VS Code CSS Custom Data (`badges/css-custom-data.json`) for `--sf-*` token autocomplete in-editor.
+
+### Changed
+- **tooling:** dist bundle headers now use a minifier-safe `/*! ... */` license banner (MIT notice survives minification).
+
 ## [0.6.34] - 2026-07-02
 
 ### Bug Fixes

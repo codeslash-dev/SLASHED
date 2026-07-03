@@ -158,7 +158,7 @@ function stripLayerWrappers(content, fileLabel) {
 function buildOne({ files, output, flat = false }) {
   const outputPath = resolveInsideRoot(output);
   const flatTag = flat ? ' (flat)' : '';
-  const header = `/* SLASHED v${VERSION} — ${path.basename(output)}${flatTag} */\n`;
+  const header = `/*! SLASHED v${VERSION} — ${path.basename(output)}${flatTag} | MIT License | github.com/codeslash-dev/SLASHED */\n`;
 
   const parts = files.map((file) => {
     const filePath = resolveInsideRoot(file);

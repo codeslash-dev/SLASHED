@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 685,
-    "rendered": 685,
+    "totalTokens": 684,
+    "rendered": 684,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 8,
@@ -9,7 +9,7 @@
     "literalDefaultMismatch": 2,
     "aliasMismatch": 0,
     "notRendered": 0,
-    "changedInDarkMode": 266
+    "changedInDarkMode": 267
   },
   "consoleErrors": [],
   "requestFailures": [],
@@ -4627,58 +4627,6 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-equal-min-col-2",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "28rem",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "28rem",
-      "shown": "28rem",
-      "darkComputed": "28rem",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-min-col-3",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "15rem",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "15rem",
-      "shown": "15rem",
-      "darkComputed": "15rem",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-min-col-4",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "16rem",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "16rem",
-      "shown": "16rem",
-      "darkComputed": "16rem",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-min-col-6",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "10rem",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "10rem",
-      "shown": "10rem",
-      "darkComputed": "10rem",
-      "changedInDark": false
-    },
-    {
       "name": "--sf-field-block",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -8938,6 +8886,45 @@
       "shown": "1060",
       "darkComputed": "1060",
       "changedInDark": false
+    },
+    {
+      "name": "--sf-equal-rule-width",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Layout tokens",
+      "declared": "0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0",
+      "shown": "0",
+      "darkComputed": "0",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-equal-rule-style",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Layout tokens",
+      "declared": "solid",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "solid",
+      "shown": "solid",
+      "darkComputed": "solid",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-equal-rule-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Layout tokens",
+      "declared": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "issues": [],
+      "computed": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
+      "shown": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
+      "darkComputed": "oklch(from oklch(0.69 0.0225 260) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)",
+      "changedInDark": true
     }
   ]
 }
