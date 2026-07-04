@@ -818,6 +818,11 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-content-width:  var(--sf-container-default)
 --sf-breakout-width: var(--sf-container-wide)
 
+/* Grid-flex (.sf-grid-flex) — flex alternative to .sf-grid for uneven
+   item counts: last-row leftovers stretch to fill (default) or stay
+   fixed-width and centered (--center). Reuses the .sf-grid knobs. */
+/* knobs: --sf-grid-min, --sf-grid-gap (shared with .sf-grid) */
+
 /* Prose */
 --sf-prose-paragraph:        var(--sf-content-gap)
 --sf-prose-heading-gap:      var(--sf-space-s)

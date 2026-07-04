@@ -1515,6 +1515,86 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-grid-flex",
+      "selector": ".sf-grid-flex",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--2xl",
+      "selector": ".sf-grid-flex--2xl",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a 2xl minimum item width.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--center",
+      "selector": ".sf-grid-flex--center",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--l",
+      "selector": ".sf-grid-flex--l",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a large (l) minimum item width.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--m",
+      "selector": ".sf-grid-flex--m",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a medium (m) minimum item width.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--s",
+      "selector": ".sf-grid-flex--s",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a small (s) minimum item width.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--xl",
+      "selector": ".sf-grid-flex--xl",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with an xl minimum item width.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--xs",
+      "selector": ".sf-grid-flex--xs",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with an xs minimum item width.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
       "name": "sf-icon",
       "selector": ".sf-icon",
       "kind": "layout",

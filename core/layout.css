@@ -215,6 +215,32 @@
 
   .sf-grid--dense { grid-auto-flow: dense; }
 
+  /* Grid-flex — flexbox alternative to .sf-grid for item counts that
+     don't divide evenly: leftover last-row items stretch to fill the
+     row by default, or stay fixed-width and centered with --center.
+     CSS Grid keeps orphans pinned to their track; flex does not. */
+  .sf-grid-flex {
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       var(--sf-grid-gap);
+  }
+  .sf-grid-flex > * {
+    flex: 1 1 min(var(--sf-grid-min), 100%);
+  }
+
+  .sf-grid-flex--center { justify-content: center; }
+  .sf-grid-flex--center > * {
+    flex-grow:  0;
+    flex-basis: min(var(--sf-grid-min), 100%);
+  }
+
+  .sf-grid-flex--xs  { --sf-grid-min: var(--sf-grid-min-xs); }
+  .sf-grid-flex--s   { --sf-grid-min: var(--sf-grid-min-s); }
+  .sf-grid-flex--m   { --sf-grid-min: var(--sf-grid-min-m); }
+  .sf-grid-flex--l   { --sf-grid-min: var(--sf-grid-min-l); }
+  .sf-grid-flex--xl  { --sf-grid-min: var(--sf-grid-min-xl); }
+  .sf-grid-flex--2xl { --sf-grid-min: var(--sf-grid-min-2xl); }
+
   .sf-icon {
     display:        inline-block;
     inline-size:    var(--sf-icon-size, var(--sf-icon-m));
@@ -468,7 +494,6 @@
   .sf-content-grid > .sf-breakout   { grid-column: breakout; }
   .sf-content-grid > .sf-full-bleed { grid-column: full; }
 
-  
   .sf-bento {
     display:               grid;
     grid-template-columns: repeat(var(--sf-bento-cols, var(--sf-bento-cols-default)), 1fr);

@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 684,
-      "sf_classes": 193,
+      "sf_classes": 201,
       "is_classes": 40
     }
   },
@@ -817,6 +817,14 @@
     "sf-grid-cols-3-1",
     "sf-grid-cols-4",
     "sf-grid-cols-6",
+    "sf-grid-flex",
+    "sf-grid-flex--2xl",
+    "sf-grid-flex--center",
+    "sf-grid-flex--l",
+    "sf-grid-flex--m",
+    "sf-grid-flex--s",
+    "sf-grid-flex--xl",
+    "sf-grid-flex--xs",
     "sf-icon",
     "sf-icon--2xl",
     "sf-icon--boxed",

@@ -27,14 +27,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 926,
+      "total": 934,
       "by_type": {
-        "class": 242,
+        "class": 250,
         "token": 684
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 870,
+        "PUBLIC": 878,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -42,15 +42,15 @@
         "knob": 223
       },
       "tokens": 684,
-      "classes": 242,
-      "sf_classes": 193,
+      "classes": 250,
+      "sf_classes": 201,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
         "Core tokens": 602,
-        "Layout primitives": 128,
+        "Layout primitives": 136,
         "Layout tokens": 53,
         "Macro classes": 45,
         "Macro tokens": 23,
@@ -22993,6 +22993,206 @@
       "description": "Responsive 6-column fixed grid. Collapses progressively on narrow containers.",
       "isVariant": false,
       "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--2xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--2xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a 2xl minimum item width.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--center",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--center",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--l",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a large (l) minimum item width.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--m",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a medium (m) minimum item width.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--s",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with a small (s) minimum item width.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with an xl minimum item width.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-grid-flex--xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-grid-flex--xs",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Grid (flex)",
+      "description": "Grid-flex variant with an xs minimum item width.",
+      "isVariant": true,
+      "baseClass": "sf-grid-flex",
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
