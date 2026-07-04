@@ -861,7 +861,20 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-scrim-direction:  to top
 --sf-scrim-gradient:   linear-gradient(…)   /* composed — override for multi-stop */
 --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6)  /* .sf-text-protect */
+
+/* Concave corner (.sf-corner-scoop) */
+--sf-corner-scoop-size: var(--sf-radius-2xl)
+--sf-corner-scoop-at:   100% 0
+
+/* Overlap recipe (.sf-overlap / .sf-overlap-host) */
+--sf-overlap-pull: var(--sf-space-xl)
 ```
+
+`.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
+directly in the CSS declaration (not a declared token) so a per-element override is picked up
+without the #496-class staleness bug a `:root` alias would have. Set `--sf-overlap-host-pad`
+inline to compensate by something other than the default pull amount; it isn't part of the token
+registry.
 
 ### 8.7 Header and safe area
 

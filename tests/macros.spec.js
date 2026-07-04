@@ -406,3 +406,126 @@ test.describe('macro: .sf-entrance--fade', () => {
     expect(name).toBe('none');
   });
 });
+
+test.describe('macro: .sf-corner-scoop', () => {
+  test('sets a radial-gradient mask', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-corner-scoop" style="width:100px;height:100px"></div>`);
+    const mask = await page.locator('#t').evaluate(el => getComputedStyle(el).maskImage);
+    expect(mask).toContain('radial-gradient');
+  });
+
+  for (const [cls, at] of [
+    ['sf-corner-scoop--top-left', '0 0'],
+    ['sf-corner-scoop--top-right', '100% 0'],
+    ['sf-corner-scoop--bottom-left', '0 100%'],
+    ['sf-corner-scoop--bottom-right', '100% 100%'],
+  ]) {
+    test(`.${cls} points the cut at ${at}`, async ({ page }) => {
+      await setup(page, `<div id="t" class="sf-corner-scoop ${cls}" style="width:100px;height:100px"></div>`);
+      const value = await page.locator('#t').evaluate(el =>
+        getComputedStyle(el).getPropertyValue('--sf-corner-scoop-at').trim()
+      );
+      expect(value).toBe(at);
+    });
+  }
+
+  test('--sf-corner-scoop-size override changes the resolved cut radius', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-corner-scoop" style="width:100px;height:100px; --sf-corner-scoop-size: 40px"></div>`);
+    const size = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).getPropertyValue('--sf-corner-scoop-size').trim()
+    );
+    expect(size).toBe('40px');
+  });
+});
+
+test.describe('macro: .sf-overlap / .sf-overlap-host', () => {
+  test('pulls the element up over the previous sibling by --sf-overlap-pull', async ({ page }) => {
+    await setup(page, `
+      <div id="prev" style="height:100px;background:#eee">prev</div>
+      <div id="t" class="sf-overlap" style="height:50px;background:#333; --sf-overlap-pull: 20px">overlap</div>
+    `);
+    const box = await page.evaluate(() => {
+      const prev = document.getElementById('prev').getBoundingClientRect();
+      const t = document.getElementById('t').getBoundingClientRect();
+      return { overlapAmount: prev.bottom - t.top };
+    });
+    expect(box.overlapAmount).toBeCloseTo(20, 0);
+  });
+
+  test('is positioned and raised above normal flow', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-overlap">x</div>`);
+    const cs = await page.locator('#t').evaluate(el => ({
+      position: getComputedStyle(el).position,
+      zIndex:   getComputedStyle(el).zIndex,
+    }));
+    expect(cs.position).toBe('relative');
+    expect(Number(cs.zIndex)).toBeGreaterThan(0);
+  });
+
+  for (const [cls, prop] of [
+    ['sf-overlap--down', 'marginBottom'],
+    ['sf-overlap--start', 'marginLeft'],
+    ['sf-overlap--end', 'marginRight'],
+  ]) {
+    test(`.${cls} sets a negative ${prop}`, async ({ page }) => {
+      await setup(page, `<div id="t" class="${cls}" style="--sf-overlap-pull: 20px">x</div>`);
+      const value = await page.locator('#t').evaluate((el, p) => parseFloat(getComputedStyle(el)[p]), prop);
+      expect(value).toBe(-20);
+    });
+  }
+
+  test('.sf-overlap-host reserves block-start padding matching the pull by default', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-overlap-host" style="--sf-overlap-pull: 24px">x</div>`);
+    const cs = await page.locator('#t').evaluate(el => ({
+      position:  getComputedStyle(el).position,
+      isolation: getComputedStyle(el).isolation,
+      padTop:    getComputedStyle(el).paddingTop,
+    }));
+    expect(cs.position).toBe('relative');
+    expect(cs.isolation).toBe('isolate');
+    expect(cs.padTop).toBe('24px');
+  });
+});
+
+test.describe('macro: .sf-scrim composed with .sf-bg (media background + overlay)', () => {
+  test('img.sf-bg auto-fills the parent behind the scrim gradient and content', async ({ page }) => {
+    await setup(page, `
+      <div id="host" class="sf-scrim sf-scrim--bottom" style="position:relative; width:200px; height:120px">
+        <img id="media" class="sf-bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">
+        <h2 id="content">Headline</h2>
+      </div>
+    `);
+    const res = await page.evaluate(() => {
+      const host    = document.getElementById('host');
+      const media   = document.getElementById('media');
+      const content = document.getElementById('content');
+      const hostBox = host.getBoundingClientRect();
+      const mediaBox = media.getBoundingClientRect();
+      return {
+        mediaPosition: getComputedStyle(media).position,
+        mediaFillsHost: Math.abs(mediaBox.width - hostBox.width) < 1 && Math.abs(mediaBox.height - hostBox.height) < 1,
+        // Content must hit-test above the media + scrim gradient, with no manual z-index set on content.
+        topElementIsContent: document.elementFromPoint(
+          content.getBoundingClientRect().left + 2,
+          content.getBoundingClientRect().top + 2
+        ) === content,
+        contentZIndex: getComputedStyle(content).zIndex,
+      };
+    });
+    expect(res.mediaPosition).toBe('absolute');
+    expect(res.mediaFillsHost).toBe(true);
+    expect(res.topElementIsContent).toBe(true);
+    // .sf-scrim's lift selector supplies the z-index — the author never sets one.
+    expect(Number(res.contentZIndex)).toBeGreaterThan(0);
+  });
+
+  test('plain .sf-scrim with an in-flow img is unaffected (no regression)', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-scrim sf-scrim--bottom" style="position:relative">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7" style="display:block">
+      </div>
+    `);
+    const position = await page.locator('#t img').evaluate(el => getComputedStyle(el).position);
+    expect(position).toBe('static');
+  });
+});
