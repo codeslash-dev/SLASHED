@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 684,
-    "rendered": 684,
+    "totalTokens": 691,
+    "rendered": 691,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 8,
@@ -8925,6 +8925,97 @@
       "shown": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
       "darkComputed": "oklch(from oklch(0.69 0.0225 260) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)",
       "changedInDark": true
+    },
+    {
+      "name": "--sf-corner-scoop-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-2xl)",
+      "aliasOf": "--sf-radius-2xl",
+      "issues": [],
+      "computed": "24px",
+      "shown": "24px",
+      "darkComputed": "24px",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corner-scoop-at",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "100% 0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "100% 0",
+      "shown": "100% 0",
+      "darkComputed": "100% 0",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corners-start-start",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "issues": [],
+      "computed": "12px",
+      "shown": "12px",
+      "darkComputed": "12px",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corners-start-end",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "issues": [],
+      "computed": "12px",
+      "shown": "12px",
+      "darkComputed": "12px",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corners-end-end",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "issues": [],
+      "computed": "12px",
+      "shown": "12px",
+      "darkComputed": "12px",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corners-end-start",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "issues": [],
+      "computed": "12px",
+      "shown": "12px",
+      "darkComputed": "12px",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-space-xl)",
+      "aliasOf": "--sf-space-xl",
+      "issues": [],
+      "computed": "52.1404px",
+      "shown": "52.1404px",
+      "darkComputed": "52.1404px",
+      "changedInDark": false
     }
   ]
 }
