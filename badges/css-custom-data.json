@@ -272,36 +272,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-boxed-bg",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.\n\nDefault: `var(--sf-color-surface)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-boxed-border-color",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.\n\nDefault: `var(--sf-color-border)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-boxed-border-width",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.\n\nDefault: `var(--sf-border-width-1)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-boxed-padding",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.\n\nDefault: `var(--sf-gutter)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-boxed-radius",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.\n\nDefault: `var(--sf-radius-l)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-boxed-shadow",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.\n\nDefault: `var(--sf-shadow-s)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-breakout-width",
       "description": "Width of full-bleed breakout elements inside a content grid.\n\nDefault: `var(--sf-container-wide)`",
       "syntax": "*"

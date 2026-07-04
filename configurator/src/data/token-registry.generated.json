@@ -2842,27 +2842,33 @@
     },
     {
       "id": 704,
-      "name": "--sf-boxed-bg"
+      "name": "--sf-boxed-bg",
+      "removed": true
     },
     {
       "id": 705,
-      "name": "--sf-boxed-border-color"
+      "name": "--sf-boxed-border-color",
+      "removed": true
     },
     {
       "id": 706,
-      "name": "--sf-boxed-border-width"
+      "name": "--sf-boxed-border-width",
+      "removed": true
     },
     {
       "id": 707,
-      "name": "--sf-boxed-padding"
+      "name": "--sf-boxed-padding",
+      "removed": true
     },
     {
       "id": 708,
-      "name": "--sf-boxed-radius"
+      "name": "--sf-boxed-radius",
+      "removed": true
     },
     {
       "id": 709,
-      "name": "--sf-boxed-shadow"
+      "name": "--sf-boxed-shadow",
+      "removed": true
     }
   ]
 }

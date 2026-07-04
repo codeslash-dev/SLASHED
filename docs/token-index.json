@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 690,
+      "tokens": 684,
       "by_tier": {
-        "PUBLIC": 634,
+        "PUBLIC": 628,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 223,
-        "consumption": 467
+        "consumption": 461
       }
     }
   },
@@ -452,54 +452,6 @@
         "core/tokens.layout.css"
       ],
       "value": "var(--sf-space-m)"
-    },
-    "--sf-boxed-bg": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-color-surface)"
-    },
-    "--sf-boxed-border-color": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-color-border)"
-    },
-    "--sf-boxed-border-width": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-border-width-1)"
-    },
-    "--sf-boxed-padding": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-gutter)"
-    },
-    "--sf-boxed-radius": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-radius-l)"
-    },
-    "--sf-boxed-shadow": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.layout.css"
-      ],
-      "value": "var(--sf-shadow-s)"
     },
     "--sf-breakout-width": {
       "tier": "PUBLIC",

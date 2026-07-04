@@ -820,13 +820,10 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 
 /* Boxed section (.sf-boxed) — framed/inset counterpart to full-bleed:
    content inside visible edges (border, radius, shadow). Standalone or
-   as a .sf-content-grid child. */
---sf-boxed-padding:      var(--sf-gutter)
---sf-boxed-bg:           var(--sf-color-surface)
---sf-boxed-border-width: var(--sf-border-width-1)
---sf-boxed-border-color: var(--sf-color-border)
---sf-boxed-radius:       var(--sf-radius-l)
---sf-boxed-shadow:       var(--sf-shadow-s)
+   as a .sf-content-grid child. Built directly from existing system
+   tokens (--sf-gutter, --sf-color-surface, --sf-border-width-1,
+   --sf-color-border, --sf-radius-l, --sf-shadow-s) — no dedicated
+   token group. */
 
 /* Grid-flex (.sf-grid-flex) — flex alternative to .sf-grid for uneven
    item counts: last-row leftovers stretch to fill (default) or stay

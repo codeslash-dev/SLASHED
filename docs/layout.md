@@ -27,7 +27,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-content-gap`, `--sf-gap` |
 | `.sf-pancake` | sticky-footer grid: header / main(1fr) / footer | — |
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed`, `.sf-boxed` | `--sf-content-width`, `--sf-breakout-width` |
-| `.sf-boxed` | framed/inset section — the counterpart to full-bleed: visible border, radius, shadow around the content; standalone or as a `.sf-content-grid` child | `--sf-boxed-padding/-bg/-border-width/-border-color/-radius/-shadow` |
+| `.sf-boxed` | framed/inset section — the counterpart to full-bleed: visible border, radius, shadow around the content; standalone or as a `.sf-content-grid` child | `--sf-gutter`, `--sf-color-surface`, `--sf-border-width-1`, `--sf-color-border`, `--sf-radius-l`, `--sf-shadow-s` |
 | `.sf-grid-flex` | flex-based grid alternative for uneven item counts; last-row leftovers stretch to fill (default) or stay fixed and centered (`--center`); `--xs … --2xl` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |
 | `.sf-frame` | aspect-ratio media box | `--sf-frame-ratio` |

@@ -702,10 +702,13 @@ test.describe('layout: .sf-boxed', () => {
     expect(s.bg).not.toBe('rgba(0, 0, 0, 0)');
   });
 
-  test('knobs override per instance', async ({ page }) => {
+  test('built from existing system tokens, not a dedicated knob group', async ({ page }) => {
+    // .sf-boxed has no --sf-boxed-* tokens of its own (#485) — overriding the
+    // underlying system tokens it consumes re-styles it, same as any other
+    // element using those tokens.
     await setup(page, `
       <div id="t" class="sf-boxed"
-           style="--sf-boxed-radius: 40px; --sf-boxed-border-width: 3px">x</div>
+           style="--sf-radius-l: 40px; --sf-border-width-1: 3px">x</div>
     `);
     const s = await page.locator('#t').evaluate(el => {
       const cs = getComputedStyle(el);
@@ -723,6 +726,16 @@ test.describe('layout: .sf-boxed', () => {
     `);
     const col = await page.locator('#b').evaluate(el => getComputedStyle(el).gridColumn);
     expect(col).toMatch(/content/);
+  });
+
+  test('combined with .sf-breakout, breakout still wins (no cascade trap)', async ({ page }) => {
+    await setup(page, `
+      <div class="sf-content-grid" style="width:1200px">
+        <div id="b" class="sf-boxed sf-breakout">framed breakout</div>
+      </div>
+    `);
+    const col = await page.locator('#b').evaluate(el => getComputedStyle(el).gridColumn);
+    expect(col).toMatch(/breakout/);
   });
 });
 

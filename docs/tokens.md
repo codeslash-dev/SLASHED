@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**690 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**684 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -622,7 +622,7 @@ rebrand workflow.
 
 ## Layout tokens (`core/tokens.layout.css`)
 
-59 tokens.
+53 tokens.
 
 | Token | Default |
 |---|---|
@@ -641,12 +641,6 @@ rebrand workflow.
 | `--sf-box-border-color` | `var(--sf-color-border)` |
 | `--sf-box-border-width` | `0` |
 | `--sf-box-padding` | `var(--sf-space-m)` |
-| `--sf-boxed-bg` | `var(--sf-color-surface)` |
-| `--sf-boxed-border-color` | `var(--sf-color-border)` |
-| `--sf-boxed-border-width` | `var(--sf-border-width-1)` |
-| `--sf-boxed-padding` | `var(--sf-gutter)` |
-| `--sf-boxed-radius` | `var(--sf-radius-l)` |
-| `--sf-boxed-shadow` | `var(--sf-shadow-s)` |
 | `--sf-breakout-width` | `var(--sf-container-wide)` |
 | `--sf-center-gutter` | `var(--sf-gutter)` |
 | `--sf-center-max` | `var(--sf-container-default)` |

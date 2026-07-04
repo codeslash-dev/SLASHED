@@ -27,21 +27,21 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 941,
+      "total": 935,
       "by_type": {
         "class": 251,
-        "token": 690
+        "token": 684
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 885,
+        "PUBLIC": 879,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 467,
+        "consumption": 461,
         "knob": 223
       },
-      "tokens": 690,
+      "tokens": 684,
       "classes": 251,
       "sf_classes": 202,
       "is_classes": 40,
@@ -51,7 +51,7 @@
         "Component tokens": 6,
         "Core tokens": 602,
         "Layout primitives": 137,
-        "Layout tokens": 59,
+        "Layout tokens": 53,
         "Macro classes": 45,
         "Macro tokens": 23,
         "Motion / animation": 15,
@@ -1585,174 +1585,6 @@
       "description": "Inner padding for the box layout primitive.",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-boxed-bg",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "boxed",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Boxed section",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.",
-      "value": "var(--sf-color-surface)",
-      "aliasOf": "--sf-color-surface",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-boxed-border-color",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "boxed",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Boxed section",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.",
-      "value": "var(--sf-color-border)",
-      "aliasOf": "--sf-color-border",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-boxed-border-width",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "boxed",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Boxed section",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.",
-      "value": "var(--sf-border-width-1)",
-      "aliasOf": "--sf-border-width-1",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-boxed-padding",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "boxed",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Boxed section",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.",
-      "value": "var(--sf-gutter)",
-      "aliasOf": "--sf-gutter",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-boxed-radius",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "boxed",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Boxed section",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-boxed-shadow",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "boxed",
-      "category": "Layout tokens",
-      "area": "layout",
-      "group": "Boxed section",
-      "description": "framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge.",
-      "value": "var(--sf-shadow-s)",
-      "aliasOf": "--sf-shadow-s",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -20883,7 +20715,7 @@
       "category": "Layout primitives",
       "area": "layout",
       "group": "",
-      "description": "Boxed section — the framed counterpart to breakout/full-bleed",
+      "description": "Boxed section — the framed counterpart to breakout/full-bleed. Built directly from existing system tokens (no dedicated token group) — the .sf-content-grid > * default above already puts it in the content column, so no override is declared here.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,

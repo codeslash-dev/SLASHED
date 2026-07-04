@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**941 elements** — 690 tokens, 251 classes.
+**935 elements** — 684 tokens, 251 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 885 | Everyday surface. SemVer-stable. |
+| PUBLIC | 879 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (690)
+## Tokens (684)
 
 ### Component tokens (6)
 
@@ -638,7 +638,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-z-toast` | PUBLIC | knob | z | `1050` | Z-index for toast / snackbar notifications. |
 | `--sf-z-tooltip` | PUBLIC | knob | z | `1060` | Z-index for tooltips and transient floating notifications. Highest named layer in the z-index stack. Default 1060. |
 
-### Layout tokens (59)
+### Layout tokens (53)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -657,12 +657,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-box-border-color` | PUBLIC | consumption | box | `var(--sf-color-border)` | Border color for the box layout primitive. |
 | `--sf-box-border-width` | PUBLIC | knob | box | `0` | Border width for the box layout primitive. |
 | `--sf-box-padding` | PUBLIC | consumption | box | `var(--sf-space-m)` | Inner padding for the box layout primitive. |
-| `--sf-boxed-bg` | PUBLIC | consumption | boxed | `var(--sf-color-surface)` | framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge. |
-| `--sf-boxed-border-color` | PUBLIC | consumption | boxed | `var(--sf-color-border)` | framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge. |
-| `--sf-boxed-border-width` | PUBLIC | consumption | boxed | `var(--sf-border-width-1)` | framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge. |
-| `--sf-boxed-padding` | PUBLIC | consumption | boxed | `var(--sf-gutter)` | framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge. |
-| `--sf-boxed-radius` | PUBLIC | consumption | boxed | `var(--sf-radius-l)` | framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge. |
-| `--sf-boxed-shadow` | PUBLIC | consumption | boxed | `var(--sf-shadow-s)` | framed/inset counterpart to full-bleed and breakout: content sits inside visible edges (border, radius, shadow) instead of running edge-to-edge. |
 | `--sf-breakout-width` | PUBLIC | consumption | breakout | `var(--sf-container-wide)` | Width of full-bleed breakout elements inside a content grid. |
 | `--sf-center-gutter` | PUBLIC | consumption | center | `var(--sf-gutter)` | Minimum side gutter for the center layout. |
 | `--sf-center-max` | PUBLIC | consumption | center | `var(--sf-container-default)` | Maximum width for the center layout. |
@@ -762,7 +756,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
 | `.sf-bg` | PUBLIC | layout | Background | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg"> or as a wrapper with a nested > img / > video / > picture. |
 | `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
-| `.sf-boxed` | PUBLIC | layout | — | Boxed section — the framed counterpart to breakout/full-bleed |
+| `.sf-boxed` | PUBLIC | layout | — | Boxed section — the framed counterpart to breakout/full-bleed. Built directly from existing system tokens (no dedicated token group) — the .sf-content-grid > * default above already puts it in the content column, so no override is declared here. |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
 | `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
 | `.sf-center--intrinsic` | PUBLIC | layout | Center | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |

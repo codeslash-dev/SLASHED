@@ -19,7 +19,7 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 690,
+      "tokens": 684,
       "sf_classes": 202,
       "is_classes": 40
     }
@@ -79,12 +79,6 @@
     "--sf-box-border-color",
     "--sf-box-border-width",
     "--sf-box-padding",
-    "--sf-boxed-bg",
-    "--sf-boxed-border-color",
-    "--sf-boxed-border-width",
-    "--sf-boxed-padding",
-    "--sf-boxed-radius",
-    "--sf-boxed-shadow",
     "--sf-breakout-width",
     "--sf-btn-padding-block",
     "--sf-btn-padding-inline",

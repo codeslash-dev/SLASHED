@@ -600,7 +600,7 @@
       "kind": "layout",
       "category": "Layout primitives",
       "group": "",
-      "description": "Boxed section — the framed counterpart to breakout/full-bleed",
+      "description": "Boxed section — the framed counterpart to breakout/full-bleed. Built directly from existing system tokens (no dedicated token group) — the .sf-content-grid > * default above already puts it in the content column, so no override is declared here.",
       "optional": false,
       "layer": "slashed.layout"
     },
