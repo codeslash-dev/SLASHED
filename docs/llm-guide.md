@@ -818,6 +818,21 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-content-width:  var(--sf-container-default)
 --sf-breakout-width: var(--sf-container-wide)
 
+/* Boxed section (.sf-boxed) — framed/inset counterpart to full-bleed:
+   content inside visible edges (border, radius, shadow). Standalone or
+   as a .sf-content-grid child. */
+--sf-boxed-padding:      var(--sf-gutter)
+--sf-boxed-bg:           var(--sf-color-surface)
+--sf-boxed-border-width: var(--sf-border-width-1)
+--sf-boxed-border-color: var(--sf-color-border)
+--sf-boxed-radius:       var(--sf-radius-l)
+--sf-boxed-shadow:       var(--sf-shadow-s)
+
+/* Grid-flex (.sf-grid-flex) — flex alternative to .sf-grid for uneven
+   item counts: last-row leftovers stretch to fill (default) or stay
+   fixed-width and centered (--center). Reuses the .sf-grid knobs. */
+/* knobs: --sf-grid-min, --sf-grid-gap (shared with .sf-grid) */
+
 /* Prose */
 --sf-prose-paragraph:        var(--sf-content-gap)
 --sf-prose-heading-gap:      var(--sf-space-s)

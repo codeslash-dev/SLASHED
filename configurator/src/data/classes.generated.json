@@ -595,6 +595,16 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-boxed",
+      "selector": ".sf-boxed",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Boxed section — the framed counterpart to breakout/full-bleed",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
       "name": "sf-breakout",
       "selector": ".sf-breakout",
       "kind": "layout",
@@ -1511,6 +1521,86 @@
       "category": "Layout primitives",
       "group": "Fixed column grids (container-query responsive)",
       "description": "Responsive 6-column fixed grid. Collapses progressively on narrow containers.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex",
+      "selector": ".sf-grid-flex",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--2xl",
+      "selector": ".sf-grid-flex--2xl",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--center",
+      "selector": ".sf-grid-flex--center",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--l",
+      "selector": ".sf-grid-flex--l",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--m",
+      "selector": ".sf-grid-flex--m",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--s",
+      "selector": ".sf-grid-flex--s",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--xl",
+      "selector": ".sf-grid-flex--xl",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-grid-flex--xs",
+      "selector": ".sf-grid-flex--xs",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not.",
       "optional": false,
       "layer": "slashed.layout"
     },

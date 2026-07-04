@@ -132,6 +132,18 @@
     --sf-content-width:  var(--sf-container-default);
 
     /* ----------------------------------------------------------
+       Boxed section — framed/inset counterpart to full-bleed and
+       breakout: content sits inside visible edges (border, radius,
+       shadow) instead of running edge-to-edge.
+       ---------------------------------------------------------- */
+    --sf-boxed-padding:      var(--sf-gutter);
+    --sf-boxed-bg:           var(--sf-color-surface);
+    --sf-boxed-border-width: var(--sf-border-width-1);
+    --sf-boxed-border-color: var(--sf-color-border);
+    --sf-boxed-radius:       var(--sf-radius-l);
+    --sf-boxed-shadow:       var(--sf-shadow-s);
+
+    /* ----------------------------------------------------------
        Prose
        ---------------------------------------------------------- */
     --sf-prose-paragraph: var(--sf-content-gap);
