@@ -17,6 +17,7 @@ import {
   stripComments, stripStrings, maskComments, maskStrings,
   readValue, readFile, requireFile,
 } from '../scripts/lib/parse.js';
+import { collectComments, describe as describeElement } from '../scripts/lib/api-index/extract.js';
 
 describe('stripComments vs maskComments', () => {
   const css = '.a { color: red; } /* comment */ .b { color: blue; }';
@@ -111,5 +112,34 @@ describe('readFile vs requireFile — missing-file behavior', () => {
       () => requireFile(missingRel, root, '[test] custom missing-file message'),
       (err) => err.message === '[test] custom missing-file message',
     );
+  });
+});
+
+describe('collectComments / describe — directive comments never become descriptions', () => {
+  // Reproduces the .sf-corner-scoop--* leak: a stylelint-disable comment sits
+  // right above a vendor-prefixed declaration inside the base rule, with no
+  // comment of their own governing the variant selectors that follow.
+  const css = `
+    /* Concave corner — a corner that curves away from the box. */
+    .sf-corner-scoop {
+      /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 */
+      -webkit-mask-image: radial-gradient(circle, transparent 1rem, black 1rem);
+    }
+    .sf-corner-scoop--top-left { --sf-corner-scoop-at: 0 0; }
+  `;
+
+  test('a stylelint-disable comment is classified as a directive, not a note', () => {
+    const comments = collectComments(css);
+    const directive = comments.find(c => c.raw.includes('stylelint-disable'));
+    assert.ok(directive, 'expected to find the stylelint-disable comment');
+    assert.equal(directive.isDirective, true);
+  });
+
+  test('a variant selector with no comment of its own falls back to the governing note, not the directive', () => {
+    const comments = collectComments(css);
+    const idx = css.indexOf('.sf-corner-scoop--top-left');
+    const { description } = describeElement(comments, idx);
+    assert.ok(!description.includes('stylelint-disable'));
+    assert.match(description, /concave corner/i);
   });
 });

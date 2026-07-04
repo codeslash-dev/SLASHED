@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 684,
+      "tokens": 687,
       "by_tier": {
-        "PUBLIC": 628,
+        "PUBLIC": 631,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 223,
-        "consumption": 461
+        "knob": 224,
+        "consumption": 463
       }
     }
   },
@@ -251,7 +251,7 @@
       "files": [
         "core/tokens.layout.css"
       ],
-      "value": "0"
+      "value": "0px"
     },
     "--sf-bg-position": {
       "tier": "PUBLIC",
@@ -2621,6 +2621,22 @@
       ],
       "value": "0.6"
     },
+    "--sf-corner-scoop-at": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "value": "100% 0"
+    },
+    "--sf-corner-scoop-size": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "value": "var(--sf-radius-2xl)"
+    },
     "--sf-cover-min-height": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -3860,6 +3876,14 @@
         "core/tokens.css"
       ],
       "value": "auto"
+    },
+    "--sf-overlap-pull": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "value": "var(--sf-space-xl)"
     },
     "--sf-palette-mix-100": {
       "tier": "PUBLIC-ADVANCED",
