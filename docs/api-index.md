@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**946 elements** — 691 tokens, 255 classes.
+**954 elements** — 691 tokens, 263 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 890 | Everyday surface. SemVer-stable. |
+| PUBLIC | 898 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -731,7 +731,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (255)
+## Classes (263)
 
 ### Accessibility (8)
 
@@ -746,7 +746,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
-### Layout primitives (128)
+### Layout primitives (136)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -836,6 +836,14 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-grid-cols-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
 | `.sf-grid-cols-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
 | `.sf-grid-cols-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-grid-flex` | PUBLIC | layout | Grid (flex) | Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. |
+| `.sf-grid-flex--2xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a 2xl minimum item width. |
+| `.sf-grid-flex--center` | PUBLIC | layout | Grid (flex) | Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching. |
+| `.sf-grid-flex--l` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a large (l) minimum item width. |
+| `.sf-grid-flex--m` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a medium (m) minimum item width. |
+| `.sf-grid-flex--s` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a small (s) minimum item width. |
+| `.sf-grid-flex--xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xl minimum item width. |
+| `.sf-grid-flex--xs` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xs minimum item width. |
 | `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
 | `.sf-icon--2xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
 | `.sf-icon--boxed` | PUBLIC | layout | Icon | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |

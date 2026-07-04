@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 712
+    "nextId": 717
   },
   "tokens": [
     {
@@ -2842,35 +2842,60 @@
     },
     {
       "id": 704,
-      "name": "--sf-corner-scoop-at"
-    },
-    {
-      "id": 705,
-      "name": "--sf-corner-scoop-size"
-    },
-    {
-      "id": 706,
-      "name": "--sf-corners-end-end"
-    },
-    {
-      "id": 707,
-      "name": "--sf-corners-end-start"
-    },
-    {
-      "id": 708,
-      "name": "--sf-corners-start-end"
-    },
-    {
-      "id": 709,
-      "name": "--sf-corners-start-start"
-    },
-    {
-      "id": 710,
-      "name": "--sf-overlap-host-pad",
+      "name": "--sf-boxed-bg",
       "removed": true
     },
     {
+      "id": 705,
+      "name": "--sf-boxed-border-color",
+      "removed": true
+    },
+    {
+      "id": 706,
+      "name": "--sf-boxed-border-width",
+      "removed": true
+    },
+    {
+      "id": 707,
+      "name": "--sf-boxed-padding",
+      "removed": true
+    },
+    {
+      "id": 708,
+      "name": "--sf-boxed-radius",
+      "removed": true
+    },
+    {
+      "id": 709,
+      "name": "--sf-boxed-shadow",
+      "removed": true
+    },
+    {
+      "id": 710,
+      "name": "--sf-corner-scoop-at"
+    },
+    {
       "id": 711,
+      "name": "--sf-corner-scoop-size"
+    },
+    {
+      "id": 712,
+      "name": "--sf-corners-end-end"
+    },
+    {
+      "id": 713,
+      "name": "--sf-corners-end-start"
+    },
+    {
+      "id": 714,
+      "name": "--sf-corners-start-end"
+    },
+    {
+      "id": 715,
+      "name": "--sf-corners-start-start"
+    },
+    {
+      "id": 716,
       "name": "--sf-overlap-pull"
     }
   ]

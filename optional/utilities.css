@@ -92,4 +92,38 @@
     }
   } */
 
+  /* ============================================================
+   * HOVER-TRANSFORM UTILITIES (.sf-hover-*)
+   * Simple, composable hover-triggered transforms — apply directly to
+   * any element (card, image, icon, button). Driven by
+   * --sf-transition-transform (core/tokens.css) so duration/easing stay
+   * in sync with the rest of the framework; the global duration
+   * kill-switch in core/accessibility.css neutralizes these under
+   * prefers-reduced-motion without needing a separate guard here.
+   * ============================================================ */
+  /* .sf-hover-grow, .sf-hover-shrink, .sf-hover-float, .sf-hover-sink,
+  .sf-hover-slide-start, .sf-hover-slide-end {
+    transition: var(--sf-transition-transform);
+  }
+  .sf-hover-grow:hover    { scale: 1.05; }
+  .sf-hover-shrink:hover  { scale: 0.95; }
+  .sf-hover-float:hover   { translate: 0 -0.25em; }
+  .sf-hover-sink:hover    { translate: 0 0.25em; }
+  .sf-hover-slide-start:hover { translate: -0.5em 0; }
+  .sf-hover-slide-end:hover   { translate: 0.5em 0; } */
+
+  /* ============================================================
+   * OVERFLOW-DEBUG UTILITY (.sf-debug-overflow)
+   * Dev-only diagnostic: apply to <body> (or any container) to outline
+   * every descendant, making the element causing horizontal page
+   * overflow visually obvious. Not a production utility — remove
+   * before shipping.
+   * ============================================================ */
+  /* .sf-debug-overflow,
+  .sf-debug-overflow *,
+  .sf-debug-overflow *::before,
+  .sf-debug-overflow *::after {
+    outline: 1px solid oklch(0.6 0.25 30 / 0.6);
+  } */
+
 }
