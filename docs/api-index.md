@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**954 elements** — 691 tokens, 263 classes.
+**958 elements** — 691 tokens, 267 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 898 | Everyday surface. SemVer-stable. |
+| PUBLIC | 902 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -731,7 +731,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (263)
+## Classes (267)
 
 ### Accessibility (8)
 
@@ -887,15 +887,19 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (58)
+### Macro classes (62)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
 | `.sf-corner-scoop` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
+| `.sf-corner-scoop--bottom` | PUBLIC | macro | — | Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a "U"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —… |
 | `.sf-corner-scoop--bottom-left` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
 | `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
+| `.sf-corner-scoop--left` | PUBLIC | macro | — | Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a "U"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —… |
+| `.sf-corner-scoop--right` | PUBLIC | macro | — | Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a "U"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —… |
+| `.sf-corner-scoop--top` | PUBLIC | macro | — | Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a "U"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —… |
 | `.sf-corner-scoop--top-left` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
 | `.sf-corner-scoop--top-right` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
 | `.sf-corners` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |

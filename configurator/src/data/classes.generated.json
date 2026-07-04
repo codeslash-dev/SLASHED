@@ -845,6 +845,16 @@
       "layer": "slashed.macros"
     },
     {
+      "name": "sf-corner-scoop--bottom",
+      "selector": ".sf-corner-scoop--bottom",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a \"U\"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —…",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
       "name": "sf-corner-scoop--bottom-left",
       "selector": ".sf-corner-scoop--bottom-left",
       "kind": "macro",
@@ -861,6 +871,36 @@
       "category": "Macro classes",
       "group": "",
       "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-corner-scoop--left",
+      "selector": ".sf-corner-scoop--left",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a \"U\"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —…",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-corner-scoop--right",
+      "selector": ".sf-corner-scoop--right",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a \"U\"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —…",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-corner-scoop--top",
+      "selector": ".sf-corner-scoop--top",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Two-corner scoop pairs — both corners on one side cut at once (e.g. --bottom carves a \"U\"/bowl opening: flat top, open concave base). A single mask-image can only encode one cut point, so these override it with two radial-gradient layers combined via mask-composite: intersect —…",
       "optional": false,
       "layer": "slashed.macros"
     },

@@ -436,6 +436,69 @@ test.describe('macro: .sf-corner-scoop', () => {
     );
     expect(size).toBe('40px');
   });
+
+  for (const [cls, at1, at2] of [
+    ['sf-corner-scoop--top', '0 0', '100% 0'],
+    ['sf-corner-scoop--bottom', '0 100%', '100% 100%'],
+    ['sf-corner-scoop--left', '0 0', '0 100%'],
+    ['sf-corner-scoop--right', '100% 0', '100% 100%'],
+  ]) {
+    test(`.${cls} cuts both corners on that side (${at1} / ${at2})`, async ({ page }) => {
+      await setup(page, `<div id="t" class="sf-corner-scoop ${cls}" style="width:100px;height:100px"></div>`);
+      const info = await page.locator('#t').evaluate(el => {
+        const cs = getComputedStyle(el);
+        return {
+          at1: cs.getPropertyValue('--sf-corner-scoop-at-1').trim(),
+          at2: cs.getPropertyValue('--sf-corner-scoop-at-2').trim(),
+          composite: cs.maskComposite,
+          layerCount: (cs.maskImage.match(/radial-gradient\(/g) || []).length,
+        };
+      });
+      expect(info.at1).toBe(at1);
+      expect(info.at2).toBe(at2);
+      // "add" (the default) would let the second layer paint back over the
+      // first cut, erasing it — this is the exact bug intersect avoids.
+      expect(info.composite).toContain('intersect');
+      expect(info.layerCount).toBe(2);
+    });
+  }
+
+  test('.sf-corner-scoop--bottom actually leaves both bottom corners transparent (not just one)', async ({ page }) => {
+    // elementFromPoint can't see this — masking is paint-only, not
+    // hit-testing, so a masked-out region still hit-tests as the element
+    // itself. Read real composited pixels instead: screenshot the page,
+    // hand the PNG back to the browser as an <img>, and sample it via
+    // canvas (native decode — no Node-side PNG library needed).
+    await setup(page, `
+      <div style="position:fixed; inset:0; background:rgb(255,0,0)"></div>
+      <div id="t" class="sf-corner-scoop sf-corner-scoop--bottom"
+           style="position:relative; width:200px;height:150px;background:rgb(0,0,0); --sf-corner-scoop-size:60px"></div>
+    `);
+    const box = await page.locator('#t').boundingBox();
+    const png = (await page.screenshot()).toString('base64');
+    const pixelAt = async (x, y) => page.evaluate(({ png, x, y }) => new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const cv = document.createElement('canvas');
+        cv.width = img.width; cv.height = img.height;
+        const ctx = cv.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const [r, g, b] = ctx.getImageData(x, y, 1, 1).data;
+        resolve([r, g, b]);
+      };
+      img.onerror = reject;
+      img.src = `data:image/png;base64,${png}`;
+    }), { png, x, y });
+    // Just inside each bottom corner: the mask should have cut through to
+    // the red background behind, at BOTH corners independently.
+    const bottomLeft  = await pixelAt(box.x + 10, box.y + box.height - 10);
+    const bottomRight = await pixelAt(box.x + box.width - 10, box.y + box.height - 10);
+    // Not masked — stays black at the top-center.
+    const topCenter = await pixelAt(box.x + box.width / 2, box.y + 10);
+    expect(bottomLeft).toEqual([255, 0, 0]);
+    expect(bottomRight).toEqual([255, 0, 0]);
+    expect(topCenter).toEqual([0, 0, 0]);
+  });
 });
 
 test.describe('macro: .sf-corners', () => {

@@ -382,6 +382,39 @@
   .sf-corner-scoop--bottom-left  { --sf-corner-scoop-at: 0 100%; }
   .sf-corner-scoop--bottom-right { --sf-corner-scoop-at: 100% 100%; }
 
+  /* Two-corner scoop pairs — both corners on one side cut at once (e.g.
+     --bottom carves a "U"/bowl opening: flat top, open concave base).
+     A single mask-image can only encode one cut point, so these override
+     it with two radial-gradient layers combined via mask-composite:
+     intersect — the "add" default would instead let the second, opaque-
+     everywhere-but-its-own-corner layer paint back over the first cut,
+     erasing it (this is exactly the "doesn't compose" limitation above,
+     worked around here by switching how the layers combine). Needs
+     unprefixed mask-composite (Safari 15.4+, i.e. inside this framework's
+     18+ floor) — no legacy -webkit-mask-composite fallback is provided. */
+  .sf-corner-scoop--top,
+  .sf-corner-scoop--bottom,
+  .sf-corner-scoop--left,
+  .sf-corner-scoop--right {
+    /* No -webkit-mask-image override needed: the base class's version
+       references --sf-corner-scoop-at, which these variants never set
+       (they set -at-1/-at-2 instead) — that leaves it invalid at
+       computed-value time, so it already falls back to its initial
+       value (none) in browsers that only understand the prefixed form. */
+    mask-image:
+      radial-gradient(circle at var(--sf-corner-scoop-at-1),
+        transparent var(--sf-corner-scoop-size),
+        black calc(var(--sf-corner-scoop-size) + 0.5px)),
+      radial-gradient(circle at var(--sf-corner-scoop-at-2),
+        transparent var(--sf-corner-scoop-size),
+        black calc(var(--sf-corner-scoop-size) + 0.5px));
+    mask-composite: intersect;
+  }
+  .sf-corner-scoop--top    { --sf-corner-scoop-at-1: 0 0;    --sf-corner-scoop-at-2: 100% 0; }
+  .sf-corner-scoop--bottom { --sf-corner-scoop-at-1: 0 100%; --sf-corner-scoop-at-2: 100% 100%; }
+  .sf-corner-scoop--left   { --sf-corner-scoop-at-1: 0 0;    --sf-corner-scoop-at-2: 0 100%; }
+  .sf-corner-scoop--right  { --sf-corner-scoop-at-1: 100% 0; --sf-corner-scoop-at-2: 100% 100%; }
+
   /* Border-radius recipe — coordinated multi-corner radius patterns via
      the four logical radius longhands (the only logical-compliant way to
      set radius; the shorthand is physical-only). Variants re-point the

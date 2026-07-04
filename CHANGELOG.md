@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## Unreleased
 
 ### Added
-- **macros:** `.sf-corner-scoop` — mask-based concave-corner cut, with `--top-left`/`--top-right`/`--bottom-left`/`--bottom-right` placement modifiers and `--sf-corner-scoop-size`/`--sf-corner-scoop-at` knobs.
+- **macros:** `.sf-corner-scoop` — mask-based concave-corner cut, with `--top-left`/`--top-right`/`--bottom-left`/`--bottom-right` placement modifiers and `--sf-corner-scoop-size`/`--sf-corner-scoop-at` knobs. `--top`/`--bottom`/`--left`/`--right` cut both corners on one side at once (via `mask-composite: intersect`) — sized so the cut radius is half the element's width/height, `--bottom` gives a "U"/bowl opening.
 - **macros:** `.sf-corners` — per-corner logical border-radius recipe (`--sf-corners-start-start`/`-start-end`/`-end-end`/`-end-start`), with `--leaf`/`--leaf-flip` asymmetric modifiers.
 - **macros:** `.sf-overlap` / `.sf-overlap-host` — negative-margin overlap recipe (`--down`/`--start`/`--end` modifiers) driven by `--sf-overlap-pull`, with a host class that reserves matching space.
 
