@@ -1628,12 +1628,12 @@
     },
     {
       "name": "--sf-corner-scoop-at",
-      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".\n\nDefault: `100% 0`",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\" (cut radius) or style=\"--sf-corner-scoop-at: 0 0\" (which corner).\n\nDefault: `100% 0`",
       "syntax": "*"
     },
     {
       "name": "--sf-corner-scoop-size",
-      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".\n\nDefault: `var(--sf-radius-2xl)`",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\" (cut radius) or style=\"--sf-corner-scoop-at: 0 0\" (which corner).\n\nDefault: `var(--sf-radius-2xl)`",
       "syntax": "*"
     },
     {

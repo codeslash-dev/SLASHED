@@ -383,12 +383,12 @@
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Layout tokens",
-      "declared": "0",
+      "declared": "0px",
       "aliasOf": null,
       "issues": [],
-      "computed": "0",
-      "shown": "0",
-      "darkComputed": "0",
+      "computed": "0px",
+      "shown": "0px",
+      "darkComputed": "0px",
       "changedInDark": false
     },
     {

@@ -872,9 +872,9 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 
 `.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
 directly in the CSS declaration (not a declared token) so a per-element override is picked up
-without the #496-class staleness bug a `:root` alias would have. Set `--sf-overlap-host-pad`
-inline to compensate by something other than the default pull amount; it isn't part of the token
-registry.
+immediately, avoiding the staleness a `:root`-level alias would have if it cached the pull value.
+Set `--sf-overlap-host-pad` inline to compensate by something other than the default pull amount;
+it isn't part of the token registry.
 
 ### 8.7 Header and safe area
 

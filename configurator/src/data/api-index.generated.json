@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "4a0ad429ba01",
+    "tokensHash": "d49dd101dba4",
     "bundles": [
       "full",
       "optimal",
@@ -7501,7 +7501,7 @@
       "namespace": "corner",
       "category": "Macro tokens",
       "group": "Concave corner",
-      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\" (cut radius) or style=\"--sf-corner-scoop-at: 0 0\" (which corner).",
       "note": "",
       "value": "100% 0",
       "aliasOf": null,
@@ -7524,7 +7524,7 @@
       "namespace": "corner",
       "category": "Macro tokens",
       "group": "Concave corner",
-      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\" (cut radius) or style=\"--sf-corner-scoop-at: 0 0\" (which corner).",
       "note": "",
       "value": "var(--sf-radius-2xl)",
       "aliasOf": "--sf-radius-2xl",

@@ -96,7 +96,8 @@
 
     /* ----------------------------------------------------------
        Concave corner — radius and corner position for .sf-corner-scoop.
-       Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)".
+       Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)"
+       (cut radius) or style="--sf-corner-scoop-at: 0 0" (which corner).
        ---------------------------------------------------------- */
     --sf-corner-scoop-size: var(--sf-radius-2xl);
     --sf-corner-scoop-at:   100% 0;

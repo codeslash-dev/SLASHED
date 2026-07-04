@@ -702,8 +702,8 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|---|
 | `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | Aspect ratio value for the .aspect-ratio macro. |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
-| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)". |
-| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)". |
+| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)" (cut radius) or style="--sf-corner-scoop-at: 0 0" (which corner). |
+| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)" (cut radius) or style="--sf-corner-scoop-at: 0 0" (which corner). |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
 | `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
