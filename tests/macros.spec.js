@@ -470,7 +470,7 @@ test.describe('macro: .sf-corners', () => {
       <div id="a" class="sf-corners sf-corners--leaf">a</div>
       <div id="b" class="sf-corners sf-corners--leaf-flip">b</div>
     `);
-    const [a, b] = await Promise.all([
+    const [a] = await Promise.all([
       page.locator('#a').evaluate(el => getComputedStyle(el).borderTopLeftRadius),
       page.locator('#b').evaluate(el => getComputedStyle(el).borderTopLeftRadius),
     ]);
