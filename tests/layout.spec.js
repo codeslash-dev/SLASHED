@@ -683,62 +683,6 @@ test.describe('layout: .sf-icon', () => {
   });
 });
 
-// ── .sf-boxed ───────────────────────────────────────────────────
-test.describe('layout: .sf-boxed', () => {
-  test('has framing: padding, border, radius, background', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-boxed">boxed</div>`);
-    const s = await page.locator('#t').evaluate(el => {
-      const cs = getComputedStyle(el);
-      return {
-        pad: parseFloat(cs.paddingInlineStart),
-        borderW: parseFloat(cs.borderTopWidth),
-        radius: parseFloat(cs.borderTopLeftRadius),
-        bg: cs.backgroundColor,
-      };
-    });
-    expect(s.pad).toBeGreaterThan(0);
-    expect(s.borderW).toBeGreaterThan(0);
-    expect(s.radius).toBeGreaterThan(0);
-    expect(s.bg).not.toBe('rgba(0, 0, 0, 0)');
-  });
-
-  test('built from existing system tokens, not a dedicated knob group', async ({ page }) => {
-    // .sf-boxed has no --sf-boxed-* tokens of its own (#485) — overriding the
-    // underlying system tokens it consumes re-styles it, same as any other
-    // element using those tokens.
-    await setup(page, `
-      <div id="t" class="sf-boxed"
-           style="--sf-radius-l: 40px; --sf-border-width-1: 3px">x</div>
-    `);
-    const s = await page.locator('#t').evaluate(el => {
-      const cs = getComputedStyle(el);
-      return { radius: cs.borderTopLeftRadius, borderW: cs.borderTopWidth };
-    });
-    expect(s.radius).toBe('40px');
-    expect(s.borderW).toBe('3px');
-  });
-
-  test('as a .sf-content-grid child it stays in the content column', async ({ page }) => {
-    await setup(page, `
-      <div class="sf-content-grid" style="width:1200px">
-        <div id="b" class="sf-boxed">boxed</div>
-      </div>
-    `);
-    const col = await page.locator('#b').evaluate(el => getComputedStyle(el).gridColumn);
-    expect(col).toMatch(/content/);
-  });
-
-  test('combined with .sf-breakout, breakout still wins (no cascade trap)', async ({ page }) => {
-    await setup(page, `
-      <div class="sf-content-grid" style="width:1200px">
-        <div id="b" class="sf-boxed sf-breakout">framed breakout</div>
-      </div>
-    `);
-    const col = await page.locator('#b').evaluate(el => getComputedStyle(el).gridColumn);
-    expect(col).toMatch(/breakout/);
-  });
-});
-
 // ── .sf-grid-flex ───────────────────────────────────────────────
 test.describe('layout: .sf-grid-flex', () => {
   const FIVE = (cls = '') => `

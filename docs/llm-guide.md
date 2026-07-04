@@ -818,13 +818,6 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-content-width:  var(--sf-container-default)
 --sf-breakout-width: var(--sf-container-wide)
 
-/* Boxed section (.sf-boxed) — framed/inset counterpart to full-bleed:
-   content inside visible edges (border, radius, shadow). Standalone or
-   as a .sf-content-grid child. Built directly from existing system
-   tokens (--sf-gutter, --sf-color-surface, --sf-border-width-1,
-   --sf-color-border, --sf-radius-l, --sf-shadow-s) — no dedicated
-   token group. */
-
 /* Grid-flex (.sf-grid-flex) — flex alternative to .sf-grid for uneven
    item counts: last-row leftovers stretch to fill (default) or stay
    fixed-width and centered (--center). Reuses the .sf-grid knobs. */

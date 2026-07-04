@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 684,
-      "sf_classes": 202,
+      "sf_classes": 201,
       "is_classes": 40
     }
   },
@@ -725,7 +725,6 @@
     "sf-bento-wide",
     "sf-bg",
     "sf-box",
-    "sf-boxed",
     "sf-breakout",
     "sf-center",
     "sf-center--intrinsic",

@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**935 elements** — 684 tokens, 251 classes.
+**934 elements** — 684 tokens, 250 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 879 | Everyday surface. SemVer-stable. |
+| PUBLIC | 878 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -724,7 +724,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (251)
+## Classes (250)
 
 ### Accessibility (8)
 
@@ -739,7 +739,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
-### Layout primitives (137)
+### Layout primitives (136)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -756,7 +756,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
 | `.sf-bg` | PUBLIC | layout | Background | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg"> or as a wrapper with a nested > img / > video / > picture. |
 | `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
-| `.sf-boxed` | PUBLIC | layout | — | Boxed section — the framed counterpart to breakout/full-bleed. Built directly from existing system tokens (no dedicated token group) — the .sf-content-grid > * default above already puts it in the content column, so no override is declared here. |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
 | `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
 | `.sf-center--intrinsic` | PUBLIC | layout | Center | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |

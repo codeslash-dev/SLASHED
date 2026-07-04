@@ -27,14 +27,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 935,
+      "total": 934,
       "by_type": {
-        "class": 251,
+        "class": 250,
         "token": 684
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 879,
+        "PUBLIC": 878,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -42,15 +42,15 @@
         "knob": 223
       },
       "tokens": 684,
-      "classes": 251,
-      "sf_classes": 202,
+      "classes": 250,
+      "sf_classes": 201,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 6,
         "Core tokens": 602,
-        "Layout primitives": 137,
+        "Layout primitives": 136,
         "Layout tokens": 53,
         "Macro classes": 45,
         "Macro tokens": 23,
@@ -20691,31 +20691,6 @@
       "area": "layout",
       "group": "Box",
       "description": "Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.layout",
-      "sourceFiles": [
-        "core/layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-boxed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-boxed",
-      "prefix": "sf",
-      "kind": "layout",
-      "category": "Layout primitives",
-      "area": "layout",
-      "group": "",
-      "description": "Boxed section — the framed counterpart to breakout/full-bleed. Built directly from existing system tokens (no dedicated token group) — the .sf-content-grid > * default above already puts it in the content column, so no override is declared here.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,

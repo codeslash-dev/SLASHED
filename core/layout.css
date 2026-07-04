@@ -494,19 +494,6 @@
   .sf-content-grid > .sf-breakout   { grid-column: breakout; }
   .sf-content-grid > .sf-full-bleed { grid-column: full; }
 
-  /* Boxed section — the framed counterpart to breakout/full-bleed. Built
-     directly from existing system tokens (no dedicated token group) — the
-     .sf-content-grid > * default above already puts it in the content
-     column, so no override is declared here. */
-  .sf-boxed {
-    padding:       var(--sf-gutter);
-    background:    var(--sf-color-surface);
-    border:        var(--sf-border-width-1) solid var(--sf-color-border);
-    border-radius: var(--sf-radius-l);
-    box-shadow:    var(--sf-shadow-s);
-  }
-
-  
   .sf-bento {
     display:               grid;
     grid-template-columns: repeat(var(--sf-bento-cols, var(--sf-bento-cols-default)), 1fr);
