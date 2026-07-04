@@ -850,7 +850,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
       "optional": false,
       "layer": "slashed.macros"
     },
@@ -860,7 +860,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
       "optional": false,
       "layer": "slashed.macros"
     },
@@ -870,7 +870,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
       "optional": false,
       "layer": "slashed.macros"
     },
@@ -880,7 +880,7 @@
       "kind": "macro",
       "category": "Macro classes",
       "group": "",
-      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
       "optional": false,
       "layer": "slashed.macros"
     },

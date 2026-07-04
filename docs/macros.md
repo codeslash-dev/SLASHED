@@ -675,7 +675,11 @@ Tokens:
 | Token | Default | What it controls |
 |---|---|---|
 | `--sf-overlap-pull` | `var(--sf-space-xl)` | how far `.sf-overlap` pulls into the adjacent element |
-| `--sf-overlap-host-pad` | `var(--sf-overlap-pull)` | `.sf-overlap-host`'s block-start padding compensation (defaults to match the pull) |
+
+`.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
+directly in the CSS declaration rather than through a declared token, so it isn't part of the
+token registry — set `--sf-overlap-host-pad` inline on an instance to compensate by something
+other than the default pull amount.
 
 `.sf-overlap-host` sets `isolation: isolate` so the overlapping element's
 raised `z-index` stays scoped to this container rather than fighting
