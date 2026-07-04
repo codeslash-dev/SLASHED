@@ -602,31 +602,20 @@ Variants:
 | `.sf-corner-scoop--top-right` | scoop at the top-right corner |
 | `.sf-corner-scoop--bottom-left` | scoop at the bottom-left corner |
 | `.sf-corner-scoop--bottom-right` | scoop at the bottom-right corner |
-| `.sf-corner-scoop--top` | scoop both top corners at once |
-| `.sf-corner-scoop--bottom` | scoop both bottom corners at once — a "U"/bowl opening when `--sf-corner-scoop-size` is close to half the element's width, so the two cuts meet in the middle |
-| `.sf-corner-scoop--left` | scoop both left corners at once |
-| `.sf-corner-scoop--right` | scoop both right corners at once |
 
 Tokens:
 
 | Token | Default | What it controls |
 |---|---|---|
 | `--sf-corner-scoop-size` | `var(--sf-radius-2xl)` | radius of the concave cut |
-| `--sf-corner-scoop-at` | `100% 0` | position of the cut for the four single-corner variants above |
+| `--sf-corner-scoop-at` | `100% 0` | position of the cut (set by the variants above) |
 
 **Limitations:** masking cuts the element's entire paint at that
 corner — `box-shadow`/`border` don't survive the cut there (put shadows
-on a wrapper element if needed). The four single-corner variants can
-only cut one corner each — combining two of them on the same element
-doesn't stack (the second `mask-image` wins outright). To cut both
-corners on one side at once, use the `--top`/`--bottom`/`--left`/`--right`
-pair variants instead — they use `mask-composite: intersect` internally
-so both cuts survive together, and need `mask-composite` support
-(Safari 15.4+, already inside this framework's browser floor) — no
-legacy `-webkit-mask-composite` fallback is provided for them. None of
-the eight variants compose with other mask-based macros
-(`.sf-overflow-fade`, `.sf-scroll-shadow`) on the same element — the
-last `mask-image` wins.
+on a wrapper element if needed). Only one scoop per element — a second
+mask layer would fill the first hole rather than adding a second cut.
+Doesn't compose with other mask-based macros (`.sf-overflow-fade`,
+`.sf-scroll-shadow`) on the same element — the last `mask-image` wins.
 
 ---
 

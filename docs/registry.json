@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 691,
-      "sf_classes": 218,
+      "sf_classes": 214,
       "is_classes": 40
     }
   },
@@ -757,12 +757,8 @@
     "sf-content-auto",
     "sf-content-grid",
     "sf-corner-scoop",
-    "sf-corner-scoop--bottom",
     "sf-corner-scoop--bottom-left",
     "sf-corner-scoop--bottom-right",
-    "sf-corner-scoop--left",
-    "sf-corner-scoop--right",
-    "sf-corner-scoop--top",
     "sf-corner-scoop--top-left",
     "sf-corner-scoop--top-right",
     "sf-corners",
