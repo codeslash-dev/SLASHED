@@ -385,18 +385,13 @@
   /* Two-corner scoop pairs — both corners on one side cut at once (e.g.
      --bottom carves a "U"/bowl opening: flat top, open concave base).
      A single mask-image can only encode one cut point, so these override
-     it with two radial-gradient layers: the "add" default would let the
-     second, opaque-everywhere-but-its-own-corner layer paint back over
-     the first cut, erasing it (this is exactly the "doesn't compose"
-     limitation above) — so the top layer combines with 'intersect'
-     instead, keeping both cuts. The bottom layer stays 'add': WebKit has
-     a bug (https://bugs.webkit.org/show_bug.cgi?id=240324) where
-     'intersect' against the implicit nothing below the bottommost layer
-     collapses it to fully transparent; 'add' against nothing is the
-     identity operation in every engine, so it's the safe choice there.
-     Needs unprefixed mask-composite (Safari 15.4+, i.e. inside this
-     framework's 18+ floor) — no legacy -webkit-mask-composite fallback
-     is provided. */
+     it with two radial-gradient layers combined via mask-composite:
+     intersect — the "add" default would instead let the second, opaque-
+     everywhere-but-its-own-corner layer paint back over the first cut,
+     erasing it (this is exactly the "doesn't compose" limitation above,
+     worked around here by switching how the layers combine). Needs
+     unprefixed mask-composite (Safari 15.4+, i.e. inside this framework's
+     18+ floor) — no legacy -webkit-mask-composite fallback is provided. */
   .sf-corner-scoop--top,
   .sf-corner-scoop--bottom,
   .sf-corner-scoop--left,
@@ -413,7 +408,7 @@
       radial-gradient(circle at var(--sf-corner-scoop-at-2),
         transparent var(--sf-corner-scoop-size),
         black calc(var(--sf-corner-scoop-size) + 0.5px));
-    mask-composite: intersect, add;
+    mask-composite: intersect;
   }
   .sf-corner-scoop--top    { --sf-corner-scoop-at-1: 0 0;    --sf-corner-scoop-at-2: 100% 0; }
   .sf-corner-scoop--bottom { --sf-corner-scoop-at-1: 0 100%; --sf-corner-scoop-at-2: 100% 100%; }
