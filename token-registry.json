@@ -2880,19 +2880,23 @@
     },
     {
       "id": 712,
-      "name": "--sf-corners-end-end"
+      "name": "--sf-corners-end-end",
+      "removed": true
     },
     {
       "id": 713,
-      "name": "--sf-corners-end-start"
+      "name": "--sf-corners-end-start",
+      "removed": true
     },
     {
       "id": 714,
-      "name": "--sf-corners-start-end"
+      "name": "--sf-corners-start-end",
+      "removed": true
     },
     {
       "id": 715,
-      "name": "--sf-corners-start-start"
+      "name": "--sf-corners-start-start",
+      "removed": true
     },
     {
       "id": 716,

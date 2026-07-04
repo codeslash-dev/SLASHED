@@ -27,23 +27,23 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 954,
+      "total": 947,
       "by_type": {
-        "class": 263,
-        "token": 691
+        "class": 260,
+        "token": 687
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 898,
+        "PUBLIC": 891,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 467,
+        "consumption": 463,
         "knob": 224
       },
-      "tokens": 691,
-      "classes": 263,
-      "sf_classes": 214,
+      "tokens": 687,
+      "classes": 260,
+      "sf_classes": 211,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
@@ -52,8 +52,8 @@
         "Core tokens": 602,
         "Layout primitives": 136,
         "Layout tokens": 53,
-        "Macro classes": 58,
-        "Macro tokens": 30,
+        "Macro classes": 55,
+        "Macro tokens": 26,
         "Motion / animation": 15,
         "Print": 4,
         "State classes": 40,
@@ -9223,118 +9223,6 @@
       "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
       "value": "var(--sf-radius-2xl)",
       "aliasOf": "--sf-radius-2xl",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-end-end",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-end-start",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-start-end",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-start-start",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -21614,81 +21502,6 @@
       "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
       "isVariant": true,
       "baseClass": "sf-corner-scoop",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-corners",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corners",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-corners--leaf",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corners--leaf",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
-      "isVariant": true,
-      "baseClass": "sf-corners",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-corners--leaf-flip",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corners--leaf-flip",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
-      "isVariant": true,
-      "baseClass": "sf-corners",
       "optional": false,
       "layer": "slashed.macros",
       "sourceFiles": [

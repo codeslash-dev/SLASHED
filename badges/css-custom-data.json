@@ -1637,26 +1637,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-corners-end-end",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-corners-end-start",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-corners-start-end",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-corners-start-start",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-cover-min-height",
       "description": "Minimum height of the cover layout (typically 100svh).\n\nDefault: `100dvh`",
       "syntax": "*"

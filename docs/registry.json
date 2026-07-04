@@ -19,8 +19,8 @@
       "optional/theme-example.css"
     ],
     "counts": {
-      "tokens": 691,
-      "sf_classes": 214,
+      "tokens": 687,
+      "sf_classes": 211,
       "is_classes": 40
     }
   },
@@ -352,10 +352,6 @@
     "--sf-contrast-threshold",
     "--sf-corner-scoop-at",
     "--sf-corner-scoop-size",
-    "--sf-corners-end-end",
-    "--sf-corners-end-start",
-    "--sf-corners-start-end",
-    "--sf-corners-start-start",
     "--sf-cover-min-height",
     "--sf-cover-padding",
     "--sf-current-font-weight",
@@ -761,9 +757,6 @@
     "sf-corner-scoop--bottom-right",
     "sf-corner-scoop--top-left",
     "sf-corner-scoop--top-right",
-    "sf-corners",
-    "sf-corners--leaf",
-    "sf-corners--leaf-flip",
     "sf-cover",
     "sf-cover--max",
     "sf-cover--min",

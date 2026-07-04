@@ -102,16 +102,6 @@
     --sf-corner-scoop-at:   100% 0;
 
     /* ----------------------------------------------------------
-       Border-radius recipe — the four logical corners for .sf-corners.
-       Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip
-       re-point these to an asymmetric set.
-       ---------------------------------------------------------- */
-    --sf-corners-start-start: var(--sf-radius-l);
-    --sf-corners-start-end:   var(--sf-radius-l);
-    --sf-corners-end-end:     var(--sf-radius-l);
-    --sf-corners-end-start:   var(--sf-radius-l);
-
-    /* ----------------------------------------------------------
        Overlap recipe — how far .sf-overlap pulls into the adjacent
        element. .sf-overlap-host's padding compensation defaults to this
        same value via a var() fallback in the rule itself (not aliased

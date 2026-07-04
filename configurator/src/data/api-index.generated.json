@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "7de2f38f7ce8",
+    "tokensHash": "4a0ad429ba01",
     "bundles": [
       "full",
       "optimal",
@@ -10,16 +10,16 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 691,
+      "tokens": 687,
       "byTier": {
-        "PUBLIC": 635,
+        "PUBLIC": 631,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
         "Core tokens": 602,
-        "Macro tokens": 30,
+        "Macro tokens": 26,
         "Component tokens": 6
       }
     }
@@ -7528,98 +7528,6 @@
       "note": "",
       "value": "var(--sf-radius-2xl)",
       "aliasOf": "--sf-radius-2xl",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-end-end",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "note": "",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-end-start",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "note": "",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-start-end",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "note": "",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "--sf-corners-start-start",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corners",
-      "category": "Macro tokens",
-      "group": "Border-radius recipe",
-      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
-      "note": "",
-      "value": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

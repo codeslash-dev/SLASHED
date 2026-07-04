@@ -885,36 +885,6 @@
       "layer": "slashed.macros"
     },
     {
-      "name": "sf-corners",
-      "selector": ".sf-corners",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
-      "name": "sf-corners--leaf",
-      "selector": ".sf-corners--leaf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
-      "name": "sf-corners--leaf-flip",
-      "selector": ".sf-corners--leaf-flip",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
       "name": "sf-cover",
       "selector": ".sf-cover",
       "kind": "layout",

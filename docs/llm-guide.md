@@ -866,12 +866,6 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-corner-scoop-size: var(--sf-radius-2xl)
 --sf-corner-scoop-at:   100% 0
 
-/* Border-radius recipe (.sf-corners) — 4 logical corners */
---sf-corners-start-start: var(--sf-radius-l)
---sf-corners-start-end:   var(--sf-radius-l)
---sf-corners-end-end:     var(--sf-radius-l)
---sf-corners-end-start:   var(--sf-radius-l)
-
 /* Overlap recipe (.sf-overlap / .sf-overlap-host) */
 --sf-overlap-pull: var(--sf-space-xl)
 ```

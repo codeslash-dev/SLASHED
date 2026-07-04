@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 691,
-    "rendered": 691,
+    "totalTokens": 687,
+    "rendered": 687,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 8,
@@ -8950,58 +8950,6 @@
       "computed": "100% 0",
       "shown": "100% 0",
       "darkComputed": "100% 0",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corners-start-start",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "issues": [],
-      "computed": "12px",
-      "shown": "12px",
-      "darkComputed": "12px",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corners-start-end",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "issues": [],
-      "computed": "12px",
-      "shown": "12px",
-      "darkComputed": "12px",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corners-end-end",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "issues": [],
-      "computed": "12px",
-      "shown": "12px",
-      "darkComputed": "12px",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corners-end-start",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-l)",
-      "aliasOf": "--sf-radius-l",
-      "issues": [],
-      "computed": "12px",
-      "shown": "12px",
-      "darkComputed": "12px",
       "changedInDark": false
     },
     {

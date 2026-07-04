@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**691 tokens** (deduplicated by name across the 4 token source files).
+**687 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 635 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 631 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 224 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 467 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 463 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -418,10 +418,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | Core | `0.6` |
 | `--sf-corner-scoop-at` | PUBLIC | knob | Macros | `100% 0` |
 | `--sf-corner-scoop-size` | PUBLIC | consumption | Macros | `var(--sf-radius-2xl)` |
-| `--sf-corners-end-end` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
-| `--sf-corners-end-start` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
-| `--sf-corners-start-end` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
-| `--sf-corners-start-start` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
 | `--sf-cover-min-height` | PUBLIC | knob | Layout | `100dvh` |
 | `--sf-cover-padding` | PUBLIC | consumption | Layout | `var(--sf-section-pad)` |
 | `--sf-current-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-bold)` |

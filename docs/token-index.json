@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 691,
+      "tokens": 687,
       "by_tier": {
-        "PUBLIC": 635,
+        "PUBLIC": 631,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 224,
-        "consumption": 467
+        "consumption": 463
       }
     }
   },
@@ -2636,38 +2636,6 @@
         "core/tokens.macros.css"
       ],
       "value": "var(--sf-radius-2xl)"
-    },
-    "--sf-corners-end-end": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-radius-l)"
-    },
-    "--sf-corners-end-start": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-radius-l)"
-    },
-    "--sf-corners-start-end": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-radius-l)"
-    },
-    "--sf-corners-start-start": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-radius-l)"
     },
     "--sf-cover-min-height": {
       "tier": "PUBLIC",

@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**691 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**687 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -682,7 +682,7 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-30 tokens.
+26 tokens.
 
 | Token | Default |
 |---|---|
@@ -690,10 +690,6 @@ rebrand workflow.
 | `--sf-content-intrinsic-size` | `500px` |
 | `--sf-corner-scoop-at` | `100% 0` |
 | `--sf-corner-scoop-size` | `var(--sf-radius-2xl)` |
-| `--sf-corners-end-end` | `var(--sf-radius-l)` |
-| `--sf-corners-end-start` | `var(--sf-radius-l)` |
-| `--sf-corners-start-end` | `var(--sf-radius-l)` |
-| `--sf-corners-start-start` | `var(--sf-radius-l)` |
 | `--sf-flow-space` | `var(--sf-content-gap)` |
 | `--sf-line-clamp` | `3` |
 | `--sf-overlap-pull` | `var(--sf-space-xl)` |

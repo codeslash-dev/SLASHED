@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**954 elements** — 691 tokens, 263 classes.
+**947 elements** — 687 tokens, 260 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 898 | Everyday surface. SemVer-stable. |
+| PUBLIC | 891 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (691)
+## Tokens (687)
 
 ### Component tokens (6)
 
@@ -696,7 +696,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Gap between switcher columns / rows. |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Inline-size threshold below which the switcher flips from horizontal to vertical. |
 
-### Macro tokens (30)
+### Macro tokens (26)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -704,10 +704,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
 | `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)". |
 | `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)". |
-| `--sf-corners-end-end` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
-| `--sf-corners-end-start` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
-| `--sf-corners-start-end` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
-| `--sf-corners-start-start` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
 | `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
@@ -731,7 +727,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (263)
+## Classes (260)
 
 ### Accessibility (8)
 
@@ -887,7 +883,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (58)
+### Macro classes (55)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -898,9 +894,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
 | `.sf-corner-scoop--top-left` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
 | `.sf-corner-scoop--top-right` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
-| `.sf-corners` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |
-| `.sf-corners--leaf` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |
-| `.sf-corners--leaf-flip` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |

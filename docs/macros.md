@@ -619,34 +619,6 @@ Doesn't compose with other mask-based macros (`.sf-overflow-fade`,
 
 ---
 
-## `.sf-corners`
-
-Coordinated multi-corner `border-radius` patterns via the four logical
-radius corners, for asymmetric shapes ("leaf", "blob") that a single
-`border-radius` value can't express.
-
-```html
-<img class="sf-corners sf-corners--leaf" src="portrait.jpg" alt="">
-```
-
-Variants:
-
-| Class | Effect |
-|---|---|
-| `.sf-corners--leaf` | large/small/large/small — a leaf silhouette |
-| `.sf-corners--leaf-flip` | the mirrored leaf silhouette |
-
-Tokens:
-
-| Token | Default | What it controls |
-|---|---|---|
-| `--sf-corners-start-start` | `var(--sf-radius-l)` | block-start/inline-start corner |
-| `--sf-corners-start-end` | `var(--sf-radius-l)` | block-start/inline-end corner |
-| `--sf-corners-end-end` | `var(--sf-radius-l)` | block-end/inline-end corner |
-| `--sf-corners-end-start` | `var(--sf-radius-l)` | block-end/inline-start corner |
-
----
-
 ## `.sf-overlap` and `.sf-overlap-host`
 
 A recipe for one element intentionally overlapping the element before

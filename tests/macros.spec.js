@@ -438,47 +438,6 @@ test.describe('macro: .sf-corner-scoop', () => {
   });
 });
 
-test.describe('macro: .sf-corners', () => {
-  test('base class applies a uniform radius to all four logical corners', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-corners" style="width:100px;height:100px"></div>`);
-    const r = await page.locator('#t').evaluate(el => {
-      const cs = getComputedStyle(el);
-      return [cs.borderTopLeftRadius, cs.borderTopRightRadius, cs.borderBottomRightRadius, cs.borderBottomLeftRadius];
-    });
-    expect(new Set(r).size).toBe(1);
-  });
-
-  test('--leaf sets an asymmetric large/small/large/small pattern', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-corners sf-corners--leaf" style="width:100px;height:100px"></div>`);
-    const r = await page.locator('#t').evaluate(el => {
-      const cs = getComputedStyle(el);
-      return {
-        tl: parseFloat(cs.borderTopLeftRadius),
-        tr: parseFloat(cs.borderTopRightRadius),
-        br: parseFloat(cs.borderBottomRightRadius),
-        bl: parseFloat(cs.borderBottomLeftRadius),
-      };
-    });
-    expect(r.tl).toBeGreaterThan(r.tr);
-    expect(r.br).toBeGreaterThan(r.bl);
-    expect(r.tl).toBe(r.br);
-    expect(r.tr).toBe(r.bl);
-  });
-
-  test('--leaf-flip mirrors --leaf', async ({ page }) => {
-    await setup(page, `
-      <div id="a" class="sf-corners sf-corners--leaf">a</div>
-      <div id="b" class="sf-corners sf-corners--leaf-flip">b</div>
-    `);
-    const [a] = await Promise.all([
-      page.locator('#a').evaluate(el => getComputedStyle(el).borderTopLeftRadius),
-      page.locator('#b').evaluate(el => getComputedStyle(el).borderTopLeftRadius),
-    ]);
-    const bOpposite = await page.locator('#b').evaluate(el => getComputedStyle(el).borderTopRightRadius);
-    expect(bOpposite).toBe(a);
-  });
-});
-
 test.describe('macro: .sf-overlap / .sf-overlap-host', () => {
   test('pulls the element up over the previous sibling by --sf-overlap-pull', async ({ page }) => {
     await setup(page, `
