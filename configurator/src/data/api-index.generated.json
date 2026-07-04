@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "354667facc7c",
+    "tokensHash": "4a0ad429ba01",
     "bundles": [
       "full",
       "optimal",
@@ -10,16 +10,16 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 684,
+      "tokens": 687,
       "byTier": {
-        "PUBLIC": 628,
+        "PUBLIC": 631,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
         "Core tokens": 602,
-        "Macro tokens": 23,
+        "Macro tokens": 26,
         "Component tokens": 6
       }
     }
@@ -678,7 +678,7 @@
       "group": "Background layer (.sf-bg)",
       "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
       "note": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
-      "value": "0",
+      "value": "0px",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -7495,6 +7495,52 @@
       ]
     },
     {
+      "name": "--sf-corner-scoop-at",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "corner",
+      "category": "Macro tokens",
+      "group": "Concave corner",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
+      "note": "",
+      "value": "100% 0",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-corner-scoop-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "corner",
+      "category": "Macro tokens",
+      "group": "Concave corner",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
+      "note": "",
+      "value": "var(--sf-radius-2xl)",
+      "aliasOf": "--sf-radius-2xl",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-cover-min-height",
       "tier": "PUBLIC",
       "role": "knob",
@@ -11041,6 +11087,29 @@
       "note": "CSS font-optical-sizing value. 'auto' lets the browser optimize letterforms for the rendered size. Set 'none' to disable optical sizing.",
       "value": "auto",
       "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "overlap",
+      "category": "Macro tokens",
+      "group": "Overlap recipe",
+      "description": "how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set…",
+      "note": "",
+      "value": "var(--sf-space-xl)",
+      "aliasOf": "--sf-space-xl",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,
