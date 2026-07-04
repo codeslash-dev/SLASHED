@@ -27,23 +27,23 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 926,
+      "total": 946,
       "by_type": {
-        "class": 242,
-        "token": 684
+        "class": 255,
+        "token": 691
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 870,
+        "PUBLIC": 890,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 461,
-        "knob": 223
+        "consumption": 467,
+        "knob": 224
       },
-      "tokens": 684,
-      "classes": 242,
-      "sf_classes": 193,
+      "tokens": 691,
+      "classes": 255,
+      "sf_classes": 206,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
@@ -52,8 +52,8 @@
         "Core tokens": 602,
         "Layout primitives": 128,
         "Layout tokens": 53,
-        "Macro classes": 45,
-        "Macro tokens": 23,
+        "Macro classes": 58,
+        "Macro tokens": 30,
         "Motion / animation": 15,
         "Print": 4,
         "State classes": 40,
@@ -883,7 +883,7 @@
       "area": "layout",
       "group": "Background layer (.sf-bg)",
       "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
-      "value": "0",
+      "value": "0px",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -9184,6 +9184,174 @@
       ]
     },
     {
+      "name": "--sf-corner-scoop-at",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "corner",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Concave corner",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
+      "value": "100% 0",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-corner-scoop-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "corner",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Concave corner",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".",
+      "value": "var(--sf-radius-2xl)",
+      "aliasOf": "--sf-radius-2xl",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-corners-end-end",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "corners",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Border-radius recipe",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
+      "value": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-corners-end-start",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "corners",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Border-radius recipe",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
+      "value": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-corners-start-end",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "corners",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Border-radius recipe",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
+      "value": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-corners-start-start",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "corners",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Border-radius recipe",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.",
+      "value": "var(--sf-radius-l)",
+      "aliasOf": "--sf-radius-l",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-cover-min-height",
       "type": "token",
       "tier": "PUBLIC",
@@ -13509,6 +13677,34 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "overlap",
+      "category": "Macro tokens",
+      "area": "macros",
+      "group": "Overlap recipe",
+      "description": "how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set…",
+      "value": "var(--sf-space-xl)",
+      "aliasOf": "--sf-space-xl",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.macros.css"
       ],
       "bundles": [
         "full",
@@ -21306,6 +21502,206 @@
       ]
     },
     {
+      "name": "sf-corner-scoop",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corner-scoop",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corner-scoop--bottom-left",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corner-scoop--bottom-left",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "isVariant": true,
+      "baseClass": "sf-corner-scoop",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corner-scoop--bottom-right",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corner-scoop--bottom-right",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "isVariant": true,
+      "baseClass": "sf-corner-scoop",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corner-scoop--top-left",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corner-scoop--top-left",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "isVariant": true,
+      "baseClass": "sf-corner-scoop",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corner-scoop--top-right",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corner-scoop--top-right",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18",
+      "isVariant": true,
+      "baseClass": "sf-corner-scoop",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corners",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corners",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corners--leaf",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corners--leaf",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
+      "isVariant": true,
+      "baseClass": "sf-corners",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-corners--leaf-flip",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-corners--leaf-flip",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only.",
+      "isVariant": true,
+      "baseClass": "sf-corners",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-cover",
       "type": "class",
       "tier": "PUBLIC",
@@ -23644,6 +24040,131 @@
       "description": "Overflow fade variant: fades the top (block-start) edge.",
       "isVariant": true,
       "baseClass": "sf-overflow-fade",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overlap",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overlap",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overlap--down",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overlap--down",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob).",
+      "isVariant": true,
+      "baseClass": "sf-overlap",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overlap--end",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overlap--end",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob).",
+      "isVariant": true,
+      "baseClass": "sf-overlap",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overlap--start",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overlap--start",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob).",
+      "isVariant": true,
+      "baseClass": "sf-overlap",
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overlap-host",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overlap-host",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both.",
+      "isVariant": false,
+      "baseClass": null,
       "optional": false,
       "layer": "slashed.macros",
       "sourceFiles": [

@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**926 elements** — 684 tokens, 242 classes.
+**946 elements** — 691 tokens, 255 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 870 | Everyday surface. SemVer-stable. |
+| PUBLIC | 890 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (684)
+## Tokens (691)
 
 ### Component tokens (6)
 
@@ -650,7 +650,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-bento-row-default` | PUBLIC | knob | bento | `10rem` | Default row height for standard bento grid cells. |
 | `--sf-bento-row-tall` | PUBLIC | knob | bento | `16rem` | Tall row height for visually prominent or hero bento cells. |
 | `--sf-bg-fit` | PUBLIC | knob | bg | `cover` | object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover. |
-| `--sf-bg-inset` | PUBLIC | knob | bg | `0` | Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly. |
+| `--sf-bg-inset` | PUBLIC | knob | bg | `0px` | Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly. |
 | `--sf-bg-position` | PUBLIC | knob | bg | `50% 50%` | object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%). |
 | `--sf-bg-radius` | PUBLIC | knob | bg | `0` | border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed. |
 | `--sf-bg-z` | PUBLIC | knob | bg | `-2` | z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background. |
@@ -696,14 +696,21 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Gap between switcher columns / rows. |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Inline-size threshold below which the switcher flips from horizontal to vertical. |
 
-### Macro tokens (23)
+### Macro tokens (30)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
 | `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | Aspect ratio value for the .aspect-ratio macro. |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
+| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)". |
+| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)". |
+| `--sf-corners-end-end` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
+| `--sf-corners-end-start` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
+| `--sf-corners-start-end` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
+| `--sf-corners-start-start` | PUBLIC | consumption | corners | `var(--sf-radius-l)` | the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set. |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
+| `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
 | `--sf-prose-block-margin` | PUBLIC | consumption | prose | `var(--sf-space-m)` | Block margin between prose elements (h2, p, ul, etc.). |
 | `--sf-prose-blockquote-border` | PUBLIC | consumption | prose | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` | Left border style for blockquotes inside prose. |
 | `--sf-prose-blockquote-padding` | PUBLIC | consumption | prose | `var(--sf-space-m)` | Inner padding for blockquotes inside prose. |
@@ -724,7 +731,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (242)
+## Classes (255)
 
 ### Accessibility (8)
 
@@ -872,12 +879,20 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (45)
+### Macro classes (58)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
+| `.sf-corner-scoop` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
+| `.sf-corner-scoop--bottom-left` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 |
+| `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 |
+| `.sf-corner-scoop--top-left` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 |
+| `.sf-corner-scoop--top-right` | PUBLIC | macro | — | stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 |
+| `.sf-corners` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |
+| `.sf-corners--leaf` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |
+| `.sf-corners--leaf-flip` | PUBLIC | macro | — | Border-radius recipe — coordinated multi-corner radius patterns via the four logical radius longhands (the only logical-compliant way to set radius; the shorthand is physical-only). Variants re-point the four knobs only. |
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
@@ -898,6 +913,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overflow-fade--left` | PUBLIC | macro | — | Overflow fade variant: fades the left (inline-start) edge. |
 | `.sf-overflow-fade--right` | PUBLIC | macro | — | Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour. |
 | `.sf-overflow-fade--top` | PUBLIC | macro | — | Overflow fade variant: fades the top (block-start) edge. |
+| `.sf-overlap` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
+| `.sf-overlap--down` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
+| `.sf-overlap--end` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
+| `.sf-overlap--start` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
+| `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
 | `.sf-prose` | PUBLIC | macro | Prose | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
 | `.sf-scrim` | PUBLIC | macro | Scrim | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
 | `.sf-scrim__content` | PUBLIC | macro | Scrim | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |

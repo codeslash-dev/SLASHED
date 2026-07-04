@@ -492,6 +492,25 @@ are lifted above the scrim. Position your content over the image with
 `position: absolute` (as above) or use a CSS `background-image` on the
 wrapper instead of an `<img>` child.
 
+**Media background + overlay + stacked content, with no manual
+`z-index`:** compose with the [`.sf-bg`](layout.md) layout primitive
+instead of a plain `<img>` — it auto-fills the parent (`position:
+absolute; inset: 0`) and already composes under `.sf-scrim` by design,
+so `img`/`video` background, gradient, and content stack correctly with
+zero extra positioning:
+
+```html
+<div class="sf-scrim sf-scrim--bottom">
+  <img class="sf-bg" src="hero.jpg" alt="">
+  <div class="sf-scrim__content">
+    <h2>Media background, scrim, and content — no z-index to manage</h2>
+  </div>
+</div>
+```
+
+This is the framework's answer to "background media + overlay + stacked
+content" — no dedicated macro needed on top of `.sf-bg` + `.sf-scrim`.
+
 Variants:
 
 | Class | Effect |
@@ -559,3 +578,105 @@ All entrance classes are gated by `prefers-reduced-motion: no-preference`;
 when the user opts out of motion the animations are inert (no movement).
 
 Lives in `core/motion.css`, layer `slashed.motion`.
+
+---
+
+## `.sf-corner-scoop`
+
+A corner that curves **away** from the box (a concave "notch"), instead
+of the normal convex `border-radius`. Reveals whatever sits behind the
+element at that corner via a `mask-image` radial gradient. Default
+corner is top-right.
+
+```html
+<div class="sf-card sf-corner-scoop--bottom-right">
+  Panel with a corner that curves away
+</div>
+```
+
+Variants:
+
+| Class | Effect |
+|---|---|
+| `.sf-corner-scoop--top-left` | scoop at the top-left corner |
+| `.sf-corner-scoop--top-right` | scoop at the top-right corner |
+| `.sf-corner-scoop--bottom-left` | scoop at the bottom-left corner |
+| `.sf-corner-scoop--bottom-right` | scoop at the bottom-right corner |
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-corner-scoop-size` | `var(--sf-radius-2xl)` | radius of the concave cut |
+| `--sf-corner-scoop-at` | `100% 0` | position of the cut (set by the variants above) |
+
+**Limitations:** masking cuts the element's entire paint at that
+corner — `box-shadow`/`border` don't survive the cut there (put shadows
+on a wrapper element if needed). Only one scoop per element — a second
+mask layer would fill the first hole rather than adding a second cut.
+Doesn't compose with other mask-based macros (`.sf-overflow-fade`,
+`.sf-scroll-shadow`) on the same element — the last `mask-image` wins.
+
+---
+
+## `.sf-corners`
+
+Coordinated multi-corner `border-radius` patterns via the four logical
+radius corners, for asymmetric shapes ("leaf", "blob") that a single
+`border-radius` value can't express.
+
+```html
+<img class="sf-corners sf-corners--leaf" src="portrait.jpg" alt="">
+```
+
+Variants:
+
+| Class | Effect |
+|---|---|
+| `.sf-corners--leaf` | large/small/large/small — a leaf silhouette |
+| `.sf-corners--leaf-flip` | the mirrored leaf silhouette |
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-corners-start-start` | `var(--sf-radius-l)` | block-start/inline-start corner |
+| `--sf-corners-start-end` | `var(--sf-radius-l)` | block-start/inline-end corner |
+| `--sf-corners-end-end` | `var(--sf-radius-l)` | block-end/inline-end corner |
+| `--sf-corners-end-start` | `var(--sf-radius-l)` | block-end/inline-start corner |
+
+---
+
+## `.sf-overlap` and `.sf-overlap-host`
+
+A recipe for one element intentionally overlapping the element before
+it (e.g. an avatar or image pulled up over the card below it), and the
+receiving container that reserves space for the intrusion.
+
+```html
+<img class="sf-overlap" src="badge.png" alt="">
+<article class="sf-card sf-overlap-host">
+  Content starts below the intruding image automatically.
+</article>
+```
+
+`.sf-overlap` variants (directional — standalone, not knob re-pointers,
+since each moves a different margin):
+
+| Class | Effect |
+|---|---|
+| `.sf-overlap` | pulls up over the previous element (default) |
+| `.sf-overlap--down` | pulls down over the next element |
+| `.sf-overlap--start` | pulls into the inline-start side |
+| `.sf-overlap--end` | pulls into the inline-end side |
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-overlap-pull` | `var(--sf-space-xl)` | how far `.sf-overlap` pulls into the adjacent element |
+| `--sf-overlap-host-pad` | `var(--sf-overlap-pull)` | `.sf-overlap-host`'s block-start padding compensation (defaults to match the pull) |
+
+`.sf-overlap-host` sets `isolation: isolate` so the overlapping element's
+raised `z-index` stays scoped to this container rather than fighting
+page-level stacking.

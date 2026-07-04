@@ -143,7 +143,7 @@
     },
     {
       "name": "--sf-bg-inset",
-      "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.\n\nDefault: `0`",
+      "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.\n\nDefault: `0px`",
       "syntax": "*"
     },
     {
@@ -1627,6 +1627,36 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-corner-scoop-at",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".\n\nDefault: `100% 0`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-corner-scoop-size",
+      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\".\n\nDefault: `var(--sf-radius-2xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-corners-end-end",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-corners-end-start",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-corners-start-end",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-corners-start-start",
+      "description": "the four logical corners for .sf-corners. Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip re-point these to an asymmetric set.\n\nDefault: `var(--sf-radius-l)`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-cover-min-height",
       "description": "Minimum height of the cover layout (typically 100svh).\n\nDefault: `100dvh`",
       "syntax": "*"
@@ -2394,6 +2424,11 @@
     {
       "name": "--sf-optical-sizing",
       "description": "CSS font-optical-sizing value. 'auto' lets the browser optimize letterforms for the rendered size. Set 'none' to disable optical sizing.\n\nDefault: `auto`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "description": "how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set…\n\nDefault: `var(--sf-space-xl)`",
       "syntax": "*"
     },
     {

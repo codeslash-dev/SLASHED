@@ -361,4 +361,77 @@
     text-decoration-line: none;
   }
 
+  /* Concave corner — a corner that curves AWAY from the box (revealing
+     whatever sits behind it), via a radial-gradient mask. Physical corner
+     names (mask geometry has no logical form, same rationale as
+     .sf-overflow-fade's physical directions). Cuts the element's full
+     paint at that corner — box-shadow/border don't survive the cut there;
+     put shadows on a wrapper if needed. Named to mirror the future
+     `corner-shape: scoop` keyword for an easy @supports migration. */
+  .sf-corner-scoop {
+    /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 */
+    -webkit-mask-image: radial-gradient(circle at var(--sf-corner-scoop-at),
+      transparent var(--sf-corner-scoop-size),
+      black calc(var(--sf-corner-scoop-size) + 0.5px));
+    mask-image: radial-gradient(circle at var(--sf-corner-scoop-at),
+      transparent var(--sf-corner-scoop-size),
+      black calc(var(--sf-corner-scoop-size) + 0.5px));
+  }
+  .sf-corner-scoop--top-left     { --sf-corner-scoop-at: 0 0; }
+  .sf-corner-scoop--top-right    { --sf-corner-scoop-at: 100% 0; }
+  .sf-corner-scoop--bottom-left  { --sf-corner-scoop-at: 0 100%; }
+  .sf-corner-scoop--bottom-right { --sf-corner-scoop-at: 100% 100%; }
+
+  /* Border-radius recipe — coordinated multi-corner radius patterns via
+     the four logical radius longhands (the only logical-compliant way to
+     set radius; the shorthand is physical-only). Variants re-point the
+     four knobs only. */
+  .sf-corners {
+    border-start-start-radius: var(--sf-corners-start-start);
+    border-start-end-radius:   var(--sf-corners-start-end);
+    border-end-end-radius:     var(--sf-corners-end-end);
+    border-end-start-radius:   var(--sf-corners-end-start);
+  }
+  .sf-corners--leaf {
+    --sf-corners-start-start: var(--sf-radius-4xl);
+    --sf-corners-start-end:   var(--sf-radius-xs);
+    --sf-corners-end-end:     var(--sf-radius-4xl);
+    --sf-corners-end-start:   var(--sf-radius-xs);
+  }
+  .sf-corners--leaf-flip {
+    --sf-corners-start-start: var(--sf-radius-xs);
+    --sf-corners-start-end:   var(--sf-radius-4xl);
+    --sf-corners-end-end:     var(--sf-radius-xs);
+    --sf-corners-end-start:   var(--sf-radius-4xl);
+  }
+
+  /* Overlap recipe — one element intentionally overlapping the previous
+     one (e.g. an image pulled up over the card below it), via a negative
+     logical margin + a raised stacking context. Directional variants are
+     standalone (margins are distinct properties, not a re-pointable knob). */
+  .sf-overlap,
+  .sf-overlap--down,
+  .sf-overlap--start,
+  .sf-overlap--end {
+    position: relative;
+    z-index:  var(--sf-z-raised);
+  }
+  .sf-overlap        { margin-block-start:  calc(-1 * var(--sf-overlap-pull)); }
+  .sf-overlap--down  { margin-block-end:    calc(-1 * var(--sf-overlap-pull)); }
+  .sf-overlap--start { margin-inline-start: calc(-1 * var(--sf-overlap-pull)); }
+  .sf-overlap--end   { margin-inline-end:   calc(-1 * var(--sf-overlap-pull)); }
+
+  /* Card-container recipe — the receiving side of an overlap: an isolated
+     stacking context with block-start padding compensation so in-flow
+     content clears an element intruding from above. The padding knob
+     defaults to the pull knob so one override tunes both. */
+  .sf-overlap-host {
+    position:  relative;
+    isolation: isolate;
+    /* var() fallback resolved on this element, not pre-baked at :root —
+       so a local --sf-overlap-pull override (even without setting
+       --sf-overlap-host-pad) is honored (#496-class pitfall). */
+    padding-block-start: var(--sf-overlap-host-pad, var(--sf-overlap-pull));
+  }
+
 }

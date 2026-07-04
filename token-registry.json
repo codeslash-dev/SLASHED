@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 704
+    "nextId": 712
   },
   "tokens": [
     {
@@ -2839,6 +2839,39 @@
     {
       "id": 703,
       "name": "--sf-equal-rule-width"
+    },
+    {
+      "id": 704,
+      "name": "--sf-corner-scoop-at"
+    },
+    {
+      "id": 705,
+      "name": "--sf-corner-scoop-size"
+    },
+    {
+      "id": 706,
+      "name": "--sf-corners-end-end"
+    },
+    {
+      "id": 707,
+      "name": "--sf-corners-end-start"
+    },
+    {
+      "id": 708,
+      "name": "--sf-corners-start-end"
+    },
+    {
+      "id": 709,
+      "name": "--sf-corners-start-start"
+    },
+    {
+      "id": 710,
+      "name": "--sf-overlap-host-pad",
+      "removed": true
+    },
+    {
+      "id": 711,
+      "name": "--sf-overlap-pull"
     }
   ]
 }

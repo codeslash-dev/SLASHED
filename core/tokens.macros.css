@@ -94,5 +94,31 @@
        shadow halo behind glyphs, consumed by .sf-text-protect. */
     --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6);
 
+    /* ----------------------------------------------------------
+       Concave corner — radius and corner position for .sf-corner-scoop.
+       Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)".
+       ---------------------------------------------------------- */
+    --sf-corner-scoop-size: var(--sf-radius-2xl);
+    --sf-corner-scoop-at:   100% 0;
+
+    /* ----------------------------------------------------------
+       Border-radius recipe — the four logical corners for .sf-corners.
+       Default to a uniform --sf-radius-l; .sf-corners--leaf/--leaf-flip
+       re-point these to an asymmetric set.
+       ---------------------------------------------------------- */
+    --sf-corners-start-start: var(--sf-radius-l);
+    --sf-corners-start-end:   var(--sf-radius-l);
+    --sf-corners-end-end:     var(--sf-radius-l);
+    --sf-corners-end-start:   var(--sf-radius-l);
+
+    /* ----------------------------------------------------------
+       Overlap recipe — how far .sf-overlap pulls into the adjacent
+       element. .sf-overlap-host's padding compensation defaults to this
+       same value via a var() fallback in the rule itself (not aliased
+       here — see core/macros.css), so one override on the host tunes
+       both unless --sf-overlap-host-pad is set independently.
+       ---------------------------------------------------------- */
+    --sf-overlap-pull: var(--sf-space-xl);
+
   }
 }

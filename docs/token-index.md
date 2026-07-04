@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**684 tokens** (deduplicated by name across the 4 token source files).
+**691 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 628 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 635 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 223 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 461 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 224 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 467 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -119,7 +119,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-bento-row-default` | PUBLIC | knob | Layout | `10rem` |
 | `--sf-bento-row-tall` | PUBLIC | knob | Layout | `16rem` |
 | `--sf-bg-fit` | PUBLIC | knob | Layout | `cover` |
-| `--sf-bg-inset` | PUBLIC | knob | Layout | `0` |
+| `--sf-bg-inset` | PUBLIC | knob | Layout | `0px` |
 | `--sf-bg-position` | PUBLIC | knob | Layout | `50% 50%` |
 | `--sf-bg-radius` | PUBLIC | knob | Layout | `0` |
 | `--sf-bg-z` | PUBLIC | knob | Layout | `-2` |
@@ -416,6 +416,12 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-content-width` | PUBLIC | consumption | Layout | `var(--sf-container-default)` |
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | Core | `0` |
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | Core | `0.6` |
+| `--sf-corner-scoop-at` | PUBLIC | knob | Macros | `100% 0` |
+| `--sf-corner-scoop-size` | PUBLIC | consumption | Macros | `var(--sf-radius-2xl)` |
+| `--sf-corners-end-end` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
+| `--sf-corners-end-start` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
+| `--sf-corners-start-end` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
+| `--sf-corners-start-start` | PUBLIC | consumption | Macros | `var(--sf-radius-l)` |
 | `--sf-cover-min-height` | PUBLIC | knob | Layout | `100dvh` |
 | `--sf-cover-padding` | PUBLIC | consumption | Layout | `var(--sf-section-pad)` |
 | `--sf-current-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-bold)` |
@@ -571,6 +577,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-opacity-disabled` | PUBLIC | knob | Core | `0.45` |
 | `--sf-opacity-muted` | PUBLIC | knob | Core | `0.5` |
 | `--sf-optical-sizing` | PUBLIC-ADVANCED | knob | Core | `auto` |
+| `--sf-overlap-pull` | PUBLIC | consumption | Macros | `var(--sf-space-xl)` |
 | `--sf-palette-mix-100` | PUBLIC-ADVANCED | knob | Core | `8%` |
 | `--sf-palette-mix-200` | PUBLIC-ADVANCED | knob | Core | `20%` |
 | `--sf-palette-mix-300` | PUBLIC-ADVANCED | knob | Core | `40%` |

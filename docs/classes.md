@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**193 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**206 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -143,12 +143,20 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-45 classes.
+58 classes.
 
 | Class |
 |---|
 | `.sf-aspect` |
 | `.sf-content-auto` |
+| `.sf-corner-scoop` |
+| `.sf-corner-scoop--bottom-left` |
+| `.sf-corner-scoop--bottom-right` |
+| `.sf-corner-scoop--top-left` |
+| `.sf-corner-scoop--top-right` |
+| `.sf-corners` |
+| `.sf-corners--leaf` |
+| `.sf-corners--leaf-flip` |
 | `.sf-drop-shadow-l` |
 | `.sf-drop-shadow-m` |
 | `.sf-drop-shadow-s` |
@@ -169,6 +177,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-overflow-fade--left` |
 | `.sf-overflow-fade--right` |
 | `.sf-overflow-fade--top` |
+| `.sf-overlap` |
+| `.sf-overlap--down` |
+| `.sf-overlap--end` |
+| `.sf-overlap--start` |
+| `.sf-overlap-host` |
 | `.sf-prose` |
 | `.sf-scrim` |
 | `.sf-scrim--bottom` |

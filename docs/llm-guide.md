@@ -856,6 +856,20 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-scrim-direction:  to top
 --sf-scrim-gradient:   linear-gradient(…)   /* composed — override for multi-stop */
 --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6)  /* .sf-text-protect */
+
+/* Concave corner (.sf-corner-scoop) */
+--sf-corner-scoop-size: var(--sf-radius-2xl)
+--sf-corner-scoop-at:   100% 0
+
+/* Border-radius recipe (.sf-corners) — 4 logical corners */
+--sf-corners-start-start: var(--sf-radius-l)
+--sf-corners-start-end:   var(--sf-radius-l)
+--sf-corners-end-end:     var(--sf-radius-l)
+--sf-corners-end-start:   var(--sf-radius-l)
+
+/* Overlap recipe (.sf-overlap / .sf-overlap-host) */
+--sf-overlap-pull:     var(--sf-space-xl)
+--sf-overlap-host-pad: var(--sf-overlap-pull)  /* defaults to match the pull */
 ```
 
 ### 8.7 Header and safe area
