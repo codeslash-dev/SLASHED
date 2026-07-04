@@ -829,14 +829,14 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-grid-cols-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
 | `.sf-grid-cols-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
 | `.sf-grid-cols-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-flex` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--2xl` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--center` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--l` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--m` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--s` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--xl` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
-| `.sf-grid-flex--xs` | PUBLIC | layout | — | Grid-flex — flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. CSS Grid keeps orphans pinned to their track; flex does not. |
+| `.sf-grid-flex` | PUBLIC | layout | Grid (flex) | Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. |
+| `.sf-grid-flex--2xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a 2xl minimum item width. |
+| `.sf-grid-flex--center` | PUBLIC | layout | Grid (flex) | Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching. |
+| `.sf-grid-flex--l` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a large (l) minimum item width. |
+| `.sf-grid-flex--m` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a medium (m) minimum item width. |
+| `.sf-grid-flex--s` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a small (s) minimum item width. |
+| `.sf-grid-flex--xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xl minimum item width. |
+| `.sf-grid-flex--xs` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xs minimum item width. |
 | `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
 | `.sf-icon--2xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
 | `.sf-icon--boxed` | PUBLIC | layout | Icon | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
