@@ -119,7 +119,10 @@
    * overflow visually obvious. Not a production utility — remove
    * before shipping.
    * ============================================================ */
-  /* .sf-debug-overflow :where(*) {
+  /* .sf-debug-overflow,
+  .sf-debug-overflow *,
+  .sf-debug-overflow *::before,
+  .sf-debug-overflow *::after {
     outline: 1px solid oklch(0.6 0.25 30 / 0.6);
   } */
 
