@@ -15,11 +15,11 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   (consolidated tranche), with `.sf-btn` and `.sf-card` broken out individually
   in [#493](https://github.com/codeslash-dev/SLASHED/issues/493) /
   [#494](https://github.com/codeslash-dev/SLASHED/issues/494) — both fully
-  written but commented out in `optional/components.css` pending v0.8. An
-  outline `.sf-btn` variant is queued as a follow-on in
+  written but commented out in `optional/components.css`, staged until
+  activated. An outline `.sf-btn` variant is queued as a follow-on in
   [#486](https://github.com/codeslash-dev/SLASHED/issues/486) once the base
   variant set ships. **Note:** #384 and #493/#494 currently overlap in scope
-  (same button/card work tracked twice) — worth consolidating before v0.8
+  (same button/card work tracked twice) — worth consolidating before
   implementation starts.
 - ~~**`@property` for spacing/shadow tokens**~~ ✓ **Done** — spacing (`--sf-radius-*`,
   `--sf-space-*`, semantic spacing) and shadow (`--sf-shadow-*`, `--sf-text-shadow-*`,
@@ -54,7 +54,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
 - **Z-index utilities** — expose the named z-index scale as `.sf-z-*` classes
   (for example `.sf-z-modal` and `.sf-z-tooltip`) in `optional/utilities.css`.
-- **First component tranche** — implement `.sf-button`, `.sf-card`, `.sf-badge`,
+- **First component tranche** — implement `.sf-btn`, `.sf-card`, `.sf-badge`,
   and `.sf-tag` first, using `optional/tokens.components.css` and existing
   `.is-*` states where appropriate. Tracked in
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384); `.sf-btn`/`.sf-card`
