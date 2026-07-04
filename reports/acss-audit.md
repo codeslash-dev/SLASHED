@@ -563,3 +563,178 @@ lub gotowe makro. Wiele pozycji z ACSS, które kiedyś były utility-class, dzi�
 - Funkcjonalnie **większość mamy** jako klasy/tokeny (clickable/focus parent, concentric radius, columns, content-grid, fades, auto/variable grid, line-clamp).
 - **Realne braki:** `?divider-all` (→ `.sf-divide`), `?overlap` (efekt zachodzącego tła), pełne siatki 7–12 + span/order, `.sf-list-none`.
 - **Poza zakresem frameworka (ewentualnie plugin):** `?ipsum-short`, `?script`, `?query-children`, `?breakpoint-*` (my: container queries), oraz **sam mechanizm `?` expansion** — najciekawszy kandydat do wdrożenia w pluginie Bricks/Gutenberg jako feature DX.
+
+---
+
+## 15. Shadows (Cienie)
+
+### 15.1 Shadows Overview (3 typy × 5 slotów, renamable, dashboard)
+- **Czym jest:** Centralny panel: Box (`box-shadow`), Text (`text-shadow`), Drop (`filter: drop-shadow()` — podąża za alfą). Po 5 numerowanych slotów, nazywalnych (`--box-shadow-subtle`), każdy typ włączany osobno.
+- **SLASHED:** ✅ **Mamy — semantyczna skala + adaptacja do dark.** Box: `--sf-shadow-none/-xs/-s/-m/-l/-xl/-2xl/-inner` + `--sf-shadow-glow(-color)`; Text: `--sf-text-shadow-none/-s/-m/-l`; Drop: `--sf-drop-shadow-s/-m/-l` (+ klasy `.sf-drop-shadow-*`). PUBLIC-ADVANCED: `--sf-shadow-strength/-lightness/-color` — **auto-wzmacniane w dark mode**.
+- **Różnica:** ACSS = 5 numerowanych, nazywalnych slotów; SLASHED = **semantyczna skala t-shirt** + auto-korekta w dark (czego ACSS nie robi). Parytet+.
+
+### 15.2 Box Shadows (`--box-shadow-1..5`, usunięto klasy w 4.0)
+- **SLASHED:** ✅ **Pełny parytet.** Skala `--sf-shadow-*` (compound, wielowarstwowe), używana jako zmienne (jak ACSS 4.0 po usunięciu klas). Dodatkowo `-inner` (inset) i `-glow`.
+
+### 15.3 Text Shadows (`--text-shadow-1..5`)
+- **SLASHED:** ✅ **Mamy — `--sf-text-shadow-s/-m/-l`** (+ `-none`). Do czytelności tekstu na obrazach (patrz też `.sf-text-protect`/`--sf-scrim-text-shadow`).
+
+### 15.4 Drop Shadows (`filter: var(--drop-shadow-N)`, alfa-aware)
+- **SLASHED:** ✅ **Mamy — `.sf-drop-shadow-s/-m/-l`** + tokeny `--sf-drop-shadow-*`. Do SVG/PNG/masek/clip-path — jak ACSS. Różnica box vs drop identyczna jak w ACSS.
+
+> **Shadows łącznie:** pełny parytet, z przewagą (auto-boost w dark, glow, inner). Różnica tylko w modelu nazewnictwa (semantyczny vs numerowane sloty).
+
+---
+
+## 16. Spacing (Odstępy)
+
+### 16.1 Standard Spacing Setup (base + scale, mult>M / div<M, fluid desktop↔mobile)
+- **Czym jest:** „Base Spacing" (wielkość) + „Base Scale" (mnożenie powyżej M, dzielenie poniżej M), osobne ratio desktop/mobile, fluid między content-width a min-width.
+- **SLASHED:** ✅ **Mamy — generatywna skala modularna (clamp+pow) w czystym CSS.** `--sf-space-2xs..4xl`, knoby `--sf-space-ratio-min/-max`, `--sf-space-base-min/-max`, mnożnik `--sf-space-scale`, zakres `--sf-fluid-min-vw/-max-vw`.
+- **Różnica:** ACSS mnoży/dzieli wokół M; my liczymy modularnie `pow()`-em na żywo. Efekt (fluid t-shirt scale) ten sam.
+
+### 16.2 Section Spacing Setup (multiplier vs standard, gutter clamp, block padding)
+- **Czym jest:** Sekcje mają większy odstęp (mnożnik nad standardem), gutter przez clamp, block padding z section-space; M domyślnie na top-level `section`.
+- **SLASHED:** ✅ **Mamy.** `--sf-section-pad` (`--xs..--2xl`), mnożnik `--sf-section-scale`, `--sf-gutter`. `.sf-section` aplikuje padding; `--guttered` przenosi gutter na sekcję.
+
+### 16.3 Contextual Spacing (container-gap / content-gap / grid-gap)
+- **Czym jest:** Odstępy „w kontekście": `--container-gap`/`.container-gap` (między kontenerami), `--content-gap`/`.content-gap` (między elementami treści), `--grid-gap`/`.grid-gap` (w siatkach). Myślenie kontekstem, nie „gap".
+- **SLASHED:** ✅ **Mamy — prawie 1:1 tokenowo.** `--sf-gap` (luźny, między komponentami), `--sf-content-gap` (ciasny, w treści), `--sf-gutter` (krawędzie), `--sf-grid-gap`, `--sf-component-pad`, `--sf-field-block`.
+- **Różnica:** Nazwy (`--sf-gap` vs `--container-gap`). ACSS daje też **klasy** `.content-gap` itd.; u nas gapy konsumują **prymitywy** (`.sf-stack`/`.sf-grid`/`.sf-cluster`) + klasa `.sf-gap` (+ `--s/--m/--l…`). Koncept identyczny.
+
+### 16.4 Automatic Spacing (auto container/content/grid gap, zero specificity `:where`)
+- **Czym jest:** ACSS **auto-aplikuje** gapy: container-gap na `section > div`, content-gap na dzieci, grid-gap na siatki z klasami — z **zerową specyficznością** (łatwe nadpisanie).
+- **SLASHED:** 🟡 **Nie auto-globalnie — przez prymitywy.** Gapy dają jawne klasy (`.sf-stack`/`.sf-grid`/`.sf-flow`/`.sf-prose`). Nie mamy warstwy „auto-spacing" nakładającej gap na każdy `section > div` globalnie.
+- **Różnica / czy dodać:** To różnica filozofii (jawne prymitywy vs auto). Ewentualnie **opcjonalny** moduł `:where(.sf-section > *)` z gapem (zero-spec) dla użytkowników chcących zachowania ACSS. Do rozważenia.
+
+### 16.5 Spacing Variables (`--space-{size}`, `--section-space-*`, bridge `--space-xl-to-m`)
+- **Czym jest:** `--space-{xs..xxl}`, `--section-space-{size}`, oraz **bridge variables** — fluid między dwoma rozmiarami (`--space-xl-to-m`, `--space-l-to-s`), analogicznie dla sekcji.
+- **SLASHED:** ✅/🟡 **Skala mamy, bridge-varów nie (bo cała skala już fluid).** `--sf-space-*` i `--sf-section-pad--*`. **Brak** nazwanych „bridge" tokenów (`-xl-to-m`) — ale każdy nasz krok to już `clamp()` między min/max, więc „bridge" jest wbudowany w każdą wartość.
+- **Różnica:** ACSS potrzebuje osobnych bridge-varów, bo ich rozmiary są bardziej dyskretne; u nas fluidność jest per-token. Drobiazg.
+
+### 16.6 Header Padding Classes (`.header--{size}`, tylko block padding, gutter zostaje)
+- **Czym jest:** `.header--{xs..xl}` — reguluje **tylko** block padding headera, zachowując inline gutter; skala **standard** (nie section).
+- **SLASHED:** 🟡/❌ **Brak dedykowanych klas headera.** Mamy `--sf-header-height` (fluid) i `.sf-section--*`, ale nie ma `.sf-header--m` regulującego block-padding przy stałym gutterze.
+- **Czy dodać:** Tanie: makra `.sf-header--{size}` (block padding ze skali standard, inline = gutter). Drobny brak.
+
+### 16.7 Section Padding Classes (`.section--{size}`, tylko block padding, gutter zostaje)
+- **Czym jest:** `.section--{xs..xxl}` — block padding na sekcji zachowując gutter (rzadka utility — „jedna z niewielu frameworków to oferuje").
+- **SLASHED:** ✅ **Mamy — dokładnie to: `.sf-section--xs..-2xl`** (+ `--collapse`, `--guttered`, `--group`). To nasz core layout. Parytet pełny; in-between przez `calc()`.
+
+### 16.8 Smart Spacing (usuń domyślne marginesy, reaplikuj gap do rich text/blog/`.smart-spacing`, sibling-aware)
+- **Czym jest:** Usuwa domyślne marginesy (h/p/list/li) i **reaplikuje** odstępy `gap`-owo do rich text, blog, `.smart-spacing`, WooCommerce, custom selektorów; tylko między **sąsiadującymi** rodzeństwami (nie nad pierwszym/pod ostatnim). ~15 tokenów `--*-spacing`. `.smart-spacing--off` wyłącza.
+- **SLASHED:** ✅ **Mamy — `.sf-flow` + `.sf-prose`.** `.sf-flow` = owl `> * + *` z `--sf-flow-space` (sibling-aware, dokładnie „tylko między sąsiadami"). `.sf-prose` = pełne stylowanie rich-text (heading/paragraph/list/blockquote/figure spacing, `--sf-prose-*`). `.sf-not-prose` = odpowiednik `.smart-spacing--off`.
+- **Różnica:** ACSS **auto-aplikuje** do blog/WooCommerce/rich-text globalnie; nasze `.sf-prose`/`.sf-flow` są **opt-in klasą**. Mechanika (reset marginesów + gap między sąsiadami) identyczna. W **pluginie WP** można by auto-owinąć treść posta w `.sf-prose` (parytet z auto ACSS).
+
+---
+
+## 17. Typography (Typografia)
+
+### 17.1 Custom Fonts (5 self-hosted, auto `@font-face`, variable fonts)
+- **Czym jest:** Dashboard: do 5 fontów self-hosted, auto-generacja `@font-face`, wsparcie variable fonts, przypisanie do body/heading/etc.
+- **SLASHED:** 🟡 **Tokeny fontów mamy, generacji `@font-face` nie (framework).** `--sf-font-body/-heading/-display/-mono` + gotowe stacki systemowe (`--sf-font-humanist/-geometric/-slab`, zero-cost), variable/OpenType: `--sf-font-variation/-features`, `--sf-optical-sizing`. **Ładowanie plików fontów (`@font-face`) to zadanie hosta/pluginu** — framework nie generuje. W pluginie WP integracja Bricks ma obsługę fontów (`slashed-bricks.php`, `class-fonts-rest.php`), ale to nie jest pełny system uploadu 5 fontów jak ACSS.
+- **Czy dodać:** 🔧 W **pluginie** warto rozważyć zarządzanie fontami (upload → `@font-face` → przypisanie do tokenów). Framework: tokeny wystarczają.
+
+### 17.2 Default Typography Styling (auto h1–h6/text, root size, Smart Line Height, wrap)
+- **Czym jest:** Auto-stylowanie nagłówków i tekstu, root font-size (100%/62.5%), **Smart Line Height** (line-height liczony z x-height/rozmiaru dla optycznej równości), weight/tracking/`text-wrap`. Wykluczenia.
+- **SLASHED:** ✅/🟡 **Mamy auto-stylowanie + wrap; „smart line height" inaczej.** `core/base.css` stylizuje `h1–h6`/`body` przez tokeny; `--sf-heading-text-wrap: balance`, `--sf-body-text-wrap: pretty`. Line-height: skala `--sf-leading-tight/-snug/-normal/-relaxed` + **`--sf-leading-taper`** (zwężanie leading rosnąco po skali). **Brak** formuły opartej o x-height (nasze leading to skala + taper).
+- **Różnica:** ACSS liczy line-height z metryk czcionki (x-height); my używamy skali+taper (prostsze, deterministyczne). Efekt zbliżony.
+
+### 17.3 Fluid Headings (`--h1..h6`, math scale, bridge `--h1-to-h3`, min h5/h6)
+- **Czym jest:** Nagłówki na skali matematycznej, fluid, bridge (`--h1-to-h3` = h1 desktop → h3 mobile), wymuszone minima dla h5/h6 (żeby nie zeszły poniżej body).
+- **SLASHED:** ✅ **Mamy — `--sf-h1-size..--sf-h6-size`** (mapują na `--sf-text-4xl..-m`), fluid z generatywnej skali, per-poziom `-line-height/-font-weight/-letter-spacing/-max-width`. Minima zapewnia `clamp()`.
+- **Różnica:** Brak nazwanych **bridge**-varów (`--h1-to-h3`), ale każdy nasz rozmiar to już `clamp()` (fluid wbudowany). Parytet+.
+
+### 17.4 Fluid Text (`--text-{xs..xxl}`, math scale, bridge `--text-xl-to-s`, root 100%/62.5%)
+- **Czym jest:** Rozmiary tekstu na idealnej skali, fluid, bridge (`--text-xl-to-s`), root 100%/62.5% (a11y), custom przez min/max + `fluid()`.
+- **SLASHED:** ✅ **Mamy — `--sf-text-2xs..4xl`** (fluid modular via clamp+pow), knoby `--sf-text-ratio-min/-max`, `--sf-text-base-min/-max`, `--sf-text-scale` + osobna skala display (`--sf-text-display-s/-m/-l`). Root: pracujemy w rem, użytkownik ustawia root wg uznania.
+- **Różnica:** Brak bridge-varów i przełącznika 62.5% w UI (framework agnostyczny). Custom rozmiar: `clamp()` na knobach zamiast `fluid()` — patrz 9.3.
+
+### 17.5 Marker Classes (`.marker--{color}` — kolor punktora listy)
+- **Czym jest:** `.marker--primary` itd. koloruje `::marker` (punktory list) na kolor palety.
+- **SLASHED:** 🟡 **Mamy token, nie utility.** `.sf-prose ::marker { color: var(--sf-prose-marker-color) }` (kolor markerów w prose, nadpisywalny inline). **Brak** klas `.sf-marker--primary` dla dowolnej listy poza prose.
+- **Czy dodać:** Tanie: makra `.sf-marker--{family}` ustawiające `::marker` color. Drobny brak.
+
+### 17.6 Text Classes (`.text--{size/color/weight/style/decoration/transform/align/...}`)
+- **Czym jest:** Duży zestaw utilities tekstu: rozmiar (`.text--l`), kolor (`.text--primary`), weight, style, decoration, transform, align, white-space, wrap itd.
+- **SLASHED:** ❌/🟡 **Nie dostarczamy utilities tekstu.** Mamy komplet **tokenów** (`--sf-text-*`, kolory, wagi, tracking, leading, `--sf-h*`), `.sf-truncate`, `.sf-text-gradient`, `.sf-tabular-nums`, ale nie „atomowych" `.text--*`.
+- **Różnica / czy dodać:** To świadoma różnica (BEM/token vs utility). Jeśli zdecydujemy się na warstwę utility (`optional/utilities.css`), text-utilities + `.sf-h1..-h6`/`.sf-text-{size}` (patrz 12.10) byłyby pierwszym kandydatem — częsty realny brak DX.
+
+### 17.7 Text & Heading Line Length (`max-width` w `ch`, per rozmiar)
+- **Czym jest:** Kontrola długości wiersza (measure) w `ch`, osobno per rozmiar tekstu/nagłówka; optymalna czytelność.
+- **SLASHED:** ✅ **Mamy — tokenowo.** `--sf-text-{size}-max-width`, `--sf-h1-max-width..-h6-max-width`, `--sf-container-prose: 65ch`, `--sf-heading-*`. Prose dba o measure automatycznie.
+- **Różnica:** ACSS aplikuje przez klasy/ustawienia; my przez tokeny/prose. Parytet.
+
+### 17.8 Typography Variables (globalne + per-level + per-size)
+- **Czym jest:** Zmienne globalne (font, weight, wrap), per-poziom (`--h2-size/-line-height/...`), per-rozmiar (`--text-l-line-height`), do skalowalnej typografii.
+- **SLASHED:** ✅ **Mamy — bardzo bogato.** `--sf-h1-*..h6-*` (size/line-height/font-weight/letter-spacing/max-width), `--sf-heading-*`, `--sf-body-*`, `--sf-text-{size}-{line-height/font-weight/letter-spacing/max-width}`, wagi semantyczne (`-body/-heading/-display/-interactive/-strong`), leading/tracking. Parytet pełny (a nawet szerzej — np. `-interactive`).
+
+---
+
+## 18. WP-CLI Commands (`wp acss …`)
+
+- **Czym jest:** ACSS 4.x dostarcza pełny interfejs **WP-CLI** do zarządzania z linii poleceń / CI / deploymentów:
+  - `wp acss settings` — `get/set/list/export/import/reset` (ten sam store co dashboard, walidacja wg schematu, `--force`, `--skip-css`).
+  - `wp acss css regenerate` — przebudowa wszystkich arkuszy z zapisanych ustawień (deploy, po imporcie `--skip-css`, po update).
+  - `wp acss status` — stan/health.
+  - `wp acss doctor` — diagnostyka problemów.
+  - `wp acss logs` — logi.
+  - `wp acss flags` — feature flags.
+- **SLASHED:** 🔧 **Brak WP-CLI w pluginie — realna luka.** `grep -rn "WP_CLI" SLASHED-for-WP/` = **pusto**. Plugin **nie rejestruje żadnych komend WP-CLI**. Do zarządzania mamy tylko: (a) po stronie frameworka npm-scripty (`build/version-sync/check:*`) — ale to dev-toolchain, nie runtime WP; (b) w pluginie npm-scripty (`verify/check/build/update-framework`) — również build-time.
+- **Znaczenie:** Dla użytkowników WP/agencji **brak `wp acss`-odpowiednika oznacza brak automatyzacji deploy/CI** (regeneracja CSS po deployu, import/export ustawień, health-check). To jedna z **wyraźniejszych luk pluginu** względem ACSS.
+- **Czy dodać:** 🔧 **Tak — rekomendacja dla `SLASHED-Plugins`.** Zarejestrować `WP_CLI::add_command('slashed …')`:
+  - `wp slashed css regenerate` (plugin już ma generator CSS/`class-css-loader.php`, `class-css-parser.php` — jest z czego złożyć),
+  - `wp slashed settings get/set/list/export/import/reset` (na istniejącym token-store/REST),
+  - opcjonalnie `status`/`doctor` (weryfikacja wersji frameworka vs bundlowanego CSS, obecność plików).
+  Średni kość, wysoka wartość dla profesjonalnych wdrożeń.
+
+---
+
+## 19. Podsumowanie — rejestr luk i niedokończonych funkcji
+
+> Sekcja zbiorcza: **dziury i niedokończone funkcje** ujawnione audytem, uszeregowane wg wartości/priorytetu, z rozbiciem na **framework** vs **plugin**.
+
+### 19.1 Najważniejsze niedokończone funkcje (framework)
+
+| # | Luka | Status w SLASHED | Rekomendacja | Priorytet |
+|---|---|---|---|---|
+| 1 | **Komponent `.sf-btn`** | Napisany, ale **zakomentowany („STAGED until v0.8")** — nieemitowany | Odblokować + dokończyć (rozmiary T-shirt, `--outline`, brakujące tokeny) | **Wysoki** |
+| 2 | **Komponent `.sf-card`** | Napisany, ale **zasztelowany (v0.8)** | Odblokować + uzupełnić knoby (link/icon/min-radius, flex↔grid) | **Wysoki** |
+| 3 | **System efektów hover** (`.on-hover--*`) | Brak (są tylko presety transition) | Opcjonalny `optional/effects.css`: `.sf-hover--grow/-float/-glow/-underline-*` na istniejących tokenach | **Wysoki** (duży efekt, niski koszt) |
+| 4 | **Efekty exit** (`.sf-exit--*`) | Brak (są keyframes) | Symetrycznie do `.sf-entrance--*` (`animation-timeline: view()`, zakres `cover`) | Średni |
+| 5 | **Entrance: blur/parallax + `-all` + `--stagger`** | Mamy 6 wariantów fade/scale | Dołożyć blur/parallax, wariant na dzieci, stagger (`sibling-index()`) | Średni |
+| 6 | **Klasy stylu nagłówka/tekstu** (`.sf-h1..-h6`, `.sf-text-{size}`) | Tylko tokeny (`--sf-h*`, `--sf-text-*`) | Makra nakładające komplet sub-właściwości (odpowiednik `heading-style()`/`text-style()`) | Średni (realny brak DX) |
+| 7 | **External link a11y** | `.sf-link-external` opt-in, **bez cue dla czytników**, nie automatyczne | Dodać visually-hidden tekst + opcjonalną regułę auto po `href` | Średni (a11y) |
+| 8 | **`fluid()` ad-hoc** | Skala jest fluid, ale brak helpera do jednorazowych wartości | Udokumentować wzorzec `clamp()`; docelowo natywna CSS `@function --fluid()` | Średni |
+| 9 | **`?divider-all` → `.sf-divide`** | Brak (mamy `.sf-divider` element) | Makro `> * + * { border-block-start: var(--sf-border) }` | Niski |
+| 10 | **Grid: 7–12 kolumn + span/order/placement + `--sf-grid-N`** | Do 6 kolumn, brak utilities placement | Rozważyć moduł utilities grid (container-query, nie media) | Niski/średni |
+| 11 | **Auto-radius mediów, `.sf-overlay` solid, `.selection--alt`, `.sf-marker--*`, `.sf-list-none`, header-padding, width-utilities, boxed layout, ribbons, overlap, inverted-radius** | Brak (drobne/niszowe) | Dobierać wg zapotrzebowania; większość to tanie makra | Niski |
+
+### 19.2 Najważniejsze luki (plugin `SLASHED-Plugins`)
+
+| # | Luka | Status | Rekomendacja | Priorytet |
+|---|---|---|---|---|
+| P1 | **WP-CLI (`wp acss …`)** | **Zero komend WP-CLI** w pluginie | `wp slashed css regenerate` + `settings get/set/list/export/import/reset` (jest generator CSS i token-store) | **Wysoki** (deploy/CI) |
+| P2 | **System „Surfaces" + „Custom Overlays" + „Textures"** | Brak nazwanych presetów tła/overlay | Moduł „Surfaces & Overlays": tokeny w frameworku + UI w konfiguratorze/pluginie | **Wysoki** |
+| P3 | **Mechanizm „recipes" (`?nazwa` → snippet)** | Brak | Rozwijanie snippetów w Bricks/Gutenberg (DX jak ACSS) | Średni |
+| P4 | **Zarządzanie fontami (`@font-face`, upload 5 fontów)** | Częściowe (Bricks) | Pełny manager fontów → tokeny `--sf-font-*` | Średni |
+| P5 | **Panel „Color Relationships" / nazwane tła kontekstowe** (`.bg--ultra-light` itd.) | Mamy `data-theme`+surfaces, brak panelu mapującego | Panel przypisań + generacja klas kontekstowych | Średni |
+| P6 | **On-Visible (IntersectionObserver)** | Framework bez JS; stan `.is-visible` istnieje | Mały skrypt w pluginie dopinający klasę | Niski |
+| P7 | **Integracje builderów formularzy** (WS Form/Gravity/Fluent) | Framework stylizuje natywne formularze | Integracje w pluginie (parytet z ACSS „Load Forms") | Niski |
+
+### 19.3 Obszary, gdzie SLASHED jest na parytecie lub **lepszy**
+
+- **Kolory / dark mode / color-scheme** — konwergencja ACSS 4.x do naszego modelu (OKLCH, `light-dark()`, `color-mix()`); u nas dark w pełni auto z 6 tokenów, płynne przejście (`.sf-theme-transition`), auto-kontrast `--on-*`, LumLocker.
+- **Skala spacingu i `.sf-section--*` (section padding, keep gutter)** — pełny parytet, generatywny fluid.
+- **Cienie** — parytet + auto-boost w dark, glow, inner.
+- **Clickable/Focus parent** — bogatsze niż ACSS (auto overlay-link, z-index zagnieżdżonych, wykluczenia).
+- **`.sf-bg` (is-bg), auto object-fit, scroll-offset (scroll-padding), `.sf-equal` (columns/masonry), `.sf-alternate` (zigzag, container-query), `.sf-grid` (variable grid), content-grid, line-clamp, gradient/overflow fades** — parytet, często breakpoint-free (container queries zamiast media).
+- **Typografia (tokeny per-level/per-size), easings, presety transition, `pow()` natywny** — parytet lub szerzej.
+- **Zero-build, zero-deps, pure CSS** — strukturalna przewaga vs model SCSS+dashboard ACSS.
+
+### 19.4 Nota metodyczna (pokrycie)
+
+- Przeanalizowano **wszystkie pozycje z przesłanych 8 zrzutów** (każdy punkt ma wpis).
+- **Przeczytano w całości** (WebFetch, pełna treść) reprezentatywny, obszerny zestaw podstron z każdej sekcji, w tym wszystkie o najbardziej szczegółowych deklaracjach (Effects: overview/hover/entrance/easing/transition/selection/sticky; Buttons: styling/gradient-outline/auto-exclusions; Backgrounds: contextual/surfaces/is-bg; Cards: color-scheme/targeting; Colors: transparencies/implementing; Dimension: content-width-safe/auto-object-fit; Forms; Grids: grid-variables/variable-grid; Functions: ctr/calc; Mixins: card-container/breakpoint/heading-text; Overlays: custom; Recipes: border-radius/column/divider/javascript/overlap; Shadows: box; Spacing: standard/header; Typography: fluid-text; CLI: css/settings; Borders: inverted-radius).
+- Dla pozostałych, cienkich/duplikujących się podstron (np. każdy pojedynczy recipe, kolejne sub-strony spacing/typografii) wpisy oparto na **stronach-przeglądach danej sekcji + zweryfikowanych odczytach sąsiednich podstron**; punktowe kontrole potwierdziły zgodność (wnioski się nie zmieniły). W razie potrzeby mogę „dopiąć" pełnym odczytem dowolną konkretną podstronę.
+- Uwaga: część slugów 4.x dla **Functions** zwracała 404 — użyto treści z docs `/3.0/functions/*` (funkcje matematyczne są niezmienione).
