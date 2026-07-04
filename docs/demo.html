@@ -1706,6 +1706,46 @@
           </div>
         </div>
 
+        <h3>.sf-grid-flex — flex alternative for uneven item counts</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
+          Flexbox-based alternative to <code>.sf-grid</code> for item counts that don't divide evenly. By default the last row's leftover items stretch to fill the row; <code>.sf-grid-flex--center</code> keeps them fixed-width and centered instead. Reuses <code>--sf-grid-min</code>/<code>--sf-grid-gap</code> — same <code>--xs … --2xl</code> scale as <code>.sf-grid</code>.
+        </p>
+        <div class="sf-stack sf-stack--m">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-flex (default — last row stretches)</code>
+            <div class="sf-grid-flex demo-layout-wrap" style="margin-top: var(--sf-space-xs); --sf-grid-min: 10rem">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-flex--center (leftover fixed-width, centered)</code>
+            <div class="sf-grid-flex sf-grid-flex--center demo-layout-wrap" style="margin-top: var(--sf-space-xs); --sf-grid-min: 10rem">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-flex--xs / --s / --m / --l / --xl / --2xl (re-point --sf-grid-min)</code>
+            <div class="sf-grid-flex sf-grid-flex--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">xs</div><div class="demo-box">xs</div><div class="demo-box">xs</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--s demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">s</div><div class="demo-box">s</div><div class="demo-box">s</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--m demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">m</div><div class="demo-box">m</div><div class="demo-box">m</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--l demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">l</div><div class="demo-box">l</div><div class="demo-box">l</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">xl</div><div class="demo-box">xl</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--2xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">2xl</div><div class="demo-box">2xl</div>
+            </div>
+          </div>
+        </div>
+
         <h3>.sf-sidebar--narrow / .sf-sidebar--wide</h3>
         <div class="sf-stack sf-stack--m">
           <div>
@@ -2301,6 +2341,12 @@
             <code>.sf-full-bleed</code> — edge to edge
           </div>
           <p style="background: var(--sf-color-surface); padding: var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">Back to content column.</p>
+        </div>
+
+        <h3 style="padding-inline: var(--sf-space-l); margin-block-start: var(--sf-space-l)">.sf-boxed</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s); padding-inline: var(--sf-space-l)">Framed/inset counterpart to <code>.sf-full-bleed</code>/<code>.sf-breakout</code> — visible border, radius, and shadow around the content. Works standalone or as a <code>.sf-content-grid</code> child (stays in the content column).</p>
+        <div style="padding-inline: var(--sf-space-l)">
+          <div class="sf-boxed">Framed section — padding, background, border, radius, shadow from existing system tokens.</div>
         </div>
       </section>
 
