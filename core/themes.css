@@ -122,6 +122,14 @@
       --sf-color-warning-strong: oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h);
       --sf-color-info-strong:    oklch(from var(--sf-color-info)    clamp(0.70, calc(l + 0.15), 1) c h);
       --sf-color-danger-strong:  oklch(from var(--sf-color-danger)  clamp(0.70, calc(l + 0.15), 1) c h);
+
+      /* :root-only aliases from tokens.css — var() resolves on the declaring
+         element, so without these re-declarations a nested [data-theme]
+         section inherits the :root-resolved (wrong-scheme) values (#496). */
+      --sf-color-code-bg:        var(--sf-color-inset);
+      --sf-color-bg--disabled:   var(--sf-color-inset);
+      --sf-color-link--disabled: var(--sf-color-text--disabled);
+      --sf-scrollbar-thumb:      var(--sf-color-neutral);
     }
 
         [data-theme="light"] {
@@ -167,6 +175,12 @@
       --sf-color-warning-strong: oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h);
       --sf-color-info-strong:    oklch(from var(--sf-color-info-source-light)    calc(l - 0.1)  c h);
       --sf-color-danger-strong:  oklch(from var(--sf-color-danger-source-light)  calc(l - 0.1)  c h);
+
+      /* :root-only aliases — see the matching note in the dark block (#496). */
+      --sf-color-code-bg:        var(--sf-color-inset);
+      --sf-color-bg--disabled:   var(--sf-color-inset);
+      --sf-color-link--disabled: var(--sf-color-text--disabled);
+      --sf-scrollbar-thumb:      var(--sf-color-neutral);
     }
 
   }
@@ -183,6 +197,10 @@
       --sf-color-text--on-info:      oklch(from var(--sf-color-info)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-inverse:   oklch(from var(--sf-color-inverse)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      /* Auto-contrast code text re-derived in-scope so it tracks the
+         per-scope --sf-color-code-bg above (#496). Same formula as
+         core/tokens.css — keep in sync. */
+      --sf-color-code-text:          oklch(from var(--sf-color-code-bg)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     }
     [data-theme="light"] {
       --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
@@ -195,6 +213,8 @@
       --sf-color-text--on-info:      oklch(from var(--sf-color-info)      clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-danger:    oklch(from var(--sf-color-danger)    clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-inverse:   oklch(from var(--sf-color-inverse)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
+      /* See matching note in the dark block (#496). */
+      --sf-color-code-text:          oklch(from var(--sf-color-code-bg)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     }
   }
 
