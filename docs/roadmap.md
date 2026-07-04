@@ -78,12 +78,14 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   `sf-shimmer`, `sf-ping`, `sf-blink`, and `sf-float` are already defined in
   `core/motion.css`; they need corresponding `.sf-spin`, `.sf-shimmer`, etc.
   utility classes in `optional/utilities.css` to be usable from markup.
-- **Hover-transform utility classes** — grow/shrink/float/sink/slide hover
-  transforms as a documented utility group, built on existing
-  `--sf-transition-*`/`--sf-animation-*` tokens.
+- ~~**Hover-transform utility classes**~~ ✓ **Done** — `.sf-hover-grow`,
+  `-shrink`, `-float`, `-sink`, `-slide-start`, `-slide-end` are written and
+  documented, staged (commented out) in `optional/utilities.css` alongside
+  the other opt-in utilities, pending activation.
   Tracked in [#487](https://github.com/codeslash-dev/SLASHED/issues/487).
-- **Overflow-detection debug utility** — an opt-in class that visually flags
-  the element causing horizontal page overflow, for diagnosing layout bugs.
+- ~~**Overflow-detection debug utility**~~ ✓ **Done** — `.sf-debug-overflow`
+  visually flags the element(s) causing horizontal page overflow, staged
+  (commented out) in `optional/utilities.css` pending activation.
   Tracked in [#495](https://github.com/codeslash-dev/SLASHED/issues/495).
 - **Interactive `drives N` exploration** — turn the configurator's passive
   dependency-count badge into a keyboard-accessible popover/list that navigates
@@ -118,33 +120,41 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   (`search_tokens`, `get_class_info`, etc.) for AI coding assistants, as a
   live alternative to the static `llms.txt`.
   Tracked in [#473](https://github.com/codeslash-dev/SLASHED/issues/473).
-- **Concave/inverted corner utility** — a utility for a corner that curves
-  away from a box (mask/gradient/`clip-path` technique), as opposed to normal
-  convex `border-radius`. Needs a technique spike before implementation.
+- ~~**Concave/inverted corner utility**~~ ✓ **Done** — shipped as
+  `.sf-corner-scoop` (mask-based radial-gradient cut) with 4 single-corner
+  position variants (`--top-left`/`--top-right`/`--bottom-left`/`--bottom-right`).
+  A two-corner "pair variant" (for U-shaped cutouts) was explored and
+  dropped — WebKit's `mask-composite` implementation has a bug with no
+  viable workaround found.
   Tracked in [#484](https://github.com/codeslash-dev/SLASHED/issues/484).
-- **Boxed-section layout primitive** — a named "boxed" section primitive
-  (inset content with visible border/shadow/radius framing) as the logical
-  counterpart to `.sf-full-bleed`/`.sf-breakout` in `core/layout.css`.
+- ~~**Boxed-section layout primitive**~~ ✗ **Not planned** — a `.sf-boxed`
+  section macro was implemented and then dropped after review; judged too
+  thin a wrapper over existing primitives (`.sf-section` + border/shadow/
+  radius tokens) to justify a dedicated class.
   Tracked in [#485](https://github.com/codeslash-dev/SLASHED/issues/485).
-- **Flex-based grid alternative** — a flex-based layout utility as an
-  explicit alternative to `.sf-grid`/`.sf-equal`/`.sf-grid-cols-*` for
-  uneven item counts, reusing existing gap tokens. Needs docs clarifying when
-  to use it over the existing grid primitives.
+- ~~**Flex-based grid alternative**~~ ✓ **Done** — shipped as `.sf-grid-flex`
+  (+ size/gap/`--center` variants) alongside `.sf-grid`/`.sf-equal`/
+  `.sf-grid-cols-*`, documented for the uneven-item-count case.
   Tracked in [#488](https://github.com/codeslash-dev/SLASHED/issues/488).
-- **Unified background media overlay macro** — one macro that layers a
-  color/gradient overlay on a background image/video with automatic
-  stacking, composing the existing `.sf-scrim`, `.is-overlay`, and
-  `--sf-z-overlay` primitives rather than new tokens.
+- ~~**Unified background media overlay macro**~~ ✓ **Done** — resolved as
+  composition guidance rather than a new macro: `.sf-scrim` composed with
+  the existing `.sf-bg` background-media primitive already layers a
+  color/gradient overlay with correct automatic stacking; documented in
+  `docs/macros.md` instead of adding a redundant class.
   Tracked in [#489](https://github.com/codeslash-dev/SLASHED/issues/489).
-- **Concrete recipe macros** — border-radius, overlap, and card-container
-  recipes on top of the existing `core/macros.css` mechanism, each shipped
-  and documented independently.
+- **Concrete recipe macros** — **partially done**. Shipped: `.sf-corner-scoop`
+  (border-radius-style recipe, tracked as #484 above) and `.sf-overlap`/
+  `.sf-overlap-host` (overlap + card-container recipes). A `.sf-corners`
+  logical-corner recipe (with a `--leaf` asymmetric variant) was also built
+  and then cut — judged too niche for the public API relative to its
+  long-term maintenance cost.
   Tracked in [#490](https://github.com/codeslash-dev/SLASHED/issues/490).
 - **Container-relative fluid scale** — the `--sf-text-*`/`--sf-space-*` fluid
   scales are `100vw`-driven and don't respond to `@container` width the way
   the layout primitives do; investigate a `cqi`-based opt-in variant for
   nested/narrow contexts (sidebars, cards) without replacing the
-  viewport-based page-level default.
+  viewport-based page-level default. A technique spike was posted as an
+  issue comment; no code shipped yet.
   Tracked in [#497](https://github.com/codeslash-dev/SLASHED/issues/497).
 - **Hero recipe / alias** — document or optionally add a `.sf-hero` convenience
   pattern that composes existing `.sf-cover` and `.sf-scrim` behaviour.
