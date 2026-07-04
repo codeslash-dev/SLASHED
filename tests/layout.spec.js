@@ -682,3 +682,58 @@ test.describe('layout: .sf-icon', () => {
     expect(p).toBeGreaterThan(0);
   });
 });
+
+// ── .sf-grid-flex ───────────────────────────────────────────────
+test.describe('layout: .sf-grid-flex', () => {
+  const FIVE = (cls = '') => `
+    <div id="t" class="sf-grid-flex ${cls}" style="width:640px; --sf-grid-min: 200px">
+      <div>1</div><div>2</div><div>3</div><div>4</div><div id="last">5</div>
+    </div>
+  `;
+
+  test('wraps into rows and stretches last-row leftovers by default', async ({ page }) => {
+    await setup(page, FIVE());
+    const res = await page.locator('#t').evaluate(el => {
+      const kids = [...el.children];
+      const rows = new Set(kids.map(k => k.offsetTop)).size;
+      const last = kids[kids.length - 1];
+      return { rows, lastWidth: last.getBoundingClientRect().width, hostWidth: el.clientWidth };
+    });
+    // 5 items at min 200px in 640px → 3 rows (2+2+1); the orphan fills its row.
+    expect(res.rows).toBe(3);
+    expect(res.lastWidth).toBeGreaterThan(res.hostWidth * 0.9);
+  });
+
+  test('--center keeps leftover items fixed-width and centered', async ({ page }) => {
+    await setup(page, FIVE('sf-grid-flex--center'));
+    const res = await page.locator('#t').evaluate(el => {
+      const last = el.querySelector('#last').getBoundingClientRect();
+      const host = el.getBoundingClientRect();
+      const centerDelta = Math.abs((last.left - host.left) - (host.right - last.right));
+      return { lastWidth: last.width, centerDelta };
+    });
+    expect(res.lastWidth).toBeLessThan(320);   // fixed basis, not stretched
+    expect(res.centerDelta).toBeLessThan(1);   // horizontally centered in the host
+  });
+
+  test('size modifiers re-point --sf-grid-min', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-grid-flex sf-grid-flex--xs" style="width:640px">
+        <div id="k">x</div><div>y</div><div>z</div><div>w</div>
+      </div>
+    `);
+    const min = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).getPropertyValue('--sf-grid-min').trim());
+    expect(min).toBe('10rem');
+  });
+
+  test('gap comes from --sf-grid-gap', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-grid-flex" style="width:640px; --sf-grid-gap: 17px">
+        <div>x</div><div>y</div>
+      </div>
+    `);
+    const gap = await page.locator('#t').evaluate(el => getComputedStyle(el).columnGap);
+    expect(gap).toBe('17px');
+  });
+});

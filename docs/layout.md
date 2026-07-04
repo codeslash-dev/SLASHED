@@ -27,6 +27,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-content-gap`, `--sf-gap` |
 | `.sf-pancake` | sticky-footer grid: header / main(1fr) / footer | — |
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed` | `--sf-content-width`, `--sf-breakout-width` |
+| `.sf-grid-flex` | flex-based grid alternative for uneven item counts; last-row leftovers stretch to fill (default) or stay fixed and centered (`--center`); `--xs … --2xl` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |
 | `.sf-frame` | aspect-ratio media box | `--sf-frame-ratio` |
 | `.sf-bg` | cover media layer behind the parent's content (parent auto-positions + isolates); composes under `.sf-scrim` | `--sf-bg-inset/-fit/-position/-radius/-z` |
@@ -51,6 +52,7 @@ Every size-aware primitive supports the canonical range
 | `.sf-cluster` | inline-axis gap        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-gap`     | layout-agnostic gap    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-grid` | min column width       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.sf-grid-flex` | min item width    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-section` | block padding          | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.sf-icon`    | font-size              | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 

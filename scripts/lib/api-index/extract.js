@@ -192,19 +192,25 @@ export function parseNote(raw) {
  * @param {string} css source CSS (comments intact)
  * @returns {Array<object>} ordered comment records
  */
+// Tooling directive comments (stylelint-disable, eslint-disable, …) suppress
+// a linter rule for the next line — they document a workaround for the rule,
+// not the selector that happens to follow. Never usable as a description.
+const DIRECTIVE_COMMENT = /^\/\*\s*(?:stylelint|eslint)-(?:disable|enable)\b/;
+
 export function collectComments(css) {
   const comments = [];
   for (const m of css.matchAll(/\/\*[\s\S]*?\*\//g)) {
     const raw    = m[0];
     const start  = m.index;
     const end    = m.index + raw.length;
-    const isHeader = /SLASHED\s+[—-]/.test(raw) && start < 4;
+    const isHeader    = /SLASHED\s+[—-]/.test(raw) && start < 4;
+    const isDirective = DIRECTIVE_COMMENT.test(raw);
     // A banner is either a divider-fenced comment, a "/* -- Title -- */" form,
     // or a single-line at-rule sub-header ("/* @property — STATUS COLORS */").
     const singleLineSubHeader = !/\n/.test(raw.trim()) && /^\/\*\s*@[\w-]+\s+[—–-]\s+\S/.test(raw);
     const isBanner = DIVIDER_RUN.test(raw) || /^\/\*\s*--\s+\S/.test(raw) || singleLineSubHeader;
     const parsed = (isBanner || isHeader) ? parseBanner(raw) : parseNote(raw);
-    comments.push({ start, end, raw, isHeader, isBanner, ...parsed });
+    comments.push({ start, end, raw, isHeader, isDirective, isBanner, ...parsed });
   }
   return comments;
 }
@@ -222,7 +228,7 @@ export function contextAt(comments, idx) {
   let nearest = null;
   for (const c of comments) {
     if (c.end > idx) break;
-    if (c.isHeader) continue;
+    if (c.isHeader || c.isDirective) continue;
     nearest = c;
     if (c.isBanner) banner = c;
   }

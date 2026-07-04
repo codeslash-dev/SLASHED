@@ -88,7 +88,12 @@
        inset is a single length applied to every edge; the layer size is
        derived from it, so a non-zero inset still fills correctly.
        ---------------------------------------------------------- */
-    --sf-bg-inset:    0;
+    /* 0px, not bare 0 — .sf-bg's inline-size/block-size multiply this by 2
+       inside a calc() alongside a percentage; a unitless 0 makes that
+       calc() a <number>/<percentage> type mismatch (invalid at
+       computed-value time), silently collapsing .sf-bg to its intrinsic
+       size. */
+    --sf-bg-inset:    0px;
     --sf-bg-fit:      cover;
     --sf-bg-position: 50% 50%;
     --sf-bg-radius:   0;

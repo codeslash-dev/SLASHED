@@ -1706,6 +1706,46 @@
           </div>
         </div>
 
+        <h3>.sf-grid-flex — flex alternative for uneven item counts</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
+          Flexbox-based alternative to <code>.sf-grid</code> for item counts that don't divide evenly. By default the last row's leftover items stretch to fill the row; <code>.sf-grid-flex--center</code> keeps them fixed-width and centered instead. Reuses <code>--sf-grid-min</code>/<code>--sf-grid-gap</code> — same <code>--xs … --2xl</code> scale as <code>.sf-grid</code>.
+        </p>
+        <div class="sf-stack sf-stack--m">
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-flex (default — last row stretches)</code>
+            <div class="sf-grid-flex demo-layout-wrap" style="margin-top: var(--sf-space-xs); --sf-grid-min: 10rem">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-flex--center (leftover fixed-width, centered)</code>
+            <div class="sf-grid-flex sf-grid-flex--center demo-layout-wrap" style="margin-top: var(--sf-space-xs); --sf-grid-min: 10rem">
+              <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div>
+            </div>
+          </div>
+          <div>
+            <code style="font-size: var(--sf-text-xs)">.sf-grid-flex--xs / --s / --m / --l / --xl / --2xl (re-point --sf-grid-min)</code>
+            <div class="sf-grid-flex sf-grid-flex--xs demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">xs</div><div class="demo-box">xs</div><div class="demo-box">xs</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--s demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">s</div><div class="demo-box">s</div><div class="demo-box">s</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--m demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">m</div><div class="demo-box">m</div><div class="demo-box">m</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--l demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">l</div><div class="demo-box">l</div><div class="demo-box">l</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">xl</div><div class="demo-box">xl</div>
+            </div>
+            <div class="sf-grid-flex sf-grid-flex--2xl demo-layout-wrap" style="margin-top: var(--sf-space-xs)">
+              <div class="demo-box">2xl</div><div class="demo-box">2xl</div>
+            </div>
+          </div>
+        </div>
+
         <h3>.sf-sidebar--narrow / .sf-sidebar--wide</h3>
         <div class="sf-stack sf-stack--m">
           <div>
@@ -2710,6 +2750,36 @@
             <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
               <strong>.sf-bg + .sf-scrim</strong>
             </div>
+          </div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-corner-scoop</code> — concave corner</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">A corner that curves away from the box, revealing the page behind it, via a <code>mask-image</code> radial gradient.</p>
+        <div class="sf-cluster sf-cluster--m">
+          <div class="sf-corner-scoop sf-corner-scoop--top-left"     style="inline-size: 8rem; block-size: 6rem; background: var(--sf-color-primary)"></div>
+          <div class="sf-corner-scoop sf-corner-scoop--top-right"    style="inline-size: 8rem; block-size: 6rem; background: var(--sf-color-tertiary)"></div>
+          <div class="sf-corner-scoop sf-corner-scoop--bottom-left"  style="inline-size: 8rem; block-size: 6rem; background: var(--sf-color-action)"></div>
+          <div class="sf-corner-scoop sf-corner-scoop--bottom-right" style="inline-size: 8rem; block-size: 6rem; background: var(--sf-color-success)"></div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-overlap</code> / <code>.sf-overlap-host</code> — intentional overlap recipe</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">One element pulled up over the next, which reserves clearance for it automatically.</p>
+        <div style="max-inline-size: 16rem">
+          <div style="inline-size: 5rem; aspect-ratio: 1; border-radius: var(--sf-radius-full); background: var(--sf-color-action); margin-inline: auto" class="sf-overlap"></div>
+          <div class="sf-overlap-host" style="text-align: center; padding-inline: var(--sf-space-m); padding-block-end: var(--sf-space-m); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface)">
+            <code>.sf-overlap-host</code> — content clears the badge above
+          </div>
+        </div>
+        <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs)">Directional variants: <code>.sf-overlap--down</code> (pulls into the next element), <code>.sf-overlap--start</code> / <code>.sf-overlap--end</code> (pulls into the inline edge).</p>
+
+        <h3 style="margin-block-start: var(--sf-space-l)">Macros in action — a composed profile card</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Both recipes together on one realistic card: a notched banner (<code>.sf-corner-scoop</code>) with an avatar overlapping into the body below (<code>.sf-overlap</code> / <code>.sf-overlap-host</code>).</p>
+        <div style="max-inline-size: 16rem">
+          <div class="sf-corner-scoop sf-corner-scoop--bottom-right" style="block-size: 6rem; background: linear-gradient(135deg, var(--sf-color-primary), var(--sf-color-tertiary))"></div>
+          <div style="inline-size: 4.5rem; aspect-ratio: 1; border-radius: var(--sf-radius-full); margin-inline: auto; background: var(--sf-color-action); border: 3px solid var(--sf-color-surface)" class="sf-overlap"></div>
+          <div class="sf-overlap-host" style="text-align: center; padding-inline: var(--sf-space-m); padding-block-end: var(--sf-space-m); border: 1px solid var(--sf-color-border); border-block-start: none; border-radius: 0 0 var(--sf-radius-m) var(--sf-radius-m); background: var(--sf-color-surface)">
+            <strong>Jamie Chen</strong>
+            <p style="margin: 0; font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">Design Systems Lead</p>
           </div>
         </div>
 

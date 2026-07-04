@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**193 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**211 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-128 classes.
+136 classes.
 
 | Class |
 |---|
@@ -98,6 +98,14 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-grid-cols-3-1` |
 | `.sf-grid-cols-4` |
 | `.sf-grid-cols-6` |
+| `.sf-grid-flex` |
+| `.sf-grid-flex--2xl` |
+| `.sf-grid-flex--center` |
+| `.sf-grid-flex--l` |
+| `.sf-grid-flex--m` |
+| `.sf-grid-flex--s` |
+| `.sf-grid-flex--xl` |
+| `.sf-grid-flex--xs` |
 | `.sf-icon` |
 | `.sf-icon--2xl` |
 | `.sf-icon--boxed` |
@@ -143,12 +151,17 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-45 classes.
+55 classes.
 
 | Class |
 |---|
 | `.sf-aspect` |
 | `.sf-content-auto` |
+| `.sf-corner-scoop` |
+| `.sf-corner-scoop--bottom-left` |
+| `.sf-corner-scoop--bottom-right` |
+| `.sf-corner-scoop--top-left` |
+| `.sf-corner-scoop--top-right` |
 | `.sf-drop-shadow-l` |
 | `.sf-drop-shadow-m` |
 | `.sf-drop-shadow-s` |
@@ -169,6 +182,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-overflow-fade--left` |
 | `.sf-overflow-fade--right` |
 | `.sf-overflow-fade--top` |
+| `.sf-overlap` |
+| `.sf-overlap--down` |
+| `.sf-overlap--end` |
+| `.sf-overlap--start` |
+| `.sf-overlap-host` |
 | `.sf-prose` |
 | `.sf-scrim` |
 | `.sf-scrim--bottom` |

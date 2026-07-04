@@ -818,6 +818,11 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-content-width:  var(--sf-container-default)
 --sf-breakout-width: var(--sf-container-wide)
 
+/* Grid-flex (.sf-grid-flex) — flex alternative to .sf-grid for uneven
+   item counts: last-row leftovers stretch to fill (default) or stay
+   fixed-width and centered (--center). Reuses the .sf-grid knobs. */
+/* knobs: --sf-grid-min, --sf-grid-gap (shared with .sf-grid) */
+
 /* Prose */
 --sf-prose-paragraph:        var(--sf-content-gap)
 --sf-prose-heading-gap:      var(--sf-space-s)
@@ -856,7 +861,20 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-scrim-direction:  to top
 --sf-scrim-gradient:   linear-gradient(…)   /* composed — override for multi-stop */
 --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6)  /* .sf-text-protect */
+
+/* Concave corner (.sf-corner-scoop) */
+--sf-corner-scoop-size: var(--sf-radius-2xl)
+--sf-corner-scoop-at:   100% 0
+
+/* Overlap recipe (.sf-overlap / .sf-overlap-host) */
+--sf-overlap-pull: var(--sf-space-xl)
 ```
+
+`.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
+directly in the CSS declaration (not a declared token) so a per-element override is picked up
+immediately, avoiding the staleness a `:root`-level alias would have if it cached the pull value.
+Set `--sf-overlap-host-pad` inline to compensate by something other than the default pull amount;
+it isn't part of the token registry.
 
 ### 8.7 Header and safe area
 
