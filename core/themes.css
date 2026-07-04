@@ -130,6 +130,11 @@
       --sf-color-bg--disabled:   var(--sf-color-inset);
       --sf-color-link--disabled: var(--sf-color-text--disabled);
       --sf-scrollbar-thumb:      var(--sf-color-neutral);
+      /* Non-sign() fallback: keeps inline code readable in engines with
+         oklch(from) but not sign() — the sign()-gated auto-contrast block
+         below overrides this with a proper per-background contrast calc
+         wherever sign() is supported. */
+      --sf-color-code-text:      var(--sf-color-text);
     }
 
         [data-theme="light"] {
@@ -181,6 +186,8 @@
       --sf-color-bg--disabled:   var(--sf-color-inset);
       --sf-color-link--disabled: var(--sf-color-text--disabled);
       --sf-scrollbar-thumb:      var(--sf-color-neutral);
+      /* Non-sign() fallback — see matching note in the dark block (#496). */
+      --sf-color-code-text:      var(--sf-color-text);
     }
 
   }

@@ -54,6 +54,10 @@ const FIXTURE_INVERSE = `
 
 test.describe('section-theme aliases (#496)', () => {
   test('pre/code background flips dark inside a nested dark section', async ({ page }) => {
+    // Root must be deterministically light — don't rely on Playwright's
+    // default colorScheme, since core/themes.css auto-flips
+    // :root:not([data-theme]) dark under prefers-color-scheme.
+    await page.emulateMedia({ colorScheme: 'light' });
     await renderWithBundle(page, FIXTURE);
     const res = await page.evaluate(`(() => {
       ${PROBE_LIB}
@@ -74,6 +78,10 @@ test.describe('section-theme aliases (#496)', () => {
   });
 
   test('inline code auto-contrast text tracks the in-scope code background', async ({ page }) => {
+    // Root must be deterministically light — don't rely on Playwright's
+    // default colorScheme, since core/themes.css auto-flips
+    // :root:not([data-theme]) dark under prefers-color-scheme.
+    await page.emulateMedia({ colorScheme: 'light' });
     await renderWithBundle(page, FIXTURE);
     const res = await page.evaluate(`(() => {
       ${PROBE_LIB}
@@ -85,6 +93,10 @@ test.describe('section-theme aliases (#496)', () => {
   });
 
   test('disabled-field background re-resolves inside a nested dark section', async ({ page }) => {
+    // Root must be deterministically light — don't rely on Playwright's
+    // default colorScheme, since core/themes.css auto-flips
+    // :root:not([data-theme]) dark under prefers-color-scheme.
+    await page.emulateMedia({ colorScheme: 'light' });
     await renderWithBundle(page, FIXTURE);
     const res = await page.evaluate(`(() => {
       ${PROBE_LIB}
@@ -99,6 +111,10 @@ test.describe('section-theme aliases (#496)', () => {
   });
 
   test('scrollbar-thumb and link--disabled re-resolve per scope', async ({ page }) => {
+    // Root must be deterministically light — don't rely on Playwright's
+    // default colorScheme, since core/themes.css auto-flips
+    // :root:not([data-theme]) dark under prefers-color-scheme.
+    await page.emulateMedia({ colorScheme: 'light' });
     await renderWithBundle(page, FIXTURE);
     const res = await page.evaluate(`(() => {
       ${PROBE_LIB}
