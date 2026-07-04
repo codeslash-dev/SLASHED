@@ -2739,6 +2739,19 @@
         </div>
         <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs)">Directional variants: <code>.sf-overlap--down</code> (pulls into the next element), <code>.sf-overlap--start</code> / <code>.sf-overlap--end</code> (pulls into the inline edge).</p>
 
+        <h3 style="margin-block-start: var(--sf-space-l)">Macros in action — a composed profile card</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">All three recipes together on one realistic card: a notched banner (<code>.sf-corner-scoop</code>) carrying a leaf-shaped badge (<code>.sf-corners--leaf</code>), with an avatar overlapping into the body below (<code>.sf-overlap</code> / <code>.sf-overlap-host</code>).</p>
+        <div style="max-inline-size: 16rem">
+          <div class="sf-corner-scoop sf-corner-scoop--bottom-right" style="position: relative; block-size: 6rem; background: linear-gradient(135deg, var(--sf-color-primary), var(--sf-color-tertiary))">
+            <div class="sf-corners sf-corners--leaf" style="position: absolute; inset-block-start: var(--sf-space-s); inset-inline-start: var(--sf-space-s); inline-size: 2rem; block-size: 2rem; display: grid; place-items: center; background: var(--sf-color-surface); font-size: var(--sf-text-s)">★</div>
+          </div>
+          <div style="inline-size: 4.5rem; aspect-ratio: 1; border-radius: var(--sf-radius-full); margin-inline: auto; background: var(--sf-color-action); border: 3px solid var(--sf-color-surface)" class="sf-overlap"></div>
+          <div class="sf-overlap-host" style="text-align: center; padding-inline: var(--sf-space-m); padding-block-end: var(--sf-space-m); border: 1px solid var(--sf-color-border); border-block-start: none; border-radius: 0 0 var(--sf-radius-m) var(--sf-radius-m); background: var(--sf-color-surface)">
+            <strong>Jamie Chen</strong>
+            <p style="margin: 0; font-size: var(--sf-text-s); color: var(--sf-color-text--muted)">Design Systems Lead</p>
+          </div>
+        </div>
+
         <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-focus-shadow</code> — box-shadow focus ring (opt-in)</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">Tab to this link: the focus indicator follows the rounded corner via <code>box-shadow: var(--sf-focus-ring-shadow)</code> instead of the default outline.</p>
         <p>

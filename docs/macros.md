@@ -589,7 +589,7 @@ element at that corner via a `mask-image` radial gradient. Default
 corner is top-right.
 
 ```html
-<div class="sf-card sf-corner-scoop--bottom-right">
+<div class="sf-card sf-corner-scoop sf-corner-scoop--bottom-right">
   Panel with a corner that curves away
 </div>
 ```
