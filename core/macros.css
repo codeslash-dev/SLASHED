@@ -389,23 +389,30 @@
      second, opaque-everywhere-but-its-own-corner layer paint back over
      the first cut, erasing it (this is exactly the "doesn't compose"
      limitation above) — so the top layer combines with 'intersect'
-     instead, keeping both cuts. The bottom layer stays 'add': WebKit has
-     a bug (https://bugs.webkit.org/show_bug.cgi?id=240324) where
-     'intersect' against the implicit nothing below the bottommost layer
-     collapses it to fully transparent; 'add' against nothing is the
-     identity operation in every engine, so it's the safe choice there.
-     Needs unprefixed mask-composite (Safari 15.4+, i.e. inside this
-     framework's 18+ floor) — no legacy -webkit-mask-composite fallback
-     is provided. */
+     instead, keeping both cuts. WebKit's *legacy prefixed* compositing
+     model (still what Safari/Playwright-WebKit actually evaluates,
+     unprefixed mask-composite notwithstanding) additionally collapses
+     the bottommost layer to fully transparent when it combines with the
+     implicit nothing below it via intersect's legacy equivalent
+     (source-in) — 'xor' is the documented workaround there (unlike
+     'add'/source-over, 'xor' against nothing is still the identity).
+     Ships both: unprefixed mask-composite for spec-compliant engines,
+     -webkit-mask-composite with the legacy keyword set + xor workaround
+     for WebKit. */
   .sf-corner-scoop--top,
   .sf-corner-scoop--bottom,
   .sf-corner-scoop--left,
   .sf-corner-scoop--right {
-    /* No -webkit-mask-image override needed: the base class's version
-       references --sf-corner-scoop-at, which these variants never set
-       (they set -at-1/-at-2 instead) — that leaves it invalid at
-       computed-value time, so it already falls back to its initial
-       value (none) in browsers that only understand the prefixed form. */
+    /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18, see comment above */
+    -webkit-mask-image:
+      radial-gradient(circle at var(--sf-corner-scoop-at-1),
+        transparent var(--sf-corner-scoop-size),
+        black calc(var(--sf-corner-scoop-size) + 0.5px)),
+      radial-gradient(circle at var(--sf-corner-scoop-at-2),
+        transparent var(--sf-corner-scoop-size),
+        black calc(var(--sf-corner-scoop-size) + 0.5px));
+    /* stylelint-disable-next-line property-no-vendor-prefix -- legacy WebKit mask-composite workaround, see comment above */
+    -webkit-mask-composite: source-in, xor;
     mask-image:
       radial-gradient(circle at var(--sf-corner-scoop-at-1),
         transparent var(--sf-corner-scoop-size),
