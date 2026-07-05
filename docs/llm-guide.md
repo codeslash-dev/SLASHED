@@ -1065,6 +1065,7 @@ Component tokens from `optional/tokens.components.css`:
 --sf-card-shadow--elevated: var(--sf-shadow-l)
 --sf-card-shadow--hover:    var(--sf-shadow-l)
 --sf-card-media-ratio:      var(--sf-ratio-video)
+--sf-card-media-radius:     var(--sf-card-radius, var(--sf-radius-m))
 --sf-card-heading-size:     var(--sf-text-xl)
 --sf-card-btn-font-size:    var(--sf-text-s)
 ```

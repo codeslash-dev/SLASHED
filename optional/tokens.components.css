@@ -20,7 +20,10 @@
     --sf-card-border-width:   var(--sf-border-width-1);
     --sf-card-border-color:   var(--sf-color-border);
     --sf-card-shadow:         var(--sf-shadow-s);
-    /* Shadow escalation for the --elevated and --interactive modifiers. */
+    /* Shadow escalation for the --elevated and --interactive modifiers.
+     * Both default to the same --sf-shadow-l step (elevated's resting shadow
+     * and interactive's hover shadow read as the same "lifted" level) — two
+     * tokens so each modifier can still be tuned independently. */
     --sf-card-shadow--elevated: var(--sf-shadow-l);
     --sf-card-shadow--hover:    var(--sf-shadow-l);
 

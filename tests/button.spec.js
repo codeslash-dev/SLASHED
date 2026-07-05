@@ -124,18 +124,20 @@ for (const theme of ['light', 'dark']) {
       expect(outColor).toBe(fillBg);
     });
 
-    test('size scale orders xs < m < xl by height', async ({ page }) => {
+    test('size scale orders xs < m < l < xl by height', async ({ page }) => {
       await mount(
         page,
         `<button class="sf-btn sf-btn--xs" id="xs">A</button>
          <button class="sf-btn" id="m">B</button>
-         <button class="sf-btn sf-btn--xl" id="xl">C</button>`,
+         <button class="sf-btn sf-btn--l" id="l">C</button>
+         <button class="sf-btn sf-btn--xl" id="xl">D</button>`,
       );
-      const [xs, m, xl] = await page.evaluate(() =>
-        ['xs', 'm', 'xl'].map((id) => document.getElementById(id).getBoundingClientRect().height),
+      const [xs, m, l, xl] = await page.evaluate(() =>
+        ['xs', 'm', 'l', 'xl'].map((id) => document.getElementById(id).getBoundingClientRect().height),
       );
       expect(xs).toBeLessThan(m);
-      expect(m).toBeLessThan(xl);
+      expect(m).toBeLessThan(l);
+      expect(l).toBeLessThan(xl);
     });
 
     test('--block stretches to the container width', async ({ page }) => {

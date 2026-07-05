@@ -79,7 +79,7 @@
       "selector": ".is-disabled",
       "kind": "state",
       "category": "State classes",
-      "group": ".sf-btn",
+      "group": "INTERACTIVITY",
       "description": "Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events.",
       "optional": false,
       "layer": "slashed.states"
@@ -229,7 +229,7 @@
       "selector": ".is-loading",
       "kind": "state",
       "category": "State classes",
-      "group": ".sf-btn",
+      "group": "LOADING / ASYNC FEEDBACK",
       "description": "Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results.",
       "optional": false,
       "layer": "slashed.states"
