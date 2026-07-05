@@ -1055,6 +1055,26 @@
       "layer": "slashed.macros"
     },
     {
+      "name": "sf-drop-shadow-xl",
+      "selector": ".sf-drop-shadow-xl",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-drop-shadow-xs",
+      "selector": ".sf-drop-shadow-xs",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
       "name": "sf-entrance--fade",
       "selector": ".sf-entrance--fade",
       "kind": "motion",
@@ -1643,6 +1663,126 @@
       "description": "Grid-flex variant with an xs minimum item width.",
       "optional": false,
       "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-h1",
+      "selector": ".sf-h1",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h1-level typography (size, line-height, weight, tracking, max-width) to any element without changing its semantic level.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-h2",
+      "selector": ".sf-h2",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h2-level typography to any element without changing its semantic level.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-h3",
+      "selector": ".sf-h3",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h3-level typography to any element without changing its semantic level.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-h4",
+      "selector": ".sf-h4",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h4-level typography to any element without changing its semantic level.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-h5",
+      "selector": ".sf-h5",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h5-level typography to any element without changing its semantic level.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-h6",
+      "selector": ".sf-h6",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h6-level typography to any element without changing its semantic level.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-hover-float",
+      "selector": ".sf-hover-float",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element up slightly on hover.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-hover-grow",
+      "selector": ".sf-hover-grow",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: scales the element up slightly on hover.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-hover-shrink",
+      "selector": ".sf-hover-shrink",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: scales the element down slightly on hover.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-hover-sink",
+      "selector": ".sf-hover-sink",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element down slightly on hover.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-hover-slide-end",
+      "selector": ".sf-hover-slide-end",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element toward the inline-end on hover.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-hover-slide-start",
+      "selector": ".sf-hover-slide-start",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element toward the inline-start on hover.",
+      "optional": true,
+      "layer": "slashed.utilities"
     },
     {
       "name": "sf-icon",
@@ -2525,6 +2665,46 @@
       "layer": "slashed.macros"
     },
     {
+      "name": "sf-text-2xl",
+      "selector": ".sf-text-2xl",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-text-2xs",
+      "selector": ".sf-text-2xs",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-text-3xl",
+      "selector": ".sf-text-3xl",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-text-4xl",
+      "selector": ".sf-text-4xl",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 4xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
       "name": "sf-text-gradient",
       "selector": ".sf-text-gradient",
       "kind": "macro",
@@ -2535,6 +2715,26 @@
       "layer": "slashed.macros"
     },
     {
+      "name": "sf-text-l",
+      "selector": ".sf-text-l",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the l text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-text-m",
+      "selector": ".sf-text-m",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the m (body) text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
       "name": "sf-text-protect",
       "selector": ".sf-text-protect",
       "kind": "macro",
@@ -2543,6 +2743,36 @@
       "description": "Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image.",
       "optional": false,
       "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-text-s",
+      "selector": ".sf-text-s",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the s text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-text-xl",
+      "selector": ".sf-text-xl",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-text-xs",
+      "selector": ".sf-text-xs",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "optional": true,
+      "layer": "slashed.utilities"
     },
     {
       "name": "sf-theme-transition",

@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 687,
+      "tokens": 692,
       "by_tier": {
-        "PUBLIC": 631,
+        "PUBLIC": 636,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 224,
-        "consumption": 463
+        "knob": 225,
+        "consumption": 467
       }
     }
   },
@@ -2741,6 +2741,22 @@
       ],
       "value": "drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))"
     },
+    "--sf-drop-shadow-xl": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))"
+    },
+    "--sf-drop-shadow-xs": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))"
+    },
     "--sf-duration-fast": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3780,6 +3796,14 @@
         "core/tokens.macros.css"
       ],
       "value": "3"
+    },
+    "--sf-link-external-label": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "\"opens in a new window or external site\""
     },
     "--sf-link-external-marker": {
       "tier": "PUBLIC",
@@ -5220,6 +5244,22 @@
         "core/tokens.css"
       ],
       "value": "0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))"
+    },
+    "--sf-text-shadow-xl": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))"
+    },
+    "--sf-text-shadow-xs": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))"
     },
     "--sf-text-xl": {
       "tier": "PUBLIC",

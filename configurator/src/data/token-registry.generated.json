@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 717
+    "nextId": 722
   },
   "tokens": [
     {
@@ -2901,6 +2901,26 @@
     {
       "id": 716,
       "name": "--sf-overlap-pull"
+    },
+    {
+      "id": 717,
+      "name": "--sf-drop-shadow-xl"
+    },
+    {
+      "id": 718,
+      "name": "--sf-drop-shadow-xs"
+    },
+    {
+      "id": 719,
+      "name": "--sf-link-external-label"
+    },
+    {
+      "id": 720,
+      "name": "--sf-text-shadow-xl"
+    },
+    {
+      "id": 721,
+      "name": "--sf-text-shadow-xs"
     }
   ]
 }

@@ -3,9 +3,10 @@
    Static opt-in utility helpers.
    Prefix: .sf-*; keep dynamic state in .is-* classes.
 
-   STAGED — definitions are commented out, like optional/components.css.
-   SLASHED is BEM-first by design and ships no utility classes in 0.x;
-   uncomment to activate. */
+   Most definitions below are STAGED (commented out) — SLASHED is BEM-first
+   by design and ships only a curated subset of utility classes; uncomment
+   a block to activate it. The heading, text-size, and hover-transform
+   blocks are active. */
 
 @layer slashed.utilities {
 
@@ -29,7 +30,7 @@
    * document semantics. Mirrors the h1–h6 rules in core/base.css.
    *   <div class="sf-h2">Visually H2, semantically a div</div>
    * ============================================================ */
-  /* .sf-h1,
+  .sf-h1,
   .sf-h2,
   .sf-h3,
   .sf-h4,
@@ -45,7 +46,24 @@
   .sf-h3 { font-size: var(--sf-h3-size); line-height: var(--sf-h3-line-height); font-weight: var(--sf-h3-font-weight); letter-spacing: var(--sf-h3-letter-spacing); max-inline-size: var(--sf-h3-max-width); }
   .sf-h4 { font-size: var(--sf-h4-size); line-height: var(--sf-h4-line-height); font-weight: var(--sf-h4-font-weight); letter-spacing: var(--sf-h4-letter-spacing); max-inline-size: var(--sf-h4-max-width); }
   .sf-h5 { font-size: var(--sf-h5-size); line-height: var(--sf-h5-line-height); font-weight: var(--sf-h5-font-weight); letter-spacing: var(--sf-h5-letter-spacing); max-inline-size: var(--sf-h5-max-width); }
-  .sf-h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); font-weight: var(--sf-h6-font-weight); letter-spacing: var(--sf-h6-letter-spacing); max-inline-size: var(--sf-h6-max-width); } */
+  .sf-h6 { font-size: var(--sf-h6-size); line-height: var(--sf-h6-line-height); font-weight: var(--sf-h6-font-weight); letter-spacing: var(--sf-h6-letter-spacing); max-inline-size: var(--sf-h6-max-width); }
+
+  /* ============================================================
+   * TEXT-SIZE UTILITIES (.sf-text-2xs – .sf-text-4xl)
+   * Apply a full fluid text-size role — size, line-height, weight,
+   * tracking, and measure (max-inline-size) — to any element in one
+   * class, mirroring the per-size token sets in core/tokens.css.
+   *   <p class="sf-text-l">Larger body copy</p>
+   * ============================================================ */
+  .sf-text-2xs { font-size: var(--sf-text-2xs); line-height: var(--sf-text-2xs-line-height); font-weight: var(--sf-text-2xs-font-weight); letter-spacing: var(--sf-text-2xs-letter-spacing); max-inline-size: var(--sf-text-2xs-max-width); }
+  .sf-text-xs  { font-size: var(--sf-text-xs);  line-height: var(--sf-text-xs-line-height);  font-weight: var(--sf-text-xs-font-weight);  letter-spacing: var(--sf-text-xs-letter-spacing);  max-inline-size: var(--sf-text-xs-max-width); }
+  .sf-text-s   { font-size: var(--sf-text-s);   line-height: var(--sf-text-s-line-height);   font-weight: var(--sf-text-s-font-weight);   letter-spacing: var(--sf-text-s-letter-spacing);   max-inline-size: var(--sf-text-s-max-width); }
+  .sf-text-m   { font-size: var(--sf-text-m);   line-height: var(--sf-text-m-line-height);   font-weight: var(--sf-text-m-font-weight);   letter-spacing: var(--sf-text-m-letter-spacing);   max-inline-size: var(--sf-text-m-max-width); }
+  .sf-text-l   { font-size: var(--sf-text-l);   line-height: var(--sf-text-l-line-height);   font-weight: var(--sf-text-l-font-weight);   letter-spacing: var(--sf-text-l-letter-spacing);   max-inline-size: var(--sf-text-l-max-width); }
+  .sf-text-xl  { font-size: var(--sf-text-xl);  line-height: var(--sf-text-xl-line-height);  font-weight: var(--sf-text-xl-font-weight);  letter-spacing: var(--sf-text-xl-letter-spacing);  max-inline-size: var(--sf-text-xl-max-width); }
+  .sf-text-2xl { font-size: var(--sf-text-2xl); line-height: var(--sf-text-2xl-line-height); font-weight: var(--sf-text-2xl-font-weight); letter-spacing: var(--sf-text-2xl-letter-spacing); max-inline-size: var(--sf-text-2xl-max-width); }
+  .sf-text-3xl { font-size: var(--sf-text-3xl); line-height: var(--sf-text-3xl-line-height); font-weight: var(--sf-text-3xl-font-weight); letter-spacing: var(--sf-text-3xl-letter-spacing); max-inline-size: var(--sf-text-3xl-max-width); }
+  .sf-text-4xl { font-size: var(--sf-text-4xl); line-height: var(--sf-text-4xl-line-height); font-weight: var(--sf-text-4xl-font-weight); letter-spacing: var(--sf-text-4xl-letter-spacing); max-inline-size: var(--sf-text-4xl-max-width); }
 
   /* ============================================================
    * Z-INDEX UTILITIES (.sf-z-*)
@@ -95,22 +113,28 @@
   /* ============================================================
    * HOVER-TRANSFORM UTILITIES (.sf-hover-*)
    * Simple, composable hover-triggered transforms — apply directly to
-   * any element (card, image, icon, button). Driven by
-   * --sf-transition-transform (core/tokens.css) so duration/easing stay
-   * in sync with the rest of the framework; the global duration
-   * kill-switch in core/accessibility.css neutralizes these under
-   * prefers-reduced-motion without needing a separate guard here.
+   * any element (card, image, icon, button). Duration/easing reuse the
+   * same tokens as --sf-transition-transform (core/tokens.css), but the
+   * transition-property targets scale/translate directly: these rules
+   * change the `scale` and `translate` properties (CSS Transforms
+   * Level 2), which a `transition: transform ...` shorthand does not
+   * cover — transform is a distinct property from its scale/translate/
+   * rotate components and won't pick up their changes. The global
+   * duration kill-switch in core/accessibility.css neutralizes these
+   * under prefers-reduced-motion without needing a separate guard here.
    * ============================================================ */
-  /* .sf-hover-grow, .sf-hover-shrink, .sf-hover-float, .sf-hover-sink,
+  .sf-hover-grow, .sf-hover-shrink, .sf-hover-float, .sf-hover-sink,
   .sf-hover-slide-start, .sf-hover-slide-end {
-    transition: var(--sf-transition-transform);
+    transition-property:        scale, translate;
+    transition-duration:        var(--sf-duration-normal);
+    transition-timing-function: var(--sf-ease-out);
   }
   .sf-hover-grow:hover    { scale: 1.05; }
   .sf-hover-shrink:hover  { scale: 0.95; }
   .sf-hover-float:hover   { translate: 0 -0.25em; }
   .sf-hover-sink:hover    { translate: 0 0.25em; }
   .sf-hover-slide-start:hover { translate: -0.5em 0; }
-  .sf-hover-slide-end:hover   { translate: 0.5em 0; } */
+  .sf-hover-slide-end:hover   { translate: 0.5em 0; }
 
   /* ============================================================
    * OVERFLOW-DEBUG UTILITY (.sf-debug-overflow)

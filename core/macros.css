@@ -321,7 +321,7 @@
   }
 
   .sf-link-external::after {
-    content:         var(--sf-link-external-marker);
+    content:         var(--sf-link-external-marker) / var(--sf-link-external-label);
     display:         inline-block;
     font-size:       0.85em;
     text-decoration: none;
@@ -338,9 +338,11 @@
 
   /* filter: drop-shadow() utilities — unlike box-shadow, follows the element's
      actual alpha shape (SVG icons, PNG cutouts, transparent logos). */
-  .sf-drop-shadow-s { filter: var(--sf-drop-shadow-s); }
-  .sf-drop-shadow-m { filter: var(--sf-drop-shadow-m); }
-  .sf-drop-shadow-l { filter: var(--sf-drop-shadow-l); }
+  .sf-drop-shadow-xs { filter: var(--sf-drop-shadow-xs); }
+  .sf-drop-shadow-s  { filter: var(--sf-drop-shadow-s); }
+  .sf-drop-shadow-m  { filter: var(--sf-drop-shadow-m); }
+  .sf-drop-shadow-l  { filter: var(--sf-drop-shadow-l); }
+  .sf-drop-shadow-xl { filter: var(--sf-drop-shadow-xl); }
 
   .sf-link--subtle:link,
   .sf-link--subtle:visited {

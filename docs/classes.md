@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**211 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**234 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -151,7 +151,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-55 classes.
+57 classes.
 
 | Class |
 |---|
@@ -165,6 +165,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-drop-shadow-l` |
 | `.sf-drop-shadow-m` |
 | `.sf-drop-shadow-s` |
+| `.sf-drop-shadow-xl` |
+| `.sf-drop-shadow-xs` |
 | `.sf-equal-height` |
 | `.sf-flow` |
 | `.sf-line-clamp-2` |
@@ -308,4 +310,32 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | Class |
 |---|
 | `.sf-theme-transition` |
+
+## Utilities (`optional/utilities.css`)
+
+21 classes.
+
+| Class |
+|---|
+| `.sf-h1` |
+| `.sf-h2` |
+| `.sf-h3` |
+| `.sf-h4` |
+| `.sf-h5` |
+| `.sf-h6` |
+| `.sf-hover-float` |
+| `.sf-hover-grow` |
+| `.sf-hover-shrink` |
+| `.sf-hover-sink` |
+| `.sf-hover-slide-end` |
+| `.sf-hover-slide-start` |
+| `.sf-text-2xl` |
+| `.sf-text-2xs` |
+| `.sf-text-3xl` |
+| `.sf-text-4xl` |
+| `.sf-text-l` |
+| `.sf-text-m` |
+| `.sf-text-s` |
+| `.sf-text-xl` |
+| `.sf-text-xs` |
 

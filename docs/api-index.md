@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**947 elements** — 687 tokens, 260 classes.
+**975 elements** — 692 tokens, 283 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 891 | Everyday surface. SemVer-stable. |
+| PUBLIC | 919 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (687)
+## Tokens (692)
 
 ### Component tokens (6)
 
@@ -31,7 +31,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
 
-### Core tokens (602)
+### Core tokens (607)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -344,6 +344,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-drop-shadow-l` | PUBLIC | consumption | drop | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` | Large CSS filter: drop-shadow for prominent illustrated or cut-out elements. |
 | `--sf-drop-shadow-m` | PUBLIC | consumption | drop | `drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))` | Medium CSS filter: drop-shadow for elevated icons and card thumbnails. |
 | `--sf-drop-shadow-s` | PUBLIC | consumption | drop | `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))` | Small CSS filter: drop-shadow. Use filter (not box-shadow) for elements with transparent areas — SVGs, PNGs, cutout images. |
+| `--sf-drop-shadow-xl` | PUBLIC | consumption | drop | `drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))` | Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements. |
+| `--sf-drop-shadow-xs` | PUBLIC | consumption | drop | `drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))` | Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images. |
 | `--sf-duration-fast` | PUBLIC | consumption | duration | `calc(150ms * var(--sf-motion-scale))` | Fast duration (~100ms). Hover transitions, tooltip appear. |
 | `--sf-duration-instant` | PUBLIC | consumption | duration | `calc(100ms * var(--sf-motion-scale))` | Near-instant duration (~50ms). Micro-interactions and cursor-follow effects. |
 | `--sf-duration-none` | PUBLIC | knob | duration | `0ms` | 0ms duration. Disables transitions (respects prefers-reduced-motion). |
@@ -450,6 +452,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-leading-snug` | PUBLIC | knob | leading | `1.3` | Snug line height (~1.35). Use for sub-headings. |
 | `--sf-leading-taper` | PUBLIC-ADVANCED | knob | leading | `0` | Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token. Default 0 keeps the curated defaults. |
 | `--sf-leading-tight` | PUBLIC | knob | leading | `1.1` | Tight line height (~1.2). Use for large display headings. |
+| `--sf-link-external-label` | PUBLIC | knob | link | `"opens in a new window or external site"` | Accessible name for the .sf-link-external marker glyph, read by screen readers via the CSS content alt-text syntax. Localise or clear alongside --sf-link-external-marker. |
 | `--sf-link-external-marker` | PUBLIC | knob | link | `" \\2197"` | CSS content value appended to external links (e.g. " ↗"). Used by the .external-link pseudo-element pattern. |
 | `--sf-link-underline-offset` | PUBLIC | knob | link | `0.15em` | Vertical offset of the link underline from the text baseline. |
 | `--sf-link-underline-thickness` | PUBLIC | knob | link | `auto` | Stroke width of the link underline. |
@@ -600,6 +603,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-shadow-m` | PUBLIC | consumption | text | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Medium text-shadow. Use for text overlaid on images to improve legibility. |
 | `--sf-text-shadow-none` | PUBLIC | knob | text | `none` | Removes text-shadow (use to explicitly reset inherited shadows). |
 | `--sf-text-shadow-s` | PUBLIC | consumption | text | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` | Small text-shadow for subtle depth on display headings. |
+| `--sf-text-shadow-xl` | PUBLIC | consumption | text | `0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))` | Extra-large text-shadow for maximum legibility over busy or high-contrast image backgrounds. |
+| `--sf-text-shadow-xs` | PUBLIC | consumption | text | `0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))` | Extra-small text-shadow for the subtlest depth on body text. |
 | `--sf-text-xl` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` | Extra-large font size (~20px). Sub-headings, callout text. |
 | `--sf-text-xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for extra-large text. |
 | `--sf-text-xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for extra-large text. |
@@ -727,7 +732,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (260)
+## Classes (283)
 
 ### Accessibility (8)
 
@@ -883,7 +888,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (55)
+### Macro classes (57)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -897,6 +902,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-drop-shadow-xl` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-drop-shadow-xs` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
 | `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
 | `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
@@ -1028,4 +1035,30 @@ and a short description. The machine-readable companion (with all columns) is
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
+
+### Utilities (21)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-h1` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h1-level typography (size, line-height, weight, tracking, max-width) to any element without changing its semantic level. |
+| `.sf-h2` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h2-level typography to any element without changing its semantic level. |
+| `.sf-h3` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h3-level typography to any element without changing its semantic level. |
+| `.sf-h4` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h4-level typography to any element without changing its semantic level. |
+| `.sf-h5` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h5-level typography to any element without changing its semantic level. |
+| `.sf-h6` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h6-level typography to any element without changing its semantic level. |
+| `.sf-hover-float` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element up slightly on hover. |
+| `.sf-hover-grow` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: scales the element up slightly on hover. |
+| `.sf-hover-shrink` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: scales the element down slightly on hover. |
+| `.sf-hover-sink` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element down slightly on hover. |
+| `.sf-hover-slide-end` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-end on hover. |
+| `.sf-hover-slide-start` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-start on hover. |
+| `.sf-text-2xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-2xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-3xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-4xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 4xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-l` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the l text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-m` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the m (body) text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-s` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the s text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 

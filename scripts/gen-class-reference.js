@@ -23,6 +23,7 @@ const FILE_META = {
   'optional/forms.css':     { title: 'Forms',                 prefix: 'sf-' },
   'optional/components.css':{ title: 'Components',            prefix: 'sf-' },
   'optional/theme-example.css': { title: 'Theme example',     prefix: ''    },
+  'optional/utilities.css':     { title: 'Utilities',         prefix: 'sf-' },
 };
 
 const SOURCES = CLASS_FILES.map(f => ({

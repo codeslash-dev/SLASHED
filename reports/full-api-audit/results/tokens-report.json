@@ -1,15 +1,15 @@
 {
   "summary": {
-    "totalTokens": 687,
-    "rendered": 687,
+    "totalTokens": 692,
+    "rendered": 692,
     "consoleErrors": 0,
     "requestFailures": 0,
-    "empties": 8,
-    "demoShownMismatch": 0,
+    "empties": 2,
+    "demoShownMismatch": 2,
     "literalDefaultMismatch": 2,
     "aliasMismatch": 0,
     "notRendered": 0,
-    "changedInDarkMode": 267
+    "changedInDarkMode": 271
   },
   "consoleErrors": [],
   "requestFailures": [],
@@ -736,12 +736,10 @@
       "category": "Component tokens",
       "declared": "var(--sf-space-xs)",
       "aliasOf": "--sf-space-xs",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "issues": [],
+      "computed": "16.858px",
+      "shown": "16.858px",
+      "darkComputed": "16.858px",
       "changedInDark": false
     },
     {
@@ -751,12 +749,10 @@
       "category": "Component tokens",
       "declared": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "issues": [],
+      "computed": "29.6296px",
+      "shown": "29.6296px",
+      "darkComputed": "29.6296px",
       "changedInDark": false
     },
     {
@@ -766,12 +762,10 @@
       "category": "Component tokens",
       "declared": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "issues": [],
+      "computed": "8px",
+      "shown": "8px",
+      "darkComputed": "8px",
       "changedInDark": false
     },
     {
@@ -1276,9 +1270,9 @@
       "declared": "oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 38%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 38%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 38%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) clamp(0.01, calc(l - 0.08 + 0 * 0.16), 0.99) c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) clamp(0.01, calc(l - 0.08 + 0 * 0.16), 0.99) c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) clamp(0.01, calc(l - 0.08 + 1 * 0.16), 0.99) c h)",
       "changedInDark": true
     },
     {
@@ -1289,9 +1283,9 @@
       "declared": "oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 82%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 82%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 82%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) clamp(0.01, calc(l - 0.04 + 0 * 0.08), 0.99) c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) clamp(0.01, calc(l - 0.04 + 0 * 0.08), 0.99) c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) clamp(0.01, calc(l - 0.04 + 1 * 0.08), 0.99) c h)",
       "changedInDark": true
     },
     {
@@ -1302,9 +1296,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.94 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 8%, oklch(0.96 0.006 250))",
-      "shown": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 8%, oklch(0.96 0.006 250))",
-      "darkComputed": "color-mix(in oklab, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h) 8%, oklch(0.22 0.003 250))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.94 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.94 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.94 c h)",
       "changedInDark": true
     },
     {
@@ -1315,9 +1309,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.88 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 20%, oklch(0.96 0.006 250))",
-      "shown": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 20%, oklch(0.96 0.006 250))",
-      "darkComputed": "color-mix(in oklab, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h) 20%, oklch(0.22 0.003 250))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.88 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.88 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.88 c h)",
       "changedInDark": true
     },
     {
@@ -1328,9 +1322,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.78 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 40%, oklch(0.96 0.006 250))",
-      "shown": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 40%, oklch(0.96 0.006 250))",
-      "darkComputed": "color-mix(in oklab, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h) 40%, oklch(0.22 0.003 250))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.78 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.78 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.78 c h)",
       "changedInDark": true
     },
     {
@@ -1341,9 +1335,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.65 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 65%, oklch(0.96 0.006 250))",
-      "shown": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 65%, oklch(0.96 0.006 250))",
-      "darkComputed": "color-mix(in oklab, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h) 65%, oklch(0.22 0.003 250))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.65 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.65 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.65 c h)",
       "changedInDark": true
     },
     {
@@ -1354,9 +1348,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.97 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 4%,  oklch(0.96 0.006 250))",
-      "shown": "color-mix(in oklab, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ) 4%,  oklch(0.96 0.006 250))",
-      "darkComputed": "color-mix(in oklab, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h) 4%,  oklch(0.22 0.003 250))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.97 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.97 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.97 c h)",
       "changedInDark": true
     },
     {
@@ -1367,9 +1361,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.50 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "oklch(0.96 0.006 250)",
-      "shown": "oklch(0.96 0.006 250)",
-      "darkComputed": "oklch(0.22 0.003 250)",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.50 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.50 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.50 c h)",
       "changedInDark": true
     },
     {
@@ -1380,9 +1374,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.37 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 82%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 82%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 82%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.37 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.37 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.37 c h)",
       "changedInDark": true
     },
     {
@@ -1393,9 +1387,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.27 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 62%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 62%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 62%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.27 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.27 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.27 c h)",
       "changedInDark": true
     },
     {
@@ -1406,9 +1400,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.17 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 38%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 38%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 38%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.17 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.17 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.17 c h)",
       "changedInDark": true
     },
     {
@@ -1419,9 +1413,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.11 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 18%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 18%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 18%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.11 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.11 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.11 c h)",
       "changedInDark": true
     },
     {
@@ -1432,9 +1426,9 @@
       "declared": "oklch(from var(--sf-color-base) 0.06 c h)",
       "aliasOf": null,
       "issues": [],
-      "computed": "color-mix(in oklab, oklch(0.96 0.006 250) 8%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "shown": "color-mix(in oklab, oklch(0.96 0.006 250) 8%, light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.05, calc(l - 0.4 - 0), 0.35) c h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.70, calc(l + 0.25 + 0), 1)    c h)\n      ))",
-      "darkComputed": "color-mix(in oklab, oklch(0.22 0.003 250) 8%, oklch(from oklch(0.69 0.0225 260) clamp(0.70, calc(l + 0.25 + 0), 1)    c h))",
+      "computed": "oklch(from oklch(0.96 0.006 250) 0.06 c h)",
+      "shown": "oklch(from oklch(0.96 0.006 250) 0.06 c h)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) 0.06 c h)",
       "changedInDark": true
     },
     {
@@ -1759,7 +1753,7 @@
       "issues": [],
       "computed": "oklch(from oklch(from oklch(0.96 0.006 250) calc(l - 0.02) c h) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)",
       "shown": "oklch(from oklch(from oklch(0.96 0.006 250) calc(l - 0.02) c h) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)",
-      "darkComputed": "oklch(from oklch(from oklch(0.22 0.003 250) calc(l - 0.02) c h) clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)",
+      "darkComputed": "oklch(from oklch(from oklch(0.22 0.003 250) calc(l - 0.02) c h)   clamp(0.1, sign(0.6 - l) * 999, 0.95) 0 0)",
       "changedInDark": true
     },
     {
@@ -2069,10 +2063,11 @@
       "declared": "inherit",
       "aliasOf": null,
       "issues": [
+        "DEMO_SHOWN_MISMATCH",
         "EMPTY_COMPUTED"
       ],
       "computed": "",
-      "shown": "(empty)",
+      "shown": "inherit (contextual)",
       "darkComputed": "",
       "changedInDark": false
     },
@@ -3306,10 +3301,11 @@
       "declared": "inherit",
       "aliasOf": null,
       "issues": [
+        "DEMO_SHOWN_MISMATCH",
         "EMPTY_COMPUTED"
       ],
       "computed": "",
-      "shown": "(empty)",
+      "shown": "inherit (contextual)",
       "darkComputed": "",
       "changedInDark": false
     },
@@ -4250,6 +4246,32 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-corner-scoop-at",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "100% 0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "100% 0",
+      "shown": "100% 0",
+      "darkComputed": "100% 0",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corner-scoop-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-2xl)",
+      "aliasOf": "--sf-radius-2xl",
+      "issues": [],
+      "computed": "24px",
+      "shown": "24px",
+      "darkComputed": "24px",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-cover-min-height",
       "tier": "PUBLIC",
       "role": "knob",
@@ -4387,9 +4409,9 @@
       "declared": "drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))",
       "aliasOf": null,
       "issues": [],
-      "computed": "drop-shadow(0 8px 16px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7)))",
-      "shown": "drop-shadow(0 8px 16px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7)))",
-      "darkComputed": "drop-shadow(0 8px 16px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2.5), 0.7)))",
+      "computed": "drop-shadow(0 8px 16px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7)))",
+      "shown": "drop-shadow(0 8px 16px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7)))",
+      "darkComputed": "drop-shadow(0 8px 16px   oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2.5), 0.7)))",
       "changedInDark": true
     },
     {
@@ -4400,9 +4422,9 @@
       "declared": "drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))",
       "aliasOf": null,
       "issues": [],
-      "computed": "drop-shadow(0 4px 6px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7)))",
-      "shown": "drop-shadow(0 4px 6px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7)))",
-      "darkComputed": "drop-shadow(0 4px 6px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2),   0.7)))",
+      "computed": "drop-shadow(0 4px 6px    oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7)))",
+      "shown": "drop-shadow(0 4px 6px    oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7)))",
+      "darkComputed": "drop-shadow(0 4px 6px    oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2),   0.7)))",
       "changedInDark": true
     },
     {
@@ -4413,9 +4435,35 @@
       "declared": "drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))",
       "aliasOf": null,
       "issues": [],
-      "computed": "drop-shadow(0 1px 2px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7)))",
-      "shown": "drop-shadow(0 1px 2px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7)))",
-      "darkComputed": "drop-shadow(0 1px 2px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1.5), 0.7)))",
+      "computed": "drop-shadow(0 1px 2px    oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7)))",
+      "shown": "drop-shadow(0 1px 2px    oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7)))",
+      "darkComputed": "drop-shadow(0 1px 2px    oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1.5), 0.7)))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-drop-shadow-xl",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "drop-shadow(0 16px 32px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7)))",
+      "shown": "drop-shadow(0 16px 32px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7)))",
+      "darkComputed": "drop-shadow(0 16px 32px  oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 3),   0.7)))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-drop-shadow-xs",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "drop-shadow(0 0.5px 1px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7)))",
+      "shown": "drop-shadow(0 0.5px 1px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7)))",
+      "darkComputed": "drop-shadow(0 0.5px 1px  oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1),   0.7)))",
       "changedInDark": true
     },
     {
@@ -4627,6 +4675,45 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-equal-rule-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Layout tokens",
+      "declared": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "issues": [],
+      "computed": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
+      "shown": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
+      "darkComputed": "oklch(from oklch(0.69 0.0225 260) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-equal-rule-style",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Layout tokens",
+      "declared": "solid",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "solid",
+      "shown": "solid",
+      "darkComputed": "solid",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-equal-rule-width",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Layout tokens",
+      "declared": "0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0",
+      "shown": "0",
+      "darkComputed": "0",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-field-block",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -4646,12 +4733,10 @@
       "category": "Component tokens",
       "declared": "var(--sf-space-xs)",
       "aliasOf": "--sf-space-xs",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "issues": [],
+      "computed": "16.858px",
+      "shown": "16.858px",
+      "darkComputed": "16.858px",
       "changedInDark": false
     },
     {
@@ -4661,12 +4746,10 @@
       "category": "Component tokens",
       "declared": "var(--sf-space-s)",
       "aliasOf": "--sf-space-s",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "issues": [],
+      "computed": "22.3459px",
+      "shown": "22.3459px",
+      "darkComputed": "22.3459px",
       "changedInDark": false
     },
     {
@@ -4676,12 +4759,10 @@
       "category": "Component tokens",
       "declared": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "issues": [],
+      "computed": "8px",
+      "shown": "8px",
+      "darkComputed": "8px",
       "changedInDark": false
     },
     {
@@ -6076,6 +6157,19 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-link-external-label",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Core tokens",
+      "declared": "\"opens in a new window or external site\"",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "\"opens in a new window or external site\"",
+      "shown": "\"opens in a new window or external site\"",
+      "darkComputed": "\"opens in a new window or external site\"",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-link-external-marker",
       "tier": "PUBLIC",
       "role": "knob",
@@ -6229,6 +6323,19 @@
       "computed": "auto",
       "shown": "auto",
       "darkComputed": "auto",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-space-xl)",
+      "aliasOf": "--sf-space-xl",
+      "issues": [],
+      "computed": "52.1404px",
+      "shown": "52.1404px",
+      "darkComputed": "52.1404px",
       "changedInDark": false
     },
     {
@@ -8362,9 +8469,9 @@
       "declared": "0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))",
       "aliasOf": null,
       "issues": [],
-      "computed": "0 4px 8px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7))",
-      "shown": "0 4px 8px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7))",
-      "darkComputed": "0 4px 8px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2.5), 0.7))",
+      "computed": "0 4px 8px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7))",
+      "shown": "0 4px 8px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2.5), 0.7))",
+      "darkComputed": "0 4px 8px   oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2.5), 0.7))",
       "changedInDark": true
     },
     {
@@ -8375,9 +8482,9 @@
       "declared": "0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))",
       "aliasOf": null,
       "issues": [],
-      "computed": "0 2px 4px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7))",
-      "shown": "0 2px 4px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7))",
-      "darkComputed": "0 2px 4px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2),   0.7))",
+      "computed": "0 2px 4px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7))",
+      "shown": "0 2px 4px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 2),   0.7))",
+      "darkComputed": "0 2px 4px   oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 2),   0.7))",
       "changedInDark": true
     },
     {
@@ -8401,9 +8508,35 @@
       "declared": "0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))",
       "aliasOf": null,
       "issues": [],
-      "computed": "0 1px 2px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7))",
-      "shown": "0 1px 2px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7))",
-      "darkComputed": "0 1px 2px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1.5), 0.7))",
+      "computed": "0 1px 2px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7))",
+      "shown": "0 1px 2px   oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7))",
+      "darkComputed": "0 1px 2px   oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1.5), 0.7))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-text-shadow-xl",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0 8px 16px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7))",
+      "shown": "0 8px 16px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7))",
+      "darkComputed": "0 8px 16px  oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 3),   0.7))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-text-shadow-xs",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0 0.5px 1px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7))",
+      "shown": "0 0.5px 1px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7))",
+      "darkComputed": "0 0.5px 1px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1),   0.7))",
       "changedInDark": true
     },
     {
@@ -8885,84 +9018,6 @@
       "computed": "1060",
       "shown": "1060",
       "darkComputed": "1060",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-rule-width",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "0",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "0",
-      "shown": "0",
-      "darkComputed": "0",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-rule-style",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "solid",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "solid",
-      "shown": "solid",
-      "darkComputed": "solid",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-rule-color",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Layout tokens",
-      "declared": "var(--sf-color-border)",
-      "aliasOf": "--sf-color-border",
-      "issues": [],
-      "computed": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
-      "shown": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
-      "darkComputed": "oklch(from oklch(0.69 0.0225 260) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)",
-      "changedInDark": true
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-2xl)",
-      "aliasOf": "--sf-radius-2xl",
-      "issues": [],
-      "computed": "24px",
-      "shown": "24px",
-      "darkComputed": "24px",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corner-scoop-at",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "100% 0",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "100% 0",
-      "shown": "100% 0",
-      "darkComputed": "100% 0",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-overlap-pull",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-space-xl)",
-      "aliasOf": "--sf-space-xl",
-      "issues": [],
-      "computed": "52.1404px",
-      "shown": "52.1404px",
-      "darkComputed": "52.1404px",
       "changedInDark": false
     }
   ]
