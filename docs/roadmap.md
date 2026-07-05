@@ -172,3 +172,41 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 - **A full utility-first API** — SLASHED remains BEM-first and token-first. Small,
   token-backed, single-purpose helpers may be considered in `optional/utilities.css`,
   but a broad Tailwind-style utility surface is out of scope.
+
+The following are **permanently excluded** — deliberate architectural decisions,
+not backlog. They should not be re-proposed or picked up by accident:
+
+- **Runtime JavaScript in the framework core** — the core ships zero runtime JS and
+  will keep doing so. Viewport-triggered "reveal on scroll / on-visible" behaviour
+  that depends on an `IntersectionObserver` is out of scope for `core/`; the supported
+  surfaces are the CSS-only `.is-visible` state hook and scroll-timeline `view()`
+  entrance animations. Any observer-driven JS belongs to host/integration layers,
+  never to the framework bundle.
+- **A consumer-facing preprocessor layer (mixins / functions)** — SLASHED is authored
+  and shipped as plain CSS with no build step for consumers. We will not expose an
+  `@include`/`@function`-style mixin or helper-function authoring API. Native CSS
+  (`calc()`, `pow()`, `color-mix()`, relative colour syntax, and — when it lands —
+  CSS `@function`) is the intended substitute.
+- **Prefix-based automatic component styling** — the framework will not auto-style
+  arbitrary classes by name pattern (e.g. "style everything matching `*--primary` or
+  `.btn-*`"). Components are explicit BEM classes (`.sf-*`); there is deliberately no
+  "style anything that matches this prefix" mechanism.
+- **Viewport-breakpoint utilities / breakpoint mixins** — responsiveness is expressed
+  with container queries and intrinsic, breakpoint-free techniques. A media-query
+  breakpoint utility or mixin system (viewport `--l-`/`--md:` suffixes,
+  `breakpoint()`-style helpers) is out of scope.
+- **Snippet-expansion ("recipe") syntax** — a `?name`-style token that expands into a
+  CSS block requires a preprocessor or builder pass, which the pure-CSS framework will
+  not implement. Editor/builder integrations may offer their own snippets; that is an
+  integration concern, not a `core/` feature.
+- **Selector-list-driven rule generation** — the framework will not read a
+  user-supplied list of selectors and graft component rules onto them (e.g. "apply
+  these card styles to this selector list"). Consumers opt in by applying the
+  component class itself.
+- **Per-channel colour partials (`-h`/`-s`/`-l`, `-r`/`-g`/`-b`)** — the colour system
+  is built on OKLCH, relative colour syntax, and `color-mix()`. We will not ship
+  per-channel HSL/RGB partial tokens for manual recomposition; relative colour syntax
+  covers those cases.
+- **Placeholder-content and script-wrapper helpers** — generating dummy/lorem text or
+  `<script>` boilerplate is not a styling concern and is out of scope for a CSS
+  framework.
