@@ -26,11 +26,11 @@
 | 7 | ~90% | **Cienie (box/text/drop)** | 15 | **Lepiej:** auto-boost w dark, `glow`, `inner`. |
 | 8 | ~90% | **Auto object-fit na `img`/`video`** | 8.9 | Domyślne (nie toggle), obejmuje też `video`. |
 | 9 | ~90% | **Auto grid / variable grid (`.sf-grid`)** | 10.4, 10.7 | `auto-fill/-fit` + `--sf-grid-min`, breakpoint-free. |
-| 10 | ~90% | **Sticky + scroll-offset kotwic** | 5.9, 8.8 | `scroll-padding` uwzględnia header (auto). **Lepiej/prościej.** |
+| 10 | ~90% | **Scroll-offset kotwic** (pod headerem) | 8.8 | `scroll-padding` uwzględnia header (auto). **Lepiej/prościej.** *(Sticky wydzielony → B, patrz „Weryfikacja A".)* |
 | 11 | ~85% | **`.sf-bg` — obraz jako warstwa tła** | 1.3 | Odpowiednik `.is-bg`; rodzic auto przez `:has()`. |
 | 12 | ~85% | **Presety transition** | 5.7 | Semantyczne per-właściwość, „nigdy `transition: all`". |
 | 13 | ~85% | **Clickable / focus parent (klikalna karta)** | 12.2–3 | **Lepiej:** auto overlay-link, z-index zagnieżdżonych, wykluczenia. |
-| 14 | ~80% | **Line clamp** | 12.11 | `.sf-line-clamp-*` + dowolne N tokenem. |
+| 14 | ~80% | **Line clamp** | 12.11 | `.sf-line-clamp-2/-3` + `.sf-line-clamp-N` (dowolne N przez `--sf-line-clamp`), `.sf-truncate`. |
 | 15 | ~70% | **Zigzag / alternating rows (`.sf-alternate`)** | 10.1 | **Lepiej:** container-query zamiast media. |
 | 16 | ~65% | **Columns / masonry (`.sf-equal`)** | 8.1–2 | Kolumny CSS z regułami. |
 | 17 | ~60% | **Gradient / overflow fades** | 5.10 | `.sf-overflow-fade` (maska), `.sf-scrim`, `.sf-text-protect`. |
@@ -38,6 +38,16 @@
 | 19 | ~55% | **Separatory (`.sf-divider`)** | 2.2 | Element + warianty (gradient/pionowy) — bogatszy. |
 | 20 | ~50% | **Easing presets** | 5.6 | 8 tokenów (vs 5 w ACSS). |
 | 21 | ~40% | **Selection styling (domyślne)** | 5.8 | `::selection` + `<mark>` tokenowo. |
+
+> **⚑ Weryfikacja kategorii A (sprawdzone wobec źródła `core/*.css` na `main`, wer. 0.6.35):**
+> 14/21 pozycji jest **w pełni czystych** (nic do poprawy): 1–4, 6, 8, 9, 11–17 (bez uwag), 20.
+> Odstępstwa od „nic do poprawy":
+> - **A10 Sticky — błędna kategoria, przeniesione do B.** W kodzie jest tylko **stan `.is-sticky`** (`core/states.css`) + jeden fluidny `--sf-sticky-offset`; **brak utility `.sf-sticky` i modyfikatorów offsetu s/m/l**. (W audycie poz. 5.9 była słusznie 🟡.) Sam **scroll-offset kotwic** (`scroll-padding` na root) zostaje w A — jest czysty.
+> - **Rdzeń na parytecie, ale z jednym drobnym uzupełnieniem już wypisanym w B** (A pozostaje, ale nie jest „idealne"): **A5 Border** → auto-radius mediów (B13; potwierdzone: `img/figure` nie dostają radius — tylko `code`/`pre`); **A7 Cienie** → skala `drop-shadow`/`text-shadow` tylko s/m/l vs pełna skala `box-shadow` (nowa poz. B); **A18 Content-grid** → tylko 3 strefy (content/breakout/full), brak `feature-max`/`full-safe` (B18); **A19 Divider** → brak `.sf-divide` „linie między dziećmi" (B21); **A21 Selection** → brak `.sf-selection--alt` (B24).
+> - **Sprostowanie nazwy klasy:** poprawnie **`.sf-line-clamp-N`** (wcześniej błędnie zapisane jako `.sf-line-clamp-`).
+> - **Do listy B dochodzą 2 pozycje** (poza tabelą, wg realnego użycia): **Sticky-utility `.sf-sticky` + offsety s/m/l** (~85%, sekcja 5.9) oraz **parytet skali cieni** (`drop-shadow`/`text-shadow` xs/xl, ~40%, sekcja 15).
+>
+> Wniosek: nagłówek „nic do poprawy" jest trafny dla 14 pozycji; dla 6 (Sticky + Border/Cienie/Content-grid/Divider/Selection) istnieje **drobne, konkretne uzupełnienie** — żadne nie podważa parytetu rdzenia, ale nie są to pozycje „zero do zrobienia".
 
 ## B. Mamy gorzej / brakuje — warto dodać (podobnie lub lepiej)
 
