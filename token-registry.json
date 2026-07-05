@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 717
+    "nextId": 736
   },
   "tokens": [
     {
@@ -2901,6 +2901,82 @@
     {
       "id": 716,
       "name": "--sf-overlap-pull"
+    },
+    {
+      "id": 717,
+      "name": "--sf-btn-border-width"
+    },
+    {
+      "id": 718,
+      "name": "--sf-btn-font-size"
+    },
+    {
+      "id": 719,
+      "name": "--sf-btn-font-weight"
+    },
+    {
+      "id": 720,
+      "name": "--sf-btn-gap"
+    },
+    {
+      "id": 721,
+      "name": "--sf-btn-min-height"
+    },
+    {
+      "id": 722,
+      "name": "--sf-card-bg"
+    },
+    {
+      "id": 723,
+      "name": "--sf-card-border-color"
+    },
+    {
+      "id": 724,
+      "name": "--sf-card-border-width"
+    },
+    {
+      "id": 725,
+      "name": "--sf-card-btn-font-size"
+    },
+    {
+      "id": 726,
+      "name": "--sf-card-gap"
+    },
+    {
+      "id": 727,
+      "name": "--sf-card-heading-size"
+    },
+    {
+      "id": 728,
+      "name": "--sf-card-media-radius"
+    },
+    {
+      "id": 729,
+      "name": "--sf-card-media-ratio"
+    },
+    {
+      "id": 730,
+      "name": "--sf-card-padding"
+    },
+    {
+      "id": 731,
+      "name": "--sf-card-radius"
+    },
+    {
+      "id": 732,
+      "name": "--sf-card-radius-outer"
+    },
+    {
+      "id": 733,
+      "name": "--sf-card-shadow"
+    },
+    {
+      "id": 734,
+      "name": "--sf-card-shadow--elevated"
+    },
+    {
+      "id": 735,
+      "name": "--sf-card-shadow--hover"
     }
   ]
 }

@@ -277,18 +277,113 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-btn-border-width",
+      "description": "Border thickness for .sf-btn (used by all fill, outline, and secondary treatments).\n\nDefault: `var(--sf-border-width-1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-font-size",
+      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.\n\nDefault: `var(--sf-text-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-font-weight",
+      "description": "Label font-weight for .sf-btn. Defaults to the interactive weight.\n\nDefault: `var(--sf-font-weight-interactive)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-gap",
+      "description": "Gap between an icon and the label inside .sf-btn.\n\nDefault: `var(--sf-space-2xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-min-height",
+      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.\n\nDefault: `var(--sf-touch-target)`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-btn-padding-block",
-      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.\n\nDefault: `var(--sf-space-xs)`",
+      "description": "Vertical (block) padding inside .sf-btn.\n\nDefault: `var(--sf-space-xs)`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-padding-inline",
-      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.\n\nDefault: `var(--sf-space-m)`",
+      "description": "Horizontal (inline) padding inside .sf-btn.\n\nDefault: `var(--sf-space-m)`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-radius",
-      "description": "Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens.\n\nDefault: `var(--sf-radius-m)`",
+      "description": "Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens.\n\nDefault: `var(--sf-radius-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-bg",
+      "description": "Background surface for .sf-card. Defaults to --sf-color-surface.\n\nDefault: `var(--sf-color-surface)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-border-color",
+      "description": "Border colour for .sf-card. Defaults to --sf-color-border.\n\nDefault: `var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-border-width",
+      "description": "Border thickness for .sf-card.\n\nDefault: `var(--sf-border-width-1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-btn-font-size",
+      "description": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.\n\nDefault: `var(--sf-text-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-gap",
+      "description": "Divider spacing for .sf-card__header / __footer (padding + margin around the rule).\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-heading-size",
+      "description": "Font-size for .sf-card__title. Defaults to --sf-text-xl.\n\nDefault: `var(--sf-text-xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-media-radius",
+      "description": "Corner radius for .sf-card__media. Mirrors the card's inner radius by default.\n\nDefault: `var(--sf-card-radius, var(--sf-radius-m))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-media-ratio",
+      "description": "Aspect ratio for .sf-card__media. Defaults to --sf-ratio-video (16/9).\n\nDefault: `var(--sf-ratio-video)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-padding",
+      "description": "Inner padding for .sf-card. Also feeds the concentric-radius math (outer = inner radius + padding).\n\nDefault: `var(--sf-space-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-radius",
+      "description": "Inner radius for .sf-card children such as __media. Combined with padding to derive the outer radius.\n\nDefault: `var(--sf-radius-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-radius-outer",
+      "description": "Outer corner radius of .sf-card. Concentric with the inner radius: calc(--sf-card-radius + --sf-card-padding).\n\nDefault: `calc(var(--sf-card-radius) + var(--sf-card-padding))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-shadow",
+      "description": "Base drop shadow for .sf-card. Defaults to --sf-shadow-s.\n\nDefault: `var(--sf-shadow-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-shadow--elevated",
+      "description": "Drop shadow applied by the .sf-card--elevated modifier (border hidden, larger shadow).\n\nDefault: `var(--sf-shadow-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-shadow--hover",
+      "description": "Drop shadow applied on hover/focus by the .sf-card--interactive modifier.\n\nDefault: `var(--sf-shadow-l)`",
       "syntax": "*"
     },
     {
