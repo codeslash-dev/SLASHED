@@ -186,7 +186,7 @@ test.describe('Shadows', () => {
     await page.goto(DEMO_URL);
     const textShadowEls = page.locator('#shadows span[style*="text-shadow"]');
     const count = await textShadowEls.count();
-    expect(count).toBe(3);
+    expect(count).toBe(5); // xs, s, m, l, xl
     for (let i = 0; i < count; i++) {
       const ts = await getStyle(textShadowEls.nth(i), 'textShadow');
       expect(ts).not.toBe('none');
@@ -195,9 +195,9 @@ test.describe('Shadows', () => {
 
   test('drop shadows apply filter to SVGs', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const svgs = page.locator('#shadows svg[style*="drop-shadow"]');
+    const svgs = page.locator('#shadows svg[class*="sf-drop-shadow"]');
     const count = await svgs.count();
-    expect(count).toBe(3);
+    expect(count).toBe(5); // xs, s, m, l, xl
     for (let i = 0; i < count; i++) {
       const filter = await getStyle(svgs.nth(i), 'filter');
       expect(filter).not.toBe('none');

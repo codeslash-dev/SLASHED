@@ -321,10 +321,18 @@
   }
 
   .sf-link-external::after {
-    content:         var(--sf-link-external-marker) / var(--sf-link-external-label);
+    content:         var(--sf-link-external-marker);
     display:         inline-block;
     font-size:       0.85em;
     text-decoration: none;
+  }
+  /* Alt-text form (accessible name for the glyph) — gated so a UA that
+     rejects the "value / string" grammar keeps the plain marker above
+     instead of dropping the whole declaration. */
+  @supports (content: "x" / "y") {
+    .sf-link-external::after {
+      content: var(--sf-link-external-marker) / var(--sf-link-external-label);
+    }
   }
 
   .sf-content-auto {

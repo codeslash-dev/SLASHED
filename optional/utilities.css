@@ -122,6 +122,11 @@
    * rotate components and won't pick up their changes. The global
    * duration kill-switch in core/accessibility.css neutralizes these
    * under prefers-reduced-motion without needing a separate guard here.
+   * On a/button/input/select/textarea/summary, core/motion.css's global
+   * transition (slashed.motion, layered after slashed.utilities) also
+   * covers scale/translate, so --sf-duration-fast wins there instead of
+   * --sf-duration-normal — the class selector's higher specificity still
+   * keeps these rules in control of *which* properties transition.
    * ============================================================ */
   .sf-hover-grow, .sf-hover-shrink, .sf-hover-float, .sf-hover-sink,
   .sf-hover-slide-start, .sf-hover-slide-end {

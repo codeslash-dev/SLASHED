@@ -292,7 +292,7 @@ Universal browser support.
 
 ---
 
-## `.sf-drop-shadow-s` / `.sf-drop-shadow-m` / `.sf-drop-shadow-l`
+## `.sf-drop-shadow-xs` / `-s` / `-m` / `-l` / `-xl`
 
 Applies `filter: drop-shadow(...)` — unlike `box-shadow`, this follows the
 actual alpha shape of the element (PNG cutouts, SVG icons, transparent
@@ -300,13 +300,19 @@ logos) instead of hugging the bounding box.
 
 ```html
 <img class="sf-drop-shadow-m" src="logo.svg" alt="">
+<svg class="sf-drop-shadow-xl" ...>...</svg>
 ```
 
 Tokens:
 
 | Token | What it controls |
 |---|---|
-| `--sf-drop-shadow-s` / `-m` / `-l` | drop-shadow value consumed 1:1 by the matching class (`core/tokens.css`) |
+| `--sf-drop-shadow-xs` / `-s` / `-m` / `-l` / `-xl` | drop-shadow value consumed 1:1 by the matching class (`core/tokens.css`) |
+
+`--sf-text-shadow-xs` / `-s` / `-m` / `-l` / `-xl` mirror the same five-step
+scale for `text-shadow` (no dedicated utility class — apply the token
+directly via `text-shadow: var(--sf-text-shadow-l)`), matching the
+`box-shadow` ramp's `xs`..`2xl` rhythm at the small/large ends.
 
 ---
 

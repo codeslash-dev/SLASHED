@@ -512,7 +512,11 @@ Pattern: `--sf-text-{size}-{property}`
 
 Not applied automatically — opt in: `line-height: var(--sf-text-xl-line-height)`.
 
-Or apply the whole role at once with `.sf-text-{size}` (`.sf-text-2xs` … `.sf-text-4xl`, `optional/utilities.css`) — sets font-size, line-height, font-weight, letter-spacing, and max-inline-size in one class.
+Or apply the whole role at once with `.sf-text-{size}` (`.sf-text-2xs` … `.sf-text-4xl`, `optional/utilities.css`) — sets font-size, line-height, font-weight, letter-spacing, and max-inline-size in one class:
+
+```html
+<p class="sf-text-l">Larger body copy, one class instead of four tokens.</p>
+```
 
 ### 6.6 Leading (line-height)
 
@@ -563,7 +567,11 @@ Pattern: `--sf-h1-{property}` through `--sf-h6-{property}`
 /* similarly: -line-height, -font-weight, -letter-spacing for each */
 ```
 
-Apply heading-level typography to a non-heading element with `.sf-h1` … `.sf-h6` (`optional/utilities.css`) — same sizes/weights/tracking as the real `h1`–`h6` elements, without changing document semantics.
+Apply heading-level typography to a non-heading element with `.sf-h1` … `.sf-h6` (`optional/utilities.css`) — same sizes/weights/tracking as the real `h1`–`h6` elements, without changing document semantics:
+
+```html
+<div class="sf-h2">Visually an h2, semantically still a div</div>
+```
 
 ### 6.9 Global heading aliases
 
@@ -961,7 +969,12 @@ Ready-made `transition` values. **Never use `transition: all`.**
 --sf-transition-overlay      /* overlay + display with allow-discrete — for top-layer dialog/popover */
 ```
 
-Ready-made hover transforms: `.sf-hover-grow` / `-shrink` / `-float` / `-sink` / `-slide-start` / `-slide-end` (`optional/utilities.css`) — transition `scale`/`translate` at `--sf-duration-normal` + `--sf-ease-out` (not `--sf-transition-transform`, since that shorthand transitions the `transform` property, not its separate `scale`/`translate`/`rotate` components).
+Ready-made hover transforms: `.sf-hover-grow` / `-shrink` / `-float` / `-sink` / `-slide-start` / `-slide-end` (`optional/utilities.css`) — transition `scale`/`translate` at `--sf-duration-normal` + `--sf-ease-out` (not `--sf-transition-transform`, since that shorthand transitions the `transform` property, not its separate `scale`/`translate`/`rotate` components):
+
+```html
+<div class="sf-card sf-hover-grow">Scales up slightly on hover</div>
+<img class="sf-hover-float" src="icon.svg" alt="">
+```
 
 ### 9.4 Animation presets
 
