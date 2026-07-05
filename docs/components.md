@@ -157,6 +157,26 @@ when the entire card should be a single link.
 | `--sf-card-heading-size` | `var(--sf-text-xl)` | `__title` size |
 | `--sf-card-btn-font-size` | `var(--sf-text-s)` | Nested `.sf-btn` size |
 
+**Composing card body layout**
+
+`.sf-card__body` is plain `display: block` — it doesn't have its own flex/grid
+switch. For gap-controlled internal layout, compose it with the framework's
+existing layout primitives instead of a card-specific modifier:
+
+```html
+<!-- Stacked spacing between arbitrary children -->
+<div class="sf-card__body sf-flow">
+  <p>First paragraph.</p>
+  <p>Second paragraph, spaced via --sf-flow-space.</p>
+</div>
+
+<!-- Wrapped horizontal row (e.g. stat items or tag chips) -->
+<div class="sf-card__body sf-cluster">
+  <span>New</span>
+  <span>Popular</span>
+</div>
+```
+
 ---
 
 ## Recipe: gradient-outline button
