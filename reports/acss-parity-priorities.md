@@ -11,6 +11,29 @@
 
 ---
 
+## 🆕 Aktualizacja — stan `main` po PR #509–#520 (sprawdzone w źródle)
+
+> Od czasu audytu doszły nowe rzeczy. Zweryfikowane **budując bundle i sprawdzając stan komentarza** (live vs staged), nie po samych nazwach.
+
+**✅ Nowo DOSTARCZONE (żywe w `core/`, emitowane):**
+- **`.sf-corner-scoop`** (+ `--top-left/-top-right/-bottom-left/-bottom-right`) — wklęsłe narożniki przez `mask: radial-gradient` → **zamyka B27 „Inverted radius"** (audit 2.3), dokładnie nowoczesną metodą `mask`, którą rekomendowałem (PR #519).
+- **`.sf-overlap`** / `--down/--start/--end` + `.sf-overlap-host` — element zachodzący na poprzedni → **zamyka B11 „overlap"** (audit 14) (PR #519).
+- **`.sf-grid-flex`** (+ `--center`, `--xs…--2xl`) — flex-grid z wyśrodkowaniem niepełnego wiersza → **zamyka lukę „Flex Grids"** (audit 8.12) (PR #516).
+- **Dark-mode: poprawki kontrastu** (PR #513) — łagodzą zastrzeżenie z A1.
+
+**🔧 NAPISANE, ale wciąż ZASZTELOWANE (zakomentowane w `optional/*`, NIE emitowane):**
+- `optional/utilities.css` (nadal nagłówek „STAGED", całość w komentarzu) zawiera już: **`.sf-hover-grow/-shrink/-float/-sink/-slide-start/-slide-end`** (hover — B3), **`.sf-h1…-h6`** (klasy nagłówków — część B7), `.sf-z-*`, `.sf-object-*`, `.sf-balance/-pretty`, klasy animacji (`.sf-spin` itd.). → **B3 i „nagłówki" z B7 przechodzą z „❌ brak" na „🔧 napisane, czekają na odkomentowanie"** — ten sam kubełek co `.sf-btn`/`.sf-card`.
+- `optional/components.css` — `.sf-btn`, `.sf-card`, `.sf-skeleton` itd. **bez zmian: nadal staged (v0.8)**.
+- **`.sf-boxed`** — dodane i **wycofane** (PR #516 „drop .sf-boxed section macro") → B26 „boxed" pozostaje niezrobione i częściowo świadomie odrzucone jako makro sekcji.
+
+**Plugin:** ostatnie PR (#139–#155) to infrastruktura/testy/marketing/relicense GPL/sync studia — **brak nowych funkcji parytetu ACSS** (nadal brak WP-CLI, menedżera fontów, Surfaces). Listy pluginu bez zmian.
+
+> **Uwaga do premisy „SLASHED nie dostarcza utilities":** nadal prawdziwa dla **wyjścia** (utilities.css zasztelowany), ale plik jest już **wypełniony** warstwą utility (hover/nagłówki/z-index/object-fit/text-wrap) — czeka tylko na odkomentowanie. To znacząco skraca drogę do zamknięcia kilku pozycji B.
+
+Poniższe tabele odzwierciedlają już powyższe (zmienione wiersze oznaczone „🆕").
+
+---
+
 # 1. FRAMEWORK (SLASHED — czysty CSS)
 
 ## A. Mamy tak samo lub lepiej — nic do poprawy
@@ -55,15 +78,15 @@
 |---|---|---|---|---|
 | 1 | ~100% | **Przyciski `.sf-btn`** | 3 | 🔧 **Odblokować z `optional/components.css` (staged v0.8)** + dodać rozmiary T-shirt, `--outline`. Najwyższy priorytet. |
 | 2 | ~95% | **Karty `.sf-card`** | 6 | 🔧 **Odblokować (staged v0.8)** + domknąć knoby (link/icon/min-radius, flex↔grid). |
-| 3 | ~85% | **Efekty hover (`.sf-hover--*`)** | 5.2 | Opcjonalny `optional/effects.css`: grow/float/glow/underline na naszych tokenach. Duży efekt wizualny, niski koszt. |
+| 3 | ~85% | 🆕 **Efekty hover (`.sf-hover-grow/-shrink/-float/-sink/-slide-start/-slide-end`)** | 5.2 | **Już napisane, ale zasztelowane** w `optional/utilities.css` (zakomentowane). Zostaje: **odkomentować** + ew. dołożyć glow/underline. Z „brak" → „czeka na odblokowanie". |
 | 4 | ~80% | **Scroll-reveal: stagger / `-all` / blur / parallax** | 5.3 | Mamy `.sf-entrance--*` (6 wariantów) — dołożyć `--stagger` (`sibling-index()`), wariant na dzieci, blur/parallax. |
 | 5 | ~70% | **Overlays: solid `.sf-overlay` + custom overlay tokeny** | 13.1–2 | Prosta ciemna nakładka na obraz + reużywalne overlaye (gradient/blur/blend). Bardzo częste w hero. |
 | 6 | ~65% | **Surfaces (preset tła: obraz/overlay/animacja)** | 1.2 | Tokeny `--sf-surface-*` + klasa; pełne UI po stronie pluginu (P). |
-| 7 | ~65% | **Klasy stylu nagłówka/tekstu (`.sf-h1..-h6`, `.sf-text-{size}`)** | 12.10, 17.6 | Makra nakładające komplet sub-właściwości (odpowiednik `heading-style()`). Realny brak DX. |
+| 7 | ~65% | 🆕 **Klasy stylu nagłówka/tekstu (`.sf-h1..-h6`, `.sf-text-{size}`)** | 12.10, 17.6 | **`.sf-h1..-h6` już napisane, ale zasztelowane** (`optional/utilities.css`). Zostaje: **odkomentować nagłówki** + dopisać `.sf-text-{size}`. |
 | 8 | ~60% | **Lista ikon (`.sf-icon-list`)** | 11.1 | Ikona+tekst, gap, wyrównanie — częste w „features/benefits". Tanie. |
 | 9 | ~55% | **Kontekstowe tła (`.sf-bg--light/-dark/-ultra`)** | 1.1 | Nazwane klasy tła + wymuszenie `data-theme`. |
 | 10 | ~45% | **Efekty exit (`.sf-exit--*`)** | 5.4 | Symetrycznie do entrance (`view()`, zakres `cover`). Mamy keyframes. |
-| 11 | ~40% | **Efekt „overlap" (tło zachodzące na sąsiada)** | 14 | Popularny w sekcjach marketingowych; makro + pseudo-element. |
+| ~~11~~ | ✅ | ~~**Efekt „overlap"**~~ **ZROBIONE** | 14 | 🆕 Dostarczone: `.sf-overlap` / `--down/--start/--end` + `.sf-overlap-host` (PR #519, live w `core/macros.css`). |
 | 12 | ~40% | **Grid: 7–12 kolumn + span/order + `--sf-grid-N`** | 10.2, 10.6 | Rozważyć moduł utilities grid (container-query). |
 | 13 | ~40% | **Auto-radius mediów (globalny toggle)** | 2.1 | Token + reguła `:where(img,figure)`. |
 | 14 | ~35% | **External link — cue dla czytników + auto po `href`** | 4.2 | Dodać visually-hidden tekst; a11y/zgodność. |
@@ -79,7 +102,7 @@
 | 24 | ~15% | **`.sf-list-none`, `.sf-selection--alt`** | 14, 5.8 | Drobne makra. |
 | 25 | ~12% | **Textures (`.sf-texture-{n}` + tokeny)** | 12.12 | Presety tekstur (pełne UI = plugin). |
 | 26 | ~10% | **Boxed layout (`.sf-boxed`)** | 8.7 | Layout „w ramce". Niszowe. |
-| 27 | ~8% | **Inverted radius (przez `mask`)** | 2.3 | Wklęsłe narożniki nowocześniej niż shadow-hack ACSS. Niszowe. |
+| ~~27~~ | ✅ | ~~**Inverted radius (przez `mask`)**~~ **ZROBIONE** | 2.3 | 🆕 Dostarczone: `.sf-corner-scoop` (+4 narożniki) przez `mask: radial-gradient` (PR #519, live w `core/macros.css`) — dokładnie rekomendowaną metodą. |
 
 ## C. Nie mamy i nie możemy mieć (filozofia / technika)
 
