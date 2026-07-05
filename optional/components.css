@@ -1,9 +1,11 @@
 /* SLASHED — optional/components.css
    @layer slashed.components
-   Reserved component class surface for button, card, badge, tag, alert,
-   avatar, modal, skeleton, form layout helpers, and table.
+   Component class surface for button, card, badge, tag, alert, avatar,
+   modal, skeleton, form layout helpers, and table.
 
-   STAGED — all definitions are commented out until v0.8.
+   .sf-btn and .sf-card are LIVE since v0.7.0. The remaining components
+   (badge, tag, alert, avatar, modal, skeleton, form layout helpers,
+   table) are STAGED — commented out until a future minor.
    Imports optional component tokens (tokens are live where noted). */
 
 @import "./tokens.components.css";
