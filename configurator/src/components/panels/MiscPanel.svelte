@@ -210,6 +210,44 @@
             Select this text to preview the selection color.
           </p>
         </div>
+
+        <div class="h-px bg-black/6 dark:bg-white/6 my-1"></div>
+
+        <p class="text-[9px] text-slate-400 dark:text-slate-600">
+          <span class="font-mono text-slate-600 dark:text-slate-400">.sf-selection--alt</span> — alternate
+          treatment for surfaces that invert colors relative to the page (e.g. a dark card on a light page).
+        </p>
+        <div>
+          <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Alt selection background</div>
+          <ColorInput
+            token="--sf-color-selection-bg--alt"
+            value={overrides["--sf-color-selection-bg--alt"] ?? ""}
+            placeholder="default"
+            isOverridden={"--sf-color-selection-bg--alt" in overrides}
+            onSet={(v) => onSet("--sf-color-selection-bg--alt", v)}
+            onReset={() => onReset("--sf-color-selection-bg--alt")}
+          />
+        </div>
+        <div>
+          <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Alt selection text color</div>
+          <ColorInput
+            token="--sf-color-selection-text--alt"
+            value={overrides["--sf-color-selection-text--alt"] ?? ""}
+            placeholder="default"
+            isOverridden={"--sf-color-selection-text--alt" in overrides}
+            onSet={(v) => onSet("--sf-color-selection-text--alt", v)}
+            onReset={() => onReset("--sf-color-selection-text--alt")}
+          />
+        </div>
+        <!-- Alt selection preview -->
+        <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
+          <p
+            class="text-[11px] text-slate-800 dark:text-slate-200 select-all"
+            style={`--sf-color-selection-bg: ${overrides["--sf-color-selection-bg--alt"] ?? "#4338ca"}; --sf-color-selection-text: ${overrides["--sf-color-selection-text--alt"] ?? "#e0e7ff"}`}
+          >
+            Select this text to preview the alt selection color.
+          </p>
+        </div>
       </div>
     {/if}
   </section>

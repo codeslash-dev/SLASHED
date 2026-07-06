@@ -38,6 +38,7 @@
   let showFocusRing = $state(false);
   let showRadiusScale = $state(false);
   let showRadiusPreview = $state(false);
+  let showMediaRadius = $state(false);
   let showFineTune = $state(false);
   let showFieldShape = $state(false);
 
@@ -57,6 +58,7 @@
   let borderStyle  = $derived(overrides["--sf-border-style"] ?? "solid");
   let focusRingColor = $derived(overrides["--sf-focus-ring-color"] ?? "");
   let dividerColor = $derived(overrides["--sf-divider-color"] ?? "");
+  let mediaRadius  = $derived(parseNum(overrides["--sf-media-radius"]?.replace("rem",""), 0));
 
   function getStyleCurrent(tokenName: string, defaultVal: string): string {
     return overrides[tokenName] ?? defaultVal;
@@ -374,6 +376,42 @@
       </div>
     {/if}
   </div>
+
+  <div class="h-px bg-black/6 dark:bg-white/6"></div>
+
+  <!-- GLOBAL MEDIA RADIUS -->
+  <section class="space-y-3">
+    <button
+      onclick={() => { showMediaRadius = !showMediaRadius; }}
+      aria-expanded={showMediaRadius}
+      class="w-full flex items-center justify-between cursor-pointer"
+    >
+      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global media radius</div>
+      <span class="text-[10px] text-slate-500">{showMediaRadius ? "▲" : "▼"}</span>
+    </button>
+    {#if showMediaRadius}
+      <p class="text-[9px] text-slate-400 dark:text-slate-600">
+        --sf-media-radius — 0 by default (off). Rounds every &lt;img&gt;/&lt;figure&gt; globally via a
+        zero-specificity :where() rule; .sf-bg and component-level radii still win.
+      </p>
+      <SliderRow
+        label="Radius" value={mediaRadius} min={0} max={2} step={0.05} unit="rem"
+        help="--sf-media-radius"
+        overridden={"--sf-media-radius" in overrides}
+        onChange={(v) => onSet("--sf-media-radius", `${v}rem`)}
+        onReset={() => onReset("--sf-media-radius")}
+        rawDefault="var(--sf-radius-m)"
+        currentRaw={overrides["--sf-media-radius"]}
+        onRawSet={(v) => onSet("--sf-media-radius", v)}
+      />
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
+        <div
+          class="w-16 h-16 bg-indigo-500/40 border border-indigo-500/30"
+          style={`border-radius: ${mediaRadius}rem`}
+        ></div>
+      </div>
+    {/if}
+  </section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
