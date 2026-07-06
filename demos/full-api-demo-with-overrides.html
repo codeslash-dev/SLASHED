@@ -122,7 +122,7 @@
   </nav>
   <main id="main">
     <h1>SLASHED Full API Demo</h1>
-    <p style="color:var(--sf-color-text--muted)">v0.7.0 · optimal-components bundle from jsDelivr CDN · 316 classes · 720 tokens (229 configurable)</p>
+    <p style="color:var(--sf-color-text--muted)">v0.7.0 · optimal-components bundle from jsDelivr CDN · 320 classes · 720 tokens (229 configurable)</p>
     <div class="notice"><strong>ultimate-override.css is ACTIVE.</strong> Every value below is recomputed from perturbed knob tokens — toggle it off in the toolbar, or compare against <a href="full-api-demo.html">the un-overridden page</a>.</div>
 
     <section id="tokens">
@@ -169,7 +169,7 @@
     </section>
 
     <section id="layout">
-      <h2>Layout primitives <span class="count">138</span></h2>
+      <h2>Layout primitives <span class="count">143</span></h2>
       <div class="tiles">
       <figure class="tile" data-class="sf-alternate">
         <figcaption class="tile__cap"><code>.sf-alternate</code></figcaption>
@@ -554,6 +554,26 @@
       <figure class="tile" data-class="sf-grid-flex--xs">
         <figcaption class="tile__cap"><code>.sf-grid-flex--xs</code></figcaption>
         <div class="tile__stage"><div class="sf-grid-flex sf-grid-flex--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-header--l">
+        <figcaption class="tile__cap"><code>.sf-header--l</code></figcaption>
+        <div class="tile__stage"><div class="sf-header sf-header--l"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-header--m">
+        <figcaption class="tile__cap"><code>.sf-header--m</code></figcaption>
+        <div class="tile__stage"><div class="sf-header sf-header--m"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-header--s">
+        <figcaption class="tile__cap"><code>.sf-header--s</code></figcaption>
+        <div class="tile__stage"><div class="sf-header sf-header--s"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-header--xl">
+        <figcaption class="tile__cap"><code>.sf-header--xl</code></figcaption>
+        <div class="tile__stage"><div class="sf-header sf-header--xl"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
+      </figure>
+      <figure class="tile" data-class="sf-header--xs">
+        <figcaption class="tile__cap"><code>.sf-header--xs</code></figcaption>
+        <div class="tile__stage"><div class="sf-header sf-header--xs"><div class="dbox">1</div><div class="dbox">2</div><div class="dbox">3</div><div class="dbox">4</div></div></div>
       </figure>
       <figure class="tile" data-class="sf-icon">
         <figcaption class="tile__cap"><code>.sf-icon</code></figcaption>
@@ -959,7 +979,7 @@
       </div>
     </section>
     <section id="state">
-      <h2>State classes <span class="count">40</span></h2>
+      <h2>State classes <span class="count">29</span></h2>
       <div class="tiles">
       <figure class="tile" data-class="is-active">
         <figcaption class="tile__cap"><code>.is-active</code></figcaption>
@@ -968,14 +988,6 @@
       <figure class="tile" data-class="is-busy">
         <figcaption class="tile__cap"><code>.is-busy</code></figcaption>
         <div class="tile__stage"><div class="is-busy dpad" aria-busy="true">is-busy</div></div>
-      </figure>
-      <figure class="tile" data-class="is-clickable">
-        <figcaption class="tile__cap"><code>.is-clickable</code></figcaption>
-        <div class="tile__stage"><div class="is-clickable dpad">is-clickable</div></div>
-      </figure>
-      <figure class="tile" data-class="is-clipped">
-        <figcaption class="tile__cap"><code>.is-clipped</code></figcaption>
-        <div class="tile__stage"><div class="is-clipped dpad">is-clipped</div></div>
       </figure>
       <figure class="tile" data-class="is-collapsed">
         <figcaption class="tile__cap"><code>.is-collapsed</code></figcaption>
@@ -1017,18 +1029,6 @@
         <figcaption class="tile__cap"><code>.is-expanded</code></figcaption>
         <div class="tile__stage"><div class="is-expanded dpad" aria-expanded="true">is-expanded</div></div>
       </figure>
-      <figure class="tile" data-class="is-fixed">
-        <figcaption class="tile__cap"><code>.is-fixed</code></figcaption>
-        <div class="tile__stage"><div class="is-fixed dpad">is-fixed</div></div>
-      </figure>
-      <figure class="tile" data-class="is-focused">
-        <figcaption class="tile__cap"><code>.is-focused</code></figcaption>
-        <div class="tile__stage"><div class="is-focused dpad">is-focused</div></div>
-      </figure>
-      <figure class="tile" data-class="is-fullscreen">
-        <figcaption class="tile__cap"><code>.is-fullscreen</code></figcaption>
-        <div class="tile__stage"><div class="is-fullscreen dpad">is-fullscreen</div></div>
-      </figure>
       <figure class="tile" data-class="is-hidden">
         <figcaption class="tile__cap"><code>.is-hidden</code></figcaption>
         <div class="tile__stage"><div class="is-hidden dpad" hidden>is-hidden</div></div>
@@ -1065,10 +1065,6 @@
         <figcaption class="tile__cap"><code>.is-pending</code></figcaption>
         <div class="tile__stage"><div class="is-pending dpad" aria-busy="true">is-pending</div></div>
       </figure>
-      <figure class="tile" data-class="is-pinned">
-        <figcaption class="tile__cap"><code>.is-pinned</code></figcaption>
-        <div class="tile__stage"><div class="is-pinned dpad">is-pinned</div></div>
-      </figure>
       <figure class="tile" data-class="is-pressed">
         <figcaption class="tile__cap"><code>.is-pressed</code></figcaption>
         <div class="tile__stage"><div class="is-pressed dpad" aria-pressed="true">is-pressed</div></div>
@@ -1076,14 +1072,6 @@
       <figure class="tile" data-class="is-readonly">
         <figcaption class="tile__cap"><code>.is-readonly</code></figcaption>
         <div class="tile__stage"><div class="is-readonly dpad" aria-readonly="true">is-readonly</div></div>
-      </figure>
-      <figure class="tile" data-class="is-resizable">
-        <figcaption class="tile__cap"><code>.is-resizable</code></figcaption>
-        <div class="tile__stage"><div class="is-resizable dpad">is-resizable</div></div>
-      </figure>
-      <figure class="tile" data-class="is-scrollable">
-        <figcaption class="tile__cap"><code>.is-scrollable</code></figcaption>
-        <div class="tile__stage"><div class="is-scrollable dpad">is-scrollable</div></div>
       </figure>
       <figure class="tile" data-class="is-selected">
         <figcaption class="tile__cap"><code>.is-selected</code></figcaption>
@@ -1093,21 +1081,9 @@
         <figcaption class="tile__cap"><code>.is-skeleton</code></figcaption>
         <div class="tile__stage"><div class="is-skeleton dpad">is-skeleton</div></div>
       </figure>
-      <figure class="tile" data-class="is-sticky">
-        <figcaption class="tile__cap"><code>.is-sticky</code></figcaption>
-        <div class="tile__stage"><div class="is-sticky dpad">is-sticky</div></div>
-      </figure>
       <figure class="tile" data-class="is-success">
         <figcaption class="tile__cap"><code>.is-success</code></figcaption>
         <div class="tile__stage"><div class="is-success dpad">is-success</div></div>
-      </figure>
-      <figure class="tile" data-class="is-truncated">
-        <figcaption class="tile__cap"><code>.is-truncated</code></figcaption>
-        <div class="tile__stage"><div class="is-truncated dpad">is-truncated</div></div>
-      </figure>
-      <figure class="tile" data-class="is-unselectable">
-        <figcaption class="tile__cap"><code>.is-unselectable</code></figcaption>
-        <div class="tile__stage"><div class="is-unselectable dpad">is-unselectable</div></div>
       </figure>
       <figure class="tile" data-class="is-valid">
         <figcaption class="tile__cap"><code>.is-valid</code></figcaption>
