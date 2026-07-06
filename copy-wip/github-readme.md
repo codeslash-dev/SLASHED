@@ -4,7 +4,7 @@
 
 <p align="center">
   A cascade-layer CSS framework you never compile.<br>
-  685 design tokens, automatic dark mode, fluid type &amp; spacing — no build step, no Node, no JavaScript.
+  720 design tokens, automatic dark mode, fluid type &amp; spacing — no build step, no Node, no JavaScript.
 </p>
 
 <p align="center">
@@ -67,14 +67,14 @@ Every letter of SLASHED is a design commitment, and each one is checkable agains
 
 ## What's inside
 
-- **685 design tokens** (`--sf-*`) covering color, typography, spacing, layout, borders, shadows, motion, and z-index — catalogued in a machine-readable [API index](docs/api-index.json).
+- **720 design tokens** (`--sf-*`) covering color, typography, spacing, layout, borders, shadows, motion, and z-index — catalogued in a machine-readable [API index](docs/api-index.json).
 - **Layout primitives** — `.sf-container`, `.sf-stack`, `.sf-grid`, `.sf-cluster`, `.sf-sidebar`, `.sf-switcher`, `.sf-cover`, `.sf-center`, `.sf-frame`, `.sf-reel`, `.sf-bento`, and more ([docs/layout.md](docs/layout.md)).
 - **Macros** — recipes like `.sf-prose`, `.sf-flow`, `.sf-truncate`, `.sf-aspect`, `.sf-scroll-shadow`, `.sf-surface` ([docs/macros.md](docs/macros.md)).
 - **State classes** — `.is-*` classes mapped to ARIA semantics ([docs/states.md](docs/states.md)).
 - **A fluid engine** — the type, display, and space scales are generated at runtime from 12 input scalars (viewport range, modular ratios, base sizes). Change one ratio and the whole system recalculates — no build ([docs/theming.md](docs/theming.md#fluid-engine)).
 - **Classless form styling**, motion, accessibility, and print modules.
 
-SLASHED is BEM-first: the token API is the product, and you build components on top. It ships **no utility classes in 0.x**, and the component classes (`.sf-btn`, `.sf-card`, …) are staged in source — commented out until they land in v0.8. What you get today is the foundation, honestly labelled.
+SLASHED is BEM-first: the token API is the product, and you build components on top. It ships **no utility classes in 0.x**. The first two component classes — `.sf-btn` and `.sf-card` — are **live since v0.7.0** (shipped in the `-components` and `full` bundles); the remaining components (badge, tag, alert, avatar, modal, skeleton, table) are staged in source, commented out until they land in a later minor. What you get today is the foundation plus the first components, honestly labelled.
 
 ## Dark mode
 
@@ -105,9 +105,9 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 | Bundle | Contents |
 | --- | --- |
 | `slashed.optimal.css` | all of `core/` + classless forms — **recommended** |
-| `slashed.optimal-components.css` | optimal + the staged component layer *(inert until v0.8)* |
+| `slashed.optimal-components.css` | optimal + the component layer — `.sf-btn` / `.sf-card` live, remaining components staged |
 | `slashed.optimal-utilities.css` | optimal + the staged utility layer *(inert in 0.x)* |
-| `slashed.full.css` | optimal + both staged layers |
+| `slashed.full.css` | optimal + the component and utility layers |
 
 <details>
 <summary>À la carte loading (individual source files)</summary>

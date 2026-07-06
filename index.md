@@ -121,9 +121,9 @@ title: Home
 </style>
 
 <div class="hero">
-  <a class="hero-badge" href="https://github.com/codeslash-dev/SLASHED/releases">v0.6.19 — see what's new →</a>
+  <a class="hero-badge" href="https://github.com/codeslash-dev/SLASHED/releases">v0.7.0 — see what's new →</a>
   <h1>CSS that gets out<br>of <span>your way</span></h1>
-  <p>A cascade-layer framework with 840 design tokens, automatic dark mode, fluid type &amp; spacing — and zero JavaScript, zero build step.</p>
+  <p>A cascade-layer framework with 720 design tokens, automatic dark mode, fluid type &amp; spacing — and zero JavaScript, zero build step.</p>
   <div class="hero-actions">
     <a class="btn-primary" href="/configurator/">Open Configurator →</a>
     <a class="btn-secondary" href="/docs/demo.html">View Demo</a>
@@ -136,7 +136,7 @@ title: Home
   <div class="feature-card">
     <div class="icon">🎨</div>
     <h3>OKLCH Color Engine</h3>
-    <p>840+ tokens derived from a handful of source colors. Full palette, dark mode, and semantic roles — all automatic.</p>
+    <p>720+ tokens derived from a handful of source colors. Full palette, dark mode, and semantic roles — all automatic.</p>
   </div>
   <div class="feature-card">
     <div class="icon">📐</div>
@@ -210,7 +210,7 @@ title: Home
   <div class="doc-section">
     <h3>Reference</h3>
     <ul>
-      <li><a href="/docs/tokens">Tokens <span>all 840 design tokens</span></a></li>
+      <li><a href="/docs/tokens">Tokens <span>all 720 design tokens</span></a></li>
       <li><a href="/docs/token-index">Token Index <span>browseable index</span></a></li>
       <li><a href="/docs/classes">Classes <span>utility &amp; macro classes</span></a></li>
       <li><a href="/docs/layout">Layout <span>grid, flex, spacing</span></a></li>
