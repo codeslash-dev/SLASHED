@@ -5,8 +5,9 @@
 
    Most definitions below are STAGED (commented out) — SLASHED is BEM-first
    by design and ships only a curated subset of utility classes; uncomment
-   a block to activate it. The heading, text-size, and hover-transform
-   blocks are active. */
+   a block to activate it. The heading, text-size, hover-transform,
+   list-reset, marker-colour, alternate-selection, and sticky blocks
+   are active. */
 
 @layer slashed.utilities {
 
@@ -146,10 +147,25 @@
    * Drops marker + inline start-padding in one class, on any
    * <ul>/<ol> (or element with list-style applied).
    * ============================================================ */
-  /* .sf-list-none {
+  .sf-list-none {
     list-style: none;
     padding-inline-start: 0;
-  } */
+  }
+
+  /* ============================================================
+   * LIST MARKER COLOUR (.sf-marker--*)
+   * Colour the ::marker of an arbitrary list outside .sf-prose
+   * (which has its own --sf-prose-marker-color). Covers both the
+   * element's own marker and any descendant list-item markers, so
+   * it works whether the class sits on the <ul>/<ol> or an <li>.
+   * ============================================================ */
+  .sf-marker--primary ::marker, .sf-marker--primary::marker { color: var(--sf-color-primary); }
+  .sf-marker--action ::marker,  .sf-marker--action::marker  { color: var(--sf-color-action); }
+  .sf-marker--success ::marker, .sf-marker--success::marker { color: var(--sf-color-success); }
+  .sf-marker--warning ::marker, .sf-marker--warning::marker { color: var(--sf-color-warning); }
+  .sf-marker--danger ::marker,  .sf-marker--danger::marker  { color: var(--sf-color-danger); }
+  .sf-marker--info ::marker,    .sf-marker--info::marker    { color: var(--sf-color-info); }
+  .sf-marker--neutral ::marker, .sf-marker--neutral::marker { color: var(--sf-color-neutral); }
 
   /* ============================================================
    * ALTERNATE SELECTION COLOUR (.sf-selection--alt)
@@ -158,10 +174,10 @@
    * selection colours land with poor contrast (e.g. a dark card on a
    * light page). Backed by --sf-color-selection-*--alt (core/tokens.css).
    * ============================================================ */
-  /* .sf-selection--alt {
+  .sf-selection--alt {
     --sf-color-selection-bg:   var(--sf-color-selection-bg--alt);
     --sf-color-selection-text: var(--sf-color-selection-text--alt);
-  } */
+  }
 
   /* ============================================================
    * STICKY POSITIONING (.sf-sticky)
@@ -171,14 +187,14 @@
    * runtime toggle. Offset modifiers add extra gap on top of the
    * existing header-aware fluid offset.
    * ============================================================ */
-  /* .sf-sticky {
+  .sf-sticky {
     position: sticky;
     inset-block-start: var(--sf-sticky-offset, 0);
     z-index: var(--sf-z-sticky);
   }
   .sf-sticky--s { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-s)); }
   .sf-sticky--m { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-m)); }
-  .sf-sticky--l { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-l)); } */
+  .sf-sticky--l { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-l)); }
 
   /* ============================================================
    * OVERFLOW-DEBUG UTILITY (.sf-debug-overflow)

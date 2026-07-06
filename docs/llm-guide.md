@@ -662,6 +662,8 @@ Apply heading-level typography to a non-heading element with `.sf-h1` … `.sf-h
 
 Use `sf-section--guttered` when the section contains a single layout without needing per-column width control. Use `sf-container` (nested inside the section) when you need `--narrow`, `--wide`, or multiple width zones in one section.
 
+For headers, `.sf-header--xs … --xl` (`core/layout.css`) set **block** padding straight from the `--sf-space-*` scale — the lighter vertical rhythm headers usually want, versus `.sf-section`'s larger `--sf-section-pad-*` steps. Only block padding is set; any inline gutter (from `.sf-section--guttered`, a container, or the element itself) is left intact.
+
 ### 7.5 Icons and UI sizes
 
 ```css
@@ -981,6 +983,13 @@ Ready-made hover transforms: `.sf-hover-grow` / `-shrink` / `-float` / `-sink` /
 <div class="sf-card sf-hover-grow">Scales up slightly on hover</div>
 <img class="sf-hover-float" src="icon.svg" alt="">
 ```
+
+Small opt-in helpers (all `optional/utilities.css`):
+
+- `.sf-list-none` — drop list marker + inline-start padding in one class.
+- `.sf-marker--{family}` — colour `::marker` on an arbitrary list (outside `.sf-prose`), `family` = `primary` / `action` / `success` / `warning` / `danger` / `info` / `neutral`. Works on the `<ul>`/`<ol>` or an `<li>`.
+- `.sf-selection--alt` — swap `::selection` colours to `--sf-color-selection-*--alt` on an element and its descendants, for surfaces where the default selection lands with poor contrast.
+- `.sf-sticky` — `position: sticky` at `--sf-sticky-offset` (the header-aware fluid offset) with `--sf-z-sticky`; `--s` / `--m` / `--l` add an extra `--sf-space-*` gap on top. The JS-toggled `.is-sticky` state class is unchanged.
 
 ### 9.4 Animation presets
 

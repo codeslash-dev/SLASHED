@@ -23,6 +23,17 @@
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
+  /* Header — block padding on the standard spacing scale. Headers usually
+     want lighter vertical rhythm than .sf-section, so these map to
+     --sf-space-* directly. Only block padding is set; any inline gutter
+     (from .sf-section--guttered, a container, or the element itself) is
+     left intact. */
+  .sf-header--xs { padding-block: var(--sf-space-xs); }
+  .sf-header--s  { padding-block: var(--sf-space-s); }
+  .sf-header--m  { padding-block: var(--sf-space-m); }
+  .sf-header--l  { padding-block: var(--sf-space-l); }
+  .sf-header--xl { padding-block: var(--sf-space-xl); }
+
   /* Collapse modifier */
   .sf-section--collapse:has(+ .sf-section--collapse) {
     padding-block-end: calc(var(--sf-section-pad) / 2);

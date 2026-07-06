@@ -2065,6 +2065,56 @@
       "layer": "slashed.utilities"
     },
     {
+      "name": "sf-header--l",
+      "selector": ".sf-header--l",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-header--m",
+      "selector": ".sf-header--m",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-header--s",
+      "selector": ".sf-header--s",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-header--xl",
+      "selector": ".sf-header--xl",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-header--xs",
+      "selector": ".sf-header--xs",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
       "name": "sf-hover-float",
       "selector": ".sf-hover-float",
       "kind": "utility",
@@ -2293,6 +2343,86 @@
       "description": "Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain.",
       "optional": false,
       "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-list-none",
+      "selector": ".sf-list-none",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST RESET (.sf-list-none)",
+      "description": "Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied).",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--action",
+      "selector": ".sf-marker--action",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--danger",
+      "selector": ".sf-marker--danger",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--info",
+      "selector": ".sf-marker--info",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--neutral",
+      "selector": ".sf-marker--neutral",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--primary",
+      "selector": ".sf-marker--primary",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--success",
+      "selector": ".sf-marker--success",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-marker--warning",
+      "selector": ".sf-marker--warning",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "optional": true,
+      "layer": "slashed.utilities"
     },
     {
       "name": "sf-no-tap-highlight",
@@ -2655,6 +2785,16 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-selection--alt",
+      "selector": ".sf-selection--alt",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "ALTERNATE SELECTION COLOUR (.sf-selection--alt)",
+      "description": "Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css).",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
       "name": "sf-sidebar",
       "selector": ".sf-sidebar",
       "kind": "layout",
@@ -2833,6 +2973,46 @@
       "description": "Stack variant with xs gap between children.",
       "optional": false,
       "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-sticky",
+      "selector": ".sf-sticky",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-sticky--l",
+      "selector": ".sf-sticky--l",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-sticky--m",
+      "selector": ".sf-sticky--m",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "optional": true,
+      "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-sticky--s",
+      "selector": ".sf-sticky--s",
+      "kind": "utility",
+      "category": "Utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "optional": true,
+      "layer": "slashed.utilities"
     },
     {
       "name": "sf-subgrid",

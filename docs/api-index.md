@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1037 elements** — 720 tokens, 317 classes.
+**1055 elements** — 720 tokens, 335 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 981 | Everyday surface. SemVer-stable. |
+| PUBLIC | 999 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -760,7 +760,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (317)
+## Classes (335)
 
 ### Accessibility (8)
 
@@ -806,7 +806,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-card--elevated` | PUBLIC | component | .sf-card | Floating card: hides the border, applies a larger shadow. |
 | `.sf-card--interactive` | PUBLIC | component | .sf-card | Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion. |
 
-### Layout primitives (138)
+### Layout primitives (143)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -906,6 +906,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-grid-flex--s` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a small (s) minimum item width. |
 | `.sf-grid-flex--xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xl minimum item width. |
 | `.sf-grid-flex--xs` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xs minimum item width. |
+| `.sf-header--l` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
+| `.sf-header--m` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
+| `.sf-header--s` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
+| `.sf-header--xl` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
+| `.sf-header--xs` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
 | `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
 | `.sf-icon--2xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
 | `.sf-icon--boxed` | PUBLIC | layout | Icon | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
@@ -1103,7 +1108,7 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
-### Utilities (21)
+### Utilities (34)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1119,6 +1124,19 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-hover-sink` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element down slightly on hover. |
 | `.sf-hover-slide-end` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-end on hover. |
 | `.sf-hover-slide-start` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-start on hover. |
+| `.sf-list-none` | PUBLIC | utility | LIST RESET (.sf-list-none) | Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied). |
+| `.sf-marker--action` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--danger` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--info` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--neutral` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--primary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--success` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--warning` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-selection--alt` | PUBLIC | utility | ALTERNATE SELECTION COLOUR (.sf-selection--alt) | Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css). |
+| `.sf-sticky` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
+| `.sf-sticky--l` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
+| `.sf-sticky--m` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
+| `.sf-sticky--s` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
 | `.sf-text-2xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-2xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-3xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |

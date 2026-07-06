@@ -28,14 +28,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1037,
+      "total": 1055,
       "by_type": {
-        "class": 317,
+        "class": 335,
         "token": 720
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 981,
+        "PUBLIC": 999,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -43,8 +43,8 @@
         "knob": 229
       },
       "tokens": 720,
-      "classes": 317,
-      "sf_classes": 268,
+      "classes": 335,
+      "sf_classes": 286,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
@@ -52,7 +52,7 @@
         "Component tokens": 25,
         "Components": 26,
         "Core tokens": 616,
-        "Layout primitives": 138,
+        "Layout primitives": 143,
         "Layout tokens": 53,
         "Macro classes": 57,
         "Macro tokens": 26,
@@ -61,7 +61,7 @@
         "State classes": 40,
         "Theme example": 1,
         "Theme utilities": 1,
-        "Utilities": 21
+        "Utilities": 34
       }
     },
     "schema": {
@@ -25292,6 +25292,131 @@
       ]
     },
     {
+      "name": "sf-header--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--l",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--m",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--s",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--xs",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-hover-float",
       "type": "class",
       "tier": "PUBLIC",
@@ -25852,6 +25977,190 @@
         "full",
         "optimal",
         "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-list-none",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-list-none",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST RESET (.sf-list-none)",
+      "description": "Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--action",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--action",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--danger",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--danger",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--info",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--info",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--neutral",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--neutral",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--primary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--primary",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--success",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--success",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--warning",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--warning",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
         "optimal-utilities"
       ]
     },
@@ -26756,6 +27065,29 @@
       ]
     },
     {
+      "name": "sf-selection--alt",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-selection--alt",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "ALTERNATE SELECTION COLOUR (.sf-selection--alt)",
+      "description": "Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css).",
+      "isVariant": true,
+      "baseClass": "sf-selection",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-sidebar",
       "type": "class",
       "tier": "PUBLIC",
@@ -27202,6 +27534,98 @@
         "full",
         "optimal",
         "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky--l",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "isVariant": true,
+      "baseClass": "sf-sticky",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky--m",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "isVariant": true,
+      "baseClass": "sf-sticky",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky--s",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "isVariant": true,
+      "baseClass": "sf-sticky",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
         "optimal-utilities"
       ]
     },

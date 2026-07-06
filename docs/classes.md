@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**268 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**286 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-138 classes.
+143 classes.
 
 | Class |
 |---|
@@ -108,6 +108,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-grid-flex--s` |
 | `.sf-grid-flex--xl` |
 | `.sf-grid-flex--xs` |
+| `.sf-header--l` |
+| `.sf-header--m` |
+| `.sf-header--s` |
+| `.sf-header--xl` |
+| `.sf-header--xs` |
 | `.sf-icon` |
 | `.sf-icon--2xl` |
 | `.sf-icon--boxed` |
@@ -356,7 +361,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Utilities (`optional/utilities.css`)
 
-21 classes.
+34 classes.
 
 | Class |
 |---|
@@ -372,6 +377,19 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-hover-sink` |
 | `.sf-hover-slide-end` |
 | `.sf-hover-slide-start` |
+| `.sf-list-none` |
+| `.sf-marker--action` |
+| `.sf-marker--danger` |
+| `.sf-marker--info` |
+| `.sf-marker--neutral` |
+| `.sf-marker--primary` |
+| `.sf-marker--success` |
+| `.sf-marker--warning` |
+| `.sf-selection--alt` |
+| `.sf-sticky` |
+| `.sf-sticky--l` |
+| `.sf-sticky--m` |
+| `.sf-sticky--s` |
 | `.sf-text-2xl` |
 | `.sf-text-2xs` |
 | `.sf-text-3xl` |
