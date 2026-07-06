@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**234 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**260 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -310,6 +310,41 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | Class |
 |---|
 | `.sf-theme-transition` |
+
+## Components (`optional/components.css`)
+
+28 classes.
+
+| Class |
+|---|
+| `.is-disabled` |
+| `.is-loading` |
+| `.sf-btn` |
+| `.sf-btn--block` |
+| `.sf-btn--block-cq` |
+| `.sf-btn--danger` |
+| `.sf-btn--ghost` |
+| `.sf-btn--info` |
+| `.sf-btn--l` |
+| `.sf-btn--neutral` |
+| `.sf-btn--outline` |
+| `.sf-btn--primary` |
+| `.sf-btn--s` |
+| `.sf-btn--secondary` |
+| `.sf-btn--success` |
+| `.sf-btn--warning` |
+| `.sf-btn--xl` |
+| `.sf-btn--xs` |
+| `.sf-card` |
+| `.sf-card--bordered` |
+| `.sf-card--elevated` |
+| `.sf-card--interactive` |
+| `.sf-card__avatar` |
+| `.sf-card__body` |
+| `.sf-card__footer` |
+| `.sf-card__header` |
+| `.sf-card__media` |
+| `.sf-card__title` |
 
 ## Utilities (`optional/utilities.css`)
 

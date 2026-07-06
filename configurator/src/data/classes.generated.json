@@ -605,6 +605,266 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-btn",
+      "selector": ".sf-btn",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Combine a colour family, a style treatment, and a size modifier.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--block",
+      "selector": ".sf-btn--block",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Full-width button (100% inline size) everywhere.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--block-cq",
+      "selector": ".sf-btn--block-cq",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Full-width button only inside a query container narrower than 20rem; intrinsic otherwise.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--danger",
+      "selector": ".sf-btn--danger",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Button in the danger (destructive) colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--ghost",
+      "selector": ".sf-btn--ghost",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Borderless, transparent button; tints on hover. The lightest button treatment.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--info",
+      "selector": ".sf-btn--info",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Button in the info colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--l",
+      "selector": ".sf-btn--l",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Large button size.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--neutral",
+      "selector": ".sf-btn--neutral",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Button in the neutral colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--outline",
+      "selector": ".sf-btn--outline",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Outlined button (coloured border/text, transparent fill) that fills with the family colour on hover. Composes with any colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--primary",
+      "selector": ".sf-btn--primary",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Button in the primary brand colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--s",
+      "selector": ".sf-btn--s",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Small button size.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--secondary",
+      "selector": ".sf-btn--secondary",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Transparent-fill button with a coloured border and text; subtle tint on hover.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--success",
+      "selector": ".sf-btn--success",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Button in the success (positive) colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--warning",
+      "selector": ".sf-btn--warning",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Button in the warning (caution) colour family.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--xl",
+      "selector": ".sf-btn--xl",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Extra-large button size.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-btn--xs",
+      "selector": ".sf-btn--xs",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-btn",
+      "description": "Extra-small button size.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card",
+      "selector": ".sf-card",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Padded content container with optional __header/__body/__footer and __media/__avatar/__title subcomponents. Uses concentric radius math so inner corners stay proportional.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card__avatar",
+      "selector": ".sf-card__avatar",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Circular avatar image inside a card.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card__body",
+      "selector": ".sf-card__body",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Card body slot.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card__footer",
+      "selector": ".sf-card__footer",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Card footer slot with a top divider.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card__header",
+      "selector": ".sf-card__header",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Card header slot with a bottom divider.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card__media",
+      "selector": ".sf-card__media",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Full-width cover image/video for a card, cropped to --sf-card-media-ratio (16/9 by default).",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card__title",
+      "selector": ".sf-card__title",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Card title heading, sized via --sf-card-heading-size.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card--bordered",
+      "selector": ".sf-card--bordered",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Flat, outlined card: keeps the border, drops the shadow.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card--elevated",
+      "selector": ".sf-card--elevated",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Floating card: hides the border, applies a larger shadow.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
+      "name": "sf-card--interactive",
+      "selector": ".sf-card--interactive",
+      "kind": "component",
+      "category": "Components",
+      "group": ".sf-card",
+      "description": "Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion.",
+      "optional": true,
+      "layer": "slashed.components"
+    },
+    {
       "name": "sf-center",
       "selector": ".sf-center",
       "kind": "layout",

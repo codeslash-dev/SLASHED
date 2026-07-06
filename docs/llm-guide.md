@@ -1063,11 +1063,39 @@ Component tokens from `optional/tokens.components.css`:
 --sf-field-padding-block:   var(--sf-space-xs)
 --sf-field-padding-inline:  var(--sf-space-s)
 
-/* Buttons */
+/* Buttons — .sf-btn (live since 0.7.0) */
 --sf-btn-radius:         var(--sf-radius-m)
 --sf-btn-padding-block:  var(--sf-space-xs)
 --sf-btn-padding-inline: var(--sf-space-m)
+--sf-btn-gap:            var(--sf-space-2xs)
+--sf-btn-font-size:      var(--sf-text-m)
+--sf-btn-font-weight:    var(--sf-font-weight-interactive)
+--sf-btn-min-height:     var(--sf-touch-target)
+--sf-btn-border-width:   var(--sf-border-width-1)
+
+/* Cards — .sf-card (live since 0.7.0) */
+--sf-card-padding:          var(--sf-space-l)
+--sf-card-gap:              var(--sf-space-m)
+--sf-card-radius:           var(--sf-radius-m)
+--sf-card-radius-outer:     calc(var(--sf-card-radius) + var(--sf-card-padding))  /* concentric */
+--sf-card-bg:               var(--sf-color-surface)
+--sf-card-border-width:     var(--sf-border-width-1)
+--sf-card-border-color:     var(--sf-color-border)
+--sf-card-shadow:           var(--sf-shadow-s)
+--sf-card-shadow--elevated: var(--sf-shadow-l)
+--sf-card-shadow--hover:    var(--sf-shadow-l)
+--sf-card-media-ratio:      var(--sf-ratio-video)
+--sf-card-media-radius:     var(--sf-card-radius, var(--sf-radius-m))
+--sf-card-heading-size:     var(--sf-text-xl)
+--sf-card-btn-font-size:    var(--sf-text-s)
 ```
+
+`.sf-btn` families: `--primary --neutral --success --warning --info --danger`;
+treatments `--secondary --ghost --outline`; sizes `--xs --s --l --xl` (m default);
+width `--block --block-cq`; states `:disabled`/`.is-disabled`/`.is-loading`.
+`.sf-card` slots: `__header __body __footer __media __avatar __title`; modifiers
+`--bordered --elevated --interactive`. Both ship in the `*-components` and `full`
+bundles only.
 
 ---
 

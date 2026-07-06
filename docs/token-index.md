@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**692 tokens** (deduplicated by name across the 4 token source files).
+**711 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 636 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 655 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 225 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 467 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 486 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -146,9 +146,28 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-box-border-width` | PUBLIC | knob | Layout | `0` |
 | `--sf-box-padding` | PUBLIC | consumption | Layout | `var(--sf-space-m)` |
 | `--sf-breakout-width` | PUBLIC | consumption | Layout | `var(--sf-container-wide)` |
+| `--sf-btn-border-width` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-border-width-1)` |
+| `--sf-btn-font-size` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-text-m)` |
+| `--sf-btn-font-weight` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-font-weight-interactive)` |
+| `--sf-btn-gap` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-2xs)` |
+| `--sf-btn-min-height` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-touch-target)` |
 | `--sf-btn-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
 | `--sf-btn-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
 | `--sf-btn-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
+| `--sf-card-bg` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-surface)` |
+| `--sf-card-border-color` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-border)` |
+| `--sf-card-border-width` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-border-width-1)` |
+| `--sf-card-btn-font-size` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-text-s)` |
+| `--sf-card-gap` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
+| `--sf-card-heading-size` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-text-xl)` |
+| `--sf-card-media-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-card-radius, var(--sf-radius-m))` |
+| `--sf-card-media-ratio` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-ratio-video)` |
+| `--sf-card-padding` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-l)` |
+| `--sf-card-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
+| `--sf-card-radius-outer` | PUBLIC | consumption | Components (optional, incomplete) | `calc(var(--sf-card-radius) + var(--sf-card-padding))` |
+| `--sf-card-shadow` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-shadow-s)` |
+| `--sf-card-shadow--elevated` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-shadow-l)` |
+| `--sf-card-shadow--hover` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-shadow-l)` |
 | `--sf-caret-color` | PUBLIC | consumption | Core | `var(--sf-color-action)` |
 | `--sf-center-gutter` | PUBLIC | consumption | Layout | `var(--sf-gutter)` |
 | `--sf-center-max` | PUBLIC | consumption | Layout | `var(--sf-container-default)` |

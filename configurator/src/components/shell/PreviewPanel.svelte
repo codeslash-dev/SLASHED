@@ -114,9 +114,11 @@
     .pv-emoji{font-size:2rem;line-height:1;}
     .pv-brand{font-weight:700;font-size:var(--sf-text-l);color:var(--sf-color-primary-600);}
     .pv-measure{max-inline-size:34rem;}
-    /* BEM components — .sf-btn / .sf-card / .sf-tag / .sf-field are staged off in
-       core until v0.8, so the preview ships its own token-driven equivalents.
-       These mirror the framework's reserved definitions one-to-one. */
+    /* BEM components — .sf-btn / .sf-card shipped in v0.7.0; .sf-tag / .sf-field
+       are still staged. The preview keeps its own token-driven pv-* equivalents
+       so it stays isolated from whichever framework bundle is loaded (and can
+       show demo-only variants such as pv-card--soft). These track the
+       framework's reserved definitions. */
     .pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sf-space-2xs);padding-block:var(--sf-space-xs);padding-inline:var(--sf-space-m);min-block-size:var(--sf-touch-target);font-family:inherit;font-size:var(--sf-text-m);font-weight:var(--sf-font-weight-interactive);line-height:var(--sf-leading-tight);white-space:nowrap;text-decoration:none;border:var(--sf-border-width-1) solid var(--sf-color-action);border-radius:var(--sf-radius-m);cursor:pointer;background:var(--sf-color-action);color:var(--sf-color-text--on-action);transition:var(--sf-transition-form-field);}
     .pv-btn--primary{background:var(--sf-color-primary);color:var(--sf-color-text--on-primary);border-color:var(--sf-color-primary);}
     .pv-btn--secondary{background:transparent;color:var(--sf-color-action);border-color:var(--sf-color-action);}

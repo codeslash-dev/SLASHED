@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current version: **0.6.35**
+Current version: **0.7.0**
 
 ## Before v1.0
 
@@ -9,18 +9,17 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 
 ## Post-1.0
 
-- **Components layer** — the `slashed.components` layer and its stubs are already
-  declared; the eight `.sf-*` components land incrementally after v1.0, additive
-  only. Tracked in [#384](https://github.com/codeslash-dev/SLASHED/issues/384)
-  (consolidated tranche), with `.sf-btn` and `.sf-card` broken out individually
-  in [#493](https://github.com/codeslash-dev/SLASHED/issues/493) /
-  [#494](https://github.com/codeslash-dev/SLASHED/issues/494) — both fully
-  written but commented out in `optional/components.css`, staged until
-  activated. An outline `.sf-btn` variant is queued as a follow-on in
-  [#486](https://github.com/codeslash-dev/SLASHED/issues/486) once the base
-  variant set ships. **Note:** #384 and #493/#494 currently overlap in scope
-  (same button/card work tracked twice) — worth consolidating before
-  implementation starts.
+- **Components layer** — the `slashed.components` layer is declared and its first
+  tranche is now live: **`.sf-btn` and `.sf-card` shipped in v0.7.0**
+  ([#493](https://github.com/codeslash-dev/SLASHED/issues/493) /
+  [#494](https://github.com/codeslash-dev/SLASHED/issues/494)), including the
+  outline `.sf-btn--outline` variant
+  ([#486](https://github.com/codeslash-dev/SLASHED/issues/486)), a button size
+  scale, and `.sf-card` modifiers. The remaining `.sf-*` components
+  (badge, tag, alert, avatar, modal, skeleton) stay staged in
+  `optional/components.css` and land incrementally in later minors. Tracked in
+  [#384](https://github.com/codeslash-dev/SLASHED/issues/384) (consolidated
+  tranche).
 - ~~**`@property` for spacing/shadow tokens**~~ ✓ **Done** — spacing (`--sf-radius-*`,
   `--sf-space-*`, semantic spacing) and shadow (`--sf-shadow-*`, `--sf-text-shadow-*`,
   `--sf-drop-shadow-*`) tokens are already registered via `@property` in
@@ -54,13 +53,11 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
 - **Z-index utilities** — expose the named z-index scale as `.sf-z-*` classes
   (for example `.sf-z-modal` and `.sf-z-tooltip`) in `optional/utilities.css`.
-- **First component tranche** — implement `.sf-btn`, `.sf-card`, `.sf-badge`,
-  and `.sf-tag` first, using `optional/tokens.components.css` and existing
-  `.is-*` states where appropriate. Tracked in
-  [#384](https://github.com/codeslash-dev/SLASHED/issues/384); `.sf-btn`/`.sf-card`
-  specifically in [#493](https://github.com/codeslash-dev/SLASHED/issues/493) /
-  [#494](https://github.com/codeslash-dev/SLASHED/issues/494) (see Post-1.0 note
-  on overlapping tracking above).
+- **First component tranche** — `.sf-btn` and `.sf-card` shipped in v0.7.0
+  (see Post-1.0 note); `.sf-badge` and `.sf-tag` are next, using
+  `optional/tokens.components.css` and existing `.is-*` states where
+  appropriate. Tracked in
+  [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
 - **Standalone table pattern** — add `.sf-table`, `.sf-table-scroll`, and compact
   variants such as striped, bordered, and compact tables without changing global
   `table` styles or `.sf-prose table` behaviour.
@@ -71,9 +68,11 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   `.sf-alert`, `.sf-avatar`, and `.sf-modal` with token-driven variants and
   native `<dialog>` compatibility where applicable. Items 5–7 of
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
-- **Outline button variant** — a border-only `.sf-btn--outline` style, plus a
-  possible gradient-border follow-up, once the base `.sf-btn` variant set ships.
-  Tracked in [#486](https://github.com/codeslash-dev/SLASHED/issues/486).
+- ~~**Outline button variant**~~ ✓ **Done (0.7.0)** — the border-only
+  `.sf-btn--outline` style shipped with the first component tranche; a
+  gradient-border version is documented as a copy-paste recipe in
+  `docs/components.md`. Tracked in
+  [#486](https://github.com/codeslash-dev/SLASHED/issues/486).
 - **Decorative animation utility classes** — the keyframes for `sf-spin`,
   `sf-shimmer`, `sf-ping`, `sf-blink`, and `sf-float` are already defined in
   `core/motion.css`; they need corresponding `.sf-spin`, `.sf-shimmer`, etc.

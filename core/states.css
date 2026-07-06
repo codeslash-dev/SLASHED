@@ -5,7 +5,7 @@
 
 @layer slashed.states {
 
-  /* VISIBILITY */
+  /* -- VISIBILITY -- */
 
   .is-hidden {
     display: none !important;
@@ -19,7 +19,7 @@
     visibility: visible;
   }
 
-  /* INTERACTIVITY */
+  /* -- INTERACTIVITY -- */
 
   /* cursor: not-allowed inherits to children with pointer-events: auto —
      intentional, part of the .is-disabled API surface. */
@@ -36,7 +36,7 @@
     user-select:    none;
   }
 
-  /* LOADING / ASYNC FEEDBACK */
+  /* -- LOADING / ASYNC FEEDBACK -- */
 
   .is-loading {
     color:          transparent !important;
@@ -94,7 +94,7 @@
     user-select:     none;
   }
 
-  /* ACTIVE / SELECTED / CURRENT */
+  /* -- ACTIVE / SELECTED / CURRENT -- */
 
   .is-active {
 
@@ -121,7 +121,7 @@
     background-color: var(--sf-color-bg--selected);
   }
 
-  /* OPEN / CLOSED */
+  /* -- OPEN / CLOSED -- */
 
   .is-open {
     --sf-is-open: 1;
@@ -135,7 +135,7 @@
     --sf-is-open: 1;
   }
 
-  /* VALIDATION / FEEDBACK */
+  /* -- VALIDATION / FEEDBACK -- */
 
   .is-valid,
   .is-success {
@@ -164,7 +164,7 @@
     --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
-  /* POSITION / STICKINESS */
+  /* -- POSITION / STICKINESS -- */
 
   .is-sticky {
     position:         sticky;
@@ -197,7 +197,7 @@
     min-block-size:  var(--sf-space-xl, 3.55rem);
   }
 
-  /* OVERFLOW / CLIPPING */
+  /* -- OVERFLOW / CLIPPING -- */
 
   .is-clipped {
     overflow: hidden !important;
@@ -214,7 +214,7 @@
     white-space:   nowrap;
   }
 
-  /* DRAG & DROP */
+  /* -- DRAG & DROP -- */
 
   .is-dragging {
     opacity: var(--sf-opacity-muted);
@@ -230,14 +230,14 @@
     cursor: grab;
   }
 
-  /* OVERLAY / BACKDROP */
+  /* -- OVERLAY / BACKDROP -- */
 
   .is-overlay {
     position: absolute;
     inset:    0;
   }
 
-  /* FOCUS / INTERACTION MODIFIERS */
+  /* -- FOCUS / INTERACTION MODIFIERS -- */
 
   .is-clickable {
     cursor:  pointer;
@@ -253,7 +253,7 @@
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  /* EMPTY STATE */
+  /* -- EMPTY STATE -- */
 
   .is-empty:empty {
     display: none;

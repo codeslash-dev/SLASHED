@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 692,
+      "tokens": 711,
       "by_tier": {
-        "PUBLIC": 636,
+        "PUBLIC": 655,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 225,
-        "consumption": 467
+        "consumption": 486
       }
     }
   },
@@ -461,6 +461,46 @@
       ],
       "value": "var(--sf-container-wide)"
     },
+    "--sf-btn-border-width": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-border-width-1)"
+    },
+    "--sf-btn-font-size": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-text-m)"
+    },
+    "--sf-btn-font-weight": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-font-weight-interactive)"
+    },
+    "--sf-btn-gap": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-space-2xs)"
+    },
+    "--sf-btn-min-height": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-touch-target)"
+    },
     "--sf-btn-padding-block": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -484,6 +524,118 @@
         "optional/tokens.components.css"
       ],
       "value": "var(--sf-radius-m)"
+    },
+    "--sf-card-bg": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-color-surface)"
+    },
+    "--sf-card-border-color": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-color-border)"
+    },
+    "--sf-card-border-width": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-border-width-1)"
+    },
+    "--sf-card-btn-font-size": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-text-s)"
+    },
+    "--sf-card-gap": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-space-m)"
+    },
+    "--sf-card-heading-size": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-text-xl)"
+    },
+    "--sf-card-media-radius": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-card-radius, var(--sf-radius-m))"
+    },
+    "--sf-card-media-ratio": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-ratio-video)"
+    },
+    "--sf-card-padding": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-space-l)"
+    },
+    "--sf-card-radius": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-radius-m)"
+    },
+    "--sf-card-radius-outer": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "calc(var(--sf-card-radius) + var(--sf-card-padding))"
+    },
+    "--sf-card-shadow": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-shadow-s)"
+    },
+    "--sf-card-shadow--elevated": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-shadow-l)"
+    },
+    "--sf-card-shadow--hover": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "var(--sf-shadow-l)"
     },
     "--sf-caret-color": {
       "tier": "PUBLIC",
