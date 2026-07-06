@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 715,
-    "rendered": 715,
+    "totalTokens": 720,
+    "rendered": 720,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 28,
@@ -9,7 +9,7 @@
     "literalDefaultMismatch": 2,
     "aliasMismatch": 0,
     "notRendered": 0,
-    "changedInDarkMode": 267
+    "changedInDarkMode": 271
   },
   "consoleErrors": [],
   "requestFailures": [],
@@ -4810,6 +4810,32 @@
       "changedInDark": true
     },
     {
+      "name": "--sf-drop-shadow-xl",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "drop-shadow(0 16px 32px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7)))",
+      "shown": "drop-shadow(0 16px 32px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7)))",
+      "darkComputed": "drop-shadow(0 16px 32px  oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 3),   0.7)))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-drop-shadow-xs",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "drop-shadow(0 0.5px 1px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7)))",
+      "shown": "drop-shadow(0 0.5px 1px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7)))",
+      "darkComputed": "drop-shadow(0 0.5px 1px  oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1),   0.7)))",
+      "changedInDark": true
+    },
+    {
       "name": "--sf-duration-fast",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -6503,6 +6529,19 @@
       "computed": "3",
       "shown": "3",
       "darkComputed": "3",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-link-external-label",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Core tokens",
+      "declared": "\"opens in a new window or external site\"",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "\"opens in a new window or external site\"",
+      "shown": "\"opens in a new window or external site\"",
+      "darkComputed": "\"opens in a new window or external site\"",
       "changedInDark": false
     },
     {
@@ -8886,6 +8925,32 @@
       "computed": "0 1px 2px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7))",
       "shown": "0 1px 2px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1.5), 0.7))",
       "darkComputed": "0 1px 2px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1.5), 0.7))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-text-shadow-xl",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0 8px 16px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7))",
+      "shown": "0 8px 16px  oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 3),   0.7))",
+      "darkComputed": "0 8px 16px  oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 3),   0.7))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-text-shadow-xs",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0 0.5px 1px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7))",
+      "shown": "0 0.5px 1px oklch(from oklch(from oklch(0.52 0.025 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 0 * 0.17) * 1),   0.7))",
+      "darkComputed": "0 0.5px 1px oklch(from oklch(from oklch(0.69 0.0225 260) 0.15 c h) l c h / clamp(0, calc(calc(0.08 + 1 * 0.17) * 1),   0.7))",
       "changedInDark": true
     },
     {

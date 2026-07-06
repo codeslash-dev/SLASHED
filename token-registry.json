@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 745
+    "nextId": 750
   },
   "tokens": [
     {
@@ -3013,6 +3013,26 @@
     {
       "id": 744,
       "name": "--sf-scroll-timeline-range-exit-start"
+    },
+    {
+      "id": 745,
+      "name": "--sf-drop-shadow-xl"
+    },
+    {
+      "id": 746,
+      "name": "--sf-drop-shadow-xs"
+    },
+    {
+      "id": 747,
+      "name": "--sf-link-external-label"
+    },
+    {
+      "id": 748,
+      "name": "--sf-text-shadow-xl"
+    },
+    {
+      "id": 749,
+      "name": "--sf-text-shadow-xs"
     }
   ]
 }

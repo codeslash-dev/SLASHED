@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "fdc82baa9481",
+    "tokensHash": "9540473e4753",
     "bundles": [
       "full",
       "optimal",
@@ -10,15 +10,15 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 715,
+      "tokens": 720,
       "byTier": {
-        "PUBLIC": 659,
+        "PUBLIC": 664,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
-        "Core tokens": 611,
+        "Core tokens": 616,
         "Macro tokens": 26,
         "Component tokens": 25
       }
@@ -8377,6 +8377,52 @@
       ]
     },
     {
+      "name": "--sf-drop-shadow-xl",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "drop",
+      "category": "Core tokens",
+      "group": "Output token @property registrations",
+      "description": "Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements.",
+      "note": "Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements.",
+      "value": "drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "*",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-drop-shadow-xs",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "drop",
+      "category": "Core tokens",
+      "group": "Output token @property registrations",
+      "description": "Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images.",
+      "note": "Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images.",
+      "value": "drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "*",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-duration-fast",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -11347,6 +11393,29 @@
       "description": "Number of lines before text truncates with an ellipsis.",
       "note": "Number of visible lines before text is clipped with an ellipsis.",
       "value": "3",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-link-external-label",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "link",
+      "category": "Core tokens",
+      "group": "Semantic gap tokens",
+      "description": "Accessible name for the .sf-link-external marker glyph, read by screen readers via the CSS content alt-text syntax. Localise or clear alongside --sf-link-external-marker.",
+      "note": "Accessible name for the .sf-link-external marker glyph, read by screen readers via the CSS content alt-text syntax. Localise or clear alongside --sf-link-external-marker.",
+      "value": "\"opens in a new window or external site\"",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -15556,6 +15625,52 @@
       "description": "Small text-shadow for subtle depth on display headings.",
       "note": "Small text-shadow for subtle depth on display headings.",
       "value": "0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "*",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-text-shadow-xl",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "text",
+      "category": "Core tokens",
+      "group": "Output token @property registrations",
+      "description": "Extra-large text-shadow for maximum legibility over busy or high-contrast image backgrounds.",
+      "note": "Extra-large text-shadow for maximum legibility over busy or high-contrast image backgrounds.",
+      "value": "0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "*",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-text-shadow-xs",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "text",
+      "category": "Core tokens",
+      "group": "Output token @property registrations",
+      "description": "Extra-small text-shadow for the subtlest depth on body text.",
+      "note": "Extra-small text-shadow for the subtlest depth on body text.",
+      "value": "0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))",
       "aliasOf": null,
       "registered": true,
       "syntax": "*",

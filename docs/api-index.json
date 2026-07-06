@@ -18,7 +18,8 @@
       "core/themes.css",
       "optional/forms.css",
       "optional/components.css",
-      "optional/theme-example.css"
+      "optional/theme-example.css",
+      "optional/utilities.css"
     ],
     "bundles": [
       "full",
@@ -27,39 +28,40 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1009,
+      "total": 1037,
       "by_type": {
-        "class": 294,
-        "token": 715
+        "class": 317,
+        "token": 720
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 953,
+        "PUBLIC": 981,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 487,
-        "knob": 228
+        "consumption": 491,
+        "knob": 229
       },
-      "tokens": 715,
-      "classes": 294,
-      "sf_classes": 245,
+      "tokens": 720,
+      "classes": 317,
+      "sf_classes": 268,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 25,
         "Components": 26,
-        "Core tokens": 611,
+        "Core tokens": 616,
         "Layout primitives": 138,
         "Layout tokens": 53,
-        "Macro classes": 55,
+        "Macro classes": 57,
         "Macro tokens": 26,
         "Motion / animation": 21,
         "Print": 4,
         "State classes": 40,
         "Theme example": 1,
-        "Theme utilities": 1
+        "Theme utilities": 1,
+        "Utilities": 21
       }
     },
     "schema": {
@@ -10267,6 +10269,62 @@
       ]
     },
     {
+      "name": "--sf-drop-shadow-xl",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "drop",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Output token @property registrations",
+      "description": "Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements.",
+      "value": "drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "*",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-drop-shadow-xs",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "drop",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Output token @property registrations",
+      "description": "Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images.",
+      "value": "drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "*",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-duration-fast",
       "type": "token",
       "tier": "PUBLIC",
@@ -13892,6 +13950,34 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-link-external-label",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "link",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Semantic gap tokens",
+      "description": "Accessible name for the .sf-link-external marker glyph, read by screen readers via the CSS content alt-text syntax. Localise or clear alongside --sf-link-external-marker.",
+      "value": "\"opens in a new window or external site\"",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
       ],
       "bundles": [
         "full",
@@ -19025,6 +19111,62 @@
       ]
     },
     {
+      "name": "--sf-text-shadow-xl",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "text",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Output token @property registrations",
+      "description": "Extra-large text-shadow for maximum legibility over busy or high-contrast image backgrounds.",
+      "value": "0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "*",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-text-shadow-xs",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "text",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Output token @property registrations",
+      "description": "Extra-small text-shadow for the subtlest depth on body text.",
+      "value": "0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "*",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-text-xl",
       "type": "token",
       "tier": "PUBLIC",
@@ -23337,6 +23479,56 @@
       ]
     },
     {
+      "name": "sf-drop-shadow-xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-drop-shadow-xl",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-drop-shadow-xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-drop-shadow-xs",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-entrance--fade",
       "type": "class",
       "tier": "PUBLIC",
@@ -24958,6 +25150,282 @@
         "full",
         "optimal",
         "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-h1",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-h1",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h1-level typography (size, line-height, weight, tracking, max-width) to any element without changing its semantic level.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-h2",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-h2",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h2-level typography to any element without changing its semantic level.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-h3",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-h3",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h3-level typography to any element without changing its semantic level.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-h4",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-h4",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h4-level typography to any element without changing its semantic level.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-h5",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-h5",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h5-level typography to any element without changing its semantic level.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-h6",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-h6",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HEADING HELPER CLASSES (.sf-h1",
+      "description": "Applies h6-level typography to any element without changing its semantic level.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-hover-float",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-hover-float",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element up slightly on hover.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-hover-grow",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-hover-grow",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: scales the element up slightly on hover.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-hover-shrink",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-hover-shrink",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: scales the element down slightly on hover.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-hover-sink",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-hover-sink",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element down slightly on hover.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-hover-slide-end",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-hover-slide-end",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element toward the inline-end on hover.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-hover-slide-start",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-hover-slide-start",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "HOVER-TRANSFORM UTILITIES (.sf-hover-*)",
+      "description": "Hover-triggered transform: translates the element toward the inline-start on hover.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
         "optimal-utilities"
       ]
     },
@@ -27163,6 +27631,98 @@
       ]
     },
     {
+      "name": "sf-text-2xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-2xl",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-2xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-2xs",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-3xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-3xl",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-4xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-4xl",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the 4xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-text-gradient",
       "type": "class",
       "tier": "PUBLIC",
@@ -27189,6 +27749,52 @@
       ]
     },
     {
+      "name": "sf-text-l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-l",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the l text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-m",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the m (body) text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-text-protect",
       "type": "class",
       "tier": "PUBLIC",
@@ -27210,6 +27816,75 @@
         "full",
         "optimal",
         "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-s",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the s text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-xl",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-text-xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-text-xs",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "TEXT-SIZE UTILITIES (.sf-text-2xs",
+      "description": "Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
         "optimal-utilities"
       ]
     },
