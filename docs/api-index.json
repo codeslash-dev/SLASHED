@@ -28,14 +28,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1052,
+      "total": 1041,
       "by_type": {
-        "class": 332,
+        "class": 321,
         "token": 720
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 996,
+        "PUBLIC": 985,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -43,9 +43,9 @@
         "knob": 229
       },
       "tokens": 720,
-      "classes": 332,
+      "classes": 321,
       "sf_classes": 283,
-      "is_classes": 40,
+      "is_classes": 29,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
@@ -58,7 +58,7 @@
         "Macro tokens": 26,
         "Motion / animation": 21,
         "Print": 4,
-        "State classes": 40,
+        "State classes": 29,
         "Theme example": 1,
         "Theme utilities": 1,
         "Utilities": 31
@@ -20253,56 +20253,6 @@
       ]
     },
     {
-      "name": "is-clickable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-clickable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Makes the element appear interactive (pointer cursor). Use when an element has a click handler but no native button or link role.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-clipped",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-clipped",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-collapsed",
       "type": "class",
       "tier": "PUBLIC",
@@ -20554,81 +20504,6 @@
       ]
     },
     {
-      "name": "is-fixed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-fixed",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-focused",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-focused",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-fullscreen",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-fullscreen",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Fullscreen positioning state — stretches the element to cover the viewport. Bare positioning only; consumers supply inset values.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-hidden",
       "type": "class",
       "tier": "PUBLIC",
@@ -20856,31 +20731,6 @@
       ]
     },
     {
-      "name": "is-pinned",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-pinned",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Pinned / sticky state — applies a visual affordance (e.g. border or shadow) to indicate the element is in its stuck (sticky) position. Toggle via IntersectionObserver.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-pressed",
       "type": "class",
       "tier": "PUBLIC",
@@ -20916,56 +20766,6 @@
       "area": "states",
       "group": "INTERACTIVITY",
       "description": "Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-resizable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-resizable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Resizable state — enables user resize handle on the element (resize: both). Typically applied to textareas or panels.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-scrollable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-scrollable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Makes the element scrollable (overflow: auto) when its content overflows. Applies to both axes.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -21031,31 +20831,6 @@
       ]
     },
     {
-      "name": "is-sticky",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-sticky",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Sticky positioning state — sets position: sticky with a top offset from --sf-sticky-offset. Useful for sticky headers and sidebar sub-menus.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-success",
       "type": "class",
       "tier": "PUBLIC",
@@ -21066,56 +20841,6 @@
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
       "description": "Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-truncated",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-truncated",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Single-line truncation state — clips overflowing text with an ellipsis (overflow: hidden, text-overflow: ellipsis, white-space: nowrap).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-unselectable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-unselectable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Prevents text selection (user-select: none) on the element. Use on interactive drag handles, labels, and UI chrome that shouldn't be selected.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -27479,7 +27204,7 @@
       "category": "Utilities",
       "area": "utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "isVariant": false,
       "baseClass": null,
       "optional": true,
@@ -27502,7 +27227,7 @@
       "category": "Utilities",
       "area": "utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "isVariant": true,
       "baseClass": "sf-sticky",
       "optional": true,
@@ -27525,7 +27250,7 @@
       "category": "Utilities",
       "area": "utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "isVariant": true,
       "baseClass": "sf-sticky",
       "optional": true,
@@ -27548,7 +27273,7 @@
       "category": "Utilities",
       "area": "utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "isVariant": true,
       "baseClass": "sf-sticky",
       "optional": true,

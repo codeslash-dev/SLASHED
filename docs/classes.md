@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**283 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**283 .sf-classes, 29 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -222,14 +222,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## State classes (`core/states.css`)
 
-40 classes.
+29 classes.
 
 | Class |
 |---|
 | `.is-active` |
 | `.is-busy` |
-| `.is-clickable` |
-| `.is-clipped` |
 | `.is-collapsed` |
 | `.is-current` |
 | `.is-danger` |
@@ -240,9 +238,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.is-empty` |
 | `.is-error` |
 | `.is-expanded` |
-| `.is-fixed` |
-| `.is-focused` |
-| `.is-fullscreen` |
 | `.is-hidden` |
 | `.is-highlighted` |
 | `.is-info` |
@@ -252,17 +247,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.is-open` |
 | `.is-overlay` |
 | `.is-pending` |
-| `.is-pinned` |
 | `.is-pressed` |
 | `.is-readonly` |
-| `.is-resizable` |
-| `.is-scrollable` |
 | `.is-selected` |
 | `.is-skeleton` |
-| `.is-sticky` |
 | `.is-success` |
-| `.is-truncated` |
-| `.is-unselectable` |
 | `.is-valid` |
 | `.is-visible` |
 | `.is-warning` |

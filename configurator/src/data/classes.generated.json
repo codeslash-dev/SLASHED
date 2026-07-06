@@ -25,26 +25,6 @@
       "layer": "slashed.states"
     },
     {
-      "name": "is-clickable",
-      "selector": ".is-clickable",
-      "kind": "state",
-      "category": "State classes",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Makes the element appear interactive (pointer cursor). Use when an element has a click handler but no native button or link role.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-clipped",
-      "selector": ".is-clipped",
-      "kind": "state",
-      "category": "State classes",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "is-collapsed",
       "selector": ".is-collapsed",
       "kind": "state",
@@ -145,36 +125,6 @@
       "layer": "slashed.states"
     },
     {
-      "name": "is-fixed",
-      "selector": ".is-fixed",
-      "kind": "state",
-      "category": "State classes",
-      "group": "POSITION / STICKINESS",
-      "description": "Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning).",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-focused",
-      "selector": ".is-focused",
-      "kind": "state",
-      "category": "State classes",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select).",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-fullscreen",
-      "selector": ".is-fullscreen",
-      "kind": "state",
-      "category": "State classes",
-      "group": "POSITION / STICKINESS",
-      "description": "Fullscreen positioning state — stretches the element to cover the viewport. Bare positioning only; consumers supply inset values.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "is-hidden",
       "selector": ".is-hidden",
       "kind": "state",
@@ -265,16 +215,6 @@
       "layer": "slashed.states"
     },
     {
-      "name": "is-pinned",
-      "selector": ".is-pinned",
-      "kind": "state",
-      "category": "State classes",
-      "group": "POSITION / STICKINESS",
-      "description": "Pinned / sticky state — applies a visual affordance (e.g. border or shadow) to indicate the element is in its stuck (sticky) position. Toggle via IntersectionObserver.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "is-pressed",
       "selector": ".is-pressed",
       "kind": "state",
@@ -291,26 +231,6 @@
       "category": "State classes",
       "group": "INTERACTIVITY",
       "description": "Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-resizable",
-      "selector": ".is-resizable",
-      "kind": "state",
-      "category": "State classes",
-      "group": "POSITION / STICKINESS",
-      "description": "Resizable state — enables user resize handle on the element (resize: both). Typically applied to textareas or panels.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-scrollable",
-      "selector": ".is-scrollable",
-      "kind": "state",
-      "category": "State classes",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Makes the element scrollable (overflow: auto) when its content overflows. Applies to both axes.",
       "optional": false,
       "layer": "slashed.states"
     },
@@ -335,42 +255,12 @@
       "layer": "slashed.states"
     },
     {
-      "name": "is-sticky",
-      "selector": ".is-sticky",
-      "kind": "state",
-      "category": "State classes",
-      "group": "POSITION / STICKINESS",
-      "description": "Sticky positioning state — sets position: sticky with a top offset from --sf-sticky-offset. Useful for sticky headers and sidebar sub-menus.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "is-success",
       "selector": ".is-success",
       "kind": "state",
       "category": "State classes",
       "group": "VALIDATION / FEEDBACK",
       "description": "Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-truncated",
-      "selector": ".is-truncated",
-      "kind": "state",
-      "category": "State classes",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Single-line truncation state — clips overflowing text with an ellipsis (overflow: hidden, text-overflow: ellipsis, white-space: nowrap).",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "is-unselectable",
-      "selector": ".is-unselectable",
-      "kind": "state",
-      "category": "State classes",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Prevents text selection (user-select: none) on the element. Use on interactive drag handles, labels, and UI chrome that shouldn't be selected.",
       "optional": false,
       "layer": "slashed.states"
     },
@@ -2950,7 +2840,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -2960,7 +2850,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -2970,7 +2860,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -2980,7 +2870,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "STICKY POSITIONING (.sf-sticky)",
-      "description": "Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid…",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
       "optional": true,
       "layer": "slashed.utilities"
     },

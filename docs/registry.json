@@ -22,7 +22,7 @@
     "counts": {
       "tokens": 720,
       "sf_classes": 283,
-      "is_classes": 40
+      "is_classes": 29
     }
   },
   "tokens": [
@@ -1035,8 +1035,6 @@
   "is_classes": [
     "is-active",
     "is-busy",
-    "is-clickable",
-    "is-clipped",
     "is-collapsed",
     "is-current",
     "is-danger",
@@ -1047,9 +1045,6 @@
     "is-empty",
     "is-error",
     "is-expanded",
-    "is-fixed",
-    "is-focused",
-    "is-fullscreen",
     "is-hidden",
     "is-highlighted",
     "is-info",
@@ -1059,17 +1054,11 @@
     "is-open",
     "is-overlay",
     "is-pending",
-    "is-pinned",
     "is-pressed",
     "is-readonly",
-    "is-resizable",
-    "is-scrollable",
     "is-selected",
     "is-skeleton",
-    "is-sticky",
     "is-success",
-    "is-truncated",
-    "is-unselectable",
     "is-valid",
     "is-visible",
     "is-warning"

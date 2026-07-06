@@ -75,7 +75,7 @@ test.describe('Container queries', () => {
 });
 
 test.describe('State classes', () => {
-  test('.is-hidden / .is-disabled / .is-truncated apply their effects', async ({ page }) => {
+  test('.is-hidden / .is-disabled apply their effects', async ({ page }) => {
     await page.goto(DEMO_URL);
     const probe = await page.evaluate(() => {
       const mk = (cls, css = '') => {
@@ -89,11 +89,9 @@ test.describe('State classes', () => {
       return {
         hidden: mk('is-hidden').display,
         disabledPE: mk('is-disabled').pointerEvents,
-        truncated: mk('is-truncated', 'width:2rem').textOverflow,
       };
     });
     expect(probe.hidden).toBe('none');
     expect(probe.disabledPE).toBe('none');
-    expect(probe.truncated).toBe('ellipsis');
   });
 });

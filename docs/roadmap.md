@@ -111,10 +111,11 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   `--sf-color-selection-*--alt` tokens.
   Tracked in [#540](https://github.com/codeslash-dev/SLASHED/issues/540).
 - ~~**Sticky positioning utility**~~ ✓ **Done** — `.sf-sticky` plus
-  `--s/-m/-l` offset modifiers written and staged (commented out) in
-  `optional/utilities.css`, layering extra gap on top of the existing
-  `--sf-sticky-offset` fluid offset; the JS-toggled `.is-sticky` state
-  class is unchanged.
+  `--s/-m/-l` offset modifiers, active in `optional/utilities.css`, layering
+  extra gap on top of the existing `--sf-sticky-offset` fluid offset. This is
+  now the sole sticky mechanism — the redundant `.is-sticky` state class was
+  removed (`position: sticky` is conditional by nature and needs no runtime
+  toggle).
   Tracked in [#542](https://github.com/codeslash-dev/SLASHED/issues/542).
 - **Interactive `drives N` exploration** — turn the configurator's passive
   dependency-count badge into a keyboard-accessible popover/list that navigates

@@ -1338,10 +1338,6 @@
               <span class="is-visible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-visible (force visibility:visible)</span>
             </div>
           </div>
-          <div>
-            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-truncated</p>
-            <div class="is-truncated" style="width: 12rem; padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">This text is very long and will be truncated with an ellipsis</div>
-          </div>
         </div>
       </section>
 
@@ -1378,19 +1374,6 @@
           <span class="is-danger" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-danger</span>
         </div>
 
-        <h3>Position / Stickiness</h3>
-        <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-sticky" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-sticky</span>
-          <span class="is-pinned" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-pinned</span>
-          <span class="is-fixed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); position: relative">.is-fixed</span>
-        </div>
-
-        <h3>Overflow / Clipping</h3>
-        <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <div class="is-clipped" style="width: 8rem; height: 3rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-clipped (overflow hidden)</div>
-          <div class="is-scrollable" style="width: 8rem; height: 3rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)"><div style="height: 6rem">.is-scrollable (scroll me)</div></div>
-        </div>
-
         <h3>Drag &amp; Drop</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
           <span class="is-dragging" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-dragging</span>
@@ -1398,11 +1381,9 @@
           <span class="is-draggable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-draggable</span>
         </div>
 
-        <h3>Overlay / Interaction</h3>
+        <h3>Overlay</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
           <div style="position: relative; width: 8rem; height: 4rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s)"><div class="is-overlay" style="background: var(--sf-color-primary); opacity: 0.2; border-radius: var(--sf-radius-s)"></div><span style="position: relative; font-size: var(--sf-text-xs); padding: var(--sf-space-xs)">.is-overlay</span></div>
-          <span class="is-clickable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-clickable</span>
-          <span class="is-unselectable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-unselectable</span>
         </div>
 
         <h3>Interactivity</h3>
@@ -1412,15 +1393,10 @@
           <span class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-disabled</span>
           <span class="is-pending" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pending</span>
           <span class="is-pressed" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pressed</span>
-          <span class="is-focused" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-focused</span>
         </div>
         <div class="sf-focus-parent sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
           <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-focus-parent (focus the input → parent rings)</code>
           <input type="text" aria-label="Focus parent demo input" placeholder="focus me" style="font-size: var(--sf-text-s)">
-        </div>
-        <div class="sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s)">
-          <div class="is-resizable" style="width: 8rem; height: 3rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s); padding: var(--sf-space-xs)">.is-resizable (drag corner)</div>
-          <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.is-fullscreen → position:fixed; inset:0 (not demoed to avoid viewport takeover)</code>
         </div>
 
         <h3>Empty State</h3>

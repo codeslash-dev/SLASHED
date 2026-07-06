@@ -181,11 +181,11 @@
 
   /* ============================================================
    * STICKY POSITIONING (.sf-sticky)
-   * Static layout-utility counterpart to the JS-toggled .is-sticky
-   * state class (core/states.css) — same --sf-sticky-offset token,
-   * for elements that are sticky unconditionally rather than by
-   * runtime toggle. Offset modifiers add extra gap on top of the
-   * existing header-aware fluid offset.
+   * The sticky mechanism — position: sticky at the header-aware
+   * --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap
+   * on top of that fluid offset. (position: sticky is already
+   * conditional by nature, so there is no separate runtime-toggled
+   * state class.)
    * ============================================================ */
   .sf-sticky {
     position: sticky;

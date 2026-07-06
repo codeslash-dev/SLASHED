@@ -989,7 +989,7 @@ Small opt-in helpers (all `optional/utilities.css`):
 - `.sf-list-none` — drop list marker + inline-start padding in one class.
 - `.sf-marker--{family}` — colour `::marker` on an arbitrary list, `family` = `primary` / `secondary` / `tertiary` / `action` (brand/action only; set `::marker { color }` yourself for anything else). A `:not(.sf-prose *)` guard leaves `.sf-prose` markers to `--sf-prose-marker-color`. Works on the `<ul>`/`<ol>` or an `<li>`.
 - `.sf-selection--alt` — swap `::selection` colours to `--sf-color-selection-*--alt` on an element and its descendants, for surfaces where the default selection lands with poor contrast.
-- `.sf-sticky` — `position: sticky` at `--sf-sticky-offset` (the header-aware fluid offset) with `--sf-z-sticky`; `--s` / `--m` / `--l` add an extra `--sf-space-*` gap on top. The JS-toggled `.is-sticky` state class is unchanged.
+- `.sf-sticky` — `position: sticky` at `--sf-sticky-offset` (the header-aware fluid offset) with `--sf-z-sticky`; `--s` / `--m` / `--l` add an extra `--sf-space-*` gap on top. This is the sticky mechanism — `position: sticky` is conditional by nature, so there is no separate runtime-toggled state class.
 
 ### 9.4 Animation presets
 

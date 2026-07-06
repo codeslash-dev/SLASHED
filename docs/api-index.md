@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1052 elements** — 720 tokens, 332 classes.
+**1041 elements** — 720 tokens, 321 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 996 | Everyday surface. SemVer-stable. |
+| PUBLIC | 985 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -760,7 +760,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (332)
+## Classes (321)
 
 ### Accessibility (8)
 
@@ -1051,14 +1051,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `.print-no-color` | PUBLIC | print | Opt-in colour treatment | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
 | `.print-only` | PUBLIC | print | Print visibility utilities | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
-### State classes (40)
+### State classes (29)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
 | `.is-busy` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Busy state — shows a progress cursor to indicate background processing. Does not mask content; use is-loading when content should be hidden during loading. |
-| `.is-clickable` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Makes the element appear interactive (pointer cursor). Use when an element has a click handler but no native button or link role. |
-| `.is-clipped` | PUBLIC | state | OVERFLOW / CLIPPING | Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary. |
 | `.is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with is-expanded or is-open. Components add transitions. |
 | `.is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
 | `.is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
@@ -1069,9 +1067,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
 | `.is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid. |
 | `.is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of is-collapsed. Components add transitions. |
-| `.is-fixed` | PUBLIC | state | POSITION / STICKINESS | Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning). |
-| `.is-focused` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select). |
-| `.is-fullscreen` | PUBLIC | state | POSITION / STICKINESS | Fullscreen positioning state — stretches the element to cover the viewport. Bare positioning only; consumers supply inset values. |
 | `.is-hidden` | PUBLIC | state | VISIBILITY | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
 | `.is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
 | `.is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
@@ -1081,17 +1076,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to is-collapsed/is-hidden. Sets --sf-is-open to 1 for calc() branching. |
 | `.is-overlay` | PUBLIC | state | OVERLAY / BACKDROP | Overlay positioning state — renders the element as a full-screen fixed overlay with a backdrop scrim. Use for modal backgrounds. |
 | `.is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from is-loading (which hides content entirely). |
-| `.is-pinned` | PUBLIC | state | POSITION / STICKINESS | Pinned / sticky state — applies a visual affordance (e.g. border or shadow) to indicate the element is in its stuck (sticky) position. Toggle via IntersectionObserver. |
 | `.is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
 | `.is-readonly` | PUBLIC | state | INTERACTIVITY | Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited. |
-| `.is-resizable` | PUBLIC | state | POSITION / STICKINESS | Resizable state — enables user resize handle on the element (resize: both). Typically applied to textareas or panels. |
-| `.is-scrollable` | PUBLIC | state | OVERFLOW / CLIPPING | Makes the element scrollable (overflow: auto) when its content overflows. Applies to both axes. |
 | `.is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
 | `.is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
-| `.is-sticky` | PUBLIC | state | POSITION / STICKINESS | Sticky positioning state — sets position: sticky with a top offset from --sf-sticky-offset. Useful for sticky headers and sidebar sub-menus. |
 | `.is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
-| `.is-truncated` | PUBLIC | state | OVERFLOW / CLIPPING | Single-line truncation state — clips overflowing text with an ellipsis (overflow: hidden, text-overflow: ellipsis, white-space: nowrap). |
-| `.is-unselectable` | PUBLIC | state | FOCUS / INTERACTION MODIFIERS | Prevents text selection (user-select: none) on the element. Use on interactive drag handles, labels, and UI chrome that shouldn't be selected. |
 | `.is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to is-success; the name signals form-field context. |
 | `.is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
 | `.is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
@@ -1130,10 +1119,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-marker--secondary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
 | `.sf-marker--tertiary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
 | `.sf-selection--alt` | PUBLIC | utility | ALTERNATE SELECTION COLOUR (.sf-selection--alt) | Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css). |
-| `.sf-sticky` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
-| `.sf-sticky--l` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
-| `.sf-sticky--m` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
-| `.sf-sticky--s` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
+| `.sf-sticky` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
+| `.sf-sticky--l` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
+| `.sf-sticky--m` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
+| `.sf-sticky--s` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
 | `.sf-text-2xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-2xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-3xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
