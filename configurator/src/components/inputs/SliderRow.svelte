@@ -1,5 +1,6 @@
 <script lang="ts">
   import RangeWithNumber from './RangeWithNumber.svelte';
+  import type { VarOption } from '../../lib/variableScales';
 
   let {
     label, help, value, min, max, step, unit, overridden, onChange, onReset,
@@ -19,7 +20,7 @@
     currentRaw?: string;
     onRawSet?: (v: string) => void;
     /** Sibling scale steps (e.g. the space or radius scale) offered alongside rawDefault. */
-    variableOptions?: { label: string; value: string }[];
+    variableOptions?: VarOption[];
   } = $props();
 
   const CUSTOM = "__sf_custom__";
@@ -45,6 +46,12 @@
 
   let hasVarInfo = $derived(!!rawDefault && !!onRawSet);
 
+  // A real picker only makes sense when there are sibling scale steps to
+  // choose between — otherwise it degenerates into a single-option dropdown
+  // (default + "Custom value…") for rows like BordersPanel's fine-tune radii
+  // or LayoutPanel's sticky offsets, which just need a plain slider.
+  let canPick = $derived(hasVarInfo && (variableOptions?.length ?? 0) > 0);
+
   // An override that isn't one of the known options but still looks like a
   // CSS expression (var()/calc()/clamp()/…) — surface it as editable text
   // rather than silently falling back to a resolved slider number.
@@ -57,11 +64,11 @@
   // while outside the picker (via "Custom value…" or the </> toggle).
   let manualView = $state<'none' | 'slider' | 'raw'>('none');
 
-  // The dropdown is shown whenever the current state maps to a known option
-  // (the default, or one of the sibling scale steps) and the user hasn't
-  // explicitly asked to go custom.
+  // The dropdown is shown whenever there are sibling options to pick between,
+  // the current state maps to a known option (the default, or one of the
+  // sibling scale steps), and the user hasn't explicitly asked to go custom.
   let showPicker = $derived(
-    hasVarInfo && manualView === 'none' && (currentRaw === undefined || !!matchedOption)
+    canPick && manualView === 'none' && (currentRaw === undefined || !!matchedOption)
   );
 
   // Outside the picker, decide between the raw-CSS text box and the slider.
@@ -142,22 +149,35 @@
       onfocus={() => { isEditingRaw = true; }}
       onblur={() => {
         isEditingRaw = false;
-        if (!rawDraft.trim()) backToVariable();
+        const v = rawDraft.trim();
+        if (!v) backToVariable();
+        else onRawSet?.(v);
+      }}
+      onkeydown={(e) => {
+        if (e.key === "Enter") (e.currentTarget as HTMLInputElement).blur();
       }}
       oninput={(e) => {
         rawDraft = (e.target as HTMLInputElement).value;
-        const v = rawDraft.trim();
-        if (v) onRawSet?.(v);
       }}
       class="w-full bg-black/8 dark:bg-white/8 border border-indigo-500/50 rounded px-2 py-1.5 text-[11px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-500 focus:outline-none"
     />
-  {:else}
-    <RangeWithNumber {value} {min} {max} {step} {unit} {onChange} />
-    {#if hasVarInfo}
+    {#if canPick}
       <button
         onclick={backToVariable}
         class="text-[9px] font-mono text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer mt-0.5"
       >&larr; back to variable</button>
+    {/if}
+  {:else}
+    <RangeWithNumber {value} {min} {max} {step} {unit} {onChange} />
+    {#if hasVarInfo}
+      {#if canPick || currentRaw !== undefined}
+        <button
+          onclick={backToVariable}
+          class="text-[9px] font-mono text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer mt-0.5"
+        >&larr; back to variable</button>
+      {:else}
+        <p class="text-[9px] font-mono text-slate-300 dark:text-slate-400 mt-0.5 leading-none">default: {rawDefault}</p>
+      {/if}
     {/if}
   {/if}
 
