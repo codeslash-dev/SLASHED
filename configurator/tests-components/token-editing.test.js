@@ -58,7 +58,7 @@ describe('SliderRow', () => {
     expect(onReset).toHaveBeenCalledOnce();
   });
 
-  test('raw mode: typing a raw CSS value fires onRawSet', async () => {
+  test('raw mode: typing a raw CSS value commits onRawSet on blur, not on every keystroke', async () => {
     const onRawSet = vi.fn();
     render(SliderRow, {
       props: {
@@ -70,6 +70,8 @@ describe('SliderRow', () => {
     });
     const rawInput = screen.getByPlaceholderText('1rem');
     await fireEvent.input(rawInput, { target: { value: 'clamp(1rem, 2vw, 2rem)' } });
+    expect(onRawSet).not.toHaveBeenCalled();
+    await fireEvent.blur(rawInput);
     expect(onRawSet).toHaveBeenCalledWith('clamp(1rem, 2vw, 2rem)');
   });
 

@@ -1,5 +1,6 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
+  import { SPACE_SCALE, RADIUS_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -95,6 +96,7 @@
         onChange={(v) => onSet("--sf-flow-space", `${v}rem`)}
         onReset={() => onReset("--sf-flow-space")}
         rawDefault="var(--sf-content-gap)"
+        variableOptions={SPACE_SCALE}
         currentRaw={overrides["--sf-flow-space"]}
         onRawSet={(v) => onSet("--sf-flow-space", v)}
       />
@@ -194,9 +196,6 @@
         overridden={"--sf-scroll-shadow-size" in overrides}
         onChange={(v) => onSet("--sf-scroll-shadow-size", `${v}rem`)}
         onReset={() => onReset("--sf-scroll-shadow-size")}
-        rawDefault="2rem"
-        currentRaw={overrides["--sf-scroll-shadow-size"]}
-        onRawSet={(v) => onSet("--sf-scroll-shadow-size", v)}
       />
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
         <div
@@ -299,6 +298,7 @@
             onChange={(v) => onSet(t.token, `${v}rem`)}
             onReset={() => onReset(t.token)}
             rawDefault={t.raw}
+            variableOptions={SPACE_SCALE}
             currentRaw={overrides[t.token]}
             onRawSet={(v) => onSet(t.token, v)}
           />
@@ -310,6 +310,7 @@
           onChange={(v) => onSet("--sf-prose-media-radius", `${v}px`)}
           onReset={() => onReset("--sf-prose-media-radius")}
           rawDefault="var(--sf-radius-m)"
+          variableOptions={RADIUS_SCALE}
           currentRaw={overrides["--sf-prose-media-radius"]}
           onRawSet={(v) => onSet("--sf-prose-media-radius", v)}
         />

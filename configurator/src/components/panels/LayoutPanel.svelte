@@ -3,6 +3,7 @@
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
   import { themeState } from '../../lib/theme.svelte';
+  import { SPACE_SCALE, CONTAINER_SCALE } from '../../lib/variableScales';
 
   const COLUMN_RULE_STYLES = ["solid", "dashed", "dotted"];
 
@@ -180,6 +181,7 @@
         onChange={(v) => onSet("--sf-center-max", `${v}rem`)}
         onReset={() => onReset("--sf-center-max")}
         rawDefault="var(--sf-container-default)"
+        variableOptions={CONTAINER_SCALE}
         currentRaw={overrides["--sf-center-max"]}
         onRawSet={(v) => onSet("--sf-center-max", v)}
       />
@@ -190,6 +192,7 @@
         onChange={(v) => onSet("--sf-center-gutter", `${v}rem`)}
         onReset={() => onReset("--sf-center-gutter")}
         rawDefault="var(--sf-gutter)"
+        variableOptions={SPACE_SCALE}
         currentRaw={overrides["--sf-center-gutter"]}
         onRawSet={(v) => onSet("--sf-center-gutter", v)}
       />
@@ -594,6 +597,7 @@
             onChange={(v) => onSet("--sf-imposter-margin", `${v}rem`)}
             onReset={() => onReset("--sf-imposter-margin")}
             rawDefault="var(--sf-space-m)"
+            variableOptions={SPACE_SCALE}
             currentRaw={overrides["--sf-imposter-margin"]}
             onRawSet={(v) => onSet("--sf-imposter-margin", v)}
           />
@@ -609,6 +613,7 @@
             onChange={(v) => onSet("--sf-content-width", `${v}rem`)}
             onReset={() => onReset("--sf-content-width")}
             rawDefault="var(--sf-container-default)"
+            variableOptions={CONTAINER_SCALE}
             currentRaw={overrides["--sf-content-width"]}
             onRawSet={(v) => onSet("--sf-content-width", v)}
           />
@@ -619,6 +624,7 @@
             onChange={(v) => onSet("--sf-breakout-width", `${v}rem`)}
             onReset={() => onReset("--sf-breakout-width")}
             rawDefault="var(--sf-container-wide)"
+            variableOptions={CONTAINER_SCALE}
             currentRaw={overrides["--sf-breakout-width"]}
             onRawSet={(v) => onSet("--sf-breakout-width", v)}
           />
@@ -634,6 +640,7 @@
             onChange={(v) => onSet("--sf-alternate-inner-gap", `${v}rem`)}
             onReset={() => onReset("--sf-alternate-inner-gap")}
             rawDefault="var(--sf-gap)"
+            variableOptions={SPACE_SCALE}
             currentRaw={overrides["--sf-alternate-inner-gap"]}
             onRawSet={(v) => onSet("--sf-alternate-inner-gap", v)}
           />

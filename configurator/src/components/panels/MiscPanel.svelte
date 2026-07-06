@@ -1,6 +1,7 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import { SIZE_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset, onBulkChange }: {
     overrides: Record<string, string>;
@@ -86,6 +87,10 @@
         overridden={"--sf-touch-target" in overrides}
         onChange={(v) => onSet("--sf-touch-target", `${v}px`)}
         onReset={() => onReset("--sf-touch-target")}
+        rawDefault="var(--sf-size-l)"
+        variableOptions={SIZE_SCALE}
+        currentRaw={overrides["--sf-touch-target"]}
+        onRawSet={(v) => onSet("--sf-touch-target", v)}
       />
       <!-- Preview -->
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex items-center gap-3">
