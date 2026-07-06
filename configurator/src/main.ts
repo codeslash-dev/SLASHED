@@ -20,8 +20,8 @@ import '@framework-css/core/macros.css';
 // shell's own Tailwind utility classes, so safe to load alongside chrome
 // without needing core/reset.css or core/base.css first. Enables real
 // .sf-btn / .sf-card markup in ComponentsPanel's in-panel live preview and
-// in PreviewPanel's demo templates.
-import '@framework-css/optional/tokens.components.css';
+// in PreviewPanel's demo templates. components.css itself @imports
+// tokens.components.css, so that's not imported separately here.
 import '@framework-css/optional/components.css';
 
 // Standalone mounts into #app; the WP plugin renders #slashed-admin-app.

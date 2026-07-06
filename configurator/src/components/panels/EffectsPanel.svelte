@@ -291,8 +291,7 @@
               placeholder={t.default}
               oninput={(e) => {
                 const v = (e.target as HTMLInputElement).value;
-                const trimmed = v.trim();
-                trimmed ? onSet(t.token, trimmed) : onReset(t.token);
+                v.trim() ? onSet(t.token, v) : onReset(t.token);
               }}
               class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
             />
@@ -339,8 +338,7 @@
               placeholder={t.default}
               oninput={(e) => {
                 const v = (e.target as HTMLInputElement).value;
-                const trimmed = v.trim();
-                trimmed ? onSet(t.token, trimmed) : onReset(t.token);
+                v.trim() ? onSet(t.token, v) : onReset(t.token);
               }}
               class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
             />
