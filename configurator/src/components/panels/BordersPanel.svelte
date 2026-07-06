@@ -24,11 +24,6 @@
   ];
 
   const COMPONENT_TOKENS = [
-    { label: "Button radius",         token: "--sf-btn-radius",         unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-btn-radius" },
-    { label: "Button padding block",  token: "--sf-btn-padding-block",  unit: "rem", min: 0, max: 1,   step: 0.025, default: 0.375, rawDefault: "var(--sf-space-xs)", help: "--sf-btn-padding-block" },
-    { label: "Button padding inline", token: "--sf-btn-padding-inline", unit: "rem", min: 0, max: 2,   step: 0.025, default: 1,     rawDefault: "var(--sf-space-m)",  help: "--sf-btn-padding-inline" },
-    { label: "Card radius (inner)",   token: "--sf-card-radius",        unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-card-radius" },
-    { label: "Card padding",          token: "--sf-card-padding",       unit: "rem", min: 0, max: 3,   step: 0.05,  default: 1.5,   rawDefault: "var(--sf-space-l)",   help: "--sf-card-padding" },
     { label: "Field radius",          token: "--sf-field-radius",       unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-field-radius" },
     { label: "Field padding block",   token: "--sf-field-padding-block",  unit: "rem", min: 0, max: 1, step: 0.025, default: 0.375, rawDefault: "var(--sf-space-xs)", help: "--sf-field-padding-block" },
     { label: "Field padding inline",  token: "--sf-field-padding-inline", unit: "rem", min: 0, max: 2, step: 0.025, default: 0.75,  rawDefault: "var(--sf-space-s)",  help: "--sf-field-padding-inline" },
@@ -44,7 +39,7 @@
   let showRadiusScale = $state(false);
   let showRadiusPreview = $state(false);
   let showFineTune = $state(false);
-  let showComponents = $state(false);
+  let showFieldShape = $state(false);
 
   function parseNum(val: string | undefined, fallback: number, strip?: string): number {
     if (!val) return fallback;
@@ -382,17 +377,17 @@
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
-  <!-- COMPONENT SHAPE -->
+  <!-- FIELD SHAPE -->
   <div>
     <button
-      onclick={() => { showComponents = !showComponents; }}
-      aria-expanded={showComponents}
+      onclick={() => { showFieldShape = !showFieldShape; }}
+      aria-expanded={showFieldShape}
       class="w-full flex items-center justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors cursor-pointer py-1"
     >
-      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Component shape</span>
-      <span class="text-[10px] text-slate-500">{showComponents ? "▲" : "▼"}</span>
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Field shape</span>
+      <span class="text-[10px] text-slate-500">{showFieldShape ? "▲" : "▼"}</span>
     </button>
-    {#if showComponents}
+    {#if showFieldShape}
       <div class="mt-2 space-y-2">
         {#each COMPONENT_TOKENS as t (t.token)}
           <SliderRow

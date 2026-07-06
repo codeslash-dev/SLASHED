@@ -10,6 +10,7 @@
                  "header-height", "touch-target", "bento", "cluster",
                  "cover-min", "equal-min", "equal-rule", "frame", "ratio-", "reel", "safe-", "sidebar",
                  "switcher", "-bg-"],
+  "components": ["btn-", "card-"],
   "borders":    ["radius", "border-width", "border-scale", "border-style", "divider"],
   "shadows":    ["shadow"],
   "motion":     ["motion", "duration", "easing", "ease", "scroll-timeline"],

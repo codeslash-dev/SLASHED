@@ -6,7 +6,7 @@ import { watchErrors, gotoClean, navButton } from './helpers.js';
 
 const NAV_LABELS = [
   'Home', 'Colors', 'Typography', 'Spacing', 'Layout',
-  'Borders', 'Shadows', 'Motion', 'Effects', 'Misc',
+  'Borders', 'Shadows', 'Motion', 'Effects', 'Misc', 'Components',
   'Themes', 'WCAG', 'Install', 'Classes',
 ];
 
