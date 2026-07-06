@@ -5,8 +5,9 @@
 
    Most definitions below are STAGED (commented out) — SLASHED is BEM-first
    by design and ships only a curated subset of utility classes; uncomment
-   a block to activate it. The heading, text-size, and hover-transform
-   blocks are active. */
+   a block to activate it. The heading, text-size, hover-transform,
+   list-reset, marker-colour, alternate-selection, and sticky blocks
+   are active. */
 
 @layer slashed.utilities {
 
@@ -146,10 +147,25 @@
    * Drops marker + inline start-padding in one class, on any
    * <ul>/<ol> (or element with list-style applied).
    * ============================================================ */
-  /* .sf-list-none {
+  .sf-list-none {
     list-style: none;
     padding-inline-start: 0;
-  } */
+  }
+
+  /* ============================================================
+   * LIST MARKER COLOUR (.sf-marker--*)
+   * Colour the ::marker of an arbitrary list. Brand/action families
+   * only — for any other colour set `::marker { color }` yourself.
+   * The :not(.sf-prose *) guard keeps this utility from reaching into
+   * a .sf-prose subtree, which owns its markers via
+   * --sf-prose-marker-color (utilities are layered after macros, so
+   * without the guard this would win). Covers the element's own marker
+   * and descendant list-item markers.
+   * ============================================================ */
+  .sf-marker--primary :not(.sf-prose *)::marker, .sf-marker--primary:not(.sf-prose *)::marker { color: var(--sf-color-primary); }
+  .sf-marker--secondary :not(.sf-prose *)::marker, .sf-marker--secondary:not(.sf-prose *)::marker { color: var(--sf-color-secondary); }
+  .sf-marker--tertiary :not(.sf-prose *)::marker, .sf-marker--tertiary:not(.sf-prose *)::marker { color: var(--sf-color-tertiary); }
+  .sf-marker--action :not(.sf-prose *)::marker, .sf-marker--action:not(.sf-prose *)::marker { color: var(--sf-color-action); }
 
   /* ============================================================
    * ALTERNATE SELECTION COLOUR (.sf-selection--alt)
@@ -158,27 +174,27 @@
    * selection colours land with poor contrast (e.g. a dark card on a
    * light page). Backed by --sf-color-selection-*--alt (core/tokens.css).
    * ============================================================ */
-  /* .sf-selection--alt {
+  .sf-selection--alt {
     --sf-color-selection-bg:   var(--sf-color-selection-bg--alt);
     --sf-color-selection-text: var(--sf-color-selection-text--alt);
-  } */
+  }
 
   /* ============================================================
    * STICKY POSITIONING (.sf-sticky)
-   * Static layout-utility counterpart to the JS-toggled .is-sticky
-   * state class (core/states.css) — same --sf-sticky-offset token,
-   * for elements that are sticky unconditionally rather than by
-   * runtime toggle. Offset modifiers add extra gap on top of the
-   * existing header-aware fluid offset.
+   * The sticky mechanism — position: sticky at the header-aware
+   * --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap
+   * on top of that fluid offset. (position: sticky is already
+   * conditional by nature, so there is no separate runtime-toggled
+   * state class.)
    * ============================================================ */
-  /* .sf-sticky {
+  .sf-sticky {
     position: sticky;
     inset-block-start: var(--sf-sticky-offset, 0);
     z-index: var(--sf-z-sticky);
   }
   .sf-sticky--s { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-s)); }
   .sf-sticky--m { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-m)); }
-  .sf-sticky--l { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-l)); } */
+  .sf-sticky--l { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-l)); }
 
   /* ============================================================
    * OVERFLOW-DEBUG UTILITY (.sf-debug-overflow)

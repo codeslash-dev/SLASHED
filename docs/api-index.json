@@ -28,14 +28,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1037,
+      "total": 1041,
       "by_type": {
-        "class": 317,
+        "class": 321,
         "token": 720
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 981,
+        "PUBLIC": 985,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -43,25 +43,25 @@
         "knob": 229
       },
       "tokens": 720,
-      "classes": 317,
-      "sf_classes": 268,
-      "is_classes": 40,
+      "classes": 321,
+      "sf_classes": 283,
+      "is_classes": 29,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 25,
         "Components": 26,
         "Core tokens": 616,
-        "Layout primitives": 138,
+        "Layout primitives": 143,
         "Layout tokens": 53,
         "Macro classes": 57,
         "Macro tokens": 26,
         "Motion / animation": 21,
         "Print": 4,
-        "State classes": 40,
+        "State classes": 29,
         "Theme example": 1,
         "Theme utilities": 1,
-        "Utilities": 21
+        "Utilities": 31
       }
     },
     "schema": {
@@ -20253,56 +20253,6 @@
       ]
     },
     {
-      "name": "is-clickable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-clickable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Makes the element appear interactive (pointer cursor). Use when an element has a click handler but no native button or link role.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-clipped",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-clipped",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Clips overflowing content (overflow: hidden). Use to constrain media or tooltips within a container boundary.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-collapsed",
       "type": "class",
       "tier": "PUBLIC",
@@ -20554,81 +20504,6 @@
       ]
     },
     {
-      "name": "is-fixed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-fixed",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Fixed positioning state — removes the element from the document flow and positions it relative to the viewport. Respects writing-mode (logical variant of fixed positioning).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-focused",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-focused",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Programmatic focus state — applies the focus ring to an element that should appear focused. Use when :focus-visible alone is insufficient (e.g. custom select).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-fullscreen",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-fullscreen",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Fullscreen positioning state — stretches the element to cover the viewport. Bare positioning only; consumers supply inset values.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-hidden",
       "type": "class",
       "tier": "PUBLIC",
@@ -20856,31 +20731,6 @@
       ]
     },
     {
-      "name": "is-pinned",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-pinned",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Pinned / sticky state — applies a visual affordance (e.g. border or shadow) to indicate the element is in its stuck (sticky) position. Toggle via IntersectionObserver.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-pressed",
       "type": "class",
       "tier": "PUBLIC",
@@ -20916,56 +20766,6 @@
       "area": "states",
       "group": "INTERACTIVITY",
       "description": "Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-resizable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-resizable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Resizable state — enables user resize handle on the element (resize: both). Typically applied to textareas or panels.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-scrollable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-scrollable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Makes the element scrollable (overflow: auto) when its content overflows. Applies to both axes.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -21031,31 +20831,6 @@
       ]
     },
     {
-      "name": "is-sticky",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-sticky",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "POSITION / STICKINESS",
-      "description": "Sticky positioning state — sets position: sticky with a top offset from --sf-sticky-offset. Useful for sticky headers and sidebar sub-menus.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "is-success",
       "type": "class",
       "tier": "PUBLIC",
@@ -21066,56 +20841,6 @@
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
       "description": "Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-truncated",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-truncated",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERFLOW / CLIPPING",
-      "description": "Single-line truncation state — clips overflowing text with an ellipsis (overflow: hidden, text-overflow: ellipsis, white-space: nowrap).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-unselectable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-unselectable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "FOCUS / INTERACTION MODIFIERS",
-      "description": "Prevents text selection (user-select: none) on the element. Use on interactive drag handles, labels, and UI chrome that shouldn't be selected.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -25292,6 +25017,131 @@
       ]
     },
     {
+      "name": "sf-header--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--l",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--m",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--s",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--xl",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--xl",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-header--xs",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-header--xs",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left…",
+      "isVariant": true,
+      "baseClass": "sf-header",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-hover-float",
       "type": "class",
       "tier": "PUBLIC",
@@ -25856,6 +25706,121 @@
       ]
     },
     {
+      "name": "sf-list-none",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-list-none",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST RESET (.sf-list-none)",
+      "description": "Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--action",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--action",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--primary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--primary",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--secondary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--secondary",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-marker--tertiary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-marker--tertiary",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
+      "isVariant": true,
+      "baseClass": "sf-marker",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-no-tap-highlight",
       "type": "class",
       "tier": "PUBLIC",
@@ -26239,14 +26204,15 @@
       "kind": "macro",
       "category": "Macro classes",
       "area": "macros",
-      "group": "Prose",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
       "description": "Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.macros",
       "sourceFiles": [
-        "core/macros.css"
+        "core/macros.css",
+        "optional/utilities.css"
       ],
       "bundles": [
         "full",
@@ -26756,6 +26722,29 @@
       ]
     },
     {
+      "name": "sf-selection--alt",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-selection--alt",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "ALTERNATE SELECTION COLOUR (.sf-selection--alt)",
+      "description": "Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css).",
+      "isVariant": true,
+      "baseClass": "sf-selection",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-sidebar",
       "type": "class",
       "tier": "PUBLIC",
@@ -27202,6 +27191,98 @@
         "full",
         "optimal",
         "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky--l",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky--l",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
+      "isVariant": true,
+      "baseClass": "sf-sticky",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky--m",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky--m",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
+      "isVariant": true,
+      "baseClass": "sf-sticky",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-sticky--s",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-sticky--s",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "STICKY POSITIONING (.sf-sticky)",
+      "description": "The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.)",
+      "isVariant": true,
+      "baseClass": "sf-sticky",
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full",
         "optimal-utilities"
       ]
     },

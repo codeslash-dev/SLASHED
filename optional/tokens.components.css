@@ -1,7 +1,7 @@
 /* SLASHED — optional/tokens.components.css
    @layer slashed.tokens
-   Reserved component token surface for the optional component module.
-   Prefix: --sf-*; declarations stay commented until matching classes ship. */
+   Component token surface for the optional component module: card, field,
+   and button knobs. Prefix: --sf-*. */
 
 @layer slashed.tokens {
   :root {
@@ -67,106 +67,6 @@
      * (no @media breakpoints). The threshold is a literal in the
      * @container condition — query conditions cannot read var(), so
      * there is no token for it.
-     */
-
-    /* ============================================================
-     * BADGE TOKENS
-     * ============================================================
-     *
-     * --sf-badge-pad-x:         var(--sf-space-2xs);
-     * --sf-badge-pad-y:         var(--sf-space-3xs, 0.125rem);
-     * --sf-badge-radius:        var(--sf-radius-pill, 9999px);
-     * --sf-badge-font-size:     var(--sf-text-2xs);
-     * --sf-badge-font-weight:   var(--sf-font-weight-interactive);
-     * --sf-badge-line-height:   var(--sf-leading-tight);
-     */
-
-    /* ============================================================
-     * TAG TOKENS
-     * ============================================================
-     *
-     * --sf-tag-pad-x:           var(--sf-space-xs);
-     * --sf-tag-pad-y:           var(--sf-space-3xs, 0.125rem);
-     * --sf-tag-radius:          var(--sf-radius-s);
-     * --sf-tag-gap:             var(--sf-space-2xs);
-     * --sf-tag-font-size:       var(--sf-text-xs);
-     * --sf-tag-bg:              var(--sf-color-inset);
-     * --sf-tag-border-width:    var(--sf-border-width-1);
-     * --sf-tag-border-color:    var(--sf-color-border);
-     */
-
-    /* ============================================================
-     * ALERT TOKENS
-     * ============================================================
-     *
-     * --sf-alert-pad:           var(--sf-space-m);
-     * --sf-alert-radius:        var(--sf-radius-m);
-     * --sf-alert-gap:           var(--sf-space-s);
-     * --sf-alert-border-width:  var(--sf-border-width-1);
-     * --sf-alert-icon-size:     var(--sf-icon-m);
-     */
-
-    /* ============================================================
-     * AVATAR TOKENS
-     * ============================================================
-     *
-     * --sf-avatar-size:         2.5rem;
-     * --sf-avatar-radius:       var(--sf-radius-full, 50%);
-     * --sf-avatar-bg:           var(--sf-color-inset);
-     * --sf-avatar-font-weight:  var(--sf-font-weight-semibold);
-     * --sf-avatar-border-width: 0;
-     * --sf-avatar-border-color: var(--sf-color-border);
-     */
-
-    /* ============================================================
-     * MODAL TOKENS
-     * ============================================================
-     *
-     * --sf-modal-pad:           var(--sf-space-l);
-     * --sf-modal-gap:           var(--sf-space-m);
-     * --sf-modal-radius:        var(--sf-radius-l);
-     * --sf-modal-max-inline:    min(90vw, 32rem);
-     * --sf-modal-bg:            var(--sf-color-surface);
-     * --sf-modal-shadow:        var(--sf-shadow-xl);
-     * --sf-modal-backdrop-bg:   color-mix(in oklab, var(--sf-color-neutral) 60%, transparent);
-     * --sf-modal-z:             var(--sf-z-modal);
-     */
-
-    /* ============================================================
-     * SKELETON TOKENS
-     * ============================================================
-     *
-     * --sf-skeleton-bg:         var(--sf-color-inset);
-     * --sf-skeleton-shimmer:    var(--sf-color-raised);
-     * --sf-skeleton-radius:     var(--sf-radius-s);
-     * --sf-skeleton-duration:   1.5s;
-     * --sf-skeleton-line-height: 0.8em;
-     */
-
-    /* ============================================================
-     * FORM LAYOUT HELPER TOKENS
-     * Gap tokens for .sf-field, .sf-form-row, .sf-form-col,
-     * and .sf-form-inline declared in optional/components.css.
-     * ============================================================
-     *
-     * --sf-field-gap:          var(--sf-space-2xs);
-     * --sf-form-row-gap:       var(--sf-space-m);
-     * --sf-form-col-gap:       var(--sf-space-s);
-     * --sf-form-inline-gap:    var(--sf-space-s);
-     */
-
-    /* ============================================================
-     * TABLE TOKENS
-     * Sizing tokens for .sf-table declared in
-     * optional/components.css.
-     * ============================================================
-     *
-     * --sf-table-cell-pad-block:  var(--sf-space-xs);
-     * --sf-table-cell-pad-inline: var(--sf-space-s);
-     * --sf-table-border-color:    var(--sf-color-border);
-     * --sf-table-stripe-bg:       var(--sf-color-inset);
-     * --sf-table-header-weight:   var(--sf-font-weight-semibold);
-     * --sf-table-compact-pad:     var(--sf-space-3xs, 0.125rem);
      */
 
   }

@@ -180,84 +180,6 @@ for (const [cls, status] of [
   });
 }
 
-// ── Position / stickiness ───────────────────────────────────────
-test('.is-sticky: position sticky with positive z-index', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-sticky">sticky</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    pos: getComputedStyle(el).position,
-    z:   parseInt(getComputedStyle(el).zIndex, 10),
-  }));
-  expect(cs.pos).toBe('sticky');
-  expect(cs.z).toBeGreaterThan(0);
-});
-
-test('.is-pinned: position sticky, top 0', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-pinned">pinned</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    pos: getComputedStyle(el).position,
-    top: getComputedStyle(el).top,
-  }));
-  expect(cs.pos).toBe('sticky');
-  expect(cs.top).toBe('0px');
-});
-
-test('.is-fixed: position fixed', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-fixed">fixed</div>`);
-  const pos = await page.locator('#t').evaluate(el => getComputedStyle(el).position);
-  expect(pos).toBe('fixed');
-});
-
-test('.is-fullscreen: position fixed, inset 0, high z-index', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-fullscreen">fullscreen</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    pos:   getComputedStyle(el).position,
-    inset: getComputedStyle(el).inset,
-    z:     parseInt(getComputedStyle(el).zIndex, 10),
-  }));
-  expect(cs.pos).toBe('fixed');
-  expect(cs.inset).toBe('0px');
-  expect(cs.z).toBeGreaterThan(0);
-});
-
-// ── Overflow ────────────────────────────────────────────────────
-test('.is-clipped: overflow hidden (important)', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-clipped">x</div>`);
-  const overflow = await page.locator('#t').evaluate(el => getComputedStyle(el).overflow);
-  expect(overflow).toBe('hidden');
-});
-
-test('.is-scrollable: overflow auto, overscroll-behavior contain', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-scrollable" style="height:100px">x</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    overflow:    getComputedStyle(el).overflow,
-    overscroll:  getComputedStyle(el).overscrollBehavior,
-  }));
-  expect(cs.overflow).toBe('auto');
-  expect(cs.overscroll).toBe('contain');
-});
-
-test('.is-truncated: text-overflow ellipsis, white-space nowrap', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-truncated" style="width:2rem">long text here</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    to:       getComputedStyle(el).textOverflow,
-    ws:       getComputedStyle(el).whiteSpace,
-    overflow: getComputedStyle(el).overflow,
-  }));
-  expect(cs.to).toBe('ellipsis');
-  expect(cs.ws).toBe('nowrap');
-  expect(cs.overflow).toBe('hidden');
-});
-
-test('.is-resizable: resize both, overflow auto', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-resizable" style="width:200px;height:100px">x</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    resize:   getComputedStyle(el).resize,
-    overflow: getComputedStyle(el).overflow,
-  }));
-  expect(cs.resize).toBe('both');
-  expect(cs.overflow).toBe('auto');
-});
-
 // ── Drag & drop ─────────────────────────────────────────────────
 test('.is-draggable: cursor grab', async ({ page }) => {
   await setup(page, `<div id="t" class="is-draggable">drag me</div>`);
@@ -279,28 +201,6 @@ test('.is-drop-target: dashed outline', async ({ page }) => {
   await setup(page, `<div id="t" class="is-drop-target">drop zone</div>`);
   const style = await page.locator('#t').evaluate(el => getComputedStyle(el).outlineStyle);
   expect(style).toBe('dashed');
-});
-
-// ── Interaction ─────────────────────────────────────────────────
-test('.is-clickable: cursor pointer', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-clickable">click me</div>`);
-  const cursor = await page.locator('#t').evaluate(el => getComputedStyle(el).cursor);
-  expect(cursor).toBe('pointer');
-});
-
-test('.is-unselectable: user-select none', async ({ page, browserName }) => {
-  await setup(page, `<div id="t" class="is-unselectable">unselectable</div>`);
-  const us = await page.locator('#t').evaluate(el =>
-    getComputedStyle(el).userSelect ?? getComputedStyle(el).webkitUserSelect
-  );
-  // WebKit requires -webkit-user-select; the framework only sets user-select (no prefix).
-  if (browserName !== 'webkit') expect(us).toBe('none');
-});
-
-test('.is-focused: shows outline ring (programmatic focus)', async ({ page }) => {
-  await setup(page, `<div id="t" class="is-focused" tabindex="0">focused</div>`);
-  const style = await page.locator('#t').evaluate(el => getComputedStyle(el).outlineStyle);
-  expect(style).not.toBe('none');
 });
 
 // ── Overlay ─────────────────────────────────────────────────────

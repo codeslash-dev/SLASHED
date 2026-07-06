@@ -164,56 +164,6 @@
     --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
-  /* -- POSITION / STICKINESS -- */
-
-  .is-sticky {
-    position:         sticky;
-    inset-block-start: var(--sf-sticky-offset, 0);
-    z-index:           var(--sf-z-sticky);
-  }
-
-  .is-pinned {
-    position:         sticky;
-    inset-block-start: 0;
-    z-index:           var(--sf-z-fixed);
-  }
-
-  .is-fixed {
-
-    position: fixed;
-  }
-
-  .is-fullscreen {
-
-    position: fixed;
-    inset:    0;
-    z-index:  var(--sf-z-overlay);
-  }
-
-  .is-resizable {
-    resize:          both;
-    overflow:        auto;
-    min-inline-size: var(--sf-space-xl, 3.55rem);
-    min-block-size:  var(--sf-space-xl, 3.55rem);
-  }
-
-  /* -- OVERFLOW / CLIPPING -- */
-
-  .is-clipped {
-    overflow: hidden !important;
-  }
-
-  .is-scrollable {
-    overflow: auto;
-    overscroll-behavior: contain;
-  }
-
-  .is-truncated {
-    overflow:      hidden;
-    text-overflow: ellipsis;
-    white-space:   nowrap;
-  }
-
   /* -- DRAG & DROP -- */
 
   .is-dragging {
@@ -235,22 +185,6 @@
   .is-overlay {
     position: absolute;
     inset:    0;
-  }
-
-  /* -- FOCUS / INTERACTION MODIFIERS -- */
-
-  .is-clickable {
-    cursor:  pointer;
-  }
-
-  .is-unselectable {
-    user-select: none;
-  }
-
-  .is-focused {
-
-    outline:        var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color);
-    outline-offset: var(--sf-focus-ring-offset);
   }
 
   /* -- EMPTY STATE -- */

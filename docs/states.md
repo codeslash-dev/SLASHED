@@ -36,14 +36,8 @@ All states are exercised in [`demo.html`](demo.html).
 | `.is-success` / `.is-error` | **general** positive/negative feedback (a save, a step) | `role="status"` / `role="alert"` | states |
 | `.is-warning` / `.is-info` | cautionary / informational feedback | — | states |
 | `.is-danger` | destructive-action context (a delete button) | — | states |
-| `.is-sticky` / `.is-pinned` / `.is-fixed` | positioning | — | states |
-| `.is-fullscreen` | app-managed fullscreen overlay | prefer `:fullscreen` for the native API | states |
-| `.is-clipped` / `.is-scrollable` / `.is-truncated` | overflow handling | — | states |
-| `.is-resizable` | user-resizable (`resize: both`) | — | states |
 | `.is-dragging` / `.is-drop-target` / `.is-draggable` | drag & drop | — | states |
 | `.is-overlay` | absolute fill | — | states |
-| `.is-clickable` / `.is-unselectable` | cursor / selection | — | states |
-| `.is-focused` | programmatic focus ring (JS-driven, no `:focus-visible`) | — | states |
 | `.is-empty:empty` | hide when empty | — | states |
 | `.sr-only-focusable` | hidden until focused (skip-link pattern) | — | accessibility |
 | `.no-motion` | kill all animation/transition on this subtree | `prefers-reduced-motion` equivalent | accessibility |

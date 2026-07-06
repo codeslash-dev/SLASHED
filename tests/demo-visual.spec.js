@@ -292,14 +292,6 @@ test.describe('Motion & States', () => {
     expect(pe).toBe('none');
   });
 
-  test('.is-truncated clips text with ellipsis', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const truncated = page.locator('#motion .is-truncated').first();
-    const overflow = await getStyle(truncated, 'overflow');
-    const textOverflow = await getStyle(truncated, 'textOverflow');
-    expect(overflow).toBe('hidden');
-    expect(textOverflow).toBe('ellipsis');
-  });
 
   test('.is-hidden removes element from layout', async ({ page }) => {
     await page.goto(DEMO_URL);
@@ -997,19 +989,6 @@ test.describe('States — Full Coverage', () => {
     expect(position).toBe('absolute');
   });
 
-  test('.is-clipped hides overflow', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const clipped = page.locator('#states-full .is-clipped').first();
-    const overflow = await getStyle(clipped, 'overflow');
-    expect(overflow).toBe('hidden');
-  });
-
-  test('.is-scrollable enables scroll with overscroll containment', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const scrollable = page.locator('#states-full .is-scrollable').first();
-    const overflow = await getStyle(scrollable, 'overflow');
-    expect(overflow).toBe('auto');
-  });
 });
 
 
