@@ -154,18 +154,18 @@
 
   /* ============================================================
    * LIST MARKER COLOUR (.sf-marker--*)
-   * Colour the ::marker of an arbitrary list outside .sf-prose
-   * (which has its own --sf-prose-marker-color). Covers both the
-   * element's own marker and any descendant list-item markers, so
-   * it works whether the class sits on the <ul>/<ol> or an <li>.
+   * Colour the ::marker of an arbitrary list. Brand/action families
+   * only — for any other colour set `::marker { color }` yourself.
+   * The :not(.sf-prose *) guard keeps this utility from reaching into
+   * a .sf-prose subtree, which owns its markers via
+   * --sf-prose-marker-color (utilities are layered after macros, so
+   * without the guard this would win). Covers the element's own marker
+   * and descendant list-item markers.
    * ============================================================ */
-  .sf-marker--primary ::marker, .sf-marker--primary::marker { color: var(--sf-color-primary); }
-  .sf-marker--action ::marker,  .sf-marker--action::marker  { color: var(--sf-color-action); }
-  .sf-marker--success ::marker, .sf-marker--success::marker { color: var(--sf-color-success); }
-  .sf-marker--warning ::marker, .sf-marker--warning::marker { color: var(--sf-color-warning); }
-  .sf-marker--danger ::marker,  .sf-marker--danger::marker  { color: var(--sf-color-danger); }
-  .sf-marker--info ::marker,    .sf-marker--info::marker    { color: var(--sf-color-info); }
-  .sf-marker--neutral ::marker, .sf-marker--neutral::marker { color: var(--sf-color-neutral); }
+  .sf-marker--primary :not(.sf-prose *)::marker, .sf-marker--primary:not(.sf-prose *)::marker { color: var(--sf-color-primary); }
+  .sf-marker--secondary :not(.sf-prose *)::marker, .sf-marker--secondary:not(.sf-prose *)::marker { color: var(--sf-color-secondary); }
+  .sf-marker--tertiary :not(.sf-prose *)::marker, .sf-marker--tertiary:not(.sf-prose *)::marker { color: var(--sf-color-tertiary); }
+  .sf-marker--action :not(.sf-prose *)::marker, .sf-marker--action:not(.sf-prose *)::marker { color: var(--sf-color-action); }
 
   /* ============================================================
    * ALTERNATE SELECTION COLOUR (.sf-selection--alt)

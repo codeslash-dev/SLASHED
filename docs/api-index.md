@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1055 elements** — 720 tokens, 335 classes.
+**1052 elements** — 720 tokens, 332 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 999 | Everyday surface. SemVer-stable. |
+| PUBLIC | 996 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -760,7 +760,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (335)
+## Classes (332)
 
 ### Accessibility (8)
 
@@ -992,7 +992,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overlap--end` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
 | `.sf-overlap--start` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
 | `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
-| `.sf-prose` | PUBLIC | macro | Prose | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
+| `.sf-prose` | PUBLIC | macro | LIST MARKER COLOUR (.sf-marker--*) | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
 | `.sf-scrim` | PUBLIC | macro | Scrim | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
 | `.sf-scrim__content` | PUBLIC | macro | Scrim | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |
 | `.sf-scrim--bottom` | PUBLIC | macro | Scrim | Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade). |
@@ -1108,7 +1108,7 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
-### Utilities (34)
+### Utilities (31)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1125,13 +1125,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-hover-slide-end` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-end on hover. |
 | `.sf-hover-slide-start` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-start on hover. |
 | `.sf-list-none` | PUBLIC | utility | LIST RESET (.sf-list-none) | Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied). |
-| `.sf-marker--action` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
-| `.sf-marker--danger` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
-| `.sf-marker--info` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
-| `.sf-marker--neutral` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
-| `.sf-marker--primary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
-| `.sf-marker--success` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
-| `.sf-marker--warning` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>. |
+| `.sf-marker--action` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
+| `.sf-marker--primary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
+| `.sf-marker--secondary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
+| `.sf-marker--tertiary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
 | `.sf-selection--alt` | PUBLIC | utility | ALTERNATE SELECTION COLOUR (.sf-selection--alt) | Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css). |
 | `.sf-sticky` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |
 | `.sf-sticky--l` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Static layout-utility counterpart to the JS-toggled .is-sticky state class (core/states.css) — same --sf-sticky-offset token, for elements that are sticky unconditionally rather than by runtime toggle. Offset modifiers add extra gap on top of the existing header-aware fluid… |

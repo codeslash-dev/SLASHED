@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**286 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**283 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -361,7 +361,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Utilities (`optional/utilities.css`)
 
-34 classes.
+32 classes.
 
 | Class |
 |---|
@@ -379,12 +379,10 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-hover-slide-start` |
 | `.sf-list-none` |
 | `.sf-marker--action` |
-| `.sf-marker--danger` |
-| `.sf-marker--info` |
-| `.sf-marker--neutral` |
 | `.sf-marker--primary` |
-| `.sf-marker--success` |
-| `.sf-marker--warning` |
+| `.sf-marker--secondary` |
+| `.sf-marker--tertiary` |
+| `.sf-prose` |
 | `.sf-selection--alt` |
 | `.sf-sticky` |
 | `.sf-sticky--l` |

@@ -21,7 +21,7 @@
     ],
     "counts": {
       "tokens": 720,
-      "sf_classes": 286,
+      "sf_classes": 283,
       "is_classes": 40
     }
   },
@@ -939,12 +939,9 @@
     "sf-link-external",
     "sf-list-none",
     "sf-marker--action",
-    "sf-marker--danger",
-    "sf-marker--info",
-    "sf-marker--neutral",
     "sf-marker--primary",
-    "sf-marker--success",
-    "sf-marker--warning",
+    "sf-marker--secondary",
+    "sf-marker--tertiary",
     "sf-no-tap-highlight",
     "sf-not-prose",
     "sf-overflow-fade",

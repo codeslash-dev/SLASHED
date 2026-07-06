@@ -2360,37 +2360,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
-      "optional": true,
-      "layer": "slashed.utilities"
-    },
-    {
-      "name": "sf-marker--danger",
-      "selector": ".sf-marker--danger",
-      "kind": "utility",
-      "category": "Utilities",
-      "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
-      "optional": true,
-      "layer": "slashed.utilities"
-    },
-    {
-      "name": "sf-marker--info",
-      "selector": ".sf-marker--info",
-      "kind": "utility",
-      "category": "Utilities",
-      "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
-      "optional": true,
-      "layer": "slashed.utilities"
-    },
-    {
-      "name": "sf-marker--neutral",
-      "selector": ".sf-marker--neutral",
-      "kind": "utility",
-      "category": "Utilities",
-      "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -2400,27 +2370,27 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
       "optional": true,
       "layer": "slashed.utilities"
     },
     {
-      "name": "sf-marker--success",
-      "selector": ".sf-marker--success",
+      "name": "sf-marker--secondary",
+      "selector": ".sf-marker--secondary",
       "kind": "utility",
       "category": "Utilities",
       "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
       "optional": true,
       "layer": "slashed.utilities"
     },
     {
-      "name": "sf-marker--warning",
-      "selector": ".sf-marker--warning",
+      "name": "sf-marker--tertiary",
+      "selector": ".sf-marker--tertiary",
       "kind": "utility",
       "category": "Utilities",
       "group": "LIST MARKER COLOUR (.sf-marker--*)",
-      "description": "Colour the ::marker of an arbitrary list outside .sf-prose (which has its own --sf-prose-marker-color). Covers both the element's own marker and any descendant list-item markers, so it works whether the class sits on the <ul>/<ol> or an <li>.",
+      "description": "Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities…",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -2579,7 +2549,7 @@
       "selector": ".sf-prose",
       "kind": "macro",
       "category": "Macro classes",
-      "group": "Prose",
+      "group": "LIST MARKER COLOUR (.sf-marker--*)",
       "description": "Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose.",
       "optional": false,
       "layer": "slashed.macros"
