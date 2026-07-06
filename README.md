@@ -74,7 +74,7 @@ Every letter of SLASHED is a design commitment, and each one is checkable agains
 - **A fluid engine** — the type, display, and space scales are generated at runtime from 12 input scalars (viewport range, modular ratios, base sizes). Change one ratio and the whole system recalculates — no build ([docs/theming.md](docs/theming.md#fluid-engine)).
 - **Classless form styling**, motion, accessibility, and print modules.
 
-SLASHED is BEM-first: the token API is the product, and you build components on top. It ships **no utility classes in 0.x**. The first two component classes — `.sf-btn` and `.sf-card` — are **live since v0.7.0** (shipped in the `-components` and `full` bundles); the remaining components (badge, tag, alert, avatar, modal, skeleton, table) are staged in source, commented out until they land in a later minor. What you get today is the foundation plus the first components, honestly labelled.
+SLASHED is BEM-first: the token API is the product, and you build components on top. It ships only a **curated subset of utility classes** in 0.x — heading (`.sf-h1`–`.sf-h6`), text-size (`.sf-text-*`), and hover-transform (`.sf-hover-*`) helpers — with the rest staged. The first two component classes — `.sf-btn` and `.sf-card` — are **live since v0.7.0** (shipped in the `-components` and `full` bundles); the remaining components (badge, tag, alert, avatar, modal, skeleton, table) are staged in source, commented out until they land in a later minor. What you get today is the foundation plus the first components, honestly labelled.
 
 ## Dark mode
 
@@ -106,7 +106,7 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 | --- | --- |
 | `slashed.optimal.css` | all of `core/` + classless forms — **recommended** |
 | `slashed.optimal-components.css` | optimal + the component layer — `.sf-btn` / `.sf-card` live, remaining components staged |
-| `slashed.optimal-utilities.css` | optimal + the staged utility layer *(inert in 0.x)* |
+| `slashed.optimal-utilities.css` | optimal + the utility layer — heading / text-size / hover helpers active, rest staged |
 | `slashed.full.css` | optimal + the component and utility layers |
 
 <details>

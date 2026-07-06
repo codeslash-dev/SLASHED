@@ -51,7 +51,7 @@ optional/
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
   components.css          slashed.components  (btn + card live since v0.7.0; remaining commented out)
-  utilities.css           slashed.utilities  (empty stub)
+  utilities.css           slashed.utilities  (curated subset active — heading/text-size/hover; rest commented)
   legacy.css              slashed.legacy
 ```
 
@@ -63,8 +63,10 @@ incrementally in upcoming minor releases (additive, no breaking
 changes). See [`docs/components.md`](components.md) for the eight
 taken component names and the roadmap.
 
-`optional/utilities.css` remains an empty stub — SLASHED is BEM-first by
-design and ships no utility classes in 0.x.
+`optional/utilities.css` ships a curated subset — the heading (`.sf-h1`–`.sf-h6`),
+text-size (`.sf-text-*`), and hover-transform (`.sf-hover-*`) helpers are active;
+the rest stay commented out. SLASHED is BEM-first by design, so it ships only
+this curated subset of utility classes in 0.x.
 
 ---
 
@@ -377,8 +379,8 @@ so `bundle.config.json` lists eight outputs in total — are built by
 |---|---|
 | `slashed.optimal.css` | all `core/` + `forms` |
 | `slashed.optimal-components.css` | optimal + `tokens.components` + `components` *(btn/card live, rest staged)* |
-| `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
-| `slashed.full.css` | optimal + `tokens.components` + `components` *(btn/card live, rest staged)* + `utilities` *(empty)* |
+| `slashed.optimal-utilities.css` | optimal + `utilities` *(curated subset active, rest staged)* |
+| `slashed.full.css` | optimal + `tokens.components` + `components` *(btn/card live, rest staged)* + `utilities` *(curated subset active, rest staged)* |
 
 `optional/legacy.css` is **not bundled by default** — add it explicitly when
 you need back-compat shims. Because every rule sits in an `@layer`,
@@ -387,7 +389,7 @@ strips local `@import` statements (the explicit file list resolves them), so
 the `tokens.components` import inside `components.css` is inlined by listing
 the token file first. `components.css` and `tokens.components.css` are
 partial — `.sf-btn` / `.sf-card` and their tokens emit CSS since v0.7.0,
-the remaining components stay commented out; `utilities.css` is an empty stub. Consumers can also build à la carte: raw
+the remaining components stay commented out; `utilities.css` ships a curated subset (heading/text-size/hover helpers active, rest commented). Consumers can also build à la carte: raw
 `core/` plus hand-picked optional files. Each bundle also has a
 layer-flattened `.flat` variant.
 
