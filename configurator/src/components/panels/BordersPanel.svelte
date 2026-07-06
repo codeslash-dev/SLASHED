@@ -3,6 +3,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import { SPACE_SCALE, RADIUS_SCALE, BORDER_WIDTH_SCALE, type VarOption } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -23,10 +24,10 @@
     { step: "2xl", name: "--sf-radius-2xl", default: 24, max: 80, step_size: 2,   rawDefault: "calc(24px * var(--sf-radius-scale))" },
   ];
 
-  const COMPONENT_TOKENS = [
-    { label: "Field radius",          token: "--sf-field-radius",       unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-field-radius" },
-    { label: "Field padding block",   token: "--sf-field-padding-block",  unit: "rem", min: 0, max: 1, step: 0.025, default: 0.375, rawDefault: "var(--sf-space-xs)", help: "--sf-field-padding-block" },
-    { label: "Field padding inline",  token: "--sf-field-padding-inline", unit: "rem", min: 0, max: 2, step: 0.025, default: 0.75,  rawDefault: "var(--sf-space-s)",  help: "--sf-field-padding-inline" },
+  const COMPONENT_TOKENS: Array<{ label: string; token: string; unit: string; min: number; max: number; step: number; default: number; rawDefault: string; help: string; variableOptions: VarOption[] }> = [
+    { label: "Field radius",          token: "--sf-field-radius",       unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-field-radius", variableOptions: RADIUS_SCALE },
+    { label: "Field padding block",   token: "--sf-field-padding-block",  unit: "rem", min: 0, max: 1, step: 0.025, default: 0.375, rawDefault: "var(--sf-space-xs)", help: "--sf-field-padding-block", variableOptions: SPACE_SCALE },
+    { label: "Field padding inline",  token: "--sf-field-padding-inline", unit: "rem", min: 0, max: 2, step: 0.025, default: 0.75,  rawDefault: "var(--sf-space-s)",  help: "--sf-field-padding-inline", variableOptions: SPACE_SCALE },
   ];
 
   const knobs = KNOBS_BY_DOMAIN["borders"] ?? [];
@@ -245,6 +246,7 @@
         onChange={(v) => onSet("--sf-divider-width", `${v}px`)}
         onReset={() => onReset("--sf-divider-width")}
         rawDefault="var(--sf-border-width-1)"
+        variableOptions={BORDER_WIDTH_SCALE}
         currentRaw={overrides["--sf-divider-width"]}
         onRawSet={(v) => onSet("--sf-divider-width", v)}
       />
@@ -255,6 +257,7 @@
         onChange={(v) => onSet("--sf-divider-gap", `${v}rem`)}
         onReset={() => onReset("--sf-divider-gap")}
         rawDefault="var(--sf-space-m)"
+        variableOptions={SPACE_SCALE}
         currentRaw={overrides["--sf-divider-gap"]}
         onRawSet={(v) => onSet("--sf-divider-gap", v)}
       />
@@ -401,6 +404,7 @@
         onChange={(v) => onSet("--sf-media-radius", `${v}rem`)}
         onReset={() => onReset("--sf-media-radius")}
         rawDefault="var(--sf-radius-m)"
+        variableOptions={RADIUS_SCALE}
         currentRaw={overrides["--sf-media-radius"]}
         onRawSet={(v) => onSet("--sf-media-radius", v)}
       />
@@ -435,6 +439,7 @@
             onChange={(v) => onSet(t.token, `${v}${t.unit}`)}
             onReset={() => onReset(t.token)}
             rawDefault={t.rawDefault}
+            variableOptions={t.variableOptions}
             currentRaw={overrides[t.token]}
             onRawSet={(v) => onSet(t.token, v)}
           />

@@ -1,5 +1,6 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
+  import { SPACE_SCALE, RADIUS_SCALE, BORDER_WIDTH_SCALE, SIZE_SCALE, type VarOption } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -33,21 +34,21 @@
     { step: "border--strong",   label: "Strong" },
   ];
 
-  const BUTTON_TOKENS = [
-    { label: "Radius",         token: "--sf-btn-radius",         unit: "rem", min: 0, max: 2,   step: 0.05,   default: 0.5,   rawDefault: "var(--sf-radius-m)" },
-    { label: "Padding block",  token: "--sf-btn-padding-block",  unit: "rem", min: 0, max: 1,   step: 0.025,  default: 0.375, rawDefault: "var(--sf-space-xs)" },
-    { label: "Padding inline", token: "--sf-btn-padding-inline", unit: "rem", min: 0, max: 2,   step: 0.025,  default: 1,     rawDefault: "var(--sf-space-m)" },
-    { label: "Gap (icon+label)", token: "--sf-btn-gap",          unit: "rem", min: 0, max: 1,   step: 0.0125, default: 0.25,  rawDefault: "var(--sf-space-2xs)" },
-    { label: "Border width",  token: "--sf-btn-border-width",   unit: "px",  min: 0, max: 4,   step: 0.5,    default: 1,     rawDefault: "var(--sf-border-width-1)" },
-    { label: "Min height",    token: "--sf-btn-min-height",      unit: "rem", min: 1, max: 4,   step: 0.125,  default: 2.75,  rawDefault: "var(--sf-touch-target)" },
+  const BUTTON_TOKENS: Array<{ label: string; token: string; unit: string; min: number; max: number; step: number; default: number; rawDefault: string; variableOptions: VarOption[] }> = [
+    { label: "Radius",         token: "--sf-btn-radius",         unit: "rem", min: 0, max: 2,   step: 0.05,   default: 0.5,   rawDefault: "var(--sf-radius-m)", variableOptions: RADIUS_SCALE },
+    { label: "Padding block",  token: "--sf-btn-padding-block",  unit: "rem", min: 0, max: 1,   step: 0.025,  default: 0.375, rawDefault: "var(--sf-space-xs)", variableOptions: SPACE_SCALE },
+    { label: "Padding inline", token: "--sf-btn-padding-inline", unit: "rem", min: 0, max: 2,   step: 0.025,  default: 1,     rawDefault: "var(--sf-space-m)", variableOptions: SPACE_SCALE },
+    { label: "Gap (icon+label)", token: "--sf-btn-gap",          unit: "rem", min: 0, max: 1,   step: 0.0125, default: 0.25,  rawDefault: "var(--sf-space-2xs)", variableOptions: SPACE_SCALE },
+    { label: "Border width",  token: "--sf-btn-border-width",   unit: "px",  min: 0, max: 4,   step: 0.5,    default: 1,     rawDefault: "var(--sf-border-width-1)", variableOptions: BORDER_WIDTH_SCALE },
+    { label: "Min height",    token: "--sf-btn-min-height",      unit: "rem", min: 1, max: 4,   step: 0.125,  default: 2.75,  rawDefault: "var(--sf-touch-target)", variableOptions: SIZE_SCALE },
   ];
 
-  const CARD_TOKENS = [
-    { label: "Padding",       token: "--sf-card-padding",       unit: "rem", min: 0, max: 3, step: 0.05, default: 1.5, rawDefault: "var(--sf-space-l)" },
-    { label: "Gap (header/footer)", token: "--sf-card-gap",     unit: "rem", min: 0, max: 2, step: 0.05, default: 1,   rawDefault: "var(--sf-space-m)" },
-    { label: "Radius (inner)", token: "--sf-card-radius",       unit: "rem", min: 0, max: 2, step: 0.05, default: 0.5, rawDefault: "var(--sf-radius-m)" },
-    { label: "Border width",  token: "--sf-card-border-width",  unit: "px",  min: 0, max: 4, step: 0.5,  default: 1,   rawDefault: "var(--sf-border-width-1)" },
-    { label: "Media radius",  token: "--sf-card-media-radius",  unit: "rem", min: 0, max: 2, step: 0.05, default: 0.5, rawDefault: "var(--sf-card-radius, var(--sf-radius-m))" },
+  const CARD_TOKENS: Array<{ label: string; token: string; unit: string; min: number; max: number; step: number; default: number; rawDefault: string; variableOptions: VarOption[] }> = [
+    { label: "Padding",       token: "--sf-card-padding",       unit: "rem", min: 0, max: 3, step: 0.05, default: 1.5, rawDefault: "var(--sf-space-l)", variableOptions: SPACE_SCALE },
+    { label: "Gap (header/footer)", token: "--sf-card-gap",     unit: "rem", min: 0, max: 2, step: 0.05, default: 1,   rawDefault: "var(--sf-space-m)", variableOptions: SPACE_SCALE },
+    { label: "Radius (inner)", token: "--sf-card-radius",       unit: "rem", min: 0, max: 2, step: 0.05, default: 0.5, rawDefault: "var(--sf-radius-m)", variableOptions: RADIUS_SCALE },
+    { label: "Border width",  token: "--sf-card-border-width",  unit: "px",  min: 0, max: 4, step: 0.5,  default: 1,   rawDefault: "var(--sf-border-width-1)", variableOptions: BORDER_WIDTH_SCALE },
+    { label: "Media radius",  token: "--sf-card-media-radius",  unit: "rem", min: 0, max: 2, step: 0.05, default: 0.5, rawDefault: "var(--sf-card-radius, var(--sf-radius-m))", variableOptions: RADIUS_SCALE },
   ];
 
   let showButton = $state(false);
@@ -197,6 +198,7 @@
             onChange={(v) => onSet(t.token, `${v}${t.unit}`)}
             onReset={() => onReset(t.token)}
             rawDefault={t.rawDefault}
+            variableOptions={t.variableOptions}
             currentRaw={overrides[t.token]}
             onRawSet={(v) => onSet(t.token, v)}
           />
@@ -290,6 +292,7 @@
             onChange={(v) => onSet(t.token, `${v}${t.unit}`)}
             onReset={() => onReset(t.token)}
             rawDefault={t.rawDefault}
+            variableOptions={t.variableOptions}
             currentRaw={overrides[t.token]}
             onRawSet={(v) => onSet(t.token, v)}
           />
