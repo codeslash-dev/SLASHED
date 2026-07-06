@@ -170,14 +170,14 @@ title: Home
 ## Install
 
 <div class="install-box">
-<pre><code><span class="comment">/* jsDelivr CDN — drop into your CSS */</span>
-@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css";</code></pre>
+<pre><code><span class="comment">&lt;!-- jsDelivr CDN — recommended --&gt;</span>
+&lt;link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css"&gt;</code></pre>
 </div>
 
 <div class="install-box">
-<pre><code><span class="comment">&lt;!-- or a &lt;link&gt; tag --&gt;</span>
-&lt;link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css"&gt;</code></pre>
+<pre><code><span class="comment">/* or @import — render-blocking &amp; serialized, prefer &lt;link&gt; */</span>
+@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css";</code></pre>
 </div>
 
 <div class="bundles">
