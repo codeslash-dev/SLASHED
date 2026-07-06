@@ -1,16 +1,14 @@
 # Components
 
-> **Status:** As of **v0.7.0** the first component tranche — `.sf-btn` and
-> `.sf-card` — is **live** in the `slashed.components` layer (ships in the
-> `*-components` and `full` bundles). The remaining reserved components below are
-> still staged (commented out in `optional/components.css`, 0 bytes) and land
-> incrementally in later minors. The `@layer slashed.components` slot is real and
-> ordered.
+> **Status:** As of **v0.7.0** SLASHED ships exactly two components —
+> `.sf-btn` and `.sf-card` — **live** in the `slashed.components` layer (in the
+> `*-components` and `full` bundles). The `@layer slashed.components` slot is real
+> and ordered.
 
-Component names are reserved by convention and land incrementally as additive
-features; none will be renamed. You can write your own BEM components against the
-same selector pattern (e.g. `.my-button`) today and switch to the `.sf-*` class
-when it ships.
+SLASHED stays BEM-first and token-first and deliberately does **not** carry a
+broad component library. For anything beyond these two, write your own BEM
+components against the same selector pattern (e.g. `.my-button`) using the
+framework's tokens.
 
 ## Component names
 
@@ -18,12 +16,6 @@ when it ships.
 |---|---|---|---|---|
 | 1 | `.sf-btn` | **live (0.7.0)** | `--primary`, `--neutral`, `--success`, `--warning`, `--info`, `--danger`, `--secondary`, `--ghost`, `--outline`, `--xs`, `--s`, `--l`, `--xl`, `--block`, `--block-cq` | — |
 | 2 | `.sf-card` | **live (0.7.0)** | `--bordered`, `--elevated`, `--interactive` | `__header`, `__body`, `__footer`, `__media`, `__avatar`, `__title` |
-| 3 | `.sf-badge` | staged | `--primary`, `--success`, `--warning`, `--danger`, `--info`, `--neutral` | — |
-| 4 | `.sf-tag` | staged | `--primary`, `--success`, `--warning`, `--danger`, `--info`, `--removable` | `__remove` |
-| 5 | `.sf-alert` | staged | `--success`, `--warning`, `--error`, `--info`, `--dismissible` | `__icon`, `__close` |
-| 6 | `.sf-avatar` | staged | `--xs`, `--s`, `--m`, `--l`, `--xl`, `--square` | — |
-| 7 | `.sf-modal` | staged | `--s`, `--m`, `--l`, `--full` | `__header`, `__body`, `__footer`, `__close` |
-| 8 | `.sf-skeleton` | staged | `--text`, `--avatar`, `--card`, `--line` | — |
 
 ---
 
@@ -240,7 +232,7 @@ tokens:
 
 ## Roadmap
 
-The first batch — `.sf-btn` + `.sf-card` — shipped in **v0.7.0**. Each subsequent
-minor that ships a component uncomments its block in `optional/components.css` +
-the matching token block, documents it here with HTML examples, adds tests under
-`tests/`, and bumps `MINOR` only (no breaking changes).
+`.sf-btn` + `.sf-card` shipped in **v0.7.0** and are the component surface SLASHED
+maintains. There is no broader component library on the roadmap — the framework's
+value is its token and layout systems, and any further UI is expected to be
+authored as project-specific BEM classes reading SLASHED tokens.
