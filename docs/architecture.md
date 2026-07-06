@@ -47,18 +47,19 @@ core/
   accessibility.css            slashed.accessibility
   print.css                    slashed.print
 optional/
-  tokens.components.css   slashed.tokens  (component tokens — incomplete, all commented out)
+  tokens.components.css   slashed.tokens  (component tokens — partial; btn/card live, rest commented out)
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
-  components.css          slashed.components  (8 components — incomplete, all commented out)
+  components.css          slashed.components  (btn + card live since v0.7.0; remaining commented out)
   utilities.css           slashed.utilities  (empty stub)
   legacy.css              slashed.legacy
 ```
 
 `optional/components.css` and `optional/tokens.components.css` are
-**not yet complete** (pre-v1.0): their `@layer` declarations are real, but
-every class definition and component token is commented out. They will
-land incrementally in upcoming minor releases (additive, no breaking
+**not yet complete** (pre-v1.0): their `@layer` declarations are real, and
+`.sf-btn` / `.sf-card` are live since v0.7.0, but the remaining component
+classes and their tokens are still commented out. They will land
+incrementally in upcoming minor releases (additive, no breaking
 changes). See [`docs/components.md`](components.md) for the eight
 taken component names and the roadmap.
 
@@ -167,10 +168,10 @@ BEM control.
 
 **slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
 
-**slashed.components** — UI blocks. Not yet complete (pre-v1.0): 8 component
+**slashed.components** — UI blocks. Partially complete (pre-v1.0): 8 component
 names are taken (`button`, `card`, `badge`, `tag`, `alert`, `avatar`,
-`modal`, `skeleton`) but all class definitions are commented out. When
-the classes ship, every value goes through `var()`. Requires
+`modal`, `skeleton`); `.sf-btn` and `.sf-card` are live since v0.7.0, the
+rest are still commented out. Every value goes through `var()`. Requires
 `tokens.components.css`.
 
 **slashed.macros** — recipes / patterns: `.sf-prose`,
@@ -375,9 +376,9 @@ so `bundle.config.json` lists eight outputs in total — are built by
 | Bundle | Contents |
 |---|---|
 | `slashed.optimal.css` | all `core/` + `forms` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* |
+| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` *(btn/card live, rest staged)* |
 | `slashed.optimal-utilities.css` | optimal + `utilities` *(empty)* |
-| `slashed.full.css` | optimal + `tokens.components` *(incomplete)* + `components` *(incomplete)* + `utilities` *(empty)* |
+| `slashed.full.css` | optimal + `tokens.components` + `components` *(btn/card live, rest staged)* + `utilities` *(empty)* |
 
 `optional/legacy.css` is **not bundled by default** — add it explicitly when
 you need back-compat shims. Because every rule sits in an `@layer`,
@@ -385,8 +386,8 @@ concatenation order within a bundle does not affect the cascade. The bundler
 strips local `@import` statements (the explicit file list resolves them), so
 the `tokens.components` import inside `components.css` is inlined by listing
 the token file first. `components.css` and `tokens.components.css` are
-incomplete (every selector/token commented out, no CSS emitted);
-`utilities.css` is an empty stub. Consumers can also build à la carte: raw
+partial — `.sf-btn` / `.sf-card` and their tokens emit CSS since v0.7.0,
+the remaining components stay commented out; `utilities.css` is an empty stub. Consumers can also build à la carte: raw
 `core/` plus hand-picked optional files. Each bundle also has a
 layer-flattened `.flat` variant.
 
@@ -449,8 +450,8 @@ Deliberate behaviours, documented so they aren't mistaken for bugs.
 
 `@starting-style` and CSS anchor positioning are only meaningful attached to
 a specific element/component transition (dialog, popover, tooltip). They
-are out of scope while `optional/components.css` is incomplete (every class
-commented out) and will be added with the components when they ship in
+are out of scope while `optional/components.css` is still filling in (only
+`.sf-btn` / `.sf-card` live so far) and will be added with the components when they ship in
 upcoming 0.x minors. The component-free part — scroll-driven animation
 range tokens (`--sf-scroll-timeline-range-*`) — already ships in
 `core/tokens.css`.
