@@ -294,6 +294,7 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 --sf-link-underline-offset:    0.15em   /* distance from text */
 --sf-link-underline-thickness: auto     /* thickness — auto = font metrics */
 --sf-link-external-marker:     " ↗"    /* marker for .sf-link-external */
+--sf-link-external-label:      "opens in a new window or external site" /* screen-reader name for the marker, via content alt-text syntax */
 ```
 
 ### 5.9 Code colors
@@ -371,10 +372,10 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 
 /* Text shadow */
 --sf-text-shadow-none
---sf-text-shadow-s / -m / -l
+--sf-text-shadow-xs / -s / -m / -l / -xl
 
-/* Drop shadow (respects alpha — PNG, SVG) — consumed by .sf-drop-shadow-s/-m/-l */
---sf-drop-shadow-s / -m / -l
+/* Drop shadow (respects alpha — PNG, SVG) — consumed by .sf-drop-shadow-xs/-s/-m/-l/-xl */
+--sf-drop-shadow-xs / -s / -m / -l / -xl
 
 /* Glow */
 --sf-shadow-glow            /* 0 0 15px 2px color — luminous effect */
@@ -511,6 +512,12 @@ Pattern: `--sf-text-{size}-{property}`
 
 Not applied automatically — opt in: `line-height: var(--sf-text-xl-line-height)`.
 
+Or apply the whole role at once with `.sf-text-{size}` (`.sf-text-2xs` … `.sf-text-4xl`, `optional/utilities.css`) — sets font-size, line-height, font-weight, letter-spacing, and max-inline-size in one class:
+
+```html
+<p class="sf-text-l">Larger body copy, one class instead of four tokens.</p>
+```
+
 ### 6.6 Leading (line-height)
 
 ```css
@@ -558,6 +565,12 @@ Pattern: `--sf-h1-{property}` through `--sf-h6-{property}`
 --sf-h6-size:           var(--sf-text-m)     /* tracking-wide */
 --sf-h6-max-width:      none
 /* similarly: -line-height, -font-weight, -letter-spacing for each */
+```
+
+Apply heading-level typography to a non-heading element with `.sf-h1` … `.sf-h6` (`optional/utilities.css`) — same sizes/weights/tracking as the real `h1`–`h6` elements, without changing document semantics:
+
+```html
+<div class="sf-h2">Visually an h2, semantically still a div</div>
 ```
 
 ### 6.9 Global heading aliases
@@ -954,6 +967,13 @@ Ready-made `transition` values. **Never use `transition: all`.**
 --sf-transition-enter        /* entrance: normal + ease-out */
 --sf-transition-exit         /* exit: fast + ease-in */
 --sf-transition-overlay      /* overlay + display with allow-discrete — for top-layer dialog/popover */
+```
+
+Ready-made hover transforms: `.sf-hover-grow` / `-shrink` / `-float` / `-sink` / `-slide-start` / `-slide-end` (`optional/utilities.css`) — transition `scale`/`translate` at `--sf-duration-normal` + `--sf-ease-out` (not `--sf-transition-transform`, since that shorthand transitions the `transform` property, not its separate `scale`/`translate`/`rotate` components):
+
+```html
+<div class="sf-card sf-hover-grow">Scales up slightly on hover</div>
+<img class="sf-hover-float" src="icon.svg" alt="">
 ```
 
 ### 9.4 Animation presets

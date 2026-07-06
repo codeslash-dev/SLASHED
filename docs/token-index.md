@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**706 tokens** (deduplicated by name across the 4 token source files).
+**711 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 650 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 655 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 224 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 482 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 225 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 486 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -450,6 +450,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-drop-shadow-l` | PUBLIC | consumption | Core | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` |
 | `--sf-drop-shadow-m` | PUBLIC | consumption | Core | `drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))` |
 | `--sf-drop-shadow-s` | PUBLIC | consumption | Core | `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))` |
+| `--sf-drop-shadow-xl` | PUBLIC | consumption | Core | `drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))` |
+| `--sf-drop-shadow-xs` | PUBLIC | consumption | Core | `drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))` |
 | `--sf-duration-fast` | PUBLIC | consumption | Core | `calc(150ms * var(--sf-motion-scale))` |
 | `--sf-duration-instant` | PUBLIC | consumption | Core | `calc(100ms * var(--sf-motion-scale))` |
 | `--sf-duration-none` | PUBLIC | knob | Core | `0ms` |
@@ -580,6 +582,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-leading-taper` | PUBLIC-ADVANCED | knob | Core | `0` |
 | `--sf-leading-tight` | PUBLIC | knob | Core | `1.1` |
 | `--sf-line-clamp` | PUBLIC | knob | Macros | `3` |
+| `--sf-link-external-label` | PUBLIC | knob | Core | `"opens in a new window or external site"` |
 | `--sf-link-external-marker` | PUBLIC | knob | Core | `" \\2197"` |
 | `--sf-link-underline-offset` | PUBLIC | knob | Core | `0.15em` |
 | `--sf-link-underline-thickness` | PUBLIC | knob | Core | `auto` |
@@ -760,6 +763,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-text-shadow-m` | PUBLIC | consumption | Core | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-text-shadow-none` | PUBLIC | knob | Core | `none` |
 | `--sf-text-shadow-s` | PUBLIC | consumption | Core | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
+| `--sf-text-shadow-xl` | PUBLIC | consumption | Core | `0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))` |
+| `--sf-text-shadow-xs` | PUBLIC | consumption | Core | `0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))` |
 | `--sf-text-xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-xl-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-body)` |
 | `--sf-text-xl-letter-spacing` | PUBLIC | consumption | Core | `var(--sf-tracking-normal)` |

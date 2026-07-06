@@ -208,12 +208,16 @@
   @property --sf-shadow-2xl       { syntax: "*"; inherits: true; }
   @property --sf-shadow-inner     { syntax: "*"; inherits: true; }
   @property --sf-text-shadow-none { syntax: "*"; inherits: true; }
+  @property --sf-text-shadow-xs   { syntax: "*"; inherits: true; }
   @property --sf-text-shadow-s    { syntax: "*"; inherits: true; }
   @property --sf-text-shadow-m    { syntax: "*"; inherits: true; }
   @property --sf-text-shadow-l    { syntax: "*"; inherits: true; }
+  @property --sf-text-shadow-xl   { syntax: "*"; inherits: true; }
+  @property --sf-drop-shadow-xs   { syntax: "*"; inherits: true; }
   @property --sf-drop-shadow-s    { syntax: "*"; inherits: true; }
   @property --sf-drop-shadow-m    { syntax: "*"; inherits: true; }
   @property --sf-drop-shadow-l    { syntax: "*"; inherits: true; }
+  @property --sf-drop-shadow-xl   { syntax: "*"; inherits: true; }
   @property --sf-shadow-glow      { syntax: "*"; inherits: true; }
 
   :root {
@@ -1454,14 +1458,18 @@
          Text shadows — share --sf-shadow-color / --sf-shadow-strength
          ---------------------------------------------------------- */
       --sf-text-shadow-none: none;
-      --sf-text-shadow-s: 0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7));
-      --sf-text-shadow-m: 0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7));
-      --sf-text-shadow-l: 0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
-  
+      --sf-text-shadow-xs: 0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1),   0.7));
+      --sf-text-shadow-s:  0 1px 2px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7));
+      --sf-text-shadow-m:  0 2px 4px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7));
+      --sf-text-shadow-l:  0 4px 8px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7));
+      --sf-text-shadow-xl: 0 8px 16px  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3),   0.7));
+
       /* Drop shadows — for filter: drop-shadow() (respects alpha edges) */
-      --sf-drop-shadow-s: drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)));
-      --sf-drop-shadow-m: drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7)));
-      --sf-drop-shadow-l: drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)));
+      --sf-drop-shadow-xs: drop-shadow(0 0.5px 1px  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1),   0.7)));
+      --sf-drop-shadow-s:  drop-shadow(0 1px 2px    oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)));
+      --sf-drop-shadow-m:  drop-shadow(0 4px 6px    oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2),   0.7)));
+      --sf-drop-shadow-l:  drop-shadow(0 8px 16px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)));
+      --sf-drop-shadow-xl: drop-shadow(0 16px 32px  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3),   0.7)));
 
     }
   }
@@ -1550,6 +1558,11 @@
        link text. Override with your own glyph (include leading space
        if you want one): `:root { --sf-link-external-marker: " →" }`. */
     --sf-link-external-marker: " \2197";  /* " ↗" — consumed by .sf-link-external */
+    /* Accessible name for the marker glyph, via the CSS alt-text syntax
+       (`content: <value> / <string>`) — read by screen readers in place
+       of the glyph, appended after the link's own text. Localise or
+       disable (together with the marker) per-site. */
+    --sf-link-external-label: "opens in a new window or external site";
 
     /* ----------------------------------------------------------
        Section padding

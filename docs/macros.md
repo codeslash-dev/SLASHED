@@ -292,7 +292,7 @@ Universal browser support.
 
 ---
 
-## `.sf-drop-shadow-s` / `.sf-drop-shadow-m` / `.sf-drop-shadow-l`
+## `.sf-drop-shadow-xs` / `-s` / `-m` / `-l` / `-xl`
 
 Applies `filter: drop-shadow(...)` — unlike `box-shadow`, this follows the
 actual alpha shape of the element (PNG cutouts, SVG icons, transparent
@@ -300,13 +300,19 @@ logos) instead of hugging the bounding box.
 
 ```html
 <img class="sf-drop-shadow-m" src="logo.svg" alt="">
+<svg class="sf-drop-shadow-xl" ...>...</svg>
 ```
 
 Tokens:
 
 | Token | What it controls |
 |---|---|
-| `--sf-drop-shadow-s` / `-m` / `-l` | drop-shadow value consumed 1:1 by the matching class (`core/tokens.css`) |
+| `--sf-drop-shadow-xs` / `-s` / `-m` / `-l` / `-xl` | drop-shadow value consumed 1:1 by the matching class (`core/tokens.css`) |
+
+`--sf-text-shadow-xs` / `-s` / `-m` / `-l` / `-xl` mirror the same five-step
+scale for `text-shadow` (no dedicated utility class — apply the token
+directly via `text-shadow: var(--sf-text-shadow-l)`), matching the
+`box-shadow` ramp's `xs`..`2xl` rhythm at the small/large ends.
 
 ---
 
@@ -415,7 +421,10 @@ support floor.
 
 ## `.sf-link-external`
 
-Adds an external-link indicator glyph after the link text via `::after`.
+Adds an external-link indicator glyph after the link text via `::after`,
+plus a screen-reader-only accessible name for that glyph using the CSS
+alt-text syntax (`content: <value> / <string>`) — assistive tech reads it
+appended after the link's own text; sighted users only see the glyph.
 
 ```html
 <a href="https://example.com" class="sf-link-external">Example</a>
@@ -426,16 +435,40 @@ Tokens:
 | Token | Default | What it controls |
 |---|---|---|
 | `--sf-link-external-marker` | `" \2197"` (arrow with leading space) | glyph appended after link text |
+| `--sf-link-external-label` | `"opens in a new window or external site"` | accessible name read by screen readers for the glyph |
 
-Disable globally:
+Disable globally (both the glyph and its accessible name):
 
 ```css
-:root { --sf-link-external-marker: ""; }
+:root {
+  --sf-link-external-marker: "";
+  --sf-link-external-label: "";
+}
 ```
 
-For automatic detection of external links (without adding the class
-manually), write your own rule targeting `a[rel~="external"]` or
-`a[href^="https://"]` and apply the same marker technique.
+Localise the announcement by overriding `--sf-link-external-label` inside a
+`:lang()` block or a locale-scoped selector.
+
+### Automatic detection by domain
+
+`.sf-link-external` is opt-in — you add the class per link. To apply the
+same treatment automatically to every cross-origin link, write your own
+rule keyed to your site's own host (CSS selectors can't read a custom
+property, so the host has to be a literal string) and exclude links that
+wrap an image, since those carry their own accessible name:
+
+```css
+a[href^="http"]:not([href*="example.com"]):not(:has(img, svg, picture))::after {
+  content: var(--sf-link-external-marker) / var(--sf-link-external-label);
+  display: inline-block;
+  font-size: 0.85em;
+  text-decoration: none;
+}
+```
+
+Swap `example.com` for your own domain. Page builders and CMS integrations
+(e.g. the WordPress plugin) can generate this rule with the site's real
+host injected server-side.
 
 ---
 

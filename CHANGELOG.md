@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **docs:** documented `.sf-btn`/`.sf-card` in `docs/components.md` with HTML examples, plus a copy-paste gradient-outline button recipe.
 - **macros:** `.sf-corner-scoop` — mask-based concave-corner cut, with `--top-left`/`--top-right`/`--bottom-left`/`--bottom-right` placement modifiers and `--sf-corner-scoop-size`/`--sf-corner-scoop-at` knobs.
 - **macros:** `.sf-overlap` / `.sf-overlap-host` — negative-margin overlap recipe (`--down`/`--start`/`--end` modifiers) driven by `--sf-overlap-pull`, with a host class that reserves matching space.
+- **tokens:** `--sf-drop-shadow-xs` / `-xl` and `--sf-text-shadow-xs` / `-xl` — extend both scales to match `box-shadow`'s `xs`..`2xl` rhythm; `.sf-drop-shadow-xs` / `-xl` utility classes added alongside the existing `-s`/`-m`/`-l`.
+- **utilities:** activate staged `.sf-h1`–`.sf-h6` (heading-level typography on any element) and add `.sf-text-2xs`–`.sf-text-4xl` (full text-size role: size, line-height, weight, tracking, measure) in `optional/utilities.css`.
+- **utilities:** activate staged `.sf-hover-grow` / `-shrink` / `-float` / `-sink` / `-slide-start` / `-slide-end` in `optional/utilities.css`.
+- **macros:** `.sf-link-external` now includes a localisable, screen-reader-only accessible name (`--sf-link-external-label`) for its marker glyph via the CSS `content` alt-text syntax.
+
+### Bug Fixes
+- **motion:** `core/motion.css`'s global interactive-element transition (`a, button, input, select, textarea, summary`) now includes `scale`/`translate`, so utilities that animate those properties (e.g. `.sf-hover-*`) aren't silently discarded by the later `slashed.motion` cascade layer on those elements.
 
 ## [0.6.35] - 2026-07-03
 

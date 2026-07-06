@@ -14,8 +14,8 @@
     a, button, input, select, textarea, summary {
       transition-property:
         color, background-color, border-color, text-decoration-color,
-        fill, stroke, opacity, box-shadow, transform, filter,
-        backdrop-filter;
+        fill, stroke, opacity, box-shadow, transform, scale, translate,
+        filter, backdrop-filter;
       transition-duration:        var(--sf-duration-fast);
       transition-timing-function: var(--sf-ease-out);
     }

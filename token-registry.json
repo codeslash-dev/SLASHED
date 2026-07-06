@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 736
+    "nextId": 741
   },
   "tokens": [
     {
@@ -2977,6 +2977,26 @@
     {
       "id": 735,
       "name": "--sf-card-shadow--hover"
+    },
+    {
+      "id": 736,
+      "name": "--sf-drop-shadow-xl"
+    },
+    {
+      "id": 737,
+      "name": "--sf-drop-shadow-xs"
+    },
+    {
+      "id": 738,
+      "name": "--sf-link-external-label"
+    },
+    {
+      "id": 739,
+      "name": "--sf-text-shadow-xl"
+    },
+    {
+      "id": 740,
+      "name": "--sf-text-shadow-xs"
     }
   ]
 }
