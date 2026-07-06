@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.0] - 2026-07-06
+
 ### Added
 - **components:** `.sf-btn` — first shipped button component (was staged/commented out). Colour families (`--primary`/`--neutral`/`--success`/`--warning`/`--info`/`--danger`), style treatments (`--secondary`/`--ghost`/`--outline`), a size scale (`--xs`/`--s`/`--l`/`--xl`), width (`--block`/`--block-cq`), and `:disabled`/`.is-loading` states. The new `--outline` modifier composes orthogonally with any colour family. Ships in the `*-components` and `full` bundles. (#493, #486)
 - **components:** `.sf-card` — first shipped card component (was staged/commented out). `__header`/`__body`/`__footer`/`__media`/`__avatar`/`__title` subcomponents with concentric-radius math, plus `--bordered`/`--elevated`/`--interactive` modifiers. (#494)
