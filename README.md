@@ -170,6 +170,19 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 | [LLM guide](docs/llm-guide.md) | compact API reference for AI-assisted development |
 | [Migration](docs/migration.md) | upgrading SLASHED + migrating from other frameworks |
 
+## Editor integration
+
+A generated [VS Code CSS Custom Data](https://github.com/microsoft/vscode-css-languageservice/blob/main/docs/customData.md)
+file ships alongside the bundles, so every `--sf-*` token autocompletes with
+its description and default value in any editor that supports the format:
+
+```json
+// .vscode/settings.json
+{
+  "css.customData": ["./node_modules/slashed/badges/css-custom-data.json"]
+}
+```
+
 ## WordPress
 
 The WordPress plugin — Bricks Builder and Gutenberg integrations plus a visual token editor in wp-admin — lives in its own repository: [SLASHED-Plugins](https://github.com/codeslash-dev/SLASHED-Plugins).
