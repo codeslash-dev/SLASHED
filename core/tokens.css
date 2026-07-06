@@ -175,6 +175,7 @@
   @property --sf-radius-full  { syntax: "<length>"; inherits: true; initial-value: 9999px; }
   @property --sf-radius-pill  { syntax: "<length>"; inherits: true; initial-value: 9999px; }
   @property --sf-radius-outer { syntax: "<length>"; inherits: true; initial-value: 0; }
+  @property --sf-media-radius { syntax: "<length>"; inherits: true; initial-value: 0; }
 
   @property --sf-space-none       { syntax: "<length>"; inherits: true; initial-value: 0; }
   @property --sf-space-px         { syntax: "<length>"; inherits: true; initial-value: 1px; }

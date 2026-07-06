@@ -2518,8 +2518,8 @@
     },
     {
       "name": "--sf-media-radius",
-      "description": "Opt-in global media radius — 0 by default (off). Set to a --sf-radius-* value to round <img>/<figure> globally: :root { --sf-media-radius: var(--sf-radius-m); } Applied via :where() in core/base.css so it never fights .sf-bg or a component's own radius.\n\nDefault: `0`",
-      "syntax": "*"
+      "description": "Radius + space: <length> syntax enables CSS transitions on layout values — border-radius/padding/gap etc. now interpolate instead of snapping. Shadow: syntax:\"*\" (no <shadow> type in spec); inherits:true so :root values cascade normally; registers the properties formally for…\n\nDefault: `0`",
+      "syntax": "<length>"
     },
     {
       "name": "--sf-motion-scale",

@@ -73,20 +73,11 @@
 
 
     /* Exit counterpart of .sf-entrance--*: fires as the element scrolls
-       out of view. animation-name is set only inside @supports below —
+       out of view. Every declaration below lives inside @supports —
        unlike entrance (where a non-scroll fallback still ends visible),
        an unconditional exit animation would leave content permanently
-       hidden on engines without animation-timeline: view() support. */
-    .sf-exit--fade,
-    .sf-exit--fade-up,
-    .sf-exit--fade-down,
-    .sf-exit--fade-left,
-    .sf-exit--fade-right,
-    .sf-exit--scale-down {
-      animation-duration:        var(--sf-duration-slow);
-      animation-timing-function: var(--sf-ease-in);
-      animation-fill-mode:       both;
-    }
+       hidden on engines without animation-timeline: view() support, so
+       there is deliberately no fallback declaration outside @supports. */
     @supports (animation-timeline: view()) {
       .sf-exit--fade,
       .sf-exit--fade-up,
@@ -94,6 +85,9 @@
       .sf-exit--fade-left,
       .sf-exit--fade-right,
       .sf-exit--scale-down {
+        animation-duration:        var(--sf-duration-slow);
+        animation-timing-function: var(--sf-ease-in);
+        animation-fill-mode:       both;
         animation-timeline: view();
         animation-range:    var(--sf-scroll-timeline-range-exit-start, cover 70%)
                             var(--sf-scroll-timeline-range-exit-end,   exit 100%);

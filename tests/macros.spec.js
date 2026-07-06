@@ -411,13 +411,19 @@ test.describe('macro: .sf-exit--fade', () => {
   test('animation-name is set when reduced motion is not preferred', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await setup(page, `<div id="t" class="sf-exit--fade">content</div>`);
-    const name = await page.locator('#t').evaluate(el =>
-      getComputedStyle(el).animationName
-    );
+    const result = await page.locator('#t').evaluate(el => ({
+      name:      getComputedStyle(el).animationName,
+      supported: CSS.supports('animation-timeline', 'view()'),
+    }));
     // animation-name is only set inside @supports (animation-timeline: view()) —
-    // Chromium (Playwright's default engine) supports it, so this should fire.
-    expect(name).not.toBe('none');
-    expect(name.length).toBeGreaterThan(0);
+    // engines without it (Firefox, WebKit) leave the element statically visible
+    // by design (see core/motion.css), so 'none' is the correct result there.
+    if (result.supported) {
+      expect(result.name).not.toBe('none');
+      expect(result.name.length).toBeGreaterThan(0);
+    } else {
+      expect(result.name).toBe('none');
+    }
   });
 
   test('animation does not apply when prefers-reduced-motion: reduce', async ({ page }) => {
