@@ -1,10 +1,10 @@
 {
   "summary": {
-    "totalTokens": 687,
-    "rendered": 687,
+    "totalTokens": 706,
+    "rendered": 706,
     "consoleErrors": 0,
     "requestFailures": 0,
-    "empties": 8,
+    "empties": 27,
     "demoShownMismatch": 0,
     "literalDefaultMismatch": 2,
     "aliasMismatch": 0,
@@ -730,6 +730,81 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-btn-border-width",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-font-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-text-m)",
+      "aliasOf": "--sf-text-m",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-font-weight",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-font-weight-interactive)",
+      "aliasOf": "--sf-font-weight-interactive",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-space-2xs)",
+      "aliasOf": "--sf-space-2xs",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-min-height",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-touch-target)",
+      "aliasOf": "--sf-touch-target",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-btn-padding-block",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -766,6 +841,216 @@
       "category": "Component tokens",
       "declared": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-bg",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-color-surface)",
+      "aliasOf": "--sf-color-surface",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-border-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-border-width",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-btn-font-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-text-s)",
+      "aliasOf": "--sf-text-s",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-heading-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-text-xl)",
+      "aliasOf": "--sf-text-xl",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-media-radius",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-card-radius, var(--sf-radius-m))",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-media-ratio",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-ratio-video)",
+      "aliasOf": "--sf-ratio-video",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-padding",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-space-l)",
+      "aliasOf": "--sf-space-l",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-radius",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-radius-m)",
+      "aliasOf": "--sf-radius-m",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-radius-outer",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "calc(var(--sf-card-radius) + var(--sf-card-padding))",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-shadow",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-shadow-s)",
+      "aliasOf": "--sf-shadow-s",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-shadow--elevated",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-shadow-l)",
+      "aliasOf": "--sf-shadow-l",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-card-shadow--hover",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "var(--sf-shadow-l)",
+      "aliasOf": "--sf-shadow-l",
       "issues": [
         "EMPTY_COMPUTED"
       ],
@@ -4250,6 +4535,32 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-corner-scoop-at",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "100% 0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "100% 0",
+      "shown": "100% 0",
+      "darkComputed": "100% 0",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-corner-scoop-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-radius-2xl)",
+      "aliasOf": "--sf-radius-2xl",
+      "issues": [],
+      "computed": "24px",
+      "shown": "24px",
+      "darkComputed": "24px",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-cover-min-height",
       "tier": "PUBLIC",
       "role": "knob",
@@ -4624,6 +4935,45 @@
       "computed": "16rem",
       "shown": "16rem",
       "darkComputed": "16rem",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-equal-rule-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Layout tokens",
+      "declared": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "issues": [],
+      "computed": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
+      "shown": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
+      "darkComputed": "oklch(from oklch(0.69 0.0225 260) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-equal-rule-style",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Layout tokens",
+      "declared": "solid",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "solid",
+      "shown": "solid",
+      "darkComputed": "solid",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-equal-rule-width",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Layout tokens",
+      "declared": "0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0",
+      "shown": "0",
+      "darkComputed": "0",
       "changedInDark": false
     },
     {
@@ -6229,6 +6579,19 @@
       "computed": "auto",
       "shown": "auto",
       "darkComputed": "auto",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Macro tokens",
+      "declared": "var(--sf-space-xl)",
+      "aliasOf": "--sf-space-xl",
+      "issues": [],
+      "computed": "52.1404px",
+      "shown": "52.1404px",
+      "darkComputed": "52.1404px",
       "changedInDark": false
     },
     {
@@ -8885,84 +9248,6 @@
       "computed": "1060",
       "shown": "1060",
       "darkComputed": "1060",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-rule-width",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "0",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "0",
-      "shown": "0",
-      "darkComputed": "0",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-rule-style",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Layout tokens",
-      "declared": "solid",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "solid",
-      "shown": "solid",
-      "darkComputed": "solid",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-equal-rule-color",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Layout tokens",
-      "declared": "var(--sf-color-border)",
-      "aliasOf": "--sf-color-border",
-      "issues": [],
-      "computed": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
-      "shown": "light-dark(\n        oklch(from oklch(0.52 0.025 260) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),\n        oklch(from oklch(0.52 0.025 260)       clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)\n      )",
-      "darkComputed": "oklch(from oklch(0.69 0.0225 260) clamp(0.25, calc(l - 0.3),  0.55) 0.005 h)",
-      "changedInDark": true
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-2xl)",
-      "aliasOf": "--sf-radius-2xl",
-      "issues": [],
-      "computed": "24px",
-      "shown": "24px",
-      "darkComputed": "24px",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corner-scoop-at",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "100% 0",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "100% 0",
-      "shown": "100% 0",
-      "darkComputed": "100% 0",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-overlap-pull",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-space-xl)",
-      "aliasOf": "--sf-space-xl",
-      "issues": [],
-      "computed": "52.1404px",
-      "shown": "52.1404px",
-      "darkComputed": "52.1404px",
       "changedInDark": false
     }
   ]

@@ -27,6 +27,8 @@
     { label: "Button radius",         token: "--sf-btn-radius",         unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-btn-radius" },
     { label: "Button padding block",  token: "--sf-btn-padding-block",  unit: "rem", min: 0, max: 1,   step: 0.025, default: 0.375, rawDefault: "var(--sf-space-xs)", help: "--sf-btn-padding-block" },
     { label: "Button padding inline", token: "--sf-btn-padding-inline", unit: "rem", min: 0, max: 2,   step: 0.025, default: 1,     rawDefault: "var(--sf-space-m)",  help: "--sf-btn-padding-inline" },
+    { label: "Card radius (inner)",   token: "--sf-card-radius",        unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-card-radius" },
+    { label: "Card padding",          token: "--sf-card-padding",       unit: "rem", min: 0, max: 3,   step: 0.05,  default: 1.5,   rawDefault: "var(--sf-space-l)",   help: "--sf-card-padding" },
     { label: "Field radius",          token: "--sf-field-radius",       unit: "rem", min: 0, max: 2,   step: 0.05,  default: 0.5,   rawDefault: "var(--sf-radius-m)",  help: "--sf-field-radius" },
     { label: "Field padding block",   token: "--sf-field-padding-block",  unit: "rem", min: 0, max: 1, step: 0.025, default: 0.375, rawDefault: "var(--sf-space-xs)", help: "--sf-field-padding-block" },
     { label: "Field padding inline",  token: "--sf-field-padding-inline", unit: "rem", min: 0, max: 2, step: 0.025, default: 0.75,  rawDefault: "var(--sf-space-s)",  help: "--sf-field-padding-inline" },

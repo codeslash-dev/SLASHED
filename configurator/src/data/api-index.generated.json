@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "d49dd101dba4",
+    "tokensHash": "4e477120ce9c",
     "bundles": [
       "full",
       "optimal",
@@ -10,9 +10,9 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 687,
+      "tokens": 706,
       "byTier": {
-        "PUBLIC": 631,
+        "PUBLIC": 650,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
@@ -20,7 +20,7 @@
         "Layout tokens": 53,
         "Core tokens": 602,
         "Macro tokens": 26,
-        "Component tokens": 6
+        "Component tokens": 25
       }
     }
   },
@@ -1291,6 +1291,111 @@
       ]
     },
     {
+      "name": "--sf-btn-border-width",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "Border thickness for .sf-btn (used by all fill, outline, and secondary treatments).",
+      "value": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-btn-font-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.",
+      "value": "var(--sf-text-m)",
+      "aliasOf": "--sf-text-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-btn-font-weight",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "Label font-weight for .sf-btn. Defaults to the interactive weight.",
+      "value": "var(--sf-font-weight-interactive)",
+      "aliasOf": "--sf-font-weight-interactive",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-btn-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "Gap between an icon and the label inside .sf-btn.",
+      "value": "var(--sf-space-2xs)",
+      "aliasOf": "--sf-space-2xs",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-btn-min-height",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.",
+      "value": "var(--sf-touch-target)",
+      "aliasOf": "--sf-touch-target",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
       "name": "--sf-btn-padding-block",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1298,7 +1403,7 @@
       "category": "Component tokens",
       "group": "BUTTON TOKENS",
       "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "",
+      "note": "Vertical (block) padding inside .sf-btn.",
       "value": "var(--sf-space-xs)",
       "aliasOf": "--sf-space-xs",
       "registered": false,
@@ -1319,7 +1424,7 @@
       "category": "Component tokens",
       "group": "BUTTON TOKENS",
       "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "",
+      "note": "Horizontal (inline) padding inside .sf-btn.",
       "value": "var(--sf-space-m)",
       "aliasOf": "--sf-space-m",
       "registered": false,
@@ -1340,9 +1445,303 @@
       "category": "Component tokens",
       "group": "BUTTON TOKENS",
       "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "",
+      "note": "Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens.",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-bg",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Background surface for .sf-card. Defaults to --sf-color-surface.",
+      "note": "Background surface for .sf-card. Defaults to --sf-color-surface.",
+      "value": "var(--sf-color-surface)",
+      "aliasOf": "--sf-color-surface",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-border-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Border colour for .sf-card. Defaults to --sf-color-border.",
+      "note": "Border colour for .sf-card. Defaults to --sf-color-border.",
+      "value": "var(--sf-color-border)",
+      "aliasOf": "--sf-color-border",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-border-width",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Border thickness for .sf-card.",
+      "note": "Border thickness for .sf-card.",
+      "value": "var(--sf-border-width-1)",
+      "aliasOf": "--sf-border-width-1",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-btn-font-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.",
+      "note": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.",
+      "value": "var(--sf-text-s)",
+      "aliasOf": "--sf-text-s",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Divider spacing for .sf-card__header / __footer (padding + margin around the rule).",
+      "note": "Divider spacing for .sf-card__header / __footer (padding + margin around the rule).",
+      "value": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-heading-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Font-size for .sf-card__title. Defaults to --sf-text-xl.",
+      "note": "Font-size for .sf-card__title. Defaults to --sf-text-xl.",
+      "value": "var(--sf-text-xl)",
+      "aliasOf": "--sf-text-xl",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-media-radius",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Corner radius for .sf-card__media. Mirrors the card's inner radius by default.",
+      "note": "Corner radius for .sf-card__media. Mirrors the card's inner radius by default.",
+      "value": "var(--sf-card-radius, var(--sf-radius-m))",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-media-ratio",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Aspect ratio for .sf-card__media. Defaults to --sf-ratio-video (16/9).",
+      "note": "Aspect ratio for .sf-card__media. Defaults to --sf-ratio-video (16/9).",
+      "value": "var(--sf-ratio-video)",
+      "aliasOf": "--sf-ratio-video",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-padding",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Inner padding for .sf-card. Also feeds the concentric-radius math (outer = inner radius + padding).",
+      "note": "Inner padding for .sf-card. Also feeds the concentric-radius math (outer = inner radius + padding).",
+      "value": "var(--sf-space-l)",
+      "aliasOf": "--sf-space-l",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-radius",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Inner radius for .sf-card children such as __media. Combined with padding to derive the outer radius.",
+      "note": "Inner radius for .sf-card children such as __media. Combined with padding to derive the outer radius.",
+      "value": "var(--sf-radius-m)",
+      "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-radius-outer",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Outer corner radius of .sf-card. Concentric with the inner radius: calc(--sf-card-radius + --sf-card-padding).",
+      "note": "Outer corner radius of .sf-card. Concentric with the inner radius: calc(--sf-card-radius + --sf-card-padding).",
+      "value": "calc(var(--sf-card-radius) + var(--sf-card-padding))",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-shadow",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Base drop shadow for .sf-card. Defaults to --sf-shadow-s.",
+      "note": "Base drop shadow for .sf-card. Defaults to --sf-shadow-s.",
+      "value": "var(--sf-shadow-s)",
+      "aliasOf": "--sf-shadow-s",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-shadow--elevated",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Drop shadow applied by the .sf-card--elevated modifier (border hidden, larger shadow).",
+      "note": "Drop shadow applied by the .sf-card--elevated modifier (border hidden, larger shadow).",
+      "value": "var(--sf-shadow-l)",
+      "aliasOf": "--sf-shadow-l",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "--sf-card-shadow--hover",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "card",
+      "category": "Component tokens",
+      "group": "CARD TOKENS",
+      "description": "Drop shadow applied on hover/focus by the .sf-card--interactive modifier.",
+      "note": "Drop shadow applied on hover/focus by the .sf-card--interactive modifier.",
+      "value": "var(--sf-shadow-l)",
+      "aliasOf": "--sf-shadow-l",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

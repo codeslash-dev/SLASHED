@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**687 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**706 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -715,13 +715,32 @@ rebrand workflow.
 
 ## Component tokens (`optional/tokens.components.css`)
 
-6 tokens.
+25 tokens.
 
 | Token | Default |
 |---|---|
+| `--sf-btn-border-width` | `var(--sf-border-width-1)` |
+| `--sf-btn-font-size` | `var(--sf-text-m)` |
+| `--sf-btn-font-weight` | `var(--sf-font-weight-interactive)` |
+| `--sf-btn-gap` | `var(--sf-space-2xs)` |
+| `--sf-btn-min-height` | `var(--sf-touch-target)` |
 | `--sf-btn-padding-block` | `var(--sf-space-xs)` |
 | `--sf-btn-padding-inline` | `var(--sf-space-m)` |
 | `--sf-btn-radius` | `var(--sf-radius-m)` |
+| `--sf-card-bg` | `var(--sf-color-surface)` |
+| `--sf-card-border-color` | `var(--sf-color-border)` |
+| `--sf-card-border-width` | `var(--sf-border-width-1)` |
+| `--sf-card-btn-font-size` | `var(--sf-text-s)` |
+| `--sf-card-gap` | `var(--sf-space-m)` |
+| `--sf-card-heading-size` | `var(--sf-text-xl)` |
+| `--sf-card-media-radius` | `var(--sf-card-radius, var(--sf-radius-m))` |
+| `--sf-card-media-ratio` | `var(--sf-ratio-video)` |
+| `--sf-card-padding` | `var(--sf-space-l)` |
+| `--sf-card-radius` | `var(--sf-radius-m)` |
+| `--sf-card-radius-outer` | `calc(var(--sf-card-radius) + var(--sf-card-padding))` |
+| `--sf-card-shadow` | `var(--sf-shadow-s)` |
+| `--sf-card-shadow--elevated` | `var(--sf-shadow-l)` |
+| `--sf-card-shadow--hover` | `var(--sf-shadow-l)` |
 | `--sf-field-padding-block` | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | `var(--sf-space-s)` |
 | `--sf-field-radius` | `var(--sf-radius-m)` |

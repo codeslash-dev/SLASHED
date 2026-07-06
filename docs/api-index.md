@@ -10,23 +10,42 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**947 elements** — 687 tokens, 260 classes.
+**992 elements** — 706 tokens, 286 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 891 | Everyday surface. SemVer-stable. |
+| PUBLIC | 936 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (687)
+## Tokens (706)
 
-### Component tokens (6)
+### Component tokens (25)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
-| `--sf-btn-padding-block` | PUBLIC | consumption | btn | `var(--sf-space-xs)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
-| `--sf-btn-padding-inline` | PUBLIC | consumption | btn | `var(--sf-space-m)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
-| `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Override to give buttons a distinct visual language from form fields without touching global radius/spacing tokens. |
+| `--sf-btn-border-width` | PUBLIC | consumption | btn | `var(--sf-border-width-1)` | Border thickness for .sf-btn (used by all fill, outline, and secondary treatments). |
+| `--sf-btn-font-size` | PUBLIC | consumption | btn | `var(--sf-text-m)` | Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button. |
+| `--sf-btn-font-weight` | PUBLIC | consumption | btn | `var(--sf-font-weight-interactive)` | Label font-weight for .sf-btn. Defaults to the interactive weight. |
+| `--sf-btn-gap` | PUBLIC | consumption | btn | `var(--sf-space-2xs)` | Gap between an icon and the label inside .sf-btn. |
+| `--sf-btn-min-height` | PUBLIC | consumption | btn | `var(--sf-touch-target)` | Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum. |
+| `--sf-btn-padding-block` | PUBLIC | consumption | btn | `var(--sf-space-xs)` | Vertical (block) padding inside .sf-btn. |
+| `--sf-btn-padding-inline` | PUBLIC | consumption | btn | `var(--sf-space-m)` | Horizontal (inline) padding inside .sf-btn. |
+| `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens. |
+| `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Background surface for .sf-card. Defaults to --sf-color-surface. |
+| `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Border colour for .sf-card. Defaults to --sf-color-border. |
+| `--sf-card-border-width` | PUBLIC | consumption | card | `var(--sf-border-width-1)` | Border thickness for .sf-card. |
+| `--sf-card-btn-font-size` | PUBLIC | consumption | card | `var(--sf-text-s)` | Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s. |
+| `--sf-card-gap` | PUBLIC | consumption | card | `var(--sf-space-m)` | Divider spacing for .sf-card__header / __footer (padding + margin around the rule). |
+| `--sf-card-heading-size` | PUBLIC | consumption | card | `var(--sf-text-xl)` | Font-size for .sf-card__title. Defaults to --sf-text-xl. |
+| `--sf-card-media-radius` | PUBLIC | consumption | card | `var(--sf-card-radius, var(--sf-radius-m))` | Corner radius for .sf-card__media. Mirrors the card's inner radius by default. |
+| `--sf-card-media-ratio` | PUBLIC | consumption | card | `var(--sf-ratio-video)` | Aspect ratio for .sf-card__media. Defaults to --sf-ratio-video (16/9). |
+| `--sf-card-padding` | PUBLIC | consumption | card | `var(--sf-space-l)` | Inner padding for .sf-card. Also feeds the concentric-radius math (outer = inner radius + padding). |
+| `--sf-card-radius` | PUBLIC | consumption | card | `var(--sf-radius-m)` | Inner radius for .sf-card children such as __media. Combined with padding to derive the outer radius. |
+| `--sf-card-radius-outer` | PUBLIC | consumption | card | `calc(var(--sf-card-radius) + var(--sf-card-padding))` | Outer corner radius of .sf-card. Concentric with the inner radius: calc(--sf-card-radius + --sf-card-padding). |
+| `--sf-card-shadow` | PUBLIC | consumption | card | `var(--sf-shadow-s)` | Base drop shadow for .sf-card. Defaults to --sf-shadow-s. |
+| `--sf-card-shadow--elevated` | PUBLIC | consumption | card | `var(--sf-shadow-l)` | Drop shadow applied by the .sf-card--elevated modifier (border hidden, larger shadow). |
+| `--sf-card-shadow--hover` | PUBLIC | consumption | card | `var(--sf-shadow-l)` | Drop shadow applied on hover/focus by the .sf-card--interactive modifier. |
 | `--sf-field-padding-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Vertical (block) inner padding for form field inputs. |
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
@@ -727,7 +746,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (260)
+## Classes (286)
 
 ### Accessibility (8)
 
@@ -741,6 +760,37 @@ and a short description. The machine-readable companion (with all columns) is
 | `.skip-link` | PUBLIC | accessibility | Skip link | Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>. |
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
+
+### Components (26)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-btn` | PUBLIC | component | .sf-btn | Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Combine a colour family, a style treatment, and a size modifier. |
+| `.sf-btn--block` | PUBLIC | component | .sf-btn | Full-width button (100% inline size) everywhere. |
+| `.sf-btn--block-cq` | PUBLIC | component | .sf-btn | Full-width button only inside a query container narrower than 20rem; intrinsic otherwise. |
+| `.sf-btn--danger` | PUBLIC | component | .sf-btn | Button in the danger (destructive) colour family. |
+| `.sf-btn--ghost` | PUBLIC | component | .sf-btn | Borderless, transparent button; tints on hover. The lightest button treatment. |
+| `.sf-btn--info` | PUBLIC | component | .sf-btn | Button in the info colour family. |
+| `.sf-btn--l` | PUBLIC | component | .sf-btn | Large button size. |
+| `.sf-btn--neutral` | PUBLIC | component | .sf-btn | Button in the neutral colour family. |
+| `.sf-btn--outline` | PUBLIC | component | .sf-btn | Outlined button (coloured border/text, transparent fill) that fills with the family colour on hover. Composes with any colour family. |
+| `.sf-btn--primary` | PUBLIC | component | .sf-btn | Button in the primary brand colour family. |
+| `.sf-btn--s` | PUBLIC | component | .sf-btn | Small button size. |
+| `.sf-btn--secondary` | PUBLIC | component | .sf-btn | Transparent-fill button with a coloured border and text; subtle tint on hover. |
+| `.sf-btn--success` | PUBLIC | component | .sf-btn | Button in the success (positive) colour family. |
+| `.sf-btn--warning` | PUBLIC | component | .sf-btn | Button in the warning (caution) colour family. |
+| `.sf-btn--xl` | PUBLIC | component | .sf-btn | Extra-large button size. |
+| `.sf-btn--xs` | PUBLIC | component | .sf-btn | Extra-small button size. |
+| `.sf-card` | PUBLIC | component | .sf-card | Padded content container with optional __header/__body/__footer and __media/__avatar/__title subcomponents. Uses concentric radius math so inner corners stay proportional. |
+| `.sf-card__avatar` | PUBLIC | component | .sf-card | Circular avatar image inside a card. |
+| `.sf-card__body` | PUBLIC | component | .sf-card | Card body slot. |
+| `.sf-card__footer` | PUBLIC | component | .sf-card | Card footer slot with a top divider. |
+| `.sf-card__header` | PUBLIC | component | .sf-card | Card header slot with a bottom divider. |
+| `.sf-card__media` | PUBLIC | component | .sf-card | Full-width cover image/video for a card, cropped to --sf-card-media-ratio (16/9 by default). |
+| `.sf-card__title` | PUBLIC | component | .sf-card | Card title heading, sized via --sf-card-heading-size. |
+| `.sf-card--bordered` | PUBLIC | component | .sf-card | Flat, outlined card: keeps the border, drops the shadow. |
+| `.sf-card--elevated` | PUBLIC | component | .sf-card | Floating card: hides the border, applies a larger shadow. |
+| `.sf-card--interactive` | PUBLIC | component | .sf-card | Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion. |
 
 ### Layout primitives (136)
 
